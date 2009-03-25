@@ -39,7 +39,7 @@ var cspace = cspace || {};
 		};
 		
 		that.saveNewObject = function (collectionObject, onSuccess, onError) {
-			ajax(that, "POST", that.options.resources.objects, onSuccess, onError, collectionObject, that.oprions.newObjectIDToken);
+			ajax(that, "POST", that.options.resources.objects, onSuccess, onError, JSON.stringify(collectionObject), that.oprions.newObjectIDToken);
 		};
 		
 		setupCollectionObjectDAO(that);
