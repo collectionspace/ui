@@ -32,4 +32,15 @@
 		url = factory(baseUrl, resourceUrls.schema);
 		jqUnit.assertEquals("URL should point to the object schema JSON file.", "./objects/schema/schema.json", url);
 	});
+
+	var fetchObjectSchemaTestFunc = function (data, textStatus) {
+		objectDAOTest.test("fetchObjectSchema", function () {
+			jqUnit.assertNotNull("Shema object should not be null", data);
+			jqUnit.assertNotUndefined("Schema has an objectTitle field", data.objectTitle);
+			jqUnit.assertNotUndefined("Schema has a description field", data.description);
+		});
+	};
+    
+	var dao = cspace.collectionObjectDAO({baseUrl: "./test-data/"});
+	dao.fetchObjectSchema(fetchObjectSchemaTestFunc, fetchObjectSchemaTestFunc);
 }());

@@ -27,7 +27,7 @@ var cspace = cspace || {};
 		fluid.mergeComponentOptions(that, "cspace.collectionObjectDAO", options);
 		
 		that.fetchObjectSchema = function (onSuccess, onError) {
-			
+			ajax(that, "GET", that.options.resources.schema, onSuccess, onError);
 		};
 		
 		that.fetchObjects = function (onSuccess, onError) {
@@ -71,4 +71,4 @@ var cspace = cspace || {};
 		newObjectIDToken: "NEW_ID"
 	});
 	
-}(jQuery, fluid_0_8));
+})(jQuery, fluid_0_8);

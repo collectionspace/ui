@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr" id="html">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>CollectionObjectDAO Test Suite</title>
+    <title>ObjectEntry Test Suite</title>
+        <link rel="stylesheet" type="text/css" href="../../main/webapp/css/cspace.css" />
     <link rel="Stylesheet" media="screen" href="../jqUnit/testsuite.css" />
 	
 	<!-- We don't really want to link against Fluid-all.js - we should switch to the custom build once it's available -->
@@ -10,19 +11,24 @@
     <script type="text/javascript" src="../jqUnit/testrunner.js"></script>
     <script type="text/javascript" src="../jqUnit/jqUnit.js"></script>
 	<script type="text/javascript" src="../../main/webapp/js/CollectionObjectDAO.js"></script>
+	<script type="text/javascript" src="../../main/webapp/js/ObjectEntry.js"></script>
 	
-    <script type="text/javascript" src="../js/CollectionObjectDAOTest.js"></script>
+    <script type="text/javascript" src="../js/ObjectEntryTest.js"></script>
 </head>
 
 <body id="body">
-    <h1 id="header">CollectionObjectDAO Test Suite</h1>
+    <h1 id="header">ObjectEntry Test Suite</h1>
     <h2 id="banner"></h2>
     <h2 id="userAgent"></h2>
 
-    <!-- Test HTML -->
-    <div id="main" style="display: none;">
-
-    </div>
     <ol id="tests"></ol>
+
+    <!-- Test HTML -->
+    <div id="main">
+
+    <div class="csc-error-dialog">
+        <p class="csc-error-message">This text should be replaced by the error message.</p>
+    </div>
+    </div>
 </body>
 </html>

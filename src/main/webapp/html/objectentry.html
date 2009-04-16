@@ -9,7 +9,12 @@
         <link rel="stylesheet" type="text/css" href="../infusion/css/fluid.layout.css" />
 		<link rel="stylesheet" type="text/css" href="../infusion/css/fluid.text.css" />
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
+		
+		<script type="text/javascript" src="../infusion/js/Fluid-all.js"></script>
+		<script type="text/javascript" src="../js/CollectionObjectDAO.js"></script>
+		<script type="text/javascript" src="../js/ObjectEntry.js"></script>
 	</head>
+
 	<body>
 		<!-- body content -->
 		<div class="fl-container-900 fl-centered">
@@ -66,7 +71,7 @@
 				<div class="fl-fix fl-container-flex fl-col-mixed fl-col-mixed2">
 				
 					<!-- left-side container. Contains bulk of Object Entry forms and fields -->
-					<div class="fl-container-650 fl-force-left">
+					<form class="fl-container-650 fl-force-left csc-object-entry-form">
 					
 						<!-- Each section of Object Entry is broken down into information-blocks.
 						      This corresponds to Information groups within Spectrum's Object Entry prodedure. -->
@@ -209,7 +214,14 @@
 							</div>
 						</div>
 						
-					</div> <!-- END left-side container -->
+						<div class="csc-error-dialog">
+							<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
+						</div>
+
+						<script type="text/javascript">
+							cspace.objectEntry(".csc-object-entry-form");
+						</script>
+					</form> <!-- END left-side container -->
 					
 					<!-- Right-side container. Contains Authority selection/addition "widgets" -->
 					<div class="fl-container-250 fl-force-right side-bar">
