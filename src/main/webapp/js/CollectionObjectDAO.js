@@ -31,15 +31,15 @@ var cspace = cspace || {};
 		};
 		
 		that.fetchObjects = function (onSuccess, onError) {
-			
-		};
-		
-		that.fetchObjectForId = function (id, onSuccess, onError) {
 
 		};
 		
+		that.fetchObjectForId = function (id, onSuccess, onError) {
+			ajax(that, "GET", that.options.resources.objects, onSuccess, onError, null, id);
+		};
+		
 		that.saveNewObject = function (collectionObject, onSuccess, onError) {
-			ajax(that, "POST", that.options.resources.objects, onSuccess, onError, JSON.stringify(collectionObject), that.oprions.newObjectIDToken);
+			ajax(that, "POST", that.options.resources.objects, onSuccess, onError, JSON.stringify(collectionObject), that.options.newObjectIDToken);
 		};
 		
 		setupCollectionObjectDAO(that);

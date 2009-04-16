@@ -35,12 +35,24 @@
 
 	var fetchObjectSchemaTestFunc = function (data, textStatus) {
 		objectDAOTest.test("fetchObjectSchema", function () {
+            jqUnit.assertFalse("Result should not be an XMLHttpRequest", (data instanceof XMLHttpRequest));
 			jqUnit.assertNotNull("Shema object should not be null", data);
 			jqUnit.assertNotUndefined("Schema has an objectTitle field", data.objectTitle);
 			jqUnit.assertNotUndefined("Schema has a description field", data.description);
 		});
 	};
     
-	var dao = cspace.collectionObjectDAO({baseUrl: "./test-data/"});
-	dao.fetchObjectSchema(fetchObjectSchemaTestFunc, fetchObjectSchemaTestFunc);
+    var fetchObjectForIdTestFunc = function (data, textStatus) {
+        objectDAOTest.test("fetchObjectForId", function () {
+            jqUnit.assertFalse("Result should not be an XMLHttpRequest", (data instanceof XMLHttpRequest));
+            jqUnit.assertTrue("Object should exist", !!data);
+            jqUnit.assertEquals("Object should have correct ID", "1984.068.0338", data.accessionNumber);
+        });
+    };
+    
+	var dao1 = cspace.collectionObjectDAO({baseUrl: "./test-data/"});
+	dao1.fetchObjectSchema(fetchObjectSchemaTestFunc, fetchObjectSchemaTestFunc);
+    
+	var dao2 = cspace.collectionObjectDAO({baseUrl: "./test-data/", schema: "./test-data/mmi-schema/"});
+	dao2.fetchObjectForId("1984.068.0338", fetchObjectForIdTestFunc, fetchObjectForIdTestFunc);
 }());

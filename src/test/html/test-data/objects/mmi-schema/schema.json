@@ -1,0 +1,57 @@
+{
+    "objectTitle": {
+        "selector": ".csc-object-title .info-value",
+        "validators": [],
+        "decorators": []
+    },
+    "accessionNumber": {
+        "selector": ".csc-object-number .info-value",
+        "validators": [],
+        "decorators": []
+    },
+    "description": {
+        "selector": ".csc-description .info-value",
+        "validators": [],
+        "decorators": []
+    },
+    "objectName": {
+        "selector": ".csc-object-name .info-value",
+        "validators": [],
+        "decorators": []
+    },
+    "distinguishingFeatures": {
+        "selector": ".csc-features .info-value",
+        "validators": [],
+        "decorators": []
+    },
+    "numberOfObjects": {
+        "selector": ".csc-num-objects .info-value",
+        "validators": [],
+        "decorators": []
+    },
+    "responsibleDepartment": {
+        "selector": ".csc-department .info-value",
+        "validators": [],
+        "decorators": []
+    },
+    "comments": {
+        "selector": ".csc-comments .info-value",
+        "validators": [],
+        "decorators": []
+    },
+    "dateAssociation": {
+        "selector": ".csc-date-association .info-value",
+        "validators": [],
+        "decorators": []
+    },
+    "datePeriod": {
+        "selector": ".csc-date-period .info-value",
+        "validators": [],
+        "decorators": []
+    },
+    "dateText": {
+        "selector": ".csc-date-text .info-value",
+        "validators": [],
+        "decorators": []
+    }
+}
