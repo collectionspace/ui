@@ -1,1 +1,1 @@
-This is a prerelease build of Fluid Infusion 0.8, cut from revision 6519 of https://source.fluidproject.org/svn/fluid/components/trunk/
+This is a custom build of Fluid Infusion 1.0 including fss, framework, renderer and jQueryUIWidgets.

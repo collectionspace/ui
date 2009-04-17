@@ -1,4 +1,4 @@
-/*global jQuery, fluid_0_8*/
+/*global jQuery, fluid_1_0*/
 
 var cspace = cspace || {};
 
@@ -57,4 +57,4 @@ var cspace = cspace || {};
             errorRecoverySuggestion: "Please try refreshing your browser"
         }
 	});
-})(jQuery, fluid_0_8);
+})(jQuery, fluid_1_0);

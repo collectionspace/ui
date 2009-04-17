@@ -1,4 +1,4 @@
-/*global jQuery, fluid_0_8*/
+/*global jQuery, fluid_1_0*/
 
 var cspace = cspace || {};
 
@@ -71,4 +71,4 @@ var cspace = cspace || {};
 		newObjectIDToken: "NEW_ID"
 	});
 	
-})(jQuery, fluid_0_8);
+})(jQuery, fluid_1_0);
