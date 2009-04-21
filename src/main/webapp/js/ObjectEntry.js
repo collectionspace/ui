@@ -17,7 +17,7 @@ var cspace = cspace || {};
 	var setupObjectEntry = function (that) {
 		bindEventHandlers(that);
         that.objectDAO = fluid.initSubcomponent(that, "dao");
-		that.objectDAO.fetchObjectSchema(that.events.onFetchSchemaSuccess.fire, that.events.onFetchSchemaError.fire);
+		that.schema = that.objectDAO.fetchObjectSchema(that.events.onFetchSchemaSuccess.fire, that.events.onFetchSchemaError.fire);
 	};
 	
 	cspace.objectEntry = function (container, options) {
@@ -40,6 +40,29 @@ var cspace = cspace || {};
 		return that;
 	};
 	
+    cspace.objectEntry.renderer = {
+        buildCutpoints: function (schema) {
+            var cutpoints = [];
+            
+            var index = 0;
+            for (key in schema) {
+                cutpoints[index++] = {
+                    id: key,
+                	selector: schema[key].selector
+                };
+            }
+            return cutpoints;
+        },
+        buildComponentTree: function () {
+            var tree = {};
+            
+            return tree;
+        },
+        renderPage: function () {
+            fluid.selfRender(that.container, buildComponentTree(), {debugMode: true});
+        }    
+    };
+    
 	fluid.defaults("cspace.objectEntry", {
         dao: {
             type: "cspace.collectionObjectDAO"
@@ -55,6 +78,7 @@ var cspace = cspace || {};
         strings: {
             schemaFetchError: "I'm sorry, an error has occurred fetching the Schema: ",
             errorRecoverySuggestion: "Please try refreshing your browser"
-        }
+        },
+        objectId: null
 	});
 })(jQuery, fluid_1_0);
