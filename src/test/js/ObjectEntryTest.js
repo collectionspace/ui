@@ -1,7 +1,15 @@
 /*global jQuery, jqUnit, cspace*/
 (function ($) {
-	
-	var objectEntryTest = new jqUnit.TestCase("ObjectEntry Tests");
+    
+        var testSchema  = {
+            "foo": {
+                "selector": "brack foofer"
+            },
+            "bar": {
+                "selector": ".hello .goodbye"
+            }
+        };
+    var objectEntryTest = new jqUnit.TestCase("ObjectEntry Tests");
 
     // this tests a modal dialog - it might have to remain last in the file
     objectEntryTest.test("showSchemaErrorMessage", function () {
@@ -16,19 +24,32 @@
     });
     
     objectEntryTest.test("renderer.buildCutpoints", function () {
-        var schema  = {
-            "foo": {
-                "selector": "brack foofer"
-            },
-            "bar": {
-                "selector": ".hello .goodbye"
-            }
-        };
-        var cutpoints = cspace.objectEntry.renderer.buildCutpoints (schema);
-        jqUnit.assertEquals("There should be 2 cutpoints", 2, cutpoints.length)
+        var cutpoints = cspace.renderer.buildCutpoints(testSchema);
+        jqUnit.assertEquals("There should be 2 cutpoints", 2, cutpoints.length);
         jqUnit.assertEquals("Field 'foo' should exist ", "foo", cutpoints[0].id);
         jqUnit.assertEquals("Field 'foo' should have ", "brack foofer", cutpoints[0].selector);
         jqUnit.assertEquals("Field 'bar' should exist ", "bar", cutpoints[1].id);
         jqUnit.assertEquals("Field 'ar' should have ", ".hello .goodbye", cutpoints[1].selector);
+    });
+    
+    objectEntryTest.test("renderer.buildComponentTree", function () {
+        var dataModel = {
+            "foo": "foofer",
+            "bar": "bat"
+        };
+        var expectedTree = {
+            children: [
+                {
+                    ID: "foo",
+                    valuebinding: "foo"
+                },
+                {
+                    ID: "bar",
+                    valuebinding: "bar"
+                }
+            ]
+        };
+        var tree = cspace.renderer.buildComponentTree(testSchema, dataModel);
+        jqUnit.assertDeepEq("Tree should be ", expectedTree, tree);
     });
 })(jQuery);
