@@ -1,56 +1,56 @@
 {
     "objectTitle": {
-        "selector": ".csc-object-title .info-value",
+        "selector": ".csc-object-title",
         "validators": [],
         "decorators": []
     },
     "accessionNumber": {
-        "selector": ".csc-object-number .info-value",
+        "selector": ".csc-object-number",
         "validators": [],
         "decorators": []
     },
     "description": {
-        "selector": ".csc-description .info-value input",
+        "selector": ".csc-description",
         "validators": [],
         "decorators": []
     },
     "objectName": {
-        "selector": ".csc-object-name .info-value input",
+        "selector": ".csc-object-name",
         "validators": [],
         "decorators": []
     },
     "distinguishingFeatures": {
-        "selector": ".csc-features .info-value input",
+        "selector": ".csc-features",
         "validators": [],
         "decorators": []
     },
     "numberOfObjects": {
-        "selector": ".csc-num-objects .info-value input",
+        "selector": ".csc-num-objects",
         "validators": [],
         "decorators": []
     },
     "responsibleDepartment": {
-        "selector": ".csc-department .info-value input",
+        "selector": ".csc-department",
         "validators": [],
         "decorators": []
     },
     "comments": {
-        "selector": ".csc-comments .info-value input",
+        "selector": ".csc-comments",
         "validators": [],
         "decorators": []
     },
     "dateAssociation": {
-        "selector": ".csc-date-association .info-value input",
+        "selector": ".csc-date-association",
         "validators": [],
         "decorators": []
     },
     "datePeriod": {
-        "selector": ".csc-date-period .info-value input",
+        "selector": ".csc-date-period",
         "validators": [],
         "decorators": []
     },
     "dateText": {
-        "selector": ".csc-date-text .info-value input",
+        "selector": ".csc-date-text",
         "validators": [],
         "decorators": []
     }

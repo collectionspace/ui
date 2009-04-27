@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>CollectionSpace - Object Entry - Left-Handed Screwdriver</title>
+		<title>CollectionSpace - Object Entry</title>
 
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-reset.css" />
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-layout.css" />
@@ -17,7 +17,7 @@
 
 	<body>
 		<!-- body content -->
-		<div class="fl-container-900 fl-centered">
+		<div class="fl-container-900 fl-centered csc-object-entry-container">
 		
 			<!-- CSpace logo and right-side search box -->
 			<div id="name-header">
@@ -42,7 +42,7 @@
 			
 			<!-- title-bar - name of object and (assession) number -->
 			<div id="title-bar">
-				<div class="object-name">Left-Handed Screwdriver</div><div class="object-number">123.45.678</div>
+				<div class="object-name csc-object-title">Left-Handed Screwdriver</div><div class="object-number csc-object-number">123.45.678</div>
 				<div class="clear"></div>
 			</div>
 			
@@ -71,7 +71,7 @@
 				<div class="fl-fix fl-container-flex fl-col-mixed fl-col-mixed2">
 				
 					<!-- left-side container. Contains bulk of Object Entry forms and fields -->
-					<form class="fl-container-650 fl-force-left csc-object-entry-form">
+					<form class="fl-container-650 fl-force-left">
 					
 						<!-- Each section of Object Entry is broken down into information-blocks.
 						      This corresponds to Information groups within Spectrum's Object Entry prodedure. -->
@@ -90,25 +90,25 @@
 								<div class="info-column2 fl-force-left">
 									
 									<!-- The information is broken down into a pair of information elements: label and value -->
-									<div class="info-pair csc-object-title">
+									<div class="info-pair">
 										<div class="info-label">Object Title</div>
-										<div class="info-value">Left-Handed Screwdriver</div>
+										<div class="info-value csc-object-title">Left-Handed Screwdriver</div>
 									</div>
 										
-									<div class="info-pair csc-description">
+									<div class="info-pair">
 										<div class="info-label">Brief Description</div>
-										<div class="info-value"><input type="text" class="input-alpha" name="brief-description"></div>
+										<div class="info-value"><input type="text" class="input-alpha csc-description" name="brief-description"></div>
 									</div>
 									
-									<div class="info-pair csc-features">
+									<div class="info-pair">
 										<div class="info-label">Distinguishing Features</div>
-										<div class="info-value"><input type="text" class="input-alpha" name="destinguishing-features"></div>
+										<div class="info-value"><input type="text" class="input-alpha csc-features" name="destinguishing-features"></div>
 									</div>
 									
-									<div class="info-pair csc-department disabled">
+									<div class="info-pair disabled">
 										<div class="info-label">Responsible Department</div>
 										<div class="info-value">
-											<input type="text" class="input-authority" name="responsible-department" disabled="true"><input type="submit" value="Add" disabled="true">
+											<input type="text" class="input-authority csc-department " name="responsible-department" disabled="true"><input type="submit" value="Add" disabled="true">
 										</div>
 									</div>
 									
@@ -119,24 +119,24 @@
 								<!-- Right-side column -->
 								<div class="info-column2 fl-force-right">
 										
-									<div class="info-pair csc-object-number">
+									<div class="info-pair">
 										<div class="info-label">Object Number</div>
-										<div class="info-value">123.45.678<a href="#"><img src="../images/add-number.jpg" style="margin-bottom: -3px; margin-left: 1em;" alt="add additional number"/></a></div>
+										<div class="info-value"><span class="csc-object-number">123.45.678</span><a href="#"><img src="../images/add-number.jpg" style="margin-bottom: -3px; margin-left: 1em;" alt="add additional number"/></a></div>
 									</div>
 										
-									<div class="info-pair csc-object-name">
+									<div class="info-pair">
 										<div class="info-label">Object Name</div>
-										<div class="info-value"><input type="text" class="input-alpha" name="number-of-objects"></div>
+										<div class="info-value"><input type="text" class="input-alpha csc-object-name" name="number-of-objects"></div>
 									</div>	
 									
-									<div class="info-pair csc-num-objects">
+									<div class="info-pair">
 										<div class="info-label">Number of Objects</div>
-										<div class="info-value"><input type="text" class="input-numeric" name="number-of-objects"></div>
+										<div class="info-value"><input type="text" class="input-numeric csc-num-objects" name="number-of-objects"></div>
 									</div>
 									
-									<div class="info-pair csc-comments">
+									<div class="info-pair">
 										<div class="info-label">Comments</div>
-										<div class="info-value"><input type="text" class="input-alpha" name="comments"></div>
+										<div class="info-value"><input type="text" class="input-alpha csc-comments" name="comments"></div>
 									</div>
 									
 									<div class="clear"></div>
@@ -157,15 +157,15 @@
 								<!-- Left-side column -->
 								<div class="info-column2 fl-force-left">
 										
-									<div class="info-pair csc-date-earliest disabled">
+									<div class="info-pair disabled">
 										<div class="info-label">Date - earliest/single</div>
 										<div class="info-value">
-										<input type="text" class="input-date" name="date-earliest-single-month" disabled="true"><input type="text" class="input-date" name="date-earliest-single-day" disabled="true"><input type="text" class="input-date" name="date-earliest-single-year" disabled="true"><a href="#" alt="calendar"><img src="../images/calendar.jpg" style="margin-bottom: -4px;"/></a></div>
+										<input type="text" class="input-date csc-date-earliest" name="date-earliest-single-month" disabled="true"><input type="text" class="input-date" name="date-earliest-single-day" disabled="true"><input type="text" class="input-date" name="date-earliest-single-year" disabled="true"><a href="#" alt="calendar"><img src="../images/calendar.jpg" style="margin-bottom: -4px;"/></a></div>
 									</div>
 									
-									<div class="info-pair csc-date-association">
+									<div class="info-pair">
 										<div class="info-label">Date - association</div>
-										<div class="info-value"><input type="text" class="input-alpha" name="date-association"></div>
+										<div class="info-value"><input type="text" class="input-alpha csc-date-association" name="date-association"></div>
 									</div>
 									
 									<div class="clear"></div>
@@ -175,16 +175,16 @@
 								<!-- Right-side column -->
 								<div class="info-column2 fl-force-right">
 										
-									<div class="info-pair csc-date-latest disabled">
+									<div class="info-pair disabled">
 										<div class="info-label">Date - latest</div>
 										<div class="info-value">
-											<input type="text" class="input-date" name="date-association-month" disabled="true"><input type="text" class="input-date" name="date-association-day" disabled="true"><input type="text" class="input-date" name="date-association-year" disabled="true"><a href="#" alt="calendar"><img src="../images/calendar.jpg" style="margin-bottom: -4px;"/></a>
+											<input type="text" class="input-date csc-date-latest" name="date-association-month" disabled="true"><input type="text" class="input-date" name="date-association-day" disabled="true"><input type="text" class="input-date" name="date-association-year" disabled="true"><a href="#" alt="calendar"><img src="../images/calendar.jpg" style="margin-bottom: -4px;"/></a>
 										</div>
 									</div>
 									
-									<div class="info-pair csc-date-period">
+									<div class="info-pair">
 										<div class="info-label">Date - period</div>
-										<div class="info-value"><input type="text" class="input-alpha" name="date-period"></div>
+										<div class="info-value"><input type="text" class="input-alpha csc-date-period" name="date-period"></div>
 									</div>
 									
 									<div class="clear"></div>
@@ -193,9 +193,9 @@
 
 								<!-- Left-side column. This is a single-columnn design and takes up 100% width -->
 								<div class="info-column1 fl-force-left">
-									<div class="info-pair csc-date-text">
+									<div class="info-pair">
 										<div class="info-label">Date - text</div>
-										<div class="info-value"><input type="text" class="input-alpha" name="date-text"></div>
+										<div class="info-value"><input type="text" class="input-alpha csc-date-text" name="date-text"></div>
 									</div>
 								</div>
 								
@@ -219,7 +219,7 @@
 						</div>
 
 						<script type="text/javascript">
-							cspace.objectEntry(".csc-object-entry-form", {objectId: "1984.068.0335b"});
+							cspace.objectEntry(".csc-object-entry-container", {objectId: "1984.068.0335b"});
 						</script>
 					</form> <!-- END left-side container -->
 					
