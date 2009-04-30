@@ -42,6 +42,10 @@ var cspace = cspace || {};
             ajax(that, "POST", that.options.resources.objects, onSuccess, onError, JSON.stringify(collectionObject), that.options.newObjectIDToken);
         };
         
+        that.saveObjectForId = function (collectionObject, id, onSuccess, onError) {
+            ajax(that, "PUT", that.options.resources.objects, onSuccess, onError, JSON.stringify(collectionObject), id);
+        };
+        
         setupCollectionObjectDAO(that);
         return that;    
     };
