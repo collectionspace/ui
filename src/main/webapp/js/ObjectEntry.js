@@ -4,6 +4,23 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
 
+    var buildFullUISchema = function (that) {
+        var fullUISchema = fluid.copy(that.schema);
+        
+		// This makes the assumption that 'save' exists. This should be configurable.
+        fullUISchema.save = {
+            "selector": that.options.selectors.save,
+            "validators": [],
+            "decorators": [
+                {type: "jQuery",
+                    func: "click", 
+                    args: that.save
+                }
+            ]
+        };
+        return fullUISchema;
+    };
+    
     var bindEventHandlers = function (that) {
         that.events.afterFetchSchemaSuccess.addListener(function (schema, textStatus) {
             that.schema = schema;
@@ -18,7 +35,7 @@ var cspace = cspace || {};
         });
 
         that.events.afterFetchObjectDataError.addListener(function (xhr, msg, error) {
-            console.log("Error fetching object data: " + msg + error);
+            // TODO: decide on appropriate response to this situation
         });
     };
     
@@ -51,8 +68,8 @@ var cspace = cspace || {};
         };
         
         that.save = function () {
-           that.events.onSave.fire(that.model);
-           that.objectDAO.saveObjectForId(that.model,
+            that.events.onSave.fire(that.model);
+            that.objectDAO.saveObjectForId(that.model,
                 that.options.objectId,
                 that.events.afterSaveObjectDataSuccess.fire,
                 that.events.afterSaveObjectDataError.fire
@@ -67,7 +84,7 @@ var cspace = cspace || {};
     cspace.saveId = "save";
     
     cspace.renderer = {
-        buildCutpoints: function (schema, selectors) {
+        buildCutpoints: function (schema) {
             var cutpoints = [];
             
             var index = 0;
@@ -80,15 +97,9 @@ var cspace = cspace || {};
                     index += 1;
                 }
             }
-            // TODO: move the processing of component-specific things (like save) out of
-            // cspace.renderer into the component itself
-            cutpoints[index] = {
-                id: cspace.saveId,
-                selector: selectors.save
-            };
             return cutpoints;
         },
-        buildComponentTree: function (schema, model, saveHandler) {
+        buildComponentTree: function (schema, model) {
             var tree = {children: []};
             
             var index = 0;
@@ -98,29 +109,24 @@ var cspace = cspace || {};
                         ID: key,
                         valuebinding: key
                     };
+                    if (schema[key].decorators && schema[key].decorators.length > 0) {
+                        tree.children[index].decorators = schema[key].decorators;
+                    }
                     index += 1;
                 }
             }
-            
-            // TODO: move the processing of component-specific things (like save) out of
-            // cspace.renderer into the component itself
-            tree.children[index] = {
-                ID: cspace.saveId,
-                decorators: [
-                    {"jQuery": ["click", saveHandler]}
-                ]
-            };
             return tree;
         },
-        renderPage: function (component) {
+        renderPage: function (that) {
+            var fullUISchema = buildFullUISchema(that);
             var renderOptions = {
-                model: component.model,
-                cutpoints: cspace.renderer.buildCutpoints(component.schema, component.options.selectors),
+                model: that.model,
+                cutpoints: cspace.renderer.buildCutpoints(fullUISchema),
                 autoBind: true,
                 debugMode: true
             };
-            fluid.selfRender(component.container,
-                             cspace.renderer.buildComponentTree(component.schema, component.model, component.save),
+            fluid.selfRender(that.container,
+                             cspace.renderer.buildComponentTree(fullUISchema, that.model),
                              renderOptions);
         }    
     };

@@ -1,14 +1,20 @@
 /*global jQuery, jqUnit, cspace*/
 (function ($) {
     
-        var testSchema  = {
-            "foo": {
-                "selector": "brack foofer"
-            },
-            "bar": {
-                "selector": ".hello .goodbye"
-            }
-        };
+    var testSchema  = {
+        "foo": {
+            "selector": "brack foofer",
+            "decorators": [
+                {"type": "jQuery",
+                 "func": "click",
+                 "args": [alert]}
+            ]
+        },
+        "bar": {
+            "selector": ".hello .goodbye",
+            "decorators": []
+        }
+    };
     var objectEntryTest = new jqUnit.TestCase("ObjectEntry Tests");
 
     // this tests a modal dialog - it might have to remain last in the file
@@ -41,7 +47,12 @@
             children: [
                 {
                     ID: "foo",
-                    valuebinding: "foo"
+                    valuebinding: "foo",
+                    decorators: [
+                        {"type": "jQuery",
+                         "func": "click",
+                         "args": [alert]}
+                    ]
                 },
                 {
                     ID: "bar",
