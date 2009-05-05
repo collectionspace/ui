@@ -121,13 +121,23 @@ var cspace = cspace || {};
             var fullUISchema = buildFullUISchema(that);
             var renderOptions = {
                 model: that.model,
-                cutpoints: cspace.renderer.buildCutpoints(fullUISchema),
                 autoBind: true,
                 debugMode: true
             };
-            fluid.selfRender(that.container,
-                             cspace.renderer.buildComponentTree(fullUISchema, that.model),
-                             renderOptions);
+            var resources = {
+                objEntry: {
+                    href: that.options.templateUrl,
+                    nodeId: "csc-object-entry-template",
+                    cutpoints: cspace.renderer.buildCutpoints(fullUISchema)
+                }
+            };
+            fluid.fetchResources(resources, function () {
+                var template = fluid.parseTemplates(resources, ["objEntry"], {});
+                fluid.reRender(template,
+                               that.container,
+                               cspace.renderer.buildComponentTree(fullUISchema, that.model),
+                               renderOptions);
+            });
         }    
     };
     
@@ -153,6 +163,7 @@ var cspace = cspace || {};
             schemaFetchError: "I'm sorry, an error has occurred fetching the Schema: ",
             errorRecoverySuggestion: "Please try refreshing your browser"
         },
+        templateUrl: "../html/ObjectEntryTemplate.html",
         objectId: null
     });
 })(jQuery, fluid_1_0);
