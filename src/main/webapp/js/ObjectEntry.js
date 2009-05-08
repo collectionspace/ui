@@ -21,9 +21,25 @@ var cspace = cspace || {};
         return fullUISchema;
     };
     
+    var buildEmptyModelFromSchema = function (schema) {
+        var model = {};
+        for (var key in schema) {
+            if (schema.hasOwnProperty(key)) {
+                model[key] = "";
+            }
+        }
+        return model;
+    };
+    
     var bindEventHandlers = function (that) {
         that.events.afterFetchSchemaSuccess.addListener(function (schema, textStatus) {
             that.schema = schema;
+            that.model = buildEmptyModelFromSchema(schema);
+            if (that.options.objectId) {
+                that.objectDAO.fetchObjectForId(that.options.objectId, that.events.afterFetchObjectDataSuccess.fire, that.events.afterFetchObjectDataError.fire);
+            } else {
+                that.refreshView();
+            }
         });
         
         that.events.afterFetchSchemaError.addListener(function (xhr, msg, error) {
@@ -43,7 +59,6 @@ var cspace = cspace || {};
         that.objectDAO = fluid.initSubcomponent(that, "dao");
         bindEventHandlers(that);
         that.objectDAO.fetchObjectSchema(that.events.afterFetchSchemaSuccess.fire, that.events.afterFetchSchemaError.fire);
-        that.objectDAO.fetchObjectForId(that.options.objectId, that.events.afterFetchObjectDataSuccess.fire, that.events.afterFetchObjectDataError.fire);
     };
     
     cspace.objectEntry = function (container, options) {
@@ -55,7 +70,9 @@ var cspace = cspace || {};
         };
         
         that.updateModel = function (newModel, source) {
-            that.model = newModel;
+            that.events.modelChanged.fire(newModel, that.model, source);
+            fluid.clear(that.model);
+            fluid.model.copyModel(that.model, newModel);
             that.refreshView();
         };
         
@@ -146,6 +163,7 @@ var cspace = cspace || {};
             type: "cspace.collectionObjectDAO"
         },
         events: {
+            modelChanged: null,
             afterFetchSchemaSuccess: null,
             afterFetchSchemaError: null,
             afterFetchObjectDataSuccess: null,
