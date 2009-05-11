@@ -100,6 +100,13 @@ var cspace = cspace || {};
     
     cspace.saveId = "save";
     
+    var createTemplateRenderFunc = function (resource, key, node, model, opts) {
+        return function () {
+            var templates = fluid.parseTemplates(resource, [key], {});
+            fluid.reRender(templates, node, model, opts);
+        };
+    };
+    
     cspace.renderer = {
         buildCutpoints: function (schema) {
             var cutpoints = [];
@@ -116,6 +123,7 @@ var cspace = cspace || {};
             }
             return cutpoints;
         },
+
         buildComponentTree: function (schema, model) {
             var tree = {children: []};
             
@@ -134,27 +142,29 @@ var cspace = cspace || {};
             }
             return tree;
         },
+
         renderPage: function (that) {
             var fullUISchema = buildFullUISchema(that);
             var renderOptions = {
                 model: that.model,
-                autoBind: true,
-                debugMode: true
+//                debugMode: true,
+                autoBind: true
             };
-            var resources = {
-                objEntry: {
-                    href: that.options.templateUrl,
-                    nodeId: "csc-object-entry-template",
-                    cutpoints: cspace.renderer.buildCutpoints(fullUISchema)
+            var cutpoints = cspace.renderer.buildCutpoints(fullUISchema);            
+            var model = cspace.renderer.buildComponentTree(fullUISchema, that.model);
+            for (var key in that.options.templates) {
+                if (that.options.templates.hasOwnProperty(key)) {
+                    var templ = that.options.templates[key];
+                    var resource = {};
+                    resource[key] = {
+                        href: templ.url,
+                        nodeId: templ.id,
+                        cutpoints: cutpoints
+                    };
+                    fluid.fetchResources(resource,
+                        createTemplateRenderFunc(resource, key, fluid.byId(templ.id), model, renderOptions));
                 }
-            };
-            fluid.fetchResources(resources, function () {
-                var template = fluid.parseTemplates(resources, ["objEntry"], {});
-                fluid.reRender(template,
-                               that.container,
-                               cspace.renderer.buildComponentTree(fullUISchema, that.model),
-                               renderOptions);
-            });
+            }
         }    
     };
     
@@ -181,7 +191,16 @@ var cspace = cspace || {};
             schemaFetchError: "I'm sorry, an error has occurred fetching the Schema: ",
             errorRecoverySuggestion: "Please try refreshing your browser"
         },
-        templateUrl: "../html/ObjectEntryTemplate.html",
+        templates: {
+//            header: {
+//                url: "../html/ObjectEntryHeaderTemplate.html",
+//                id: "csc-header"
+//            },
+            body: {
+                url: "../html/ObjectEntryTemplate.html",
+                id: "csc-object-entry-template"
+            }
+        },
         objectId: null
     });
 })(jQuery, fluid_1_0);
