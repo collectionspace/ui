@@ -192,10 +192,10 @@ var cspace = cspace || {};
             errorRecoverySuggestion: "Please try refreshing your browser"
         },
         templates: {
-//            header: {
-//                url: "../html/ObjectEntryHeaderTemplate.html",
-//                id: "csc-header"
-//            },
+            header: {
+                url: "../html/ObjectEntryHeaderTemplate.html",
+                id: "csc-header"
+            },
             body: {
                 url: "../html/ObjectEntryTemplate.html",
                 id: "csc-object-entry-template"
