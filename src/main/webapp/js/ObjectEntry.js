@@ -86,11 +86,18 @@ var cspace = cspace || {};
         
         that.save = function () {
             that.events.onSave.fire(that.model);
-            that.objectDAO.saveObjectForId(that.model,
-                that.options.objectId,
-                that.events.afterSaveObjectDataSuccess.fire,
-                that.events.afterSaveObjectDataError.fire
-            );        
+            if (that.options.objectId) {
+                that.objectDAO.saveObjectForId(that.model,
+                    that.options.objectId,
+                    that.events.afterSaveObjectDataSuccess.fire,
+                    that.events.afterSaveObjectDataError.fire
+                );        
+            } else {
+                that.objectDAO.saveNewObject(that.model,
+                    that.events.afterSaveObjectDataSuccess.fire,
+                    that.events.afterSaveObjectDataError.fire
+                );        
+            }
             return false;
         };
 
@@ -192,10 +199,10 @@ var cspace = cspace || {};
             errorRecoverySuggestion: "Please try refreshing your browser"
         },
         templates: {
-            header: {
-                url: "../html/ObjectEntryHeaderTemplate.html",
-                id: "csc-header"
-            },
+//            header: {
+//                url: "../html/ObjectEntryHeaderTemplate.html",
+//                id: "csc-header"
+//            },
             body: {
                 url: "../html/ObjectEntryTemplate.html",
                 id: "csc-object-entry-template"
