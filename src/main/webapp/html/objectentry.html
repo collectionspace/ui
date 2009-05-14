@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-layout.css" />
 		<link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
-		
+
 		<script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
 		<script type="text/javascript" src="../js/CollectionObjectDAO.js"></script>
 		<script type="text/javascript" src="../js/ObjectEntry.js"></script>
@@ -22,116 +22,54 @@
 		
 			<!-- CSpace logo and right-side search box -->
 			<div id="name-header">
-				<img src="../images/logo.jpg" style="margin:15px 0px; float:left;" alt="collectionspace.org"/>
-				<div id="header-right">
-					<div class="admin-pref">Administration&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Preferences</div>
-					<div class="search-box"><input type="text" class="search-alpha" name="comments"><input type="submit" value="Search"></div>
-					<div class="advanced-search">> Advanced search</div>
-				</div>
-				<div class="clear"></div>
-			</div>
+				<img src="../images/header.png" alt="CollectionSpace" height=60 width=900 /></div>
 			
-			<!-- top-level menu. Note that this is NOT an HTML list -->
-			<div id="top-nav-menu">
-				<div class="menu-item"><a href="#" >Intake</a></div>
-				<div class="menu-item"><a href="#" class="active" >Objects</a></div>
-				<div class="menu-item"><a href="#" >Authorities</a></div>
-				<div class="menu-item"><a href="#" >Loans</a></div>
-				<div class="menu-item"><a href="#" class="no-margin">Reporting</a></div>
-				<div class="clear"></div>	
-			</div>
+			<ul class="cssmenu">
+				<li class="mycs"><a href="#" title="My Collection Space"><span class="displace">My Collection Space</span></a></li>
+				<li class="report"><a href="#" title="Report"><span class="displace">Report</span></a></li>
+				<li class="findandedit"><a href="#" class="selected" title="Find &amp; Edit"><span class="displace">Find and Edit</span></a></li>
+				<li class="createnew"><a href="#"  title="Create New"><span class="displace">Create New</span></a></li>
+			</ul>
 			
 			<!-- title-bar - name of object and (assession) number -->
 			<div id="title-bar">
 				<div class="object-name csc-object-title">Left-Handed Screwdriver</div><div class="object-number csc-object-number">123.45.678</div>
-				<div class="clear"></div>
-			</div>
-			
-			<!-- menu for smaller level options, i.e., view log, note, preview -->
-			<div class="selection-bar">
-				<div class="selection-option"><img src="../images/selection-square.jpg" alt=""/><div class="selection-option-text">view log</div></div>
-				<div class="selection-option"><img src="../images/selection-square.jpg" alt=""/><div class="selection-option-text">note</div></div>
-				<div class="selection-option"><img src="../images/selection-square.jpg" alt=""/><div class="selection-option-text">preview</div></div>
-				<div class="clear"></div>
+				<div class="clear"><!-- --></div>
 			</div>
 			
 			<!-- main content. body width 900px -->
-			<div class="fl-container-900">
-			
-				<!-- Object Data Entry specific sub-menu -->
-				<div id="object-id-menu">
-					<ul class="fl-tabs fl-tabs-left">
-						<li class="fl-activeTab"><a href="#_bottom">Basic</a></li>
-						<li><a href="#">Location &amp; Movement Control</a></li>
-						<li><a href="#">Condition &amp; Technical Assessment</a></li>
-						<li><a href="#">Insurance</a></li>
-					</ul>
-				</div>
+			<div id="all-content" class="fl-fix">
 				
 				<!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
-				<div class="fl-fix fl-container-flex fl-col-mixed fl-col-mixed2">
+				<div class="fl-fix fl-container-flex fl-col-mixed2">
 				
 					<!-- left-side container. Contains bulk of Object Entry forms and fields -->
-                    <!-- this div will be replaced by the contents of the Template -->
-					<div class="fl-container-650 fl-force-left csc-object-entry-container" id="csc-object-entry-template">
-					</div>
-                    <!-- END left-side container -->
+					<div class="fl-container-650 fl-force-left">
+					
+						<!-- Object Data Entry specific sub-menu -->
+						<div id="object-id-menu">
+							<ul class="fl-tabs fl-tabs-left">
+								<li ><a href="objectentry.html#_bottom">Basic</a></li>
+								<li><a href="objectentry.html">Cataloging</a></li>
+								<li><a href="objectentry.html">Condition</a></li>
+								<li><a href="objectentry.html">Val &amp; Ins</a></li>
+								<li><a href="objectentry.html">Docs/Media</a></li>
+								<li><a href="objectentry.html">Location</a></li>
+								<li><a href="objectentry.html">Rights</a></li>
+							</ul>
+						</div>
+
+						<!-- this div will be replaced by the contents of the Template -->
+						<div class="csc-object-entry-container" id="csc-object-entry-template">
+						</div>
+					</div><!-- END left-side container -->
 					
 					<!-- Right-side container. Contains Authority selection/addition "widgets" -->
-					<div class="fl-container-250 fl-force-right side-bar">
+					<div class="fl-container-container-250 fl-force-right side-bar">
+						<img src="../images/related-records.png" alt="related record column" height=506 width=250 /></div>
+					<!-- END Right-side container -->
 					
-						<div class="information-block">
-						
-							<div class="sub-information-block">
-								<div class="header">
-									<div class="fl-force-left">Related Authorities</div>
-									<div class="fl-force-right minimize"><a href="#"><img src="../images/minimize.jpg" alt="minimize" /></a></div>
-									<div class="clear"></div>
-								</div>
-								<div class="underline"></div>
-								<div class="content">
-									<a href="#"><img src="../images/add-authority.jpg" alt="Add related authority" /></a>
-								</div>
-							</div>
-													
-							<div class="sub-information-block">
-								<div class="search-header">
-									<div class="label">Search and add related Authorities</div>
-								</div>
-								<div class="content">
-									<input type="text" class="search-authority" name="add-authorities"><input type="submit" value="Search">
-								</div>
-							</div>
-						</div>	
-						
-						<div class="information-block">
-						
-							<div class="sub-information-block">
-								<div class="header">
-									<div class="fl-force-left">Related Objects</div>
-									<div class="fl-force-right minimize"><a href="#"><img src="../images/minimize.jpg" alt="minimize" /></a></div>
-									<div class="clear"></div>
-								</div>
-								<div class="underline"></div>
-								<div class="content">
-									<a href="#"><img src="../images/add-object.jpg" alt="Add related object" /></a>
-								</div>
-							</div>
-													
-							<div class="sub-information-block">
-								<div class="search-header">
-									<div class="label">Search and add related Objects</div>
-								</div>
-								<div class="content">
-									<input type="text" class="search-authority" name="add-objects"><input type="submit" value="Search">
-								</div>
-							</div>
-						</div>	
-						
-					</div> <!-- END Right-side container -->
-					
-					<div class="clear"></div>
-					
+					<div class="clear"><!-- --></div>
 				</div> <!-- END sub-main content -->
 				
 			</div> <!-- END main content -->
