@@ -56,7 +56,7 @@ var cspace = cspace || {};
     };
     
     var setupObjectEntry = function (that) {
-        that.objectDAO = fluid.initSubcomponent(that, "dao");
+        that.objectDAO = fluid.initSubcomponent(that, "dao", [fluid.COMPONENT_OPTIONS]);
         bindEventHandlers(that);
         that.objectDAO.fetchObjectSchema(that.events.afterFetchSchemaSuccess.fire, that.events.afterFetchSchemaError.fire);
     };
