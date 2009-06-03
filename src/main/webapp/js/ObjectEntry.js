@@ -1,4 +1,4 @@
-/*global jQuery, fluid_1_0*/
+/*global jQuery, fluid_1_1*/
 
 var cspace = cspace || {};
 
@@ -210,4 +210,4 @@ var cspace = cspace || {};
         },
         objectId: null
     });
-})(jQuery, fluid_1_0);
+})(jQuery, fluid_1_1);

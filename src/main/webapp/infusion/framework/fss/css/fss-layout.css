@@ -88,6 +88,9 @@ Generic containers for columns and layouts
 
 .fl-layout-linear .fl-linearEnabled {width:100% !important; /*position:relative;*/ display:block;} /* linearization opt in for special cases */
 
+.fl-layout-linear .fl-button-left,
+.fl-layout-linear .fl-button-right {padding:1em;}
+
 /*
 Layout Helpers
 =============================================
@@ -235,7 +238,7 @@ input.fl-icon {padding-left:16px;}
 /*
  * Forms and Form Controls
  * Common arrangements for form inputs in a list
- * Alignment requires list of label elements placed before the control 
+ * Alignment requires list of fl-label elements placed before the control 
  */
 .fl-controls-left li {list-style-type:none; text-align:left;}
 .fl-controls-left .fl-label {float:left; text-align:left; width:50%; margin-right:5px;}
@@ -249,15 +252,18 @@ input.fl-icon {padding-left:16px;}
 /**
  * Knockout Background Images
  */
-.fl-no-background-images, .fl-no-background-images * {
+.fl-noBackgroundImages, .fl-noBackgroundImages * {
     background-image:none !important;
 }
-.fl-no-background-images .fl-icon {
+.fl-noBackgroundImages .fl-icon {
     text-indent:0 !important;
     width:auto !important;
     background-color:transparent !important;
 }
 
-/* Progressive Enhancement */
-.fl-ProgEnhance-enhanced {display:none} /* JS will overwrite this if it is enabled */
-.fl-ProgEnhance-basic {} /* This will be filled with display:hidden when JS runs */
+/* Progressive Enhancement: JS will reverse the display setup if it is enabled */
+.fl-ProgEnhance-enhanced, /* << syntax breaks conventions and is Deprecated*/
+.fl-progEnhance-enhanced {display:none} 
+
+.fl-ProgEnhance-basic, /* << syntax breaks conventions and is Deprecated*/
+.fl-progEnhance-basic {}
