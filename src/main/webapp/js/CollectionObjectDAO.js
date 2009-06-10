@@ -1,3 +1,13 @@
+/*
+Copyright 2009 University of Toronto
+
+Licensed under the Educational Community License (ECL), Version 2.0. 
+ou may not use this file except in compliance with this License.
+
+You may obtain a copy of the ECL 2.0 License at
+https://source.collectionspace.org/collection-space/LICENSE.txt
+*/
+
 /*global jQuery, fluid_1_1*/
 
 var cspace = cspace || {};
@@ -52,6 +62,9 @@ var cspace = cspace || {};
     
     cspace.collectionObjectDAO.serverURLFactory = function (baseUrl, resourceUrl, id) {
         return baseUrl + resourceUrl + (id ? id : "");
+// TEMPORARY 2009-06-10:
+// To test on a local server with the chain application, use the following line instead:
+//        return baseUrl + resourceUrl + (id ? id : "schema") + "."+DATA_FORMAT;
     };
     
     cspace.collectionObjectDAO.createFileSystemURLFactory = function (resourceUrls) {
