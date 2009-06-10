@@ -1,3 +1,13 @@
+/*
+Copyright 2009 University of Toronto
+
+Licensed under the Educational Community License (ECL), Version 2.0. 
+ou may not use this file except in compliance with this License.
+
+You may obtain a copy of the ECL 2.0 License at
+https://source.collectionspace.org/collection-space/LICENSE.txt
+*/
+
 /*global jQuery, fluid_1_1*/
 
 var cspace = cspace || {};
@@ -77,8 +87,8 @@ var cspace = cspace || {};
         };
         
         that.showSchemaErrorMessage = function (msg) {
-            that.locate("errorMessage").text(msg);
-            that.locate("errorDialog").dialog({
+            that.locate("errorMessage", "body").text(msg);
+            that.locate("errorDialog", "body").dialog({
                 modal: true,
                 dialogClass: "fl-widget"
             });
