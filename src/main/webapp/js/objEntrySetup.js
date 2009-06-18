@@ -28,18 +28,18 @@ var demo = demo || {};
     
     demo.setup = function () {
         var objectId = getUrlParameter("objectId");
-        var opts = {
-// TEMPORARY 2009-06-10:
-// To test on a local server with the chain application, uncomment this option block:
+        var opts = {};
 /*
-            dao: {
-                type: "cspace.collectionObjectDAO",
-                options: {
-                    baseUrl: "http://localhost:8080/chain/"
-                }
+The CollectionObjectDAO default options are suitable for testing on a local machine.
+To configure the demo to run on a particular server, set the baseUrl option to reference
+the URL for the application layer, as shown in the following sample:
+        opts.dao = {
+            type: "cspace.collectionObjectDAO",
+            options: {
+                baseUrl: "http://localhost:8080/chain/"
             }
-*/
         };
+*/
         if (objectId) {
             opts.objectId = objectId;
         }
