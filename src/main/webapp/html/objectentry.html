@@ -31,58 +31,58 @@
 
 	<body>
 		<!-- body content -->
-		<div class="fl-container-900 fl-centered">
+		<div class="fl-container-1050 fl-centered">
 		
 			<!-- CSpace logo and right-side search box -->
 			<div id="name-header">
-				<img src="../images/header.png" alt="CollectionSpace" height=60 width=900 /></div>
+				<img src="../images/header.png" alt="CollectionSpace" height=123 width=1050 /></div>
 			
-			<ul class="cssmenu">
+			<!--<ul class="cssmenu">
 				<li class="mycs"><a href="#" title="My Collection Space"><span class="displace">My Collection Space</span></a></li>
 				<li class="report"><a href="#" title="Report"><span class="displace">Report</span></a></li>
 				<li class="findandedit"><a href="#" class="selected" title="Find &amp; Edit"><span class="displace">Find and Edit</span></a></li>
 				<li class="createnew"><a href="#"  title="Create New"><span class="displace">Create New</span></a></li>
-			</ul>
+			</ul> -->
 			
 			<!-- title-bar - name of object and (assession) number -->
 			<div id="title-bar">
-				<div class="object-name csc-object-title">Left-Handed Screwdriver</div><div class="object-number csc-object-number">123.45.678</div>
-				<div class="clear"><!-- --></div>
+				<div class="object-name csc-object-title">Left-Handed Screwdriver</div><div class="object-number csc-object-number">123.45.678</div><div class="object-type">object</div>
+				<div class="clear"></div>
 			</div>
 			
-			<!-- main content. body width 900px -->
-			<div id="all-content" class="fl-fix">
+			<!-- main content -->
+			<div id="all-content" class="fl-fix object-entry">
 				
 				<!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
 				<div class="fl-fix fl-container-flex fl-col-mixed2">
 				
 					<!-- left-side container. Contains bulk of Object Entry forms and fields -->
-					<div class="fl-container-650 fl-force-left">
-					
+					<div class="fl-container-left fl-force-left">
+						
 						<!-- Object Data Entry specific sub-menu -->
 						<div id="object-id-menu">
-							<ul class="fl-tabs fl-tabs-left">
-								<li ><a href="objectentry.html#_bottom">Basic</a></li>
+							<!--<ul class="fl-tabs fl-tabs-left">
+								<li class="fl-activeTab"><a href="objectentry.html#_bottom">Basic</a></li>
 								<li><a href="objectentry.html">Cataloging</a></li>
 								<li><a href="objectentry.html">Condition</a></li>
 								<li><a href="objectentry.html">Val &amp; Ins</a></li>
 								<li><a href="objectentry.html">Docs/Media</a></li>
 								<li><a href="objectentry.html">Location</a></li>
 								<li><a href="objectentry.html">Rights</a></li>
-							</ul>
-						</div>
-
+							</ul>-->
+							<img src="../images/tab-bar.png" alt="related record column" height=24 width=598 /></div>
+						
 						<!-- this div will be replaced by the contents of the Template -->
 						<div class="csc-object-entry-container" id="csc-object-entry-template">
 						</div>
 					</div><!-- END left-side container -->
 					
-					<!-- Right-side container. Contains Authority selection/addition "widgets" -->
-					<div class="fl-container-container-250 fl-force-right side-bar">
-						<img src="../images/related-records.png" alt="related record column" height=506 width=250 /></div>
+					<!-- Right-side container. Pivot area -->
+					<div class="fl-container-pivot fl-force-right">
+						<img src="../images/pivot.png" alt="related record column" height=693 width=303 /></div>
 					<!-- END Right-side container -->
 					
-					<div class="clear"><!-- --></div>
+					<div class="clear"></div>
 				</div> <!-- END sub-main content -->
 				
 			</div> <!-- END main content -->

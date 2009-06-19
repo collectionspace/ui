@@ -13,16 +13,17 @@
 
 	<body>
 		<!-- left-side container. Contains bulk of Object Entry forms and fields -->
-		<form class="fl-container-650 fl-force-left csc-object-entry-container" id="csc-object-entry-template">
-			<div class="dashed-border">
+		<form class="fl-container-left csc-object-entry-container" id="csc-object-entry-template">
+			<!-- outer-border block -->
+			<div class="object-entry-outer-border">
 				<!-- Each section of Object Entry is broken down into information-blocks.
 					  This corresponds to Information groups within Spectrum's Object Entry prodedure. -->
-				<div class="fl-container-flex fl-fix content">
+				<div class="fl-container-flex fl-fix information-group">
 				
-					<div class="info-column2 fl-force-left">	
+					<div class="info-column1 fl-force-left">	
 			
 						<!-- Information-block header -->
-						<div class="fl-container-flex fl-fix header">
+						<div class="fl-container-flex header">
 							Object Identification Information
 						</div>
 						
@@ -31,7 +32,7 @@
 							
 							<!-- The information-block is further broken down into two columns of equal size: left and right -->
 							<!-- Left-side column -->
-							<div class="info-column1 fl-force-left">
+							<div class="info-column2-40 fl-force-left">
 								
 								<!-- The information is broken down into a pair of information elements: label and value -->
 								<div class="info-pair">
@@ -59,18 +60,21 @@
 								<div class="info-pair disabled">
 									<div class="info-label">Responsible Department</div>
 									<div class="info-value">
-										<input type="text" class="input-authority csc-department " name="responsible-department" disabled="true"><input type="submit" value="Add" disabled="true">
+										<input type="text" class="input-authority csc-department " name="responsible-department" disabled="true"><!--<input type="submit" value="Add" disabled="true">-->
 									</div>
 								</div>
 								
+							</div>
+							
+							<div class="info-column2-60 fl-force-right">
 								<div class="info-pair">
 									<div class="info-label">Brief Description</div>
-									<div class="info-value"><textarea class="input-textarea csc-description" maxlength="2000" name="brief-description"></textarea></div>
+									<div class="info-value"><textarea class="input-textarea csc-description" name="brief-description"></textarea></div>
 								</div>
 								
 								<div class="info-pair">
 									<div class="info-label">Distinguishing Features</div>
-									<div class="info-value"><textarea class="input-textarea csc-features" maxlength="2000" name="destinguishing-features"></textarea></div>
+									<div class="info-value"><textarea class="input-textarea csc-features" name="destinguishing-features"></textarea></div>
 								</div>
 
 								<div class="info-pair">
@@ -78,33 +82,19 @@
 									<div class="info-value"><textarea class="input-textarea csc-comments" name="comments"></textarea></div>
 								</div>
 								
-								<div class="clear"><!-- --></div>
-								
 							</div>
 							
-							<div class="clear"><!-- --></div>
+							<div class="clear"></div>
 						</div>
 
 					</div>
-					
-					<div class="info-column2 fl-force-right">
-						
-							<!-- Information-block header -->
-							<div class="fl-container-flex fl-fix header">
-								Media Snapshot
-							</div>
-							
-							<!-- Information-block content block -->
-							<div class="fl-container-flex content">
-								<img src="../images/media-snapshot.png" alt="media snapshot image" height=224 width=280 /></div>
-					</div>
-					
+
 				</div>	
 
 				
-				<div class="fl-container-flex fl-fix content">
+				<div class="fl-container-flex fl-fix information-group">
 					<div class="info-column1 fl-force-left">
-						<div class="fl-container-flex fl-fix header">
+						<div class="fl-container-flex header">
 							Date Information
 						</div>
 						<div class="fl-container-flex fl-fix content">
@@ -115,15 +105,13 @@
 								<div class="info-pair disabled">
 									<div class="info-label">Date - earliest/single</div>
 									<div class="info-value">
-									<input type="text" class="input-date csc-date-earliest" name="date-earliest-single-month" disabled="true"><input type="text" class="input-date" name="date-earliest-single-day" disabled="true"><input type="text" class="input-date" name="date-earliest-single-year" disabled="true"><a href="#" alt="calendar"><img src="../images/calendar.jpg" style="margin-bottom: -4px;"/></a></div>
+									<input type="text" class="input-date csc-date-earliest" name="date-earliest-single-month" disabled="true"><input type="text" class="input-date" name="date-earliest-single-day" disabled="true"><input type="text" class="input-date" name="date-earliest-single-year" disabled="true"><img src="../images/calendar.jpg" alt="calendar" style="margin-bottom: -4px;"/></div>
 								</div>
 								
 								<div class="info-pair">
 									<div class="info-label">Date - association</div>
 									<div class="info-value"><input type="text" class="input-alpha csc-date-association" name="date-association"></div>
 								</div>
-								
-								<div class="clear"></div>
 								
 							</div>
 							
@@ -133,16 +121,13 @@
 								<div class="info-pair disabled">
 									<div class="info-label">Date - latest</div>
 									<div class="info-value">
-										<input type="text" class="input-date csc-date-latest" name="date-association-month" disabled="true"><input type="text" class="input-date" name="date-association-day" disabled="true"><input type="text" class="input-date" name="date-association-year" disabled="true"><a href="#" alt="calendar"><img src="../images/calendar.jpg" style="margin-bottom: -4px;"/></a>
-									</div>
+										<input type="text" class="input-date csc-date-latest" name="date-association-month" disabled="true"><input type="text" class="input-date" name="date-association-day" disabled="true"><input type="text" class="input-date" name="date-association-year" disabled="true"><img src="../images/calendar.jpg" alt="calendar" style="margin-bottom: -4px;"/></div>
 								</div>
 								
 								<div class="info-pair">
 									<div class="info-label">Date - period</div>
 									<div class="info-value"><input type="text" class="input-alpha csc-date-period" name="date-period"></div>
 								</div>
-								
-								<div class="clear"></div>
 								
 							</div>
 
@@ -154,7 +139,7 @@
 								</div>
 							</div>
 							
-							<div class="clear"><!-- --></div>
+							<div class="clear"></div>
 						</div>
 					
 					</div>
@@ -163,7 +148,7 @@
 				<div class="csc-error-dialog">
 					<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
 				</div>
-			</div> <!-- dashed-border-->
+			</div> <!-- end outer border-->
 
 			<!-- Save button container -->
 			<div class="fl-container-flex input-button">
