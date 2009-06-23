@@ -62,10 +62,6 @@ var cspace = cspace || {};
     
     cspace.collectionObjectDAO.serverURLFactory = function (baseUrl, resourceUrl, id) {
         return baseUrl + resourceUrl + (id ? id : "");
-// TEMPORARY 2009-06-10:
-// Required to deal with http://issues.collectionspace.org/browse/CSPACE-233
-// To test on a local server with the chain application, use the following line instead:
-//        return baseUrl + resourceUrl + (id ? id : "schema") + "."+DATA_FORMAT;
     };
     
     cspace.collectionObjectDAO.createFileSystemURLFactory = function (resourceUrls) {
