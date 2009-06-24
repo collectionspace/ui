@@ -35,7 +35,11 @@
 		
 			<!-- CSpace logo and right-side search box -->
 			<div id="name-header">
-				<img src="../images/header.png" alt="CollectionSpace" height=123 width=1050 /></div>
+				<img src="../images/header.png" alt="CollectionSpace" height=123 width=1050 usemap="#header"/>
+				<map name="header">
+					<area shape="rect" coords="131,81,353,112" href="createnew.html" alt="Create New">
+					<area shape="rect" coords="10,11,256,54" href="createnew.html" alt="CollectionSpace">
+				</map></div>
 			
 			<!--<ul class="cssmenu">
 				<li class="mycs"><a href="#" title="My Collection Space"><span class="displace">My Collection Space</span></a></li>
@@ -46,7 +50,7 @@
 			
 			<!-- title-bar - name of object and (assession) number -->
 			<div id="title-bar">
-				<div class="object-name csc-object-title">Left-Handed Screwdriver</div><div class="object-number csc-object-number">123.45.678</div><div class="object-type">object</div>
+				<div class="object-name csc-object-title">Object Title</div><div class="object-number csc-object-number">2009.001.1234</div><div class="object-type">object</div>
 				<div class="clear"></div>
 			</div>
 			
@@ -78,8 +82,12 @@
 					</div><!-- END left-side container -->
 					
 					<!-- Right-side container. Pivot area -->
-					<div class="fl-container-pivot fl-force-right">
-						<img src="../images/pivot.png" alt="related record column" height=693 width=303 /></div>
+					<div class="fl-container-pivot fl-force-right" sty le="filter:alpha(opacity=50); /* IE */
+opacity: 0.5; /* Safari, Opera */
+-moz-opacity:0.50; /* FireFox */
+z-index: 20;
+">
+						<img src="../images/pivot-fade.png" alt="related record column" height=666 width=303 /></div>
 					<!-- END Right-side container -->
 					
 					<div class="clear"></div>
