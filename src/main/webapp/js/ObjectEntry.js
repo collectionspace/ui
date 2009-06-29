@@ -54,14 +54,25 @@ var cspace = cspace || {};
         
         that.events.afterFetchSchemaError.addListener(function (xhr, msg, error) {
             that.showSchemaErrorMessage(that.options.strings.schemaFetchError + msg + that.options.strings.errorRecoverySuggestion);
+            that.locate("savedMessage").hide();
         });
 
         that.events.afterFetchObjectDataSuccess.addListener(function (data, textStatus) {
             that.updateModel(data);
+            that.locate("savedMessage").hide();
         });
 
         that.events.afterFetchObjectDataError.addListener(function (xhr, msg, error) {
             // TODO: decide on appropriate response to this situation
+            that.locate("savedMessage").hide();
+        });
+        
+        that.events.afterSaveObjectDataSuccess.addListener(function () {
+            that.locate("savedMessage").text(that.options.strings.saveSuccessfulMessage).show();
+        });
+        
+        that.events.afterSaveObjectDataError.addListener(function (xhr, msg, error) {
+            that.locate("savedMessage").text(that.options.strings.saveFailedMessage+msg).show();
         });
     };
     
@@ -93,7 +104,7 @@ var cspace = cspace || {};
                 dialogClass: "fl-widget"
             });
         };
-        
+
         that.save = function () {
             that.events.onSave.fire(that.model);
             if (that.options.objectId) {
@@ -202,11 +213,14 @@ var cspace = cspace || {};
         selectors: {
             errorDialog: ".csc-error-dialog",
             errorMessage: ".csc-error-message",
-            save: ".csc-save"
+            save: ".csc-save",
+            savedMessage: ".csc-saved-message"
         },
         strings: {
             schemaFetchError: "I'm sorry, an error has occurred fetching the Schema: ",
-            errorRecoverySuggestion: "Please try refreshing your browser"
+            errorRecoverySuggestion: "Please try refreshing your browser",
+            saveSuccessfulMessage: "Object record successfully saved",
+            saveFailedMessage: "Error: Object record not saved: "
         },
         templates: {
 //            header: {
