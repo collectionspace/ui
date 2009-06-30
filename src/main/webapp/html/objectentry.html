@@ -37,20 +37,14 @@
 			<div id="name-header">
 				<img src="../images/header.png" alt="CollectionSpace" height=123 width=1050 usemap="#header"/>
 				<map name="header">
-					<area shape="rect" coords="131,81,353,112" href="createnew.html" alt="Create New">
 					<area shape="rect" coords="10,11,256,54" href="createnew.html" alt="CollectionSpace">
+					<area shape="rect" coords="131,81,353,112" href="createnew.html" alt="Create New">
 				</map></div>
-			
-			<!--<ul class="cssmenu">
-				<li class="mycs"><a href="#" title="My Collection Space"><span class="displace">My Collection Space</span></a></li>
-				<li class="report"><a href="#" title="Report"><span class="displace">Report</span></a></li>
-				<li class="findandedit"><a href="#" class="selected" title="Find &amp; Edit"><span class="displace">Find and Edit</span></a></li>
-				<li class="createnew"><a href="#"  title="Create New"><span class="displace">Create New</span></a></li>
-			</ul> -->
 			
 			<!-- title-bar - name of object and (assession) number -->
 			<div id="title-bar">
 				<div class="object-name csc-object-title">Object Title</div><div class="object-number csc-object-number">2009.001.1234</div><div class="object-type">object</div>
+				<!--<div class="user-message-container"><div class="user-message">Object Record Saved</div></div>-->
 				<div class="clear"></div>
 			</div>
 			
@@ -65,15 +59,6 @@
 						
 						<!-- Object Data Entry specific sub-menu -->
 						<div id="object-id-menu">
-							<!--<ul class="fl-tabs fl-tabs-left">
-								<li class="fl-activeTab"><a href="objectentry.html#_bottom">Basic</a></li>
-								<li><a href="objectentry.html">Cataloging</a></li>
-								<li><a href="objectentry.html">Condition</a></li>
-								<li><a href="objectentry.html">Val &amp; Ins</a></li>
-								<li><a href="objectentry.html">Docs/Media</a></li>
-								<li><a href="objectentry.html">Location</a></li>
-								<li><a href="objectentry.html">Rights</a></li>
-							</ul>-->
 							<img src="../images/tab-bar.png" alt="related record column" height=24 width=598 /></div>
 						
 						<!-- this div will be replaced by the contents of the Template -->
@@ -82,12 +67,19 @@
 					</div><!-- END left-side container -->
 					
 					<!-- Right-side container. Pivot area -->
-					<div class="fl-container-pivot fl-force-right" sty le="filter:alpha(opacity=50); /* IE */
-opacity: 0.5; /* Safari, Opera */
--moz-opacity:0.50; /* FireFox */
-z-index: 20;
-">
-						<img src="../images/pivot-fade.png" alt="related record column" height=666 width=303 /></div>
+					<div class="fl-container-pivot fl-force-right">
+						<img src="../images/media-snapshot.png" alt="media snapshot" height=307 width=302 /><div class="recently-created-container">
+							<div class="recently-created">
+								<div class="header">Recently Created Object Entry Records</div>
+								<form id="form" action="" method="" name="form">
+									<select class="recently-created-list">
+										<option value="1">object record 1</option>
+										<option value="2">object record 2</option>
+										<option value="3">object record 3</option>
+									</select><input type="image" src="../images/viewbutton.png" class="viewbutton">
+								</form>
+							</div>
+						</div><img src="../images/related-entities.png" alt="related entities" height=165 width=302 /></div>
 					<!-- END Right-side container -->
 					
 					<div class="clear"></div>
