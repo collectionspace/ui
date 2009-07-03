@@ -76,7 +76,8 @@ var cspace = cspace || {};
         });
         
         that.events.afterSaveObjectDataSuccess.addListener(function () {
-            that.objectDAO.fetchObjects(that.recentActivity.updateModel, console.log("Foo!!"));
+            // TODO: Better error handling
+            that.objectDAO.fetchObjects(that.recentActivity.updateModel, console.log("Error fetching object list"));
         });
     };
     

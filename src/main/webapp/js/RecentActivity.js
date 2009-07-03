@@ -14,44 +14,37 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
 
-    getRenderTemplates = function (that) {
-        var resourceSpecs = {
-            alist: {
-                resourceKey: "alist",
-                resourceText: $("#form")[0].innerHTML,
-                href: "."
-            }
-        };
-            var cutPoints = [
-                {
-                    id: "list",
-                    selector: that.options.selectors.activityList
-                }
-            ];
-        return fluid.parseTemplates(resourceSpecs, ["alist"], {cutpoints: cutPoints});
-    };
-
     buildComponentTreeForSelect = function (id, model) {
         var tree = {children: [
                     {
                         ID: id,
                         selection: {
-                            value: model[0]
+                            value: model.selected
                         },
                         optionlist: {
-                            value: model
+                            value: model.items
                         },
                         optionnames: {
-                            value: model
-                        }
+                            value: model.items
+                        },
+                        decorators: [{
+                            type: "jQuery",
+                            func: "change",
+                            args: function () {
+                                // in this context, "this" is the select pull-down itself
+                                // This is Extremely temporary
+                                document.location = "./objectentry.html?objectId="+this.value;
+                            }
+                        }]
                     }
                 ]};
         return tree;
     };
-    
+     
     bindEventHandlers = function (that) {
         that.events.afterFetchObjectsSuccess.addListener(function (activityList) {
-            that.model = activityList.items;
+            that.model.items = activityList.items;
+            that.model.selected = that.model.items[0];
 
             var cutPoints = [
                 {
@@ -68,7 +61,6 @@ var cspace = cspace || {};
             // TODO: decide on a better response to error
             console.log("Error fetching activity list: "+error);
         });
-        
     };
     
     setupRecentActivity = function (that) {
@@ -85,15 +77,17 @@ var cspace = cspace || {};
     
     cspace.recentActivity = function (container, options) {
         var that = fluid.initView("cspace.recentActivity", container, options);
-        that.model = {};
+        that.model = {
+            items: [],
+            selected: ""
+        };
         
         that.updateModel = function (newModel, source) {
-            that.model = newModel.items;
+            that.model.items = newModel.items;
             that.refreshView();
         };
         
         that.refreshView = function () {
-            console.log("list: "+that.model);
             var cutPoints = [
                 {
                     id: "list",
@@ -120,6 +114,7 @@ var cspace = cspace || {};
         selectors: {
             listContainer: ".csc-recent-activity",
             activityList: ".csc-recent-activity-list",
+            viewButton: ".csc-view-button"
         }
     });
 })(jQuery, fluid_1_1);

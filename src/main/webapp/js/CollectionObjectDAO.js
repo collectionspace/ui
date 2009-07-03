@@ -15,8 +15,17 @@ var cspace = cspace || {};
 (function ($, fluid) {
     var DATA_FORMAT = "json";
 
-    var newID = function () {
-        return new Date().getTime();
+    // This is a temporary function, in place only until the ID service is accessible
+    // through the APP layer.
+    var newID = function (model) {
+        var id = model.accessionNumber.split(" ")[0];
+        if (id === "") {
+            id = model.objectTitle.split(" ")[0];
+        }
+        if (id === "") {
+            id = new Date().getTime();
+        }
+        return id;
     };
     
     var ajax = function (that, method, resourceUrl, onSuccess, onError, data, id) {
@@ -53,7 +62,7 @@ var cspace = cspace || {};
         };
         
         that.saveNewObject = function (collectionObject, onSuccess, onError) {
-            ajax(that, "POST", that.options.resources.objects, onSuccess, onError, JSON.stringify(collectionObject), collectionObject.accessionNumber.split(" ")[0]);
+            ajax(that, "POST", that.options.resources.objects, onSuccess, onError, JSON.stringify(collectionObject), newID(collectionObject));
         };
         
         that.saveObjectForId = function (collectionObject, id, onSuccess, onError) {
