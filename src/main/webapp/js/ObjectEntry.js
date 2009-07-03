@@ -28,6 +28,16 @@ var cspace = cspace || {};
                 }
             ]
         };
+        fullUISchema.saveSecondary = {
+            "selector": that.options.selectors.saveSecondary,
+            "validators": [],
+            "decorators": [
+                {type: "jQuery",
+                    func: "click", 
+                    args: that.save
+                }
+            ]
+        };
         return fullUISchema;
     };
     
@@ -223,6 +233,7 @@ var cspace = cspace || {};
             errorDialog: ".csc-error-dialog",
             errorMessage: ".csc-error-message",
             save: ".csc-save",
+            saveSecondary: ".csc-save-bottom",
             savedMessage: ".csc-saved-message"
         },
         strings: {
