@@ -46,7 +46,7 @@ var cspace = cspace || {};
         var j=0;
         for (var i=0; i<list.length;i++) {
             if (list[i] !== "schema") {
-                newlist[j++] = list[i];
+                newList[j++] = list[i];
             }
         }
         return newList;
