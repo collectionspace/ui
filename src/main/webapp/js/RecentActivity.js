@@ -41,16 +41,22 @@ var cspace = cspace || {};
         return tree;
     };
      
+    stripSchemaFromList = function (list) {
+        var newList = [];
+        var j=0;
+        for (var i=0; i<list.length;i++) {
+            if (list[i] !== "schema") {
+                newlist[j++] = list[i];
+            }
+        }
+        return newList;
+    };
+    
     bindEventHandlers = function (that) {
         that.events.afterFetchObjectsSuccess.addListener(function (activityList) {
             // TEMPORARY: Currently, the demo doesn't properly separate the schema from the data
             // files - they're in the same folder, so the schema shows up in the list.
-            var j=0;
-            for (var i=0; i<activityList.items.length;i++) {
-                if (activityList.items[i] !== "schema") {
-                    that.model.items[j++] = activityList.items[i];
-                }
-            }
+            that.model.items = stripSchemaFromList(activityList.items);
             that.model.selected = that.model.items[0];
 
             var cutPoints = [
@@ -90,7 +96,7 @@ var cspace = cspace || {};
         };
         
         that.updateModel = function (newModel, source) {
-            that.model.items = newModel.items;
+            that.model.items = stripSchemaFromList(newModel.items);
             that.refreshView();
         };
         
