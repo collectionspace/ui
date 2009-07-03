@@ -14,6 +14,10 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
     var DATA_FORMAT = "json";
+
+    var newID = function () {
+        return new Date().getTime();
+    };
     
     var ajax = function (that, method, resourceUrl, onSuccess, onError, data, id) {
         jQuery.ajax({
@@ -41,7 +45,7 @@ var cspace = cspace || {};
         };
         
         that.fetchObjects = function (onSuccess, onError) {
-
+            ajax(that, "GET", that.options.resources.objects, onSuccess, onError, null);
         };
         
         that.fetchObjectForId = function (id, onSuccess, onError) {
@@ -49,7 +53,7 @@ var cspace = cspace || {};
         };
         
         that.saveNewObject = function (collectionObject, onSuccess, onError) {
-            ajax(that, "POST", that.options.resources.objects, onSuccess, onError, JSON.stringify(collectionObject), that.options.newObjectIDToken);
+            ajax(that, "POST", that.options.resources.objects, onSuccess, onError, JSON.stringify(collectionObject), newID());
         };
         
         that.saveObjectForId = function (collectionObject, id, onSuccess, onError) {
@@ -78,7 +82,7 @@ var cspace = cspace || {};
     
     fluid.defaults("cspace.collectionObjectDAO", {
         resources: {
-            objects: "objects/",
+            objects: "objects",
             schema: "objects/schema/"
         },
         baseUrl: "./",

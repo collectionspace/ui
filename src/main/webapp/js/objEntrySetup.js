@@ -28,22 +28,26 @@ var demo = demo || {};
     
     demo.setup = function () {
         var objectId = getUrlParameter("objectId");
-        var opts = {};
+        var oeOpts = {};
+        var raOpts = {};
 /*
 The CollectionObjectDAO default options are suitable for testing on a local machine.
 To configure the demo to run on a particular server, set the baseUrl option to reference
 the URL for the application layer, as shown in the following sample:
-        opts.dao = {
+        var localhostDao = {
             type: "cspace.collectionObjectDAO",
             options: {
                 baseUrl: "http://localhost:8080/chain/"
             }
         };
+        oeOpts.dao = localhostDao;
+        raOpts.dao = localhostDao;
 */
+
         if (objectId) {
-            opts.objectId = objectId;
+            oeOpts.objectId = objectId;
         }
-        cspace.objectEntry(".csc-object-entry-container", opts);
+        cspace.objectEntry(".csc-object-entry-container", oeOpts);
     };
     
 })(jQuery);

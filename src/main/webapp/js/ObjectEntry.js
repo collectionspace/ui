@@ -74,6 +74,10 @@ var cspace = cspace || {};
         that.events.afterSaveObjectDataError.addListener(function (xhr, msg, error) {
             that.locate("savedMessage").text(that.options.strings.saveFailedMessage+msg).show();
         });
+        
+        that.events.afterSaveObjectDataSuccess.addListener(function () {
+            that.objectDAO.fetchObjects(that.recentActivity.updateModel, console.log("Foo!!"));
+        });
     };
     
     var setupObjectEntry = function (that) {
@@ -85,6 +89,7 @@ var cspace = cspace || {};
     cspace.objectEntry = function (container, options) {
         var that = fluid.initView("cspace.objectEntry", container, options);
         that.model = {};
+        that.recentActivity = fluid.initSubcomponent(that, "recentActivity", [".recently-created-container", options]);
         
         that.refreshView = function () {
             cspace.renderer.renderPage(that);
@@ -199,6 +204,9 @@ var cspace = cspace || {};
     fluid.defaults("cspace.objectEntry", {
         dao: {
             type: "cspace.collectionObjectDAO"
+        },
+        recentActivity: {
+            type: "cspace.recentActivity"
         },
         events: {
             modelChanged: null,

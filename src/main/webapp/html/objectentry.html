@@ -10,8 +10,9 @@
 		<link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
 
-		<script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
 <!--
+		<script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
+-->
 		<script type="text/javascript" src="../infusion/1.1/lib/jquery/core/js/jquery.js"></script>
 		<script type="text/javascript" src="../infusion/1.1/lib/jquery/ui/js/ui.core.js"></script>
 		<script type="text/javascript" src="../infusion/1.1/lib/jquery/ui/js/ui.dialog.js"></script>
@@ -22,9 +23,9 @@
 		<script type="text/javascript" src="../infusion/1.1/lib/fastXmlPull/js/fastXmlPull.js"></script>
 		<script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidParser.js"></script>
 		<script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidRenderer.js"></script>
--->
 
 		<script type="text/javascript" src="../js/CollectionObjectDAO.js"></script>
+		<script type="text/javascript" src="../js/RecentActivity.js"></script>
 		<script type="text/javascript" src="../js/ObjectEntry.js"></script>
 		<script type="text/javascript" src="../js/objEntrySetup.js"></script>
 	</head>
@@ -37,7 +38,7 @@
 			<div id="name-header">
 				<img src="../images/header.png" alt="CollectionSpace" height=123 width=1050 usemap="#header"/>
 				<map name="header">
-					<area shape="rect" coords="10,11,256,54" href="createnew.html" alt="CollectionSpace">
+					<area shape="rect" coords="10,11,256,54" href="http://demo.collectionspace.org" alt="CollectionSpace">
 					<area shape="rect" coords="131,81,353,112" href="createnew.html" alt="Create New">
 				</map></div>
 			
@@ -68,11 +69,12 @@
 					
 					<!-- Right-side container. Pivot area -->
 					<div class="fl-container-pivot fl-force-right">
-						<img src="../images/media-snapshot.png" alt="media snapshot" height=307 width=302 /><div class="recently-created-container">
-							<div class="recently-created">
+						<img src="../images/media-snapshot.png" alt="media snapshot" height=307 width=302 />
+                        <div class="recently-created-container">
+							<div class="recently-created csc-recent-activity">
 								<div class="header">Recently Created Object Entry Records</div>
 								<form id="form" action="" method="" name="form">
-									<select class="recently-created-list">
+									<select class="recently-created-list csc-recent-activity-list">
 										<option value="1">object record 1</option>
 										<option value="2">object record 2</option>
 										<option value="3">object record 3</option>
