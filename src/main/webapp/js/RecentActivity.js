@@ -43,7 +43,14 @@ var cspace = cspace || {};
      
     bindEventHandlers = function (that) {
         that.events.afterFetchObjectsSuccess.addListener(function (activityList) {
-            that.model.items = activityList.items;
+            // TEMPORARY: Currently, the demo doesn't properly separate the schema from the data
+            // files - they're in the same folder, so the schema shows up in the list.
+            var j=0;
+            for (var i=0; i<activityList.items.length;i++) {
+                if (activityList.items[i] !== "schema") {
+                    that.model.items[j++] = activityList.items[i];
+                }
+            }
             that.model.selected = that.model.items[0];
 
             var cutPoints = [
