@@ -53,7 +53,7 @@ var cspace = cspace || {};
         };
         
         that.saveNewObject = function (collectionObject, onSuccess, onError) {
-            ajax(that, "POST", that.options.resources.objects, onSuccess, onError, JSON.stringify(collectionObject), newID());
+            ajax(that, "POST", that.options.resources.objects, onSuccess, onError, JSON.stringify(collectionObject), collectionObject.accessionNumber.split(" ")[0]);
         };
         
         that.saveObjectForId = function (collectionObject, id, onSuccess, onError) {
