@@ -41,9 +41,11 @@ var cspace = cspace || {};
         return tree;
     };
      
-    stripSchemaFromList = function (list) {
-        var newList = [];
-        var j=0;
+    // TODO: This is a temporary function, in use only for the 1.0 demo. It takes care of some
+    // glitches, worflow issues and other things that either need to be fixed, or addressed in a better way.
+    convertItemsToSelelctionList = function (list) {
+        var newList = ["Select from the list below..."];
+        var j=1;
         for (var i=0; i<list.length;i++) {
             if (list[i] !== "schema") {
                 newList[j++] = list[i];
@@ -56,7 +58,7 @@ var cspace = cspace || {};
         that.events.afterFetchObjectsSuccess.addListener(function (activityList) {
             // TEMPORARY: Currently, the demo doesn't properly separate the schema from the data
             // files - they're in the same folder, so the schema shows up in the list.
-            that.model.items = stripSchemaFromList(activityList.items);
+            that.model.items = convertItemsToSelelctionList(activityList.items);
             that.model.selected = that.model.items[0];
 
             var cutPoints = [
@@ -96,7 +98,8 @@ var cspace = cspace || {};
         };
         
         that.updateModel = function (newModel, source) {
-            that.model.items = stripSchemaFromList(newModel.items);
+            that.model.items = convertItemsToSelelctionList(newModel.items);
+            that.model.selection = that.model.items[0];
             that.refreshView();
         };
         
