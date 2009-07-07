@@ -82,12 +82,6 @@ var cspace = cspace || {};
         that.objectDAO = fluid.initSubcomponent(that, "dao", [fluid.COMPONENT_OPTIONS]);
         bindEventHandlers(that);
         that.objectDAO.fetchObjects(that.events.afterFetchObjectsSuccess.fire, that.events.afterFetchObjectsError.fire);
-            var cutPoints = [
-                {
-                    id: "list",
-                    selector: that.options.selectors.activityList
-                }
-            ];
     };
     
     cspace.recentActivity = function (container, options) {
