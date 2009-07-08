@@ -53,6 +53,12 @@
 	var dao1 = cspace.collectionObjectDAO({baseUrl: "./test-data/"});
 	dao1.fetchObjectSchema(fetchObjectSchemaTestFunc, fetchObjectSchemaTestFunc);
     
-	var dao2 = cspace.collectionObjectDAO({baseUrl: "./test-data/", schema: "./test-data/mmi-schema/"});
+	var dao2 = cspace.collectionObjectDAO({
+        baseUrl: "./test-data/",
+        resources: {
+            objects: "objects/",    // CSPACE-256: This option is only set until this issue is resolved
+            schema: "objects/mmi-schema/"
+        }
+    });
 	dao2.fetchObjectForId("1984.068.0338", fetchObjectForIdTestFunc, fetchObjectForIdTestFunc);
 }());
