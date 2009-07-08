@@ -2,6 +2,8 @@ html{font-size: 100%;}
 
 body {font-size:13px; line-height:14px; padding: .5em 0;}
 
+#all-content {min-height:500px; height:auto !important; height:500px;}
+
 #name-header {}	
 
 #title-bar {padding: 16px 0px 18px 10px;}
@@ -102,6 +104,14 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 /*input[type=text],input[type=password],textarea{width:12.25em;*width:11.9em;}*/
 input,textarea,select{font-family:inherit; font-size:14px; font-weight:inherit; line-height:16px; padding:0; *padding:1px 0 0 1px; margin:0; border:1px solid #878888;}
 textarea {overflow:auto;}
+
+#footer {margin-top:20px; border-top: 2px solid #D8D9DA; padding-top:7px;}
+#footer .footer-text {text-align: center; color: #656565; font-weight: bold; font-size:11px; line-height: 120%;}
+
+#footer a:link, a:visited {color:#656565; text-decoration:underline;}
+#footer a:active {color:#656565;}
+#footer a:hover {color:#6699C8; text-decoration:underline;}
+
 
 .search-label {font-weight: normal; font-size: 12px; line-height:12px;}
 	
