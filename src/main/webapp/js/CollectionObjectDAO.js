@@ -49,7 +49,7 @@ var cspace = cspace || {};
         var that = {};
         fluid.mergeComponentOptions(that, "cspace.collectionObjectDAO", options);
         
-        that.fetchObjectSchema = function (onSuccess, onError) {
+        that.fetchObjectSpec = function (onSuccess, onError) {
             ajax(that, "GET", that.options.resources.schema, onSuccess, onError);
         };
         

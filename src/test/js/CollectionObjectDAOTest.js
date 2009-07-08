@@ -16,7 +16,7 @@
 		jqUnit.assertEquals("URL should point to the all objects URL.", "http://myserver.org/objects/", url);
 		
 		url = cspace.collectionObjectDAO.serverURLFactory(baseUrl, resourceUrls.schema);
-		jqUnit.assertEquals("URL should point to the object schema URL.", "http://myserver.org/objects/schema/", url);
+		jqUnit.assertEquals("URL should point to the object spec URL.", "http://myserver.org/objects/schema/", url);
 	});
 	
 	objectDAOTest.test("fileSystemURLFactory", function () {
@@ -30,15 +30,15 @@
 		jqUnit.assertEquals("URL should point to the all objects JSON file.", "./objects/objects.json", url);
 		
 		url = factory(baseUrl, resourceUrls.schema);
-		jqUnit.assertEquals("URL should point to the object schema JSON file.", "./objects/schema/schema.json", url);
+		jqUnit.assertEquals("URL should point to the object spec JSON file.", "./objects/schema/schema.json", url);
 	});
 
-	var fetchObjectSchemaTestFunc = function (data, textStatus) {
-		objectDAOTest.test("fetchObjectSchema", function () {
+	var fetchObjectSpecTestFunc = function (data, textStatus) {
+		objectDAOTest.test("fetchObjectSpec", function () {
             jqUnit.assertFalse("Result should not be an XMLHttpRequest", (data instanceof XMLHttpRequest));
 			jqUnit.assertNotNull("Shema object should not be null", data);
-			jqUnit.assertNotUndefined("Schema has an objectTitle field", data.objectTitle);
-			jqUnit.assertNotUndefined("Schema has a description field", data.description);
+			jqUnit.assertNotUndefined("Spec has an objectTitle field", data.objectTitle);
+			jqUnit.assertNotUndefined("Spec has a description field", data.description);
 		});
 	};
     
@@ -51,7 +51,7 @@
     };
     
 	var dao1 = cspace.collectionObjectDAO({baseUrl: "./test-data/"});
-	dao1.fetchObjectSchema(fetchObjectSchemaTestFunc, fetchObjectSchemaTestFunc);
+	dao1.fetchObjectSpec(fetchObjectSpecTestFunc, fetchObjectSpecTestFunc);
     
 	var dao2 = cspace.collectionObjectDAO({
         baseUrl: "./test-data/",

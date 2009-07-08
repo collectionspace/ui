@@ -14,11 +14,11 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var buildFullUISchema = function (that) {
-        var fullUISchema = fluid.copy(that.schema);
+    var buildFullUISpec = function (that) {
+        var fullUISpec = fluid.copy(that.spec);
         
 		// This makes the assumption that 'save' exists. This should be configurable.
-        fullUISchema.save = {
+        fullUISpec.save = {
             "selector": that.options.selectors.save,
             "validators": [],
             "decorators": [
@@ -28,7 +28,7 @@ var cspace = cspace || {};
                 }
             ]
         };
-        fullUISchema.saveSecondary = {
+        fullUISpec.saveSecondary = {
             "selector": that.options.selectors.saveSecondary,
             "validators": [],
             "decorators": [
@@ -38,13 +38,13 @@ var cspace = cspace || {};
                 }
             ]
         };
-        return fullUISchema;
+        return fullUISpec;
     };
     
-    var buildEmptyModelFromSchema = function (schema) {
+    var buildEmptyModelFromSpec = function (spec) {
         var model = {};
-        for (var key in schema) {
-            if (schema.hasOwnProperty(key)) {
+        for (var key in spec) {
+            if (spec.hasOwnProperty(key)) {
                 model[key] = "";
             }
         }
@@ -52,9 +52,9 @@ var cspace = cspace || {};
     };
     
     var bindEventHandlers = function (that) {
-        that.events.afterFetchSchemaSuccess.addListener(function (schema, textStatus) {
-            that.schema = schema;
-            that.model = buildEmptyModelFromSchema(schema);
+        that.events.afterFetchSpecSuccess.addListener(function (spec, textStatus) {
+            that.spec = spec;
+            that.model = buildEmptyModelFromSpec(spec);
             if (that.options.objectId) {
                 that.objectDAO.fetchObjectForId(that.options.objectId, that.events.afterFetchObjectDataSuccess.fire, that.events.afterFetchObjectDataError.fire);
             } else {
@@ -62,8 +62,8 @@ var cspace = cspace || {};
             }
         });
         
-        that.events.afterFetchSchemaError.addListener(function (xhr, msg, error) {
-            that.showSchemaErrorMessage(that.options.strings.schemaFetchError + msg + that.options.strings.errorRecoverySuggestion);
+        that.events.afterFetchSpecError.addListener(function (xhr, msg, error) {
+            that.showSpecErrorMessage(that.options.strings.specFetchError + msg + that.options.strings.errorRecoverySuggestion);
             that.locate("savedMessage").hide();
         });
 
@@ -94,7 +94,7 @@ var cspace = cspace || {};
     var setupObjectEntry = function (that) {
         that.objectDAO = fluid.initSubcomponent(that, "dao", [fluid.COMPONENT_OPTIONS]);
         bindEventHandlers(that);
-        that.objectDAO.fetchObjectSchema(that.events.afterFetchSchemaSuccess.fire, that.events.afterFetchSchemaError.fire);
+        that.objectDAO.fetchObjectSpec(that.events.afterFetchSpecSuccess.fire, that.events.afterFetchSpecError.fire);
     };
     
     cspace.objectEntry = function (container, options) {
@@ -113,7 +113,7 @@ var cspace = cspace || {};
             that.refreshView();
         };
         
-        that.showSchemaErrorMessage = function (msg) {
+        that.showSpecErrorMessage = function (msg) {
             that.locate("errorMessage", "body").text(msg);
             that.locate("errorDialog", "body").dialog({
                 modal: true,
@@ -152,15 +152,15 @@ var cspace = cspace || {};
     };
     
     cspace.renderer = {
-        buildCutpoints: function (schema) {
+        buildCutpoints: function (spec) {
             var cutpoints = [];
             
             var index = 0;
-            for (var key in schema) {
-                if (schema.hasOwnProperty(key)) {
+            for (var key in spec) {
+                if (spec.hasOwnProperty(key)) {
                     cutpoints[index] = {
                         id: key,
-                        selector: schema[key].selector
+                        selector: spec[key].selector
                     };
                     index += 1;
                 }
@@ -168,18 +168,18 @@ var cspace = cspace || {};
             return cutpoints;
         },
 
-        buildComponentTree: function (schema, model) {
+        buildComponentTree: function (spec, model) {
             var tree = {children: []};
             
             var index = 0;
-            for (var key in schema) {
-                if (schema.hasOwnProperty(key)) {
+            for (var key in spec) {
+                if (spec.hasOwnProperty(key)) {
                     tree.children[index] = {
                         ID: key,
                         valuebinding: key
                     };
-                    if (schema[key].decorators && schema[key].decorators.length > 0) {
-                        tree.children[index].decorators = schema[key].decorators;
+                    if (spec[key].decorators && spec[key].decorators.length > 0) {
+                        tree.children[index].decorators = spec[key].decorators;
                     }
                     index += 1;
                 }
@@ -188,14 +188,14 @@ var cspace = cspace || {};
         },
 
         renderPage: function (that) {
-            var fullUISchema = buildFullUISchema(that);
+            var fullUISpec = buildFullUISpec(that);
             var renderOptions = {
                 model: that.model,
 //                debugMode: true,
                 autoBind: true
             };
-            var cutpoints = cspace.renderer.buildCutpoints(fullUISchema);            
-            var model = cspace.renderer.buildComponentTree(fullUISchema, that.model);
+            var cutpoints = cspace.renderer.buildCutpoints(fullUISpec);            
+            var model = cspace.renderer.buildComponentTree(fullUISpec, that.model);
             for (var key in that.options.templates) {
                 if (that.options.templates.hasOwnProperty(key)) {
                     var templ = that.options.templates[key];
@@ -221,8 +221,8 @@ var cspace = cspace || {};
         },
         events: {
             modelChanged: null,
-            afterFetchSchemaSuccess: null,
-            afterFetchSchemaError: null,
+            afterFetchSpecSuccess: null,
+            afterFetchSpecError: null,
             afterFetchObjectDataSuccess: null,
             afterFetchObjectDataError: null,
             afterSaveObjectDataSuccess: null,
@@ -237,7 +237,7 @@ var cspace = cspace || {};
             savedMessage: ".csc-saved-message"
         },
         strings: {
-            schemaFetchError: "I'm sorry, an error has occurred fetching the Schema: ",
+            specFetchError: "I'm sorry, an error has occurred fetching the Spec: ",
             errorRecoverySuggestion: "Please try refreshing your browser",
             saveSuccessfulMessage: "Object record successfully saved",
             saveFailedMessage: "Error: Object record not saved: "

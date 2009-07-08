@@ -1,7 +1,7 @@
 /*global jQuery, jqUnit, cspace*/
 (function ($) {
     
-    var testSchema  = {
+    var testSpec  = {
         "foo": {
             "selector": "brack foofer",
             "decorators": [
@@ -18,19 +18,19 @@
     var objectEntryTest = new jqUnit.TestCase("ObjectEntry Tests");
 
     // this tests a modal dialog - it might have to remain last in the file
-    objectEntryTest.test("showSchemaErrorMessage", function () {
+    objectEntryTest.test("showSpecErrorMessage", function () {
         jqUnit.notVisible("Error dialog should not be visible to start", ".csc-error-dialog");
 
         var objEntry = cspace.objectEntry("#main");
 
         jqUnit.isVisible("Error dialog should be visible", ".csc-error-dialog");
         var errorMessage = $(".csc-error-message").text();
-        jqUnit.assertTrue("Error string should contain schemaFetchError", (errorMessage.indexOf(objEntry.options.strings.schemaFetchError) > -1));
+        jqUnit.assertTrue("Error string should contain specFetchError", (errorMessage.indexOf(objEntry.options.strings.specFetchError) > -1));
         jqUnit.assertTrue("Error string should contain errorRecoverySuggestion", (errorMessage.indexOf(objEntry.options.strings.errorRecoverySuggestion) > -1));
     });
     
     objectEntryTest.test("renderer.buildCutpoints", function () {
-        var cutpoints = cspace.renderer.buildCutpoints(testSchema);
+        var cutpoints = cspace.renderer.buildCutpoints(testSpec);
         jqUnit.assertEquals("There should be 2 cutpoints", 2, cutpoints.length);
         jqUnit.assertEquals("Field 'foo' should exist ", "foo", cutpoints[0].id);
         jqUnit.assertEquals("Field 'foo' should have ", "brack foofer", cutpoints[0].selector);
@@ -60,7 +60,7 @@
                 }
             ]
         };
-        var tree = cspace.renderer.buildComponentTree(testSchema, dataModel);
+        var tree = cspace.renderer.buildComponentTree(testSpec, dataModel);
         jqUnit.assertDeepEq("Tree should be ", expectedTree, tree);
     });
 })(jQuery);

@@ -56,8 +56,8 @@ var cspace = cspace || {};
     
     bindEventHandlers = function (that) {
         that.events.afterFetchObjectsSuccess.addListener(function (activityList) {
-            // TEMPORARY: Currently, the demo doesn't properly separate the schema from the data
-            // files - they're in the same folder, so the schema shows up in the list.
+            // TEMPORARY: Currently, the demo doesn't properly separate the spec file from the data
+            // files - they're in the same folder, so the spec shows up in the list.
             that.model.items = convertItemsToSelelctionList(activityList.items);
             that.model.selected = that.model.items[0];
 
