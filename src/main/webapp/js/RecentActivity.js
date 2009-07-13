@@ -42,7 +42,7 @@ var cspace = cspace || {};
      
     // TODO: This is a temporary function, in use only for the 1.0 demo. It takes care of some
     // glitches, worflow issues and other things that either need to be fixed, or addressed in a better way.
-    convertItemsToSelelctionList = function (list) {
+    convertItemsToSelectionList = function (list) {
         var newList = ["Select from the list below..."];
         var j=1;
         for (var i=0; i<list.length;i++) {
@@ -57,18 +57,8 @@ var cspace = cspace || {};
         that.events.afterFetchObjectsSuccess.addListener(function (activityList) {
             // TEMPORARY: Currently, the demo doesn't properly separate the spec file from the data
             // files - they're in the same folder, so the spec shows up in the list.
-            that.model.items = convertItemsToSelelctionList(activityList.items);
+            that.model.items = convertItemsToSelectionList(activityList.items);
             that.model.selected = that.model.items[0];
-
-            var cutPoints = [
-                {
-                    id: "list",
-                    selector: that.options.selectors.activityList
-                }
-            ];
-            var tree = buildComponentTreeForSelect(that, "list");
-            that.renderTemplates = fluid.selfRender(that.locate("listContainer"), tree, {cutpoints: cutPoints, debugMode: true});
-
             that.refreshView();
         });
         that.events.afterFetchObjectsError.addListener(function (xhr, msg, error) {
@@ -80,13 +70,21 @@ var cspace = cspace || {};
     setupRecentActivity = function (that) {
         that.objectDAO = fluid.initSubcomponent(that, "dao", [fluid.COMPONENT_OPTIONS]);
         bindEventHandlers(that);
+        var cutPoints = [
+            {
+                id: "list",
+                selector: that.options.selectors.activityList
+            }
+        ];
+        var tree = buildComponentTreeForSelect(that, "list");
+        that.renderTemplates = fluid.selfRender(that.locate("listContainer"), tree, {cutpoints: cutPoints, debugMode: true});
         that.objectDAO.fetchObjects(that.events.afterFetchObjectsSuccess.fire, that.events.afterFetchObjectsError.fire);
     };
     
     cspace.recentActivity = function (container, options) {
         var that = fluid.initView("cspace.recentActivity", container, options);
         that.model = {
-            items: [],
+            items: convertItemsToSelectionList([]),
             selected: ""
         };
         
@@ -95,7 +93,7 @@ var cspace = cspace || {};
                 that.objectDAO.fetchObjects(that.events.afterFetchObjectsSuccess.fire, that.events.afterFetchObjectsError.fire);
                 return;
             }
-            that.model.items = convertItemsToSelelctionList(newModel.items);
+            that.model.items = convertItemsToSelectionList(newModel.items);
             that.model.selection = that.model.items[0];
             that.refreshView();
         };
