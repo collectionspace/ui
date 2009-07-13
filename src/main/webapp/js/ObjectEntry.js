@@ -84,11 +84,6 @@ var cspace = cspace || {};
         that.events.afterSaveObjectDataError.addListener(function (xhr, msg, error) {
             that.locate("savedMessage").text(that.options.strings.saveFailedMessage+msg).show();
         });
-        
-        that.events.afterSaveObjectDataSuccess.addListener(function () {
-            // TODO: Better error handling
-            that.objectDAO.fetchObjects(that.recentActivity.updateModel, console.log("Error fetching object list"));
-        });
     };
     
     var setupObjectEntry = function (that) {
@@ -100,7 +95,6 @@ var cspace = cspace || {};
     cspace.objectEntry = function (container, options) {
         var that = fluid.initView("cspace.objectEntry", container, options);
         that.model = {};
-        that.recentActivity = fluid.initSubcomponent(that, "recentActivity", [".recently-created-container", options]);
         
         that.refreshView = function () {
             cspace.renderer.renderPage(that);
@@ -216,18 +210,15 @@ var cspace = cspace || {};
         dao: {
             type: "cspace.collectionObjectDAO"
         },
-        recentActivity: {
-            type: "cspace.recentActivity"
-        },
         events: {
             modelChanged: null,
-            afterFetchSpecSuccess: null,
-            afterFetchSpecError: null,
-            afterFetchObjectDataSuccess: null,
-            afterFetchObjectDataError: null,
-            afterSaveObjectDataSuccess: null,
-            afterSaveObjectDataError: null,
-            onSave: null
+			onSave: null,
+            afterFetchSpecSuccess: null,  // params: data, textStatus
+            afterFetchSpecError: null,  // params: XMLHttpRequest, textStatus, errorThrown
+            afterFetchObjectDataSuccess: null,  // params: data, textStatus
+            afterFetchObjectDataError: null,  // params: XMLHttpRequest, textStatus, errorThrown
+            afterSaveObjectDataSuccess: null,  // params: data, textStatus
+            afterSaveObjectDataError: null  // params: XMLHttpRequest, textStatus, errorThrown
         },
         selectors: {
             errorDialog: ".csc-error-dialog",

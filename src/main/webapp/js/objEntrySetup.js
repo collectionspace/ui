@@ -47,7 +47,17 @@ the URL for the application layer, as shown in the following sample:
         if (objectId) {
             oeOpts.objectId = objectId;
         }
-        cspace.objectEntry(".csc-object-entry-container", oeOpts);
+        var objEntry = cspace.objectEntry(".csc-object-entry-container", oeOpts);
+        var recentAct = cspace.recentActivity(".recently-created-container", raOpts);
+        
+        // connect up the two components to listen to each other's events
+        recentAct.events.modelChanged.addListener(function (model) {
+            console.log("heard!!");
+            document.location = "./objectentry.html?objectId="+model.selected;
+        });
+        objEntry.events.afterSaveObjectDataSuccess.addListener(function(data, textStatus){
+            recentAct.updateModel();
+        });
     };
     
 })(jQuery);

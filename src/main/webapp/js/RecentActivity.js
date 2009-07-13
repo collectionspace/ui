@@ -14,26 +14,25 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
 
-    buildComponentTreeForSelect = function (id, model) {
+    buildComponentTreeForSelect = function (that, id) {
         var tree = {children: [
                     {
                         ID: id,
                         selection: {
-                            value: model.selected
+                            value: that.model.selected
                         },
                         optionlist: {
-                            value: model.items
+                            value: that.model.items
                         },
                         optionnames: {
-                            value: model.items
+                            value: that.model.items
                         },
                         decorators: [{
-                            type: "jQuery",
-                            func: "change",
-                            args: function () {
-                                // in this context, "this" is the select pull-down itself
-                                // This is Extremely temporary
-                                document.location = "./objectentry.html?objectId="+this.value;
+                            type: "event",
+                            event: "onchange",
+                            handler: function () {
+                                that.model.selected = this.value;
+                                that.events.modelChanged.fire(that.model);
                             }
                         }]
                     }
@@ -67,7 +66,7 @@ var cspace = cspace || {};
                     selector: that.options.selectors.activityList
                 }
             ];
-            var tree = buildComponentTreeForSelect("list", that.model);
+            var tree = buildComponentTreeForSelect(that, "list");
             that.renderTemplates = fluid.selfRender(that.locate("listContainer"), tree, {cutpoints: cutPoints, debugMode: true});
 
             that.refreshView();
@@ -92,6 +91,10 @@ var cspace = cspace || {};
         };
         
         that.updateModel = function (newModel, source) {
+            if (!newModel) {
+                that.objectDAO.fetchObjects(that.events.afterFetchObjectsSuccess.fire, that.events.afterFetchObjectsError.fire);
+                return;
+            }
             that.model.items = convertItemsToSelelctionList(newModel.items);
             that.model.selection = that.model.items[0];
             that.refreshView();
@@ -104,7 +107,7 @@ var cspace = cspace || {};
                     selector: that.options.selectors.activityList
                 }
             ];
-            var tree = buildComponentTreeForSelect("list", that.model);
+            var tree = buildComponentTreeForSelect(that, "list");
             fluid.reRender(that.renderTemplates, that.locate("listContainer"), tree, {cutpoints: cutPoints, debugMode: true});
         };
         
@@ -116,7 +119,8 @@ var cspace = cspace || {};
     fluid.defaults ("cspace.recentActivity", {
         events: {
             afterFetchObjectsSuccess: null,
-            afterFetchObjectsError: null
+            afterFetchObjectsError: null,
+            modelChanged: null
         },
         dao: {
             type: "cspace.collectionObjectDAO"
