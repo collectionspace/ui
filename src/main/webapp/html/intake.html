@@ -1,0 +1,520 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>CollectionSpace - Object Intake</title>
+
+        <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-reset.css" />
+        <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-layout.css" />
+		<link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
+        <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
+
+		<script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
+<!--
+		<script type="text/javascript" src="../infusion/1.1/lib/jquery/core/js/jquery.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/lib/jquery/ui/js/ui.core.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/lib/jquery/ui/js/ui.dialog.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/lib/json/js/json2.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/framework/core/js/Fluid.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/framework/core/js/FluidDOMUtilities.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/framework/core/js/DataBinding.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/lib/fastXmlPull/js/fastXmlPull.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidParser.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidRenderer.js"></script>
+-->
+
+		<script type="text/javascript" src="../js/CollectionObjectDAO.js"></script>
+		<script type="text/javascript" src="../js/RecentActivity.js"></script>
+		<script type="text/javascript" src="../js/ObjectEntry.js"></script>
+		<script type="text/javascript" src="../js/objEntrySetup.js"></script>
+	
+		<script language="javascript"> 
+			function Toggle(origin, toggled) {
+				var ele = document.getElementById(toggled);
+				if(ele.style.display == "block") {
+					ele.style.display = "none";
+					origin.src="../images/toggle-more.png";
+					origin.alt="toggle more";
+				}
+				else {
+					ele.style.display = "block";
+					origin.src="../images/toggle-less.png";
+					origin.alt="toggle less";
+				}
+			} 
+		</script>
+
+	</head>
+
+	<body>
+		<!-- body content -->
+		<div class="fl-container-1050 fl-centered">
+		
+			<!-- CSpace logo and right-side search box -->
+			<div id="name-header">
+				<img src="../images/header.png" alt="CollectionSpace" height=123 width=1050 usemap="#header"/>
+				<map name="header">
+					<area shape="rect" coords="10,11,256,54" href="http://www.collectionspace.org/current_release" alt="CollectionSpace">
+					<area shape="rect" coords="131,81,353,112" href="createnew.html" alt="Create New">
+				</map></div>
+			
+			<!-- title-bar - name of object and (assession) number -->
+			<div id="title-bar">
+				<div class="object-name csc-object-title">&nbsp;</div><div class="object-number csc-object-number">&nbsp;</div>
+				<div class="clear"></div>
+			</div>
+			
+			<!-- main content -->
+			<div id="all-content-intake" class="fl-fix object-entry">
+				
+				<!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
+				<div class="fl-fix fl-container-flex fl-col-mixed2">
+				
+					<!-- left-side container. Contains bulk of Object Entry forms and fields -->
+					<div class="fl-container-left fl-force-left">
+						
+						<div id="object-id-menu"></div>
+						
+						<!-- this div will be replaced by the contents of the Template -->
+						<div class="csc-object-entry-container" id="csc-object-entry- template">
+						
+							<form class="fl-container-left csc-object-entry-container" id="csc-object-entry-template">
+								<!-- outer-border block -->
+								<div class="upper-save"><input type="image" src="../images/savebutton.png" alt="save button" class="savebutton csc-save" height="25" width="74"  /></div><div class="clear"></div>
+								<div class="intake-outer-border">
+
+									<div class="csc-saved-message hidden cs-message">Save successful!</div>
+
+									<!-- Each section of Object Entry is broken down into information-blocks.
+										  This corresponds to Information groups within Spectrum's Object Entry prodedure. -->
+									<div class="fl-container-flex fl-fix information-group">
+									
+										<div class="info-column fl-force-left">	
+								
+											<!-- Information-block header -->
+											<div class="fl-container-flex header">
+												<span class="title-toggle"><img id="toggle-image" onclick="Toggle(this, 'toggle_intake_information');" src="../images/toggle-less.png" height=13 width=13 alt="toggle-less" /></span>
+												Object Entry
+											</div>
+	
+											<!-- Information-block content block -->
+											<div class="fl-container-flex fl-fix content">
+											
+												<div id="toggle_intake_information" style="display:block;">
+													
+													<!-- Left-side column -->
+													<div class="info-column2-50 fl-force-left" >
+														<!-- The information is broken down into a pair of information elements: label and value -->
+														<div class="info-pair">
+															<div class="info-label">Entry Number</div>
+															<div class="info-value"><input type="text" class="input-alpha csc-entry_number" name="entry_number"></div>
+														</div>
+														
+														<div class="info-pair">
+															<div class="info-label">Entry Date</div>
+															<div class="info-value">
+															<input type="text" class="input-date csc-entry-date-earliest" name="entry-date-single-month" disabled="true"><input type="text" class="input-date" name="csc-entry-date-single-day" disabled="true"><input type="text" class="input-date" name="csc-entry-date-single-year" disabled="true"><img src="../images/calendar.jpg" alt="calendar" style="margin-bottom: -5px;"/></div>													
+														</div>
+														
+														<div class="info-pair">
+															<div class="info-label">Number of Objects</div>
+															<div class="info-value"><input type="text" class="input-numeric-small csc-number-of-objects" name="number-of-objects"></div>
+														</div>
+														
+														<div class="info-pair-addrow">
+															<div class="info-label">Entry Method</div>
+															<div class="info-value">
+															
+																<table id="" >										
+																	<tbody>
+																		<tr>
+																			<td class="table-unselected"></td>
+																			<td><input type="text" class="input-alpha-table csc-intake-entry-method" name="intake-entry-method"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															
+															</div>
+														</div>
+														
+														<div class="info-pair">
+															<div class="info-label">Entry Reason</div>
+															<div class="info-value"><input type="text" class="input-alpha csc-entry-reasons" name="entry-reasons"></div>
+														</div>
+
+													</div>
+													
+													<div class="info-column2-50 fl-force-right">
+														<div class="info-pair">
+															<div class="info-label">Return Date</div>
+															<div class="info-value">
+															<input type="text" class="input-date csc-date-earliest" name="intake-return-date-single-month" disabled="true"><input type="text" class="input-date" name="intake-return-date-single-day" disabled="true"><input type="text" class="input-date" name="intake-return-date-single-year" disabled="true"><img src="../images/calendar.jpg" alt="calendar" style="margin-bottom: -5px;"/></div>													
+														</div>
+
+														<div class="info-pair">
+															<div class="info-label">Donor</div>
+															<div class="info-value"><input type="text" class="input-alpha csc-donor" name="donor"></div>
+														</div>
+														
+														<div class="info-pair">
+															<div class="info-label">Depositor</div>
+															<div class="info-value"><input type="text" class="input-alpha csc-depositor" name="depositor"></div>
+														</div>
+														
+														<div class="info-pair">
+															<div class="info-label">Responsible Entity</div>
+															<div class="info-value"><input type="text" class="input-alpha csc-responsible-entity" name="responsible-entity"></div>
+														</div>													
+														
+														<div class="info-pair">
+															<div class="info-label">Brief Description</div>
+															<div class="info-value"><div class="info-value"><textarea class="input-textarea csc-intake-brief-description" name="intake-brief-description"></textarea></div></div>
+														</div>
+														
+													</div>
+													
+													<div class="info-column1 fl-force-left">
+															
+														<div class="info-pair">
+															<div class="info-label">Entry Note</div>
+															<div class="info-value"><textarea class="input-textarea csc-intake-entry-note" name="intake-entry-note"></textarea></div>
+														</div>
+														
+													</div>
+												
+													<div class="info-column1 fl-force-left">
+															
+														<div class="info-pair">
+															<div class="info-label">Packing Note</div>
+															<div class="info-value"><div class="info-value"><textarea class="input-textarea csc-intake-packing-note" name="intake-packing-note"></textarea></div></div>
+														</div>
+														
+													</div>
+													
+													<div class="clear"></div>
+												</div>
+											</div>
+
+										</div>
+
+									</div>	
+									
+									<div class="fl-container-flex fl-fix information-group">
+										<div class="info-column fl-force-left">
+										
+											<div class="fl-container-flex header">
+												<span class="title-toggle"><img id="toggle-image" onclick="Toggle(this, 'toggle-valuation');" src="../images/toggle-less.png" height=13 width=13 alt="toggle-less" /></span>
+												Valuation
+											</div>
+											
+											<div class="fl-container-flex fl-fix content">
+												<div id="toggle-valuation" style="display:block;">
+													<!-- Left-side column -->
+													<div class="info-column2 fl-force-left">
+															
+														<div class="info-pair">
+															<div class="info-label">Valuer</div>
+															<div class="info-value"><input type="text" class="input-alpha csc-valuer" name="valuer"></div>
+														</div>	
+														
+														<div class="info-pair">
+															<div class="info-label">Reference Number</div>
+															<div class="info-value"><input type="text" class="input-alpha csc-valuation-reference-number" name="valuation-reference-number"></div>
+														</div>	
+														
+													</div>
+													
+													<!-- Right-side column -->
+													<div class="info-column2 fl-force-right">
+															
+														<div class="info-pair">
+															<div class="info-label">Valuation Amount</div>
+															<div class="info-value"><input type="text" class="input-money-type" name="valuation-amount-money-type" value="US dollar"><input type="text" class="input-money-amount" name="valuation-amount-money-amount" value=" $ "></div>
+														</div>	
+														
+													</div>
+													
+													<div class="clear"></div>
+												</div>
+											</div>
+										
+										</div>
+									</div>
+
+									<div class="fl-container-flex fl-fix information-group">
+										<div class="info-column fl-force-left">
+											<div class="fl-container-flex header">
+												<span class="title-toggle"><img id="toggle-image" onclick="Toggle(this, 'toggle-insurance');" src="../images/toggle-less.png" height=13 width=13 alt="toggle-less" /></span>
+												Insurance
+											</div>
+											<div class="fl-container-flex fl-fix content">
+												
+												<div id="toggle-insurance" style="display:block;">
+													<!-- Left-side column -->
+													<div class="info-column2 fl-force-left">
+															
+														<div class="info-pair-addrow">
+															<div class="info-label">Insurer</div>
+															<div class="info-value">
+															
+																<table id="" >										
+																	<tbody>
+																		<tr>
+																			<td class="table-unselected"></td>
+																			<td><input type="text" class="input-alpha-table csc-intake-insurer" name="intake-insurer"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															
+															</div>
+														</div>	
+														
+														<div class="info-pair">
+															<div class="info-label">Policy Number</div>
+															<div class="info-value"><input type="text" class="input-alpha csc-insurance-policy-number" name="insurance-policy-number"></div>
+														</div>	
+
+														<div class="info-pair">
+															<div class="info-label">Return Date</div>
+															<div class="info-value">
+															<input type="text" class="input-date csc-insurance-return-date-earliest" name="insurance-return-date-single-month" disabled="true"><input type="text" class="input-date" name="insurance-return-date-single-day" disabled="true"><input type="text" class="input-date" name="insurance-return-date-single-year" disabled="true"><img src="../images/calendar.jpg" alt="calendar" style="margin-bottom: -5px;"/></div>													
+														</div>
+														
+													</div>
+													
+													<!-- Right-side column -->
+													<div class="info-column2 fl-force-right">
+															
+														<div class="info-pair">
+															<div class="info-label">Insurance Amount</div>
+															<div class="info-value"><input type="text" class="input-money-type" name="insurance-amount-money-type" value="US dollar"><input type="text" class="input-money-amount" name="insurace-amount-money-amount" value=" $ "></div>
+														</div>
+														
+														<div class="info-pair">
+															<div class="info-label">Reference Number</div>
+															<div class="info-value"><input type="text" class="input-alpha csc-insurance-reference-number" name="insurance-reference-number"></div>
+														</div>	
+														
+														<div class="info-pair">
+															<div class="info-label">Insurance Note</div>
+															<div class="info-value"><textarea class="input-textarea csc-insurance-note" name="insurance-note"></textarea></div>
+														</div>
+														
+													</div>
+													
+													<div class="clear"></div>
+												</div>
+											</div>
+										
+										</div>
+									</div>
+									
+									<div class="fl-container-flex fl-fix information-group">
+										<div class="info-column fl-force-left">
+											<div class="fl-container-flex header">
+												<span><img id="toggle-image" onclick="Toggle(this, 'toggle-location');" src="../images/toggle-less.png" height=13 width=13 alt="toggle-less" style="padding-right: 2px;" /></span>
+												Location
+											</div>
+											<div class="fl-container-flex fl-fix content">
+												<div id="toggle-location" style="display:block;">
+													
+													<!-- Left-side column -->
+													<div class="info-column2-50 fl-force-left">
+															
+														<div class="info-pair">
+															<div class="info-label">Current Location</div>
+															<div class="info-value"><input type="text" class="input-alpha csc-current-location" name="current-location"></div>
+														</div>	
+														
+														<div class="info-pair">
+															<div class="info-label">Normal Location</div>
+															<div class="info-value"><input type="text" class="input-alpha csc-normal-location" name="normal-location"></div>
+														</div>
+														
+														<div class="info-pair">
+															<div class="info-label">Location Date</div>
+															<div class="info-value">
+															<input type="text" class="input-date csc-location-date-earliest" name="location-date-single-month" disabled="true"><input type="text" class="input-date" name="location-date-single-day" disabled="true"><input type="text" class="input-date" name="location-date-single-year" disabled="true"><img src="../images/calendar.jpg" alt="calendar" style="margin-bottom: -5px;"/></div>													
+														</div>
+														
+													</div>
+													
+													<!-- Left-side column -->
+													<div class="info-column2-50 fl-force-right">
+															
+														<div class="info-pair">
+															<div class="info-label">Location Note</div>
+															<div class="info-value"><textarea class="input-textarea csc-location-note" name="location-note"></textarea></div>
+														</div>	
+														
+													</div>
+													
+													<div class="clear"></div>
+												</div>
+											</div>
+										
+										</div>
+									</div>
+									
+									<div class="fl-container-flex fl-fix information-group">
+										<div class="info-column fl-force-left">
+											<div class="fl-container-flex header">
+												<span class="title-toggle"><img id="toggle-image" onclick="Toggle(this, 'toggle-condition');" src="../images/toggle-less.png" height=13 width=13 alt="toggle-less" /></span>
+												Condition
+											</div>
+											<div class="fl-container-flex fl-fix content">
+											
+												<div id="toggle-condition" style="display:block;">
+													<!-- Left-side column -->
+													
+													<div class="info-column2-50 fl-force-left">
+													
+														<div class="info-pair-addrow">
+															<div class="info-label">Assessment Method</div>
+															<div class="info-value">
+															
+																<table id="" >										
+																	<tbody>
+																		<tr>
+																			<td class="table-unselected"></td>
+																			<td><input type="text" class="input-alpha-table csc-assessment-method" name="assessment-method"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															
+															</div>
+														</div>
+														
+														<div class="info-pair-addrow">
+															<div class="info-label">Assessment Reason</div>
+															<div class="info-value">
+															
+																<table id="" >										
+																	<tbody>
+																		<tr>
+																			<td class="table-unselected"></td>
+																			<td><input type="text" class="input-alpha-table csc-object-assessment-reason" name="assessment-reason"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															
+															</div>
+														</div>
+														
+														<div class="info-pair-addrow">
+															<div class="info-label">Assessor</div>
+															<div class="info-value">
+															
+																<table id="" >										
+																	<tbody>
+																		<tr>
+																			<td class="table-unselected"></td>
+																			<td><input type="text" class="input-alpha-table csc-assessor" name="assessor"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															
+															</div>
+														</div>
+													
+													</div>
+													
+													<div class="info-column2-50 fl-force-right">
+													
+														<div class="info-pair">
+															<div class="info-label">Assessment Date</div>
+															<div class="info-value">
+															<input type="text" class="input-date csc-assessment-date-single-month-earliest" name="assessment-date-single-month" disabled="true"><input type="text" class="input-date" name="assessment-date-single-day" disabled="true"><input type="text" class="input-date" name="assessment-date-single-year" disabled="true"><img src="../images/calendar.jpg" alt="calendar" style="margin-bottom: -5px;"/></div>													
+														</div>
+														
+														<div class="info-pair">
+															<div class="info-label">Assessment Note</div>
+															<div class="info-value"><textarea class="input-textarea csc-assessment-note" name="assessment-note"></textarea></div>
+														</div>
+													
+													</div>
+													
+													<div class="info-column1 fl-force-left">
+													
+														<div class="info-pair">
+															<div class="info-label">Assessment</div>
+															<div class="info-value"><textarea class="input-textarea csc-assessment-note" name="assessment-note"></textarea></div>
+														</div>
+													
+													</div>
+													
+													<div class="clear"></div>
+												</div>
+											</div>
+										
+										</div>
+									</div>	
+									
+									<div class="csc-error-dialog">
+										<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
+									</div>
+								</div> <!-- end outer border-->
+
+								<!-- Save button container -->
+								<div class="fl-container-flex input-buttons">
+									<input type="image" src="../images/savebutton.png" alt="save button" class="savebutton csc-save-bottom" height="25" width="74"  /><input type="image" src="../images/cancelbutton.png" alt="cancel button" class="cancelbutton" name="" width="89" height="25" /><div class="clear"><!-- --></div></div>	
+								
+							</form> <!-- END left-side container -->
+
+						</div>
+					</div><!-- END left-side container -->
+					
+					<!-- Right-side container. Pivot area -->
+					<div class="fl-container-pivot fl-force-right">
+						<img src="../images/media-snapshot.png" alt="media snapshot" height=307 width=302 />
+                        <div class="recently-created-container">
+							<div class="recently-created csc-recent-activity">
+								<div class="header">Recently Created Intake Records</div>
+								<form id="form" action="" method="" name="form">
+									<select class="recently-created-list csc-recent-activity-list">
+										<option value="1">intake record 1</option>
+										<option value="2">intake record 2</option>
+										<option value="3">intake record 3</option>
+									</select>
+								</form>
+							</div>
+							
+						</div>
+						
+						<div class="recently-created-container">
+							<div class="recently-created csc-recent-activity">
+								<div class="header">Attach a new Object Record</div>
+								<form id="form" action="" method="" name="form">
+									<select class="recently-created-list csc-recent-activity-list">
+										<option value="1">create from new</option>
+										<option value="2">from existing object record</option>
+										<option value="3">third option</option>
+									</select>
+								</form>
+							</div>
+							
+						</div><img src="../images/related-entities.png" alt="related entities" height=165 width=302 /></div>
+					<!-- END Right-side container -->
+					
+					<div class="clear"></div>
+				</div> <!-- END sub-main content -->
+				
+			</div> <!-- END main content -->
+			
+			<!-- footer block -->
+			<div id="footer">
+				<div class="footer-text">&copy; 2009 CollectionSpace &nbsp;&ndash;&nbsp; CollectionSpace <a href="http://wiki.collectionspace.org/display/collectionspace/Project+Roadmap+-+Incremental+Releases#ProjectRoadmap-IncrementalReleases-CollectionSpaceRelease0.2%3AHelloMars">Release 0.2</a> &nbsp;&ndash;&nbsp; <a href="http://www.collectionspace.org">About CollectionSpace</a> &nbsp;&ndash;&nbsp; <a href="http://wiki.collectionspace.org/display/collectionspace/Release+0.1+Feedback">Leave Feedback</a></div>
+			</div> <!-- END footer block -->
+			
+		</div> <!-- END body content -->
+
+        <div class="csc-error-dialog">
+            <p class="csc-error-message">This text should be replaced by the error message.</p>
+        </div>
+		
+    	<script type="text/javascript">
+    		demo.setup();
+    	</script>
+	</body>
+</html>

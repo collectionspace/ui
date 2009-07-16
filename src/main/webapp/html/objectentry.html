@@ -28,6 +28,22 @@
 		<script type="text/javascript" src="../js/RecentActivity.js"></script>
 		<script type="text/javascript" src="../js/ObjectEntry.js"></script>
 		<script type="text/javascript" src="../js/objEntrySetup.js"></script>
+		
+		<script language="javascript"> 
+			function Toggle(origin, toggled) {
+				var ele = document.getElementById(toggled);
+				if(ele.style.display == "block") {
+					ele.style.display = "none";
+					origin.src="../images/toggle-more.png";
+					origin.alt="toggle more";
+				}
+				else {
+					ele.style.display = "block";
+					origin.src="../images/toggle-less.png";
+					origin.alt="toggle less";
+				}
+			} 
+		</script>
 	</head>
 
 	<body>
@@ -44,8 +60,7 @@
 			
 			<!-- title-bar - name of object and (assession) number -->
 			<div id="title-bar">
-				<div class="object-name csc-object-title"><!--Object Title-->&nbsp;</div><div class="object-number csc-object-number"><!--2009.001.1234-->&nbsp;</div><!--<div class="object-type">object</div>-->
-				<!--<div class="user-message-container"><div class="user-message">Object Record Saved</div></div>-->
+				<div class="object-name csc-object-title">&nbsp;</div><div class="object-number csc-object-number">&nbsp;</div>
 				<div class="clear"></div>
 			</div>
 			
@@ -79,9 +94,6 @@
 										<option value="2">object record 2</option>
 										<option value="3">object record 3</option>
 									</select>
-<!--
-                                <input type="image" src="../images/viewbutton.png" class="viewbutton csc-view-button">
--->
 								</form>
 							</div>
 						</div><img src="../images/related-entities.png" alt="related entities" height=165 width=302 /></div>
@@ -94,7 +106,7 @@
 			
 			<!-- footer block -->
 			<div id="footer">
-				<div class="footer-text">&copy; 2009 CollectionSpace &nbsp;&ndash;&nbsp; CollectionSpace Version 0.1 &nbsp;&ndash;&nbsp; <a href="http://www.collectionspace.org">About CollectionSpace</a> &nbsp;&ndash;&nbsp; <a href="http://wiki.collectionspace.org/display/collectionspace/Release+0.1+Feedback">Leave Feedback</a></div>
+				<div class="footer-text">&copy; 2009 CollectionSpace &nbsp;&ndash;&nbsp; CollectionSpace <a href="http://wiki.collectionspace.org/display/collectionspace/Project+Roadmap+-+Incremental+Releases#ProjectRoadmap-IncrementalReleases-CollectionSpaceRelease0.2%3AHelloMars">Release 0.2</a> &nbsp;&ndash;&nbsp; <a href="http://www.collectionspace.org">About CollectionSpace</a> &nbsp;&ndash;&nbsp; <a href="http://wiki.collectionspace.org/display/collectionspace/Release+0.1+Feedback">Leave Feedback</a></div>
 			</div> <!-- END footer block -->
 			
 		</div> <!-- END body content -->

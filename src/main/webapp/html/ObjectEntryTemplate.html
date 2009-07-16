@@ -9,6 +9,23 @@
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-layout.css" />
 		<link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
+		
+		<script language="javascript"> 
+			function Toggle(origin, toggled) {
+				var ele = document.getElementById(toggled);
+				if(ele.style.display == "block") {
+					ele.style.display = "none";
+					origin.src="../images/toggle-more.png";
+					origin.alt="toggle more";
+				}
+				else {
+					ele.style.display = "block";
+					origin.src="../images/toggle-less.png";
+					origin.alt="toggle less";
+				}
+			} 
+		</script>
+		
 	</head>
 
 	<body>
@@ -24,71 +41,160 @@
 					  This corresponds to Information groups within Spectrum's Object Entry prodedure. -->
 				<div class="fl-container-flex fl-fix information-group">
 				
-					<div class="info-column1 fl-force-left">	
+					<div class="info-column fl-force-left">	
 			
 						<!-- Information-block header -->
 						<div class="fl-container-flex header">
+							<span class="header-toggle"><img id="toggle-image" onclick="Toggle(this, 'toggle_object_identification_information');" src="../images/toggle-less.png" height=13 width=13 alt="toggle-less" /></span>
 							Object Identification Information
 						</div>
 						
 						<!-- Information-block content block -->
 						<div class="fl-container-flex fl-fix content">
 							
-							<!-- The information-block is further broken down into two columns of equal size: left and right -->
-							<!-- Left-side column -->
-							<div class="info-column2-40 fl-force-left">
+							<div id="toggle_object_identification_information" style="display:block;">
+								<!-- The information-block is further broken down into two columns of equal size: left and right -->
 								
-								<!-- The information is broken down into a pair of information elements: label and value -->
-								<div class="info-pair">
-									<div class="info-label">Object Title</div>
-									<div class="info-value"><input type="text" class="input-alpha csc-object-title" name="object_title"></div>
-									<!--<div class="info-value csc-object-title" rsf:id="objectTitle">Left-Handed Screwdriver</div>-->
-								</div>
-								
-								<div class="info-pair">
-									<div class="info-label">Accession Number</div>
-									<div class="info-value"><input type="text" class="input-alpha csc-object-number" name="object-number"></div>
-									<!--<div class="info-value csc-object-title" rsf:id="objectTitle">Left-Handed Screwdriver</div>-->
-								</div>
-								
-								<div class="info-pair">
-									<div class="info-label">Object Name</div>
-									<div class="info-value"><input type="text" class="input-alpha csc-object-name" name="number-of-objects"></div>
-								</div>
-								
-								<div class="info-pair">
-									<div class="info-label">Number of Objects</div>
-									<div class="info-value"><input type="text" class="input-numeric-small csc-num-objects" name="number-of-objects"></div>
-								</div>
-								
-								<div class="info-pair disabled">
-									<div class="info-label">Responsible Department</div>
-									<div class="info-value">
-										<input type="text" class="input-authority csc-department " name="responsible-department" disabled="true"><!--<input type="submit" value="Add" disabled="true">-->
-									</div>
-								</div>
-								
-							</div>
-							
-							<div class="info-column2-60 fl-force-right">
-								<div class="info-pair">
-									<div class="info-label">Brief Description</div>
-									<div class="info-value"><textarea class="input-textarea csc-description" name="brief-description"></textarea></div>
-								</div>
-								
-								<div class="info-pair">
-									<div class="info-label">Distinguishing Features</div>
-									<div class="info-value"><textarea class="input-textarea csc-features" name="destinguishing-features"></textarea></div>
-								</div>
+								<!-- one row column -->
+								<div class="info-column1 fl-force-left">
+																
+									<div class="info-pair-addrow">
+										<div class="info-label">Titles</div>
+										<div class="info-value">
 
-								<div class="info-pair">
-									<div class="info-label">Comments</div>
-									<div class="info-value"><textarea class="input-textarea csc-comments" name="comments"></textarea></div>
+											<table id="" >
+												<thead>
+													<tr>
+														<td class="table-select"></td>
+														<td>Title</td>
+														<td>Title Language</td>
+														<td>Title Translation</td>
+														<td>Title Type</td>
+													</tr>
+												</thead>
+												
+												<tbody>
+													<tr>
+														<td class="table-unselected"></td>
+														<td><input type="text" class="input-alpha-table csc-object-title" name="object-title" style="border:0; width:100%;"></td>
+														<td><input type="text" class="input-alpha-table csc-object-title-language" name="object-title-language" style="border:0; width:100%;"></td>
+														<td><input type="text" class="input-alpha-table csc-object-title-translation" name="object-title-translation" style="border:0; width:100%;"></td>
+														<td><input type="text" class="input-alpha-table csc-object-title-type" name="object-title-type" style="border:0; width:100%;"></td>
+													</tr>
+												</tbody>
+											</table>
+
+										</div>
+									</div>	
+															
 								</div>
 								
+								<!-- Left-side column -->
+								<div class="info-column2-50 fl-force-left">
+									
+									<!-- The information is broken down into a pair of information elements: label and value -->									
+									<div class="info-pair">
+										<div class="info-label">Accession Number</div>
+										<div class="info-value"><input type="text" class="input-alpha csc-object-number" name="object-number"></div>
+									</div>
+									
+									<div class="info-pair-addrow">
+										<div class="info-label">Other Number</div>
+										<div class="info-value">
+											<table id="" >
+												<thead>
+													<tr>
+														<td class="table-select"></td>
+														<td>Number</td>
+														<td>Number Type</td>
+													</tr>
+												</thead>
+													
+												<tbody>
+													<tr>
+														<td class="table-unselected"></td>
+														<td><input type="text" class="input-alpha-table csc-other-number" name="other-number" style="border:0; width:auto; width: 100%;"></td>
+														<td><input type="text" class="input-alpha-table csc-other-number-type" name="other-number-type" style="border:0; width:auto; width: 100%;"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									
+								</div>
+								
+								<div class="info-column2-50 fl-force-right">
+									<div class="info-pair">
+										<div class="info-label">Number of Items</div>
+										<div class="info-value"><input type="text" class="input-numeric-small csc-num-objects" name="number-of-items"></div>
+									</div>
+									
+									<div class="info-pair">
+										<div class="info-label">Responsible Department</div>
+										<div class="info-value"><input type="text" class="input-authority csc-department " name="responsible-department"></div>
+									</div>
+
+								</div>
+								
+								<div class="info-column1 fl-force-left">
+									<div class="info-pair-addrow">
+										<div class="info-label">Object Name</div>
+										<div class="info-value">
+											<table id="" >
+												<thead>
+													<tr>
+														<td class="table-select"></td>
+														<td>Object Name</td>
+														<td>Currency</td>
+														<td>Level</td>
+														<td>Sytem</td>
+														<td>Type</td>
+														<td>Language</td>
+														<td>Note</td>
+													</tr>
+												</thead>
+												
+												<tbody>
+													<tr>
+														<td class="table-unselected"></td>
+														<td><input type="text" class="input-alpha-table csc-object-name" name="object-name"></td>
+														<td><input type="text" class="input-alpha-table csc-object-currency" name="object-currency"></td>
+														<td><input type="text" class="input-alpha-table csc-object-level" name="object-level"></td>
+														<td><input type="text" class="input-alpha-table csc-object-system" name="object-system"></td>
+														<td><input type="text" class="input-alpha-table csc-object-type" name="object-type"></td>
+														<td><input type="text" class="input-alpha-table csc-object-language" name="object-language"></td>
+														<td><input type="text" class="input-alpha-table csc-object-note" name="object-note"></td>
+													</tr>
+												</tbody>
+											</table>
+
+										</div>
+									</div>		
+								</div>
+								
+								<div class="info-column1 fl-force-left">
+									<div class="info-pair">
+										<div class="info-label">Brief Description</div>
+										<div class="info-value"><textarea class="input-textarea csc-description" name="brief-description"></textarea></div>
+									</div>		
+								</div>
+								
+								<div class="info-column1 fl-force-left">
+									<div class="info-pair">
+										<div class="info-label">Distinguishing Features</div>
+										<div class="info-value"><textarea class="input-textarea csc-features" name="destinguishing-features"></textarea></div>
+									</div>		
+								</div>
+								
+								<div class="info-column1 fl-force-left">
+									<div class="info-pair">
+										<div class="info-label">Comments</div>
+										<div class="info-value"><textarea class="input-textarea csc-comments" name="comments"></textarea></div>
+									</div>		
+								</div>
+								
+								<div class="clear"></div>
 							</div>
-							
-							<div class="clear"></div>
 						</div>
 
 					</div>
@@ -99,51 +205,54 @@
 				<div class="fl-container-flex fl-fix information-group">
 					<div class="info-column1 fl-force-left">
 						<div class="fl-container-flex header">
+							<span class="header-toggle"><img id="toggle-image" onclick="Toggle(this, 'toggle_date_information');" src="../images/toggle-less.png" height=13 width=13 alt="toggle-less" /></span>
 							Date Information
 						</div>
 						<div class="fl-container-flex fl-fix content">
 							
-							<!-- Left-side column -->
-							<div class="info-column2 fl-force-left">
+							<div id="toggle_date_information" style="display:block;">
+								<!-- Left-side column -->
+								<div class="info-column2 fl-force-left">
+										
+									<div class="info-pair disabled">
+										<div class="info-label">Date - earliest/single</div>
+										<div class="info-value">
+											<input type="text" class="input-date csc-date-earliest" name="date-earliest-single-month" disabled="true"><input type="text" class="input-date" name="date-earliest-single-day" disabled="true"><input type="text" class="input-date" name="date-earliest-single-year" disabled="true"><img src="../images/calendar.jpg" alt="calendar" style="margin-bottom: -4px;"/></div>
+									</div>
 									
-								<div class="info-pair disabled">
-									<div class="info-label">Date - earliest/single</div>
-									<div class="info-value">
-									<input type="text" class="input-date csc-date-earliest" name="date-earliest-single-month" disabled="true"><input type="text" class="input-date" name="date-earliest-single-day" disabled="true"><input type="text" class="input-date" name="date-earliest-single-year" disabled="true"><img src="../images/calendar.jpg" alt="calendar" style="margin-bottom: -4px;"/></div>
-								</div>
-								
-								<div class="info-pair">
-									<div class="info-label">Date - association</div>
-									<div class="info-value"><input type="text" class="input-alpha csc-date-association" name="date-association"></div>
-								</div>
-								
-							</div>
-							
-							<!-- Right-side column -->
-							<div class="info-column2 fl-force-right">
+									<div class="info-pair">
+										<div class="info-label">Date - association</div>
+										<div class="info-value"><input type="text" class="input-alpha csc-date-association" name="date-association"></div>
+									</div>
 									
-								<div class="info-pair disabled">
-									<div class="info-label">Date - latest</div>
-									<div class="info-value">
-										<input type="text" class="input-date csc-date-latest" name="date-association-month" disabled="true"><input type="text" class="input-date" name="date-association-day" disabled="true"><input type="text" class="input-date" name="date-association-year" disabled="true"><img src="../images/calendar.jpg" alt="calendar" style="margin-bottom: -4px;"/></div>
 								</div>
 								
-								<div class="info-pair">
-									<div class="info-label">Date - period</div>
-									<div class="info-value"><input type="text" class="input-alpha csc-date-period" name="date-period"></div>
+								<!-- Right-side column -->
+								<div class="info-column2 fl-force-right">
+										
+									<div class="info-pair disabled">
+										<div class="info-label">Date - latest</div>
+										<div class="info-value">
+											<input type="text" class="input-date csc-date-latest" name="date-association-month" disabled="true"><input type="text" class="input-date" name="date-association-day" disabled="true"><input type="text" class="input-date" name="date-association-year" disabled="true"><img src="../images/calendar.jpg" alt="calendar" style="margin-bottom: -4px;"/></div>
+									</div>
+									
+									<div class="info-pair">
+										<div class="info-label">Date - period</div>
+										<div class="info-value"><input type="text" class="input-alpha csc-date-period" name="date-period"></div>
+									</div>
+									
 								</div>
-								
-							</div>
 
-							<!-- Left-side column. This is a single-columnn design and takes up 100% width -->
-							<div class="info-column1 fl-force-left">
-								<div class="info-pair">
-									<div class="info-label">Date text</div>
-									<div class="info-value"><textarea class="input-textarea csc-date-text" name="date-text"></textarea></div>
+								<!-- Left-side column. This is a single-columnn design and takes up 100% width -->
+								<div class="info-column1 fl-force-left">
+									<div class="info-pair">
+										<div class="info-label">Date text</div>
+										<div class="info-value"><textarea class="input-textarea csc-date-text" name="date-text"></textarea></div>
+									</div>
 								</div>
+								
+								<div class="clear"></div>
 							</div>
-							
-							<div class="clear"></div>
 						</div>
 					
 					</div>
