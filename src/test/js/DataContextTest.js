@@ -149,4 +149,55 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         url = testFactory.urlForModelPath("collectionObject.procedures", models.nestedModel);
         jqUnit.assertEquals("Url for related procedures", "file://somesite.com/objects/12345/procedures", url);
     });
+    
+    /****************************
+     * Test a successful fetch. *
+     ****************************/
+    (function () {
+        var model = {};
+        
+        var testFetchSuccess = function (newModel, oldModel, source) {
+             dataContextTest.test("Fetch valid data", function () {
+                 jqUnit.assertEquals("The data was fetched and placed at the correct spot in the model.", model, newModel);
+                 jqUnit.assertEquals("The model data (accessionNumber) is the data we expected to get.", "1984.068.0335b", model.accessionNumber);
+                 jqUnit.assertEquals("The model data (objectTitle) is the data we expected to get.", "Catalogs. Wyanoak Publishing Company.", model.objectTitle);
+             });
+        };
+        
+        var errorInTest = function (type, modelPath, message) {
+            dataContextTest.test("Fetch valid data", function () {
+                ok(false, "Data should have been returned for a fetch against valid data: " + message);
+            });
+        };
+        
+        // Successful fetch test.
+        var context = cspace.dataContext(model, {
+            listeners: {
+                modelChanged: testFetchSuccess,
+                onError: errorInTest
+            },
+            urlFactory: {
+                type: "cspace.dataContext.urlFactory",
+                options: {
+                    baseUrl: "./test-data",
+                    protocol: "",
+                    includeResourceExtension: true,
+                    resourceMapper: {
+                        type: "cspace.dataContext.staticResourceMapper",
+                        options: {
+                            modelToResourceMap: {
+                                "*": "/objects/%id"
+                            },
+                            replacements: {
+                                "id": "accessionNumber"
+                            }
+                        }
+                    }
+                }
+            }
+        });     
+        
+        context.fetch("*", "1984.068.0335b");
+    })();
+
 }());

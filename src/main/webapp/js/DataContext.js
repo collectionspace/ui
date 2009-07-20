@@ -26,6 +26,12 @@ var cspace = cspace || {};
         }
         return newString;
     };
+    
+    var bindEventHandlers = function (that) {
+        that.events.afterFetch.addListener(function (modelPath, data) {
+            that.updateModel(data);
+        });
+    };
 
     // This isn't currently used, but might be useful in fuzzing over slashes.
     var addTrailingSlash = function (url) {
@@ -39,12 +45,34 @@ var cspace = cspace || {};
      * @param {Object} options configuration options
      */
     cspace.dataContext = function (model, options) {
-        var that = {};
+        var that = {
+            model: model
+        };
         fluid.mergeComponentOptions(that, "fluid.dataContext", options);
+        that.urlFactory = fluid.initSubcomponent(that, "urlFactory", [fluid.COMPONENT_OPTIONS]);
         fluid.instantiateFirers(that, that.options);
         
+        that.updateModel = function (newModel, source) {
+            var oldModel;
+            fluid.clear(that.model);
+            fluid.model.copyModel(that.model, newModel);
+            that.events.modelChanged.fire(that.model, oldModel, source);
+        };
+        
         that.fetch = function (modelPath, id) {
-            
+            // TODO: This is the *wrong* way to get the ID into the URL:
+            that.model[that.urlFactory.resourceMapper.replacements.id] = id;
+            jQuery.ajax({
+                url: that.urlFactory.urlForModelPath(modelPath, that.model),
+                type: "GET",
+                dataType: that.urlFactory.options.dataType,
+                success: function (data, textStatus) {
+                    that.events.afterFetch.fire(modelPath, data);
+                },
+                error: function (xhr, textStatus, errorThrown){
+                    that.events.onError.fire("fetch", modelPath, textStatus);
+                }
+            });
         };
         
         that.create = function (modelPath) {
@@ -64,15 +92,20 @@ var cspace = cspace || {};
             
         };
         
+        bindEventHandlers(that);
         return that;
     };
     
     fluid.defaults("fluid.dataContext", {
         events: {
+            modelChanged: null,    // newModel, oldModel, source
             afterSave: null,   // modelPath, oldData, newData
             afterDelete: null, // modelPath
             afterFetch: null,  // modelPath, data
             onError: null      // operation["save", "delete", "fetch"], modelPath, message
+        },
+        urlFactory: {
+            type: "cspace.dataContext.urlFactory"
         }
     });
     
@@ -85,10 +118,12 @@ var cspace = cspace || {};
     cspace.dataContext.urlFactory = function (options) {
         var that = {};
         fluid.mergeComponentOptions(that, "cspace.dataContext.urlFactory", options);
+        // TODO: The resourceMapper should probably not be nested so deeply
         that.resourceMapper = fluid.initSubcomponent(that, "resourceMapper", [fluid.COMPONENT_OPTIONS]);
         
         var extension = function () {
-            return that.options.resourceFormat ? "." + that.options.resourceFormat : "";
+            // TODO: This should be generalized to something more sensible. Or should we have the user specifically provide the extension?
+            return that.options.includeResourceExtension ? "." + that.options.dataType : "";
         };
         
         that.urlForModelPath = function (modelPath, model) {
@@ -105,7 +140,8 @@ var cspace = cspace || {};
         },
         protocol: (document.location.protocol === "file:") ? "file://" : "http://",
         baseUrl: "/",
-        resourceFormat: undefined
+        dataType: "json",
+        includeResourceExtension: false
     });
     
     /**
@@ -118,6 +154,7 @@ var cspace = cspace || {};
             modelToResourceMap: (options && options.modelToResourceMap) ? options.modelToResourceMap : {},
             replacements: (options && options.replacements) ? options.replacements : {}
         };
+
         
         that.map = function (model, modelPath) {
             if (!modelPath) {
