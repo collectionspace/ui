@@ -69,7 +69,7 @@ var cspace = cspace || {};
                 success: function (data, textStatus) {
                     that.events.afterFetch.fire(modelPath, data);
                 },
-                error: function (xhr, textStatus, errorThrown){
+                error: function (xhr, textStatus, errorThrown) {
                     that.events.onError.fire("fetch", modelPath, textStatus);
                 }
             });

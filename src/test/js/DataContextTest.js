@@ -157,16 +157,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var model = {};
         
         var testFetchSuccess = function (newModel, oldModel, source) {
-             dataContextTest.test("Fetch valid data", function () {
-                 jqUnit.assertEquals("The data was fetched and placed at the correct spot in the model.", model, newModel);
-                 jqUnit.assertEquals("The model data (accessionNumber) is the data we expected to get.", "1984.068.0335b", model.accessionNumber);
-                 jqUnit.assertEquals("The model data (objectTitle) is the data we expected to get.", "Catalogs. Wyanoak Publishing Company.", model.objectTitle);
-             });
+            dataContextTest.test("Fetch valid data", function () {
+                jqUnit.assertEquals("The data was fetched and placed at the correct spot in the model.", model, newModel);
+                jqUnit.assertEquals("The model data (accessionNumber) is the data we expected to get.", "1984.068.0335b", model.accessionNumber);
+                jqUnit.assertEquals("The model data (objectTitle) is the data we expected to get.", "Catalogs. Wyanoak Publishing Company.", model.objectTitle);
+            });
         };
         
         var errorInTest = function (type, modelPath, message) {
             dataContextTest.test("Fetch valid data", function () {
-                ok(false, "Data should have been returned for a fetch against valid data: " + message);
+                jqUnit.ok(false, "Data should have been returned for a fetch against valid data: " + message);
             });
         };
         
