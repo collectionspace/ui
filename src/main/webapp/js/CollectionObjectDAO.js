@@ -91,7 +91,7 @@ var cspace = cspace || {};
     
     fluid.defaults("cspace.collectionObjectDAO", {
         resources: {
-            objects: "objects",    // this should have a trailing slash - see CSPACE-256
+            objects: "objects/",
             schema: "objects/schema/"
         },
         baseUrl: "./",
