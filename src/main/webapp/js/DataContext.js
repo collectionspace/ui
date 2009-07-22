@@ -59,11 +59,16 @@ var cspace = cspace || {};
             that.events.modelChanged.fire(that.model, oldModel, source);
         };
         
-        that.fetch = function (modelPath, id) {
-            // TODO: This is the *wrong* way to get the ID into the URL:
-            that.model[that.urlFactory.resourceMapper.replacements.id] = id;
+        that.fetch = function (modelPath, queryParameters) {
+            var shadow = {};
+            if (modelPath === "*") {
+                shadow = queryParameters;
+            } else {
+                fluid.model.setBeanValue(shadow, modelPath, queryParameters);
+            }
+            var workingModel = $.extend({}, that.model, shadow);
             jQuery.ajax({
-                url: that.urlFactory.urlForModelPath(modelPath, that.model),
+                url: that.urlFactory.urlForModelPath(modelPath, workingModel),
                 type: "GET",
                 dataType: that.urlFactory.options.dataType,
                 success: function (data, textStatus) {
@@ -108,6 +113,16 @@ var cspace = cspace || {};
             type: "cspace.dataContext.urlFactory"
         }
     });
+    
+    /**
+     * A convenience function for creating a dataContext that uses the resourceMapper version of the
+     * urlFactory.
+     */
+    cspace.resourceMapperDataContext = function (model, options) {
+        var opts = {};
+        // /TODO: Implement this function!
+        return cspace.dataContext(model, opts);        
+    };
     
     /**
      * A UrlFactory is responsible for hiding away the variations between loading data locally for testing
