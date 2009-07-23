@@ -74,7 +74,7 @@ var dataContextTester = function () {
             },
             replacements: {
                 "collObjId": "collectionObject.resourceId",
-                "procId": "collectionObject.procedureId"   // procedures.resourceId?
+                "procId": "collectionObject.procedures.resourceId"
             }
         }
     };
@@ -193,7 +193,7 @@ var dataContextTester = function () {
     });
     
     dataContextTest.test("Fetch valid data (flat model)", function () {
-        var testModel = fluid.copy(models.flatCollectionObject);
+        var testModel = {};
         var testFetchSuccess = function (modelPath, data) {
             jqUnit.assertEquals("The data that was fetched is the the data we expected to get (accessionNumber).", "1984.068.0335b", data.accessionNumber);
             jqUnit.assertEquals("The data that was fetched is the the data we expected to get (objectTitle) is the data we expected to get.", "Catalogs. Wyanoak Publishing Company.", data.objectTitle);
@@ -216,7 +216,7 @@ var dataContextTester = function () {
     });
         
     dataContextTest.test("Fetch valid data (nested model)", function () {
-        var testModel = fluid.copy(models.nestedModel);
+        var testModel = {};
         var testFetchSuccess = function (modelPath, data) {
             jqUnit.assertEquals("The data that was fetched is the the data we expected to get (accessionNumber).", "1984.068.0335b", data.accessionNumber);
             jqUnit.assertEquals("The data that was fetched is the the data we expected to get (objectTitle) is the data we expected to get.", "Catalogs. Wyanoak Publishing Company.", data.objectTitle);
@@ -240,7 +240,7 @@ var dataContextTester = function () {
         
 
     dataContextTest.test("Fetch ui spec", function () {
-        var testModel = fluid.copy(models.flatCollectionObject);
+        var testModel = {};
         var testFetchSuccess = function (modelPath, data) {
             jqUnit.assertDeepEq("The spec that was fetched is the the data we expected to get (objectTitle.selector).", "#object-title .info-value", data.objectTitle.selector);
             same(data.description.validators, [], "The spec that was fetched is the the data we expected to get (description.validators) is the data we expected to get.");
@@ -264,3 +264,4 @@ var dataContextTester = function () {
 (function () {
     dataContextTester();
 }());
+
