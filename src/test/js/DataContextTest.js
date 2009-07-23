@@ -259,6 +259,17 @@ var dataContextTester = function () {
         stop();
         testContext.fetch("spec");
     });
+
+    dataContextTest.test("resourceMapperDataContext", function () {
+        var testOptions = mapperOptions.flatObjectModel;
+        testOptions.protocol = "sms://";
+        var testContext = cspace.resourceMapperDataContext(models.flatCollectionObject, testOptions);
+        jqUnit.assertDeepEq("Resulting mapper should have correct map", mapperOptions.flatObjectModel.modelToResourceMap, testContext.urlFactory.resourceMapper.modelToResourceMap);
+        jqUnit.assertDeepEq("Resulting mapper should have correct replacements", mapperOptions.flatObjectModel.replacements, testContext.urlFactory.resourceMapper.replacements);
+        jqUnit.assertDeepEq("Resulting urlFactory should have specified protocol", "sms://", testContext.urlFactory.options.protocol);
+        jqUnit.assertDeepEq("Resulting urlFactory should have default dataType", "json", testContext.urlFactory.options.dataType);
+        
+    });
 };
 
 (function () {

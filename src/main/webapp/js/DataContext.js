@@ -48,7 +48,7 @@ var cspace = cspace || {};
         var that = {
             model: model
         };
-        fluid.mergeComponentOptions(that, "fluid.dataContext", options);
+        fluid.mergeComponentOptions(that, "cspace.dataContext", options);
         that.urlFactory = fluid.initSubcomponent(that, "urlFactory", [fluid.COMPONENT_OPTIONS]);
         fluid.instantiateFirers(that, that.options);
         
@@ -61,6 +61,7 @@ var cspace = cspace || {};
         
         that.fetch = function (modelPath, queryParameters) {
             var shadow = {};
+            // setBeanValue() doesn't treat "*" as intended, so we have to do it manually
             if (modelPath === "*") {
                 shadow = queryParameters;
             } else {
@@ -101,7 +102,7 @@ var cspace = cspace || {};
         return that;
     };
     
-    fluid.defaults("fluid.dataContext", {
+    fluid.defaults("cspace.dataContext", {
         events: {
             modelChanged: null,    // newModel, oldModel, source
             afterSave: null,   // modelPath, oldData, newData
@@ -115,13 +116,45 @@ var cspace = cspace || {};
     });
     
     /**
-     * A convenience function for creating a dataContext that uses the resourceMapper version of the
-     * urlFactory.
+     * A convenience function for creating a dataContext that uses the default resourceMapper
+     * version of the default urlFactory.
      */
     cspace.resourceMapperDataContext = function (model, options) {
-        var opts = {};
-        // /TODO: Implement this function!
-        return cspace.dataContext(model, opts);        
+        var mapperDefaults = fluid.defaults("cspace.dataContext.staticResourceMapper"); 
+        var mapperOpts = {};
+        for (var key in mapperDefaults) {
+            if (mapperDefaults.hasOwnPropert(key)) {
+                mapperOpts[key] = options[key];
+            }
+        }
+        mapperOpts.modelToResourceMap = options.modelToResourceMap;
+        mapperOpts.replacements = options.replacements;
+        
+        var urlFactoryOpts = {};
+        var urlFactoryDefaults = fluid.defaults("cspace.dataContext.urlFactory");
+        for (key in urlFactoryDefaults) {
+            if (urlFactoryDefaults.hasOwnPropert(key)) {
+                urlFactoryOpts[key] = options[key];
+            }
+        }
+        urlFactoryOpts.resourceMapper = {
+            type: "cspace.dataContext.staticResourceMapper",
+            options: mapperOpts
+        };
+
+        var dataContextDefaults = fluid.defaults("cspace.dataContext");
+        var dataContextOpts = {};
+        for (key in dataContextDefaults) {
+            if (dataContextDefaults.hasOwnPropert(key)) {
+                dataContextOpts[key] = options[key];
+            }
+        }
+        dataContextOpts.urlFactory = {
+            type: "cspace.dataContext.urlFactory",
+            options: urlFactoryOpts
+        };
+
+        return cspace.dataContext(model, dataContextOpts);        
     };
     
     /**
