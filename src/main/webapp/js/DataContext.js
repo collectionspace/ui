@@ -123,7 +123,7 @@ var cspace = cspace || {};
         var mapperDefaults = fluid.defaults("cspace.dataContext.staticResourceMapper"); 
         var mapperOpts = {};
         for (var key in mapperDefaults) {
-            if (mapperDefaults.hasOwnPropert(key)) {
+            if (mapperDefaults.hasOwnPropertyy(key)) {
                 mapperOpts[key] = options[key];
             }
         }
@@ -133,7 +133,7 @@ var cspace = cspace || {};
         var urlFactoryOpts = {};
         var urlFactoryDefaults = fluid.defaults("cspace.dataContext.urlFactory");
         for (key in urlFactoryDefaults) {
-            if (urlFactoryDefaults.hasOwnPropert(key)) {
+            if (urlFactoryDefaults.hasOwnProperty(key)) {
                 urlFactoryOpts[key] = options[key];
             }
         }
@@ -145,7 +145,7 @@ var cspace = cspace || {};
         var dataContextDefaults = fluid.defaults("cspace.dataContext");
         var dataContextOpts = {};
         for (key in dataContextDefaults) {
-            if (dataContextDefaults.hasOwnPropert(key)) {
+            if (dataContextDefaults.hasOwnProperty(key)) {
                 dataContextOpts[key] = options[key];
             }
         }
