@@ -43,79 +43,72 @@
 						
 					<!-- this div will be replaced by the contents of the Template -->
 					<div class="csc-object-entry- container" id="csc-object-entry- template">
-						
-						<div class="csc-object-entry- container" id="csc-object-entry- template">
-							<!-- outer-border block -->
-							<div class="login-outer-border">
-
-								<div class="csc-saved-message hidden cs-message">Save successful!</div>
-
-								<div class="fl-container-flex fl-fix" id="login">
-									
-									<div class="info-column2-50 fl-force-left">
-										<div class="login-text">
-											<div class="info-pair">
-												<div class="info-label">Current Release 0.2 Information</div>
-												<div class="info-value">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
-											</div>
+						<!-- outer-border block -->
+						<div class="login-outer-border">
+							<div class="csc-saved-message hidden cs-message">Save successful!</div>
+							
+							<div class="fl-container-flex fl-fix" id="login">	
+								<div class="info-column2-50 fl-force-left">
+									<div class="login-text">
+										<div class="info-pair">
+											<div class="info-label">Current Release 0.2 Information</div>
+											<div class="info-value">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
 										</div>
 									</div>
-										
-									<div class="info-column2-50 fl-force-right">
-										<div class="login-forms">
-											<div class="info-pair">
-												<div class="info-label">Log into CollectionSpace</div>
-												<div class="info-value">
-													<div class="fl-container-left csc-object-entry-container" id="">
-														<div class="login-pair">
-															<div class="login-label">User ID</div>
-															<div class="login-element"><input type="text" class="input-alpha csc-user-id" name="login-name"></div>
-															<div class="login-error csc-un-warning" style="display:none;">User ID does not exist</div>
-															<div class="clear"></div>
-														</div>
-														
-														<div class="login-pair">
-															<div class="login-label">Password</div>
-															<div class="login-element"><input type="password" class="input-alpha csc-password" name="login-pw"></div>
-															<div class="login-error csc-pw-warning" style="display:none;">Password is incorrect</div>
-															<div class="clear"></div>
-														</div>
-														
-														<div class="login-pair">
-															<div class="login-label">&nbsp;</div>
-															<div class="login-element"><input type="checkbox" name="remember-me" value="remember-me" /> Remember me</div>
-															<div class="clear"></div>
-														</div>
-														
-														<div class="login-pair">
-															<div class="login-label">&nbsp;</div>
-															<div class="login-element"><input type="image" class="csc-login-button" src="../images/login-button.png" name="login-button" style="border:none;" /></div>
-															<div class="clear"></div>
-														</div>
-														
-														<div class="login-pair">
-															<div class="login-label">&nbsp;</div>
-															<div class="login-element"><a href="">Forgot ID or Password?</a></div>
-															<div class="clear"></div>
-														</div>
-														
-													</div>												
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="clear"></div>
-								</div>	
-
-								<div class="csc-error-dialog">
-									<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
 								</div>
-								
-							</div> <!-- end outer border-->
+									
+								<div class="info-column2-50 fl-force-right">
+									<div class="login-forms">
+										<div class="info-pair">
+											<div class="info-label">Log into CollectionSpace</div>
+											<div class="info-value">
+												<div class="csc-object-entry-container">
+													<div class="login-pair">
+														<div class="login-label">User ID</div>
+														<div class="login-element"><input type="text" class="input-alpha-login csc-user-id" name="login-name"></div>
+														<div class="login-error csc-un-warning hidden">User ID does not exist</div>
+														<div class="clear"></div>
+													</div>
+													
+													<div class="login-pair">
+														<div class="login-label">Password</div>
+														<div class="login-element"><input type="password" class="input-alpha-login csc-password" name="login-pw"></div>
+														<div class="login-error csc-pw-warning hidden">Password is incorrect</div>
+														<div class="clear"></div>
+													</div>
+													
+													<div class="login-pair">
+														<div class="login-label">&nbsp;</div>
+														<div class="login-element"><input type="checkbox" class="no-border" name="remember-me" value="remember-me" /> Remember me</div>
+														<div class="clear"></div>
+													</div>
+													
+													<div class="login-pair">
+														<div class="login-label">&nbsp;</div>
+														<div class="login-element"><input type="image" class="csc-login-button no-border" src="../images/login-button.png" name="login-button" /></div>
+														<div class="clear"></div>
+													</div>
+													
+													<div class="login-pair">
+														<div class="login-label">&nbsp;</div>
+														<div class="login-element"><a href="">Forgot ID or Password?</a></div>
+														<div class="clear"></div>
+													</div>
+													
+												</div>												
+											</div>
+										</div>
+									</div>
+								</div>
 
-						</div> <!-- END left-side container -->
+								<div class="clear"></div>
+							</div>	
 
+							<div class="csc-error-dialog">
+								<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
+							</div>
+							
+						</div> <!-- end outer border-->
 					</div>
 
 					<div class="clear"></div>
