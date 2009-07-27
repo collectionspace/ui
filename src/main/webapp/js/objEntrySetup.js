@@ -28,7 +28,9 @@ var demo = demo || {};
     
     demo.setup = function () {
         var objectId = getUrlParameter("objectId");
-        var oeOpts = {};
+        var oeOpts = {
+            idField: "accessionNumber"
+        };
         var raOpts = {};
 /*
 The CollectionObjectDAO default options are suitable for testing on a local machine.

@@ -53,10 +53,21 @@ var cspace = cspace || {};
     
     var bindEventHandlers = function (that) {
         that.events.afterFetchSpecSuccess.addListener(function (spec, textStatus) {
-            that.spec = spec;
-            that.model = buildEmptyModelFromSpec(spec);
+            that.spec = spec.spec;
+            var modelDataContextOptions = {
+                modelToResourceMap: spec.modelToResourceMap,
+                replacements: spec.replacements
+            };
+            that.modelDataContext = cspace.resourceMapperDataContext(that.model, modelDataContextOptions);
+            that.modelDataContext.events.modelChanged.addListener(function (data, textStatus) {
+                that.updateModel(data);
+                that.locate("savedMessage").hide();
+            });
+            that.model = buildEmptyModelFromSpec(that.spec);
             if (that.options.objectId) {
-                that.objectDAO.fetchObjectForId(that.options.objectId, that.events.afterFetchObjectDataSuccess.fire, that.events.afterFetchObjectDataError.fire);
+                var queryParams = {};
+                queryParams[that.options.idField] = that.options.objectId;
+                that.modelDataContext.fetch("*", queryParams);
             } else {
                 that.refreshView();
             }
@@ -84,18 +95,31 @@ var cspace = cspace || {};
         that.events.afterSaveObjectDataError.addListener(function (xhr, msg, error) {
             that.locate("savedMessage").text(that.options.strings.saveFailedMessage+msg).show();
         });
+
+        that.specDataContext.events.modelChanged.addListener(that.events.afterFetchSpecSuccess.fire);
+        that.specDataContext.events.onError.addListener(that.events.afterFetchSpecError.fire);
     };
     
     var setupObjectEntry = function (that) {
         that.objectDAO = fluid.initSubcomponent(that, "dao", [fluid.COMPONENT_OPTIONS]);
+        that.specDataContext = cspace.resourceMapperDataContext(that.spec, {
+            modelToResourceMap: {
+                "spec": that.options.uiSpecURL
+            },
+            replacements: {}
+        });
         bindEventHandlers(that);
-        that.objectDAO.fetchObjectSpec(that.events.afterFetchSpecSuccess.fire, that.events.afterFetchSpecError.fire);
+        that.specDataContext.fetch("spec");
     };
-    
+
+    /**
+     * Object Entry component
+     */
     cspace.objectEntry = function (container, options) {
         var that = fluid.initView("cspace.objectEntry", container, options);
         that.model = {};
-        
+        that.spec = {};
+
         that.refreshView = function () {
             cspace.renderer.renderPage(that);
         };
@@ -243,6 +267,8 @@ var cspace = cspace || {};
                 id: "csc-object-entry-template"
             }
         },
-        objectId: null
+        objectId: null,
+        uiSpecURL: "./objects/schema/schema",
+        idField: "id"
     });
 })(jQuery, fluid_1_1);

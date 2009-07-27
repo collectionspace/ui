@@ -186,10 +186,10 @@ var cspace = cspace || {};
         resourceMapper: {
             type: "cspace.dataContext.staticResourceMapper"
         },
-        protocol: (document.location.protocol === "file:") ? "file://" : "http://",
-        baseUrl: "/",
+        protocol: "",
+        baseUrl: "./",
         dataType: "json",
-        includeResourceExtension: false
+        includeResourceExtension: (document.location.protocol === "file:") ? true : false
     });
     
     /**

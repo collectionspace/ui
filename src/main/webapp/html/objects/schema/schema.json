@@ -1,57 +1,66 @@
 {
-    "objectTitle": {
-        "selector": ".csc-object-title",
-        "validators": [],
-        "decorators": []
+	spec: {
+	    "objectTitle": {
+	        "selector": ".csc-object-title",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "accessionNumber": {
+	        "selector": ".csc-object-number",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "description": {
+	        "selector": ".csc-description",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "objectName": {
+	        "selector": ".csc-object-name",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "distinguishingFeatures": {
+	        "selector": ".csc-features",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "numberOfObjects": {
+	        "selector": ".csc-num-objects",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "responsibleDepartment": {
+	        "selector": ".csc-department",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "comments": {
+	        "selector": ".csc-comments",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "dateAssociation": {
+	        "selector": ".csc-date-association",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "datePeriod": {
+	        "selector": ".csc-date-period",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "dateText": {
+	        "selector": ".csc-date-text",
+	        "validators": [],
+	        "decorators": []
+	    }
+	},
+	modelToResourceMap: {
+        "*": "/objects/%collObjId",
+        "spec": "/objects/schema/schema"
     },
-    "accessionNumber": {
-        "selector": ".csc-object-number",
-        "validators": [],
-        "decorators": []
-    },
-    "description": {
-        "selector": ".csc-description",
-        "validators": [],
-        "decorators": []
-    },
-    "objectName": {
-        "selector": ".csc-object-name",
-        "validators": [],
-        "decorators": []
-    },
-    "distinguishingFeatures": {
-        "selector": ".csc-features",
-        "validators": [],
-        "decorators": []
-    },
-    "numberOfObjects": {
-        "selector": ".csc-num-objects",
-        "validators": [],
-        "decorators": []
-    },
-    "responsibleDepartment": {
-        "selector": ".csc-department",
-        "validators": [],
-        "decorators": []
-    },
-    "comments": {
-        "selector": ".csc-comments",
-        "validators": [],
-        "decorators": []
-    },
-    "dateAssociation": {
-        "selector": ".csc-date-association",
-        "validators": [],
-        "decorators": []
-    },
-    "datePeriod": {
-        "selector": ".csc-date-period",
-        "validators": [],
-        "decorators": []
-    },
-    "dateText": {
-        "selector": ".csc-date-text",
-        "validators": [],
-        "decorators": []
+    replacements: {
+        "collObjId": "accessionNumber"
     }
 }

@@ -82,7 +82,6 @@ var dataContextTester = function () {
     var makeUrlFactoryOptions = function (mapperOpts) {
     	return {
             baseUrl: "./test-data",
-            protocol: "",
             includeResourceExtension: true,
             resourceMapper: {
                 type: "cspace.dataContext.staticResourceMapper",
@@ -157,24 +156,16 @@ var dataContextTester = function () {
 		jqUnit.assertEquals("Mapping collectionObject.procedures", "/objects/12345/procedures", result);
     });
 
-    dataContextTest.test("urlFactory, only baseUrl", function () {
+    dataContextTest.test("urlFactory, baseUrl", function () {
         var opts = {
-            baseUrl: "somesite.com"
+            protocol: "sms://",
+            baseUrl: "somesite.com/",
+            includeResourceExtension: false
         };
         var testFactory = cspace.dataContext.urlFactory(opts);
 
         var url = testFactory.urlForModelPath("collectionObject", models.flatCollectionObject);
-        jqUnit.assertEquals("No options", "file://somesite.com", url);
-    });
-
-    dataContextTest.test("urlFactory, protocol", function () {
-        var opts = {
-            baseUrl: "somesite.com",
-            protocol: "sms://"
-        };
-        var testFactory = cspace.dataContext.urlFactory(opts);
-        var url = testFactory.urlForModelPath("*", models.flatCollectionObject);
-        jqUnit.assertEquals("No options", "sms://somesite.com", url);
+        jqUnit.assertEquals("No options", "sms://somesite.com/", url);
     });
 
     dataContextTest.test("urlFactory, nested model", function () {
@@ -183,7 +174,9 @@ var dataContextTester = function () {
                 type: "cspace.dataContext.staticResourceMapper",
                 options: mapperOptions.nestedModel
             },
-            baseUrl: "somesite.com"
+            protocol: "file://",
+            baseUrl: "somesite.com",
+            includeResourceExtension: false
         };
         var testFactory = cspace.dataContext.urlFactory(opts);
         var url = testFactory.urlForModelPath("collectionObject", models.nestedModel);
@@ -262,11 +255,11 @@ var dataContextTester = function () {
 
     dataContextTest.test("resourceMapperDataContext", function () {
         var testOptions = mapperOptions.flatObjectModel;
-        testOptions.protocol = "sms://";
+        testOptions.baseUrl = "ftp://somewhere";
         var testContext = cspace.resourceMapperDataContext(models.flatCollectionObject, testOptions);
         jqUnit.assertDeepEq("Resulting mapper should have correct map", mapperOptions.flatObjectModel.modelToResourceMap, testContext.urlFactory.resourceMapper.modelToResourceMap);
         jqUnit.assertDeepEq("Resulting mapper should have correct replacements", mapperOptions.flatObjectModel.replacements, testContext.urlFactory.resourceMapper.replacements);
-        jqUnit.assertDeepEq("Resulting urlFactory should have specified protocol", "sms://", testContext.urlFactory.options.protocol);
+        jqUnit.assertDeepEq("Resulting urlFactory should have specified baseUrl", "ftp://somewhere", testContext.urlFactory.options.baseUrl);
         jqUnit.assertDeepEq("Resulting urlFactory should have default dataType", "json", testContext.urlFactory.options.dataType);
         
     });
