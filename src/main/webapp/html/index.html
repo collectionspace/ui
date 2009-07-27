@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>CollectionSpace - Object Intake</title>
+		<title>CollectionSpace - Login</title>
 
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-reset.css" />
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-layout.css" />
@@ -24,10 +24,7 @@
 		<script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidRenderer.js"></script>
 -->
 
-		<script type="text/javascript" src="../js/CollectionObjectDAO.js"></script>
-		<script type="text/javascript" src="../js/RecentActivity.js"></script>
-		<script type="text/javascript" src="../js/ObjectEntry.js"></script>
-		<script type="text/javascript" src="../js/objEntrySetup.js"></script>
+		<script type="text/javascript" src="../js/Login.js"></script>
 
 	</head>
 
@@ -47,7 +44,7 @@
 					<!-- this div will be replaced by the contents of the Template -->
 					<div class="csc-object-entry- container" id="csc-object-entry- template">
 						
-						<form class="csc-object-entry- container" id="csc-object-entry- template">
+						<div class="csc-object-entry- container" id="csc-object-entry- template">
 							<!-- outer-border block -->
 							<div class="login-outer-border">
 
@@ -69,18 +66,18 @@
 											<div class="info-pair">
 												<div class="info-label">Log into CollectionSpace</div>
 												<div class="info-value">
-													<form class="fl-container-left csc-object-entry-container" id="">
+													<div class="fl-container-left csc-object-entry-container" id="">
 														<div class="login-pair">
 															<div class="login-label">User ID</div>
-															<div class="login-element"><input type="text" class="input-alpha" name="login-name"></div>
-															<div class="login-error" style="display:none;">User ID does not exist</div>
+															<div class="login-element"><input type="text" class="input-alpha csc-user-id" name="login-name"></div>
+															<div class="login-error csc-un-warning" style="display:none;">User ID does not exist</div>
 															<div class="clear"></div>
 														</div>
 														
 														<div class="login-pair">
 															<div class="login-label">Password</div>
-															<div class="login-element"><input type="password" class="input-alpha" name="login-pw"></div>
-															<div class="login-error" style="display:none;">Password is incorrect</div>
+															<div class="login-element"><input type="password" class="input-alpha csc-password" name="login-pw"></div>
+															<div class="login-error csc-pw-warning" style="display:none;">Password is incorrect</div>
 															<div class="clear"></div>
 														</div>
 														
@@ -92,7 +89,7 @@
 														
 														<div class="login-pair">
 															<div class="login-label">&nbsp;</div>
-															<div class="login-element"><input type="image" src="../images/login-button.png" name="login-button" style="border:none;" /></div>
+															<div class="login-element"><input type="image" class="csc-login-button" src="../images/login-button.png" name="login-button" style="border:none;" /></div>
 															<div class="clear"></div>
 														</div>
 														
@@ -102,7 +99,7 @@
 															<div class="clear"></div>
 														</div>
 														
-													</form>												
+													</div>												
 												</div>
 											</div>
 										</div>
@@ -117,7 +114,7 @@
 								
 							</div> <!-- end outer border-->
 
-						</form> <!-- END left-side container -->
+						</div> <!-- END left-side container -->
 
 					</div>
 
@@ -138,7 +135,10 @@
         </div>
 		
     	<script type="text/javascript">
-    		<!--demo.setup();-->
+    		jQuery(document).ready(function() {
+				var login = cspace.login(".login-forms");
+			});
+    		
     	</script>
 	</body>
 </html>
