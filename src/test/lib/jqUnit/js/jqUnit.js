@@ -228,7 +228,13 @@ var jqUnit = jqUnit || {};
     // Mix these test functions into the jqUnit namespace.
     $.extend(jqUnit, testFns);
     
-    
+    /************************************************
+     * Add ok() to the jqUnit namespace, for jqMock *
+     ************************************************/
+    jqUnit.ok = function (a, msg) {
+        return ok(a, msg);
+    };
+
     /*******************
      * TestCase object *
      *******************/
