@@ -31,7 +31,9 @@ var demo = demo || {};
         var oeOpts = {
             idField: "accessionNumber"
         };
-        var raOpts = {};
+        if (objectId) {
+            oeOpts.objectId = objectId;
+        }
 /*
 The CollectionObjectDAO default options are suitable for testing on a local machine.
 To configure the demo to run on a particular server, set the baseUrl option to reference
@@ -43,13 +45,22 @@ the URL for the application layer, as shown in the following sample:
             }
         };
         oeOpts.dao = localhostDao;
-        raOpts.dao = localhostDao;
+        oeOpts.uiSpecUrl = "http://localhost:8080/chain/objects/schema";
+        oeOpts.dataContext = {
+            type: "cspace.resourceMapperDataContext",
+            options: {
+                protocol: "http://",
+                baseUrl: "localhost:8080/chain/",
+                includeResourceExtension: false
+            }
+        };
 */
 
-        if (objectId) {
-            oeOpts.objectId = objectId;
-        }
         var objEntry = cspace.objectEntry(".csc-object-entry-container", oeOpts);
+/*
+*/
+        var raOpts = {};
+        raOpts.dao = localhostDao;
         var recentAct = cspace.recentActivity(".recently-created-container", raOpts);
         
         // connect up the two components to listen to each other's events

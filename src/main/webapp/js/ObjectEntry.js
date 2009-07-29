@@ -14,6 +14,21 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
 
+    // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
+    // load it manually via ajax
+    var fetchUISpec = function (that, callback) {
+        jQuery.ajax({
+            url: that.options.uiSpecUrl,
+            type: "GET",
+            dataType: "json",
+            success: callback,
+            error: function (xhr, textStatus, errorThrown) {
+                that.showSpecErrorMessage(that.options.strings.specFetchError + textStatus + that.options.strings.errorRecoverySuggestion);
+                that.locate("savedMessage").hide();
+            }
+        });
+    };
+
     var buildFullUISpec = function (that) {
         var fullUISpec = fluid.copy(that.spec);
         
@@ -51,15 +66,18 @@ var cspace = cspace || {};
         return model;
     };
     
-    var bindEventHandlers = function (that) {
-        that.events.afterFetchSpecSuccess.addListener(function (spec, textStatus) {
+    var setupDataContext = function (that) {
+        return function(spec, textStatus){
             that.spec = spec.spec;
-            var modelDataContextOptions = {
-                modelToResourceMap: spec.modelToResourceMap,
-                replacements: spec.replacements
-            };
-            that.modelDataContext = cspace.resourceMapperDataContext(that.model, modelDataContextOptions);
-            that.modelDataContext.events.modelChanged.addListener(function (data, textStatus) {
+
+            // insert the resourceMapper options retrieved with the UISpec into the options structure
+            that.options.dataContext.options = that.options.dataContext.options || {};
+            that.options.dataContext.options.modelToResourceMap = spec.modelToResourceMap;
+            that.options.dataContext.options.replacements = spec.replacements;
+
+            that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
+
+            that.dataContext.events.modelChanged.addListener(function (data, textStatus) {
                 that.updateModel(data);
                 that.locate("savedMessage").hide();
             });
@@ -67,27 +85,15 @@ var cspace = cspace || {};
             if (that.options.objectId) {
                 var queryParams = {};
                 queryParams[that.options.idField] = that.options.objectId;
-                that.modelDataContext.fetch("*", queryParams);
-            } else {
+                that.dataContext.fetch("*", queryParams);
+            }
+            else {
                 that.refreshView();
             }
-        });
-        
-        that.events.afterFetchSpecError.addListener(function (xhr, msg, error) {
-            that.showSpecErrorMessage(that.options.strings.specFetchError + msg + that.options.strings.errorRecoverySuggestion);
-            that.locate("savedMessage").hide();
-        });
-
-        that.events.afterFetchObjectDataSuccess.addListener(function (data, textStatus) {
-            that.updateModel(data);
-            that.locate("savedMessage").hide();
-        });
-
-        that.events.afterFetchObjectDataError.addListener(function (xhr, msg, error) {
-            // TODO: decide on appropriate response to this situation
-            that.locate("savedMessage").hide();
-        });
-        
+        };
+    };
+    
+    var bindEventHandlers = function (that) {
         that.events.afterSaveObjectDataSuccess.addListener(function () {
             that.locate("savedMessage").text(that.options.strings.saveSuccessfulMessage).show();
         });
@@ -95,21 +101,12 @@ var cspace = cspace || {};
         that.events.afterSaveObjectDataError.addListener(function (xhr, msg, error) {
             that.locate("savedMessage").text(that.options.strings.saveFailedMessage+msg).show();
         });
-
-        that.specDataContext.events.modelChanged.addListener(that.events.afterFetchSpecSuccess.fire);
-        that.specDataContext.events.onError.addListener(that.events.afterFetchSpecError.fire);
     };
     
     var setupObjectEntry = function (that) {
         that.objectDAO = fluid.initSubcomponent(that, "dao", [fluid.COMPONENT_OPTIONS]);
-        that.specDataContext = cspace.resourceMapperDataContext(that.spec, {
-            modelToResourceMap: {
-                "spec": that.options.uiSpecURL
-            },
-            replacements: {}
-        });
         bindEventHandlers(that);
-        that.specDataContext.fetch("spec");
+        fetchUISpec(that, setupDataContext(that));
     };
 
     /**
@@ -234,13 +231,12 @@ var cspace = cspace || {};
         dao: {
             type: "cspace.collectionObjectDAO"
         },
+        dataContext: {
+            type: "cspace.resourceMapperDataContext"
+        },
         events: {
             modelChanged: null,
 			onSave: null,
-            afterFetchSpecSuccess: null,  // params: data, textStatus
-            afterFetchSpecError: null,  // params: XMLHttpRequest, textStatus, errorThrown
-            afterFetchObjectDataSuccess: null,  // params: data, textStatus
-            afterFetchObjectDataError: null,  // params: XMLHttpRequest, textStatus, errorThrown
             afterSaveObjectDataSuccess: null,  // params: data, textStatus
             afterSaveObjectDataError: null  // params: XMLHttpRequest, textStatus, errorThrown
         },
@@ -268,7 +264,10 @@ var cspace = cspace || {};
             }
         },
         objectId: null,
-        uiSpecURL: "./objects/schema/schema",
-        idField: "id"
+        idField: "id",
+
+        // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
+        // load it manually via ajax
+        uiSpecUrl: "./objects/schema/schema.json"
     });
 })(jQuery, fluid_1_1);

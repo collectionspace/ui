@@ -52,6 +52,7 @@ var cspace = cspace || {};
         that.urlFactory = fluid.initSubcomponent(that, "urlFactory", [fluid.COMPONENT_OPTIONS]);
         fluid.instantiateFirers(that, that.options);
         
+        // TODO: This should probably accept the modelPath as well, and only update that part of the tree
         that.updateModel = function (newModel, source) {
             var oldModel;
             fluid.clear(that.model);
