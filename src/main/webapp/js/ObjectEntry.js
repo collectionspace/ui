@@ -66,11 +66,15 @@ var cspace = cspace || {};
         return model;
     };
     
-    var handleDataContextError = function (operation/*["save", "delete", "fetch"]*/, modelPath, message) {
-        console.log("DC Error on "+operation+": "+message);
-        var msgKey = operation + "FailedMessage"; 
-        var msg = that.options.strings[msgKey] + message;
-        that.locate("feedbackMessage").text(msg).show();
+    var makeDCErrorHandler = function (that) {
+        return function(operation/*["save", "delete", "fetch"]*/, modelPath, message){
+            var msgKey = operation + "FailedMessage";
+            var msg = that.options.strings[msgKey] + message;
+            that.locate("feedbackMessage").text(msg).show();
+            if (operation === "save") {
+                that.events.afterSaveObjectDataError.fire();
+            }
+        };
     };
 
     var setupDataContext = function (that) {
@@ -84,16 +88,7 @@ var cspace = cspace || {};
 
             that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
 
-            that.dataContext.events.modelChanged.addListener(function (newModel, oldModel, source) {
-                that.events.modelChanged.fire(newModel, oldModel, source);
-                that.refreshView();
-                that.locate("feedbackMessage").hide();
-            });
-
-            that.dataContext.events.onError.addListener(handleDataContextError);
-            that.dataContext.events.afterSave.addListener(function () {
-                that.locate("feedbackMessage").text(that.options.strings.saveSuccessfulMessage).show();
-            });
+            bindEventHandlers(that);
             
             fluid.model.copyModel(that.model, buildEmptyModelFromSpec(that.spec));
             if (that.options.objectId) {
@@ -108,18 +103,20 @@ var cspace = cspace || {};
     };
     
     var bindEventHandlers = function (that) {
-        that.events.afterSaveObjectDataSuccess.addListener(function () {
-            that.locate("feedbackMessage").text(that.options.strings.saveSuccessfulMessage).show();
+        that.dataContext.events.modelChanged.addListener(function (newModel, oldModel, source) {
+            that.events.modelChanged.fire(newModel, oldModel, source);
+            that.refreshView();
+            that.locate("feedbackMessage").hide();
         });
-        
-        that.events.afterSaveObjectDataError.addListener(function (xhr, msg, error) {
-            that.locate("feedbackMessage").text(that.options.strings.saveFailedMessage+msg).show();
+
+        that.dataContext.events.onError.addListener(makeDCErrorHandler(that));
+        that.dataContext.events.afterSave.addListener(function (modelPath, oldData, newData) {
+            that.events.afterSaveObjectDataSuccess.fire(newData, that.options.strings.saveSuccessfulMessage);
+            that.locate("feedbackMessage").text(that.options.strings.saveSuccessfulMessage).show();
         });
     };
     
     var setupObjectEntry = function (that) {
-        that.objectDAO = fluid.initSubcomponent(that, "dao", [fluid.COMPONENT_OPTIONS]);
-        bindEventHandlers(that);
         fetchUISpec(that, setupDataContext(that));
     };
 
@@ -155,10 +152,7 @@ var cspace = cspace || {};
             if (that.options.objectId) {
                 that.dataContext.update("*");
             } else {
-                that.objectDAO.saveNewObject(that.model,
-                    that.events.afterSaveObjectDataSuccess.fire,
-                    that.events.afterSaveObjectDataError.fire
-                );        
+                that.dataContext.create("*");
             }
             return false;
         };
@@ -238,9 +232,6 @@ var cspace = cspace || {};
     };
     
     fluid.defaults("cspace.objectEntry", {
-        dao: {
-            type: "cspace.collectionObjectDAO"
-        },
         dataContext: {
             type: "cspace.resourceMapperDataContext"
         },
