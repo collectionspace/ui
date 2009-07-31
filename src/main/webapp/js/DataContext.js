@@ -91,10 +91,10 @@ var cspace = cspace || {};
                 dataType: that.urlFactory.options.dataType,
                 data: JSON.stringify(data),
                 success: function (data, textStatus) {
-                    that.events.afterSave.fire(modelPath, data);
+                    that.events.afterCreate.fire(modelPath, data);
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    that.events.onError.fire("save", modelPath, textStatus);
+                    that.events.onError.fire("create", modelPath, textStatus);
                 }
             });
         };
@@ -108,10 +108,10 @@ var cspace = cspace || {};
                 dataType: that.urlFactory.options.dataType,
                 data: JSON.stringify(data),
                 success: function (data, textStatus) {
-                    that.events.afterSave.fire(modelPath, data);
+                    that.events.afterUpdate.fire(modelPath, data);
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    that.events.onError.fire("save", modelPath, textStatus);
+                    that.events.onError.fire("update", modelPath, textStatus);
                 }
             });
         };
@@ -132,10 +132,11 @@ var cspace = cspace || {};
     fluid.defaults("cspace.dataContext", {
         events: {
             modelChanged: null,    // newModel, oldModel, source
-            afterSave: null,   // modelPath, oldData, newData
+            afterCreate: null,   // modelPath, data
             afterDelete: null, // modelPath
             afterFetch: null,  // modelPath, data
-            onError: null      // operation["save", "delete", "fetch"], modelPath, message
+            afterUpdate: null,  // modelPath, data
+            onError: null      // operation["create", "delete", "fetch", "update"], modelPath, message
         },
         urlFactory: {
             type: "cspace.dataContext.urlFactory"

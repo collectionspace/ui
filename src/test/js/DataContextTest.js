@@ -285,6 +285,30 @@ var dataContextTester = function () {
         ajaxMock.verify();
         ajaxMock.restore();
     });
+
+    dataContextTest.test("create: params to jQuery.ajax()", function () {
+        var testOptions = mapperOptions.flatObjectModel;
+        testOptions.objectId = "allNewId";
+        var testModel = models.flatCollectionObject;
+        testModel.resourceId = "allNewId";
+        var testContext = cspace.dataContext(testModel, makeDataContextOptions(testOptions));
+
+        var ajaxMock = new jqMock.Mock(jQuery, "ajax");
+        
+        // Don't know how jqMock checks functions, so just check the other parameters for now
+        var expectedAjaxParamsForFullModel = {
+            url: "./test-data/objects/allNewId.json",
+            data: JSON.stringify(models.flatCollectionObject),
+            type: "POST",
+            dataType: "json"
+        };
+        ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParamsForFullModel));
+        
+        testContext.create("*");
+
+        ajaxMock.verify();
+        ajaxMock.restore();
+    });
 };
 
 (function () {

@@ -73,7 +73,7 @@ locally, comment out the following code (i.e. to the end of this setup function)
             console.log("heard!!");
             document.location = "./objectentry.html?objectId=" + model.selected;
         });
-        objEntry.events.afterSaveObjectDataSuccess.addListener(function (data, textStatus) {
+        objEntry.events.afterCreateObjectDataSuccess.addListener(function (data, textStatus) {
             recentAct.updateModel();
         });
     };

@@ -25,6 +25,7 @@ var cspace = cspace || {};
             error: function (xhr, textStatus, errorThrown) {
                 that.showSpecErrorMessage(that.options.strings.specFetchError + textStatus + that.options.strings.errorRecoverySuggestion);
                 that.locate("feedbackMessage").hide();
+                that.events.onError.fire("fetch UISpec");
             }
         });
     };
@@ -67,13 +68,11 @@ var cspace = cspace || {};
     };
     
     var makeDCErrorHandler = function (that) {
-        return function(operation/*["save", "delete", "fetch"]*/, modelPath, message){
+        return function(operation/*["create", "delete", "fetch", "update"]*/, modelPath, message){
             var msgKey = operation + "FailedMessage";
             var msg = that.options.strings[msgKey] + message;
             that.locate("feedbackMessage").text(msg).show();
-            if (operation === "save") {
-                that.events.afterSaveObjectDataError.fire();
-            }
+            that.events.onError.fire(operation);
         };
     };
 
@@ -109,11 +108,17 @@ var cspace = cspace || {};
             that.locate("feedbackMessage").hide();
         });
 
-        that.dataContext.events.onError.addListener(makeDCErrorHandler(that));
-        that.dataContext.events.afterSave.addListener(function (modelPath, oldData, newData) {
-            that.events.afterSaveObjectDataSuccess.fire(newData, that.options.strings.saveSuccessfulMessage);
-            that.locate("feedbackMessage").text(that.options.strings.saveSuccessfulMessage).show();
+        that.dataContext.events.afterCreate.addListener(function (modelPath, data) {
+            that.events.afterCreateObjectDataSuccess.fire(data, that.options.strings.createSuccessfulMessage);
+            that.locate("feedbackMessage").text(that.options.strings.createSuccessfulMessage).show();
         });
+
+        that.dataContext.events.afterUpdate.addListener(function (modelPath, data) {
+            that.events.afterUpdateObjectDataSuccess.fire(data, that.options.strings.updateSuccessfulMessage);
+            that.locate("feedbackMessage").text(that.options.strings.updateSuccessfulMessage).show();
+        });
+
+        that.dataContext.events.onError.addListener(makeDCErrorHandler(that));
     };
     
     var setupObjectEntry = function (that) {
@@ -238,8 +243,9 @@ var cspace = cspace || {};
         events: {
             modelChanged: null,
 			onSave: null,
-            afterSaveObjectDataSuccess: null,  // params: data, textStatus
-            afterSaveObjectDataError: null  // params: XMLHttpRequest, textStatus, errorThrown
+            afterCreateObjectDataSuccess: null,  // params: data, textStatus
+            afterUpdateObjectDataSuccess: null,  // params: data, textStatus
+            onError: null  // params: operation
         },
         selectors: {
             errorDialog: ".csc-error-dialog",
@@ -251,10 +257,12 @@ var cspace = cspace || {};
         strings: {
             specFetchError: "I'm sorry, an error has occurred fetching the UISpec: ",
             errorRecoverySuggestion: "Please try refreshing your browser",
-            saveSuccessfulMessage: "Object record successfully saved",
-            saveFailedMessage: "Error saving record: ",
-            deleteFailedMessage: "Error deleting record: ",
-            fetchFailedMessage: "Error retriving record: "
+            updateSuccessfulMessage: "Object Record successfully saved",
+            createSuccessfulMessage: "New Object Record successfully created",
+            updateFailedMessage: "Error saving Record: ",
+            createFailedMessage: "Error creating Record: ",
+            deleteFailedMessage: "Error deleting Record: ",
+            fetchFailedMessage: "Error retriving Record: "
         },
         templates: {
 //            header: {
