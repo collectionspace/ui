@@ -24,7 +24,7 @@ var cspace = cspace || {};
             success: callback,
             error: function (xhr, textStatus, errorThrown) {
                 that.showSpecErrorMessage(that.options.strings.specFetchError + textStatus + that.options.strings.errorRecoverySuggestion);
-                that.locate("savedMessage").hide();
+                that.locate("feedbackMessage").hide();
             }
         });
     };
@@ -66,6 +66,13 @@ var cspace = cspace || {};
         return model;
     };
     
+    var handleDataContextError = function (operation/*["save", "delete", "fetch"]*/, modelPath, message) {
+        console.log("DC Error on "+operation+": "+message);
+        var msgKey = operation + "FailedMessage"; 
+        var msg = that.options.strings[msgKey] + message;
+        that.locate("feedbackMessage").text(msg).show();
+    };
+
     var setupDataContext = function (that) {
         return function(spec, textStatus){
             that.spec = spec.spec;
@@ -77,11 +84,18 @@ var cspace = cspace || {};
 
             that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
 
-            that.dataContext.events.modelChanged.addListener(function (data, textStatus) {
-                that.updateModel(data);
-                that.locate("savedMessage").hide();
+            that.dataContext.events.modelChanged.addListener(function (newModel, oldModel, source) {
+                that.events.modelChanged.fire(newModel, oldModel, source);
+                that.refreshView();
+                that.locate("feedbackMessage").hide();
             });
-            that.model = buildEmptyModelFromSpec(that.spec);
+
+            that.dataContext.events.onError.addListener(handleDataContextError);
+            that.dataContext.events.afterSave.addListener(function () {
+                that.locate("feedbackMessage").text(that.options.strings.saveSuccessfulMessage).show();
+            });
+            
+            fluid.model.copyModel(that.model, buildEmptyModelFromSpec(that.spec));
             if (that.options.objectId) {
                 var queryParams = {};
                 queryParams[that.options.idField] = that.options.objectId;
@@ -95,11 +109,11 @@ var cspace = cspace || {};
     
     var bindEventHandlers = function (that) {
         that.events.afterSaveObjectDataSuccess.addListener(function () {
-            that.locate("savedMessage").text(that.options.strings.saveSuccessfulMessage).show();
+            that.locate("feedbackMessage").text(that.options.strings.saveSuccessfulMessage).show();
         });
         
         that.events.afterSaveObjectDataError.addListener(function (xhr, msg, error) {
-            that.locate("savedMessage").text(that.options.strings.saveFailedMessage+msg).show();
+            that.locate("feedbackMessage").text(that.options.strings.saveFailedMessage+msg).show();
         });
     };
     
@@ -139,11 +153,7 @@ var cspace = cspace || {};
         that.save = function () {
             that.events.onSave.fire(that.model);
             if (that.options.objectId) {
-                that.objectDAO.saveObjectForId(that.model,
-                    that.options.objectId,
-                    that.events.afterSaveObjectDataSuccess.fire,
-                    that.events.afterSaveObjectDataError.fire
-                );        
+                that.dataContext.update("*");
             } else {
                 that.objectDAO.saveNewObject(that.model,
                     that.events.afterSaveObjectDataSuccess.fire,
@@ -245,13 +255,15 @@ var cspace = cspace || {};
             errorMessage: ".csc-error-message",
             save: ".csc-save",
             saveSecondary: ".csc-save-bottom",
-            savedMessage: ".csc-saved-message"
+            feedbackMessage: ".csc-saved-message"
         },
         strings: {
-            specFetchError: "I'm sorry, an error has occurred fetching the Spec: ",
+            specFetchError: "I'm sorry, an error has occurred fetching the UISpec: ",
             errorRecoverySuggestion: "Please try refreshing your browser",
             saveSuccessfulMessage: "Object record successfully saved",
-            saveFailedMessage: "Error: Object record not saved: "
+            saveFailedMessage: "Error saving record: ",
+            deleteFailedMessage: "Error deleting record: ",
+            fetchFailedMessage: "Error retriving record: "
         },
         templates: {
 //            header: {

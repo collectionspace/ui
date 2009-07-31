@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jqUnit, cspace, start, stop, ok, same*/
+/*global jqUnit, jQuery, jqMock, cspace, fluid, start, stop, ok, same*/
 
 var dataContextTester = function () {
     var models = {
@@ -262,6 +262,28 @@ var dataContextTester = function () {
         jqUnit.assertDeepEq("Resulting urlFactory should have specified baseUrl", "ftp://somewhere", testContext.urlFactory.options.baseUrl);
         jqUnit.assertDeepEq("Resulting urlFactory should have default dataType", "json", testContext.urlFactory.options.dataType);
         
+    });
+    
+    dataContextTest.test("update: params to jQuery.ajax()", function () {
+        var testOptions = mapperOptions.flatObjectModel;
+        testOptions.objectId = "12345";
+        var testContext = cspace.dataContext(models.flatCollectionObject, makeDataContextOptions(testOptions));
+
+        var ajaxMock = new jqMock.Mock(jQuery, "ajax");
+        
+        // Don't know how jqMock checks functions, so just check the other parameters for now
+        var expectedAjaxParamsForFullModel = {
+            url: "./test-data/objects/12345.json",
+            data: JSON.stringify(models.flatCollectionObject),
+            type: "PUT",
+            dataType: "json"
+        };
+        ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParamsForFullModel));
+        
+        testContext.update("*");
+
+        ajaxMock.verify();
+        ajaxMock.restore();
     });
 };
 

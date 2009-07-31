@@ -87,7 +87,20 @@ var cspace = cspace || {};
         };
         
         that.update = function (modelPath) {
-            
+            // getBeanValue() doesn't treat "*" as intended, so we have to do it manually
+            var data = (modelPath === "*" ? that.model : fluid.model.getBeanValue(that.model, modelPath));
+            jQuery.ajax({
+                url: that.urlFactory.urlForModelPath(modelPath, that.model),
+                type: "PUT",
+                dataType: that.urlFactory.options.dataType,
+                data: JSON.stringify(data),
+                success: function (data, textStatus) {
+                    that.events.afterSave.fire(modelPath, data);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    that.events.onError.fire("update", modelPath, textStatus);
+                }
+            });
         };
 
         // creates or updates as necessary
@@ -204,7 +217,6 @@ var cspace = cspace || {};
             replacements: (options && options.replacements) ? options.replacements : {}
         };
 
-        
         that.map = function (model, modelPath) {
             if (!modelPath) {
                 modelPath = "*";

@@ -8,13 +8,13 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery*/
+/*global jQuery, window, cspace*/
 
 var demo = demo || {};
 
 (function ($) {
 
-     var getUrlParameter = function (name) {
+    var getUrlParameter = function (name) {
         name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
         var regexS = "[\\?&]" + name + "=([^&#]*)";
         var regex = new RegExp(regexS);
@@ -35,9 +35,12 @@ var demo = demo || {};
             oeOpts.objectId = objectId;
         }
 /*
-The CollectionObjectDAO default options are suitable for testing on a local machine.
-To configure the demo to run on a particular server, set the baseUrl option to reference
-the URL for the application layer, as shown in the following sample:
+This code configures the demo to work with the chain app running at localhost:8080
+To configure the demo to work with the app layer at a different URL, modify the various URLS and
+URL bits below appropriately.
+To configure the demo to run off your local hard drive (i.e. without a server, comment out the
+code between this comment and the ==== below.
+*/
         var localhostDao = {
             type: "cspace.collectionObjectDAO",
             options: {
@@ -54,10 +57,12 @@ the URL for the application layer, as shown in the following sample:
                 includeResourceExtension: false
             }
         };
-*/
+// ======================
 
         var objEntry = cspace.objectEntry(".csc-object-entry-container", oeOpts);
 /*
+The 'Recent Activity' functionality does not work on the local file system, so if you're testing
+locally, comment out the following code (i.e. to the end of this setup function)
 */
         var raOpts = {};
         raOpts.dao = localhostDao;
@@ -66,9 +71,9 @@ the URL for the application layer, as shown in the following sample:
         // connect up the two components to listen to each other's events
         recentAct.events.modelChanged.addListener(function (model) {
             console.log("heard!!");
-            document.location = "./objectentry.html?objectId="+model.selected;
+            document.location = "./objectentry.html?objectId=" + model.selected;
         });
-        objEntry.events.afterSaveObjectDataSuccess.addListener(function(data, textStatus){
+        objEntry.events.afterSaveObjectDataSuccess.addListener(function (data, textStatus) {
             recentAct.updateModel();
         });
     };
