@@ -28,9 +28,7 @@ var demo = demo || {};
     
     demo.setup = function () {
         var objectId = getUrlParameter("objectId");
-        var oeOpts = {
-            idField: "accessionNumber"
-        };
+        var oeOpts = {};
         if (objectId) {
             oeOpts.objectId = objectId;
         }

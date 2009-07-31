@@ -14,6 +14,19 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
 
+    // This is a temporary function, in place only until the ID service is accessible
+    // through the APP layer.
+    var newID = function (model) {
+        var id = model.accessionNumber.split(" ")[0];
+        if (id === "") {
+            id = model.objectTitle.split(" ")[0];
+        }
+        if (id === "") {
+            id = new Date().getTime();
+        }
+        return id;
+    };
+    
     // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
     // load it manually via ajax
     var fetchUISpec = function (that, callback) {
@@ -157,6 +170,7 @@ var cspace = cspace || {};
             if (that.options.objectId) {
                 that.dataContext.update("*");
             } else {
+                that.model.id = newID(that.model);    // temporary, till server returns ID
                 that.dataContext.create("*");
             }
             return false;
