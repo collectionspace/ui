@@ -1,57 +1,57 @@
 {
 	spec: {
 	    "objectTitle": {
-	        "selector": ".csc-object-title",
+	        "selector": ".csc-object-identification-object-title",
 	        "validators": [],
 	        "decorators": []
 	    },
 	    "accessionNumber": {
-	        "selector": ".csc-object-number",
+	        "selector": ".csc-object-identification-object-number",
 	        "validators": [],
 	        "decorators": []
 	    },
 	    "description": {
-	        "selector": ".csc-description",
+	        "selector": ".csc-object-identification-brief-description",
 	        "validators": [],
 	        "decorators": []
 	    },
 	    "objectName": {
-	        "selector": ".csc-object-name",
+	        "selector": ".csc-object-identification-object-name",
 	        "validators": [],
 	        "decorators": []
 	    },
 	    "distinguishingFeatures": {
-	        "selector": ".csc-features",
+	        "selector": ".csc-object-identification-distinguishing-features",
 	        "validators": [],
 	        "decorators": []
 	    },
 	    "numberOfObjects": {
-	        "selector": ".csc-num-objects",
+	        "selector": ".csc-object-identification-number-objects",
 	        "validators": [],
 	        "decorators": []
 	    },
 	    "responsibleDepartment": {
-	        "selector": ".csc-department",
+	        "selector": ".csc-object-identification-responsible-department",
 	        "validators": [],
 	        "decorators": []
 	    },
 	    "comments": {
-	        "selector": ".csc-comments",
+	        "selector": ".csc-object-identification-comments",
 	        "validators": [],
 	        "decorators": []
 	    },
 	    "dateAssociation": {
-	        "selector": ".csc-date-association",
+	        "selector": ".csc-date-information-date-association",
 	        "validators": [],
 	        "decorators": []
 	    },
 	    "datePeriod": {
-	        "selector": ".csc-date-period",
+	        "selector": ".csc-date-information-date-period",
 	        "validators": [],
 	        "decorators": []
 	    },
 	    "dateText": {
-	        "selector": ".csc-date-text",
+	        "selector": ".csc-date-information-date-text",
 	        "validators": [],
 	        "decorators": []
 	    }
