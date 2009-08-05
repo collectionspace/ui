@@ -4,12 +4,67 @@
 	        "selector": ".csc-entry-number",
 	        "validators": [],
 	        "decorators": []
+	    },
+	    "entryDate": {
+	        "selector": ".csc-entry-date",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "numObjects": {
+	        "selector": ".csc-number-of-objects",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "entryMethod": {
+	        "selector": ".csc-intake-entry-method",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "entryReasons": {
+	        "selector": ".csc-entry-reasons",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "returnDate": {
+	        "selector": ".csc-object-return-date",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "donor": {
+	        "selector": ".csc-donor",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "depositor": {
+	        "selector": ".csc-depositor",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "responsibleEntity": {
+	        "selector": ".csc-responsible-entity",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "description": {
+	        "selector": ".csc-intake-brief-description",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "entryNode": {
+	        "selector": ".csc-intake-entry-note",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "packingNote": {
+	        "selector": ".csc-intake-packing-note",
+	        "validators": [],
+	        "decorators": []
 	    }
 	},
 	modelToResourceMap: {
-        "*": "/intake/%collObjId"
+        "*": "/intake/%intakeRecordId"
     },
     replacements: {
-        "collObjId": "id"
+        "intakeRecordId": "id"
     }
 }
