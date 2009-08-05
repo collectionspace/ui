@@ -279,10 +279,10 @@ var cspace = cspace || {};
             fetchFailedMessage: "Error retriving Record: "
         },
         templates: {
-//            header: {
-//                url: "../html/ObjectEntryHeaderTemplate.html",
-//                id: "csc-header"
-//            },
+            header: {
+                url: "../html/HeaderTemplate.html",
+                id: "name-header"
+            },
             body: {
                 url: "../html/ObjectEntryTemplate.html",
                 id: "csc-object-entry-template"
