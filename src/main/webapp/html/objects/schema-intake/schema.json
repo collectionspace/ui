@@ -1,0 +1,15 @@
+{
+	spec: {
+	    "entryNumber": {
+	        "selector": ".csc-entry-number",
+	        "validators": [],
+	        "decorators": []
+	    }
+	},
+	modelToResourceMap: {
+        "*": "/intake/%collObjId"
+    },
+    replacements: {
+        "collObjId": "id"
+    }
+}
