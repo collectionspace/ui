@@ -280,7 +280,7 @@ var cspace = cspace || {};
         },
         templates: {
             header: {
-                url: "../html/HeaderTemplate.html",
+                url: "../html/header.html",
                 id: "name-header"
             },
             body: {
@@ -290,6 +290,10 @@ var cspace = cspace || {};
             rightSidebar:  {
                 url: "../html/right-sidebar.html",
                 id: "csc-right-sidebar"
+            },
+            footer: {
+                url: "../html/footer.html",
+                id: "footer"
             }
         },
         objectId: null,
