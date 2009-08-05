@@ -11,7 +11,6 @@
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
 
 		<script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
-		<script type="text/javascript" src="../js/cspace.js"></script>
 <!--
 		<script type="text/javascript" src="../infusion/1.1/lib/jquery/core/js/jquery.js"></script>
 		<script type="text/javascript" src="../infusion/1.1/lib/jquery/ui/js/ui.core.js"></script>
@@ -25,10 +24,12 @@
 		<script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidRenderer.js"></script>
 -->
 
+		<script type="text/javascript" src="../js/cspace.js"></script>
 		<script type="text/javascript" src="../js/CollectionObjectDAO.js"></script>
+		<script type="text/javascript" src="../js/DataContext.js"></script>
 		<script type="text/javascript" src="../js/RecentActivity.js"></script>
 		<script type="text/javascript" src="../js/ObjectEntry.js"></script>
-		<script type="text/javascript" src="../js/objEntrySetup.js"></script>
+		<script type="text/javascript" src="../js/objIntakeSetup.js"></script>
 	</head>
 
 	<body>
@@ -64,8 +65,8 @@
 						<div class="fl-container-left fl-force-left">
 							<div id="object-id-menu"></div>
 							<!-- this div will be replaced by the contents of the Template -->
-							<div class="csc-object-entry-container" id="csc-object-entry- template">
-								<form class="fl-container-left csc-object-entry-container" id="csc-object-entry-template">
+							<div class="csc-object-intake-container" id="csc-object-intake-template">
+								<form class="fl-container-left">
 									<!-- outer-border block -->
 									<div class="intake-outer-border">
 										<div class="csc-saved-message hidden cs-message">Save successful!</div>
@@ -698,7 +699,7 @@
 						<div class="fl-container-pivot fl-force-right">
 							<div><img src="../images/media-snapshot.png" alt="media snapshot" height=253 width=248 /></div>
 							
-							<div class="pivot-box">
+							<div class="pivot-box recently-created-container">
 								<div class="pivot-box-content csc-recent-activity">
 									<div class="pivot-box-header">
 										Recently Created Intake Records
