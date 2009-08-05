@@ -286,6 +286,10 @@ var cspace = cspace || {};
             body: {
                 url: "../html/ObjectEntryTemplate.html",
                 id: "csc-object-entry-template"
+            },
+            rightSidebar:  {
+                url: "../html/right-sidebar.html",
+                id: "csc-right-sidebar"
             }
         },
         objectId: null,
