@@ -50,7 +50,7 @@
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "entryNode": {
+	    "entryNote": {
 	        "selector": ".csc-intake-entry-note",
 	        "validators": [],
 	        "decorators": []
