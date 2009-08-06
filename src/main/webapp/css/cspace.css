@@ -62,11 +62,11 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .information-group {padding: 10px 0;}
 
 .header{font-weight: bold; font-size:14px; line-height:14px; width:100%; padding-bottom:4px; *padding-bottom:2px;} /*default header properties*/
-.header-toggle img {padding: 6px 2px 0px 4px;}
-.header-toggle-sub img {margin: 0px 2px -2px 0px;}
-.pivot-toggle img   {margin: 0px 2px -1px -3px;}
+.header-toggle img {padding: 6px 2px 0 4px;}
+.header-toggle-sub img {margin: 0 2px -2px 0px;}
+.pivot-toggle img   {margin: 0 2px -1px -3px;}
 
-.info-column     {width: 100%;}
+.info-column 	 {width: 100%;}
 .info-column1 	 {width: 100%;}
 .info-column2	 {width: 48%;} 
 .info-column2-30 {width: 29%;}
@@ -84,14 +84,14 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 
 .fl-container-left .upper-save {float:right; margin:-25px 0 0 0;}
  #all-content-intake .upper-save {float:right; margin:-25px 0 0 0;}
-.fl-container-left .object-entry-outer-border {border:none; padding: 0px 0px 10px 10px;}
-.fl-container-left .intake-outer-border {border: none; padding: 0px 0px 10px 10px;}
-.login-outer-border {border: none; padding:40px 0px 10px 0px;}
+.fl-container-left .object-entry-outer-border {border:none; padding: 0 0 10px 10px;}
+.fl-container-left .intake-outer-border {border: none; padding: 0 0 10px 10px;}
+.login-outer-border {border: none; padding:40px 0 10px 0px;}
 
 .fl-container-left  .information-group       {padding:10px 0;}
 .fl-container-left  .information-subgroup {padding:10px 0;}
-.fl-container-left  .information-group       .content 	{border:none; background-color: #E7E8E9; padding: 6px 12px 6px 12px; *padding:6px 12px 0px 12px; width:auto; display:block;}
-.fl-container-left  .information-subgroup .content 	{border:none; background-color: #D1D2D4; padding: 6px 12px 6px 12px; *padding:6px 12px 0px 12px; width:auto; display:block;}
+.fl-container-left  .information-group       .content 	{border:none; background-color: #E7E8E9; padding: 6px 12px 6px 12px; *padding:6px 12px 0 12px; width:auto; display:block;}
+.fl-container-left  .information-subgroup .content 	{border:none; background-color: #D1D2D4; padding: 6px 12px 6px 12px; *padding:6px 12px 0 12px; width:auto; display:block;}
 .fl-container-left  .information-group       .header   	{font-size:15px; line-height:15px; background-color:#B4C7D3;}
 .fl-container-left  .information-group       .sub-header {font-size:14px; line-height:14px; font-weight:bold; padding-bottom: 15px;}
 .fl-container-left  .information-subgroup .header   	{font-size:11px; line-height:11px; background-color:#E7E8E9;}
@@ -103,7 +103,7 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .object-entry .fl-container-pivot {padding-top:5px;}
 
 .fl-container-left .create-new-outer-border  {border: none; padding-left:10px; margin-right:10px;}
-.fl-container-left .create-new-outer-border .content {border: 1px solid #B5C7D3; background-color: #E7E8E9; padding: 12px 0px 12px 12px; width:auto;}
+.fl-container-left .create-new-outer-border .content {border: 1px solid #B5C7D3; background-color: #E7E8E9; padding: 12px 0 12px 12px; width:auto;}
 .fl-container-left .create-new-outer-border .header {padding:6px 0 4px 8px; width:auto; clear:both; font-size:16px; line-height:16px;}
 .fl-container-left .create-new-outer-border .information-group {padding: 15px 0 15px 0;}
 
@@ -128,7 +128,7 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .info-pair-addrow .info-value {float:left; width:100%; padding-top:1px; padding-bottom:8px; }
 .info-pair-addrow .info-value table {width:100%; border-spacing:0; background-color:#FFF; font-size:11px; line-height:11px; margin-bottom:0;}
 .info-pair-addrow .info-value thead td {background-color:#F3F3F4; color:#3B3B3C; border:1px solid #BABABB; padding: 2px 1px 1px 2px;}
-.info-pair-addrow .info-value tbody td, .info-pair-addrow .info-value tbody th {border:1px solid #BABABB; padding: 1px 0px 1px 0px; *padding: 0px;}
+.info-pair-addrow .info-value tbody td, .info-pair-addrow .info-value tbody th {border:1px solid #BABABB; padding: 1px 0 1px 0; *padding: 0;}
 .info-pair-addrow .info-value tbody td input {border:0; width:99.5%;}
 .info-pair-addrow .info-value .table-select {width:12px;}
 .info-pair-addrow .info-value .table-selected, .info-value .table-unselected {width:12px; background-position: top left; background-repeat:no-repeat; background-position:center;}
@@ -137,19 +137,19 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .info-pair-addrow .addrow {float:right; margin: -8px 0 -8px 0;}
 
 .info-pair-table {width:100%; float:left; font-size:14px; line-height:16px; margin- bottom:-5px;}
-.info-pair-table .info-label {float:left; width:100%; padding-top: 2px; padding-bottom:0px; *padding-bottom:0px; font-weight:bold; font-size:11px; color:# 0F75BC;}
+.info-pair-table .info-label {float:left; width:100%; padding-top: 2px; padding-bottom:0; *padding-bottom:0px; font-weight:bold; font-size:11px; color:# 0F75BC;}
 .info-pair-table .info-value {float:left; width:100%; padding-top:1px; padding-bottom:8px; }
 .info-pair-table .info-value table {width:100%; border-spacing:0; background-color:#FFF; font-size:11px; line-height:11px; margin-bottom:0;}
 .info-pair-table .info-value thead td {background-color:#F3F3F4; color:#3B3B3C; border:1px solid #BABABB; padding: 2px 1px 1px 2px;}
-.info-pair-table .info-value tbody td, .info-pair-addrow .info-value tbody th {border:1px solid #BABABB; padding: 1px 0px 1px 0px; *padding: 0px;}
+.info-pair-table .info-value tbody td, .info-pair-addrow .info-value tbody th {border:1px solid #BABABB; padding: 1px 0 1px 0; *padding: 0;}
 .info-pair-table .info-value tbody td input {border:0; width:99.5%;}
 
 .info-pair-date {padding-bottom:2px;}
 .info-pair-date .info-label {padding-bottom:2px;}
 .info-pair-date .info-value {padding-bottom:6px;}
 .info-pair-date .info-value table {width:auto; border-spacing:0; background-color:#FFF; font-size:11px; line-height:11px; margin-bottom:0;}
-.info-pair-date .info-value thead td {background-color:#F3F3F4; color:#3B3B3C; border:1px solid #BABABB; padding: 1px 1px 2px 2px; *padding:0 0 0px 1px;}
-.info-pair-date .info-value tbody td, .info-pair-addrow .info-value tbody th {border:1px solid #BABABB; padding: 1px 0px 1px 0px; *padding: 0px;}
+.info-pair-date .info-value thead td {background-color:#F3F3F4; color:#3B3B3C; border:1px solid #BABABB; padding: 1px 1px 2px 2px; *padding:0 0 0 1px;}
+.info-pair-date .info-value tbody td, .info-pair-addrow .info-value tbody th {border:1px solid #BABABB; padding: 1px 0 1px 0; *padding: 0;}
 .info-pair-date .info-value tbody td input {border:0; width:99.5%;}
 
 .cal {width:16px;}
@@ -189,7 +189,6 @@ textarea {overflow:auto;}
 #all-content-login a:hover   {color:#6699C8; text-decoration:none;}
 
 #login {}
-#login
 
 .gen-num-overlay {}
 .gen-num-overlay-header {padding:8px 20px; color:#fff; background-color:#9D9FA2; font-size:15px; border-bottom: 1px solid #BFDF94;}
@@ -257,9 +256,9 @@ textarea {overflow:auto;}
 .clear {clear:both; margin:0; padding:0; height:1px; overflow:hidden; visibility:hidden; display:block;}
 
 .input-buttons {width:100%; padding:1px 0 8px 0;}
-.savebutton, .cancelbutton, .viewbutton  {margin-right:8px; float:right; border-width: 0px;}
+.savebutton, .cancelbutton, .viewbutton  {margin-right:8px; float:right; border-width: 0;}
 .viewbutton {margin:0px; *margin-top:-24px; line-height:0;}
-.no-border {border-width:0px; background-color: #F5F5F6;}
+.no-border {border-width:0; background-color: #F5F5F6;}
 .no-float {float:none;}
 .disabled {color: gray; background-color:gray;}
 .radio-button.disabled {color:gray; background-color:#E7E8E9;}
