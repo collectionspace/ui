@@ -15,13 +15,13 @@
             "decorators": []
         }
     };
-    var objectEntryTest = new jqUnit.TestCase("ObjectEntry Tests");
+    var dataEntryTest = new jqUnit.TestCase("DataEntry Tests");
 
     // this tests a modal dialog - it might have to remain last in the file
-    objectEntryTest.test("showSpecErrorMessage", function () {
+    dataEntryTest.test("showSpecErrorMessage", function () {
         jqUnit.notVisible("Error dialog should not be visible to start", ".csc-error-dialog");
 
-        var objEntry = cspace.objectEntry("#main");
+        var objEntry = cspace.dataEntry("#main");
 
         jqUnit.isVisible("Error dialog should be visible", ".csc-error-dialog");
         var errorMessage = $(".csc-error-message").text();
@@ -29,7 +29,7 @@
         jqUnit.assertTrue("Error string should contain errorRecoverySuggestion", (errorMessage.indexOf(objEntry.options.strings.errorRecoverySuggestion) > -1));
     });
     
-    objectEntryTest.test("renderer.buildCutpoints", function () {
+    dataEntryTest.test("renderer.buildCutpoints", function () {
         var cutpoints = cspace.renderer.buildCutpoints(testSpec);
         jqUnit.assertEquals("There should be 2 cutpoints", 2, cutpoints.length);
         jqUnit.assertEquals("Field 'foo' should exist ", "foo", cutpoints[0].id);
@@ -38,7 +38,7 @@
         jqUnit.assertEquals("Field 'ar' should have ", ".hello .goodbye", cutpoints[1].selector);
     });
     
-    objectEntryTest.test("renderer.buildComponentTree", function () {
+    dataEntryTest.test("renderer.buildComponentTree", function () {
         var dataModel = {
             "foo": "foofer",
             "bar": "bat"

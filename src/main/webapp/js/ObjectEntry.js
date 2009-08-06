@@ -137,15 +137,15 @@ var cspace = cspace || {};
         that.dataContext.events.onError.addListener(makeDCErrorHandler(that));
     };
     
-    var setupObjectEntry = function (that) {
+    var setupDataEntry = function (that) {
         fetchUISpec(that, setupDataContext(that));
     };
 
     /**
      * Object Entry component
      */
-    cspace.objectEntry = function (container, options) {
-        var that = fluid.initView("cspace.objectEntry", container, options);
+    cspace.dataEntry = function (container, options) {
+        var that = fluid.initView("cspace.dataEntry", container, options);
         that.model = {};
         that.spec = {};
 
@@ -179,7 +179,7 @@ var cspace = cspace || {};
             return false;
         };
 
-        setupObjectEntry(that);
+        setupDataEntry(that);
         return that;
     };
     
@@ -260,7 +260,7 @@ var cspace = cspace || {};
         }    
     };
     
-    fluid.defaults("cspace.objectEntry", {
+    fluid.defaults("cspace.dataEntry", {
         dataContext: {
             type: "cspace.resourceMapperDataContext"
         },

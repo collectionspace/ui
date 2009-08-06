@@ -57,7 +57,7 @@ code between this comment and the ==== below.
         };
 // ======================
 
-        var objEntry = cspace.objectEntry(".csc-object-entry-container", oeOpts);
+        var objEntry = cspace.dataEntry(".csc-object-entry-container", oeOpts);
 /*
 The 'Recent Activity' functionality does not work on the local file system, so if you're testing
 locally, comment out the following code (i.e. to the end of this setup function)

@@ -65,7 +65,7 @@ code between this comment and the ==== below.
 */
 // ======================
 
-        var intake = cspace.objectEntry(".csc-object-intake-container", oiOpts);
+        var intake = cspace.dataEntry(".csc-object-intake-container", oiOpts);
 /*
 The 'Recent Activity' functionality does not work on the local file system, so if you're testing
 locally, comment out the following code (i.e. to the end of this setup function)
@@ -77,7 +77,7 @@ locally, comment out the following code (i.e. to the end of this setup function)
                 
                 // connect up the two components to listen to each other's events
                 recentAct.events.modelChanged.addListener(function (model) {
-                    document.location = "./objectentry.html?objectId=" + model.selected;
+                    document.location = "./intake.html?objectId=" + model.selected;
                 });
                 oe.events.afterCreateObjectDataSuccess.addListener(function (data, textStatus) {
                     recentAct.updateModel();
