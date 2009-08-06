@@ -65,21 +65,27 @@ code between this comment and the ==== below.
 */
 // ======================
 
-        var objIntake = cspace.objectEntry(".csc-object-intake-container", oiOpts);
+        var intake = cspace.objectEntry(".csc-object-intake-container", oiOpts);
 /*
 The 'Recent Activity' functionality does not work on the local file system, so if you're testing
 locally, comment out the following code (i.e. to the end of this setup function)
-        var raOpts = {};
-        raOpts.dao = localhostDao;
-        var recentAct = cspace.recentActivity(".recently-created-container", raOpts);
+        var recentActivitySetup = function (oe, dao) {
+            return function () {
+                var raOpts = {};
+                raOpts.dao = dao;
+                var recentAct = cspace.recentActivity(".recently-created-container", raOpts);
+                
+                // connect up the two components to listen to each other's events
+                recentAct.events.modelChanged.addListener(function (model) {
+                    document.location = "./objectentry.html?objectId=" + model.selected;
+                });
+                oe.events.afterCreateObjectDataSuccess.addListener(function (data, textStatus) {
+                    recentAct.updateModel();
+                });
+            };
+        };
         
-        // connect up the two components to listen to each other's events
-        recentAct.events.modelChanged.addListener(function (model) {
-            document.location = "./objectentry.html?objectId=" + model.selected;
-        });
-        objIntake.events.afterCreateObjectDataSuccess.addListener(function (data, textStatus) {
-            recentAct.updateModel();
-        });
+        intake.events.pageRendered.addListener(recentActivitySetup(intake, localhostDao));
 */
     };
     

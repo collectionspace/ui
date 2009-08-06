@@ -17,12 +17,15 @@ var cspace = cspace || {};
     // This is a temporary function, in place only until the ID service is accessible
     // through the APP layer.
     var newID = function (model) {
-        var id = model.accessionNumber.split(" ")[0];
-        if (id === "") {
+        var id = model.id;
+        if ((!id || (id === "")) && model.accessionNumber) {
+            id = model.accessionNumber.split(" ")[0];
+        }
+        if ((!id || (id === "")) && model.objectTitle) {
             id = model.objectTitle.split(" ")[0];
         }
-        if (id === "") {
-            id = new Date().getTime();
+        if (!id || (id === "")) {
+            id = new Date().getTime().toString();
         }
         return id;
     };
@@ -182,10 +185,17 @@ var cspace = cspace || {};
     
     cspace.saveId = "save";
     
-    var createTemplateRenderFunc = function (resource, key, node, model, opts) {
+    var createTemplateRenderFunc = function (that, resources, model, opts) {
         return function () {
-            var templates = fluid.parseTemplates(resource, [key], {});
-            fluid.reRender(templates, node, model, opts);
+            var templateNames = [];
+            var i = 0;
+            for (var key in resources) {
+                if (resources.hasOwnProperty(key)) {
+                    var template = fluid.parseTemplates(resources, [key], {});
+                    fluid.reRender(template, fluid.byId(resources[key].nodeId), model, opts);
+                }
+            }
+            that.events.pageRendered.fire();
         };
     };
     
@@ -234,19 +244,19 @@ var cspace = cspace || {};
             };
             var cutpoints = cspace.renderer.buildCutpoints(fullUISpec);            
             var model = cspace.renderer.buildComponentTree(fullUISpec, that.model);
+            var resources = {};
             for (var key in that.options.templates) {
                 if (that.options.templates.hasOwnProperty(key)) {
                     var templ = that.options.templates[key];
-                    var resource = {};
-                    resource[key] = {
+                    resources[key] = {
                         href: templ.url,
                         nodeId: templ.id,
                         cutpoints: cutpoints
                     };
-                    fluid.fetchResources(resource,
-                        createTemplateRenderFunc(resource, key, fluid.byId(templ.id), model, renderOptions));
                 }
             }
+            fluid.fetchResources(resources,
+                createTemplateRenderFunc(that, resources, model, renderOptions));
         }    
     };
     
@@ -259,7 +269,8 @@ var cspace = cspace || {};
 			onSave: null,
             afterCreateObjectDataSuccess: null,  // params: data, textStatus
             afterUpdateObjectDataSuccess: null,  // params: data, textStatus
-            onError: null  // params: operation
+            onError: null,  // params: operation
+            pageRendered: null
         },
         selectors: {
             errorDialog: ".csc-error-dialog",
@@ -297,7 +308,7 @@ var cspace = cspace || {};
             }
         },
         objectId: null,
-        idField: "id",
+        idField: "csid",
 
         // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
         // load it manually via ajax

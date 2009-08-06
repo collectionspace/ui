@@ -65,6 +65,6 @@
         "*": "/intake/%intakeRecordId"
     },
     replacements: {
-        "intakeRecordId": "id"
+        "intakeRecordId": "csid"
     }
 }

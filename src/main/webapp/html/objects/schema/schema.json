@@ -61,6 +61,6 @@
         "spec": "/objects/schema/schema"
     },
     replacements: {
-        "collObjId": "id"
+        "collObjId": "csid"
     }
 }
