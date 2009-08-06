@@ -29,7 +29,7 @@ var demo = demo || {};
     demo.setup = function () {
         var objectId = getUrlParameter("objectId");
         var oiOpts = {
-            uiSpecUrl: "./objects/schema-intake/schema.json",
+            uiSpecUrl: "./intake/schema/schema.json",
             templates: {
                 body: {
                     url: "../html/IntakeTemplate.html",
@@ -40,6 +40,7 @@ var demo = demo || {};
         if (objectId) {
             oiOpts.objectId = objectId;
         }
+
 /*
 This code configures the demo to work with the chain app running at localhost:8080
 To configure the demo to work with the app layer at a different URL, modify the various URLS and
