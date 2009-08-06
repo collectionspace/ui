@@ -13,66 +13,129 @@
 
 	<body>
 
-		<div class="fl-container-1050 fl-centered">
+		<div class="fl-container-1024 fl-centered">
 		
 			<!-- CSpace logo and right-side search box -->
 			<div id="name-header">
-				<img src="../images/header.png" alt="CollectionSpace" height=123 width=1050 usemap="#create new button"/>
-				<map name="create new button">
-					<area shape="rect" coords="10,11,256,54" href="http://www.collectionspace.org/current_release" alt="CollectionSpace">
-					<area shape="rect" coords="131,81,353,112" href="createnew.html" alt="Create New">
+				<div><img src="../images/header.png" alt="CollectionSpace" height=86 width=1024 usemap="#header"/></div>
+				<map name="header">
+					<area shape="rect" coords="10,11,256,50" href="http://www.collectionspace.org/current_release" alt="CollectionSpace">
+					<area shape="rect" coords="238,54,457,79" href="createnew.html" alt="Create New">
 				</map></div>
 			
-			<div id="title-bar">
-				<div class="header-name csc-object-title">Create New Records</div>
-				<div class="clear"><!-- --></div>
-			</div>
-
-			<!-- main content -->
-			<div id="all-content" class="fl-fix create-new">
-				
-				<!-- sub-main content broken down into two column containers of unequal size: left side and right (pivot) side -->
-				<div class="fl-fix fl-container-flex fl-col-mixed2">
-				
-					<!-- left side container -->
-					<div class="fl-container-content fl-force-left fl-container-left">
-						<!-- create-new block -->
-						<div class="create-new-outer-border">
-						
-							<!-- Object Record information group -->
-							<div class="fl-container-flex fl-fix information-group">
-								<!-- outer info column -->
-								<div class="info-column1">	
-									<!-- information block header -->
-									<div class="fl-container-flex header">
-										Object Entry Records
-									</div> <!-- end information block header -->
-									<!-- container content -->
-									<div class="fl-container-flex fl-fix content">
-										<!-- inner info column -->
-										<div class="info-column1 fl-force-left">
-											<div class="button">
-												<a href="objectentry.html?objectId=1984.068.0335b"><img src="../images/create-existing1.png" alt="create from existing 1" class="button" height=27 width=204 /></a></div>
-											<div class="button">
-												<a href="objectentry.html?objectId=1984.068.0338"><img src="../images/create-existing2.png" alt="create from existing 2" class="button" height=27 width=204 /></a></div>
-											<div class="button">
-												<a href="objectentry.html"><img src="../images/create-quick.png" alt="create new" class="button" height=27 width=164 /></a></div>
-											<div class="clear"><!-- --></div>	
-										</div> <!-- end inner info column -->
-										
-									</div> <!-- end container content -->
-								</div> <!-- end outer info column -->
-							</div> <!-- end information group -->
-
-						</div> <!-- end create-new -->
-					</div> <!-- end left side container -->
-					
-					<div class="clear"><!-- --></div>
-					
+			<div class="fl-container-1024-inner">
+			
+				<div id="title-bar" class="underline">
+					<div class="header-name no-float csc-object-title">Create New Records</div>
 				</div>
+					
+				<!-- main content -->
+				<div id="all-content" class="fl-fix create-new">
+					
+					<!-- sub-main content broken down into two column containers of unequal size: left side and right (pivot) side -->
+					<div class="fl-fix fl-container-flex fl-col-mixed2">
+					
+						<!-- left side container -->
+						<div class="fl-container-content fl-force-left fl-container-left">
+							<!-- create-new block -->
+							<div class="create-new-outer-border">
+							
+								<!-- Object Record information group -->
+								<div class="fl-container-flex fl-fix information-group">
+									<!-- outer info column -->
+									<div class="info-column1">	
+										<!-- information block header -->
+										<div class="fl-container-flex header">
+											Object Records
+										</div> <!-- end information block header -->
+										<!-- container content -->
+										<div class="fl-container-flex fl-fix content">
+											<!-- inner info column -->
+											<div class="info-column1 fl-force-left">
+												<a class="button create-quick-button" href="objectentry.html" title="create quick record"></a>
+												<!--<a class="button create-new-button" href="objectentry.html" title="create new record"></a>
+												<a class="button create-existing-button" href="objectentry.html" title="create record from existing"></a>
+												<a class="button create-template-button" href="objectentry.html" title="create record from template"></a>-->
+												<div class="button"><img src="../images/btnCreateNew_grey.png" alt="create new" class="button" height=23 width=96 /></div>
+												<div class="button"><img src="../images/btnCreateExisting_grey.png" alt="create new" class="button" height=23 width=155 /></div>
+												<div class="button"><img src="../images/btnCreateTemplate_grey.png" alt="create new" class="button" height=23 width=157 /></div>
+												<div class="clear"></div>
+												
+											</div> <!-- end inner info column -->
+											
+										</div> <!-- end container content -->
+									</div> <!-- end outer info column -->
+								</div> <!-- end information group -->
 
-			</div> <!-- end create new -->
+								<div class="fl-container-flex fl-fix information-group">
+									<!-- outer info column -->
+									<div class="info-column1">	
+										<!-- information block header -->
+										<div class="fl-container-flex header">
+											Procedural Records
+										</div> <!-- end information block header -->
+										<!-- container content -->
+										<div class="fl-container-flex fl-fix content">
+											<div class="info-column1 fl-force-left">
+												<div class="sub-header">Select a Procedure</div>
+												<div class="radio-buttons">
+													<span class="radio-button"><input type="radio" name="procedure" value="intake" checked="checked" /> Intake</span>
+													<span class="radio-button disabled"><input type="radio" name="procedure" value="acquisition" disabled /> Acquisition</span>
+													<span class="radio-button disabled"><input type="radio" name="procedure" value="loanin" disabled /> Loan In</span>
+													<span class="radio-button disabled"><input type="radio" name="procedure" value="loanout" disabled /> Loan Out</span>
+													<span class="radio-button disabled"><input type="radio" name="procedure" value="objectexit" disabled /> Object Exit</span>
+												
+												</div>
+												<a class="button create-quick-button" href="intake.html" title="create quick record"></a>
+												<div class="button"><img src="../images/btnCreateNew_grey.png" alt="create new" class="button" height=23 width=96 /></div>
+												<div class="button"><img src="../images/btnCreateExisting_grey.png" alt="create new" class="button" height=23 width=155 /></div>
+												<div class="button"><img src="../images/btnCreateTemplate_grey.png" alt="create new" class="button" height=23 width=157 /></div>
+												<div class="clear"></div>
+											</div> <!-- end inner info column -->
+											
+										</div> <!-- end container content -->
+									</div> <!-- end outer info column -->
+								</div> <!-- end information group -->
+								
+								<div class="fl-container-flex fl-fix information-group">
+									<!-- outer info column -->
+									<div class="info-column1">	
+										<!-- information block header -->
+										<div class="fl-container-flex header">
+											Organizational Records
+										</div> <!-- end information block header -->
+										<!-- container content -->
+										<div class="fl-container-flex fl-fix content disabled">
+											<div class="info-column1 fl-force-left">
+												<div class="sub-header">Select a Type</div>
+												<div class="radio-buttons">
+													<span class="radio-button disabled"><input type="radio" name="procedure" value="authority" disabled /> Authority</span>
+													<span class="radio-button disabled"><input type="radio" name="procedure" value="location" disabled /> Location</span>
+													<span class="radio-button disabled"><input type="radio" name="procedure" value="mediasupport" disabled /> Media Support</span>
+													<span class="radio-button disabled"><input type="radio" name="procedure" value="collection" disabled /> Collection</span>
+												</div>
+												<div class="button"><img src="../images/btnCreateQuick_grey.png" alt="create quick record" class="button" height=23 width=192 /></div>
+												<div class="button"><img src="../images/btnCreateNew_grey.png" alt="create new" class="button" height=23 width=96 /></div>
+												<div class="button"><img src="../images/btnCreateExisting_grey.png" alt="create new" class="button" height=23 width=155 /></div>
+												<div class="button"><img src="../images/btnCreateTemplate_grey.png" alt="create new" class="button" height=23 width=157 /></div>
+												<div class="clear"></div>
+											</div> <!-- end inner info column -->
+											
+										</div> <!-- end container content -->
+									</div> <!-- end outer info column -->
+								</div> <!-- end information group -->
+								
+							</div> <!-- end create-new -->
+						</div> <!-- end left side container -->
+						
+						<div class="clear"></div>
+						
+					</div>
 
+				</div> <!-- end create new -->
+
+			</div>
+			
 			<!-- footer block -->
 			<div id="footer">
 				<div class="footer-text">&copy; 2009 CollectionSpace &nbsp;&ndash;&nbsp; CollectionSpace <a href="http://wiki.collectionspace.org/display/collectionspace/Project+Roadmap+-+Incremental+Releases#ProjectRoadmap-IncrementalReleases-CollectionSpaceRelease0.2%3AHelloMars">Release 0.2</a> &nbsp;&ndash;&nbsp; <a href="http://www.collectionspace.org">About CollectionSpace</a> &nbsp;&ndash;&nbsp; <a href="http://wiki.collectionspace.org/display/collectionspace/Release+0.1+Feedback">Leave Feedback</a></div>
