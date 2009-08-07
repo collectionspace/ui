@@ -54,21 +54,14 @@ var cspace = cspace || {};
     };
     
     bindEventHandlers = function (that) {
-        that.events.afterFetchObjectsSuccess.addListener(function (activityList) {
-            // TEMPORARY: Currently, the demo doesn't properly separate the spec file from the data
-            // files - they're in the same folder, so the spec shows up in the list.
-            that.model.items = convertItemsToSelectionList(activityList.items);
-            that.model.selected = that.model.items[0];
+        that.dataContext.events.modelChanged.addListener(function (newModel, oldModel, source) {
+            fluid.model.copyModel(that.model.items, convertItemsToSelectionList(newModel.items));
             that.refreshView();
-        });
-        that.events.afterFetchObjectsError.addListener(function (xhr, msg, error) {
-            // TODO: decide on a better response to error
-            console.log("Error fetching activity list: "+error);
         });
     };
     
     setupRecentActivity = function (that) {
-        that.objectDAO = fluid.initSubcomponent(that, "dao", [fluid.COMPONENT_OPTIONS]);
+        that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model.items, fluid.COMPONENT_OPTIONS]);
         bindEventHandlers(that);
         var cutPoints = [
             {
@@ -78,7 +71,7 @@ var cspace = cspace || {};
         ];
         var tree = buildComponentTreeForSelect(that, "list");
         that.renderTemplates = fluid.selfRender(that.locate("listContainer"), tree, {cutpoints: cutPoints, debugMode: true});
-        that.objectDAO.fetchObjects(that.events.afterFetchObjectsSuccess.fire, that.events.afterFetchObjectsError.fire);
+        that.dataContext.fetch("*", {});
     };
     
     cspace.recentActivity = function (container, options) {
@@ -90,7 +83,7 @@ var cspace = cspace || {};
         
         that.updateModel = function (newModel, source) {
             if (!newModel) {
-                that.objectDAO.fetchObjects(that.events.afterFetchObjectsSuccess.fire, that.events.afterFetchObjectsError.fire);
+                that.dataContext.fetch("*", {});
                 return;
             }
             that.model.items = convertItemsToSelectionList(newModel.items);
@@ -116,12 +109,10 @@ var cspace = cspace || {};
     
     fluid.defaults ("cspace.recentActivity", {
         events: {
-            afterFetchObjectsSuccess: null,
-            afterFetchObjectsError: null,
             modelChanged: null
         },
-        dao: {
-            type: "cspace.collectionObjectDAO"
+        dataContext: {
+            type: "cspace.resourceMapperDataContext"
         },
         selectors: {
             listContainer: ".csc-recent-activity",

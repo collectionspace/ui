@@ -16,8 +16,8 @@ var cspace = cspace || {};
 
     // This is a temporary function, in place only until the ID service is accessible
     // through the APP layer.
-    var newID = function (model) {
-        var id = model.id;
+    var newID = function (model, idField) {
+        var id = model[idField];
         if ((!id || (id === "")) && model.accessionNumber) {
             id = model.accessionNumber.split(" ")[0];
         }
@@ -173,7 +173,7 @@ var cspace = cspace || {};
             if (that.options.objectId) {
                 that.dataContext.update("*");
             } else {
-                that.model.id = newID(that.model);    // temporary, till server returns ID
+                that.model[that.options.idField] = newID(that.model, that.options.idField);    // temporary, till server returns ID
                 that.dataContext.create("*");
             }
             return false;
