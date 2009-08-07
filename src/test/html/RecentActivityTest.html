@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr" id="html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>RecentActivity Test Suite</title>
+        <link rel="stylesheet" type="text/css" href="../../main/webapp/css/cspace.css" />
+    <link rel="Stylesheet" media="screen" href="../lib/qunit/css/testsuite.css" />
+	
+    <script type="text/javascript" src="../../main/webapp/infusion/CSpaceInfusion.js"></script>
+    <script type="text/javascript" src="../lib/qunit/js/testrunner.js"></script>
+    <script type="text/javascript" src="../lib/jqUnit/js/jqUnit.js"></script>
+    <script type="text/javascript" src="../lib/jqMock/js/jqMock.js"></script>
+	<script type="text/javascript" src="../../main/webapp/js/DataContext.js"></script>
+	<script type="text/javascript" src="../../main/webapp/js/RecentActivity.js"></script>
+	
+    <script type="text/javascript" src="../js/RecentActivityTest.js"></script>
+</head>
+
+<body id="body">
+    <h1 id="header">RecentActivity Test Suite</h1>
+    <h2 id="banner"></h2>
+    <h2 id="userAgent"></h2>
+
+    <ol id="tests"></ol>
+
+    <!-- Test HTML -->
+    <div id="main">
+
+    <div class="csc-error-dialog">
+        <p class="csc-error-message">This text should be replaced by the error message.</p>
+    </div>
+    
+    <div class="recently-created-container">
+        <div class="csc-recent-activity">
+    		<select class="recently-created-list csc-recent-activity-list pivot-box-content">
+    			<option value="1">object record 1</option>
+    			<option value="2">object record 2</option>
+    			<option value="3">object record 3</option>
+    		</select>
+        </div>
+    </div>
+</body>
+</html>
