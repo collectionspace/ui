@@ -1,7 +1,10 @@
 		<!-- left-side container. Contains bulk of Object Entry forms and fields -->
 		<form class="fl-container-left csc-object-entry-container">
-			<!-- outer-border block -->
-			<!--<div class="upper-save"><input type="image" src="../images/savebutton.png" alt="save button" class="savebutton csc-save" height="25" width="74"  /></div><div class="clear"></div>-->
+			<!-- Object Data Entry specific sub-menu -->
+			<div class="save-bar">
+				<div id="object-id-menu"><img src="../images/tab-bar.png" alt="related record column" height=22 width=441 /></div>
+				<div class="upper-save"><input type="image" src="../images/savebutton.png" alt="save button" class="savebutton csc-save" height="25" width="74"  /></div><div class="clear"></div>
+			</div>
 			<div class="object-entry-outer-border">
 
                 <div class="csc-saved-message hidden cs-message">Save successful!</div>
@@ -14,7 +17,6 @@
 			
 						<!-- Information-block header -->
 						<div class="fl-container-flex header">
-							<!--<span class="header-toggle"><img id="toggle-image" onclick="Toggle(this, 'toggle_object_identification_information');" src="../images/toggle-less.png" height=13 width=13 alt="toggle-less" /></span>-->
 							<span class="header-toggle"><img id="toggle-object-identification-information-img" onclick="ShowHide('#toggle-object-identification-information'); return false;" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
 							Object Identification Information
 						</div>
