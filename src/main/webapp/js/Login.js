@@ -14,20 +14,41 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 var cspace = cspace || {};
 
 (function ($, fluid) {
-
-    var sendLoginToServer = function (that) {
-        // TODO: Security - don't want to send login info as plain text
-        var loginInfo = {
-            userID: that.locate("userID").val(),
-            password: that.locate("password").val()
+	
+    var buildComponentTree = function (that) {
+        var tree = {
+            children: [{
+                ID: "news-info",
+                value: "Some text from system adninistration to inform users about stuff that is happening with Collection Space."
+            }, {
+                ID: "userid",
+                valuebinding: "userid"
+            }, {
+                ID: "password",
+                valuebinding: "password"
+            }, {
+                ID: "login-button",
+                value: "login",
+                decorators: [{
+                    type: "jQuery",
+                    func: "click",
+                    args: function () {
+                        that.events.onLogin.fire();
+                    }
+                }]
+            }]
         };
+        return tree;
+    };
         
+	var sendLoginToServer = function (that) {
+        // TODO: Security - don't want to send login info as plain text
         jQuery.ajax({
             // TODO: Specify the URL in the options, so users can provide it
             url: "http://localhost/",
             type: "POST",
             dataType: "json",
-            data: JSON.stringify(loginInfo),
+            data: JSON.stringify(that.model),
             success: that.events.loginSuccess.fire,
             error: that.events.loginError.fire
         });
@@ -38,10 +59,6 @@ var cspace = cspace || {};
     };
     
     var setupLogin = function (that) {        
-        that.locate("loginButton").click(function () {
-            that.events.onLogin.fire();
-        });
-        
         that.events.onLogin.addListener(function () {
             sendLoginToServer(that);
         });
@@ -49,6 +66,8 @@ var cspace = cspace || {};
         that.events.loginError.addListener(function (XMLHttpRequest, textStatus, errorThrown) {
             handleError(that, XMLHttpRequest, textStatus, errorThrown);
         });
+
+        that.refreshView();
     };
     
     /**
@@ -59,8 +78,19 @@ var cspace = cspace || {};
      */
     cspace.login = function (container, options) {
         var that = fluid.initView("cspace.login", container, options);
-        that.model = {};
+        that.model = {
+            userid: "",
+            password: ""
+        };
                 
+        that.refreshView = function () {
+            var opts = {
+                model: that.model,
+                autoBind: true
+            };
+            fluid.selfRender(that.container, buildComponentTree(that), opts);
+        };
+
         setupLogin(that);
         return that;
     };

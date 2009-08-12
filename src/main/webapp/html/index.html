@@ -52,7 +52,7 @@
 									<div class="login-text">
 										<div class="info-pair">
 											<div class="info-label">Current Release 0.2 Information</div>
-											<div class="info-value">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
+											<div class="info-value" rsf:id="news-info">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
 										</div>
 									</div>
 								</div>
@@ -65,14 +65,14 @@
 												<div class="csc-object-entry-container">
 													<div class="login-pair">
 														<div class="login-label">User ID</div>
-														<div class="login-element"><input type="text" class="input-alpha-login csc-user-id" name="login-name"></div>
+														<div class="login-element"><input type="text" class="input-alpha-login csc-user-id" name="login-name" rsf:id="userid"></div>
 														<div class="login-error csc-un-warning hidden">User ID does not exist</div>
 														<div class="clear"></div>
 													</div>
 													
 													<div class="login-pair">
 														<div class="login-label">Password</div>
-														<div class="login-element"><input type="password" class="input-alpha-login csc-password" name="login-pw"></div>
+														<div class="login-element"><input type="password" class="input-alpha-login csc-password" name="login-pw" rsf:id="password"></div>
 														<div class="login-error csc-pw-warning hidden">Password is incorrect</div>
 														<div class="clear"></div>
 													</div>
@@ -85,7 +85,7 @@
 													
 													<div class="login-pair">
 														<div class="login-label">&nbsp;</div>
-														<div class="login-element"><input type="image" class="csc-login-button no-border" src="../images/login-button.png" name="login-button" /></div>
+														<div class="login-element"><input rsf:id="login-button" type="image" class="csc-login-button no-border" src="../images/login-button.png" name="login-button" /></div>
 														<div class="clear"></div>
 													</div>
 													
@@ -129,7 +129,7 @@
 		
     	<script type="text/javascript">
     		jQuery(document).ready(function() {
-				var login = cspace.login(".login-forms");
+				var login = cspace.login(".login-outer-border");
 			});
     		
     	</script>
