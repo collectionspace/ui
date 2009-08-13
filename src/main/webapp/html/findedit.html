@@ -10,8 +10,25 @@
 		<link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
 		
+<!--
 		<script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
+-->
+		<script type="text/javascript" src="../infusion/1.1/lib/jquery/core/js/jquery.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/lib/jquery/ui/js/ui.core.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/lib/jquery/ui/js/ui.dialog.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/lib/json/js/json2.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/framework/core/js/Fluid.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/framework/core/js/FluidDOMUtilities.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/framework/core/js/DataBinding.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/lib/fastXmlPull/js/fastXmlPull.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidParser.js"></script>
+		<script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidRenderer.js"></script>
+
 		<script type="text/javascript" src="../js/cspace.js"></script>
+		<script type="text/javascript" src="../js/Renderer.js"></script>
+		<script type="text/javascript" src="../js/DataContext.js"></script>
+		<script type="text/javascript" src="../js/RecordList.js"></script>
+		<script type="text/javascript" src="../js/findEditSetup.js"></script>
 	</head>
 
 	<body>
@@ -44,7 +61,7 @@
 							<!-- create-new block -->
 							<div class="find-edit-outer-border">
 							
-								<div class="fl-container-flex fl-fix information-group">
+								<div class="fl-container-flex fl-fix information-group object-records-group">
 									<!-- outer info column -->
 									<div class="info-column1">	
 										<!-- information block header -->
@@ -54,6 +71,7 @@
 										</div>
 										<!-- container content -->
 										<div class="fl-container-flex fl-fix content" id="toggle-object-records">
+                                            <div class="hidden csc-error-message">This is the error message</div>
 											<!-- inner info column -->
 											<div class="info-column1 fl-force-left">
 												
@@ -73,10 +91,10 @@
 																</thead>
 																
 																<tbody>
-																	<tr>
-																		<td><a href="objectentry.html?objectId=1984.068.0335b">Catalogs. Wyanoak Publishing Company.</a></td>
-																		<td>1984.068.0335b</td>
-																		<td>10 Aug 2009 08:43</td>
+																	<tr class="csc-record-list-row">
+																		<td class="csc-object-title"><a href="objectentry.html?objectId=1984.068.0335b">Catalogs. Wyanoak Publishing Company.</a></td>
+																		<td class="csc-accession-number">1984.068.0335b</td>
+																		<td class="csc-last-edit">10 Aug 2009 08:43</td>
 																		<td>&nbsp;</td>
 																	</tr>
 																	<tr>
@@ -130,7 +148,7 @@
 									</div> <!-- end outer info column -->
 								</div> <!-- end information group -->
 
-								<div class="fl-container-flex fl-fix information-group">
+								<div class="fl-container-flex fl-fix information-group procedural-records-group">
 									<!-- outer info column -->
 									<div class="info-column1">	
 										<!-- information block header -->
@@ -140,6 +158,7 @@
 										</div>
 										<!-- container content -->
 										<div class="fl-container-flex fl-fix content" id="toggle-procedural-records">
+                                            <div class="hidden csc-error-message">This is the error message</div>
 											<!-- inner info column -->
 											<div class="info-column1 fl-force-left">
 												
@@ -150,11 +169,11 @@
 														<div class="info-value overflow-find-edit">
 															<table id="">
 																<thead>
-																	<tr>
-																		<td width=22%>Entry Number</td>
-																		<td width=10%>Type</td>
-																		<td width=45%>Brief Description</td>
-																		<td width=15%>Last Edit</td>
+																	<tr class="csc-record-list-row">
+																		<td class="csc-record-list-col-1" width=22%>Entry Number</td>
+																		<td class="csc-record-list-col-2"width=10%>Type</td>
+																		<td class="csc-record-list-col-3"width=45%>Brief Description</td>
+																		<td class="csc-record-list-col-4"width=15%>Last Edit</td>
 																		<td width=3% >&nbsp;</td>
 																	</tr>
 																</thead>
@@ -182,7 +201,7 @@
 									</div> <!-- end outer info column -->
 								</div> <!-- end information group -->
 								
-								<div class="fl-container-flex fl-fix information-group">
+								<div class="fl-container-flex fl-fix information-group organizational-records-group">
 									<!-- outer info column -->
 									<div class="info-column1">	
 										<!-- information block header -->
@@ -251,6 +270,10 @@
 				<div class="footer-text">&copy; 2009 CollectionSpace &nbsp;&ndash;&nbsp; CollectionSpace <a href="http://wiki.collectionspace.org/display/collectionspace/Project+Roadmap+-+Incremental+Releases#ProjectRoadmap-IncrementalReleases-CollectionSpaceRelease0.2%3AHelloMars">Release 0.2</a> &nbsp;&ndash;&nbsp; <a href="http://www.collectionspace.org">About CollectionSpace</a> &nbsp;&ndash;&nbsp; <a href="http://wiki.collectionspace.org/display/collectionspace/Release+0.1+Feedback">Leave Feedback</a></div>
 			</div> <!-- END footer block -->
 		</div>
+
+    	<script type="text/javascript">
+    		cspace.setupFindEdit();
+    	</script>
 
 	</body>
 </html>

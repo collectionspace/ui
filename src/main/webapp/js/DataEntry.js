@@ -46,33 +46,6 @@ var cspace = cspace || {};
         });
     };
 
-    var buildFullUISpec = function (that) {
-        var fullUISpec = fluid.copy(that.spec);
-        
-		// This makes the assumption that 'save' exists. This should be configurable.
-        fullUISpec.save = {
-            "selector": that.options.selectors.save,
-            "validators": [],
-            "decorators": [
-                {type: "jQuery",
-                    func: "click", 
-                    args: that.save
-                }
-            ]
-        };
-        fullUISpec.saveSecondary = {
-            "selector": that.options.selectors.saveSecondary,
-            "validators": [],
-            "decorators": [
-                {type: "jQuery",
-                    func: "click", 
-                    args: that.save
-                }
-            ]
-        };
-        return fullUISpec;
-    };
-    
     var buildEmptyModelFromSpec = function (spec) {
         var model = {};
         for (var key in spec) {
@@ -184,81 +157,6 @@ var cspace = cspace || {};
     };
     
     cspace.saveId = "save";
-    
-    var createTemplateRenderFunc = function (that, resources, model, opts) {
-        return function () {
-            var templateNames = [];
-            var i = 0;
-            for (var key in resources) {
-                if (resources.hasOwnProperty(key)) {
-                    var template = fluid.parseTemplates(resources, [key], {});
-                    fluid.reRender(template, fluid.byId(resources[key].nodeId), model, opts);
-                }
-            }
-            that.events.pageRendered.fire();
-        };
-    };
-    
-    cspace.renderer = {
-        buildCutpoints: function (spec) {
-            var cutpoints = [];
-            
-            var index = 0;
-            for (var key in spec) {
-                if (spec.hasOwnProperty(key)) {
-                    cutpoints[index] = {
-                        id: key,
-                        selector: spec[key].selector
-                    };
-                    index += 1;
-                }
-            }
-            return cutpoints;
-        },
-
-        buildComponentTree: function (spec, model) {
-            var tree = {children: []};
-            
-            var index = 0;
-            for (var key in spec) {
-                if (spec.hasOwnProperty(key)) {
-                    tree.children[index] = {
-                        ID: key,
-                        valuebinding: key
-                    };
-                    if (spec[key].decorators && spec[key].decorators.length > 0) {
-                        tree.children[index].decorators = spec[key].decorators;
-                    }
-                    index += 1;
-                }
-            }
-            return tree;
-        },
-
-        renderPage: function (that) {
-            var fullUISpec = buildFullUISpec(that);
-            var renderOptions = {
-                model: that.model,
-//                debugMode: true,
-                autoBind: true
-            };
-            var cutpoints = cspace.renderer.buildCutpoints(fullUISpec);            
-            var model = cspace.renderer.buildComponentTree(fullUISpec, that.model);
-            var resources = {};
-            for (var key in that.options.templates) {
-                if (that.options.templates.hasOwnProperty(key)) {
-                    var templ = that.options.templates[key];
-                    resources[key] = {
-                        href: templ.url,
-                        nodeId: templ.id,
-                        cutpoints: cutpoints
-                    };
-                }
-            }
-            fluid.fetchResources(resources,
-                createTemplateRenderFunc(that, resources, model, renderOptions));
-        }    
-    };
     
     fluid.defaults("cspace.dataEntry", {
         dataContext: {
