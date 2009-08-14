@@ -1,0 +1,10 @@
+{
+	"spec": {
+		"newsInfo": {
+			"selector": ".csc-news-info",
+			"validators": [],
+			"decorators": [],
+			"defaultText": "Some text from system adninistration to inform users about stuff that is happening with Collection Space."
+		}
+	}
+}

@@ -15,11 +15,26 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
 	
+    // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
+    // load it manually via ajax
+    var fetchUISpec = function (that, callback) {
+        jQuery.ajax({
+            url: that.options.uiSpecUrl,
+            type: "GET",
+            dataType: "json",
+            success: callback,
+            error: function (xhr, textStatus, errorThrown) {
+                console.log("Error retrieving UISpec: " + textStatus);
+            }
+        });
+    };
+    
+    // TODO: This component tree will eventually be programmatically generated from the UI Spec
     var buildComponentTree = function (that) {
         var tree = {
             children: [{
                 ID: "news-info",
-                value: "Some text from system adninistration to inform users about stuff that is happening with Collection Space."
+                valuebinding: "newsInfo"
             }, {
                 ID: "userid",
                 valuebinding: "userid"
@@ -58,6 +73,14 @@ var cspace = cspace || {};
         that.locate("unWarning").show();
     };
     
+    var createPageRenderer = function (that) {
+        return function (spec, textStatus) {
+            that.spec = spec.spec;
+            that.model.newsInfo = that.spec.newsInfo.defaultText;
+            that.refreshView();
+        };
+    };
+    
     var setupLogin = function (that) {        
         that.events.onLogin.addListener(function () {
             sendLoginToServer(that);
@@ -66,8 +89,8 @@ var cspace = cspace || {};
         that.events.loginError.addListener(function (XMLHttpRequest, textStatus, errorThrown) {
             handleError(that, XMLHttpRequest, textStatus, errorThrown);
         });
-
-        that.refreshView();
+        
+        fetchUISpec(that, createPageRenderer(that));
     };
     
     /**
@@ -80,7 +103,8 @@ var cspace = cspace || {};
         var that = fluid.initView("cspace.login", container, options);
         that.model = {
             userid: "",
-            password: ""
+            password: "",
+            newsInfo: ""
         };
                 
         that.refreshView = function () {
@@ -109,7 +133,12 @@ var cspace = cspace || {};
             loginButton: ".csc-login-button",
             unWarning: ".csc-un-warning",
             pwWarning: ".csc-pw-warning"
-        }
+        },
+        
+        // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
+        // load it manually via ajax
+        uiSpecUrl: "./login/spec/spec.json"
+        
     });
     
 })(jQuery, fluid_1_1);
