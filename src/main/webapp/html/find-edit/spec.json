@@ -1,24 +1,27 @@
  {
     "spec": {
-		"repeated": {
-	        "objectTitle": {
-	            "selector": ".csc-object-title",
-	            "validators": [],
-	            "decorators": []
-	        },
-	        "accessionNumber": {
-	            "selector": ".csc-accession-number",
-	            "validators": [],
-	            "decorators": []
-	        },
-	        "lastEdit": {
-	            "selector": ".csc-last-edit",
-	            "validators": [],
-	            "decorators": []
-	        }
+		"records": {
+			"selector": ".csc-record-list-row",
+			"repeated": {
+		        "objectTitle": {
+		            "selector": ".csc-object-title",
+		            "validators": [],
+		            "decorators": []
+		        },
+		        "accessionNumber": {
+		            "selector": ".csc-accession-number",
+		            "validators": [],
+		            "decorators": []
+		        },
+		        "lastEdit": {
+		            "selector": ".csc-last-edit",
+		            "validators": [],
+		            "decorators": []
+		        }
+			}
 		}
     },
-	modelToResourceMap: {
-        "*": "/objects",
+	"modelToResourceMap": {
+        "*": "/objects"
     }
 }

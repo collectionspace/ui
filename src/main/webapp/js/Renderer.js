@@ -14,6 +14,38 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
 
+    var addCutpointsToList = function (list, specPart) {
+        var index = list.length;
+        for (var key in specPart) {
+            list[index] = {
+                id: key,
+                selector: specPart[key].selector
+            };
+            if (key === "repeatedItems") {
+                list[index].id = "repeatedItems:";
+                addCutpointsToList(list, specPart[key].items);
+            }
+            index = list.length;
+        }
+    };
+
+    var addCutpointsToList2 = function (list, specPart) {
+        var index = list.length;
+        for (var key in specPart) {
+            if (specPart.hasOwnProperty(key)) {
+                list[index] = {
+                    id: key,
+                    selector: specPart[key].selector
+                };
+                if (specPart[key].hasOwnProperty("repeated")) {
+                    list[index].id = key+":";
+                    addCutpointsToList2(list, specPart[key].repeated);
+                }
+                index = list.length;
+            }
+        }
+    };
+
     cspace.renderer = {
         buildFullUISpec: function (that) {
             var fullUISpec = fluid.copy(that.spec);
@@ -56,23 +88,9 @@ var cspace = cspace || {};
             };
         },
         
-        addCutpointsToList: function (list, specPart) {
-            var index = list.length;
-            for (var key in specPart) {
-                list[index] = {
-                    id: key,
-                    selector: specPart[key].selector
-                };
-                if (key === "repeatedItems") {
-                    cspace.renderer.addCutpointsToList(list, specPart[key].items);
-                }
-                index = list.length;
-            }
-        },
-
         buildCutpointsFromSpec: function (spec) {
             var cutpoints = [];
-            cspace.renderer.addCutpointsToList(cutpoints, spec);
+            addCutpointsToList(cutpoints, spec);
             return cutpoints;
         },
 
@@ -81,6 +99,27 @@ var cspace = cspace || {};
             for (var i=0; i<modelPart.length; i++) {
                 children[index] = {
                     ID: "repeatedItems:",
+                    children: []
+                };
+                var j = 0;
+                for (var key in specPart) {
+                    if (specPart.hasOwnProperty(key)) {
+                        children[index].children[j] = {
+                            ID: key,
+                            valuebinding: (el?el+"."+i+"."+key:key)
+                        };
+                        j++;
+                    }
+                }
+                index++;
+            }
+        },
+        
+        addRepeatedItemsToComponentTree2: function (children, name, specPart, modelPart, el) {
+            var index = children.length;
+            for (var i=0; i<modelPart.length; i++) {
+                children[index] = {
+                    ID: name + ":",
                     children: []
                 };
                 var j = 0;
@@ -119,8 +158,36 @@ var cspace = cspace || {};
             return children;
         },
 
+        buildComponentTreeChildren2: function (specPart, modelPart, el) {
+            var children = [];
+            var index = 0;
+            for (var key in specPart) {
+                if (specPart.hasOwnProperty(key)) {
+                    var elPath = (el ? fluid.model.composePath(el, key) : key);
+                    if (specPart[key].hasOwnProperty("repeated")) {
+                        // repeated items need to be filled in based on the data, not the schema
+                        // the schema defines the fields for each row, but the data must be 
+                        // examined to fill in each row
+                        cspace.renderer.addRepeatedItemsToComponentTree2(children, key, specPart[key].repeated, modelPart[key], elPath);
+                    } else {
+                        children[index] = {
+                            ID: key,
+                            valuebinding: elPath
+                        };
+                    }                    
+                }
+                index = children.length;
+            }            
+            return children;
+        },
+
         buildComponentTree: function (spec, model) {
             var tree = {children: cspace.renderer.buildComponentTreeChildren(spec, model)};
+            return tree;
+        },
+
+        buildComponentTree2: function (spec, model) {
+            var tree = {children: cspace.renderer.buildComponentTreeChildren2(spec, model)};
             return tree;
         },
 
@@ -156,12 +223,13 @@ var cspace = cspace || {};
             };
             for (var i=0; i<model.length; i++) {
                 var child = {
-                    ID: "row:",
+                    ID: "repeatedItems:",
                     children: []
                 };
                 var j = 0;
-                for (key in model[i]) {
-                    if (model[i].hasOwnProperty(key) && spec.hasOwnProperty(key)) {
+                for (var key in model[i]) {
+//                    if (model[i].hasOwnProperty(key) && spec.hasOwnProperty(key)) {
+                    if (model[i].hasOwnProperty(key) && spec.repeatedItems.items.hasOwnProperty(key)) {
                         child.children[j] = {
                             ID: key,
                             value: model[i][key]
@@ -172,8 +240,24 @@ var cspace = cspace || {};
                 tree.children[i] = child;
             }
             return tree;
-        }
+        },
          
+        createCutpoints: function (spec) {
+            var cutpoints = [];
+            addCutpointsToList2(cutpoints, spec);
+            return cutpoints;
+        },
+
+        createComponentTree: function (spec, model) {
+            var tree = {
+                children: []
+            };
+
+            for (var i=0; i<model.length; i++) {
+                
+            }
+            return tree;
+        }
     };
 
 })(jQuery, fluid_1_1);
