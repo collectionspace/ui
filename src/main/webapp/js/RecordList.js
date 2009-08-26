@@ -113,7 +113,7 @@ var cspace = cspace || {};
         };
 
         that.refreshView = function () {
-            var tree = cspace.renderer.buildComponentTree2(that.spec, that.model);
+            var tree = cspace.renderer.buildComponentTree(that.spec, that.model);
             var cutpoints = cspace.renderer.createCutpoints(that.spec);
             fluid.selfRender(that.container, tree, {cutpoints: cutpoints, model: testModel, debugMode: true});
         };

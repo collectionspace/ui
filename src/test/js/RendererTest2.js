@@ -20,7 +20,7 @@ var rendererTester = function(){
     });
 
     rendererTest.test("Component trees", function () {
-        var tree = cspace.renderer.buildComponentTree2(testSpec.spec, testModel);
+        var tree = cspace.renderer.buildComponentTree(testSpec.spec, testModel);
         jqUnit.assertDeepEq("Component tree for UISpec with repeated items", testTree, tree);
     });
 
