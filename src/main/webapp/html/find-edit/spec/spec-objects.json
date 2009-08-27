@@ -1,27 +1,32 @@
  {
     "spec": {
-		"records": {
-			"selector": ".csc-object-record-list-row",
-			"repeated": {
-		        "objectTitle": {
-		            "selector": ".csc-object-title",
-		            "validators": [],
-		            "decorators": []
-		        },
-		        "accessionNumber": {
-		            "selector": ".csc-accession-number",
-		            "validators": [],
-		            "decorators": []
-		        },
-		        "lastEdit": {
-		            "selector": ".csc-last-edit",
-		            "validators": [],
-		            "decorators": []
-		        }
-			}
-		}
+        "records": {
+            "selector": ".csc-object-record-list-row",
+            "repeated": {
+                "objectTitle": {
+                    "selector": ".csc-object-title",
+                    "type": "link",
+					"href": "objectentry.html?objectId=%csid",
+                    "replacements": {
+                        "csid": "csid"
+                    },
+                    "validators": [],
+                    "decorators": []
+                },
+                "accessionNumber": {
+                    "selector": ".csc-accession-number",
+                    "validators": [],
+                    "decorators": []
+                },
+                "lastEdit": {
+                    "selector": ".csc-last-edit",
+                    "validators": [],
+                    "decorators": []
+                }
+            }
+        }
     },
-	"modelToResourceMap": {
+    "modelToResourceMap": {
         "*": "/find-edit/object-records"
     }
 }

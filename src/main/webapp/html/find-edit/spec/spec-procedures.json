@@ -1,32 +1,37 @@
  {
     "spec": {
-		"records": {
-			"selector": ".csc-procedural-record-list-row",
-			"repeated": {
-		        "entryNum": {
-		            "selector": ".csc-entry-number",
-		            "validators": [],
-		            "decorators": []
-		        },
-		        "type": {
-		            "selector": ".csc-type",
-		            "validators": [],
-		            "decorators": []
-		        },
-		        "description": {
-		            "selector": ".csc-description",
-		            "validators": [],
-		            "decorators": []
-		        },
-		        "lastEdit": {
-		            "selector": ".csc-last-edit",
-		            "validators": [],
-		            "decorators": []
-		        }
-			}
-		}
+        "records": {
+            "selector": ".csc-procedural-record-list-row",
+            "repeated": {
+                "entryNum": {
+                    "selector": ".csc-entry-number",
+                    "type": "link",
+					"href": "intake.html?objectId=%csid",
+                    "replacements": {
+                        "csid": "csid"
+                    },
+                    "validators": [],
+                    "decorators": []
+                },
+                "type": {
+                    "selector": ".csc-type",
+                    "validators": [],
+                    "decorators": []
+                },
+                "description": {
+                    "selector": ".csc-description",
+                    "validators": [],
+                    "decorators": []
+                },
+                "lastEdit": {
+                    "selector": ".csc-last-edit",
+                    "validators": [],
+                    "decorators": []
+                }
+            }
+        }
     },
-	"modelToResourceMap": {
+    "modelToResourceMap": {
         "*": "/find-edit/procedure-records"
     }
 }

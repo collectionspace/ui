@@ -78,6 +78,24 @@ var cspace = cspace || {};
         return cutpoints;
     };
 
+    var buildLinkComponent = function (key, modelPart, spec, i) {
+        var targetString;
+        if (spec.replacements) {
+            var reps = [];
+            for (var prop in spec.replacements) {
+                if (spec.replacements.hasOwnProperty(prop)) {
+                    reps[prop] = fluid.model.getBeanValue(modelPart[i], spec.replacements[prop]);
+                }
+            }
+            targetString = fluid.stringTemplate(spec.href, reps);
+        }
+        return {
+            ID: key,
+            target: targetString,
+            linktext: modelPart[i][key]
+        };
+    };
+
     var addRepeatedItemsToComponentTree = function (children, name, specPart, modelPart, el) {
         var index = children.length;
         for (var i = 0; i < modelPart.length; i++) {
@@ -88,10 +106,15 @@ var cspace = cspace || {};
             var j = 0;
             for (var key in specPart) {
                 if (specPart.hasOwnProperty(key)) {
-                    children[index].children[j] = {
-                        ID: key,
-                        valuebinding: (el ? el + "." + i + "." + key : key)
-                    };
+                    var spec = specPart[key];
+                    if (spec.hasOwnProperty("type") && spec.type === "link") {
+                        children[index].children[j] = buildLinkComponent(key, modelPart, spec, i);
+                    } else {
+                        children[index].children[j] = {
+                            ID: key,
+                            valuebinding: (el ? el + "." + i + "." + key : key)
+                        };
+                    }
                     j++;
                 }
             }

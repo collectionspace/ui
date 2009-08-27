@@ -1,13 +1,16 @@
 {
     "records": [{
-        "objectTitle": "Lorem ipsum",
-        "accessionNumber": "12.34.56",
+        "csid": "1984.068.0335b",
+        "objectTitle": "Sales catalogs and related materials / Catalogs",
+        "accessionNumber": "1984.068.0335b",
         "lastEdit": "2009-03-23"
     }, {
-        "objectTitle": "Dolor sit amet",
-        "accessionNumber": "12-3456",
+        "csid": "1984.068.0338",
+        "objectTitle": "Stamp albums. Famous stars series stamp album.",
+        "accessionNumber": "1984.068.0338",
         "lastEdit": "2009-06-11"
     }, {
+        "csid": "3",
         "objectTitle": "Consectetur Adipisicing Elit",
         "accessionNumber": "123.4-56",
         "lastEdit": "2008-12-06"
