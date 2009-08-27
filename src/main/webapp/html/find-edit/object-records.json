@@ -1,0 +1,15 @@
+{
+    "records": [{
+        "objectTitle": "Lorem ipsum",
+        "accessionNumber": "12.34.56",
+        "lastEdit": "2009-03-23"
+    }, {
+        "objectTitle": "Dolor sit amet",
+        "accessionNumber": "12-3456",
+        "lastEdit": "2009-06-11"
+    }, {
+        "objectTitle": "Consectetur Adipisicing Elit",
+        "accessionNumber": "123.4-56",
+        "lastEdit": "2008-12-06"
+    }]
+}

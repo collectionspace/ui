@@ -15,7 +15,8 @@ var cspace = cspace || {};
 (function ($) {
 
     cspace.setupFindEdit = function () {
-        var objRecordList = cspace.recordList(".object-records-group");
+        var objRecordList = cspace.recordList(".object-records-group", {uiSpecUrl: "./find-edit/spec/spec-objects.json"});
+        var procRecordList = cspace.recordList(".procedural-records-group", {uiSpecUrl: "./find-edit/spec/spec-procedures.json"});
     };
 
 }) (jQuery);

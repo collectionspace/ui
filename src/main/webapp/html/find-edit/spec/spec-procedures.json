@@ -1,15 +1,20 @@
  {
     "spec": {
 		"records": {
-			"selector": ".csc-record-list-row",
+			"selector": ".csc-procedural-record-list-row",
 			"repeated": {
-		        "objectTitle": {
-		            "selector": ".csc-object-title",
+		        "entryNum": {
+		            "selector": ".csc-entry-number",
 		            "validators": [],
 		            "decorators": []
 		        },
-		        "accessionNumber": {
-		            "selector": ".csc-accession-number",
+		        "type": {
+		            "selector": ".csc-type",
+		            "validators": [],
+		            "decorators": []
+		        },
+		        "description": {
+		            "selector": ".csc-description",
 		            "validators": [],
 		            "decorators": []
 		        },
@@ -22,6 +27,6 @@
 		}
     },
 	"modelToResourceMap": {
-        "*": "/objects"
+        "*": "/find-edit/procedure-records"
     }
 }

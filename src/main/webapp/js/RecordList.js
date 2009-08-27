@@ -14,41 +14,6 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
 
-    // temporary, for testing only:
-    var testModel = {
-        records: [{
-            objectTitle: "test title 1",
-            accessionNumber: "12.34.56",
-            lastEdit: "2009-03-23"
-        }, {
-            objectTitle: "test title 2",
-            accessionNumber: "12-3456",
-            lastEdit: "2009-06-11"
-        }, {
-            objectTitle: "test title 3",
-            accessionNumber: "123.4-56",
-            lastEdit: "2008-12-06"
-        }]
-    };
-    var testTree = {
-        children: [
-            {ID: "records:", children: [{ID: "objectTitle", valuebinding: "records.0.objectTitle"},
-                                        {ID: "accessionNumber", valuebinding: "records.0.accessionNumber"},
-                                        {ID: "lastEdit", valuebinding: "records.0.lastEdit"}]},
-            {ID: "records:", children: [{ID: "objectTitle", valuebinding: "records.1.objectTitle"},
-                                        {ID: "accessionNumber", valuebinding: "records.1.accessionNumber"},
-                                        {ID: "lastEdit", valuebinding: "records.1.lastEdit"}]},
-            {ID: "records:", children: [{ID: "objectTitle", valuebinding: "records.2.objectTitle"},
-                                        {ID: "accessionNumber", valuebinding: "records.2.accessionNumber"},
-                                        {ID: "lastEdit", valuebinding: "records.2.lastEdit"}]}
-        ]
-    };
-    var testCutpoints = [
-        {selector: ".csc-record-list-row", id: "records:"},
-        {selector: ".csc-object-title", id: "objectTitle"},
-        {selector: ".csc-accession-number", id: "accessionNumber"},
-        {selector: ".csc-last-edit", id: "lastEdit"}
-    ];
 
     // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
     // load it manually via ajax
@@ -59,7 +24,7 @@ var cspace = cspace || {};
             dataType: "json",
             success: callback,
             error: function (xhr, textStatus, errorThrown) {
-                that.showErrorMessage("Records temporarily unavailable");
+                that.showErrorMessage("COnfiguration information temporarily unavailable, sorry");
             }
         });
     };
@@ -73,11 +38,7 @@ var cspace = cspace || {};
 
         that.dataContext.events.onError.addListener(function (operation, modelPath, message) {
             // temporary, for testing only:
-            if (operation === "fetch") {
-                fluid.model.copyModel(that.model, testModel);
-                that.refreshView();
-                that.locate("errorMessage").hide();
-            }
+            that.showErrorMessage("Records temporarily unavailable, sorry");
         });
     };
 
@@ -115,7 +76,7 @@ var cspace = cspace || {};
         that.refreshView = function () {
             var tree = cspace.renderer.buildComponentTree(that.spec, that.model);
             var cutpoints = cspace.renderer.createCutpoints(that.spec);
-            fluid.selfRender(that.container, tree, {cutpoints: cutpoints, model: testModel, debugMode: true});
+            fluid.selfRender(that.container, tree, {cutpoints: cutpoints, model: that.model, debugMode: true});
         };
 
         setupRecordList(that);
@@ -135,7 +96,10 @@ var cspace = cspace || {};
             },
             errorMessage: ".csc-error-message"
         },
-        uiSpecUrl: "./find-edit/spec.json",
+        events: {
+            modelChanged: null
+        },
+        uiSpecUrl: "./find-edit/spec/spec.json",
         template: {
             url: "list.html",
             id: "list"

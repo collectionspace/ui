@@ -1,0 +1,27 @@
+ {
+    "spec": {
+		"records": {
+			"selector": ".csc-object-record-list-row",
+			"repeated": {
+		        "objectTitle": {
+		            "selector": ".csc-object-title",
+		            "validators": [],
+		            "decorators": []
+		        },
+		        "accessionNumber": {
+		            "selector": ".csc-accession-number",
+		            "validators": [],
+		            "decorators": []
+		        },
+		        "lastEdit": {
+		            "selector": ".csc-last-edit",
+		            "validators": [],
+		            "decorators": []
+		        }
+			}
+		}
+    },
+	"modelToResourceMap": {
+        "*": "/find-edit/object-records"
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "records": [{
+        "entryNum": "123",
+        "type": "intake",
+        "description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        "lastEdit": "2009-08-29"
+    }, {
+        "entryNum": "8476",
+        "type": "intake",
+        "description": "Ut enim ad minim veniam,",
+        "lastEdit": "2008-12-06"
+    }, {
+        "entryNum": "177.43a",
+        "type": "aquisition",
+        "description": "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur",
+        "lastEdit": "2008-09-24"
+    }]
+}
