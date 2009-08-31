@@ -215,9 +215,10 @@ var cspace = cspace || {};
             type: "cspace.dataContext.staticResourceMapper"
         },
         protocol: "",
-        baseUrl: "./",
+        baseUrl: (document.location.protocol === "file:") ? "./" : "../../chain/",
         dataType: "json",
-        includeResourceExtension: (document.location.protocol === "file:") ? true : false
+        includeResourceExtension: (document.location.protocol === "file:") ? true : false,
+        testMode: (document.location.protocol === "file:") ? true : false
     });
     
     /**
