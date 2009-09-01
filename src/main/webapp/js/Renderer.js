@@ -14,14 +14,14 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var createTemplateRenderFunc = function (that, resources, model, opts) {
+    var createTemplateRenderFunc = function (that, resources, tree, opts) {
         return function () {
             var templateNames = [];
             var i = 0;
             for (var key in resources) {
                 if (resources.hasOwnProperty(key)) {
                     var template = fluid.parseTemplates(resources, [key], {});
-                    fluid.reRender(template, fluid.byId(resources[key].nodeId), model, opts);
+                    fluid.reRender(template, fluid.byId(resources[key].nodeId), tree, opts);
                 }
             }
             that.events.pageRendered.fire();
@@ -115,6 +115,9 @@ var cspace = cspace || {};
                             valuebinding: (el ? el + "." + i + "." + key : key)
                         };
                     }
+                    if (spec.decorators && spec.decorators.length > 0) {
+                        children[index].children[j].decorators = spec.decorators;
+                    }
                     j++;
                 }
             }
@@ -138,7 +141,10 @@ var cspace = cspace || {};
                         ID: key,
                         valuebinding: elPath
                     };
-                }                    
+                    if (specPart[key].decorators && specPart[key].decorators.length > 0) {
+                        children[index].decorators = specPart[key].decorators;
+                    }
+                }
                 index = children.length;
             }
         }            
@@ -159,7 +165,7 @@ var cspace = cspace || {};
                 autoBind: true
             };
             var cutpoints = buildCutpointsFromSpec(fullUISpec);            
-            var model = cspace.renderer.buildComponentTree(fullUISpec, that.model);
+            var tree = cspace.renderer.buildComponentTree(fullUISpec, that.model);
             var resources = {};
             for (var key in that.options.templates) {
                 if (that.options.templates.hasOwnProperty(key)) {
@@ -172,7 +178,7 @@ var cspace = cspace || {};
                 }
             }
             fluid.fetchResources(resources,
-                createTemplateRenderFunc(that, resources, model, renderOptions));
+                createTemplateRenderFunc(that, resources, tree, renderOptions));
         },
         
         createCutpoints: function (spec) {
