@@ -1,21 +1,27 @@
 {
     "records": [{
-        "csid": "12.34.56",
-        "entryNum": "123",
+        "csid": "1251813637913",
+        "entryNum": "IN2004.002",
         "type": "intake",
-        "description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        "description": "Licensed merchandise figurines from The Nightmare Before Christmas and Beetlejuice",
         "lastEdit": "2009-08-29"
     }, {
-        "csid": "5",
-        "entryNum": "8476",
+        "csid": "1251815798739",
+        "entryNum": "2007.4-a",
         "type": "intake",
-        "description": "Ut enim ad minim veniam,",
+        "description": "Pickled herring from \"Immer nie am Meer\"",
+        "lastEdit": "2007-09-17"
+    }, {
+        "csid": "1251814260949",
+        "entryNum": "IN2009.001",
+        "type": "intake",
+        "description": "Small metal flower, fashioned from scraps",
         "lastEdit": "2008-12-06"
     }, {
-        "csid": "6",
-        "entryNum": "177.43a",
-        "type": "aquisition",
-        "description": "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur",
-        "lastEdit": "2008-09-24"
+        "csid": "1251814350763",
+        "entryNum": "IN2009.002",
+        "type": "intake",
+        "description": "GERTY",
+        "lastEdit": "2009-08-29"
     }]
 }
