@@ -26,10 +26,35 @@ var demo = demo || {};
         }
     };
     
+    setupTestDataContext = function () {
+        return {
+            type: "cspace.dataContext",
+            options: {
+                urlFactory: {
+                    type: "cspace.dataContext.testUrlFactory",
+                    options: {
+                        resourceMapper: {
+                            type: "cspace.dataContext.staticResourceMapper",
+                            options: {
+                            	modelToResourceMap: {
+                                    "*": "data/intake/%recordId",
+                                    "spec": "schemas/intake/schema"
+                                },
+                                replacements: {
+                                    "recordId": "csid"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+    };
+
     demo.setup = function () {
         var objectId = getUrlParameter("objectId");
         var oiOpts = {
-            uiSpecUrl: "./intake/schema/schema.json",
+            uiSpecUrl: "./schemas/intake/schema.json",
             templates: {
                 body: {
                     url: "../html/IntakeTemplate.html",
@@ -39,6 +64,9 @@ var demo = demo || {};
         };
         if (objectId) {
             oiOpts.objectId = objectId;
+        }
+        if (document.location.protocol === "file:") {
+            oiOpts.dataContext = setupTestDataContext();
         }
         var intake = cspace.dataEntry(".csc-object-intake-container", oiOpts);
 

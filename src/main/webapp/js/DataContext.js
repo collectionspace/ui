@@ -209,18 +209,45 @@ var cspace = cspace || {};
         
         return that;    
     };
-    
+
+    cspace.dataContext.testUrlFactory = function (options) {
+        var that = {};
+        fluid.mergeComponentOptions(that, "cspace.dataContext.testUrlFactory", options);
+        that.resourceMapper = fluid.initSubcomponent(that, "resourceMapper", [fluid.COMPONENT_OPTIONS]);
+
+        that.urlForModelPath = function (modelPath, model) {
+            var resource = that.resourceMapper.map(model, modelPath);
+            return that.options.protocol + that.options.baseUrl + resource + ".json";
+        };
+
+        return that;
+    };
+
     fluid.defaults("cspace.dataContext.urlFactory", {
         resourceMapper: {
             type: "cspace.dataContext.staticResourceMapper"
         },
         protocol: "",
-        baseUrl: (document.location.protocol === "file:") ? "./" : "../../chain/",
+        baseUrl: "../../chain/",
         dataType: "json",
-        includeResourceExtension: (document.location.protocol === "file:") ? true : false,
-        testMode: (document.location.protocol === "file:") ? true : false
+        includeResourceExtension: false
     });
-    
+
+    fluid.defaults("cspace.dataContext.testUrlFactory", {
+        resourceMapper: {
+            type: "cspace.dataContext.staticResourceMapper",
+            options: {
+                modelToResourceMap: {
+                    "*": "files"
+                }
+            }
+        },
+        protocol: "",
+        baseUrl: "./",
+        dataType: "json",
+        includeResourceExtension: true
+    });
+
     /**
      * The StaticResourceMapper is the default strategy for mapping model paths to resource-oriented URLs.
      * 

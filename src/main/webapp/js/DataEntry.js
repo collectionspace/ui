@@ -210,6 +210,6 @@ var cspace = cspace || {};
 
         // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
         // load it manually via ajax
-        uiSpecUrl: "./objects/schema/schema.json"
+        uiSpecUrl: "./schemas/collection-object/schema.json"
     });
 })(jQuery, fluid_1_1);

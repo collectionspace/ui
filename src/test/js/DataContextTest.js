@@ -309,6 +309,50 @@ var dataContextTester = function () {
         ajaxMock.verify();
         ajaxMock.restore();
     });
+    
+    dataContextTest.test("testUrlFactory", function () {
+        var tuf = cspace.dataContext.testUrlFactory();
+        var result = tuf.urlForModelPath("*", {});
+        jqUnit.assertEquals("Default URL for \"*\"", "./files.json", result);
+
+        tuf = cspace.dataContext.testUrlFactory({
+            resourceMapper: {
+                type: "cspace.dataContext.staticResourceMapper",
+                options: {
+                	modelToResourceMap: {
+                        "*": "data/collection-object/%collObjId",
+                        "spec": "schemas/collection-object/schema"
+                    },
+                    replacements: {
+                        "collObjId": "csid"
+                    }
+                }
+            }
+        });
+        result = tuf.urlForModelPath("spec", {});
+        jqUnit.assertEquals("Object URL for \"spec\"", "./schemas/collection-object/schema.json", result);
+        result = tuf.urlForModelPath("*", {csid: "12345"});
+        jqUnit.assertEquals("Object URL for \"*\"", "./data/collection-object/12345.json", result);
+
+        tuf = cspace.dataContext.testUrlFactory({
+            resourceMapper: {
+                type: "cspace.dataContext.staticResourceMapper",
+                options: {
+                	modelToResourceMap: {
+                        "*": "data/intake/%id",
+                        "spec": "schemas/intake/schema"
+                    },
+                    replacements: {
+                        "id": "csid"
+                    }
+                }
+            }
+        });
+        result = tuf.urlForModelPath("spec", {});
+        jqUnit.assertEquals("Object URL for \"spec\"", "./schemas/intake/schema.json", result);
+        result = tuf.urlForModelPath("*", {csid: "54321"});
+        jqUnit.assertEquals("Object URL for \"*\"", "./data/intake/54321.json", result);
+    });
 };
 
 (function () {

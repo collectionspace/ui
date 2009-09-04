@@ -26,11 +26,39 @@ var demo = demo || {};
         }
     };
     
+    setupTestDataContext = function () {
+        return {
+            type: "cspace.dataContext",
+            options: {
+                urlFactory: {
+                    type: "cspace.dataContext.testUrlFactory",
+                    options: {
+                        resourceMapper: {
+                            type: "cspace.dataContext.staticResourceMapper",
+                            options: {
+                            	modelToResourceMap: {
+                                    "*": "data/collection-object/%collObjId",
+                                    "spec": "schemas/collection-object/schema"
+                                },
+                                replacements: {
+                                    "collObjId": "csid"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+    };
+
     demo.setup = function () {
         var objectId = getUrlParameter("objectId");
         var oeOpts = {};
         if (objectId) {
             oeOpts.objectId = objectId;
+        }
+        if (document.location.protocol === "file:") {
+            oeOpts.dataContext = setupTestDataContext();
         }
         var objEntry = cspace.dataEntry(".csc-object-entry-container", oeOpts);
 
