@@ -1,6 +1,8 @@
- {
+ // CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
+ // an array of IDs. Until this is changed, reduce the UISpec to include only the one field
+{
     "spec": {
-        "records": {
+        "items": {
             "selector": ".csc-procedural-record-list-row",
             "repeated": {
                 "entryNum": {
@@ -13,25 +15,25 @@
                     "validators": [],
                     "decorators": []
                 },
-                "type": {
-                    "selector": ".csc-type",
-                    "validators": [],
-                    "decorators": []
-                },
-                "description": {
-                    "selector": ".csc-description",
-                    "validators": [],
-                    "decorators": []
-                },
-                "lastEdit": {
-                    "selector": ".csc-last-edit",
-                    "validators": [],
-                    "decorators": []
-                }
+//                "type": {
+//                    "selector": ".csc-type",
+//                    "validators": [],
+//                    "decorators": []
+//                },
+//                "description": {
+//                    "selector": ".csc-description",
+//                    "validators": [],
+//                    "decorators": []
+//                },
+//                "lastEdit": {
+//                    "selector": ".csc-last-edit",
+//                    "validators": [],
+//                    "decorators": []
+//                }
             }
         }
     },
     "modelToResourceMap": {
-        "*": "/find-edit/procedure-records"
+        "*": "/intake/"
     }
 }

@@ -14,9 +14,39 @@ var cspace = cspace || {};
 
 (function ($) {
 
+    setupTestDataContext = function (recordType) {
+        return {
+            type: "cspace.dataContext",
+            options: {
+                urlFactory: {
+                    type: "cspace.dataContext.testUrlFactory",
+                    options: {
+                        resourceMapper: {
+                            type: "cspace.dataContext.staticResourceMapper",
+                            options: {
+                            	modelToResourceMap: {
+                                    "*": "find-edit/" + recordType + "-records"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+    };
+
     cspace.setupFindEdit = function () {
-        var objRecordList = cspace.recordList(".object-records-group", {uiSpecUrl: "./find-edit/spec/spec-objects.json"});
-        var procRecordList = cspace.recordList(".procedural-records-group", {uiSpecUrl: "./find-edit/spec/spec-procedures.json"});
+        var orOpts = {uiSpecUrl: "./find-edit/spec/spec-objects.json"};
+        if (document.location.protocol === "file:") {
+            orOpts.dataContext = setupTestDataContext("object");
+        }
+        var objRecordList = cspace.recordList(".object-records-group", orOpts);
+
+        var prOpts = {uiSpecUrl: "./find-edit/spec/spec-procedures.json"};
+        if (document.location.protocol === "file:") {
+            prOpts.dataContext = setupTestDataContext("procedure");
+        }
+        var procRecordList = cspace.recordList(".procedural-records-group", prOpts);
     };
 
 }) (jQuery);

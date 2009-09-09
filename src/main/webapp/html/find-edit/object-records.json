@@ -1,18 +1,31 @@
+ // CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
+ // an array of IDs. Until this is changed, the test data will reflect what the server would produce
+
+//{
+//    "records": [{
+//        "csid": "1984.068.0335b",
+//        "objectTitle": "Sales catalogs and related materials / Catalogs",
+//        "accessionNumber": "1984.068.0335b",
+//        "lastEdit": "2009-03-23"
+//    }, {
+//        "csid": "1984.068.0338",
+//        "objectTitle": "Stamp albums. Famous stars series stamp album.",
+//        "accessionNumber": "1984.068.0338",
+//        "lastEdit": "2009-06-11"
+//    }, {
+//        "csid": "2005.018.1383",
+//        "objectTitle": "Souvenir books. Molly O' Play Book.",
+//        "accessionNumber": "2005.018.1383",
+//        "lastEdit": "2008-12-06"
+//    }]
+//}
+
+
 {
-    "records": [{
-        "csid": "1984.068.0335b",
-        "objectTitle": "Sales catalogs and related materials / Catalogs",
-        "accessionNumber": "1984.068.0335b",
-        "lastEdit": "2009-03-23"
-    }, {
-        "csid": "1984.068.0338",
-        "objectTitle": "Stamp albums. Famous stars series stamp album.",
-        "accessionNumber": "1984.068.0338",
-        "lastEdit": "2009-06-11"
-    }, {
-        "csid": "2005.018.1383",
-        "objectTitle": "Souvenir books. Molly O' Play Book.",
-        "accessionNumber": "2005.018.1383",
-        "lastEdit": "2008-12-06"
-    }]
+    "items": [
+        "1984.068.0335b",
+        "1984.068.0338",
+        "2005.018.1383",
+        "2009.09.08-1"
+    ]
 }

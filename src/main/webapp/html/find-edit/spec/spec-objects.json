@@ -1,10 +1,14 @@
+ // CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
+ // an array of IDs. Until this is changed, reduce the UISpec to include only the one field
  {
     "spec": {
-        "records": {
+        "items": {
             "selector": ".csc-object-record-list-row",
             "repeated": {
-                "objectTitle": {
-                    "selector": ".csc-object-title",
+//                "objectTitle": {
+//                    "selector": ".csc-object-title",
+                "accessionNumber": {
+                    "selector": ".csc-accession-number",
                     "type": "link",
 					"href": "objectentry.html?objectId=%csid",
                     "replacements": {
@@ -12,21 +16,21 @@
                     },
                     "validators": [],
                     "decorators": []
-                },
-                "accessionNumber": {
-                    "selector": ".csc-accession-number",
-                    "validators": [],
-                    "decorators": []
-                },
-                "lastEdit": {
-                    "selector": ".csc-last-edit",
-                    "validators": [],
-                    "decorators": []
+//                },
+//                "accessionNumber": {
+//                    "selector": ".csc-accession-number",
+//                    "validators": [],
+//                    "decorators": []
+//                },
+//                "lastEdit": {
+//                    "selector": ".csc-last-edit",
+//                    "validators": [],
+//                    "decorators": []
                 }
             }
         }
     },
     "modelToResourceMap": {
-        "*": "/find-edit/object-records"
+        "*": "/objects/"
     }
 }
