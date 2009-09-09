@@ -266,7 +266,7 @@ var dataContextTester = function () {
     
     dataContextTest.test("update: params to jQuery.ajax()", function () {
         var testOptions = mapperOptions.flatObjectModel;
-        testOptions.objectId = "12345";
+        testOptions.csid = "12345";
         var testContext = cspace.dataContext(models.flatCollectionObject, makeDataContextOptions(testOptions));
 
         var ajaxMock = new jqMock.Mock(jQuery, "ajax");
@@ -288,7 +288,7 @@ var dataContextTester = function () {
 
     dataContextTest.test("create: params to jQuery.ajax()", function () {
         var testOptions = mapperOptions.flatObjectModel;
-        testOptions.objectId = "allNewId";
+        testOptions.csid = "allNewId";
         var testModel = models.flatCollectionObject;
         testModel.resourceId = "allNewId";
         var testContext = cspace.dataContext(testModel, makeDataContextOptions(testOptions));

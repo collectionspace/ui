@@ -15,10 +15,10 @@ var demo = demo || {};
 (function ($) {
 
     demo.setup = function () {
-        var objectId = cspace.util.getUrlParameter("objectId");
+        var csid = cspace.util.getUrlParameter("csid");
         var oeOpts = {};
-        if (objectId) {
-            oeOpts.objectId = objectId;
+        if (csid) {
+            oeOpts.csid = csid;
         }
         if (document.location.protocol === "file:") {
             oeOpts.dataContext = cspace.util.setupTestDataContext("collection-object");

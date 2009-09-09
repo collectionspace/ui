@@ -79,9 +79,9 @@ var cspace = cspace || {};
             bindEventHandlers(that);
             
             fluid.model.copyModel(that.model, buildEmptyModelFromSpec(that.spec));
-            if (that.options.objectId) {
+            if (that.options.csid) {
                 var queryParams = {};
-                queryParams[that.options.idField] = that.options.objectId;
+                queryParams[that.options.idField] = that.options.csid;
                 that.dataContext.fetch("*", queryParams);
             }
             else {
@@ -143,7 +143,7 @@ var cspace = cspace || {};
 
         that.save = function () {
             that.events.onSave.fire(that.model);
-            if (that.options.objectId) {
+            if (that.options.csid) {
                 that.dataContext.update("*");
             } else {
                 that.model[that.options.idField] = newID(that.model, that.options.idField);    // temporary, till server returns ID
@@ -205,7 +205,7 @@ var cspace = cspace || {};
                 id: "footer"
             }
         },
-        objectId: null,
+        csid: null,
         idField: "csid",
 
         // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,

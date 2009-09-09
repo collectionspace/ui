@@ -15,7 +15,7 @@ var demo = demo || {};
 (function ($) {
 
     demo.setup = function () {
-        var objectId = cspace.util.getUrlParameter("objectId");
+        var csid = cspace.util.getUrlParameter("csid");
         var oiOpts = {
             uiSpecUrl: "./schemas/intake/schema.json",
             templates: {
@@ -25,8 +25,8 @@ var demo = demo || {};
                 }
             }
         };
-        if (objectId) {
-            oiOpts.objectId = objectId;
+        if (csid) {
+            oiOpts.csid = csid;
         }
         if (document.location.protocol === "file:") {
             oiOpts.dataContext = cspace.util.setupTestDataContext("intake");

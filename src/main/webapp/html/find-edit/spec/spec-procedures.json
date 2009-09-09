@@ -8,7 +8,7 @@
                 "entryNum": {
                     "selector": ".csc-entry-number",
                     "type": "link",
-					"href": "intake.html?objectId=%csid",
+					"href": "intake.html?csid=%csid",
                     "replacements": {
                         "csid": "csid"
                     },
