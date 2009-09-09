@@ -32,32 +32,6 @@ var demo = demo || {};
             oiOpts.dataContext = cspace.util.setupTestDataContext("intake");
         }
         var intake = cspace.dataEntry(".csc-object-intake-container", oiOpts);
-
-        var initRecentActivity = function (oe) {
-            return function () {
-                var raOpts = {
-                    dataContext: {
-                        type: "cspace.resourceMapperDataContext",
-                        options: {
-                            modelToResourceMap: {
-                                "*": "/intake"
-                            }
-                        }
-                    }
-                };
-                var recentAct = cspace.recentActivity(".recently-created-container", raOpts);
-                
-                // connect up the two components to listen to each other's events
-                recentAct.events.modelChanged.addListener(function (model) {
-                    document.location = "./intake.html?objectId=" + model.selected;
-                });
-                oe.events.afterCreateObjectDataSuccess.addListener(function (data, textStatus) {
-                    recentAct.updateModel();
-                });
-            };
-        };
-        
-        intake.events.pageRendered.addListener(initRecentActivity(intake));
     };
     
 })(jQuery);

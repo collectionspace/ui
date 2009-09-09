@@ -24,32 +24,6 @@ var demo = demo || {};
             oeOpts.dataContext = cspace.util.setupTestDataContext("collection-object");
         }
         var objEntry = cspace.dataEntry(".csc-object-entry-container", oeOpts);
-
-        var initRecentActivity = function (oe) {
-            return function () {
-                var raOpts = {
-                    dataContext: {
-                        type: "cspace.resourceMapperDataContext",
-                        options: {
-                            modelToResourceMap: {
-                                "*": "/objects"
-                            }
-                        }
-                    }
-                };
-                var recentAct = cspace.recentActivity(".recently-created-container", raOpts);
-                
-                // connect up the two components to listen to each other's events
-                recentAct.events.modelChanged.addListener(function (model) {
-                    document.location = "./objectentry.html?objectId=" + model.selected;
-                });
-                oe.events.afterCreateObjectDataSuccess.addListener(function (data, textStatus) {
-                    recentAct.updateModel();
-                });
-            };
-        };
-        
-        objEntry.events.pageRendered.addListener(initRecentActivity(objEntry));
     };
     
 })(jQuery);
