@@ -14,45 +14,8 @@ var demo = demo || {};
 
 (function ($) {
 
-    var getUrlParameter = function (name) {
-        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-        var regexS = "[\\?&]" + name + "=([^&#]*)";
-        var regex = new RegExp(regexS);
-        var results = regex.exec(window.location.href);
-        if (results === null) {
-            return "";
-        } else {
-            return results[1];
-        }
-    };
-    
-    setupTestDataContext = function () {
-        return {
-            type: "cspace.dataContext",
-            options: {
-                urlFactory: {
-                    type: "cspace.dataContext.testUrlFactory",
-                    options: {
-                        resourceMapper: {
-                            type: "cspace.dataContext.staticResourceMapper",
-                            options: {
-                            	modelToResourceMap: {
-                                    "*": "data/intake/%recordId",
-                                    "spec": "schemas/intake/schema"
-                                },
-                                replacements: {
-                                    "recordId": "csid"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        };
-    };
-
     demo.setup = function () {
-        var objectId = getUrlParameter("objectId");
+        var objectId = cspace.util.getUrlParameter("objectId");
         var oiOpts = {
             uiSpecUrl: "./schemas/intake/schema.json",
             templates: {
@@ -66,7 +29,7 @@ var demo = demo || {};
             oiOpts.objectId = objectId;
         }
         if (document.location.protocol === "file:") {
-            oiOpts.dataContext = setupTestDataContext();
+            oiOpts.dataContext = cspace.util.setupTestDataContext("intake");
         }
         var intake = cspace.dataEntry(".csc-object-intake-container", oiOpts);
 
