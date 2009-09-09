@@ -9,23 +9,6 @@
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-layout.css" />
 		<link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
-
-		<script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
-<!--
-		<script type="text/javascript" src="../infusion/1.1/lib/jquery/core/js/jquery.js"></script>
-		<script type="text/javascript" src="../infusion/1.1/lib/jquery/ui/js/ui.core.js"></script>
-		<script type="text/javascript" src="../infusion/1.1/lib/jquery/ui/js/ui.dialog.js"></script>
-		<script type="text/javascript" src="../infusion/1.1/lib/json/js/json2.js"></script>
-		<script type="text/javascript" src="../infusion/1.1/framework/core/js/Fluid.js"></script>
-		<script type="text/javascript" src="../infusion/1.1/framework/core/js/FluidDOMUtilities.js"></script>
-		<script type="text/javascript" src="../infusion/1.1/framework/core/js/DataBinding.js"></script>
-		<script type="text/javascript" src="../infusion/1.1/lib/fastXmlPull/js/fastXmlPull.js"></script>
-		<script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidParser.js"></script>
-		<script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidRenderer.js"></script>
--->
-
-		<script type="text/javascript" src="../js/Login.js"></script>
-
 	</head>
 
 	<body>
@@ -36,79 +19,76 @@
 			<div id="name-header-login"><img src="../images/logo-large.jpg" alt="CollectionSpace logo" height=60 width=350/></div>
 			
 			<!-- main content -->
-			<div id="all-content-login" class="fl-fix object-entry">
+			<div id="all-content-login" class="fl-fix">
 				
 				<!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
 				<div class="fl-fix fl-container-flex fl-col-mixed2">			
 						
 					<!-- this div will be replaced by the contents of the Template -->
-					<div class="csc-object-entry- container" id="csc-object-entry- template">
-						<!-- outer-border block -->
-						<div class="login-outer-border">
-							<div class="csc-saved-message hidden cs-message">Save successful!</div>
-							
-							<div class="fl-container-flex fl-fix" id="login">	
-								<div class="info-column2-50 fl-force-left">
-									<div class="login-text">
-										<div class="info-pair">
-											<div class="info-label">Current Release 0.2 Information</div>
-											<div class="info-value csc-news-info" rsf:id="news-info"></div>
-										</div>
-									</div>
-								</div>
-									
-								<div class="info-column2-50 fl-force-right">
-									<div class="login-forms">
-										<div class="info-pair">
-											<div class="info-label">Log into CollectionSpace</div>
-											<div class="info-value">
-												<div class="csc-object-entry-container">
-													<div class="login-pair">
-														<div class="login-label">User ID</div>
-														<div class="login-element"><input type="text" class="input-alpha-login csc-user-id" name="login-name" rsf:id="userid"></div>
-														<div class="login-error csc-un-warning hidden">User ID does not exist</div>
-														<div class="clear"></div>
-													</div>
-													
-													<div class="login-pair">
-														<div class="login-label">Password</div>
-														<div class="login-element"><input type="password" class="input-alpha-login csc-password" name="login-pw" rsf:id="password"></div>
-														<div class="login-error csc-pw-warning hidden">Password is incorrect</div>
-														<div class="clear"></div>
-													</div>
-													
-													<div class="login-pair">
-														<div class="login-label">&nbsp;</div>
-														<div class="login-element"><input type="checkbox" class="no-border" name="remember-me" value="remember-me" /> Remember me</div>
-														<div class="clear"></div>
-													</div>
-													
-													<div class="login-pair">
-														<div class="login-label">&nbsp;</div>
-														<div class="login-element"><input rsf:id="login-button" type="image" class="csc-login-button no-border" src="../images/login-button.png" name="login-button" /></div>
-														<div class="clear"></div>
-													</div>
-													
-													<div class="login-pair">
-														<div class="login-label">&nbsp;</div>
-														<div class="login-element"><a href="">Forgot ID or Password?</a></div>
-														<div class="clear"></div>
-													</div>
-													
-												</div>												
-											</div>
-										</div>
-									</div>
-								</div>
+					<div>
 
-								<div class="clear"></div>
-							</div>	
-
-							<div class="csc-error-dialog">
-								<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
-							</div>
-							
-						</div> <!-- end outer border-->
+						<form action="../../chain/login">
+    						<!-- outer-border block -->
+    						<div class="login-outer-border">
+    							<div class="fl-container-flex fl-fix" id="login">	
+    								<div class="info-column2-50 fl-force-left">
+    									<div class="login-text">
+    										<div class="info-pair">
+    											<div class="info-label">Current Release 0.2 Information</div>
+    											<div class="info-value csc-news-info"></div>
+    										</div>
+    									</div>
+    								</div>
+    									
+    								<div class="info-column2-50 fl-force-right">
+    									<div class="login-forms">
+    										<div class="info-pair">
+    											<div class="info-label">Log into CollectionSpace</div>
+    											<div class="info-value">
+    												<div>
+    													<div class="login-pair">
+    														<div class="login-label">User ID</div>
+    														<div class="login-element"><input type="text" class="input-alpha-login" name="userid"></div>
+    														<div class="login-error hidden">User ID does not exist</div>
+    														<div class="clear"></div>
+    													</div>
+    													
+    													<div class="login-pair">
+    														<div class="login-label">Password</div>
+    														<div class="login-element"><input type="password" class="input-alpha-login" name="password"></div>
+    														<div class="login-error hidden">Password is incorrect</div>
+    														<div class="clear"></div>
+    													</div>
+    													
+    													<div class="login-pair">
+    														<div class="login-label">&nbsp;</div>
+    														<div class="login-element"><input type="checkbox" class="no-border" name="remember-me" value="remember-me" /> Remember me</div>
+    														<div class="clear"></div>
+    													</div>
+    													
+    													<div class="login-pair">
+    														<div class="login-label">&nbsp;</div>
+    														<div class="login-element"><input type="image" class="no-border" src="../images/login-button.png" name="submit" /></div>
+    														<div class="clear"></div>
+    													</div>
+    													
+    													<div class="login-pair">
+    														<div class="login-label">&nbsp;</div>
+    														<div class="login-element"><a href="">Forgot ID or Password?</a></div>
+    														<div class="clear"></div>
+    													</div>
+    													
+    												</div>												
+    											</div>
+    										</div>
+    									</div>
+    								</div>
+    
+    								<div class="clear"></div>
+    							</div>	
+    
+    						</div> <!-- end outer border-->
+                        </form>
 					</div>
 
 					<div class="clear"></div>
@@ -122,16 +102,5 @@
 			</div> <!-- END footer block -->
 			
 		</div> <!-- END body content -->
-
-        <div class="csc-error-dialog">
-            <p class="csc-error-message">This text should be replaced by the error message.</p>
-        </div>
-		
-    	<script type="text/javascript">
-    		jQuery(document).ready(function() {
-				var login = cspace.login(".login-outer-border");
-			});
-    		
-    	</script>
 	</body>
 </html>
