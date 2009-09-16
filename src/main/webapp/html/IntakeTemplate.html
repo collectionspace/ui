@@ -11,8 +11,8 @@
 						<div class="fl-container-flex fl-fix information-group">
 							<div class="info-column fl-force-left">	
 								<!-- Information-block header -->
-								<div class="fl-container-flex header">
-									<span class="header-toggle"><img id="toggle-intake-information-img" onclick="ShowHide('#toggle-intake-information'); return false;" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+								<div class="fl-container-flex header" onclick="ShowHide('#toggle-intake-information'); return false;">
+									<span class="header-toggle"><img id="toggle-intake-information-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 									Object Entry
 								</div>
 
@@ -32,8 +32,7 @@
 												<table id="">
 													<tbody>
 														<tr>
-															<td><input type="text" disabled class="input-date csc-entry-date" name="entry-date"></td>
-															<td class="cal"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+															<td class="field-cal"><input type="text" disabled class="input-date csc-entry-date" name="entry-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -73,8 +72,7 @@
 												<table id="">
 													<tbody>
 														<tr>
-															<td><input type="text" disabled class="input-date csc-object-return-date" name="object-return-date"></td>
-															<td class="cal"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+															<td class="field-cal"><input type="text" disabled class="input-date csc-object-return-date" name="object-return-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -121,8 +119,8 @@
 						
 						<div class="fl-container-flex fl-fix information-group">
 							<div class="info-column fl-force-left">
-								<div class="fl-container-flex header">
-									<span class="header-toggle"><img id="toggle-collection-img" onclick="ShowHide('#toggle-collection'); return false;" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+								<div class="fl-container-flex header" onclick="ShowHide('#toggle-collection'); return false;">
+									<span class="header-toggle"><img id="toggle-collection-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 									Object Collection Information
 								</div>
 								<div class="fl-container-flex fl-fix content" id="toggle-collection" >
@@ -135,8 +133,7 @@
 												<table id="">
 													<tbody>
 														<tr>
-															<td><input type="text" disabled class="input-date csc-field-location-date" name="field-location-date"></td>
-															<td class="cal"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+															<td class="field-cal"><input type="text" disabled class="input-date csc-field-location-date" name="field-location-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -250,9 +247,9 @@
 													<thead>
 														<tr>
 															<td class="table-select"></td>
-															<td>Stratagraphic Unit Name</td>
-															<td>Stratagraphic Unit Type</td>
-															<td>Stratagraphic Unit Note</td>
+															<td>Name</td>
+															<td>Type</td>
+															<td>Note</td>
 														</tr>
 													</thead>
 														
@@ -286,8 +283,8 @@
 						
 						<div class="fl-container-flex fl-fix information-group">
 							<div class="info-column fl-force-left">
-								<div class="fl-container-flex header">
-									<span class="header-toggle"><img id="toggle-date-info-img" onclick="ShowHide('#toggle-date-info'); return false;" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+								<div class="fl-container-flex header" onclick="ShowHide('#toggle-date-info'); return false;">
+									<span class="header-toggle"><img id="toggle-date-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 									Date Information
 								</div>
 								<div class="fl-container-flex fl-fix content" id="toggle-date-info" >
@@ -300,8 +297,7 @@
 												<table id="">
 													<tbody>
 														<tr>
-															<td><input type="text" disabled class="input-date csc-field-location-date" name="field-location-date"></td>
-															<td class="cal"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+															<td class="field-cal"><input type="text" disabled class="input-date csc-field-location-date" name="field-location-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -325,43 +321,28 @@
 									
 									<div class="info-column1 fl-force-left">
 										<div class="info-pair-table">
-											<div class="info-label">Date Earliest/Single</div>
+											<div class="info-label" title="">Date</div>
 											<div class="info-value">
 												<table id="">
 													<thead>
 														<tr>
-															<td>Date Earliest/Single</td>
-															<td>Date Earliest/Single Certainty</td>
-															<td>Date Earliest/Single Qualifier</td>
+															<td title="">Date Type</td>
+															<td title="">Date</td>
+															<td title="">Certainty</td>
+															<td title="">Qualifier</td>
 														</tr>
 													</thead>
 														
 													<tbody>
 														<tr>
-															<td class="table-cal disabled"><input type="text" disabled class="input-date csc-date-earliest-single" name="date-earliest-single"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+															<td class="label">Date - Earliest/single</td>
+															<td class="field-cal disabled"><input type="text" disabled class="input-date csc-date-earliest-single" name="date-earliest-single"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 															<td><input type="text" class="input-alpha-table csc-date-earliest-single-certainty" name="date-earliest-single-certainty"></td>
 															<td><input type="text" class="input-alpha-table csc-date-earliest-single-qualifier" name="date-earliest-single-qualifier"></td>
 														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-										
-										<div class="info-pair-table">
-											<div class="info-label">Date Latest</div>
-											<div class="info-value">
-												<table id="" >
-													<thead>
 														<tr>
-															<td>Date Latest</td>
-															<td>Date Latest Certainty</td>
-															<td>Date Latest Qualifier</td>
-														</tr>
-													</thead>
-														
-													<tbody>
-														<tr>
-															<td class="table-cal disabled"><input type="text" disabled class="input-date csc-date-latest" name="date-latest"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+															<td class="label">Date - Latest</td>
+															<td class="field-cal disabled"><input type="text" disabled class="input-date csc-date-latest" name="date-latest"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 															<td><input type="text" class="input-alpha-table csc-date-latest-certainty" name="date-latest-certainty"></td>
 															<td><input type="text" class="input-alpha-table csc-date-latest-qualifier" name="date-latest-qualifier"></td>
 														</tr>
@@ -369,7 +350,7 @@
 												</table>
 											</div>
 										</div>
-										
+									
 										<div class="info-pair">
 											<div class="info-label">Date Text</div>
 											<div class="info-value"><textarea class="input-textarea csc-date-text" name="field-date-text"></textarea></div>
@@ -383,8 +364,8 @@
 						
 						<div class="fl-container-flex fl-fix information-group">
 							<div class="info-column fl-force-left">
-								<div class="fl-container-flex header">
-									<span class="header-toggle"><img id="toggle-valuation-img" onclick="ShowHide('#toggle-valuation'); return false;" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+								<div class="fl-container-flex header" onclick="ShowHide('#toggle-valuation'); return false;">
+									<span class="header-toggle"><img id="toggle-valuation-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 									Valuation
 								</div>
 								
@@ -404,10 +385,27 @@
 									
 									<!-- Right-side column -->
 									<div class="info-column2 fl-force-right">
-										<div class="info-pair">
-											<div class="info-label">Valuation Amount</div>
-											<div class="info-value"><input type="text" class="input-money-type" name="valuation-amount-money-type" value="US dollar"><input type="text" class="input-money-amount" name="valuation-amount-money-amount" value=" $ "></div>
-										</div>	
+										
+										<div class="info-pair-table">
+											<div class="info-label" title="">Valuation Amount</div>
+											<div class="info-value">
+												<table id="" >
+													<thead>
+														<tr>
+															<td title="">Currency</td>
+															<td title="">Value</td>
+														</tr>
+													</thead>
+													
+													<tbody>
+														<tr>
+															<td><input type="text" class="input-money-type" name="valuation-amount-money-type" value="US dollar"></td>
+															<td><input type="text" class="input-money-amount" name="valuation-amount-money-amount" value="$ "></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
 									</div>
 									<div class="clear"></div>
 								</div>
@@ -416,8 +414,8 @@
 
 						<div class="fl-container-flex fl-fix information-group">
 							<div class="info-column fl-force-left">
-								<div class="fl-container-flex header">
-									<span class="header-toggle"><img id="toggle-insurance-img" onclick="ShowHide('#toggle-insurance'); return false;" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+								<div class="fl-container-flex header" onclick="ShowHide('#toggle-insurance'); return false;">
+									<span class="header-toggle"><img id="toggle-insurance-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 									Insurance
 								</div>
 								<div class="fl-container-flex fl-fix content" id="toggle-insurance" >
@@ -449,8 +447,7 @@
 												<table id="">
 													<tbody>
 														<tr>
-															<td ><input type="text" disabled class="input-date csc-insurance-return-date" name="insurance-return-date"></td>
-															<td class="cal"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+															<td class="field-cal"><input type="text" disabled class="input-date csc-insurance-return-date" name="insurance-return-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -460,9 +457,25 @@
 									
 									<!-- Right-side column -->
 									<div class="info-column2 fl-force-right">
-										<div class="info-pair">
-											<div class="info-label">Insurance Amount</div>
-											<div class="info-value"><input type="text" class="input-money-type" name="insurance-amount-money-type" value="US dollar"><input type="text" class="input-money-amount" name="insurace-amount-money-amount" value=" $ "></div>
+										<div class="info-pair-table">
+											<div class="info-label" title="">Insurance Amount</div>
+											<div class="info-value">
+												<table id="" >
+													<thead>
+														<tr>
+															<td title="">Currency</td>
+															<td title="">Value</td>
+														</tr>
+													</thead>
+													
+													<tbody>
+														<tr>
+															<td><input type="text" class="input-money-type csc-insurance-insurance-amount-denomination" name="insurance-insurance-amount-denomination" value="US dollar"></td>
+															<td><input type="text" class="input-money-amount csc-insurance-insurance-amount-value" name="insurance-insurance-amount-value" value="$ "></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
 										</div>
 										
 										<div class="info-pair">
@@ -483,8 +496,8 @@
 						
 						<div class="fl-container-flex fl-fix information-group">
 							<div class="info-column fl-force-left">
-								<div class="fl-container-flex header">
-									<span class="header-toggle"><img id="toggle-location-img" onclick="ShowHide('#toggle-location'); return false;" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+								<div class="fl-container-flex header" onclick="ShowHide('#toggle-location'); return false;">
+									<span class="header-toggle"><img id="toggle-location-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 									Location
 								</div>
 								<div class="fl-container-flex fl-fix content" id="toggle-location" >
@@ -506,8 +519,7 @@
 												<table id="">
 													<tbody>
 														<tr>
-															<td><input type="text" disabled class="input-date csc-location-date" name="location-date"></td>
-															<td class="cal"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+															<td class="field-cal"><input type="text" disabled class="input-date csc-location-date" name="location-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -530,8 +542,8 @@
 						
 						<div class="fl-container-flex fl-fix information-group">
 							<div class="info-column fl-force-left">
-								<div class="fl-container-flex header">
-									<span class="header-toggle"><img id="toggle-condition-img" onclick="ShowHide('#toggle-condition'); return false;" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+								<div class="fl-container-flex header" onclick="ShowHide('#toggle-condition'); return false;">
+									<span class="header-toggle"><img id="toggle-condition-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 									Condition
 								</div>
 								<div class="fl-container-flex fl-fix content" id="toggle-condition" >
@@ -590,8 +602,7 @@
 												<table id="">
 													<tbody>
 														<tr>
-															<td><input type="text" disabled class="input-date csc-assessment-date" name="assessment-date"></td>
-															<td class="cal"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+															<td class="field-cal"><input type="text" disabled class="input-date csc-assessment-date" name="assessment-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 														</tr>
 													</tbody>
 												</table>

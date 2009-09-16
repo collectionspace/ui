@@ -16,14 +16,38 @@
 					<div class="info-column fl-force-left">	
 			
 						<!-- Information-block header -->
-						<div class="fl-container-flex header">
-							<span class="header-toggle"><img id="toggle-object-identification-information-img" onclick="ShowHide('#toggle-object-identification-information'); return false;" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+						<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-identification-information'); return false;">
+							<span class="header-toggle"><img id="toggle-object-identification-information-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 							Object Identification Information
 						</div>
 						
 						<!-- Information-block content block -->
 						<div class="fl-container-flex fl-fix content" id="toggle-object-identification-information">
 							<!-- The information-block is further broken down into two columns of equal size: left and right -->
+							<div class="info-column1 fl-force-left">
+								<div class="info-column2-50 fl-force-left">
+									<div class="info-pair-addrow">
+										<div class="info-label" title="">Accession Number</div>
+										<div class="info-value"><input type="text" class="input-alpha csc-object-identification-object-number" name="object-identification-object-number"></div>
+									</div>
+								</div>
+								
+								<div class="info-column2-50 fl-force-right">
+									<div class="info-pair-addrow">
+										<div class="info-label" title="">Other Numbers</div>
+										<div class="info-value">
+											<table id="" >
+												<tbody>
+													<tr>
+														<td class="table-unselected"></td>
+														<td><input type="text" class="input-alpha-table csc-object-identification-other-number" name="object-identification-other-number"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
 							
 							<!-- one row column -->
 							<div class="info-column1 fl-force-left">
@@ -35,7 +59,7 @@
 												<tr>
 													<td class="table-select"></td>
 													<td title="">Title</td>
-													<td title="">Title Language</td>
+													<td title="">Object Title Language</td>
 													<td title="">Title Translation</td>
 													<td title="">Title Type</td>
 												</tr>
@@ -53,53 +77,7 @@
 										</table>
 									</div>
 								</div>
-							</div>
-							
-							<!-- Left-side column -->
-							<div class="info-column2-50 fl-force-left">
-								<!-- The information is broken down into a pair of information elements: label and value -->									
-								<div class="info-pair">
-									<div class="info-label" title="">Accession Number</div>
-									<div class="info-value"><input type="text" class="input-alpha csc-object-identification-object-number" name="object-identification-object-number"></div>
-								</div>
-																	
-								<div class="info-pair-addrow">
-									<div class="info-label" title="">Other Number</div>
-									<div class="info-value">
-										<table id="" >
-											<thead>
-												<tr>
-													<td class="table-select"></td>
-													<td title="">Number</td>
-													<td title="">Number Type</td>
-												</tr>
-											</thead>
-												
-											<tbody>
-												<tr>
-													<td class="table-unselected"></td>
-													<td><input type="text" class="input-alpha-table csc-object-identification-other-number" name="object-identification-other-number"></td>
-													<td><input type="text" class="input-alpha-table csc-object-identification-other-number-type" name="object-identification-other-number-type"></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-							
-							<div class="info-column2-50 fl-force-right">
-								<div class="info-pair">
-									<div class="info-label" title="">Number of Items</div>
-									<div class="info-value"><input type="text" class="input-numeric-small csc-object-identification-number-objects" name="object-identification-number-objects"></div>
-								</div>
 								
-								<div class="info-pair">
-									<div class="info-label" title="">Responsible Department</div>
-									<div class="info-value"><input type="text" class="input-authority csc-object-identification-responsible-department" name="object-identification-responsible-department"></div>
-								</div>
-							</div>
-							
-							<div class="info-column1 fl-force-left">
 								<div class="info-pair-addrow">
 									<div class="info-label" title="">Object Name</div>
 									<div class="info-value">
@@ -134,7 +112,65 @@
 								</div>
 							</div>
 							
-							<div class="info-column1 fl-force-left">
+							<!-- Left-side column -->
+							<div class="info-column2-50 fl-force-left">
+								<div class="info-pair-table">
+									<div class="info-label" title="">Components and Range</div>
+									<div class="info-value">
+										<table id="" style="width:60%;">
+											<tbody>
+												<tr>
+													<td class="label">Total Number of Items</td>
+													<td><input type="text" class="input-numeric-small csc-object-identification-number-objects" name="object-identification-number-objects"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								
+								<div class="info-pair-addrow">
+									<div class="info-label" title=""></div>
+									<div class="info-value">
+										<table id="" >
+											<thead>
+												<tr>
+													<td class="table-select"></td>
+													<td title="">Sub Number</td>
+													<td title="" colspan=2>Description</td>
+												</tr>
+											</thead>
+											
+											<tbody>
+												<tr>
+													<td>&nbsp;1</td>
+													<td>2004.002.001a</td>
+													<td>King Chess Piece</td>
+													<td>create record</td>
+												</tr>
+												<tr>
+													<td>&nbsp;2</td>
+													<td>2004.002.001b</td>
+													<td>Queen Chess Piece</td>
+													<td>create record</td></tr>
+												<tr>
+													<td>&nbsp;3</td>
+													<td>2004.002.001c</td>
+													<td>Pawn Chess Piece</td>
+													<td>create record</td></tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								
+								<div class="info-pair">
+									<div class="info-label" title="">Responsible Department</div>
+									<div class="info-value"><input type="text" class="input-authority csc-object-identification-responsible-department" name="object-identification-responsible-department"></div>
+								</div>
+								
+							</div>
+							
+							<!--<div class="info-column1 fl-force-left">-->
+							<div class="info-column2 fl-force-right">
 								<div class="info-pair-addrow">
 									<div class="info-label" title="">Brief Description</div>
 									<div class="info-value">
@@ -148,16 +184,12 @@
 										</table>
 									</div>
 								</div>
-							</div>
-							
-							<div class="info-column1 fl-force-left">
+								
 								<div class="info-pair">
 									<div class="info-label" title="">Distinguishing Features</div>
 									<div class="info-value"><textarea class="input-textarea csc-object-identification-distinguishing-features" name="object-identification-destinguishing-features"></textarea></div>
-								</div>		
-							</div>
-							
-							<div class="info-column1 fl-force-left">
+								</div>
+								
 								<div class="info-pair-addrow">
 									<div class="info-label" title="">Comments</div>
 									<div class="info-value">
@@ -165,7 +197,7 @@
 											<tbody>
 												<tr>
 													<td class="table-unselected"></td>
-													<td><input type="text" class="input-alpha-table csc-object-identification-comments" name="object-identification-comments"></td>
+													<td><input type="text" class="input-textarea csc-object-identification-comments" name="object-identification-comments"></td>
 												</tr>
 											</tbody>
 										</table>
@@ -180,8 +212,8 @@
 
 				<div class="fl-container-flex fl-fix information-group">
 					<div class="info-column fl-force-left">
-						<div class="fl-container-flex header">
-							<span class="header-toggle"><img id="toggle-object-description-info-img" onclick="ShowHide('#toggle-object-description-info'); return false;" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+						<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-description-info'); return false;">
+							<span class="header-toggle"><img id="toggle-object-description-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 							Object Description Information
 						</div>
 						<div class="fl-container-flex fl-fix content" id="toggle-object-description-info" >
@@ -398,7 +430,7 @@
 													<td><input type="text" class="input-alpha-table csc-object-description-dimension" name="object-description-dimension"></td>
 													<td><input type="text" class="input-alpha-table csc-object-description-dimension-part" name="object-description-dimension-part"></td>
 													<td><input type="text" class="input-alpha-table csc-object-description-dimension-unit" name="object-description-dimension-unit"></td>
-													<td class="table-cal disabled"><input type="text" disabled class="input-date csc-object-description-dimension-date" name="object-description-dimension-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+													<td class="field-cal disabled"><input type="text" disabled class="input-date csc-object-description-dimension-date" name="object-description-dimension-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 													<td><input type="text" class="input-alpha-table csc-object-description-dimension-value" name="object-description-dimension-value"></td>
 													<td><input type="text" class="input-alpha-table csc-object-description-dimension-value-qualifier" name="object-description-dimension-calue-qualifier"></td>
 												</tr>
@@ -412,8 +444,8 @@
 							
 								<div class="fl-container-flex fl-fix information-subgroup">
 									<div class="info-column fl-force-left">
-										<div class="fl-container-flex header">
-											<span class="header-toggle-sub"><img id="toggle-description-information-content-img" onclick="ShowHide('#toggle-description-information-content'); return false;" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+										<div class="fl-container-flex header" onclick="ShowHide('#toggle-description-information-content'); return false;">
+											<span class="header-toggle-sub"><img id="toggle-description-information-content-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 											Content
 										</div>
 										<div class="fl-container-flex fl-fix content" id="toggle-description-information-content" >
@@ -475,7 +507,7 @@
 															<tbody>
 																<tr>
 																	<td class="table-unselected"></td>
-																	<td class="table-cal disabled"><input type="text" disabled class="input-date csc-object-description-content-date" name="object-description-content-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+																	<td class="field-cal disabled"><input type="text" disabled class="input-date csc-object-description-content-date" name="object-description-content-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 																</tr>
 															</tbody>
 														</table>
@@ -686,8 +718,8 @@
 							
 								<div class="fl-container-flex fl-fix information-subgroup">
 									<div class="info-column fl-force-left">
-										<div class="fl-container-flex header">
-											<span class="header-toggle-sub"><img id="toggle-description-information-inscription-img" onclick="ShowHide('#toggle-description-information-inscription'); return false;" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+										<div class="fl-container-flex header" onclick="ShowHide('#toggle-description-information-inscription'); return false;">
+											<span class="header-toggle-sub"><img id="toggle-description-information-inscription-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 											Inscription
 										</div>
 										<div class="fl-container-flex fl-fix content" id="toggle-description-information-inscription" >
@@ -740,7 +772,7 @@
 															<tbody>
 																<tr>
 																	<td class="table-unselected"></td>
-																	<td class="table-cal disabled"><input type="text" disabled class="input-date csc-object-description-inscription-date" name="object-description-inscription-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+																	<td class="field-cal disabled"><input type="text" disabled class="input-date csc-object-description-inscription-date" name="object-description-inscription-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 																</tr>
 															</tbody>
 														</table>
@@ -850,8 +882,8 @@
 				
 				<div class="fl-container-flex fl-fix information-group">
 					<div class="info-column fl-force-left">
-						<div class="fl-container-flex header">
-							<span class="header-toggle"><img id="toggle-date-info-img" onclick="ShowHide('#toggle-date-info'); return false;" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+						<div class="fl-container-flex header" onclick="ShowHide('#toggle-date-info'); return false;">
+							<span class="header-toggle"><img id="toggle-date-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 							Date Information
 						</div>
 						<div class="fl-container-flex fl-fix content" id="toggle-date-info" >
@@ -887,43 +919,28 @@
 							
 							<div class="info-column1 fl-force-left">
 								<div class="info-pair-table">
-									<div class="info-label" title="">Date Earliest/Single</div>
+									<div class="info-label" title="">Date</div>
 									<div class="info-value">
 										<table id="">
 											<thead>
 												<tr>
-													<td title="">Date Earliest/Single</td>
-													<td title="">Date Earliest/Single Certainty</td>
-													<td title="">Date Earliest/Single Qualifier</td>
+													<td title="">Date Type</td>
+													<td title="">Date</td>
+													<td title="">Certainty</td>
+													<td title="">Qualifier</td>
 												</tr>
 											</thead>
 												
 											<tbody>
 												<tr>
-													<td class="table-cal disabled"><input type="text" disabled class="input-date csc-date-information-date-earliest-single" name="date-information-date-earliest-single"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+													<td class="label">Date - Earliest/single</td>
+													<td class="field-cal disabled"><input type="text" disabled class="input-date csc-date-information-date-earliest-single" name="date-information-date-earliest-single"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 													<td><input type="text" class="input-alpha-table csc-date-information-date-earliest-single-certainty" name="date-information-date-earliest-single-certainty"></td>
 													<td><input type="text" class="input-alpha-table csc-date-information-date-earliest-single-qualifier" name="date-information-date-earliest-single-qualifier"></td>
 												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								
-								<div class="info-pair-table">
-									<div class="info-label" title="">Date Latest</div>
-									<div class="info-value">
-										<table id="" >
-											<thead>
 												<tr>
-													<td title="">Date Latest</td>
-													<td title="">Date Latest Certainty</td>
-													<td title="">Date Latest Qualifier</td>
-												</tr>
-											</thead>
-												
-											<tbody>
-												<tr>
-													<td class="table-cal disabled"><input type="text" disabled class="input-date csc-date-information-date-latest" name="date-information-date-latest"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+													<td class="label">Date - Latest</td>
+													<td class="field-cal disabled"><input type="text" disabled class="input-date csc-date-information-date-latest" name="date-information-date-latest"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 													<td><input type="text" class="input-alpha-table csc-date-information-date-latest-certainty" name="date-information-date-latest-certainty"></td>
 													<td><input type="text" class="input-alpha-table csc-date-information-date-latest-qualifier" name="date-information-date-latest-qualifier"></td>
 												</tr>
@@ -931,7 +948,7 @@
 										</table>
 									</div>
 								</div>
-								
+							
 								<div class="info-pair">
 									<div class="info-label" title="">Date Text</div>
 									<div class="info-value"><textarea class="input-textarea csc-date-information-date-text" name="date-information-date-text"></textarea></div>

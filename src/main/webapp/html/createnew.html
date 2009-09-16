@@ -5,6 +5,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>CollectionSpace - Create New Record</title>
 
+		<script type="text/javascript" src="../js/cspace.js"></script>
+		
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-reset.css" />
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-layout.css" />
 		<link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
@@ -76,25 +78,27 @@
 											Procedural Records
 										</div> <!-- end information block header -->
 										<!-- container content -->
-										<div class="fl-container-flex fl-fix content">
-											<div class="info-column1 fl-force-left">
-												<div class="sub-header">Select a Procedure</div>
-												<div class="radio-buttons">
-													<span class="radio-button"><input type="radio" name="procedure" value="intake" checked="checked" /> Intake</span>
-													<span class="radio-button disabled"><input type="radio" name="procedure" value="acquisition" disabled /> Acquisition</span>
-													<span class="radio-button disabled"><input type="radio" name="procedure" value="loanin" disabled /> Loan In</span>
-													<span class="radio-button disabled"><input type="radio" name="procedure" value="loanout" disabled /> Loan Out</span>
-													<span class="radio-button disabled"><input type="radio" name="procedure" value="objectexit" disabled /> Object Exit</span>
+										<form name="selectprocedure">
+											<div class="fl-container-flex fl-fix content">
+												<div class="info-column1 fl-force-left">
+													<div class="sub-header">Select a Procedure</div>
+													<div class="radio-buttons">
+														<span class="radio-button"><input type="radio" name="procedure" value="intake.html" checked="checked" /> Intake</span>
+														<span class="radio-button"><input type="radio" name="procedure" value="acquisition.html" /> Acquisition</span>
+														<span class="radio-button disabled"><input type="radio" name="procedure" value="loanin" disabled /> Loan In</span>
+														<span class="radio-button disabled"><input type="radio" name="procedure" value="loanout" disabled /> Loan Out</span>
+														<span class="radio-button disabled"><input type="radio" name="procedure" value="objectexit" disabled /> Object Exit</span>
+													
+													</div>
+													<input type=button class="button create-quick-button" onclick="getRadioValue();" value ="" title="create quick record"/>
+													<div class="button"><img src="../images/btnCreateNew_grey.png" alt="create new" class="button" height=23 width=96 /></div>
+													<div class="button"><img src="../images/btnCreateExisting_grey.png" alt="create new" class="button" height=23 width=155 /></div>
+													<div class="button"><img src="../images/btnCreateTemplate_grey.png" alt="create new" class="button" height=23 width=157 /></div>
+													<div class="clear"></div>
+												</div> <!-- end inner info column -->
 												
-												</div>
-												<a class="button create-quick-button" href="intake.html" title="create quick record"></a>
-												<div class="button"><img src="../images/btnCreateNew_grey.png" alt="create new" class="button" height=23 width=96 /></div>
-												<div class="button"><img src="../images/btnCreateExisting_grey.png" alt="create new" class="button" height=23 width=155 /></div>
-												<div class="button"><img src="../images/btnCreateTemplate_grey.png" alt="create new" class="button" height=23 width=157 /></div>
-												<div class="clear"></div>
-											</div> <!-- end inner info column -->
-											
-										</div> <!-- end container content -->
+											</div> <!-- end container content -->
+										</form>
 									</div> <!-- end outer info column -->
 								</div> <!-- end information group -->
 								

@@ -1,0 +1,652 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>CollectionSpace - Acquisition</title>
+
+        <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-reset.css" />
+        <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-layout.css" />
+		<link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
+        <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
+
+		<script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
+		<script type="text/javascript" src="../js/cspace.js"></script>
+		<script type="text/javascript" src="../js/Renderer.js"></script>
+		<script type="text/javascript" src="../js/DataContext.js"></script>
+		<script type="text/javascript" src="../js/RecentActivity.js"></script>
+		<script type="text/javascript" src="../js/DataEntry.js"></script>
+		<script type="text/javascript" src="../js/objEntrySetup.js"></script>
+	</head>
+
+	<body>
+		<!-- body content -->
+		<div class="fl-container-1024 fl-centered">
+		
+			<!-- CSpace logo and right-side search box -->
+			<div id="name-header">
+ 			    <div><img src="../images/header.png" alt="CollectionSpace" height=86 width=1024 usemap="#header"/></div>
+				<map name="header">
+					<area shape="rect" coords="10,11,256,50" href="http://www.collectionspace.org/current_release" alt="CollectionSpace">
+					<area shape="rect" coords="265,59,510,84" href="createnew.html" alt="Create New">
+					<area shape="rect" coords="518,59,763,84" href="findedit.html" alt="Find and Edit">
+				</map></div>
+			
+			<div class="fl-container-1024-inner">
+			
+				<!-- title-bar - name of object and (assession) number -->
+				<div id="title-bar">
+					<div class="title-bar-value">
+						<div class="primary-value csc-acquisition-title">2004.001</div><div class="secondary-value csc-acquisition-number">Purple Monkey Dishwasher</div>
+						<div class="clear"></div>
+					</div>
+					
+					<div class="label">
+						<div class="label-text">ACCESSION NUMBER</div><div class="label-text">DESCRIPTION</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			
+				<!-- main content -->
+				<div id="all-content" class="fl-fix object-entry">
+					
+						
+					<!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
+					<div class="fl-fix fl-container-flex fl-col-mixed2">
+
+						<!-- left-side container. Contains bulk of Object Entry forms and fields -->
+						<div class="fl-container-left fl-force-left">
+
+							<!-- this div will be filled in with the contents of the Template -->
+							<div class="csc-acquisition-entry-container" id="csc-acquisition-entry-template">
+							
+									<!-- left-side container. Contains bulk of Object Entry forms and fields -->
+								<form class="fl-container-left csc-acquisition-entry-container">
+									<!-- Object Data Entry specific sub-menu -->
+									<div class="save-bar">
+										<div id="top-nav-menu"><img src="../images/acquisition-tabs.png" alt="related record column" height=22 width=136 /></div>
+										<div class="upper-save"><input type="image" src="../images/savebutton.png" alt="save button" class="savebutton csc-save" height="25" width="74"/></div>
+										<div class="collapse-all"><!--<img id="toggle-all-img"  src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" 
+											onclick="ShowHide('#toggle-object-identification-information'); ShowHide('#toggle-object-description-info'); ShowHide('#toggle-date-info'); ShowHide('#toggle-all'); return false;"/>Collapse All--></div>
+										<div class="clear"></div>
+									</div>
+									<div class="acquisition-outer-border">
+
+										<div class="csc-saved-message hidden cs-message">Save successful!</div>
+
+										<!-- Each section of Object Entry is broken down into information-blocks.
+											  This corresponds to Information groups within Spectrum's Object Entry prodedure. -->
+										<div class="fl-container-flex fl-fix information-group">
+										
+											<div class="info-column fl-force-left">	
+									
+												<!-- Information-block header -->
+												<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-identification-information'); return false;">
+													<span class="header-toggle"><img id="toggle-object-identification-information-img"  src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+													Acqusition Information
+												</div>
+												
+												<!-- Information-block content block -->
+												<div class="fl-container-flex fl-fix content" id="toggle-object-identification-information">
+													<!-- The information-block is further broken down into two columns of equal size: left and right -->
+													
+													<!-- one row column -->
+													<div class="info-column fl-force-left">
+														<div class="info-column2-40 fl-force-left">
+															<div class="info-pair">
+																<div class="info-label" title="">Acquisition Reference Number</div>
+																<div class="info-value"><input type="text" class="input-numeric-long csc-acquisition-acquisition-reference-number" name="acquisition-acquisition-reference-number"></div>
+															</div>
+														
+															<div class="info-pair-addrow">
+																<div class="info-label" title="">Acquisition Date</div>
+																<div class="info-value">
+																	<table id="" style="width:auto;">
+																		<tbody>
+																			<tr>
+																				<td class="table-unselected"></td>
+																				<td class="field-cal"><input type="text" disabled class="input-date csc-acquisition-date" name="acquisition-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+															
+															<div class="info-pair-date">
+																<div class="info-label" title="">Accession Date</div>
+																<div class="info-value">
+																	<table id="">
+																		<tbody>
+																			<tr>
+																				<td><input type="text" disabled class="input-date csc-acquisition-accession-date" name="acquisition-accession-date"></td>
+																				<td class="cal"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+														
+														<div class="info-column2-60 fl-force-right">
+															<div class="info-pair-table">
+																<div class="info-label" title="">Purchase Price</div>
+																<div class="info-value">
+																	<table id="" >
+																		<thead>
+																			<td class="label">Purchase Price Type</td>
+																			<td class="label">Currency</td>
+																			<td class="label">Value</td>
+																		</thead>
+																		<tbody>
+																			<tr>
+																				<td class="label">Group Purchase Price</td>
+																				<td><input type="text" class="input-money-type csc-acquisition-purchaser-price-demonination" name="acquisition-purchaser-price-denomination" value="US Dollar"></td>
+																				<td><input type="text" class="input-numeric-medium csc-acquisition-purchaser-price" name="acquisition-purchaser-price" value="$ "></td>
+																			</tr>
+																			<tr>
+																				<td class="label">Object Offer Price</td>
+																				<td><input type="text" class="input-money-type csc-acquisition-object-offer-price-denomination" name="acquisition-object-offer-price-denomination" value="US Dollar"></td>
+																				<td><input type="text" class="input-numeric-medium csc-acquisition-object-offer-price" name="acquisition-object-offer-price" value="$ "></td>
+																			</tr>
+																			<tr>
+																				<td class="label">Object Purchaser Offer Price</td>
+																				<td><input type="text" class="input-money-type csc-acquisition-object-purchaser-offer-price-denomination" name="acquisition-object-purchaser-offer-price-denomination" value="US Dollar"></td>
+																				<td><input type="text" class="input-numeric-medium csc-acquisition-object-purchaser-offer-price" name="acquisition-object-purchaser-offer-price" value="$ "></td>
+																			</tr>
+																			<tr>
+																				<td class="label">Object Purchase Price</td>
+																				<td><input type="text" class="input-money-type csc-acquisition-object-purchaser-price-denomination" name="acquisition-object-purchaser-price-denomination" value="US Dollar"></td>
+																				<td><input type="text" class="input-numeric-medium csc-acquisition-object-purchaser-price" name="acquisition-object-purchaser-price" value="$ "></td>
+																			</tr>
+																			<tr>
+																				<td class="label">Original Object Purchase Price</td>
+																				<td><input type="text" class="input-money-type csc-acquisition-original-object-purchaser-price-denomination" name="acquisition-original-object-purchaser-price-denomination" value="US Dollar"></td>
+																				<td><input type="text" class="input-numeric-medium csc-acquisition-original-object-purchaser-price" name="acquisition-original-object-purchaser-price" value="$ "></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>	
+														</div>
+													</div>
+													
+													<div class="info-column fl-force-left">
+														<div class="info-pair-table">
+															<div class="info-label" title="">Acquisition Funding</div>
+															<div class="info-value">
+																<table id="" >
+																	<thead>
+																		<tr>
+																			<td title="" colspan="2">Acquisition Funding</td>
+																			<td title="">Source</td>
+																			<td title="">Provisos</td>
+																		</tr>
+																	</thead>
+																		
+																	<tbody>
+																		<tr>
+																			<td sytle="width:180px;"><input type="text" class="input-money-type csc-acquisition-acquisition-funding-denomination" name="acquisition-acquisition-funding-denomination" value="US Dollar"></td>
+																			<td><input type="text" class="input-numeric-medium csc-acquisition-acquisition-funding-value" name="acquisition-acquisition-funding-value" value="$ "></td>
+																			<td><input type="text" class="input-alpha-table csc-acquisition-acquisition-source" name="acquisition-acquisition-source"></td>
+																			<td><input type="text" class="input-alpha-table csc-acquisition-acquisition-source-provisos" name="acquisition-acquisition-source-provisos"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>												
+													</div>
+													
+													<div class="info-column fl-force-left">
+														<div class="info-column2-40 fl-force-left">									
+															<div class="info-pair">
+																<div class="info-label" title="">Acquisition Method</div>
+																<div class="info-value"><input type="text" class="input-alpha csc-acquisition-acquisition-method" name="acquisition-acquisition-method"></div>
+															</div>
+																								
+															<div class="info-pair-table">
+																<div class="info-label" title="">Acqusition Authorizer</div>
+																<div class="info-value">
+																	<table id="" >
+																		<thead>
+																			<tr>
+																				<td title="">Acqusition Authorizer</td>
+																				<td title="">Date</td>
+																			</tr>
+																		</thead>
+																		
+																		<tbody>
+																			<tr>
+																				<td><input type="text" class="input-alpha-table csc-acquisition-authorizer" name="acquisition-authorizer"></td>
+																				<td><input type="text" class="input-alpha-table csc-acquisition-authorizer-date" name="acquisition-authorizer-date"></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+															
+															<div class="info-pair">
+																<div class="info-label" title="">Acquisition Source</div>
+																<div class="info-value"><input type="text" class="input-alpha csc-acquisition-acquisition-source" name="acquisition-acquisition-source"></div>
+															</div>
+															
+															<div class="info-pair">
+																<div class="info-label" title="">Transfer of Title Number</div>
+																<div class="info-value"><input type="text" class="input-alpha csc-acquisition-transfer-of-title-number" name="acquisition-transfer-of-title-number"></div>
+															</div>
+														</div>
+													
+														<div class="info-column2-60 fl-force-right">
+															<div class="info-pair">
+																<div class="info-label" title="">Acquisition Reason</div>
+																<div class="info-value"><input type="text" class="input-textarea csc-acquisition-acquisition-reason" name="acquisition-acquisition-reason"></div>
+															</div>
+															
+															<div class="info-pair">
+																<div class="info-label" title="">Acquisition Note</div>
+																<div class="info-value"><input type="text" class="input-textarea csc-acquisition-acquisition-note" name="acquisition-acquisition-note"></div>
+															</div>
+															
+															<div class="info-pair">
+																<div class="info-label" title="">Acquisition Provisos</div>
+																<div class="info-value"><input type="text" class="input-textarea csc-acquisition-acquisition-provisos" name="acquisition-acquisition-provisos"></div>
+															</div>
+														</div>
+													</div>
+													<div class="clear"></div>
+												</div>
+											</div>
+										</div>	
+
+										<div class="fl-container-flex fl-fix information-group">
+											<div class="info-column fl-force-left">
+												<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-description-info'); return false;">
+													<span class="header-toggle"><img id="toggle-object-description-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+													Object Identification Information
+												</div>
+												<div class="fl-container-flex fl-fix content" id="toggle-object-description-info" >
+													<div class="info-column1 fl-force-left">
+														<div class="info-column2-50 fl-force-left">
+															<div class="info-pair-addrow">
+																<div class="info-label" title="">Accession Number</div>
+																<div class="info-value"><input type="text" class="input-numeric-long csc-acquisition-accession-number" name="acquisition-accession-number" value="2004.002.001"></div>
+															</div>
+														</div>
+														
+														<div class="info-column2-50 fl-force-right">
+															<div class="info-pair-addrow">
+																<div class="info-label" title="">Other Numbers</div>
+																<div class="info-value">
+																	<table id="" >
+																		<tbody>
+																			<tr>
+																				<td class="table-unselected"></td>
+																				<td><input type="text" class="input-numeric-long csc-acquisition-accession-number" name="acquisition-accession-number" value=""></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+													</div>
+													
+													
+													<div class="info-column1 fl-force-left">
+														<div class="info-pair-addrow">
+															<div class="info-label" title="">Title</div>
+															<div class="info-value">
+																<table id="" >
+																	<thead>
+																		<tr>
+																			<td class="table-select"></td>
+																			<td title="">Title</td>
+																			<td title="">Object Title Language</td>
+																			<td title="">Title Translation</td>
+																			<td title="">Title Type</td>
+																		</tr>
+																	</thead>
+																	
+																	<tbody>
+																		<tr>
+																			<td class="table-unselected"></td>
+																			<td><input type="text" class="input-alpha-table csc-acquisition-object-id-title" name="acquisition-object-id-title"></td>
+																			<td><input type="text" class="input-alpha-table csc-acquisition-object-id-title-language-component" name="acquisition-object-id-title-language-component"></td>
+																			<td><input type="text" class="input-alpha-table csc-acquisition-object-id-title-translation-component-note" name="acquisition-object-id-title-translation-component-note"></td>
+																			<td><input type="text" class="input-alpha-table csc-acquisition-object-id-title-type-name" name="acquisition-object-id-title-type-name"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+													
+													<div class="info-column1 fl-force-left">
+														<div class="info-pair-addrow">
+															<div class="info-label" title="">Object Name</div>
+															<div class="info-value">
+																<table id="" >
+																	<thead>
+																		<tr>
+																			<td class="table-select"></td>
+																			<td title="">Object Name</td>
+																			<td title="">Currency</td>
+																			<td title="">Level</td>
+																			<td title="">System</td>
+																			<td title="">Type</td>
+																			<td title="">Language</td>
+																			<td title="">Note</td>
+																		</tr>
+																	</thead>
+																	
+																	<tbody>
+																		<tr>
+																			<td class="table-unselected"></td>
+																			<td><input type="text" class="input-alpha-table csc-acquisition-object-id-object-name" name="acquisition-object-id-object-name"></td>
+																			<td><input type="text" class="input-alpha-table csc-acquisition-object-id-object-currency" name="acquisition-object-id-object-currency"></td>
+																			<td><input type="text" class="input-alpha-table csc-acquisition-object-id-object-level" name="acquisition-object-id-object-level"></td>
+																			<td><input type="text" class="input-alpha-table csc-acquisition-object-id-object-system" name="acquisition-object-id-object-system"></td>
+																			<td><input type="text" class="input-alpha-table csc-acquisition-object-id-object-type" name="acquisition-object-id-object-type"></td>
+																			<td><input type="text" class="input-alpha-table csc-acquisition-object-id-object-language" name="acquisition-object-id-object-language"></td>
+																			<td><input type="text" class="input-alpha-table csc-acquisition-object-id-object-note" name="acquisition-object-id-object-note"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+													
+													<div class="info-column2-50 fl-force-left">
+														<div class="info-pair-table">
+															<div class="info-label" title="">Components and Range</div>
+															<div class="info-value">
+																<table id="" style="width:60%;">
+																	<tbody>
+																		<tr>
+																			<td class="label">Total Number of Items</td>
+																			<td><input type="text" class="input-numeric-small csc-acquisition-total-number-of-items" name="acquisition-accession-number-total-number-of-items" value="16"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														
+														<div class="info-pair-addrow">
+															<div class="info-label" title=""></div>
+															<div class="info-value">
+																<table id="" >
+																	<thead>
+																		<tr>
+																			<td class="table-select"></td>
+																			<td title="">Sub Number</td>
+																			<td title="" colspan=2>Description</td>
+																		</tr>
+																	</thead>
+																	
+																	<tbody>
+																		<tr>
+																			<td>&nbsp;1</td>
+																			<td>2004.002.001a</td>
+																			<td>King Chess Piece</td>
+																			<td>create record</td>
+																		</tr>
+																		<tr>
+																			<td>&nbsp;2</td>
+																			<td>2004.002.001b</td>
+																			<td>Queen Chess Piece</td>
+																			<td>create record</td></tr>
+																		<tr>
+																			<td>&nbsp;3</td>
+																			<td>2004.002.001c</td>
+																			<td>Pawn Chess Piece</td>
+																			<td>create record</td></tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														
+														<div class="info-pair">
+															<div class="info-label" title="">Responsible Department</div>
+															<div class="info-value"><input type="text" class="input-alpha csc-acquisition-object-id-responsible-department" name="acquisition-object-id-responsible-department"></div>
+														</div>											
+													</div>
+													
+													<!-- Left-side column -->
+													<div class="info-column2-50 fl-force-right">
+														<div class="info-pair">
+															<div class="info-pair-addrow">
+																<div class="info-label" title="">Brief Description</div>
+																<div class="info-value">
+																	<table id="" >											
+																		<tbody>
+																			<tr>
+																				<td class="table-unselected"></td>
+																				<td><input type="text" class="input-textarea csc-acquisition-object-id-brief-description" name="acquisition-object-id-brief-description"></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+														
+														<div class="info-pair">
+															<div class="info-label" title="">Distinguishing Features</div>
+															<div class="info-value"><input type="text" class="input-textarea csc-acquisition-object-id-distinguishing-features" name="acquisition-object-id-distinguishing-features"></div>
+														</div>
+														
+														<div class="info-pair">
+															<div class="info-pair-addrow">
+																<div class="info-label" title="">Comments</div>
+																<div class="info-value">
+																	<table id="" >											
+																		<tbody>
+																			<tr>
+																				<td class="table-unselected"></td>
+																				<td><input type="text" class="input-textarea csc-acquisition-object-id-comments" name="acquisition-object-id-comments"></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+													</div>
+													
+													<div class="clear"></div>
+												</div>
+											</div>
+										</div>
+										
+										<div class="fl-container-flex fl-fix information-group">
+											<div class="info-column fl-force-left">
+												<div class="fl-container-flex header" onclick="ShowHide('#toggle-date-info'); return false;">
+													<span class="header-toggle"><img id="toggle-date-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+													Date Information
+												</div>
+												<div class="fl-container-flex fl-fix content" id="toggle-date-info" >
+													<!-- Left-side column -->
+													<div class="info-column2-50 fl-force-left">
+														<div class="info-pair-addrow">
+															<div class="info-label" title="">Date Association</div>
+															<div class="info-value">
+																<table id="" >											
+																	<tbody>
+																		<tr>
+																			<td class="table-unselected"></td>
+																			<td><input type="text" class="input-alpha csc-acquisition-date-information-date-association" name="acquisition-date-information-date-association"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+													
+													<!-- Left-side column -->
+													<div class="info-column2-50 fl-force-right">															
+														<div class="info-pair">
+															<div class="info-label" title="">Date Period</div>
+															<div class="info-value"><input type="text" class="input-alpha csc-acquisition-date-information-date-period" name="acquisition-date-information-date-period"></div>
+														</div>	
+													</div>
+													
+													<div class="info-column1 fl-force-left">
+														<div class="info-pair-table">
+															<div class="info-label" title="">Date</div>
+															<div class="info-value">
+																<table id="">
+																	<thead>
+																		<tr>
+																			<td title="">Date Type</td>
+																			<td title="">Date</td>
+																			<td title="">Certainty</td>
+																			<td title="">Qualifier</td>
+																		</tr>
+																	</thead>
+																		
+																	<tbody>
+																		<tr>
+																			<td class="label">Date - Earliest/single</td>
+																			<td class="field-cal disabled"><input type="text" disabled class="input-date csc-acquisition-date-information-date-earliest-single" name="acquisition-date-information-date-earliest-single"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+																			<td><input type="text" class="input-alpha-table csc-acquisition-date-information-date-earliest-single-certainty" name="acquisition-date-information-date-earliest-single-certainty"></td>
+																			<td><input type="text" class="input-alpha-table csc-acquisition-date-information-date-earliest-single-qualifier" name="acquisition-date-information-date-earliest-single-qualifier"></td>
+																		</tr>
+																		<tr>
+																			<td class="label">Date - Latest</td>
+																			<td class="field-cal disabled"><input type="text" disabled class="input-date csc-acquisition-date-information-date-latest-single" name="acquisition-date-information-date-latest-single"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+																			<td><input type="text" class="input-alpha-table csc-acquisition-date-information-date-latest-single-certainty" name="acquisition-date-information-date-latest-single-certainty"></td>
+																			<td><input type="text" class="input-alpha-table csc-acquisition-date-information-date-latest-single-qualifier" name="acquisition-date-information-date-latest-single-qualifier"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														
+														<div class="info-pair">
+															<div class="info-label" title="">Date Text</div>
+															<div class="info-value"><textarea class="input-textarea csc-acquisition-date-information-date-text" name="acquisition-date-information-date-text"></textarea></div>
+														</div>
+													</div>
+													<div class="clear"></div>
+												</div>
+											</div>
+										</div>
+										
+										<div class="csc-error-dialog">
+											<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
+										</div>
+									</div> <!-- end outer border-->
+
+									<!-- Save button container -->
+									<div class="fl-container-flex input-buttons">
+										<input type="image" src="../images/savebutton.png" alt="save button" class="savebutton csc-save-bottom" height="25" width="74"  /><input type="image" src="../images/cancelbutton.png" alt="cancel button" class="cancelbutton" name="" width="89" height="25" /><div class="clear"><!-- --></div></div>	
+									
+								</form> <!-- END left-side container -->
+								
+							</div>
+						</div><!-- END left-side container -->
+						
+						<!-- Right-side container. Pivot area -->
+						<div class="fl-container-pivot fl-force-right csc-right-sidebar" id="csc-right-sidebar">
+							<img src="../images/media-snapshot.png" alt="media snapshot" height=253 width=248 />
+							
+							<div class="pivot-box">
+								<div class="pivot-box-content integrated-authorities">
+									<div class="pivot-box-header" onclick="ShowHide('#toggle-integrated-authorities'); return false;">
+										<span class="pivot-toggle"><img id="toggle-integrated-authorities-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+										Integrated Authorities (6)
+									</div>
+									<div id="toggle-integrated-authorities">
+										<div class="pivot-box-label">
+											<div class="pivot-box-label-pair"><div class="pivot-box-label-1">Description</div>		<div class="pivot-box-label-2">Type</div></div>
+											<div class="clear"></div>
+										</div>
+										<div class="pivot-box-data">
+											<div class="pivot-box-data-pair"><div class="pivot-box-data-1">Van Gogh, Vincent</div>	<div class="pivot-box-data-2">(A) Person</div></div>
+											<div class="pivot-box-data-pair"><div class="pivot-box-data-1">Guagin, Paul</div>		<div class="pivot-box-data-2">(A) Person</div></div>
+											<div class="pivot-box-data-pair"><div class="pivot-box-data-1">Arles, France</div>		<div class="pivot-box-data-2">(A) Location</div></div>
+											<div class="pivot-box-data-pair"><div class="pivot-box-data-1">Paris Expo, 76</div>		<div class="pivot-box-data-2">(A) Event</div></div>
+											<div class="pivot-box-data-pair"><div class="pivot-box-data-1">Oil on canvas</div>		<div class="pivot-box-data-2">Vocabulary</div></div>
+											<div class="pivot-box-data-pair"><div class="pivot-box-data-1">Frame, Victorian</div>	<div class="pivot-box-data-2">Vocabulary</div></div>
+											<div class="clear"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="pivot-box">
+								<div class="pivot-box-content related-procedures">
+									<div class="pivot-box-header" onclick="ShowHide('#toggle-related-procedures'); return false;">
+										<span class="pivot-toggle"><img id="toggle-related-procedures-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+										Related Procedures (1)
+									</div>
+									<div id="toggle-related-procedures">
+										<div class="pivot-box-label">
+											<div class="pivot-box-label-pair"><div class="pivot-box-label-1">ID</div><div class="pivot-box-label-2">Type</div><div class="pivot-box-label-3">Created On</div></div>
+											<div class="clear"></div>
+										</div>
+										<div class="pivot-box-data">
+											<div class="pivot-box-data-pair"><div class="pivot-box-data-1">2004.002</div><div class="pivot-box-data-2">Intake</div><div class="pivot-box-data-2">04.04.09</div></div>
+											<div class="clear"></div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="pivot-box-content related-objects">
+									<div class="pivot-box-header" onclick="ShowHide('#toggle-related-objects'); return false;">
+										<span class="pivot-toggle"><img id="toggle-related-objects-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+										Related Objects (1)
+									</div>
+									<div id="toggle-related-objects">
+										<div class="pivot-box-label">
+											<div class="pivot-box-label-pair"><div class="pivot-box-label-1">Accession</div><div class="pivot-box-label-2">Title</div></div>
+											<div class="clear"></div>
+										</div>
+										<div class="pivot-box-data">
+											<div class="pivot-box-data-pair"><div class="pivot-box-data-1">2004.002.001</div><div class="pivot-box-data-2">A sample record's info</div></div>
+											<div class="clear"></div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="pivot-box-content related-collections">
+									<div class="pivot-box-header" onclick="ShowHide('#toggle-related-collections'); return false;">
+										<span class="pivot-toggle"><img id="toggle-related-collections-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+										Related Collections (3)
+									</div>
+									<div id="toggle-related-collections">
+										<div class="pivot-box-label">
+											<div class="pivot-box-label-pair"><div class="pivot-box-label-1">Name</div><div class="pivot-box-label-2">Owner</div><div class="pivot-box-label-3">Edited On</div></div>
+											<div class="clear"></div>
+										</div>
+										<div class="pivot-box-data">
+											<div class="pivot-box-data-pair"><div class="pivot-box-data-1">Impressionist</div><div class="pivot-box-data-2">Megan Forbes</div><div class="pivot-box-data-3">04.04.09</div></div>
+											<div class="pivot-box-data-pair"><div class="pivot-box-data-1">Needs conservation</div><div class="pivot-box-data-2">me (public)</div><div class="pivot-box-data-3">04.04.09</div></div>
+											<div class="pivot-box-data-pair"><div class="pivot-box-data-1">My-to-do</div><div class="pivot-box-data-2">me (private)</div><div class="pivot-box-data-3">04.04.09</div></div>
+											<div class="clear"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+							<!-- END Right-side container -->
+					
+							<div class="clear"></div>
+						</div> <!-- END sub-main content -->
+					</div>
+				</div> <!-- END main content -->
+			
+			</div>
+			
+			<!-- footer block -->
+			<div id="footer">
+ 			   			<div class="footer-text">&copy; 2009 CollectionSpace &nbsp;&ndash;&nbsp; CollectionSpace <a href="http://wiki.collectionspace.org/display/collectionspace/Project+Roadmap+-+Incremental+Releases#ProjectRoadmap-IncrementalReleases-CollectionSpaceRelease0.2%3AHelloMars">Release 0.2</a> &nbsp;&ndash;&nbsp; <a href="http://www.collectionspace.org">About CollectionSpace</a> &nbsp;&ndash;&nbsp; <a href="http://wiki.collectionspace.org/display/collectionspace/Release+0.1+Feedback">Leave Feedback</a></div>
+			</div> <!-- END footer block -->
+			
+		</div> <!-- END body content -->
+
+        <div class="csc-error-dialog">
+            <p class="csc-error-message">This text should be replaced by the error message.</p>
+        </div>
+		
+    	<script type="text/javascript">
+    		demo.setup();
+    	</script>
+	</body>
+</html>
