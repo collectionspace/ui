@@ -23,14 +23,23 @@
 		<!-- body content -->
 		<div class="fl-container-1024 fl-centered">
 		
-			<!-- CSpace logo and right-side search box -->
-			<div id="name-header">
- 			    <div><img src="../images/header.png" alt="CollectionSpace" height=86 width=1024 usemap="#header"/></div>
-				<map name="header">
-					<area shape="rect" coords="10,11,256,50" href="http://www.collectionspace.org/current_release" alt="CollectionSpace">
-					<area shape="rect" coords="265,59,510,84" href="createnew.html" alt="Create New">
-					<area shape="rect" coords="518,59,763,84" href="findedit.html" alt="Find and Edit">
-				</map></div>
+			<div id="header-menu">
+				<div id="header-menu-content">
+					<div>
+						<div class="header-menu-logo"><a href="http://www.collectionspace.org/current_release"><img src="../images/header-logo.png" height=34 width=196 alt="CollectionSpace" /></a></div>
+						<div class="header-menu-logout"><a href="index.html">Log out</a></div>
+						<div class="clear"></div>
+					</div>
+					<div style="header-menu-button-row">
+						<div class="header-menu-button mycs inactive"></div>
+						<div><a class="header-menu-button createnew" href="createnew.html"></a></div>
+						<div><a class="header-menu-button findedit selected" href="findedit.html"></a></div>
+						<div class="header-menu-button report inactive"></div>
+						<div class="header-menu-button admin no-margin inactive"></div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
 			
 			<div class="fl-container-1024-inner">
 			
@@ -42,7 +51,7 @@
 					</div>
 					
 					<div class="label">
-						<div class="label-text">ACCESSION NUMBER</div><div class="label-text">DESCRIPTION</div>
+						<div class="label-text">ACQUISITION NUMBER</div><div class="label-text">DESCRIPTION</div>
 						<div class="clear"></div>
 					</div>
 				</div>
@@ -83,7 +92,7 @@
 												<!-- Information-block header -->
 												<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-identification-information'); return false;">
 													<span class="header-toggle"><img id="toggle-object-identification-information-img"  src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-													Acqusition Information
+													Acquisition Information
 												</div>
 												
 												<!-- Information-block content block -->
@@ -94,7 +103,7 @@
 													<div class="info-column fl-force-left">
 														<div class="info-column2-40 fl-force-left">
 															<div class="info-pair">
-																<div class="info-label" title="">Acquisition Reference Number</div>
+																<div class="info-label" title="">Acquisition Number</div>
 																<div class="info-value"><input type="text" class="input-numeric-long csc-acquisition-acquisition-reference-number" name="acquisition-acquisition-reference-number"></div>
 															</div>
 														
@@ -177,7 +186,8 @@
 																<table id="" >
 																	<thead>
 																		<tr>
-																			<td title="" colspan="2">Acquisition Funding</td>
+																			<td title="">Currency</td>
+																			<td title="">Value</td>
 																			<td title="">Source</td>
 																			<td title="">Provisos</td>
 																		</tr>
@@ -204,12 +214,12 @@
 															</div>
 																								
 															<div class="info-pair-table">
-																<div class="info-label" title="">Acqusition Authorizer</div>
+																<div class="info-label" title="">Acquisition Authorizer</div>
 																<div class="info-value">
 																	<table id="" >
 																		<thead>
 																			<tr>
-																				<td title="">Acqusition Authorizer</td>
+																				<td title="">Acquisition Authorizer</td>
 																				<td title="">Date</td>
 																			</tr>
 																		</thead>
@@ -268,7 +278,7 @@
 														<div class="info-column2-50 fl-force-left">
 															<div class="info-pair-addrow">
 																<div class="info-label" title="">Accession Number</div>
-																<div class="info-value"><input type="text" class="input-numeric-long csc-acquisition-accession-number" name="acquisition-accession-number" value="2004.002.001"></div>
+																<div class="info-value"><input type="text" class="input-numeric-long csc-acquisition-accession-number" name="acquisition-accession-number"></div>
 															</div>
 														</div>
 														
@@ -355,21 +365,23 @@
 													</div>
 													
 													<div class="info-column2-50 fl-force-left">
-														<div class="info-pair-table">
+														<div class="info-pair-table deactivate">
 															<div class="info-label" title="">Components and Range</div>
 															<div class="info-value">
-																<table id="" style="width:60%;">
+																<table class="components">
 																	<tbody>
 																		<tr>
 																			<td class="label">Total Number of Items</td>
-																			<td><input type="text" class="input-numeric-small csc-acquisition-total-number-of-items" name="acquisition-accession-number-total-number-of-items" value="16"></td>
+																			<td><input type="text" disabled=disabled class="input-numeric-small csc-acquisition-total-number-of-items" name="acquisition-accession-number-total-number-of-items"></td>
 																		</tr>
 																	</tbody>
 																</table>
+																<div class="components-img"><img src="../images/gen_sub.png" alt="generate sub number" height=19 width=110 /></div>
+																<div class="clear"></div>
 															</div>
 														</div>
 														
-														<div class="info-pair-addrow">
+														<div class="info-pair-addrow deactivate">
 															<div class="info-label" title=""></div>
 															<div class="info-value">
 																<table id="" >
@@ -384,20 +396,11 @@
 																	<tbody>
 																		<tr>
 																			<td>&nbsp;1</td>
-																			<td>2004.002.001a</td>
-																			<td>King Chess Piece</td>
-																			<td>create record</td>
+																			<td></td>
+																			<td></td>
+																			<td></td>
 																		</tr>
-																		<tr>
-																			<td>&nbsp;2</td>
-																			<td>2004.002.001b</td>
-																			<td>Queen Chess Piece</td>
-																			<td>create record</td></tr>
-																		<tr>
-																			<td>&nbsp;3</td>
-																			<td>2004.002.001c</td>
-																			<td>Pawn Chess Piece</td>
-																			<td>create record</td></tr>
+																	
 																	</tbody>
 																</table>
 															</div>
