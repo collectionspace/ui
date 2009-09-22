@@ -14,6 +14,18 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
 
+    // This is temporary: Right now, auto-filled numbers are facilitated through a specially
+    // named object record. The name of this record must be removed from the list of records.
+    var cleanUpRecordList = function (list) {
+        var cleanedList = [];
+        var ci = 0;
+        for (var i = 0; i < list.length; i++) {
+            if (list[i] !== "__auto") {
+                cleanedList[ci++] = list[i];
+            }
+        }
+        return cleanedList;
+    };
 
     // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
     // load it manually via ajax
@@ -65,7 +77,7 @@ var cspace = cspace || {};
     cspace.recordList = function (container, options) {
         var that = fluid.initView("cspace.recordList", container, options);
         that.model = {
-            records: []
+            items: []
         };
         that.spec = {};
 
@@ -74,6 +86,7 @@ var cspace = cspace || {};
         };
 
         that.refreshView = function () {
+            that.model.items = cleanUpRecordList(that.model.items);
             var tree = cspace.renderer.buildComponentTree(that.spec, that.model);
             var cutpoints = cspace.renderer.createCutpoints(that.spec);
             fluid.selfRender(that.container, tree, {cutpoints: cutpoints, model: that.model, debugMode: true});
