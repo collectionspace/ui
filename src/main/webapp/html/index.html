@@ -9,6 +9,9 @@
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-layout.css" />
 		<link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
+		<script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
+		<script type="text/javascript" src="../js/Utilities.js"></script>
+		<script type="text/javascript" src="../js/loginSetup.js"></script>
 	</head>
 
 	<body>
@@ -46,17 +49,15 @@
     											<div class="info-label">Log into CollectionSpace</div>
     											<div class="info-value">
     												<div>
+														<div class="login-error hidden csc-login-error">Incorrect User ID/Password</div>
     													<div class="login-pair">
     														<div class="login-label">User ID</div>
     														<div class="login-element"><input type="text" class="input-alpha-login" name="userid"></div>
-    														<div class="login-error hidden">User ID does not exist</div>
     														<div class="clear"></div>
     													</div>
-    													
     													<div class="login-pair">
     														<div class="login-label">Password</div>
     														<div class="login-element"><input type="password" class="input-alpha-login" name="password"></div>
-    														<div class="login-error hidden">Password is incorrect</div>
     														<div class="clear"></div>
     													</div>
     													
@@ -102,5 +103,9 @@
 			</div> <!-- END footer block -->
 			
 		</div> <!-- END body content -->
+
+        <script>
+            cspace_login.setup();
+        </script>
 	</body>
 </html>
