@@ -18,6 +18,7 @@ var demo = demo || {};
         var csid = cspace.util.getUrlParameter("csid");
         var oiOpts = {
             autoGenNumField: "entryNumber",
+            alternateFields: ["entryNumber"],
             uiSpecUrl: "./schemas/intake/schema.json",
             templates: {
                 body: {

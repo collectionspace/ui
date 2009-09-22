@@ -53,4 +53,32 @@ var cspace = cspace || {};
         };
     };
 
+    // This is a temporary function, in place only until the ID service is accessible
+    // through the APP layer.
+    cspace.util.newID = function (model, idField, alternateFields) {
+        var id = model[idField];
+        
+        if (!id || (id === "")) {
+            for (var i = 0; i < alternateFields.length; i++) {
+                if (model[alternateFields[i]]) {
+                    id = model[alternateFields[i]].split(" ")[0];
+                    break;
+                }
+            }
+            if (!id || (id === "")) {
+                id = new Date().getTime().toString();
+            }
+        }
+//        if ((!id || (id === "")) && model.accessionNumber) {
+//            id = model.accessionNumber.split(" ")[0];
+//        }
+//        if ((!id || (id === "")) && model.objectTitle) {
+//            id = model.objectTitle.split(" ")[0];
+//        }
+//        if (!id || (id === "")) {
+//            id = new Date().getTime().toString();
+//        }
+        return id;
+    };
+    
 })(jQuery, fluid_1_1);
