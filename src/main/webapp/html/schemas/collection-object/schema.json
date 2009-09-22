@@ -1,59 +1,67 @@
 {
 	spec: {
 	    "objectTitle": {
-	        "selector": ".csc-object-identification-object-title",
-	        "validators": [],
-	        "decorators": []
+	        "selector": ".csc-object-identification-object-title"
+	    },
+	    "objectTitleLanguage": {
+	        "selector": ".csc-object-identification-object-title-language"
+	    },
+	    "objectTitleTranslation": {
+	        "selector": ".csc-object-identification-object-title-translation"
+	    },
+	    "objectTitleType": {
+	        "selector": ".csc-object-identification-object-title-type"
 	    },
 	    "accessionNumber": {
-	        "selector": ".csc-object-identification-object-number",
-	        "validators": [],
-	        "decorators": []
+	        "selector": ".csc-object-identification-object-number"
+	    },
+	    "otherNumber": {
+	        "selector": ".csc-object-identification-other-number"
 	    },
 	    "description": {
-	        "selector": ".csc-object-identification-brief-description",
-	        "validators": [],
-	        "decorators": []
+	        "selector": ".csc-object-identification-brief-description"
 	    },
 	    "objectName": {
-	        "selector": ".csc-object-identification-object-name",
-	        "validators": [],
-	        "decorators": []
+	        "selector": ".csc-object-identification-object-name"
+	    },
+	    "objectCurrency": {
+	        "selector": ".csc-object-identification-object-currency"
+	    },
+	    "objectLevel": {
+	        "selector": ".csc-object-identification-object-level"
+	    },
+	    "objectSystem": {
+	        "selector": ".csc-object-identification-object-system"
+	    },
+	    "objectType": {
+	        "selector": ".csc-object-identification-object-type"
+	    },
+	    "objectLanguage": {
+	        "selector": ".csc-object-identification-object-language"
+	    },
+	    "objectNote": {
+	        "selector": ".csc-object-identification-object-note"
 	    },
 	    "distinguishingFeatures": {
-	        "selector": ".csc-object-identification-distinguishing-features",
-	        "validators": [],
-	        "decorators": []
+	        "selector": ".csc-object-identification-distinguishing-features"
 	    },
 	    "numberOfObjects": {
-	        "selector": ".csc-object-identification-number-objects",
-	        "validators": [],
-	        "decorators": []
+	        "selector": ".csc-object-identification-number-objects"
 	    },
 	    "responsibleDepartment": {
-	        "selector": ".csc-object-identification-responsible-department",
-	        "validators": [],
-	        "decorators": []
+	        "selector": ".csc-object-identification-responsible-department"
 	    },
 	    "comments": {
-	        "selector": ".csc-object-identification-comments",
-	        "validators": [],
-	        "decorators": []
+	        "selector": ".csc-object-identification-comments"
 	    },
 	    "dateAssociation": {
-	        "selector": ".csc-date-information-date-association",
-	        "validators": [],
-	        "decorators": []
+	        "selector": ".csc-date-information-date-association"
 	    },
 	    "datePeriod": {
-	        "selector": ".csc-date-information-date-period",
-	        "validators": [],
-	        "decorators": []
+	        "selector": ".csc-date-information-date-period"
 	    },
 	    "dateText": {
-	        "selector": ".csc-date-information-date-text",
-	        "validators": [],
-	        "decorators": []
+	        "selector": ".csc-date-information-date-text"
 	    }
 	},
 	modelToResourceMap: {
