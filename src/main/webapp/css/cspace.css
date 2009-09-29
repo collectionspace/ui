@@ -362,6 +362,11 @@ opacity:0.5;
 	margin-bottom: 10px;
 }
 
+.cs-timestamp {
+    float:right;
+    font-weight:normal;
+    font-size: 1em;
+}
 .hidden {
     display: none;
 }
