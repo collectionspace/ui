@@ -32,8 +32,8 @@
 					</div>
 					<div style="header-menu-button-row">
 						<div class="header-menu-button mycs inactive"></div>
-						<div><a class="header-menu-button createnew" href="createnew.html"></a></div>
-						<div><a class="header-menu-button findedit selected" href="findedit.html"></a></div>
+						<div class="createnew"><a class="header-menu-button" href="createnew.html"></a></div>
+						<div class="findedit"><a class="header-menu-button selected" href="findedit.html"></a></div>
 						<div class="header-menu-button report inactive"></div>
 						<div class="header-menu-button admin no-margin inactive"></div>
 						<div class="clear"></div>
@@ -72,9 +72,9 @@
 									<!-- left-side container. Contains bulk of Object Entry forms and fields -->
 								<form class="fl-container-left csc-acquisition-entry-container">
 									<!-- Object Data Entry specific sub-menu -->
-									<div class="save-bar">
-										<div id="top-nav-menu"><img src="../images/acquisition-tabs.png" alt="related record column" height=22 width=136 /></div>
-										<div class="upper-save"><input type="image" src="../images/savebutton.png" alt="save button" class="savebutton csc-save" height="25" width="74"/></div>
+									<div id="top-nav">
+										<div id="tab-menu"><img src="../images/acquisition-tabs.png" alt="related record column" height=24 width=698 /></div>
+										<div class="upper-save"><input type="image" src="../images/btnSave.png" alt="save button" class="savebutton csc-save" height="24" width="100"/></div>
 										<div class="collapse-all"><!--<img id="toggle-all-img"  src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" 
 											onclick="ShowHide('#toggle-object-identification-information'); ShowHide('#toggle-object-description-info'); ShowHide('#toggle-date-info'); ShowHide('#toggle-all'); return false;"/>Collapse All--></div>
 										<div class="clear"></div>
@@ -149,28 +149,28 @@
 																		<tbody>
 																			<tr>
 																				<td class="label">Group Purchase Price</td>
-																				<td><input type="text" class="input-money-type csc-acquisition-purchaser-price-demonination" name="acquisition-purchaser-price-denomination" value="US Dollar"></td>
-																				<td><input type="text" class="input-numeric-medium csc-acquisition-purchaser-price" name="acquisition-purchaser-price" value="$ "></td>
+																				<td><input type="text" class="input-money-type csc-acquisition-purchaser-price-demonination" name="acquisition-purchaser-price-denomination" value="US dollar $"></td>
+																				<td><input type="text" class="input-numeric-medium csc-acquisition-purchaser-price" name="acquisition-purchaser-price" ></td>
 																			</tr>
 																			<tr>
 																				<td class="label">Object Offer Price</td>
-																				<td><input type="text" class="input-money-type csc-acquisition-object-offer-price-denomination" name="acquisition-object-offer-price-denomination" value="US Dollar"></td>
-																				<td><input type="text" class="input-numeric-medium csc-acquisition-object-offer-price" name="acquisition-object-offer-price" value="$ "></td>
+																				<td><input type="text" class="input-money-type csc-acquisition-object-offer-price-denomination" name="acquisition-object-offer-price-denomination" value="US dollar $"></td>
+																				<td><input type="text" class="input-numeric-medium csc-acquisition-object-offer-price" name="acquisition-object-offer-price" ></td>
 																			</tr>
 																			<tr>
 																				<td class="label">Object Purchaser Offer Price</td>
-																				<td><input type="text" class="input-money-type csc-acquisition-object-purchaser-offer-price-denomination" name="acquisition-object-purchaser-offer-price-denomination" value="US Dollar"></td>
-																				<td><input type="text" class="input-numeric-medium csc-acquisition-object-purchaser-offer-price" name="acquisition-object-purchaser-offer-price" value="$ "></td>
+																				<td><input type="text" class="input-money-type csc-acquisition-object-purchaser-offer-price-denomination" name="acquisition-object-purchaser-offer-price-denomination" value="US dollar $"></td>
+																				<td><input type="text" class="input-numeric-medium csc-acquisition-object-purchaser-offer-price" name="acquisition-object-purchaser-offer-price" ></td>
 																			</tr>
 																			<tr>
 																				<td class="label">Object Purchase Price</td>
-																				<td><input type="text" class="input-money-type csc-acquisition-object-purchaser-price-denomination" name="acquisition-object-purchaser-price-denomination" value="US Dollar"></td>
-																				<td><input type="text" class="input-numeric-medium csc-acquisition-object-purchaser-price" name="acquisition-object-purchaser-price" value="$ "></td>
+																				<td><input type="text" class="input-money-type csc-acquisition-object-purchaser-price-denomination" name="acquisition-object-purchaser-price-denomination" value="US dollar $"></td>
+																				<td><input type="text" class="input-numeric-medium csc-acquisition-object-purchaser-price" name="acquisition-object-purchaser-price" ></td>
 																			</tr>
 																			<tr>
 																				<td class="label">Original Object Purchase Price</td>
-																				<td><input type="text" class="input-money-type csc-acquisition-original-object-purchaser-price-denomination" name="acquisition-original-object-purchaser-price-denomination" value="US Dollar"></td>
-																				<td><input type="text" class="input-numeric-medium csc-acquisition-original-object-purchaser-price" name="acquisition-original-object-purchaser-price" value="$ "></td>
+																				<td><input type="text" class="input-money-type csc-acquisition-original-object-purchaser-price-denomination" name="acquisition-original-object-purchaser-price-denomination" value="US dollar $"></td>
+																				<td><input type="text" class="input-numeric-medium csc-acquisition-original-object-purchaser-price" name="acquisition-original-object-purchaser-price" ></td>
 																			</tr>
 																		</tbody>
 																	</table>
@@ -195,8 +195,8 @@
 																		
 																	<tbody>
 																		<tr>
-																			<td sytle="width:180px;"><input type="text" class="input-money-type csc-acquisition-acquisition-funding-denomination" name="acquisition-acquisition-funding-denomination" value="US Dollar"></td>
-																			<td><input type="text" class="input-numeric-medium csc-acquisition-acquisition-funding-value" name="acquisition-acquisition-funding-value" value="$ "></td>
+																			<td sytle="width:180px;"><input type="text" class="input-money-type csc-acquisition-acquisition-funding-denomination" name="acquisition-acquisition-funding-denomination" value="US dollar $"></td>
+																			<td><input type="text" class="input-numeric-medium csc-acquisition-acquisition-funding-value" name="acquisition-acquisition-funding-value" ></td>
 																			<td><input type="text" class="input-alpha-table csc-acquisition-acquisition-source" name="acquisition-acquisition-source"></td>
 																			<td><input type="text" class="input-alpha-table csc-acquisition-acquisition-source-provisos" name="acquisition-acquisition-source-provisos"></td>
 																		</tr>
@@ -267,7 +267,7 @@
 											</div>
 										</div>	
 
-										<div class="fl-container-flex fl-fix information-group">
+										<!--<div class="fl-container-flex fl-fix information-group">
 											<div class="info-column fl-force-left">
 												<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-description-info'); return false;">
 													<span class="header-toggle"><img id="toggle-object-description-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
@@ -412,7 +412,7 @@
 														</div>											
 													</div>
 													
-													<!-- Left-side column -->
+													
 													<div class="info-column2-50 fl-force-right">
 														<div class="info-pair">
 															<div class="info-pair-addrow">
@@ -456,15 +456,16 @@
 												</div>
 											</div>
 										</div>
+										-->
 										
-										<div class="fl-container-flex fl-fix information-group">
+										<!--<div class="fl-container-flex fl-fix information-group">
 											<div class="info-column fl-force-left">
 												<div class="fl-container-flex header" onclick="ShowHide('#toggle-date-info'); return false;">
 													<span class="header-toggle"><img id="toggle-date-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 													Date Information
 												</div>
 												<div class="fl-container-flex fl-fix content" id="toggle-date-info" >
-													<!-- Left-side column -->
+													
 													<div class="info-column2-50 fl-force-left">
 														<div class="info-pair-addrow">
 															<div class="info-label" title="">Date Association</div>
@@ -481,7 +482,7 @@
 														</div>
 													</div>
 													
-													<!-- Left-side column -->
+													
 													<div class="info-column2-50 fl-force-right">															
 														<div class="info-pair">
 															<div class="info-label" title="">Date Period</div>
@@ -530,6 +531,7 @@
 												</div>
 											</div>
 										</div>
+										-->
 										
 										<div class="csc-error-dialog">
 											<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
@@ -538,7 +540,7 @@
 
 									<!-- Save button container -->
 									<div class="fl-container-flex input-buttons">
-										<input type="image" src="../images/savebutton.png" alt="save button" class="savebutton csc-save-bottom" height="25" width="74"  /><input type="image" src="../images/cancelbutton.png" alt="cancel button" class="cancelbutton" name="" width="89" height="25" /><div class="clear"><!-- --></div></div>	
+										<input type="image" src="../images/btnSave.png" alt="save button" class="savebutton csc-save-bottom" height="24" width="100"  /><input type="image" src="../images/cancelbutton.png" alt="cancel button" class="cancelbutton" name="" width="89" height="25" /><div class="clear"><!-- --></div></div>	
 									
 								</form> <!-- END left-side container -->
 								

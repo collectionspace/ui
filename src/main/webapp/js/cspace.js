@@ -13,3 +13,21 @@ function getRadioValue() {
 		}
 	}
 }
+
+$(document).ready(function() {
+	$('#number1-info').val($('#number1').val());
+	
+	$('#number1-info').focus(function() {
+		$('#number1-info').toggleClass('deactivate');
+		$('#number1').toggleClass('hidden');
+		$('#number1').focus();
+		
+    });
+		
+    $('#number1').blur(function() {
+		$('#number1-info').toggleClass('deactivate');
+		$('#number1-info').val($('#number1').val());
+		$('#number1').toggleClass("hidden");
+		
+    });
+});
