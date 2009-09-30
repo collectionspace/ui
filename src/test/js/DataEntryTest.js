@@ -29,8 +29,8 @@
         jqUnit.assertTrue("Error string should contain errorRecoverySuggestion", (errorMessage.indexOf(objEntry.options.strings.errorRecoverySuggestion) > -1));
     });
     
-    dataEntryTest.test("renderer.buildCutpoints", function () {
-        var cutpoints = cspace.renderer.buildCutpoints(testSpec);
+    dataEntryTest.test("renderer.createCutpoints", function () {
+        var cutpoints = cspace.renderer.createCutpoints(testSpec);
         jqUnit.assertEquals("There should be 2 cutpoints", 2, cutpoints.length);
         jqUnit.assertEquals("Field 'foo' should exist ", "foo", cutpoints[0].id);
         jqUnit.assertEquals("Field 'foo' should have ", "brack foofer", cutpoints[0].selector);
