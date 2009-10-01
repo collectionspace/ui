@@ -115,6 +115,7 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .info-column3 	 {width: 32%;}
 
 .fl-container-1024   {width: 1024px;}
+.fl-container-900     {width:900px;}
 .fl-container-1050   {width: 1050px;}
 /*.fl-container-1024-inner {padding: 0 10px 0 4px;}*/
 .fl-container-1024-inner {padding:0;}
@@ -159,7 +160,7 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .info-value {width:100%; float:left; padding-bottom:10px; z-index:0;}
 
 .login-text {padding:15px 20px;}
-.login-forms {background-color:#EFF0EF; padding:15px 0 15px 20px;}
+.login-forms {background-color:#E6E6E6; padding:25px 0 10px 35px; margin-top:20px;}
 .login-text .info-label, .login-forms .info-label {font-size: 20px; line-height:20px; font-weight:bold;}
 .login-text .info-value, .login-forms .info-value {padding-top: 20px; font-size:14px; line-height:18px; width:90%;}
 .login-pair {padding-bottom: 15px;}
@@ -337,8 +338,9 @@ td textarea {border:none;}
 .no-border {border-width:0; background-color: #F5F5F6;}
 .no-float {float:none;}
 .no-margin {margin:0;}
+.no-padding {padding:0;}
 
-.disabled {color: #CCCCCC !important;}
+.disabled {color: #A0A0A0 !important;}
 .content.disabled, .disabled td, .disabled tr {background-color:#CDCCCC !important; color:#a0a0a0 !important;}
 .radio-button.disabled {color:gray; background-color:#E7E 8E9;}
 
