@@ -1,4 +1,4 @@
-				<form class="fl-container-left">
+<form class="fl-container-left">
 					<div id="top-nav">
 						<div id="tab-menu"><!-- --></div>
 						<div class="upper-save"><input type="image" src="../images/btnSave.png" alt="save button" class="savebutton csc-save" height="24" width="100"  /></div><div class="clear"></div>
@@ -14,20 +14,20 @@
 							  This corresponds to Information groups within Spectrum's Object Entry prodedure. -->
 						<div class="fl-container-flex fl-fix information-group">
 							<div class="info-column fl-force-left">	
-								<!-- Information-block header -->
+								
 								<div class="fl-container-flex header" onclick="ShowHide('#toggle-intake-information'); return false;">
 									<span class="header-toggle"><img id="toggle-intake-information-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 									Object Entry
 								</div>
 
-								<!-- Information-block content block -->
+								
 								<div class="fl-container-flex fl-fix content" id="toggle-intake-information" >
-									<!-- Left-side column -->
+									
 									<div class="info-column2-50 fl-force-left" >
-										<!-- The information is broken down into a pair of information elements: label and value -->
+										
 										<div class="info-pair">
 											<div class="info-label">Entry Number</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-entry-number" name="entry_number"></div>
+											<div class="info-value"><input type="text" class="input-alpha csc-intake-entry-number" name="intake-entry-number" /></div>
 										</div>
 																				
 										<div class="info-pair-date">
@@ -36,7 +36,7 @@
 												<table id="">
 													<tbody>
 														<tr>
-															<td class="field-cal"><input type="text" disabled=disabled class="input-date csc-entry-date disabled" name="entry-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+															<td class="field-cal"><input type="text" disabled=disabled class="input-date csc-intake-entry-date disabled" name="intake-entry-date" /><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -44,13 +44,8 @@
 										</div>
 										
 										<div class="info-pair">
-											<div class="info-label">Number of Objects</div>
-											<div class="info-value"><input type="text" class="input-numeric-small csc-number-of-objects" name="number-of-objects"></div>
-										</div>
-										
-										<div class="info-pair">
 											<div class="info-label">Entry Reason</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-entry-reasons" name="entry-reasons"></div>
+											<div class="info-value"><input type="text" class="input-alpha csc-intake-entry-reason" name="intake-entry-reason" /></div>
 										</div>
 										
 										<div class="info-pair-addrow">
@@ -60,12 +55,12 @@
 													<tbody>
 														<tr>
 															<td class="table-unselected"></td>
-															<td><input type="text" class="input-alpha-table csc-intake-entry-method" name="intake-entry-method"></td>
+															<td><input type="text" class="input-alpha-table csc-intake-entry-method" name="intake-entry-method" /></td>
 														</tr>
 													</tbody>
 												</table>
 											</div>
-											<!--<div class="addrow"><img src="../images/addarow.png" alt="add a row" title="click to add an additional row" height=15 width=88 onclick='addRow("addrow-entry-method")'/></div>-->
+											
 										</div>
 										
 									</div>
@@ -77,7 +72,7 @@
 												<table id="">
 													<tbody>
 														<tr>
-															<td class="field-cal"><input type="text" disabled class="input-date csc-object-return-date disabled" name="object-return-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+															<td class="field-cal"><input type="text" disabled class="input-date csc-intake-return-date disabled" name="intake-return-date" /><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -85,45 +80,53 @@
 										</div>
 
 										<div class="info-pair">
-											<div class="info-label">Donor</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-donor" name="donor"></div>
+											<div class="info-label">Current Owner</div>
+											<div class="info-value"><input type="text" class="input-alpha csc-intake-current-owner" name="intake-current-owner" /></div>
 										</div>
 										
-										<div class="info-pair">
+										<div class="info-pair-table">
 											<div class="info-label">Depositor</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-depositor" name="depositor"></div>
-										</div>
-										
-										<div class="info-pair">
-											<div class="info-label">Responsible Entity</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-responsible-entity" name="responsible-entity"></div>
-										</div>													
-										
-										<div class="info-pair">
-											<div class="info-label">Brief Description</div>
-											<div class="info-value"><textarea class="input-textarea csc-intake-brief-description" name="intake-brief-description"></textarea></div>
+											<div class="info-value">
+												<table id="" >
+													<thead>
+														<tr>
+															<td>Depositor</td>
+															<td>Depositor Requirements</td>
+														</tr>
+													</thead>
+														
+													<tbody>
+														<tr>
+															<td><input type="text" class="input-alpha-table csc-intake-depositor" name="intake-depositor" /></td>
+															<td><input type="text" class="input-alpha-table csc-intake-depositor-requirements" name="intake-depositor-requirements" /></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
+									
+									<div class="clear"></div>
 									
 									<div class="info-column1 fl-force-left">
 										<div class="info-pair">
 											<div class="info-label">Entry Note</div>
-											<div class="info-value"><textarea class="input-textarea csc-intake-entry-note" name="intake-entry-note"></textarea></div>
+											<div class="info-value"><input class="input-textarea csc-intake-entry-note" name="intake-entry-note" /></div>
 										</div>
 									
 										<div class="info-pair">
 											<div class="info-label">Packing Note</div>
-											<div class="info-value"><div class="info-value"><textarea class="input-textarea csc-intake-packing-note" name="intake-packing-note"></textarea></div></div>
+											<div class="info-value"><div class="info-value"><input class="input-textarea csc-intake-packing-note" name="intake-packing-note" /></div></div>
 										</div>
 									</div>
 									
 									<div class="clear"></div>
 								</div>
 							</div>
-						</div>	
+						</div>
 						
 						<div class="fl-container-flex fl-fix information-group">
-							<div class="info-column fl-force-left deactivate">
+							<div class="info-column fl-force-left">
 								<div class="fl-container-flex header" onclick="ShowHide('#toggle-collection'); return false;">
 									<span class="header-toggle"><img id="toggle-collection-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 									Object Collection Information
@@ -138,7 +141,7 @@
 												<table id="">
 													<tbody>
 														<tr>
-															<td class="field-cal"><input type="text" disabled class="input-date csc-field-location-date disabled" name="field-location-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+															<td class="field-cal"><input type="text" disabled class="input-date csc-intake-field-location-date disabled" name="intake-field-location-date" /><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -152,17 +155,17 @@
 													<tbody>
 														<tr>
 															<td class="table-unselected"></td>
-															<td><input type="text" class="input-alpha-table csc-field-collection-event-name" name="field-collection-event-name" /></td>
+															<td><input type="text" class="input-alpha-table csc-intake-field-collection-event-name" name="intake-field-collection-event-name" /></td>
 														</tr>
 													</tbody>
 												</table>
 											</div>
-											<!--<div class="addrow"><img src="../images/addarow.png" alt="add a row" title="click to add an additional row" height=15 width=88 onclick='addRow("addrow-entry-method")'/></div>-->
+											
 										</div>
 										
 										<div class="info-pair">
 											<div class="info-label">Field Collection Event Reference Number</div>
-											<div class="info-value"><input type="text" class="input-numeric-medium csc-field-collection-event-name" name="field-collection-event-name"></div>
+											<div class="info-value"><input type="text" class="input-numeric-medium csc-intake-field-collection-event-ref-number" name="intake-field-collection-event-ref-number" /></div>
 										</div>
 										
 										<div class="info-pair-addrow">
@@ -172,30 +175,30 @@
 													<tbody>
 														<tr>
 															<td class="table-unselected"></td>
-															<td><input type="text" class="input-alpha-table csc-field-collection-method" name="field-collection-method"></td>
+															<td><input type="text" class="input-alpha-table csc-intake-field-collection-method" name="intake-field-collection-method" /></td>
 														</tr>
 													</tbody>
 												</table>
 											</div>
-											<!--<div class="addrow"><img src="../images/addarow.png" alt="add a row" title="click to add an additional row" height=15 width=88 onclick='addRow("addrow-entry-method")'/></div>-->
+											
 										</div>
 										
 										<div class="info-pair">
 											<div class="info-label">Field Collection Number</div>
-											<div class="info-value"><input type="text" class="input-numeric csc-field-collection-number" name="current-field-collection-number"></div>
-										</div>
+											<div class="info-value"><input type="text" class="input-numeric csc-intake-field-collection-number" name="current-intake-field-collection-number" /></div>
+										</div> 
 									</div>
 									
 									<!-- Left-side column -->
 									<div class="info-column2-50 fl-force-right">															
 										<div class="info-pair">
 											<div class="info-label">Field Collection Source</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-field-collection-source" name="current-field-collection-source"></div>
+											<div class="info-value"><input type="text" class="input-alpha csc-intake-field-collection-source" name="current-intake-field-collection-source" /></div>
 										</div>
 										
 										<div class="info-pair">
 											<div class="info-label">Field Collection Place</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-field-collection-place" name="current-field-collection-place"></div>
+											<div class="info-value"><input type="text" class="input-alpha csc-intake-field-collection-place" name="intake-current-field-collection-place" /></div>
 										</div>
 										
 										<div class="info-pair-addrow">
@@ -205,12 +208,12 @@
 													<tbody>
 														<tr>
 															<td class="table-unselected"></td>
-															<td><input type="text" class="input-alpha-table csc-field-collector" name="field-collector"></td>
+															<td><input type="text" class="input-alpha-table csc-intake-field-collector" name="intake-field-collector" /></td>
 														</tr>
 													</tbody>
 												</table>
 											</div>
-											<!--<div class="addrow"><img src="../images/addarow.png" alt="add a row" title="click to add an additional row" height=15 width=88 onclick='addRow("addrow-entry-method")'/></div>-->
+											
 										</div>
 										
 										<div class="info-pair-addrow">
@@ -220,12 +223,12 @@
 													<tbody>
 														<tr>
 															<td class="table-unselected"></td>
-															<td><input type="text" class="input-alpha-table csc-geological-complex-name" name="geological-complex-name"></td>
+															<td><input type="text" class="input-alpha-table csc-intake-geological-complex-name" name="intake-geological-complex-name" /></td>
 														</tr>
 													</tbody>
 												</table>
 											</div>
-											<!--<div class="addrow"><img src="../images/addarow.png" alt="add a row" title="click to add an additional row" height=15 width=88 onclick='addRow("addrow-entry-method")'/></div>-->
+											
 										</div>
 										
 										<div class="info-pair-addrow">
@@ -235,14 +238,15 @@
 													<tbody>
 														<tr>
 															<td class="table-unselected"></td>
-															<td><input type="text" class="input-alpha-table csc-habitat" name="habitat"></td>
+															<td><input type="text" class="input-alpha-table csc-intake-habitat" name="intake-habitat" /></td>
 														</tr>
 													</tbody>
 												</table>
 											</div>
-											<!--<div class="addrow"><img src="../images/addarow.png" alt="add a row" title="click to add an additional row" height=15 width=88 onclick='addRow("addrow-entry-method")'/></div>-->
+											
 										</div>
 									</div>
+									
 									
 									<div class="info-column1 fl-force-left">
 										<div class="info-pair-addrow">
@@ -261,9 +265,9 @@
 													<tbody>
 														<tr>
 															<td class="table-unselected"></td>
-															<td><input type="text" class="input-alpha-table csc-strat-name" name="strat-name"></td>
-															<td><input type="text" class="input-alpha-table csc-strat-type" name="strat-type"></td>
-															<td><input type="text" class="input-alpha-table csc-strat-note" name="strat-note"></td>
+															<td><input type="text" class="input-alpha-table csc-intake-strat-name" name="intake-strat-name" /></td>
+															<td><input type="text" class="input-alpha-table csc-intake-strat-type" name="intake-strat-type" /></td>
+															<td><input type="text" class="input-alpha-table csc-intake-strat-note" name="intake-strat-note" /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -272,12 +276,12 @@
 										
 										<div class="info-pair">
 											<div class="info-label">Field Collection Note</div>
-											<div class="info-value"><textarea class="input-textarea csc-field-collection-note" name="field-collection-note"></textarea></div>
+											<div class="info-value"><input class="input-textarea csc-intake-field-collection-note" name="intake-field-collection-note" /></div>
 										</div>
 										
 										<div class="info-pair">
 											<div class="info-label">Habitat Note</div>
-											<div class="info-value"><textarea class="input-textarea csc-habitat-note" name="habitat-note"></textarea></div>
+											<div class="info-value"><input class="input-textarea csc-intake-habitat-note" name="intake-habitat-note" cols=30 rows=4 /></div>
 										</div>	
 									</div>
 									
@@ -287,7 +291,7 @@
 						</div>
 						
 						<div class="fl-container-flex fl-fix information-group">
-							<div class="info-column fl-force-left deactivate">
+							<div class="info-column fl-force-left">
 								<div class="fl-container-flex header" onclick="ShowHide('#toggle-date-info'); return false;">
 									<span class="header-toggle"><img id="toggle-date-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 									Date Information
@@ -295,21 +299,21 @@
 								<div class="fl-container-flex fl-fix content" id="toggle-date-info" >
 									<!-- Left-side column -->
 									<div class="info-column2-50 fl-force-left">
-										
 										<div class="info-pair">
 											<div class="info-label">Date Association</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-date-association" name="date-association"></div>
+											<div class="info-value"><input type="text" class="input-alpha csc-intake-date-association" name="intake-date-association" /></div>
 										</div>	
-										
 									</div>
 									
 									<!-- Left-side column -->
 									<div class="info-column2-50 fl-force-right">															
 										<div class="info-pair">
 											<div class="info-label">Date Period</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-date-period" name="date-period"></div>
+											<div class="info-value"><input type="text" class="input-alpha csc-intake-date-period" name="intake-date-period" /></div>
 										</div>	
 									</div>
+									
+									<div class="clear"></div>
 									
 									<div class="info-column1 fl-force-left">
 										<div class="info-pair-table">
@@ -328,15 +332,15 @@
 													<tbody>
 														<tr>
 															<td class="label">Date - Earliest/single</td>
-															<td class="field-cal disabled"><input type="text" disabled class="input-date csc-date-earliest-single disabled" name="date-earliest-single"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
-															<td><input type="text" class="input-alpha-table csc-date-earliest-single-certainty" name="date-earliest-single-certainty"></td>
-															<td><input type="text" class="input-alpha-table csc-date-earliest-single-qualifier" name="date-earliest-single-qualifier"></td>
+															<td class="field-cal disabled"><input type="text" disabled class="input-date csc-intake-date-earliest-single disabled" name="intake-date-earliest-single" /><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
+															<td><input type="text" class="input-alpha-table csc-intake-date-earliest-single-certainty" name="intake-date-earliest-single-certainty" /></td>
+															<td><input type="text" class="input-alpha-table csc-intake-date-earliest-single-qualifier" name="intake-date-earliest-single-qualifier" /></td>
 														</tr>
 														<tr>
 															<td class="label">Date - Latest</td>
-															<td class="field-cal disabled"><input type="text" disabled class="input-date csc-date-latest disabled" name="date-latest"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
-															<td><input type="text" class="input-alpha-table csc-date-latest-certainty" name="date-latest-certainty"></td>
-															<td><input type="text" class="input-alpha-table csc-date-latest-qualifier" name="date-latest-qualifier"></td>
+															<td class="field-cal disabled"><input type="text" disabled class="input-date csc-intake-date-latest disabled" name="intake-date-latest" /><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
+															<td><input type="text" class="input-alpha-table csc-intake-date-latest-certainty" name="intake-date-latest-certainty" /></td>
+															<td><input type="text" class="input-alpha-table csc-intake-date-latest-qualifier" name="intake-date-latest-qualifier" /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -345,7 +349,7 @@
 									
 										<div class="info-pair">
 											<div class="info-label">Date Text</div>
-											<div class="info-value"><textarea class="input-textarea csc-date-text" name="field-date-text"></textarea></div>
+											<div class="info-value"><input class="input-textarea csc-intake-date-text" name="intake-field-date-text" /></div>
 										</div>
 									</div>
 									
@@ -355,7 +359,7 @@
 						</div>
 						
 						<div class="fl-container-flex fl-fix information-group">
-							<div class="info-column fl-force-left deactivate">
+							<div class="info-column fl-force-left">
 								<div class="fl-container-flex header" onclick="ShowHide('#toggle-valuation'); return false;">
 									<span class="header-toggle"><img id="toggle-valuation-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 									Valuation
@@ -366,46 +370,24 @@
 									<div class="info-column2-50 fl-force-left">
 										<div class="info-pair">
 											<div class="info-label">Valuer</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-valuer" name="valuer"></div>
+											<div class="info-value"><input type="text" class="input-alpha csc-intake-valuer" name="intake-valuer" /></div>
 										</div>
-										
+									</div>
+
+									<div class="info-column2-50 fl-force-right">
 										<div class="info-pair">
 											<div class="info-label">Reference Number</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-valuation-reference-number" name="valuation-reference-number"></div>
+											<div class="info-value"><input type="text" class="input-alpha csc-intake-valuation-reference-number" name="intake-valuation-reference-number" /></div>
 										</div>	
 									</div>
 									
-									<!-- Right-side column -->
-									<div class="info-column2-50 fl-force-right">
-										
-										<div class="info-pair-table">
-											<div class="info-label" title="">Valuation Amount</div>
-											<div class="info-value">
-												<table id="" >
-													<thead>
-														<tr>
-															<td title="">Currency</td>
-															<td title="">Value</td>
-														</tr>
-													</thead>
-													
-													<tbody>
-														<tr>
-															<td><input type="text" class="input-money-type" name="valuation-amount-money-type" value="US dollar $"></td>
-															<td><input type="text" class="input-money-amount" name="valuation-amount-money-amount" ></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
 									<div class="clear"></div>
 								</div>
 							</div>
 						</div>
 
 						<div class="fl-container-flex fl-fix information-group">
-							<div class="info-column fl-force-left deactivate">
+							<div class="info-column fl-force-left">
 								<div class="fl-container-flex header" onclick="ShowHide('#toggle-insurance'); return false;">
 									<span class="header-toggle"><img id="toggle-insurance-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 									Insurance
@@ -420,7 +402,7 @@
 													<tbody>
 														<tr>
 															<td class="table-unselected"></td>
-															<td><input type="text" class="input-alpha-table csc-intake-insurer" name="intake-insurer"></td>
+															<td><input type="text" class="input-alpha-table csc-intake-insurer" name="intake-insurer" /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -430,16 +412,16 @@
 										
 										<div class="info-pair">
 											<div class="info-label">Policy Number</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-insurance-policy-number" name="insurance-policy-number"></div>
+											<div class="info-value"><input type="text" class="input-alpha csc-intake-insurance-policy-number" name="intake-insurance-policy-number" /></div>
 										</div>	
 
 										<div class="info-pair-date">
-											<div class="info-label">Return Date</div>
+											<div class="info-label">Renewal Date</div>
 											<div class="info-value">
 												<table id="">
 													<tbody>
 														<tr>
-															<td class="field-cal"><input type="text" disabled class="input-date csc-insurance-return-date disabled" name="insurance-return-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+															<td class="field-cal"><input type="text" disabled class="input-date csc-intake-insurance-renewal-date disabled" name="intake-insurance-renewal-date" /><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -449,35 +431,14 @@
 									
 									<!-- Right-side column -->
 									<div class="info-column2-50 fl-force-right">
-										<div class="info-pair-table">
-											<div class="info-label" title="">Insurance Amount</div>
-											<div class="info-value">
-												<table id="" >
-													<thead>
-														<tr>
-															<td title="">Currency</td>
-															<td title="">Value</td>
-														</tr>
-													</thead>
-													
-													<tbody>
-														<tr>
-															<td><input type="text" class="input-money-type csc-insurance-insurance-amount-denomination" name="insurance-insurance-amount-denomination" value="US dollar $"></td>
-															<td><input type="text" class="input-money-amount csc-insurance-insurance-amount-value" name="insurance-insurance-amount-value" ></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-										
 										<div class="info-pair">
 											<div class="info-label">Reference Number</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-insurance-reference-number" name="insurance-reference-number"></div>
+											<div class="info-value"><input type="text" class="input-alpha csc-intake-insurance-reference-number" name="intake-insurance-reference-number" /></div>
 										</div>	
 										
 										<div class="info-pair">
 											<div class="info-label">Insurance Note</div>
-											<div class="info-value"><textarea class="input-textarea csc-insurance-note" name="insurance-note"></textarea></div>
+											<div class="info-value"><input class="input-textarea csc-intake-insurance-note" name="intake-insurance-note" /></div>
 										</div>
 									</div>
 									
@@ -487,31 +448,31 @@
 						</div>
 						
 						<div class="fl-container-flex fl-fix information-group">
-							<div class="info-column fl-force-left deactivate">
+							<div class="info-column fl-force-left">
 								<div class="fl-container-flex header" onclick="ShowHide('#toggle-location'); return false;">
 									<span class="header-toggle"><img id="toggle-location-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 									Location
 								</div>
 								<div class="fl-container-flex fl-fix content" id="toggle-location" >
 									<!-- Left-side column -->
-									<div class="info-column2-50 fl-force-left">
-										<div class="info-pair">
+									<div class="info-column1 fl-force-left">
+										<div class="info-pair-table">
 											<div class="info-label">Current Location</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-current-location" name="current-location"></div>
-										</div>	
-										
-										<div class="info-pair">
-											<div class="info-label">Normal Location</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-normal-location" name="normal-location"></div>
-										</div>
-										
-										<div class="info-pair-date">
-											<div class="info-label">Location Date</div>
 											<div class="info-value">
-												<table id="">
+												<table id="" >
+													<thead>
+														<tr>
+															<td>Current Location</td>
+															<td>Current Location Fitness</td>
+															<td>Current Location Note</td>
+														</tr>
+													</thead>
+														
 													<tbody>
 														<tr>
-															<td class="field-cal"><input type="text" disabled class="input-date csc-location-date disabled" name="location-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+															<td><input type="text" class="input-alpha-table csc-intake-current-location" name="intake-current-location" /></td>
+															<td><input type="text" class="input-alpha-table csc-intake-current-location-fitness" name="intake-current-location-fitness" /></td>
+															<td><input type="text" class="input-alpha-table csc-intake-current-location-note" name="intake-current-location-note" /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -519,13 +480,32 @@
 										</div>
 									</div>
 									
+									<div class="clear"></div>
+									
 									<!-- Left-side column -->
-									<div class="info-column2-50 fl-force-right">															
-										<div class="info-pair">
-											<div class="info-label">Location Note</div>
-											<div class="info-value"><textarea class="input-textarea csc-location-note" name="location-note"></textarea></div>
+									<div class="info-column2-50 fl-force-left">
+										<div class="info-pair-date">
+											<div class="info-label">Location Date</div>
+											<div class="info-value">
+												<table id="">
+													<tbody>
+														<tr>
+															<td class="field-cal"><input type="text" disabled class="input-date csc-intake-location-date disabled" name="location-date" /><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
 										</div>	
 									</div>
+									
+									<div class="info-column2-50 fl-force-right">
+										<div class="info-pair">
+											<div class="info-label">Normal Location</div>
+											<div class="info-value"><input type="text" class="input-alpha csc-intake-normal-location" name="intake-normal-location" /></div>
+										</div>
+									</div>
+									
+									
 									
 									<div class="clear"></div>
 								</div>
@@ -533,7 +513,7 @@
 						</div>
 						
 						<div class="fl-container-flex fl-fix information-group">
-							<div class="info-column fl-force-left deactivate">
+							<div class="info-column fl-force-left">
 								<div class="fl-container-flex header" onclick="ShowHide('#toggle-condition'); return false;">
 									<span class="header-toggle"><img id="toggle-condition-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 									Condition
@@ -542,13 +522,13 @@
 									<!-- Left-side column -->
 									<div class="info-column2-50 fl-force-left">
 										<div class="info-pair-addrow">
-											<div class="info-label">Assessment Method</div>
+											<div class="info-label">Condition Check Method</div>
 											<div class="info-value">
 												<table id="">										
 													<tbody>
 														<tr>
 															<td class="table-unselected"></td>
-															<td><input type="text" class="input-alpha-table csc-assessment-method" name="assessment-method"></td>
+															<td><input type="text" class="input-alpha-table csc-intake-condition-check-method" name="intake-condition-check-method" /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -557,13 +537,13 @@
 										</div>
 										
 										<div class="info-pair-addrow">
-											<div class="info-label">Assessment Reason</div>
+											<div class="info-label">Condition Check Reason</div>
 											<div class="info-value">
 												<table id="">										
 													<tbody>
 														<tr>
 															<td class="table-unselected"></td>
-															<td><input type="text" class="input-alpha-table csc-object-assessment-reason" name="assessment-reason"></td>
+															<td><input type="text" class="input-alpha-table csc-intake-condition-check-reason" name="intake-condition-check-reason" /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -572,13 +552,13 @@
 										</div>
 										
 										<div class="info-pair-addrow">
-											<div class="info-label">Assessor</div>
+											<div class="info-label">Condition Check Assessor</div>
 											<div class="info-value">
 												<table id="">										
 													<tbody>
 														<tr>
 															<td class="table-unselected"></td>
-															<td><input type="text" class="input-alpha-table csc-assessor" name="assessor"></td>
+															<td><input type="text" class="input-alpha-table csc-intake-condition-check-assessor" name="intake-condition-check-assessor" /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -589,12 +569,12 @@
 									
 									<div class="info-column2-50 fl-force-right">
 										<div class="info-pair-date">
-											<div class="info-label">Assessment Date</div>
+											<div class="info-label">Condition Check Date</div>
 											<div class="info-value">
 												<table id="">
 													<tbody>
 														<tr>
-															<td class="field-cal"><input type="text" disabled class="input-date csc-assessment-date disabled" name="assessment-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+															<td class="field-cal"><input type="text" disabled class="input-date csc-intake-condition-check-date disabled" name="intake-condition-check-date" /><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
 														</tr>
 													</tbody>
 												</table>
@@ -602,15 +582,33 @@
 										</div>
 										
 										<div class="info-pair">
-											<div class="info-label">Assessment Note</div>
-											<div class="info-value"><textarea class="input-textarea csc-assessment-note" name="assessment-note"></textarea></div>
+											<div class="info-label">Condition Check Reference Number</div>
+											<div class="info-value"><input class="input-alpha csc-intake-condition-check-reference-number" name="intake-condition-check-reference-number" /></div>
 										</div>
+										
 									</div>
+									
+									<div class="clear"></div>
 									
 									<div class="info-column1 fl-force-left">
 										<div class="info-pair">
-											<div class="info-label">Assessment</div>
-												<div class="info-value"><textarea class="input-textarea csc-assessment-note" name="assessment-note"></textarea></div>
-												</div></div><div class="clear"></div></div></div></div><div class="csc-error-dialog"><p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p></div></div> <!-- end outer border-->
-						<!-- Save button container -->			<div class="fl-container-flex input-buttons"><input type="image" src="../images/btnSave.png" alt="save button" class="savebutton csc-save-bottom" height="24" width="100"  /><input type="image" src="../images/btnCancel.png" alt="cancel button" class="cancelbutton" name="" width="100" height="24" /><div class="clear"></div></div></form> <!-- END left-side container -->
-				</div>
+											<div class="info-label">Condition Check Note</div>
+											<div class="info-value"><input class="input-textarea csc-intake-condition-check-note" name="intake-condition-check-note" /></div>
+										</div>
+									</div>
+									<div class="clear"></div>
+								</div>
+							</div>
+						</div>
+							
+						<div class="csc-error-dialog">
+							<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
+						</div>
+					</div> <!-- end outer border-->
+					<!-- Save button container -->
+					<div class="fl-container-flex input-buttons">
+						<input type="image" src="../images/btnSave.png" alt="save button" class="savebutton csc-save-bottom" height="24" width="100"  />
+						<input type="image" src="../images/btnCancel.png" alt="cancel button" class="cancelbutton" name="" width="100" height="24" />
+						<div class="clear"></div>
+					</div>
+				</form> <!-- END left-side container -->

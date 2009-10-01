@@ -169,7 +169,7 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 
 .info-pair-addrow {width:100%; float:left; font-size:14px; line-height:16px;}
 .info-pair-addrow .info-label {float:left; width:100%; padding-top:2px; font-weight:bold; font-size:11px; color:# 0F75BC;}
-.info-pair-addrow .info-value {float:left; width:100%; padding-top:2px; padding-bottom:10px; *padding-bottom:7px; }
+.info-pair-addrow .info-value {float:left; width:100%; padding-top:0px; padding-bottom:10px; *padding-bottom:7px; }
 .info-pair-addrow .info-value table {width:100%; border-spacing:0; background-color:#FFF; font-size:11px; line-height:11px; margin-bottom:0;}
 .info-pair-addrow .info-value thead td {background-color:#F3F3F4; color:#3B3B3C; border:1px solid #BABABB; padding: 2px 1px 2px 1px;}
 .info-pair-addrow .info-value tbody td, 
@@ -185,7 +185,7 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 
 .info-pair-table {width:100%; float:left; font-size:14px; line-height:16px;}
 .info-pair-table .info-label {float:left; width:100%; padding-top: 2px; padding-bottom:2px; font-weight:bold; font-size:11px; color:# 0F75BC;}
-.info-pair-table .info-value {float:left; width:100%; padding-top:2px; padding-bottom:10px; *padding-bottom:7px;}
+.info-pair-table .info-value {float:left; width:100%; padding-top:0px; padding-bottom:10px; *padding-bottom:7px;}
 .info-pair-table .info-value table {width:100%; border-spacing:0; background-color:#FFF; font-size:11px; line-height:11px; margin-bottom:0;}
 .info-pair-table .info-value table.components {width:60%; float:left;}
 .info-pair-table .info-value thead td {background-color:#F3F3F4; color:#3B3B3C; border:1px solid #BABABB; padding: 2px 1px 2px 1px;}
