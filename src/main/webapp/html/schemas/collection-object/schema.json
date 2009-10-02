@@ -54,14 +54,194 @@
 	    "comments": {
 	        "selector": ".csc-object-identification-comments"
 	    },
-	    "dateAssociation": {
-	        "selector": ".csc-date-information-date-association"
+	    "descCopyNumber": {
+	    	"selector": ".csc-object-description-copy-number"
 	    },
-	    "datePeriod": {
-	        "selector": ".csc-date-information-date-period"
+	    "descStatus": {
+	    	"selector": ".csc-object-description-status"
 	    },
-	    "dateText": {
-	        "selector": ".csc-date-information-date-text"
+	    "descSex": {
+	    	"selector": ".csc-object-description-sex"
+	    },
+	    "descPhase": {
+	    	"selector": ".csc-object-description-phase"
+	    },
+	    "descForm": {
+	    	"selector": ".csc-object-description-form"
+	    },
+	    "descEditionNumber": {
+	    	"selector": ".csc-object-description-edition-number"
+	    },
+	    "descAge": {
+	    	"selector": ".csc-object-description-age"
+	    },
+	    "descAgeQualifier": {
+	    	"selector": ".csc-object-description-age-qualifier"
+	    },
+	    "descAgeUnit": {
+	    	"selector": ".csc-object-description-age-unit"
+	    },
+	    "descStyle": {
+	    	"selector": ".csc-object-description-style"
+	    },
+	    "descColor": {
+	    	"selector": ".csc-object-description-color"
+	    },
+	    "descMaterial": {
+	    	"selector": ".csc-object-description-material"
+	    },
+	    "descMaterialComponent": {
+	    	"selector": ".csc-object-description-material-component"
+	    },
+	    "descMaterialNote": {
+	    	"selector": ".csc-object-description-material-component-note"
+	    },
+	    "descMaterialName": {
+	    	"selector": ".csc-object-description-material-name"
+	    },
+	    "descMaterialSource": {
+	    	"selector": ".csc-object-description-material-source"
+	    },
+	    "descPhysicalDescription": {
+	    	"selector": ".csc-object-description-physical-description"
+	    },
+	    "descComponentName": {
+	    	"selector": ".csc-object-description-object-component-name"
+	    },
+	    "descComponentInfo": {
+	    	"selector": ".csc-object-description-object-component-information"
+	    },
+	    "descTechAttribute": {
+	    	"selector": ".csc-object-description-technical-attribute"
+	    },
+	    "descTechAttributeMeasure": {
+	    	"selector": ".csc-object-description-technical-attribute-measurement"
+	    },
+	    "descTechAttributeUnit": {
+	    	"selector": ".csc-object-description-technical-attribute-unit"
+	    },
+	    "descDimension": {
+	    	"selector": ".csc-object-description-dimension"
+	    },
+	    "descDimensionPart": {
+	    	"selector": ".csc-object-description-dimension-part"
+	    },
+	    "descDimensionUnit": {
+	    	"selector": ".csc-object-description-dimension-unit"
+	    },
+	    "descDimensionValue": {
+	    	"selector": ".csc-object-description-dimension-value"
+	    },
+	    "descDimensionValueQualifier": {
+	    	"selector": ".csc-object-description-dimension-value-qualifier"
+	    },
+	    "descContentDescription": {
+	    	"selector": ".csc-object-description-content-description"
+	    },
+	    "descContentLanguage": {
+	    	"selector": ".csc-object-description-content-language"
+	    },
+	    "descContentActivity": {
+	    	"selector": ".csc-object-description-content-activity"
+	    },
+	    "descContentConcept": {
+	    	"selector": ".csc-object-description-content-concept"
+	    },
+	    "descContentPosition": {
+	    	"selector": ".csc-object-description-content-position"
+	    },
+	    "descContentObject": {
+	    	"selector": ".csc-object-description-content-object"
+	    },
+	    "descContentObjectType": {
+	    	"selector": ".csc-object-description-content-object-type"
+	    },
+	    "descContentPeople": {
+	    	"selector": ".csc-object-description-content-people"
+	    },
+	    "descContentPerson": {
+	    	"selector": ".csc-object-description-content-person"
+	    },
+	    "descContentPlace": {
+	    	"selector": ".csc-object-description-content-place"
+	    },
+	    "descContentScript": {
+	    	"selector": ".csc-object-description-content-script"
+	    },
+	    "descContentOrganization": {
+	    	"selector": ".csc-object-description-content-organization"
+	    },
+	    "descContentMethod": {
+	    	"selector": ".csc-object-description-content-method"
+	    },
+	    "descContentEventName": {
+	    	"selector": ".csc-object-description-content-event-name"
+	    },
+	    "descContentEventNameType": {
+	    	"selector": ".csc-object-description-content-event-name-type"
+	    },
+	    "descContentOther": {
+	    	"selector": ".csc-object-description-content-other"
+	    },
+	    "descContentOtherType": {
+	    	"selector": ".csc-object-description-content-other-type"
+	    },
+	    "descContentNote": {
+	    	"selector": ".csc-object-description-content-note"
+	    },
+	    "descInscriptionContent": {
+	    	"selector": ".csc-object-description-inscription-content"
+	    },
+	    "descInscriptionDescription": {
+	    	"selector": ".csc-object-description-inscription-description"
+	    },
+	    "descInscriptionInscriber": {
+	    	"selector": ".csc-object-description-inscription-inscriber"
+	    },
+	    "descInscriptionLanguage": {
+	    	"selector": ".csc-object-description-inscription-language"
+	    },
+	    "descInscriptionPosition": {
+	    	"selector": ".csc-object-description-inscription-position"
+	    },
+	    "descInscriptionScript": {
+	    	"selector": ".csc-object-description-inscription-script"
+	    },
+	    "descInscriptionType": {
+	    	"selector": ".csc-object-description-inscription-type"
+	    },
+	    "descInscriptionMethod": {
+	    	"selector": ".csc-object-description-inscription-method"
+	    },
+	    "descInscriptionInterpretation": {
+	    	"selector": ".csc-object-description-inscription-interpretation"
+	    },
+	    "descInscriptionTranslation": {
+	    	"selector": ".csc-object-description-inscription-translation"
+	    },
+	    "descInscriptionTransliteration": {
+	    	"selector": ".csc-object-description-inscription-transliteration"
+	    },
+	    "descDateAssociation": {
+	    	"selector": ".csc-date-information-date-association"
+	    },
+	    "descDatePeriod": {
+	    	"selector": ".csc-date-information-date-period"
+	    },
+	    "descDateEarliestSingleCertainty": {
+	    	"selector": ".csc-date-information-date-earliest-single-certainty"
+	    },
+	    "descDateEarliestSingleQualifier": {
+	    	"selector": ".csc-date-information-date-earliest-single-qualifier"
+	    },
+	    "descDateLatestSingleCertainty": {
+	    	"selector": ".csc-date-information-date-latest-certainty"
+	    },
+	    "descDateLatestSingleQualifier": {
+	    	"selector": ".csc-date-information-date-latest-qualifier"
+	    },
+	    "descDateText": {
+	    	"selector": ".csc-date-information-date-text"
 	    }
 	},
 	modelToResourceMap: {
