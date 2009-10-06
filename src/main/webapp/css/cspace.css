@@ -9,7 +9,7 @@ border:1px solid #BABABB; overflow:visible;}
 
 #all-content, #all-content-intake, #all-content-login {min-height:500px; height:auto !important; height:500px;}
 #name-header {}
-#name-header-login{}
+#name-header-login{ padding-top:20px;}
 
 #header-menu {width:1024px; height:86px;}
 #header-menu-content {}
@@ -166,7 +166,7 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .login-pair {padding-bottom: 15px;}
 .login-pair .login-label {width:70px; text-align:right; float:left; font-weight:bold;}
 .login-pair .login-element {float:left; padding-left:10px; padding-right: 2px;}
-.login-error {float:right; margin-left:10px; padding-left:20px; color:#868788; background-image: url(../images/warning.png); background-repeat: no-repeat; background-position:left;}
+.login-error {float:left; margin: 8px 0 -8px 17px; padding-left:20px; font-weight:bold; color:#606060; background-image: url(../images/warning.png); background-repeat: no-repeat; background-position:left;}
 
 .info-pair-addrow {width:100%; float:left; font-size:14px; line-height:16px;}
 .info-pair-addrow .info-label {float:left; width:100%; padding-top:2px; font-weight:bold; font-size:11px; color:# 0F75BC;}
