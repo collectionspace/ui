@@ -35,6 +35,11 @@
 	        "validators": [],
 	        "decorators": []
 	    },
+	    "depositorRequirements": {
+	        "selector": ".csc-intake-depositor-requirements",
+	        "validators": [],
+	        "decorators": []
+	    },
 	    "entryNote": {
 	        "selector": ".csc-intake-entry-note",
 	        "validators": [],

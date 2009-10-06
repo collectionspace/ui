@@ -127,6 +127,74 @@
 						
 						<div class="fl-container-flex fl-fix information-group">
 							<div class="info-column fl-force-left">
+								<div class="fl-container-flex header" onclick="ShowHide('#toggle-date-info'); return false;">
+									<span class="header-toggle"><img id="toggle-date-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+									Date Information
+								</div>
+								<div class="fl-container-flex fl-fix content" id="toggle-date-info" >
+									<!-- Left-side column -->
+									<div class="info-column2-50 fl-force-left">
+										<div class="info-pair">
+											<div class="info-label">Date Association</div>
+											<div class="info-value"><input type="text" class="input-alpha csc-intake-date-association" name="intake-date-association" /></div>
+										</div>	
+									</div>
+									
+									<!-- Left-side column -->
+									<div class="info-column2-50 fl-force-right">															
+										<div class="info-pair">
+											<div class="info-label">Date Period</div>
+											<div class="info-value"><input type="text" class="input-alpha csc-intake-date-period" name="intake-date-period" /></div>
+										</div>	
+									</div>
+									
+									<div class="clear"></div>
+									
+									<div class="info-column1 fl-force-left">
+										<div class="info-pair-table">
+											<div class="info-label" title="">Date</div>
+											<div class="info-value">
+												<table id="">
+													<thead>
+														<tr>
+															<td title="">Date Type</td>
+															<td title="">Date</td>
+															<td title="">Certainty</td>
+															<td title="">Qualifier</td>
+														</tr>
+													</thead>
+														
+													<tbody>
+														<tr>
+															<td class="label">Date - Earliest/single</td>
+															<td class="field-cal disabled"><input type="text" disabled class="input-date csc-intake-date-earliest-single disabled" name="intake-date-earliest-single" /><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
+															<td><input type="text" class="input-alpha-table csc-intake-date-earliest-single-certainty" name="intake-date-earliest-single-certainty" /></td>
+															<td><input type="text" class="input-alpha-table csc-intake-date-earliest-single-qualifier" name="intake-date-earliest-single-qualifier" /></td>
+														</tr>
+														<tr>
+															<td class="label">Date - Latest</td>
+															<td class="field-cal disabled"><input type="text" disabled class="input-date csc-intake-date-latest disabled" name="intake-date-latest" /><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
+															<td><input type="text" class="input-alpha-table csc-intake-date-latest-certainty" name="intake-date-latest-certainty" /></td>
+															<td><input type="text" class="input-alpha-table csc-intake-date-latest-qualifier" name="intake-date-latest-qualifier" /></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									
+										<div class="info-pair">
+											<div class="info-label">Date Text</div>
+											<div class="info-value"><input class="input-textarea csc-intake-date-text" name="intake-field-date-text" /></div>
+										</div>
+									</div>
+									
+									<div class="clear"></div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="fl-container-flex fl-fix information-group">
+							<div class="info-column fl-force-left">
 								<div class="fl-container-flex header" onclick="ShowHide('#toggle-collection'); return false;">
 									<span class="header-toggle"><img id="toggle-collection-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 									Object Collection Information
@@ -283,74 +351,6 @@
 											<div class="info-label">Habitat Note</div>
 											<div class="info-value"><input class="input-textarea csc-intake-habitat-note" name="intake-habitat-note" cols=30 rows=4 /></div>
 										</div>	
-									</div>
-									
-									<div class="clear"></div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="fl-container-flex fl-fix information-group">
-							<div class="info-column fl-force-left">
-								<div class="fl-container-flex header" onclick="ShowHide('#toggle-date-info'); return false;">
-									<span class="header-toggle"><img id="toggle-date-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-									Date Information
-								</div>
-								<div class="fl-container-flex fl-fix content" id="toggle-date-info" >
-									<!-- Left-side column -->
-									<div class="info-column2-50 fl-force-left">
-										<div class="info-pair">
-											<div class="info-label">Date Association</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-intake-date-association" name="intake-date-association" /></div>
-										</div>	
-									</div>
-									
-									<!-- Left-side column -->
-									<div class="info-column2-50 fl-force-right">															
-										<div class="info-pair">
-											<div class="info-label">Date Period</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-intake-date-period" name="intake-date-period" /></div>
-										</div>	
-									</div>
-									
-									<div class="clear"></div>
-									
-									<div class="info-column1 fl-force-left">
-										<div class="info-pair-table">
-											<div class="info-label" title="">Date</div>
-											<div class="info-value">
-												<table id="">
-													<thead>
-														<tr>
-															<td title="">Date Type</td>
-															<td title="">Date</td>
-															<td title="">Certainty</td>
-															<td title="">Qualifier</td>
-														</tr>
-													</thead>
-														
-													<tbody>
-														<tr>
-															<td class="label">Date - Earliest/single</td>
-															<td class="field-cal disabled"><input type="text" disabled class="input-date csc-intake-date-earliest-single disabled" name="intake-date-earliest-single" /><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
-															<td><input type="text" class="input-alpha-table csc-intake-date-earliest-single-certainty" name="intake-date-earliest-single-certainty" /></td>
-															<td><input type="text" class="input-alpha-table csc-intake-date-earliest-single-qualifier" name="intake-date-earliest-single-qualifier" /></td>
-														</tr>
-														<tr>
-															<td class="label">Date - Latest</td>
-															<td class="field-cal disabled"><input type="text" disabled class="input-date csc-intake-date-latest disabled" name="intake-date-latest" /><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
-															<td><input type="text" class="input-alpha-table csc-intake-date-latest-certainty" name="intake-date-latest-certainty" /></td>
-															<td><input type="text" class="input-alpha-table csc-intake-date-latest-qualifier" name="intake-date-latest-qualifier" /></td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-										</div>
-									
-										<div class="info-pair">
-											<div class="info-label">Date Text</div>
-											<div class="info-value"><input class="input-textarea csc-intake-date-text" name="intake-field-date-text" /></div>
-										</div>
 									</div>
 									
 									<div class="clear"></div>
