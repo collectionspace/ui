@@ -93,11 +93,11 @@
 												<div class="info-column1 fl-force-left">
 													<div class="sub-header">Select a Procedure</div>
 													<div class="radio-buttons">
-														<span class="radio-button"><input type="radio" name="procedure" value="intake.html" checked="checked" /> Intake</span>
-														<span class="radio-button disabled"><input type="radio" name="procedure" value="acquisition.html" disabled /> Acquisition</span>
-														<span class="radio-button disabled"><input type="radio" name="procedure" value="loanin" disabled /> Loan In</span>
-														<span class="radio-button disabled"><input type="radio" name="procedure" value="loanout" disabled /> Loan Out</span>
-														<span class="radio-button disabled"><input type="radio" name="procedure" value="objectexit" disabled /> Object Exit</span>
+														<span class="radio-button"><input id="new-intake-radio" type="radio" name="procedure" value="intake.html" checked="checked" /> <label for="new-intake-radio">Intake</label></span>
+														<span class="radio-button"><input id="new-acquisition-radio" type="radio" name="procedure" value="acquisition.html" /> <label for="new-acquisition-radio">Acquisition</span>
+														<span class="radio-button disabled"><input id="new-loanin-radio" type="radio" name="procedure" value="loanin" disabled /> <label for="new-loanin-radio">Loan In</span>
+														<span class="radio-button disabled"><input id="new-loanout-radio" type="radio" name="procedure" value="loanout" disabled /> <label for="new-loanout-radio">Loan Out</span>
+														<span class="radio-button disabled"><input id="new-exit-radio" type="radio" name="procedure" value="objectexit" disabled /> <label for="new-exit-radio">Object Exit</span>
 													
 													</div>
 													<input type=button class="button create-quick-button" onclick="getRadioValue();" value ="" title="create quick record"/>

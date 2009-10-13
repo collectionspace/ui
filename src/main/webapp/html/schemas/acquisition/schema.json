@@ -1,0 +1,96 @@
+{
+	spec: {
+	    "acquReferenceNum": {
+	        "selector": ".csc-acquisition-acquisition-reference-number",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "acquDate": {
+	        "selector": ".csc-acquisition-date",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "acquAccessionDate": {
+	        "selector": ".csc-acquisition-accession-date",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "acquPriceDesc": {
+	        "selector": ".csc-acquisition-purchaser-price-description",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "acquPriceDenom": {
+	        "selector": ".csc-acquisition-purchaser-price-denomination",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "acquPrice": {
+	        "selector": ".csc-acquisition-purchaser-price",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "acquFundingDenom": {
+	        "selector": ".csc-acquisition-acquisition-funding-denomination",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "acquFundingValue": {
+	        "selector": ".csc-acquisition-acquisition-funding-value",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "acquFundingSource": {
+	        "selector": ".csc-acquisition-acquisition-funding-source",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "acquFundingProviso": {
+	        "selector": ".csc-acquisition-acquisition-funding-provisos",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "acquMethod": {
+	        "selector": ".csc-acquisition-acquisition-method",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "acquAuthorize": {
+	        "selector": ".csc-acquisition-authorizer",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "acquSource": {
+	        "selector": ".csc-acquisition-acquisition-source",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "acquTitleNum": {
+	        "selector": ".csc-acquisition-transfer-of-title-number",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "acquReason": {
+	        "selector": ".csc-acquisition-acquisition-reason",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "acquNote": {
+	        "selector": ".csc-acquisition-acquisition-note",
+	        "validators": [],
+	        "decorators": []
+	    },
+	    "acquProviso": {
+	        "selector": ".csc-acquisition-acquisition-provisos",
+	        "validators": [],
+	        "decorators": []
+	    }
+
+	},
+	modelToResourceMap: {
+        "*": "/acquisition/%acquisitionRecordId",
+    },
+    replacements: {
+        "acquisitionRecordId": "csid"
+    }
+}
