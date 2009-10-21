@@ -12,11 +12,16 @@
 	    },
 	    "entryMethod": {
 	        "selector": ".csc-intake-entry-method",
+	        "options": ["in-person", "post", "found-on-doorstep"],
+	        "options-text": ["In person", "Post", "Found on doorstep"],
+			"default": "0",
 	        "validators": [],
 	        "decorators": []
 	    },
 	    "entryReason": {
 	        "selector": ".csc-intake-entry-reason",
+	        "options": ["enquiry", "commission", "loan"],
+	        "options-text": ["Enquiry", "Commission", "Loan"],
 	        "validators": [],
 	        "decorators": []
 	    },

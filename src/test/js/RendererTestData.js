@@ -59,3 +59,126 @@ var testCutpoints = [
     {selector: ".csc-accession-number", id: "accessionNumber"},
     {selector: ".csc-last-edit", id: "lastEdit"}
 ];
+
+
+// Test data for the Term List pull-downs:
+// construct a component tree that has nothing but the select in it
+
+// Case 1: Term list has a default, model is empty
+var defaultEmptyModel = {
+    spec: {
+        "spec": {
+    	    "entryMethod": {
+    	        "selector": ".csc-intake-entry-method",
+    	        "options": ["in-person", "post", "found-on-doorstep"],
+    	        "options-text": ["In person", "Post", "Found on doorstep"],
+    			"default": "1",
+    	        "validators": [],
+    	        "decorators": []
+    	    }
+        },
+    	"modelToResourceMap": {
+            "*": "/intake"
+        }
+    },
+    tree: {
+        children: [
+            {ID: "entryMethod",
+             selection: {valuebinding: "entryMethod"},
+             optionlist: ["in-person", "post", "found-on-doorstep"],
+             optionnames: ["In person", "Post", "Found on doorstep"]}
+        ]
+    },
+    model: {
+        entryMethod: ""
+    }
+};
+
+// Case 2: Term list has no default, model is empty
+var noDefaultEmptyModel = {
+    spec: {
+        "spec": {
+    	    "entryReason": {
+    	        "selector": ".csc-intake-entry-reason",
+    	        "options": ["enquiry", "commission", "loan"],
+    	        "options-text": ["Enquiry", "Commission", "Loan"],
+    	        "validators": [],
+    	        "decorators": []
+    	    }
+        },
+    	"modelToResourceMap": {
+            "*": "/intake"
+        }
+    },
+    tree: {
+        children: [
+            {ID: "entryReason",
+             selection: {valuebinding: "entryReason"},
+             optionlist: ["none", "enquiry", "commission", "loan"],
+             optionnames: ["-- Select from the list --", "Enquiry", "Commission", "Loan"]}
+        ]
+    },
+    model: {
+        entryReason: ""
+    }
+};
+
+// Case 3: Term list has a default, model already has a value
+var defaultWithModel = {
+    spec: {
+        "spec": {
+    	    "entryMethod": {
+    	        "selector": ".csc-intake-entry-method",
+    	        "options": ["in-person", "post", "found-on-doorstep"],
+    	        "options-text": ["In person", "Post", "Found on doorstep"],
+    			"default": "1",
+    	        "validators": [],
+    	        "decorators": []
+    	    }
+        },
+    	"modelToResourceMap": {
+            "*": "/intake"
+        }
+    },
+    tree: {
+        children: [
+            {ID: "entryMethod",
+             selection: {valuebinding: "entryMethod"},
+             optionlist: ["in-person", "post", "found-on-doorstep"],
+             optionnames: ["In person", "Post", "Found on doorstep"]}
+        ]
+    },
+    model: {
+        entryMethod: "found-on-doorstep"
+    }
+};
+
+// Case 4: Term list has no default, model is not empty
+var noDefaultWithModel = {
+    spec: {
+        "spec": {
+    	    "entryReason": {
+    	        "selector": ".csc-intake-entry-reason",
+    	        "options": ["enquiry", "commission", "loan"],
+    	        "options-text": ["Enquiry", "Commission", "Loan"],
+    	        "validators": [],
+    	        "decorators": []
+    	    }
+        },
+    	"modelToResourceMap": {
+            "*": "/intake"
+        }
+    },
+    tree: {
+        children: [
+            {ID: "entryReason",
+             selection: {valuebinding: "entryReason"},
+             optionlist: ["none", "enquiry", "commission", "loan"],
+             optionnames: ["-- Select from the list --", "Enquiry", "Commission", "Loan"]}
+        ]
+    },
+    model: {
+        entryReason: "commission"
+    }
+};
+

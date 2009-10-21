@@ -102,6 +102,32 @@ var cspace = cspace || {};
         };
     };
 
+    var buildSelectComponent = function (key, modelPart, spec, i) {
+        var optList = spec.options;
+        var optNames = spec["options-text"];
+        if (spec.hasOwnProperty("default")) {
+            if (!modelPart[key] || modelPart[key] === "") {
+                var defaultIndex = parseInt(spec["default"]);
+                modelPart[key] = spec.options[defaultIndex];
+            }
+        } else {
+            optList.splice(0, 0, "none");
+            optNames.splice(0, 0, "-- Select from the list --");
+            if (!modelPart[key] || modelPart[key] === "") {
+                modelPart[key] = spec.options[0];
+            }
+        }
+
+        return [
+            {
+                ID: key,
+                selection: {valuebinding: key},
+                optionlist: optList,
+                optionnames: optNames
+            }
+        ];
+    };
+
     var addRepeatedItemsToComponentTree = function (children, name, specPart, modelPart, el) {
         var index = children.length;
         for (var i = 0; i < modelPart.length; i++) {
@@ -143,10 +169,14 @@ var cspace = cspace || {};
                     // examined to fill in each row
                     addRepeatedItemsToComponentTree(children, key, specPart[key].repeated, modelPart[key], elPath);
                 } else {
-                    children[index] = {
-                        ID: key,
-                        valuebinding: elPath
-                    };
+                    if (specPart[key].hasOwnProperty("options")) {
+                        children = children.concat(buildSelectComponent(key, modelPart, specPart[key]));
+                    } else {
+                        children[index] = {
+                            ID: key,
+                            valuebinding: elPath
+                        };
+                    }
                     if (specPart[key].decorators && specPart[key].decorators.length > 0) {
                         children[index].decorators = specPart[key].decorators;
                     }
