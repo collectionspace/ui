@@ -102,17 +102,22 @@ var cspace = cspace || {};
         };
     };
 
-    var buildSelectComponent = function (key, modelPart, spec, i) {
+    /*
+     * TODO: Make sure this is called in the case of repeated items properly
+     *         (see addRepeatedItemsToComponentTree() )
+     */
+    var buildSelectComponent = function (key, modelPart, spec, strings) {
         var optList = spec.options;
         var optNames = spec["options-text"];
         if (spec.hasOwnProperty("default")) {
             if (!modelPart[key] || modelPart[key] === "") {
                 var defaultIndex = parseInt(spec["default"]);
                 modelPart[key] = spec.options[defaultIndex];
+                optNames[defaultIndex] += strings.defaultTermIndicator;
             }
         } else {
             optList.splice(0, 0, "none");
-            optNames.splice(0, 0, "-- Select from the list --");
+            optNames.splice(0, 0, strings.noDefaultInvitation);
             if (!modelPart[key] || modelPart[key] === "") {
                 modelPart[key] = spec.options[0];
             }
@@ -157,7 +162,7 @@ var cspace = cspace || {};
         }
     };
     
-    var buildComponentTreeChildren = function (specPart, modelPart, el) {
+    var buildComponentTreeChildren = function (specPart, modelPart, strings, el) {
         var children = [];
         var index = 0;
         for (var key in specPart) {
@@ -170,7 +175,7 @@ var cspace = cspace || {};
                     addRepeatedItemsToComponentTree(children, key, specPart[key].repeated, modelPart[key], elPath);
                 } else {
                     if (specPart[key].hasOwnProperty("options")) {
-                        children = children.concat(buildSelectComponent(key, modelPart, specPart[key]));
+                        children = children.concat(buildSelectComponent(key, modelPart, specPart[key], strings));
                     } else {
                         children[index] = {
                             ID: key,
@@ -188,8 +193,8 @@ var cspace = cspace || {};
     };
 
     cspace.renderer = {
-        buildComponentTree: function (spec, model) {
-            var tree = {children: buildComponentTreeChildren(spec, model)};
+        buildComponentTree: function (spec, model, strings) {
+            var tree = {children: buildComponentTreeChildren(spec, model, strings)};
             return tree;
         },
 
@@ -198,10 +203,13 @@ var cspace = cspace || {};
             var renderOptions = {
                 model: that.model,
 //                debugMode: true,
+
+messageLocator: fluid.messageLocator({foo: "Foo", bar: "Bar"}),
+
                 autoBind: true
             };
             var cutpoints = buildCutpointsFromSpec(fullUISpec);            
-            var tree = cspace.renderer.buildComponentTree(fullUISpec, that.model);
+            var tree = cspace.renderer.buildComponentTree(fullUISpec, that.model, that.options.strings);
             var resources = {};
             for (var key in that.options.templates) {
                 if (that.options.templates.hasOwnProperty(key)) {

@@ -204,7 +204,9 @@ var cspace = cspace || {};
             updateFailedMessage: "Error saving Record: ",
             createFailedMessage: "Error creating Record: ",
             deleteFailedMessage: "Error deleting Record: ",
-            fetchFailedMessage: "Error retriving Record: "
+            fetchFailedMessage: "Error retriving Record: ",
+            defaultTermIndicator: " (default)",
+            noDefaultInvitation: "-- Select an item from the list --"
         },
         templates: {
             header: {
