@@ -25,21 +25,28 @@ var rendererTester = function(){
     });
 
     rendererTest.test("Component tree, Select only", function () {
-        var treeDefault = cspace.renderer.buildComponentTree(defaultEmptyModel.spec.spec, defaultEmptyModel.model);
+        var strings = {
+            defaultTermIndicator: " (default)",
+            noDefaultInvitation: "-- Select an item from the list --"
+        };
+        var treeDefault = cspace.renderer.buildComponentTree(defaultEmptyModel.spec.spec, defaultEmptyModel.model, strings);
         jqUnit.assertDeepEq("Tree for select, list has default, model has no value", defaultEmptyModel.tree, treeDefault);
         jqUnit.assertEquals("Model should have default value", "post", defaultEmptyModel.model.entryMethod);
         
-        var treeNoDefault = cspace.renderer.buildComponentTree(noDefaultEmptyModel.spec.spec, noDefaultEmptyModel.model);
+        var treeNoDefault = cspace.renderer.buildComponentTree(noDefaultEmptyModel.spec.spec, noDefaultEmptyModel.model, strings);
         jqUnit.assertDeepEq("Tree for select, list has no default, model has no value", noDefaultEmptyModel.tree, treeNoDefault);
         jqUnit.assertEquals("Model should have 'none'", "none", noDefaultEmptyModel.model.entryReason);
 
-        var treeDefaultWithModel = cspace.renderer.buildComponentTree(defaultWithModel.spec.spec, defaultWithModel.model);
+        var treeDefaultWithModel = cspace.renderer.buildComponentTree(defaultWithModel.spec.spec, defaultWithModel.model, strings);
         jqUnit.assertDeepEq("Tree for select, list has default, model has a value", defaultWithModel.tree, treeDefaultWithModel);
         jqUnit.assertEquals("Model should have original value", "found-on-doorstep", defaultWithModel.model.entryMethod);
 
-        var treeNoDefaultWithModel = cspace.renderer.buildComponentTree(noDefaultWithModel.spec.spec, noDefaultWithModel.model);
+        var treeNoDefaultWithModel = cspace.renderer.buildComponentTree(noDefaultWithModel.spec.spec, noDefaultWithModel.model, strings);
         jqUnit.assertDeepEq("Tree for select, list has no default, model has a value", noDefaultWithModel.tree, treeNoDefaultWithModel);
         jqUnit.assertEquals("Model should have original value", "commission", noDefaultWithModel.model.entryReason);
+
+        var treeRepeatedTermLists = cspace.renderer.buildComponentTree(repeatedTermLists.spec.spec, repeatedTermLists.model, strings);
+        jqUnit.assertDeepEq("Tree for select, repeated items", repeatedTermLists.tree, treeRepeatedTermLists);
     });
 
 };

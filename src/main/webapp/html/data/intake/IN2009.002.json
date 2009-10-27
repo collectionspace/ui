@@ -3,9 +3,12 @@
     "depositor": "Duncan Jones",
     "responsibleEntity": "Nathan Parker",
     "packingNote": "",
-    "entryReasons": "",
+    "entryReason": "",
     "entryNumber": "IN2009.002",
-    "entryMethod": "found-on-doorstep",
+    "entryMethods": [
+        {"entryMethod": "found-on-doorstep"},
+        {"entryMethod": "post"}
+    ],
     "entryNote": "",
     "numObjects": "1",
     "description": "GERTY",

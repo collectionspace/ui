@@ -86,7 +86,7 @@ var defaultEmptyModel = {
             {ID: "entryMethod",
              selection: {valuebinding: "entryMethod"},
              optionlist: ["in-person", "post", "found-on-doorstep"],
-             optionnames: ["In person", "Post", "Found on doorstep"]}
+             optionnames: ["In person", "Post (default)", "Found on doorstep"]}
         ]
     },
     model: {
@@ -115,7 +115,7 @@ var noDefaultEmptyModel = {
             {ID: "entryReason",
              selection: {valuebinding: "entryReason"},
              optionlist: ["none", "enquiry", "commission", "loan"],
-             optionnames: ["-- Select from the list --", "Enquiry", "Commission", "Loan"]}
+             optionnames: ["-- Select an item from the list --", "Enquiry", "Commission", "Loan"]}
         ]
     },
     model: {
@@ -145,7 +145,7 @@ var defaultWithModel = {
             {ID: "entryMethod",
              selection: {valuebinding: "entryMethod"},
              optionlist: ["in-person", "post", "found-on-doorstep"],
-             optionnames: ["In person", "Post", "Found on doorstep"]}
+             optionnames: ["In person", "Post (default)", "Found on doorstep"]}
         ]
     },
     model: {
@@ -174,7 +174,7 @@ var noDefaultWithModel = {
             {ID: "entryReason",
              selection: {valuebinding: "entryReason"},
              optionlist: ["none", "enquiry", "commission", "loan"],
-             optionnames: ["-- Select from the list --", "Enquiry", "Commission", "Loan"]}
+             optionnames: ["-- Select an item from the list --", "Enquiry", "Commission", "Loan"]}
         ]
     },
     model: {
@@ -182,3 +182,48 @@ var noDefaultWithModel = {
     }
 };
 
+var repeatedTermLists = {
+    spec: {
+        spec: {
+            entryReasons: {
+                selector: ".csc-intake-entry-reason-row",
+                repeated: {
+            	    "entryReason": {
+            	        "selector": ".csc-intake-entry-reason",
+            	        "options": ["enquiry", "commission", "loan"],
+            	        "options-text": ["Enquiry", "Commission", "Loan"],
+            	        "validators": [],
+            	        "decorators": []
+            	    }
+                }
+            }
+        },
+    	"modelToResourceMap": {
+            "*": "/intake"
+        }
+    },
+    tree: {
+        children: [
+            {ID: "entryReasons:",
+             children: [
+                {ID: "entryReason",
+                 selection: {valuebinding: "entryReasons.0.entryReason"},
+                 optionlist: ["none", "enquiry", "commission", "loan"],
+                 optionnames: ["-- Select an item from the list --", "Enquiry", "Commission", "Loan"]}
+             ]},
+            {ID: "entryReasons:",
+             children: [
+                {ID: "entryReason",
+                 selection: {valuebinding: "entryReasons.1.entryReason"},
+                 optionlist: ["none", "enquiry", "commission", "loan"],
+                 optionnames: ["-- Select an item from the list --", "Enquiry", "Commission", "Loan"]}
+             ]}
+        ]
+    },
+    model: {
+        "entryReasons": [
+            {"entryReason": "enquiry"},
+            {"entryReason": "loan"}
+        ]
+    }
+};

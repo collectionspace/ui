@@ -53,7 +53,7 @@ var cspace = cspace || {};
         var model = {};
         for (var key in spec) {
             if (spec.hasOwnProperty(key)) {
-                model[key] = "";
+                model[key] = (spec[key].hasOwnProperty("repeated") ? [""] : "");
             }
         }
         return model;

@@ -10,13 +10,16 @@
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "entryMethod": {
-	        "selector": ".csc-intake-entry-method",
-	        "options": ["in-person", "post", "found-on-doorstep"],
-	        "options-text": ["In person", "Post", "Found on doorstep"],
-			"default": "0",
-	        "validators": [],
-	        "decorators": []
+	    "entryMethods": {
+	        "selector": ".csc-intake-entry-method-row",
+			"repeated": {
+			    "entryMethod": {
+			        "selector": ".csc-intake-entry-method",
+			        "options": ["in-person", "post", "found-on-doorstep"],
+			        "options-text": ["In person", "Post", "Found on doorstep"],
+					"default": "0"
+				}
+			}
 	    },
 	    "entryReason": {
 	        "selector": ".csc-intake-entry-reason",

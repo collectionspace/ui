@@ -102,39 +102,35 @@ var cspace = cspace || {};
         };
     };
 
-    /*
-     * TODO: Make sure this is called in the case of repeated items properly
-     *         (see addRepeatedItemsToComponentTree() )
-     */
-    var buildSelectComponent = function (key, modelPart, spec, strings) {
-        var optList = spec.options;
-        var optNames = spec["options-text"];
+    var buildSelectComponent = function (key, el, model, spec, strings) {
+        var optList = fluid.copy(spec.options);
+        var optNames = fluid.copy(spec["options-text"]);
+        var val = fluid.model.getBeanValue(model, el);
         if (spec.hasOwnProperty("default")) {
-            if (!modelPart[key] || modelPart[key] === "") {
-                var defaultIndex = parseInt(spec["default"]);
-                modelPart[key] = spec.options[defaultIndex];
-                optNames[defaultIndex] += strings.defaultTermIndicator;
+            var defaultIndex = parseInt(spec["default"]);
+            optNames[defaultIndex] += strings.defaultTermIndicator;
+            if (!val || val === "") {
+                fluid.model.setBeanValue(model, el, optList[defaultIndex]);
             }
         } else {
             optList.splice(0, 0, "none");
             optNames.splice(0, 0, strings.noDefaultInvitation);
-            if (!modelPart[key] || modelPart[key] === "") {
-                modelPart[key] = spec.options[0];
+            if (!val || val === "") {
+                fluid.model.setBeanValue(model, el, optList[0]);
             }
         }
 
-        return [
-            {
-                ID: key,
-                selection: {valuebinding: key},
-                optionlist: optList,
-                optionnames: optNames
-            }
-        ];
+        return {
+            ID: key,
+            selection: {valuebinding: el},
+            optionlist: optList,
+            optionnames: optNames
+        };
     };
 
-    var addRepeatedItemsToComponentTree = function (children, name, specPart, modelPart, el) {
+    var addRepeatedItemsToComponentTree = function (children, name, specPart, model, el, strings) {
         var index = children.length;
+        var modelPart = fluid.model.getBeanValue(model, el);
         for (var i = 0; i < modelPart.length; i++) {
             children[index] = {
                 ID: name + ":",
@@ -144,12 +140,15 @@ var cspace = cspace || {};
             for (var key in specPart) {
                 if (specPart.hasOwnProperty(key)) {
                     var spec = specPart[key];
+                    var newEl = (el ? el + "." + i + "." + key : key);
                     if (spec.hasOwnProperty("type") && spec.type === "link") {
                         children[index].children[j] = buildLinkComponent(key, modelPart, spec, i);
+                    } else if (spec.hasOwnProperty("options")) {
+                        children[index].children[j] = buildSelectComponent(key, newEl, model, spec, strings);
                     } else {
                         children[index].children[j] = {
                             ID: key,
-                            valuebinding: (el ? el + "." + i + "." + key : key)
+                            valuebinding: newEl
                         };
                     }
                     if (spec.decorators && spec.decorators.length > 0) {
@@ -172,10 +171,10 @@ var cspace = cspace || {};
                     // repeated items need to be filled in based on the data, not the schema
                     // the schema defines the fields for each row, but the data must be 
                     // examined to fill in each row
-                    addRepeatedItemsToComponentTree(children, key, specPart[key].repeated, modelPart[key], elPath);
+                    addRepeatedItemsToComponentTree(children, key, specPart[key].repeated, modelPart/*[key]*/, elPath, strings);
                 } else {
                     if (specPart[key].hasOwnProperty("options")) {
-                        children = children.concat(buildSelectComponent(key, modelPart, specPart[key], strings));
+                        children = children.concat(buildSelectComponent(key, key, modelPart, specPart[key], strings));
                     } else {
                         children[index] = {
                             ID: key,
@@ -203,9 +202,6 @@ var cspace = cspace || {};
             var renderOptions = {
                 model: that.model,
 //                debugMode: true,
-
-messageLocator: fluid.messageLocator({foo: "Foo", bar: "Bar"}),
-
                 autoBind: true
             };
             var cutpoints = buildCutpointsFromSpec(fullUISpec);            

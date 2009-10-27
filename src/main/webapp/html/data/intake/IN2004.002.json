@@ -5,7 +5,7 @@
     "packingNote": "",
     "entryReason": "commission",
     "entryNumber": "IN2004.002",
-    "entryMethod": "post",
+    "entryMethods": [{"entryMethod":"post"}],
     "entryNote": "",
     "numObjects": "42",
     "description": "Licensed merchandise figurines from The Nightmare Before Christmas and Beetlejuice",

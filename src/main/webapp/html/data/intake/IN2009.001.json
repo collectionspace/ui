@@ -5,7 +5,7 @@
     "packingNote": "",
     "entryReason": "enquiry",
     "entryNumber": "IN2009.001",
-    "entryMethod": "found-on-doorstep",
+    "entryMethods": [{"entryMethod":"found-on-doorstep"}],
     "entryNote": "",
     "numObjects": "1",
     "description": "Small metal flower, fashioned from scraps",

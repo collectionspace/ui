@@ -5,7 +5,7 @@
     "packingNote": "Herring are in a glass tray, with a saran wrap cover",
     "entryReason": "",
     "entryNumber": "2007.4-a",
-    "entryMethod": "in-person",
+    "entryMethods": [{"entryMethod":"in-person"}],
     "entryNote": "",
     "numObjects": "37",
     "description": "Pickled herring from \"Immer nie am Meer\"",

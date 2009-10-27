@@ -1,7 +1,7 @@
 {
     "entryNumber": "IN2009.003",
 	"entryDate": "",
-	"entryMethod": "in-person",
+	"entryMethods": [{"entryMethod":"in-person"}],
 	"entryReason": "loan",
 	"returnDate": "",
 	"currentOwner": "me me me!",
