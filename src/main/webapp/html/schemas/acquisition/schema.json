@@ -1,5 +1,5 @@
 {
-	spec: {
+	"spec": {
 	    "acquReferenceNum": {
 	        "selector": ".csc-acquisition-acquisition-reference-number",
 	        "validators": [],
@@ -52,8 +52,8 @@
 	    },
 	    "acquMethod": {
 	        "selector": ".csc-acquisition-acquisition-method",
-	        "validators": [],
-	        "decorators": []
+	        "options": ["gift", "purchase", "exchange", "transfer", "Treasure"],
+	        "options-text": ["Gift", "Purchase", "Exchange", "Transfer", "Treasure"]
 	    },
 	    "acquAuthorize": {
 	        "selector": ".csc-acquisition-authorizer",
@@ -87,10 +87,10 @@
 	    }
 
 	},
-	modelToResourceMap: {
-        "*": "/acquisition/%acquisitionRecordId",
+	"modelToResourceMap": {
+        "*": "/acquisition/%acquisitionRecordId"
     },
-    replacements: {
+    "replacements": {
         "acquisitionRecordId": "csid"
     }
 }

@@ -1,5 +1,5 @@
 {
-	spec: {
+	"spec": {
 	    "objectTitle": {
 	        "selector": ".csc-object-identification-object-title"
 	    },
@@ -49,7 +49,9 @@
 	        "selector": ".csc-object-identification-number-objects"
 	    },
 	    "responsibleDepartment": {
-	        "selector": ".csc-object-identification-responsible-department"
+	        "selector": ".csc-object-identification-responsible-department",
+	        "options": ["antiquities", "architecture-design", "decorative-arts", "ethnography", "herpetology", "media-performance-art", "paintings-sculpture", "paleobotany", "photographs", "prints-drawings"],
+	        "options-text": ["Antiquities", "Architecture and Design", "Decorative Arts", "Ethnography", "Herpetology", "Media and Performance Art", "Paintings and Sculpture", "Paleobotany", "Photographs", "Prints and Drawings"]
 	    },
 	    "comments": {
 	        "selector": ".csc-object-identification-comments"
@@ -244,11 +246,11 @@
 	    	"selector": ".csc-date-information-date-text"
 	    }
 	},
-	modelToResourceMap: {
+	"modelToResourceMap": {
         "*": "/objects/%collObjId",
         "spec": "/objects/schema/schema"
     },
-    replacements: {
+    "replacements": {
         "collObjId": "csid"
     }
 }
