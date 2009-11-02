@@ -2,14 +2,22 @@ html{font-size: 100%;}
 
 body {font-size:13px; line-height:13px; padding: 2px 0;}
 
-table tr, table tr td, table tr th  {border:none; padding:0px; margin:0; text-align:left; font-weight:normal;}
+table tr, table tr td, table tr th  {border:0; padding:0; margin:0; text-align:left; font-weight:normal;}
 
-input,textarea,select{font-family:inherit; font-size:12px; font-weight:inherit; line-height:15px; padding:0; margin:0; *margin-bottom:-3px; 
+p, fieldset, table, pre {margin-bottom:0em;}
+
+input,textarea {font-family:inherit; font-size:12px; font-weight:inherit; line-height:15px; padding:0; margin:0; *margin-bottom:0px; 
 border:1px solid #BABABB; overflow:visible;}
+
+select {border:1px solid #BABABB;}
+
+input[type="text"], input[type="password"], textarea {width:99.75%;}
+
+:focus {outline: 1px solid black;}
 
 #all-content, #all-content-intake, #all-content-login {min-height:500px; height:auto !important; height:500px;}
 #name-header {}
-#name-header-login{ padding-top:20px;}
+#name-header-login {padding-top:20px;}
 
 #header-menu {width:1024px; height:86px;}
 #header-menu-content {}
@@ -155,12 +163,25 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .fl-container-pivot {padding-top:0px;}
 .create-new .fl-container-left .button {margin-right: 7px; float:left;}
 
-.info-pair   {width:100%; float:left; font-size:14px; line-height:16px; /*position:relative;*/}
-.info-label {width:100%; float:left; padding-top: 2px; padding-bottom:2px; font-weight:bold; font-size:11px; line-height:11px;}
-.info-value {width:100%; float:left; padding-bottom:10px; z-index:0;}
+.info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-termlist 
+{width:100%; float:left; position:relative; padding-bottom:10px; font-size:12px; line-height:12px;}
+
+.info-label {width:100%; float:left; padding-top: 2px; padding-bottom:2px; font-weight:bold; color:# 0F75BC; font-size:11px; line-height:11px;}
+.info-value {width:100%; float:left; z-index:0;}
+.info-value table {width:100%; border-spacing:0; background-color:#FFF; margin-top:1px; border:0; padding:0;}
+.info-value thead tr {}
+.info-value thead td {border:1px solid #BABABB; background-color:#F3F3F4; color:#3B3B3C; padding: 2px 0 2px 2px; font-size:11px; line-height: 11px;}
+.info-value tbody tr {}
+.info-value tbody td {border:1px solid #BABABB;}
+.info-value tbody td input {*margin:0 -2px 0 2px;}
+
+.info-pair-termlist  table, .info-pair-termlist tbody td{width:auto;  background-color:#E6E6E6;}
+.info-pair-termlist .info-value {padding-bottom:4px;}
+.info-pair-termlist table select {mar gin-bottom:6px; border:0;}
+.info-pair-date .info-value  table {width:auto;}
 
 .login-text {padding:15px 20px;}
-.login-forms {background-color:#E6E6E6; padding:25px 0 10px 35px; margin-top:20px;}
+.login-forms {background-color:#E6E6E6; padding:25px 0 20px 35px; margin-top:20px;}
 .login-text .info-label, .login-forms .info-label {font-size: 20px; line-height:20px; font-weight:bold;}
 .login-text .info-value, .login-forms .info-value {padding-top: 20px; font-size:14px; line-height:18px; width:90%;}
 .login-pair {padding-bottom: 15px;}
@@ -168,40 +189,14 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .login-pair .login-element {float:left; padding-left:10px; padding-right: 2px;}
 .login-error {float:left; margin: 8px 0 -8px 17px; padding-left:20px; font-weight:bold; color:#606060; background-image: url(../images/warning.png); background-repeat: no-repeat; background-position:left;}
 
-.info-pair-addrow {width:100%; float:left; font-size:14px; line-height:16px;}
-.info-pair-addrow .info-label {float:left; width:100%; padding-top:2px; font-weight:bold; font-size:11px; color:# 0F75BC;}
-.info-pair-addrow .info-value {float:left; width:100%; padding-top:0px; padding-bottom:10px; *padding-bottom:7px; }
-.info-pair-addrow .info-value table {width:100%; border-spacing:0; background-color:#FFF; font-size:11px; line-height:11px; margin-bottom:0;}
-.info-pair-addrow .info-value thead td {background-color:#F3F3F4; color:#3B3B3C; border:1px solid #BABABB; padding: 2px 1px 2px 1px;}
-.info-pair-addrow .info-value tbody td, 
-.info-pair-addrow .info-value tbody th {border:1px solid #BABABB; padding: 0 0 0 0px; font-size:12px; line-height:12px; height:19px; *height:17px;}
-.info-pair-addrow .info-value tbody td input {border:0; width:100%;}
+.info-value .table-select {}
+.info-value .table-selected, .info-value .table-unselected {width:12px; background-position: top left; background-repeat:no-repeat; background-position:center;  background-color:#FFF;}
+.info-value .table-selected {background-image:url(../images/selected.png); width:14px !important;}
+.info-value .table-unselected {background-image:url(../images/unselected.png); width:14px !important;}
+.info-value .table-spacer {width:14px !important;}
+.addrow {float:right; margin: -8px 0 -8px 0;}
 
-.info-pair-addrow .info-value .table-select {width:12px;}
-.info-pair-addrow .info-value .table-selected, .info-value .table-unselected {width:12px; background-position: top left; background-repeat:no-repeat; background-position:center;}
-.info-pair-addrow .info-value .table-selected {background-image:url(../images/selected.png); width:14px !important; height:14px;}
-.info-pair-addrow .info-value .table-unselected {background-image:url(../images/unselected.png); width:14px !important; height:14px;}
-.info-pair-addrow .info-value .table-spacer {width:14px !important;}
-.info-pair-addrow .addrow {float:right; margin: -8px 0 -8px 0;}
-
-.info-pair-table {width:100%; float:left; font-size:14px; line-height:16px;}
-.info-pair-table .info-label {float:left; width:100%; padding-top: 2px; padding-bottom:2px; font-weight:bold; font-size:11px; color:# 0F75BC;}
-.info-pair-table .info-value {float:left; width:100%; padding-top:0px; padding-bottom:10px; *padding-bottom:7px;}
-.info-pair-table .info-value table {width:100%; border-spacing:0; background-color:#FFF; font-size:11px; line-height:11px; margin-bottom:0;}
 .info-pair-table .info-value table.components {width:60%; float:left;}
-.info-pair-table .info-value thead td {background-color:#F3F3F4; color:#3B3B3C; border:1px solid #BABABB; padding: 2px 1px 2px 1px;}
-.info-pair-table .info-value tbody td, 
-.info-pair-table .info-value tbody td {border:1px solid #BABABB; font-size:12px; line-height:12px; height:19px; *height:17px;}
-.info-pair-table .info-value tbody td input {border:none; font-size:12px; line-height:12px;}
-
-.info-pair-date {float:left; padding-bottom:2px; width:100%;}
-.info-pair-date .info-label {float:left; padding-bottom:2px; font-weight:bold; font-size:11px; width:100%;}
-.info-pair-date .info-value {float:left; padding-bottom:8px;}
-.info-pair-date .info-value table {width:auto; border-spacing:0; background-color:#FFF; font-size:11px; line-height:11px; margin:0;}
-.info-pair-date .info-value thead td {background-color:#F3F3F4; color:#3B3B3C; border:1px solid #BABABB; padding: 1px 1px 2px 1px;}
-.info-pair-date .info-value tbody td, 
-.info-pair-date .info-value tbody th {border:1px solid #BABABB; padding:0;}
-.info-pair-date .info-value tbody td input {border:none;}
 
 .find-edit-object-records .info-pair-table {width:100%; float:left; font-size:14px; line-height:16px;}
 .find-edit-object-records .info-pair-table .info-label {float:left; width:100%; padding-top: 2px; padding-bottom:0; font-weight:bold; font-size:11px; color:# 0F75BC;}
@@ -219,20 +214,21 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 
 .input-alpha, .input-alpha-table, .input-authority, .input-numeric, 
 .input-numeric-small, .input-numeric-medium, .input-numeric-long, 
-.input-dropdown, .input-money-type, .input-money-amount, .input-date
-{width: 99.5%; height:16px; padding-top:2px; *padding:1px 0; margin-top:-1px;}
+.input-dropdown, .input-money-type, .input-money-amount, .input-date, .input-textarea
+{width: 99.5%; height:16px; padding-top:2px; *padding-top:2px;}
 
 table .input-alpha, table .input-alpha-table, table .input-authority, table .input-numeric, 
 table .input-numeric-small, table .input-numeric-medium, table .input-numeric-long, 
 table .input-dropdown, table .input-money-type, table .input-money-amount, table .input-date
-{height:17px; padding-top:1px; margin-top:0;}
+{height:17px; *height:16px; padding-top:1px; *padding-top:0; border:0;}
+
  
 .input-numeric-small   {width: 60px;}
 .input-numeric-medium {width: 120px}
 .input-date	 		   {width: 100px !important;}
 .input-money-amount	   {width: 120px;}
-
-.input-textarea		   {width: 99.5%; height:63px;}
+.input-select		   {width: auto;}
+.input-textarea		   {width: 99.5%; height:62px;}
 .input-alpha-login       {width: 120px; height:18px;}
 
 .fl-container-pivot  select.recently-created-list {width:232px !important; height:20px; *height:24px;}
@@ -324,7 +320,7 @@ textarea {overflow:auto;}
 	
 .clear {clear:both; margin:0; padding:0; height:1px; overflow:hidden; visibility:hidden; display:block;}
 
-td.label {background-color:#F3F3F4;}
+td.label {background-color:#F3F3F4; padding-left:1px;}
 td textarea {border:none;}
 
 .components-img {float:right;}
@@ -346,6 +342,8 @@ td textarea {border:none;}
 
 .deactivate, .deactivate table, .deactivate table td, .deactivate .label {background-color:#CDCCCC !important; color:#606060 !important;}
 .deactivate input {color:gray !important;}
+
+.activate input {color:black !important; background-color:white !important;}
 
 .overflow-find-edit {overflow-y:auto; overflow-x:hidden; max-height:144px;}
 

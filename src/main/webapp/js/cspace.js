@@ -15,19 +15,48 @@ function getRadioValue() {
 }
 
 $(document).ready(function() {
-	$('#number1-info').val($('#number1').val());
+	$currentFocus = null;
+	$(':input').focus( function() {
+		$currentFocus = this;
+		
+	});
+
+
+	$switch = false;
+	$('#primary').val($switch);
 	
-	$('#number1-info').focus(function() {
-		$('#number1-info').toggleClass('deactivate');
-		$('#number1').toggleClass('hidden');
-		$('#number1').focus();
+	//$('#primary').val($('#secondary').val());
+	
+	$('#primary').focus(function() {
+	
+		if ( $switch == false ) { //ok to change focus to secondary
+			$('#primary').removeClass('activate').addClass('deactivate');
+			$('#secondary').removeClass('hidden').addClass('show');
+			$('#secondary').focus();
+		}
 		
+		else {
+			//$('#secondary').removeClass('show').addClass('hidden');
+			$('#primary').removeClass('deactivate').addClass('activate');
+		}
+		
+		$switch = false;
+			
+		//$('#primary').val($switch);
+		$('#primary').val($switch);
     });
-		
-    $('#number1').blur(function() {
-		$('#number1-info').toggleClass('deactivate');
-		$('#number1-info').val($('#number1').val());
-		$('#number1').toggleClass("hidden");
-		
+	
+	$('#primary').blur(function() {
+		$switch = false;
+	});
+	
+    $('#secondary').blur(function() {
+			$('#secondary').removeClass('show').addClass('hidden');
+			
+			$('#primary').removeClass('deactivate').addClass('activate');
+			
+			$switch = true;
+
+			$('#primary').val($switch);
     });
 });
