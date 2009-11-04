@@ -14,47 +14,37 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var buildTree = function () {
-        return {
-            children: [
-                {ID: "patterns",
-                 optionnames: {valuebinding: "names"},
-                 optionlist: {valuebinding: "list"},
-                 selection: {valuebinding: ""}
-            },
-            {ID: "pattern-row:",
-             children: [
-                 {ID: "pattern-name",
-                  parentRelativeID: "..::patterns",
-                  choiceindex: 0},
-                 {ID: "pattern-sample",
-                  value: "IN2009.1"}
-             ]},
-            {ID: "pattern-row:",
-             children: [
-                 {ID: "pattern-name",
-                  parentRelativeID: "..::patterns",
-                  choiceindex: 1},
-                 {ID: "pattern-sample",
-                  value: "ACC2009.42"}
-             ]},
-            {ID: "pattern-row:",
-             children: [
-                 {ID: "pattern-name",
-                  parentRelativeID: "..::patterns",
-                  choiceindex: 2},
-                 {ID: "pattern-sample",
-                  value: "LI2009.1"}
-             ]}
-            ]
-        };
+    var buildTree = function (samples) {
+		
+		var tree = {
+			children: [{
+				ID: "patterns",
+	            optionnames: {valuebinding: "names"},
+	            optionlist: {valuebinding: "list"},
+	            selection: {valuebinding: ""}
+			}]
+		};
+		
+		return tree.children.concat(fluid.transform(samples, function (node, index) {
+			return {
+                ID: "pattern-row:",
+                children: [{
+                    ID: "pattern-name",
+                    parentRelativeID: "..::patterns",
+                    choiceindex: index
+                }, {
+                    ID: "pattern-sample",
+                    value: node
+                }]
+            };
+		}));
     };
 
-    var buildCutpoints = function () {
+    var buildCutpoints = function (selectors) {
         return [
-            {id: "pattern-row:", selector: ".csc-numberPatternChooser-patternRow"},
-            {id: "pattern-name", selector: ".csc-numberPatternChooser-name"},
-            {id: "pattern-sample", selector: ".csc-numberPatternChooser-sample"}
+            {id: "pattern-row:", selector: selectors.row},
+            {id: "pattern-name", selector: selectors.name},
+            {id: "pattern-sample", selector: selectors.sample}
         ];
     };
 
@@ -63,17 +53,15 @@ var cspace = cspace || {};
         var resources = {
             chooser: {
                 href: that.options.templateURL,
-                cutpoints: buildCutpoints()
+                cutpoints: buildCutpoints(that.options.selectors)
             }
         };
         
         // Get the template, create the tree and render the table of contents
         fluid.fetchResources(resources, function () {
             var templates = fluid.parseTemplates(resources, ["chooser"], {});
-            var node = $("<div></div>", that.container[0].ownerDocument);
-            fluid.reRender(templates, node, buildTree(), {model: that.model});
-            that.container.append(node);
-            that.events.afterRender.fire(node);
+            fluid.reRender(templates, that.container, buildTree(that.model.samples), {model: that.model});
+            that.events.afterRender.fire();
         });
     };
 
@@ -82,7 +70,8 @@ var cspace = cspace || {};
         that.model = {
             names: ["Intake", "Acquisition", "Loan In"],
             list: ["intake", "acc", "loan-in"],
-            selection: "acc"
+            selection: "acc",
+			samples: ["IN2009.1", "ACC2009.42", "LI2009.1"]
         }; // = options.model?
         
         that.refreshView = function () {
@@ -97,7 +86,10 @@ var cspace = cspace || {};
     fluid.defaults("cspace.numberPatternChooser", {
         selectors: {
             button: ".csc-numberPatternChooser-button",
-            list: ".csc-numberPatternChooser-list"
+            list: ".csc-numberPatternChooser-list",
+			row: ".csc-numberPatternChooser-patternRow",
+			name: ".csc-numberPatternChooser-name",
+			sample: ".csc-numberPatternChooser-sample"
         },
         events: {
             afterRender: null
