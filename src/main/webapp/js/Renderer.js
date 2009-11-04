@@ -161,7 +161,7 @@ var cspace = cspace || {};
         }
     };
     
-    var buildComponentTreeChildren = function (specPart, modelPart, strings, dataContext, el) {
+    var buildComponentTreeChildren = function (specPart, that, el) {
         var children = [];
         var index = 0;
         for (var key in specPart) {
@@ -171,10 +171,10 @@ var cspace = cspace || {};
                     // repeated items need to be filled in based on the data, not the schema
                     // the schema defines the fields for each row, but the data must be 
                     // examined to fill in each row
-                    addRepeatedItemsToComponentTree(children, key, specPart[key].repeated, modelPart/*[key]*/, elPath, strings);
+                    addRepeatedItemsToComponentTree(children, key, specPart[key].repeated, that.model/*[key]*/, elPath, that.options.strings);
                 } else {
                     if (specPart[key].hasOwnProperty("options")) {
-                        children = children.concat(buildSelectComponent(key, key, modelPart, specPart[key], strings));
+                        children = children.concat(buildSelectComponent(key, key, that.model, specPart[key], that.options.strings));
                     } else {
                         children[index] = {
                             ID: key,
@@ -186,7 +186,7 @@ var cspace = cspace || {};
                         children[index].decorators = fluid.transform(children[index].decorators, function (value, ind) {
                             if (value.func === "cspace.numberPatternChooser") {
                                 value.options = value.options || {};
-                                value.options.dataContext = dataContext;
+                                value.options.dataContext = that.dataContext;
                             }
                             return value;
                         });
@@ -199,8 +199,8 @@ var cspace = cspace || {};
     };
 
     cspace.renderer = {
-        buildComponentTree: function (spec, model, strings, dataContext) {
-            var tree = {children: buildComponentTreeChildren(spec, model, strings, dataContext)};
+        buildComponentTree: function (spec, that) {
+            var tree = {children: buildComponentTreeChildren(spec, that)};
             return tree;
         },
 
@@ -212,7 +212,7 @@ var cspace = cspace || {};
                 autoBind: true
             };
             var cutpoints = buildCutpointsFromSpec(fullUISpec);            
-            var tree = cspace.renderer.buildComponentTree(fullUISpec, that.model, that.options.strings, that.dataContext);
+            var tree = cspace.renderer.buildComponentTree(fullUISpec, that);
             var resources = {};
             for (var key in that.options.templates) {
                 if (that.options.templates.hasOwnProperty(key)) {

@@ -49,13 +49,15 @@ var cspace = cspace || {};
     };
 
     var fetchNextNumberInSequence = function (sequenceName, callback) {
+        callback(sequenceName);
 //        ajax call to get number({
 //            callback: callback
 //        });
     };
 
-    var populateInputField = function() {
-//        input.val = number;
+    var populateInputField = function(value) {
+        var foo = $(".csc-acquisition-acquisition-reference-number");
+        $(".csc-acquisition-acquisition-reference-number").val(value);
     };
 
     var bindEvents = function (that) {

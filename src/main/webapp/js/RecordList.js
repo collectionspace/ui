@@ -87,7 +87,7 @@ var cspace = cspace || {};
 
         that.refreshView = function () {
             that.model.items = cleanUpRecordList(that.model.items);
-            var tree = cspace.renderer.buildComponentTree(that.spec, that.model);
+            var tree = cspace.renderer.buildComponentTree(that.spec, that);
             var cutpoints = cspace.renderer.createCutpoints(that.spec);
             fluid.selfRender(that.container, tree, {cutpoints: cutpoints, model: that.model});
         };
