@@ -5,7 +5,13 @@
 	        "validators": [],
             "decorators": [
                 {"type": "fluid",
-                 "func": "cspace.numberPatternChooser"
+                 "func": "cspace.numberPatternChooser",
+                 "container": ".csc-acquisition-acquisition-reference-number-patternChooserContainer",
+                 "options": {
+                     "selectors": {
+                         "numberField": ".csc-acquisition-acquisition-reference-number"
+                     }
+                 }
                  }
             ]
 	    },
