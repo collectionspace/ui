@@ -3,7 +3,11 @@
 	    "acquReferenceNum": {
 	        "selector": ".csc-acquisition-acquisition-reference-number",
 	        "validators": [],
-	        "decorators": []
+            "decorators": [
+                {"type": "fluid",
+                 "func": "cspace.numberPatternChooser"
+                 }
+            ]
 	    },
 	    "acquDate": {
 	        "selector": ".csc-acquisition-date",

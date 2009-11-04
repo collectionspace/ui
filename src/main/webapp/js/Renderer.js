@@ -161,7 +161,7 @@ var cspace = cspace || {};
         }
     };
     
-    var buildComponentTreeChildren = function (specPart, modelPart, strings, el) {
+    var buildComponentTreeChildren = function (specPart, modelPart, strings, dataContext, el) {
         var children = [];
         var index = 0;
         for (var key in specPart) {
@@ -183,6 +183,13 @@ var cspace = cspace || {};
                     }
                     if (specPart[key].decorators && specPart[key].decorators.length > 0) {
                         children[index].decorators = specPart[key].decorators;
+                        children[index].decorators = fluid.transform(children[index].decorators, function (value, ind) {
+                            if (value.func === "cspace.numberPatternChooser") {
+                                value.options = value.options || {};
+                                value.options.dataContext = dataContext;
+                            }
+                            return value;
+                        });
                     }
                 }
                 index = children.length;
@@ -192,8 +199,8 @@ var cspace = cspace || {};
     };
 
     cspace.renderer = {
-        buildComponentTree: function (spec, model, strings) {
-            var tree = {children: buildComponentTreeChildren(spec, model, strings)};
+        buildComponentTree: function (spec, model, strings, dataContext) {
+            var tree = {children: buildComponentTreeChildren(spec, model, strings, dataContext)};
             return tree;
         },
 
@@ -205,7 +212,7 @@ var cspace = cspace || {};
                 autoBind: true
             };
             var cutpoints = buildCutpointsFromSpec(fullUISpec);            
-            var tree = cspace.renderer.buildComponentTree(fullUISpec, that.model, that.options.strings);
+            var tree = cspace.renderer.buildComponentTree(fullUISpec, that.model, that.options.strings, that.dataContext);
             var resources = {};
             for (var key in that.options.templates) {
                 if (that.options.templates.hasOwnProperty(key)) {
