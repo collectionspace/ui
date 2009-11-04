@@ -48,16 +48,15 @@ var cspace = cspace || {};
         ];
     };
 
-    var fetchNextNumberInSequence = function (sequenceName, callback) {
-        callback(sequenceName);
+    var fetchNextNumberInSequence = function (that, sequenceName, callback) {
+        callback(that, sequenceName);
 //        ajax call to get number({
 //            callback: callback
 //        });
     };
 
-    var populateInputField = function(value) {
-        var foo = $(".csc-acquisition-acquisition-reference-number");
-        $(".csc-acquisition-acquisition-reference-number").val(value);
+    var populateInputField = function(that, value) {
+        that.locate("numberField").val(value);
     };
 
     var bindEvents = function (that) {
@@ -68,7 +67,7 @@ var cspace = cspace || {};
         that.locate("row").click(function (eventObject) {
             that.model.selected = that.model.list[eventObject.currentTarget.rowIndex-1];
             list.hide();
-            fetchNextNumberInSequence(that.model.selected, populateInputField);
+            fetchNextNumberInSequence(that, that.model.selected, populateInputField);
         });
         list.hide();
     };
@@ -117,7 +116,8 @@ var cspace = cspace || {};
             list: ".csc-numberPatternChooser-list",
 			row: ".csc-numberPatternChooser-patternRow",
 			name: ".csc-numberPatternChooser-name",
-			sample: ".csc-numberPatternChooser-sample"
+			sample: ".csc-numberPatternChooser-sample",
+            numberField: ".csc-numberPatternChooser-numberField"
         },
         events: {
             afterRender: null
