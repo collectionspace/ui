@@ -206,7 +206,11 @@ var cspace = cspace || {};
             var resource = that.resourceMapper.map(model, modelPath);
             return that.options.protocol + that.options.baseUrl + resource + extension();
         };
-        
+
+        that.baseUrl = function () {
+            return that.options.protocol + that.options.baseUrl;
+        }; 
+            
         return that;    
     };
 

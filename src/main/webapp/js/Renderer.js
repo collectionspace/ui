@@ -186,7 +186,7 @@ var cspace = cspace || {};
                         children[index].decorators = fluid.transform(children[index].decorators, function (value, ind) {
                             if (value.func === "cspace.numberPatternChooser") {
                                 value.options = value.options || {};
-                                //value.options.dataContext = that.dataContext;
+                                value.options.baseUrl = that.dataContext.urlFactory.baseUrl();
 								value.options.applier = that.applier;
                             }
                             return value;

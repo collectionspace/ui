@@ -53,16 +53,29 @@ var cspace = cspace || {};
     };
 
     var fetchNextNumberInSequence = function (that, sequenceName, callback) {
-        callback(that, sequenceName);
-//        ajax call to get number({
-//            callback: callback
-//        });
+        jQuery.ajax({
+            url: that.options.baseUrl + "/" + sequenceName + "/__auto",
+            type: "GET",
+            dataType: "json",
+            success: callback,
+            error: function (xhr, textStatus, errorThrown) {
+                // TODO: implement proper error handling
+                callback({error: "Not supported yet"}, "error");
+           }
+        });
+
     };
 
-    var populateInputField = function(that, value) {
-		var numField = that.locate("numberField", that.container);
-		numField.val(value);
-		fluid.applyChange(numField, value, that.options.applier);
+    var populateInputField = function(that){
+        return function(data, status){
+            var numField = that.locate("numberField", that.container);
+            var value;
+            for (key in data) {
+                value = data[key];
+            }
+            numField.val(value);
+            fluid.applyChange(numField, value, that.options.applier);
+        };
     };
 
     var bindEvents = function (that) {
@@ -78,7 +91,7 @@ var cspace = cspace || {};
         that.locate("row").click(function (eventObject) {
             that.options.selected = that.model.list[eventObject.currentTarget.rowIndex-1];
             list.hide();
-            fetchNextNumberInSequence(that, that.options.selected, populateInputField);
+            fetchNextNumberInSequence(that, that.options.selected, populateInputField(that));
         });
     };
 	
