@@ -14,8 +14,13 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var buildTree = function (samples) {
-		
+    var buildTree = function (model) {
+		// If no model return empty component tree.	
+		if (!model) {
+			return {};
+		}
+				
+		var samples = model.samples;		
 		var tree = {
 			children: [{
 				ID: "patterns",
@@ -23,8 +28,7 @@ var cspace = cspace || {};
 	            optionlist: {valuebinding: "list"},
 	            selection: {valuebinding: ""}
 			}]
-		};
-		
+		};		
 		return tree.children.concat(fluid.transform(samples, function (node, index) {
 			return {
                 ID: "pattern-row:",
@@ -56,21 +60,35 @@ var cspace = cspace || {};
     };
 
     var populateInputField = function(that, value) {
-        that.locate("numberField").val(value);
+		var numField = that.locate("numberField", that.container);
+		numField.val(value);
+		fluid.applyChange(numField, value, that.options.applier);
     };
 
     var bindEvents = function (that) {
         var list = that.locate("list");
         that.locate("button").click(function () {
-            list.show();
+			if (list.is(":visible")) {
+				list.hide();
+			}
+			else {
+				list.show();
+			}
         });
         that.locate("row").click(function (eventObject) {
-            that.model.selected = that.model.list[eventObject.currentTarget.rowIndex-1];
+            that.options.selected = that.model.list[eventObject.currentTarget.rowIndex-1];
             list.hide();
-            fetchNextNumberInSequence(that, that.model.selected, populateInputField);
+            fetchNextNumberInSequence(that, that.options.selected, populateInputField);
         });
-        list.hide();
     };
+	
+	var setupNode = function (that) {
+		// Only display number-pattern-chooser button when there is a model.
+		if (!that.model) {
+            that.locate("button").hide();
+        }
+		that.locate("list").hide();
+	};
 
     var setupChooser = function (that) {
         // Data structure needed by fetchResources
@@ -84,9 +102,10 @@ var cspace = cspace || {};
         // Get the template, create the tree and render the table of contents
         fluid.fetchResources(resources, function () {
             var templates = fluid.parseTemplates(resources, ["chooser"], {});
-            var node = $("<div></div>", that.container[0].ownerDocument);
-            fluid.reRender(templates, node, buildTree(that.model.samples), {model: that.model});
-            that.container.append(node);
+			var node = $("<div></div>", that.container[0].ownerDocument);
+            fluid.reRender(templates, node, buildTree(that.model), {model: that.model});
+			that.container.append(node);
+			setupNode(that);
             bindEvents(that);
             that.events.afterRender.fire(node);
         });
@@ -94,15 +113,10 @@ var cspace = cspace || {};
 
     cspace.numberPatternChooser = function (container, options) {
         var that = fluid.initView("cspace.numberPatternChooser", container, options);
-        that.model = {
-            names: ["Intake", "Acquisition", "Loan In"],
-            list: ["intake", "acc", "loan-in"],
-            selected: null,
-			samples: ["IN2009.1", "ACC2009.42", "LI2009.1"]
-        }; // = options.model?
+		
+        that.model = that.options.model;
         
-        that.refreshView = function () {
-            
+        that.refreshView = function () {            
         };
         
         setupChooser(that);
@@ -116,9 +130,10 @@ var cspace = cspace || {};
             list: ".csc-numberPatternChooser-list",
 			row: ".csc-numberPatternChooser-patternRow",
 			name: ".csc-numberPatternChooser-name",
-			sample: ".csc-numberPatternChooser-sample",
-            numberField: ".csc-numberPatternChooser-numberField"
+			sample: ".csc-numberPatternChooser-sample"
         },
+		model: null,
+		selected: null,
         events: {
             afterRender: null
         },

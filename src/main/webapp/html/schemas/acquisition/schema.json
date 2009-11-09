@@ -1,19 +1,23 @@
 {
 	"spec": {
 	    "acquReferenceNum": {
-	        "selector": ".csc-acquisition-acquisition-reference-number",
+	        "selector": ".csc-acquisition-numberPatternChooser-reference-number",
 	        "validators": [],
-            "decorators": [
-                {"type": "fluid",
-                 "func": "cspace.numberPatternChooser",
-                 "container": ".csc-acquisition-acquisition-reference-number-patternChooserContainer",
-                 "options": {
-                     "selectors": {
-                         "numberField": ".csc-acquisition-acquisition-reference-number"
-                     }
-                 }
-                 }
-            ]
+            "decorators": [{
+			    "type": "fluid",
+                "func": "cspace.numberPatternChooser",
+                "container": ".csc-acquisition-reference-number-patternChooserContainer",
+                "options": {
+				    "selectors": {
+					    "numberField": ".csc-acquisition-numberPatternChooser-reference-number"
+					},
+				    "model": {
+					    "list": ["intake", "acc", "loan-in"],
+						"samples": ["IN2009.1", "ACC2009.42", "LI2009.1"],
+						"names": ["Intake", "Acquisition", "Loan In"]
+					}
+				}
+            }]
 	    },
 	    "acquDate": {
 	        "selector": ".csc-acquisition-date",

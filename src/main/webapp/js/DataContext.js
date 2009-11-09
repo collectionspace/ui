@@ -151,7 +151,7 @@ var cspace = cspace || {};
         var mapperDefaults = fluid.defaults("cspace.dataContext.staticResourceMapper"); 
         var mapperOpts = {};
         for (var key in mapperDefaults) {
-            if (mapperDefaults.hasOwnPropertyy(key)) {
+            if (mapperDefaults.hasOwnProperty(key)) {
                 mapperOpts[key] = options[key];
             }
         }
@@ -254,10 +254,9 @@ var cspace = cspace || {};
      * @param {Object} options configuration options for the mapper, including the modelToResourceMap
      */
     cspace.dataContext.staticResourceMapper = function (options) {
-        var that = {
-            modelToResourceMap: (options && options.modelToResourceMap) ? options.modelToResourceMap : {},
-            replacements: (options && options.replacements) ? options.replacements : {}
-        };
+		
+		var that = fluid.initLittleComponent("cspace.dataContext.staticResourceMapper", 
+		    options);
 
         that.map = function (model, modelPath) {
             if (!modelPath) {
@@ -265,23 +264,29 @@ var cspace = cspace || {};
             }
             
             var result = "";
-            if (!that.modelToResourceMap.hasOwnProperty(modelPath)) {
+            if (!that.options.modelToResourceMap.hasOwnProperty(modelPath)) {
                 // TODO: what to return if there's no map??
                 return result;
             }
 
             // TODO: this is pretty inefficient; resolving the values of each key in the replacements, even if we only need a few of them.
             var reps = [];
-            for (var key in that.replacements) {
-                if (that.replacements.hasOwnProperty(key)) {
-                    reps[key] = fluid.model.getBeanValue(model, that.replacements[key]);
+            for (var key in that.options.replacements) {
+                if (that.options.replacements.hasOwnProperty(key)) {
+                    reps[key] = fluid.model.getBeanValue(model, that.options.replacements[key]);
                 }
             }
-            result = fluid.stringTemplate(that.modelToResourceMap[modelPath], reps);
+            result = fluid.stringTemplate(that.options.modelToResourceMap[modelPath], reps);
 
             return result;
         };
         
         return that;
     };
+	
+	fluid.defaults("cspace.dataContext.staticResourceMapper", {
+		modelToResourceMap: {},
+		replacements: {}
+	});
+	
 })(jQuery, fluid_1_1);
