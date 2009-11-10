@@ -4,12 +4,16 @@
 	width:400px;
 	float:right; width:100%;
 }
+.pattern-chooser-input {
+	width:51% !important;
+}
 .csc-numberPatternChooser-button {
+	border:none;
 	background-color:#577A98; 
-	padding: 0 4px; 
+	padding: 2px 4px 1px 4px; *padding: 2px 4px 0 4px;
 	color:#fff; 
 	float:right; 
-	margin-top:-19px; *margin-top:-21px;
+	margin-top:-20px; *margin-top:-21px;
 	z-index:9999;
 }
 .cs-numberPatternChooser-list {
