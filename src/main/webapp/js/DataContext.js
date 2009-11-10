@@ -224,6 +224,10 @@ var cspace = cspace || {};
             return that.options.protocol + that.options.baseUrl + resource + ".json";
         };
 
+        that.baseUrl = function () {
+            return that.options.protocol + that.options.baseUrl;
+        }; 
+            
         return that;
     };
 
