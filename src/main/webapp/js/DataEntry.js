@@ -113,6 +113,7 @@ var cspace = cspace || {};
                 queryParams[that.options.idField] = that.options.csid;
                 that.dataContext.fetch("*", queryParams);
             } else {
+                that.applier = fluid.makeChangeApplier(that.model);
                 that.refreshView();
             }
         };
