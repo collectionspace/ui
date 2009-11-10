@@ -177,7 +177,7 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 
 .info-pair-termlist  table, .info-pair-termlist tbody td{width:auto;  background-color:#E6E6E6;}
 .info-pair-termlist .info-value {padding-bottom:4px;}
-.info-pair-termlist table select {mar gin-bottom:6px; border:0;}
+.info-pair-termlist table select {border:0;}
 .info-pair-date .info-value  table {width:auto;}
 
 .login-text {padding:15px 20px;}
@@ -215,7 +215,7 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .input-alpha, .input-alpha-table, .input-authority, .input-numeric, 
 .input-numeric-small, .input-numeric-medium, .input-numeric-long, 
 .input-dropdown, .input-money-type, .input-money-amount, .input-date, .input-textarea
-{width: 99.5%; height:16px; padding-top:2px; *padding-top:2px;}
+{width: 99.5%; height:16px; padding-top:2px;}
 
 table .input-alpha, table .input-alpha-table, table .input-authority, table .input-numeric, 
 table .input-numeric-small, table .input-numeric-medium, table .input-numeric-long, 
