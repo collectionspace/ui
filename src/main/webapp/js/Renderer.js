@@ -31,7 +31,7 @@ var cspace = cspace || {};
     var buildFullUISpec = function (that) {
         var fullUISpec = fluid.copy(that.spec);
         
-		// This makes the assumption that 'save' exists. This should be configurable.
+        // This makes the assumption that 'save' exists. This should be configurable.
         fullUISpec.save = {
             "selector": that.options.selectors.save,
             "validators": [],
@@ -187,7 +187,7 @@ var cspace = cspace || {};
                             if (value.func === "cspace.numberPatternChooser") {
                                 value.options = value.options || {};
                                 value.options.baseUrl = that.dataContext.urlFactory.baseUrl();
-								value.options.applier = that.applier;
+                                value.options.applier = that.applier;
                             }
                             return value;
                         });
@@ -210,7 +210,8 @@ var cspace = cspace || {};
             var renderOptions = {
                 model: that.model,
 //                debugMode: true,
-                autoBind: true
+                autoBind: true,
+                applier: that.applier
             };
             var cutpoints = buildCutpointsFromSpec(fullUISpec);            
             var tree = cspace.renderer.buildComponentTree(fullUISpec, that);
