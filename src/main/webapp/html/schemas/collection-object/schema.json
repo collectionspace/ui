@@ -13,7 +13,22 @@
 	        "selector": ".csc-object-identification-object-title-type"
 	    },
 	    "accessionNumber": {
-	        "selector": ".csc-object-identification-object-number"
+	        "selector": ".csc-object-identification-object-number",
+            "decorators": [{
+			    "type": "fluid",
+                "func": "cspace.numberPatternChooser",
+                "container": ".csc-object-identification-object-number-container",
+                "options": {
+				    "selectors": {
+					    "numberField": ".csc-object-identification-object-number"
+					},
+				    "model": {
+					    "list": ["intake", "objects", "loans-in"],
+						"samples": ["IN2009.1.1", "2009.1.1", "LI2009.1.1"],
+						"names": ["Intake", "Accession", "Loans In"]
+					}
+				}
+            }]
 	    },
 	    "otherNumber": {
 	        "selector": ".csc-object-identification-other-number"
