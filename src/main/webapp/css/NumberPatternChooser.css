@@ -64,7 +64,7 @@ td.csc-numberPatternChooser-checkmark {
 	width:12px;
 	z-index:9999;
 }
-.selected {
+.cs-numberPatternChooser-selected {
 	background:url('../images/checkmark.png') no-repeat center center;
 	z-index:9999;
 }

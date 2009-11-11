@@ -84,9 +84,14 @@ var cspace = cspace || {};
             list.toggle();
         });
         that.locate("row").click(function (eventObject) {
-            that.options.selected = that.model.list[eventObject.currentTarget.rowIndex-1];
+            that.locate("checkmark").removeClass(that.options.styles.selected);
+            
+            var target = eventObject.currentTarget;
+            that.options.selected = that.model.list[target.rowIndex-1];
+            that.locate("checkmark", target).addClass(that.options.styles.selected);
+
             list.hide();
-            fetchNextNumberInSequence(that, that.options.selected, populateInputField(that));
+	        fetchNextNumberInSequence(that, that.options.selected, populateInputField(that));
         });
     };
 
@@ -137,8 +142,12 @@ var cspace = cspace || {};
             list: ".csc-numberPatternChooser-list",
             row: ".csc-numberPatternChooser-patternRow",
             name: ".csc-numberPatternChooser-name",
-            sample: ".csc-numberPatternChooser-sample"
+            sample: ".csc-numberPatternChooser-sample",
+	        checkmark: ".csc-numberPatternChooser-checkmark"
         },
+		styles: {
+		 	selected: "cs-numberPatternChooser-selected"
+		 },
         model: null,
         selected: null,
         events: {
