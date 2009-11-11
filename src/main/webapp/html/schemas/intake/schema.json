@@ -3,7 +3,21 @@
 	    "entryNumber": {
 	        "selector": ".csc-intake-entry-number",
 	        "validators": [],
-	        "decorators": []
+            "decorators": [{
+			    "type": "fluid",
+                "func": "cspace.numberPatternChooser",
+                "container": ".csc-intake-entry-number-container",
+                "options": {
+				    "selectors": {
+					    "numberField": ".csc-intake-entry-number"
+					},
+				    "model": {
+					    "list": ["intake", "study", "evaluations"],
+						"samples": ["IN2009.1", "ST2009.1", "EV2009.1"],
+						"names": ["Intake", "Study", "Evaluation"]
+					}
+				}
+            }]
 	    },
 	    "entryDate": {
 	        "selector": ".csc-intake-entry-date",
