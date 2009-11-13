@@ -1,11 +1,11 @@
 				<!-- title-bar - name of object and (assession) number -->
 				<div id="title-bar">
 					<div class="title-bar-value">
-						<div class="object-number csc-titleBar-intake-entry-number"></div>
+						<div class="record-number csc-titleBar-intake-entry-number"></div>
 						<div class="clear"></div>
 					</div>
 					<div class="label">
-						<div class="label-text">ENTRY NUMBER</div>
+						<div class="label-text">INTAKE ENTRY NUMBER</div>
 						<div class="clear"></div>
 					</div>
 				</div>
@@ -17,7 +17,7 @@
 						<!-- left-side container. Contains bulk of Object Entry forms and fields -->
 						<div class="fl-container-left fl-force-left">
 							                           
-<form class="fl-container-left">
+					<form class="fl-container-left">
 					<div id="top-nav">
 						<div id="tab-menu"><!-- --></div>
 						<div class="upper-save"><input type="image" src="../images/btnSave.png" alt="save button" class="savebutton csc-save" height="24" width="100"  /></div><div class="clear"></div>
@@ -45,8 +45,8 @@
 									<div class="info-column2-50 fl-force-left" >
 										
 										<div class="info-pair">
-											<div class="info-label">Entry Number</div>
-											<div class="info-value csc-intake-entry-number-container"><input type="text" class="input-alpha csc-intake-entry-number" name="intake-entry-number" /></div>
+											<div class="info-label">Intake Entry Number</div>
+											<div class="info-value csc-intake-entry-number-container"><input type="text" class="input-alpha csc-intake-entry-number pattern-chooser-input" name="intake-entry-number" /></div>
 										</div>
 																				
 										<div class="info-pair-date">
@@ -246,13 +246,17 @@
 														</tr>
 													</tbody>
 												</table>
-											</div>
-											
+											</div>											
 										</div>
-										
+										<!--
 										<div class="info-pair">
 											<div class="info-label">Field Collection Event Reference Number</div>
 											<div class="info-value"><input type="text" class="input-numeric-medium csc-intake-field-collection-event-ref-number" name="intake-field-collection-event-ref-number" /></div>
+										</div>
+										
+										<div class="info-pair">
+											<div class="info-label">Field Collection Source</div>
+											<div class="info-value"><input type="text" class="input-alpha csc-intake-field-collection-source" name="current-intake-field-collection-source" /></div>
 										</div>
 										
 										<div class="info-pair-addrow">
@@ -269,24 +273,16 @@
 											</div>
 											
 										</div>
+										-->
 										
+									</div>
+									
+									<!-- Left-side column -->
+									<div class="info-column2-50 fl-force-right">
 										<div class="info-pair">
 											<div class="info-label">Field Collection Number</div>
 											<div class="info-value"><input type="text" class="input-numeric csc-intake-field-collection-number" name="current-intake-field-collection-number" /></div>
 										</div> 
-									</div>
-									
-									<!-- Left-side column -->
-									<div class="info-column2-50 fl-force-right">															
-										<div class="info-pair">
-											<div class="info-label">Field Collection Source</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-intake-field-collection-source" name="current-intake-field-collection-source" /></div>
-										</div>
-										
-										<div class="info-pair">
-											<div class="info-label">Field Collection Place</div>
-											<div class="info-value"><input type="text" class="input-alpha csc-intake-field-collection-place" name="intake-current-field-collection-place" /></div>
-										</div>
 										
 										<div class="info-pair-addrow">
 											<div class="info-label">Field Collector</div>
@@ -301,6 +297,11 @@
 												</table>
 											</div>
 											
+										</div>
+										<!--
+										<div class="info-pair">
+											<div class="info-label">Field Collection Place</div>
+											<div class="info-value"><input type="text" class="input-alpha csc-intake-field-collection-place" name="intake-current-field-collection-place" /></div>
 										</div>
 										
 										<div class="info-pair-addrow">
@@ -332,9 +333,10 @@
 											</div>
 											
 										</div>
+										-->
 									</div>
 									
-									
+									<!--
 									<div class="info-column1 fl-force-left">
 										<div class="info-pair-addrow">
 											<div class="info-label">Stratagraphic Unit</div>
@@ -371,6 +373,7 @@
 											<div class="info-value"><input class="input-textarea csc-intake-habitat-note" name="intake-habitat-note" cols=30 rows=4 /></div>
 										</div>	
 									</div>
+									-->
 									
 									<div class="clear"></div>
 								</div>

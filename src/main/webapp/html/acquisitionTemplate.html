@@ -1,7 +1,7 @@
 <!-- title-bar - name of object and (assession) number -->
 <div id="title-bar">
 	<div class="title-bar-value">
-		<div class="object-name csc-titleBar-acquisition-reference-number"></div>
+		<div class="record-number csc-titleBar-acquisition-reference-number"></div>
 		<div class="clear"></div>
 	</div>
 	
@@ -60,6 +60,41 @@
 																</div>
 															</div>
 														
+															<div class="info-pair-date">
+																<div class="info-label" title="">Accession Date</div>
+																<div class="info-value">
+																	<table id="">
+																		<tbody>
+																			<tr>
+																				<td><input type="text" disabled class="input-date csc-acquisition-accession-date disabled" name="acquisition-accession-date"></td>
+																				<td class="cal"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+															
+															<div class="info-pair-table">
+																<div class="info-label" title="">Acqusition Authorizer</div>
+																<div class="info-value">
+																	<table id="" >
+																		<thead>
+																			<tr>
+																				<td title="">Acqusition Authorizer</td>
+																				<td title="">Date</td>
+																			</tr>
+																		</thead>
+																		
+																		<tbody>
+																			<tr>
+																				<td><input type="text" class="input-alpha-table csc-acquisition-authorizer" name="acquisition-authorizer"></td>
+																				<td class="field-cal"><input type="text" disabled class="input-date csc-acquisition-authorizer-date disabled" name="acquisition-authorizer-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+															
 															<div class="info-pair-addrow">
 																<div class="info-label" title="">Acquisition Date</div>
 																<div class="info-value">
@@ -74,19 +109,21 @@
 																</div>
 															</div>
 															
-															<div class="info-pair-date">
-																<div class="info-label" title="">Accession Date</div>
-																<div class="info-value">
-																	<table id="">
-																		<tbody>
-																			<tr>
-																				<td><input type="text" disabled class="input-date csc-acquisition-accession-date disabled" name="acquisition-accession-date"></td>
-																				<td class="cal"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
-																			</tr>
-																		</tbody>
-																	</table>
-																</div>
+															<div class="info-pair">
+																<div class="info-label" title="">Acquisition Method</div>
+																<div class="info-value"><select class="csc-acquisition-acquisition-method" name="acquisition-acquisition-method" /></div>
 															</div>
+															
+															<div class="info-pair">
+																<div class="info-label" title="">Acquisition Source</div>
+																<div class="info-value"><input type="text" class="input-alpha csc-acquisition-acquisition-source" name="acquisition-acquisition-source"></div>
+															</div>
+															
+															<div class="info-pair">
+																<div class="info-label" title="">Transfer of Title Number</div>
+																<div class="info-value"><input type="text" class="input-alpha csc-acquisition-transfer-of-title-number" name="acquisition-transfer-of-title-number"></div>
+															</div>
+															
 														</div>
 														
 														<div class="info-column2-60 fl-force-right">
@@ -133,10 +170,27 @@
 																	</table>
 																</div>
 															</div>
+															
+															<div class="info-pair">
+																<div class="info-label" title="">Acquisition Reason</div>
+																<div class="info-value"><input type="text" class="input-textarea csc-acquisition-acquisition-reason" name="acquisition-acquisition-reason"></div>
+															</div>
+															
+															<div class="info-pair">
+																<div class="info-label" title="">Acquisition Note</div>
+																<div class="info-value"><input type="text" class="input-textarea csc-acquisition-acquisition-note" name="acquisition-acquisition-note"></div>
+															</div>
+															
+															<div class="info-pair">
+																<div class="info-label" title="">Acquisition Provisos</div>
+																<div class="info-value"><input type="text" class="input-textarea csc-acquisition-acquisition-provisos" name="acquisition-acquisition-provisos"></div>
+															</div>
+															
 														</div>
 													</div>
 													
 													<div class="info-column fl-force-left">
+												
 														<div class="info-pair-table deactivate">
 															<div class="info-label" title="">Acquisition Funding</div>
 															<div class="info-value">
@@ -160,61 +214,66 @@
 																</table>
 															</div>
 														</div>
+														
 													</div>
+													<div class="clear"></div>
+												</div>
+											</div>
+										</div>
+										
+										<div class="fl-container-flex fl-fix information-group">
+										
+											<div class="info-column fl-force-left">	
+									
+												<!-- Information-block header -->
+												<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-collection-information'); return false;">
+													<span class="header-toggle"><img id="toggle-object-collection-information-img"  src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+													Object Collection Information
+												</div>
+												
+												<!-- Information-block content block -->
+												<div class="fl-container-flex fl-fix content" id="toggle-object-collection-information">
+													<!-- The information-block is further broken down into two columns of equal size: left and right -->
 													
-													<div class="info-column fl-force-left">
-														<div class="info-column2-40 fl-force-left">									
-															<div class="info-pair">
-																<div class="info-label" title="">Acquisition Method</div>
-																<div class="info-value"><select class="csc-acquisition-acquisition-method" name="acquisition-acquisition-method" /></div>
-															</div>
-																								
-															<div class="info-pair-table">
-																<div class="info-label" title="">Acqusition Authorizer</div>
+													<!-- one row column -->
+													<div class="info-column fl-force-left z-fix">
+														<div class="info-column2-50 fl-force-left">
+															<div class="info-pair-addrow">
+																<div class="info-label" title="">Field Collection Date</div>
 																<div class="info-value">
-																	<table id="" >
-																		<thead>
-																			<tr>
-																				<td title="">Acqusition Authorizer</td>
-																				<td title="">Date</td>
-																			</tr>
-																		</thead>
-																		
+																	<table id="" style="width:auto;">
 																		<tbody>
 																			<tr>
-																				<td><input type="text" class="input-alpha-table csc-acquisition-authorizer" name="acquisition-authorizer"></td>
-																				<td class="field-cal"><input type="text" disabled class="input-date csc-acquisition-authorizer-date disabled" name="acquisition-authorizer-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+																				<td class="table-unselected"></td>
+																				<td class="field-cal"><input type="text" disabled class="input-date csc-object-collection-field-collection-date disabled" name="csc-object-collection-field-collection-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 																			</tr>
 																		</tbody>
 																	</table>
 																</div>
 															</div>
-															
+																													
 															<div class="info-pair">
-																<div class="info-label" title="">Acquisition Source</div>
-																<div class="info-value"><input type="text" class="input-alpha csc-acquisition-acquisition-source" name="acquisition-acquisition-source"></div>
-															</div>
-															
-															<div class="info-pair">
-																<div class="info-label" title="">Transfer of Title Number</div>
-																<div class="info-value"><input type="text" class="input-alpha csc-acquisition-transfer-of-title-number" name="acquisition-transfer-of-title-number"></div>
+																<div class="info-label" title="">Field Collection Event Name</div>
+																<div class="info-value">
+																	<input type="text" class="input-alpha csc-object-collection-field-collection-event-name" />
+																</div>
 															</div>
 														</div>
 													
-														<div class="info-column2-60 fl-force-right">
+													
+														<div class="info-column2-50 fl-force-right">
 															<div class="info-pair">
-																<div class="info-label" title="">Acquisition Reason</div>
-																<div class="info-value"><input type="text" class="input-textarea csc-acquisition-acquisition-reason" name="acquisition-acquisition-reason"></div>
+																<div class="info-label" title="">Field Collection Number</div>
+																<div class="info-value">
+																	<input type="text" class="input-numeric csc-object-collection-field-collection-number" />
+																</div>
 															</div>
 															
 															<div class="info-pair">
-																<div class="info-label" title="">Acquisition Note</div>
-																<div class="info-value"><input type="text" class="input-textarea csc-acquisition-acquisition-note" name="acquisition-acquisition-note"></div>
-															</div>
-															
-															<div class="info-pair">
-																<div class="info-label" title="">Acquisition Provisos</div>
-																<div class="info-value"><input type="text" class="input-textarea csc-acquisition-acquisition-provisos" name="acquisition-acquisition-provisos"></div>
+																<div class="info-label" title="">Field Collector</div>
+																<div class="info-value">
+																	<input type="text" class="input-alpha csc-object-collection-field-collection-collector" />
+																</div>
 															</div>
 														</div>
 													</div>

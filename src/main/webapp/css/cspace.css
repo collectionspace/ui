@@ -95,8 +95,9 @@ ul.cssmenu li.mycs a:active, ul.cssmenu li.mycs a:hover,
 ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 
 .header-name {text-transform:uppercase;}
-.object-name, .object-number, .header-name, .primary-value, .secondary-value {font-size: 24px; line-height: 24px; float:left; width:400px;}
+.object-name, .record-number, .header-name, .primary-value, .secondary-value {font-size: 24px; line-height: 24px; float:left; width:400px;}
 .object-type {margin-left: 1.7em; padding:1px 8px; font-size:18px; line-height:22px; text-transform:uppercase; background-color:#E7E7E8; float:left;}
+.object-name, .record-number {height: 24px;}
 .user-message-container {height: 24px;}
 .user-message{width: 100%; text-align: center; font-size: 24px; line-height: 24px; float:left; color:red; padding-top:4px; display:block;}
 
