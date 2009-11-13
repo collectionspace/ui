@@ -1,8 +1,10 @@
 .cs-numberPatternChooser {
-    position: absolute;
-	z-index:99999;
 	width:400px;
-	float:right; width:100%;
+	float:right; 
+	width:100%;
+	position:absolute;
+	*position:relative;
+	z-index:9999;
 }
 .pattern-chooser-input {
 	width:51% !important;
@@ -14,58 +16,46 @@
 	color:#fff; 
 	float:right; 
 	margin-top:-20px; *margin-top:-21px;
-	z-index:9999;
 }
 .cs-numberPatternChooser-list {
     background-color:white;
-    z-index: 9999;
 	margin-top:2px !important;
 }
 table.cs-numberPatternChooser-list thead {
 	border:1px solid #577A98;
-	z-index:9999;
 }
 table.cs-numberPatternChooser-list thead tr {
 	border-bottom:none;
 	background-color: #577A98;
 	color:#fff;
-	z-index:9999;
 }
 table.cs-numberPatternChooser-list thead th {
 	border:none;
 	padding: 2px 0 2px 2px;
-	z-index:9999;
 }
 table.cs-numberPatternChooser-list tbody {
 	border:1px solid #CECECE;
-	z-index:9999;
 }
 table.cs-numberPatternChooser-list tbody td {
 	border: none;
 	padding: 4px 0 4px 2px;
-	z-index:9999;
 }
 tr.csc-numberPatternChooser-patternRow {
 	cursor:pointer;
-	z-index:9999;
 }
 tr.csc-numberPatternChooser-patternRow:hover {
 	background-color:#CDE9EF;
 }
 tr.csc-numberPatternChooser-name {
 	color:#606060;
-	z-index:9999;
 }
 tr.csc-numberPatternChooser-sample {
 	color:#64A8CB;
-	z-index:9999;
 }
 td.csc-numberPatternChooser-checkmark {
 	width:12px;
-	z-index:9999;
 }
 .cs-numberPatternChooser-selected {
 	background:url('../images/checkmark.png') no-repeat center center;
-	z-index:9999;
 }
 

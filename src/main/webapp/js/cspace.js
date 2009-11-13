@@ -4,7 +4,7 @@ function ShowHide(toggleme) {
 	var src = ($(self).attr("src") === "../images/toggle-more.png") ? "../images/toggle-less.png" : "../images/toggle-more.png";
 	$(self).attr("src", src);
 }
-
+ 
 function getRadioValue() {
 	for (var i=0; i < document.selectprocedure.procedure.length; i++) {
 		if (document.selectprocedure.procedure[i].checked) {

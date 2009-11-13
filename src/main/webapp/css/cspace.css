@@ -112,6 +112,8 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .header-toggle-sub img {margin: 0 2px -2px 0;}
 .pivot-toggle img   {margin: 0 2px -2px -3px;}
 
+.z-fix {position:relative; z-index:10000;}
+
 .info-column 	 {width: 100%;}
 .info-column1 	 {width: 100%;}
 .info-column2	 {width: 49%;} 
@@ -164,10 +166,10 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .create-new .fl-container-left .button {margin-right: 7px; float:left;}
 
 .info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-termlist 
-{width:100%; float:left; position:relative; padding-bottom:10px; font-size:12px; line-height:12px;}
+{width:100%; float:left; position:relative; padding-bottom:10px; font-size:12px; line-height:12px; position:relative;}
 
 .info-label {width:100%; float:left; padding-top: 2px; padding-bottom:2px; font-weight:bold; color:# 0F75BC; font-size:11px; line-height:11px;}
-.info-value {width:100%; float:left; z-index:0;}
+.info-value {width:100%; float:left;}
 .info-value table {width:100%; border-spacing:0; background-color:#FFF; margin-top:1px; border:0; padding:0;}
 .info-value thead tr {}
 .info-value thead td {border:1px solid #BABABB; background-color:#F3F3F4; color:#3B3B3C; padding: 2px 0 2px 2px; font-size:11px; line-height: 11px;}
