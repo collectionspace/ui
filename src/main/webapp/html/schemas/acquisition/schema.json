@@ -2,6 +2,7 @@
 	"spec": {
 	    "acquReferenceNum": {
 	        "selector": ".csc-acquisition-numberPatternChooser-reference-number",
+	        "displayOnlySelectors": [".csc-titleBar-acquisition-reference-number"],
 	        "validators": [],
             "decorators": [{
 			    "type": "fluid",

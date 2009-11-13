@@ -1,7 +1,8 @@
 {
 	"spec": {
 	    "objectTitle": {
-	        "selector": ".csc-object-identification-object-title"
+	        "selector": ".csc-object-identification-object-title",
+	        "displayOnlySelectors": [".csc-titleBar-object-identification-object-title"]
 	    },
 	    "objectTitleLanguage": {
 	        "selector": ".csc-object-identification-object-title-language"
@@ -14,6 +15,7 @@
 	    },
 	    "accessionNumber": {
 	        "selector": ".csc-object-identification-object-number",
+	        "displayOnlySelectors": [".csc-titleBar-object-identification-object-number"],
             "decorators": [{
 			    "type": "fluid",
                 "func": "cspace.numberPatternChooser",

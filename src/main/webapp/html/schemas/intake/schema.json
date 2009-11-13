@@ -2,6 +2,7 @@
 	spec: {
 	    "entryNumber": {
 	        "selector": ".csc-intake-entry-number",
+	        "displayOnlySelectors": [".csc-titleBar-intake-entry-number"],
 	        "validators": [],
             "decorators": [{
 			    "type": "fluid",
