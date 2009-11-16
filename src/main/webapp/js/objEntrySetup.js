@@ -16,10 +16,7 @@ var demo = demo || {};
 
     demo.setup = function () {
         var csid = cspace.util.getUrlParameter("csid");
-        var oeOpts = {
-            autoGenNumField: "accessionNumber",
-            alternateFields: ["accessionNumber", "objectTitle"]
-        };
+        var oeOpts = {};
         if (csid) {
             oeOpts.csid = csid;
         }
