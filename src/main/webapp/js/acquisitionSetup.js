@@ -18,6 +18,7 @@ var demo = demo || {};
     demo.setup = function () {
         var csid = cspace.util.getUrlParameter("csid");
         var oiOpts = {
+            alternateFields: ["acquReferenceNum"],
             uiSpecUrl: "./schemas/acquisition/schema.json",
             templates: {
                 body: {

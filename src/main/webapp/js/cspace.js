@@ -1,8 +1,8 @@
 function ShowHide(toggleme) {
-	$(toggleme).toggle(); 
+	jQuery(toggleme).toggle(); 
 	var self = toggleme + "-img";
-	var src = ($(self).attr("src") === "../images/toggle-more.png") ? "../images/toggle-less.png" : "../images/toggle-more.png";
-	$(self).attr("src", src);
+	var src = (jQuery(self).attr("src") === "../images/toggle-more.png") ? "../images/toggle-less.png" : "../images/toggle-more.png";
+	jQuery(self).attr("src", src);
 }
  
 function getRadioValue() {
@@ -14,49 +14,45 @@ function getRadioValue() {
 	}
 }
 
-$(document).ready(function() {
+jQuery(document).ready(function() {
 	$currentFocus = null;
-	$(':input').focus( function() {
+	jQuery(':input').focus( function() {
 		$currentFocus = this;
 		
 	});
 
 
 	$switch = false;
-	$('#primary').val($switch);
+	jQuery('#primary').val($switch);
 	
-	//$('#primary').val($('#secondary').val());
+	jQuery('#primary').focus(function() {
 	
-	$('#primary').focus(function() {
-	
-		if ( $switch == false ) { //ok to change focus to secondary
-			$('#primary').removeClass('activate').addClass('deactivate');
-			$('#secondary').removeClass('hidden').addClass('show');
-			$('#secondary').focus();
+		if ( $switch === false ) { //ok to change focus to secondary
+			jQuery('#primary').removeClass('activate').addClass('deactivate');
+			jQuery('#secondary').removeClass('hidden').addClass('show');
+			jQuery('#secondary').focus();
 		}
 		
 		else {
-			//$('#secondary').removeClass('show').addClass('hidden');
-			$('#primary').removeClass('deactivate').addClass('activate');
+			jQuery('#primary').removeClass('deactivate').addClass('activate');
 		}
 		
 		$switch = false;
 			
-		//$('#primary').val($switch);
-		$('#primary').val($switch);
+		jQuery('#primary').val($switch);
     });
 	
-	$('#primary').blur(function() {
+	jQuery('#primary').blur(function() {
 		$switch = false;
 	});
 	
-    $('#secondary').blur(function() {
-			$('#secondary').removeClass('show').addClass('hidden');
+    jQuery('#secondary').blur(function() {
+			jQuery('#secondary').removeClass('show').addClass('hidden');
 			
-			$('#primary').removeClass('deactivate').addClass('activate');
+			jQuery('#primary').removeClass('deactivate').addClass('activate');
 			
 			$switch = true;
 
-			$('#primary').val($switch);
+			jQuery('#primary').val($switch);
     });
 });

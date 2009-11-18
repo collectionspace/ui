@@ -58,26 +58,19 @@ var cspace = cspace || {};
     cspace.util.newID = function (model, idField, alternateFields) {
         var id = model[idField];
         
-        if (!id || (id === "")) {
-            for (var i = 0; i < alternateFields.length; i++) {
-                if (model[alternateFields[i]]) {
-                    id = model[alternateFields[i]].split(" ")[0];
-                    break;
-                }
-            }
-            if (!id || (id === "")) {
+        if (!id) {
+			 if (alternateFields) {
+			     for (var i = 0; i < alternateFields.length; i++) {
+				     if (model[alternateFields[i]]) {
+					     id = model[alternateFields[i]].split(" ")[0];
+					     break;
+				     }
+			     }
+		     }
+            if (!id) {
                 id = new Date().getTime().toString();
             }
         }
-//        if ((!id || (id === "")) && model.accessionNumber) {
-//            id = model.accessionNumber.split(" ")[0];
-//        }
-//        if ((!id || (id === "")) && model.objectTitle) {
-//            id = model.objectTitle.split(" ")[0];
-//        }
-//        if (!id || (id === "")) {
-//            id = new Date().getTime().toString();
-//        }
         return id;
     };
     

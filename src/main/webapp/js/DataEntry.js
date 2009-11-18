@@ -235,6 +235,7 @@ var cspace = cspace || {};
         },
         csid: null,
         idField: "csid",
+        alternateFields: [],
         
         // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
         // load it manually via ajax
