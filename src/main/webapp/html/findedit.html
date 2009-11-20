@@ -131,7 +131,7 @@
 									</div> <!-- end outer info column -->
 								</div> <!-- end information group -->
 
-								<div class="fl-container-flex fl-fix information-group procedural-records-group">
+								<div class="fl-container-flex fl-fix information-group">
 									<!-- outer info column -->
 									<div class="info-column1">	
 										<!-- information block header -->
@@ -141,13 +141,16 @@
 										</div>
 										<!-- container content -->
 										<div class="fl-container-flex fl-fix content" id="toggle-procedural-records">
-                                            <div class="hidden csc-error-message cs-message">This is the error message</div>
 											<!-- inner info column -->
 											<div class="info-column1 fl-force-left">
 												
 												<div class="find-edit-object-records">
-												
-													<div class="info-pair-table">
+
+        <!-- This division of procedural records into types is temporary, until we work out how the records will be queried -->
+                                                    <!-- Intake procedural records -->
+													<div class="info-pair-table intake-records-group">
+                                                        <div>Intake Records</div>
+                                                        <div class="hidden csc-error-message cs-message">This is the error message</div>
 														<!--<div class="info-label">Date Earliest/Single</div>-->
 														<div class="info-value overflow-find-edit">
 															<table id="">
@@ -167,6 +170,44 @@
 																	
 																<tbody>
 																	<tr class="csc-procedural-record-list-row">
+																		<td><a class="csc-entry-number" href="intake.html">(retrieving record list...)</a></td>
+																		<td class="csc-type"></td>
+<!--
+ // CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
+ // an array of IDs. Until this is changed, reduce the markup to include only the one field
+																		<td class="csc-description">description</td>
+-->
+																		<td class="csc-last-edit"></td>
+																		<td>&nbsp;</td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+
+                                                    <!-- Acquisition procedural records -->
+													<div class="info-pair-table acquisition-records-group">
+                                                        <div>Acquisition Records</div>
+	                                                    <div class="hidden csc-error-message cs-message">This is the error message</div>
+    													<!--<div class="info-label">Date Earliest/Single</div>-->
+														<div class="info-value overflow-find-edit">
+															<table id="">
+																<thead>
+																	<tr>
+																		<td width=22%>Entry Number</td>
+																		<td width=10%>Type</td>
+<!--
+ // CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
+ // an array of IDs. Until this is changed, reduce the markup to include only the one field
+																		<td width=45%>Brief Description</td>
+-->
+																		<td width=15%>Last Edit</td>
+																		<td width=3% >&nbsp;</td>
+																	</tr>
+																</thead>
+																	
+																<tbody>
+																	<tr class="csc-acquisition-record-list-row">
 																		<td><a class="csc-entry-number" href="intake.html">(retrieving record list...)</a></td>
 																		<td class="csc-type"></td>
 <!--

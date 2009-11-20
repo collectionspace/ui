@@ -42,11 +42,17 @@ var cspace = cspace || {};
         }
         var objRecordList = cspace.recordList(".object-records-group", orOpts);
 
-        var prOpts = {uiSpecUrl: "./find-edit/spec/spec-procedures.json"};
+        var prInOpts = {uiSpecUrl: "./find-edit/spec/spec-intakes.json"};
         if (document.location.protocol === "file:") {
-            prOpts.dataContext = setupTestDataContext("procedure");
+            prInOpts.dataContext = setupTestDataContext("intake");
         }
-        var procRecordList = cspace.recordList(".procedural-records-group", prOpts);
+        var procIntakeRecordList = cspace.recordList(".intake-records-group", prInOpts);
+
+        var prAcqOpts = {uiSpecUrl: "./find-edit/spec/spec-acquisitions.json"};
+        if (document.location.protocol === "file:") {
+            prAcqOpts.dataContext = setupTestDataContext("acquisition");
+        }
+        var procAcquisitionRecordList = cspace.recordList(".acquisition-records-group", prAcqOpts);
     };
 
 }) (jQuery);

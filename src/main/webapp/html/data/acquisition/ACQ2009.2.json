@@ -1,5 +1,5 @@
 {
-    "acquReferenceNum": "1234",
+    "acquReferenceNum": "ACQ2009.2",
 	"acquDate": "",
 	"acquAccessionDate": "",
 	"acquPriceDesc": "",
@@ -9,7 +9,7 @@
 	"acquFundingValue": "10000",
 	"acquFundingSource": "Some nice person",
 	"acquFundingProviso": "The museum displays it",
-	"acquMethod": "Gentle persuasion",
+	"acquMethod": "Treasure",
 	"acquSource": "Another nice person",
 	"acquTitleNum": "1-2-3-4",
 	"acquReason": "The museum likes it",
