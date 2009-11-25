@@ -88,6 +88,9 @@ var cspace = cspace || {};
     };
 
     var bindEvents = function (that) {
+        var list = that.locate("list");
+        var rows = that.locate("row");
+        
         that.locate("button").click(function () {
             var list = that.locate("list");
             list.toggle();
@@ -95,9 +98,22 @@ var cspace = cspace || {};
                 list.focus();
             }
         });
+        
+        fluid.deadMansBlur(rows, rows, function (eventObject) {
+             list.hide();
+        });
 
-        that.locate("list").fluid("selectable", {
-            selectableElements: that.locate("row"),
+        var keyCode = function (evt) {
+            return evt.keyCode ? evt.keyCode : (evt.which ? evt.which : 0);          
+        };
+        list.keypress(function (eventObject) {
+	         if (keyCode(eventObject) === $.ui.keyCode.ESCAPE) {
+                list.hide();
+            }
+        });
+
+        list.fluid("selectable", {
+            selectableElements: rows,
             onSelect: function (row) {
                 if (row) {
                     $(row).addClass(that.options.styles.selecting);
@@ -110,11 +126,11 @@ var cspace = cspace || {};
             }
         });
 
-        that.locate("row").click(function (event) {
+        rows.click(function (event) {
             selectNumberPattern (that, event.currentTarget);
         });
 
-        that.locate("row").fluid("activatable", function (event) {
+        rows.fluid("activatable", function (event) {
             selectNumberPattern (that, event.currentTarget);
         });
     };
