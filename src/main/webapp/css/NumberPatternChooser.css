@@ -47,6 +47,9 @@ tr.csc-numberPatternChooser-patternRow {
 tr.csc-numberPatternChooser-patternRow:hover {
 	background-color:#CDE9EF;
 }
+tr.csc-numberPatternChooser-patternRow.cs-numberPatternChooser-selecting {
+	background-color:#CDE9EF;
+}
 tr.csc-numberPatternChooser-name {
 	color:#606060;
 }

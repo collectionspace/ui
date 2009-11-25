@@ -75,23 +75,47 @@ var cspace = cspace || {};
             }
             numField.val(value);
             numField.change();
+            numField.focus();
         };
     };
 
-    var bindEvents = function (that) {
-        var list = that.locate("list");
-        that.locate("button").click(function () {
-            list.toggle();
-        });
-        that.locate("row").click(function (eventObject) {
-            that.locate("checkmark").removeClass(that.options.styles.selected);
-            
-            var target = eventObject.currentTarget;
-            that.options.selected = that.model.list[target.rowIndex-1];
-            that.locate("checkmark", target).addClass(that.options.styles.selected);
+    var selectNumberPattern = function (that, patternRow) {
+        that.locate("checkmark").removeClass(that.options.styles.selected);
+        that.options.selected = that.model.list[patternRow.rowIndex - 1];
+        that.locate("checkmark", patternRow).addClass(that.options.styles.selected);
+        that.locate("list").hide();
+        fetchNextNumberInSequence(that, that.options.selected, populateInputField(that));
+    };
 
-            list.hide();
-	        fetchNextNumberInSequence(that, that.options.selected, populateInputField(that));
+    var bindEvents = function (that) {
+        that.locate("button").click(function () {
+            var list = that.locate("list");
+            list.toggle();
+            if (list.is(':visible') ) {
+                list.focus();
+            }
+        });
+
+        that.locate("list").fluid("selectable", {
+            selectableElements: that.locate("row"),
+            onSelect: function (row) {
+                if (row) {
+                    $(row).addClass(that.options.styles.selecting);
+                }
+            },
+            onUnselect: function (row) {
+                if (row) {
+                    $(row).removeClass(that.options.styles.selecting);
+                }
+            }
+        });
+
+        that.locate("row").click(function (event) {
+            selectNumberPattern (that, event.currentTarget);
+        });
+
+        that.locate("row").fluid("activatable", function (event) {
+            selectNumberPattern (that, event.currentTarget);
         });
     };
 
@@ -146,7 +170,8 @@ var cspace = cspace || {};
 	        checkmark: ".csc-numberPatternChooser-checkmark"
         },
 		styles: {
-		 	selected: "cs-numberPatternChooser-selected"
+		 	selected: "cs-numberPatternChooser-selected",
+            selecting: "cs-numberPatternChooser-selecting"
 		 },
         model: null,
         selected: null,
