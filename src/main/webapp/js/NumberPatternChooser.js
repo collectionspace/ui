@@ -94,20 +94,20 @@ var cspace = cspace || {};
         that.locate("button").click(function () {
             var list = that.locate("list");
             list.toggle();
-            if (list.is(':visible') ) {
+            if (list.is(":visible") ) {
                 list.focus();
             }
         });
         
-        fluid.deadMansBlur(rows, rows, function (eventObject) {
+        fluid.deadMansBlur(rows, rows, function (event) {
              list.hide();
         });
 
         var keyCode = function (evt) {
             return evt.keyCode ? evt.keyCode : (evt.which ? evt.which : 0);          
         };
-        list.keypress(function (eventObject) {
-	         if (keyCode(eventObject) === $.ui.keyCode.ESCAPE) {
+        list.keypress(function (event) {
+	         if (keyCode(event) === $.ui.keyCode.ESCAPE) {
                 list.hide();
             }
         });
@@ -116,6 +116,7 @@ var cspace = cspace || {};
             selectableElements: rows,
             onSelect: function (row) {
                 if (row) {
+                    rows.removeClass(that.options.styles.selecting);
                     $(row).addClass(that.options.styles.selecting);
                 }
             },
@@ -124,6 +125,11 @@ var cspace = cspace || {};
                     $(row).removeClass(that.options.styles.selecting);
                 }
             }
+        });
+
+        rows.mouseover(function (event) {
+            rows.removeClass(that.options.styles.selecting);
+            $(event.currentTarget).addClass(that.options.styles.selecting);
         });
 
         rows.click(function (event) {
