@@ -14,7 +14,7 @@
                     },
                     "validators": [],
                     "decorators": []
-                },
+                }
 //                "type": {
 //                    "selector": ".csc-type",
 //                    "validators": [],
