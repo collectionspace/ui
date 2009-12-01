@@ -55,8 +55,7 @@ var cspace = cspace || {};
         // TODO: This should probably accept the modelPath as well, and only update that part of the tree
         that.updateModel = function (newModel, source) {
             var oldModel;
-            fluid.clear(that.model);
-            fluid.model.copyModel(that.model, newModel);
+			 $.extend(true, that.model, newModel);
             that.events.modelChanged.fire(that.model, oldModel, source);
         };
         
