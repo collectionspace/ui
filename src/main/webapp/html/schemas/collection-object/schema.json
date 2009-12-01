@@ -146,7 +146,9 @@
 	    	"selector": ".csc-object-description-dimension-part"
 	    },
 	    "descDimensionUnit": {
-	    	"selector": ".csc-object-description-dimension-unit"
+	    	"selector": ".csc-object-description-dimension-unit",
+	    	"options": ["centimeters", "millimeters", "meters", "liters", "kilograms", "cubic-centimeters", "minutes", "carats", "pixels", "count", "stories", "inches", "square-feet", "feet"],
+	        "options-text": ["centimeters", "millimeters", "meters", "liters", "kilograms", "cubic centimeters", "minutes", "carats", "pixels", "count", "stories", "inches", "square feet", "feet"]
 	    },
 	    "descDimensionValue": {
 	    	"selector": ".csc-object-description-dimension-value"
