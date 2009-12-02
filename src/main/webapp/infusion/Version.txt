@@ -1,1 +1,1 @@
-This is a custom build of Fluid Infusion 1.1 including: json, fss, framework, renderer, inlineEdit and jQueryUIWidgets.
+This is a custom build of Fluid Infusion 1.1.2 including: json, fss, framework, renderer, inlineEdit, pager and jQueryUIWidgets.

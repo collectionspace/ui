@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <title>Search</title>
+        <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-reset.css" />
+        <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-layout.css" />
+        <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
+        <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
+        <link rel="stylesheet" type="text/css" href="../css/Pager.css" />
+        <!--
+        <script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
+        -->
+        <script type="text/javascript" src="../infusion/1.1/lib/jquery/core/js/jquery.js"></script>
+        <script type="text/javascript" src="../infusion/1.1/lib/jquery/ui/js/ui.core.js"></script>
+        <script type="text/javascript" src="../infusion/1.1/lib/jquery/ui/js/ui.dialog.js"></script>
+        <script type="text/javascript" src="../infusion/1.1/lib/json/js/json2.js"></script>
+        <script type="text/javascript" src="../infusion/1.1/framework/core/js/Fluid.js"></script>
+        <script type="text/javascript" src="../infusion/1.1/framework/core/js/FluidDOMUtilities.js"></script>
+        <script type="text/javascript" src="../infusion/1.1/framework/core/js/DataBinding.js"></script>
+        <script type="text/javascript" src="../infusion/1.1/lib/fastXmlPull/js/fastXmlPull.js"></script>
+        <script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidParser.js"></script>
+        <script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidRenderer.js"></script>
+        <script type="text/javascript" src="../infusion/1.1/components/pager/js/Pager.js"></script>
+
+        <script type="text/javascript" src="../js/cspace.js"></script>
+        <script type="text/javascript" src="../js/Utilities.js"></script>
+        <script type="text/javascript" src="../js/Renderer.js"></script>
+        <script type="text/javascript" src="../js/DataContext.js"></script>
+        <script type="text/javascript" src="../js/Search.js"></script>
+    </head>
+    <body>
+        <div class="main-search-page">
+
+            <!-- search form -->
+            <form>
+                <input name="keyword" type="text" class="csc-search-keywords"/>
+                <select name="recordtype" class="csc-search-record-type">
+                    <option value="object">Object</option>
+                    <option value="intake">Intake</option>
+                    <option value="acquisition">Acquisition</option>
+                </select>
+                <a href="#" class="csc-search-submit">Search</a>
+            </form>
+            <!-- end search form -->
+            
+            <!-- search results -->
+            <div class="csc-search-results fl-pager">
+                <ul id="pager-top" class="fl-pager-ui flc-pager-top">
+                    <li>
+                        <ul class="pager-links fl-pager-links flc-pager-links">
+                            <li class="flc-pager-pageLink"><a href="#">1</a></li>
+                            <li class="flc-pager-pageLink-disabled">2</li>
+                            <li class="flc-pager-pageLink"><a href="#">3</a></li>
+                        </ul>
+                    </li>
+                    <li class="flc-pager-previous">
+                        <a href="#">&lt; previous</a>
+                    </li>
+                    <li class="flc-pager-next">
+                        <a href="#">next &gt;</a>
+                    </li>
+                    <li>
+                        Show <span>
+                            <select class="flc-pager-page-size">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                            </select>
+                        </span>
+                        per page
+                    </li>
+                </ul>
+                <table summary="search results" id="search-results" class="fl-pager-data">
+                    <thead>
+                        <tr>
+                            <th>ID Number</th>
+                            <th>Detail</th>
+                            <th>Record type</th>
+                            <th>Last edited</th>
+                        </tr>
+                    </thead>
+                    <tbody id="body-template">
+                        <tr rsf:id="row:">
+                            <td rsf:id="number">ACC2009.1</td>
+                            <td rsf:id="detail">Girl in a box, Cezanne Paul</td>
+                            <td rsf:id="recordtype">Object</td>
+                            <td rsf:id="edited">Today</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul id="pager-bottom" class="fl-pager-ui flc-pager-bottom">
+                    <li>
+                        <ul class="pager-links fl-pager-links flc-pager-links">
+                            <li value="1" class= flc-pager-pageLink"><a href="#">1</a></li>
+                            <li class="flc-pager-pageLink-disabled">2</li>
+                            <li value="2" class="flc-pager-pageLink"><a href="#">3</a></li>
+                        </ul>
+                    </li>
+                    <li class="flc-pager-previous">
+                        <a href="#">&lt; previous</a>
+                    </li>
+                    <li class="flc-pager-next">
+                        <a href="#">next &gt;</a>
+                    </li>
+                    <span class="flc-pager-summary">1-10 of 500 items</span>
+                </ul>
+            </div>
+            <!-- end search results -->
+
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                cspace.search(".main-search-page");
+            });
+        </script>
+    </body>
+</html>
