@@ -82,7 +82,18 @@ var cspace = cspace || {};
                 dataModel: that.model,
                 columnDefs: colDefs,
                 bodyRenderer: {
-                    type: "fluid.pager.selfRender"
+                    type: "fluid.pager.selfRender",
+                    options: {
+                        renderOptions: {
+                            cutpoints: [
+                                {id: "row:", selector: ".csc-row"},
+                                {id: "number", selector: ".csc-number"},
+                                {id: "detail", selector: ".csc-detail"},
+                                {id: "recordtype", selector: ".csc-recordtype"},
+                                {id: "edited", selector: ".csc-edited"}
+                            ]
+                        }
+                    }
                 },
                 pagerBar: {
                     type: "fluid.pager.pagerBar",
