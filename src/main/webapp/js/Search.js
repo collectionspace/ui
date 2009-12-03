@@ -16,34 +16,32 @@ var cspace = cspace || {};
 
     var colDefs = [
         {key: "number", valuebinding: "*.number", components: {
-            target: "#",
+            target: "${*.recordtype}.html?csid=${*.number}",
             linktext: fluid.VALUE
         }, sortable: false},
         {key: "detail", valuebinding: "*.detail", components: {
-            value: fluid.VALUE
+            value: "${*.detail}"
         }, sortable: false},
         {key: "recordtype", valuebinding: "*.recordtype", components: {
-            value: fluid.VALUE
+            value: "${*.recordtype}"
         }, sortable: false},
         {key: "edited", valuebinding: "*.edited", components: {
-            value: fluid.VALUE
+            value: "${*.edited}"
         }, sortable: false}
     ];
 
     var temporaryTestData = {
         searchResults: [
-            {number:"ACC1", detail: "Foo", recordtype: "Object", edited: "today"},
-            {number:"IN2", detail: "Bar", recordtype: "Intake", edited: "yesterday"},
-            {number:"ACQ3", detail: "Bat", recordtype: "Acquisition", edited: "Tuesday"},
-            {number:"LI4", detail: "Blah", recordtype: "Loan in", edited: "Monday"},
-            {number:"ACC1.a", detail: "Foo", recordtype: "Object", edited: "today"},
-            {number:"IN2.b", detail: "Bar", recordtype: "Intake", edited: "yesterday"},
-            {number:"ACQ3.c", detail: "Bat", recordtype: "Acquisition", edited: "Tuesday"},
-            {number:"LI4.d", detail: "Blah", recordtype: "Loan in", edited: "Monday"},
-            {number:"ACC1.1", detail: "Foo", recordtype: "Object", edited: "today"},
-            {number:"IN2.2", detail: "Bar", recordtype: "Intake", edited: "yesterday"},
-            {number:"ACQ3.3", detail: "Bat", recordtype: "Acquisition", edited: "Tuesday"},
-            {number:"LI4.4", detail: "Blah", recordtype: "Loan in", edited: "Monday"},
+            {csid: "1984.068.0335b", number:"1984.068.0335b", detail: "Catalogs. Wyanoak Publishing Company.", recordtype: "objectentry", edited: "today"},
+            {csid: "1984.068.0338", number:"1984.068.0338", detail: "Stamp albums. Famous stars series stamp album.", recordtype: "objectentry", edited: "yesterday"},
+            {csid: "2005.018.1383", number:"2005.018.1383", detail: "Souvenir books. Molly O' Play Book.", recordtype: "objectentry", edited: "Tuesday"},
+            {csid: "2007.4-a", number:"2007.4-a", detail: "", recordtype: "intake", edited: "today"},
+            {csid: "IN2004.002", number:"IN2004.002", detail: "", recordtype: "intake", edited: "yesterday"},
+            {csid: "IN2009.001", number:"IN2009.001", detail: "", recordtype: "intake", edited: "Tuesday"},
+            {csid: "IN2009.002", number:"IN2009.002", detail: "", recordtype: "intake", edited: "today"},
+            {csid: "IN2009.003", number:"IN2009.003", detail: "", recordtype: "intake", edited: "yesterday"},
+            {csid: "ACQ2009.2", number:"ACQ2009.2", detail: "", recordtype: "acquisition", edited: "Tuesday"},
+            {csid: "ACQ2009.002.001", number:"ACQ2009.002.001", detail: "", recordtype: "acquisition", edited: "Tuesday"}
         ]
     };
 
