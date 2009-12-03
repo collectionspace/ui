@@ -22,7 +22,7 @@ var cspace = cspace || {};
         {key: "detail", valuebinding: "*.detail", components: {
             value: fluid.VALUE
         }, sortable: false},
-        {key: "type", valuebinding: "*.type", components: {
+        {key: "recordtype", valuebinding: "*.recordtype", components: {
             value: fluid.VALUE
         }, sortable: false},
         {key: "edited", valuebinding: "*.edited", components: {
@@ -32,10 +32,18 @@ var cspace = cspace || {};
 
     var temporaryTestData = {
         searchResults: [
-            {number:"ACC1", detail: "Foo", type: "Object", edited: "today"},
-            {number:"IN2", detail: "Bar", type: "Intake", edited: "yesterday"},
-            {number:"ACQ3", detail: "Bat", type: "Acquisition", edited: "Tuesday"},
-            {number:"LI4", detail: "Blah", type: "Loan in", edited: "Monday"}
+            {number:"ACC1", detail: "Foo", recordtype: "Object", edited: "today"},
+            {number:"IN2", detail: "Bar", recordtype: "Intake", edited: "yesterday"},
+            {number:"ACQ3", detail: "Bat", recordtype: "Acquisition", edited: "Tuesday"},
+            {number:"LI4", detail: "Blah", recordtype: "Loan in", edited: "Monday"},
+            {number:"ACC1.a", detail: "Foo", recordtype: "Object", edited: "today"},
+            {number:"IN2.b", detail: "Bar", recordtype: "Intake", edited: "yesterday"},
+            {number:"ACQ3.c", detail: "Bat", recordtype: "Acquisition", edited: "Tuesday"},
+            {number:"LI4.d", detail: "Blah", recordtype: "Loan in", edited: "Monday"},
+            {number:"ACC1.1", detail: "Foo", recordtype: "Object", edited: "today"},
+            {number:"IN2.2", detail: "Bar", recordtype: "Intake", edited: "yesterday"},
+            {number:"ACQ3.3", detail: "Bat", recordtype: "Acquisition", edited: "Tuesday"},
+            {number:"LI4.4", detail: "Blah", recordtype: "Loan in", edited: "Monday"},
         ]
     };
 
@@ -65,9 +73,10 @@ var cspace = cspace || {};
 
     cspace.search = function (container, options) {
         var that = fluid.initView("cspace.search", container, options);
-        that.model = {
-            searchResults: []
-        };
+//        that.model = {
+//            searchResults: []
+//        };
+        that.model = temporaryTestData.searchResults;
         
         var pagerArguments = [
             that.options.selectors.resultsContainer,
@@ -75,28 +84,18 @@ var cspace = cspace || {};
                 dataModel: that.model,
                 columnDefs: colDefs,
                 bodyRenderer: {
-                    type: "fluid.pager.selfRender",
-                    options: {
-                        selectors: {
-                            root: "#body-template"
-                        },
-                        row: "row:"
-                    }
+                    type: "fluid.pager.selfRender"
                 },
                 pagerBar: {
                     type: "fluid.pager.pagerBar",
                     options: {
                         pageList: {
-                            type: "fluid.pager.renderedPageList",
-                            options: { 
-                                linkBody: "a"
-                            }
-                        }
+                            type: "fluid.pager.renderedPageList",                        }
                     }
                 }
             }
         ];
-//        var resultsPager = fluid.initSubcomponent(that, "resultsPager", pagerArguments);
+        var resultsPager = fluid.initSubcomponent(that, "resultsPager", pagerArguments);
         bindEventHandlers(that);
         
 //        var keywords = cspace.util.getUrlParameter("keyword");
