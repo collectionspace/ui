@@ -90,6 +90,7 @@ var cspace = cspace || {};
     var bindEventHandlers = function (that) {
 
         that.dataContext.events.afterCreate.addListener(function (modelPath, data) {
+            that.applier.requestChange(that.options.idField, data.csid);
             that.events.afterCreateObjectDataSuccess.fire(data, that.options.strings.createSuccessfulMessage);
 	        displayTimestampedMessage(that, that.options.strings.createSuccessfulMessage, Date());
             that.options.csid = data.csid;
