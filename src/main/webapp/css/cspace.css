@@ -4,7 +4,8 @@ body {font-size:13px; line-height:13px; padding: 2px 0;}
 
 table tr, table tr td, table tr th  {border:0; padding:0; margin:0; text-align:left; font-weight:normal;}
 
-p, fieldset, table, pre {margin-bottom:0em;}
+fieldset, table, pre {margin-bottom:0em;}
+p {margin-bottom:1em;}
 
 input,textarea {font-family:inherit; font-size:12px; font-weight:inherit; line-height:15px; padding:0; margin:0; *margin-bottom:0px; 
 border:1px solid #BABABB; overflow:visible;}
