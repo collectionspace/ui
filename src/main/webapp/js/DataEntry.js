@@ -171,7 +171,7 @@ var cspace = cspace || {};
             if (that.options.csid) {
                 that.dataContext.update("*");
             } else {
-                that.applier.requestChange(that.options.idField, cspace.util.newID(that.model, that.options.idField, that.options.alternateFields));
+                that.applier.requestChange(that.options.idField, "");
                 that.dataContext.create("*");
             }
             return false;

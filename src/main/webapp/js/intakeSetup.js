@@ -16,9 +16,10 @@ var demo = demo || {};
 
     demo.setup = function () {
         var csid = cspace.util.getUrlParameter("csid");
+		var isLocal = cspace.util.isLocal();
         var oiOpts = {
             alternateFields: ["entryNumber"],
-            uiSpecUrl: "./schemas/intake/schema.json",
+            uiSpecUrl: isLocal ? "./schemas/intake/schema.json" : "../../chain/intake/schema",
             templates: {
                 body: {
                     url: "../html/IntakeTemplate.html",
@@ -29,7 +30,7 @@ var demo = demo || {};
         if (csid) {
             oiOpts.csid = csid;
         }
-        if (document.location.protocol === "file:") {
+        if (isLocal) {
             oiOpts.dataContext = cspace.util.setupTestDataContext("intake");
         }
         var intake = cspace.dataEntry(".csc-object-intake-container", oiOpts);

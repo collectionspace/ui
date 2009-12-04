@@ -16,13 +16,15 @@ var demo = demo || {};
 
     demo.setup = function () {
         var csid = cspace.util.getUrlParameter("csid");
+		var isLocal = cspace.util.isLocal();
         var oeOpts = {
-            alternateFields: ["accessionNumber", "objectTitle"]
+            alternateFields: ["accessionNumber", "objectTitle"],
+			uiSpecUrl: isLocal ? "./schemas/collection-object/schema.json" : "../../chain/objects/schema",
         };
         if (csid) {
             oeOpts.csid = csid;
         }
-        if (document.location.protocol === "file:") {
+        if (isLocal) {
             oeOpts.dataContext = cspace.util.setupTestDataContext("collection-object");
         }
         var objEntry = cspace.dataEntry(".csc-object-entry-container", oeOpts);

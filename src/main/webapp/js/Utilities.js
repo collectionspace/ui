@@ -73,5 +73,9 @@ var cspace = cspace || {};
         }
         return id;
     };
+	
+	cspace.util.isLocal = function () {
+		return document.location.protocol === "file:";
+	};
     
 })(jQuery, fluid_1_1);
