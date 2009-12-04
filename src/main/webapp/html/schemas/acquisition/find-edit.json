@@ -3,11 +3,11 @@
         "items": {
             "selector": ".csc-acquisition-record-list-row",
             "repeated": {
-                "entryNum": {
+                "acquReferenceNum": {
                     "selector": ".csc-entry-number",
                     "type": "link",
 					"href": "acquisition.html?csid=%csid",
-                    "linktext": "%acquReferenceNum"
+                    "linktext": "%acquReferenceNum",
                     "replacements": {
                         "csid": "csid",
                         "acquReferenceNum": "acquReferenceNum"
@@ -15,21 +15,6 @@
                     "validators": [],
                     "decorators": []
                 }
-//                "type": {
-//                    "selector": ".csc-type",
-//                    "validators": [],
-//                    "decorators": []
-//                },
-//                "description": {
-//                    "selector": ".csc-description",
-//                    "validators": [],
-//                    "decorators": []
-//                },
-//                "lastEdit": {
-//                    "selector": ".csc-last-edit",
-//                    "validators": [],
-//                    "decorators": []
-//                }
             }
         }
     },
