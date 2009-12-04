@@ -84,10 +84,7 @@ var cspace = cspace || {};
             var reps = [];
             for (var prop in spec.replacements) {
                 if (spec.replacements.hasOwnProperty(prop)) {
- // CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
- // an array of IDs. Until this is changed, process the data assuming it is an array of IDs
-//                    reps[prop] = fluid.model.getBeanValue(modelPart[i], spec.replacements[prop]);
-                    reps[prop] = modelPart[i];
+                    reps[prop] = fluid.model.getBeanValue(modelPart[i], spec.replacements[prop]);
                 }
             }
             targetString = fluid.stringTemplate(spec.href, reps);
@@ -95,10 +92,7 @@ var cspace = cspace || {};
         return {
             ID: key,
             target: targetString,
- // CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
- // an array of IDs. Until this is changed, process the data assuming it is an array of IDs
-//          linktext: modelPart[i][key]
-          linktext: modelPart[i]
+            linktext: modelPart[i][key]
         };
     };
 

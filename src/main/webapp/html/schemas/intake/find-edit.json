@@ -1,16 +1,16 @@
 {
     "spec": {
         "items": {
-            "selector": ".csc-acquisition-record-list-row",
+            "selector": ".csc-procedural-record-list-row",
             "repeated": {
-                "acquReferenceNum": {
+                "entryNum": {
                     "selector": ".csc-entry-number",
                     "type": "link",
-					"href": "acquisition.html?csid=%csid",
-                    "linktext": "%acquReferenceNum",
+					"href": "intake.html?csid=%csid",
+                    "linktext": "%entryNumber",
                     "replacements": {
                         "csid": "csid",
-                        "acquReferenceNum": "acquReferenceNum"
+                        "entryNumber": "entryNumber"
                     },
                     "validators": [],
                     "decorators": []
@@ -34,6 +34,6 @@
         }
     },
     "modelToResourceMap": {
-        "*": "/acquisition/"
+        "*": "/intake/"
     }
 }

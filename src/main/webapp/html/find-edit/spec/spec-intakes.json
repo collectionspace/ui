@@ -1,16 +1,16 @@
- // CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
- // an array of IDs. Until this is changed, reduce the UISpec to include only the one field
 {
     "spec": {
         "items": {
             "selector": ".csc-procedural-record-list-row",
             "repeated": {
-                "entryNum": {
+                "entryNumber": {
                     "selector": ".csc-entry-number",
                     "type": "link",
 					"href": "intake.html?csid=%csid",
+                    "linktext": "%entryNumber",
                     "replacements": {
-                        "csid": "csid"
+                        "csid": "csid",
+                        "entryNumber": "entryNumber"
                     },
                     "validators": [],
                     "decorators": []

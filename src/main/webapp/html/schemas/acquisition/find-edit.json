@@ -3,11 +3,11 @@
         "items": {
             "selector": ".csc-acquisition-record-list-row",
             "repeated": {
-                "acquReferenceNum": {
+                "entryNum": {
                     "selector": ".csc-entry-number",
                     "type": "link",
 					"href": "acquisition.html?csid=%csid",
-                    "linktext": "%acquReferenceNum",
+                    "linktext": "%acquReferenceNum"
                     "replacements": {
                         "csid": "csid",
                         "acquReferenceNum": "acquReferenceNum"
