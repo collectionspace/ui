@@ -19,7 +19,7 @@ var demo = demo || {};
 		var isLocal = cspace.util.isLocal();
         var oeOpts = {
             alternateFields: ["accessionNumber", "objectTitle"],
-			uiSpecUrl: isLocal ? "./schemas/collection-object/schema.json" : "../../chain/objects/schema",
+			uiSpecUrl: isLocal ? "./schemas/collection-object/schema.json" : "../../chain/objects/schema"
         };
         if (csid) {
             oeOpts.csid = csid;
