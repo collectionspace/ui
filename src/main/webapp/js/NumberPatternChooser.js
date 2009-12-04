@@ -54,13 +54,13 @@ var cspace = cspace || {};
 
     var fetchNextNumberInSequence = function (that, sequenceName, callback) {
         jQuery.ajax({
-            url: that.options.baseUrl + sequenceName + "/__auto",
+            url: that.options.baseUrl + "id/"+ sequenceName,
             type: "GET",
             dataType: "json",
             success: callback,
             error: function (xhr, textStatus, errorThrown) {
                 // TODO: implement proper error handling
-                callback({error: "Not supported yet"}, "error");
+                callback({next: "Not supported yet"}, "error");
            }
         });
 
@@ -69,11 +69,7 @@ var cspace = cspace || {};
     var populateInputField = function(that){
         return function(data, status){
             var numField = that.locate("numberField", that.container);
-            var value;
-            for (key in data) {
-                value = data[key];
-            }
-            numField.val(value);
+            numField.val(data.next);
             numField.change();
             numField.focus();
         };
