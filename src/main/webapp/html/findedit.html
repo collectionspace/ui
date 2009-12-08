@@ -23,8 +23,9 @@
 		<script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidParser.js"></script>
 		<script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidRenderer.js"></script>
 -->
-
+        
 		<script type="text/javascript" src="../js/cspace.js"></script>
+		<script type="text/javascript" src="../js/Utilities.js"></script>
 		<script type="text/javascript" src="../js/Renderer.js"></script>
 		<script type="text/javascript" src="../js/DataContext.js"></script>
 		<script type="text/javascript" src="../js/RecordList.js"></script>
@@ -98,8 +99,8 @@
  // an array of IDs. Until this is changed, reduce the markup to include only the one field
 																		<td width=55%>Title</td>
 -->
-																		<td width=22%>Number</td>
-																		<td width=15%>Last Edit</td>
+																		<td width=50%>Accession Number</td>
+																		<td width=47%>Last Edit</td>
 																		<td width=3% >&nbsp;</td>
 																	</tr>
 																</thead>
@@ -156,14 +157,14 @@
 															<table id="">
 																<thead>
 																	<tr>
-																		<td width=22%>Entry Number</td>
-																		<td width=10%>Type</td>
+																		<td width=50%>Entry Number</td>
+																		<!--<td width=10%>Type</td> -->
 <!--
  // CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
  // an array of IDs. Until this is changed, reduce the markup to include only the one field
 																		<td width=45%>Brief Description</td>
 -->
-																		<td width=15%>Last Edit</td>
+																		<td width=47%>Last Edit</td>
 																		<td width=3% >&nbsp;</td>
 																	</tr>
 																</thead>
@@ -194,14 +195,14 @@
 															<table id="">
 																<thead>
 																	<tr>
-																		<td width=22%>Entry Number</td>
-																		<td width=10%>Type</td>
+																		<td width=50%>Entry Number</td>
+																		<!--<td width=10%>Type</td>-->
 <!--
  // CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
  // an array of IDs. Until this is changed, reduce the markup to include only the one field
 																		<td width=45%>Brief Description</td>
 -->
-																		<td width=15%>Last Edit</td>
+																		<td width=47%>Last Edit</td>
 																		<td width=3% >&nbsp;</td>
 																	</tr>
 																</thead>
@@ -254,18 +255,14 @@
 															<table id="">
 																<thead>
 																	<tr class="disabled">
-																		<td width=22%>Name</td>
-																		<td width=10%>Type</td>
-																		<td width=45%>Brief Description</td>
-																		<td width=15%>Last Edit</td>
+																		<td width=50%>Number</td>
+																		<td width=47%>Last Edit</td>
 																		<td width=3% >&nbsp;</td>
 																	</tr>
 																</thead>
 																	
 																<tbody class="disabled">
 																	<tr>
-																		<td>&nbsp;</td>
-																		<td>&nbsp;</td>
 																		<td>&nbsp;</td>
 																		<td>&nbsp;</td>
 																		<td>&nbsp;</td>
@@ -289,19 +286,7 @@
 							</div> <!-- end information group -->
 								
 						</div> <!-- end create-new -->
-
-					    <div class="fl-container-content fl-force-left fl-container-right">
-					        <form action="search.html">
-                                <input name="keyword" type="text" />
-                                <select name="recordtype">
-                                    <option value="object">Object</option>
-                                    <option value="intake">Intake</option>
-                                    <option value="acquisition">Acquisition</option>
-                                </select>
-                                <input type="submit" value="Search" />
-                            </form>                            
-					    </div>
-                    </div> <!-- end left side container -->
+					</div> <!-- end left side container -->
 						
 					<div class="clear"></div>
 						
@@ -311,7 +296,7 @@
 
 			<!-- footer block -->
 			<div id="footer">
-				<div class="footer-text">&copy; 2009 CollectionSpace &nbsp;&ndash;&nbsp; CollectionSpace <a href="http://wiki.collectionspace.org/display/collectionspace/Project+Roadmap+-+Incremental+Releases#ProjectRoadmap-IncrementalReleases-CollectionSpaceRelease0.2%3AHelloMars">Release 0.2</a> &nbsp;&ndash;&nbsp; <a href="http://www.collectionspace.org">About CollectionSpace</a> &nbsp;&ndash;&nbsp; <a href="http://wiki.collectionspace.org/display/collectionspace/Release+0.1+Feedback">Leave Feedback</a></div>
+				<div class="footer-text">&copy; 2009 CollectionSpace &nbsp;&ndash;&nbsp; CollectionSpace <a href="http://www.collectionspace.org/current_release">Release 0.3</a> &nbsp;&ndash;&nbsp; <a href="http://www.collectionspace.org">About CollectionSpace</a> &nbsp;&ndash;&nbsp; <a href="http://wiki.collectionspace.org/display/collectionspace/Release+0.3+Feedback">Leave Feedback</a></div>
 			</div> <!-- END footer block -->
 		</div>
 

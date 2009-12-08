@@ -13,9 +13,9 @@
 					    "numberField": ".csc-acquisition-numberPatternChooser-reference-number"
 					},
 				    "model": {
-					    "list": ["objects", "archives", "library", "intake", "acquisition"],
-						"samples": ["2009.1", "AR2009.42", "LIB2009.1", "IN2009.3", "ACQ2009.5"],
-						"names": ["Accession", "Archives", "Library", "Intake", "Acquisition"]
+					    "list": ["objects", "archives", "library"],
+						"samples": ["2009.1", "AR2009.42", "LIB2009.1"],
+						"names": ["Accession", "Archives", "Library"]
 					}
 				}
             }]

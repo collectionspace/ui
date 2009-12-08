@@ -36,7 +36,7 @@ var cspace = cspace || {};
             dataType: "json",
             success: callback,
             error: function (xhr, textStatus, errorThrown) {
-                that.showErrorMessage("Ccnfiguration information temporarily unavailable, sorry");
+                that.showErrorMessage("Configuration information temporarily unavailable, sorry");
             }
         });
     };

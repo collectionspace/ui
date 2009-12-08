@@ -36,20 +36,24 @@ var cspace = cspace || {};
     };
 
     cspace.setupFindEdit = function () {
-        var orOpts = {uiSpecUrl: "./find-edit/spec/spec-objects.json"};
-        if (document.location.protocol === "file:") {
+		var isLocal = cspace.util.isLocal();
+        var orOpts = {uiSpecUrl: isLocal ? 
+		    "./find-edit/spec/spec-objects.json" : "../../chain/objects/uispec/find-edit"};
+        if (isLocal) {
             orOpts.dataContext = setupTestDataContext("object");
         }
         var objRecordList = cspace.recordList(".object-records-group", orOpts);
 
-        var prInOpts = {uiSpecUrl: "./find-edit/spec/spec-intakes.json"};
-        if (document.location.protocol === "file:") {
+        var prInOpts = {uiSpecUrl: isLocal ? 
+		    "./find-edit/spec/spec-intakes.json" : "../../chain/intake/uispec/find-edit"};
+        if (isLocal) {
             prInOpts.dataContext = setupTestDataContext("intake");
         }
         var procIntakeRecordList = cspace.recordList(".intake-records-group", prInOpts);
 
-        var prAcqOpts = {uiSpecUrl: "./find-edit/spec/spec-acquisitions.json"};
-        if (document.location.protocol === "file:") {
+        var prAcqOpts = {uiSpecUrl: isLocal ?
+		    "./find-edit/spec/spec-acquisitions.json" : "../../chain/acquisition/uispec/find-edit"};
+        if (isLocal) {
             prAcqOpts.dataContext = setupTestDataContext("acquisition");
         }
         var procAcquisitionRecordList = cspace.recordList(".acquisition-records-group", prAcqOpts);

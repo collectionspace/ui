@@ -2,7 +2,7 @@
 				<!-- title-bar - name of object and (assession) number -->
 				<div id="title-bar">
 					<div class="title-bar-value">
-						<div class="record-number csc-titleBar-object-identification-object-number">2009-1-1</div><div class="object-name csc-titleBar-object-identification-object-title">NEW OBJECT</div>
+						<div class="record-number csc-titleBar-object-identification-object-number">2009-1-1</div><div class="title-name csc-titleBar-object-identification-object-title">NEW OBJECT</div>
 						<div class="clear"></div>
 					</div>
 					
@@ -159,10 +159,11 @@
 							</div>
 							
 							<!-- one row column -->
-							<div class="info-column1 fl-force-left">
+							<div class="info-column1 fl-force-left" id="multipleEdit">
+							
 								<div class="info-pair-addrow">
 									<div class="info-label" title="">Title</div>
-									<div class="info-value">
+									<div class="info-value" >
 										<table id="" >
 											<thead>
 												<tr>
@@ -177,16 +178,16 @@
 											<tbody>
 												<tr>
 													<td class="table-unselected"></td>
-													<td><input type="text" class="input-alpha-table csc-object-identification-object-title" name="object-identification-object-title"></td>
-													<td><input type="text" class="input-alpha-table csc-object-identification-object-title-language" name="object-identification-object-title-language"></td>
-													<td><input type="text" class="input-alpha-table csc-object-identification-object-title-translation" name="object-identification-object-title-translation"></td>
-													<td><input type="text" class="input-alpha-table csc-object-identification-object-title-type" name="object-identification-object-title-type"></td>
+													<td class="flc-inlineEdit-text"><input type="text" class="input-alpha-table csc-object-identification-object-title editableText" name="object-identification-object-title"></td>
+													<td class="flc-inlineEdit-text"><input type="text" class="input-alpha-table csc-object-identification-object-title-language editableText" name="object-identification-object-title-language"></td>
+													<td class="flc-inlineEdit-text"><input type="text" class="input-alpha-table csc-object-identification-object-title-translation editableText" name="object-identification-object-title-translation"></td>
+													<td class="flc-inlineEdit-text"><input type="text" class="input-alpha-table csc-object-identification-object-title-type editableText" name="object-identification-object-title-type"></td>
 												</tr>
 											</tbody>
 										</table>
 									</div>
 								</div>
-								
+							
 								<div class="info-pair-addrow">
 									<div class="info-label" title="">Object Name</div>
 									<div class="info-value">
@@ -970,7 +971,8 @@
 
 			<!-- Save button container -->
 			<div class="fl-container-flex input-buttons">
-				<a href="#" class="savebutton csc-save-bottom"><img src="../images/btnSave.png" alt="save button" height="24" width="100" /></a><input type="image" src="../images/btnCancel.png" alt="cancel button" class="cancelbutton" name="" width="100" height="24" /><div class="clear"><!-- --></div></div>	
+				<a href="#" class="savebutton csc-save-bottom"><img src="../images/btnSave.png" alt="save button" height="24" width="100" /></a>
+				<a href="findedit.html" class="cancelbutton"><img src="../images/btnCancel.png" alt="cancel button" width="100" height="24" /></a><div class="clear"><!-- --></div></div>	
 			
 		</div> <!-- END left-side container -->
 						</div><!-- END left-side container -->

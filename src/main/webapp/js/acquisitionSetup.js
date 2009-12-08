@@ -17,9 +17,10 @@ var demo = demo || {};
 
     demo.setup = function () {
         var csid = cspace.util.getUrlParameter("csid");
+		var isLocal = cspace.util.isLocal();
         var oiOpts = {
             alternateFields: ["acquReferenceNum"],
-            uiSpecUrl: "./schemas/acquisition/schema.json",
+            uiSpecUrl: isLocal ? "./schemas/acquisition/schema.json" : "../../chain/acquisition/schema",
             templates: {
                 body: {
                     url: "../html/acquisitionTemplate.html",
@@ -30,7 +31,7 @@ var demo = demo || {};
         if (csid) {
             oiOpts.csid = csid;
         }
-        if (document.location.protocol === "file:") {
+        if (isLocal) {
             oiOpts.dataContext = cspace.util.setupTestDataContext("acquisition");
         }
         var acquisition = cspace.dataEntry(".csc-acquisition-container", oiOpts);

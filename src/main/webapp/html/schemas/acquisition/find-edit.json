@@ -15,21 +15,6 @@
                     "validators": [],
                     "decorators": []
                 }
-//                "type": {
-//                    "selector": ".csc-type",
-//                    "validators": [],
-//                    "decorators": []
-//                },
-//                "description": {
-//                    "selector": ".csc-description",
-//                    "validators": [],
-//                    "decorators": []
-//                },
-//                "lastEdit": {
-//                    "selector": ".csc-last-edit",
-//                    "validators": [],
-//                    "decorators": []
-//                }
             }
         }
     },

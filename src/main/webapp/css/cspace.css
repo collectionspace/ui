@@ -4,7 +4,8 @@ body {font-size:13px; line-height:13px; padding: 2px 0;}
 
 table tr, table tr td, table tr th  {border:0; padding:0; margin:0; text-align:left; font-weight:normal;}
 
-p, fieldset, table, pre {margin-bottom:0em;}
+fieldset, table, pre {margin-bottom:0em;}
+p {margin-bottom:1em;}
 
 input,textarea {font-family:inherit; font-size:12px; font-weight:inherit; line-height:15px; padding:0; margin:0; *margin-bottom:0px; 
 border:1px solid #BABABB; overflow:visible;}
@@ -95,9 +96,10 @@ ul.cssmenu li.mycs a:active, ul.cssmenu li.mycs a:hover,
 ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 
 .header-name {text-transform:uppercase;}
-.object-name, .record-number, .header-name, .primary-value, .secondary-value {font-size: 24px; line-height: 24px; float:left; width:400px;}
+.title-name, .record-number, .header-name, .primary-value, .secondary-value {font-size: 24px; line-height: 24px; float:left; width:400px;}
+.title-name {width:620px; overflow:hidden;}
 .object-type {margin-left: 1.7em; padding:1px 8px; font-size:18px; line-height:22px; text-transform:uppercase; background-color:#E7E7E8; float:left;}
-.object-name, .record-number {height: 24px;}
+.object-name, .record-number, .title-name {height: 24px;}
 .user-message-container {height: 24px;}
 .user-message{width: 100%; text-align: center; font-size: 24px; line-height: 24px; float:left; color:red; padding-top:4px; display:block;}
 
@@ -145,9 +147,9 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .fl-container-left  .information-subgroup .content 	{border:none; background-color: #D1D2D4; padding: 6px 12px 6px 12px; *padding:6px 12px 0 12px; width:auto; display:block;}
 .fl-container-left  .information-group       .header   	{font-size:15px; line-height:15px; background-color:#6A8EA8; cursor:pointer;}
 .fl-container-left  .information-group       .sub-header {font-size:14px; line-height:14px; font-weight:bold; padding-bottom: 15px;}
-.fl-container-left  .information-subgroup .header   	{font-size:11px; line-height:11px; background-color:#E7E8E9;}
+.fl-container-left  .information-subgroup .header   	{font-size:11px; line-height:11px; background-color:#E6E6E6;}
 
-.fl-container-left  .information-group .radio-buttons {padding-bottom: 15px;}
+.fl-container-left  .information-group .radio-buttons {padding-bottom: 15px; width:100%;}
 .fl-container-left  .information-group .radio-button	{padding-right: 20px; font-size:14px; line-height:14px;}
 .fl-container-left  .information-group .radio-button	input {border:none; }
 
@@ -189,7 +191,7 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .login-text .info-value, .login-forms .info-value {padding-top: 20px; font-size:14px; line-height:18px; width:90%;}
 .login-pair {padding-bottom: 15px;}
 .login-pair .login-label {width:70px; text-align:right; float:left; font-weight:bold;}
-.login-pair .login-element {float:left; padding-left:10px; padding-right: 2px;}
+.login-pair .login-element {float:left; padding-left:10px; padding-right: 2px; width:65%;}
 .login-error {float:left; margin: 8px 0 -8px 17px; padding-left:20px; font-weight:bold; color:#606060; background-image: url(../images/warning.png); background-repeat: no-repeat; background-position:left;}
 
 .info-value .table-select {}
@@ -387,3 +389,5 @@ opacity:0.5;
 
 .test-div {position:absolute; top: 34px; left: 0px; z-index:2; border:1px solid #BABABB; 
 width:400px; padding: 0 0 0 0px; height: 120px; background-color:white;}
+
+tr:focus {outline:none;}
