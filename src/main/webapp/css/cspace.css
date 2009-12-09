@@ -20,7 +20,7 @@ input[type="text"], input[type="password"], textarea {width:99.75%;}
 #name-header {}
 #name-header-login {padding-top:20px;}
 
-#header-menu {width:1024px; height:86px;}
+#header-menu {width:1024px; }
 #header-menu-content {}
 .header-menu-logo {padding:17px 0 8px 0; float:left;}
 .header-menu-logout {padding:17px 0 0 0; float:right; font-size:11px; line-height:11px; font-weight:bold;}
@@ -59,6 +59,19 @@ input[type="text"], input[type="password"], textarea {width:99.75%;}
 #title-bar .label {border-top:1px solid #81C9E7; font-size:12px; line-height: 12px; padding: 2px 0 5px 0; *padding:2px 0 7px 0; color: #9E9FA0;}
 #title-bar .title-bar-value {margin-bottom:3px;}
 #title-bar .label .label-text {width:400px; float:left;}
+
+#search-box {padding: 12px 0 6px 12px; margin-top:14px; background-color:#CCC;}
+.search-bar {}
+.csc-search-keywords {width:50% !important; margin-bottom:12px;}
+.found-records-box {padding:14px 0 10px 6px;}
+.found-records-content {color:#606060; font-size:16px; line-height:16px; font-weight:bold;}
+
+table#search-results {padding-left:12px; width:100%;}
+table#search-results thead {background-color:#E1E8ED; font-size:11px; line-height:11px; color:#2278AB;}
+table#search-results thead tr th{padding:10px 0 10px 12px;}
+
+
+.flc-pager-top, .flc-pager-bottom {background-color:#ccc; padding:4px 12px; font-size:11px; line-height:11px;}
 
 #top-nav {padding-bottom:0px; clear:both;}
 #tab-menu {padding-bottom:1px; width:auto; height:24px; float:left;}

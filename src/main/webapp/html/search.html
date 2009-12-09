@@ -31,88 +31,154 @@
         <script type="text/javascript" src="../js/Search.js"></script>
     </head>
     <body>
-        <div class="main-search-page">
+	
+	
+	
+	<body>
+		<!-- body content -->
+		<div class="fl-container-1024 fl-centered">
+		
+			<!-- CSpace logo and right-side search box -->
+			<div id="name-header">
+				<!-- this div will be filled in with the contents of the Template -->
+			</div>
+			
+			<div id="header-menu">
+				<div id="header-menu-content">
+					<div>
+						<div class="header-menu-logo"><a href="http://www.collectionspace.org/current_release"><img src="../images/header-logo.png" height=34 width=196 alt="CollectionSpace" /></a></div>
+						<div class="header-menu-logout"><a href="index.html">Log out</a></div>
+						<div class="clear"></div>
+					</div>
+					<div style="header-menu-button-row">
+						<div class="header-menu-button mycs inactive"></div>
+						<div class="createnew"><a class="header-menu-button" href="createnew.html"></a></div>
+						<div class="findedit"><a class="header-menu-button selected" href="findedit.html"></a></div>
+						<div class="header-menu-button report inactive"></div>
+						<div class="header-menu-button no-margin admin inactive"></div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="fl-container-1024-inner">
+			
+				<div id="all-content" class="fl-fix acquisition">
 
-            <!-- search form -->
-            <form>
-                <input name="keyword" type="text" class="csc-search-keywords"/>
-                <select name="recordtype" class="csc-search-record-type">
-                    <option value="objectentry">Object</option>
-                    <option value="intake">Intake</option>
-                    <option value="acquisition">Acquisition</option>
-                </select>
-                <a href="#" class="csc-search-submit">Search</a>
-            </form>
-            <!-- end search form -->
-            
-            <!-- search results -->
-            <div class="csc-search-results fl-pager">
-                <ul id="pager-top" class="fl-pager-ui flc-pager-top">
-                    <li>
-                        <ul class="pager-links fl-pager-links flc-pager-links">
-                            <li class="flc-pager-pageLink"><a href="#">1</a></li>
-                            <li class="flc-pager-pageLink-disabled">2</li>
-                            <li class="flc-pager-pageLink"><a href="#">3</a></li>
-                        </ul>
-                    </li>
-                    <li class="flc-pager-previous">
-                        <a href="#">&lt; previous</a>
-                    </li>
-                    <li class="flc-pager-next">
-                        <a href="#">next &gt;</a>
-                    </li>
-                    <li>
-                        Show <span>
-                            <select class="flc-pager-page-size">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="50">50</option>
-                            </select>
-                        </span>
-                        per page
-                    </li>
-                </ul>
-                <table summary="search results" id="search-results" class="fl-pager-data">
-                    <thead>
-                        <tr>
-                            <th>ID Number</th>
-                            <th>Detail</th>
-                            <th>Last edited</th>
-                        </tr>
-                    </thead>
-                    <tbody class="flc-pager-body-template">
-                        <tr class="csc-row">
-                            <td><a href="x" class="csc-number">ACC2009.1</a></td>
-                            <td class="csc-detail">Girl in a box, Cezanne Paul</td>
-                            <td class="csc-edited">Today</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <ul id="pager-bottom" class="fl-pager-ui flc-pager-bottom">
-                    <li>
-                        <ul class="pager-links fl-pager-links flc-pager-links">
-                            <li value="1" class= flc-pager-pageLink"><a href="#">1</a></li>
-                            <li class="flc-pager-pageLink-disabled">2</li>
-                            <li value="2" class="flc-pager-pageLink"><a href="#">3</a></li>
-                        </ul>
-                    </li>
-                    <li class="flc-pager-previous">
-                        <a href="#">&lt; previous</a>
-                    </li>
-                    <li class="flc-pager-next">
-                        <a href="#">next &gt;</a>
-                    </li>
-                    <span class="flc-pager-summary">1-10 of 500 items</span>
-                </ul>
-            </div>
-            <!-- end search results -->
+					<!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
+					<div class="fl-fix fl-container-flex fl-col-mixed2">
 
-        </div>
-        <script type="text/javascript">
+						<!-- left-side container. Contains bulk of Object Entry forms and fields -->
+						<div class="fl-container-left fl-force-left">
+				
+							<div class="main-search-page">
+
+								<div id="search-box">
+									<!-- search form -->
+									<form>
+										<input name="keyword" type="text" class="csc-search-keywords"/>
+										<select name="recordtype" class="csc-search-record-type">
+											<option value="objectentry">Object</option>
+											<option value="intake">Intake</option>
+											<option value="acquisition">Acquisition</option>
+										</select>
+										<a href="#" class="csc-search-submit">Search</a>
+									</form>
+									<!-- end search form -->
+								</div>
+								<div class="found-records-box">
+									<div class="found-records-content">
+										Found 293 object records
+									</div>
+								
+								</div>
+								<!-- search results -->
+								<div class="csc-search-results fl-pager">
+									<ul id="pager-top" class="fl-pager-ui flc-pager-top">
+										<li>
+											<ul class="pager-links fl-pager-links flc-pager-links">
+												<li class="flc-pager-pageLink"><a href="#">1</a></li>
+												<li class="flc-pager-pageLink-disabled">2</li>
+												<li class="flc-pager-pageLink"><a href="#">3</a></li>
+											</ul>
+										</li>
+										<li class="flc-pager-previous">
+											<a href="#">&lt; previous</a>
+										</li>
+										<li class="flc-pager-next">
+											<a href="#">next &gt;</a>
+										</li>
+										<li>
+											Show <span>
+												<select class="flc-pager-page-size">
+													<option value="5">5</option>
+													<option value="10">10</option>
+													<option value="20">20</option>
+													<option value="50">50</option>
+												</select>
+											</span>
+											per page
+										</li>
+									</ul>
+									<table summary="search results" id="search-results" class="fl-pager-data">
+										<thead>
+											<tr>
+												<th>ID Number</th>
+												<th>Detail</th>
+												<th>Last edited</th>
+											</tr>
+										</thead>
+										<tbody class="flc-pager-body-template">
+											<tr class="csc-row">
+												<td><a href="x" class="csc-number">ACC2009.1</a></td>
+												<td class="csc-detail">Girl in a box, Cezanne Paul</td>
+												<td class="csc-edited">Today</td>
+											</tr>
+										</tbody>
+									</table>
+									<ul id="pager-bottom" class="fl-pager-ui flc-pager-bottom">
+										<li>
+											<ul class="pager-links fl-pager-links flc-pager-links">
+												<li value="1" class= flc-pager-pageLink"><a href="#">1</a></li>
+												<li class="flc-pager-pageLink-disabled">2</li>
+												<li value="2" class="flc-pager-pageLink"><a href="#">3</a></li>
+											</ul>
+										</li>
+										<li class="flc-pager-previous">
+											<a href="#">&lt; previous</a>
+										</li>
+										<li class="flc-pager-next">
+											<a href="#">next &gt;</a>
+										</li>
+										<span class="flc-pager-summary">1-10 of 500 items</span>
+									</ul>
+								</div>
+								<!-- end search results -->
+
+							</div>
+						</div>
+						
+						<div class="fl-container-pivot fl-force-right csc-right-sidebar" id="csc-right-sidebar">
+								<!-- this div will be filled in with the contents of the Template -->
+						</div> <!-- END sub-main content -->
+						<div class="clear"></div>
+					</div>
+				</div>
+			
+			<!-- end inner -->
+			</div>
+			
+			<!-- footer block -->
+			<div id="footer">
+				<!-- this div will be filled in with the contents of the Template -->
+			</div> <!-- END footer block -->
+			
+		</div> <!-- END body content -->
+		<script type="text/javascript">
             $(document).ready(function(){
                 cspace.search(".main-search-page");
             });
         </script>
-    </body>
+	</body>
+
 </html>
