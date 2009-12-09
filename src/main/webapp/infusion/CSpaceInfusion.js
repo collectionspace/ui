@@ -1,3 +1,267 @@
+/*
+    json2.js
+    2007-11-06
+
+    Public Domain
+
+    No warranty expressed or implied. Use at your own risk.
+
+    See http://www.JSON.org/js.html
+
+    This file creates a global JSON object containing two methods:
+
+        JSON.stringify(value, whitelist)
+            value       any JavaScript value, usually an object or array.
+
+            whitelist   an optional that determines how object values are
+                        stringified.
+
+            This method produces a JSON text from a JavaScript value.
+            There are three possible ways to stringify an object, depending
+            on the optional whitelist parameter.
+
+            If an object has a toJSON method, then the toJSON() method will be
+            called. The value returned from the toJSON method will be
+            stringified.
+
+            Otherwise, if the optional whitelist parameter is an array, then
+            the elements of the array will be used to select members of the
+            object for stringification.
+
+            Otherwise, if there is no whitelist parameter, then all of the
+            members of the object will be stringified.
+
+            Values that do not have JSON representaions, such as undefined or
+            functions, will not be serialized. Such values in objects will be
+            dropped, in arrays will be replaced with null. JSON.stringify()
+            returns undefined. Dates will be stringified as quoted ISO dates.
+
+            Example:
+
+            var text = JSON.stringify(['e', {pluribus: 'unum'}]);
+            // text is '["e",{"pluribus":"unum"}]'
+
+        JSON.parse(text, filter)
+            This method parses a JSON text to produce an object or
+            array. It can throw a SyntaxError exception.
+
+            The optional filter parameter is a function that can filter and
+            transform the results. It receives each of the keys and values, and
+            its return value is used instead of the original value. If it
+            returns what it received, then structure is not modified. If it
+            returns undefined then the member is deleted.
+
+            Example:
+
+            // Parse the text. If a key contains the string 'date' then
+            // convert the value to a date.
+
+            myData = JSON.parse(text, function (key, value) {
+                return key.indexOf('date') >= 0 ? new Date(value) : value;
+            });
+
+    This is a reference implementation. You are free to copy, modify, or
+    redistribute.
+
+    Use your own copy. It is extremely unwise to load third party
+    code into your pages.
+*/
+
+/*jslint evil: true */
+/*extern JSON */
+
+if (!this.JSON) {
+
+    JSON = function () {
+
+        function f(n) {    // Format integers to have at least two digits.
+            return n < 10 ? '0' + n : n;
+        }
+
+        Date.prototype.toJSON = function () {
+
+// Eventually, this method will be based on the date.toISOString method.
+
+            return this.getUTCFullYear()   + '-' +
+                 f(this.getUTCMonth() + 1) + '-' +
+                 f(this.getUTCDate())      + 'T' +
+                 f(this.getUTCHours())     + ':' +
+                 f(this.getUTCMinutes())   + ':' +
+                 f(this.getUTCSeconds())   + 'Z';
+        };
+
+
+        var m = {    // table of character substitutions
+            '\b': '\\b',
+            '\t': '\\t',
+            '\n': '\\n',
+            '\f': '\\f',
+            '\r': '\\r',
+            '"' : '\\"',
+            '\\': '\\\\'
+        };
+
+        function stringify(value, whitelist) {
+            var a,          // The array holding the partial texts.
+                i,          // The loop counter.
+                k,          // The member key.
+                l,          // Length.
+                r = /["\\\x00-\x1f\x7f-\x9f]/g,
+                v;          // The member value.
+
+            switch (typeof value) {
+            case 'string':
+
+// If the string contains no control characters, no quote characters, and no
+// backslash characters, then we can safely slap some quotes around it.
+// Otherwise we must also replace the offending characters with safe sequences.
+
+                return r.test(value) ?
+                    '"' + value.replace(r, function (a) {
+                        var c = m[a];
+                        if (c) {
+                            return c;
+                        }
+                        c = a.charCodeAt();
+                        return '\\u00' + Math.floor(c / 16).toString(16) +
+                                                   (c % 16).toString(16);
+                    }) + '"' :
+                    '"' + value + '"';
+
+            case 'number':
+
+// JSON numbers must be finite. Encode non-finite numbers as null.
+
+                return isFinite(value) ? String(value) : 'null';
+
+            case 'boolean':
+            case 'null':
+                return String(value);
+
+            case 'object':
+
+// Due to a specification blunder in ECMAScript,
+// typeof null is 'object', so watch out for that case.
+
+                if (!value) {
+                    return 'null';
+                }
+
+// If the object has a toJSON method, call it, and stringify the result.
+
+                if (typeof value.toJSON === 'function') {
+                    return stringify(value.toJSON());
+                }
+                a = [];
+                if (typeof value.length === 'number' &&
+                        !(value.propertyIsEnumerable('length'))) {
+
+// The object is an array. Stringify every element. Use null as a placeholder
+// for non-JSON values.
+
+                    l = value.length;
+                    for (i = 0; i < l; i += 1) {
+                        a.push(stringify(value[i], whitelist) || 'null');
+                    }
+
+// Join all of the elements together and wrap them in brackets.
+
+                    return '[' + a.join(',') + ']';
+                }
+                if (whitelist) {
+
+// If a whitelist (array of keys) is provided, use it to select the components
+// of the object.
+
+                    l = whitelist.length;
+                    for (i = 0; i < l; i += 1) {
+                        k = whitelist[i];
+                        if (typeof k === 'string') {
+                            v = stringify(value[k], whitelist);
+                            if (v) {
+                                a.push(stringify(k) + ':' + v);
+                            }
+                        }
+                    }
+                } else {
+
+// Otherwise, iterate through all of the keys in the object.
+
+                    for (k in value) {
+                        if (typeof k === 'string') {
+                            v = stringify(value[k], whitelist);
+                            if (v) {
+                                a.push(stringify(k) + ':' + v);
+                            }
+                        }
+                    }
+                }
+
+// Join all of the member texts together and wrap them in braces.
+
+                return '{' + a.join(',') + '}';
+            }
+        }
+
+        return {
+            stringify: stringify,
+            parse: function (text, filter) {
+                var j;
+
+                function walk(k, v) {
+                    var i, n;
+                    if (v && typeof v === 'object') {
+                        for (i in v) {
+                            if (Object.prototype.hasOwnProperty.apply(v, [i])) {
+                                n = walk(i, v[i]);
+                                if (n !== undefined) {
+                                    v[i] = n;
+                                }
+                            }
+                        }
+                    }
+                    return filter(k, v);
+                }
+
+
+// Parsing happens in three stages. In the first stage, we run the text against
+// regular expressions that look for non-JSON patterns. We are especially
+// concerned with '()' and 'new' because they can cause invocation, and '='
+// because it can cause mutation. But just to be safe, we want to reject all
+// unexpected forms.
+
+// We split the first stage into 4 regexp operations in order to work around
+// crippling inefficiencies in IE's and Safari's regexp engines. First we
+// replace all backslash pairs with '@' (a non-JSON character). Second, we
+// replace all simple value tokens with ']' characters. Third, we delete all
+// open brackets that follow a colon or comma or that begin the text. Finally,
+// we look to see that the remaining characters are only whitespace or ']' or
+// ',' or ':' or '{' or '}'. If that is so, then the text is safe for eval.
+
+                if (/^[\],:{}\s]*$/.test(text.replace(/\\./g, '@').
+replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(:?[eE][+\-]?\d+)?/g, ']').
+replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+
+// In the second stage we use the eval function to compile the text into a
+// JavaScript structure. The '{' operator is subject to a syntactic ambiguity
+// in JavaScript: it can begin a block or an object literal. We wrap the text
+// in parens to eliminate the ambiguity.
+
+                    j = eval('(' + text + ')');
+
+// In the optional third stage, we recursively walk the new structure, passing
+// each name/value pair to a filter function for possible transformation.
+
+                    return typeof filter === 'function' ? walk('', j) : j;
+                }
+
+// If the text is not JSON parseable, then a SyntaxError is thrown.
+
+                throw new SyntaxError('parseJSON');
+            }
+        };
+    }();
+}
 /*!
  * jQuery JavaScript Library v1.3.2
  * http://jquery.com/
@@ -8563,7 +8827,7 @@ fluid_1_1 = fluid_1_1 || {};
       var seenset = {};
       var collected = {};
       var out = "";
-//      var debugMode = false;
+      var debugMode = false;
       var renderOptions = options;
       var decoratorQueue = [];
       
@@ -13547,267 +13811,919 @@ $.extend($.ui.slider, {
 });
 
 })(jQuery);
-/*
-    json2.js
-    2007-11-06
+/* Copyright (c) 2006 Brandon Aaron (http://brandonaaron.net)
+ * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) 
+ * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
+ *
+ * $LastChangedDate: 2009-05-05 11:14:12 -0400 (Tue, 05 May 2009) $
+ * $Rev: 7137 $
+ *
+ * Version 2.1
+ */
 
-    Public Domain
+(function($){
 
-    No warranty expressed or implied. Use at your own risk.
+/**
+ * The bgiframe is chainable and applies the iframe hack to get 
+ * around zIndex issues in IE6. It will only apply itself in IE 
+ * and adds a class to the iframe called 'bgiframe'. The iframe
+ * is appeneded as the first child of the matched element(s) 
+ * with a tabIndex and zIndex of -1.
+ * 
+ * By default the plugin will take borders, sized with pixel units,
+ * into account. If a different unit is used for the border's width,
+ * then you will need to use the top and left settings as explained below.
+ *
+ * NOTICE: This plugin has been reported to cause perfromance problems
+ * when used on elements that change properties (like width, height and
+ * opacity) a lot in IE6. Most of these problems have been caused by 
+ * the expressions used to calculate the elements width, height and 
+ * borders. Some have reported it is due to the opacity filter. All 
+ * these settings can be changed if needed as explained below.
+ *
+ * @example $('div').bgiframe();
+ * @before <div><p>Paragraph</p></div>
+ * @result <div><iframe class="bgiframe".../><p>Paragraph</p></div>
+ *
+ * @param Map settings Optional settings to configure the iframe.
+ * @option String|Number top The iframe must be offset to the top
+ * 		by the width of the top border. This should be a negative 
+ *      number representing the border-top-width. If a number is 
+ * 		is used here, pixels will be assumed. Otherwise, be sure
+ *		to specify a unit. An expression could also be used. 
+ * 		By default the value is "auto" which will use an expression 
+ * 		to get the border-top-width if it is in pixels.
+ * @option String|Number left The iframe must be offset to the left
+ * 		by the width of the left border. This should be a negative 
+ *      number representing the border-left-width. If a number is 
+ * 		is used here, pixels will be assumed. Otherwise, be sure
+ *		to specify a unit. An expression could also be used. 
+ * 		By default the value is "auto" which will use an expression 
+ * 		to get the border-left-width if it is in pixels.
+ * @option String|Number width This is the width of the iframe. If
+ *		a number is used here, pixels will be assume. Otherwise, be sure
+ * 		to specify a unit. An experssion could also be used.
+ *		By default the value is "auto" which will use an experssion
+ * 		to get the offsetWidth.
+ * @option String|Number height This is the height of the iframe. If
+ *		a number is used here, pixels will be assume. Otherwise, be sure
+ * 		to specify a unit. An experssion could also be used.
+ *		By default the value is "auto" which will use an experssion
+ * 		to get the offsetHeight.
+ * @option Boolean opacity This is a boolean representing whether or not
+ * 		to use opacity. If set to true, the opacity of 0 is applied. If
+ *		set to false, the opacity filter is not applied. Default: true.
+ * @option String src This setting is provided so that one could change 
+ *		the src of the iframe to whatever they need.
+ *		Default: "javascript:false;"
+ *
+ * @name bgiframe
+ * @type jQuery
+ * @cat Plugins/bgiframe
+ * @author Brandon Aaron (brandon.aaron@gmail.com || http://brandonaaron.net)
+ */
+$.fn.bgIframe = $.fn.bgiframe = function(s) {
+	// This is only for IE6
+	if ( $.browser.msie && parseInt($.browser.version) <= 6 ) {
+		s = $.extend({
+			top     : 'auto', // auto == .currentStyle.borderTopWidth
+			left    : 'auto', // auto == .currentStyle.borderLeftWidth
+			width   : 'auto', // auto == offsetWidth
+			height  : 'auto', // auto == offsetHeight
+			opacity : true,
+			src     : 'javascript:false;'
+		}, s || {});
+		var prop = function(n){return n&&n.constructor==Number?n+'px':n;},
+		    html = '<iframe class="bgiframe"frameborder="0"tabindex="-1"src="'+s.src+'"'+
+		               'style="display:block;position:absolute;z-index:-1;'+
+			               (s.opacity !== false?'filter:Alpha(Opacity=\'0\');':'')+
+					       'top:'+(s.top=='auto'?'expression(((parseInt(this.parentNode.currentStyle.borderTopWidth)||0)*-1)+\'px\')':prop(s.top))+';'+
+					       'left:'+(s.left=='auto'?'expression(((parseInt(this.parentNode.currentStyle.borderLeftWidth)||0)*-1)+\'px\')':prop(s.left))+';'+
+					       'width:'+(s.width=='auto'?'expression(this.parentNode.offsetWidth+\'px\')':prop(s.width))+';'+
+					       'height:'+(s.height=='auto'?'expression(this.parentNode.offsetHeight+\'px\')':prop(s.height))+';'+
+					'"/>';
+		return this.each(function() {
+			if ( $('> iframe.bgiframe', this).length == 0 )
+				this.insertBefore( document.createElement(html), this.firstChild );
+		});
+	}
+	return this;
+};
 
-    See http://www.JSON.org/js.html
+// Add browser.version if it doesn't exist
+if (!$.browser.version)
+	$.browser.version = navigator.userAgent.toLowerCase().match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/)[1];
 
-    This file creates a global JSON object containing two methods:
+})(jQuery);/*
+Copyright 2008-2009 University of Cambridge
+Copyright 2008-2009 University of Toronto
 
-        JSON.stringify(value, whitelist)
-            value       any JavaScript value, usually an object or array.
+Licensed under the Educational Community License (ECL), Version 2.0 or the New
+BSD license. You may not use this file except in compliance with one these
+Licenses.
 
-            whitelist   an optional that determines how object values are
-                        stringified.
-
-            This method produces a JSON text from a JavaScript value.
-            There are three possible ways to stringify an object, depending
-            on the optional whitelist parameter.
-
-            If an object has a toJSON method, then the toJSON() method will be
-            called. The value returned from the toJSON method will be
-            stringified.
-
-            Otherwise, if the optional whitelist parameter is an array, then
-            the elements of the array will be used to select members of the
-            object for stringification.
-
-            Otherwise, if there is no whitelist parameter, then all of the
-            members of the object will be stringified.
-
-            Values that do not have JSON representaions, such as undefined or
-            functions, will not be serialized. Such values in objects will be
-            dropped, in arrays will be replaced with null. JSON.stringify()
-            returns undefined. Dates will be stringified as quoted ISO dates.
-
-            Example:
-
-            var text = JSON.stringify(['e', {pluribus: 'unum'}]);
-            // text is '["e",{"pluribus":"unum"}]'
-
-        JSON.parse(text, filter)
-            This method parses a JSON text to produce an object or
-            array. It can throw a SyntaxError exception.
-
-            The optional filter parameter is a function that can filter and
-            transform the results. It receives each of the keys and values, and
-            its return value is used instead of the original value. If it
-            returns what it received, then structure is not modified. If it
-            returns undefined then the member is deleted.
-
-            Example:
-
-            // Parse the text. If a key contains the string 'date' then
-            // convert the value to a date.
-
-            myData = JSON.parse(text, function (key, value) {
-                return key.indexOf('date') >= 0 ? new Date(value) : value;
-            });
-
-    This is a reference implementation. You are free to copy, modify, or
-    redistribute.
-
-    Use your own copy. It is extremely unwise to load third party
-    code into your pages.
+You may obtain a copy of the ECL 2.0 License and BSD License at
+https://source.fluidproject.org/svn/LICENSE.txt
 */
 
-/*jslint evil: true */
-/*extern JSON */
+/*global jQuery*/
+/*global fluid_1_1*/
 
-if (!this.JSON) {
+fluid_1_1 = fluid_1_1 || {};
 
-    JSON = function () {
+(function ($, fluid) {
 
-        function f(n) {    // Format integers to have at least two digits.
-            return n < 10 ? '0' + n : n;
+    /******************
+     * Pager Bar View *
+     ******************/
+
+    
+    function updateStyles(pageListThat, newModel, oldModel) {
+        if (!pageListThat.pageLinks) {
+            return;
         }
+        if (oldModel.pageIndex !== undefined) {
+            var oldLink = pageListThat.pageLinks.eq(oldModel.pageIndex);
+            oldLink.removeClass(pageListThat.options.styles.currentPage);
+        }
+        var pageLink = pageListThat.pageLinks.eq(newModel.pageIndex);
+        pageLink.addClass(pageListThat.options.styles.currentPage); 
 
-        Date.prototype.toJSON = function () {
 
-// Eventually, this method will be based on the date.toISOString method.
+    }
+    
+    function bindLinkClick(link, events, eventArg) {
+        link.unbind("click.fluid.pager");
+        link.bind("click.fluid.pager", function () {events.initiatePageChange.fire(eventArg); });
+    }
+    
+    // 10 -> 1, 11 -> 2
+    function computePageCount(model) {
+        model.pageCount = Math.max(1, Math.floor((model.totalRange - 1) / model.pageSize) + 1);
+    }
+    
+    function computePageLimit(model) {
+        return Math.min(model.totalRange, (model.pageIndex + 1) * model.pageSize);
+    }
 
-            return this.getUTCFullYear()   + '-' +
-                 f(this.getUTCMonth() + 1) + '-' +
-                 f(this.getUTCDate())      + 'T' +
-                 f(this.getUTCHours())     + ':' +
-                 f(this.getUTCMinutes())   + ':' +
-                 f(this.getUTCSeconds())   + 'Z';
+    fluid.pager = function () {
+        return fluid.pagerImpl.apply(null, arguments);
+    };
+    
+    fluid.pager.directPageList = function (container, events, options) {
+        var that = fluid.initView("fluid.pager.directPageList", container, options);
+        that.pageLinks = that.locate("pageLinks");
+        for (var i = 0; i < that.pageLinks.length; ++ i) {
+            var pageLink = that.pageLinks.eq(i);
+            bindLinkClick(pageLink, events, {pageIndex: i});
+        }
+        events.onModelChange.addListener(
+            function (newModel, oldModel) {
+                updateStyles(that, newModel, oldModel);
+            }
+        );
+        that.defaultModel = {
+            pageIndex: undefined,
+            pageSize: 1,
+            totalRange: that.pageLinks.length
         };
-
-
-        var m = {    // table of character substitutions
-            '\b': '\\b',
-            '\t': '\\t',
-            '\n': '\\n',
-            '\f': '\\f',
-            '\r': '\\r',
-            '"' : '\\"',
-            '\\': '\\\\'
+        return that;
+    };
+    
+    /** Returns an array of size count, filled with increasing integers, 
+     *  starting at 0 or at the index specified by first. 
+     */
+    
+    fluid.iota = function (count, first) {
+        first = first || 0;
+        var togo = [];
+        for (var i = 0; i < count; ++ i) {
+            togo[togo.length] = first++;
+        }
+        return togo;
+    };
+    
+    fluid.pager.everyPageStrategy = fluid.iota;
+    
+    fluid.pager.gappedPageStrategy = function (locality, midLocality) {
+        if (!locality) {
+            locality = 3;
+        }
+        if (!midLocality) {
+            midLocality = locality;
+        }
+        return function (count, first, mid) {
+            var togo = [];
+            var j = 0;
+            var lastSkip = false;
+            for (var i = 0; i < count; ++ i) {
+                if (i < locality || (count - i - 1) < locality || (i >= mid - midLocality && i <= mid + midLocality)) {
+                    togo[j++] = i;
+                    lastSkip = false;
+                }
+                else if (!lastSkip) {
+                    togo[j++] = -1;
+                    lastSkip = true;
+                }
+            }
+            return togo;
         };
+    };
+    
+    fluid.pager.renderedPageList = function (container, events, pagerBarOptions, options, strings) {
+        options = $.extend(true, pagerBarOptions, options);
+        var that = fluid.initView("fluid.pager.renderedPageList", container, options);
+        options = that.options; // pick up any defaults
+        var renderOptions = {
+            cutpoints: [ {
+                id: "page-link:link",
+                selector: pagerBarOptions.selectors.pageLinks
+            },
+            {
+                id: "page-link:skip",
+                selector: pagerBarOptions.selectors.pageLinkSkip
+            },
+            {
+                id: "page-link:disabled",
+                selector: pagerBarOptions.selectors.pageLinkDisabled
+            }]
+        };
+        
+        if (options.linkBody) {
+            renderOptions.cutpoints[renderOptions.cutpoints.length] = {
+                id: "payload-component",
+                selector: options.linkBody
+            };
+        }        
+        function pageToComponent(current) {
+            return function (page) {
+                return page === -1? {
+                    ID: "page-link:skip"
+                } : 
+                {
+                    ID: page === current? "page-link:link": "page-link:link",
+                    localID: page + 1,
+                    value: page + 1,
+                    pageIndex: page,
+                    decorators: [
+                        {type: "jQuery",
+                             func: "click", 
+                             args: function () {events.initiatePageChange.fire({pageIndex: page}); }
+                         },
+                        {type: page === current? "addClass" : "",
+                             classes: that.options.styles.currentPage}
+                         ]
+                };
+            };
+        }
+        var root = that.locate("root");
+        fluid.expectFilledSelector(root, "Error finding root template for fluid.pager.renderedPageList");
+        
+        var template = fluid.selfRender(root, {}, renderOptions);
+        events.onModelChange.addListener(
+            function (newModel, oldModel) {
+                var pages = that.options.pageStrategy(newModel.pageCount, 0, newModel.pageIndex);
+                var pageTree = fluid.transform(pages, pageToComponent(newModel.pageIndex));
+                pageTree[pageTree.length - 1].value = pageTree[pageTree.length - 1].value + strings.last;
+                events.onRenderPageLinks.fire(pageTree, newModel);
+                fluid.reRender(template, root, pageTree, renderOptions);
+                updateStyles(that, newModel, oldModel);
+            }
+        );
+        return that;
+    };
+    
+    fluid.defaults("fluid.pager.renderedPageList",
+        {
+            selectors: {
+                root: ".flc-pager-links"
+            },
+            linkBody: "a",
+            pageStrategy: fluid.pager.everyPageStrategy
+        }
+    );
+    
+    var updatePreviousNext = function (that, options, newModel) {
+        if (newModel.pageIndex === 0) {
+            that.previous.addClass(options.styles.disabled);
+        } else {
+            that.previous.removeClass(options.styles.disabled);
+        }
+        
+        if (newModel.pageIndex === newModel.pageCount - 1) {
+            that.next.addClass(options.styles.disabled);
+        } else {
+            that.next.removeClass(options.styles.disabled);
+        }
+    };
+    
+    fluid.pager.previousNext = function (container, events, options) {
+        var that = fluid.initView("fluid.pager.previousNext", container, options);
+        that.previous = that.locate("previous");
+        bindLinkClick(that.previous, events, {relativePage: -1});
+        that.next = that.locate("next");
+        bindLinkClick(that.next, events, {relativePage: +1});
+        events.onModelChange.addListener(
+            function (newModel, oldModel, overallThat) {
+                updatePreviousNext(that, options, newModel);
+            }
+        );
+        return that;
+    };
 
-        function stringify(value, whitelist) {
-            var a,          // The array holding the partial texts.
-                i,          // The loop counter.
-                k,          // The member key.
-                l,          // Length.
-                r = /["\\\x00-\x1f\x7f-\x9f]/g,
-                v;          // The member value.
+    fluid.pager.pagerBar = function (events, container, options, strings) {
+        var that = fluid.initView("fluid.pager.pagerBar", container, options);
+        that.pageList = fluid.initSubcomponent(that, "pageList", 
+           [container, events, that.options, fluid.COMPONENT_OPTIONS, strings]);
+        that.previousNext = fluid.initSubcomponent(that, "previousNext", 
+           [container, events, that.options, fluid.COMPONENT_OPTIONS, strings]);
+        
+        return that;
+    };
 
-            switch (typeof value) {
-            case 'string':
+    
+    fluid.defaults("fluid.pager.pagerBar", {
+            
+        previousNext: {
+            type: "fluid.pager.previousNext"
+        },
+        
+        pageList: {
+            type: "fluid.pager.directPageList"
+        },
+        
+        selectors: {
+            pageLinks: ".flc-pager-pageLink",
+            pageLinkSkip: ".flc-pager-pageLink-skip",
+            pageLinkDisabled: ".flc-pager-pageLink-disabled",
+            previous: ".flc-pager-previous",
+            next: ".flc-pager-next"
+        },
+        
+        styles: {
+            currentPage: "fl-pager-currentPage",
+            disabled: "fl-pager-disabled"
+        }
+    });
 
-// If the string contains no control characters, no quote characters, and no
-// backslash characters, then we can safely slap some quotes around it.
-// Otherwise we must also replace the offending characters with safe sequences.
+    function getColumnDefs(that) {
+        return that.options.columnDefs;
+    }
 
-                return r.test(value) ?
-                    '"' + value.replace(r, function (a) {
-                        var c = m[a];
-                        if (c) {
-                            return c;
-                        }
-                        c = a.charCodeAt();
-                        return '\\u00' + Math.floor(c / 16).toString(16) +
-                                                   (c % 16).toString(16);
-                    }) + '"' :
-                    '"' + value + '"';
+    fluid.pager.findColumnDef = function (columnDefs, key) {
+        var columnDef = $.grep(columnDefs, function (def) {
+            return def.key === key;
+        })[0];
+        return columnDef;
+    };
+    
+    function getRoots(target, overallThat, index) {
+        var cellRoot = (overallThat.options.dataOffset? overallThat.options.dataOffset + ".": "");
+        target.shortRoot = index;
+        target.longRoot = cellRoot + target.shortRoot;
+    }
+    
+    function expandPath(EL, shortRoot, longRoot) {
+        if (EL.charAt(0) === "*") {
+            return longRoot + EL.substring(1); 
+        }
+        else {
+            return EL.replace("*", shortRoot);
+        }
+    }
+    
+    fluid.pager.fetchValue = function (that, dataModel, index, valuebinding, roots) {
+        getRoots(roots, that, index);
 
-            case 'number':
+        var path = expandPath(valuebinding, roots.shortRoot, roots.longRoot);
+        return fluid.model.getBeanValue(dataModel, path);
+    };
+    
+    fluid.pager.basicSorter = function (overallThat, model) {        
+        var dataModel = overallThat.options.dataModel;
+        var roots = {};
+        var columnDefs = getColumnDefs(overallThat);
+        var columnDef = fluid.pager.findColumnDef(columnDefs, model.sortKey);
+        var sortrecs = [];
+        for (var i = 0; i < model.totalRange; ++ i) {
+            sortrecs[i] = {
+                index: i,
+                value: fluid.pager.fetchValue(overallThat, dataModel, i, columnDef.valuebinding, roots)
+            };
+        }
+        var columnType = typeof sortrecs[0].value;
+        function sortfunc(arec, brec) {
+            var a = arec.value;
+            var b = brec.value;
+            return a === b? 0 : (a > b? model.sortDir : -model.sortDir); 
+        }
+        sortrecs.sort(sortfunc);
+        return fluid.transform(sortrecs, function (row) {return row.index; });
+    };
 
-// JSON numbers must be finite. Encode non-finite numbers as null.
-
-                return isFinite(value) ? String(value) : 'null';
-
-            case 'boolean':
-            case 'null':
-                return String(value);
-
-            case 'object':
-
-// Due to a specification blunder in ECMAScript,
-// typeof null is 'object', so watch out for that case.
-
-                if (!value) {
-                    return 'null';
+    
+    fluid.pager.directModelFilter = function (model, pagerModel, perm) {
+        var togo = [];
+        var limit = computePageLimit(pagerModel);
+        for (var i = pagerModel.pageIndex * pagerModel.pageSize; i < limit; ++ i) {
+            var index = perm? perm[i]: i;
+            togo[togo.length] = {index: index, row: model[index]};
+        }
+        return togo;
+    };
+    
+    function expandVariables(value, opts) {
+        var togo = "";
+        var index = 0;
+        while (true) {
+            var nextindex = value.indexOf("${", index);
+            if (nextindex === -1) {
+                togo += value.substring(index);
+                break;
+            }
+            else {
+                togo += value.substring(index, nextindex);
+                var endi = value.indexOf("}", nextindex + 2);
+                var EL = value.substring(nextindex + 2, endi);
+                if (EL === "VALUE") {
+                    EL = opts.EL;
+                }
+                else {
+                    EL = expandPath(EL, opts.shortRoot, opts.longRoot);
                 }
 
-// If the object has a toJSON method, call it, and stringify the result.
-
-                if (typeof value.toJSON === 'function') {
-                    return stringify(value.toJSON());
-                }
-                a = [];
-                if (typeof value.length === 'number' &&
-                        !(value.propertyIsEnumerable('length'))) {
-
-// The object is an array. Stringify every element. Use null as a placeholder
-// for non-JSON values.
-
-                    l = value.length;
-                    for (i = 0; i < l; i += 1) {
-                        a.push(stringify(value[i], whitelist) || 'null');
-                    }
-
-// Join all of the elements together and wrap them in brackets.
-
-                    return '[' + a.join(',') + ']';
-                }
-                if (whitelist) {
-
-// If a whitelist (array of keys) is provided, use it to select the components
-// of the object.
-
-                    l = whitelist.length;
-                    for (i = 0; i < l; i += 1) {
-                        k = whitelist[i];
-                        if (typeof k === 'string') {
-                            v = stringify(value[k], whitelist);
-                            if (v) {
-                                a.push(stringify(k) + ':' + v);
-                            }
-                        }
-                    }
-                } else {
-
-// Otherwise, iterate through all of the keys in the object.
-
-                    for (k in value) {
-                        if (typeof k === 'string') {
-                            v = stringify(value[k], whitelist);
-                            if (v) {
-                                a.push(stringify(k) + ':' + v);
-                            }
-                        }
-                    }
-                }
-
-// Join all of the member texts together and wrap them in braces.
-
-                return '{' + a.join(',') + '}';
+                var val = fluid.model.getBeanValue(opts.dataModel, EL);
+                togo += val;
+                index = endi + 1;
             }
         }
+        return togo;
+    }
+   
+    function expandPaths(target, tree, opts) {
+        for (var i in tree) {
+            var val = tree[i];
+            if (val === fluid.VALUE) {
+                if (i === "valuebinding") {
+                    target[i] = opts.EL;
+                }
+                else {
+                    target[i] = {"valuebinding" : opts.EL};
+                }
+            }
+            else if (i === "valuebinding") {
+                target[i] = expandPath(tree[i], opts);
+            }
+            else if (typeof(val) === 'object') {
+                target[i] = val.length !== undefined? [] : {};
+                expandPaths(target[i], val, opts);
+            }
+            else if (typeof(val) === 'string') {
+                target[i] = expandVariables(val, opts);
+            }
+            else {target[i] = tree[i]; }
+        }
+        return target;
+    }
+   
+   // sets opts.EL, returns ID
+    function iDforColumn(columnDef, opts) {
+        var options = opts.options;
+        var EL = columnDef.valuebinding;
+        var key = columnDef.key;
+        if (!EL) {
+            fluid.fail("Error in definition for column with key " + key + ": valuebinding is not set");
+        }
+        opts.EL = expandPath(EL, opts.shortRoot, opts.longRoot);
+        if (!key) {
+            var segs = fluid.model.parseEL(EL);
+            key = segs[segs.length - 1];
+        }
+        var ID = (options.keyPrefix? options.keyPrefix : "") + key;
+        return ID;
+    }
+   
+    function expandColumnDefs(filteredRow, opts) {
+        var tree = fluid.transform(opts.columnDefs, function (columnDef) {
+            var ID = iDforColumn(columnDef, opts);
+            var togo;
+            if (!columnDef.components) {
+                return {
+                    ID: ID,
+                    valuebinding: opts.EL
+                };
+            }
+            else if (typeof columnDef.components === 'function') {
+                togo = columnDef.components(filteredRow.row, filteredRow.index);
+            }
+            else {
+                togo = columnDef.components;
+            }
+            togo = expandPaths({}, togo, opts);
+            togo.ID = ID;
+            return togo;
+        });
+        return tree;
+    }
+   
+    function fetchModel(overallThat) {
+        return fluid.model.getBeanValue(overallThat.options.dataModel, 
+            overallThat.options.dataOffset);
+    }
+   
+    
+    function bigHeaderForKey(key, opts) {
+        var id = opts.options.renderOptions.idMap["header:" + key];
+        var smallHeader = fluid.jById(id);
+        if (smallHeader.length === 0) {return null; }
+        var headerSortStylisticOffset = opts.overallOptions.selectors.headerSortStylisticOffset;
+        var bigHeader = fluid.findAncestor(smallHeader, function (element) {
+            return $(element).is(headerSortStylisticOffset); });
+        return bigHeader;
+    }
+   
+    function setSortHeaderClass(styles, element, sort) {
+        element = $(element);
+        element.removeClass(styles.ascendingHeader);
+        element.removeClass(styles.descendingHeader);
+        if (sort !== 0) {
+            element.addClass(sort === 1? styles.ascendingHeader : styles.descendingHeader);
+        }
+    }
+    
+    function isCurrentColumnSortable(columnDefs, model) {
+        var columnDef = model.sortKey? fluid.pager.findColumnDef(columnDefs, model.sortKey) : null;
+        return columnDef ? columnDef.sortable : false;
+    };
+    
+    function setModelSortHeaderClass(newModel, opts) {
+        var styles = opts.overallOptions.styles;
+        var sort = isCurrentColumnSortable(opts.columnDefs, newModel) ? newModel.sortDir : 0;
+        setSortHeaderClass(styles, bigHeaderForKey(newModel.sortKey, opts), sort);
+    }
+   
+    function fireModelChange(that, newModel, forceUpdate) {
+        computePageCount(newModel);
+        if (newModel.pageIndex >= newModel.pageCount) {
+            newModel.pageIndex = newModel.pageCount - 1;
+        }
+        if (forceUpdate || newModel.pageIndex !== that.model.pageIndex || newModel.pageSize !== that.model.pageSize || newModel.sortKey !== that.model.sortKey ||
+                newModel.sortDir !== that.model.sortDir) {
+            var sorted = isCurrentColumnSortable(getColumnDefs(that), newModel) ? 
+                that.options.sorter(that, newModel) : null;
+            that.permutation = sorted;
+            that.events.onModelChange.fire(newModel, that.model, that);
+            fluid.model.copyModel(that.model, newModel);
+        }            
+    }
+ 
+    function generateColumnClick(overallThat, columnDef, opts) {
+        return function () {
+            if (columnDef.sortable === true) {
+                var model = overallThat.model;
+                var newModel = fluid.copy(model);
+                var styles = overallThat.options.styles;
+                var oldKey = model.sortKey;
+                if (columnDef.key !== model.sortKey) {
+                    newModel.sortKey = columnDef.key;
+                    newModel.sortDir = 1;
+                    var oldBig = bigHeaderForKey(oldKey, opts);
+                    if (oldBig) {
+                        setSortHeaderClass(styles, oldBig, 0);
+                    }
+                }
+                else if (newModel.sortKey === columnDef.key) {
+                    newModel.sortDir = -1 * newModel.sortDir;
+                }
+                else {return false; }
+                newModel.pageIndex = 0;
+                fireModelChange(overallThat, newModel, true);
+                setModelSortHeaderClass(newModel, opts);                
+            }
+            return false;
+        };
+    }
+   
+    function fetchHeaderDecorators(decorators, columnDef) {
+        return decorators[columnDef.sortable? "sortableHeader" : "unsortableHeader"];
+    }
+   
+    function generateHeader(overallThat, newModel, columnDefs, opts) {
+        return {
+            children:  
+                fluid.transform(columnDefs, function (columnDef) {
+                return {
+                    ID: iDforColumn(columnDef, opts),
+                    value: columnDef.label,
+                    decorators: [
+                        {"jQuery": ["click", generateColumnClick(overallThat, columnDef, opts)]},
+                        {identify: "header:" + columnDef.key}].concat(fetchHeaderDecorators(opts.overallOptions.decorators, columnDef))
+                };
+            }
+       )};
+    }
+   
+    /** A body renderer implementation which uses the Fluid renderer to render a table section **/
+   
+    fluid.pager.selfRender = function (overallThat, inOptions) {
+        var that = fluid.initView("fluid.pager.selfRender", overallThat.container, inOptions);
+        var options = that.options;
+        options.renderOptions.idMap = options.renderOptions.idMap || {};
+        var idMap = options.renderOptions.idMap;
+        var root = that.locate("root");
+        var template = fluid.selfRender(root, {}, options.renderOptions);
+        root.addClass(options.styles.root);
+        var columnDefs = getColumnDefs(overallThat);
+        var expOpts = {options: options, columnDefs: columnDefs, overallOptions: overallThat.options, dataModel: overallThat.options.dataModel, idMap: idMap};
+        var directModel = fetchModel(overallThat);
 
         return {
-            stringify: stringify,
-            parse: function (text, filter) {
-                var j;
-
-                function walk(k, v) {
-                    var i, n;
-                    if (v && typeof v === 'object') {
-                        for (i in v) {
-                            if (Object.prototype.hasOwnProperty.apply(v, [i])) {
-                                n = walk(i, v[i]);
-                                if (n !== undefined) {
-                                    v[i] = n;
+            returnedOptions: {
+                listeners: {
+                    onModelChange: function (newModel, oldModel) {
+                        var filtered = overallThat.options.modelFilter(directModel, newModel, overallThat.permutation);
+                        var tree = fluid.transform(filtered, 
+                            function (filteredRow) {
+                                var roots = getRoots(expOpts, overallThat, filteredRow.index);
+                                if (columnDefs === "explode") {
+                                    return fluid.explode(filteredRow.row, root);
+                                }
+                                else if (columnDefs.length) {
+                                    return expandColumnDefs(filteredRow, expOpts);
                                 }
                             }
+                            );
+                        var fullTree = {};
+                        fullTree[options.row] = tree;
+                        if (typeof(columnDefs) === "object") {
+                            fullTree[options.header] = generateHeader(overallThat, newModel, columnDefs, expOpts);
                         }
+                        options.renderOptions = options.renderOptions || {};
+                        options.renderOptions.model = expOpts.dataModel;
+                        fluid.reRender(template, root, fullTree, options.renderOptions);
+                        setModelSortHeaderClass(newModel, expOpts); // TODO, should this not be actually renderable?
                     }
-                    return filter(k, v);
                 }
-
-
-// Parsing happens in three stages. In the first stage, we run the text against
-// regular expressions that look for non-JSON patterns. We are especially
-// concerned with '()' and 'new' because they can cause invocation, and '='
-// because it can cause mutation. But just to be safe, we want to reject all
-// unexpected forms.
-
-// We split the first stage into 4 regexp operations in order to work around
-// crippling inefficiencies in IE's and Safari's regexp engines. First we
-// replace all backslash pairs with '@' (a non-JSON character). Second, we
-// replace all simple value tokens with ']' characters. Third, we delete all
-// open brackets that follow a colon or comma or that begin the text. Finally,
-// we look to see that the remaining characters are only whitespace or ']' or
-// ',' or ':' or '{' or '}'. If that is so, then the text is safe for eval.
-
-                if (/^[\],:{}\s]*$/.test(text.replace(/\\./g, '@').
-replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(:?[eE][+\-]?\d+)?/g, ']').
-replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
-
-// In the second stage we use the eval function to compile the text into a
-// JavaScript structure. The '{' operator is subject to a syntactic ambiguity
-// in JavaScript: it can begin a block or an object literal. We wrap the text
-// in parens to eliminate the ambiguity.
-
-                    j = eval('(' + text + ')');
-
-// In the optional third stage, we recursively walk the new structure, passing
-// each name/value pair to a filter function for possible transformation.
-
-                    return typeof filter === 'function' ? walk('', j) : j;
-                }
-
-// If the text is not JSON parseable, then a SyntaxError is thrown.
-
-                throw new SyntaxError('parseJSON');
             }
         };
-    }();
-}
+    };
+
+    fluid.defaults("fluid.pager.selfRender", {
+        selectors: {
+            root: ".flc-pager-body-template"
+        },
+		
+		styles: {
+			root: "fl-pager"
+        },
+		
+        keyStrategy: "id",
+        keyPrefix: "",
+        row: "row:",
+        header: "header:",
+        // Options passed upstream to the renderer
+        renderOptions: {}
+    });
+
+
+    fluid.pager.summary = function (dom, options) {
+        var node = dom.locate("summary");
+        return {
+            returnedOptions: {
+                listeners: {
+                    onModelChange: function (newModel, oldModel) {
+                        var text = fluid.stringTemplate(options.message, {
+                            first: newModel.pageIndex * newModel.pageSize + 1,
+                            last: computePageLimit(newModel),
+                            total: newModel.totalRange
+                        });
+                        if (node.length > 0) {
+                            node.text(text);
+                        }
+                    }
+                }
+            }
+        };
+    };
+    
+    fluid.pager.directPageSize = function (that) {
+        var node = that.locate("pageSize");
+        if (node.length > 0) {
+            that.events.onModelChange.addListener(
+                function (newModel, oldModel) {
+                    if (node.val() !== newModel.pageSize) {
+                        node.val(newModel.pageSize);
+                    }
+                }
+            );
+            node.change(function () {
+                that.events.initiatePageSizeChange.fire(node.val());
+            });
+        }
+        return that;
+    };
+
+
+    fluid.pager.rangeAnnotator = function (that, options) {
+        var roots = {};
+        that.events.onRenderPageLinks.addListener(function (tree, newModel) {
+            var column = that.options.annotateColumnRange;
+            var dataModel = that.options.dataModel;
+            // TODO: reaching into another component's options like this is a bit unfortunate
+            var columnDefs = getColumnDefs(that);
+
+            if (!column || !dataModel || !columnDefs) {
+                return;
+            }
+            var columnDef = fluid.pager.findColumnDef(columnDefs, column);
+            
+            function fetchValue(index) {
+                index = that.permutation? that.permutation[index] : index;
+                return fluid.pager.fetchValue(that, dataModel, index, columnDef.valuebinding, roots);
+            }
+            var tModel = {};
+            fluid.model.copyModel(tModel, newModel);
+            
+            fluid.transform(tree, function (cell) {
+                if (cell.ID === "page-link:link") {
+                    var page = cell.pageIndex;
+                    var start = page * tModel.pageSize;
+                    tModel.pageIndex = page;
+                    var limit = computePageLimit(tModel);
+                    var iValue = fetchValue(start);
+                    var lValue = fetchValue(limit - 1);
+                    
+                    var text = "<b>" + iValue + "</b><br/>&mdash;<br/><b>" + lValue + "</b>";
+                    
+                    var decorator = {
+                        type: "jQuery",
+                        func: "tooltip",
+                        args: {
+                            delay: that.options.tooltipDelay,
+                            extraClass: that.options.styles.tooltip,
+                            bodyHandler: function () { 
+                                return text; 
+                            },
+                            showURL: false,
+                            id: that.options.tooltipId
+                        }
+                    };
+                    cell.decorators.push(decorator);
+                }
+            });
+        });
+    };
+
+    /*******************
+     * Pager Component *
+     *******************/
+    
+    fluid.pagerImpl = function (container, options) {
+        var that = fluid.initView("fluid.pager", container, options);
+        
+        var pageIndexConformer = function (model, changeRequest) {
+            if (changeRequest.value < 0) {
+                changeRequest.value = 0;
+            }
+        };
+        
+        that.events.initiatePageChange.addListener(
+            function (arg) {
+                var newModel = fluid.copy(that.model);
+                if (arg.relativePage !== undefined) {
+                    newModel.pageIndex = that.model.pageIndex + arg.relativePage;
+                }
+                else {
+                    newModel.pageIndex = arg.pageIndex;
+                }
+                if (newModel.pageIndex === undefined || newModel.pageIndex < 0) {
+                    newModel.pageIndex = 0;
+                }
+                fireModelChange(that, newModel, arg.forceUpdate);
+            }
+        );
+        
+        that.events.initiatePageSizeChange.addListener(
+            function (arg) {
+                var newModel = fluid.copy(that.model);
+                newModel.pageSize = arg;
+                fireModelChange(that, newModel);     
+            }
+            );
+
+        // Setup the top and bottom pager bars.
+        var pagerBarElement = that.locate("pagerBar");
+        if (pagerBarElement.length > 0) {
+            that.pagerBar = fluid.initSubcomponent(that, "pagerBar", 
+            [that.events, pagerBarElement, fluid.COMPONENT_OPTIONS, that.options.strings]);
+        }
+        
+        var pagerBarSecondaryElement = that.locate("pagerBarSecondary");
+        if (pagerBarSecondaryElement.length > 0) {
+            that.pagerBarSecondary = fluid.initSubcomponent(that, "pagerBar",
+               [that.events, pagerBarSecondaryElement, fluid.COMPONENT_OPTIONS, that.options.strings]);
+        }
+ 
+        that.bodyRenderer = fluid.initSubcomponent(that, "bodyRenderer", [that, fluid.COMPONENT_OPTIONS]);
+        
+        that.summary = fluid.initSubcomponent(that, "summary", [that.dom, fluid.COMPONENT_OPTIONS]);
+        
+        that.pageSize = fluid.initSubcomponent(that, "pageSize", [that]);
+        
+        that.rangeAnnotator = fluid.initSubcomponent(that, "rangeAnnotator", [that, fluid.COMPONENT_OPTIONS]);
+ 
+        that.model = fluid.copy(that.options.model);
+        
+        var dataModel = fetchModel(that);
+        if (dataModel) {
+            that.model.totalRange = dataModel.length;
+        }
+        if (that.model.totalRange === undefined) {
+            if (!that.pagerBar) {
+                fluid.fail("Error in Pager configuration - cannot determine total range, " +
+                " since not configured in model.totalRange and no PagerBar is configured");
+            }
+            that.model = that.pagerBar.pageList.defaultModel;
+        }
+        that.applier = fluid.makeChangeApplier(that.model);
+
+        that.events.initiatePageChange.fire({pageIndex: that.model.pageIndex? that.model.pageIndex: 0, 
+           forceUpdate: true});
+
+        return that;
+    };
+    
+    fluid.defaults("fluid.pager", {
+        pagerBar: {type: "fluid.pager.pagerBar", 
+            options: null},
+        
+        summary: {type: "fluid.pager.summary", options: {
+            message: "%first-%last of %total items"
+        }},
+        
+        pageSize: {
+            type: "fluid.pager.directPageSize"
+        },
+        
+        modelFilter: fluid.pager.directModelFilter,
+        
+        sorter: fluid.pager.basicSorter,
+        
+        bodyRenderer: {
+            type: "fluid.emptySubcomponent"
+        },
+        
+        model: {
+            pageIndex: undefined,
+            pageSize: 10,
+            totalRange: undefined
+        },
+        
+        dataModel: undefined,
+        // Offset of the tree's "main" data from the overall dataModel root
+        dataOffset: "",
+        
+        // strategy for generating a tree row, either "explode" or an array of columnDef objects
+        columnDefs: "explode",
+        
+        annotateColumnRange: undefined,
+        
+        tooltipDelay: 300,
+        
+        tooltipId: "tooltip",
+        
+        rangeAnnotator: {
+            type: "fluid.pager.rangeAnnotator"
+        },
+        
+        selectors: {
+            pagerBar: ".flc-pager-top",
+            pagerBarSecondary: ".flc-pager-bottom",
+            summary: ".flc-pager-summary",
+            pageSize: ".flc-pager-page-size",
+            headerSortStylisticOffset: ".flc-pager-sort-header"
+        },
+        
+        styles: {
+            tooltip: "fl-pager-tooltip",
+            ascendingHeader: "fl-pager-asc",
+            descendingHeader: "fl-pager-desc"
+        },
+        
+        decorators: {
+            sortableHeader: [],
+            unsortableHeader: []
+        },
+        
+        strings: {
+            last: " (last)"
+        },
+        
+        events: {
+            initiatePageChange: null,
+            initiatePageSizeChange: null,
+            onModelChange: null,
+            onRenderPageLinks: null
+        }
+    });
+})(jQuery, fluid_1_1);

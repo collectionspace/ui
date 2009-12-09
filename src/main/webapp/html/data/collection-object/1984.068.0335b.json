@@ -33,10 +33,10 @@
     "descTechAttribute":"",
     "descTechAttributeMeasure":"",
     "descTechAttributeUnit":"",
-    "descDimension":"",
+    "descDimension":"Height",
     "descDimensionPart":"",
-    "descDimensionUnit":"",
-    "descDimensionValue":"",
+    "descDimensionUnit":"pixels",
+    "descDimensionValue":"3456",
     "descDimensionValueQualifier":"",
     "descContentDescription":"",
     "descContentLanguage":"",
@@ -75,3 +75,4 @@
     "descDateLatestSingleQualifier":"",
     "descDateText": ""
 }
+
