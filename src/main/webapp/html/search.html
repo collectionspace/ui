@@ -6,8 +6,9 @@
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-reset.css" />
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-layout.css" />
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
+		<link rel="stylesheet" type="text/css" href="../css/Pager.css" />
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
-        <link rel="stylesheet" type="text/css" href="../css/Pager.css" />
+        
 
         <script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
         <!--
@@ -63,7 +64,7 @@
 			
 			<div class="fl-container-1024-inner">
 			
-				<div id="all-content" class="fl-fix acquisition">
+				<div id="all-content" class="fl-fix">
 
 					<!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
 					<div class="fl-fix fl-container-flex fl-col-mixed2">
@@ -76,25 +77,30 @@
 								<div id="search-box">
 									<!-- search form -->
 									<form>
-										<input name="keyword" type="text" class="csc-search-keywords"/>
-										<select name="recordtype" class="csc-search-record-type">
-											<option value="objectentry">Object</option>
-											<option value="intake">Intake</option>
-											<option value="acquisition">Acquisition</option>
-										</select>
-										<a href="#" class="csc-search-submit">Search</a>
+										<input name="keyword" type="text" class="csc-search-keywords" /><a href="#" class="csc-search-submit">Search</a>
+										<div>
+											<span class="recordtype-label">Record Type</span>
+											<select name="recordtype" class="csc-search-record-type">
+												<option value="objectentry">Object</option>
+												<option value="intake">Intake</option>
+												<option value="acquisition">Acquisition</option>
+											</select>
+										</div>
 									</form>
 									<!-- end search form -->
 								</div>
 								<div class="found-records-box">
 									<div class="found-records-content">
-										Found 293 object records
+										Found 256 object records
 									</div>
 								
 								</div>
 								<!-- search results -->
 								<div class="csc-search-results fl-pager">
 									<ul id="pager-top" class="fl-pager-ui flc-pager-top">
+										<li class="flc-pager-previous">
+											<a href="#">&lt; previous</a>
+										</li>
 										<li>
 											<ul class="pager-links fl-pager-links flc-pager-links">
 												<li class="flc-pager-pageLink"><a href="#">1</a></li>
@@ -102,13 +108,10 @@
 												<li class="flc-pager-pageLink"><a href="#">3</a></li>
 											</ul>
 										</li>
-										<li class="flc-pager-previous">
-											<a href="#">&lt; previous</a>
-										</li>
 										<li class="flc-pager-next">
 											<a href="#">next &gt;</a>
 										</li>
-										<li>
+										<li class="flc-per-page">
 											Show <span>
 												<select class="flc-pager-page-size">
 													<option value="5">5</option>
@@ -119,7 +122,9 @@
 											</span>
 											per page
 										</li>
+										<div class="clear"></div>
 									</ul>
+									<div class="clear"></div>
 									<table summary="search results" id="search-results" class="fl-pager-data">
 										<thead>
 											<tr>
@@ -137,21 +142,25 @@
 										</tbody>
 									</table>
 									<ul id="pager-bottom" class="fl-pager-ui flc-pager-bottom">
+										<li class="flc-pager-previous">
+											<a href="#">&lt; previous</a>
+										</li>
 										<li>
 											<ul class="pager-links fl-pager-links flc-pager-links">
-												<li value="1" class= flc-pager-pageLink"><a href="#">1</a></li>
+												<li value="1" class= "flc-pager-pageLink"><a href="#">1</a></li>
 												<li class="flc-pager-pageLink-disabled">2</li>
 												<li value="2" class="flc-pager-pageLink"><a href="#">3</a></li>
 											</ul>
 										</li>
-										<li class="flc-pager-previous">
-											<a href="#">&lt; previous</a>
-										</li>
 										<li class="flc-pager-next">
 											<a href="#">next &gt;</a>
 										</li>
-										<span class="flc-pager-summary">1-10 of 500 items</span>
+										<li class="flc-pager-summary">
+											1-10 of 500 items
+										</li>
+										<div class="clear"></div>
 									</ul>
+									<div class="clear"></div>
 								</div>
 								<!-- end search results -->
 
