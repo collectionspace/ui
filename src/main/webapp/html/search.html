@@ -9,9 +9,8 @@
 		<link rel="stylesheet" type="text/css" href="../css/Pager.css" />
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
         
-        <!--
         <script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
-        -->
+        <!--
         <script type="text/javascript" src="../infusion/1.1/lib/jquery/core/js/jquery.js"></script>
         <script type="text/javascript" src="../infusion/1.1/lib/jquery/ui/js/ui.core.js"></script>
         <script type="text/javascript" src="../infusion/1.1/lib/jquery/ui/js/ui.dialog.js"></script>
@@ -23,6 +22,7 @@
         <script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidParser.js"></script>
         <script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidRenderer.js"></script>
         <script type="text/javascript" src="../infusion/1.1/components/pager/js/Pager.js"></script>
+        -->
 
         <script type="text/javascript" src="../js/cspace.js"></script>
         <script type="text/javascript" src="../js/Utilities.js"></script>
@@ -88,78 +88,81 @@
 									</form>
 									<!-- end search form -->
 								</div>
-								<div class="found-records-box">
-									<div class="found-records-content">
-										Found <span class="csc-search-results-count">256</span> object records
-									</div>
-								
-								</div>
-								<!-- search results -->
-								<div class="csc-search-results fl-pager">
-									<ul id="pager-top" class="fl-pager-ui flc-pager-top">
-										<li class="flc-pager-previous">
-											<a href="#">&lt; previous</a>
-										</li>
-										<li>
-											<ul class="pager-links fl-pager-links flc-pager-links">
-												<li class="flc-pager-pageLink"><a href="#">1</a></li>
-												<li class="flc-pager-pageLink-disabled">2</li>
-												<li class="flc-pager-pageLink"><a href="#">3</a></li>
-											</ul>
-										</li>
-										<li class="flc-pager-next">
-											<a href="#">next &gt;</a>
-										</li>
-										<li class="flc-per-page">
-											Show <span>
-												<select class="flc-pager-page-size">
-													<option value="5">5</option>
-													<option value="10">10</option>
-													<option value="20">20</option>
-													<option value="50">50</option>
-												</select>
-											</span>
-											per page
-										</li>
-										<div class="clear"></div>
-									</ul>
-									<div class="clear"></div>
-									<table summary="search results" id="search-results" class="fl-pager-data">
-										<thead>
-											<tr class="csc-header">
-												<th>ID Number</th>
-												<th>Summary</th>
-												<th>Last edited</th>
-											</tr>
-										</thead>
-										<tbody class="flc-pager-body-template">
-											<tr class="csc-row">
-												<td><a href="x" class="csc-number">ACC2009.1</a></td>
-												<td class="csc-col">Girl in a box, Cezanne Paul</td>
-											</tr>
-										</tbody>
-									</table>
-									<ul id="pager-bottom" class="fl-pager-ui flc-pager-bottom">
-										<li class="flc-pager-previous">
-											<a href="#">&lt; previous</a>
-										</li>
-										<li>
-											<ul class="pager-links fl-pager-links flc-pager-links">
-												<li value="1" class= "flc-pager-pageLink"><a href="#">1</a></li>
-												<li class="flc-pager-pageLink-disabled">2</li>
-												<li value="2" class="flc-pager-pageLink"><a href="#">3</a></li>
-											</ul>
-										</li>
-										<li class="flc-pager-next">
-											<a href="#">next &gt;</a>
-										</li>
-										<li class="flc-pager-summary">
-											1-10 of 500 items
-										</li>
-										<div class="clear"></div>
-									</ul>
-									<div class="clear"></div>
-								</div>
+
+                                <div class="csc-search-results">
+    								<div class="found-records-box">
+    									<div class="found-records-content">
+    										Found <span class="csc-search-results-count">256</span> object records
+    									</div>
+    								
+    								</div>
+    								<!-- search results -->
+    								<div class="fl-pager">
+    									<ul id="pager-top" class="fl-pager-ui flc-pager-top">
+    										<li class="flc-pager-previous">
+    											<a href="#">&lt; previous</a>
+    										</li>
+    										<li>
+    											<ul class="pager-links fl-pager-links flc-pager-links">
+    												<li class="flc-pager-pageLink"><a href="#">1</a></li>
+    												<li class="flc-pager-pageLink-disabled">2</li>
+    												<li class="flc-pager-pageLink"><a href="#">3</a></li>
+    											</ul>
+    										</li>
+    										<li class="flc-pager-next">
+    											<a href="#">next &gt;</a>
+    										</li>
+    										<li class="flc-per-page">
+    											Show <span>
+    												<select class="flc-pager-page-size">
+    													<option value="5">5</option>
+    													<option value="10">10</option>
+    													<option value="20">20</option>
+    													<option value="50">50</option>
+    												</select>
+    											</span>
+    											per page
+    										</li>
+    										<div class="clear"></div>
+    									</ul>
+    									<div class="clear"></div>
+    									<table summary="search results" id="search-results" class="fl-pager-data">
+    										<thead>
+    											<tr class="csc-header">
+    												<th>ID Number</th>
+    												<th>Summary</th>
+    												<th>Last edited</th>
+    											</tr>
+    										</thead>
+    										<tbody class="flc-pager-body-template">
+    											<tr class="csc-row">
+    												<td><a href="x" class="csc-number">ACC2009.1</a></td>
+    												<td class="csc-col">Girl in a box, Cezanne Paul</td>
+    											</tr>
+    										</tbody>
+    									</table>
+    									<ul id="pager-bottom" class="fl-pager-ui flc-pager-bottom">
+    										<li class="flc-pager-previous">
+    											<a href="#">&lt; previous</a>
+    										</li>
+    										<li>
+    											<ul class="pager-links fl-pager-links flc-pager-links">
+    												<li value="1" class= "flc-pager-pageLink"><a href="#">1</a></li>
+    												<li class="flc-pager-pageLink-disabled">2</li>
+    												<li value="2" class="flc-pager-pageLink"><a href="#">3</a></li>
+    											</ul>
+    										</li>
+    										<li class="flc-pager-next">
+    											<a href="#">next &gt;</a>
+    										</li>
+    										<li class="flc-pager-summary">
+    											1-10 of 500 items
+    										</li>
+    										<div class="clear"></div>
+    									</ul>
+    									<div class="clear"></div>
+    								</div>
+                                </div>
 								<!-- end search results -->
 
 							</div>

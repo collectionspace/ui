@@ -113,25 +113,26 @@ var cspace = cspace || {};
                 }
             }
         ];
+        that.locate("resultsContainer").show();
         var resultsPager = fluid.initSubcomponent(that, "resultsPager", pagerArguments);
         that.locate("resultsCount").text(resultsPager.model.totalRange);
     };
 
     var submitSearchRequest = function (that) {
         return function () {
-            jQuery.ajax({
-                url: "http://localhost:8080/chain/search",
-                type: "GET",
-                dataType: "json",
-                success: function (data, textStatus) {
-                    displaySearchResults(that);
-                },
-                error: function (xhr, textStatus, errorThrown) {
+// Temporarily bypass the ajax call, to make cross-browser testing easier
+            displaySearchResults(that, that.locate("recordType").val());
+//            jQuery.ajax({
+//                url: "http://localhost:8080/chain/search",
+//                type: "GET",
+//                dataType: "json",
+//                success: function (data, textStatus) {
+//                    displaySearchResults(that);
+//                },
+//                error: function (xhr, textStatus, errorThrown) {
 //                    that.events.onError.fire("fetch", modelPath, textStatus);
-// for testing, display test results on error
-                    displaySearchResults(that, that.locate("recordType").val());
-                }
-            });
+//                }
+//            });
         };
     };
 
@@ -141,13 +142,18 @@ var cspace = cspace || {};
 
     cspace.search = function (container, options) {
         var that = fluid.initView("cspace.search", container, options);
+        that.locate("resultsContainer").hide();
         that.model = {};
         
         bindEventHandlers(that);
         
-//        var keywords = cspace.util.getUrlParameter("keyword");
-//        var recordType = cspace.util.getUrlParameter("recordtype");
-        
+        var keywords = cspace.util.getUrlParameter("keywords");
+        var recordType = cspace.util.getUrlParameter("recordtype");
+        if (keywords) {
+            that.locate("keywords").val(keywords);
+            that.locate("recordType").val(recordType);
+            submitSearchRequest(that)();
+        }
         return that;
     };
 
