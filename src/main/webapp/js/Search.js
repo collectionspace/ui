@@ -32,22 +32,27 @@ var cspace = cspace || {};
 
     var colDefsGenerated = function (columnList, recordType) {
         return fluid.transform(columnList, function (object, index) {
+            var sortable = false;
+            var key = "col:";
             var comp;
+
             if (object === "number") {
+                key = "number";
                 comp = {
                     target: recordType + ".html?csid=${*.number}",
                     linktext: fluid.VALUE
                 };
+                sortable = true;
+            } else if (object === "csid") {
+                key = "csid";
             } else {
-                comp = {
-                    value: "${*." + object + "}"
-                };
+                comp = {value: "${*." + object + "}"};
             }
             return {
-                key: object,
+                key: key,
                 valuebinding: "*." + object,
                 components: comp,
-                sortable: false
+                sortable: sortable
             };
         });
     };
@@ -55,19 +60,19 @@ var cspace = cspace || {};
     var temporaryTestData = {
         objectentry: [
             {csid: "1984.068.0335b", number: "1984.068.0335b", detail: "Catalogs. Wyanoak Publishing Company.", edited: "today"},
-            {csid: "1984.068.0338", number: "1984.068.0338", detail: "Stamp albums. Famous stars series stamp album.", edited: "yesterday"},
-            {csid: "2005.018.1383", number: "2005.018.1383", detail: "Souvenir books. Molly O' Play Book.", edited: "Tuesday"}
+            {csid: "2005.018.1383", number: "2005.018.1383", detail: "Souvenir books. Molly O' Play Book.", edited: "Tuesday"},
+            {csid: "1984.068.0338", number: "1984.068.0338", detail: "Stamp albums. Famous stars series stamp album.", edited: "yesterday"}
         ],
         intake: [
-            {csid: "2007.4-a", number: "2007.4-a", detail: "", edited: "today"},
-            {csid: "IN2004.002", number: "IN2004.002", detail: "", edited: "yesterday"},
-            {csid: "IN2009.001", number: "IN2009.001", detail: "", edited: "Tuesday"},
-            {csid: "IN2009.002", number: "IN2009.002", detail: "", edited: "today"},
-            {csid: "IN2009.003", number: "IN2009.003", detail: "", edited: "yesterday"}
+            {csid: "2007.4-a", number: "2007.4-a", edited: "today"},
+            {csid: "IN2004.002", number: "IN2004.002", edited: "yesterday"},
+            {csid: "IN2009.001", number: "IN2009.001", edited: "Tuesday"},
+            {csid: "IN2009.002", number: "IN2009.002", edited: "today"},
+            {csid: "IN2009.003", number: "IN2009.003", edited: "yesterday"}
         ],
         acquisition: [
-            {csid: "ACQ2009.2", number: "ACQ2009.2", detail: "", edited: "Tuesday"},
-            {csid: "ACQ2009.002.001", number: "ACQ2009.002.001", detail: "", edited: "Tuesday"}
+            {csid: "ACQ2009.2", number: "ACQ2009.2", edited: "Tuesday", test: "Foo"},
+            {csid: "ACQ2009.002.001", number: "ACQ2009.002.001", edited: "Tuesday", test: "Bar"}
         ]
     };
 
@@ -91,9 +96,8 @@ var cspace = cspace || {};
                         renderOptions: {
                             cutpoints: [
                                 {id: "row:", selector: that.options.selectors.resultsRow},
-                                {id: "number", selector: that.options.selectors.columns.col1},
-                                {id: "detail", selector: that.options.selectors.columns.col2},
-                                {id: "edited", selector: that.options.selectors.columns.col3}
+                                {id: "number", selector: that.options.selectors.columns.number},
+                                {id: "col:", selector: that.options.selectors.columns.col}
                             ]
                         }
                     }
@@ -154,9 +158,8 @@ var cspace = cspace || {};
             resultsCount: ".csc-search-results-count",
             resultsRow: ".csc-row",
             columns: {
-                col1: ".csc-number",
-                col2: ".csc-detai",
-                col3: ".csc-edited"
+                number: ".csc-number",
+                col: ".csc-col"
             }
         },
         
