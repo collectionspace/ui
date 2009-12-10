@@ -127,7 +127,7 @@ var cspace = cspace || {};
 //                type: "GET",
 //                dataType: "json",
 //                success: function (data, textStatus) {
-//                    displaySearchResults(that);
+//                    displaySearchResults(that, that.locate("recordType").val());
 //                },
 //                error: function (xhr, textStatus, errorThrown) {
 //                    that.events.onError.fire("fetch", modelPath, textStatus);
