@@ -14,21 +14,28 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var colDefs = [
-        {key: "number", valuebinding: "*.number", components: {
-            target: "${*.recordtype}.html?csid=${*.number}",
-            linktext: fluid.VALUE
-        }, sortable: false},
-        {key: "detail", valuebinding: "*.detail", components: {
-            value: "${*.detail}"
-        }, sortable: false},
-        {key: "recordtype", valuebinding: "*.recordtype", components: {
-            value: "${*.recordtype}"
-        }, sortable: false},
-        {key: "edited", valuebinding: "*.edited", components: {
-            value: "${*.edited}"
-        }, sortable: false}
-    ];
+    var temporaryTestData = {
+        objectentry: [
+            {csid: "1984.068.0335b", number: "1984.068.0335b", summary: "Catalogs. Wyanoak Publishing Company.", edited: "today"},
+            {csid: "2005.018.1383", number: "2005.018.1383", summary: "Souvenir books. Molly O' Play Book.", edited: "Tuesday"},
+            {csid: "1984.068.0338", number: "1984.068.0338", summary: "Stamp albums. Famous stars series stamp album.", edited: "yesterday"}
+        ],
+        intake: [
+            {csid: "2007.4-a", number: "2007.4-a", summary: "Christoph Grissemann", edited: "today"},
+            {csid: "IN2004.002", number: "IN2004.002", summary: "Jennifer Connelly", edited: "yesterday"},
+            {csid: "IN2009.001", number: "IN2009.001", summary: "", edited: "Tuesday"},
+            {csid: "IN2009.002", number: "IN2009.002", summary: "Duncan Jones", edited: "today"},
+            {csid: "IN2009.003", number: "IN2009.003", summary: "yes, please", edited: "yesterday"}
+        ],
+        acquisition: [
+            {csid: "ACQ2009.2", number: "ACQ2009.2", summary: "Another nice person", edited: "Tuesday"},
+            {csid: "ACQ2009.002.001", number: "ACQ2009.002.001", summary: "BigShopIncorproated", edited: "Tuesday"}
+        ]
+    };
+
+    var getTestData = function (recordType) {
+        return temporaryTestData[recordType];
+    };
 
     var colDefsGenerated = function (columnList, recordType) {
         return fluid.transform(columnList, function (object, index) {
@@ -57,28 +64,7 @@ var cspace = cspace || {};
         });
     };
 
-    var temporaryTestData = {
-        objectentry: [
-            {csid: "1984.068.0335b", number: "1984.068.0335b", summary: "Catalogs. Wyanoak Publishing Company.", edited: "today"},
-            {csid: "2005.018.1383", number: "2005.018.1383", summary: "Souvenir books. Molly O' Play Book.", edited: "Tuesday"},
-            {csid: "1984.068.0338", number: "1984.068.0338", summary: "Stamp albums. Famous stars series stamp album.", edited: "yesterday"}
-        ],
-        intake: [
-            {csid: "2007.4-a", number: "2007.4-a", summary: "Christoph Grissemann", edited: "today"},
-            {csid: "IN2004.002", number: "IN2004.002", summary: "Jennifer Connelly", edited: "yesterday"},
-            {csid: "IN2009.001", number: "IN2009.001", summary: "", edited: "Tuesday"},
-            {csid: "IN2009.002", number: "IN2009.002", summary: "Duncan Jones", edited: "today"},
-            {csid: "IN2009.003", number: "IN2009.003", summary: "yes, please", edited: "yesterday"}
-        ],
-        acquisition: [
-            {csid: "ACQ2009.2", number: "ACQ2009.2", summary: "Another nice person", edited: "Tuesday"},
-            {csid: "ACQ2009.002.001", number: "ACQ2009.002.001", summary: "BigShopIncorproated", edited: "Tuesday"}
-        ]
-    };
-
     var displaySearchResults = function (that, recordType) {
-        // given a set of search results, display them in the 'resultsContainer'
-        that.model = temporaryTestData[recordType];
         var colList = [];
         for (var key in that.model[0]) {
             if (that.model[0].hasOwnProperty(key)) {
@@ -121,13 +107,16 @@ var cspace = cspace || {};
     var submitSearchRequest = function (that) {
         return function () {
 // Temporarily bypass the ajax call, to make cross-browser testing easier
-            displaySearchResults(that, that.locate("recordType").val());
+            var recordType = that.locate("recordType").val();
+            that.model = getTestData(recordType);
+            that.events.modelChanged.fire();
 //            jQuery.ajax({
 //                url: "http://localhost:8080/chain/search",
 //                type: "GET",
 //                dataType: "json",
 //                success: function (data, textStatus) {
-//                    displaySearchResults(that, that.locate("recordType").val());
+//                    that.model = data;
+//                    that.events.modelChanged.fire();
 //                },
 //                error: function (xhr, textStatus, errorThrown) {
 //                    that.events.onError.fire("fetch", modelPath, textStatus);
@@ -138,6 +127,10 @@ var cspace = cspace || {};
 
     var bindEventHandlers = function (that) {
         that.locate("searchButton").click(submitSearchRequest(that));
+
+        that.events.modelChanged.addListener(function () {
+            displaySearchResults(that, that.locate("recordType").val());
+        });
     };
 
     cspace.search = function (container, options) {
@@ -173,7 +166,8 @@ var cspace = cspace || {};
         },
         
         events: {
-            
+            modelChanged: null,
+            onError: null
         },
         
         resultsPager: {
