@@ -59,20 +59,20 @@ var cspace = cspace || {};
 
     var temporaryTestData = {
         objectentry: [
-            {csid: "1984.068.0335b", number: "1984.068.0335b", detail: "Catalogs. Wyanoak Publishing Company.", edited: "today"},
-            {csid: "2005.018.1383", number: "2005.018.1383", detail: "Souvenir books. Molly O' Play Book.", edited: "Tuesday"},
-            {csid: "1984.068.0338", number: "1984.068.0338", detail: "Stamp albums. Famous stars series stamp album.", edited: "yesterday"}
+            {csid: "1984.068.0335b", number: "1984.068.0335b", summary: "Catalogs. Wyanoak Publishing Company.", edited: "today"},
+            {csid: "2005.018.1383", number: "2005.018.1383", summary: "Souvenir books. Molly O' Play Book.", edited: "Tuesday"},
+            {csid: "1984.068.0338", number: "1984.068.0338", summary: "Stamp albums. Famous stars series stamp album.", edited: "yesterday"}
         ],
         intake: [
-            {csid: "2007.4-a", number: "2007.4-a", edited: "today"},
-            {csid: "IN2004.002", number: "IN2004.002", edited: "yesterday"},
-            {csid: "IN2009.001", number: "IN2009.001", edited: "Tuesday"},
-            {csid: "IN2009.002", number: "IN2009.002", edited: "today"},
-            {csid: "IN2009.003", number: "IN2009.003", edited: "yesterday"}
+            {csid: "2007.4-a", number: "2007.4-a", summary: "Christoph Grissemann", edited: "today"},
+            {csid: "IN2004.002", number: "IN2004.002", summary: "Jennifer Connelly", edited: "yesterday"},
+            {csid: "IN2009.001", number: "IN2009.001", summary: "", edited: "Tuesday"},
+            {csid: "IN2009.002", number: "IN2009.002", summary: "Duncan Jones", edited: "today"},
+            {csid: "IN2009.003", number: "IN2009.003", summary: "yes, please", edited: "yesterday"}
         ],
         acquisition: [
-            {csid: "ACQ2009.2", number: "ACQ2009.2", edited: "Tuesday", test: "Foo"},
-            {csid: "ACQ2009.002.001", number: "ACQ2009.002.001", edited: "Tuesday", test: "Bar"}
+            {csid: "ACQ2009.2", number: "ACQ2009.2", summary: "Another nice person", edited: "Tuesday"},
+            {csid: "ACQ2009.002.001", number: "ACQ2009.002.001", summary: "BigShopIncorproated", edited: "Tuesday"}
         ]
     };
 
@@ -95,6 +95,7 @@ var cspace = cspace || {};
                     options: {
                         renderOptions: {
                             cutpoints: [
+                                {id: "header:", selector: that.options.selectors.resultsHeader},
                                 {id: "row:", selector: that.options.selectors.resultsRow},
                                 {id: "number", selector: that.options.selectors.columns.number},
                                 {id: "col:", selector: that.options.selectors.columns.col}
@@ -113,6 +114,7 @@ var cspace = cspace || {};
             }
         ];
         var resultsPager = fluid.initSubcomponent(that, "resultsPager", pagerArguments);
+        that.locate("resultsCount").text(resultsPager.model.totalRange);
     };
 
     var submitSearchRequest = function (that) {
@@ -156,6 +158,7 @@ var cspace = cspace || {};
             searchButton: ".csc-search-submit",
             resultsContainer: ".csc-search-results",
             resultsCount: ".csc-search-results-count",
+            resultsHeader: ".csc-header",
             resultsRow: ".csc-row",
             columns: {
                 number: ".csc-number",
