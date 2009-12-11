@@ -9,8 +9,9 @@
 		<link rel="stylesheet" type="text/css" href="../css/Pager.css" />
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
         
-        <script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
         <!--
+        <script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
+        -->
         <script type="text/javascript" src="../infusion/1.1/lib/jquery/core/js/jquery.js"></script>
         <script type="text/javascript" src="../infusion/1.1/lib/jquery/ui/js/ui.core.js"></script>
         <script type="text/javascript" src="../infusion/1.1/lib/jquery/ui/js/ui.dialog.js"></script>
@@ -22,7 +23,6 @@
         <script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidParser.js"></script>
         <script type="text/javascript" src="../infusion/1.1/framework/renderer/js/fluidRenderer.js"></script>
         <script type="text/javascript" src="../infusion/1.1/components/pager/js/Pager.js"></script>
-        -->
 
         <script type="text/javascript" src="../js/cspace.js"></script>
         <script type="text/javascript" src="../js/Utilities.js"></script>
@@ -49,13 +49,14 @@
 					<div class="header-menu-logout"><a href="index.html">Log out</a></div>
 					<div class="clear"></div>
 					<div class="header-menu-search">
-						<form>
+						<form action="search.html">
 							<select name="recordtype" class="csc-global-search-record-type">
 								<option value="objectentry">Object</option>
 								<option value="intake">Intake</option>
 								<option value="acquisition">Acquisition</option>
 							</select>
-							<input name="keyword" type="text" class="csc-global-search-keywords" /><a href="#" class="csc-global-search-submit">Search</a>
+							<input name="keywords" type="text" class="csc-global-search-keywords" />
+                            <input type="submit" class="csc-global-search-submit" value="Search" />
 						</form>
 					</div>
 				</div>
@@ -137,10 +138,10 @@
     									<div class="clear"></div>
     									<table summary="search results" id="search-results" class="fl-pager-data">
     										<thead>
-    											<tr class="csc-header">
-    												<th>ID Number</th>
-    												<th>Summary</th>
-    												<th>Last edited</th>
+    											<tr rsf:id="header:" class="csc-header">
+    												<th class="flc-pager-sort-header"><a href="#">ID Number</a></th>
+    												<th class="flc-pager-sort-header"><a href="#">Summary</a></th>
+    												<th class="flc-pager-sort-header"><a href="#">Last edited</a></th>
     											</tr>
     										</thead>
     										<tbody class="flc-pager-body-template">

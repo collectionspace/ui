@@ -39,7 +39,6 @@ var cspace = cspace || {};
 
     var colDefsGenerated = function (columnList, recordType) {
         return fluid.transform(columnList, function (object, index) {
-            var sortable = false;
             var key = "col:";
             var comp;
 
@@ -49,7 +48,6 @@ var cspace = cspace || {};
                     target: recordType + ".html?csid=${*.number}",
                     linktext: fluid.VALUE
                 };
-                sortable = true;
             } else if (object === "csid") {
                 key = "csid";
             } else {
@@ -59,7 +57,7 @@ var cspace = cspace || {};
                 key: key,
                 valuebinding: "*." + object,
                 components: comp,
-                sortable: sortable
+                sortable: true
             };
         });
     };
@@ -99,8 +97,8 @@ var cspace = cspace || {};
                 }
             }
         ];
-        that.locate("resultsContainer").show();
         var resultsPager = fluid.initSubcomponent(that, "resultsPager", pagerArguments);
+        that.locate("resultsContainer").show();
         that.locate("resultsCount").text(resultsPager.model.totalRange);
     };
 
