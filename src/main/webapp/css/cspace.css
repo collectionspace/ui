@@ -21,12 +21,14 @@ input[type="text"], input[type="password"], textarea {width:99.75%;}
 #name-header {}
 #name-header-login {padding-top:20px;}
 
-#header-menu {width:1024px; }
-#header-menu-content {}
-.header-menu-logo {padding:17px 0 8px 0; float:left;}
-.header-menu-logout {padding:17px 0 0 0; float:right; font-size:11px; line-height:11px; font-weight:bold;}
-.header-menu-button-row {}
+#header-menu {width:1024px;}
+.header-menu-logo {padding:17px 0 8px 0; width:196px; float:left;}
+.header-menu-right {width:500px; float:right;}
+.header-menu-logout {padding:4px 0 12px 0; float:right; font-size:11px; line-height:11px; font-weight:bold;}
 .header-menu-button {margin-right:6px; float:left; width:200px; height:30px;}
+.header-menu-search {float:right;}
+
+.header-menu-button-row {}
 
 .mycs, .createnew, .findedit, .report, .admin {border:none; background-repeat:no-repeat; background-position: 0 0;}
 
@@ -63,10 +65,17 @@ input[type="text"], input[type="password"], textarea {width:99.75%;}
 
 #search-box {padding: 8px 0 8px 12px; margin-top:14px; background-color:#F2F2F3; border:1px solid #CECFD1;}
 .search-bar {}
-.csc-search-submit {padding:3px 33px 1px; margin:0; *margin-top:-10px; border:1px solid #94A8B5; background-color:#336384; color:#fff; text-decoration:none; font-size:12px; line-height:12px;}
-.csc-search-keywords {width:50% !important; margin:0 12px 8px 0;}
+.csc-search-submit, .csc-global-search-submit {padding:3px 33px 1px; margin:0; *margin-top:-10px; border:1px solid #94A8B5; 
+	background-color:#336384; color:#fff; text-decoration:none; font-size:12px; line-height:12px;}
+.csc-global-search-submit {padding:3px 10px 1px; background-color:#D5D6D7; color:#000;}
+.csc-search-keywords {width:50% !important; margin:0 12px 8px 0; height:16px; border:1px solid #BCBDBD; padding:2px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}
 .found-records-box {padding:14px 0 10px 6px;}
 .found-records-content {color:#606060; font-size:16px; line-height:16px; font-weight:bold;}
+
+.csc-global-search-keywords {width:200px !important; margin:0 8px 8px 2px; height:16px; border:1px solid #BCBDBD; padding:2px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}
+.csc-search-record-type, .csc-global-search-record-type {color:#6D6E71;}
+
+.recordtype-label {padding-right:8px; padding-top:3px; font-size:12px; color:#6D6E71;}
 
 table#search-results {padding-left:12px; width:100%;}
 table#search-results thead {background-color:#E1E8ED; font-size:11px; line-height:11px; color:#2278AB; border-top:1px solid #CECFD1; border-bottom:1px solid #CECFD1;}
@@ -95,11 +104,6 @@ table#search-results tbody tr td a.csc-number:hover {color:#6A8FA8; text-decorat
 .fl-pager-ui a:hover {text-decoration:underline;}
 .fl-pager .fl-pager-ui .fl-pager-links a {border:none;}
 .fl-pager .fl-pager-ui .fl-pager-link {}
-
-.csc-search-keywords {height:16px; border:1px solid #BCBDBD; padding:2px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}
-.csc-search-record-type {color:#6D6E71;}
-
-.recordtype-label {padding-right:8px; padding-top:3px; font-size:12px; color:#6D6E71;}
 
 #top-nav {padding-bottom:0px; clear:both;}
 #tab-menu {padding-bottom:1px; width:auto; height:24px; float:left;}
