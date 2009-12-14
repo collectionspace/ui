@@ -21,278 +21,278 @@
 		<!-- left-side container. Contains bulk of Object Entry forms and fields -->
 		<div class="fl-container-left fl-force-left">
 
-								<div class="fl-container-left csc-acquisition-container">
-									<div class="save-bar">
-										<div class="upper-save"><a href="#" class="savebutton csc-save"><img src="../images/savebutton.png" alt="save button" height="25" width="74" /></a></div>
-										<div class="clear"></div>
+			<div class="fl-container-left csc-acquisition-container">
+				<div class="save-bar">
+					<div class="upper-save"><a href="#" class="savebutton csc-save"><img src="../images/savebutton.png" alt="save button" height="25" width="74" /></a></div>
+					<div class="clear"></div>
+				</div>
+				<div class="acquisition-outer-border">
+
+					<div class="hidden csc-message-container cs-message">
+						<span class="csc-timestamp cs-timestamp">time</span>
+						<span class="csc-message">Save successful!</span>
+					</div>
+	
+
+					<!-- Each section of Object Entry is broken down into information-blocks.
+						  This corresponds to Information groups within Spectrum's Object Entry prodedure. -->
+					<div class="fl-container-flex fl-fix information-group">
+					
+						<div class="info-column fl-force-left">	
+				
+							<!-- Information-block header -->
+							<div class="fl-container-flex header" onclick="ShowHide('#toggle-acquisition-information'); return false;">
+								<span class="header-toggle"><img id="toggle-acquisition-information-img"  src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+								Acqusition Information
+							</div>
+							
+							<!-- Information-block content block -->
+							<div class="fl-container-flex fl-fix content" id="toggle-acquisition-information">
+								<!-- The information-block is further broken down into two columns of equal size: left and right -->
+								
+								<!-- one row column -->
+								<div class="info-column fl-force-left z-fix">
+									<div class="info-column2-40 fl-force-left">
+										<div class="info-pair">
+											<div class="info-label" title="">Acquisition Reference Number</div>
+											<div class="info-value csc-acquisition-reference-number-patternChooserContainer">
+												<input type="text" class="input-numeric-long csc-acquisition-numberPatternChooser-reference-number pattern-chooser-input" />
+											</div>
+										</div>
+									
+										<div class="info-pair-date">
+											<div class="info-label" title="">Accession Date</div>
+											<div class="info-value csc-acquisition-accession-date-container">
+												<table>
+													<tbody>
+														<tr>
+															<td><input type="text" class="input-date csc-acquisition-accession-date csc-calendar-date" name="acquisition-accession-date" /></td>
+															<td><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></a></td>
+														</tr>
+													</tbody>
+												</table>
+												<div class="csc-date-picker" />
+											</div>
+										</div>
+										
+										<div class="info-pair-table">
+											<div class="info-label" title="">Acqusition Authorizer</div>
+											<div class="info-value">
+												<table id="" >
+													<thead>
+														<tr>
+															<td title="">Acqusition Authorizer</td>
+															<td title="">Date</td>
+														</tr>
+													</thead>
+													
+													<tbody>
+														<tr>
+															<td><input type="text" class="input-alpha-table csc-acquisition-authorizer" name="acquisition-authorizer"></td>
+															<td class="field-cal"><input type="text" disabled class="input-date csc-acquisition-authorizer-date disabled" name="acquisition-authorizer-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										
+										<div class="info-pair-addrow">
+											<div class="info-label" title="">Acquisition Date</div>
+											<div class="info-value">
+												<table id="" style="width:auto;">
+													<tbody>
+														<tr>
+															<td class="table-unselected"></td>
+															<td class="field-cal"><input type="text" disabled class="input-date csc-acquisition-date disabled" name="acquisition-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										
+										<div class="info-pair">
+											<div class="info-label" title="">Acquisition Method</div>
+											<div class="info-value"><select class="csc-acquisition-acquisition-method" name="acquisition-acquisition-method" /></div>
+										</div>
+										
+										<div class="info-pair">
+											<div class="info-label" title="">Acquisition Source</div>
+											<div class="info-value"><input type="text" class="input-alpha csc-acquisition-acquisition-source" name="acquisition-acquisition-source"></div>
+										</div>
+										
+										<div class="info-pair">
+											<div class="info-label" title="">Transfer of Title Number</div>
+											<div class="info-value"><input type="text" class="input-alpha csc-acquisition-transfer-of-title-number" name="acquisition-transfer-of-title-number"></div>
+										</div>
+										
 									</div>
-									<div class="acquisition-outer-border">
-
-                                        <div class="hidden csc-message-container cs-message">
-                                            <span class="csc-timestamp cs-timestamp">time</span>
-                                            <span class="csc-message">Save successful!</span>
-                                        </div>
-                        
-
-										<!-- Each section of Object Entry is broken down into information-blocks.
-											  This corresponds to Information groups within Spectrum's Object Entry prodedure. -->
-										<div class="fl-container-flex fl-fix information-group">
-										
-											<div class="info-column fl-force-left">	
 									
-												<!-- Information-block header -->
-												<div class="fl-container-flex header" onclick="ShowHide('#toggle-acquisition-information'); return false;">
-													<span class="header-toggle"><img id="toggle-acquisition-information-img"  src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-													Acqusition Information
-												</div>
-												
-												<!-- Information-block content block -->
-												<div class="fl-container-flex fl-fix content" id="toggle-acquisition-information">
-													<!-- The information-block is further broken down into two columns of equal size: left and right -->
-													
-													<!-- one row column -->
-													<div class="info-column fl-force-left z-fix">
-														<div class="info-column2-40 fl-force-left">
-															<div class="info-pair">
-																<div class="info-label" title="">Acquisition Reference Number</div>
-																<div class="info-value csc-acquisition-reference-number-patternChooserContainer">
-																	<input type="text" class="input-numeric-long csc-acquisition-numberPatternChooser-reference-number pattern-chooser-input" />
-																</div>
-															</div>
-														
-															<div class="info-pair-date">
-																<div class="info-label" title="">Accession Date</div>
-																<div class="info-value csc-acquisition-accession-date-container">
-																	<table>
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td><input type="text" class="input-date csc-acquisition-accession-date csc-calendar-date" name="acquisition-accession-date" /></td>
-                                                                                <td><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></a></td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-																	<div class="csc-date-picker" />
-																</div>
-															</div>
-															
-															<div class="info-pair-table">
-																<div class="info-label" title="">Acqusition Authorizer</div>
-																<div class="info-value">
-																	<table id="" >
-																		<thead>
-																			<tr>
-																				<td title="">Acqusition Authorizer</td>
-																				<td title="">Date</td>
-																			</tr>
-																		</thead>
-																		
-																		<tbody>
-																			<tr>
-																				<td><input type="text" class="input-alpha-table csc-acquisition-authorizer" name="acquisition-authorizer"></td>
-																				<td class="field-cal"><input type="text" disabled class="input-date csc-acquisition-authorizer-date disabled" name="acquisition-authorizer-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
-																			</tr>
-																		</tbody>
-																	</table>
-																</div>
-															</div>
-															
-															<div class="info-pair-addrow">
-																<div class="info-label" title="">Acquisition Date</div>
-																<div class="info-value">
-																	<table id="" style="width:auto;">
-																		<tbody>
-																			<tr>
-																				<td class="table-unselected"></td>
-																				<td class="field-cal"><input type="text" disabled class="input-date csc-acquisition-date disabled" name="acquisition-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
-																			</tr>
-																		</tbody>
-																	</table>
-																</div>
-															</div>
-															
-															<div class="info-pair">
-																<div class="info-label" title="">Acquisition Method</div>
-																<div class="info-value"><select class="csc-acquisition-acquisition-method" name="acquisition-acquisition-method" /></div>
-															</div>
-															
-															<div class="info-pair">
-																<div class="info-label" title="">Acquisition Source</div>
-																<div class="info-value"><input type="text" class="input-alpha csc-acquisition-acquisition-source" name="acquisition-acquisition-source"></div>
-															</div>
-															
-															<div class="info-pair">
-																<div class="info-label" title="">Transfer of Title Number</div>
-																<div class="info-value"><input type="text" class="input-alpha csc-acquisition-transfer-of-title-number" name="acquisition-transfer-of-title-number"></div>
-															</div>
-															
-														</div>
-														
-														<div class="info-column2-60 fl-force-right">
-															<div class="info-pair-table deactivate">
-																<div class="info-label" title="">Purchase Price</div>
-																<div class="info-value">
-																	<table id="" >
-																		<thead>
-																			<td class="label">Purchase Price Type</td>
-																			<td class="label">Currency</td>
-																			<td class="label">Value</td>
-																		</thead>
-																		<tbody>
-																			<tr>
-																				<td class="label"></td>
-																				<td><input type="text" disabled=disabled class="input-money-type csc-acquisition-purchaser-price-denomination" name="acquisition-purchaser-price-denomination" value="US Dollar"></td>
-																				<td><input type="text" disabled=disabled class="input-numeric-medium csc-acquisition-purchaser-price" name="acquisition-purchaser-price" value="$ "></td>
-																			</tr>
-																<!--	 		
-																		***	TEMPORARILY COMMENTED OUT AS THIS WILL BE A REPEATING LIST OF DATA TO BE IMPLEMENTED IN A FUTURE RELEASE ***
-																
-																			<tr>
-																				<td class="label">Object Offer Price</td>
-																				<td><input type="text" class="input-money-type csc-acquisition-object-offer-price-denomination" name="acquisition-object-offer-price-denomination" value="US Dollar"></td>
-																				<td><input type="text" class="input-numeric-medium csc-acquisition-object-offer-price" name="acquisition-object-offer-price" value="$ "></td>
-																			</tr>
-																			<tr>
-																				<td class="label">Object Purchaser Offer Price</td>
-																				<td><input type="text" class="input-money-type csc-acquisition-object-purchaser-offer-price-denomination" name="acquisition-object-purchaser-offer-price-denomination" value="US Dollar"></td>
-																				<td><input type="text" class="input-numeric-medium csc-acquisition-object-purchaser-offer-price" name="acquisition-object-purchaser-offer-price" value="$ "></td>
-																			</tr>
-																			<tr>
-																				<td class="label">Object Purchase Price</td>
-																				<td><input type="text" class="input-money-type csc-acquisition-object-purchaser-price-denomination" name="acquisition-object-purchaser-price-denomination" value="US Dollar"></td>
-																				<td><input type="text" class="input-numeric-medium csc-acquisition-object-purchaser-price" name="acquisition-object-purchaser-price" value="$ "></td>
-																			</tr>
-																			<tr>
-																				<td class="label">Original Object Purchase Price</td>
-																				<td><input type="text" class="input-money-type csc-acquisition-original-object-purchaser-price-denomination" name="acquisition-original-object-purchaser-price-denomination" value="US Dollar"></td>
-																				<td><input type="text" class="input-numeric-medium csc-acquisition-original-object-purchaser-price" name="acquisition-original-object-purchaser-price" value="$ "></td>
-																			</tr>
-																-->
-																		</tbody>
-																	</table>
-																</div>
-															</div>
-															
-															<div class="info-pair">
-																<div class="info-label" title="">Acquisition Reason</div>
-																<div class="info-value"><textarea class="input-textarea csc-acquisition-acquisition-reason" name="acquisition-acquisition-reason" /></div>
-															</div>
-															
-															<div class="info-pair">
-																<div class="info-label" title="">Acquisition Note</div>
-																<div class="info-value"><textarea class="input-textarea csc-acquisition-acquisition-note" name="acquisition-acquisition-note" /></div>
-															</div>
-															
-															<div class="info-pair">
-																<div class="info-label" title="">Acquisition Provisos</div>
-																<div class="info-value"><textarea class="input-textarea csc-acquisition-acquisition-provisos" name="acquisition-acquisition-provisos" /></div>
-															</div>
-															
-														</div>
-													</div>
-													
-													<div class="info-column fl-force-left">
-												
-														<div class="info-pair-table deactivate">
-															<div class="info-label" title="">Acquisition Funding</div>
-															<div class="info-value">
-																<table id="" >
-																	<thead>
-																		<tr>
-																			<td title="" colspan="2">Acquisition Funding</td>
-																			<td title="">Source</td>
-																			<td title="">Provisos</td>
-																		</tr>
-																	</thead>
-																		
-																	<tbody>
-																		<tr>
-																			<td sytle="width:180px;"><input type="text" disabled=disabled class="input-money-type csc-acquisition-acquisition-funding-denomination" name="acquisition-acquisition-funding-denomination" value="US Dollar"></td>
-																			<td><input type="text" disabled=disabled class="input-numeric-medium csc-acquisition-acquisition-funding-value" name="acquisition-acquisition-funding-value" value="$ "></td>
-																			<td><input type="text" disabled=disabled class="input-alpha-table csc-acquisition-acquisition-funding-source" name="acquisition-acquisition-funding-source"></td>
-																			<td><input type="text" disabled=disabled class="input-alpha-table csc-acquisition-acquisition-funding-provisos" name="acquisition-acquisition-funding-provisos"></td>
-																		</tr>
-																	</tbody>
-																</table>
-															</div>
-														</div>
-														
-													</div>
-													<div class="clear"></div>
-												</div>
+									<div class="info-column2-60 fl-force-right">
+										<div class="info-pair-table deactivate">
+											<div class="info-label" title="">Purchase Price</div>
+											<div class="info-value">
+												<table id="" >
+													<thead>
+														<td class="label">Purchase Price Type</td>
+														<td class="label">Currency</td>
+														<td class="label">Value</td>
+													</thead>
+													<tbody>
+														<tr>
+															<td class="label"></td>
+															<td><input type="text" disabled=disabled class="input-money-type csc-acquisition-purchaser-price-denomination" name="acquisition-purchaser-price-denomination" value="US Dollar"></td>
+															<td><input type="text" disabled=disabled class="input-numeric-medium csc-acquisition-purchaser-price" name="acquisition-purchaser-price" value="$ "></td>
+														</tr>
+											<!--	 		
+													***	TEMPORARILY COMMENTED OUT AS THIS WILL BE A REPEATING LIST OF DATA TO BE IMPLEMENTED IN A FUTURE RELEASE ***
+											
+														<tr>
+															<td class="label">Object Offer Price</td>
+															<td><input type="text" class="input-money-type csc-acquisition-object-offer-price-denomination" name="acquisition-object-offer-price-denomination" value="US Dollar"></td>
+															<td><input type="text" class="input-numeric-medium csc-acquisition-object-offer-price" name="acquisition-object-offer-price" value="$ "></td>
+														</tr>
+														<tr>
+															<td class="label">Object Purchaser Offer Price</td>
+															<td><input type="text" class="input-money-type csc-acquisition-object-purchaser-offer-price-denomination" name="acquisition-object-purchaser-offer-price-denomination" value="US Dollar"></td>
+															<td><input type="text" class="input-numeric-medium csc-acquisition-object-purchaser-offer-price" name="acquisition-object-purchaser-offer-price" value="$ "></td>
+														</tr>
+														<tr>
+															<td class="label">Object Purchase Price</td>
+															<td><input type="text" class="input-money-type csc-acquisition-object-purchaser-price-denomination" name="acquisition-object-purchaser-price-denomination" value="US Dollar"></td>
+															<td><input type="text" class="input-numeric-medium csc-acquisition-object-purchaser-price" name="acquisition-object-purchaser-price" value="$ "></td>
+														</tr>
+														<tr>
+															<td class="label">Original Object Purchase Price</td>
+															<td><input type="text" class="input-money-type csc-acquisition-original-object-purchaser-price-denomination" name="acquisition-original-object-purchaser-price-denomination" value="US Dollar"></td>
+															<td><input type="text" class="input-numeric-medium csc-acquisition-original-object-purchaser-price" name="acquisition-original-object-purchaser-price" value="$ "></td>
+														</tr>
+											-->
+													</tbody>
+												</table>
 											</div>
 										</div>
 										
-										<div class="fl-container-flex fl-fix information-group">
+										<div class="info-pair">
+											<div class="info-label" title="">Acquisition Reason</div>
+											<div class="info-value"><textarea class="input-textarea csc-acquisition-acquisition-reason" name="acquisition-acquisition-reason" /></div>
+										</div>
 										
-											<div class="info-column fl-force-left deactivate">	
+										<div class="info-pair">
+											<div class="info-label" title="">Acquisition Note</div>
+											<div class="info-value"><textarea class="input-textarea csc-acquisition-acquisition-note" name="acquisition-acquisition-note" /></div>
+										</div>
+										
+										<div class="info-pair">
+											<div class="info-label" title="">Acquisition Provisos</div>
+											<div class="info-value"><textarea class="input-textarea csc-acquisition-acquisition-provisos" name="acquisition-acquisition-provisos" /></div>
+										</div>
+										
+									</div>
+								</div>
+								
+								<div class="info-column fl-force-left">
+							
+									<div class="info-pair-table deactivate">
+										<div class="info-label" title="">Acquisition Funding</div>
+										<div class="info-value">
+											<table id="" >
+												<thead>
+													<tr>
+														<td title="" colspan="2">Acquisition Funding</td>
+														<td title="">Source</td>
+														<td title="">Provisos</td>
+													</tr>
+												</thead>
+													
+												<tbody>
+													<tr>
+														<td sytle="width:180px;"><input type="text" disabled=disabled class="input-money-type csc-acquisition-acquisition-funding-denomination" name="acquisition-acquisition-funding-denomination" value="US Dollar"></td>
+														<td><input type="text" disabled=disabled class="input-numeric-medium csc-acquisition-acquisition-funding-value" name="acquisition-acquisition-funding-value" value="$ "></td>
+														<td><input type="text" disabled=disabled class="input-alpha-table csc-acquisition-acquisition-funding-source" name="acquisition-acquisition-funding-source"></td>
+														<td><input type="text" disabled=disabled class="input-alpha-table csc-acquisition-acquisition-funding-provisos" name="acquisition-acquisition-funding-provisos"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
 									
-												<!-- Information-block header -->
-												<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-collection-information'); return false;">
-													<span class="header-toggle"><img id="toggle-object-collection-information-img"  src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-													Object Collection Information
-												</div>
-												
-												<!-- Information-block content block -->
-												<div class="fl-container-flex fl-fix content" id="toggle-object-collection-information">
-													<!-- The information-block is further broken down into two columns of equal size: left and right -->
-													
-													<!-- one row column -->
-													<div class="info-column fl-force-left z-fix">
-														<div class="info-column2-50 fl-force-left deactivate">
-															<div class="info-pair-addrow">
-																<div class="info-label" title="">Field Collection Date</div>
-																<div class="info-value">
-																	<table id="" style="width:auto;">
-																		<tbody>
-																			<tr>
-																				<td class="table-unselected"></td>
-																				<td class="field-cal"><input type="text" disabled class="input-date csc-object-collection-field-collection-date disabled" name="csc-object-collection-field-collection-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
-																			</tr>
-																		</tbody>
-																	</table>
-																</div>
-															</div>
-																													
-															<div class="info-pair">
-																<div class="info-label" title="">Field Collection Event Name</div>
-																<div class="info-value">
-																	<input type="text" disabled=disabled class="input-alpha csc-object-collection-field-collection-event-name" />
-																</div>
-															</div>
-														</div>
-													
-													
-														<div class="info-column2-50 fl-force-right deactivate">
-															<div class="info-pair">
-																<div class="info-label" title="">Field Collection Number</div>
-																<div class="info-value">
-																	<input type="text" disabled=disabled class="input-numeric csc-object-collection-field-collection-number" />
-																</div>
-															</div>
-															
-															<div class="info-pair">
-																<div class="info-label" title="">Field Collector</div>
-																<div class="info-value">
-																	<input type="text" disabled=disabled class="input-alpha csc-object-collection-field-collection-collector" />
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="clear"></div>
-												</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="fl-container-flex fl-fix information-group">
+					
+						<div class="info-column fl-force-left deactivate">	
+				
+							<!-- Information-block header -->
+							<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-collection-information'); return false;">
+								<span class="header-toggle"><img id="toggle-object-collection-information-img"  src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+								Object Collection Information
+							</div>
+							
+							<!-- Information-block content block -->
+							<div class="fl-container-flex fl-fix content" id="toggle-object-collection-information">
+								<!-- The information-block is further broken down into two columns of equal size: left and right -->
+								
+								<!-- one row column -->
+								<div class="info-column fl-force-left z-fix">
+									<div class="info-column2-50 fl-force-left deactivate">
+										<div class="info-pair-addrow">
+											<div class="info-label" title="">Field Collection Date</div>
+											<div class="info-value">
+												<table id="" style="width:auto;">
+													<tbody>
+														<tr>
+															<td class="table-unselected"></td>
+															<td class="field-cal"><input type="text" disabled class="input-date csc-object-collection-field-collection-date disabled" name="csc-object-collection-field-collection-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+																								
+										<div class="info-pair">
+											<div class="info-label" title="">Field Collection Event Name</div>
+											<div class="info-value">
+												<input type="text" disabled=disabled class="input-alpha csc-object-collection-field-collection-event-name" />
+											</div>
+										</div>
+									</div>
+								
+								
+									<div class="info-column2-50 fl-force-right deactivate">
+										<div class="info-pair">
+											<div class="info-label" title="">Field Collection Number</div>
+											<div class="info-value">
+												<input type="text" disabled=disabled class="input-numeric csc-object-collection-field-collection-number" />
 											</div>
 										</div>
 										
-										<div class="csc-error-dialog">
-											<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
+										<div class="info-pair">
+											<div class="info-label" title="">Field Collector</div>
+											<div class="info-value">
+												<input type="text" disabled=disabled class="input-alpha csc-object-collection-field-collection-collector" />
+											</div>
 										</div>
-									</div> <!-- end outer border-->
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="csc-error-dialog">
+						<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
+					</div>
+				</div> <!-- end outer border-->
 
-									<!-- Save button container -->
-									<div class="fl-container-flex input-buttons">
-										<a href="#" class="savebutton csc-save-bottom"><img src="../images/savebutton.png" alt="save button" height="25" width="74" /></a>
-										<a href="findedit.html" class="cancelbutton"><img src="../images/cancelbutton.png" alt="cancel button" width="89" height="25" /></a><div class="clear"><!-- --></div></div>	
-								</div> <!-- END left-side container -->
+				<!-- Save button container -->
+				<div class="fl-container-flex input-buttons">
+					<a href="#" class="savebutton csc-save-bottom"><img src="../images/savebutton.png" alt="save button" height="25" width="74" /></a>
+					<a href="findedit.html" class="cancelbutton"><img src="../images/cancelbutton.png" alt="cancel button" width="89" height="25" /></a><div class="clear"><!-- --></div></div>	
+			</div> <!-- END left-side container -->
 
 		</div><!-- END left-side container -->
 		

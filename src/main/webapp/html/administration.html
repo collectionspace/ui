@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-        <title>Administration</title>
+        <title>CollectionSpace - Administration</title>
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-reset.css" />
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-layout.css" />
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
@@ -38,11 +38,7 @@
 		<!-- body content -->
 		<div class="fl-container-1024 fl-centered">
 		
-			<!-- CSpace logo and right-side search box -->
-			<div id="name-header">
-				<!-- this div will be filled in with the contents of the Template -->
-			</div>
-			
+			<!-- CSpace logo and right-side search box -->	
 			<div id="header-menu">
 				<div class="header-menu-logo"><a href="http://www.collectionspace.org/current_release"><img src="../images/header-logo.png" height=34 width=196 alt="CollectionSpace" /></a></div>
 				<div class="header-menu-right">
@@ -61,7 +57,7 @@
 					</div>
 				</div>
 				<div class="clear"></div>
-				<div style="header-menu-button-row">
+				<div class="header-menu-button-row">
 					<div class="header-menu-button mycs inactive"></div>
 					<div class="createnew"><a class="header-menu-button" href="createnew.html"></a></div>
 					<div class="findedit"><a class="header-menu-button" href="findedit.html"></a></div>
@@ -82,10 +78,27 @@
 					<!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
 					<div class="fl-fix fl-container-flex fl-col-mixed2">
 
-						<!-- left-side container. Contains bulk of Object Entry forms and fields -->
-						<div class="fl-container-left fl-force-right">
+						<div class="fl-container-pivot-users fl-force-left" id="">
+							
+							<div class="pivot-search-box">
+								<div class="pivot-search-box-content">
+									<div class="pivot-search-box-header">
+										Users
+									</div>
+								
+									<div class="pivot-search-box-data">
+										
+										<div class="clear"></div>
+									</div>
+								</div>
+								<div class="clear"></div>
+							</div>
+							
+						</div> <!-- END sub-main content -->
+						
+						<div class="fl-container-users fl-force-right">
 				
-							<div class="main-search-page">
+							<div class="main-users-page">
 
 								<div id="search-box">
 									<!-- search form -->
@@ -95,17 +108,108 @@
 									<!-- end search form -->
 								</div>
 
-                                <div class="csc-search-results">
+                                <div class="csc-user-list">
     							
-                                </div>
-								<!-- end search results -->
+									<div class="fl-container-flex fl-fix information-subgroup">
 
+										<div class="fl-container-flex fl-fix content" id="">
+											
+											<div class="info-column2-50 fl-force-left">
+												<div class="fl-container-flex header">
+													Users
+												</div>
+												
+												<div class="overflow-user-list">
+													<table class="user-table">
+														<thead>
+															<tr>
+																<td>First Name</td>
+																<td>Last Name</td>
+																<td>Roles by Department</td>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>Jesse</td>
+																<td>Martinez</td>
+																<td>admin</td>
+															</tr>
+															<tr>
+																<td>Jesse</td>
+																<td>Martinez</td>
+																<td>admin</td>
+															</tr>
+															<tr>
+																<td>Jesse</td>
+																<td>Martinez</td>
+																<td>admin</td>
+															</tr>
+															<tr>
+																<td>Jesse</td>
+																<td>Martinez</td>
+																<td>admin</td>
+															</tr>
+															<tr>
+																<td>Jesse</td>
+																<td>Martinez</td>
+																<td>admin</td>
+															</tr>
+															<tr>
+																<td>Jesse</td>
+																<td>Martinez</td>
+																<td>admin</td>
+															</tr>
+															<tr>
+																<td>Jesse</td>
+																<td>Martinez</td>
+																<td>admin</td>
+															</tr>
+															<tr>
+																<td>Jesse</td>
+																<td>Martinez</td>
+																<td>admin</td>
+															</tr>
+															<tr>
+																<td>Jesse</td>
+																<td>Martinez</td>
+																<td>admin</td>
+															</tr>
+															<tr>
+																<td>Jesse</td>
+																<td>Martinez</td>
+																<td>admin</td>
+															</tr>
+															<tr>
+																<td>Jesse</td>
+																<td>Martinez</td>
+																<td>admin</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+												<div class="clear"></div>
+											</div>
+											
+											<div class="info-column2-50 fl-force-right">
+												<div class="fl-container-flex header">
+													User Details
+												</div>
+												<div class="user-details">
+													<div class="info-pair"><div class="label">User Name</div><div class="user-input">input box</div></div>
+													<div class="clear"></div>
+												</div>
+												<div class="clear"></div>
+											</div>
+											
+										</div>
+									
+									</div> <!-- end information group -->
+								
+                                </div>
+								
 							</div>
 						</div>
 						
-						<div class="fl-container-pivot fl-force-left csc-right-sidebar" id="csc-right-sidebar">
-								<!-- this div will be filled in with the contents of the Template -->
-						</div> <!-- END sub-main content -->
 						<div class="clear"></div>
 					</div>
 				</div>
