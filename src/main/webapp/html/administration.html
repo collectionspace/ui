@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-        <title>Search</title>
+        <title>Administration</title>
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-reset.css" />
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-layout.css" />
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
@@ -64,14 +64,18 @@
 				<div style="header-menu-button-row">
 					<div class="header-menu-button mycs inactive"></div>
 					<div class="createnew"><a class="header-menu-button" href="createnew.html"></a></div>
-					<div class="findedit"><a class="header-menu-button selected" href="findedit.html"></a></div>
+					<div class="findedit"><a class="header-menu-button" href="findedit.html"></a></div>
 					<div class="header-menu-button report inactive"></div>
-					<div class="admin"><a class="header-menu-button no-margin" href="administration.html"></a></div>
+					<div class="admin"><a class="header-menu-button no-margin selected" href="administration.html"></a></div>
 					<div class="clear"></div>
 				</div>
 			</div>
 			
 			<div class="fl-container-1024-inner">
+			
+				<div id="title-bar" class="underline">
+					<div class="header-name no-float csc-object-title">ADMINISTRATION</div>
+				</div>
 			
 				<div id="all-content" class="fl-fix">
 
@@ -79,106 +83,27 @@
 					<div class="fl-fix fl-container-flex fl-col-mixed2">
 
 						<!-- left-side container. Contains bulk of Object Entry forms and fields -->
-						<div class="fl-container-left fl-force-left">
+						<div class="fl-container-left fl-force-right">
 				
 							<div class="main-search-page">
 
 								<div id="search-box">
 									<!-- search form -->
 									<form>
-										<input name="keyword" type="text" class="csc-search-keywords" /><a href="#" class="csc-search-submit">Search</a>
-										<div>
-											<span class="recordtype-label">Record Type</span>
-											<select name="recordtype" class="csc-search-record-type">
-												<option value="objectentry">Object</option>
-												<option value="intake">Intake</option>
-												<option value="acquisition">Acquisition</option>
-											</select>
-										</div>
+										<input name="keyword" type="text" class="csc-search-user" /><a href="#" class="csc-search-submit">Find User</a>
 									</form>
 									<!-- end search form -->
 								</div>
 
                                 <div class="csc-search-results">
-    								<div class="found-records-box">
-    									<div class="found-records-content">
-    										Found <span class="csc-search-results-count">256</span> object records
-    									</div>
-    								
-    								</div>
-    								<!-- search results -->
-    								<div class="fl-pager">
-    									<ul id="pager-top" class="fl-pager-ui flc-pager-top">
-    										<li class="flc-pager-previous">
-    											<a href="#">&lt; previous</a>
-    										</li>
-    										<li>
-    											<ul class="pager-links fl-pager-links flc-pager-links">
-    												<li class="flc-pager-pageLink"><a href="#">1</a></li>
-    												<li class="flc-pager-pageLink-disabled">2</li>
-    												<li class="flc-pager-pageLink"><a href="#">3</a></li>
-    											</ul>
-    										</li>
-    										<li class="flc-pager-next">
-    											<a href="#">next &gt;</a>
-    										</li>
-    										<li class="flc-per-page">
-    											Show <span>
-    												<select class="flc-pager-page-size">
-    													<option value="5">5</option>
-    													<option value="10">10</option>
-    													<option value="20">20</option>
-    													<option value="50">50</option>
-    												</select>
-    											</span>
-    											per page
-    										</li>
-    										<div class="clear"></div>
-    									</ul>
-    									<div class="clear"></div>
-    									<table summary="search results" id="search-results" class="fl-pager-data">
-    										<thead>
-    											<tr rsf:id="header:" class="csc-header">
-    												<th class="flc-pager-sort-header"><a href="#">ID Number</a></th>
-    												<th class="flc-pager-sort-header"><a href="#">Summary</a></th>
-    												<th class="flc-pager-sort-header"><a href="#">Last edited</a></th>
-    											</tr>
-    										</thead>
-    										<tbody class="flc-pager-body-template">
-    											<tr class="csc-row">
-    												<td><a href="x" class="csc-number">ACC2009.1</a></td>
-    												<td class="csc-col">Girl in a box, Cezanne Paul</td>
-    											</tr>
-    										</tbody>
-    									</table>
-    									<ul id="pager-bottom" class="fl-pager-ui flc-pager-bottom">
-    										<li class="flc-pager-previous">
-    											<a href="#">&lt; previous</a>
-    										</li>
-    										<li>
-    											<ul class="pager-links fl-pager-links flc-pager-links">
-    												<li value="1" class= "flc-pager-pageLink"><a href="#">1</a></li>
-    												<li class="flc-pager-pageLink-disabled">2</li>
-    												<li value="2" class="flc-pager-pageLink"><a href="#">3</a></li>
-    											</ul>
-    										</li>
-    										<li class="flc-pager-next">
-    											<a href="#">next &gt;</a>
-    										</li>
-    										<li class="flc-pager-summary">
-    											1-10 of 500 items
-    										</li>
-    										<div class="clear"></div>
-    									</ul>
-    									<div class="clear"></div>
-    								</div>
+    							
                                 </div>
 								<!-- end search results -->
 
 							</div>
 						</div>
 						
-						<div class="fl-container-pivot fl-force-right csc-right-sidebar" id="csc-right-sidebar">
+						<div class="fl-container-pivot fl-force-left csc-right-sidebar" id="csc-right-sidebar">
 								<!-- this div will be filled in with the contents of the Template -->
 						</div> <!-- END sub-main content -->
 						<div class="clear"></div>

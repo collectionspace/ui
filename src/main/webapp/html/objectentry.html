@@ -45,27 +45,37 @@
             </div>
 			
 			<div id="header-menu">
-				<div id="header-menu-content">
-					<div>
-						<div class="header-menu-logo"><a href="http://www.collectionspace.org/current_release"><img src="../images/header-logo.png" height=34 width=196 alt="CollectionSpace" /></a></div>
-						<div class="header-menu-logout"><a href="index.html">Log out</a></div>
-						<div class="clear"></div>
+				<div class="header-menu-logo"><a href="http://www.collectionspace.org/current_release"><img src="../images/header-logo.png" height=34 width=196 alt="CollectionSpace" /></a></div>
+				<div class="header-menu-right">
+					<div class="header-menu-logout"><a href="index.html">Log out</a></div>
+					<div class="clear"></div>
+					<div class="header-menu-search">
+						<form action="search.html">
+							<select name="recordtype" class="csc-global-search-record-type">
+								<option value="objectentry">Object</option>
+								<option value="intake">Intake</option>
+								<option value="acquisition">Acquisition</option>
+							</select>
+							<input name="keywords" type="text" class="csc-global-search-keywords" />
+                            <input type="submit" class="csc-global-search-submit" value="Search" />
+						</form>
 					</div>
-					<div style="header-menu-button-row">
-						<div class="header-menu-button mycs inactive"></div>
-						<div class="createnew"><a class="header-menu-button" href="createnew.html"></a></div>
-						<div class="findedit"><a class="header-menu-button selected" href="findedit.html"></a></div>
-						<div class="header-menu-button report inactive"></div>
-						<div class="header-menu-button no-margin admin inactive"></div>
-						<div class="clear"></div>
-					</div>
+				</div>
+				<div class="clear"></div>
+				<div style="header-menu-button-row">
+					<div class="header-menu-button mycs inactive"></div>
+					<div class="createnew"><a class="header-menu-button" href="createnew.html"></a></div>
+					<div class="findedit"><a class="header-menu-button selected" href="findedit.html"></a></div>
+					<div class="header-menu-button report inactive"></div>
+					<div class="admin"><a class="header-menu-button no-margin" href="administration.html"></a></div>
+					<div class="clear"></div>
 				</div>
 			</div>
 			
 			<div class="fl-container-1024-inner">
-							<!-- this div will be filled in with the contents of the Template -->
-							<div class="csc-object-entry-container" id="csc-object-entry-template">
-							</div>
+				<!-- this div will be filled in with the contents of the Template -->
+				<div class="csc-object-entry-container" id="csc-object-entry-template">
+				</div>
 			
 			</div>
 			

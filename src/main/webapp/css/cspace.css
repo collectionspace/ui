@@ -69,7 +69,8 @@ input[type="text"], input[type="password"], textarea {width:99.75%;}
 	background-color:#336384; color:#fff; text-decoration:none; font-size:12px; line-height:12px;}
 .csc-search-pivot-submit-container {padding:14px 8px 0 0; float:left;}
 .csc-global-search-submit {padding:3px 10px 1px; background-color:#D5D6D7; color:#000;}
-.csc-search-keywords {width:50% !important; margin:0 12px 8px 0; height:16px; border:1px solid #BCBDBD; padding:2px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}
+.csc-search-keywords, .csc-search-user {width:50% !important; margin:0 12px 8px 0; height:16px; border:1px solid #BCBDBD; padding:2px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}
+.csc-search-user {margin-top:8px;}
 .found-records-box {padding:14px 0 10px 6px;}
 .found-records-content {color:#606060; font-size:16px; line-height:16px; font-weight:bold;}
 
@@ -143,7 +144,7 @@ ul.cssmenu li.mycs a:active, ul.cssmenu li.mycs a:hover,
 ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 
 .header-name {text-transform:uppercase;}
-.title-name, .record-number, .header-name, .primary-value, .secondary-value {font-size: 24px; line-height: 24px; float:left; width:400px;}
+.title-name, .record-number, .header-name, .primary-value, .secondary-value {font-size: 22px; line-height: 22px; float:left; width:400px;}
 .title-name {width:620px; overflow:hidden;}
 .object-type {margin-left: 1.7em; padding:1px 8px; font-size:18px; line-height:22px; text-transform:uppercase; background-color:#E7E7E8; float:left;}
 .object-name, .record-number, .title-name {height: 24px;}
