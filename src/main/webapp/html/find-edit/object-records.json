@@ -1,7 +1,7 @@
 {
     "items": [
-        {"accessionNumber": "1984.068.0335b", "csid": "1984.068.0335b"},
-        {"accessionNumber": "1984.068.0338", "csid": "1984.068.0338"},
-        {"accessionNumber": "2005.018.1383", "csid": "2005.018.1383"}
+        {"accessionNumber": "1984.068.0335b", "csid": "1984.068.0335b", "objectTitle": "Catalogs. Wyanoak Publishing Company."},
+        {"accessionNumber": "1984.068.0338", "csid": "1984.068.0338", "objectTitle": "Stamp albums. Famous stars series stamp album."},
+        {"accessionNumber": "2005.018.1383", "csid": "2005.018.1383", "objectTitle": "Souvenir books. Molly O' Play Book."}
     ]
 }

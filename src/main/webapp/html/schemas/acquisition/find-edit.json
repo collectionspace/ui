@@ -3,6 +3,9 @@
         "items": {
             "selector": ".csc-acquisition-record-list-row",
             "repeated": {
+                "acquNote": {
+                    "selector": ".csc-summary",
+                },
                 "acquReferenceNum": {
                     "selector": ".csc-entry-number",
                     "type": "link",

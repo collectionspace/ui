@@ -3,8 +3,9 @@
         "items": {
             "selector": ".csc-object-record-list-row",
             "repeated": {
-//                "objectTitle": {
-//                    "selector": ".csc-object-title",
+                "objectTitle": {
+                    "selector": ".csc-summary",
+                },
                 "accessionNumber": {
                     "selector": ".csc-accession-number",
                     "type": "link",

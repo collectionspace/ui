@@ -3,6 +3,9 @@
         "items": {
             "selector": ".csc-procedural-record-list-row",
             "repeated": {
+                "entryNote": {
+                    "selector": ".csc-summary",
+                },
                 "entryNumber": {
                     "selector": ".csc-entry-number",
                     "type": "link",
