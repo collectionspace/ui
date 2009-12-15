@@ -23,7 +23,13 @@
 	    "acquDate": {
 	        "selector": ".csc-acquisition-date",
 	        "validators": [],
-	        "decorators": []
+	        "decorators": [{
+			    "type": "fluid",
+				"func": "cspace.datePicker",
+				"container": ".csc-acquisition-acquisition-date-container",
+				"options": {
+				}
+			}]
 	    },
 	    "acquAccessionDate": {
 	        "selector": ".csc-acquisition-accession-date",
