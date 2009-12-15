@@ -23,7 +23,11 @@
 	    "entryDate": {
 	        "selector": ".csc-intake-entry-date",
 	        "validators": [],
-	        "decorators": []
+	        "decorators": [{
+			    "type": "fluid",
+				"func": "cspace.datePicker",
+				"container": ".csc-intake-entry-date-container"
+			}]
 	    },
 	    "entryMethods": {
 	        "selector": ".csc-intake-entry-method-row",
@@ -46,7 +50,11 @@
 	    "returnDate": {
 	        "selector": ".csc-intake-return-date",
 	        "validators": [],
-	        "decorators": []
+	        "decorators": [{
+			    "type": "fluid",
+				"func": "cspace.datePicker",
+				"container": ".csc-intake-return-date-container"
+			}]
 	    },
 	    "currentOwner": {
 	        "selector": ".csc-intake-current-owner",
@@ -125,7 +133,11 @@
 		"fieldCollectionDate": {
 	        "selector": ".csc-intake-field-location-date",
 	        "validators": [],
-	        "decorators": []
+	        "decorators": [{
+			    "type": "fluid",
+				"func": "cspace.datePicker",
+				"container": ".csc-intake-field-location-date-container"
+			}]
 	    },
 		"fieldCollectionEventName": {
 	        "selector": ".csc-intake-field-collection-event-name",
@@ -229,7 +241,11 @@
 		"insuranceRenewalDate": {
 	        "selector": ".csc-intake-insurance-renewal-date",
 	        "validators": [],
-	        "decorators": []
+	        "decorators": [{
+			    "type": "fluid",
+				"func": "cspace.datePicker",
+				"container": ".csc-intake-insurance-renewal-date-container"
+			}]
 	    },
 		"insurer": {
 	        "selector": ".csc-intake-insurer",
@@ -256,7 +272,11 @@
 		"locationDate": {
 	        "selector": ".csc-intake-location-date",
 	        "validators": [],
-	        "decorators": []
+	        "decorators": [{
+			    "type": "fluid",
+				"func": "cspace.datePicker",
+				"container": ".csc-intake-location-date-container"
+			}]
 	    },
 		"normalLocation": {
 	        "selector": ".csc-intake-normal-location",
@@ -268,7 +288,11 @@
 		"conditionCheckDate": {
 	        "selector": ".csc-intake-condition-check-date",
 	        "validators": [],
-	        "decorators": []
+	        "decorators": [{
+			    "type": "fluid",
+				"func": "cspace.datePicker",
+				"container": ".csc-intake-condition-check-date-container"
+			}]
 	    },
 		"conditionCheckMethod": {
 	        "selector": ".csc-intake-condition-check-method",

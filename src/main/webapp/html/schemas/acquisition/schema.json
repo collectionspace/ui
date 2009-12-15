@@ -26,9 +26,7 @@
 	        "decorators": [{
 			    "type": "fluid",
 				"func": "cspace.datePicker",
-				"container": ".csc-acquisition-acquisition-date-container",
-				"options": {
-				}
+				"container": ".csc-acquisition-acquisition-date-container"
 			}]
 	    },
 	    "acquAccessionDate": {
@@ -37,9 +35,7 @@
 	        "decorators": [{
 			    "type": "fluid",
 				"func": "cspace.datePicker",
-				"container": ".csc-acquisition-accession-date-container",
-				"options": {
-				}
+				"container": ".csc-acquisition-accession-date-container"
 			}]
 	    },
 	    "acquPriceDesc": {
