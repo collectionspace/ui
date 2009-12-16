@@ -1,0 +1,27 @@
+ {
+    "spec": {
+        "items": {
+            "selector": ".csc-related-object-record-list-row",
+            "repeated": {
+                "accessionNumber": {
+                    "selector": ".csc-related-accession-number",
+                    "type": "link",
+					"href": "objectentry.html?csid=%csid",
+                    "linktext": "%accessionNumber",
+                    "replacements": {
+                        "csid": "csid",
+                        "accessionNumber": "accessionNumber"
+                    },
+                    "validators": [],
+                    "decorators": []
+                },
+                "objectTitle": {
+                    "selector": ".csc-related-title"
+                }
+            }
+        }
+    },
+    "modelToResourceMap": {
+        "*": "/objects/"
+    }
+}

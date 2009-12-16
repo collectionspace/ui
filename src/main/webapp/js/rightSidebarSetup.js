@@ -25,7 +25,7 @@ var cspace = cspace || {};
                             type: "cspace.dataContext.staticResourceMapper",
                             options: {
                             	modelToResourceMap: {
-                                    "*": "right-sidebar/"+csid+"/" + recordType + "-records"
+                                    "*": "related-records/"+csid+"/" + recordType + "-records"
                                 }
                             }
                         }
@@ -36,13 +36,13 @@ var cspace = cspace || {};
     };
 
     cspace.setupRightSidebar = function (csid) {
-        var orOpts = {uiSpecUrl: "./right-sidebar/spec/spec-objects.json"};
+        var orOpts = {uiSpecUrl: "./related-records/spec/spec-objects.json"};
         if (document.location.protocol === "file:") {
             orOpts.dataContext = setupTestDataContext(csid, "object");
         }
         var objRecordList = cspace.recordList(".related-objects", orOpts);
 
-        var prOpts = {uiSpecUrl: "./right-sidebar/spec/spec-procedures.json"};
+        var prOpts = {uiSpecUrl: "./related-records/spec/spec-procedures.json"};
         if (document.location.protocol === "file:") {
             prOpts.dataContext = setupTestDataContext(csid, "procedure");
         }
