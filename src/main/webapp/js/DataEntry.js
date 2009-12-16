@@ -113,6 +113,18 @@ var cspace = cspace || {};
                 }
             }
         });
+        
+        for (var key in that.options.templates) {
+            if (that.options.templates.hasOwnProperty(key)) {
+                var templ = that.options.templates[key];
+                if (templ.hasOwnProperty("setupFunction")) {
+                    var func = templ.setupFunction;
+                    that.events.pageRendered.addListener(function () {
+                        fluid.invokeGlobalFunction(func, [that.model.csid]);
+                    });
+                }
+            }
+        }
 
         that.dataContext.events.onError.addListener(makeDCErrorHandler(that));
     };
@@ -227,7 +239,8 @@ var cspace = cspace || {};
             },
             rightSidebar:  {
                 url: "../html/right-sidebar.html",
-                id: "csc-right-sidebar"
+                id: "csc-right-sidebar",
+                setupFunction: "cspace.setupRightSidebar"
             },
             footer: {
                 url: "../html/footer.html",

@@ -90,6 +90,7 @@ var cspace = cspace || {};
             var tree = cspace.renderer.buildComponentTree(that.spec, that);
             var cutpoints = cspace.renderer.createCutpoints(that.spec);
             fluid.selfRender(that.container, tree, {cutpoints: cutpoints, model: that.model});
+            that.locate("numberOfItems").text("(" + that.model.items.length + ")");
         };
 
         setupRecordList(that);

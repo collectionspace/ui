@@ -14,7 +14,7 @@ var cspace = cspace || {};
 
 (function ($) {
 
-    setupTestDataContext = function (recordType) {
+    setupTestDataContext = function (csid, recordType) {
         return {
             type: "cspace.dataContext",
             options: {
@@ -25,7 +25,7 @@ var cspace = cspace || {};
                             type: "cspace.dataContext.staticResourceMapper",
                             options: {
                             	modelToResourceMap: {
-                                    "*": "right-sidebar/" + recordType + "-records"
+                                    "*": "right-sidebar/"+csid+"/" + recordType + "-records"
                                 }
                             }
                         }
@@ -35,16 +35,16 @@ var cspace = cspace || {};
         };
     };
 
-    cspace.setupRightSidebar = function () {
+    cspace.setupRightSidebar = function (csid) {
         var orOpts = {uiSpecUrl: "./right-sidebar/spec/spec-objects.json"};
         if (document.location.protocol === "file:") {
-            orOpts.dataContext = setupTestDataContext("object");
+            orOpts.dataContext = setupTestDataContext(csid, "object");
         }
         var objRecordList = cspace.recordList(".related-objects", orOpts);
 
         var prOpts = {uiSpecUrl: "./right-sidebar/spec/spec-procedures.json"};
         if (document.location.protocol === "file:") {
-            prOpts.dataContext = setupTestDataContext("procedure");
+            prOpts.dataContext = setupTestDataContext(csid, "procedure");
         }
         var procRecordList = cspace.recordList(".related-procedures", prOpts);
     };

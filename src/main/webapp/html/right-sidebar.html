@@ -20,7 +20,7 @@
 				<div class="pivot-box-content integrated-authorities deactivate">
 					<div class="pivot-box-header" onclick="ShowHide('#toggle-integrated-authorities'); return false;">
 						<span class="pivot-toggle"><img id="toggle-integrated-authorities-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
-						Integrated Authorities (6)
+						Integrated Authorities <span class="csc-num-items"></span>
 					</div>
 					<div id="toggle-integrated-authorities">
 						<div class="pivot-box-label">
@@ -35,34 +35,48 @@
 			</div>
 			
 			<div class="pivot-box">
-				<div class="pivot-box-content related-procedures deactivate">
+				<div class="pivot-box-content related-procedures">
 					<div class="pivot-box-header" onclick="ShowHide('#toggle-related-procedures'); return false;">
 						<span class="pivot-toggle"><img id="toggle-related-procedures-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
-						Related Procedures (1)
+						Related Procedures
+						<span class="csc-num-items"></span>
 					</div>
 					<div id="toggle-related-procedures">
+					<div class="hidden csc-error-message cs-message">This is the error message</div>
 						<div class="pivot-box-label">
-							<div class="pivot-box-label-pair"><div class="pivot-box-label-1">ID</div><div class="pivot-box-label-2">Type</div><div class="pivot-box-label-3">Created On</div></div>
+							<div class="pivot-box-label-pair">
+							    <div class="pivot-box-label-1">ID</div>
+							    <div class="pivot-box-label-2">Summary</div>
+							    <div class="pivot-box-label-3">Type</div>
+							</div>
 							<div class="clear"></div>
 						</div>
-						<div class="pivot-box-data">
-							
+						<div class="pivot-box-data csc-related-procedural-record-list-row">
+							<div class="pivot-box-data-1"><a class="csc-related-procedure-number" href="intake.html">(retrieving record list...)</a></div>
+							<div class="pivot-box-data-2 csc-related-procedure-summary"></div>
+							<div class="pivot-box-data-3 csc-related-procedure-recordtype"></div>
 						</div>
 					</div>
 				</div>
 				
-				<div class="pivot-box-content related-objects deactivate">
+				<div class="pivot-box-content related-objects" >
 					<div class="pivot-box-header" onclick="ShowHide('#toggle-related-objects'); return false;">
 						<span class="pivot-toggle"><img id="toggle-related-objects-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
-						Related Objects (1)
+						Related Objects
+						<span class="csc-num-items"></span>
 					</div>
 					<div id="toggle-related-objects">
+					<div class="hidden csc-error-message cs-message">This is the error message</div>
 						<div class="pivot-box-label">
-							<div class="pivot-box-label-pair"><div class="pivot-box-label-1">Accession</div><div class="pivot-box-label-2">Title</div></div>
+							<div class="pivot-box-label-pair">
+								<div class="pivot-box-label-1">Accession</div>
+								<div class="pivot-box-label-2">Title</div>
+							</div>
 							<div class="clear"></div>
 						</div>
-						<div class="pivot-box-data">
-							
+						<div class="pivot-box-data csc-related-object-record-list-row">
+							<div class="pivot-box-data-1"><a class="csc-related-accession-number" href="objectEntry.html">(retrieving record list...)</a></div>
+							<div class="pivot-box-data-2 csc-related-title"></div>
 						</div>
 					</div>
 				</div>
@@ -70,7 +84,7 @@
 				<div class="pivot-box-content related-collections deactivate">
 					<div class="pivot-box-header" onclick="ShowHide('#toggle-related-collections'); return false;">
 						<span class="pivot-toggle"><img id="toggle-related-collections-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
-						Related Collections (3)
+						Related Collections <span class="csc-num-items"></span>
 					</div>
 					<div id="toggle-related-collections">
 						<div class="pivot-box-label">
@@ -87,7 +101,9 @@
 		<!-- END Right-side container -->
 	
 			<div class="clear"></div>
+    		
 		</div> <!-- END sub-main content -->
+
     </body>
 </html>
         
