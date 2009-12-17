@@ -25,7 +25,7 @@ var cspace = cspace || {};
                             type: "cspace.dataContext.staticResourceMapper",
                             options: {
                             	modelToResourceMap: {
-                                    "*": "find-edit/" + recordType + "-records"
+                                    "*": "test-data/find-edit/" + recordType + "-records"
                                 }
                             }
                         }
