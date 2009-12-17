@@ -9,7 +9,7 @@
                 "accessionNumber": {
                     "selector": ".csc-accession-number",
                     "type": "link",
-					"href": "objectentry.html?csid=%csid",
+					"href": "object.html?csid=%csid",
                     "linktext": "%accessionNumber",
                     "replacements": {
                         "csid": "csid",

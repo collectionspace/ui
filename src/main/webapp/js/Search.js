@@ -14,29 +14,33 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var temporaryTestData = {
-        objectentry: [
-            {csid: "1984.068.0335b", number: "1984.068.0335b", summary: "Catalogs. Wyanoak Publishing Company.", edited: "today"},
-            {csid: "2005.018.1383", number: "2005.018.1383", summary: "Souvenir books. Molly O' Play Book.", edited: "Tuesday"},
-            {csid: "1984.068.0338", number: "1984.068.0338", summary: "Stamp albums. Famous stars series stamp album.", edited: "yesterday"}
-        ],
-        intake: [
-            {csid: "2007.4-a", number: "2007.4-a", summary: "Christoph Grissemann", edited: "today"},
-            {csid: "IN2004.002", number: "IN2004.002", summary: "Jennifer Connelly", edited: "yesterday"},
-            {csid: "IN2009.001", number: "IN2009.001", summary: "", edited: "Tuesday"},
-            {csid: "IN2009.002", number: "IN2009.002", summary: "Duncan Jones", edited: "today"},
-            {csid: "IN2009.003", number: "IN2009.003", summary: "yes, please", edited: "yesterday"}
-        ],
-        acquisition: [
-            {csid: "ACQ2009.2", number: "ACQ2009.2", summary: "Another nice person", edited: "Tuesday"},
-            {csid: "ACQ2009.002.001", number: "ACQ2009.002.001", summary: "BigShopIncorproated", edited: "Tuesday"}
-        ]
+    var defaultSearchUrlBuilder = function (recordType, query) {
+        return "../chain/" + recordType + "/search?query=" + query;
     };
 
-    var getTestData = function (recordType) {
-        return temporaryTestData[recordType];
-    };
-
+//    var temporaryTestData = {
+//        object: [
+//            {csid: "1984.068.0335b", number: "1984.068.0335b", summary: "Catalogs. Wyanoak Publishing Company.", edited: "today"},
+//            {csid: "2005.018.1383", number: "2005.018.1383", summary: "Souvenir books. Molly O' Play Book.", edited: "Tuesday"},
+//            {csid: "1984.068.0338", number: "1984.068.0338", summary: "Stamp albums. Famous stars series stamp album.", edited: "yesterday"}
+//        ],
+//        intake: [
+//            {csid: "2007.4-a", number: "2007.4-a", summary: "Christoph Grissemann", edited: "today"},
+//            {csid: "IN2004.002", number: "IN2004.002", summary: "Jennifer Connelly", edited: "yesterday"},
+//            {csid: "IN2009.001", number: "IN2009.001", summary: "", edited: "Tuesday"},
+//            {csid: "IN2009.002", number: "IN2009.002", summary: "Duncan Jones", edited: "today"},
+//            {csid: "IN2009.003", number: "IN2009.003", summary: "yes, please", edited: "yesterday"}
+//        ],
+//        acquisition: [
+//            {csid: "ACQ2009.2", number: "ACQ2009.2", summary: "Another nice person", edited: "Tuesday"},
+//            {csid: "ACQ2009.002.001", number: "ACQ2009.002.001", summary: "BigShopIncorproated", edited: "Tuesday"}
+//        ]
+//    };
+//
+//    var getTestData = function (recordType) {
+//        return temporaryTestData[recordType];
+//    };
+//
     var colDefsGenerated = function (columnList, recordType) {
         return fluid.transform(columnList, function (object, index) {
             var key = "col:";
@@ -104,22 +108,23 @@ var cspace = cspace || {};
 
     var submitSearchRequest = function (that) {
         return function () {
-// Temporarily bypass the ajax call, to make cross-browser testing easier
             var recordType = that.locate("recordType").val();
-            that.model = getTestData(recordType);
-            that.events.modelChanged.fire();
-//            jQuery.ajax({
-//                url: "http://localhost:8080/chain/search",
-//                type: "GET",
-//                dataType: "json",
-//                success: function (data, textStatus) {
-//                    that.model = data;
-//                    that.events.modelChanged.fire();
-//                },
-//                error: function (xhr, textStatus, errorThrown) {
-//                    that.events.onError.fire("fetch", modelPath, textStatus);
-//                }
-//            });
+            var query = that.locate("keywords").val();
+// Temporarily bypass the ajax call, to make cross-browser testing easier
+//            that.model = getTestData(recordType);
+//            that.events.modelChanged.fire();
+            jQuery.ajax({
+                url: that.options.searchUrlBuilder(recordType, query),
+                type: "GET",
+                dataType: "json",
+                success: function (data, textStatus) {
+                    that.model = data;
+                    that.events.modelChanged.fire();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    that.events.onError.fire("search", textStatus);
+                }
+            });
         };
     };
 
@@ -128,6 +133,10 @@ var cspace = cspace || {};
 
         that.events.modelChanged.addListener(function () {
             displaySearchResults(that, that.locate("recordType").val());
+        });
+        
+        that.events.onError.addListener(function (action, status) {
+            console.log("Error on " + action + ": " + status);
         });
     };
 
@@ -168,6 +177,8 @@ var cspace = cspace || {};
             onError: null
         },
         
+        searchUrlBuilder: defaultSearchUrlBuilder,
+
         resultsPager: {
             type: "fluid.pager"
         }
