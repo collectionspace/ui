@@ -1,4 +1,4 @@
 [
-    {"csid": "ACQ2009.2", number: "ACQ2009.2", "summary": "Another nice person", "recordtype": "intake", "lastedited": "Tuesday"},
-    {"csid": "ACQ2009.002.001", number: "ACQ2009.002.001", "summary": "BigShopIncorproated", "recordtype": "intake", "lastedited": "Tuesday"}
+    {"csid": "ACQ2009.2", number: "ACQ2009.2", "summary": "Another nice person", "recordtype": "acquisition"},
+    {"csid": "ACQ2009.002.001", number: "ACQ2009.002.001", "summary": "BigShopIncorproated", "recordtype": "acquisition"}
 ]
