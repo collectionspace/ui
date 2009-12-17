@@ -111,6 +111,7 @@ var cspace = cspace || {};
         });
         
         that.events.onError.addListener(function (action, status) {
+            that.locate("resultsContainer").hide();
             that.locate("errorMessage").show();
         });
     };
