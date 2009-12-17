@@ -3,17 +3,17 @@
         "items": {
             "selector": ".csc-acquisition-record-list-row",
             "repeated": {
-                "acquNote": {
+                "summary": {
                     "selector": ".csc-summary",
                 },
-                "acquReferenceNum": {
+                "number": {
                     "selector": ".csc-entry-number",
                     "type": "link",
 					"href": "acquisition.html?csid=%csid",
-                    "linktext": "%acquReferenceNum",
+                    "linktext": "%number",
                     "replacements": {
                         "csid": "csid",
-                        "acquReferenceNum": "acquReferenceNum"
+                        "number": "number"
                     },
                     "validators": [],
                     "decorators": []

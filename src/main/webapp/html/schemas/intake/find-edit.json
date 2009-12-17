@@ -3,15 +3,17 @@
         "items": {
             "selector": ".csc-procedural-record-list-row",
             "repeated": {
-                "entryNote": {
+                "summary": {
                     "selector": ".csc-summary",
                 },
-                "entryNumber": {
+                "number": {
                     "selector": ".csc-entry-number",
                     "type": "link",
 					"href": "intake.html?csid=%csid",
+                    "linktext": "%number",
                     "replacements": {
-                        "csid": "csid"
+                        "csid": "csid",
+                        "number": "number"
                     },
                     "validators": [],
                     "decorators": []

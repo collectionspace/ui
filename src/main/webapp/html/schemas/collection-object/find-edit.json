@@ -3,17 +3,17 @@
         "items": {
             "selector": ".csc-object-record-list-row",
             "repeated": {
-                "objectTitle": {
+                "summary": {
                     "selector": ".csc-summary",
                 },
-                "accessionNumber": {
+                "number": {
                     "selector": ".csc-accession-number",
                     "type": "link",
 					"href": "object.html?csid=%csid",
-                    "linktext": "%accessionNumber",
+                    "linktext": "%number",
                     "replacements": {
                         "csid": "csid",
-                        "accessionNumber": "accessionNumber"
+                        "number": "number"
                     },
                     "validators": [],
                     "decorators": []

@@ -1,9 +1,9 @@
 {
     "items": [
-        {"entryNumber": "2007.4-a", "csid": "2007.4-a", "entryNote": ""},
-        {"entryNumber": "IN2004.002", "csid": "IN2004.002", "entryNote": ""},
-        {"entryNumber": "IN2009.001", "csid": "IN2009.001", "entryNote": ""},
-        {"entryNumber": "IN2009.002", "csid": "IN2009.002", "entryNote": ""},
-        {"entryNumber": "IN2009.003", "csid": "IN2009.003", "entryNote": "please enter this without using vowels"}
+        {"number": "2007.4-a", "csid": "2007.4-a", "summary": ""},
+        {"number": "IN2004.002", "csid": "IN2004.002", "summary": ""},
+        {"number": "IN2009.001", "csid": "IN2009.001", "summary": ""},
+        {"number": "IN2009.002", "csid": "IN2009.002", "summary": ""},
+        {"number": "IN2009.003", "csid": "IN2009.003", "summary": "please enter this without using vowels"}
     ]
 }
