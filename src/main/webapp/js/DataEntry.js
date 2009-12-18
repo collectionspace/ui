@@ -58,7 +58,7 @@ var cspace = cspace || {};
                 // This is only temporary until http://issues.collectionspace.org/browse/CSPACE-263
                 // is resolved
                 that.options.csid = undefined;
-                that.applier.requestChange("csid", undefined);
+                that.applier.requestChange("fields.csid", undefined);
             }
         };
     };
@@ -91,10 +91,10 @@ var cspace = cspace || {};
     var bindEventHandlers = function (that) {
 
         that.dataContext.events.afterCreate.addListener(function (modelPath, data) {
-            that.applier.requestChange(that.options.idField, data.csid);
+            that.applier.requestChange(that.options.idField, data.fields.csid);
             that.events.afterCreateObjectDataSuccess.fire(data, that.options.strings.createSuccessfulMessage);
 	        displayTimestampedMessage(that, that.options.strings.createSuccessfulMessage, Date());
-            that.options.csid = data.csid;
+            that.options.csid = data.fields.csid;
         });
 
         that.dataContext.events.afterUpdate.addListener(function (modelPath, data) {
@@ -121,7 +121,7 @@ var cspace = cspace || {};
                 if (templ.hasOwnProperty("setupFunction")) {
                     var func = templ.setupFunction;
                     that.events.pageRendered.addListener(function () {
-                        fluid.invokeGlobalFunction(func, [that.model.csid]);
+                        fluid.invokeGlobalFunction(func, [that.model.fields.csid]);
                     });
                 }
             }
@@ -146,7 +146,7 @@ var cspace = cspace || {};
             fluid.model.copyModel(that.model, buildEmptyModelFromSpec(that.spec));
             var queryParams = {};
             if (that.options.csid) {
-                queryParams[that.options.idField] = that.options.csid;
+                fluid.model.setBeanValue(queryParams, that.options.idField, that.options.csid);
                 that.dataContext.fetch("*", queryParams);
             } else {
                 setupModel(that);
@@ -164,7 +164,10 @@ var cspace = cspace || {};
      */
     cspace.dataEntry = function (container, options) {
         var that = fluid.initView("cspace.dataEntry", container, options);
-        that.model = {};
+        that.model = {
+            fields: {},
+            relations: {}
+        };
         that.spec = {};
         that.displayOnlyFields = {};
 
@@ -249,7 +252,7 @@ var cspace = cspace || {};
             }
         },
         csid: null,
-        idField: "csid",
+        idField: "fields.csid",
         alternateFields: [],
         
         // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,

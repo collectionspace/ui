@@ -1,15 +1,17 @@
 {
-    "returnDate": "",
-    "depositor": "",
-    "responsibleEntity": "Anastasia Cheetham",
-    "packingNote": "",
-    "entryReason": "enquiry",
-    "entryNumber": "IN2009.001",
-    "entryMethods": [{"entryMethod":"found-on-doorstep"}],
-    "entryNote": "",
-    "numObjects": "1",
-    "description": "Small metal flower, fashioned from scraps",
-    "entryDate": "",
-    "donor": "Wikus Van De Merwe",
-    "csid": "1251814260949"
+    "fields": {
+        "returnDate": "",
+        "depositor": "",
+        "responsibleEntity": "Anastasia Cheetham",
+        "packingNote": "",
+        "entryReason": "enquiry",
+        "entryNumber": "IN2009.001",
+        "entryMethods": [{"entryMethod":"found-on-doorstep"}],
+        "entryNote": "",
+        "numObjects": "1",
+        "description": "Small metal flower, fashioned from scraps",
+        "entryDate": "",
+        "donor": "Wikus Van De Merwe",
+        "csid": "1251814260949"
+    }
 }

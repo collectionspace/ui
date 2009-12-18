@@ -1,6 +1,6 @@
 {
 	spec: {
-	    "entryNumber": {
+	    "fields.entryNumber": {
 	        "selector": ".csc-intake-entry-number",
 	        "displayOnlySelectors": [".csc-titleBar-intake-entry-number"],
 	        "validators": [],
@@ -20,7 +20,7 @@
 				}
             }]
 	    },
-	    "entryDate": {
+	    "fields.entryDate": {
 	        "selector": ".csc-intake-entry-date",
 	        "validators": [],
 	        "decorators": [{
@@ -29,7 +29,7 @@
 				"container": ".csc-intake-entry-date-container"
 			}]
 	    },
-	    "entryMethods": {
+	    "fields.entryMethods": {
 	        "selector": ".csc-intake-entry-method-row",
 			"repeated": {
 			    "entryMethod": {
@@ -40,14 +40,14 @@
 				}
 			}
 	    },
-	    "entryReason": {
+	    "fields.entryReason": {
 	        "selector": ".csc-intake-entry-reason",
 	        "options": ["enquiry", "commission", "loan"],
 	        "options-text": ["Enquiry", "Commission", "Loan"],
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "returnDate": {
+	    "fields.returnDate": {
 	        "selector": ".csc-intake-return-date",
 	        "validators": [],
 	        "decorators": [{
@@ -56,81 +56,81 @@
 				"container": ".csc-intake-return-date-container"
 			}]
 	    },
-	    "currentOwner": {
+	    "fields.currentOwner": {
 	        "selector": ".csc-intake-current-owner",
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "depositor": {
+	    "fields.depositor": {
 	        "selector": ".csc-intake-depositor",
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "depositorRequirements": {
+	    "fields.depositorRequirements": {
 	        "selector": ".csc-intake-depositor-requirements",
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "entryNote": {
+	    "fields.entryNote": {
 	        "selector": ".csc-intake-entry-note",
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "packingNote": {
+	    "fields.packingNote": {
 	        "selector": ".csc-intake-packing-note",
 	        "validators": [],
 	        "decorators": []
 	    },
 		
 		
-		"associationDate": {
+		"fields.associationDate": {
 	        "selector": ".csc-intake-date-association",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"earliestDate": {
+		"fields.earliestDate": {
 	        "selector": ".csc-intake-date-earliest-single",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"earliestDateCertainty": {
+		"fields.earliestDateCertainty": {
 	        "selector": ".csc-intake-date-earliest-single-certainty",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"earliestDateQualifier": {
+		"fields.earliestDateQualifier": {
 	        "selector": ".csc-intake-date-earliest-single-qualifier",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"latestDate": {
+		"fields.latestDate": {
 	        "selector": ".csc-intake-date-latest",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"latestDateCertainty": {
+		"fields.latestDateCertainty": {
 	        "selector": ".csc-intake-date-latest-certainty",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"latestDateQualifier": {
+		"fields.latestDateQualifier": {
 	        "selector": ".csc-intake-date-latest-qualifier",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"datePeriod": {
+		"fields.datePeriod": {
 	        "selector": ".csc-intake-date-period",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"dateText": {
+		"fields.dateText": {
 	        "selector": ".csc-intake-date-text",
 	        "validators": [],
 	        "decorators": []
 	    },
 		
 		
-		"fieldCollectionDate": {
+		"fields.fieldCollectionDate": {
 	        "selector": ".csc-intake-field-location-date",
 	        "validators": [],
 	        "decorators": [{
@@ -139,106 +139,106 @@
 				"container": ".csc-intake-field-location-date-container"
 			}]
 	    },
-		"fieldCollectionEventName": {
+		"fields.fieldCollectionEventName": {
 	        "selector": ".csc-intake-field-collection-event-name",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"fieldCollectionEventRefNumber": {
+		"fields.fieldCollectionEventRefNumber": {
 	        "selector": ".csc-intake-field-collection-event-ref-number",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"fieldCollectionMethod": {
+		"fields.fieldCollectionMethod": {
 	        "selector": ".csc-intake-field-collection-method",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"fieldCollectionNote": {
+		"fields.fieldCollectionNote": {
 	        "selector": ".csc-intake-field-collection-number",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"fieldCollectionNumber": {
+		"fields.fieldCollectionNumber": {
 	        "selector": ".csc-intake-field-collection-note",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"fieldCollectionPlace": {
+		"fields.fieldCollectionPlace": {
 	        "selector": ".csc-intake-field-collection-place",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"fieldCollectionSource": {
+		"fields.fieldCollectionSource": {
 	        "selector": ".csc-intake-field-collection-source",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"fieldCollector": {
+		"fields.fieldCollector": {
 	        "selector": ".csc-intake-field-collector",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"geologicalComplexName": {
+		"fields.geologicalComplexName": {
 	        "selector": ".csc-intake-geological-complex-name",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"habitat": {
+		"fields.habitat": {
 	        "selector": ".csc-intake-habitat",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"habitatNote": {
+		"fields.habitatNote": {
 	        "selector": ".csc-intake-habitat-note",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"stratigraphicUnitName": {
+		"fields.stratigraphicUnitName": {
 	        "selector": ".csc-intake-strat-name",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"stratigraphicUnitType": {
+		"fields.stratigraphicUnitType": {
 	        "selector": ".csc-intake-strat-type",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"stratigraphicUnitNote": {
+		"fields.stratigraphicUnitNote": {
 	        "selector": ".csc-intake-strat-note",
 	        "validators": [],
 	        "decorators": []
 	    },
 		
 		
-		"ValuationReferenceNumber": {
+		"fields.ValuationReferenceNumber": {
 	        "selector": ".csc-intake-valuation-reference-number",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"Valuer": {
+		"fields.Valuer": {
 	        "selector": ".csc-intake-valuer",
 	        "validators": [],
 	        "decorators": []
 	    },
 		
 		
-		"insuranceNote": {
+		"fields.insuranceNote": {
 	        "selector": ".csc-intake-insurance-note",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"insurancePolicyNumber": {
+		"fields.insurancePolicyNumber": {
 	        "selector": ".csc-intake-insurance-policy-number",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"InsuranceReferenceNumber": {
+		"fields.InsuranceReferenceNumber": {
 	        "selector": ".csc-intake-insurance-reference-number",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"insuranceRenewalDate": {
+		"fields.insuranceRenewalDate": {
 	        "selector": ".csc-intake-insurance-renewal-date",
 	        "validators": [],
 	        "decorators": [{
@@ -247,29 +247,29 @@
 				"container": ".csc-intake-insurance-renewal-date-container"
 			}]
 	    },
-		"insurer": {
+		"fields.insurer": {
 	        "selector": ".csc-intake-insurer",
 	        "validators": [],
 	        "decorators": []
 	    },
 		
 		
-		"currentLocation": {
+		"fields.currentLocation": {
 	        "selector": ".csc-intake-current-location",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"currentLocationFitness": {
+		"fields.currentLocationFitness": {
 	        "selector": ".csc-intake-current-location-fitness",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"currentLocationNote": {
+		"fields.currentLocationNote": {
 	        "selector": ".csc-intake-current-location-note",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"locationDate": {
+		"fields.locationDate": {
 	        "selector": ".csc-intake-location-date",
 	        "validators": [],
 	        "decorators": [{
@@ -278,14 +278,14 @@
 				"container": ".csc-intake-location-date-container"
 			}]
 	    },
-		"normalLocation": {
+		"fields.normalLocation": {
 	        "selector": ".csc-intake-normal-location",
 	        "validators": [],
 	        "decorators": []
 	    },
 		
 		
-		"conditionCheckDate": {
+		"fields.conditionCheckDate": {
 	        "selector": ".csc-intake-condition-check-date",
 	        "validators": [],
 	        "decorators": [{
@@ -294,36 +294,38 @@
 				"container": ".csc-intake-condition-check-date-container"
 			}]
 	    },
-		"conditionCheckMethod": {
+		"fields.conditionCheckMethod": {
 	        "selector": ".csc-intake-condition-check-method",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"conditionCheckNote": {
+		"fields.conditionCheckNote": {
 	        "selector": ".csc-intake-condition-check-note",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"conditionCheckReason": {
+		"fields.conditionCheckReason": {
 	        "selector": ".csc-intake-condition-check-reason",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"conditionCheckReferenceNumber": {
+		"fields.conditionCheckReferenceNumber": {
 	        "selector": ".csc-intake-condition-check-reference-number",
 	        "validators": [],
 	        "decorators": []
 	    },
-		"conditionCheckAssesor": {
+		"fields.conditionCheckAssesor": {
 	        "selector": ".csc-intake-condition-check-assessor",
 	        "validators": [],
 	        "decorators": []
 	    }
 	},
 	modelToResourceMap: {
-        "*": "/intake/%intakeRecordId"
+        "*": "/intake/%intakeRecordId",
+        "fields": "/intake/%intakeRecordId",
+        "relations": "/intake/%intakeRecordId"
     },
     replacements: {
-        "intakeRecordId": "csid"
+        "intakeRecordId": "fields.csid"
     }
 }

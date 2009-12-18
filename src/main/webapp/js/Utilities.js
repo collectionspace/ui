@@ -40,10 +40,12 @@ var cspace = cspace || {};
                             options: {
                             	modelToResourceMap: {
                                     "*": "data/"+recordType+"/%recordId",
+                                    "fields": "data/"+recordType+"/%recordId",
+                                    "relations": "data/"+recordType+"/%recordId",
                                     "spec": "schemas/"+recordType+"/schema"
                                 },
                                 replacements: {
-                                    "recordId": "csid"
+                                    "recordId": "fields.csid"
                                 }
                             }
                         }
@@ -56,7 +58,7 @@ var cspace = cspace || {};
     // This is a temporary function, in place only until the ID service is accessible
     // through the APP layer.
     cspace.util.newID = function (model, idField, alternateFields) {
-        var id = model[idField];
+        var id = fluid.model.getBeanValue(model, idField);
         
         if (!id) {
 			 if (alternateFields) {

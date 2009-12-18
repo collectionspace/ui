@@ -1,1 +1,21 @@
-{"entryMethods":[{"entryMethod":"in-person"}],"returnDate":"","depositor":"Christoph Grissemann","responsibleEntity":"Jorg Kalt","packingNote":"Herring are in a glass tray, with a saran wrap cover","entryNumber":"Not supported yet","entryNote":"","entryReason":"none","numObjects":"37","description":"Pickled herring from \"Immer nie am Meer\"","entryDate":"","donor":"Antonin Svoboda","csid":"2007.4-a"}
+{
+    "fields": {
+        "entryMethods": [
+            {
+                "entryMethod": "in-person"
+            }
+        ],
+        "returnDate": "",
+        "depositor": "Christoph Grissemann",
+        "responsibleEntity": "Jorg Kalt",
+        "packingNote": "Herring are in a glass tray, with a saran wrap cover",
+        "entryNumber": "Not supported yet",
+        "entryNote": "",
+        "entryReason": "none",
+        "numObjects": "37",
+        "description": "Pickled herring from \"Immer nie am Meer\"",
+        "entryDate": "",
+        "donor": "Antonin Svoboda",
+        "csid": "2007.4-a"
+    }
+}

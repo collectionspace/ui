@@ -1,6 +1,6 @@
 {
 	"spec": {
-	    "acquReferenceNum": {
+	    "fields.acquReferenceNum": {
 	        "selector": ".csc-acquisition-numberPatternChooser-reference-number",
 	        "displayOnlySelectors": [".csc-titleBar-acquisition-reference-number"],
 	        "validators": [],
@@ -20,7 +20,7 @@
 				}
             }]
 	    },
-	    "acquDate": {
+	    "fields.acquDate": {
 	        "selector": ".csc-acquisition-date",
 	        "validators": [],
 	        "decorators": [{
@@ -29,7 +29,7 @@
 				"container": ".csc-acquisition-acquisition-date-container"
 			}]
 	    },
-	    "acquAccessionDate": {
+	    "fields.acquAccessionDate": {
 	        "selector": ".csc-acquisition-accession-date",
 	        "validators": [],
 	        "decorators": [{
@@ -38,72 +38,72 @@
 				"container": ".csc-acquisition-accession-date-container"
 			}]
 	    },
-	    "acquPriceDesc": {
+	    "fields.acquPriceDesc": {
 	        "selector": ".csc-acquisition-purchaser-price-description",
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "acquPriceDenom": {
+	    "fields.acquPriceDenom": {
 	        "selector": ".csc-acquisition-purchaser-price-denomination",
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "acquPrice": {
+	    "fields.acquPrice": {
 	        "selector": ".csc-acquisition-purchaser-price",
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "acquFundingDenom": {
+	    "fields.acquFundingDenom": {
 	        "selector": ".csc-acquisition-acquisition-funding-denomination",
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "acquFundingValue": {
+	    "fields.acquFundingValue": {
 	        "selector": ".csc-acquisition-acquisition-funding-value",
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "acquFundingSource": {
+	    "fields.acquFundingSource": {
 	        "selector": ".csc-acquisition-acquisition-funding-source",
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "acquFundingProviso": {
+	    "fields.acquFundingProviso": {
 	        "selector": ".csc-acquisition-acquisition-funding-provisos",
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "acquMethod": {
+	    "fields.acquMethod": {
 	        "selector": ".csc-acquisition-acquisition-method",
 	        "options": ["gift", "purchase", "exchange", "transfer", "Treasure"],
 	        "options-text": ["Gift", "Purchase", "Exchange", "Transfer", "Treasure"]
 	    },
-	    "acquAuthorize": {
+	    "fields.acquAuthorize": {
 	        "selector": ".csc-acquisition-authorizer",
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "acquSource": {
+	    "fields.acquSource": {
 	        "selector": ".csc-acquisition-acquisition-source",
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "acquTitleNum": {
+	    "fields.acquTitleNum": {
 	        "selector": ".csc-acquisition-transfer-of-title-number",
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "acquReason": {
+	    "fields.acquReason": {
 	        "selector": ".csc-acquisition-acquisition-reason",
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "acquNote": {
+	    "fields.acquNote": {
 	        "selector": ".csc-acquisition-acquisition-note",
 	        "validators": [],
 	        "decorators": []
 	    },
-	    "acquProviso": {
+	    "fields.acquProviso": {
 	        "selector": ".csc-acquisition-acquisition-provisos",
 	        "validators": [],
 	        "decorators": []
@@ -111,9 +111,11 @@
 
 	},
 	"modelToResourceMap": {
-        "*": "/acquisition/%acquisitionRecordId"
+        "*": "/acquisition/%acquisitionRecordId",
+        "fields": "/acquisition/%acquisitionRecordId",
+        "relations": "/acquisition/%acquisitionRecordId"
     },
     "replacements": {
-        "acquisitionRecordId": "csid"
+        "acquisitionRecordId": "fields.csid"
     }
 }

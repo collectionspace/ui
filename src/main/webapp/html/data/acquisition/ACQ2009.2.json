@@ -1,18 +1,20 @@
 {
-    "acquReferenceNum": "ACQ2009.2",
-	"acquDate": "",
-	"acquAccessionDate": "",
-	"acquPriceDesc": "",
-	"acquPriceDenom": "UK pound",
-	"acquPrice": "10000",
-	"acquFundingDenom": "UK Pound",
-	"acquFundingValue": "10000",
-	"acquFundingSource": "Some nice person",
-	"acquFundingProviso": "The museum displays it",
-	"acquMethod": "Treasure",
-	"acquSource": "Another nice person",
-	"acquTitleNum": "1-2-3-4",
-	"acquReason": "The museum likes it",
-	"acquNote": "Some info about this acquisition",
-	"acquProviso": "A curator must say hello to it every day"
+    "fields": {
+        "acquReferenceNum": "ACQ2009.2",
+    	"acquDate": "",
+    	"acquAccessionDate": "",
+    	"acquPriceDesc": "",
+    	"acquPriceDenom": "UK pound",
+    	"acquPrice": "10000",
+    	"acquFundingDenom": "UK Pound",
+    	"acquFundingValue": "10000",
+    	"acquFundingSource": "Some nice person",
+    	"acquFundingProviso": "The museum displays it",
+    	"acquMethod": "Treasure",
+    	"acquSource": "Another nice person",
+    	"acquTitleNum": "1-2-3-4",
+    	"acquReason": "The museum likes it",
+    	"acquNote": "Some info about this acquisition",
+    	"acquProviso": "A curator must say hello to it every day"
+    }
 }

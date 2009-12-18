@@ -1,18 +1,20 @@
 {
-    "returnDate": "",
-    "depositor": "Duncan Jones",
-    "responsibleEntity": "Nathan Parker",
-    "packingNote": "",
-    "entryReason": "",
-    "entryNumber": "IN2009.002",
-    "entryMethods": [
-        {"entryMethod": "found-on-doorstep"},
-        {"entryMethod": "post"}
-    ],
-    "entryNote": "",
-    "numObjects": "1",
-    "description": "GERTY",
-    "entryDate": "",
-    "donor": "Sam Rockwell",
-    "csid": "1251814350763"
+    "fields": {
+        "returnDate": "",
+        "depositor": "Duncan Jones",
+        "responsibleEntity": "Nathan Parker",
+        "packingNote": "",
+        "entryReason": "",
+        "entryNumber": "IN2009.002",
+        "entryMethods": [
+            {"entryMethod": "found-on-doorstep"},
+            {"entryMethod": "post"}
+        ],
+        "entryNote": "",
+        "numObjects": "1",
+        "description": "GERTY",
+        "entryDate": "",
+        "donor": "Sam Rockwell",
+        "csid": "1251814350763"
+    }
 }
