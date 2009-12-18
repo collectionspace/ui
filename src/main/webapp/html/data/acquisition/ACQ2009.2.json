@@ -16,5 +16,26 @@
     	"acquReason": "The museum likes it",
     	"acquNote": "Some info about this acquisition",
     	"acquProviso": "A curator must say hello to it every day"
-    }
+    },
+    "relations": [
+        {
+            "csid": "IN2004.002",
+            "number": "IN2004.002",
+            "summary": "something",
+            "recordtype": "intake",
+            "relationshiptype": "affects more"
+        },{
+            "csid": "1984.068.0335b",
+            "number": "1984.068.0335b",
+            "summary": "some other thing",
+            "recordtype": "object",
+            "relationshiptype": "also affects"
+        },{
+            "csid": "2007.4-a",
+            "number": "2007.4-a",
+            "summary": "yet other thing",
+            "recordtype": "intake",
+            "relationshiptype": "also affects somewhat"
+        }
+    ]
 }

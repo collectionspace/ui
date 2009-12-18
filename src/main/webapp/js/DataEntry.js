@@ -30,6 +30,21 @@ var cspace = cspace || {};
         });
     };
 
+    var fetchRelatedRecordsUISpec = function (that, callback) {
+        jQuery.ajax({
+            // TODO: Figure out where the UI spec will come from!
+            url: "./related-records/spec/spec.json",
+            type: "GET",
+            dataType: "json",
+            success: callback,
+            error: function (xhr, textStatus, errorThrown) {
+                that.showSpecErrorMessage(that.options.strings.specFetchError + textStatus + that.options.strings.errorRecoverySuggestion);
+                that.locate("messageContainer").hide();
+                that.events.onError.fire("fetch related records UISpec");
+            }
+        });
+    };
+
     displayTimestampedMessage = function (that, msg, time) {
         that.locate("feedbackMessage").text(msg);
         that.locate("timestamp").text(time);
@@ -42,7 +57,6 @@ var cspace = cspace || {};
         for (var key in spec) {
             if (spec.hasOwnProperty(key)) {
                 fluid.model.setBeanValue(model, key, (spec[key].hasOwnProperty("repeated") ? [""] : ""));
-//                model[key] = (spec[key].hasOwnProperty("repeated") ? [""] : "");
             }
         }
         return model;
@@ -155,6 +169,16 @@ var cspace = cspace || {};
         };
     };
     
+    var renderRelatedRecords = function (that) {
+        return function (spec, textStatus) {
+            
+        };
+    };
+
+    var setupRelatedRecords = function (that){
+        fetchRelatedRecordsUISpec(that, renderRelatedRecords(that));
+    };
+
     var setupDataEntry = function (that) {
         fetchUISpec(that, setupDataContext(that));
     };
@@ -195,6 +219,7 @@ var cspace = cspace || {};
         };
 
         setupDataEntry(that);
+        setupRelatedRecords(that);
         return that;
     };
     
@@ -218,7 +243,8 @@ var cspace = cspace || {};
             saveSecondary: ".csc-save-bottom",
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
-            timestamp: ".csc-timestamp"
+            timestamp: ".csc-timestamp",
+            relatedRecords: ".csc-related-records"
         },
         strings: {
             specFetchError: "I'm sorry, an error has occurred fetching the UISpec: ",
@@ -243,8 +269,8 @@ var cspace = cspace || {};
             },
             rightSidebar:  {
                 url: "../html/right-sidebar.html",
-                id: "csc-right-sidebar",
-                setupFunction: "cspace.setupRightSidebar"
+                id: "csc-right-sidebar"//,
+//                setupFunction: "cspace.setupRightSidebar"
             },
             footer: {
                 url: "../html/footer.html",

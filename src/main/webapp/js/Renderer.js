@@ -193,6 +193,13 @@ var cspace = cspace || {};
         return children;
     };
 
+    var buildRelatedRecordsTree = function (that){
+        
+    };
+    var buildRelatedRecordsCutpoints = function (that) {
+        
+    };
+
     cspace.renderer = {
         buildComponentTree: function (spec, that) {
             var tree = {children: buildComponentTreeChildren(spec, that)};
@@ -224,6 +231,12 @@ var cspace = cspace || {};
                 createTemplateRenderFunc(that, resources, tree, renderOptions));
         },
         
+        renderRelatedRecords: function (that) {
+            var tree = buildRelatedRecordsTree(that);
+            var cutpoints = buildRelatedRecordsCutpoints(that);
+            fluid.selfRender(that.locate("relatedRecords"), tree, {cutpoints: cutpoints});
+        },
+
         createCutpoints: function (spec) {
             var cutpoints = [];
             addCutpointsToList(cutpoints, spec);

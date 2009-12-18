@@ -18,5 +18,26 @@
         "csid": "ACQ2009.002.001",
         "acquFundingValue": "",
         "acquAuthorize": "Erin Yu"
-    }
+    },
+    "relations": [
+        {
+            "csid": "1984.068.0338",
+            "number": "1984.068.0338",
+            "summary": "somethings",
+            "recordtype": "object",
+            "relationshiptype": "affects"
+        },{
+            "csid": "2007.4-a",
+            "number": "2007.4-a",
+            "summary": "yet other thing",
+            "recordtype": "intake",
+            "relationshiptype": "also affects somewhat"
+        },{
+            "csid": "1984.068.0335b",
+            "number": "1984.068.0335b",
+            "summary": "some other thing",
+            "recordtype": "object",
+            "relationshiptype": "also affects"
+        }
+    ]
 }

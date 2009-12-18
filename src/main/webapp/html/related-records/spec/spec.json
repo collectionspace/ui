@@ -1,0 +1,34 @@
+{
+    "spec": {
+        "relations": {
+            "selector": ".csc-related-row",
+            "repeated": {
+                "number": {
+                    "selector": ".csc-related-number",
+                    "type": "link",
+					"href": "%recordtype.html?csid=%csid",
+                    "linktext": "%number",
+                    "replacements": {
+                        "csid": "csid",
+                        "number": "number",
+                        "recordtype": "recordtype"
+                    },
+                    "validators": [],
+                    "decorators": []
+                },
+                "summary": {
+                    "selector": ".csc-related-summary"
+                },
+                "recordtype": {
+                    "selector": ".csc-related-recordtype"
+                },
+                "relationshiptype": {
+                    "selector": ".csc-related-relationshiptype"
+                }
+            }
+        }
+    },
+    "modelToResourceMap": {
+        "*": "/objects/"
+    }
+}
