@@ -41,7 +41,8 @@ var cspace = cspace || {};
         var model = {};
         for (var key in spec) {
             if (spec.hasOwnProperty(key)) {
-                model[key] = (spec[key].hasOwnProperty("repeated") ? [""] : "");
+                fluid.model.setBeanValue(model, key, (spec[key].hasOwnProperty("repeated") ? [""] : ""));
+//                model[key] = (spec[key].hasOwnProperty("repeated") ? [""] : "");
             }
         }
         return model;
@@ -64,7 +65,7 @@ var cspace = cspace || {};
 
     var makeDisplayFieldUpdater = function (selector) {
         return function (model, oldModel, changeRequest) {
-            $(selector).text(model[changeRequest.path]);
+            $(selector).text(fluid.model.getBeanValue(model, changeRequest.path));
         };
     };
 
@@ -109,7 +110,7 @@ var cspace = cspace || {};
         that.events.pageRendered.addListener(function () {
             for (var path in that.displayOnlyFields) {
                 if (that.displayOnlyFields.hasOwnProperty(path)) {
-                    $(that.displayOnlyFields[path]).text(that.model[path] + " ");
+                    $(that.displayOnlyFields[path]).text(fluid.model.getBeanValue(that.model, path) + " ");
                 }
             }
         });
