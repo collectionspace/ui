@@ -17,6 +17,8 @@ input[type="text"], input[type="password"], textarea {width:99.75%;}
 
 :focus {outline: 1px solid black;}
 
+.fl-fix {overflow:visible;}
+
 #all-content, #all-content-intake, #all-content-login {min-height:500px; height:auto !important; height:500px;}
 #name-header {}
 #name-header-login {padding-top:20px;}

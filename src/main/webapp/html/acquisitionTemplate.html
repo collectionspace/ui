@@ -1,3 +1,16 @@
+<!--[if IE ]>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	   var zIndexNumber = 5000;
+	   // Put your target element(s) in the selector below!
+	   $("div").each(function() {
+			   $(this).css('zIndex', zIndexNumber);
+			   zIndexNumber -= 10;
+	   });
+});
+</script>
+<![endif]-->
+
 <!-- title-bar - name of object and (assession) number -->
 <div id="title-bar">
 	<div class="title-bar-value">
@@ -38,7 +51,7 @@
 						  This corresponds to Information groups within Spectrum's Object Entry prodedure. -->
 					<div class="fl-container-flex fl-fix information-group">
 					
-						<div class="info-column fl-force-left">	
+						<div class="info-column">	
 				
 							<!-- Information-block header -->
 							<div class="fl-container-flex header" onclick="ShowHide('#toggle-acquisition-information'); return false;">
@@ -222,11 +235,12 @@
 								<div class="clear"></div>
 							</div>
 						</div>
+						
 					</div>
 					
 					<div class="fl-container-flex fl-fix information-group">
 					
-						<div class="info-column fl-force-left deactivate">	
+						<div class="info-column deactivate">	
 				
 							<!-- Information-block header -->
 							<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-collection-information'); return false;">
@@ -283,6 +297,7 @@
 								<div class="clear"></div>
 							</div>
 						</div>
+						
 					</div>
 					
 					<div class="csc-error-dialog">
@@ -293,7 +308,8 @@
 				<!-- Save button container -->
 				<div class="fl-container-flex input-buttons">
 					<a href="#" class="savebutton csc-save-bottom"><img src="../images/savebutton.png" alt="save button" height="25" width="74" /></a>
-					<a href="findedit.html" class="cancelbutton"><img src="../images/cancelbutton.png" alt="cancel button" width="89" height="25" /></a><div class="clear"><!-- --></div></div>	
+					<a href="findedit.html" class="cancelbutton"><img src="../images/cancelbutton.png" alt="cancel button" width="89" height="25" /></a><div class="clear"><!-- --></div>
+				</div>	
 			</div> <!-- END left-side container -->
 
 		</div><!-- END left-side container -->
@@ -302,5 +318,6 @@
 		<div class="fl-container-pivot fl-force-right csc-right-sidebar" id="csc-right-sidebar">
 			    <!-- this div will be filled in with the contents of the Template -->
 		</div> <!-- END sub-main content -->
+		<div class="clear"></div>
 	</div>
 </div> <!-- END main content -->

@@ -1,3 +1,15 @@
+				<!--[if IE ]>
+				<script type="text/javascript">
+				jQuery(document).ready(function() {
+					   var zIndexNumber = 5000;
+					   // Put your target element(s) in the selector below!
+					   $("div").each(function() {
+							   $(this).css('zIndex', zIndexNumber);
+							   zIndexNumber -= 10;
+					   });
+				});
+				</script>
+				<![endif]-->
 			
 				<!-- title-bar - name of object and (assession) number -->
 				<div id="title-bar">
@@ -14,972 +26,976 @@
 			
 				<!-- main content -->
 				<div id="all-content" class="fl-fix object-entry">
-					
-						
+
 					<!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
 					<div class="fl-fix fl-container-flex fl-col-mixed2">
 
 						<!-- left-side container. Contains bulk of Object Entry forms and fields -->
 						<div class="fl-container-left fl-force-left">
 
-		<div class="fl-container-left csc-object-entry-container">
-			<!-- Object Data Entry specific sub-menu -->
-			<div id="top-nav">
-				<div id="tab-menu"><img src="../images/cataloging-tabs.png" alt="related record column" height=24 width=642 /></div>
-				<div class="upper-save"><a href="#" class="savebutton csc-save"><img src="../images/btnSave.png" alt="save button" height="24" width="100" /></a></div><div class="clear"></div>
-			</div>
-			<div class="object-entry-outer-border">
+							<div class="fl-container-left csc-object-entry-container">
+								<!-- Object Data Entry specific sub-menu -->
+								<div id="top-nav">
+									<div id="tab-menu"><img src="../images/cataloging-tabs.png" alt="related record column" height=24 width=642 /></div>
+									<div class="upper-save"><a href="#" class="savebutton csc-save"><img src="../images/btnSave.png" alt="save button" height="24" width="100" /></a></div><div class="clear"></div>
+								</div>
+								
+								<div class="object-entry-outer-border">
 
-                <div class="hidden csc-message-container cs-message">
-                    <span class="csc-timestamp cs-timestamp">time</span>
-                    <span class="csc-message">Save successful!</span>
-                </div>
+									<div class="hidden csc-message-container cs-message">
+										<span class="csc-timestamp cs-timestamp">time</span>
+										<span class="csc-message">Save successful!</span>
+									</div>
 
-				<!-- Each section of Object Entry is broken down into information-blocks.
-					  This corresponds to Information groups within Spectrum's Object Entry prodedure. -->
-				<div class="fl-container-flex fl-fix information-group">
-				
-					<div class="info-column fl-force-left">	
-			
-						<!-- Information-block header -->
-						<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-identification-information'); return false;">
-							<span class="header-toggle"><img id="toggle-object-identification-information-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-							Object Identification Information
-						</div>
-						
-						<!-- Information-block content block -->
-						<div class="fl-container-flex fl-fix content" id="toggle-object-identification-information">
-							<!-- The information-block is further broken down into two columns of equal size: left and right -->
-							<div class="info-column1 fl-force-left">
-								<div class="info-column2-50 fl-force-left">
-									<div class="info-pair-addrow">
-										<div class="info-label" title="">Accession Number</div>
-										<div class="info-value csc-object-identification-object-number-container">
-										    <input type="text" class="input-alpha csc-object-identification-object-number pattern-chooser-input" name="object-identification-object-number">
-                                        </div>
-									</div>
+									<!-- Each section of Object Entry is broken down into information-blocks.
+										  This corresponds to Information groups within Spectrum's Object Entry prodedure. -->
+									<div class="fl-container-flex fl-fix information-group">
 									
-									<div class="info-pair-table deactivate">
-										<div class="info-label" title="">Components and Range</div>
-										<div class="info-value">
-											<table class="components">
-												<tbody>
-													<tr>
-														<td class="label">Total Number of Items</td>
-														<td><input type="text" disabled class="input-numeric-small csc-object-identification-number-objects disabled" name="object-identification-number-objects"></td>
-													</tr>
-												</tbody>
-											</table>
-											<div class="components-img"><img src="../images/gen_sub.png" alt="generate sub number" height=19 width=110 /></div>
-											<div class="clear"></div>
-										</div>
-									</div>
-									
-									<div class="info-pair-addrow deactivate">
-										<div class="info-label" title=""></div>
-										<div class="info-value deactivate" >
-											<table id="">
-												<thead>
-													<tr>
-														<td class="table-select"></td>
-														<td title="">Sub Number</td>
-														<td title="" colspan=2>Description</td>
-													</tr>
-												</thead>
-												
-												<tbody>
-													<tr>
-														<td>&nbsp;1</td>
-														<td></td>
-														<td></td>
-														<td></td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									
-									<div class="info-pair">
-										<div class="info-label" title="">Responsible Department</div>
-										<div class="info-value"><select class="csc-object-identification-responsible-department" name="object-identification-responsible-department"/></div>
-									</div>
-								</div>
+										<div class="info-column">	
 								
-								<div class="info-column2-50 fl-force-right">
-								<!--
-								Temporarily commented out because Other Number is not saving properly.
-									<div class="info-pair-addrow">
-										<div class="info-label" title="">kks</div>
-										<div class="info-value">
-											<table id="" >
-												<tbody>
-													<tr>
-														<td class="table-unselected"></td>
-														<td><input type="text" class="input-alpha-table csc-object-identification-other-number" name="object-identification-other-number"></td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
--->		
-									<div class="info-pair-addrow">
-										<div class="info-label" title="">Brief Description</div>
-										<div class="info-value">
-											<table id="" >
-												<tbody>
-													<tr>
-														<td class="table-unselected"></td>
-														<td><textarea class="input-textarea csc-object-identification-brief-description" name="object-identification-brief-description"></textarea></td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									
-									<div class="info-pair">
-										<div class="info-label" title="">Distinguishing Features</div>
-										<div class="info-value"><textarea class="input-textarea csc-object-identification-distinguishing-features" name="object-identification-destinguishing-features"></textarea></div>
-									</div>
-									
-									<div class="info-pair-addrow">
-										<div class="info-label" title="">Comments</div>
-										<div class="info-value">
-											<table id="" >											
-												<tbody>
-													<tr>
-														<td class="table-unselected"></td>
-														<td><textarea class="input-textarea csc-object-identification-comments" name="object-identification-comments"></textarea></td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									
-								</div>
-							</div>
-							
-							<!-- one row column -->
-							<div class="info-column1 fl-force-left" id="multipleEdit">
-							
-								<div class="info-pair-addrow">
-									<div class="info-label" title="">Title</div>
-									<div class="info-value" >
-										<table id="" >
-											<thead>
-												<tr>
-													<td class="table-select"></td>
-													<td title="">Title</td>
-													<td title="">Object Title Language</td>
-													<td title="">Title Translation</td>
-													<td title="">Title Type</td>
-												</tr>
-											</thead>
-										
-											<tbody>
-												<tr>
-													<td class="table-unselected"></td>
-													<td class="flc-inlineEdit-text"><input type="text" class="input-alpha-table csc-object-identification-object-title editableText" name="object-identification-object-title"></td>
-													<td class="flc-inlineEdit-text"><input type="text" class="input-alpha-table csc-object-identification-object-title-language editableText" name="object-identification-object-title-language"></td>
-													<td class="flc-inlineEdit-text"><input type="text" class="input-alpha-table csc-object-identification-object-title-translation editableText" name="object-identification-object-title-translation"></td>
-													<td class="flc-inlineEdit-text"><input type="text" class="input-alpha-table csc-object-identification-object-title-type editableText" name="object-identification-object-title-type"></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							
-								<div class="info-pair-addrow">
-									<div class="info-label" title="">Object Name</div>
-									<div class="info-value">
-										<table id="" >
-											<thead>
-												<tr>
-													<td class="table-select"></td>
-													<td title="">Object Name</td>
-													<td title="">Currency</td>
-													<td title="">Level</td>
-													<td title="">Sytem</td>
-													<td title="">Type</td>
-													<td title="">Language</td>
-													<td title="">Note</td>
-												</tr>
-											</thead>
-											
-											<tbody>
-												<tr>
-													<td class="table-unselected"></td>
-													<td><input type="text" class="input-alpha-table csc-object-identification-object-name" name="object-identification-object-name"></td>
-													<td><input type="text" class="input-alpha-table csc-object-identification-object-currency" name="object-identification-object-currency"></td>
-													<td><input type="text" class="input-alpha-table csc-object-identification-object-level" name="object-identification-object-level"></td>
-													<td><input type="text" class="input-alpha-table csc-object-identification-object-system" name="object-identification-object-system"></td>
-													<td><input type="text" class="input-alpha-table csc-object-identification-object-type" name="object-identification-object-type"></td>
-													<td><input type="text" class="input-alpha-table csc-object-identification-object-language" name="object-identification-object-language"></td>
-													<td><input type="text" class="input-alpha-table csc-object-identification-object-note" name="object-identification-object-note"></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						
-							<div class="clear"></div>
-						</div>
-					</div>
-				</div>	
-
-				<div class="fl-container-flex fl-fix information-group">
-					<div class="info-column fl-force-left">
-						<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-description-info'); return false;">
-							<span class="header-toggle"><img id="toggle-object-description-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-							Object Description Information
-						</div>
-						<div class="fl-container-flex fl-fix content" id="toggle-object-description-info" >
-							<!-- Left-side column -->
-							<div class="info-column2-50 fl-force-left">
-																		
-								<div class="info-pair">
-									<div class="info-label" title="">Copy Number</div>
-									<div class="info-value"><input type="text" class="input-alpha csc-object-description-copy-number" name="object-description-copy-number"></div>
-								</div>
-								
-								<div class="info-pair">
-									<div class="info-label" title="">Object Status</div>
-									<div class="info-value"><input type="text" class="input-alpha csc-object-description-status" name="object-description-status"></div>
-								</div>
-								
-								<div class="info-pair">
-									<div class="info-label" title="">Sex</div>
-									<div class="info-value"><input type="text" class="input-alpha csc-object-description-sex" name="object-description-sex"></div>
-								</div>
-								
-								<div class="info-pair">
-									<div class="info-label" title="">Phase</div>
-									<div class="info-value"><input type="text" class="input-alpha csc-object-description-phase" name="object-description-phase"></div>
-								</div>
-								
-								<div class="info-column1 fl-force-left">
-									<div class="info-pair-addrow">
-										<div class="info-label" title="">Form</div>
-										<div class="info-value">
-											<table id="" >											
-												<tbody>
-													<tr>
-														<td class="table-unselected"></td>
-														<td><input type="text" class="input-alpha-table csc-object-description-form" name="object-description-form"></td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-								
-							</div>
-							
-							<!-- Left-side column -->
-							<div class="info-column2-50 fl-force-right">
-								<div class="info-pair">
-									<div class="info-label" title="">Edition Number</div>
-									<div class="info-value"><input type="text" class="input-alpha csc-object-description-edition-number" name="object-description-edition-number"></div>
-								</div>
-								
-								<div class="info-pair-table">
-									<div class="info-label" title="">Age</div>
-									<div class="info-value">
-										<table id="" >
-											<thead>
-												<tr>
-													<td title="">Age</td>
-													<td title="">Age Qualifier</td>
-													<td title="">Unit</td>
-												</tr>
-											</thead>
-											
-											<tbody>
-												<tr>
-													<td><input type="text" class="input-alpha-table csc-object-description-age" name="object-description-age"></td>
-													<td><input type="text" class="input-alpha-table csc-object-description-age-qualifier" name="object-description-age-qualifier"></td>
-													<td><input type="text" class="input-alpha-table csc-object-description-age-unit" name="object-description-age-unit"></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>		
-								
-								<div class="info-pair-addrow">
-									<div class="info-label" title="">Style</div>
-									<div class="info-value">
-										<table id="" >
-											<tbody>
-												<tr>
-													<td class="table-unselected"></td>
-													<td><input type="text" class="input-alpha-table csc-object-description-style" name="object-description-style"></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								
-								<div class="info-pair-addrow">
-									<div class="info-label" title="">Color</div>
-									<div class="info-value">
-										<table id="" >											
-											<tbody>
-												<tr>
-													<td class="table-unselected"></td>
-													<td><input type="text" class="input-alpha-table csc-object-description-color" name="object-description-color"></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								
-							</div>
-							
-							<div class="info-column1 fl-force-left">
-								<div class="info-pair-addrow">
-									<div class="info-label" title="">Material</div>
-									<div class="info-value">
-										<table id="" >
-											<thead>
-												<tr>
-													<td class="table-select"></td>
-													<td title="">Material</td>
-													<td title="">Material Component</td>
-													<td title="">Material Component Note</td>
-													<td title="">Material Name</td>
-													<td title="">Material Source</td>
-												</tr>
-											</thead>
-											
-											<tbody>
-												<tr>
-													<td class="table-unselected"></td>
-													<td><input type="text" class="input-alpha-table csc-object-description-material" name="object-description-material"></td>
-													<td><input type="text" class="input-alpha-table csc-object-description-material-component" name="object-description-material-component"></td>
-													<td><input type="text" class="input-alpha-table csc-object-description-material-component-note" name="object-description-material-component-note"></td>
-													<td><input type="text" class="input-alpha-table csc-object-description-material-name" name="object-description-material-name"></td>
-													<td><input type="text" class="input-alpha-table csc-object-description-material-source" name="object-description-material-source"></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								
-								<div class="info-pair">
-									<div class="info-label" title="">Physical Description</div>
-    								<div class="info-value"><textarea class="input-textarea csc-object-description-physical-description" name="object-description-physical-description"></textarea></div>
-								</div>
-							</div>
-							
-							<div class="info-column2-50 fl-force-left">
-								<div class="info-pair-addrow">
-									<div class="info-label" title="">Object Component</div>
-									<div class="info-value">
-										<table id="" >
-											<thead>
-												<tr>
-													<td class="table-select"></td>
-													<td title="">Name</td>
-													<td title="">Information</td>
-												</tr>
-											</thead>
-											
-											<tbody>
-												<tr>
-													<td class="table-unselected"></td>
-													<td><input type="text" class="input-alpha-table csc-object-description-object-component-name" name="object-description-object-component-name"></td>
-													<td><input type="text" class="input-alpha-table csc-object-description-object-component-information" name="object-description-object-component-information"></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								
-							</div>
-							
-							<div class="info-column2-50 fl-force-right">
-								<div class="info-pair-addrow">
-									<div class="info-label" title="">Technical Attribute</div>
-									<div class="info-value">
-										<table id="" >
-											<thead>
-												<tr>
-													<td class="table-select"></td>
-													<td title="">Technical Attribute</td>
-													<td title="">Measurement</td>
-													<td title="">Unit</td>
-												</tr>
-											</thead>
-											
-											<tbody>
-												<tr>
-													<td class="table-unselected"></td>
-													<td><input type="text" class="input-alpha-table csc-object-description-technical-attribute" name="object-description-technical-attribute"></td>
-													<td><input type="text" class="input-alpha-table csc-object-description-technical-attribute-measurement" name="object-description-technical-attribute-measurement"></td>
-													<td><input type="text" class="input-alpha-table csc-object-description-technical-attribute-unit" name="object-description-technical-atteribute-unit"></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-							
-							<div class="info-column1 fl-force-left">
-								<div class="info-pair-addrow">
-									<div class="info-label" title="">Dimension</div>
-									<div class="info-value">
-										<table id="" >
-											<thead>
-												<tr>
-													<td class="table-select"></td>
-													<td title="" class="deactivate">Date</td>
-													<td title="" class="deactivate">Part</td>
-													<td title="">Dimension</td>
-													<td title="">Value</td>
-													<td title="">Dimension Unit</td>
-													<td title="" class="deactivate">Value Qualifier</td>
-												</tr>
-											</thead>
-											
-											<tbody>
-												<tr>
-													<td class="table-unselected"></td>
-													<td class="field-cal disabled"><input type="text" disabled class="input-date csc-object-description-dimension-date deactivate" name="object-description-dimension-date"><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
-													<td class="field-cal disabled"><input type="text" disabled class="input-alpha-table csc-object-description-dimension-part deactivate" name="object-description-dimension-part"></td>
-													<td><input type="text" class="input-alpha-table csc-object-description-dimension" name="object-description-dimension"></td>
-													<td><input type="text" class="input-alpha-table csc-object-description-dimension-value" name="object-description-dimension-value"></td>
-													<td><select type="text" class="input-alpha-table csc-object-description-dimension-unit" name="object-description-dimension-unit" /></td>
-													<td class="field-cal disabled"><input type="text" disabled class="input-alpha-table csc-object-description-dimension-value-qualifier deactivate" name="object-description-dimension-calue-qualifier"></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-							
-							<div class="info-column1 fl-force-left">
-							
-								<div class="fl-container-flex fl-fix information-subgroup">
-									<div class="info-column fl-force-left">
-										<div class="fl-container-flex header" onclick="ShowHide('#toggle-description-information-content'); return false;">
-											<span class="header-toggle-sub"><img id="toggle-description-information-content-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-											Content
-										</div>
-										<div class="fl-container-flex fl-fix content" id="toggle-description-information-content" >
-											
-											<div class="info-column1 fl-force-left">
-												<div class="info-pair">
-													<div class="info-label" title="">Description</div>
-													<div class="info-value"><textarea class="input-textarea csc-object-description-content-description" name="object-description-content-description"></textarea></div>
-												</div>
+											<!-- Information-block header -->
+											<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-identification-information'); return false;">
+												<span class="header-toggle"><img id="toggle-object-identification-information-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+												Object Identification Information
 											</div>
 											
-											<div class="info-column2-50 fl-force-left">
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Language</div>
-													<div class="info-value">
-														<table id="" >															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-content-language" name="object-description-content-language"></td>
-																</tr>
-															</tbody>
-														</table>
+											<!-- Information-block content block -->
+											<div class="fl-container-flex fl-fix content" id="toggle-object-identification-information">
+												<!-- The information-block is further broken down into two columns of equal size: left and right -->
+												<div class="info-column1 fl-force-left">
+													<div class="info-column2-50 fl-force-left">
+														<div class="info-pair-addrow">
+															<div class="info-label" title="">Accession Number</div>
+															<div class="info-value csc-object-identification-object-number-container">
+																<input type="text" class="input-alpha csc-object-identification-object-number pattern-chooser-input" name="object-identification-object-number">
+															</div>
+														</div>
+														
+														<div class="info-pair-table deactivate">
+															<div class="info-label" title="">Components and Range</div>
+															<div class="info-value">
+																<table class="components">
+																	<tbody>
+																		<tr>
+																			<td class="label">Total Number of Items</td>
+																			<td><input type="text" disabled class="input-numeric-small csc-object-identification-number-objects disabled" name="object-identification-number-objects"></td>
+																		</tr>
+																	</tbody>
+																</table>
+																<div class="components-img"><img src="../images/gen_sub.png" alt="generate sub number" height=19 width=110 /></div>
+																<div class="clear"></div>
+															</div>
+														</div>
+														
+														<div class="info-pair-addrow deactivate">
+															<div class="info-label" title=""></div>
+															<div class="info-value deactivate" >
+																<table id="">
+																	<thead>
+																		<tr>
+																			<td class="table-select"></td>
+																			<td title="">Sub Number</td>
+																			<td title="" colspan=2>Description</td>
+																		</tr>
+																	</thead>
+																	
+																	<tbody>
+																		<tr>
+																			<td>&nbsp;1</td>
+																			<td></td>
+																			<td></td>
+																			<td></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														
+														<div class="info-pair">
+															<div class="info-label" title="">Responsible Department</div>
+															<div class="info-value"><select class="csc-object-identification-responsible-department" name="object-identification-responsible-department"/></div>
+														</div>
 													</div>
-												</div>
-												
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Activity</div>
-													<div class="info-value">
-														<table id="" >															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-content-activity" name="object-description-content-activity"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Concept</div>
-													<div class="info-value">
-														<table id="" >															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-content-concept" name="object-description-content-concept"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-												<div class="info-pair-addrow date-table">
-													<div class="info-label" title="">Date</div>
-													<div class="info-value">
-														<table id="" >															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td class="field-cal disabled"><input type="text" disabled class="input-date csc-object-description-content-date disabled" name="object-description-content-date"><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Position</div>
-													<div class="info-value">
-														<table id="" >															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-content-position" name="object-description-content-position"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Object</div>
-													<div class="info-value">
-														<table id="" >
-															<thead>
-																<tr>
-																	<td class="table-select"></td>
-																	<td title="">Object</td>
-																	<td title="">Object Type</td>
-																</tr>
-															</thead>
-															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-content-object" name="object-description-content-object"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-content-object-type" name="object-description-content-object-type"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-											</div>
-											
-											<div class="info-column2-50 fl-force-right">
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">People</div>
-													<div class="info-value">
-														<table id="" >															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-content-people" name="object-description-content-people"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Person</div>
-													<div class="info-value">
-														<table id="" >															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-content-person" name="object-description-content-person"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Place</div>
-													<div class="info-value">
-														<table id="" >															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-content-place" name="object-description-content-place"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Script</div>
-													<div class="info-value">
-														<table id="" >															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-content-script" name="object-description-content-script"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Organization</div>
-													<div class="info-value">
-														<table id="" >															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-content-organization" name="object-description-content-organization"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Method</div>
-													<div class="info-value">
-														<table id="" >															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-content-method" name="object-description-content-method"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Event Name</div>
-													<div class="info-value">
-														<table id="" >
-															<thead>
-																<tr>
-																	<td class="table-select"></td>
-																	<td title="">Event Name</td>
-																	<td title="">Event Name Type</td>
-																</tr>
-															</thead>
-															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-content-event-name" name="object-description-content-event-name"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-content-event-name-type" name="object-description-content-event-name-type"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Other</div>
-													<div class="info-value">
-														<table id="" >
-															<thead>
-																<tr>
-																	<td class="table-select"></td>
-																	<td title="">Other</td>
-																	<td title="">Other Type</td>
-																</tr>
-															</thead>
-															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-content-other" name="object-description-content-other"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-content-other-type" name="object-description-content-other-type"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-											</div>
-											
-											<div class="info-column1 fl-force-left">
-<!--
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Script</div>
-													<div class="info-value">
-														<table id="" >
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-content-script" name="object-description-content-script"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
--->
-												
-												<div class="info-pair">
-													<div class="info-label" title="">Note</div>
-													<div class="info-value"><textarea class="input-textarea csc-object-description-content-note" name="object-description-content-note"></textarea></div>
-												</div>
-												
-											</div>
-											
-										</div>
-									</div>
-								</div>
-							
-							</div>
-							
-							<div class="info-column1 fl-force-left">
-							
-								<div class="fl-container-flex fl-fix information-subgroup">
-									<div class="info-column fl-force-left">
-										<div class="fl-container-flex header" onclick="ShowHide('#toggle-description-information-inscription'); return false;">
-											<span class="header-toggle-sub"><img id="toggle-description-information-inscription-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-											Inscription
-										</div>
-										<div class="fl-container-flex fl-fix content" id="toggle-description-information-inscription" >
-											
-											<div class="info-column1 fl-force-left">
-												<div class="info-pair">
-													<div class="info-label" title="">Inscription Content</div>
-													<div class="info-value"><textarea class="input-textarea csc-object-description-inscription-content" name="object-description-inscription-content"></textarea></div>
-												</div>
-												
-												<div class="info-pair">
-													<div class="info-label" title="">Inscription Description</div>
-													<div class="info-value"><textarea class="input-textarea csc-object-description-inscription-description" name="object-description-inscription-description"></textarea></div>
-												</div>
-											</div>
-											
-											<div class="info-column2-50 fl-force-left">
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Inscriber</div>
-													<div class="info-value">
-														<table id="" >															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-inscription-inscriber" name="object-description-inscription-inscriber"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Language</div>
-													<div class="info-value">
-														<table id="" >															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-inscription-language" name="object-description-inscription-language"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
 													
-												<div class="info-pair-addrow date-table">
-													<div class="info-label" title="">Date</div>
-													<div class="info-value">
-														<table id="" >															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td class="field-cal disabled"><input type="text" disabled class="input-date csc-object-description-inscription-date disabled" name="object-description-inscription-date"><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
-																</tr>
-															</tbody>
-														</table>
+													<div class="info-column2-50 fl-force-right">
+													<!--
+													Temporarily commented out because Other Number is not saving properly.
+														<div class="info-pair-addrow">
+															<div class="info-label" title="">kks</div>
+															<div class="info-value">
+																<table id="" >
+																	<tbody>
+																		<tr>
+																			<td class="table-unselected"></td>
+																			<td><input type="text" class="input-alpha-table csc-object-identification-other-number" name="object-identification-other-number"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+					-->		
+														<div class="info-pair-addrow">
+															<div class="info-label" title="">Brief Description</div>
+															<div class="info-value">
+																<table id="" >
+																	<tbody>
+																		<tr>
+																			<td class="table-unselected"></td>
+																			<td><textarea class="input-textarea csc-object-identification-brief-description" name="object-identification-brief-description"></textarea></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														
+														<div class="info-pair">
+															<div class="info-label" title="">Distinguishing Features</div>
+															<div class="info-value"><textarea class="input-textarea csc-object-identification-distinguishing-features" name="object-identification-destinguishing-features"></textarea></div>
+														</div>
+														
+														<div class="info-pair-addrow">
+															<div class="info-label" title="">Comments</div>
+															<div class="info-value">
+																<table id="" >											
+																	<tbody>
+																		<tr>
+																			<td class="table-unselected"></td>
+																			<td><textarea class="input-textarea csc-object-identification-comments" name="object-identification-comments"></textarea></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														
 													</div>
 												</div>
 												
+												<!-- one row column -->
+												<div class="info-column1 fl-force-left" id="multipleEdit">
+												
+													<div class="info-pair-addrow">
+														<div class="info-label" title="">Title</div>
+														<div class="info-value" >
+															<table id="" >
+																<thead>
+																	<tr>
+																		<td class="table-select"></td>
+																		<td title="">Title</td>
+																		<td title="">Object Title Language</td>
+																		<td title="">Title Translation</td>
+																		<td title="">Title Type</td>
+																	</tr>
+																</thead>
+															
+																<tbody>
+																	<tr>
+																		<td class="table-unselected"></td>
+																		<td class="flc-inlineEdit-text"><input type="text" class="input-alpha-table csc-object-identification-object-title editableText" name="object-identification-object-title"></td>
+																		<td class="flc-inlineEdit-text"><input type="text" class="input-alpha-table csc-object-identification-object-title-language editableText" name="object-identification-object-title-language"></td>
+																		<td class="flc-inlineEdit-text"><input type="text" class="input-alpha-table csc-object-identification-object-title-translation editableText" name="object-identification-object-title-translation"></td>
+																		<td class="flc-inlineEdit-text"><input type="text" class="input-alpha-table csc-object-identification-object-title-type editableText" name="object-identification-object-title-type"></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												
+													<div class="info-pair-addrow">
+														<div class="info-label" title="">Object Name</div>
+														<div class="info-value">
+															<table id="" >
+																<thead>
+																	<tr>
+																		<td class="table-select"></td>
+																		<td title="">Object Name</td>
+																		<td title="">Currency</td>
+																		<td title="">Level</td>
+																		<td title="">Sytem</td>
+																		<td title="">Type</td>
+																		<td title="">Language</td>
+																		<td title="">Note</td>
+																	</tr>
+																</thead>
+																
+																<tbody>
+																	<tr>
+																		<td class="table-unselected"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-identification-object-name" name="object-identification-object-name"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-identification-object-currency" name="object-identification-object-currency"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-identification-object-level" name="object-identification-object-level"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-identification-object-system" name="object-identification-object-system"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-identification-object-type" name="object-identification-object-type"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-identification-object-language" name="object-identification-object-language"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-identification-object-note" name="object-identification-object-note"></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											
+												<div class="clear"></div>
 											</div>
-											
-											<div class="info-column2-50 fl-force-right">
-												<div class="info-pair">
-													<div class="info-label" title="">Position</div>
-													<div class="info-value"><input type="text" class="input-alpha csc-object-description-inscription-position" name="object-description-inscription-position"></div>
-												</div>
-												
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Script</div>
-													<div class="info-value">
-														<table id="" >															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-inscription-script" name="object-description-inscription-script"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Type</div>
-													<div class="info-value">
-														<table id="" >															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-inscription-type" name="object-description-inscription-type"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Method</div>
-													<div class="info-value">
-														<table id="" >															
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-inscription-method" name="object-description-inscription-method"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-											</div>
-											
-											<div class="info-column1 fl-force-left">
-											
-												<div class="info-pair">
-													<div class="info-label" title="">Interpretation</div>
-													<div class="info-value"><textarea class="input-textarea csc-object-description-inscription-interpretation" name="object-description-inscription-interpretation"></textarea></div>
-												</div>
-												
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Translation</div>
-													<div class="info-value">
-														<table id="" >
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-inscription-translation" name="object-description-inscription-translation"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-												<div class="info-pair-addrow">
-													<div class="info-label" title="">Transliteration</div>
-													<div class="info-value">
-														<table id="" >
-															<tbody>
-																<tr>
-																	<td class="table-unselected"></td>
-																	<td><input type="text" class="input-alpha-table csc-object-description-inscription-transliteration" name="object-description-inscription-transliteration"></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-												
-											</div>
-											
 										</div>
-									</div>
-								</div>
-							
-							</div>
-							
-							
-							<div class="clear"></div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="fl-container-flex fl-fix information-group">
-					<div class="info-column fl-force-left">
-						<div class="fl-container-flex header" onclick="ShowHide('#toggle-date-info'); return false;">
-							<span class="header-toggle"><img id="toggle-date-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-							Date Information
-						</div>
-						<div class="fl-container-flex fl-fix content" id="toggle-date-info" >
-							<!-- Left-side column -->
-							<div class="info-column2-50 fl-force-left">
-								<div class="info-pair">
-									<div class="info-label" title="">Date Association</div>
-									<div class="info-value"><input type="text" class="input-alpha csc-date-information-date-association" name="date-information-date-association"></div>
-								</div>	
-							</div>
-							
-							<!-- Left-side column -->
-							<div class="info-column2-50 fl-force-right">															
-								<div class="info-pair">
-									<div class="info-label" title="">Date Period</div>
-									<div class="info-value"><input type="text" class="input-alpha csc-date-information-date-period" name="date-information-date-period"></div>
-								</div>	
-							</div>
-							
-							<div class="info-column1 fl-force-left">
-								<div class="info-pair-table">
-									<div class="info-label" title="">Date</div>
-									<div class="info-value">
-										<table id="">
-											<thead>
-												<tr>
-													<td title="">Date Type</td>
-													<td title="">Date</td>
-													<td title="">Certainty</td>
-													<td title="">Qualifier</td>
-												</tr>
-											</thead>
-												
-											<tbody>
-												<tr>
-													<td class="label">Date - Earliest/single</td>
-													<td class="field-cal disabled"><input type="text" disabled class="input-date csc-date-information-date-earliest-single disabled" name="date-information-date-earliest-single"><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
-													<td><input type="text" class="input-alpha-table csc-date-information-date-earliest-single-certainty" name="date-information-date-earliest-single-certainty"></td>
-													<td><input type="text" class="input-alpha-table csc-date-information-date-earliest-single-qualifier" name="date-information-date-earliest-single-qualifier"></td>
-												</tr>
-												<tr>
-													<td class="label">Date - Latest</td>
-													<td class="field-cal disabled"><input type="text" disabled class="input-date csc-date-information-date-latest disabled" name="date-information-date-latest"><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
-													<td><input type="text" class="input-alpha-table csc-date-information-date-latest-certainty" name="date-information-date-latest-certainty"></td>
-													<td><input type="text" class="input-alpha-table csc-date-information-date-latest-qualifier" name="date-information-date-latest-qualifier"></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							
-								<div class="info-pair">
-									<div class="info-label" title="">Date Text</div>
-									<div class="info-value"><textarea class="input-textarea csc-date-information-date-text" name="date-information-date-text"></textarea></div>
-								</div>
-							</div>
-							<div class="clear"></div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="csc-error-dialog">
-					<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
-				</div>
-			</div> <!-- end outer border-->
+										
+									</div>	
 
-			<!-- Save button container -->
-			<div class="fl-container-flex input-buttons">
-				<a href="#" class="savebutton csc-save-bottom"><img src="../images/btnSave.png" alt="save button" height="24" width="100" /></a>
-				<a href="findedit.html" class="cancelbutton"><img src="../images/btnCancel.png" alt="cancel button" width="100" height="24" /></a><div class="clear"><!-- --></div></div>	
-			
-		</div> <!-- END left-side container -->
+									<div class="fl-container-flex fl-fix information-group">
+										<div class="info-column">
+											<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-description-info'); return false;">
+												<span class="header-toggle"><img id="toggle-object-description-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+												Object Description Information
+											</div>
+											<div class="fl-container-flex fl-fix content" id="toggle-object-description-info" >
+												<!-- Left-side column -->
+												<div class="info-column2-50 fl-force-left">
+																							
+													<div class="info-pair">
+														<div class="info-label" title="">Copy Number</div>
+														<div class="info-value"><input type="text" class="input-alpha csc-object-description-copy-number" name="object-description-copy-number"></div>
+													</div>
+													
+													<div class="info-pair">
+														<div class="info-label" title="">Object Status</div>
+														<div class="info-value"><input type="text" class="input-alpha csc-object-description-status" name="object-description-status"></div>
+													</div>
+													
+													<div class="info-pair">
+														<div class="info-label" title="">Sex</div>
+														<div class="info-value"><input type="text" class="input-alpha csc-object-description-sex" name="object-description-sex"></div>
+													</div>
+													
+													<div class="info-pair">
+														<div class="info-label" title="">Phase</div>
+														<div class="info-value"><input type="text" class="input-alpha csc-object-description-phase" name="object-description-phase"></div>
+													</div>
+													
+													<div class="info-column1 fl-force-left">
+														<div class="info-pair-addrow">
+															<div class="info-label" title="">Form</div>
+															<div class="info-value">
+																<table id="" >											
+																	<tbody>
+																		<tr>
+																			<td class="table-unselected"></td>
+																			<td><input type="text" class="input-alpha-table csc-object-description-form" name="object-description-form"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+													
+												</div>
+												
+												<!-- Left-side column -->
+												<div class="info-column2-50 fl-force-right">
+													<div class="info-pair">
+														<div class="info-label" title="">Edition Number</div>
+														<div class="info-value"><input type="text" class="input-alpha csc-object-description-edition-number" name="object-description-edition-number"></div>
+													</div>
+													
+													<div class="info-pair-table">
+														<div class="info-label" title="">Age</div>
+														<div class="info-value">
+															<table id="" >
+																<thead>
+																	<tr>
+																		<td title="">Age</td>
+																		<td title="">Age Qualifier</td>
+																		<td title="">Unit</td>
+																	</tr>
+																</thead>
+																
+																<tbody>
+																	<tr>
+																		<td><input type="text" class="input-alpha-table csc-object-description-age" name="object-description-age"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-description-age-qualifier" name="object-description-age-qualifier"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-description-age-unit" name="object-description-age-unit"></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>		
+													
+													<div class="info-pair-addrow">
+														<div class="info-label" title="">Style</div>
+														<div class="info-value">
+															<table id="" >
+																<tbody>
+																	<tr>
+																		<td class="table-unselected"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-description-style" name="object-description-style"></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													
+													<div class="info-pair-addrow">
+														<div class="info-label" title="">Color</div>
+														<div class="info-value">
+															<table id="" >											
+																<tbody>
+																	<tr>
+																		<td class="table-unselected"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-description-color" name="object-description-color"></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													
+												</div>
+												
+												<div class="info-column1 fl-force-left">
+													<div class="info-pair-addrow">
+														<div class="info-label" title="">Material</div>
+														<div class="info-value">
+															<table id="" >
+																<thead>
+																	<tr>
+																		<td class="table-select"></td>
+																		<td title="">Material</td>
+																		<td title="">Material Component</td>
+																		<td title="">Material Component Note</td>
+																		<td title="">Material Name</td>
+																		<td title="">Material Source</td>
+																	</tr>
+																</thead>
+																
+																<tbody>
+																	<tr>
+																		<td class="table-unselected"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-description-material" name="object-description-material"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-description-material-component" name="object-description-material-component"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-description-material-component-note" name="object-description-material-component-note"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-description-material-name" name="object-description-material-name"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-description-material-source" name="object-description-material-source"></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													
+													<div class="info-pair">
+														<div class="info-label" title="">Physical Description</div>
+														<div class="info-value"><textarea class="input-textarea csc-object-description-physical-description" name="object-description-physical-description"></textarea></div>
+													</div>
+												</div>
+												
+												<div class="info-column2-50 fl-force-left">
+													<div class="info-pair-addrow">
+														<div class="info-label" title="">Object Component</div>
+														<div class="info-value">
+															<table id="" >
+																<thead>
+																	<tr>
+																		<td class="table-select"></td>
+																		<td title="">Name</td>
+																		<td title="">Information</td>
+																	</tr>
+																</thead>
+																
+																<tbody>
+																	<tr>
+																		<td class="table-unselected"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-description-object-component-name" name="object-description-object-component-name"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-description-object-component-information" name="object-description-object-component-information"></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													
+												</div>
+												
+												<div class="info-column2-50 fl-force-right">
+													<div class="info-pair-addrow">
+														<div class="info-label" title="">Technical Attribute</div>
+														<div class="info-value">
+															<table id="" >
+																<thead>
+																	<tr>
+																		<td class="table-select"></td>
+																		<td title="">Technical Attribute</td>
+																		<td title="">Measurement</td>
+																		<td title="">Unit</td>
+																	</tr>
+																</thead>
+																
+																<tbody>
+																	<tr>
+																		<td class="table-unselected"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-description-technical-attribute" name="object-description-technical-attribute"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-description-technical-attribute-measurement" name="object-description-technical-attribute-measurement"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-description-technical-attribute-unit" name="object-description-technical-atteribute-unit"></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												
+												<div class="info-column1 fl-force-left">
+													<div class="info-pair-addrow">
+														<div class="info-label" title="">Dimension</div>
+														<div class="info-value">
+															<table id="" >
+																<thead>
+																	<tr>
+																		<td class="table-select"></td>
+																		<td title="" class="deactivate">Date</td>
+																		<td title="" class="deactivate">Part</td>
+																		<td title="">Dimension</td>
+																		<td title="">Value</td>
+																		<td title="">Dimension Unit</td>
+																		<td title="" class="deactivate">Value Qualifier</td>
+																	</tr>
+																</thead>
+																
+																<tbody>
+																	<tr>
+																		<td class="table-unselected"></td>
+																		<td class="field-cal disabled"><input type="text" disabled class="input-date csc-object-description-dimension-date deactivate" name="object-description-dimension-date"><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
+																		<td class="field-cal disabled"><input type="text" disabled class="input-alpha-table csc-object-description-dimension-part deactivate" name="object-description-dimension-part"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-description-dimension" name="object-description-dimension"></td>
+																		<td><input type="text" class="input-alpha-table csc-object-description-dimension-value" name="object-description-dimension-value"></td>
+																		<td><select type="text" class="input-alpha-table csc-object-description-dimension-unit" name="object-description-dimension-unit" /></td>
+																		<td class="field-cal disabled"><input type="text" disabled class="input-alpha-table csc-object-description-dimension-value-qualifier deactivate" name="object-description-dimension-calue-qualifier"></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												
+												<div class="info-column1 fl-force-left">
+												
+													<div class="fl-container-flex fl-fix information-subgroup">
+														<div class="info-column fl-force-left">
+															<div class="fl-container-flex header" onclick="ShowHide('#toggle-description-information-content'); return false;">
+																<span class="header-toggle-sub"><img id="toggle-description-information-content-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+																Content
+															</div>
+															<div class="fl-container-flex fl-fix content" id="toggle-description-information-content" >
+																
+																<div class="info-column">
+																	<div class="info-pair">
+																		<div class="info-label" title="">Description</div>
+																		<div class="info-value"><textarea class="input-textarea csc-object-description-content-description" name="object-description-content-description"></textarea></div>
+																	</div>
+																</div>
+																
+																<div class="info-column2-50 fl-force-left">
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Language</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-content-language" name="object-description-content-language"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Activity</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-content-activity" name="object-description-content-activity"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Concept</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-content-concept" name="object-description-content-concept"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow date-table">
+																		<div class="info-label" title="">Date</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td class="field-cal disabled"><input type="text" disabled class="input-date csc-object-description-content-date disabled" name="object-description-content-date"><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Position</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-content-position" name="object-description-content-position"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Object</div>
+																		<div class="info-value">
+																			<table id="" >
+																				<thead>
+																					<tr>
+																						<td class="table-select"></td>
+																						<td title="">Object</td>
+																						<td title="">Object Type</td>
+																					</tr>
+																				</thead>
+																				
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-content-object" name="object-description-content-object"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-content-object-type" name="object-description-content-object-type"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																</div>
+																
+																<div class="info-column2-50 fl-force-right">
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">People</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-content-people" name="object-description-content-people"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Person</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-content-person" name="object-description-content-person"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Place</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-content-place" name="object-description-content-place"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Script</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-content-script" name="object-description-content-script"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Organization</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-content-organization" name="object-description-content-organization"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Method</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-content-method" name="object-description-content-method"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Event Name</div>
+																		<div class="info-value">
+																			<table id="" >
+																				<thead>
+																					<tr>
+																						<td class="table-select"></td>
+																						<td title="">Event Name</td>
+																						<td title="">Event Name Type</td>
+																					</tr>
+																				</thead>
+																				
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-content-event-name" name="object-description-content-event-name"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-content-event-name-type" name="object-description-content-event-name-type"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Other</div>
+																		<div class="info-value">
+																			<table id="" >
+																				<thead>
+																					<tr>
+																						<td class="table-select"></td>
+																						<td title="">Other</td>
+																						<td title="">Other Type</td>
+																					</tr>
+																				</thead>
+																				
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-content-other" name="object-description-content-other"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-content-other-type" name="object-description-content-other-type"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																</div>
+																
+																<div class="info-column">
+					<!--
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Script</div>
+																		<div class="info-value">
+																			<table id="" >
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-content-script" name="object-description-content-script"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+					-->
+																	
+																	<div class="info-pair">
+																		<div class="info-label" title="">Note</div>
+																		<div class="info-value"><textarea class="input-textarea csc-object-description-content-note" name="object-description-content-note"></textarea></div>
+																	</div>
+																	
+																</div>
+																<div class="clear"></div>
+															</div>
+														</div>
+													</div>
+												
+												</div>
+												
+												<div class="info-column1 fl-force-left">
+												
+													<div class="fl-container-flex fl-fix information-subgroup">
+														<div class="info-column">
+															<div class="fl-container-flex header" onclick="ShowHide('#toggle-description-information-inscription'); return false;">
+																<span class="header-toggle-sub"><img id="toggle-description-information-inscription-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+																Inscription
+															</div>
+															<div class="fl-container-flex fl-fix content" id="toggle-description-information-inscription" >
+																
+																<div class="info-column">
+																	<div class="info-pair">
+																		<div class="info-label" title="">Inscription Content</div>
+																		<div class="info-value"><textarea class="input-textarea csc-object-description-inscription-content" name="object-description-inscription-content"></textarea></div>
+																	</div>
+																	
+																	<div class="info-pair">
+																		<div class="info-label" title="">Inscription Description</div>
+																		<div class="info-value"><textarea class="input-textarea csc-object-description-inscription-description" name="object-description-inscription-description"></textarea></div>
+																	</div>
+																</div>
+																
+																<div class="info-column2-50 fl-force-left">
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Inscriber</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-inscriber" name="object-description-inscription-inscriber"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Language</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-language" name="object-description-inscription-language"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																		
+																	<div class="info-pair-addrow date-table">
+																		<div class="info-label" title="">Date</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td class="field-cal disabled"><input type="text" disabled class="input-date csc-object-description-inscription-date disabled" name="object-description-inscription-date"><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																</div>
+																
+																<div class="info-column2-50 fl-force-right">
+																	<div class="info-pair">
+																		<div class="info-label" title="">Position</div>
+																		<div class="info-value"><input type="text" class="input-alpha csc-object-description-inscription-position" name="object-description-inscription-position"></div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Script</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-script" name="object-description-inscription-script"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Type</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-type" name="object-description-inscription-type"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Method</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-method" name="object-description-inscription-method"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																</div>
+																
+																<div class="info-column1">
+																
+																	<div class="info-pair">
+																		<div class="info-label" title="">Interpretation</div>
+																		<div class="info-value"><textarea class="input-textarea csc-object-description-inscription-interpretation" name="object-description-inscription-interpretation"></textarea></div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Translation</div>
+																		<div class="info-value">
+																			<table id="" >
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-translation" name="object-description-inscription-translation"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Transliteration</div>
+																		<div class="info-value">
+																			<table id="" >
+																				<tbody>
+																					<tr>
+																						<td class="table-unselected"></td>
+																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-transliteration" name="object-description-inscription-transliteration"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																</div>
+																<div class="clear"></div>
+															</div>
+														</div>
+													</div>
+												
+												</div>
+												
+												<div class="clear"></div>
+											</div>
+										</div>
+										
+									</div>
+									
+									<div class="fl-container-flex fl-fix information-group">
+										<div class="info-column">
+											<div class="fl-container-flex header" onclick="ShowHide('#toggle-date-info'); return false;">
+												<span class="header-toggle"><img id="toggle-date-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+												Date Information
+											</div>
+											<div class="fl-container-flex fl-fix content" id="toggle-date-info" >
+												<!-- Left-side column -->
+												<div class="info-column2-50 fl-force-left">
+													<div class="info-pair">
+														<div class="info-label" title="">Date Association</div>
+														<div class="info-value"><input type="text" class="input-alpha csc-date-information-date-association" name="date-information-date-association"></div>
+													</div>	
+												</div>
+												
+												<!-- Left-side column -->
+												<div class="info-column2-50 fl-force-right">															
+													<div class="info-pair">
+														<div class="info-label" title="">Date Period</div>
+														<div class="info-value"><input type="text" class="input-alpha csc-date-information-date-period" name="date-information-date-period"></div>
+													</div>	
+												</div>
+												
+												<div class="info-column1 fl-force-left">
+													<div class="info-pair-table">
+														<div class="info-label" title="">Date</div>
+														<div class="info-value">
+															<table id="">
+																<thead>
+																	<tr>
+																		<td title="">Date Type</td>
+																		<td title="">Date</td>
+																		<td title="">Certainty</td>
+																		<td title="">Qualifier</td>
+																	</tr>
+																</thead>
+																	
+																<tbody>
+																	<tr>
+																		<td class="label">Date - Earliest/single</td>
+																		<td class="field-cal disabled"><input type="text" disabled class="input-date csc-date-information-date-earliest-single disabled" name="date-information-date-earliest-single"><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
+																		<td><input type="text" class="input-alpha-table csc-date-information-date-earliest-single-certainty" name="date-information-date-earliest-single-certainty"></td>
+																		<td><input type="text" class="input-alpha-table csc-date-information-date-earliest-single-qualifier" name="date-information-date-earliest-single-qualifier"></td>
+																	</tr>
+																	<tr>
+																		<td class="label">Date - Latest</td>
+																		<td class="field-cal disabled"><input type="text" disabled class="input-date csc-date-information-date-latest disabled" name="date-information-date-latest"><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
+																		<td><input type="text" class="input-alpha-table csc-date-information-date-latest-certainty" name="date-information-date-latest-certainty"></td>
+																		<td><input type="text" class="input-alpha-table csc-date-information-date-latest-qualifier" name="date-information-date-latest-qualifier"></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												
+													<div class="info-pair">
+														<div class="info-label" title="">Date Text</div>
+														<div class="info-value"><textarea class="input-textarea csc-date-information-date-text" name="date-information-date-text"></textarea></div>
+													</div>
+												</div>
+												<div class="clear"></div>
+											</div>
+										</div>
+										
+									</div>
+									
+									<div class="csc-error-dialog">
+										<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
+									</div>
+								</div> <!-- end outer border-->
+
+								<!-- Save button container -->
+								<div class="fl-container-flex input-buttons">
+									<a href="#" class="savebutton csc-save-bottom"><img src="../images/btnSave.png" alt="save button" height="24" width="100" /></a>
+									<a href="findedit.html" class="cancelbutton"><img src="../images/btnCancel.png" alt="cancel button" width="100" height="24" /></a><div class="clear"></div>
+								</div>	
+								
+							</div> <!-- END left-side container -->
 						</div><!-- END left-side container -->
 						
 						<!-- Right-side container. Pivot area -->
 						<div class="fl-container-pivot fl-force-right csc-right-sidebar" id="csc-right-sidebar">
              			    <!-- this div will be filled in with the contents of the Template -->
 						</div> <!-- END sub-main content -->
+						<div class="clear"></div>
 					</div>
 				</div> <!-- END main content -->

@@ -14,6 +14,7 @@ function getRadioValue() {
 	}
 }
 
+
 jQuery(document).ready(function() {
 	$currentFocus = null;
 	jQuery(':input').focus( function() {

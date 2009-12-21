@@ -17,7 +17,8 @@ See the COPYING file for details.
 .goog-date-picker {
   -moz-user-focus: normal;
   -moz-user-select: none;
-  position: relative;
+  position: absolute;
+  z-index:9999 !important;
   border: 1px solid #000;
   float: left;
   padding: 2px;
