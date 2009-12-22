@@ -211,12 +211,20 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .fl-container-users  .information-group       .header   	{font-size:15px; line-height:15px; background-color:#6A8EA8; cursor:pointer;}
 .fl-container-users  .information-group       .sub-header {font-size:14px; line-height:14px; font-weight:bold; padding-bottom: 15px; background-color:#E6E6E6;}
 .fl-container-users  .information-subgroup .header   	{font-size:14px; line-height:14px; background-color:#E6E6E6; padding-bottom:8px; color:#606060;}
-.fl-container-users  .information-subgroup   table {font-size:12px; line-height:12px; background-color:#E6E6E6; width:371px; border:1px solid #ADADAD; margin:1px;}
-.fl-container-users  .information-subgroup   table thead tr td {font-size:11px; line-height:11px; background-color:#C5D1CF; padding:2px 2px 1px 4px; border:1px solid #ADADAD;}
-.fl-container-users  .information-subgroup   table tbody tr td {background-color:#fff; padding: 4px 2px 3px 4px; border:1px solid #ADADAD; color:#606060}
+.fl-container-users  .information-subgroup  table {font-size:12px; line-height:12px; background-color:#E6E6E6; width:371px; border:1px solid #ADADAD; margin:1px;}
+.fl-container-users  .information-subgroup  table thead tr td {font-size:11px; line-height:11px; background-color:#C5D1CF; padding:2px 2px 1px 4px; border:1px solid #ADADAD;}
+.fl-container-users  .information-subgroup  table tbody tr td {background-color:#fff; padding: 5px 2px 4px 4px; border:1px solid #ADADAD; color:#606060}
+.fl-container-users  .information-subgroup  table tbody tr:hover td {background-color:#BFF4FF; cursor:pointer;}
+.fl-container-users  .information-subgroup  table tbody tr.add-new-user td {color:#A9A59B; font-weight:bold; background-color:#F5F3DC;}
+
 
 .overflow-user-list {max-height:300px; overflow-x:hidden; overflow-y:auto; margin-bottom:24px;}
-.user-details {height:400px; border:1px solid #ADADAD; padding:12px; background-color:#C5D1CF;}
+.user-details { border:1px solid #ADADAD; padding:12px; background-color:#C5D1CF;}
+.user-details-fields {height:400px;}
+.user-details .info-pair {padding-bottom:16px;}
+.user-details .info-pair .label {float:left; width:110px; font-weight:bold; text-align:right; padding:5px 14px 0 0 ;}
+.user-details .info-pair .user-input {float:left; width:230px;}
+
 
 .fl-container-left  .information-group .radio-buttons {padding-bottom: 15px; width:100%;}
 .fl-container-left  .information-group .radio-button	{padding-right: 20px; font-size:14px; line-height:14px;}
@@ -281,6 +289,7 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .find-edit-object-records .info-pair-table .info-value tbody td {border:none; padding: 3px 0 3px 2px;}
 .find-edit-object-records .info-pair-table .info-value tbody tr:hover {background-color:#BFF4FF;}
 
+
 .cal img {padding:0 1px 1px 1px;}
 
 .field-cal {width:118px;}
@@ -341,10 +350,12 @@ textarea {overflow:auto;}
 .gen-num-overlay table tr:hover td.type {color:#3 33399;}
 .gen-num-overlay table tr:hover td.prefix {color:#3 33399;}
 
-.pivot-box, .pivot-search-box {margin-bottom:10px; margin-top:10px; border-left:1px solid #C9CACC; border-right:1px solid #C9CACC; border-bottom:1px solid #C9CACC;}
-.pivot-box-content, .pivot-search-box-content {font-size:10px; line-height:10px; color:#7F8083; border-top:1px solid #C9CACC;}
-.pivot-box-header, .pivot-search-box-header {background-color:#6A8EA8; font-weight:bold; padding:4px 0 4px 8px; color:#606060; font-size:12px; line-height:12px; cursor:pointer;}
-.pivot-search-box-header {color:#000;}
+.pivot-search-box {}
+.pivot-box, .pivot-search-box, .pivot-users-box {margin-bottom:10px; margin-top:10px; border-left:1px solid #C9CACC; border-right:1px solid #C9CACC; border-bottom:1px solid #C9CACC;}
+.pivot-box-content, .pivot-search-box-content, .pivot-users-box-content {font-size:10px; line-height:10px; color:#7F8083; border-top:1px solid #C9CACC;}
+.pivot-box-header, .pivot-search-box-header, .pivot-users-box-header {background-color:#6A8EA8; font-weight:bold; padding:4px 0 4px 8px; color:#000; font-size:12px; line-height:12px; cursor:pointer;}
+.pivot-users-box-header {cursor:auto; background-color:#5C7E9A;}
+.pivot-header {color:#606060;}
 .pivot-box-label-pair {width:100%; clear:both;}
 .pivot-box-label {border-bottom:1px solid #C9CACC; padding:2px 0 2px 8px;}
 .pivot-box-label-1 , .pivot-box-label-2 , .pivot-box-label-3 {float:left;} 
@@ -361,6 +372,8 @@ textarea {overflow:auto;}
 
 .pivot-box-data {padding:3px 0 3px 8px;}
 .pivot-search-box-data  {padding:10px 0 10px 8px;}
+.pivot-users-box-data  {padding:10px 0 10px 8px;}
+
 .pivot-box-data-1 {float:left; padding:2px 0; color:#0F75BC;}
 .pivot-box-data-2 {float:left; padding:2px 0;}
 .pivot-box-data-3 {float:left; padding:2px 0;}
@@ -375,7 +388,7 @@ textarea {overflow:auto;}
 .related-collections .pivot-box-data-2 {width:34%;}
 .related-collections .pivot-box-data-3 {width:22%;}
 
-.pivot-search-box {}
+
 
 .create-quick-button{display:block; width:192px; height:23px; background: url("../images/btnCreateQuickt.png") no-repeat 0 -23px; border:none;}
 .create-quick-button:hover {background-position: 0 0;}
@@ -408,6 +421,7 @@ td textarea {border:none;}
 
 .input-buttons {width:100%; padding:1px 0 8px 0; margin-top:-20px;}
 .savebutton, .cancelbutton, .viewbutton  {margin-left:10px; float:right; border:none;}
+.deletebutton {margin-right:10px; float:left; border:none;}
 .viewbutton {margin:0px; *margin-top:-24px; line-height:0;}
 .no-border {border-width:0; background-color: #F5F5F6;}
 .no-float {float:none;}
