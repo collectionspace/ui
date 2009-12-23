@@ -85,6 +85,7 @@ input[type="text"], input[type="password"], textarea {width:99.75%;}
 .csc-user-list, .csc-user-details {}
 .csc-user-list .header {background-color:white;}
 
+.select-recordtype {padding-top:8px;}
 .recordtype-label {padding-right:8px; padding-top:3px; font-size:12px; color:#6D6E71;}
 
 table#search-results {padding-left:12px; width:100%;}
