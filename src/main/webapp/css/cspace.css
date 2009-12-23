@@ -65,20 +65,22 @@ input[type="text"], input[type="password"], textarea {width:99.75%;}
 #title-bar .title-bar-value {margin-bottom:3px;}
 #title-bar .label .label-text {width:400px; float:left;}
 
-#search-box {padding: 8px 0 8px 12px; margin:9px 0 4px 0; background-color:#E6E6E6; border:1px solid #CECFD1;}
+#search-box {padding: 12px 0 12px 12px; margin:9px 0 4px 0; background-color:#E6E6E6; border:1px solid #CECFD1;}
 .search-bar {}
-.csc-search-submit, .csc-global-search-submit, .csc-search-pivot-submit {padding:3px 33px 1px; margin:0; *margin-top:-10px; border:1px solid #94A8B5; 
+.csc-search-submit, .csc-global-search-submit, .csc-search-pivot-submit, .csc-new-user-submit
+ {padding:2px 25px 0px 25px; margin:0; border:1px solid #94A8B5; 
 	background-color:#336384; color:#fff; text-decoration:none; font-size:12px; line-height:12px;}
+.csc-new-user-submit {float:right; margin-right:14px;}
 .csc-search-pivot-submit-container {padding:14px 8px 0 0; float:left;}
 .csc-global-search-submit {padding:3px 10px 1px; background-color:#D5D6D7; color:#000;}
-.csc-search-keywords, .csc-search-user {width:50% !important; margin:0 12px 8px 0; height:16px; border:1px solid #BCBDBD; padding:2px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}
-.csc-search-user {margin-top:8px;}
+.csc-search-keywords, .csc-search-user {width:50% !important; margin:0 12px 0 0; height:16px; border:1px solid #BCBDBD; padding:2px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}
+.csc-search-user {mar gin-top:8px;}
 .found-records-box {padding:4px 0 14px 6px;}
 .found-records-content {color:#606060; font-size:16px; line-height:16px; font-weight:bold;}
 
-.csc-global-search-keywords, .csc-search-pivot-keywords {width:200px !important; margin:0 8px 8px 2px; height:16px; border:1px solid #BCBDBD; padding:2px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}
+.csc-global-search-keywords, .csc-search-pivot-keywords {width:200px !important; margin:0 8px 0 2px; height:16px; border:1px solid #BCBDBD; padding:2px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}
 .csc-search-pivot-keywords {width:226px !important; margin:0 8px 8px 0;}
-.csc-search-record-type, .csc-global-search-record-type, .csc-search-pivot-record-type {color:#6D6E71;}
+.csc-search-record-type, .csc-global-search-record-type, .csc-search-pivot-record-type {color:#6D6E71; *margin-bottom:-1px;}
 
 .csc-user-list, .csc-user-details {}
 .csc-user-list .header {background-color:white;}
@@ -212,11 +214,11 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .fl-container-users  .information-group       .sub-header {font-size:14px; line-height:14px; font-weight:bold; padding-bottom: 15px; background-color:#E6E6E6;}
 .fl-container-users  .information-subgroup .header   	{font-size:14px; line-height:14px; background-color:#E6E6E6; padding-bottom:8px; color:#606060;}
 .fl-container-users  .information-subgroup  table {font-size:12px; line-height:12px; background-color:#E6E6E6; width:371px; border:1px solid #ADADAD; margin:1px;}
-.fl-container-users  .information-subgroup  table thead tr td {font-size:11px; line-height:11px; background-color:#C5D1CF; padding:2px 2px 1px 4px; border:1px solid #ADADAD;}
+.fl-container-users  .information-subgroup  table thead tr td {font-size:11px; line-height:11px; background-color:#C5D1CF; padding:3px 2px 2px 4px; border:1px solid #ADADAD; color:#336384;}
 .fl-container-users  .information-subgroup  table tbody tr td {background-color:#fff; padding: 5px 2px 4px 4px; border:1px solid #ADADAD; color:#606060}
 .fl-container-users  .information-subgroup  table tbody tr:hover td {background-color:#BFF4FF; cursor:pointer;}
 .fl-container-users  .information-subgroup  table tbody tr.add-new-user td {color:#A9A59B; font-weight:bold; background-color:#F5F3DC;}
-
+.new-user-background {background-color:#F5F3DC !important;}
 
 .overflow-user-list {max-height:300px; overflow-x:hidden; overflow-y:auto; margin-bottom:24px;}
 .user-details { border:1px solid #ADADAD; padding:12px; background-color:#C5D1CF;}

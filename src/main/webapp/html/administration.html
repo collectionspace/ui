@@ -103,8 +103,7 @@
 								<div id="search-box">
 									<!-- search form -->
 									<form>
-										<input name="keyword" type="text" class="csc-search-user" /><a href="#" class="csc-search-submit">Find User</a>
-									</form>
+										<input name="keyword" type="text" class="csc-search-user" /><input type="submit" class="csc-search-submit" value="Find User" /></form>
 									<!-- end search form -->
 								</div>
 
@@ -129,10 +128,10 @@
 															</tr>
 														</thead>
 														<tbody>
-															<tr class="add-new-user" style="color:#AAA79F; background-color:#F5F3DC;">
+															<tr class="add-new-user">
 																<td>New</td>
 																<td>User</td>
-																<td>Edit Details</td>
+																<td>Edit Details <img src="../images/new_user_arrow.png" width=16 height=10 alt=""/></td>
 															</tr>
 															<tr>
 																<td>Jesse</td>
@@ -192,6 +191,12 @@
 														</tbody>
 													</table>
 												</div>
+												
+												<!-- search form -->
+												<form>
+													<input type="submit" class="csc-new-user-submit" value="+ Create New User" /></form>
+												<!-- end search form -->
+												
 												<div class="clear"></div>
 											</div>
 											
@@ -199,7 +204,7 @@
 												<div class="fl-container-flex header">
 													User Details
 												</div>
-												<div class="user-details">
+												<div class="user-details <!--new-user-background-->">
 													<div class="user-details-fields">
 														<div class="info-pair">
 															<div class="label">User Name</div><div class="user-input"><input type="text" class="input-alpha csc-" name=""></div>
