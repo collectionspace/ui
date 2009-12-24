@@ -120,6 +120,12 @@ table#search-results tbody tr td a.csc-number:hover {color:#6A8FA8; text-decorat
 #tab-menu {padding-bottom:1px; width:auto; height:24px; float:left;}
 .upper-save {float:right; padding-bottom:1px; width:auto; height:24px;}
 
+.authority-select {float:left; padding:2px 4px; *padding:0 4px; margin: 0 8px 4px 0; background-color:#E1E8ED; cursor:pointer;}
+.authority-select select {background-color:#E1E8ED; float:left;}
+.authority-select .authority-select-label {font-weight:bold; float:left; padding: 3px 2px 0 4px; *padding:5px 2px 0 4px;}
+.authority-select-tab {background-color:#E1E8ED; padding:6px 10px 5px 10px; float:left; cursor:pointer; font-weight:bold;}
+.top-nav .selected {background-color:#316285; color:#fff;}
+
 .fl-tabs {margin:0 0 2px 0; *margin-bottom:3px; border:0 none #000; text-align:center; padding:0;}
 .fl-tabs li {list-style-type:none; display:inline;}
 .fl-tabs li a {padding:4px 14px 2px 14px; background-color:#E8E9EB; margin-left:2px; *margin-bottom:-4px; *padding:2px 14px 3px 14px; border:none; 
@@ -196,7 +202,9 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .fl-container-left .upper-save {float:right;}
 .fl-container-left .object-entry-outer-border,
 .fl-container-left .intake-outer-border,
-.fl-container-left .acquisition-outer-border {border: none; /*padding: 0 0 10px 10px;*/ padding: 0 0 10px 0;}
+.fl-container-left .acquisition-outer-border,
+.fl-container-left .authority-outer-border
+ {border: none; /*padding: 0 0 10px 10px;*/ padding: 0 0 10px 0;}
 .login-outer-border {border: none; padding:40px 0 10px 0px;}
 
 .fl-container-left  .information-group       {padding:0 0 20px 0;}
@@ -249,7 +257,7 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .create-new .fl-container-left .button {margin-right: 7px; float:left;}
 
 .info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-termlist 
-{width:100%; float:left; position:relative; padding-bottom:10px; font-size:12px; line-height:12px; position:relative;}
+{width:100%; position:relative; padding-bottom:10px; font-size:12px; line-height:12px; float:left;}
 
 .info-label {width:100%; float:left; padding-top: 2px; padding-bottom:2px; font-weight:bold; color:# 0F75BC; font-size:11px; line-height:11px;}
 .info-value {width:100%; float:left;}
@@ -303,6 +311,8 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}
 .input-dropdown, .input-money-type, .input-money-amount, .input-date, .input-textarea
 {width: 99.5%; height:16px; padding-top:2px;}
 
+
+
 table .input-alpha, table .input-alpha-table, table .input-authority, table .input-numeric, 
 table .input-numeric-small, table .input-numeric-medium, table .input-numeric-long, 
 table .input-dropdown, table .input-money-type, table .input-money-amount, table .input-date
@@ -313,8 +323,8 @@ table .input-dropdown, table .input-money-type, table .input-money-amount, table
 .input-numeric-medium {width: 120px}
 .input-date	 		   {width: 100px !important;}
 .input-money-amount	   {width: 120px;}
-.input-select		   {width: auto;}
-.input-textarea		   {width: 99.5%; height:62px;}
+.input-select		   {width: auto; height:20px; *height:23px;}
+.input-textarea		   {width: 99.5%; height:61px; *height:63px;}
 .input-alpha-login       {width: 120px; height:18px;}
 
 .fl-container-pivot  select.recently-created-list {width:232px !important; height:20px; *height:24px;}
