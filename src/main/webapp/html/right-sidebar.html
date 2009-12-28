@@ -17,99 +17,161 @@
 			<img src="../images/media-snapshot.png" alt="media snapshot" height=253 width=248 />
 			
 			<div class="pivot-box">
-				<div class="pivot-box-content integrated-authorities deactivate">
+				<div class="pivot-box-content integrated-authorities">
 					<div class="pivot-box-header" onclick="ShowHide('#toggle-integrated-authorities'); return false;">
 						<span class="pivot-toggle"><img id="toggle-integrated-authorities-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
-						Integrated Authorities <span class="csc-num-items"></span>
+						Integrated Authorities &amp; Vocabularies<span class="csc-num-items"></span>
 					</div>
-					<div id="toggle-integrated-authorities">
-						<div class="pivot-box-label">
-							<div class="pivot-box-label-pair"><div class="pivot-box-label-1">Description</div>
-							<div class="pivot-box-label-2">Type</div></div>
+					
+					<table id="toggle-integrated-authorities" class="pivot-box-table">
+						<div class="hidden csc-error-message cs-message">This is the error message</div>
+						<thead class="">
+							<tr>
+								<td>Description</td>
+								<td>Type</td>
+								<td>Relationship</td>
+							</tr>
+						</thead>
+						<tbody >
+							<tr>
+								<td colspan=3><a class="csc-related-number" href="authority.html">(retrieving record list...)</a></td>
+							</tr>
+							<tr class="pivot-box-data csc-related-row">
+								<td><a href="#" class="link">Connelly, Jennifer</a></td>
+								<td class="csc-related-recordtype">(A) Person</td>
+								<td class="csc-related-relationshiptype">Current Owner</td>
+							</tr>
+							<tr  class="pivot-box-data csc-related-row">
+								<td><a href="#" class="link">Gere, Richard</a></td>
+								<td class="csc-related-recordtype">(A) Person</td>
+								<td class="csc-related-relationshiptype">Donor</td>
+							</tr>
+							<tr class="pivot-box-data csc-related-row">
+								<td><a href="#" class="link">Paris Expo, 76</a></td>
+								<td>(A) Event</td>
+								<td>Location</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<div class="csc-related-records">
+				<div class="pivot-box">
+					<div class="pivot-box-content related-procedures">
+						<div class="pivot-box-header" onclick="ShowHide('#toggle-related-procedures'); return false;">
+							<div class="fl-force-left">
+								<span class="pivot-toggle"><img id="toggle-related-procedures-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+								Related Procedures
+								<span class="csc-num-items"></span>
+							</div>
+							<div class="add-more"><a href=""class="add-link">+ add</a></div>
 							<div class="clear"></div>
 						</div>
-						<div class="pivot-box-data">
-							
+						
+						<table id="toggle-related-procedures" class="pivot-box-table">
+							<div class="hidden csc-error-message cs-message">This is the error message</div>
+							<thead class="">
+								<tr>
+									<td>ID</td>
+									<td>Summary</td>
+									<td>Type</td>
+									<td>Relationship</td>
+								</tr>
+							</thead>
+							<tbody >
+								<tr>
+									<td colspan=4><a class="csc-related-number" href="intake.html">(retrieving record list...)</a></td>
+								</tr>
+								<tr class="pivot-box-data csc-related-row">
+									<td><a href="#" class="link csc-related-number">IN2009.003</a></td>
+									<td class="csc-related-summary">Please enter this without vowels</td>
+									<td class="csc-related-recordtype">Intake</td>
+									<td class="csc-related-relationshiptype">Intake</td>
+								</tr>
+								<tr class="pivot-box-data csc-related-row">
+									<td><a href="#" class="link csc-related-number">IN2009.003</a></td>
+									<td class="csc-related-summary">Please enter this without vowels</td>
+									<td class="csc-related-recordtype">Intake</td>
+									<td class="csc-related-relationshiptype">Intake</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+					<div class="pivot-box-content related-objects" >
+						<div class="pivot-box-header" onclick="ShowHide('#toggle-related-objects'); return false;">
+							<div class="fl-force-left">
+								<span class="pivot-toggle"><img id="toggle-related-objects-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+								Related Objects
+								<span class="csc-num-items"></span>
+							</div>
+							<div class="add-more"><a href="" class="add-link">+ add</a></div>
+							<div class="clear"></div>
 						</div>
+						<table id="toggle-related-objects" class="pivot-box-table">
+							<div class="hidden csc-error-message cs-message">This is the error message</div>
+							<thead class="">
+								<tr>
+									<td>Accession</td>
+									<td>Summary</td>
+									<td>Relationship</td>
+								</tr>
+							</thead>
+							<tbody >
+								<tr>
+									<td colspan=3><a class="csc-related-number" href="object.html">(retrieving record list...)</a></td>
+								</tr>
+								<tr class="pivot-box-data csc-related-row">
+									<td><a href="#" class="link csc-related-number">IN2009.003</a></td>
+									<td class="csc-related-summary">Please enter this without vowels</td>
+									<td class="csc-related-relationshiptype">Intake</td>
+								</tr>
+								<tr class="pivot-box-data csc-related-row">
+									<td><a href="#" class="link csc-related-number">IN2009.003</a></td>
+									<td class="csc-related-summary">Please enter this without vowels</td>
+									<td class="csc-related-relationshiptype">Intake</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+					<div class="pivot-box-content related-collections">
+						<div class="pivot-box-header" onclick="ShowHide('#toggle-related-collections'); return false;">
+							<span class="pivot-toggle"><img id="toggle-related-collections-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
+							Related Collections <span class="csc-num-items"></span>
+						</div>
+						
+						<table id="toggle-related-collections" class="pivot-box-table">
+							<div class="hidden csc-error-message cs-message">This is the error message</div>
+							<thead class="">
+								<tr>
+									<td>Name</td>
+									<td>Owner</td>
+									<td>Edited On</td>
+								</tr>
+							</thead>
+							<tbody >
+								<tr>
+									<td colspan=3><a class="csc-related-number" href="intake.html">(retrieving record list...)</a></td>
+								</tr>
+								<tr class="pivot-box-data csc-related-row">
+									<td><a href="#" class="link csc-collection-name">Star Wars</a></td>
+									<td class="csc-collection-owner">Jesse Martinez</td>
+									<td class="csc-collection-time">Yesterday</td>
+								</tr>
+								<tr class="pivot-box-data csc-related-row">
+									<td><a href="#" class="link csc-related-number">Howdy Doody</a></td>
+									<td class="csc-related-summary">Nina Dinoff</td>
+									<td class="csc-related-relationshiptype">12 Dec 2009</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
 			
-        <div class="csc-related-records">
-			<div class="pivot-box">
-				<div class="pivot-box-content related-procedures">
-					<div class="pivot-box-header" onclick="ShowHide('#toggle-related-procedures'); return false;">
-						<span class="pivot-toggle"><img id="toggle-related-procedures-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
-						Related Procedures
-						<span class="csc-num-items"></span>
-					</div>
-					<div id="toggle-related-procedures">
-					<div class="hidden csc-error-message cs-message">This is the error message</div>
-						<div class="pivot-box-label">
-							<div class="pivot-box-label-pair">
-							    <div class="pivot-box-label-1">ID</div>
-							    <div class="pivot-box-label-2">Summary</div>
-							    <div class="pivot-box-label-3">Record Type</div>
-							    <div class="pivot-box-label-4">Relationship</div>
-								<div class="clear"></div>
-							</div>
-							<div class="clear"></div>
-						</div>
-						<div class="pivot-box-data csc-related-row">
-							<div class="pivot-box-data-1"><a class="csc-related-number" href="intake.html">(retrieving record list...)</a></div>
-							<div class="pivot-box-data-2 csc-related-summary"></div>
-							<div class="pivot-box-data-3 csc-related-recordtype"></div>
-							<div class="pivot-box-data-4 csc-related-relationshiptypte"></div>
-							<div class="clear"></div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="pivot-box-content related-objects" >
-					<div class="pivot-box-header" onclick="ShowHide('#toggle-related-objects'); return false;">
-						<span class="pivot-toggle"><img id="toggle-related-objects-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
-						Related Objects
-						<span class="csc-num-items"></span>
-					</div>
-					<div id="toggle-related-objects">
-					<div class="hidden csc-error-message cs-message">This is the error message</div>
-						<div class="pivot-box-label">
-							<div class="pivot-box-label-pair">
-								<div class="pivot-box-label-1">Accession</div>
-								<div class="pivot-box-label-2">Summary</div>
-								<div class="pivot-box-label-3">Relationship</div>
-								<div class="clear"></div>
-							</div>
-							<div class="clear"></div>
-						</div>
-						<div class="pivot-box-data csc-related-row">
-							<div class="pivot-box-data-1"><a class="csc-related-number" href="object.html">(retrieving record list...)</a></div>
-							<div class="pivot-box-data-2 csc-related-summary"></div>
-							<div class="pivot-box-data-3 csc-related-relationshiptype"></div>
-							<div class="clear"></div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="pivot-box-content related-collections deactivate">
-					<div class="pivot-box-header" onclick="ShowHide('#toggle-related-collections'); return false;">
-						<span class="pivot-toggle"><img id="toggle-related-collections-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
-						Related Collections <span class="csc-num-items"></span>
-					</div>
-					<div id="toggle-related-collections">
-						<div class="pivot-box-label">
-							<div class="pivot-box-label-pair"><div class="pivot-box-label-1">Name</div><div class="pivot-box-label-2">Owner</div><div class="pivot-box-label-3">Edited On</div></div>
-							<div class="clear"></div>
-						</div>
-						<div class="pivot-box-data">
-							
-						</div>
-					</div>
-				</div>
-			</div>
-        </div>
-		
-		<!-- END Right-side container -->
+			<!-- END Right-side container -->
 	
 			<div class="clear"></div>
     		
