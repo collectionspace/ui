@@ -151,23 +151,6 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .fl-tabs-left {text-align:left; padding-left:0px;}
 .fl-tabs-right {text-align:right; padding-right:15px;}
 
-/*ul.cssmenu {list-style-type: none; padding: 4px 0px; margin:0; height:  29px;}
-.displace {position: absolute; left: -5000px;}
-ul.cssmenu li {float: right; list-style-type:none; margin:0; padding:0 0 0 2px; display:inline;}
-ul.cssmenu li a {display: block; width: 223px; height: 29px; background: url("../images/top-menu-full.png");}
-ul.cssmenu li.createnew a {background-position: 0 0;}
-ul.cssmenu li.findandedit a {background-position: -218px 0;}
-ul.cssmenu li.report a {background-position: -447px 0;}
-ul.cssmenu li.mycs a {background-position: -671px 0;}
-ul.cssmenu li.createnew a:active, ul.cssmenu li.createnew a:hover,
-ul.cssmenu li.createnew a.selected {background-position: 0 -29px;}
-ul.cssmenu li.findandedit a:active, ul.cssmenu li.findandedit a:hover, 
-ul.cssmenu li.findandedit a.selected {background-position: -223px -29px;}
-ul.cssmenu li.report a:active, ul.cssmenu li.report a:hover, 
-ul.cssmenu li.report a.selected {background-position: -447px -29px;}
-ul.cssmenu li.mycs a:active, ul.cssmenu li.mycs a:hover, 
-ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}*/
-
 .header-name {text-transform:uppercase;}
 .title-name, .record-number, .header-name, .primary-value, .secondary-value {font-size: 22px; line-height: 22px; float:left; width:400px;}
 .title-name {width:620px; overflow:hidden;}
@@ -187,8 +170,6 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}*/
 .header-toggle img {padding: 6px 2px 0 4px;}
 .header-toggle-sub img {margin: 0 2px -2px 0;}
 .pivot-toggle img   {margin: 0 2px -2px -3px;}
-
-.z-fix {}
 
 .info-column 	 {width: 100%;}
 .info-column1 	 {width: 100%;}
@@ -311,7 +292,6 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}*/
 .find-edit-object-records .info-pair-table .info-value tbody td {border:none; padding: 3px 0 3px 2px;}
 .find-edit-object-records .info-pair-table .info-value tbody tr:hover {background-color:#BFF4FF;}
 
-
 .cal img {padding:0 1px 1px 1px;}
 
 .field-cal {width:118px;}
@@ -321,8 +301,6 @@ ul.cssmenu li.mycs a.selected {background-position: -671px -29px;}*/
 .input-numeric-small, .input-numeric-medium, .input-numeric-long, 
 .input-dropdown, .input-money-type, .input-money-amount, .input-date, .input-textarea
 {width: 99.5%; height:16px; padding-top:2px;}
-
-
 
 table .input-alpha, table .input-alpha-table, table .input-authority, table .input-numeric, 
 table .input-numeric-small, table .input-numeric-medium, table .input-numeric-long, 
@@ -379,7 +357,6 @@ textarea {overflow:auto;}
 .pivot-box-content, .pivot-search-box-content, .pivot-users-box-content {font-size:10px; line-height:10px; color:#7F8083; border-top:1px solid #C9CACC;}
 .pivot-box-header, .pivot-search-box-header, .pivot-users-box-header {background-color:#6A8EA8; font-weight:bold; padding:4px 4px 4px 8px; color:#000; font-size:12px; line-height:12px; cursor:pointer; height:13px;}
 .pivot-users-box-header {cursor:auto; background-color:#5C7E9A;}
-.pivot-box-header {}
 .pivot-header {color:#606060;}
 
 .pivot-box-table {width:100%; background-color:#fff; color:#6D6E71;}
@@ -387,40 +364,9 @@ textarea {overflow:auto;}
 .pivot-box-table thead tr td {border-bottom: 1px solid #C9CACC; font-weight:bold;}
 .add-more {float:right; color:#000; *padding-top:2px;}
 
-/*
-.pivot-box-label-pair {width:100%; clear:both;}
-.pivot-box-label {border-bottom:1px solid #C9CACC; padding:2px 0 2px 8px;}
-.pivot-box-label-1 , .pivot-box-label-2 , .pivot-box-label-3 {float:left;} 
-.integrated-authorities .pivot-box-label-1 {width:65%;}
-.integrated-authorities .pivot-box-label-2 {width:35%;}
-.related-procedures .pivot-box-label-1 {width:33%;}
-.related-procedures .pivot-box-label-2 {width:33%;}
-.related-procedures .pivot-box-label-3 {width:33%;}
-.related-objects .pivot-box-label-1 {width:33%;}
-.related-objects .pivot-box-label-2 {width:66%;}
-.related-collections .pivot-box-label-1 {width:33%;}
-.related-collections .pivot-box-label-2 {width:33%;}
-.related-collections .pivot-box-label-3 {width:33%;}
-
 .pivot-box-data {padding:3px 0 3px 8px;}
 .pivot-search-box-data  {padding:10px 0 10px 8px;}
 .pivot-users-box-data  {padding:10px 0 10px 8px;}
-
-.pivot-box-data-1 {float:left; padding:2px 0; color:#0F75BC;}
-.pivot-box-data-2 {float:left; padding:2px 0;}
-.pivot-box-data-3 {float:left; padding:2px 0;}
-.integrated-authorities .pivot-box-data-1 {width:65%;}
-.integrated-authorities .pivot-box-data-2 {width:35%;}
-.related-procedures .pivot-box-data-1 {width:33%;}
-.related-procedures .pivot-box-data-2 {width:33%;}
-.related-procedures .pivot-box-data-3 {width:33%;}
-.related-objects .pivot-box-data-1 {width:35%;}
-.related-objects .pivot-box-data-2 {width:65%;}
-.related-collections .pivot-box-data-1 {width:44%;}
-.related-collections .pivot-box-data-2 {width:34%;}
-.related-collections .pivot-box-data-3 {width:22%;} */
-
-
 
 .create-quick-button{display:block; width:192px; height:23px; background: url("../images/btnCreateQuickt.png") no-repeat 0 -23px; border:none;}
 .create-quick-button:hover {background-position: 0 0;}
