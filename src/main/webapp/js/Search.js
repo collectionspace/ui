@@ -15,7 +15,12 @@ var cspace = cspace || {};
 (function ($, fluid) {
 
     var defaultSearchUrlBuilder = function (recordType, query) {
-        return "../chain/" + recordType + "/search?query=" + query;
+// Up to 0.4, there's a bug in which the recordType for 'object' needs to be
+// plural
+        if (recordType === "object") {
+            recordType = "objects";
+        }
+        return "../../chain/" + recordType + "/search?query=" + query;
     };
 
     var colDefsGenerated = function (columnList, recordType) {
