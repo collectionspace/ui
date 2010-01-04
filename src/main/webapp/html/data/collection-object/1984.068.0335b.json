@@ -75,6 +75,24 @@
         "descDateLatestSingleCertainty":"",
         "descDateLatestSingleQualifier":"",
         "descDateText": ""
-    }
+    },
+    "relations": [
+        {
+            "summary": "Stamp albums. Famous stars series stamp album.",
+            "csid": "1984.068.0338",
+            "number": "1984.068.0338",
+            "relid": "19ba9f30-75c3-41c8-b3e6",
+            "relationshiptype": "affects",
+            "recordtype": "objects"
+        },
+        {
+            "summary": "Souvenir books. Molly O' Play Book.",
+            "csid": "2005.018.1383",
+            "number": "2005.018.1383",
+            "relid": "e8d20612-e1f5-4e90-bc36",
+            "relationshiptype": "affects",
+            "recordtype": "objects"
+        }
+    ]
 }
 

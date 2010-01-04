@@ -24,7 +24,7 @@
             "csid": "1984.068.0338",
             "number": "1984.068.0338",
             "summary": "somethings",
-            "recordtype": "object",
+            "recordtype": "objects",
             "relationshiptype": "affects"
         },{
             "csid": "2007.4-a",
@@ -33,10 +33,16 @@
             "recordtype": "intake",
             "relationshiptype": "also affects somewhat"
         },{
+            "csid": "ACQ2009.2",
+            "number": "ACQ2009.2",
+            "summary": "different, yet",
+            "recordtype": "acquisition",
+            "relationshiptype": "also affects somewhat"
+        },{
             "csid": "1984.068.0335b",
             "number": "1984.068.0335b",
             "summary": "some other thing",
-            "recordtype": "object",
+            "recordtype": "objects",
             "relationshiptype": "also affects"
         }
     ]

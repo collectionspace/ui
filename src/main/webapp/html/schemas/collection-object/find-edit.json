@@ -17,16 +17,6 @@
                     },
                     "validators": [],
                     "decorators": []
-//                },
-//                "accessionNumber": {
-//                    "selector": ".csc-accession-number",
-//                    "validators": [],
-//                    "decorators": []
-//                },
-//                "lastEdit": {
-//                    "selector": ".csc-last-edit",
-//                    "validators": [],
-//                    "decorators": []
                 }
             }
         }

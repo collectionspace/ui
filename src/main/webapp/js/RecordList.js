@@ -66,7 +66,15 @@ var cspace = cspace || {};
 
             bindEventHandlers(that);
             that.locate("errorMessage").hide();
-            that.dataContext.fetch("*", {});
+            if (that.options.data) {
+                that.events.modelChanged.fire(that.options.data, that.model.items);
+                that.model.items = that.options.data;
+                that.refreshView();
+                that.locate("errorMessage").hide();
+            }
+            else {
+                that.dataContext.fetch("*", {});
+            }
         };
     };
 

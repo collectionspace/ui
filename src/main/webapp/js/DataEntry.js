@@ -134,8 +134,14 @@ var cspace = cspace || {};
                 var templ = that.options.templates[key];
                 if (templ.hasOwnProperty("setupFunction")) {
                     var func = templ.setupFunction;
+                    var data = templ.data;
                     that.events.pageRendered.addListener(function () {
-                        fluid.invokeGlobalFunction(func, [that.model.fields.csid]);
+                        if (data) {
+                            fluid.invokeGlobalFunction(func, [that.model.fields.csid, that.model[data]]);
+                        }
+                        else {
+                            fluid.invokeGlobalFunction(func, [that.model.fields.csid]);
+                        }
                     });
                 }
             }
@@ -269,8 +275,9 @@ var cspace = cspace || {};
             },
             rightSidebar:  {
                 url: "../html/right-sidebar.html",
-                id: "csc-right-sidebar"//,
-//                setupFunction: "cspace.setupRightSidebar"
+                id: "csc-right-sidebar",
+                setupFunction: "cspace.setupRightSidebar",
+                data: "relations"
             },
             footer: {
                 url: "../html/footer.html",

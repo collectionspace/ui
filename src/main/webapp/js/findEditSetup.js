@@ -38,6 +38,7 @@ var cspace = cspace || {};
     cspace.setupFindEdit = function () {
 		var isLocal = cspace.util.isLocal();
         var orOpts = {uiSpecUrl: isLocal ? 
+// CSPACE-701
 		    "./schemas/collection-object/find-edit.json" : "../../chain/objects/uispec/find-edit"};
         if (isLocal) {
             orOpts.dataContext = setupTestDataContext("object");

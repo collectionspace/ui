@@ -87,6 +87,13 @@ var cspace = cspace || {};
                     reps[prop] = fluid.model.getBeanValue(modelPart[i], spec.replacements[prop]);
                 }
             }
+// CSPACE-701
+// in some cases, "objects" is used instead of "object"
+// this will be fixed in 0.5, but until then, we have to fudge it
+            if (reps.recordtype && reps.recordtype === "objects") {
+                reps.recordtype = "object";
+            }
+// end of fudge for CSPACE-701
             targetString = fluid.stringTemplate(spec.href, reps);
         }
         return {

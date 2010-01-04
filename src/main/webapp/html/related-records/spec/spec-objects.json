@@ -1,22 +1,26 @@
  {
     "spec": {
         "items": {
-            "selector": ".csc-related-object-record-list-row",
+            "selector": ".csc-related-row",
             "repeated": {
-                "accessionNumber": {
-                    "selector": ".csc-related-accession-number",
+                "summary": {
+                    "selector": ".csc-related-summary",
+                },
+                "number": {
+                    "selector": ".csc-related-number",
                     "type": "link",
-					"href": "object.html?csid=%csid",
-                    "linktext": "%accessionNumber",
+					"href": "%recordtype.html?csid=%csid",
+                    "linktext": "%number",
                     "replacements": {
                         "csid": "csid",
-                        "accessionNumber": "accessionNumber"
+                        "number": "number",
+                        "recordtype": "recordtype"
                     },
                     "validators": [],
                     "decorators": []
                 },
-                "objectTitle": {
-                    "selector": ".csc-related-title"
+                "recordtype": {
+                    "selector": ".csc-related-recordtype",                    
                 }
             }
         }
