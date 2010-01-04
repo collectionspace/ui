@@ -50,15 +50,16 @@ var cspace = cspace || {};
 
     var displaySearchResults = function (that, recordType) {
         var colList = [];
-        for (var key in that.model[0]) {
-            if (that.model[0].hasOwnProperty(key)) {
+        var results = that.model.results;
+        for (var key in results[0]) {
+            if (results[0].hasOwnProperty(key)) {
                 colList.push(key);
             }
         }
         var pagerArguments = [
             that.options.selectors.resultsContainer,
             {
-                dataModel: that.model,
+                dataModel: results,
                 columnDefs: colDefsGenerated(colList, recordType),
                 bodyRenderer: {
                     type: "fluid.pager.selfRender",
