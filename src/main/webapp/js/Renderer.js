@@ -152,8 +152,16 @@ var cspace = cspace || {};
                             valuebinding: newEl
                         };
                     }
-                    if (spec.decorators && spec.decorators.length > 0) {
+					if (spec.decorators && spec.decorators.length > 0) {
                         children[index].children[j].decorators = spec.decorators;
+                        children[index].children[j].decorators = fluid.transform(children[index].children[j].decorators, function (value, ind) {
+                            if (value.func === "cspace.numberPatternChooser") {
+                                value.options = value.options || {};
+                                value.options.baseUrl = that.dataContext.urlFactory.baseUrl();
+                                value.options.applier = that.applier;
+                            }
+                            return value;
+                        });
                     }
                     j++;
                 }

@@ -101,6 +101,34 @@ var cspace = cspace || {};
             }
         }
     };
+	
+	var setupConfirmation = function (that) {
+        
+        var resources = {
+            confirmation: {
+                href: that.options.confirmationTemplateUrl
+            }
+        };
+        
+        var confirmation = $("<div></div>", that.container[0].ownerDocument)
+            .html("You are about to navigate from the current record. Please confirm...")
+            .dialog({
+                autoOpen: false,
+                title: "Confirmation."
+            });
+        
+        fluid.fetchResources(resources, function () {
+            var templates = fluid.parseTemplates(resources, ["confirmation"], {});
+            fluid.reRender(templates, confirmation, {});
+        });
+        
+		$("a:not([href^=#])").live("click", function (e) {
+           confirmation.dialog("open");
+			var href = e.originalTarget.href;
+			cspace.confirmation(confirmation, {model: {href: href}, action: that.save});
+           return false;
+       });		
+   };
 
     var bindEventHandlers = function (that) {
 
@@ -136,16 +164,17 @@ var cspace = cspace || {};
                     var func = templ.setupFunction;
                     var data = templ.data;
                     that.events.pageRendered.addListener(function () {
+						var args = [that.model.fields.csid];
                         if (data) {
-                            fluid.invokeGlobalFunction(func, [that.model.fields.csid, that.model[data]]);
+							 args.push(that.model[data]);
                         }
-                        else {
-                            fluid.invokeGlobalFunction(func, [that.model.fields.csid]);
-                        }
+                        fluid.invokeGlobalFunction(func, args);
                     });
                 }
             }
         }
+		
+		setupConfirmation(that);
 
         that.dataContext.events.onError.addListener(makeDCErrorHandler(that));
     };
@@ -287,6 +316,7 @@ var cspace = cspace || {};
         csid: null,
         idField: "fields.csid",
         alternateFields: [],
+		 confirmationTemplateUrl: "../html/Confirmation.html",
         
         // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
         // load it manually via ajax

@@ -1,0 +1,23 @@
+.cs-confirmationDialog {
+	background-color: white;
+	width:800px;
+	float:left; 
+	width:100%;
+	position:absolute;
+	*position:relative;
+	z-index:9999;
+	border:1px solid #CECECE;
+}
+.ui-icon-closethick {
+	background-color:#577A98;
+}
+.ui-dialog-titlebar {
+	background-color:#577A98;
+}
+.cs-confirmationDialogButton {
+	border:none;
+	background-color:#577A98; 
+	color:#fff; 
+	float:left; 
+	margin-left: 53%;
+}
