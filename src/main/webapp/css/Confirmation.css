@@ -1,23 +1,45 @@
 .cs-confirmationDialog {
+	color: #6E6E6E;
+	font-size:14px;
+	line-height:20px;
 	background-color: white;
-	width:800px;
-	float:left; 
 	width:100%;
 	position:absolute;
 	*position:relative;
-	z-index:9999;
-	border:1px solid #CECECE;
+	z-index:99999;
+	border:0px solid #CECECE;
+}
+.csc-confirmationDialog-inner {
+	padding:20px 20px 20px 30px;
 }
 .ui-icon-closethick {
-	background-color:#577A98;
+	background-color:#fff;
+	float:right;
+	color:#6B8DA7;
 }
 .ui-dialog-titlebar {
-	background-color:#577A98;
+	background-color:#fff;
+	padding:4px 6px 4px 10px;
+	cursor:move;
+	margin-top:20px;
+}
+.csc-confirmationDialog-text{
+	padding-bottom:20px;
+}
+.csc-confirmationDialog-buttonrow {
+	padding:10px 0 0 0;
 }
 .cs-confirmationDialogButton {
-	border:none;
-	background-color:#577A98; 
-	color:#fff; 
-	float:left; 
-	margin-left: 53%;
+	border:none !important;
+}
+.ui-dialog-title {
+	color:#6E6E6E;
+	font-size:14px;
+	font-weight:bold;
+}
+.csc-confirmationDialog-closeBtn {
+	position:absolute;
+	right:-20px;
+	top:-41px;
+	width:auto;
 }

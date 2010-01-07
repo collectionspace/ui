@@ -3,7 +3,7 @@
 	float:left; 
 	width:100%;
 	position:absolute;
-	z-index:99999 !important;
+	z-index:999 !important;
 }
 .pattern-chooser-input {
 	width:51% !important;

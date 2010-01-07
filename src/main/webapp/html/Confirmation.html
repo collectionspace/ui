@@ -1,7 +1,16 @@
 <!-- NumberPatternChooser template -->
 <div class="csc-confirmationDialog cs-confirmationDialog">
-	Any unsaved changes will be lost if you naviage away without saving...
-    <input type="button" value="Cancel" class="csc-confirmationDialogButton-cancel cs-confirmationDialogButton">
-	<input type="button" value="Save and Procede" class="csc-confirmationDialogButton-save cs-confirmationDialogButton">
-	<input type="button" value="Procede without saving" class="csc-confirmationDialogButton-procede cs-confirmationDialogButton">
+	<div class="csc-confirmationDialog-inner">
+		<div class="csc-confirmationDialog-closeBtn"><img style="float:right;" src="../images/btnCloseTop.png" /></div><div class="clear"></div>
+		<div class="csc-confirmationDialog-text">You are about to leave this record.<br/>Save Changes?</div>
+		<div class="csc-confirmationDialog-buttonrow">
+			<input type="image" class="csc-confirmationDialogButton-cancel cs-confirmationDialogButton" alt="cancel " src="../images/btnCanceConfirm.png"/>
+			<input type="image" class="csc-confirmationDialogButton-save cs-confirmationDialogButton" alt="proceed without saving" src="../images/btnDontSave.png"/>
+			<input type="image" class="csc-confirmationDialogButton-save cs-confirmationDialogButton" alt="save and proceed" src="../images/btnSaveLarge.png"/>
+			<div class="clear"></div>
+		</div>
+		<!--<input type="button" value="Cancel" class="csc-confirmationDialogButton-cancel cs-confirmationDialogButton">
+		<input type="button" value="Save and Procede" class="csc-confirmationDialogButton-save cs-confirmationDialogButton">
+		<input type="button" value="Procede without saving" class="csc-confirmationDialogButton-procede cs-confirmationDialogButton"> -->
+	</div>
 </div>
