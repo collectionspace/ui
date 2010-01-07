@@ -114,6 +114,7 @@ var cspace = cspace || {};
             .html("You are about to navigate from the current record. Please confirm...")
             .dialog({
                 autoOpen: false,
+                modal: true,
                 title: "Confirmation."
             });
 		
