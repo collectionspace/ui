@@ -18,7 +18,10 @@ var cspace = cspace || {};
 		that.locate("cancel").click(function () {
             that.container.dialog("close");
         });
-        that.locate("procede").click(function (e) {
+		that.locate("closeButton").click(function () {
+            that.container.dialog("close");
+        });
+        that.locate("proceed").click(function (e) {
             window.location = that.options.model.href;
         });
         that.locate("save").click(function (e) {
@@ -40,8 +43,9 @@ var cspace = cspace || {};
 	fluid.defaults("cspace.confirmation", {
         selectors: {
             cancel: ".csc-confirmationDialogButton-cancel",
-            procede: ".csc-confirmationDialogButton-procede",
-            save: ".csc-confirmationDialogButton-save"
+            proceed: ".csc-confirmationDialogButton-proceed",
+            save: ".csc-confirmationDialogButton-save",
+			closeButton: ".csc-confirmationDialog-closeBtn"
         }
     });
 	

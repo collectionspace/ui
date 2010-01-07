@@ -116,6 +116,8 @@ var cspace = cspace || {};
                 autoOpen: false,
                 title: "Confirmation."
             });
+		
+		confirmation.parent().css("overflow", "visible")
         
         fluid.fetchResources(resources, function () {
             var templates = fluid.parseTemplates(resources, ["confirmation"], {});
