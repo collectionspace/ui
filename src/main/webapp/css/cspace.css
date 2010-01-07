@@ -30,6 +30,7 @@ input[type="text"], input[type="password"], textarea {width:99.5%;}
 .header-menu-logout {padding:4px 0 12px 0; float:right; font-size:11px; line-height:11px; font-weight:bold;}
 .header-menu-button {margin-right:6px; float:left; width:200px; height:30px;}
 .header-menu-search {float:right;}
+.header-menu-search select {margin-bottom:-1px;}
 
 .header-menu-button-row {}
 
@@ -82,6 +83,8 @@ input[type="text"], input[type="password"], textarea {width:99.5%;}
 .csc-global-search-keywords, .csc-search-pivot-keywords {width:200px !important; margin:0 8px 0 2px; height:16px; border:1px solid #BCBDBD; padding:2px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}
 .csc-search-pivot-keywords {width:226px !important; margin:0 8px 8px 0;}
 .csc-search-record-type, .csc-global-search-record-type, .csc-search-pivot-record-type {color:#6D6E71; *margin-bottom:-1px;}
+
+.csc-search-error-message {text-align:center; font-size:16px; margin:10px 0; background-color:#D1D2D4; border:2px solid black; padding: 10px 0;}
 
 .csc-user-list, .csc-user-details {}
 .csc-user-list .header {background-color:white;}
