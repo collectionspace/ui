@@ -23,6 +23,10 @@ var cspace = cspace || {};
         {"label": "Peach", "urn": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Peach)'Peach'"}
     ];
 
+    var parseLabelFromUrn = function (urn) {
+        return urn.slice(urn.indexOf("'") + 1, urn.length - 1);
+    };
+
     var setupAutocomplete = function (that) {
         var opts = that.options;
 
@@ -45,6 +49,11 @@ var cspace = cspace || {};
             input.val(item.urn);
             input.change();
         });
+
+        if (input.val()) {
+            var val = input.val();
+            autoCompleteInput.val(parseLabelFromUrn(val));
+        }
     };
 
 

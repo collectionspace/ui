@@ -17,7 +17,7 @@
         "acquSource": "BigShopIncorproated",
         "csid": "ACQ2009.002.001",
         "acquFundingValue": "",
-        "acquAuthorize": "Erin Yu"
+        "acquAuthorize": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Peach)'Peach'"
     },
     "relations": [
         {

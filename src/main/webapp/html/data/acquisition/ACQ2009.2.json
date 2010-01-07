@@ -2,6 +2,7 @@
     "fields": {
         "acquReferenceNum": "ACQ2009.2",
     	"acquDate": "",
+        "acquAuthorize": "",
     	"acquAccessionDate": "",
     	"acquPriceDesc": "",
     	"acquPriceDenom": "UK pound",
