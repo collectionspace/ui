@@ -73,14 +73,13 @@ jQuery(document).ready(function() {
 											</div>
 										</div>
 									
-										<div class="info-pair-date">
+										<div class="info-pair-date info-pair-date">
 											<div class="info-label" title="">Accession Date</div>
 											<div class="info-value csc-acquisition-accession-date-container">
 												<table>
 													<tbody>
 														<tr>
-															<td><input type="text" class="input-date csc-acquisition-accession-date csc-calendar-date" name="acquisition-accession-date" /></td>
-															<td><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></a></td>
+															<td class="field-cal"><input type="text" class="input-date csc-acquisition-accession-date csc-calendar-date" name="acquisition-accession-date" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></a></td>
 														</tr>
 													</tbody>
 												</table>
@@ -109,15 +108,14 @@ jQuery(document).ready(function() {
 											</div>
 										</div>
 										
-										<div class="info-pair-addrow">
+										<div class="info-pair-addrow info-pair-date">
 											<div class="info-label" title="">Acquisition Date</div>
 											<div class="info-value csc-acquisition-acquisition-date-container">
-												<table id="" style="width:auto;">
+												<table id="">
 													<tbody>
 														<tr>
-															<td class="table-unselected"></td>
-															<td class="field-cal"><input type="text" class="input-date csc-acquisition-date csc-calendar-date" name="acquisition-date"></td>
-                                                            <td><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></a></td>
+															<!--<td class="table-unselected"></td>-->
+															<td class="field-cal"><input type="text" class="input-date csc-acquisition-date csc-calendar-date" name="acquisition-date"><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></a></td>
 														</tr>
 													</tbody>
 												</table>
@@ -255,13 +253,13 @@ jQuery(document).ready(function() {
 								<!-- one row column -->
 								<div class="info-column fl-force-left z-fix">
 									<div class="info-column2-50 fl-force-left deactivate">
-										<div class="info-pair-addrow">
+										<div class="info-pair-addrow info-pair-date">
 											<div class="info-label" title="">Field Collection Date</div>
 											<div class="info-value">
-												<table id="" style="width:auto;">
+												<table id="">
 													<tbody>
 														<tr>
-															<td class="table-unselected"></td>
+															<!--<td class="table-unselected"></td>-->
 															<td class="field-cal"><input type="text" disabled class="input-date csc-object-collection-field-collection-date disabled" name="csc-object-collection-field-collection-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 														</tr>
 													</tbody>
