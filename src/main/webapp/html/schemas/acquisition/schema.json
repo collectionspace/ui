@@ -65,8 +65,14 @@
 	    },
 	    "fields.acquFundingSource": {
 	        "selector": ".csc-acquisition-acquisition-funding-source",
-	        "validators": [],
-	        "decorators": []
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-acquisition-acquisition-funding-source",
+                "options": {
+                    "url": "../../chain/acquisition/autocomplete/acquFundingSource"
+                }
+            }]
 	    },
 	    "fields.acquFundingProviso": {
 	        "selector": ".csc-acquisition-acquisition-funding-provisos",
@@ -80,13 +86,25 @@
 	    },
 	    "fields.acquAuthorize": {
 	        "selector": ".csc-acquisition-authorizer",
-	        "validators": [],
-	        "decorators": []
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-acquisition-authorizer",
+                "options": {
+                    "url": "../../chain/acquisition/autocomplete/acquAuthorize"
+                }
+            }]
 	    },
 	    "fields.acquSource": {
 	        "selector": ".csc-acquisition-acquisition-source",
-	        "validators": [],
-	        "decorators": []
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-acquisition-acquisition-source",
+                "options": {
+                    "url": "../../chain/acquisition/autocomplete/acquSource"
+                }
+            }]
 	    },
 	    "fields.acquTitleNum": {
 	        "selector": ".csc-acquisition-transfer-of-title-number",

@@ -58,13 +58,25 @@
 	    },
 	    "fields.currentOwner": {
 	        "selector": ".csc-intake-current-owner",
-	        "validators": [],
-	        "decorators": []
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-intake-current-owner",
+                "options": {
+                    "url": "../../chain/intake/autocomplete/currentOwner"
+                }
+            }]
 	    },
 	    "fields.depositor": {
 	        "selector": ".csc-intake-depositor",
-	        "validators": [],
-	        "decorators": []
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-intake-depositor",
+                "options": {
+                    "url": "../../chain/intake/autocomplete/depositor"
+                }
+            }]
 	    },
 	    "fields.depositorRequirements": {
 	        "selector": ".csc-intake-depositor-requirements",
@@ -171,13 +183,25 @@
 	    },
 		"fields.fieldCollectionSource": {
 	        "selector": ".csc-intake-field-collection-source",
-	        "validators": [],
-	        "decorators": []
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-intake-field-collection-source",
+                "options": {
+                    "url": "../../chain/intake/autocomplete/fieldCollectionSource"
+                }
+            }]
 	    },
 		"fields.fieldCollector": {
 	        "selector": ".csc-intake-field-collector",
-	        "validators": [],
-	        "decorators": []
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-intake-field-collector",
+                "options": {
+                    "url": "../../chain/intake/autocomplete/fieldCollector"
+                }
+            }]
 	    },
 		"fields.geologicalComplexName": {
 	        "selector": ".csc-intake-geological-complex-name",
@@ -218,8 +242,14 @@
 	    },
 		"fields.Valuer": {
 	        "selector": ".csc-intake-valuer",
-	        "validators": [],
-	        "decorators": []
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-intake-valuer",
+                "options": {
+                    "url": "../../chain/intake/autocomplete/Valuer"
+                }
+            }]
 	    },
 		
 		
@@ -249,8 +279,14 @@
 	    },
 		"fields.insurer": {
 	        "selector": ".csc-intake-insurer",
-	        "validators": [],
-	        "decorators": []
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-intake-insurer",
+                "options": {
+                    "url": "../../chain/intake/autocomplete/insurer"
+                }
+            }]
 	    },
 		
 		
@@ -316,8 +352,14 @@
 	    },
 		"fields.conditionCheckAssesor": {
 	        "selector": ".csc-intake-condition-check-assessor",
-	        "validators": [],
-	        "decorators": []
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-intake-condition-check-assessor",
+                "options": {
+                    "url": "../../chain/intake/autocomplete/conditionCheckAssesor"
+                }
+            }]
 	    }
 	},
 	modelToResourceMap: {

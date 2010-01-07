@@ -178,10 +178,26 @@
 	    	"selector": ".csc-object-description-content-object-type"
 	    },
 	    "fields.descContentPeople": {
-	    	"selector": ".csc-object-description-content-people"
+	    	"selector": ".csc-object-description-content-people",
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-object-description-content-people",
+                "options": {
+                    "url": "../../chain/objects/autocomplete/descContentPeople"
+                }
+            }]
 	    },
 	    "fields.descContentPerson": {
-	    	"selector": ".csc-object-description-content-person"
+	    	"selector": ".csc-object-description-content-person",
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-object-description-content-person",
+                "options": {
+                    "url": "../../chain/objects/autocomplete/descContentPerson"
+                }
+            }]
 	    },
 	    "fields.descContentPlace": {
 	    	"selector": ".csc-object-description-content-place"
@@ -190,7 +206,15 @@
 	    	"selector": ".csc-object-description-content-script"
 	    },
 	    "fields.descContentOrganization": {
-	    	"selector": ".csc-object-description-content-organization"
+	    	"selector": ".csc-object-description-content-organization",
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-object-description-content-organization",
+                "options": {
+                    "url": "../../chain/objects/autocomplete/descContentOrganization"
+                }
+            }]
 	    },
 	    "fields.descContentMethod": {
 	    	"selector": ".csc-object-description-content-method"
