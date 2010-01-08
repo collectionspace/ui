@@ -439,6 +439,10 @@ td textarea {border:none;}
 	top:0;
 	background:#666666 url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/ui-lightness/images/ui-bg_diagonals-thick_20_666666_40x40.png) repeat scroll 50% 50%;
 	opacity:0.5;
+	filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	-khtml-opacity: 0.5;
+
 }
 
 .cs-message {
