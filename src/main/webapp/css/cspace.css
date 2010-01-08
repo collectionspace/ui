@@ -245,7 +245,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .fl-container-left .create-new-outer-border .information-group {padding: 15px 0 15px 0;}
 
 .fl-container-left .find-edit-outer-border  {border: none; /*padding-left:10px;*/ margin-right:10px;}
-.fl-container-left .find-edit-outer-border .content {border: 1px solid #B5C7D3; background-color: #fff; padding: 6px 6px 12px 6px; width:auto;}
+.fl-container-left .find-edit-outer-border .content {border: 1px solid #B5C7D3; background-color: #fff; padding: 6px 6px 0px 6px; width:auto;}
 .fl-container-left .find-edit-outer-border .header { width:auto; clear:both; font-size:16px; line-height:16px;}
 .fl-container-left .find-edit-outer-border .information-group {padding: 10px 0 10px 0;}
 
