@@ -368,6 +368,6 @@
         "relations": "/intake/%intakeRecordId"
     },
     replacements: {
-        "intakeRecordId": "fields.csid"
+        "intakeRecordId": "csid"
     }
 }

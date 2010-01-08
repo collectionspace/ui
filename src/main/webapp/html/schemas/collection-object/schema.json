@@ -296,6 +296,6 @@
         "spec": "/objects/schema/schema"
     },
     "replacements": {
-        "collObjId": "fields.csid"
+        "collObjId": "csid"
     }
 }

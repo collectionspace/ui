@@ -134,6 +134,6 @@
         "relations": "/acquisition/%acquisitionRecordId"
     },
     "replacements": {
-        "acquisitionRecordId": "fields.csid"
+        "acquisitionRecordId": "csid"
     }
 }
