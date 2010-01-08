@@ -72,7 +72,7 @@ var cspace = cspace || {};
                 // This is only temporary until http://issues.collectionspace.org/browse/CSPACE-263
                 // is resolved
                 that.options.csid = undefined;
-                that.applier.requestChange("fields.csid", undefined);
+                that.applier.requestChange("csid", undefined);
             }
         };
     };
@@ -136,10 +136,10 @@ var cspace = cspace || {};
     var bindEventHandlers = function (that) {
 
         that.dataContext.events.afterCreate.addListener(function (modelPath, data) {
-            that.applier.requestChange(that.options.idField, data.fields.csid);
+            that.applier.requestChange(that.options.idField, data.csid);
             that.events.afterCreateObjectDataSuccess.fire(data, that.options.strings.createSuccessfulMessage);
 	        displayTimestampedMessage(that, that.options.strings.createSuccessfulMessage, Date());
-            that.options.csid = data.fields.csid;
+            that.options.csid = data.csid;
         });
 
         that.dataContext.events.afterUpdate.addListener(function (modelPath, data) {
@@ -167,7 +167,7 @@ var cspace = cspace || {};
                     var func = templ.setupFunction;
                     var data = templ.data;
                     that.events.pageRendered.addListener(function () {
-						var args = [that.model.fields.csid];
+						var args = [that.model.csid];
                         if (data) {
 							 args.push(that.model[data]);
                         }
@@ -227,6 +227,7 @@ var cspace = cspace || {};
     cspace.dataEntry = function (container, options) {
         var that = fluid.initView("cspace.dataEntry", container, options);
         that.model = {
+            csid: undefined,
             fields: {},
             relations: {}
         };
@@ -317,7 +318,7 @@ var cspace = cspace || {};
             }
         },
         csid: null,
-        idField: "fields.csid",
+        idField: "csid",
         alternateFields: [],
 		 confirmationTemplateUrl: "../html/Confirmation.html",
         
