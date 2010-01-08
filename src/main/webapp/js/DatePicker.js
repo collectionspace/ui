@@ -18,12 +18,21 @@ var cspace = cspace || {};
         return evt.keyCode ? evt.keyCode : (evt.which ? evt.which : 0);          
     };
 	
+    var closeCalendar =  function (that) {
+	    that.locate("datePicker").hide();
+		that.locate("calendarButton").focus();
+    };
+
 	var bindEvents = function (that) {
 		
 		var datePicker = that.locate("datePicker");
 		var calendarDate = that.locate("calendarDate");
 		var table = $(that.datePicker.tableBody_);
 		
+        fluid.deadMansBlur(datePicker, table, function () {
+            closeCalendar(that);
+        });
+
 		table.blur(function () {
 			table.removeClass(that.options.styles.focus);
 		});
@@ -82,8 +91,7 @@ var cspace = cspace || {};
                 }
 				break;
 			case $.ui.keyCode.ESCAPE:
-			    datePicker.hide();
-				that.locate("calendarButton").focus();
+                closeCalendar(that);
 			    break;
 			case $.ui.keyCode.ENTER:
 			case $.ui.keyCode.SPACE:
