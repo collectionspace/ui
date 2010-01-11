@@ -1,4 +1,5 @@
 {
+    "csid": "1251814260949",
     "fields": {
         "returnDate": "",
         "depositor": "",
@@ -12,7 +13,6 @@
         "description": "Small metal flower, fashioned from scraps",
         "entryDate": "",
         "donor": "Wikus Van De Merwe",
-        "csid": "1251814260949"
     },
     "relations": [
     ]

@@ -1,4 +1,5 @@
 {
+    "csid": "1251814350763",
     "fields": {
         "entryNumber": "IN2009.003",
     	"entryDate": "",
@@ -51,7 +52,6 @@
     	"conditionCheckReason": "had to",
     	"conditionCheckReferenceNumber": "1122233344",
     	"conditionCheckAssesor": "all of them",
-        "csid": "1251814350763"
     },
     "relations": [
     ]

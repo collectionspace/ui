@@ -30,21 +30,6 @@ var cspace = cspace || {};
         });
     };
 
-    var fetchRelatedRecordsUISpec = function (that, callback) {
-        jQuery.ajax({
-            // TODO: Figure out where the UI spec will come from!
-            url: "./related-records/spec/spec.json",
-            type: "GET",
-            dataType: "json",
-            success: callback,
-            error: function (xhr, textStatus, errorThrown) {
-                that.showSpecErrorMessage(that.options.strings.specFetchError + textStatus + that.options.strings.errorRecoverySuggestion);
-                that.locate("messageContainer").hide();
-                that.events.onError.fire("fetch related records UISpec");
-            }
-        });
-    };
-
     displayTimestampedMessage = function (that, msg, time) {
         that.locate("feedbackMessage").text(msg);
         that.locate("timestamp").text(time);
@@ -207,16 +192,6 @@ var cspace = cspace || {};
         };
     };
     
-    var renderRelatedRecords = function (that) {
-        return function (spec, textStatus) {
-            
-        };
-    };
-
-    var setupRelatedRecords = function (that){
-        fetchRelatedRecordsUISpec(that, renderRelatedRecords(that));
-    };
-
     var setupDataEntry = function (that) {
         fetchUISpec(that, setupDataContext(that));
     };
@@ -258,7 +233,6 @@ var cspace = cspace || {};
         };
 
         setupDataEntry(that);
-        setupRelatedRecords(that);
         return that;
     };
     

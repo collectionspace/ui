@@ -37,10 +37,12 @@ var cspace = cspace || {};
 
     var buildRelationsList = function (data, recordTypeList) {
         var relationList = [];
-        for (var i = 0; i < data.length; i++) {
-            for (var j = 0; j < recordTypeList.length; j++) {
-                if (data[i].recordtype === recordTypeList[j]) {
-                    relationList.push(data[i]);
+        if (data) {
+            for (var i = 0; i < data.length; i++) {
+                for (var j = 0; j < recordTypeList.length; j++) {
+                    if (data[i].recordtype === recordTypeList[j]) {
+                        relationList.push(data[i]);
+                    }
                 }
             }
         }
@@ -52,20 +54,16 @@ var cspace = cspace || {};
         if (document.location.protocol === "file:") {
             orOpts.dataContext = setupTestDataContext(csid, "object");
         }
-        if (data) {
 // CSPACE-701: the record type should be "object" or whatever is selected.
 // Once this issue is fixed, this code should be updated
-            orOpts.data =  buildRelationsList(data, ["objects"]);
-        }
+        orOpts.data =  buildRelationsList(data, ["objects"]);
         var objRecordList = cspace.recordList(".related-objects", orOpts);
 
         var prOpts = {uiSpecUrl: "./related-records/spec/spec-procedures.json"};
         if (document.location.protocol === "file:") {
             prOpts.dataContext = setupTestDataContext(csid, "procedure");
         }
-        if (data) {
-            prOpts.data = buildRelationsList(data, ["intake", "acquisition"]);
-        }
+        prOpts.data = buildRelationsList(data, ["intake", "acquisition"]);
         var procRecordList = cspace.recordList(".related-procedures", prOpts);
     };
 

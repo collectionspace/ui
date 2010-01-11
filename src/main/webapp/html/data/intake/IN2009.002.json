@@ -1,4 +1,5 @@
 {
+    "csid": "1251814350763",
     "fields": {
         "returnDate": "",
         "depositor": "Duncan Jones",
@@ -15,7 +16,6 @@
         "description": "GERTY",
         "entryDate": "",
         "donor": "Sam Rockwell",
-        "csid": "1251814350763"
     },
     "relations": [
     ]
