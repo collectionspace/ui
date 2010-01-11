@@ -14,6 +14,8 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
 
+    var resultsPager;
+
     var defaultSearchUrlBuilder = function (recordType, query) {
 // CSPACE-701
 // Up to 0.4, there's a bug in which the recordType for 'object' needs to be
@@ -86,7 +88,15 @@ var cspace = cspace || {};
                 }
             }
         ];
-        var resultsPager = fluid.initSubcomponent(that, "resultsPager", pagerArguments);
+        if (resultsPager) {
+            fluid.model.copyModel(resultsPager.options.dataModel, results);
+            resultsPager.options.columnDefs = colDefsGenerated(colList, recordType),
+            // you're not supposed to touch the pager's model, but there's a bug in this version, so...
+            resultsPager.model.totalRange = results.length;
+            resultsPager.events.initiatePageChange.fire({pageIndex: 0, forceUpdate: true});
+        } else {
+            resultsPager = fluid.initSubcomponent(that, "resultsPager", pagerArguments);
+        }
         that.locate("resultsContainer").show();
         that.locate("resultsCount").text(resultsPager.model.totalRange);
     };
