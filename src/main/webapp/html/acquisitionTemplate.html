@@ -56,7 +56,7 @@ jQuery(document).ready(function() {
 							<!-- Information-block header -->
 							<div class="fl-container-flex header" onclick="ShowHide('#toggle-acquisition-information'); return false;">
 								<span class="header-toggle"><img id="toggle-acquisition-information-img"  src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-								Acqusition Information
+								Acquisition Information
 							</div>
 							
 							<!-- Information-block content block -->
@@ -141,7 +141,7 @@ jQuery(document).ready(function() {
 									</div>
 									
 									<div class="info-column2-60 fl-force-right">
-										<div class="info-pair-table deactivate">
+										<div class="info-pair-table">
 											<div class="info-label" title="">Purchase Price</div>
 											<div class="info-value">
 												<table id="" >
@@ -152,9 +152,10 @@ jQuery(document).ready(function() {
 													</thead>
 													<tbody>
 														<tr>
-															<td class="label"></td>
-															<td><input type="text" disabled=disabled class="input-money-type csc-acquisition-purchaser-price-denomination" name="acquisition-purchaser-price-denomination" value="US Dollar"></td>
-															<td><input type="text" disabled=disabled class="input-numeric-medium csc-acquisition-purchaser-price" name="acquisition-purchaser-price" value="$ "></td>
+															<!--<td class="label"></td>-->
+															<td><input type="text" class="input-alpha csc-acquisition-purchase-price-type" name="acquisition-purchase-price-type"></td>
+															<td><input type="text" class="input-money-type csc-acquisition-purchaser-price-denomination" name="acquisition-purchaser-price-denomination" value=""></td>
+															<td><input type="text" class="input-numeric-medium csc-acquisition-purchaser-price" name="acquisition-purchaser-price" value=""></td>
 														</tr>
 											<!--	 		
 													***	TEMPORARILY COMMENTED OUT AS THIS WILL BE A REPEATING LIST OF DATA TO BE IMPLEMENTED IN A FUTURE RELEASE ***

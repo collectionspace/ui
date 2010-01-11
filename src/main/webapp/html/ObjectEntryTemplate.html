@@ -19,7 +19,7 @@
 					</div>
 					
 					<div class="label">
-						<div class="label-text">ACCESSION NUMBER</div><div class="label-text">TITLE</div>
+						<div class="label-text">IDENTIFICATION NUMBER</div><div class="label-text">TITLE</div>
 						<div class="clear"></div>
 					</div>
 				</div>
@@ -71,40 +71,36 @@
 															</div>
 														</div>
 														
-														<div class="info-pair-table deactivate">
-															<div class="info-label" title="">Components and Range</div>
+														<div class="info-pair-table ">
+															<div class="info-label" title="">Number of Objects</div>
 															<div class="info-value">
-																<table class="components">
+																<table class="input-numeric-small">
 																	<tbody>
 																		<tr>
-																			<td class="label">Total Number of Items</td>
-																			<td><input type="text" disabled class="input-numeric-small csc-object-identification-number-objects disabled" name="object-identification-number-objects"></td>
+																			<td><input type="text" class="input-numeric-small csc-object-identification-number-objects" name="object-identification-number-objects"></td>
 																		</tr>
 																	</tbody>
 																</table>
-																<div class="components-img"><img src="../images/gen_sub.png" alt="generate sub number" height=19 width=110 /></div>
-																<div class="clear"></div>
+																
 															</div>
 														</div>
-														
-														<div class="info-pair-addrow deactivate">
-															<div class="info-label" title=""></div>
-															<div class="info-value deactivate" >
-																<table id="">
+													
+														<div class="info-pair-addrow">
+															<div class="info-label" title="">Other Number</div>
+															<div class="info-value">
+																<table id="" >
 																	<thead>
 																		<tr>
-																			<td class="table-select"></td>
-																			<td title="">Sub Number</td>
-																			<td title="" colspan=2>Description</td>
+																			<!--<td class="table-select"></td>-->
+																			<td title="">Number</td>
+																			<td title="">Number Type</td>
 																		</tr>
 																	</thead>
-																	
 																	<tbody>
 																		<tr>
-																			<td>&nbsp;1</td>
-																			<td></td>
-																			<td></td>
-																			<td></td>
+																			<!--<td class="table-unselected"></td>-->
+																			<td><input type="text" class="input-alpha-table csc-object-identification-other-number" name="object-identification-other-number"></td>
+																			<td><input type="text" class="input-alpha-table csc-object-identification-other-number-type" name="object-identification-other-number-type"></td>
 																		</tr>
 																	</tbody>
 																</table>
