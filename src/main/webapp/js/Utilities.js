@@ -45,7 +45,7 @@ var cspace = cspace || {};
                                     "spec": "schemas/"+recordType+"/schema"
                                 },
                                 replacements: {
-                                    "recordId": "fields.csid"
+                                    "recordId": "csid"
                                 }
                             }
                         }
