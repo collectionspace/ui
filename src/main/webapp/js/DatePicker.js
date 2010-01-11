@@ -48,10 +48,13 @@ var cspace = cspace || {};
 		
 		var setDate = function () {
 			var date = that.datePicker.getDate();
-			calendarDate.val(date.date_);
+            // TODO: Better factor out the formatting of the date
+            calendarDate.val(date.getYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate());
             calendarDate.change();
             datePicker.hide();
-            calendarDate.focus();
+// CSPACE-707: Until we can better handle manually entered dates,
+// the input field will be disabled
+//            calendarDate.focus();
 		};
 		
 		that.locate("date").click(function (event) {			
@@ -112,6 +115,11 @@ var cspace = cspace || {};
 		datePicker.create(datePickerObj[0]);
 		datePickerObj.addClass(datePickerClass);
 		datePickerObj.hide();
+// CSPACE-707: Until we can better handle manually entered dates,
+// the input field will be disabled
+        var dateField = that.locate("calendarDate");
+        dateField.attr("readonly", "readonly");
+        dateField.attr("disabled", true);
 		return datePicker;
 	};
 	
