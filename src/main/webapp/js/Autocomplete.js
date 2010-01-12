@@ -46,8 +46,10 @@ var cspace = cspace || {};
         input.hide();
 
         autoCompleteInput.autocomplete(opts).autocomplete("result", function (e, item) {
-            input.val(item.urn);
-            input.change();
+            if (item) {
+                input.val(item.urn);
+                input.change();
+            }
         });
 
         if (input.val()) {
