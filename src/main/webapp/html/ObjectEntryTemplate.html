@@ -62,7 +62,7 @@
 											<!-- Information-block content block -->
 											<div class="fl-container-flex fl-fix content" id="toggle-object-identification-information">
 												<!-- The information-block is further broken down into two columns of equal size: left and right -->
-												<div class="info-column1 fl-force-left">
+												<div class="info-column1">
 													<div class="info-column2-50 fl-force-left">
 														<div class="info-pair-addrow">
 															<div class="info-label" title="">Accession Number</div>
@@ -111,6 +111,7 @@
 															<div class="info-label" title="">Responsible Department</div>
 															<div class="info-value"><select class="csc-object-identification-responsible-department" name="object-identification-responsible-department"/></div>
 														</div>
+														<div class="clear"></div>
 													</div>
 													
 													<div class="info-column2-50 fl-force-right">
@@ -162,12 +163,13 @@
 																</table>
 															</div>
 														</div>
-														
+														<div class="clear"></div>
 													</div>
+													<div class="clear"></div>
 												</div>
 												
 												<!-- one row column -->
-												<div class="info-column1 fl-force-left" id="multipleEdit">
+												<div class="info-column1" id="multipleEdit">
 												
 													<div class="info-pair-addrow">
 														<div class="info-label" title="">Title</div>
@@ -228,9 +230,8 @@
 															</table>
 														</div>
 													</div>
+													<div class="clear"></div>
 												</div>
-											
-												<div class="clear"></div>
 											</div>
 										</div>
 										
@@ -266,7 +267,7 @@
 														<div class="info-value"><input type="text" class="input-alpha csc-object-description-phase" name="object-description-phase"></div>
 													</div>
 													
-													<div class="info-column1 fl-force-left">
+													<div class="info-column1">
 														<div class="info-pair-addrow">
 															<div class="info-label" title="">Form</div>
 															<div class="info-value">
@@ -341,10 +342,10 @@
 															</table>
 														</div>
 													</div>
-													
+													<div class="clear"></div>
 												</div>
-												
-												<div class="info-column1 fl-force-left">
+												<div class="clear"></div>
+												<div class="info-column1">
 													<div class="info-pair-addrow">
 														<div class="info-label" title="">Material</div>
 														<div class="info-value">
@@ -432,8 +433,8 @@
 														</div>
 													</div>
 												</div>
-												
-												<div class="info-column1 fl-force-left">
+												<div class="clear"></div>
+												<div class="info-column1">
 													<div class="info-pair-addrow">
 														<div class="info-label" title="">Dimension</div>
 														<div class="info-value">
@@ -464,9 +465,10 @@
 															</table>
 														</div>
 													</div>
+													<div class="clear"></div>
 												</div>
 												
-												<div class="info-column1 fl-force-left">
+												<div class="info-column1">
 												
 													<div class="fl-container-flex fl-fix information-subgroup">
 														<div class="info-column fl-force-left">
@@ -576,7 +578,7 @@
 																			</table>
 																		</div>
 																	</div>
-																	
+																	<div class="clear"></div>
 																</div>
 																
 																<div class="info-column2-50 fl-force-right">
@@ -709,9 +711,9 @@
 																			</table>
 																		</div>
 																	</div>
-																	
+																	<div class="clear"></div>
 																</div>
-																
+																<div class="clear"></div>
 																<div class="info-column">
 					<!--
 																	<div class="info-pair-addrow">
@@ -728,7 +730,6 @@
 																		</div>
 																	</div>
 					-->
-																	
 																	<div class="info-pair">
 																		<div class="info-label" title="">Note</div>
 																		<div class="info-value"><textarea class="input-textarea csc-object-description-content-note" name="object-description-content-note"></textarea></div>
@@ -738,19 +739,20 @@
 																<div class="clear"></div>
 															</div>
 														</div>
+														<div class="clear"></div>
 													</div>
-												
+													<div class="clear"></div>
 												</div>
 												
-												<div class="info-column1 fl-force-left">
+												<div class="info-column1">
 												
 													<div class="fl-container-flex fl-fix information-subgroup">
 														<div class="info-column">
-															<div class="fl-container-flex header" onclick="ShowHide('#toggle-description-information-inscription'); return false;">
-																<span class="header-toggle-sub"><img id="toggle-description-information-inscription-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-																Inscription
+															<div class="fl-container-flex header" onclick="ShowHide('#toggle-description-information-inscription-content'); return false;">
+																<span class="header-toggle-sub"><img id="toggle-description-information-inscription-content-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+																Inscription Content
 															</div>
-															<div class="fl-container-flex fl-fix content" id="toggle-description-information-inscription" >
+															<div class="fl-container-flex fl-fix content" id="toggle-description-information-inscription-content" >
 																
 																<div class="info-column">
 																	<div class="info-pair">
@@ -758,10 +760,10 @@
 																		<div class="info-value"><textarea class="input-textarea csc-object-description-inscription-content" name="object-description-inscription-content"></textarea></div>
 																	</div>
 																	
-																	<div class="info-pair">
+																	<!--<div class="info-pair">
 																		<div class="info-label" title="">Inscription Description</div>
 																		<div class="info-value"><textarea class="input-textarea csc-object-description-inscription-description" name="object-description-inscription-description"></textarea></div>
-																	</div>
+																	</div>-->
 																</div>
 																
 																<div class="info-column2-50 fl-force-left">
@@ -858,7 +860,7 @@
 																	</div>
 																	
 																</div>
-																
+																<div class="clear"></div>
 																<div class="info-column1">
 																
 																	<div class="info-pair">
@@ -892,6 +894,107 @@
 																				</tbody>
 																			</table>
 																		</div>
+																	</div>
+																	
+																	<div class="clear"></div>
+																</div>
+																<div class="clear"></div>
+															</div>
+														</div>
+													</div>
+												
+												</div>
+												
+												
+												<div class="info-column1">
+												
+													<div class="fl-container-flex fl-fix information-subgroup">
+														<div class="info-column">
+															<div class="fl-container-flex header" onclick="ShowHide('#toggle-description-information-inscription-description'); return false;">
+																<span class="header-toggle-sub"><img id="toggle-description-information-inscription-description-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+																Inscription Description
+															</div>
+															<div class="fl-container-flex fl-fix content" id="toggle-description-information-inscription-description" >
+																
+																<div class="info-column">
+																	<div class="info-pair">
+																		<div class="info-label" title="">Inscription Description</div>
+																		<div class="info-value"><textarea class="input-textarea csc-object-description-inscription-description" name="object-description-inscription-description"></textarea></div>
+																	</div>
+																</div>
+																
+																<div class="info-column2-50 fl-force-left">
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Inscriber</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-description-inscriber" name="object-description-inscription-description-inscriber"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																		
+																	<div class="info-pair-addrow info-pair-date">
+																		<div class="info-label" title="">Date</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td class="field-cal disabled"><input type="text" disabled class="input-date csc-object-description-inscription-description-date disabled" name="object-description-inscription-description-date"><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	<div class="clear"></div>
+																</div>
+																
+																<div class="info-column2-50 fl-force-right">
+																	<div class="info-pair">
+																		<div class="info-label" title="">Position</div>
+																		<div class="info-value"><input type="text" class="input-alpha csc-object-description-inscription-description-position" name="object-description-inscription-description-position"></div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Type</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-description-type" name="object-description-inscription-description-type"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label" title="">Method</div>
+																		<div class="info-value">
+																			<table id="" >															
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-description-method" name="object-description-inscription-description-method"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																</div>
+																
+																<div class="info-column1">
+																
+																	<div class="info-pair">
+																		<div class="info-label" title="">Interpretation</div>
+																		<div class="info-value"><textarea class="input-textarea csc-object-description-inscription-description-interpretation" name="object-description-inscription-description-interpretation"></textarea></div>
 																	</div>
 																	
 																</div>
