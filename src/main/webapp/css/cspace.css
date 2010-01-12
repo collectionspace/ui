@@ -126,10 +126,10 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .fl-pager .fl-pager-ui li.flc-per-page {margin-top:-4px;}
 .pager-links{display:inline;}
 
-.fl-pager-ui a {text-decoration:none; color:#6D6E71;}
-.fl-pager-ui a:hover {text-decoration:underline;}
-.fl-pager .fl-pager-ui .fl-pager-links a {border:none;}
-.fl-pager .fl-pager-ui .fl-pager-link {}
+table#search-results .fl-pager-ui a {text-decoration:none; color:#6D6E71;}
+table#search-results .fl-pager-ui a:hover {text-decoration:underline;}
+table#search-results .fl-pager .fl-pager-ui .fl-pager-links a {border:none;}
+table#search-results .fl-pager .fl-pager-ui .fl-pager-link {}
 
 #top-nav {padding-bottom:0px; clear:both;}
 #tab-menu {padding-bottom:1px; width:auto; height:24px; float:left;}
