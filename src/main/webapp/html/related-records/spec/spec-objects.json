@@ -4,7 +4,7 @@
             "selector": ".csc-related-row",
             "repeated": {
                 "summary": {
-                    "selector": ".csc-related-summary",
+                    "selector": ".csc-related-summary"
                 },
                 "number": {
                     "selector": ".csc-related-number",
@@ -20,7 +20,7 @@
                     "decorators": []
                 },
                 "recordtype": {
-                    "selector": ".csc-related-recordtype",                    
+                    "selector": ".csc-related-recordtype"
                 }
             }
         }
