@@ -103,7 +103,7 @@ var cspace = cspace || {};
                 title: "Confirmation."
             });
 		
-		confirmation.parent().css("overflow", "visible")
+		confirmation.parent().css("overflow", "visible");
         
         fluid.fetchResources(resources, function () {
             var templates = fluid.parseTemplates(resources, ["confirmation"], {});
@@ -112,8 +112,8 @@ var cspace = cspace || {};
         
 		$("a:not([href*=#])").live("click", function (e) {
            confirmation.dialog("open");
-			var href = e.originalTarget.href;
-			cspace.confirmation(confirmation, {model: {href: href}, action: that.save});
+			var href = e.target.href;
+            cspace.confirmation(confirmation, {model: {href: href}, action: that.save});
            return false;
        });		
    };
