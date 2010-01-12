@@ -54,7 +54,7 @@ var cspace = cspace || {};
 
     var displaySearchResults = function (that, recordType) {
         var colList = [];
-        var results = that.model.results;
+        var results = (that.model.results || []);
         for (var key in results[0]) {
             if (results[0].hasOwnProperty(key)) {
                 colList.push(key);
