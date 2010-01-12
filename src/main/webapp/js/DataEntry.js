@@ -111,10 +111,11 @@ var cspace = cspace || {};
         });
         
 		$("a:not([href*=#])").live("click", function (e) {
-           confirmation.dialog("open");
-			var href = e.target.href;
-            cspace.confirmation(confirmation, {model: {href: href}, action: that.save});
-           return false;
+            if (that.unsavedChanges) {
+                confirmation.dialog("open");
+                cspace.confirmation(confirmation, {model: {href: e.target.href}, action: that.save});
+                return false;
+            }
        });		
    };
 
@@ -124,12 +125,14 @@ var cspace = cspace || {};
             that.applier.requestChange(that.options.idField, data.csid);
             that.events.afterCreateObjectDataSuccess.fire(data, that.options.strings.createSuccessfulMessage);
 	        displayTimestampedMessage(that, that.options.strings.createSuccessfulMessage, Date());
+            that.unsavedChanges = false;
             that.options.csid = data.csid;
         });
 
         that.dataContext.events.afterUpdate.addListener(function (modelPath, data) {
             that.events.afterUpdateObjectDataSuccess.fire(data, that.options.strings.updateSuccessfulMessage);
 	        displayTimestampedMessage(that, that.options.strings.updateSuccessfulMessage, Date());
+            that.unsavedChanges = false;
         });
 
         that.dataContext.events.afterFetch.addListener(function (modelPath, data) {
@@ -143,6 +146,13 @@ var cspace = cspace || {};
                     $(that.displayOnlyFields[path]).text(fluid.model.getBeanValue(that.model, path) + " ");
                 }
             }
+
+            for (var field in that.spec) {
+                var el = $(that.spec[field].selector);
+                el.change(function () {
+                    that.unsavedChanges = true;
+                });
+            }        
         });
         
         for (var key in that.options.templates) {
@@ -208,6 +218,7 @@ var cspace = cspace || {};
         };
         that.spec = {};
         that.displayOnlyFields = {};
+        that.unsavedChanges = false;
 
         that.refreshView = function () {
             cspace.renderer.renderPage(that);
