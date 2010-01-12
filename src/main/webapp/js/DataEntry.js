@@ -110,7 +110,7 @@ var cspace = cspace || {};
             fluid.reRender(templates, confirmation, {});
         });
         
-		$("a:not([href^=#])").live("click", function (e) {
+		$("a:not([href*=#])").live("click", function (e) {
            confirmation.dialog("open");
 			var href = e.originalTarget.href;
 			cspace.confirmation(confirmation, {model: {href: href}, action: that.save});
