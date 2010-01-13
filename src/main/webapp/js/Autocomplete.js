@@ -47,7 +47,11 @@ var cspace = cspace || {};
 
         autoCompleteInput.autocomplete(opts).autocomplete("result", function (e, item) {
             if (item) {
-                input.val(item.urn);
+                if (cspace.util.isLocal()) {
+                    input.val(item.urn);
+                } else {
+                    input.val(JSON.parse(item[0]).urn);
+                }
                 input.change();
             }
         });
@@ -60,15 +64,30 @@ var cspace = cspace || {};
 
 
     cspace.jqueryAutocompleteFormatItem = function (item, i, total) {
-        return item.label;
+        if (cspace.util.isLocal()) {
+            return item.label;
+        } else {
+            var obj = JSON.parse(item[0]);
+            return obj.label;
+        }
     };
 
     cspace.jqueryAutocompleteFormatMatch = function (item, i, total) {
-        return item.label;
+        if (cspace.util.isLocal()) {
+            return item.label;
+        } else {
+            var obj = JSON.parse(item[0]);
+            return obj.label;
+        }
     };
 
     cspace.jqueryAutocompleteFormatResult = function (item) {
-        return item.label;
+        if (cspace.util.isLocal()) {
+            return item.label;
+        } else {
+            var obj = JSON.parse(item[0]);
+            return obj.label;
+        }
     };
 
 	cspace.autocomplete = function (container, options) {
@@ -80,10 +99,11 @@ var cspace = cspace || {};
     };
     
     fluid.defaults("cspace.autocomplete", {
-        minChars: 0,
+        minChars: 3,
         matchContains: true,
         mustMatch: true,
         autoFill: false,
+        highlight: false,
 
         formatItem: cspace.jqueryAutocompleteFormatItem,
         formatMatch: cspace.jqueryAutocompleteFormatMatch,
