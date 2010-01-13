@@ -16,7 +16,8 @@ select {border:1px solid #BABABB;}
 input[type="text"], input[type="password"], textarea {width:99.5%;}
 /*table input[type="text"], table input[type="password"], table textarea {width:99%;}*/
 
-:focus {outline: 1px solid black;}
+:focus {outline: none;}
+input:focus, textarea:focus {outline: 1px solid black;}
 
 .fl-fix {overflow:visible;}
 
@@ -451,7 +452,7 @@ td textarea {border:none;}
     font-size: 1.2em;
     font-weight:bold;
     padding: 4px;
-	margin-bottom: 10px;
+	margin: 5px 0 8px 0;
 }
 
 .cs-timestamp {
