@@ -15,12 +15,12 @@ var cspace = cspace || {};
 (function ($, fluid) {
 
     var testData = [
-        {"label": "Apple", "urn": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Peach)'Peach'"},
+        {"label": "Apple pie", "urn": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Apple pie)'Apple+pie'"},
         {"label": "Pear", "urn": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Pear)'Pear'"},
         {"label": "Banana", "urn": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Banana)'Banana'"},
-        {"label": "Berry", "urn": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Banana)'Banana'"},
+        {"label": "Berry", "urn": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Berry)'Berry'"},
         {"label": "Apricot", "urn": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Apricot)'Apricot'"},
-        {"label": "Peach", "urn": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Peach)'Peach'"}
+        {"label": "Peach cobbler", "urn": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Peach cobbler)'Peach+cobbler'"}
     ];
 
     var parseLabelFromUrn = function (urn) {
@@ -32,6 +32,7 @@ var cspace = cspace || {};
 
         if (cspace.util.isLocal()) {
             opts.data = testData;
+            opts.url = null;
         }
         else if (that.options.url) {
             opts.url = that.options.url;
