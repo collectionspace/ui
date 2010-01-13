@@ -101,7 +101,11 @@ var cspace = cspace || {};
     fluid.defaults("cspace.autocomplete", {
         minChars: 3,
         matchContains: true,
-        mustMatch: true,
+// MustMatch true results in sending the result back to the server again. This
+// ends up not matching (because it's two words, I think) and so clearing the field.
+// Setting mustMatch to false prevents this, but still seems to require a match, which is odd.
+// If it turns out that the match-forcing is not working, this is where to start investigating.
+        mustMatch: false,
         autoFill: false,
         highlight: false,
 
