@@ -58,7 +58,7 @@ var cspace = cspace || {};
 
         if (input.val()) {
             var val = input.val();
-            autoCompleteInput.val(parseLabelFromUrn(val));
+            autoCompleteInput.val(parseLabelFromUrn(val).replace("+", " "));
         }
     };
 
@@ -77,7 +77,7 @@ var cspace = cspace || {};
             return item.label;
         } else {
             var obj = JSON.parse(item[0]);
-            return obj.label;
+            return parseLabelFromUrn(obj.urn);
         }
     };
 
