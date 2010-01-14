@@ -33,18 +33,17 @@ var cspace = cspace || {};
             closeCalendar(that);
         });
 
-		table.blur(function () {
+		table.blur(function (e) {
 			table.removeClass(that.options.styles.focus);
 		});
 		
-		table.focus(function () {
+		table.focus(function (e) {
             table.addClass(that.options.styles.focus);
         });
 		
 		that.locate("calendarButton").click(function (event) {
 			datePicker.toggle();
             table.focus();
-			datePicker.focus();
 		});
 		
 		var setDate = function () {
@@ -107,6 +106,7 @@ var cspace = cspace || {};
 			    break; 
 			}
 		});
+
 	};
 	
 	var setupDatePicker = function (that) {
