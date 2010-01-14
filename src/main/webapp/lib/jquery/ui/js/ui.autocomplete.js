@@ -309,6 +309,9 @@ $.widget("ui.autocomplete", {
 				select.show();
 			} else {
 				hideResultsNow();
+                                if (options.nothingFoundCallback) {
+                                    options.nothingFoundCallback(q);
+                                }
 			}
 		};
 

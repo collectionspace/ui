@@ -46,6 +46,11 @@ var cspace = cspace || {};
         autoCompleteInput.insertAfter(input);
         input.hide();
 
+        opts.nothingFoundCallback = function (term) {
+           input.val(term);
+           input.change(); 
+        };
+
         autoCompleteInput.autocomplete(opts).autocomplete("result", function (e, item) {
             if (item) {
                 if (cspace.util.isLocal()) {
