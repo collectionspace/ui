@@ -289,14 +289,16 @@ table#search-results .fl-pager .fl-pager-ui .fl-pager-link {}
 
 .info-pair-table .info-value table.components {width:60%; float:left;}
 
-.find-edit-object-records .info-pair-table {width:100%; float:left; font-size:14px; line-height:16px;}
+.find-edit-object-records .info-pair-table {width:100%; float:left; font-size:14px; line-height:16px; padding-bottom:0;}
 .find-edit-object-records .info-pair-table .info-label {float:left; width:100%; padding-top: 2px; padding-bottom:0; font-weight:bold; font-size:11px; color:# 0F75BC;}
-.find-edit-object-records .info-pair-table .info-value {float:left; width:100%; padding-top:1px; padding-bottom:0px;}
-.find-edit-object-records .info-pair-table .info-value table {width:696px; border-spacing:0; background-color:#FFF; font-size:12px; line-height:12px; margin-bottom:0;}
+.find-edit-object-records .info-pair-table .info-value {float:left; width:100%; /*padding-top:1px;*/ padding-bottom:0px; border-top: 1px solid #CECFD1;}
+.find-edit-object-records .info-pair-table .info-value table {/*width:696px;*/ width:100%; border-spacing:0; background-color:#FFF; font-size:12px; line-height:12px; margin:0;}
 .find-edit-object-records .info-pair-table .info-value thead tr  {background-color:#FFF; color:#3B3B3C; border:none; padding: 2px 1px 1px 2px;}
-.find-edit-object-records .info-pair-table .info-value thead td {border-collapse: collapse; background-color:#E1E8ED; color:#2278AB; border:none; border-bottom:1px solid #CECFD1;  border-top:1px solid #CECFD1; padding: 6px 1px 6px 6px;}
+.find-edit-object-records .info-pair-table .info-value thead td {border-collapse: collapse; background-color:#E1E8ED; color:#2278AB; border:none; border-bottom:0px solid #CECFD1;  border-top:0px solid #CECFD1; padding: 6px 1px 6px 6px;}
 .find-edit-object-records .info-pair-table .info-value tbody td {border:none; padding: 5px 1px 5px 6px; border-top:1px solid #CECFD1; border-bottom:1px solid #CECFD1;}
 .find-edit-object-records .info-pair-table .info-value tbody tr:hover {/*background-color:#BFF4FF;*/}
+.find-edit-object-records .info-pair-table .sub-header {padding:5px 0 2px 0; margin:0; font-weight:normal;}
+.find-edit-object-records .footer {padding:10px 12px; background-color:#E1E8ED; border-bottom: 1px solid #CECFD1; margin-top:-1px;}
 
 .input-alpha, .input-alpha-table, .input-authority, .input-numeric, 
 .input-numeric-small, .input-numeric-medium, .input-numeric-long, .ui-autocomplete-input,
@@ -308,16 +310,15 @@ table#search-results .fl-pager .fl-pager-ui .fl-pager-link {}
 table .input-alpha, table .input-alpha-table, table .input-authority, table .input-numeric, 
 table .input-numeric-small, table .input-numeric-medium, table .input-numeric-long, 
 table .input-dropdown, table .input-money-type, table .input-money-amount, table .input-date,
-table .input-autocomplete, table .ui-autocomplete-input
+table .input-autocomplete, table .ui-autocomplete-input, table .input-dropdown
 {height:17px; *height:16px; padding-top:1px; *padding-top:0; border:none; padding-left:0px;}
-
 
 .input-numeric-small   {width: 60px  !important;}
 .input-numeric-medium {width: 120px !important;}
 .input-date	 		   {width: 142px !important;}
 .input-money-amount	   {width: 120px !important;}
-.input-select		   {width: auto; height:19px; *height:23px;}
-table .input-select         {width: auto; height:18px; *height:22px;}
+.input-select		   {width: auto; height:20px; *height:23px;}
+table .input-select         {width: auto; height:18px; *height:22px; padding-top:0; border:none;}
 .input-textarea		   {width: 99.5%; height:61px; *height:63px;}
 .input-alpha-login       {width: 120px; height:18px;}
 .input-autocomplete	   {width:auto !important;}
@@ -428,7 +429,7 @@ td textarea {border:none;}
 
 .activate input {color:black !important; background-color:white !important;}
 
-.overflow-find-edit {overflow-y:auto; overflow-x:hidden; max-height:144px;}
+.overflow-find-edit {overflow-y:auto; overflow-x:hidden; max-height:194px;} /*  min-height */
 
 .fl-widget {background: white; border: 1px solid black;}
 
