@@ -158,7 +158,8 @@ table#search-results .fl-pager .fl-pager-ui .fl-pager-link {}
 .fl-tabs-right {text-align:right; padding-right:15px;}
 
 .header-name {text-transform:uppercase;}
-.title-name, .record-number, .header-name, .primary-value, .secondary-value {font-size: 22px; line-height: 22px; float:left; width:400px;}
+.title-name, .record-number, .header-name, .primary-value, .secondary-value {font-size: 22px; line-height: 22px; float:left; width:400px; overflow:hidden;}
+.csc-titleBar-acquisition-reference-number, .csc-titleBar-intake-entry-number {font-size: 22px; line-height: 22px; float:left; width:100%; overflow:hidden;}
 .title-name {width:620px; overflow:hidden;}
 .object-type {margin-left: 1.7em; padding:1px 8px; font-size:18px; line-height:22px; text-transform:uppercase; background-color:#E7E7E8; float:left;}
 .object-name, .record-number, .title-name {height: 24px;}
@@ -295,6 +296,7 @@ table#search-results .fl-pager .fl-pager-ui .fl-pager-link {}
 .find-edit-object-records .info-pair-table .info-value table {/*width:696px;*/ width:100%; border-spacing:0; background-color:#FFF; font-size:12px; line-height:12px; margin:0;}
 .find-edit-object-records .info-pair-table .info-value thead tr  {background-color:#FFF; color:#3B3B3C; border:none; padding: 2px 1px 1px 2px;}
 .find-edit-object-records .info-pair-table .info-value thead td {border-collapse: collapse; background-color:#E1E8ED; color:#2278AB; border:none; border-bottom:0px solid #CECFD1;  border-top:0px solid #CECFD1; padding: 6px 1px 6px 6px;}
+.find-edit-object-records .info-pair-table .info-value tbody tr {height:22px;}
 .find-edit-object-records .info-pair-table .info-value tbody td {border:none; padding: 5px 1px 5px 6px; border-top:1px solid #CECFD1; border-bottom:1px solid #CECFD1;}
 .find-edit-object-records .info-pair-table .info-value tbody tr:hover {/*background-color:#BFF4FF;*/}
 .find-edit-object-records .info-pair-table .sub-header {padding:5px 0 2px 0; margin:0; font-weight:normal;}
@@ -315,7 +317,8 @@ table .input-autocomplete, table .ui-autocomplete-input, table .input-dropdown
 
 .input-numeric-small   {width: 60px  !important;}
 .input-numeric-medium {width: 120px !important;}
-.input-date	 		   {width: 142px !important;}
+.input-date	 		   {width: 142px !important; padding-left:2px;}
+table.input-date	 	   {padding-left:2px;}
 .input-money-amount	   {width: 120px !important;}
 .input-select		   {width: auto; height:20px; *height:23px;}
 table .input-select         {width: auto; height:18px; *height:22px; padding-top:0; border:none;}
@@ -420,12 +423,13 @@ td textarea {border:none;}
 .no-margin {margin:0;}
 .no-padding {padding:0;}
 
-.disabled {color: #A0A0A0 !important;}
-.content.disabled, .disabled td, .disabled tr {background-color:#CDCCCC !important; color:#a0a0a0 !important;}
+.disabled {}
+.content.disabled, .disabled td, .disabled tr, input.disabled, td.disabled, tr.disabled {background-color:#CDCCCC  !important; color:#a0a0a0 !important;}
 .radio-button.disabled {color:gray; background-color:#E7E 8E9;}
 
 .deactivate, .deactivate table, .deactivate table td, .deactivate .label {background-color:#CDCCCC !important; color:#606060 !important;}
 .deactivate input {color:gray !important;}
+input.deactivate {background-color:#EFEFEF !important; color:#000 !important;}
 
 .activate input {color:black !important; background-color:white !important;}
 
