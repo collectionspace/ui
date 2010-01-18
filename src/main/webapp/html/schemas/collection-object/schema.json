@@ -237,35 +237,56 @@
 	    "fields.descInscriptionContent": {
 	    	"selector": ".csc-object-description-inscription-content"
 	    },
+	    "fields.descInscriptionContentInscriber": {
+	    	"selector": ".csc-object-description-inscription-content-inscriber"
+	    },
+	    "fields.descInscriptionContentLanguage": {
+	    	"selector": ".csc-object-description-inscription-content-language"
+	    },
+	    "fields.descInscriptionContentDate": {
+	    	"selector": ".csc-object-description-inscription-content-date"
+	    },
+	    "fields.descInscriptionContentPosition": {
+	    	"selector": ".csc-object-description-inscription-content-position"
+	    },
+	    "fields.descInscriptionContentScript": {
+	    	"selector": ".csc-object-description-inscription-content-script"
+	    },
+	    "fields.descInscriptionContentType": {
+	    	"selector": ".csc-object-description-inscription-content-type"
+	    },
+	    "fields.descInscriptionContentMethod": {
+	    	"selector": ".csc-object-description-inscription-content-method"
+	    },
+	    "fields.descInscriptionContentInterpretation": {
+	    	"selector": ".csc-object-description-inscription-content-interpretation"
+	    },
+	    "fields.descInscriptionContentTranslation": {
+	    	"selector": ".csc-object-description-inscription-content-translation"
+	    },
+	    "fields.descInscriptionContentTransliteration": {
+	    	"selector": ".csc-object-description-inscription-content-transliteration"
+	    },
 	    "fields.descInscriptionDescription": {
 	    	"selector": ".csc-object-description-inscription-description"
 	    },
-	    "fields.descInscriptionInscriber": {
-	    	"selector": ".csc-object-description-inscription-inscriber"
+	    "fields.descInscriptionDescriptionInscriber": {
+	    	"selector": ".csc-object-description-inscription-description-inscriber"
 	    },
-	    "fields.descInscriptionLanguage": {
-	    	"selector": ".csc-object-description-inscription-language"
+	    "fields.descInscriptionDescriptionDate": {
+	    	"selector": ".csc-object-description-inscription-description-date"
 	    },
-	    "fields.descInscriptionPosition": {
-	    	"selector": ".csc-object-description-inscription-position"
+	    "fields.descInscriptionDescriptionPosition": {
+	    	"selector": ".csc-object-description-inscription-description-position"
 	    },
-	    "fields.descInscriptionScript": {
-	    	"selector": ".csc-object-description-inscription-script"
+	    "fields.descInscriptionDescriptionType": {
+	    	"selector": ".csc-object-description-inscription-description-type"
 	    },
-	    "fields.descInscriptionType": {
-	    	"selector": ".csc-object-description-inscription-type"
+	    "fields.descInscriptionDescriptionMethod": {
+	    	"selector": ".csc-object-description-inscription-description-method"
 	    },
-	    "fields.descInscriptionMethod": {
-	    	"selector": ".csc-object-description-inscription-method"
-	    },
-	    "fields.descInscriptionInterpretation": {
-	    	"selector": ".csc-object-description-inscription-interpretation"
-	    },
-	    "fields.descInscriptionTranslation": {
-	    	"selector": ".csc-object-description-inscription-translation"
-	    },
-	    "fields.descInscriptionTransliteration": {
-	    	"selector": ".csc-object-description-inscription-transliteration"
+	    "fields.descInscriptionDescriptionInterpretation": {
+	    	"selector": ".csc-object-description-inscription-description-interpretation"
 	    },
 	    "fields.descDateAssociation": {
 	    	"selector": ".csc-date-information-date-association"

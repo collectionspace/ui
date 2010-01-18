@@ -43,6 +43,9 @@
 	        "validators": [],
 	        "decorators": []
 	    },
+	    "fields.acquPriceType": {
+	        "selector": ".csc-acquisition-purchase-price-type"
+	    },
 	    "fields.acquPriceDenom": {
 	        "selector": ".csc-acquisition-purchaser-price-denomination",
 	        "validators": [],
@@ -94,6 +97,14 @@
                     "url": "../../chain/acquisition/autocomplete/acquAuthorize"
                 }
             }]
+	    },
+	    "fields.acquAuthorizeDate": {
+	        "selector": ".csc-acquisition-authorizer-date",
+	        "decorators": [{
+			    "type": "fluid",
+				"func": "cspace.datePicker",
+				"container": ".csc-acquisition-authorizer-date-container"
+			}]
 	    },
 	    "fields.acquSource": {
 	        "selector": ".csc-acquisition-acquisition-source",
