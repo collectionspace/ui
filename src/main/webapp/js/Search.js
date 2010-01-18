@@ -90,7 +90,7 @@ var cspace = cspace || {};
         ];
         if (resultsPager) {
             fluid.model.copyModel(resultsPager.options.dataModel, results);
-            resultsPager.options.columnDefs = colDefsGenerated(colList, recordType),
+            fluid.model.copyModel(resultsPager.options.columnDefs, colDefsGenerated(colList, recordType));
             // you're not supposed to touch the pager's model, but there's a bug in this version, so...
             resultsPager.model.totalRange = results.length;
             resultsPager.events.initiatePageChange.fire({pageIndex: 0, forceUpdate: true});
