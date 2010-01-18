@@ -23,8 +23,12 @@ var cspace = cspace || {};
         {"label": "Peach cobbler", "urn": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Peach cobbler)'Peach+cobbler'"}
     ];
 
-    var parseLabelFromUrn = function (urn) {
-        return urn.slice(urn.indexOf("'") + 1, urn.length - 1);
+    var parseLabelFromUrn = function (string) {
+        if (string.substring(0, 4) === "urn:") {
+            return string.slice(string.indexOf("'") + 1, string.length - 1).replace("+", " ");
+        } else {
+            return string;
+        }
     };
 
     var setupAutocomplete = function (that) {
@@ -46,11 +50,6 @@ var cspace = cspace || {};
         autoCompleteInput.insertAfter(input);
         input.hide();
 
-        opts.nothingFoundCallback = function (term) {
-           input.val(term);
-           input.change(); 
-        };
-
         autoCompleteInput.autocomplete(opts).autocomplete("result", function (e, item) {
             if (item) {
                 if (cspace.util.isLocal()) {
@@ -64,8 +63,17 @@ var cspace = cspace || {};
 
         if (input.val()) {
             var val = input.val();
-            autoCompleteInput.val(parseLabelFromUrn(val).replace("+", " "));
+            autoCompleteInput.val(parseLabelFromUrn(val));
         }
+
+        autoCompleteInput.blur(function () {
+            var storedVal = input.val();
+            var typedVal = autoCompleteInput.val();
+            if (typedVal !== parseLabelFromUrn(storedVal)) {
+                input.val(typedVal);
+                input.change();
+            }
+        });
     };
 
 
