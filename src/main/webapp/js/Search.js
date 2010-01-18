@@ -36,7 +36,7 @@ var cspace = cspace || {};
                 key = "number";
                 comp = {
                     target: recordType + ".html?csid=${*.csid}",
-                    linktext: fluid.VALUE
+                    linktext: "${*.number}" 
                 };
             } else if (object === "csid") {
                 key = "csid";
