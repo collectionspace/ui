@@ -112,8 +112,15 @@ var cspace = cspace || {};
         
 		$("a:not([href*=#])").live("click", function (e) {
             if (that.unsavedChanges) {
+                var href;
+                if (e.target.nodeName === "IMG") {
+                    // this assumes that if the target is an image, it must be wrapped in an <a>
+                    href = e.target.parentNode.href;
+                } else {
+                    href = e.target.href;
+                }
                 confirmation.dialog("open");
-                cspace.confirmation(confirmation, {model: {href: e.target.href}, action: that.save});
+                cspace.confirmation(confirmation, {model: {href: href}, action: that.save});
                 return false;
             }
        });		
