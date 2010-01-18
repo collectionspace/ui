@@ -121,6 +121,10 @@ var cspace = cspace || {};
 
     var bindEventHandlers = function (that) {
 
+        that.events.onSave.addListener(function () {
+            displayTimestampedMessage(that, that.options.strings.savingMessage, "");
+        });
+
         that.dataContext.events.afterCreate.addListener(function (modelPath, data) {
             that.applier.requestChange(that.options.idField, data.csid);
             that.events.afterCreateObjectDataSuccess.fire(data, that.options.strings.createSuccessfulMessage);
@@ -273,6 +277,7 @@ var cspace = cspace || {};
         strings: {
             specFetchError: "I'm sorry, an error has occurred fetching the UISpec: ",
             errorRecoverySuggestion: "Please try refreshing your browser",
+            savingMessage: "Saving, please wait...",
             updateSuccessfulMessage: "Object Record successfully saved",
             createSuccessfulMessage: "New Object Record successfully created",
             updateFailedMessage: "Error saving Record: ",
