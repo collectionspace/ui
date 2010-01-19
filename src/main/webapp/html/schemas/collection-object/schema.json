@@ -35,6 +35,9 @@
 	    "fields.otherNumber": {
 	        "selector": ".csc-object-identification-other-number"
 	    },
+	    "fields.otherNumberType": {
+	        "selector": ".csc-object-identification-other-number-type"
+	    },
 	    "fields.description": {
 	        "selector": ".csc-object-identification-brief-description"
 	    },
