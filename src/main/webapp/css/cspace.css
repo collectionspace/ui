@@ -262,7 +262,7 @@ table#search-results .fl-pager .fl-pager-ui .fl-pager-link {}
 .info-value {width:100%; float:left;}
 .info-value table {width:100%; border-spacing:0; background-color:#FFF; margin-top:1px; border:0; padding:0;}
 .info-value thead tr {}
-.info-value thead td {border:1px solid #BABABB; background-color:#F3F3F4; color:#3B3B3C; padding: 2px 0 2px 2px; font-size:11px; line-height: 11px;}
+.info-value thead td {border:1px solid #BABABB; background-color:#F3F3F4; color:#3B3B3C; padding: 2px 2px 2px 2px; font-size:11px; line-height: 11px;}
 .info-value tbody tr {}
 .info-value tbody td {border:1px solid #BABABB;}
 .info-value tbody td input {*margin:0 -2px 0 2px;}
@@ -425,11 +425,11 @@ td textarea {border:none;}
 
 .disabled {}
 .content.disabled, .disabled td, .disabled tr, input.disabled, td.disabled, tr.disabled {background-color:#CDCCCC  !important; color:#a0a0a0 !important;}
-.radio-button.disabled {color:gray; background-color:#E7E 8E9;}
+.radio-button.disabled {color:gray; /*background-color:#E7E 8E9;*/}
 
 .deactivate, .deactivate table, .deactivate table td, .deactivate .label {background-color:#CDCCCC !important; color:#606060 !important;}
-.deactivate input {color:gray !important;}
-input.deactivate {background-color:#EFEFEF !important; color:#000 !important;}
+.deactivate input {color:#CDCCCC !important;}
+input.deactivate {background-color:#CDCCCC !important; color:#000 !important;}
 
 .activate input {color:black !important; background-color:white !important;}
 

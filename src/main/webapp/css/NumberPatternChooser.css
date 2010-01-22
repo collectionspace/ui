@@ -16,6 +16,7 @@
 	float:left; 
 	margin-left: 53%;
 	margin-top:-20px; *margin-top:-21px;
+	cursor:pointer;
 }
 .cs-numberPatternChooser-list {
     background-color:white;

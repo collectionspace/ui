@@ -79,7 +79,7 @@ jQuery(document).ready(function() {
 												<table>
 													<tbody>
 														<tr>
-															<td class="field-cal"><input type="text" class="input-date csc-acquisition-accession-date csc-calendar-date deactivate" name="acquisition-accession-date" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></a></td>
+															<td class="field-cal"><input type="text" class="input-date csc-acquisition-accession-date csc-calendar-date" name="acquisition-accession-date" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></a></td>
 														</tr>
 													</tbody>
 												</table>
@@ -116,7 +116,7 @@ jQuery(document).ready(function() {
 													<tbody>
 														<tr>
 															<!--<td class="table-unselected"></td>-->
-															<td class="field-cal"><input type="text" class="input-date csc-acquisition-date csc-calendar-date deactivate" name="acquisition-date"><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></a></td>
+															<td class="field-cal"><input type="text" class="input-date csc-acquisition-date csc-calendar-date " name="acquisition-date"><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></a></td>
 														</tr>
 													</tbody>
 												</table>
@@ -221,9 +221,9 @@ jQuery(document).ready(function() {
 													
 												<tbody>
 													<tr>
-														<td sytle="width:180px;"><input type="text" disabled=disabled class="input-money-type csc-acquisition-acquisition-funding-denomination disabled" name="acquisition-acquisition-funding-denomination" value="US Dollar"></td>
-														<td><input type="text" disabled=disabled class="input-numeric-medium csc-acquisition-acquisition-funding-value disabled" name="acquisition-acquisition-funding-value" value="$ "></td>
-														<td><input type="text" disabled=disabled class="input-alpha-table csc-acquisition-acquisition-funding-source" name="acquisition-acquisition-funding-source"></td>
+														<td sytle="width:180px;"><input type="text" disabled=disabled class="input-money-type csc-acquisition-acquisition-funding-denomination disabled" name="acquisition-acquisition-funding-denomination" value=""></td>
+														<td><input type="text" disabled=disabled class="input-numeric-medium csc-acquisition-acquisition-funding-value disabled" name="acquisition-acquisition-funding-value" value=""></td>
+														<td><input type="text" disabled=disabled class="input-alpha-table csc-acquisition-acquisition-funding-source disabled" name="acquisition-acquisition-funding-source"></td>
 														<td><input type="text" disabled=disabled class="input-alpha-table csc-acquisition-acquisition-funding-provisos disabled" name="acquisition-acquisition-funding-provisos"></td>
 													</tr>
 												</tbody>
@@ -249,11 +249,11 @@ jQuery(document).ready(function() {
 							</div>
 							
 							<!-- Information-block content block -->
-							<div class="fl-container-flex fl-fix content" id="toggle-object-collection-information">
+							<div class="fl-container-flex fl-fix content disabled" id="toggle-object-collection-information">
 								<!-- The information-block is further broken down into two columns of equal size: left and right -->
 								
 								<!-- one row column -->
-								<div class="info-column fl-force-left z-fix">
+								<div class="info-column fl-force-left">
 									<div class="info-column2-50 fl-force-left deactivate">
 										<div class="info-pair-addrow info-pair-date">
 											<div class="info-label" title="">Field Collection Date</div>
