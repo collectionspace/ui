@@ -91,6 +91,7 @@
 									</div> <!-- end outer info column -->
 								</div> <!-- end information group -->
 
+								<!-- Procedural Record information group -->
 								<div class="fl-container-flex fl-fix information-group">
 									<!-- outer info column -->
 									<div class="info-column1">	
@@ -109,7 +110,6 @@
 														<span class="radio-button disabled"><input id="new-loanin-radio" type="radio" name="recordtype" value="loanin" disabled /> <label for="new-loanin-radio">Loan In</label></span>
 														<span class="radio-button disabled"><input id="new-loanout-radio" type="radio" name="recordtype" value="loanout" disabled /> <label for="new-loanout-radio">Loan Out</label></span>
 														<span class="radio-button disabled"><input id="new-exit-radio" type="radio" name="recordtype" value="objectexit" disabled /> <label for="new-exit-radio">Object Exit</label></span>
-													
 													</div>
 													<input type=button class="button create-quick-button" onclick="getRadioValue();" value ="" title="create quick record"/>
 													<div class="button"><img src="../images/btnCreateNew_grey.png" alt="create new" class="button" height=23 width=96 /></div>
@@ -123,12 +123,13 @@
 									</div> <!-- end outer info column -->
 								</div> <!-- end information group -->
 								
+								<!-- Vocabulary Term information group -->
 								<div class="fl-container-flex fl-fix information-group">
 									<!-- outer info column -->
 									<div class="info-column1">	
 										<!-- information block header -->
 										<div class="fl-container-flex header">
-											Vocabulary, Storage, Media Records 
+											Vocabulary/Authority Terms 
 										</div> <!-- end information block header -->
 										<!-- container content -->
 										<!--<form name="selecttypeV">-->
@@ -136,13 +137,15 @@
 												<div class="info-column1">
 													<div class="sub-header">Select a Type</div>
 													<div class="radio-buttons">
-														<span class="radio-button"><input type="radio" id="new-name-authority-radio" name="recordtype" value="authority.html"/> Name Authority</span>
-														<span class="radio-button disabled"><input type="radio" name="recordtype" value="location" disabled /> Location</span>
-														<span class="radio-button disabled"><input type="radio" name="recordtype" value="mediasupport" disabled /> Media Support</span>
-														<span class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Collection</span>
+														<span class="radio-button"><input type="radio" id="new-name-authority-radio" name="recordtype" value="authority.html"/> Name</span>
+														<span class="radio-button disabled"><input type="radio" name="recordtype" value="location" disabled /> Place</span>
+														<span class="radio-button disabled"><input type="radio" name="recordtype" value="mediasupport" disabled /> Subject</span>
+														<span class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Concept</span>
+														<span class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Exhibition</span>
+														<span class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Collecting Event</span>
+														<span class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Citation</span>
 													</div>
 													<input type=button class="button create-quick-button" onclick="getRadioValue();" value ="" title="create quick record"/>
-													<!--<div class="button"><img class="button" width="192" height="23" alt="create quick record" src="../images/btnCreateQuick.png"/></div>-->
 													<div class="button"><img src="../images/btnCreateNew_grey.png" alt="create new" class="button" height=23 width=96 /></div>
 													<div class="button"><img src="../images/btnCreateExisting_grey.png" alt="create new" class="button" height=23 width=155 /></div>
 													<div class="button"><img src="../images/btnCreateTemplate_grey.png" alt="create new" class="button" height=23 width=157 /></div>
@@ -154,6 +157,37 @@
 									</div> <!-- end outer info column -->
 								</div> <!-- end information group -->
 								
+								<!-- Storage an Media Records information group -->
+								<div class="fl-container-flex fl-fix information-group">
+									<!-- outer info column -->
+									<div class="info-column1">	
+										<!-- information block header -->
+										<div class="fl-container-flex header">
+											Storage and Media Records 
+										</div> <!-- end information block header -->
+										<!-- container content -->
+										<!--<form name="selecttypeV">-->
+											<div class="fl-container-flex fl-fix content">
+												<div class="info-column1">
+													<div class="sub-header">Select a Type</div>
+													<div class="radio-buttons ">
+														<span class="radio-button disabled"><input type="radio" name="recordtype" value="location" disabled /> Location</span>
+														<span class="radio-button disabled"><input type="radio" name="recordtype" value="mediasupport" disabled /> Media Support</span>
+														<span class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Collection</span>
+													</div>
+													<!--<input type=button class="button create-quick-button"disabled onclick="getRadioValue();" value ="" title="create quick record"/>-->
+													<div class="button"><img class="button" width="192" height="23" alt="create quick record" src="../images/btnCreateQuick_grey.png"/></div>
+													<div class="button"><img src="../images/btnCreateNew_grey.png" alt="create new" class="button" height=23 width=96 /></div>
+													<div class="button"><img src="../images/btnCreateExisting_grey.png" alt="create new" class="button" height=23 width=155 /></div>
+													<div class="button"><img src="../images/btnCreateTemplate_grey.png" alt="create new" class="button" height=23 width=157 /></div>
+													<div class="clear"></div>
+												</div> <!-- end inner info column -->
+												
+											</div> <!-- end container content -->
+										</form>
+									</div> <!-- end outer info column -->
+								</div> <!-- end information group -->
+
 							</div> <!-- end create-new -->
 						</div> <!-- end left side container -->
 						
