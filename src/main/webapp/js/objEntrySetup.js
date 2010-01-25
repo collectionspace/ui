@@ -20,7 +20,7 @@ var demo = demo || {};
         var oeOpts = {
             alternateFields: ["accessionNumber", "objectTitle"],
 // CSPACE-701
-			uiSpecUrl: isLocal ? "./schemas/collection-object/schema.json" : "../../chain/objects/schema"
+			uiSpecUrl: isLocal ? "./uispecs/collection-object/uispec.json" : "../../chain/objects/uispec"
         };
         if (csid) {
             oeOpts.csid = csid;

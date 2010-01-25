@@ -42,7 +42,7 @@ var cspace = cspace || {};
                                     "*": "data/"+recordType+"/%recordId",
                                     "fields": "data/"+recordType+"/%recordId",
                                     "relations": "data/"+recordType+"/%recordId",
-                                    "spec": "schemas/"+recordType+"/schema"
+                                    "spec": "uispecs/"+recordType+"/uispec"
                                 },
                                 replacements: {
                                     "recordId": "csid"

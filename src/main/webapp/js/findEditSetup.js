@@ -39,21 +39,21 @@ var cspace = cspace || {};
 		var isLocal = cspace.util.isLocal();
         var orOpts = {uiSpecUrl: isLocal ? 
 // CSPACE-701
-		    "./schemas/collection-object/find-edit.json" : "../../chain/objects/uispec/find-edit"};
+		    "./uispecs/collection-object/find-edit.json" : "../../chain/objects/uispec/find-edit"};
         if (isLocal) {
             orOpts.dataContext = setupTestDataContext("object");
         }
         var objRecordList = cspace.recordList(".object-records-group", orOpts);
 
         var prInOpts = {uiSpecUrl: isLocal ? 
-		    "./schemas/intake/find-edit.json" : "../../chain/intake/uispec/find-edit"};
+		    "./uispecs/intake/find-edit.json" : "../../chain/intake/uispec/find-edit"};
         if (isLocal) {
             prInOpts.dataContext = setupTestDataContext("intake");
         }
         var procIntakeRecordList = cspace.recordList(".intake-records-group", prInOpts);
 
         var prAcqOpts = {uiSpecUrl: isLocal ?
-		    "./schemas/acquisition/find-edit.json" : "../../chain/acquisition/uispec/find-edit"};
+		    "./uispecs/acquisition/find-edit.json" : "../../chain/acquisition/uispec/find-edit"};
         if (isLocal) {
             prAcqOpts.dataContext = setupTestDataContext("acquisition");
         }

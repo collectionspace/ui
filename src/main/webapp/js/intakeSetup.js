@@ -19,7 +19,7 @@ var demo = demo || {};
 		var isLocal = cspace.util.isLocal();
         var oiOpts = {
             alternateFields: ["entryNumber"],
-            uiSpecUrl: isLocal ? "./schemas/intake/schema.json" : "../../chain/intake/schema",
+            uiSpecUrl: isLocal ? "./uispecs/intake/uispec.json" : "../../chain/intake/uispec",
             templates: {
                 body: {
                     url: "../html/IntakeTemplate.html",

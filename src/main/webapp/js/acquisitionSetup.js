@@ -20,7 +20,7 @@ var demo = demo || {};
 		var isLocal = cspace.util.isLocal();
         var oiOpts = {
             alternateFields: ["acquReferenceNum"],
-            uiSpecUrl: isLocal ? "./schemas/acquisition/schema.json" : "../../chain/acquisition/schema",
+            uiSpecUrl: isLocal ? "./uispecs/acquisition/uispec.json" : "../../chain/acquisition/uispec",
             templates: {
                 body: {
                     url: "../html/acquisitionTemplate.html",
