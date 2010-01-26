@@ -14,6 +14,46 @@ var cspace = cspace || {};
 
 (function ($, fluid) {
     
+    var types = {
+        create: "POST",
+        fetch: "GET",
+        update: "PUT",
+        remove: "DELETE"
+    };
+
+    /*
+     * Wrapper around fluid.model.getBeanValue() that handles a modelPath of "*"
+     */
+    cspace.getBeanValue = function (model, modelPath) {
+        return (modelPath === "*" ? model : fluid.model.getBeanValue(model, modelPath));
+    };
+
+    /*
+     * that: the DataContext object
+     * operation: string ("create", "fetch", "update", "remove"); will be displayed in the case of an error
+     * modelPath:
+     * model:
+     * successEvent: event to fire after success
+     * data: data to be stringified for PUT or POST (optional)
+     */
+    var ajax = function (that, operation, modelPath, model, successEvent, data) {
+        var opts = {
+            url: that.urlFactory.urlForModelPath(modelPath, model),
+            type: types[operation],
+            dataType: that.urlFactory.options.dataType,
+            success: function (data, textStatus) {
+                successEvent.fire(modelPath, data);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                that.events.onError.fire(operation, modelPath, textStatus);
+            }
+        };
+        if (operation === "create" || operation === "update") {
+            opts.data = JSON.stringify(data);
+        }
+        jQuery.ajax(opts);
+    };
+
     fluid.completelyIndirectStringTemplate = function (template, values, model) {
         var newString = template;
         var hasModel = !!model;
@@ -68,51 +108,17 @@ var cspace = cspace || {};
                 fluid.model.setBeanValue(shadow, modelPath, queryParameters);
             }
             var workingModel = $.extend({}, that.model, shadow);
-            jQuery.ajax({
-                url: that.urlFactory.urlForModelPath(modelPath, workingModel),
-                type: "GET",
-                dataType: that.urlFactory.options.dataType,
-                success: function (data, textStatus) {
-                    that.events.afterFetch.fire(modelPath, data);
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    that.events.onError.fire("fetch", modelPath, textStatus);
-                }
-            });
+            ajax(that, "fetch", modelPath, workingModel, that.events.afterFetch);
         };
         
         that.create = function (modelPath) {
-            // getBeanValue() doesn't treat "*" as intended, so we have to do it manually
-            var data = (modelPath === "*" ? that.model : fluid.model.getBeanValue(that.model, modelPath));
-            jQuery.ajax({
-                url: that.urlFactory.urlForModelPath(modelPath, that.model),
-                type: "POST",
-                dataType: that.urlFactory.options.dataType,
-                data: JSON.stringify(data),
-                success: function (data, textStatus) {
-                    that.events.afterCreate.fire(modelPath, data);
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    that.events.onError.fire("create", modelPath, textStatus);
-                }
-            });
+            var data = cspace.getBeanValue(that.model, modelPath);
+    	    ajax(that, "create", modelPath, that.model, that.events.afterCreate, data);
         };
         
         that.update = function (modelPath) {
-            // getBeanValue() doesn't treat "*" as intended, so we have to do it manually
-            var data = (modelPath === "*" ? that.model : fluid.model.getBeanValue(that.model, modelPath));
-            jQuery.ajax({
-                url: that.urlFactory.urlForModelPath(modelPath, that.model),
-                type: "PUT",
-                dataType: that.urlFactory.options.dataType,
-                data: JSON.stringify(data),
-                success: function (data, textStatus) {
-                    that.events.afterUpdate.fire(modelPath, data);
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    that.events.onError.fire("update", modelPath, textStatus);
-                }
-            });
+            var data = cspace.getBeanValue(that.model, modelPath);
+            ajax(that, "update", modelPath, that.model, that.events.afterUpdate, data);
         };
 
         // creates or updates as necessary
@@ -132,10 +138,10 @@ var cspace = cspace || {};
         events: {
             modelChanged: null,    // newModel, oldModel, source
             afterCreate: null,   // modelPath, data
-            afterDelete: null, // modelPath
+            afterRemove: null, // modelPath
             afterFetch: null,  // modelPath, data
             afterUpdate: null,  // modelPath, data
-            onError: null      // operation["create", "delete", "fetch", "update"], modelPath, message
+            onError: null      // operation["create", "remove", "fetch", "update"], modelPath, message
         },
         urlFactory: {
             type: "cspace.dataContext.urlFactory"
