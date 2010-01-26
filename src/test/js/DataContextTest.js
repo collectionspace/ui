@@ -11,6 +11,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 /*global jqUnit, jQuery, jqMock, cspace, fluid, start, stop, ok, same*/
 
 var dataContextTester = function () {
+    // jqMock requires jqUnit.ok to exist
+    jqUnit.ok = ok;
+    
     var models = {
         flatCollectionObject: {
             resourceId: "12345",
@@ -257,8 +260,8 @@ var dataContextTester = function () {
         var testOptions = mapperOptions.flatObjectModel;
         testOptions.baseUrl = "ftp://somewhere";
         var testContext = cspace.resourceMapperDataContext(models.flatCollectionObject, testOptions);
-        jqUnit.assertDeepEq("Resulting mapper should have correct map", mapperOptions.flatObjectModel.modelToResourceMap, testContext.urlFactory.resourceMapper.modelToResourceMap);
-        jqUnit.assertDeepEq("Resulting mapper should have correct replacements", mapperOptions.flatObjectModel.replacements, testContext.urlFactory.resourceMapper.replacements);
+        jqUnit.assertDeepEq("Resulting mapper should have correct map", mapperOptions.flatObjectModel.modelToResourceMap, testContext.urlFactory.resourceMapper.options.modelToResourceMap);
+        jqUnit.assertDeepEq("Resulting mapper should have correct replacements", mapperOptions.flatObjectModel.replacements, testContext.urlFactory.resourceMapper.options.replacements);
         jqUnit.assertDeepEq("Resulting urlFactory should have specified baseUrl", "ftp://somewhere", testContext.urlFactory.options.baseUrl);
         jqUnit.assertDeepEq("Resulting urlFactory should have default dataType", "json", testContext.urlFactory.options.dataType);
         
