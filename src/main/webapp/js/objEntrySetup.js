@@ -1,5 +1,5 @@
 /*
-Copyright 2009 University of Toronto
+Copyright 2009-2010 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
 ou may not use this file except in compliance with this License.
@@ -18,7 +18,6 @@ var demo = demo || {};
         var csid = cspace.util.getUrlParameter("csid");
 		var isLocal = cspace.util.isLocal();
         var oeOpts = {
-            alternateFields: ["accessionNumber", "objectTitle"],
 // CSPACE-701
 			uiSpecUrl: isLocal ? "./uispecs/collection-object/uispec.json" : "../../chain/objects/uispec"
         };

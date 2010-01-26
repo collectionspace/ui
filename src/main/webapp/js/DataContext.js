@@ -1,5 +1,5 @@
 /*
-Copyright 2009 University of Toronto
+Copyright 2009-2010 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
 ou may not use this file except in compliance with this License.
@@ -192,7 +192,8 @@ var cspace = cspace || {};
     
     /**
      * A UrlFactory is responsible for hiding away the variations between loading data locally for testing
-     * and on the server in production
+     * and on the server in production. It also uses the resourceMapper to determine the proper
+     * URL for communications related to a given model path.
      * 
      * @param {Object} options configuration options for the url factory
      */
@@ -219,6 +220,10 @@ var cspace = cspace || {};
         return that;    
     };
 
+    /*
+     * This object defaults to an URL that includes a file extension of ".json" which is used
+     * in testing.
+     */
     cspace.dataContext.testUrlFactory = function (options) {
         var that = {};
         fluid.mergeComponentOptions(that, "cspace.dataContext.testUrlFactory", options);
@@ -263,6 +268,7 @@ var cspace = cspace || {};
 
     /**
      * The StaticResourceMapper is the default strategy for mapping model paths to resource-oriented URLs.
+     * The urlFactory uses a resource mapper to generate urls.
      * 
      * @param {Object} options configuration options for the mapper, including the modelToResourceMap
      */

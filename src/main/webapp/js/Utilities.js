@@ -1,5 +1,5 @@
 /*
-Copyright 2009 University of Toronto
+Copyright 2009-2010 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
 ou may not use this file except in compliance with this License.
@@ -55,27 +55,6 @@ var cspace = cspace || {};
         };
     };
 
-    // This is a temporary function, in place only until the ID service is accessible
-    // through the APP layer.
-    cspace.util.newID = function (model, idField, alternateFields) {
-        var id = fluid.model.getBeanValue(model, idField);
-        
-        if (!id) {
-			 if (alternateFields) {
-			     for (var i = 0; i < alternateFields.length; i++) {
-				     if (model[alternateFields[i]]) {
-					     id = model[alternateFields[i]].split(" ")[0];
-					     break;
-				     }
-			     }
-		     }
-            if (!id) {
-                id = new Date().getTime().toString();
-            }
-        }
-        return id;
-    };
-	
 	cspace.util.isLocal = function () {
 		return document.location.protocol === "file:";
 	};

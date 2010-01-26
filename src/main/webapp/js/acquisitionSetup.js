@@ -1,5 +1,5 @@
 /*
-Copyright 2009 University of Toronto
+Copyright 2009-2010 University of Toronto
 Copyright 2009 University of Cambridge
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
@@ -19,7 +19,6 @@ var demo = demo || {};
         var csid = cspace.util.getUrlParameter("csid");
 		var isLocal = cspace.util.isLocal();
         var oiOpts = {
-            alternateFields: ["acquReferenceNum"],
             uiSpecUrl: isLocal ? "./uispecs/acquisition/uispec.json" : "../../chain/acquisition/uispec",
             templates: {
                 body: {

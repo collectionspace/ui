@@ -1,5 +1,5 @@
 /*
-Copyright 2009 University of Toronto
+Copyright 2009-2010 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
 ou may not use this file except in compliance with this License.
@@ -51,7 +51,7 @@ var cspace = cspace || {};
 
     cspace.setupRightSidebar = function (csid, data) {
         var orOpts = {uiSpecUrl: "./related-records/spec/spec-objects.json"};
-        if (document.location.protocol === "file:") {
+        if (cspace.util.isLocal()) {
             orOpts.dataContext = setupTestDataContext(csid, "object");
         }
 // CSPACE-701: the record type should be "object" or whatever is selected.
@@ -60,7 +60,7 @@ var cspace = cspace || {};
         var objRecordList = cspace.recordList(".related-objects", orOpts);
 
         var prOpts = {uiSpecUrl: "./related-records/spec/spec-procedures.json"};
-        if (document.location.protocol === "file:") {
+        if (cspace.util.isLocal()) {
             prOpts.dataContext = setupTestDataContext(csid, "procedure");
         }
         prOpts.data = buildRelationsList(data, ["intake", "acquisition"]);

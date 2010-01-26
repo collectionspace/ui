@@ -1,5 +1,5 @@
 /*
-Copyright 2009 University of Toronto
+Copyright 2009-2010 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
 ou may not use this file except in compliance with this License.
@@ -133,7 +133,7 @@ var cspace = cspace || {};
         });
 
         that.dataContext.events.afterCreate.addListener(function (modelPath, data) {
-            that.applier.requestChange(that.options.idField, data.csid);
+            that.applier.requestChange("csid", data.csid);
             that.events.afterCreateObjectDataSuccess.fire(data, that.options.strings.createSuccessfulMessage);
 	        displayTimestampedMessage(that, that.options.strings.createSuccessfulMessage, Date());
             that.unsavedChanges = false;
@@ -204,7 +204,7 @@ var cspace = cspace || {};
             fluid.model.copyModel(that.model, buildEmptyModelFromSpec(that.spec));
             var queryParams = {};
             if (that.options.csid) {
-                fluid.model.setBeanValue(queryParams, that.options.idField, that.options.csid);
+                fluid.model.setBeanValue(queryParams, "csid", that.options.csid);
                 that.dataContext.fetch("*", queryParams);
             } else {
                 setupModel(that);
@@ -248,7 +248,7 @@ var cspace = cspace || {};
             if (that.options.csid) {
                 that.dataContext.update("*");
             } else {
-                that.applier.requestChange(that.options.idField, "");
+                that.applier.requestChange("csid", "");
                 that.dataContext.create("*");
             }
             return false;
@@ -285,8 +285,8 @@ var cspace = cspace || {};
             specFetchError: "I'm sorry, an error has occurred fetching the UISpec: ",
             errorRecoverySuggestion: "Please try refreshing your browser",
             savingMessage: "Saving, please wait...",
-            updateSuccessfulMessage: "Object Record successfully saved",
-            createSuccessfulMessage: "New Object Record successfully created",
+            updateSuccessfulMessage: "Record successfully saved",
+            createSuccessfulMessage: "New Record successfully created",
             updateFailedMessage: "Error saving Record: ",
             createFailedMessage: "Error creating Record: ",
             deleteFailedMessage: "Error deleting Record: ",
@@ -315,9 +315,7 @@ var cspace = cspace || {};
             }
         },
         csid: null,
-        idField: "csid",
-        alternateFields: [],
-		 confirmationTemplateUrl: "../html/Confirmation.html",
+		confirmationTemplateUrl: "../html/Confirmation.html",
         
         // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
         // load it manually via ajax
