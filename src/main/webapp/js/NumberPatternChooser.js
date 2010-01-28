@@ -1,5 +1,5 @@
 /*
-Copyright 2009 University of Toronto
+Copyright 2009-2010 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
 ou may not use this file except in compliance with this License.
@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid_1_1*/
+/*global jQuery, fluid_1_2*/
 
 var cspace = cspace || {};
 
@@ -54,20 +54,20 @@ var cspace = cspace || {};
 
     var fetchNextNumberInSequence = function (that, sequenceName, callback) {
         jQuery.ajax({
-            url: that.options.baseUrl + "id/"+ sequenceName,
+            url: that.options.baseUrl + "id/" + sequenceName,
             type: "GET",
             dataType: "json",
             success: callback,
             error: function (xhr, textStatus, errorThrown) {
                 // TODO: implement proper error handling
                 callback({next: "Not supported yet"}, "error");
-           }
+            }
         });
 
     };
 
-    var populateInputField = function(that){
-        return function(data, status){
+    var populateInputField = function (that) {
+        return function (data, status) {
             var numField = that.locate("numberField", that.container);
             numField.val(data.next);
             numField.change();
@@ -90,20 +90,20 @@ var cspace = cspace || {};
         that.locate("button").click(function () {
             var list = that.locate("list");
             list.toggle();
-            if (list.is(":visible") ) {
+            if (list.is(":visible")) {
                 list.focus();
             }
         });
         
         fluid.deadMansBlur(rows, rows, function (event) {
-             list.hide();
+            list.hide();
         });
 
         var keyCode = function (evt) {
             return evt.keyCode ? evt.keyCode : (evt.which ? evt.which : 0);          
         };
         list.keypress(function (event) {
-	         if (keyCode(event) === $.ui.keyCode.ESCAPE) {
+            if (keyCode(event) === $.ui.keyCode.ESCAPE) {
                 list.hide();
             }
         });
@@ -129,11 +129,11 @@ var cspace = cspace || {};
         });
 
         rows.click(function (event) {
-            selectNumberPattern (that, event.currentTarget);
+            selectNumberPattern(that, event.currentTarget);
         });
 
         rows.fluid("activatable", function (event) {
-            selectNumberPattern (that, event.currentTarget);
+            selectNumberPattern(that, event.currentTarget);
         });
     };
 
@@ -188,9 +188,9 @@ var cspace = cspace || {};
 	        checkmark: ".csc-numberPatternChooser-checkmark"
         },
 		styles: {
-		 	selected: "cs-numberPatternChooser-selected",
+	        selected: "cs-numberPatternChooser-selected",
             selecting: "cs-numberPatternChooser-selecting"
-		 },
+	    },
         model: null,
         selected: null,
         events: {
@@ -198,4 +198,4 @@ var cspace = cspace || {};
         },
         templateUrl: "../html/NumberPatternChooser.html"
     });
-}) (jQuery, fluid_1_1);
+})(jQuery, fluid_1_2);

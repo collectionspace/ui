@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid_1_1*/
+/*global jQuery, fluid_1_2*/
 
 var cspace = cspace || {};
 
@@ -95,7 +95,7 @@ var cspace = cspace || {};
         // TODO: This should probably accept the modelPath as well, and only update that part of the tree
         that.updateModel = function (newModel, source) {
             var oldModel;
-			 $.extend(true, that.model, newModel);
+			$.extend(true, that.model, newModel);
             that.events.modelChanged.fire(that.model, oldModel, source);
         };
         
@@ -113,7 +113,7 @@ var cspace = cspace || {};
         
         that.create = function (modelPath) {
             var data = cspace.getBeanValue(that.model, modelPath);
-    	    ajax(that, "create", modelPath, that.model, that.events.afterCreate, data);
+            ajax(that, "create", modelPath, that.model, that.events.afterCreate, data);
         };
         
         that.update = function (modelPath) {
@@ -308,4 +308,4 @@ var cspace = cspace || {};
 		replacements: {}
 	});
 	
-})(jQuery, fluid_1_1);
+})(jQuery, fluid_1_2);

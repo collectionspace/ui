@@ -1,5 +1,5 @@
 /*
-Copyright 2009 University of Toronto
+Copyright 2009-2010 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
 ou may not use this file except in compliance with this License.
@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid_1_1, goog*/
+/*global jQuery, fluid_1_2, goog*/
 
 var cspace = cspace || {};
 
@@ -147,4 +147,4 @@ var cspace = cspace || {};
         months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 	});
 	
-})(jQuery, fluid_1_1);
+})(jQuery, fluid_1_2);

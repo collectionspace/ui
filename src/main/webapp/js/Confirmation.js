@@ -1,5 +1,5 @@
 /*
-Copyright 2009 University of Toronto
+Copyright 2009-2010 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
 ou may not use this file except in compliance with this License.
@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid_1_1*/
+/*global jQuery, fluid_1_2, window*/
 
 var cspace = cspace || {};
 
@@ -34,7 +34,7 @@ var cspace = cspace || {};
 		bindEvents(that);
 	};
 	
-	cspace.confirmation = function(container, options){
+	cspace.confirmation = function (container, options) {
 		var that = fluid.initView("cspace.confirmation", container, options);
 		setup(that);
 		return that;
@@ -49,4 +49,4 @@ var cspace = cspace || {};
         }
     });
 	
-}) (jQuery, fluid_1_1);
+})(jQuery, fluid_1_2);

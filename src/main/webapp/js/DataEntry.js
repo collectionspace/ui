@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid_1_1*/
+/*global jQuery, fluid_1_2*/
 
 var cspace = cspace || {};
 
@@ -30,7 +30,7 @@ var cspace = cspace || {};
         });
     };
 
-    displayTimestampedMessage = function (that, msg, time) {
+    var displayTimestampedMessage = function (that, msg, time) {
         that.locate("feedbackMessage").text(msg);
         that.locate("timestamp").text(time);
         that.locate("messageContainer").show();
@@ -48,7 +48,7 @@ var cspace = cspace || {};
     };
     
     var makeDCErrorHandler = function (that) {
-        return function(operation/*["create", "delete", "fetch", "update"]*/, modelPath, message){
+        return function (operation/*["create", "delete", "fetch", "update"]*/, modelPath, message) {
             var msgKey = operation + "FailedMessage";
             var msg = that.options.strings[msgKey] + message;
             displayTimestampedMessage(that, msg, "");
@@ -77,7 +77,7 @@ var cspace = cspace || {};
                 var modelfield = that.spec[key];
                 if (modelfield.hasOwnProperty("displayOnlySelectors")) {
                     var displayOnlySelectors = modelfield.displayOnlySelectors;
-                    for (var i=0, len = displayOnlySelectors.length; i<len; i++) {
+                    for (var i = 0, len = displayOnlySelectors.length; i < len; i++) {
                         var sel = displayOnlySelectors[i];
                         that.displayOnlyFields[key] = sel;
                         that.applier.modelChanged.addListener(key, makeDisplayFieldUpdater(sel));                        
@@ -123,8 +123,8 @@ var cspace = cspace || {};
                 cspace.confirmation(confirmation, {model: {href: href}, action: that.save});
                 return false;
             }
-       });		
-   };
+        });		
+    };
 
     var bindEventHandlers = function (that) {
 
@@ -159,10 +159,12 @@ var cspace = cspace || {};
             }
 
             for (var field in that.spec) {
-                var el = $(that.spec[field].selector);
-                el.change(function () {
-                    that.unsavedChanges = true;
-                });
+                if (that.spec.hasOwnProperty(field)) {
+                    var el = $(that.spec[field].selector);
+                    el.change(function () {
+                        that.unsavedChanges = true;
+                    });
+                }
             }        
         });
         
@@ -173,9 +175,9 @@ var cspace = cspace || {};
                     var func = templ.setupFunction;
                     var data = templ.data;
                     that.events.pageRendered.addListener(function () {
-						var args = [that.model.csid];
+	                    var args = [that.model.csid];
                         if (data) {
-							 args.push(that.model[data]);
+                            args.push(that.model[data]);
                         }
                         fluid.invokeGlobalFunction(func, args);
                     });
@@ -189,7 +191,7 @@ var cspace = cspace || {};
     };
     
     var setupDataContext = function (that) {
-        return function(spec, textStatus){
+        return function (spec, textStatus) {
             that.spec = spec.spec;
 
             // insert the resourceMapper options retrieved with the UISpec into the options structure
@@ -322,4 +324,4 @@ var cspace = cspace || {};
         uiSpecUrl: "./uispecs/collection-object/uispec.json"
 
     });
-})(jQuery, fluid_1_1);
+})(jQuery, fluid_1_2);

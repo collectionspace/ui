@@ -1,5 +1,5 @@
 /*
-Copyright 2009 University of Toronto
+Copyright 2009-2010 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
 ou may not use this file except in compliance with this License.
@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid_1_1*/
+/*global jQuery, fluid_1_2*/
 
 var cspace = cspace || {};
 
@@ -19,7 +19,9 @@ var cspace = cspace || {};
             var templateNames = [];
             var i = 0;
             for (var key in resources) {
-                if (resources.hasOwnProperty(key)) {
+// the comparison to "callbackCalled" is a workaround for FLUID-3486
+// if I better understand the issue at some point, I might find a better solution
+                if (resources.hasOwnProperty(key) && key !== "callbackCalled") {
                     var template = fluid.parseTemplates(resources, [key], {});
                     fluid.reRender(template, fluid.byId(resources[key].nodeId), tree, opts);
                 }
@@ -259,4 +261,4 @@ var cspace = cspace || {};
         }
     };
 
-})(jQuery, fluid_1_1);
+})(jQuery, fluid_1_2);
