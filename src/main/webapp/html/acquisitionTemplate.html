@@ -14,12 +14,11 @@ jQuery(document).ready(function() {
 <!-- title-bar - name of object and (assession) number -->
 <div id="title-bar">
 	<div class="title-bar-value">
-		<div class="record-number csc-titleBar-acquisition-reference-number"></div>
-		<div class="clear"></div>
-	</div>
-	
-	<div class="label">
-		<div class="label-text">ACQUISITION REFERENCE NUMBER</div>
+		<div class="overflow">
+			<div class="record-number csc-titleBar-acquisition-reference-number"></div>
+			<div class="clear"></div>
+		</div>
+		<div class="record-type">Acquisition</div>
 		<div class="clear"></div>
 	</div>
 </div>
@@ -35,10 +34,26 @@ jQuery(document).ready(function() {
 		<div class="fl-container-left fl-force-left">
 
 			<div class="fl-container-left csc-acquisition-container">
-				<div class="top-nav">
-					<div class="upper-save"><a href="#" class="savebutton csc-save"><img src="../images/savebutton.png" alt="save button" height="25" width="74" /></a></div>
-					<div class="clear"></div>
+				<div id="top-nav">
+					<div id="tab-menu"><!--<img src="../images/cataloging-tabs.png" alt="related record column" height=24 width=642 />-->
+						<ul class="menu-record">
+							<li><a class="current" href="#">Acquisition</a></li>
+							<li><a href="#">Cataloging</a></li>
+							<li><a href="#">Condition</a></li>
+							<li><a href="#">Conservation</a></li>
+							<li><a href="#">Location &amp; Movement</a></li>
+							<li><a href="#">Transportation</a></li>
+							<li><a href="#">Valuation</a></li>
+							<li><a href="#">Media</a></li>
+						</ul>
+					</div>
+					<div id="tab-menu-sub">
+						<div class="upper-save"><a href="#" class="savebutton csc-save"><input type="button" class="savebutton" value="Save"/></a></div>
+						<div class="time-stamp">Last Saved on 01.11.10 at 12:12pm</div>
+						<div class="clear"></div>
+					</div>
 				</div>
+				
 				<div class="acquisition-outer-border">
 
 					<div class="hidden csc-message-container cs-message">
