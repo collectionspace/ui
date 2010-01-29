@@ -34,8 +34,8 @@ jQuery(document).ready(function() {
 		<div class="fl-container-left fl-force-left">
 
 			<div class="fl-container-left csc-acquisition-container">
-				<div id="top-nav">
-					<div id="tab-menu"><!--<img src="../images/cataloging-tabs.png" alt="related record column" height=24 width=642 />-->
+				<div id="secondary-nav">
+					<div id="secondary-nav-menu"><!--<img src="../images/cataloging-tabs.png" alt="related record column" height=24 width=642 />-->
 						<ul class="menu-record">
 							<li><a class="current" href="#">Acquisition</a></li>
 							<li><a href="#">Cataloging</a></li>
@@ -47,7 +47,7 @@ jQuery(document).ready(function() {
 							<li><a href="#">Media</a></li>
 						</ul>
 					</div>
-					<div id="tab-menu-sub">
+					<div id="secondary-nav-menu-sub">
 						<div class="upper-save"><a href="#" class="savebutton csc-save"><input type="button" class="savebutton" value="Save"/></a></div>
 						<div class="time-stamp">Last Saved on 01.11.10 at 12:12pm</div>
 						<div class="clear"></div>
@@ -80,7 +80,7 @@ jQuery(document).ready(function() {
 								
 								<!-- one row column -->
 								<div class="info-column fl-force-left">
-									<div class="info-column2-40 fl-force-left">
+									<div class="info-column2-50 fl-force-left">
 										<div class="info-pair">
 											<div class="info-label" title="">Acquisition Reference Number</div>
 											<div class="info-value csc-acquisition-reference-number-patternChooserContainer">
@@ -156,7 +156,7 @@ jQuery(document).ready(function() {
 										
 									</div>
 									
-									<div class="info-column2-60 fl-force-right">
+									<div class="info-column2-50 fl-force-right">
 										<div class="info-pair-table">
 											<div class="info-label" title="">Purchase Price</div>
 											<div class="info-value">
@@ -325,11 +325,12 @@ jQuery(document).ready(function() {
 					</div>
 				</div> <!-- end outer border-->
 
-				<!-- Save button container -->
+				<!-- Button container -->
 				<div class="fl-container-flex input-buttons">
-					<a href="#" class="savebutton csc-save-bottom"><img src="../images/savebutton.png" alt="save button" height="25" width="74" /></a>
-					<a href="findedit.html" class="cancelbutton"><img src="../images/cancelbutton.png" alt="cancel button" width="89" height="25" /></a><div class="clear"><!-- --></div>
-				</div>	
+					<a href="#" class="csc-save-bottom"><input type="button" class="savebutton" value="Save" /></a>
+					<a href="findedit.html"><input type="button" class="cancelbutton" value="Cancel" /></a>
+					<div class="clear"></div>
+				</div>
 			</div> <!-- END left-side container -->
 
 		</div><!-- END left-side container -->

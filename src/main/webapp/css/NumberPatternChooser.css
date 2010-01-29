@@ -8,15 +8,17 @@
 .pattern-chooser-input {
 	width:51% !important;
 }
-.csc-numberPatternChooser-button {
+
+input.numberPatternChooserButton{
 	border:none;
-	background-color:#577A98; 
-	padding: 2px 4px 1px 4px; *padding: 2px 4px 0 4px;
+	background-color:#94BC80; 
+	padding: 3px 12px; *padding: 2px 12px;
 	color:#fff; 
-	float:left; 
-	margin-left: 53%;
-	margin-top:-20px; *margin-top:-21px;
+	float:right;
+	margin-top:-22px; *margin-top:-22px;
 	cursor:pointer;
+	font-size:11px;
+	font-weight:bold;
 }
 .cs-numberPatternChooser-list {
     background-color:white;

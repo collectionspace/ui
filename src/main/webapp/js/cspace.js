@@ -1,8 +1,8 @@
 function ShowHide(toggleme) {
 	jQuery(toggleme).toggle(); 
 	var self = toggleme + "-img";
-	var src = (jQuery(self).attr("src") === "../images/toggle-more.png") ? "../images/toggle-less.png" : "../images/toggle-more.png";
-	jQuery(self).attr("src", src);
+	var source = (jQuery(self).attr("src") === "../images/toggle-more.png") ? "../images/toggle-less.png" : "../images/toggle-more.png";
+	jQuery(self).attr("src", source);
 }
 
 function ToggleTabs(toggleme, toggleother, toggleSelected) {
