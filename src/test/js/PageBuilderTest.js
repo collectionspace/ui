@@ -37,12 +37,9 @@ var pageBuilderTester = function () {
     };
 
     pageBuilderTest.test("ProtoComponents", function () {
-        // this doesn't work yet because i'm  not using selectors:
-        // rendering the first proto-tree removes the second because the second
-        // has an rsf:id but no matching node in the tree
         var testProtoTree1 = {
-            title: "${objectTitle}",
-            description: "${briefDescription}",
+            title: "${fields.objectTitle}",
+            description: "${fields.briefDescription}",
             dataEntryContainer: {
                 decorators: [
                     {type: "fluid",
@@ -53,8 +50,8 @@ var pageBuilderTester = function () {
             }
         };
         var testProtoTree2 = {
-            link: {target: "${recordType}.html?csid=${csid}",
-                    linktext: "${number}"},
+            link: {target: "${relations.recordType}.html?csid=${csid}",
+                    linktext: "${relations.number}"},
             linksContainer: {
                 decorators: [
                     {type: "fluid",

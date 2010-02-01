@@ -18,6 +18,19 @@ var cspace = cspace || {};
     // the HTML has been constructed on the server
     // and the UISpec has been provided through JSONP, stored in cspace.pageBuilder.uispec
 
+    var buildCutpoints = function (uispec) {
+        var cutpoints = [];
+        for (var key in uispec) {
+            if (uispec.hasOwnProperty(key)) {
+                cutpoints.push({
+                    id: key,
+                    selector: "." + key
+                });
+            }
+        }
+        return cutpoints;
+    };
+
     var setup = function (that) {
         that.uispec = cspace.pageBuilder.uispec;
         that.expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
@@ -27,7 +40,8 @@ var cspace = cspace || {};
                 
                 // note: renderer options like debugMode should be passed in, not hard-coded
                 var renderOpts = {
-                    debugMode: true
+                    debugMode: true,
+                    cutpoints: buildCutpoints(that.uispec[region])
                 };
                 if (that.options.model) {
                     if (that.options.modelPath) {
