@@ -1,5 +1,6 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <title>CollectionSpace - Administration</title>
@@ -8,10 +9,7 @@
         <link rel="stylesheet" type="text/css" href="../fluid-infusion/src/webapp/framework/fss/css/fss-text.css" />
 		<link rel="stylesheet" type="text/css" href="../css/Pager.css" />
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
-        
-<!--
-		<script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
--->
+
         <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/core/js/jquery.js"></script>
         <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/ui/js/ui.core.js"></script>
         <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/ui/js/ui.dialog.js"></script>
@@ -32,15 +30,12 @@
     </head>
     <body>
 	
-	
-	
-	<body>
 		<!-- body content -->
 		<div class="fl-container-1024 fl-centered">
 		
 			<!-- CSpace logo and right-side search box -->	
 			<div id="header-menu">
-				<div class="header-menu-logo"><a href="http://www.collectionspace.org/current_release"><img src="../images/header-logo.png" height=34 width=196 alt="CollectionSpace" /></a></div>
+				<div class="header-menu-logo"><a href="http://www.collectionspace.org/current_release"><img src="../images/header-logo.png" height=60 width=345 alt="CollectionSpace" /></a></div>
 				<div class="header-menu-right">
 					<div class="header-menu-logout"><a href="index.html">Log out</a></div>
 					<div class="clear"></div>
@@ -52,11 +47,12 @@
 								<option value="acquisition">Acquisition</option>
 							</select>
 							<input name="keywords" type="text" class="csc-global-search-keywords" />
-                            <input type="submit" class="csc-global-search-submit" value="Search" />
+                            <input type="submit" class="csc-global-search-submit globalSearchButton" value="Search" />
 						</form>
 					</div>
 				</div>
 				<div class="clear"></div>
+				
 				<div class="header-menu-row">
 					<div class="inner">
 						<span class="menu-item">My CollectionSpace</span>
@@ -71,12 +67,8 @@
 			<div class="fl-container-1024-inner">
 			
 				<div id="title-bar">
-					<div class="title-bar-value">
-						<div class="overflow">
-							<div class="header-name no-float csc-object-title">Administration</div>
-							<div class="clear"></div>
-						</div>
-						<div class="clear"></div>
+					<div class="content">
+						<div class="header-name">Administration</div>
 					</div>
 				</div>
 			
@@ -110,7 +102,7 @@
 								<div id="search-box">
 									<!-- search form -->
 									<form>
-										<input name="keyword" type="text" class="csc-search-user" /><input type="submit" class="csc-search-submit" value="Find User" /></form>
+										<input name="keyword" type="text" class="csc-search-user" /><input type="submit" class="csc-search-submit button" value="Find User" /></form>
 									<!-- end search form -->
 								</div>
 
@@ -201,7 +193,7 @@
 												
 												<!-- search form -->
 												<form>
-													<input type="submit" class="csc-new-user-submit" value="+ Create New User" /></form>
+													<input type="submit" class="csc-new-user-submit butto" value="+ Create New User" /></form>
 												<!-- end search form -->
 												
 												<div class="clear"></div>

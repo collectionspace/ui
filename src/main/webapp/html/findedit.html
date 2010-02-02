@@ -35,7 +35,7 @@
 		
 			<!-- CSpace logo and right-side search box -->
 			<div id="header-menu">
-				<div class="header-menu-logo"><a href="http://www.collectionspace.org/current_release"><img src="../images/header-logo.png" height=34 width=196 alt="CollectionSpace" /></a></div>
+				<div class="header-menu-logo"><a href="http://www.collectionspace.org/current_release"><img src="../images/header-logo.png" height=60 width=345 alt="CollectionSpace" /></a></div>
 				<div class="header-menu-right">
 					<div class="header-menu-logout"><a href="index.html">Log out</a></div>
 					<div class="clear"></div>
@@ -47,7 +47,7 @@
 								<option value="acquisition">Acquisition</option>
 							</select>
 							<input name="keywords" type="text" class="csc-global-search-keywords" />
-							<input type="submit" class="csc-global-search-submit" value="Search" />
+							<input type="submit" class="csc-global-search-submit globalSearchButton" value="Search" />
 						</form>
 					</div>
 				</div>
@@ -66,11 +66,8 @@
 			<div class="fl-container-1024-inner">
 			
 				<div id="title-bar">
-					<div class="title-bar-value">
-						<div class="overflow">
-							<div class="header-name no-float csc-object-title">Find and Edit Records</div>
-						</div>
-						<div class="clear"></div>
+					<div class="content">
+						<div class="header-name">Find and Edit Records</div>
 					</div>
 				</div>
 					
@@ -79,225 +76,229 @@
 					
 					<!-- sub-main content broken down into two column containers of unequal size: left side and right (pivot) side -->
 					<div class="fl-fix fl-container-flex fl-col-mixed2">
-					
 						<!-- left side container -->
 						<div class="fl-container-content fl-force-left fl-container-left">
-							<!-- create-new block -->
-							<div class="find-edit-outer-border">
-							
-								<div class="fl-container-flex fl-fix information-group object-records-group">
-									<!-- outer info column -->
-									<div class="info-column1">	
-										<!-- information block header -->
-										<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-records'); return false;">
-											<span class="header-toggle"><img id="toggle-object-records-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-											Object Records
-										</div>
-										<!-- container content -->
-										<div class="fl-container-flex fl-fix " id="toggle-object-records">
-                                            <div class="hidden csc-error-message cs-message">This is the error message</div>
-											<!-- inner info column -->
-											<div class="info-column1">
-												
-												<div class="find-edit-object-records">
-													<div class="info-pair-table">
-														<div class="info-value overflow-find-edit">
-															<table id="">
-																<thead>
-																	<tr>
-<!--
- // CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
- // an array of IDs. Until this is changed, reduce the markup to include only the one field
-																		<td width=55%>Title</td>
--->
-																		<td width=25%>Identification Number</td>
-																		<td width=75%>Summary</td>
-																	</tr>
-																</thead>
-																
-																<tbody>
-																	<tr class="csc-object-record-list-row">
-<!--
- // CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
- // an array of IDs. Until this is changed, reduce the markup to include only the one field
-																		<td><a class="csc-object-title" href="object.html?csid=1984.068.0335b">Catalogs. Wyanoak Publishing Company.</a></td>
-																		<td class="csc-accession-number">1984.068.0335b</td>
--->
-																		<td ><a class="csc-accession-number link" href="object.html">(retrieving record list...)</a>&nbsp;</td>
-																		<td class="csc-summary"></td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-													</div>
-													<div class="clear"></div>
-													<div class="footer"><!-- --></div>
-												</div>
-											</div> <!-- end inner info column -->
-											
-										</div> <!-- end container content -->
-									</div> <!-- end outer info column -->
-								</div> <!-- end information group -->
-
-								<div class="fl-container-flex fl-fix information-group">
-									<!-- outer info column -->
-									<div class="info-column1">	
-										<!-- information block header -->
-										<div class="fl-container-flex header" onclick="ShowHide('#toggle-procedural-records'); return false;">
-											<span class="header-toggle"><img id="toggle-procedural-records-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-											Procedural Records
-										</div>
-										<!-- container content -->
-										<div class="fl-container-flex fl-fix " id="toggle-procedural-records">
-											<!-- inner info column -->
-											<div class="info-column1">
-												
-												<div class="find-edit-object-records">
-
-        <!-- This division of procedural records into types is temporary, until we work out how the records will be queried -->
-                                                    <!-- Intake procedural records -->
-													<div class="info-pair-table intake-records-group">
-                                                        <div class="sub-header">Intake Records</div>
-                                                        <div class="hidden csc-error-message cs-message">This is the error message</div>
-														<div class="info-value overflow-find-edit">
-															<table id="">
-																<thead>
-																	<tr>
-																		<td width=25%>Entry Number</td>
-																		<td width=15%>Type</td>
-<!--
- // CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
- // an array of IDs. Until this is changed, reduce the markup to include only the one field
-																		<td width=45%>Brief Description</td>
--->
-																		<td width=60%>Summary</td>
-																	</tr>
-																</thead>
-																
-																<tbody>
-																	<tr class="csc-procedural-record-list-row">
-																		<td><a class="csc-entry-number link" href="intake.html">(retrieving record list...)</a></td>
-																		<td class="csc-type">Intake</td>
-<!--
- // CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
- // an array of IDs. Until this is changed, reduce the markup to include only the one field
-																		<td class="csc-description">description</td>
--->
-																		<td class="csc-summary"></td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-													</div>
-													<div class="clear"></div>
-													<div class="footer"><!-- --></div>
-													
-                                                    <!-- Acquisition procedural records -->
-													<div class="info-pair-table acquisition-records-group">
-                                                        <div class="sub-header">Acquisition Records</div>
-	                                                    <div class="hidden csc-error-message cs-message">This is the error message</div>
-    													<!--<div class="info-label">Date Earliest/Single</div>-->
-														<div class="info-value overflow-find-edit">
-															<table id="">
-																<thead>
-																	<tr>
-																		<td width=25%>Entry Number</td>
-																		<td width=15%>Type</td>
-<!--
- // CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
- // an array of IDs. Until this is changed, reduce the markup to include only the one field
-																		<td width=45%>Brief Description</td>
--->
-																		<td width=60%>Summary</td>
-																	</tr>
-																</thead>
-																	
-																<tbody>
-																	<tr class="csc-acquisition-record-list-row">
-																		<td><a class="csc-entry-number link" href="intake.html">(retrieving record list...)</a></td>
-																		<td class="csc-type">Acquisition</td>
-<!--
- // CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
- // an array of IDs. Until this is changed, reduce the markup to include only the one field
-																		<td class="csc-description">description</td>
--->
-																		<td class="csc-summary"></td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-													</div>
-													<div class="clear"></div>
-													<div class="footer"><!-- --></div>
-												</div>
-									
-												<div class="clear"></div>
-											</div> <!-- end inner info column -->
-											
-										</div> <!-- end container content -->
-									</div> <!-- end outer info column -->
-								</div> <!-- end information group -->
-								
-								<div class="fl-container-flex fl-fix information-group organizational-records-group">
-									<!-- outer info column -->
-									<div class="info-column1">	
-										<!-- information block header -->
-										<div class="fl-container-flex header" onclick="ShowHide('#toggle-organizational-records'); return false;">
-											<span class="header-toggle"><img id="toggle-organizational-records-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-											Vocabulary, Storage, Media Records
-										</div>
-										<!-- container content -->
-										<div class="fl-container-flex fl-fix  " id="toggle-organizational-records">
-											<!-- inner info column -->
-											<div class="info-column1">
-												
-												<div class="find-edit-object-records">
-												
-													<div class="info-pair-table disableme disabled">
-														<div class="info-value overflow-find-edit>
-															<table id="">
-																<thead>
-																	<tr class="">
-																		<td width=30%>ID Number</td>
-																		<td width=15%>Type</td>
-																		<td width=55%>Summary</td>
-																	</tr>
-																</thead>
-																	
-																<tbody class="">
-																	<tr>
-																		<td>&nbsp;</td>
-																		<td>&nbsp;</td>
-																		<td>&nbsp;</td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-													</div>
-													<div class="clear"></div>
-													<div class="footer disableme"><!-- --></div>
-												</div>
-												
-												<div class="clear"></div>
-											</div> <!-- end inner info column -->
-											
-										</div> <!-- end container content -->
-									</div> <!-- end outer info column -->
-								</div> <!-- end information group -->
-								
-								
-							</div> <!-- end information group -->
-								
-						</div> <!-- end create-new -->
-						<div class="fl-container-pivot fl-force-right csc-right-sidebar" id="csc-right-sidebar">
 						
+							<div class="fl-container-flex fl-fix information-group search-leader">
+								<div class="fl-container-flex header">
+									<div class="label" style="float:left;">Latest Search:</div>
+									<div class="value" style="float:left;">Howdy Doody</div>
+									<div class="link" style="float:right;">Save as Collection</div>
+									<div class="clear"></div>
+								</div>
+								
+							</div>
+							
+							
+							<div class="fl-container-flex fl-fix information-group object-records-group">
+								<!-- outer info column -->
+								<div class="info-column">	
+									<!-- information block header -->
+									<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-records'); return false;">
+										<span class="header-toggle"><img id="toggle-object-records-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+										393 Found Records
+									</div>
+									<!-- container content -->
+									<div class="fl-container-flex fl-fix content" id="toggle-object-records">
+										<div class="hidden csc-error-message cs-message">This is the error message</div>
+										<!-- inner info column -->
+										<div class="info-column">
+											<div class="find-edit-object-records">
+												<div class="info-pair-table">
+													<div class="info-value overflow-find-edit">
+														<table id="">
+															<thead>
+																<tr>
+<!--
+// CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
+// an array of IDs. Until this is changed, reduce the markup to include only the one field
+																	<td width=55%>Title</td>
+-->
+																	<td width=25%>Identification Number</td>
+																	<td width=75%>Summary</td>
+																</tr>
+															</thead>
+															
+															<tbody>
+																<tr class="csc-object-record-list-row">
+<!--
+// CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
+// an array of IDs. Until this is changed, reduce the markup to include only the one field
+																	<td><a class="csc-object-title" href="object.html?csid=1984.068.0335b">Catalogs. Wyanoak Publishing Company.</a></td>
+																	<td class="csc-accession-number">1984.068.0335b</td>
+-->
+																	<td ><a class="csc-accession-number link" href="object.html">(retrieving record list...)</a>&nbsp;</td>
+																	<td class="csc-summary"></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+												<div class="clear"></div>
+												<div class="footer"><!-- --></div>
+											</div>
+										</div> <!-- end inner info column -->
+										
+									</div> <!-- end container content -->
+								</div> <!-- end outer info column -->
+							</div> <!-- end information group -->
+
+							<div class="fl-container-flex fl-fix information-group">
+								<!-- outer info column -->
+								<div class="info-column">	
+									<!-- information block header -->
+									<div class="fl-container-flex header" onclick="ShowHide('#toggle-procedural-records'); return false;">
+										<span class="header-toggle"><img id="toggle-procedural-records-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+										Procedural Records
+									</div>
+									<!-- container content -->
+									<div class="fl-container-flex fl-fix content" id="toggle-procedural-records">
+										<!-- inner info column -->
+										<div class="info-column">
+											
+											<div class="find-edit-object-records">
+
+	<!-- This division of procedural records into types is temporary, until we work out how the records will be queried -->
+												<!-- Intake procedural records -->
+												<div class="info-pair-table intake-records-group">
+													<div class="sub-header">Intake Records</div>
+													<div class="hidden csc-error-message cs-message">This is the error message</div>
+													<div class="info-value overflow-find-edit">
+														<table id="">
+															<thead>
+																<tr>
+																	<td width=25%>Entry Number</td>
+																	<td width=15%>Type</td>
+<!--
+// CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
+// an array of IDs. Until this is changed, reduce the markup to include only the one field
+																	<td width=45%>Brief Description</td>
+-->
+																	<td width=60%>Summary</td>
+																</tr>
+															</thead>
+															
+															<tbody>
+																<tr class="csc-procedural-record-list-row">
+																	<td><a class="csc-entry-number link" href="intake.html">(retrieving record list...)</a></td>
+																	<td class="csc-type">Intake</td>
+<!--
+// CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
+// an array of IDs. Until this is changed, reduce the markup to include only the one field
+																	<td class="csc-description">description</td>
+-->
+																	<td class="csc-summary"></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+												<div class="clear"></div>
+												<div class="footer"><!-- --></div>
+												
+												<!-- Acquisition procedural records -->
+												<div class="info-pair-table acquisition-records-group">
+													<div class="sub-header">Acquisition Records</div>
+													<div class="hidden csc-error-message cs-message">This is the error message</div>
+													<!--<div class="info-label">Date Earliest/Single</div>-->
+													<div class="info-value overflow-find-edit">
+														<table id="">
+															<thead>
+																<tr>
+																	<td width=25%>Entry Number</td>
+																	<td width=15%>Type</td>
+<!--
+// CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
+// an array of IDs. Until this is changed, reduce the markup to include only the one field
+																	<td width=45%>Brief Description</td>
+-->
+																	<td width=60%>Summary</td>
+																</tr>
+															</thead>
+																
+															<tbody>
+																<tr class="csc-acquisition-record-list-row">
+																	<td><a class="csc-entry-number link" href="intake.html">(retrieving record list...)</a></td>
+																	<td class="csc-type">Acquisition</td>
+<!--
+// CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
+// an array of IDs. Until this is changed, reduce the markup to include only the one field
+																	<td class="csc-description">description</td>
+-->
+																	<td class="csc-summary"></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+												<div class="clear"></div>
+												<div class="footer"><!-- --></div>
+											</div>
+								
+											<div class="clear"></div>
+										</div> <!-- end inner info column -->
+										
+									</div> <!-- end container content -->
+								</div> <!-- end outer info column -->
+							</div> <!-- end information group -->
+							
+							<div class="fl-container-flex fl-fix information-group organizational-records-group">
+								<!-- outer info column -->
+								<div class="info-column">	
+									<!-- information block header -->
+									<div class="fl-container-flex header" onclick="ShowHide('#toggle-organizational-records'); return false;">
+										<span class="header-toggle"><img id="toggle-organizational-records-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+										Vocabulary, Storage, Media Records
+									</div>
+									<!-- container content -->
+									<div class="fl-container-flex fl-fix content disabled" id="toggle-organizational-records">
+										<!-- inner info column -->
+										<div class="info-column">
+											
+											<div class="find-edit-object-records">
+											
+												<div class="info-pair-table">
+													<div class="info-value overflow-find-edit>
+														<table id="">
+															<thead>
+																<tr class="">
+																	<td width=30%>ID Number</td>
+																	<td width=15%>Type</td>
+																	<td width=55%>Summary</td>
+																</tr>
+															</thead>
+																
+															<tbody class="">
+																<tr>
+																	<td>&nbsp;</td>
+																	<td>&nbsp;</td>
+																	<td>&nbsp;</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+												<div class="clear"></div>
+												<div class="footer"><!-- --></div>
+											</div>
+											
+											<div class="clear"></div>
+										</div> <!-- end inner info column -->
+									</div> <!-- end container content -->
+								</div> <!-- end outer info column -->
+							</div> <!-- end information group -->
+						</div> <!-- end create-new -->
+						
+						<div class="fl-container-pivot fl-force-right csc-right-sidebar" id="csc-right-sidebar">
+							
 							<div class="pivot-search-box">
-								<div class="pivot-search-box-content">
-									<div class="pivot-search-box-header">
+								<div class="info-column1">
+									
+									<div class="header">
 										Search
 									</div>
 								
-									<div class="pivot-search-box-data">
+									<div class="content">
 										<div class="pivot-menu-search">
 											<form action="search.html">
 												<input name="keywords" type="text" class="csc-search-pivot-keywords" />
@@ -307,13 +308,14 @@
 													<option value="intake">Intake</option>
 													<option value="acquisition">Acquisition</option>
 												</select>
-												<div class="csc-search-pivot-submit-container"><input type="submit" value="Search" class="csc-search-pivot-submit" /></div>
+												<div class="csc-search-pivot-submit-container"><input type="submit" value="Search" class="csc-search-pivot-submit globalSearchButton" /></div>
 											</form>
 										</div>
 										<div class="clear"></div>
 									</div>
+									
+									<div class="clear"></div>
 								</div>
-								<div class="clear"></div>
 							</div>
 						
 						</div>
