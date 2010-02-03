@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid_1_2*/
+/*global jQuery, fluid_1_2, cspace*/
 
 cspace = cspace || {};
 
@@ -17,14 +17,50 @@ cspace = cspace || {};
     // Notes:
     // the UISpec has been provided through JSONP, stored in cspace.pageBuilder.uispec
 
+    var injectElementsOfType = function (container, elementType, elements) {
+        if (!elements || elements.length < 1) {
+            return;
+        }
+
+        var elementsOfType = $(elementType, container);
+        var repeat = elementsOfType.length === 0 ? function (idx, element) {
+            container.append(element);
+        } : function (idx, element) {
+            var lastEl = $(elementType + ":last", container);
+            lastEl.after(element);
+        };
+
+        $.each(elements, repeat);
+    };
+    
+    var inject = function (docString, selector, container) {
+        if (!docString || docString === "") {
+            return;
+        }
+
+        var headTag = docString.match(/<head(.|\s)*?\/head>/gi)[0],
+            bodyTag = docString.match(/<body(.|\s)*?\/body>/gi)[0];
+// Currently, parsing the link and script tags is not working quite properly, so
+// for now, forego that process: assume the target HTML has everything you'd need
+//        var linkTags = [].concat(headTag.match(/<link(.|\s)*?\/>/gi)).concat(headTag.match(/<link(.|\s)*?\/link>/gi)),
+//            scriptTags = headTag.match(/<script(.|\s)*?\/script>/gi);
+
+//        var head = $("head");
+//        injectElementsOfType(head, "link", linkTags);
+//        injectElementsOfType(head, "script", scriptTags);
+
+        var templateContainer = $("<div></div>").html(bodyTag);
+        container.html($(selector, templateContainer)); 
+    };
+    
     var setup = function (that) {
         that.uispec = cspace.pageBuilder.uispec;
         that.components = [];
         for (var region in that.dependencies) {
-			if (that.dependencies.hasOwnProperty(region)) {
-	            var dep = that.dependencies[region];
-	            that.components[region] = fluid.invokeGlobalFunction(dep.funcName, dep.args);
-			}
+            if (that.dependencies.hasOwnProperty(region)) {
+                var dep = that.dependencies[region];
+                that.components[region] = fluid.invokeGlobalFunction(dep.funcName, dep.args);
+            }
         }
     };
 
@@ -33,18 +69,7 @@ cspace = cspace || {};
             for (var regionName in resourceSpecs) {
                 if (resourceSpecs.hasOwnProperty(regionName) && (regionName !== "callbackCalled")) {
                     var region = resourceSpecs[regionName];
-                    var doc = $(region.resourceText, document);
-                    if (doc) {
-//                        var node = $(region.templateSelector, doc);
-var node = doc;
-                        if (node) {
-                            $(region.targetSelector).replaceWith(node);
-                        } else {
-//                            console.log("Couldn't find template node in HTML");
-                        }
-                    } else {
-//                        console.log("Couldn't convert HTML to a jQuery");
-                    }
+                    inject(region.resourceText, region.templateSelector, $(region.targetSelector));
                 }
                 
             }

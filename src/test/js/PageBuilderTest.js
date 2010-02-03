@@ -72,15 +72,11 @@ cspace = cspace || {};
     };
 
     cspace.testComponent3 = function (container, options) {
-        var jContainer = $(container);
+        var body = $("body");
         jqUnit.assertEquals("Template 1 inserted", 1, $("#testText1").length);
-        startIfDone(2);
-    };
-
-    cspace.testComponent4 = function (container, options) {
-        var jContainer = $(container);
         jqUnit.assertEquals("Template 2 inserted", 1, $("#testText2").length);
-        startIfDone(2);
+        jqUnit.assertEquals("Rest of doc wasn't inseted", 0, $("#shouldntbehere", body).length);
+        start();
     };
 
     var pageBuilderTester = function () {
@@ -92,21 +88,15 @@ cspace = cspace || {};
         });
     
         pageBuilderTest.test("Assembly of HTML", function () {
-            expect(2);
+            expect(3);
             var dependencies = {
                 dateEntry: {
                     funcName: "cspace.testComponent3",
                     args: [
                         "#dataEntryContainer"   // container
                     ]
-                },
-                relatedRecords: {
-                    funcName: "cspace.testComponent4",
-                    args: [
-                        "#linksContainer"           // container
-                    ]
                 }
-            }
+            };
             var options = {
                 pageSpec: cspace.testData.testPageSpec
             };
