@@ -2,7 +2,7 @@
 
 /* core HTML elements*/
 html{font-size: 100%;} 
-body {font-size:13px; line-height:13px; padding: 2px 0;}
+body {font-size:13px; line-height:13px; padding: 2px 30px;}
 table tr, table tr td, table tr th  {border:0; padding:0; margin:0; text-align:left; font-weight:normal;}
 fieldset, table, pre {margin-bottom:0em;}
 p {margin-bottom:1em;}
@@ -19,6 +19,7 @@ input[type="text"], input[type="password"], textarea {width:99.5%;}
 input.savebutton, input.globalSearchButton, input.cancelbutton, input.button
 	{background-color:#94BC80; padding: 2px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; margin:0; border:none;}
 input.button, input.button.quick {float:left; padding:2px 12px;}
+#search-box input.button, #search-box input.button.quick {floaT:none; padding:2px 12px;}
 .input-button, input.input-button {background-color:#94BC80; padding: 5px 12px 4px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; margin:0 5px; border:none; float:left;}
 .input-button.quick , .button.quick {background-color:#fff; padding: 5px 12px 4px 12px; font-weight:bold; color:#93BC7F; cursor:pointer; font-size:13px; 
 	margin:0 5px; border:none; float:left;}
@@ -34,7 +35,8 @@ a.add-link {color:#000; text-decoration:none;}
 a.add-link:hover {color:#000; text-decoration:underline;}
 
 .menu-item a:link, .menu-item a:visited, .menu-item a:active {color:#A6A6A6; text-decoration:none;}
-.menu-item:hover, .menu-item a:hover {color:#777; border-bottom-color:#777;}
+.menu-item.selected a:link, .menu-item.selected a:visited, .menu-item.selected a:active {color:#646464; text-decoration:none;}
+.menu-item:hover, .menu-item a:hover {color:#646464; border-bottom-color:#646464;}
 
 .menu-record a {background:none repeat scroll 0 0 #6F9DCE; color:#fff; font-weight:bold;	display:block;	padding:0.2em .4em;	margin-right:2px; 
 	text-decoration:none; border:2px solid #6F9DCE; border-bottom:none;}
@@ -91,7 +93,7 @@ td textarea {border:none;}
 #name-header-login {padding-top:20px;}
 
 /* header selectors */
-#header-menu {width:1024px;}
+#header-menu {/*width:1024px;*/}
 .header-menu-logo {padding:4px 0 8px 0; float:left;}
 .header-menu-right {width:500px; float:right;}
 .header-menu-logout {padding:4px 0 12px 0; float:right; font-size:11px; line-height:11px; font-weight:bold;}
@@ -100,10 +102,11 @@ td textarea {border:none;}
 .header-menu-search select {margin-bottom:-1px;}
 
 /* header global nav */
-.header-menu-row {padding-bottom:8px; border-bottom: 0px solid #D3D2CE;}
-.header-menu-row .inner {}
-.menu-item {padding: 0 25px 2px 0; border-bottom: 2px solid #D3D2CE; color:#A6A6A6; font-size: 14px; font-weight:bold; background-color:#fff; cursor:pointer;}
-.menu-item.selected {color:#646464; border-bottom:2px solid #646464;}
+.header-menu-row {width:auto; margin-bottom:8px; border-bottom: 0px solid #D3D2CE; background:#fff url('../images/header-menu-row-buffer.png') repeat-x bottom right;}
+.header-menu-row .inner {float:left; background-color:#fff;}
+.menu-item {padding: 0 25px 2px 0; margin-right:3px; border-bottom: 3px solid #D3D2CE; color:#A6A6A6; font-size: 14px; 
+	font-weight:bold; background-color:#fff; cursor:pointer; float:left;}
+.menu-item.selected {color:#646464; border-bottom-color:#646464;}
 
 /* header space for record ID etc. */
 #title-bar {margin: 0 0 10px 0; background-color:#F0F5FB;  /*background-color:#aaa;*/}
@@ -120,14 +123,18 @@ td textarea {border:none;}
 
 /* secondary navigation menu */
 #secondary-nav {padding-bottom:6px; clear:both;}
+#secondary-nav.pivot {padding-bottom:0;}
 #secondary-nav-menu {padding-bottom:6px; width:100%; margin-top:-3px;}
-.menu-record {display:table;	 font-family:arial,helvetica,sans-serif; list-style-type:none; margin:0; padding:0;	white-space:nowrap;}
-.menu-record li {display:table-cell;}
+#secondary-nav-menu .menu-record, #secondary-nav.pivot .menu-record {display:table; font-family:arial,helvetica,sans-serif; 
+	list-style-type:none; margin:0; padding:0; white-space:nowrap;}
+#secondary-nav.pivot .menu-record {width:100%;}
+#secondary-nav.pivot .menu-record li{width:50%; /* 50% for each of the two tabs */}
+#secondary-nav-menu .menu-record li {display:table-cell;}
 #secondary-nav-menu-sub .upper-save {float:right; padding-bottom:1px; width:auto;}
-#secondary-nav-menu-sub .time-stamp {float:right; padding-top:6px; font-size:10px; color:#BEBEBE; margin-left:20px;}
+#secondary-nav-menu-sub .time-stamp {float:right; padding-top:6px; font-size:10px; color:#BEBEBE; margin-right:10px;}
 
 /*search page related */ /* need to revisit */
-#search-box {padding: 12px 0 12px 12px; margin:9px 0 4px 0; background-color:#E6E6E6; border:1px solid #CECFD1;}
+#search-box {padding: 12px 0 12px 12px; margin:0 0 4px 0; background-color:#E6E6E6; border:1px solid #CECFD1;}
 .search-bar {}
 .main-search-page {border-top:1px solid #F2F2F3; border-bottom:1px solid #F2F2F3;}
 /*.csc-search-submit, .csc-search-pivot-submit, .csc-new-user-submit {padding:2px 25px 0px 25px; margin:0; border:1px solid #94A8B5; 
@@ -208,15 +215,13 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .info-column2-70 {width:  69%;}
 .info-column3 	 {width:  32%;}
 
-.fl-container-1024   {width: 1024px;}
+.fl-container-1024   {min-width: 1084px;}
 .fl-container-900     {width:  900px;}
 .fl-container-1050   {width: 1050px;}
 /*.fl-container-1024-inner {padding: 0 10px 0 4px;}*/
 .fl-container-1024-inner {padding:0;}
-.fl-container-left   {/*width: 748px;*/ width:764px;}
-.fl-container-users {width:816px;}
-.fl-container-pivot-users {width:196px;}
-.fl-container-pivot {width: 248px;}
+.fl-container-left, .fl-container-users   {/*width: 748px;*/ width:69%; min-width:740px;}
+.fl-container-pivot, .fl-container-pivot-users { /*width:28%;*/ width:28%; min-width: 248px;}
 
 .fl-container-left .upper-save {float:right;}
 .fl-container-left .object-entry-outer-border,
@@ -384,11 +389,14 @@ table .field-cal {width:160px;}
 .pivot-search-box .header {background-color:#6E9FCE; color:#FFFFFF; font-size:13px;  padding:5px 0 6px 5px; width:auto;}
 .pivot-search-box .content {border:none; padding: 10px;}
 
-.pivot-box, .pivot-users-box {margin-bottom:10px; margin-top:10px; border:1px solid #999999; border-top:none; /*border-left:1px solid #C9CACC; border-right:1px solid #C9CACC; border-bottom:1px solid #C9CACC;*/}
-.pivot-box-content, .pivot-search-box-content, .pivot-users-box-content {font-size:10px; line-height:10px; color:#7F8083; /*border-top:1px solid #C9CACC*/;}
-.pivot-box-header, .pivot-search-box-header, .pivot-users-box-header {border-top:1px solid #999999; border-bottom:1px solid #999999; background-color:#B3B3B3; font-weight:bold; 
-	padding:4px 4px 4px 8px; color:#000; font-size:12px; line-height:12px; cursor:pointer; height:13px;}
-.pivot-search-box-header, .pivot-users-box-header {cursor:auto;}
+.right-sidebar {width:100%;}
+.pivot-box, .pivot-users-box {margin-bottom:20px; min-width:270px; border:0px solid #999999; border-top:none; }
+.pivot-box .content, .pivot-box-content, .pivot-search-box-content, .pivot-users-box-content 
+	{font-size:10px; line-height:10px; color:#7F8083; border:1px solid #D3D3D3;}
+.pivot-box .header, .pivot-box-header, .pivot-search-box-header, .pivot-users-box-header 
+	{border-top:0px solid #999999; border-bottom:0px solid #999999; background-color:#AAA;  
+	padding:4px 4px 4px 8px; margin-bottom:2px; color:#FFF; font-size:13px; cursor:pointer; height:13px; width:auto;}
+.pivot-search-box-header, .pivot-users-box .header {cursor:auto;}
 .pivot-header {color:#606060;}
 
 .pivot-box-table {width:100%; background-color:#fff; color:#6D6E71;}
@@ -399,8 +407,8 @@ table .field-cal {width:160px;}
 
 
 .pivot-box-data {padding:3px 0 3px 8px;}
-.pivot-search-box-data  {padding:10px 0 10px 8px; bor der:1px solid #999999; border-top:none;}
-.pivot-users-box-data  {padding:10px 0 10px 8px;}
+.pivot-search-box-data  {padding:10px 0 10px 8px; border:0px solid #999999; border-top:none;}
+.pivot-box .data  {padding:10px 0 10px 8px;}
 
 /*.create-quick-button{display:block; width:192px; height:23px; background: url("../images/btnCreateQuickt.png") no-repeat 0 -23px; border:none;}
 .create-quick-button:hover {background-position: 0 0;}
@@ -428,11 +436,11 @@ table .field-cal {width:160px;}
 
 .input-buttons {width:100%; padding:1px 0 8px 0; margin-top:-20px;}
 .input-buttons input {margin-left:20px;}
-.savebutton, .cancelbutton, .viewbutton  {margin-left:10px; float:right; border:none;}
+.savebutton, .cancelbutton, .viewbutton , .deletebutton {margin-left:10px; float:right; border:none; text-decoration:none;}
 .deletebutton {margin-right:10px; float:left; border:none;}
 .viewbutton {margin:0px; *margin-top:-24px; line-height:0;}
 
-.no-border {border-width:0; background-color: #F5F5F6;}
+.no-border {border:none;}
 .no-float {float:none;}
 .no-margin {margin:0;}
 .no-padding {padding:0;}
