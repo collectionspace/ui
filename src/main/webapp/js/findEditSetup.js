@@ -14,48 +14,66 @@ var cspace = cspace || {};
 
 (function ($) {
 
-    setupTestDataContext = function (recordType) {
-        return {
-            type: "cspace.dataContext",
-            options: {
-                urlFactory: {
-                    type: "cspace.dataContext.testUrlFactory",
-                    options: {
-                        resourceMapper: {
-                            type: "cspace.dataContext.staticResourceMapper",
-                            options: {
-                            	modelToResourceMap: {
-                                    "*": "test-data/find-edit/" + recordType + "-records"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        };
-    };
-
     cspace.setupFindEdit = function () {
 		var isLocal = cspace.util.isLocal();
-        var orOpts = {uiSpecUrl: isLocal ? 
+        var orOpts = {
+            dataContext: {
+                options: {
+                    recordType: "objects"
+                }
+            },
+            uiSpecUrl: isLocal ? 
 // CSPACE-701
 		    "./uispecs/collection-object/find-edit.json" : "../../chain/objects/uispec/find-edit"};
         if (isLocal) {
-            orOpts.dataContext = setupTestDataContext("object");
+            orOpts.dataContext = {
+                type: "cspace.dataContext",
+                options: {
+                    baseUrl: "data",
+                    recordType: "collection-object",
+                    fileExtension: ".json"
+                }
+            };
         }
         var objRecordList = cspace.recordList(".object-records-group", orOpts);
 
-        var prInOpts = {uiSpecUrl: isLocal ? 
+        var prInOpts = {
+            dataContext: {
+                options: {
+                    recordType: "intake"
+                }
+            },
+            uiSpecUrl: isLocal ? 
 		    "./uispecs/intake/find-edit.json" : "../../chain/intake/uispec/find-edit"};
         if (isLocal) {
-            prInOpts.dataContext = setupTestDataContext("intake");
+            prInOpts.dataContext = {
+                type: "cspace.dataContext",
+                options: {
+                    baseUrl: "data",
+                    recordType: "intake",
+                    fileExtension: ".json"
+                }
+            };
         }
         var procIntakeRecordList = cspace.recordList(".intake-records-group", prInOpts);
 
-        var prAcqOpts = {uiSpecUrl: isLocal ?
+        var prAcqOpts = {
+            dataContext: {
+                options: {
+                    recordType: "acquisition"
+                }
+            },
+            uiSpecUrl: isLocal ?
 		    "./uispecs/acquisition/find-edit.json" : "../../chain/acquisition/uispec/find-edit"};
         if (isLocal) {
-            prAcqOpts.dataContext = setupTestDataContext("acquisition");
+            prAcqOpts.dataContext = {
+                type: "cspace.dataContext",
+                options: {
+                    baseUrl: "data",
+                    recordType: "acquisition",
+                    fileExtension: ".json"
+                }
+            };
         }
         var procAcquisitionRecordList = cspace.recordList(".acquisition-records-group", prAcqOpts);
     };

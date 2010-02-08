@@ -18,7 +18,7 @@ var demo = demo || {};
         var opts = {};
         if (cspace.util.isLocal()) {
             opts.searchUrlBuilder = function (recordType, query) {
-                return "./test-data/search/" + recordType + ".json";
+                return "./data/" + recordType + "/search/list.json";
             };
         }
         var acquisition = cspace.search(".main-search-page", opts);

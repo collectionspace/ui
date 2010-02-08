@@ -48,7 +48,7 @@ var cspace = cspace || {};
             that.locate("errorMessage").hide();
         });
 
-        that.dataContext.events.onError.addListener(function (operation, modelPath, message) {
+        that.dataContext.events.onError.addListener(function (operation, message) {
             // temporary, for testing only:
             that.showErrorMessage("Records temporarily unavailable, sorry");
         });
@@ -57,10 +57,6 @@ var cspace = cspace || {};
     var createDataContextSetup = function (that) {
         return function (spec, textStatus) {
             that.spec = spec.spec;
-
-            // insert the resourceMapper options retrieved with the UISpec into the options structure
-            that.options.dataContext.options = that.options.dataContext.options || {};
-            that.options.dataContext.options.modelToResourceMap = spec.modelToResourceMap;
 
             that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
 
@@ -73,7 +69,11 @@ var cspace = cspace || {};
                 that.locate("errorMessage").hide();
             }
             else {
-                that.dataContext.fetch("*", {});
+                if (cspace.util.isLocal()) {
+                    that.dataContext.fetch("records/list");
+                } else {
+                    that.dataContext.fetch();
+                }
             }
         };
     };
@@ -107,7 +107,7 @@ var cspace = cspace || {};
     
     fluid.defaults("cspace.recordList", {
         dataContext: {
-            type: "cspace.resourceMapperDataContext"
+            type: "cspace.dataContext"
         },
         selectors: {
             numberOfItems: ".csc-num-items",    // present in sidebar, not in find/edit

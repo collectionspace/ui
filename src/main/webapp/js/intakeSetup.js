@@ -1,5 +1,6 @@
 /*
 Copyright 2009-2010 University of Toronto
+Copyright 2009 University of Cambridge
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
 ou may not use this file except in compliance with this License.
@@ -15,25 +16,12 @@ var demo = demo || {};
 (function ($) {
 
     demo.setup = function () {
-        var csid = cspace.util.getUrlParameter("csid");
-		var isLocal = cspace.util.isLocal();
-        var oiOpts = {
-            uiSpecUrl: isLocal ? "./uispecs/intake/uispec.json" : "../../chain/intake/uispec",
-            templates: {
-                body: {
-                    url: "../html/IntakeTemplate.html",
-                    id: "csc-object-intake-template"
-                }
-            }
+        var pageSpec = {
+            href: "../html/IntakeTemplate.html",
+            templateID: "csc-object-intake-template",
+            targetSelector: ".csc-object-intake-container"
         };
-        if (csid) {
-            oiOpts.csid = csid;
-        }
-        if (isLocal) {
-            oiOpts.dataContext = cspace.util.setupTestDataContext("intake");
-        }
-        var intake = cspace.dataEntry(".csc-object-intake-container", oiOpts);
+        var intake = cspace.dataEntrySetup("intake", pageSpec);
     };
-    
 })(jQuery);
 

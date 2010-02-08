@@ -16,6 +16,10 @@ var cspace = cspace || {};
 
     cspace.util = {};
 
+    cspace.util.addTrailingSlash = function (url) {
+        return url + ((url.charAt(url.length - 1) !== "/") ? "/" : "");
+    };
+
     cspace.util.getUrlParameter = function (name) {
         name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
         var regexS = "[\\?&]" + name + "=([^&#]*)";
@@ -28,35 +32,49 @@ var cspace = cspace || {};
         }
     };
 
-    cspace.util.setupTestDataContext = function (recordType) {
-        return {
-            type: "cspace.dataContext",
-            options: {
-                urlFactory: {
-                    type: "cspace.dataContext.testUrlFactory",
-                    options: {
-                        resourceMapper: {
-                            type: "cspace.dataContext.staticResourceMapper",
-                            options: {
-                            	modelToResourceMap: {
-                                    "*": "data/"+recordType+"/%recordId",
-                                    "fields": "data/"+recordType+"/%recordId",
-                                    "relations": "data/"+recordType+"/%recordId",
-                                    "spec": "uispecs/"+recordType+"/uispec"
-                                },
-                                replacements: {
-                                    "recordId": "csid"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        };
-    };
-
 	cspace.util.isLocal = function () {
 		return document.location.protocol === "file:";
 	};
     
+    /**
+     * 
+     * @param {Object} recordType
+     * @param {Object} pageSpec
+            href: "test-data/template1.html",
+            templateSelector: "#template1mainNode",
+            targetSelector: "#insertTemplate1here"
+     */
+    cspace.dataEntrySetup = function (recordType, pageSpec) {
+        var csid = cspace.util.getUrlParameter("csid");
+        var isLocal = cspace.util.isLocal();
+        var opts = {
+            dataContext: {
+                options: {
+                    recordType: recordType
+                }
+            },
+            uiSpecUrl: "../../chain/" + recordType + "/uispec",
+            templates: {
+                body: {
+                    url: pageSpec.href,
+                    id: pageSpec.templateID
+                }
+            }
+        };
+        if (isLocal) {
+            opts.uiSpecUrl = "./uispecs/" + recordType+ "/uispec.json";
+            opts.dataContext.options.baseUrl = "data";
+            opts.dataContext.options.fileExtension = ".json";
+        }
+        if (csid) {
+            opts.csid = csid;
+        }
+
+// CSPACE-701
+        if (isLocal && recordType === "objects") {
+            opts.uiSpecUrl = "./uispecs/collection-object/uispec.json";
+            opts.dataContext.options.recordType = "collection-object";
+        }
+        return cspace.dataEntry(pageSpec.targetSelector, opts);
+    };
 })(jQuery, fluid_1_2);

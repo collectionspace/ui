@@ -1,0 +1,6 @@
+{
+    "results": [
+        {"number": "ACQ2009.2", "csid": "ACQ2009.2", "summary": "Some info about this acquisition"},
+        {"number": "ACQ2009.002.001", "csid": "ACQ2009.002.001", "summary": "This one is not exactly what we'd like, but it'll do for now."}
+    ]
+}

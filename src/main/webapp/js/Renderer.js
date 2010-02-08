@@ -159,7 +159,7 @@ var cspace = cspace || {};
                         children[index].children[j].decorators = fluid.transform(children[index].children[j].decorators, function (value, ind) {
                             if (value.func === "cspace.numberPatternChooser") {
                                 value.options = value.options || {};
-                                value.options.baseUrl = that.dataContext.urlFactory.baseUrl();
+                                value.options.baseUrl = that.dataContext.baseUrl();
                                 value.options.applier = that.applier;
                             }
                             return value;
@@ -197,7 +197,7 @@ var cspace = cspace || {};
                         children[index].decorators = fluid.transform(children[index].decorators, function (value, ind) {
                             if (value.func === "cspace.numberPatternChooser") {
                                 value.options = value.options || {};
-                                value.options.baseUrl = that.dataContext.urlFactory.baseUrl();
+                                value.options.baseUrl = that.dataContext.baseUrl();
                                 value.options.applier = that.applier;
                             }
                             return value;

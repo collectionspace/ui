@@ -54,7 +54,7 @@ var cspace = cspace || {};
 
     var fetchNextNumberInSequence = function (that, sequenceName, callback) {
         jQuery.ajax({
-            url: that.options.baseUrl + "id/" + sequenceName,
+            url: cspace.util.addTrailingSlash(that.options.baseUrl) + "id/" + sequenceName,
             type: "GET",
             dataType: "json",
             success: callback,

@@ -15,20 +15,12 @@ var demo = demo || {};
 (function ($) {
 
     demo.setup = function () {
-        var csid = cspace.util.getUrlParameter("csid");
-		var isLocal = cspace.util.isLocal();
-        var oeOpts = {
-// CSPACE-701
-			uiSpecUrl: isLocal ? "./uispecs/collection-object/uispec.json" : "../../chain/objects/uispec"
+        var pageSpec = {
+            href: "../html/ObjectEntryTemplate.html",
+            templateID: "csc-object-entry-template",
+            targetSelector: ".csc-object-entry-container"
         };
-        if (csid) {
-            oeOpts.csid = csid;
-        }
-        if (isLocal) {
-            oeOpts.dataContext = cspace.util.setupTestDataContext("collection-object");
-        }
-        var objEntry = cspace.dataEntry(".csc-object-entry-container", oeOpts);
+        var intake = cspace.dataEntrySetup("objects", pageSpec);
     };
-    
 })(jQuery);
 

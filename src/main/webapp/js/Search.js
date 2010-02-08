@@ -105,6 +105,10 @@ var cspace = cspace || {};
         return function () {
             that.locate("errorMessage").hide();
             var recordType = that.locate("recordType").val();
+// CSPACE-701
+            if (cspace.util.isLocal() && (recordType === "object")) {
+                recordType = "collection-object";
+            }
             var query = that.locate("keywords").val();
             jQuery.ajax({
                 url: that.options.searchUrlBuilder(recordType, query),

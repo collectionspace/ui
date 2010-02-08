@@ -16,25 +16,12 @@ var demo = demo || {};
 (function ($) {
 
     demo.setup = function () {
-        var csid = cspace.util.getUrlParameter("csid");
-		var isLocal = cspace.util.isLocal();
-        var oiOpts = {
-            uiSpecUrl: isLocal ? "./uispecs/acquisition/uispec.json" : "../../chain/acquisition/uispec",
-            templates: {
-                body: {
-                    url: "../html/acquisitionTemplate.html",
-                    id: "csc-acquisition-template"
-                }
-            }
+        var pageSpec = {
+            href: "../html/acquisitionTemplate.html",
+            templateID: "csc-acquisition-template",
+            targetSelector: ".csc-acquisition-container"
         };
-        if (csid) {
-            oiOpts.csid = csid;
-        }
-        if (isLocal) {
-            oiOpts.dataContext = cspace.util.setupTestDataContext("acquisition");
-        }
-        var acquisition = cspace.dataEntry(".csc-acquisition-container", oiOpts);
+        var intake = cspace.dataEntrySetup("acquisition", pageSpec);
     };
-    
 })(jQuery);
 
