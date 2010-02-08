@@ -7,6 +7,7 @@
 }
 .pattern-chooser-input {
 	width:51% !important;
+	border:2px solid #C7CFD4;
 }
 
 input.numberPatternChooserButton{

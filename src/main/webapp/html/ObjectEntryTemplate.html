@@ -80,35 +80,44 @@
 												<div class="info-column">
 													<div class="info-column2-50 fl-force-left">
 														<div class="info-pair">
-															<div class="info-label" >Identification Number</div>
+															<div class="info-label">Identification Number</div>
 															<div class="info-value csc-object-identification-object-number-container">
-																<input type="text" class="input-alpha csc-object-identification-object-number pattern-chooser-input" name="object-identification-object-number">
+																<input type="text" class="csc-object-identification-object-number pattern-chooser-input">
 															</div>
 														</div>
 														
 														<div class="info-pair">
-															<div class="info-label" >Number of Objects</div>
+															<div class="info-label">Number of Objects</div>
 															<div class="info-value">
-																<input type="text" class="input-numeric-small csc-object-identification-number-objects" name="object-identification-number-objects">
+																<table id="" style="width:auto;">
+																	<tbody>
+																		<tr>
+																			<td class="table-unselected"></td>
+																			<td><input type="text" class=" csc-object-identification-number-objects"></td>
+																		</tr>
+																	</tbody>
+																</table>
+															
+																<!--<input type="text" class="input-numeric-small csc-object-identification-number-objects" name="object-identification-number-objects">-->
 															</div>
 														</div>
 													
 														<div class="info-pair-addrow">
-															<div class="info-label" >Other Number</div>
+															<div class="info-label">Other Number</div>
 															<div class="info-value">
-																<table id="" >
+																<table>
 																	<thead>
 																		<tr>
 																			<!--<td class="table-select"></td>-->
-																			<td >Number</td>
-																			<td >Number Type</td>
+																			<td>Number</td>
+																			<td>Number Type</td>
 																		</tr>
 																	</thead>
 																	<tbody>
 																		<tr>
 																			<!--<td class="table-unselected"></td>-->
-																			<td><input type="text" class="input-alpha-table csc-object-identification-other-number" name="object-identification-other-number"></td>
-																			<td><input type="text" class="input-alpha-table csc-object-identification-other-number-type" name="object-identification-other-number-type"></td>
+																			<td><input type="text" class="csc-object-identification-other-number"></td>
+																			<td><input type="text" class="csc-object-identification-other-number-type"></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -116,37 +125,21 @@
 														</div>
 														
 														<div class="info-pair">
-															<div class="info-label" >Responsible Department</div>
-															<div class="info-value"><select class="csc-object-identification-responsible-department input-select" name="object-identification-responsible-department"/></div>
+															<div class="info-label">Responsible Department</div>
+															<div class="info-value"><select class="csc-object-identification-responsible-department input-select"/></div>
 														</div>
 														<div class="clear"></div>
 													</div>
 													
 													<div class="info-column2-50 fl-force-right">
-													<!--
-													Temporarily commented out because Other Number is not saving properly.
 														<div class="info-pair-addrow">
-															<div class="info-label" >kks</div>
+															<div class="info-label">Brief Description</div>
 															<div class="info-value">
-																<table id="" >
-																	<tbody>
-																		<tr>
-																			<td class="table-unselected"></td>
-																			<td><input type="text" class="input-alpha-table csc-object-identification-other-number" name="object-identification-other-number"></td>
-																		</tr>
-																	</tbody>
-																</table>
-															</div>
-														</div>
-					-->		
-														<div class="info-pair-addrow">
-															<div class="info-label" >Brief Description</div>
-															<div class="info-value">
-																<table id="" >
+																<table>
 																	<tbody>
 																		<tr>
 																			<!--<td class="table-unselected"></td>-->
-																			<td><textarea class="input-textarea csc-object-identification-brief-description" name="object-identification-brief-description"></textarea></td>
+																			<td><textarea class="input-textarea csc-object-identification-brief-description"></textarea></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -154,18 +147,27 @@
 														</div>
 														
 														<div class="info-pair">
-															<div class="info-label" >Distinguishing Features</div>
-															<div class="info-value"><textarea class="input-textarea csc-object-identification-distinguishing-features" name="object-identification-destinguishing-features"></textarea></div>
+															<div class="info-label">Distinguishing Features</div>
+															<div class="info-value">
+																<table>
+																	<tbody>
+																		<tr>
+																			<td><textarea class="input-textarea csc-object-identification-distinguishing-features"></textarea></td>
+																		</tr>
+																	</tbody>
+																</table>
+															
+															<!--<textarea class="input-textarea csc-object-identification-distinguishing-features" name="object-identification-destinguishing-features"></textarea>--></div>
 														</div>
 														
 														<div class="info-pair-addrow">
-															<div class="info-label" >Comments</div>
+															<div class="info-label">Comments</div>
 															<div class="info-value">
-																<table id="" >											
+																<table>											
 																	<tbody>
 																		<tr>
 																			<!--<td class="table-unselected"></td>-->
-																			<td><textarea class="input-textarea csc-object-identification-comments" name="object-identification-comments"></textarea></td>
+																			<td><textarea class="input-textarea csc-object-identification-comments"></textarea></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -180,26 +182,30 @@
 												<div class="info-column1" id="multipleEdit">
 												
 													<div class="info-pair-addrow">
-														<div class="info-label" >Title</div>
-														<div class="info-value" >
-															<table id="" >
+														<div class="info-header">
+															<div class="info-label">Title</div>
+															<div class="addrow"><img src="../images/btnAddRow.png" alt="add a row" title="click to add an additional row" height=13 width=31 /></div>
+															<div class="clear"></div>
+														</div>
+														<div class="info-value">
+															<table>
 																<thead>
 																	<tr>
 																		<!--<td class="table-select"></td>-->
-																		<td >Title</td>
-																		<td >Object Title Language</td>
-																		<td >Title Translation</td>
-																		<td >Title Type</td>
+																		<td>Title</td>
+																		<td>Object Title Language</td>
+																		<td>Title Translation</td>
+																		<td>Title Type</td>
 																	</tr>
 																</thead>
 															
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td class="flc-inlineEdit-text" style="width:45%;"><input type="text" class="input-alpha-table csc-object-identification-object-title editableText" name="object-identification-object-title"></td>
-																		<td class="flc-inlineEdit-text"><input type="text" class="input-alpha-table csc-object-identification-object-title-language editableText" name="object-identification-object-title-language"></td>
-																		<td class="flc-inlineEdit-text"><input type="text" class="input-alpha-table csc-object-identification-object-title-translation editableText" name="object-identification-object-title-translation"></td>
-																		<td class="flc-inlineEdit-text"><input type="text" class="input-alpha-table csc-object-identification-object-title-type editableText" name="object-identification-object-title-type"></td>
+																		<td class="flc-inlineEdit-text" style="width:45%;"><input type="text" class="csc-object-identification-object-title editableText"></td>
+																		<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-object-title-language editableText"></td>
+																		<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-object-title-translation editableText"></td>
+																		<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-object-title-type editableText"></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -207,32 +213,32 @@
 													</div>
 												
 													<div class="info-pair-addrow">
-														<div class="info-label" >Object Name</div>
+														<div class="info-label">Object Name</div>
 														<div class="info-value">
-															<table id="" >
+															<table>
 																<thead>
 																	<tr>
 																		<!--<td class="table-select"></td>-->
-																		<td >Object Name</td>
-																		<td >Currency</td>
-																		<td >Level</td>
-																		<td >System</td>
-																		<td >Type</td>
-																		<td >Language</td>
-																		<td >Note</td>
+																		<td>Object Name</td>
+																		<td>Currency</td>
+																		<td>Level</td>
+																		<td>System</td>
+																		<td>Type</td>
+																		<td>Language</td>
+																		<td>Note</td>
 																	</tr>
 																</thead>
 																
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td style="width:30%;"><input type="text" class="input-alpha-table csc-object-identification-object-name" name="object-identification-object-name"></td>
-																		<td><input type="text" class="input-alpha-table csc-object-identification-object-currency" name="object-identification-object-currency"></td>
-																		<td><input type="text" class="input-alpha-table csc-object-identification-object-level" name="object-identification-object-level"></td>
-																		<td><input type="text" class="input-alpha-table csc-object-identification-object-system" name="object-identification-object-system"></td>
-																		<td><input type="text" class="input-alpha-table csc-object-identification-object-type" name="object-identification-object-type"></td>
-																		<td><input type="text" class="input-alpha-table csc-object-identification-object-language" name="object-identification-object-language"></td>
-																		<td><input type="text" class="input-alpha-table csc-object-identification-object-note" name="object-identification-object-note"></td>
+																		<td style="width:30%;"><input type="text" class="csc-object-identification-object-name"></td>
+																		<td><input type="text" class="csc-object-identification-object-currency"></td>
+																		<td><input type="text" class="csc-object-identification-object-level"></td>
+																		<td><input type="text" class="csc-object-identification-object-system"></td>
+																		<td><input type="text" class="csc-object-identification-object-type"></td>
+																		<td><input type="text" class="csc-object-identification-object-language"></td>
+																		<td><input type="text" class="csc-object-identification-object-note"></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -251,39 +257,79 @@
 												<span class="header-toggle"><img id="toggle-object-description-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 												Object Description Information
 											</div>
-											<div class="fl-container-flex fl-fix content" id="toggle-object-description-info" >
+											<div class="fl-container-flex fl-fix content" id="toggle-object-description-info">
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-left">
 																							
 													<div class="info-pair">
-														<div class="info-label" >Copy Number</div>
-														<div class="info-value"><input type="text" class="input-alpha csc-object-description-copy-number" name="object-description-copy-number"></div>
+														<div class="info-label">Copy Number</div>
+														<div class="info-value">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-object-description-copy-number"></td>
+																	</tr>
+																</tbody>
+															</table>
+															<!--<input type="text" class="csc-object-description-copy-number" name="object-description-copy-number">-->
+														</div>
 													</div>
 													
 													<div class="info-pair">
-														<div class="info-label" >Object Status</div>
-														<div class="info-value"><input type="text" class="input-alpha csc-object-description-status" name="object-description-status"></div>
+														<div class="info-label">Object Status</div>
+														<div class="info-value">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-object-description-status"></td>
+																	</tr>
+																</tbody>
+															</table>
+															<!--<input type="text" class="csc-object-description-status" name="object-description-status">-->
+														</div>
 													</div>
 													
 													<div class="info-pair">
-														<div class="info-label" >Sex</div>
-														<div class="info-value"><input type="text" class="input-alpha csc-object-description-sex" name="object-description-sex"></div>
+														<div class="info-label">Sex</div>
+														<div class="info-value">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-object-description-sex"></td>
+																	</tr>
+																</tbody>
+															</table>
+															<!--<input type="text" class="csc-object-description-sex" name="object-description-sex">-->
+														</div>
 													</div>
 													
 													<div class="info-pair">
-														<div class="info-label" >Phase</div>
-														<div class="info-value"><input type="text" class="input-alpha csc-object-description-phase" name="object-description-phase"></div>
+														<div class="info-label">Phase</div>
+														<div class="info-value">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-object-description-phase"></td>
+																	</tr>
+																</tbody>
+															</table>
+															<!--<input type="text" class="csc-object-description-phase" name="object-description-phase">-->
+														</div>
 													</div>
 													
 													<div class="info-column1">
 														<div class="info-pair-addrow">
-															<div class="info-label" >Form</div>
+															<div class="info-label">Form</div>
 															<div class="info-value">
-																<table id="" >											
+																<table>											
 																	<tbody>
 																		<tr>
 																			<!--<td class="table-unselected"></td>-->
-																			<td><input type="text" class="input-alpha-table csc-object-description-form" name="object-description-form"></td>
+																			<td><input type="text" class="csc-object-description-form"></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -296,27 +342,37 @@
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-right">
 													<div class="info-pair">
-														<div class="info-label" >Edition Number</div>
-														<div class="info-value"><input type="text" class="input-alpha csc-object-description-edition-number" name="object-description-edition-number"></div>
+														<div class="info-label">Edition Number</div>
+														<div class="info-value">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-object-description-edition-number"></td>
+																	</tr>
+																</tbody>
+															</table>
+															<!--<input type="text" class="csc-object-description-edition-number" name="object-description-edition-number">-->
+														</div>
 													</div>
 													
 													<div class="info-pair-table">
-														<div class="info-label" >Age</div>
+														<div class="info-label">Age</div>
 														<div class="info-value">
-															<table id="" >
+															<table>
 																<thead>
 																	<tr>
-																		<td >Age</td>
-																		<td >Age Qualifier</td>
-																		<td >Unit</td>
+																		<td>Age</td>
+																		<td>Age Qualifier</td>
+																		<td>Unit</td>
 																	</tr>
 																</thead>
 																
 																<tbody>
 																	<tr>
-																		<td><input type="text" class="input-alpha-table csc-object-description-age" name="object-description-age"></td>
-																		<td><input type="text" class="input-alpha-table csc-object-description-age-qualifier" name="object-description-age-qualifier"></td>
-																		<td><input type="text" class="input-alpha-table csc-object-description-age-unit" name="object-description-age-unit"></td>
+																		<td><input type="text" class="csc-object-description-age"></td>
+																		<td><input type="text" class="csc-object-description-age-qualifier"></td>
+																		<td><input type="text" class="csc-object-description-age-unit"></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -324,13 +380,13 @@
 													</div>		
 													
 													<div class="info-pair-addrow">
-														<div class="info-label" >Style</div>
+														<div class="info-label">Style</div>
 														<div class="info-value">
-															<table id="" >
+															<table>
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="input-alpha-table csc-object-description-style" name="object-description-style"></td>
+																		<td><input type="text" class="csc-object-description-style"></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -338,13 +394,13 @@
 													</div>
 													
 													<div class="info-pair-addrow">
-														<div class="info-label" >Color</div>
+														<div class="info-label">Color</div>
 														<div class="info-value">
-															<table id="" >											
+															<table>											
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="input-alpha-table csc-object-description-color" name="object-description-color"></td>
+																		<td><input type="text" class="csc-object-description-color"></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -355,28 +411,28 @@
 												<div class="clear"></div>
 												<div class="info-column1">
 													<div class="info-pair-addrow">
-														<div class="info-label" >Material</div>
+														<div class="info-label">Material</div>
 														<div class="info-value">
-															<table id="" >
+															<table>
 																<thead>
 																	<tr>
 																		<!--<td class="table-select"></td>-->
-																		<td >Material</td>
-																		<td >Material Component</td>
-																		<td >Material Component Note</td>
-																		<td >Material Name</td>
-																		<td >Material Source</td>
+																		<td>Material</td>
+																		<td>Material Component</td>
+																		<td>Material Component Note</td>
+																		<td>Material Name</td>
+																		<td>Material Source</td>
 																	</tr>
 																</thead>
 																
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="input-alpha-table csc-object-description-material" name="object-description-material"></td>
-																		<td><input type="text" class="input-alpha-table csc-object-description-material-component" name="object-description-material-component"></td>
-																		<td><input type="text" class="input-alpha-table csc-object-description-material-component-note" name="object-description-material-component-note"></td>
-																		<td><input type="text" class="input-alpha-table csc-object-description-material-name" name="object-description-material-name"></td>
-																		<td><input type="text" class="input-alpha-table csc-object-description-material-source" name="object-description-material-source"></td>
+																		<td><input type="text" class="csc-object-description-material"></td>
+																		<td><input type="text" class="csc-object-description-material-component"></td>
+																		<td><input type="text" class="csc-object-description-material-component-note"></td>
+																		<td><input type="text" class="csc-object-description-material-name"></td>
+																		<td><input type="text" class="csc-object-description-material-source"></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -384,29 +440,39 @@
 													</div>
 													
 													<div class="info-pair">
-														<div class="info-label" >Physical Description</div>
-														<div class="info-value"><textarea class="input-textarea csc-object-description-physical-description" name="object-description-physical-description"></textarea></div>
+														<div class="info-label">Physical Description</div>
+														<div class="info-value">
+															<table>											
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><textarea class="input-textarea csc-object-description-physical-description"></textarea></td>
+																	</tr>
+																</tbody>
+															</table>
+															<!--<textarea class="input-textarea csc-object-description-physical-description" name="object-description-physical-description"></textarea>-->
+														</div>
 													</div>
 												</div>
 												
 												<div class="info-column2-50 fl-force-left">
 													<div class="info-pair-addrow">
-														<div class="info-label" >Object Component</div>
+														<div class="info-label">Object Component</div>
 														<div class="info-value">
-															<table id="" >
+															<table>
 																<thead>
 																	<tr>
 																		<!--<td class="table-select"></td>-->
-																		<td >Name</td>
-																		<td >Information</td>
+																		<td>Name</td>
+																		<td>Information</td>
 																	</tr>
 																</thead>
 																
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="input-alpha-table csc-object-description-object-component-name" name="object-description-object-component-name"></td>
-																		<td><input type="text" class="input-alpha-table csc-object-description-object-component-information" name="object-description-object-component-information"></td>
+																		<td><input type="text" class="csc-object-description-object-component-name"></td>
+																		<td><input type="text" class="csc-object-description-object-component-information"></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -417,24 +483,24 @@
 												
 												<div class="info-column2-50 fl-force-right">
 													<div class="info-pair-addrow">
-														<div class="info-label" >Technical Attribute</div>
+														<div class="info-label">Technical Attribute</div>
 														<div class="info-value">
-															<table id="" >
+															<table>
 																<thead>
 																	<tr>
 																		<!--<td class="table-select"></td>-->
-																		<td >Technical Attribute</td>
-																		<td >Measurement</td>
-																		<td >Unit</td>
+																		<td>Technical Attribute</td>
+																		<td>Measurement</td>
+																		<td>Unit</td>
 																	</tr>
 																</thead>
 																
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="input-alpha-table csc-object-description-technical-attribute" name="object-description-technical-attribute"></td>
-																		<td><input type="text" class="input-alpha-table csc-object-description-technical-attribute-measurement" name="object-description-technical-attribute-measurement"></td>
-																		<td><input type="text" class="input-alpha-table csc-object-description-technical-attribute-unit" name="object-description-technical-atteribute-unit"></td>
+																		<td><input type="text" class="csc-object-description-technical-attribute"></td>
+																		<td><input type="text" class="csc-object-description-technical-attribute-measurement"></td>
+																		<td><input type="text" class="csc-object-description-technical-attribute-unit"></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -444,17 +510,17 @@
 												<div class="clear"></div>
 												<div class="info-column1">
 													<div class="info-pair-addrow">
-														<div class="info-label" >Dimension</div>
+														<div class="info-label">Dimension</div>
 														<div class="info-value">
-															<table id="" >
+															<table>
 																<thead>
 																	<tr>
 																		<!--<td class="table-select"></td>-->
 																		<td  class="deactivate">Date</td>
 																		<td  class="deactivate">Part</td>
-																		<td >Dimension</td>
-																		<td >Value</td>
-																		<td >Dimension Unit</td>
+																		<td>Dimension</td>
+																		<td>Value</td>
+																		<td>Dimension Unit</td>
 																		<td  class="deactivate">Value Qualifier</td>
 																	</tr>
 																</thead>
@@ -462,12 +528,12 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td class="field-cal disabled"><input type="text" disabled class="input-date csc-object-description-dimension-date disabled" name="object-description-dimension-date"><img src="../images/cal.png" alt="calendar"  height=14 width=14 /></td>
-																		<td class="field-cal disabled"><input type="text" disabled class="input-alpha-table csc-object-description-dimension-part deactivate" name="object-description-dimension-part"></td>
-																		<td><input type="text" class="input-alpha-table csc-object-description-dimension" name="object-description-dimension"></td>
-																		<td><input type="text" class="input-alpha-table csc-object-description-dimension-value" name="object-description-dimension-value"></td>
-																		<td style="width:25%;"><select class="input-select csc-object-description-dimension-unit" name="object-description-dimension-unit" /></td>
-																		<td class="field-cal disabled"><input type="text" disabled class="input-alpha-table csc-object-description-dimension-value-qualifier deactivate" name="object-description-dimension-calue-qualifier"></td>
+																		<td class="field-cal disabled"><input type="text" disabled class="input-date csc-object-description-dimension-date disabled"><img src="../images/cal.png" alt="calendar"  height=14 width=14 /></td>
+																		<td class="field-cal disabled"><input type="text" disabled class="csc-object-description-dimension-part deactivate"></td>
+																		<td><input type="text" class="csc-object-description-dimension"></td>
+																		<td><input type="text" class="csc-object-description-dimension-value"></td>
+																		<td style="width:25%;"><select class="input-select csc-object-description-dimension-unit" /></td>
+																		<td class="field-cal disabled"><input type="text" disabled class="csc-object-description-dimension-value-qualifier deactivate"></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -484,24 +550,34 @@
 																<span class="header-toggle-sub"><img id="toggle-description-information-content-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 																Content
 															</div>
-															<div class="fl-container-flex fl-fix content" id="toggle-description-information-content" >
+															<div class="fl-container-flex fl-fix content" id="toggle-description-information-content">
 																
 																<div class="info-column">
 																	<div class="info-pair">
-																		<div class="info-label" >Description</div>
-																		<div class="info-value"><textarea class="input-textarea csc-object-description-content-description" name="object-description-content-description"></textarea></div>
+																		<div class="info-label">Description</div>
+																		<div class="info-value">
+																			<table>											
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><textarea class="input-textarea csc-object-description-content-description"></textarea></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																			<!--<textarea class="input-textarea csc-object-description-content-description" name="object-description-content-description"></textarea>-->
+																		</div>
 																	</div>
 																</div>
 																
 																<div class="info-column2-50 fl-force-left">
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Language</div>
+																		<div class="info-label">Language</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-content-language" name="object-description-content-language"></td>
+																						<td><input type="text" class="csc-object-description-content-language"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -509,13 +585,13 @@
 																	</div>
 																	
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Activity</div>
+																		<div class="info-label">Activity</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-content-activity" name="object-description-content-activity"></td>
+																						<td><input type="text" class="csc-object-description-content-activity"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -523,13 +599,13 @@
 																	</div>
 																	
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Concept</div>
+																		<div class="info-label">Concept</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-content-concept" name="object-description-content-concept"></td>
+																						<td><input type="text" class="csc-object-description-content-concept"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -537,13 +613,13 @@
 																	</div>
 																	
 																	<div class="info-pair-addrow info-pair-date">
-																		<div class="info-label" >Date</div>
+																		<div class="info-label">Date</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td class="field-cal disabled"><input type="text" disabled class="input-date csc-object-description-content-date disabled" name="object-description-content-date"><img src="../images/cal.png" alt="calendar"  height=14 width=14 /></td>
+																						<td class="field-cal disabled"><input type="text" disabled class="input-date csc-object-description-content-date disabled"><img src="../images/cal.png" alt="calendar"  height=14 width=14 /></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -551,13 +627,13 @@
 																	</div>
 																	
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Position</div>
+																		<div class="info-label">Position</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-content-position" name="object-description-content-position"></td>
+																						<td><input type="text" class="csc-object-description-content-position"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -565,22 +641,22 @@
 																	</div>
 																	
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Object</div>
+																		<div class="info-label">Object</div>
 																		<div class="info-value">
-																			<table id="" >
+																			<table>
 																				<thead>
 																					<tr>
 																						<!--<td class="table-select"></td>-->
-																						<td >Object</td>
-																						<td >Object Type</td>
+																						<td>Object</td>
+																						<td>Object Type</td>
 																					</tr>
 																				</thead>
 																				
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-content-object" name="object-description-content-object"></td>
-																						<td><input type="text" class="input-alpha-table csc-object-description-content-object-type" name="object-description-content-object-type"></td>
+																						<td><input type="text" class="csc-object-description-content-object"></td>
+																						<td><input type="text" class="csc-object-description-content-object-type"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -591,13 +667,13 @@
 																
 																<div class="info-column2-50 fl-force-right">
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >People</div>
+																		<div class="info-label">People</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-content-people" name="object-description-content-people"></td>
+																						<td><input type="text" class="csc-object-description-content-people"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -605,13 +681,13 @@
 																	</div>
 																	
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Person</div>
+																		<div class="info-label">Person</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-content-person" name="object-description-content-person"></td>
+																						<td><input type="text" class="csc-object-description-content-person"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -619,13 +695,13 @@
 																	</div>
 																	
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Place</div>
+																		<div class="info-label">Place</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-content-place" name="object-description-content-place"></td>
+																						<td><input type="text" class="csc-object-description-content-place"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -633,13 +709,13 @@
 																	</div>
 																	
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Script</div>
+																		<div class="info-label">Script</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-content-script" name="object-description-content-script"></td>
+																						<td><input type="text" class="csc-object-description-content-script"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -647,13 +723,13 @@
 																	</div>
 																	
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Organization</div>
+																		<div class="info-label">Organization</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-content-organization" name="object-description-content-organization"></td>
+																						<td><input type="text" class="csc-object-description-content-organization"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -661,13 +737,13 @@
 																	</div>
 																	
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Method</div>
+																		<div class="info-label">Method</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-content-method" name="object-description-content-method"></td>
+																						<td><input type="text" class="csc-object-description-content-method"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -675,22 +751,22 @@
 																	</div>
 																	
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Event Name</div>
+																		<div class="info-label">Event Name</div>
 																		<div class="info-value">
-																			<table id="" >
+																			<table>
 																				<thead>
 																					<tr>
 																						<!--<td class="table-select"></td>-->
-																						<td >Event Name</td>
-																						<td >Event Name Type</td>
+																						<td>Event Name</td>
+																						<td>Event Name Type</td>
 																					</tr>
 																				</thead>
 																				
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-content-event-name" name="object-description-content-event-name"></td>
-																						<td><input type="text" class="input-alpha-table csc-object-description-content-event-name-type" name="object-description-content-event-name-type"></td>
+																						<td><input type="text" class="csc-object-description-content-event-name"></td>
+																						<td><input type="text" class="csc-object-description-content-event-name-type"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -698,22 +774,22 @@
 																	</div>
 																	
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Other</div>
+																		<div class="info-label">Other</div>
 																		<div class="info-value">
-																			<table id="" >
+																			<table>
 																				<thead>
 																					<tr>
 																						<!--<td class="table-select"></td>-->
-																						<td >Other</td>
-																						<td >Other Type</td>
+																						<td>Other</td>
+																						<td>Other Type</td>
 																					</tr>
 																				</thead>
 																				
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-content-other" name="object-description-content-other"></td>
-																						<td><input type="text" class="input-alpha-table csc-object-description-content-other-type" name="object-description-content-other-type"></td>
+																						<td><input type="text" class="csc-object-description-content-other"></td>
+																						<td><input type="text" class="csc-object-description-content-other-type"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -725,13 +801,13 @@
 																<div class="info-column">
 					<!--
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Script</div>
+																		<div class="info-label">Script</div>
 																		<div class="info-value">
-																			<table id="" >
+																			<table>
 																				<tbody>
 																					<tr>
 																						<td class="table-unselected"></td>
-																						<td><input type="text" class="input-alpha-table csc-object-description-content-script" name="object-description-content-script"></td>
+																						<td><input type="text" class="csc-object-description-content-script" name="object-description-content-script"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -739,8 +815,18 @@
 																	</div>
 					-->
 																	<div class="info-pair">
-																		<div class="info-label" >Note</div>
-																		<div class="info-value"><textarea class="input-textarea csc-object-description-content-note" name="object-description-content-note"></textarea></div>
+																		<div class="info-label">Note</div>
+																		<div class="info-value">
+																			<table>											
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><textarea class="input-textarea csc-object-description-physical-description"></textarea></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																			<!--<textarea class="input-textarea csc-object-description-content-note" name="object-description-content-note"></textarea>-->
+																		</div>
 																	</div>
 																	
 																</div>
@@ -760,29 +846,39 @@
 																<span class="header-toggle-sub"><img id="toggle-description-information-inscription-content-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 																Inscription Content
 															</div>
-															<div class="fl-container-flex fl-fix content" id="toggle-description-information-inscription-content" >
+															<div class="fl-container-flex fl-fix content" id="toggle-description-information-inscription-content">
 																
 																<div class="info-column">
 																	<div class="info-pair">
-																		<div class="info-label" >Inscription Content</div>
-																		<div class="info-value"><textarea class="input-textarea csc-object-description-inscription-content" name="object-description-inscription-content"></textarea></div>
+																		<div class="info-label">Inscription Content</div>
+																		<div class="info-value">
+																			<table>															
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><textarea class="input-textarea csc-object-description-inscription-content"></textarea></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																			<!--<textarea class="input-textarea csc-object-description-inscription-content" name="object-description-inscription-content"></textarea>-->
+																		</div>
 																	</div>
 																	
 																	<!--<div class="info-pair">
-																		<div class="info-label" >Inscription Description</div>
+																		<div class="info-label">Inscription Description</div>
 																		<div class="info-value"><textarea class="input-textarea csc-object-description-inscription-description" name="object-description-inscription-description"></textarea></div>
 																	</div>-->
 																</div>
 																
 																<div class="info-column2-50 fl-force-left">
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Inscriber</div>
+																		<div class="info-label">Inscriber</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-content-inscriber" name="object-description-inscription-content-inscriber"></td>
+																						<td><input type="text" class="csc-object-description-inscription-content-inscriber"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -790,13 +886,13 @@
 																	</div>
 																	
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Language</div>
+																		<div class="info-label">Language</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-content-language" name="object-description-inscription-content-language"></td>
+																						<td><input type="text" class="csc-object-description-inscription-content-language"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -804,13 +900,13 @@
 																	</div>
 																		
 																	<div class="info-pair-addrow info-pair-date">
-																		<div class="info-label" >Date</div>
+																		<div class="info-label">Date</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td class="field-cal"><input type="text" class="input-date csc-object-description-inscription-content-date" name="object-description-inscription-content-date"><img src="../images/cal.png" alt="calendar"  height=14 width=14 /></td>
+																						<td class="field-cal"><input type="text" class="input-date csc-object-description-inscription-content-date"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -821,18 +917,28 @@
 																
 																<div class="info-column2-50 fl-force-right">
 																	<div class="info-pair">
-																		<div class="info-label" >Position</div>
-																		<div class="info-value"><input type="text" class="input-alpha csc-object-description-inscription-content-position" name="object-description-inscription-content-position"></div>
-																	</div>
-																	
-																	<div class="info-pair-addrow">
-																		<div class="info-label" >Script</div>
+																		<div class="info-label">Position</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-content-script" name="object-description-inscription-content-script"></td>
+																						<td class="field-cal"><input type="text" class="csc-object-description-inscription-content-position"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																			<!--<input type="text" class="csc-object-description-inscription-content-position" name="object-description-inscription-content-position">-->
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label">Script</div>
+																		<div class="info-value">
+																			<table>															
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><input type="text" class="csc-object-description-inscription-content-script"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -840,13 +946,13 @@
 																	</div>
 																	
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Type</div>
+																		<div class="info-label">Type</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-content-type" name="object-description-inscription-content-type"></td>
+																						<td><input type="text" class="csc-object-description-inscription-content-type"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -854,13 +960,13 @@
 																	</div>
 																	
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Method</div>
+																		<div class="info-label">Method</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-content-method" name="object-description-inscription-content-method"></td>
+																						<td><input type="text" class="csc-object-description-inscription-content-method"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -872,18 +978,28 @@
 																<div class="info-column1">
 																
 																	<div class="info-pair">
-																		<div class="info-label" >Interpretation</div>
-																		<div class="info-value"><textarea class="input-textarea csc-object-description-inscription-content-interpretation" name="object-description-inscription-content-interpretation"></textarea></div>
-																	</div>
-																	
-																	<div class="info-pair-addrow">
-																		<div class="info-label" >Translation</div>
+																		<div class="info-label">Interpretation</div>
 																		<div class="info-value">
-																			<table id="" >
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-content-translation" name="object-description-inscription-content-translation"></td>
+																						<td class="field-cal"><textarea class="input-textarea csc-object-description-inscription-content-interpretation"></textarea></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																			<!--<textarea class="input-textarea csc-object-description-inscription-content-interpretation" name="object-description-inscription-content-interpretation"></textarea>-->
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label">Translation</div>
+																		<div class="info-value">
+																			<table>
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><input type="text" class="csc-object-description-inscription-content-translation"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -891,13 +1007,13 @@
 																	</div>
 																	
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Transliteration</div>
+																		<div class="info-label">Transliteration</div>
 																		<div class="info-value">
-																			<table id="" >
+																			<table>
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-content-transliteration" name="object-description-inscription-content-transliteration"></td>
+																						<td><input type="text" class="csc-object-description-inscription-content-transliteration"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -922,24 +1038,34 @@
 																<span class="header-toggle-sub"><img id="toggle-description-information-inscription-description-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 																Inscription Description
 															</div>
-															<div class="fl-container-flex fl-fix content" id="toggle-description-information-inscription-description" >
+															<div class="fl-container-flex fl-fix content" id="toggle-description-information-inscription-description">
 																
 																<div class="info-column">
 																	<div class="info-pair">
-																		<div class="info-label" >Inscription Description</div>
-																		<div class="info-value"><textarea class="input-textarea csc-object-description-inscription-description" name="object-description-inscription-description"></textarea></div>
+																		<div class="info-label">Inscription Description</div>
+																		<div class="info-value">
+																			<table>
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><textarea class="input-textarea csc-object-description-inscription-description"></textarea></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																			<!--<textarea class="input-textarea csc-object-description-inscription-description" name="object-description-inscription-description"></textarea>-->
+																		</div>
 																	</div>
 																</div>
 																
 																<div class="info-column2-50 fl-force-left">
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Inscriber</div>
+																		<div class="info-label">Inscriber</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-description-inscriber" name="object-description-inscription-description-inscriber"></td>
+																						<td><input type="text" class="csc-object-description-inscription-description-inscriber"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -947,13 +1073,13 @@
 																	</div>
 																		
 																	<div class="info-pair-addrow info-pair-date">
-																		<div class="info-label" >Date</div>
+																		<div class="info-label">Date</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td class="field-cal"><input type="text" class="input-date csc-object-description-inscription-description-date" name="object-description-inscription-description-date"><img src="../images/cal.png" alt="calendar"  height=14 width=14 /></td>
+																						<td class="field-cal"><input type="text" class="input-date csc-object-description-inscription-description-date"><img src="../images/cal.png" alt="calendar"  height=14 width=14 /></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -964,18 +1090,28 @@
 																
 																<div class="info-column2-50 fl-force-right">
 																	<div class="info-pair">
-																		<div class="info-label" >Position</div>
-																		<div class="info-value"><input type="text" class="input-alpha csc-object-description-inscription-description-position" name="object-description-inscription-description-position"></div>
-																	</div>
-																	
-																	<div class="info-pair-addrow">
-																		<div class="info-label" >Type</div>
+																		<div class="info-label">Position</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-description-type" name="object-description-inscription-description-type"></td>
+																						<td><input type="text" class="csc-object-description-inscription-description-position"></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																			<!--<input type="text" class="csc-object-description-inscription-description-position" name="object-description-inscription-description-position">-->
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair-addrow">
+																		<div class="info-label">Type</div>
+																		<div class="info-value">
+																			<table>															
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><input type="text" class="csc-object-description-inscription-description-type"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -983,13 +1119,13 @@
 																	</div>
 																	
 																	<div class="info-pair-addrow">
-																		<div class="info-label" >Method</div>
+																		<div class="info-label">Method</div>
 																		<div class="info-value">
-																			<table id="" >															
+																			<table>															
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="input-alpha-table csc-object-description-inscription-description-method" name="object-description-inscription-description-method"></td>
+																						<td><input type="text" class="csc-object-description-inscription-description-method"></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -1001,8 +1137,18 @@
 																<div class="info-column1">
 																
 																	<div class="info-pair">
-																		<div class="info-label" >Interpretation</div>
-																		<div class="info-value"><textarea class="input-textarea csc-object-description-inscription-description-interpretation" name="object-description-inscription-description-interpretation"></textarea></div>
+																		<div class="info-label">Interpretation</div>
+																		<div class="info-value">
+																			<table>
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><textarea class="input-textarea csc-object-description-inscription-description-interpretation"></textarea></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																			<!--<textarea class="input-textarea csc-object-description-inscription-description-interpretation" name="object-description-inscription-description-interpretation"></textarea>-->
+																		</div>
 																	</div>
 																	
 																</div>
@@ -1025,49 +1171,69 @@
 												<span class="header-toggle"><img id="toggle-date-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 												Date Information
 											</div>
-											<div class="fl-container-flex fl-fix content" id="toggle-date-info" >
+											<div class="fl-container-flex fl-fix content" id="toggle-date-info">
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-left">
 													<div class="info-pair">
-														<div class="info-label" >Date Association</div>
-														<div class="info-value"><input type="text" class="input-alpha csc-date-information-date-association" name="date-information-date-association"></div>
+														<div class="info-label">Date Association</div>
+														<div class="info-value">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-date-information-date-association"></td>
+																	</tr>
+																</tbody>
+															</table>
+															<!--<input type="text" class="csc-date-information-date-association" name="date-information-date-association">-->
+														</div>
 													</div>	
 												</div>
 												
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-right">															
 													<div class="info-pair">
-														<div class="info-label" >Date Period</div>
-														<div class="info-value"><input type="text" class="input-alpha csc-date-information-date-period" name="date-information-date-period"></div>
+														<div class="info-label">Date Period</div>
+														<div class="info-value">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-date-information-date-period"></td>
+																	</tr>
+																</tbody>
+															</table>
+															<!--<input type="text" class="csc-date-information-date-period" name="date-information-date-period">-->
+														</div>
 													</div>	
 												</div>
 												
 												<div class="info-column1 fl-force-left">
 													<div class="info-pair-table">
-														<div class="info-label" >Date</div>
+														<div class="info-label">Date</div>
 														<div class="info-value">
-															<table id="">
+															<table>
 																<thead>
 																	<tr>
-																		<td >Date Type</td>
-																		<td >Date</td>
-																		<td >Certainty</td>
-																		<td >Qualifier</td>
+																		<td>Date Type</td>
+																		<td>Date</td>
+																		<td>Certainty</td>
+																		<td>Qualifier</td>
 																	</tr>
 																</thead>
 																	
 																<tbody>
 																	<tr>
 																		<td class="label">Date - Earliest/single</td>
-																		<td class="disabled"><input type="text" disabled class="input-alpha csc-date-information-date-earliest-single disabled" name="date-information-date-earliest-single"></td>
-																		<td><input type="text" class="input-alpha-table csc-date-information-date-earliest-single-certainty" name="date-information-date-earliest-single-certainty"></td>
-																		<td><input type="text" class="input-alpha-table csc-date-information-date-earliest-single-qualifier" name="date-information-date-earliest-single-qualifier"></td>
+																		<td class="disabled"><input type="text" disabled class="csc-date-information-date-earliest-single disabled"></td>
+																		<td><input type="text" class="csc-date-information-date-earliest-single-certainty"></td>
+																		<td><input type="text" class="csc-date-information-date-earliest-single-qualifier"></td>
 																	</tr>
 																	<tr>
 																		<td class="label">Date - Latest</td>
-																		<td class="disabled"><input type="text" disabled class="input-alpha csc-date-information-date-latest disabled" name="date-information-date-latest"></td>
-																		<td><input type="text" class="input-alpha-table csc-date-information-date-latest-certainty" name="date-information-date-latest-certainty"></td>
-																		<td><input type="text" class="input-alpha-table csc-date-information-date-latest-qualifier" name="date-information-date-latest-qualifier"></td>
+																		<td class="disabled"><input type="text" disabled class="csc-date-information-date-latest disabled"></td>
+																		<td><input type="text" class="csc-date-information-date-latest-certainty"></td>
+																		<td><input type="text" class="csc-date-information-date-latest-qualifier"></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -1075,8 +1241,18 @@
 													</div>
 												
 													<div class="info-pair">
-														<div class="info-label" >Date Text</div>
-														<div class="info-value"><textarea class="input-textarea csc-date-information-date-text" name="date-information-date-text"></textarea></div>
+														<div class="info-label">Date Text</div>
+														<div class="info-value">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><textarea class="input-textarea csc-date-information-date-text"></textarea></td>
+																	</tr>
+																</tbody>
+															</table>
+															<!--<textarea class="input-textarea csc-date-information-date-text" name="date-information-date-text"></textarea>-->
+														</div>
 													</div>
 												</div>
 												<div class="clear"></div>

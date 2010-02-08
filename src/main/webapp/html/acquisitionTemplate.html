@@ -26,14 +26,13 @@
 				<!-- main content -->
 				<div id="all-content" class="fl-fix acquisition">
 					
-						
 					<!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
 					<div class="fl-fix fl-container-flex fl-col-mixed2">
 
 						<!-- left-side container. Contains bulk of Object Entry forms and fields -->
-						<div class="">
+						<div class="fl-container-left fl-force-left">
 
-							<div class="fl-container-left fl-force-left csc-acquisition-container">
+							<div class="csc-acquisition-container">
 								<div id="secondary-nav">
 									<div id="secondary-nav-menu">
 										<ul class="menu-record">
@@ -94,7 +93,7 @@
 																<table>
 																	<tbody>
 																		<tr>
-																			<td class="field-cal"><input type="text" class="input-date csc-acquisition-accession-date csc-calendar-date" name="acquisition-accession-date" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></a></td>
+																			<td class="field-cal"><input type="text" class="input-date csc-acquisition-accession-date csc-calendar-date" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></a></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -115,8 +114,8 @@
 																	
 																	<tbody>
 																		<tr>
-																			<td><input type="text" class="input-alpha-table csc-acquisition-authorizer" name="acquisition-authorizer"></td>
-																			<td class="field-cal"><input type="text" disabled class="input-date csc-acquisition-authorizer-date csc-calendar-date" name="acquisition-authorizer-date"><img src="../images/cal.png" class="csc-calendar-button" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+																			<td><input type="text" class="csc-acquisition-authorizer" name="acquisition-authorizer"></td>
+																			<td class="field-cal"><input type="text" disabled class="input-date csc-acquisition-authorizer-date csc-calendar-date"><img src="../images/cal.png" class="csc-calendar-button" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -131,7 +130,7 @@
 																	<tbody>
 																		<tr>
 																			<!--<td class="table-unselected"></td>-->
-																			<td class="field-cal"><input type="text" class="input-date csc-acquisition-date csc-calendar-date " name="acquisition-date"><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></a></td>
+																			<td class="field-cal"><input type="text" class="input-date csc-acquisition-date csc-calendar-date"><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></a></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -141,17 +140,37 @@
 														
 														<div class="info-pair">
 															<div class="info-label" title="">Acquisition Method</div>
-															<div class="info-value"><select class="csc-acquisition-acquisition-method input-select" name="acquisition-acquisition-method" /></div>
+															<div class="info-value"><select class="csc-acquisition-acquisition-method input-select" /></div>
 														</div>
 														
 														<div class="info-pair">
 															<div class="info-label" title="">Acquisition Source</div>
-															<div class="info-value"><input type="text" class="input-alpha csc-acquisition-acquisition-source" name="acquisition-acquisition-source"></div>
+															<div class="info-value">
+																<table id="">
+																	<tbody>
+																		<tr>
+																			<!--<td class="table-unselected"></td>-->
+																			<td><input type="text" class="csc-acquisition-acquisition-source"></td>
+																		</tr>
+																	</tbody>
+																</table>
+																<!--<input type="text" class="csc-acquisition-acquisition-source" name="acquisition-acquisition-source">-->
+															</div>
 														</div>
 														
 														<div class="info-pair">
 															<div class="info-label" title="">Transfer of Title Number</div>
-															<div class="info-value"><input type="text" class="input-alpha csc-acquisition-transfer-of-title-number" name="acquisition-transfer-of-title-number"></div>
+															<div class="info-value">
+																<table id="">
+																	<tbody>
+																		<tr>
+																			<!--<td class="table-unselected"></td>-->
+																			<td><input type="text" class="csc-acquisition-transfer-of-title-number"></td>
+																		</tr>
+																	</tbody>
+																</table>
+																<!--<input type="text" class="csc-acquisition-transfer-of-title-number" name="acquisition-transfer-of-title-number">-->
+															</div>
 														</div>
 														
 													</div>
@@ -169,9 +188,9 @@
 																	<tbody>
 																		<tr>
 																			<!--<td class="label"></td>-->
-																			<td><input type="text" class="input-alpha csc-acquisition-purchase-price-type" name="acquisition-purchase-price-type"></td>
-																			<td><input type="text" class="input-money-type csc-acquisition-purchaser-price-denomination" name="acquisition-purchaser-price-denomination" value=""></td>
-																			<td><input type="text" class="input-numeric-medium csc-acquisition-purchaser-price" name="acquisition-purchaser-price" value=""></td>
+																			<td><input type="text" class="csc-acquisition-purchase-price-type"></td>
+																			<td><input type="text" class="input-money-type csc-acquisition-purchaser-price-denomination"></td>
+																			<td><input type="text" class="input-numeric-medium csc-acquisition-purchaser-price"></td>
 																		</tr>
 															<!--	 		
 																	***	TEMPORARILY COMMENTED OUT AS THIS WILL BE A REPEATING LIST OF DATA TO BE IMPLEMENTED IN A FUTURE RELEASE ***
@@ -204,17 +223,47 @@
 														
 														<div class="info-pair">
 															<div class="info-label" title="">Acquisition Reason</div>
-															<div class="info-value"><textarea class="input-textarea csc-acquisition-acquisition-reason" name="acquisition-acquisition-reason" /></div>
+															<div class="info-value">
+																<table id="">
+																	<tbody>
+																		<tr>
+																			<!--<td class="table-unselected"></td>-->
+																			<td><textarea class="input-textarea csc-acquisition-acquisition-reason"/></td>
+																		</tr>
+																	</tbody>
+																</table>
+																<!--<textarea class="input-textarea csc-acquisition-acquisition-reason" name="acquisition-acquisition-reason" />-->
+															</div>
 														</div>
 														
 														<div class="info-pair">
 															<div class="info-label" title="">Acquisition Note</div>
-															<div class="info-value"><textarea class="input-textarea csc-acquisition-acquisition-note" name="acquisition-acquisition-note" /></div>
+															<div class="info-value">
+																<table id="">
+																	<tbody>
+																		<tr>
+																			<!--<td class="table-unselected"></td>-->
+																			<td><textarea class="input-textarea csc-acquisition-acquisition-note" /></td>
+																		</tr>
+																	</tbody>
+																</table>
+																<!--<textarea class="input-textarea csc-acquisition-acquisition-note" name="acquisition-acquisition-note" />-->
+															</div>
 														</div>
 														
 														<div class="info-pair">
 															<div class="info-label" title="">Acquisition Provisos</div>
-															<div class="info-value"><textarea class="input-textarea csc-acquisition-acquisition-provisos" name="acquisition-acquisition-provisos" /></div>
+															<div class="info-value">
+																<table id="">
+																	<tbody>
+																		<tr>
+																			<!--<td class="table-unselected"></td>-->
+																			<td><textarea class="input-textarea csc-acquisition-acquisition-provisos" /></td>
+																		</tr>
+																	</tbody>
+																</table>
+																<!--<textarea class="input-textarea csc-acquisition-acquisition-provisos" name="acquisition-acquisition-provisos" />-->
+															</div>
 														</div>
 														
 													</div>
@@ -236,10 +285,10 @@
 																	
 																<tbody>
 																	<tr>
-																		<td sytle="width:180px;"><input type="text" disabled=disabled class="input-money-type csc-acquisition-acquisition-funding-denomination disabled" name="acquisition-acquisition-funding-denomination" value=""></td>
-																		<td><input type="text" disabled=disabled class="input-numeric-medium csc-acquisition-acquisition-funding-value disabled" name="acquisition-acquisition-funding-value" value=""></td>
-																		<td><input type="text" disabled=disabled class="input-alpha-table csc-acquisition-acquisition-funding-source disabled" name="acquisition-acquisition-funding-source"></td>
-																		<td><input type="text" disabled=disabled class="input-alpha-table csc-acquisition-acquisition-funding-provisos disabled" name="acquisition-acquisition-funding-provisos"></td>
+																		<td sytle="width:180px;"><input type="text" disabled=disabled class="input-money-type csc-acquisition-acquisition-funding-denomination disabled"></td>
+																		<td><input type="text" disabled=disabled class="input-numeric-medium csc-acquisition-acquisition-funding-value disabled"></td>
+																		<td><input type="text" disabled=disabled class="csc-acquisition-acquisition-funding-source disabled"></td>
+																		<td><input type="text" disabled=disabled class="csc-acquisition-acquisition-funding-provisos disabled"></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -277,7 +326,7 @@
 																	<tbody>
 																		<tr>
 																			<!--<td class="table-unselected"></td>-->
-																			<td class="field-cal"><input type="text" disabled class="input-date csc-object-collection-field-collection-date disabled" name="csc-object-collection-field-collection-date"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
+																			<td class="field-cal"><input type="text" disabled class="input-date csc-object-collection-field-collection-date disabled"><img src="../images/cal.png" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -287,7 +336,15 @@
 														<div class="info-pair">
 															<div class="info-label" title="">Field Collection Event Name</div>
 															<div class="info-value">
-																<input type="text" disabled=disabled class="input-alpha csc-object-collection-field-collection-event-name disabled" />
+																<table id="">
+																	<tbody>
+																		<tr>
+																			<!--<td class="table-unselected"></td>-->
+																			<td><input type="text" disabled=disabled class="csc-object-collection-field-collection-event-name disabled" /></td>
+																		</tr>
+																	</tbody>
+																</table>
+																<!--<input type="text" disabled=disabled class="csc-object-collection-field-collection-event-name disabled" />-->
 															</div>
 														</div>
 													</div>
@@ -297,14 +354,30 @@
 														<div class="info-pair">
 															<div class="info-label" title="">Field Collection Number</div>
 															<div class="info-value">
-																<input type="text" disabled=disabled class="input-numeric csc-object-collection-field-collection-number disabled" />
+																<table id="">
+																	<tbody>
+																		<tr>
+																			<!--<td class="table-unselected"></td>-->
+																			<td><input type="text" disabled=disabled class="input-numeric csc-object-collection-field-collection-number disabled" /></td>
+																		</tr>
+																	</tbody>
+																</table>
+																<!--<input type="text" disabled=disabled class="input-numeric csc-object-collection-field-collection-number disabled" />-->
 															</div>
 														</div>
 														
 														<div class="info-pair">
 															<div class="info-label" title="">Field Collector</div>
 															<div class="info-value">
-																<input type="text" disabled=disabled class="input-alpha csc-object-collection-field-collection-collector disabled" />
+																<table id="">
+																	<tbody>
+																		<tr>
+																			<!--<td class="table-unselected"></td>-->
+																			<td><input type="text" disabled=disabled class="csc-object-collection-field-collection-collector disabled" /></td>
+																		</tr>
+																	</tbody>
+																</table>
+																<!--<input type="text" disabled=disabled class="csc-object-collection-field-collection-collector disabled" />-->
 															</div>
 														</div>
 													</div>
