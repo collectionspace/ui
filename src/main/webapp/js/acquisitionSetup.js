@@ -15,15 +15,6 @@ var demo = demo || {};
 
 (function ($) {
 
-    demo.setup = function () {
-        var pageSpec = {
-            href: "../html/acquisitionTemplate.html",
-            templateID: "csc-acquisition-template",
-            targetSelector: ".csc-acquisition-container"
-        };
-        var intake = cspace.dataEntrySetup("acquisition", pageSpec);
-    };
-
     cspace.acquisitionSetup = function () {
 
         var setUpPage = function () {
@@ -83,7 +74,7 @@ var demo = demo || {};
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {
-                    cspace.pageBuilder.uispec = data.spec;
+                    cspace.pageBuilder.uispec = data;
                     setUpPage();
                 },
                 error: function (xhr, textStatus, errorThrown) {

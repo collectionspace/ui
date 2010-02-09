@@ -15,15 +15,6 @@ var demo = demo || {};
 
 (function ($) {
 
-    demo.setup = function () {
-        var pageSpec = {
-            href: "../html/IntakeTemplate.html",
-            templateID: "csc-object-intake-template",
-            targetSelector: ".csc-object-intake-container"
-        };
-        var intake = cspace.dataEntrySetup("intake", pageSpec);
-    };
-
     cspace.intakeSetup = function () {
 
         var setUpPage = function () {
@@ -83,7 +74,7 @@ var demo = demo || {};
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {
-                    cspace.pageBuilder.uispec = data.spec;
+                    cspace.pageBuilder.uispec = data;
                     setUpPage();
                 },
                 error: function (xhr, textStatus, errorThrown) {

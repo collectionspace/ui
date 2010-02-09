@@ -14,6 +14,29 @@ var cspace = cspace || {};
 
 (function ($) {
 
+    cspace.setupFindEditNew = function(){
+        var setUpPage = function () {
+            
+        };
+
+        if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
+            jQuery.ajax({
+                url: "./uispecs/find-edit/uispec.json",
+                type: "GET",
+                dataType: "json",
+                success: function (data, textStatus) {
+                    cspace.pageBuilder.uispec = data.spec;
+                    setUpPage();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("ERROR!");
+                }
+            });
+        } else {
+            setUpPage();
+        }
+    };
+
     cspace.setupFindEdit = function () {
 		var isLocal = cspace.util.isLocal();
         var orOpts = {

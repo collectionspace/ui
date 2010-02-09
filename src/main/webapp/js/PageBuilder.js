@@ -95,6 +95,10 @@ cspace = cspace || {};
     var setUpModel = function (that) {
         return function (data, textStatus) {
             fluid.model.copyModel(that.model, data);
+            that.model.relations = that.model.relations || {};
+            that.model.termsUsed = that.model.termsUsed || {};
+            that.model.csid = that.model.csid || null;
+
             that.applier = fluid.makeChangeApplier(that.model);
             
             invokeDependencies(that);
@@ -105,22 +109,17 @@ cspace = cspace || {};
         fluid.model.copyModel(that.uispec, cspace.pageBuilder.uispec);
         fluid.clear(cspace.pageBuilder.uispec);
 
-        that.model = {
-            csid: undefined,
-            fields: {},
-            relations: {}
-        };
+        that.model = {};
         that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
         that.dataContext.events.afterFetch.addListener(setUpModel(that));
         that.dataContext.events.onError.addListener(function () {
             console.log("Error!");
         });
         
-        fluid.model.copyModel(that.model, buildEmptyModelFromSpec(that.uispec));
         if (that.options.csid) {
             that.dataContext.fetch(that.options.csid);
         } else {
-            setUpModel(that)(that.model);
+            setUpModel(that)(buildEmptyModelFromSpec(that.uispec));
         }
     };
 

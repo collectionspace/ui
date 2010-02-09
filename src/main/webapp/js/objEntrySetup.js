@@ -14,15 +14,6 @@ var demo = demo || {};
 
 (function ($) {
 
-/*    demo.setup = function () {
-        var pageSpec = {
-            href: "../html/ObjectEntryTemplate.html",
-            templateID: "csc-object-entry-template",
-            targetSelector: ".csc-object-entry-container"
-        };
-        var object = cspace.dataEntrySetup("objects", pageSpec);
-    };
-*/
     cspace.objectSetup = function () {
 
         var setUpPage = function () {
@@ -84,7 +75,7 @@ var demo = demo || {};
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {
-                    cspace.pageBuilder.uispec = data.spec;
+                    cspace.pageBuilder.uispec = data;
                     setUpPage();
                 },
                 error: function (xhr, textStatus, errorThrown) {
