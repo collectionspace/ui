@@ -69,26 +69,26 @@
 										<div class="info-column">	
 								
 											<!-- Information-block header -->
-											<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-identification-information'); return false;">
+											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-identification-information'); return false;">
 												<span class="header-toggle"><img id="toggle-object-identification-information-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 												Object Identification Information
 											</div>
 											
 											<!-- Information-block content block -->
-											<div class="fl-container-flex fl-fix content" id="toggle-object-identification-information">
+											<div class="fl-container-flex fl-fix content main" id="toggle-object-identification-information">
 												<!-- The information-block is further broken down into two columns of equal size: left and right -->
 												<div class="info-column">
 													<div class="info-column2-50 fl-force-left">
 														<div class="info-pair">
 															<div class="info-label">Identification Number</div>
-															<div class="info-value csc-object-identification-object-number-container">
+															<div class="content csc-object-identification-object-number-container">
 																<input type="text" class="csc-object-identification-object-number pattern-chooser-input">
 															</div>
 														</div>
 														
 														<div class="info-pair">
 															<div class="info-label">Number of Objects</div>
-															<div class="info-value">
+															<div class="content">
 																<table id="" style="width:auto;">
 																	<tbody>
 																		<tr>
@@ -102,9 +102,9 @@
 															</div>
 														</div>
 													
-														<div class="info-pair-addrow">
+														<div class="info-pair">
 															<div class="info-label">Other Number</div>
-															<div class="info-value">
+															<div class="content">
 																<table>
 																	<thead>
 																		<tr>
@@ -126,15 +126,15 @@
 														
 														<div class="info-pair">
 															<div class="info-label">Responsible Department</div>
-															<div class="info-value"><select class="csc-object-identification-responsible-department input-select"/></div>
+															<div class="content"><select class="csc-object-identification-responsible-department input-select"/></div>
 														</div>
 														<div class="clear"></div>
 													</div>
 													
 													<div class="info-column2-50 fl-force-right">
-														<div class="info-pair-addrow">
+														<div class="info-pair">
 															<div class="info-label">Brief Description</div>
-															<div class="info-value">
+															<div class="content">
 																<table>
 																	<tbody>
 																		<tr>
@@ -148,7 +148,7 @@
 														
 														<div class="info-pair">
 															<div class="info-label">Distinguishing Features</div>
-															<div class="info-value">
+															<div class="content">
 																<table>
 																	<tbody>
 																		<tr>
@@ -160,9 +160,9 @@
 															<!--<textarea class="input-textarea csc-object-identification-distinguishing-features" name="object-identification-destinguishing-features"></textarea>--></div>
 														</div>
 														
-														<div class="info-pair-addrow">
+														<div class="info-pair">
 															<div class="info-label">Comments</div>
-															<div class="info-value">
+															<div class="content">
 																<table>											
 																	<tbody>
 																		<tr>
@@ -179,19 +179,19 @@
 												</div>
 												
 												<!-- one row column -->
-												<div class="info-column1" id="multipleEdit">
+												<div class="info-column" id="multipleEdit">
 												
-													<div class="info-pair-addrow">
-														<div class="info-header">
-															<div class="info-label">Title</div>
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Title</div>
 															<div class="addrow"><img src="../images/btnAddRow.png" alt="add a row" title="click to add an additional row" height=13 width=31 /></div>
 															<div class="clear"></div>
 														</div>
-														<div class="info-value">
+														<div class="content">
 															<table>
 																<thead>
 																	<tr>
-																		<!--<td class="table-select"></td>-->
+																		<td class="table-select"></td>
 																		<td>Title</td>
 																		<td>Object Title Language</td>
 																		<td>Title Translation</td>
@@ -201,7 +201,14 @@
 															
 																<tbody>
 																	<tr>
-																		<!--<td class="table-unselected"></td>-->
+																		<td class="table-selected"></td>
+																		<td class="flc-inlineEdit-text" style="width:45%;"><input type="text" class="csc-object-identification-object-title editableText"></td>
+																		<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-object-title-language editableText"></td>
+																		<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-object-title-translation editableText"></td>
+																		<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-object-title-type editableText"></td>
+																	</tr>
+																	<tr>
+																		<td class="table-unselected"></td>
 																		<td class="flc-inlineEdit-text" style="width:45%;"><input type="text" class="csc-object-identification-object-title editableText"></td>
 																		<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-object-title-language editableText"></td>
 																		<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-object-title-translation editableText"></td>
@@ -212,13 +219,17 @@
 														</div>
 													</div>
 												
-													<div class="info-pair-addrow">
-														<div class="info-label">Object Name</div>
-														<div class="info-value">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Object Name</div>
+															<div class="addrow"><img src="../images/btnAddRow.png" alt="add a row" title="click to add an additional row" height=13 width=31 /></div>
+															<div class="clear"></div>
+														</div>
+														<div class="content">
 															<table>
 																<thead>
 																	<tr>
-																		<!--<td class="table-select"></td>-->
+																		<td class="table-select"></td>
 																		<td>Object Name</td>
 																		<td>Currency</td>
 																		<td>Level</td>
@@ -231,7 +242,7 @@
 																
 																<tbody>
 																	<tr>
-																		<!--<td class="table-unselected"></td>-->
+																		<td class="table-selected"></td>
 																		<td style="width:30%;"><input type="text" class="csc-object-identification-object-name"></td>
 																		<td><input type="text" class="csc-object-identification-object-currency"></td>
 																		<td><input type="text" class="csc-object-identification-object-level"></td>
@@ -253,17 +264,17 @@
 
 									<div class="fl-container-flex fl-fix information-group">
 										<div class="info-column">
-											<div class="fl-container-flex header" onclick="ShowHide('#toggle-object-description-info'); return false;">
+											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-description-info'); return false;">
 												<span class="header-toggle"><img id="toggle-object-description-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 												Object Description Information
 											</div>
-											<div class="fl-container-flex fl-fix content" id="toggle-object-description-info">
+											<div class="fl-container-flex fl-fix content main" id="toggle-object-description-info">
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-left">
 																							
 													<div class="info-pair">
 														<div class="info-label">Copy Number</div>
-														<div class="info-value">
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -278,7 +289,7 @@
 													
 													<div class="info-pair">
 														<div class="info-label">Object Status</div>
-														<div class="info-value">
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -293,7 +304,7 @@
 													
 													<div class="info-pair">
 														<div class="info-label">Sex</div>
-														<div class="info-value">
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -308,7 +319,7 @@
 													
 													<div class="info-pair">
 														<div class="info-label">Phase</div>
-														<div class="info-value">
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -321,10 +332,10 @@
 														</div>
 													</div>
 													
-													<div class="info-column1">
-														<div class="info-pair-addrow">
+													<div class="info-column">
+														<div class="info-pair">
 															<div class="info-label">Form</div>
-															<div class="info-value">
+															<div class="content">
 																<table>											
 																	<tbody>
 																		<tr>
@@ -343,7 +354,7 @@
 												<div class="info-column2-50 fl-force-right">
 													<div class="info-pair">
 														<div class="info-label">Edition Number</div>
-														<div class="info-value">
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -356,9 +367,9 @@
 														</div>
 													</div>
 													
-													<div class="info-pair-table">
+													<div class="info-pair">
 														<div class="info-label">Age</div>
-														<div class="info-value">
+														<div class="content">
 															<table>
 																<thead>
 																	<tr>
@@ -379,9 +390,9 @@
 														</div>
 													</div>		
 													
-													<div class="info-pair-addrow">
+													<div class="info-pair">
 														<div class="info-label">Style</div>
-														<div class="info-value">
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -393,9 +404,9 @@
 														</div>
 													</div>
 													
-													<div class="info-pair-addrow">
+													<div class="info-pair">
 														<div class="info-label">Color</div>
-														<div class="info-value">
+														<div class="content">
 															<table>											
 																<tbody>
 																	<tr>
@@ -409,10 +420,10 @@
 													<div class="clear"></div>
 												</div>
 												<div class="clear"></div>
-												<div class="info-column1">
-													<div class="info-pair-addrow">
+												<div class="info-column">
+													<div class="info-pair">
 														<div class="info-label">Material</div>
-														<div class="info-value">
+														<div class="content">
 															<table>
 																<thead>
 																	<tr>
@@ -441,7 +452,7 @@
 													
 													<div class="info-pair">
 														<div class="info-label">Physical Description</div>
-														<div class="info-value">
+														<div class="content">
 															<table>											
 																<tbody>
 																	<tr>
@@ -456,9 +467,9 @@
 												</div>
 												
 												<div class="info-column2-50 fl-force-left">
-													<div class="info-pair-addrow">
+													<div class="info-pair">
 														<div class="info-label">Object Component</div>
-														<div class="info-value">
+														<div class="content">
 															<table>
 																<thead>
 																	<tr>
@@ -482,9 +493,9 @@
 												</div>
 												
 												<div class="info-column2-50 fl-force-right">
-													<div class="info-pair-addrow">
+													<div class="info-pair">
 														<div class="info-label">Technical Attribute</div>
-														<div class="info-value">
+														<div class="content">
 															<table>
 																<thead>
 																	<tr>
@@ -508,10 +519,10 @@
 													</div>
 												</div>
 												<div class="clear"></div>
-												<div class="info-column1">
-													<div class="info-pair-addrow">
+												<div class="info-column">
+													<div class="info-pair">
 														<div class="info-label">Dimension</div>
-														<div class="info-value">
+														<div class="content">
 															<table>
 																<thead>
 																	<tr>
@@ -542,20 +553,20 @@
 													<div class="clear"></div>
 												</div>
 												
-												<div class="info-column1">
+												<div class="info-column">
 												
 													<div class="fl-container-flex fl-fix information-subgroup">
 														<div class="info-column fl-force-left">
-															<div class="fl-container-flex header" onclick="ShowHide('#toggle-description-information-content'); return false;">
+															<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-description-information-content'); return false;">
 																<span class="header-toggle-sub"><img id="toggle-description-information-content-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 																Content
 															</div>
-															<div class="fl-container-flex fl-fix content" id="toggle-description-information-content">
+															<div class="fl-container-flex fl-fix content main" id="toggle-description-information-content">
 																
 																<div class="info-column">
 																	<div class="info-pair">
 																		<div class="info-label">Description</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>											
 																				<tbody>
 																					<tr>
@@ -570,9 +581,9 @@
 																</div>
 																
 																<div class="info-column2-50 fl-force-left">
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Language</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -584,9 +595,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Activity</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -598,9 +609,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Concept</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -612,9 +623,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow info-pair-date">
+																	<div class="info-pair info-pair-date">
 																		<div class="info-label">Date</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -626,9 +637,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Position</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -640,9 +651,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Object</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>
 																				<thead>
 																					<tr>
@@ -666,9 +677,9 @@
 																</div>
 																
 																<div class="info-column2-50 fl-force-right">
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">People</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -680,9 +691,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Person</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -694,9 +705,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Place</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -708,9 +719,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Script</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -722,9 +733,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Organization</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -736,9 +747,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Method</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -750,9 +761,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Event Name</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>
 																				<thead>
 																					<tr>
@@ -773,9 +784,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Other</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>
 																				<thead>
 																					<tr>
@@ -800,9 +811,9 @@
 																<div class="clear"></div>
 																<div class="info-column">
 					<!--
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Script</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>
 																				<tbody>
 																					<tr>
@@ -816,7 +827,7 @@
 					-->
 																	<div class="info-pair">
 																		<div class="info-label">Note</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>											
 																				<tbody>
 																					<tr>
@@ -838,20 +849,20 @@
 													<div class="clear"></div>
 												</div>
 												
-												<div class="info-column1">
+												<div class="info-column">
 												
 													<div class="fl-container-flex fl-fix information-subgroup">
 														<div class="info-column">
-															<div class="fl-container-flex header" onclick="ShowHide('#toggle-description-information-inscription-content'); return false;">
+															<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-description-information-inscription-content'); return false;">
 																<span class="header-toggle-sub"><img id="toggle-description-information-inscription-content-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 																Inscription Content
 															</div>
-															<div class="fl-container-flex fl-fix content" id="toggle-description-information-inscription-content">
+															<div class="fl-container-flex fl-fix content main" id="toggle-description-information-inscription-content">
 																
 																<div class="info-column">
 																	<div class="info-pair">
 																		<div class="info-label">Inscription Content</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -866,14 +877,14 @@
 																	
 																	<!--<div class="info-pair">
 																		<div class="info-label">Inscription Description</div>
-																		<div class="info-value"><textarea class="input-textarea csc-object-description-inscription-description" name="object-description-inscription-description"></textarea></div>
+																		<div class="content"><textarea class="input-textarea csc-object-description-inscription-description" name="object-description-inscription-description"></textarea></div>
 																	</div>-->
 																</div>
 																
 																<div class="info-column2-50 fl-force-left">
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Inscriber</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -885,9 +896,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Language</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -899,9 +910,9 @@
 																		</div>
 																	</div>
 																		
-																	<div class="info-pair-addrow info-pair-date">
+																	<div class="info-pair info-pair-date">
 																		<div class="info-label">Date</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -918,7 +929,7 @@
 																<div class="info-column2-50 fl-force-right">
 																	<div class="info-pair">
 																		<div class="info-label">Position</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -931,9 +942,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Script</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -945,9 +956,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Type</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -959,9 +970,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Method</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -975,11 +986,11 @@
 																	
 																</div>
 																<div class="clear"></div>
-																<div class="info-column1">
+																<div class="info-column">
 																
 																	<div class="info-pair">
 																		<div class="info-label">Interpretation</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -992,9 +1003,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Translation</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>
 																				<tbody>
 																					<tr>
@@ -1006,9 +1017,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Transliteration</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>
 																				<tbody>
 																					<tr>
@@ -1030,20 +1041,20 @@
 												</div>
 												
 												
-												<div class="info-column1">
+												<div class="info-column">
 												
 													<div class="fl-container-flex fl-fix information-subgroup">
 														<div class="info-column">
-															<div class="fl-container-flex header" onclick="ShowHide('#toggle-description-information-inscription-description'); return false;">
+															<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-description-information-inscription-description'); return false;">
 																<span class="header-toggle-sub"><img id="toggle-description-information-inscription-description-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 																Inscription Description
 															</div>
-															<div class="fl-container-flex fl-fix content" id="toggle-description-information-inscription-description">
+															<div class="fl-container-flex fl-fix content main" id="toggle-description-information-inscription-description">
 																
 																<div class="info-column">
 																	<div class="info-pair">
 																		<div class="info-label">Inscription Description</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>
 																				<tbody>
 																					<tr>
@@ -1058,9 +1069,9 @@
 																</div>
 																
 																<div class="info-column2-50 fl-force-left">
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Inscriber</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -1072,9 +1083,9 @@
 																		</div>
 																	</div>
 																		
-																	<div class="info-pair-addrow info-pair-date">
+																	<div class="info-pair info-pair-date">
 																		<div class="info-label">Date</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -1091,7 +1102,7 @@
 																<div class="info-column2-50 fl-force-right">
 																	<div class="info-pair">
 																		<div class="info-label">Position</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>
 																				<tbody>
 																					<tr>
@@ -1104,9 +1115,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Type</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -1118,9 +1129,9 @@
 																		</div>
 																	</div>
 																	
-																	<div class="info-pair-addrow">
+																	<div class="info-pair">
 																		<div class="info-label">Method</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
@@ -1134,11 +1145,11 @@
 																	
 																</div>
 																
-																<div class="info-column1">
+																<div class="info-column">
 																
 																	<div class="info-pair">
 																		<div class="info-label">Interpretation</div>
-																		<div class="info-value">
+																		<div class="content">
 																			<table>
 																				<tbody>
 																					<tr>
@@ -1167,16 +1178,16 @@
 									
 									<div class="fl-container-flex fl-fix information-group">
 										<div class="info-column">
-											<div class="fl-container-flex header" onclick="ShowHide('#toggle-date-info'); return false;">
+											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-date-info'); return false;">
 												<span class="header-toggle"><img id="toggle-date-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 												Date Information
 											</div>
-											<div class="fl-container-flex fl-fix content" id="toggle-date-info">
+											<div class="fl-container-flex fl-fix content main" id="toggle-date-info">
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-left">
 													<div class="info-pair">
 														<div class="info-label">Date Association</div>
-														<div class="info-value">
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -1194,7 +1205,7 @@
 												<div class="info-column2-50 fl-force-right">															
 													<div class="info-pair">
 														<div class="info-label">Date Period</div>
-														<div class="info-value">
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -1208,10 +1219,10 @@
 													</div>	
 												</div>
 												
-												<div class="info-column1 fl-force-left">
-													<div class="info-pair-table">
+												<div class="info-column fl-force-left">
+													<div class="info-pair">
 														<div class="info-label">Date</div>
-														<div class="info-value">
+														<div class="content">
 															<table>
 																<thead>
 																	<tr>
@@ -1242,7 +1253,7 @@
 												
 													<div class="info-pair">
 														<div class="info-label">Date Text</div>
-														<div class="info-value">
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
