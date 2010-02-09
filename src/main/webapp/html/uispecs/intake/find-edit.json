@@ -1,23 +1,22 @@
 {
-    "spec": {
-        "items": {
-            "selector": ".csc-procedural-record-list-row",
-            "repeated": {
-                "summary": {
-                    "selector": ".csc-summary",
+    "items": {
+        "selector": ".csc-procedural-record-list-row",
+        "repeated": {
+            "summary": {
+                "selector": ".csc-summary",
+            },
+            "number": {
+                "selector": ".csc-entry-number",
+                "type": "link",
+				"href": "intake.html?csid=%csid",
+                "linktext": "%number",
+                "replacements": {
+                    "csid": "csid",
+                    "number": "number"
                 },
-                "number": {
-                    "selector": ".csc-entry-number",
-                    "type": "link",
-					"href": "intake.html?csid=%csid",
-                    "linktext": "%number",
-                    "replacements": {
-                        "csid": "csid",
-                        "number": "number"
-                    },
-                    "validators": [],
-                    "decorators": []
-                }
+                "validators": [],
+                "decorators": []
+            }
 //                "type": {
 //                    "selector": ".csc-type",
 //                    "validators": [],
@@ -33,10 +32,6 @@
 //                    "validators": [],
 //                    "decorators": []
 //                }
-            }
         }
-    },
-    "modelToResourceMap": {
-        "*": "/intake/"
     }
 }

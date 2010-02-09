@@ -56,7 +56,7 @@ var cspace = cspace || {};
 
     var createDataContextSetup = function (that) {
         return function (spec, textStatus) {
-            that.spec = spec.spec;
+            that.spec = spec;
 
             that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
 

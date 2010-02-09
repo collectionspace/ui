@@ -25,7 +25,7 @@ var cspace = cspace || {};
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {
-                    cspace.pageBuilder.uispec = data.spec;
+                    cspace.pageBuilder.uispec = data;
                     setUpPage();
                 },
                 error: function (xhr, textStatus, errorThrown) {
@@ -45,9 +45,8 @@ var cspace = cspace || {};
                     recordType: "objects"
                 }
             },
-            uiSpecUrl: isLocal ? 
-// CSPACE-701
-		    "./uispecs/collection-object/find-edit.json" : "../../chain/objects/uispec/find-edit"};
+            uiSpecUrl: "./uispecs/collection-object/find-edit.json"
+        };
         if (isLocal) {
             orOpts.dataContext = {
                 type: "cspace.dataContext",
@@ -66,8 +65,8 @@ var cspace = cspace || {};
                     recordType: "intake"
                 }
             },
-            uiSpecUrl: isLocal ? 
-		    "./uispecs/intake/find-edit.json" : "../../chain/intake/uispec/find-edit"};
+            uiSpecUrl:"./uispecs/intake/find-edit.json"
+        };
         if (isLocal) {
             prInOpts.dataContext = {
                 type: "cspace.dataContext",
@@ -86,8 +85,8 @@ var cspace = cspace || {};
                     recordType: "acquisition"
                 }
             },
-            uiSpecUrl: isLocal ?
-		    "./uispecs/acquisition/find-edit.json" : "../../chain/acquisition/uispec/find-edit"};
+            uiSpecUrl: "./uispecs/acquisition/find-edit.json"
+        };
         if (isLocal) {
             prAcqOpts.dataContext = {
                 type: "cspace.dataContext",
