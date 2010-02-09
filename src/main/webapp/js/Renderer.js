@@ -230,7 +230,7 @@ var cspace = cspace || {};
                 model: that.model,
 //                debugMode: true,
                 autoBind: true,
-                applier: that.applier
+                applier: that.options.applier
             };
             var cutpoints = buildCutpointsFromSpec(fullUISpec);            
             var tree = cspace.renderer.buildComponentTree(fullUISpec, that);
@@ -240,13 +240,10 @@ var cspace = cspace || {};
                     var templ = that.options.templates[key];
                     resources[key] = {
                         href: templ.url,
-//                        nodeId: templ.id,
                         cutpoints: cutpoints
                     };
                 }
             }
-//            fluid.fetchResources(resources,
-//                createTemplateRenderFunc(that, resources, tree, renderOptions));
             renderOptions.cutpoints = cutpoints;
             fluid.selfRender(that.container, tree, renderOptions);
             that.events.pageRendered.fire();

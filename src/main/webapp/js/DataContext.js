@@ -71,7 +71,7 @@ var cspace = cspace || {};
         that.updateModel = function (newModel, source) {
             var oldModel = {};
             fluid.model.copyModel(oldModel, that.model);
-            $.extend(true, that.model, newModel);
+            fluid.model.copyModel(that.model, newModel);
             that.events.modelChanged.fire(that.model, oldModel, source);
         };
         

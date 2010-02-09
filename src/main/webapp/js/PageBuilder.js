@@ -105,17 +105,17 @@ cspace = cspace || {};
         fluid.model.copyModel(that.uispec, cspace.pageBuilder.uispec);
         fluid.clear(cspace.pageBuilder.uispec);
 
+        that.model = {
+            csid: undefined,
+            fields: {},
+            relations: {}
+        };
         that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
         that.dataContext.events.afterFetch.addListener(setUpModel(that));
         that.dataContext.events.onError.addListener(function () {
             console.log("Error!");
         });
         
-        that.model = {
-            csid: undefined,
-            fields: {},
-            relations: {}
-        };
         fluid.model.copyModel(that.model, buildEmptyModelFromSpec(that.uispec));
         if (that.options.csid) {
             that.dataContext.fetch(that.options.csid);

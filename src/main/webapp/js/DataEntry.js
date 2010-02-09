@@ -30,7 +30,6 @@ var cspace = cspace || {};
             if (operation === "create") {
                 // This is only temporary until http://issues.collectionspace.org/browse/CSPACE-263
                 // is resolved
-                that.options.csid = undefined;
                 that.options.applier.requestChange("csid", undefined);
             }
         };
@@ -109,7 +108,6 @@ var cspace = cspace || {};
             that.events.afterCreateObjectDataSuccess.fire(data, that.options.strings.createSuccessfulMessage);
 	        displayTimestampedMessage(that, that.options.strings.createSuccessfulMessage, Date());
             that.unsavedChanges = false;
-            that.options.csid = data.csid;
         });
 
         that.options.dataContext.events.afterUpdate.addListener(function (data) {
@@ -174,11 +172,11 @@ var cspace = cspace || {};
 
         that.save = function () {
             that.events.onSave.fire(that.model);
-            if (that.options.csid) {
-                that.dataContext.update();
+            if (that.model.csid) {
+                that.options.dataContext.update();
             } else {
-                that.optons.applier.requestChange("csid", "");
-                that.dataContext.create();
+                that.options.applier.requestChange("csid", "");
+                that.options.dataContext.create();
             }
             return false;
         };
@@ -220,7 +218,6 @@ var cspace = cspace || {};
             defaultTermIndicator: " (default)",
             noDefaultInvitation: "-- Select an item from the list --"
         },
-        csid: null,
 		confirmationTemplateUrl: "../html/Confirmation.html",
         
         // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
