@@ -14,8 +14,15 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-    // Notes:
-    // the UISpec has been provided through JSONP, stored in cspace.pageBuilder.uispec
+    var buildEmptyModelFromSpec = function (spec) {
+        var model = {};
+        for (var key in spec) {
+            if (spec.hasOwnProperty(key)) {
+                fluid.model.setBeanValue(model, key, (spec[key].hasOwnProperty("repeated") ? [""] : ""));
+            }
+        }
+        return model;
+    };
 
     var injectElementsOfType = function (container, elementType, elements) {
         if (!elements || elements.length < 1) {
@@ -38,8 +45,13 @@ cspace = cspace || {};
             return;
         }
 
-        var headTag = docString.match(/<head(.|\s)*?\/head>/gi)[0],
-            bodyTag = docString.match(/<body(.|\s)*?\/body>/gi)[0];
+//        var headTag = docString.match(/<head(.|\s)*?\/head>/gi)[0];
+        var bodyTag = docString.match(/<body(.|\s)*?\/body>/gi);
+        if (bodyTag) {
+            bodyTag = bodyTag[0];
+        } else {
+            bodyTag = docString;
+        }
 // Currently, parsing the link and script tags is not working quite properly, so
 // for now, forego that process: assume the target HTML has everything you'd need
 //        var linkTags = [].concat(headTag.match(/<link(.|\s)*?\/>/gi)).concat(headTag.match(/<link(.|\s)*?\/link>/gi)),
@@ -50,17 +62,65 @@ cspace = cspace || {};
 //        injectElementsOfType(head, "script", scriptTags);
 
         var templateContainer = $("<div></div>").html(bodyTag);
-        container.html($(selector, templateContainer)); 
+        var templateContent = $(selector, templateContainer);
+        container.append($(selector, templateContainer)); 
     };
     
-    var setup = function (that) {
-        that.uispec = cspace.pageBuilder.uispec;
+    var expandOptions = function (pageBuilder, args) {
+        if (args.length !== 2) {
+            return;
+        }
+        var options = args[1];
+        for (var opt in options) {
+            if (options.hasOwnProperty(opt)) {
+                var val = options[opt];
+                if ((typeof(val) === "string") && (val.indexOf("{pageBuilder}") === 0)) {
+                    options[opt] = fluid.model.getBeanValue(pageBuilder, val.substring(14, val.length));
+                }
+            }
+        }
+    };
+
+    var invokeDependencies = function (that) {
         that.components = [];
         for (var region in that.dependencies) {
             if (that.dependencies.hasOwnProperty(region)) {
                 var dep = that.dependencies[region];
+                expandOptions(that, dep.args);
                 that.components[region] = fluid.invokeGlobalFunction(dep.funcName, dep.args);
             }
+        }
+    };
+
+    var setUpModel = function (that) {
+        return function (data, textStatus) {
+            fluid.model.copyModel(that.model, data);
+            that.applier = fluid.makeChangeApplier(that.model);
+            
+            invokeDependencies(that);
+        };
+    };
+
+    var setUpPageBuilder = function (that) {
+        fluid.model.copyModel(that.uispec, cspace.pageBuilder.uispec);
+        fluid.clear(cspace.pageBuilder.uispec);
+
+        that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
+        that.dataContext.events.afterFetch.addListener(setUpModel(that));
+        that.dataContext.events.onError.addListener(function () {
+            console.log("Error!");
+        });
+        
+        that.model = {
+            csid: undefined,
+            fields: {},
+            relations: {}
+        };
+        fluid.model.copyModel(that.model, buildEmptyModelFromSpec(that.uispec));
+        if (that.options.csid) {
+            that.dataContext.fetch(that.options.csid);
+        } else {
+            setUpModel(that)(that.model);
         }
     };
 
@@ -73,15 +133,17 @@ cspace = cspace || {};
                 }
                 
             }
-            setup(that);
+            setUpPageBuilder(that);
         });
 
     };
 
     cspace.pageBuilder = function (dependencies, options) {
         var that = {
-            dependencies: dependencies
+            dependencies: dependencies,
+            uispec: {}
         };
+
         if (options && options.container) {
             // not sure exactly what to do here, or what condition to check to decide to do it
             that = fluid.initView("cspace.pageBuilder", options.container, options);
@@ -92,10 +154,15 @@ cspace = cspace || {};
         if (options && options.pageSpec) {
             assembleHTML(that);
         } else {
-            setup(that);
+            setUpPageBuilder(that);
         }
     };
 
+    fluid.defaults("cspace.pageBuilder", {
+        dataContext: {
+            type: "cspace.dataContext"
+        }
+    });
 })(jQuery, fluid_1_2);
 
 

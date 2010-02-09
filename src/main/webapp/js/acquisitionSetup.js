@@ -23,5 +23,77 @@ var demo = demo || {};
         };
         var intake = cspace.dataEntrySetup("acquisition", pageSpec);
     };
+
+    cspace.acquisitionSetup = function () {
+
+        var setUpPage = function () {
+            var deOpts = {
+                dataContext: "{pageBuilder}.dataContext",
+                applier: "{pageBuilder}.applier",
+                uispec: "{pageBuilder}.uispec"
+            };
+            var sbOpts = {
+                applier: "{pageBuilder}.applier",
+                model: "{pageBuilder}.model.relations"
+            }
+    
+            var dependencies = {
+                dataEntry: {
+                    funcName: "cspace.dataEntry",
+                    args: [".csc-acquisition", deOpts]
+                },
+                sidebar: {
+                    funcName: "cspace.setupRightSidebar",
+                    args: [csid, sbOpts] // should be data as second param
+                }
+            };
+            var options = {
+                dataContext: {
+                    options: {
+                        recordType: "acquisition"
+                    }
+                },
+                pageSpec: {
+                    dateEntry: {
+                        href: "acquisitionTemplate.html",
+                        templateSelector: ".csc-acquisition-template",
+                        targetSelector: ".csc-acquisition-container"
+                    },
+                    sidebar: {
+                        href: "right-sidebar.html",
+                        templateSelector: ".csc-right-sidebar",
+                        targetSelector: ".csc-sidebar-container"
+                    }
+                }
+            };
+            var csid = cspace.util.getUrlParameter("csid");
+            if (csid) {
+                options.csid = csid;
+            }
+            if (cspace.util.isLocal()) {
+                options.dataContext.options.baseUrl = "data";
+                options.dataContext.options.fileExtension = ".json";
+            }
+            cspace.pageBuilder(dependencies, options);
+        };
+
+        if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
+            jQuery.ajax({
+                url: "./uispecs/acquisition/uispec.json",
+                type: "GET",
+                dataType: "json",
+                success: function (data, textStatus) {
+                    cspace.pageBuilder.uispec = data.spec;
+                    setUpPage();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("ERROR!");
+                }
+            });
+        } else {
+            setUpPage();
+        }
+    };
+    
 })(jQuery);
 

@@ -14,13 +14,86 @@ var demo = demo || {};
 
 (function ($) {
 
-    demo.setup = function () {
+/*    demo.setup = function () {
         var pageSpec = {
             href: "../html/ObjectEntryTemplate.html",
             templateID: "csc-object-entry-template",
             targetSelector: ".csc-object-entry-container"
         };
-        var intake = cspace.dataEntrySetup("objects", pageSpec);
+        var object = cspace.dataEntrySetup("objects", pageSpec);
+    };
+*/
+    cspace.objectSetup = function () {
+
+        var setUpPage = function () {
+            var deOpts = {
+                dataContext: "{pageBuilder}.dataContext",
+                applier: "{pageBuilder}.applier",
+                uispec: "{pageBuilder}.uispec"
+            };
+            var sbOpts = {
+                applier: "{pageBuilder}.applier",
+                model: "{pageBuilder}.model.relations"
+            }
+    
+            var dependencies = {
+                dataEntry: {
+                    funcName: "cspace.dataEntry",
+                    args: [".csc-object-entry", deOpts]
+                },
+                sidebar: {
+                    funcName: "cspace.setupRightSidebar",
+                    args: [csid, sbOpts] // should be data as second param
+                }
+            };
+            var options = {
+                dataContext: {
+                    options: {
+                        recordType: "objects"
+                    }
+                },
+                pageSpec: {
+                    dateEntry: {
+                        href: "ObjectEntryTemplate.html",
+                        templateSelector: ".csc-object-entry-template",
+                        targetSelector: ".csc-object-entry-container"
+                    },
+                    sidebar: {
+                        href: "right-sidebar.html",
+                        templateSelector: ".csc-right-sidebar",
+                        targetSelector: ".csc-sidebar-container"
+                    }
+                }
+            };
+            var csid = cspace.util.getUrlParameter("csid");
+            if (csid) {
+                options.csid = csid;
+            }
+            if (cspace.util.isLocal()) {
+                options.dataContext.options.baseUrl = "data";
+                options.dataContext.options.fileExtension = ".json";
+                // CSPACE-701
+                options.dataContext.options.recordType = "collection-object";
+            }
+            cspace.pageBuilder(dependencies, options);
+        };
+
+        if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
+            jQuery.ajax({
+                url: "./uispecs/collection-object/uispec.json",
+                type: "GET",
+                dataType: "json",
+                success: function (data, textStatus) {
+                    cspace.pageBuilder.uispec = data.spec;
+                    setUpPage();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("EROR!");
+                }
+            });
+        } else {
+            setUpPage();
+        }
     };
 })(jQuery);
 

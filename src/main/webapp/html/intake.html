@@ -43,6 +43,7 @@
 		<script type="text/javascript" src="../js/rightSidebarSetup.js"></script>
 		<script type="text/javascript" src="../js/Autocomplete.js"></script>
 		<script type="text/javascript" src="../js/DataEntry.js"></script>
+        <script type="text/javascript" src="../js/PageBuilder.js"></script>
 		<script type="text/javascript" src="../lib/goog/base.js"></script>
 		<script type="text/javascript">
             goog.require('goog.dom');
@@ -100,8 +101,10 @@
 			</div>
 			
 			<!-- add a 14px left &right border-->
-			<div class="fl-container-1024-inner csc-object-intake-container" id="csc-object-intake-template">
-				<!-- this div will be filled in with the contents of the Template -->
+			<div class="fl-container-1024-inner">
+                <!-- this div will be filled in with the contents of the Template -->
+                <div class="csc-object-intake-container">
+                </div>
 			</div> <!-- END inner padding div -->
 		
 			<!-- footer block -->
@@ -116,7 +119,7 @@
         </div>
 		
     	<script type="text/javascript">
-    		demo.setup();
+    		cspace.intakeSetup();
     	</script>
 	</body>
 </html>

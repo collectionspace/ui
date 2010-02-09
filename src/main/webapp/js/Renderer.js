@@ -23,7 +23,8 @@ var cspace = cspace || {};
 // if I better understand the issue at some point, I might find a better solution
                 if (resources.hasOwnProperty(key) && key !== "callbackCalled") {
                     var template = fluid.parseTemplates(resources, [key], {});
-                    fluid.reRender(template, fluid.byId(resources[key].nodeId), tree, opts);
+//                    fluid.reRender(template, fluid.byId(resources[key].nodeId), tree, opts);
+                    fluid.reRender(template, that.container, tree, opts);
                 }
             }
             that.events.pageRendered.fire();
@@ -159,7 +160,7 @@ var cspace = cspace || {};
                         children[index].children[j].decorators = fluid.transform(children[index].children[j].decorators, function (value, ind) {
                             if (value.func === "cspace.numberPatternChooser") {
                                 value.options = value.options || {};
-                                value.options.baseUrl = that.dataContext.baseUrl();
+                                value.options.baseUrl = that.options.dataContext.baseUrl();
                                 value.options.applier = that.applier;
                             }
                             return value;
@@ -197,7 +198,7 @@ var cspace = cspace || {};
                         children[index].decorators = fluid.transform(children[index].decorators, function (value, ind) {
                             if (value.func === "cspace.numberPatternChooser") {
                                 value.options = value.options || {};
-                                value.options.baseUrl = that.dataContext.baseUrl();
+                                value.options.baseUrl = that.options.dataContext.baseUrl();
                                 value.options.applier = that.applier;
                             }
                             return value;
@@ -239,13 +240,17 @@ var cspace = cspace || {};
                     var templ = that.options.templates[key];
                     resources[key] = {
                         href: templ.url,
-                        nodeId: templ.id,
+//                        nodeId: templ.id,
                         cutpoints: cutpoints
                     };
                 }
             }
-            fluid.fetchResources(resources,
-                createTemplateRenderFunc(that, resources, tree, renderOptions));
+//            fluid.fetchResources(resources,
+//                createTemplateRenderFunc(that, resources, tree, renderOptions));
+            renderOptions.cutpoints = cutpoints;
+            fluid.selfRender(that.container, tree, renderOptions);
+            that.events.pageRendered.fire();
+
         },
         
         renderRelatedRecords: function (that) {
