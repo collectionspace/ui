@@ -21,11 +21,12 @@ var demo = demo || {};
             var deOpts = {
                 dataContext: "{pageBuilder}.dataContext",
                 applier: "{pageBuilder}.applier",
-                uispec: "{pageBuilder}.uispec"
+                uispec: "{pageBuilder}.uispec.dataEntry"
             };
             var sbOpts = {
-                applier: "{pageBuilder}.applier",
-                model: "{pageBuilder}.model.relations"
+                relations: "{pageBuilder}.model.relations",
+                termsUsed: "{pageBuilder}.model.termsUsed",
+                uispec: "{pageBuilder}.uispec.sidebar"
             }
     
             var dependencies = {
@@ -34,8 +35,8 @@ var demo = demo || {};
                     args: [".csc-acquisition", deOpts]
                 },
                 sidebar: {
-                    funcName: "cspace.setupRightSidebar",
-                    args: [csid, sbOpts] // should be data as second param
+                    funcName: "cspace.sidebar",
+                    args: [".csc-sidebar", sbOpts]
                 }
             };
             var options = {

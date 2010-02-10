@@ -1,363 +1,415 @@
 {
-    "fields.entryNumber": {
-        "selector": ".csc-intake-entry-number",
-        "displayOnlySelectors": [".csc-titleBar-intake-entry-number"],
-        "validators": [],
-        "decorators": [{
-		    "type": "fluid",
-            "func": "cspace.numberPatternChooser",
-            "container": ".csc-intake-entry-number-container",
-            "options": {
-			    "selectors": {
-				    "numberField": ".csc-intake-entry-number"
-				},
-			    "model": {
-				    "list": ["intake", "study", "evaluations"],
-					"samples": ["IN2009.1", "ST2009.1", "EV2009.1"],
-					"names": ["Intake", "Study", "Evaluation"]
-				}
-			}
-        }]
+    "dataEntry": {
+        "fields.entryNumber": {
+            "selector": ".csc-intake-entry-number",
+            "displayOnlySelectors": [".csc-titleBar-intake-entry-number"],
+            "validators": [],
+            "decorators": [{
+    		    "type": "fluid",
+                "func": "cspace.numberPatternChooser",
+                "container": ".csc-intake-entry-number-container",
+                "options": {
+    			    "selectors": {
+    				    "numberField": ".csc-intake-entry-number"
+    				},
+    			    "model": {
+    				    "list": ["intake", "study", "evaluations"],
+    					"samples": ["IN2009.1", "ST2009.1", "EV2009.1"],
+    					"names": ["Intake", "Study", "Evaluation"]
+    				}
+    			}
+            }]
+        },
+        "fields.entryDate": {
+            "selector": ".csc-intake-entry-date",
+            "validators": [],
+            "decorators": [{
+    		    "type": "fluid",
+    			"func": "cspace.datePicker",
+    			"container": ".csc-intake-entry-date-container"
+    		}]
+        },
+        "fields.entryMethods": {
+            "selector": ".csc-intake-entry-method-row",
+    		"repeated": {
+    		    "entryMethod": {
+    		        "selector": ".csc-intake-entry-method",
+    		        "options": ["in-person", "post", "found-on-doorstep"],
+    		        "options-text": ["In person", "Post", "Found on doorstep"],
+    				"default": "0"
+    			}
+    		}
+        },
+        "fields.entryReason": {
+            "selector": ".csc-intake-entry-reason",
+            "options": ["enquiry", "commission", "loan"],
+            "options-text": ["Enquiry", "Commission", "Loan"],
+            "validators": [],
+            "decorators": []
+        },
+        "fields.returnDate": {
+            "selector": ".csc-intake-return-date",
+            "validators": [],
+            "decorators": [{
+    		    "type": "fluid",
+    			"func": "cspace.datePicker",
+    			"container": ".csc-intake-return-date-container"
+    		}]
+        },
+        "fields.currentOwner": {
+            "selector": ".csc-intake-current-owner",
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-intake-current-owner",
+                "options": {
+                    "url": "../../chain/intake/autocomplete/currentOwner"
+                }
+            }]
+        },
+        "fields.depositor": {
+            "selector": ".csc-intake-depositor",
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-intake-depositor",
+                "options": {
+                    "url": "../../chain/intake/autocomplete/depositor"
+                }
+            }]
+        },
+        "fields.depositorRequirements": {
+            "selector": ".csc-intake-depositor-requirements",
+            "validators": [],
+            "decorators": []
+        },
+        "fields.entryNote": {
+            "selector": ".csc-intake-entry-note",
+            "validators": [],
+            "decorators": []
+        },
+        "fields.packingNote": {
+            "selector": ".csc-intake-packing-note",
+            "validators": [],
+            "decorators": []
+        },
+    	
+    	
+    	"fields.associationDate": {
+            "selector": ".csc-intake-date-association",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.earliestDate": {
+            "selector": ".csc-intake-date-earliest-single",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.earliestDateCertainty": {
+            "selector": ".csc-intake-date-earliest-single-certainty",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.earliestDateQualifier": {
+            "selector": ".csc-intake-date-earliest-single-qualifier",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.latestDate": {
+            "selector": ".csc-intake-date-latest",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.latestDateCertainty": {
+            "selector": ".csc-intake-date-latest-certainty",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.latestDateQualifier": {
+            "selector": ".csc-intake-date-latest-qualifier",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.datePeriod": {
+            "selector": ".csc-intake-date-period",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.dateText": {
+            "selector": ".csc-intake-date-text",
+            "validators": [],
+            "decorators": []
+        },
+    	
+    	
+    	"fields.fieldCollectionDate": {
+            "selector": ".csc-intake-field-location-date",
+            "validators": [],
+            "decorators": [{
+    		    "type": "fluid",
+    			"func": "cspace.datePicker",
+    			"container": ".csc-intake-field-location-date-container"
+    		}]
+        },
+    	"fields.fieldCollectionEventName": {
+            "selector": ".csc-intake-field-collection-event-name",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.fieldCollectionEventRefNumber": {
+            "selector": ".csc-intake-field-collection-event-ref-number",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.fieldCollectionMethod": {
+            "selector": ".csc-intake-field-collection-method",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.fieldCollectionNote": {
+            "selector": ".csc-intake-field-collection-number",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.fieldCollectionNumber": {
+            "selector": ".csc-intake-field-collection-note",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.fieldCollectionPlace": {
+            "selector": ".csc-intake-field-collection-place",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.fieldCollectionSource": {
+            "selector": ".csc-intake-field-collection-source",
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-intake-field-collection-source",
+                "options": {
+                    "url": "../../chain/intake/autocomplete/fieldCollectionSource"
+                }
+            }]
+        },
+    	"fields.fieldCollector": {
+            "selector": ".csc-intake-field-collector",
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-intake-field-collector",
+                "options": {
+                    "url": "../../chain/intake/autocomplete/fieldCollector"
+                }
+            }]
+        },
+    	"fields.geologicalComplexName": {
+            "selector": ".csc-intake-geological-complex-name",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.habitat": {
+            "selector": ".csc-intake-habitat",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.habitatNote": {
+            "selector": ".csc-intake-habitat-note",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.stratigraphicUnitName": {
+            "selector": ".csc-intake-strat-name",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.stratigraphicUnitType": {
+            "selector": ".csc-intake-strat-type",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.stratigraphicUnitNote": {
+            "selector": ".csc-intake-strat-note",
+            "validators": [],
+            "decorators": []
+        },
+    	
+    	
+    	"fields.ValuationReferenceNumber": {
+            "selector": ".csc-intake-valuation-reference-number",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.Valuer": {
+            "selector": ".csc-intake-valuer",
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-intake-valuer",
+                "options": {
+                    "url": "../../chain/intake/autocomplete/Valuer"
+                }
+            }]
+        },
+    	
+    	
+    	"fields.insuranceNote": {
+            "selector": ".csc-intake-insurance-note",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.insurancePolicyNumber": {
+            "selector": ".csc-intake-insurance-policy-number",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.InsuranceReferenceNumber": {
+            "selector": ".csc-intake-insurance-reference-number",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.insuranceRenewalDate": {
+            "selector": ".csc-intake-insurance-renewal-date",
+            "validators": [],
+            "decorators": [{
+    		    "type": "fluid",
+    			"func": "cspace.datePicker",
+    			"container": ".csc-intake-insurance-renewal-date-container"
+    		}]
+        },
+    	"fields.insurer": {
+            "selector": ".csc-intake-insurer",
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-intake-insurer",
+                "options": {
+                    "url": "../../chain/intake/autocomplete/insurer"
+                }
+            }]
+        },
+    	
+    	
+    	"fields.currentLocation": {
+            "selector": ".csc-intake-current-location",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.currentLocationFitness": {
+            "selector": ".csc-intake-current-location-fitness",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.currentLocationNote": {
+            "selector": ".csc-intake-current-location-note",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.locationDate": {
+            "selector": ".csc-intake-location-date",
+            "validators": [],
+            "decorators": [{
+    		    "type": "fluid",
+    			"func": "cspace.datePicker",
+    			"container": ".csc-intake-location-date-container"
+    		}]
+        },
+    	"fields.normalLocation": {
+            "selector": ".csc-intake-normal-location",
+            "validators": [],
+            "decorators": []
+        },
+    	
+    	
+    	"fields.conditionCheckDate": {
+            "selector": ".csc-intake-condition-check-date",
+            "validators": [],
+            "decorators": [{
+    		    "type": "fluid",
+    			"func": "cspace.datePicker",
+    			"container": ".csc-intake-condition-check-date-container"
+    		}]
+        },
+    	"fields.conditionCheckMethod": {
+            "selector": ".csc-intake-condition-check-method",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.conditionCheckNote": {
+            "selector": ".csc-intake-condition-check-note",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.conditionCheckReason": {
+            "selector": ".csc-intake-condition-check-reason",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.conditionCheckReferenceNumber": {
+            "selector": ".csc-intake-condition-check-reference-number",
+            "validators": [],
+            "decorators": []
+        },
+    	"fields.conditionCheckAssesor": {
+            "selector": ".csc-intake-condition-check-assessor",
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-intake-condition-check-assessor",
+                "options": {
+                    "url": "../../chain/intake/autocomplete/conditionCheckAssesor"
+                }
+            }]
+        }
     },
-    "fields.entryDate": {
-        "selector": ".csc-intake-entry-date",
-        "validators": [],
-        "decorators": [{
-		    "type": "fluid",
-			"func": "cspace.datePicker",
-			"container": ".csc-intake-entry-date-container"
-		}]
-    },
-    "fields.entryMethods": {
-        "selector": ".csc-intake-entry-method-row",
-		"repeated": {
-		    "entryMethod": {
-		        "selector": ".csc-intake-entry-method",
-		        "options": ["in-person", "post", "found-on-doorstep"],
-		        "options-text": ["In person", "Post", "Found on doorstep"],
-				"default": "0"
-			}
-		}
-    },
-    "fields.entryReason": {
-        "selector": ".csc-intake-entry-reason",
-        "options": ["enquiry", "commission", "loan"],
-        "options-text": ["Enquiry", "Commission", "Loan"],
-        "validators": [],
-        "decorators": []
-    },
-    "fields.returnDate": {
-        "selector": ".csc-intake-return-date",
-        "validators": [],
-        "decorators": [{
-		    "type": "fluid",
-			"func": "cspace.datePicker",
-			"container": ".csc-intake-return-date-container"
-		}]
-    },
-    "fields.currentOwner": {
-        "selector": ".csc-intake-current-owner",
-        "decorators": [{
-            "type": "fluid",
-            "func": "cspace.autocomplete",
-            "container": ".csc-intake-current-owner",
-            "options": {
-                "url": "../../chain/intake/autocomplete/currentOwner"
+    "sidebar": {
+        "termsUsed": {},
+        "relatedObjects": {
+            "items": {
+                "selector": ".csc-related-row",
+                "repeated": {
+                    "summary": {
+                        "selector": ".csc-related-summary"
+                    },
+                    "number": {
+                        "selector": ".csc-related-number",
+                        "type": "link",
+                        "href": "%recordtype.html?csid=%csid",
+                        "linktext": "%number",
+                        "replacements": {
+                            "csid": "csid",
+                            "number": "number",
+                            "recordtype": "recordtype"
+                        }
+                    }
+                }
             }
-        }]
-    },
-    "fields.depositor": {
-        "selector": ".csc-intake-depositor",
-        "decorators": [{
-            "type": "fluid",
-            "func": "cspace.autocomplete",
-            "container": ".csc-intake-depositor",
-            "options": {
-                "url": "../../chain/intake/autocomplete/depositor"
+        },
+        "relatedProcedures": {
+            "items": {
+                "selector": ".csc-related-row",
+                "repeated": {
+                    "summary": {
+                        "selector": ".csc-related-summary"
+                    },
+                    "number": {
+                        "selector": ".csc-related-number",
+                        "type": "link",
+                        "href": "%recordtype.html?csid=%csid",
+                        "linktext": "%number",
+                        "replacements": {
+                            "csid": "csid",
+                            "number": "number",
+                            "recordtype": "recordtype"
+                        },
+                        "validators": [],
+                        "decorators": []
+                    },
+                    "recordtype": {
+                        "selector": ".csc-related-recordtype"
+                    }
+                }
             }
-        }]
-    },
-    "fields.depositorRequirements": {
-        "selector": ".csc-intake-depositor-requirements",
-        "validators": [],
-        "decorators": []
-    },
-    "fields.entryNote": {
-        "selector": ".csc-intake-entry-note",
-        "validators": [],
-        "decorators": []
-    },
-    "fields.packingNote": {
-        "selector": ".csc-intake-packing-note",
-        "validators": [],
-        "decorators": []
-    },
-	
-	
-	"fields.associationDate": {
-        "selector": ".csc-intake-date-association",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.earliestDate": {
-        "selector": ".csc-intake-date-earliest-single",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.earliestDateCertainty": {
-        "selector": ".csc-intake-date-earliest-single-certainty",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.earliestDateQualifier": {
-        "selector": ".csc-intake-date-earliest-single-qualifier",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.latestDate": {
-        "selector": ".csc-intake-date-latest",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.latestDateCertainty": {
-        "selector": ".csc-intake-date-latest-certainty",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.latestDateQualifier": {
-        "selector": ".csc-intake-date-latest-qualifier",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.datePeriod": {
-        "selector": ".csc-intake-date-period",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.dateText": {
-        "selector": ".csc-intake-date-text",
-        "validators": [],
-        "decorators": []
-    },
-	
-	
-	"fields.fieldCollectionDate": {
-        "selector": ".csc-intake-field-location-date",
-        "validators": [],
-        "decorators": [{
-		    "type": "fluid",
-			"func": "cspace.datePicker",
-			"container": ".csc-intake-field-location-date-container"
-		}]
-    },
-	"fields.fieldCollectionEventName": {
-        "selector": ".csc-intake-field-collection-event-name",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.fieldCollectionEventRefNumber": {
-        "selector": ".csc-intake-field-collection-event-ref-number",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.fieldCollectionMethod": {
-        "selector": ".csc-intake-field-collection-method",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.fieldCollectionNote": {
-        "selector": ".csc-intake-field-collection-number",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.fieldCollectionNumber": {
-        "selector": ".csc-intake-field-collection-note",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.fieldCollectionPlace": {
-        "selector": ".csc-intake-field-collection-place",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.fieldCollectionSource": {
-        "selector": ".csc-intake-field-collection-source",
-        "decorators": [{
-            "type": "fluid",
-            "func": "cspace.autocomplete",
-            "container": ".csc-intake-field-collection-source",
-            "options": {
-                "url": "../../chain/intake/autocomplete/fieldCollectionSource"
-            }
-        }]
-    },
-	"fields.fieldCollector": {
-        "selector": ".csc-intake-field-collector",
-        "decorators": [{
-            "type": "fluid",
-            "func": "cspace.autocomplete",
-            "container": ".csc-intake-field-collector",
-            "options": {
-                "url": "../../chain/intake/autocomplete/fieldCollector"
-            }
-        }]
-    },
-	"fields.geologicalComplexName": {
-        "selector": ".csc-intake-geological-complex-name",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.habitat": {
-        "selector": ".csc-intake-habitat",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.habitatNote": {
-        "selector": ".csc-intake-habitat-note",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.stratigraphicUnitName": {
-        "selector": ".csc-intake-strat-name",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.stratigraphicUnitType": {
-        "selector": ".csc-intake-strat-type",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.stratigraphicUnitNote": {
-        "selector": ".csc-intake-strat-note",
-        "validators": [],
-        "decorators": []
-    },
-	
-	
-	"fields.ValuationReferenceNumber": {
-        "selector": ".csc-intake-valuation-reference-number",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.Valuer": {
-        "selector": ".csc-intake-valuer",
-        "decorators": [{
-            "type": "fluid",
-            "func": "cspace.autocomplete",
-            "container": ".csc-intake-valuer",
-            "options": {
-                "url": "../../chain/intake/autocomplete/Valuer"
-            }
-        }]
-    },
-	
-	
-	"fields.insuranceNote": {
-        "selector": ".csc-intake-insurance-note",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.insurancePolicyNumber": {
-        "selector": ".csc-intake-insurance-policy-number",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.InsuranceReferenceNumber": {
-        "selector": ".csc-intake-insurance-reference-number",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.insuranceRenewalDate": {
-        "selector": ".csc-intake-insurance-renewal-date",
-        "validators": [],
-        "decorators": [{
-		    "type": "fluid",
-			"func": "cspace.datePicker",
-			"container": ".csc-intake-insurance-renewal-date-container"
-		}]
-    },
-	"fields.insurer": {
-        "selector": ".csc-intake-insurer",
-        "decorators": [{
-            "type": "fluid",
-            "func": "cspace.autocomplete",
-            "container": ".csc-intake-insurer",
-            "options": {
-                "url": "../../chain/intake/autocomplete/insurer"
-            }
-        }]
-    },
-	
-	
-	"fields.currentLocation": {
-        "selector": ".csc-intake-current-location",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.currentLocationFitness": {
-        "selector": ".csc-intake-current-location-fitness",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.currentLocationNote": {
-        "selector": ".csc-intake-current-location-note",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.locationDate": {
-        "selector": ".csc-intake-location-date",
-        "validators": [],
-        "decorators": [{
-		    "type": "fluid",
-			"func": "cspace.datePicker",
-			"container": ".csc-intake-location-date-container"
-		}]
-    },
-	"fields.normalLocation": {
-        "selector": ".csc-intake-normal-location",
-        "validators": [],
-        "decorators": []
-    },
-	
-	
-	"fields.conditionCheckDate": {
-        "selector": ".csc-intake-condition-check-date",
-        "validators": [],
-        "decorators": [{
-		    "type": "fluid",
-			"func": "cspace.datePicker",
-			"container": ".csc-intake-condition-check-date-container"
-		}]
-    },
-	"fields.conditionCheckMethod": {
-        "selector": ".csc-intake-condition-check-method",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.conditionCheckNote": {
-        "selector": ".csc-intake-condition-check-note",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.conditionCheckReason": {
-        "selector": ".csc-intake-condition-check-reason",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.conditionCheckReferenceNumber": {
-        "selector": ".csc-intake-condition-check-reference-number",
-        "validators": [],
-        "decorators": []
-    },
-	"fields.conditionCheckAssesor": {
-        "selector": ".csc-intake-condition-check-assessor",
-        "decorators": [{
-            "type": "fluid",
-            "func": "cspace.autocomplete",
-            "container": ".csc-intake-condition-check-assessor",
-            "options": {
-                "url": "../../chain/intake/autocomplete/conditionCheckAssesor"
-            }
-        }]
+        }
     }
 }

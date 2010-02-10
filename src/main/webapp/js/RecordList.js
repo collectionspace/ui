@@ -79,7 +79,11 @@ var cspace = cspace || {};
     };
 
     var setupRecordList = function (that) {
-        fetchUISpec(that, createDataContextSetup(that));
+        if (that.options.uispec) {
+            createDataContextSetup(that)(that.options.uispec);
+        } else {
+            fetchUISpec(that, createDataContextSetup(that));
+        }
     };
 
     cspace.recordList = function (container, options) {

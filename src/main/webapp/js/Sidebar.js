@@ -32,19 +32,19 @@ cspace = cspace || {};
     };
 
     cspace.sidebar = function (container, options) {
-        var that = fluid.initComponent("cspace.sidebar", container, options);
+        var that = fluid.initView("cspace.sidebar", container, options);
         
-        that.integratedAuthorities = initSubcomponent(that, "cspace.recordList",
-            [that.options.selectors.integratedAuthorities,
-             {data: that.options.termsUsed}]);
+        that.integratedAuthorities = cspace.recordList(that.options.selectors.integratedAuthorities,
+             {data: that.options.termsUsed,
+              uispec: that.options.uispec.termsUsed});
 
-        that.relatedRecords = initSubcomponent(that, "cspace.recordList",
-            [that.options.selectors.relatedRecords,
-             {data: buildRelationsList(that.options.relations, ["objects"])}]);
+        that.relatedObjects = cspace.recordList(that.options.selectors.relatedObjects,
+             {data: buildRelationsList(that.options.relations, ["objects"]),
+              uispec: that.options.uispec.relatedObjects});
 
-        that.relatedProcedures = initSubcomponent(that, "cspace.recordList",
-            [that.options.selectors.relatedProcedures,
-             {data: buildRelationsList(that.options.relations, ["intake", "acquisition"])}]);
+        that.relatedProcedures = cspace.recordList(that.options.selectors.relatedProcedures,
+             {data: buildRelationsList(that.options.relations, ["intake", "acquisition"]),
+              uispec: that.options.uispec.relatedProcedures});
 
         return that;
     };
@@ -53,9 +53,8 @@ cspace = cspace || {};
         selectors: {
             mediaSnapshot: ".csc-media-snapshot",
             integratedAuthorities: ".csc-integrated-authorities",
-            relatedRecords: ".csc-related-records",
-            relatedProcedures: ".csc-related-procedures",
-            relatedCollections: ".csc-related-collections"
+            relatedObjects: ".csc-related-objects",
+            relatedProcedures: ".csc-related-procedures"
         }
     });
 })(jQuery, fluid_1_2)
