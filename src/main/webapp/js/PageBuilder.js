@@ -14,16 +14,6 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var buildEmptyModelFromSpec = function (spec) {
-        var model = {};
-        for (var key in spec) {
-            if (spec.hasOwnProperty(key)) {
-                fluid.model.setBeanValue(model, key, (spec[key].hasOwnProperty("repeated") ? [""] : ""));
-            }
-        }
-        return model;
-    };
-
     var injectElementsOfType = function (container, elementType, elements) {
         if (!elements || elements.length < 1) {
             return;
@@ -94,9 +84,9 @@ cspace = cspace || {};
 
     var setUpModel = function (that) {
         return function (data, textStatus) {
-            fluid.model.copyModel(that.model, data);
-            that.model.relations = that.model.relations || {};
-            that.model.termsUsed = that.model.termsUsed || {};
+            that.model.fields = that.model.fields || {};
+            that.model.relations = that.model.relations || [];
+            that.model.termsUsed = that.model.termsUsed || [];
             that.model.csid = that.model.csid || null;
 
             that.applier = fluid.makeChangeApplier(that.model);
@@ -119,7 +109,7 @@ cspace = cspace || {};
         if (that.options.csid) {
             that.dataContext.fetch(that.options.csid);
         } else {
-            setUpModel(that)(buildEmptyModelFromSpec(that.uispec));
+            setUpModel(that)({});
         }
     };
 
