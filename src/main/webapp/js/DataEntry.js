@@ -171,12 +171,26 @@ var cspace = cspace || {};
         return selectors;
     };
 
+    // the protoExpander doesn't yet handle selections, so the tree it creates needs some adjustment
+    var fixSelections = function (tree) {
+        for (var i = 0; i < tree.children.length; i++) {
+            var comp = tree.children[i];
+            if (comp.selection) {
+                for (var j = 0; j < comp.optionlist.length; j++) {
+                    comp.optionlist[j] = comp.optionlist[j].value;
+                    comp.optionnames[j] = comp.optionnames[j].value;
+                }
+            }
+        }
+    };
+
     var renderPage = function (that) {
         var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
         var protoTree = {};
         fluid.model.copyModel(protoTree, that.uispec);
         addDecoratorOptionsToProtoTree(protoTree, that);
         var tree = expander(protoTree);
+        fixSelections(tree);
         var renderOpts = {
             cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(buildSelectorsFromUISpec(that.uispec), {}),
             model: that.model,
