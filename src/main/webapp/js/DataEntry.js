@@ -43,9 +43,9 @@ var cspace = cspace || {};
 
     var setupModel = function (that) {
         // check the spec for any model fields that need to be displayed in an extra field
-        for (var key in that.spec) {
-            if (that.spec.hasOwnProperty(key)) {
-                var modelfield = that.spec[key];
+        for (var key in that.uispec) {
+            if (that.uispec.hasOwnProperty(key)) {
+                var modelfield = that.uispec[key];
                 if (modelfield.hasOwnProperty("displayOnlySelectors")) {
                     var displayOnlySelectors = modelfield.displayOnlySelectors;
                     for (var i = 0, len = displayOnlySelectors.length; i < len; i++) {
@@ -76,11 +76,6 @@ var cspace = cspace || {};
 		
 		confirmation.parent().css("overflow", "visible");
         
-/*        fluid.fetchResources(resources, function () {
-            var templates = fluid.parseTemplates(resources, ["confirmation"], {});
-            fluid.reRender(templates, confirmation, {});
-        });
-*/        
 		$("a:not([href*=#])").live("click", function (e) {
             if (that.unsavedChanges) {
                 var href;
@@ -128,9 +123,9 @@ var cspace = cspace || {};
                 }
             }
 
-            for (var field in that.spec) {
-                if (that.spec.hasOwnProperty(field)) {
-                    var el = $(that.spec[field].selector);
+            for (var field in that.uispec) {
+                if (that.uispec.hasOwnProperty(field)) {
+                    var el = $(that.uispec[field].selector);
                     el.change(function () {
                         that.unsavedChanges = true;
                     });
@@ -148,18 +143,67 @@ var cspace = cspace || {};
         that.refreshView();
     };
     
+    // TODO: These protoTree processing functions should be combined so that all processing
+    // can be done in one pass
+    var addDecoratorOptionsToProtoTree = function (protoTree, that) {
+        for (var key in protoTree) {
+            if (protoTree.hasOwnProperty(key)) {
+                var entry = protoTree[key];
+                if (entry.decorators) {
+                    for (var i = 0; i < entry.decorators.length; i++) {
+                        var dec = entry.decorators[i];
+                        if (fluid.getGlobalValue(dec.func + ".getDecoratorOptions")) {
+                            $.extend(true, dec.options, fluid.invokeGlobalFunction(dec.func + ".getDecoratorOptions", [that]));
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    var buildSelectorsFromUISpec = function (uispec) {
+        var selectors = {};
+        for (var key in uispec) {
+            if (uispec.hasOwnProperty(key)) {
+                selectors[key] = key;
+            }
+        }
+        return selectors;
+    };
+
+    var renderPage = function (that) {
+        var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
+        var protoTree = {};
+        fluid.model.copyModel(protoTree, that.uispec);
+        addDecoratorOptionsToProtoTree(protoTree, that);
+        var tree = expander(protoTree);
+        var renderOpts = {
+            cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(buildSelectorsFromUISpec(that.uispec), {}),
+            model: that.model,
+            debugMode: true,
+            autoBind: true,
+            applier: that.options.applier
+        };
+        fluid.selfRender(that.container, tree, renderOpts);
+that.locate("save").click(that.save);
+    };
+
     /**
      * Object Entry component
      */
     cspace.dataEntry = function (container, options) {
         var that = fluid.initView("cspace.dataEntry", container, options);
         that.model = that.options.applier.model;
-        that.spec = that.options.uispec;
+        that.uispec = that.options.uispec;
         that.displayOnlyFields = {};
         that.unsavedChanges = false;
 
         that.refreshView = function () {
+if (container === ".csc-acquisition") {
+    renderPage(that);
+} else {
             cspace.renderer.renderPage(that);
+}
         };
         
         that.showSpecErrorMessage = function (msg) {

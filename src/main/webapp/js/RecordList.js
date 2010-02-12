@@ -56,7 +56,7 @@ var cspace = cspace || {};
 
     var createDataContextSetup = function (that) {
         return function (spec, textStatus) {
-            that.spec = spec;
+            that.uispec = spec;
 
             that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
 
@@ -91,7 +91,7 @@ var cspace = cspace || {};
         that.model = {
             items: []
         };
-        that.spec = {};
+        that.uispec = {};
 
         that.showErrorMessage = function (msg) {
             that.locate("errorMessage").text(msg).show();
@@ -99,8 +99,8 @@ var cspace = cspace || {};
 
         that.refreshView = function () {
             that.model.items = cleanUpRecordList(that.model.items);
-            var tree = cspace.renderer.buildComponentTree(that.spec, that);
-            var cutpoints = cspace.renderer.createCutpoints(that.spec);
+            var tree = cspace.renderer.buildComponentTree(that.uispec, that);
+            var cutpoints = cspace.renderer.createCutpoints(that.uispec);
             fluid.selfRender(that.container, tree, {cutpoints: cutpoints, model: that.model});
             that.locate("numberOfItems").text("(" + that.model.items.length + ")");
         };

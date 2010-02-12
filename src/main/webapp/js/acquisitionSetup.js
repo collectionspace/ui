@@ -71,7 +71,7 @@ var demo = demo || {};
 
         if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
             jQuery.ajax({
-                url: "./uispecs/acquisition/uispec.json",
+                url: "./uispecs/acquisition/uispec-proto.json",
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {
@@ -79,7 +79,7 @@ var demo = demo || {};
                     setUpPage();
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log("ERROR!");
+                    console.log("Error fetching acquisition uispec");
                 }
             });
         } else {

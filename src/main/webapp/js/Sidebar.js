@@ -34,7 +34,7 @@ cspace = cspace || {};
     cspace.sidebar = function (container, options) {
         var that = fluid.initView("cspace.sidebar", container, options);
         
-        that.integratedAuthorities = cspace.recordList(that.options.selectors.integratedAuthorities,
+        that.integratedAuthorities = cspace.recordList(that.options.selectors.termsUsed,
              {data: that.options.termsUsed,
               uispec: that.options.uispec.termsUsed});
 
@@ -52,7 +52,7 @@ cspace = cspace || {};
     fluid.defaults("cspace.sidebar", {
         selectors: {
             mediaSnapshot: ".csc-media-snapshot",
-            integratedAuthorities: ".csc-integrated-authorities",
+            termsUsed: ".csc-integrated-authorities",
             relatedObjects: ".csc-related-objects",
             relatedProcedures: ".csc-related-procedures"
         }

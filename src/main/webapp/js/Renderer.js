@@ -32,7 +32,7 @@ var cspace = cspace || {};
     };
     
     var buildFullUISpec = function (that) {
-        var fullUISpec = fluid.copy(that.spec);
+        var fullUISpec = fluid.copy(that.uispec);
         
         // This makes the assumption that 'save' exists. This should be configurable.
         fullUISpec.save = {

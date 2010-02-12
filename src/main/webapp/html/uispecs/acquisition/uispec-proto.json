@@ -1,0 +1,175 @@
+{
+"dataEntry": {
+        ".csc-acquisition-numberPatternChooser-reference-number": "${fields.acquReferenceNum}",
+        ".csc-acquisition-reference-number-patternChooserContainer": {
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.numberPatternChooser",
+                "container": ".csc-acquisition-reference-number-patternChooserContainer",
+                "options": {
+                    "selectors": {
+                        "numberField": ".csc-acquisition-numberPatternChooser-reference-number"
+                    },
+                    "model": {
+                        "list": ["objects", "archives", "library"],
+                        "samples": ["2009.1", "AR2009.42", "LIB2009.1"],
+                        "names": ["Accession", "Archives", "Library"]
+                    }
+                }
+            }]
+        },
+        ".csc-titleBar-acquisition-reference-number": "${fields.acquReferenceNum}",
+        ".csc-acquisition-date": "${fields.acquDate}",
+        ".csc-acquisition-acquisition-date-container": {
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.datePicker",
+                "container": ".csc-acquisition-acquisition-date-container"
+            }]
+        },
+        ".csc-acquisition-accession-date": "${fields.acquAccessionDate}",
+        ".csc-acquisition-accession-date-container": {
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.datePicker",
+                "container": ".csc-acquisition-accession-date-container"
+            }]
+        },
+        ".csc-acquisition-purchaser-price-description": "${fields.acquPriceDesc}",
+        ".csc-acquisition-purchase-price-type": "${fields.acquPriceType}",
+        ".csc-acquisition-purchaser-price-denomination": "${fields.acquPriceDenom}",
+        ".csc-acquisition-purchaser-price": "${fields.acquPrice}",
+        ".csc-acquisition-acquisition-funding-denomination": "${fields.acquFundingDenom}",
+        ".csc-acquisition-acquisition-funding-value": "${fields.acquFundingValue}",
+        ".csc-acquisition-acquisition-funding-source": "${fields.acquFundingSource}",
+        ".csc-acquisition-acquisition-funding-source-autocomplete": {
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-acquisition-acquisition-funding-source",
+                "options": {
+                    "url": "../../chain/acquisition/autocomplete/acquFundingSource"
+                }
+            }]
+        },
+        ".csc-acquisition-acquisition-funding-provisos": "${fields.acquFundingProviso}",
+        ".csc-acquisition-acquisition-method": "${fields.acquMethod}",
+        ".csc-acquisition-authorizer": "${fields.acquAuthorize}",
+        ".csc-acquisition-authorizer-autocomplete": {
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-acquisition-authorizer",
+                "options": {
+                    "url": "../../chain/acquisition/autocomplete/acquAuthorize"
+                }
+            }]
+        },
+        ".csc-acquisition-authorizer-date": "${fields.acquAuthorizeDate}",
+        ".csc-acquisition-authorizer-date-container": {
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.datePicker",
+                "container": ".csc-acquisition-authorizer-date-container"
+            }]
+        },
+        ".csc-acquisition-acquisition-source": "${fields.acquSource}",
+        ".csc-acquisition-acquisition-source-autocomplete": {
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-acquisition-acquisition-source",
+                "options": {
+                    "url": "../../chain/acquisition/autocomplete/acquSource"
+                }
+            }]
+        },
+        ".csc-acquisition-transfer-of-title-number": "${fields.acquTitleNum}",
+        ".csc-acquisition-acquisition-reason": "${fields.acquReason}",
+        ".csc-acquisition-acquisition-note": "${fields.acquNote}",
+        ".csc-acquisition-acquisition-provisos": "${fields.acquProviso}"
+    },
+    "sidebar": {
+        "termsUsed": {
+            "termRow:": {
+                "children": [
+                    {
+                        "term": "${termsUsed.0.number}",
+                        "type": "${termsUsed.0.recordType}",
+                        "field": "${termsUsed.0.field}"
+                    }
+                ]
+                }
+        },
+        "relatedProcedures": {
+            "procedureRow:": {
+                "children": [
+                    {
+                        "number": "${relations.0.number}",
+                        "type": "${relations.0.recordType}",
+                        "lastUpdate": "${relations.0.lastUpdate}"
+                    }
+                ]
+            }
+        },
+        "relatedObjects": {
+            "objectRow:": {
+                "children": [
+                    {
+                        "number": "${relations.0.number}",
+                        "summary": "${relations.0.summary}",
+                        "lastUpdate": "${relations.0.lastUpdate}"
+                    }
+                ]
+            }
+        }
+    }
+}
+
+
+/*
+var protoTree = {
+    "referenceNum": "${fields.acquReferenceNum}",
+    "date": "${fields.acquDate}",
+    "accessionDate": "${fields.acquAccessionDate}",
+    "priceDesc": "${fields.acquPriceDesc}",
+    "priceType": "${fields.acquPriceType}",
+    "priceDenom": "${fields.acquPriceDenom}",
+    "price": "${fields.acquPrice}",
+    "fundingDenom": "${fields.acquFundingDenom}",
+    "fundingValue": "${fields.acquFundingValue}",
+    "fundingSource": "${fields.acquFundingSource}",
+    "fundingProviso": "${fields.acquFundingProviso}",
+    "method": "${fields.acquMethod}",
+    "authorize": "${fields.acquAuthorize}",
+    "authorizeDate": "${fields.acquAuthorizeDate}",
+    "source": "${fields.acquSource}",
+    "titleNum": "${fields.acquTitleNum}",
+    "reason": "${fields.acquReason}",
+    "note": "${fields.acquNote}",
+    "proviso": "${fields.acquProviso}"
+}
+var selectors = {
+    "referenceNum": ".csc-acquisition-numberPatternChooser-reference-number",
+    "date": ".csc-acquisition-date",
+    "accessionDate": ".csc-acquisition-accession-date",
+    "priceDesc": ".csc-acquisition-purchaser-price-description",
+    "priceType": ".csc-acquisition-purchase-price-type",
+    "priceDenom": ".csc-acquisition-purchaser-price-denomination",
+    "price": ".csc-acquisition-purchaser-price",
+    "fundingDenom": ".csc-acquisition-acquisition-funding-denomination",
+    "fundingValue": ".csc-acquisition-acquisition-funding-value",
+    "fundingSource": ".csc-acquisition-acquisition-funding-source",
+    "fundingProviso": ".csc-acquisition-acquisition-funding-provisos",
+    "method": ".csc-acquisition-acquisition-method",
+    "authorize": ".csc-acquisition-authorizer",
+    "authorizeDate": ".csc-acquisition-authorizer-date",
+    "source": ".csc-acquisition-acquisition-source",
+    "titleNum": ".csc-acquisition-transfer-of-title-number",
+    "reason": ".csc-acquisition-acquisition-reason",
+    "note": ".csc-acquisition-acquisition-note",
+    "proviso": ".csc-acquisition-acquisition-provisos"
+}
+var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
+var tree = expander(protoTree);
+*/
