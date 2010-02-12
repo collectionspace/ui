@@ -125,7 +125,7 @@ td textarea {border:none;}
 /* secondary navigation menu */
 #secondary-nav {padding-bottom:6px; clear:both;}
 #secondary-nav.pivot {padding-bottom:0;}
-#secondary-nav-menu {paddin g-top:6px; width:100%; mar gin-top:3px; heig ht:21px;}
+#secondary-nav-menu {padding-top:6px; width:100%; margin-top:3px; height:21px;}
 #secondary-nav-menu .menu-record, #secondary-nav.pivot .menu-record {display:block; font-family:arial,helvetica,sans-serif; 
 	list-style-type:none; margin:0; padding:0; white-space:nowrap;}
 #secondary-nav.pivot .menu-record {width:100%;}
@@ -217,7 +217,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .info-column2-50 {width:  49%;}
 .info-column2-60 {width:  59%;}
 .info-column2-70 {width:  69%;}
-.info-column3 	 {width:  32%;}
+.info-column3 	 {width:  33%;}
 
 .fl-container-1024   {min-width: 1084px;}
 .fl-container-900     {width:  900px;}
@@ -243,11 +243,12 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 	{border: none; /*padding: 0 0 10px 10px;*/ padding: 0 0 10px 0;}
 .login-outer-border {border: none; padding:40px 0 10px 0px;}
 
-.fl-container-left .information-group .info-pair .header {padding:0; margin:0; background-color:#fff; color:#000; cursor:default;}
-.info-label, .info-pair .label {/*width:100%;*/ float:left; padding-bottom:4px; font-weight:bold; color:# 0F75BC; font-size:11px; line-height:11px;}
+.info-pair .header {padding:0; margin:0; background-color:#fff; color:#000; cursor:default;}
+.info-label, .info-pair .label, .info-pair-date .label {/*width:100%;*/ float:left; padding-bottom:4px; font-weight:bold; color:# 0F75BC; font-size:11px; line-height:11px;}
 .info-pair .content td.label {float:none; padding-bottom:0px; font-weight:normal; font-size:inherit; line-height:inherit;}
-.info-value, .info-pair .content {width:100%; float:left; border:none; padding:0;}
-.info-value table, .info-pair .content table {width:100%; border-spacing:0; background-color:#FFF; margin-top:0px; border:2px solid #C7CFD4; padding:0;}
+.info-value, .info-pair .content, .info-pair-date .content {width:100%; float:left; border:none;}
+.info-value table, .info-pair .content table, .info-pair-date .content table {width:100%; border-spacing:0; background-color:#FFF; margin-top:0px; border:2px solid #C7CFD4; padding:0;}
+.info-pair-date .content table {width:auto;}
 .info-value thead tr , .info-pair .content thead tr {}
 .info-value thead td, .info-pair .content thead td {border:1px solid #C7CFD4;  border-top:1px solid #C7CFD4; background-color:#F8F8F7; color:#3B3B3C; padding: 2px 2px 2px 2px; font-size:11px; line-height: 11px;}
 .info-value tbody tr, .info-pair .content tbody tr {}
@@ -334,7 +335,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .input-date	 		   {width: 142px !important; padding-left:2px;}
 table.input-date	 	   {padding-left:2px;}
 .input-money-amount	   {width: 120px !important;}
-.input-select		   {width: auto; height:20px; *height:23px;}
+.input-select		   {width: auto; height:23px; *height:23px;}
 table .input-select         {width: auto; height:18px; *height:22px; padding-top:0; border:none;}
 .input-textarea		   {/*width: 99.5%;*/ width:100%; height:73px; *height:73px;}
 .input-alpha-login       {width: 120px; height:18px;}
