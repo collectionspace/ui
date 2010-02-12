@@ -76,13 +76,13 @@
 												<div class="info-column2-50 fl-force-left" >
 													
 													<div class="info-pair">
-														<div class="info-label">Intake Entry Number</div>
-														<div class="info-value csc-intake-entry-number-container"><input type="text" class="input-alpha csc-intake-entry-number pattern-chooser-input" /></div>
+														<div class="label">Intake Entry Number</div>
+														<div class="content csc-intake-entry-number-container"><input type="text" class="input-alpha csc-intake-entry-number pattern-chooser-input" /></div>
 													</div>
 													
 													<div class="info-pair-date">
-														<div class="info-label">Entry Date</div>
-														<div class="info-value csc-intake-entry-date-container">
+														<div class="label">Entry Date</div>
+														<div class="content csc-intake-entry-date-container">
 															<table>
 																<tbody>
 																	<tr>
@@ -94,15 +94,19 @@
 														</div>													
 													</div>
 													
-													<div class="info-pair-termlist">
-														<div class="info-label">Entry Reason</div>
-														<div class="info-value"><select class="csc-intake-entry-reason input-select" /></div>
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Entry Reason</div>
+														</div>
+														<div class="content"><select class="csc-intake-entry-reason input-select" /></div>
 													</div>
 													
-													<div class="info-pair-termlist">
-														<div class="info-label">Entry Method</div>
-														<div class="info-value">
-															<table id="addrow-entry-method" >										
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Entry Method</div>
+														</div>
+														<div class="content">
+															<table id="addrow-entry-method" style="width:auto;">										
 																<tbody>
 																	<tr class="csc-intake-entry-method-row">
 																		<!--<td class="table-unselected"></td>-->
@@ -117,8 +121,10 @@
 												
 												<div class="info-column2-50 fl-force-right">
 													<div class="info-pair-date">
-														<div class="info-label">Return Date</div>
-														<div class="info-value csc-intake-return-date-container">
+														<div class="header">
+															<div class="label">Return Date</div>
+														</div>
+														<div class="content csc-intake-return-date-container">
 															<table>
 																<tbody>
 																	<tr>
@@ -131,8 +137,10 @@
 													</div>
 
 													<div class="info-pair">
-														<div class="info-label">Current Owner</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Current Owner</div>
+														</div>
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -141,13 +149,14 @@
 																	</tr>
 																</tbody>
 															</table>
-															<!--<input type="text" class="input-autocomplete csc-intake-current-owner" name="intake-current-owner" />-->
 														</div>
 													</div>
 													
-													<div class="info-pair-table">
-														<div class="info-label">Depositor</div>
-														<div class="info-value">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Depositor</div>
+														</div>
+														<div class="content">
 															<table id="" >
 																<thead>
 																	<tr>
@@ -171,8 +180,10 @@
 												
 												<div class="info-column fl-force-left">
 													<div class="info-pair">
-														<div class="info-label">Entry Note</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Entry Note</div>
+														</div>
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -181,13 +192,14 @@
 																	</tr>
 																</tbody>
 															</table>
-															<!--<textarea class="input-textarea csc-intake-entry-note" name="intake-entry-note" />-->
 														</div>
 													</div>
 												
 													<div class="info-pair">
-														<div class="info-label">Packing Note</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Packing Note</div>
+														</div>
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -196,7 +208,6 @@
 																	</tr>
 																</tbody>
 															</table>
-															<!--<textarea class="input-textarea csc-intake-packing-note" name="intake-packing-note" />-->
 														</div>
 													</div>
 												</div>
@@ -217,8 +228,10 @@
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-left">
 													<div class="info-pair">
-														<div class="info-label">Date Association</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Date Association</div>
+														</div>
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -227,7 +240,6 @@
 																	</tr>
 																</tbody>
 															</table>
-															<!--<input type="text" class="input-alpha csc-intake-date-association" name="intake-date-association" />-->
 														</div>
 													</div>	
 												</div>
@@ -235,8 +247,10 @@
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-right">															
 													<div class="info-pair">
-														<div class="info-label">Date Period</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Date Period</div>
+														</div>
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -245,7 +259,6 @@
 																	</tr>
 																</tbody>
 															</table>
-															<!--<input type="text" class="input-alpha csc-intake-date-period" name="intake-date-period" />-->
 														</div>
 													</div>	
 												</div>
@@ -253,9 +266,11 @@
 												<div class="clear"></div>
 												
 												<div class="info-column fl-force-left">
-													<div class="info-pair-table">
-														<div class="info-label" title="">Date</div>
-														<div class="info-value">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Date</div>
+														</div>
+														<div class="content">
 															<table>
 																<thead>
 																	<tr>
@@ -285,8 +300,10 @@
 													</div>
 												
 													<div class="info-pair">
-														<div class="info-label">Date Text</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Date Text</div>
+														</div>
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -295,7 +312,6 @@
 																	</tr>
 																</tbody>
 															</table>
-															<!--<textarea class="input-textarea csc-intake-date-text" name="intake-field-date-text" />-->
 														</div>
 													</div>
 												</div>
@@ -317,8 +333,10 @@
 												<div class="info-column2-50 fl-force-left">
 													
 													<div class="info-pair-date">
-														<div class="info-label">Field Collection Date</div>
-														<div class="info-value csc-intake-field-location-date-container">
+														<div class="header">
+															<div class="label">Field Collection Date</div>
+														</div>
+														<div class="content csc-intake-field-location-date-container">
 															<table>
 																<tbody>
 																	<tr>
@@ -331,8 +349,10 @@
 													</div>
 													
 													<div class="info-pair">
-														<div class="info-label">Field Collection Event Name</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Field Collection Event Name</div>
+														</div>
+														<div class="content">
 															<table id="addrow-entry-method">										
 																<tbody>
 																	<tr>
@@ -343,40 +363,17 @@
 															</table>
 														</div>											
 													</div>
-													<!--
-													<div class="info-pair">
-														<div class="info-label">Field Collection Event Reference Number</div>
-														<div class="info-value"><input type="text" class="input-numeric-medium csc-intake-field-collection-event-ref-number" name="intake-field-collection-event-ref-number" /></div>
-													</div>
 													
-													<div class="info-pair">
-														<div class="info-label">Field Collection Source</div>
-														<div class="info-value"><input type="text" class="input-alpha csc-intake-field-collection-source" name="current-intake-field-collection-source" /></div>
-													</div>
-													
-													<div class="info-pair">
-														<div class="info-label">Field Collection Method</div>
-														<div class="info-value">
-															<table id="addrow-entry-method">										
-																<tbody>
-																	<tr>
-																		<td class="table-unselected"></td>
-																		<td><input type="text" class="input-alpha-table csc-intake-field-collection-method" name="intake-field-collection-method" /></td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-														
-													</div>
-													-->
 													
 												</div>
 												
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-right">
 													<div class="info-pair">
-														<div class="info-label">Field Collection Number</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Field Collection Number</div>
+														</div>
+														<div class="content">
 															<table id="addrow-entry-method">										
 																<tbody>
 																	<tr>
@@ -385,13 +382,14 @@
 																	</tr>
 																</tbody>
 															</table>
-															<!--<input type="text" class="input-numeric csc-intake-field-collection-number" name="current-intake-field-collection-number" />-->
 														</div>
 													</div> 
 													
 													<div class="info-pair">
-														<div class="info-label">Field Collector</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Field Collector</div>
+														</div>
+														<div class="content">
 															<table id="addrow-entry-method">										
 																<tbody>
 																	<tr>
@@ -403,82 +401,10 @@
 														</div>
 														
 													</div>
-													<!--
-													<div class="info-pair">
-														<div class="info-label">Field Collection Place</div>
-														<div class="info-value"><input type="text" class="input-alpha csc-intake-field-collection-place" name="intake-current-field-collection-place" /></div>
-													</div>
 													
-													<div class="info-pair">
-														<div class="info-label">Geological Complex Name</div>
-														<div class="info-value">
-															<table id="addrow-entry-method">										
-																<tbody>
-																	<tr>
-																		<td class="table-unselected"></td>
-																		<td><input type="text" class="input-alpha-table csc-intake-geological-complex-name" name="intake-geological-complex-name" /></td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-														
-													</div>
-													
-													<div class="info-pair">
-														<div class="info-label">Habitat</div>
-														<div class="info-value">
-															<table id="addrow-entry-method">										
-																<tbody>
-																	<tr>
-																		<td class="table-unselected"></td>
-																		<td><input type="text" class="input-alpha-table csc-intake-habitat" name="intake-habitat" /></td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-														
-													</div>
-													-->
 												</div>
 												
-												<!--
-												<div class="info-column fl-force-left">
-													<div class="info-pair">
-														<div class="info-label">Stratagraphic Unit</div>
-														<div class="info-value">
-															<table id="" >
-																<thead>
-																	<tr>
-																		<td class="table-select"></td>
-																		<td>Name</td>
-																		<td>Type</td>
-																		<td>Note</td>
-																	</tr>
-																</thead>
-																	
-																<tbody>
-																	<tr>
-																		<td class="table-unselected"></td>
-																		<td><input type="text" class="input-alpha-table csc-intake-strat-name" name="intake-strat-name" /></td>
-																		<td><input type="text" class="input-alpha-table csc-intake-strat-type" name="intake-strat-type" /></td>
-																		<td><input type="text" class="input-alpha-table csc-intake-strat-note" name="intake-strat-note" /></td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-													</div>
-													
-													<div class="info-pair">
-														<div class="info-label">Field Collection Note</div>
-														<div class="info-value"><input class="input-textarea csc-intake-field-collection-note" name="intake-field-collection-note" /></div>
-													</div>
-													
-													<div class="info-pair">
-														<div class="info-label">Habitat Note</div>
-														<div class="info-value"><input class="input-textarea csc-intake-habitat-note" name="intake-habitat-note" cols=30 rows=4 /></div>
-													</div>	
-												</div>
-												-->
+												
 												
 												<div class="clear"></div>
 											</div>
@@ -497,8 +423,10 @@
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-left">
 													<div class="info-pair">
-														<div class="info-label">Valuer</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Valuer</div>
+														</div>
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -507,15 +435,16 @@
 																	</tr>
 																</tbody>
 															</table>
-															<!--<input type="text" class="input-autocomplete csc-intake-valuer" name="intake-valuer" />-->
 														</div>
 													</div>
 												</div>
 
 												<div class="info-column2-50 fl-force-right">
 													<div class="info-pair">
-														<div class="info-label">Reference Number</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Reference Number</div>
+														</div>
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -524,7 +453,6 @@
 																	</tr>
 																</tbody>
 															</table>
-															<!--<input type="text" class="input-alpha csc-intake-valuation-reference-number" name="intake-valuation-reference-number" />-->
 														</div>
 													</div>	
 												</div>
@@ -545,8 +473,10 @@
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-left">
 													<div class="info-pair">
-														<div class="info-label">Insurer</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Insurer</div>
+														</div>
+														<div class="content">
 															<table>										
 																<tbody>
 																	<tr>
@@ -556,12 +486,13 @@
 																</tbody>
 															</table>
 														</div>
-														<!--<div class="addrow"><img src="../images/addarow.png" alt="add a row" title="click to add an additional row" height=15 width=88 /></div>-->
 													</div>	
 													
 													<div class="info-pair">
-														<div class="info-label">Policy Number</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Policy Number</div>
+														</div>
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -570,13 +501,14 @@
 																	</tr>
 																</tbody>
 															</table>
-															<!--<input type="text" class="input-alpha csc-intake-insurance-policy-number" />-->
 														</div>
 													</div>	
 
 													<div class="info-pair-date">
-														<div class="info-label">Renewal Date</div>
-														<div class="info-value csc-intake-insurance-renewal-date-container">
+														<div class="header">
+															<div class="label">Renewal Date</div>
+														</div>
+														<div class="content csc-intake-insurance-renewal-date-container">
 															<table>
 																<tbody>
 																	<tr>
@@ -592,8 +524,10 @@
 												<!-- Right-side column -->
 												<div class="info-column2-50 fl-force-right">
 													<div class="info-pair">
-														<div class="info-label">Reference Number</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Reference Number</div>
+														</div>
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -602,13 +536,14 @@
 																	</tr>
 																</tbody>
 															</table>
-															<!--<input type="text" class="input-alpha csc-intake-insurance-reference-number" name="intake-insurance-reference-number" />-->
 														</div>
 													</div>	
 													
 													<div class="info-pair">
-														<div class="info-label">Insurance Note</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Insurance Note</div>
+														</div>
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -617,7 +552,6 @@
 																	</tr>
 																</tbody>
 															</table>
-															<!--<textarea class="input-textarea csc-intake-insurance-note" name="intake-insurance-note" />-->
 														</div>
 													</div>
 												</div>
@@ -637,9 +571,11 @@
 											<div class="fl-container-flex fl-fix content main" id="toggle-location" >
 												<!-- Left-side column -->
 												<div class="info-column fl-force-left">
-													<div class="info-pair-table">
-														<div class="info-label">Current Location</div>
-														<div class="info-value">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Current Location</div>
+														</div>
+														<div class="content">
 															<table id="" >
 																<thead>
 																	<tr>
@@ -666,8 +602,10 @@
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-left">
 													<div class="info-pair-date">
-														<div class="info-label">Location Date</div>
-														<div class="info-value csc-intake-location-date-container">
+														<div class="header">
+															<div class="label">Location Date</div>
+														</div>
+														<div class="content csc-intake-location-date-container">
 															<table>
 																<tbody>
 																	<tr>
@@ -682,8 +620,10 @@
 												
 												<div class="info-column2-50 fl-force-right">
 													<div class="info-pair">
-														<div class="info-label">Normal Location</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Normal Location</div>
+														</div>
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -692,7 +632,6 @@
 																	</tr>
 																</tbody>
 															</table>
-															<!--<input type="text" class="input-alpha csc-intake-normal-location" name="intake-normal-location" />-->
 														</div>
 													</div>
 												</div>
@@ -713,8 +652,10 @@
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-left">
 													<div class="info-pair">
-														<div class="info-label">Condition Check Method</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Condition Check Method</div>
+														</div>
+														<div class="content">
 															<table>										
 																<tbody>
 																	<tr>
@@ -724,12 +665,13 @@
 																</tbody>
 															</table>
 														</div>
-														<!--<div class="addrow"><img src="../images/addarow.png" alt="add a row" title="click to add an additional row" height=15 width=88 /></div>-->
 													</div>
 													
 													<div class="info-pair">
-														<div class="label">Condition Check Reason</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Condition Check Reason</div>
+														</div>
+														<div class="content">
 															<table>										
 																<tbody>
 																	<tr>
@@ -739,12 +681,13 @@
 																</tbody>
 															</table>
 														</div>
-														<!--<div class="addrow"><img src="../images/addarow.png" alt="add a row" title="click to add an additional row" height=15 width=88 /></div>-->
 													</div>
 													
 													<div class="info-pair">
-														<div class="info-label">Condition Check Assessor</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Condition Check Assessor</div>
+														</div>
+														<div class="content">
 															<table>										
 																<tbody>
 																	<tr>
@@ -754,14 +697,15 @@
 																</tbody>
 															</table>
 														</div>
-														<!--<div class="addrow"><img src="../images/addarow.png" alt="add a row" title="click to add an additional row" height=15 width=88 /></div>-->
 													</div>
 												</div>
 												
 												<div class="info-column2-50 fl-force-right">
 													<div class="info-pair-date">
-														<div class="info-label">Condition Check Date</div>
-														<div class="info-value csc-intake-condition-check-date-container">
+														<div class="header">
+															<div class="label">Condition Check Date</div>
+														</div>
+														<div class="content csc-intake-condition-check-date-container">
 															<table>
 																<tbody>
 																	<tr>
@@ -774,8 +718,10 @@
 													</div>
 													
 													<div class="info-pair">
-														<div class="info-label">Condition Check Reference Number</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Condition Check Reference Number</div>
+														</div>
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -784,7 +730,6 @@
 																	</tr>
 																</tbody>
 															</table>
-															<!--<input class="input-alpha csc-intake-condition-check-reference-number" name="intake-condition-check-reference-number" />-->
 														</div>
 													</div>
 													
@@ -794,8 +739,10 @@
 												
 												<div class="info-column fl-force-left">
 													<div class="info-pair">
-														<div class="info-label">Condition Check Note</div>
-														<div class="info-value">
+														<div class="header">
+															<div class="label">Condition Check Note</div>
+														</div>
+														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
@@ -804,7 +751,6 @@
 																	</tr>
 																</tbody>
 															</table>
-															<!--<textarea class="input-textarea csc-intake-condition-check-note" name="intake-condition-check-note" />-->
 														</div>
 													</div>
 												</div>
@@ -831,6 +777,7 @@
 									<div class="clear"></div>
 								</div>
 							</div> <!-- END left-side container -->
+                                                       </div>
 
 						</div><!-- END left-side container -->
 						
