@@ -35,7 +35,6 @@
                 "container": ".csc-acquisition-accession-date-container"
             }]
         },
-        ".csc-acquisition-purchaser-price-description": "${fields.acquPriceDesc}",
         ".csc-acquisition-purchase-price-type": "${fields.acquPriceType}",
         ".csc-acquisition-purchaser-price-denomination": "${fields.acquPriceDenom}",
         ".csc-acquisition-purchaser-price": "${fields.acquPrice}",

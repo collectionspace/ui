@@ -160,26 +160,35 @@ var cspace = cspace || {};
             }
         }
     };
-
-    var buildSelectorsFromUISpec = function (uispec) {
-        var selectors = {};
+    
+    var buildSelectorsFromUISpec = function (uispec, selectors) {
         for (var key in uispec) {
             if (uispec.hasOwnProperty(key)) {
-                selectors[key] = key;
+                selectors[key] = (key.indexOf(":") === key.length-1 ? key.substring(0, key.length-1) : key);
+            }
+            if (uispec[key].children) {
+                for (var i = 0; i < uispec[key].children.length; i++) {
+                    buildSelectorsFromUISpec(uispec[key].children[i], selectors);
+                }
             }
         }
-        return selectors;
     };
 
     // the protoExpander doesn't yet handle selections, so the tree it creates needs some adjustment
-    var fixSelections = function (tree) {
+    var fixSelectionsInTree = function (tree) {
         for (var i = 0; i < tree.children.length; i++) {
-            var comp = tree.children[i];
-            if (comp.selection) {
-                for (var j = 0; j < comp.optionlist.length; j++) {
-                    comp.optionlist[j] = comp.optionlist[j].value;
-                    comp.optionnames[j] = comp.optionnames[j].value;
-                }
+            fixSelections(tree.children[i]);
+        }
+    };
+    var fixSelections = function (comp) {
+        if (comp.selection) {
+            for (var j = 0; j < comp.optionlist.length; j++) {
+                comp.optionlist[j] = comp.optionlist[j].value;
+                comp.optionnames[j] = comp.optionnames[j].value;
+            }
+        } else if (comp.children) {
+            for (var i = 0; i < comp.children.length; i++) {
+                fixSelections(comp.children[i]);
             }
         }
     };
@@ -191,8 +200,10 @@ var cspace = cspace || {};
         addDecoratorOptionsToProtoTree(protoTree, that);
         var tree = expander(protoTree);
         fixSelections(tree);
+        var selectors = {};
+        buildSelectorsFromUISpec(that.uispec, selectors);
         var renderOpts = {
-            cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(buildSelectorsFromUISpec(that.uispec), {}),
+            cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(selectors, {}),
             model: that.model,
             debugMode: true,
             autoBind: true,
@@ -213,11 +224,7 @@ that.locate("save").click(that.save);
         that.unsavedChanges = false;
 
         that.refreshView = function () {
-if (container === ".csc-acquisition") {
-    renderPage(that);
-} else {
-            cspace.renderer.renderPage(that);
-}
+            renderPage(that);
         };
         
         that.showSpecErrorMessage = function (msg) {

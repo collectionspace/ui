@@ -32,7 +32,7 @@ var demo = demo || {};
             var dependencies = {
                 dataEntry: {
                     funcName: "cspace.dataEntry",
-                    args: [".csc-acquisition", deOpts]
+                    args: [".csc-acquisition-template", deOpts]
                 },
                 sidebar: {
                     funcName: "cspace.sidebar",

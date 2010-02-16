@@ -41,19 +41,19 @@
             "optionlist": ["antiquities", "architecture-design", "decorative-arts", "ethnography", "herpetology", "media-performance-art", "paintings-sculpture", "paleobotany", "photographs", "prints-drawings"],
             "optionnames": ["Antiquities", "Architecture and Design", "Decorative Arts", "Ethnography", "Herpetology", "Media and Performance Art", "Paintings and Sculpture", "Paleobotany", "Photographs", "Prints and Drawings"]
         },
-        ".csc-object-identification-comments": "{$fields.comments}",
-        ".csc-object-description-copy-number": "{$fields.descCopyNumber}",
-        ".csc-object-description-status": "{$fields.descStatus}",
-        ".csc-object-description-sex": "{$fields.descSex}",
-        ".csc-object-description-phase": "{$fields.descPhase}",
-        ".csc-object-description-form": "{$fields.descForm}",
-        ".csc-object-description-edition-number": "{$fields.descEditionNumber}",
-        ".csc-object-description-age": "{$fields.descAge}",
-        ".csc-object-description-age-qualifier": "{$fields.descAgeQualifier}",
-        ".csc-object-description-age-unit": "{$fields.descAgeUnit}",
-        ".csc-object-description-style": "{$fields.descStyle}",
-        ".csc-object-description-color": "{$fields.descColor}",
-        ".csc-object-description-material": "{$fields.descMaterial}",
+        ".csc-object-identification-comments": "${fields.comments}",
+        ".csc-object-description-copy-number": "${fields.descCopyNumber}",
+        ".csc-object-description-status": "${fields.descStatus}",
+        ".csc-object-description-sex": "${fields.descSex}",
+        ".csc-object-description-phase": "${fields.descPhase}",
+        ".csc-object-description-form": "${fields.descForm}",
+        ".csc-object-description-edition-number": "${fields.descEditionNumber}",
+        ".csc-object-description-age": "${fields.descAge}",
+        ".csc-object-description-age-qualifier": "${fields.descAgeQualifier}",
+        ".csc-object-description-age-unit": "${fields.descAgeUnit}",
+        ".csc-object-description-style": "${fields.descStyle}",
+        ".csc-object-description-color": "${fields.descColor}",
+        ".csc-object-description-material": "${fields.descMaterial}",
         ".csc-object-description-material-component": "${fields.descMaterialComponent}",
         ".csc-object-description-material-component-note": "${fields.descMaterialNote}",
         ".csc-object-description-material-name": "${fields.descMaterialName}",
@@ -85,7 +85,7 @@
             "decorators": [{
                 "type": "fluid",
                 "func": "cspace.autocomplete",
-                "container": ".csc-object-description-content-people-auto",
+                "container": ".csc-object-description-content-people",
                 "options": {
                     "url": "../../chain/objects/autocomplete/descContentPeople"
                 }
@@ -105,7 +105,7 @@
         ".csc-object-description-content-place": "${fields.descContentPlace}",
         ".csc-object-description-content-script": "${fields.descContentScript}",
         ".csc-object-description-content-organization": "${fields.descContentOrganization}",
-        ".csc-object-description-content-organization=autocomplete": {
+        ".csc-object-description-content-organization-autocomplete": {
             "decorators": [{
                 "type": "fluid",
                 "func": "cspace.autocomplete",

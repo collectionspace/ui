@@ -30,7 +30,7 @@
         ".csc-intake-entry-method-row:": { 
             "children": [
                 { ".csc-intake-entry-method": {
-                    "selection": "${fields.entryMethods.0}",
+                    "selection": "${fields.entryMethods.0.entryMethod}",
                     "optionlist": ["in-person", "post", "found-on-doorstep"],
                     "optionnames": ["In person", "Post", "Found on doorstep"],
                     "default": "0"
@@ -92,23 +92,12 @@
                 "container": ".csc-intake-field-location-date-container"
             }]
         },
-        ".csc-intake-field-collection-event-name": "$fields.fieldCollectionEventName}",
+        ".csc-intake-field-collection-event-name": "${fields.fieldCollectionEventName}",
         ".csc-intake-field-collection-event-ref-number": "${fields.fieldCollectionEventRefNumber}",
         ".csc-intake-field-collection-method": "${fields.fieldCollectionMethod}",
         ".csc-intake-field-collection-number": "${fields.fieldCollectionNote}",
         ".csc-intake-field-collection-note": "${fields.fieldCollectionNumber}",
         ".csc-intake-field-collection-place": "${fields.fieldCollectionPlace}",
-        ".csc-intake-field-collection-source": "${fields.fieldCollectionSource}",
-        ".csc-intake-field-collection-source-autocomplete": {
-            "decorators": [{
-                "type": "fluid",
-                "func": "cspace.autocomplete",
-                "container": ".csc-intake-field-collection-source",
-                "options": {
-                    "url": "../../chain/intake/autocomplete/fieldCollectionSource"
-                }
-            }]
-        },
         ".csc-intake-field-collector": "${fields.fieldCollector}",
         ".csc-intake-field-collector-autocomplete": {
             "decorators": [{

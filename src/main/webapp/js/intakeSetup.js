@@ -32,7 +32,7 @@ var demo = demo || {};
             var dependencies = {
                 dataEntry: {
                     funcName: "cspace.dataEntry",
-                    args: [".csc-intake", deOpts]
+                    args: [".csc-object-intake-template", deOpts]
                 },
                 sidebar: {
                     funcName: "cspace.sidebar",
@@ -72,7 +72,7 @@ var demo = demo || {};
 
         if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
             jQuery.ajax({
-                url: "./uispecs/intake/uispec.json",
+                url: "./uispecs/intake/uispec-proto.json",
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {
