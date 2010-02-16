@@ -125,7 +125,7 @@ td textarea {border:none;}
 /* secondary navigation menu */
 #secondary-nav {padding-bottom:6px; clear:both;}
 #secondary-nav.pivot {padding-bottom:0;}
-#secondary-nav-menu {padding-top:6px; width:100%; margin-top:3px; height:21px;}
+#secondary-nav-menu {padding-top:6px; width:100%; margin-top:3px; margin-bottom:6px; height:21px;}
 #secondary-nav-menu .menu-record, #secondary-nav.pivot .menu-record {display:block; font-family:arial,helvetica,sans-serif; 
 	list-style-type:none; margin:0; padding:0; white-space:nowrap;}
 #secondary-nav.pivot .menu-record {width:100%;}
@@ -229,9 +229,10 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 
 .fl-container-left  .information-group       {padding:0 0 20px 0;}
 .fl-container-left  .information-subgroup {padding:10px 0;}
-.fl-container-left  .information-group       .content.main 	{border-bottom: 1px solid #D2D0D0; border-top: 1px solid #D2D0D0; background-color: #F3F3F3; padding: 12px; *padding:12px 12px 0 12px; width:auto; display:block;}
+.fl-container-left  .information-group       .content.main 	{border-bottom: 1px solid #D2D0D0; border-top: 1px solid #D2D0D0; background-color: #F3F3F3; padding: 12px; *padding:12px 12px 0 12px; width:auto; }
 .fl-container-left  .information-subgroup .content.main	{border:none; background-color: #D1D2D4; padding: 6px 12px 6px 12px; *padding:6px 12px 0 12px; width:auto; display:block;}
-.fl-container-left  .information-group       .header.toggle   {font-size:13px; line-height:13px; background-color:#AAA; cursor:pointer; color:#fff;}
+.fl-container-left  .information-group       .header.toggle   {font-size:13px; line-height:13px; background-color:#AAA; cursor:pointer; color:#fff; height:25px; padding-bottom:0; /*background:#AAA url('../images/toggle.png') no-repeat;*/}
+.fl-container-left  .information-group       .header.toggle.active   {background-position:left bottom;}
 .fl-container-left  .information-group       .sub-header 	{font-size:14px; line-height:14px; font-weight:bold; padding-bottom: 15px; color:#666;}
 .fl-container-left  .information-subgroup .header.toggle   {font-size:11px; line-height:11px; background-color:#AAAAAA; color:#000; padding:5px 0 5px 5px; width:auto;}
 

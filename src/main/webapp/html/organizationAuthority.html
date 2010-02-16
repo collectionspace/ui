@@ -143,9 +143,12 @@
 									</div>
 					
 									<div class="fl-container-flex fl-fix information-group" id="toggle-authority-information">
-									
+										<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-name'); return false;">
+											<span class="header-toggle"><img id="toggle-name-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+											Person Name Authority
+										</div>
 										<!-- Information-block content block -->
-										<div class="fl-container-flex fl-fix content main" >
+										<div class="fl-container-flex fl-fix content main" id="toggle-name">
 											
 											<!-- one row column -->
 											<div class="info-column">
@@ -335,7 +338,11 @@
 									</div>
 									
 									<div class="fl-container-flex fl-fix information-group" style="display:none;" id="toggle-authority-contact-information">
-										<div class="fl-container-flex fl-fix content main">
+										<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-contact'); return false;">
+											<span class="header-toggle"><img id="toggle-contact-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+											Contact Information
+										</div>
+										<div class="fl-container-flex fl-fix content main" id="toggle-contact">
 											<div class="info-column">
 												<div class="info-column2-40 fl-force-left">
 													<div class="info-pair">
@@ -438,6 +445,7 @@
 												<div class="clear"></div>
 											</div>
 										</div>
+										<div class="clear"></div>
 									</div>
 									
 									<div class="csc-error-dialog">
