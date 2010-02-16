@@ -1,0 +1,485 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>CollectionSpace - Organization Authority</title>
+
+        <link rel="stylesheet" type="text/css" href="../fluid-infusion/src/webapp/framework/fss/css/fss-reset.css" />
+        <link rel="stylesheet" type="text/css" href="../fluid-infusion/src/webapp/framework/fss/css/fss-layout.css" />
+		<link rel="stylesheet" type="text/css" href="../fluid-infusion/src/webapp/framework/fss/css/fss-text.css" />
+        <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
+        <link rel="stylesheet" type="text/css" href="../css/NumberPatternChooser.css" />
+		<link rel="stylesheet" href="../lib/goog/demos/css/datepicker.css">
+		
+<!--
+		<script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
+-->
+		<script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/core/js/jquery.js"></script>
+		<script type="text/javascript" src="../fluid-infusion/src/webapp/jquery/ui/js/ui.core.js"></script>
+		<script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/ui/js/ui.dialog.js"></script>
+		<script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/plugins/delegate/js/jquery.delegate.js"></script>
+		<script type="text/javascript" src="../fluid-infusion/src/webapp/lib/json/js/json2.js"></script>
+		<script type="text/javascript" src="../fluid-infusion/src/webapp/framework/core/js/Fluid.js"></script>
+		<script type="text/javascript" src="../fluid-infusion/src/webapp/framework/core/js/FluidDOMUtilities.js"></script>
+		<script type="text/javascript" src="../fluid-infusion/src/webapp/framework/core/js/jquery.keyboard-a11y.js"></script>
+		<script type="text/javascript" src="../fluid-infusion/src/webapp/framework/core/js/DataBinding.js"></script>
+		<script type="text/javascript" src="../fluid-infusion/src/webapp/lib/fastXmlPull/js/fastXmlPull.js"></script>
+		<script type="text/javascript" src="../fluid-infusion/src/webapp/framework/renderer/js/fluidParser.js"></script>
+		<script type="text/javascript" src="../fluid-infusion/src/webapp/framework/renderer/js/fluidRenderer.js"></script>
+		<script type="text/javascript" src="../fluid-infusion/src/webapp/components/inlineEdit/js/InlineEdit.js"></script>
+
+		<script type="text/javascript" src="../js/cspace.js"></script>
+		<script type="text/javascript" src="../js/Utilities.js"></script>    
+		<script type="text/javascript" src="../js/Renderer.js"></script>
+		<script type="text/javascript" src="../js/DataContext.js"></script>
+		<script type="text/javascript" src="../js/DataEntry.js"></script>
+		<script type="text/javascript" src="../js/RecordList.js"></script>
+		<script type="text/javascript" src="../js/rightSidebarSetup.js"></script>
+		<script type="text/javascript" src="../js/NumberPatternChooser.js"></script>
+		<script type="text/javascript" src="../lib/goog/base.js"></script>
+		<script type="text/javascript">
+            goog.require('goog.dom');
+	        goog.require('goog.date');
+	        goog.require('goog.i18n.DateTimeSymbols');
+	        goog.require('goog.i18n.DateTimeSymbols_en_ISO');
+	        goog.require('goog.i18n.DateTimeSymbols_en_US');
+	        goog.require('goog.i18n.DateTimeSymbols_de');
+	        goog.require('goog.i18n.DateTimeSymbols_ml');
+	        goog.require('goog.i18n.DateTimeSymbols_ar_YE');
+	        goog.require('goog.locale');
+	        goog.require('goog.ui.DatePicker');
+		</script>
+		<script type="text/javascript" src="../js/DatePicker.js"></script>
+		<script type="text/javascript" src="../js/acquisitionSetup.js"></script>
+
+	</head>
+
+	<body>
+		<!-- body content -->
+		<div class="fl-container-1024 fl-centered">
+		
+			<!-- CSpace logo and right-side search box -->
+			<div id="name-header">
+ 			    <!-- this div will be filled in with the contents of the Template -->
+            </div>
+			
+			<div id="header-menu">
+				<div class="header-menu-logo"><a href="http://www.collectionspace.org/current_release"><img src="../images/header-logo.png" height=60 width=345 alt="CollectionSpace" /></a></div>
+				<div class="header-menu-right">
+					<div class="header-menu-logout"><a href="index.html">Log out</a></div>
+					<div class="clear"></div>
+					<div class="header-menu-search">
+						<form action="search.html">
+							<select name="recordtype" class="csc-global-search-record-type">
+								<option value="object">Object</option>
+								<option value="intake">Intake</option>
+								<option value="acquisition">Acquisition</option>
+							</select>
+							<input name="keywords" type="text" class="csc-global-search-keywords" />
+							<input type="submit" class="csc-global-search-submit globalSearchButton" value="Search" />
+						</form>
+					</div>
+				</div>
+				<div class="clear"></div>
+				<div class="header-menu-row">
+					<div class="inner">
+						<div class="menu-item">My CollectionSpace</div>
+						<div class="menu-item"><a href="createnew.html">Create New</a></div>
+						<div class="menu-item selected"><a href="findedit.html">Find and Edit</a></div>
+						<div class="menu-item">Report</div>
+						<div class="menu-item"><a href="administration.html">Administration</a></div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			
+			<div class="fl-container-1024-inner">
+
+				<!-- this div will be filled in with the contents of the Template -->
+				<div class="csc-acquisition-container" id="csc-acquisition-template">
+
+					<!-- title-bar - name of object and (assession) number -->
+					<div id="title-bar">
+						<div class="content">
+							<div class="overflow">
+								<div class="value csc-titleBar-">Museum of the Moving Image</div>
+								<div class="clear"></div>
+							</div>
+							<div class="record-type">Organization Authority</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+
+				<!-- main content -->
+				<div id="all-content" class="fl-fix authority">
+
+					<!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
+					<div class="fl-fix fl-container-flex fl-col-mixed2">
+
+						<!-- left-side container. Contains bulk of Object Entry forms and fields -->
+						<div class="fl-container-left fl-force-left">
+
+							<div class="csc-authority-container">
+								<div id="secondary-nav">
+									<div id="secondary-nav-menu">
+										<ul class="menu-record">
+											<li class="selected"><a href="#toggle-authority-information">Organization Name Authority</a></li>
+											<li><a href="#toggle-authority-contact-information">Contact Information</a></li>
+										</ul>
+									</div>
+									<div id="secondary-nav-menu-sub">
+										<div class="upper-save"><input type="button" class="savebutton csc-save" value="Save"/></div>
+										<div class="time-stamp">Last Saved on 01.11.10 at 12:12pm</div>
+										<div class="clear"></div>
+									</div>
+								</div>
+							
+								<div class="authority-outer-border">
+									<div class="hidden csc-name-authority-message-container cs-message">
+										<span class="csc-timestamp cs-timestamp">time</span>
+										<span class="csc-message">Save successful!</span>
+									</div>
+					
+									<div class="fl-container-flex fl-fix information-group" id="toggle-authority-information">
+									
+										<!-- Information-block content block -->
+										<div class="fl-container-flex fl-fix content main" >
+											
+											<!-- one row column -->
+											<div class="info-column">
+												
+												<div class="info-column">
+													<div class="info-column2-40 fl-force-left">
+														<div class="info-pair">
+															<div class="header">
+																<div class="label">Display Name</div>
+															</div>
+															<div class="content">
+																<table>
+																	<tbody>
+																		<tr>
+																			<!--<td class="table-unselected"></td>-->
+																			<td><input type="text" class="csc-org-authority-displayname" /></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														<div class="clear"></div>
+													</div>
+													
+													<div class="info-column2-60 fl-force-right">
+														<div class="info-column2-60 fl-force-left">
+															<div class="info-pair">
+																<div class="header">
+																	<div class="label">Reference Number</div>
+																</div>
+																<div class="content">
+																	<table>
+																		<tbody>
+																			<tr>
+																				<!--<td class="table-unselected"></td>-->
+																				<td><input type="text" class="csc-org-authority-reference-number" /></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+															<div class="clear"></div>
+														</div>
+														
+														<div class="info-column2-40 fl-force-right">
+															<div class="info-pair">
+																<div class="header">
+																	<div class="label">Status</div>
+																</div>
+																<div class="content">
+																	<select class="csc-org-authority-status input-select"></select>	
+																</div>
+															</div>
+															<div class="clear"></div>
+														</div>
+														<div class="clear"></div>
+													</div>
+													<div class="clear"></div>
+												</div>
+												
+												<div class="info-column fl-force-left">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Name</div>
+														</div>
+														<div class="content">
+															<table>
+																<thead>
+																	<tr>
+																		<td>Main Body</td>
+																		<td>Sub-Body</td>
+																		<td>Addition to name</td>
+																		<td>Contact</td>
+																	</tr>
+																</thead>
+																	
+																<tbody>
+																	<tr>
+																		<td><input type="text" class="csc-org-authority-mainbody"></td>
+																		<td><input type="text" class="csc-org-authority-subbody"></td>
+																		<td><input type="text" class="csc-org-authority-additiontoname"></td>
+																		<td><input type="text" class="csc-org-authority-contact"></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													<div class="clear"></div>
+												</div>
+													
+												<div class="info-column2-50 fl-force-left">
+													<div class="info-pair-date">
+														<div class="header">
+															<div class="label">Foundation Date</div>
+														</div>
+														<div class="content csc-intake-entry-date-container">
+															<table>
+																<tbody>
+																	<tr>
+																		<td class="field-cal"><input type="text" class="input-date csc-org-authority-foundation-date csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" height=14 width=14 /></a></td>
+																	</tr>
+																</tbody>
+															</table>
+															<div class="csc-date-picker" ></div>
+														</div>
+													</div>
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Foundation Place</div>
+														</div>
+														<div class="content">
+															<select class="csc-org-authority-foundation-place input-select" ></select>
+														</div>
+													</div>
+													<div class="info-pair-date">
+														<div class="header">
+															<div class="label">Dissolution Date</div>
+														</div>
+														<div class="content csc-intake-entry-date-container">
+															<table>
+																<tbody>
+																	<tr>
+																		<td class="field-cal"><input type="text" class="input-date csc-org-authority-dissolution-date csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" height=14 width=14 /></a></td>
+																	</tr>
+																</tbody>
+															</table>
+															<div class="csc-date-picker" ></div>
+														</div>
+													</div>
+													<div class="clear"></div>
+												</div>
+												
+												<div class="info-column2-50 fl-force-right">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Group</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-org-authority-group" /></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Function</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-org-authority-function" /></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">History</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><textarea type="text" class="input-textarea csc-org-authority-history" ></textarea></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													<div class="clear"></div>
+												</div>
+												<div class="clear"></div>
+											</div>
+											<div class="clear"></div>
+										</div>
+										<div class="clear"></div>
+									</div>
+									
+									<div class="fl-container-flex fl-fix information-group" style="display:none;" id="toggle-authority-contact-information">
+										<div class="fl-container-flex fl-fix content main">
+											<div class="info-column">
+												<div class="info-column2-40 fl-force-left">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Address Type</div>
+														</div>
+														<div class="content">
+															<select class="csc-org-authority-address-type input-select" ></select>
+														</div>
+													</div>
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Fax Number</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-org-authority-fax-number" /></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Telephone Number</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-org-authority-telephone-number" /></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													<div class="clear"></div>
+												</div>
+												
+												<div class="info-column2-60 fl-force-right">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Address</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-org-authority-address" /></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Place</div>
+														</div>
+														<div class="content">
+															<select class="csc-org-authority-place input-select" ></select>
+														</div>
+													</div>
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Postcode</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-org-authority-post-code" /></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Email</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-org-authority-email" /></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													<div class="clear"></div>
+												</div>
+												<div class="clear"></div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="csc-error-dialog">
+										<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
+									</div>
+								</div> <!-- end outer border-->
+
+								<!-- Save button container -->
+								<div class="fl-container-flex input-buttons">
+									<a href="#" class="csc-save-bottom"><input type="button" class="savebutton" value="Save" /></a>
+									<a href="nameAuthority.html"><input type="button" class="cancelbutton" value="Cancel" /></a>
+									<div class="clear"></div>
+								</div>	
+							</div> <!-- END left-side container -->
+
+						</div><!-- END left-side container -->
+						
+						<!-- Right-side container. Pivot area -->
+						<div class="fl-container-pivot fl-force-right csc-right-sidebar" id="csc-org-authority-right-sidebar">
+								<!-- this div will be filled in with the contents of the Template -->
+						</div> <!-- END sub-main content -->
+						<div class="clear"></div>
+					</div>
+				</div> <!-- END main content -->
+
+			</div>
+			
+		</div>
+			
+		<!-- footer block -->
+		<div id="footer">
+			<!-- this div will be filled in with the contents of the Template -->
+		</div> <!-- END footer block -->
+			
+		<!--</div>--> <!-- END body content -->
+
+        <div class="csc-error-dialog">
+            <p class="csc-error-message">This text should be replaced by the error message.</p>
+        </div>
+		
+    	<script type="text/javascript">
+    		//demo.setup();
+    	</script>
+	</body>
+</html>

@@ -42,7 +42,7 @@ a.add-link:hover {color:#000; text-decoration:underline;}
 .menu-record a {background:none repeat scroll 0 0 #6F9DCE; color:#fff; font-weight:bold;	padding:0.2em .4em; 
 	text-decoration:none; border:2px solid #6F9DCE; border-bottom:none; *margin-right:2px; *padding:2px 4px;}
 .menu-record a:hover {background:none repeat scroll 0 0 #999; border:2px solid #999;	border-bottom:none;}
-.menu-record a.current {background:none repeat scroll 0 0 #FFF; color:#6F9DCE; cursor:default; padding-top:6px; border:2px solid #6F9DCE; border-bottom:none;}
+.menu-record a.current, .menu-record li.selected a {background:none repeat scroll 0 0 #FFF; color:#6F9DCE; cursor:default; padding-top:6px; border:2px solid #6F9DCE; border-bottom:none;}
 
 .input-button a {text-decoration:none; color:inherit;}
 .input-button:hover, input.button:hover, .button.quick:hover {text-decoration:none; color:#fff; background-color:#93BC7F;}
@@ -440,3 +440,7 @@ input.deactivate {background-color:#CDCCCC !important; color:#000 !important;}
 .hidden {display: none;}
 .show {display: block;}
 .clear {clear:both; margin:0; padding:0; height:1px; overflow:hidden; visibility:hidden; display:block;}
+
+.ui-tabs .ui-tabs-hide {
+     display: none;
+}

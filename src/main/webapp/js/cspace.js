@@ -11,6 +11,8 @@ function ToggleTabs(toggleme, toggleother, toggleSelected) {
 	jQuery(toggleSelected).removeClass("selected");
 	
 }
+
+
  
 function getRadioValue() {
 	for (var i=0; i < document.selecttype.recordtype.length; i++) {
@@ -25,6 +27,25 @@ function getRadioValue() {
 
 
 jQuery(document).ready(function() {
+	// from http://www.sohtanaka.com/web-design/simple-tabs-w-css-jquery/
+   //When page loads...
+	$(".information-group").hide(); //Hide all content
+	$(".menu-record li:first").addClass("selected").show(); //Activate first tab
+	$(".information-group:first").show(); //Show first tab content
+
+	//On Click Event
+	$(".menu-record li").click(function() {
+
+		$(".menu-record li").removeClass("selected"); //Remove any "active" class
+		$(this).addClass("selected"); //Add "active" class to selected tab
+		$(".information-group").hide(); //Hide all tab content
+
+		var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
+		$(activeTab).show(); //Fade in the active ID content
+		return false;
+	});
+
+
 	$currentFocus = null;
 	jQuery(':input').focus( function() {
 		$currentFocus = this;

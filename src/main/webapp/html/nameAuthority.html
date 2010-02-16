@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>CollectionSpace - Authority</title>
+		<title>CollectionSpace - Person Authority</title>
 
         <link rel="stylesheet" type="text/css" href="../fluid-infusion/src/webapp/framework/fss/css/fss-reset.css" />
         <link rel="stylesheet" type="text/css" href="../fluid-infusion/src/webapp/framework/fss/css/fss-layout.css" />
@@ -52,6 +52,7 @@
 		</script>
 		<script type="text/javascript" src="../js/DatePicker.js"></script>
 		<script type="text/javascript" src="../js/acquisitionSetup.js"></script>
+
 
 	</head>
 
@@ -106,7 +107,7 @@
 								<div class="value csc-titleBar-">Homer Jay Simpson, 1955 - </div>
 								<div class="clear"></div>
 							</div>
-							<div class="record-type">Authority</div>
+							<div class="record-type">Person Authority</div>
 							<div class="clear"></div>
 						</div>
 					</div>
@@ -119,19 +120,14 @@
 					<div class="fl-fix fl-container-flex fl-col-mixed2">
 
 						<!-- left-side container. Contains bulk of Object Entry forms and fields -->
-						<div class="fl-container-left fl-force-left">
+						<div class="fl-container-left fl-force-left" id="tabs">
 
 							<div class="csc-authority-container">
 								<div id="secondary-nav">
 									<div id="secondary-nav-menu">
 										<ul class="menu-record">
-											<li onclick="ToggleTabs('#toggle-authority-information', '#toggle-authority-contact-information', '.authority-select-tab'); $(this).addClass('selected'); return false;"><a class="current" href="#">
-												<select class="csc-name-authority-salutation input-select" name="name-authority-salutation" >
-													<option>Person</option>
-													<option>Organization</option>
-												</select> Name Authority</a>
-											</li>
-											<li onclick="ToggleTabs('#toggle-authority-contact-information', '#toggle-authority-information', '.authority-select'); $(this).addClass('selected'); return false; "><a href="#">Contact Information</a></li>
+											<li class="selected"><a href="#toggle-authority-information">Person Name Authority</a></li>
+											<li><a href="#toggle-authority-contact-information">Contact Information</a></li>
 										</ul>
 									</div>
 									<div id="secondary-nav-menu-sub">
@@ -420,7 +416,7 @@
 										<div class="clear"></div>
 									</div>
 									
-									<div class="fl-container-flex fl-fix information-group" style="display:none;" id="toggle-authority-contact-information">
+									<div class="fl-container-flex fl-fix information-group" id="toggle-authority-contact-information">
 										<div class="fl-container-flex fl-fix content main">
 											<div class="info-column">
 												<div class="info-column2-40 fl-force-left">
