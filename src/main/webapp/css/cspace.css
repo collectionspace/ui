@@ -42,7 +42,7 @@ a.add-link:hover {color:#000; text-decoration:underline;}
 .menu-record a {background:none repeat scroll 0 0 #6F9DCE; color:#fff; font-weight:bold;	padding:0.2em .4em; 
 	text-decoration:none; border:2px solid #6F9DCE; border-bottom:none; *margin-right:2px; *padding:2px 4px;}
 .menu-record a:hover {background:none repeat scroll 0 0 #999; border:2px solid #999;	border-bottom:none;}
-.menu-record a.current {background:none repeat scroll 0 0 #FFF; color:#6F9DCE; cursor:default; padding-top:6px; border:2px solid #6F9DCE; border-bottom:none;}
+.menu-record a.current, .menu-record li.selected a {background:none repeat scroll 0 0 #FFF; color:#6F9DCE; cursor:default; padding-top:6px; border:2px solid #6F9DCE; border-bottom:none;}
 
 .input-button a {text-decoration:none; color:inherit;}
 .input-button:hover, input.button:hover, .button.quick:hover {text-decoration:none; color:#fff; background-color:#93BC7F;}
@@ -125,7 +125,7 @@ td textarea {border:none;}
 /* secondary navigation menu */
 #secondary-nav {padding-bottom:6px; clear:both;}
 #secondary-nav.pivot {padding-bottom:0;}
-#secondary-nav-menu {padding-top:6px; width:100%; margin-top:3px; height:21px;}
+#secondary-nav-menu {padding-top:6px; width:100%; margin-top:3px; margin-bottom:6px; height:21px;}
 #secondary-nav-menu .menu-record, #secondary-nav.pivot .menu-record {display:block; font-family:arial,helvetica,sans-serif; 
 	list-style-type:none; margin:0; padding:0; white-space:nowrap;}
 #secondary-nav.pivot .menu-record {width:100%;}
@@ -229,9 +229,10 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 
 .fl-container-left  .information-group       {padding:0 0 20px 0;}
 .fl-container-left  .information-subgroup {padding:10px 0;}
-.fl-container-left  .information-group       .content.main 	{border-bottom: 1px solid #D2D0D0; border-top: 1px solid #D2D0D0; background-color: #F3F3F3; padding: 12px; *padding:12px 12px 0 12px; width:auto; display:block;}
+.fl-container-left  .information-group       .content.main 	{border-bottom: 1px solid #D2D0D0; border-top: 1px solid #D2D0D0; background-color: #F3F3F3; padding: 12px; *padding:12px 12px 0 12px; width:auto; }
 .fl-container-left  .information-subgroup .content.main	{border:none; background-color: #D1D2D4; padding: 6px 12px 6px 12px; *padding:6px 12px 0 12px; width:auto; display:block;}
-.fl-container-left  .information-group       .header.toggle   {font-size:13px; line-height:13px; background-color:#AAA; cursor:pointer; color:#fff;}
+.fl-container-left  .information-group       .header.toggle   {font-size:13px; line-height:13px; background-color:#AAA; cursor:pointer; color:#fff; height:25px; padding-bottom:0; /*background:#AAA url('../images/toggle.png') no-repeat;*/}
+.fl-container-left  .information-group       .header.toggle.active   {background-position:left bottom;}
 .fl-container-left  .information-group       .sub-header 	{font-size:14px; line-height:14px; font-weight:bold; padding-bottom: 15px; color:#666;}
 .fl-container-left  .information-subgroup .header.toggle   {font-size:11px; line-height:11px; background-color:#AAAAAA; color:#000; padding:5px 0 5px 5px; width:auto;}
 
@@ -440,3 +441,7 @@ input.deactivate {background-color:#CDCCCC !important; color:#000 !important;}
 .hidden {display: none;}
 .show {display: block;}
 .clear {clear:both; margin:0; padding:0; height:1px; overflow:hidden; visibility:hidden; display:block;}
+
+.ui-tabs .ui-tabs-hide {
+     display: none;
+}

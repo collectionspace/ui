@@ -12,6 +12,29 @@
 				</script>
 				<![endif]-->
 
+				<script type="text/javascript">
+
+				jQuery(document).ready(function() {
+
+					//Hide (Collapse) the toggle containers on load
+					$(".ttt").hide(); 
+
+					//Switch the "Open" and "Close" state per click
+					$(".toggle").toggle(function(){
+						$(this).addClass("active");
+						}, function () {
+						$(this).removeClass("active");
+					});
+
+					//Slide up and down on click
+					$(".toggle").click(function(){
+						$(this).next(".ttt").slideToggle("slow");
+					});
+				
+				});
+				</script>
+
+				
 				<!-- title-bar - name of object and (assession) number -->
 				<div id="title-bar">
 					<div class="content">
@@ -37,7 +60,7 @@
 								<div id="secondary-nav">
 									<div id="secondary-nav-menu">
 										<ul class="menu-record">
-											<li><a class="current" href="#">Intake</a></li>
+											<li class="selected"><a href="#intake-record">Intake</a></li>
 											<li><a href="#">Cataloging</a></li>
 											<li><a href="#">Condition</a></li>
 											<li><a href="#">Conservation</a></li>
@@ -55,23 +78,23 @@
 								</div>
 								
 								<!-- outer-border block -->
-								<div class="intake-outer-border">
+								<div class="intake-outer-border" id="intake-record">
 									<div class="hidden csc-message-container cs-message">
 										<span class="csc-timestamp cs-timestamp">time</span>
 										<span class="csc-message">Save successful!</span>
 									</div>
 									<!-- Each section of Object Entry is broken down into information-blocks.
 										  This corresponds to Information groups within Spectrum's Object Entry prodedure. -->
-									<div class="fl-container-flex fl-fix information-group">
+									<div class="fl-container-flex fl-fix information-group" id="toggle-intake-information">
 										<div class="info-column">	
 											
-											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-intake-information'); return false;">
+											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-intake-information .main'); return false;">
 												<span class="header-toggle"><img id="toggle-intake-information-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 												Object Entry
 											</div>
 
 											
-											<div class="fl-container-flex fl-fix content main" id="toggle-intake-information" >
+											<div class="fl-container-flex fl-fix content main ttt" >
 												
 												<div class="info-column2-50 fl-force-left" >
 													
@@ -220,13 +243,13 @@
 										
 									</div>
 									
-									<div class="fl-container-flex fl-fix information-group">
+									<div class="fl-container-flex fl-fix information-group" id="toggle-date-info">
 										<div class="info-column">
-											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-date-info'); return false;">
+											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-date-info .main'); return false;">
 												<span class="header-toggle"><img id="toggle-date-info-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 												Date Information
 											</div>
-											<div class="fl-container-flex fl-fix content main" id="toggle-date-info" >
+											<div class="fl-container-flex fl-fix content main"  >
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-left">
 													<div class="info-pair">
@@ -317,20 +340,18 @@
 														</div>
 													</div>
 												</div>
-												
 												<div class="clear"></div>
 											</div>
 										</div>
-										
 									</div>
 									
-									<div class="fl-container-flex fl-fix information-group">
+									<div class="fl-container-flex fl-fix information-group" id="toggle-collection">
 										<div class="info-column">
-											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-collection'); return false;">
+											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-collection .main'); return false;">
 												<span class="header-toggle"><img id="toggle-collection-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 												Object Collection Information
 											</div>
-											<div class="fl-container-flex fl-fix content main" id="toggle-collection" >
+											<div class="fl-container-flex fl-fix content main">
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-left">
 													
@@ -415,14 +436,14 @@
 										
 									</div>
 									
-									<div class="fl-container-flex fl-fix information-group">
+									<div class="fl-container-flex fl-fix information-group" id="toggle-valuation">
 										<div class="info-column">
-											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-valuation'); return false;">
+											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-valuation .main'); return false;">
 												<span class="header-toggle"><img id="toggle-valuation-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 												Valuation
 											</div>
 											
-											<div class="fl-container-flex fl-fix content main" id="toggle-valuation" >
+											<div class="fl-container-flex fl-fix content main">
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-left">
 													<div class="info-pair">
@@ -460,20 +481,18 @@
 														</div>
 													</div>	
 												</div>
-												
 												<div class="clear"></div>
 											</div>
 										</div>
-										
 									</div>
 
-									<div class="fl-container-flex fl-fix information-group">
+									<div class="fl-container-flex fl-fix information-group" id="toggle-insurance">
 										<div class="info-column">
-											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-insurance'); return false;">
+											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-insurance .main'); return false;">
 												<span class="header-toggle"><img id="toggle-insurance-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 												Insurance
 											</div>
-											<div class="fl-container-flex fl-fix content main" id="toggle-insurance" >
+											<div class="fl-container-flex fl-fix content main">
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-left">
 													<div class="info-pair">
@@ -560,20 +579,18 @@
 														</div>
 													</div>
 												</div>
-												
 												<div class="clear"></div>
 											</div>
 										</div>
-										
 									</div>
 									
-									<div class="fl-container-flex fl-fix information-group">
+									<div class="fl-container-flex fl-fix information-group" id="toggle-location">
 										<div class="info-column">
-											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-location'); return false;">
+											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-location .main'); return false;">
 												<span class="header-toggle"><img id="toggle-location-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 												Location
 											</div>
-											<div class="fl-container-flex fl-fix content main" id="toggle-location" >
+											<div class="fl-container-flex fl-fix content main">
 												<!-- Left-side column -->
 												<div class="info-column fl-force-left">
 													<div class="info-pair">
@@ -647,13 +664,13 @@
 										
 									</div>
 									
-									<div class="fl-container-flex fl-fix information-group">
+									<div class="fl-container-flex fl-fix information-group" id="toggle-condition">
 										<div class="info-column">
-											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-condition'); return false;">
+											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-condition .main'); return false;">
 												<span class="header-toggle"><img id="toggle-condition-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 												Condition
 											</div>
-											<div class="fl-container-flex fl-fix content main" id="toggle-condition" >
+											<div class="fl-container-flex fl-fix content main">
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-left">
 													<div class="info-pair">
@@ -776,6 +793,7 @@
 									</div>
 									
 								</div> <!-- end outer border-->
+															
 								<!-- Button container -->
 								<div class="fl-container-flex input-buttons">
 									<a href="#" class="csc-save-bottom"><input type="button" class="savebutton" value="Save" /></a>
