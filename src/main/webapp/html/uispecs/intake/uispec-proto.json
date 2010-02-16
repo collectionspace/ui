@@ -193,9 +193,9 @@
                     {
                         ".csc-related-number": {
                             "linktext": "${items.0.number}",
-                            "target": "foo.html"
+                            "target": "nameAuthority?csid=${items.0.csid}"
                          },
-                        ".csc-related-recordtype": "${items.0.recordType}"
+                        ".csc-related-recordtype": "${items.0.recordtype}"
                     }
                 ]
                 }
@@ -206,9 +206,9 @@
                     {
                         ".csc-related-number": {
                             "linktext": "${items.0.number}",
-                            "target": "foo.html"
+                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
                          },
-                        ".csc-related-recordtype": "${items.0.recordType}",
+                        ".csc-related-recordtype": "${items.0.recordtype}",
                         ".csc-related-summary": "${items.0.summary}"
                     }
                 ]
@@ -220,7 +220,7 @@
                     {
                         ".csc-related-number": {
                             "linktext": "${items.0.number}",
-                            "target": "foo.html"
+                            "target": "object.html?csid=${items.0.csid}"
                          },
                         ".csc-related-summary": "${items.0.summary}"
                     }

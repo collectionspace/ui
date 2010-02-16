@@ -218,15 +218,58 @@ var cspace = cspace || {};
         
     };
 
+    cspace.renderer = {
+        buildComponentTree: function (spec, that) {
+            var tree = {children: buildComponentTreeChildren(spec, that)};
+            return tree;
+        },
+
+        renderPage: function (that) {
+            var fullUISpec = buildFullUISpec(that);
+            var renderOptions = {
+                model: that.model,
+//                debugMode: true,
+                autoBind: true,
+                applier: that.options.applier
+            };
+            var cutpoints = buildCutpointsFromSpec(fullUISpec);            
+            var tree = cspace.renderer.buildComponentTree(fullUISpec, that);
+            var resources = {};
+            for (var key in that.options.templates) {
+                if (that.options.templates.hasOwnProperty(key)) {
+                    var templ = that.options.templates[key];
+                    resources[key] = {
+                        href: templ.url,
+                        cutpoints: cutpoints
+                    };
+                }
+            }
+            renderOptions.cutpoints = cutpoints;
+            fluid.selfRender(that.container, tree, renderOptions);
+            that.events.pageRendered.fire();
+
+        },
+        
+        renderRelatedRecords: function (that) {
+            var tree = buildRelatedRecordsTree(that);
+            var cutpoints = buildRelatedRecordsCutpoints(that);
+            fluid.selfRender(that.locate("relatedRecords"), tree, {cutpoints: cutpoints});
+        },
+
+        createCutpoints: function (spec) {
+            var cutpoints = [];
+            addCutpointsToList(cutpoints, spec);
+            return cutpoints;
+        }
+    };
+
     var replaceIndex = function (comp, oldInd, newInd) {
         for (var key in comp) {
             if (comp.hasOwnProperty(key)) {
                 var val = comp[key];
                 if ((typeof(val) === "string") && (val.indexOf("${") !== -1)) {
                     comp[key] = val.replace(oldInd+"", newInd+"");
-                    return;
-                }
-                if (typeof(val) === "object") {
+                } else if (typeof(val) === "object") {
                     replaceIndex(val, oldInd, newInd);
                 }
             }
@@ -258,6 +301,36 @@ var cspace = cspace || {};
                 fixSelections(comp.children[i]);
             }
         }
+    };
+
+    var extractEL = function (string) {
+        if (ELstyle === "ALL") {
+            return string;
+        }
+        else if (ELstyle.length === 1) {
+            if (string.charAt(0) === ELstyle) {
+                return string.substring(1);
+            }
+        }
+        else if (ELstyle === "${}") {
+            var i1 = string.indexOf("${");
+            var i2 = string.indexOf("}");
+            if (i1 === 0 && i2 !== -1) {
+                return string.substring(2, i2);
+            }
+        }
+    };
+
+    var replaceWithValues = function (string, model) {
+        var b = string.indexOf("${");
+        var e = string.indexOf("}");
+        while (b !== -1) {
+            var el = string.slice(b+2,e);
+            string = string.replace("${"+el+"}", fluid.model.getBeanValue(model, el));
+            b = string.indexOf("${");
+            e = string.indexOf("}");
+        }
+        return string;
     };
 
     cspace.renderUtils = {
@@ -318,53 +391,27 @@ var cspace = cspace || {};
             for (var i = 0; i < tree.children.length; i++) {
                 fixSelections(tree.children[i]);
             }
-        }
-
-    };
-
-    cspace.renderer = {
-        buildComponentTree: function (spec, that) {
-            var tree = {children: buildComponentTreeChildren(spec, that)};
-            return tree;
-        },
-
-        renderPage: function (that) {
-            var fullUISpec = buildFullUISpec(that);
-            var renderOptions = {
-                model: that.model,
-//                debugMode: true,
-                autoBind: true,
-                applier: that.options.applier
-            };
-            var cutpoints = buildCutpointsFromSpec(fullUISpec);            
-            var tree = cspace.renderer.buildComponentTree(fullUISpec, that);
-            var resources = {};
-            for (var key in that.options.templates) {
-                if (that.options.templates.hasOwnProperty(key)) {
-                    var templ = that.options.templates[key];
-                    resources[key] = {
-                        href: templ.url,
-                        cutpoints: cutpoints
-                    };
-                }
-            }
-            renderOptions.cutpoints = cutpoints;
-            fluid.selfRender(that.container, tree, renderOptions);
-            that.events.pageRendered.fire();
-
         },
         
-        renderRelatedRecords: function (that) {
-            var tree = buildRelatedRecordsTree(that);
-            var cutpoints = buildRelatedRecordsCutpoints(that);
-            fluid.selfRender(that.locate("relatedRecords"), tree, {cutpoints: cutpoints});
-        },
-
-        createCutpoints: function (spec) {
-            var cutpoints = [];
-            addCutpointsToList(cutpoints, spec);
-            return cutpoints;
+        // TODO: Note that this assumes absolutely NO binding to the data model
+        constructLinks: function (protoTree, model) {
+            for (var key in protoTree) {
+                if (protoTree.hasOwnProperty(key)) {
+                    var entry = protoTree[key];
+                    if (entry.target) {
+                        entry.target = replaceWithValues(entry.target, model);
+                        entry.linktext = replaceWithValues(entry.linktext, model);
+                    } else if (entry.children) {
+                        for (var i = 0; i < entry.children.length; i++) {
+                            cspace.renderUtils.constructLinks(entry.children[i], model);
+                        }
+                    } else if (typeof(entry) === "object") {
+                        cspace.renderUtils.constructLinks(entry, model);
+                    }
+                }
+            }
         }
+
     };
 
 })(jQuery, fluid_1_2);

@@ -102,6 +102,7 @@ var cspace = cspace || {};
             var protoTree = {};
             fluid.model.copyModel(protoTree, that.uispec);
             cspace.renderUtils.multiplyRows(protoTree, that.model);
+            cspace.renderUtils.constructLinks(protoTree, that.model);
             var tree = expander(protoTree);
             var selectors = {};
             cspace.renderUtils.buildSelectorsFromUISpec(that.uispec, selectors);
