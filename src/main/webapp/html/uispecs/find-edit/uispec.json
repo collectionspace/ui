@@ -1,63 +1,42 @@
 {
     "objects": {
-        "items": {
-            "selector": ".csc-object-record-list-row",
-            "repeated": {
-                "summary": {
-                    "selector": ".csc-summary"
-                },
-                "number": {
-                    "selector": ".csc-accession-number",
-                    "type": "link",
-                    "href": "object.html?csid=%csid",
-                    "linktext": "%number",
-                    "replacements": {
-                        "csid": "csid",
-                        "number": "number"
+            ".csc-object-record-list-row:": {
+                "children": [
+                    {
+                        ".csc-accession-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "object.html?csid=${items.0.csid}"
+                         },
+                        ".csc-summary": "${items.0.summary}"
                     }
-                }
+                ]
             }
-        }
     },
     "proceduresIntake": {
-        "items": {
-            "selector": ".csc-procedural-record-list-row",
-            "repeated": {
-                "summary": {
-                    "selector": ".csc-summary"
-                },
-                "number": {
-                    "selector": ".csc-entry-number",
-                    "type": "link",
-                    "href": "intake.html?csid=%csid",
-                    "linktext": "%number",
-                    "replacements": {
-                        "csid": "csid",
-                        "number": "number"
+            ".csc-procedural-record-list-row:": {
+                "children": [
+                    {
+                        ".csc-entry-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "intake.html?csid=${items.0.csid}"
+                         },
+                        ".csc-summary": "${items.0.summary}"
                     }
-                }
+                ]
             }
-        }
     },
     "proceduresAcquisition": {
-        "items": {
-            "selector": ".csc-acquisition-record-list-row",
-            "repeated": {
-                "summary": {
-                    "selector": ".csc-summary"
-                },
-                "number": {
-                    "selector": ".csc-entry-number",
-                    "type": "link",
-                    "href": "acquisition.html?csid=%csid",
-                    "linktext": "%number",
-                    "replacements": {
-                        "csid": "csid",
-                        "number": "number"
+            ".csc-acquisition-record-list-row:": {
+                "children": [
+                    {
+                        ".csc-entry-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "acquisition.html?csid=${items.0.csid}"
+                         },
+                        ".csc-summary": "${items.0.summary}"
                     }
-                }
+                ]
             }
-        }
     },
     "authorityTerms": {}
 }
