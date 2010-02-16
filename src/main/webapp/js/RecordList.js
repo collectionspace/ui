@@ -89,7 +89,7 @@ var cspace = cspace || {};
     cspace.recordList = function (container, options) {
         var that = fluid.initView("cspace.recordList", container, options);
         that.model = {
-            items: []
+            items: (options.data? options.data: [])
         };
         that.uispec = {};
 
@@ -98,10 +98,27 @@ var cspace = cspace || {};
         };
 
         that.refreshView = function () {
+            var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
+            var protoTree = {};
+            fluid.model.copyModel(protoTree, that.uispec);
+            cspace.renderUtils.multiplyRows(protoTree, that.model);
+            var tree = expander(protoTree);
+            var selectors = {};
+            cspace.renderUtils.buildSelectorsFromUISpec(that.uispec, selectors);
+            var renderOpts = {
+                cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(selectors, {}),
+                model: that.model,
+                debugMode: true,
+                autoBind: true,
+                applier: that.options.applier
+            };
+            fluid.selfRender(that.container, tree, renderOpts);
+/*
             that.model.items = cleanUpRecordList(that.model.items);
             var tree = cspace.renderer.buildComponentTree(that.uispec, that);
             var cutpoints = cspace.renderer.createCutpoints(that.uispec);
             fluid.selfRender(that.container, tree, {cutpoints: cutpoints, model: that.model});
+*/
             that.locate("numberOfItems").text("(" + that.model.items.length + ")");
         };
 

@@ -143,65 +143,16 @@ var cspace = cspace || {};
         that.refreshView();
     };
     
-    // TODO: These protoTree processing functions should be combined so that all processing
-    // can be done in one pass
-    var addDecoratorOptionsToProtoTree = function (protoTree, that) {
-        for (var key in protoTree) {
-            if (protoTree.hasOwnProperty(key)) {
-                var entry = protoTree[key];
-                if (entry.decorators) {
-                    for (var i = 0; i < entry.decorators.length; i++) {
-                        var dec = entry.decorators[i];
-                        if (fluid.getGlobalValue(dec.func + ".getDecoratorOptions")) {
-                            $.extend(true, dec.options, fluid.invokeGlobalFunction(dec.func + ".getDecoratorOptions", [that]));
-                        }
-                    }
-                }
-            }
-        }
-    };
-    
-    var buildSelectorsFromUISpec = function (uispec, selectors) {
-        for (var key in uispec) {
-            if (uispec.hasOwnProperty(key)) {
-                selectors[key] = (key.indexOf(":") === key.length-1 ? key.substring(0, key.length-1) : key);
-            }
-            if (uispec[key].children) {
-                for (var i = 0; i < uispec[key].children.length; i++) {
-                    buildSelectorsFromUISpec(uispec[key].children[i], selectors);
-                }
-            }
-        }
-    };
-
-    // the protoExpander doesn't yet handle selections, so the tree it creates needs some adjustment
-    var fixSelectionsInTree = function (tree) {
-        for (var i = 0; i < tree.children.length; i++) {
-            fixSelections(tree.children[i]);
-        }
-    };
-    var fixSelections = function (comp) {
-        if (comp.selection) {
-            for (var j = 0; j < comp.optionlist.length; j++) {
-                comp.optionlist[j] = comp.optionlist[j].value;
-                comp.optionnames[j] = comp.optionnames[j].value;
-            }
-        } else if (comp.children) {
-            for (var i = 0; i < comp.children.length; i++) {
-                fixSelections(comp.children[i]);
-            }
-        }
-    };
-
     var renderPage = function (that) {
         var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
         var protoTree = {};
         fluid.model.copyModel(protoTree, that.uispec);
-        addDecoratorOptionsToProtoTree(protoTree, that);
+        cspace.renderUtils.addDecoratorOptionsToProtoTree(protoTree, that);
+        cspace.renderUtils.multiplyRows(protoTree, that.model);
         var tree = expander(protoTree);
-        fixSelections(tree);
+        cspace.renderUtils.fixSelectionsInTree(tree);
         var selectors = {};
-        buildSelectorsFromUISpec(that.uispec, selectors);
+        cspace.renderUtils.buildSelectorsFromUISpec(that.uispec, selectors);
         var renderOpts = {
             cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(selectors, {}),
             model: that.model,

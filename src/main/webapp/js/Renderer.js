@@ -218,6 +218,110 @@ var cspace = cspace || {};
         
     };
 
+    var replaceIndex = function (comp, oldInd, newInd) {
+        for (var key in comp) {
+            if (comp.hasOwnProperty(key)) {
+                var val = comp[key];
+                if ((typeof(val) === "string") && (val.indexOf("${") !== -1)) {
+                    comp[key] = val.replace(oldInd+"", newInd+"");
+                    return;
+                }
+                if (typeof(val) === "object") {
+                    replaceIndex(val, oldInd, newInd);
+                }
+            }
+        }
+    };
+
+    var findValueBinding = function (comp) {
+        for (var key in comp) {
+            if (comp.hasOwnProperty(key)) {
+                var val = comp[key];
+                if ((typeof(val) === "string") && (val.indexOf("${") !== -1)) {
+                    return val.substring(val.indexOf("${")+2, val.indexOf("0")-1);
+                }
+                if (typeof(val) === "object") {
+                    return findValueBinding(val);
+                }
+            }
+        }
+    };
+
+    var fixSelections = function (comp) {
+        if (comp.selection) {
+            for (var j = 0; j < comp.optionlist.length; j++) {
+                comp.optionlist[j] = comp.optionlist[j].value;
+                comp.optionnames[j] = comp.optionnames[j].value;
+            }
+        } else if (comp.children) {
+            for (var i = 0; i < comp.children.length; i++) {
+                fixSelections(comp.children[i]);
+            }
+        }
+    };
+
+    cspace.renderUtils = {
+        // TODO: These protoTree processing functions should be combined so that all processing
+        // can be done in one pass
+        addDecoratorOptionsToProtoTree: function (protoTree, that) {
+            for (var key in protoTree) {
+                if (protoTree.hasOwnProperty(key)) {
+                    var entry = protoTree[key];
+                    if (entry.decorators) {
+                        for (var i = 0; i < entry.decorators.length; i++) {
+                            var dec = entry.decorators[i];
+                            if (fluid.getGlobalValue(dec.func + ".getDecoratorOptions")) {
+                                $.extend(true, dec.options, fluid.invokeGlobalFunction(dec.func + ".getDecoratorOptions", [that]));
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        
+        multiplyRows: function (protoTree, model) {
+            for (var key in protoTree) {
+                if (protoTree.hasOwnProperty(key)) {
+                    if (key.indexOf(":") !== -1) {
+                        var row = protoTree[key].children[0];
+                        var elPath = findValueBinding(row);
+                        var dataCount = fluid.model.getBeanValue(model, elPath).length;
+                        if (dataCount === 0) {
+                            protoTree[key].children = [];
+                        } else {
+                            for (var i = 1; i <= dataCount-1; i++) {
+                                protoTree[key].children[i] = {};
+                                fluid.model.copyModel(protoTree[key].children[i], protoTree[key].children[0]);
+                                replaceIndex(protoTree[key].children[i], 0, i);
+                            }
+                        }
+                    }
+                }
+            }
+        },
+    
+        buildSelectorsFromUISpec: function (uispec, selectors) {
+            for (var key in uispec) {
+                if (uispec.hasOwnProperty(key)) {
+                    selectors[key] = (key.indexOf(":") === key.length-1 ? key.substring(0, key.length-1) : key);
+                }
+                if (uispec[key].children) {
+                    for (var i = 0; i < uispec[key].children.length; i++) {
+                        cspace.renderUtils.buildSelectorsFromUISpec(uispec[key].children[i], selectors);
+                    }
+                }
+            }
+        },
+    
+        // the protoExpander doesn't yet handle selections, so the tree it creates needs some adjustment
+        fixSelectionsInTree: function (tree) {
+            for (var i = 0; i < tree.children.length; i++) {
+                fixSelections(tree.children[i]);
+            }
+        }
+
+    };
+
     cspace.renderer = {
         buildComponentTree: function (spec, that) {
             var tree = {children: buildComponentTreeChildren(spec, that)};

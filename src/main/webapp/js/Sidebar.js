@@ -46,6 +46,7 @@ cspace = cspace || {};
              {data: buildRelationsList(that.options.relations, ["intake", "acquisition"]),
               uispec: that.options.uispec.relatedProcedures});
 
+
         return that;
     };
     

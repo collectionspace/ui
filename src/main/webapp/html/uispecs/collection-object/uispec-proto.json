@@ -149,34 +149,41 @@
     },
     "sidebar": {
         "termsUsed": {
-            "termRow:": {
+            ".csc-related-row:": {
                 "children": [
                     {
-                        "term": "${termsUsed.0.number}",
-                        "type": "${termsUsed.0.recordType}",
-                        "field": "${termsUsed.0.field}"
+                        ".csc-related-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "foo.html"
+                         },
+                        ".csc-related-recordtype": "${items.0.recordType}"
                     }
                 ]
                 }
         },
         "relatedProcedures": {
-            "procedureRow:": {
+            ".csc-related-row:": {
                 "children": [
                     {
-                        "number": "${relations.0.number}",
-                        "type": "${relations.0.recordType}",
-                        "lastUpdate": "${relations.0.lastUpdate}"
+                        ".csc-related-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "foo.html"
+                         },
+                        ".csc-related-recordtype": "${items.0.recordType}",
+                        ".csc-related-summary": "${items.0.summary}"
                     }
                 ]
             }
         },
         "relatedObjects": {
-            "objectRow:": {
+            ".csc-related-row:": {
                 "children": [
                     {
-                        "number": "${relations.0.number}",
-                        "summary": "${relations.0.summary}",
-                        "lastUpdate": "${relations.0.lastUpdate}"
+                        ".csc-related-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "foo.html"
+                         },
+                        ".csc-related-summary": "${items.0.summary}"
                     }
                 ]
             }

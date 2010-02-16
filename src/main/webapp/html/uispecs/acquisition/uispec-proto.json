@@ -94,85 +94,44 @@
     },
     "sidebar": {
         "termsUsed": {
-            "termRow:": {
+            ".csc-related-row:": {
                 "children": [
                     {
-                        "term": "${termsUsed.0.number}",
-                        "type": "${termsUsed.0.recordType}",
-                        "field": "${termsUsed.0.field}"
+                        ".csc-related-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "foo.html"
+                         },
+                        ".csc-related-recordtype": "${items.0.recordType}"
                     }
                 ]
                 }
         },
         "relatedProcedures": {
-            "procedureRow:": {
+            ".csc-related-row:": {
                 "children": [
                     {
-                        "number": "${relations.0.number}",
-                        "type": "${relations.0.recordType}",
-                        "lastUpdate": "${relations.0.lastUpdate}"
+                        ".csc-related-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "foo.html"
+                         },
+                        ".csc-related-recordtype": "${items.0.recordType}",
+                        ".csc-related-summary": "${items.0.summary}"
                     }
                 ]
             }
         },
         "relatedObjects": {
-            "objectRow:": {
+            ".csc-related-row:": {
                 "children": [
                     {
-                        "number": "${relations.0.number}",
-                        "summary": "${relations.0.summary}",
-                        "lastUpdate": "${relations.0.lastUpdate}"
+                        ".csc-related-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "foo.html"
+                         },
+                        ".csc-related-summary": "${items.0.summary}"
                     }
                 ]
             }
         }
     }
 }
-
-
-/*
-var protoTree = {
-    "referenceNum": "${fields.acquReferenceNum}",
-    "date": "${fields.acquDate}",
-    "accessionDate": "${fields.acquAccessionDate}",
-    "priceDesc": "${fields.acquPriceDesc}",
-    "priceType": "${fields.acquPriceType}",
-    "priceDenom": "${fields.acquPriceDenom}",
-    "price": "${fields.acquPrice}",
-    "fundingDenom": "${fields.acquFundingDenom}",
-    "fundingValue": "${fields.acquFundingValue}",
-    "fundingSource": "${fields.acquFundingSource}",
-    "fundingProviso": "${fields.acquFundingProviso}",
-    "method": "${fields.acquMethod}",
-    "authorize": "${fields.acquAuthorize}",
-    "authorizeDate": "${fields.acquAuthorizeDate}",
-    "source": "${fields.acquSource}",
-    "titleNum": "${fields.acquTitleNum}",
-    "reason": "${fields.acquReason}",
-    "note": "${fields.acquNote}",
-    "proviso": "${fields.acquProviso}"
-}
-var selectors = {
-    "referenceNum": ".csc-acquisition-numberPatternChooser-reference-number",
-    "date": ".csc-acquisition-date",
-    "accessionDate": ".csc-acquisition-accession-date",
-    "priceDesc": ".csc-acquisition-purchaser-price-description",
-    "priceType": ".csc-acquisition-purchase-price-type",
-    "priceDenom": ".csc-acquisition-purchaser-price-denomination",
-    "price": ".csc-acquisition-purchaser-price",
-    "fundingDenom": ".csc-acquisition-acquisition-funding-denomination",
-    "fundingValue": ".csc-acquisition-acquisition-funding-value",
-    "fundingSource": ".csc-acquisition-acquisition-funding-source",
-    "fundingProviso": ".csc-acquisition-acquisition-funding-provisos",
-    "method": ".csc-acquisition-acquisition-method",
-    "authorize": ".csc-acquisition-authorizer",
-    "authorizeDate": ".csc-acquisition-authorizer-date",
-    "source": ".csc-acquisition-acquisition-source",
-    "titleNum": ".csc-acquisition-transfer-of-title-number",
-    "reason": ".csc-acquisition-acquisition-reason",
-    "note": ".csc-acquisition-acquisition-note",
-    "proviso": ".csc-acquisition-acquisition-provisos"
-}
-var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
-var tree = expander(protoTree);
-*/
