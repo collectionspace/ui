@@ -14,9 +14,6 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-// related stuff in "relations"
-// integratedAuthorities in "termsUsed"
-
     var buildRelationsList = function (data, recordTypeList) {
         var relationList = [];
         if (data) {

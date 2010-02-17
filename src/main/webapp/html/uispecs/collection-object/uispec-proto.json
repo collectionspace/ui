@@ -1,12 +1,14 @@
 {
+    "titleBar": {
+        ".csc-titleBar-object-identification-object-title": "${fields.objectTitle}",
+        ".csc-titleBar-object-identification-object-number": "${fields.accessionNumber}",
+    },
     "dataEntry": {
         ".csc-object-identification-object-title": "${fields.objectTitle}",
-        ".csc-titleBar-object-identification-object-title": "${fields.objectTitle}",
         ".csc-object-identification-object-title-language": "${fields.objectTitleLanguage}",
         ".csc-object-identification-object-title-translation": "${fields.objectTitleTranslation}",
         ".csc-object-identification-object-title-type": "${fields.objectTitleType}",
         ".csc-object-identification-object-number": "${fields.accessionNumber}",
-        ".csc-titleBar-object-identification-object-number": "${fields.accessionNumber}",
         ".csc-object-identification-object-number-container": {
             "decorators": [{
                 "type": "fluid",

@@ -17,6 +17,10 @@ var demo = demo || {};
     cspace.objectSetup = function () {
 
         var setUpPage = function () {
+            var tbOpts = {
+                applier: "{pageBuilder}.applier",
+                uispec: "{pageBuilder}.uispec.titleBar"
+            };
             var deOpts = {
                 dataContext: "{pageBuilder}.dataContext",
                 applier: "{pageBuilder}.applier",
@@ -29,6 +33,10 @@ var demo = demo || {};
             }
     
             var dependencies = {
+                titleBar: {
+                    funcName: "cspace.titleBar",
+                    args: [".csc-object-entry-template", tbOpts]
+                },
                 dataEntry: {
                     funcName: "cspace.dataEntry",
                     args: [".csc-object-entry-template", deOpts]
@@ -45,6 +53,11 @@ var demo = demo || {};
                     }
                 },
                 pageSpec: {
+                    titleBar: {
+                        href: "ObjectTitleBar.html",
+                        templateSelector: ".csc-object-entry-titleBar-template",
+                        targetSelector: ".csc-object-entry-titleBar-container"
+                    },
                     dateEntry: {
                         href: "ObjectEntryTemplate.html",
                         templateSelector: ".csc-object-entry-template",

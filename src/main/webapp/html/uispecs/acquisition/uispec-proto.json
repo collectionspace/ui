@@ -1,4 +1,7 @@
 {
+"titleBar": {
+        ".csc-titleBar-acquisition-reference-number": "${fields.acquReferenceNum}",
+},
 "dataEntry": {
         ".csc-acquisition-numberPatternChooser-reference-number": "${fields.acquReferenceNum}",
         ".csc-acquisition-reference-number-patternChooserContainer": {
@@ -18,7 +21,6 @@
                 }
             }]
         },
-        ".csc-titleBar-acquisition-reference-number": "${fields.acquReferenceNum}",
         ".csc-acquisition-date": "${fields.acquDate}",
         ".csc-acquisition-acquisition-date-container": {
             "decorators": [{

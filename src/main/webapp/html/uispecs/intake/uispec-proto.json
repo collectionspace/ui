@@ -1,7 +1,9 @@
 {
+    "titleBar": {
+        ".csc-titleBar-intake-entry-number": "${fields.entryNumber}"
+    },
     "dataEntry": {
         ".csc-intake-entry-number": "${fields.entryNumber}",
-        ".csc-titleBar-intake-entry-number": "${fields.entryNumber}",
         ".csc-intake-entry-number-container": {
                 "decorators": [{
                     "type": "fluid",

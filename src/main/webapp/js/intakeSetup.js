@@ -18,6 +18,10 @@ var demo = demo || {};
     cspace.intakeSetup = function () {
 
         var setUpPage = function () {
+            var tbOpts = {
+                applier: "{pageBuilder}.applier",
+                uispec: "{pageBuilder}.uispec.titleBar"
+            };
             var deOpts = {
                 dataContext: "{pageBuilder}.dataContext",
                 applier: "{pageBuilder}.applier",
@@ -30,6 +34,10 @@ var demo = demo || {};
             }
     
             var dependencies = {
+                titleBar: {
+                    funcName: "cspace.titleBar",
+                    args: [".csc-object-intake-titleBar-template", tbOpts]
+                },
                 dataEntry: {
                     funcName: "cspace.dataEntry",
                     args: [".csc-object-intake-template", deOpts]
@@ -46,6 +54,11 @@ var demo = demo || {};
                     }
                 },
                 pageSpec: {
+                    titleBar: {
+                        href: "IntakeTitleBar.html",
+                        templateSelector: ".csc-object-intake-titleBar-template",
+                        targetSelector: ".csc-object-intake-titleBar-container"
+                    },
                     dateEntry: {
                         href: "IntakeTemplate.html",
                         templateSelector: ".csc-object-intake-template",

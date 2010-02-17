@@ -18,6 +18,10 @@ var demo = demo || {};
     cspace.acquisitionSetup = function () {
 
         var setUpPage = function () {
+            var tbOpts = {
+                applier: "{pageBuilder}.applier",
+                uispec: "{pageBuilder}.uispec.titleBar"
+            };
             var deOpts = {
                 dataContext: "{pageBuilder}.dataContext",
                 applier: "{pageBuilder}.applier",
@@ -30,6 +34,10 @@ var demo = demo || {};
             }
     
             var dependencies = {
+                titleBar: {
+                    funcName: "cspace.titleBar",
+                    args: [".csc-acquisition-titleBar-template", tbOpts]
+                },
                 dataEntry: {
                     funcName: "cspace.dataEntry",
                     args: [".csc-acquisition-template", deOpts]
@@ -46,6 +54,11 @@ var demo = demo || {};
                     }
                 },
                 pageSpec: {
+                    titleBar: {
+                        href: "acquisitionTitleBar.html",
+                        templateSelector: ".csc-acquisition-titleBar-template",
+                        targetSelector: ".csc-acquisition-titleBar-container"
+                    },
                     dateEntry: {
                         href: "acquisitionTemplate.html",
                         templateSelector: ".csc-acquisition-template",
