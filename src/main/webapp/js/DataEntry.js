@@ -76,6 +76,11 @@ var cspace = cspace || {};
 		
 		confirmation.parent().css("overflow", "visible");
         
+        fluid.fetchResources(resources, function () {
+            var templates = fluid.parseTemplates(resources, ["confirmation"], {});
+            fluid.reRender(templates, confirmation, {});
+        });
+        
 		$("a:not([href*=#])").live("click", function (e) {
             if (that.unsavedChanges) {
                 var href;
@@ -158,6 +163,7 @@ var cspace = cspace || {};
             applier: that.options.applier
         };
         fluid.selfRender(that.container, tree, renderOpts);
+        that.events.pageRendered.fire();
 that.locate("save").click(that.save);
     };
 
