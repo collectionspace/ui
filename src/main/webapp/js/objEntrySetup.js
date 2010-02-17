@@ -53,6 +53,11 @@ var demo = demo || {};
                     }
                 },
                 pageSpec: {
+                    header: {
+                        href: "header.html",
+                        templateSelector: ".csc-header-template",
+                        targetSelector: ".csc-header-container"
+                    },
                     titleBar: {
                         href: "ObjectTitleBar.html",
                         templateSelector: ".csc-object-entry-titleBar-template",

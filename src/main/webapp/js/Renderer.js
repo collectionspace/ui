@@ -55,20 +55,10 @@ var cspace = cspace || {};
     };
 
     var extractEL = function (string) {
-        if (ELstyle === "ALL") {
-            return string;
-        }
-        else if (ELstyle.length === 1) {
-            if (string.charAt(0) === ELstyle) {
-                return string.substring(1);
-            }
-        }
-        else if (ELstyle === "${}") {
-            var i1 = string.indexOf("${");
-            var i2 = string.indexOf("}");
-            if (i1 === 0 && i2 !== -1) {
-                return string.substring(2, i2);
-            }
+        var i1 = string.indexOf("${");
+        var i2 = string.indexOf("}");
+        if (i1 !== -1 && i2 !== -1) {
+            return string.substring(2, i2);
         }
     };
 
@@ -84,47 +74,40 @@ var cspace = cspace || {};
         return string;
     };
 
+
+    // the renderer extracts an actual value out of the model for selections
+    // even if they are valuebound. If our model is empty, this causes an error
+    var fixModelForSelection = function (entry, model) {
+        if (entry.selection) {
+            var elPath = extractEL(entry.selection);
+            var modelVal = fluid.model.getBeanValue(model, elPath);
+            if (!modelVal) {
+                fluid.model.setBeanValue(model, elPath, "");
+            }
+        }
+    };
+
+    // TODO: Note that this assumes absolutely NO binding to the data model
+    var constructLinks = function (protoTree, model) {
+        for (var key in protoTree) {
+            if (protoTree.hasOwnProperty(key)) {
+                var entry = protoTree[key];
+                if (entry.target) {
+                    entry.target = replaceWithValues(entry.target, model);
+                    entry.linktext = replaceWithValues(entry.linktext, model);
+                } else if (entry.children) {
+                    for (var i = 0; i < entry.children.length; i++) {
+                        constructLinks(entry.children[i], model);
+                    }
+                } else if (typeof(entry) === "object") {
+                    constructLinks(entry, model);
+                }
+            }
+        }
+    };
+
     cspace.renderUtils = {
 
-        // TODO: These protoTree processing functions should be combined so that all processing
-        // can be done in one pass
-        addDecoratorOptionsToProtoTree: function (protoTree, that) {
-            for (var key in protoTree) {
-                if (protoTree.hasOwnProperty(key)) {
-                    var entry = protoTree[key];
-                    if (entry.decorators) {
-                        for (var i = 0; i < entry.decorators.length; i++) {
-                            var dec = entry.decorators[i];
-                            if (fluid.getGlobalValue(dec.func + ".getDecoratorOptions")) {
-                                $.extend(true, dec.options, fluid.invokeGlobalFunction(dec.func + ".getDecoratorOptions", [that]));
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        
-        multiplyRows: function (protoTree, model) {
-            for (var key in protoTree) {
-                if (protoTree.hasOwnProperty(key)) {
-                    if (key.indexOf(":") !== -1) {
-                        var row = protoTree[key].children[0];
-                        var elPath = findValueBinding(row);
-                        var dataCount = fluid.model.getBeanValue(model, elPath).length;
-                        if (dataCount === 0) {
-                            protoTree[key].children = [];
-                        } else {
-                            for (var i = 1; i <= dataCount-1; i++) {
-                                protoTree[key].children[i] = {};
-                                fluid.model.copyModel(protoTree[key].children[i], protoTree[key].children[0]);
-                                replaceIndex(protoTree[key].children[i], 0, i);
-                            }
-                        }
-                    }
-                }
-            }
-        },
-    
         buildSelectorsFromUISpec: function (uispec, selectors) {
             for (var key in uispec) {
                 if (uispec.hasOwnProperty(key)) {
@@ -145,25 +128,6 @@ var cspace = cspace || {};
             }
         },
         
-        // TODO: Note that this assumes absolutely NO binding to the data model
-        constructLinks: function (protoTree, model) {
-            for (var key in protoTree) {
-                if (protoTree.hasOwnProperty(key)) {
-                    var entry = protoTree[key];
-                    if (entry.target) {
-                        entry.target = replaceWithValues(entry.target, model);
-                        entry.linktext = replaceWithValues(entry.linktext, model);
-                    } else if (entry.children) {
-                        for (var i = 0; i < entry.children.length; i++) {
-                            cspace.renderUtils.constructLinks(entry.children[i], model);
-                        }
-                    } else if (typeof(entry) === "object") {
-                        cspace.renderUtils.constructLinks(entry, model);
-                    }
-                }
-            }
-        },
-
         buildProtoTree: function (uispec, that) {
             var protoTree = {};
             fluid.model.copyModel(protoTree, uispec);
@@ -172,6 +136,8 @@ var cspace = cspace || {};
                 if (protoTree.hasOwnProperty(key)) {
                     var entry = protoTree[key];
 
+                    fixModelForSelection(entry, that.model);
+                    
                     // add decorator options from that
                     if (entry.decorators) {
                         for (var i = 0; i < entry.decorators.length; i++) {
@@ -186,11 +152,12 @@ var cspace = cspace || {};
                     if (key.indexOf(":") !== -1) {
                         var row = entry.children[0];
                         var elPath = findValueBinding(row);
-                        var dataCount = fluid.model.getBeanValue(that.model, elPath).length;
-                        if (dataCount === 0) {
-                            entry.children = [];
-                        } else {
-                            for (var i = 1; i <= dataCount-1; i++) {
+                        var data = fluid.model.getBeanValue(that.model, elPath);
+                        if (!data) {
+                            fluid.model.setBeanValue(that.model, elPath, []);
+                        }
+                        else {
+                            for (var i = 1; i < data.length; i++) {
                                 entry.children[i] = {};
                                 fluid.model.copyModel(entry.children[i], entry.children[0]);
                                 replaceIndex(entry.children[i], 0, i);
@@ -200,7 +167,7 @@ var cspace = cspace || {};
 
                     // build static links (assumes no data binding for link elements!)
                     if ((typeof(entry) === "object") && !entry.decorators) {
-                        cspace.renderUtils.constructLinks(entry, that.model);
+                        constructLinks(entry, that.model);
                     }
                 }
             }

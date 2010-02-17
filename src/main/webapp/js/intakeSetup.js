@@ -54,6 +54,11 @@ var demo = demo || {};
                     }
                 },
                 pageSpec: {
+                    header: {
+                        href: "header.html",
+                        templateSelector: ".csc-header-template",
+                        targetSelector: ".csc-header-container"
+                    },
                     titleBar: {
                         href: "IntakeTitleBar.html",
                         templateSelector: ".csc-object-intake-titleBar-template",
