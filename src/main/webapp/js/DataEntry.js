@@ -35,31 +35,7 @@ var cspace = cspace || {};
         };
     };
 
-    var makeDisplayFieldUpdater = function (selector) {
-        return function (model, oldModel, changeRequest) {
-            $(selector).text(fluid.model.getBeanValue(model, changeRequest.path));
-        };
-    };
-
-    var setupModel = function (that) {
-        // check the spec for any model fields that need to be displayed in an extra field
-        for (var key in that.uispec) {
-            if (that.uispec.hasOwnProperty(key)) {
-                var modelfield = that.uispec[key];
-                if (modelfield.hasOwnProperty("displayOnlySelectors")) {
-                    var displayOnlySelectors = modelfield.displayOnlySelectors;
-                    for (var i = 0, len = displayOnlySelectors.length; i < len; i++) {
-                        var sel = displayOnlySelectors[i];
-                        that.displayOnlyFields[key] = sel;
-                        that.options.applier.modelChanged.addListener(key, makeDisplayFieldUpdater(sel));                        
-                    }
-                }
-            }
-        }
-    };
-	
 	var setupConfirmation = function (that) {
-        
         var resources = {
             confirmation: {
                 href: that.options.confirmationTemplateUrl
@@ -67,11 +43,11 @@ var cspace = cspace || {};
         };
         
         var confirmation = $("<div></div>", that.container[0].ownerDocument)
-            .html("You are about to navigate from the current record. Please confirm...")
+            .html(that.options.strings.confirmation)
             .dialog({
                 autoOpen: false,
                 modal: true,
-                title: "Confirmation."
+                title: that.options.strings.confirmationTitle
             });
 		
 		confirmation.parent().css("overflow", "visible");
@@ -99,6 +75,8 @@ var cspace = cspace || {};
 
     var bindEventHandlers = function (that) {
 
+        setupConfirmation(that);
+
         that.events.onSave.addListener(function () {
             displayTimestampedMessage(that, that.options.strings.savingMessage, "");
         });
@@ -117,31 +95,26 @@ var cspace = cspace || {};
         });
 
         that.options.dataContext.events.afterFetch.addListener(function (data) {
-            setupModel(that);
             that.refreshView();
         });
 
         that.events.pageRendered.addListener(function () {
-            for (var path in that.displayOnlyFields) {
-                if (that.displayOnlyFields.hasOwnProperty(path)) {
-                    $(that.displayOnlyFields[path]).text(fluid.model.getBeanValue(that.model, path) + " ");
-                }
-            }
-
-            for (var field in that.uispec) {
-                if (that.uispec.hasOwnProperty(field)) {
-                    var el = $(that.uispec[field].selector);
+            that.locate("save").click(that.save);
+            for (var selector in that.options.uispec) {
+                if (that.options.uispec.hasOwnProperty(selector)) {
+                    if (selector.indexOf(":") !== -1) {
+                        selector = selector.substring(0, selector.indexOf(":"));
+                    }
+                    var el = $(selector);
                     el.change(function () {
                         that.unsavedChanges = true;
                     });
                 }
             }        
         });
-        
-		setupConfirmation(that);
 
         that.options.dataContext.events.onError.addListener(makeDCErrorHandler(that));
-    };
+   };
     
     var setupDataEntry = function (that) {
         bindEventHandlers(that);
@@ -150,11 +123,11 @@ var cspace = cspace || {};
     
     var renderPage = function (that) {
         var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
-        var protoTree = cspace.renderUtils.buildProtoTree(that.uispec, that);
+        var protoTree = cspace.renderUtils.buildProtoTree(that.options.uispec, that);
         var tree = expander(protoTree);
         cspace.renderUtils.fixSelectionsInTree(tree);
         var selectors = {};
-        cspace.renderUtils.buildSelectorsFromUISpec(that.uispec, selectors);
+        cspace.renderUtils.buildSelectorsFromUISpec(that.options.uispec, selectors);
         var renderOpts = {
             cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(selectors, {}),
             model: that.model,
@@ -164,7 +137,6 @@ var cspace = cspace || {};
         };
         fluid.selfRender(that.container, tree, renderOpts);
         that.events.pageRendered.fire();
-that.locate("save").click(that.save);
     };
 
     /**
@@ -173,8 +145,6 @@ that.locate("save").click(that.save);
     cspace.dataEntry = function (container, options) {
         var that = fluid.initView("cspace.dataEntry", container, options);
         that.model = that.options.applier.model;
-        that.uispec = that.options.uispec;
-        that.displayOnlyFields = {};
         that.unsavedChanges = false;
 
         that.refreshView = function () {
@@ -218,7 +188,6 @@ that.locate("save").click(that.save);
             errorDialog: ".csc-error-dialog",
             errorMessage: ".csc-error-message",
             save: ".csc-save",
-            saveSecondary: ".csc-save-bottom",
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
             timestamp: ".csc-timestamp",
@@ -235,7 +204,9 @@ that.locate("save").click(that.save);
             deleteFailedMessage: "Error deleting Record: ",
             fetchFailedMessage: "Error retriving Record: ",
             defaultTermIndicator: " (default)",
-            noDefaultInvitation: "-- Select an item from the list --"
+            noDefaultInvitation: "-- Select an item from the list --",
+            confirmation: "You are about to navigate from the current record. Please confirm...",
+            confirmationTitle: "Confirmation."
         },
 		confirmationTemplateUrl: "../html/Confirmation.html",
         
