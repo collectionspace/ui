@@ -145,10 +145,7 @@ var cspace = cspace || {};
     
     var renderPage = function (that) {
         var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
-        var protoTree = {};
-        fluid.model.copyModel(protoTree, that.uispec);
-        cspace.renderUtils.addDecoratorOptionsToProtoTree(protoTree, that);
-        cspace.renderUtils.multiplyRows(protoTree, that.model);
+        var protoTree = cspace.renderUtils.buildProtoTree(that.uispec, that);
         var tree = expander(protoTree);
         cspace.renderUtils.fixSelectionsInTree(tree);
         var selectors = {};
