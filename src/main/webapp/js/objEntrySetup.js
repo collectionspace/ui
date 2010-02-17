@@ -85,7 +85,7 @@ var demo = demo || {};
 
         if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
             jQuery.ajax({
-                url: "./uispecs/collection-object/uispec-proto.json",
+                url: "./uispecs/collection-object/uispec.json",
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {
