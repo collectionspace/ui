@@ -24,7 +24,9 @@ var cspace = cspace || {};
             recordType = "objects";
         }
 // end of fudge for CSPACE-701
-        return "../../chain/" + recordType + "/search?query=" + query;
+        
+        var recordTypeParts = recordType.split('-');        
+        return "../../chain/" + recordTypeParts.join('/') + "/search?query=" + query;
     };
 
     var colDefsGenerated = function (columnList, recordType) {

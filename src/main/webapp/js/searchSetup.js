@@ -18,7 +18,8 @@ var demo = demo || {};
         var opts = {};
         if (cspace.util.isLocal()) {
             opts.searchUrlBuilder = function (recordType, query) {
-                return "./data/" + recordType + "/search/list.json";
+                var recordTypeParts = (recordType === "collection-object"? [recordType]: recordType.split('-'));        
+                return "./data/" + recordTypeParts.join('/') + "/search/list.json";
             };
         }
         var acquisition = cspace.search(".main-search-page", opts);
