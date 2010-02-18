@@ -58,19 +58,24 @@ var cspace = cspace || {};
         };
 
         that.refreshView = function () {
-            var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
-            var protoTree = cspace.renderUtils.buildProtoTree(that.options.uispec, that);
-            var tree = expander(protoTree);
-            var selectors = {};
-            cspace.renderUtils.buildSelectorsFromUISpec(that.options.uispec, selectors);
-            var renderOpts = {
-                cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(selectors, {}),
-                model: that.model,
-//                debugMode: true,
-                autoBind: true,
-                applier: that.options.applier
-            };
-            fluid.selfRender(that.container, tree, renderOpts);
+            if (that.model.items.length > 0) {
+                that.locate("noneYetMessage").hide();
+                var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
+                var protoTree = cspace.renderUtils.buildProtoTree(that.options.uispec, that);
+                var tree = expander(protoTree);
+                var selectors = {};
+                cspace.renderUtils.buildSelectorsFromUISpec(that.options.uispec, selectors);
+                var renderOpts = {
+                    cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(selectors, {}),
+                    model: that.model,
+                    debugMode: true,
+                    autoBind: true,
+                    applier: that.options.applier
+                };
+                fluid.selfRender(that.container, tree, renderOpts);
+            } else {
+                that.locate("noneYetMessage").show();
+            }
             that.locate("numberOfItems").text("(" + that.model.items.length + ")");
         };
 
@@ -84,7 +89,8 @@ var cspace = cspace || {};
         },
         selectors: {
             numberOfItems: ".csc-num-items",    // present in sidebar, not in find/edit
-            errorMessage: ".csc-error-message"
+            errorMessage: ".csc-error-message",
+            noneYetMessage: ".csc-no-records-message"
         },
         events: {
             modelChanged: null
