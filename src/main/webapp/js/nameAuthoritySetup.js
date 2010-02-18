@@ -73,6 +73,11 @@ var demo = demo || {};
                         href: "right-sidebar.html",
                         templateSelector: ".csc-right-sidebar",
                         targetSelector: ".csc-sidebar-container"
+                    },
+                    footer: {
+                        href: "footer.html",
+                        templateSelector: ".csc-footer",
+                        targetSelector: ".csc-footer-container"
                     }
                 }
             };

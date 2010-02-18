@@ -65,13 +65,19 @@ cspace = cspace || {};
             };
             
             var options = {
-/*                pageSpec: {
-                    objects: {},
-                    proceduresIntake: {},
-                    proceduresAcquisiton: {},
-                    authorityTerms: {}
+                pageSpec: {
+                    header: {
+                        href: "header.html",
+                        templateSelector: ".csc-header-template",
+                        targetSelector: ".csc-header-container"
+                    },
+                    footer: {
+                        href: "footer.html",
+                        templateSelector: ".csc-footer",
+                        targetSelector: ".csc-footer-container"
+                    }
                 }
-*/            };
+            };
             cspace.pageBuilder(dependencies, options);
         };
 
