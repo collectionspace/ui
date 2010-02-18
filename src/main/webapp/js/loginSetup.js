@@ -10,7 +10,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 /*global jQuery, window, cspace*/
 
-var cspace_login = cspace_login || {};
+cspace_login = cspace_login || {};
 
 (function ($) {
 
