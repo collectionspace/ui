@@ -1,0 +1,57 @@
+{
+    "titleBar": {
+        ".csc-titleBar-displayName": "${fields.nameAuthorityName}",
+        ".csc-titleBar-birthDate": "${fields.nameAuthorityBirthDate}",
+        ".csc-titleBar-deathDate": "${fields.nameAuthorityDeathDate}",
+    },
+    "dataEntry": {
+        ".csc-name-authority-name": "${fields.nameAuthorityName}",
+        ".csc-name-authority-reference-number": "${fields.nameAuthorityReferenceNumber}",
+        ".csc-name-authority-status": {
+            "selection": "${fields.nameAuthorityStatus}",
+            "optionlist": ["option1", "option2", "option3"],
+            "optionnames": ["option1", "option2", "option3"]
+        }
+    },
+    "sidebar": {
+        "termsUsed": {
+            ".csc-related-row:": {
+                "children": [
+                    {
+                        ".csc-related-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "nameAuthority?csid=${items.0.csid}"
+                         },
+                        ".csc-related-recordtype": "${items.0.recordtype}"
+                    }
+                ]
+                }
+        },
+        "relatedProcedures": {
+            ".csc-related-row:": {
+                "children": [
+                    {
+                        ".csc-related-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
+                         },
+                        ".csc-related-recordtype": "${items.0.recordtype}",
+                        ".csc-related-summary": "${items.0.summary}"
+                    }
+                ]
+            }
+        },
+        "relatedObjects": {
+            ".csc-related-row:": {
+                "children": [
+                    {
+                        ".csc-related-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "object.html?csid=${items.0.csid}"
+                         },
+                        ".csc-related-summary": "${items.0.summary}"
+                    }
+                ]
+            }
+        }
+    }}

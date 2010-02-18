@@ -1,0 +1,17 @@
+{
+    "csid": "123.456.789",
+    "fields": {
+        "nameAuthorityName": "Fred Bloggs",
+        "nameAuthorityReferenceNumber": "123456789",
+        "nameAuthorityStatus": "option2"
+    },
+    "relations": [
+        {
+            "csid": "1984.068.0335b",
+            "number": "1984.068.0335b",
+            "summary": "some other thing",
+            "recordtype": "objects",
+            "relationshiptype": "also affects"
+        }
+    ]
+}
