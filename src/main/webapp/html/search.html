@@ -27,6 +27,7 @@
         <script type="text/javascript" src="../js/cspace.js"></script>
         <script type="text/javascript" src="../js/Utilities.js"></script>
         <script type="text/javascript" src="../js/Renderer.js"></script>
+        <script type="text/javascript" src="../js/PageBuilder.js"></script>
         <script type="text/javascript" src="../js/DataContext.js"></script>
         <script type="text/javascript" src="../js/Search.js"></script>
         <script type="text/javascript" src="../js/searchSetup.js"></script>
@@ -40,42 +41,18 @@
 		<div class="fl-container-1024 fl-centered">
 		
 			<!-- CSpace logo and right-side search box -->
-			<div id="name-header">
+			<div class="csc-header-container" id="name-header">
 				<!-- this div will be filled in with the contents of the Template -->
-			</div>
-			
-			<div id="header-menu">
-				<div class="header-menu-logo"><a href="http://www.collectionspace.org/current_release"><img src="../images/header-logo.png" height=60 width=345 alt="CollectionSpace" /></a></div>
-				<div class="header-menu-right">
-					<div class="header-menu-logout"><a href="index.html">Log out</a></div>
-					<div class="clear"></div>
-					<div class="header-menu-search">
-						<form action="search.html">
-							<select name="recordtype" class="csc-global-search-record-type">
-								<option value="object">Object</option>
-								<option value="intake">Intake</option>
-								<option value="acquisition">Acquisition</option>
-							</select>
-							<input name="keywords" type="text" class="csc-global-search-keywords" />
-                            <input type="submit" class="csc-global-search-submit globalSearchButton" value="Search" />
-						</form>
-					</div>
-				</div>
-				<div class="clear"></div>
-				
-				<div class="header-menu-row">
-					<div class="inner">
-						<span class="menu-item">My CollectionSpace</span>
-						<span class="menu-item"><a href="createnew.html">Create New</a></span>
-						<span class="menu-item selected"><a href="findedit.html">Find and Edit</a></span>
-						<span class="menu-item">Report</span>
-						<span class="menu-item"><a href="administration.html">Administration</a></span>
-					</div>
-				</div>
 			</div>
 			
 			<div class="fl-container-1024-inner">
 			
+                <div id="title-bar">
+                    <div class="content">
+                        <div class="header-name">Search</div>
+                    </div>
+                </div>
+                    
 				<div id="all-content" class="fl-fix">
 
 					<!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
@@ -196,7 +173,7 @@
 			</div>
 			
 			<!-- footer block -->
-			<div id="footer">
+			<div class="csc-footer-container" id="footer">
 				<!-- this div will be filled in with the contents of the Template -->
 			</div> <!-- END footer block -->
 			

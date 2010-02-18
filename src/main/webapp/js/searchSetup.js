@@ -15,13 +15,34 @@ cspace = cspace || {};
 (function ($) {
 
     cspace.searchSetup = function () {
-        var opts = {};
+        
+        var searchOpts = {};
         if (cspace.util.isLocal()) {
-            opts.searchUrlBuilder = function (recordType, query) {
+            searchOpts.searchUrlBuilder = function (recordType, query) {
                 return "./data/" + recordType + "/search/list.json";
             };
         }
-        var acquisition = cspace.search(".main-search-page", opts);
+        var dependencies = {
+            search: {
+                funcName: "cspace.search",
+                args: [".main-search-page", searchOpts]
+            }
+        };
+        var pageBuilderOpts = {
+            pageSpec: {
+                header: {
+                    href: "header.html",
+                    templateSelector: ".csc-header-template",
+                    targetSelector: ".csc-header-container"
+                },
+                footer: {
+                    href: "footer.html",
+                    templateSelector: ".csc-footer",
+                    targetSelector: ".csc-footer-container"
+                }
+            }
+        };
+        cspace.pageBuilder(dependencies, pageBuilderOpts);
     };
     
 })(jQuery);
