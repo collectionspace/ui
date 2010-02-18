@@ -122,7 +122,9 @@ cspace = cspace || {};
                 }
                 
             }
-            setUpPageBuilder(that);
+            if (!that.options.htmlOnly) {
+                setUpPageBuilder(that);                
+            }
         });
 
     };
@@ -150,6 +152,8 @@ cspace = cspace || {};
     fluid.defaults("cspace.pageBuilder", {
         dataContext: {
             type: "cspace.dataContext"
-        }
+        },
+        
+        htmlOnly: false
     });
 })(jQuery, fluid_1_2);
