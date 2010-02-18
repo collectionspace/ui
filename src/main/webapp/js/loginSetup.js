@@ -10,11 +10,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 /*global jQuery, window, cspace*/
 
-var cspace_login = cspace_login || {};
+cspace = cspace || {};
 
 (function ($) {
 
-    cspace_login.setup = function (errorMessageSelector) {
+    cspace.setup = function (errorMessageSelector) {
         errorMessageSelector = errorMessageSelector || ".csc-login-error";
         var loginResult = cspace.util.getUrlParameter("result");
         if (loginResult === "fail") {

@@ -10,7 +10,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 /*global jQuery, fluid_1_2*/
 
-var cspace = cspace || {};
+cspace = cspace || {};
 
 (function ($, fluid) {
     
