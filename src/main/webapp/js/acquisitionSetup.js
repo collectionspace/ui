@@ -31,12 +31,16 @@ cspace = cspace || {};
                 relations: "{pageBuilder}.model.relations",
                 termsUsed: "{pageBuilder}.model.termsUsed",
                 uispec: "{pageBuilder}.uispec.sidebar"
-            }
-    
+            };
+            
             var dependencies = {
                 titleBar: {
                     funcName: "cspace.titleBar",
                     args: [".csc-acquisition-titleBar-template", tbOpts]
+                },
+                tabs: {
+                    funcName: "cspace.tabs",
+                    args: [".csc-tabs-template"]
                 },
                 dataEntry: {
                     funcName: "cspace.dataEntry",
@@ -64,10 +68,15 @@ cspace = cspace || {};
                         templateSelector: ".csc-acquisition-titleBar-template",
                         targetSelector: ".csc-acquisition-titleBar-container"
                     },
+                    tabs: {
+                        href: "tabsTemplate.html",
+                        templateSelector: ".csc-tabs-template",
+                        targetSelector: ".csc-tabs-container"
+                    },
                     dateEntry: {
                         href: "acquisitionTemplate.html",
                         templateSelector: ".csc-acquisition-template",
-                        targetSelector: ".csc-acquisition-container"
+                        targetSelector: ".csc-record-edit-container"
                     },
                     sidebar: {
                         href: "right-sidebar.html",

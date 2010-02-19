@@ -37,6 +37,10 @@ cspace = cspace || {};
                     funcName: "cspace.titleBar",
                     args: [".csc-object-entry-template", tbOpts]
                 },
+                tabs: {
+                    funcName: "cspace.tabs",
+                    args: [".csc-tabs-template"]
+                },
                 dataEntry: {
                     funcName: "cspace.dataEntry",
                     args: [".csc-object-entry-template", deOpts]
@@ -58,6 +62,11 @@ cspace = cspace || {};
                         templateSelector: ".csc-header-template",
                         targetSelector: ".csc-header-container"
                     },
+                    tabs: {
+                        href: "tabsTemplate.html",
+                        templateSelector: ".csc-tabs-template",
+                        targetSelector: ".csc-tabs-container"
+                    },
                     titleBar: {
                         href: "ObjectTitleBar.html",
                         templateSelector: ".csc-object-entry-titleBar-template",
@@ -66,7 +75,7 @@ cspace = cspace || {};
                     dateEntry: {
                         href: "ObjectEntryTemplate.html",
                         templateSelector: ".csc-object-entry-template",
-                        targetSelector: ".csc-object-entry-container"
+                        targetSelector: ".csc-record-edit-container"
                     },
                     sidebar: {
                         href: "right-sidebar.html",

@@ -38,6 +38,10 @@ cspace = cspace || {};
                     funcName: "cspace.titleBar",
                     args: [".csc-object-intake-titleBar-template", tbOpts]
                 },
+                tabs: {
+                    funcName: "cspace.tabs",
+                    args: [".csc-tabs-template"]
+                },
                 dataEntry: {
                     funcName: "cspace.dataEntry",
                     args: [".csc-object-intake-template", deOpts]
@@ -54,6 +58,11 @@ cspace = cspace || {};
                     }
                 },
                 pageSpec: {
+                    tabs: {
+                        href: "tabsTemplate.html",
+                        templateSelector: ".csc-tabs-template",
+                        targetSelector: ".csc-tabs-container"
+                    },
                     header: {
                         href: "header.html",
                         templateSelector: ".csc-header-template",
@@ -67,7 +76,7 @@ cspace = cspace || {};
                     dateEntry: {
                         href: "IntakeTemplate.html",
                         templateSelector: ".csc-object-intake-template",
-                        targetSelector: ".csc-object-intake-container"
+                        targetSelector: ".csc-record-edit-container"
                     },
                     sidebar: {
                         href: "right-sidebar.html",

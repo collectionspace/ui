@@ -18,6 +18,7 @@
 		<script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/core/js/jquery.js"></script>
 		<script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/ui/js/ui.core.js"></script>
 		<script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/ui/js/ui.dialog.js"></script>
+        <script type="text/javascript" src="../lib/jquery/ui/js/ui.tabs.js"></script>
 		<script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/plugins/delegate/js/jquery.delegate.js"></script>
 		<script type="text/javascript" src="../fluid-infusion/src/webapp/lib/json/js/json2.js"></script>
 		<script type="text/javascript" src="../fluid-infusion/src/webapp/framework/core/js/Fluid.js"></script>
@@ -40,6 +41,7 @@
 		<script type="text/javascript" src="../js/RecordList.js"></script>
 		<script type="text/javascript" src="../js/rightSidebarSetup.js"></script>
 		<script type="text/javascript" src="../js/NumberPatternChooser.js"></script>
+        <script type="text/javascript" src="../js/Tabs.js"></script>
         <script type="text/javascript" src="../js/TitleBar.js"></script>
         <script type="text/javascript" src="../js/Sidebar.js"></script>
         <script type="text/javascript" src="../js/PageBuilder.js"></script>
@@ -73,9 +75,24 @@
                 <div class="csc-nameAuthority-titleBar-container">
                 </div>
                 
-				<!-- this div will be filled in with the contents of the Template -->
-				<div class="csc-name-authority-container" id="csc-name-authority-template">
-				</div>
+                <!-- main content -->
+                <div id="all-content" class="fl-fix acquisition">
+                    <!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
+                    <div class="fl-fix fl-container-flex fl-col-mixed2">
+    
+                        <!-- left-side container. Contains bulk of Object Entry forms and fields -->
+                        <div class="fl-container-left fl-force-left">
+                            <div class="csc-tabs-container"></div>
+                        </div>
+    
+                        <div class="fl-container-pivot fl-force-right">
+                            <div class="csc-sidebar-container"></div>
+                        </div>
+                        <div class="clear"></div>
+
+                    </div>
+                </div>
+                <!-- END main content -->
 			</div>
 			
 		</div>

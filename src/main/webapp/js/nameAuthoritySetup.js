@@ -18,6 +18,12 @@ cspace = cspace || {};
     cspace.nameAuthoritySetup = function () {
 
         var setUpPage = function () {
+            var tabOpts = {
+                tabList: [
+                    {name: "Person Name Authority", target: "#primaryTab"},
+                    {name: "Contact Information", target: null}
+                ]
+            };
             var tbOpts = {
                 applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.titleBar"
@@ -31,12 +37,16 @@ cspace = cspace || {};
                 relations: "{pageBuilder}.model.relations",
                 termsUsed: "{pageBuilder}.model.termsUsed",
                 uispec: "{pageBuilder}.uispec.sidebar"
-            }
+            };
     
             var dependencies = {
                 titleBar: {
                     funcName: "cspace.titleBar",
                     args: [".csc-nameAuthority-titleBar-template", tbOpts]
+                },
+                tabs: {
+                    funcName: "cspace.tabs",
+                    args: [".csc-tabs-template", tabOpts]
                 },
                 dataEntry: {
                     funcName: "cspace.dataEntry",
@@ -54,6 +64,11 @@ cspace = cspace || {};
                     }
                 },
                 pageSpec: {
+                    tabs: {
+                        href: "tabsTemplate.html",
+                        templateSelector: ".csc-tabs-template",
+                        targetSelector: ".csc-tabs-container"
+                    },
                     header: {
                         href: "header.html",
                         templateSelector: ".csc-header-template",
@@ -67,7 +82,7 @@ cspace = cspace || {};
                     dateEntry: {
                         href: "nameAuthorityTemplate.html",
                         templateSelector: ".csc-name-authority-template",
-                        targetSelector: ".csc-name-authority-container"
+                        targetSelector: ".csc-record-edit-container"
                     },
                     sidebar: {
                         href: "right-sidebar.html",
