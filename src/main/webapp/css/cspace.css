@@ -17,9 +17,10 @@ input, textarea {font-family:inherit; font-size:12px; font-weight:inherit; line-
 input[type="button"], input[type="submit"] {height:auto;}
 input:focus, textarea:focus {outline: 1px solid black;}
 input[type="text"], input[type="password"], textarea {/*width:99.5%;*/ width:100%; margin:0;}
-input.savebutton, input.globalSearchButton, input.cancelbutton, input.button
+input.savebutton, input.globalSearchButton, input.cancelbutton, input.button, input.button.add
 	{background-color:#94BC80; padding: 2px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; margin:0; border:none;}
 input.button, input.button.quick {float:left; padding:2px 12px;}
+input.button.add {padding:0px 4px; font-size:11px; line-height:100%; background-color:#fff; color:#94BC80;}
 #search-box input.button, #search-box input.button.quick {floaT:none; padding:2px 12px;}
 .input-button, input.input-button {background-color:#94BC80; padding: 5px 12px 4px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; margin:0 5px; border:none; float:left;}
 .input-button.quick , .button.quick {background-color:#fff; padding: 5px 12px 4px 12px; font-weight:bold; color:#93BC7F; cursor:pointer; font-size:13px; 
@@ -80,12 +81,14 @@ td textarea {border:none;}
 .flc-pager-top, .flc-pager-bottom {background-color:#F2F2F3; padding:4px 12px; font-size:11px; line-height:11px;}
 .flc-pager-top {border -top:1px solid #CECFD1;}
 .flc-pager-bottom {border -bottom:1px solid #CECFD1;}
-.fl-pager .fl-pager-ui li {float:left;}
-.fl-pager .fl-pager-ui li.flc-per-page, .fl-pager .fl-pager-ui li.flc-pager-summary  {float:right; color:#6D6E71;}
-.fl-pager .fl-pager-ui li.flc-per-page {margin-top:-4px;}
-.pager-links{display:inline;}
+.fl-pager .fl-pager-ui li {float:left; padding-top:1px;}
+.fl-pager .fl-pager-ui li.flc-pager-summary  {float:right; color:#6D6E71;}
+.fl-pager .fl-pager-ui li.flc-per-page {/*margin-top:-4px;*/}
+.fl-pager .fl-pager-ui li.flc-per-page {float:left; color:#6D6E71;}
+.pager-links {display:inline; padding-top:5px;}
+.fl-pager .fl-pager-ui  { padding -top:5px;}
 #pager-top {padding:6px 12px 2px 7px;}
-#pager-bottom {padding:6px 12px 7px 7px;}
+#pager-bottom {padding:4px 1px 4px 1px; background-color:#E8E8E8; border-bottom: 1px solid #C8C6C6;}
 
 
 /*set min-height for record pages */
@@ -138,7 +141,7 @@ td textarea {border:none;}
 #secondary-nav-menu-sub .time-stamp {float:right; padding-top:6px; font-size:10px; color:#BEBEBE; margin-right:10px;}
 
 /*search page related */ /* need to revisit */
-#search-box {padding: 12px 0 12px 12px; margin:0 0 4px 0; background-color:#E6E6E6; border:1px solid #CECFD1;}
+#search-box {padding: 12px 0 12px 12px; margin:0 0 20px 0; background-color:#E6E6E6; border:1px solid #CECFD1;}
 .search-bar {}
 .main-search-page {border-top:1px solid #F2F2F3; border-bottom:1px solid #F2F2F3;}
 /*.csc-search-submit, .csc-search-pivot-submit, .csc-new-user-submit {padding:2px 25px 0px 25px; margin:0; border:1px solid #94A8B5; 
@@ -149,8 +152,8 @@ td textarea {border:none;}
 .csc-search-keywords, .csc-search-user {width:50% !important; margin:0 12px 0 0; height:16px; border:1px solid #BCBDBD; 
 	padding:2px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}
 .csc-search-user {mar gin-top:8px;}
-.found-records-box {padding:4px 0 14px 6px;}
-.found-records-content {color:#606060; font-size:16px; line-height:16px; font-weight:bold;}
+.found-records-box {/*padding:4px 0 14px 6px;*/}
+.found-records-content {/*color:#606060; font-size:16px; line-height:16px; font-weight:bold;*/}
 
 .csc-global-search-keywords, .csc-search-pivot-keywords {width:140px !important; margin:0 8px 0 2px; height:16px; border:1px solid #BCBDBD; 
 	padding:2px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}
@@ -170,8 +173,7 @@ table#search-results .fl-pager .fl-pager-ui .fl-pager-links a {border:none;}
 table#search-results .fl-pager .fl-pager-ui .fl-pager-link {}
 
 table#search-results {padding-left:12px; width:100%;}
-table#search-results thead {background-color:#E1E8ED; font-size:11px; line-height:11px; color:#2278AB; border-top:1px solid #CECFD1; 
-	border-bottom:1px solid #CECFD1;}
+table#search-results thead {background-color:#E8E8E8; font-size:11px; line-height:11px; color:#2278AB;}
 table#search-results thead tr th{padding:6px 0 6px 12px;}
 table#search-results tbody {border-bottom:1px solid #CECFD1;}
 table#search-results tbody tr td {padding:5px 0 5px 12px; font-size:12px; line-height:12px; border-top:1px solid #CECFD1; 
@@ -388,7 +390,7 @@ table .field-cal {width:162px;}
 .pivot-box-table {width:100%; background-color:#fff; color:#6D6E71;}
 .pivot-box-table  tr td {padding:3px 3px 3px 2px; vertical-align:top;}
 .pivot-box-table thead tr td {border-bottom: 1px solid #C9CACC; font-weight:bold;}
-.add-more {float:right; color:#000; *padding-top:2px;}
+.add-more {float:right; color:#000; *padding-top:2px; margin-top:-1px;}
 
 
 .pivot-box-data {padding:3px 0 3px 8px;}
