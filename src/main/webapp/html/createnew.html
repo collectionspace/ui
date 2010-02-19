@@ -15,43 +15,35 @@
         <link rel="stylesheet" type="text/css" href="../fluid-infusion/src/webapp/framework/fss/css/fss-layout.css" />
 		<link rel="stylesheet" type="text/css" href="../fluid-infusion/src/webapp/framework/fss/css/fss-text.css" />
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
+
+        <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/core/js/jquery.js"></script>
+        <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/ui/js/ui.core.js"></script>
+        <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/ui/js/ui.dialog.js"></script>
+        <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/json/js/json2.js"></script>
+        <script type="text/javascript" src="../fluid-infusion/src/webapp/framework/core/js/Fluid.js"></script>
+        <script type="text/javascript" src="../fluid-infusion/src/webapp/framework/core/js/FluidDOMUtilities.js"></script>
+        <script type="text/javascript" src="../fluid-infusion/src/webapp/framework/core/js/DataBinding.js"></script>
+        <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/fastXmlPull/js/fastXmlPull.js"></script>
+        <script type="text/javascript" src="../fluid-infusion/src/webapp/framework/renderer/js/fluidParser.js"></script>
+        <script type="text/javascript" src="../fluid-infusion/src/webapp/framework/renderer/js/fluidRenderer.js"></script>
+        <script type="text/javascript" src="../engage-core-framework/js/engageRenderUtils.js"></script>
+        
+        <script type="text/javascript" src="../js/cspace.js"></script>
+        <script type="text/javascript" src="../js/Utilities.js"></script>
+        <script type="text/javascript" src="../js/Renderer.js"></script>
+        <script type="text/javascript" src="../js/PageBuilder.js"></script>
+        <script type="text/javascript" src="../js/createNewSetup.js"></script>
 	</head>
 
 	<body>
 
 		<div class="fl-container-1024 fl-centered">
 		
-			<!-- CSpace logo and right-side search box -->
-			<div id="header-menu">
-				<div class="header-menu-logo"><a href="http://www.collectionspace.org/current_release"><img src="../images/header-logo.png" height=60 width=345 alt="CollectionSpace" /></a></div>
-				<div class="header-menu-right">
-					<div class="header-menu-logout"><a href="index.html">Log out</a></div>
-					<div class="clear"></div>
-					<div class="header-menu-search">
-						<form action="search.html">
-							<select name="recordtype" class="csc-global-search-record-type">
-								<option value="object">Object</option>
-								<option value="intake">Intake</option>
-								<option value="acquisition">Acquisition</option>
-							</select>
-							<input name="keywords" type="text" class="csc-global-search-keywords" />
-                            <input type="submit" class="csc-global-search-submit globalSearchButton" value="Search" />
-						</form>
-					</div>
-				</div>
-				<div class="clear"></div>
-				<div class="header-menu-row">
-					<div class="inner">
-						<div class="menu-item">My CollectionSpace</div>
-						<div class="menu-item selected"><a href="createnew.html">Create New</a></div>
-						<div class="menu-item"><a href="findedit.html">Find and Edit</a></div>
-						<div class="menu-item">Report</div>
-						<div class="menu-item"><a href="administration.html">Administration</a></div>
-					</div>
-					<div class="clear"></div>
-				</div>
-			</div>
-			
+            <!-- CSpace logo and right-side search box -->
+            <div id="name-header" class="csc-header-container">
+                <!-- this div will be filled in with the contents of the Template -->
+            </div>
+            
 			<div class="fl-container-1024-inner">
 			
 				<div id="title-bar">
@@ -203,12 +195,16 @@
 				</div> <!-- end create new -->
 
 			</div>
-			
-			<!-- footer block -->
-			<div id="footer">
-				<div class="footer-text">&copy; 2009-2010 CollectionSpace &nbsp;&ndash;&nbsp; CollectionSpace <a href="http://www.collectionspace.org/current_release">Release 0.5</a> &nbsp;&ndash;&nbsp; <a href="http://www.collectionspace.org">About CollectionSpace</a> &nbsp;&ndash;&nbsp; <a href="http://wiki.collectionspace.org/display/collectionspace/Release+0.5+Feedback">Leave Feedback</a></div>
-			</div> <!-- END footer block -->
-			
+
+            <!-- footer block -->
+            <div class="csc-footer-container" id="footer">
+                <!-- this div will be filled in with the contents of the Template -->
+            </div> <!-- END footer block -->
+
 		</div> <!-- end fl-container-1024 -->
+
+        <script type="text/javascript">
+            cspace.setupCreateNew();
+        </script>
 	</body>
 </html>

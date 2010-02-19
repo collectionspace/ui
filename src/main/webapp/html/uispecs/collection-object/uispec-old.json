@@ -1,0 +1,366 @@
+{
+    "dataEntry": {
+        "fields.objectTitle": {
+            "selector": ".csc-object-identification-object-title",
+            "displayOnlySelectors": [".csc-titleBar-object-identification-object-title"]
+        },
+        "fields.objectTitleLanguage": {
+            "selector": ".csc-object-identification-object-title-language"
+        },
+        "fields.objectTitleTranslation": {
+            "selector": ".csc-object-identification-object-title-translation"
+        },
+        "fields.objectTitleType": {
+            "selector": ".csc-object-identification-object-title-type"
+        },
+        "fields.accessionNumber": {
+            "selector": ".csc-object-identification-object-number",
+            "displayOnlySelectors": [".csc-titleBar-object-identification-object-number"],
+            "decorators": [{
+    		    "type": "fluid",
+                "func": "cspace.numberPatternChooser",
+                "container": ".csc-object-identification-object-number-container",
+                "options": {
+    			    "selectors": {
+    				    "numberField": ".csc-object-identification-object-number"
+    				},
+    			    "model": {
+    				    "list": ["intake", "objects", "loans-in"],
+    					"samples": ["IN2009.1.1", "2009.1.1", "LI2009.1.1"],
+    					"names": ["Intake", "Accession", "Loans In"]
+    				}
+    			}
+            }]
+        },
+        "fields.otherNumber": {
+            "selector": ".csc-object-identification-other-number"
+        },
+        "fields.otherNumberType": {
+            "selector": ".csc-object-identification-other-number-type"
+        },
+        "fields.description": {
+            "selector": ".csc-object-identification-brief-description"
+        },
+        "fields.objectName": {
+            "selector": ".csc-object-identification-object-name"
+        },
+        "fields.objectCurrency": {
+            "selector": ".csc-object-identification-object-currency"
+        },
+        "fields.objectLevel": {
+            "selector": ".csc-object-identification-object-level"
+        },
+        "fields.objectSystem": {
+            "selector": ".csc-object-identification-object-system"
+        },
+        "fields.objectType": {
+            "selector": ".csc-object-identification-object-type"
+        },
+        "fields.objectLanguage": {
+            "selector": ".csc-object-identification-object-language"
+        },
+        "fields.objectNote": {
+            "selector": ".csc-object-identification-object-note"
+        },
+        "fields.distinguishingFeatures": {
+            "selector": ".csc-object-identification-distinguishing-features"
+        },
+        "fields.numberOfObjects": {
+            "selector": ".csc-object-identification-number-objects"
+        },
+        "fields.responsibleDepartment": {
+            "selector": ".csc-object-identification-responsible-department",
+            "options": ["antiquities", "architecture-design", "decorative-arts", "ethnography", "herpetology", "media-performance-art", "paintings-sculpture", "paleobotany", "photographs", "prints-drawings"],
+            "options-text": ["Antiquities", "Architecture and Design", "Decorative Arts", "Ethnography", "Herpetology", "Media and Performance Art", "Paintings and Sculpture", "Paleobotany", "Photographs", "Prints and Drawings"]
+        },
+        "fields.comments": {
+            "selector": ".csc-object-identification-comments"
+        },
+        "fields.descCopyNumber": {
+        	"selector": ".csc-object-description-copy-number"
+        },
+        "fields.descStatus": {
+        	"selector": ".csc-object-description-status"
+        },
+        "fields.descSex": {
+        	"selector": ".csc-object-description-sex"
+        },
+        "fields.descPhase": {
+        	"selector": ".csc-object-description-phase"
+        },
+        "fields.descForm": {
+        	"selector": ".csc-object-description-form"
+        },
+        "fields.descEditionNumber": {
+        	"selector": ".csc-object-description-edition-number"
+        },
+        "fields.descAge": {
+        	"selector": ".csc-object-description-age"
+        },
+        "fields.descAgeQualifier": {
+        	"selector": ".csc-object-description-age-qualifier"
+        },
+        "fields.descAgeUnit": {
+        	"selector": ".csc-object-description-age-unit"
+        },
+        "fields.descStyle": {
+        	"selector": ".csc-object-description-style"
+        },
+        "fields.descColor": {
+        	"selector": ".csc-object-description-color"
+        },
+        "fields.descMaterial": {
+        	"selector": ".csc-object-description-material"
+        },
+        "fields.descMaterialComponent": {
+        	"selector": ".csc-object-description-material-component"
+        },
+        "fields.descMaterialNote": {
+        	"selector": ".csc-object-description-material-component-note"
+        },
+        "fields.descMaterialName": {
+        	"selector": ".csc-object-description-material-name"
+        },
+        "fields.descMaterialSource": {
+        	"selector": ".csc-object-description-material-source"
+        },
+        "fields.descPhysicalDescription": {
+        	"selector": ".csc-object-description-physical-description"
+        },
+        "fields.descComponentName": {
+        	"selector": ".csc-object-description-object-component-name"
+        },
+        "fields.descComponentInfo": {
+        	"selector": ".csc-object-description-object-component-information"
+        },
+        "fields.descTechAttribute": {
+        	"selector": ".csc-object-description-technical-attribute"
+        },
+        "fields.descTechAttributeMeasure": {
+        	"selector": ".csc-object-description-technical-attribute-measurement"
+        },
+        "fields.descTechAttributeUnit": {
+        	"selector": ".csc-object-description-technical-attribute-unit"
+        },
+        "fields.descDimension": {
+        	"selector": ".csc-object-description-dimension"
+        },
+        "fields.descDimensionPart": {
+        	"selector": ".csc-object-description-dimension-part"
+        },
+        "fields.descDimensionUnit": {
+        	"selector": ".csc-object-description-dimension-unit",
+        	"options": ["centimeters", "millimeters", "meters", "liters", "kilograms", "cubic-centimeters", "minutes", "carats", "pixels", "count", "stories", "inches", "square-feet", "feet"],
+            "options-text": ["centimeters", "millimeters", "meters", "liters", "kilograms", "cubic centimeters", "minutes", "carats", "pixels", "count", "stories", "inches", "square feet", "feet"]
+        },
+        "fields.descDimensionValue": {
+        	"selector": ".csc-object-description-dimension-value"
+        },
+        "fields.descDimensionValueQualifier": {
+        	"selector": ".csc-object-description-dimension-value-qualifier"
+        },
+        "fields.descContentDescription": {
+        	"selector": ".csc-object-description-content-description"
+        },
+        "fields.descContentLanguage": {
+        	"selector": ".csc-object-description-content-language"
+        },
+        "fields.descContentActivity": {
+        	"selector": ".csc-object-description-content-activity"
+        },
+        "fields.descContentConcept": {
+        	"selector": ".csc-object-description-content-concept"
+        },
+        "fields.descContentPosition": {
+        	"selector": ".csc-object-description-content-position"
+        },
+        "fields.descContentObject": {
+        	"selector": ".csc-object-description-content-object"
+        },
+        "fields.descContentObjectType": {
+        	"selector": ".csc-object-description-content-object-type"
+        },
+        "fields.descContentPeople": {
+        	"selector": ".csc-object-description-content-people",
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-object-description-content-people",
+                "options": {
+                    "url": "../../chain/objects/autocomplete/descContentPeople"
+                }
+            }]
+        },
+        "fields.descContentPerson": {
+        	"selector": ".csc-object-description-content-person",
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-object-description-content-person",
+                "options": {
+                    "url": "../../chain/objects/autocomplete/descContentPerson"
+                }
+            }]
+        },
+        "fields.descContentPlace": {
+        	"selector": ".csc-object-description-content-place"
+        },
+        "fields.descContentScript": {
+        	"selector": ".csc-object-description-content-script"
+        },
+        "fields.descContentOrganization": {
+        	"selector": ".csc-object-description-content-organization",
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.autocomplete",
+                "container": ".csc-object-description-content-organization",
+                "options": {
+                    "url": "../../chain/objects/autocomplete/descContentOrganization"
+                }
+            }]
+        },
+        "fields.descContentMethod": {
+        	"selector": ".csc-object-description-content-method"
+        },
+        "fields.descContentEventName": {
+        	"selector": ".csc-object-description-content-event-name"
+        },
+        "fields.descContentEventNameType": {
+        	"selector": ".csc-object-description-content-event-name-type"
+        },
+        "fields.descContentOther": {
+        	"selector": ".csc-object-description-content-other"
+        },
+        "fields.descContentOtherType": {
+        	"selector": ".csc-object-description-content-other-type"
+        },
+        "fields.descContentNote": {
+        	"selector": ".csc-object-description-content-note"
+        },
+        "fields.descInscriptionContent": {
+        	"selector": ".csc-object-description-inscription-content"
+        },
+        "fields.descInscriptionContentInscriber": {
+        	"selector": ".csc-object-description-inscription-content-inscriber"
+        },
+        "fields.descInscriptionContentLanguage": {
+        	"selector": ".csc-object-description-inscription-content-language"
+        },
+        "fields.descInscriptionContentDate": {
+        	"selector": ".csc-object-description-inscription-content-date"
+        },
+        "fields.descInscriptionContentPosition": {
+        	"selector": ".csc-object-description-inscription-content-position"
+        },
+        "fields.descInscriptionContentScript": {
+        	"selector": ".csc-object-description-inscription-content-script"
+        },
+        "fields.descInscriptionContentType": {
+        	"selector": ".csc-object-description-inscription-content-type"
+        },
+        "fields.descInscriptionContentMethod": {
+        	"selector": ".csc-object-description-inscription-content-method"
+        },
+        "fields.descInscriptionContentInterpretation": {
+        	"selector": ".csc-object-description-inscription-content-interpretation"
+        },
+        "fields.descInscriptionContentTranslation": {
+        	"selector": ".csc-object-description-inscription-content-translation"
+        },
+        "fields.descInscriptionContentTransliteration": {
+        	"selector": ".csc-object-description-inscription-content-transliteration"
+        },
+        "fields.descInscriptionDescription": {
+        	"selector": ".csc-object-description-inscription-description"
+        },
+        "fields.descInscriptionDescriptionInscriber": {
+        	"selector": ".csc-object-description-inscription-description-inscriber"
+        },
+        "fields.descInscriptionDescriptionDate": {
+        	"selector": ".csc-object-description-inscription-description-date"
+        },
+        "fields.descInscriptionDescriptionPosition": {
+        	"selector": ".csc-object-description-inscription-description-position"
+        },
+        "fields.descInscriptionDescriptionType": {
+        	"selector": ".csc-object-description-inscription-description-type"
+        },
+        "fields.descInscriptionDescriptionMethod": {
+        	"selector": ".csc-object-description-inscription-description-method"
+        },
+        "fields.descInscriptionDescriptionInterpretation": {
+        	"selector": ".csc-object-description-inscription-description-interpretation"
+        },
+        "fields.descDateAssociation": {
+        	"selector": ".csc-date-information-date-association"
+        },
+        "fields.descDatePeriod": {
+        	"selector": ".csc-date-information-date-period"
+        },
+        "fields.descDateEarliestSingleCertainty": {
+        	"selector": ".csc-date-information-date-earliest-single-certainty"
+        },
+        "fields.descDateEarliestSingleQualifier": {
+        	"selector": ".csc-date-information-date-earliest-single-qualifier"
+        },
+        "fields.descDateLatestSingleCertainty": {
+        	"selector": ".csc-date-information-date-latest-certainty"
+        },
+        "fields.descDateLatestSingleQualifier": {
+        	"selector": ".csc-date-information-date-latest-qualifier"
+        },
+        "fields.descDateText": {
+        	"selector": ".csc-date-information-date-text"
+        }
+    },
+    "sidebar": {
+        "termsUsed": {},
+        "relatedObjects": {
+            "items": {
+                "selector": ".csc-related-row",
+                "repeated": {
+                    "summary": {
+                        "selector": ".csc-related-summary"
+                    },
+                    "number": {
+                        "selector": ".csc-related-number",
+                        "type": "link",
+                        "href": "%recordtype.html?csid=%csid",
+                        "linktext": "%number",
+                        "replacements": {
+                            "csid": "csid",
+                            "number": "number",
+                            "recordtype": "recordtype"
+                        }
+                    }
+                }
+            }
+        },
+        "relatedProcedures": {
+            "items": {
+                "selector": ".csc-related-row",
+                "repeated": {
+                    "summary": {
+                        "selector": ".csc-related-summary"
+                    },
+                    "number": {
+                        "selector": ".csc-related-number",
+                        "type": "link",
+                        "href": "%recordtype.html?csid=%csid",
+                        "linktext": "%number",
+                        "replacements": {
+                            "csid": "csid",
+                            "number": "number",
+                            "recordtype": "recordtype"
+                        },
+                        "validators": [],
+                        "decorators": []
+                    },
+                    "recordtype": {
+                        "selector": ".csc-related-recordtype"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,3 +1,4 @@
+<div class="csc-object-intake-template">
 				<!--[if IE ]>
 				<script type="text/javascript">
 				jQuery(document).ready(function() {
@@ -29,22 +30,9 @@
 					$(".toggle").click(function(){
 						$(this).next(".ttt").slideToggle("slow");
 					});
-				
 				});
 				</script>
 
-				
-				<!-- title-bar - name of object and (assession) number -->
-				<div id="title-bar">
-					<div class="content">
-						<div class="overflow">
-							<div class="record-number csc-titleBar-intake-entry-number"></div>
-							<div class="clear"></div>
-						</div>
-						<div class="record-type">Intake</div>
-						<div class="clear"></div>
-					</div>
-				</div>
 				
 				<!-- main content -->
 				<div id="all-content" class="fl-fix object-entry">
@@ -55,7 +43,7 @@
 						<!-- left-side container. Contains bulk of Object Entry forms and fields -->
 						<div class="fl-container-left fl-force-left">
 							                           
-							<!--<div class="">-->
+							<div class="csc-intake">
 								<div id="secondary-nav">
 									<div id="secondary-nav-menu">
 										<ul class="menu-record">
@@ -167,7 +155,8 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="input-autocomplete csc-intake-current-owner" /></td>
+																		<td><input type="text" class="input-autocomplete csc-intake-current-owner" />
+                                                                            <div class="csc-intake-current-owner-autocomplete"></div></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -189,7 +178,8 @@
 																	
 																<tbody>
 																	<tr>
-																		<td><input type="text" class="input-autocomplete csc-intake-depositor" /></td>
+																		<td><input type="text" class="input-autocomplete csc-intake-depositor" />
+                                                                            <div class="csc-intake-depositor-autocomplete"></div></td>
 																		<td><input type="text" class="input-alpha-table csc-intake-depositor-requirements" /></td>
 																	</tr>
 																</tbody>
@@ -306,13 +296,19 @@
 																<tbody>
 																	<tr>
 																		<td class="label">Date - Earliest/single</td>
-																		<td class="field-cal"><input type="text"  class="input-date csc-intake-date-earliest-single deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></a></td>
+																		<td class="field-cal csc-intake-date-earliest-single-container"><input type="text"  class="input-date csc-intake-date-earliest-single deactivate csc-calendar-date" />
+                                                                                <a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></a>
+                                                                                <span class="csc-date-picker"></span>
+                                                                                </td>
 																		<td><input type="text" class="input-alpha-table csc-intake-date-earliest-single-certainty" /></td>
 																		<td><input type="text" class="input-alpha-table csc-intake-date-earliest-single-qualifier" /></td>
 																	</tr>
 																	<tr>
 																		<td class="label">Date - Latest</td>
-																		<td class="field-cal"><input type="text"  class="input-date csc-intake-date-latest deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></a></td>
+																		<td class="field-cal csc-intake-date-latest-single-container"><input type="text"  class="input-date csc-intake-date-latest deactivate csc-calendar-date" />
+                                                                                <a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="" height=14 width=14 /></a>
+                                                                                <div class="csc-date-picker"></div>
+                                                                                </td>
 																		<td><input type="text" class="input-alpha-table csc-intake-date-latest-certainty" /></td>
 																		<td><input type="text" class="input-alpha-table csc-intake-date-latest-qualifier" /></td>
 																	</tr>
@@ -414,7 +410,8 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="input-autocomplete csc-intake-field-collector" /></td>
+																		<td><input type="text" class="input-autocomplete csc-intake-field-collector" />
+                                                                            <div class="csc-intake-field-collector-autocomplete"></div></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -423,9 +420,6 @@
 													</div>
 													
 												</div>
-												
-												
-												
 												<div class="clear"></div>
 											</div>
 										</div>
@@ -451,7 +445,8 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="input-autocomplete csc-intake-valuer" name="intake-valuer" /></td>
+																		<td><input type="text" class="input-autocomplete csc-intake-valuer" name="intake-valuer" />
+                                                                            <div class="csc-intake-valuer-autocomplete"></div></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -499,7 +494,8 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="input-autocomplete csc-intake-insurer" name="intake-insurer" /></td>
+																		<td><input type="text" class="input-autocomplete csc-intake-insurer" name="intake-insurer" />
+                                                                            <div class="csc-intake-insurer-autocomplete"></div></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -708,7 +704,8 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="input-autocomplete csc-intake-condition-check-assessor" /></td>
+																		<td><input type="text" class="input-autocomplete csc-intake-condition-check-assessor" />
+                                                                            <div class="csc-intake-condition-check-assessor-autocomplete"></div></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -789,18 +786,20 @@
 															
 								<!-- Button container -->
 								<div class="fl-container-flex input-buttons">
-									<a href="#" class="csc-save-bottom"><input type="button" class="savebutton" value="Save" /></a>
+									<a href="#"><input type="button" class="savebutton csc-save" value="Save" /></a>
 									<a href="findedit.html"><input type="button" class="cancelbutton" value="Cancel" /></a>
 									<div class="clear"></div>
 								</div>
 							</div> <!-- END left-side container -->
+                                                       </div>
 
 						</div><!-- END left-side container -->
 						
 						<!-- Right-side container. Pivot area -->
-						<div class="fl-container-pivot fl-force-right csc-right-sidebar" id="csc-right-sidebar">
+						<div class="fl-container-pivot fl-force-right csc-sidebar-container" id="csc-right-sidebar">
 							<!-- this div will be filled in with the contents of the Template -->
 						</div> <!-- END Right-side container -->
 						<div class="clear"></div>
 					</div> <!-- END sub-main content -->
 				</div> <!-- END main content -->
+</div>

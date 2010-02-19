@@ -14,33 +14,6 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-    // This is temporary: Right now, auto-filled numbers are facilitated through a specially
-    // named object record. The name of this record must be removed from the list of records.
-    var cleanUpRecordList = function (list) {
-        var cleanedList = [];
-        var ci = 0;
-        for (var i = 0; i < list.length; i++) {
-            if (list[i] !== "__auto") {
-                cleanedList[ci++] = list[i];
-            }
-        }
-        return cleanedList;
-    };
-
-    // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
-    // load it manually via ajax
-    var fetchUISpec = function (that, callback) {
-        jQuery.ajax({
-            url: that.options.uiSpecUrl,
-            type: "GET",
-            dataType: "json",
-            success: callback,
-            error: function (xhr, textStatus, errorThrown) {
-                that.showErrorMessage("Configuration information temporarily unavailable, sorry");
-            }
-        });
-    };
-
     var bindEventHandlers = function (that) {
         that.dataContext.events.modelChanged.addListener(function (newModel, oldModel, source) {
             that.events.modelChanged.fire(newModel, oldModel, source);
@@ -54,50 +27,55 @@ cspace = cspace || {};
         });
     };
 
-    var createDataContextSetup = function (that) {
-        return function (spec, textStatus) {
-            that.spec = spec.spec;
-
-            that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
-
-            bindEventHandlers(that);
-            that.locate("errorMessage").hide();
-            if (that.options.data) {
-                that.events.modelChanged.fire(that.options.data, that.model.items);
-                that.model.items = that.options.data;
-                that.refreshView();
-                that.locate("errorMessage").hide();
-            }
-            else {
-                if (cspace.util.isLocal()) {
-                    that.dataContext.fetch("records/list");
-                } else {
-                    that.dataContext.fetch();
-                }
-            }
-        };
-    };
-
     var setupRecordList = function (that) {
-        fetchUISpec(that, createDataContextSetup(that));
+        that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
+
+        bindEventHandlers(that);
+        that.locate("errorMessage").hide();
+        if (that.options.data) {
+            that.events.modelChanged.fire(that.options.data, that.model.items);
+            that.model.items = that.options.data;
+            that.refreshView();
+            that.locate("errorMessage").hide();
+        }
+        else {
+            if (cspace.util.isLocal()) {
+                that.dataContext.fetch("records/list");
+            } else {
+                that.dataContext.fetch();
+            }
+        }
     };
 
     cspace.recordList = function (container, options) {
         var that = fluid.initView("cspace.recordList", container, options);
         that.model = {
-            items: []
+            items: (options.data? options.data: [])
         };
-        that.spec = {};
 
         that.showErrorMessage = function (msg) {
             that.locate("errorMessage").text(msg).show();
         };
 
         that.refreshView = function () {
-            that.model.items = cleanUpRecordList(that.model.items);
-            var tree = cspace.renderer.buildComponentTree(that.spec, that);
-            var cutpoints = cspace.renderer.createCutpoints(that.spec);
-            fluid.selfRender(that.container, tree, {cutpoints: cutpoints, model: that.model});
+            if (that.model.items.length > 0) {
+                that.locate("noneYetMessage").hide();
+                var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
+                var protoTree = cspace.renderUtils.buildProtoTree(that.options.uispec, that);
+                var tree = expander(protoTree);
+                var selectors = {};
+                cspace.renderUtils.buildSelectorsFromUISpec(that.options.uispec, selectors);
+                var renderOpts = {
+                    cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(selectors, {}),
+                    model: that.model,
+                    debugMode: true,
+                    autoBind: true,
+                    applier: that.options.applier
+                };
+                fluid.selfRender(that.container, tree, renderOpts);
+            } else {
+                that.locate("noneYetMessage").show();
+            }
             that.locate("numberOfItems").text("(" + that.model.items.length + ")");
         };
 
@@ -111,20 +89,11 @@ cspace = cspace || {};
         },
         selectors: {
             numberOfItems: ".csc-num-items",    // present in sidebar, not in find/edit
-            row: ".csc-record-list-row",
-            columns: {
-                col1: ".csc-record-list-col-1",
-                col2: ".csc-record-list-col-2"
-            },
-            errorMessage: ".csc-error-message"
+            errorMessage: ".csc-error-message",
+            noneYetMessage: ".csc-no-records-message"
         },
         events: {
             modelChanged: null
-        },
-        uiSpecUrl: "./find-edit/spec/spec.json",
-        template: {
-            url: "list.html",
-            id: "list"
         }
     });
 

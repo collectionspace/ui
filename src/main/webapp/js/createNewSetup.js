@@ -8,28 +8,14 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, window, cspace*/
+/*global jQuery, cspace, console*/
 
 cspace = cspace || {};
 
 (function ($) {
 
-    cspace.searchSetup = function () {
-        
-        var searchOpts = {};
-        if (cspace.util.isLocal()) {
-            searchOpts.searchUrlBuilder = function (recordType, query) {
-                var recordTypeParts = (recordType === "collection-object"? [recordType]: recordType.split('-'));        
-                return "./data/" + recordTypeParts.join('/') + "/search/list.json";
-            };
-        }
-        var dependencies = {
-            search: {
-                funcName: "cspace.search",
-                args: [".main-search-page", searchOpts]
-            }
-        };
-        var pageBuilderOpts = {
+    cspace.setupCreateNew = function () {
+        var options = {
             pageSpec: {
                 header: {
                     href: "header.html",
@@ -41,10 +27,9 @@ cspace = cspace || {};
                     templateSelector: ".csc-footer",
                     targetSelector: ".csc-footer-container"
                 }
-            }
+            },
+            htmlOnly: true
         };
-        cspace.pageBuilder(dependencies, pageBuilderOpts);
+        cspace.pageBuilder({}, options);
     };
-    
 })(jQuery);
-

@@ -20,12 +20,14 @@
 		<script type="text/javascript" src="../fluid-infusion/src/webapp/lib/fastXmlPull/js/fastXmlPull.js"></script>
 		<script type="text/javascript" src="../fluid-infusion/src/webapp/framework/renderer/js/fluidParser.js"></script>
 		<script type="text/javascript" src="../fluid-infusion/src/webapp/framework/renderer/js/fluidRenderer.js"></script>
+        <script type="text/javascript" src="../engage-core-framework/js/engageRenderUtils.js"></script>
         
 		<script type="text/javascript" src="../js/cspace.js"></script>
 		<script type="text/javascript" src="../js/Utilities.js"></script>
 		<script type="text/javascript" src="../js/Renderer.js"></script>
 		<script type="text/javascript" src="../js/DataContext.js"></script>
 		<script type="text/javascript" src="../js/RecordList.js"></script>
+        <script type="text/javascript" src="../js/PageBuilder.js"></script>
 		<script type="text/javascript" src="../js/findEditSetup.js"></script>
 	</head>
 
@@ -33,37 +35,10 @@
 
 		<div class="fl-container-1024 fl-centered">
 		
-			<!-- CSpace logo and right-side search box -->
-			<div id="header-menu">
-				<div class="header-menu-logo"><a href="http://www.collectionspace.org/current_release"><img src="../images/header-logo.png" height=60 width=345 alt="CollectionSpace" /></a></div>
-				<div class="header-menu-right">
-					<div class="header-menu-logout"><a href="index.html">Log out</a></div>
-					<div class="clear"></div>
-					<div class="header-menu-search">
-						<form action="search.html">
-							<select name="recordtype" class="csc-global-search-record-type">
-								<option value="object">Object</option>
-								<option value="intake">Intake</option>
-								<option value="acquisition">Acquisition</option>
-							</select>
-							<input name="keywords" type="text" class="csc-global-search-keywords" />
-							<input type="submit" class="csc-global-search-submit globalSearchButton" value="Search" />
-						</form>
-					</div>
-				</div>
-				<div class="clear"></div>
-				
-				<div class="header-menu-row">
-					<div class="inner">
-						<div class="menu-item">My CollectionSpace</div>
-						<div class="menu-item"><a href="createnew.html">Create New</a></div>
-						<div class="menu-item selected"><a href="findedit.html">Find and Edit</a></div>
-						<div class="menu-item">Report</div>
-						<div class="menu-item"><a href="administration.html">Administration</a></div>
-					</div>
-					<div class="clear"></div>
-				</div>
-			</div>
+            <!-- CSpace logo and right-side search box -->
+            <div id="name-header" class="csc-header-container">
+                <!-- this div will be filled in with the contents of the Template -->
+            </div>
 			
 			<div class="fl-container-1024-inner">
 			
@@ -112,25 +87,15 @@
 														<table id="">
 															<thead>
 																<tr>
-<!--
-// CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
-// an array of IDs. Until this is changed, reduce the markup to include only the one field
-																	<td width=55%>Title</td>
--->
 																	<td width=25%>Identification Number</td>
 																	<td width=75%>Summary</td>
 																</tr>
 															</thead>
 															
 															<tbody>
+                                                                <tr><td colspan=2 class="hidden csc-no-records-message">No records found</td></tr>
 																<tr class="csc-object-record-list-row">
-<!--
-// CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
-// an array of IDs. Until this is changed, reduce the markup to include only the one field
-																	<td><a class="csc-object-title" href="object.html?csid=1984.068.0335b">Catalogs. Wyanoak Publishing Company.</a></td>
-																	<td class="csc-accession-number">1984.068.0335b</td>
--->
-																	<td ><a class="csc-accession-number link" href="object.html">(retrieving record list...)</a>&nbsp;</td>
+																	<td ><a class="csc-accession-number link" href="object.html"></a>&nbsp;</td>
 																	<td class="csc-summary"></td>
 																</tr>
 															</tbody>
@@ -172,24 +137,15 @@
 																<tr>
 																	<td width=25%>Entry Number</td>
 																	<td width=15%>Type</td>
-<!--
-// CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
-// an array of IDs. Until this is changed, reduce the markup to include only the one field
-																	<td width=45%>Brief Description</td>
--->
 																	<td width=60%>Summary</td>
 																</tr>
 															</thead>
 															
 															<tbody>
+                                                                <tr><td colspan=3 class="hidden csc-no-records-message">No records found</td></tr>
 																<tr class="csc-procedural-record-list-row">
-																	<td><a class="csc-entry-number link" href="intake.html">(retrieving record list...)</a></td>
-																	<td class="csc-type">Intake</td>
-<!--
-// CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
-// an array of IDs. Until this is changed, reduce the markup to include only the one field
-																	<td class="csc-description">description</td>
--->
+																	<td><a class="csc-entry-number link" href="intake.html"></a></td>
+																	<td class="csc-type"></td>
 																	<td class="csc-summary"></td>
 																</tr>
 															</tbody>
@@ -210,24 +166,15 @@
 																<tr>
 																	<td width=25%>Entry Number</td>
 																	<td width=15%>Type</td>
-<!--
-// CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
-// an array of IDs. Until this is changed, reduce the markup to include only the one field
-																	<td width=45%>Brief Description</td>
--->
 																	<td width=60%>Summary</td>
 																</tr>
 															</thead>
 																
 															<tbody>
+                                                                <tr><td colspan=3 class="hidden csc-no-records-message">No records found</td></tr>
 																<tr class="csc-acquisition-record-list-row">
-																	<td><a class="csc-entry-number link" href="intake.html">(retrieving record list...)</a></td>
-																	<td class="csc-type">Acquisition</td>
-<!--
-// CSPACE-416: Currently, App layer doesn't return multiple fields for lists of records, only
-// an array of IDs. Until this is changed, reduce the markup to include only the one field
-																	<td class="csc-description">description</td>
--->
+																	<td><a class="csc-entry-number link" href="intake.html"></a></td>
+																	<td class="csc-type"></td>
 																	<td class="csc-summary"></td>
 																</tr>
 															</tbody>
@@ -258,7 +205,7 @@
 										<!-- inner info column -->
 										<div class="info-column">
 											
-											<div class="find-edit-object-records">
+											<div class="find-edit-object-records authority-records-group">
 											
 												<div class="info-pair-table">
 													<div class="info-value overflow-find-edit>
@@ -332,10 +279,10 @@
 
 			</div> <!-- end create new -->
 
-			<!-- footer block -->
-			<div id="footer">
-				<div class="footer-text">&copy; 2009-2010 CollectionSpace &nbsp;&ndash;&nbsp; CollectionSpace <a href="http://www.collectionspace.org/current_release">Release 0.5</a> &nbsp;&ndash;&nbsp; <a href="http://www.collectionspace.org">About CollectionSpace</a> &nbsp;&ndash;&nbsp; <a href="http://wiki.collectionspace.org/display/collectionspace/Release+0.5+Feedback">Leave Feedback</a></div>
-			</div> <!-- END footer block -->
+            <!-- footer block -->
+            <div class="csc-footer-container" id="footer">
+                <!-- this div will be filled in with the contents of the Template -->
+            </div> <!-- END footer block -->
 		</div>
 
     	<script type="text/javascript">

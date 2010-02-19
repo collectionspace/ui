@@ -1,3 +1,4 @@
+<div class="csc-acquisition-template">
 				<!--[if IE ]>
 				<script type="text/javascript">
 				jQuery(document).ready(function() {
@@ -11,18 +12,6 @@
 				</script>
 				<![endif]-->
 
-				<!-- title-bar - name of object and (assession) number -->
-				<div id="title-bar">
-					<div class="content">
-						<div class="overflow">
-							<div class="record-number csc-titleBar-acquisition-reference-number"></div>
-							<div class="clear"></div>
-						</div>
-						<div class="record-type">Acquisition</div>
-						<div class="clear"></div>
-					</div>
-				</div>
-
 				<!-- main content -->
 				<div id="all-content" class="fl-fix acquisition">
 					
@@ -32,7 +21,7 @@
 						<!-- left-side container. Contains bulk of Object Entry forms and fields -->
 						<div class="fl-container-left fl-force-left">
 
-							<div class="csc-acquisition-container">
+							<div class="csc-acquisition">
 								<div id="secondary-nav">
 									<div id="secondary-nav-menu">
 										<ul class="menu-record">
@@ -118,7 +107,9 @@
 																	
 																	<tbody>
 																		<tr>
-																			<td><input type="text" class="csc-acquisition-authorizer" name="acquisition-authorizer"></td>
+																			<td><input type="text" class="csc-acquisition-authorizer" name="acquisition-authorizer">
+                                                                            <div class="csc-acquisition-authorizer-autocomplete"></div>
+                                                                            </td>
 																			<td class="field-cal"><input type="text" disabled class="input-date csc-acquisition-authorizer-date csc-calendar-date"><img src="../images/cal.png" class="csc-calendar-button" alt="calendar" title="click to add a date" height=14 width=14 /></td>
 																		</tr>
 																	</tbody>
@@ -160,7 +151,9 @@
 																	<tbody>
 																		<tr>
 																			<!--<td class="table-unselected"></td>-->
-																			<td><input type="text" class="csc-acquisition-acquisition-source"></td>
+																			<td"><input type="text" class="csc-acquisition-acquisition-source">
+                                                                                 <div class="csc-acquisition-acquisition-source-autocomplete"></div>
+                                                                            </td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -305,7 +298,9 @@
 																	<tr>
 																		<td sytle="width:180px;"><input type="text" disabled=disabled class="input-money-type csc-acquisition-acquisition-funding-denomination disabled"></td>
 																		<td><input type="text" disabled=disabled class="input-numeric-medium csc-acquisition-acquisition-funding-value disabled"></td>
-																		<td><input type="text" disabled=disabled class="csc-acquisition-acquisition-funding-source disabled"></td>
+																		<td><input type="text" disabled=disabled class="csc-acquisition-acquisition-funding-source disabled">
+                                                                            <div class="csc-acquisition-acquisition-funding-source-autocomplete"></div>
+                                                                        </td>
 																		<td><input type="text" disabled=disabled class="csc-acquisition-acquisition-funding-provisos disabled"></td>
 																	</tr>
 																</tbody>
@@ -423,7 +418,7 @@
 
 								<!-- Button container -->
 								<div class="fl-container-flex input-buttons">
-									<a href="#" class="csc-save-bottom"><input type="button" class="savebutton" value="Save" /></a>
+									<a href="#"><input type="button" class="savebutton csc-save" value="Save" /></a>
 									<a href="findedit.html"><input type="button" class="cancelbutton" value="Cancel" /></a>
 									<div class="clear"></div>
 								</div>
@@ -432,9 +427,10 @@
 						</div><!-- END left-side container -->
 						
 						<!-- Right-side container. Pivot area -->
-						<div class="fl-container-pivot fl-force-right csc-right-sidebar" id="csc-right-sidebar">
+						<div class="fl-container-pivot fl-force-right csc-sidebar-container" id="csc-right-sidebar">
 								<!-- this div will be filled in with the contents of the Template -->
 						</div> <!-- END sub-main content -->
 						<div class="clear"></div>
 					</div>
 				</div> <!-- END main content -->
+</div>

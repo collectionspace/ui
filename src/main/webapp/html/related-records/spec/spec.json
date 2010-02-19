@@ -3,6 +3,9 @@
         "relations": {
             "selector": ".csc-related-row",
             "repeated": {
+                "summary": {
+                    "selector": ".csc-related-summary"
+                },
                 "number": {
                     "selector": ".csc-related-number",
                     "type": "link",
@@ -15,9 +18,6 @@
                     },
                     "validators": [],
                     "decorators": []
-                },
-                "summary": {
-                    "selector": ".csc-related-summary"
                 },
                 "recordtype": {
                     "selector": ".csc-related-recordtype"

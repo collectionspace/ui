@@ -2,80 +2,100 @@
 Copyright 2009 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
-ou may not use this file except in compliance with this License.
+You may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, window, cspace*/
+/*global jQuery, cspace, console*/
 
 cspace = cspace || {};
 
 (function ($) {
 
     cspace.setupFindEdit = function () {
-		var isLocal = cspace.util.isLocal();
-        var orOpts = {
-            dataContext: {
-                options: {
-                    recordType: "objects"
-                }
-            },
-            uiSpecUrl: isLocal ? 
-// CSPACE-701
-		    "./uispecs/collection-object/find-edit.json" : "../../chain/objects/uispec/find-edit"};
-        if (isLocal) {
-            orOpts.dataContext = {
-                type: "cspace.dataContext",
-                options: {
+        var setUpPage = function () {
+            var objOpts = {
+                dataContext: { options: { recordType: "objects" } },
+                uispec: "{pageBuilder}.uispec.objects"
+            };
+            var intOpts = {
+                dataContext: { options: { recordType: "intake" } },
+                uispec: "{pageBuilder}.uispec.proceduresIntake"
+            };
+            var acqOpts = {
+                dataContext: { options: { recordType: "acquisition" } },
+                uispec: "{pageBuilder}.uispec.proceduresAcquisition"
+            };
+            var authOpts = {
+                dataContext: { options: { recordType: "authority" } },
+                uispec: "{pageBuilder}.uispec.authorityTerms"
+            };
+            if (cspace.util.isLocal()) {
+                objOpts.dataContext.options = {
                     baseUrl: "data",
                     recordType: "collection-object",
                     fileExtension: ".json"
+                };
+                intOpts.dataContext.options.baseUrl = 
+                    acqOpts.dataContext.options.baseUrl = 
+                        authOpts.dataContext.options.baseUrl = "data";
+                intOpts.dataContext.options.fileExtension = 
+                    acqOpts.dataContext.options.fileExtension = 
+                        authOpts.dataContext.options.fileExtension = ".json";
+            }
+            var dependencies = {
+                objects: {
+                    funcName: "cspace.recordList",
+                    args: [".object-records-group", objOpts]
+                },
+                proceduresIntake: {
+                    funcName: "cspace.recordList",
+                    args: [".intake-records-group", intOpts]
+                },
+                proceduresAcquisition: {
+                    funcName: "cspace.recordList",
+                    args: [".acquisition-records-group", acqOpts]
+                },
+                authorityTerms: {
+                    funcName: "cspace.recordList",
+                    args: [".authority-records-group", authOpts]
                 }
             };
-        }
-        var objRecordList = cspace.recordList(".object-records-group", orOpts);
+            
+            var options = {
+                pageSpec: {
+                    header: {
+                        href: "header.html",
+                        templateSelector: ".csc-header-template",
+                        targetSelector: ".csc-header-container"
+                    },
+                    footer: {
+                        href: "footer.html",
+                        templateSelector: ".csc-footer",
+                        targetSelector: ".csc-footer-container"
+                    }
+                }
+            };
+            cspace.pageBuilder(dependencies, options);
+        };
 
-        var prInOpts = {
-            dataContext: {
-                options: {
-                    recordType: "intake"
+        if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
+            jQuery.ajax({
+                url: "./uispecs/find-edit/uispec.json",
+                type: "GET",
+                dataType: "json",
+                success: function (data, textStatus) {
+                    cspace.pageBuilder.uispec = data;
+                    setUpPage();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("ERROR!");
                 }
-            },
-            uiSpecUrl: isLocal ? 
-		    "./uispecs/intake/find-edit.json" : "../../chain/intake/uispec/find-edit"};
-        if (isLocal) {
-            prInOpts.dataContext = {
-                type: "cspace.dataContext",
-                options: {
-                    baseUrl: "data",
-                    recordType: "intake",
-                    fileExtension: ".json"
-                }
-            };
+            });
+        } else {
+            setUpPage();
         }
-        var procIntakeRecordList = cspace.recordList(".intake-records-group", prInOpts);
-
-        var prAcqOpts = {
-            dataContext: {
-                options: {
-                    recordType: "acquisition"
-                }
-            },
-            uiSpecUrl: isLocal ?
-		    "./uispecs/acquisition/find-edit.json" : "../../chain/acquisition/uispec/find-edit"};
-        if (isLocal) {
-            prAcqOpts.dataContext = {
-                type: "cspace.dataContext",
-                options: {
-                    baseUrl: "data",
-                    recordType: "acquisition",
-                    fileExtension: ".json"
-                }
-            };
-        }
-        var procAcquisitionRecordList = cspace.recordList(".acquisition-records-group", prAcqOpts);
     };
-
-}) (jQuery);
+})(jQuery);

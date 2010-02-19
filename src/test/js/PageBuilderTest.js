@@ -31,14 +31,12 @@ cspace = cspace || {};
             funcName: "cspace.testComponent1",
             args: [
                 "#dataEntryContainer"   // container
-//                ,{modelPath: "fields"}  // options
             ]
         },
         relatedRecords: {
             funcName: "cspace.testComponent2",
             args: [
                 "#linksContainer"           // container
-//                ,{modelPath: "relations"}   // options
             ]
         }
     };
@@ -104,7 +102,11 @@ cspace = cspace || {};
             stop();
             cspace.pageBuilder(dependencies, options);
         });
+
+        pageBuilderTest.test("Constructing dependency options", function () {});
+
     };
+    
 
     $(document).ready(function () {
         pageBuilderTester();

@@ -11,7 +11,7 @@
             {"entryMethod": "found-on-doorstep"},
             {"entryMethod": "post"}
         ],
-        "entryNote": "",
+        "entryNote": "This record has multiple entry methods.",
         "numObjects": "1",
         "description": "GERTY",
         "entryDate": "",
