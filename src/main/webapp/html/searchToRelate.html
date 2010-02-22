@@ -1,0 +1,97 @@
+    <div class="cs-add-related-records-dialog main-search-page">
+
+        <div>Search for <span class="csc-record-type">type</span> records to relate to the current record:</div>
+        <div id="search-box">
+            <!-- search form -->
+            <form>
+                <input name="keywords" type="text" class="csc-search-keywords" /><a href="#" class="csc-search-submit">Search</a>
+                <div class="select-recordtype">
+                    <span class="recordtype-label">Record Type</span>
+                    <select name="recordtype" class="csc-search-record-type">
+                        <option value="object">Object</option>
+                        <option value="intake">Intake</option>
+                        <option value="acquisition">Acquisition</option>
+                        <option value="authorities-person">Person</option>
+                        <option value="authorities-organization">Organization</option>
+                    </select>
+                </div>
+            </form>
+            <!-- end search form -->
+        </div>
+
+        <div class="csc-search-error-message hidden">
+            We've encountered an error retrieving search results. Please try again.
+        </div>
+        
+        <div class="csc-search-results">
+            <div class="fl-container-flex header toggle found-records-box" onclick="ShowHide('#toggle-object-records'); return false;">
+                <span class="header-toggle"><img id="toggle-object-records-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+                <span class="found-records-content">
+                    Found <span class="csc-search-results-count">0</span> records
+                </span>
+            </div>
+            
+            <!-- search results -->
+            <div class="fl-pager" id="toggle-object-records">
+                <table summary="search results" id="search-results" class="fl-pager-data">
+                    <thead>
+                        <tr rsf:id="header:" class="csc-header">
+                            <th class="flc-pager-sort-header">ID Number</th>
+                            <th class="flc-pager-sort-header">Summary</th>
+                            <!--<th class="flc-pager-sort-header">Record Type</th>-->
+                        </tr>
+                    </thead>
+                    <tbody class="flc-pager-body-template">
+                        <tr class="csc-row">
+                            <td><a href="x" class="csc-number link">ACC2009.1</a></td>
+                            <td class="csc-col">Girl in a box, Cezanne Paul</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul id="pager-bottom" class="fl-pager-ui flc-pager-bottom">
+                    <li class="flc-per-page">
+                        Show <span>
+                            <select class="flc-pager-page-size">
+                                <option value="1">1</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                            </select>
+                        </span>
+                        per page
+                    </li>
+                    <div style="padding-top:3px;">
+                        <div style="width:300px; margin-left:auto; margin-right:auto;">
+                            <li class="flc-pager-previous">
+                                <a href="#">&lt; previous</a>
+                            </li>
+                            <li>
+                                <ul class="pager-links fl-pager-links flc-pager-links">
+                                    <li value="1" class= "flc-pager-pageLink"><a href="#">1</a></li>
+                                    <li class="flc-pager-pageLink-disabled">2</li>
+                                    <li value="2" class="flc-pager-pageLink"><a href="#">3</a></li>
+                                </ul>
+                            </li>
+                            <li class="flc-pager-next">
+                                <a href="#">next &gt;</a>
+                            </li>
+                        </div>
+                        <li class="flc-pager-summary">
+                            1-10 of 500 items
+                        </li>
+                    </div>
+                    <div class="clear"></div>
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <!-- end search results -->
+
+        <script type="text/javascript">
+            jQuery(document).ready(function () {
+console.log("in searchToRelate.html, calling searchToRelate()");
+                cspace.searchToRelateSetup();
+            });
+        </script>
+
+    </div>

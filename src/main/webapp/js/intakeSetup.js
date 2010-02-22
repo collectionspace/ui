@@ -27,11 +27,15 @@ cspace = cspace || {};
                 applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.dataEntry"
             };
+            var tabsOpts = {
+                applier: "{pageBuilder}.applier",
+                setupFuncs: [null, "cspace.objectTabSetup"]
+            };
             var sbOpts = {
                 relations: "{pageBuilder}.model.relations",
                 termsUsed: "{pageBuilder}.model.termsUsed",
                 uispec: "{pageBuilder}.uispec.sidebar"
-            }
+            };
     
             var dependencies = {
                 titleBar: {
@@ -40,7 +44,7 @@ cspace = cspace || {};
                 },
                 tabs: {
                     funcName: "cspace.tabs",
-                    args: [".csc-tabs-template"]
+                    args: [".csc-tabs-template", tabsOpts]
                 },
                 dataEntry: {
                     funcName: "cspace.dataEntry",
@@ -93,14 +97,20 @@ cspace = cspace || {};
             var csid = cspace.util.getUrlParameter("csid");
             if (csid) {
                 options.csid = csid;
+                cspace.currentCsid = csid;
+            } else {
+                cspace.currentCsid = null;
             }
+            
             if (cspace.util.isLocal()) {
                 options.dataContext.options.baseUrl = "data";
                 options.dataContext.options.fileExtension = ".json";
             }
 
+            cspace.currentRecordType = "intake";
             cspace.pageBuilder(dependencies, options);
         };
+
 
         if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
             jQuery.ajax({

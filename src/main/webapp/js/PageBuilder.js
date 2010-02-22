@@ -97,7 +97,7 @@ cspace = cspace || {};
 
     var setUpPageBuilder = function (that) {
         fluid.model.copyModel(that.uispec, cspace.pageBuilder.uispec);
-        fluid.clear(cspace.pageBuilder.uispec);
+        cspace.pageBuilder.uispec = null;
 
         that.model = {};
         that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);

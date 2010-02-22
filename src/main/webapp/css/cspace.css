@@ -447,3 +447,8 @@ input.deactivate {background-color:#CDCCCC !important; color:#000 !important;}
 .ui-tabs .ui-tabs-hide {
      display: none;
 }
+
+.cs-add-related-records-dialog {
+    background-color: white;
+    min-width: 600px;
+}

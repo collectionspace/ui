@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, window, cspace*/
+/*global jQuery, cspace*/
 
 cspace = cspace || {};
 
@@ -31,23 +31,28 @@ cspace = cspace || {};
     cspace.sidebar = function (container, options) {
         var that = fluid.initView("cspace.sidebar", container, options);
         
-        that.integratedAuthorities = cspace.recordList(that.options.selectors.termsUsed,
+        that.integratedAuthorities = fluid.initSubcomponent(that, "recordList", [that.options.selectors.termsUsed,
              {data: that.options.termsUsed,
-              uispec: that.options.uispec.termsUsed});
+              uispec: that.options.uispec.termsUsed}]);
 
-        that.relatedObjects = cspace.recordList(that.options.selectors.relatedObjects,
-             {data: buildRelationsList(that.options.relations, ["objects"]),
-              uispec: that.options.uispec.relatedObjects});
-
-        that.relatedProcedures = cspace.recordList(that.options.selectors.relatedProcedures,
+        that.relatedProcedures = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedProcedures,
              {data: buildRelationsList(that.options.relations, ["intake", "acquisition"]),
-              uispec: that.options.uispec.relatedProcedures});
+              uispec: that.options.uispec.relatedProcedures}]);
 
+        that.relatedObjects = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedObjects,
+             {data: buildRelationsList(that.options.relations, ["objects"]),
+              uispec: that.options.uispec.relatedObjects}]);
 
         return that;
     };
     
     fluid.defaults("cspace.sidebar", {
+        recordList: {
+            type: "cspace.recordList"
+        },
+        relatedRecordsList: {
+            type: "cspace.relatedRecordsList"
+        },
         selectors: {
             mediaSnapshot: ".csc-media-snapshot",
             termsUsed: ".csc-integrated-authorities",
@@ -55,4 +60,4 @@ cspace = cspace || {};
             relatedProcedures: ".csc-related-procedures"
         }
     });
-})(jQuery, fluid_1_2)
+})(jQuery, fluid_1_2);

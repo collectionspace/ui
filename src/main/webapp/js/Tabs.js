@@ -34,6 +34,13 @@ cspace = cspace || {};
         }
         that.locate("tabsContainer").prepend(tabs);
         that.locate("tabsContainer").tabs({
+            cache: true,
+            ajaxOptions: {
+                success: function (data, textStatus, XMLHttpRequest) {
+                    var tabIndex = that.locate("tabsContainer").tabs('option', 'selected');
+                    fluid.invokeGlobalFunction(that.options.setupFuncs[tabIndex], [that.options.applier]);
+                }
+            },
             select: function (event, ui) {
                 var links = $("a", tabs);
                 links.removeClass(that.options.styles.current);

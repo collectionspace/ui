@@ -14,8 +14,53 @@ cspace = cspace || {};
 
 (function ($) {
 
-    cspace.objectTabSetup = function () {
+    cspace.objectTabSetup = function (applier) {
+        console.log("in cspace.objectTabSetup()");
+        var setUpPage = function () {
+            var options = {
+                pageSpec: {
+                    relatedRecords: {
+                        href: "objectTabRecordListTemplate.html",
+                        templateSelector: ".csc-object-tab-record-list",
+                        targetSelector: ".div-for-list-of-records"
+                    },
+                    newRecord:{
+                        href: "objectTabSchemaTemplate.html",
+                        templateSelector: ".csc-object-tab-schema",
+                        targetSelector: ".div-for-schema"
+                    } 
+                }
+            };
+            var dependencies = {
+                relatedRecords: {
+                    funcName: "cspace.relatedRecordsList",
+                    args: [".div-for-list-of-records", {recordType: "objects",
+                    data: applier.model.relations}]
+                }//,
+//                newRecord: {
+  //                  funcName: "cspace.dataEntry",
+    //                args: [".div-for-schema", {}]
+            };
+            console.log("in objectTabSetup(), about to call pageBuilder");
+            cspace.pageBuilder(dependencies, options);            
+        };
 
+        if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
+            jQuery.ajax({
+                url: "./uispecs/object-tab/uispec.json",
+                type: "GET",
+                dataType: "json",
+                success: function (data, textStatus) {
+                    cspace.pageBuilder.uispec = data;
+                    setUpPage();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Error fetching objects tab uispec");
+                }
+            });
+        } else {
+            setUpPage();
+        }
     };
 
 })(jQuery, fluid_1_2);
