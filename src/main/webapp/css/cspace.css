@@ -88,7 +88,7 @@ td textarea {border:none;}
 .pager-links {display:inline; padding-top:5px;}
 .fl-pager .fl-pager-ui  { padding -top:5px;}
 #pager-top {padding:6px 12px 2px 7px;}
-#pager-bottom {padding:4px 1px 4px 1px; background-color:#E8E8E8; border-bottom: 1px solid #C8C6C6;}
+#pager-bottom {padding:4px 1px 1px 1px; background-color:#E8E8E8; border-bottom: 1px solid #C8C6C6;}
 
 
 /*set min-height for record pages */
