@@ -14,12 +14,6 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-    makeFunction = function (recordType) {
-        return function () {
-            $(".test-content").text("This is the new text. Record type = "+recordType);
-        };
-    };
-
     var addNewRelationship = function (newCsid, currentCsid) {
         /* url for relationships: .../chain/relationships/
          * GET/POST/DELETE

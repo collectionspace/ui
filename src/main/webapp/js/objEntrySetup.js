@@ -21,6 +21,10 @@ cspace = cspace || {};
                 applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.titleBar"
             };
+            var tabsOpts = {
+                applier: "{pageBuilder}.applier",
+                setupFuncs: [null, "cspace.objectTabSetup"]
+            };
             var deOpts = {
                 dataContext: "{pageBuilder}.dataContext",
                 applier: "{pageBuilder}.applier",
@@ -30,7 +34,7 @@ cspace = cspace || {};
                 relations: "{pageBuilder}.model.relations",
                 termsUsed: "{pageBuilder}.model.termsUsed",
                 uispec: "{pageBuilder}.uispec.sidebar"
-            }
+            };
     
             var dependencies = {
                 titleBar: {
@@ -39,7 +43,7 @@ cspace = cspace || {};
                 },
                 tabs: {
                     funcName: "cspace.tabs",
-                    args: [".csc-tabs-template"]
+                    args: [".csc-tabs-template", tabsOpts]
                 },
                 dataEntry: {
                     funcName: "cspace.dataEntry",

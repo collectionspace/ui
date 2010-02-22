@@ -15,7 +15,6 @@ cspace = cspace || {};
 (function ($) {
 
     cspace.objectTabSetup = function (applier) {
-        console.log("in cspace.objectTabSetup()");
         var setUpPage = function () {
             var options = {
                 pageSpec: {
@@ -24,24 +23,29 @@ cspace = cspace || {};
                         templateSelector: ".csc-object-tab-record-list",
                         targetSelector: ".div-for-list-of-records"
                     },
-                    newRecord:{
+                    newRecord: {
                         href: "objectTabSchemaTemplate.html",
                         templateSelector: ".csc-object-tab-schema",
                         targetSelector: ".div-for-schema"
                     } 
                 }
             };
+            var deOpts = {
+                dataContext: "{pageBuilder}.dataContext",
+                applier: "{pageBuilder}.applier",
+                uispec: "{pageBuilder}.uispec.newRecord"
+            };
             var dependencies = {
                 relatedRecords: {
                     funcName: "cspace.relatedRecordsList",
                     args: [".div-for-list-of-records", {recordType: "objects",
                     data: applier.model.relations}]
-                }//,
-//                newRecord: {
-  //                  funcName: "cspace.dataEntry",
-    //                args: [".div-for-schema", {}]
+                },
+                newRecord: {
+                    funcName: "cspace.dataEntry",
+                    args: [".div-for-schema", deOpts]
+                }
             };
-            console.log("in objectTabSetup(), about to call pageBuilder");
             cspace.pageBuilder(dependencies, options);            
         };
 

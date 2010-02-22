@@ -14,13 +14,13 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-    makeFunction = function (recordType) {
+    var makeFunction = function (recordType) {
         return function () {
-            $(".test-content").text("This is the new text. Record type = "+recordType);
+            $(".test-content").text("This is the new text. Record type = " + recordType);
         };
     };
 
-    setupAddDialog = function (that) {
+    var setupAddDialog = function (that) {
         var resources = {
             addDialog: {
                 href: "../html/searchToRelate.html"
