@@ -29,8 +29,9 @@ cspace = cspace || {};
         return "../../chain/" + recordTypeParts.join('/') + "/search?query=" + query;
     };
 
-    var colDefsGenerated = function (columnList, recordType) {
-        return fluid.transform(columnList, function (object, index) {
+    var colDefsGenerated = function (columnList, recordType, selectable) {
+        var csidList = [];
+        var colDefs = fluid.transform(columnList, function (object, index) {
             var key = "col:";
             var comp;
 
@@ -52,6 +53,14 @@ cspace = cspace || {};
                 sortable: true
             };
         });
+        if (selectable) {
+            colDefs[colDefs.length] = {
+                key: "selected",
+                valuebinding: "*.selected",
+                sortable: false
+            };
+        }
+        return colDefs;
     };
 
     var displaySearchResults = function (that, recordType) {
@@ -62,21 +71,35 @@ cspace = cspace || {};
                 colList.push(key);
             }
         }
+        var rendererCutpoints = [
+            {id: "header:", selector: that.options.selectors.resultsHeader},
+            {id: "row:", selector: that.options.selectors.resultsRow},
+            {id: "number", selector: that.options.selectors.columns.number},
+            {id: "col:", selector: that.options.selectors.columns.col}
+        ];
+
+        if (that.options.resultsSelectable) {
+            results = fluid.transform(results, function (object, index) {
+                object.selected = false;
+                return object;
+            });
+            rendererCutpoints[rendererCutpoints.length] = {
+                id: "selected",
+                selector: that.options.selectors.columns.select
+            };
+        }
         var pagerArguments = [
             that.options.selectors.resultsContainer,
             {
                 dataModel: results,
-                columnDefs: colDefsGenerated(colList, recordType),
+                columnDefs: colDefsGenerated(colList, recordType, that.options.resultsSelectable),
                 bodyRenderer: {
                     type: "fluid.pager.selfRender",
                     options: {
                         renderOptions: {
-                            cutpoints: [
-                                {id: "header:", selector: that.options.selectors.resultsHeader},
-                                {id: "row:", selector: that.options.selectors.resultsRow},
-                                {id: "number", selector: that.options.selectors.columns.number},
-                                {id: "col:", selector: that.options.selectors.columns.col}
-                            ]
+                            cutpoints: rendererCutpoints,
+                            autoBind: true,
+                            model: results
                         }
                     }
                 },
@@ -92,7 +115,7 @@ cspace = cspace || {};
         ];
         if (resultsPager) {
             fluid.model.copyModel(resultsPager.options.dataModel, results);
-            fluid.model.copyModel(resultsPager.options.columnDefs, colDefsGenerated(colList, recordType));
+            fluid.model.copyModel(resultsPager.options.columnDefs, colDefsGenerated(colList, recordType, that.options.resultsSelectable));
             // you're not supposed to touch the pager's model, but there's a bug in this version, so...
             resultsPager.model.totalRange = results.length;
             resultsPager.events.initiatePageChange.fire({pageIndex: 0, forceUpdate: true});
@@ -169,7 +192,8 @@ cspace = cspace || {};
             resultsRow: ".csc-row",
             columns: {
                 number: ".csc-number",
-                col: ".csc-col"
+                col: ".csc-col",
+                select: ".csc-search-select"
             }
         },
         
@@ -182,6 +206,8 @@ cspace = cspace || {};
 
         resultsPager: {
             type: "fluid.pager"
-        }
+        },
+        
+        resultsSelectable: false
     });
 })(jQuery, fluid_1_2);

@@ -32,15 +32,18 @@ cspace = cspace || {};
         var that = fluid.initView("cspace.sidebar", container, options);
         
         that.integratedAuthorities = fluid.initSubcomponent(that, "recordList", [that.options.selectors.termsUsed,
-             {data: that.options.termsUsed,
+             {data: that.options.applier.model.termsUsed,
+              csid: that.options.applier.model.csid,
               uispec: that.options.uispec.termsUsed}]);
 
         that.relatedProcedures = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedProcedures,
-             {data: buildRelationsList(that.options.relations, ["intake", "acquisition"]),
+             {data: buildRelationsList(that.options.applier.model.relations, ["intake", "acquisition"]),
+              csid: that.options.applier.model.csid,
               uispec: that.options.uispec.relatedProcedures}]);
 
         that.relatedObjects = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedObjects,
-             {data: buildRelationsList(that.options.relations, ["objects"]),
+             {data: buildRelationsList(that.options.applier.model.relations, ["objects"]),
+              csid: that.options.applier.model.csid,
               uispec: that.options.uispec.relatedObjects}]);
 
         return that;

@@ -35,11 +35,15 @@ cspace = cspace || {};
                 applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.newRecord"
             };
+            var rrOpts = {
+                recordType: "objects",
+                csid: applier.model.csid,
+                data: applier.model.relations
+            };
             var dependencies = {
                 relatedRecords: {
                     funcName: "cspace.relatedRecordsList",
-                    args: [".div-for-list-of-records", {recordType: "objects",
-                    data: applier.model.relations}]
+                    args: [".div-for-list-of-records", rrOpts]
                 },
                 newRecord: {
                     funcName: "cspace.dataEntry",

@@ -31,8 +31,7 @@ cspace = cspace || {};
                 uispec: "{pageBuilder}.uispec.dataEntry"
             };
             var sbOpts = {
-                relations: "{pageBuilder}.model.relations",
-                termsUsed: "{pageBuilder}.model.termsUsed",
+                applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.sidebar"
             };
     

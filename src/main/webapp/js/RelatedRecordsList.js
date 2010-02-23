@@ -59,14 +59,14 @@ cspace = cspace || {};
         var that = fluid.initView("cspace.relatedRecordsList", container, options);
         that.model = {
             csid: that.options.csid || null,
-            items: that.options.items || []
+            items: that.options.data || []
         };
 
-        that.recordList = fluid.initSubcomponent(that, "recordList", [that.container, 
-                {
-                    data: that.options.data,
-                    uispec: that.options.uispec
-                }]);
+        var rlOpts = {
+            data: that.model.items,
+            uispec: that.options.uispec
+        };
+        that.recordList = fluid.initSubcomponent(that, "recordList", [that.container, rlOpts]);
 
         that.add = function (relatedCsid) {
             addNewRelationship(relatedCsid, that.model.csid);

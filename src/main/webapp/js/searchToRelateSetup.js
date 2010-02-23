@@ -15,22 +15,16 @@ cspace = cspace || {};
 (function ($) {
 
     cspace.searchToRelateSetup = function () {
-        var searchOpts = {};
+        var searchOpts = {
+            resultsSelectable: true
+        };
         if (cspace.util.isLocal()) {
             searchOpts.searchUrlBuilder = function (recordType, query) {
                 var recordTypeParts = (recordType === "collection-object" ? [recordType] : recordType.split('-'));        
                 return "./data/" + recordTypeParts.join('/') + "/search/list.json";
             };
         }
-        var dependencies = {
-            search: {
-                funcName: "cspace.search",
-                args: [".main-search-page", searchOpts]
-            }
-        };
-        var pageBuilderOpts = {
-        };
-        cspace.pageBuilder(dependencies);
+        cspace.search(".main-search-page", searchOpts);
     };
     
 })(jQuery);

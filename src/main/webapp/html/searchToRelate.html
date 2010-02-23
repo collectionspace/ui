@@ -24,11 +24,12 @@
         </div>
         
         <div class="csc-search-results">
-            <div class="fl-container-flex header toggle found-records-box" onclick="ShowHide('#toggle-object-records'); return false;">
+            <div class="fl-container-flex header toggle found-records-box">
                 <span class="header-toggle"><img id="toggle-object-records-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
                 <span class="found-records-content">
                     Found <span class="csc-search-results-count">0</span> records
                 </span>
+                <span><input type="button" value="Add to current record" class="csc-relate-button" /></span>
             </div>
             
             <!-- search results -->
@@ -36,6 +37,7 @@
                 <table summary="search results" id="search-results" class="fl-pager-data">
                     <thead>
                         <tr rsf:id="header:" class="csc-header">
+                            <th>Select</th>
                             <th class="flc-pager-sort-header">ID Number</th>
                             <th class="flc-pager-sort-header">Summary</th>
                             <!--<th class="flc-pager-sort-header">Record Type</th>-->
@@ -43,7 +45,8 @@
                     </thead>
                     <tbody class="flc-pager-body-template">
                         <tr class="csc-row">
-                            <td><a href="x" class="csc-number link">ACC2009.1</a></td>
+                            <td><input type="checkbox" class="csc-search-select"/></td>
+                            <td class="csc-number link">ACC2009.1</td>
                             <td class="csc-col">Girl in a box, Cezanne Paul</td>
                         </tr>
                     </tbody>
@@ -89,7 +92,6 @@
 
         <script type="text/javascript">
             jQuery(document).ready(function () {
-console.log("in searchToRelate.html, calling searchToRelate()");
                 cspace.searchToRelateSetup();
             });
         </script>
