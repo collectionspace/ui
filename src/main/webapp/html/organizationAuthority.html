@@ -337,52 +337,52 @@
 										<div class="clear"></div>
 									</div>
 									
-									<div class="fl-container-flex fl-fix information-group" style="display:visible;" id="toggle-authority-contact-information">
+									<div class="fl-container-flex fl-fix information-group" id="toggle-authority-contact-information">
 										<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-contact'); return false;">
 											<span class="header-toggle"><img id="toggle-contact-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 											Contact Information
 										</div>
 										<div class="fl-container-flex fl-fix content main" id="toggle-contact">
 											<div class="info-column">
-												<div class="info-column">
-													<div class="info-pair">
-														<div class="header">
-															<div class="label">Place</div>
+												<div class="info-column2-70 fl-force-left">
+													<div class="info-column2-30 fl-force-left">
+														<div class="info-pair">
+															<div class="header">
+																<div class="label">Address type</div>
+															</div>
+															<div class="content">
+																<table>
+																	<tbody>
+																		<tr>
+																			<!--<td class="table-unselected"></td>-->
+																			<td><input type="text" class="csc-org-authority-type" /></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
 														</div>
-														<div class="content">
-															<table>
-																<thead>
-																	<tr>
-																		<td>Type</td>
-																		<td>Street Number</td>
-																		<td>Street Name</td>
-																		<td>Street Address Suffix</td>
-																		<td>City</td>
-																		<td>State/Province</td>
-																		<td>Postcode</td>
-																		<td>Country</td>
-																	</tr>
-																</thead>
-																	
-																<tbody>
-																	<tr>
-																		<td><input type="text" class="csc-org-authority-type"></td>
-																		<td><input type="text" class="csc-org-authority-streetnumber"></td>
-																		<td><input type="text" class="csc-org-authority-streetname"></td>
-																		<td><input type="text" class="csc-org-authority-streetaddresssuffix"></td>
-																		<td><input type="text" class="csc-org-authority-city"></td>
-																		<td><input type="text" class="csc-org-authority-state-prov"></td>
-																		<td><input type="text" class="csc-org-authority-postcode"></td>
-																		<td><input type="text" class="csc-org-authority-country"></td>
-																	</tr>
-																</tbody>
-															</table>
+													</div>
+													<div class="info-column2-70 fl-force-right">
+														<div class="info-pair">
+															<div class="header">
+																<div class="label">Address Place</div>
+															</div>
+															<div class="content">
+																<table>
+																	<tbody>
+																		<tr>
+																			<!--<td class="table-unselected"></td>-->
+																			<td><input type="text" class="csc-org-authority-place1" /></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
 														</div>
-													</div>	
-												
+													</div>
+													<div class="clear"></div>
 												</div>
-											
-												<div class="info-column2-40 fl-force-left">
+												
+												<div class="info-column2-30 fl-force-right">
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Fax Number</div>
@@ -413,10 +413,6 @@
 															</table>
 														</div>
 													</div>
-													<div class="clear"></div>
-												</div>
-												
-												<div class="info-column2-60 fl-force-right">
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Email</div>

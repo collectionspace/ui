@@ -96,15 +96,15 @@
 										</div>
 										
 										<div class="csc-search-results">
-											<div class="fl-container-flex header toggle found-records-box" onclick="ShowHide('#toggle-object-records'); return false;">
-												<span class="header-toggle"><img id="toggle-object-records-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+											<div class="fl-container-flex header toggle found-records-box" onclick="ShowHide('#toggle-records'); return false;">
+												<span class="header-toggle"><img id="toggle-records-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 												<span class="found-records-content">
 													Found <span class="csc-search-results-count">0</span> records
 												</span>
 											</div>
 											
 											<!-- search results -->
-											<div class="fl-pager" id="toggle-object-records">
+											<div class="fl-pager" id="toggle-records">
 												<!--<ul id="pager-top" class="fl-pager-ui flc-pager-top">
 													<li class="flc-pager-previous">
 														<a href="#">&lt; previous</a>
@@ -149,7 +149,7 @@
 													</tbody>
 												</table>
 												<ul id="pager-bottom" class="fl-pager-ui flc-pager-bottom">
-													<li class="flc-per-page">
+													<li class="flc-per-page" style="width:320px; margin-top:-3px;">
 														Show <span>
 															<select class="flc-pager-page-size">
 																<option value="1">1</option>
@@ -160,26 +160,22 @@
 														</span>
 														per page
 													</li>
-													<div style="padding-top:3px;">
-														<div style="width:300px; margin-left:auto; margin-right:auto;">
-															<li class="flc-pager-previous">
-																<a href="#">&lt; previous</a>
-															</li>
-															<li>
-																<ul class="pager-links fl-pager-links flc-pager-links">
-																	<li value="1" class= "flc-pager-pageLink"><a href="#">1</a></li>
-																	<li class="flc-pager-pageLink-disabled">2</li>
-																	<li value="2" class="flc-pager-pageLink"><a href="#">3</a></li>
-																</ul>
-															</li>
-															<li class="flc-pager-next">
-																<a href="#">next &gt;</a>
-															</li>
-														</div>
-														<li class="flc-pager-summary">
-															1-10 of 500 items
-														</li>
-													</div>
+													<li class="flc-pager-previous">
+														<a href="#">&lt; previous</a>
+													</li>
+													<li>
+														<ul class="pager-links fl-pager-links flc-pager-links">
+															<li value="1" class= "flc-pager-pageLink"><a href="#">1</a></li>
+															<li class="flc-pager-pageLink-disabled">2</li>
+															<li value="2" class="flc-pager-pageLink"><a href="#">3</a></li>
+														</ul>
+													</li>
+													<li class="flc-pager-next">
+														<a href="#">next &gt;</a>
+													</li>
+													<li class="flc-pager-summary" style="width:100px; text-align:right;">
+														1-10 of 500 items
+													</li>
 													<div class="clear"></div>
 												</ul>
 												<div class="clear"></div>
