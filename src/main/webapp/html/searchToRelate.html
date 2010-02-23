@@ -5,15 +5,14 @@
             <!-- search form -->
             <form>
                 <input name="keywords" type="text" class="csc-search-keywords" /><a href="#" class="csc-search-submit">Search</a>
-                <div class="select-recordtype">
+                <div class="select-recordtype csc-recordTypeSelecter csc-recordTypeSelecter-procedures hidden">
                     <span class="recordtype-label">Record Type</span>
                     <select name="recordtype" class="csc-search-record-type">
-                        <option value="object">Object</option>
                         <option value="intake">Intake</option>
                         <option value="acquisition">Acquisition</option>
-                        <option value="authorities-person">Person</option>
-                        <option value="authorities-organization">Organization</option>
                     </select>
+                </div>
+                <div class="select-recordtype csc-recordTypeSelecter csc-recordTypeSelecter-object hidden">
                 </div>
             </form>
             <!-- end search form -->
@@ -89,11 +88,5 @@
             </div>
         </div>
         <!-- end search results -->
-
-        <script type="text/javascript">
-            jQuery(document).ready(function () {
-                cspace.searchToRelateSetup();
-            });
-        </script>
 
     </div>

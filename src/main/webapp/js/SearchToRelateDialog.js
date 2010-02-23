@@ -14,9 +14,11 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var makeFunction = function (recordType) {
+    var makeRelater = function (that) {
         return function () {
-            $(".test-content").text("This is the new text. Record type = " + recordType);
+            var data = that.search.resultsPager.options.dataModel;
+
+            that.dlg.dialog("close");
         };
     };
 
@@ -41,7 +43,19 @@ cspace = cspace || {};
         fluid.fetchResources(resources, function () {
             var templates = fluid.parseTemplates(resources, ["addDialog"], {});
             fluid.reRender(templates, addDialog, {});
-            $(".test-search-button").click(makeFunction("bar"));
+
+            var searchOpts = {
+                resultsSelectable: true
+            };
+            if (cspace.util.isLocal()) {
+                searchOpts.searchUrlBuilder = function (recordType, query) {
+                    var recordTypeParts = (recordType === "collection-object" ? [recordType] : recordType.split('-'));        
+                    return "./data/" + recordTypeParts.join('/') + "/search/list.json";
+                };
+            }
+            that.search = cspace.search(".main-search-page", searchOpts);
+
+            that.locate("addButton", addDialog).click(makeRelater(that));
         });
 
         return addDialog;        
@@ -52,8 +66,10 @@ cspace = cspace || {};
 
         that.dlg = setupAddDialog(that);
 
-        that.showDialog = function () {
-            
+        that.prepareDialog = function (type) {
+            that.locate("searchResults", that.dlg).hide();
+            that.locate("recordTypeSelecter", that.dlg).hide();
+            that.locate(type+"Selecter", that.dlg).show();
         };
 
         return that;
@@ -61,8 +77,12 @@ cspace = cspace || {};
     
     fluid.defaults("cspace.searchToRelateDialog", {
         selectors: {
-            addButton: ".csc-add-related-records-button",
-            recordTypeString: ".csc-record-type"
+            addButton: ".csc-relate-button",
+            searchResults: ".csc-search-results",
+            recordTypeString: ".csc-record-type",
+            recordTypeSelecter: ".csc-recordTypeSelecter",
+            objectSelecter: ".csc-recordTypeSelecter-object",
+            proceduresSelecter: ".csc-recordTypeSelecter-procedures"
         }
     });
 })(jQuery, fluid_1_2);

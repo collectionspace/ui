@@ -14,8 +14,6 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var resultsPager;
-
     var defaultSearchUrlBuilder = function (recordType, query) {
 // CSPACE-701
 // Up to 0.4, there's a bug in which the recordType for 'object' needs to be
@@ -66,8 +64,8 @@ cspace = cspace || {};
     var displaySearchResults = function (that, recordType) {
         var colList = [];
         var results = (that.model.results || []);
-        for (var key in results[0]) {
-            if (results[0].hasOwnProperty(key)) {
+        for (var key in that.model.results[0]) {
+            if (that.model.results[0].hasOwnProperty(key)) {
                 colList.push(key);
             }
         }
@@ -79,7 +77,7 @@ cspace = cspace || {};
         ];
 
         if (that.options.resultsSelectable) {
-            results = fluid.transform(results, function (object, index) {
+            that.model.results = fluid.transform(results, function (object, index) {
                 object.selected = false;
                 return object;
             });
@@ -91,7 +89,7 @@ cspace = cspace || {};
         var pagerArguments = [
             that.options.selectors.resultsContainer,
             {
-                dataModel: results,
+                dataModel: that.model.results,
                 columnDefs: colDefsGenerated(colList, recordType, that.options.resultsSelectable),
                 bodyRenderer: {
                     type: "fluid.pager.selfRender",
@@ -99,7 +97,7 @@ cspace = cspace || {};
                         renderOptions: {
                             cutpoints: rendererCutpoints,
                             autoBind: true,
-                            model: results
+                            model: that.model.results
                         }
                     }
                 },
@@ -113,17 +111,17 @@ cspace = cspace || {};
                 }
             }
         ];
-        if (resultsPager) {
-            fluid.model.copyModel(resultsPager.options.dataModel, results);
-            fluid.model.copyModel(resultsPager.options.columnDefs, colDefsGenerated(colList, recordType, that.options.resultsSelectable));
+        if (that.resultsPager) {
+            fluid.model.copyModel(that.resultsPager.options.dataModel, that.model.results);
+            fluid.model.copyModel(that.resultsPager.options.columnDefs, colDefsGenerated(colList, recordType, that.options.resultsSelectable));
             // you're not supposed to touch the pager's model, but there's a bug in this version, so...
-            resultsPager.model.totalRange = results.length;
-            resultsPager.events.initiatePageChange.fire({pageIndex: 0, forceUpdate: true});
+            that.resultsPager.model.totalRange = that.model.results.length;
+            that.resultsPager.events.initiatePageChange.fire({pageIndex: 0, forceUpdate: true});
         } else {
-            resultsPager = fluid.initSubcomponent(that, "resultsPager", pagerArguments);
+            that.resultsPager = fluid.initSubcomponent(that, "resultsPager", pagerArguments);
         }
         that.locate("resultsContainer").show();
-        that.locate("resultsCount").text(resultsPager.model.totalRange);
+        that.locate("resultsCount").text(that.resultsPager.model.totalRange);
     };
 
     var submitSearchRequest = function (that) {

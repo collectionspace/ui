@@ -38,6 +38,7 @@ cspace = cspace || {};
             var rrOpts = {
                 recordType: "objects",
                 csid: applier.model.csid,
+                recordType: "object",
                 data: applier.model.relations
             };
             var dependencies = {

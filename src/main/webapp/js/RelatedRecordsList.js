@@ -78,12 +78,8 @@ cspace = cspace || {};
 
         cspace.addDialogInst = cspace.addDialogInst || cspace.searchToRelateDialog(that.container);
         that.locate("addButton").live("click", function (e) {
-            // TODO: get the target in a cross-browser way (i.e. cater to IE
-            var el = $(e.target);
-            var type = el.attr("recordtype");
-            var a = that.locate("recordTypeString");
-            var b = that.locate("recordTypeString", cspace.addDialogInst.dlg);
-            that.locate("recordTypeString", cspace.addDialogInst.dlg).text(type);
+            that.locate("recordTypeString", cspace.addDialogInst.dlg).text(that.options.recordType);
+            cspace.addDialogInst.prepareDialog(that.options.recordType);
             cspace.addDialogInst.dlg.dialog("open");
         });
 
