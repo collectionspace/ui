@@ -120,14 +120,50 @@
 									</div> <!-- end outer info column -->
 								</div> <!-- end information group -->
 								
-								<!-- Vocabulary Term information group -->
+                                <!-- Vocabulary Term information group -->
+                                <div class="fl-container-flex fl-fix information-group">
+                                    <!-- outer info column -->
+                                    <div class="info-column1">  
+                                        <!-- information block header -->
+                                        <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-vocab-records'); return false;">
+                                            <span class="header-toggle"><img id="toggle-vocab-records-img"  src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+                                            Vocabulary Terms
+                                        </div> <!-- end information block header -->
+                                        <!-- container content -->
+                                        <!--<form name="selecttypeV">-->
+                                            <div class="fl-container-flex fl-fix content main" id="toggle-vocab-records">
+                                                <div class="info-column">
+                                                    <div class="sub-header">Select a Type</div>
+                                                    <div class="radio-buttons">
+                                                        <span class="radio-button"><input type="radio" id="new-name-authority-radio" name="recordtype" value="nameAuthority.html"/> Person</span>
+                                                        <span class="radio-button"><input type="radio" id="new-org-authority-radio" name="recordtype" value="organizationAuthority.html"/> Organization</span>
+                                                        <span class="radio-button disabled"><input type="radio" name="recordtype" value="location" disabled /> Place</span>
+                                                        <span class="radio-button disabled"><input type="radio" name="recordtype" value="mediasupport" disabled /> Subject</span>
+                                                        <span class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Concept</span>
+                                                        <span class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Exhibition</span>
+                                                        <span class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Collecting Event</span>
+                                                        <span class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Citation</span>
+                                                    </div>
+                                                    <input type=button class="button quick" onclick="getRadioValue();" value="Create Quick Record" />
+                                                    <div class="input-button disabled">Create New</div>
+                                                    <div class="input-button disabled">Create From Existing</div>
+                                                    <div class="input-button disabled">Create From Template</div>
+                                                    <div class="clear"></div>
+                                                </div> <!-- end inner info column -->
+                                                
+                                            </div> <!-- end container content -->
+                                        </form>
+                                    </div> <!-- end outer info column -->
+                                </div> <!-- end information group -->
+
+								<!-- Other information group -->
 								<div class="fl-container-flex fl-fix information-group">
 									<!-- outer info column -->
 									<div class="info-column1">	
 										<!-- information block header -->
 										<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-vocab-records'); return false;">
 											<span class="header-toggle"><img id="toggle-vocab-records-img"  src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-											Vocabulary Storage and Media Records
+											Other
 										</div> <!-- end information block header -->
 										<!-- container content -->
 										<!--<form name="selecttypeV">-->
@@ -135,15 +171,11 @@
 												<div class="info-column">
 													<div class="sub-header">Select a Type</div>
 													<div class="radio-buttons">
-														<span class="radio-button"><input type="radio" id="new-name-authority-radio" name="recordtype" value="nameAuthority.html"/> Name</span>
-														<span class="radio-button disabled"><input type="radio" name="recordtype" value="location" disabled /> Place</span>
-														<span class="radio-button disabled"><input type="radio" name="recordtype" value="mediasupport" disabled /> Subject</span>
-														<span class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Concept</span>
-														<span class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Exhibition</span>
-														<span class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Collecting Event</span>
-														<span class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Citation</span>
+														<span class="radio-button disabled"><input type="radio" name="recordtype" value="location" disabled /> Storage Location</span>
+														<span class="radio-button disabled"><input type="radio" name="recordtype" value="mediasupport" disabled /> Media Records</span>
+														<span class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Collection</span>
 													</div>
-													<input type=button class="button quick" onclick="getRadioValue();" value="Create Quick Record" />
+													<input type=button class="button quick disabled" onclick="getRadioValue();" value="Create Quick Record" />
 													<div class="input-button disabled">Create New</div>
 													<div class="input-button disabled">Create From Existing</div>
 													<div class="input-button disabled">Create From Template</div>
