@@ -181,7 +181,7 @@ cspace = cspace || {};
     fluid.defaults("cspace.search", {
         selectors: {
             keywords: ".csc-search-keywords",
-            recordType: ".csc-search-record-type",
+            recordType: ".csc-select-box-container .csc-search-record-type",
             errorMessage: ".csc-search-error-message",
             searchButton: ".csc-search-submit",
             resultsContainer: ".csc-search-results",

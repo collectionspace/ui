@@ -67,9 +67,10 @@ cspace = cspace || {};
         that.dlg = setupAddDialog(that);
 
         that.prepareDialog = function (type) {
+            var selectBoxContainer = that.locate("selectBoxContainer", that.dlg);
+            selectBoxContainer.empty();
+            selectBoxContainer.append(that.locate(type+"Selecter", that.dlg).clone());
             that.locate("searchResults", that.dlg).hide();
-            that.locate("recordTypeSelecter", that.dlg).hide();
-            that.locate(type+"Selecter", that.dlg).show();
         };
 
         return that;
@@ -80,7 +81,8 @@ cspace = cspace || {};
             addButton: ".csc-relate-button",
             searchResults: ".csc-search-results",
             recordTypeString: ".csc-record-type",
-            recordTypeSelecter: ".csc-recordTypeSelecter",
+            selectBoxContainer: ".csc-select-box-container",
+            selectBoxes: ".csc-select-boxes",
             objectSelecter: ".csc-recordTypeSelecter-object",
             proceduresSelecter: ".csc-recordTypeSelecter-procedures"
         }
