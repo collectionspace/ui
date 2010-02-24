@@ -36,6 +36,20 @@ cspace = cspace || {};
 		return document.location.protocol === "file:";
 	};
     
+    cspace.util.buildRelationsList = function (data, recordTypeList) {
+        var relationList = [];
+        if (data) {
+            for (var i = 0; i < data.length; i++) {
+                for (var j = 0; j < recordTypeList.length; j++) {
+                    if (data[i].recordtype === recordTypeList[j]) {
+                        relationList.push(data[i]);
+                    }
+                }
+            }
+        }
+        return relationList;     
+    };
+
     /**
      * 
      * @param {Object} recordType

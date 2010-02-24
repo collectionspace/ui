@@ -14,6 +14,15 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
+    var recordsLists = {
+        intake: ["intake"],
+        acquisition: ["acquisition"],
+        procedures: ["intake", "acquisition"],
+        object: ["objects"],
+        objects: ["objects"],
+        "collection-object": ["objects"]
+    };
+
     var addNewRelationship = function (newCsid, currentCsid) {
         /* url for relationships: .../chain/relationships/
          * GET/POST/DELETE
@@ -63,7 +72,7 @@ cspace = cspace || {};
         };
 
         var rlOpts = {
-            data: that.model.items,
+            data: cspace.util.buildRelationsList(that.model.items, recordsLists[that.options.recordType]),
             uispec: that.options.uispec
         };
         that.recordList = fluid.initSubcomponent(that, "recordList", [that.container, rlOpts]);

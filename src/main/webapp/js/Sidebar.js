@@ -14,20 +14,6 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var buildRelationsList = function (data, recordTypeList) {
-        var relationList = [];
-        if (data) {
-            for (var i = 0; i < data.length; i++) {
-                for (var j = 0; j < recordTypeList.length; j++) {
-                    if (data[i].recordtype === recordTypeList[j]) {
-                        relationList.push(data[i]);
-                    }
-                }
-            }
-        }
-        return relationList;     
-    };
-
     cspace.sidebar = function (container, options) {
         var that = fluid.initView("cspace.sidebar", container, options);
         
@@ -37,13 +23,13 @@ cspace = cspace || {};
               uispec: that.options.uispec.termsUsed}]);
 
         that.relatedProcedures = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedProcedures,
-             {data: buildRelationsList(that.options.applier.model.relations, ["intake", "acquisition"]),
+             {data: that.options.applier.model.relations,
               csid: that.options.applier.model.csid,
               recordType: "procedures",
               uispec: that.options.uispec.relatedProcedures}]);
 
         that.relatedObjects = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedObjects,
-             {data: buildRelationsList(that.options.applier.model.relations, ["objects"]),
+             {data: that.options.applier.model.relations,
               csid: that.options.applier.model.csid,
               recordType: "object",
               uispec: that.options.uispec.relatedObjects}]);
