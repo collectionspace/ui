@@ -39,7 +39,8 @@ cspace = cspace || {};
                 recordType: "objects",
                 csid: applier.model.csid,
                 recordType: "object",
-                data: applier.model.relations
+                data: applier.model.relations,
+                uispec: "{pageBuilder}.uispec.relatedRecords"
             };
             var dependencies = {
                 relatedRecords: {

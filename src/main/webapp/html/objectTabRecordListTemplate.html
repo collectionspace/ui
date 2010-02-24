@@ -16,61 +16,33 @@
 				<div class="csc-related-procedures">
 					<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-related-objecttab-records'); return false;">
 						<span class="header-toggle"><img id="toggle-related-objecttab-records-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-						Related <span class="csc-record-type">FOOFER</span> Records
+						Related <span class="csc-record-type"></span> Records
 					</div>
-										
+
 					<div class="content related-procedures" id="toggle-related-objecttab-records">
-						<div class="fl-pager" id="toggle-records">
-														
-							<table summary="search results" id="search-results" class="fl-pager-data">
-								<thead>
-									<tr rsf:id="header:" class="csc-header">
-										<th class="flc-pager-sort-header">ID Number</th>
-										<th class="flc-pager-sort-header">Summary</th>
-										<!--<th class="flc-pager-sort-header">Record Type</th>-->
-									</tr>
-								</thead>
-								<tbody class="flc-pager-body-template">
-									<tr class="csc-row">
-										<td><a href="x" class="csc-number link">ACC2009.1</a></td>
-										<td class="csc-col">Girl in a box, Cezanne Paul</td>
-									</tr>
-								</tbody>
-							</table>
-							<ul id="pager-bottom" class="fl-pager-ui flc-pager-bottom">
-								<li class="flc-per-page" style="width:320px; margin-top:-3px;">
-									Show <span>
-										<select class="flc-pager-page-size">
-											<option value="5">5</option>
-											<option value="10">10</option>
-											<option value="20">20</option>
-											<option value="50">50</option>
-										</select>
-									</span>
-									per page
-								</li>
-								<li class="flc-pager-previous">
-									<a href="#">&lt; previous</a>
-								</li>
-								<li>
-									<ul class="pager-links fl-pager-links flc-pager-links">
-										<li value="1" class= "flc-pager-pageLink"><a href="#">1</a></li>
-										<li class="flc-pager-pageLink-disabled">2</li>
-										<li value="2" class="flc-pager-pageLink"><a href="#">3</a></li>
-									</ul>
-								</li>
-								<li class="flc-pager-next">
-									<a href="#">next &gt;</a>
-								</li>
-								<li class="flc-pager-summary" style="width:100px; text-align:right;">
-									1-10 of 500 items
-								</li>
-								<div class="clear"></div>
-							</ul>
-							<div class="clear"></div>
-						</div>
-						
+						<table class="pivot-box-table">
+							<thead>
+								<tr>
+                                    <td>ID Number</td>
+                                    <td>Summary</td>
+								</tr>
+							</thead>
+							<tbody>
+                                <tr><td colspan=2 class="hidden csc-no-records-message">No related records yet</td></tr>
+                                <tr><td colspan=2 class="hidden csc-error-message cs-message">This is the error message</td></tr>
+                                <tr class="pivot-box-data csc-related-row">
+                                    <td><a href="#" class="link csc-related-number"></a></td>
+                                    <td class="csc-related-summary"></td>
+                                </tr>
+                                <tr class="pivot-box-data csc-related-row">
+                                    <td><a href="#" class="link csc-related-number"></a></td>
+                                    <td class="csc-related-summary"></td>
+                                </tr>
+							</tbody>
+						</table>
+						<div class="clear"></div>
 					</div>
+
 				</div>
 			</div>
 		</div>
