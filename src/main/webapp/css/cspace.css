@@ -21,7 +21,8 @@ input.savebutton, input.globalSearchButton, input.cancelbutton, input.button, in
 	{background-color:#94BC80; padding: 2px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; margin:0; border:none;}
 input.button, input.button.quick. input.button.addrecordbutton {float:left; padding:2px 12px;}
 input.button.add {padding:0px 4px; font-size:11px; line-height:100%; background-color:#fff; color:#94BC80;}
-#search-box input.button, #search-box input.button.quick {floaT:none; padding:2px 12px;}
+#search-box input.button, #search-box input.button.quick {float:none; padding:2px 12px;}
+#create-box input.button, #create-box input.button.quick {float:none; padding:2px 12px;}
 .input-button, input.input-button {background-color:#94BC80; padding: 5px 12px 4px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; margin:0 5px; border:none; float:left;}
 .input-button.quick , .button.quick {background-color:#fff; padding: 5px 12px 4px 12px; font-weight:bold; color:#93BC7F; cursor:pointer; font-size:13px; 
 	margin:0 5px; border:none; float:left;}
@@ -146,6 +147,8 @@ td textarea {border:none;}
 
 /*search page related */ /* need to revisit */
 #search-box {padding: 12px 0 12px 12px; margin:0 0 20px 0; background-color:#E6E6E6; border:1px solid #CECFD1;}
+#create-box {padding: 12px 0 12px 12px; margin:0 0 20px 0; background-color:#E6E6E6; border:1px solid #CECFD1;}
+.search-box {background-color:#E6E6E6; border:1px solid #CECFD1;}
 .search-bar {}
 .main-search-page {border-top:1px solid #F2F2F3; border-bottom:1px solid #F2F2F3;}
 /*.csc-search-submit, .csc-search-pivot-submit, .csc-new-user-submit {padding:2px 25px 0px 25px; margin:0; border:1px solid #94A8B5; 
@@ -465,3 +468,6 @@ input.deactivate {background-color:#CDCCCC !important; color:#000 !important;}
     background-color: white;
     min-width: 600px;
 }
+
+.float-left {  float: left; }
+.float-right {  float: right; }
