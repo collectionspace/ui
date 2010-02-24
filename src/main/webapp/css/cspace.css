@@ -248,8 +248,8 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .fl-container-left .acquisition-outer-border,
 .fl-container-left .authority-outer-border
 	{border: none; /*padding: 0 0 10px 10px;*/ padding: 0 0 10px 0;}
-.login-outer-border {border: none; padding:40px 0 10px 0px;}
-
+.login-outer-border {border: none; padding:100px 0 10px 0px;}
+	
 .info-pair .header {padding:0; margin:0; background-color:#fff; color:#000; cursor:default;}
 .info-label, .info-pair .label, .info-pair-date .label {/*width:100%;*/ float:left; padding-bottom:4px; font-weight:bold; color:# 0F75BC; font-size:11px; line-height:11px;}
 .info-pair .content td.label {float:none; padding-bottom:0px; font-weight:normal; font-size:inherit; line-height:inherit;}
@@ -314,13 +314,20 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .info-pair-termlist table select {border:0;}
 .info-pair-date .info-value  table, .fl-container-left .information-group .info-pair-date .info-pair .content  table {width:auto;}
 
-.login-text {padding:15px 20px;}
-.login-forms {background-color:#E6E6E6; padding:25px 0 20px 35px; margin-top:20px;}
-.login-text .info-label, .login-forms .info-label {font-size: 20px; line-height:20px; font-weight:bold;}
-.login-text .info-value, .login-forms .info-value, .login-text .fl-container-left .information-group .info-pair .content, .fl-container-left .information-group .login-forms .info-pair .content {padding-top: 20px; font-size:14px; line-height:18px; width:90%;}
+.login-text {padding:0 20px 15px 20px;}
+.login-forms {width:100%;}
+.login-forms .info-pair{}
+.login-forms .header  {padding:18px 18px 6px 18px; background-color:#93BC7F; margin-bottom:2px; width:auto;}
+.login-forms .header  .label {font-size:20px; color:#fff;}
+.login-forms .content{width:100%; background-color:#E8E7E7; padding:18px; }
+
+.login-text .header, .login-forms .header {font-size: 20px; line-height:20px; font-weight:bold; color:#9D9D9D;}
+.login-text .content, .login-forms .content, .login-text .fl-container-left .information-group .info-pair .content, .fl-container-left .information-group .login-forms .info-pair .content 
+	{padding-top: 20px; font-size:14px; line-height:18px; width:90%;}
 .login-pair {padding-bottom: 15px;}
-.login-pair .login-label {width:70px; text-align:right; float:left; font-weight:bold;}
-.login-pair .login-element {float:left; padding-left:10px; padding-right: 2px; width:65%;}
+.login-pair .login-label {width:70px; float:left; font-weight:bold; color:#666; margin-right:10px;}
+.login-pair .login-element {float:left; padding -left:10px; padding-right: 2px; width:65%;}
+.login-pair.forgotpw {width:100%; padding-bottom:0;}
 .login-error {float:left; margin: 8px 0 -8px 17px; padding-left:20px; font-weight:bold; color:#606060; background-image: url(../images/warning.png); background-repeat: no-repeat; background-position:left;}
 
 .info-value .table-select, .info-pair .content .table-select {}
@@ -396,7 +403,7 @@ table .field-cal {width:162px;}
 .pivot-box-table {width:100%; background-color:#fff; color:#6D6E71;}
 .pivot-box-table  tr td {padding:3px 3px 3px 2px; vertical-align:top;}
 .pivot-box-table thead tr td {border-bottom: 1px solid #C9CACC; font-weight:bold;}
-.add-more {float:right; color:#000; *padding-top:2px; margin:3px 4px 0 0;}
+.add-more {float:right; color:#000; *padding-top:2px; margin:4px 4px 0 0;}
 
 
 .pivot-box-data {padding:3px 0 3px 8px;}
