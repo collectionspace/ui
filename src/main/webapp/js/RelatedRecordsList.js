@@ -23,6 +23,12 @@ cspace = cspace || {};
         "collection-object": ["objects"]
     };
 
+    var displayMessage = function (that, msg) {
+        var messageContainer = that.locate("messageContainer", "body");
+        that.locate("feedbackMessage", messageContainer).text(msg);
+        messageContainer.show();
+    };
+
     var renderPage = function (that) {
         that.locate("recordTypeString").text(that.options.recordType);
         that.locate("addButton").click(function () {});
@@ -54,9 +60,14 @@ cspace = cspace || {};
             cspace.addDialogInst = cspace.searchToRelateDialog(that.container, dlgOpts);
         }
         that.locate("addButton").live("click", function (e) {
-            that.locate("recordTypeString", cspace.addDialogInst.dlg).text(that.options.recordType);
-            cspace.addDialogInst.prepareDialog(that.options.recordType);
-            cspace.addDialogInst.dlg.dialog("open");
+            if (that.model.csid) {
+                that.locate("messageContainer", "body").hide();                
+                that.locate("recordTypeString", cspace.addDialogInst.dlg).text(that.options.recordType);
+                cspace.addDialogInst.prepareDialog(that.options.recordType);
+                cspace.addDialogInst.dlg.dialog("open");
+            } else {
+                displayMessage(that, "Please save the record you are creating before trying to relate other records to it.");
+            }
         });
 
         renderPage(that);
@@ -68,6 +79,8 @@ cspace = cspace || {};
             type: "cspace.recordList"
         },
         selectors: {
+            messageContainer: ".csc-message-container",
+            feedbackMessage: ".csc-message",
             listContainer: ".csc-related-records-list",
             addButton: ".csc-add-related-record-button",
             recordTypeString: ".csc-record-type"
