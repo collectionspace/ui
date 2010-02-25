@@ -78,20 +78,16 @@
 					<!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
 					<div class="fl-fix fl-container-flex fl-col-mixed2">
 
-						<div class="fl-container-pivot-users fl-force-left" id="">
+						<div class="fl-container-pivot-users fl-container-admin-menu fl-force-left" id="">
 							
-							<div class="pivot-box">
-								<div class="header">
-									Users
-								</div>
-								<div class="content">
-									<div class="data">
-										test
-										<div class="clear"></div>
-									</div>
-								</div>
-								<div class="clear"></div>
-							</div>
+							<ul>
+								<li class="selected">Users</li>
+								<li class="inactive">Roles and Permission</li>
+								<li class="inactive">Help Management</li>
+								<li class="inactive">Reporting</li>
+								<li class="inactive">Numbering</li>
+								<li class="inactive">Templates</li>
+							</ul>
 							
 						</div> <!-- END sub-main content -->
 						
@@ -112,7 +108,7 @@
 
 										<div class="fl-container-flex fl-fix content" id="">
 											
-											<div class="info-column2-50 fl-force-left">
+											<div class="info-column2-60 fl-force-left">
 												<div class="fl-container-flex header">
 													Users
 												</div>
@@ -182,7 +178,7 @@
 																<td>Martinez</td>
 																<td>admin</td>
 															</tr>
-															<tr>
+															<tr class="last">
 																<td>Jesse</td>
 																<td>Martinez</td>
 																<td>admin</td>
@@ -193,24 +189,24 @@
 												
 												<!-- search form -->
 												<form>
-													<input type="submit" class="csc-new-user-submit button" value="+ Create New User" /></form>
+													<input type="submit" class="csc-new-user-submit button" value="Create New User" /></form>
 												<!-- end search form -->
 												
 												<div class="clear"></div>
 											</div>
 											
-											<div class="info-column2-50 fl-force-right">
+											<div class="info-column2-40 fl-force-right">
 												<div class="fl-container-flex header">
 													User Details
 												</div>
 												<div class="user-details <!--new-user-background-->">
 													<div class="user-details-fields">
 														<div class="info-pair">
-															<div class="label">User Name</div><div class="user-input"><input type="text" class="input-alpha csc-" name=""></div>
+															<div class="label">User ID</div><div class="user-input"><input type="text" class="input-alpha csc-" name=""></div>
 														</div>
 													
 														<div class="info-pair">
-															<div class="label">User Real Name</div><div class="user-input"><input type="text" class="input-alpha csc-" name=""></div>
+															<div class="label">User Name</div><div class="user-input"><input type="text" class="input-alpha csc-" name=""></div>
 														</div>
 													
 														<div class="info-pair">
@@ -228,6 +224,7 @@
 														<div class="info-pair">
 															<div class="label">Status</div><div class="user-input"><input type="text" class="input-alpha csc-" name=""></div>
 														</div>
+														<div class="clear"></div>
 													</div>
 													
 													<div class="fl-container-flex">
