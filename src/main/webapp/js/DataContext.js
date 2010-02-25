@@ -18,11 +18,16 @@ cspace = cspace || {};
         create: "POST",
         fetch: "GET",
         update: "PUT",
-        remove: "DELETE"
+        remove: "DELETE",
+        addRelations: "POST"
     };
 
-    var buildUrl = function (baseUrl, recordType, csid, fileExtension) {
-        return cspace.util.addTrailingSlash(baseUrl) + recordType + "/" + (csid ? csid + fileExtension : "");
+    var buildUrl = function (operation, baseUrl, recordType, csid, fileExtension) {
+        if (operation === "addRelations") {
+            return cspace.util.addTrailingSlash(baseUrl) + "relationships/";
+        } else {
+            return cspace.util.addTrailingSlash(baseUrl) + recordType + "/" + (csid ? csid + fileExtension : "");
+        }
     };
 
     /*
@@ -30,21 +35,22 @@ cspace = cspace || {};
      * operation: string ("create", "fetch", "update", "remove"); will be displayed in the case of an error
      * successEvent: event to fire after success
      * csid: the csid to fetch (optional)
+     * data: the model or new relations to transmit (optional)
      */
-    var ajax = function (that, operation, successEvent, csid) {
+    var ajax = function (operation, options, successEvent, errorEvent, csid, data) {
         var opts = {
-            url: buildUrl(that.options.baseUrl, that.options.recordType, csid, that.options.fileExtension),
+            url: buildUrl(operation, options.baseUrl, options.recordType, csid, options.fileExtension),
             type: types[operation],
-            dataType: that.options.dataType,
+            dataType: options.dataType,
             success: function (data, textStatus) {
                 successEvent.fire(data);
             },
             error: function (xhr, textStatus, errorThrown) {
-                that.events.onError.fire(operation, textStatus);
+                errorEvent.fire(operation, textStatus);
             }
         };
-        if (operation === "create" || operation === "update") {
-            opts.data = JSON.stringify(that.model);
+        if (operation === "create" || operation === "update" || operation === "addRelations") {
+            opts.data = JSON.stringify(data);
         }
         jQuery.ajax(opts);
     };
@@ -76,15 +82,19 @@ cspace = cspace || {};
         };
         
         that.fetch = function (csid) {
-            ajax(that, "fetch", that.events.afterFetch, csid);
+            ajax("fetch", that.options, that.events.afterFetch, that.events.onError, csid);
         };
         
         that.update = function () {
-            ajax(that, "update", that.events.afterUpdate, that.model.csid);
+            ajax("update", that.options, that.events.afterUpdate, that.events.onError, that.model.csid, that.model);
         };
         
         that.create = function () {
-            ajax(that, "create", that.events.afterCreate);
+            ajax("create", that.options, that.events.afterCreate, that.events.onError, null, that.model);
+        };
+
+        that.addRelations = function (newRelations) {
+            ajax("addRelations", that.options, that.events.afterAddRelations, that.events.onError, null, newRelations);
         };
 
         that.baseUrl = function () {
@@ -102,6 +112,7 @@ cspace = cspace || {};
             afterRemove: null, // 
             afterFetch: null,  //  data
             afterUpdate: null,  //  data
+            afterAddRelations: null,  //  data
             onError: null      // operation["create", "remove", "fetch", "update"], message
         },
         baseUrl: "../../chain",

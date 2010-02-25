@@ -1,5 +1,5 @@
 /*
-Copyright 2009 University of Toronto
+Copyright 2009-2010 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
 ou may not use this file except in compliance with this License.
@@ -161,6 +161,38 @@ var dataContextTester = function () {
         dc.events.onError.addListener(fetchError);
         stop();
         dc.fetch("1984.068.0335b");
+    });
+
+    dataContextTest.test("Add new relations ajax parameters", function () {
+        var testRelations = {
+            items: [
+                {
+                    source: {csid: testModel.csid},
+                    target: {csid: "987.654"},
+                    type: "affects",
+                    "one-way": true
+                },
+                {
+                    source: {csid: testModel.csid},
+                    target: {csid: "741.852"},
+                    type: "affects",
+                    "one-way": true
+                }
+            ]
+        };
+        var ajaxMock = new jqMock.Mock(jQuery, "ajax");
+        var expectedAjaxParams = {
+            url: "http://some.museum.com/relationships/",
+            data: JSON.stringify(testRelations),
+            type: "POST",
+            dataType: "json"
+        };
+        ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams));
+
+        var dc = cspace.dataContext(testModel, testOpts);
+        dc.addRelations(testRelations);
+        ajaxMock.verify();
+        ajaxMock.restore();
     });
 };
 

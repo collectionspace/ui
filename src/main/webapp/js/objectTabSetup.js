@@ -36,10 +36,10 @@ cspace = cspace || {};
                 uispec: "{pageBuilder}.uispec.newRecord"
             };
             var rrOpts = {
+                dataContext: "{pageBuilder}.dataContext",
+                applier: applier,
                 recordType: "objects",
-                csid: applier.model.csid,
                 recordType: "object",
-                data: applier.model.relations,
                 uispec: "{pageBuilder}.uispec.relatedRecords"
             };
             var dependencies = {

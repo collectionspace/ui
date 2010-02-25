@@ -31,6 +31,7 @@ cspace = cspace || {};
                 uispec: "{pageBuilder}.uispec.dataEntry"
             };
             var sbOpts = {
+                dataContext: "{pageBuilder}.dataContext",
                 applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.sidebar"
             };

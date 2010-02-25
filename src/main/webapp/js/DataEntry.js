@@ -15,9 +15,10 @@ cspace = cspace || {};
 (function ($, fluid) {
 
     var displayTimestampedMessage = function (that, msg, time) {
-        that.locate("feedbackMessage").text(msg);
-        that.locate("timestamp").text(time);
-        that.locate("messageContainer").show();
+        var messageContainer = that.locate("messageContainer", "body");
+        that.locate("feedbackMessage", messageContainer).text(msg);
+        that.locate("timestamp", messageContainer).text(time);
+        messageContainer.show();
         
     };
 
@@ -203,6 +204,7 @@ cspace = cspace || {};
             createFailedMessage: "Error creating Record: ",
             deleteFailedMessage: "Error deleting Record: ",
             fetchFailedMessage: "Error retriving Record: ",
+            addRelationsFailedMessage: "Error adding related records: ",
             defaultTermIndicator: " (default)",
             noDefaultInvitation: "-- Select an item from the list --",
             confirmation: "You are about to navigate from the current record. Please confirm...",

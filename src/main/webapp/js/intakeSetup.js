@@ -32,6 +32,7 @@ cspace = cspace || {};
                 setupFuncs: [null, "cspace.objectTabSetup"]
             };
             var sbOpts = {
+                dataContext: "{pageBuilder}.dataContext",
                 applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.sidebar"
             };
@@ -121,7 +122,7 @@ cspace = cspace || {};
                     setUpPage();
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log("ERROR!");
+                    console.log("Error fetching intake uispec!");
                 }
             });
         } else {

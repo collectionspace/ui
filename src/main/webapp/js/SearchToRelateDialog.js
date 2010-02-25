@@ -18,6 +18,21 @@ cspace = cspace || {};
         return function () {
             var data = that.search.resultsPager.options.dataModel;
 
+            var newIndex = 0;
+            var newRelations = [];
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].selected) {
+                    newRelations[newIndex] = {
+                        source: {csid: that.options.currentCSID},
+                        target: data[i],
+                        type: "affects",
+                        "one-way": false
+                    };
+                    newIndex += 1;
+                }
+            }
+            that.options.dataContext.addRelations(newRelations);
+
             that.dlg.dialog("close");
         };
     };
@@ -25,7 +40,7 @@ cspace = cspace || {};
     var setupAddDialog = function (that) {
         var resources = {
             addDialog: {
-                href: "../html/searchToRelate.html"
+                href: that.options.templates.dialog
             }
         };
         
@@ -61,16 +76,36 @@ cspace = cspace || {};
         return addDialog;        
     };
 
+    var bindEventHandlers = function (that) {
+        that.options.dataContext.events.afterAddRelations.addListener(function (data) {
+            that.updateRelations(that.updateRelations);
+        });
+    };
+
     cspace.searchToRelateDialog = function (container, options) {
         var that = fluid.initView("cspace.searchToRelateDialog", container, options);
 
         that.dlg = setupAddDialog(that);
+
+        bindEventHandlers(that);
 
         that.prepareDialog = function (type) {
             var selectBoxContainer = that.locate("selectBoxContainer", that.dlg);
             selectBoxContainer.empty();
             selectBoxContainer.append(that.locate(type+"Selecter", that.dlg).clone());
             that.locate("searchResults", that.dlg).hide();
+        };
+
+        that.updateRelations = function (newRelations) {
+            var newModelRelations = [];
+            fluid.model.copyModel(newModelRelations, that.options.applier.model.relations);
+            var relIndex = newModelRelations.length;            
+            for (var i = 0; i < newRelations.items.length; i++) {
+                newModelRelations[relIndex] = newRelations.items[i].target;
+                newModelRelations[relIndex].relationshiptype = newRelations.items[i].type;
+                relIndex += 1;
+            }
+            that.options.applier.requestChange("relations", newModelRelations);
         };
 
         return that;
@@ -85,6 +120,9 @@ cspace = cspace || {};
             selectBoxes: ".csc-select-boxes",
             objectSelecter: ".csc-recordTypeSelecter-object",
             proceduresSelecter: ".csc-recordTypeSelecter-procedures"
+        },
+        templates: {
+            dialog: "../html/searchToRelate.html"
         }
     });
 })(jQuery, fluid_1_2);

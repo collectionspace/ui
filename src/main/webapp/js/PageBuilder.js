@@ -102,9 +102,6 @@ cspace = cspace || {};
         that.model = {};
         that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
         that.dataContext.events.afterFetch.addListener(setUpModel(that));
-        that.dataContext.events.onError.addListener(function (operation, textStatus) {
-            console.log("Error trying to " + operation + ": " + textStatus);
-        });
         
         if (that.options.csid) {
             that.dataContext.fetch(that.options.csid);
