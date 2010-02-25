@@ -21,11 +21,12 @@ input.savebutton, input.globalSearchButton, input.cancelbutton, input.button, in
 	{background-color:#94BC80; padding: 1px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; margin:0; border:none;}
 input.button, input.button.quick. input.button.addrecordbutton {float:left; padding:2px 12px;}
 input.button.add {padding:0px 4px; font-size:11px; line-height:100%; background-color:#fff; color:#94BC80;}
-#search-box input.button, #search-box input.button.quick {float:none; padding:1px 12px; margin-left:6px;}
+#search-box input.button, #search-box input.button.quick {float:none; padding:2px 12px 1px 12px; margin-left:6px;}
 #create-box input.button, #create-box input.button.quick {float:none; padding:2px 12px;}
 .input-button, input.input-button {background-color:#94BC80; padding: 5px 12px 4px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; margin:0 5px; border:none; float:left;}
-.input-button.quick , .button.quick {background-color:#fff; padding: 5px 12px 4px 12px; font-weight:bold; color:#93BC7F; cursor:pointer; font-size:13px; 
+.input-button.quick , .button.quick, .quick-large  {background-color:#fff; padding: 2px 12px 2px 12px; font-weight:bold; color:#93BC7F; cursor:pointer; font-size:13px; 
 	margin:0 5px; border:none; float:left;}
+.quick-large {padding:5px 12px 4px 12px;}
 .input-button.disabled, input.input-button.disabled {cursor:default;}
 select {border:1px solid #C7CFD4;}
 
@@ -47,7 +48,7 @@ a.add-link:hover {color:#000; text-decoration:underline;}
 .menu-record a.current, .menu-record li.selected a {background:none repeat scroll 0 0 #FFF; color:#6F9DCE; cursor:default; padding-top:6px; border:2px solid #6F9DCE; border-bottom:none;}
 
 .input-button a {text-decoration:none; color:inherit;}
-.input-button:hover, input.button:hover, .button.quick:hover {text-decoration:none; color:#fff; background-color:#93BC7F;}
+.input-button:hover, input.button:hover, .button.quick:hover, .button.quick-large:hover  {text-decoration:none; color:#fff; background-color:#93BC7F;}
 
 #footer a:link, #footer a:visited {color:#656565; text-decoration:underline;}
 #footer a:active {color:#656565;}
@@ -147,6 +148,7 @@ td textarea {border:none;}
 
 /*search page related */ /* need to revisit */
 #search-box {padding: 10px; margin-bottom:2px; background-color:#F3F3F#; border:0px solid #CECFD1;}
+#search-box input.button {margin-left:10px;}
 #create-box {padding: 12px 0 12px 12px; margin:0 0 20px 0; background-color:#E6E6E6; border:1px solid #CECFD1;}
 .search-box {background-color:#E6E6E6; border:1px solid #CECFD1;}
 .search-bar {}
@@ -164,7 +166,7 @@ td textarea {border:none;}
 
 .csc-global-search-keywords, .csc-search-pivot-keywords {width:140px !important; margin:0 8px 0 2px; height:16px; border:1px solid #BCBDBD; 
 	padding:1px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}
-.csc-search-pivot-keywords {width:226px !important; margin:0 8px 8px 0;}
+.csc-search-pivot-keywords {width:99% !important; margin:0 8px 8px 0; display:block;}
 .csc-search-record-type, .csc-global-search-record-type, .csc-search-pivot-record-type {color:#000; *margin-bottom:-1px;}
 
 .csc-user-list, .csc-user-details {}
@@ -432,6 +434,8 @@ table .field-cal {width:162px;}
 .pivot-box-data {padding:3px 0 3px 8px;}
 .pivot-search-box-data  {padding:10px 0 10px 8px; border:0px solid #999999; border-top:none;}
 .pivot-box .data  {padding:10px 0 10px 8px;}
+
+.pivot-menu-search select {margin-top:10px;}
 
 .date-table {wi dth:134px;}
 
