@@ -21,12 +21,16 @@
         <script type="text/javascript" src="../fluid-infusion/src/webapp/framework/renderer/js/fluidParser.js"></script>
         <script type="text/javascript" src="../fluid-infusion/src/webapp/framework/renderer/js/fluidRenderer.js"></script>
         <script type="text/javascript" src="../fluid-infusion/src/webapp/components/pager/js/Pager.js"></script>
+        <script type="text/javascript" src="../engage-core-framework/js/engageRenderUtils.js"></script>
 
         <script type="text/javascript" src="../js/cspace.js"></script>
         <script type="text/javascript" src="../js/Utilities.js"></script>
         <script type="text/javascript" src="../js/Renderer.js"></script>
         <script type="text/javascript" src="../js/DataContext.js"></script>
-        <script type="text/javascript" src="../js/Search.js"></script>
+        <script type="text/javascript" src="../js/DataEntry.js"></script>
+        <script type="text/javascript" src="../js/RecordList.js"></script>
+        <script type="text/javascript" src="../js/AdminUsers.js"></script>
+        <script type="text/javascript" src="../js/adminSetup.js"></script>
     </head>
     <body>
 	
@@ -93,7 +97,7 @@
 						
 						<div class="fl-container-users fl-force-right">
 				
-							<div class="main-users-page">
+							<div class="main-users-page csc-users-userAdmin">
 
 								<div id="search-box">
 									<!-- search form -->
@@ -113,75 +117,23 @@
 													Users
 												</div>
 												
-												<div class="overflow-user-list">
+												<div class="overflow-user-list csc-user-userList">
 													<table class="user-table">
 														<thead>
 															<tr>
-																<td>First Name</td>
-																<td>Last Name</td>
-																<td>Roles by Department</td>
+																<td>User Name</td>
+																<td>Status</td>
 															</tr>
 														</thead>
 														<tbody>
-															<tr class="add-new-user">
-																<td>New</td>
-																<td>User</td>
+															<tr class="add-new-user csc-user-addNew">
+																<td>New User</td>
 																<td>Edit Details <img src="../images/new_user_arrow.png" width=16 height=10 alt=""/></td>
 															</tr>
-															<tr>
-																<td>Jesse</td>
-																<td>Martinez</td>
-																<td>admin</td>
-															</tr>
-															<tr>
-																<td>Jesse</td>
-																<td>Martinez</td>
-																<td>admin</td>
-															</tr>
-															<tr>
-																<td>Jesse</td>
-																<td>Martinez</td>
-																<td>admin</td>
-															</tr>
-															<tr>
-																<td>Jesse</td>
-																<td>Martinez</td>
-																<td>admin</td>
-															</tr>
-															<tr>
-																<td>Jesse</td>
-																<td>Martinez</td>
-																<td>admin</td>
-															</tr>
-															<tr>
-																<td>Jesse</td>
-																<td>Martinez</td>
-																<td>admin</td>
-															</tr>
-															<tr>
-																<td>Jesse</td>
-																<td>Martinez</td>
-																<td>admin</td>
-															</tr>
-															<tr>
-																<td>Jesse</td>
-																<td>Martinez</td>
-																<td>admin</td>
-															</tr>
-															<tr>
-																<td>Jesse</td>
-																<td>Martinez</td>
-																<td>admin</td>
-															</tr>
-															<tr>
-																<td>Jesse</td>
-																<td>Martinez</td>
-																<td>admin</td>
-															</tr>
-															<tr class="last">
-																<td>Jesse</td>
-																<td>Martinez</td>
-																<td>admin</td>
+															<tr class="csc-user-userList-row">
+																<td class="csc-user-userList-name">Jesse Martinez</td>
+																<td class="csc-user-userList-status">active</td>
+                                                                <td class="hidden csc-user-userList-csid">hidden csid</td>
 															</tr>
 														</tbody>
 													</table>
@@ -200,29 +152,29 @@
 													User Details
 												</div>
 												<div class="user-details <!--new-user-background-->">
-													<div class="user-details-fields">
+													<div class="user-details-fields csc-user-userDetails">
 														<div class="info-pair">
-															<div class="label">User ID</div><div class="user-input"><input type="text" class="input-alpha csc-" name=""></div>
+															<div class="label">User ID</div><div class="user-input"><input type="text" class="input-alpha csc-user-userID" name=""/></div>
 														</div>
 													
 														<div class="info-pair">
-															<div class="label">User Name</div><div class="user-input"><input type="text" class="input-alpha csc-" name=""></div>
+															<div class="label">User Name</div><div class="user-input"><input type="text" class="input-alpha csc-user-userName" name=""/></div>
 														</div>
 													
 														<div class="info-pair">
-															<div class="label">Password</div><div class="user-input"><input type="password" class="input-alpha csc-" name=""></div>
+															<div class="label">Password</div><div class="user-input"><input type="password" class="input-alpha csc-user-password" name=""/></div>
 														</div>
 													
 														<div class="info-pair">
-															<div class="label">Confirm Password</div><div class="user-input"><input type="password" class="input-alpha csc-" name=""></div>
+															<div class="label">Confirm Password</div><div class="user-input"><input type="password" class="input-alpha csc-user-passwordConfirm" name=""/></div>
 														</div>
 													
 														<div class="info-pair">
-															<div class="label">Email Address</div><div class="user-input"><input type="text" class="input-alpha csc-" name=""></div>
+															<div class="label">Email Address</div><div class="user-input"><input type="text" class="input-alpha csc-user-email" name=""/></div>
 														</div>
 													
 														<div class="info-pair">
-															<div class="label">Status</div><div class="user-input"><input type="text" class="input-alpha csc-" name=""></div>
+															<div class="label">Status</div><div class="user-input"><input type="text" class="input-alpha csc-user-status" name=""/></div>
 														</div>
 														<div class="clear"></div>
 													</div>
@@ -265,6 +217,11 @@
 			</div> <!-- END footer block -->
 			
 		</div> <!-- END body content -->
+        <script type="text/javascript">
+            jQuery(document).ready(function(){
+                cspace.adminSetup();
+            });
+        </script>
 	</body>
 
 </html>

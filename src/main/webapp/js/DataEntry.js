@@ -145,6 +145,8 @@ cspace = cspace || {};
      */
     cspace.dataEntry = function (container, options) {
         var that = fluid.initView("cspace.dataEntry", container, options);
+        // workaround for FLUID-3505
+        that.options.applier = options.applier;
         that.model = that.options.applier.model;
         that.unsavedChanges = false;
 

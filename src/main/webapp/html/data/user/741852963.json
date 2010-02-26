@@ -1,0 +1,10 @@
+{
+    "csid": "741852963",
+    "fields": {
+        "userID": "jesse",
+        "userName": "Jesse Martinez",
+        "password": "testpassword",
+        "email": "jesse.martinez@collectionspace.org",
+        "status": "active",
+    }
+}
