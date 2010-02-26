@@ -16,6 +16,7 @@ cspace = cspace || {};
 
     cspace.sidebar = function (container, options) {
         var that = fluid.initView("cspace.sidebar", container, options);
+        // workaround for FLUID-3505:
         that.options.applier = options.applier;
         
         that.integratedAuthorities = fluid.initSubcomponent(that, "recordList", [that.options.selectors.termsUsed,

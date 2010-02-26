@@ -48,7 +48,9 @@ cspace = cspace || {};
 
     cspace.relatedRecordsList = function (container, options) {
         var that = fluid.initView("cspace.relatedRecordsList", container, options);
+        // workaround for FLUID-3505:
         that.options.applier = options.applier;
+
         that.model = {
             csid: that.options.applier.model.csid || null,
             items: that.options.applier.model.relations || []

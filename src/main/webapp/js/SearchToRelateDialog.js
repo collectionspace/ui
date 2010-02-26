@@ -88,6 +88,7 @@ cspace = cspace || {};
 
     cspace.searchToRelateDialog = function (container, options) {
         var that = fluid.initView("cspace.searchToRelateDialog", container, options);
+        // workaround for FLUID-3505:
         that.options.applier = options.applier;
 
         that.dlg = setupAddDialog(that);
