@@ -153,9 +153,9 @@ td textarea {border:none;}
 .search-box {background-color:#E6E6E6; border:1px solid #CECFD1;}
 .search-bar {}
 .main-search-page {border-top:1px solid #F2F2F3; border-bottom:1px solid #F2F2F3;}
-/*.csc-search-submit, .csc-search-pivot-submit, .csc-new-user-submit {padding:2px 25px 0px 25px; margin:0; border:1px solid #94A8B5; 
+/*.csc-search-submit, .csc-search-pivot-submit, .cs-new-user-submit {padding:2px 25px 0px 25px; margin:0; border:1px solid #94A8B5; 
 	background-color:#336384; color:#fff; text-decoration:none; font-size:12px; line-height:12px;}*/
-.csc-new-user-submit {float:right; margin-right:14px;}
+.cs-new-user-submit {float:right; margin-right:14px;}
 .csc-search-pivot-submit-container {padding:14px 0 0 8px; float:right;}
 /*.csc-global-search-submit {padding:3px 10px 1px; background-color:#D5D6D7; color:#000;}*/
 .csc-search-keywords, .csc-search-user {width:50% !important; margin:0 12px 0 0; height:16px; border:1px solid #BCBDBD; 

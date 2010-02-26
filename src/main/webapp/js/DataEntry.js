@@ -111,7 +111,10 @@ cspace = cspace || {};
                         that.unsavedChanges = true;
                     });
                 }
-            }        
+            }
+            that.locate("cancel").click(function () {
+                that.events.onCancel.fire();
+            });
         });
 
         that.options.dataContext.events.onError.addListener(makeDCErrorHandler(that));
@@ -177,11 +180,10 @@ cspace = cspace || {};
         return that;
     };
     
-    cspace.saveId = "save";
-    
     fluid.defaults("cspace.dataEntry", {
         events: {
 	        onSave: null,
+            onCancel: null,
             afterCreateObjectDataSuccess: null,  // params: data, textStatus
             afterUpdateObjectDataSuccess: null,  // params: data, textStatus
             onError: null,  // params: operation
@@ -191,6 +193,7 @@ cspace = cspace || {};
             errorDialog: ".csc-error-dialog",
             errorMessage: ".csc-error-message",
             save: ".csc-save",
+            cancel: ".csc-user-cancel",
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
             timestamp: ".csc-timestamp",

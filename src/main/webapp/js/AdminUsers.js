@@ -14,6 +14,14 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
+    var hideUserDetails = function (domBinder) {
+        domBinder.locate("userDetails").hide();
+        domBinder.locate("userDetailsNone").show();
+    };
+    var showUserDetails = function (domBinder) {
+        domBinder.locate("userDetailsNone").hide();
+        domBinder.locate("userDetails").show();
+    };
     var retrieveUserList = function (userList, model) {
             $.ajax({
                 url: "data/user/records/list.json",
@@ -31,8 +39,11 @@ cspace = cspace || {};
                 }
             });    };
 
-    var addNewUser = function (e) {
-        console.log("the Add New User row was clicked!!");
+    var addNewUser = function(domBinder){
+        return function(e){
+            showUserDetails(domBinder);
+            domBinder.locate("newUserRow").show();
+        };
     };
 
     var loadUser = function(that){
@@ -48,6 +59,7 @@ cspace = cspace || {};
                     // the following workaround compensates:
                     fluid.model.copyModel(that.userDetailsApplier.model, data);
                     that.userDetails.refreshView();
+                    showUserDetails(that.dom);
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     console.log("Error fetching user data for csid "+csid);
@@ -58,11 +70,17 @@ cspace = cspace || {};
 
     var bindEventHandlers = function (that) {
 
-        that.locate("newUser").click(addNewUser);
+        that.locate("newUser").click(addNewUser(that.dom));
         that.locate("userListRow").live("click", loadUser(that));
-        
-        that.userDetailsApplier.modelChanged.addListener("*", function (model, oldModel, changeRequest) {
-            console.log("model.userDetails changed!");
+        that.userDetails.options.dataContext.events.afterCreate.addListener(function () {
+            that.locate("newUserRow").hide();
+        });
+        that.userDetails.options.dataContext.events.onError.addListener(function () {
+            that.locate("newUserRow").hide();
+        });
+        that.userDetails.events.onCancel.addListener(function () {
+            hideUserDetails(that.dom);
+            that.locate("newUserRow").hide();
         });
     };
 
@@ -94,6 +112,8 @@ cspace = cspace || {};
 
         bindEventHandlers(that);
         retrieveUserList(that.userList, that.userListApplier.model);
+        hideUserDetails(that.dom);
+        that.locate("newUserRow").hide();
         return that;
     };
 
@@ -109,7 +129,9 @@ cspace = cspace || {};
             csid: ".csc-user-userList-csid",
             userListRow: ".csc-user-userList-row",
             userDetails: ".csc-user-userDetails",
-            newUser: ".csc-user-addNew"
+            userDetailsNone: ".csc-user-userDetails-none",
+            newUser: ".csc-user-createNew",
+            newUserRow: ".csc-user-addNew"
         }
     });
 })(jQuery, fluid_1_2);
