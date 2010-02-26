@@ -22,12 +22,12 @@ cspace = cspace || {};
                         href: "objectTabRecordListTemplate.html",
                         templateSelector: ".csc-object-tab-record-list",
                         targetSelector: ".div-for-list-of-records"
-                    },
-                    newRecord: {
-                        href: "objectTabSchemaTemplate.html",
-                        templateSelector: ".csc-object-tab-schema",
-                        targetSelector: ".div-for-schema"
-                    } 
+                    } //,
+                  //  newRecord: {
+                  //      href: "objectTabSchemaTemplate.html",
+                  //      templateSelector: ".csc-object-tab-schema",
+                  //      targetSelector: ".div-for-schema"
+                  //  } 
                 }
             };
             var deOpts = {
@@ -46,11 +46,11 @@ cspace = cspace || {};
                 relatedRecords: {
                     funcName: "cspace.relatedRecordsList",
                     args: [".div-for-list-of-records", rrOpts]
-                },
-                newRecord: {
-                    funcName: "cspace.dataEntry",
-                    args: [".div-for-schema", deOpts]
-                }
+                } //,
+             //   newRecord: {
+             //       funcName: "cspace.dataEntry",
+             //       args: [".div-for-schema", deOpts]
+             //   }
             };
             cspace.pageBuilder(dependencies, options);            
         };
