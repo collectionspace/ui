@@ -57,6 +57,11 @@ cspace = cspace || {};
             that.locate("errorMessage").text(msg).show();
         };
 
+        that.updateModel = function (newModel) {
+            fluid.model.copyModel(that.model.items, newModel);
+            that.refreshView();
+        };
+
         that.refreshView = function () {
             if (that.model.items.length > 0) {
                 that.locate("noneYetMessage").hide();

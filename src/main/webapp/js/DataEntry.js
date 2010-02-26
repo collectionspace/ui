@@ -14,10 +14,10 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var displayTimestampedMessage = function (that, msg, time) {
-        var messageContainer = that.locate("messageContainer", "body");
-        that.locate("feedbackMessage", messageContainer).text(msg);
-        that.locate("timestamp", messageContainer).text(time);
+    var displayTimestampedMessage = function (locater, msg, time) {
+        var messageContainer = locater.locate("messageContainer", "body");
+        locater.locate("feedbackMessage", messageContainer).text(msg);
+        locater.locate("timestamp", messageContainer).text(time);
         messageContainer.show();
         
     };
@@ -26,7 +26,7 @@ cspace = cspace || {};
         return function (operation/*["create", "delete", "fetch", "update"]*/, message) {
             var msgKey = operation + "FailedMessage";
             var msg = that.options.strings[msgKey] + message;
-            displayTimestampedMessage(that, msg, "");
+            displayTimestampedMessage(that.dom, msg, "");
             that.events.onError.fire(operation);
             if (operation === "create") {
                 // This is only temporary until http://issues.collectionspace.org/browse/CSPACE-263

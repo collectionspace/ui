@@ -31,7 +31,11 @@ cspace = cspace || {};
                     newIndex += 1;
                 }
             }
-            that.options.dataContext.addRelations(newRelations);
+            if (cspace.util.isLocal()) {
+                that.updateRelations({items: newRelations});
+            } else {
+                that.options.dataContext.addRelations({items: newRelations});
+            }
 
             that.dlg.dialog("close");
         };
@@ -78,12 +82,13 @@ cspace = cspace || {};
 
     var bindEventHandlers = function (that) {
         that.options.dataContext.events.afterAddRelations.addListener(function (data) {
-            that.updateRelations(that.updateRelations);
+            that.updateRelations(data);
         });
     };
 
     cspace.searchToRelateDialog = function (container, options) {
         var that = fluid.initView("cspace.searchToRelateDialog", container, options);
+        that.options.applier = options.applier;
 
         that.dlg = setupAddDialog(that);
 

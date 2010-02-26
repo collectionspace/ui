@@ -23,19 +23,32 @@ cspace = cspace || {};
         "collection-object": ["objects"]
     };
 
-    var displayMessage = function (that, msg) {
-        var messageContainer = that.locate("messageContainer", "body");
-        that.locate("feedbackMessage", messageContainer).text(msg);
+    var displayMessage = function (locater, msg) {
+        var messageContainer = locater.locate("messageContainer", "body");
+        locater.locate("feedbackMessage", messageContainer).text(msg);
         messageContainer.show();
     };
 
-    var renderPage = function (that) {
-        that.locate("recordTypeString").text(that.options.recordType);
-        that.locate("addButton").click(function () {});
+    bindEventHandlers = function (that) {
+        that.locate("addButton").live("click", function (e) {
+            if (that.model.csid) {
+                that.locate("messageContainer", "body").hide();                
+                that.locate("recordTypeString", cspace.addDialogInst.dlg).text(that.options.recordType);
+                cspace.addDialogInst.prepareDialog(that.options.recordType);
+                cspace.addDialogInst.dlg.dialog("open");
+            } else {
+                displayMessage(that.dom, "Please save the record you are creating before trying to relate other records to it.");
+            }
+        });
+
+        that.options.applier.modelChanged.addListener("relations", function(model, oldModel, changeRequest) {
+            that.recordList.updateModel(cspace.util.buildRelationsList(model.relations, recordsLists[that.options.recordType]));
+        });
     };
 
     cspace.relatedRecordsList = function (container, options) {
         var that = fluid.initView("cspace.relatedRecordsList", container, options);
+        that.options.applier = options.applier;
         that.model = {
             csid: that.options.applier.model.csid || null,
             items: that.options.applier.model.relations || []
@@ -47,10 +60,6 @@ cspace = cspace || {};
         };
         that.recordList = fluid.initSubcomponent(that, "recordList", [that.container, rlOpts]);
 
-        that.refreshView = function () {
-            renderPage(that);
-        };
-
         if (!cspace.addDialogInst) {
             var dlgOpts = {
                 currentCSID: that.model.csid,
@@ -59,18 +68,8 @@ cspace = cspace || {};
             };
             cspace.addDialogInst = cspace.searchToRelateDialog(that.container, dlgOpts);
         }
-        that.locate("addButton").live("click", function (e) {
-            if (that.model.csid) {
-                that.locate("messageContainer", "body").hide();                
-                that.locate("recordTypeString", cspace.addDialogInst.dlg).text(that.options.recordType);
-                cspace.addDialogInst.prepareDialog(that.options.recordType);
-                cspace.addDialogInst.dlg.dialog("open");
-            } else {
-                displayMessage(that, "Please save the record you are creating before trying to relate other records to it.");
-            }
-        });
 
-        renderPage(that);
+        bindEventHandlers(that);
         return that;
     };
 
