@@ -39,8 +39,18 @@ cspace = cspace || {};
                 }
             });    };
 
-    var addNewUser = function(domBinder){
+    var addNewUser = function(userDetails, domBinder){
         return function(e){
+            fluid.model.copyModel(userDetails.model,{
+                fields: {
+                    userID: "",
+                    userName: "", 
+                    password: "", 
+                    email: "",
+                    status: ""
+                }
+            });
+            userDetails.refreshView();
             showUserDetails(domBinder);
             domBinder.locate("newUserRow").show();
         };
@@ -70,10 +80,11 @@ cspace = cspace || {};
 
     var bindEventHandlers = function (that) {
 
-        that.locate("newUser").click(addNewUser(that.dom));
+        that.locate("newUser").click(addNewUser(that.userDetails, that.dom, that.options.uispec));
         that.locate("userListRow").live("click", loadUser(that));
         that.userDetails.options.dataContext.events.afterCreate.addListener(function () {
             that.locate("newUserRow").hide();
+            retrieveUserList(that.userList, that.userListApplier.model);
         });
         that.userDetails.options.dataContext.events.onError.addListener(function () {
             that.locate("newUserRow").hide();
@@ -82,6 +93,13 @@ cspace = cspace || {};
             hideUserDetails(that.dom);
             that.locate("newUserRow").hide();
         });
+    };
+
+    setUpUserAdministrator = function (that) {
+        bindEventHandlers(that);
+        retrieveUserList(that.userList, that.userListApplier.model);
+        hideUserDetails(that.dom);
+        that.locate("newUserRow").hide();
     };
 
     cspace.adminUsers = function (container, options) {
@@ -93,8 +111,6 @@ cspace = cspace || {};
             }
         };
         that.userListApplier = fluid.makeChangeApplier(that.model.userList);
-        that.userDetailsApplier = fluid.makeChangeApplier(that.model.userDetails);
-
         that.userList = fluid.initSubcomponent(that, "userList", [
             that.options.selectors.userList, {
                 uispec: that.options.uispec.userList,
@@ -102,18 +118,18 @@ cspace = cspace || {};
                 dataContext: cspace.dataContext()
             }
         ]);
+
+        that.userDetailsApplier = fluid.makeChangeApplier(that.model.userDetails);
+        var dc = cspace.dataContext(that.model.userDetails, {});
         that.userDetails = fluid.initSubcomponent(that, "userDetails", [
             that.options.selectors.userDetails, {
                 uispec: that.options.uispec.userDetails,
                 applier: that.userDetailsApplier,
-                dataContext: cspace.dataContext()
+                dataContext: dc
             }
         ]);
 
-        bindEventHandlers(that);
-        retrieveUserList(that.userList, that.userListApplier.model);
-        hideUserDetails(that.dom);
-        that.locate("newUserRow").hide();
+        setUpUserAdministrator(that);
         return that;
     };
 

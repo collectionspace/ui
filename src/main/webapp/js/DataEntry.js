@@ -155,6 +155,7 @@ cspace = cspace || {};
 
         that.refreshView = function () {
             renderPage(that);
+            that.locate("messageContainer", "body").hide();
         };
         
         that.showSpecErrorMessage = function (msg) {
