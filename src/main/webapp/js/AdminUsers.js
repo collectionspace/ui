@@ -14,6 +14,23 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
+    var retrieveUserList = function (userList, model) {
+            $.ajax({
+                url: "data/user/records/list.json",
+                type: "GET",
+                dataType: "json",
+                success: function (data, textStatus) {
+                    // that.userListApplier.requestChange("*", data);
+                    // requestChange() to "*" doesn't work (see FLUID-3507)
+                    // the following workaround compensates:
+                    fluid.model.copyModel(model, data);
+                    userList.updateModel(model.items);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Error retrieving user list");
+                }
+            });    };
+
     var addNewUser = function (e) {
         console.log("the Add New User row was clicked!!");
     };
@@ -26,7 +43,6 @@ cspace = cspace || {};
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {
-                    console.log("Got data for  user data for csid "+csid);
                     // that.userDetailsApplier.requestChange("*", data);
                     // requestChange() to "*" doesn't work (see FLUID-3507)
                     // the following workaround compensates:
@@ -53,12 +69,7 @@ cspace = cspace || {};
     cspace.adminUsers = function (container, options) {
         var that = fluid.initView("cspace.adminUsers", container, options);
         that.model = {
-            userList: [
-                {csid: "963852741", name: "Carl Hogsden", status: "active"},
-                {csid: "369258147", name: "Megan Forbes", status: "active"},
-                {csid: "147258369", name: "Anastasia Cheetham", status: "inactive"},
-                {csid: "741852963", name: "Jesse Martinez", status: "active"}
-            ],
+            userList: [],
             userDetails: {
                 fields: {}
             }
@@ -82,6 +93,7 @@ cspace = cspace || {};
         ]);
 
         bindEventHandlers(that);
+        retrieveUserList(that.userList, that.userListApplier.model);
         return that;
     };
 
