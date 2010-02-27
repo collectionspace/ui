@@ -65,7 +65,6 @@ cspace = cspace || {};
         if (!cspace.addDialogInst) {
             var dlgOpts = {
                 currentCSID: that.model.csid,
-                dataContext: that.options.dataContext,
                 applier: that.options.applier
             };
             cspace.addDialogInst = cspace.searchToRelateDialog(that.container, dlgOpts);

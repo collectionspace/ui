@@ -26,13 +26,11 @@ cspace = cspace || {};
 
         that.relatedProcedures = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedProcedures,
              {applier: that.options.applier,
-              dataContext: that.options.dataContext,
               recordType: "procedures",
               uispec: that.options.uispec.relatedProcedures}]);
 
         that.relatedObjects = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedObjects,
              {applier: that.options.applier,
-              dataContext: that.options.dataContext,
               recordType: "object",
               uispec: that.options.uispec.relatedObjects}]);
 

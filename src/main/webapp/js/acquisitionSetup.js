@@ -26,13 +26,12 @@ cspace = cspace || {};
                 applier: "{pageBuilder}.applier",
                 setupFuncs: [null, "cspace.objectTabSetup"]
             };
-            var deOpts = {
+            var reOpts = {
                 dataContext: "{pageBuilder}.dataContext",
                 applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.recordEditor"
             };
             var sbOpts = {
-                dataContext: "{pageBuilder}.dataContext",
                 applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.sidebar"
             };
@@ -48,7 +47,7 @@ cspace = cspace || {};
                 },
                 recordEditor: {
                     funcName: "cspace.recordEditor",
-                    args: [".csc-acquisition-template", deOpts]
+                    args: [".csc-acquisition-template", reOpts]
                 },
                 sidebar: {
                     funcName: "cspace.sidebar",

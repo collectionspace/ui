@@ -30,13 +30,12 @@ cspace = cspace || {};
                   //  } 
                 }
             };
-            var deOpts = {
+            var reOpts = {
                 dataContext: "{pageBuilder}.dataContext",
                 applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.newRecord"
             };
             var rrOpts = {
-                dataContext: "{pageBuilder}.dataContext",
                 applier: applier,
                 recordType: "objects",
                 recordType: "object",
@@ -49,7 +48,7 @@ cspace = cspace || {};
                 } //,
              //   newRecord: {
              //       funcName: "cspace.recordEditor",
-             //       args: [".div-for-schema", deOpts]
+             //       args: [".div-for-schema", reOpts]
              //   }
             };
             cspace.pageBuilder(dependencies, options);            

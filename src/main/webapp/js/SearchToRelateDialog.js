@@ -34,7 +34,7 @@ cspace = cspace || {};
             if (cspace.util.isLocal()) {
                 that.updateRelations({items: newRelations});
             } else {
-                that.options.dataContext.addRelations({items: newRelations});
+                that.dataContext.addRelations({items: newRelations});
             }
 
             that.dlg.dialog("close");
@@ -81,7 +81,7 @@ cspace = cspace || {};
     };
 
     var bindEventHandlers = function (that) {
-        that.options.dataContext.events.afterAddRelations.addListener(function (data) {
+        that.dataContext.events.afterAddRelations.addListener(function (data) {
             that.updateRelations(data);
         });
     };
@@ -90,6 +90,15 @@ cspace = cspace || {};
         var that = fluid.initView("cspace.searchToRelateDialog", container, options);
         // workaround for FLUID-3505:
         that.options.applier = options.applier;
+        
+        var dcOpts = {
+            recordType: "relationships"
+        };
+        if (cspace.util.isLocal()) {
+            dcOpts.baseUrl = "data";
+            dcOpts.fileExtension = ".json";
+        }
+        that.dataContext = cspace.dataContext(that.options.applier.model, dcOpts);
 
         that.dlg = setupAddDialog(that);
 
