@@ -14,6 +14,13 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
+    var displayMessage = function (locater, msg) {
+        var messageContainer = locater.locate("messageContainer", "body");
+        locater.locate("feedbackMessage", messageContainer).text(msg);
+        messageContainer.show();
+        
+    };
+
     var hideUserDetails = function (domBinder) {
         domBinder.locate("userDetails").hide();
         domBinder.locate("userDetailsNone").show();
@@ -63,6 +70,21 @@ cspace = cspace || {};
         };
     };
 
+    validate = function (domBinder) {
+        var required = domBinder.locate("requiredFields");
+        for (var i = 0; i < required.length; i++) {
+            if (required[i].value === "") {
+                displayMessage(domBinder, "All fields required");
+                return false;
+            }
+        }
+        if (domBinder.locate("password").val() !== domBinder.locate("passwordConfirm").val()) {
+            displayMessage(domBinder, "Passwords don't match");
+            return false;
+        }
+        return true;
+    };
+
     var bindEventHandlers = function (that) {
 
         that.locate("newUser").click(addNewUser(that.userDetails, that.dom, that.options.uispec));
@@ -84,6 +106,9 @@ cspace = cspace || {};
         that.userDetails.events.onCancel.addListener(function () {
             hideUserDetails(that.dom);
             that.locate("newUserRow").hide();
+        });
+        that.userDetails.events.onSave.addListener(function () {
+            return validate(that.dom);
         });
     };
 
@@ -142,13 +167,18 @@ cspace = cspace || {};
         },
         selectors: {
             messageContainer: ".csc-message-container",
+            feedbackMessage: ".csc-message",
             userList: ".csc-user-userList",
             csid: ".csc-user-userList-csid",
             userListRow: ".csc-user-userList-row",
             userDetails: ".csc-user-userDetails",
             userDetailsNone: ".csc-user-userDetails-none",
             newUser: ".csc-user-createNew",
-            newUserRow: ".csc-user-addNew"
+            newUserRow: ".csc-user-addNew",
+            password: ".csc-user-password",
+            passwordConfirm: ".csc-user-passwordConfirm",
+            requiredFields: ".csc-user-required"
         }
     });
+
 })(jQuery, fluid_1_2);

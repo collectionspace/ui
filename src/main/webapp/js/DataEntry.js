@@ -168,12 +168,14 @@ cspace = cspace || {};
         };
 
         that.save = function () {
-            that.events.onSave.fire(that.model);
-            if (that.model.csid) {
-                that.options.dataContext.update();
-            } else {
-                that.options.applier.requestChange("csid", "");
-                that.options.dataContext.create();
+            var ret = that.events.onSave.fire(that.model);
+            if (ret !== false) {
+                if (that.model.csid) {
+                    that.options.dataContext.update();
+                } else {
+                    that.options.applier.requestChange("csid", "");
+                    that.options.dataContext.create();
+                }
             }
             return false;
         };
@@ -184,7 +186,7 @@ cspace = cspace || {};
     
     fluid.defaults("cspace.dataEntry", {
         events: {
-	        onSave: null,
+	        onSave: "preventable",
             onCancel: null,
             afterCreateObjectDataSuccess: null,  // params: data, textStatus
             afterUpdateObjectDataSuccess: null,  // params: data, textStatus
