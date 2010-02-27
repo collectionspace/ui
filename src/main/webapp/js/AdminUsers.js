@@ -30,21 +30,24 @@ cspace = cspace || {};
         domBinder.locate("userDetails").show();
     };
     var retrieveUserList = function (userList, model) {
-            $.ajax({
-                url: "data/user/records/list.json",
-                type: "GET",
-                dataType: "json",
-                success: function (data, textStatus) {
-                    // that.userListApplier.requestChange("*", data);
-                    // requestChange() to "*" doesn't work (see FLUID-3507)
-                    // the following workaround compensates:
-                    fluid.model.copyModel(model, data);
-                    userList.updateModel(model.items);
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    console.log("Error retrieving user list");
-                }
-            });    };
+        // TODO: Use the DC for this
+        var url = (cspace.util.isLocal() ? "data/user/records/list.json" : "../../chain/user");
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "json",
+            success: function (data, textStatus) {
+                // that.userListApplier.requestChange("*", data);
+                // requestChange() to "*" doesn't work (see FLUID-3507)
+                // the following workaround compensates:
+                fluid.model.copyModel(model, data);
+                userList.updateModel(model.items);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log("Error retrieving user list");
+            }
+        });
+    };
 
     var addNewUser = function(userDetails, domBinder){
         return function(e){

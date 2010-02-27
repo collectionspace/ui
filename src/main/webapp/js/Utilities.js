@@ -50,45 +50,4 @@ cspace = cspace || {};
         return relationList;     
     };
 
-    /**
-     * 
-     * @param {Object} recordType
-     * @param {Object} pageSpec
-            href: "test-data/template1.html",
-            templateSelector: "#template1mainNode",
-            targetSelector: "#insertTemplate1here"
-     */
-    cspace.recordEditorSetup = function (recordType, pageSpec) {
-        var csid = cspace.util.getUrlParameter("csid");
-        var isLocal = cspace.util.isLocal();
-        var opts = {
-            dataContext: {
-                options: {
-                    recordType: recordType
-                }
-            },
-            uiSpecUrl: "../../chain/" + recordType + "/uispec",
-            templates: {
-                body: {
-                    url: pageSpec.href,
-                    id: pageSpec.templateID
-                }
-            }
-        };
-        if (isLocal) {
-            opts.uiSpecUrl = "./uispecs/" + recordType+ "/uispec.json";
-            opts.dataContext.options.baseUrl = "data";
-            opts.dataContext.options.fileExtension = ".json";
-        }
-        if (csid) {
-            opts.csid = csid;
-        }
-
-// CSPACE-701
-        if (isLocal && recordType === "objects") {
-            opts.uiSpecUrl = "./uispecs/collection-object/uispec.json";
-            opts.dataContext.options.recordType = "collection-object";
-        }
-        return cspace.recordEditor(pageSpec.targetSelector, opts);
-    };
 })(jQuery, fluid_1_2);

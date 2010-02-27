@@ -84,12 +84,14 @@ cspace = cspace || {};
 
     var setUpModel = function (that) {
         return function (data, textStatus) {
-            that.model.fields = that.model.fields || {};
-            that.model.relations = that.model.relations || [];
-            that.model.termsUsed = that.model.termsUsed || [];
-            that.model.csid = that.model.csid || null;
-
-            that.applier = fluid.makeChangeApplier(that.model);
+            if (data === {}) {
+                that.model = {
+                    csid: null,
+                    fields: {},
+                    termsUsed: [],
+                    relations: []
+                };
+            }
             
             invokeDependencies(that);
         };
@@ -100,6 +102,7 @@ cspace = cspace || {};
         cspace.pageBuilder.uispec = null;
 
         that.model = {};
+        that.applier = fluid.makeChangeApplier(that.model);
         that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
         that.dataContext.events.afterFetch.addListener(setUpModel(that));
         
@@ -132,12 +135,7 @@ cspace = cspace || {};
             uispec: {}
         };
 
-        if (options && options.container) {
-            // not sure exactly what to do here, or what condition to check to decide to do it
-            that = fluid.initView("cspace.pageBuilder", options.container, options);
-        } else {
-            fluid.mergeComponentOptions(that, "cspace.pageBuilder", options);
-        }
+        fluid.mergeComponentOptions(that, "cspace.pageBuilder", options);
 
         if (options && options.pageSpec) {
             assembleHTML(that);
