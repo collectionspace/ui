@@ -30,7 +30,7 @@ cspace = cspace || {};
         dateEntry: {
             funcName: "cspace.testComponent1",
             args: [
-                "#dataEntryContainer"   // container
+                "#recordEditorContainer"   // container
             ]
         },
         relatedRecords: {
@@ -42,7 +42,7 @@ cspace = cspace || {};
     };
 
     cspace.testData.testPageSpec = {
-        dataEntry: {
+        recordEditor: {
             href: "test-data/template1.html",
             templateSelector: "#template1mainNode",
             targetSelector: "#insertTemplate1here"
@@ -91,7 +91,7 @@ cspace = cspace || {};
                 dateEntry: {
                     funcName: "cspace.testComponent3",
                     args: [
-                        "#dataEntryContainer"   // container
+                        "#recordEditorContainer"   // container
                     ]
                 }
             };

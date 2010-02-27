@@ -58,7 +58,7 @@ cspace = cspace || {};
             templateSelector: "#template1mainNode",
             targetSelector: "#insertTemplate1here"
      */
-    cspace.dataEntrySetup = function (recordType, pageSpec) {
+    cspace.recordEditorSetup = function (recordType, pageSpec) {
         var csid = cspace.util.getUrlParameter("csid");
         var isLocal = cspace.util.isLocal();
         var opts = {
@@ -89,6 +89,6 @@ cspace = cspace || {};
             opts.uiSpecUrl = "./uispecs/collection-object/uispec.json";
             opts.dataContext.options.recordType = "collection-object";
         }
-        return cspace.dataEntry(pageSpec.targetSelector, opts);
+        return cspace.recordEditor(pageSpec.targetSelector, opts);
     };
 })(jQuery, fluid_1_2);

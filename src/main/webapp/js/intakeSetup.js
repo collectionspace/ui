@@ -25,7 +25,7 @@ cspace = cspace || {};
             var deOpts = {
                 dataContext: "{pageBuilder}.dataContext",
                 applier: "{pageBuilder}.applier",
-                uispec: "{pageBuilder}.uispec.dataEntry"
+                uispec: "{pageBuilder}.uispec.recordEditor"
             };
             var tabsOpts = {
                 applier: "{pageBuilder}.applier",
@@ -46,8 +46,8 @@ cspace = cspace || {};
                     funcName: "cspace.tabs",
                     args: [".csc-tabs-template", tabsOpts]
                 },
-                dataEntry: {
-                    funcName: "cspace.dataEntry",
+                recordEditor: {
+                    funcName: "cspace.recordEditor",
                     args: [".csc-object-intake-template", deOpts]
                 },
                 sidebar: {

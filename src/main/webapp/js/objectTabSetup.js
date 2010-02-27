@@ -48,7 +48,7 @@ cspace = cspace || {};
                     args: [".div-for-list-of-records", rrOpts]
                 } //,
              //   newRecord: {
-             //       funcName: "cspace.dataEntry",
+             //       funcName: "cspace.recordEditor",
              //       args: [".div-for-schema", deOpts]
              //   }
             };

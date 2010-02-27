@@ -147,8 +147,8 @@ cspace = cspace || {};
     /**
      * Object Entry component
      */
-    cspace.dataEntry = function (container, options) {
-        var that = fluid.initView("cspace.dataEntry", container, options);
+    cspace.recordEditor = function (container, options) {
+        var that = fluid.initView("cspace.recordEditor", container, options);
         // workaround for FLUID-3505
         that.options.applier = options.applier;
         that.model = that.options.applier.model;
@@ -184,7 +184,7 @@ cspace = cspace || {};
         return that;
     };
     
-    fluid.defaults("cspace.dataEntry", {
+    fluid.defaults("cspace.recordEditor", {
         events: {
 	        onSave: "preventable",
             onCancel: null,

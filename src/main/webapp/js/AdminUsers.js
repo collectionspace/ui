@@ -155,7 +155,7 @@ cspace = cspace || {};
             type: "cspace.recordList"
         },
         userDetails: {
-            type: "cspace.dataEntry"
+            type: "cspace.recordEditor"
         },
         dataContext: {
             type: "cspace.dataContext",
