@@ -17,18 +17,40 @@ cspace = cspace || {};
     cspace.adminSetup = function () {
 
         var setUpPage = function () {
-            var opts = {
-                uispec: cspace.adminSetup.uispec
+
+            var adminOpts = {
+                uispec: "{pageBuilder}.uispec"
             };
             if (cspace.util.isLocal()) {
-                opts.dataContext = {
+                adminOpts.dataContext = {
                     options: {
                         baseUrl: "data/",
                         fileExtension: ".json"
                     }
                 };
             }
-            var userAdministrator = cspace.adminUsers(".csc-users-userAdmin", opts);
+            var dependencies = {
+                users: {
+                    funcName: "cspace.adminUsers",
+                    args: [".csc-users-userAdmin", adminOpts]
+                }
+            };
+
+            var options = {
+                pageSpec: {
+                    header: {
+                        href: "header.html",
+                        templateSelector: ".csc-header-template",
+                        targetSelector: ".csc-header-container"
+                    },
+                    footer: {
+                        href: "footer.html",
+                        templateSelector: ".csc-footer",
+                        targetSelector: ".csc-footer-container"
+                    }
+                }
+            };
+            cspace.pageBuilder(dependencies, options);
         };
 
         if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
@@ -37,7 +59,7 @@ cspace = cspace || {};
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {
-                    cspace.adminSetup.uispec = data;
+                    cspace.pageBuilder.uispec = data;
                     setUpPage();
                 },
                 error: function (xhr, textStatus, errorThrown) {
