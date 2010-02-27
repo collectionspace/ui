@@ -59,22 +59,7 @@ cspace = cspace || {};
     var loadUser = function(that){
         return function(e){
             var csid = that.locate("csid", e.target.parentNode).text();
-            $.ajax({
-                url: "data/user/"+csid+".json",
-                type: "GET",
-                dataType: "json",
-                success: function (data, textStatus) {
-                    // that.userDetailsApplier.requestChange("*", data);
-                    // requestChange() to "*" doesn't work (see FLUID-3507)
-                    // the following workaround compensates:
-                    fluid.model.copyModel(that.userDetailsApplier.model, data);
-                    that.userDetails.refreshView();
-                    showUserDetails(that.dom);
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    console.log("Error fetching user data for csid "+csid);
-                }
-            });
+            that.dataContext.fetch(csid);
         };
     };
 
@@ -82,12 +67,19 @@ cspace = cspace || {};
 
         that.locate("newUser").click(addNewUser(that.userDetails, that.dom, that.options.uispec));
         that.locate("userListRow").live("click", loadUser(that));
-        that.userDetails.options.dataContext.events.afterCreate.addListener(function () {
+        that.dataContext.events.afterCreate.addListener(function () {
             that.locate("newUserRow").hide();
             retrieveUserList(that.userList, that.userListApplier.model);
         });
-        that.userDetails.options.dataContext.events.onError.addListener(function () {
+        that.userDetails.events.pageRendered.addListener(function () {
             that.locate("newUserRow").hide();
+            showUserDetails(that.dom);
+        });
+        that.dataContext.events.onError.addListener(function (operation, message) {
+            that.locate("newUserRow").hide();
+            if (operation === "fetch") {
+                
+            }
         });
         that.userDetails.events.onCancel.addListener(function () {
             hideUserDetails(that.dom);
@@ -115,17 +107,17 @@ cspace = cspace || {};
             that.options.selectors.userList, {
                 uispec: that.options.uispec.userList,
                 data: that.model.userList,
-                dataContext: cspace.dataContext()
+                dataContext: cspace.dataContext(that.model.userList)
             }
         ]);
 
         that.userDetailsApplier = fluid.makeChangeApplier(that.model.userDetails);
-        var dc = cspace.dataContext(that.model.userDetails, {});
+        that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model.userDetails, fluid.COMPONENT_OPTIONS]);
         that.userDetails = fluid.initSubcomponent(that, "userDetails", [
             that.options.selectors.userDetails, {
                 uispec: that.options.uispec.userDetails,
                 applier: that.userDetailsApplier,
-                dataContext: dc
+                dataContext: that.dataContext
             }
         ]);
 
@@ -140,7 +132,16 @@ cspace = cspace || {};
         userDetails: {
             type: "cspace.dataEntry"
         },
+        dataContext: {
+            type: "cspace.dataContext",
+            options: {
+                recordType: "user",
+                dataType: "json",
+                fileExtension: ""
+            }
+        },
         selectors: {
+            messageContainer: ".csc-message-container",
             userList: ".csc-user-userList",
             csid: ".csc-user-userList-csid",
             userListRow: ".csc-user-userList-row",

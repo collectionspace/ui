@@ -148,15 +148,14 @@
 												<div class="fl-container-flex header">User Details</div>
 												<div class="user-details">
 
+                                                    <div class="hidden csc-message-container cs-message">
+                                                        <span class="csc-timestamp cs-timestamp">time</span>
+                                                        <span class="csc-message">Save successful!</span>
+                                                    </div>
                                                     <div class="user-details-fields csc-user-userDetails-none">
                                                         No user selected. Please select a user from the list, or create a new user.
                                                     </div>
-													<div class="user-details-fields csc-user-userDetails">
-                                                        <div class="hidden csc-message-container cs-message">
-                                                            <span class="csc-timestamp cs-timestamp">time</span>
-                                                            <span class="csc-message">Save successful!</span>
-                                                        </div>
-    
+													<div class="user-details-fields csc-user-userDetails">    
 														<div class="info-pair">
 															<div class="label">User ID</div><div class="user-input"><input type="text" class="input-alpha csc-user-userID" name=""/></div>
 														</div>
@@ -181,9 +180,9 @@
 															<div class="label">Status</div><div class="user-input"><input type="text" class="input-alpha csc-user-status" name=""/></div>
 														</div>
                                                         <div class="fl-container-flex">
-                                                            <a href="#" class="savebutton button csc-save"><input type="button" class="savebutton" value="Save" /></a>
-                                                            <a href="#" class="cancelbutton button csc-user-cancel"><input type="button" class="savebutton" value="Cancel" /></a>
-                                                            <a href="#" class="deletebutton button"><input type="button" class="savebutton" value="Delete" /></a>
+                                                            <input type="button" class="savebutton button csc-save savebutton" value="Save" />
+                                                            <input type="button" class="cancelbutton button csc-user-cancel savebutton" value="Cancel" />
+                                                            <input type="button" class="deletebutton button savebutton" value="Delete" />
                                                             <div class="clear"></div>
                                                         </div>
 													</div>

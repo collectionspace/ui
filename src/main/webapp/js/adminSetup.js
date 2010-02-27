@@ -17,7 +17,18 @@ cspace = cspace || {};
     cspace.adminSetup = function () {
 
         var setUpPage = function () {
-            var userAdministrator = cspace.adminUsers(".csc-users-userAdmin", {uispec: cspace.adminSetup.uispec});
+            var opts = {
+                uispec: cspace.adminSetup.uispec
+            };
+            if (cspace.util.isLocal()) {
+                opts.dataContext = {
+                    options: {
+                        baseUrl: "data/",
+                        fileExtension: ".json"
+                    }
+                };
+            }
+            var userAdministrator = cspace.adminUsers(".csc-users-userAdmin", opts);
         };
 
         if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {

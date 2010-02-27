@@ -113,6 +113,7 @@ cspace = cspace || {};
                 }
             }
             that.locate("cancel").click(function () {
+                that.locate("messageContainer", "body").hide();
                 that.events.onCancel.fire();
             });
         });

@@ -18,7 +18,7 @@ input[type="button"], input[type="submit"] {height:auto;}
 input:focus, textarea:focus {outline: 1px solid black;}
 input[type="text"], input[type="password"], textarea {/*width:99.5%;*/ width:100%; margin:0;}
 input.savebutton, input.globalSearchButton, input.cancelbutton, input.button, input.button.add, input.button.addrecordbutton
-	{background-color:#94BC80; padding: 1px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; margin:0; border:none;}
+	{background-color:#94BC80; padding: 1px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; border:none;}
 input.button, input.button.quick. input.button.addrecordbutton {float:left; padding:2px 12px;}
 input.button.add {padding:0px 4px; font-size:11px; line-height:100%; background-color:#fff; color:#94BC80;}
 #search-box input.button, #search-box input.button.quick {float:none; padding:2px 12px 1px 12px; margin-left:6px;}
