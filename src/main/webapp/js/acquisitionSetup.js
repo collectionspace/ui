@@ -24,6 +24,17 @@ cspace = cspace || {};
             };
             var tabsOpts = {
                 applier: "{pageBuilder}.applier",
+                tabList: [
+                    {name: "Acquisition", target: "#primaryTab"},
+                    {name: "Objects", target: "objectTabPlaceholder.html"},
+                    {name: "Conservation", target: null},
+                    {name: "Location &amp; Movement", target: null},
+                    {name: "Transport", target: null},
+                    {name: "Valuation", target: null},
+                    {name: "Insurance", target: null},
+                    {name: "Media", target: null},
+                    {name: "Rights", target: null}
+                ],
                 setupFuncs: [null, "cspace.objectTabSetup"]
             };
             var reOpts = {

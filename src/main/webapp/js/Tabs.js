@@ -63,7 +63,7 @@ cspace = cspace || {};
             list: "menu-record"
         },
         tabList: [
-            {name: "Acquisition", target: "#primaryTab"},
+            {name: "Cataloging", target: "#primaryTab"},
             {name: "Objects", target: "objectTabPlaceholder.html"},
             {name: "Conservation", target: null},
             {name: "Location &amp; Movement", target: null},
