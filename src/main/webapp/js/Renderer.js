@@ -91,16 +91,21 @@ cspace = cspace || {};
     var constructLinks = function (protoTree, model) {
         for (var key in protoTree) {
             if (protoTree.hasOwnProperty(key)) {
-                var entry = protoTree[key];
-                if (entry.target) {
-                    entry.target = replaceWithValues(entry.target, model);
-                    entry.linktext = replaceWithValues(entry.linktext, model);
-                } else if (entry.children) {
-                    for (var i = 0; i < entry.children.length; i++) {
-                        constructLinks(entry.children[i], model);
+                if (key === "linktext" || key === "target") {
+                    protoTree.target = replaceWithValues(protoTree.target, model);
+                    protoTree.linktext = replaceWithValues(protoTree.linktext, model);
+                } else {
+                    var entry = protoTree[key];
+                    if (entry.target) {
+                        entry.target = replaceWithValues(entry.target, model);
+                        entry.linktext = replaceWithValues(entry.linktext, model);
+                    } else if (entry.children) {
+                        for (var i = 0; i < entry.children.length; i++) {
+                            constructLinks(entry.children[i], model);
+                        }
+                    } else if (typeof(entry) === "object") {
+                        constructLinks(entry, model);
                     }
-                } else if (typeof(entry) === "object") {
-                    constructLinks(entry, model);
                 }
             }
         }
