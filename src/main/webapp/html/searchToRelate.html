@@ -1,112 +1,137 @@
-    <div class="cs-add-related-records-dialog main-search-page">
-
-        <div>Add new <span class="csc-record-type">type</span> records to the current record:</div>
-        <div class="search-box">
-            <div id="search-box" class="float-left">
-                <div>Search existing:</div>
-                <!-- search form -->
-                <form>
-                    <input name="keywords" type="text" class="csc-search-keywords" /><a href="#" class="csc-search-submit">Search</a>
-                    <div class="csc-select-box-container"></div>
-                </form>
-                <!-- end search form -->
-                <div class="csc-select-boxes hidden">
-                    <div class="select-recordtype csc-recordTypeSelecter-object hidden">
-                        <select name="recordtype" class="csc-search-record-type">
-                            <option value="object">Object</option>
-                        </select>
-                    </div>
-                    <div class="select-recordtype csc-recordTypeSelecter-procedures">
-                        <span class="recordtype-label">Record Type</span>
-                        <select name="recordtype" class="csc-search-record-type">
-                            <option value="intake">Intake</option>
-                            <option value="acquisition">Acquisition</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-    
-            <div id="create-box" class="float-right">
-                <div>Create new object(s):</div>
-                <!-- search form -->
-                <form>
-                    <select name="type" type="text" class="csc-type" disabled>
-                        <option>- select -</option>
-                    </select><a href="#" class="csc-create-submit" disabled>Create</a>
-                </form>
-                <!-- end search form -->
-            </div>
-    
-        </div>
-        <div class="csc-search-error-message hidden">
-            We've encountered an error retrieving search results. Please try again.
-        </div>
-        
-        <div class="csc-search-results">
-            <div class="fl-container-flex header toggle found-records-box">
-                <span class="header-toggle"><img id="toggle-object-records-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-                <span class="found-records-content">
-                    Found <span class="csc-search-results-count">0</span> records
-                </span>
-                <span><input type="button" value="Add to current record" class="csc-relate-button" /></span>
-            </div>
-            
-            <!-- search results -->
-            <div class="fl-pager" id="toggle-object-records">
-                <table summary="search results" id="search-results" class="fl-pager-data">
-                    <thead>
-                        <tr rsf:id="header:" class="csc-header">
-                            <th>Select</th>
-                            <th class="flc-pager-sort-header">ID Number</th>
-                            <th class="flc-pager-sort-header">Summary</th>
-                            <!--<th class="flc-pager-sort-header">Record Type</th>-->
-                        </tr>
-                    </thead>
-                    <tbody class="flc-pager-body-template">
-                        <tr class="csc-row">
-                            <td><input type="checkbox" class="csc-search-select"/></td>
-                            <td class="csc-number link">ACC2009.1</td>
-                            <td class="csc-col">Girl in a box, Cezanne Paul</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <ul id="pager-bottom" class="fl-pager-ui flc-pager-bottom">
-                    <li class="flc-per-page">
-                        Show <span>
-                            <select class="flc-pager-page-size">
-                                <option value="1">1</option>
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="50">50</option>
-                            </select>
-                        </span>
-                        per page
-                    </li>
-                    <div style="padding-top:3px;">
-                        <div style="width:300px; margin-left:auto; margin-right:auto;">
-                            <li class="flc-pager-previous">
-                                <a href="#">&lt; previous</a>
-                            </li>
-                            <li>
-                                <ul class="pager-links fl-pager-links flc-pager-links">
-                                    <li value="1" class= "flc-pager-pageLink"><a href="#">1</a></li>
-                                    <li class="flc-pager-pageLink-disabled">2</li>
-                                    <li value="2" class="flc-pager-pageLink"><a href="#">3</a></li>
-                                </ul>
-                            </li>
-                            <li class="flc-pager-next">
-                                <a href="#">next &gt;</a>
-                            </li>
-                        </div>
-                        <li class="flc-pager-summary">
-                            1-10 of 500 items
-                        </li>
-                    </div>
-                    <div class="clear"></div>
-                </ul>
-                <div class="clear"></div>
-            </div>
-        </div>
+    <div class="cs-add-related-records-dialog main-search-page csc-confirmationDialog cs-confirmationDialog">
+		<div class="csc-confirmationDialog-closeBtn"><img src="../images/btnCloseTop.png" /></div>
+		<div style="float:left; padding-left:10px;">Add new <span class="csc-record-type">type</span> records to the current record:</div><div class="clear"></div>
+		<div class="csc-confirmationDialog-inner " style="padding-top:10px; pading-bottom:10px;">
+			<div class="info-column2-50 fl-force-left">
+				<div class="info-pair">
+					<div id="search-box" class="float-left" style="padding:10px 0; width:100%;">
+						<div class="header">
+							<div class="label">Search existing:</div>
+							<div class="clear"></div>
+						</div>
+						<div class="content">
+							<!-- search form -->
+							<form>
+								<input name="keywords" type="text" class="csc-search-keywords" />
+								<input class="csc-search-submit button" type="button" value="Search" />
+								<!--<a href="#" class="csc-search-submit button" >Search</a>-->
+								<div class="csc-select-box-container"></div>
+							</form>
+							<!-- end search form -->
+							<div class="csc-select-boxes hidden">
+								<div class="select-recordtype csc-recordTypeSelecter-object hidden">
+									<select name="recordtype" class="csc-search-record-type">
+										<option value="object">Object</option>
+									</select>
+								</div>
+								<div class="select-recordtype csc-recordTypeSelecter-procedures" style="float:left;">
+									<span class="recordtype-label">Record Type</span>
+									<select name="recordtype" class="csc-search-record-type">
+										<option value="intake">Intake</option>
+										<option value="acquisition">Acquisition</option>
+									</select>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="info-column2-50 fl-force-right">
+				<div class="info-pair">
+					<div id="create-box" >
+						<div class="header">
+							<div class="label">Create new object(s):</div>
+							<div class="clear"></div>
+						</div>
+						<div class="content">
+							<!-- search form -->
+							<form>
+								<select name="type" type="text" class="csc-type input-select" disabled>
+									<option>- select -</option>
+								</select>
+								<input type="button" style="margin-bottom:-2px;" class="csc-create-submit button" value="Search" disabled />
+							</form>
+							<!-- end search form -->
+							<div class="csc-search-error-message hidden">
+								We've encountered an error retrieving search results. Please try again.
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="clear"></div>
+			
+			<div class="csc-search-results" style="width:100%;">
+				<div class="fl-container-flex header found-records-box">
+					<!--<span class="header-toggle"><img id="toggle-object-records-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>-->
+					<span style="float:left; margin:5px 0 0 6px;" class="found-records-content">
+						Found <span class="csc-search-results-count">0</span> records
+					</span>
+					<span style="float:right; margin:3px 4px 0 0;"><input type="button" value="Add to current record" class="csc-relate-button" /></span>
+					<div class="clear"></div>
+				</div>
+				
+				<!-- search results -->
+				<div class="fl-pager" id="toggle-object-records">
+					<table summary="search results" id="search-results" class="fl-pager-data">
+						<thead>
+							<tr rsf:id="header:" class="csc-header">
+								<th>Select</th>
+								<th class="flc-pager-sort-header">ID Number</th>
+								<th class="flc-pager-sort-header">Summary</th>
+								<!--<th class="flc-pager-sort-header">Record Type</th>-->
+							</tr>
+						</thead>
+						<tbody class="flc-pager-body-template">
+							<tr class="csc-row">
+								<td><input type="checkbox" class="csc-search-select"/></td>
+								<td class="csc-number link">ACC2009.1</td>
+								<td class="csc-col">Girl in a box, Cezanne Paul</td>
+							</tr>
+						</tbody>
+					</table>
+					<ul id="pager-bottom" class="fl-pager-ui flc-pager-bottom">
+						<li class="flc-per-page">
+							Show <span>
+								<select class="flc-pager-page-size">
+									<option value="5">5</option>
+									<option value="10">10</option>
+									<option value="20">20</option>
+									<option value="50">50</option>
+								</select>
+							</span>
+							per page
+						</li>
+						<div style="padding-top:3px;">
+							<div style="width:300px; margin-left:auto; margin-right:auto;">
+								<li class="flc-pager-previous">
+									<a href="#">&lt; previous</a>
+								</li>
+								<li>
+									<ul class="pager-links fl-pager-links flc-pager-links">
+										<li value="1" class= "flc-pager-pageLink"><a href="#">1</a></li>
+										<li class="flc-pager-pageLink-disabled">2</li>
+										<li value="2" class="flc-pager-pageLink"><a href="#">3</a></li>
+									</ul>
+								</li>
+								<li class="flc-pager-next">
+									<a href="#">next &gt;</a>
+								</li>
+							</div>
+							<li class="flc-pager-summary">
+								1-10 of 500 items
+							</li>
+						</div>
+						<div class="clear"></div>
+					</ul>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
         <!-- end search results -->
-
-    </div>
+	</div>

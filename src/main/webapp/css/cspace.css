@@ -149,7 +149,7 @@ td textarea {border:none;}
 /*search page related */ /* need to revisit */
 #search-box {padding: 10px; margin-bottom:2px; background-color:#F3F3F#; border:0px solid #CECFD1;}
 #search-box input.button {margin-left:10px;}
-#create-box {padding: 12px 0 12px 12px; margin:0 0 20px 0; background-color:#E6E6E6; border:1px solid #CECFD1;}
+#create-box {padding: 12px 0 12px 12px; margin:0 0 20px 0; /*background-color:#E6E6E6;*/ border:0px solid #CECFD1;}
 .search-box {background-color:#E6E6E6; border:1px solid #CECFD1;}
 .search-bar {}
 .main-search-page {border-top:1px solid #F2F2F3; border-bottom:1px solid #F2F2F3;}
@@ -248,10 +248,12 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .fl-container-left  .information-subgroup {padding:10px 0;}
 .fl-container-left  .information-group       .content.main, .information-group       .content.main 	{border-bottom: 1px solid #D2D0D0; border-top: 1px solid #D2D0D0; background-color: #F3F3F3; padding: 12px; *padding:12px 12px 0 12px; width:auto; }
 .fl-container-left  .information-subgroup .content.main	{border:none; background-color: #D1D2D4; padding: 6px 12px 6px 12px; *padding:6px 12px 0 12px; width:auto; display:block;}
-.fl-container-left  .information-group       .header.toggle, .header.toggle   {font-size:13px; line-height:13px; background-color:#AAA; cursor:pointer; color:#fff; height:25px; padding-bottom:0; /*background:#AAA url('../images/toggle.png') no-repeat;*/}
+.fl-container-left  .information-group       .header.toggle, .header.toggle, .found-records-box.header    {font-size:13px; line-height:13px; background-color:#AAA; cursor:pointer; color:#fff; height:25px; padding-bottom:0; /*background:#AAA url('../images/toggle.png') no-repeat;*/}
 .fl-container-left  .information-group       .header.toggle.active   {background-position:left bottom;}
 .fl-container-left  .information-group       .sub-header 	{font-size:14px; line-height:14px; font-weight:bold; padding-bottom: 15px; color:#666;}
 .fl-container-left  .information-subgroup .header.toggle   {font-size:11px; line-height:11px; background-color:#AAAAAA; color:#000; padding:6px 0 7px 5px; width:auto; height:auto;}
+
+.found-records-box.header {font-size:13px; line-height:13px; background-color:#AAA; cursor:default; color:#fff; padding: 0;}
 
 .fl-container-left .upper-save {float:right;}
 .fl-container-left .object-entry-outer-border,
@@ -490,7 +492,7 @@ input.deactivate {background-color:#CDCCCC !important; color:#000 !important;}
 
 .cs-add-related-records-dialog {
     background-color: white;
-    min-width: 600px;
+    min -width: 600px;
 }
 
 .float-left {  float: left; }
