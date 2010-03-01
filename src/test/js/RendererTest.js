@@ -12,72 +12,99 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 var rendererTester = function(){
 
+    cspace.testDecorator = {
+        getDecoratorOptions: function (parentComponent) {
+            return {
+                option1: parentComponent.options.opt1,
+                option2: parentComponent.options.opt2
+            };
+        }
+    };
+
     var rendererTest = new jqUnit.TestCase("Renderer Tests");
 
-    rendererTest.test("Cutpoints", function () {
-        var cutpoints = cspace.renderer.createCutpoints(testSpec.spec);
-        jqUnit.assertDeepEq("Cutpoints for UISpec with repeated items", testCutpoints, cutpoints);
+    rendererTest.test("buildProtoTree(): Basic tree, empty model", function () {
+        var testUISpec = {
+            selector1: "${field1}",
+            selector2: "${field2}",
+            selector3: "${field3}"
+        };
+        var testThat = {};
+        var expectedProtoTree = {
+            selector1: "${field1}",
+            selector2: "${field2}",
+            selector3: "${field3}"
+        };
+        var protoTree = cspace.renderUtils.buildProtoTree(testUISpec, testThat);
+        jqUnit.assertDeepEq("Proto Tree should be correct", expectedProtoTree, protoTree);
     });
-
-    rendererTest.test("Basic Component trees", function () {
+    
+    rendererTest.test("buildProtoTree(): Repeated rows", function () {
+        var testUISpec = {
+            "rowSelector:": {
+                children: [
+                    { selector1: "${repeated.0.field1}",
+                      selector2: "${repeated.0.field2}" }
+                ]
+            }
+        };
+        var testModel = {
+            repeated: [
+                { field1: "value1a", field2: "value2a" },
+                { field1: "value1b", field2: "value2b" },
+                { field1: "value1c", field2: "value2c" }
+            ]
+        };
         var testThat = {
-            model: testModel,
-            options: {}
+            model: testModel
         };
-        var tree = cspace.renderer.buildComponentTree(testSpec.spec, testThat);
-        jqUnit.assertDeepEq("Component tree for UISpec with repeated items", testTree, tree);
+        var expectedProtoTree = {
+            "rowSelector:": {
+                children: [
+                    { selector1: "${repeated.0.field1}",
+                      selector2: "${repeated.0.field2}" },
+                    { selector1: "${repeated.1.field1}",
+                      selector2: "${repeated.1.field2}" },
+                    { selector1: "${repeated.2.field1}",
+                      selector2: "${repeated.2.field2}" }
+                ]
+            }
+        };
+        var protoTree = cspace.renderUtils.buildProtoTree(testUISpec, testThat);
+        jqUnit.assertDeepEq("Proto Tree should be correct", expectedProtoTree, protoTree);
     });
 
-    rendererTest.test("Component tree, Select only", function () {
-        var strings = {
-            defaultTermIndicator: " (default)",
-            noDefaultInvitation: "-- Select an item from the list --"
+    rendererTest.test("buildProtoTree(): Decorators", function () {
+        var testUISpec = {
+            selector: {
+                decorators: [{
+                    type: "fluid",
+                    func: "cspace.testDecorator"
+                }]
+            }
         };
-        var treeDefault = cspace.renderer.buildComponentTree(defaultEmptyModel.spec.spec, {
-            model: defaultEmptyModel.model,
+        var testThat = {
             options: {
-                strings: strings
+                opt1: "foo",
+                opt2: "bar"
             }
-        });
-        jqUnit.assertDeepEq("Tree for select, list has default, model has no value", defaultEmptyModel.tree, treeDefault);
-        jqUnit.assertEquals("Model should have default value", "post", defaultEmptyModel.model.entryMethod);
-        
-        var treeNoDefault = cspace.renderer.buildComponentTree(noDefaultEmptyModel.spec.spec, {
-            model: noDefaultEmptyModel.model,
-            options: {
-                strings: strings
+        };
+        var expectedProtoTree = {
+            selector: {
+                decorators: [{
+                    type: "fluid",
+                    func: "cspace.testDecorator",
+                    options: {
+                        option1: "foo",
+                        option2: "bar"
+                    }
+                }]
             }
-        });
-        jqUnit.assertDeepEq("Tree for select, list has no default, model has no value", noDefaultEmptyModel.tree, treeNoDefault);
-        jqUnit.assertEquals("Model should have 'none'", "none", noDefaultEmptyModel.model.entryReason);
+        };
 
-        var treeDefaultWithModel = cspace.renderer.buildComponentTree(defaultWithModel.spec.spec, {
-            model: defaultWithModel.model,
-            options: {
-                strings: strings
-            }
-        });
-        jqUnit.assertDeepEq("Tree for select, list has default, model has a value", defaultWithModel.tree, treeDefaultWithModel);
-        jqUnit.assertEquals("Model should have original value", "found-on-doorstep", defaultWithModel.model.entryMethod);
-
-        var treeNoDefaultWithModel = cspace.renderer.buildComponentTree(noDefaultWithModel.spec.spec, {
-            model: noDefaultWithModel.model,
-            options: {
-                strings: strings
-            }
-        });
-        jqUnit.assertDeepEq("Tree for select, list has no default, model has a value", noDefaultWithModel.tree, treeNoDefaultWithModel);
-        jqUnit.assertEquals("Model should have original value", "commission", noDefaultWithModel.model.entryReason);
-
-        var treeRepeatedTermLists = cspace.renderer.buildComponentTree(repeatedTermLists.spec.spec, {
-            model: repeatedTermLists.model,
-            options: {
-                strings: strings
-            }
-        });
-        jqUnit.assertDeepEq("Tree for select, repeated items", repeatedTermLists.tree, treeRepeatedTermLists);
+        var protoTree = cspace.renderUtils.buildProtoTree(testUISpec, testThat);
+        jqUnit.assertDeepEq("Proto Tree should be correct", expectedProtoTree, protoTree);
     });
-
 };
 
 (function () {

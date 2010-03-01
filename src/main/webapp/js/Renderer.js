@@ -143,6 +143,7 @@ cspace = cspace || {};
                         for (var i = 0; i < entry.decorators.length; i++) {
                             var dec = entry.decorators[i];
                             if (fluid.getGlobalValue(dec.func + ".getDecoratorOptions")) {
+                                dec.options = dec.options || {};
                                 $.extend(true, dec.options, fluid.invokeGlobalFunction(dec.func + ".getDecoratorOptions", [that]));
                             }
                         }
@@ -157,10 +158,10 @@ cspace = cspace || {};
                             fluid.model.setBeanValue(that.model, elPath, []);
                         }
                         else {
-                            for (var i = 1; i < data.length; i++) {
-                                entry.children[i] = {};
-                                fluid.model.copyModel(entry.children[i], entry.children[0]);
-                                replaceIndex(entry.children[i], 0, i);
+                            for (var j = 1; j < data.length; j++) {
+                                entry.children[j] = {};
+                                fluid.model.copyModel(entry.children[j], entry.children[0]);
+                                replaceIndex(entry.children[j], 0, j);
                             }
                         }
                     }
