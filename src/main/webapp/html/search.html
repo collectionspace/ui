@@ -16,6 +16,8 @@
         <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/ui/js/ui.core.js"></script>
         <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/ui/js/ui.dialog.js"></script>
         <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/json/js/json2.js"></script>
+        <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/plugins/delegate/js/jquery.delegate.js"></script>
+        <script type="text/javascript" src="../fluid-infusion/src/webapp/framework/core/js/jquery.keyboard-a11y.js"></script>
         <script type="text/javascript" src="../fluid-infusion/src/webapp/framework/core/js/Fluid.js"></script>
         <script type="text/javascript" src="../fluid-infusion/src/webapp/framework/core/js/FluidDOMUtilities.js"></script>
         <script type="text/javascript" src="../fluid-infusion/src/webapp/framework/core/js/DataBinding.js"></script>
@@ -74,22 +76,18 @@
 									<div class="main-search-page">
 
 										<div id="search-box">
-											<!-- search form -->
-											<form>
-												<!--<input name="keywords" type="text" class="csc-search-keywords" /><a href="#" class="csc-search-submit globalSearchButton">Search</a>-->
-												<input name="keywords" type="text" class="csc-search-keywords" /><input type="button" class="csc-search-submit button" type="submit" value="Search" />
-												<div class="select-recordtype csc-select-box-container">
-                                                    <span class="recordtype-label">Record Type</span>
-                                                    <select name="recordtype" class="csc-search-record-type">
-                                                        <option value="object">Object</option>
-                                                        <option value="intake">Intake</option>
-                                                        <option value="acquisition">Acquisition</option>
-                                                        <option value="authorities-person">Person</option>
-                                                        <option value="authorities-organization">Organization</option>
-                                                    </select>
-												</div>
-											</form>
-											<!-- end search form -->
+											<!--<input name="keywords" type="text" class="csc-search-keywords" /><a href="#" class="csc-search-submit globalSearchButton">Search</a>-->
+											<input name="keywords" type="text" class="csc-search-keywords" /><input type="button" class="csc-search-submit button" type="submit" value="Search" />
+											<div class="select-recordtype csc-select-box-container">
+                                                <span class="recordtype-label">Record Type</span>
+                                                <select name="recordtype" class="csc-search-record-type">
+                                                    <option value="object">Object</option>
+                                                    <option value="intake">Intake</option>
+                                                    <option value="acquisition">Acquisition</option>
+                                                    <option value="authorities-person">Person</option>
+                                                    <option value="authorities-organization">Organization</option>
+                                                </select>
+											</div>
 										</div>
 
 										<div class="csc-search-error-message hidden">

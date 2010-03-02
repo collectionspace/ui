@@ -149,7 +149,9 @@ cspace = cspace || {};
     };
 
     var bindEventHandlers = function (that) {
-        that.locate("searchButton").click(submitSearchRequest(that));
+        var searchSubmitHandler = submitSearchRequest(that);
+        that.locate("searchButton").click(searchSubmitHandler);
+        that.locate("keywords").fluid("activatable", searchSubmitHandler);
 
         that.events.modelChanged.addListener(function () {
             displaySearchResults(that, that.locate("recordType").val());
