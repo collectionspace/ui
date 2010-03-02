@@ -32,7 +32,8 @@ cspace = cspace || {};
             };
             var sbOpts = {
                 applier: "{pageBuilder}.applier",
-                uispec: "{pageBuilder}.uispec.sidebar"
+                uispec: "{pageBuilder}.uispec.sidebar",
+                currentRecordType: "objects"
             };
     
             var dependencies = {

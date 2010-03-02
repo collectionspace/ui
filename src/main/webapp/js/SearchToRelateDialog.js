@@ -20,10 +20,14 @@ cspace = cspace || {};
 
             var newIndex = 0;
             var newRelations = [];
+            var source = {
+                csid: that.options.currentCSID,
+                recordtype: that.options.currentRecordType
+            };
             for (var i = 0; i < data.length; i++) {
                 if (data[i].selected) {
                     newRelations[newIndex] = {
-                        source: {csid: that.options.currentCSID},
+                        source: source,
                         target: data[i],
                         type: "affects",
                         "one-way": false

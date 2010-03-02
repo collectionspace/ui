@@ -38,7 +38,7 @@ cspace = cspace || {};
             var rrOpts = {
                 applier: applier,
                 recordType: "objects",
-                recordType: "object",
+                currentRecordType: "objects",
                 uispec: "{pageBuilder}.uispec.relatedRecords"
             };
             var dependencies = {
