@@ -79,6 +79,9 @@ cspace = cspace || {};
             that.search = cspace.search(".main-search-page", searchOpts);
 
             that.locate("addButton", addDialog).click(makeRelater(that));
+            that.locate("closeButton", addDialog).click(function () {
+                addDialog.dialog("close");
+            });
         });
 
         return addDialog;        
@@ -138,7 +141,8 @@ cspace = cspace || {};
             selectBoxContainer: ".csc-select-box-container",
             selectBoxes: ".csc-select-boxes",
             objectSelecter: ".csc-recordTypeSelecter-object",
-            proceduresSelecter: ".csc-recordTypeSelecter-procedures"
+            proceduresSelecter: ".csc-recordTypeSelecter-procedures",
+            closeButton: ".csc-searchToRelate-closeBtn"
         },
         templates: {
             dialog: "../html/searchToRelate.html"

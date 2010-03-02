@@ -499,3 +499,11 @@ input.deactivate {background-color:#CDCCCC !important; color:#000 !important;}
 
 .float-left {  float: left; }
 .float-right {  float: right; }
+
+.cs-dialog-closeBtn {
+    position:absolute;
+    right:-20px;
+    top:-41px;
+    width:auto;
+    cursor:pointer;
+}

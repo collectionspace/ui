@@ -50,11 +50,4 @@
 	font-weight:bold;
 	*float:left;
 }
-.csc-confirmationDialog-closeBtn {
-	position:absolute;
-	right:-20px;
-	top:-41px;
-	width:auto;
-	cursor:pointer;
-}
 a, a:hover {text-decoration:none;}
