@@ -20,8 +20,8 @@ cspace = cspace || {};
         var setUpPage = function () {
             var tabOpts = {
                 tabList: [
-                    {name: "Organization Name Authority", target: "#primaryTab"},
-                    {name: "Contact Information", target: null}
+                    {name: "Organization Name Authority", target: "#primaryTab"}/*,
+                    {name: "Contact Information", target: null}*/
                 ]
             };
             var tbOpts = {
