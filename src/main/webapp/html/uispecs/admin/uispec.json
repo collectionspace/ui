@@ -12,10 +12,14 @@
     },
     "userDetails": {
         ".csc-user-userID": "${fields.userID}",
-        ".csc-user-userName": "${fields.userName}", //NameAuthority
+        ".csc-user-userName": "${fields.userName}",
         ".csc-user-password": "${fields.password}",
         ".csc-user-passwordConfirm": "${fields.passwordConfirm}",
         ".csc-user-email": "${fields.email}",
-        ".csc-user-status": "${fields.status}", // contolled list: "Active", "Inactive"
+        ".csc-user-status": {
+            "selection": "${fields.status}",
+            "optionlist": ["active", "inactive"],
+            "optionnames": ["Active", "Inactive"]
+        }
     }
 }
