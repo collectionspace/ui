@@ -66,12 +66,19 @@
 											</div>
 											
 											<div class="info-column2-40 fl-force-right">
-												<div class="info-pair">
+												<div class="info-pair-select">
 													<div class="header">
 														<div class="label">Status</div>
 													</div>
 													<div class="content">
-														<select class="csc-nameAuthority-status"></select>  
+														<table>
+															<tbody>
+																<tr>
+																	<!--<td class="table-unselected"></td>-->
+																	<td><select class="csc-nameAuthority-status"></select>  </td>
+																</tr>
+															</tbody>
+														</table>
 													</div>
 												</div>
 												<div class="clear"></div>
@@ -102,8 +109,8 @@
 														
 													<tbody>
 														<tr>
-															<td><select class="csc-nameAuthority-salutation"></select></td>
-															<td><select class="csc-nameAuthority-title"></select></td>
+															<td><select class="csc-nameAuthority-salutation input-select"></select></td>
+															<td><select class="csc-nameAuthority-title input-select"></select></td>
 															<td><input type="text" class="csc-nameAuthority-foreName"></td>
 															<td><input type="text" class="csc-nameAuthority-middleName"></td>
 															<td><input type="text" class="csc-nameAuthority-surName"></td>
@@ -118,13 +125,20 @@
 									</div>
 										
 									<div class="info-column2-40 fl-force-left">
-										<div class="info-pair">
+										<div class="info-pair-select">
 											<div class="header">
 												<div class="label">Gender</div>
 											</div>
 											<div class="content">
-												<select class="csc-nameAuthority-gender"></select>
-											</div>+
+												<table>
+													<tbody>
+														<tr>
+															<!--<td class="table-unselected"></td>-->
+															<td><select class="csc-nameAuthority-gender"></select></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
 											
 										</div>
 										<div class="info-pair">
@@ -314,12 +328,28 @@
 							<div class="fl-container-flex fl-fix content main" id="toggle-contact">
 								<div class="info-column">
 									<div class="info-column2-40 fl-force-left">
-										<div class="info-pair">
+										<div class="info-pair-select">
 											<div class="header">
 												<div class="label">Address Type</div>
 											</div>
 											<div class="content">
-												<select class="csc-contact-addressType1" ></select>
+												<table>
+													<tbody>
+														<tr>
+															<!--<td class="table-unselected"></td>-->
+															<td><select class="csc-contact-addressType1" ></select></td>
+														</tr>
+														<tr>
+															<!--<td class="table-unselected"></td>-->
+															<td><select class="csc-contact-addressType1" ></select></td>
+														</tr>
+														<tr>
+															<!--<td class="table-unselected"></td>-->
+															<td><select class="csc-contact-addressType1" ></select></td>
+														</tr>
+													</tbody>
+												</table>
+												
 											</div>
 										</div>
 										<div class="info-pair">
@@ -329,6 +359,10 @@
 											<div class="content">
 												<table>
 													<tbody>
+														<tr>
+															<!--<td class="table-unselected"></td>-->
+															<td><input type="text" class="csc-contact-faxNumber1" /></td>
+														</tr>
 														<tr>
 															<!--<td class="table-unselected"></td>-->
 															<td><input type="text" class="csc-contact-faxNumber1" /></td>
