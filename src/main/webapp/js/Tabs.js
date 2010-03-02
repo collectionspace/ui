@@ -51,7 +51,9 @@ cspace = cspace || {};
 
     cspace.tabs = function (container, options) {
         var that = fluid.initView("cspace.tabs", container, options);
-        
+        // workaround for FLUID-3505:
+        that.options.applier = options.applier;
+
         buildTabs(that);
 
         return that;
