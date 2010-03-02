@@ -28,10 +28,6 @@ cspace = cspace || {};
                 dataContext: { options: { recordType: "acquisition" } },
                 uispec: "{pageBuilder}.uispec.proceduresAcquisition"
             };
-            var authOpts = {
-                dataContext: { options: { recordType: "authority" } },
-                uispec: "{pageBuilder}.uispec.authorityTerms"
-            };
             if (cspace.util.isLocal()) {
                 objOpts.dataContext.options = {
                     baseUrl: "data",
@@ -39,11 +35,9 @@ cspace = cspace || {};
                     fileExtension: ".json"
                 };
                 intOpts.dataContext.options.baseUrl = 
-                    acqOpts.dataContext.options.baseUrl = 
-                        authOpts.dataContext.options.baseUrl = "data";
+                    acqOpts.dataContext.options.baseUrl = "data";
                 intOpts.dataContext.options.fileExtension = 
-                    acqOpts.dataContext.options.fileExtension = 
-                        authOpts.dataContext.options.fileExtension = ".json";
+                    acqOpts.dataContext.options.fileExtension = ".json";
             }
             var dependencies = {
                 objects: {
@@ -57,10 +51,6 @@ cspace = cspace || {};
                 proceduresAcquisition: {
                     funcName: "cspace.recordList",
                     args: [".acquisition-records-group", acqOpts]
-                },
-                authorityTerms: {
-                    funcName: "cspace.recordList",
-                    args: [".authority-records-group", authOpts]
                 }
             };
             
