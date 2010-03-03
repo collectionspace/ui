@@ -32,7 +32,7 @@ cspace = cspace || {};
 
         that.relatedObjects = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedObjects,
              {applier: that.options.applier,
-              recordType: "object",
+              recordType: "objects",
               currentRecordType: that.options.currentRecordType,
               uispec: that.options.uispec.relatedObjects}]);
 

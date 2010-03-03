@@ -140,7 +140,7 @@ cspace = cspace || {};
             recordTypeString: ".csc-record-type",
             selectBoxContainer: ".csc-select-box-container",
             selectBoxes: ".csc-select-boxes",
-            objectSelecter: ".csc-recordTypeSelecter-object",
+            objectsSelecter: ".csc-recordTypeSelecter-object",
             proceduresSelecter: ".csc-recordTypeSelecter-procedures",
             closeButton: ".csc-searchToRelate-closeBtn"
         },
