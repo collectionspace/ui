@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <title>Login Test Suite</title>
+        <link rel="Stylesheet" media="screen" href="../lib/qunit/css/testsuite.css" />
+        
+<!--
+        <script type="text/javascript" src="../../main/webapp/infusion/CSpaceInfusion.js"></script>
+-->
+        <script type="text/javascript" src="../../main/webapp/fluid-infusion/src/webapp/lib/jquery/core/js/jquery.js"></script>
+        <script type="text/javascript" src="../../main/webapp/fluid-infusion/src/webapp/lib/json/js/json2.js"></script>
+        <script type="text/javascript" src="../../main/webapp/fluid-infusion/src/webapp/framework/core/js/Fluid.js"></script>
+        <script type="text/javascript" src="../../main/webapp/fluid-infusion/src/webapp/framework/core/js/FluidDOMUtilities.js"></script>
+        <script type="text/javascript" src="../lib/qunit/js/testrunner.js"></script>
+        <script type="text/javascript" src="../lib/jqUnit/js/jqUnit.js"></script>
+        <script type="text/javascript" src="../lib/jqMock/js/jqMock.js"></script>
+
+        <script type="text/javascript" src="../../main/webapp/js/cspace.js"></script>
+        <script type="text/javascript" src="../../main/webapp/js/Utilities.js"></script>
+        <script type="text/javascript" src="../../main/webapp/js/Login.js"></script>
+        
+        <script type="text/javascript" src="../js/LoginTest.js"></script>
+    </head>
+    <body>
+        <h1 id="header">Login Test Suite</h1>
+        <h2 id="banner"></h2>
+        <h2 id="userAgent"></h2>
+
+        <!-- Test HTML -->
+        <div id="main">
+            <div class="login-container">
+                <div class="csc-login-signIn">
+                    <form class="csc-login-loginForm" action="foo">
+                        <div class="csc-login-userId"></div>
+                        <div class="csc-login-password"></div>
+                        <div class="csc-login-button"></div>
+                        <div class="csc-login-requestReset"></div>
+                    </form>
+                </div>
+                <div class="csc-login-enterEmail">
+                    <div class="csc-login-enterEmailMessage"></div>
+                    <div class="csc-login-enterEmailForm"></div>
+                    <div class="csc-login-email"></div>
+                    <div class="csc-login-requestResetButton"></div>
+                </div>
+                <div class="csc-login-resetRequest">
+                    <form class="csc-login-resetForm" action="foo">
+                        <div class="csc-login-newPassword"></div>
+                        <div class="csc-login-confirmPassword"></div>
+                        <div class="csc-login-resetPasswordButton"></div>
+                    </form>
+                </div>
+                <div class="csc-login-passwordReset"></div>
+                <div class="csc-login-warning"></div>
+            </div>
+        </div>
+        <ol id="tests"></ol>
+    </body>
+</html>

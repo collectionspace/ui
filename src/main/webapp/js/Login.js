@@ -94,7 +94,14 @@ cspace = cspace || {};
 
     var setupLogin = function (that) {  
         bindEventHandlers(that);      
-
+        if (cspace.util.isLocal()) {
+            that.locate("loginForm").attr("action", "createnew.html");
+            that.locate("resetForm").attr("action", "createnew.html");
+        } else {
+            that.locate("loginForm").attr("action", cspace.util.addTrailingSlash(that.options.baseUrl)+"login");
+            that.locate("resetForm").attr("action", cspace.util.addTrailingSlash(that.options.baseUrl)+"resetpassword");
+        }
+        
         var resetToken = cspace.util.getUrlParameter("token");
         if (resetToken) {
             showReset(that.dom);
@@ -130,6 +137,7 @@ cspace = cspace || {};
         },
     
         selectors: {
+            loginForm: ".csc-login-loginForm",
             signIn: ".csc-login-signIn",
             userID: ".csc-login-userId",
             password: ".csc-login-password",
@@ -142,6 +150,7 @@ cspace = cspace || {};
             email: ".csc-login-email",
             requestResetButton: ".csc-login-requestResetButton",
             
+            resetForm: ".csc-login-resetForm",
             resetRequest: ".csc-login-resetRequest",
             newPassword: ".csc-login-newPassword",
             confirmPassword: ".csc-login-confirmPassword",
@@ -152,9 +161,7 @@ cspace = cspace || {};
             warning: ".csc-login-warning"
         },
         
-        loginUrl: "../../chain/login",
-        requestPasswordResetUrl: "../../chain/passwordreset",
-        resetPasswordUrl: "../../chain/resetpassword"
+        baseUrl: "../../chain/"
     });
     
 })(jQuery, fluid_1_2);
