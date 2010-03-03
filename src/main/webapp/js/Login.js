@@ -124,7 +124,7 @@ cspace = cspace || {};
         };
 
         that.submitPasswordResetRequest = function (successFunction, errorFunction) {
-            submitPasswordResetRequest(that.locate("email").text(), that.options.baseUrl, successFunction, errorFunction);
+            submitPasswordResetRequest(that.locate("email").val(), that.options.baseUrl, successFunction, errorFunction);
         };
 
         setupLogin(that);

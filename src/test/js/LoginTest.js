@@ -50,7 +50,7 @@ var loginTester = function(){
         jqUnit.notVisible("Clicking 'reset password' hides basic login", login.options.selectors.signIn);
         jqUnit.isVisible("Clicking 'reset password' shows email form", login.options.selectors.enterEmail);
 
-        jQuery(login.options.selectors.email).text("test@collectionspace.org");
+        jQuery(login.options.selectors.email).val("test@collectionspace.org");
         var testSuccess = function (data, textStatus, xhr) {
             start();
         };
