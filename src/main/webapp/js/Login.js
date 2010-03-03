@@ -35,28 +35,11 @@ cspace = cspace || {};
         domBinder.locate("passwordReset").show();
     };
 
-	var sendLoginToServer = function (that) {
-        return function(e){
-            // TODO: Security - don't want to send login info as plain text
-            jQuery.ajax({
-                // TODO: Specify the URL in the options, so users can provide it
-                url: that.options.loginUrl,
-                type: "POST",
-                dataType: "json",
-                data: JSON.stringify(that.model),
-                success: that.events.loginSuccess.fire,
-                error: that.events.loginError.fire
-            });
-        };
-    };
-    
     var showResetRequestForm = function (domBinder) {
-        return function (e) {
-            domBinder.locate("signIn").hide();
-            domBinder.locate("enterEmail").show();
-            domBinder.locate("resetRequest").hide();
-            domBinder.locate("passwordReset").hide();
-        };
+        domBinder.locate("signIn").hide();
+        domBinder.locate("enterEmail").show();
+        domBinder.locate("resetRequest").hide();
+        domBinder.locate("passwordReset").hide();
     };
 
     var showResetRequestSubmittedPage = function (domBinder) {
@@ -64,15 +47,17 @@ cspace = cspace || {};
         domBinder.locate("enterEmailMessage").text("Email sent.");
     };
 
-    var submitResetRequest = function (that) {
-        return function (e) {
-            // TODO: validate that the two passwords match
-            // TODO: request for password reset to that.options.requestPasswordResetUrl,
-            // which will eventually send an email to the user
-            showResetRequestSubmittedPage(that.dom);
-        };
+    var submitPasswordResetRequest = function (email, url, success, error) {
+        jQuery.ajax({
+            url: cspace.util.addTrailingSlash(url) + "passwordreset",
+            type: "POST",
+            dataType: "json",
+            data: JSON.stringify({"email": email}),
+            success: success,
+            error: error
+        });
     };
-
+    
     var submitNewPassword = function (that) {
         return function (e) {
             showPasswordReset(that.dom);
@@ -81,14 +66,22 @@ cspace = cspace || {};
         };
     };
 
-    var handleError = function (that, XMLHttpRequest, textStatus, errorThrown) {
-        that.locate("warning").show();
+    var makeErrorHandler = function (domBinder, text) {
+        return function(XMLHttpRequest, textStatus, errorThrown){
+            domBinder.locate("warning").text(text).show();
+        };
     };
     
     var bindEventHandlers = function (that) {
-        that.locate("loginButton").click(sendLoginToServer(that));
-        that.locate("requestReset").click(showResetRequestForm(that.dom));
-        that.locate("requestResetButton").click(submitResetRequest(that));
+        that.locate("requestReset").click(function(e){
+            that.locate("warning").hide();
+            showResetRequestForm(that.dom);
+        });
+        that.locate("requestResetButton").click(function (e) {
+            that.submitPasswordResetRequest(function (data, textStatus) {
+                showResetRequestSubmittedPage(that.dom);
+            }, makeErrorHandler(that.dom, "Unable to submit request"));
+        });
         that.locate("resetPassword").click(submitNewPassword(that));
     };
 
@@ -101,7 +94,13 @@ cspace = cspace || {};
             that.locate("loginForm").attr("action", cspace.util.addTrailingSlash(that.options.baseUrl)+"login");
             that.locate("resetForm").attr("action", cspace.util.addTrailingSlash(that.options.baseUrl)+"resetpassword");
         }
-        
+
+        var result = cspace.util.getUrlParameter("result");
+        if (result == "fail") {
+            that.locate("warning").show();
+        } else {
+            that.locate("warning").hide();
+        }
         var resetToken = cspace.util.getUrlParameter("token");
         if (resetToken) {
             showReset(that.dom);
@@ -121,7 +120,11 @@ cspace = cspace || {};
         that.model = {
             userid: "",
             password: "",
-            newsInfo: ""
+            email: ""
+        };
+
+        that.submitPasswordResetRequest = function (successFunction, errorFunction) {
+            submitPasswordResetRequest(that.locate("email").text(), that.options.baseUrl, successFunction, errorFunction);
         };
 
         setupLogin(that);
@@ -131,9 +134,7 @@ cspace = cspace || {};
     fluid.defaults("cspace.login", {
         
         events: {
-            onLogin: null,
-            loginSuccess: null,
-            loginError: null
+            passwordResetRequestSubmitted: null
         },
     
         selectors: {
@@ -158,7 +159,7 @@ cspace = cspace || {};
 
             passwordReset: ".csc-login-passwordReset",
 
-            warning: ".csc-login-warning"
+            warning: ".csc-warning"
         },
         
         baseUrl: "../../chain/"

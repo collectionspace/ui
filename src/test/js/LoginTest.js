@@ -11,6 +11,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 /*global jqUnit, jQuery, jqMock, cspace, fluid, start, stop, ok, expect*/
 
 var loginTester = function(){
+    // jqMock requires jqUnit.ok to exist
+    jqUnit.ok = ok;
 
     var loginTest = new jqUnit.TestCase("Login Tests");
 
@@ -30,6 +32,36 @@ var loginTester = function(){
         jqUnit.assertEquals("Login form action should be set based on the supplied baseUrl", "http://foo.com/bar/login", jQuery(login.options.selectors.loginForm).attr("action"));
         jqUnit.assertEquals("Reset form action should be set based on the supplied baseUrl", "http://foo.com/bar/resetpassword", jQuery(login.options.selectors.resetForm).attr("action"));
         cspace.util.isLocal = tempIsLocal;
+    });
+
+    loginTest.test("Password reset request: Ajax parameters", function () {
+        var ajaxMock = new jqMock.Mock(jQuery, "ajax");
+        // Don't know how jqMock checks functions, so just check the other parameters for now
+        var expectedAjaxParams = {
+            url: "http://foo.com/bar/passwordreset",
+            data: JSON.stringify({"email":"test@collectionspace.org"}),
+            type: "POST",
+            dataType: "json"
+        };
+        ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams));
+
+        var login = cspace.login(".login-container", {baseUrl: "http://foo.com/bar"});
+        jQuery(login.options.selectors.requestReset).click();
+        jqUnit.notVisible("Clicking 'reset password' hides basic login", login.options.selectors.signIn);
+        jqUnit.isVisible("Clicking 'reset password' shows email form", login.options.selectors.enterEmail);
+
+        jQuery(login.options.selectors.email).text("test@collectionspace.org");
+        var testSuccess = function (data, textStatus, xhr) {
+            start();
+        };
+        var testError = function (xhr, textStatus, errorThrown) {
+            start();
+        };
+        stop();
+        login.submitPasswordResetRequest(testSuccess, testError);
+        ajaxMock.verify();
+        ajaxMock.restore();
+
     });
 };
 
