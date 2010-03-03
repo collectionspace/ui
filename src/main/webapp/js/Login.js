@@ -14,83 +14,93 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
-	
-    // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
-    // load it manually via ajax
-    var fetchUISpec = function (that, callback) {
-        jQuery.ajax({
-            url: that.options.uiSpecUrl,
-            type: "GET",
-            dataType: "json",
-            success: callback,
-            error: function (xhr, textStatus, errorThrown) {
-                console.log("Error retrieving UISpec: " + textStatus);
-            }
-        });
+    var showSignIn = function (domBinder) {
+        domBinder.locate("signIn").show();
+        domBinder.locate("enterEmail").hide();
+        domBinder.locate("resetRequest").hide();
+        domBinder.locate("passwordReset").hide();
     };
-    
-    // TODO: This component tree will eventually be programmatically generated from the UI Spec
-    var buildComponentTree = function (that) {
-        var tree = {
-            children: [{
-                ID: "news-info",
-                valuebinding: "newsInfo"
-            }, {
-                ID: "userid",
-                valuebinding: "userid"
-            }, {
-                ID: "password",
-                valuebinding: "password"
-            }, {
-                ID: "login-button",
-                value: "login",
-                decorators: [{
-                    type: "jQuery",
-                    func: "click",
-                    args: function () {
-                        that.events.onLogin.fire();
-                    }
-                }]
-            }]
-        };
-        return tree;
+
+    var showReset = function (domBinder) {
+        domBinder.locate("signIn").hide();
+        domBinder.locate("enterEmail").hide();
+        domBinder.locate("resetRequest").show();
+        domBinder.locate("passwordReset").hide();
     };
-        
+
+    var showPasswordReset = function (domBinder) {
+        domBinder.locate("signIn").hide();
+        domBinder.locate("enterEmail").hide();
+        domBinder.locate("resetRequest").hide();
+        domBinder.locate("passwordReset").show();
+    };
+
 	var sendLoginToServer = function (that) {
-        // TODO: Security - don't want to send login info as plain text
-        jQuery.ajax({
-            // TODO: Specify the URL in the options, so users can provide it
-            url: "http://localhost/",
-            type: "POST",
-            dataType: "json",
-            data: JSON.stringify(that.model),
-            success: that.events.loginSuccess.fire,
-            error: that.events.loginError.fire
-        });
-    };
-    
-    var handleError = function (that, XMLHttpRequest, textStatus, errorThrown) {
-        that.locate("unWarning").show();
-    };
-    
-    var createPageRenderer = function (that) {
-        return function (spec, textStatus) {
-            that.spec = spec.spec;
-            that.model.newsInfo = that.spec.newsInfo.defaultText;
-            that.refreshView();
+        return function(e){
+            // TODO: Security - don't want to send login info as plain text
+            jQuery.ajax({
+                // TODO: Specify the URL in the options, so users can provide it
+                url: that.options.loginUrl,
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify(that.model),
+                success: that.events.loginSuccess.fire,
+                error: that.events.loginError.fire
+            });
         };
     };
     
-    var setupLogin = function (that) {        
-        that.events.onLogin.addListener(function () {
-            sendLoginToServer(that);
-        });
-        
-        that.events.loginError.addListener(function (XMLHttpRequest, textStatus, errorThrown) {
-            handleError(that, XMLHttpRequest, textStatus, errorThrown);
-        });
-        
-        fetchUISpec(that, createPageRenderer(that));
+    var showResetRequestForm = function (domBinder) {
+        return function (e) {
+            domBinder.locate("signIn").hide();
+            domBinder.locate("enterEmail").show();
+            domBinder.locate("resetRequest").hide();
+            domBinder.locate("passwordReset").hide();
+        };
+    };
+
+    var showResetRequestSubmittedPage = function (domBinder) {
+        domBinder.locate("enterEmailForm").hide();
+        domBinder.locate("enterEmailMessage").text("Email sent.");
+    };
+
+    var submitResetRequest = function (that) {
+        return function (e) {
+            // TODO: validate that the two passwords match
+            // TODO: request for password reset to that.options.requestPasswordResetUrl,
+            // which will eventually send an email to the user
+            showResetRequestSubmittedPage(that.dom);
+        };
+    };
+
+    var submitNewPassword = function (that) {
+        return function (e) {
+            showPasswordReset(that.dom);
+            // TODO: submit new password to that.options.resetPasswordUrl,
+            // which should log the user in automatically
+        };
+    };
+
+    var handleError = function (that, XMLHttpRequest, textStatus, errorThrown) {
+        that.locate("warning").show();
+    };
+    
+    var bindEventHandlers = function (that) {
+        that.locate("loginButton").click(sendLoginToServer(that));
+        that.locate("requestReset").click(showResetRequestForm(that.dom));
+        that.locate("requestResetButton").click(submitResetRequest(that));
+        that.locate("resetPassword").click(submitNewPassword(that));
+    };
+
+    var setupLogin = function (that) {  
+        bindEventHandlers(that);      
+
+        var resetToken = cspace.util.getUrlParameter("token");
+        if (resetToken) {
+            showReset(that.dom);
+        } else {
+            showSignIn(that.dom);
+        }
     };
     
     /**
@@ -106,14 +116,6 @@ cspace = cspace || {};
             password: "",
             newsInfo: ""
         };
-                
-        that.refreshView = function () {
-            var opts = {
-                model: that.model,
-                autoBind: true
-            };
-            fluid.selfRender(that.container, buildComponentTree(that), opts);
-        };
 
         setupLogin(that);
         return that;
@@ -128,17 +130,31 @@ cspace = cspace || {};
         },
     
         selectors: {
-            userID: ".csc-user-id",
-            password: ".csc-password",
+            signIn: ".csc-login-signIn",
+            userID: ".csc-login-userId",
+            password: ".csc-login-password",
             loginButton: ".csc-login-button",
-            unWarning: ".csc-un-warning",
-            pwWarning: ".csc-pw-warning"
+            requestReset: ".csc-login-requestReset",
+
+            enterEmail: ".csc-login-enterEmail",
+            enterEmailMessage: ".csc-login-enterEmailMessage",
+            enterEmailForm: ".csc-login-enterEmailForm",
+            email: ".csc-login-email",
+            requestResetButton: ".csc-login-requestResetButton",
+            
+            resetRequest: ".csc-login-resetRequest",
+            newPassword: ".csc-login-newPassword",
+            confirmPassword: ".csc-login-confirmPassword",
+            resetPassword: ".csc-login-resetPasswordButton",
+
+            passwordReset: ".csc-login-passwordReset",
+
+            warning: ".csc-login-warning"
         },
         
-        // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
-        // load it manually via ajax
-        uiSpecUrl: "./login/spec/spec.json"
-        
+        loginUrl: "../../chain/login",
+        requestPasswordResetUrl: "../../chain/passwordreset",
+        resetPasswordUrl: "../../chain/resetpassword"
     });
     
 })(jQuery, fluid_1_2);

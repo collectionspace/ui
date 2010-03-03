@@ -14,15 +14,17 @@ cspace = cspace || {};
 
 (function ($) {
 
-    cspace.setup = function (errorMessageSelector) {
-        errorMessageSelector = errorMessageSelector || ".csc-login-error";
-        var loginResult = cspace.util.getUrlParameter("result");
-        if (loginResult === "fail") {
-            $(errorMessageSelector).show();
-        } else {
-            $(errorMessageSelector).hide();
+    cspace.loginSetup = function(){
+        var loginOpts = {};
+
+        if (cspace.util.isLocal()) {
+            // TODO: Properly configure things to do something reasonable locally
+            loginOpts.loginUrl = "#";
+            loginOpts.requestPasswordResetUrl = "#";
+            loginOpts.resetPasswordUrl = "#";
         }
+        cspace.login(".csc-login", loginOpts);
     };
-    
+        
 })(jQuery);
 
