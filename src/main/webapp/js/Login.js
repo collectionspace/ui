@@ -21,6 +21,20 @@ cspace = cspace || {};
         domBinder.locate("passwordReset").hide();
     };
 
+    var showResetRequestForm = function (domBinder) {
+        domBinder.locate("signIn").hide();
+        domBinder.locate("enterEmail").show();
+        domBinder.locate("resetRequest").hide();
+        domBinder.locate("passwordReset").hide();
+    };
+
+    var showResetRequestSubmitted = function (domBinder) {
+        domBinder.locate("signIn").hide();
+        domBinder.locate("enterEmail").hide();
+        domBinder.locate("resetRequest").hide();
+        domBinder.locate("passwordReset").hide();
+    };
+
     var showReset = function (domBinder) {
         domBinder.locate("signIn").hide();
         domBinder.locate("enterEmail").hide();
@@ -35,34 +49,40 @@ cspace = cspace || {};
         domBinder.locate("passwordReset").show();
     };
 
-    var showResetRequestForm = function (domBinder) {
-        domBinder.locate("signIn").hide();
-        domBinder.locate("enterEmail").show();
-        domBinder.locate("resetRequest").hide();
-        domBinder.locate("passwordReset").hide();
-    };
-
     var showResetRequestSubmittedPage = function (domBinder) {
         domBinder.locate("enterEmailForm").hide();
         domBinder.locate("enterEmailMessage").text("Email sent.");
     };
 
-    var submitPasswordResetRequest = function (email, url, success, error) {
-        jQuery.ajax({
-            url: cspace.util.addTrailingSlash(url) + "passwordreset",
-            type: "POST",
-            dataType: "json",
-            data: JSON.stringify({"email": email}),
-            success: success,
-            error: error
-        });
+    var submitEmail = function (email, url, that) {
+        if (cspace.util.isLocal()) {
+            showResetRequestSubmittedPage(that.dom);
+            that.events.emailSubmitted.fire();
+        } else {
+            jQuery.ajax({
+                url: cspace.util.addTrailingSlash(url) + "passwordreset",
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({"email": email}),
+                success: that.events.emailSubmitted.fire,
+                error: that.events.onError.fire
+            });
+        }
     };
     
-    var submitNewPassword = function (that) {
+    var makeEmailSubmitter = function (that) {
+        return function (e) {
+            that.submitEmail(function (data, textStatus) {
+                showResetRequestSubmittedPage(that.dom);
+            }, makeErrorHandler(that.dom, "Unable to submit request"));
+            showResetRequestSubmittedPage(that.dom);
+        };
+    };
+
+    var makePasswordSubmitter = function (that) {
         return function (e) {
             showPasswordReset(that.dom);
-            // TODO: submit new password to that.options.resetPasswordUrl,
-            // which should log the user in automatically
+            that.submitNewPassword();
         };
     };
 
@@ -77,12 +97,8 @@ cspace = cspace || {};
             that.locate("warning").hide();
             showResetRequestForm(that.dom);
         });
-        that.locate("requestResetButton").click(function (e) {
-            that.submitPasswordResetRequest(function (data, textStatus) {
-                showResetRequestSubmittedPage(that.dom);
-            }, makeErrorHandler(that.dom, "Unable to submit request"));
-        });
-        that.locate("resetPassword").click(submitNewPassword(that));
+        that.locate("submitEmail").click(makeEmailSubmitter(that));
+        that.locate("submitNewPassword").click(makePasswordSubmitter(that));
     };
 
     var setupLogin = function (that) {  
@@ -123,8 +139,13 @@ cspace = cspace || {};
             email: ""
         };
 
-        that.submitPasswordResetRequest = function (successFunction, errorFunction) {
-            submitPasswordResetRequest(that.locate("email").val(), that.options.baseUrl, successFunction, errorFunction);
+        that.submitEmail = function () {
+            submitEmail(that.locate("email").val(), that.options.baseUrl, that);
+        };
+        
+        that.submitNewPassword = function (successFunction, errorFunction) {
+            // TODO: submit new password to that.options.baseUrl+"resetpassword",
+            // which should log the user in automatically
         };
 
         setupLogin(that);
@@ -134,7 +155,8 @@ cspace = cspace || {};
     fluid.defaults("cspace.login", {
         
         events: {
-            passwordResetRequestSubmitted: null
+            emailSubmitted: null,
+            onError: null
         },
     
         selectors: {
@@ -149,13 +171,13 @@ cspace = cspace || {};
             enterEmailMessage: ".csc-login-enterEmailMessage",
             enterEmailForm: ".csc-login-enterEmailForm",
             email: ".csc-login-email",
-            requestResetButton: ".csc-login-requestResetButton",
-            
+            submitEmail: ".csc-login-submitEmail",
+                        
             resetForm: ".csc-login-resetForm",
             resetRequest: ".csc-login-resetRequest",
             newPassword: ".csc-login-newPassword",
             confirmPassword: ".csc-login-confirmPassword",
-            resetPassword: ".csc-login-resetPasswordButton",
+            submitNewPassword: ".csc-login-submitNewPassword",
 
             passwordReset: ".csc-login-passwordReset",
 

@@ -34,7 +34,19 @@ var loginTester = function(){
         cspace.util.isLocal = tempIsLocal;
     });
 
-    loginTest.test("Password reset request: Ajax parameters", function () {
+    loginTest.test("Password reset request (local)", function () {
+        var login = cspace.login(".login-container", {baseUrl: "http://foo.com/bar"});
+        jQuery(login.options.selectors.requestReset).click();
+        jqUnit.notVisible("Clicking 'reset password' hides basic login", login.options.selectors.signIn);
+        jqUnit.isVisible("Clicking 'reset password' shows email form", login.options.selectors.enterEmail);
+
+        jQuery(login.options.selectors.email).val("test@collectionspace.org");
+        login.submitEmail();
+        jqUnit.notVisible("On success, after submit email form should be hidden", login.options.selectors.enterEmailForm);
+        jqUnit.isVisible("On success, after submit 'reset request submitted' message should be displayed", login.options.selectors.enterEmailMessage);
+    });
+
+    loginTest.test("Password reset request Ajax parameters", function () {
         var ajaxMock = new jqMock.Mock(jQuery, "ajax");
         // Don't know how jqMock checks functions, so just check the other parameters for now
         var expectedAjaxParams = {
@@ -45,26 +57,42 @@ var loginTester = function(){
         };
         ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams));
 
+        var tempIsLocal = cspace.util.isLocal;
+        cspace.util.isLocal = function () {return false;};
         var login = cspace.login(".login-container", {baseUrl: "http://foo.com/bar"});
-        jQuery(login.options.selectors.requestReset).click();
-        jqUnit.notVisible("Clicking 'reset password' hides basic login", login.options.selectors.signIn);
-        jqUnit.isVisible("Clicking 'reset password' shows email form", login.options.selectors.enterEmail);
-
         jQuery(login.options.selectors.email).val("test@collectionspace.org");
+        login.submitEmail();
+        ajaxMock.verify();
+        ajaxMock.restore();
+    });
+
+    loginTest.test("Password reset request Ajax callback", function () {
+        var tempIsLocal = cspace.util.isLocal;
+        cspace.util.isLocal = function () {return false;};
+        var login = cspace.login(".login-container", {baseUrl: "http://foo.com/bar"});
         var testSuccess = function (data, textStatus, xhr) {
+            jqUnit.assertTrue("Success actually shouldn't happen when testing locally", false);
+            cspace.util.isLocal = tempIsLocal;
             start();
         };
         var testError = function (xhr, textStatus, errorThrown) {
+            jqUnit.assertTrue("Error callback should happen when testing locally", true);
+            cspace.util.isLocal = tempIsLocal;
             start();
         };
-        stop();
-        login.submitPasswordResetRequest(testSuccess, testError);
-        ajaxMock.verify();
-        ajaxMock.restore();
+        login.events.emailSubmitted.addListener(testSuccess);
+        login.events.onError.addListener(testError);
 
+        jQuery(login.options.selectors.email).val("test@collectionspace.org");
+        stop();
+        login.submitEmail();
     });
 };
 
 (function () {
     loginTester();
 }());
+
+
+/*
+*/
