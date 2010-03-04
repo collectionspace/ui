@@ -49,14 +49,49 @@ cspace = cspace || {};
         domBinder.locate("passwordReset").show();
     };
 
-    var showResetRequestSubmittedPage = function (domBinder) {
+    var showEmailSubmittedPage = function (domBinder) {
         domBinder.locate("enterEmailForm").hide();
         domBinder.locate("enterEmailMessage").text("Email sent.");
     };
 
+    var makeRequiredFieldsValidator = function (domBinder, formType, message) {
+        return function (e) {
+            var requiredFields = domBinder.locate(formType+"Required");
+            var missing = false;
+            for (var i = 0; i < requiredFields.length; i++) {
+                if ($(requiredFields[i]).val() === "") {
+                    missing = true;
+                    break;
+                }
+            }
+            if (!missing) {
+                domBinder.locate("warning").hide();
+                return true;
+            } else {
+                domBinder.locate("warning").text(message).show();
+                return false;
+            }
+        };
+    };
+
+    var emailFormValid = function (domBinder, message) {
+        return makeRequiredFieldsValidator(domBinder, "email", message)();      
+    };
+
+    var passwordFormValid = function (domBinder, allRequiredMessage, mustMatchMessage) {
+        if (!makeRequiredFieldsValidator(domBinder, "password", allRequiredMessage)()) {
+            return false;
+        }
+        if (domBinder.locate("newPassword").val() !== domBinder.locate("confirmPassword").val()) {
+            domBinder.locate("warning").text(mustMatchMessage).show();
+            return false;
+        }
+        return true;
+    };
+
     var submitEmail = function (email, url, that) {
         if (cspace.util.isLocal()) {
-            showResetRequestSubmittedPage(that.dom);
+            showEmailSubmittedPage(that.dom);
             that.events.emailSubmitted.fire();
         } else {
             jQuery.ajax({
@@ -70,18 +105,30 @@ cspace = cspace || {};
         }
     };
     
+    var submitNewPassword = function (password, url, that) {
+        if (cspace.util.isLocal()) {
+            showPasswordReset(that.dom);
+            that.events.passwordSubmitted.fire();
+        } else {
+            jQuery.ajax({
+                url: cspace.util.addTrailingSlash(url) + "resetpassword",
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify({"password": password, "token": that.token}),
+                success: that.events.passwordSubmitted.fire,
+                error: that.events.onError.fire
+            });
+        }
+    };
+
     var makeEmailSubmitter = function (that) {
         return function (e) {
-            that.submitEmail(function (data, textStatus) {
-                showResetRequestSubmittedPage(that.dom);
-            }, makeErrorHandler(that.dom, "Unable to submit request"));
-            showResetRequestSubmittedPage(that.dom);
+            that.submitEmail();
         };
     };
 
     var makePasswordSubmitter = function (that) {
         return function (e) {
-            showPasswordReset(that.dom);
             that.submitNewPassword();
         };
     };
@@ -99,6 +146,16 @@ cspace = cspace || {};
         });
         that.locate("submitEmail").click(makeEmailSubmitter(that));
         that.locate("submitNewPassword").click(makePasswordSubmitter(that));
+
+        that.events.emailSubmitted.addListener(function () {
+            showEmailSubmittedPage(that.dom);
+        });
+        that.events.passwordSubmitted.addListener(function () {
+            showPasswordReset(that.dom);
+        });
+        
+        that.locate("loginForm").submit(makeRequiredFieldsValidator(that.dom, "login", that.options.strings.allFieldsRequired));
+        that.locate("resetForm").submit(makeRequiredFieldsValidator(that.dom, "password", that.options.strings.allFieldsRequired));
     };
 
     var setupLogin = function (that) {  
@@ -119,6 +176,7 @@ cspace = cspace || {};
         }
         var resetToken = cspace.util.getUrlParameter("token");
         if (resetToken) {
+            that.token = resetToken;
             showReset(that.dom);
         } else {
             showSignIn(that.dom);
@@ -133,19 +191,17 @@ cspace = cspace || {};
      */
     cspace.login = function (container, options) {
         var that = fluid.initView("cspace.login", container, options);
-        that.model = {
-            userid: "",
-            password: "",
-            email: ""
-        };
 
         that.submitEmail = function () {
-            submitEmail(that.locate("email").val(), that.options.baseUrl, that);
+            if (emailFormValid(that.dom, that.options.strings.emailRequired)) {
+                submitEmail(that.locate("email").val(), that.options.baseUrl, that);
+            }
         };
         
-        that.submitNewPassword = function (successFunction, errorFunction) {
-            // TODO: submit new password to that.options.baseUrl+"resetpassword",
-            // which should log the user in automatically
+        that.submitNewPassword = function () {
+            if (passwordFormValid(that.dom, that.options.strings.allFieldsRequired, that.options.strings.passwordsMustMatch)) {
+                submitNewPassword(that.locate("newPassword").val(), that.options.baseUrl, that);
+            }
         };
 
         setupLogin(that);
@@ -156,6 +212,7 @@ cspace = cspace || {};
         
         events: {
             emailSubmitted: null,
+            passwordSubmitted: null,
             onError: null
         },
     
@@ -166,24 +223,33 @@ cspace = cspace || {};
             password: ".csc-login-password",
             loginButton: ".csc-login-button",
             requestReset: ".csc-login-requestReset",
+            loginRequired: ".csc-login-loginRequired",
 
             enterEmail: ".csc-login-enterEmail",
             enterEmailMessage: ".csc-login-enterEmailMessage",
             enterEmailForm: ".csc-login-enterEmailForm",
             email: ".csc-login-email",
             submitEmail: ".csc-login-submitEmail",
+            emailRequired: ".csc-login-emailRequired",
                         
             resetForm: ".csc-login-resetForm",
             resetRequest: ".csc-login-resetRequest",
             newPassword: ".csc-login-newPassword",
             confirmPassword: ".csc-login-confirmPassword",
             submitNewPassword: ".csc-login-submitNewPassword",
+            passwordRequired: ".csc-login-passwordRequired",
 
             passwordReset: ".csc-login-passwordReset",
 
             warning: ".csc-warning"
         },
-        
+
+        strings: {
+            allFieldsRequired: "All fields must be filled in",
+            emailRequired: "You must enter a valid email",
+            passwordsMustMatch: "Passwords must match"
+        }, 
+       
         baseUrl: "../../chain/"
     });
     
