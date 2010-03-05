@@ -32,6 +32,9 @@ cspace = cspace || {};
                 link.addClass(that.options.styles.current);
             }
         }
+		
+		$("a:first", tabs).addClass(that.options.styles.primary)
+		
         that.locate("tabsContainer").prepend(tabs);
         that.locate("tabsContainer").tabs({
             cache: true,
@@ -79,7 +82,8 @@ cspace = cspace || {};
             listContainer: "secondary-nav-menu",
             list: "menu-record",
             current: "current",
-            inactive: "inactive"
+            inactive: "inactive",
+			primary: "primary"
         },
         mergePolicy: {
             tabList: "replace"
