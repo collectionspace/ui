@@ -30,6 +30,15 @@
 		"postcode1": "CB1 2AZ",
 		"email1": ""
     },
+    "termsUsed": [
+        {
+            "csid": "963.852.741",
+            "number": "Council of Itinerate Musicians",
+            "recordtype": "organization",
+            "relationshiptype": "uses",
+            "sourceFieldName": "group"
+        }
+    ],
     "relations": [
         {
             "csid": "1984.068.0335b",

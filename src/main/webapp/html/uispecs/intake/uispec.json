@@ -203,11 +203,12 @@
             ".csc-related-row:": {
                 "children": [
                     {
-                        ".csc-related-number": {
+                        ".csc-related-summary": {
                             "linktext": "${items.0.number}",
-                            "target": "nameAuthority?csid=${items.0.csid}"
+                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
                          },
-                        ".csc-related-recordtype": "${items.0.recordtype}"
+                        ".csc-related-recordtype": "${items.0.recordtype}",
+                        ".csc-related-field": "${items.0.sourceFieldName}"
                     }
                 ]
                 }

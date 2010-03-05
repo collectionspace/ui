@@ -21,6 +21,7 @@ cspace = cspace || {};
         
         that.integratedAuthorities = fluid.initSubcomponent(that, "recordList", [that.options.selectors.termsUsed,
              {data: that.options.applier.model.termsUsed,
+              recordType: "procedures",
               csid: that.options.applier.model.csid,
               uispec: that.options.uispec.termsUsed}]);
 

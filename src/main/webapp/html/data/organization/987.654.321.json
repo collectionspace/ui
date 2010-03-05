@@ -7,7 +7,7 @@
 		"longName": "Bloggs & Co.",
         "subBodyName": "",
         "nameAdditions": "",
-		"contactName": "Fred Bloggs",
+		"contactName": "urn:cspace:org.collectionspace.demo:personauthority:name(TestPersonAuth):person(Fred Bloggs)'Fred Bloggs'",
         "foundingDate": "",
         "foundingPlace": "Cambridge",
 		"dissolutionDate": "",
@@ -22,6 +22,14 @@
 		"postcode1": "CB1 2AZ",
 		"email1": ""
     },
+    "termsUsed": [
+        {
+            "csid": "123.456.789",
+            "number": "Fred Bloggs",
+            "sourceFieldName": "contactName",
+            "recordtype": "person"
+        }
+    ],
     "relations": [
         {
             "csid": "1984.068.0335b",

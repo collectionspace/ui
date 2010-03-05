@@ -12,6 +12,7 @@
             }
         ],
         "returnDate": "",
+        "currentOwner": "urn:cspace:org.collectionspace.demo:organizationauthority:name(TestOrgAuth):organization:name(Bloggs & Co.)'Bloggs & Co.'",
         "depositor": "Christoph Grissemann",
         "responsibleEntity": "Jorg Kalt",
         "packingNote": "Herring are in a glass tray, with a saran wrap cover",
@@ -22,6 +23,14 @@
         "entryDate": "",
         "donor": "Antonin Svoboda",
     },
+    "termsUsed": [
+        {
+            "csid": "987.654.321",
+            "number": "Bloggs & Co.",
+            "sourceFieldName": "currentOwner",
+            "recordtype": "organization"
+        }
+    ],
     "relations": [
     ]
 }
