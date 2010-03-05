@@ -41,7 +41,7 @@ cspace = cspace || {};
             var dependencies = {
                 titleBar: {
                     funcName: "cspace.titleBar",
-                    args: [".csc-nameAuthority-titleBar-template", tbOpts]
+                    args: [".csc-personAuthority-titleBar-template", tbOpts]
                 },
                 tabs: {
                     funcName: "cspace.tabs",
@@ -49,7 +49,7 @@ cspace = cspace || {};
                 },
                 recordEditor: {
                     funcName: "cspace.recordEditor",
-                    args: [".csc-nameAuthority-template", deOpts]
+                    args: [".csc-personAuthority-template", deOpts]
                 },
                 sidebar: {
                     funcName: "cspace.sidebar",
@@ -75,12 +75,12 @@ cspace = cspace || {};
                     },
                     titleBar: {
                         href: "personTitleBar.html",
-                        templateSelector: ".csc-nameAuthority-titleBar-template",
+                        templateSelector: ".csc-personAuthority-titleBar-template",
                         targetSelector: ".csc-header-container"
                     },
                     dateEntry: {
                         href: "personTemplate.html",
-                        templateSelector: ".csc-nameAuthority-template",
+                        templateSelector: ".csc-personAuthority-template",
                         targetSelector: ".csc-record-edit-container"
                     },
                     sidebar: {
