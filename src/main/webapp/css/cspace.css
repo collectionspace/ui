@@ -24,7 +24,7 @@ input.button.add {padding:0px 4px; font-size:11px; background-color:#fff; color:
 #search-box input.button, #search-box input.button.quick {float:none; padding:2px 12px 1px 12px; margin-left:6px;}
 #create-box input.button, #create-box input.button.quick {float:none; padding:2px 12px;}
 .input-button, input.input-button {background-color:#94BC80; padding: 5px 12px 4px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; margin:0 5px; border:none; float:left;}
-.input-button.quick , .button.quick, .quick-large  {background-color:#fff; padding: 2px 12px 2px 12px; font-weight:bold; color:#93BC7F; cursor:pointer; font-size:13px; 
+.input-button.quick , .button.quick, .quick-large  {background-color:#94BC80; padding: 2px 12px 2px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; 
 	margin:0 5px; border:none; float:left; /**padding:4px 12px 3px 12px;*/}
 .input-button.disabled, .input-button.disabled:hover {background-color:#CDCCCC !important; color:#A0A0A0 !important}
 .quick-large {padding:5px 12px 4px 12px;}
@@ -248,6 +248,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .fl-container-admin-menu ul li.inactive {background-color:#CCC; color:#6E9FCE; border:1px solid #CCC; cursor: default;}
 
 .fl-container-left  .information-group       {padding:0 0 20px 0;}
+.create-new .fl-container-left  .information-group       {padding:0;}
 .fl-container-left  .information-subgroup {padding:10px 0;}
 .fl-container-left  .information-group       .content.main, .information-group       .content.main 	{border-bottom: 1px solid #D2D0D0; border-top: 1px solid #D2D0D0; background-color: #F3F3F3; padding: 12px; /**padding:12px 12px 0 12px;*/ width:auto; }
 .fl-container-left  .information-subgroup .content.main	{border:none; background-color: #D1D2D4; padding: 6px 12px 6px 12px; /**padding:6px 12px 0 12px;*/ width:auto; display:block;}
@@ -351,7 +352,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 
 .overflow-user-list {max-height:300px; overflow-x:hidden; overflow-y:auto; margin-bottom:24px; width:100%;}
 .user-details { border:1px solid #C7CFD4; padding:10px; background-color:#F0F5FA; min-width:364px;}
-.user-details-fields {padding-bottom:10px;}
+.user-details-fields {padding-bottom:0px;}
 .user-details .info-pair {padding-bottom:16px;}
 .user-details .info-pair .label {float:left; width:110px; font-weight:bold; text-align:right; padding:6px 14px 0 0 ;}
 .user-details .info-pair .user-input {float:left; width:230px;}
