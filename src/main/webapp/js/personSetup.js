@@ -15,12 +15,12 @@ cspace = cspace || {};
 
 (function ($) {
 
-    cspace.organizationAuthoritySetup = function () {
+    cspace.personSetup = function () {
 
         var setUpPage = function () {
             var tabOpts = {
                 tabList: [
-                    {name: "Organization Name Authority", target: "#primaryTab"}/*,
+                    {name: "Person Name Authority", target: "#primaryTab"} /*,
                     {name: "Contact Information", target: null}*/
                 ]
             };
@@ -41,7 +41,7 @@ cspace = cspace || {};
             var dependencies = {
                 titleBar: {
                     funcName: "cspace.titleBar",
-                    args: [".csc-organizationAuthority-titleBar-template", tbOpts]
+                    args: [".csc-nameAuthority-titleBar-template", tbOpts]
                 },
                 tabs: {
                     funcName: "cspace.tabs",
@@ -49,7 +49,7 @@ cspace = cspace || {};
                 },
                 recordEditor: {
                     funcName: "cspace.recordEditor",
-                    args: [".csc-organizationAuthority-template", deOpts]
+                    args: [".csc-nameAuthority-template", deOpts]
                 },
                 sidebar: {
                     funcName: "cspace.sidebar",
@@ -59,7 +59,7 @@ cspace = cspace || {};
             var options = {
                 dataContext: {
                     options: {
-                        recordType: "organization-authority"
+                        recordType: "person"
                     }
                 },
                 pageSpec: {
@@ -74,13 +74,13 @@ cspace = cspace || {};
                         targetSelector: ".csc-header-container"
                     },
                     titleBar: {
-                        href: "organizationAuthorityTitleBar.html",
-                        templateSelector: ".csc-organizationAuthority-titleBar-template",
+                        href: "personTitleBar.html",
+                        templateSelector: ".csc-nameAuthority-titleBar-template",
                         targetSelector: ".csc-header-container"
                     },
                     dateEntry: {
-                        href: "organizationAuthorityTemplate.html",
-                        templateSelector: ".csc-organizationAuthority-template",
+                        href: "personTemplate.html",
+                        templateSelector: ".csc-nameAuthority-template",
                         targetSelector: ".csc-record-edit-container"
                     },
                     sidebar: {
@@ -108,7 +108,7 @@ cspace = cspace || {};
 
         if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
             jQuery.ajax({
-                url: "./uispecs/organization-authority/uispec.json",
+                url: "./uispecs/person/uispec.json",
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {
@@ -116,7 +116,7 @@ cspace = cspace || {};
                     setUpPage();
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log("Error fetching organization authority uispec");
+                    console.log("Error fetching person uispec");
                 }
             });
         } else {
