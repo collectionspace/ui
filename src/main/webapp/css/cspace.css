@@ -47,7 +47,10 @@ a.add-link:hover {color:#000; text-decoration:underline;}
 .menu-record a {background:none repeat scroll 0 0 #6F9DCE; color:#fff; font-weight:bold;	padding:0.2em .4em; 
 	text-decoration:none; border:2px solid #6F9DCE; border-bottom:none; *margin-right:2px; /**padding:2px 4px;*/}
 .menu-record a:hover {background:none repeat scroll 0 0 #999; border:2px solid #999;	border-bottom:none;}
-.menu-record a.current, .menu-record li.selected a {background:none repeat scroll 0 0 #FFF; color:#6F9DCE; cursor:default; padding-top:6px; border:2px solid #6F9DCE; border-bottom:none;}
+.menu-record a.current, .menu-record li.selected a { background: no-repeat scroll 0 0 #FFF; color:#6F9DCE; cursor:default; padding-top:6px; border:2px solid #6F9DCE; border-bottom:none; padding-left:10px;}
+
+#secondary-nav-menu .menu-record a.current {background: url("../images/primary.png") no-repeat scroll 0 50% #FFF;}
+
 .menu-record a.disabled {background-color:#999; border:1px solid #999; border-bottom:none; cursor:default;}
 
 .input-button a {text-decoration:none; color:inherit;}
@@ -503,7 +506,7 @@ table .field-cal {width:162px;}
 .no-float {float:none;}
 .no-margin {margin:0;}
 .no-padding {padding:0;}
-.no-cursor a {cursor:default;}
+.no-cursor, .no-cursor a {cursor:default;}
 
 /* disabling/enabling selectors */ /*needs to be consolidated*/
 .disabled {}
