@@ -143,8 +143,8 @@ td textarea {border:none;}
 #secondary-nav.pivot {padding-bottom:0;}
 #secondary-nav.pivot .menu-record {/*display:block;*/ width:100%; font-family:arial,helvetica,sans-serif;}
 #secondary-nav.pivot ul.menu-record {padding-bottom:18px; white-space:nowrap; width:100%;}
-#secondary-nav.pivot ul.menu-record li {display:inline; list-style-type:none; width:50%;}
-#secondary-nav.pivot ul.menu-record li a {wi dth:200px; } /*hack to get two inline displayed tabs at 100% width */
+#secondary-nav.pivot ul.menu-record li {display:inline; list-style-type:none; width:100%;}
+#secondary-nav.pivot ul.menu-record li a {width:100%; } /*hack to get two inline displayed tabs at 100% width */
 
 #secondary-nav-menu .menu-record ul {margin:0; padding:0;}
 #secondary-nav-menu .menu-record li {display:inline;}
@@ -255,12 +255,14 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .fl-container-left  .information-subgroup {padding:10px 0;}
 .fl-container-left  .information-group       .content.main, .information-group       .content.main 	{border-bottom: 1px solid #D2D0D0; border-top: 1px solid #D2D0D0; background-color: #F3F3F3; padding: 12px; /**padding:12px 12px 0 12px;*/ width:auto; }
 .fl-container-left  .information-subgroup .content.main	{border:none; background-color: #D1D2D4; padding: 6px 12px 6px 12px; /**padding:6px 12px 0 12px;*/ width:auto; display:block;}
-.fl-container-left  .information-group       .header.toggle, .header.toggle, .found-records-box.header    {font-size:13px; line-height:13px; background-color:#AAA; cursor:pointer; color:#fff; height:25px; padding-bottom:0; /*background:#AAA url('../images/toggle.png') no-repeat;*/}
+.fl-container-left  .information-group       .header.toggle, .header.toggle, .found-records-box.header, .header.static    {font-size:13px; line-height:13px; background-color:#AAA; cursor:pointer; color:#fff; height:25px; padding-bottom:0; /*background:#AAA url('../images/toggle.png') no-repeat;*/}
 .fl-container-left  .information-group       .header.toggle.active   {background-position:left bottom;}
 .fl-container-left  .information-group       .sub-header 	{font-size:14px; line-height:14px; font-weight:bold; padding-bottom: 15px; color:#666;}
 .fl-container-left  .information-subgroup .header.toggle   {font-size:11px; line-height:11px; background-color:#AAAAAA; color:#000; padding:6px 0 7px 5px; width:auto; height:auto;}
 
 .found-records-box.header {font-size:13px; line-height:13px; background-color:#AAA; cursor:default; color:#fff; padding: 0;}
+.header.static {cursor:default; padding:5px 0 7px 5px; height:auto; width:auto;}
+
 
 .fl-container-left .upper-save {float:right;}
 .fl-container-left .object-entry-outer-border,
@@ -281,10 +283,13 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .info-pair .content,
 .info-pair-date .content,
 .info-pair-select .content {width:100%; float:left; border:none;}
+.info-pair-select .content {padding-bottom:2px;}
 
 .info-pair .content table,
 .info-pair-date .content table,
 .info-pair-select table {width:100%; border-spacing:0; background-color:#FFF; margin-top:0px; border:2px solid #C7CFD4; border-bottom: 1px solid #C7CFD4; padding:0;}
+.info-pair-select table {border-width:1px;}
+
 
 .info-pair .content table table,
 .info-pair-date .content table  table,
@@ -293,8 +298,8 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .info-pair-date .content table,
 .info-pair-select .content table {width:auto;}
 
-.info-pair-select .content tbody td, 
 .info-pair-date .content tbody td {border-bottom:2px solid #C7CFD4;}
+.info-pair-select .content tbody td {border-bottom:1px solid #C7CFD4;}
 
 .info-pair .content thead tr {}
 .info-pair .content thead td {border:1px solid #C7CFD4; background-color:#F8F8F7; color:#3B3B3C; padding: 2px; font-size:11px; line-height: 11px;}
@@ -419,7 +424,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 table.input-date	 	   {padding-left:2px;}
 .input-money-amount	   {width: 120px !important;}
 .input-select		   {width: auto; height:23px;}
-table .input-select         {width: auto; height:19px; /**height:22px;*/ padding-top:0; border:none;}
+table .input-select         {width: 100%; height:19px; /**height:22px;*/ padding-top:0; border:none;}
 .input-textarea		   {/*width: 99.5%;*/ width:100%; height:73px;}
 .input-alpha-login       {width: 120px; height:18px;}
 .input-autocomplete	   {width:auto !important;}
