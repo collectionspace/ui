@@ -124,8 +124,9 @@ cspace = cspace || {};
 
 
         if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
+            var uispecUrl = (cspace.util.isLocal() ? "./uispecs/intake/uispec.json" : "../../chain/intake/uispec");
             jQuery.ajax({
-                url: "./uispecs/intake/uispec.json",
+                url: uispecUrl,
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {

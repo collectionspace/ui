@@ -117,8 +117,9 @@ cspace = cspace || {};
         };
 
         if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
+            var uispecUrl = (cspace.util.isLocal() ? "./uispecs/acquisition/uispec.json" : "../../chain/acquisition/uispec");
             jQuery.ajax({
-                url: "./uispecs/acquisition/uispec.json",
+                url: uispecUrl,
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {

@@ -72,8 +72,9 @@ cspace = cspace || {};
         };
 
         if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
+            var uispecUrl = (cspace.util.isLocal() ? "./uispecs/find-edit/uispec.json" : "../../chain/find-edit/uispec");
             jQuery.ajax({
-                url: "./uispecs/find-edit/uispec.json",
+                url: uispecUrl,
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {

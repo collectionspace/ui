@@ -55,8 +55,9 @@ cspace = cspace || {};
         };
 
         if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
+            var uispecUrl = (cspace.util.isLocal() ? "./uispecs/object-tab/uispec.json" : "../../chain/object-tab/uispec");
             jQuery.ajax({
-                url: "./uispecs/object-tab/uispec.json",
+                url: uispecUrl,
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {
