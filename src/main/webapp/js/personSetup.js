@@ -59,7 +59,8 @@ cspace = cspace || {};
             var options = {
                 dataContext: {
                     options: {
-                        recordType: "person"
+                        recordType: "person",
+                        baseUrl: "../../chain/vocabularies"
                     }
                 },
                 pageSpec: {
