@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid_1_2*/
+/*global jQuery, fluid_1_2, cspace*/
 
 cspace = cspace || {};
 
@@ -22,8 +22,9 @@ cspace = cspace || {};
         
     };
 
+    // operation = one of "create", "delete", "fetch", "update"
     var makeDCErrorHandler = function (that) {
-        return function (operation/*["create", "delete", "fetch", "update"]*/, message) {
+        return function (operation, message) {
             var msgKey = operation + "FailedMessage";
             var msg = that.options.strings[msgKey] + message;
             displayTimestampedMessage(that.dom, msg, "");
@@ -37,28 +38,14 @@ cspace = cspace || {};
     };
 
 	var setupConfirmation = function (that) {
-        var resources = {
-            confirmation: {
-                href: that.options.confirmationTemplateUrl
-            }
+        var confirmationOpts = {
+            action: that.save,
+            actionSuccessEvents: [that.events.afterCreateObjectDataSuccess, that.events.afterUpdateObjectDataSuccess],
+            actionErrorEvents: [that.events.onError]
         };
-        
-        var confirmation = $("<div></div>", that.container[0].ownerDocument)
-            .html(that.options.strings.confirmation)
-            .dialog({
-                autoOpen: false,
-                modal: true,
-                title: that.options.strings.confirmationTitle
-            });
-		
-		confirmation.parent().css("overflow", "visible");
-        
-        fluid.fetchResources(resources, function () {
-            var templates = fluid.parseTemplates(resources, ["confirmation"], {});
-            fluid.reRender(templates, confirmation, {});
-        });
-        
-		$("a:not([href*=#]):not([class*='" + that.options.selectors.confirmationExclusion.substring(1) + "'])").live("click", function (e) {
+        that.confirmation = cspace.confirmation(that.container, confirmationOpts);
+
+        $("a:not([href*=#]):not([class*='" + that.options.selectors.confirmationExclusion.substring(1) + "'])").live("click", function (e) {
             if (that.unsavedChanges) {
                 var href;
                 if (e.target.nodeName === "IMG") {
@@ -67,11 +54,10 @@ cspace = cspace || {};
                 } else {
                     href = e.target.href;
                 }
-                confirmation.dialog("open");
-                cspace.confirmation(confirmation, {model: {href: href}, action: that.save});
+                that.confirmation.open(href);
                 return false;
             }
-        });		
+        }); 
     };
 
     var bindEventHandlers = function (that) {
@@ -101,15 +87,16 @@ cspace = cspace || {};
 
         that.events.pageRendered.addListener(function () {
             that.locate("save").click(that.save);
+            var setUnchanged = function () {
+                that.unsavedChanges = true;
+            };
             for (var selector in that.options.uispec) {
                 if (that.options.uispec.hasOwnProperty(selector)) {
                     if (selector.indexOf(":") !== -1) {
                         selector = selector.substring(0, selector.indexOf(":"));
                     }
                     var el = $(selector);
-                    el.change(function () {
-                        that.unsavedChanges = true;
-                    });
+                    el.change(setUnchanged);
                 }
             }
             that.locate("cancel").click(function () {
@@ -119,7 +106,7 @@ cspace = cspace || {};
         });
 
         that.options.dataContext.events.onError.addListener(makeDCErrorHandler(that));
-   };
+    };
     
     var setupDataEntry = function (that) {
         bindEventHandlers(that);
@@ -216,11 +203,8 @@ cspace = cspace || {};
             fetchFailedMessage: "Error retriving Record: ",
             addRelationsFailedMessage: "Error adding related records: ",
             defaultTermIndicator: " (default)",
-            noDefaultInvitation: "-- Select an item from the list --",
-            confirmation: "You are about to navigate from the current record. Please confirm...",
-            confirmationTitle: "Confirmation."
+            noDefaultInvitation: "-- Select an item from the list --"
         },
-		confirmationTemplateUrl: "../html/Confirmation.html",
         
         // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
         // load it manually via ajax

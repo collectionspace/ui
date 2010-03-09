@@ -8,35 +8,88 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid_1_2, window*/
+/*global jQuery, fluid_1_2, window, cspace*/
 
 cspace = cspace || {};
 
 (function ($, fluid) {
 	
+    var attachActionListeners = function (successEvents, successHandler, errorEvents, errorHandler) {
+        for (var i = 0; i < successEvents.length; i++) {
+            successEvents[i].addListener(successHandler);
+        }
+        for (var j = 0; j < errorEvents.length; j++) {
+            errorEvents[j].addListener(errorHandler);
+        }
+    };
+    var removeActionListeners = function (successEvents, successHandler, errorEvents, errorHandler) {
+        for (var i = 0; i < successEvents.length; i++) {
+            successEvents[i].removeListener(successHandler);
+        }
+        for (var j = 0; j < errorEvents.length; j++) {
+            errorEvents[j].removeListener(errorHandler);
+        }
+    };
+    
 	var bindEvents = function (that) {
-		that.locate("cancel").click(function () {
-            that.container.dialog("close");
+		that.locate("cancel", that.dlg).click(function () {
+            that.close();
         });
-		that.locate("closeButton").click(function () {
-            that.container.dialog("close");
+		that.locate("closeButton", that.dlg).click(function () {
+            that.close();
         });
-        that.locate("proceed").click(function (e) {
-            window.location = that.options.model.href;
+        that.locate("proceed", that.dlg).click(function (e) {
+            that.navigate();
         });
-        that.locate("save").click(function (e) {
+        that.locate("act", that.dlg).click(function (e) {
             that.options.action();
-            window.location = that.options.model.href;
         });
 	};
 	
-	var setup = function (that) {
-		bindEvents(that);
-	};
-	
+    var setupConfirmation = function (that) {
+        var resources = {
+            confirmation: {
+                href: that.options.confirmationTemplateUrl
+            }
+        };
+        
+        var confirmation = $("<div></div>", that.container[0].ownerDocument)
+            .html(that.options.strings.confirmation)
+            .dialog({
+                autoOpen: false,
+                modal: true,
+                title: that.options.strings.confirmationTitle
+            });
+        
+        confirmation.parent().css("overflow", "visible");
+        
+        fluid.fetchResources(resources, function () {
+            var templates = fluid.parseTemplates(resources, ["confirmation"], {});
+            fluid.reRender(templates, confirmation, {});
+            bindEvents(that);
+        });
+
+        return confirmation;
+    };
+
 	cspace.confirmation = function (container, options) {
 		var that = fluid.initView("cspace.confirmation", container, options);
-		setup(that);
+        that.model = {href: "#"};
+
+        that.dlg = setupConfirmation(that);
+        that.navigate = function () {
+            removeActionListeners(that.options.actionSuccessEvents, that.navigate, that.options.actionErrorEvents, that.close);
+            window.location = that.model.href;
+        };
+        that.close = function () {
+            removeActionListeners(that.options.actionSuccessEvents, that.navigate, that.options.actionErrorEvents, that.close);
+            that.dlg.dialog("close");
+        };
+        that.open = function (targetHref) {
+            that.model.href = targetHref;
+            attachActionListeners(that.options.actionSuccessEvents, that.navigate, that.options.actionErrorEvents, that.close);
+            that.dlg.dialog("open");
+        };
 		return that;
 	};
 	
@@ -44,9 +97,14 @@ cspace = cspace || {};
         selectors: {
             cancel: ".csc-confirmationDialogButton-cancel",
             proceed: ".csc-confirmationDialogButton-proceed",
-            save: ".csc-confirmationDialogButton-save",
+            act: ".csc-confirmationDialogButton-save",
 			closeButton: ".csc-confirmationDialog-closeBtn"
-        }
+        },
+        strings: {
+            confirmation: "You are about to navigate from the current record. Please confirm...",
+            confirmationTitle: "Confirmation."
+        },
+        confirmationTemplateUrl: "../html/Confirmation.html"
     });
 	
 })(jQuery, fluid_1_2);
