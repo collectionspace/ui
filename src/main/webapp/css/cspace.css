@@ -277,7 +277,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 
 .info-pair .label,
 .info-pair-date .label,
-.info-pair-select .label {/*width:100%;*/ float:left; padding-bottom:4px; font-weight:bold; color:# 0F75BC; font-size:11px; line-height:11px;}
+.info-pair-select .label {/*width:100%;*/ float:left; padding-bottom:4px; font-weight:bold; color:#333; font-size:11px; line-height:11px;}
 
 .info-pair .content td.label {float:none; padding-bottom:0px; font-weight:normal; font-size:inherit; line-height:inherit;}
 
