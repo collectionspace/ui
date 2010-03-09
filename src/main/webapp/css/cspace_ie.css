@@ -9,7 +9,11 @@ input.savebutton, input.globalSearchButton, input.cancelbutton, input.button, in
 	{height:21px; padding: 1px 12px;}
 
 input.button.add {padding:0 4px; margin:0; height:auto;}
-	
+
+.header-menu-row .inner {margin-bottom:-1px;}
+
+#secondary-nav-menu ul.menu-record {padding-bottom:18px; margin-top:12px;}
+
 .input-button.quick , .button.quick, .quick-large  {height:21px; padding:2px 12px 1px 12px;}
 
 .csc-search-keywords, .csc-search-user {padding:3px 0 0px 2px;}
