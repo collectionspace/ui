@@ -62,13 +62,9 @@ cspace = cspace || {};
     };
 
     var displaySearchResults = function (that, recordType) {
-        var colList = [];
+        var colList = that.options.columnList;
         var results = (that.model.results || []);
-        for (var key in that.model.results[0]) {
-            if (that.model.results[0].hasOwnProperty(key)) {
-                colList.push(key);
-            }
-        }
+
         var rendererCutpoints = [
             {id: "header:", selector: that.options.selectors.resultsHeader},
             {id: "row:", selector: that.options.selectors.resultsRow},
@@ -154,7 +150,12 @@ cspace = cspace || {};
         that.locate("keywords").fluid("activatable", searchSubmitHandler);
 
         that.events.modelChanged.addListener(function () {
-            displaySearchResults(that, that.locate("recordType").val());
+// CSPACE-1139
+            var recordType = that.locate("recordType").val();
+            if (recordType.indexOf("authorities-") === 0) {
+                recordType = recordType.substring(12);
+            }
+            displaySearchResults(that, recordType);
         });
         
         that.events.onError.addListener(function (action, status) {
@@ -202,6 +203,8 @@ cspace = cspace || {};
             onError: null
         },
         
+        columnList: ["number", "summary", "recordtype"],
+
         searchUrlBuilder: defaultSearchUrlBuilder,
 
         resultsPager: {

@@ -1,0 +1,76 @@
+{
+    "results": [
+        {
+            "summary": "Mary Alden",
+            "number": "Mary Alden",
+            "csid": "e4a1d777-9226-4a69-86c0",
+            "displayName": "Mary Alden",
+            "refid": "urn:cspace.org.collectionspace.demo.personauthority:name(cc025527-3f1f-4a21-84fc):person:name(e4a1d777-9226-4a69-86c0)'Mary+Alden'",
+            "recordtype": "person"
+        },
+        {
+            "summary": "Rex Allen",
+            "number": "Rex Allen",
+            "csid": "eeb01f46-2480-458f-821f",
+            "displayName": "Rex Allen",
+            "refid": "urn:cspace.org.collectionspace.demo.personauthority:name(cc025527-3f1f-4a21-84fc):person:name(eeb01f46-2480-458f-821f)'Rex+Allen'",
+            "recordtype": "person"
+        },
+        {
+            "summary": "Fred Allen",
+            "number": "Fred Allen",
+            "csid": "f1cd3109-6f9f-49b1-9117",
+            "displayName": "Fred Allen",
+            "refid": "urn:cspace.org.collectionspace.demo.personauthority:name(cc025527-3f1f-4a21-84fc):person:name(f1cd3109-6f9f-49b1-9117)'Fred+Allen'",
+            "recordtype": "person"
+        },
+        {
+            "summary": "Gerard Alexander",
+            "number": "Gerard Alexander",
+            "csid": "5367ef11-0a48-469a-bc08",
+            "displayName": "Gerard Alexander",
+            "refid": "urn:cspace.org.collectionspace.demo.personauthority:name(cc025527-3f1f-4a21-84fc):person:name(5367ef11-0a48-469a-bc08)'Gerard+Alexander'",
+            "recordtype": "person"
+        },
+        {
+            "summary": "Karen Allen",
+            "number": "Karen Allen",
+            "csid": "53d14f38-33f9-4cea-8532",
+            "displayName": "Karen Allen",
+            "refid": "urn:cspace.org.collectionspace.demo.personauthority:name(cc025527-3f1f-4a21-84fc):person:name(53d14f38-33f9-4cea-8532)'Karen+Allen'",
+            "recordtype": "person"
+        },
+        {
+            "summary": "Phyllis Allen",
+            "number": "Phyllis Allen",
+            "csid": "9aa0721f-d520-44f5-9330",
+            "displayName": "Phyllis Allen",
+            "refid": "urn:cspace.org.collectionspace.demo.personauthority:name(cc025527-3f1f-4a21-84fc):person:name(9aa0721f-d520-44f5-9330)'Phyllis+Allen'",
+            "recordtype": "person"
+        },
+        {
+            "summary": "Elsie Alberts",
+            "number": "Elsie Alberts",
+            "csid": "ba3cf975-755b-4dc7-9b17",
+            "displayName": "Elsie Alberts",
+            "refid": "urn:cspace.org.collectionspace.demo.personauthority:name(cc025527-3f1f-4a21-84fc):person:name(ba3cf975-755b-4dc7-9b17)'Elsie+Alberts'",
+            "recordtype": "person"
+        },
+        {
+            "summary": "Sophie Aldred",
+            "number": "Sophie Aldred",
+            "csid": "f322ff83-914e-4f9f-8490",
+            "displayName": "Sophie Aldred",
+            "refid": "urn:cspace.org.collectionspace.demo.personauthority:name(cc025527-3f1f-4a21-84fc):person:name(f322ff83-914e-4f9f-8490)'Sophie+Aldred'",
+            "recordtype": "person"
+        },
+        {
+            "summary": "Alan Alda",
+            "number": "Alan Alda",
+            "csid": "00f49d87-46d9-467e-8824",
+            "displayName": "Alan Alda",
+            "refid": "urn:cspace.org.collectionspace.demo.personauthority:name(cc025527-3f1f-4a21-84fc):person:name(00f49d87-46d9-467e-8824)'Alan+Alda'",
+            "recordtype": "person"
+        }
+    ]
+}

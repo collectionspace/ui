@@ -19,6 +19,10 @@ cspace = cspace || {};
         var searchOpts = {};
         if (cspace.util.isLocal()) {
             searchOpts.searchUrlBuilder = function (recordType, query) {
+            	// CSPACE-1139
+                if (recordType.indexOf("authorities-") === 0) {
+                    recordType = recordType.substring(12);
+                }
                 var recordTypeParts = (recordType === "collection-object"? [recordType]: recordType.split('-'));        
                 return "./data/" + recordTypeParts.join('/') + "/search/list.json";
             };
