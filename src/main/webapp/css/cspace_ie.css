@@ -24,14 +24,14 @@ input.button.add {padding:0 4px; margin:0; height:auto;}
 
 .header {padding-bottom:3px;}
 
-.fl-container-left  .information-group .content.main, .information-group .content.main {padding:12px 12px 0 12px;}
+.fl-container-left  .information-group .content.main, .information-group .content.main {padding:12px 12px 12px 12px;}
 
-.fl-container-left  .information-subgroup .content.main {padding:6px 12px 0 12px;}
+.fl-container-left  .information-subgroup .content.main {padding:6px 12px 12px 12px;}
 
 table .input-select {height:22px;}
 
 .fl-container-pivot  select.recently-created-list {height:24px;}
 
-.field-cal img {margin-top:2px;}
+.field-cal img {margin-bottom:-3px;}
 
 .viewbutton {margin-top:-24px;}
