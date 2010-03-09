@@ -136,7 +136,7 @@ cspace = cspace || {};
         var renderOpts = {
             cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(selectors, {}),
             model: that.model,
-            debugMode: true,
+            // debugMode: true,
             autoBind: true,
             applier: that.options.applier
         };
