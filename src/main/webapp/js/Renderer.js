@@ -34,7 +34,7 @@ cspace = cspace || {};
                 if ((typeof(val) === "string") && (val.indexOf("${") !== -1)) {
                     return val.substring(val.indexOf("${")+2, val.indexOf("0")-1);
                 }
-                if (typeof(val) === "object") {
+                if (typeof(val) === "object" && typeof(val.length) !== "number") {
                     return findValueBinding(val);
                 }
             }
