@@ -58,7 +58,7 @@ cspace = cspace || {};
             fluid.reRender(templates, confirmation, {});
         });
         
-		$("a:not([href*=#])").live("click", function (e) {
+		$("a:not([href*=#]):not([class*='" + that.options.selectors.confirmationExclusion.substring(1) + "'])").live("click", function (e) {
             if (that.unsavedChanges) {
                 var href;
                 if (e.target.nodeName === "IMG") {
@@ -201,7 +201,8 @@ cspace = cspace || {};
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
             timestamp: ".csc-timestamp",
-            relatedRecords: ".csc-related-records"
+            relatedRecords: ".csc-related-records",
+            confirmationExclusion: ".csc-confirmation-exclusion"
         },
         strings: {
             specFetchError: "I'm sorry, an error has occurred fetching the UISpec: ",
