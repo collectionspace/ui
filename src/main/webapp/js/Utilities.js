@@ -50,4 +50,11 @@ cspace = cspace || {};
         return relationList;     
     };
 
+    cspace.util.displayTimestampedMessage = function (locater, msg, time) {
+        var messageContainer = locater.locate("messageContainer", "body");
+        locater.locate("feedbackMessage", messageContainer).text(msg);
+        locater.locate("timestamp", messageContainer).text(time ? time : "");
+        messageContainer.show();
+    };
+
 })(jQuery, fluid_1_2);

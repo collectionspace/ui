@@ -14,20 +14,12 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var displayTimestampedMessage = function (locater, msg, time) {
-        var messageContainer = locater.locate("messageContainer", "body");
-        locater.locate("feedbackMessage", messageContainer).text(msg);
-        locater.locate("timestamp", messageContainer).text(time);
-        messageContainer.show();
-        
-    };
-
     // operation = one of "create", "delete", "fetch", "update"
     var makeDCErrorHandler = function (that) {
         return function (operation, message) {
             var msgKey = operation + "FailedMessage";
             var msg = that.options.strings[msgKey] + message;
-            displayTimestampedMessage(that.dom, msg, "");
+            cspace.util.displayTimestampedMessage(that.dom, msg, "");
             that.events.onError.fire(operation);
             if (operation === "create") {
                 // This is only temporary until http://issues.collectionspace.org/browse/CSPACE-263
@@ -65,19 +57,19 @@ cspace = cspace || {};
         setupConfirmation(that);
 
         that.events.onSave.addListener(function () {
-            displayTimestampedMessage(that, that.options.strings.savingMessage, "");
+            cspace.util.displayTimestampedMessage(that, that.options.strings.savingMessage, "");
         });
 
         that.options.dataContext.events.afterCreate.addListener(function (data) {
             that.options.applier.requestChange("csid", data.csid);
             that.events.afterCreateObjectDataSuccess.fire(data, that.options.strings.createSuccessfulMessage);
-	        displayTimestampedMessage(that, that.options.strings.createSuccessfulMessage, Date());
+	        cspace.util.displayTimestampedMessage(that, that.options.strings.createSuccessfulMessage, Date());
             that.unsavedChanges = false;
         });
 
         that.options.dataContext.events.afterUpdate.addListener(function (data) {
             that.events.afterUpdateObjectDataSuccess.fire(data, that.options.strings.updateSuccessfulMessage);
-	        displayTimestampedMessage(that, that.options.strings.updateSuccessfulMessage, Date());
+	        cspace.util.displayTimestampedMessage(that, that.options.strings.updateSuccessfulMessage, Date());
             that.unsavedChanges = false;
         });
 

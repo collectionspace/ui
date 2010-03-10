@@ -23,21 +23,15 @@ cspace = cspace || {};
         "collection-object": ["objects"]
     };
 
-    var displayMessage = function (locater, msg) {
-        var messageContainer = locater.locate("messageContainer", "body");
-        locater.locate("feedbackMessage", messageContainer).text(msg);
-        messageContainer.show();
-    };
-
     bindEventHandlers = function (that) {
         that.locate("addButton").live("click", function (e) {
-            if (that.model.csid) {
+            if (that.options.applier.model.csid) {
                 that.locate("messageContainer", "body").hide();                
                 that.locate("recordTypeString", cspace.addDialogInst.dlg).text(that.options.recordType);
                 cspace.addDialogInst.prepareDialog(that.options.recordType);
                 cspace.addDialogInst.dlg.dialog("open");
             } else {
-                displayMessage(that.dom, "Please save the record you are creating before trying to relate other records to it.");
+                cspace.util.displayTimestampedMessage(that.dom, that.options.strings.pleaseSaveFirst);
             }
         });
 
@@ -51,20 +45,15 @@ cspace = cspace || {};
         // workaround for FLUID-3505:
         that.options.applier = options.applier;
 
-        that.model = {
-            csid: that.options.applier.model.csid || null,
-            items: that.options.applier.model.relations || []
-        };
-
         var rlOpts = {
-            data: cspace.util.buildRelationsList(that.model.items, recordsLists[that.options.recordType]),
+            data: cspace.util.buildRelationsList(that.options.applier.model.relations, recordsLists[that.options.recordType]),
             uispec: that.options.uispec
         };
         that.recordList = fluid.initSubcomponent(that, "recordList", [that.container, rlOpts]);
 
         if (!cspace.addDialogInst) {
             var dlgOpts = {
-                currentCSID: that.model.csid,
+                currentCSID: that.options.applier.model.csid,
                 applier: that.options.applier,
                 currentRecordType: that.options.currentRecordType
             };
@@ -82,9 +71,13 @@ cspace = cspace || {};
         selectors: {
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
+            timestamp: ".csc-timestamp",
             listContainer: ".csc-related-records-list",
             addButton: ".csc-add-related-record-button",
             recordTypeString: ".csc-record-type"
+        },
+        strings: {
+            pleaseSaveFirst: "Please save the record you are creating before trying to relate other records to it."
         },
         relationshipsUrl: "../../chain/relationships/"
     });

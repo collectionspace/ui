@@ -14,13 +14,6 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var displayMessage = function (locater, msg) {
-        var messageContainer = locater.locate("messageContainer", "body");
-        locater.locate("feedbackMessage", messageContainer).text(msg);
-        messageContainer.show();
-        
-    };
-
     var hideUserDetails = function (domBinder) {
         domBinder.locate("userDetails").hide();
         domBinder.locate("userDetailsNone").show();
@@ -77,12 +70,12 @@ cspace = cspace || {};
         var required = domBinder.locate("requiredFields");
         for (var i = 0; i < required.length; i++) {
             if (required[i].value === "") {
-                displayMessage(domBinder, "All fields required");
+                cspace.util.displayTimestampedMessage(domBinder, "All fields required");
                 return false;
             }
         }
         if (domBinder.locate("password").val() !== domBinder.locate("passwordConfirm").val()) {
-            displayMessage(domBinder, "Passwords don't match");
+            cspace.util.displayTimestampedMessage(domBinder, "Passwords don't match");
             return false;
         }
         return true;
@@ -171,6 +164,7 @@ cspace = cspace || {};
         selectors: {
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
+            timestamp: ".csc-timestamp",
             userList: ".csc-user-userList",
             csid: ".csc-user-userList-csid",
             userListRow: ".csc-user-userList-row",
