@@ -26,11 +26,11 @@ input.numberPatternChooserButton{
 	margin-top:2px !important;
 }
 table.cs-numberPatternChooser-list thead {
-	border:1px solid #577A98;
+	border:0px solid #577A98;
 }
 table.cs-numberPatternChooser-list thead tr {
-	border-bottom:none;
-	background-color: #577A98;
+	border-bottom:1 px solid ;
+	background-color: #6E9FCE;
 	color:#fff;
 }
 table.cs-numberPatternChooser-list thead th {
@@ -41,7 +41,7 @@ table.cs-numberPatternChooser-list tbody {
 	border:1px solid #CECECE;
 }
 table.cs-numberPatternChooser-list tbody td {
-	border: none;
+	border: none !important;
 	padding: 4px 0 4px 2px;
 }
 tr.csc-numberPatternChooser-patternRow {

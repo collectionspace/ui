@@ -22,7 +22,7 @@ See the COPYING file for details.
   float: left;
   padding: 2px;
   color: #000;
-  background: #c3d9ff;
+  background: #c3d9ff !important;
   cursor: default;
 }
 

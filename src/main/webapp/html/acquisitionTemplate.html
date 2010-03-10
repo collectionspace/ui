@@ -62,7 +62,7 @@
 																<table>
 																	<tbody>
 																		<tr>
-																			<td class="field-cal"><input type="text" class="input-date csc-acquisition-accession-date csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=14 width=14 /></a></td>
+																			<td class="field-cal disabled"><input type="text" class="input-date csc-acquisition-accession-date csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></a></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -88,7 +88,7 @@
 																			<td><input type="text" class="csc-acquisition-authorizer" name="acquisition-authorizer">
                                                                             <div class="csc-acquisition-authorizer-autocomplete"></div>
                                                                             </td>
-																			<td class="field-cal"><input type="text" disabled class="input-date csc-acquisition-authorizer-date csc-calendar-date deactivate"><img src="../images/cal.png" class="csc-calendar-button" alt="calendar"  height=14 width=14 /></td>
+																			<td class="field-cal disabled"><input type="text" disabled class="input-date csc-acquisition-authorizer-date csc-calendar-date deactivate"><img src="../images/cal.png" class="csc-calendar-button" alt="calendar"  height=19 width=18 /></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -105,7 +105,7 @@
 																	<tbody>
 																		<tr>
 																			<!--<td class="table-unselected"></td>-->
-																			<td class="field-cal"><input type="text" class="input-date csc-acquisition-date csc-calendar-date deactivate"><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=14 width=14 /></a></td>
+																			<td class="field-cal disabled"><input type="text" class="input-date csc-acquisition-date csc-calendar-date deactivate"><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></a></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -269,7 +269,7 @@
 												
 												<div class="info-column fl-force-left">
 											
-													<div class="info-pair deactivate">
+													<div class="info-pair">
 														<div class="header">
 															<div class="label">Acquisition Funding</div>
 														</div>
@@ -277,7 +277,8 @@
 															<table>
 																<thead>
 																	<tr>
-																		<td colspan="2">Acquisition Funding</td>
+																		<td>Denomination</td>
+																		<td>Value</td>
 																		<td>Source</td>
 																		<td>Provisos</td>
 																	</tr>
@@ -285,12 +286,12 @@
 																	
 																<tbody>
 																	<tr>
-																		<td sytle="width:180px;"><input type="text" disabled=disabled class="input-money-type csc-acquisition-acquisition-funding-denomination disabled"></td>
-																		<td><input type="text" disabled=disabled class="input-numeric-medium csc-acquisition-acquisition-funding-value disabled"></td>
-																		<td><input type="text" disabled=disabled class="csc-acquisition-acquisition-funding-source disabled">
+																		<td><input type="text" class="input-money-type csc-acquisition-acquisition-funding-denomination"></td>
+																		<td><input type="text"  class="input-numeric-medium csc-acquisition-acquisition-funding-value"></td>
+																		<td><input type="text"  class="csc-acquisition-acquisition-funding-source">
                                                                             <div class="csc-acquisition-acquisition-funding-source-autocomplete"></div>
                                                                         </td>
-																		<td><input type="text" disabled=disabled class="csc-acquisition-acquisition-funding-provisos disabled"></td>
+																		<td><input type="text"  class="csc-acquisition-acquisition-funding-provisos"></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -306,7 +307,7 @@
 									
 									<div class="fl-container-flex fl-fix information-group">
 									
-										<div class="info-column deactivate">	
+										<div class="info-column ">	
 								
 											<!-- Information-block header -->
 											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-collection-information'); return false;">
@@ -315,12 +316,12 @@
 											</div>
 											
 											<!-- Information-block content block -->
-											<div class="fl-container-flex fl-fix content main disabled" id="toggle-object-collection-information">
+											<div class="fl-container-flex fl-fix content main " id="toggle-object-collection-information">
 												<!-- The information-block is further broken down into two columns of equal size: left and right -->
 												
 												<!-- one row column -->
 												<div class="info-column fl-force-left">
-													<div class="info-column2-50 fl-force-left deactivate">
+													<div class="info-column2-50 fl-force-left ">
 														<div class="info-pair-date">
 															<div class="header">
 																<div class="label">Field Collection Date</div>
@@ -330,7 +331,7 @@
 																	<tbody>
 																		<tr>
 																			<!--<td class="table-unselected"></td>-->
-																			<td class="field-cal"><input type="text" disabled class="input-date csc-object-collection-field-collection-date disabled"><img src="../images/cal.png" alt="calendar"  height=14 width=14 /></td>
+																			<td class="field-cal disabled"><input type="text" class="input-date csc-object-collection-field-collection-date csc-calendar-date deactivate" disabled=disabled><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -346,7 +347,7 @@
 																	<tbody>
 																		<tr>
 																			<!--<td class="table-unselected"></td>-->
-																			<td><input type="text" disabled=disabled class="csc-object-collection-field-collection-event-name disabled" /></td>
+																			<td><input type="text" class="csc-object-collection-field-collection-event-name " /></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -355,7 +356,7 @@
 													</div>
 												
 												
-													<div class="info-column2-50 fl-force-right deactivate">
+													<div class="info-column2-50 fl-force-right">
 														<div class="info-pair">
 															<div class="header">
 																<div class="label">Field Collection Number</div>
@@ -365,7 +366,7 @@
 																	<tbody>
 																		<tr>
 																			<!--<td class="table-unselected"></td>-->
-																			<td><input type="text" disabled=disabled class="input-numeric csc-object-collection-field-collection-number disabled" /></td>
+																			<td><input type="text" class="input-numeric csc-object-collection-field-collection-number " /></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -381,7 +382,7 @@
 																	<tbody>
 																		<tr>
 																			<!--<td class="table-unselected"></td>-->
-																			<td><input type="text" disabled=disabled class="csc-object-collection-field-collection-collector disabled" /></td>
+																			<td><input type="text"class="csc-object-collection-field-collection-collector " /></td>
 																		</tr>
 																	</tbody>
 																</table>
