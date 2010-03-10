@@ -17,7 +17,7 @@ input.button.add {padding:0 4px; margin:0; height:auto;}
 #secondary-nav-menu ul.menu-record {margin-top:10px;}
 #secondary-nav.pivot ul.menu-record {margin-top:10px;}
 
-li .flc-pager-pageLink {margin-top:-3px;}
+li .flc-pager-pageLink {margin-top:-1px;}
 
 .input-button.quick , .button.quick, .quick-large  {height:21px; padding:2px 12px 1px 12px;}
 

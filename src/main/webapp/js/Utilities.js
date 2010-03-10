@@ -57,4 +57,15 @@ cspace = cspace || {};
         messageContainer.show();
     };
 
+	cspace.util.setZIndex = function() {
+		if ($.browser.msie) {
+		   var zIndexNumber = 999;
+		   $("div").each(function() {
+				   $(this).css('zIndex', zIndexNumber);
+				   zIndexNumber -= 1;
+		   });
+		}
+	};
+	
+	
 })(jQuery, fluid_1_2);

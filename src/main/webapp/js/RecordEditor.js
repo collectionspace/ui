@@ -95,6 +95,7 @@ cspace = cspace || {};
                 that.locate("messageContainer", "body").hide();
                 that.events.onCancel.fire();
             });
+			cspace.util.setZIndex();
         });
 
         that.options.dataContext.events.onError.addListener(makeDCErrorHandler(that));

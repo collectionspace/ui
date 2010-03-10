@@ -1,9 +1,9 @@
 .ui-dialog {
-	min-width:350px !important;
+	min-width:450px !important;
 	*width:auto;
 }
 .ui-dialog.cs-search-dialog {
-	min-width:600px !important;
+	min-width:800px !important;
 }
 
 .cs-confirmationDialog {
