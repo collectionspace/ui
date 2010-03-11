@@ -39,7 +39,6 @@ cspace = cspace || {};
                 type: "POST",
                 data: JSON.stringify({fields: {displayName: newDisplayName}}),
                 success: function (data) {
-                    console.log("success posting new term");
                     cspace.autocomplete.addConfirmDlg.hide();
                 },
                 error: function () {
@@ -49,13 +48,17 @@ cspace = cspace || {};
         };
     };
 
-    var addNewTerm = function (newDisplayName, vocabUrl) {
+    var addNewTerm = function () {
         return function () {
+            if (cspace.util.isLocal()) {
+                cspace.autocomplete.addConfirmDlg.hide();
+                return;
+            }
             $.ajax({
-                url: vocabUrl,
+                url: cspace.autocomplete.addConfirmDlg.vocabUrl,
                 dataType: "json",
                 type: "GET",
-                success: postNewTerm(newDisplayName),
+                success: postNewTerm(cspace.autocomplete.addConfirmDlg.newDisplayName),
                 error: function () {
                     console.log("error getting new term url");
                 }
@@ -65,16 +68,14 @@ cspace = cspace || {};
 
     var clearNewTerm = function (input) {
         return function () {
-var foo = input;
-            input.val("");
+            cspace.autocomplete.addConfirmDlg.fieldToClear.val("");
             cspace.autocomplete.addConfirmDlg.hide();
         };
     };
 
     var showConfirmation = function (newTerm, vocabUrl, field, domBinder) {
         domBinder.locate("newTerm", cspace.autocomplete.addConfirmDlg).text(newTerm);
-        domBinder.locate("clearButton", cspace.autocomplete.addConfirmDlg).click(clearNewTerm($(".ui-autocomplete-input", field.parent())));
-        domBinder.locate("addButton", cspace.autocomplete.addConfirmDlg).click(addNewTerm(newTerm, vocabUrl));
+        cspace.autocomplete.addConfirmDlg.newDisplayName = newTerm;
         cspace.autocomplete.addConfirmDlg.show();
     };
 
@@ -90,6 +91,11 @@ var foo = input;
             fluid.fetchResources(resources, function () {
                 cspace.autocomplete.addConfirmDlg = $(resources.addConfirm.resourceText, that.container[0].ownerDocument);
                 cspace.autocomplete.addConfirmDlg.hide();
+                cspace.autocomplete.addConfirmDlg.vocabUrl = that.options.vocabUrl;
+                cspace.autocomplete.addConfirmDlg.newDisplayName = "";
+                cspace.autocomplete.addConfirmDlg.fieldToClear = $(".ui-autocomplete-input", that.container.parent());
+                that.locate("clearButton", cspace.autocomplete.addConfirmDlg).click(clearNewTerm());
+                that.locate("addButton", cspace.autocomplete.addConfirmDlg).click(addNewTerm());
                 cspace.autocomplete.addConfirmDlg.blur(clearNewTerm($(".ui-autocomplete-input", that.container.parent())));
                 $("#primaryTab").prepend(cspace.autocomplete.addConfirmDlg);
             });
@@ -108,7 +114,6 @@ var foo = input;
                 url: that.options.queryUrl + "?q=" + request.term,
                 dataType: "text",
                 success: function(data){
-                    console.log("autocompleteCallback's success handler");
                     var dataArray;
                     if (data === "") {
                         showConfirmation(request.term, that.options.vocabUrl, that.container, that.dom);
@@ -120,9 +125,8 @@ var foo = input;
                     }
                 },
                 error: function(){
-                    console.log("autocompleteCallback's error handler");
                     if (cspace.util.isLocal()) {
-                        showConfirmation(request.term, that.container, that.dom);
+                        showConfirmation(request.term, "", that.container, that.dom);
                     }
                 }
             });
