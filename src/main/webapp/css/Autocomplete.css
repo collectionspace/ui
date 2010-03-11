@@ -86,9 +86,19 @@
 }
 
 .cs-autocomplete-addConfirmation {
-    width:400px;
+    width:auto;
     float:left; 
-    width:100%;
+    border:2px solid #C7CFD4;
     position:absolute;
-    z-index:999 !important;
+    z-index:9999 !important;
+	background-color:#fff;
+	margin:6px 0 0 -2px;
+	max-width:100%;
+	overflow:auto;
 }
+.cs-autocomplete-addConfirmation .inner {padding:5px 10px 10px 10px;}
+.cs-autocomplete-addConfirmation  .dialog  {text-align:center; font-style:italic; color:#6E6E6E; padding-bottom:15px;}
+.cs-autocomplete-addConfirmation  .content {color:#000; padding-bottom:15px; float:none;}
+.cs-autocomplete-addConfirmation  .pad-right {padding-right:10px;}
+
+
