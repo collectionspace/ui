@@ -31,15 +31,18 @@ cspace = cspace || {};
         }
     };
 
-    var postNewTerm = function (newDisplayName) {
+    var postNewTerm = function () {
         return function (data) {
             $.ajax({
                 url: "../../chain" + data.url,
                 dataType: "json",
                 type: "POST",
-                data: JSON.stringify({fields: {displayName: newDisplayName}}),
+                data: JSON.stringify({fields: {displayName: cspace.autocomplete.addConfirmDlg.newDisplayName}}),
                 success: function (data) {
                     cspace.autocomplete.addConfirmDlg.hide();
+                    // TODO: this needs to be set to the URN, not the displayName
+                    cspace.autocomplete.addConfirmDlg.field.val(cspace.autocomplete.addConfirmDlg.newDisplayName);
+                    cspace.autocomplete.addConfirmDlg.field.change();
                 },
                 error: function () {
                     console.log("error posting new term");
@@ -58,7 +61,7 @@ cspace = cspace || {};
                 url: cspace.autocomplete.addConfirmDlg.vocabUrl,
                 dataType: "json",
                 type: "GET",
-                success: postNewTerm(cspace.autocomplete.addConfirmDlg.newDisplayName),
+                success: postNewTerm(),
                 error: function () {
                     console.log("error getting new term url");
                 }
@@ -76,6 +79,7 @@ cspace = cspace || {};
     var showConfirmation = function (newTerm, field, domBinder) {
         domBinder.locate("newTerm", cspace.autocomplete.addConfirmDlg).text(newTerm);
         cspace.autocomplete.addConfirmDlg.newDisplayName = newTerm;
+        cspace.autocomplete.addConfirmDlg.field = field;
         var autocompleteInput = $(".ui-autocomplete-input", field.parent());
         cspace.autocomplete.addConfirmDlg.fieldToClear = autocompleteInput;
         autocompleteInput.after(cspace.autocomplete.addConfirmDlg);
@@ -100,8 +104,6 @@ cspace = cspace || {};
 
                 that.locate("clearButton", cspace.autocomplete.addConfirmDlg).click(clearNewTerm());
                 that.locate("addButton", cspace.autocomplete.addConfirmDlg).click(addNewTerm());
-
-//                $("#primaryTab").prepend(cspace.autocomplete.addConfirmDlg);
             });
         }
     };
@@ -197,9 +199,6 @@ cspace = cspace || {};
             }
         });
         setUpConfirmation(that);
-    $("a:not([href])").live("click", function () {
-        console.log(">>>>>>>>>> clicked!!!!");
-    }); 
     };
 
 
