@@ -29,15 +29,8 @@ cspace = cspace || {};
         };
     };
 
-	var setupConfirmation = function (that) {
-        var confirmationOpts = {
-            action: that.save,
-            actionSuccessEvents: [that.events.afterCreateObjectDataSuccess, that.events.afterUpdateObjectDataSuccess],
-            actionErrorEvents: [that.events.onError]
-        };
-        that.confirmation = cspace.confirmation(that.container, confirmationOpts);
-
-        $("a:not([href*=#]):not([class*='" + that.options.selectors.confirmationExclusion.substring(1) + "'])").live("click", function (e) {
+    var makeShowConfirmation = function (that) {
+        return function (e) {
             if (that.unsavedChanges) {
                 var href;
                 if (e.target.nodeName === "IMG") {
@@ -49,7 +42,19 @@ cspace = cspace || {};
                 that.confirmation.open(href);
                 return false;
             }
-        }); 
+        };
+    };
+
+	var setupConfirmation = function (that) {
+        var confirmationOpts = {
+            action: that.save,
+            actionSuccessEvents: [that.events.afterCreateObjectDataSuccess, that.events.afterUpdateObjectDataSuccess],
+            actionErrorEvents: [that.events.onError]
+        };
+        that.confirmation = cspace.confirmation(that.container, confirmationOpts);
+
+        var showConf = makeShowConfirmation(that);
+        $("a:not([href*=#]):not([class*='" + that.options.selectors.confirmationExclusion.substring(1) + "']):not(.ui-autocomplete a)").live("click", showConf); 
     };
 
     var bindEventHandlers = function (that) {
