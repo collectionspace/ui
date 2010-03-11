@@ -73,9 +73,12 @@ cspace = cspace || {};
         };
     };
 
-    var showConfirmation = function (newTerm, vocabUrl, field, domBinder) {
+    var showConfirmation = function (newTerm, field, domBinder) {
         domBinder.locate("newTerm", cspace.autocomplete.addConfirmDlg).text(newTerm);
         cspace.autocomplete.addConfirmDlg.newDisplayName = newTerm;
+        var autocompleteInput = $(".ui-autocomplete-input", field.parent());
+        cspace.autocomplete.addConfirmDlg.fieldToClear = autocompleteInput;
+        autocompleteInput.after(cspace.autocomplete.addConfirmDlg);
         cspace.autocomplete.addConfirmDlg.show();
     };
 
@@ -91,13 +94,14 @@ cspace = cspace || {};
             fluid.fetchResources(resources, function () {
                 cspace.autocomplete.addConfirmDlg = $(resources.addConfirm.resourceText, that.container[0].ownerDocument);
                 cspace.autocomplete.addConfirmDlg.hide();
+
                 cspace.autocomplete.addConfirmDlg.vocabUrl = that.options.vocabUrl;
                 cspace.autocomplete.addConfirmDlg.newDisplayName = "";
-                cspace.autocomplete.addConfirmDlg.fieldToClear = $(".ui-autocomplete-input", that.container.parent());
+
                 that.locate("clearButton", cspace.autocomplete.addConfirmDlg).click(clearNewTerm());
                 that.locate("addButton", cspace.autocomplete.addConfirmDlg).click(addNewTerm());
-                cspace.autocomplete.addConfirmDlg.blur(clearNewTerm($(".ui-autocomplete-input", that.container.parent())));
-                $("#primaryTab").prepend(cspace.autocomplete.addConfirmDlg);
+
+//                $("#primaryTab").prepend(cspace.autocomplete.addConfirmDlg);
             });
         }
     };
@@ -116,7 +120,7 @@ cspace = cspace || {};
                 success: function(data){
                     var dataArray;
                     if (data === "") {
-                        showConfirmation(request.term, that.options.vocabUrl, that.container, that.dom);
+                        showConfirmation(request.term, that.container, that.dom);
                     } else {
                         cspace.autocomplete.addConfirmDlg.hide();
                         var newdata = "[" + data.replace(/}\s*{/g, "},{") + "]";
@@ -155,7 +159,11 @@ cspace = cspace || {};
         var jqacopts = {
             minLength: that.options.minChars,
             delay: that.options.delay,
-            source: makeAutocompleteCallback(that)
+            source: makeAutocompleteCallback(that),
+            select: function(event, ui) {
+                input.val(ui.item.urn);
+                input.change();
+            }
         };
         autoCompleteInput.autocomplete(jqacopts).autocomplete(
      /*   "result", function (e, item) {
@@ -184,6 +192,9 @@ cspace = cspace || {};
             }
         });
         setUpConfirmation(that);
+    $("a:not([href])").live("click", function () {
+        console.log(">>>>>>>>>> clicked!!!!");
+    }); 
     };
 
 
