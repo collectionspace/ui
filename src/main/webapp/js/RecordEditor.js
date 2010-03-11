@@ -39,7 +39,6 @@ cspace = cspace || {};
                 } else {
                     href = e.target.href;
                 }
-console.log("confirmation: href="+href);
                 that.confirmation.open(href);
                 return false;
             }
@@ -55,7 +54,7 @@ console.log("confirmation: href="+href);
         that.confirmation = cspace.confirmation(that.container, confirmationOpts);
 
         var showConf = makeShowConfirmation(that);
-        $("a:not([href*=#]):not([class*='" + that.options.selectors.confirmationExclusion.substring(1) + "']):not(.ui autocomplete a)").live("click", showConf); 
+        $("a:not([href*=#]):not([class*='" + that.options.selectors.confirmationExclusion.substring(1) + "']):not(.ui-autocomplete a)").live("click", showConf); 
     };
 
     var bindEventHandlers = function (that) {
