@@ -120,7 +120,7 @@ cspace = cspace || {};
                 success: function(data){
                     var dataArray;
                     if (data === "") {
-                        showConfirmation(request.term, that.container, that.dom);
+                            showConfirmation(request.term, that.container, that.dom);
                     } else {
                         cspace.autocomplete.addConfirmDlg.hide();
                         var newdata = "[" + data.replace(/}\s*{/g, "},{") + "]";
@@ -130,7 +130,12 @@ cspace = cspace || {};
                 },
                 error: function(){
                     if (cspace.util.isLocal()) {
-                        showConfirmation(request.term, "", that.container, that.dom);
+                        if (request.term === "all") {
+                            testdata = ["Fred Allen", "Phyllis Allen", "Karen Allen", "Rex Allen"];
+                            callback(testdata);
+                        } else {
+                            showConfirmation(request.term, that.container, that.dom);
+                        }
                     }
                 }
             });
