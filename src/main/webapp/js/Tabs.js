@@ -19,9 +19,9 @@ cspace = cspace || {};
         tabs.addClass(that.options.styles.list);
         for (var i = 0; i < that.options.tabList.length; i++) {
             var tabspec = that.options.tabList[i];
-            var tab = $("<li></li>", tabs);
+            var tab = $("<li></li>");
             tabs.append(tab);
-            var link = $("<a>" + tabspec.name + "</a>", tab);
+            var link = $("<a>" + tabspec.name + "</a>");
             tab.prepend(link);
             if (tabspec.target) {
                 link.attr("href", tabspec.target);
@@ -33,7 +33,7 @@ cspace = cspace || {};
             }
         }
 		
-		$("a:first", tabs).addClass(that.options.styles.primary)
+		$("a:first", tabs).addClass(that.options.styles.primary);
 		
         that.locate("tabsContainer").prepend(tabs);
         that.locate("tabsContainer").tabs({

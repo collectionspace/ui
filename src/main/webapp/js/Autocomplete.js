@@ -31,6 +31,81 @@ cspace = cspace || {};
         }
     };
 
+    var addNewTermToAuthority = function (newDisplayName) {
+        $.ajax({
+            url: "../../chain/vocabularies/person",
+            dataType: "json",
+            type: "POST",
+            data: JSON.stringify({fields: {displayName: newDisplayName}}),
+            success: function () {
+                console.log("success adding new term");
+            },
+            error: function () {
+                console.log("error adding new term");
+            }
+        });
+    };
+
+    var showConfirmation = function (newTerm) {
+        that.locate("newTerm", cspace.autocomplete.addConfirmDlg).text(newTerm);
+    };
+
+    var addNewTerm = function () {
+        
+    };
+
+    var clearNewTerm = function () {
+        
+    };
+
+    var setUpConfirmation = function (that) {
+        if (!cspace.autocomplete.addConfirmDlg) {
+            var resources = {
+                addConfirm: {
+                    href: that.options.addConfirmationTemplate
+                }
+            };
+            
+            fluid.fetchResources(resources, function () {
+                cspace.autocomplete.addConfirmDlg = $(resources.addConfirm.resourceText, that.container[0].ownerDocument);
+                that.locate("clearButton", cspace.autocomplete.addConfirmDlg).click(clearNewTerm);
+                that.locate("addButton", cspace.autocomplete.addConfirmDlg).click(addNewTerm);
+          //      cspace.autocomplete.addConfirmDlg.hide();
+                that.container.parent().append(cspace.autocomplete.addConfirmDlg);
+            });
+        }
+    };
+
+    /*
+     * request: object with a single property called "term", which refers to the value currently in the text input.
+     * callback: expects a single argument to contain the data to suggest to the user.
+     *           This data should be filtered based on the provided term, and can be in any of the formats described 
+     *            for simple local data (String-Array or Object-Array with label/value/both properties).
+     */
+    var makeAutocompleteCallback = function (that) {
+        return function(request, callback){
+            $.ajax({
+                url: that.options.url + "?q=" + request.term,
+                dataType: "text",
+                success: function(data){
+                    var dataArray;
+                    if (data === "") {
+var dialog = $("<div style=\"float:left;position:absolute;\">Foofer!!!</div>");
+$(".ui-autocomplete-input").after(dialog);
+//                        addNewTermToAuthority(request.term);
+                    } else {
+                        var newdata = "[" + data.replace(/}\s*{/g, "},{") + "]";
+                        dataArray = JSON.parse(newdata);
+                        callback(dataArray);
+                    }
+                },
+                error: function(){
+                    console.log("autocompleteCallback's error handler");
+                }
+            });
+        };
+    };
+
     var setupAutocomplete = function (that) {
         var opts = that.options;
 
@@ -50,7 +125,13 @@ cspace = cspace || {};
         autoCompleteInput.insertAfter(input);
         input.hide();
 
-        autoCompleteInput.autocomplete(opts).autocomplete("result", function (e, item) {
+        var jqacopts = {
+            minLength: that.options.minChars,
+            delay: that.options.delay,
+            source: makeAutocompleteCallback(that)
+        };
+        autoCompleteInput.autocomplete(jqacopts).autocomplete(
+     /*   "result", function (e, item) {
             if (item) {
                 if (cspace.util.isLocal()) {
                     input.val(item.urn);
@@ -59,7 +140,8 @@ cspace = cspace || {};
                 }
                 input.change();
             }
-        });
+        } */
+        );
 
         if (input.val()) {
             var val = input.val();
@@ -74,6 +156,7 @@ cspace = cspace || {};
                 input.change();
             }
         });
+        setUpConfirmation(that);
     };
 
 
@@ -113,7 +196,14 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.autocomplete", {
+        selectors: {
+            newTerm: ".csc-autocomplete-newTerm",
+            clearButton: ".csc-autcomplete-addClear",
+            addButton: ".csc-autcomplete-addConfirm"
+        },
+
         minChars: 3,
+        delay: 500,
         matchContains: true,
 // MustMatch true results in sending the result back to the server again. This
 // ends up not matching (because it's two words, I think) and so clearing the field.
@@ -123,9 +213,12 @@ cspace = cspace || {};
         autoFill: false,
         highlight: false,
 
+        addConfirmationTemplate: "../html/AutocompleteAddConfirmation.html",
+        
         formatItem: cspace.jqueryAutocompleteFormatItem,
         formatMatch: cspace.jqueryAutocompleteFormatMatch,
         formatResult: cspace.jqueryAutocompleteFormatResult
+        
         
     });
 
