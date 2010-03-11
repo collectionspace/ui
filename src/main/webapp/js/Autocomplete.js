@@ -31,23 +31,36 @@ cspace = cspace || {};
         }
     };
 
-    var addNewTermToAuthority = function (newDisplayName) {
-        $.ajax({
-            url: "../../chain/vocabularies/person",
-            dataType: "json",
-            type: "POST",
-            data: JSON.stringify({fields: {displayName: newDisplayName}}),
-            success: function () {
-                console.log("success adding new term");
-            },
-            error: function () {
-                console.log("error adding new term");
-            }
-        });
+    var postNewTerm = function (newDisplayName) {
+        return function (data) {
+            $.ajax({
+                url: "../../chain" + data.url,
+                dataType: "json",
+                type: "POST",
+                data: JSON.stringify({fields: {displayName: newDisplayName}}),
+                success: function (data) {
+                    console.log("success posting new term");
+                    cspace.autocomplete.addConfirmDlg.hide();
+                },
+                error: function () {
+                    console.log("error posting new term");
+                }
+            });
+        };
     };
 
-    var addNewTerm = function () {
-        
+    var addNewTerm = function (newDisplayName, vocabUrl) {
+        return function () {
+            $.ajax({
+                url: vocabUrl,
+                dataType: "json",
+                type: "GET",
+                success: postNewTerm(newDisplayName),
+                error: function () {
+                    console.log("error getting new term url");
+                }
+            });
+        };
     };
 
     var clearNewTerm = function (input) {
@@ -58,10 +71,10 @@ var foo = input;
         };
     };
 
-    var showConfirmation = function (newTerm, field, domBinder) {
+    var showConfirmation = function (newTerm, vocabUrl, field, domBinder) {
         domBinder.locate("newTerm", cspace.autocomplete.addConfirmDlg).text(newTerm);
         domBinder.locate("clearButton", cspace.autocomplete.addConfirmDlg).click(clearNewTerm($(".ui-autocomplete-input", field.parent())));
-        domBinder.locate("addButton", cspace.autocomplete.addConfirmDlg).click(addNewTerm);
+        domBinder.locate("addButton", cspace.autocomplete.addConfirmDlg).click(addNewTerm(newTerm, vocabUrl));
         cspace.autocomplete.addConfirmDlg.show();
     };
 
@@ -92,13 +105,13 @@ var foo = input;
     var makeAutocompleteCallback = function (that) {
         return function(request, callback){
             $.ajax({
-                url: that.options.url + "?q=" + request.term,
+                url: that.options.queryUrl + "?q=" + request.term,
                 dataType: "text",
                 success: function(data){
                     console.log("autocompleteCallback's success handler");
                     var dataArray;
                     if (data === "") {
-                        showConfirmation(request.term, that.container, that.dom);
+                        showConfirmation(request.term, that.options.vocabUrl, that.container, that.dom);
                     } else {
                         cspace.autocomplete.addConfirmDlg.hide();
                         var newdata = "[" + data.replace(/}\s*{/g, "},{") + "]";
@@ -121,10 +134,10 @@ var foo = input;
 
         if (cspace.util.isLocal()) {
             opts.data = testData;
-            opts.url = null;
+            opts.queryUrl = null;
         }
         else if (that.options.url) {
-            opts.url = that.options.url;
+            opts.url = that.options.queryUrl;
         }
         else if (that.options.data) {
             opts.data = that.options.data;
