@@ -46,20 +46,28 @@ cspace = cspace || {};
         });
     };
 
-    var showConfirmation = function (newTerm) {
-        that.locate("newTerm", cspace.autocomplete.addConfirmDlg).text(newTerm);
-    };
-
     var addNewTerm = function () {
         
     };
 
-    var clearNewTerm = function () {
-        
+    var clearNewTerm = function (input) {
+        return function () {
+var foo = input;
+            input.val("");
+            cspace.autocomplete.addConfirmDlg.hide();
+        };
+    };
+
+    var showConfirmation = function (newTerm, field, domBinder) {
+        domBinder.locate("newTerm", cspace.autocomplete.addConfirmDlg).text(newTerm);
+        domBinder.locate("clearButton", cspace.autocomplete.addConfirmDlg).click(clearNewTerm($(".ui-autocomplete-input", field.parent())));
+        domBinder.locate("addButton", cspace.autocomplete.addConfirmDlg).click(addNewTerm);
+        cspace.autocomplete.addConfirmDlg.show();
     };
 
     var setUpConfirmation = function (that) {
         if (!cspace.autocomplete.addConfirmDlg) {
+            cspace.autocomplete.addConfirmDlg = "temp"; // to ensure that only one is created
             var resources = {
                 addConfirm: {
                     href: that.options.addConfirmationTemplate
@@ -68,10 +76,9 @@ cspace = cspace || {};
             
             fluid.fetchResources(resources, function () {
                 cspace.autocomplete.addConfirmDlg = $(resources.addConfirm.resourceText, that.container[0].ownerDocument);
-                that.locate("clearButton", cspace.autocomplete.addConfirmDlg).click(clearNewTerm);
-                that.locate("addButton", cspace.autocomplete.addConfirmDlg).click(addNewTerm);
-          //      cspace.autocomplete.addConfirmDlg.hide();
-                that.container.parent().append(cspace.autocomplete.addConfirmDlg);
+                cspace.autocomplete.addConfirmDlg.hide();
+                cspace.autocomplete.addConfirmDlg.blur(clearNewTerm($(".ui-autocomplete-input", that.container.parent())));
+                $("#primaryTab").prepend(cspace.autocomplete.addConfirmDlg);
             });
         }
     };
@@ -88,12 +95,12 @@ cspace = cspace || {};
                 url: that.options.url + "?q=" + request.term,
                 dataType: "text",
                 success: function(data){
+                    console.log("autocompleteCallback's success handler");
                     var dataArray;
                     if (data === "") {
-var dialog = $("<div style=\"float:left;position:absolute;\">Foofer!!!</div>");
-$(".ui-autocomplete-input").after(dialog);
-//                        addNewTermToAuthority(request.term);
+                        showConfirmation(request.term, that.container, that.dom);
                     } else {
+                        cspace.autocomplete.addConfirmDlg.hide();
                         var newdata = "[" + data.replace(/}\s*{/g, "},{") + "]";
                         dataArray = JSON.parse(newdata);
                         callback(dataArray);
@@ -101,6 +108,9 @@ $(".ui-autocomplete-input").after(dialog);
                 },
                 error: function(){
                     console.log("autocompleteCallback's error handler");
+                    if (cspace.util.isLocal()) {
+                        showConfirmation(request.term, that.container, that.dom);
+                    }
                 }
             });
         };
