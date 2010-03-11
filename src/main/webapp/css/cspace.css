@@ -20,6 +20,7 @@ input[type="text"], input[type="password"], textarea {/*width:99.5%;*/ width:100
 input.savebutton, input.globalSearchButton, input.cancelbutton, input.button, input.button.add, input.button.addrecordbutton
 	{background-color:#94BC80; padding: 1px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; border:none;}
 input.button.inverse, .button.inverse, input.button.add  {background-color:#fff; color:#94BC80; border:1px solid #94BC80; padding-top:0; padding-bottom:0;}
+input.button.lengthen, .button.lengthen {padding-left:30px; padding-right:30px;}
 input.button, input.button.quick. input.button.addrecordbutton {float:left; padding:2px 12px;}
 input.button.add {padding:0px 4px; font-size:11px; height:auto; border:none;}
 #search-box input.button, #search-box input.button.quick {float:none; padding:2px 12px 1px 12px; margin-left:6px;}
