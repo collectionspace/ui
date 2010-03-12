@@ -108,9 +108,6 @@ cspace = cspace || {};
             var csid = cspace.util.getUrlParameter("csid");
             if (csid) {
                 options.csid = csid;
-                cspace.currentCsid = csid;
-            } else {
-                cspace.currentCsid = null;
             }
             
             if (cspace.util.isLocal()) {

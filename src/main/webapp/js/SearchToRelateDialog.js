@@ -21,7 +21,7 @@ cspace = cspace || {};
             var newIndex = 0;
             var newRelations = [];
             var source = {
-                csid: that.options.currentCSID,
+                csid: that.options.applier.model.csid,
                 recordtype: that.options.currentRecordType
             };
             for (var i = 0; i < data.length; i++) {

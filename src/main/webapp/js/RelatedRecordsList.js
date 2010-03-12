@@ -53,7 +53,6 @@ cspace = cspace || {};
 
         if (!cspace.addDialogInst) {
             var dlgOpts = {
-                currentCSID: that.options.applier.model.csid,
                 applier: that.options.applier,
                 currentRecordType: that.options.currentRecordType
             };
