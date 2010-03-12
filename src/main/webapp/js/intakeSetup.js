@@ -25,7 +25,9 @@ cspace = cspace || {};
             var reOpts = {
                 dataContext: "{pageBuilder}.dataContext",
                 applier: "{pageBuilder}.applier",
-                uispec: "{pageBuilder}.uispec.recordEditor"
+                uispec: "{pageBuilder}.uispec.recordEditor",
+                selectors: {identificationNumber: ".csc-intake-entry-number"},
+                strings: {identificationNumberRequired: "Please specify an Intake Entry Number"}
             };
             var tabsOpts = {
                 applier: "{pageBuilder}.applier",
@@ -88,7 +90,7 @@ cspace = cspace || {};
                         templateSelector: ".csc-object-intake-titleBar-template",
                         targetSelector: ".csc-object-intake-titleBar-container"
                     },
-                    dateEntry: {
+                    recordEditor: {
                         href: "IntakeTemplate.html",
                         templateSelector: ".csc-object-intake-template",
                         targetSelector: ".csc-record-edit-container"

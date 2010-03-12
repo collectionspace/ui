@@ -28,10 +28,12 @@ cspace = cspace || {};
                 applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.titleBar"
             };
-            var deOpts = {
+            var reOpts = {
                 dataContext: "{pageBuilder}.dataContext",
                 applier: "{pageBuilder}.applier",
-                uispec: "{pageBuilder}.uispec.recordEditor"
+                uispec: "{pageBuilder}.uispec.recordEditor",
+                selectors: {identificationNumber: ".csc-organizationAuthority-displayName"},
+                strings: {identificationNumberRequired: "Please specify a Display Name"}
             };
             var sbOpts = {
                 applier: "{pageBuilder}.applier",
@@ -49,7 +51,7 @@ cspace = cspace || {};
                 },
                 recordEditor: {
                     funcName: "cspace.recordEditor",
-                    args: [".csc-organizationAuthority-template", deOpts]
+                    args: [".csc-organizationAuthority-template", reOpts]
                 },
                 sidebar: {
                     funcName: "cspace.sidebar",
@@ -79,7 +81,7 @@ cspace = cspace || {};
                         templateSelector: ".csc-organizationAuthority-titleBar-template",
                         targetSelector: ".csc-header-container"
                     },
-                    dateEntry: {
+                    recordEditor: {
                         href: "organizationTemplate.html",
                         templateSelector: ".csc-organizationAuthority-template",
                         targetSelector: ".csc-record-edit-container"

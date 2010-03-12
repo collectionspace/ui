@@ -40,7 +40,9 @@ cspace = cspace || {};
             var reOpts = {
                 dataContext: "{pageBuilder}.dataContext",
                 applier: "{pageBuilder}.applier",
-                uispec: "{pageBuilder}.uispec.recordEditor"
+                uispec: "{pageBuilder}.uispec.recordEditor",
+                selectors: {identificationNumber: ".csc-acquisition-numberPatternChooser-reference-number"},
+                strings: {identificationNumberRequired: "Please specify an Acquisition Reference Number"}
             };
             var sbOpts = {
                 applier: "{pageBuilder}.applier",

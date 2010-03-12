@@ -57,9 +57,22 @@ cspace = cspace || {};
         $("a:not([href*=#]):not([class*='" + that.options.selectors.confirmationExclusion.substring(1) + "']):not(.ui-autocomplete a)").live("click", showConf); 
     };
 
+    var validateIdentificationNumber = function (domBinder, message) {
+        return function () {
+            var required = domBinder.locate("identificationNumber");
+            if ( $.trim(required.val()) === "") {
+                cspace.util.displayTimestampedMessage(domBinder, message);
+                return false;
+            }
+            return true;
+        };
+    };
+
     var bindEventHandlers = function (that) {
 
         setupConfirmation(that);
+
+        that.events.onSave.addListener(validateIdentificationNumber(that.dom, that.options.strings.identificationNumberRequired));
 
         that.events.onSave.addListener(function () {
             cspace.util.displayTimestampedMessage(that, that.options.strings.savingMessage, "");

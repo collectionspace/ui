@@ -28,7 +28,9 @@ cspace = cspace || {};
             var reOpts = {
                 dataContext: "{pageBuilder}.dataContext",
                 applier: "{pageBuilder}.applier",
-                uispec: "{pageBuilder}.uispec.recordEditor"
+                uispec: "{pageBuilder}.uispec.recordEditor",
+                selectors: {identificationNumber: ".csc-object-identification-object-number"},
+                strings: {identificationNumberRequired: "Please specify an Identification Number"}
             };
             var sbOpts = {
                 applier: "{pageBuilder}.applier",
