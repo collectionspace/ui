@@ -26,60 +26,7 @@ cspace = cspace || {};
 
     cspace.testData = cspace.testData || {};
 
-    cspace.testData.basicDependencies = {
-        dateEntry: {
-            funcName: "cspace.testComponent1",
-            args: [
-                "#recordEditorContainer"   // container
-            ]
-        },
-        relatedRecords: {
-            funcName: "cspace.testComponent2",
-            args: [
-                "#linksContainer"           // container
-            ]
-        }
-    };
-
-    cspace.testData.dependenciesWithOptions = {
-        dateEntry: {
-            funcName: "cspace.testComponent4",
-            args: [
-                "#recordEditorContainer",   // container
-                {               // options
-                    foo: "bar",
-                    bat: "cat"
-                }  
-            ]
-        },
-        relatedRecords: {
-            funcName: "cspace.testComponent5",
-            args: [
-                "#linksContainer",           // container
-                {               // options
-                    foo: {
-                        bar: "bat",
-                        cat: "CATT"
-                    }
-                }  
-            ]
-        }
-    };
-
-    cspace.testData.dependenciesWithIOCdemands = {
-        recordEditor: {
-            funcName: "cspace.testComponent7",
-            args: [
-                "#recordEditorContainer",   // container
-                {               // options with IOC demands
-                    foo: "{pageBuilder}.options.option1",
-                    bat: "{pageBuilder}.options.option2"
-                }  
-            ]
-        }
-    };
-
-    cspace.testData.testPageSpec = {
+    var testPageSpec = {
         recordEditor: {
             href: "test-data/template1.html",
             templateSelector: "#template1mainNode",
@@ -92,106 +39,153 @@ cspace = cspace || {};
         }
     };
 
-    // these test components carry out tests on the markup, or on their parameters. they are
-    // customized for the test functions that use them
-    
-    cspace.testComponent1 = function (container, options) {
-        var jContainer = $(container);
-        jqUnit.assertTrue("TestComponent1 instantiated", true);
-        jqUnit.assertEquals("TestComponent1 initiated with correct container", cspace.testData.basicDependencies.dateEntry.args[0], container);
-    };
-
-    cspace.testComponent2 = function (container, options) {
-        var jContainer = $(container);
-        jqUnit.assertTrue("TestComponent2 instantiated", true);
-        jqUnit.assertEquals("TestComponent2 initiated with correct container", cspace.testData.basicDependencies.relatedRecords.args[0], container);
-    };
-
-    cspace.testComponent3 = function (container, options) {
-        var body = $("body");
-        jqUnit.assertEquals("Template 1 inserted", 1, $("#testText1").length);
-        jqUnit.assertEquals("Template 2 inserted", 1, $("#testText2").length);
-        jqUnit.assertEquals("Rest of doc wasn't inserted", 0, $("#shouldntbehere", body).length);
-        start();
-    };
-
-    cspace.testComponent4 = function (container, options) {
-        jqUnit.assertTrue("TestComponent4 instantiated", true);
-        jqUnit.assertEquals("TestComponent4 initiated with correct container", cspace.testData.dependenciesWithOptions.dateEntry.args[0], container);
-        jqUnit.assertDeepEq("TestComponent4 initiated with correct options", cspace.testData.dependenciesWithOptions.dateEntry.args[1], options);
-    };
-
-    cspace.testComponent5 = function (container, options) {
-        jqUnit.assertTrue("TestComponent5 instantiated", true);
-        jqUnit.assertEquals("TestComponent5 initiated with correct container", cspace.testData.dependenciesWithOptions.relatedRecords.args[0], container);
-        jqUnit.assertDeepEq("TestComponent5 initiated with correct options", cspace.testData.dependenciesWithOptions.relatedRecords.args[1], options);
-    };
-
-    cspace.testData.testIOCoptions = {option1: "bar", option2: "cat"};
-    cspace.testComponent6 = function (container, options) {
-        jqUnit.assertTrue("TestComponent6 instantiated", true);
-        jqUnit.assertEquals("TestComponent6 initiated with correct container", cspace.testData.dependenciesWithOptions.relatedRecords.args[0], container);
-        jqUnit.assertDeepEq("TestComponent6 initiated with correct IOC demand1", cspace.testData.testIOCoptions.option1, options.foo);
-    };
-
-    cspace.testComponent7 = function (container, options) {
-        jqUnit.assertTrue("testComponent7 instantiated", true);
-        jqUnit.assertEquals("testComponent7 initiated with correct container", cspace.testData.dependenciesWithIOCdemands.recordEditor.args[0], container);
-        jqUnit.assertDeepEq("testComponent7 initiated with correct IOC demanded option1", cspace.testData.dependenciesWithIOCdemands.recordEditor.args[1].foo, options.foo);
-        jqUnit.assertDeepEq("testComponent7 initiated with correct IOC demanded option2", cspace.testData.dependenciesWithIOCdemands.recordEditor.args[1].bat, options.bat);
-    };
-
-    cspace.testData.dependenciesWithIOCdemands = {
-        recordEditor: {
-            funcName: "cspace.testComponent7",
-            args: [
-                "#recordEditorContainer",   // container
-                {               // options with IOC demands
-                    foo: "{pageBuilder}.options.option1",
-                    bat: "{pageBuilder}.options.option2"
-                }  
-            ]
-        }
-    };
-
     var pageBuilderTester = function () {
         var pageBuilderTest = new jqUnit.TestCase("PageBuilder Tests");
         
+        pageBuilderTest.test("Assembly of HTML only", function () {
+            var options = {
+                pageSpec: testPageSpec,
+                htmlOnly: true,
+                listeners: {
+                    pageReady: function () {
+                        var body = $("body");
+                        jqUnit.assertEquals("Template 1 inserted", 1, $("#testText1").length);
+                        jqUnit.assertEquals("Template 2 inserted", 1, $("#testText2").length);
+                        jqUnit.assertEquals("Rest of doc wasn't inserted", 0, $("#shouldntbehere", body).length);
+                        $("#testText1").remove();
+                        $("#testText2").remove();
+                        start();
+                    }
+                }
+            };
+            done = 0;
+            stop();
+            cspace.pageBuilder(null, options);
+        });
+
+        cspace.testComponent1 = function (container, options) {
+            var body = $("body");
+            jqUnit.assertEquals("Template 1 inserted", 1, $("#testText1").length);
+            jqUnit.assertEquals("Template 2 inserted", 1, $("#testText2").length);
+            jqUnit.assertEquals("Rest of doc wasn't inserted", 0, $("#shouldntbehere", body).length);
+            start();
+        };
+
         pageBuilderTest.test("Assembly of HTML", function () {
             expect(3);
             var dependencies = {
                 dateEntry: {
-                    funcName: "cspace.testComponent3",
-                    args: [
-                        "#recordEditorContainer"   // container
-                    ]
+                    funcName: "cspace.testComponent1",
+                    args: ["#recordEditorContainer"]   // container
                 }
             };
             var options = {
-                pageSpec: cspace.testData.testPageSpec
+                pageSpec: testPageSpec
             };
             done = 0;
             stop();
             cspace.pageBuilder(dependencies, options);
         });
 
+        var basicDependencies = {
+            dateEntry: {
+                funcName: "cspace.testComponent2",
+                args: ["#recordEditorContainer"]   // container
+            },
+            relatedRecords: {
+                funcName: "cspace.testComponent3",
+                args: ["#linksContainer"]           // container
+            }
+        };
+    
+        cspace.testComponent2 = function (container, options) {
+            var jContainer = $(container);
+            jqUnit.assertTrue("testComponent2 instantiated", true);
+            jqUnit.assertEquals("testComponent2 initiated with correct container", "#recordEditorContainer", container);
+        };
+    
+        cspace.testComponent3 = function (container, options) {
+            var jContainer = $(container);
+            jqUnit.assertTrue("testComponent3 instantiated", true);
+            jqUnit.assertEquals("testComponent3 initiated with correct container", "#linksContainer", container);
+        };
+    
+        var testIOCoptions = {option1: "bar", option2: "cat"};
+
         pageBuilderTest.test("Invocation of dependent components: container parameter", function () {
             expect(4);    // this is total num of assertions in the test components
-            cspace.pageBuilder(cspace.testData.basicDependencies, cspace.testData.testIOCoptions);
+            cspace.pageBuilder(basicDependencies, testIOCoptions);
         });
     
+        var dependenciesWithOptions = {
+            dateEntry: {
+                funcName: "cspace.testComponent4",
+                args: [
+                    "#recordEditorContainer",   // container
+                    {               // options
+                        foo: "bar",
+                        bat: "cat"
+                    }  
+                ]
+            },
+            relatedRecords: {
+                funcName: "cspace.testComponent5",
+                args: [
+                    "#linksContainer",           // container
+                    {               // options
+                        foo: {
+                            bar: "bat",
+                            cat: "CATT"
+                        }
+                    }  
+                ]
+            }
+        };
+    
+        cspace.testComponent4 = function (container, options) {
+            jqUnit.assertTrue("TestComponent4 instantiated", true);
+            jqUnit.assertEquals("TestComponent4 initiated with correct container", "#recordEditorContainer", container);
+            jqUnit.assertDeepEq("TestComponent4 initiated with correct options", dependenciesWithOptions.dateEntry.args[1], options);
+        };
+    
+        cspace.testComponent5 = function (container, options) {
+            jqUnit.assertTrue("TestComponent5 instantiated", true);
+            jqUnit.assertEquals("TestComponent5 initiated with correct container", "#linksContainer", container);
+            jqUnit.assertDeepEq("TestComponent5 initiated with correct options", dependenciesWithOptions.relatedRecords.args[1], options);
+        };
+
         pageBuilderTest.test("Invocation of dependent components: container plus options only", function () {
             expect(6);
-            cspace.pageBuilder(cspace.testData.dependenciesWithOptions);
+            cspace.pageBuilder(dependenciesWithOptions);
         });
     
+        var dependenciesWithIOCdemands = {
+            recordEditor: {
+                funcName: "cspace.testComponent6",
+                args: [
+                    "#recordEditorContainer",   // container
+                    {               // options with IOC demands
+                        foo: "{pageBuilder}.options.option1",
+                        bat: "{pageBuilder}.options.option2"
+                    }  
+                ]
+            }
+        };
+    
+        cspace.testComponent6 = function (container, options) {
+            jqUnit.assertTrue("testComponent6 instantiated", true);
+            jqUnit.assertEquals("testComponent6 initiated with correct container", dependenciesWithIOCdemands.recordEditor.args[0], container);
+            jqUnit.assertDeepEq("testComponent6 initiated with correct IOC demanded option1", "September", options.foo);
+            jqUnit.assertDeepEq("testComponent6 initiated with correct IOC demanded option2", "Toronto", options.bat);
+        };
+    
         pageBuilderTest.test("Invocation of dependent components: mini IOC", function () {
-//            expect(?);
+            expect(4);
             var pbOpts = {
                 option1: "September",
                 option2: "Toronto"
             };
-            cspace.pageBuilder(cspace.testData.dependenciesWithIOCdemands, pbOpts);
+            cspace.pageBuilder(dependenciesWithIOCdemands, pbOpts);
         });
     
     };
