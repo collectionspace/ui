@@ -21,7 +21,7 @@ cspace = cspace || {};
             var newIndex = 0;
             var newRelations = [];
             var source = {
-                csid: that.options.applier.model.csid,
+                csid: that.applier.model.csid,
                 recordtype: that.options.currentRecordType
             };
             for (var i = 0; i < data.length; i++) {
@@ -93,10 +93,9 @@ cspace = cspace || {};
         });
     };
 
-    cspace.searchToRelateDialog = function (container, options) {
+    cspace.searchToRelateDialog = function (container, applier, options) {
         var that = fluid.initView("cspace.searchToRelateDialog", container, options);
-        // workaround for FLUID-3505:
-        that.options.applier = options.applier;
+        that.applier = applier;
         
         var dcOpts = {
             recordType: "relationships"
@@ -105,7 +104,7 @@ cspace = cspace || {};
             dcOpts.baseUrl = "data";
             dcOpts.fileExtension = ".json";
         }
-        that.dataContext = cspace.dataContext(that.options.applier.model, dcOpts);
+        that.dataContext = cspace.dataContext(that.applier.model, dcOpts);
 
         that.dlg = setupAddDialog(that);
 
@@ -120,14 +119,14 @@ cspace = cspace || {};
 
         that.updateRelations = function (newRelations) {
             var newModelRelations = [];
-            fluid.model.copyModel(newModelRelations, that.options.applier.model.relations);
+            fluid.model.copyModel(newModelRelations, that.applier.model.relations);
             var relIndex = newModelRelations.length;            
             for (var i = 0; i < newRelations.items.length; i++) {
                 newModelRelations[relIndex] = newRelations.items[i].target;
                 newModelRelations[relIndex].relationshiptype = newRelations.items[i].type;
                 relIndex += 1;
             }
-            that.options.applier.requestChange("relations", newModelRelations);
+            that.applier.requestChange("relations", newModelRelations);
         };
 
         return that;

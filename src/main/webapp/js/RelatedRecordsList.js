@@ -25,7 +25,7 @@ cspace = cspace || {};
 
     bindEventHandlers = function (that) {
         that.locate("addButton").live("click", function (e) {
-            if (that.options.applier.model.csid) {
+            if (that.applier.model.csid) {
                 that.locate("messageContainer", "body").hide();                
                 that.locate("recordTypeString", cspace.addDialogInst.dlg).text(that.options.recordType);
                 cspace.addDialogInst.prepareDialog(that.options.recordType);
@@ -35,28 +35,27 @@ cspace = cspace || {};
             }
         });
 
-        that.options.applier.modelChanged.addListener("relations", function(model, oldModel, changeRequest) {
+        that.applier.modelChanged.addListener("relations", function(model, oldModel, changeRequest) {
             that.recordList.updateModel(cspace.util.buildRelationsList(model.relations, recordsLists[that.options.recordType]));
         });
     };
 
-    cspace.relatedRecordsList = function (container, options) {
+    cspace.relatedRecordsList = function (container, applier, options) {
         var that = fluid.initView("cspace.relatedRecordsList", container, options);
-        // workaround for FLUID-3505:
-        that.options.applier = options.applier;
+        that.applier = applier;
 
         var rlOpts = {
-            data: cspace.util.buildRelationsList(that.options.applier.model.relations, recordsLists[that.options.recordType]),
+            data: cspace.util.buildRelationsList(that.applier.model.relations, recordsLists[that.options.recordType]),
             uispec: that.options.uispec
         };
         that.recordList = fluid.initSubcomponent(that, "recordList", [that.container, rlOpts]);
 
         if (!cspace.addDialogInst) {
             var dlgOpts = {
-                applier: that.options.applier,
+                applier: that.applier,
                 currentRecordType: that.options.currentRecordType
             };
-            cspace.addDialogInst = cspace.searchToRelateDialog(that.container, dlgOpts);
+            cspace.addDialogInst = cspace.searchToRelateDialog(that.container, that.applier, dlgOpts);
         }
 
         bindEventHandlers(that);

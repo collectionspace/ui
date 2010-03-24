@@ -188,6 +188,49 @@ cspace = cspace || {};
             cspace.pageBuilder(dependenciesWithIOCdemands, pbOpts);
         });
     
+        var dependenciesWithAdditionalParameters = {
+            recordEditor: {
+                funcName: "cspace.testComponent7", 
+                args: [
+                    "#recordEditorContainer",
+                    "extraParameter",
+                    {option1: "Danny Kaye"}
+                ]
+            }
+        };
+        cspace.testComponent7 = function (container, stringParam, options) {
+            jqUnit.assertTrue("testComponent7 instantiated", true);
+            jqUnit.assertEquals("testComponent7 initiated with correct container", dependenciesWithIOCdemands.recordEditor.args[0], container);
+            jqUnit.assertDeepEq("testComponent7 initiated with correct extra parameter", "extraParameter", stringParam);
+            jqUnit.assertDeepEq("testComponent7 initiated with correct option", "Danny Kaye", options.option1);
+        };
+
+        pageBuilderTest.test("Invocation of dependent components: additional parameters to components", function () {
+            expect(4);
+            cspace.pageBuilder(dependenciesWithAdditionalParameters);
+        });
+    
+        var dependenciesWithDemandInParameters = {
+            recordEditor: {
+                funcName: "cspace.testComponent8", 
+                args: [
+                    "#recordEditorContainer",
+                    "{pageBuilder}.options.pbOpt",
+                    {option1: "Danny Kaye"}
+                ]
+            }
+        };
+        cspace.testComponent8 = function (container, nameParam, options) {
+            jqUnit.assertTrue("testComponent8 instantiated", true);
+            jqUnit.assertEquals("testComponent8 initiated with correct container", dependenciesWithIOCdemands.recordEditor.args[0], container);
+            jqUnit.assertDeepEq("testComponent8 initiated with correct extra parameter demanded from PageBuilder", "Jacob", nameParam);
+            jqUnit.assertDeepEq("testComponent8 initiated with correct option", "Danny Kaye", options.option1);
+        };
+
+        pageBuilderTest.test("Invocation of dependent components: IOC in additional parameters", function () {
+            expect(4);
+            cspace.pageBuilder(dependenciesWithDemandInParameters, {pbOpt: "Jacob"} );
+        });
     };
     
     $(document).ready(function () {

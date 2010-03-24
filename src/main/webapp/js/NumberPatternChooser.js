@@ -182,7 +182,7 @@ cspace = cspace || {};
     cspace.numberPatternChooser.getDecoratorOptions = function (parentComponent) {
         return {
             baseUrl: parentComponent.options.dataContext.options.baseUrl,
-            applier: parentComponent.options.applier
+            applier: parentComponent.applier
         };
     };
 

@@ -29,17 +29,18 @@ cspace = cspace || {};
             if (that.options.uispec.hasOwnProperty(selector)) {
                 var val = that.options.uispec[selector];
                 var el = val.substring(val.indexOf("${")+2, val.indexOf("}"));
-                that.options.applier.modelChanged.addListener(el, makeFieldUpdater(selector));
-                updateField(selector, fluid.model.getBeanValue(that.options.applier.model, el));
+                that.applier.modelChanged.addListener(el, makeFieldUpdater(selector));
+                updateField(selector, fluid.model.getBeanValue(that.applier.model, el));
             }
         }
     };
 
-    cspace.titleBar = function (container, options) {
+    cspace.titleBar = function (container, applier, options) {
         var that = fluid.initView("cspace.titleBar", container, options);
+        that.applier = applier;
         
         setupTitleBar(that);
 
         return that;
-    }
+    };
 }) (jQuery, fluid_1_2);

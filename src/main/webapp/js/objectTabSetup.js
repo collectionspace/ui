@@ -2,7 +2,7 @@
 Copyright 2009-2010 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
-ou may not use this file except in compliance with this License.
+You may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
@@ -32,11 +32,9 @@ cspace = cspace || {};
             };
             var reOpts = {
                 dataContext: "{pageBuilder}.dataContext",
-                applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.newRecord"
             };
             var rrOpts = {
-                applier: applier,
                 recordType: "objects",
                 currentRecordType: "objects",
                 uispec: "{pageBuilder}.uispec.relatedRecords"
@@ -44,11 +42,11 @@ cspace = cspace || {};
             var dependencies = {
                 relatedRecords: {
                     funcName: "cspace.relatedRecordsList",
-                    args: [".div-for-list-of-records", rrOpts]
+                    args: [".div-for-list-of-records", applier, rrOpts]
                 } //,
              //   newRecord: {
              //       funcName: "cspace.recordEditor",
-             //       args: [".div-for-schema", reOpts]
+             //       args: [".div-for-schema", applier, reOpts]
              //   }
             };
             cspace.pageBuilder(dependencies, options);            

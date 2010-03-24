@@ -56,11 +56,22 @@ cspace = cspace || {};
         container.append($(selector, templateContainer)); 
     };
     
-    var expandOptions = function (pageBuilder, args) {
-        if (args.length !== 2) {
-            return;
+    var replaceWithDemand = function(item, pageBuilder) {
+        if ((typeof(item) === "string") && (item.indexOf("{pageBuilder}") === 0)) {
+            return fluid.model.getBeanValue(pageBuilder, item.substring(14, arg.length));
+        } else {
+            return item;
         }
-        var options = args[1];
+    };
+    var expandOptions = function (pageBuilder, args) {
+        var optIndex = args.length - 1;
+        for (var i = 1; i < optIndex; i++) {
+            var arg = args[i];
+            if ((typeof(arg) === "string") && (arg.indexOf("{pageBuilder}") === 0)) {
+                args[i] = fluid.model.getBeanValue(pageBuilder, arg.substring(14, arg.length));
+            }
+        }
+        var options = args[optIndex];
         for (var opt in options) {
             if (options.hasOwnProperty(opt)) {
                 var val = options[opt];
@@ -94,6 +105,7 @@ cspace = cspace || {};
             }
             
             invokeDependencies(that);
+            that.events.pageReady.fire();
         };
     };
 
@@ -124,6 +136,8 @@ cspace = cspace || {};
             }
             if (!that.options.htmlOnly) {
                 setUpPageBuilder(that);                
+            } else {
+                that.events.pageReady.fire();
             }
         });
 
@@ -136,6 +150,7 @@ cspace = cspace || {};
         };
 
         fluid.mergeComponentOptions(that, "cspace.pageBuilder", options);
+        fluid.instantiateFirers(that, that.options);
 
         if (options && options.pageSpec) {
             assembleHTML(that);
@@ -145,6 +160,9 @@ cspace = cspace || {};
     };
 
     fluid.defaults("cspace.pageBuilder", {
+        events: {
+            pageReady: null
+        },
         dataContext: {
             type: "cspace.dataContext"
         },

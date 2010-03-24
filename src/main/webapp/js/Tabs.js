@@ -41,7 +41,7 @@ cspace = cspace || {};
             ajaxOptions: {
                 success: function (data, textStatus, XMLHttpRequest) {
                     var tabIndex = that.locate("tabsContainer").tabs('option', 'selected');
-                    fluid.invokeGlobalFunction(that.options.setupFuncs[tabIndex], [that.options.applier]);
+                    fluid.invokeGlobalFunction(that.options.setupFuncs[tabIndex], [that.applier]);
                 }
             },
             select: function (event, ui) {
@@ -52,10 +52,9 @@ cspace = cspace || {};
         });
     };
 
-    cspace.tabs = function (container, options) {
+    cspace.tabs = function (container, applier, options) {
         var that = fluid.initView("cspace.tabs", container, options);
-        // workaround for FLUID-3505:
-        that.options.applier = options.applier;
+        that.applier = applier;
 
         buildTabs(that);
 

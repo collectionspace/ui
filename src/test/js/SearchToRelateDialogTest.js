@@ -72,7 +72,7 @@ var searchToRelateDialogTester = function () {
                 dialog: "test-data/template1.html"
             }
         };
-        var dlg = cspace.searchToRelateDialog("#dialog-container", dlgOpts);
+        var dlg = cspace.searchToRelateDialog("#dialog-container", applier, dlgOpts);
         dlg.updateRelations(testRelations);
     });
 
@@ -110,7 +110,7 @@ var searchToRelateDialogTester = function () {
                 dialog: "test-data/template1.html"
             }
         };
-        var dlg = cspace.searchToRelateDialog("#dialog-container", dlgOpts);
+        var dlg = cspace.searchToRelateDialog("#dialog-container", applier, dlgOpts);
         dlg.updateRelations(testRelations);
     });
 };

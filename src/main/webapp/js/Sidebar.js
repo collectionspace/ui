@@ -14,26 +14,25 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-    cspace.sidebar = function (container, options) {
+    cspace.sidebar = function (container, applier, options) {
         var that = fluid.initView("cspace.sidebar", container, options);
-        // workaround for FLUID-3505:
-        that.options.applier = options.applier;
+        that.applier = applier;
         
         that.integratedAuthorities = fluid.initSubcomponent(that, "recordList", [that.options.selectors.termsUsed,
-             {data: that.options.applier.model.termsUsed || [],
+             {data: that.applier.model.termsUsed || [],
               recordType: "authorities",
-              csid: that.options.applier.model.csid,
+              csid: that.applier.model.csid,
               uispec: that.options.uispec.termsUsed}]);
 
         that.relatedProcedures = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedProcedures,
-             {applier: that.options.applier,
-              recordType: "procedures",
+              that.applier,
+             {recordType: "procedures",
               currentRecordType: that.options.currentRecordType,
               uispec: that.options.uispec.relatedProcedures}]);
 
         that.relatedObjects = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedObjects,
-             {applier: that.options.applier,
-              recordType: "objects",
+              that.applier,
+             {recordType: "objects",
               currentRecordType: that.options.currentRecordType,
               uispec: that.options.uispec.relatedObjects}]);
 

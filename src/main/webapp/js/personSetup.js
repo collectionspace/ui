@@ -25,37 +25,34 @@ cspace = cspace || {};
                 ]
             };
             var tbOpts = {
-                applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.titleBar"
             };
             var reOpts = {
                 dataContext: "{pageBuilder}.dataContext",
-                applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.recordEditor",
                 selectors: {identificationNumber: ".csc-personAuthority-displayName"},
                 strings: {identificationNumberRequired: "Please specify a Display Name"}
             };
             var sbOpts = {
-                applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.sidebar"
             };
     
             var dependencies = {
                 titleBar: {
                     funcName: "cspace.titleBar",
-                    args: [".csc-personAuthority-titleBar-template", tbOpts]
+                    args: [".csc-personAuthority-titleBar-template", "{pageBuilder}.applier", tbOpts]
                 },
                 tabs: {
                     funcName: "cspace.tabs",
-                    args: [".csc-tabs-template", tabOpts]
+                    args: [".csc-tabs-template", "{pageBuilder}.applier", tabOpts]
                 },
                 recordEditor: {
                     funcName: "cspace.recordEditor",
-                    args: [".csc-personAuthority-template", reOpts]
+                    args: [".csc-personAuthority-template", "{pageBuilder}.applier", reOpts]
                 },
                 sidebar: {
                     funcName: "cspace.sidebar",
-                    args: [".csc-sidebar", sbOpts]
+                    args: [".csc-sidebar", "{pageBuilder}.applier", sbOpts]
                 }
             };
             var options = {

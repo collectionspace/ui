@@ -135,9 +135,10 @@ cspace = cspace || {};
         that.userDetailsApplier = fluid.makeChangeApplier(that.model.userDetails);
         that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model.userDetails, fluid.COMPONENT_OPTIONS]);
         that.userDetails = fluid.initSubcomponent(that, "userDetails", [
-            that.options.selectors.userDetails, {
+            that.options.selectors.userDetails,
+            that.userDetailsApplier,
+            {
                 uispec: that.options.uispec.userDetails,
-                applier: that.userDetailsApplier,
                 dataContext: that.dataContext
             }
         ]);

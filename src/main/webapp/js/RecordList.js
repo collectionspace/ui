@@ -74,8 +74,8 @@ cspace = cspace || {};
                     cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(selectors, {}),
                     model: that.model,
                     // debugMode: true,
-                    autoBind: true,
-                    applier: that.options.applier
+                    autoBind: true//,
+               //     applier: that.options.applier
                 };
                 fluid.selfRender(that.container, tree, renderOpts);
             } else {

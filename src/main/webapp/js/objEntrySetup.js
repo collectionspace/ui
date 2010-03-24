@@ -18,22 +18,18 @@ cspace = cspace || {};
 
         var setUpPage = function () {
             var tbOpts = {
-                applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.titleBar"
             };
             var tabsOpts = {
-                applier: "{pageBuilder}.applier",
                 setupFuncs: [null, "cspace.objectTabSetup"]
             };
             var reOpts = {
                 dataContext: "{pageBuilder}.dataContext",
-                applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.recordEditor",
                 selectors: {identificationNumber: ".csc-object-identification-object-number"},
                 strings: {identificationNumberRequired: "Please specify an Identification Number"}
             };
             var sbOpts = {
-                applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.sidebar",
                 currentRecordType: "objects"
             };
@@ -41,19 +37,19 @@ cspace = cspace || {};
             var dependencies = {
                 titleBar: {
                     funcName: "cspace.titleBar",
-                    args: [".csc-object-entry-template", tbOpts]
+                    args: [".csc-object-entry-template", "{pageBuilder}.applier", tbOpts]
                 },
                 tabs: {
                     funcName: "cspace.tabs",
-                    args: [".csc-tabs-template", tabsOpts]
+                    args: [".csc-tabs-template", "{pageBuilder}.applier", tabsOpts]
                 },
                 recordEditor: {
                     funcName: "cspace.recordEditor",
-                    args: [".csc-object-entry-template", reOpts]
+                    args: [".csc-object-entry-template", "{pageBuilder}.applier", reOpts]
                 },
                 sidebar: {
                     funcName: "cspace.sidebar",
-                    args: [".csc-sidebar", sbOpts]
+                    args: [".csc-sidebar", "{pageBuilder}.applier", sbOpts]
                 }
             };
             var options = {

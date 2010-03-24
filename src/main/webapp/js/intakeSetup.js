@@ -19,18 +19,15 @@ cspace = cspace || {};
 
         var setUpPage = function () {
             var tbOpts = {
-                applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.titleBar"
             };
             var reOpts = {
                 dataContext: "{pageBuilder}.dataContext",
-                applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.recordEditor",
                 selectors: {identificationNumber: ".csc-intake-entry-number"},
                 strings: {identificationNumberRequired: "Please specify an Intake Entry Number"}
             };
             var tabsOpts = {
-                applier: "{pageBuilder}.applier",
                 tabList: [
                     {name: "Intake", target: "#primaryTab"},
                     {name: "Objects", target: "objectTabPlaceholder.html"},
@@ -45,7 +42,6 @@ cspace = cspace || {};
                 setupFuncs: [null, "cspace.objectTabSetup"]
             };
             var sbOpts = {
-                applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.sidebar",
                 currentRecordType: "intake"
             };
@@ -53,19 +49,19 @@ cspace = cspace || {};
             var dependencies = {
                 titleBar: {
                     funcName: "cspace.titleBar",
-                    args: [".csc-object-intake-titleBar-template", tbOpts]
+                    args: [".csc-object-intake-titleBar-template", "{pageBuilder}.applier", tbOpts]
                 },
                 tabs: {
                     funcName: "cspace.tabs",
-                    args: [".csc-tabs-template", tabsOpts]
+                    args: [".csc-tabs-template", "{pageBuilder}.applier", tabsOpts]
                 },
                 recordEditor: {
                     funcName: "cspace.recordEditor",
-                    args: [".csc-object-intake-template", reOpts]
+                    args: [".csc-object-intake-template", "{pageBuilder}.applier", reOpts]
                 },
                 sidebar: {
                     funcName: "cspace.sidebar",
-                    args: [".csc-sidebar", sbOpts]
+                    args: [".csc-sidebar", "{pageBuilder}.applier", sbOpts]
                 }
             };
             var options = {

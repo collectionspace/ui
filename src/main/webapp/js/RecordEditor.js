@@ -24,7 +24,7 @@ cspace = cspace || {};
             if (operation === "create") {
                 // This is only temporary until http://issues.collectionspace.org/browse/CSPACE-263
                 // is resolved
-                that.options.applier.requestChange("csid", undefined);
+                that.applier.requestChange("csid", undefined);
             }
         };
     };
@@ -79,7 +79,7 @@ cspace = cspace || {};
         });
 
         that.options.dataContext.events.afterCreate.addListener(function (data) {
-            that.options.applier.requestChange("csid", data.csid);
+            that.applier.requestChange("csid", data.csid);
             that.events.afterCreateObjectDataSuccess.fire(data, that.options.strings.createSuccessfulMessage);
 	        cspace.util.displayTimestampedMessage(that, that.options.strings.createSuccessfulMessage, Date());
             that.unsavedChanges = false;
@@ -136,7 +136,7 @@ cspace = cspace || {};
             model: that.model,
             // debugMode: true,
             autoBind: true,
-            applier: that.options.applier
+            applier: that.applier
         };
         fluid.selfRender(that.container, tree, renderOpts);
         that.events.pageRendered.fire();
@@ -145,11 +145,10 @@ cspace = cspace || {};
     /**
      * Object Entry component
      */
-    cspace.recordEditor = function (container, options) {
+    cspace.recordEditor = function (container, applier, options) {
         var that = fluid.initView("cspace.recordEditor", container, options);
-        // workaround for FLUID-3505
-        that.options.applier = options.applier;
-        that.model = that.options.applier.model;
+        that.applier = applier;
+        that.model = that.applier.model;
         that.unsavedChanges = false;
 
         that.refreshView = function () {
@@ -171,7 +170,7 @@ cspace = cspace || {};
                 if (that.model.csid) {
                     that.options.dataContext.update();
                 } else {
-                    that.options.applier.requestChange("csid", "");
+                    that.applier.requestChange("csid", "");
                     that.options.dataContext.create();
                 }
             }
