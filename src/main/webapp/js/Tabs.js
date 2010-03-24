@@ -28,12 +28,10 @@ cspace = cspace || {};
             } else {
                 link.addClass(that.options.styles.inactive);
             }
-            if (i === 0) {
-                link.addClass(that.options.styles.current);
-            }
+           	if (tabspec.target === "#primaryTab") {
+				link.addClass(that.options.styles.primary).addClass(that.options.styles.current);
+			}
         }
-		
-		$("a:first", tabs).addClass(that.options.styles.primary);
 		
         that.locate("tabsContainer").prepend(tabs);
         that.locate("tabsContainer").tabs({
@@ -68,14 +66,13 @@ cspace = cspace || {};
         },
         tabList: [
             {name: "Cataloging", target: "#primaryTab"},
-            {name: "Objects", target: "objectTabPlaceholder.html"},
-            {name: "Conservation", target: null},
+			{name: "Acquisition", target: null},
+			{name: "Cataloging - related", target: "objectTabPlaceholder.html"},
+            {name: "Intake", target: null},
+            {name: "Loan In", target: null},
+            {name: "Loan Out", target: null},
             {name: "Location &amp; Movement", target: null},
-            {name: "Transport", target: null},
-            {name: "Valuation", target: null},
-            {name: "Insurance", target: null},
-            {name: "Media", target: null},
-            {name: "Rights", target: null}
+            {name: "Media", target: null}
         ],
         styles: {
             listContainer: "secondary-nav-menu",

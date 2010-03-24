@@ -23,15 +23,13 @@ cspace = cspace || {};
             };
             var tabsOpts = {
                 tabList: [
-                    {name: "Acquisition", target: "#primaryTab"},
-                    {name: "Objects", target: "objectTabPlaceholder.html"},
-                    {name: "Conservation", target: null},
-                    {name: "Location &amp; Movement", target: null},
-                    {name: "Transport", target: null},
-                    {name: "Valuation", target: null},
-                    {name: "Insurance", target: null},
-                    {name: "Media", target: null},
-                    {name: "Rights", target: null}
+					{name: "Acquisition", target: "#primaryTab"},
+					{name: "Cataloging", target: "objectTabPlaceholder.html"},
+					{name: "Intake", target: null},
+					{name: "Loan In", target: null},
+					{name: "Loan Out", target: null},
+					{name: "Location &amp; Movement", target: null},
+					{name: "Media", target: null}
                 ],
                 setupFuncs: [null, "cspace.objectTabSetup"]
             };

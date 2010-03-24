@@ -128,6 +128,7 @@ li .flc-pager-pageLink {margin-top:-1px;}
 
 /* header space for record ID etc. */
 #title-bar {margin: 0 0 20px 0; background-color:#F0F5FB;  /*background-color:#aaa;*/}
+#title-bar.nobg {background-color:#FFF;}
 
 #title-bar .title-bar-value {padding:0 10px; height:42px; color:#696565; font-weight:bold;}
 #title-bar .title-bar-value .overflow{padding-top:9px; max-width:90%; float:left;}
@@ -137,7 +138,7 @@ li .flc-pager-pageLink {margin-top:-1px;}
 #title-bar .content .overflow {padding-left:10px; max-width:90%; float:left;}
 
 #title-bar .value{padding-right:30px; float:left; overflow:hidden; display:block;}
-#title-bar .record-type {float:right; color:#BFD2E1; font-weight:bolder; /*text-transform:uppercase;*/ padding-right:10px;}
+#title-bar .record-type {float:right; color:#BFD2E1; font-weight:bolder; padding-right:10px;}
 
 /* secondary navigation menu */
 #secondary-nav {padding-bottom:0px;}
@@ -275,7 +276,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .fl-container-left .intake-outer-border,
 .fl-container-left .acquisition-outer-border,
 .fl-container-left .authority-outer-border
-	{border: none; /*padding: 0 0 10px 10px;*/ padding: 0 0 10px 0;}
+	{border: none; /*padding: 0 0 10px 10px;*/ padding: 0 0 0px 0;}
 .login-outer-border {border: none; padding:100px 0 10px 0px;}
 	
 .info-pair .header, .info-pair-date .header, .info-pair-select .header {padding:0; margin:0; color:#000; cursor:default;}
@@ -507,7 +508,7 @@ table .field-cal {width:162px;}
 .collapse-all {float:right; font-size:13px; line-height:13px; font-weight:bold; padding-top:10px;}
 .collapse-all img {padding-right:6px;}
 
-.input-buttons {width:100%; padding:1px 0 8px 0; margin-top:-20px;}
+.input-buttons {width:100%; padding:1px 0 8px 0; margin-top:0;}
 .input-buttons input {margin-left:20px;}
 .savebutton, .cancelbutton, .viewbutton , .deletebutton, .addrecordbutton {margin-left:10px; float:right; border:none; text-decoration:none;}
 .deletebutton {margin-right:10px; float:left; border:none;}

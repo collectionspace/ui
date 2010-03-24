@@ -19,59 +19,53 @@ cspace = cspace || {};
 
         var setUpPage = function () {
             var tbOpts = {
-                applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.titleBar"
             };
             var tabsOpts = {
-                applier: "{pageBuilder}.applier",
                 tabList: [
-                    {name: "Loan Out", target: "#primaryTab"},
-                    {name: "Objects", target: "objectTabPlaceholder.html"},
-                    {name: "Conservation", target: null},
-                    {name: "Location &amp; Movement", target: null},
-                    {name: "Transport", target: null},
-                    {name: "Valuation", target: null},
-                    {name: "Insurance", target: null},
-                    {name: "Media", target: null},
-                    {name: "Rights", target: null}
+                    {name: "Loan In", target: "#primaryTab"},
+					{name: "Acquisition", target: null},
+					{name: "Cataloging", target: "objectTabPlaceholder.html"},
+					{name: "Intake", target: null},
+					{name: "Loan Out", target: null},
+					{name: "Location &amp; Movement", target: null},
+					{name: "Media", target: null}
                 ],
                 setupFuncs: [null, "cspace.objectTabSetup"]
             };
             var reOpts = {
                 dataContext: "{pageBuilder}.dataContext",
-                applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.recordEditor",
                 selectors: {identificationNumber: ".csc-loanout-numberPatternChooser-reference-number"},
                 strings: {identificationNumberRequired: "Please specify a Loan Out Number"}
             };
             var sbOpts = {
-                applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.sidebar",
-                currentRecordType: "loan in"
+                currentRecordType: "loanout"
             };
             
             var dependencies = {
                 titleBar: {
                     funcName: "cspace.titleBar",
-                    args: [".csc-loanout-titleBar-template", tbOpts]
+                    args: [".csc-loanout-titleBar-template", "{pageBuilder}.applier", tbOpts]
                 },
                 tabs: {
                     funcName: "cspace.tabs",
-                    args: [".csc-tabs-template", tabsOpts]
+                    args: [".csc-tabs-template", "{pageBuilder}.applier", tabsOpts]
                 },
                 recordEditor: {
                     funcName: "cspace.recordEditor",
-                    args: [".csc-loanout-template", reOpts]
+                    args: [".csc-loanout-template", "{pageBuilder}.applier", reOpts]
                 },
                 sidebar: {
                     funcName: "cspace.sidebar",
-                    args: [".csc-sidebar", sbOpts]
+                    args: [".csc-sidebar", "{pageBuilder}.applier", sbOpts]
                 }
             };
             var options = {
                 dataContext: {
                     options: {
-                        recordType: "loan out"
+                        recordType: "loanout"
                     }
                 },
                 pageSpec: {
