@@ -19,11 +19,9 @@ cspace = cspace || {};
 
         var setUpPage = function () {
             var tbOpts = {
-                applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.titleBar"
             };
             var tabsOpts = {
-                applier: "{pageBuilder}.applier",
                 tabList: [
                     {name: "Loan In", target: "#primaryTab"},
                     {name: "Objects", target: "objectTabPlaceholder.html"},
@@ -39,39 +37,37 @@ cspace = cspace || {};
             };
             var reOpts = {
                 dataContext: "{pageBuilder}.dataContext",
-                applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.recordEditor",
-                selectors: {identificationNumber: ".csc-loanin-numberPatternChooser-reference-number"},
+                selectors: {identificationNumber: ".csc-loanIn-loanInNumber-numberPatternChooser"},
                 strings: {identificationNumberRequired: "Please specify a Loan In Number"}
             };
             var sbOpts = {
-                applier: "{pageBuilder}.applier",
                 uispec: "{pageBuilder}.uispec.sidebar",
-                currentRecordType: "loan in"
+                currentRecordType: "loanin"
             };
             
             var dependencies = {
                 titleBar: {
                     funcName: "cspace.titleBar",
-                    args: [".csc-loanin-titleBar-template", tbOpts]
+                    args: [".csc-loanIn-titleBar-template", "{pageBuilder}.applier", tbOpts]
                 },
                 tabs: {
                     funcName: "cspace.tabs",
-                    args: [".csc-tabs-template", tabsOpts]
+                    args: [".csc-tabs-template", "{pageBuilder}.applier", tabsOpts]
                 },
                 recordEditor: {
                     funcName: "cspace.recordEditor",
-                    args: [".csc-loanin-template", reOpts]
+                    args: [".csc-loanIn-template", "{pageBuilder}.applier", reOpts]
                 },
                 sidebar: {
                     funcName: "cspace.sidebar",
-                    args: [".csc-sidebar", sbOpts]
+                    args: [".csc-sidebar", "{pageBuilder}.applier", sbOpts]
                 }
             };
             var options = {
                 dataContext: {
                     options: {
-                        recordType: "loan in"
+                        recordType: "loanin"
                     }
                 },
                 pageSpec: {
@@ -82,8 +78,8 @@ cspace = cspace || {};
                     },
                     titleBar: {
                         href: "loanInTitleBar.html",
-                        templateSelector: ".csc-loanin-titleBar-template",
-                        targetSelector: ".csc-loanin-titleBar-container"
+                        templateSelector: ".csc-loanIn-titleBar-template",
+                        targetSelector: ".csc-loanIn-titleBar-container"
                     },
                     tabs: {
                         href: "tabsTemplate.html",
@@ -92,7 +88,7 @@ cspace = cspace || {};
                     },
                     dateEntry: {
                         href: "loanInTemplate.html",
-                        templateSelector: ".csc-loanin-template",
+                        templateSelector: ".csc-loanIn-template",
                         targetSelector: ".csc-record-edit-container"
                     },
                     sidebar: {
@@ -119,7 +115,7 @@ cspace = cspace || {};
         };
 
         if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
-            var uispecUrl = (cspace.util.isLocal() ? "./uispecs/acquisition/uispec.json" : "../../chain/acquisition/uispec");
+            var uispecUrl = (cspace.util.isLocal() ? "./uispecs/loanin/uispec.json" : "../../chain/loanin/uispec");
             jQuery.ajax({
                 url: uispecUrl,
                 type: "GET",

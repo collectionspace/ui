@@ -1,5 +1,5 @@
-<div class="csc-loanin-template">
-							<div class="csc-acquisition">
+<div class="csc-loanIn-template">
+							<div class="csc-loanIn">
 								<div id="secondary-nav">
 									<div id="secondary-nav-menu-sub">
 										<div class="upper-save"><input type="button" class="savebutton csc-save" value="Save"/></div>
@@ -8,7 +8,7 @@
 									</div>
 								</div>
 								
-								<div class="acquisition-outer-border">
+								<div class="loanIn-outer-border">
 
 									<div class="hidden csc-message-container cs-message">
 										<span class="csc-timestamp cs-timestamp">time</span>
@@ -36,8 +36,8 @@
 													<div class="info-column2-50 fl-force-left">
 														<div class="info-pair">
 															<div class="label">Loan In Number</div>
-															<div class="content csc-loanin-reference-number-patternChooserContainer">
-																<input type="text" class="input-numeric-long csc-loanin-numberPatternChooser-reference-number pattern-chooser-input" />
+															<div class="content csc-loanIn-loanInNumber-patternChooserContainer">
+																<input type="text" class="input-numeric-long csc-loanIn-loanInNumber pattern-chooser-input" />
 															</div>
 														</div>
 														
@@ -48,10 +48,10 @@
 															<div class="content">
 																<table>
 																	<tbody>
-																		<tr>
+																		<tr class="csc-loanIn-lender-row">
 																			<!--<td class="table-unselected"></td>-->
-																			<td><input type="text" class="csc-loanin-lender">
-                                                                                 <div class="csc-loanin-lender-autocomplete"></div>
+																			<td><input type="text" class="csc-loanIn-lender">
+                                                                                 <div class="csc-loanIn-lender-autocomplete"></div>
                                                                             </td>
 																		</tr>
 																	</tbody>
@@ -68,8 +68,8 @@
 																	<tbody>
 																		<tr>
 																			<!--<td class="table-unselected"></td>-->
-																			<td><input type="text" class="csc-loanin-contact">
-                                                                                 <div class="csc-loanin-contact-autocomplete"></div>
+																			<td><input type="text" class="csc-loanIn-lendersContact">
+                                                                                 <div class="csc-loanIn-lendersContact-autocomplete"></div>
                                                                             </td>
 																		</tr>
 																	</tbody>
@@ -81,7 +81,7 @@
 															<div class="header">
 																<div class="label">Authorization</div>
 															</div>
-															<div class="content csc-acquisition-authorizer-date-container">
+															<div class="content csc-loanIn-lendersAuthorizerDate-container">
 																<table>
 																	<thead>
 																		<tr>
@@ -92,10 +92,11 @@
 																	
 																	<tbody>
 																		<tr>
-																			<td><input type="text" class="csc-loanin-authorizer">
-                                                                            <div class="csc-loanin-authorizer-autocomplete"></div>
+																			<td><input type="text" class="csc-loanIn-lendersAuthorizer">
+                                                                            <div class="csc-loanIn-lendersAuthorizer-autocomplete"></div>
                                                                             </td>
-																			<td class="field-cal disabled"><input type="text" disabled class="input-date csc-loanin-authorizer-date csc-calendar-date deactivate"><img src="../images/cal.png" class="csc-calendar-button" alt="calendar"  height=19 width=18 /></td>
+																			<td class="field-cal"><input type="text" disabled class="input-date csc-loanIn-lendersAuthorizerDate csc-calendar-date deactivate"><img src="../images/cal.png" class="csc-calendar-button" alt="calendar"  height=19 width=18 />
+                                                                                                                                            <div class="csc-date-picker"></div></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -112,7 +113,7 @@
 																	<tbody>
 																		<tr>
 																			<!--<td class="table-unselected"></td>-->
-																			<td><textarea class="input-textarea csc-loanin-conditions"/></td>
+																			<td><textarea class="input-textarea csc-loanIn-loanInConditions"/></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -129,9 +130,9 @@
 															<div class="content">
 																<table>
 																	<tbody>
-																		<tr class="csc-loanin-purpose-row">
+																		<tr class="csc-loanIn-loanPurpose-row">
 																			<!--<td class="table-unselected"></td>-->
-																			<td><select class="csc-loanin-purpose input-select" /></td>
+																			<td><select class="csc-loanIn-loanPurpose input-select" /></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -147,8 +148,8 @@
 																	<tbody>
 																		<tr>
 																			<!--<td class="table-unselected"></td>-->
-																			<td><input type="text" class="csc-loanin-contact">
-                                                                                 <div class="csc-loanin-contact-autocomplete"></div>
+																			<td><input type="text" class="csc-loanIn-loanInContact">
+                                                                                 <div class="csc-loanIn-loanInContact-autocomplete"></div>
                                                                             </td>
 																		</tr>
 																	</tbody>
@@ -165,7 +166,7 @@
 																	<tbody>
 																		<tr>
 																			<!--<td class="table-unselected"></td>-->
-																			<td><textarea class="input-textarea csc-loanin-note"/></td>
+																			<td><textarea class="input-textarea csc-loanIn-loanInNote"/></td>
 																		</tr>
 																	</tbody>
 																</table>
