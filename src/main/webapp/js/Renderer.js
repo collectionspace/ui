@@ -15,11 +15,12 @@ cspace = cspace || {};
 (function ($, fluid) {
 
     var replaceIndex = function (comp, oldInd, newInd) {
+        var re = new RegExp(oldInd, "g");
         for (var key in comp) {
             if (comp.hasOwnProperty(key)) {
                 var val = comp[key];
                 if ((typeof(val) === "string") && (val.indexOf("${") !== -1)) {
-                    comp[key] = val.replace(oldInd+"", newInd+"");
+                    comp[key] = val.replace(re, newInd+"");
                 } else if (typeof(val) === "object") {
                     replaceIndex(val, oldInd, newInd);
                 }
