@@ -24,7 +24,7 @@ cspace = cspace || {};
     };
     var retrieveUserList = function (userList, model) {
         // TODO: Use the DC for this
-        var url = (cspace.util.isLocal() ? "data/user/records/list.json" : "../../chain/user");
+        var url = (cspace.util.isLocal() ? "data/user/records/list.json" : "../../chain/users");
         $.ajax({
             url: url,
             type: "GET",

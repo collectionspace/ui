@@ -13,7 +13,11 @@
         "description": "Licensed merchandise figurines from The Nightmare Before Christmas and Beetlejuice",
         "entryDate": "",
         "donor": "Richard Gere",
+        "depositor": "urn:cspace:org.collectionspace.demo:personauthority:id(cc025527-3f1f-4a21-84fc):person:id(9f14f23e-381a-4dc6-9bd6)'Achmed+Abdullah'"
     },
+    "termsUsed": [
+        {"sourceFieldName":"depositor","number":"Achmed Abdullah","csid":"9f14f23e-381a-4dc6-9bd6","recordtype":"person"}
+    ],
     "relations": [
         {
             "csid": "1984.068.0338",

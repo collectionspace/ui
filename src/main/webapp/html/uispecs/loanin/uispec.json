@@ -147,7 +147,7 @@
                     {
                         ".csc-related-number": {
                             "linktext": "${items.0.number}",
-                            "target": "object.html?csid=${items.0.csid}"
+                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
                          },
                         ".csc-related-summary": "${items.0.summary}"
                     }
