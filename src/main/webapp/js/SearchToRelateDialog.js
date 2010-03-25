@@ -56,9 +56,11 @@ cspace = cspace || {};
             .dialog({
                 autoOpen: false,
                 modal: true,
+				minWidth: 700,
+				draggable: true,
                 dialogClass: "cs-search-dialog",
-                position: [50,50],
-                midWidth: 700
+                position: ['center',100],
+				title: ""                
             });
         
         addDialog.parent().css("overflow", "visible");

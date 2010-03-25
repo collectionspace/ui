@@ -45,7 +45,7 @@
 .ui-dialog-titlebar {
 	background-color:#fff;
 	padding:4px 6px 4px 10px;
-	cursor:move;
+	/*cursor:move;*/
 	margin-top:20px;
 	min-width:250px;
 }
