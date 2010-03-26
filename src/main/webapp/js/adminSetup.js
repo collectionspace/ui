@@ -54,7 +54,9 @@ cspace = cspace || {};
         };
 
         if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
-            var uispecUrl = (cspace.util.isLocal() ? "./uispecs/admin/uispec.json" : "../../chain/users/uispec");
+//            var uispecUrl = (cspace.util.isLocal() ? "./uispecs/admin/uispec.json" : "../../chain/users/uispec");
+// Workaround for CSPACE-1320:
+            var uispecUrl = "./uispecs/admin/uispec.json";
             jQuery.ajax({
                 url: uispecUrl,
                 type: "GET",

@@ -157,7 +157,7 @@ cspace = cspace || {};
         dataContext: {
             type: "cspace.dataContext",
             options: {
-                recordType: "user",
+                recordType: "users",
                 dataType: "json",
                 fileExtension: ""
             }
