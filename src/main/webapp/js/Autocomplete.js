@@ -149,14 +149,6 @@ cspace = cspace || {};
             autoCompleteInput.val(parseLabelFromUrn(val));
         }
 
-        autoCompleteInput.blur(function () {
-            var storedVal = input.val();
-            var typedVal = autoCompleteInput.val();
-            if (typedVal !== parseLabelFromUrn(storedVal)) {
-                input.val(typedVal);
-                input.change();
-            }
-        });
     };
 
 	cspace.autocomplete = function (container, options) {
