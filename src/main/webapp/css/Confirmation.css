@@ -16,11 +16,12 @@
 	*position:relative;
 	z-index:99999;
 	border:0px solid #CECECE;
+	padding:0 10px 10px 10px;
 }
-.cs-confirmationDialog .label {float:left; padding-left:10px;}
+.cs-confirmationDialog .label {float:left; /*padding-left:10px;*/}
 
 .csc-confirmationDialog-inner {
-	padding:20px 20px 20px 20px;
+	/*padding:20px 20px 20px 20px;*/
 }
 .csc-confirmationDialog-inner .search-box {padding:10px 0; width:100%; float:left;}
 
@@ -32,22 +33,26 @@
 
 .csc-search-results {width:100%;}
 
-
-
 .ui-icon-closethick {
 	background-color:#fff;
 	flo at:right;
 	color:#6B8DA7;
+	margin: -8px -4px 0 0;
 }
 .ui-dialog-titlebar-close {
 	float:right;
 }
 .ui-dialog-titlebar {
 	background-color:#fff;
-	padding:4px 6px 4px 10px;
+	padding:10px 10px 20px 10px;
 	/*cursor:move;*/
 	margin-top:20px;
 	min-width:250px;
+	width:100%;
+}
+
+.ui-dialog-content {
+
 }
 .csc-confirmationDialog-text{
 	padding-bottom:2px;
@@ -60,8 +65,27 @@
 }
 .ui-dialog-title {
 	color:#6E6E6E;
-	font-size:14px;
+	font-size:18px;
 	font-weight:bold;
 	*float:left;
 }
 a, a:hover {text-decoration:none;}
+
+.cs-dialog-closeBtn {
+    position:absolute;
+    right:-20px;
+    top:-63px;
+    width:auto;
+    cursor:pointer;
+}
+.add-related-steps {height:74px; background: url('../images/linkRecords-one.png') 15px center no-repeat #EBEBEB; margin-bottom:10px; padding-left:80px;}
+.add-related-steps.stepTwo {background: url('../images/linkRecords-two.png') 15px center no-repeat #EBEBEB;}
+
+
+#search-box, #create-box {padding:6px 0 0 0; margin:0;}
+#relationship-box {padding:17px 0 0 0;}
+#search-box .header, #create-box .header, #relationship-box .header {color:#5A5A5A; font-size:12px; padding:0 0 0px 0;}
+#search-box .content, #create-box .content, #relationship-box .content {padding:0;}
+#search-box .select-recordtype {padding-top:6px;}
+
+#relationship-box {padding:17px 0 0 0;}

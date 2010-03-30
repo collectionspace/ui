@@ -60,7 +60,7 @@ cspace = cspace || {};
 				draggable: true,
                 dialogClass: "cs-search-dialog",
                 position: ['center',100],
-				title: ""                
+				title: "Link Records"                
             });
         
         addDialog.parent().css("overflow", "visible");
