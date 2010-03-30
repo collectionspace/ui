@@ -24,6 +24,10 @@ cspace = cspace || {};
               csid: that.applier.model.csid,
               uispec: that.options.uispec.termsUsed}]);
 
+        that.applier.modelChanged.addListener("termsUsed", function(model, oldModel, changeRequest) {
+            that.integratedAuthorities.updateModel(model.termsUsed);
+        });
+
         that.relatedProcedures = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedProcedures,
               that.applier,
              {recordType: "procedures",

@@ -90,6 +90,7 @@ cspace = cspace || {};
 
         that.options.dataContext.events.afterUpdate.addListener(function (data) {
             that.events.afterUpdateObjectDataSuccess.fire(data, that.options.strings.updateSuccessfulMessage);
+            that.applier.requestChange("termsUsed", data.termsUsed);
 	        cspace.util.displayTimestampedMessage(that, that.options.strings.updateSuccessfulMessage, Date());
             that.unsavedChanges = false;
         });
