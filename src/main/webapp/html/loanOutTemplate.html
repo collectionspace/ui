@@ -1,5 +1,5 @@
-<div class="csc-loanout-template">
-							<div class="csc-acquisition">
+<div class="csc-loanOut-template">
+							<div class="csc-loanOut">
 								<div id="secondary-nav">
 									<div id="secondary-nav-menu-sub">
 										<div class="upper-save"><input type="button" class="savebutton csc-save" value="Save"/></div>
@@ -22,13 +22,13 @@
 										<div class="info-column">	
 								
 											<!-- Information-block header -->
-											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-acquisition-information'); return false;">
-												<span class="header-toggle"><img id="toggle-acquisition-information-img"  src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-loanout-information'); return false;">
+												<span class="header-toggle"><img id="toggle-loanout-information-img"  src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
 												Object Entry Information
 											</div>
 											
 											<!-- Information-block content block -->
-											<div class="fl-container-flex fl-fix content main" id="toggle-acquisition-information">
+											<div class="fl-container-flex fl-fix content main" id="toggle-loanout-information">
 												<!-- The information-block is further broken down into two columns of equal size: left and right -->
 												
 												<!-- one row column -->
@@ -36,8 +36,8 @@
 													<div class="info-column2-50 fl-force-left">
 														<div class="info-pair">
 															<div class="label">Loan Out Number</div>
-															<div class="content csc-loanout-reference-number-patternChooserContainer">
-																<input type="text" class="input-numeric-long csc-loanout-numberPatternChooser-reference-number pattern-chooser-input" />
+															<div class="content csc-loanOut-loanOutNumber-patternChooserContainer">
+																<input type="text" class="input-numeric-long csc-loanOut-loanOutNumber pattern-chooser-input" />
 															</div>
 														</div>
 														
@@ -45,7 +45,7 @@
 															<div class="header">
 																<div class="label">Borrower</div>
 															</div>
-															<div class="content csc-acquisition-authorizer-date-container">
+															<div class="content">
 																<table>
 																	<thead>
 																		<tr>
@@ -56,15 +56,16 @@
 																	
 																	<tbody>
 																		<tr>
-																			<td><input type="text" class="csc-loanout-authorizer">
-                                                                            <div class="csc-loanout-authorizer-autocomplete"></div>
+																			<td><input type="text" class="csc-loanOut-borrower">
+                                                                            <div class="csc-loanOut-borrower-autocomplete"></div>
                                                                             </td>
-																			<td><input type="text" class=""></td>
+                                                                            <td><input type="text" class="csc-loanOut-borrowersContact">
+                                                                            <div class="csc-loanOut-borrowersContact-autocomplete"></div>
+                                                                            </td>
 																		</tr>
 																	</tbody>
 																</table>
-																<div class="csc-date-picker"></div>
-															</div>
+    														</div>
 														</div>
 														
 														<div class="info-pair">
@@ -75,8 +76,7 @@
 																<table>
 																	<tbody>
 																		<tr>
-																			<!--<td class="table-unselected"></td>-->
-																			<td><textarea class="input-textarea csc-loanout-conditions"/></td>
+																			<td><textarea class="input-textarea csc-loanOut-loanOutConditions"/></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -93,9 +93,8 @@
 															<div class="content">
 																<table>
 																	<tbody>
-																		<tr class="csc-loanout-purpose-row">
-																			<!--<td class="table-unselected"></td>-->
-																			<td><select class="csc-loanout-purpose input-select" /></td>
+																		<tr>
+																			<td><select class="csc-loanOut-loanPurpose input-select" /></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -117,8 +116,8 @@
 																	
 																	<tbody>
 																		<tr>
-																			<td><input type="text" class="csc-loanout-authorizer">
-                                                                            <div class="csc-loanout-authorizer-autocomplete"></div>
+																			<td><input type="text" class="csc-loanOut-lendersAuthorizer">
+                                                                            <div class="csc-loanOut-lendersAuthorizer-autocomplete"></div>
                                                                             </td>
 																			<td><input type="text" class=""></td>
 																		</tr>
@@ -137,7 +136,7 @@
 																	<tbody>
 																		<tr>
 																			<!--<td class="table-unselected"></td>-->
-																			<td><textarea class="input-textarea csc-loanout-note"/></td>
+																			<td><textarea class="input-textarea csc-loanOut-loanOutNote"/></td>
 																		</tr>
 																	</tbody>
 																</table>
@@ -151,7 +150,7 @@
 															<div class="header">
 																<div class="label">Loaned Object Status</div>
 															</div>
-															<div class="content csc-loanIn-lendersAuthorizerDate-container">
+															<div class="content">
 																<table>
 																	<thead>
 																		<tr>
@@ -163,15 +162,14 @@
 																	
 																	<tbody>
 																		<tr>
-																			<td><input type="text" class="csc-loanout-loandedObjectStatus"></td>
-																			<td class="field-cal"><input type="text" disabled class="input-date csc-loanIn-loandedObjectStatusDate csc-calendar-date deactivate"><img src="../images/cal.png" class="csc-calendar-button" alt="calendar"  height=19 width=18 />
+																			<td><select class="csc-loanOut-loanedObjectStatus input-select" /></td>
+																			<td class="field-cal csc-loanOut-loanedObjectStatusDate-container"><input type="text" disabled class="input-date csc-loanOut-loanedObjectStatusDate csc-calendar-date deactivate"><img src="../images/cal.png" class="csc-calendar-button" alt="calendar"  height=19 width=18 />
                                                                                 <div class="csc-date-picker"></div></td>
-																			<td><input type="text" class="csc-loanout-loandedObjectStatusNote"></td>
+																			<td><input type="text" class="csc-loanOut-loanedObjectStatusNote"></td>
 																			
 																		</tr>
 																	</tbody>
 																</table>
-																<div class="csc-date-picker"></div>
 															</div>
 														</div>
 													</div>
@@ -182,15 +180,16 @@
 															<div class="header">
 																<div class="label">Loan Out Date</div>
 															</div>
-															<div class="content csc-loanOut-date-container">
+															<div class="content">
 																<table>
 																	<tbody>
 																		<tr>
-																			<td class="field-cal disabled"><input type="text" class="input-date csc-loanOut-date csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></a></td>
+																			<td class="field-cal csc-loanOut-loanOutDate-container"><input type="text" class="input-date csc-loanOut-loanOutDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></a>
+                                                                                                                                            <div class="csc-date-picker"></div>
+</td>
 																		</tr>
 																	</tbody>
 																</table>
-																<div class="csc-date-picker"></div>
 															</div>
 														</div>
 													</div>
@@ -200,15 +199,16 @@
 															<div class="header">
 																<div class="label">Loan Return Date</div>
 															</div>
-															<div class="content csc-loanIn-returnDate-container">
+															<div class="content">
 																<table>
 																	<tbody>
 																		<tr>
-																			<td class="field-cal disabled"><input type="text" class="input-date csc-loanOut-returnDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></a></td>
+																			<td class="field-cal csc-loanOut-loanReturnDate-container"><input type="text" class="input-date csc-loanOut-loanReturnDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></a>
+                                                                                                                                            <div class="csc-date-picker"></div>
+</td>
 																		</tr>
 																	</tbody>
 																</table>
-																<div class="csc-date-picker"></div>
 															</div>
 														</div>
 													</div>
@@ -218,15 +218,15 @@
 															<div class="header">
 																<div class="label">Loan Renewal Application Date</div>
 															</div>
-															<div class="content csc-loanIn-renewalApplicationDate-container">
+															<div class="content">
 																<table>
 																	<tbody>
 																		<tr>
-																			<td class="field-cal disabled"><input type="text" class="input-date csc-loanOut-renewalApplicationDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></a></td>
+																			<td class="field-cal csc-loanOut-loanRenewalApplicationDate-container"><input type="text" class="input-date csc-loanOut-loanRenewalApplicationDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></a>
+                                                                                                                                            <div class="csc-date-picker"></div></td>
 																		</tr>
 																	</tbody>
 																</table>
-																<div class="csc-date-picker"></div>
 															</div>
 														</div>
 													</div>

@@ -1,0 +1,19 @@
+{
+    "csid": "124357689",
+    "fields": {
+        "loanOutNumber": "LO2010.1",
+        "loanPurpose": "scientificorexhibitpreparation",
+        "borrower": "urn:cspace:org.collectionspace.demo:orgauthority:id(00c0a279-973c-41cf-9f5a):organization:id(ede71f8a-3f07-4565-9063)'Bing+Crosby+Ice+Cream+Sales%2C+Inc.'",
+        "borrowersContact": "urn:cspace:org.collectionspace.demo:personauthority:id(cc025527-3f1f-4a21-84fc):person:id(933ebb8d-78b1-4c4f-ae55)'Dic+Penderyn'",
+        "lendersAuthorizer": "urn:cspace:org.collectionspace.demo:personauthority:id(cc025527-3f1f-4a21-84fc):person:id(13f09f22-794b-4ef9-9f7d)'Phyllis+Allen'",
+        "lendersContact": "urn:cspace:org.collectionspace.demo:personauthority:id(cc025527-3f1f-4a21-84fc):person:id(933ebb8d-78b1-4c4f-ae55)'Dic+Penderyn'",
+        "loanOutConditions": "very good",
+        "loanOutNote": "Take good care of it",
+        "loanedObjectStatus": "photographyrequested",
+        "loanedObjectStatusDate": "March 25, 2010",
+        "loanedObjectStatusNote": "Please take a nice picture - you know: good lighting, nice background...",
+        "loanOutDate": "March 26, 2010",
+        "loanReturnDate": "April 26, 2010",
+        "loanRenewalApplicationDate": "April 25, 2010"
+    }
+}

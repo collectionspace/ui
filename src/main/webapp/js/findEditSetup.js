@@ -32,6 +32,10 @@ cspace = cspace || {};
                 dataContext: { options: { recordType: "loanin" } },
                 uispec: "{pageBuilder}.uispec.proceduresLoanIn"
             };
+            var loOpts = {
+                dataContext: { options: { recordType: "loanout" } },
+                uispec: "{pageBuilder}.uispec.proceduresLoanOut"
+            };
             if (cspace.util.isLocal()) {
                 objOpts.dataContext.options = {
                     baseUrl: "data",
@@ -40,10 +44,12 @@ cspace = cspace || {};
                 };
                 intOpts.dataContext.options.baseUrl = 
                     acqOpts.dataContext.options.baseUrl =  
-                        liOpts.dataContext.options.baseUrl = "data";
+                        liOpts.dataContext.options.baseUrl =  
+                            loOpts.dataContext.options.baseUrl = "data";
                 intOpts.dataContext.options.fileExtension = 
                     acqOpts.dataContext.options.fileExtension = 
-                        liOpts.dataContext.options.fileExtension = ".json";
+                        liOpts.dataContext.options.fileExtension = 
+                            loOpts.dataContext.options.fileExtension = ".json";
             }
             var dependencies = {
                 objects: {
@@ -61,6 +67,10 @@ cspace = cspace || {};
                 proceduresLoanIn: {
                     funcName: "cspace.recordList",
                     args: [".loanIn-records-group", liOpts]
+                },
+                proceduresLoanOut: {
+                    funcName: "cspace.recordList",
+                    args: [".loanOut-records-group", loOpts]
                 }
             };
             

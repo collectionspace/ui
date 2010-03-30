@@ -23,11 +23,11 @@ cspace = cspace || {};
             };
             var tabsOpts = {
                 tabList: [
-                    {name: "Loan In", target: "#primaryTab"},
+                    {name: "Loan Out", target: "#primaryTab"},
 					{name: "Acquisition", target: null},
 					{name: "Cataloging", target: "objectTabPlaceholder.html"},
 					{name: "Intake", target: null},
-					{name: "Loan Out", target: null},
+					{name: "Loan In", target: null},
 					{name: "Location &amp; Movement", target: null},
 					{name: "Media", target: null}
                 ],
@@ -36,7 +36,7 @@ cspace = cspace || {};
             var reOpts = {
                 dataContext: "{pageBuilder}.dataContext",
                 uispec: "{pageBuilder}.uispec.recordEditor",
-                selectors: {identificationNumber: ".csc-loanout-numberPatternChooser-reference-number"},
+                selectors: {identificationNumber: ".csc-loanOut-loanOutNumber-numberPatternChooser"},
                 strings: {identificationNumberRequired: "Please specify a Loan Out Number"}
             };
             var sbOpts = {
@@ -47,7 +47,7 @@ cspace = cspace || {};
             var dependencies = {
                 titleBar: {
                     funcName: "cspace.titleBar",
-                    args: [".csc-loanout-titleBar-template", "{pageBuilder}.applier", tbOpts]
+                    args: [".csc-loanOut-titleBar-template", "{pageBuilder}.applier", tbOpts]
                 },
                 tabs: {
                     funcName: "cspace.tabs",
@@ -55,7 +55,7 @@ cspace = cspace || {};
                 },
                 recordEditor: {
                     funcName: "cspace.recordEditor",
-                    args: [".csc-loanout-template", "{pageBuilder}.applier", reOpts]
+                    args: [".csc-loanOut-template", "{pageBuilder}.applier", reOpts]
                 },
                 sidebar: {
                     funcName: "cspace.sidebar",
@@ -76,8 +76,8 @@ cspace = cspace || {};
                     },
                     titleBar: {
                         href: "loanoutTitleBar.html",
-                        templateSelector: ".csc-loanout-titleBar-template",
-                        targetSelector: ".csc-loanout-titleBar-container"
+                        templateSelector: ".csc-loanOut-titleBar-template",
+                        targetSelector: ".csc-loanOut-titleBar-container"
                     },
                     tabs: {
                         href: "tabsTemplate.html",
@@ -86,7 +86,7 @@ cspace = cspace || {};
                     },
                     dateEntry: {
                         href: "loanoutTemplate.html",
-                        templateSelector: ".csc-loanout-template",
+                        templateSelector: ".csc-loanOut-template",
                         targetSelector: ".csc-record-edit-container"
                     },
                     sidebar: {
@@ -113,7 +113,7 @@ cspace = cspace || {};
         };
 
         if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
-            var uispecUrl = (cspace.util.isLocal() ? "./uispecs/acquisition/uispec.json" : "../../chain/acquisition/uispec");
+            var uispecUrl = (cspace.util.isLocal() ? "./uispecs/loanout/uispec.json" : "../../chain/loanout/uispec");
             jQuery.ajax({
                 url: uispecUrl,
                 type: "GET",
@@ -123,7 +123,7 @@ cspace = cspace || {};
                     setUpPage();
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log("Error fetching acquisition uispec");
+                    console.log("Error fetching loanout uispec");
                 }
             });
         } else {
