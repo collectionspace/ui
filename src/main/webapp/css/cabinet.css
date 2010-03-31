@@ -1,0 +1,11 @@
+/* tentative Fluid Cabinet component styling */
+
+.flc-cabinet {border: 1px solid #C7CFD4; font-size:11px; line-height:100%;}
+.flc-cabinet-mainheader {border-bottom: 1px solid #C7CFD4; background-color:#E8E8E8; padding: 2px 0;}
+.flc-cabinet-mainheader .label {font-weight:normal; padding: 0 5px; font-size:10px;}
+.flc-cabinet-handle, .flc-cabinet-row {padding:3px 4px 4px 6px;}
+a.flc-cabinet-header {text-decoration:none;}
+.flc-cabinet-drawer  {margin-left:12px;}
+.checkbox-row {position:absolute; left:0; float:left;}
+.checkbox {padding: 0 10px;}
+.permission-name {padding-left:90px; float:left;}

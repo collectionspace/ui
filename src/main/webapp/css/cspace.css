@@ -14,7 +14,7 @@ textarea {overflow:auto;}
 /* input form selectors */
 input, textarea {font-family:inherit; font-size:12px; font-weight:inherit; line-height:15px; padding:0; margin:0; /**margin-bottom:0px; */
 	border:0px solid #C7CFD4; overflow:visible; height:17px; padding:1px 0 1px 0;}
-input[type="button"], input[type="submit"] {height:auto;}
+input[type="button"], input[type="submit"], input[type="checkbox"] {height:auto;}
 input:focus, textarea:focus {outline: 1px solid black;}
 input[type="text"], input[type="password"], textarea {/*width:99.5%;*/ width:100%; margin:0;}
 input.savebutton, input.globalSearchButton, input.cancelbutton, input.button, input.button.add, input.button.addrecordbutton
@@ -160,15 +160,16 @@ li .flc-pager-pageLink {margin-top:-1px;}
 #secondary-nav-menu-sub .time-stamp {float:right; padding-top:6px; font-size:10px; color:#BEBEBE;}
 
 /*search page related */ /* need to revisit */
-#search-box {padding: 10px; margin-bottom:2px; background-color:#F3F3F#; border:0px solid #CECFD1;}
+#search-box {padding: 10px; /*margin-bottom:2px;*/ border:0px solid #CECFD1;}
 #search-box input.button {margin-left:10px;}
 #create-box {padding: 12px 0 12px 12px; margin:0 0 20px 0; /*background-color:#E6E6E6;*/ border:0px solid #CECFD1;}
 .search-box {background-color:#E6E6E6; border:1px solid #CECFD1;}
+.main-users-page #search-box {background-color:#E8E8E8; margin-bottom:12px;}
 .search-bar {}
 .main-search-page {border-top:1px solid #F2F2F3; border-bottom:1px solid #F2F2F3;}
 /*.csc-search-submit, .csc-search-pivot-submit, .cs-new-user-submit {padding:2px 25px 0px 25px; margin:0; border:1px solid #94A8B5; 
 	background-color:#336384; color:#fff; text-decoration:none; font-size:12px; line-height:12px;}*/
-.cs-new-user-submit {float:right; margin-right:14px;}
+.cs-new-user-submit {float:right; /*margin-right:14px;*/}
 .csc-search-pivot-submit-container {padding:14px 0 0 8px; float:right;}
 /*.csc-global-search-submit {padding:3px 10px 1px; background-color:#D5D6D7; color:#000;}*/
 .csc-search-keywords, .csc-search-user {width:50% !important; margin:0 12px 0 0; height:16px; border:1px solid #BCBDBD; 
@@ -236,11 +237,13 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .info-column 	 {width: 100%;}
 .info-column1 	 {width: 100%;}
 .info-column2	 {width:  49%;} 
-.info-column2-30 {width:  29%;}
-.info-column2-40 {width:  39%;}
+.info-column2-20 {width:  20%;} 
+.info-column2-30 {width:  30%;}
+.info-column2-40 {width:  40%;}
 .info-column2-50 {width:  49%;}
 .info-column2-60 {width:  59%;}
 .info-column2-70 {width:  69%;}
+.info-column2-80 {width:  79%;}
 .info-column3 	 {width:  33%;}
 
 .fl-container-1024   {min-width: 1084px;}
@@ -249,7 +252,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 /*.fl-container-1024-inner {padding: 0 10px 0 4px;}*/
 .fl-container-1024-inner {padding:0;}
 .fl-container-left {min-width:740px; width:69%;}
-.fl-container-users   {/*width: 748px;*/ width:79%; min-width:800x;}
+.fl-container-admin   {/*width: 748px;*/ width:79%; min-width:800x;}
 .fl-container-pivot  {width:29%; min-width: 248px;}
 .fl-container-admin-menu {width:20%; min-width: 200px;}
 .fl-container-admin-menu ul {width:100%;}
@@ -347,31 +350,35 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 
 .add-more {float:right; color:#000; /**padding-top:2px;*/ margin:4px 4px 0 0;}
 
-
-.fl-container-users  .information-group       {padding:0 0 20px 0;}
-.fl-container-users  .information-subgroup {padding:10px 0;}
-.fl-container-users  .information-group       .content 	{border:none; background-color: #E6E6E6; padding: 12px 12px 12px 12px; width:auto; display:block;}
-.fl-container-users  .information-subgroup .content 	{border:none; background-color: #F3F3F3; padding: 10px; width:auto; display:block; border:0px solid #CECFD1;}
-.fl-container-users  .information-group       .header   	{font-size:15px; line-height:15px; background-color:#6A8EA8; cursor:pointer;}
-.fl-container-users  .information-group       .sub-header {font-size:14px; line-height:14px; font-weight:bold; padding-bottom: 15px; background-color:#E6E6E6;}
-.fl-container-users  .information-subgroup .header   	{font-size:14px; line-height:14px; background-color:inherit; padding-bottom:8px; color:#3D3A3A;}
-.fl-container-users  .information-subgroup  table {font-size:12px; line-height:12px; background-color:#E6E6E6; width:99%; border:1px solid #C7CFD4; margin:1px;}
-.fl-container-users  .information-subgroup  table thead tr td {font-size:11px; line-height:11px; background-color:#E8E8E8; padding:2px 2px 2px 5px; border:1px solid #C7CFD4; color:#231F20;}
-.fl-container-users  .information-subgroup  table tbody {border:1px solid #000;}
-.fl-container-users  .information-subgroup  table tbody tr td {background-color:#fff; padding: 4px 2px 3px 5px; border:1px solid #C7CFD4; border-bottom:1px solid #E9E8E8; color:#606060}
-.fl-container-users  .information-subgroup  table tbody tr:hover td {background-color:#BFF4FF; cursor:pointer;}
-.fl-container-users  .information-subgroup  table tbody tr.add-new-user td {color:#A9A59B; font-weight:bold; background-color:#F5F3DC;}
-.fl-container-users  .information-subgroup  table tbody tr.last td{border-bottom:1px solid #C7CFD4;}
+.fl-container-admin  .information-group       {padding:0 0 20px 0;}
+.fl-container-admin  .information-subgroup {padding:12px 10px 10px 10px; border:1px solid #C7CFD4; width:auto; background-color:#F0F5FA;}
+.fl-container-admin  .information-group       .content 	{border:none; background-color: #E6E6E6; padding: 12px 12px 12px 12px; width:auto; display:block;}
+.fl-container-admin  .information-subgroup .content 	{border:none; background-color: inherit; padding: 0px; width:auto; display:block; border:0px solid #CECFD1; width:100%;}
+.fl-container-admin  .information-subgroup .content input {border:1px solid #C7CFD4; width:98%;}
+.fl-container-admin  .information-group       .header   	{font-size:14px; line-height:14px; background-color:inherit; padding-bottom:8px; color:#3A3A3A;}
+.fl-container-admin  .information-group       .sub-header {font-size:14px; line-height:14px; font-weight:bold; padding-bottom: 15px; background-color:#E6E6E6;}
+.fl-container-admin  .information-subgroup .header   	{font-size:14px; line-height:14px; background-color:inherit; padding-bottom:8px; color:#3A3A3A;}
+.fl-container-admin  .information-group  table {font-size:12px; line-height:12px; background-color:#E6E6E6; width:99.5%; border:1px solid #C7CFD4; /*margin:1px;*/}
+.fl-container-admin  .information-group  table thead tr td {font-size:11px; line-height:11px; background-color:#E8E8E8; padding:2px 2px 2px 5px; border:1px solid #C7CFD4; color:#3A3A3A;}
+.fl-container-admin  .information-group  table.permissions thead tr td {border:none; border-bottom:1px solid #C7CFD4;}
+.fl-container-admin  .information-group  table tbody {border:1px solid #C7CFD4;}
+.fl-container-admin  .information-group  table tbody tr td {background-color:#fff; padding: 4px 2px 3px 5px; border:1px solid #C7CFD4; /*border-bottom:1px solid #E9E8E8;*/ color:#3A3A3A;}
+.fl-container-admin  .information-group  table.permissions tbody tr td {border:none; border-bottom:1px solid #C7CFD4;}
+.fl-container-admin  .information-group  table.hover tbody tr:hover td {background-color:#BFF4FF; cursor:pointer;}
+.fl-container-admin  .information-group  table tbody tr.add-new-user td {color:#A9A59B; font-weight:bold; background-color:#F5F3DC;}
+.fl-container-admin  .information-group  table tbody tr.last td{border-bottom:1px solid #C7CFD4;}
 .new-user-background {background-color:#F5F3DC !important;}
 
-.overflow-user-list {max-height:300px; overflow-x:hidden; overflow-y:auto; margin-bottom:24px; width:100%;}
+
+.overflow-user-list {max-height:300px; overflow-x:hidden; overflow-y:auto; margin-bottom:10px; width:100%; }
 .user-details { border:1px solid #C7CFD4; padding:10px; background-color:#F0F5FA; min-width:364px;}
-.user-details-fields {padding-bottom:0px;}
+.user-details-fields {padding-bottom:10px;}
 .user-details .info-pair {padding-bottom:16px;}
 .user-details .info-pair .label {float:left; width:110px; font-weight:bold; text-align:right; padding:6px 14px 0 0 ;}
 .user-details .info-pair .user-input {float:left; width:230px;}
 .user-details .info-pair .user-input input {border:1px solid #C7CFD4;}
 
+.permission-retails {}
 
 .create-new .radio-buttons {width:100%;}
 .create-new .radio-button	{min-width: 100px; padding:4px 20px 4px 0; font-size:14px; line-height:14px; float:left;}

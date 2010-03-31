@@ -42,13 +42,11 @@
     </head>
     <body>
 	
-		<!-- body content -->
 		<div class="fl-container-1024 fl-centered">
 		
 			<div id="header-menu" class="csc-header-container"></div>
 			
 			<div class="fl-container-1024-inner">
-			
 				<div id="title-bar" class="nobg">
 					<div class="content">
 						<div class="header-name">Administration</div>
@@ -56,27 +54,20 @@
 				</div>
 			
 				<div id="all-content" class="fl-fix">
-
-					<!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
 					<div class="fl-fix fl-container-flex fl-col-mixed2">
-
 						<div class="fl-container-pivot-users fl-container-admin-menu fl-force-left" id="">
-							
 							<ul>
 								<li class="selected">Users</li>
-								<li class="inactive">Roles and Permission</li>
+								<li class=""><a href="roles.html">Roles and Permission</a></li>
 								<li class="inactive">Help Management</li>
 								<li class="inactive">Reporting</li>
 								<li class="inactive">Numbering</li>
 								<li class="inactive">Templates</li>
 							</ul>
-							
-						</div> <!-- END sub-main content -->
+						</div>
 						
-						<div class="fl-container-users fl-force-right">
-				
+						<div class="fl-container-admin fl-force-right">
 							<div class="main-users-page csc-users-userAdmin">
-
 								<div id="search-box">
 									<!-- search form -->
 									<form>
@@ -85,11 +76,8 @@
 								</div>
 
                                 <div class="csc-user-list">
-    							
-									<div class="fl-container-flex fl-fix information-subgroup">
-
+									<div class="fl-container-flex fl-fix information-group">
 										<div class="fl-container-flex fl-fix content" id="">
-											
 											<div class="info-column2-60 fl-force-left">
 												<div class="fl-container-flex header">
 													Users
@@ -116,16 +104,13 @@
 														</tbody>
 													</table>
 												</div>
-												
 												<input type="submit" class="cs-new-user-submit csc-user-createNew button" value="Create New User" />
-												
 												<div class="clear"></div>
 											</div>
 											
 											<div class="info-column2-40 fl-force-right">
 												<div class="fl-container-flex header">User Details</div>
 												<div class="user-details">
-
                                                     <div class="hidden csc-message-container cs-message">
                                                         <span class="csc-timestamp cs-timestamp">time</span>
                                                         <span class="csc-message">Save successful!</span>
@@ -153,11 +138,10 @@
 														<div class="info-pair">
 															<div class="label">Email Address</div><div class="user-input"><input type="text" class="input-alpha csc-user-email csc-user-required" name=""/></div>
 														</div>
-													
 														<div class="info-pair">
 															<div class="label">Status</div><div class="user-input">
                                                                 <select class="csc-user-status csc-user-required"></select>
-                                                                </div>
+                                                            </div>
 														</div>
                                                         <div class="fl-container-flex">
                                                             <input type="button" class="savebutton button csc-save savebutton" value="Save" />
@@ -172,15 +156,13 @@
 											</div>
 											<div class="clear"></div>
 										</div>									
-									</div> <!-- end information group -->
+									</div>
                                 </div>
 							</div>
 						</div>
 						<div class="clear"></div>
 					</div>
 				</div>
-			
-			<!-- end inner -->
 			</div>
 			
 			<!-- footer block -->
