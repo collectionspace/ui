@@ -35,25 +35,27 @@ cspace = cspace || {};
                 cspace.autocomplete.addConfirmDlg.field.change();
             },
             error: function () {
-                console.log("error posting new term");
+                fluid.fail("error posting new term");
             }
         });
     };
 
-    var addNewTerm = function () {
-        if (cspace.util.isLocal()) {
-            cspace.autocomplete.addConfirmDlg.hide();
-            return;
-        }
-        $.ajax({
-            url: cspace.autocomplete.addConfirmDlg.vocabUrl,
-            dataType: "json",
-            type: "GET",
-            success: postNewTerm,
-            error: function () {
-                console.log("error getting new term url");
+    var addNewTerm = function (vocabUrl) {
+        return function () {
+            if (cspace.util.isLocal()) {
+                cspace.autocomplete.addConfirmDlg.hide();
+                return;
             }
-        });
+            $.ajax({
+                url: vocabUrl,
+                dataType: "json",
+                type: "GET",
+                success: postNewTerm,
+                error: function () {
+                    fluid.fail("error getting new term url");
+                }
+            });
+        };
     };
 
     var clearNewTerm = function () {
@@ -61,7 +63,7 @@ cspace = cspace || {};
         cspace.autocomplete.addConfirmDlg.hide();
     };
 
-    var showConfirmation = function (newTerm, field, domBinder) {
+    var showConfirmation = function (newTerm, field, domBinder, vocabUrl) {
         $("ul.ui-autocomplete", field.parent()).hide();
         domBinder.locate("newTerm", cspace.autocomplete.addConfirmDlg).text(newTerm);
 
@@ -71,6 +73,7 @@ cspace = cspace || {};
         cspace.autocomplete.addConfirmDlg.fieldToClear = autocompleteInput;
 
         autocompleteInput.after(cspace.autocomplete.addConfirmDlg);
+        domBinder.locate("addButton", cspace.autocomplete.addConfirmDlg).click(addNewTerm(vocabUrl));
         cspace.autocomplete.addConfirmDlg.show();
     };
 
@@ -87,11 +90,9 @@ cspace = cspace || {};
                 cspace.autocomplete.addConfirmDlg = $(resources.addConfirm.resourceText, that.container[0].ownerDocument);
                 cspace.autocomplete.addConfirmDlg.hide();
 
-                cspace.autocomplete.addConfirmDlg.vocabUrl = that.options.vocabUrl;
                 cspace.autocomplete.addConfirmDlg.newDisplayName = "";
 
                 that.locate("clearButton", cspace.autocomplete.addConfirmDlg).click(clearNewTerm);
-                that.locate("addButton", cspace.autocomplete.addConfirmDlg).click(addNewTerm);
             });
         }
     };
@@ -104,7 +105,7 @@ cspace = cspace || {};
                 success: function(data){
                     var dataArray;
                     if (data === "") {
-                            showConfirmation(request.term, that.container, that.dom);
+                            showConfirmation(request.term, that.container, that.dom, that.options.vocabUrl);
                     } else {
                         cspace.autocomplete.addConfirmDlg.hide();
                         var newdata = "[" + data.replace(/}\s*{/g, "},{") + "]";
@@ -119,7 +120,7 @@ cspace = cspace || {};
                             testdata = ["Fred Allen", "Phyllis Allen", "Karen Allen", "Rex Allen"];
                             callback(testdata);
                         } else {
-                            showConfirmation(request.term, that.container, that.dom);
+                            showConfirmation(request.term, that.container, that.dom, that.options.vocabUrl);
                         }
                     }
                 }
