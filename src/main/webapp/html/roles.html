@@ -68,28 +68,44 @@
 									<div class="fl-container-flex fl-fix information-group">
 										<div class="fl-container-flex fl-fix content" id="">
 											<div class="info-column2-20 fl-force-left">
+												
 												<div class="fl-container-flex header">
-													Roles by Department
+													<div class="fl-force-left">Roles</div>
+													<div class="addrole"><input type="button" class="button small" value="+ role" /></div>
+													<div class="clear"></div>
 												</div>
 												<div class="overflow-user-list csc-user-userList">
 													<table class="user-table hover">
-														<thead>
-															<tr>
-																<td>User Name</td>
-															</tr>
-														</thead>
 														<tbody>
-															<tr class="csc-user-userList-row">
-																<td class="csc-user-userList-name">Megan Forbes</td>
+															<tr>
+																<td class="header">Summer Interns</td>
 															</tr>
 															<tr class="csc-user-userList-row">
-																<td class="csc-user-userList-name">Jesse Martinez</td>
+																<td class="csc-user-userList-name">Scanning Intern</td>
 															</tr>
 															<tr class="csc-user-userList-row">
-																<td class="csc-user-userList-name">Erin Yu</td>
+																<td class="csc-user-userList-name">Media Intern</td>
 															</tr>
 															<tr class="csc-user-userList-row">
-																<td class="csc-user-userList-name">Anastasia Cheetham</td>
+																<td class="csc-user-userList-name selected">Cataloging Intern</td>
+															</tr>
+															<tr class="csc-user-userList-row">
+																<td class="csc-user-userList-name">Inventory Intern</td>
+															</tr>
+															<tr>
+																<td class="header">Museum Staff</td>
+															</tr>
+															<tr class="csc-user-userList-row">
+																<td class="csc-user-userList-name">PR</td>
+															</tr>
+															<tr class="csc-user-userList-row">
+																<td class="csc-user-userList-name">Curator</td>
+															</tr>
+															<tr class="csc-user-userList-row">
+																<td class="csc-user-userList-name">Educator</td>
+															</tr>
+															<tr class="csc-user-userList-row">
+																<td class="csc-user-userList-name">Director</td>
 															</tr>
 														</tbody>
 													</table>
@@ -144,13 +160,13 @@
 																		<div class="flc-cabinet-drawer">
 																			<div class="flc-cabinet-header flc-cabinet-handle">
 																				<div class="checkbox-row"><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span></div>
-																				<div class="permission-name"><a href="#_" class="flc-cabinet-header">Object Identification</a></div><div class="clear"></div>
+																				<div class="permission-name"><a href="#_" class="flc-cabinet-header">Intake</a></div><div class="clear"></div>
 																			</div>
 																			<div class="flc-cabinet-contents">
 																				<div class="flc-cabinet-drawer">
 																					<div class="flc-cabinet-header flc-cabinet-handle">
 																						<div class="checkbox-row"><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span></div>
-																						<div class="permission-name"><a href="#_" class="flc-cabinet-header">Titles</a></div><div class="clear"></div>
+																						<div class="permission-name"><a href="#_" class="flc-cabinet-header">Sublevel</a></div><div class="clear"></div>
 																					</div>
 																					
 																					<div class="flc-cabinet-contents">
@@ -168,7 +184,7 @@
 																					
 																					<div class="flc-cabinet-row">
 																						<div class="checkbox-row"><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span></div>
-																						<div class="permission-name">Accession Number</div><div class="clear"></div>
+																						<div class="permission-name">Another Something</div><div class="clear"></div>
 																					</div>
 																				</div>
 																			</div>
@@ -176,17 +192,17 @@
 																		<div class="flc-cabinet-drawer">
 																			<div class="flc-cabinet-header flc-cabinet-handle">
 																				<div class="checkbox-row"><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span></div>
-																				<div class="permission-name"><a href="#_" class="flc-cabinet-header">Description</a></div><div class="clear"></div>
+																				<div class="permission-name"><a href="#_" class="flc-cabinet-header">Name Authority</a></div><div class="clear"></div>
 																			</div>
 																			<div class="flc-cabinet-contents">
 																				<div class="flc-cabinet-drawer">
 																					<div class="flc-cabinet-row">
 																						<div class="checkbox-row"><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span></div>
-																						<div  class="permission-name">Copy Number</div><div class="clear"></div>
+																						<div  class="permission-name">Fish</div><div class="clear"></div>
 																					</div>
 																					<div class="flc-cabinet-row">
 																						<div class="checkbox-row"><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span></div>
-																						<div class="permission-name">Object Status</div><div class="clear"></div>
+																						<div class="permission-name">Chips</div><div class="clear"></div>
 																					</div>
 																				</div>
 																			</div>
@@ -194,10 +210,19 @@
 																	</div>
 																</div>
 															</div>
-															
 														</div>
 													</div>
 													<div class="clear"></div>
+												</div>
+												<div class="role-buttons">
+													<div class="fl-force-left">
+														<a href="#"><input class="button inversebutton" type="button" value="Delete" /></a>
+														<a href="#"><input class="button inversebutton" type="button" value="Duplicate" /></a>
+													</div>
+													<div class="fl-force-right">
+														<a href="#"><input class="button inversebutton" type="button" class="inversebutton" value="Cancel" /></a>
+														<a href="#"><input class="button" type="button" value="Save" /></a>
+													</div>
 												</div>
 												<div class="clear"></div>
 											</div>
