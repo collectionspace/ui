@@ -123,7 +123,7 @@ cspace = cspace || {};
                     setUpPage();
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log("Error fetching acquisition uispec");
+                    fluid.fail("Error fetching loanIn uispec:" + textStatus);
                 }
             });
         } else {

@@ -123,7 +123,7 @@ cspace = cspace || {};
                     setUpPage();
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log("Error fetching loanout uispec");
+                    fluid.fail("Error fetching loanOut uispec:" + textStatus);
                 }
             });
         } else {

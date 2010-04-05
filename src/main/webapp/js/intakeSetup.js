@@ -127,7 +127,7 @@ cspace = cspace || {};
                     setUpPage();
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log("Error fetching intake uispec!");
+                    fluid.fail("Error fetching intake uispec:" + textStatus);
                 }
             });
         } else {

@@ -66,7 +66,7 @@ cspace = cspace || {};
                     setUpPage();
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log("Error fetching admin uispec: " + textStatus);
+                    fluid.fail("Error fetching admin uispec: " + textStatus);
                 }
             });
         } else {

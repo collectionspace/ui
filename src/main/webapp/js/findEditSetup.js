@@ -102,7 +102,7 @@ cspace = cspace || {};
                     setUpPage();
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log("ERROR!");
+                    fluid.fail("Error fetching find-edit uispec:" + textStatus);
                 }
             });
         } else {

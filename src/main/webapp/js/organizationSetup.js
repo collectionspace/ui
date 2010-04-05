@@ -117,7 +117,7 @@ cspace = cspace || {};
                     setUpPage();
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log("Error fetching organization authority uispec");
+                    fluid.fail("Error fetching organization authority uispec:" + textStatus);
                 }
             });
         } else {

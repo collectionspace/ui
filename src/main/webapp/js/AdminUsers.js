@@ -37,7 +37,7 @@ cspace = cspace || {};
                 userList.updateModel(model.items);
             },
             error: function (xhr, textStatus, errorThrown) {
-                console.log("Error retrieving user list");
+                fluid.fail("Error retrieving user list:" + textStatus);
             }
         });
     };

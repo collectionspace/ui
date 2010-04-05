@@ -63,7 +63,7 @@ cspace = cspace || {};
                     setUpPage();
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log("Error fetching objects tab uispec");
+                    fluid.fail("Error fetching objects tab uispec:" + textStatus);
                 }
             });
         } else {

@@ -117,7 +117,7 @@ cspace = cspace || {};
                     setUpPage();
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log("Error fetching person uispec");
+                    fluid.fail("Error fetching person uispec");
                 }
             });
         } else {
