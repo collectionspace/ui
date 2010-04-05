@@ -6,8 +6,8 @@
 .flc-cabinet-handle, .flc-cabinet-row {padding:3px 4px 1px 6px; border-bottom:1px solid #E8E8E8;}
 a.flc-cabinet-header {text-decoration:none;}
 .flc-cabinet-drawer  {/*margin-left:12px;*/}
-.checkbox-row {/*position:absolute; left:0;*/ float:left;}
-.checkbox {padding: 0 10px;}
+.radio-row {/*position:absolute; left:0;*/ float:left;}
+.radio {padding: 0 8px;}
 .permission-name {padding-left:10px; margin:0; margin-top:3px; float:left;}
 .role-buttons {padding-top:10px;}
 .addrole {float:right; margin-bottom:-18px;}
