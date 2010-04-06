@@ -42,7 +42,7 @@ cspace = cspace || {};
         });
     };
 
-    var addNewUser = function(userDetails, domBinder, uispec){
+    var addNewUser = function(container, userDetails, domBinder, uispec){
         return function(e){
             fluid.model.copyModel(userDetails.model,{
                 fields: {
@@ -56,6 +56,7 @@ cspace = cspace || {};
                 }
             });
             userDetails.refreshView();
+            cspace.passwordValidator(container);
             showUserDetails(domBinder);
             domBinder.locate("newUserRow").show();
         };
@@ -90,7 +91,7 @@ cspace = cspace || {};
 
     var bindEventHandlers = function (that) {
 
-        that.locate("newUser").click(addNewUser(that.userDetails, that.dom, that.options.uispec));
+        that.locate("newUser").click(addNewUser(that.container, that.userDetails, that.dom, that.options.uispec));
         that.locate("userListRow").live("click", loadUser(that));
         that.dataContext.events.afterCreate.addListener(function () {
             that.locate("newUserRow").hide();

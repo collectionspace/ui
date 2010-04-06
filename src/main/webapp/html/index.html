@@ -17,6 +17,7 @@
 
         <script type="text/javascript" src="../js/cspace.js"></script>
 		<script type="text/javascript" src="../js/Utilities.js"></script>
+        <script type="text/javascript" src="../js/PasswordValidator.js"></script>
         <script type="text/javascript" src="../js/Login.js"></script>
 		<script type="text/javascript" src="../js/loginSetup.js"></script>
 	</head>
@@ -143,7 +144,7 @@
     
                                                 <div class="content">
                                                     <div class="login-pair">
-                                                        <div class="login-error hidden csc-warning">Passwords don't match</div>
+                                                        <div class="login-error hidden csc-warning csc-passwordValidator-message">Passwords don't match</div>
                                                         <div class="clear"></div>
                                                     </div>
                                                     <div class="login-pair">
@@ -152,7 +153,7 @@
                                                     <div class="login-block" style="width:100%;">
                                                         <div class="login-pair">
                                                             <div class="login-label">New Password</div>
-                                                            <div class="login-element"><input type="password" class="input-alpha csc-login-newPassword csc-login-passwordRequired" name="password"/></div>
+                                                            <div class="login-element"><input type="password" class="input-alpha csc-login-newPassword csc-login-passwordRequired csc-passwordValidator-password" name="password"/></div>
                                                             <div class="clear"></div>
                                                         </div>
     

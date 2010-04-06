@@ -163,6 +163,8 @@ cspace = cspace || {};
         
         that.locate("loginForm").submit(makeRequiredFieldsValidator(that.dom, "login", that.options.strings.allFieldsRequired));
         that.locate("resetForm").submit(makeRequiredFieldsValidator(that.dom, "password", that.options.strings.allFieldsRequired));
+
+        cspace.passwordValidator(that.container);
     };
 
     var setupLogin = function (that) {  
