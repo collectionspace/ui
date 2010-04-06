@@ -49,7 +49,7 @@
                                                 The demo site now features the official CollectionSpace "look and feel,"
                                                 which incorporates a consistent and intuitive interface.</p>
 
-											<p>To access the demo, use login: <strong>guest</strong> and password: <strong>guest</strong>.</p>
+											<p>To access the demo, use email: <strong>test</strong> and password: <strong>test</strong>.</p>
 											</div>
 										</div>
 										<div class="clear"></div>
@@ -69,12 +69,17 @@
     
     											<div class="content">
                                                     <div class="login-pair">
-                                                        <div class="login-error hidden csc-warning">Incorrect User ID/Password</div>
+                                                        <div class="login-error hidden csc-warning">Incorrect Email/Password combination</div>
                                                         <div class="clear"></div>
                                                     </div>
     												<div class="login-block" style="width:100%;">
     													<div class="login-pair">
-    														<div class="login-label">User ID</div>
+                                                            <!--
+                                                            In the default configuration, the email address used as the userid.
+                                                            The information is submitted as the userId, but for clarity, the field
+                                                            is labelled "Email"
+                                                            -->
+    														<div class="login-label">Email</div>
     														<div class="login-element"><input type="text" class="input-alpha csc-login-userId csc-login-loginRequired" name="userid"/></div>
     														<div class="clear"></div>
     													</div>
@@ -88,11 +93,9 @@
     														<div class="clear"></div>
     													</div>
     													
-                                                        <!--
       													<div class="login-pair forgotpw">
     														Forgot Password? <a href="#" class="link csc-login-requestReset">Click here to reset password</a>
     													</div>
-                                                        -->
     												</div>												
     											</div>
                                             </form>
@@ -122,7 +125,6 @@
                                                     </div>
                                                     
                                                     <div class="login-pair">
-                                                        <!--<div class="login-element"><input type="button" name="submit" class="button" value="Sign In" /></div>-->
                                                         <div class="login-element"><input type="button" class="no-border csc-login-submitEmail" value="Reset my password" name="submit" /></div>
                                                         <div class="clear"></div>
                                                     </div>

@@ -19,7 +19,8 @@
         ".csc-user-status": {
             "selection": "${fields.status}",
             "optionlist": ["active", "inactive"],
-            "optionnames": ["Active", "Inactive"]
+            "optionnames": ["Active", "Inactive"],
+            "default": "active"
         }
     }
 }
