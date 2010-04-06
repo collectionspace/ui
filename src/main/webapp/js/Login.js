@@ -16,6 +16,7 @@ cspace = cspace || {};
 (function ($, fluid) {
     var showSignIn = function (domBinder) {
         domBinder.locate("signIn").show();
+        domBinder.locate("userID").focus();
         domBinder.locate("enterEmail").hide();
         domBinder.locate("resetRequest").hide();
         domBinder.locate("passwordReset").hide();
@@ -24,6 +25,7 @@ cspace = cspace || {};
     var showResetRequestForm = function (domBinder) {
         domBinder.locate("signIn").hide();
         domBinder.locate("enterEmail").show();
+        domBinder.locate("email").focus();
         domBinder.locate("resetRequest").hide();
         domBinder.locate("passwordReset").hide();
     };
@@ -39,6 +41,7 @@ cspace = cspace || {};
         domBinder.locate("signIn").hide();
         domBinder.locate("enterEmail").hide();
         domBinder.locate("resetRequest").show();
+        domBinder.locate("newPassword").focus();
         domBinder.locate("passwordReset").hide();
     };
 
@@ -58,9 +61,11 @@ cspace = cspace || {};
         return function (e) {
             var requiredFields = domBinder.locate(formType+"Required");
             var missing = false;
+            var firstMissing = -1;
             for (var i = 0; i < requiredFields.length; i++) {
                 if ($(requiredFields[i]).val() === "") {
                     missing = true;
+                    firstMissing = i;
                     break;
                 }
             }
@@ -69,6 +74,7 @@ cspace = cspace || {};
                 return true;
             } else {
                 domBinder.locate("warning").text(message).show();
+                requiredFields[firstMissing].focus();
                 return false;
             }
         };
@@ -84,6 +90,7 @@ cspace = cspace || {};
         }
         if (domBinder.locate("newPassword").val() !== domBinder.locate("confirmPassword").val()) {
             domBinder.locate("warning").text(mustMatchMessage).show();
+            domBinder.locate("newPassword").focus();
             return false;
         }
         return true;
@@ -181,6 +188,7 @@ cspace = cspace || {};
         } else {
             showSignIn(that.dom);
         }
+
     };
     
     /**
