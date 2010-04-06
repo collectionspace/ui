@@ -28,22 +28,24 @@ cspace = cspace || {};
             var passwordLength = password.length;
             if (passwordLength < that.options.minLength || passwordLength > that.options.maxLength) {
                 var msg = fluid.stringTemplate(that.options.messages.length, {min: that.options.minLength, max: that.options.maxLength});
-                that.locate("messageEl").text(msg).show();
+                cspace.util.displayTimestampedMessage(that.dom, msg);
                 return false;
             }
-            that.locate("messageEl").hide();
+            cspace.util.hideMessage(that.dom);
             return true;
         };
 
         bindEvents(that);
-        that.locate("messageEl").hide();
+        cspace.util.hideMessage(that.dom);
         return that;
     };
 
     fluid.defaults ("cspace.passwordValidator", {
         selectors: {
             passwordField: ".csc-passwordValidator-password",
-            messageEl: ".csc-passwordValidator-message"
+            messageContainer: ".csc-message-container",
+            feedbackMessage: ".csc-message",
+            timestamp: ".csc-timestamp"
         },
         messages: {
             length: "Passwords must be between %min and %max characters in length."

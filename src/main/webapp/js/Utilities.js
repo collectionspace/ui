@@ -57,6 +57,10 @@ cspace = cspace || {};
         messageContainer.show();
     };
 
+    cspace.util.hideMessage = function(locater){
+        locater.locate("messageContainer", "body").hide();
+    };
+
 	cspace.util.setZIndex = function() {
 		if ($.browser.msie) {
 		   var zIndexNumber = 999;
