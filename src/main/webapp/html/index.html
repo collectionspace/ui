@@ -68,7 +68,7 @@
                                                 </div>
                                                 <div class="clear"></div>
     
-    											<div class="content">
+    											<div class="content sign-in">
                                                     <div class="login-pair">
                                                         <div class="login-error hidden csc-message-container">
                                                             <span class="csc-timestamp cs-timestamp">time</span>
@@ -76,13 +76,13 @@
                                                         </div>
                                                         <div class="clear"></div>
                                                     </div>
-    												<div class="login-block" style="width:100%;">
+    												<div class="login-block">
     													<div class="login-pair">
                                                             <!--
-                                                            In the default configuration, the email address used as the userid.
-                                                            The information is submitted as the userId, but for clarity, the field
-                                                            is labelled "Email"
-                                                            -->
+																In the default configuration, the email address used as the userid.
+																The information is submitted as the userId, but for clarity, the field
+																is labelled "Email"
+																-->
     														<div class="login-label">Email</div>
     														<div class="login-element"><input type="text" class="input-alpha csc-login-userId csc-login-loginRequired" name="userid"/></div>
     														<div class="clear"></div>
@@ -93,7 +93,7 @@
     														<div class="clear"></div>
     													</div>
     													<div class="login-pair">
-    														<div class="login-element"><input type="image" class="no-border csc-login-button" src="../images/login-button.png" name="submit" /></div>
+    														<div class="login-element"><input type="submit" class="button csc-login-button" value="Log In" /></div>
     														<div class="clear"></div>
     													</div>
     													
@@ -114,14 +114,13 @@
 											<div class="clear"></div>
 
                                             <div class="content">
-                                                <div class="login-pair">
-                                                    <div class="login-error hidden csc-warning">Invalid email</div>
-                                                    <div class="clear"></div>
-                                                </div>
-                                                <div class="login-pair csc-login-enterEmailMessage">
+                                                <div class="csc-login-enterEmailMessage">
                                                     Please enter the email address associated with your account.
                                                 </div>
-                                                <div class="login-block csc-login-enterEmailForm" style="width:100%;">
+												<div class="login-pair">
+                                                    <div class="login-error hidden csc-warning">Invalid email</div>
+                                                </div>
+                                                <div class="login-block csc-login-enterEmailForm">
                                                     <div class="login-pair">
                                                         <div class="login-label">Email</div>
                                                         <div class="login-element"><input type="text" class="input-alpha csc-login-email csc-login-emailRequired" name="email"/></div>
@@ -129,7 +128,7 @@
                                                     </div>
                                                     
                                                     <div class="login-pair">
-                                                        <div class="login-element"><input type="button" class="no-border csc-login-submitEmail" value="Reset my password" name="submit" /></div>
+                                                        <div class="login-element"><input type="submit" class="button csc-login-submitEmail" value="Reset my password" name="submit" /></div>
                                                         <div class="clear"></div>
                                                     </div>
                                                 </div>                                              
@@ -145,18 +144,18 @@
                                                 </div>
                                                 <div class="clear"></div>
     
-                                                <div class="content">
-                                                    <div class="login-pair">
+                                                <div class="content reset-password">
+                                                    <div class="">
+                                                        Enter the new password for <span class="csc-login-email">email address</span>
+                                                    </div>
+													<div class="login-pair">
                                                         <div class="login-error hidden csc-message-container">
                                                             <span class="csc-timestamp cs-timestamp">time</span>
                                                             <span class="csc-message">Save successful!</span>
                                                         </div>
                                                         <div class="clear"></div>
                                                     </div>
-                                                    <div class="login-pair">
-                                                        Enter the new password for <span class="csc-login-email">email address</span>
-                                                    </div>
-                                                    <div class="login-block" style="width:100%;">
+                                                    <div class="login-block">
                                                         <div class="login-pair">
                                                             <div class="login-label">New Password</div>
                                                             <div class="login-element"><input type="password" class="input-alpha csc-login-newPassword csc-login-passwordRequired csc-passwordValidator-password" name="password"/></div>
@@ -170,7 +169,7 @@
                                                         </div>
                                                         
                                                         <div class="login-pair">
-                                                            <div class="login-element"><input type="button" class="no-border csc-login-submitNewPassword" value="Reset" name="submit" /></div>
+                                                            <div class="login-element"><input type="submit" class="button csc-login-submitNewPassword" value="Reset" name="submit" /></div>
                                                             <div class="clear"></div>
                                                         </div>
                                                     </div>                                              

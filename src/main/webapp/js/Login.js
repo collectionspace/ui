@@ -54,7 +54,7 @@ cspace = cspace || {};
 
     var showEmailSubmittedPage = function (domBinder) {
         domBinder.locate("enterEmailForm").hide();
-        domBinder.locate("enterEmailMessage").text("Email sent.");
+        domBinder.locate("enterEmailMessage").text("An email has been sent you. Please follow the link in the email to reset the password.");
     };
 
     var makeRequiredFieldsValidator = function (domBinder, formType, message) {
@@ -259,9 +259,9 @@ cspace = cspace || {};
 
         strings: {
             allFieldsRequired: "All fields must be filled in",
-            emailRequired: "You must enter a valid email",
+            emailRequired: "You must enter a valid email address",
             passwordsMustMatch: "Passwords must match",
-            invalid: "Invalied email/password combination"
+            invalid: "Invalid email/password combination"
         }, 
        
         baseUrl: "../../chain/"
