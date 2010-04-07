@@ -24,7 +24,7 @@ cspace = cspace || {};
     };
     var retrieveUserList = function (userList, model) {
         // TODO: Use the DC for this
-        var url = (cspace.util.isLocal() ? "data/user/records/list.json" : "../../chain/users");
+        var url = (cspace.util.isLocal() ? "data/users/records/list.json" : "../../chain/users");
         $.ajax({
             url: url,
             type: "GET",
@@ -42,7 +42,7 @@ cspace = cspace || {};
         });
     };
 
-    var addNewUser = function(userDetails, domBinder){
+    var addNewUser = function(container, userDetails, domBinder, uispec){
         return function(e){
             fluid.model.copyModel(userDetails.model,{
                 fields: {
@@ -50,10 +50,13 @@ cspace = cspace || {};
                     userName: "", 
                     password: "", 
                     email: "",
-                    status: ""
+                    // TODO: This access into the UISpec is completely inappropriate
+                    // We need a better way of initializing to the default
+                    status: uispec.userDetails[".csc-user-status"]["default"]
                 }
             });
             userDetails.refreshView();
+            cspace.passwordValidator(container);
             showUserDetails(domBinder);
             domBinder.locate("newUserRow").show();
         };
@@ -66,13 +69,18 @@ cspace = cspace || {};
         };
     };
 
-    validate = function (domBinder) {
+    validate = function (domBinder, userDetailsApplier) {
         var required = domBinder.locate("requiredFields");
         for (var i = 0; i < required.length; i++) {
             if (required[i].value === "") {
                 cspace.util.displayTimestampedMessage(domBinder, "All fields required");
                 return false;
             }
+        }
+        // In the default configuration, the email address used as the userid.
+        // If all required fields are present and the userid is not set, use the email
+        if (!domBinder.locate("userID").val()) {
+            userDetailsApplier.requestChange("fields.userID", domBinder.locate("email").val());
         }
         if (domBinder.locate("password").val() !== domBinder.locate("passwordConfirm").val()) {
             cspace.util.displayTimestampedMessage(domBinder, "Passwords don't match");
@@ -83,7 +91,7 @@ cspace = cspace || {};
 
     var bindEventHandlers = function (that) {
 
-        that.locate("newUser").click(addNewUser(that.userDetails, that.dom, that.options.uispec));
+        that.locate("newUser").click(addNewUser(that.container, that.userDetails, that.dom, that.options.uispec));
         that.locate("userListRow").live("click", loadUser(that));
         that.dataContext.events.afterCreate.addListener(function () {
             that.locate("newUserRow").hide();
@@ -104,7 +112,7 @@ cspace = cspace || {};
             that.locate("newUserRow").hide();
         });
         that.userDetails.events.onSave.addListener(function () {
-            return validate(that.dom);
+            return validate(that.dom, that.userDetailsApplier);
         });
     };
 
@@ -173,6 +181,8 @@ cspace = cspace || {};
             userDetailsNone: ".csc-user-userDetails-none",
             newUser: ".csc-user-createNew",
             newUserRow: ".csc-user-addNew",
+            userID: ".csc-user-userID",
+            email: ".csc-user-email",
             password: ".csc-user-password",
             passwordConfirm: ".csc-user-passwordConfirm",
             requiredFields: ".csc-user-required"
