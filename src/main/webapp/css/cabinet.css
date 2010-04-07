@@ -11,3 +11,6 @@ a.flc-cabinet-header {text-decoration:none;}
 .permission-name {padding-left:10px; margin:0; margin-top:3px; float:left;}
 .role-buttons {padding-top:10px;}
 .addrole {float:right; margin-bottom:-18px;}
+
+.cs-permissions-table {border: 1px solid #C7CFD4; font-size:11px; line-height:100%;}
+.cs-permissions-row {padding:3px 4px 1px 6px; border-bottom:1px solid #E8E8E8;}

@@ -30,11 +30,9 @@
         <script type="text/javascript" src="../js/Renderer.js"></script>
         <script type="text/javascript" src="../js/Confirmation.js"></script>
         <script type="text/javascript" src="../js/DataContext.js"></script>
-        <script type="text/javascript" src="../js/RecordEditor.js"></script>
-        <script type="text/javascript" src="../js/RecordList.js"></script>
-        <script type="text/javascript" src="../js/AdminUsers.js"></script>
+        <script type="text/javascript" src="../js/Permissions.js"></script>
         <script type="text/javascript" src="../js/PageBuilder.js"></script>
-        <script type="text/javascript" src="../js/adminSetup.js"></script>
+        <script type="text/javascript" src="../js/rolesSetup.js"></script>
     </head>
     <body>
 	
@@ -115,7 +113,7 @@
 											
 											<div class="info-column2-80 fl-force-right">
 												<div class="fl-container-flex header">Edit Role</div>
-												<div class="fl-container-flex fl-fix information-subgroup">
+												<div class="fl-container-flex fl-fix information-subgroup csc-permissions">
 													<div class="info-column fl-force-left">
 														<div class="info-column2-50 fl-force-left">
 															<div class="info-column2-50 fl-force-left">
@@ -149,7 +147,41 @@
 													<div class="info-column2-70 fl-force-left">
 														<div class="info-pair">
 															<div class="label">Permissions</div>
-															<div id="test-cabinet2" class="flc-cabinet">
+                                                            <div class="cs-permissions-table">
+                                                                <div class="flc-cabinet-mainheader"><span class="label">None</span><span class="label">Read</span><span class="label">Write</span><span class="label">Delete</span></div>
+
+                                                            <div class="cs-permissions-row csc-permissions-record-row">
+                                                                <div class="radio-row">
+                                                                    <span class="radio"><input type="radio" name="group1" /></span>
+                                                                    <span class="radio"><input type="radio" name="group1" /></span>
+                                                                    <span class="radio"><input type="radio" name="group1" /></span>
+                                                                    <span class="radio"><input type="radio" name="group1" /></span>
+                                                                </div>
+                                                                <div class="permission-name">Object Cataloguing</div><div class="clear"></div>
+                                                            </div>
+                                                            <div class="cs-permissions-row">
+                                                                <div class="radio-row">
+                                                                    <span class="radio"><input type="radio" name="group2" /></span>
+                                                                    <span class="radio"><input type="radio" name="group2" /></span>
+                                                                    <span class="radio"><input type="radio" name="group2" /></span>
+                                                                    <span class="radio"><input type="radio" name="group2" /></span>
+                                                                </div>
+                                                                <div class="permission-name">Intake</div><div class="clear"></div>
+                                                            </div>
+                                                            <div class="cs-permissions-row">
+                                                                <div class="radio-row">
+                                                                    <span class="radio"><input type="radio" name="group3" /></span>
+                                                                    <span class="radio"><input type="radio" name="group3" /></span>
+                                                                    <span class="radio"><input type="radio" name="group3" /></span>
+                                                                    <span class="radio"><input type="radio" name="group3" /></span>
+                                                                </div>
+                                                                <div class="permission-name">Acquisition</div><div class="clear"></div>
+                                                            </div>
+                                                            </div>
+
+
+<!--
+                                                            <div id="test-cabinet2" class="flc-cabinet">
 																<div class="flc-cabinet-mainheader"><span class="label">None</span><span class="label">Read</span><span class="label">Write</span><span class="label">Delete</span></div>
 																<div class="flc-cabinet-drawer">
 																	<div class="flc-cabinet-header flc-cabinet-handle">
@@ -255,6 +287,7 @@
 																	</div>
 																</div>
 															</div>
+-->
 														</div>
 													</div>
 													<div class="clear"></div>
