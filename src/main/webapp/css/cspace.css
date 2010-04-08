@@ -410,7 +410,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .login-text {padding:0 10px 15px 0px;}
 .login-forms {width:100%;}
 .login-forms .info-pair{}
-.login-forms .header  {padding:18px 18px 6px 18px; background-color:#93BC7F; margin-bottom:2px; /*width:auto;*/}
+.login-forms .header  {padding:18px 18px 6px 18px; background-color:#93BC7F; /*margin-bottom:2px;*/ /*width:auto;*/}
 .login-forms .header  .label {font-size:20px; color:#fff;}
 .login-forms .content{width:100%; background-color:#E8E7E7; padding:18px; }
 
@@ -420,10 +420,12 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 	{padding-top: 20px; font-size:14px; line-height:18px; /*width:90%;*/}
 .login-forms .content.sign-in {padding-top:5px;}
 .login-pair {padding-bottom: 20px;}
-.login-pair .login-label {width:80px; float:left; font-weight:bold; color:#666; margin-right:10px;}
+.login-pair .login-label {width:80px; float:left; font-weight:bold; color:#333; margin-right:10px;}
 .login-pair .login-element {float:left; padding-right: 2px; width:70%;}
-.login-pair.forgotpw {width:100%; padding-bottom:0;}
-.login-error {margin-left:90px; margin-bottom:-18px; padding-left:20px; /*font-weight:bold;*/ color:#606060; background-image: url(../images/warning.png); background-repeat: no-repeat; background-position:left;}
+.login-pair.forgotpw {width:100%; padding-bottom:0; font-size:13px;}
+.login-pair.forgotpw, .login-pair.forgotpw  a, .login-pair.forgotpw  a:hover {color:#333;}
+.login-error {margin-left:90px; margin-bottom:-18px; padding-left:24px; /*font-weight:bold;*/ font-size:12px; color:red; background-image: url(../images/warning.png); background-repeat: no-repeat; background-position:left;}
+.login-pair .button {background-color:#93BC7F; padding:3px 18px;}
 
 .reset-password .login-pair .login-label {width:130px;}
 .reset-password .login-pair .login-element {width:60%;}
