@@ -423,8 +423,8 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .login-pair .login-label {width:80px; float:left; font-weight:bold; color:#333; margin-right:10px;}
 .login-pair .login-element {float:left; padding-right: 2px; width:70%;}
 .login-pair.forgotpw {width:100%; padding-bottom:0; font-size:13px;}
-.login-pair.forgotpw, .login-pair.forgotpw  a, .login-pair.forgotpw  a:hover {color:#333;}
-.login-error {margin-left:90px; margin-bottom:-18px; padding-left:24px; /*font-weight:bold;*/ font-size:12px; color:red; background-image: url(../images/warning.png); background-repeat: no-repeat; background-position:left;}
+.login-pair.forgotpw {color:#333;}
+.login-error {margin-left:90px; margin-bottom:-18px; padding-left:24px; /*font-weight:bold;*/ font-size:12px; color:#C60018; background-image: url(../images/warning.png); background-repeat: no-repeat; background-position:left;}
 .login-pair .button {background-color:#93BC7F; padding:3px 18px;}
 
 .reset-password .login-pair .login-label {width:130px;}
