@@ -12,9 +12,14 @@
         <link rel="stylesheet" type="text/css" href="../css/cabinet.css" />
 		<!--[if lt IE 9]> <link rel="stylesheet" type="text/css" href="../css/cspace_ie.css"> <![endif]-->
 
-        <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/core/js/jquery.js"></script>
-        <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/ui/js/ui.core.js"></script>
-        <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/ui/js/ui.dialog.js"></script>
+        <script type="text/javascript" src="../lib/jquery/core/js/jquery-1.4.2.js"></script>
+        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.tabs.js"></script>
+        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/plugins/delegate/js/jquery.delegate.js"></script>
         <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/json/js/json2.js"></script>
         <script type="text/javascript" src="../fluid-infusion/src/webapp/framework/core/js/Fluid.js"></script>
         <script type="text/javascript" src="../fluid-infusion/src/webapp/framework/core/js/FluidDOMUtilities.js"></script>
@@ -30,11 +35,12 @@
         <script type="text/javascript" src="../js/Renderer.js"></script>
         <script type="text/javascript" src="../js/Confirmation.js"></script>
         <script type="text/javascript" src="../js/DataContext.js"></script>
+        <script type="text/javascript" src="../js/Permissions.js"></script>
         <script type="text/javascript" src="../js/RecordEditor.js"></script>
         <script type="text/javascript" src="../js/RecordList.js"></script>
-        <script type="text/javascript" src="../js/AdminUsers.js"></script>
+        <script type="text/javascript" src="../js/AdminRoles.js"></script>
         <script type="text/javascript" src="../js/PageBuilder.js"></script>
-        <script type="text/javascript" src="../js/adminSetup.js"></script>
+        <script type="text/javascript" src="../js/rolesSetup.js"></script>
     </head>
     <body>
 	
@@ -51,7 +57,7 @@
 			
 				<div id="all-content" class="fl-fix">
 					<div class="fl-fix fl-container-flex fl-col-mixed2">
-						<div class="fl-container-pivot-users fl-container-admin-menu fl-force-left" id="">
+						<div class="fl-container-pivot-roles fl-container-admin-menu fl-force-left" id="">
 							<ul>
 								<li class=""><a href="administration.html">Users</a></li>
 								<li class="selected">Roles and Permission</li>
@@ -63,49 +69,28 @@
 						</div>
 						
 						<div class="fl-container-admin fl-force-right">
-							<div class="main-users-page csc-users-userAdmin">
-                                <div class="csc-user-list">
+							<div class="main-roles-page csc-roles-roleAdmin">
+                                <div class="csc-role-list">
 									<div class="fl-container-flex fl-fix information-group">
 										<div class="fl-container-flex fl-fix content" id="">
 											<div class="info-column2-20 fl-force-left">
 												
 												<div class="fl-container-flex header">
 													<div class="fl-force-left">Roles</div>
-													<div class="addrole"><input type="button" class="button small" value="+ role" /></div>
+													<div class="addrole"><input type="button" class="button small csc-role-createNew" value="+ role" /></div>
 													<div class="clear"></div>
 												</div>
-												<div class="overflow-user-list csc-user-userList">
-													<table class="user-table hover">
+												<div class="overflow-role-list csc-role-roleList">
+													<table class="role-table hover">
 														<tbody>
+<!--
 															<tr>
-																<td class="header">Summer Interns</td>
+																<td class="header">Group Name</td>
 															</tr>
-															<tr class="csc-user-userList-row">
-																<td class="csc-user-userList-name">Scanning Intern</td>
-															</tr>
-															<tr class="csc-user-userList-row">
-																<td class="csc-user-userList-name">Media Intern</td>
-															</tr>
-															<tr class="csc-user-userList-row">
-																<td class="csc-user-userList-name selected">Cataloging Intern</td>
-															</tr>
-															<tr class="csc-user-userList-row">
-																<td class="csc-user-userList-name">Inventory Intern</td>
-															</tr>
-															<tr>
-																<td class="header">Museum Staff</td>
-															</tr>
-															<tr class="csc-user-userList-row">
-																<td class="csc-user-userList-name">PR</td>
-															</tr>
-															<tr class="csc-user-userList-row">
-																<td class="csc-user-userList-name">Curator</td>
-															</tr>
-															<tr class="csc-user-userList-row">
-																<td class="csc-user-userList-name">Educator</td>
-															</tr>
-															<tr class="csc-user-userList-row">
-																<td class="csc-user-userList-name">Director</td>
+-->
+															<tr class="csc-role-roleList-row">
+																<td class="csc-role-roleList-name">test role name</td>
+                                                                <td class="hidden csc-role-roleList-csid"></td>
 															</tr>
 														</tbody>
 													</table>
@@ -115,116 +100,184 @@
 											
 											<div class="info-column2-80 fl-force-right">
 												<div class="fl-container-flex header">Edit Role</div>
-												<div class="fl-container-flex fl-fix information-subgroup">
-													<div class="info-column fl-force-left">
-														<div class="info-column2-50 fl-force-left">
-															<div class="info-column2-50 fl-force-left">
-																<div class="info-pair">
-																	<div class="label">Group</div>
-																	<div class="content">
-																		<input type="text" class="" />
-																	</div>
-																</div>
-															</div>
-															<div class="info-column2-50 fl-force-right">
-																<div class="info-pair">
-																	<div class="label">Role Name</div>
-																	<div class="content">
-																		<input type="text" class="" />
-																	</div>
-																</div>
-															</div>
-															<div class="clear"></div>
-														</div>
-														<div class="info-column2-50 fl-force-right">
-															<div class="info-pair">
-																<div class="label">Description</div>
-																<div class="content">
-																	<input type="text" class="" />
-																</div>
-															</div>
-														</div>
-													</div>
-													
-													<div class="info-column2-70 fl-force-left">
-														<div class="info-pair">
-															<div class="label">Permissions</div>
-															<div id="test-cabinet2" class="flc-cabinet">
-																<div class="flc-cabinet-mainheader"><span class="label">Write</span><span class="label">Read</span><span class="label">Delete</span></div>
-																<div class="flc-cabinet-drawer">
-																	<div class="flc-cabinet-header flc-cabinet-handle">
-																		<div class="checkbox-row"><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span></div>
-																		<div class="permission-name"><a href="#_" class="flc-cabinet-header">Object Cataloguing</a></div><div class="clear"></div>
-																	</div>
-																	<div class="flc-cabinet-contents">
-																		<div class="flc-cabinet-drawer">
-																			<div class="flc-cabinet-header flc-cabinet-handle">
-																				<div class="checkbox-row"><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span></div>
-																				<div class="permission-name"><a href="#_" class="flc-cabinet-header">Intake</a></div><div class="clear"></div>
-																			</div>
-																			<div class="flc-cabinet-contents">
-																				<div class="flc-cabinet-drawer">
-																					<div class="flc-cabinet-header flc-cabinet-handle">
-																						<div class="checkbox-row"><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span></div>
-																						<div class="permission-name"><a href="#_" class="flc-cabinet-header">Sublevel</a></div><div class="clear"></div>
-																					</div>
-																					
-																					<div class="flc-cabinet-contents">
-																						<div class="flc-cabinet-drawer">
-																							<div class="flc-cabinet-row">
-																								<div class="checkbox-row"><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span></div>
-																								<div  class="permission-name">Other</div><div class="clear"></div>
-																							</div>
-																							<div class="flc-cabinet-row">
-																								<div class="checkbox-row"><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span></div>
-																								<div class="permission-name">Something</div><div class="clear"></div>
-																							</div>
-																						</div>
-																					</div>
-																					
-																					<div class="flc-cabinet-row">
-																						<div class="checkbox-row"><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span></div>
-																						<div class="permission-name">Another Something</div><div class="clear"></div>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																		<div class="flc-cabinet-drawer">
-																			<div class="flc-cabinet-header flc-cabinet-handle">
-																				<div class="checkbox-row"><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span></div>
-																				<div class="permission-name"><a href="#_" class="flc-cabinet-header">Name Authority</a></div><div class="clear"></div>
-																			</div>
-																			<div class="flc-cabinet-contents">
-																				<div class="flc-cabinet-drawer">
-																					<div class="flc-cabinet-row">
-																						<div class="checkbox-row"><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span></div>
-																						<div  class="permission-name">Fish</div><div class="clear"></div>
-																					</div>
-																					<div class="flc-cabinet-row">
-																						<div class="checkbox-row"><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span><span class="checkbox"><input type="checkbox" /></span></div>
-																						<div class="permission-name">Chips</div><div class="clear"></div>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="clear"></div>
-												</div>
-												<div class="role-buttons">
-													<div class="fl-force-left">
-														<a href="#"><input class="button inversebutton" type="button" value="Delete" /></a>
-														<a href="#"><input class="button inversebutton" type="button" value="Duplicate" /></a>
-													</div>
-													<div class="fl-force-right">
-														<a href="#"><input class="button inversebutton" type="button" class="inversebutton" value="Cancel" /></a>
-														<a href="#"><input class="button" type="button" value="Save" /></a>
-													</div>
-												</div>
-												<div class="clear"></div>
+                                                <div class="fl-container-admin">
+                                                    <div class="information-subgroup csc-permissions-none">
+                                                        No roles selected. Please select a role from the list, or create a new role.
+                                                    </div>
+    												<div class="fl-container-flex fl-fix information-subgroup csc-permissions">
+    													<div class="info-column fl-force-left">
+    														<div class="info-column2-50 fl-force-left">
+    															<div class="info-column2-50 fl-force-left">
+    																<div class="info-pair">
+    																	<div class="label">Group</div>
+    																	<div class="content">
+    																		<input type="text" class="" />
+    																	</div>
+    																</div>
+    															</div>
+    															<div class="info-column2-50 fl-force-right">
+    																<div class="info-pair">
+    																	<div class="label">Role Name</div>
+    																	<div class="content">
+    																		<input type="text" class="" />
+    																	</div>
+    																</div>
+    															</div>
+    															<div class="clear"></div>
+    														</div>
+    														<div class="info-column2-50 fl-force-right">
+    															<div class="info-pair">
+    																<div class="label">Description</div>
+    																<div class="content">
+    																	<input type="text" class="" />
+    																</div>
+    															</div>
+    														</div>
+    													</div>
+    													
+    													<div class="info-column2-70 fl-force-left">
+    														<div class="info-pair">
+    															<div class="label">Permissions</div>
+                                                                <div class="cs-permissions-table">
+                                                                    <div class="flc-cabinet-mainheader"><span class="label">None</span><span class="label">Read</span><span class="label">Write</span><span class="label">Delete</span></div>
+    
+                                                                <div class="cs-permissions-row csc-permissions-record-row">
+                                                                    <div class="radio-row">
+                                                                        <span class="radio"><input type="radio"  csc-permissions-record-permissions name="group1" /></span>
+                                                                        <span class="radio"><input type="radio" name="group1" /></span>
+                                                                        <span class="radio"><input type="radio" name="group1" /></span>
+                                                                        <span class="radio"><input type="radio" name="group1" /></span>
+                                                                    </div>
+                                                                    <div class="permission-name csc-permissions-record-type">record type name</div>
+                                                                    <div class="clear"></div>
+                                                                </div>
+                                                                </div>
+    
+    
+    <!--
+                                                                <div id="test-cabinet2" class="flc-cabinet">
+    																<div class="flc-cabinet-mainheader"><span class="label">None</span><span class="label">Read</span><span class="label">Write</span><span class="label">Delete</span></div>
+    																<div class="flc-cabinet-drawer">
+    																	<div class="flc-cabinet-header flc-cabinet-handle">
+                                                                            <div class="radio-row">
+                                                                                <span class="radio"><input type="radio" name="group1" /></span>
+                                                                                <span class="radio"><input type="radio" name="group1" /></span>
+                                                                                <span class="radio"><input type="radio" name="group1" /></span>
+                                                                                <span class="radio"><input type="radio" name="group1" /></span>
+                                                                             </div>
+    																		<div class="permission-name"><a href="#_" class="flc-cabinet-header">Object Cataloguing</a></div><div class="clear"></div>
+    																	</div>
+    																	<div class="flc-cabinet-contents">
+    																		<div class="flc-cabinet-drawer">
+    																			<div class="flc-cabinet-header flc-cabinet-handle">
+                                                                                    <div class="radio-row">
+                                                                                        <span class="radio"><input type="radio" name="group2" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group2" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group2" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group2" /></span>
+                                                                                     </div>
+    																				<div class="permission-name"><a href="#_" class="flc-cabinet-header">Intake</a></div><div class="clear"></div>
+    																			</div>
+    																			<div class="flc-cabinet-contents">
+    																				<div class="flc-cabinet-drawer">
+    																					<div class="flc-cabinet-header flc-cabinet-handle">
+                                                                                    <div class="radio-row">
+                                                                                        <span class="radio"><input type="radio" name="group3" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group3" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group3" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group3" /></span>
+                                                                                     </div>
+    																						<div class="permission-name"><a href="#_" class="flc-cabinet-header">Sublevel</a></div><div class="clear"></div>
+    																					</div>
+    																					
+    																					<div class="flc-cabinet-contents">
+    																						<div class="flc-cabinet-drawer">
+    																							<div class="flc-cabinet-row">
+                                                                                    <div class="radio-row">
+                                                                                        <span class="radio"><input type="radio" name="group4" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group4" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group4" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group4" /></span>
+                                                                                     </div>
+    																								<div  class="permission-name">Other</div><div class="clear"></div>
+    																							</div>
+    																							<div class="flc-cabinet-row">
+                                                                                    <div class="radio-row">
+                                                                                        <span class="radio"><input type="radio" name="group5" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group5" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group5" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group5" /></span>
+                                                                                     </div>
+    																								<div class="permission-name">Something</div><div class="clear"></div>
+    																							</div>
+    																						</div>
+    																					</div>
+    																					
+    																					<div class="flc-cabinet-row">
+                                                                                    <div class="radio-row">
+                                                                                        <span class="radio"><input type="radio" name="group6" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group6" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group6" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group6" /></span>
+                                                                                     </div>
+    																						<div class="permission-name">Another Something</div><div class="clear"></div>
+    																					</div>
+    																				</div>
+    																			</div>
+    																		</div>
+    																		<div class="flc-cabinet-drawer">
+    																			<div class="flc-cabinet-header flc-cabinet-handle">
+                                                                                    <div class="radio-row">
+                                                                                        <span class="radio"><input type="radio" name="group7" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group7" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group7" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group7" /></span>
+                                                                                     </div>
+    																				<div class="permission-name"><a href="#_" class="flc-cabinet-header">Name Authority</a></div><div class="clear"></div>
+    																			</div>
+    																			<div class="flc-cabinet-contents">
+    																				<div class="flc-cabinet-drawer">
+    																					<div class="flc-cabinet-row">
+                                                                                    <div class="radio-row">
+                                                                                        <span class="radio"><input type="radio" name="group8" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group8" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group8" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group8" /></span>
+                                                                                     </div>
+    																						<div  class="permission-name">Fish</div><div class="clear"></div>
+    																					</div>
+    																					<div class="flc-cabinet-row">
+                                                                                    <div class="radio-row">
+                                                                                        <span class="radio"><input type="radio" name="group9" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group9" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group9" /></span>
+                                                                                        <span class="radio"><input type="radio" name="group9" /></span>
+                                                                                     </div>
+    																						<div class="permission-name">Chips</div><div class="clear"></div>
+    																					</div>
+    																				</div>
+    																			</div>
+    																		</div>
+    																	</div>
+    																</div>
+    															</div>
+    -->
+    														</div>
+    													</div>
+    													<div class="clear"></div>
+                                                        <div class="role-buttons">
+                                                            <div class="fl-force-left">
+                                                                <a href="#"><input class="button inversebutton" type="button" value="Delete" /></a>
+                                                                <a href="#"><input class="button inversebutton" type="button" value="Duplicate" /></a>
+                                                            </div>
+                                                            <div class="fl-force-right">
+                                                                <a href="#"><input class="button inversebutton" type="button" class="inversebutton" value="Cancel" /></a>
+                                                                <a href="#"><input class="button" type="button" value="Save" /></a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clear"></div>
+    												</div>
+                                                </div>
 											</div>
 											<div class="clear"></div>
 										</div>									
@@ -244,7 +297,7 @@
 		</div>
         <script type="text/javascript">
             jQuery(document).ready(function(){
-                cspace.adminSetup();
+                cspace.rolesSetup();
             });
         </script>
 	</body>
