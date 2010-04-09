@@ -63,7 +63,7 @@ cspace = cspace || {};
                 proceduresAcquisition: {
                     funcName: "cspace.recordList",
                     args: [".acquisition-records-group", acqOpts]
-/*                },
+                },
                 proceduresLoanIn: {
                     funcName: "cspace.recordList",
                     args: [".loanIn-records-group", liOpts]
@@ -71,7 +71,7 @@ cspace = cspace || {};
                 proceduresLoanOut: {
                     funcName: "cspace.recordList",
                     args: [".loanOut-records-group", loOpts]
-*/                }
+                }
             };
             
             var options = {
