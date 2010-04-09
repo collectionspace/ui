@@ -13,14 +13,13 @@
         ".csc-permissions-record-row:": {
             "children": [
                 {
-                    "csc-permissions-record-permissions": {
-                        "selection": "${fields.permissions.0.permissions}",
+                    ".csc-permissions-record-permissions": {
+                        "selection": "${fields.permissions.0.permission}",
                         "optionlist": ["none", "read","write", "delete"],
-                        "default": "2"
-                    }
-                },
-                {
-                    "csc-permissions-record-type": "${fields.permissions.recordType"
+                        "optionnames": ["none", "read","write", "delete"],
+                        "default": "write"
+                    },
+                    ".csc-permissions-record-type": "${fields.permissions.0.recordType}"
                 }
             ]
         }

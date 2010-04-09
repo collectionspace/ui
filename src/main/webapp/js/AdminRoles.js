@@ -14,11 +14,11 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var hideRoleDetails = function (domBinder) {
+    var hidePermissions = function (domBinder) {
         domBinder.locate("permissions").hide();
         domBinder.locate("permissionsNone").show();
     };
-    var showRoleDetails = function (domBinder) {
+    var showPermissions = function (domBinder) {
         domBinder.locate("permissionsNone").hide();
         domBinder.locate("permissions").show();
     };
@@ -46,18 +46,15 @@ cspace = cspace || {};
         return function(e){
             fluid.model.copyModel(permissions.model,{
                 fields: {
-                    roleID: "",
-                    roleName: "", 
-                    password: "", 
-                    email: "",
-                    // TODO: This access into the UISpec is completely inappropriate
-                    // We need a better way of initializing to the default
-                    status: uispec.permissions[".csc-role-status"]["default"]
+                    permissions: [
+                        {
+                            recordType: "",
+                            permission: ""
+                        }
+                    ]
                 }
             });
-            permissions.refreshView();
-            cspace.passwordValidator(container);
-            showRoleDetails(domBinder);
+            showPermissions(domBinder);
             domBinder.locate("newRoleRow").show();
         };
     };
@@ -99,7 +96,7 @@ cspace = cspace || {};
         });
         that.permissions.events.pageRendered.addListener(function () {
             that.locate("newRoleRow").hide();
-            showRoleDetails(that.dom);
+            showPermissions(that.dom);
         });
         that.dataContext.events.onError.addListener(function (operation, message) {
             that.locate("newRoleRow").hide();
@@ -108,7 +105,7 @@ cspace = cspace || {};
             }
         });
         that.permissions.events.onCancel.addListener(function () {
-            hideRoleDetails(that.dom);
+            hidePermissions(that.dom);
             that.locate("newRoleRow").hide();
         });
         that.permissions.events.onSave.addListener(function () {
@@ -119,7 +116,7 @@ cspace = cspace || {};
     setUpRoleAdministrator = function (that) {
         bindEventHandlers(that);
         retrieveRoleList(that.roleList, that.roleListApplier.model);
-        hideRoleDetails(that.dom);
+        hidePermissions(that.dom);
         that.locate("newRoleRow").hide();
     };
 
@@ -160,7 +157,7 @@ cspace = cspace || {};
             type: "cspace.recordList"
         },
         permissions: {
-            type: "cspace.permissions"
+            type: "cspace.recordEditor"
         },
         dataContext: {
             type: "cspace.dataContext",

@@ -16,7 +16,10 @@ cspace = cspace || {};
 
     cspace.permissions = function (container, options) {
         var that = fluid.initView("cspace.permissions", container, options);
+        that.model = {};
         
+        that.refreshView = function () {};
+
         return that;
     };
 

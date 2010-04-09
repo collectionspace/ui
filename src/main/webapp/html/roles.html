@@ -12,9 +12,14 @@
         <link rel="stylesheet" type="text/css" href="../css/cabinet.css" />
 		<!--[if lt IE 9]> <link rel="stylesheet" type="text/css" href="../css/cspace_ie.css"> <![endif]-->
 
-        <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/core/js/jquery.js"></script>
-        <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/ui/js/ui.core.js"></script>
-        <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/ui/js/ui.dialog.js"></script>
+        <script type="text/javascript" src="../lib/jquery/core/js/jquery-1.4.2.js"></script>
+        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.tabs.js"></script>
+        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/jquery/plugins/delegate/js/jquery.delegate.js"></script>
         <script type="text/javascript" src="../fluid-infusion/src/webapp/lib/json/js/json2.js"></script>
         <script type="text/javascript" src="../fluid-infusion/src/webapp/framework/core/js/Fluid.js"></script>
         <script type="text/javascript" src="../fluid-infusion/src/webapp/framework/core/js/FluidDOMUtilities.js"></script>
@@ -31,6 +36,7 @@
         <script type="text/javascript" src="../js/Confirmation.js"></script>
         <script type="text/javascript" src="../js/DataContext.js"></script>
         <script type="text/javascript" src="../js/Permissions.js"></script>
+        <script type="text/javascript" src="../js/RecordEditor.js"></script>
         <script type="text/javascript" src="../js/RecordList.js"></script>
         <script type="text/javascript" src="../js/AdminRoles.js"></script>
         <script type="text/javascript" src="../js/PageBuilder.js"></script>
@@ -71,11 +77,11 @@
 												
 												<div class="fl-container-flex header">
 													<div class="fl-force-left">Roles</div>
-													<div class="addrole"><input type="button" class="button small" value="+ role" /></div>
+													<div class="addrole"><input type="button" class="button small csc-role-createNew" value="+ role" /></div>
 													<div class="clear"></div>
 												</div>
 												<div class="overflow-role-list csc-role-roleList">
-													<table class="user-table hover">
+													<table class="role-table hover">
 														<tbody>
 <!--
 															<tr>
@@ -94,8 +100,8 @@
 											
 											<div class="info-column2-80 fl-force-right">
 												<div class="fl-container-flex header">Edit Role</div>
-                                                <div class="user-details">
-                                                    <div class="user-details-fields csc-permissions-none">
+                                                <div class="fl-container-admin">
+                                                    <div class="information-subgroup csc-permissions-none">
                                                         No roles selected. Please select a role from the list, or create a new role.
                                                     </div>
     												<div class="fl-container-flex fl-fix information-subgroup csc-permissions">
@@ -137,30 +143,13 @@
     
                                                                 <div class="cs-permissions-row csc-permissions-record-row">
                                                                     <div class="radio-row">
-                                                                        <span class="radio"><input type="radio" name="group1" /></span>
+                                                                        <span class="radio"><input type="radio"  csc-permissions-record-permissions name="group1" /></span>
                                                                         <span class="radio"><input type="radio" name="group1" /></span>
                                                                         <span class="radio"><input type="radio" name="group1" /></span>
                                                                         <span class="radio"><input type="radio" name="group1" /></span>
                                                                     </div>
-                                                                    <div class="permission-name">Object Cataloguing</div><div class="clear"></div>
-                                                                </div>
-                                                                <div class="cs-permissions-row">
-                                                                    <div class="radio-row">
-                                                                        <span class="radio"><input type="radio" name="group2" /></span>
-                                                                        <span class="radio"><input type="radio" name="group2" /></span>
-                                                                        <span class="radio"><input type="radio" name="group2" /></span>
-                                                                        <span class="radio"><input type="radio" name="group2" /></span>
-                                                                    </div>
-                                                                    <div class="permission-name">Intake</div><div class="clear"></div>
-                                                                </div>
-                                                                <div class="cs-permissions-row">
-                                                                    <div class="radio-row">
-                                                                        <span class="radio"><input type="radio" name="group3" /></span>
-                                                                        <span class="radio"><input type="radio" name="group3" /></span>
-                                                                        <span class="radio"><input type="radio" name="group3" /></span>
-                                                                        <span class="radio"><input type="radio" name="group3" /></span>
-                                                                    </div>
-                                                                    <div class="permission-name">Acquisition</div><div class="clear"></div>
+                                                                    <div class="permission-name csc-permissions-record-type">record type name</div>
+                                                                    <div class="clear"></div>
                                                                 </div>
                                                                 </div>
     

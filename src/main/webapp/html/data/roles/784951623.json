@@ -1,0 +1,11 @@
+{
+    "fields": {
+        "permissions": [
+            {"recordType": "Object Cataloging", "permission": "write"},
+            {"recordType": "Intake", "permission": "read"},
+            {"recordType": "Acquisition", "permission": "read"},
+            {"recordType": "Loan In", "permission": "none"},
+            {"recordType": "Loan out", "permission": "none"}
+        ]
+    }
+}
