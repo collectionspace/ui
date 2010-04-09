@@ -18,8 +18,8 @@ input[type="button"], input[type="submit"], input[type="checkbox"] {height:auto;
 input:focus, textarea:focus {outline: 1px solid black;}
 input[type="text"], input[type="password"], textarea {/*width:99.5%;*/ width:100%; margin:0;}
 input.savebutton, input.globalSearchButton, input.cancelbutton, input.button, input.button.add, input.button.addrecordbutton, input.inversebutton
-	{background-color:#94BC80; padding: 1px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; border:none;}
-input.inversebutton {background-color:#fff; color:#94BC80; border:0px solid #94BC80;}
+	{background-color:#A2C88F; padding: 1px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; border:none;}
+input.inversebutton {background-color:#fff; color:#A2C88F; border:0px solid #A2C88F;}
 input.button.inverse, .button.inverse, input.button.add {background-color:#fff; color:#94BC80; border:1px solid #94BC80; padding-top:0; padding-bottom:0;}
 input.button.lengthen, .button.lengthen {padding-left:30px; padding-right:30px;}
 input.button, input.button.quick. input.button.addrecordbutton {float:left; padding:2px 12px;}
@@ -407,21 +407,30 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .fl-container-left .information-group .info-pair-select .info-pair .content  table {width:auto;}
 .info-pair-select select {height:19px; border:none;}
 
-.login-text {padding:0 20px 15px 20px;}
+.login-text {padding:0 10px 15px 0px;}
 .login-forms {width:100%;}
 .login-forms .info-pair{}
-.login-forms .header  {padding:18px 18px 6px 18px; background-color:#93BC7F; margin-bottom:2px; width:auto;}
+.login-forms .header  {padding:18px 18px 6px 18px; background-color:#93BC7F; /*margin-bottom:2px;*/ /*width:auto;*/}
 .login-forms .header  .label {font-size:20px; color:#fff;}
 .login-forms .content{width:100%; background-color:#E8E7E7; padding:18px; }
 
 .login-text .header, .login-forms .header {font-size: 20px; line-height:20px; font-weight:bold; color:#9D9D9D;}
-.login-text .content, .login-forms .content, .login-text .fl-container-left .information-group .info-pair .content, .fl-container-left .information-group .login-forms .info-pair .content 
-	{padding-top: 20px; font-size:14px; line-height:18px; width:90%;}
-.login-pair {padding-bottom: 15px;}
-.login-pair .login-label {width:70px; float:left; font-weight:bold; color:#666; margin-right:10px;}
-.login-pair .login-element {float:left; padding -left:10px; padding-right: 2px; width:65%;}
-.login-pair.forgotpw {width:100%; padding-bottom:0;}
-.login-error {float:left; margin: 8px 0 -8px 17px; padding-left:20px; font-weight:bold; color:#606060; background-image: url(../images/warning.png); background-repeat: no-repeat; background-position:left;}
+.login-text .content, .login-forms .content, .login-text .fl-container-left .information-group .info-pair .content, 
+.fl-container-left .information-group .login-forms .info-pair .content 
+	{padding-top: 20px; font-size:14px; line-height:18px; /*width:90%;*/}
+.login-forms .content.sign-in {padding-top:5px;}
+.login-pair {padding-bottom: 20px;}
+.login-pair .login-label {width:80px; float:left; font-weight:bold; color:#333; margin-right:10px;}
+.login-pair .login-element {float:left; padding-right: 2px; width:70%;}
+.login-pair.forgotpw {width:100%; padding-bottom:0; font-size:13px;}
+.login-pair.forgotpw {color:#333;}
+.login-error {margin-left:90px; margin-bottom:-18px; padding-left:24px; /*font-weight:bold;*/ font-size:12px; color:#C60018; background-image: url(../images/warning.png); background-repeat: no-repeat; background-position:left;}
+.login-pair .button {background-color:#93BC7F; padding:3px 18px;}
+
+.reset-password .login-pair .login-label {width:130px;}
+.reset-password .login-pair .login-element {width:60%;}
+.reset-password .login-error {margin-left:140px;}
+
 
 .info-pair .content .table-select {}
 .info-pair .content .table-selected, .info-pair .content .table-unselected 

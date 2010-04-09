@@ -54,7 +54,7 @@ cspace = cspace || {};
 
     var showEmailSubmittedPage = function (domBinder) {
         domBinder.locate("enterEmailForm").hide();
-        domBinder.locate("enterEmailMessage").text("Email sent.");
+        domBinder.locate("enterEmailMessage").text("An email has been sent you. Please follow the link in the email to reset the password.");
     };
 
     var makeRequiredFieldsValidator = function (domBinder, formType, message) {
@@ -70,10 +70,10 @@ cspace = cspace || {};
                 }
             }
             if (!missing) {
-                domBinder.locate("warning").hide();
+                cspace.util.hideMessage(domBinder);
                 return true;
             } else {
-                domBinder.locate("warning").text(message).show();
+                cspace.util.displayTimestampedMessage(domBinder, message);
                 requiredFields[firstMissing].focus();
                 return false;
             }
@@ -89,7 +89,7 @@ cspace = cspace || {};
             return false;
         }
         if (domBinder.locate("newPassword").val() !== domBinder.locate("confirmPassword").val()) {
-            domBinder.locate("warning").text(mustMatchMessage).show();
+            cspace.util.displayTimestampedMessage(domBinder, mustMatchMessage);
             domBinder.locate("newPassword").focus();
             return false;
         }
@@ -142,13 +142,13 @@ cspace = cspace || {};
 
     var makeErrorHandler = function (domBinder, text) {
         return function(XMLHttpRequest, textStatus, errorThrown){
-            domBinder.locate("warning").text(text).show();
+            cspace.util.displayTimestampedMessage(domBinder, text);
         };
     };
     
     var bindEventHandlers = function (that) {
         that.locate("requestReset").click(function(e){
-            that.locate("warning").hide();
+            cspace.util.hideMessage(that.dom);
             showResetRequestForm(that.dom);
         });
         that.locate("submitEmail").click(makeEmailSubmitter(that));
@@ -179,9 +179,9 @@ cspace = cspace || {};
 
         var result = cspace.util.getUrlParameter("result");
         if (result == "fail") {
-            that.locate("warning").show();
+            cspace.util.displayTimestampedMessage(that.dom, that.options.strings.invalid);
         } else {
-            that.locate("warning").hide();
+            cspace.util.hideMessage(that.dom);
         }
         var resetToken = cspace.util.getUrlParameter("token");
         if (resetToken) {
@@ -251,13 +251,17 @@ cspace = cspace || {};
 
             passwordReset: ".csc-login-passwordReset",
 
-            warning: ".csc-warning"
+            warning: ".csc-warning",
+            messageContainer: ".csc-message-container",
+            feedbackMessage: ".csc-message",
+            timestamp: ".csc-timestamp"
         },
 
         strings: {
             allFieldsRequired: "All fields must be filled in",
-            emailRequired: "You must enter a valid email",
-            passwordsMustMatch: "Passwords must match"
+            emailRequired: "You must enter a valid email address",
+            passwordsMustMatch: "Passwords must match",
+            invalid: "Invalid email/password combination"
         }, 
        
         baseUrl: "../../chain/"
