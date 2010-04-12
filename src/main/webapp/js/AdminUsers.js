@@ -42,6 +42,13 @@ cspace = cspace || {};
         });
     };
 
+    var restoreUserList = function (domBinder, userList, model) {
+        return function () {
+            domBinder.locate("unSearchButton").hide();
+            retrieveUserList(userList, model);
+        };
+    };
+
     var addNewUser = function(container, userDetails, domBinder, uispec){
         return function(e){
             fluid.model.copyModel(userDetails.model,{
@@ -69,7 +76,7 @@ cspace = cspace || {};
         };
     };
 
-    validate = function (domBinder, userDetailsApplier) {
+    var validate = function (domBinder, userDetailsApplier) {
         var required = domBinder.locate("requiredFields");
         for (var i = 0; i < required.length; i++) {
             if (required[i].value === "") {
@@ -89,8 +96,35 @@ cspace = cspace || {};
         return true;
     };
 
+    var submitSearch = function (domBinder, userList, model) {
+        return function () {
+            var query = domBinder.locate("searchField").val();
+            // TODO: Use the DC for this
+            var url = (cspace.util.isLocal() ? "data/users/search/list.json" : "../../chain/users/search?query=" + query);
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                success: function (data, textStatus) {
+                    // that.userListApplier.requestChange("*", data);
+                    // requestChange() to "*" doesn't work (see FLUID-3507)
+                    // the following workaround compensates:
+                    fluid.model.copyModel(model, data.results);
+                    userList.updateModel(model);
+                    domBinder.locate("unSearchButton").show();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    fluid.fail("Error retrieving search results:" + textStatus);
+                }
+            });
+        };
+    };
+
     var bindEventHandlers = function (that) {
 
+        that.locate("searchButton").click(submitSearch(that.dom, that.userList, that.userListApplier.model));
+        that.locate("unSearchButton").click(restoreUserList(that.dom, that.userList, that.userListApplier.model)).hide();
+        
         that.locate("newUser").click(addNewUser(that.container, that.userDetails, that.dom, that.options.uispec));
         that.locate("userListRow").live("click", loadUser(that));
         that.dataContext.events.afterCreate.addListener(function () {
@@ -171,6 +205,9 @@ cspace = cspace || {};
             }
         },
         selectors: {
+            searchField: ".csc-user-searchField",
+            searchButton: ".csc-user-searchButton",
+            unSearchButton: ".csc-user-unSearchButton",
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
             timestamp: ".csc-timestamp",
