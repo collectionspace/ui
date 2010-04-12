@@ -34,39 +34,39 @@
                                 "url": "../../chain/loanin/autocomplete/lender"
                             }
                         }]
+                    },
+                    ".csc-loanIn-lendersAuthorizer": "${fields.lenders.0.lendersAuthorizer}",
+                    ".csc-loanIn-lendersAuthorizer-autocomplete": {
+                        "decorators": [{
+                            "type": "fluid",
+                            "func": "cspace.autocomplete",
+                            "container": ".csc-loanIn-lendersAuthorizer",
+                            "options": {
+                                "url": "../../chain/loanin/autocomplete/lendersAuthorizer"
+                            }
+                        }]
+                    },
+                    ".csc-loanIn-lendersAuthorizerDate": "${fields.lenders.0.lendersAuthorizerDate}",
+                    ".csc-loanIn-lendersAuthorizerDate-container": {
+                        "decorators": [{
+                            "type": "fluid",
+                            "func": "cspace.datePicker",
+                            "container": ".csc-loanIn-lendersAuthorizerDate-container"
+                        }]
+                    },
+                    ".csc-loanIn-lendersContact": "${fields.lenders.0.lendersContact}",
+                    ".csc-loanIn-lendersContact-autocomplete": {
+                        "decorators": [{
+                            "type": "fluid",
+                            "func": "cspace.autocomplete",
+                            "container": ".csc-loanIn-lendersContact",
+                            "options": {
+                                "url": "../../chain/loanin/autocomplete/lendersContact"
+                            }
+                        }]
                     }
                 }
             ]
-        },
-        ".csc-loanIn-lendersAuthorizer": "${fields.lendersAuthorizer}",
-        ".csc-loanIn-lendersAuthorizer-autocomplete": {
-            "decorators": [{
-                "type": "fluid",
-                "func": "cspace.autocomplete",
-                "container": ".csc-loanIn-lendersAuthorizer",
-                "options": {
-                    "url": "../../chain/loanin/autocomplete/lendersAuthorizer"
-                }
-            }]
-        },
-        ".csc-loanIn-lendersAuthorizerDate": "${fields.lendersAuthorizerDate}",
-        ".csc-loanIn-lendersAuthorizerDate-container": {
-            "decorators": [{
-                "type": "fluid",
-                "func": "cspace.datePicker",
-                "container": ".csc-loanIn-lendersAuthorizerDate-container"
-            }]
-        },
-        ".csc-loanIn-lendersContact": "${fields.lendersContact}",
-        ".csc-loanIn-lendersContact-autocomplete": {
-            "decorators": [{
-                "type": "fluid",
-                "func": "cspace.autocomplete",
-                "container": ".csc-loanIn-lendersContact",
-                "options": {
-                    "url": "../../chain/loanin/autocomplete/lendersContact"
-                }
-            }]
         },
         ".csc-loanIn-loanInContact": "${fields.loanInContact}",
         ".csc-loanIn-loanInContact-autocomplete": {

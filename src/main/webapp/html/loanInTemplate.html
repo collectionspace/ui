@@ -1,235 +1,235 @@
 <div class="csc-loanIn-template">
-							<div class="csc-loanIn">
-								<div id="secondary-nav">
-									<div id="secondary-nav-menu-sub">
-										<div class="upper-save"><input type="button" class="savebutton csc-save" value="Save"/></div>
-										<div class="time-stamp">Last Saved on 01.11.10 at 12:12pm</div>
-										<div class="clear"></div>
-									</div>
-								</div>
-								
-								<div class="loanIn-outer-border">
+	<div class="csc-loanIn">
+		<div id="secondary-nav">
+			<div id="secondary-nav-menu-sub">
+				<div class="upper-save"><input type="button" class="savebutton csc-save" value="Save"/></div>
+				<div class="time-stamp">Last Saved on 01.11.10 at 12:12pm</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		
+		<div class="loanIn-outer-border">
 
-									<div class="hidden csc-message-container cs-message">
-										<span class="csc-timestamp cs-timestamp">time</span>
-										<span class="csc-message">Save successful!</span>
-									</div>
+			<div class="hidden csc-message-container cs-message">
+				<span class="csc-timestamp cs-timestamp">time</span>
+				<span class="csc-message">Save successful!</span>
+			</div>
+
+			<div class="fl-container-flex fl-fix information-group">
+			
+				<div class="info-column">	
+		
+					<!-- Information-block header -->
+					<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-loanIn-information'); return false;">
+						<span class="header-toggle"><img id="toggle-loanIn-information-img"  src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+						Object Entry Information
+					</div>
 					
-									<div class="fl-container-flex fl-fix information-group">
-									
-										<div class="info-column">	
-								
-											<!-- Information-block header -->
-											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-loanIn-information'); return false;">
-												<span class="header-toggle"><img id="toggle-loanIn-information-img"  src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-												Object Entry Information
-											</div>
-											
-											<!-- Information-block content block -->
-											<div class="fl-container-flex fl-fix content main" id="toggle-loanIn-information">
-												<div class="info-column fl-force-left">
-													<div class="info-column2-50 fl-force-left">
-														<div class="info-pair">
-															<div class="label">Loan In Number</div>
-															<div class="content csc-loanIn-loanInNumber-patternChooserContainer">
-																<input type="text" class="input-numeric-long csc-loanIn-loanInNumber pattern-chooser-input" />
-															</div>
-														</div>
-													</div>
-													<div class="info-column2-50 fl-force-right">
-														<div class="info-column2-50 fl-force-left">
-															<div class="info-pair-select">
-																<div class="header">
-																	<div class="label">Loan Purpose</div>
-																</div>
-																<div class="content">
-																	<table>
-																		<tbody>
-																			<tr class="csc-loanIn-loanPurpose-row">
-																				<!--<td class="table-unselected"></td>-->
-																				<td><select class="csc-loanIn-loanPurpose input-select" /></td>
-																			</tr>
-																		</tbody>
-																	</table>
-																</div>
-															</div>
-														</div>
-														<div class="info-column2-50 fl-force-right">
-															<div class="info-pair">
-																<div class="header">
-																	<div class="label">Loan in Contact</div>
-																</div>
-																<div class="content">
-																	<table>
-																		<tbody>
-																			<tr class="csc-loanIn-loanContact-row">
-																				<!--<td class="table-unselected"></td>-->
-																				<td><input type="text" class="csc-loanIn-loanContact">
-																					<div class="csc-loanIn-loanContact-autocomplete"></div></td>
-																			</tr>
-																		</tbody>
-																	</table>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="info-column fl-force-left">
-													<div class="info-column1 fl-force-left">
-														<div class="info-pair">
-															<div class="header">
-																<div class="label">Lender</div>
-															</div>
-															<div class="content csc-loanIn-lendersAuthorizerDate-container">
-																<table>
-																	<thead>
-																		<tr>
-																			<td>Lender</td>
-																			<td>Lender's Contact</td>
-																			<td>Lender's Authorizer</td>
-																			<td>Authorization Date</td>
-																		</tr>
-																	</thead>
-																	
-																	<tbody>
-																		<tr>
-																			<td><!--<input type="text" class="csc-loanIn-lender">
-																					<div class="csc-loanIn-lender-autocomplete"></div>-->
-																				<input type="text" class="">
-                                                                            </td>
-																			<td><input type="text" class="csc-loanIn-lendersContact">
-                                                                                 <div class="csc-loanIn-lendersContact-autocomplete"></div>
-                                                                            </td>
-																			<td><input type="text" class="csc-loanIn-lendersAuthorizer">
-																				<div class="csc-loanIn-lendersAuthorizer-autocomplete"></div>
-                                                                            </td>
-																			<td class="field-cal"><input type="text" disabled class="input-date csc-loanIn-lendersAuthorizerDate csc-calendar-date deactivate"><img src="../images/cal.png" class="csc-calendar-button" alt="calendar"  height=19 width=18 />
-                                                                                <div class="csc-date-picker"></div></td>
-																		</tr>
-																	</tbody>
-																</table>
-																<div class="csc-date-picker"></div>
-															</div>
-														</div>
-													</div>
-													<div class="clear"></div>
-												</div>
-												<div class="info-column fl-force-left">
-													<div class="info-column2-50 fl-force-left">
-														<div class="info-pair">
-															<div class="header">
-																<div class="label">Loan In Conditions</div>
-															</div>
-															<div class="content">
-																<table>
-																	<tbody>
-																		<tr>
-																			<!--<td class="table-unselected"></td>-->
-																			<td><textarea class="input-textarea csc-loanIn-loanInConditions"/></td>
-																		</tr>
-																	</tbody>
-																</table>
-															</div>
-														</div>
-													</div>
-													
-													<div class="info-column2-50 fl-force-right">
-														<div class="info-pair">
-															<div class="header">
-																<div class="label">Loan In Note</div>
-															</div>
-															<div class="content">
-																<table>
-																	<tbody>
-																		<tr>
-																			<!--<td class="table-unselected"></td>-->
-																			<td><textarea class="input-textarea csc-loanIn-loanInNote"/></td>
-																		</tr>
-																	</tbody>
-																</table>
-															</div>
-														</div>
-													</div>
-												</div>
-												
-												<div class="info-column fl-force-left">
-													<div class="info-column3 fl-force-left">
-														<div class="info-pair-date">
-															<div class="header">
-																<div class="label">Loan In Date</div>
-															</div>
-															<div class="content csc-loanIn-date-container">
-																<table>
-																	<tbody>
-																		<tr>
-																			<td class="field-cal disabled"><input type="text" class="input-date csc-loanIn-date csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></a></td>
-																		</tr>
-																	</tbody>
-																</table>
-																<div class="csc-date-picker"></div>
-															</div>
-														</div>
-													</div>
-													
-													<div class="info-column3 fl-force-left">
-														<div class="info-pair-date">
-															<div class="header">
-																<div class="label">Loan Return Date</div>
-															</div>
-															<div class="content csc-loanIn-returnDate-container">
-																<table>
-																	<tbody>
-																		<tr>
-																			<td class="field-cal disabled"><input type="text" class="input-date csc-loanIn-returnDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></a></td>
-																		</tr>
-																	</tbody>
-																</table>
-																<div class="csc-date-picker"></div>
-															</div>
-														</div>
-													</div>
-													
-													<div class="info-column3 fl-force-left">
-														<div class="info-pair-date">
-															<div class="header">
-																<div class="label">Loan Renewal Application Date</div>
-															</div>
-															<div class="content csc-loanIn-renewalApplicationDate-container">
-																<table>
-																	<tbody>
-																		<tr>
-																			<td class="field-cal disabled"><input type="text" class="input-date csc-loanIn-renewalApplicationDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></a></td>
-																		</tr>
-																	</tbody>
-																</table>
-																<div class="csc-date-picker"></div>
-															</div>
-														</div>
-													</div>
-												</div>
-												
-												<div class="clear"></div>
-											</div>
-										</div>
-										
+					<!-- Information-block content block -->
+					<div class="fl-container-flex fl-fix content main" id="toggle-loanIn-information">
+						<div class="info-column fl-force-left">
+							<div class="info-column2-50 fl-force-left">
+								<div class="info-pair">
+									<div class="label">Loan In Number</div>
+									<div class="content csc-loanIn-loanInNumber-patternChooserContainer">
+										<input type="text" class="input-numeric-long csc-loanIn-loanInNumber pattern-chooser-input" />
 									</div>
-									
-									<div class="hidden csc-message-container cs-message">
-										<span class="csc-timestamp cs-timestamp">time</span>
-										<span class="csc-message">Save successful!</span>
-									</div>
-
-									<div class="csc-error-dialog">
-										<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
-									</div>
-								</div> <!-- end outer border-->
-
-								<!-- Button container -->
-								<div class="fl-container-flex input-buttons">
-									<a href="#"><input type="button" class="savebutton csc-save" value="Save" /></a>
-									<a href="findedit.html"><input type="button" class="cancelbutton" value="Cancel" /></a>
-									<div class="clear"></div>
 								</div>
 							</div>
+							<div class="info-column2-50 fl-force-right">
+								<div class="info-column2-50 fl-force-left">
+									<div class="info-pair-select">
+										<div class="header">
+											<div class="label">Loan Purpose</div>
+										</div>
+										<div class="content">
+											<table>
+												<tbody>
+													<tr class="csc-loanIn-loanPurpose-row">
+														<!--<td class="table-unselected"></td>-->
+														<td><select class="csc-loanIn-loanPurpose input-select" /></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div class="info-column2-50 fl-force-right">
+									<div class="info-pair">
+										<div class="header">
+											<div class="label">Loan in Contact</div>
+										</div>
+										<div class="content">
+											<table>
+												<tbody>
+													<tr class="csc-loanIn-loanContact-row">
+														<!--<td class="table-unselected"></td>-->
+														<td><input type="text" class="csc-loanIn-loanContact">
+															<div class="csc-loanIn-loanContact-autocomplete"></div></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="info-column fl-force-left">
+							<div class="info-column1 fl-force-left">
+								<div class="info-pair">
+									<div class="header">
+										<div class="label">Lender</div>
+									</div>
+									<div class="content">
+										<table>
+											<thead>
+												<tr>
+													<td>Lender</td>
+													<td>Lender's Contact</td>
+													<td>Lender's Authorizer</td>
+													<td>Authorization Date</td>
+												</tr>
+											</thead>
+											
+											<tbody>
+												<tr class="csc-loanIn-lender-row">
+													<td><input type="text" class="csc-loanIn-lender">
+															<div class="csc-loanIn-lender-autocomplete"></div>
+														<input type="text" class="">
+                                                    </td>
+													<td><input type="text" class="csc-loanIn-lendersContact">
+                                                         <div class="csc-loanIn-lendersContact-autocomplete"></div>
+                                                    </td>
+													<td><input type="text" class="csc-loanIn-lendersAuthorizer">
+														<div class="csc-loanIn-lendersAuthorizer-autocomplete"></div>
+                                                    </td>
+													<td class="field-cal csc-loanIn-lendersAuthorizerDate-container"><input type="text" disabled class="input-date csc-loanIn-lendersAuthorizerDate csc-calendar-date deactivate"><img src="../images/cal.png" class="csc-calendar-button" alt="calendar"  height=19 width=18 />
+                                                        <div class="csc-date-picker"></div></td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="csc-date-picker"></div>
+									</div>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="info-column fl-force-left">
+							<div class="info-column2-50 fl-force-left">
+								<div class="info-pair">
+									<div class="header">
+										<div class="label">Loan In Conditions</div>
+									</div>
+									<div class="content">
+										<table>
+											<tbody>
+												<tr>
+													<!--<td class="table-unselected"></td>-->
+													<td><textarea class="input-textarea csc-loanIn-loanInConditions"/></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							
+							<div class="info-column2-50 fl-force-right">
+								<div class="info-pair">
+									<div class="header">
+										<div class="label">Loan In Note</div>
+									</div>
+									<div class="content">
+										<table>
+											<tbody>
+												<tr>
+													<!--<td class="table-unselected"></td>-->
+													<td><textarea class="input-textarea csc-loanIn-loanInNote"/></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="info-column fl-force-left">
+							<div class="info-column3 fl-force-left">
+								<div class="info-pair-date">
+									<div class="header">
+										<div class="label">Loan In Date</div>
+									</div>
+									<div class="content csc-loanIn-date-container">
+										<table>
+											<tbody>
+												<tr>
+													<td class="field-cal disabled"><input type="text" class="input-date csc-loanIn-date csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></a></td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="csc-date-picker"></div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="info-column3 fl-force-left">
+								<div class="info-pair-date">
+									<div class="header">
+										<div class="label">Loan Return Date</div>
+									</div>
+									<div class="content csc-loanIn-returnDate-container">
+										<table>
+											<tbody>
+												<tr>
+													<td class="field-cal disabled"><input type="text" class="input-date csc-loanIn-returnDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></a></td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="csc-date-picker"></div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="info-column3 fl-force-left">
+								<div class="info-pair-date">
+									<div class="header">
+										<div class="label">Loan Renewal Application Date</div>
+									</div>
+									<div class="content csc-loanIn-renewalApplicationDate-container">
+										<table>
+											<tbody>
+												<tr>
+													<td class="field-cal disabled"><input type="text" class="input-date csc-loanIn-renewalApplicationDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></a></td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="csc-date-picker"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="clear"></div>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="hidden csc-message-container cs-message">
+				<span class="csc-timestamp cs-timestamp">time</span>
+				<span class="csc-message">Save successful!</span>
+			</div>
+
+			<div class="csc-error-dialog">
+				<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
+			</div>
+		</div> <!-- end outer border-->
+
+		<!-- Button container -->
+		<div class="fl-container-flex input-buttons">
+			<a href="#"><input type="button" class="savebutton csc-save" value="Save" /></a>
+			<a href="findedit.html"><input type="button" class="cancelbutton" value="Cancel" /></a>
+			<div class="clear"></div>
+		</div>
+	</div>
 
 </div>
