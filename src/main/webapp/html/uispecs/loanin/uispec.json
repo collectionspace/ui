@@ -24,23 +24,21 @@
         ".csc-loanIn-lender-row:": {
             "children": [
                 {
-                    ".csc-loanIn-lender": "${fields.lenders.0.lender}",
-                    ".csc-loanIn-lender-autocomplete": {
+                    ".csc-loanIn-lender": {
+                        "valuebinding": "${fields.lenders.0.lender}",
                         "decorators": [{
                             "type": "fluid",
                             "func": "cspace.autocomplete",
-                            "container": ".csc-loanIn-lender",
                             "options": {
                                 "url": "../../chain/loanin/autocomplete/lender"
                             }
                         }]
                     },
-                    ".csc-loanIn-lendersAuthorizer": "${fields.lenders.0.lendersAuthorizer}",
-                    ".csc-loanIn-lendersAuthorizer-autocomplete": {
+                    ".csc-loanIn-lendersAuthorizer": {
+                        "valuebinding": "${fields.lenders.0.lendersAuthorizer}",
                         "decorators": [{
                             "type": "fluid",
                             "func": "cspace.autocomplete",
-                            "container": ".csc-loanIn-lendersAuthorizer",
                             "options": {
                                 "url": "../../chain/loanin/autocomplete/lendersAuthorizer"
                             }
@@ -51,15 +49,13 @@
                         "decorators": [{
                             "type": "fluid",
                             "func": "cspace.datePicker",
-                            "container": ".csc-loanIn-lendersAuthorizerDate-container"
                         }]
                     },
-                    ".csc-loanIn-lendersContact": "${fields.lenders.0.lendersContact}",
-                    ".csc-loanIn-lendersContact-autocomplete": {
+                    ".csc-loanIn-lendersContact": {
+                        "valuebinding": "${fields.lenders.0.lendersContact}",
                         "decorators": [{
                             "type": "fluid",
                             "func": "cspace.autocomplete",
-                            "container": ".csc-loanIn-lendersContact",
                             "options": {
                                 "url": "../../chain/loanin/autocomplete/lendersContact"
                             }
@@ -68,12 +64,11 @@
                 }
             ]
         },
-        ".csc-loanIn-loanInContact": "${fields.loanInContact}",
-        ".csc-loanIn-loanInContact-autocomplete": {
+        ".csc-loanIn-loanInContact": {
+            "valuebinding": "${fields.loanInContact}",
             "decorators": [{
                 "type": "fluid",
                 "func": "cspace.autocomplete",
-                "container": ".csc-loanIn-loanInContact",
                 "options": {
                     "url": "../../chain/loanin/autocomplete/loanInContact"
                 }
@@ -84,24 +79,21 @@
         ".csc-loanIn-loanInDate-container": {
             "decorators": [{
                 "type": "fluid",
-                "func": "cspace.datePicker",
-                "container": ".csc-loanIn-loanInDate-container"
+                "func": "cspace.datePicker"
             }]
         },
         ".csc-loanIn-loanReturnDate": "${fields.loanReturnDate}",
         ".csc-loanIn-loanReturnDate-container": {
             "decorators": [{
                 "type": "fluid",
-                "func": "cspace.datePicker",
-                "container": ".csc-loanIn-loanReturnDate-container"
+                "func": "cspace.datePicker"
             }]
         },
         ".csc-loanIn-loanRenewalApplicationDate": "${fields.loanRenewalApplicationDate}",
         ".csc-loanIn-loanRenewalApplicationDate-container": {
             "decorators": [{
                 "type": "fluid",
-                "func": "cspace.datePicker",
-                "container": ".csc-loanIn-loanRenewalApplicationDate-container"
+                "func": "cspace.datePicker"
             }]
         },
         ".csc-loanIn-loanInNote": "${fields.loanInNote}",

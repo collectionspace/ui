@@ -48,6 +48,9 @@ cspace = cspace || {};
                 comp.optionlist[j] = comp.optionlist[j].value;
                 comp.optionnames[j] = comp.optionnames[j].value;
             }
+        } else if (comp.valuebinding && comp.valuebinding.valuebinding) {
+            // Workaround for ENGAGE-382            
+            comp.valuebinding = comp.valuebinding.valuebinding;
         } else if (comp.children) {
             for (var i = 0; i < comp.children.length; i++) {
                 fixSelections(comp.children[i]);

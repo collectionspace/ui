@@ -36,7 +36,7 @@ cspace = cspace || {};
             var reOpts = {
                 dataContext: "{pageBuilder}.dataContext",
                 uispec: "{pageBuilder}.uispec.recordEditor",
-                selectors: {identificationNumber: ".csc-loanOut-loanOutNumber-numberPatternChooser"},
+                selectors: {identificationNumber: ".csc-loanOut-loanOutNumber"},
                 strings: {identificationNumberRequired: "Please specify a Loan Out Number"}
             };
             var sbOpts = {

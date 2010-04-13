@@ -36,7 +36,7 @@ cspace = cspace || {};
             var reOpts = {
                 dataContext: "{pageBuilder}.dataContext",
                 uispec: "{pageBuilder}.uispec.recordEditor",
-                selectors: {identificationNumber: ".csc-loanIn-loanInNumber-numberPatternChooser"},
+                selectors: {identificationNumber: ".csc-loanIn-loanInNumber"},
                 strings: {identificationNumberRequired: "Please specify a Loan In Number"}
             };
             var sbOpts = {
