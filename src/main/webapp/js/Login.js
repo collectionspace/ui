@@ -121,7 +121,7 @@ cspace = cspace || {};
                 url: cspace.util.addTrailingSlash(url) + "resetpassword",
                 type: "POST",
                 dataType: "json",
-                data: JSON.stringify({"password": password, "token": that.token}),
+                data: JSON.stringify({"password": password, "token": that.token, "email": that.email}),
                 success: that.events.passwordSubmitted.fire,
                 error: that.events.onError.fire
             });
@@ -188,8 +188,10 @@ cspace = cspace || {};
             cspace.util.hideMessage(that.dom);
         }
         var resetToken = cspace.util.getUrlParameter("token");
+        var email = cspace.util.getUrlParameter("email");
         if (resetToken) {
             that.token = resetToken;
+            that.email = email;
             showReset(that.dom);
         } else {
             showSignIn(that.dom);
@@ -255,7 +257,6 @@ cspace = cspace || {};
 
             passwordReset: ".csc-login-passwordReset",
 
-            warning: ".csc-warning",
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
             timestamp: ".csc-timestamp"

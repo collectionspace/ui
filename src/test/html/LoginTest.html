@@ -17,6 +17,7 @@
         <script type="text/javascript" src="../lib/jqMock/js/jqMock.js"></script>
 
         <script type="text/javascript" src="../../main/webapp/js/cspace.js"></script>
+        <script type="text/javascript" src="../../main/webapp/js/PasswordValidator.js"></script>
         <script type="text/javascript" src="../../main/webapp/js/Utilities.js"></script>
         <script type="text/javascript" src="../../main/webapp/js/Login.js"></script>
         
@@ -52,7 +53,10 @@
                     </form>
                 </div>
                 <div class="csc-login-passwordReset"></div>
-                <div class="csc-warning"></div>
+                <div class="login-error hidden csc-message-container">
+                    <span class="csc-timestamp cs-timestamp">time</span>
+                    <span class="csc-message">Save successful!</span>
+                </div>
             </div>
         </div>
         <ol id="tests"></ol>
