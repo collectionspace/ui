@@ -161,6 +161,10 @@ cspace = cspace || {};
             showPasswordReset(that.dom);
         });
         
+        that.events.onError.addListener(function () {
+            cspace.util.displayTimestampedMessage(that.dom, that.options.strings.generalError);            
+        });
+
         that.locate("loginForm").submit(makeRequiredFieldsValidator(that.dom, "login", that.options.strings.allFieldsRequired));
         that.locate("resetForm").submit(makeRequiredFieldsValidator(that.dom, "password", that.options.strings.allFieldsRequired));
 
@@ -261,7 +265,8 @@ cspace = cspace || {};
             allFieldsRequired: "All fields must be filled in",
             emailRequired: "You must enter a valid email address",
             passwordsMustMatch: "Passwords must match",
-            invalid: "Invalid email/password combination"
+            invalid: "Invalid email/password combination",
+            generalError: "I'm sorry, an error has occurred. Please try again, or contact your system administrator."
         }, 
        
         baseUrl: "../../chain/"
