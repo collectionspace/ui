@@ -131,6 +131,9 @@ cspace = cspace || {};
             that.locate("newUserRow").hide();
             retrieveUserList(that.userList, that.userListApplier.model);
         });
+        that.dataContext.events.afterUpdate.addListener(function () {
+            retrieveUserList(that.userList, that.userListApplier.model);
+        });
         that.userDetails.events.pageRendered.addListener(function () {
             that.locate("newUserRow").hide();
             showUserDetails(that.dom);

@@ -3,7 +3,7 @@
         ".csc-user-userList-row:": {
             "children": [
                 {
-                    ".csc-user-userList-name": "${items.0.name}",
+                    ".csc-user-userList-name": "${items.0.userName}",
                     ".csc-user-userList-status": "${items.0.status}",
                     ".csc-user-userList-csid": "${items.0.csid}"
                 }
