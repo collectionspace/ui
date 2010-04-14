@@ -14,7 +14,7 @@
         "gender": "male",
 		"occupation": "Musician",
 		"schoolOrStyle": "His own",
-		"group": "Council of Itinerate Musicians",
+		"group": "Bloggs & Co.",
 		"nationality": "English",
 		"nameNote": "",
 		"bioNote": "",
@@ -32,8 +32,8 @@
     },
     "termsUsed": [
         {
-            "csid": "963.852.741",
-            "number": "Council of Itinerate Musicians",
+            "csid": "987.654.321",
+            "number": "Bloggs & Co.",
             "recordtype": "organization",
             "relationshiptype": "uses",
             "sourceFieldName": "group"

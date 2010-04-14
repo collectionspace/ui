@@ -27,6 +27,7 @@
             "csid": "123.456.789",
             "number": "Fred Bloggs",
             "sourceFieldName": "contactName",
+            "relationshiptype": "uses",
             "recordtype": "person"
         }
     ],

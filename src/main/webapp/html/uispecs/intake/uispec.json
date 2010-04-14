@@ -10,7 +10,8 @@
                 "func": "cspace.autocomplete",
                 "container": ".csc-intake-current-owner",
                 "options": {
-                    "url": "../../chain/intake/autocomplete/currentOwner"
+                    "queryUrl": "../../chain/intake/autocomplete/currentOwner",
+                    "vocabUrl": "../../chain/intake/source-vocab/currentOwner"
                 }
             }]
         },
@@ -21,7 +22,8 @@
                 "func": "cspace.autocomplete",
                 "container": ".csc-intake-depositor",
                 "options": {
-                    "url": "../../chain/intake/autocomplete/depositor"
+                    "queryUrl": "../../chain/intake/autocomplete/depositor",
+                    "vocabUrl": "../../chain/intake/source-vocab/depositor"
                 }
             }]
         },

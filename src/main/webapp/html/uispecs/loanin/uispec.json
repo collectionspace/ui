@@ -30,7 +30,8 @@
                             "type": "fluid",
                             "func": "cspace.autocomplete",
                             "options": {
-                                "url": "../../chain/loanin/autocomplete/lender"
+                                "queryUrl": "../../chain/loanin/autocomplete/lender",
+                                "vocabUrl": "../../chain/loanin/source-vocab/lender"
                             }
                         }]
                     },
@@ -40,7 +41,8 @@
                             "type": "fluid",
                             "func": "cspace.autocomplete",
                             "options": {
-                                "url": "../../chain/loanin/autocomplete/lendersAuthorizer"
+                                "queryUrl": "../../chain/loanin/autocomplete/lendersAuthorizer",
+                                "vocabUrl": "../../chain/loanin/source-vocab/lendersAuthorizer"
                             }
                         }]
                     },
@@ -57,7 +59,8 @@
                             "type": "fluid",
                             "func": "cspace.autocomplete",
                             "options": {
-                                "url": "../../chain/loanin/autocomplete/lendersContact"
+                                "queryUrl": "../../chain/loanin/autocomplete/lendersContact",
+                                "vocabUrl": "../../chain/loanin/source-vocab/lendersContact"
                             }
                         }]
                     }
@@ -70,7 +73,8 @@
                 "type": "fluid",
                 "func": "cspace.autocomplete",
                 "options": {
-                    "url": "../../chain/loanin/autocomplete/loanInContact"
+                    "queryUrl": "../../chain/loanin/autocomplete/loanInContact",
+                    "vocabUrl": "../../chain/loanin/source-vocab/loanInContact"
                 }
             }]
         },

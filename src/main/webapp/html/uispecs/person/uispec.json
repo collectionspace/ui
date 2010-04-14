@@ -39,7 +39,8 @@
                 "func": "cspace.autocomplete",
                 "container": ".csc-personAuthority-occupation",
                 "options": {
-                    "url": "../../chain/personAuthority/autocomplete/occupation"
+                    "queryUrl": "../../chain/personAuthority/autocomplete/occupation",
+                    "vocabUrl": "../../chain/personAuthority/source-vocab/occupation"
                 }
             }]
         },
@@ -50,7 +51,8 @@
                 "func": "cspace.autocomplete",
                 "container": ".csc-personAuthority-schoolOrStyle",
                 "options": {
-                    "url": "../../chain/personAuthority/autocomplete/schoolOrStyle"
+                    "queryUrl": "../../chain/personAuthority/autocomplete/schoolOrStyle",
+                    "vocabUrl": "../../chain/personAuthority/source-vocab/schoolOrStyle"
                 }
             }]
         },
@@ -61,7 +63,8 @@
                 "func": "cspace.autocomplete",
                 "container": ".csc-personAuthority-group",
                 "options": {
-                    "url": "../../chain/personAuthority/autocomplete/group"
+                    "queryUrl": "../../chain/personAuthority/autocomplete/group",
+                    "vocabUrl": "../../chain/personAuthority/source-vocab/group"
                 }
             }]
         },
@@ -72,7 +75,8 @@
                 "func": "cspace.autocomplete",
                 "container": ".csc-personAuthority-nationality",
                 "options": {
-                    "url": "../../chain/personAuthority/autocomplete/nationality"
+                    "queryUrl": "../../chain/personAuthority/autocomplete/nationality",
+                    "vocabUrl": "../../chain/personAuthority/source-vocab/nationality"
                 }
             }]
         },
@@ -93,7 +97,8 @@
                 "func": "cspace.autocomplete",
                 "container": ".csc-personAuthority-birthPlace",
                 "options": {
-                    "url": "../../chain/personAuthority/autocomplete/birthPlace"
+                    "queryUrl": "../../chain/personAuthority/autocomplete/birthPlace",
+                    "vocabUrl": "../../chain/personAuthority/source-vocab/birthPlace"
                 }
             }]
         },
@@ -112,7 +117,8 @@
                 "func": "cspace.autocomplete",
                 "container": ".csc-personAuthority-deathPlace",
                 "options": {
-                    "url": "../../chain/personAuthority/autocomplete/deathPlace"
+                    "queryUrl": "../../chain/personAuthority/autocomplete/deathPlace",
+                    "vocabUrl": "../../chain/personAuthority/source-vocab/deathPlace"
                 }
             }]
         },
@@ -130,7 +136,8 @@
                 "func": "cspace.autocomplete",
                 "container": ".csc-contact-place",
                 "options": {
-                    "url": "../../chain/personAuthority/autocomplete/place"
+                    "queryUrl": "../../chain/personAuthority/autocomplete/place",
+                    "vocabUrl": "../../chain/personAuthority/source-vocab/place"
                 }
             }]
         },
@@ -143,7 +150,7 @@
             ".csc-related-row:": {
                 "children": [
                     {
-                        ".csc-related-summary": {
+                        ".csc-related-number": {
                             "linktext": "${items.0.number}",
                             "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
                          },

@@ -22,7 +22,8 @@
                 "func": "cspace.autocomplete",
                 "container": ".csc-organizationAuthority-contactName",
                 "options": {
-                    "url": "../../chain/organizationAuthority/autocomplete/contactName"
+                    "queryUrl": "../../chain/organizationAuthority/autocomplete/contactName",
+                    "vocabUrl": "../../chain/organizationAuthority/source-vocab/contactName"
                 }
             }]
         },
@@ -41,7 +42,8 @@
                 "func": "cspace.autocomplete",
                 "container": ".csc-organizationAuthority-foundingPlace",
                 "options": {
-                    "url": "../../chain/organizationAuthority/autocomplete/foundingPlace"
+                    "queryUrl": "../../chain/organizationAuthority/autocomplete/foundingPlace",
+                    "vocabUrl": "../../chain/organizationAuthority/source-vocab/foundingPlace"
                 }
             }]
         },
@@ -60,7 +62,8 @@
                 "func": "cspace.autocomplete",
                 "container": ".csc-organizationAuthority-group",
                 "options": {
-                    "url": "../../chain/organizationAuthority/autocomplete/group"
+                    "queryUrl": "../../chain/organizationAuthority/autocomplete/group",
+                    "vocabUrl": "../../chain/organizationAuthority/source-vocab/group"
                 }
             }]
         },
@@ -84,7 +87,8 @@
                 "func": "cspace.autocomplete",
                 "container": ".csc-contact-place",
                 "options": {
-                    "url": "../../chain/nameAuthority/autocomplete/place"
+                    "queryUrl": "../../chain/organizationAuthority/autocomplete/place",
+                    "vocabUrl": "../../chain/organizationAuthority/source-vocab/place"
                 }
             }]
         },
@@ -97,7 +101,7 @@
             ".csc-related-row:": {
                 "children": [
                     {
-                        ".csc-related-summary": {
+                        ".csc-related-number": {
                             "linktext": "${items.0.number}",
                             "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
                          },

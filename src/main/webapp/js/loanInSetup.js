@@ -114,6 +114,8 @@ cspace = cspace || {};
 
         if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
             var uispecUrl = (cspace.util.isLocal() ? "./uispecs/loanin/uispec.json" : "../../chain/loanin/uispec");
+            // Until loan service is in place, force the local UISpec for testing
+            uispecUrl = "./uispecs/loanin/uispec.json";
             jQuery.ajax({
                 url: uispecUrl,
                 type: "GET",
