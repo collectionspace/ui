@@ -1,8 +1,8 @@
 {
     "csid": "963852741",
     "fields": {
-        "userID": "carl",
-        "userName": "Carl Hogsden",
+        "userId": "carl",
+        "screenName": "Carl Hogsden",
         "password": "testpassword",
         "email": "carl.hogsden@collectionspace.org",
         "status": "active",

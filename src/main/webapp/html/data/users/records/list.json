@@ -1,8 +1,8 @@
 {
     "items": [
-        {"csid": "963852741", "userName": "Carl Hogsden", "status": "active"},
-        {"csid": "369258147", "userName": "Megan Forbes", "status": "active"},
-        {"csid": "147258369", "userName": "Anastasia Cheetham", "status": "inactive"},
-        {"csid": "741852963", "userName": "Jesse Martinez", "status": "active"}
+        {"csid": "963852741", "screenName": "Carl Hogsden", "status": "active"},
+        {"csid": "369258147", "screenName": "Megan Forbes", "status": "active"},
+        {"csid": "147258369", "screenName": "Anastasia Cheetham", "status": "inactive"},
+        {"csid": "741852963", "screenName": "Jesse Martinez", "status": "active"}
     ]
 }
