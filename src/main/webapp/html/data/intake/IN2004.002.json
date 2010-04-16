@@ -2,7 +2,7 @@
     "csid": "IN2004.002",
     "fields": {
         "returnDate": "",
-        "depositor": "Jennifer Connelly",
+        "depositor": "urn:cspace:org.collectionspace.demo:orgperson:name(Demo Person Authority):person(Achmed Abdullah)'Achmed Abdullah'",
         "responsibleEntity": "",
         "packingNote": "",
         "entryReason": "commission",

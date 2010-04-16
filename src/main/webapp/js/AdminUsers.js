@@ -22,7 +22,7 @@ cspace = cspace || {};
         domBinder.locate("userDetailsNone").hide();
         domBinder.locate("userDetails").show();
     };
-    var retrieveUserList = function (userList, model) {
+    var retrieveUserList = function (domBinder, userList, model) {
         // TODO: Use the DC for this
         var url = (cspace.util.isLocal() ? "data/users/records/list.json" : "../../chain/users");
         $.ajax({
@@ -35,6 +35,7 @@ cspace = cspace || {};
                 // the following workaround compensates:
                 fluid.model.copyModel(model, data);
                 userList.updateModel(model.items);
+                domBinder.locate("newUserRow").hide();
             },
             error: function (xhr, textStatus, errorThrown) {
                 fluid.fail("Error retrieving user list:" + textStatus);
@@ -45,7 +46,7 @@ cspace = cspace || {};
     var restoreUserList = function (domBinder, userList, model) {
         return function () {
             domBinder.locate("unSearchButton").hide();
-            retrieveUserList(userList, model);
+            retrieveUserList(domBinder, userList, model);
         };
     };
 
@@ -111,6 +112,7 @@ cspace = cspace || {};
                     // the following workaround compensates:
                     fluid.model.copyModel(model, data.results);
                     userList.updateModel(model);
+                    domBinder.locate("newUserRow").hide();
                     domBinder.locate("unSearchButton").show();
                 },
                 error: function (xhr, textStatus, errorThrown) {
@@ -129,10 +131,10 @@ cspace = cspace || {};
         that.locate("userListRow").live("click", loadUser(that));
         that.dataContext.events.afterCreate.addListener(function () {
             that.locate("newUserRow").hide();
-            retrieveUserList(that.userList, that.userListApplier.model);
+            retrieveUserList(that.dom, that.userList, that.userListApplier.model);
         });
         that.dataContext.events.afterUpdate.addListener(function () {
-            retrieveUserList(that.userList, that.userListApplier.model);
+            retrieveUserList(that.dom, that.userList, that.userListApplier.model);
         });
         that.userDetails.events.pageRendered.addListener(function () {
             that.locate("newUserRow").hide();
@@ -155,7 +157,7 @@ cspace = cspace || {};
 
     setUpUserAdministrator = function (that) {
         bindEventHandlers(that);
-        retrieveUserList(that.userList, that.userListApplier.model);
+        retrieveUserList(that.dom, that.userList, that.userListApplier.model);
         hideUserDetails(that.dom);
         that.locate("newUserRow").hide();
     };

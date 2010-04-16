@@ -52,6 +52,7 @@ cspace = cspace || {};
         that.model = {
             items: (options.data? options.data: [])
         };
+        that.renderTemplate = undefined;
 
         that.showErrorMessage = function (msg) {
             that.locate("errorMessage").text(msg).show();
@@ -63,22 +64,25 @@ cspace = cspace || {};
         };
 
         that.refreshView = function () {
-            if (that.model.items.length > 0) {
-                that.locate("noneYetMessage").hide();
-                var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
-                var protoTree = cspace.renderUtils.buildProtoTree(that.options.uispec, that);
-                var tree = expander(protoTree);
-                var selectors = {};
-                cspace.renderUtils.buildSelectorsFromUISpec(that.options.uispec, selectors);
-                var renderOpts = {
-                    cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(selectors, {}),
-                    model: that.model,
-                    // debugMode: true,
-                    autoBind: true//,
-               //     applier: that.options.applier
-                };
-                fluid.selfRender(that.container, tree, renderOpts);
+            that.locate("noneYetMessage").hide();
+            var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
+            var protoTree = cspace.renderUtils.buildProtoTree(that.options.uispec, that);
+            var tree = expander(protoTree);
+            var selectors = {};
+            cspace.renderUtils.buildSelectorsFromUISpec(that.options.uispec, selectors);
+            var renderOpts = {
+                cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(selectors, {}),
+                model: that.model,
+                // debugMode: true,
+                autoBind: true//,
+           //     applier: that.options.applier
+            };
+            if (!that.renderTemplate) {
+                that.renderTemplate = fluid.selfRender(that.container, tree, renderOpts);
             } else {
+                that.renderTemplate =fluid.reRender(that.renderTemplate, that.container, tree, renderOpts);
+            }
+            if (that.model.items.length <= 0) {
                 that.locate("noneYetMessage").show();
             }
             that.locate("numberOfItems").text("(" + that.model.items.length + ")");

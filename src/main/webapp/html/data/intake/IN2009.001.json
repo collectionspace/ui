@@ -2,7 +2,8 @@
     "csid": "IN2009.001",
     "fields": {
         "returnDate": "",
-        "depositor": "",
+        "depositor": "urn:cspace:org.collectionspace.demo:orgperson:name(Demo Person Authority):person(Phyllis Allen)'Phyllis Allen'",
+        "currentOwner": "urn:cspace:org.collectionspace.demo:orgperson:name(Demo Person Authority):person(Achmed Abdullah)'Achmed Abdullah'",
         "responsibleEntity": "Anastasia Cheetham",
         "packingNote": "",
         "entryReason": "enquiry",
