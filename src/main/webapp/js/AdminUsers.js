@@ -18,9 +18,16 @@ cspace = cspace || {};
         domBinder.locate("userDetails").hide();
         domBinder.locate("userDetailsNone").show();
     };
-    var showUserDetails = function (domBinder) {
+    var showUserDetails = function (domBinder, newUser) {
         domBinder.locate("userDetailsNone").hide();
         domBinder.locate("userDetails").show();
+        if (newUser) {
+            domBinder.locate("hideOnCreate").hide();
+            domBinder.locate("hideOnEdit").show();
+        } else {
+            domBinder.locate("hideOnEdit").hide();
+            domBinder.locate("hideOnCreate").show();
+        }
     };
     var retrieveUserList = function (domBinder, userList, model) {
         // TODO: Use the DC for this
@@ -65,7 +72,7 @@ cspace = cspace || {};
             });
             userDetails.refreshView();
             cspace.passwordValidator(container);
-            showUserDetails(domBinder);
+            showUserDetails(domBinder, true);
             domBinder.locate("newUserRow").show();
         };
     };
@@ -87,10 +94,11 @@ cspace = cspace || {};
         }
         // In the default configuration, the email address used as the userid.
         // If all required fields are present and the userid is not set, use the email
-        if (!domBinder.locate("userID").val()) {
-            userDetailsApplier.requestChange("fields.userID", domBinder.locate("email").val());
+        if (!domBinder.locate("userId").val()) {
+            userDetailsApplier.requestChange("fields.userId", domBinder.locate("email").val());
         }
-        if (domBinder.locate("password").val() !== domBinder.locate("passwordConfirm").val()) {
+        
+        if (domBinder.locate("password").is(":visible") && (domBinder.locate("password").val() !== domBinder.locate("passwordConfirm").val())) {
             cspace.util.displayTimestampedMessage(domBinder, "Passwords don't match");
             return false;
         }
@@ -138,7 +146,7 @@ cspace = cspace || {};
         });
         that.userDetails.events.pageRendered.addListener(function () {
             that.locate("newUserRow").hide();
-            showUserDetails(that.dom);
+            showUserDetails(that.dom, false);
         });
         that.dataContext.events.onError.addListener(function (operation, message) {
             that.locate("newUserRow").hide();
@@ -223,11 +231,13 @@ cspace = cspace || {};
             userDetailsNone: ".csc-user-userDetails-none",
             newUser: ".csc-user-createNew",
             newUserRow: ".csc-user-addNew",
-            userID: ".csc-user-userID",
+            userId: ".csc-user-userID",
             email: ".csc-user-email",
+            hideOnCreate: ".csc-user-hideOnCreate",
+            hideOnEdit: ".csc-user-hideOnEdit",
             password: ".csc-user-password",
             passwordConfirm: ".csc-user-passwordConfirm",
-            requiredFields: ".csc-user-required"
+            requiredFields: ".csc-user-required:visible"
         }
     });
 
