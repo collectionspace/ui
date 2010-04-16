@@ -53,8 +53,8 @@ cspace = cspace || {};
         return function(e){
             fluid.model.copyModel(userDetails.model,{
                 fields: {
-                    userID: "",
-                    userName: "", 
+                    userId: "",
+                    screenName: "", 
                     password: "", 
                     email: "",
                     // TODO: This access into the UISpec is completely inappropriate
