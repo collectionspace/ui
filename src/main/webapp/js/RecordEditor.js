@@ -199,6 +199,7 @@ cspace = cspace || {};
             errorMessage: ".csc-error-message",
             save: ".csc-save",
             cancel: ".csc-user-cancel",
+            deleteButton: ".csc-delete",
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
             timestamp: ".csc-timestamp",

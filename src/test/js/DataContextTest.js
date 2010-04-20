@@ -194,6 +194,22 @@ var dataContextTester = function () {
         ajaxMock.verify();
         ajaxMock.restore();
     });
+
+    dataContextTest.test("Remove ajax call", function () {
+        testModel.csid = "741.852-963";        
+        var ajaxMock = new jqMock.Mock(jQuery, "ajax");
+        var expectedAjaxParams = {
+            url: "http://some.museum.com/aRecordType/" + testModel.csid,
+            type: "DELETE"
+        };
+        ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams));
+
+        var dc = cspace.dataContext(testModel, testOpts);
+        dc.remove(testModel.csid);
+
+        ajaxMock.verify();
+        ajaxMock.restore();
+    });
 };
 
 

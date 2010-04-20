@@ -28,6 +28,12 @@ cspace = cspace || {};
                         fileExtension: ".json"
                     }
                 };
+                adminOpts.userListDataContext = {
+                    options: {
+                        baseUrl: "data/",
+                        fileExtension: ".json"
+                    }
+                };
             }
             var dependencies = {
                 users: {

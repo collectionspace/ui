@@ -93,6 +93,10 @@ cspace = cspace || {};
             ajax("create", that.options, that.events.afterCreate, that.events.onError, null, that.model);
         };
 
+        that.remove = function (csid) {
+            ajax("remove", that.options, that.events.afterRemove, that.events.onError, csid);
+        };
+
         that.addRelations = function (newRelations) {
             ajax("addRelations", that.options, that.events.afterAddRelations, that.events.onError, null, newRelations);
         };

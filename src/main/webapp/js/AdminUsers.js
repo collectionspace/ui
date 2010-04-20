@@ -29,35 +29,15 @@ cspace = cspace || {};
             domBinder.locate("hideOnCreate").show();
         }
     };
-    var retrieveUserList = function (domBinder, userList, model) {
-        // TODO: Use the DC for this
-        var url = (cspace.util.isLocal() ? "data/users/records/list.json" : "../../chain/users");
-        $.ajax({
-            url: url,
-            type: "GET",
-            dataType: "json",
-            success: function (data, textStatus) {
-                // that.userListApplier.requestChange("*", data);
-                // requestChange() to "*" doesn't work (see FLUID-3507)
-                // the following workaround compensates:
-                fluid.model.copyModel(model, data);
-                userList.updateModel(model.items);
-                domBinder.locate("newUserRow").hide();
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                fluid.fail("Error retrieving user list:" + textStatus);
-            }
-        });
-    };
 
-    var restoreUserList = function (domBinder, userList, model) {
+    var restoreUserList = function (dc, domBinder, userList, model) {
         return function () {
             domBinder.locate("unSearchButton").hide();
-            retrieveUserList(domBinder, userList, model);
+            dc.fetch(cspace.util.isLocal()? "records/list":null);
         };
     };
 
-    var addNewUser = function(container, userDetails, domBinder, uispec){
+    var addNewUser = function (container, userDetails, domBinder, uispec) {
         return function(e){
             fluid.model.copyModel(userDetails.model,{
                 fields: {
@@ -77,7 +57,7 @@ cspace = cspace || {};
         };
     };
 
-    var loadUser = function(that){
+    var loadUser = function (that) {
         return function(e){
             var csid = that.locate("csid", e.target.parentNode).text();
             that.dataContext.fetch(csid);
@@ -133,16 +113,19 @@ cspace = cspace || {};
     var bindEventHandlers = function (that) {
 
         that.locate("searchButton").click(submitSearch(that.dom, that.userList, that.userListApplier.model));
-        that.locate("unSearchButton").click(restoreUserList(that.dom, that.userList, that.userListApplier.model)).hide();
+        that.locate("unSearchButton").click(restoreUserList(that.userListDC, that.dom, that.userList, that.userListApplier.model)).hide();
         
         that.locate("newUser").click(addNewUser(that.container, that.userDetails, that.dom, that.options.uispec));
         that.locate("userListRow").live("click", loadUser(that));
         that.dataContext.events.afterCreate.addListener(function () {
             that.locate("newUserRow").hide();
-            retrieveUserList(that.dom, that.userList, that.userListApplier.model);
+            that.userListDC.fetch(cspace.util.isLocal()? "records/list":null);
         });
         that.dataContext.events.afterUpdate.addListener(function () {
-            retrieveUserList(that.dom, that.userList, that.userListApplier.model);
+            that.userListDC.fetch(cspace.util.isLocal()? "records/list":null);
+        });
+        that.dataContext.events.afterRemove.addListener(function () {
+            that.userListDC.fetch(cspace.util.isLocal()? "records/list":null);
         });
         that.userDetails.events.pageRendered.addListener(function () {
             that.locate("newUserRow").hide();
@@ -161,13 +144,18 @@ cspace = cspace || {};
         that.userDetails.events.onSave.addListener(function () {
             return validate(that.dom, that.userDetailsApplier);
         });
+
+        that.userList.events.afterRender.addListener(that.fireAfterRender);
+
+        that.userListDC.events.modelChanged.addListener(function () {
+            that.userList.updateModel(that.model.userList.items);
+        });
     };
 
     setUpUserAdministrator = function (that) {
         bindEventHandlers(that);
-        retrieveUserList(that.dom, that.userList, that.userListApplier.model);
+        that.userListDC.fetch(cspace.util.isLocal()? "records/list":null);
         hideUserDetails(that.dom);
-        that.locate("newUserRow").hide();
     };
 
     cspace.adminUsers = function (container, options) {
@@ -179,11 +167,11 @@ cspace = cspace || {};
             }
         };
         that.userListApplier = fluid.makeChangeApplier(that.model.userList);
+        that.userListDC = fluid.initSubcomponent(that, "userListDataContext", [that.model.userList, fluid.COMPONENT_OPTIONS]);
         that.userList = fluid.initSubcomponent(that, "userList", [
             that.options.selectors.userList, {
                 uispec: that.options.uispec.userList,
-                data: that.model.userList,
-                dataContext: cspace.dataContext(that.model.userList)
+                data: that.model.userList
             }
         ]);
 
@@ -198,6 +186,12 @@ cspace = cspace || {};
             }
         ]);
 
+        that.fireAfterRender = function () {
+            that.locate("newUserRow").hide();
+            that.events.afterRender.fire();
+            that.userList.events.afterRender.removeListener(that.fireAfterRender);
+        };
+
         setUpUserAdministrator(that);
         return that;
     };
@@ -209,6 +203,14 @@ cspace = cspace || {};
         userDetails: {
             type: "cspace.recordEditor"
         },
+        userListDataContext: {
+            type: "cspace.dataContext",
+            options: {
+                recordType: "users",
+                dataType: "json",
+                fileExtension: ""
+            }
+        },
         dataContext: {
             type: "cspace.dataContext",
             options: {
@@ -217,6 +219,7 @@ cspace = cspace || {};
                 fileExtension: ""
             }
         },
+        url: "../../chain/users",
         selectors: {
             searchField: ".csc-user-searchField",
             searchButton: ".csc-user-searchButton",
@@ -238,7 +241,10 @@ cspace = cspace || {};
             password: ".csc-user-password",
             passwordConfirm: ".csc-user-passwordConfirm",
             requiredFields: ".csc-user-required:visible"
-        }
+        },
+         events: {
+             afterRender: null
+         }
     });
 
 })(jQuery, fluid_1_2);

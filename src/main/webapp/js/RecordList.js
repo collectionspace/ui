@@ -86,6 +86,7 @@ cspace = cspace || {};
                 that.locate("noneYetMessage").show();
             }
             that.locate("numberOfItems").text("(" + that.model.items.length + ")");
+            that.events.afterRender.fire();
         };
 
         setupRecordList(that);
@@ -102,7 +103,8 @@ cspace = cspace || {};
             noneYetMessage: ".csc-no-records-message"
         },
         events: {
-            modelChanged: null
+            modelChanged: null,
+            afterRender: null
         }
     });
 
