@@ -575,3 +575,4 @@ table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; f
 .float-left {  float: left; }
 .float-right {  float: right; }
 
+.password-instructions { font-size: 90%; width: 60%; float: right; color: grey;}
