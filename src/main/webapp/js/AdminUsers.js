@@ -60,7 +60,7 @@ cspace = cspace || {};
     var loadUser = function (that) {
         return function(e){
             var csid = that.locate("csid", e.target.parentNode).text();
-            that.dataContext.fetch(csid);
+            that.userDetailsDC.fetch(csid);
         };
     };
 
@@ -117,21 +117,23 @@ cspace = cspace || {};
         
         that.locate("newUser").click(addNewUser(that.container, that.userDetails, that.dom, that.options.uispec));
         that.locate("userListRow").live("click", loadUser(that));
-        that.dataContext.events.afterCreate.addListener(function () {
+        that.userDetailsDC.events.afterCreate.addListener(function () {
             that.locate("newUserRow").hide();
             that.userListDC.fetch(cspace.util.isLocal()? "records/list":null);
         });
-        that.dataContext.events.afterUpdate.addListener(function () {
+        that.userDetailsDC.events.afterUpdate.addListener(function () {
             that.userListDC.fetch(cspace.util.isLocal()? "records/list":null);
         });
-        that.dataContext.events.afterRemove.addListener(function () {
+        that.userDetailsDC.events.afterRemove.addListener(function () {
+            hideUserDetails(that.dom);
+            cspace.util.hideMessage(that.dom);
             that.userListDC.fetch(cspace.util.isLocal()? "records/list":null);
         });
-        that.userDetails.events.pageRendered.addListener(function () {
+        that.userDetails.events.afterRender.addListener(function () {
             that.locate("newUserRow").hide();
             showUserDetails(that.dom, false);
         });
-        that.dataContext.events.onError.addListener(function (operation, message) {
+        that.userDetailsDC.events.onError.addListener(function (operation, message) {
             that.locate("newUserRow").hide();
             if (operation === "fetch") {
                 
@@ -153,6 +155,7 @@ cspace = cspace || {};
     };
 
     setUpUserAdministrator = function (that) {
+        that.locate("newUserRow").hide();
         bindEventHandlers(that);
         that.userListDC.fetch(cspace.util.isLocal()? "records/list":null);
         hideUserDetails(that.dom);
@@ -176,13 +179,13 @@ cspace = cspace || {};
         ]);
 
         that.userDetailsApplier = fluid.makeChangeApplier(that.model.userDetails);
-        that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model.userDetails, fluid.COMPONENT_OPTIONS]);
+        that.userDetailsDC = fluid.initSubcomponent(that, "dataContext", [that.model.userDetails, fluid.COMPONENT_OPTIONS]);
         that.userDetails = fluid.initSubcomponent(that, "userDetails", [
             that.options.selectors.userDetails,
             that.userDetailsApplier,
             {
                 uispec: that.options.uispec.userDetails,
-                dataContext: that.dataContext
+                dataContext: that.userDetailsDC
             }
         ]);
 

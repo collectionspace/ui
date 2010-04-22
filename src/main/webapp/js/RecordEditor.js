@@ -51,6 +51,7 @@ cspace = cspace || {};
             actionSuccessEvents: [that.events.afterCreateObjectDataSuccess, that.events.afterUpdateObjectDataSuccess],
             actionErrorEvents: [that.events.onError]
         };
+        // TODO: This should be a subcomponent, with an option block that can be overridden
         that.confirmation = cspace.confirmation(that.container, confirmationOpts);
 
         var showConf = makeShowConfirmation(that);
@@ -83,6 +84,7 @@ cspace = cspace || {};
 
         that.options.dataContext.events.afterCreate.addListener(function (data) {
             that.applier.requestChange("csid", data.csid);
+            that.locate("deleteButton").removeAttr("disabled").removeClass("deactivate");
             that.events.afterCreateObjectDataSuccess.fire(data, that.options.strings.createSuccessfulMessage);
 	        cspace.util.displayTimestampedMessage(that, that.options.strings.createSuccessfulMessage, Date());
             that.unsavedChanges = false;
@@ -95,12 +97,17 @@ cspace = cspace || {};
             that.unsavedChanges = false;
         });
 
+        that.options.dataContext.events.afterRemove.addListener(function() {
+            that.events.afterRemove.fire(that.options.strings.removeSuccessfulMessage);
+        });
+
         that.options.dataContext.events.afterFetch.addListener(function (data) {
             that.refreshView();
         });
 
-        that.events.pageRendered.addListener(function () {
+        that.events.afterRender.addListener(function () {
             that.locate("save").click(that.save);
+            that.locate("deleteButton").click(that.remove);
             var setUnchanged = function () {
                 that.unsavedChanges = true;
             };
@@ -143,7 +150,12 @@ cspace = cspace || {};
             applier: that.applier
         };
         fluid.selfRender(that.container, tree, renderOpts);
-        that.events.pageRendered.fire();
+        if (!that.model.csid) {
+            that.locate("deleteButton").attr("disabled", "disabled").addClass("deactivate");
+        } else {
+            that.locate("deleteButton").removeAttr("disabled").removeClass("deactivate");
+        }
+        that.events.afterRender.fire();
     };
 
     /**
@@ -180,6 +192,10 @@ cspace = cspace || {};
             }
             return false;
         };
+        
+        that.remove = function () {
+            that.options.dataContext.remove(that.model.csid);
+        };
 
         setupDataEntry(that);
         return that;
@@ -191,14 +207,15 @@ cspace = cspace || {};
             onCancel: null,
             afterCreateObjectDataSuccess: null,  // params: data, textStatus
             afterUpdateObjectDataSuccess: null,  // params: data, textStatus
+            afterRemove: null, // params: textStatus
             onError: null,  // params: operation
-            pageRendered: null
+            afterRender: null
         },
         selectors: {
             errorDialog: ".csc-error-dialog",
             errorMessage: ".csc-error-message",
             save: ".csc-save",
-            cancel: ".csc-user-cancel",
+            cancel: ".csc-cancel",
             deleteButton: ".csc-delete",
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
@@ -212,6 +229,7 @@ cspace = cspace || {};
             savingMessage: "Saving, please wait...",
             updateSuccessfulMessage: "Record successfully saved",
             createSuccessfulMessage: "New Record successfully created",
+            removeSuccessfulMessage: "Record successfully deleted",
             updateFailedMessage: "Error saving Record: ",
             createFailedMessage: "Error creating Record: ",
             deleteFailedMessage: "Error deleting Record: ",
