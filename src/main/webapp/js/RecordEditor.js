@@ -86,6 +86,7 @@ cspace = cspace || {};
             that.applier.requestChange("csid", data.csid);
             that.locate("deleteButton").removeAttr("disabled").removeClass("deactivate");
             that.events.afterCreateObjectDataSuccess.fire(data, that.options.strings.createSuccessfulMessage);
+            that.applier.requestChange("termsUsed", data.termsUsed);
 	        cspace.util.displayTimestampedMessage(that, that.options.strings.createSuccessfulMessage, Date());
             that.unsavedChanges = false;
         });
