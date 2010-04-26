@@ -102,7 +102,7 @@ cspace = cspace || {};
             that.events.afterRemove.fire(that.options.strings.removeSuccessfulMessage);
         });
 
-        that.options.dataContext.events.afterFetch.addListener(function (data) {
+        that.options.dataContext.events.modelChanged.addListener(function (data) {
             that.refreshView();
         });
 
