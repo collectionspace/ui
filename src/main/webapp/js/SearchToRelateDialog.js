@@ -74,7 +74,7 @@ cspace = cspace || {};
             };
             if (cspace.util.isLocal()) {
                 searchOpts.searchUrlBuilder = function (recordType, query) {
-                    var recordTypeParts = (recordType === "collection-object" ? [recordType] : recordType.split('-'));        
+                    var recordTypeParts = recordType.split('-');        
                     return "./data/" + recordTypeParts.join('/') + "/search/list.json";
                 };
             }

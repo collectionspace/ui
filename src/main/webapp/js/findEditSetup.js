@@ -36,19 +36,16 @@ cspace = cspace || {};
             uispec: "{pageBuilder}.uispec.proceduresLoanOut"
         };
         if (cspace.util.isLocal()) {
-            objOpts.dataContext.options = {
-                baseUrl: "data",
-                recordType: "collection-object",
-                fileExtension: ".json"
-            };
-            intOpts.dataContext.options.baseUrl = 
-                acqOpts.dataContext.options.baseUrl =  
-                    liOpts.dataContext.options.baseUrl =  
-                        loOpts.dataContext.options.baseUrl = "data";
-            intOpts.dataContext.options.fileExtension = 
-                acqOpts.dataContext.options.fileExtension = 
-                    liOpts.dataContext.options.fileExtension = 
-                        loOpts.dataContext.options.fileExtension = ".json";
+            objOpts.dataContext.options.baseUrl = 
+                intOpts.dataContext.options.baseUrl = 
+                    acqOpts.dataContext.options.baseUrl =  
+                        liOpts.dataContext.options.baseUrl =  
+                            loOpts.dataContext.options.baseUrl = "data";
+            objOpts.dataContext.options.fileExtension = 
+                intOpts.dataContext.options.fileExtension = 
+                    acqOpts.dataContext.options.fileExtension = 
+                        liOpts.dataContext.options.fileExtension = 
+                            loOpts.dataContext.options.fileExtension = ".json";
         }
         var dependencies = {
             objects: {

@@ -118,7 +118,7 @@ cspace = cspace || {};
             var recordType = that.locate("recordType").val();
 // CSPACE-701
             if (cspace.util.isLocal() && (recordType === "object")) {
-                recordType = "collection-object";
+                recordType = "objects";
             }
             var query = that.locate("keywords").val();
             jQuery.ajax({

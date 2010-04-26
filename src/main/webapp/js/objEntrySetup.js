@@ -89,7 +89,7 @@ cspace = cspace || {};
                     targetSelector: ".csc-footer-container"
                 }
             },
-            pageType: (cspace.util.isLocal()? "collection-object":"objects")
+            pageType: "objects"
         };
         var csid = cspace.util.getUrlParameter("csid");
         if (csid) {
@@ -98,8 +98,6 @@ cspace = cspace || {};
         if (cspace.util.isLocal()) {
             options.dataContext.options.baseUrl = "data";
             options.dataContext.options.fileExtension = ".json";
-            // CSPACE-701
-            options.dataContext.options.recordType = "collection-object";
         }
         cspace.pageBuilder(dependencies, options);
     };

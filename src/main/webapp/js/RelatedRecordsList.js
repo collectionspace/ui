@@ -19,8 +19,7 @@ cspace = cspace || {};
         acquisition: ["acquisition"],
         procedures: ["intake", "acquisition"],
         object: ["objects"],
-        objects: ["objects"],
-        "collection-object": ["objects"]
+        objects: ["objects"]
     };
 
     bindEventHandlers = function (that) {

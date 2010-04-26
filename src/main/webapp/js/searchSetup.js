@@ -23,7 +23,7 @@ cspace = cspace || {};
                 if (recordType.indexOf("authorities-") === 0) {
                     recordType = recordType.substring(12);
                 }
-                var recordTypeParts = (recordType === "collection-object"? [recordType]: recordType.split('-'));        
+                var recordTypeParts = recordType.split('-');        
                 return "./data/" + recordTypeParts.join('/') + "/search/list.json";
             };
         }
