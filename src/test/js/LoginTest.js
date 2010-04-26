@@ -21,8 +21,7 @@ var loginTester = function(){
         jqUnit.isVisible("Basic login should be visible", login.options.selectors.signIn);
         jqUnit.notVisible("Email entry should not be visible", login.options.selectors.enterEmail);
         jqUnit.notVisible("New password entry should not be visible", login.options.selectors.resetRequest);
-        jqUnit.notVisible("Reset confirmation should not be visible", login.options.selectors.passwordReset);
-        jqUnit.notVisible("Warning should not be visible", login.options.selectors.warning);
+        jqUnit.notVisible("Message should not be visible", login.options.selectors.messageContainer);
         jqUnit.assertEquals("In local mode, login form action should be set to local option", "createnew.html", jQuery(login.options.selectors.loginForm).attr("action"));
         jqUnit.assertEquals("In local mode, reset form action should be set to local option", "createnew.html", jQuery(login.options.selectors.resetForm).attr("action"));
 
@@ -36,32 +35,32 @@ var loginTester = function(){
 
     loginTest.test("Basic login required fields", function () {
         var login = cspace.login(".login-container", {baseUrl: "http://foo.com/bar"});
-        jqUnit.notVisible("Before login, warning should not be visible", login.options.selectors.warning);
+        jqUnit.notVisible("Before login, message should not be visible", login.options.selectors.messageContainer);
 
         jQuery(login.options.selectors.loginForm).submit();
-        jqUnit.isVisible("Logging in with empty fields should show error message", login.options.selectors.warning);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery(login.options.selectors.warning).text());
+        jqUnit.isVisible("Logging in with empty fields should show error message", login.options.selectors.messageContainer);
+        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery.trim(jQuery(login.options.selectors.messageContainer).text()));
 
-        jQuery(login.options.selectors.warning).hide();
+        jQuery(login.options.selectors.messageContainer).hide();
         jQuery(login.options.selectors.userid).val("userid");
         jQuery(login.options.selectors.loginForm).submit();
-        jqUnit.isVisible("Logging in with only user id should show error message", login.options.selectors.warning);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery(login.options.selectors.warning).text());
+        jqUnit.isVisible("Logging in with only user id should show error message", login.options.selectors.messageContainer);
+        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery.trim(jQuery(login.options.selectors.messageContainer).text()));
 
-        jQuery(login.options.selectors.warning).hide();
+        jQuery(login.options.selectors.messageContainer).hide();
         jQuery(login.options.selectors.userid).val("");
         jQuery(login.options.selectors.password).val("password");
         jQuery(login.options.selectors.loginForm).submit();
-        jqUnit.isVisible("Logging in with only password should show error message", login.options.selectors.warning);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery(login.options.selectors.warning).text());
+        jqUnit.isVisible("Logging in with only password should show error message", login.options.selectors.messageContainer);
+        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery.trim(jQuery(login.options.selectors.messageContainer).text()));
     });
 
     loginTest.test("Email submit required field", function () {
         var login = cspace.login(".login-container", {baseUrl: "http://foo.com/bar"});
-        jqUnit.notVisible("Before login, warning should not be visible", login.options.selectors.warning);
+        jqUnit.notVisible("Before login, message should not be visible", login.options.selectors.messageContainer);
         login.submitEmail();
-        jqUnit.isVisible("Submitting email with empty fields should show error message", login.options.selectors.warning);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.emailRequired, jQuery(login.options.selectors.warning).text());
+        jqUnit.isVisible("Submitting email with empty fields should show error message", login.options.selectors.messageContainer);
+        jqUnit.assertEquals("Message should describe required fields", login.options.strings.emailRequired, jQuery.trim(jQuery(login.options.selectors.messageContainer).text()));
     });
 
     loginTest.test("Email submit (local)", function () {
@@ -97,55 +96,33 @@ var loginTester = function(){
         cspace.util.isLocal = tempIsLocal;
     });
 
-    loginTest.test("Email submit Ajax callback", function () {
-        var tempIsLocal = cspace.util.isLocal;
-        cspace.util.isLocal = function () {return false;};
-        var login = cspace.login(".login-container", {baseUrl: "http://foo.com/bar"});
-        var testSuccess = function (data, textStatus, xhr) {
-            jqUnit.assertTrue("Success actually shouldn't happen when testing locally", false);
-            cspace.util.isLocal = tempIsLocal;
-            start();
-        };
-        var testError = function (xhr, textStatus, errorThrown) {
-            jqUnit.assertTrue("Error callback should happen when testing locally", true);
-            cspace.util.isLocal = tempIsLocal;
-            start();
-        };
-        login.events.emailSubmitted.addListener(testSuccess);
-        login.events.onError.addListener(testError);
-
-        jQuery(login.options.selectors.email).val("test@collectionspace.org");
-        stop();
-        login.submitEmail();
-    });
-
     loginTest.test("New password submission required fields", function () {
         var login = cspace.login(".login-container", {baseUrl: "http://foo.com/bar"});
-        jqUnit.notVisible("Before login, warning should not be visible", login.options.selectors.warning);
+        jqUnit.notVisible("Before login, message should not be visible", login.options.selectors.messageContainer);
         login.submitNewPassword();
-        jqUnit.isVisible("Submitting password with empty fields should show error message", login.options.selectors.warning);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery(login.options.selectors.warning).text());
+        jqUnit.isVisible("Submitting password with empty fields should show error message", login.options.selectors.messageContainer);
+        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery.trim(jQuery(login.options.selectors.messageContainer).text()));
 
-        jQuery(login.options.selectors.warning).hide();
+        jQuery(login.options.selectors.messageContainer).hide();
         jQuery(login.options.selectors.newPassword).val("newPass");
         login.submitNewPassword();
-        jqUnit.isVisible("Submitting password with only one field should show error message", login.options.selectors.warning);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery(login.options.selectors.warning).text());
+        jqUnit.isVisible("Submitting password with only one field should show error message", login.options.selectors.messageContainer);
+        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery.trim(jQuery(login.options.selectors.messageContainer).text()));
 
-        jQuery(login.options.selectors.warning).hide();
+        jQuery(login.options.selectors.messageContainer).hide();
         jQuery(login.options.selectors.newPassword).val("");
         jQuery(login.options.selectors.confirmPassword).val("newPass");
         login.submitNewPassword();
-        jqUnit.isVisible("Submitting password with only other field should show error message", login.options.selectors.warning);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery(login.options.selectors.warning).text());
+        jqUnit.isVisible("Submitting password with only other field should show error message", login.options.selectors.messageContainer);
+        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery.trim(jQuery(login.options.selectors.messageContainer).text()));
 
 
-        jQuery(login.options.selectors.warning).hide();
+        jQuery(login.options.selectors.messageContainer).hide();
         jQuery(login.options.selectors.newPassword).val("newPassOne");
         jQuery(login.options.selectors.confirmPassword).val("newPassTwo");
         login.submitNewPassword();
-        jqUnit.isVisible("Submitting password with non-matching password should show error message", login.options.selectors.warning);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.passwordsMustMatch, jQuery(login.options.selectors.warning).text());
+        jqUnit.isVisible("Submitting password with non-matching password should show error message", login.options.selectors.messageContainer);
+        jqUnit.assertEquals("Message should describe required fields", login.options.strings.passwordsMustMatch, jQuery.trim(jQuery(login.options.selectors.messageContainer).text()));
     });
 
     loginTest.test("New password submission (local)", function () {
@@ -154,7 +131,6 @@ var loginTester = function(){
         jQuery(login.options.selectors.confirmPassword).val("testPassOne");
         jQuery(login.options.selectors.resetForm).show();
         login.submitNewPassword();
-        jqUnit.isVisible("After new password submission, confirmation should be visible", login.options.selectors.passwordReset);
         jqUnit.notVisible("After new password submission, password form should not be visible", login.options.selectors.resetForm);
     });
 

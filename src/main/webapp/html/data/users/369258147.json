@@ -1,8 +1,8 @@
 {
     "csid": "369258147",
     "fields": {
-        "userID": "megan",
-        "userName": "Megan Forbes",
+        "userId": "megan",
+        "screenName": "Megan Forbes",
         "password": "testpassword",
         "email": "megan.forbes@collectionspace.org",
         "status": "active",

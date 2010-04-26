@@ -166,6 +166,9 @@ cspace = cspace || {};
                         if (!data) {
                             fluid.model.setBeanValue(that.model, elPath, []);
                         }
+                        else if (data.length === 0) {
+                            entry.children = [];
+                        }
                         else {
                             for (var j = 1; j < data.length; j++) {
                                 entry.children[j] = {};

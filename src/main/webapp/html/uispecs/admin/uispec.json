@@ -3,7 +3,7 @@
         ".csc-user-userList-row:": {
             "children": [
                 {
-                    ".csc-user-userList-name": "${items.0.name}",
+                    ".csc-user-userList-name": "${items.0.screenName}",
                     ".csc-user-userList-status": "${items.0.status}",
                     ".csc-user-userList-csid": "${items.0.csid}"
                 }
@@ -11,8 +11,8 @@
         }
     },
     "userDetails": {
-        ".csc-user-userID": "${fields.userID}",
-        ".csc-user-userName": "${fields.userName}",
+        ".csc-user-userID": "${fields.userId}",
+        ".csc-user-userName": "${fields.screenName}",
         ".csc-user-password": "${fields.password}",
         ".csc-user-passwordConfirm": "${fields.passwordConfirm}",
         ".csc-user-email": "${fields.email}",

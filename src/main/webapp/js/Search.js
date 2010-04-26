@@ -15,14 +15,6 @@ cspace = cspace || {};
 (function ($, fluid) {
 
     var defaultSearchUrlBuilder = function (recordType, query) {
-// CSPACE-701
-// Up to 0.4, there's a bug in which the recordType for 'object' needs to be
-// plural
-        if (recordType === "object") {
-            recordType = "objects";
-        }
-// end of fudge for CSPACE-701
-        
         var recordTypeParts = recordType.split('-');        
         return "../../chain/" + recordTypeParts.join('/') + "/search?query=" + query;
     };

@@ -16,62 +16,46 @@ cspace = cspace || {};
 
     cspace.adminSetup = function () {
 
-        var setUpPage = function () {
-
-            var adminOpts = {
-                uispec: "{pageBuilder}.uispec"
+        var adminOpts = {
+            uispec: "{pageBuilder}.uispec"
+        };
+        if (cspace.util.isLocal()) {
+            adminOpts.dataContext = {
+                options: {
+                    baseUrl: "data/",
+                    fileExtension: ".json"
+                }
             };
-            if (cspace.util.isLocal()) {
-                adminOpts.dataContext = {
-                    options: {
-                        baseUrl: "data/",
-                        fileExtension: ".json"
-                    }
-                };
+            adminOpts.userListDataContext = {
+                options: {
+                    baseUrl: "data/",
+                    fileExtension: ".json"
+                }
+            };
+        }
+        var dependencies = {
+            users: {
+                funcName: "cspace.adminUsers",
+                args: [".csc-users-userAdmin", adminOpts]
             }
-            var dependencies = {
-                users: {
-                    funcName: "cspace.adminUsers",
-                    args: [".csc-users-userAdmin", adminOpts]
-                }
-            };
-
-            var options = {
-                pageSpec: {
-                    header: {
-                        href: "header.html",
-                        templateSelector: ".csc-header-template",
-                        targetSelector: ".csc-header-container"
-                    },
-                    footer: {
-                        href: "footer.html",
-                        templateSelector: ".csc-footer",
-                        targetSelector: ".csc-footer-container"
-                    }
-                }
-            };
-            cspace.pageBuilder(dependencies, options);
         };
 
-        if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
-//            var uispecUrl = (cspace.util.isLocal() ? "./uispecs/admin/uispec.json" : "../../chain/users/uispec");
-// Workaround for CSPACE-1320:
-            var uispecUrl = "./uispecs/admin/uispec.json";
-            jQuery.ajax({
-                url: uispecUrl,
-                type: "GET",
-                dataType: "json",
-                success: function (data, textStatus) {
-                    cspace.pageBuilder.uispec = data;
-                    setUpPage();
+        var options = {
+            pageSpec: {
+                header: {
+                    href: "header.html",
+                    templateSelector: ".csc-header-template",
+                    targetSelector: ".csc-header-container"
                 },
-                error: function (xhr, textStatus, errorThrown) {
-                    fluid.fail("Error fetching admin uispec: " + textStatus);
+                footer: {
+                    href: "footer.html",
+                    templateSelector: ".csc-footer",
+                    targetSelector: ".csc-footer-container"
                 }
-            });
-        } else {
-            setUpPage();
-        }
+            },
+            pageType: "admin"
+        };
+        cspace.pageBuilder(dependencies, options);
     };
     
 })(jQuery);

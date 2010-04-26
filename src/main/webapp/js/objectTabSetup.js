@@ -15,60 +15,41 @@ cspace = cspace || {};
 (function ($) {
 
     cspace.objectTabSetup = function (applier) {
-        var setUpPage = function () {
-            var options = {
-                pageSpec: {
-                    relatedRecords: {
-                        href: "objectTabRecordListTemplate.html",
-                        templateSelector: ".csc-object-tab-record-list",
-                        targetSelector: ".div-for-list-of-records"
-                    } //,
-                  //  newRecord: {
-                  //      href: "objectTabSchemaTemplate.html",
-                  //      templateSelector: ".csc-object-tab-schema",
-                  //      targetSelector: ".div-for-schema"
-                  //  } 
-                }
-            };
-            var reOpts = {
-                dataContext: "{pageBuilder}.dataContext",
-                uispec: "{pageBuilder}.uispec.newRecord"
-            };
-            var rrOpts = {
-                recordType: "objects",
-                currentRecordType: "objects",
-                uispec: "{pageBuilder}.uispec.relatedRecords"
-            };
-            var dependencies = {
+        var options = {
+            pageSpec: {
                 relatedRecords: {
-                    funcName: "cspace.relatedRecordsList",
-                    args: [".div-for-list-of-records", applier, rrOpts]
-                } //,
-             //   newRecord: {
-             //       funcName: "cspace.recordEditor",
-             //       args: [".div-for-schema", applier, reOpts]
-             //   }
-            };
-            cspace.pageBuilder(dependencies, options);            
-        };
-
-        if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
-            var uispecUrl = (cspace.util.isLocal() ? "./uispecs/object-tab/uispec.json" : "../../chain/object-tab/uispec");
-            jQuery.ajax({
-                url: uispecUrl,
-                type: "GET",
-                dataType: "json",
-                success: function (data, textStatus) {
-                    cspace.pageBuilder.uispec = data;
-                    setUpPage();
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    fluid.fail("Error fetching objects tab uispec:" + textStatus);
+                    href: "objectTabRecordListTemplate.html",
+                    templateSelector: ".csc-object-tab-record-list",
+                    targetSelector: ".div-for-list-of-records"
                 }
-            });
-        } else {
-            setUpPage();
-        }
+              //  newRecord: {
+              //      href: "objectTabSchemaTemplate.html",
+              //      templateSelector: ".csc-object-tab-schema",
+              //      targetSelector: ".div-for-schema"
+              //  } 
+            },
+            pageType: "object-tab"
+        };
+        var reOpts = {
+            dataContext: "{pageBuilder}.dataContext",
+            uispec: "{pageBuilder}.uispec.newRecord"
+        };
+        var rrOpts = {
+            recordType: "objects",
+            currentRecordType: "objects",
+            uispec: "{pageBuilder}.uispec.relatedRecords"
+        };
+        var dependencies = {
+            relatedRecords: {
+                funcName: "cspace.relatedRecordsList",
+                args: [".div-for-list-of-records", applier, rrOpts]
+            } //,
+         //   newRecord: {
+         //       funcName: "cspace.recordEditor",
+         //       args: [".div-for-schema", applier, reOpts]
+         //   }
+        };
+        cspace.pageBuilder(dependencies, options);            
     };
 
 })(jQuery, fluid_1_2);

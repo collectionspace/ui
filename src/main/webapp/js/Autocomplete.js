@@ -40,22 +40,20 @@ cspace = cspace || {};
         });
     };
 
-    var addNewTerm = function (vocabUrl) {
-        return function () {
-            if (cspace.util.isLocal()) {
-                cspace.autocomplete.addConfirmDlg.hide();
-                return;
+    var addNewTerm = function () {
+        if (cspace.util.isLocal()) {
+            cspace.autocomplete.addConfirmDlg.hide();
+            return;
+        }
+        $.ajax({
+            url: cspace.autocomplete.addConfirmDlg.vocabUrl,
+            dataType: "json",
+            type: "GET",
+            success: postNewTerm,
+            error: function () {
+                fluid.fail("error getting new term url");
             }
-            $.ajax({
-                url: vocabUrl,
-                dataType: "json",
-                type: "GET",
-                success: postNewTerm,
-                error: function () {
-                    fluid.fail("error getting new term url");
-                }
-            });
-        };
+        });
     };
 
     var clearNewTerm = function () {
@@ -71,9 +69,9 @@ cspace = cspace || {};
         cspace.autocomplete.addConfirmDlg.newDisplayName = newTerm;
         cspace.autocomplete.addConfirmDlg.field = field;
         cspace.autocomplete.addConfirmDlg.fieldToClear = autocompleteInput;
+        cspace.autocomplete.addConfirmDlg.vocabUrl = vocabUrl;
 
         autocompleteInput.after(cspace.autocomplete.addConfirmDlg);
-        domBinder.locate("addButton", cspace.autocomplete.addConfirmDlg).click(addNewTerm(vocabUrl));
         cspace.autocomplete.addConfirmDlg.show();
     };
 
@@ -93,6 +91,7 @@ cspace = cspace || {};
                 cspace.autocomplete.addConfirmDlg.newDisplayName = "";
 
                 that.locate("clearButton", cspace.autocomplete.addConfirmDlg).click(clearNewTerm);
+                that.locate("addButton", cspace.autocomplete.addConfirmDlg).click(addNewTerm);
             });
         }
     };

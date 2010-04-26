@@ -59,7 +59,7 @@
 						<div class="fl-container-pivot-users fl-container-admin-menu fl-force-left" id="">
 							<ul>
 								<li class="selected">Users</li>
-								<li class=""><a href="roles.html">Roles and Permission</a></li>
+								<li class=""><a href="#">Roles and Permission</a></li>
 								<li class="inactive">Help Management</li>
 								<li class="inactive">Reporting</li>
 								<li class="inactive">Numbering</li>
@@ -70,13 +70,9 @@
 						<div class="fl-container-admin fl-force-right">
 							<div class="main-users-page csc-users-userAdmin">
                                 <!-- search form -->
-<!--  Search of users not supported yet
 								<div id="search-box">
-									<form>
-										<input name="keyword" type="text" class="csc-search-user" /><input type="submit" class="csc-search-submit button" value="Find User" />
-                                    </form>
+									<input name="keyword" type="text" class="cs-search-user csc-user-searchField" /><input type="submit" class="csc-user-searchButton button" value="Find User" /> (searches Full Name)<input type="submit" class="csc-user-unSearchButton button" value="Show all users" />
 								</div>
--->
                                 <!-- end search form -->
 
                                 <div class="csc-user-list">
@@ -91,7 +87,7 @@
 													<table class="user-table">
 														<thead>
 															<tr>
-																<td>User Name</td>
+																<td>User's Full Name</td>
 																<td>Status</td>
 															</tr>
 														</thead>
@@ -135,23 +131,29 @@
 															<div class="label">Full Name</div><div class="user-input"><input type="text" class="input-alpha csc-user-userName csc-user-required" name=""/></div>
 														</div>
 
-														<div class="info-pair">
-															<div class="label">Password</div><div class="user-input"><input type="password" class="input-alpha csc-user-password csc-user-required csc-passwordValidator-password" name=""/></div>
-														</div>
-													
-														<div class="info-pair">
-															<div class="label">Confirm Password</div><div class="user-input"><input type="password" class="input-alpha csc-user-passwordConfirm csc-user-required" name=""/></div>
-														</div>
+                                                        <div class="csc-user-hideOnEdit">
+                                                            <div class="password-instructions">Password must be between<br/>8 and 23 characters.</div>
+                                                            <div class="clear"></div>
 
-														<div class="info-pair">
-															<div class="label">Status</div><div class="user-input">
-                                                                <select class="csc-user-status csc-user-required"></select>
-                                                            </div>
-														</div>
+    														<div class="info-pair">
+    															<div class="label">Password</div><div class="user-input"><input type="password" class="input-alpha csc-user-password csc-user-required csc-passwordValidator-password" name=""/></div>
+    														</div>
+    													
+    														<div class="info-pair">
+    															<div class="label">Confirm Password</div><div class="user-input"><input type="password" class="input-alpha csc-user-passwordConfirm csc-user-required" name=""/></div>
+    														</div>
+                                                        </div>
+                                                        <div class="csc-user-hideOnCreate">
+    														<div class="info-pair">
+    															<div class="label">Status</div><div class="user-input">
+                                                                    <select class="csc-user-status csc-user-required" disabled></select>
+                                                                </div>
+    														</div>
+                                                        </div>
                                                         <div class="fl-container-flex">
                                                             <input type="button" class="savebutton button csc-save savebutton" value="Save" />
-                                                            <input type="button" class="cancelbutton button csc-user-cancel savebutton" value="Cancel" />
-                                                            <input type="button" class="deletebutton button savebutton" value="Delete" />
+                                                            <input type="button" class="cancelbutton button csc-cancel savebutton" value="Cancel" />
+                                                            <input type="button" class="deletebutton button csc-delete savebutton" value="Delete" />
                                                             <div class="clear"></div>
                                                         </div>
 													</div>

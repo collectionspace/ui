@@ -110,9 +110,6 @@ cspace = cspace || {};
     };
 
     var setUpPageBuilder = function (that) {
-        fluid.model.copyModel(that.uispec, cspace.pageBuilder.uispec);
-        cspace.pageBuilder.uispec = null;
-
         that.model = {};
         that.applier = fluid.makeChangeApplier(that.model);
         that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
@@ -145,13 +142,59 @@ cspace = cspace || {};
 
     cspace.pageBuilder = function (dependencies, options) {
         var that = {
-            dependencies: dependencies,
-            uispec: {}
+            dependencies: dependencies
         };
 
         fluid.mergeComponentOptions(that, "cspace.pageBuilder", options);
         fluid.instantiateFirers(that, that.options);
 
+        // TODO: We should consider refactoring this work. We have several calls to the server that need
+        //       to happen synchronously - perhaps it should be rolled into a single call.
+        
+        // determine if logged in and redirect
+        if (!cspace.util.isLocal()) {
+            var loginRedirect = false;
+            jQuery.ajax({
+                async: false,
+                url: "../../chain/loginstatus",
+                type: "GET",
+                dataType: "json",
+                success: function (data, textStatus) {
+                    loginRedirect = !data.login;
+                }
+            });
+            
+            if (loginRedirect) {
+                var currentUrl = document.location.href;
+                var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
+                window.location = loginUrl;     
+            }
+        }
+            
+            
+        // Fetch UI spec if required
+        if (!that.uispec && that.options.pageType) {            
+            var uispecUrl = (cspace.util.isLocal() ? "./uispecs/" + that.options.pageType + "/uispec.json" : "../../chain/" + that.options.pageType + "/uispec");
+
+            // TODO:    Workaround for CSPACE-1320:
+            if (that.options.pageType == "admin") {
+                uispecUrl = "./uispecs/admin/uispec.json";
+            }
+            
+            jQuery.ajax({
+                async: false,
+                url: uispecUrl,
+                type: "GET",
+                dataType: "json",
+                success: function (data, textStatus) {
+                    that.uispec = data;
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    fluid.fail("Error fetching " + that.options.pageType + " uispec:" + textStatus);
+                }
+            });
+        }        
+        
         if (options && options.pageSpec) {
             assembleHTML(that);
         } else {
@@ -165,8 +208,9 @@ cspace = cspace || {};
         },
         dataContext: {
             type: "cspace.dataContext"
-        },
-        
-        htmlOnly: false
+        },        
+        htmlOnly: false,
+        uispec: {},
+        pageType: ""
     });
 })(jQuery, fluid_1_2);

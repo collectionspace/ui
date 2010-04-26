@@ -19,7 +19,6 @@ cspace = cspace || {};
         domBinder.locate("userID").focus();
         domBinder.locate("enterEmail").hide();
         domBinder.locate("resetRequest").hide();
-        domBinder.locate("passwordReset").hide();
     };
 
     var showResetRequestForm = function (domBinder) {
@@ -27,14 +26,12 @@ cspace = cspace || {};
         domBinder.locate("enterEmail").show();
         domBinder.locate("email").focus();
         domBinder.locate("resetRequest").hide();
-        domBinder.locate("passwordReset").hide();
     };
 
     var showResetRequestSubmitted = function (domBinder) {
         domBinder.locate("signIn").hide();
         domBinder.locate("enterEmail").hide();
         domBinder.locate("resetRequest").hide();
-        domBinder.locate("passwordReset").hide();
     };
 
     var showReset = function (domBinder) {
@@ -42,14 +39,15 @@ cspace = cspace || {};
         domBinder.locate("enterEmail").hide();
         domBinder.locate("resetRequest").show();
         domBinder.locate("newPassword").focus();
-        domBinder.locate("passwordReset").hide();
     };
 
-    var showPasswordReset = function (domBinder) {
-        domBinder.locate("signIn").hide();
-        domBinder.locate("enterEmail").hide();
-        domBinder.locate("resetRequest").hide();
-        domBinder.locate("passwordReset").show();
+    var showPasswordReset = function (domBinder, data) {
+        if (data.ok) {
+            domBinder.locate("signIn").show();
+            domBinder.locate("enterEmail").hide();
+            domBinder.locate("resetRequest").hide();
+        }
+        cspace.util.displayTimestampedMessage(domBinder, data.message);
     };
 
     var showEmailSubmittedPage = function (domBinder) {
@@ -114,14 +112,15 @@ cspace = cspace || {};
     
     var submitNewPassword = function (password, url, that) {
         if (cspace.util.isLocal()) {
-            showPasswordReset(that.dom);
-            that.events.passwordSubmitted.fire();
+            var mockResponse = {message: "Success", ok:true};
+            showPasswordReset(that.dom, mockResponse);
+            that.events.passwordSubmitted.fire(mockResponse);
         } else {
             jQuery.ajax({
                 url: cspace.util.addTrailingSlash(url) + "resetpassword",
                 type: "POST",
                 dataType: "json",
-                data: JSON.stringify({"password": password, "token": that.token}),
+                data: JSON.stringify({"password": password, "token": that.token, "email": that.email}),
                 success: that.events.passwordSubmitted.fire,
                 error: that.events.onError.fire
             });
@@ -157,10 +156,14 @@ cspace = cspace || {};
         that.events.emailSubmitted.addListener(function () {
             showEmailSubmittedPage(that.dom);
         });
-        that.events.passwordSubmitted.addListener(function () {
-            showPasswordReset(that.dom);
+        that.events.passwordSubmitted.addListener(function (data, statusText) {
+            showPasswordReset(that.dom, data);
         });
         
+        that.events.onError.addListener(function () {
+            cspace.util.displayTimestampedMessage(that.dom, that.options.strings.generalError);            
+        });
+
         that.locate("loginForm").submit(makeRequiredFieldsValidator(that.dom, "login", that.options.strings.allFieldsRequired));
         that.locate("resetForm").submit(makeRequiredFieldsValidator(that.dom, "password", that.options.strings.allFieldsRequired));
 
@@ -184,8 +187,10 @@ cspace = cspace || {};
             cspace.util.hideMessage(that.dom);
         }
         var resetToken = cspace.util.getUrlParameter("token");
+        var email = cspace.util.getUrlParameter("email");
         if (resetToken) {
             that.token = resetToken;
+            that.email = email;
             showReset(that.dom);
         } else {
             showSignIn(that.dom);
@@ -249,9 +254,6 @@ cspace = cspace || {};
             submitNewPassword: ".csc-login-submitNewPassword",
             passwordRequired: ".csc-login-passwordRequired",
 
-            passwordReset: ".csc-login-passwordReset",
-
-            warning: ".csc-warning",
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
             timestamp: ".csc-timestamp"
@@ -261,7 +263,8 @@ cspace = cspace || {};
             allFieldsRequired: "All fields must be filled in",
             emailRequired: "You must enter a valid email address",
             passwordsMustMatch: "Passwords must match",
-            invalid: "Invalid email/password combination"
+            invalid: "Invalid email/password combination",
+            generalError: "I'm sorry, an error has occurred. Please try again, or contact your system administrator."
         }, 
        
         baseUrl: "../../chain/"
