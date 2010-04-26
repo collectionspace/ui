@@ -8,11 +8,11 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, cspace, fluid_1_2 */
+/*global jQuery, cspace, fluid */
 
 cspace = cspace || {};
 
-(function ($) {
+(function ($, fluid) {
 
     cspace.objectTabSetup = function (applier) {
         var options = {
@@ -52,4 +52,4 @@ cspace = cspace || {};
         cspace.pageBuilder(dependencies, options);            
     };
 
-})(jQuery, fluid_1_2);
+})(jQuery, fluid);

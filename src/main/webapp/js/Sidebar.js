@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, cspace*/
+/*global jQuery, cspace, fluid*/
 
 cspace = cspace || {};
 
@@ -57,4 +57,4 @@ cspace = cspace || {};
             relatedProcedures: ".csc-related-procedures"
         }
     });
-})(jQuery, fluid_1_2);
+})(jQuery, fluid);

@@ -74,7 +74,7 @@ cspace = cspace || {};
                     targetSelector: ".csc-header-container"
                 },
                 titleBar: {
-                    href: "loanoutTitleBar.html",
+                    href: "loanOutTitleBar.html",
                     templateSelector: ".csc-loanOut-titleBar-template",
                     targetSelector: ".csc-loanOut-titleBar-container"
                 },
@@ -84,7 +84,7 @@ cspace = cspace || {};
                     targetSelector: ".csc-tabs-container"
                 },
                 dateEntry: {
-                    href: "loanoutTemplate.html",
+                    href: "loanOutTemplate.html",
                     templateSelector: ".csc-loanOut-template",
                     targetSelector: ".csc-record-edit-container"
                 },
@@ -99,7 +99,7 @@ cspace = cspace || {};
                     targetSelector: ".csc-footer-container"
                 }
             },
-            pageType: "loanOut"
+            pageType: "loanout"
         };
         var csid = cspace.util.getUrlParameter("csid");
         if (csid) {
