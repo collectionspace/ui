@@ -19,7 +19,6 @@ cspace = cspace || {};
         domBinder.locate("userID").focus();
         domBinder.locate("enterEmail").hide();
         domBinder.locate("resetRequest").hide();
-        domBinder.locate("passwordReset").hide();
     };
 
     var showResetRequestForm = function (domBinder) {
@@ -27,14 +26,12 @@ cspace = cspace || {};
         domBinder.locate("enterEmail").show();
         domBinder.locate("email").focus();
         domBinder.locate("resetRequest").hide();
-        domBinder.locate("passwordReset").hide();
     };
 
     var showResetRequestSubmitted = function (domBinder) {
         domBinder.locate("signIn").hide();
         domBinder.locate("enterEmail").hide();
         domBinder.locate("resetRequest").hide();
-        domBinder.locate("passwordReset").hide();
     };
 
     var showReset = function (domBinder) {
@@ -42,14 +39,15 @@ cspace = cspace || {};
         domBinder.locate("enterEmail").hide();
         domBinder.locate("resetRequest").show();
         domBinder.locate("newPassword").focus();
-        domBinder.locate("passwordReset").hide();
     };
 
-    var showPasswordReset = function (domBinder) {
-        domBinder.locate("signIn").hide();
-        domBinder.locate("enterEmail").hide();
-        domBinder.locate("resetRequest").hide();
-        domBinder.locate("passwordReset").show();
+    var showPasswordReset = function (domBinder, data) {
+        if (data.ok) {
+            domBinder.locate("signIn").show();
+            domBinder.locate("enterEmail").hide();
+            domBinder.locate("resetRequest").hide();
+        }
+        cspace.util.displayTimestampedMessage(domBinder, data.message);
     };
 
     var showEmailSubmittedPage = function (domBinder) {
@@ -114,8 +112,9 @@ cspace = cspace || {};
     
     var submitNewPassword = function (password, url, that) {
         if (cspace.util.isLocal()) {
-            showPasswordReset(that.dom);
-            that.events.passwordSubmitted.fire();
+            var mockResponse = {message: "Success", ok:true};
+            showPasswordReset(that.dom, mockResponse);
+            that.events.passwordSubmitted.fire(mockResponse);
         } else {
             jQuery.ajax({
                 url: cspace.util.addTrailingSlash(url) + "resetpassword",
@@ -157,8 +156,8 @@ cspace = cspace || {};
         that.events.emailSubmitted.addListener(function () {
             showEmailSubmittedPage(that.dom);
         });
-        that.events.passwordSubmitted.addListener(function () {
-            showPasswordReset(that.dom);
+        that.events.passwordSubmitted.addListener(function (data, statusText) {
+            showPasswordReset(that.dom, data);
         });
         
         that.events.onError.addListener(function () {
@@ -254,8 +253,6 @@ cspace = cspace || {};
             confirmPassword: ".csc-login-confirmPassword",
             submitNewPassword: ".csc-login-submitNewPassword",
             passwordRequired: ".csc-login-passwordRequired",
-
-            passwordReset: ".csc-login-passwordReset",
 
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",

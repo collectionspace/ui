@@ -21,7 +21,6 @@ var loginTester = function(){
         jqUnit.isVisible("Basic login should be visible", login.options.selectors.signIn);
         jqUnit.notVisible("Email entry should not be visible", login.options.selectors.enterEmail);
         jqUnit.notVisible("New password entry should not be visible", login.options.selectors.resetRequest);
-        jqUnit.notVisible("Reset confirmation should not be visible", login.options.selectors.passwordReset);
         jqUnit.notVisible("Message should not be visible", login.options.selectors.messageContainer);
         jqUnit.assertEquals("In local mode, login form action should be set to local option", "createnew.html", jQuery(login.options.selectors.loginForm).attr("action"));
         jqUnit.assertEquals("In local mode, reset form action should be set to local option", "createnew.html", jQuery(login.options.selectors.resetForm).attr("action"));
@@ -132,7 +131,6 @@ var loginTester = function(){
         jQuery(login.options.selectors.confirmPassword).val("testPassOne");
         jQuery(login.options.selectors.resetForm).show();
         login.submitNewPassword();
-        jqUnit.isVisible("After new password submission, confirmation should be visible", login.options.selectors.passwordReset);
         jqUnit.notVisible("After new password submission, password form should not be visible", login.options.selectors.resetForm);
     });
 
