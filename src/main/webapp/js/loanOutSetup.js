@@ -15,57 +15,27 @@ cspace = cspace || {};
 
 (function ($) {
 
-    cspace.loadOutSetup = function () {
+    cspace.loanOutSetup = function () {
 
-<<<<<<< .working
-        var setUpPage = function () {
-            var tbOpts = {
-                uispec: "{pageBuilder}.uispec.titleBar"
-            };
-            var tabsOpts = {
-                tabList: [
-                    {name: "Loan Out", target: "#primaryTab"},
-					{name: "Acquisition", target: null},
-					{name: "Cataloging", target: "objectTabPlaceholder.html"},
-					{name: "Intake", target: null},
-					{name: "Loan In", target: null},
-					{name: "Location &amp; Movement", target: null},
-					{name: "Media", target: null}
-                ],
-                setupFuncs: [null, "cspace.objectTabSetup"]
-            };
-            var reOpts = {
-                dataContext: "{pageBuilder}.dataContext",
-                uispec: "{pageBuilder}.uispec.recordEditor",
-                selectors: {identificationNumber: ".csc-loanOut-loanOutNumber"},
-                strings: {identificationNumberRequired: "Please specify a Loan Out Number"}
-            };
-            var sbOpts = {
-                uispec: "{pageBuilder}.uispec.sidebar",
-                currentRecordType: "loanout"
-            };
-            
-            var dependencies = {
-=======
         var tbOpts = {
             uispec: "{pageBuilder}.uispec.titleBar"
         };
         var tabsOpts = {
             tabList: [
                 {name: "Loan Out", target: "#primaryTab"},
-				{name: "Acquisition", target: null},
-				{name: "Cataloging", target: "objectTabPlaceholder.html"},
-				{name: "Intake", target: null},
-				{name: "Loan In", target: null},
-				{name: "Location &amp; Movement", target: null},
-				{name: "Media", target: null}
+                {name: "Acquisition", target: null},
+                {name: "Cataloging", target: "objectTabPlaceholder.html"},
+                {name: "Intake", target: null},
+                {name: "Loan In", target: null},
+                {name: "Location &amp; Movement", target: null},
+                {name: "Media", target: null}
             ],
             setupFuncs: [null, "cspace.objectTabSetup"]
         };
         var reOpts = {
             dataContext: "{pageBuilder}.dataContext",
             uispec: "{pageBuilder}.uispec.recordEditor",
-            selectors: {identificationNumber: ".csc-loanOut-loanOutNumber-numberPatternChooser"},
+            selectors: {identificationNumber: ".csc-loanOut-loanOutNumber"},
             strings: {identificationNumberRequired: "Please specify a Loan Out Number"}
         };
         var sbOpts = {
@@ -103,7 +73,6 @@ cspace = cspace || {};
                     templateSelector: ".csc-header-template",
                     targetSelector: ".csc-header-container"
                 },
->>>>>>> .merge-right.r1903
                 titleBar: {
                     href: "loanoutTitleBar.html",
                     templateSelector: ".csc-loanOut-titleBar-template",
@@ -132,31 +101,9 @@ cspace = cspace || {};
             },
             pageType: "loanOut"
         };
-<<<<<<< .working
-
-        if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
-            var uispecUrl = (cspace.util.isLocal() ? "./uispecs/loanout/uispec.json" : "../../chain/loanout/uispec");
-            // Until loan service is in place, force the local UISpec for testing
-            uispecUrl = "./uispecs/loanout/uispec.json";
-            jQuery.ajax({
-                url: uispecUrl,
-                type: "GET",
-                dataType: "json",
-                success: function (data, textStatus) {
-                    cspace.pageBuilder.uispec = data;
-                    setUpPage();
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    fluid.fail("Error fetching loanOut uispec:" + textStatus);
-                }
-            });
-        } else {
-            setUpPage();
-=======
         var csid = cspace.util.getUrlParameter("csid");
         if (csid) {
             options.csid = csid;
->>>>>>> .merge-right.r1903
         }
         if (cspace.util.isLocal()) {
             options.dataContext.options.baseUrl = "data";
