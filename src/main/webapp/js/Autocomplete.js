@@ -104,7 +104,7 @@ cspace = cspace || {};
                 success: function(data){
                     var dataArray;
                     if (data === "") {
-                            showConfirmation(request.term, that.container, that.dom, that.options.vocabUrl);
+                            showConfirmation(request.term, that.hiddenInput, that.dom, that.options.vocabUrl);
                     } else {
                         cspace.autocomplete.addConfirmDlg.hide();
                         var newdata = "[" + data.replace(/}\s*{/g, "},{") + "]";
@@ -119,7 +119,7 @@ cspace = cspace || {};
                             testdata = ["Fred Allen", "Phyllis Allen", "Karen Allen", "Rex Allen"];
                             callback(testdata);
                         } else {
-                            showConfirmation(request.term, that.container, that.dom, that.options.vocabUrl);
+                            showConfirmation(request.term, that.hiddenInput, that.dom, that.options.vocabUrl);
                         }
                     }
                 }
@@ -128,24 +128,24 @@ cspace = cspace || {};
     };
 
     var setupAutocomplete = function (that) {
-        var input = that.container;
+        that.hiddenInput = $("input", that.container.parent());
         var autoCompleteInput = $("<input/>");
-        autoCompleteInput.insertAfter(input);
-        input.hide();
+        autoCompleteInput.insertAfter(that.hiddenInput);
+        that.hiddenInput.hide();
 
         var opts = {
             minLength: that.options.minChars,
             delay: that.options.delay,
             source: makeAutocompleteCallback(that),
             select: function(event, ui) {
-                input.val(ui.item.urn);
-                input.change();
+                that.hiddenInput.val(ui.item.urn);
+                that.hiddenInput.change();
             }
         };
         autoCompleteInput.autocomplete(opts).autocomplete();
 
-        if (input.val()) {
-            var val = input.val();
+        if (that.hiddenInput.val()) {
+            var val = that.hiddenInput.val();
             autoCompleteInput.val(parseLabelFromUrn(val));
         }
 
