@@ -157,6 +157,7 @@ cspace = cspace || {};
             jQuery.ajax({
                 async: false,
                 url: "../../chain/loginstatus",
+                cache: false,
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {
