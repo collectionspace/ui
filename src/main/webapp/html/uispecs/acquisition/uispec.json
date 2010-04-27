@@ -137,7 +137,8 @@
         ".csc-acquisition-purchaser-price-denomination": "${fields.acquPriceDenom}",
         ".csc-acquisition-purchase-price-type": "${fields.acquPriceType}",
         ".csc-acquisition-purchaser-price": "${fields.acquPrice}",
-        ".csc-acquisition-transfer-of-title-number": "${fields.acquTitleNum}"
+        ".csc-acquisition-transfer-of-title-number": "${fields.acquTitleNum}",
+        ".csc-object-collection-field-collection-event-name": "${fields.acquCollectionEventName}"
     },
     "titleBar": {
             ".csc-titleBar-acquisition-reference-number": "${fields.acquReferenceNum}"

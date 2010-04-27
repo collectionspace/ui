@@ -20,7 +20,8 @@
             {"acquSource": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Small Shop Incorproated)'Small Shop Incorproated'"}
         ],
         "acquFundingValue": "",
-        "acquAuthorize": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Peach)'Peach'"
+        "acquAuthorize": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Peach)'Peach'",
+        "acquCollectionEventName": "Saturday picnic"
     },
     "relations": [
         {
