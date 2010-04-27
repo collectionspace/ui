@@ -13,7 +13,7 @@
     	"acquFundingSource": "Some nice person",
     	"acquFundingProviso": "The museum displays it",
     	"acquMethod": "Treasure",
-    	"acquSource": "Another nice person",
+    	"acquSources": [],
     	"acquTitleNum": "1-2-3-4",
     	"acquReason": "The museum likes it",
     	"acquNote": "Some info about this acquisition",

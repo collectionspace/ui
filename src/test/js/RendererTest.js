@@ -114,6 +114,49 @@ var rendererTester = function(){
         jqUnit.assertDeepEq("Decorator options should be added to uispec decorator specification (existing options in uispec shouldn't be overwritten)", expectedProtoTree, protoTree);
     });
 
+    rendererTest.test("buildProtoTree(): Repeated decorators, no data", function () {
+        var testUISpec = {
+            "row:": {
+                children: [{
+                    fieldA: "${repeated.0.field1}",
+                    fieldB: {
+                        decorators: [{
+                            "type": "fluid",
+                            "func": "cspace.autocomplete",
+                            "options": {
+                                "url": "url.com"
+                            }
+                        }]
+                    }
+                }]
+            }
+        };
+        var testModel = {
+            repeated: []
+        };
+        var testThat = {
+            model: testModel
+        };
+        var expectedProtoTree = {
+            "row:": {
+                children: [{
+                    fieldA: "${repeated.0.field1}",
+                    fieldB: {
+                        decorators: [{
+                            "type": "fluid",
+                            "func": "cspace.autocomplete",
+                            "options": {
+                                "url": "url.com"
+                            }
+                        }]
+                    }
+                }]
+            }
+        };
+        var protoTree = cspace.renderUtils.buildProtoTree(testUISpec, testThat);
+        jqUnit.assertDeepEq("Decorator should be in protoTree", expectedProtoTree, protoTree);
+    });
+
     rendererTest.test("buildProtoTree(): Fix of selections if model empty", function () {
         var testUISpec = {
             selector: {

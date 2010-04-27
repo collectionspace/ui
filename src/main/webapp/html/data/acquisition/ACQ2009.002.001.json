@@ -15,9 +15,13 @@
         "acquFundingProviso": "",
         "acquPriceDenom": "",
         "acquNote": "This one is not exactly what we'd like, but it'll do for now.",
-        "acquSource": "BigShopIncorproated",
+        "acquSources": [
+            {"acquSource": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Big Shop Incorproated)'Big Shop Incorproated'"},
+            {"acquSource": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Small Shop Incorproated)'Small Shop Incorproated'"}
+        ],
         "acquFundingValue": "",
-        "acquAuthorize": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Peach)'Peach'"
+        "acquAuthorize": "urn:cspace:org.collectionspace.demo:orgauthority:name(Demo Org Authority):organization:name(Peach)'Peach'",
+        "acquCollectionEventName": "Saturday picnic"
     },
     "relations": [
         {
