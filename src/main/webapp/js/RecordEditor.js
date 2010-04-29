@@ -150,7 +150,12 @@ cspace = cspace || {};
             autoBind: true,
             applier: that.applier
         };
-        fluid.selfRender(that.container, tree, renderOpts);
+        if (that.template) {
+            fluid.reRender(that.template, that.container, tree, renderOpts);
+        }
+        else {
+            that.template = fluid.selfRender(that.container, tree, renderOpts);
+        }
         if (!that.model.csid) {
             that.locate("deleteButton").attr("disabled", "disabled").addClass("deactivate");
         } else {
