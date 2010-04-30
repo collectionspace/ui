@@ -156,7 +156,9 @@ cspace = cspace || {};
         else {
             that.template = fluid.selfRender(that.container, tree, renderOpts);
         }
-        if (!that.model.csid) {
+        // TODO: This comparison against test@collectionspace.org is a hack put in place for the 0.6
+        // release to prevent testers from deleting the test account. It should be removed asap
+        if (!that.model.csid || (that.model.fields.email === "test@collectionspace.org")) {
             that.locate("deleteButton").attr("disabled", "disabled").addClass("deactivate");
         } else {
             that.locate("deleteButton").removeAttr("disabled").removeClass("deactivate");
