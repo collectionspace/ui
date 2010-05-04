@@ -1,0 +1,14 @@
+This is a custom build of goog.ui.DatePicker with dependencies (using compiler 
+with SIMPLE_OPTIMIZATION). To rebuild you will need to
+
+- check out google closure tools from
+  http://closure-library.googlecode.com/svn/trunk/
+
+- use out google Closure compiler from
+  http://code.google.com/closure/compiler/
+  
+and run the following command with adjusted paths to the resources
+according to your filesystem:
+
+${closure-library-read-only}/bin/calcdeps.py -i goog.ui.DatePicker.Require.js -p ${closure-library-read-only} -o compiled -c compiler.jar -f "--compilation_level=SIMPLE_OPTIMIZATIONS" > goog.ui.DatePicker.js
+
