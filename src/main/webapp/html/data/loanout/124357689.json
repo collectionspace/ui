@@ -7,6 +7,7 @@
         "borrowersContact": "urn:cspace:org.collectionspace.demo:personauthority:id(cc025527-3f1f-4a21-84fc):person:id(933ebb8d-78b1-4c4f-ae55)'Dic+Penderyn'",
         "lendersAuthorizer": "urn:cspace:org.collectionspace.demo:personauthority:id(cc025527-3f1f-4a21-84fc):person:id(13f09f22-794b-4ef9-9f7d)'Phyllis+Allen'",
         "lendersContact": "urn:cspace:org.collectionspace.demo:personauthority:id(cc025527-3f1f-4a21-84fc):person:id(933ebb8d-78b1-4c4f-ae55)'Dic+Penderyn'",
+        "lendersAuthorizationDate": "April 1, 2010",
         "loanOutConditions": "very good",
         "loanOutNote": "Take good care of it",
         "loanedObjectStatus": "photographyrequested",

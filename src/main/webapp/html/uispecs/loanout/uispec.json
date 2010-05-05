@@ -65,6 +65,13 @@
                 }
             }]
         },
+        ".csc-loanOut-lendersAuthorizationDate": "${fields.lendersAuthorizationDate}",
+        ".csc-loanOut-lendersAuthorizationDate-container": {
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.datePicker"
+            }]
+        },
         ".csc-loanOut-loanOutNote": "${fields.loanOutNote}",
         ".csc-loanOut-loanOutDate": "${fields.loanOutDate}",
         ".csc-loanOut-loanOutDate-container": {
