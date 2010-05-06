@@ -17,17 +17,21 @@ var adminUsersTester = function(){
     
     adminUsersTest.test("Creation", function () {
         var testOpts = {
-            uispec: "../../main/webapp/html/uispecs/users/uispec.json",
-            userListDataContext: {
+            uispec: {list: {}, details: {}},
+            userListEditor: {
                 options: {
-                    baseUrl: "../../main/webapp/html/data",
-                    fileExtension: ".json"
+                    listDataContext: {                    
+                        options: {
+                            baseUrl: "../../main/webapp/html/data",
+                            fileExtension: ".json"
+                        }
+                    }
                 }
             },
             listeners: {
                 afterRender: function () {
-                    jqUnit.assertEquals("User list should have right number of entries", 4, adminUsers.model.userList.items.length);
-                    jqUnit.assertEquals("User list should contain expected user", "Megan Forbes", adminUsers.model.userList.items[1].screenName);
+                    jqUnit.assertEquals("User list should have right number of entries", 4, adminUsers.userListEditor.model.list.items.length);
+                    jqUnit.assertEquals("User list should contain expected user", "Megan Forbes", adminUsers.userListEditor.model.list.items[1].screenName);
                     start();
                 }
             }

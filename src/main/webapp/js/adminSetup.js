@@ -17,21 +17,26 @@ cspace = cspace || {};
     cspace.adminSetup = function () {
 
         var adminOpts = {
-            uispec: "{pageBuilder}.uispec"
+            uispec: "{pageBuilder}.uispec",
+            userListEditor: {
+                uispec: "{pageBuilder}.uispec"
+            }
         };
         if (cspace.util.isLocal()) {
-            adminOpts.dataContext = {
-                options: {
-                    baseUrl: "data/",
-                    fileExtension: ".json"
+            adminOpts.userListEditor.options = {
+                listDataContext: {                    
+                    options: {
+                        baseUrl: "data/",
+                        fileExtension: ".json"
+                    }
+                },
+                dataContext: {                    
+                    options: {
+                        baseUrl: "data/",
+                        fileExtension: ".json"
+                    }
                 }
-            };
-            adminOpts.userListDataContext = {
-                options: {
-                    baseUrl: "data/",
-                    fileExtension: ".json"
-                }
-            };
+            };            
         }
         var dependencies = {
             users: {

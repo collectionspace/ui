@@ -71,6 +71,17 @@ cspace = cspace || {};
             return true;
         };
     };
+    
+    var validateRequiredFields = function (domBinder, message) {
+        var required = domBinder.locate("requiredFields");
+        for (var i = 0; i < required.length; i++) {
+            if (required[i].value === "") {
+                cspace.util.displayTimestampedMessage(domBinder, message);
+                return false;
+            }
+        }
+        return true;
+    };
 
     var bindEventHandlers = function (that) {
 
@@ -80,6 +91,10 @@ cspace = cspace || {};
 
         that.events.onSave.addListener(function () {
             cspace.util.displayTimestampedMessage(that, that.options.strings.savingMessage, "");
+        });
+        
+        that.events.onSave.addListener(function () {
+            return validateRequiredFields(that.dom, that.options.strings.missingRequiredFields);
         });
 
         that.options.dataContext.events.afterCreate.addListener(function (data) {
@@ -229,7 +244,8 @@ cspace = cspace || {};
             feedbackMessage: ".csc-message",
             timestamp: ".csc-timestamp",
             relatedRecords: ".csc-related-records",
-            confirmationExclusion: ".csc-confirmation-exclusion"
+            confirmationExclusion: ".csc-confirmation-exclusion",
+            requiredFields: ".csc-required:visible"
         },
         strings: {
             specFetchError: "I'm sorry, an error has occurred fetching the UISpec: ",
@@ -244,7 +260,8 @@ cspace = cspace || {};
             fetchFailedMessage: "Error retriving Record: ",
             addRelationsFailedMessage: "Error adding related records: ",
             defaultTermIndicator: " (default)",
-            noDefaultInvitation: "-- Select an item from the list --"
+            noDefaultInvitation: "-- Select an item from the list --",
+            missingRequiredFields: "Some required fields are empty"
         },
         
         // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,

@@ -12,6 +12,7 @@
 		<!--[if lt IE 9]> <link rel="stylesheet" type="text/css" href="../css/cspace_ie.css"> <![endif]-->
 
         <script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
+        
         <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.autocomplete.js"></script>
         <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.tabs.js"></script>        
         <script type="text/javascript" src="../engage-core-framework/js/engageRenderUtils.js"></script>
@@ -24,6 +25,7 @@
         <script type="text/javascript" src="../js/RecordEditor.js"></script>
         <script type="text/javascript" src="../js/RecordList.js"></script>
         <script type="text/javascript" src="../js/PasswordValidator.js"></script>
+        <script type="text/javascript" src="../js/ListEditor.js"></script>
         <script type="text/javascript" src="../js/AdminUsers.js"></script>
         <script type="text/javascript" src="../js/PageBuilder.js"></script>
         <script type="text/javascript" src="../js/adminSetup.js"></script>
@@ -70,7 +72,7 @@
 													Users
 												</div>
 												
-												<div class="overflow-user-list csc-user-userList">
+												<div class="overflow-user-list csc-listEditor-list">
 													<table class="user-table">
 														<thead>
 															<tr>
@@ -79,14 +81,14 @@
 															</tr>
 														</thead>
 														<tbody>
-															<tr class="add-new-user csc-user-addNew">
+															<tr class="add-new-user csc-listEditor-addNew">
 																<td>New User</td>
 																<td>Edit Details <img src="../images/new_user_arrow.png" width=16 height=10 alt=""/></td>
 															</tr>
-															<tr class="csc-user-userList-row">
+															<tr class="csc-listEditor-list-row">
 																<td class="csc-user-userList-name"></td>
 																<td class="csc-user-userList-status"></td>
-                                                                <td class="hidden csc-user-userList-csid"></td>
+                                                                <td class="hidden csc-listEditor-list-csid"></td>
 															</tr>
 														</tbody>
 													</table>
@@ -102,38 +104,38 @@
                                                         <span class="csc-timestamp cs-timestamp">time</span>
                                                         <span class="csc-message">Save successful!</span>
                                                     </div>
-                                                    <div class="user-details-fields csc-user-userDetails-none">
+                                                    <div class="user-details-fields csc-listEditor-details-none">
                                                         No user selected. Please select a user from the list, or create a new user.
                                                     </div>
-													<div class="user-details-fields csc-user-userDetails">    
+													<div class="user-details-fields csc-listEditor-details">    
                                                         <div class="info-pair">
-                                                            <div class="label">Email Address</div><div class="user-input"><input type="text" class="input-alpha csc-user-email csc-user-required" name=""/></div>
+                                                            <div class="label">Email Address</div><div class="user-input"><input type="text" class="input-alpha csc-user-email csc-required" name=""/></div>
                                                         </div>
 <!--
 														<div class="info-pair">
-															<div class="label">User ID</div><div class="user-input"><input type="text" class="input-alpha csc-user-userID csc-user-required" name=""/></div>
+															<div class="label">User ID</div><div class="user-input"><input type="text" class="input-alpha csc-user-userID csc-required" name=""/></div>
 														</div>
 -->													
 														<div class="info-pair">
-															<div class="label">Full Name</div><div class="user-input"><input type="text" class="input-alpha csc-user-userName csc-user-required" name=""/></div>
+															<div class="label">Full Name</div><div class="user-input"><input type="text" class="input-alpha csc-user-userName csc-required" name=""/></div>
 														</div>
 
-                                                        <div class="csc-user-hideOnEdit">
+                                                        <div class="csc-details-hideOnEdit">
                                                             <div class="password-instructions">Password must be between<br/>8 and 23 characters.</div>
                                                             <div class="clear"></div>
 
     														<div class="info-pair">
-    															<div class="label">Password</div><div class="user-input"><input type="password" class="input-alpha csc-user-password csc-user-required csc-passwordValidator-password" name=""/></div>
+    															<div class="label">Password</div><div class="user-input"><input type="password" class="input-alpha csc-user-password csc-required csc-passwordValidator-password" name=""/></div>
     														</div>
     													
     														<div class="info-pair">
-    															<div class="label">Confirm Password</div><div class="user-input"><input type="password" class="input-alpha csc-user-passwordConfirm csc-user-required" name=""/></div>
+    															<div class="label">Confirm Password</div><div class="user-input"><input type="password" class="input-alpha csc-user-passwordConfirm csc-required" name=""/></div>
     														</div>
                                                         </div>
-                                                        <div class="csc-user-hideOnCreate">
+                                                        <div class="csc-details-hideOnCreate">
     														<div class="info-pair">
     															<div class="label">Status</div><div class="user-input">
-                                                                    <select class="csc-user-status csc-user-required" disabled></select>
+                                                                    <select class="csc-user-status csc-required" disabled></select>
                                                                 </div>
     														</div>
                                                         </div>

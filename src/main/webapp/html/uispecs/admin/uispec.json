@@ -1,16 +1,16 @@
 {
-    "userList": {
-        ".csc-user-userList-row:": {
+    "list": {
+        ".csc-listEditor-list-row:": {
             "children": [
                 {
                     ".csc-user-userList-name": "${items.0.screenName}",
                     ".csc-user-userList-status": "${items.0.status}",
-                    ".csc-user-userList-csid": "${items.0.csid}"
+                    ".csc-listEditor-list-csid": "${items.0.csid}"
                 }
             ]
         }
     },
-    "userDetails": {
+    "details": {
         ".csc-user-userID": "${fields.userId}",
         ".csc-user-userName": "${fields.screenName}",
         ".csc-user-password": "${fields.password}",
