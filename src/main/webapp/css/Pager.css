@@ -27,6 +27,12 @@
 .fl-pager .fl-pager-ui a {
     padding:0 3px;
     margin:0 2px;
+	color:#6E9FCE;
+	text-decoration:none;
+}
+.fl-pager .fl-pager-ui a:hover, .fl-pager .fl-pager-ui a:focus {
+	color:#6E9FCE;
+	text-decoration:underline;
 }
 .fl-pager .fl-pager-ui .fl-pager-links a {    
     border:1px solid #ccc;
@@ -39,6 +45,9 @@
     border:none;
     background-color:transparent;
     text-decoration:none;
+}
+.fl-pager .fl-pager-ui .fl-pager-links .fl-pager-currentPage:hover, .fl-pager .fl-pager-ui .fl-pager-links .fl-pager-currentPage:focus {
+	text-decoration:underline;
 }
 .fl-pager .fl-pager-ui .fl-pager-links a:hover {
     background-color:#0287C5;
