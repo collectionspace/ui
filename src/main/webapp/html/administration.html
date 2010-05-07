@@ -48,7 +48,7 @@
 						<div class="fl-container-pivot-users fl-container-admin-menu fl-force-left" id="">
 							<ul>
 								<li class="selected">Users</li>
-								<li class=""><a href="#">Roles and Permission</a></li>
+								<li class="inactive">Roles and Permission</li>
 								<li class="inactive">Help Management</li>
 								<li class="inactive">Reporting</li>
 								<li class="inactive">Numbering</li>
@@ -67,11 +67,12 @@
                                 <div class="csc-user-list">
 									<div class="fl-container-flex fl-fix information-group">
 										<div class="fl-container-flex fl-fix content" id="">
-											<div class="info-column2-60 fl-force-left">
-												<div class="fl-container-flex header">
-													Users
+											<div class="info-column2-40 fl-force-left">
+												<div>
+													<div class="fl-container-flex header fl-force-left">Users</div>
+													<input type="submit" class="cs-new-user-submit csc-user-createNew button fl-force-right" value="Create New User" />
+													<div class="clear"></div>
 												</div>
-												
 												<div class="overflow-user-list csc-listEditor-list">
 													<table class="user-table">
 														<thead>
@@ -93,11 +94,11 @@
 														</tbody>
 													</table>
 												</div>
-												<input type="submit" class="cs-new-user-submit csc-user-createNew button" value="Create New User" />
+												
 												<div class="clear"></div>
 											</div>
 											
-											<div class="info-column2-40 fl-force-right">
+											<div class="info-column2-60 fl-force-right">
 												<div class="fl-container-flex header">User Details</div>
 												<div class="user-details">
                                                     <div class="hidden csc-message-container cs-message">
@@ -116,15 +117,13 @@
 															<div class="label">User ID</div><div class="user-input"><input type="text" class="input-alpha csc-user-userID csc-required" name=""/></div>
 														</div>
 -->													
-														<div class="info-pair">
+														<div class="info-pair no-padding">
 															<div class="label">Full Name</div><div class="user-input"><input type="text" class="input-alpha csc-user-userName csc-required" name=""/></div>
 														</div>
 
                                                         <div class="csc-details-hideOnEdit">
-                                                            <div class="password-instructions">Password must be between<br/>8 and 23 characters.</div>
-                                                            <div class="clear"></div>
-
-    														<div class="info-pair">
+															<div class="info-pair">
+																<div class="password-instructions">Password must be between 8 and 23 characters.</div>
     															<div class="label">Password</div><div class="user-input"><input type="password" class="input-alpha csc-user-password csc-required csc-passwordValidator-password" name=""/></div>
     														</div>
     													
@@ -140,7 +139,7 @@
     														</div>
                                                         </div>
                                                         <div class="fl-container-flex">
-                                                            <input type="button" class="savebutton button csc-save savebutton" value="Save" />
+                                                            <input type="button" class="savebutton button csc-save savebutton  lengthen" value="Save" />
                                                             <input type="button" class="cancelbutton button csc-cancel savebutton" value="Cancel" />
                                                             <input type="button" class="deletebutton button csc-delete savebutton" value="Delete" />
                                                             <div class="clear"></div>

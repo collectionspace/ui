@@ -51,7 +51,7 @@ a.add-link:hover, a.add-link:focus {color:#000; text-decoration:underline;}
 .menu-record a {background:none repeat scroll 0 0 #6F9DCE; color:#fff; font-weight:bold;	padding:0.2em .4em; 
 	text-decoration:none; border:2px solid #6F9DCE; border-bottom:none; *margin-right:2px; /**padding:2px 4px;*/}
 .menu-record a:hover, .menu-record a:focus {background:none repeat scroll 0 0 #336699; border:2px solid #336699;	border-bottom:none;}
-.menu-record a.current, .menu-record li.selected a { background: no-repeat scroll 0 0 #FFF; color:#6F9DCE; cursor:default; padding-top:6px; border:2px solid #6F9DCE; border-bottom:none;}
+.menu-record a.current, .menu-record li.selected a { background: no-repeat scroll 0 0 #FFF; color:#6F9DCE; /*cursor:default;*/ padding-top:6px; border:2px solid #6F9DCE; border-bottom:none;}
 .menu-record a.inactive {cursor:default; background-color:#CCC; border:2px solid #CCC; border-bottom:none;}
 
 #secondary-nav-menu .menu-record a.primary {background-image: url("../images/primary.png"); background-repeat: no-repeat; background-position:bottom left ; padding-left:12px;}
@@ -259,7 +259,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .fl-container-pivot  {width:29%; min-width: 248px;}
 .fl-container-admin-menu {width:20%; min-width: 200px;}
 .fl-container-admin-menu ul {width:100%;}
-.fl-container-admin-menu ul li{list-style-type:none; /*cursor:pointer;*/ padding:2px 0 3px 5px; border:1px solid #6E9FCE; background-color:#6E9FCE; margin-bottom:4px; color:#fff; font-weight:bold;}
+.fl-container-admin-menu ul li{list-style-type:none; cursor:pointer; padding:2px 0 3px 5px; border:1px solid #6E9FCE; background-color:#6E9FCE; margin-bottom:4px; color:#fff; font-weight:bold;}
 .fl-container-admin-menu ul li.selected {background-color:#FFF; color:#6E9FCE;}
 .fl-container-admin-menu ul li.inactive {background-color:#CCC; color:#FFF; border:1px solid #CCC; cursor: default;}
 .fl-container-admin-menu ul  a{text-decoration:none; color:#fff;}
@@ -360,20 +360,21 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .fl-container-admin  .information-group       .content 	{border:none; background-color: #E6E6E6; padding: 12px 12px 12px 12px; width:auto; display:block;}
 .fl-container-admin  .information-subgroup .content 	{border:none; background-color: #F0F5FA; padding: 0px; width:auto; display:block; border:0px solid #CECFD1; width:100%;}
 .fl-container-admin  .information-subgroup .content input {border:1px solid #C7CFD4; width:98%;}
-.fl-container-admin  .information-group       .header   	{font-size:14px; line-height:14px; background-color:#E6E6E6; /*padding-bottom:8px;*/ color:#3A3A3A;}
+.fl-container-admin  .information-group       .header   	{ height:20px; font-size:14px; line-height:14px; background-color:#E6E6E6; /*padding-bottom:8px;*/ color:#3A3A3A; width:auto;}
 .fl-container-admin  .information-group       .sub-header {font-size:14px; line-height:14px; font-weight:bold; padding-bottom: 15px; background-color:#E6E6E6;}
 .fl-container-admin  .information-subgroup .header   	{font-size:14px; line-height:14px; background-color:#E6E6E6; padding-bottom:8px; color:#3A3A3A;}
 .fl-container-admin  .information-group  table {font-size:12px; line-height:12px; background-color:#E6E6E6; width:100%; border:1px solid #C7CFD4; /*margin:1px;*/}
-.fl-container-admin  .information-group  table thead tr td {font-size:11px; line-height:11px; background-color:#E8E8E8; font-weight:bold; padding:4px 2px 4px 5px; border:1px solid #C7CFD4; color:#3A3A3A;}
+.fl-container-admin  .information-group  table thead tr td {font-size:11px; line-height:11px; background-color:#E8E8E8; font-weight:bold; padding:4px 2px 4px 5px; border-bottom:1px solid #C7CFD4; color:#3A3A3A;}
 .fl-container-admin  .information-group  table.permissions thead tr td {border:none; border-bottom:1px solid #C7CFD4;}
 .fl-container-admin  .information-group  table tbody {border:1px solid #C7CFD4;}
-.fl-container-admin  .information-group  table tbody tr td {background-color:#fff; padding: 4px 2px 3px 5px; border:1px solid #C7CFD4; /*border-bottom:1px solid #E9E8E8;*/ color:#3A3A3A;}
+.fl-container-admin  .information-group  table tbody tr td {background-color:#fff; padding: 4px 2px 3px 5px; border:none; border-bottom:1px solid #C7CFD4; cursor:pointer; color:#3A3A3A;}
+.fl-container-admin  .information-group  table tbody tr:hover td {background-color:#F0F5FB;}
 .fl-container-admin  .information-group  table tbody tr td.header {background-color:#E8E8E8; padding: 4px 2px 4px 5px; font-size:12px; line-height:100%;}
-.fl-container-admin  .information-group  table tbody tr td.selected {background-color:#6E9FCE; color:#fff;}
+.fl-container-admin  .information-group  table tbody tr.selected td {background-color:#6F9ECD; color:#fff;}
 .fl-container-admin  .information-group  table.permissions tbody tr td {border:none; border-bottom:1px solid #C7CFD4;}
 .fl-container-admin  .information-group  table.hover tbody tr:hover td {background-color:#6E9FCE; cursor:pointer; color:#fff;}
 .fl-container-admin  .information-group  table tbody tr:hover td.header {background-color:#E8E8E8; color:#3A3A3A;}
-.fl-container-admin  .information-group  table tbody tr.add-new-user td {color:#A9A59B; font-weight:bold; background-color:#F5F3DC;}
+.fl-container-admin  .information-group  table tbody tr.add-new-user td {color:#A9A59B; font-weight:bold; background-color:#FFFBEB;}
 .fl-container-admin  .information-group  table tbody tr.last td{border-bottom:1px solid #C7CFD4;}
 .new-user-background {background-color:#F5F3DC !important;}
 
@@ -383,8 +384,10 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .user-details-fields {padding-bottom:10px;}
 .user-details .info-pair {padding-bottom:16px;}
 .user-details .info-pair .label {float:left; width:110px; font-weight:bold; text-align:right; padding:6px 14px 0 0 ;}
-.user-details .info-pair .user-input {float:left; width:230px;}
+.user-details .info-pair .user-input {float:left; width:320px;}
 .user-details .info-pair .user-input input {border:1px solid #C7CFD4;}
+.password-instructions {font-size: 11px; color:#808080; margin-left:124px; margin-bottom:2px;}
+.empty-required, .empty-required:focus {outline:1px solid #D10010; background-color:#FFE7E3;}
 
 .permission-retails {}
 
@@ -552,7 +555,7 @@ table .field-cal {width:162px;}
 .radio-button.disabled {color:gray;}
 .deactivate, .deactivate table, .deactivate table td, .deactivate .label {background-color:#CDCCCC !important; color:#606060 !important;}
 .deactivate input {color:#CDCCCC !important;}
-input.deactivate {background-color:#CDCCCC !important; color:#000 !important;}
+input.deactivate {background-color:#CDCCCC !important; color:#000 !important; cursor:default;}
 .disableme {background-color:#CDCCCC !important; color:gray !important;}
 .activate input {color:black !important; background-color:white !important;}
 
@@ -576,7 +579,7 @@ table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; f
     min -width: 600px;
 }
 
+.cs-new-user-submit {}
+
 .float-left {  float: left; }
 .float-right {  float: right; }
-
-.password-instructions { font-size: 90%; width: 60%; float: right; color: grey;}
