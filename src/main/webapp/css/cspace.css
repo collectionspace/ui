@@ -457,7 +457,8 @@ table.input-date	 	   {padding-left:2px;}
 table .input-select         {width: 100%; height:19px; /**height:22px;*/ padding-top:0; border:none;}
 .input-textarea		   {/*width: 99.5%;*/ width:100%; height:73px;}
 .input-alpha-login       {width: 120px; height:18px;}
-.input-autocomplete	   {width:auto !important;}
+.input-autocomplete	   {width:auto !important; }
+.input-autocomplete, .ui-autocomplete-input {background: #fff url(../images/arrowPredictiveText.png) no-repeat right center;}
 
 .fl-container-pivot  select.recently-created-list {width:232px !important; height:20px; /**height:24px;*/}
 

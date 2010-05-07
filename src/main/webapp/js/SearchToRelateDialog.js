@@ -60,7 +60,7 @@ cspace = cspace || {};
 				draggable: true,
                 dialogClass: "cs-search-dialog",
                 position: ['center',100],
-				title: "Add Related Object/Procedural  Record"                
+				title: "Add Related Object/Procedural Record"                
             });
         
         addDialog.parent().css("overflow", "visible");
