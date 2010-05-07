@@ -383,10 +383,10 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .user-details { border:1px solid #C7CFD4; padding:10px; background-color:#F0F5FA; /*min-width:364px;*/}
 .user-details-fields {padding-bottom:10px;}
 .user-details .info-pair {padding-bottom:16px;}
-.user-details .info-pair .label {float:left; width:110px; font-weight:bold; text-align:right; padding:6px 14px 0 0 ;}
+.user-details .info-pair .label {float:left; width:120px; font-weight:bold; text-align:right; padding:6px 14px 0 0 ;}
 .user-details .info-pair .user-input {float:left; width:320px;}
 .user-details .info-pair .user-input input {border:1px solid #C7CFD4;}
-.password-instructions {font-size: 11px; color:#808080; margin-left:124px; margin-bottom:2px;}
+.password-instructions {font-size: 11px; color:#808080; margin-left:134px; margin-bottom:2px;}
 .empty-required, .empty-required:focus {outline:1px solid #D10010; background-color:#FFE7E3;}
 
 .permission-retails {}
@@ -415,26 +415,29 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .login-text {padding:0 10px 15px 0px;}
 .login-forms {width:100%;}
 .login-forms .info-pair{}
-.login-forms .header  {padding:18px 18px 6px 18px; background-color:#93BC7F; /*margin-bottom:2px;*/ /*width:auto;*/}
+.login-forms .header  {padding:18px 18px 6px 18px; background-color:#93BC7F; width:auto;}
 .login-forms .header  .label {font-size:20px; color:#fff;}
-.login-forms .content{width:100%; background-color:#E8E7E7; padding:18px; }
+.login-forms .content{background-color:#E8E7E7; pad ding:18px;}
+.login-forms .content .inner {padding:18px;}
 
 .login-text .header, .login-forms .header {font-size: 20px; line-height:20px; font-weight:bold; color:#9D9D9D;}
 .login-text .content, .login-forms .content, .login-text .fl-container-left .information-group .info-pair .content, 
 .fl-container-left .information-group .login-forms .info-pair .content 
 	{padding-top: 20px; font-size:14px; line-height:18px; /*width:90%;*/}
-.login-forms .content.sign-in {padding-top:5px;}
-.login-pair {padding-bottom: 20px;}
-.login-pair .login-label {width:80px; float:left; font-weight:bold; color:#333; margin-right:10px; font-size:13px;}
+.login-forms .content {padding:0;}
+.login-pair {padding-bottom: 20px; width:100%;}
+.login-pair .login-label {width:80px; float:left; font-weight:bold; color:#333; margin-right:14px; font-size:13px;}
 .login-pair .login-element {float:left; padding-right: 2px; width:70%;}
 .login-pair.forgotpw {width:100%; padding-bottom:0; font-size:12px;}
-.login-pair.forgotpw {color:#333;}
+.login-pair.forgotpw {padding-top:10px;}
 .login-error {margin-left:90px; margin-bottom:-18px; padding-left:24px; /*font-weight:bold;*/ color:#C60018; background-image: url(../images/warning.png); background-repeat: no-repeat; background-position:left;}
 .login-pair .button {background-color:#93BC7F; padding:3px 18px;}
 
-.reset-password .login-pair .login-label {width:130px;}
+.login-block {padding-top:10px; width:100%;}
+
+.reset-password .login-pair .login-label {width:120px;}
 .reset-password .login-pair .login-element {width:60%;}
-.reset-password .login-error {margin-left:140px;}
+.reset-password .login-error {margin-left:0px; margin-top:20px;}
 
 
 .info-pair .content .table-select {}
