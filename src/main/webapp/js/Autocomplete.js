@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid*/
+/*global jQuery, fluid, cspace*/
 
 cspace = cspace || {};
 
@@ -22,17 +22,14 @@ cspace = cspace || {};
         }
     };
 
-    var postNewTerm = function (data) {
+    var postNewTerm = function (term, url, callback) {
         $.ajax({
-            url: "../../chain" + data.url,
+            url: "../../chain" + url,
             dataType: "json",
             type: "POST",
-            data: JSON.stringify({fields: {displayName: cspace.autocomplete.addConfirmDlg.newDisplayName}}),
+            data: JSON.stringify({fields: {displayName: term}}),
             success: function (data) {
-                cspace.autocomplete.addConfirmDlg.hide();
-                // TODO: this needs to be set to the URN, not the displayName
-                cspace.autocomplete.addConfirmDlg.field.val(cspace.autocomplete.addConfirmDlg.newDisplayName);
-                cspace.autocomplete.addConfirmDlg.field.change();
+                callback(data.urn);
             },
             error: function () {
                 fluid.fail("error posting new term");
@@ -40,22 +37,12 @@ cspace = cspace || {};
         });
     };
 
-    var addNewTerm = function () {
-        if (cspace.util.isLocal()) {
-            cspace.autocomplete.addConfirmDlg.hide();
-            return;
-        }
-        $.ajax({
-            url: cspace.autocomplete.addConfirmDlg.vocabUrl,
-            dataType: "json",
-            type: "GET",
-            success: postNewTerm,
-            error: function () {
-                fluid.fail("error getting new term url");
-            }
-        });
+    var updateTerm = function (value) {
+        cspace.autocomplete.addConfirmDlg.field.val(value);
+        cspace.autocomplete.addConfirmDlg.field.change();
+        cspace.autocomplete.addConfirmDlg.hide();
     };
-
+    
     var clearNewTerm = function () {
         cspace.autocomplete.addConfirmDlg.fieldToClear.val("");
         cspace.autocomplete.addConfirmDlg.hide();
@@ -91,20 +78,23 @@ cspace = cspace || {};
                 cspace.autocomplete.addConfirmDlg.newDisplayName = "";
 
                 that.locate("clearButton", cspace.autocomplete.addConfirmDlg).click(clearNewTerm);
-                that.locate("addButton", cspace.autocomplete.addConfirmDlg).click(addNewTerm);
+                that.locate("addButton", cspace.autocomplete.addConfirmDlg).click(function () { 
+                    that.options.termSaverFn(cspace.autocomplete.addConfirmDlg.newDisplayName, updateTerm);
+                });
+                that.events.afterRenderConfirmation.fire();
             });
         }
     };
 
     var makeAutocompleteCallback = function (that) {
-        return function(request, callback){
+        return function (request, callback) {
             $.ajax({
                 url: that.options.queryUrl + "?q=" + request.term,
                 dataType: "text",
-                success: function(data){
+                success: function (data) {
                     var dataArray;
                     if (data === "") {
-                            showConfirmation(request.term, that.hiddenInput, that.dom, that.options.vocabUrl);
+                        showConfirmation(request.term, that.hiddenInput, that.dom, that.options.vocabUrl);
                     } else {
                         cspace.autocomplete.addConfirmDlg.hide();
                         var newdata = "[" + data.replace(/}\s*{/g, "},{") + "]";
@@ -112,11 +102,13 @@ cspace = cspace || {};
                         callback(dataArray);
                     }
                 },
-                error: function(){
+                error: function () {
                     if (cspace.util.isLocal()) {
                         if (request.term === "all") {
                             cspace.autocomplete.addConfirmDlg.hide();
-                            testdata = ["Fred Allen", "Phyllis Allen", "Karen Allen", "Rex Allen"];
+                            
+                            // TODO: We should pull this testdata out of here
+                            var testdata = ["Fred Allen", "Phyllis Allen", "Karen Allen", "Rex Allen"];
                             callback(testdata);
                         } else {
                             showConfirmation(request.term, that.hiddenInput, that.dom, that.options.vocabUrl);
@@ -137,7 +129,7 @@ cspace = cspace || {};
             minLength: that.options.minChars,
             delay: that.options.delay,
             source: makeAutocompleteCallback(that),
-            select: function(event, ui) {
+            select: function (event, ui) {
                 that.hiddenInput.val(ui.item.urn);
                 that.hiddenInput.change();
             }
@@ -156,8 +148,25 @@ cspace = cspace || {};
 
         setupAutocomplete(that);
         setUpConfirmation(that);
-
         return that;
+    };
+
+    cspace.autocomplete.ajaxTermSaver = function (term, callback) {
+        if (cspace.util.isLocal()) {
+            cspace.autocomplete.addConfirmDlg.hide();
+            return;
+        }
+        $.ajax({
+            url: cspace.autocomplete.addConfirmDlg.vocabUrl,
+            dataType: "json",
+            type: "GET",
+            success: function (data) {
+                postNewTerm(term, data.url, callback);
+            },
+            error: function () {
+                fluid.fail("error getting new term url");
+            }
+        });
     };
     
     fluid.defaults("cspace.autocomplete", {
@@ -166,11 +175,13 @@ cspace = cspace || {};
             clearButton: ".csc-autcomplete-addClear",
             addButton: ".csc-autcomplete-addConfirm"
         },
-
+        events: {
+            afterRenderConfirmation: null
+        }, 
+        termSaverFn: cspace.autocomplete.ajaxTermSaver,
         minChars: 3,
         delay: 500,
 
         addConfirmationTemplate: "../html/AutocompleteAddConfirmation.html"
     });
-
 })(jQuery, fluid);
