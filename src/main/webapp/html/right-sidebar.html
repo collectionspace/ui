@@ -10,11 +10,9 @@
 		<link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
 		<!--[if lt IE 9]> <link rel="stylesheet" type="text/css" href="../css/cspace_ie.css"> <![endif]-->
-
     </head>
     <body>
     <div class="csc-right-sidebar">
-		<!-- Right-side container. Pivot area -->
 		<div id="secondary-nav" class="pivot">
 			<div id="secondary-nav-menu">
 				<ul class="menu-record">
@@ -34,23 +32,22 @@
 				<div class="content" id="toggle-media-snapshot"><img src="../images/sample.png" alt="sample image" title="sample media image" width=200 height=238 /></div>
 			</div>
 			
-			
 			<div class="pivot-box csc-integrated-authorities">
 				<div class="header toggle" onclick="ShowHide('#toggle-integrated-authorities'); return false;">
 					<span class="header-toggle"><img id="toggle-integrated-authorities-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle-less" /></span>
 					Integrated Vocabularies <span class="csc-num-items">(0)</span>
 				</div>
+				
 				<div class="content integrated-authorities list-table" id="toggle-integrated-authorities">
-					
-					<table class="">
-						<thead class="">
+					<table>
+						<thead>
 							<tr>
 								<td>Term</td>
 								<td>Vocabulary</td>
 								<td>Field</td>
 							</tr>
 						</thead>
-						<tbody >
+						<tbody>
     					    <tr><td colspan=3 class="hidden csc-error-message cs-message">This is the error message</td></tr>
                                 <!--<tr><td colspan=3 class="hidden csc-no-records-message">No Authority terms used yet</td></tr>-->
 							<tr class="pivot-box-data csc-related-row">
@@ -78,9 +75,8 @@
 					</div>
 					
 					<div class="content related-procedures list-table" id="toggle-related-procedures">
-						
 						<table>
-							<thead class="">
+							<thead>
 								<tr>
 									<td>Number</td>
 									<td>Summary</td>
@@ -119,16 +115,15 @@
 					</div>
 					
 					<div class="content related-objects list-table" id="toggle-related-objects">
-						
-						<table class="">
-							<thead class="">
+						<table>
+							<thead>
 								<tr>
 									<td>Number</td>
 									<td>Summary</td>
 									<td>Type</td>
 								</tr>
 							</thead>
-							<tbody >
+							<tbody>
                                 <tr><td colspan=3 class="hidden csc-no-records-message">No related records yet</td></tr>
 							    <tr><td colspan=3 class="hidden csc-error-message cs-message">This is the error message</td></tr>
 								<tr class="pivot-box-data csc-related-row">
@@ -145,12 +140,10 @@
 						</table>
 					</div>
 				</div>
-							
-			<!-- END Right-side container -->
-	
+			</div>
 			<div class="clear"></div>
-    		
-		</div> <!-- END sub-main content -->
+		</div>
+		<div class="clear"></div>
     </div>
     </body>
 </html>
