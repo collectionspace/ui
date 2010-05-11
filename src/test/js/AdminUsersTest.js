@@ -16,28 +16,31 @@ var adminUsersTester = function(){
     });
     
     adminUsersTest.test("Creation", function () {
+        var adminUsers;
+        var recordListUISpec = {
+            ".csc-recordList-row:": {
+                "children": [
+                    {
+                        ".csc-user-userList-name": "${items.0.screenName}",
+                        ".csc-user-userList-status": "${items.0.status}",
+                        ".csc-listEditor-list-csid": "${items.0.csid}"
+                    }
+                ]
+            }
+        };
         var testOpts = {
-            uispec: {list: {}, details: {}},
+            recordType: "users/records/list.json",
+            uispec: {list: recordListUISpec, details: {}},
             userListEditor: {
                 options: {
-                    listDataContext: {                    
-                        options: {
-                            baseUrl: "../../main/webapp/html/data",
-                            fileExtension: ".json"
-                        }
-                    }
-                }
-            },
-            listeners: {
-                afterRender: function () {
-                    jqUnit.assertEquals("User list should have right number of entries", 4, adminUsers.userListEditor.model.list.items.length);
-                    jqUnit.assertEquals("User list should contain expected user", "Megan Forbes", adminUsers.userListEditor.model.list.items[1].screenName);
-                    start();
+                    baseUrl: "../../main/webapp/html/data/"
                 }
             }
         };
-        stop();
-        var adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        jqUnit.assertEquals("User list model should have right number of entries", 4, adminUsers.userListEditor.model.list.length);
+        jqUnit.assertEquals("User list model should contain expected user", "Megan Forbes", adminUsers.userListEditor.model.list[1].screenName);
+        jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, $(".csc-recordList-row", "#main").length);
     });
 };
 

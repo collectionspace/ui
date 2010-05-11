@@ -197,7 +197,7 @@ cspace = cspace || {};
         },
 		styles: {
 	        selected: "cs-numberPatternChooser-selected",
-            selecting: "cs-numberPatternChooser-selecting"
+            selecting: "cs-selecting"
 	    },
         model: null,
         selected: null,

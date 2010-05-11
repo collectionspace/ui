@@ -34,7 +34,8 @@ cspace = cspace || {};
                 // requestChange() to "*" doesn't work (see FLUID-3507)
                 // the following workaround compensates:
                 fluid.model.copyModel(model, data);
-                roleList.updateModel(model.items);
+                fluid.model.copyModel(roleList.model.items, model.items);
+                roleList.refreshView();
             },
             error: function (xhr, textStatus, errorThrown) {
                 fluid.fail("Error retrieving role list:" + textStatus);
@@ -130,11 +131,12 @@ cspace = cspace || {};
         };
         that.roleListApplier = fluid.makeChangeApplier(that.model.roleList);
         that.roleList = fluid.initSubcomponent(that, "roleList", [
-            that.options.selectors.roleList, {
-                uispec: that.options.uispec.roleList,
-                data: that.model.roleList,
-                dataContext: cspace.dataContext(that.model.roleList)
-            }
+            that.options.selectors.roleList,
+            {
+                items: that.model.roleList,
+                selectionIndex: -1
+            }, 
+            that.options.uispec.roleList
         ]);
 
         that.permissionsApplier = fluid.makeChangeApplier(that.model.permissions);

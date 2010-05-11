@@ -14,59 +14,74 @@ cspace = cspace || {};
 
 (function ($) {
 
-    cspace.setupFindEdit = function () {
-        var objOpts = {
-            dataContext: { options: { recordType: "objects" } },
-            uispec: "{pageBuilder}.uispec.objects"
-        };
-        var intOpts = {
-            dataContext: { options: { recordType: "intake" } },
-            uispec: "{pageBuilder}.uispec.proceduresIntake"
-        };
-        var acqOpts = {
-            dataContext: { options: { recordType: "acquisition" } },
-            uispec: "{pageBuilder}.uispec.proceduresAcquisition"
-        };
-        var liOpts = {
-            dataContext: { options: { recordType: "loanin" } },
-            uispec: "{pageBuilder}.uispec.proceduresLoanIn"
-        };
-        var loOpts = {
-            dataContext: { options: { recordType: "loanout" } },
-            uispec: "{pageBuilder}.uispec.proceduresLoanOut"
-        };
+    var buildUrl = function (recordType) {
         if (cspace.util.isLocal()) {
-            objOpts.dataContext.options.baseUrl = 
-                intOpts.dataContext.options.baseUrl = 
-                    acqOpts.dataContext.options.baseUrl =  
-                        liOpts.dataContext.options.baseUrl =  
-                            loOpts.dataContext.options.baseUrl = "data";
-            objOpts.dataContext.options.fileExtension = 
-                intOpts.dataContext.options.fileExtension = 
-                    acqOpts.dataContext.options.fileExtension = 
-                        liOpts.dataContext.options.fileExtension = 
-                            loOpts.dataContext.options.fileExtension = ".json";
+            return "./data/" + recordType + "/records/list.json";
+        } else {
+            return "../../chain/" + recordType;
         }
+    };
+
+    var fetchModel = function (recordType) {
+        var model = {
+            items: [],
+            selectionIndex: -1
+        };
+        $.ajax({
+            url: buildUrl(recordType),
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                model.items = data.items;
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                fluid.log("Error fetching list of " + recordType + " records: " + textStatus);
+            }
+        });
+        return model;
+    };
+
+    cspace.setupFindEdit = function () {
+        var stringOptions = {
+            strings: {
+                nothingYet: "No records yet"
+            }
+        };
         var dependencies = {
             objects: {
                 funcName: "cspace.recordList",
-                args: [".object-records-group", objOpts]
+                args: [".object-records-group",
+                        fetchModel("objects"),
+                        "{pageBuilder}.uispec.objects",
+                        stringOptions]
             },
             proceduresIntake: {
                 funcName: "cspace.recordList",
-                args: [".intake-records-group", intOpts]
+                args: [".intake-records-group",
+                        fetchModel("intake"),
+                        "{pageBuilder}.uispec.proceduresIntake",
+                        stringOptions]
             },
             proceduresAcquisition: {
                 funcName: "cspace.recordList",
-                args: [".acquisition-records-group", acqOpts]
+                args: [".acquisition-records-group",
+                        fetchModel("acquisition"),
+                        "{pageBuilder}.uispec.proceduresAcquisition",
+                        stringOptions]
                 },
                 proceduresLoanIn: {
                     funcName: "cspace.recordList",
-                    args: [".loanIn-records-group", liOpts]
+                    args: [".loanIn-records-group",
+                        fetchModel("loanin"),
+                        "{pageBuilder}.uispec.proceduresLoanin",
+                        stringOptions]
                 },
                 proceduresLoanOut: {
                     funcName: "cspace.recordList",
-                    args: [".loanOut-records-group", loOpts]
+                    args: [".loanOut-records-group",
+                        fetchModel("loanout"),
+                        "{pageBuilder}.uispec.proceduresLoanout",
+                        stringOptions]
           }
         };
         

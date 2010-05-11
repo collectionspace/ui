@@ -18,14 +18,20 @@ cspace = cspace || {};
         var that = fluid.initView("cspace.sidebar", container, options);
         that.applier = applier;
         
+        var intAuthModel = {
+            items: that.applier.model.termsUsed || [],
+            selectionIndex: -1
+        };
         that.integratedAuthorities = fluid.initSubcomponent(that, "recordList", [that.options.selectors.termsUsed,
-             {data: that.applier.model.termsUsed || [],
-              recordType: "authorities",
+            intAuthModel,
+            that.options.uispec.termsUsed,
+             {recordType: "authorities",
               csid: that.applier.model.csid,
-              uispec: that.options.uispec.termsUsed}]);
+              strings: {nothingYet: "No Authority terms used yet"}}]);
 
         that.applier.modelChanged.addListener("termsUsed", function(model, oldModel, changeRequest) {
-            that.integratedAuthorities.updateModel(model.termsUsed);
+            fluid.model.copyModel(that.integratedAuthorities.model.items, model.termsUsed);
+            that.integratedAuthorities.refreshView();
         });
 
         that.relatedProcedures = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedProcedures,

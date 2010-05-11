@@ -35,7 +35,8 @@ cspace = cspace || {};
         });
 
         that.applier.modelChanged.addListener("relations", function(model, oldModel, changeRequest) {
-            that.recordList.updateModel(cspace.util.buildRelationsList(model.relations, recordsLists[that.options.recordType]));
+            fluid.model.copyModel(that.recordList.model.items, cspace.util.buildRelationsList(model.relations, recordsLists[that.options.recordType]));
+            that.recordList.refreshView();
         });
     };
 
@@ -43,11 +44,13 @@ cspace = cspace || {};
         var that = fluid.initView("cspace.relatedRecordsList", container, options);
         that.applier = applier;
 
-        var rlOpts = {
-            data: cspace.util.buildRelationsList(that.applier.model.relations, recordsLists[that.options.recordType]),
-            uispec: that.options.uispec
+        var listModel = {
+            items: cspace.util.buildRelationsList(that.applier.model.relations, recordsLists[that.options.recordType]),
+            selectionIndex: -1
         };
-        that.recordList = fluid.initSubcomponent(that, "recordList", [that.container, rlOpts]);
+        that.recordList = fluid.initSubcomponent(that, "recordList", [that.container,
+            listModel,
+            that.options.uispec]);
 
         if (!cspace.addDialogInst) {
             var dlgOpts = {

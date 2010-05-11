@@ -98,21 +98,17 @@ cspace = cspace || {};
 
     cspace.adminUsers = function (container, options) {
         var that = fluid.initView("cspace.adminUsers", container, options);
-        that.options.userListEditor.options.uispec = that.options.uispec;
-        that.userListEditor = fluid.initSubcomponent(that, "userListEditor", [that.container, fluid.COMPONENT_OPTIONS]);
+        that.userListEditor = fluid.initSubcomponent(that, "userListEditor", [that.container, that.options.recordType, 
+            that.options.uispec, fluid.COMPONENT_OPTIONS]);
         bindEventHandlers(that);
         return that;
     };
 
     fluid.defaults("cspace.adminUsers", {
+        recordType: "users",
         userListEditor: {
             type: "cspace.listEditor",
             options: {
-                listDataContext: {                    
-                    options: {
-                        recordType: "users"
-                    }
-                },
                 dataContext: {
                     options: {
                         recordType: "users"

@@ -14,75 +14,99 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     
+    var initializeRecordListData = function (baseUrl, recordType) {
+        var list = [];
+        $.ajax({
+            url: baseUrl + recordType,
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                list = data.items;
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                fluid.log("Error fetching list of records: " + textStatus);
+            }
+        });
+        return list;
+    };
+
+    var refreshRecordList = function (model, list, baseUrl, recordType) {
+        $.ajax({
+            url: baseUrl + recordType,
+            dataType: "json",
+            success: function (data) {
+                fluid.model.copyModel(model.list, data.items);
+                fluid.model.copyModel(list.model.items, model.list);
+                list.refreshView();
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                fluid.log("Error fetching list of records: " + textStatus);
+            }
+        });
+    };
+
     var hideDetails = function (domBinder) {
         domBinder.locate("details").hide();
         domBinder.locate("detailsNone").show();
     };
     
-    var loadDetails = function (that) {
-        return function(e){
-            var csid = that.locate("csid", e.target.parentNode).text();
-            that.detailsDC.fetch(csid);
-        };
+    var loadDetails = function (model, detailsDC) {
+        detailsDC.fetch(model.items[model.selectionIndex].csid);
     };
     
     var bindEventHandlers = function (that) {
 
-        that.locate("listRow").live("click", loadDetails(that));
-        
         that.detailsDC.events.afterCreate.addListener(function () {
             that.locate("newListRow").hide();
-            that.listDC.fetch(cspace.util.isLocal() ? "records/list" : null);
+            refreshRecordList(that.model, that.list, that.options.baseUrl, that.recordType);
         });
         that.detailsDC.events.afterUpdate.addListener(function () {
-            that.listDC.fetch(cspace.util.isLocal() ? "records/list" : null);
+            refreshRecordList(that.model, that.list, that.options.baseUrl, that.recordType);
         });
         that.detailsDC.events.afterRemove.addListener(function () {
             hideDetails(that.dom);
             cspace.util.hideMessage(that.dom);
-            that.listDC.fetch(cspace.util.isLocal() ? "records/list" : null);
+            refreshRecordList(that.model, that.list, that.options.baseUrl, that.recordType);
         });
         that.details.events.afterRender.addListener(function () {
             that.locate("newListRow").hide();
             that.showDetails(false);
+            that.events.afterRender.fire();
         });
         that.detailsDC.events.onError.addListener(function (operation, message) {
             that.locate("newListRow").hide();
-            if (operation === "fetch") {                
-            }
         });
         that.details.events.onCancel.addListener(function () {
             hideDetails(that.dom);
             that.locate("newListRow").hide();
         });
-
-        that.list.events.afterRender.addListener(that.fireAfterRender);
-
-        that.listDC.events.modelChanged.addListener(function (update) {
-            that.list.updateModel(that.model.list.items);
+        that.list.events.onSelect.addListener(function (model) {
+            loadDetails(model, that.detailsDC);
         });
     };
     
     var setUpListEditor = function (that) {
         that.locate("newListRow").hide();
         bindEventHandlers(that);
-        that.listDC.fetch(cspace.util.isLocal() ? "records/list" : null);
         hideDetails(that.dom);
+        that.events.afterRender.fire();
     };
     
-    cspace.listEditor = function (container, options) {
+    cspace.listEditor = function (container, recordType, uispec, options) {
         var that = fluid.initView("cspace.listEditor", container, options);
+        that.recordType = recordType;
+        that.uispec = uispec;
         that.model = {
-            list: [],
+            list: initializeRecordListData(that.options.baseUrl, that.recordType),
             details: {}
         };
-        that.listApplier = fluid.makeChangeApplier(that.model.list);
-        that.listDC = fluid.initSubcomponent(that, "listDataContext", [that.model.list, fluid.COMPONENT_OPTIONS]);
         that.list = fluid.initSubcomponent(that, "list", [
-            that.options.selectors.list, {
-                uispec: that.options.uispec.list,
-                data: that.model.list
-            }
+            that.options.selectors.list, 
+            {
+                items: that.model.list,
+                selectionIndex: -1
+            },
+            that.uispec.list
         ]);
 
         that.detailsApplier = fluid.makeChangeApplier(that.model.details);
@@ -91,16 +115,10 @@ cspace = cspace || {};
             that.options.selectors.details,
             that.detailsApplier,
             {
-                uispec: that.options.uispec.details,
+                uispec: that.uispec.details,
                 dataContext: that.detailsDC
             }
         ]);
-
-        that.fireAfterRender = function () {
-            that.locate("newListRow").hide();
-            that.events.afterRender.fire();
-            that.list.events.afterRender.removeListener(that.fireAfterRender);
-        };
         
         that.showDetails = function (newDetails) {
             that.locate("detailsNone").hide();
@@ -116,12 +134,7 @@ cspace = cspace || {};
         
         that.showNewListRow = function (show) {
             var newListRow = that.locate("newListRow");
-            if (show) {
-                newListRow.show();
-            }
-            else {
-                newListRow.hide();
-            }
+            newListRow[show ? "show" : "hide"]();
         };
 
         setUpListEditor(that);
@@ -151,7 +164,6 @@ cspace = cspace || {};
                 fileExtension: ""
             }
         },
-        url: "",
         selectors: {
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
@@ -167,7 +179,8 @@ cspace = cspace || {};
         },
          events: {
              afterRender: null
-         }
+         },
+         baseUrl: "../../chain/"
     });
 
 })(jQuery, fluid);

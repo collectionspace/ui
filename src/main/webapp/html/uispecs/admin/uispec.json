@@ -1,6 +1,6 @@
 {
     "list": {
-        ".csc-listEditor-list-row:": {
+        ".csc-recordList-row:": {
             "children": [
                 {
                     ".csc-user-userList-name": "${items.0.screenName}",
