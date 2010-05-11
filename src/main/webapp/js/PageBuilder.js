@@ -54,32 +54,20 @@ cspace = cspace || {};
         var templateContainer = $("<div></div>").html(bodyTag);
         var templateContent = $(selector, templateContainer);
         container.append($(selector, templateContainer)); 
-    };
+    };    
     
-    var replaceWithDemand = function(item, pageBuilder) {
-        if ((typeof(item) === "string") && (item.indexOf("{pageBuilder}") === 0)) {
-            return fluid.model.getBeanValue(pageBuilder, item.substring(14, arg.length));
-        } else {
-            return item;
-        }
-    };
-    var expandOptions = function (pageBuilder, args) {
-        var optIndex = args.length - 1;
-        for (var i = 1; i < optIndex; i++) {
-            var arg = args[i];
-            if ((typeof(arg) === "string") && (arg.indexOf("{pageBuilder}") === 0)) {
-                args[i] = fluid.model.getBeanValue(pageBuilder, arg.substring(14, arg.length));
-            }
-        }
-        var options = args[optIndex];
-        for (var opt in options) {
-            if (options.hasOwnProperty(opt)) {
-                var val = options[opt];
-                if ((typeof(val) === "string") && (val.indexOf("{pageBuilder}") === 0)) {
-                    options[opt] = fluid.model.getBeanValue(pageBuilder, val.substring(14, val.length));
+    var expandOptions = function (pageBuilder, args) {        
+        $.each(args, function (index, arg) {
+            if (arg) {
+                var type = typeof(arg);
+                if (type === "object") {
+                    expandOptions(pageBuilder, arg);
+                }
+                else if (type === "string" && arg.indexOf("{pageBuilder}") === 0) {
+                    args[index] = fluid.model.getBeanValue(pageBuilder, arg.substring(14, arg.length));
                 }
             }
-        }
+        });
     };
 
     var invokeDependencies = function (that) {

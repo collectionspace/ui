@@ -166,7 +166,10 @@ cspace = cspace || {};
                     "#recordEditorContainer",   // container
                     {               // options with IOC demands
                         foo: "{pageBuilder}.options.option1",
-                        bat: "{pageBuilder}.options.option2"
+                        bat: "{pageBuilder}.options.option2",
+                        options: {
+                            foobarSubcomponent: "{pageBuilder}.options.option1"
+                        }
                     }  
                 ]
             }
@@ -177,10 +180,11 @@ cspace = cspace || {};
             jqUnit.assertEquals("testComponent6 initiated with correct container", dependenciesWithIOCdemands.recordEditor.args[0], container);
             jqUnit.assertDeepEq("testComponent6 initiated with correct IOC demanded option1", "September", options.foo);
             jqUnit.assertDeepEq("testComponent6 initiated with correct IOC demanded option2", "Toronto", options.bat);
+            jqUnit.assertDeepEq("testComponent6 initiated with correct IOC demanded option1 for subcomponent", "September", options.options.foobarSubcomponent);
         };
     
         pageBuilderTest.test("Invocation of dependent components: mini IOC", function () {
-            expect(4);
+            expect(5);
             var pbOpts = {
                 option1: "September",
                 option2: "Toronto"
