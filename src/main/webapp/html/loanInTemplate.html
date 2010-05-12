@@ -2,30 +2,25 @@
 	<div class="csc-loanIn">
 		<div id="secondary-nav">
 			<div id="secondary-nav-menu-sub">
-				<div class="upper-save"><input type="button" class="savebutton csc-save" value="Save"/></div>
-				<div class="time-stamp">Last Saved on 01.11.10 at 12:12pm</div>
+				<div class="upper-save"><input type="button" class="csc-save primary" value="Save"/></div>
+				<div class="time-stamp"> </div>
 				<div class="clear"></div>
 			</div>
 		</div>
 		
 		<div class="loanIn-outer-border">
-
 			<div class="hidden csc-message-container cs-message">
 				<span class="csc-timestamp cs-timestamp">time</span>
 				<span class="csc-message">Save successful!</span>
 			</div>
 
 			<div class="fl-container-flex fl-fix information-group">
-			
-				<div class="info-column">	
-		
-					<!-- Information-block header -->
+				<div class="info-column">
 					<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-loanIn-information'); return false;">
-						<span class="header-toggle"><img id="toggle-loanIn-information-img"  src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+						<span class="header-toggle"><img id="toggle-loanIn-information-img"  src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
 						Object Entry Information
 					</div>
 					
-					<!-- Information-block content block -->
 					<div class="fl-container-flex fl-fix content main" id="toggle-loanIn-information">
 						<div class="info-column fl-force-left">
 							<div class="info-column2-50 fl-force-left">
@@ -64,7 +59,7 @@
 												<tbody>
 													<tr class="csc-loanIn-loanContact-row">
 														<!--<td class="table-unselected"></td>-->
-														<td><input type="text" class="csc-loanIn-loanInContact">
+														<td><input type="text" class="csc-loanIn-loanInContact" />
 															<div class="csc-loanIn-loanInContact-autocomplete"></div></td>
 													</tr>
 												</tbody>
@@ -74,6 +69,7 @@
 								</div>
 							</div>
 						</div>
+						
 						<div class="info-column fl-force-left">
 							<div class="info-column1 fl-force-left">
 								<div class="info-pair">
@@ -93,13 +89,13 @@
 											
 											<tbody>
 												<tr class="csc-loanIn-lender-row">
-													<td><input type="text" class="csc-loanIn-lender">
+													<td><input type="text" class="csc-loanIn-lender" />
                                                     </td>
-													<td><input type="text" class="csc-loanIn-lendersContact">
+													<td><input type="text" class="csc-loanIn-lendersContact" />
                                                     </td>
-													<td><input type="text" class="csc-loanIn-lendersAuthorizer">
+													<td><input type="text" class="csc-loanIn-lendersAuthorizer" />
                                                     </td>
-													<td class="field-cal csc-loanIn-lendersAuthorizerDate-container"><input type="text" disabled class="input-date csc-loanIn-lendersAuthorizerDate csc-calendar-date deactivate"><img src="../images/cal.png" class="csc-calendar-button" alt="calendar"  height=19 width=18 />
+													<td class="field-cal csc-loanIn-lendersAuthorizerDate-container"><input type="text" disabled="disabled" class="input-date csc-loanIn-lendersAuthorizerDate csc-calendar-date deactivate" /><img src="../images/cal.png" class="csc-calendar-button" alt="calendar"  height="16" width="18" />
                                                         <div class="csc-date-picker"></div></td>
 												</tr>
 											</tbody>
@@ -110,6 +106,7 @@
 							</div>
 							<div class="clear"></div>
 						</div>
+						
 						<div class="info-column fl-force-left">
 							<div class="info-column2-50 fl-force-left">
 								<div class="info-pair">
@@ -121,7 +118,7 @@
 											<tbody>
 												<tr>
 													<!--<td class="table-unselected"></td>-->
-													<td><textarea class="input-textarea csc-loanIn-loanInConditions"/></td>
+													<td><textarea class="input-textarea csc-loanIn-loanInConditions" /></td>
 												</tr>
 											</tbody>
 										</table>
@@ -139,7 +136,7 @@
 											<tbody>
 												<tr>
 													<!--<td class="table-unselected"></td>-->
-													<td><textarea class="input-textarea csc-loanIn-loanInNote"/></td>
+													<td><textarea class="input-textarea csc-loanIn-loanInNote" /></td>
 												</tr>
 											</tbody>
 										</table>
@@ -158,7 +155,7 @@
 										<table>
 											<tbody>
 												<tr>
-													<td class="field-cal disabled"><input type="text" class="input-date csc-loanIn-loanInDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></a></td>
+													<td class="field-cal disabled"><input type="text" class="input-date csc-loanIn-loanInDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></a></td>
 												</tr>
 											</tbody>
 										</table>
@@ -176,7 +173,7 @@
 										<table>
 											<tbody>
 												<tr>
-													<td class="field-cal disabled"><input type="text" class="input-date csc-loanIn-loanReturnDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></a></td>
+													<td class="field-cal disabled"><input type="text" class="input-date csc-loanIn-loanReturnDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></a></td>
 												</tr>
 											</tbody>
 										</table>
@@ -194,7 +191,7 @@
 										<table>
 											<tbody>
 												<tr>
-													<td class="field-cal disabled"><input type="text" class="input-date csc-loanIn-loanRenewalApplicationDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height=19 width=18 /></a></td>
+													<td class="field-cal disabled"><input type="text" class="input-date csc-loanIn-loanRenewalApplicationDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></a></td>
 												</tr>
 											</tbody>
 										</table>
@@ -203,11 +200,9 @@
 								</div>
 							</div>
 						</div>
-						
 						<div class="clear"></div>
 					</div>
 				</div>
-				
 			</div>
 			
 			<div class="hidden csc-message-container cs-message">
@@ -218,12 +213,11 @@
 			<div class="csc-error-dialog">
 				<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
 			</div>
-		</div> <!-- end outer border-->
+		</div>
 
-		<!-- Button container -->
-		<div class="fl-container-flex input-buttons">
-			<a href="#"><input type="button" class="savebutton csc-save" value="Save" /></a>
-			<a href="findedit.html"><input type="button" class="cancelbutton" value="Cancel" /></a>
+		<div class="fl-container-flex button-row">
+			<a href="#"><input type="button" class="csc-save primary" value="Save" /></a>
+			<a href="findedit.html"><input type="button" value="Cancel" /></a>
 			<div class="clear"></div>
 		</div>
 	</div>

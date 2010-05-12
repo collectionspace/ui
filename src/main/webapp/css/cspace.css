@@ -13,29 +13,31 @@ textarea {overflow:auto;}
 
 /* input form selectors */
 input, textarea {font-family:inherit; font-size:12px; font-weight:inherit; line-height:15px; padding:0; margin:0; /**margin-bottom:0px; */
-	border:0px solid #C7CFD4; overflow:visible; height:17px; padding:1px 0 1px 0;}
+	border:0px solid #C7CFD4; overflow:visible; height:17px; /*padding:1px 0 1px 0;*/}
 input[type="button"], input[type="submit"], input[type="checkbox"] {height:auto;}
 input:focus, textarea:focus {outline: 1px solid black;}
 input[type="text"], input[type="password"], textarea {/*width:99.5%;*/ width:100%; margin:0;}
-input.savebutton, input.globalSearchButton, input.cancelbutton, input.button, input.button.add, input.button.addrecordbutton, input.inversebutton
-	{background-color:#A2C88F; padding: 1px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; border:none;}
-input.inversebutton {background-color:#fff; color:#A2C88F; border:0px solid #A2C88F;}
-input.button.inverse, .button.inverse, input.button.add {background-color:#fff; color:#94BC80; border:1px solid #94BC80; padding-top:0; padding-bottom:0;}
-input.button.lengthen, .button.lengthen {padding-left:30px; padding-right:30px;}
-input.button, input.button.quick. input.button.addrecordbutton {float:left; padding:2px 12px;}
-input.button.add {padding:0px 4px; font-size:11px; height:auto; border:none;}
-input.small {padding:1px 4px; font-size:12px; line-height:100%;}
-#search-box input.button, #search-box input.button.quick {float:none; padding:2px 12px 1px 12px; margin-left:6px;}
-#create-box input.button, #create-box input.button.quick {float:none; padding:2px 12px;}
-.input-button, input.input-button {background-color:#94BC80; padding: 5px 12px 4px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; margin:0 5px; border:none; float:left;}
-.input-button.quick , .button.quick, .quick-large  {background-color:#94BC80; padding: 2px 12px 2px 12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; 
-	margin:0 5px; border:none; float:left; /**padding:4px 12px 3px 12px;*/}
-.input-button.disabled, .input-button.disabled:hover {background-color:#CDCCCC !important; color:#A0A0A0 !important}
-.quick-large {padding:5px 12px 4px 12px;}
-.input-button.disabled, input.input-button.disabled {cursor:default;}
+input[type="submit"].logout {font-weight:bold; color:#333; background-color:#F3F3F3;}
+input[type="submit"].logout:hover {background-color:#333; color:#FFF;}
+input[type="button"], input[type="submit"]	{background-color:#93BC7F; height:21px; padding-left:12px; padding-right:12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; line-height:15px; border:none;}
+input[type="button"]:hover, input[type="submit"]:hover	{background-color:#73AA4F;}
+input[type="button"].primary, input[type="submit"].primary	{background-color:#73AA4F; padding-left:30px; padding-right:30px;}
+input[type="button"].primary:hover, input[type="submit"].primary:hover	{background-color:#48722D;}
+input[type="button"].tertiary, input[type="submit"].tertiary {height:17px; padding-left:4px; padding-right:4px; font-size:11px; background-color:#FFF; color:#73AA4F;}
+input[type="button"].tertiary:hover, input[type="submit"].tertiary:hover {background-color:#FFFBCC;}
+
+
+.button-row input[type="button"], .button-row-right input[type="button"] {margin-left:10px; float:right; margin-top:10px;}
+.button-row-left input[type="button"], .button-row-left-center input[type="button"] {margin-right:10px; margin-top:10px;}
+.button-row-left-center {margin-left:auto; margin-right:auto; width:auto;}
+
+
+
+
+
+
 select {border:1px solid #C7CFD4;}
 table select {border:0px solid #C7CFD4;}
-
 
 /*   anchor link colors and behaviors   */
 a.link {color:#6E9FCE; text-decoration:none;}
@@ -116,7 +118,8 @@ li .flc-pager-pageLink {margin-top:-1px;}
 .header-menu-logo {margin:4px 0 8px 0; float:left; background: #fff url("../images/header-logo.png") no-repeat left top; width:345px; height:60px;}
 .header-menu-logo a {display:block; height:60px; text-indent:-9999px; padding-bottom:8px;}
 .header-menu-right {width:500px; float:right;}
-.header-menu-logout {padding:4px 0 12px 0; float:right; font-size:11px; line-height:11px; font-weight:bold;}
+.header-menu-right input, .header-menu-right select {margin-left:5px; vertical-align:bottom;}
+.header-menu-logout {padding:4px 0 12px 0; float:right;}
 .header-menu-button {margin-right:6px; float:left; width:200px; height:30px;}
 .header-menu-search {float:right;}
 .header-menu-search select {margin-bottom:-1px;}
@@ -146,7 +149,7 @@ li .flc-pager-pageLink {margin-top:-1px;}
 /* secondary navigation menu */
 #secondary-nav {padding-bottom:0px;}
 #secondary-nav-menu {padding-top:6px; width:100%; margin-bottom:0px;}
-#secondary-nav-menu .menu-record {padding-bottom:18px;}
+#secondary-nav-menu .menu-record {padding-bottom:15px;}
 #secondary-nav-menu ul.menu-record { white-space:nowrap;}
 #secondary-nav-menu ul.menu-record li{display:inline; list-style-type:none; margin-right:3px;}
 
@@ -159,12 +162,12 @@ li .flc-pager-pageLink {margin-top:-1px;}
 #secondary-nav-menu .menu-record ul {margin:0; padding:0;}
 #secondary-nav-menu .menu-record li {display:inline;}
 #secondary-nav-menu-sub  {padding-bottom:6px;}
-#secondary-nav-menu-sub .upper-save {float:right; padding-bottom:1px; width:72px; margin-left:15px;}
+#secondary-nav-menu-sub .upper-save {float:right; padding-bottom:1px; margin-left:15px;}
 #secondary-nav-menu-sub .time-stamp {float:right; padding-top:6px; font-size:10px; color:#BEBEBE;}
 
 /*search page related */ /* need to revisit */
 #search-box {padding: 10px; /*margin-bottom:2px;*/ border:0px solid #CECFD1;}
-#search-box input.button {margin-left:10px;}
+#search-box input {margin-right:10px;}
 #create-box {padding: 12px 0 12px 12px; margin:0 0 20px 0; /*background-color:#E6E6E6;*/ border:0px solid #CECFD1;}
 .search-box {background-color:#E6E6E6; border:1px solid #CECFD1;}
 .main-users-page #search-box {background-color:#E8E8E8; margin-bottom:12px;}
@@ -175,13 +178,13 @@ li .flc-pager-pageLink {margin-top:-1px;}
 .cs-new-user-submit {float:right; /*margin-right:14px;*/}
 .csc-search-pivot-submit-container {padding:14px 0 0 8px; float:right;}
 /*.csc-global-search-submit {padding:3px 10px 1px; background-color:#D5D6D7; color:#000;}*/
-.csc-search-keywords, .cs-search-user {width:50% !important; margin:0 12px 0 0; height:16px; border:1px solid #BCBDBD; 
-	padding:2px 0 1px 2px; /**padding:3px 0 0px 2px;*/ font-size:13px; line-height:13px;}
+.csc-search-keywords, .cs-search-user {width:50% !important; margin:0 12px 0 0; border:1px solid #BCBDBD; 
+	padding:2px 0 1px 2px; font-size:13px; line-height:13px;}
 .cs-search-user {mar gin-top:8px;}
 .found-records-box {/*padding:4px 0 14px 6px;*/}
 .found-records-content {/*color:#606060; font-size:16px; line-height:16px; font-weight:bold;*/}
 
-.csc-global-search-keywords, .csc-search-pivot-keywords {width:140px !important; margin:0 8px 0 2px; height:16px; border:1px solid #BCBDBD; 
+.csc-global-search-keywords, .csc-search-pivot-keywords {width:140px !important; margin:0 8px 0 2px; height:17px; border:1px solid #BCBDBD; 
 	padding:1px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}
 .csc-search-pivot-keywords {width:99% !important; margin:0 8px 8px 0; display:block;}
 .csc-search-record-type, .csc-global-search-record-type, .csc-search-pivot-record-type {color:#000; /**margin-bottom:-1px;*/}
@@ -298,7 +301,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .info-pair .content,
 .info-pair-date .content,
 .info-pair-select .content {width:100%; float:left; border:none;}
-.info-pair-select .content {padding-bottom:2px;}
+.info-pair-select .content {/*padding-bottom:2px;*/}
 
 .info-pair .content table,
 .info-pair-date .content table,
@@ -336,7 +339,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .list-table {border-bottom:0px solid #D2D0D0;}
 .list-table .header {}
 .list-table  .content {padding:0 !important;}
-.list-table  table {font-size:12px; line-height:120%; background-color:#00FFFF; border:0px solid #ADADAD; width:100%;}
+.list-table  table {font-size:12px; line-height:120%; /*background-color:#00FFFF;*/ border:0px solid #ADADAD; width:100%;}
 .list-table  table thead tr td {font-size:11px; background-color:#E8E8E8; padding:4px 2px 3px 4px; border:none; color:#9D9D9D; font-weight:bold;}
 .list-table  table tbody tr td {background-color:#fff; padding: 5px 2px 4px 4px; border-bottom:0px solid #ADADAD; color:#92B7DA; vertical-align:top;}
 .list-table  table tbody tr:hover td {/*background-color:#BFF4FF; cursor:pointer;*/ background-color:#F0F5FB;}
@@ -381,7 +384,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 
 .overflow-user-list {max-height:300px; overflow-x:hidden; overflow-y:auto; margin-bottom:10px; width:100%; }
 .user-details { border:1px solid #C7CFD4; padding:10px; background-color:#F0F5FA; /*min-width:364px;*/}
-.user-details-fields {padding-bottom:10px;}
+.user-details-fields {/*padding-bottom:10px;*/}
 .user-details .info-pair {padding-bottom:16px;}
 .user-details .info-pair .label {float:left; width:120px; font-weight:bold; text-align:right; padding:6px 14px 0 0 ;}
 .user-details .info-pair .user-input {float:left; width:320px;}
@@ -459,9 +462,9 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .input-date	 		   {width: 142px !important; padding-left:2px;}
 table.input-date	 	   {padding-left:2px;}
 .input-money-amount	   {width: 120px !important;}
-.input-select		   {width: auto; height:23px;}
+.input-select		   {width: auto; height:21px;}
 table .input-select         {width: 100%; height:19px; /**height:22px;*/ padding-top:0; border:none;}
-.input-textarea		   {/*width: 99.5%;*/ width:100%; height:73px;}
+.input-textarea		   {/*width: 99.5%;*/ width:100%; height:71px;}
 .input-alpha-login       {width: 120px; height:18px;}
 .input-autocomplete	   {width:auto !important; }
 .input-autocomplete, .ui-autocomplete-input {background: #fff url(../images/arrowPredictiveText.png) no-repeat right center;}
@@ -471,8 +474,8 @@ table .input-select         {width: 100%; height:19px; /**height:22px;*/ padding
 .cal img {padding:0 1px 1px 1px;}
 
 .field-cal {width:138px;}
-table .field-cal {width:162px;}
-.field-cal img {padding: 0; margin:0 0 -5px 0;}
+table .field-cal {width:162px; background-color:#C7CFD4;}
+.field-cal img {padding: 0; margin:0 0 -4px -1px;}
 
 
 #footer {margin-top:20px; border-top: 2px solid #D8D9DA; padding-top:7px;}
@@ -540,11 +543,7 @@ table .field-cal {width:162px;}
 .collapse-all {float:right; font-size:13px; line-height:13px; font-weight:bold; padding-top:10px;}
 .collapse-all img {padding-right:6px;}
 
-.input-buttons {width:100%; padding:1px 0 8px 0; margin-top:0;}
-.input-buttons input {margin-left:20px;}
-.savebutton, .cancelbutton, .viewbutton , .deletebutton, .addrecordbutton {margin-left:10px; float:right; border:none; text-decoration:none;}
-.deletebutton {margin-right:10px; float:left; border:none;}
-.viewbutton {margin:0px; /**margin-top:-24px;*/ line-height:0;}
+
 
 .no-border {border:none;}
 .no-float {float:none;}
@@ -554,7 +553,7 @@ table .field-cal {width:162px;}
 
 /* disabling/enabling selectors */ /*needs to be consolidated*/
 .disabled {}
-.content.disabled, .disabled td, .disabled tr, input.disabled, td.disabled, tr.disabled {background-color:#CDCCCC  !important; color:#a0a0a0 !important;}
+.content.disabled, .disabled td, .disabled tr, input.disabled, td.disabled, tr.disabled {background-color:#CDCCCC  !important; color:#a0a0a0 !important; cursor:default;}
 .radio-button.disabled {color:gray;}
 .deactivate, .deactivate table, .deactivate table td, .deactivate .label {background-color:#CDCCCC !important; color:#606060 !important;}
 .deactivate input {color:#CDCCCC !important;}
@@ -574,15 +573,13 @@ table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; f
 .clear {clear:both; margin:0; padding:0; height:1px; overflow:hidden; visibility:hidden; display:block;}
 
 .ui-tabs .ui-tabs-hide {
-     display: none;
+	display: none;
 }
 
 .cs-add-related-records-dialog {
-    background-color: white;
-    min -width: 600px;
+	background-color: white;
+	min -width: 600px;
 }
-
-.cs-new-user-submit {}
 
 .float-left {  float: left; }
 .float-right {  float: right; }

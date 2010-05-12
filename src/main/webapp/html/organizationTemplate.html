@@ -3,33 +3,26 @@
 							<div class="csc-authority-container">
 								<div id="secondary-nav">
 									<div id="secondary-nav-menu-sub">
-										<div class="upper-save"><input type="button" class="savebutton csc-save" value="Save"/></div>
-										<div class="time-stamp">Last Saved on 01.11.10 at 12:12pm</div>
+										<div class="upper-save"><input type="button" class="csc-save primary" value="Save"/></div>
+										<div class="time-stamp"> </div>
 										<div class="clear"></div>
 									</div>
 								</div>
 							
-								
 								<div class="authority-outer-border">
-
 									<div class="hidden csc-message-container cs-message">
 										<span class="csc-timestamp cs-timestamp">time</span>
 										<span class="csc-message">Save successful!</span>
 									</div>
-					
-									<!-- Each section of Object Entry is broken down into information-blocks.
-										  This corresponds to Information groups within Spectrum's Object Entry prodedure. -->
+									
 									<div class="fl-container-flex fl-fix information-group" id="toggle-authority-information">
 										<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-name'); return false;">
-											<span class="header-toggle"><img id="toggle-name-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+											<span class="header-toggle"><img id="toggle-name-img" src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
 											Organization Name Authority
 										</div>
-									<!-- Information-block content block -->
+									
 										<div class="fl-container-flex fl-fix content main" id="toggle-name">
-											
-											<!-- one row column -->
 											<div class="info-column">
-												
 												<div class="info-column">
 													<div class="info-column2-40 fl-force-left">
 														<div class="info-pair">
@@ -81,7 +74,7 @@
 																		<tbody>
 																			<tr>
 																				<!--<td class="table-unselected"></td>-->
-																				<td><select class="csc-organizationAuthority-status input-select"></select></td>
+																				<td><select class="csc-organizationAuthority-status input-select" /></td>
 																			</tr>
 																		</tbody>
 																	</table>
@@ -109,12 +102,11 @@
 																		<td>Contact name</td>
 																	</tr>
 																</thead>
-																	
 																<tbody>
 																	<tr>
-																		<td><input type="text" class="csc-organizationAuthority-longName"/></td>
-																		<td><input type="text" class="csc-organizationAuthority-subBodyName"/></td>
-																		<td><input type="text" class="csc-organizationAuthority-nameAdditions"/></td>
+																		<td><input type="text" class="csc-organizationAuthority-longName" /></td>
+																		<td><input type="text" class="csc-organizationAuthority-subBodyName" /></td>
+																		<td><input type="text" class="csc-organizationAuthority-nameAdditions" /></td>
 																		<td>
 																			<table>
 																                <tbody>
@@ -143,7 +135,7 @@
 															<table>
 																<tbody>
 																	<tr>
-																		<td class="field-cal disabled"><input type="text" class="input-date csc-organizationAuthority-foundingDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" height=19 width=18 /></a></td>
+																		<td class="field-cal disabled"><input type="text" class="input-date csc-organizationAuthority-foundingDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" height="16" width="18" /></a></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -166,6 +158,7 @@
 															</table>
 														</div>
 													</div>
+													
 													<div class="info-pair-date">
 														<div class="header">
 															<div class="label">Dissolution Date</div>
@@ -174,7 +167,7 @@
 															<table>
 																<tbody>
 																	<tr>
-																		<td class="field-cal disabled"><input type="text" class="input-date csc-organizationAuthority-dissolutionDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" height=19 width=18 /></a></td>
+																		<td class="field-cal disabled"><input type="text" class="input-date csc-organizationAuthority-dissolutionDate csc-calendar-date deactivate" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" height="16" width="18" /></a></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -201,6 +194,7 @@
 															</table>
 														</div>
 													</div>
+													
 													<div class="info-pair-select">
 														<div class="header">
 															<div class="label">Function</div>
@@ -210,7 +204,7 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><select class="csc-organizationAuthority-function input-select"></select></td>
+																		<td><select class="csc-organizationAuthority-function input-select" /></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -226,7 +220,7 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><textarea type="text" class="input-textarea csc-organizationAuthority-history" ></textarea></td>
+																		<td><textarea type="text" class="input-textarea csc-organizationAuthority-history" /></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -243,7 +237,7 @@
 									
 									<div class="fl-container-flex fl-fix information-group" id="toggle-authority-contact-information">
 										<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-contact'); return false;">
-											<span class="header-toggle"><img id="toggle-contact-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+											<span class="header-toggle"><img id="toggle-contact-img" src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
 											Contact Information
 										</div>
 										<div class="fl-container-flex fl-fix content main" id="toggle-contact">
@@ -258,12 +252,13 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><select class="csc-contact-addressType1 input-select" disabled ></select></td>
+																		<td><select class="csc-contact-addressType1 input-select" disabled="disabled" /></td>
 																	</tr>
 																</tbody>
 															</table>
 														</div>
 													</div>
+													
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Fax Number</div>
@@ -273,12 +268,13 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="csc-contact-faxNumber1" disabled /></td>
+																		<td><input type="text" class="csc-contact-faxNumber1" disabled="disabled" /></td>
 																	</tr>
 																</tbody>
 															</table>
 														</div>
 													</div>
+													
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Telephone Number</div>
@@ -288,7 +284,7 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="csc-contact-telephoneNumber1" disabled /></td>
+																		<td><input type="text" class="csc-contact-telephoneNumber1" disabled="disabled" /></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -307,12 +303,13 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="csc-contact-addressText1"  disabled/></td>
+																		<td><input type="text" class="csc-contact-addressText1" disabled="disabled" /></td>
 																	</tr>
 																</tbody>
 															</table>
 														</div>
 													</div>
+													
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Place</div>
@@ -322,13 +319,14 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-															            <td><input type="text" class="csc-contact-place" disabled />
+															            <td><input type="text" class="csc-contact-place" disabled="disabled" />
                                                                             <!--<div class="csc-contact-place-autocomplete"></div>--></td>
 																	</tr>
 																</tbody>
 															</table>
 														</div>
 													</div>
+													
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Postcode</div>
@@ -338,12 +336,13 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="csc-contact-postcode1" disabled /></td>
+																		<td><input type="text" class="csc-contact-postcode1" disabled="disabled" /></td>
 																	</tr>
 																</tbody>
 															</table>
 														</div>
 													</div>
+													
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Email</div>
@@ -353,7 +352,7 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="csc-contact-email1" disabled /></td>
+																		<td><input type="text" class="csc-contact-email1" disabled="disabled" /></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -370,12 +369,11 @@
 									<div class="csc-error-dialog">
 										<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
 									</div>
-								</div> <!-- end outer border-->
-
-								<!-- Save button container -->
-								<div class="fl-container-flex input-buttons">
-                                    <div><input type="button" class="savebutton csc-save" value="Save"/></div>
-									<a href="organization.html"><input type="button" class="cancelbutton" value="Cancel" /></a>
+								</div>
+								
+								<div class="fl-container-flex button-row">
+                                    <div><input type="button" class="csc-save primary" value="Save"/></div>
+									<a href="organization.html"><input type="button" value="Cancel" /></a>
 									<div class="clear"></div>
 								</div>	
 							</div>

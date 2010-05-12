@@ -23,10 +23,8 @@
         <script type="text/javascript" src="../js/searchSetup.js"></script>
     </head>
     <body>
-			<!-- body content -->
-		<div class="fl-container-1024 fl-centered">
 		
-			<!-- CSpace logo and right-side search box -->
+		<div class="fl-container-1024 fl-centered">
 			<div class="csc-header-container" id="name-header">
 				<!-- this div will be filled in with the contents of the Template -->
             </div>
@@ -40,13 +38,8 @@
 				</div>
 			
 				<div id="all-content" class="fl-fix">
-
-					<!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
 					<div class="fl-fix fl-container-flex fl-col-mixed2">
-
-						<!-- left-side container. Contains bulk of Object Entry forms and fields -->
 						<div class="fl-container-left fl-force-left">
-						
 							<div class="fl-container-flex fl-fix information-group search-leader">
 								<div class="fl-container-flex header">
 									<div class="label" style="float:left;">Latest Search:&nbsp;</div>
@@ -54,18 +47,14 @@
 									<!--<div class="link" style="float:right;">Save as Collection</div>-->
 									<div class="clear"></div>
 								</div>
-								
 							</div>
 							
 							<div class="fl-container-flex fl-fix information-group object-records-group">
-								<!-- outer info column -->
 								<div class="info-column">
-							
 									<div class="main-search-page">
-
 										<div id="search-box">
 											<!--<input name="keywords" type="text" class="csc-search-keywords" /><a href="#" class="csc-search-submit globalSearchButton">Search</a>-->
-											<input name="keywords" type="text" class="csc-search-keywords" /><input type="button" class="csc-search-submit button" type="submit" value="Search" />
+											<input name="keywords" type="text" class="csc-search-keywords" /><input type="button" class="csc-search-submit" type="submit" value="Search" />
 											<div class="select-recordtype csc-select-box-container">
                                                 <span class="recordtype-label">Record Type</span>
                                                 <select name="recordtype" class="csc-search-record-type">
@@ -86,7 +75,7 @@
 										
 										<div class="csc-search-results">
 											<div class="fl-container-flex header toggle found-records-box" onclick="ShowHide('#toggle-records'); return false;">
-												<span class="header-toggle"><img id="toggle-records-img" src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
+												<span class="header-toggle"><img id="toggle-records-img" src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
 												<span class="found-records-content">
 													Found <span class="csc-search-results-count">0</span> records
 												</span>
@@ -172,8 +161,6 @@
 											</div>
 										</div>
 										<!-- end search results -->
-
-
 									</div>
 								</div>
 							</div>	
@@ -185,16 +172,13 @@
 						<div class="clear"></div>
 					</div>
 				</div>
-			
-			<!-- end inner -->
 			</div>
 			
-			<!-- footer block -->
 			<div class="csc-footer-container" id="footer">
 				<!-- this div will be filled in with the contents of the Template -->
-			</div> <!-- END footer block -->
-			
-		</div> <!-- END body content -->
+			</div>
+		</div>
+		
 		<script type="text/javascript">
             $(document).ready(function(){
                 cspace.searchSetup();

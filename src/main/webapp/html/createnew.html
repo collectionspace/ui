@@ -24,72 +24,43 @@
 	<body>
 
 		<div class="fl-container-1024 fl-centered">
-		
-            <!-- CSpace logo and right-side search box -->
             <div id="name-header" class="csc-header-container">
                 <!-- this div will be filled in with the contents of the Template -->
             </div>
-            
 			<div class="fl-container-1024-inner">
-			
 				<div id="title-bar" class="nobg">
 					<div class="content">
 						<div class="header-name">Create New Records</div>
 					</div>
 				</div>
-					
-				<!-- main content -->
-				<div id="all-content" class="fl-fix create-new">
-					
-					<!-- sub-main content broken down into two column containers of unequal size: left side and right (pivot) side -->
-					<div class="fl-fix fl-container-flex fl-col-mixed2">
-					
-						<!-- left side container -->
-						<div class="fl-container-content fl-force-left fl-container-left">
-							<!-- create-new block -->
-							<div class="create-new-outer-border">
-								<!-- Object Record information group -->
-								<div class="fl-container-flex fl-fix information-group">
-									<!-- outer info column -->
-									<div class="info-column">	
-										<!-- information block header -->
-										<div class="fl-container-flex header static">
-											
-											Object Records
-										</div> <!-- end information block header -->
-										<!-- container content -->
-										<form name="selecttype">
-										<div class="fl-container-flex fl-fix content main" id="toggle-object-records">
-											<div class="radio-buttons">
-												<div class="radio-button"><input id="new-intake-radio" type="radio" name="recordtype" value="objects.html" checked="checked" /> <label for="new-intake-radio">Object</label></div>
-												<div class="clear"></div>
-											</div>
-											<!-- inner info column -->
-											<!--<div class="info-column">
-												<div class="input-button quick-large"><a class="" href="objects.html">Create Quick Record</a></div>
-												<div class="input-button disabled">Create New</div>
-												<div class="input-button disabled">Create From Existing</div>
-												<div class="input-button disabled">Create From Template</div>
-												<div class="clear"></div>
-											</div>-->
-											
-										</div> <!-- end container content -->
-									</div> <!-- end outer info column -->
-								</div> <!-- end information group -->
 
-								<!-- Procedural Record information group -->
-								<div class="fl-container-flex fl-fix information-group">
-									<!-- outer info column -->
-									<div class="info-column1">	
-										<!-- information block header -->
-										<div class="fl-container-flex header static" >
-											Procedural Records
-										</div> <!-- end information block header -->
-										<!-- container content -->
-										
+				<div id="all-content" class="fl-fix create-new">
+					<div class="fl-fix fl-container-flex fl-col-mixed2">
+						<div class="fl-container-content fl-force-left fl-container-left">
+							<div class="create-new-outer-border">
+								<form name="selecttype">
+									<div class="fl-container-flex fl-fix information-group">
+										<div class="info-column">	
+											<div class="fl-container-flex header static">
+												Object Records
+											</div>
+											
+											<div class="fl-container-flex fl-fix content main" id="toggle-object-records">
+												<div class="radio-buttons">
+													<div class="radio-button"><input id="new-intake-radio" type="radio" name="recordtype" value="objects.html" checked="checked" /> <label for="new-intake-radio">Object</label></div>
+													<div class="clear"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="fl-container-flex fl-fix information-group">
+										<div class="info-column1">	
+											<div class="fl-container-flex header static" >
+												Procedural Records
+											</div>							
 											<div class="fl-container-flex fl-fix content main" id="toggle-procedural-records">
 												<div class="info-column">
-													<!--<div class="sub-header">Select a Procedure</div>-->
 													<div class="radio-buttons">
 														<div class="radio-button"><input id="new-intake-radio" type="radio" name="recordtype" value="intake.html" /> <label for="new-intake-radio">Intake</label></div>
 														<div class="radio-button"><input id="new-acquisition-radio" type="radio" name="recordtype" value="acquisition.html" /> <label for="new-acquisition-radio">Acquisition</label></div>
@@ -98,105 +69,72 @@
 														<div class="radio-button disabled"><input id="new-exit-radio" type="radio" name="recordtype" value="objectexit" disabled /> <label for="new-exit-radio">Object Exit</label></div>
 														<div class="clear"></div>
 													</div>
-													<!--<input type=button class="button quick" onclick="getRadioValue();" value="Create Quick Record" />
-													<div class="input-button disabled">Create New</div>
-													<div class="input-button disabled">Create From Existing</div>
-													<div class="input-button disabled">Create From Template</div>-->
 													<div class="clear"></div>
-												</div> <!-- end inner info column -->
-												
-											</div> <!-- end container content -->
-										<!--</form> -->
-									</div> <!-- end outer info column -->
-								</div> <!-- end information group -->
+												</div>
+											</div>
+										</div>
+									</div>
 								
-                                <!-- Vocabulary Term information group -->
-                                <div class="fl-container-flex fl-fix information-group">
-                                    <!-- outer info column -->
-                                    <div class="info-column1">  
-                                        <!-- information block header -->
-                                        <div class="fl-container-flex header static" >
-                                            Vocabulary Terms
-                                        </div> <!-- end information block header -->
-                                        <!-- container content -->
-                                        <!--<form name="selecttypeV">-->
-                                            <div class="fl-container-flex fl-fix content main" id="toggle-vocab-records">
-                                                <div class="info-column">
-                                                    <!--<div class="sub-header">Select a Type</div>-->
-                                                    <div class="radio-buttons">
-                                                        <div class="radio-button"><input type="radio" id="new-person-authority-radio" name="recordtype" value="person.html"/> Person</div>
-                                                        <div class="radio-button"><input type="radio" id="new-org-authority-radio" name="recordtype" value="organization.html"/> Organization</div>
-                                                        <div class="radio-button disabled"><input type="radio" name="recordtype" value="location" disabled /> Place</div>
-                                                        <div class="radio-button disabled"><input type="radio" name="recordtype" value="mediasupport" disabled /> Subject</div>
-                                                        <div class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Concept</div>
-                                                        <div class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Exhibition</div>
-                                                        <div class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Collecting Event</div>
-                                                        <div class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Citation</div>
+									<div class="fl-container-flex fl-fix information-group">
+										<div class="info-column1">
+											<div class="fl-container-flex header static" >
+												Vocabulary Terms
+											</div>
+											<div class="fl-container-flex fl-fix content main" id="toggle-vocab-records">
+												<div class="info-column">
+													<div class="radio-buttons">
+														<div class="radio-button"><input type="radio" id="new-person-authority-radio" name="recordtype" value="person.html"/> Person</div>
+														<div class="radio-button"><input type="radio" id="new-org-authority-radio" name="recordtype" value="organization.html"/> Organization</div>
+														<div class="radio-button disabled"><input type="radio" name="recordtype" value="location" disabled /> Place</div>
+														<div class="radio-button disabled"><input type="radio" name="recordtype" value="mediasupport" disabled /> Subject</div>
+														<div class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Concept</div>
+														<div class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Exhibition</div>
+														<div class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Collecting Event</div>
+														<div class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Citation</div>
 														<div class="clear"></div>
 													</div>
-                                                    <!--<input type=button class="button quick" onclick="getRadioValue();" value="Create Quick Record" />
-														<div class="input-button disabled">Create New</div>
-														<div class="input-button disabled">Create From Existing</div>
-														<div class="input-button disabled">Create From Template</div>-->
-                                                    <div class="clear"></div>
-                                                </div> <!-- end inner info column -->
-                                                
-                                            </div> <!-- end container content -->
-                                        </form>
-                                    </div> <!-- end outer info column -->
-                                </div> <!-- end information group -->
-
-								<!-- Other information group -->
-								<div class="fl-container-flex fl-fix information-group">
-									<!-- outer info column -->
-									<div class="info-column1">	
-										<!-- information block header -->
-										<div class="fl-container-flex header static" >
-											Other
-										</div> <!-- end information block header -->
-										<!-- container content -->
-										<!--<form name="selecttypeV">-->
+													<div class="clear"></div>
+												</div>
+											</div>
+										   
+										</div>
+									</div>
+								
+									<div class="fl-container-flex fl-fix information-group">
+										<div class="info-column1">	
+											<div class="fl-container-flex header static" >
+												Other
+											</div>
 											<div class="fl-container-flex fl-fix content main" id="toggle-other-records">
 												<div class="info-column">
-													<!--<div class="sub-header">Select a Type</div>-->
 													<div class="radio-buttons">
 														<div class="radio-button disabled"><input type="radio" name="recordtype" value="location" disabled /> Storage Location</div>
 														<div class="radio-button disabled"><input type="radio" name="recordtype" value="mediasupport" disabled /> Media Records</div>
 														<div class="radio-button disabled"><input type="radio" name="recordtype" value="collection" disabled /> Collection</div>
 														<div class="clear"></div>
 													</div>
-													<!--<input type=button class="button quick disabled" onclick="getRadioValue();" value="Create Quick Record" />-->
-													<!--<div class="input-button disabled">Create Quick Record</div>
-													<div class="input-button disabled">Create New</div>
-													<div class="input-button disabled">Create From Existing</div>
-													<div class="input-button disabled">Create From Template</div>-->
 													<div class="clear"></div>
-												</div> <!-- end inner info column -->
-												
-											</div> <!-- end container content -->
-										</form>
-										<div class="button-row">
-										<input type=button class="button quick" onclick="getRadioValue();" value="Create Quick Record" />
-										<div class="input-button disabled">Create New</div>
-										<div class="input-button disabled">Create From Existing</div>
-										<div class="input-button disabled">Create From Template</div>
-										<div class="clear"></div>
+												</div>
+											</div>
 										</div>
-									</div> <!-- end outer info column -->
-								</div> <!-- end information group -->
-								
-							</div> <!-- end create-new -->
-						</div> <!-- end left side container -->
+									</div>
+									
+									<div class="button-row-left-center">
+										<input type=button class="" onclick="getRadioValue();" value="Create Quick Record" />
+										<input type=button class="disabled"  value="Create New" />
+										<input type=button class="disabled"  value="Create From Existing" />
+										<input type=button class="disabled"  value="Create From Template" />
+									</div>
+								</form>
+							</div>
+						</div>
 						
 						<div class="fl-container-pivot fl-force-right csc-right-sidebar" id="csc-right-sidebar">
-							
 							<div class="pivot-search-box">
 								<div class="info-column1">
-									
 									<div class="header">
 										Search
 									</div>
-								
 									<div class="content">
 										<div class="pivot-menu-search">
 											<form action="search.html">
@@ -216,26 +154,19 @@
 										</div>
 										<div class="clear"></div>
 									</div>
-									
 									<div class="clear"></div>
 								</div>
 							</div>
-						
 						</div>
 						<div class="clear"></div>
-						
 					</div>
-
-				</div> <!-- end create new -->
-
+				</div>
 			</div>
 
-            <!-- footer block -->
             <div class="csc-footer-container" id="footer">
                 <!-- this div will be filled in with the contents of the Template -->
-            </div> <!-- END footer block -->
-
-		</div> <!-- end fl-container-1024 -->
+            </div>
+		</div>
 
         <script type="text/javascript">
             cspace.setupCreateNew();
