@@ -89,7 +89,7 @@ cspace = cspace || {};
             if (!that.renderTemplate) {
                 that.renderTemplate = fluid.selfRender(that.container, tree, renderOpts);
             } else {
-                that.renderTemplate = fluid.reRender(that.renderTemplate, that.container, tree, renderOpts);
+                fluid.reRender(that.renderTemplate, that.container, tree, renderOpts);
             }
             that.locate("numberOfItems").text("(" + that.model.items.length + ")");
             that.events.afterRender.fire();
@@ -113,8 +113,8 @@ cspace = cspace || {};
             nothingYet: "No related records yet"
         },
         styles: {
-            selecting: "cs-recordList-selecting",
-            selected: "cs-recordList-selected"
+            selecting: "cs-selecting",
+            selected: "cs-selected"
         }
     });
 

@@ -9,6 +9,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jQuery, fluid, cspace*/
+"use strict";
 
 cspace = cspace || {};
 
@@ -64,7 +65,7 @@ cspace = cspace || {};
             if (required === container) {
                 return true;
             }
-            if ( $.trim(required.val()) === "") {
+            if ($.trim(required.val()) === "") {
                 cspace.util.displayTimestampedMessage(domBinder, message);
                 return false;
             }
@@ -97,7 +98,7 @@ cspace = cspace || {};
             return validateRequiredFields(that.dom, that.options.strings.missingRequiredFields);
         });
 
-        that.options.dataContext.events.afterCreate.addListener(function (data) {
+        that.dataContext.events.afterCreate.addListener(function (data) {
             that.applier.requestChange("csid", data.csid);
             that.locate("deleteButton").removeAttr("disabled").removeClass("deactivate");
             that.events.afterCreateObjectDataSuccess.fire(data, that.options.strings.createSuccessfulMessage);
@@ -106,18 +107,18 @@ cspace = cspace || {};
             that.unsavedChanges = false;
         });
 
-        that.options.dataContext.events.afterUpdate.addListener(function (data) {
+        that.dataContext.events.afterUpdate.addListener(function (data) {
             that.events.afterUpdateObjectDataSuccess.fire(data, that.options.strings.updateSuccessfulMessage);
             that.applier.requestChange("termsUsed", data.termsUsed);
 	        cspace.util.displayTimestampedMessage(that, that.options.strings.updateSuccessfulMessage, Date());
             that.unsavedChanges = false;
         });
 
-        that.options.dataContext.events.afterRemove.addListener(function() {
+        that.dataContext.events.afterRemove.addListener(function () {
             that.events.afterRemove.fire(that.options.strings.removeSuccessfulMessage);
         });
 
-        that.options.dataContext.events.modelChanged.addListener(function (data) {
+        that.dataContext.events.modelChanged.addListener(function (data) {
             that.refreshView();
         });
 
@@ -127,8 +128,8 @@ cspace = cspace || {};
             var setUnchanged = function () {
                 that.unsavedChanges = true;
             };
-            for (var selector in that.options.uispec) {
-                if (that.options.uispec.hasOwnProperty(selector)) {
+            for (var selector in that.uispec) {
+                if (that.uispec.hasOwnProperty(selector)) {
                     if (selector.indexOf(":") !== -1) {
                         selector = selector.substring(0, selector.indexOf(":"));
                     }
@@ -143,7 +144,7 @@ cspace = cspace || {};
 			cspace.util.setZIndex();
         });
 
-        that.options.dataContext.events.onError.addListener(makeDCErrorHandler(that));
+        that.dataContext.events.onError.addListener(makeDCErrorHandler(that));
     };
     
     var setupDataEntry = function (that) {
@@ -153,11 +154,11 @@ cspace = cspace || {};
     
     var renderPage = function (that) {
         var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
-        var protoTree = cspace.renderUtils.buildProtoTree(that.options.uispec, that);
+        var protoTree = cspace.renderUtils.buildProtoTree(that.uispec, that);
         var tree = expander(protoTree);
         cspace.renderUtils.fixSelectionsInTree(tree);
         var selectors = {};
-        cspace.renderUtils.buildSelectorsFromUISpec(that.options.uispec, selectors);
+        cspace.renderUtils.buildSelectorsFromUISpec(that.uispec, selectors);
         var renderOpts = {
             cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(selectors, {}),
             model: that.model,
@@ -184,9 +185,11 @@ cspace = cspace || {};
     /**
      * Object Entry component
      */
-    cspace.recordEditor = function (container, applier, options) {
+    cspace.recordEditor = function (container, dataContext, applier, uispec, options) {
         var that = fluid.initView("cspace.recordEditor", container, options);
+        that.dataContext = dataContext;
         that.applier = applier;
+        that.uispec = uispec;
         that.model = that.applier.model;
         that.unsavedChanges = false;
 
@@ -207,17 +210,17 @@ cspace = cspace || {};
             var ret = that.events.onSave.fire(that.model);
             if (ret !== false) {
                 if (that.model.csid) {
-                    that.options.dataContext.update();
+                    that.dataContext.update();
                 } else {
                     that.applier.requestChange("csid", "");
-                    that.options.dataContext.create();
+                    that.dataContext.create();
                 }
             }
             return false;
         };
         
         that.remove = function () {
-            that.options.dataContext.remove(that.model.csid);
+            that.dataContext.remove(that.model.csid);
         };
 
         setupDataEntry(that);
@@ -262,11 +265,6 @@ cspace = cspace || {};
             defaultTermIndicator: " (default)",
             noDefaultInvitation: "-- Select an item from the list --",
             missingRequiredFields: "Some required fields are empty"
-        },
-        
-        // Ultimately, the UISpec will be loaded via JSONP (see CSPACE-300). Until then,
-        // load it manually via ajax
-        uiSpecUrl: ""
-
+        }
     });
 })(jQuery, fluid);

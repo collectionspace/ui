@@ -21,8 +21,6 @@ cspace = cspace || {};
             uispec: "{pageBuilder}.uispec.titleBar"
         };
         var reOpts = {
-            dataContext: "{pageBuilder}.dataContext",
-            uispec: "{pageBuilder}.uispec.recordEditor",
             selectors: {identificationNumber: ".csc-intake-entry-number"},
             strings: {identificationNumberRequired: "Please specify an Intake Entry Number"}
         };
@@ -54,7 +52,8 @@ cspace = cspace || {};
             },
             recordEditor: {
                 funcName: "cspace.recordEditor",
-                args: [".csc-object-intake-template", "{pageBuilder}.applier", reOpts]
+                args: [".csc-object-intake-template", "{pageBuilder}.dataContext", 
+                	"{pageBuilder}.applier", "{pageBuilder}.uispec.recordEditor", reOpts]
             },
             sidebar: {
                 funcName: "cspace.sidebar",

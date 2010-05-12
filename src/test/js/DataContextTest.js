@@ -9,8 +9,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jqUnit, jQuery, jqMock, cspace, fluid, start, stop, ok, expect*/
+"use strict";
 
-var dataContextTester = function () {
+(function () {
     // jqMock requires jqUnit.ok to exist
     jqUnit.ok = ok;
 
@@ -27,6 +28,7 @@ var dataContextTester = function () {
 
     /*
      * Utility to call qUnit's start() only once all tests have executed
+     * TODO: this seems generally useful and we should push it up to jqunit
      */
     var done = 0; 
     var startIfDone = function (numTests) {
@@ -71,26 +73,31 @@ var dataContextTester = function () {
     });    
 
     dataContextTest.test("Update event firing", function () {
-        expect(1);
+        expect(2);
+                
         var testUpdateOpts = {
             baseUrl: "test-data",
             recordType: "objects",
-            fileExtension: ".json"
-        };
-        var updateSuccess = function (data) {
-            ok(true, "Success function should be called after successful update");
-            start();
-        };
-        var updateError = function (operation, message) {
-            ok(false, "Error function shouldn't be called after successful update");
-            start();
+            fileExtension: ".json",
+            listeners: {
+                afterUpdate: function (data) {
+                    ok(true, "Success function should be called after successful update");
+                    startIfDone(2);
+                },
+                afterSave: function (data) {
+                    ok(true, "afterSave function should be called after successful update");
+                    startIfDone(2);
+                },
+                onError: function (operation, message) {
+                    ok(false, "Error function shouldn't be called after successful update");
+                    start();
+                }
+            }
         };
 
         var dc = cspace.dataContext({csid: "12345"}, testUpdateOpts);
-        dc.events.afterUpdate.addListener(updateSuccess);
-        dc.events.onError.addListener(updateError);
-        stop();
         dc.update();
+        stop();
     });
 
     dataContextTest.test("Fetch ajax parameters", function () {
@@ -138,29 +145,32 @@ var dataContextTester = function () {
         var testFetchOpts = {
             baseUrl: "test-data",
             recordType: "objects",
-            fileExtension: ".json"
-        };
-        var fetchSuccess = function (data) {
-            jqUnit.assertEquals("The data has the accessionNumber we expected.", "1984.068.0335b", data.accessionNumber);
-            jqUnit.assertEquals("The data has the objectTitle we expected.", "Catalogs. Wyanoak Publishing Company.", data.objectTitle);
-            startIfDone(2);
-        };
-        var modelChanged = function (newModel, oldModel, source) {
-            jqUnit.assertEquals("The new model has the accessionNumber we expected.", "1984.068.0335b", newModel.accessionNumber);
-            jqUnit.assertEquals("The new model has the objectTitle we expected.", "Catalogs. Wyanoak Publishing Company.", newModel.objectTitle);
-            jqUnit.assertEquals("The old model has the objectTitle we expected.", "old title", oldModel.objectTitle);
-            startIfDone(2);
-        };
-        var fetchError = function (operation, message) {
-            ok(false, "No error should occur for a fetch against valid data: operation=" + operation + ", message=" + message);
-            start();
+            fileExtension: ".json", 
+            listeners: {
+                afterFetch: function (data) {
+                    jqUnit.assertEquals("The data has the accessionNumber we expected.", "1984.068.0335b", data.accessionNumber);
+                    jqUnit.assertEquals("The data has the objectTitle we expected.", "Catalogs. Wyanoak Publishing Company.", data.objectTitle);
+                    startIfDone(2);
+                }, 
+                modelChanged: function (newModel, oldModel, source) {
+                    jqUnit.assertEquals("The new model has the accessionNumber we expected.", "1984.068.0335b", newModel.accessionNumber);
+                    jqUnit.assertEquals("The new model has the objectTitle we expected.", "Catalogs. Wyanoak Publishing Company.", newModel.objectTitle);
+                    jqUnit.assertEquals("The old model has the objectTitle we expected.", "old title", oldModel.objectTitle);
+                    startIfDone(2);
+                },
+                afterSave: function (data) {
+                    ok(false, "No afterSave event should be fired when fetching");
+                    start();
+                },
+                onError: function (operation, message) {
+                    ok(false, "No error should occur for a fetch against valid data: operation=" + operation + ", message=" + message);
+                    start();
+                }
+            }
         };
         var dc = cspace.dataContext(testModel, testFetchOpts);
-        dc.events.afterFetch.addListener(fetchSuccess);
-        dc.events.modelChanged.addListener(modelChanged);
-        dc.events.onError.addListener(fetchError);
-        stop();
         dc.fetch("1984.068.0335b");
+        stop();
     });
 
     dataContextTest.test("Add new relations ajax parameters", function () {
@@ -210,10 +220,5 @@ var dataContextTester = function () {
         ajaxMock.verify();
         ajaxMock.restore();
     });
-};
-
-
-(function () {
-    dataContextTester();
 }());
 

@@ -36,7 +36,6 @@ cspace = cspace || {};
             dataType: "json",
             success: function (data) {
                 fluid.model.copyModel(model.list, data.items);
-                fluid.model.copyModel(list.model.items, model.list);
                 list.refreshView();
             },
             error: function (xhr, textStatus, errorThrown) {
@@ -55,31 +54,31 @@ cspace = cspace || {};
     };
     
     var bindEventHandlers = function (that) {
-
+    	
+    	that.detailsDC.events.afterSave.addListener(function () {
+    		refreshRecordList(that.model, that.list, that.options.baseUrl, that.recordType);
+    	});
         that.detailsDC.events.afterCreate.addListener(function () {
             that.locate("newListRow").hide();
-            refreshRecordList(that.model, that.list, that.options.baseUrl, that.recordType);
-        });
-        that.detailsDC.events.afterUpdate.addListener(function () {
-            refreshRecordList(that.model, that.list, that.options.baseUrl, that.recordType);
         });
         that.detailsDC.events.afterRemove.addListener(function () {
             hideDetails(that.dom);
             cspace.util.hideMessage(that.dom);
-            refreshRecordList(that.model, that.list, that.options.baseUrl, that.recordType);
         });
+        that.detailsDC.events.onError.addListener(function (operation, message) {
+            that.locate("newListRow").hide();
+        });
+        
         that.details.events.afterRender.addListener(function () {
             that.locate("newListRow").hide();
             that.showDetails(false);
             that.events.afterRender.fire();
         });
-        that.detailsDC.events.onError.addListener(function (operation, message) {
-            that.locate("newListRow").hide();
-        });
         that.details.events.onCancel.addListener(function () {
             hideDetails(that.dom);
             that.locate("newListRow").hide();
         });
+        
         that.list.events.onSelect.addListener(function (model) {
             loadDetails(model, that.detailsDC);
         });
@@ -101,8 +100,7 @@ cspace = cspace || {};
             details: {}
         };
         that.list = fluid.initSubcomponent(that, "list", [
-            that.options.selectors.list, 
-            {
+            that.options.selectors.list, {
                 items: that.model.list,
                 selectionIndex: -1
             },
@@ -113,11 +111,9 @@ cspace = cspace || {};
         that.detailsDC = fluid.initSubcomponent(that, "dataContext", [that.model.details, fluid.COMPONENT_OPTIONS]);
         that.details = fluid.initSubcomponent(that, "details", [
             that.options.selectors.details,
+            that.detailsDC,
             that.detailsApplier,
-            {
-                uispec: that.uispec.details,
-                dataContext: that.detailsDC
-            }
+            that.uispec.details
         ]);
         
         that.showDetails = function (newDetails) {
@@ -147,14 +143,6 @@ cspace = cspace || {};
         },
         details: {
             type: "cspace.recordEditor"
-        },
-        listDataContext: {
-            type: "cspace.dataContext",
-            options: {
-                recordType: "",
-                dataType: "json",
-                fileExtension: ""
-            }
         },
         dataContext: {
             type: "cspace.dataContext",

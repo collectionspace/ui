@@ -33,8 +33,6 @@ cspace = cspace || {};
             setupFuncs: [null, "cspace.objectTabSetup"]
         };
         var reOpts = {
-            dataContext: "{pageBuilder}.dataContext",
-            uispec: "{pageBuilder}.uispec.recordEditor",
             selectors: {identificationNumber: ".csc-loanOut-loanOutNumber"},
             strings: {identificationNumberRequired: "Please specify a Loan Out Number"}
         };
@@ -54,7 +52,8 @@ cspace = cspace || {};
             },
             recordEditor: {
                 funcName: "cspace.recordEditor",
-                args: [".csc-loanOut-template", "{pageBuilder}.applier", reOpts]
+                args: [".csc-loanOut-template", "{pageBuilder}.dataContext", 
+                	"{pageBuilder}.applier", "{pageBuilder}.uispec.recordEditor", reOpts]
             },
             sidebar: {
                 funcName: "cspace.sidebar",

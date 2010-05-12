@@ -9,8 +9,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jqUnit, jQuery, jqMock, cspace, fluid, start, stop, ok, expect*/
+"use strict";
 
-var recordEditorTester = function(){
+(function () {
     // jqMock requires jqUnit.ok to exist
     jqUnit.ok = ok;
 
@@ -26,17 +27,14 @@ var recordEditorTester = function(){
             }
         };
         var dc = cspace.dataContext(testModel, {baseUrl: "."});
-        var testOpts = {
-            uispec: {
-                ".csc-test-1": "${fields.field1}",
-                ".csc-test-2": "${fields.field2}",
-                ".csc-test-3": "${fields.field3}"
-            },
-            dataContext: dc
+        var uispec = {
+            ".csc-test-1": "${fields.field1}",
+            ".csc-test-2": "${fields.field2}",
+            ".csc-test-3": "${fields.field3}"
         };
         var applier = fluid.makeChangeApplier(testModel);
-        var recordEditor = cspace.recordEditor("#main", applier, testOpts);
-        jqUnit.assertEquals("foo", testModel.fields.field1, $(".csc-test-1").val());
+        var recordEditor = cspace.recordEditor("#main", dc, applier, uispec);
+        jqUnit.assertEquals("foo", testModel.fields.field1, jQuery(".csc-test-1").val());
     });
 
     recordEditorTest.test("Delete", function () {
@@ -50,30 +48,16 @@ var recordEditorTester = function(){
 
         var testModel = {
             csid: "123.456.789",
-            fields: {
-                field1: "A",
-                field2: "B",
-                field3: "C"
-            }
+            fields: {}
         };
         var dc = cspace.dataContext(testModel, {baseUrl: "http://mymuseum.org", recordType: "thisRecordType"});
-        var testOpts = {
-            uispec: {
-                ".csc-test-1": "${fields.field1}",
-                ".csc-test-2": "${fields.field2}",
-                ".csc-test-3": "${fields.field3}"
-            },
-            dataContext: dc
-        };
+        var uispec = {};
         var applier = fluid.makeChangeApplier(testModel);
-        var recordEditor = cspace.recordEditor("#main", applier, testOpts);
+        var recordEditor = cspace.recordEditor("#main", dc, applier, uispec);
         recordEditor.remove();
         ajaxMock.verify();
         ajaxMock.restore();
     });
-};
 
-(function () {
-    recordEditorTester();
 }());
 

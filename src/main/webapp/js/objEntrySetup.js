@@ -23,8 +23,6 @@ cspace = cspace || {};
             setupFuncs: [null, "cspace.objectTabSetup"]
         };
         var reOpts = {
-            dataContext: "{pageBuilder}.dataContext",
-            uispec: "{pageBuilder}.uispec.recordEditor",
             selectors: {identificationNumber: ".csc-object-identification-object-number"},
             strings: {identificationNumberRequired: "Please specify an Identification Number"}
         };
@@ -44,7 +42,8 @@ cspace = cspace || {};
             },
             recordEditor: {
                 funcName: "cspace.recordEditor",
-                args: [".csc-object-entry-template", "{pageBuilder}.applier", reOpts]
+                args: [".csc-object-entry-template", "{pageBuilder}.dataContext", 
+                	"{pageBuilder}.applier", "{pageBuilder}.uispec.recordEditor", reOpts]
             },
             sidebar: {
                 funcName: "cspace.sidebar",

@@ -8,7 +8,8 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid*/
+/*global jQuery, fluid, cspace*/
+"use strict";
 
 cspace = cspace || {};
 
@@ -31,27 +32,32 @@ cspace = cspace || {};
     };
 
     /*
-     * that: the DataContext object
-     * operation: string ("create", "fetch", "update", "remove"); will be displayed in the case of an error
+     * operation: string ("create", "fetch", "update", "remove", "addRelations"); will be displayed in the case of an error
+     * options: 
      * successEvent: event to fire after success
+     * events: 
      * csid: the csid to fetch (optional)
      * data: the model or new relations to transmit (optional)
      */
-    var ajax = function (operation, options, successEvent, errorEvent, csid, data) {
+    var ajax = function (operation, options, successEvent, events, csid, data) {
         var opts = {
             url: buildUrl(operation, options.baseUrl, options.recordType, csid, options.fileExtension),
             type: types[operation],
             dataType: options.dataType,
             success: function (data, textStatus) {
                 successEvent.fire(data);
+                if (operation !== "fetch") {
+                    events.afterSave.fire(data);
+                }
             },
             error: function (xhr, textStatus, errorThrown) {
-                errorEvent.fire(operation, textStatus);
+                events.onError.fire(operation, textStatus);
             }
         };
-        if (operation === "create" || operation === "update" || operation === "addRelations") {
+        if (data) {
             opts.data = JSON.stringify(data);
         }
+        
         jQuery.ajax(opts);
     };
 
@@ -82,23 +88,23 @@ cspace = cspace || {};
         };
         
         that.fetch = function (csid) {
-            ajax("fetch", that.options, that.events.afterFetch, that.events.onError, csid);
+            ajax("fetch", that.options, that.events.afterFetch, that.events, csid);
         };
         
         that.update = function () {
-            ajax("update", that.options, that.events.afterUpdate, that.events.onError, that.model.csid, that.model);
+            ajax("update", that.options, that.events.afterUpdate, that.events, that.model.csid, that.model);
         };
         
         that.create = function () {
-            ajax("create", that.options, that.events.afterCreate, that.events.onError, null, that.model);
+            ajax("create", that.options, that.events.afterCreate, that.events, null, that.model);
         };
 
         that.remove = function (csid) {
-            ajax("remove", that.options, that.events.afterRemove, that.events.onError, csid);
+            ajax("remove", that.options, that.events.afterRemove, that.events, csid);
         };
 
         that.addRelations = function (newRelations) {
-            ajax("addRelations", that.options, that.events.afterAddRelations, that.events.onError, null, newRelations);
+            ajax("addRelations", that.options, that.events.afterAddRelations, that.events, null, newRelations);
         };
 
         that.baseUrl = function () {
@@ -117,6 +123,7 @@ cspace = cspace || {};
             afterFetch: null,  //  data
             afterUpdate: null,  //  data
             afterAddRelations: null,  //  data
+            afterSave: null,
             onError: null      // operation["create", "remove", "fetch", "update"], message
         },
         baseUrl: "../../chain",

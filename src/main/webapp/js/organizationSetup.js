@@ -27,8 +27,6 @@ cspace = cspace || {};
             uispec: "{pageBuilder}.uispec.titleBar"
         };
         var reOpts = {
-            dataContext: "{pageBuilder}.dataContext",
-            uispec: "{pageBuilder}.uispec.recordEditor",
             selectors: {identificationNumber: ".csc-organizationAuthority-displayName"},
             strings: {identificationNumberRequired: "Please specify a Display Name"}
         };
@@ -47,7 +45,8 @@ cspace = cspace || {};
             },
             recordEditor: {
                 funcName: "cspace.recordEditor",
-                args: [".csc-organizationAuthority-template", "{pageBuilder}.applier", reOpts]
+                args: [".csc-organizationAuthority-template", "{pageBuilder}.dataContext",
+                	"{pageBuilder}.applier", "{pageBuilder}.uispec.recordEditor", reOpts]
             },
             sidebar: {
                 funcName: "cspace.sidebar",

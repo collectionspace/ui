@@ -31,6 +31,7 @@ cspace = cspace || {};
             pageType: "object-tab"
         };
         var reOpts = {
+        	// These are now not optional to the RecordEditor and must be passed as args.
             dataContext: "{pageBuilder}.dataContext",
             uispec: "{pageBuilder}.uispec.newRecord"
         };
