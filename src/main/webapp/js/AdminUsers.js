@@ -14,29 +14,23 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var validate = function (domBinder, userDetailsApplier, passwordValidator) {
+    var validate = function (domBinder, userDetailsApplier) {
         // In the default configuration, the email address used as the userid.
         // If all required fields are present and the userid is not set, use the email
         if (!domBinder.locate("userId").val()) {
             userDetailsApplier.requestChange("fields.userId", domBinder.locate("email").val());
         }
         
-        var password = domBinder.locate("password");
-        if (password.is(":visible") && (password.val() !== domBinder.locate("passwordConfirm").val())) {
+        if (domBinder.locate("password").is(":visible") && (domBinder.locate("password").val() !== domBinder.locate("passwordConfirm").val())) {
             cspace.util.displayTimestampedMessage(domBinder, "Passwords don't match");
             return false;
         }
-        
-        if (!passwordValidator.validateLength(password)) {
-            return false;
-        }
-
         return true;
     };
-       
-    var addNewUser = function (that) {
+    
+    var addNewUser = function (container, userListEditor, domBinder, uispec) {
         return function(e){
-            fluid.model.copyModel(that.userListEditor.details.model,{
+            fluid.model.copyModel(userListEditor.details.model,{
                 fields: {
                     userId: "",
                     screenName: "", 
@@ -44,17 +38,13 @@ cspace = cspace || {};
                     email: "",
                     // TODO: This access into the UISpec is completely inappropriate
                     // We need a better way of initializing to the default
-                    status: that.options.uispec.details[".csc-user-status"]["default"]
+                    status: uispec.details[".csc-user-status"]["default"]
                 }
             });
-            that.userListEditor.details.refreshView();
-
-            if (!that.passwordValidator) {
-                that.passwordValidator = cspace.passwordValidator(that.container);
-            }
-            
-            that.userListEditor.showDetails(true);
-            that.userListEditor.showNewListRow(true);
+            userListEditor.details.refreshView();
+            cspace.passwordValidator(container);
+            userListEditor.showDetails(true);
+            userListEditor.showNewListRow(true);
         };
     };
     
@@ -96,10 +86,10 @@ cspace = cspace || {};
         that.locate("searchButton").click(submitSearch(that.dom, that.userListEditor));
         that.locate("unSearchButton").click(restoreUserList(that.userListEditor.listDC, that.dom)).hide();
         
-        that.locate("newUser").click(addNewUser(that));
+        that.locate("newUser").click(addNewUser(that.container, that.userListEditor, that.dom, that.options.uispec));
 
         that.userListEditor.details.events.onSave.addListener(function () {
-            return validate(that.dom, that.userListEditor.detailsApplier, that.passwordValidator);
+            return validate(that.dom, that.userListEditor.detailsApplier);
         });
         that.userListEditor.events.pageReady.addListener(function () {
             that.events.afterRender.fire();
@@ -110,7 +100,6 @@ cspace = cspace || {};
         var that = fluid.initView("cspace.adminUsers", container, options);
         that.userListEditor = fluid.initSubcomponent(that, "userListEditor", [that.container, that.options.recordType, 
             that.options.uispec, fluid.COMPONENT_OPTIONS]);
-        that.passwordValidator = null;
         bindEventHandlers(that);
         return that;
     };

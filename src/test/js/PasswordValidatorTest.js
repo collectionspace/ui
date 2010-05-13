@@ -40,7 +40,7 @@ var passwordValidatorTester = function(){
         jqUnit.notVisible("On exact min length password, message should not be visible", msg);
         pw.val("12345678901234567890123").change();
         jqUnit.notVisible("On exact max length password, message should not be visible", msg);
-        pw.val("1234567890123456789012345").change();
+        pw.val("123456789012345678901234").change();
         jqUnit.isVisible("On too-long password, message should be visible", msg);
     });
 
@@ -66,7 +66,7 @@ var passwordValidatorTester = function(){
         jqUnit.notVisible("To begin, message should not be visible", msg);
         pw.val("123").change();
         jqUnit.isVisible("On short password, message should be visible", msg);
-        jqUnit.assertEquals("Message should include default lengths", "Passwords must be between 8 and 24 characters in length.", $.trim(msg.text()));
+        jqUnit.assertEquals("Message should include default lengths", "Passwords must be between 8 and 23 characters in length.", $.trim(msg.text()));
     });
 
     passwordValidatorTest.test("Message text: custom lengths", function () {
