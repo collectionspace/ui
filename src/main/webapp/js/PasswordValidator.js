@@ -51,6 +51,6 @@ cspace = cspace || {};
             length: "Passwords must be between %min and %max characters in length."
         },
         minLength: 8,
-        maxLength: 23
+        maxLength: 24
     });
 }) (jQuery, fluid);
