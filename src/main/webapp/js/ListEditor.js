@@ -154,7 +154,7 @@ cspace = cspace || {};
             url: options.baseUrl + recordType,
             dataType: "json",
             success: function (data) {
-                model.list = data.items;
+                fluid.model.copyModel(model.list, data.items);
                 if (callback) {
                     callback();
                 }
