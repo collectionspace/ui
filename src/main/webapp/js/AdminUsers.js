@@ -101,7 +101,7 @@ cspace = cspace || {};
         that.userListEditor.details.events.onSave.addListener(function () {
             return validate(that.dom, that.userListEditor.detailsApplier, that.passwordValidator);
         });
-        that.userListEditor.events.afterRender.addListener(function () {
+        that.userListEditor.events.pageReady.addListener(function () {
             that.events.afterRender.fire();
         });
     };

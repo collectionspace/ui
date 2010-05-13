@@ -26,41 +26,61 @@ cspace = cspace || {};
     };
 
     var bindEventHandlers = function (that) {
-        that.events.afterRender.addListener(function () {
-            var list = that.container;
-            var rows = that.locate("row");
-            list.fluid("selectable", {
-                selectableElements: rows,
-                onSelect: function (row) {
-                    if (row) {
-                        rows.removeClass(that.options.styles.selecting);
-                        $(row).addClass(that.options.styles.selecting);
-                    }
-                },
-                onUnselect: function (row) {
-                    if (row) {
-                        $(row).removeClass(that.options.styles.selecting);
-                    }
+        var list = that.container;
+        var rows = that.locate("row");
+        list.fluid("selectable", {
+            selectableElements: rows,
+            onSelect: function (row) {
+                if (row) {
+                    rows.removeClass(that.options.styles.selecting);
+                    $(row).addClass(that.options.styles.selecting);
                 }
-            });
-            rows.mouseover(function (event) {
-                rows.removeClass(that.options.styles.selecting);
-                $(event.currentTarget).addClass(that.options.styles.selecting);
-            });
-    
-            rows.click(function (event) {
-                selectItem(event.currentTarget, that.model, that.dom, that.events, that.options.styles);
-            });
-    
-            rows.fluid("activatable", function (event) {
-                selectItem(event.currentTarget, that.model, that.dom, that.events, that.options.styles);
-            });
+            },
+            onUnselect: function (row) {
+                if (row) {
+                    $(row).removeClass(that.options.styles.selecting);
+                }
+            }
+        });
+        rows.mouseover(function (event) {
+            rows.removeClass(that.options.styles.selecting);
+            $(event.currentTarget).addClass(that.options.styles.selecting);
+        });
+
+        rows.click(function (event) {
+            selectItem(event.currentTarget, that.model, that.dom, that.events, that.options.styles);
+        });
+
+        rows.fluid("activatable", function (event) {
+            selectItem(event.currentTarget, that.model, that.dom, that.events, that.options.styles);
         });
     };
 
-    var setupRecordList = function (that) {
-        bindEventHandlers(that);
-        that.refreshView();
+    var renderList = function (that) {
+        var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
+        var protoTree = cspace.renderUtils.buildProtoTree(that.uispec, that);
+        var tree = expander(protoTree);
+        if (that.model.items.length <= 0) {
+            tree.children[0].children = [{
+                ID: that.options.selectors.nothingYet,
+                value: that.options.strings.nothingYet
+            }];
+        }
+        var selectors = {};
+        cspace.renderUtils.buildSelectorsFromUISpec(that.uispec, selectors);
+        selectors[that.options.selectors.nothingYet] = that.options.selectors.nothingYet;
+        var renderOpts = {
+            cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(selectors, {}),
+            model: that.model,
+            // debugMode: true,
+            autoBind: true
+        };
+        if (!that.renderTemplate) {
+            that.renderTemplate = fluid.selfRender(that.container, tree, renderOpts);
+        } else {
+            fluid.reRender(that.renderTemplate, that.container, tree, renderOpts);
+        }
+        that.locate("numberOfItems").text("(" + that.model.items.length + ")");
     };
 
     cspace.recordList = function (container, model, uispec, options) {
@@ -68,34 +88,12 @@ cspace = cspace || {};
         that.model = model;
         that.uispec = uispec;
         that.refreshView = function () {
-            var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
-            var protoTree = cspace.renderUtils.buildProtoTree(that.uispec, that);
-            var tree = expander(protoTree);
-            if (that.model.items.length <= 0) {
-                tree.children[0].children = [{
-                    ID: that.options.selectors.nothingYet,
-                    value: that.options.strings.nothingYet
-                }];
-            }
-            var selectors = {};
-            cspace.renderUtils.buildSelectorsFromUISpec(that.uispec, selectors);
-            selectors[that.options.selectors.nothingYet] = that.options.selectors.nothingYet;
-            var renderOpts = {
-                cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(selectors, {}),
-                model: that.model,
-                // debugMode: true,
-                autoBind: true
-            };
-            if (!that.renderTemplate) {
-                that.renderTemplate = fluid.selfRender(that.container, tree, renderOpts);
-            } else {
-                fluid.reRender(that.renderTemplate, that.container, tree, renderOpts);
-            }
-            that.locate("numberOfItems").text("(" + that.model.items.length + ")");
+            renderList(that);
+            bindEventHandlers(that);
             that.events.afterRender.fire();
         };
 
-        setupRecordList(that);
+        that.refreshView();
         return that;
     };
     

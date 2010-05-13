@@ -56,7 +56,9 @@ cspace = cspace || {};
     var bindEventHandlers = function (that) {
     	
     	that.detailsDC.events.afterSave.addListener(function () {
-    		refreshRecordList(that.model, that.list, that.options.baseUrl, that.recordType);
+            that.options.listPopulationStrategy(that.model, that.recordType, that.options, function (data) {
+                that.list.refreshView();
+            });
     	});
         that.detailsDC.events.afterCreate.addListener(function () {
             that.locate("newListRow").hide();
@@ -72,7 +74,6 @@ cspace = cspace || {};
         that.details.events.afterRender.addListener(function () {
             that.locate("newListRow").hide();
             that.showDetails(false);
-            that.events.afterRender.fire();
         });
         that.details.events.onCancel.addListener(function () {
             hideDetails(that.dom);
@@ -87,8 +88,7 @@ cspace = cspace || {};
     var setUpListEditor = function (that) {
         that.locate("newListRow").hide();
         bindEventHandlers(that);
-        hideDetails(that.dom);
-        that.events.afterRender.fire();
+        that.events.pageReady.fire();
     };
     
     cspace.listEditor = function (container, recordType, uispec, options) {
@@ -96,25 +96,20 @@ cspace = cspace || {};
         that.recordType = recordType;
         that.uispec = uispec;
         that.model = {
-            list: initializeRecordListData(that.options.baseUrl, that.recordType),
+            list: [],
             details: {}
         };
-        that.list = fluid.initSubcomponent(that, "list", [
-            that.options.selectors.list, {
-                items: that.model.list,
-                selectionIndex: -1
-            },
-            that.uispec.list
-        ]);
 
         that.detailsApplier = fluid.makeChangeApplier(that.model.details);
         that.detailsDC = fluid.initSubcomponent(that, "dataContext", [that.model.details, fluid.COMPONENT_OPTIONS]);
         that.details = fluid.initSubcomponent(that, "details", [
-            that.options.selectors.details,
+            $(that.options.selectors.details, that.container),
             that.detailsDC,
             that.detailsApplier,
-            that.uispec.details
+            that.uispec.details,
+            fluid.COMPONENT_OPTIONS
         ]);
+        hideDetails(that.dom);
         
         that.showDetails = function (newDetails) {
             that.locate("detailsNone").hide();
@@ -133,8 +128,45 @@ cspace = cspace || {};
             newListRow[show ? "show" : "hide"]();
         };
 
-        setUpListEditor(that);
+        that.options.listPopulationStrategy(that.model, that.recordType, that.options, function () {
+            that.list = fluid.initSubcomponent(that, "list", [
+                $(that.options.selectors.list, container),
+                {
+                    items: that.model.list,
+                    selectionIndex: -1
+                },
+                that.uispec.list,
+                fluid.COMPONENT_OPTIONS
+            ]);
+            setUpListEditor(that);
+        });
         return that;
+    };
+
+    /*
+     * @param {Object} model        The data model of the component
+     * @param {String} recordType   The string representing the record type
+     * @param {Object} options      The options block of the calling component
+     * @param {Function} callback   An optional callback function that will be called on success
+     */
+    cspace.listEditor.fetchData = function (model, recordType, options, callback) {
+        $.ajax({
+            url: options.baseUrl + recordType,
+            dataType: "json",
+            success: function (data) {
+                model.list = data.items;
+                if (callback) {
+                    callback();
+                }
+            }
+        });
+    };
+
+    cspace.listEditor.receiveData = function (model, recordType, options, callback) {
+        model.list = options.data;
+        if (callback) {
+            callback();
+        }
     };
 
     fluid.defaults("cspace.listEditor", {
@@ -165,10 +197,12 @@ cspace = cspace || {};
             hideOnCreate: ".csc-details-hideOnCreate",
             hideOnEdit: ".csc-details-hideOnEdit"
         },
-         events: {
-             afterRender: null
-         },
-         baseUrl: "../../chain/"
+        events: {
+            pageReady: null
+        },
+        listPopulationStrategy: cspace.listEditor.fetchData,
+        baseUrl: "../../chain/", // used by the cspace.listEditor.fetchData strategy
+        data: [] // used by the cspace.listEditor.receiveData strategy
     });
 
 })(jQuery, fluid);

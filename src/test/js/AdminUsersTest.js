@@ -35,12 +35,18 @@ var adminUsersTester = function(){
                 options: {
                     baseUrl: "../../main/webapp/html/data/"
                 }
+            },
+            listeners: {
+                afterRender: function () {
+                    jqUnit.assertEquals("User list model should have right number of entries", 4, adminUsers.userListEditor.model.list.length);
+                    jqUnit.assertEquals("User list model should contain expected user", "Megan Forbes", adminUsers.userListEditor.model.list[1].screenName);
+                    jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, $(".csc-recordList-row", "#main").length);
+                    start();
+                }
             }
         };
         adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
-        jqUnit.assertEquals("User list model should have right number of entries", 4, adminUsers.userListEditor.model.list.length);
-        jqUnit.assertEquals("User list model should contain expected user", "Megan Forbes", adminUsers.userListEditor.model.list[1].screenName);
-        jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, $(".csc-recordList-row", "#main").length);
+        stop();
     });
 };
 
