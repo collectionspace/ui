@@ -17,40 +17,41 @@ cspace = cspace || {};
     cspace.objectTabSetup = function (applier) {
         var options = {
             pageSpec: {
-                relatedRecords: {
+                list: {
                     href: "objectTabRecordListTemplate.html",
                     templateSelector: ".csc-object-tab-record-list",
                     targetSelector: ".div-for-list-of-records"
-                }
-              //  newRecord: {
-              //      href: "objectTabSchemaTemplate.html",
-              //      templateSelector: ".csc-object-tab-schema",
-              //      targetSelector: ".div-for-schema"
-              //  } 
+                },
+                details: {
+                    href: "ObjectEntryTemplate.html",
+                    templateSelector: ".csc-object-entry-template",
+                    targetSelector: ".div-for-recordEditor"
+                } 
             },
             pageType: "object-tab"
         };
-        var reOpts = {
-        	// These are now not optional to the RecordEditor and must be passed as args.
-            dataContext: "{pageBuilder}.dataContext",
-            uispec: "{pageBuilder}.uispec.newRecord"
+        var leOpts = {
+            listPopulationStrategy: cspace.listEditor.receiveData,
+            data: applier.model.relations,
+            dataContext: {
+                options: {
+                    recordType: "objects"
+                }
+            }
         };
-        var rrOpts = {
-            recordType: "objects",
-            currentRecordType: "objects",
-            uispec: "{pageBuilder}.uispec.relatedRecords"
-        };
+        if (cspace.util.isLocal()) {
+            leOpts.dataContext.options.baseUrl = "data/";
+            leOpts.dataContext.options.fileExtension = ".json";
+        }
         var dependencies = {
-            relatedRecords: {
-                funcName: "cspace.relatedRecordsList",
-                args: [".div-for-list-of-records", applier, rrOpts]
-            } //,
-         //   newRecord: {
-         //       funcName: "cspace.recordEditor",
-         //       args: [".div-for-schema", applier, reOpts]
-         //   }
+            listEditor: {
+                funcName: "cspace.listEditor",
+                args: [".csc-object-tab",
+                    "objects",
+                    "{pageBuilder}.uispec",
+                    leOpts]
+            }
         };
         cspace.pageBuilder(dependencies, options);            
     };
-
 })(jQuery, fluid);

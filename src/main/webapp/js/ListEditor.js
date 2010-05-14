@@ -163,7 +163,7 @@ cspace = cspace || {};
     };
 
     cspace.listEditor.receiveData = function (model, recordType, options, callback) {
-        model.list = options.data;
+        fluid.model.copyModel(model.list, options.data);
         if (callback) {
             callback();
         }

@@ -166,8 +166,11 @@ cspace = cspace || {};
             var uispecUrl = (cspace.util.isLocal() ? "./uispecs/" + that.options.pageType + "/uispec.json" : "../../chain/" + that.options.pageType + "/uispec");
 
             // TODO:    Workaround for CSPACE-1320:
-            if (that.options.pageType == "admin") {
+            if (that.options.pageType === "admin") {
                 uispecUrl = "./uispecs/admin/uispec.json";
+            } 
+            else if (that.options.pageType === "object-tab") {
+                uispecUrl = "./uispecs/object-tab/uispec.json";
             }
             
             jQuery.ajax({
