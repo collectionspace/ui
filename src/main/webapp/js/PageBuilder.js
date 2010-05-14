@@ -71,6 +71,8 @@ cspace = cspace || {};
     };
 
     var invokeDependencies = function (that) {
+        that.events.onDependencySetup.fire(that.uispec);
+        
         that.components = [];
         for (var region in that.dependencies) {
             if (that.dependencies.hasOwnProperty(region)) {
@@ -135,7 +137,7 @@ cspace = cspace || {};
 
         fluid.mergeComponentOptions(that, "cspace.pageBuilder", options);
         fluid.instantiateFirers(that, that.options);
-
+        
         // TODO: We should consider refactoring this work. We have several calls to the server that need
         //       to happen synchronously - perhaps it should be rolled into a single call.
         
@@ -162,8 +164,12 @@ cspace = cspace || {};
             
             
         // Fetch UI spec if required
-        if (!that.uispec && that.options.pageType) {            
-            var uispecUrl = (cspace.util.isLocal() ? "./uispecs/" + that.options.pageType + "/uispec.json" : "../../chain/" + that.options.pageType + "/uispec");
+        if (!that.uispec && that.options.pageType) {
+            // TODO: Once we have changed our local versus remote strategy this can also be cleaned up.
+            //       Ideally, we would default to the server url and could configure for the local page and for tests
+            var urlTemplate = that.options.uispecUrl ||
+                (cspace.util.isLocal() ? "./uispecs/%pageType/uispec.json" : "../../chain/%pageType/uispec");                                
+            var uispecUrl = fluid.stringTemplate(urlTemplate, {pageType: that.options.pageType});
 
             // TODO:    Workaround for CSPACE-1320:
             if (that.options.pageType === "admin") {
@@ -192,17 +198,20 @@ cspace = cspace || {};
         } else {
             setUpPageBuilder(that);
         }
+        
+        return that;
     };
 
     fluid.defaults("cspace.pageBuilder", {
         events: {
-            pageReady: null
+            pageReady: null,
+            onDependencySetup: null
         },
         dataContext: {
             type: "cspace.dataContext"
         },        
         htmlOnly: false,
-        uispec: {},
+        uispecUrl: "",
         pageType: ""
     });
 })(jQuery, fluid);

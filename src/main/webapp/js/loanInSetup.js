@@ -15,8 +15,20 @@ cspace = cspace || {};
 
 (function ($) {
 
-    cspace.loanInSetup = function () {
-
+    /**
+     * options: {
+     *     pageBuilderOpts: {
+     *                    ....
+     *     },
+     *     sideBarOpts: {
+     *                    ....
+     *     },
+     *     templateUrlPrefix: ""
+     * }
+     */
+    cspace.loanInSetup = function (options) {
+        options = options || {};
+        
         var tbOpts = {
             uispec: "{pageBuilder}.uispec.titleBar"
         };
@@ -36,10 +48,9 @@ cspace = cspace || {};
             selectors: {identificationNumber: ".csc-loanIn-loanInNumber"},
             strings: {identificationNumberRequired: "Please specify a Loan In Number"}
         };
-        var sbOpts = {
-            uispec: "{pageBuilder}.uispec.sidebar",
-            currentRecordType: "loanin"
-        };
+        var sbOpts = options.sideBarOpts || {};
+        sbOpts.uispec = "{pageBuilder}.uispec.sidebar";
+        sbOpts.currentRecordType = "loanin";
         
         var dependencies = {
             titleBar: {
@@ -60,55 +71,63 @@ cspace = cspace || {};
                 args: [".csc-sidebar", "{pageBuilder}.applier", sbOpts]
             }
         };
-        var options = {
-            dataContext: {
-                options: {
-                    recordType: "loanin"
-                }
-            },
-            pageSpec: {
-                header: {
-                    href: "header.html",
-                    templateSelector: ".csc-header-template",
-                    targetSelector: ".csc-header-container"
-                },
-                titleBar: {
-                    href: "loanInTitleBar.html",
-                    templateSelector: ".csc-loanIn-titleBar-template",
-                    targetSelector: ".csc-loanIn-titleBar-container"
-                },
-                tabs: {
-                    href: "tabsTemplate.html",
-                    templateSelector: ".csc-tabs-template",
-                    targetSelector: ".csc-tabs-container"
-                },
-                dateEntry: {
-                    href: "loanInTemplate.html",
-                    templateSelector: ".csc-loanIn-template",
-                    targetSelector: ".csc-record-edit-container"
-                },
-                sidebar: {
-                    href: "right-sidebar.html",
-                    templateSelector: ".csc-right-sidebar",
-                    targetSelector: ".csc-sidebar-container"
-                },
-                footer: {
-                    href: "footer.html",
-                    templateSelector: ".csc-footer",
-                    targetSelector: ".csc-footer-container"
-                }
-            },
-            pageType: "loanin"
+        
+        var fullUrl = function (templateName) {
+            return options.templateUrlPrefix ? options.templateUrlPrefix + templateName : templateName;
         };
+            
+        var pageBuilderOpts = options.pageBuilderOpts || {};
+        pageBuilderOpts.dataContext = {
+            options: {
+                recordType: "loanin"
+            }
+        };
+        
+        pageBuilderOpts.pageSpec = {
+            header: {
+                href: fullUrl("header.html"),
+                templateSelector: ".csc-header-template",
+                targetSelector: ".csc-header-container"
+            },
+            titleBar: {
+                href: fullUrl("loanInTitleBar.html"),
+                templateSelector: ".csc-loanIn-titleBar-template",
+                targetSelector: ".csc-loanIn-titleBar-container"
+            },
+            tabs: {
+                href: fullUrl("tabsTemplate.html"),
+                templateSelector: ".csc-tabs-template",
+                targetSelector: ".csc-tabs-container"
+            },
+            dateEntry: {
+                href: fullUrl("loanInTemplate.html"),
+                templateSelector: ".csc-loanIn-template",
+                targetSelector: ".csc-record-edit-container"
+            },
+            sidebar: {
+                href: fullUrl("right-sidebar.html"),
+                templateSelector: ".csc-right-sidebar",
+                targetSelector: ".csc-sidebar-container"
+            },
+            footer: {
+                href: fullUrl("footer.html"),
+                templateSelector: ".csc-footer",
+                targetSelector: ".csc-footer-container"
+            }
+        };
+        
+        pageBuilderOpts.pageType = "loanin";
+
         var csid = cspace.util.getUrlParameter("csid");
         if (csid) {
-            options.csid = csid;
+            pageBuilderOpts.csid = csid;
         }
         if (cspace.util.isLocal()) {
-            options.dataContext.options.baseUrl = "data";
-            options.dataContext.options.fileExtension = ".json";
+            pageBuilderOpts.dataContext.options.baseUrl = "data";
+            pageBuilderOpts.dataContext.options.fileExtension = ".json";
         }
-        cspace.pageBuilder(dependencies, options);
+        
+        return cspace.pageBuilder(dependencies, pageBuilderOpts);
     };
     
 })(jQuery);

@@ -53,11 +53,11 @@ cspace = cspace || {};
             that.options.uispec]);
 
         if (!cspace.addDialogInst) {
-            var dlgOpts = {
-                applier: that.applier,
-                currentRecordType: that.options.currentRecordType
-            };
-            cspace.addDialogInst = cspace.searchToRelateDialog(that.container, that.applier, dlgOpts);
+            var dlgOpts = that.options.searchToRelateDialog.options || {};
+            dlgOpts.applier = that.applier;
+            dlgOpts.currentRecordType = that.options.currentRecordType;
+            
+            cspace.addDialogInst = fluid.initSubcomponent(that, "searchToRelateDialog", [that.container, that.applier, dlgOpts]);
         }
 
         bindEventHandlers(that);
@@ -68,6 +68,9 @@ cspace = cspace || {};
         recordList: {
             type: "cspace.recordList"
         },
+        searchToRelateDialog: {
+            type: "cspace.searchToRelateDialog"
+        },      
         selectors: {
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",

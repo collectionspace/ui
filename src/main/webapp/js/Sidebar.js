@@ -34,17 +34,21 @@ cspace = cspace || {};
             that.integratedAuthorities.refreshView();
         });
 
+        var rpOpts = that.options.relatedRecordsList.options || {};
+        rpOpts.recordType = "procedures";
+        rpOpts.currentRecordType = that.options.currentRecordType;
+        rpOpts.uispec = that.options.uispec.relatedProcedures;
         that.relatedProcedures = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedProcedures,
               that.applier,
-             {recordType: "procedures",
-              currentRecordType: that.options.currentRecordType,
-              uispec: that.options.uispec.relatedProcedures}]);
+              rpOpts]);
 
+        var roOpts = that.options.relatedRecordsList.options || {};
+        roOpts.recordType = "objects";
+        roOpts.currentRecordType = that.options.currentRecordType;
+        roOpts.uispec = that.options.uispec.relatedObjects;
         that.relatedObjects = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedObjects,
               that.applier,
-             {recordType: "objects",
-              currentRecordType: that.options.currentRecordType,
-              uispec: that.options.uispec.relatedObjects}]);
+              roOpts]);
 
         return that;
     };
