@@ -142,6 +142,7 @@ cspace = cspace || {};
                 that.events.onCancel.fire();
             });
 			cspace.util.setZIndex();
+			cspace.util.corner();
         });
 
         that.dataContext.events.onError.addListener(makeDCErrorHandler(that));

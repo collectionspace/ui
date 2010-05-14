@@ -41,7 +41,8 @@ function getRadioValue() {
 
 
 jQuery(document).ready(function() {
-		
+
+	
 	$currentFocus = null;
 	jQuery(':input').focus( function() {
 		$currentFocus = this;
@@ -82,15 +83,5 @@ jQuery(document).ready(function() {
 
 			jQuery('#primary').val($switch);
     });
-	
-	
-	/*if ($.browser.msie) {
-	   var zIndexNumber = 999;
-	   $("div").each(function() {
-			   $(this).css('zIndex', zIndexNumber);
-			   zIndexNumber -= 1;
-	   });
-	}*/
-	
-	
+		
 });

@@ -71,5 +71,9 @@ cspace = cspace || {};
 		}
 	};
 	
+	cspace.util.corner = function() {
+
+	};
+	
 	
 })(jQuery, fluid);
