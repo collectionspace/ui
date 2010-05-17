@@ -1,4 +1,4 @@
-/* CollectionSpace 0.6 default CSS selectors */
+/* CollectionSpace 0.7 default CSS selectors */
 
 /* core HTML elements*/
 html{font-size: 100%;} 
@@ -9,7 +9,8 @@ p {margin-bottom:1em;}
 ul {margin:0; width:auto;}
 textarea {overflow:auto;}
 :focus {outline: none;}
-
+select {border:1px solid #C7CFD4;}
+table select {border:0px solid #C7CFD4;}
 
 /* input form selectors */
 input, textarea {font-family:inherit; font-size:12px; font-weight:inherit; line-height:15px; padding:0; margin:0; /**margin-bottom:0px; */
@@ -26,22 +27,14 @@ input[type="button"].primary:hover, input[type="submit"].primary:hover	{backgrou
 input[type="button"].tertiary, input[type="submit"].tertiary {height:17px; padding-left:4px; padding-right:4px; font-size:11px; background-color:#FFF; color:#73AA4F;}
 input[type="button"].tertiary:hover, input[type="submit"].tertiary:hover {background-color:#FFFBCC;}
 
-
 .button-row input[type="button"], .button-row-right input[type="button"] {margin-left:10px; float:right; margin-top:10px;}
 .button-row-left input[type="button"], .button-row-left-center input[type="button"] {margin-right:10px; margin-top:10px;}
 .button-row-left-center {margin-left:auto; margin-right:auto; width:auto;}
 
 
-
-
-
-
-select {border:1px solid #C7CFD4;}
-table select {border:0px solid #C7CFD4;}
-
 /*   anchor link colors and behaviors   */
 a.link {color:#6E9FCE; text-decoration:none;}
-a.link:hover, a.link:focus {/*color:#6E9FCE;*/ background-color:#F0F5FB; text-decoration:underline;}
+a.link:hover, a.link:focus {/*color:#6E9FCE;*/ /*background-color:#F0F5FB;*/ text-decoration:underline;}
 
 a.add-link {color:#000; text-decoration:none;}
 a.add-link:hover, a.add-link:focus {color:#000; text-decoration:underline;}
@@ -51,14 +44,13 @@ a.add-link:hover, a.add-link:focus {color:#000; text-decoration:underline;}
 .menu-item:hover, .menu-item a:hover, .menu-item:focus, .menu-item a:focus {color:#646464; border-bottom-color:#646464;}
 
 .menu-record a {background:none repeat scroll 0 0 #6F9DCE; color:#fff; font-weight:bold;	padding:0.2em .4em; 
-	text-decoration:none; border:2px solid #6F9DCE; border-bottom:none; *margin-right:2px; /**padding:2px 4px;*/
+	text-decoration:none; border:2px solid #6F9DCE; border-bottom:none; *margin-right:2px; 
 	/*-moz-border-radius-topright: 5px; -moz-border-radius-topleft: 5px; -webkit-border-radius-topright: 5px; -webkit-border-radius-topleft: 5px;*/}
 .menu-record a:hover, .menu-record a:focus {background:none repeat scroll 0 0 #336699; border:2px solid #336699;	border-bottom:none;}
 .menu-record a.current, .menu-record li.selected a { background: no-repeat scroll 0 0 #FFF; color:#6F9DCE; /*cursor:default;*/ padding-top:6px; border:2px solid #6F9DCE; border-bottom:none;}
 .menu-record a.inactive {cursor:default; background-color:#CCC; border:2px solid #CCC; border-bottom:none;}
 
-#secondary-nav-menu .menu-record a.primary {background-image: url("../images/primary.png"); background-repeat: no-repeat; background-position:bottom left ; padding-left:12px; 
-	}
+#secondary-nav-menu .menu-record a.primary {background-image: url("../images/primary.png"); background-repeat: no-repeat; background-position:bottom left ; padding-left:12px;}
 
 .menu-record a.disabled , .menu-record a:hover.disabled {background-color:#CCC; border:1px solid #CCC; border-bottom:none;}
 
@@ -110,10 +102,11 @@ li .flc-pager-pageLink {margin-top:-1px;}
 #pager-bottom {padding:4px 12px 1px 12px; background-color:#E8E8E8; border-bottom: 1px solid #C8C6C6; height:100%;}
 #pager-bottom  .flc-per-page {width:320px; margin-top:-3px;}
 
+
 /*set min-height for record pages */
 #all-content {min-height:500px; height:auto !important; height:500px;}
-
 #name-header-login {padding-top:20px;}
+
 
 /* header selectors */
 #header-menu {}
@@ -126,6 +119,7 @@ li .flc-pager-pageLink {margin-top:-1px;}
 .header-menu-search {float:right;}
 .header-menu-search select {margin-bottom:-1px;}
 
+
 /* header global nav */
 .header-menu-row {width:auto; margin-bottom:2px; border-bottom: 0px solid #D3D2CE; background:#fff url('../images/header-menu-row-buffer.png') repeat-x bottom right;}
 .header-menu-row .inner {float:left; background-color:#fff;}
@@ -134,19 +128,18 @@ li .flc-pager-pageLink {margin-top:-1px;}
 .menu-item a {position:relative;}
 .menu-item.selected {color:#646464; border-bottom-color:#646464;}
 
+
 /* header space for record ID etc. */
 #title-bar {margin: 0 0 20px 0; background-color:#F0F5FB;  /*background-color:#aaa;*/}
 #title-bar.nobg {background-color:#FFF;}
-
 #title-bar .title-bar-value {padding:0 10px; height:42px; color:#696565; font-weight:bold;}
 #title-bar .title-bar-value .overflow{padding-top:9px; max-width:90%; float:left;}
-
 #title-bar .header-name, #title-bar .content .overflow, #title-bar .record-type {padding-top:9px;}
 #title-bar .content {height:42px; color:#696565; font-weight:bold; font-size:24px; line-height:110%;}
 #title-bar .content .overflow {padding-left:10px; max-width:90%; float:left;}
-
 #title-bar .value{padding-right:30px; float:left; overflow:hidden; display:block;}
 #title-bar .record-type {float:right; color:#6E9FCE; font-weight:bolder; padding-right:10px;}
+
 
 /* secondary navigation menu */
 #secondary-nav {padding-bottom:0px;}
@@ -154,21 +147,20 @@ li .flc-pager-pageLink {margin-top:-1px;}
 #secondary-nav-menu .menu-record {padding-bottom:15px;}
 #secondary-nav-menu ul.menu-record { white-space:nowrap;}
 #secondary-nav-menu ul.menu-record li{display:inline; list-style-type:none; margin-right:3px;}
-
 #secondary-nav.pivot {padding-bottom:0;}
 #secondary-nav.pivot .menu-record {padding-bottom:18px;}
 #secondary-nav.pivot ul.menu-record { white-space:nowrap;}
 #secondary-nav.pivot ul.menu-record li {display:inline; list-style-type:none; margin-right:3px;}
 #secondary-nav.pivot ul.menu-record li a {wid th:100%;}
-
 #secondary-nav-menu .menu-record ul {margin:0; padding:0;}
 #secondary-nav-menu .menu-record li {display:inline;}
 #secondary-nav-menu-sub  {padding-bottom:6px;}
 #secondary-nav-menu-sub .upper-save {float:right; padding-bottom:1px; margin-left:15px;}
 #secondary-nav-menu-sub .time-stamp {float:right; padding-top:6px; font-size:10px; color:#BEBEBE;}
 
+
 /*search page related */ /* need to revisit */
-#search-box {padding: 10px; /*margin-bottom:2px;*/ border:0px solid #CECFD1;}
+#search-box {padding: 10px; border:0px solid #CECFD1; margin-bottom:20px; background-color:#F2F2F3;}
 #search-box input {margin-right:10px;}
 #create-box {padding: 12px 0 12px 12px; margin:0 0 20px 0; /*background-color:#E6E6E6;*/ border:0px solid #CECFD1;}
 .search-box {background-color:#E6E6E6; border:1px solid #CECFD1;}
@@ -203,15 +195,13 @@ table#search-results .fl-pager-ui a:hover {text-decoration:underline;}
 table#search-results .fl-pager .fl-pager-ui .fl-pager-links a {border:none;}
 table#search-results .fl-pager .fl-pager-ui .fl-pager-link {}
 
-table#search-results {padding-left:12px; width:100%;}
+/*table#search-results {padding-left:12px; width:100%;}
 table#search-results thead {background-color:#E8E8E8; font-size:11px; line-height:11px; color:#2278AB;}
 table#search-results thead tr th{padding:6px 0 6px 12px;}
 table#search-results tbody {border-bottom:1px solid #CECFD1;}
 table#search-results tbody tr td {padding:5px 0 5px 12px; font-size:12px; line-height:12px; border-top:1px solid #CECFD1; 
 	border-bottom:1px solid #CECFD1; vertical-align:top;}
-
-/*table#search-results tbody tr td a.csc-number {color:#6A8FA8; text-decoration:none;}
-table#search-results tbody tr td a.csc-number:hover {color:#6A8FA8; text-decoration:underline;}*/
+*/
 
 table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 
@@ -280,7 +270,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .fl-container-left  .information-group       .sub-header 	{font-size:14px; line-height:14px; font-weight:bold; padding-bottom: 10px; padding-top:5px; color:#666;}
 .fl-container-left  .information-subgroup .header.toggle   {font-size:11px; line-height:11px; background-color:#AAAAAA; color:#000; padding:6px 0 7px 5px; width:auto; height:auto;}
 
-.found-records-box.header {font-size:13px; line-height:13px; background-color:#AAA; cursor:default; color:#fff; padding: 0;}
+/*.found-records-box.header {font-size:13px; line-height:13px; background-color:#AAA; cursor:default; color:#fff; padding: 0;}*/
 .header.static {cursor:default; padding:5px 0 7px 5px; height:auto; width:auto;}
 
 
@@ -307,8 +297,8 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 
 .info-pair .content table,
 .info-pair-date .content table,
-.info-pair-select table {width:100%; border-spacing:0; background-color:#FFF; margin-top:0px; border:2px solid #C7CFD4; border-bottom: 0px solid #C7CFD4; padding:0;}
-.info-pair-select table {border:1px solid #C7CFD4; border-bottom: 0px solid #C7CFD4;}
+.info-pair-select table {width:100%; border-spacing:0; background-color:#FFF; margin-top:0px; border:2px solid #C7CFD4; border:1px solid #C7CFD4; border-bottom: 0px solid #C7CFD4; padding:0;}
+/*.info-pair-select table {border:1px solid #C7CFD4; border-bottom: 0px solid #C7CFD4;}*/
 
 .info-pair .content table table,
 .info-pair-date .content table  table,
@@ -327,25 +317,24 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .info-pair .content tbody td input {*margin:0 -2px 0 2px;}
 
 .find-edit .fl-container-left .information-group .content, .related-records  .information-group  .content {padding:0 !important;}
-.find-edit .fl-container-left .information-group  table {font-size:12px; background-color:#00FFFF; border:0px solid #ADADAD; }
+/*.find-edit .fl-container-left .information-group  table {font-size:12px; background-color:#00FFFF; border:0px solid #ADADAD; }
 .find-edit .fl-container-left .information-group  table thead tr td {font-size:11px; background-color:#E8E8E8; padding:4px 2px 3px 4px; border:none; color:#9D9D9D;}
-.find-edit .fl-container-left .information-group  table tbody tr td {background-color:#fff; padding: 5px 2px 4px 4px; border:0px solid #ADADAD; color:#92B7DA}
-.find-edit .fl-container-left .information-group  table tbody tr:hover td {/*background-color:#BFF4FF; cursor:pointer;*/}
+.find-edit .fl-container-left .information-group  table tbody tr td {background-color:#fff; padding: 5px 2px 4px 4px; border:0px solid #ADADAD; color:#92B7DA}*/
+/*.find-edit .fl-container-left .information-group  table tbody tr:hover td {background-color:#F0F5FB; cursor:pointer;}*/
 .find-edit .fl-container-left .information-group  table tbody tr.add-new-user td {color:#A9A59B; font-weight:bold; background-color:#F5F3DC;}
 
-.find-edit .search-leader .header {padding: 5px 10px 6px 10px; width:auto; background-color:#F3F3F3; cursor:default;}
+/*.find-edit .search-leader .header {padding: 5px 10px 6px 10px; width:auto; background-color:#F3F3F3; cursor:default;}
 .find-edit .search-leader .header .label {padding-right:4px; color:#666;}
 .find-edit .search-leader .header .value {color:#000;}
-.find-edit .search-leader .header .link {color:#A5C695;}
+.find-edit .search-leader .header .link {color:#A5C695;}*/
 
 .list-table {border-bottom:0px solid #D2D0D0;}
 .list-table .header {}
 .list-table  .content {padding:0 !important;}
 .list-table  table {font-size:12px; line-height:120%; /*background-color:#00FFFF;*/ border:0px solid #ADADAD; width:100%;}
-.list-table  table thead tr td {font-size:11px; background-color:#E8E8E8; padding:4px 2px 3px 4px; border:none; color:#9D9D9D; font-weight:bold;}
+.list-table  table thead tr td, .list-table  table thead tr th {font-size:11px; background-color:#F3F3F3; padding:4px 2px 3px 4px; border:none; color:#666; font-weight:bold;}
 .list-table  table tbody tr td {background-color:#fff; padding: 5px 2px 4px 4px; border-bottom:0px solid #ADADAD; color:#92B7DA; vertical-align:top;}
-.list-table  table tbody tr:hover td {/*background-color:#BFF4FF; cursor:pointer;*/ background-color:#F0F5FB;}
-
+.list-table  table tbody tr:hover td {/*background-color:#BFF4FF; cursor:pointer;*/ background-color:#F0F5FB ;}
 
 /*.related-procedures  .content {padding:0 !important;}
 .related-procedures  table {font-size:12px; background-color:#00FFFF; border:0px solid #ADADAD; }
@@ -356,7 +345,6 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .pivot-box-table {width:100%; background-color:#fff; color:#6D6E71;}
 .pivot-box-table  tr td {font-size:11px; padding:4px 2px 3px 4px; border:none; color:#92B7DA;}
 .pivot-box-table thead tr td {border-bottom: 0px solid #C9CACC; font-weight:bold; background-color:#E8E8E8; color:#9D9D9D;}
-
 
 .add-more {float:right; color:#000; /**padding-top:2px;*/ margin:4px 4px 0 0;}
 
@@ -397,8 +385,8 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .permission-retails {}
 
 .create-new .radio-buttons {width:100%;}
-.create-new .radio-button	{min-width: 100px; padding:4px 20px 4px 0; font-size:14px; line-height:14px; float:left;}
-.create-new .radio-button	input {border:none;}
+.create-new .radio-button {min-width: 100px; padding:4px 20px 4px 0; font-size:14px; line-height:14px; float:left;}
+.create-new .radio-button input {border:none;}
 .create-new .button-row {padding:15px 0; width:625px; margin-left:auto; margin-right:auto;}
 
 .object-entry .fl-container-pivot {padding-top:0px;}
@@ -408,7 +396,6 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 
 .info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-select, .info-pair-termlist 
 {width:100%; position:relative; padding-bottom:18px; padding-top:0px; font-size:12px; line-height:12px; float:left;}
-
 
 .info-pair-termlist  table, .info-pair-termlist tbody td{width:auto;  background-color:#E6E6E6;}
 .fl-container-left .information-group .info-pair-termlist .info-pair .content {padding-bottom:4px;}
@@ -444,7 +431,6 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .reset-password .login-pair .login-element {width:60%;}
 .reset-password .login-error {margin-left:0px; margin-top:20px;}
 
-
 .info-pair .content .table-select {}
 .info-pair .content .table-selected, .info-pair .content .table-unselected 
 	{width:12px; background-position: top left; background-repeat:no-repeat; background-position:center;  background-color:#FFF;}
@@ -462,7 +448,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .input-numeric-small   {width: 60px  !important;}
 .input-numeric-medium {width: 120px !important;}
 .input-date	 		   {width: 142px !important; padding-left:2px;}
-table.input-date	 	   {padding-left:2px;}
+/*table.input-date	 	   {padding-left:2px;}*/
 .input-money-amount	   {width: 120px !important;}
 .input-select		   {width: auto; height:21px;}
 table .input-select         {width: 100%; height:19px; /**height:22px;*/ padding-top:0; border:none;}
@@ -479,11 +465,8 @@ table .input-select         {width: 100%; height:19px; /**height:22px;*/ padding
 table .field-cal {width:162px; background-color:#C7CFD4;}
 .field-cal img {padding: 0; margin:0 0 -4px -1px;}
 
-
 #footer {margin-top:20px; border-top: 2px solid #D8D9DA; padding-top:7px;}
 #footer .footer-text {text-align: center; color: #656565; font-weight: bold; font-size:11px; line-height: 120%;}
-
-#login {}
 
 .gen-num-overlay {}
 .gen-num-overlay-header {padding:8px 20px; color:#fff; background-color:#9D9FA2; font-size:15px; border-bottom: 1px solid #BFDF94;}
@@ -495,7 +478,6 @@ table .field-cal {width:162px; background-color:#C7CFD4;}
 .gen-num-overlay-body table tbody {background-color:#fff;}
 .gen-num-overlay-body table tbody td.type {color:#818183;}
 .gen-num-overlay-body table tbody td.prefix {color:#0F96D7;}
-
 .gen-num-overlay table tr:hover td {background-color:#FFD6F7;}
 .gen-num-overlay table tr:hover td.type {color:#3 33399;}
 .gen-num-overlay table tr:hover td.prefix {color:#3 33399;}
@@ -517,17 +499,11 @@ table .field-cal {width:162px; background-color:#C7CFD4;}
 .pivot-box .header:hover, .pivot-box .header:focus {background-color:#666666;}
 .pivot-box .header.toggle {height:25px;}
 .header.static.button {height:21px; padding:4px 0 0px 4px;}
-	
 .pivot-search-box-header, .pivot-users-box .header {cursor:auto;}
 .pivot-header {color:#606060;}
-
-
-
-
 .pivot-box-data {padding:3px 0 3px 8px;}
 .pivot-search-box-data  {padding:10px 0 10px 8px; border:0px solid #999999; border-top:none;}
 .pivot-box .data  {padding:10px 0 10px 8px;}
-
 .pivot-menu-search select {margin-top:10px;}
 
 .date-table {wi dth:134px;}
@@ -544,8 +520,6 @@ table .field-cal {width:162px; background-color:#C7CFD4;}
 
 .collapse-all {float:right; font-size:13px; line-height:13px; font-weight:bold; padding-top:10px;}
 .collapse-all img {padding-right:6px;}
-
-
 
 .no-border {border:none;}
 .no-float {float:none;}
@@ -573,21 +547,12 @@ table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; f
 .show {display: block;}
 .clear {clear:both; margin:0; padding:0; height:1px; overflow:hidden; visibility:hidden; display:block;}
 
-.ui-tabs .ui-tabs-hide {
-	display: none;
-}
+.ui-tabs .ui-tabs-hide {display: none;}
 
-.cs-add-related-records-dialog {
-	background-color: white;
-	min -width: 600px;
-}
+.cs-add-related-records-dialog {background-color: white; min -width: 600px;}
 
-.float-left {  float: left; }
-.float-right {  float: right; }
+.float-left {float: left;}
+.float-right {float: right;}
 
-.cs-selecting {
-    background-color:#E2F0F7;
-}
-.cs-selected {
-    background-color:#F0F5FB;
-}
+.cs-selecting {background-color:#E2F0F7;}
+.cs-selected {background-color:#F0F5FB;}

@@ -29,25 +29,23 @@
 				<!-- this div will be filled in with the contents of the Template -->
             </div>
 			<div class="fl-container-1024-inner">
-			
 				<div id="title-bar" class="nobg">
 					<div class="content">
 						<div class="header-name">Search Results</div>
 						<div class="clear"></div>
 					</div>
 				</div>
-			
+				
 				<div id="all-content" class="fl-fix">
 					<div class="fl-fix fl-container-flex fl-col-mixed2">
 						<div class="fl-container-left fl-force-left">
-							<div class="fl-container-flex fl-fix information-group search-leader">
+							<!--<div class="fl-container-flex fl-fix information-group search-leader">
 								<div class="fl-container-flex header">
 									<div class="label" style="float:left;">Latest Search:&nbsp;</div>
 									<div class="value" style="float:left;">&nbsp;</div>
-									<!--<div class="link" style="float:right;">Save as Collection</div>-->
 									<div class="clear"></div>
 								</div>
-							</div>
+							</div>-->
 							
 							<div class="fl-container-flex fl-fix information-group object-records-group">
 								<div class="info-column">
@@ -74,15 +72,14 @@
 										</div>
 										
 										<div class="csc-search-results">
-											<div class="fl-container-flex header toggle found-records-box" onclick="ShowHide('#toggle-records'); return false;">
-												<span class="header-toggle"><img id="toggle-records-img" src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+											<div class="fl-container-flex header static found-records-box">
 												<span class="found-records-content">
 													Found <span class="csc-search-results-count">0</span> records
 												</span>
 											</div>
 											
 											<!-- search results -->
-											<div class="fl-pager" id="toggle-records">
+											<div class="fl-pager list-table" id="toggle-records">
 												<!--<ul id="pager-top" class="fl-pager-ui flc-pager-top">
 													<li class="flc-pager-previous">
 														<a href="#">&lt; previous</a>
