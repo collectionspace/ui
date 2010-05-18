@@ -7,16 +7,16 @@
 }
 .pattern-chooser-input {
 	width:51% !important;
-	border:2px solid #C7CFD4;
+	border:1px solid #C7CFD4;
 }
 
 input.numberPatternChooserButton{
 	border:none;
 	background-color:#94BC80; 
-	padding: 3px 12px; *padding: 2px 12px;
+	padding: 2px 12px; *padding: 2px 12px;
 	color:#fff; 
 	float:right;
-	margin-top:-22px; *margin-top:-22px;
+	margin-top:-21px; *margin-top:-21px;
 	cursor:pointer;
 	font-size:11px;
 	font-weight:bold;

@@ -3,6 +3,7 @@
 /* core HTML elements*/
 html{font-size: 100%;} 
 body {font-size:13px; line-height:13px; padding: 2px 30px;}
+table {border-collapse:collapse;}
 table tr, table tr td, table tr th  {border:0; padding:0; margin:0; text-align:left; font-weight:normal;}
 fieldset, table, pre {margin-bottom:0em;}
 p {margin-bottom:1em;}
@@ -293,27 +294,25 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .info-pair .content,
 .info-pair-date .content,
 .info-pair-select .content {width:100%; float:left; border:none;}
-.info-pair-select .content {/*padding-bottom:2px;*/}
 
 .info-pair .content table,
 .info-pair-date .content table,
-.info-pair-select table {width:100%; border-spacing:0; background-color:#FFF; margin-top:0px; border:2px solid #C7CFD4; border:1px solid #C7CFD4; border-bottom: 0px solid #C7CFD4; padding:0;}
-/*.info-pair-select table {border:1px solid #C7CFD4; border-bottom: 0px solid #C7CFD4;}*/
+.info-pair-select table {width:100%; border-spacing:0; background-color:#FFF; margin-top:0px; border:1px solid #C7CFD4; /*border:1px solid #C7CFD4; border-bottom: 0px solid #C7CFD4;*/ padding:0;}
 
 .info-pair .content table table,
 .info-pair-date .content table  table,
-.info-pair-select table table {border:0px solid #C7CFD4;}
+.info-pair-select table table {border:none;}
 
 .info-pair-date .content table,
 .info-pair-select .content table {width:auto;}
 
-.info-pair-date .content tbody td {border-bottom:2px solid #C7CFD4;}
-.info-pair-select .content tbody td {border-bottom:1px solid #C7CFD4;}
+/*.info-pair-date .content tbody td {border- bottom:1px solid #C7CFD4;}
+.info-pair-select .content tbody td {border- bottom:1px solid #C7CFD4;}*/
 
 .info-pair .content thead tr {}
-.info-pair .content thead td {border:1px solid #C7CFD4; background-color:#F8F8F7; color:#3B3B3C; padding: 2px; font-size:11px; line-height: 11px;}
+.info-pair .content thead td {border:1px solid #C7CFD4; background-color:#F8F8F7; color:#3B3B3C; padding:2px; font-size:11px; line-height:11px;}
 .info-pair .content tbody tr {}
-.info-pair .content tbody td {border: 1px solid #C7CFD4; border-bottom:2px solid #C7CFD4;}
+.info-pair .content tbody td {border: 1px solid #C7CFD4; /*border-bottom:1px solid #C7CFD4;*/}
 .info-pair .content tbody td input {*margin:0 -2px 0 2px;}
 
 .find-edit .fl-container-left .information-group .content, .related-records  .information-group  .content {padding:0 !important;}
@@ -444,7 +443,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 
 .find-edit table tr td {vertical-align:top;}
 
-.ui-autocomplete-input {width:99.75%}
+.ui-autocomplete-input {/*width:99.75%*/ width:100%;}
 
 .input-numeric-small   {width: 60px  !important;}
 .input-numeric-medium {width: 120px !important;}
@@ -452,10 +451,10 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 /*table.input-date	 	   {padding-left:2px;}*/
 .input-money-amount	   {width: 120px !important;}
 .input-select		   {width: auto; height:21px;}
-table .input-select         {width: 100%; height:19px; /**height:22px;*/ padding-top:0; border:none;}
-.input-textarea		   {/*width: 99.5%;*/ width:100%; height:71px;}
+table .input-select         {width: 100%; height:17px; /**height:22px;*/ padding-top:0; border:none;}
+.input-textarea		   {/*width: 99.5%;*/ width:100%; height:69px; overflow:auto;}
 .input-alpha-login       {width: 120px; height:18px;}
-.input-autocomplete	   {width:auto !important; }
+.input-autocomplete	   {/*width:auto !important; */}
 .input-autocomplete, .ui-autocomplete-input {background: #fff url(../images/arrowPredictiveText.png) no-repeat right center;}
 
 .fl-container-pivot  select.recently-created-list {width:232px !important; height:20px; /**height:24px;*/}
