@@ -14,177 +14,96 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var hidePermissions = function (domBinder) {
-        domBinder.locate("permissions").hide();
-        domBinder.locate("permissionsNone").show();
+    var addNewRole = function (container, roleListEditor, domBinder, uispec) {
+        return function(e){
+            fluid.model.copyModel(roleListEditor.details.model,{
+                fields: {}
+            });
+            roleListEditor.details.refreshView();
+            cspace.passwordValidator(container);
+            roleListEditor.showDetails(true);
+            roleListEditor.showNewListRow(true);
+        };
     };
-    var showPermissions = function (domBinder) {
-        domBinder.locate("permissionsNone").hide();
-        domBinder.locate("permissions").show();
-    };
-    var retrieveRoleList = function (roleList, model) {
-        // TODO: Use the DC for this
-        var url = (cspace.util.isLocal() ? "data/roles/records/list.json" : "../../chain/roles");
-        $.ajax({
-            url: url,
-            type: "GET",
-            dataType: "json",
-            success: function (data, textStatus) {
-                // that.roleListApplier.requestChange("*", data);
-                // requestChange() to "*" doesn't work (see FLUID-3507)
-                // the following workaround compensates:
-                fluid.model.copyModel(model, data);
-                fluid.model.copyModel(roleList.model.items, model.items);
-                roleList.refreshView();
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                fluid.fail("Error retrieving role list:" + textStatus);
-            }
-        });
+    
+    var restoreRoleList = function (dc, domBinder) {
+        return function () {
+            domBinder.locate("unSearchButton").hide();
+            dc.fetch(cspace.util.isLocal() ? "records/list" : null);
+        };
     };
 
-    var addNewRole = function(container, permissions, domBinder, uispec){
-        return function(e){
-            fluid.model.copyModel(permissions.model,{
-                fields: {
-                    permissions: [
-                        {
-                            recordType: "",
-                            permission: ""
-                        }
-                    ]
+    var submitSearch = function (domBinder, roleListEditor) {
+        return function () {
+            var query = domBinder.locate("searchField").val();
+            var model = roleListEditor.listApplier.model;
+            // TODO: Use the DC for this
+            var url = (cspace.util.isLocal() ? "data/roles/search/list.json" : "../../chain/roles/search?query=" + query);
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                success: function (data, textStatus) {
+                    // that.roleListApplier.requestChange("*", data);
+                    // requestChange() to "*" doesn't work (see FLUID-3507)
+                    // the following workaround compensates:
+                    fluid.model.copyModel(model, data.results);
+                    roleListEditor.list.updateModel(model);
+                    roleListEditor.showNewListRow(false);
+                    domBinder.locate("unSearchButton").show();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    fluid.fail("Error retrieving search results:" + textStatus);
                 }
             });
-            showPermissions(domBinder);
-            domBinder.locate("newRoleRow").show();
         };
-    };
-
-    var loadRole = function(that){
-        return function(e){
-            var csid = that.locate("csid", e.target.parentNode).text();
-            that.dataContext.fetch(csid);
-        };
-    };
-
-    validate = function (domBinder, permissionsApplier) {
-        var required = domBinder.locate("requiredFields");
-        for (var i = 0; i < required.length; i++) {
-            if (required[i].value === "") {
-                cspace.util.displayTimestampedMessage(domBinder, "All fields required");
-                return false;
-            }
-        }
-        // In the default configuration, the email address used as the roleid.
-        // If all required fields are present and the roleid is not set, use the email
-        if (!domBinder.locate("roleID").val()) {
-            permissionsApplier.requestChange("fields.roleID", domBinder.locate("email").val());
-        }
-        if (domBinder.locate("password").val() !== domBinder.locate("passwordConfirm").val()) {
-            cspace.util.displayTimestampedMessage(domBinder, "Passwords don't match");
-            return false;
-        }
-        return true;
     };
 
     var bindEventHandlers = function (that) {
 
-        that.locate("newRole").click(addNewRole(that.container, that.permissions, that.dom, that.options.uispec));
-        that.locate("roleListRow").live("click", loadRole(that));
-        that.dataContext.events.afterCreate.addListener(function () {
-            that.locate("newRoleRow").hide();
-            retrieveRoleList(that.roleList, that.roleListApplier.model);
-        });
-        that.permissions.events.pageRendered.addListener(function () {
-            that.locate("newRoleRow").hide();
-            showPermissions(that.dom);
-        });
-        that.dataContext.events.onError.addListener(function (operation, message) {
-            that.locate("newRoleRow").hide();
-            if (operation === "fetch") {
-                
-            }
-        });
-        that.permissions.events.onCancel.addListener(function () {
-            hidePermissions(that.dom);
-            that.locate("newRoleRow").hide();
-        });
-        that.permissions.events.onSave.addListener(function () {
-            return validate(that.dom, that.permissionsApplier);
-        });
-    };
+        that.locate("searchButton").click(submitSearch(that.dom, that.roleListEditor));
+        that.locate("unSearchButton").click(restoreRoleList(that.roleListEditor.listDC, that.dom)).hide();
+        
+        that.locate("newRole").click(addNewRole(that.container, that.roleListEditor, that.dom, that.options.uispec));
 
-    setUpRoleAdministrator = function (that) {
-        bindEventHandlers(that);
-        retrieveRoleList(that.roleList, that.roleListApplier.model);
-        hidePermissions(that.dom);
-        that.locate("newRoleRow").hide();
+        that.roleListEditor.details.events.onSave.addListener(function () {
+        });
+        that.roleListEditor.events.pageReady.addListener(function () {
+            that.events.afterRender.fire();
+        });
     };
 
     cspace.adminRoles = function (container, options) {
         var that = fluid.initView("cspace.adminRoles", container, options);
-        that.model = {
-            roleList: [],
-            permissions: {
-                fields: {}
-            }
-        };
-        that.roleListApplier = fluid.makeChangeApplier(that.model.roleList);
-        that.roleList = fluid.initSubcomponent(that, "roleList", [
-            that.options.selectors.roleList,
-            {
-                items: that.model.roleList,
-                selectionIndex: -1
-            }, 
-            that.options.uispec.roleList
-        ]);
-
-        that.permissionsApplier = fluid.makeChangeApplier(that.model.permissions);
-        that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model.permissions, fluid.COMPONENT_OPTIONS]);
-        that.permissions = fluid.initSubcomponent(that, "permissions", [
-            that.options.selectors.permissions,
-            that.permissionsApplier,
-            {
-                uispec: that.options.uispec.permissions,
-                dataContext: that.dataContext
-            }
-        ]);
-
-        setUpRoleAdministrator(that);
+        that.roleListEditor = fluid.initSubcomponent(that, "roleListEditor", [that.container, that.options.recordType, 
+            that.options.uispec, fluid.COMPONENT_OPTIONS]);
+        bindEventHandlers(that);
         return that;
     };
 
     fluid.defaults("cspace.adminRoles", {
-        roleList: {
-            type: "cspace.recordList"
-        },
-        permissions: {
-            type: "cspace.recordEditor"
-        },
-        dataContext: {
-            type: "cspace.dataContext",
+        recordType: "roles",
+        roleListEditor: {
+            type: "cspace.listEditor",
             options: {
-                recordType: "roles",
-                dataType: "json",
-                fileExtension: ""
+                dataContext: {
+                    options: {
+                        recordType: "roles"
+                    }
+                }
             }
         },
         selectors: {
+            searchField: ".csc-role-searchField",
+            searchButton: ".csc-role-searchButton",
+            unSearchButton: ".csc-role-unSearchButton",
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
             timestamp: ".csc-timestamp",
-            roleList: ".csc-role-roleList",
-            csid: ".csc-role-roleList-csid",
-            roleListRow: ".csc-role-roleList-row",
-            permissions: ".csc-permissions",
-            permissionsNone: ".csc-permissions-none",
-            newRole: ".csc-role-createNew",
-            newRoleRow: ".csc-role-addNew",
-            roleID: ".csc-role-roleID",
-            email: ".csc-role-email",
-            password: ".csc-role-password",
-            passwordConfirm: ".csc-role-passwordConfirm",
-            requiredFields: ".csc-role-required"
+            newRole: ".csc-role-createNew"
+        },
+        events: {
+            afterRender: null
         }
     });
 

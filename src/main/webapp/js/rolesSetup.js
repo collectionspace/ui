@@ -16,60 +16,46 @@ cspace = cspace || {};
 
     cspace.rolesSetup = function () {
 
-        var setUpPage = function () {
-
-            var permsOpts = {
-                uispec: "{pageBuilder}.uispec"
-            };
-            if (cspace.util.isLocal()) {
-                permsOpts.dataContext = {
-                    options: {
-                        baseUrl: "data/",
-                        fileExtension: ".json"
+        var rolesOpts = {
+            uispec: "{pageBuilder}.uispec"
+        };
+        if (cspace.util.isLocal()) {
+            rolesOpts.recordType = "roles/records/list.json";            
+            rolesOpts.userListEditor = {
+                options: {
+                    baseUrl: "data/",
+                    dataContext: {
+                        options: {
+                            baseUrl: "data/",
+                            fileExtension: ".json"
+                        }
                     }
-                };
+                }
+            };       
+        }
+        var dependencies = {
+            roles: {
+                funcName: "cspace.adminRoles",
+                args: [".csc-roles-roleAdmin", rolesOpts]
             }
-            var dependencies = {
-                permissions: {
-                    funcName: "cspace.adminRoles",
-                    args: [".csc-roles-roleAdmin", permsOpts]
-                }
-            };
-
-            var options = {
-                pageSpec: {
-                    header: {
-                        href: "header.html",
-                        templateSelector: ".csc-header-template",
-                        targetSelector: ".csc-header-container"
-                    },
-                    footer: {
-                        href: "footer.html",
-                        templateSelector: ".csc-footer",
-                        targetSelector: ".csc-footer-container"
-                    }
-                }
-            };
-            cspace.pageBuilder(dependencies, options);
         };
 
-        if (!cspace.pageBuilder || !cspace.pageBuilder.uispec) {
-            var uispecUrl = (cspace.util.isLocal() ? "./uispecs/roles/uispec.json" : "../../chain/users/uispec");
-            jQuery.ajax({
-                url: uispecUrl,
-                type: "GET",
-                dataType: "json",
-                success: function (data, textStatus) {
-                    cspace.pageBuilder.uispec = data;
-                    setUpPage();
+        var options = {
+            pageSpec: {
+                header: {
+                    href: "header.html",
+                    templateSelector: ".csc-header-template",
+                    targetSelector: ".csc-header-container"
                 },
-                error: function (xhr, textStatus, errorThrown) {
-                    fluid.fail("Error fetching roles uispec: " + textStatus);
+                footer: {
+                    href: "footer.html",
+                    templateSelector: ".csc-footer",
+                    targetSelector: ".csc-footer-container"
                 }
-            });
-        } else {
-            setUpPage();
-        }
+            },
+            pageType: "roles"
+        };
+        cspace.pageBuilder(dependencies, options);
     };
     
 })(jQuery);
