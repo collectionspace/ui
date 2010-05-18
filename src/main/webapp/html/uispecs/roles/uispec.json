@@ -1,5 +1,5 @@
 {
-    "roleList": {
+    "list": {
         ".csc-recordList-row:": {
             "children": [
                 {
@@ -9,7 +9,7 @@
             ]
         }
     },
-    "permissions": {
+    "details": {
         ".csc-permissions-record-row:": {
             "children": [
                 {

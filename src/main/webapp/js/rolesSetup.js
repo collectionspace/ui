@@ -21,7 +21,7 @@ cspace = cspace || {};
         };
         if (cspace.util.isLocal()) {
             rolesOpts.recordType = "roles/records/list.json";            
-            rolesOpts.userListEditor = {
+            rolesOpts.roleListEditor = {
                 options: {
                     baseUrl: "data/",
                     dataContext: {
