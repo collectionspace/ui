@@ -25,16 +25,16 @@
 		<div class="fl-force-right right-sidebar csc-sidebar" id="csc-right-sidebar">
 			<!--<img src="../images/media-snapshot.png" alt="media snapshot" height=253 width=248 />-->
 			<div class="pivot-box media-snapshot csc-media-snapshot">
-				<div class="header toggle" onclick="ShowHide('#toggle-media-snapshot'); return false;">
-					<span class="header-toggle"><img id="toggle-media-snapshot-img" src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
+				<div class="header toggle" onclick="ShowHide('#toggle-media-snapshot', this); return false;">
+					<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
 					Media Snapshot
 				</div>
 				<div class="content" id="toggle-media-snapshot"><img src="../images/sample.png" alt="sample image" title="sample media image" width="200" height="238" /></div>
 			</div>
 			
 			<div class="pivot-box csc-integrated-authorities">
-				<div class="header toggle" onclick="ShowHide('#toggle-integrated-authorities'); return false;">
-					<span class="header-toggle"><img id="toggle-integrated-authorities-img" src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
+				<div class="header toggle" onclick="ShowHide('#toggle-integrated-authorities', this); return false;">
+					<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
 					Integrated Vocabularies <span class="csc-num-items">(0)</span>
 				</div>
 				
@@ -63,13 +63,13 @@
 			
 			<div class="csc-related-records">
 				<div class="pivot-box csc-related-procedures">
-					<div class="header toggle" onclick="ShowHide('#toggle-related-procedures'); return false;">
+					<div class="header toggle" onclick="ShowHide('#toggle-related-procedures', this); return false;">
 						<div class="fl-force-left">
-							<span class="header-toggle"><img id="toggle-related-procedures-img" height="12" width="12" alt="toggle-less" src="../images/toggle-less.png" /></span>
+							<span class="header-toggle"><img height="12" width="12" alt="toggle-less" src="../images/toggle-less.png" /></span>
 							Related Procedures
 							<span class="csc-num-items"></span>
 						</div>
-						<div class="add-more" onclick="ShowHide('#toggle-related-procedures'); return false">
+						<div class="add-more" onclick="ShowHide('#toggle-related-procedures', this); return false">
 							<a href="" class="add-link csc-confirmation-exclusion"><input class="csc-add-related-record-button tertiary" type="button" value="Add" /></a>
 						</div>
 						<div class="clear"></div>
@@ -99,13 +99,13 @@
 				</div>
 				
 				<div class="pivot-box csc-related-objects">
-					<div class="header toggle" onclick="ShowHide('#toggle-related-objects'); return false;">
+					<div class="header toggle" onclick="ShowHide('#toggle-related-objects', this); return false;">
 						<div class="fl-force-left">
-							<span class="header-toggle"><img id="toggle-related-objects-img" src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
+							<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
 							Related Objects
 							<span class="csc-num-items"></span>
 						</div>
-						<div class="add-more" onclick="ShowHide('#toggle-related-objects'); return false">
+						<div class="add-more" onclick="ShowHide('#toggle-related-objects', this); return false">
 						    <a href="" class="add-link csc-confirmation-exclusion"><input class="csc-add-related-record-button tertiary" type="button" value="Add" /></a>
                         </div>
 						<div class="clear"></div>

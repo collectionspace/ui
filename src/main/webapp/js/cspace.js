@@ -13,19 +13,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 var cspace = cspace || {};
 
-function ShowHide(toggleme) {
-	jQuery(toggleme).toggle(); 
-	var self = toggleme + "-img";
-	var source = (jQuery(self).attr("src") === "../images/toggle-more.png") ? "../images/toggle-less.png" : "../images/toggle-more.png";
-	jQuery(self).attr("src", source);
+function ShowHide(toggleme, source) {
+	jQuery(toggleme).toggle();
+	var foo = jQuery(source).find("img").attr("src");
+	var image = (foo === "../images/toggle-more.png") ? "../images/toggle-less.png" : "../images/toggle-more.png";
+	jQuery(source).find("img").attr("src", image);
 }
 
-function ToggleTabs(toggleme, toggleother, toggleSelected) {
+/*function ToggleTabs(toggleme, toggleother, toggleSelected) {
 	jQuery(toggleother).hide();
 	jQuery(toggleme).show();
 	jQuery(toggleSelected).removeClass("selected");
 	
-}
+}*/
 
  
 function getRadioValue() {
@@ -50,7 +50,7 @@ jQuery(document).ready(function() {
 	});
 
 
-	$switch = false;
+	/*$switch = false;
 	jQuery('#primary').val($switch);
 	
 	jQuery('#primary').focus(function() {
@@ -82,6 +82,6 @@ jQuery(document).ready(function() {
 			$switch = true;
 
 			jQuery('#primary').val($switch);
-    });
+    });*/
 		
 });

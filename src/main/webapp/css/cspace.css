@@ -161,7 +161,7 @@ li .flc-pager-pageLink {margin-top:-1px;}
 
 
 /*search page related */ /* need to revisit */
-#search-box {padding: 10px; border:0px solid #CECFD1; margin-bottom:20px; background-color:#F2F2F3;}
+#search-box {padding: 10px; border:0px solid #CECFD1; margin-bottom:20px; /*background-color:#F2F2F3;*/}
 #search-box input {margin-right:10px;}
 #create-box {padding: 12px 0 12px 12px; margin:0 0 20px 0; /*background-color:#E6E6E6;*/ border:0px solid #CECFD1;}
 .search-box {background-color:#E6E6E6; border:1px solid #CECFD1;}
