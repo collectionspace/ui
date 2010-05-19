@@ -9,21 +9,22 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jQuery, cspace, fluid*/
+"use strict";
 
 cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var makeRelater = function (that) {
+    var handleAddClick = function (that) {
         return function () {
             var data = that.search.resultsPager.options.dataModel;
-
             var newIndex = 0;
             var newRelations = [];
             var source = {
-                csid: that.applier.model.csid,
+                csid: that.model.csid,
                 recordtype: that.options.currentRecordType
             };
+            // TODO: Candidate for transform.
             for (var i = 0; i < data.length; i++) {
                 if (data[i].selected) {
                     newRelations[newIndex] = {
@@ -35,12 +36,9 @@ cspace = cspace || {};
                     newIndex += 1;
                 }
             }
-            if (cspace.util.isLocal()) {
-                that.updateRelations({items: newRelations});
-            } else {
-                that.dataContext.addRelations({items: newRelations});
-            }
-
+            that.events.addRelations.fire({
+                items: newRelations
+            });
             that.dlg.dialog("close");
         };
     };
@@ -59,16 +57,18 @@ cspace = cspace || {};
 				minWidth: 700,
 				draggable: true,
                 dialogClass: "cs-search-dialog",
-                position: ['center',100],
+                position: ['center', 100],
 				title: "Add Related Object/Procedural Record"                
             });
         
         addDialog.parent().css("overflow", "visible");
         
         fluid.fetchResources(resources, function () {
+            // TODO: check why we are fetching resources after we create the dialog. 
             var templates = fluid.parseTemplates(resources, ["addDialog"], {});
             fluid.reRender(templates, addDialog, {});
 
+            // TODO: Should be pushed up.
             var searchOpts = {
                 resultsSelectable: true
             };
@@ -78,57 +78,31 @@ cspace = cspace || {};
                     return "./data/" + recordTypeParts.join('/') + "/search/list.json";
                 };
             }
+            // TODO: Should be a subcomponent.
+            // Like this: that.search = fluid.initSubcomponent(that, "search", [$(".main-search-page", ".cs-search-dialog"), fluid.COMPONENT_OPTIONS]);
             that.search = cspace.search(".main-search-page", searchOpts);
 
-            that.locate("addButton", addDialog).click(makeRelater(that));
+            that.locate("addButton", addDialog).click(handleAddClick(that));
             that.locate("closeButton", addDialog).click(function () {
                 addDialog.dialog("close");
             });
+            that.events.afterRender.fire();
         });
 
         return addDialog;        
     };
 
-    var bindEventHandlers = function (that) {
-        that.dataContext.events.afterAddRelations.addListener(function (data) {
-            that.updateRelations(data);
-        });
-    };
-
-    cspace.searchToRelateDialog = function (container, applier, options) {
-        var that = fluid.initView("cspace.searchToRelateDialog", container, options);
-        that.applier = applier;
+    cspace.searchToRelateDialog = function (container, model, options) {
         
-        var dcOpts = {
-            recordType: "relationships"
-        };
-        if (cspace.util.isLocal()) {
-            dcOpts.baseUrl = "data";
-            dcOpts.fileExtension = ".json";
-        }
-        that.dataContext = cspace.dataContext(that.applier.model, dcOpts);
-
+        var that = fluid.initView("cspace.searchToRelateDialog", container, options);
+        that.model = model;
         that.dlg = setupAddDialog(that);
-
-        bindEventHandlers(that);
 
         that.prepareDialog = function (type) {
             var selectBoxContainer = that.locate("selectBoxContainer", that.dlg);
             selectBoxContainer.empty();
-            selectBoxContainer.append(that.locate(type+"Selecter", that.dlg).clone());
+            selectBoxContainer.append(that.locate(type + "Selecter", that.dlg).clone());
             that.locate("searchResults", that.dlg).hide();
-        };
-
-        that.updateRelations = function (newRelations) {
-            var newModelRelations = [];
-            fluid.model.copyModel(newModelRelations, that.applier.model.relations);
-            var relIndex = newModelRelations.length;            
-            for (var i = 0; i < newRelations.items.length; i++) {
-                newModelRelations[relIndex] = newRelations.items[i].target;
-                newModelRelations[relIndex].relationshiptype = newRelations.items[i].type;
-                relIndex += 1;
-            }
-            that.applier.requestChange("relations", newModelRelations);
         };
 
         return that;
@@ -147,6 +121,10 @@ cspace = cspace || {};
         },
         templates: {
             dialog: "../html/searchToRelate.html"
+        },
+        events: {
+            addRelations: null,
+            afterRender: null
         }
     });
 })(jQuery, fluid);

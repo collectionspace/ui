@@ -36,10 +36,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             sideBarOpts: {
                 relatedRecordsList: {
                     options: {
-                        searchToRelateDialog: {
+                        relationManager: {
                             options: {
-                                templates: {
-                                    dialog: "../../main/webapp/html/searchToRelate.html"
+                                searchToRelateDialog: {
+                                    options: {
+                                        templates: {
+                                            dialog: "../../main/webapp/html/searchToRelate.html"
+                                        }
+                                    }
                                 }
                             }
                         }

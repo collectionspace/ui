@@ -9,12 +9,52 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jQuery, cspace, fluid */
+"use strict";
 
 cspace = cspace || {};
 
 (function ($, fluid) {
 
     cspace.objectTabSetup = function (applier) {
+        
+        var local = cspace.util.isLocal();
+        
+        var tabOpts = {
+            listEditor: {
+                options: {
+                    listPopulationStrategy: cspace.listEditor.receiveData,
+                    data: applier.model.relations,
+                    dataContext: {
+                        options: {
+                            recordType: "objects"
+                        }
+                    }
+                }
+            }
+        };
+        
+        if (local) {
+            tabOpts.listEditor.options.dataContext.options.baseUrl = "data/";
+            tabOpts.listEditor.options.dataContext.options.fileExtension = ".json";
+            tabOpts.relationManager = {
+                options: {
+                    dataContext: {
+                        options: {
+                            baseUrl: "data/",
+                            fileExtension: ".json"
+                        }
+                    }
+                }
+            };
+        }
+        
+        var dependencies = {
+            users: {
+                funcName: "cspace.relatedRecordsTab",
+                args: [".csc-object-tab", "objects", "{pageBuilder}.uispec", applier, tabOpts]
+            }
+        };
+
         var options = {
             pageSpec: {
                 list: {
@@ -30,28 +70,6 @@ cspace = cspace || {};
             },
             pageType: "object-tab"
         };
-        var leOpts = {
-            listPopulationStrategy: cspace.listEditor.receiveData,
-            data: applier.model.relations,
-            dataContext: {
-                options: {
-                    recordType: "objects"
-                }
-            }
-        };
-        if (cspace.util.isLocal()) {
-            leOpts.dataContext.options.baseUrl = "data/";
-            leOpts.dataContext.options.fileExtension = ".json";
-        }
-        var dependencies = {
-            listEditor: {
-                funcName: "cspace.listEditor",
-                args: [".csc-object-tab",
-                    "objects",
-                    "{pageBuilder}.uispec",
-                    leOpts]
-            }
-        };
-        cspace.pageBuilder(dependencies, options);            
+        cspace.pageBuilder(dependencies, options);        
     };
 })(jQuery, fluid);

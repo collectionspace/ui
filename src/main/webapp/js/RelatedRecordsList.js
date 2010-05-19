@@ -13,7 +13,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
-
+    
     var recordsLists = {
         intake: ["intake"],
         acquisition: ["acquisition"],
@@ -23,17 +23,6 @@ cspace = cspace || {};
     };
 
     bindEventHandlers = function (that) {
-        that.locate("addButton").live("click", function (e) {
-            if (that.applier.model.csid) {
-                that.locate("messageContainer", "body").hide();                
-                that.locate("recordTypeString", cspace.addDialogInst.dlg).text(that.options.recordType);
-                cspace.addDialogInst.prepareDialog(that.options.recordType);
-                cspace.addDialogInst.dlg.dialog("open");
-            } else {
-                cspace.util.displayTimestampedMessage(that.dom, that.options.strings.pleaseSaveFirst);
-            }
-        });
-
         that.applier.modelChanged.addListener("relations", function(model, oldModel, changeRequest) {
             fluid.model.copyModel(that.recordList.model.items, cspace.util.buildRelationsList(model.relations, recordsLists[that.options.recordType]));
             that.recordList.refreshView();
@@ -48,17 +37,19 @@ cspace = cspace || {};
             items: cspace.util.buildRelationsList(that.applier.model.relations, recordsLists[that.options.recordType]),
             selectionIndex: -1
         };
-        that.recordList = fluid.initSubcomponent(that, "recordList", [that.container,
+        that.recordList = fluid.initSubcomponent(that, "recordList", [
+            that.container,
             listModel,
-            that.options.uispec]);
-
-        if (!cspace.addDialogInst) {
-            var dlgOpts = that.options.searchToRelateDialog.options || {};
-            dlgOpts.applier = that.applier;
-            dlgOpts.currentRecordType = that.options.currentRecordType;
-            
-            cspace.addDialogInst = fluid.initSubcomponent(that, "searchToRelateDialog", [that.container, that.applier, dlgOpts]);
-        }
+            that.options.uispec,
+            fluid.COMPONENT_OPTIONS
+        ]);
+        
+        that.relationManager = fluid.initSubcomponent(that, "relationManager", [
+            that.container,
+            that.options.recordType,
+            that.applier,
+            fluid.COMPONENT_OPTIONS
+        ]);
 
         bindEventHandlers(that);
         return that;
@@ -68,20 +59,13 @@ cspace = cspace || {};
         recordList: {
             type: "cspace.recordList"
         },
-        searchToRelateDialog: {
-            type: "cspace.searchToRelateDialog"
-        },      
+        relationManager: {
+            type: "cspace.relationManager"
+        },
         selectors: {
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
-            timestamp: ".csc-timestamp",
-            listContainer: ".csc-related-records-list",
-            addButton: ".csc-add-related-record-button",
-            recordTypeString: ".csc-record-type"
-        },
-        strings: {
-            pleaseSaveFirst: "Please save the record you are creating before trying to relate other records to it."
-        },
-        relationshipsUrl: "../../chain/relationships/"
+            timestamp: ".csc-timestamp"
+        }
     });
 })(jQuery, fluid);

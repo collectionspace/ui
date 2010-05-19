@@ -9,6 +9,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jQuery, cspace, fluid*/
+"use strict";
 
 cspace = cspace || {};
 
@@ -29,23 +30,49 @@ cspace = cspace || {};
               csid: that.applier.model.csid,
               strings: {nothingYet: "No Authority terms used yet"}}]);
 
-        that.applier.modelChanged.addListener("termsUsed", function(model, oldModel, changeRequest) {
+        that.applier.modelChanged.addListener("termsUsed", function (model, oldModel, changeRequest) {
             fluid.model.copyModel(that.integratedAuthorities.model.items, model.termsUsed);
             that.integratedAuthorities.refreshView();
         });
 
-        var rpOpts = that.options.relatedRecordsList.options || {};
-        rpOpts.recordType = "procedures";
-        rpOpts.currentRecordType = that.options.currentRecordType;
-        rpOpts.uispec = that.options.uispec.relatedProcedures;
+        // TODO: looks like a bug that I need to specify the current record type twice. 
+        var rpOpts = {
+            recordType : "procedures",
+            currentRecordType : that.options.currentRecordType,
+            uispec : that.options.uispec.relatedProcedures,
+            relationManager : {
+                options: {
+                    currentRecordType: that.options.currentRecordType
+                }
+            }
+        };
+        fluid.merge({}, rpOpts, that.options.relatedRecordsList.options);
+        
+        var roOpts = {
+            recordType: "objects",
+            currentRecordType: that.options.currentRecordType,
+            uispec: that.options.uispec.relatedObjects,
+            relationManager: {
+                options: {
+                    currentRecordType: that.options.currentRecordType
+                }
+            }
+        };
+        fluid.merge({}, roOpts, that.options.relatedRecordsList.options);
+        
+        if (cspace.util.isLocal()) {
+            var localOpts = {
+                options: {
+                    baseUrl: "data/",
+                    fileExtension: ".json"
+                }
+            };
+            rpOpts.relationManager.options.dataContext = localOpts;
+            roOpts.relationManager.options.dataContext = localOpts;
+        }
         that.relatedProcedures = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedProcedures,
               that.applier,
               rpOpts]);
-
-        var roOpts = that.options.relatedRecordsList.options || {};
-        roOpts.recordType = "objects";
-        roOpts.currentRecordType = that.options.currentRecordType;
-        roOpts.uispec = that.options.uispec.relatedObjects;
         that.relatedObjects = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedObjects,
               that.applier,
               roOpts]);

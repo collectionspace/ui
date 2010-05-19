@@ -16,9 +16,26 @@
 		<link rel="stylesheet" type="text/css" href="../css/Confirmation.css" />
 		<link rel="stylesheet" type="text/css" href="../css/Autocomplete.css" />
 		<!--[if lt IE 9]> <link rel="stylesheet" type="text/css" href="../css/cspace_ie.css"> <![endif]-->
-
+        
         <script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
-
+        <!--
+        <script type="text/javascript" src="../../../../../infusion-1.2/src/webapp/lib/jquery/core/js/jquery.js"></script>
+        <script type="text/javascript" src="../../../../../infusion-1.2/src/webapp/framework/core/js/Fluid.js"></script>
+        <script type="text/javascript" src="../../../../../infusion-1.2/src/webapp/lib/jquery/plugins/delegate/js/jquery.delegate.js"></script>
+        <script type="text/javascript" src="../../../../../infusion-1.2/src/webapp/lib/json/js/json2.js"></script>
+        <script type="text/javascript" src="../../../../../infusion-1.2/src/webapp/lib/jquery/ui/js/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="../../../../../infusion-1.2/src/webapp/framework/core/js/jquery.keyboard-a11y.js"></script>
+        <script type="text/javascript" src="../../../../../infusion-1.2/src/webapp/framework/core/js/Fluid.js"></script>
+        <script type="text/javascript" src="../../../../../infusion-1.2/src/webapp/framework/core/js/FluidDOMUtilities.js"></script>
+        <script type="text/javascript" src="../../../../../infusion-1.2/src/webapp/framework/core/js/DataBinding.js"></script>
+        <script type="text/javascript" src="../../../../../infusion-1.2/src/webapp/lib/fastXmlPull/js/fastXmlPull.js"></script>
+        <script type="text/javascript" src="../../../../../infusion-1.2/src/webapp/framework/renderer/js/fluidParser.js"></script>
+        <script type="text/javascript" src="../../../../../infusion-1.2/src/webapp/framework/renderer/js/fluidRenderer.js"></script>
+        <script type="text/javascript" src="../../../../../infusion-1.2/src/webapp/components/inlineEdit/js/InlineEdit.js"></script>
+        <script type="text/javascript" src="../../../../../infusion-1.2/src/webapp/components/pager/js/Pager.js"></script>
+        <script type="text/javascript" src="../../../../../infusion-1.2/src/webapp/lib/jquery/ui/js/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="../../../../../infusion-1.2/src/webapp/lib/jquery/ui/js/jquery.ui.dialog.js"></script>
+        -->
         <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.autocomplete.js"></script>
         <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.tabs.js"></script>
 		<script type="text/javascript" src="../lib/jquery/plugins/corner/js/jquery.corner.js"></script>
@@ -31,6 +48,7 @@
 		<script type="text/javascript" src="../js/NumberPatternChooser.js"></script>
 		<script type="text/javascript" src="../js/Confirmation.js"></script>
 		<script type="text/javascript" src="../js/RecordList.js"></script>
+		<script type="text/javascript" src="../js/RelationManager.js"></script>
         <script type="text/javascript" src="../js/RelatedRecordsList.js"></script>
 		<script type="text/javascript" src="../js/Autocomplete.js"></script>
 		<script type="text/javascript" src="../js/RecordEditor.js"></script>
@@ -40,6 +58,7 @@
         <script type="text/javascript" src="../js/TitleBar.js"></script>
         <script type="text/javascript" src="../js/Tabs.js"></script>
         <script type="text/javascript" src="../js/ListEditor.js"></script>
+        <script type="text/javascript" src="../js/RelatedRecordsTab.js"></script>
         <script type="text/javascript" src="../js/PageBuilder.js"></script>
         <script type="text/javascript" src="../js/objectTabSetup.js"></script>
 		<script type="text/javascript" src="../js/objEntrySetup.js"></script>
@@ -88,8 +107,7 @@
 		
     	<script type="text/javascript">
             jQuery(document).ready(function(){
-        		cspace.objectSetup();
-				
+        		cspace.objectSetup();				
             });
     	</script>
 	</body>

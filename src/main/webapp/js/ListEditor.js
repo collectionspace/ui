@@ -8,41 +8,12 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid*/
+/*global jQuery, fluid, cspace*/
+"use strict";
 
 cspace = cspace || {};
 
 (function ($, fluid) {
-    
-    var initializeRecordListData = function (baseUrl, recordType) {
-        var list = [];
-        $.ajax({
-            url: baseUrl + recordType,
-            dataType: "json",
-            async: false,
-            success: function (data) {
-                list = data.items;
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                fluid.log("Error fetching list of records: " + textStatus);
-            }
-        });
-        return list;
-    };
-
-    var refreshRecordList = function (model, list, baseUrl, recordType) {
-        $.ajax({
-            url: baseUrl + recordType,
-            dataType: "json",
-            success: function (data) {
-                fluid.model.copyModel(model.list, data.items);
-                list.refreshView();
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                fluid.log("Error fetching list of records: " + textStatus);
-            }
-        });
-    };
 
     var hideDetails = function (domBinder) {
         domBinder.locate("details").hide();
@@ -54,12 +25,12 @@ cspace = cspace || {};
     };
     
     var bindEventHandlers = function (that) {
-    	
-    	that.detailsDC.events.afterSave.addListener(function () {
+
+        that.detailsDC.events.afterSave.addListener(function () {
             that.options.listPopulationStrategy(that.model, that.recordType, that.options, function (data) {
                 that.list.refreshView();
             });
-    	});
+        });
         that.detailsDC.events.afterCreate.addListener(function () {
             that.locate("newListRow").hide();
         });
