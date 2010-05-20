@@ -50,13 +50,9 @@ cspace = cspace || {};
     };
     
     var makeDialog = function (that) {
-        var model = {
-            csid: that.applier.model,
-            relations: that.applier.model.relations
-        };
         var dlgOpts = that.options.searchToRelateDialog.options || {};
         dlgOpts.currentRecordType = that.options.currentRecordType;
-        return fluid.initSubcomponent(that, "searchToRelateDialog", [that.container, model, dlgOpts]);
+        return fluid.initSubcomponent(that, "searchToRelateDialog", [that.container, that.applier, dlgOpts]);
     };
     
     cspace.relationManager = function (container, recordType, applier, options) {

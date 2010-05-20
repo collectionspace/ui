@@ -21,7 +21,7 @@ cspace = cspace || {};
             var newIndex = 0;
             var newRelations = [];
             var source = {
-                csid: that.model.csid,
+                csid: that.applier.model.csid,
                 recordtype: that.options.currentRecordType
             };
             // TODO: Candidate for transform.
@@ -92,10 +92,10 @@ cspace = cspace || {};
         return addDialog;        
     };
 
-    cspace.searchToRelateDialog = function (container, model, options) {
+    cspace.searchToRelateDialog = function (container, applier, options) {
         
         var that = fluid.initView("cspace.searchToRelateDialog", container, options);
-        that.model = model;
+        that.applier = applier;
         that.dlg = setupAddDialog(that);
 
         that.prepareDialog = function (type) {
