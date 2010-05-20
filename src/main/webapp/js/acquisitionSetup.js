@@ -22,7 +22,8 @@ cspace = cspace || {};
         };
         var tabsOpts = {
             tabList: [
-				{name: "Acquisition", target: "#primaryTab"},
+                {name: "Acquisition", target: "#primaryTab"},
+				{name: "Acquisition - related", target: null},
 				{name: "Cataloging", target: "objectTabPlaceholder.html"},
 				{name: "Intake", target: null},
 				{name: "Loan In", target: null},

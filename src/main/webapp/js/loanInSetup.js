@@ -38,6 +38,7 @@ cspace = cspace || {};
                 {name: "Acquisition", target: null},
                 {name: "Cataloging", target: "objectTabPlaceholder.html"},
                 {name: "Intake", target: null},
+                {name: "Loan In - related", target: null},
                 {name: "Loan Out", target: null},
                 {name: "Location &amp; Movement", target: null},
                 {name: "Media", target: null}
