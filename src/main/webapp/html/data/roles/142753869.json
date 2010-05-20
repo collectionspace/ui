@@ -1,0 +1,14 @@
+{
+    "csid": "142753869",
+    "fields": {
+        "permissions": [
+            {"recordType": "Object Cataloging", "permission": "write"},
+            {"recordType": "Intake", "permission": "write"},
+            {"recordType": "Acquisition", "permission": "write"},
+            {"recordType": "Loan In", "permission": "read"},
+            {"recordType": "Loan out", "permission": "read"}
+        ],
+        "name": "Media Intern",
+        "description": "Interns responsible for working with media records"
+    }
+}

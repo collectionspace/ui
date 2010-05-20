@@ -1,4 +1,5 @@
 {
+    "csid": "784951623",
     "fields": {
         "permissions": [
             {"recordType": "Object Cataloging", "permission": "write"},
@@ -6,6 +7,8 @@
             {"recordType": "Acquisition", "permission": "read"},
             {"recordType": "Loan In", "permission": "none"},
             {"recordType": "Loan out", "permission": "none"}
-        ]
+        ],
+        "name": "Scanning Intern",
+        "description": "Interns responsible for scanning documents"
     }
 }

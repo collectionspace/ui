@@ -1,0 +1,14 @@
+{
+    "csid": "362951847",
+    "fields": {
+        "permissions": [
+            {"recordType": "Object Cataloging", "permission": "read"},
+            {"recordType": "Intake", "permission": "read"},
+            {"recordType": "Acquisition", "permission": "read"},
+            {"recordType": "Loan In", "permission": "read"},
+            {"recordType": "Loan out", "permission": "read"}
+        ],
+        "name": "Curator",
+        "description": "Full-time museum curators"
+    }
+}

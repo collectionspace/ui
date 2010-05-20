@@ -320,7 +320,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .find-edit .fl-container-left .information-group  table thead tr td {font-size:11px; background-color:#E8E8E8; padding:4px 2px 3px 4px; border:none; color:#9D9D9D;}
 .find-edit .fl-container-left .information-group  table tbody tr td {background-color:#fff; padding: 5px 2px 4px 4px; border:0px solid #ADADAD; color:#92B7DA}*/
 /*.find-edit .fl-container-left .information-group  table tbody tr:hover td {background-color:#F0F5FB; cursor:pointer;}*/
-.find-edit .fl-container-left .information-group  table tbody tr.add-new-user td {color:#A9A59B; font-weight:bold; background-color:#F5F3DC;}
+.find-edit .fl-container-left .information-group  table tbody tr.add-new-row td {color:#A9A59B; font-weight:bold; background-color:#F5F3DC;}
 
 /*.find-edit .search-leader .header {padding: 5px 10px 6px 10px; width:auto; background-color:#F3F3F3; cursor:default;}
 .find-edit .search-leader .header .label {padding-right:4px; color:#666;}
@@ -367,7 +367,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .fl-container-admin  .information-group  table.permissions tbody tr td {border:none; border-bottom:1px solid #C7CFD4;}
 .fl-container-admin  .information-group  table.hover tbody tr:hover td {background-color:#6E9FCE; cursor:pointer; color:#fff;}
 .fl-container-admin  .information-group  table tbody tr:hover td.header {background-color:#E8E8E8; color:#3A3A3A;}
-.fl-container-admin  .information-group  table tbody tr.add-new-user td {color:#A9A59B; font-weight:bold; background-color:#FFFBEB;}
+.fl-container-admin  .information-group  table tbody tr.add-new-row td {color:#A9A59B; font-weight:bold; background-color:#FFFBEB;}
 .fl-container-admin  .information-group  table tbody tr.last td{border-bottom:1px solid #C7CFD4;}
 .new-user-background {background-color:#F5F3DC !important;}
 

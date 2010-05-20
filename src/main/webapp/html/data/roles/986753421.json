@@ -1,0 +1,14 @@
+{
+    "csid": "986753421",
+    "fields": {
+        "permissions": [
+            {"recordType": "Object Cataloging", "permission": "write"},
+            {"recordType": "Intake", "permission": "delete"},
+            {"recordType": "Acquisition", "permission": "delete"},
+            {"recordType": "Loan In", "permission": "delete"},
+            {"recordType": "Loan out", "permission": "delete"}
+        ],
+        "name": "Director",
+        "description": "The big boss"
+    }
+}

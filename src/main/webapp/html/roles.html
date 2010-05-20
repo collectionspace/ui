@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-        <title>CollectionSpace - Administration - Roles and Permissisons</title>
+        <title>CollectionSpace - Administration - Roles and Permissions</title>
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-reset.css" />
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-layout.css" />
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
@@ -65,7 +65,7 @@
 												
 												<div class="fl-container-flex header">
 													<div class="fl-force-left">Roles</div>
-													<div class="addrole"><input type="button" class="button small csc-listEditor-addNew" value="+ role" /></div>
+													<div class="addrole"><input type="button" class="button small csc-role-createNew" value="+ role" /></div>
 													<div class="clear"></div>
 												</div>
 												<div class="overflow-role-list csc-listEditor-list">
@@ -76,6 +76,9 @@
 																<td class="header">Group Name</td>
 															</tr>
 -->
+                                                            <tr class="add-new-row csc-listEditor-addNew" style="display:none;">
+                                                                <td>New Role - Edit Details <img src="../images/new_user_arrow.png" width=16 height=10 alt=""/></td>
+                                                            </tr>
 															<tr class="csc-recordList-row">
 																<td class="csc-role-roleList-name">test role name</td>
                                                                 <td class="hidden csc-listEditor-list-csid"></td>
@@ -89,35 +92,41 @@
 											<div class="info-column2-80 fl-force-right">
 												<div class="fl-container-flex header">Edit Role</div>
                                                 <div class="fl-container-admin">
+                                                    <div class="hidden csc-message-container cs-message">
+                                                        <span class="csc-timestamp cs-timestamp">time</span>
+                                                        <span class="csc-message">Save successful!</span>
+                                                    </div>
                                                     <div class="information-subgroup csc-listEditor-details-none">
                                                         No roles selected. Please select a role from the list, or create a new role.
                                                     </div>
     												<div class="fl-container-flex fl-fix information-subgroup csc-listEditor-details">
     													<div class="info-column fl-force-left">
     														<div class="info-column2-50 fl-force-left">
+<!--
     															<div class="info-column2-50 fl-force-left">
     																<div class="info-pair">
     																	<div class="label">Group</div>
     																	<div class="content">
-    																		<input type="text" class="" />
+    																		<input type="text" class="csc-role-group" />
     																	</div>
     																</div>
     															</div>
-    															<div class="info-column2-50 fl-force-right">
+-->
+    															<div class="info-column2-50 fl-force-left">
     																<div class="info-pair">
     																	<div class="label">Role Name</div>
     																	<div class="content">
-    																		<input type="text" class="" />
+    																		<input type="text" class="csc-role-name" />
     																	</div>
     																</div>
     															</div>
     															<div class="clear"></div>
     														</div>
-    														<div class="info-column2-50 fl-force-right">
+    														<div class="info-column2-50 fl-force-left">
     															<div class="info-pair">
     																<div class="label">Description</div>
     																<div class="content">
-    																	<input type="text" class="" />
+    																	<input type="text" class="csc-role-description" />
     																</div>
     															</div>
     														</div>
@@ -255,12 +264,12 @@
     													<div class="clear"></div>
                                                         <div class="role-buttons">
                                                             <div class="fl-force-left">
-                                                                <a href="#"><input class="button inversebutton" type="button" value="Delete" /></a>
-                                                                <a href="#"><input class="button inversebutton" type="button" value="Duplicate" /></a>
+                                                                <a href="#"><input class="button inversebutton csc-delete" type="button" value="Delete" /></a>
+                                                                <a href="#"><input class="button inversebutton disabled" type="button" value="Duplicate" /></a>
                                                             </div>
                                                             <div class="fl-force-right">
-                                                                <a href="#"><input class="button inversebutton" type="button" class="inversebutton" value="Cancel" /></a>
-                                                                <a href="#"><input class="button" type="button" value="Save" /></a>
+                                                                <a href="#"><input class="button inversebutton csc-cancel" type="button" value="Cancel" /></a>
+                                                                <a href="#"><input class="button csc-save" type="button" value="Save" /></a>
                                                             </div>
                                                         </div>
                                                         <div class="clear"></div>
