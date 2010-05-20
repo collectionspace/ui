@@ -422,7 +422,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .login-pair .login-element {float:left; padding-right: 2px; width:70%;}
 .login-pair.forgotpw {width:100%; padding-bottom:0; font-size:12px;}
 .login-pair.forgotpw {padding-top:10px;}
-.login-error {margin-left:90px; margin-bottom:-18px; padding-left:24px; /*font-weight:bold;*/ color:#C60018; background-image: url(../images/warning.png); background-repeat: no-repeat; background-position:left;}
+.login-error {margin-left:90px; /*margin-bottom:-18px;*/ padding-left:24px; /*font-weight:bold;*/ color:#C60018; background-image: url(../images/warning.png); background-repeat: no-repeat; background-position:left;}
 .login-pair .button {background-color:#93BC7F; padding:3px 18px;}
 
 .login-block {padding-top:10px; width:100%;}
