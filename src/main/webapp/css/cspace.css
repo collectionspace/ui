@@ -19,7 +19,7 @@ input, textarea {font-family:inherit; font-size:12px; font-weight:inherit; line-
 input[type="button"], input[type="submit"], input[type="checkbox"] {height:auto; /*-moz-border-radius: 3px; -webkit-border-radius: 3px;*/}
 input:focus, textarea:focus {outline: 1px solid black;}
 input[type="text"], input[type="password"], textarea {/*width:99.5%;*/ width:100%; margin:0;}
-input[type="submit"].logout {font-weight:bold; color:#333; background-color:#F3F3F3;}
+input[type="submit"].logout {font-weight:bold; color:#333; background-color:#F3F3F3; padding-left:11px; padding-right:10px;}
 input[type="submit"].logout:hover {background-color:#333; color:#FFF;}
 input[type="button"], input[type="submit"]	{background-color:#93BC7F; height:21px; padding-left:12px; padding-right:12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; line-height:15px; border:none;}
 input[type="button"]:hover, input[type="submit"]:hover	{background-color:#73AA4F;}
@@ -545,7 +545,7 @@ table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; f
 .cs-timestamp {float:right; font-weight:normal; font-size: 1em;}
 .hidden {display: none;}
 .show {display: block;}
-.clear {clear:both; margin:0; padding:0; height:1px; overflow:hidden; visibility:hidden; display:block;}
+.clear {clear:both; margin:0 0 -1px; padding:0; height:1px; overflow:hidden; visibility:hidden; display:block;}
 
 .ui-tabs .ui-tabs-hide {display: none;}
 
