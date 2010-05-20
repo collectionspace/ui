@@ -174,9 +174,14 @@ cspace = cspace || {};
             // TODO:    Workaround for CSPACE-1320:
             if (that.options.pageType === "admin") {
                 uispecUrl = "./uispecs/admin/uispec.json";
-            } 
-            else if (that.options.pageType === "object-tab") {
+            }
+            else
+            if (that.options.pageType === "object-tab") {
                 uispecUrl = "./uispecs/object-tab/uispec.json";
+            }
+            else
+            if (that.options.pageType === "roles") {
+                uispecUrl = "./uispecs/roles/uispec.json";
             }
             
             jQuery.ajax({
