@@ -17,7 +17,9 @@ cspace = cspace || {};
     var recordsLists = {
         intake: ["intake"],
         acquisition: ["acquisition"],
-        procedures: ["intake", "acquisition"],
+        loanin: ["loanin"],
+        loanout: ["loanout"],
+        procedures: ["intake", "acquisition", "loanin", "loanout"],
         object: ["objects"],
         objects: ["objects"]
     };
