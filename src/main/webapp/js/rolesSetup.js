@@ -20,7 +20,7 @@ cspace = cspace || {};
             uispec: "{pageBuilder}.uispec"
         };
         if (cspace.util.isLocal()) {
-            rolesOpts.recordType = "roles/records/list.json";            
+            rolesOpts.recordType = "role/records/list.json";            
             rolesOpts.roleListEditor = {
                 options: {
                     baseUrl: "data/",
@@ -34,7 +34,7 @@ cspace = cspace || {};
             };       
         }
         var dependencies = {
-            roles: {
+            role: {
                 funcName: "cspace.adminRoles",
                 args: [".csc-roles-roleAdmin", rolesOpts]
             }
@@ -53,7 +53,7 @@ cspace = cspace || {};
                     targetSelector: ".csc-footer-container"
                 }
             },
-            pageType: "roles"
+            pageType: "role"
         };
         cspace.pageBuilder(dependencies, options);
     };

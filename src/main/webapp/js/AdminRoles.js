@@ -46,13 +46,13 @@ cspace = cspace || {};
     };
 
     fluid.defaults("cspace.adminRoles", {
-        recordType: "roles",
+        recordType: "role",
         roleListEditor: {
             type: "cspace.listEditor",
             options: {
                 dataContext: {
                     options: {
-                        recordType: "roles"
+                        recordType: "role"
                     }
                 }
             }

@@ -180,8 +180,8 @@ cspace = cspace || {};
                 uispecUrl = "./uispecs/object-tab/uispec.json";
             }
             else
-            if (that.options.pageType === "roles") {
-                uispecUrl = "./uispecs/roles/uispec.json";
+            if (that.options.pageType === "role") {
+                uispecUrl = "./uispecs/role/uispec.json";
             }
             
             jQuery.ajax({
