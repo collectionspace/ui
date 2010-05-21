@@ -35,53 +35,14 @@ var listEditorTester = function(){
             }
         }
     };
-
+    var testOpts;
     var listEditorTest = new jqUnit.TestCase("ListEditor Tests", function () {
+        fluid.model.copyModel(testOpts, baseTestOpts);
         listEditorTest.fetchTemplate("../../main/webapp/html/administration.html", ".csc-users-userAdmin");
     });
     
-    listEditorTest.test("fetchData strategy", function () {
-        var testModel = {
-            list: [],
-            selectionIndex: -1
-        };
-        var recordType = "users/records/list.json";
-        strategyOptions = {baseUrl: "../../main/webapp/html/data/"};
-        var testResults = function () {
-            jqUnit.assertEquals("Fetched data should have right number of entries", 4, testModel.list.length);
-            jqUnit.assertEquals("Fetched data should contain expected entry", "Megan Forbes", testModel.list[1].screenName);
-            start();
-        };
-        cspace.listEditor.fetchData(testModel, recordType, strategyOptions, testResults);
-        stop();
-    });
-
-    listEditorTest.test("receiveData strategy", function () {
-        var testModel = {
-            list: [],
-            selectionIndex: -1
-        };
-        var recordType = "users/records/list.json";
-        strategyOptions = {data: []};
-        var testResults = function () {
-            jqUnit.assertEquals("Received data should have right number of entries", 4, testModel.list.length);
-            jqUnit.assertEquals("Received data should contain expected entry", "Megan Forbes", testModel.list[1].screenName);
-            start();
-        };
-        $.ajax({
-            async: false,
-            url: "../../main/webapp/html/data/users/records/list.json",
-            dataType: "json",
-            success: function (data) {strategyOptions.data = data.items;}
-        });
-        cspace.listEditor.receiveData(testModel, recordType, strategyOptions, testResults);
-        stop();
-    });
-
     listEditorTest.test("Initial setup (default strategy: fetch)", function () {
         var listEditor;
-        var testOpts = {};
-        fluid.model.copyModel(testOpts, baseTestOpts);
         testOpts.list = {
             options: {
                 listeners: {
@@ -90,13 +51,7 @@ var listEditorTester = function(){
                         jqUnit.assertEquals("Model should contain expected entry", "Megan Forbes", listEditor.model.list[1].screenName);
                         jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, $(".csc-recordList-row", "#main").length);
                         jqUnit.notVisible("Details should be invisible initially", listEditor.options.selectors.details);
-                        listEditor.showDetails(true);
-                        jqUnit.isVisible("Details should be visible after showDetails", listEditor.options.selectors.details);
-                        jqUnit.notVisible("New Entry row should be invisible initially", listEditor.options.selectors.newListRow);
-                        listEditor.showNewListRow(true);
-                        jqUnit.isVisible("New Entry row should be visible after showNewListRow true", listEditor.options.selectors.newListRow);
-                        listEditor.showNewListRow(false);
-                        jqUnit.notVisible("New Entry row should be invisible after showNewListRow false", listEditor.options.selectors.newListRow);
+                        jqUnit.notVisible("Add new row should be invisible initially", listEditor.options.selectors.newListRow);
                         start();
                     }
                 }
@@ -108,8 +63,6 @@ var listEditorTester = function(){
     
     listEditorTest.test("Initial setup (receive strategy)", function () {
         var listEditor;
-        var testOpts = {};
-        fluid.model.copyModel(testOpts, baseTestOpts);
         testOpts.listPopulationStrategy = cspace.listEditor.receiveStrategy;
         $.ajax({
             async: false,
@@ -125,13 +78,7 @@ var listEditorTester = function(){
                         jqUnit.assertEquals("Model should contain expected entry", "Megan Forbes", listEditor.model.list[1].screenName);
                         jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, $(".csc-recordList-row", "#main").length);
                         jqUnit.notVisible("Details should be invisible initially", listEditor.options.selectors.details);
-                        listEditor.showDetails(true);
-                        jqUnit.isVisible("Details should be visible after showDetails", listEditor.options.selectors.details);
                         jqUnit.notVisible("New Entry row should be invisible initially", listEditor.options.selectors.newListRow);
-                        listEditor.showNewListRow(true);
-                        jqUnit.isVisible("New Entry row should be visible after showNewListRow true", listEditor.options.selectors.newListRow);
-                        listEditor.showNewListRow(false);
-                        jqUnit.notVisible("New Entry row should be invisible after showNewListRow false", listEditor.options.selectors.newListRow);
                         start();
                     }
                 }
@@ -143,16 +90,58 @@ var listEditorTester = function(){
     
     listEditorTest.test("onSelect: details showing", function () {
         var listEditor;
-        var testOpts = {};
-        fluid.model.copyModel(testOpts, baseTestOpts);
         var detailsTester = function(){
             jqUnit.isVisible("Details should be visible after activating an item in the list", listEditor.options.selectors.details);
+            jqUnit.notVisible("New Entry row should be invisible initially", listEditor.options.selectors.newListRow);
+            jqUnit.isVisible("We can see the details that should be visible on edit", listEditor.options.selectors.hideOnCreate);
+            jqUnit.notVisible("We can't see the details that are invisible on edit", listEditor.options.selectors.hideOnEdit);
             jqUnit.assertEquals("Details should be from the correct item", "Megan Forbes", $(".csc-user-userName").val());
             start();
         };
         testOpts.listeners = {
             pageReady: function () {
                 listEditor.details.events.afterRender.addListener(detailsTester);
+                $(".csc-recordList-row:eq(1)", "#main").click();
+            }
+        };
+        listEditor = cspace.listEditor(".csc-users-userAdmin", "users/records/list.json", testUISpec, testOpts);
+        stop();
+    });
+    
+    listEditorTest.test("addNewListRow", function () {
+        var listEditor;
+        testOpts.listeners = {
+            pageReady: function() {
+                jqUnit.notVisible("New Entry row should be invisible initially", listEditor.options.selectors.newListRow);
+                jqUnit.notVisible("Details should be invisible initially", listEditor.options.selectors.details);
+                jqUnit.deepEq("Details Model should be empty initially", {}, listEditor.model.details);
+                listEditor.addNewListRow();
+                jqUnit.isVisible("Details should be visible", listEditor.options.selectors.details);
+                jqUnit.isVisible("New Entry row should be visible", listEditor.options.selectors.newListRow);
+                jqUnit.deepEq("Details Model should still be empty when trying to create a new row", {}, listEditor.model.details);
+                start();
+            }
+        };
+        listEditor = cspace.listEditor(".csc-users-userAdmin", "users/records/list.json", testUISpec, testOpts);
+        stop();
+    });
+    
+    listEditorTest.test("addNewListRow after something was selected", function () {
+        var listEditor;
+        var detailsTester = function(){
+            listEditor.details.events.afterRender.removeListener("afterRenderHandler");
+            jqUnit.notVisible("New Entry row should be invisible initially", listEditor.options.selectors.newListRow);
+            jqUnit.isVisible("Details should be visible initially", listEditor.options.selectors.details);
+            jqUnit.deepEq("Details Model should be empty initially", listEditor.model.list[1], listEditor.model.details);
+            listEditor.addNewListRow();
+            jqUnit.isVisible("Details should be visible", listEditor.options.selectors.details);
+            jqUnit.isVisible("New Entry row should be visible", listEditor.options.selectors.newListRow);
+            jqUnit.deepEq("Details Model should still be empty when trying to create a new row", {}, listEditor.model.details);
+            start();
+        };
+        testOpts.listeners = {
+            pageReady: function () {
+                listEditor.details.events.afterRender.addListener(detailsTester, "afterRenderHandler");
                 $(".csc-recordList-row:eq(1)", "#main").click();
             }
         };

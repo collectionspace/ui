@@ -16,14 +16,27 @@ cspace = cspace || {};
 (function ($, fluid) {
     
     var bindEventHandlers = function (that) {
-        that.applier.modelChanged.addListener("relations", function (model, oldModel, changeRequest) {
-            that.listEditor.options.listPopulationStrategy(that.listEditor.model, that.recordType, {data: model.relations}, function () {
-                that.listEditor.list.refreshView();
-            });
+        that.applier.modelChanged.addListener("relations", function () {
+            that.listEditor.options.updateList(that.listEditor, that.listEditor.list.refreshView);
         });
         that.listEditor.events.pageReady.addListener(function () {
             that.events.afterRender.fire();
         });
+    };
+    
+    var createListUpdater = function (applier) {
+        return function (listEditor, callback) {
+            $.ajax({
+                url: listEditor.options.baseUrl + listEditor.recordType + "/" + applier.model.csid,
+                dataType: "json",
+                success: function (data) {
+                    fluid.model.copyModel(listEditor.model.list, data.relations);
+                    if (callback) {
+                        callback();
+                    }
+                }
+            });
+        };
     };
     
     cspace.relatedRecordsTab = function (container, recordType, uispec, applier, options) {
@@ -31,6 +44,8 @@ cspace = cspace || {};
         that.recordType = recordType;
         that.uispec = uispec;
         that.applier = applier;
+        
+        that.options.listEditor.options.updateList = createListUpdater(that.applier);
         
         that.listEditor = fluid.initSubcomponent(that, "listEditor", [that.container, that.recordType, 
             that.uispec, fluid.COMPONENT_OPTIONS]);

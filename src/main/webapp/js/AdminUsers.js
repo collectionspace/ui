@@ -8,7 +8,8 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid*/
+/*global jQuery, fluid, cspace*/
+"use strict";
 
 cspace = cspace || {};
 
@@ -26,26 +27,6 @@ cspace = cspace || {};
             return false;
         }
         return true;
-    };
-    
-    var addNewUser = function (container, userListEditor, domBinder, uispec) {
-        return function(e){
-            fluid.model.copyModel(userListEditor.details.model,{
-                fields: {
-                    userId: "",
-                    screenName: "", 
-                    password: "", 
-                    email: "",
-                    // TODO: This access into the UISpec is completely inappropriate
-                    // We need a better way of initializing to the default
-                    status: uispec.details[".csc-user-status"]["default"]
-                }
-            });
-            userListEditor.details.refreshView();
-            cspace.passwordValidator(container);
-            userListEditor.showDetails(true);
-            userListEditor.showNewListRow(true);
-        };
     };
     
     var restoreUserList = function (dc, domBinder) {
@@ -85,8 +66,6 @@ cspace = cspace || {};
 
         that.locate("searchButton").click(submitSearch(that.dom, that.userListEditor));
         that.locate("unSearchButton").click(restoreUserList(that.userListEditor.listDC, that.dom)).hide();
-        
-        that.locate("newUser").click(addNewUser(that.container, that.userListEditor, that.dom, that.options.uispec));
 
         that.userListEditor.details.events.onSave.addListener(function () {
             return validate(that.dom, that.userListEditor.detailsApplier);
@@ -123,7 +102,6 @@ cspace = cspace || {};
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
             timestamp: ".csc-timestamp",
-            newUser: ".csc-user-createNew",
             userId: ".csc-user-userID",
             email: ".csc-user-email",
             password: ".csc-user-password",

@@ -18,18 +18,27 @@ cspace = cspace || {};
     var hideDetails = function (domBinder) {
         domBinder.locate("details").hide();
         domBinder.locate("detailsNone").show();
+        domBinder.locate("newListRow").hide();
     };
     
-    var loadDetails = function (model, detailsDC) {
-        detailsDC.fetch(model.items[model.selectionIndex].csid);
+    var showDetails = function (domBinder, newDetails) {
+        domBinder.locate("detailsNone").hide();
+        domBinder.locate("details").show();
+        if (newDetails) {
+            domBinder.locate("newListRow").show();
+            domBinder.locate("hideOnCreate").hide();
+            domBinder.locate("hideOnEdit").show();
+        } else {
+            domBinder.locate("newListRow").hide();
+            domBinder.locate("hideOnEdit").hide();
+            domBinder.locate("hideOnCreate").show();
+        }
     };
     
     var bindEventHandlers = function (that) {
 
         that.detailsDC.events.afterSave.addListener(function () {
-            that.options.listPopulationStrategy(that.model, that.recordType, that.options, function (data) {
-                that.list.refreshView();
-            });
+            that.options.updateList(that, that.list.refreshView);
         });
         that.detailsDC.events.afterCreate.addListener(function () {
             that.locate("newListRow").hide();
@@ -43,17 +52,17 @@ cspace = cspace || {};
         });
         
         that.details.events.afterRender.addListener(function () {
-            that.locate("newListRow").hide();
-            that.showDetails(false);
+            showDetails(that.dom, false);
         });
         that.details.events.onCancel.addListener(function () {
             hideDetails(that.dom);
-            that.locate("newListRow").hide();
         });
         
         that.list.events.onSelect.addListener(function (model) {
-            loadDetails(model, that.detailsDC);
+            that.options.loadDetails(model, that.detailsDC);
         });
+        
+        that.locate("addNewListRowButton").click(that.addNewListRow);
     };
     
     var setUpListEditor = function (that) {
@@ -82,24 +91,16 @@ cspace = cspace || {};
         ]);
         hideDetails(that.dom);
         
-        that.showDetails = function (newDetails) {
-            that.locate("detailsNone").hide();
-            that.locate("details").show();
-            if (newDetails) {
-                that.locate("hideOnCreate").hide();
-                that.locate("hideOnEdit").show();
-            } else {
-                that.locate("hideOnEdit").hide();
-                that.locate("hideOnCreate").show();
-            }
-        };
-        
-        that.showNewListRow = function (show) {
-            var newListRow = that.locate("newListRow");
-            newListRow[show ? "show" : "hide"]();
+        /**
+         * addNewListRow - add an empty row to the list and display cleared and ready for editing details.
+         */
+        that.addNewListRow = function () {
+            fluid.model.copyModel(that.model.details, {});
+            that.details.refreshView();
+            showDetails(that.dom, true);
         };
 
-        that.options.listPopulationStrategy(that.model, that.recordType, that.options, function () {
+        that.options.initList(that, function () {
             that.list = fluid.initSubcomponent(that, "list", [
                 $(that.options.selectors.list, container),
                 {
@@ -115,17 +116,17 @@ cspace = cspace || {};
     };
 
     /*
-     * @param {Object} model        The data model of the component
-     * @param {String} recordType   The string representing the record type
-     * @param {Object} options      The options block of the calling component
+     * A strategy for providing data to populate the 'list' portion of the ListEditor model.
+     * This strategy fetches the data from the server. 
+     * @param {Object} listEditor   The ListEdior component
      * @param {Function} callback   An optional callback function that will be called on success
      */
-    cspace.listEditor.fetchData = function (model, recordType, options, callback) {
+    cspace.listEditor.fetchData = function (listEditor, callback) {
         $.ajax({
-            url: options.baseUrl + recordType,
+            url: listEditor.options.baseUrl + listEditor.recordType,
             dataType: "json",
             success: function (data) {
-                fluid.model.copyModel(model.list, data.items);
+                fluid.model.copyModel(listEditor.model.list, data.items);
                 if (callback) {
                     callback();
                 }
@@ -133,11 +134,27 @@ cspace = cspace || {};
         });
     };
 
-    cspace.listEditor.receiveData = function (model, recordType, options, callback) {
-        fluid.model.copyModel(model.list, options.data);
+    /*
+     * A strategy for providing data to populate the 'list' portion of the ListEditor model.
+     * This strategy extracts data from an option. 
+     * @param {Object} listEditor   The ListEdior component
+     * @param {Function} callback   An optional callback function that will be called on success
+     */
+    cspace.listEditor.receiveData = function (listEditor, callback) {
+        fluid.model.copyModel(listEditor.model.list, listEditor.options.data);
         if (callback) {
             callback();
         }
+    };
+    
+    /*
+     * A strategy for providing data to populate the 'details' portion of the ListEditor model.
+     * This strategy uses the DataContext to fetch the information. 
+     * @param {Object} model        A data model
+     * @param {Object} detailsDC    The DataContext used for the 'details' section of the component
+     */
+    cspace.listEditor.loadDetails = function (model, detailsDC) {
+        detailsDC.fetch(model.items[model.selectionIndex].csid);
     };
 
     fluid.defaults("cspace.listEditor", {
@@ -166,12 +183,18 @@ cspace = cspace || {};
             detailsNone: ".csc-listEditor-details-none",
             newListRow: ".csc-listEditor-addNew",
             hideOnCreate: ".csc-details-hideOnCreate",
-            hideOnEdit: ".csc-details-hideOnEdit"
+            hideOnEdit: ".csc-details-hideOnEdit",
+            addNewListRowButton: ".csc-listEditor-createNew"
         },
         events: {
             pageReady: null
         },
-        listPopulationStrategy: cspace.listEditor.fetchData,
+        
+        // strategies:
+        loadDetails: cspace.listEditor.loadDetails,
+        initList: cspace.listEditor.fetchData,
+        updateList: cspace.listEditor.fetchData,
+
         baseUrl: "../../chain/", // used by the cspace.listEditor.fetchData strategy
         data: [] // used by the cspace.listEditor.receiveData strategy
     });

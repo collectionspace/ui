@@ -22,7 +22,7 @@ cspace = cspace || {};
         var tabOpts = {
             listEditor: {
                 options: {
-                    listPopulationStrategy: cspace.listEditor.receiveData,
+                    initList: cspace.listEditor.receiveData,
                     data: applier.model.relations,
                     dataContext: {
                         options: {
