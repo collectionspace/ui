@@ -74,6 +74,101 @@ var rendererTester = function(){
         jqUnit.assertDeepEq("Repeated rows should be present in proto tree.", expectedProtoTree, protoTree);
     });
 
+    rendererTest.test("buildProtoTree(): Repeated rows, no data, decorator comes before valuebinding (CSPACE-1888)", function () {
+        var testUISpec = {
+            "rowSelector:": {
+                children: [
+                    { selector1: {
+                            decorators: [{
+                                type: "fluid",
+                                func: "cspace.testDecorator"
+                            }]
+                        },
+                      selector2: "${repeated.0.field2}" }
+                ]
+            }
+        };
+        var testModel = {
+        };
+        var testThat = {
+            model: testModel
+        };
+        var expectedProtoTree = {
+            "rowSelector:": {
+                children: [
+                    { selector1: {
+                            decorators: [{
+                                type: "fluid",
+                                func: "cspace.testDecorator"
+                            }]
+                        },
+                      selector2: "${repeated.0.field2}" }
+                ]
+            }
+        };
+        var expectedUpdatedModel = {
+            repeated: []
+        };
+        var protoTree = cspace.renderUtils.buildProtoTree(testUISpec, testThat);
+        jqUnit.assertDeepEq("One row should be present in proto tree.", expectedProtoTree, protoTree);
+        jqUnit.assertDeepEq("Model should be updated to reflect repeated field.", expectedUpdatedModel, testThat.model);
+    });
+
+    rendererTest.test("buildProtoTree(): Repeated rows, repeated data, decorator comes before valuebinding (CSPACE-1888)", function () {
+        var testUISpec = {
+            "rowSelector:": {
+                children: [
+                    { selector1: {
+                            decorators: [{
+                                type: "fluid",
+                                func: "cspace.testDecorator"
+                            }]
+                        },
+                      selector2: "${repeated.0.field2}" }
+                ]
+            }
+        };
+        var testModel = {
+            repeated: [
+                {field2: "foo"},
+                {field2: "bar"},
+                {field2: "bat"}
+            ]
+        };
+        var testThat = {
+            model: testModel
+        };
+        var expectedProtoTree = {
+            "rowSelector:": {
+                children: [
+                    { selector1: {
+                            decorators: [{
+                                type: "fluid",
+                                func: "cspace.testDecorator"
+                            }]
+                        },
+                      selector2: "${repeated.0.field2}" },
+                    { selector1: {
+                            decorators: [{
+                                type: "fluid",
+                                func: "cspace.testDecorator"
+                            }]
+                        },
+                      selector2: "${repeated.1.field2}" },
+                    { selector1: {
+                            decorators: [{
+                                type: "fluid",
+                                func: "cspace.testDecorator"
+                            }]
+                        },
+                      selector2: "${repeated.2.field2}" }
+                ]
+            }
+        };
+        var protoTree = cspace.renderUtils.buildProtoTree(testUISpec, testThat);
+        jqUnit.assertDeepEq("One row should be present in proto tree.", expectedProtoTree, protoTree);
+    });
+
     rendererTest.test("buildProtoTree(): Decorators", function () {
         var testUISpec = {
             selector: {

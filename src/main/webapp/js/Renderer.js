@@ -28,12 +28,19 @@ cspace = cspace || {};
         }
     };
 
+    var getElPathOfArray = function (binding) {
+        return binding.substring(binding.indexOf("${")+2, binding.indexOf("0")-1);
+    };
+
     var findValueBinding = function (comp) {
+        if (typeof(comp) === "string") {
+            return getElPathOfArray(comp);
+        } 
         for (var key in comp) {
             if (comp.hasOwnProperty(key)) {
                 var val = comp[key];
                 if ((typeof(val) === "string") && (val.indexOf("${") !== -1)) {
-                    return val.substring(val.indexOf("${")+2, val.indexOf("0")-1);
+                    return getElPathOfArray(val);
                 }
                 if (typeof(val) === "object" && typeof(val.length) !== "number") {
                     return findValueBinding(val);
@@ -161,7 +168,13 @@ cspace = cspace || {};
                     // multiply template rows based on model
                     if (key.indexOf(":") !== -1) {
                         var row = entry.children[0];
-                        var elPath = findValueBinding(row);
+                        var elPath;
+                        for (var subkey in row) {
+                            elPath = findValueBinding(row[subkey]);
+                            if (elPath) {
+                                break;
+                            }
+                        }
                         var data = fluid.model.getBeanValue(that.model, elPath);
                         if (!data) {
                             fluid.model.setBeanValue(that.model, elPath, []);
