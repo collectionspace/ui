@@ -10,7 +10,7 @@
         }
     },
     "details": {
-        ".csc-role-group": "${fields.group}",
+        ".csc-role-group": "${fields.groupName}",
         ".csc-role-name": "${fields.roleName}",
         ".csc-role-description": "${fields.description}",
         ".csc-permissions-record-row:": {

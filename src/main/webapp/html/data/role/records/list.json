@@ -1,8 +1,8 @@
 {
     "items": [
-        {"csid": "784951623", "name": "Scanning Intern"},
-        {"csid": "142753869", "name": "Media Intern"},
-        {"csid": "362951847", "name": "Curator"},
-        {"csid": "986753421", "name": "Director"}
+        {"csid": "784951623", "roleName": "Scanning Intern"},
+        {"csid": "142753869", "roleName": "Media Intern"},
+        {"csid": "362951847", "roleName": "Curator"},
+        {"csid": "986753421", "roleName": "Director"}
     ]
 }

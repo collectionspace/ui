@@ -8,7 +8,7 @@
             {"recordType": "Loan In", "permission": "read"},
             {"recordType": "Loan out", "permission": "read"}
         ],
-        "name": "Curator",
+        "roleName": "Curator",
         "description": "Full-time museum curators"
     }
 }

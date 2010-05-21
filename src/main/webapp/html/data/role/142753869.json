@@ -8,7 +8,7 @@
             {"recordType": "Loan In", "permission": "read"},
             {"recordType": "Loan out", "permission": "read"}
         ],
-        "name": "Media Intern",
+        "roleName": "Media Intern",
         "description": "Interns responsible for working with media records"
     }
 }

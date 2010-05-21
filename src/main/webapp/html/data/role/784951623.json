@@ -8,7 +8,7 @@
             {"recordType": "Loan In", "permission": "none"},
             {"recordType": "Loan out", "permission": "none"}
         ],
-        "name": "Scanning Intern",
+        "roleName": "Scanning Intern",
         "description": "Interns responsible for scanning documents"
     }
 }

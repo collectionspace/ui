@@ -8,7 +8,7 @@
             {"recordType": "Loan In", "permission": "delete"},
             {"recordType": "Loan out", "permission": "delete"}
         ],
-        "name": "Director",
+        "roleName": "Director",
         "description": "The big boss"
     }
 }
