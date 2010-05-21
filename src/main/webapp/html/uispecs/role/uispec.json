@@ -3,7 +3,7 @@
         ".csc-recordList-row:": {
             "children": [
                 {
-                    ".csc-role-roleList-name": "${items.0.name}",
+                    ".csc-role-roleList-name": "${items.0.roleName}",
                     ".csc-role-roleList-csid": "${items.0.csid}"
                 }
             ]
@@ -11,7 +11,7 @@
     },
     "details": {
         ".csc-role-group": "${fields.group}",
-        ".csc-role-name": "${fields.name}",
+        ".csc-role-name": "${fields.roleName}",
         ".csc-role-description": "${fields.description}",
         ".csc-permissions-record-row:": {
             "children": [
