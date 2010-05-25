@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global fluid, jQuery, jqUnit, cspace*/
+/*global fluid, jQuery, jqUnit, cspace, start, stop, expect*/
 "use strict";
 
 (function ($, fluid) {
@@ -46,10 +46,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         "relationshiptype": "affects"
     }];
     
-    var relationManagerTest = new jqUnit.TestCase("RelationManager Tests", function () {
-        var model = {};
-        applier = fluid.makeChangeApplier(model);
-        relationManager = cspace.relationManager("#main", "objects", applier, {
+    var relationManagerTest = new jqUnit.TestCase("RelationManager Tests", null, function () {
+        delete cspace.addDialogInst;
+        $(".ui-dialog").detach();
+    });
+    
+    var createRelationManager = function (model, opts, inApplier) {
+        applier = inApplier || fluid.makeChangeApplier(model);
+        var defaultOpts = {
             searchToRelateDialog: {
                 options: {
                     templates: {
@@ -57,111 +61,144 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }
                 }
             }
+        };        
+        $.extend(true, defaultOpts, opts);
+        relationManager = cspace.relationManager("#main", "objects", applier, defaultOpts);
+        stop();
+    };
+    
+    relationManagerTest.test("Initialization", function () {
+        createRelationManager({}, {
+            searchToRelateDialog: {
+                options: {
+                    listeners: {
+                        afterRender: function () {
+                            jqUnit.assertValue("Search to relate dialog initialized", cspace.addDialogInst);
+                            jqUnit.assertValue("Relation Manager's data context initialized", relationManager.dataContext);
+                            jqUnit.assertDeepEq("Applier is properly initalized", applier, relationManager.applier);
+                            jqUnit.assertDeepEq("Applier is properly initalized", "objects", relationManager.recordType);
+                            start();
+                        }
+                    }
+                }
+            }
         });
     });
     
-    relationManagerTest.test("Initialization", function () {
-        jqUnit.assertValue("Search to relate dialog initialized", cspace.addDialogInst);
-        jqUnit.assertValue("Relation Manager's data context initialized", relationManager.dataContext);
-        jqUnit.assertDeepEq("Applier is properly initalized", applier, relationManager.applier);
-        jqUnit.assertDeepEq("Applier is properly initalized", "objects", relationManager.recordType);
-    });
-    
     relationManagerTest.test("Add Relation Dialog when the object is not saved", function () {
-        jqUnit.notVisible("Add Relation Dialog is initially invisible", cspace.addDialogInst.dlg);
-        relationManager.locate("addButton").click();
-        jqUnit.notVisible("Add Relation Dialog is invisible becuase the object is not saved", cspace.addDialogInst.dlg);
-        var message = relationManager.locate("feedbackMessage");
-        jqUnit.isVisible("Error message is visible", message);
-        jqUnit.assertEquals("Object should be saved first", relationManager.options.strings.pleaseSaveFirst, message.text());
+        createRelationManager({}, {
+            searchToRelateDialog: {
+                options: {
+                    listeners: {
+                        afterRender: function () {
+                            jqUnit.notVisible("Add Relation Dialog is initially invisible", cspace.addDialogInst.dlg);
+                            relationManager.locate("addButton").click();
+                            jqUnit.notVisible("Add Relation Dialog is invisible becuase the object is not saved", cspace.addDialogInst.dlg);
+                            var message = relationManager.locate("feedbackMessage");
+                            jqUnit.isVisible("Error message is visible", message);
+                            jqUnit.assertEquals("Object should be saved first", relationManager.options.strings.pleaseSaveFirst, message.text());
+                            start();
+                        }
+                    }
+                }
+            }
+        });
     });
     
     relationManagerTest.test("Add Relation Dialog", function () {
-        relationManager.applier.requestChange("csid", "123456798");
-        jqUnit.notVisible("Add Relation Dialog is initially invisible", cspace.addDialogInst.dlg);
-        relationManager.locate("addButton").click();
-        var message = relationManager.locate("feedbackMessage");
-        jqUnit.notVisible("Error message is invisible", message);
-        jqUnit.isVisible("Add Relation Dialog is visible", cspace.addDialogInst.dlg);
-        cspace.addDialogInst.dlg.dialog("close");
+        createRelationManager({}, {
+            searchToRelateDialog: {
+                options: {
+                    listeners: {
+                        afterRender: function () {
+                            relationManager.applier.requestChange("csid", "123456798");
+                            jqUnit.notVisible("Add Relation Dialog is initially invisible", cspace.addDialogInst.dlg);
+                            relationManager.locate("addButton").click();
+                            var message = relationManager.locate("feedbackMessage");
+                            jqUnit.notVisible("Error message is invisible", message);
+                            jqUnit.isVisible("Add Relation Dialog is visible", cspace.addDialogInst.dlg);
+                            cspace.addDialogInst.dlg.dialog("close");
+                            start();
+                        }
+                    }
+                }
+            }
+        });        
     });
     
-    var setupRelationManager = function (baseCSID, relations) {
-        relationManager.applier.requestChange("csid", baseCSID);
-        relationManager.applier.requestChange("relations", relations);
-    };
-    
     relationManagerTest.test("Add relations", function () {
-        setupRelationManager(baseCSID, relations);
-        jqUnit.assertEquals("The object has no relations initially", relations, relationManager.applier.model.relations);
-        relationManager.addRelations({items: newRelations});
-        jqUnit.assertDeepEq("The object has new relations", expectedRelations, relationManager.applier.model.relations);
+        createRelationManager({
+                csid: baseCSID,
+                relations: relations
+            }, {
+                searchToRelateDialog: {
+                    options: {
+                        listeners: {
+                            afterRender: function () {
+                                jqUnit.assertEquals("The object has no relations initially", relations, relationManager.applier.model.relations);
+                                relationManager.addRelations({items: newRelations});
+                                jqUnit.assertDeepEq("The object has new relations", expectedRelations, relationManager.applier.model.relations);
+                                start();
+                            }
+                        }
+                    }
+                }
+            }
+        );        
     });
     
     relationManagerTest.test("Add relations to none (through search to relate dialog)", function () {
         expect(4);
-        setupRelationManager(baseCSID, relations);
-        jqUnit.assertEquals("The object has no relations initially", relations, relationManager.applier.model.relations);
+        var model = {
+            csid: baseCSID,
+            relations: relations
+        };
+        applier = fluid.makeChangeApplier(model);
         applier.modelChanged.addListener("relations", function (model, oldModel, changeRequest) {
             jqUnit.assertDeepEq("Listener oldModel paramter should be right", [], oldModel.relations);
             jqUnit.assertDeepEq("Listener model paramter should be right", expectedRelations, model.relations);
             jqUnit.assertDeepEq("The model has been updated with the new relations.", expectedRelations, relationManager.applier.model.relations);
         });
-        cspace.addDialogInst.events.afterRender.addListener(function () {
-            relationManager.locate("addButton").click();
-            cspace.addDialogInst.search.locate("searchButton").click();            
-            cspace.addDialogInst.locate("addButton", cspace.addDialogInst.dlg).click();
-        });
-//        var dlgOpts = {
-//            currentCSID: baseCSID,
-//            dataContext: relationManager.dataContext,
-//            applier: relationManager.applier,
-//            templates: {
-//                dialog: "test-data/template1.html"
-//            }
-//        };
-//        var dlg = cspace.searchToRelateDialog("#dialog-container", applier, dlgOpts);
-//        dlg.updateRelations(newRelations);
-//        dlg.locate("addButton", dlg.dlg).click();
-//        $(".csc-relate-button").click();
+        createRelationManager(model, {
+            searchToRelateDialog: {
+                options: {
+                    listeners: {
+                        afterRender: function () {
+                            jqUnit.assertEquals("The object has no relations initially", relations, relationManager.applier.model.relations);
+                            relationManager.addRelations({items: newRelations});
+                            start();
+                        }
+                    }
+                }
+            }
+        }, applier);
     });
-
-//    relationManagerTest.test("Add relations to existing relations", function () {
-//        var testModel = {};
-//        fluid.model.copyModel(testModel, baseModel);
-//        var existingRelation = {
-//            "csid": "963.852",
-//            "relationshiptype": "affects"
-//        };
-//        testModel.relations[0] = existingRelation;
-//        var applier = fluid.makeChangeApplier(testModel);
-//        var expectedRelations = [
-//            existingRelation,
-//            {
-//                "csid": "987.654",
-//                "relationshiptype": "affects"
-//            }, {
-//                "csid": "741.852",
-//                "relationshiptype": "affects"
-//            }
-//        ];
-//
-//        applier.modelChanged.addListener("relations", function (model, oldModel, changeRequest) {
-//            jqUnit.assertDeepEq("Listener oldModel paramter should be right", [existingRelation], oldModel.relations);
-//            jqUnit.assertDeepEq("Listener model paramter should be right", expectedRelations, model.relations);
-//            jqUnit.assertDeepEq("The model has been updated with the new relations.", expectedRelations, testModel.relations);
-//            start();
-//        });
-//        var dlgOpts = {
-//            currentCSID: baseCSID,
-//            dataContext: cspace.dataContext(applier.model),
-//            applier: applier,
-//            templates: {
-//                dialog: "test-data/template1.html"
-//            }
-//        };
-//        var dlg = cspace.searchToRelateDialog("#dialog-container", applier, dlgOpts);
-//        dlg.updateRelations(testRelations);
-//    });
+    
+    relationManagerTest.test("Fire create new record event", function () {
+        expect(1);
+        var model = {
+            csid: baseCSID,
+            relations: relations
+        };
+        applier = fluid.makeChangeApplier(model);
+        createRelationManager(model, {
+            listeners: function () {
+                jqUnit.assertTrue("Search to relate dialog fires onCreateNewRecord when clicked create", true);
+                start();
+            },
+            searchToRelateDialog: {
+                options: {
+                    listeners: {
+                        afterRender: function () {
+                            jqUnit.assertEquals("The object has no relations initially", relations, relationManager.applier.model.relations);
+                            relationManager.locate("addButton").click();
+                            cspace.addDialogInst.locate("createNewButton", cspace.addDialogInst.dlg).click();
+                            start();
+                        }
+                    }
+                }
+            }
+        }, applier);
+    });
     
 })(jQuery, fluid);

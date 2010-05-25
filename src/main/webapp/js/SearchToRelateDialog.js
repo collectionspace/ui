@@ -42,6 +42,17 @@ cspace = cspace || {};
             that.dlg.dialog("close");
         };
     };
+    
+    var bindEventHandlers = function (that, addDialog) {
+        that.locate("addButton", addDialog).click(handleAddClick(that));
+        that.locate("closeButton", addDialog).click(function () {
+            addDialog.dialog("close");
+        });
+        that.locate("createNewButton", addDialog).click(function () {
+            that.events.onCreateNewRecord.fire();
+            that.dlg.dialog("close");
+        });
+    };
 
     var setupAddDialog = function (that) {
         var resources = {
@@ -81,11 +92,9 @@ cspace = cspace || {};
             // TODO: Should be a subcomponent.
             // Like this: that.search = fluid.initSubcomponent(that, "search", [$(".main-search-page", ".cs-search-dialog"), fluid.COMPONENT_OPTIONS]);
             that.search = cspace.search(".main-search-page", searchOpts);
-
-            that.locate("addButton", addDialog).click(handleAddClick(that));
-            that.locate("closeButton", addDialog).click(function () {
-                addDialog.dialog("close");
-            });
+            
+            bindEventHandlers(that, addDialog);
+            
             that.events.afterRender.fire();
         });
 
@@ -117,13 +126,15 @@ cspace = cspace || {};
             selectBoxes: ".csc-select-boxes",
             objectsSelecter: ".csc-recordTypeSelecter-object",
             proceduresSelecter: ".csc-recordTypeSelecter-procedures",
-            closeButton: ".csc-searchToRelate-closeBtn"
+            closeButton: ".csc-searchToRelate-closeBtn",
+            createNewButton: ".csc-create-submit"
         },
         templates: {
             dialog: "../html/searchToRelate.html"
         },
         events: {
             addRelations: null,
+            onCreateNewRecord: null,
             afterRender: null
         }
     });

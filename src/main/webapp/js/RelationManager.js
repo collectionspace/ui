@@ -37,9 +37,11 @@ cspace = cspace || {};
                 cspace.addDialogInst.prepareDialog(that.recordType);
                 cspace.addDialogInst.dlg.bind("dialogopen", function () {
                     cspace.addDialogInst.events.addRelations.addListener(that.addRelations, "addRelationsListener");
+                    cspace.addDialogInst.events.onCreateNewRecord.addListener(that.events.onCreateNewRecord.fire, "onCreateNewRecordListener");
                 });
                 cspace.addDialogInst.dlg.bind("dialogclose", function () {
                     cspace.addDialogInst.events.addRelations.removeListener("addRelationsListener");
+                    cspace.addDialogInst.events.onCreateNewRecord.removeListener("onCreateNewRecordListener");
                 });
                 cspace.addDialogInst.dlg.dialog("open");
             } else {
@@ -97,6 +99,9 @@ cspace = cspace || {};
         },
         strings: {
             pleaseSaveFirst: "Please save the record you are creating before trying to relate other records to it."
+        },
+        events: {
+            onCreateNewRecord: null
         }
     });
     

@@ -22,6 +22,22 @@ cspace = cspace || {};
         that.listEditor.events.pageReady.addListener(function () {
             that.events.afterRender.fire();
         });
+        that.relationManager.events.onCreateNewRecord.addListener(that.listEditor.addNewListRow);
+        that.listEditor.detailsDC.events.afterCreate.addListener(function (data) {
+            var newRelation = [{
+                source: {
+                    csid: that.applier.model.csid,
+                    recordtype: that.recordType
+                },
+                target: {
+                    csid: data.csid,
+                    recordtype: "objects"
+                },//data,
+                type: "affects",
+                "one-way": false
+            }];
+            that.relationManager.addRelations({items: newRelation});
+        });
     };
     
     var createListUpdater = function (applier) {
