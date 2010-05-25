@@ -32,12 +32,22 @@ var adminUsersTester = function () {
         uispec: testUISpec,
         userListEditor: {
             options: {
-                baseUrl: "../../main/webapp/html/data/"
+    			baseUrl: "../../main/webapp/html/data/",
+                dataContext: {
+                    options: {
+                        baseUrl: "../../main/webapp/html/data/"
+                    }
+                }
             }
         }
     };
 
     var testOpts;
+    var testDataCreateUser = {
+    	email: "rj@dio.com",
+    	userName: "R J Dio",
+    	validPassword: "123456789"
+    };
 
     var adminUsersTest = new jqUnit.TestCase("AdminUsers Tests", function () {
         adminUsersTest.fetchTemplate("../../main/webapp/html/administration.html", ".csc-users-userAdmin");
@@ -98,10 +108,52 @@ var adminUsersTester = function () {
         adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
         stop();
     });
-
+    
+    adminUsersTest.test("Save new user - successful ajax call", function () {
+        var adminUsers;
+        testOpts.listeners = {
+            afterRender: function () {
+            	jQuery(adminUsers.userListEditor.options.selectors.addNewListRowButton).click();
+                
+                //all fields are required
+                jQuery(adminUsers.options.selectors.email).val(testDataCreateUser.email).change();
+                jQuery(adminUsers.options.selectors.userName).val(testDataCreateUser.userName).change();
+                jQuery(adminUsers.options.selectors.password).val(testDataCreateUser.validPassword).change();
+                jQuery(adminUsers.options.selectors.passwordConfirm).val(testDataCreateUser.validPassword).change();
+                
+                var ajaxMock = new jqMock.Mock(jQuery, "ajax");
+                var expectedAjaxParams = {
+                    url: "../../main/webapp/html/data/users/",
+                    dataType: "json",
+                    type: "POST",
+                    data: JSON.stringify({
+               			fields: {
+               				status: "",
+               				email: testDataCreateUser.email,
+               				screenName: testDataCreateUser.userName,
+               				password: testDataCreateUser.validPassword,
+               				passwordConfirm: testDataCreateUser.validPassword,
+               				userId: testDataCreateUser.email
+               			},
+               			csid: ""
+               		})
+                };
+                
+                ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams));               
+                jQuery(adminUsers.userListEditor.details.options.selectors.save).click();
+                              
+                ajaxMock.verify();              
+                ajaxMock.restore();
+                                               
+                start();
+            }
+        };
+        
+        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        stop();
+    });
 };
 
 (function () {
     adminUsersTester();
 }());
-
