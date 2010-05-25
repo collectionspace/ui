@@ -104,6 +104,7 @@ cspace = cspace || {};
             timestamp: ".csc-timestamp",
             userId: ".csc-user-userID",
             email: ".csc-user-email",
+            userName: ".csc-user-userName",
             password: ".csc-user-password",
             passwordConfirm: ".csc-user-passwordConfirm"
         },
