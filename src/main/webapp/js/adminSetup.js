@@ -53,7 +53,7 @@ cspace = cspace || {};
                     targetSelector: ".csc-footer-container"
                 }
             },
-            pageType: "admin"
+            pageType: "users"
         };
         cspace.pageBuilder(dependencies, options);
     };
