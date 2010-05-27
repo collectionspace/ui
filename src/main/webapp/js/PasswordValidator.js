@@ -8,7 +8,8 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid*/
+/*global jQuery, fluid, cspace*/
+"use strict";
 
 cspace = cspace || {};
 
@@ -16,7 +17,7 @@ cspace = cspace || {};
 
     var bindEvents = function (that) {
         var pwField = that.locate("passwordField");
-        pwField.change(function(event) {
+        pwField.change(function (event) {
             that.validateLength(pwField.val());
         });
     };
@@ -35,12 +36,18 @@ cspace = cspace || {};
             return true;
         };
 
-        bindEvents(that);
+		// TODO: In general, we shouldn't make a component's event binding public.
+		// Password validation should probably be more of a decorator-type function.
+		// This is captured in CSPACE-1829
+        that.bindEvents = function () {
+            bindEvents(that);
+        };
+        
         cspace.util.hideMessage(that.dom);
         return that;
     };
 
-    fluid.defaults ("cspace.passwordValidator", {
+    fluid.defaults("cspace.passwordValidator", {
         selectors: {
             passwordField: ".csc-passwordValidator-password",
             messageContainer: ".csc-message-container",
@@ -51,6 +58,6 @@ cspace = cspace || {};
             length: "Passwords must be between %min and %max characters in length."
         },
         minLength: 8,
-        maxLength: 23
+        maxLength: 24
     });
-}) (jQuery, fluid);
+})(jQuery, fluid);

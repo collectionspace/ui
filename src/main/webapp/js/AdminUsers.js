@@ -15,7 +15,7 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var validate = function (domBinder, userDetailsApplier) {
+    var validate = function (domBinder, userDetailsApplier, passwordValidator) {
         // In the default configuration, the email address used as the userid.
         // If all required fields are present and the userid is not set, use the email
         if (!domBinder.locate("userId").val()) {
@@ -26,6 +26,17 @@ cspace = cspace || {};
             cspace.util.displayTimestampedMessage(domBinder, "Passwords don't match");
             return false;
         }
+        
+        var password = domBinder.locate("password");
+        if (password.is(":visible") && (password.val() !== domBinder.locate("passwordConfirm").val())) {
+        	cspace.util.displayTimestampedMessage(domBinder, "Passwords don't match");
+            return false;
+        }
+        
+        if (password.is(":visible") && !passwordValidator.validateLength(password.val())) {
+            return false;
+        }
+
         return true;
     };
     
@@ -68,10 +79,14 @@ cspace = cspace || {};
         that.locate("unSearchButton").click(restoreUserList(that.userListEditor.listDC, that.dom)).hide();
 
         that.userListEditor.details.events.onSave.addListener(function () {
-            return validate(that.dom, that.userListEditor.detailsApplier);
+            return validate(that.dom, that.userListEditor.detailsApplier, that.passwordValidator);
         });
         that.userListEditor.events.pageReady.addListener(function () {
             that.events.afterRender.fire();
+        });
+        
+        that.userListEditor.events.afterAddNewListRow.addListener(function () {
+        	that.passwordValidator.bindEvents();
         });
     };
 
@@ -79,7 +94,9 @@ cspace = cspace || {};
         var that = fluid.initView("cspace.adminUsers", container, options);
         that.userListEditor = fluid.initSubcomponent(that, "userListEditor", [that.container, that.options.recordType, 
             that.options.uispec, fluid.COMPONENT_OPTIONS]);
+        that.passwordValidator = fluid.initSubcomponent(that, "passwordValidator", [that.container, fluid.COMPONENT_OPTIONS]);
         bindEventHandlers(that);
+        
         return that;
     };
 
@@ -94,6 +111,9 @@ cspace = cspace || {};
                     }
                 }
             }
+        },
+        passwordValidator: {
+        	type: "cspace.passwordValidator"
         },
         selectors: {
             searchField: ".csc-user-searchField",

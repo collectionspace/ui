@@ -207,6 +207,11 @@ cspace = cspace || {};
             });
         };
 
+        /*
+         * return: Boolean true if the save was submitted, false if it was prevented by any event listeners.
+         * Note that a return value of true does not necessarily indicate that the save was successful, only that
+         * it was successfully submitted.
+         */
         that.save = function () {
             var ret = that.events.onSave.fire(that.model);
             if (ret !== false) {
@@ -216,6 +221,7 @@ cspace = cspace || {};
                     that.applier.requestChange("csid", "");
                     that.dataContext.create();
                 }
+                return true;
             }
             return false;
         };

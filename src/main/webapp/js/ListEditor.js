@@ -98,6 +98,7 @@ cspace = cspace || {};
             fluid.model.copyModel(that.model.details, {});
             that.details.refreshView();
             showDetails(that.dom, true);
+            that.events.afterAddNewListRow.fire();
         };
 
         that.options.initList(that, function () {
@@ -187,7 +188,8 @@ cspace = cspace || {};
             addNewListRowButton: ".csc-listEditor-createNew"
         },
         events: {
-            pageReady: null
+            pageReady: null,
+            afterAddNewListRow: null
         },
         
         // strategies:
