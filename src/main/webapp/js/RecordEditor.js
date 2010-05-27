@@ -48,7 +48,7 @@ cspace = cspace || {};
 
 	var setupConfirmation = function (that) {
         var confirmationOpts = {
-            action: that.save,
+            action: that.requestSave,
             actionSuccessEvents: [that.events.afterCreateObjectDataSuccess, that.events.afterUpdateObjectDataSuccess],
             actionErrorEvents: [that.events.onError]
         };
@@ -123,7 +123,7 @@ cspace = cspace || {};
         });
 
         that.events.afterRender.addListener(function () {
-            that.locate("save").click(that.save);
+            that.locate("save").click(that.requestSave);
             that.locate("deleteButton").click(that.remove);
             var setUnchanged = function () {
                 that.unsavedChanges = true;
@@ -212,7 +212,7 @@ cspace = cspace || {};
          * Note that a return value of true does not necessarily indicate that the save was successful, only that
          * it was successfully submitted.
          */
-        that.save = function () {
+        that.requestSave = function () {
             var ret = that.events.onSave.fire(that.model);
             if (ret !== false) {
                 if (that.model.csid) {

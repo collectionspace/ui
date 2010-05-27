@@ -167,7 +167,7 @@ var adminUsersTester = function () {
                 jQuery(adminUsersSelectors.password).val(testDataCreateUser.validPassword).change();
                 jQuery(adminUsersSelectors.passwordConfirm).val(testDataCreateUser.validPassword).change();
                 
-                var saveResult = adminUsers.userListEditor.details.save();
+                var saveResult = adminUsers.userListEditor.details.requestSave();
                 jqUnit.assertTrue("details.save returns true for successful save", saveResult);
                                
                 start();
@@ -190,7 +190,7 @@ var adminUsersTester = function () {
                 jQuery(adminUsersSelectors.password).val(testDataCreateUser.validPassword).change();
                 jQuery(adminUsersSelectors.passwordConfirm).val(testDataCreateUser.validPassword).change();
                 
-                var saveResult = adminUsers.userListEditor.details.save();
+                var saveResult = adminUsers.userListEditor.details.requestSave();
                 jqUnit.assertFalse("details.save returns false if passwords do not match", saveResult);
                 jqUnit.isVisible("message container is visible", userListEditorSelectors.messageContainer);
 
@@ -215,7 +215,7 @@ var adminUsersTester = function () {
                 jQuery(adminUsersSelectors.password).val(testDataCreateUser.validPassword).change();
                 jQuery(adminUsersSelectors.passwordConfirm).val("1234567890").change();
                 
-                var saveResult = adminUsers.userListEditor.details.save();
+                var saveResult = adminUsers.userListEditor.details.requestSave();
                 jqUnit.assertFalse("details.save returns false if passwords do not match", saveResult);
                 jqUnit.isVisible("message container is visible", userListEditorSelectors.messageContainer);
 
@@ -240,7 +240,7 @@ var adminUsersTester = function () {
                 jQuery(adminUsersSelectors.password).val(testDataCreateUser.invalidPassword).change();
                 jQuery(adminUsersSelectors.passwordConfirm).val(testDataCreateUser.invalidPassword).change();
                 
-                var saveResult = adminUsers.userListEditor.details.save();
+                var saveResult = adminUsers.userListEditor.details.requestSave();
                 jqUnit.assertFalse("details.save returns false if passwords are invalid", saveResult);
                 jqUnit.isVisible("message container is visible", userListEditorSelectors.messageContainer);
 
@@ -260,7 +260,7 @@ var adminUsersTester = function () {
                 var userListEditorSelectors = adminUsers.userListEditor.options.selectors;
                 jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
                 
-                var saveResult = adminUsers.userListEditor.details.save();
+                var saveResult = adminUsers.userListEditor.details.requestSave();
                 jqUnit.assertTrue("Save should succeed (validation should not prevent save)", saveResult);
                 jqUnit.isVisible("message container is visible", userListEditorSelectors.messageContainer);
 
