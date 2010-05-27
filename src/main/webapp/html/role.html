@@ -33,9 +33,7 @@
     <body>
 	
 		<div class="fl-container-1024 fl-centered">
-		
 			<div id="header-menu" class="csc-header-container"></div>
-			
 			<div class="fl-container-1024-inner">
 				<div id="title-bar" class="nobg">
 					<div class="content">
@@ -45,7 +43,7 @@
 			
 				<div id="all-content" class="fl-fix">
 					<div class="fl-fix fl-container-flex fl-col-mixed2">
-						<div class="fl-container-pivot-roles fl-container-admin-menu fl-force-left" id="">
+						<div class="fl-container-pivot-roles fl-container-admin-menu fl-force-left">
 							<ul>
 								<li><a href="administration.html">Users</a></li>
 								<li class="selected">Roles and Permissions</li>
@@ -60,16 +58,15 @@
 							<div class="main-roles-page csc-roles-roleAdmin">
                                 <div class="csc-role-list">
 									<div class="fl-container-flex fl-fix information-group">
-										<div class="fl-container-flex fl-fix content" id="">
+										<div class="fl-container-flex fl-fix content">
 											<div class="info-column2-20 fl-force-left">
-												
 												<div class="fl-container-flex header">
 													<div class="fl-force-left">Roles</div>
-													<div class="addrole"><input type="button" class="button small csc-listEditor-createNew" value="+ role" /></div>
+													<div class="addrole"><input type="button" class="csc-listEditor-createNew" value="+ role" /></div>
 													<div class="clear"></div>
 												</div>
 												<div class="overflow-role-list csc-listEditor-list">
-													<table class="role-table hover">
+													<table class="role-table">
 														<tbody>
 <!--
 															<tr>
@@ -138,16 +135,16 @@
                                                                 <div class="cs-permissions-table">
                                                                     <div class="flc-cabinet-mainheader"><span class="label">None</span><span class="label">Read</span><span class="label">Write</span><span class="label">Delete</span></div>
     
-                                                                <div class="cs-permissions-row csc-permissions-record-row">
-                                                                    <div class="radio-row">
-                                                                        <span class="radio"><input type="radio"  csc-permissions-record-permissions name="group1" /></span>
-                                                                        <span class="radio"><input type="radio" name="group1" /></span>
-                                                                        <span class="radio"><input type="radio" name="group1" /></span>
-                                                                        <span class="radio"><input type="radio" name="group1" /></span>
-                                                                    </div>
-                                                                    <div class="permission-name csc-permissions-record-type">record type name</div>
-                                                                    <div class="clear"></div>
-                                                                </div>
+																	<div class="cs-permissions-row csc-permissions-record-row">
+																		<div class="radio-row">
+																			<span class="radio"><input type="radio"  csc-permissions-record-permissions name="group1" /></span>
+																			<span class="radio"><input type="radio" name="group1" /></span>
+																			<span class="radio"><input type="radio" name="group1" /></span>
+																			<span class="radio"><input type="radio" name="group1" /></span>
+																		</div>
+																		<div class="permission-name csc-permissions-record-type">record type name</div>
+																		<div class="clear"></div>
+																	</div>
                                                                 </div>
     
     
@@ -264,12 +261,12 @@
     													<div class="clear"></div>
                                                         <div class="role-buttons">
                                                             <div class="fl-force-left">
-                                                                <a href="#"><input class="button inversebutton csc-delete" type="button" value="Delete" /></a>
-                                                                <a href="#"><input class="button inversebutton disabled" type="button" value="Duplicate" /></a>
+                                                                <a href="#"><input class="csc-delete" type="button" value="Delete" /></a>
+                                                                <a href="#"><input class="disabled" type="button" value="Duplicate" /></a>
                                                             </div>
                                                             <div class="fl-force-right">
-                                                                <a href="#"><input class="button inversebutton csc-cancel" type="button" value="Cancel" /></a>
-                                                                <a href="#"><input class="button csc-save" type="button" value="Save" /></a>
+                                                                <a href="#"><input class="csc-cancel" type="button" value="Cancel" /></a>
+                                                                <a href="#"><input class="csc-save primary" type="button" value="Save" /></a>
                                                             </div>
                                                         </div>
                                                         <div class="clear"></div>
@@ -287,7 +284,6 @@
 				</div>
 			</div>
 			
-			<!-- footer block -->
 			<div id="footer" class="csc-footer-container">
 				<!-- this div will be filled in with the contents of the Template -->
 			</div> <!-- END footer block -->
