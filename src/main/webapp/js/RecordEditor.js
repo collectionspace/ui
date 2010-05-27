@@ -33,14 +33,9 @@ cspace = cspace || {};
     var makeShowConfirmation = function (that) {
         return function (e) {
             if (that.unsavedChanges) {
-                var href;
-                if (e.target.nodeName === "IMG") {
-                    // this assumes that if the target is an image, it must be wrapped in an <a>
-                    href = e.target.parentNode.href;
-                } else {
-                    href = e.target.href;
-                }
-                that.confirmation.open(href);
+            	// TODO: confirmation only works on element clicks that have an href
+            	// http://issues.collectionspace.org/browse/CSPACE-1813
+                that.confirmation.open($(this).attr("href"));
                 return false;
             }
         };
