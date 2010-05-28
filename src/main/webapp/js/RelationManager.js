@@ -53,7 +53,7 @@ cspace = cspace || {};
     
     var makeDialog = function (that) {
         var dlgOpts = that.options.searchToRelateDialog.options || {};
-        dlgOpts.currentRecordType = that.options.currentRecordType;
+        dlgOpts.primaryRecordType = that.options.primaryRecordType || that.recordType;
         return fluid.initSubcomponent(that, "searchToRelateDialog", [that.container, that.applier, dlgOpts]);
     };
     
@@ -102,7 +102,8 @@ cspace = cspace || {};
         },
         events: {
             onCreateNewRecord: null
-        }
+        },
+        primaryRecordType: null
     });
     
 })(jQuery, fluid);

@@ -27,11 +27,11 @@ cspace = cspace || {};
             var newRelation = [{
                 source: {
                     csid: that.applier.model.csid,
-                    recordtype: that.recordType
+                    recordtype: that.relationManager.options.primaryRecordType
                 },
                 target: {
                     csid: data.csid,
-                    recordtype: "objects"
+                    recordtype: that.recordType
                 },//data,
                 type: "affects",
                 "one-way": false
@@ -40,10 +40,10 @@ cspace = cspace || {};
         });
     };
     
-    var createListUpdater = function (applier) {
+    var createListUpdater = function (applier, primaryRecordType) {
         return function (listEditor, callback) {
             $.ajax({
-                url: listEditor.options.baseUrl + listEditor.recordType + "/" + applier.model.csid,
+                url: listEditor.options.baseUrl + primaryRecordType + "/" + applier.model.csid,
                 dataType: "json",
                 success: function (data) {
                     fluid.model.copyModel(listEditor.model.list, data.relations);
@@ -60,11 +60,6 @@ cspace = cspace || {};
         that.recordType = recordType;
         that.uispec = uispec;
         that.applier = applier;
-        
-        that.options.listEditor.options.updateList = createListUpdater(that.applier);
-        
-        that.listEditor = fluid.initSubcomponent(that, "listEditor", [that.container, that.recordType, 
-            that.uispec, fluid.COMPONENT_OPTIONS]);
             
         that.relationManager = fluid.initSubcomponent(that, "relationManager", [
             that.container,
@@ -72,6 +67,11 @@ cspace = cspace || {};
             that.applier,
             fluid.COMPONENT_OPTIONS
         ]);
+        
+        that.options.listEditor.options.updateList = createListUpdater(that.applier, that.relationManager.options.primaryRecordType);
+        
+        that.listEditor = fluid.initSubcomponent(that, "listEditor", [that.container, that.recordType, 
+            that.uispec, fluid.COMPONENT_OPTIONS]);
             
         bindEventHandlers(that);
         

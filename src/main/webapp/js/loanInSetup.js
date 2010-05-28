@@ -43,7 +43,14 @@ cspace = cspace || {};
                 {name: "Location &amp; Movement", target: null},
                 {name: "Media", target: null}
             ],
-            setupFuncs: [null, "cspace.objectTabSetup"]
+            tabSetups: [
+                null, {
+                    func: "cspace.objectTabSetup",
+                    options: {
+                        primaryRecordType: "loanin"
+                    }
+                }
+            ]
         };
         var reOpts = {
             selectors: {identificationNumber: ".csc-loanIn-loanInNumber"},
@@ -51,7 +58,7 @@ cspace = cspace || {};
         };
         var sbOpts = options.sideBarOpts || {};
         sbOpts.uispec = "{pageBuilder}.uispec.sidebar";
-        sbOpts.currentRecordType = "loanin";
+        sbOpts.primaryRecordType = "loanin";
         
         var dependencies = {
             titleBar: {

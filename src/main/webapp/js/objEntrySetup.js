@@ -20,7 +20,14 @@ cspace = cspace || {};
             uispec: "{pageBuilder}.uispec.titleBar"
         };
         var tabsOpts = {
-            setupFuncs: [null, "cspace.objectTabSetup"]
+            tabSetups: [
+                null, {
+                    func: "cspace.objectTabSetup",
+                    options: {
+                        primaryRecordType: "objects"
+                    }
+                }
+            ]
         };
         var reOpts = {
             selectors: {identificationNumber: ".csc-object-identification-object-number"},
@@ -28,7 +35,7 @@ cspace = cspace || {};
         };
         var sbOpts = {
             uispec: "{pageBuilder}.uispec.sidebar",
-            currentRecordType: "objects"
+            primaryRecordType: "objects"
         };
 
         var dependencies = {

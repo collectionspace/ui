@@ -31,7 +31,14 @@ cspace = cspace || {};
                 {name: "Location &amp; Movement", target: null},
                 {name: "Media", target: null}
             ],
-            setupFuncs: [null, "cspace.objectTabSetup"]
+            tabSetups: [
+                null, {
+                    func: "cspace.objectTabSetup",
+                    options: {
+                        primaryRecordType: "loanout"
+                    }
+                }
+            ]
         };
         var reOpts = {
             selectors: {identificationNumber: ".csc-loanOut-loanOutNumber"},
@@ -39,7 +46,7 @@ cspace = cspace || {};
         };
         var sbOpts = {
             uispec: "{pageBuilder}.uispec.sidebar",
-            currentRecordType: "loanout"
+            primaryRecordType: "loanout"
         };
         
         var dependencies = {

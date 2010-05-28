@@ -31,7 +31,14 @@ cspace = cspace || {};
 				{name: "Location &amp; Movement", target: null},
 				{name: "Media", target: null}
             ],
-            setupFuncs: [null, "cspace.objectTabSetup"]
+            tabSetups: [
+                null, {
+                    func: "cspace.objectTabSetup",
+                    options: {
+                        primaryRecordType: "acquisition"
+                    }
+                }
+            ]
         };
         var reOpts = {
             selectors: {identificationNumber: ".csc-acquisition-numberPatternChooser-reference-number"},
@@ -39,7 +46,7 @@ cspace = cspace || {};
         };
         var sbOpts = {
             uispec: "{pageBuilder}.uispec.sidebar",
-            currentRecordType: "acquisition"
+            primaryRecordType: "acquisition"
         };
         
         var dependencies = {

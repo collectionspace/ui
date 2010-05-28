@@ -38,11 +38,11 @@ cspace = cspace || {};
         // TODO: looks like a bug that I need to specify the current record type twice. 
         var rpOpts = {
             recordType : "procedures",
-            currentRecordType : that.options.currentRecordType,
+            primaryRecordType : that.options.primaryRecordType,
             uispec : that.options.uispec.relatedProcedures,
             relationManager : {
                 options: {
-                    currentRecordType: that.options.currentRecordType
+                    primaryRecordType: that.options.primaryRecordType
                 }
             }
         };
@@ -50,11 +50,11 @@ cspace = cspace || {};
         
         var roOpts = {
             recordType: "objects",
-            currentRecordType: that.options.currentRecordType,
+            primaryRecordType: that.options.primaryRecordType,
             uispec: that.options.uispec.relatedObjects,
             relationManager: {
                 options: {
-                    currentRecordType: that.options.currentRecordType
+                    primaryRecordType: that.options.primaryRecordType
                 }
             }
         };

@@ -22,7 +22,7 @@ cspace = cspace || {};
             var newRelations = [];
             var source = {
                 csid: that.applier.model.csid,
-                recordtype: that.options.currentRecordType
+                recordtype: that.options.primaryRecordType
             };
             // TODO: Candidate for transform.
             for (var i = 0; i < data.length; i++) {

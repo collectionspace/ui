@@ -35,11 +35,18 @@ cspace = cspace || {};
                 {name: "Location &amp; Movement", target: null},
                 {name: "Media", target: null}
             ],
-            setupFuncs: [null, "cspace.objectTabSetup"]
+            tabSetups: [
+                null, {
+                    func: "cspace.objectTabSetup",
+                    options: {
+                        primaryRecordType: "intake"
+                    }
+                }
+            ]
         };
         var sbOpts = {
             uispec: "{pageBuilder}.uispec.sidebar",
-            currentRecordType: "intake"
+            primaryRecordType: "intake"
         };
 
         var dependencies = {

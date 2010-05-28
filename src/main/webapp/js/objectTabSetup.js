@@ -15,7 +15,7 @@ cspace = cspace || {};
 
 (function ($, fluid) {
 
-    cspace.objectTabSetup = function (applier) {
+    cspace.objectTabSetup = function (applier, options) {
         
         var local = cspace.util.isLocal();
         
@@ -29,6 +29,11 @@ cspace = cspace || {};
                             recordType: "objects"
                         }
                     }
+                }
+            },
+            relationManager: {
+                options: {
+                    primaryRecordType: options.primaryRecordType
                 }
             }
         };
