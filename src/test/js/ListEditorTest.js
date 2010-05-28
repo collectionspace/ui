@@ -16,13 +16,13 @@ var listEditorTester = function(){
     var testUISpec = {};
     $.ajax({
         async: false,
-        url: "../../main/webapp/html/uispecs/admin/uispec.json",
+        url: "../../main/webapp/html/uispecs/users/uispec.json",
         dataType: "json",
         success: function (data) {
             testUISpec = data;
         },
         error: function (xhr, textStatus, error) {
-            fluid.log("Unable to load admin uispec for testing");
+            fluid.log("Unable to load users uispec for testing");
         }
     });
     var baseTestOpts = {
