@@ -63,74 +63,78 @@
 			
 			<div class="csc-related-records">
 				<div class="pivot-box csc-related-procedures">
-					<div class="header toggle" onclick="ShowHide('#toggle-related-procedures', this); return false;">
-						<div class="fl-force-left">
-							<span class="header-toggle"><img height="12" width="12" alt="toggle-less" src="../images/toggle-less.png" /></span>
-							Related Procedures
-							<span class="csc-num-items"></span>
+				    <div class="add-more">
+                        <a href="#add" class="add-link csc-confirmation-exclusion"><input class="csc-add-related-record-button tertiary" type="button" value="Add" /></a>
+                    </div>
+                    <div class="csc-relatedRecordsList-recordList">
+						<div class="header toggle" onclick="ShowHide('#toggle-related-procedures', this); return false;">
+							<div class="fl-force-left">
+								<span class="header-toggle"><img height="12" width="12" alt="toggle-less" src="../images/toggle-less.png" /></span>
+								Related Procedures
+								<span class="csc-num-items"></span>
+							</div>						
+							<div class="clear"></div>
 						</div>
-						<div class="add-more" onclick="ShowHide('#toggle-related-procedures', this); return false">
-							<a href="" class="add-link csc-confirmation-exclusion"><input class="csc-add-related-record-button tertiary" type="button" value="Add" /></a>
+						
+						<div class="content related-procedures list-table" id="toggle-related-procedures">
+							<table>
+								<thead>
+									<tr>
+										<td>Number</td>
+										<td>Summary</td>
+										<td>Type</td>
+	                                    <td></td>
+									</tr>
+								</thead>
+								<tbody >
+								    <tr><td colspan="4" class="hidden csc-error-message cs-message">This is the error message</td></tr>
+									<tr class="pivot-box-data csc-recordList-row">
+										<td><a href="#" class="link csc-related-number"></a></td>
+										<td class="csc-related-summary"></td>
+										<td class="csc-related-recordtype"></td>
+	                                    <td class="csc-no-items-message"></td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
-						<div class="clear"></div>
-					</div>
-					
-					<div class="content related-procedures list-table" id="toggle-related-procedures">
-						<table>
-							<thead>
-								<tr>
-									<td>Number</td>
-									<td>Summary</td>
-									<td>Type</td>
-                                    <td></td>
-								</tr>
-							</thead>
-							<tbody >
-							    <tr><td colspan="4" class="hidden csc-error-message cs-message">This is the error message</td></tr>
-								<tr class="pivot-box-data csc-recordList-row">
-									<td><a href="#" class="link csc-related-number"></a></td>
-									<td class="csc-related-summary"></td>
-									<td class="csc-related-recordtype"></td>
-                                    <td class="csc-no-items-message"></td>
-								</tr>
-							</tbody>
-						</table>
 					</div>
 				</div>
 				
 				<div class="pivot-box csc-related-objects">
-					<div class="header toggle" onclick="ShowHide('#toggle-related-objects', this); return false;">
-						<div class="fl-force-left">
-							<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
-							Related Objects
-							<span class="csc-num-items"></span>
+				    <div class="add-more">
+                        <a href="#add" class="add-link csc-confirmation-exclusion"><input class="csc-add-related-record-button tertiary" type="button" value="Add" /></a>
+                    </div>
+                    <div class="csc-relatedRecordsList-recordList">
+						<div class="header toggle" onclick="ShowHide('#toggle-related-objects', this); return false;">
+							<div class="fl-force-left">
+								<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
+								Related Objects
+								<span class="csc-num-items"></span>
+							</div>
+							<div class="clear"></div>
 						</div>
-						<div class="add-more" onclick="ShowHide('#toggle-related-objects', this); return false">
-						    <a href="" class="add-link csc-confirmation-exclusion"><input class="csc-add-related-record-button tertiary" type="button" value="Add" /></a>
-                        </div>
-						<div class="clear"></div>
-					</div>
-					
-					<div class="content related-objects list-table" id="toggle-related-objects">
-						<table>
-							<thead>
-								<tr>
-									<td>Number</td>
-									<td>Summary</td>
-									<td>Type</td>
-                                    <td></td>
-								</tr>
-							</thead>
-							<tbody>
-							    <tr><td colspan="4" class="hidden csc-error-message cs-message">This is the error message</td></tr>
-								<tr class="pivot-box-data csc-recordList-row">
-									<td><a href="#" class="link csc-related-number"></a></td>
-									<td class="csc-related-summary"></td>
-									<td class="csc-related-recordtype"></td>
-                                    <td class="csc-no-items-message"></td>
-								</tr>
-							</tbody>
-						</table>
+						
+						<div class="content related-objects list-table" id="toggle-related-objects">
+							<table>
+								<thead>
+									<tr>
+										<td>Number</td>
+										<td>Summary</td>
+										<td>Type</td>
+	                                    <td></td>
+									</tr>
+								</thead>
+								<tbody>
+								    <tr><td colspan="4" class="hidden csc-error-message cs-message">This is the error message</td></tr>
+									<tr class="pivot-box-data csc-recordList-row">
+										<td><a href="#" class="link csc-related-number"></a></td>
+										<td class="csc-related-summary"></td>
+										<td class="csc-related-recordtype"></td>
+	                                    <td class="csc-no-items-message"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>

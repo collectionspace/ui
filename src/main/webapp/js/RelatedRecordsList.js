@@ -40,7 +40,7 @@ cspace = cspace || {};
             selectionIndex: -1
         };
         that.recordList = fluid.initSubcomponent(that, "recordList", [
-            that.container,
+            that.locate("recordListSelector"),
             listModel,
             that.options.uispec,
             fluid.COMPONENT_OPTIONS
@@ -67,7 +67,8 @@ cspace = cspace || {};
         selectors: {
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
-            timestamp: ".csc-timestamp"
+            timestamp: ".csc-timestamp",
+            recordListSelector: ".csc-relatedRecordsList-recordList"
         }
     });
 })(jQuery, fluid);
