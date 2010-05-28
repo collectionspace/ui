@@ -40,31 +40,31 @@ cspace = cspace || {};
         return true;
     };
     
-    var restoreUserList = function (dc, domBinder) {
+    var restoreUserList = function (userListEditor, domBinder) {
         return function () {
             domBinder.locate("unSearchButton").hide();
-            dc.fetch(cspace.util.isLocal() ? "records/list" : null);
+            userListEditor.options.updateList(userListEditor, userListEditor.refreshView);
         };
     };
 
-    var submitSearch = function (domBinder, userListEditor) {
+    var submitSearch = function (listEditor, domBinder, queryURL, successEvent) {
         return function () {
-            var query = domBinder.locate("searchField").val();
-            var model = userListEditor.listApplier.model;
+            var query = cspace.util.isLocal() ? "" : domBinder.locate("searchField").val();
+            var model = listEditor.model;
             // TODO: Use the DC for this
-            var url = (cspace.util.isLocal() ? "data/users/search/list.json" : "../../chain/users/search?query=" + query);
+            var url = queryURL + query;
             $.ajax({
                 url: url,
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {
-                    // that.userListApplier.requestChange("*", data);
+                    // applier.requestChange("*", data);
                     // requestChange() to "*" doesn't work (see FLUID-3507)
                     // the following workaround compensates:
-                    fluid.model.copyModel(model, data.results);
-                    userListEditor.list.updateModel(model);
-                    userListEditor.showNewListRow(false);
+                    fluid.model.copyModel(model.list, data.results);                    
+                    listEditor.refreshView();
                     domBinder.locate("unSearchButton").show();
+                    successEvent.fire();
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     fluid.fail("Error retrieving search results:" + textStatus);
@@ -75,8 +75,8 @@ cspace = cspace || {};
 
     var bindEventHandlers = function (that) {
 
-        that.locate("searchButton").click(submitSearch(that.dom, that.userListEditor));
-        that.locate("unSearchButton").click(restoreUserList(that.userListEditor.listDC, that.dom)).hide();
+        that.locate("searchButton").click(submitSearch(that.userListEditor, that.dom, that.options.queryURL, that.events.afterSearch));
+        that.locate("unSearchButton").click(restoreUserList(that.userListEditor, that.dom)).hide();
 
         that.userListEditor.details.events.onSave.addListener(function () {
             return validate(that.dom, that.userListEditor.detailsApplier, that.passwordValidator);
@@ -129,8 +129,10 @@ cspace = cspace || {};
             passwordConfirm: ".csc-user-passwordConfirm"
         },
         events: {
-            afterRender: null
-        }
+            afterRender: null,
+            afterSearch: null
+        },
+        queryURL: "../../chain/users/search?query="
     });
 
 })(jQuery, fluid);

@@ -20,7 +20,8 @@ cspace = cspace || {};
             uispec: "{pageBuilder}.uispec"
         };
         if (cspace.util.isLocal()) {
-            adminOpts.recordType = "users/records/list.json";            
+            adminOpts.recordType = "users/records/list.json";
+            adminOpts.queryURL = "data/users/search/list.json";
             adminOpts.userListEditor = {
                 options: {
                     baseUrl: "data/",

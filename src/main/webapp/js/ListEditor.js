@@ -100,6 +100,11 @@ cspace = cspace || {};
             showDetails(that.dom, true);
             that.events.afterAddNewListRow.fire();
         };
+        
+        that.refreshView = function () {
+            that.list.refreshView();
+            hideDetails(that.dom);
+        };
 
         that.options.initList(that, function () {
             that.list = fluid.initSubcomponent(that, "list", [

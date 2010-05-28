@@ -270,7 +270,33 @@ var adminUsersTester = function () {
         
         adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
         stop();
-    });    
+    });
+    
+    adminUsersTest.test("Test search/unsearch functionality", function () {
+        var adminUsers;
+        testOpts.queryURL = "../../main/webapp/html/data/users/search/list.json";
+        testOpts.listeners = {
+            afterSearch: function () {
+                jqUnit.isVisible("Unsearch is visible after search", adminUsers.options.selectors.unSearchButton);
+                jqUnit.assertEquals("There are 2 users in the list after search", 2, adminUsers.userListEditor.model.list.length);
+                adminUsers.userListEditor.list.events.afterRender.addListener(function () {
+                    jqUnit.notVisible("Unsearch is invisible after unsearch", adminUsers.options.selectors.unSearchButton);
+                    jqUnit.assertEquals("There are 4 users in the list after unsearch", 4, adminUsers.userListEditor.model.list.length);
+                });
+                adminUsers.locate("unSearchButton").click();
+                start();
+            },
+            afterRender: function () {               
+                jqUnit.assertEquals("Initially there are 4 users in the list", 4, adminUsers.userListEditor.model.list.length);
+                jqUnit.notVisible("Unsearch is invisible initially", adminUsers.options.selectors.unSearchButton);
+                adminUsers.dom.locate("searchField").val("test");
+                jqUnit.assertEquals("Value in seatch fiels is 'test'", "test", adminUsers.dom.locate("searchField").val());
+                adminUsers.locate("searchButton").click();
+            }
+        };
+        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        stop();
+    });  
     
 };
 
