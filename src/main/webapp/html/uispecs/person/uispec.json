@@ -1,151 +1,32 @@
 {
-    "titleBar": {
-        ".csc-titleBar-displayName": "${fields.displayName}",
-        ".csc-titleBar-birthDate": "${fields.birthDate}",
-        ".csc-titleBar-deathDate": "${fields.deathDate}",
-    },
-    "recordEditor": {
-        ".csc-personAuthority-displayName": "${fields.displayName}",
-        ".csc-personAuthority-referenceNumber": "${fields.referenceNumber}",
-        ".csc-personAuthority-status": {
-            "selection": "${fields.status}",
-            "optionlist": ["provisional", "under review", "accepted","rejected"],
-            "optionnames": ["Provisional", "Under Review", "Accepted","Rejected"]
-        },
-        ".csc-personAuthority-salutation": {
-		    "selection": "${fields.salutation}",
-			"optionlist": ["Dear", "My Darling","Your Majaesty","Your Royal Highness"],
-            "optionnames": ["Dear", "My Darling", "Your Majaesty","Your Royal Highness"]
-        },
-        ".csc-personAuthority-title": {
-		    "selection": "${fields.title}",
-			"optionlist": ["Mr", "Mrs", "Ms", "Miss", "Dr", "Professor", "Sir", "Dame", "Baron", "Baroness", "Lord", "Lady"],
-            "optionnames": ["Mr", "Mrs", "Ms", "Miss", "Dr", "Professor", "Sir", "Dame", "Baron", "Baroness", "Lord", "Lady"]
-        },
-        ".csc-personAuthority-foreName": "${fields.foreName}",
-        ".csc-personAuthority-middleName": "${fields.middleName}",
-        ".csc-personAuthority-surName": "${fields.surName}",
-        ".csc-personAuthority-nameAdditions": "${fields.nameAdditions}",
-        ".csc-personAuthority-initials": "${fields.initials}",
-        ".csc-personAuthority-gender": {
-            "selection": "${fields.gender}",
-            "optionlist": ["male", "female"],
-            "optionnames": ["Male", "Female"]
-        },
-        ".csc-personAuthority-occupation": "${fields.occupation}",
-        ".csc-personAuthority-occupation-autocomplete": {
-            "decorators": [{
-                "type": "fluid",
-                "func": "cspace.autocomplete",
-                "container": ".csc-personAuthority-occupation",
-                "options": {
-                    "queryUrl": "../../chain/personAuthority/autocomplete/occupation",
-                    "vocabUrl": "../../chain/personAuthority/source-vocab/occupation"
-                }
-            }]
-        },
-        ".csc-personAuthority-schoolOrStyle": "${fields.schoolOrStyle}",
-        ".csc-personAuthority-schoolOrStyle-autocomplete": {
-            "decorators": [{
-                "type": "fluid",
-                "func": "cspace.autocomplete",
-                "container": ".csc-personAuthority-schoolOrStyle",
-                "options": {
-                    "queryUrl": "../../chain/personAuthority/autocomplete/schoolOrStyle",
-                    "vocabUrl": "../../chain/personAuthority/source-vocab/schoolOrStyle"
-                }
-            }]
-        },
-        ".csc-personAuthority-group": "${fields.group}",
-        ".csc-personAuthority-group-autocomplete": {
-            "decorators": [{
-                "type": "fluid",
-                "func": "cspace.autocomplete",
-                "container": ".csc-personAuthority-group",
-                "options": {
-                    "queryUrl": "../../chain/personAuthority/autocomplete/group",
-                    "vocabUrl": "../../chain/personAuthority/source-vocab/group"
-                }
-            }]
-        },
-        ".csc-personAuthority-nationality": "${fields.nationality}",
-        ".csc-personAuthority-nationality-autocomplete": {
-            "decorators": [{
-                "type": "fluid",
-                "func": "cspace.autocomplete",
-                "container": ".csc-personAuthority-nationality",
-                "options": {
-                    "queryUrl": "../../chain/personAuthority/autocomplete/nationality",
-                    "vocabUrl": "../../chain/personAuthority/source-vocab/nationality"
-                }
-            }]
-        },
-        ".csc-personAuthority-nameNote": "${fields.nameNote}",
-        ".csc-personAuthority-bioNote": "${fields.bioNote}",
-        ".csc-personAuthority-birthDate": "${fields.birthDate}",
-        ".csc-personAuthority-birthDate-container": {
-            "decorators": [{
-                "type": "fluid",
-                "func": "cspace.datePicker",
-                "container": ".csc-personAuthority-birthDate-container"
-            }]
-        },
-        ".csc-personAuthority-birthPlace": "${fields.birthPlace}",
-        ".csc-personAuthority-birthPlace-autocomplete": {
-            "decorators": [{
-                "type": "fluid",
-                "func": "cspace.autocomplete",
-                "container": ".csc-personAuthority-birthPlace",
-                "options": {
-                    "queryUrl": "../../chain/personAuthority/autocomplete/birthPlace",
-                    "vocabUrl": "../../chain/personAuthority/source-vocab/birthPlace"
-                }
-            }]
-        },
-        ".csc-personAuthority-deathDate": "${fields.deathDate}",
-        ".csc-personAuthority-deathDate-container": {
-            "decorators": [{
-                "type": "fluid",
-                "func": "cspace.datePicker",
-                "container": ".csc-personAuthority-deathDate-container"
-            }]
-        },
-        ".csc-personAuthority-deathPlace": "${fields.deathPlace}",
-        ".csc-personAuthority-deathPlace-autocomplete": {
-            "decorators": [{
-                "type": "fluid",
-                "func": "cspace.autocomplete",
-                "container": ".csc-personAuthority-deathPlace",
-                "options": {
-                    "queryUrl": "../../chain/personAuthority/autocomplete/deathPlace",
-                    "vocabUrl": "../../chain/personAuthority/source-vocab/deathPlace"
-                }
-            }]
-        },
-        ".csc-contact-addressType1": {
-            "selection": "${fields.addressType1}",
-            "optionlist": ["Home", "Work"],
-            "optionnames": ["home", "work"]
-        },
-        ".csc-contact-addressText1": "${fields.addressText1}",
-        ".csc-contact-faxNumber1": "${fields.faxNumber1}",
-        ".csc-contact-place": "${fields.place}",
-        ".csc-contact-place-autocomplete": {
-            "decorators": [{
-                "type": "fluid",
-                "func": "cspace.autocomplete",
-                "container": ".csc-contact-place",
-                "options": {
-                    "queryUrl": "../../chain/personAuthority/autocomplete/place",
-                    "vocabUrl": "../../chain/personAuthority/source-vocab/place"
-                }
-            }]
-        },
-        ".csc-contact-telephoneNumber1": "${fields.telephoneNumber1}",
-        ".csc-contact-postcode1": "${fields.postcode1}",
-        ".csc-contact-email1": "${fields.email1}"
-    },
     "sidebar": {
+        "relatedObjects": {
+            ".csc-recordList-row:": {
+                "children": [
+                    {
+                        ".csc-related-summary": "${items.0.summary}",
+                        ".csc-related-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
+                        }
+                    }
+                ]
+            }
+        },
+        "relatedProcedures": {
+            ".csc-recordList-row:": {
+                "children": [
+                    {
+                        ".csc-related-summary": "${items.0.summary}",
+                        ".csc-related-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
+                        },
+                        ".csc-related-recordtype": "${items.0.recordtype}"
+                    }
+                ]
+            }
+        },
         "termsUsed": {
             ".csc-recordList-row:": {
                 "children": [
@@ -153,39 +34,182 @@
                         ".csc-related-number": {
                             "linktext": "${items.0.number}",
                             "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
-                         },
-                        ".csc-related-recordtype": "${items.0.recordtype}",
-                        ".csc-related-field": "${items.0.sourceFieldName}"
+                        },
+                        ".csc-related-field": "${items.0.sourceFieldName}",
+                        ".csc-related-recordtype": "${items.0.recordtype}"
                     }
                 ]
+            }
+        }
+    },
+    "titleBar": {
+        ".csc-titleBar-displayName": "${fields.displayName}",
+        ".csc-titleBar-birthDate": "${fields.birthDate}",
+        ".csc-titleBar-deathDate": "${fields.deathDate}"
+    },
+    "recordEditor": {
+        ".csc-personAuthority-nameNote": "${fields.nameNote}",
+        ".csc-personAuthority-deathPlace": "${fields.deathPlace}",
+        ".csc-personAuthority-status": {
+            "default": "0",
+            "optionnames": [
+                "Provisional",
+                "Under Review",
+                "Accepted",
+                "Rejected"
+            ],
+            "optionlist": [
+                "provisional",
+                "under review",
+                "accepted",
+                "rejected"
+            ],
+            "selection": "${fields.status}"
+        },
+        ".csc-personAuthority-birthDate": "${fields.birthDate}",
+        ".csc-personAuthority-nationality-autocomplete": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/vocabularies/person/autocomplete/nationality",
+                        "vocabUrl": "../../chain/vocabularies/person/source-vocab/nationality"
+                    }
                 }
+            ]
         },
-        "relatedProcedures": {
-            ".csc-recordList-row:": {
-                "children": [
-                    {
-                        ".csc-related-number": {
-                            "linktext": "${items.0.number}",
-                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
-                         },
-                        ".csc-related-recordtype": "${items.0.recordtype}",
-                        ".csc-related-summary": "${items.0.summary}"
-                    }
-                ]
-            }
+        ".csc-personAuthority-nameAdditions": "${fields.nameAdditions}",
+        ".csc-personAuthority-gender": {
+            "optionnames": [
+                "Male",
+                "Female"
+            ],
+            "optionlist": [
+                "male",
+                "female"
+            ],
+            "selection": "${fields.gender}"
         },
-        "relatedObjects": {
-            ".csc-recordList-row:": {
-                "children": [
-                    {
-                        ".csc-related-number": {
-                            "linktext": "${items.0.number}",
-                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
-                         },
-                        ".csc-related-summary": "${items.0.summary}"
+        ".csc-personAuthority-birthPlace-autocomplete": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/vocabularies/person/autocomplete/birthPlace",
+                        "vocabUrl": "../../chain/vocabularies/person/source-vocab/birthPlace"
                     }
-                ]
-            }
+                }
+            ]
+        },
+        ".csc-personAuthority-occupation": "${fields.occupation}",
+        ".csc-personAuthority-middleName": "${fields.middleName}",
+        ".csc-personAuthority-surName": "${fields.surName}",
+        ".csc-personAuthority-salutation": {
+            "optionnames": [
+                "Dear",
+                "My Darling",
+                "Your Majaesty",
+                "Your Royal Highness"
+            ],
+            "optionlist": [
+                "Dear",
+                "My Darling",
+                "Your Majaesty",
+                "Your Royal Highness"
+            ],
+            "selection": "${fields.salutation}"
+        },
+        ".csc-personAuthority-displayName": "${fields.displayName}",
+        ".csc-personAuthority-title": {
+            "optionnames": [
+                "Mr",
+                "Mrs",
+                "Ms",
+                "Miss",
+                "Dr",
+                "Professor",
+                "Sir",
+                "Dame",
+                "Baron",
+                "Baroness",
+                "Lord",
+                "Lady"
+            ],
+            "optionlist": [
+                "Mr",
+                "Mrs",
+                "Ms",
+                "Miss",
+                "Dr",
+                "Professor",
+                "Sir",
+                "Dame",
+                "Baron",
+                "Baroness",
+                "Lord",
+                "Lady"
+            ],
+            "selection": "${fields.title}"
+        },
+        ".csc-personAuthority-group-autocomplete": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/vocabularies/person/autocomplete/group",
+                        "vocabUrl": "../../chain/vocabularies/person/source-vocab/group"
+                    }
+                }
+            ]
+        },
+        ".csc-personAuthority-initials": "${fields.initials}",
+        ".csc-personAuthority-birthDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
+        ".csc-personAuthority-deathDate": "${fields.deathDate}",
+        ".csc-personAuthority-group": "${fields.group}",
+        ".csc-personAuthority-birthPlace": "${fields.birthPlace}",
+        ".csc-personAuthority-nationality": "${fields.nationality}",
+        ".csc-personAuthority-bioNote": "${fields.bioNote}",
+        ".csc-personAuthority-occupation-autocomplete": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/vocabularies/person/autocomplete/occupation",
+                        "vocabUrl": "../../chain/vocabularies/person/source-vocab/occupation"
+                    }
+                }
+            ]
+        },
+        ".csc-personAuthority-deathPlace-autocomplete": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/vocabularies/person/autocomplete/deathPlace",
+                        "vocabUrl": "../../chain/vocabularies/person/source-vocab/deathPlace"
+                    }
+                }
+            ]
+        },
+        ".csc-personAuthority-deathDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
         }
     }
 }
