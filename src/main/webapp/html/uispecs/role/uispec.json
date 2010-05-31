@@ -22,7 +22,43 @@
                         "optionnames": ["none", "read","write", "delete"],
                         "default": "write"
                     },
-                    ".csc-permissions-record-type": "${fields.permissions.0.recordType}"
+                    ".csc-permissions-record-type": "Object Cataloging"
+                },
+                {
+                    ".csc-permissions-record-permissions": {
+                        "selection": "${fields.permissions.1.permission}",
+                        "optionlist": ["none", "read","write", "delete"],
+                        "optionnames": ["none", "read","write", "delete"],
+                        "default": "write"
+                    },
+                    ".csc-permissions-record-type": "Intake"
+                },
+                {
+                    ".csc-permissions-record-permissions": {
+                        "selection": "${fields.permissions.1.permission}",
+                        "optionlist": ["none", "read","write", "delete"],
+                        "optionnames": ["none", "read","write", "delete"],
+                        "default": "write"
+                    },
+                    ".csc-permissions-record-type": "Acquisition"
+                },
+                {
+                    ".csc-permissions-record-permissions": {
+                        "selection": "${fields.permissions.2.permission}",
+                        "optionlist": ["none", "read","write", "delete"],
+                        "optionnames": ["none", "read","write", "delete"],
+                        "default": "write"
+                    },
+                    ".csc-permissions-record-type": "Loan In"
+                },
+                {
+                    ".csc-permissions-record-permissions": {
+                        "selection": "${fields.permissions.3.permission}",
+                        "optionlist": ["none", "read","write", "delete"],
+                        "optionnames": ["none", "read","write", "delete"],
+                        "default": "write"
+                    },
+                    ".csc-permissions-record-type": "Loan Out"
                 }
             ]
         }

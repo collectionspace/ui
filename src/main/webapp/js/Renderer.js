@@ -179,7 +179,7 @@ cspace = cspace || {};
                         if (!data) {
                             fluid.model.setBeanValue(that.model, elPath, []);
                         }
-                        else {
+                        else if (entry.children.length <=1) {
                             for (var j = 1; j < data.length; j++) {
                                 entry.children[j] = {};
                                 fluid.model.copyModel(entry.children[j], entry.children[0]);

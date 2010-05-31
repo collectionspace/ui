@@ -352,6 +352,108 @@ var rendererTester = function(){
         cspace.renderUtils.fixSelectionsInTree(testTree);
         jqUnit.assertDeepEq("Selections should be fixed", expectedFixedTree, testTree);
     });
+
+    rendererTest.test("Rows already repeated in UISpec: no data model", function () {
+        var testUISpec = {
+            ".selector1": "${fields.field1}",
+            ".selector2-row:": {
+                children: [
+                    {
+                        ".selectorA": "${fields.fields2.0.fieldA}",
+                        ".selectorB": "Straight text 1"
+                    },
+                    {
+                        ".selectorA": "${fields.fields2.1.fieldA}",
+                        ".selectorB": "Straight text 2"
+                    },
+                    {
+                        ".selectorA": "${fields.fields2.2.fieldA}",
+                        ".selectorB": "Straight text 3"
+                    }
+                ]
+            },
+            ".selector3-row:": {
+                children: [
+                    {
+                        ".selectorX": "${fields.fields3.0.fieldX}",
+                        ".selectorZ": "Different straight text"
+                    }
+                ]
+            }
+        };
+        var expectedProtoTree = {};
+        fluid.model.copyModel(expectedProtoTree, testUISpec); // with no data model, should be same
+        var testThat = {model: {}};
+        var expectedModel = {
+            fields: {
+                fields2: [],
+                fields3: []
+            }
+        };
+        var protoTree = cspace.renderUtils.buildProtoTree(testUISpec, testThat);
+        jqUnit.assertDeepEq("ProtoTree should look just like UISpec", expectedProtoTree, protoTree);
+        jqUnit.assertDeepEq("Model should have been updated to include empty arrays", testThat.model, expectedModel);
+    });
+
+    rendererTest.test("Rows already repeated in UISpec: with data model", function () {
+        var testUISpec = {
+            ".selector1": "${fields.field1}",
+            ".selector2-row:": {
+                children: [
+                    {
+                        ".selectorA": "${fields.fields2.0.fieldA}",
+                        ".selectorB": "Straight text 1"
+                    },
+                    {
+                        ".selectorA": "${fields.fields2.1.fieldA}",
+                        ".selectorB": "Straight text 2"
+                    },
+                    {
+                        ".selectorA": "${fields.fields2.2.fieldA}",
+                        ".selectorB": "Straight text 3"
+                    }
+                ]
+            },
+            ".selector3-row:": {
+                children: [
+                    {
+                        ".selectorX": "${fields.fields3.0.fieldX}",
+                        ".selectorY": "${fields.fields3.0.fieldY}"
+                    }
+                ]
+            }
+        };
+        var testModel = {
+            fields: {
+                field1: "foo",
+                fields2: [
+                    { fieldA: "for" },
+                    { fieldA: "fan" },
+                    { fieldA: "tap" }
+                ],
+                fields3: [
+                    { fieldX: "bar", fieldY: "bat" },
+                    { fieldX: "car", fieldY: "cat" },
+                    { fieldX: "can", fieldY: "ban" }
+                ]
+            }
+        };
+        var expectedProtoTree = {};
+        fluid.model.copyModel(expectedProtoTree, testUISpec); // protoTree will start out the same
+        expectedProtoTree[".selector3-row:"].children[1] = {
+                                                                ".selectorX": "${fields.fields3.1.fieldX}",
+                                                                ".selectorY": "${fields.fields3.1.fieldY}"
+                                                            };
+        expectedProtoTree[".selector3-row:"].children[2] = {
+                                                                ".selectorX": "${fields.fields3.2.fieldX}",
+                                                                ".selectorY": "${fields.fields3.2.fieldY}"
+                                                            };
+        var testThat = {model: {}};
+        fluid.model.copyModel(testThat.model, testModel);
+        var protoTree = cspace.renderUtils.buildProtoTree(testUISpec, testThat);
+        jqUnit.assertDeepEq("ProtoTree have repeated rows expanded", expectedProtoTree, protoTree);
+        jqUnit.assertDeepEq("Model should be unchanged", testThat.model, testModel);
+    });
 };
 
 (function () {
