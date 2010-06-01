@@ -83,32 +83,32 @@ cspace = cspace || {};
         }
     };
 
-    var setUpModel = function (that) {
-        return function (data, textStatus) {
-            if (data === {}) {
-                that.model = {
-                    csid: null,
-                    fields: {},
-                    termsUsed: [],
-                    relations: []
-                };
-            }
-            
-            invokeDependencies(that);
-            that.events.pageReady.fire();
+    var setupModelAndDependencies = function (that) {
+        that.applier = fluid.makeChangeApplier(that.model);    
+        invokeDependencies(that);
+        that.events.pageReady.fire();
+    };
+    
+    var createEmptyModel = function () {
+        return {
+            csid: null,
+            fields: {},
+            termsUsed: [],
+            relations: []
         };
     };
-
+    
     var setUpPageBuilder = function (that) {
-        that.model = {};
-        that.applier = fluid.makeChangeApplier(that.model);
+        that.model = createEmptyModel();        
         that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
-        that.dataContext.events.afterFetch.addListener(setUpModel(that));
+        that.dataContext.events.afterFetch.addListener(function () {
+            setupModelAndDependencies(that);
+        });
         
         if (that.options.csid) {
             that.dataContext.fetch(that.options.csid);
         } else {
-            setUpModel(that)({});
+            setupModelAndDependencies(that);
         }
     };
 

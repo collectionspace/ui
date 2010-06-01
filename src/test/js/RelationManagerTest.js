@@ -17,7 +17,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     var applier;
     
     var baseCSID = "123456798";
-    var relations = [];
     // TODO: figure out if the two models (posted and saved) should be normalized.
     var newRelations = [{
         source: {
@@ -129,15 +128,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     relationManagerTest.test("Add relations", function () {
         createRelationManager({
                 csid: baseCSID,
-                relations: relations
+                relations: []
             }, {
                 searchToRelateDialog: {
                     options: {
                         listeners: {
                             afterRender: function () {
-                                jqUnit.assertEquals("The object has no relations initially", relations, relationManager.applier.model.relations);
+                                jqUnit.assertDeepEq("The object has no relations initially", [], relationManager.applier.model.relations);
                                 relationManager.addRelations({items: newRelations});
-                                jqUnit.assertDeepEq("The object has new relations", expectedRelations, relationManager.applier.model.relations);
+                                jqUnit.assertDeepEq("The object has new relations", expectedRelations, relationManager.applier.model.relations.objects);
                                 start();
                             }
                         }
@@ -151,20 +150,20 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         expect(4);
         var model = {
             csid: baseCSID,
-            relations: relations
+            relations: []
         };
         applier = fluid.makeChangeApplier(model);
         applier.modelChanged.addListener("relations", function (model, oldModel, changeRequest) {
             jqUnit.assertDeepEq("Listener oldModel paramter should be right", [], oldModel.relations);
-            jqUnit.assertDeepEq("Listener model paramter should be right", expectedRelations, model.relations);
-            jqUnit.assertDeepEq("The model has been updated with the new relations.", expectedRelations, relationManager.applier.model.relations);
+            jqUnit.assertDeepEq("Listener model paramter should be right", expectedRelations, model.relations.objects);
+            jqUnit.assertDeepEq("The model has been updated with the new relations.", expectedRelations, relationManager.applier.model.relations.objects);
         });
-        createRelationManager(model, {
+        createRelationManager(applier.model, {
             searchToRelateDialog: {
                 options: {
                     listeners: {
                         afterRender: function () {
-                            jqUnit.assertEquals("The object has no relations initially", relations, relationManager.applier.model.relations);
+                            jqUnit.assertDeepEq("The object has no relations initially", [], relationManager.applier.model.relations);
                             relationManager.addRelations({items: newRelations});
                             start();
                         }
@@ -178,7 +177,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         expect(1);
         var model = {
             csid: baseCSID,
-            relations: relations
+            relations: []
         };
         applier = fluid.makeChangeApplier(model);
         createRelationManager(model, {
@@ -190,7 +189,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 options: {
                     listeners: {
                         afterRender: function () {
-                            jqUnit.assertEquals("The object has no relations initially", relations, relationManager.applier.model.relations);
+                            jqUnit.assertDeepEq("The object has no relations initially", [], relationManager.applier.model.relations);
                             relationManager.locate("addButton").click();
                             cspace.addDialogInst.locate("createNewButton", cspace.addDialogInst.dlg).click();
                             start();

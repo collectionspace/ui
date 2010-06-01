@@ -23,7 +23,7 @@ cspace = cspace || {};
             listEditor: {
                 options: {
                     initList: cspace.listEditor.receiveData,
-                    data: applier.model.relations,
+                    data: applier.model.relations.objects,
                     dataContext: {
                         options: {
                             recordType: "objects"

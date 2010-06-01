@@ -15,18 +15,20 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     
-    var updateRelations = function (applier) {
+    var updateRelations = function (applier, recordType) {
         // TODO: Fluid transform candidate.
         return function (relations) {
             var newModelRelations = [];
-            fluid.model.copyModel(newModelRelations, applier.model.relations);
+            var elPath = "relations." + recordType;
+            fluid.model.copyModel(newModelRelations, applier.model.relations[recordType]);
             var relIndex = newModelRelations.length;            
             for (var i = 0; i < relations.items.length; i++) {
-                newModelRelations[relIndex] = relations.items[i].target;
-                newModelRelations[relIndex].relationshiptype = relations.items[i].type;
+                var relation = relations.items[i];
+                newModelRelations[relIndex] = relation.target;
+                newModelRelations[relIndex].relationshiptype = relation.type;
                 relIndex += 1;
             }
-            applier.requestChange("relations", newModelRelations);
+            applier.requestChange(elPath, newModelRelations);
         };
     };
     
@@ -48,7 +50,7 @@ cspace = cspace || {};
                 cspace.util.displayTimestampedMessage(that.dom, that.options.strings.pleaseSaveFirst);
             }
         });
-        that.dataContext.events.afterAddRelations.addListener(updateRelations(that.applier));
+        that.dataContext.events.afterAddRelations.addListener(updateRelations(that.applier, that.recordType));
     };
     
     var makeDialog = function (that) {
@@ -70,7 +72,7 @@ cspace = cspace || {};
         // something like this: that.addRelations = that.options.addRelations;
         that.addRelations = function (relations) {
             if (cspace.util.isLocal()) {
-                updateRelations(that.applier)(relations);
+                updateRelations(that.applier, that.recordType)(relations);
             }
             else {
                 that.dataContext.addRelations(relations);

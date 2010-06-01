@@ -16,7 +16,8 @@ cspace = cspace || {};
 (function ($, fluid) {
     
     var bindEventHandlers = function (that) {
-        that.applier.modelChanged.addListener("relations", function () {
+        var elPath = "relations." + that.recordType;
+        that.applier.modelChanged.addListener(elPath, function () {
             that.listEditor.options.updateList(that.listEditor, that.listEditor.list.refreshView);
         });
         that.listEditor.events.pageReady.addListener(function () {
@@ -40,13 +41,13 @@ cspace = cspace || {};
         });
     };
     
-    var createListUpdater = function (applier, primaryRecordType) {
+    var createListUpdater = function (applier, primaryRecordType, recordType) {
         return function (listEditor, callback) {
             $.ajax({
                 url: listEditor.options.baseUrl + primaryRecordType + "/" + applier.model.csid,
                 dataType: "json",
                 success: function (data) {
-                    fluid.model.copyModel(listEditor.model.list, data.relations);
+                    fluid.model.copyModel(listEditor.model.list, data.relations[recordType]);
                     if (callback) {
                         callback();
                     }
@@ -68,7 +69,7 @@ cspace = cspace || {};
             fluid.COMPONENT_OPTIONS
         ]);
         
-        that.options.listEditor.options.updateList = createListUpdater(that.applier, that.relationManager.options.primaryRecordType);
+        that.options.listEditor.options.updateList = createListUpdater(that.applier, that.relationManager.options.primaryRecordType, that.recordType);
         
         that.listEditor = fluid.initSubcomponent(that, "listEditor", [that.container, that.recordType, 
             that.uispec, fluid.COMPONENT_OPTIONS]);

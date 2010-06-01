@@ -14,19 +14,26 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     
-    var recordsLists = {
-        intake: ["intake"],
-        acquisition: ["acquisition"],
-        loanin: ["loanin"],
-        loanout: ["loanout"],
-        procedures: ["intake", "acquisition", "loanin", "loanout"],
-        object: ["objects"],
-        objects: ["objects"]
+    // TODO: This has to be done in the app layer i.e. provide an array of procedures in relations block.
+    // This way wouldn't have to write this work around. Related to CSPACE-1977.
+    var buildRelationsList = function (relations, recordType) {
+        if (recordType !== "procedures") {
+            return relations[recordType];
+        }
+        var procedures = ["procedures", "intake", "acquisition", "loanin", "loanout"];
+        var relationList = [];
+        $.each(procedures, function (index, value) {
+            relationList = relationList.concat(relations[value] || []);
+        });
+        return relationList;     
     };
-
+    
     bindEventHandlers = function (that) {
-        that.applier.modelChanged.addListener("relations", function(model, oldModel, changeRequest) {
-            fluid.model.copyModel(that.recordList.model.items, cspace.util.buildRelationsList(model.relations, recordsLists[that.options.recordType]));
+        var elPath = "relations." + that.options.recordType;
+        that.applier.modelChanged.addListener(elPath, function(model, oldModel, changeRequest) {
+        	// TODO: This should be just model.relations[that.options.recordType]
+        	// Related to CSPACE-1977.
+            fluid.model.copyModel(that.recordList.model.items, buildRelationsList(model.relations, that.options.recordType) || []);
             that.recordList.refreshView();
         });
     };
@@ -36,7 +43,9 @@ cspace = cspace || {};
         that.applier = applier;
 
         var listModel = {
-            items: cspace.util.buildRelationsList(that.applier.model.relations, recordsLists[that.options.recordType]),
+        	// TODO: This should be just that.applier.model.relations[that.options.recordType]
+        	// Related to CSPACE-1977.
+            items: buildRelationsList(that.applier.model.relations, that.options.recordType) || [],
             selectionIndex: -1
         };
         that.recordList = fluid.initSubcomponent(that, "recordList", [
