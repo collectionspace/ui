@@ -555,7 +555,7 @@ table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; f
 .float-right {float: right;}
 
 .cs-selecting {background-color:#E2F0F7;}
-.cs-selected {background-color:#000; color:#fff; font-weight:bold;}
-tr.cs-selected td {background-color:#6E9FCE !important; color:#fff !important; font-weight:bold;}
+.user-table .cs-selected, .role-table .cs-selected  {background-color:#000; color:#fff; font-weight:bold;}
+.user-table tr.cs-selected td, .role-table tr.cs-selected td {background-color:#6E9FCE !important; color:#fff !important; font-weight:bold;}
 
 .required {color:red;}
