@@ -88,6 +88,38 @@
 																</table>
 															</div>
 														</div>
+														
+														<div class="info-pair-select">
+															<div class="header">
+																<div class="label">Collection</div>
+															</div>
+															<div class="content">
+																<table>
+																	<tbody>
+																		<tr>
+																			<!--<td class="table-unselected"></td>-->
+																			<td><select class="csc-object-identification-collection input-select"/></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+														
+														<div class="info-pair-select">
+															<div class="header">
+																<div class="label">Record Status</div>
+															</div>
+															<div class="content">
+																<table>
+																	<tbody>
+																		<tr>
+																			<!--<td class="table-unselected"></td>-->
+																			<td><select class="csc-object-identification-record-status input-select"/></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
 														<div class="clear"></div>
 													</div>
 													
@@ -207,13 +239,13 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-selected"></td>-->
-																		<td style="width:25%;"><input type="text" class="csc-object-identification-object-name"/></td>
+																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-identification-object-name"/></td>
 																		<td><select class="csc-object-identification-object-currency input-select"/></td>
 																		<td><select class="csc-object-identification-object-level input-select"/></td>
 																		<td><select class="csc-object-identification-object-system input-select"/></td>
 																		<td><select class="csc-object-identification-object-type input-select"/></td>
 																		<td><select class="csc-object-identification-object-language input-select"/></td>	
-																		<td style="width:25%;><input type="text" class="csc-object-identification-object-note"/></td>
+																		<td style="width:25%;"><input type="text" class="csc-object-identification-object-note"/></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -367,7 +399,7 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="csc-object-description-style"/></td>
+																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-style"/></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -412,11 +444,11 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="csc-object-description-material"/></td>
+																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-material"/></td>
 																		<td><input type="text" class="csc-object-description-material-component" disabled="disabled"/></td>
 																		<td><input type="text" class="csc-object-description-material-component-note"/></td>
 																		<td><input type="text" class="csc-object-description-material-name"/></td>
-																		<td><input type="text" class="csc-object-description-material-source"/></td>
+																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-material-source"/></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -459,7 +491,7 @@
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
 																		<td><select class="csc-object-description-object-component-name input-select"/></td>
-																		<td><input type="text" class="csc-object-description-object-component-information" disabled="disabled"/></td>
+																		<td class="disabled"><input type="text" class="csc-object-description-object-component-information" disabled="disabled"/></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -517,12 +549,12 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-description-dimension-date csc-calendar-date deactivate" /><img src="../images/cal.png" alt="calendar"  height="16" width="18"/></td>
+																		<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-description-dimension-date csc-calendar-date" /><img src="../images/cal.png" alt="calendar"  height="16" width="18"/></td>
 																		<td><select class="csc-object-description-dimension-part input-select"/></td>
 																		<td><select class="csc-object-description-dimension input-select"/></td>
 																		<td><input type="text" class="csc-object-description-dimension-value"/></td>
 																		<td><select class="input-select csc-object-description-dimension-unit" /></td>
-																		<td class="field-cal"><input type="text" class="csc-object-description-dimension-value-qualifier"/></td>
+																		<td class="field-cal disabled"><input type="text" class="csc-object-description-dimension-value-qualifier"/></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -583,7 +615,7 @@
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="csc-object-description-content-activity"/></td>
+																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-content-activity"/></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -599,7 +631,7 @@
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="csc-object-description-content-concept"/></td>
+																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-content-concept"/></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -615,7 +647,7 @@
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-description-content-date disabled"/><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></td>
+																						<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-description-content-date"/><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -655,7 +687,7 @@
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" class="csc-object-description-content-object"/></td>
-																						<td><input type="text" class="csc-object-description-content-object-type" disabled="disabled"/></td>
+																						<td class="disabled"><input type="text" class="csc-object-description-content-object-type" disabled="disabled"/></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -707,7 +739,7 @@
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="csc-object-description-content-place"/></td>
+																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-content-place"/></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -779,8 +811,8 @@
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="csc-object-description-content-event-name"/></td>
-																						<td><input type="text" class="csc-object-description-content-event-name-type"/></td>
+																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-content-event-name"/></td>
+																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-content-event-name-type"/></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -803,8 +835,8 @@
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="csc-object-description-content-other"/></td>
-																						<td><input type="text" class="csc-object-description-content-other-type" disabled="disabled"/></td>
+																						<td class="disabled"><input type="text" class="csc-object-description-content-other" disabled="disabled"/></td>
+																						<td class="disabled"><input type="text" class="csc-object-description-content-other-type" disabled="disabled"/></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -993,7 +1025,7 @@
 																				<tbody>
 																					<tr>
 																						<!--<td class="table-unselected"></td>-->
-																						<td class="field-cal"><textarea class="input-textarea csc-object-description-inscription-content-interpretation"></textarea></td>
+																						<td class="field-cal disabled"><textarea class="input-textarea csc-object-description-inscription-content-interpretation"></textarea></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -1181,6 +1213,825 @@
 									
 									<div class="fl-container-flex fl-fix information-group">
 										<div class="info-column">
+											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-production', this); return false;">
+												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+												Object Production Information
+											</div>
+											<div class="fl-container-flex fl-fix content main" id="toggle-object-production">
+												<div class="info-pair">
+													<div class="header">
+														<div class="label">Production Reason</div>
+													</div>
+													<div class="content">
+														<table>
+															<tbody>
+																<tr>
+																	<!--<td class="table-unselected"></td>-->
+																	<td><textarea class="input-textarea csc-object-production-reason"></textarea></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+										
+												<div class="info-column2-50 fl-force-left">
+													<div class="info-pair-date">
+														<div class="header">
+															<div class="label">Production Date</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-production-date csc-calendar-date" /><img src="../images/cal.png" alt="calendar"  height="16" width="18"/></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Production Technique</div>
+														</div>
+														<div class="content">
+															<table>
+																<thead>
+																	<tr>
+																		<td>Technique</td>
+																		<td>Technique Type</td>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-production-technique"/></td>
+																		<td><select class="csc-object-production-technique-type input-select"/></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												
+												<div class="info-column2-50 fl-force-right">															
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Production People</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-object-production-people"/>
+                                                                            <div class="csc-object-production-people-autocomplete"></div></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Production Person</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-object-production-person"/>
+                                                                            <div class="csc-object-production-person-autocomplete"></div></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Production Place</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-object-production-place"/>
+                                                                            <div class="csc-object-production-place-autocomplete"></div></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Production Organization</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-object-production-organization"/>
+                                                                            <div class="csc-object-production-organization-autocomplete"></div></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												
+												<div class="info-column fl-force-left">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Production Note</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><textarea class="input-textarea csc-object-production-note"></textarea></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												<div class="clear"></div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="fl-container-flex fl-fix information-group">
+										<div class="info-column">
+											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-history', this); return false;">
+												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+												Object History and Association Information
+											</div>
+											<div class="fl-container-flex fl-fix content main" id="toggle-object-history">
+											
+												<!-- BEGIN Associations sub-group -->
+												<div class="info-column">
+													<div class="fl-container-flex fl-fix information-subgroup">
+														<div class="info-column">
+															<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-history-associations', this); return false;">
+																<span class="header-toggle-sub"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+																Associations
+															</div>
+															
+															<div class="fl-container-flex fl-fix content main" id="toggle-object-history-associations">
+															
+																<div class="info-column2-50 fl-force-left">
+																	<div class="info-pair">
+																		<div class="header">
+																			<div class="label">Associated Activity</div>
+																		</div>
+																		<div class="content">
+																			<table>
+																				<thead>
+																					<tr>
+																						<td>Associated Activity</td>
+																						<td>Associated Activity Note</td>
+																					</tr>
+																				</thead>
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-associations-activity"/></td>
+																						<td><input type="text" class="csc-object-history-associations-activity-note"/></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	
+																	
+																	<div class="info-pair">
+																		<div class="header">
+																			<div class="label">Associated Object</div>
+																		</div>
+																		<div class="content">
+																			<table>
+																				<thead>
+																					<tr>
+																						<td>Associated Object</td>
+																						<td>Associated Object Type</td>
+																					</tr>
+																				</thead>
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><input type="text" class="csc-object-history-associations-object"/></td>
+																						<td><input type="text" class="csc-object-history-associations-object-type"/></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair">
+																		<div class="header">
+																			<div class="label">Associated Concept</div>
+																		</div>
+																		<div class="content">
+																			<table>
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-associations-concept"/></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair">
+																		<div class="header">
+																			<div class="label">Associated Cultural Affinity</div>
+																		</div>
+																		<div class="content">
+																			<table>
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-associations-cultural-affinity"/></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair">
+																		<div class="header">
+																			<div class="label">Associated Organization</div>
+																		</div>
+																		<div class="content">
+																			<table>
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><input type="text" class="csc-object-history-associations-organization"/>
+																							<div class="csc-object-history-associations-organization-autocomplete"></div></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair">
+																		<div class="header">
+																			<div class="label">Associated People</div>
+																		</div>
+																		<div class="content">
+																			<table>
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><input type="text" class="csc-object-history-associations-people"/>
+																							<div class="csc-object-history-associations-people-autocomplete"></div></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair">
+																		<div class="header">
+																			<div class="label">Associated Person</div>
+																		</div>
+																		<div class="content">
+																			<table>
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><input type="text" class="csc-object-history-associations-person"/>
+																							<div class="csc-object-history-associations-person-autocomplete"></div></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair">
+																		<div class="header">
+																			<div class="label">Associated Place</div>
+																		</div>
+																		<div class="content">
+																			<table>
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-associations-place"/></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair">
+																		<div class="header">
+																			<div class="label">Associated Type</div>
+																		</div>
+																		<div class="content">
+																			<table>															
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><select class="csc-object-history-associations-type input-select"/></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="clear"></div>
+																</div>
+																
+																<div class="info-column2-50 fl-force-right">
+																	<div class="info-pair">
+																		<div class="header">
+																			<div class="label">Associated Event Name</div>
+																		</div>
+																		<div class="content">
+																			<table>
+																				<thead>
+																					<tr>
+																						<td>Associated Event Name</td>
+																						<td>Associated Event Name type</td>
+																					</tr>
+																				</thead>
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-associations-event"/></td>
+																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-associations-event-name"/></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair">
+																		<div class="header">
+																			<div class="label">Associated Event Organization</div>
+																		</div>
+																		<div class="content">
+																			<table>
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><input type="text" class="csc-object-history-associations-event-organization"/>
+																							<div class="csc-object-history-associations-event-organization-autocomplete"></div></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair">
+																		<div class="header">
+																			<div class="label">Associated Event People</div>
+																		</div>
+																		<div class="content">
+																			<table>
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><input type="text" class="csc-object-history-associations-event-people"/>
+																							<div class="csc-object-history-associations-event-people-autocomplete"></div></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	
+																	<div class="info-pair">
+																		<div class="header">
+																			<div class="label">Associated Event Person</div>
+																		</div>
+																		<div class="content">
+																			<table>
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><input type="text" class="csc-object-history-associations-event-person"/>
+																							<div class="csc-object-history-associations-event-person-autocomplete"></div></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair">
+																		<div class="header">
+																			<div class="label">Associated Event Place</div>
+																		</div>
+																		<div class="content">
+																			<table>
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><input type="text" class="csc-object-history-associations-event-place"/>
+																							<div class="csc-object-history-associations-event-place-autocomplete"></div></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair info-pair-date">
+																		<div class="header">
+																			<div class="label">Associated Date</div>
+																		</div>
+																		<div class="content">
+																			<table>															
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-history-associations-date"/><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																	
+																	<div class="info-pair">
+																		<div class="header">
+																			<div class="label">Association Note</div>
+																		</div>
+																		<div class="content">
+																			<table>
+																				<tbody>
+																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+																						<td><textarea class="input-textarea csc-object-history-associations-note"></textarea></td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</div>
+																	</div>
+																</div>
+																<div class="clear"></div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="clear"></div>
+												<!-- END Associations sub-group -->
+												
+												<div class="info-column fl-force-left">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Object History Note</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><textarea class="input-textarea csc-object-history-associations-object-history-note"></textarea></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												
+												<div class="info-column fl-force-left">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Usage</div>
+														</div>
+														<div class="content">
+															<table>
+																<thead>
+																	<tr>
+																		<td>Usage</td>
+																		<td>Usage Notes</td>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+																		<td><select class="csc-object-history-associations-usage input-select"/></td>
+																		<td><input type="text" class="csc-object-history-associations-usage-notes"/></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												
+												<div class="info-column fl-force-left">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Owner</div>
+														</div>
+														<div class="content">
+															<table>
+																<thead>
+																	<tr>
+																		<td>Owner</td>
+																		<td>Access</td>
+																		<td>Category</td>
+																		<td>Dates</td>
+																		<td>Exchange Method</td>
+																		<td>Exchange Note</td>
+																		<td>Exchange Price - Denotionation</td>
+																		<td>Exchange Price - Value</td>
+																		<td>Ownership Place</td>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+																		<td><input type="text" class="csc-object-history-associations-owener"/>
+																			<div class="csc-object-history-associations-owener-autocomplete"></div></td>
+																		<td><select class="csc-object-history-associations-access input-select"/></td>
+																		<td><select class="csc-object-history-associations-category input-select"/></td>
+																		<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-history-associations-dates disabled"/><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></td>
+																		<td><select class="csc-object-history-associations-exchange-method input-select"/></td>
+																		<td><input type="text" class="csc-object-history-associations-exchange-note"/></td>
+																		<td><select class="csc-object-history-associations-denomination input-select"/></td>
+																		<td><input type="text" class="csc-object-history-associations-exchange-price-value"/></td>
+																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-associations-owenership-place"/></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												<div class="clear"></div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="fl-container-flex fl-fix information-group">
+										<div class="info-column">
+											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-owner', this); return false;">
+												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+												Object Owner's Contribution Information
+											</div>
+											<div class="fl-container-flex fl-fix content main" id="toggle-object-owner">
+												<div class="info-column fl-force-left">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Owner's Personal Experience</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><textarea class="input-textarea csc-object-owner-experience"></textarea></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												
+												<div class="info-column fl-force-left">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Owner's Personal Response</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><textarea class="input-textarea csc-object-owner-response"></textarea></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												
+												<div class="info-column fl-force-left">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Owner's Reference</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-object-owner-reference"/></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												
+												<div class="info-column fl-force-left">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Owner's Contribution Note</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><textarea class="input-textarea csc-object-owner-contribution-note"></textarea></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												<div class="clear"></div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="fl-container-flex fl-fix information-group">
+										<div class="info-column">
+											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-viewer', this); return false;">
+												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+												Object Viewer's Contribution Information
+											</div>
+											<div class="fl-container-flex fl-fix content main" id="toggle-object-viewer">
+												<div class="info-column fl-force-left">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Viewer's Role</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-object-viewer-role"/></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												
+												<div class="info-column fl-force-left">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Viewer's Personal Experience</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><textarea class="input-textarea csc-object-viewer-experience"></textarea></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												
+												<div class="info-column fl-force-left">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Viewer's Personal Response</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><textarea class="input-textarea csc-object-viewer-response"></textarea></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												
+												<div class="info-column fl-force-left">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Viewer's Reference</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-object-viewer-reference"/></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												
+												<div class="info-column fl-force-left">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Viewer's Contribution Note</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><textarea class="input-textarea csc-object-viewer-contribution-note"></textarea></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+												<div class="clear"></div>
+											</div>
+										</div>
+									</div>
+									
+									
+									
+									<div class="fl-container-flex fl-fix information-group">
+										<div class="info-column">
+											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-ref-info', this); return false;">
+												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+												Reference Information
+											</div>
+											<div class="fl-container-flex fl-fix content main" id="toggle-ref-info">
+												<div class="info-column2-50 fl-force-left">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Reference</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td class="disabled"><input type="text" disabled="disabled" class="csc-reference-information-reference"/></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>	
+												</div>
+												
+												<div class="info-column2-50 fl-force-right">															
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Catalog Number</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td><input type="text" class="csc-reference-information-catalog-umber"/></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>	
+												</div>
+												<div class="clear"></div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="fl-container-flex fl-fix information-group">
+										<div class="info-column">
+											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-collection', this); return false;">
+												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+												Object Collection Information
+											</div>
+											<div class="fl-container-flex fl-fix content main" id="toggle-object-collection">
+												<div class="info-column fl-force-left">
+													<div class="info-pair">
+														<div class="header">
+															<div class="label">Field Collection Event Name</div>
+														</div>
+														<div class="content">
+															<table>
+																<tbody>
+																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-collection-field-collection-event-name"/></td>
+																	</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>	
+												</div>
+												<div class="clear"></div>
+											</div>
+										</div>
+									</div>
+									
+
+									<!--<div class="fl-container-flex fl-fix information-group">
+										<div class="info-column">
 											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-date-info', this); return false;">
 												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
 												Date Information
@@ -1195,7 +2046,7 @@
 															<table>
 																<tbody>
 																	<tr>
-																		<!--<td class="table-unselected"></td>-->
+																		
 																		<td><input type="text" class="csc-date-information-date-association"/></td>
 																	</tr>
 																</tbody>
@@ -1213,7 +2064,7 @@
 															<table>
 																<tbody>
 																	<tr>
-																		<!--<td class="table-unselected"></td>-->
+																		
 																		<td><input type="text" class="csc-date-information-date-period"/></td>
 																	</tr>
 																</tbody>
@@ -1240,13 +2091,13 @@
 																<tbody>
 																	<tr>
 																		<td class="label">Date - Earliest/single</td>
-																		<td class="disabled"><input type="text" disabled="disabled" class="csc-date-information-date-earliest-single disabled"/></td>
+																		<td class="disabled"><input type="text" disabled="disabled" class="csc-date-information-date-earliest-single"/></td>
 																		<td><input type="text" class="csc-date-information-date-earliest-single-certainty"/></td>
 																		<td><input type="text" class="csc-date-information-date-earliest-single-qualifier"/></td>
 																	</tr>
 																	<tr>
 																		<td class="label">Date - Latest</td>
-																		<td class="disabled"><input type="text" disabled="disabled" class="csc-date-information-date-latest disabled"/></td>
+																		<td class="disabled"><input type="text" disabled="disabled" class="csc-date-information-date-latest"/></td>
 																		<td><input type="text" class="csc-date-information-date-latest-certainty"/></td>
 																		<td><input type="text" class="csc-date-information-date-latest-qualifier"/></td>
 																	</tr>
@@ -1263,7 +2114,7 @@
 															<table>
 																<tbody>
 																	<tr>
-																		<!--<td class="table-unselected"></td>-->
+																		
 																		<td><textarea class="input-textarea csc-date-information-date-text"></textarea></td>
 																	</tr>
 																</tbody>
@@ -1274,7 +2125,7 @@
 												<div class="clear"></div>
 											</div>
 										</div>
-									</div>
+									</div>-->
 									
 									<div class="hidden csc-message-container cs-message">
 										<span class="csc-timestamp cs-timestamp">time</span>

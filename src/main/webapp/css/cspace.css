@@ -528,13 +528,15 @@ table .field-cal {width:162px; background-color:#C7CFD4;}
 .no-cursor, .no-cursor a {cursor:default;}
 
 /* disabling/enabling selectors */ /*needs to be consolidated*/
-.disabled {}
-.content.disabled, .disabled td, .disabled tr, input.disabled, td.disabled, tr.disabled {background-color:#CDCCCC  !important; color:#a0a0a0 !important; cursor:default;}
+.disabled {color:#606060;}
+td.disabled, td.disabled input, input[disabled]  {color:#606060; background-color:#CCC; cursor:default;}
+input[disabled]:hover, input[disabled]:hover	{background-color:#CCC !important;}
+/*.content.disabled, .disabled td, .disabled tr, input.disabled, td.disabled, tr.disabled {background-color:#CDCCCC  !important; color:#a0a0a0 !important; cursor:default;}
 .radio-button.disabled {color:gray;}
 .deactivate, .deactivate table, .deactivate table td, .deactivate .label {background-color:#CDCCCC !important; color:#606060 !important;}
 .deactivate input {color:#CDCCCC !important;}
 input.deactivate {background-color:#CDCCCC !important; color:#000 !important; cursor:default;}
-.disableme {background-color:#CDCCCC !important; color:gray !important;}
+.disableme {background-color:#CDCCCC !important; color:gray !important;}*/
 .activate input {color:black !important; background-color:white !important;}
 
 .overflowdiv {overflow-y:auto; overflow-x:hidden; max-height:183px;} /*  min-height */

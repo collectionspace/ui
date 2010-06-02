@@ -20,6 +20,8 @@
 }
 .cs-confirmationDialog .label {float:left; /*padding-left:10px;*/ font-size:12px;}
 
+
+.add-more input{height:17px;}
 .csc-confirmationDialog-inner {
 	/*padding:20px 20px 20px 20px;*/
 }
@@ -27,7 +29,7 @@
 
 .csc-confirmationDialog-inner {}
 .csc-confirmationDialog-inner .add-more {margin-top:0px;}
-.csc-confirmationDialog-inner .add-more .button.add, .csc-confirmationDialog-inner .add-more .button.add:hover {background-color:#94BC80; color:#fff;}
+.csc-confirmationDialog-inner .add-more .button.add, .csc-confirmationDialog-inner .add-more .button.add:hover {/*background-color:#94BC80;*/ color:#fff;}
 
 .csc-recordTypeSelecter-procedures {float:left;}
 
@@ -82,7 +84,7 @@ a, a:hover {text-decoration:none;}
 .add-related-steps.stepTwo {background: url('../images/linkRecords-two.png') 15px center no-repeat #EBEBEB;}
 
 
-#search-box, #create-box {padding:18px 0 0 0; margin:0;}
+#search-box, #create-box {padding:5px 0 0 0; margin:0;}
 #relationship-box {padding:17px 0 0 0;}
 #search-box .header, #create-box .header, #relationship-box .header {color:#5A5A5A; font-size:12px; padding:0 0 0px 0;}
 #search-box .content, #create-box .content, #relationship-box .content {padding:0;}
