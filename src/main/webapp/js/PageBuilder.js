@@ -94,7 +94,7 @@ cspace = cspace || {};
             csid: null,
             fields: {},
             termsUsed: [],
-            relations: []
+            relations: {}
         };
     };
     
