@@ -529,7 +529,7 @@ table .field-cal {width:162px; background-color:#C7CFD4;}
 
 /* disabling/enabling selectors */ /*needs to be consolidated*/
 .disabled {color:#606060;}
-td.disabled, td.disabled input, input[disabled]  {color:#606060; background-color:#CCC; cursor:default;}
+td.disabled, td.disabled input, input[disabled]  {color:#606060; background-color:#CCC; cursor:default; background-image:none;}
 input[disabled]:hover, input[disabled]:hover	{background-color:#CCC !important;}
 /*.content.disabled, .disabled td, .disabled tr, input.disabled, td.disabled, tr.disabled {background-color:#CDCCCC  !important; color:#a0a0a0 !important; cursor:default;}
 .radio-button.disabled {color:gray;}
@@ -561,3 +561,17 @@ table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; f
 .user-table tr.cs-selected td, .role-table tr.cs-selected td {background-color:#6E9FCE !important; color:#fff !important; font-weight:bold;}
 
 .required {color:red;}
+
+/* id/class selector combinations to activate proper header tabs*/
+#intake .header-menu-row .findedit a,
+#objects .header-menu-row .findedit a,
+#acquisition .header-menu-row .findedit a,
+#loanin .header-menu-row .findedit a,
+#loanout .header-menu-row .findedit a,
+#person .header-menu-row .findedit a,
+#organization .header-menu-row .findedit a,
+#search .header-menu-row .findedit a,
+#findedit .header-menu-row .findedit a,
+#createnew .header-menu-row .createnew a,
+#administration .header-menu-row .administration a
+{color:#646464; border-bottom-color: #646464; text-decoration:none;}
