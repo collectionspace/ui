@@ -3,12 +3,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <title>RecordEditor Test Suite</title>
-        <link rel="Stylesheet" media="screen" href="../lib/qunit/css/testsuite.css" />
+        <link rel="stylesheet" media="screen" href="../lib/qunit/css/qunit.css" />
         
         <script type="text/javascript" src="../../main/webapp/infusion/CSpaceInfusion.js"></script>
         <script type="text/javascript" src="../../main/webapp/engage-core-framework/js/engageRenderUtils.js"></script>
 
-        <script type="text/javascript" src="../lib/qunit/js/testrunner.js"></script>
+        <script type="text/javascript" src="../lib/qunit/js/qunit.js"></script>
         <script type="text/javascript" src="../lib/jqUnit/js/jqUnit.js"></script>
         <script type="text/javascript" src="../lib/jqMock/js/jqMock.js"></script>
 
@@ -22,9 +22,12 @@
         <script type="text/javascript" src="../js/RecordEditorTest.js"></script>
     </head>
     <body>
-        <h1 id="header">RecordEditor Test Suite</h1>
-        <h2 id="banner"></h2>
-        <h2 id="userAgent"></h2>
+        <h1 id="qunit-header">RecordEditor Test Suite</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+    
 
         <!-- Test HTML -->
         <div id="main" style="display: none;">
@@ -32,6 +35,5 @@
             <input class="csc-test-2" type="text" />
             <input class="csc-test-3" type="text" />
         </div>
-        <ol id="tests"></ol>
     </body>
 </html>
