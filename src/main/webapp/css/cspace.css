@@ -42,7 +42,7 @@ a.add-link:hover, a.add-link:focus {color:#000; text-decoration:underline;}
 
 .menu-item a, .menu-item a:link, .menu-item a:visited, .menu-item a:active {color:#A6A6A6; text-decoration:none; border-bottom:3px solid #CFCECE; padding-right:25px; padding-bottom:2px;}
 .menu-item.selected a:link, .menu-item.selected a:visited, .menu-item.selected a:active {color:#646464; border-bottom:3px solid #646464; text-decoration:none;}
-.menu-item:hover, .menu-item a:hover, .menu-item:focus, .menu-item a:focus {color:#646464; border-bottom-color:#646464;}
+.menu-item:not(.no-cursor):hover, .menu-item:not(.no-cursor) a:hover, .menu-item:focus, .menu-item a:focus {color:#646464; border-bottom-color:#646464;}
 
 .menu-record a {background:none repeat scroll 0 0 #6F9DCE; color:#fff; font-weight:bold;	padding:0.2em .4em; 
 	text-decoration:none; border:2px solid #6F9DCE; border-bottom:none; *margin-right:2px; 
