@@ -9,6 +9,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jQuery, fluid, window, cspace*/
+"use strict";
 
 cspace = cspace || {};
 
@@ -67,6 +68,7 @@ cspace = cspace || {};
             var templates = fluid.parseTemplates(resources, ["confirmation"], {});
             fluid.reRender(templates, confirmation, {});
             bindEvents(that);
+            that.events.afterRender.fire();
         });
 
         return confirmation;
@@ -95,6 +97,7 @@ cspace = cspace || {};
 	
 	fluid.defaults("cspace.confirmation", {
         selectors: {
+			dialog: ".csc-confirmationDialog",
             cancel: ".csc-confirmationDialogButton-cancel",
             proceed: ".csc-confirmationDialogButton-proceed",
             act: ".csc-confirmationDialogButton-save",
@@ -103,6 +106,9 @@ cspace = cspace || {};
         strings: {
             confirmation: "You are about to navigate from the current record. Please confirm...",
             confirmationTitle: "Confirmation."
+        },
+        events: {
+            afterRender: null
         },
         confirmationTemplateUrl: "../html/Confirmation.html"
     });
