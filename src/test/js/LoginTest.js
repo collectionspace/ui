@@ -84,7 +84,7 @@ var loginTester = function(){
             type: "POST",
             dataType: "json"
         };
-        ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams));
+        ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams)).returnValue();
 
         var tempIsLocal = cspace.util.isLocal;
         cspace.util.isLocal = function () {return false;};
@@ -143,7 +143,7 @@ var loginTester = function(){
             type: "POST",
             dataType: "json"
         };
-        ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams));
+        ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams)).returnValue();
 
         var tempIsLocal = cspace.util.isLocal;
         cspace.util.isLocal = function () {return false;};
