@@ -47,6 +47,25 @@
     },
     "recordEditor": {
         ".csc-acquisition-acquisition-funding-denomination": "${fields.acquisitionFundingDenomination}",
+        ".csc-acquisition-owner-row:": {
+            "children": [
+                {
+                    ".csc-acquisition-owner": "${fields.owners.0.owner}",
+                    ".csc-acquisition-owner-autocomplete": {
+                        "decorators": [
+                            {
+                                "func": "cspace.autocomplete",
+                                "type": "fluid",
+                                "options": {
+                                    "queryUrl": "../../chain/acquisition/autocomplete/owner",
+                                    "vocabUrl": "../../chain/acquisition/source-vocab/owner"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         ".csc-acquisition-acquisition-source-row:": {
             "children": [
                 {
