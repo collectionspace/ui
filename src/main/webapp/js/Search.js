@@ -112,6 +112,21 @@ cspace = cspace || {};
         that.locate("resultsCount").text(that.resultsPager.model.totalRange);
     };
 
+    var submitSearch = function (url, model, successEvent, errorEvent) {
+        jQuery.ajax({
+            url: url,
+            type: "GET",
+            dataType: "json",
+            success: function (data, textStatus) {
+                fluid.model.copyModel(model, data);
+                successEvent.fire();
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                errorEvent.fire("search", textStatus);
+            }
+        });
+    };
+
     var submitSearchRequest = function (that) {
         return function () {
             that.locate("errorMessage").hide();
@@ -121,18 +136,7 @@ cspace = cspace || {};
                 recordType = "objects";
             }
             var query = that.locate("keywords").val();
-            jQuery.ajax({
-                url: that.options.searchUrlBuilder(recordType, query),
-                type: "GET",
-                dataType: "json",
-                success: function (data, textStatus) {
-                    that.model = data;
-                    that.events.modelChanged.fire();
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    that.events.onError.fire("search", textStatus);
-                }
-            });
+            that.search(recordType, query);
         };
     };
 
@@ -161,6 +165,10 @@ cspace = cspace || {};
         that.locate("resultsContainer").hide();
         that.model = {};
         
+        that.search = function (recordType, queryString) {
+            submitSearch(that.options.searchUrlBuilder(recordType, queryString), that.model, that.events.modelChanged, that.events.onError);
+        };
+
         bindEventHandlers(that);
         
         var keywords = cspace.util.getUrlParameter("keywords");
@@ -168,8 +176,9 @@ cspace = cspace || {};
         if (keywords) {
             that.locate("keywords").val(keywords);
             that.locate("recordType").val(recordType);
-            submitSearchRequest(that)();
+            that.search(recordType, keywords);
         }
+
         return that;
     };
 
