@@ -59,12 +59,26 @@ cspace = cspace || {};
         that.events.afterRender.fire();
     };
 
+    /*
+     * Repeated fields are expected to save the fields even if they're empty.
+     * In this case, we require at least one instance of the field in the model.
+     */
+    var prepareModel = function (model, elPath, applier) {
+        var list = fluid.model.getBeanValue(model, elPath);
+        if (!list || list.length === 0) {
+            list = addRow([]);
+            applier.requestChange(elPath, list);
+            fluid.model.setBeanValue(model, elPath, list);
+        }
+    };
+
     cspace.repeatable = function (container, options) {
         
         var that = fluid.initView("cspace.repeatable", container, options);
         
         that.applier = that.options.applier;
-        that.model = that.options.model;        
+        that.model = that.options.model;
+        prepareModel(that.model, that.options.elPath, that.applier);
         
         that.refreshView = function () {
             renderPage(that);

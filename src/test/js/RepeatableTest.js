@@ -72,13 +72,30 @@ var repeatableTester = function () {
         repeatable = setupRepeatable();        
         jqUnit.assertEquals("Model is of lenth 1 initially", 1, fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath).length);
         jqUnit.assertEquals("Initially, value matched model", "This is brief description.", jQuery(".csc-object-identification-brief-description").val());
-        jQuery(".csc-object-identification-brief-description").val("test");
+        jQuery(".csc-object-identification-brief-description").val("test").change();
         jqUnit.assertEquals("Before adding a row, first value is changed to 'test'", "test", jQuery(".csc-object-identification-brief-description").val());
+        jqUnit.assertEquals("After changing field to 'test', model should be 'test", "test", fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath)[0]);
         repeatable.applier.modelChanged.addListener("*", function () {
             jqUnit.assertEquals("After clicking 'add', model is now of length 2", 2, fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath).length);
             jqUnit.assertEquals("After adding a row, first value is still 'test'", "test", jQuery(".csc-object-identification-brief-description").eq(0).val());
+            jqUnit.assertEquals("After adding a row, model for first field should be 'test", "test", fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath)[0]);
         });
         repeatable.locate("addButton").click();        
+    });
+
+    repeatableTest.test("Add functionality when model initially empty", function () {
+        var oldTestModel = {};
+        fluid.model.copyModel(oldTestModel, testModel);
+        fluid.clear(testModel);        
+
+        repeatable = setupRepeatable();
+        jqUnit.assertEquals("When initialized with an empty  model, model length should be 1", 1, fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath).length);
+        repeatable.applier.modelChanged.addListener("*", function () {
+            jqUnit.assertEquals("After clicking 'add', model is now of length 2", 2, fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath).length);
+        });
+        repeatable.locate("addButton").click();
+        fluid.clear(testModel);
+        fluid.model.copyModel(testModel, oldTestModel);
     });
     
     repeatableTest.test("Delete Functionality", function () {
