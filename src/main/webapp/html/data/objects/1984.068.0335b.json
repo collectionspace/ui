@@ -12,7 +12,9 @@
         "objectNameCurrency": "Estonian",
         "title": "This record has two related cataloging records.",
         "objectNameLanguage": "Estonian",
-        "briefDescription": "This is brief description.",
+        "briefDescriptions": [
+            "This is brief description."
+        ],
         "otherNumberType": "no type",
         "titleType": "Sample",
         "titleTranslation": "No translation",
@@ -20,9 +22,7 @@
         "objectNameNote": "No note",
         "comments": "These are the comments",
         "objectNameLevel": "Very High",
-        "color": [
-            "blue"
-        ]
+        "color": "blue"
     },
     "relations": [
         {

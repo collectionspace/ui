@@ -116,22 +116,7 @@
             "optionlist": ["classified","denomination","simple","taxonomic","typological"],
             "selection": "${fields.objectNameType}"
         },
-        ".csc-object-description-color-repeated-container": {
-            "decorators": [{
-                "type": "fluid",
-                "func": "cspace.repeatable",
-                "options": {
-                    "protoTree": {
-                        ".csc-object-description-color-row:": {
-                            "children": [{
-                                ".csc-object-description-color": "${fields.color.0}"
-                            }]
-                        }
-                    },
-                    "elPath": "fields.color"
-                }
-            }]
-        },
+        ".csc-object-description-color": "${fields.color.0}",
         ".csc-object-description-inscription-content-method": {
             "optionnames": [
                 "Option"
@@ -562,7 +547,22 @@
             ],
             "selection": "${fields.objectComponentInformation}"
         },
-        ".csc-object-identification-brief-description": "${fields.briefDescription}",
+        ".csc-object-identification-brief-description-repeated-container": {
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.repeatable",
+                "options": {
+                    "protoTree": {
+                        ".csc-object-identification-brief-description-row:": {
+                            "children": [{
+                                ".csc-object-identification-brief-description": "${fields.briefDescriptions.0}",
+                            }]
+                        }
+                    },
+                    "elPath": "fields.briefDescriptions"
+                }
+            }]
+        },
         ".csc-object-description-content-description": "${fields.contentDescription}",
         ".csc-object-identification-object-number-container": {
             "decorators": [

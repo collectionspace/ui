@@ -20,7 +20,7 @@ var repeatableTester = function () {
         url: "../../main/webapp/html/uispecs/objects/uispec.json",
         dataType: "json",
         success: function (data) {
-            testUISpec = data["recordEditor"][".csc-object-description-color-repeated-container"].decorators[0];
+            testUISpec = data["recordEditor"][".csc-object-identification-brief-description-repeated-container"].decorators[0];
         },
         error: function (xhr, textStatus, error) {
             fluid.log("Unable to load object uispec for testing");
@@ -54,7 +54,7 @@ var repeatableTester = function () {
         };
         opts.expander = "cspace.renderUtils.expander";
         jQuery.extend(true, opts, options); 
-        return cspace.repeatable(".csc-object-description-color-repeated-container", opts);
+        return cspace.repeatable(".csc-object-identification-brief-description-repeated-container", opts);
     };
     
     repeatableTest.test("Initialization", function () {        
@@ -71,12 +71,12 @@ var repeatableTester = function () {
     repeatableTest.test("Add Functionality + applier/model consistency", function () {        
         repeatable = setupRepeatable();        
         jqUnit.assertEquals("Model is of lenth 1 initially", 1, fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath).length);
-        jqUnit.assertEquals("Initially, value matched model", "blue", jQuery(".csc-object-description-color").val());
-        jQuery(".csc-object-description-color").val("test");
-        jqUnit.assertEquals("Before adding a row, first value is changed to 'test'", "test", jQuery(".csc-object-description-color").val());
+        jqUnit.assertEquals("Initially, value matched model", "This is brief description.", jQuery(".csc-object-identification-brief-description").val());
+        jQuery(".csc-object-identification-brief-description").val("test");
+        jqUnit.assertEquals("Before adding a row, first value is changed to 'test'", "test", jQuery(".csc-object-identification-brief-description").val());
         repeatable.applier.modelChanged.addListener("*", function () {
             jqUnit.assertEquals("After clicking 'add', model is now of length 2", 2, fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath).length);
-            jqUnit.assertEquals("After adding a row, first value is still 'test'", "test", jQuery(".csc-object-description-color").eq(0).val());
+            jqUnit.assertEquals("After adding a row, first value is still 'test'", "test", jQuery(".csc-object-identification-brief-description").eq(0).val());
         });
         repeatable.locate("addButton").click();        
     });
