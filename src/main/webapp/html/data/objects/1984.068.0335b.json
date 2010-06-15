@@ -19,7 +19,10 @@
         "otherNumber": "2",
         "objectNameNote": "No note",
         "comments": "These are the comments",
-        "objectNameLevel": "Very High"
+        "objectNameLevel": "Very High",
+        "color": [
+            "blue"
+        ]
     },
     "relations": [
         {

@@ -121,8 +121,23 @@ cspace = cspace || {};
             }
         }
     };
-
+    
     cspace.renderUtils = {
+        
+        cutpointsFromUISpec: function (uispec) {
+            var selectors = {};
+            cspace.renderUtils.buildSelectorsFromUISpec(uispec, selectors);
+            return fluid.engage.renderUtils.selectorsToCutpoints(selectors, {});            
+        },
+        
+        // TODO: need to make expander's API to be consistent with all expanders in the future.
+        expander: function (uispec, that) {
+            var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
+            var protoTree = cspace.renderUtils.buildProtoTree(uispec, that);
+            var tree = expander(protoTree);
+            cspace.renderUtils.fixSelectionsInTree(tree);
+            return tree;
+        },
 
         buildSelectorsFromUISpec: function (uispec, selectors) {
             for (var key in uispec) {
@@ -158,9 +173,9 @@ cspace = cspace || {};
                     if (entry.decorators) {
                         for (var i = 0; i < entry.decorators.length; i++) {
                             var dec = entry.decorators[i];
-                            if (fluid.getGlobalValue(dec.func + ".getDecoratorOptions")) {
+                            if (fluid.getGlobalValue(dec.func + ".extendDecoratorOptions")) {
                                 dec.options = dec.options || {};
-                                $.extend(true, dec.options, fluid.invokeGlobalFunction(dec.func + ".getDecoratorOptions", [that]));
+                                fluid.invokeGlobalFunction(dec.func + ".extendDecoratorOptions", [dec.options, that]);
                             }
                         }
                     }

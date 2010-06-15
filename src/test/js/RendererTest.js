@@ -2,7 +2,7 @@
 Copyright 2009 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
-ou may not use this file except in compliance with this License.
+You may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
@@ -13,11 +13,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 var rendererTester = function(){
 
     cspace.testDecorator = {
-        getDecoratorOptions: function (parentComponent) {
-            return {
+        extendDecoratorOptions: function (options, parentComponent) {
+            $.extend(true, options, {
                 option1: parentComponent.options.opt1,
                 option2: parentComponent.options.opt2
-            };
+            });
         }
     };
 
@@ -351,6 +351,48 @@ var rendererTester = function(){
         };
         cspace.renderUtils.fixSelectionsInTree(testTree);
         jqUnit.assertDeepEq("Selections should be fixed", expectedFixedTree, testTree);
+    });
+    
+    rendererTest.test("cspace.renderUtils.expander()", function () {
+        var testUISpec = {
+            selector1: "${field1}",
+            selector2: "${field2}",
+            selector3: "${field3}"
+        };
+        var expectedTree = {
+            children: [{
+                ID: "selector1",
+                valuebinding: "field1"
+            }, {
+                ID: "selector2",
+                valuebinding: "field2"
+            }, {
+                ID: "selector3",
+                valuebinding: "field3"
+            }]
+        };
+        var tree = cspace.renderUtils.expander(testUISpec, {});        
+        jqUnit.assertDeepEq("Expander properly expands protoTree to componentTree ", expectedTree, tree);        
+    });
+    
+    rendererTest.test("cspace.renderUtils.cutpointsFromUISpec()", function () {
+        var testUISpec = {
+            selector1: "${field1}",
+            selector2: "${field2}",
+            selector3: "${field3}"
+        };
+        var expectedCutpoints = [{
+            id: "selector1",
+            selector: "selector1"
+        }, {
+            id: "selector2",
+            selector: "selector2"
+        }, {
+            id: "selector3",
+            selector: "selector3"
+        }];
+        var cutpoints = cspace.renderUtils.cutpointsFromUISpec(testUISpec);        
+        jqUnit.assertDeepEq("Cutpoints are properly generated from the uispec ", expectedCutpoints, cutpoints);        
     });
 };
 

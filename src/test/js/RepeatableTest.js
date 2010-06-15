@@ -1,0 +1,107 @@
+/*
+Copyright 2010 University of Toronto
+
+Licensed under the Educational Community License (ECL), Version 2.0. 
+You may not use this file except in compliance with this License.
+
+You may obtain a copy of the ECL 2.0 License at
+https://source.collectionspace.org/collection-space/LICENSE.txt
+*/
+
+/*global jqUnit, jQuery, cspace, fluid, start, stop, ok, expect*/
+"use strict";
+
+var repeatableTester = function () {
+    var testUISpec = {};
+    var testModel = {};
+    var repeatable;
+    jQuery.ajax({
+        async: false,
+        url: "../../main/webapp/html/uispecs/objects/uispec.json",
+        dataType: "json",
+        success: function (data) {
+            testUISpec = data["recordEditor"][".csc-object-description-color-repeated-container"].decorators[0];
+        },
+        error: function (xhr, textStatus, error) {
+            fluid.log("Unable to load object uispec for testing");
+        }
+    });
+    jQuery.ajax({
+        async: false,
+        url: "../../main/webapp/html/data/objects/1984.068.0335b.json",
+        dataType: "json",
+        success: function (data) {
+            testModel = data;
+        },
+        error: function (xhr, textStatus, error) {
+            fluid.log("Unable to load object data for testing");
+        }
+    });
+    
+    var repeatableTest = new jqUnit.TestCase("Repeatable Tests", function () {
+        repeatableTest.fetchTemplate("../../main/webapp/html/ObjectEntryTemplate.html", ".csc-object-entry-template");
+    });
+    
+    var setupRepeatable = function (options) {
+        var model = {};
+        fluid.model.copyModel(model, testModel);
+        var applier = fluid.makeChangeApplier(model);
+        var opts = testUISpec.options;
+        opts.model = model;
+        opts.applier = applier;
+        opts.renderOptions = {
+            cutpoints: cspace.renderUtils.cutpointsFromUISpec(testUISpec.options.protoTree)
+        };
+        opts.expander = "cspace.renderUtils.expander";
+        jQuery.extend(true, opts, options); 
+        return cspace.repeatable(".csc-object-description-color-repeated-container", opts);
+    };
+    
+    repeatableTest.test("Initialization", function () {        
+        repeatable = setupRepeatable();
+        jqUnit.assertValue("Component was initialized", repeatable);
+    });
+    repeatableTest.test("Add Functionality", function () {        
+        repeatable = setupRepeatable();
+        jqUnit.assertEquals("Model is of length 1 initially", 1, fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath).length);
+        repeatable.locate("addButton").click();
+        jqUnit.assertEquals("After clicking 'add', model is now of length 2", 2, fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath).length);
+    });
+    
+    repeatableTest.test("Add Functionality + applier/model consistency", function () {        
+        repeatable = setupRepeatable();        
+        jqUnit.assertEquals("Model is of lenth 1 initially", 1, fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath).length);
+        jqUnit.assertEquals("Initially, value matched model", "blue", jQuery(".csc-object-description-color").val());
+        jQuery(".csc-object-description-color").val("test");
+        jqUnit.assertEquals("Before adding a row, first value is changed to 'test'", "test", jQuery(".csc-object-description-color").val());
+        repeatable.applier.modelChanged.addListener("*", function () {
+            jqUnit.assertEquals("After clicking 'add', model is now of length 2", 2, fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath).length);
+            jqUnit.assertEquals("After adding a row, first value is still 'test'", "test", jQuery(".csc-object-description-color").eq(0).val());
+        });
+        repeatable.locate("addButton").click();        
+    });
+    
+    repeatableTest.test("Delete Functionality", function () {
+        // TODO: Delete is not yet implemented, so only the 'after clicking add' assert will run currently
+        //       An expect() would catch this
+        repeatable = setupRepeatable();
+        repeatable.events.afterDelete.addListener(function () {
+            jqUnit.assertEquals("After delete of only item, model is still of length 1", 1, fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath).length);
+        }, "deletePrimary");
+        jQuery(".csc-repeatable-delete").eq(0).click();
+        repeatable.events.afterDelete.removeListener("deletePrimary");
+        repeatable.applier.modelChanged.addListener("*", function () {
+            jqUnit.assertEquals("After clicking 'add', model is now of length 2", 2, fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath).length);
+        });
+        repeatable.locate("addButton").click();
+        repeatable.events.afterDelete.addListener(function () {
+            jqUnit.assertEquals("After deleting non-primary item, model is of length 1", 1, fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath).length);
+        }, "deleteNonPrimary");
+        jQuery(".csc-repeatable-delete").eq(1).click();
+        repeatable.events.afterDelete.removeListener("deleteNonPrimary");
+    });
+};
+
+(function () {
+    repeatableTester();
+}());

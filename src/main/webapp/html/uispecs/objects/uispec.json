@@ -116,7 +116,22 @@
             "optionlist": ["classified","denomination","simple","taxonomic","typological"],
             "selection": "${fields.objectNameType}"
         },
-        ".csc-object-description-color": "${fields.color}",
+        ".csc-object-description-color-repeated-container": {
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.repeatable",
+                "options": {
+                    "protoTree": {
+                        ".csc-object-description-color-row:": {
+                            "children": [{
+                                ".csc-object-description-color": "${fields.color.0}"
+                            }]
+                        }
+                    },
+                    "elPath": "fields.color"
+                }
+            }]
+        },
         ".csc-object-description-inscription-content-method": {
             "optionnames": [
                 "Option"
