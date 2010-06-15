@@ -2,25 +2,43 @@
 Copyright 2009-2010 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
-ou may not use this file except in compliance with this License.
+You may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid*/
+/*global cspace, jQuery, fluid*/
+"use strict";
 
 cspace = cspace || {};
 
 (function ($, fluid) {
 
-    var defaultSearchUrlBuilder = function (recordType, query) {
+    var displayLookingMessage = function (domBinder, keywords) {
+        domBinder.locate("resultsCountContainer").hide();
+        domBinder.locate("queryString").text(keywords);
+        domBinder.locate("lookingContainer").show();
+    };
+    
+    var displayResultsCount = function (domBinder, count, keywords) {
+        domBinder.locate("lookingContainer").hide();
+        domBinder.locate("resultsCount").text(count);
+        domBinder.locate("queryString").text(keywords);
+        domBinder.locate("resultsCountContainer").show();
+    };
+
+    var defaultSearchUrlBuilder = function (recordType, keywords) {
         var recordTypeParts = recordType.split('-');        
-        return "../../chain/" + recordTypeParts.join('/') + "/search?query=" + query;
+        return "../../chain/" + recordTypeParts.join('/') + "/search?query=" + keywords;
     };
 
     var colDefsGenerated = function (columnList, recordType, selectable) {
-        var csidList = [];
+        // CSPACE-1139
+        if (recordType.indexOf("authorities-") === 0) {
+            recordType = recordType.substring(12);
+        }
+
         var colDefs = fluid.transform(columnList, function (object, index) {
             var key = "col:";
             var comp;
@@ -53,7 +71,7 @@ cspace = cspace || {};
         return colDefs;
     };
 
-    var displaySearchResults = function (that, recordType) {
+    var displaySearchResults = function (that) {
         var colList = that.options.columnList;
         var results = (that.model.results || []);
 
@@ -78,7 +96,7 @@ cspace = cspace || {};
             that.options.selectors.resultsContainer,
             {
                 dataModel: that.model.results,
-                columnDefs: colDefsGenerated(colList, recordType, that.options.resultsSelectable),
+                columnDefs: colDefsGenerated(colList, that.model.recordType, that.options.resultsSelectable),
                 bodyRenderer: {
                     type: "fluid.pager.selfRender",
                     options: {
@@ -101,15 +119,16 @@ cspace = cspace || {};
         ];
         if (that.resultsPager) {
             fluid.model.copyModel(that.resultsPager.options.dataModel, that.model.results);
-            fluid.model.copyModel(that.resultsPager.options.columnDefs, colDefsGenerated(colList, recordType, that.options.resultsSelectable));
+            fluid.model.copyModel(that.resultsPager.options.columnDefs, colDefsGenerated(colList, that.model.recordType, that.options.resultsSelectable));
             // you're not supposed to touch the pager's model, but there's a bug in this version, so...
             that.resultsPager.model.totalRange = that.model.results.length;
             that.resultsPager.events.initiatePageChange.fire({pageIndex: 0, forceUpdate: true});
         } else {
             that.resultsPager = fluid.initSubcomponent(that, "resultsPager", pagerArguments);
         }
+        displayResultsCount(that.dom, that.resultsPager.model.totalRange, that.model.keywords);
         that.locate("resultsContainer").show();
-        that.locate("resultsCount").text(that.resultsPager.model.totalRange);
+        that.events.afterSearch.fire();
     };
 
     var submitSearch = function (url, model, successEvent, errorEvent) {
@@ -118,7 +137,7 @@ cspace = cspace || {};
             type: "GET",
             dataType: "json",
             success: function (data, textStatus) {
-                fluid.model.copyModel(model, data);
+                fluid.model.copyModel(model.results, data.results);
                 successEvent.fire();
             },
             error: function (xhr, textStatus, errorThrown) {
@@ -130,13 +149,13 @@ cspace = cspace || {};
     var submitSearchRequest = function (that) {
         return function () {
             that.locate("errorMessage").hide();
-            var recordType = that.locate("recordType").val();
+            that.model.recordType = that.locate("recordType").val();
 // CSPACE-701
-            if (cspace.util.isLocal() && (recordType === "object")) {
-                recordType = "objects";
+            if (cspace.util.isLocal() && (that.model.recordType === "object")) {
+                that.model.recordType = "objects";
             }
-            var query = that.locate("keywords").val();
-            that.search(recordType, query);
+            that.model.keywords = that.locate("keywords").val();
+            that.search();
         };
     };
 
@@ -146,12 +165,7 @@ cspace = cspace || {};
         that.locate("keywords").fluid("activatable", searchSubmitHandler);
 
         that.events.modelChanged.addListener(function () {
-// CSPACE-1139
-            var recordType = that.locate("recordType").val();
-            if (recordType.indexOf("authorities-") === 0) {
-                recordType = recordType.substring(12);
-            }
-            displaySearchResults(that, recordType);
+            displaySearchResults(that, that.model.recordType);
         });
         
         that.events.onError.addListener(function (action, status) {
@@ -163,20 +177,27 @@ cspace = cspace || {};
     cspace.search = function (container, options) {
         var that = fluid.initView("cspace.search", container, options);
         that.locate("resultsContainer").hide();
-        that.model = {};
+        that.model = {
+            keywords: cspace.util.getUrlParameter("keywords"),
+            recordType: cspace.util.getUrlParameter("recordtype"),
+            results: []
+        };
         
-        that.search = function (recordType, queryString) {
-            submitSearch(that.options.searchUrlBuilder(recordType, queryString), that.model, that.events.modelChanged, that.events.onError);
+        that.search = function () {
+            displayLookingMessage(that.dom, that.model.keywords);
+            that.events.onSearch.fire();
+            submitSearch(that.options.searchUrlBuilder(that.model.recordType, that.model.keywords), that.model, that.events.modelChanged, that.events.onError);
         };
 
         bindEventHandlers(that);
         
-        var keywords = cspace.util.getUrlParameter("keywords");
-        var recordType = cspace.util.getUrlParameter("recordtype");
-        if (keywords) {
-            that.locate("keywords").val(keywords);
-            that.locate("recordType").val(recordType);
-            that.search(recordType, keywords);
+        that.locate("resultsCountContainer").hide();
+        that.locate("lookingContainer").hide();
+
+        if (that.model.keywords) {
+            that.locate("keywords").val(that.model.keywords);
+            that.locate("recordType").val(that.model.recordType);
+            that.search();
         }
 
         return that;
@@ -189,7 +210,10 @@ cspace = cspace || {};
             errorMessage: ".csc-search-error-message",
             searchButton: ".csc-search-submit",
             resultsContainer: ".csc-search-results",
+            resultsCountContainer: ".csc-search-resultsCountContainer",
             resultsCount: ".csc-search-results-count",
+            lookingContainer: ".csc-search-lookingContainer",
+            queryString: ".csc-search-queryString",
             resultsHeader: ".csc-header",
             resultsRow: ".csc-row",
             columns: {
@@ -201,6 +225,8 @@ cspace = cspace || {};
         
         events: {
             modelChanged: null,
+            onSearch: null,
+            afterSearch: null,
             onError: null
         },
         

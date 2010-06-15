@@ -177,7 +177,8 @@ li .flc-pager-pageLink {margin-top:-1px;}
 	padding:2px 0 1px 2px; font-size:13px; line-height:13px;}
 .cs-search-user {mar gin-top:8px;}
 .found-records-box {/*padding:4px 0 14px 6px;*/}
-.found-records-content {/*color:#606060; font-size:16px; line-height:16px; font-weight:bold;*/}
+.found-records-content {font-weight: normal;}
+.cs-search-highlight {font-weight:bold;}
 
 .csc-global-search-keywords, .csc-search-pivot-keywords {width:140px !important; margin:0 8px 0 2px; height:17px; border:1px solid #BCBDBD; 
 	padding:1px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}

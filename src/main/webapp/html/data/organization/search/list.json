@@ -1,0 +1,12 @@
+{
+    "results": [
+        {
+            "summary": "Bloggs & Co.",
+            "number": "Bloggs & Co.",
+            "csid": "987.654.321",
+            "displayName": "Bloggs & Co.",
+            "refid": "urn:cspace.org.collectionspace.demo.personauthority:name(987.654.321):person:name(987.654.321)'Bloggs & Co.'",
+            "recordtype": "person"
+        }
+    ]
+}
