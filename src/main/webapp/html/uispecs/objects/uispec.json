@@ -116,7 +116,7 @@
             "optionlist": ["classified","denomination","simple","taxonomic","typological"],
             "selection": "${fields.objectNameType}"
         },
-        ".csc-object-description-color": "${fields.color.0}",
+        ".csc-object-description-color": "${fields.color}",
         ".csc-object-description-inscription-content-method": {
             "optionnames": [
                 "Option"
@@ -555,7 +555,7 @@
                     "protoTree": {
                         ".csc-object-identification-brief-description-row:": {
                             "children": [{
-                                ".csc-object-identification-brief-description": "${fields.briefDescriptions.0}",
+                                ".csc-object-identification-brief-description": "${fields.briefDescriptions.0}"
                             }]
                         }
                     },
