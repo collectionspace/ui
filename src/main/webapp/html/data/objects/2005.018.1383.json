@@ -60,9 +60,9 @@
         "objectNameLanguage": "por",
         "style": "26",
         "briefDescriptions": [
-            "brief",
-            "more brief",
-            "less brief"
+            {"briefDescription": "brief"},
+            {"briefDescription": "more brief"},
+            {"briefDescription": "less brief"}
         ],
         "contentPerson": "urn:cspace:org.collectionspace.demo:personauthority:id(48c74123-e547-4ff1-81d2):person:id(d2dedc9c-e91b-4fc9-b998)'Ann+Young'",
         "dimensionValue": "40",

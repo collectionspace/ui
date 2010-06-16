@@ -555,7 +555,7 @@
                     "protoTree": {
                         ".csc-object-identification-brief-description-row:": {
                             "children": [{
-                                ".csc-object-identification-brief-description": "${fields.briefDescriptions.0}"
+                                ".csc-object-identification-brief-description": "${fields.briefDescriptions.0.briefDescription}"
                             }]
                         }
                     },

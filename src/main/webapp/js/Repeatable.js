@@ -17,7 +17,9 @@ cspace = cspace || {};
     
     // TODO: Account for an elPath into the model that points to undefined: not known whether it is a simple field or an object/row.
     var addRow = function (fields) {
-        fields.push(typeof(fields[0]) === "string" ? "" : {});
+        // TODO: It's not yet sure whether or not a simple object like this will work for
+        //       groups of fields - we'll have to test against the server when it's supported
+        fields.push({});
         return fields;
     };
     

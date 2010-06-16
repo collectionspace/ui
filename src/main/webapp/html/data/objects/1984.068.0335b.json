@@ -13,7 +13,7 @@
         "title": "This record has two related cataloging records.",
         "objectNameLanguage": "Estonian",
         "briefDescriptions": [
-            "This is brief description."
+            {"briefDescription": "This is brief description."}
         ],
         "otherNumberType": "no type",
         "titleType": "Sample",

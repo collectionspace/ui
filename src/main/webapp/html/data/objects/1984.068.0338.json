@@ -13,7 +13,7 @@
         "title": "large post-conquest Ming Dynasty Chrome pan.",
         "objectNameLanguage": "Estonian",
         "briefDescriptions": [
-            "This is a slightly brief description."
+            {"briefDescription": "This is a slightly brief description."}
         ],
         "otherNumberType": "no type",
         "titleType": "Sample",
