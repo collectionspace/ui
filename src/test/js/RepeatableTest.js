@@ -74,11 +74,11 @@ var repeatableTester = function () {
         jqUnit.assertEquals("Initially, value matched model", "This is brief description.", jQuery(".csc-object-identification-brief-description").val());
         jQuery(".csc-object-identification-brief-description").val("test").change();
         jqUnit.assertEquals("Before adding a row, first value is changed to 'test'", "test", jQuery(".csc-object-identification-brief-description").val());
-        jqUnit.assertEquals("After changing field to 'test', model should be 'test", "test", fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath)[0]);
+        jqUnit.assertDeepEq("After changing field to 'test', model should be 'test", {briefDescription: "test"}, fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath)[0]);
         repeatable.applier.modelChanged.addListener("*", function () {
             jqUnit.assertEquals("After clicking 'add', model is now of length 2", 2, fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath).length);
             jqUnit.assertEquals("After adding a row, first value is still 'test'", "test", jQuery(".csc-object-identification-brief-description").eq(0).val());
-            jqUnit.assertEquals("After adding a row, model for first field should be 'test", "test", fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath)[0]);
+            jqUnit.assertDeepEq("After adding a row, model for first field should be 'test", {briefDescription: "test"}, fluid.model.getBeanValue(repeatable.model, repeatable.options.elPath)[0]);
         });
         repeatable.locate("addButton").click();        
     });
