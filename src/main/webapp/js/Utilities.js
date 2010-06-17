@@ -2,13 +2,14 @@
 Copyright 2009-2010 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
-ou may not use this file except in compliance with this License.
+You may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid*/
+/*global jQuery, fluid, cspace, window*/
+"use strict";
 
 cspace = cspace || {};
 
@@ -32,9 +33,9 @@ cspace = cspace || {};
         }
     };
 
-	cspace.util.isLocal = function () {
-		return document.location.protocol === "file:";
-	};
+    cspace.util.isLocal = function () {
+        return document.location.protocol === "file:";
+    };
 
     cspace.util.displayTimestampedMessage = function (locater, msg, time) {
         var messageContainer = locater.locate("messageContainer", "body");
@@ -43,23 +44,27 @@ cspace = cspace || {};
         messageContainer.show();
     };
 
-    cspace.util.hideMessage = function(locater){
+    cspace.util.hideMessage = function (locater) {
         locater.locate("messageContainer", "body").hide();
     };
 
-	cspace.util.setZIndex = function() {
-		if ($.browser.msie) {
-		   var zIndexNumber = 999;
-		   $("div").each(function() {
-				   $(this).css('zIndex', zIndexNumber);
-				   zIndexNumber -= 1;
-		   });
-		}
-	};
-	
-	cspace.util.corner = function() {
+    cspace.util.setZIndex = function () {
+        if ($.browser.msie) {
+            var zIndexNumber = 999;
+            $("div").each(function () {
+                $(this).css('zIndex', zIndexNumber);
+                zIndexNumber -= 1;
+            });
+        }
+    };
 
-	};
-	
-	
+    cspace.util.corner = function () {
+    };
+
+    cspace.util.getDefaultConfigURL = function () {
+        var url = window.location.pathname;
+        var dirEnd = url.lastIndexOf("/");
+        return url.substring(0, dirEnd) + "\/config" + url.substring(dirEnd, url.indexOf(".html")) + ".json";
+    };
+
 })(jQuery, fluid);

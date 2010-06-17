@@ -9,104 +9,25 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jQuery, window, cspace*/
+"use strict";
 
 cspace = cspace || {};
 
 (function ($) {
 
-    cspace.objectSetup = function () {
-
-        var tbOpts = {
-            uispec: "{pageBuilder}.uispec.titleBar"
-        };
-        var tabsOpts = {
-            tabSetups: [
-                null, {
-                    func: "cspace.objectTabSetup",
-                    options: {
-                        primaryRecordType: "objects"
-                    }
-                }
-            ]
-        };
-        var reOpts = {
-            selectors: {identificationNumber: ".csc-object-identification-object-number"},
-            strings: {identificationNumberRequired: "Please specify an Identification Number"}
-        };
-        var sbOpts = {
-            uispec: "{pageBuilder}.uispec.sidebar",
-            primaryRecordType: "objects"
-        };
-
-        var dependencies = {
-            titleBar: {
-                funcName: "cspace.titleBar",
-                args: [".csc-object-entry-template", "{pageBuilder}.applier", tbOpts]
-            },
-            tabs: {
-                funcName: "cspace.tabs",
-                args: [".csc-tabs-template", "{pageBuilder}.applier", tabsOpts]
-            },
-            recordEditor: {
-                funcName: "cspace.recordEditor",
-                args: [".csc-object-entry-template", "{pageBuilder}.dataContext", 
-                	"{pageBuilder}.applier", "{pageBuilder}.uispec.recordEditor", reOpts]
-            },
-            sidebar: {
-                funcName: "cspace.sidebar",
-                args: [".csc-sidebar", "{pageBuilder}.applier", sbOpts]
+    cspace.objectSetup = function (options) {
+        
+        options = options || {};
+                
+        options.fetchConfigCallback = options.fetchConfigCallback || function (config) {
+            config.pageBuilder.options.csid = cspace.util.getUrlParameter("csid");                
+            if (cspace.util.isLocal()) {
+                config.pageBuilder.options.dataContext.options.baseUrl = "data";
+                config.pageBuilder.options.dataContext.options.fileExtension = ".json";
             }
-        };
-        var options = {
-            dataContext: {
-                options: {
-                    recordType: "objects"
-                }
-            },
-            pageSpec: {
-                header: {
-                    href: "header.html",
-                    templateSelector: ".csc-header-template",
-                    targetSelector: ".csc-header-container"
-                },
-                tabs: {
-                    href: "tabsTemplate.html",
-                    templateSelector: ".csc-tabs-template",
-                    targetSelector: ".csc-tabs-container"
-                },
-                titleBar: {
-                    href: "ObjectTitleBar.html",
-                    templateSelector: ".csc-object-entry-titleBar-template",
-                    targetSelector: ".csc-object-entry-titleBar-container"
-                },
-                dateEntry: {
-                    href: "ObjectEntryTemplate.html",
-                    templateSelector: ".csc-object-entry-template",
-                    targetSelector: ".csc-record-edit-container"
-                },
-                sidebar: {
-                    href: "right-sidebar.html",
-                    templateSelector: ".csc-right-sidebar",
-                    targetSelector: ".csc-sidebar-container"
-                },
-                footer: {
-                    href: "footer.html",
-                    templateSelector: ".csc-footer",
-                    targetSelector: ".csc-footer-container"
-                }
-            },
-            pageType: "objects"
-        };
-        var csid = cspace.util.getUrlParameter("csid");
-        if (csid) {
-            options.csid = csid;
-        }
-        if (cspace.util.isLocal()) {
-            options.dataContext.options.baseUrl = "data";
-            options.dataContext.options.fileExtension = ".json";
-        }
-        cspace.pageBuilder(dependencies, options);
+        };        
+        return cspace.pageSetup(options);
+        
     };
-
 })(jQuery);
 
