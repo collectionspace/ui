@@ -1,11 +1,15 @@
-<div class="csc-object-tab">
-    <div class="div-for-list-of-records"></div>
+<div class="fl-container-flex fl-fix information-group">
+	<div class="info-column">
+		<div class="csc-object-tab" id="toggle-edit-cataloging-record">
+			<div class="div-for-list-of-records"></div>
 
-    <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-record-information', this); return false;">
-        <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
-        Edit Cataloging Record
-    </div>
+			<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-edit-cataloging-record .div-for-recordEditor', this); return false;">
+				<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+				Edit Cataloging Record
+			</div>
 
-    <div class="div-for-recordEditor">
-    </div>
+			<div class="div-for-recordEditor content main">
+			</div>
+		</div>
+	</div>
 </div>
