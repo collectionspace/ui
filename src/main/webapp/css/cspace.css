@@ -42,8 +42,14 @@ input[type="button"].searchButton, input[type="submit"].searchButton {background
 input[type="button"].searchButton:hover, input[type="submit"].searchButton:hover {background-color:#73AA4F;}
 input[type="button"].gotoButton, input[type="submit"].gotoButton {background:transparent url('../images/icnGoTo.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
 input[type="button"].gotoButton:hover, input[type="submit"].gotoButton:hover {background-color:#DAEDD1;}
+/*input[type="button"].addButton, input[type="submit"].addButton {background:transparent url('../images/icnAdd_.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
+input[type="button"].addButton:hover, input[type="submit"].addButton:hover {background-color:#DAEDD1;}*/
+input[type="button"].addButton, input[type="submit"].addButton {background:#93BC7F url('../images/icnAdd_.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#FFF;}
+input[type="button"].addButton:hover, input[type="submit"].addButton:hover {background-color:#73AA4F;}
+/*input[type="button"].addButton, input[type="submit"].addButton {background:#FFF url('../images/icnAdd.png') no-repeat 8px 2px; padding-left:24px; padding-right:8px; color:#73AA4F;}
+input[type="button"].addButton:hover, input[type="submit"].addButton:hover {background-color:#FFFBCC;}*/
 
-.button-row input[type="button"], .button-row-right input[type="button"] {margin-left:10px; float:right; margin-top:10px;}
+.button-row input[type="button"], .button-row-right input[type="button"] {margin-left:10px; float:right; margin-top:10px; margin-bottom:5px;}
 .button-row-left input[type="button"], .button-row-left-center input[type="button"] {margin-right:10px; margin-top:10px;}
 .button-row-left-center {margin-left:auto; margin-right:auto; width:auto;}
 
@@ -85,6 +91,10 @@ a.add-link:hover, a.add-link:focus {color:#000; text-decoration:underline;}
 .header-menu-logout a:active {color:#656565;}
 .header-menu-logout a:hover, .header-menu-logout a:focus  {color:#6699C8; text-decoration:underline;}
 
+
+a.header-focus {text-decoration:none; color:inherit;}
+a.header-foc us:focus {outline: 1px solid black;}
+a.header-focus:focus  .header.toggle {background-color:#666666; outline: 1px solid black;}
 
 /* table selectors */
 tr:focus {outline:none;}
@@ -170,7 +180,7 @@ li .flc-pager-pageLink {margin-top:-1px;}
 #secondary-nav.pivot ul.menu-record li a {wid th:100%;}
 #secondary-nav-menu .menu-record ul {margin:0; padding:0;}
 #secondary-nav-menu .menu-record li {display:inline;}
-#secondary-nav-menu-sub  {padding-bottom:6px;}
+#secondary-nav-menu-sub  {/*padding-bottom:6px;*/}
 #secondary-nav-menu-sub .upper-save {float:right; padding-bottom:1px; margin-left:15px;}
 #secondary-nav-menu-sub .time-stamp {float:right; padding-top:6px; font-size:10px; color:#BEBEBE;}
 
@@ -558,7 +568,7 @@ input.deactivate {background-color:#CDCCCC !important; color:#000 !important; cu
 
 .overflowdiv {overflow-y:auto; overflow-x:hidden; max-height:183px;} /*  min-height */
 
-.cs-message {background-color: #D1D2D4;	border:2px solid black; font-size: 1.2em; font-weight:bold; padding: 4px; margin: 5px 0 8px 0;}
+.cs-message {background-color: #D1D2D4;	border:2px solid black; font-size: 1.2em; font-weight:bold; padding: 4px; margin: 0 0 8px 0;}
 table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; font-weight:inherit; padding: 0; margin:0;}
 
 .cs-timestamp {float:right; font-weight:normal; font-size: 1em;}
