@@ -547,18 +547,14 @@
             ],
             "selection": "${fields.objectComponentInformation}"
         },
-        ".csc-object-identification-brief-description-repeated-container": {
+        ".csc-object-identification-brief-description": {
             "decorators": [{
                 "type": "fluid",
-                "func": "cspace.repeatable",
+                "func": "cspace.makeRepeatable",
                 "options": {
                     "protoTree": {
-                        ".csc-object-identification-brief-description-row:": {
-                            "children": [{
-                                ".csc-object-identification-brief-description": "${fields.briefDescriptions.0.briefDescription}"
-                            }]
-                        }
-                    },
+                        ".csc-object-identification-brief-description": "${fields.briefDescriptions.0.briefDescription}"
+                     },
                     "elPath": "fields.briefDescriptions"
                 }
             }]

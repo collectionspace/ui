@@ -31,6 +31,21 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <!-- Test HTML -->
-        <div id="main"></div>
+        <div id="main">
+            <div id="simpleFieldContainer">
+                <input class="csc-repeatable-repeat cst-simpleTestField" type="text" />
+            </div>
+            
+            <div id="tableContainer">        
+	            <table>
+	                <tr class="csc-repeatable-repeat">
+	                    <td><input class="cst-tableTestField" type="text" /></td>
+	                </tr>
+	            </table>
+            </div>
+            
+            <input class="cst-simpleTestFieldNoContainer" type="text" />
+            
+        </div>
     </body>
 </html>
