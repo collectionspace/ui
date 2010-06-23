@@ -82,9 +82,9 @@ cspace = cspace || {};
      */
     var addPrimaryAndDelete = function (that, node) {
         // TODO: we need to programatically generate the 'name' attribute since we need more then one group of radio buttons on a page. 
-        var primary = $("<input class=\"csc-repeatable-primary\" type=\"radio\" name=\"primary\" />");
-        var remove = $("<input class=\"csc-repeatable-delete\" type=\"button\" />");
-                
+        var primary = $("<input class=\"csc-repeatable-primary \" type=\"radio\" name=\"primary\" />").addClass(that.options.styles.primary);
+        var remove = $("<input class=\"csc-repeatable-delete \" type=\"button\" value=\"X\"/>").addClass(that.options.styles.remove);
+        
         if (node.is("tr")) {
             primary.wrap("<td />");
             remove.wrap("<td />");
@@ -125,16 +125,22 @@ cspace = cspace || {};
     cspace.repeatable.generateMarkup = function (that) {
         // Check for the add button and generate it if required 
         if (that.locate("add").length === 0) {
-            that.container.prepend("<input class=\"csc-repeatable-add\" type=\"button\" value=\"" + that.options.strings.add + "\" />");
+            that.container.prepend("<input class=\"csc-repeatable-add " + 
+                    that.options.styles.add + 
+                    "\" type=\"button\" value=\"" + 
+                    that.options.strings.add + 
+                    "\" />");
         }
         
         var node = that.locate("repeat");
         // TODO: check that we have a repeating node - if not what should we do? grab the first thing? grab everything?
         
         if (!node.is("tr") && !node.is("li")) {
-            node.wrap("<ul><li class=\"csc-repeatable-repeat\"/></ul>");            
+            node.wrap("<ul><li class=\"csc-repeatable-repeat " + that.options.styles.repeat + "\"/></ul>");            
             // TODO: there is probably a bug here when the 'repeat' selector is overridden - write a test to prove this
+            //       to fix the issue we need to add another selector - repeatable-content
             node.removeClass("csc-repeatable-repeat");
+            node.addClass(that.options.styles.content);
             node = node.parent("li");    
         }
 
@@ -177,6 +183,13 @@ cspace = cspace || {};
         },    
         strings: {
             add: "+ Field"
+        },
+        styles: {
+            add: "cs-repeatable-add",
+            remove: "cs-repeatable-delete",
+            primary: "cs-repeatable-primary",
+            content: "cs-repeatable-content",
+            repeat: "cs-repeatable-repeat"     
         },
         applier: null,      // Applier for the main record that cspace.repeatable belongs to. REQUIRED
         model: null,        // Model for the main record that cspace.repeatable belongs to. REQUIRED

@@ -481,7 +481,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .input-money-amount	   {width: 120px !important;}
 .input-select		   {width: auto; height:21px;}
 table .input-select         {width: 100%; height:17px; /**height:22px;*/ padding-top:0; border:none;}
-.input-textarea		   {/*width: 99.5%;*/ width:100%; height:69px; overflow:auto;}
+.input-textarea  {/*width: 99.5%;*/ width:100%; height:69px; overflow:auto; border:1px solid #C7CFD4;}
 .input-alpha-login       {width: 120px; height:18px;}
 .input-autocomplete	   {/*width:auto !important; */}
 .input-autocomplete, .ui-autocomplete-input {background: #fff url(../images/arrowPredictiveText.png) no-repeat right center;}
@@ -606,3 +606,11 @@ table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; f
 {color:#646464; border-bottom-color: #646464; text-decoration:none;}
 
 .csc-related-field {overflow:hidden;}
+
+/*  styling repeatable fields  */
+.cs-repeatable-add {margin-left: 80%;}
+li.cs-repeatable-repeat {list-style-type: none;}
+.cs-repeatable-content {width: 90%;}
+input.cs-repeatable-primary {width: 5%; position: relative; vertical-align: top;}
+input.cs-repeatable-delete {width: 5%; vertical-align: top; color: grey; background-color: transparent;}
+input.cs-repeatable-delete:hover {color: white; background-color: blue;}

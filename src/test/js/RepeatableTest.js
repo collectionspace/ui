@@ -97,7 +97,7 @@ var repeatableTester = function ($) {
     };
     
     var basicMarkupGenerateTest = function (container, repeatEl, text) {
-        // 11 asserts
+        // 13 asserts
         
         var ul = $("ul", container);
         jqUnit.exists("The ul has been generated inside container", ul);
@@ -111,7 +111,11 @@ var repeatableTester = function ($) {
         jqUnit.assertFalse("The field no longer has the repeat selector", field.hasClass("csc-repeatable-repeat"));
         jqUnit.assertEquals("The original model was rendered ", text, field.val());
         jqUnit.exists("The delete has been generated inside the li", $(".csc-repeatable-delete", li));
-        jqUnit.exists("The primary has been generated inside the li", $(".csc-repeatable-primary", li));
+        
+        var primary = $(".csc-repeatable-primary", li);
+        jqUnit.exists("The primary has been generated inside the li", primary);
+        jqUnit.assertTrue("primary has the default selector on it", primary.hasClass("csc-repeatable-primary"));
+        jqUnit.assertTrue("primary has the styling selector on it", primary.hasClass("cs-repeatable-primary"));
 
         var addButton = $(".csc-repeatable-add", container);
         jqUnit.exists("The add button has been generated inside container", addButton);
@@ -120,7 +124,7 @@ var repeatableTester = function ($) {
     };
     
     repeatableTest.test("Markup Generation for Basic Component", function () {
-        expect(11);
+        expect(13);
         var myRepeatable = basicSetup({text: "blue"});
         
         basicMarkupGenerateTest(myRepeatable.container, ".cst-simpleTestField", "blue");
@@ -238,7 +242,7 @@ var repeatableTester = function ($) {
     });
     
     repeatableTest.test("Make repeatable with simple field", function () {
-        expect(13);
+        expect(15);
         
         var model = {
             myTexts: [
@@ -276,7 +280,7 @@ var repeatableTester = function ($) {
 
     
     repeatableTest.test("Init test for brief description", function () {
-        expect(11);
+        expect(13);
         var myRepeatable = setupRepeatableWithBriefDesc();
         basicMarkupGenerateTest(myRepeatable.container, ".csc-object-identification-brief-description", "This is brief description.");
 
