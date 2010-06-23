@@ -12,9 +12,10 @@
         "objectNameCurrency": "Estonian",
         "title": "This record has two related cataloging records.",
         "objectNameLanguage": "Estonian",
-        "briefDescriptions": [
-            {"briefDescription": "This is brief description."}
-        ],
+        "briefDescriptions": [{
+            "briefDescription": "This is brief description.",
+            "_primary": true
+        }],
         "otherNumberType": "no type",
         "titleType": "Sample",
         "titleTranslation": "No translation",

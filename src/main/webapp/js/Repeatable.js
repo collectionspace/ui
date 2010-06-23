@@ -24,6 +24,40 @@ cspace = cspace || {};
         return fields;
     };
     
+    // TODO: This should go away once we have proper radio button prototree expansion
+    var updatePrimary = function (fields, index) {
+        fluid.transform(fields, function (field, idx) {
+            field._primary = (index === idx) ? true : false;
+        });
+        return fields;
+    };
+            
+    var deleteRow = function (fields, index) {
+        if (fields.length > 1) {
+            if (fields[index]._primary === true) {
+                var sucIndex = index === 0 ? 1 : index - 1;
+                fields[sucIndex]._primary = true;
+            }
+            fields.splice(index, 1);
+        } else {
+            // TODO: here we should clear the field
+        }
+        
+        return fields;
+    };
+
+    // TODO: This should go away once we have proper radio button prototree expansion
+    var setupPrimary = function (radioButtons, fields) {
+        $.each(fields, function (index, field) {
+            radioButtons[index].checked = field._primary || false;
+        });
+    };
+
+    var requestChange = function (that, callback, index) {
+        var elPath = that.options.elPath;
+        that.applier.requestChange(elPath, callback(fluid.model.getBeanValue(that.model, elPath), index));
+    };
+
     var bindEventHandlers = function (that) {        
         var elPath = that.options.elPath;
         
@@ -34,14 +68,23 @@ cspace = cspace || {};
         });
         
         // Make a change request to add an extra row.
-        that.locate("add").click(function () {                        
-            that.applier.requestChange(elPath, addRow(fluid.model.getBeanValue(that.model, elPath)));
+        that.locate("add").click(function () {
+            requestChange(that, addRow);
             that.refreshView();
             that.events.afterAdd.fire();
         });
         
         that.locate("remove").click(function () {
+            var index = that.locate("remove").index(this);
+            requestChange(that, deleteRow, index);            
+            that.refreshView();
             that.events.afterDelete.fire();
+        });
+
+        that.locate("primary").click(function () {
+            var index = that.locate("primary").index(this);
+            requestChange(that, updatePrimary, index);
+            that.events.afterUpdatePrimary.fire();
         });
     };
     
@@ -61,6 +104,7 @@ cspace = cspace || {};
             that.template = fluid.selfRender(that.container, tree, that.options.renderOptions);
         }
         bindEventHandlers(that);
+        setupPrimary(that.locate("primary"), fluid.model.getBeanValue(that.model, that.options.elPath));
         that.events.afterRender.fire();
     };
 
@@ -179,7 +223,8 @@ cspace = cspace || {};
         events: {
             afterRender: null,
             afterDelete: null,
-            afterAdd: null
+            afterAdd: null,
+            afterUpdatePrimary: null
         },    
         strings: {
             add: "+ Field"

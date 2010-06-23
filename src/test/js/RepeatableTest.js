@@ -136,7 +136,7 @@ var repeatableTester = function ($) {
             container: "#tableContainer", 
             cutpoints: [{
                 id: "myTextField",
-                selector: ".csc-repeatable-repeat input"
+                selector: ".cst-tableTestField"
             }], 
             text: "circle"
         });
@@ -274,7 +274,92 @@ var repeatableTester = function ($) {
         
         basicMarkupGenerateTest(container, ".cst-simpleTestFieldNoContainer", "Bruges");    
     });
+    
+    repeatableTest.test("Delete Functionality", function () {    
+        expect(9);
 
+        var myRepeatable = basicSetup({model: {
+            myTexts: [{
+                myText: "cat",
+                _primary: true
+            }, {
+                myText: "dog",
+                _primary: false
+            }, {
+                myText: "fish",
+                _primary: false
+            }]
+        }});
+        
+        jqUnit.assertEquals("There are three items rendered", 3, $("li", myRepeatable.container).length);
+        jqUnit.assertEquals("When initialized with an empty  model, model length should be 3", 3, myRepeatable.model.myTexts.length);
+        jqUnit.assertTrue("Primary field should be the first", myRepeatable.model.myTexts[0]._primary);
+        jqUnit.assertFalse("Primary field not be the second", myRepeatable.model.myTexts[1]._primary);
+        jqUnit.assertFalse("Primary field not be the third", myRepeatable.model.myTexts[2]._primary);
+        
+        myRepeatable.locate("remove").eq(2).click();
+        
+        jqUnit.assertEquals("After clicking 'remove', model is now of length 2", 2, myRepeatable.model.myTexts.length);
+        jqUnit.assertEquals("There are now 2 items rendered", 2, $("li", myRepeatable.container).length);
+
+        jqUnit.assertTrue("Primary field should still be the first", myRepeatable.model.myTexts[0]._primary);
+        jqUnit.assertFalse("Primary field not be the second", myRepeatable.model.myTexts[1]._primary);
+
+    });
+    
+    repeatableTest.test("Delete Functionality + Update Primary", function () {
+        expect(7);
+
+        var myRepeatable = basicSetup({model: {
+            myTexts: [{
+                myText: "cat",
+                _primary: false
+            }, {
+                myText: "dog",
+                _primary: true
+            }, {
+                myText: "fish",
+                _primary: false
+            }]
+        }});        
+        
+        jqUnit.assertTrue("Primary field has index of 1", myRepeatable.model.myTexts[1]._primary);        
+        myRepeatable.locate("remove").eq(1).click();
+        jqUnit.assertEquals("After clicking 'remove', model is now of length 2", 2, myRepeatable.model.myTexts.length);
+        jqUnit.assertEquals("There are now 2 items rendered", 2, $("li", myRepeatable.container).length);
+        jqUnit.assertTrue("Primary field now has index of 0", myRepeatable.model.myTexts[0]._primary);
+        myRepeatable.locate("remove").eq(0).click();
+        jqUnit.assertEquals("After clicking 'remove', model is now of length 1", 1, myRepeatable.model.myTexts.length);
+        jqUnit.assertEquals("There are now 1 item rendered", 1, $("li", myRepeatable.container).length);
+        jqUnit.assertTrue("Primary field now has index of 0", myRepeatable.model.myTexts[0]._primary);
+    });
+    
+    repeatableTest.test("Update Primary", function () {
+        expect(6);
+
+        var myRepeatable = basicSetup({model: {
+            myTexts: [{
+                myText: "cat",
+                _primary: false
+            }, {
+                myText: "dog",
+                _primary: true
+            }, {
+                myText: "fish",
+                _primary: false
+            }]
+        }});        
+        
+        jqUnit.assertEquals("Primary field has index of 1", true, fluid.model.getBeanValue(myRepeatable.model, myRepeatable.options.elPath)[1]._primary);
+        jqUnit.assertEquals("Radio button for row with index 1 is initially selected", true, myRepeatable.locate("primary")[1].checked);        
+        myRepeatable.locate("primary").eq(0).click();        
+        jqUnit.assertEquals("Primary field now has index of 0", true, fluid.model.getBeanValue(myRepeatable.model, myRepeatable.options.elPath)[0]._primary);
+        jqUnit.assertEquals("Radio button for row with index 0 is now selected", true, myRepeatable.locate("primary")[0].checked);
+        myRepeatable.locate("primary").eq(2).click();        
+        jqUnit.assertEquals("Primary field now has index of 2", true, fluid.model.getBeanValue(myRepeatable.model, myRepeatable.options.elPath)[2]._primary);
+        jqUnit.assertEquals("Radio button for row with index 2 is now selected", true, myRepeatable.locate("primary")[2].checked);
+    });
+    
     
     // TODO: write a test which has a couple of fields in a div that is to be repeated
 
@@ -285,6 +370,7 @@ var repeatableTester = function ($) {
         basicMarkupGenerateTest(myRepeatable.container, ".csc-object-identification-brief-description", "This is brief description.");
 
     });
+
 };
 
 (function () {
