@@ -85,7 +85,7 @@ cspace = cspace || {};
         var primary = $("<input class=\"csc-repeatable-primary\" type=\"radio\" name=\"primary\" />");
         var remove = $("<input class=\"csc-repeatable-delete\" type=\"button\" />");
                 
-        if (node[0].tagName === "TR") {
+        if (node.is("tr")) {
             primary.wrap("<td />");
             remove.wrap("<td />");
         }
@@ -112,7 +112,7 @@ cspace = cspace || {};
         that.applier = that.options.applier;
         that.model = that.options.model;
         prepareModel(that.model, that.options.elPath, that.applier);
-        that.options.generateMarkup(that);
+        fluid.invokeGlobalFunction(that.options.generateMarkup, [that]);
         
         that.refreshView = function () {
             renderPage(that);
@@ -125,14 +125,13 @@ cspace = cspace || {};
     cspace.repeatable.generateMarkup = function (that) {
         // Check for the add button and generate it if required 
         if (that.locate("add").length === 0) {
-            // TODO: i18n the string
-            that.container.prepend("<input class=\"csc-repeatable-add\" type=\"button\" value=\"+ Field\" />");
+            that.container.prepend("<input class=\"csc-repeatable-add\" type=\"button\" value=\"" + that.options.strings.add + "\" />");
         }
         
         var node = that.locate("repeat");
         // TODO: check that we have a repeating node - if not what should we do? grab the first thing? grab everything?
         
-        if (node[0].tagName !== "TR" && node[0].tagName !== "LI") {
+        if (!node.is("tr") && !node.is("li")) {
             node.wrap("<ul><li class=\"csc-repeatable-repeat\"/></ul>");            
             // TODO: there is probably a bug here when the 'repeat' selector is overridden - write a test to prove this
             node.removeClass("csc-repeatable-repeat");
@@ -175,7 +174,10 @@ cspace = cspace || {};
             afterRender: null,
             afterDelete: null,
             afterAdd: null
-        },         
+        },    
+        strings: {
+            add: "+ Field"
+        },
         applier: null,      // Applier for the main record that cspace.repeatable belongs to. REQUIRED
         model: null,        // Model for the main record that cspace.repeatable belongs to. REQUIRED
         elPath: "items",         // Path into the model that points to the collection of fields to be repeated - it should be an array.
@@ -185,7 +187,7 @@ cspace = cspace || {};
             autoBind: true
            // debugMode: true
         },
-        generateMarkup: cspace.repeatable.generateMarkup   // TODO: change this to a function name instead of a function
+        generateMarkup: "cspace.repeatable.generateMarkup"
     });
     
     /**

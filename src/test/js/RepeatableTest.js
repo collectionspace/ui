@@ -97,7 +97,7 @@ var repeatableTester = function ($) {
     };
     
     var basicMarkupGenerateTest = function (container, repeatEl, text) {
-        // 10 asserts
+        // 11 asserts
         
         var ul = $("ul", container);
         jqUnit.exists("The ul has been generated inside container", ul);
@@ -115,11 +115,12 @@ var repeatableTester = function ($) {
 
         var addButton = $(".csc-repeatable-add", container);
         jqUnit.exists("The add button has been generated inside container", addButton);
+        jqUnit.assertEquals("The text of the add button is correct", "+ Field", addButton.val());
         jqUnit.notExists("The add button is not in the ul", $(".csc-repeatable-add", ul));        
     };
     
     repeatableTest.test("Markup Generation for Basic Component", function () {
-        expect(10);
+        expect(11);
         var myRepeatable = basicSetup({text: "blue"});
         
         basicMarkupGenerateTest(myRepeatable.container, ".cst-simpleTestField", "blue");
@@ -222,10 +223,22 @@ var repeatableTester = function ($) {
         myRepeatable.locate("add").click();
     });
     
-    // TODO: Need to write a test where the markup isn't generated
-
+    repeatableTest.test("Markup driven", function () {
+        expect(3);
+        
+        var myRepeatable = basicSetup({container: "#markupPresent", cutpoints: [{
+                id: "myTextField",
+                selector: ".csc-repeatable-repeatd"
+            }
+        ], text: "subway"});
+        
+        jqUnit.assertEquals("No list should be generated in the container", 1, $("ul", myRepeatable.container).length);
+        jqUnit.assertEquals("No list element should be generated in the container", 1, $("ul", myRepeatable.container).length);
+        jqUnit.assertEquals("No inputs should be generated in the container", 0, $("input", myRepeatable.container).length);
+    });
+    
     repeatableTest.test("Make repeatable with simple field", function () {
-        expect(12);
+        expect(13);
         
         var model = {
             myTexts: [
@@ -259,12 +272,11 @@ var repeatableTester = function ($) {
     });
 
     
-    
     // TODO: write a test which has a couple of fields in a div that is to be repeated
-    // TODO: write a test where the markup uses an li
+
     
     repeatableTest.test("Init test for brief description", function () {
-        expect(10);
+        expect(11);
         var myRepeatable = setupRepeatableWithBriefDesc();
         basicMarkupGenerateTest(myRepeatable.container, ".csc-object-identification-brief-description", "This is brief description.");
 
