@@ -66,24 +66,29 @@
                 }
             ]
         },
-        ".csc-acquisition-acquisition-source-row:": {
-            "children": [
-                {
-                    ".csc-acquisition-acquisition-source": "${fields.acquisitionSources.0.acquisitionSource}",
-                    ".csc-acquisition-acquisition-source-autocomplete": {
-                        "decorators": [
-                            {
-                                "func": "cspace.autocomplete",
-                                "type": "fluid",
-                                "options": {
-                                    "queryUrl": "../../chain/acquisition/autocomplete/acquisitionSource",
-                                    "vocabUrl": "../../chain/acquisition/source-vocab/acquisitionSource"
-                                }
-                            }
-                        ]
-                    }
+        ".csc-acquisition-acquisition-source-container": {
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.makeRepeatable",
+                "options": {
+                    "protoTree": {
+                        ".csc-acquisition-acquisition-source": "${fields.acquisitionSources.0.acquisitionSource}",
+                        ".csc-acquisition-acquisition-source-autocomplete": {
+	                        "decorators": [
+	                            {
+	                                "func": "cspace.autocomplete",
+	                                "type": "fluid",
+	                                "options": {
+	                                    "queryUrl": "../../chain/acquisition/autocomplete/acquisitionSource",
+	                                    "vocabUrl": "../../chain/acquisition/source-vocab/acquisitionSource"
+	                                }
+	                            }
+	                        ]
+	                    }
+                     },
+                    "elPath": "fields.acquisitionSources"
                 }
-            ]
+            }]
         },
         ".csc-acquisition-acquisition-reason": "${fields.acquisitionReason}",
         ".csc-acquisition-authorizer-date-container": {
