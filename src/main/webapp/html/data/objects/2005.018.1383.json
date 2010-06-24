@@ -22,7 +22,12 @@
         "objectNumber": "2005.018.1383",
         "form": "pinned",
         "contentOtherType": "54",
-        "responsibleDepartment": "paleobotany",
+        "responsibleDepartment": [{
+            "responsibleDepartment": "ethnography",
+            "_primary": true 
+        },{
+	        "responsibleDepartment": "paleobotany"
+        }],
         "inscriber": "urn:cspace:org.collectionspace.demo:personauthority:id(48c74123-e547-4ff1-81d2):person:id(d2dedc9c-e91b-4fc9-b998)'Ann+Young'",
         "dateLatestCertainty": "75",
         "contentActivity": "43",

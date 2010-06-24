@@ -5,7 +5,10 @@
         "objectNumber": "1984.068.0338",
         "objectName": "Some object",
         "objectNameSystem": "no system",
-        "responsibleDepartment": "architecture-design",
+        "responsibleDepartment": [{
+            "responsibleDepartment": "herpetology",
+            "_primary": true 
+        }],
         "objectNameType": "sample",
         "objectTitleLanguage": "English",
         "numberOfObjects": "1",
