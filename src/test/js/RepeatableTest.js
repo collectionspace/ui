@@ -370,6 +370,65 @@ var repeatableTester = function ($) {
         basicMarkupGenerateTest(myRepeatable.container, ".csc-object-identification-brief-description", "This is brief description.");
 
     });
+    
+    repeatableTest.test("CSPACE-2212/2213 Inconsistent that.model and that.options.renderOptions.model", function () {
+        expect(6);
+
+        var myRepeatable = basicSetup({model: {
+            myTexts: [{
+                myText: "cat",
+                _primary: true
+            }]
+        }});        
+                
+        myRepeatable.events.afterRender.addListener(function () {
+            jqUnit.assertDeepEq("After clicking add models should be the same",
+                myRepeatable.model, myRepeatable.options.renderOptions.model);
+        }, "testAddRow2");
+        myRepeatable.locate("add").click();
+        myRepeatable.events.afterRender.removeListener("testAddRow2");
+        
+        myRepeatable.events.afterRender.addListener(function () {
+            jqUnit.assertDeepEq("After deleting row 1 models should be the same",
+                myRepeatable.model, myRepeatable.options.renderOptions.model);
+        }, "testRemoveRow1");
+        myRepeatable.locate("remove").eq(1).click();
+        myRepeatable.events.afterRender.removeListener("testRemoveRow1");
+        
+        myRepeatable.locate("add").click();
+        myRepeatable.events.afterRender.addListener(function () {
+            jqUnit.assertDeepEq("After changing row 2 value models should be the same",
+                myRepeatable.model, myRepeatable.options.renderOptions.model);
+        }, "testAddRow2Value");
+        $(".cst-simpleTestField", myRepeatable.locate("repeat").eq(1)).val("dog");
+        myRepeatable.refreshView();
+        myRepeatable.events.afterRender.removeListener("testAddRow2Value");
+        
+        myRepeatable.events.afterRender.addListener(function () {
+            jqUnit.assertDeepEq("After clicking add again models should be the same",
+                myRepeatable.model, myRepeatable.options.renderOptions.model);
+        }, "testAddRow3");
+        myRepeatable.locate("add").click();
+        myRepeatable.events.afterRender.removeListener("testAddRow3");
+        
+        myRepeatable.events.afterRender.addListener(function () {
+            jqUnit.assertDeepEq("After changing row 3 value models should be the same",
+                myRepeatable.model, myRepeatable.options.renderOptions.model);
+        }, "testAddRow3Value");
+        $(".cst-simpleTestField", myRepeatable.locate("repeat").eq(2)).val("bird");
+        myRepeatable.refreshView();
+        myRepeatable.events.afterRender.removeListener("testAddRow3Value");
+            
+        myRepeatable.locate("remove").eq(2).click();
+        myRepeatable.locate("remove").eq(1).click();
+        
+        myRepeatable.events.afterRender.addListener(function () {
+            jqUnit.assertDeepEq("After clicking add after 2 delets models should be the same",
+                myRepeatable.model, myRepeatable.options.renderOptions.model);
+        }, "testAddRow2AfterDelete");
+        myRepeatable.locate("add").click();
+        myRepeatable.events.afterRender.removeListener("testAddRow2AfterDelete");
+    });
 
 };
 

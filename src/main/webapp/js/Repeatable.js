@@ -93,10 +93,8 @@ cspace = cspace || {};
         
         // TODO: We should pass the args to the expander that are consistent with generic expanders.
         var tree = fluid.invokeGlobalFunction(that.options.expander, [that.options.protoTree, that]);
-        $.extend(true, that.options.renderOptions, {
-            model: that.model,
-            applier: that.applier
-        });
+        that.options.renderOptions.model = that.model;
+        that.options.renderOptions.applier = that.applier;
         if (that.template) {
             fluid.reRender(that.template, that.container, tree, that.options.renderOptions);
         }
