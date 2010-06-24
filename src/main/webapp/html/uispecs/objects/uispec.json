@@ -193,31 +193,42 @@
             "selection": "${fields.otherNumberType}"
         },
         ".csc-object-identification-responsible-department": {
-            "optionnames": [
-                "Antiquities",
-                "Architecture and Design",
-                "Decorative Arts",
-                "Ethnography",
-                "Herpetology",
-                "Media and Performance Art",
-                "Paintings and Sculpture",
-                "Paleobotany",
-                "Photographs",
-                "Prints and Drawings"
-            ],
-            "optionlist": [
-                "antiquities",
-                "architecture-design",
-                "decorative-arts",
-                "ethnography",
-                "herpetology",
-                "media-performance-art",
-                "paintings-sculpture",
-                "paleobotany",
-                "photographs",
-                "prints-drawings"
-            ],
-            "selection": "${fields.responsibleDepartment}"
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.makeRepeatable",
+                "options": {
+                    "protoTree": {
+                        ".csc-object-identification-responsible-department": {
+                            "optionnames": [
+                                "Antiquities",
+                                "Architecture and Design",
+                                "Decorative Arts",
+                                "Ethnography",
+                                "Herpetology",
+                                "Media and Performance Art",
+                                "Paintings and Sculpture",
+                                "Paleobotany",
+                                "Photographs",
+                                "Prints and Drawings"
+                            ],
+                            "optionlist": [
+                                "antiquities",
+                                "architecture-design",
+                                "decorative-arts",
+                                "ethnography",
+                                "herpetology",
+                                "media-performance-art",
+                                "paintings-sculpture",
+                                "paleobotany",
+                                "photographs",
+                                "prints-drawings"
+                            ],
+                            "selection": "${fields.responsibleDepartment.0.responsibleDepartment}"
+                        }
+                     },
+                    "elPath": "fields.responsibleDepartment"
+                }
+            }]
         },
         ".csc-object-description-technical-attribute": {
             "optionnames": [
