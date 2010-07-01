@@ -51,7 +51,7 @@ input[type="button"].addButton:hover, input[type="submit"].addButton:hover {back
 
 .button-row input[type="button"], .button-row-right input[type="button"] {margin-left:10px; float:right; margin-bottom:5px;}
 .button-row-left input[type="button"], .button-row-left-center input[type="button"] {margin-right:10px; margin-top:10px;}
-.button-row-left-center {margin-left:auto; margin-right:auto; width:auto;}
+.button-row-left-center {float:right; margin-right:2%;}
 
 
 /*   anchor link colors and behaviors   */
@@ -290,7 +290,6 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .fl-container-left-inner, .csc-tabs-container {margin-right:15px;}
 
 .fl-container-left  .information-group       {padding:0 0 20px 0;}
-.create-new .fl-container-left  .information-group       {padding:0;}
 .fl-container-left  .information-subgroup {padding:10px 0;}
 .fl-container-left  .information-group       .content.main, .information-group       .content.main 	{border-bottom: 1px solid #D2D0D0; border-top: 1px solid #D2D0D0; background-color: #F3F3F3; padding: 12px; /**padding:12px 12px 0 12px;*/ width:auto; }
 .fl-container-left  .information-subgroup .content.main	{border:none; background-color: #D1D2D4; padding: 6px 12px 6px 12px; /**padding:6px 12px 0 12px;*/ width:auto; display:block;}
@@ -414,8 +413,11 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 
 .permission-retails {}
 
+.create-new .fl-container-left  .information-group       {padding:0;}
+.create-new .fl-container-left  .information-group .info-column  {width:98%;}
+.create-new .fl-container-left  .information-group .info-column  .main {padding:2px 0 0 0; margin-bottom:10px; border:none; background-color:#F3F3F4;}
 .create-new .radio-buttons {width:100%;}
-.create-new .radio-button {min-width: 100px; padding:4px 20px 4px 0; font-size:14px; line-height:14px; float:left;}
+.create-new .radio-button {min-width: 100px; padding:6px 20px 6px 10px; font-size:14px; line-height:14px; background-color:#F3F3F4; border-bottom:1px solid white;}
 .create-new .radio-button input {border:none;}
 .create-new .button-row {padding:15px 0; width:625px; margin-left:auto; margin-right:auto;}
 
