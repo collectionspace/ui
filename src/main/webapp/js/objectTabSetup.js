@@ -17,7 +17,7 @@ cspace = cspace || {};
 
     cspace.objectTabSetup = function (applier, options) {
         
-        var local = cspace.util.isLocal();
+        var local = cspace.util.useLocalData();
         
         var tabOpts = {
             listEditor: {

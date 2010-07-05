@@ -51,6 +51,7 @@ var adminUsersTester = function () {
     };
 
     var adminUsersTest = new jqUnit.TestCase("AdminUsers Tests", function () {
+        cspace.util.isTest = true;
         adminUsersTest.fetchTemplate("../../main/webapp/html/administration.html", ".csc-users-userAdmin");
         testOpts = {};
         fluid.model.copyModel(testOpts, baseTestOpts);

@@ -21,7 +21,7 @@ cspace = cspace || {};
                 
         options.fetchConfigCallback = options.fetchConfigCallback || function (config) {
             config.pageBuilder.options.csid = cspace.util.getUrlParameter("csid");                
-            if (cspace.util.isLocal()) {
+            if (cspace.util.useLocalData()) {
                 config.pageBuilder.options.dataContext.options.baseUrl = "data";
                 config.pageBuilder.options.dataContext.options.fileExtension = ".json";
             }

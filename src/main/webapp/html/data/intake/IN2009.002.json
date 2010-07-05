@@ -17,6 +17,13 @@
         "entryDate": "",
         "donor": "Sam Rockwell",
     },
-    "relations": [
+    "relations": {},
+    "termsUsed": [
+        {
+            "csid": "123.456.789",
+            "number": "Duncan Jones",
+            "sourceFieldName": "depositor",
+            "recordtype": "person"
+        }
     ]
 }

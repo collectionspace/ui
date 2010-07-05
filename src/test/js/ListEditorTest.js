@@ -37,6 +37,7 @@ var listEditorTester = function(){
     };
     var testOpts = {};
     var listEditorTest = new jqUnit.TestCase("ListEditor Tests", function () {
+        cspace.util.isTest = true;
         fluid.model.copyModel(testOpts, baseTestOpts);
         listEditorTest.fetchTemplate("../../main/webapp/html/administration.html", ".csc-users-userAdmin");
     });

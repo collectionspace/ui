@@ -26,6 +26,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     });
     
     var relatedRecordsListTest = new jqUnit.TestCase("RelatedRecordsList Tests", function () {
+        cspace.util.isTest = true;
         relatedRecordsListTest.fetchTemplate("../../main/webapp/html/right-sidebar.html", ".csc-right-sidebar");
     });
     

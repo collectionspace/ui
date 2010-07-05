@@ -28,7 +28,8 @@
         "objectNameLevel": "Very High",
         "color": "blue"
     },
-    "relations": [
+    "relations": {
+        "objects": [
         {
             "summary": "Stamp albums. Famous stars series stamp album.",
             "csid": "1984.068.0338",
@@ -46,5 +47,7 @@
             "recordtype": "objects"
         }
     ]
+
+    }
 }
 

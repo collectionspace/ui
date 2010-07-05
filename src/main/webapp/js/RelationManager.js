@@ -71,7 +71,7 @@ cspace = cspace || {};
         // TODO: add relations should be overridden high up if local.
         // something like this: that.addRelations = that.options.addRelations;
         that.addRelations = function (relations) {
-            if (cspace.util.isLocal()) {
+            if (cspace.util.useLocalData()) {
                 updateRelations(that.applier, that.recordType)(relations);
             }
             else {

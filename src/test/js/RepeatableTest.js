@@ -15,7 +15,9 @@ var repeatableTester = function ($) {
     var briefDescUISpec;
     var briefDescModel;
 
-    var repeatableTest = new jqUnit.TestCase("Repeatable Tests");
+    var repeatableTest = new jqUnit.TestCase("Repeatable Tests", function () {
+        cspace.util.isTest = true;
+    });
     
     var basicSetup = function (options) {
         options = options || {};

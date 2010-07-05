@@ -46,6 +46,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     }];
     
     var relationManagerTest = new jqUnit.TestCase("RelationManager Tests", null, function () {
+        cspace.util.isTest = true;
         delete cspace.addDialogInst;
         $(".ui-dialog").detach();
     });

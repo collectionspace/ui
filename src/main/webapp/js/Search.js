@@ -151,7 +151,7 @@ cspace = cspace || {};
             that.locate("errorMessage").hide();
             that.model.recordType = that.locate("recordType").val();
 // CSPACE-701
-            if (cspace.util.isLocal() && (that.model.recordType === "object")) {
+            if (cspace.util.useLocalData() && (that.model.recordType === "object")) {
                 that.model.recordType = "objects";
             }
             that.model.keywords = that.locate("keywords").val();

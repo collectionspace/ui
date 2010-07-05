@@ -95,7 +95,7 @@ cspace = cspace || {};
     };
 
     var submitEmail = function (email, url, that) {
-        if (cspace.util.isLocal()) {
+        if (cspace.util.useLocalData()) {
             showEmailSubmittedPage(that.dom);
             that.events.emailSubmitted.fire();
         } else {
@@ -111,7 +111,7 @@ cspace = cspace || {};
     };
     
     var submitNewPassword = function (password, url, that) {
-        if (cspace.util.isLocal()) {
+        if (cspace.util.useLocalData()) {
             var mockResponse = {message: "Success", ok:true};
             showPasswordReset(that.dom, mockResponse);
             that.events.passwordSubmitted.fire(mockResponse);
@@ -172,7 +172,7 @@ cspace = cspace || {};
 
     var setupLogin = function (that) {  
         bindEventHandlers(that);      
-        if (cspace.util.isLocal()) {
+        if (cspace.util.useLocalData()) {
             that.locate("loginForm").attr("action", "createnew.html");
             that.locate("resetForm").attr("action", "createnew.html");
         } else {

@@ -49,7 +49,7 @@ cspace = cspace || {};
 
     var submitSearch = function (listEditor, domBinder, queryURL, successEvent) {
         return function () {
-            var query = cspace.util.isLocal() ? "" : domBinder.locate("searchField").val();
+            var query = cspace.util.useLocalData() ? "" : domBinder.locate("searchField").val();
             var model = listEditor.model;
             // TODO: Use the DC for this
             var url = queryURL + query;

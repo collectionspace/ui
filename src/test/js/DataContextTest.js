@@ -38,7 +38,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
     };
 
-    var dataContextTest = new jqUnit.TestCase("DataContext Tests");
+    var dataContextTest = new jqUnit.TestCase("DataContext Tests", function () {
+        cspace.util.isTest = true;
+    });
     
     dataContextTest.test("Create ajax parameters", function () {
         var ajaxMock = new jqMock.Mock(jQuery, "ajax");

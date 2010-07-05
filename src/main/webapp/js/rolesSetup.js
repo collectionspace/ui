@@ -19,7 +19,7 @@ cspace = cspace || {};
         var rolesOpts = {
             uispec: "{pageBuilder}.uispec"
         };
-        if (cspace.util.isLocal()) {
+        if (cspace.util.useLocalData()) {
             rolesOpts.recordType = "role/records/list.json";            
             rolesOpts.roleListEditor = {
                 options: {

@@ -103,7 +103,7 @@ cspace = cspace || {};
                     }
                 },
                 error: function () {
-                    if (cspace.util.isLocal()) {
+                    if (cspace.util.useLocalData()) {
                         if (request.term === "all") {
                             cspace.autocomplete.addConfirmDlg.hide();
                             
@@ -152,7 +152,7 @@ cspace = cspace || {};
     };
 
     cspace.autocomplete.ajaxTermSaver = function (term, callback) {
-        if (cspace.util.isLocal()) {
+        if (cspace.util.useLocalData()) {
             cspace.autocomplete.addConfirmDlg.hide();
             return;
         }

@@ -40,7 +40,9 @@ cspace = cspace || {};
     };
 
     var pageBuilderTester = function () {
-        var pageBuilderTest = new jqUnit.TestCase("PageBuilder Tests");
+        var pageBuilderTest = new jqUnit.TestCase("PageBuilder Tests", function () {
+        cspace.util.isTest = true;
+    });
         
         pageBuilderTest.test("Assembly of HTML only", function () {
             var options = {

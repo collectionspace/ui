@@ -60,7 +60,7 @@ cspace = cspace || {};
         };
         fluid.merge({}, roOpts, that.options.relatedRecordsList.options);
         
-        if (cspace.util.isLocal()) {
+        if (cspace.util.useLocalData()) {
             var localOpts = {
                 options: {
                     baseUrl: "data/",

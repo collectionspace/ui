@@ -35,6 +35,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     var testOpts;
     
     var confirmationTests = new jqUnit.TestCase("Confirmation Tests", function () {
+        cspace.util.isTest = true;
         testOpts = {};
         fluid.model.copyModel(testOpts, baseTestOpts);
     });  

@@ -33,8 +33,8 @@ cspace = cspace || {};
         }
     };
 
-    cspace.util.isLocal = function () {
-        return document.location.protocol === "file:";
+    cspace.util.useLocalData = function () {
+        return cspace.util.isTest || document.location.protocol === "file:";
     };
 
     cspace.util.displayTimestampedMessage = function (locater, msg, time) {

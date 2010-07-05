@@ -16,6 +16,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     var pageBuilder;
 
     var objectsTests = new jqUnit.TestCase("Objects Tests", function () {
+        cspace.util.isTest = true;
         objectsTests.fetchTemplate("../../main/webapp/html/objects.html", ".fl-container-1024");
     });
     
@@ -125,11 +126,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                     jqUnit.assertEquals("After '+field' clicked, there have to be 2 brief descriptions", 
                                         2, model.fields.briefDescriptions.length);
                                     jqUnit.assertDeepEq("(In the model) First brief descriptions is still correct", {
-                                        "briefDescription": "This is brief description."
+                                        "briefDescription": "This is brief description.",
+                                        "_primary": true
                                     }, model.fields.briefDescriptions[0]);
                                     jqUnit.assertDeepEq("(In the model) Second brief descriptions is empty", 
                                         {}, model.fields.briefDescriptions[1]);
-                                    var repeatableContainer = $(".csc-object-identification-brief-description-repeated-container");
+                                    var repeatableContainer = $(".csc-repeatable-add").eq(1).parent("div");
                                     var domModifiedListener = function () {
                                         // The first DOMSubtreeModified will be the Renderer clearing the DOM; we want
                                         // to test after the second event, which will be after the new DOM is rendered
@@ -144,7 +146,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                     };
                                     repeatableContainer.bind("DOMSubtreeModified", domModifiedListener);
                                 });
-                                $(".csc-repeatable-add", ".csc-object-identification-brief-description-repeated-container").click();
+                                $(".csc-repeatable-add").eq(1).click();
                             }
                         }
                     }
@@ -184,11 +186,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                     jqUnit.assertEquals("After '+field' clicked, there have to be 2 bried descriptions", 
                                         2, model.fields.briefDescriptions.length);
                                     jqUnit.assertDeepEq("(In the model) First brief descriptions is still", {
-                                        "briefDescription": "New Test Description"
+                                        "briefDescription": "New Test Description",
+                                        "_primary": true
                                     }, model.fields.briefDescriptions[0]);
                                     jqUnit.assertDeepEq("(In the model) Second brief descriptions is empty", 
                                         {}, model.fields.briefDescriptions[1]);                                    
-                                    var repeatableContainer = $(".csc-object-identification-brief-description-repeated-container");
+                                    var repeatableContainer = $(".csc-repeatable-add").eq(1).parent("div");
                                     var domModifiedListener = function () {
                                         // The first DOMSubtreeModified will be the Renderer clearing the DOM; we want
                                         // to test after the second event, which will be after the new DOM is rendered
@@ -204,7 +207,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                     repeatableContainer.bind("DOMSubtreeModified", domModifiedListener);
                                 });
                                 
-                                $(".csc-repeatable-add", ".csc-object-identification-brief-description-repeated-container").click();
+                                $(".csc-repeatable-add").eq(1).click();
                             }
                         }
                     }

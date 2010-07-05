@@ -1,6 +1,6 @@
 {
     "items": [
-        {"number": "ACQ2009.2", "csid": "ACQ2009.2", "summary": "Some info about this acquisition", "recordtype": "acquisition"},
-        {"number": "ACQ2009.002.001", "csid": "ACQ2009.002.001", "summary": "This one is not exactly what we'd like, but it'll do for now.", "recordtype": "acquisition"}
+        {"number": "ACQ2009.2", "csid": "ACQ2009.2", "summary": "", "recordtype": "acquisition"},
+    {"number": "ACQ2009.002.001", "csid": "ACQ2009.002.001", "summary": "Lebowsky", "recordtype": "acquisition"}
     ]
 }

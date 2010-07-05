@@ -17,7 +17,7 @@ cspace = cspace || {};
     cspace.searchSetup = function () {
         
         var searchOpts = {};
-        if (cspace.util.isLocal()) {
+        if (cspace.util.useLocalData()) {
             searchOpts.searchUrlBuilder = function (recordType, query) {
             	// CSPACE-1139
                 if (recordType.indexOf("authorities-") === 0) {

@@ -53,6 +53,13 @@
     	"conditionCheckReferenceNumber": "1122233344",
     	"conditionCheckAssesor": "all of them",
     },
-    "relations": [
+    "relations": {},
+    "termsUsed": [
+        {
+            "csid": "123.456.789",
+            "number": "yes, please",
+            "sourceFieldName": "depositor",
+            "recordtype": "person"
+        }
     ]
 }

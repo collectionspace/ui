@@ -12,7 +12,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 (function () {
 
-    var autocompleteTests = new jqUnit.TestCase("Autocomplete Tests");
+    var autocompleteTests = new jqUnit.TestCase("Autocomplete Tests", function () {
+        cspace.util.isTest = true;
+    });
 
     autocompleteTests.test("Save new term", function () {
         var myAutocomplete;

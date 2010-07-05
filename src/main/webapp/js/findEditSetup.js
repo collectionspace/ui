@@ -15,7 +15,7 @@ cspace = cspace || {};
 (function ($) {
 
     var buildUrl = function (recordType) {
-        if (cspace.util.isLocal()) {
+        if (cspace.util.useLocalData()) {
             return "./data/" + recordType + "/records/list.json";
         } else {
             return "../../chain/" + recordType;

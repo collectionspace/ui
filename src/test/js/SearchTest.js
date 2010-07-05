@@ -16,6 +16,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     jqUnit.ok = ok;
     
     var searchTests = new jqUnit.TestCase("Search Tests", function () {
+        cspace.util.isTest = true;
         searchTests.fetchTemplate("../../main/webapp/html/search.html", ".main-search-page");
     });  
     

@@ -14,7 +14,9 @@ var loginTester = function(){
     // jqMock requires jqUnit.ok to exist
     jqUnit.ok = ok;
 
-    var loginTest = new jqUnit.TestCase("Login Tests");
+    var loginTest = new jqUnit.TestCase("Login Tests", function () {
+        cspace.util.isTest = true;
+    });
 
     loginTest.test("Basic login form visibility, actions", function () {
         var login = cspace.login(".login-container", {baseUrl: "http://foo.com/bar"});
@@ -25,12 +27,12 @@ var loginTester = function(){
         jqUnit.assertEquals("In local mode, login form action should be set to local option", "createnew.html", jQuery(login.options.selectors.loginForm).attr("action"));
         jqUnit.assertEquals("In local mode, reset form action should be set to local option", "createnew.html", jQuery(login.options.selectors.resetForm).attr("action"));
 
-        var tempIsLocal = cspace.util.isLocal;
-        cspace.util.isLocal = function () {return false;};
+        var tempIsLocal = cspace.util.useLocalData;
+        cspace.util.useLocalData = function () {return false;};
         login = cspace.login(".login-container", {baseUrl: "http://foo.com/bar"});
         jqUnit.assertEquals("Login form action should be set based on the supplied baseUrl", "http://foo.com/bar/login", jQuery(login.options.selectors.loginForm).attr("action"));
         jqUnit.assertEquals("Reset form action should be set based on the supplied baseUrl", "http://foo.com/bar/resetpassword", jQuery(login.options.selectors.resetForm).attr("action"));
-        cspace.util.isLocal = tempIsLocal;
+        cspace.util.useLocalData = tempIsLocal;
     });
 
     loginTest.test("Basic login required fields", function () {
@@ -86,14 +88,14 @@ var loginTester = function(){
         };
         ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams)).returnValue();
 
-        var tempIsLocal = cspace.util.isLocal;
-        cspace.util.isLocal = function () {return false;};
+        var tempIsLocal = cspace.util.useLocalData;
+        cspace.util.useLocalData = function () {return false;};
         var login = cspace.login(".login-container", {baseUrl: "http://foo.com/bar"});
         jQuery(login.options.selectors.email).val("test@collectionspace.org");
         login.submitEmail();
         ajaxMock.verify();
         ajaxMock.restore();
-        cspace.util.isLocal = tempIsLocal;
+        cspace.util.useLocalData = tempIsLocal;
     });
 
     loginTest.test("New password submission required fields", function () {
@@ -145,8 +147,8 @@ var loginTester = function(){
         };
         ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams)).returnValue();
 
-        var tempIsLocal = cspace.util.isLocal;
-        cspace.util.isLocal = function () {return false;};
+        var tempIsLocal = cspace.util.useLocalData;
+        cspace.util.useLocalData = function () {return false;};
         var login = cspace.login(".login-container", {baseUrl: "http://foo.com/bar"});
         jQuery(login.options.selectors.newPassword).val("testPassTwo");
         jQuery(login.options.selectors.confirmPassword).val("testPassTwo");

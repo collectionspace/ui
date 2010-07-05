@@ -14,6 +14,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 (function () {
 
     var loanInTests = new jqUnit.TestCase("Loan In Tests", function () {
+        cspace.util.isTest = true;
         loanInTests.fetchTemplate("../../main/webapp/html/loanin.html", ".fl-container-1024");
     });
     

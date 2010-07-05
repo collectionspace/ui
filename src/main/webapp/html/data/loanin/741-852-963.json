@@ -21,5 +21,6 @@
         "loanRenewalApplicationDate": "April 23, 2010",
         "loanInNote": "Take good care of it",
         "loanPurpose": "scientificorexhibitpreparation"
-    }
+    },
+    "relations": {}
 }

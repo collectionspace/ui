@@ -31,13 +31,5 @@
             "recordtype": "person"
         }
     ],
-    "relations": [
-        {
-            "csid": "1984.068.0335b",
-            "number": "1984.068.0335b",
-            "summary": "some other thing",
-            "recordtype": "objects",
-            "relationshiptype": "also affects"
-        }
-    ]
+    "relations": {}
 }

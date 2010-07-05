@@ -14,7 +14,9 @@ var passwordValidatorTester = function(){
     // jqMock requires jqUnit.ok to exist
     jqUnit.ok = ok;
 
-    var passwordValidatorTest = new jqUnit.TestCase("PasswordValidator Tests");
+    var passwordValidatorTest = new jqUnit.TestCase("PasswordValidator Tests", function () {
+        cspace.util.isTest = true;
+    });
     var samplePasswords = {
     		invalidTooSmall : "1234567",
     		invalidTooLong : "1234567890123456789012345",

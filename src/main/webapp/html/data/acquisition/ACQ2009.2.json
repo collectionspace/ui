@@ -1,43 +1,48 @@
 {
     "csid": "ACQ2009.2",
     "fields": {
-        "acquReferenceNum": "ACQ2009.2",
-    	"acquDate": "",
-        "acquAuthorize": "",
-    	"acquAccessionDate": "",
-    	"acquPriceDesc": "",
-    	"acquPriceDenom": "UK pound",
-    	"acquPrice": "10000",
-    	"acquFundingDenom": "UK Pound",
-    	"acquFundingValue": "10000",
-    	"acquFundingSource": "Some nice person",
-    	"acquFundingProviso": "The museum displays it",
-    	"acquMethod": "Treasure",
-    	"acquSources": [],
-    	"acquTitleNum": "1-2-3-4",
-    	"acquReason": "The museum likes it",
-    	"acquNote": "Some info about this acquisition",
-    	"acquProviso": "A curator must say hello to it every day"
+        "acquisitionReferenceNumber": "ACQ2009.2",
+    	"acquisitionDate": "",
+        "acquisitionAuthorizer": "",
+    	"acquisitionAccessionDate": "",
+    	"acquisitionPriceDesc": "",
+    	"objectPurchaseOfferPriceDenomination": "UK pound",
+    	"objectPurchaseOfferPriceValue": "10000",
+    	"acquisitionFundingDenomination": "UK Pound",
+    	"acquisitionFundingValue": "10000",
+    	"acquisitionFundingSource": "Some nice person",
+    	"acquisitionFundingSourceProvisos": "The museum displays it",
+    	"acquisitionMethod": "treasure",
+    	"acquisitionSources": [],
+    	"transferOfTitleNumber": "1-2-3-4",
+    	"acquisitionReason": "The museum likes it",
+    	"acquisitionNote": "Some info about this acquisition",
+    	"acquisitionProviso": "A curator must say hello to it every day"
     },
-    "relations": [
-        {
-            "csid": "IN2004.002",
-            "number": "IN2004.002",
-            "summary": "something",
-            "recordtype": "intake",
-            "relationshiptype": "affects more"
-        },{
+    "relations": {
+        "procedures": [
+            {
+                "csid": "IN2004.002",
+                "number": "IN2004.002",
+                "summary": "something",
+                "recordtype": "intake",
+                "relationshiptype": "affects more"
+            },{
+                "csid": "2007.4-a",
+                "number": "2007.4-a",
+                "summary": "yet other thing",
+                "recordtype": "intake",
+                "relationshiptype": "also affects somewhat"
+            }
+        ],
+        "objects": [
+            {
             "csid": "1984.068.0335b",
             "number": "1984.068.0335b",
             "summary": "some other thing",
             "recordtype": "objects",
             "relationshiptype": "also affects"
-        },{
-            "csid": "2007.4-a",
-            "number": "2007.4-a",
-            "summary": "yet other thing",
-            "recordtype": "intake",
-            "relationshiptype": "also affects somewhat"
-        }
+            }
     ]
+    }
 }

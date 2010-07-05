@@ -17,7 +17,9 @@ var searchToRelateDialogTester = function () {
         relations: []
     };
     
-    var searchToRelateDialogTest = new jqUnit.TestCase("SearchToRelateDialog Tests");
+    var searchToRelateDialogTest = new jqUnit.TestCase("SearchToRelateDialog Tests", function () {
+        cspace.util.isTest = true;
+    });
     
     searchToRelateDialogTest.test("Create new record event", function () {
         expect(1);

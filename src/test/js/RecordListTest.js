@@ -24,6 +24,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
     };
     var recordListTest = new jqUnit.TestCase("RecordList Tests", function () {
+        cspace.util.isTest = true;
         recordListTest.fetchTemplate("test-data/RecordListTestTemplate.html", ".csc-recordList");
     });
 

@@ -130,7 +130,7 @@ cspace = cspace || {};
         if (csid) {
             pageBuilderOpts.csid = csid;
         }
-        if (cspace.util.isLocal()) {
+        if (cspace.util.useLocalData()) {
             pageBuilderOpts.dataContext.options.baseUrl = "data";
             pageBuilderOpts.dataContext.options.fileExtension = ".json";
         }

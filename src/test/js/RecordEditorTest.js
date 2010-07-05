@@ -16,6 +16,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     jqUnit.ok = ok;
 
     var recordEditorTest = new jqUnit.TestCase("recordEditor Tests", function () {
+        cspace.util.isTest = true;
     });
     
     recordEditorTest.test("Creation", function () {

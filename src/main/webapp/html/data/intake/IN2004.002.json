@@ -18,31 +18,38 @@
     "termsUsed": [
         {"sourceFieldName":"depositor","number":"Achmed Abdullah","csid":"9f14f23e-381a-4dc6-9bd6","recordtype":"person"}
     ],
-    "relations": [
-        {
-            "csid": "1984.068.0338",
-            "number": "1984.068.0338",
-            "summary": "somethings",
-            "recordtype": "objects",
-            "relationshiptype": "affects"
-        },{
-            "csid": "2007.4-a",
-            "number": "2007.4-a",
-            "summary": "yet other thing",
-            "recordtype": "intake",
-            "relationshiptype": "also affects somewhat"
-        },{
-            "csid": "ACQ2009.2",
-            "number": "ACQ2009.2",
-            "summary": "different, yet",
-            "recordtype": "acquisition",
-            "relationshiptype": "also affects somewhat"
-        },{
-            "csid": "1984.068.0335b",
-            "number": "1984.068.0335b",
-            "summary": "some other thing",
-            "recordtype": "objects",
-            "relationshiptype": "also affects"
-        }
-    ]
+    "relations": {
+        "objects":
+            [
+                {
+                    "csid": "1984.068.0338",
+                    "number": "1984.068.0338",
+                    "summary": "somethings",
+                    "recordtype": "objects",
+                    "relationshiptype": "affects"
+                },{
+                    "csid": "1984.068.0335b",
+                    "number": "1984.068.0335b",
+                    "summary": "some other thing",
+                    "recordtype": "objects",
+                    "relationshiptype": "also affects"
+                }
+            ],
+        "procedures":
+            [
+                {
+                    "csid": "2007.4-a",
+                    "number": "2007.4-a",
+                    "summary": "yet other thing",
+                    "recordtype": "intake",
+                    "relationshiptype": "also affects somewhat"
+                },{
+                    "csid": "ACQ2009.2",
+                    "number": "ACQ2009.2",
+                    "summary": "different, yet",
+                    "recordtype": "acquisition",
+                    "relationshiptype": "also affects somewhat"
+                }
+            ]
+    }
 }

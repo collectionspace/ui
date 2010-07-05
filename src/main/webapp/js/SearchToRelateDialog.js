@@ -83,7 +83,7 @@ cspace = cspace || {};
             var searchOpts = {
                 resultsSelectable: true
             };
-            if (cspace.util.isLocal()) {
+            if (cspace.util.useLocalData()) {
                 searchOpts.searchUrlBuilder = function (recordType, query) {
                     var recordTypeParts = recordType.split('-');        
                     return "./data/" + recordTypeParts.join('/') + "/search/list.json";

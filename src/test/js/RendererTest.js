@@ -21,7 +21,9 @@ var rendererTester = function(){
         }
     };
 
-    var rendererTest = new jqUnit.TestCase("Renderer Tests");
+    var rendererTest = new jqUnit.TestCase("Renderer Tests", function () {
+        cspace.util.isTest = true;
+    });
 
     rendererTest.test("buildProtoTree(): Basic tree, empty model", function () {
         var testUISpec = {

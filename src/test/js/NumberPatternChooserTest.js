@@ -24,7 +24,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
 
 	
-    var numberPatternChooserTest = new jqUnit.TestCase("NumberPatternChooser Tests");
+    var numberPatternChooserTest = new jqUnit.TestCase("NumberPatternChooser Tests", function () {
+        cspace.util.isTest = true;
+    });
 
     numberPatternChooserTest.test("Creation", function () {
         var numberPatternChooser;

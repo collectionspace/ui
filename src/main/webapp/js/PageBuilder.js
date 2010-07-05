@@ -142,7 +142,7 @@ cspace = cspace || {};
         //       to happen synchronously - perhaps it should be rolled into a single call.
         
         // determine if logged in and redirect
-        if (!cspace.util.isLocal()) {
+        if (!cspace.util.useLocalData()) {
             var loginRedirect = false;
             jQuery.ajax({
                 async: false,
@@ -168,7 +168,7 @@ cspace = cspace || {};
             // TODO: Once we have changed our local versus remote strategy this can also be cleaned up.
             //       Ideally, we would default to the server url and could configure for the local page and for tests
             var urlTemplate = that.options.uispecUrl ||
-                (cspace.util.isLocal() ? "./uispecs/%pageType/uispec.json" : "../../chain/%pageType/uispec");                                
+                (cspace.util.useLocalData() ? "./uispecs/%pageType/uispec.json" : "../../chain/%pageType/uispec");                                
             var uispecUrl = fluid.stringTemplate(urlTemplate, {pageType: that.options.pageType});
 
             // TODO:    Workaround until App layer is generating role uispecs:
