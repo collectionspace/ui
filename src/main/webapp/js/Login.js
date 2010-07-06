@@ -28,10 +28,11 @@ cspace = cspace || {};
         domBinder.locate("resetRequest").hide();
     };
 
-    var showResetRequestSubmitted = function (domBinder) {
-        domBinder.locate("signIn").hide();
-        domBinder.locate("enterEmail").hide();
-        domBinder.locate("resetRequest").hide();
+    var showEmailSubmittedPage = function (domBinder, data) {
+        if (data.ok) {
+            domBinder.locate("enterEmailForm").hide();
+        }
+        cspace.util.displayTimestampedMessage(domBinder, data.message);
     };
 
     var showReset = function (domBinder) {
@@ -48,11 +49,6 @@ cspace = cspace || {};
             domBinder.locate("resetRequest").hide();
         }
         cspace.util.displayTimestampedMessage(domBinder, data.message);
-    };
-
-    var showEmailSubmittedPage = function (domBinder) {
-        domBinder.locate("enterEmailForm").hide();
-        domBinder.locate("enterEmailMessage").text("An email has been sent you. Please follow the link in the email to reset the password.");
     };
 
     var makeRequiredFieldsValidator = function (domBinder, formType, message) {
@@ -96,8 +92,8 @@ cspace = cspace || {};
 
     var submitEmail = function (email, url, that) {
         if (cspace.util.useLocalData()) {
-            showEmailSubmittedPage(that.dom);
-            that.events.emailSubmitted.fire();
+            var mockResponse = {message: "Success", ok:true};
+            that.events.emailSubmitted.fire(mockResponse);
         } else {
             jQuery.ajax({
                 url: cspace.util.addTrailingSlash(url) + "passwordreset",
@@ -153,8 +149,8 @@ cspace = cspace || {};
         that.locate("submitEmail").click(makeEmailSubmitter(that));
         that.locate("submitNewPassword").click(makePasswordSubmitter(that));
 
-        that.events.emailSubmitted.addListener(function () {
-            showEmailSubmittedPage(that.dom);
+        that.events.emailSubmitted.addListener(function (data, statusText) {
+            showEmailSubmittedPage(that.dom, data);
         });
         that.events.passwordSubmitted.addListener(function (data, statusText) {
             showPasswordReset(that.dom, data);
@@ -165,7 +161,7 @@ cspace = cspace || {};
         });
 
         that.locate("loginForm").submit(makeRequiredFieldsValidator(that.dom, "login", that.options.strings.allFieldsRequired));
-        that.locate("resetForm").submit(makeRequiredFieldsValidator(that.dom, "password", that.options.strings.allFieldsRequired));
+        that.locate("resetRequest").submit(makeRequiredFieldsValidator(that.dom, "password", that.options.strings.allFieldsRequired));
 
         cspace.passwordValidator(that.container);
     };
@@ -174,10 +170,8 @@ cspace = cspace || {};
         bindEventHandlers(that);      
         if (cspace.util.useLocalData()) {
             that.locate("loginForm").attr("action", "createnew.html");
-            that.locate("resetForm").attr("action", "createnew.html");
         } else {
             that.locate("loginForm").attr("action", cspace.util.addTrailingSlash(that.options.baseUrl)+"login");
-            that.locate("resetForm").attr("action", cspace.util.addTrailingSlash(that.options.baseUrl)+"resetpassword");
         }
 
         var result = cspace.util.getUrlParameter("result");
@@ -246,8 +240,7 @@ cspace = cspace || {};
             email: ".csc-login-email",
             submitEmail: ".csc-login-submitEmail",
             emailRequired: ".csc-login-emailRequired",
-                        
-            resetForm: ".csc-login-resetForm",
+
             resetRequest: ".csc-login-resetRequest",
             newPassword: ".csc-login-newPassword",
             confirmPassword: ".csc-login-confirmPassword",
