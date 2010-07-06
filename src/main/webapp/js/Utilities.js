@@ -63,8 +63,7 @@ cspace = cspace || {};
 
     cspace.util.getDefaultConfigURL = function () {
         var url = window.location.pathname;
-        var dirEnd = url.lastIndexOf("/");
-        return url.substring(0, dirEnd) + "\/config" + url.substring(dirEnd, url.indexOf(".html")) + ".json";
+        return ".\/config" + url.substring(url.lastIndexOf("/"), url.indexOf(".html")) + ".json";
     };
 
 })(jQuery, fluid);
