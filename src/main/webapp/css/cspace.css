@@ -28,17 +28,17 @@ input[type="button"].primary:hover, input[type="submit"].primary:hover	{backgrou
 input[type="button"].tertiary, input[type="submit"].tertiary {height:17px; padding-left:4px; padding-right:4px; font-size:11px; background-color:#FFF; color:#73AA4F;}
 input[type="button"].tertiary:hover, input[type="submit"].tertiary:hover {background-color:#FFFBCC;}
 
-input[type="button"].saveButton, input[type="submit"].saveButton {background:#73AA4F url('../images/icnSave.png') no-repeat 24px 4px; padding-left:40px; padding-right:20px; }
+input[type="button"].saveButton, input[type="submit"].saveButton {background:#73AA4F url('../images/icnSave.png') no-repeat 24px 4px; font-size:13px; padding-left:40px; padding-right:20px; }
 input[type="button"].saveButton:hover, input[type="submit"].saveButton:hover {background-color:#48722D;}
-input[type="button"].cancelButton, input[type="submit"].cancelButton {background:transparent url('../images/icnCancel.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
+input[type="button"].cancelButton, input[type="submit"].cancelButton {background:transparent url('../images/icnCancel.png') no-repeat 8px 4px; font-size:13px; padding-left:24px; padding-right:8px; color:#669922;}
 input[type="button"].cancelButton:hover, input[type="submit"].cancelButton:hover {background-color:#DAEDD1;}
-input[type="button"].editButton, input[type="submit"].editButton {background:transparent url('../images/icnEdit.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
+input[type="button"].editButton, input[type="submit"].editButton {background:transparent url('../images/icnEdit.png') no-repeat 8px 4px; font-size:13px;  padding-left:24px; padding-right:8px; color:#669922;}
 input[type="button"].editButton:hover, input[type="submit"].editButton:hover {background-color:#DAEDD1;}
-input[type="button"].deleteButton, input[type="submit"].deleteButton {background:transparent url('../images/icnDelete.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
+input[type="button"].deleteButton, input[type="submit"].deleteButton {background:transparent url('../images/icnDelete.png') no-repeat 8px 4px; font-size:13px; padding-left:24px; padding-right:8px; color:#669922;}
 input[type="button"].deleteButton:hover, input[type="submit"].deleteButton:hover {background-color:#DAEDD1;}
 input[type="button"].duplicateButton, input[type="submit"].duplicateButton {background:transparent url('../images/icnDuplicate.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
 input[type="button"].duplicateButton:hover, input[type="submit"].duplicateButton:hover {background-color:#DAEDD1;}
-input[type="button"].searchButton, input[type="submit"].searchButton {background:#73AA4F url('../images/icnSearch.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#FFF;}
+input[type="button"].searchButton, input[type="submit"].searchButton {background:#73AA4F url('../images/icnSearch.png') no-repeat 8px 4px; font-size:13px; padding-left:24px; padding-right:8px; color:#FFF;}
 input[type="button"].searchButton:hover, input[type="submit"].searchButton:hover {background-color:#48722D;}
 input[type="button"].gotoButton, input[type="submit"].gotoButton {background:transparent url('../images/icnGoTo.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
 input[type="button"].gotoButton:hover, input[type="submit"].gotoButton:hover {background-color:#DAEDD1;}
@@ -48,6 +48,8 @@ input[type="button"].addButton, input[type="submit"].addButton {background:#93BC
 input[type="button"].addButton:hover, input[type="submit"].addButton:hover {background-color:#73AA4F;}
 /*input[type="button"].addButton, input[type="submit"].addButton {background:#FFF url('../images/icnAdd.png') no-repeat 8px 2px; padding-left:24px; padding-right:8px; color:#73AA4F;}
 input[type="button"].addButton:hover, input[type="submit"].addButton:hover {background-color:#FFFBCC;}*/
+nput[type="button"].addButton, input[type="submit"].addButton {background:#93BC7F url('../images/icnAdd_.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#FFF;}
+input[type="button"].addButton:hover, input[type="submit"].addButton:hover {background-color:#73AA4F;}
 
 .button-row input[type="button"], .button-row-right input[type="button"] {margin-left:10px; float:right; margin-bottom:5px;}
 .button-row-left input[type="button"], .button-row-left-center input[type="button"] {margin-right:10px; margin-top:10px;}
@@ -622,8 +624,5 @@ li.cs-repeatable-repeat {list-style-type: none;  margin-bottom:1px;}
 .cs-repeatable-content {width: 89%;}
 div.cs-rep eatable-content input{float:left;}
 input.cs-repeatable-primary {width: 5%; position: relative; vertical-align: top;}
-input.cs-repeatable-delete {width: 3%; vertical-align: top; padding:0px; color: grey; background-color: transparent; line-height:100%; font-size:11px; height:15px; line-height:80%; margin:2px 0;}
-input.cs-repeatable-delete:hover, input.cs-repeatable-delete:focus {color: white; background-color: blue;}
-input.cs-repeatable-delete:hover, input.cs-repeatable-delete:focus {color: white; background-color: blue;}
-
-
+input.cs-repeatable-delete {width: 5%; height:18px; vertical-align: top; padding:0px; background:transparent url('../images/icnDelete.png') no-repeat 1px 2px; /*color: transparent; background-color: transparent; line-height:100%; font-size:11px; height:15px; line-height:80%; margin:2px 0;*/}
+input.cs-repeatable-delete:hover, input.cs-repeatable-delete:focus {color: white; /*background-color: blue;*/ background:transparent url('../images/icnDeleteIdle.png') no-repeat 0px 0px;}

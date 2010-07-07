@@ -125,7 +125,7 @@ cspace = cspace || {};
     var addPrimaryAndDelete = function (that, node) {
         // TODO: we need to programatically generate the 'name' attribute since we need more then one group of radio buttons on a page. 
         var primary = $("<input class=\"csc-repeatable-primary \" type=\"radio\" name=\"primary-" + that.options.elPath + "\" />").addClass(that.options.styles.primary);
-        var remove = $("<input class=\"csc-repeatable-delete \" type=\"button\" value=\"X\"/>").addClass(that.options.styles.remove);
+        var remove = $("<input class=\"csc-repeatable-delete \" type=\"button\" value=\"\"/>").addClass(that.options.styles.remove);
         
         if (node.is("tr")) {
             primary.wrap("<td />");
