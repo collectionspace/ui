@@ -19,17 +19,17 @@ input, textarea {font-family:inherit; font-size:12px; font-weight:inherit; line-
 input[type="button"], input[type="submit"], input[type="checkbox"] {height:auto; /*-moz-border-radius: 3px; -webkit-border-radius: 3px;*/}
 input:focus, textarea:focus {outline: 1px solid black;}
 input[type="text"], input[type="password"], textarea {/*width:99.5%;*/ width:100%; margin:0;}
-input[type="submit"].logout {font-weight:bold; color:#333; background-color:#F3F3F3; padding-left:9px; padding-right:9px;}
+input[type="submit"].logout {font-weight:bold; color:#333; background-color:#F3F3F3; padding-left:14px; padding-right:15px;}
 input[type="submit"].logout:hover {background-color:#333; color:#FFF;}
-input[type="button"], input[type="submit"]	{background-color:#93BC7F; height:21px; padding-left:12px; padding-right:12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; line-height:15px; border:none;}
-input[type="button"]:hover, input[type="submit"]:hover	{background-color:#73AA4F;}
+input[type="button"], input[type="submit"]	{background-color:#73AA4F; height:21px; padding-left:12px; padding-right:12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; line-height:15px; border:none;}
+input[type="button"]:hover, input[type="submit"]:hover	{background-color:#48722D;}
 input[type="button"].primary, input[type="submit"].primary	{background-color:#73AA4F; padding-left:30px; padding-right:30px;}
 input[type="button"].primary:hover, input[type="submit"].primary:hover	{background-color:#48722D;}
 input[type="button"].tertiary, input[type="submit"].tertiary {height:17px; padding-left:4px; padding-right:4px; font-size:11px; background-color:#FFF; color:#73AA4F;}
 input[type="button"].tertiary:hover, input[type="submit"].tertiary:hover {background-color:#FFFBCC;}
 
 input[type="button"].saveButton, input[type="submit"].saveButton {background:#73AA4F url('../images/icnSave.png') no-repeat 24px 4px; padding-left:40px; padding-right:25px; }
-input[type="button"].saveButton:hover, input[type="submit"].saveButton:hover {backg round-color:#005599;}
+input[type="button"].saveButton:hover, input[type="submit"].saveButton:hover {background-color:#48722D;}
 input[type="button"].cancelButton, input[type="submit"].cancelButton {background:transparent url('../images/icnCancel.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
 input[type="button"].cancelButton:hover, input[type="submit"].cancelButton:hover {background-color:#DAEDD1;}
 input[type="button"].editButton, input[type="submit"].editButton {background:transparent url('../images/icnEdit.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
@@ -38,8 +38,8 @@ input[type="button"].deleteButton, input[type="submit"].deleteButton {background
 input[type="button"].deleteButton:hover, input[type="submit"].deleteButton:hover {background-color:#DAEDD1;}
 input[type="button"].duplicateButton, input[type="submit"].duplicateButton {background:transparent url('../images/icnDuplicate.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
 input[type="button"].duplicateButton:hover, input[type="submit"].duplicateButton:hover {background-color:#DAEDD1;}
-input[type="button"].searchButton, input[type="submit"].searchButton {background:#93BC7F url('../images/icnSearch.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#FFF;}
-input[type="button"].searchButton:hover, input[type="submit"].searchButton:hover {background-color:#73AA4F;}
+input[type="button"].searchButton, input[type="submit"].searchButton {background:#73AA4F url('../images/icnSearch.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#FFF;}
+input[type="button"].searchButton:hover, input[type="submit"].searchButton:hover {background-color:#48722D;}
 input[type="button"].gotoButton, input[type="submit"].gotoButton {background:transparent url('../images/icnGoTo.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
 input[type="button"].gotoButton:hover, input[type="submit"].gotoButton:hover {background-color:#DAEDD1;}
 /*input[type="button"].addButton, input[type="submit"].addButton {background:transparent url('../images/icnAdd_.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
@@ -575,7 +575,7 @@ input.deactivate {background-color:#CDCCCC !important; color:#000 !important; cu
 .disableme {background-color:#CDCCCC !important; color:gray !important;}*/
 .activate input {color:black !important; background-color:white !important;}
 
-.overflowdiv {overflow-y:auto; overflow-x:hidden; max-height:183px;} /*  min-height */
+.overflowdiv {overflow-y:auto; overflow-x:hidden; /*max-height:183px;*/ max-height:180px;} /*  min-height */
 
 .cs-message {background-color: #D1D2D4;	border:2px solid black; font-size: 1.2em; font-weight:bold; padding: 4px; margin: 0 0 8px 0;}
 table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; font-weight:inherit; padding: 0; margin:0;}
