@@ -73,6 +73,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             }
                         }
                     }
+                },
+                recordEditor: {
+                    options: {
+                        confirmation: {
+                            options: {
+                                confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
+                            }
+                        }
+                    }
                 }
             }
         }, options);
@@ -115,38 +124,36 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 recordEditor: {
                     options: {
                         listeners: {
-                            afterRender: function () {
-                                jqUnit.assertEquals("Initally, there is 1 row of repeatable fields", 
-                                    1, $(".csc-object-identification-brief-description").length);
-                                jqUnit.assertEquals("Initally, Repeatable field has a value of ", 
-                                    "This is brief description.", $(".csc-object-identification-brief-description").val());
-                                pageBuilder.applier.modelChanged.addListener("*", function (model, oldModel, changeRequest) {                                    
-                                    jqUnit.assertEquals("Request model elPath should be ", 
-                                        "fields.briefDescriptions", changeRequest.path);
-                                    jqUnit.assertEquals("After '+field' clicked, there have to be 2 brief descriptions", 
-                                        2, model.fields.briefDescriptions.length);
+                            afterRender: function(){
+                                jqUnit.assertEquals("Initally, there is 1 row of repeatable fields", 1, $(".csc-object-identification-brief-description").length);
+                                jqUnit.assertEquals("Initally, Repeatable field has a value of ", "This is brief description.", $(".csc-object-identification-brief-description").val());
+                                pageBuilder.applier.modelChanged.addListener("*", function(model, oldModel, changeRequest){
+                                    jqUnit.assertEquals("Request model elPath should be ", "fields.briefDescriptions", changeRequest.path);
+                                    jqUnit.assertEquals("After '+field' clicked, there have to be 2 brief descriptions", 2, model.fields.briefDescriptions.length);
                                     jqUnit.assertDeepEq("(In the model) First brief descriptions is still correct", {
                                         "briefDescription": "This is brief description.",
                                         "_primary": true
                                     }, model.fields.briefDescriptions[0]);
-                                    jqUnit.assertDeepEq("(In the model) Second brief descriptions is empty", 
-                                        {}, model.fields.briefDescriptions[1]);
+                                    jqUnit.assertDeepEq("(In the model) Second brief descriptions is empty", {}, model.fields.briefDescriptions[1]);
                                     var repeatableContainer = $(".csc-repeatable-add").eq(1).parent("div");
-                                    var domModifiedListener = function () {
+                                    var domModifiedListener = function(){
                                         // The first DOMSubtreeModified will be the Renderer clearing the DOM; we want
                                         // to test after the second event, which will be after the new DOM is rendered
                                         repeatableContainer.unbind("DOMSubtreeModified", this);
-                                        repeatableContainer.bind("DOMSubtreeModified", function () { 
-                                            jqUnit.assertDeepEq("(On the page) First brief descriptions is still", 
-                                                "This is brief description.", $(".csc-object-identification-brief-description").eq(0).val());
-                                            jqUnit.assertDeepEq("(On the page) Second brief descriptions is empty", 
-                                                "", $(".csc-object-identification-brief-description").eq(1).val());
+                                        repeatableContainer.bind("DOMSubtreeModified", function(){
+                                            jqUnit.assertDeepEq("(On the page) First brief descriptions is still", "This is brief description.", $(".csc-object-identification-brief-description").eq(0).val());
+                                            jqUnit.assertDeepEq("(On the page) Second brief descriptions is empty", "", $(".csc-object-identification-brief-description").eq(1).val());
                                             start();
                                         });
                                     };
                                     repeatableContainer.bind("DOMSubtreeModified", domModifiedListener);
                                 });
                                 $(".csc-repeatable-add").eq(1).click();
+                            }
+                        },
+                        confirmation: {
+                            options: {
+                                confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
                             }
                         }
                     }
@@ -209,6 +216,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                 
                                 $(".csc-repeatable-add").eq(1).click();
                             }
+                        }
+                    },
+                    confirmation: {
+                        options: {
+                            confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
                         }
                     }
                 }

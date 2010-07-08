@@ -52,10 +52,10 @@ cspace = cspace || {};
                 }
             ]
         };
-        var reOpts = {
-            selectors: {identificationNumber: ".csc-loanIn-loanInNumber"},
-            strings: {identificationNumberRequired: "Please specify a Loan In Number"}
-        };
+        var reOpts = options.recordEditorOpts || {};
+        reOpts.selectors = {identificationNumber: ".csc-loanIn-loanInNumber"};
+        reOpts.strings = {identificationNumberRequired: "Please specify a Loan In Number"};
+
         var sbOpts = options.sideBarOpts || {};
         sbOpts.uispec = "{pageBuilder}.uispec.sidebar";
         sbOpts.primaryRecordType = "loanin";

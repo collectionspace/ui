@@ -15,6 +15,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     // jqMock requires jqUnit.ok to exist
     jqUnit.ok = ok;
 
+    var baseOpts = {
+        confirmation: {
+            options: {
+                confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
+            }
+        }
+    };
+
     var recordEditorTest = new jqUnit.TestCase("recordEditor Tests", function () {
         cspace.util.isTest = true;
     });
@@ -34,7 +42,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             ".csc-test-3": "${fields.field3}"
         };
         var applier = fluid.makeChangeApplier(testModel);
-        var recordEditor = cspace.recordEditor("#main", dc, applier, uispec);
+        var recordEditor = cspace.recordEditor("#main", dc, applier, uispec, baseOpts);
         jqUnit.assertEquals("foo", testModel.fields.field1, jQuery(".csc-test-1").val());
     });
 
@@ -54,7 +62,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var dc = cspace.dataContext(testModel, {baseUrl: "http://mymuseum.org", recordType: "thisRecordType"});
         var uispec = {};
         var applier = fluid.makeChangeApplier(testModel);
-        var recordEditor = cspace.recordEditor("#main", dc, applier, uispec);
+        var recordEditor = cspace.recordEditor("#main", dc, applier, uispec, baseOpts);
         recordEditor.remove();
         ajaxMock.verify();
         ajaxMock.restore();

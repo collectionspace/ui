@@ -51,6 +51,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }
                 }
             },
+            recordEditorOpts: {
+                confirmation: {
+                    options: {
+                        confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
+                    }
+                }
+            },
             templateUrlPrefix: "../../main/webapp/html/"
         };
         

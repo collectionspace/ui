@@ -37,6 +37,15 @@ var adminUsersTester = function () {
                     options: {
                         baseUrl: "../../main/webapp/html/data/"
                     }
+                },
+                details: {
+                    options: {
+                        confirmation: {
+                            options: {
+                                confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
+                            }
+                        }
+                    }
                 }
             }
         }

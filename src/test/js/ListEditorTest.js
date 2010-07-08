@@ -33,6 +33,15 @@ var listEditorTester = function(){
                 fileExtension: ".json",
                 recordType: "users"
             }
+        },
+        details: {
+            options: {
+                confirmation: {
+                    options: {
+                        confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
+                    }
+                }
+            }
         }
     };
     var testOpts = {};
