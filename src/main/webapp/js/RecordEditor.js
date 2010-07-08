@@ -42,16 +42,20 @@ cspace = cspace || {};
     };
 
 	var setupConfirmation = function (that) {
+	    
         var confirmationOpts = {
             action: that.requestSave,
             actionSuccessEvents: [that.events.afterCreateObjectDataSuccess, that.events.afterUpdateObjectDataSuccess],
             actionErrorEvents: [that.events.onError]
         };
-        // TODO: This should be a subcomponent, with an option block that can be overridden
-        that.confirmation = cspace.confirmation(that.container, confirmationOpts);
+        
+        that.confirmation = fluid.initSubcomponent(that, "confirmation", [
+            that.container,
+            $.extend(true, confirmationOpts, that.options.confirmation.options) 
+        ]);
 
         var showConf = makeShowConfirmation(that);
-        $("a:not([href*=#]):not([class*='" + that.options.selectors.confirmationExclusion.substring(1) + "']):not(.ui-autocomplete a)").live("click", showConf); 
+        $(that.options.selectors.confirmationInclude + ":not(" + that.options.selectors.confirmationExclude + ")").live("click", showConf);
     };
 
     var validateIdentificationNumber = function (domBinder, container, message) {
@@ -230,6 +234,9 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.recordEditor", {
+        confirmation: {
+            type: "cspace.confirmation"
+        },
         events: {
 	        onSave: "preventable",
             onCancel: null,
@@ -249,8 +256,9 @@ cspace = cspace || {};
             feedbackMessage: ".csc-message",
             timestamp: ".csc-timestamp",
             relatedRecords: ".csc-related-records",
-            confirmationExclusion: ".csc-confirmation-exclusion",
-            requiredFields: ".csc-required:visible"
+            requiredFields: ".csc-required:visible",
+            confirmationInclude: "a",
+            confirmationExclude: "[href*=#], .csc-confirmation-exclusion, .ui-autocomplete a"
         },
         strings: {
             specFetchError: "I'm sorry, an error has occurred fetching the UISpec: ",
