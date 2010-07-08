@@ -127,11 +127,6 @@ cspace = cspace || {};
         var primary = $("<input class=\"csc-repeatable-primary \" type=\"radio\" name=\"primary-" + that.options.elPath + "\" />").addClass(that.options.styles.primary);
         var remove = $("<input class=\"csc-repeatable-delete \" type=\"button\" value=\"\"/>").addClass(that.options.styles.remove);
         
-        if (node.is("tr")) {
-            primary.wrap("<td />");
-            remove.wrap("<td />");
-        }
-        
         if (that.locate("primary").length === 0) {
             node.prepend(primary);
         }
@@ -140,6 +135,14 @@ cspace = cspace || {};
             node.append(remove);
         }
                 
+        if (node.is("tr")) {
+            primary.wrap("<td />");
+            remove.wrap("<td />");
+            var headerRow = $("thead tr", that.container);
+            headerRow.prepend("<td />");
+            headerRow.append("<td />");
+        }
+        
     };
     
     
@@ -247,6 +250,7 @@ cspace = cspace || {};
     });
     
     /**
+     * Convenience function to wrap the repeatable element in a suitable container div
      * @element a jqueryable selector
      */
     cspace.makeRepeatable = function (element, options) {

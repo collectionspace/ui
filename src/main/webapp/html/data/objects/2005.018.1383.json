@@ -13,6 +13,10 @@
         "materialSource": "32",
         "contentObjectType": "taxonomic",
         "copyNumber": "17",
+        "otherNumbers": [
+            {"otherNumberType": "unknown", "otherNumber": "42",},
+            {"otherNumberType": "obsolete", "otherNumber": "7",}
+        ],
         "otherNumberType": "obsolete",
         "otherNumber": "2",
         "age": "23",

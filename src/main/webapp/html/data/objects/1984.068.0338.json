@@ -18,10 +18,11 @@
         "briefDescriptions": [
             {"briefDescription": "This is a slightly brief description."}
         ],
-        "otherNumberType": "no type",
+        "otherNumbers": [
+            {"otherNumber": "2", "otherNumberType": "lender"}
+        ],
         "titleType": "Sample",
         "titleTranslation": "No translation",
-        "otherNumber": "2",
         "objectNameNote": "No note",
         "comments": "These are the comments",
         "objectNameLevel": "Very High"

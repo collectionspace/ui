@@ -19,10 +19,8 @@
             "briefDescription": "This is brief description.",
             "_primary": true
         }],
-        "otherNumberType": "no type",
         "titleType": "Sample",
         "titleTranslation": "No translation",
-        "otherNumber": "2",
         "objectNameNote": "No note",
         "comments": "These are the comments",
         "objectNameLevel": "Very High",

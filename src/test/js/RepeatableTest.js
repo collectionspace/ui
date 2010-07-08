@@ -133,7 +133,9 @@ var repeatableTester = function ($) {
     });
    
     repeatableTest.test("Markup Generation For a Table", function () {
-        expect(7);
+        expect(10);
+        var headerRow = $("thead tr", container);
+        var previousHeaderColumnCount = $("td", headerRow).length;
         var myRepeatable = basicSetup({
             container: "#tableContainer", 
             cutpoints: [{
@@ -149,10 +151,16 @@ var repeatableTester = function ($) {
        
         var tr = $("tr", container);
         jqUnit.assertTrue("The tr has the repeat selector", tr.hasClass("csc-repeatable-repeat"));
-        jqUnit.exists("The delete has been generated inside the table row", $(".csc-repeatable-delete", tr));
-        jqUnit.exists("The primary has been generated inside the table row", $(".csc-repeatable-primary", tr));
+        jqUnit.exists("The delete has been generated inside a table cell in the row ", $("td > .csc-repeatable-delete", tr));
+        jqUnit.exists("The primary has been generated inside a table cell in the row ", $("td > .csc-repeatable-primary", tr));
         jqUnit.assertEquals("The original model was rendered ", "circle", $(".cst-tableTestField", tr).val());
     
+        var colHeaders = $("td", headerRow);
+        var newLength = colHeaders.length;
+        jqUnit.assertEquals("The table header row has had two columns added to it ", previousHeaderColumnCount + 2, newLength);
+        jqUnit.assertEquals("The first column header is empty ", "", $(colHeaders[0]).text());
+        jqUnit.assertEquals("The last column header is empty ", "", $(colHeaders[newLength - 1]).text());
+
         var addButton = $(".csc-repeatable-add", container);
         jqUnit.exists("The add button has been generated inside container", addButton);
         var table = $("table", container);

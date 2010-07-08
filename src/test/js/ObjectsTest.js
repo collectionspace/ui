@@ -125,7 +125,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     options: {
                         listeners: {
                             afterRender: function(){
-                                jqUnit.assertEquals("Initally, there is 1 row of repeatable fields", 1, $(".csc-object-identification-brief-description").length);
+                                jqUnit.assertEquals("Initally, there is 1 row in the 'brief description' repeatable fields", 1, $(".csc-object-identification-brief-description").length);
                                 jqUnit.assertEquals("Initally, Repeatable field has a value of ", "This is brief description.", $(".csc-object-identification-brief-description").val());
                                 pageBuilder.applier.modelChanged.addListener("*", function(model, oldModel, changeRequest){
                                     jqUnit.assertEquals("Request model elPath should be ", "fields.briefDescriptions", changeRequest.path);
@@ -135,7 +135,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                         "_primary": true
                                     }, model.fields.briefDescriptions[0]);
                                     jqUnit.assertDeepEq("(In the model) Second brief descriptions is empty", {}, model.fields.briefDescriptions[1]);
-                                    var repeatableContainer = $(".csc-repeatable-add").eq(1).parent("div");
+                                    // TODO: The index of '2' requires careful knowledge of how many repeated fields, and which one is the brief description
+                                    var repeatableContainer = $(".csc-repeatable-add").eq(2).parent("div");
                                     var domModifiedListener = function(){
                                         // The first DOMSubtreeModified will be the Renderer clearing the DOM; we want
                                         // to test after the second event, which will be after the new DOM is rendered
@@ -148,7 +149,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                     };
                                     repeatableContainer.bind("DOMSubtreeModified", domModifiedListener);
                                 });
-                                $(".csc-repeatable-add").eq(1).click();
+                                // TODO: The index of '2' requires careful knowledge of how many repeated fields, and which one is the brief description
+                                $(".csc-repeatable-add").eq(2).click();
                             }
                         },
                         confirmation: {
@@ -197,8 +199,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                         "_primary": true
                                     }, model.fields.briefDescriptions[0]);
                                     jqUnit.assertDeepEq("(In the model) Second brief descriptions is empty", 
-                                        {}, model.fields.briefDescriptions[1]);                                    
-                                    var repeatableContainer = $(".csc-repeatable-add").eq(1).parent("div");
+                                        {}, model.fields.briefDescriptions[1]);
+                                    // TODO: The index of '2' requires careful knowledge of how many repeated fields, and which one is the brief description
+                                    var repeatableContainer = $(".csc-repeatable-add").eq(2).parent("div");
                                     var domModifiedListener = function () {
                                         // The first DOMSubtreeModified will be the Renderer clearing the DOM; we want
                                         // to test after the second event, which will be after the new DOM is rendered
@@ -214,7 +217,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                     repeatableContainer.bind("DOMSubtreeModified", domModifiedListener);
                                 });
                                 
-                                $(".csc-repeatable-add").eq(1).click();
+                                // TODO: The index of '2' requires careful knowledge of how many repeated fields, and which one is the brief description
+                                $(".csc-repeatable-add").eq(2).click();
                             }
                         }
                     },

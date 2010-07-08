@@ -854,23 +854,6 @@
                 }
             ]
         },
-        ".csc-object-identification-other-number-type": {
-            "optionnames": [
-                "Lender",
-                "Obsolete",
-                "Previous",
-                "Serial",
-                "Unknown"
-            ],
-            "optionlist": [
-                "lender",
-                "obsolete",
-                "previous",
-                "serial",
-                "unknown"
-            ],
-            "selection": "${fields.otherNumberType}"
-        },
         ".csc-object-description-technical-attribute": {
             "optionnames": [
                 "magnetic tape type",
@@ -905,7 +888,41 @@
             "selection": "${fields.ownershipExchangePriceCurrency}"
         },
         ".csc-object-description-dimension-value-date": "${fields.dimensionValueDate}",
-        ".csc-object-identification-other-number": "${fields.otherNumber}",
+
+        ".csc-object-identification-otherNumbers": {
+            "decorators": [
+                {
+                    "func": "cspace.repeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.otherNumbers",
+                        "protoTree": {
+                            ".csc-object-identification-other-number": "${fields.otherNumbers.0.otherNumber}",
+                            ".csc-object-identification-other-number-type": {
+                                "optionnames": [
+                                    "Lender",
+                                    "Obsolete",
+                                    "Previous",
+                                    "Serial",
+                                    "Unknown"
+                                ],
+                                "optionlist": [
+                                    "lender",
+                                    "obsolete",
+                                    "previous",
+                                    "serial",
+                                    "unknown"
+                                ],
+                                "selection": "${fields.otherNumbers.0.otherNumberType}"
+                            },
+                        }
+                    }
+                }
+            ]
+        },
+
+
+
         ".csc-object-history-association-event-name": "${fields.associatedEventNameType}",
         ".csc-object-production-date-container": {
             "decorators": [
