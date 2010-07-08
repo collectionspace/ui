@@ -19,7 +19,7 @@ input, textarea {font-family:inherit; font-size:12px; font-weight:inherit; line-
 input[type="button"], input[type="submit"], input[type="checkbox"] {height:auto; /*-moz-border-radius: 3px; -webkit-border-radius: 3px;*/}
 input:focus, textarea:focus {outline: 1px solid black;}
 input[type="text"], input[type="password"], textarea {/*width:99.5%;*/ width:100%; margin:0;}
-input[type="submit"].logout {font-weight:bold; color:#333; background-color:#F3F3F3; padding-left:14px; padding-right:15px;}
+input[type="submit"].logout {font-weight:bold; color:#333; background-color:#F3F3F3; padding-left:15px; padding-right:14px; font-size:13px;}
 input[type="submit"].logout:hover {background-color:#333; color:#FFF;}
 input[type="button"], input[type="submit"]	{background-color:#73AA4F; height:21px; padding-left:12px; padding-right:12px; font-weight:bold; color:#fff; cursor:pointer; font-size:11px; line-height:11px; border:none;}
 input[type="button"]:hover, input[type="submit"]:hover	{background-color:#48722D;}
@@ -624,5 +624,5 @@ li.cs-repeatable-repeat {list-style-type: none;  margin-bottom:1px;}
 .cs-repeatable-content {width: 89%;}
 div.cs-rep eatable-content input{float:left;}
 input.cs-repeatable-primary {width: 5%; position: relative; vertical-align: top;}
-input.cs-repeatable-delete {width: 5%; height:18px; vertical-align: top; padding:0px; background:transparent url('../images/icnDelete.png') no-repeat 1px 2px; /*color: transparent; background-color: transparent; line-height:100%; font-size:11px; height:15px; line-height:80%; margin:2px 0;*/}
-input.cs-repeatable-delete:hover, input.cs-repeatable-delete:focus {color: white; /*background-color: blue;*/ background:transparent url('../images/icnDeleteIdle.png') no-repeat 0px 0px;}
+input.cs-repeatable-delete {width: 16px; height:18px; vertical-align: top; padding:0px; background:transparent url('../images/icnDeleteIdle.png') no-repeat 1px 2px; /*color: transparent; background-color: transparent; line-height:100%; font-size:11px; height:15px; line-height:80%; margin:2px 0;*/}
+input.cs-repeatable-delete:hover, input.cs-repeatable-delete:focus {color: white; /*background-color: blue;*/ background:transparent url('../images/icnDelete.png') no-repeat 1px 2px;}
