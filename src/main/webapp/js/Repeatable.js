@@ -119,6 +119,15 @@ cspace = cspace || {};
         }
     };
 
+    var addColumnsToHeader = function (headerRow) {
+        var headerCols = headerRow.children();
+        if (headerCols.length > 0) {
+            newCol = $(headerCols[0]).clone().empty();
+            headerRow.prepend(newCol.clone());
+            headerRow.append(newCol);
+        }
+    };
+
     /**
      * @node content node that will contain primary and delete
      */
@@ -138,9 +147,10 @@ cspace = cspace || {};
         if (node.is("tr")) {
             primary.wrap("<td />");
             remove.wrap("<td />");
-            var headerRow = $("thead tr", that.container);
-            headerRow.prepend("<td />");
-            headerRow.append("<td />");
+            var headerRow = that.locate("headerRow");
+            if (headerRow.length > 0) {
+                addColumnsToHeader(headerRow);
+            }
         }
         
     };
@@ -219,7 +229,8 @@ cspace = cspace || {};
             add: ".csc-repeatable-add",
             remove: ".csc-repeatable-delete",
             primary: ".csc-repeatable-primary",
-            repeat: ".csc-repeatable-repeat"     
+            repeat: ".csc-repeatable-repeat",
+            headerRow: ".csc-repeatable-headerRow"  
         },
         events: {
             afterRender: null,

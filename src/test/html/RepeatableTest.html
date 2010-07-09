@@ -31,18 +31,82 @@
                 <input class="csc-repeatable-repeat cst-simpleTestField" type="text" />
             </div>
             
-            <div id="tableContainer">        
-	            <table>
-	                <thead>
-	                    <tr>
-                            <td>Test column header</td>
-	                    </tr>
-	                </thead>
-	                <tr class="csc-repeatable-repeat">
-	                    <td><input class="cst-tableTestField" type="text" /></td>
-	                </tr>
-	            </table>
+            <div id="tableContainerNoHeader">        
+                <table>
+                    <tr class="csc-repeatable-repeat">
+                        <td><input class="cst-tableTestField" type="text" /></td>
+                    </tr>
+                </table>
             </div>
+            
+            <div id="tableContainerTrTh">        
+                <table>
+                        <tr class="csc-repeatable-headerRow">
+                            <th>Header in tr/th combination</th>
+                        </tr>
+                    <tr class="csc-repeatable-repeat">
+                        <td><input class="cst-tableTestField" type="text" /></td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div id="tableContainerTrTd">        
+                <table>
+                        <tr class="csc-repeatable-headerRow">
+                            <td>Header in a plain tr/td</td>
+                        </tr>
+                    <tr class="csc-repeatable-repeat">
+                        <td><input class="cst-tableTestField" type="text" /></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="tableContainerTheadTrTh">        
+                <table>
+                    <thead>
+                        <tr class="csc-repeatable-headerRow">
+                            <th>Header in thead/tr/th</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="csc-repeatable-repeat">
+                            <td><input class="cst-tableTestField" type="text" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="tableContainerTheadMultipleTrTd">        
+                <table>
+                    <thead id="thead">
+                        <tr class="csc-repeatable-headerRow">
+                            <td>Multi-row header in a</td>
+                        </tr>
+                        <tr class="csc-repeatable-headerRow">
+                            <td>thead block</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="csc-repeatable-repeat">
+                            <td><input class="cst-tableTestField" type="text" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="tableContainerTheadTrNoTd">        
+                <table>
+                    <thead>
+                        <tr class="csc-repeatable-headerRow">
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="csc-repeatable-repeat">
+                            <td><input class="cst-tableTestField" type="text" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
             
             <input class="cst-simpleTestFieldNoContainer" type="text" />
             

@@ -133,11 +133,9 @@ var repeatableTester = function ($) {
     });
    
     repeatableTest.test("Markup Generation For a Table", function () {
-        expect(10);
-        var headerRow = $("thead tr", container);
-        var previousHeaderColumnCount = $("td", headerRow).length;
+        expect(7);
         var myRepeatable = basicSetup({
-            container: "#tableContainer", 
+            container: "#tableContainerNoHeader", 
             cutpoints: [{
                 id: "myTextField",
                 selector: ".cst-tableTestField"
@@ -154,17 +152,100 @@ var repeatableTester = function ($) {
         jqUnit.exists("The delete has been generated inside a table cell in the row ", $("td > .csc-repeatable-delete", tr));
         jqUnit.exists("The primary has been generated inside a table cell in the row ", $("td > .csc-repeatable-primary", tr));
         jqUnit.assertEquals("The original model was rendered ", "circle", $(".cst-tableTestField", tr).val());
+
+        var addButton = $(".csc-repeatable-add", container);
+        jqUnit.exists("The add button has been generated inside container", addButton);
+        var table = $("table", container);
+        jqUnit.notExists("The add button is not in the table", $(".csc-repeatable-add", table));
+    });
+    
+    tableSetup = function (tableId) {
+        return basicSetup({
+            container: tableId, 
+            cutpoints: [{
+                id: "myTextField",
+                selector: ".cst-tableTestField"
+            }], 
+            text: "circle"
+        });
+    };
+    
+    repeatableTest.test("Markup Generation For Table Headers: basic TR/TH", function () {
+        expect(3);
+        var headerRow = $("#tableContainerTrTh " + fluid.defaults("cspace.repeatable").selectors.headerRow);
+        var previousHeaderColumnCount = $("th", headerRow).length;
+        var myRepeatable = tableSetup("#tableContainerTrTh");
+        var container = myRepeatable.container;
+    
+        var colHeaders = $("th", headerRow);
+        var newLength = colHeaders.length;
+        jqUnit.assertEquals("The table header row has had two columns added to it ", previousHeaderColumnCount + 2, newLength);
+        jqUnit.assertEquals("The first column header is empty ", "", $(colHeaders[0]).text());
+        jqUnit.assertEquals("The last column header is empty ", "", $(colHeaders[newLength - 1]).text());
+    });
+    
+    repeatableTest.test("Markup Generation For Table Headers: plain TR/TD", function () {
+        expect(3);
+        var headerRow = $("#tableContainerTrTd " + fluid.defaults("cspace.repeatable").selectors.headerRow);
+        var previousHeaderColumnCount = $("td", headerRow).length;
+        var myRepeatable = tableSetup("#tableContainerTrTd");
+        var container = myRepeatable.container;
     
         var colHeaders = $("td", headerRow);
         var newLength = colHeaders.length;
         jqUnit.assertEquals("The table header row has had two columns added to it ", previousHeaderColumnCount + 2, newLength);
         jqUnit.assertEquals("The first column header is empty ", "", $(colHeaders[0]).text());
         jqUnit.assertEquals("The last column header is empty ", "", $(colHeaders[newLength - 1]).text());
-
-        var addButton = $(".csc-repeatable-add", container);
-        jqUnit.exists("The add button has been generated inside container", addButton);
-        var table = $("table", container);
-        jqUnit.notExists("The add button is not in the table", $(".csc-repeatable-add", table));
+    });
+    
+    repeatableTest.test("Markup Generation For Table Headers: THEAD/TR/TH", function () {
+        expect(3);
+        var headerRow = $("#tableContainerTheadTrTh " + fluid.defaults("cspace.repeatable").selectors.headerRow);
+        var previousHeaderColumnCount = $("th", headerRow).length;
+        var myRepeatable = tableSetup("#tableContainerTheadTrTh");
+        var container = myRepeatable.container;
+    
+        var colHeaders = $("th", headerRow);
+        var newLength = colHeaders.length;
+        jqUnit.assertEquals("The table header row has had two columns added to it ", previousHeaderColumnCount + 2, newLength);
+        jqUnit.assertEquals("The first column header is empty ", "", $(colHeaders[0]).text());
+        jqUnit.assertEquals("The last column header is empty ", "", $(colHeaders[newLength - 1]).text());
+    });
+    
+    repeatableTest.test("Markup Generation For Table Headers: THEAD/TR/TD with multiple rows", function () {
+        expect(3);
+        var headerRow = $("#tableContainerTheadMultipleTrTd " + fluid.defaults("cspace.repeatable").selectors.headerRow);
+        var previousHeaderColumnCount = $("td", headerRow).length;
+        var myRepeatable = tableSetup("#tableContainerTheadMultipleTrTd");
+        var container = myRepeatable.container;
+    
+        var colHeaders = $("td", headerRow);
+        var newLength = colHeaders.length;
+        jqUnit.assertEquals("The table header row has had two columns added to it ", previousHeaderColumnCount + (2 * previousHeaderColumnCount), newLength);
+        jqUnit.assertEquals("The first column header is empty ", "", $(colHeaders[0]).text());
+        jqUnit.assertEquals("The last column header is empty ", "", $(colHeaders[newLength - 1]).text());
+    });
+    
+    repeatableTest.test("Markup Generation For Table Headers: THEAD/TR, no TD", function () {
+        expect(1);
+        var headerRow = $("#tableContainerTheadTrNoTd " + fluid.defaults("cspace.repeatable").selectors.headerRow);
+        var previousHeaderColumnCount = $("td", headerRow).length;
+        var myRepeatable = tableSetup("#tableContainerTheadTrNoTd");
+        var container = myRepeatable.container;
+    
+        var colHeaders = $("td", headerRow);
+        var newLength = colHeaders.length;
+        jqUnit.assertEquals("The table header row should have no columns added ", previousHeaderColumnCount, newLength);
+    });
+    
+    repeatableTest.test("Markup Generation For Table Headers: no header present", function () {
+        expect(2);
+        
+        var headerRow = $("#tableContainerNoHeader " + fluid.defaults("cspace.repeatable").selectors.headerRow);
+        jqUnit.assertEquals("Before testing, there should be nothing with the header row selector", 0, headerRow.length);
+        var myRepeatable = tableSetup("#tableContainerNoHeader");
+        var container = myRepeatable.container;
+        jqUnit.assertEquals("After initializing, there should still be nothing with the header row selector", 0, headerRow.length);
     });
     
     repeatableTest.test("Multi rows in the model", function () {     
