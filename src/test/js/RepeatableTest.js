@@ -159,7 +159,7 @@ var repeatableTester = function ($) {
         jqUnit.notExists("The add button is not in the table", $(".csc-repeatable-add", table));
     });
     
-    tableSetup = function (tableId) {
+    var tableSetup = function (tableId) {
         return basicSetup({
             container: tableId, 
             cutpoints: [{
@@ -168,48 +168,31 @@ var repeatableTester = function ($) {
             }], 
             text: "circle"
         });
+    }; 
+
+    var basicMarkupGenTableTest = function (tableId, elName) {
+        expect(3);
+        var headerRow = $(tableId + " " + fluid.defaults("cspace.repeatable").selectors.headerRow);
+        var previousHeaderColumnCount = $(elName, headerRow).length;
+        var myRepeatable = tableSetup(tableId);
+        var colHeaders = $(elName, headerRow);
+        var newLength = colHeaders.length;
+        
+        jqUnit.assertEquals("The table header row has had two columns added to it ", previousHeaderColumnCount + 2, newLength);
+        jqUnit.assertEquals("The first column header is empty ", "", $(colHeaders[0]).text());
+        jqUnit.assertEquals("The last column header is empty ", "", $(colHeaders[newLength - 1]).text());
     };
     
     repeatableTest.test("Markup Generation For Table Headers: basic TR/TH", function () {
-        expect(3);
-        var headerRow = $("#tableContainerTrTh " + fluid.defaults("cspace.repeatable").selectors.headerRow);
-        var previousHeaderColumnCount = $("th", headerRow).length;
-        var myRepeatable = tableSetup("#tableContainerTrTh");
-        var container = myRepeatable.container;
-    
-        var colHeaders = $("th", headerRow);
-        var newLength = colHeaders.length;
-        jqUnit.assertEquals("The table header row has had two columns added to it ", previousHeaderColumnCount + 2, newLength);
-        jqUnit.assertEquals("The first column header is empty ", "", $(colHeaders[0]).text());
-        jqUnit.assertEquals("The last column header is empty ", "", $(colHeaders[newLength - 1]).text());
+        basicMarkupGenTableTest("#tableContainerTrTh", "th");
     });
     
     repeatableTest.test("Markup Generation For Table Headers: plain TR/TD", function () {
-        expect(3);
-        var headerRow = $("#tableContainerTrTd " + fluid.defaults("cspace.repeatable").selectors.headerRow);
-        var previousHeaderColumnCount = $("td", headerRow).length;
-        var myRepeatable = tableSetup("#tableContainerTrTd");
-        var container = myRepeatable.container;
-    
-        var colHeaders = $("td", headerRow);
-        var newLength = colHeaders.length;
-        jqUnit.assertEquals("The table header row has had two columns added to it ", previousHeaderColumnCount + 2, newLength);
-        jqUnit.assertEquals("The first column header is empty ", "", $(colHeaders[0]).text());
-        jqUnit.assertEquals("The last column header is empty ", "", $(colHeaders[newLength - 1]).text());
+        basicMarkupGenTableTest("#tableContainerTrTd", "td");
     });
-    
+
     repeatableTest.test("Markup Generation For Table Headers: THEAD/TR/TH", function () {
-        expect(3);
-        var headerRow = $("#tableContainerTheadTrTh " + fluid.defaults("cspace.repeatable").selectors.headerRow);
-        var previousHeaderColumnCount = $("th", headerRow).length;
-        var myRepeatable = tableSetup("#tableContainerTheadTrTh");
-        var container = myRepeatable.container;
-    
-        var colHeaders = $("th", headerRow);
-        var newLength = colHeaders.length;
-        jqUnit.assertEquals("The table header row has had two columns added to it ", previousHeaderColumnCount + 2, newLength);
-        jqUnit.assertEquals("The first column header is empty ", "", $(colHeaders[0]).text());
-        jqUnit.assertEquals("The last column header is empty ", "", $(colHeaders[newLength - 1]).text());
+        basicMarkupGenTableTest("#tableContainerTheadTrTh", "th");
     });
     
     repeatableTest.test("Markup Generation For Table Headers: THEAD/TR/TD with multiple rows", function () {
@@ -217,7 +200,6 @@ var repeatableTester = function ($) {
         var headerRow = $("#tableContainerTheadMultipleTrTd " + fluid.defaults("cspace.repeatable").selectors.headerRow);
         var previousHeaderColumnCount = $("td", headerRow).length;
         var myRepeatable = tableSetup("#tableContainerTheadMultipleTrTd");
-        var container = myRepeatable.container;
     
         var colHeaders = $("td", headerRow);
         var newLength = colHeaders.length;
@@ -231,11 +213,9 @@ var repeatableTester = function ($) {
         var headerRow = $("#tableContainerTheadTrNoTd " + fluid.defaults("cspace.repeatable").selectors.headerRow);
         var previousHeaderColumnCount = $("td", headerRow).length;
         var myRepeatable = tableSetup("#tableContainerTheadTrNoTd");
-        var container = myRepeatable.container;
     
         var colHeaders = $("td", headerRow);
-        var newLength = colHeaders.length;
-        jqUnit.assertEquals("The table header row should have no columns added ", previousHeaderColumnCount, newLength);
+        jqUnit.assertEquals("The table header row should have no columns added ", previousHeaderColumnCount, colHeaders.length);
     });
     
     repeatableTest.test("Markup Generation For Table Headers: no header present", function () {
@@ -244,7 +224,6 @@ var repeatableTester = function ($) {
         var headerRow = $("#tableContainerNoHeader " + fluid.defaults("cspace.repeatable").selectors.headerRow);
         jqUnit.assertEquals("Before testing, there should be nothing with the header row selector", 0, headerRow.length);
         var myRepeatable = tableSetup("#tableContainerNoHeader");
-        var container = myRepeatable.container;
         jqUnit.assertEquals("After initializing, there should still be nothing with the header row selector", 0, headerRow.length);
     });
     
@@ -519,6 +498,60 @@ var repeatableTester = function ($) {
         }, "testAddRow2AfterDelete");
         myRepeatable.locate("add").click();
         myRepeatable.events.afterRender.removeListener("testAddRow2AfterDelete");
+    });
+    
+    repeatableTest.test("Make repeatable rows in table with makeRepeatable", function () {        
+        var model = {
+            myTexts: [
+                {
+                    myText: "Bruges"
+                }
+            ]
+        };
+        var options = {
+            model: model,
+            applier: fluid.makeChangeApplier(model),
+            protoTree: {
+                "myTextField": "${myTexts.0.myText}"
+            },
+            renderOptions: {
+                cutpoints: [{
+                    id: "myTextField",
+                    selector: ".cst-tableTestField"
+                }]
+            }
+        };        
+        var myRepeatable = cspace.makeRepeatable(".csc-repeatable-table-row", options);        
+        var container = myRepeatable.container;        
+        jqUnit.assertEquals("The Table does not contain divs", 0, $("div", "table").length);
+        jqUnit.assertEquals("Container should containe a table", 1, container.has("table").length);        
+    });
+    
+    repeatableTest.test("Make repeatable rows in ul with makeRepeatable", function () {        
+        var model = {
+            myTexts: [
+                {
+                    myText: "Bruges"
+                }
+            ]
+        };
+        var options = {
+            model: model,
+            applier: fluid.makeChangeApplier(model),
+            protoTree: {
+                "myTextField": "${myTexts.0.myText}"
+            },
+            renderOptions: {
+                cutpoints: [{
+                    id: "myTextField",
+                    selector: ".csc-repeatable-li-text"
+                }]
+            }
+        };        
+        var myRepeatable = cspace.makeRepeatable(".csc-repeatable-li", options);        
+        var container = myRepeatable.container;        
+        jqUnit.assertEquals("The ul does not contain divs", 0, $("ul", "#markupPresent").has("div").length);
+        jqUnit.assertEquals("Container should containe a ul", 1, container.has("ul").length);        
     });
 
 };

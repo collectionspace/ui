@@ -892,7 +892,7 @@
         ".csc-object-identification-otherNumbers": {
             "decorators": [
                 {
-                    "func": "cspace.repeatable",
+                    "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
                         "elPath": "fields.otherNumbers",

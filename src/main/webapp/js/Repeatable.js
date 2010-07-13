@@ -122,7 +122,7 @@ cspace = cspace || {};
     var addColumnsToHeader = function (headerRow) {
         var headerCols = headerRow.children();
         if (headerCols.length > 0) {
-            newCol = $(headerCols[0]).clone().empty();
+            var newCol = $(headerCols[0]).clone().empty();
             headerRow.prepend(newCol.clone());
             headerRow.append(newCol);
         }
@@ -260,6 +260,11 @@ cspace = cspace || {};
         generateMarkup: "cspace.repeatable.generateMarkup"
     });
     
+     
+    var isListOrTable = function (elem) {
+        return $(elem).is("ul, ol, table");
+    };
+     
     /**
      * Convenience function to wrap the repeatable element in a suitable container div
      * @element a jqueryable selector
@@ -267,6 +272,12 @@ cspace = cspace || {};
     cspace.makeRepeatable = function (element, options) {
         element = $(element);
         element.addClass("csc-repeatable-repeat");
+        
+        if (element.is("tr") || element.is("li")) {
+            element = fluid.findAncestor(element, isListOrTable);
+            element = $(element);
+        }
+        
         element.wrap("<div />");
         
         return cspace.repeatable(element.parent("div"), options);
