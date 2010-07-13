@@ -58,7 +58,7 @@ cspace = cspace || {};
             hideDetails(that.dom);
         });
         
-        that.list.events.onSelect.addListener(function (model) {
+        that.list.events.afterSelect.addListener(function (model) {
             that.options.loadDetails(model, that.detailsDC);
         });
         
@@ -82,6 +82,7 @@ cspace = cspace || {};
 
         that.detailsApplier = fluid.makeChangeApplier(that.model.details);
         that.detailsDC = fluid.initSubcomponent(that, "dataContext", [that.model.details, fluid.COMPONENT_OPTIONS]);
+
         that.details = fluid.initSubcomponent(that, "details", [
             $(that.options.selectors.details, that.container),
             that.detailsDC,
@@ -105,6 +106,29 @@ cspace = cspace || {};
             that.list.refreshView();
             hideDetails(that.dom);
         };
+        
+        $.extend(true, that.options.list.options, {
+            onSelectHandler: function (model, rows, events, styles, newIndex) {
+                if (that.details.unsavedChanges) {
+                    // We save the oldSuccessHandler and then put it back in place once the event is triggered in 
+                    // order to keep the defualt functionality enabled. 
+                    var oldSuccessHandler = that.details.confirmation.options.successHandler; 
+                    that.details.confirmation.options.successHandler = function (confirmation) {
+                        return function () {
+                            confirmation.updateEventListeners("remove");                            
+                            confirmation.dlg.dialog("close");
+                            confirmation.options.successHandler = oldSuccessHandler;
+                            that.details.unsavedChanges = false;
+                            cspace.recordList.onSelectHandlerDefault(model, rows, events, styles, newIndex);
+                        };
+                    };
+                    that.details.showConfirmation();
+                }
+                else {
+                    cspace.recordList.onSelectHandlerDefault(model, rows, events, styles, newIndex);
+                }
+            }
+        });
 
         that.options.initList(that, function () {
             that.list = fluid.initSubcomponent(that, "list", [
@@ -165,7 +189,8 @@ cspace = cspace || {};
 
     fluid.defaults("cspace.listEditor", {
         list: {
-            type: "cspace.recordList"
+            type: "cspace.recordList",
+            options: {}
         },
         details: {
             type: "cspace.recordEditor"

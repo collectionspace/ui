@@ -14,22 +14,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
-	
-    var attachActionListeners = function (successEvents, successHandler, errorEvents, errorHandler) {
-        for (var i = 0; i < successEvents.length; i++) {
-            successEvents[i].addListener(successHandler);
-        }
-        for (var j = 0; j < errorEvents.length; j++) {
-            errorEvents[j].addListener(errorHandler);
-        }
-    };
-    var removeActionListeners = function (successEvents, successHandler, errorEvents, errorHandler) {
-        for (var i = 0; i < successEvents.length; i++) {
-            successEvents[i].removeListener(successHandler);
-        }
-        for (var j = 0; j < errorEvents.length; j++) {
-            errorEvents[j].removeListener(errorHandler);
-        }
+    
+    var updateHandlerForEvents = function (action, events, handler) {
+        $.each(events, function (index, event) {
+            event[action + "Listener"](handler);
+        });
     };
     
 	var bindEvents = function (that) {
@@ -40,7 +29,7 @@ cspace = cspace || {};
             that.close();
         });
         that.locate("proceed", that.dlg).click(function (e) {
-            that.navigate();
+            that.options.successHandler(that)();
         });
         that.locate("act", that.dlg).click(function (e) {
             that.options.action();
@@ -79,23 +68,35 @@ cspace = cspace || {};
         that.model = {href: "#"};
 
         that.dlg = setupConfirmation(that);
-        that.navigate = function () {
-            removeActionListeners(that.options.actionSuccessEvents, that.navigate, that.options.actionErrorEvents, that.close);
-            window.location = that.model.href;
-        };
+        
+        that.updateEventListeners = function (action) {
+            updateHandlerForEvents(action, that.options.actionSuccessEvents, that.options.successHandler(that));
+            updateHandlerForEvents(action, that.options.actionErrorEvents, that.close);
+        };        
+        
         that.close = function () {
-            removeActionListeners(that.options.actionSuccessEvents, that.navigate, that.options.actionErrorEvents, that.close);
+            that.updateEventListeners("remove");
             that.dlg.dialog("close");
+            that.events.afterClose.fire();
         };
         that.open = function (targetHref) {
             that.model.href = targetHref;
-            attachActionListeners(that.options.actionSuccessEvents, that.navigate, that.options.actionErrorEvents, that.close);
+            that.updateEventListeners("add");
             that.dlg.dialog("open");
+            that.events.afterOpen.fire();
         };
 		return that;
 	};
 	
+	cspace.confirmation.provideSuccessHandler = function (confirmation) {
+	    return function () {
+	        confirmation.updateEventListeners("remove");
+            window.location = confirmation.model.href;
+	    };
+	};
+	
 	fluid.defaults("cspace.confirmation", {
+	    successHandler: cspace.confirmation.provideSuccessHandler,
         selectors: {
 			dialog: ".csc-confirmationDialog",
             cancel: ".csc-confirmationDialogButton-cancel",
@@ -108,7 +109,9 @@ cspace = cspace || {};
             confirmationTitle: "Confirmation."
         },
         events: {
-            afterRender: null
+            afterRender: null,
+            afterOpen: null,
+            afterClose: null
         },
         confirmationTemplateUrl: "../html/Confirmation.html"
     });

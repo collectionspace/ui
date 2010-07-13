@@ -35,7 +35,8 @@ var adminUsersTester = function () {
     			baseUrl: "../../main/webapp/html/data/",
                 dataContext: {
                     options: {
-                        baseUrl: "../../main/webapp/html/data/"
+                        baseUrl: "../../main/webapp/html/data/",
+                        fileExtension: ".json"
                     }
                 },
                 details: {
@@ -61,6 +62,7 @@ var adminUsersTester = function () {
 
     var adminUsersTest = new jqUnit.TestCase("AdminUsers Tests", function () {
         cspace.util.isTest = true;
+        $(".ui-dialog").detach();
         adminUsersTest.fetchTemplate("../../main/webapp/html/administration.html", ".csc-users-userAdmin");
         testOpts = {};
         fluid.model.copyModel(testOpts, baseTestOpts);
@@ -266,15 +268,14 @@ var adminUsersTester = function () {
         var adminUsers;
         testOpts.listeners = {
             afterRender: function () {
-                
                 var userListEditorSelectors = adminUsers.userListEditor.options.selectors;
+                adminUsers.userListEditor.details.events.afterRender.addListener(function () {                
+                    var saveResult = adminUsers.userListEditor.details.requestSave();
+                    jqUnit.assertTrue("Save should succeed (validation should not prevent save)", saveResult);
+                    jqUnit.isVisible("message container is visible", userListEditorSelectors.messageContainer);
+                    start();
+                });
                 jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
-                
-                var saveResult = adminUsers.userListEditor.details.requestSave();
-                jqUnit.assertTrue("Save should succeed (validation should not prevent save)", saveResult);
-                jqUnit.isVisible("message container is visible", userListEditorSelectors.messageContainer);
-
-                start();
             }
         };
         
@@ -306,7 +307,77 @@ var adminUsersTester = function () {
         };
         adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
         stop();
-    });  
+    });
+    
+    adminUsersTest.test("Confirmation", function () {
+        var adminUsers;
+        testOpts.listeners = {
+            afterRender: function () {
+                adminUsers.userListEditor.details.events.afterRender.addListener(function () {
+                    adminUsers.userListEditor.details.events.afterRender.removeListener("initialSelect");
+                    jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());
+                    jqUnit.notVisible("Confiration dialog is invisible initially", adminUsers.userListEditor.details.confirmation.dlg);
+                    adminUsers.locate("userName").val("New Name").change();
+                    adminUsers.userListEditor.details.confirmation.events.afterOpen.addListener(function () {
+                        jqUnit.isVisible("Confiration dialog should now be visible", adminUsers.userListEditor.details.confirmation.dlg);
+                    });
+                    jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
+                    start();
+                }, "initialSelect");
+                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
+            }
+        };
+        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        stop();
+    });
+    
+    adminUsersTest.test("Confirmation cancel", function () {
+        var adminUsers;
+        testOpts.listeners = {
+            afterRender: function () {
+                adminUsers.userListEditor.details.events.afterRender.addListener(function () {
+                    adminUsers.userListEditor.details.events.afterRender.removeListener("initialSelect");                    
+                    adminUsers.locate("userName").val("New Name").change();
+                    adminUsers.userListEditor.details.confirmation.events.afterOpen.addListener(function () {
+                        adminUsers.userListEditor.details.confirmation.events.afterClose.addListener(function () {
+                            jqUnit.notVisible("Confiration dialog is now invisible", adminUsers.userListEditor.details.confirmation.dlg);
+                            jqUnit.assertEquals("User Name should still be", "New Name", adminUsers.locate("userName").val());
+                        });
+                        adminUsers.userListEditor.details.confirmation.locate("cancel", adminUsers.userListEditor.details.confirmation.dlg).click();                        
+                    });
+                    jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
+                    start();
+                }, "initialSelect");
+                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
+            }
+        };
+        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        stop();
+    });
+    
+    adminUsersTest.test("Confirmation proceed", function () {
+        var adminUsers;
+        testOpts.listeners = {
+            afterRender: function () {
+                adminUsers.userListEditor.details.events.afterRender.addListener(function () {
+                    adminUsers.userListEditor.details.events.afterRender.removeListener("initialSelect");                    
+                    adminUsers.locate("userName").val("New Name").change();
+                    adminUsers.userListEditor.details.confirmation.events.afterOpen.addListener(function () {
+                        adminUsers.userListEditor.details.events.afterRender.addListener(function () {
+                            jqUnit.notVisible("Confiration dialog is now invisible", adminUsers.userListEditor.details.confirmation.dlg);
+                            jqUnit.assertEquals("User Name should now be", "Megan Forbes", adminUsers.locate("userName").val());
+                        });
+                        adminUsers.userListEditor.details.confirmation.locate("proceed", adminUsers.userListEditor.details.confirmation.dlg).click();                        
+                    });
+                    jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
+                    start();
+                }, "initialSelect");
+                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
+            }
+        };
+        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        stop();
+    });
     
 };
 

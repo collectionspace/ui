@@ -18,16 +18,16 @@ cspace = cspace || {};
     var selectItem = function (row, model, domBinder, events, styles) {
         row = $(row);
         var rows = domBinder.locate("row");
-        var newIndex = rows.index(row);
-        rows.removeClass(styles.selected);
-        row.addClass(styles.selected);
-        model.selectionIndex = newIndex;
-        events.onSelect.fire(model);
+        var newIndex = rows.index(row);        
+        events.onSelect.fire(model, rows, events, styles, newIndex);
     };
 
     var bindEventHandlers = function (that) {
         var list = that.container;
         var rows = that.locate("row");
+        
+        that.events.onSelect.addListener(that.options.onSelectHandler);
+        
         list.fluid("selectable", {
             selectableElements: rows,
             onSelect: function (row) {
@@ -97,7 +97,15 @@ cspace = cspace || {};
         return that;
     };
     
+    cspace.recordList.onSelectHandlerDefault = function (model, rows, events, styles, newIndex) {
+        rows.removeClass(styles.selected);
+        rows.eq(newIndex).addClass(styles.selected);
+        model.selectionIndex = newIndex;
+        events.afterSelect.fire(model);    
+    };
+    
     fluid.defaults("cspace.recordList", {
+        onSelectHandler: cspace.recordList.onSelectHandlerDefault,
         selectors: {
             numberOfItems: ".csc-num-items",    // present in sidebar, not in find/edit
             nothingYet: ".csc-no-items-message",
@@ -105,6 +113,7 @@ cspace = cspace || {};
         },
         events: {
             onSelect: null,
+            afterSelect: null,
             afterRender: null
         },
         strings: {

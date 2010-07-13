@@ -30,34 +30,6 @@ cspace = cspace || {};
         };
     };
 
-    var makeShowConfirmation = function (that) {
-        return function (e) {
-            if (that.unsavedChanges) {
-            	// TODO: confirmation only works on element clicks that have an href
-            	// http://issues.collectionspace.org/browse/CSPACE-1813
-                that.confirmation.open($(this).attr("href"));
-                return false;
-            }
-        };
-    };
-
-	var setupConfirmation = function (that) {
-	    
-        var confirmationOpts = {
-            action: that.requestSave,
-            actionSuccessEvents: [that.events.afterCreateObjectDataSuccess, that.events.afterUpdateObjectDataSuccess],
-            actionErrorEvents: [that.events.onError]
-        };
-        
-        that.confirmation = fluid.initSubcomponent(that, "confirmation", [
-            that.container,
-            $.extend(true, confirmationOpts, that.options.confirmation.options) 
-        ]);
-
-        var showConf = makeShowConfirmation(that);
-        $(that.options.selectors.confirmationInclude + ":not(" + that.options.selectors.confirmationExclude + ")").live("click", showConf);
-    };
-
     var validateIdentificationNumber = function (domBinder, container, message) {
         return function () {
             var required = domBinder.locate("identificationNumber");
@@ -85,7 +57,7 @@ cspace = cspace || {};
 
     var bindEventHandlers = function (that) {
 
-        setupConfirmation(that);
+        $(that.options.selectors.confirmationInclude + ":not(" + that.options.selectors.confirmationExclude + ")").live("click", that.showConfirmation);
 
         that.events.onSave.addListener(validateIdentificationNumber(that.dom, that.container, that.options.strings.identificationNumberRequired));
 
@@ -120,22 +92,20 @@ cspace = cspace || {};
         that.dataContext.events.modelChanged.addListener(function (data) {
             that.refreshView();
         });
+        
+        that.dataContext.events.afterFetch.addListener(function () {
+            that.unsavedChanges = false;
+        });
+        
+        var setUnchanged = function () {
+            that.unsavedChanges = true;
+        };
+        
+        that.applier.modelChanged.addListener("*", setUnchanged);
 
         that.events.afterRender.addListener(function () {
             that.locate("save").click(that.requestSave);
             that.locate("deleteButton").click(that.remove);
-            var setUnchanged = function () {
-                that.unsavedChanges = true;
-            };
-            for (var selector in that.uispec) {
-                if (that.uispec.hasOwnProperty(selector)) {
-                    if (selector.indexOf(":") !== -1) {
-                        selector = selector.substring(0, selector.indexOf(":"));
-                    }
-                    var el = $(selector);
-                    el.change(setUnchanged);
-                }
-            }
             that.locate("cancel").click(function () {
                 that.locate("messageContainer", "body").hide();
                 that.events.onCancel.fire();
@@ -191,7 +161,6 @@ cspace = cspace || {};
         that.applier = applier;
         that.uispec = uispec;
         that.model = that.applier.model;
-        that.unsavedChanges = false;
 
         that.refreshView = function () {
             renderPage(that);
@@ -228,8 +197,28 @@ cspace = cspace || {};
         that.remove = function () {
             that.dataContext.remove(that.model.csid);
         };
+        
+        that.confirmation = fluid.initSubcomponent(that, "confirmation", [
+            that.container,
+            $.extend(true, {
+                action: that.requestSave,
+                actionSuccessEvents: [that.events.afterCreateObjectDataSuccess, that.events.afterUpdateObjectDataSuccess],
+                actionErrorEvents: [that.events.onError]
+            }, that.options.confirmation.options) 
+        ]);
+        
+        that.showConfirmation = function () {
+            if (that.unsavedChanges) {
+                // TODO: confirmation only works on element clicks that have an href
+                // http://issues.collectionspace.org/browse/CSPACE-1813
+                that.confirmation.open($(this).attr("href"));
+                return false;
+            }
+        };
 
         setupDataEntry(that);
+        that.unsavedChanges = false;
+
         return that;
     };
     
