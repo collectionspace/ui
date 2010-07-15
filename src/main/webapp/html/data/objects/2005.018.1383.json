@@ -1,7 +1,21 @@
 {
-    "relations": {},
+    "relations": {
+        
+    },
     "csid": "2005.018.1383",
     "fields": {
+        "objectNames": [
+            {
+                "objectName": "Some object",
+                "objectNameCurrency": "archaic",
+                "objectNameLevel": "group",
+                "objectNameSystem": "nomenclature",
+                "objectNameType": "denomination",
+                "objectNameLanguage": "ancientgreek",
+                "objectNameNote": "No note",
+                "_primary": true 
+            } 
+        ],
         "contentDescription": "41",
         "contentMethod": "50",
         "contentScript": "spencerian-method",
@@ -14,30 +28,37 @@
         "contentObjectType": "taxonomic",
         "copyNumber": "17",
         "otherNumbers": [
-            {"otherNumberType": "unknown", "otherNumber": "42",},
-            {"otherNumberType": "obsolete", "otherNumber": "7",}
+            {
+                "otherNumberType": "unknown",
+                "otherNumber": "42" 
+            },
+            {
+                "otherNumberType": "obsolete",
+                "otherNumber": "7" 
+            } 
         ],
         "otherNumberType": "obsolete",
         "otherNumber": "2",
         "age": "23",
         "objectStatus": "paralectotype",
-        "objectNameNote": "16",
         "contentOther": "53",
         "objectNumber": "2005.018.1383",
         "form": "pinned",
         "contentOtherType": "54",
-        "responsibleDepartment": [{
-            "responsibleDepartment": "ethnography",
-            "_primary": true 
-        },{
-	        "responsibleDepartment": "paleobotany"
-        }],
+        "responsibleDepartment": [
+            {
+                "responsibleDepartment": "ethnography",
+                "_primary": true 
+            },
+            {
+                "responsibleDepartment": "paleobotany" 
+            } 
+        ],
         "inscriber": "urn:cspace:org.collectionspace.demo:personauthority:id(48c74123-e547-4ff1-81d2):person:id(d2dedc9c-e91b-4fc9-b998)'Ann+Young'",
         "dateLatestCertainty": "75",
         "contentActivity": "43",
         "physicalDescription": "33",
         "dateLatestQualifier": "76",
-        "objectNameType": "14",
         "contentObject": "46",
         "objectComponentInformation": "35",
         "contentEventNameType": "52",
@@ -53,7 +74,6 @@
         "inscriptionDescriptionMethod": "69",
         "sex": "female",
         "contentEventName": "51",
-        "objectNameSystem": "13",
         "contentPosition": "45",
         "inscriptionTransliteration": "65",
         "dimensionMeasurementUnit": "stories",
@@ -63,15 +83,19 @@
         "materialComponentNote": "30",
         "numberOfObjects": "1",
         "technicalAttributeMeasurement": "78",
-        "objectNameCurrency": "11",
         "technicalAttribute": "record-speed",
         "title": "This record has every field filled in.",
-        "objectNameLanguage": "por",
         "style": "26",
         "briefDescriptions": [
-            {"briefDescription": "brief"},
-            {"briefDescription": "more brief"},
-            {"briefDescription": "less brief"}
+            {
+                "briefDescription": "brief" 
+            },
+            {
+                "briefDescription": "more brief" 
+            },
+            {
+                "briefDescription": "less brief" 
+            } 
         ],
         "contentPerson": "urn:cspace:org.collectionspace.demo:personauthority:id(48c74123-e547-4ff1-81d2):person:id(d2dedc9c-e91b-4fc9-b998)'Ann+Young'",
         "dimensionValue": "40",
@@ -82,7 +106,6 @@
         "titleTranslation": "8",
         "inscriptionDescriptionType": "estate-stamp",
         "inscriptionType": "graffiti",
-        "objectNameLevel": "12",
         "editionNumber": "22",
         "dateText": "77",
         "materialName": "31",
@@ -91,7 +114,6 @@
         "inscriptionScript": "rustic-capitals",
         "inscriptionMethod": "62",
         "dateAssociation": "71",
-        "objectName": "10",
         "dateEarliestSingleCertainty": "73",
         "csid": "fec77aa4-b37f-4e3d-9b40",
         "ageQualifier": "24",
@@ -102,38 +124,38 @@
         "color": "27",
         "inscriptionDescription": "66",
         "inscriptionPosition": "rim",
-        "comments": "6"
+        "comments": "6" 
     },
     "termsUsed": [
         {
             "sourceFieldName": "collectionobjects_common:inscriber",
             "number": "Margaret Brodie",
             "csid": "c0fd9987-7625-4b5f-bbac",
-            "recordtype": "person"
+            "recordtype": "person" 
         },
         {
             "sourceFieldName": "collectionobjects_common:contentOrganization",
             "number": "Hardie & Co.",
             "csid": "c0fd9987-7625-4b5f-foo",
-            "recordtype": "organization"
+            "recordtype": "organization" 
         },
         {
             "sourceFieldName": "collectionobjects_common:inscriptionDescriptionInscriber",
             "number": "Ann Young",
             "csid": "48c74123-e547-4ff1-81d2",
-            "recordtype": "person"
+            "recordtype": "person" 
         },
         {
             "sourceFieldName": "collectionobjects_common:contentPeople",
             "number": "Margaret Brodie",
             "csid": "c0fd9987-7625-4b5f-bbac",
-            "recordtype": "person"
+            "recordtype": "person" 
         },
         {
             "sourceFieldName": "collectionobjects_common:ContentPerson",
             "number": "Ann Young",
             "csid": "48c74123-e547-4ff1-81d2",
-            "recordtype": "person"
-        },
+            "recordtype": "person" 
+        } 
     ]
 }

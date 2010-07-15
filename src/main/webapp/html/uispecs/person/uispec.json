@@ -48,6 +48,70 @@
         ".csc-titleBar-deathDate": "${fields.deathDate}"
     },
     "recordEditor": {
+        ".csc-personAuthority-name": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.names",
+                        "protoTree": {
+                            ".csc-personAuthority-salutation": {
+                                "optionnames": [
+                                    "Dear",
+                                    "My Darling",
+                                    "Your Majaesty",
+                                    "Your Royal Highness"
+                                ],
+                                "optionlist": [
+                                    "Dear",
+                                    "My Darling",
+                                    "Your Majaesty",
+                                    "Your Royal Highness"
+                                ],
+                                "selection": "${fields.names.0.salutation}"
+                            },
+                            ".csc-personAuthority-title": {
+                                "optionnames": [
+                                    "Mr",
+                                    "Mrs",
+                                    "Ms",
+                                    "Miss",
+                                    "Dr",
+                                    "Professor",
+                                    "Sir",
+                                    "Dame",
+                                    "Baron",
+                                    "Baroness",
+                                    "Lord",
+                                    "Lady"
+                                ],
+                                "optionlist": [
+                                    "Mr",
+                                    "Mrs",
+                                    "Ms",
+                                    "Miss",
+                                    "Dr",
+                                    "Professor",
+                                    "Sir",
+                                    "Dame",
+                                    "Baron",
+                                    "Baroness",
+                                    "Lord",
+                                    "Lady"
+                                ],
+                                "selection": "${fields.names.0.title}"
+                            },
+                            ".csc-personAuthority-foreName": "${fields.names.0.foreName}",
+                            ".csc-personAuthority-middleName": "${fields.names.0.middleName}",
+                            ".csc-personAuthority-surName": "${fields.names.0.surName}",
+                            ".csc-personAuthority-nameAdditions": "${fields.names.0.nameAdditions}",
+                            ".csc-personAuthority-initials": "${fields.names.0.initials}"
+                        }
+                    }
+                }
+            ]
+        },
         ".csc-personAuthority-nameNote": "${fields.nameNote}",
         ".csc-personAuthority-deathPlace": "${fields.deathPlace}",
         ".csc-personAuthority-status": {
@@ -79,7 +143,6 @@
                 }
             ]
         },
-        ".csc-personAuthority-nameAdditions": "${fields.nameAdditions}",
         ".csc-personAuthority-gender": {
             "optionnames": [
                 "Male",
@@ -104,55 +167,7 @@
             ]
         },
         ".csc-personAuthority-occupation": "${fields.occupation}",
-        ".csc-personAuthority-middleName": "${fields.middleName}",
-        ".csc-personAuthority-surName": "${fields.surName}",
-        ".csc-personAuthority-salutation": {
-            "optionnames": [
-                "Dear",
-                "My Darling",
-                "Your Majaesty",
-                "Your Royal Highness"
-            ],
-            "optionlist": [
-                "Dear",
-                "My Darling",
-                "Your Majaesty",
-                "Your Royal Highness"
-            ],
-            "selection": "${fields.salutation}"
-        },
         ".csc-personAuthority-displayName": "${fields.displayName}",
-        ".csc-personAuthority-title": {
-            "optionnames": [
-                "Mr",
-                "Mrs",
-                "Ms",
-                "Miss",
-                "Dr",
-                "Professor",
-                "Sir",
-                "Dame",
-                "Baron",
-                "Baroness",
-                "Lord",
-                "Lady"
-            ],
-            "optionlist": [
-                "Mr",
-                "Mrs",
-                "Ms",
-                "Miss",
-                "Dr",
-                "Professor",
-                "Sir",
-                "Dame",
-                "Baron",
-                "Baroness",
-                "Lord",
-                "Lady"
-            ],
-            "selection": "${fields.title}"
-        },
         ".csc-personAuthority-group-autocomplete": {
             "decorators": [
                 {
@@ -165,7 +180,6 @@
                 }
             ]
         },
-        ".csc-personAuthority-initials": "${fields.initials}",
         ".csc-personAuthority-birthDate-container": {
             "decorators": [
                 {

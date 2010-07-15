@@ -230,7 +230,7 @@ cspace = cspace || {};
             remove: ".csc-repeatable-delete",
             primary: ".csc-repeatable-primary",
             repeat: ".csc-repeatable-repeat",
-            headerRow: ".csc-repeatable-headerRow"  
+            headerRow: ".csc-repeatable-headerRow"
         },
         events: {
             afterRender: null,
@@ -276,6 +276,7 @@ cspace = cspace || {};
         if (element.is("tr") || element.is("li")) {
             element = fluid.findAncestor(element, isListOrTable);
             element = $(element);
+            $("thead tr", element).addClass("csc-repeatable-headerRow");
         }
         
         element.wrap("<div />");

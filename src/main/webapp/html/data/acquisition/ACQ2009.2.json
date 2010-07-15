@@ -1,6 +1,19 @@
 {
     "csid": "ACQ2009.2",
     "fields": {
+        "acquisitionFunding": [{
+            "acquisitionFundingDenomination": "test1",
+            "acquisitionFundingValue": "test2",
+            "acquisitionFundingSource": "test3",
+            "acquisitionFundingSourceProvisos": "test4",
+            "_primary": false
+        }, {
+            "acquisitionFundingDenomination": "",
+            "acquisitionFundingValue": "",
+            "acquisitionFundingSource": "Source",
+            "acquisitionFundingSourceProvisos": "TEST",
+            "_primary": true
+        }],
         "acquisitionReferenceNumber": "ACQ2009.2",
     	"acquisitionDate": "",
         "acquisitionAuthorizer": "",
@@ -8,10 +21,6 @@
     	"acquisitionPriceDesc": "",
     	"objectPurchaseOfferPriceDenomination": "UK pound",
     	"objectPurchaseOfferPriceValue": "10000",
-    	"acquisitionFundingDenomination": "UK Pound",
-    	"acquisitionFundingValue": "10000",
-    	"acquisitionFundingSource": "Some nice person",
-    	"acquisitionFundingSourceProvisos": "The museum displays it",
     	"acquisitionMethod": "treasure",
     	"acquisitionSources": [],
     	"transferOfTitleNumber": "1-2-3-4",

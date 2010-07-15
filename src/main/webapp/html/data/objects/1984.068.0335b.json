@@ -3,27 +3,30 @@
     "fields": {
         "distinguishingFeatures": "These are distinguishing features.",
         "objectNumber": "1984.068.0335b",
-        "objectName": "Some object",
-        "objectNameSystem": "no system",
+        "objectNames": [{
+            "objectName": "Some object",
+            "objectNameCurrency": "archaic",
+            "objectNameLevel": "group",
+            "objectNameSystem": "nomenclature",
+            "objectNameType": "denomination",
+            "objectNameLanguage": "ancientgreek",
+            "objectNameNote": "No note",
+            "_primary": true
+        }],
         "responsibleDepartment": [{
             "responsibleDepartment": "architecture-design",
             "_primary": true 
         }],
-        "objectNameType": "sample",
         "objectTitleLanguage": "English",
         "numberOfObjects": "1",
-        "objectNameCurrency": "Estonian",
-        "title": "This record has two related cataloging records.",
-        "objectNameLanguage": "Estonian",
+		"title": "This record has two related cataloging records.",
         "briefDescriptions": [{
             "briefDescription": "This is brief description.",
             "_primary": true
         }],
         "titleType": "Sample",
         "titleTranslation": "No translation",
-        "objectNameNote": "No note",
-        "comments": "These are the comments",
-        "objectNameLevel": "Very High",
+		"comments": "These are the comments",
         "color": "blue"
     },
     "relations": {

@@ -1,16 +1,19 @@
 {
     "csid": "123.456.789",
     "fields": {
+        "names": [{
+            "salutation": "My Darling",
+            "title": "Sir",
+            "foreName": "Fred",
+            "middleName": "Rick",
+            "surName": "Bloggs",
+            "nameAdditions": "III",
+            "initials": "FRB",
+            "_primary": true
+        }],
         "displayName": "Fred Bloggs",
         "referenceNumber": "1234",
         "status": "accepted",
-		"salutation": "My Darling",
-        "title": "Sir",
-        "foreName": "Fred",
-        "middleName": "Rick",
-        "surName": "Bloggs",
-        "nameAdditions": "",
-        "initials": "FRB",
         "gender": "male",
 		"occupation": "Musician",
 		"schoolOrStyle": "His own",

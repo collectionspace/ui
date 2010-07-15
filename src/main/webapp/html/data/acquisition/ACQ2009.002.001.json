@@ -8,6 +8,13 @@
     "csid": "61807957-3001-481c-a697",
     "fields": {
         "acquisitionReferenceNumber": "2005.017",
+        "acquisitionFunding": [{
+            "acquisitionFundingDenomination": "test1",
+            "acquisitionFundingValue": "test2",
+            "acquisitionFundingSource": "test3",
+            "acquisitionFundingSourceProvisos": "test4",
+            "_primary": true
+        }],
         "acquisitionSources": [
             {
                 "acquisitionSource": "Stephen Charla",

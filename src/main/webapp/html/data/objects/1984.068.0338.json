@@ -2,19 +2,24 @@
     "csid": "1984.068.0338",
     "fields": {
         "distinguishingFeatures": "These are distinguishing features.",
+        "objectNames": [{
+            "objectName": "Some object",
+            "objectNameCurrency": "archaic",
+            "objectNameLevel": "group",
+            "objectNameSystem": "nomenclature",
+            "objectNameType": "denomination",
+            "objectNameLanguage": "ancientgreek",
+            "objectNameNote": "No note",
+            "_primary": true
+        }],
         "objectNumber": "1984.068.0338",
-        "objectName": "Some object",
-        "objectNameSystem": "no system",
         "responsibleDepartment": [{
             "responsibleDepartment": "herpetology",
             "_primary": true 
         }],
-        "objectNameType": "sample",
         "objectTitleLanguage": "English",
         "numberOfObjects": "1",
-        "objectNameCurrency": "Estonian",
-        "title": "large post-conquest Ming Dynasty Chrome pan.",
-        "objectNameLanguage": "Estonian",
+		"title": "large post-conquest Ming Dynasty Chrome pan.",
         "briefDescriptions": [
             {"briefDescription": "This is a slightly brief description."}
         ],
@@ -23,9 +28,7 @@
         ],
         "titleType": "Sample",
         "titleTranslation": "No translation",
-        "objectNameNote": "No note",
-        "comments": "These are the comments",
-        "objectNameLevel": "Very High"
+		"comments": "These are the comments"
     },
     "relations": {}
 }

@@ -46,7 +46,6 @@
         ".csc-titleBar-acquisition-reference-number": "${fields.acquisitionReferenceNumber}"
     },
     "recordEditor": {
-        ".csc-acquisition-acquisition-funding-denomination": "${fields.acquisitionFundingDenomination}",
         ".csc-acquisition-owner-row:": {
             "children": [
                 {
@@ -90,6 +89,33 @@
                 }
             }]
         },
+        ".csc-acquisition-acquisition-funding": {
+            "decorators": [{
+                "type": "fluid",
+                "func": "cspace.makeRepeatable",
+                "options": {
+                    "protoTree": {
+                        ".csc-acquisition-acquisition-funding-denomination": "${fields.acquisitionFunding.0.acquisitionFundingDenomination}",
+                        ".csc-acquisition-acquisition-funding-value": "${fields.acquisitionFunding.0.acquisitionFundingValue}",
+                        ".csc-acquisition-acquisition-funding-source": "${fields.acquisitionFunding.0.acquisitionFundingSource}",
+                        ".csc-acquisition-acquisition-funding-source-autocomplete": {
+                            "decorators": [
+                                {
+                                    "func": "cspace.autocomplete",
+                                    "type": "fluid",
+                                    "options": {
+                                        "queryUrl": "../../chain/acquisition/autocomplete/acquisitionFundingSource",
+                                        "vocabUrl": "../../chain/acquisition/source-vocab/acquisitionFundingSource"
+                                    }
+                                }
+                            ]
+                        },
+                        ".csc-acquisition-acquisition-funding-provisos": "${fields.acquisitionFunding.0.acquisitionFundingSourceProvisos}"
+                    },
+                    "elPath": "fields.acquisitionFunding"
+                }
+            }]
+        },
         ".csc-acquisition-acquisition-reason": "${fields.acquisitionReason}",
         ".csc-acquisition-authorizer-date-container": {
             "decorators": [
@@ -99,11 +125,8 @@
                 }
             ]
         },
-        ".csc-acquisition-acquisition-provisos": "${fields.acquisitionProvisos}",
-        ".csc-acquisition-acquisition-funding-value": "${fields.acquisitionFundingValue}",
+        ".csc-acquisition-acquisition-provisos": "${fields.acquisitionProvisos}",        
         ".csc-object-collection-field-collection-number": "${fields.fieldCollectionNumber}",
-        ".csc-acquisition-acquisition-funding-source": "${fields.acquisitionFundingSource}",
-        ".csc-acquisition-acquisition-funding-provisos": "${fields.acquisitionFundingSourceProvisos}",
         ".csc-acquisition-numberPatternChooser-reference-number": "${fields.acquisitionReferenceNumber}",
         ".csc-acquisition-purchaser-price-denomination": "${fields.objectPurchaseOfferPriceDenomination}",
         ".csc-acquisition-purchaser-price": "${fields.objectPurchaseOfferPriceValue}",
@@ -145,19 +168,7 @@
                 }
             ]
         },
-        ".csc-object-collection-field-collection-collector": "${fields.fieldCollector}",
-        ".csc-acquisition-acquisition-funding-source-autocomplete": {
-            "decorators": [
-                {
-                    "func": "cspace.autocomplete",
-                    "type": "fluid",
-                    "options": {
-                        "queryUrl": "../../chain/acquisition/autocomplete/acquisitionFundingSource",
-                        "vocabUrl": "../../chain/acquisition/source-vocab/acquisitionFundingSource"
-                    }
-                }
-            ]
-        },
+        ".csc-object-collection-field-collection-collector": "${fields.fieldCollector}",        
         ".csc-acquisition-purchase-price-type": "${fields.objectPurchaseOfferPriceType}",
         ".csc-acquisition-reference-number-patternChooserContainer": {
             "decorators": [
