@@ -56,6 +56,9 @@ cspace = cspace || {};
     var makeDialog = function (that) {
         var dlgOpts = that.options.searchToRelateDialog.options || {};
         dlgOpts.primaryRecordType = that.options.primaryRecordType || that.recordType;
+        if (cspace.util.useLocalData()) {
+            $.extend(true, dlgOpts, { search : { options: { searchUrlBuilder : cspace.search.localSearchUrlBuilder }}});
+        }
         return fluid.initSubcomponent(that, "searchToRelateDialog", [that.container, that.applier, dlgOpts]);
     };
     

@@ -176,13 +176,20 @@ cspace = cspace || {};
 
     cspace.search = function (container, options) {
         var that = fluid.initView("cspace.search", container, options);
-        that.locate("resultsContainer").hide();
+        
+        that.hideResults = function () {
+            that.locate("resultsContainer").hide();
+            that.locate("resultsCountContainer").hide();
+            that.locate("lookingContainer").hide();
+            that.locate("errorMessage").hide();
+        };
+        
         that.model = {
             keywords: cspace.util.getUrlParameter("keywords"),
             recordType: cspace.util.getUrlParameter("recordtype"),
             results: []
         };
-        
+
         that.search = function () {
             displayLookingMessage(that.dom, that.model.keywords);
             that.events.onSearch.fire();
@@ -190,9 +197,7 @@ cspace = cspace || {};
         };
 
         bindEventHandlers(that);
-        
-        that.locate("resultsCountContainer").hide();
-        that.locate("lookingContainer").hide();
+        that.hideResults();
 
         if (that.model.keywords) {
             that.locate("keywords").val(that.model.keywords);
@@ -202,6 +207,17 @@ cspace = cspace || {};
 
         return that;
     };
+    
+    cspace.search.localSearchUrlBuilder = function (recordType, keywords) {
+        // CSPACE-1139
+        if (recordType.indexOf("authorities-") === 0) {
+            recordType = recordType.substring(12);
+        }
+        var recordTypeParts = recordType.split('-');        
+        return "./data/" + recordTypeParts.join('/') + "/search/list.json";
+    };
+
+
 
     fluid.defaults("cspace.search", {
         selectors: {

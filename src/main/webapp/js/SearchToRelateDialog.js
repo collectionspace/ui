@@ -65,11 +65,11 @@ cspace = cspace || {};
             .dialog({
                 autoOpen: false,
                 modal: true,
-				minWidth: 700,
-				draggable: true,
+                minWidth: 700,
+                draggable: true,
                 dialogClass: "cs-search-dialog",
                 position: ['center', 100],
-				title: "Add Related Object/Procedural Record"                
+                title: "Add Related Object/Procedural Record"                
             });
         
         addDialog.parent().css("overflow", "visible");
@@ -78,20 +78,9 @@ cspace = cspace || {};
             // TODO: check why we are fetching resources after we create the dialog. 
             var templates = fluid.parseTemplates(resources, ["addDialog"], {});
             fluid.reRender(templates, addDialog, {});
-
-            // TODO: Should be pushed up.
-            var searchOpts = {
-                resultsSelectable: true
-            };
-            if (cspace.util.useLocalData()) {
-                searchOpts.searchUrlBuilder = function (recordType, query) {
-                    var recordTypeParts = recordType.split('-');        
-                    return "./data/" + recordTypeParts.join('/') + "/search/list.json";
-                };
-            }
-            // TODO: Should be a subcomponent.
-            // Like this: that.search = fluid.initSubcomponent(that, "search", [$(".main-search-page", ".cs-search-dialog"), fluid.COMPONENT_OPTIONS]);
-            that.search = cspace.search(".main-search-page", searchOpts);
+            // TODO: We are hard coding a selector in here for search. 
+            //       The selector should conform to cspace standards and should be specified in the options block
+            that.search = fluid.initSubcomponent(that, "search", [$(".main-search-page"), fluid.COMPONENT_OPTIONS]);
             
             bindEventHandlers(that, addDialog);
             
@@ -111,7 +100,7 @@ cspace = cspace || {};
             var selectBoxContainer = that.locate("selectBoxContainer", that.dlg);
             selectBoxContainer.empty();
             selectBoxContainer.append(that.locate(type + "Selecter", that.dlg).clone());
-            that.locate("searchResults", that.dlg).hide();
+            that.search.hideResults();
         };
 
         return that;
@@ -120,7 +109,6 @@ cspace = cspace || {};
     fluid.defaults("cspace.searchToRelateDialog", {
         selectors: {
             addButton: ".csc-relate-button",
-            searchResults: ".csc-search-results",
             recordTypeString: ".csc-record-type",
             selectBoxContainer: ".csc-select-box-container",
             selectBoxes: ".csc-select-boxes",
@@ -136,6 +124,12 @@ cspace = cspace || {};
             addRelations: null,
             onCreateNewRecord: null,
             afterRender: null
+        },
+        search: {
+            type: "cspace.search",
+            options: {
+                resultsSelectable: true
+            }
         }
     });
 })(jQuery, fluid);
