@@ -89,7 +89,7 @@ cspace = cspace || {};
         that.events.pageReady.fire();
     };
     
-    var createEmptyModel = function () {
+    var createBaseModel = function () {
         return {
             csid: null,
             fields: {},
@@ -99,7 +99,8 @@ cspace = cspace || {};
     };
     
     var setUpPageBuilder = function (that) {
-        that.model = createEmptyModel();        
+        that.model = createBaseModel();
+        cspace.util.createEmptyModel(that.model, that.uispec);
         that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
         that.dataContext.events.afterFetch.addListener(function () {
             setupModelAndDependencies(that);

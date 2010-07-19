@@ -65,5 +65,48 @@ cspace = cspace || {};
         var url = window.location.pathname;
         return ".\/config" + url.substring(url.lastIndexOf("/"), url.indexOf(".html")) + ".json";
     };
-
+    
+    var buildModelStructure = function (model, elPath) {
+        var keys = elPath.split(".");        
+        for (var index = 0; index < keys.length - 1; index++) {
+            var key = keys[index];            
+            var isArray = keys[index + 1] === "0";
+            if (typeof(model) === "object" && typeof(model.length) === "number") {
+                if (model.length === 0) {
+                    model.push({});
+                }                
+                model = model[0];
+            }
+            model[key] = model[key] || (isArray ? [] : {});            
+            model = model[key];
+            index += isArray ? 1 : 0;
+        }
+    };
+    
+    cspace.util.createEmptyModel = function (model, uispec) {
+        for (var key in uispec) {
+            if (!uispec.hasOwnProperty(key)) {
+                continue;                
+            }
+            var value = uispec[key];
+            if (!value) {
+                continue;
+            }
+            var type = typeof(value);
+            switch (type) {
+                case "object":
+                    cspace.util.createEmptyModel(model, value);
+                    break;
+                case "string":
+                    var i1 = value.indexOf("${");
+                    var i2 = value.indexOf("}");
+                    if (i1 === 0 && i2 !== -1 && value.search(/.0./gi) > -1) {
+                        buildModelStructure(model, value.substring(2, i2));
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 })(jQuery, fluid);
