@@ -13,7 +13,7 @@
             "objectNameNote": "No note",
             "_primary": true
         }],
-        "responsibleDepartment": [{
+        "responsibleDepartments": [{
             "responsibleDepartment": "architecture-design",
             "_primary": true 
         }],
