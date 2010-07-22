@@ -13,6 +13,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+    fluid.log("Tabs.js loaded");
 
     var buildTabs = function (that) {
         var tabs = $("<ul></ul>", that.container[0].ownerDocument);

@@ -14,6 +14,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+    fluid.log("SearchToRelateDialog.js loaded");
 
     var handleAddClick = function (that) {
         return function () {

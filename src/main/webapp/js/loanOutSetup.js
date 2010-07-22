@@ -16,6 +16,7 @@ cspace = cspace || {};
 (function ($) {
 
     cspace.loanOutSetup = function () {
+        fluid.log("loanOutSetup.js loaded");
 
         var tbOpts = {
             uispec: "{pageBuilder}.uispec.titleBar"

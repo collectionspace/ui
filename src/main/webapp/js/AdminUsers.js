@@ -14,6 +14,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+    fluid.log("AdminUsers.js loaded");
 
     var validate = function (domBinder, userDetailsApplier, passwordValidator) {
         // In the default configuration, the email address used as the userid.

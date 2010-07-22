@@ -13,6 +13,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+    fluid.log("PageBuilder.js loaded");
 
     var injectElementsOfType = function (container, elementType, elements) {
         if (!elements || elements.length < 1) {
@@ -78,14 +79,18 @@ cspace = cspace || {};
             if (that.dependencies.hasOwnProperty(region)) {
                 var dep = that.dependencies[region];
                 expandOptions(that, dep.args);
+                fluid.log("PageBuilder.js before executing " + dep.funcName);
                 that.components[region] = fluid.invokeGlobalFunction(dep.funcName, dep.args);
+                fluid.log("PageBuilder.js after executing " + dep.funcName);
             }
         }
     };
 
     var setupModelAndDependencies = function (that) {
         that.applier = fluid.makeChangeApplier(that.model);    
+        fluid.log("PageBuilder.js before invoking dependencies");
         invokeDependencies(that);
+        fluid.log("PageBuilder.js after invoking dependencies");        
         that.events.pageReady.fire();
     };
     
@@ -101,6 +106,7 @@ cspace = cspace || {};
     var setUpPageBuilder = function (that) {
         that.model = createBaseModel();
         cspace.util.createEmptyModel(that.model, that.uispec);
+        fluid.log("PageBuilder.js after creating empty model");
         that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
         that.dataContext.events.afterFetch.addListener(function () {
             setupModelAndDependencies(that);
@@ -108,13 +114,16 @@ cspace = cspace || {};
         
         if (that.options.csid) {
             that.dataContext.fetch(that.options.csid);
+            fluid.log("PageBuilder.js after fetching record " + that.options.csid);
         } else {
             setupModelAndDependencies(that);
         }
     };
 
     var assembleHTML = function (that) {
+        fluid.log("PageBuilder.js before fetching resources");
         fluid.fetchResources(that.options.pageSpec, function (resourceSpecs) {
+            fluid.log("PageBuilder.js after fetching resources");
             for (var regionName in resourceSpecs) {
                 if (resourceSpecs.hasOwnProperty(regionName) && (regionName !== "callbackCalled")) {
                     var region = resourceSpecs[regionName];
@@ -138,7 +147,9 @@ cspace = cspace || {};
 
         fluid.mergeComponentOptions(that, "cspace.pageBuilder", options);
         fluid.instantiateFirers(that, that.options);
-        
+
+        fluid.log("PageBuilder.js before checking loginstatus");
+
         // TODO: We should consider refactoring this work. We have several calls to the server that need
         //       to happen synchronously - perhaps it should be rolled into a single call.
         
@@ -153,6 +164,7 @@ cspace = cspace || {};
                 dataType: "json",
                 success: function (data, textStatus) {
                     loginRedirect = !data.login;
+                    fluid.log("PageBuilder.js after checking loginstatus");
                 }
             });
             
@@ -163,6 +175,7 @@ cspace = cspace || {};
             }
         }
             
+        fluid.log("PageBuilder.js before fetching uispec");
             
         // Fetch UI spec if required
         if (!that.uispec && that.options.pageType) {
@@ -184,6 +197,7 @@ cspace = cspace || {};
                 dataType: "json",
                 success: function (data, textStatus) {
                     that.uispec = data;
+                    fluid.log("PageBuilder.js after fetching uispec");
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     fluid.fail("Error fetching " + that.options.pageType + " uispec:" + textStatus);

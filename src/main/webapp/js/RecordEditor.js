@@ -14,6 +14,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+    fluid.log("RecordEditor.js loaded");
 
     // operation = one of "create", "delete", "fetch", "update"
     var makeDCErrorHandler = function (that) {
@@ -56,7 +57,6 @@ cspace = cspace || {};
     };
 
     var bindEventHandlers = function (that) {
-
         $(that.options.selectors.confirmationInclude + ":not(" + that.options.selectors.confirmationExclude + ")").live("click", that.showConfirmation);
 
         that.events.onSave.addListener(validateIdentificationNumber(that.dom, that.container, that.options.strings.identificationNumberRequired));
@@ -123,12 +123,16 @@ cspace = cspace || {};
     };
     
     var renderPage = function (that) {
+        fluid.log("RecordEditor.js renderPage start");
         var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
         var protoTree = cspace.renderUtils.buildProtoTree(that.uispec, that);
+        fluid.log("RecordEditor.js after buildProtoTree");
         var tree = expander(protoTree);
         cspace.renderUtils.fixSelectionsInTree(tree);
+        fluid.log("RecordEditor.js after tree is fixed");
         var selectors = {};
         cspace.renderUtils.buildSelectorsFromUISpec(that.uispec, selectors);
+        fluid.log("RecordEditor.js after building selectors");
         var renderOpts = {
             cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(selectors, {}),
             model: that.model,
@@ -136,11 +140,15 @@ cspace = cspace || {};
             autoBind: true,
             applier: that.applier
         };
+        
+        fluid.log("RecordEditor.js before render");
         if (that.template) {
             fluid.reRender(that.template, that.container, tree, renderOpts);
+            fluid.log("RecordEditor.js after reRender");
         }
         else {
             that.template = fluid.selfRender(that.container, tree, renderOpts);
+            fluid.log("RecordEditor.js after selfRender");
         }
         // TODO: This comparison against test@collectionspace.org is a hack put in place for the 0.6
         // release to prevent testers from deleting the test account. It should be removed asap
@@ -150,6 +158,7 @@ cspace = cspace || {};
             that.locate("deleteButton").removeAttr("disabled").removeClass("deactivate");
         }
         that.events.afterRender.fire();
+        fluid.log("RecordEditor.js renderPage end");
     };
 
     /**

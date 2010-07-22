@@ -14,6 +14,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+    fluid.log("Search.js loaded");
 
     var displayLookingMessage = function (domBinder, keywords) {
         domBinder.locate("resultsCountContainer").hide();

@@ -13,7 +13,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
-    
+    fluid.log("RelatedRecordsList.js loaded");
+
     // TODO: This has to be done in the app layer i.e. provide an array of procedures in relations block.
     // This way wouldn't have to write this work around. Related to CSPACE-1977.
     var buildRelationsList = function (relations, recordType) {

@@ -14,6 +14,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+    fluid.log("Sidebar.js loaded");
 
     cspace.sidebar = function (container, applier, options) {
         var that = fluid.initView("cspace.sidebar", container, options);

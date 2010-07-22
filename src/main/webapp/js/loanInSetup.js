@@ -14,6 +14,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($) {
+    fluid.log("loanInSetup.js loaded");
 
     /**
      * options: {

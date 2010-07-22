@@ -13,6 +13,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+    fluid.log("permissions.js loaded");
 
     cspace.permissions = function (container, options) {
         var that = fluid.initView("cspace.permissions", container, options);

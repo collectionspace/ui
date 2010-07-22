@@ -16,6 +16,7 @@ cspace = cspace || {};
 (function ($) {
 
     cspace.intakeSetup = function () {
+        fluid.log("intakeSetup.js loaded");
 
         var tbOpts = {
             uispec: "{pageBuilder}.uispec.titleBar"

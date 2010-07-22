@@ -14,7 +14,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
-    
+    fluid.log("RelatedRecordsTab.js loaded");
+ 
     var bindEventHandlers = function (that) {
         var elPath = "relations." + that.recordType;
         that.applier.modelChanged.addListener(elPath, function () {

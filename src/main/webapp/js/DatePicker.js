@@ -13,7 +13,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
-	
+    fluid.log("DatePicker.js loaded");
+
 	var keyCode = function (evt) {
         return evt.keyCode ? evt.keyCode : (evt.which ? evt.which : 0);          
     };

@@ -15,6 +15,8 @@ cspace = cspace || {};
 (function ($) {
 
     cspace.setupCreateNew = function () {
+        fluid.log("createNewSetup.js loaded");
+
         var options = {
             pageSpec: {
                 header: {

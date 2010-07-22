@@ -13,6 +13,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($) {
+    fluid.log("searchSetup.js loaded");
 
     cspace.searchSetup = function () {
         

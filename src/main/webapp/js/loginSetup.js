@@ -15,6 +15,8 @@ cspace = cspace || {};
 (function ($) {
 
     cspace.loginSetup = function(){
+        fluid.log("loginSetup.js loaded");
+
         var loginOpts = {};
 
         cspace.login(".csc-login", loginOpts);

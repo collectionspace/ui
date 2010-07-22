@@ -14,7 +14,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($) {
-    
+    fluid.log("PageSetup.js loaded");
+
     var fetchConfig = function (that, callback) {
         $.ajax({
             url: that.options.configURL || cspace.util.getDefaultConfigURL(),

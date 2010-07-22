@@ -15,6 +15,7 @@ cspace = cspace || {};
 (function ($) {
 
     cspace.adminSetup = function () {
+        fluid.log("adminSetup.js loaded");
 
         var adminOpts = {
             uispec: "{pageBuilder}.uispec"

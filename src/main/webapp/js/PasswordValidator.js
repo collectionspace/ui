@@ -14,6 +14,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+    fluid.log("PasswordValidator.js loaded");
 
     var bindEvents = function (that) {
         var pwField = that.locate("passwordField");

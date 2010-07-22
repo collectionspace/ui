@@ -14,6 +14,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+    fluid.log("objectTabSetup.js loaded");
 
     cspace.objectTabSetup = function (applier, options) {
         

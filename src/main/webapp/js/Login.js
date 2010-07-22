@@ -14,6 +14,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+    fluid.log("Login.js loaded");
+
     var showSignIn = function (domBinder) {
         domBinder.locate("signIn").show();
         domBinder.locate("userID").focus();

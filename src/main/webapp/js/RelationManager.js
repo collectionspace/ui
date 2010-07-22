@@ -14,7 +14,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
-    
+    fluid.log("RelationManager.js loaded");
+
     var updateRelations = function (applier, recordType) {
         // TODO: Fluid transform candidate.
         return function (relations) {

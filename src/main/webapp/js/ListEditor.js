@@ -14,6 +14,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+    fluid.log("ListEditor.js loaded");
 
     var hideDetails = function (domBinder) {
         domBinder.locate("details").hide();

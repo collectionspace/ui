@@ -13,6 +13,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+    fluid.log("Renderer.js loaded");
 
     var replaceIndex = function (comp, oldInd, newInd) {
         var re = new RegExp(oldInd, "g");

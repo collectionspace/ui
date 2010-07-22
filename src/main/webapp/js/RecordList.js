@@ -14,6 +14,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+    fluid.log("RecordList.js loaded");
 
     var selectItem = function (row, model, domBinder, events, styles) {
         row = $(row);

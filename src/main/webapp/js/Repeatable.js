@@ -14,7 +14,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
-    
+    fluid.log("Repeatable.js loaded");
+
     // TODO: Account for an elPath into the model that points to undefined: not known whether it is a simple field or an object/row.
     //       We need to write a test for this but I think it is fixed now
     var addRow = function (fields) {

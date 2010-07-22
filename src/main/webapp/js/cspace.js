@@ -12,6 +12,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 /*global jQuery, window, cspace*/
 
 var cspace = cspace || {};
+//fluid.setLogging(true);
+fluid.log("cspace.js loaded");
 
 function ShowHide(toggleme, source) {
 	jQuery(toggleme).toggle();
@@ -41,7 +43,6 @@ function getRadioValue() {
 
 
 jQuery(document).ready(function() {
-
 	
 	$currentFocus = null;
 	jQuery(':input').focus( function() {

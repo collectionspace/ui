@@ -13,6 +13,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+    fluid.log("Autocomplete.js loaded");
 
     var parseLabelFromUrn = function (string) {
         if (string.substring(0, 4) === "urn:") {
@@ -148,6 +149,7 @@ cspace = cspace || {};
 
         setupAutocomplete(that);
         setUpConfirmation(that);
+
         return that;
     };
 

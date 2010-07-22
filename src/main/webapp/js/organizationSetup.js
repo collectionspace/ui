@@ -16,6 +16,7 @@ cspace = cspace || {};
 (function ($) {
 
     cspace.organizationSetup = function () {
+        fluid.log("organizationSetup.js loaded");
 
         var tabOpts = {
             tabList: [

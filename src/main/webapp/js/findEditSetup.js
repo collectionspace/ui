@@ -13,6 +13,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($) {
+    fluid.log("findEditSetup.js loaded");
 
     var buildUrl = function (recordType) {
         if (cspace.util.useLocalData()) {

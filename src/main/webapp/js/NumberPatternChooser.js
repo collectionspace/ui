@@ -13,6 +13,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
+    fluid.log("NumberPatternChooser.js loaded");
 
     var buildTree = function (model) {
         // If no model return empty component tree.
@@ -174,7 +175,6 @@ cspace = cspace || {};
         };
         
         setupChooser(that);
-
         return that;
     };
 
