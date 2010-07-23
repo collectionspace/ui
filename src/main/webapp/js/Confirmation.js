@@ -26,7 +26,7 @@ cspace = cspace || {};
 		that.locate("cancel", that.dlg).click(function () {
             that.close();
         });
-		that.locate("closeButton", that.dlg).click(function () {
+		that.locate("close", that.dlg).click(function () {
             that.close();
         });
         that.locate("proceed", that.dlg).click(function (e) {
@@ -35,57 +35,105 @@ cspace = cspace || {};
         that.locate("act", that.dlg).click(function (e) {
             that.options.action();
         });
+        that.dlg.bind("dialogclose", function () {
+            that.events.afterClose.fire();
+        });
+        that.dlg.bind("dialogopen", function () {
+            that.events.afterOpen.fire();
+        });
+	};
+	
+	var addButtonToTree = function (id, strings) {
+	    return {
+            ID: id,
+            decorators: {
+                type: "attrs",
+                attributes: {
+                    alt: strings[id + "Alt"],
+                    value: strings[id + "Text"]
+                } 
+            }
+        };
+	};
+	
+	var buildTree = function (strings, enableButtons) {	    
+	    var tree = {
+	        children: [{
+	            ID: "message:",
+                messagekey: "primaryMessage"
+	        }, {
+                ID: "close",
+                decorators: {
+                    type: "attrs",
+                    attributes: {
+                        alt: strings.closeAlt                        
+                    }
+                }
+            }]
+	    };
+	    
+	    $.each(enableButtons, function (index, button) {
+	        tree.children.push(addButtonToTree(button, strings));
+	    });
+                
+        if (strings.secondaryMessage) {
+            tree.children.push({
+                ID: "message:",
+                messagekey: "secondaryMessage"
+            });
+        }
+        
+	    return tree;
 	};
 	
     var setupConfirmation = function (that) {
         var resources = {
             confirmation: {
-                href: that.options.confirmationTemplateUrl
+                href: that.options.confirmationTemplateUrl,
+                cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(that.options.selectors, {})
             }
         };
-        
-        var confirmation = $("<div></div>", that.container[0].ownerDocument)
-            .html(that.options.strings.confirmation)
-            .dialog({
-                autoOpen: false,
-                modal: true,
-                title: that.options.strings.confirmationTitle
-            });
-        
-        confirmation.parent().css("overflow", "visible");
-        
         fluid.fetchResources(resources, function () {
-            var templates = fluid.parseTemplates(resources, ["confirmation"], {});
-            fluid.reRender(templates, confirmation, {});
-            bindEvents(that);
-            that.events.afterRender.fire();
+            that.templates = fluid.parseTemplates(resources, ["confirmation"], {});
+            that.dlg = $("<div></div>", that.container[0].ownerDocument)
+                .dialog({
+                    autoOpen: false,
+                    modal: true,
+                    title: that.options.strings.confirmationTitle
+                });
+            that.refreshView();
+            that.events.afterFetchTemplate.fire();
         });
-
-        return confirmation;
     };
 
 	cspace.confirmation = function (container, options) {
 		var that = fluid.initView("cspace.confirmation", container, options);
-        that.model = {href: "#"};
-
-        that.dlg = setupConfirmation(that);
+        that.model = {href: "#"};   // destination to nav to on successful navigation
         
         that.updateEventListeners = function (action) {
             updateHandlerForEvents(action, that.options.actionSuccessEvents, that.options.successHandler(that));
             updateHandlerForEvents(action, that.options.actionErrorEvents, that.close);
-        };        
+        };
+        
+        that.refreshView = function () {
+            fluid.reRender(that.templates, that.dlg, buildTree(that.options.strings, that.options.enableButtons), {
+                messageLocator: fluid.messageLocator(that.options.strings, fluid.stringTemplate)
+            });
+            bindEvents(that);
+            that.events.afterRender.fire();
+        };
         
         that.close = function () {
             that.updateEventListeners("remove");
             that.dlg.dialog("close");
-            that.events.afterClose.fire();
         };
         that.open = function (targetHref) {
             that.model.href = targetHref;
             that.updateEventListeners("add");
             that.dlg.dialog("open");
-            that.events.afterOpen.fire();
         };
+        
+        setupConfirmation(that);
 		return that;
 	};
 	
@@ -99,20 +147,32 @@ cspace = cspace || {};
 	fluid.defaults("cspace.confirmation", {
 	    successHandler: cspace.confirmation.provideSuccessHandler,
         selectors: {
-			dialog: ".csc-confirmationDialog",
             cancel: ".csc-confirmationDialogButton-cancel",
             proceed: ".csc-confirmationDialogButton-proceed",
             act: ".csc-confirmationDialogButton-save",
-			closeButton: ".csc-confirmationDialog-closeBtn"
+			close: ".csc-confirmationDialog-closeBtn",
+			// Had to add a : because we currently can not use the expander
+			// with repeating rows and message bundle at the same time.
+			"message:": ".csc-confirmationDialog-text"
         },
+        enableButtons: ["act", "proceed", "cancel"],    // selector names
         strings: {
-            confirmation: "You are about to navigate from the current record. Please confirm...",
-            confirmationTitle: "Confirmation."
+            primaryMessage: "You are about to leave this record.",
+            secondaryMessage: "Save Changes?",
+            confirmationTitle: "Confirmation.",
+            actText: "Save",
+            actAlt: "save and proceed",
+            cancelText: "Cancel",
+            cancelAlt: "cancel",
+            proceedText: "Don't Save",
+            proceedAlt: "proceed without saving",
+            closeAlt: "close dialog"
         },
         events: {
             afterRender: null,
             afterOpen: null,
-            afterClose: null
+            afterClose: null,
+            afterFetchTemplate: null
         },
         confirmationTemplateUrl: "../html/Confirmation.html"
     });

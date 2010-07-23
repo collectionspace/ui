@@ -204,7 +204,34 @@ cspace = cspace || {};
         };
         
         that.remove = function () {
-            that.dataContext.remove(that.model.csid);
+            var oldOptions = {}; 
+            fluid.model.copyModel(oldOptions, that.confirmation.options);
+            $.extend(true, that.confirmation.options, {
+                action: function () {
+                    that.dataContext.remove(that.model.csid);
+                },
+                actionSuccessEvents: [that.dataContext.events.afterRemove, that.confirmation.events.afterClose],
+                successHandler: function (confirmation) {
+                    return function () {
+                        if (confirmation.dlg.dialog("isOpen")) {
+                            confirmation.close();                            
+                        }
+                        else {
+                            confirmation.options = oldOptions;
+                            confirmation.refreshView();
+                        }
+                    };
+                },
+                enableButtons: ["act", "cancel"],
+                strings: {
+                    primaryMessage: "Delete this record?",
+                    secondaryMessage: "",
+                    actText: "Delete",
+                    actAlt: "delete record"
+                }
+            });
+            that.confirmation.refreshView();
+            that.confirmation.open();
         };
         
         that.confirmation = fluid.initSubcomponent(that, "confirmation", [

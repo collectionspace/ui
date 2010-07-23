@@ -14,15 +14,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 (function () {
 
     var saveAction = function () {
-        console.log("save me");
+        fluid.log("save me");
     };
     
     var afterSuccessSave = function () {
-        console.log("success save");
+        fluid.log("success save");
     };
     
     var onError = function () {
-        console.log("error");
+        fluid.log("error");
     };
     
     var baseTestOpts = {
@@ -47,13 +47,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         testOpts.listeners = {
             afterRender: function () {
                 var expectedDefaultHREF = "#";
-                jqUnit.assertTrue("dialog is on the page", jQuery(confirmation.options.selectors.dialog).length !== 0);
-                jqUnit.notVisible("dialog is not visible", jQuery(confirmation.options.selectors.dialog));
+                jqUnit.assertTrue("dialog is on the page", jQuery(".csc-confirmationDialog").length !== 0);
+                jqUnit.notVisible("dialog is not visible", jQuery(".csc-confirmationDialog"));
                 jqUnit.assertTrue("href is expected string", confirmation.model.href === expectedDefaultHREF);
 
                 var expectedHREF = "";
                 confirmation.open(expectedHREF);
-                jqUnit.isVisible("dialog is visible", jQuery(confirmation.options.selectors.dialog));
+                jqUnit.isVisible("dialog is visible", jQuery(".csc-confirmationDialog"));
                 jqUnit.assertTrue("href is expected string", confirmation.model.href === expectedHREF);
                 start();
             }

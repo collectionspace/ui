@@ -12,9 +12,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 "use strict";
 
 (function () {
-    // jqMock requires jqUnit.ok to exist
-    jqUnit.ok = ok;
-
+    var recordEditor;
     var baseOpts = {
         confirmation: {
             options: {
@@ -22,9 +20,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         }
     };
+    cspace.util.isTest = true;
 
-    var recordEditorTest = new jqUnit.TestCase("recordEditor Tests", function () {
-        cspace.util.isTest = true;
+    var recordEditorTest = new jqUnit.TestCase("recordEditor Tests", null, function () {
+        $(".ui-dialog").detach();
     });
     
     recordEditorTest.test("Creation", function () {
@@ -42,19 +41,21 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             ".csc-test-3": "${fields.field3}"
         };
         var applier = fluid.makeChangeApplier(testModel);
-        var recordEditor = cspace.recordEditor("#main", dc, applier, uispec, baseOpts);
-        jqUnit.assertEquals("foo", testModel.fields.field1, jQuery(".csc-test-1").val());
-    });
-
-    recordEditorTest.test("Delete", function () {
-        var ajaxMock = new jqMock.Mock(jQuery, "ajax");
-        var expectedAjaxParams = {
-            url: "http://mymuseum.org/thisRecordType/123.456.789",
-            dataType: "json",
-            type: "DELETE"
+        var opts = {};
+        fluid.model.copyModel(opts, baseOpts);
+        opts.listeners = {
+            afterRender: function () {
+                jqUnit.assertEquals("foo", testModel.fields.field1, jQuery(".csc-test-1").val());
+                start();
+            }
         };
-        ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams));
-
+        recordEditor = cspace.recordEditor("#main", dc, applier, uispec, opts);
+        stop();
+    });
+    
+    recordEditorTest.test("Delete", function () {
+        var opts = {};
+        fluid.model.copyModel(opts, baseOpts);
         var testModel = {
             csid: "123.456.789",
             fields: {}
@@ -62,10 +63,24 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var dc = cspace.dataContext(testModel, {baseUrl: "http://mymuseum.org", recordType: "thisRecordType"});
         var uispec = {};
         var applier = fluid.makeChangeApplier(testModel);
-        var recordEditor = cspace.recordEditor("#main", dc, applier, uispec, baseOpts);
-        recordEditor.remove();
-        ajaxMock.verify();
-        ajaxMock.restore();
+        $.extend(true, opts, {
+            confirmation: {
+                options: {
+                    listeners: {
+                        afterFetchTemplate: function () {                                                                
+                            recordEditor.remove();
+                            recordEditor.dataContext.events.afterRemove.addListener(function () {
+                                jqUnit.assertTrue("Successfully executed remove", true);
+                                start();
+                            });
+                            recordEditor.confirmation.locate("act", recordEditor.confirmation.dlg).click();
+                        }
+                    }
+                }
+            }
+        });
+        recordEditor = cspace.recordEditor("#main", dc, applier, uispec, opts);
+        stop();
     });
 
 }());

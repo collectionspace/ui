@@ -9,10 +9,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jqUnit, jQuery, jqMock, cspace, fluid, start, stop, ok, expect*/
+"use strict";
 
 var adminUsersTester = function () {
 
-	// jqMock requires jqUnit.ok to exist
+    // jqMock requires jqUnit.ok to exist
     jqUnit.ok = ok;
     
     var testUISpec = {};
@@ -32,7 +33,7 @@ var adminUsersTester = function () {
         uispec: testUISpec,
         userListEditor: {
             options: {
-    			baseUrl: "../../main/webapp/html/data/",
+                baseUrl: "../../main/webapp/html/data/",
                 dataContext: {
                     options: {
                         baseUrl: "../../main/webapp/html/data/",
@@ -54,15 +55,15 @@ var adminUsersTester = function () {
 
     var testOpts;
     var testDataCreateUser = {
-    	email: "rj@dio.com",
-    	userName: "R J Dio",
-    	validPassword: "123456789",
-    	invalidPassword: "123"
+        email: "rj@dio.com",
+        userName: "R J Dio",
+        validPassword: "123456789",
+        invalidPassword: "123"
     };
 
     var adminUsersTest = new jqUnit.TestCase("AdminUsers Tests", function () {
         cspace.util.isTest = true;
-        $(".ui-dialog").detach();
+        jQuery(".ui-dialog").detach();
         adminUsersTest.fetchTemplate("../../main/webapp/html/administration.html", ".csc-users-userAdmin");
         testOpts = {};
         fluid.model.copyModel(testOpts, baseTestOpts);
@@ -96,7 +97,7 @@ var adminUsersTester = function () {
         var adminUsers;
         testOpts.listeners = {
             afterRender: function () {
-        		var userListEditorSelectors = adminUsers.userListEditor.options.selectors;
+                var userListEditorSelectors = adminUsers.userListEditor.options.selectors;
                 jQuery(userListEditorSelectors.addNewListRowButton).click();
                 
                 var adminUsersSelectors = adminUsers.options.selectors;                
@@ -127,7 +128,7 @@ var adminUsersTester = function () {
         var adminUsers;
         testOpts.listeners = {
             afterRender: function () {
-            	jQuery(adminUsers.userListEditor.options.selectors.addNewListRowButton).click();
+                jQuery(adminUsers.userListEditor.options.selectors.addNewListRowButton).click();
                 
                 var adminUsersSelectors = adminUsers.options.selectors;                
                 jQuery(adminUsersSelectors.email).val(testDataCreateUser.email).change();
@@ -141,16 +142,16 @@ var adminUsersTester = function () {
                     dataType: "json",
                     type: "POST",
                     data: JSON.stringify({
-               			fields: {
-               				status: "",
-               				email: testDataCreateUser.email,
-               				screenName: testDataCreateUser.userName,
-               				password: testDataCreateUser.validPassword,
-               				passwordConfirm: testDataCreateUser.validPassword,
-               				userId: testDataCreateUser.email
-               			},
-               			csid: ""
-               		})
+                        fields: {
+                            status: "",
+                            email: testDataCreateUser.email,
+                            screenName: testDataCreateUser.userName,
+                            password: testDataCreateUser.validPassword,
+                            passwordConfirm: testDataCreateUser.validPassword,
+                            userId: testDataCreateUser.email
+                        },
+                        csid: ""
+                    })
                 };
                 
                 ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams));               
@@ -194,7 +195,7 @@ var adminUsersTester = function () {
         var adminUsers;
         testOpts.listeners = {
             afterRender: function () {
-        		var userListEditorSelectors = adminUsers.userListEditor.options.selectors;
+                var userListEditorSelectors = adminUsers.userListEditor.options.selectors;
                 jQuery(userListEditorSelectors.addNewListRowButton).click();
                 
                 var adminUsersSelectors = adminUsers.options.selectors;                
@@ -218,7 +219,7 @@ var adminUsersTester = function () {
         var adminUsers;
         testOpts.listeners = {
             afterRender: function () {
-        		var userListEditorSelectors = adminUsers.userListEditor.options.selectors;
+                var userListEditorSelectors = adminUsers.userListEditor.options.selectors;
                 jQuery(userListEditorSelectors.addNewListRowButton).click();
                 
                 var adminUsersSelectors = adminUsers.options.selectors;                
@@ -243,7 +244,7 @@ var adminUsersTester = function () {
         var adminUsers;
         testOpts.listeners = {
             afterRender: function () {
-        		var userListEditorSelectors = adminUsers.userListEditor.options.selectors;
+                var userListEditorSelectors = adminUsers.userListEditor.options.selectors;
                 jQuery(userListEditorSelectors.addNewListRowButton).click();
                 
                 var adminUsersSelectors = adminUsers.options.selectors;                
@@ -357,19 +358,39 @@ var adminUsersTester = function () {
     
     adminUsersTest.test("Confirmation proceed", function () {
         var adminUsers;
-        testOpts.listeners = {
-            afterRender: function () {
-                adminUsers.userListEditor.details.events.afterRender.addListener(function () {
-                    adminUsers.userListEditor.details.events.afterRender.removeListener("initialSelect");                    
+        testOpts.userListEditor.options.details.options.confirmation.options.listeners = {
+            afterFetchTemplate: function () {
+                var re = adminUsers.userListEditor.details;
+                re.events.afterRender.addListener(function () {
+                    re.events.afterRender.removeListener("initialSelect");                    
                     adminUsers.locate("userName").val("New Name").change();
-                    adminUsers.userListEditor.details.confirmation.events.afterOpen.addListener(function () {
-                        adminUsers.userListEditor.details.events.afterRender.addListener(function () {
-                            jqUnit.notVisible("Confiration dialog is now invisible", adminUsers.userListEditor.details.confirmation.dlg);
-                            jqUnit.assertEquals("User Name should now be", "Megan Forbes", adminUsers.locate("userName").val());
-                        });
-                        adminUsers.userListEditor.details.confirmation.locate("proceed", adminUsers.userListEditor.details.confirmation.dlg).click();                        
-                    });
                     jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
+                    re.events.afterRender.addListener(function () {
+                        jqUnit.notVisible("Confiration dialog is now invisible", re.confirmation.dlg);
+                        jqUnit.assertEquals("User Name should now be", "Megan Forbes", adminUsers.locate("userName").val());
+                        start();
+                    });
+                    re.confirmation.locate("proceed", re.confirmation.dlg).click();
+                }, "initialSelect");
+                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
+            }
+        };
+        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        stop();
+    });
+    
+    adminUsersTest.test("Confirmation delete", function () {
+        var adminUsers;
+        testOpts.userListEditor.options.details.options.confirmation.options.listeners = {
+            afterFetchTemplate: function () {
+                var re = adminUsers.userListEditor.details;
+                re.events.afterRender.addListener(function () {
+                    re.events.afterRender.removeListener("initialSelect");
+                    re.remove();
+                    jqUnit.assertEquals("Confirmation Text Should Say", "Delete this record?", re.confirmation.locate("message:", re.confirmation.dlg).text());
+                    jqUnit.isVisible("Delete button should be visible", re.confirmation.locate("act", re.confirmation.dlg));
+                    jqUnit.isVisible("Cancel button should be visible", re.confirmation.locate("cancel", re.confirmation.dlg));
+                    jqUnit.assertEquals("Proceed / Don't Save button should not be rendered", 0, re.confirmation.locate("proceed", re.confirmation.dlg).length);
                     start();
                 }, "initialSelect");
                 jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
@@ -379,6 +400,99 @@ var adminUsersTester = function () {
         stop();
     });
     
+    adminUsersTest.test("Confirmation delete + cancel", function () {
+        var adminUsers;
+        testOpts.userListEditor.options.details.options.confirmation.options.listeners = {
+            afterFetchTemplate: function () {
+                var re = adminUsers.userListEditor.details;
+                re.events.afterRender.addListener(function () {
+                    re.events.afterRender.removeListener("initialSelect");
+                    re.remove();
+                    jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());
+                    jqUnit.isVisible("Confirmation Dialog is now visible", jQuery(".csc-confirmationDialog"));
+                    re.confirmation.locate("cancel", re.confirmation.dlg).click();
+                    jqUnit.notVisible("Confirmation Dialog is now invisible", jQuery(".csc-confirmationDialog"));
+                    jqUnit.assertEquals("Selected username is still", "Anastasia Cheethem", adminUsers.locate("userName").val());
+                    start();
+                }, "initialSelect");
+                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
+            }
+        };
+        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        stop();
+    });
+    
+    adminUsersTest.test("Confirmation delete + proceed", function () {
+        var adminUsers;
+        testOpts.userListEditor.options.details.options.confirmation.options.listeners = {
+            afterFetchTemplate: function () {
+                var re = adminUsers.userListEditor.details;
+                re.events.afterRender.addListener(function () {
+                    re.events.afterRender.removeListener("initialSelect");
+                    re.remove();
+                    jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());                        
+                    re.dataContext.events.afterRemove.addListener(function () {                        
+                        jqUnit.assertTrue("Successfully executed remove", true);
+                        jqUnit.notVisible("Confirmation Dialog is now invisible", jQuery(".csc-confirmationDialog"));
+                        jqUnit.notVisible("No record selected", adminUsers.locate("userName"));
+                        start();
+                    });
+                    re.confirmation.locate("act", re.confirmation.dlg).click();
+                }, "initialSelect");
+                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
+            }
+        };
+        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        stop();
+    });
+    
+    adminUsersTest.test("Confirmation navigate + delete", function () {
+        var adminUsers;
+        testOpts.userListEditor.options.details.options.confirmation.options.listeners = {
+            afterFetchTemplate: function () {
+                var re = adminUsers.userListEditor.details;
+                re.events.afterRender.addListener(function () {
+                    re.events.afterRender.removeListener("initialSelect");                    
+                    adminUsers.locate("userName").val("New Name").change();
+                    jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
+                    jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.locate("message:", re.confirmation.dlg).eq(0).text());
+                    jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.locate("message:", re.confirmation.dlg).eq(1).text());
+                    re.confirmation.close();
+                    re.remove();
+                    jqUnit.assertEquals("Confirmation Text Should Say", "Delete this record?", re.confirmation.locate("message:", re.confirmation.dlg).text());
+                    start();
+                    re.confirmation.locate("act", re.confirmation.dlg).click();
+                }, "initialSelect");
+                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
+            }
+        };
+        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        stop();
+    });
+    
+    adminUsersTest.test("Confirmation delete + navigate", function () {
+        var adminUsers;
+        testOpts.userListEditor.options.details.options.confirmation.options.listeners = {
+            afterFetchTemplate: function () {
+                var re = adminUsers.userListEditor.details;
+                re.events.afterRender.addListener(function () {
+                    re.events.afterRender.removeListener("initialSelect");                    
+                    re.remove();
+                    jqUnit.assertEquals("Confirmation Text Should Say", "Delete this record?", re.confirmation.locate("message:", re.confirmation.dlg).text());
+                    re.confirmation.close();
+                    adminUsers.locate("userName").val("New Name").change();
+                    jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
+                    jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.locate("message:", re.confirmation.dlg).eq(0).text());
+                    jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.locate("message:", re.confirmation.dlg).eq(1).text());                    
+                    start();
+                    re.confirmation.locate("act", re.confirmation.dlg).click();
+                }, "initialSelect");
+                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
+            }
+        };
+        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        stop();
+    });
 };
 
 (function () {
