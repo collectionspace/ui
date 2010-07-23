@@ -21,35 +21,35 @@ input:focus, textarea:focus {outline: 1px solid black;}
 input[type="text"], input[type="password"], textarea {/*width:99.5%;*/ width:100%; margin:0;}
 input[type="submit"].logout {font-weight:bold; color:#333; background-color:#F3F3F3; padding-left:15px; padding-right:14px; font-size:13px;}
 input[type="submit"].logout:hover {background-color:#333; color:#FFF;}
-input[type="button"], input[type="submit"]	{background-color:#73AA4F; height:21px; padding-left:12px; padding-right:12px; font-weight:bold; color:#fff; cursor:pointer; font-size:11px; line-height:11px; border:none;}
+input[type="button"], input[type="submit"]	{background-color:#73AA4F; height:21px; padding-left:12px; padding-right:12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; line-height:13px; border:none;}
 input[type="button"]:hover, input[type="submit"]:hover	{background-color:#48722D;}
 input[type="button"].primary, input[type="submit"].primary	{background-color:#73AA4F; padding-left:30px; padding-right:30px;}
 input[type="button"].primary:hover, input[type="submit"].primary:hover	{background-color:#48722D;}
 input[type="button"].tertiary, input[type="submit"].tertiary {height:17px; padding-left:4px; padding-right:4px; font-size:11px; background-color:#FFF; color:#73AA4F;}
 input[type="button"].tertiary:hover, input[type="submit"].tertiary:hover {background-color:#FFFBCC;}
 
-input[type="button"].saveButton, input[type="submit"].saveButton {background:#73AA4F url('../images/icnSave.png') no-repeat 24px 4px; font-size:13px; padding-left:40px; padding-right:20px; }
+input[type="button"].saveButton, input[type="submit"].saveButton {background:#73AA4F url('../images/icnSave.png') no-repeat 24px 4px; padding-left:40px; padding-right:20px; }
 input[type="button"].saveButton:hover, input[type="submit"].saveButton:hover {background-color:#48722D;}
-input[type="button"].cancelButton, input[type="submit"].cancelButton {background:transparent url('../images/icnCancel.png') no-repeat 8px 4px; font-size:13px; padding-left:24px; padding-right:8px; color:#669922;}
+input[type="button"].cancelButton, input[type="submit"].cancelButton {background:transparent url('../images/icnCancel.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
 input[type="button"].cancelButton:hover, input[type="submit"].cancelButton:hover {background-color:#DAEDD1;}
-input[type="button"].editButton, input[type="submit"].editButton {background:transparent url('../images/icnEdit.png') no-repeat 8px 4px; font-size:13px;  padding-left:24px; padding-right:8px; color:#669922;}
+input[type="button"].editButton, input[type="submit"].editButton {background:transparent url('../images/icnEdit.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
 input[type="button"].editButton:hover, input[type="submit"].editButton:hover {background-color:#DAEDD1;}
-input[type="button"].deleteButton, input[type="submit"].deleteButton {background:transparent url('../images/icnDelete.png') no-repeat 8px 4px; font-size:13px; padding-left:24px; padding-right:8px; color:#669922;}
+input[type="button"].deleteButton, input[type="submit"].deleteButton {background:transparent url('../images/icnDelete.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
 input[type="button"].deleteButton:hover, input[type="submit"].deleteButton:hover {background-color:#DAEDD1;}
 input[type="button"].duplicateButton, input[type="submit"].duplicateButton {background:transparent url('../images/icnDuplicate.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
 input[type="button"].duplicateButton:hover, input[type="submit"].duplicateButton:hover {background-color:#DAEDD1;}
-input[type="button"].searchButton, input[type="submit"].searchButton {background:#73AA4F url('../images/icnSearch.png') no-repeat 8px 4px; font-size:13px; padding-left:24px; padding-right:8px; color:#FFF;}
+input[type="button"].searchButton, input[type="submit"].searchButton {background:#73AA4F url('../images/icnSearch.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#FFF;}
 input[type="button"].searchButton:hover, input[type="submit"].searchButton:hover {background-color:#48722D;}
 input[type="button"].gotoButton, input[type="submit"].gotoButton {background:transparent url('../images/icnGoTo.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
 input[type="button"].gotoButton:hover, input[type="submit"].gotoButton:hover {background-color:#DAEDD1;}
 /*input[type="button"].addButton, input[type="submit"].addButton {background:transparent url('../images/icnAdd_.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
 input[type="button"].addButton:hover, input[type="submit"].addButton:hover {background-color:#DAEDD1;}*/
-input[type="button"].addButton, input[type="submit"].addButton {background:#93BC7F url('../images/icnAdd_.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#FFF;}
-input[type="button"].addButton:hover, input[type="submit"].addButton:hover {background-color:#73AA4F;}
+input[type="button"].addButton, input[type="submit"].addButton {background:#73AA4F url('../images/icnAdd_.png') no-repeat 8px 4px; padding-left:24px; font-size:11px; padding-right:8px; color:#FFF;}
+input[type="button"].addButton:hover, input[type="submit"].addButton:hover {background-color:#48722D;}
 /*input[type="button"].addButton, input[type="submit"].addButton {background:#FFF url('../images/icnAdd.png') no-repeat 8px 2px; padding-left:24px; padding-right:8px; color:#73AA4F;}
 input[type="button"].addButton:hover, input[type="submit"].addButton:hover {background-color:#FFFBCC;}*/
 nput[type="button"].addButton, input[type="submit"].addButton {background:#93BC7F url('../images/icnAdd_.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#FFF;}
-input[type="button"].addButton:hover, input[type="submit"].addButton:hover {background-color:#73AA4F;}
+input[type="button"].addButton:hover, input[type="submit"].addButton:hover {background-color:#48722D;}
 
 .button-row input[type="button"], .button-row-right input[type="button"] {margin-left:10px; float:right; margin-bottom:5px;}
 .button-row-left input[type="button"], .button-row-left-center input[type="button"] {margin-right:10px; margin-top:10px;}
@@ -158,7 +158,7 @@ li .flc-pager-pageLink {margin-top:-1px;}
 
 
 /* header space for record ID etc. */
-#title-bar {margin: 0 0 20px 0; background-color:#F0F5FB;  /*background-color:#aaa;*/}
+#title-bar {margin: 0 0 10px 0; background-color:#F0F5FB;  /*background-color:#aaa;*/}
 #title-bar.nobg {background-color:#FFF;}
 #title-bar .title-bar-value {padding:0 10px; height:42px; color:#696565; font-weight:bold;}
 #title-bar .title-bar-value .overflow{padding-top:9px; max-width:90%; float:left;}
@@ -526,15 +526,25 @@ table .field-cal {width:162px; background-color:#C7CFD4;}
 
 .right-sidebar {width:100%;}
 .pivot-box, .pivot-users-box {margin-bottom:20px; min-width:270px; border:0px solid #999999; border-top:none; background-color:#fff; }
+.used-by .pivot-box {margin-bottom:0;}
 .media-snapshot {border-left: 1px solid #C9CACC; border-right: 1px solid #C9CACC;}
 .media-snapshot .content {padding:6px;}
 .media-snapshot .content img {margin-left:auto; margin-right:auto; display:block;}
 .pivot-box .content, .pivot-box-content, .pivot-search-box-content, .pivot-users-box-content 
 	{font-size:10px; line-height:10px; color:#7F8083; border-bottom:1px solid #D2D0D0; background-color:#fff;}
+.pivot-box.used-by .content {padding-left:5px; background-color:inherit;}
+.pivot-box.used-by .content.related-procedures {padding-left:0px; background-color:inherit;}
 .pivot-box .header, .pivot-search-box-header, .pivot-users-box-header 
 	{border-top:0px solid #999999; border-bottom:0px solid #999999; background-color:#999;  
 	/*padding:4px 4px 4px 8px;*/ color:#FFF; font-size:13px; cursor:pointer; height:13px; width:auto;}
+
+.used-by .pivot-box .header 
+	{border-top:0px solid #E7E8E9; border-bottom:0px solid #E7E8E9; background-color:#E7E8E9;  
+	/*padding:4px 4px 4px 8px;*/ color:#6D6E71; font-size:13px; cursor:pointer; height:13px; width:auto;}
+	
 .pivot-box .header:hover, .pivot-box .header:focus {background-color:#666666;}
+.pivot-box.used-by .header:hover, .pivot-box.used-by .header:focus {color:white;}
+.pivot-box.used-by, .pivot-box.used-by:hover  { background-color:#999;}
 .pivot-box .header.toggle {height:25px;}
 .header.static.button {height:21px; padding:4px 0 0px 4px;}
 .pivot-search-box-header, .pivot-users-box .header {cursor:auto;}
@@ -617,11 +627,11 @@ table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; f
 .csc-related-field {overflow:hidden;}
 
 /*  styling repeatable fields  */
-.content.repeatable {margin-top:-17px;}
+.content.repeatable {marg in-top:-17px;}
 .cs-repeatable-add {}
-input[type="button"].cs-repeatable-add {height:17px; width:20%; position:relative; right:-74.4%;}
+input[type="button"].cs-repeatable-add {font-size:11px; height:17px; width:55px; position:absolute; right:25px; top:-2px;}
 li.cs-repeatable-repeat {list-style-type: none;  margin-bottom:1px;}
-.cs-repeatable-content {width: 89%;}
+.cs-repeatable-content {width: 89.2%;}
 div.cs-rep eatable-content input{float:left;}
 input.cs-repeatable-primary {width: 5%; position: relative; vertical-align: top;}
 input.cs-repeatable-delete {width: 16px; height:18px; vertical-align: top; padding:0px; background:transparent url('../images/icnDeleteIdle.png') no-repeat 1px 2px; /*color: transparent; background-color: transparent; line-height:100%; font-size:11px; height:15px; line-height:80%; margin:2px 0;*/}
