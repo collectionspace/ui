@@ -37,10 +37,12 @@ cspace = cspace || {};
                 {name: "Media", target: null}
             ],
             tabSetups: [
-                null, {
-                    func: "cspace.objectTabSetup",
+                null,   // primary tab
+                {       // first active tab: cataloging
+                    func: "cspace.tabSetup",
                     options: {
-                        primaryRecordType: "intake"
+                        primaryRecordType: "intake",
+                        configURL: "./config/object-tab.json"
                     }
                 }
             ]

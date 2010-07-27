@@ -1,0 +1,52 @@
+{
+    "pageBuilder": {
+        "options": {
+            "pageSpec": {
+                "list": {
+                    "href": "objectTabRecordListTemplate.html",
+                    "templateSelector": ".csc-object-tab-record-list",
+                    "targetSelector": ".div-for-list-of-records"
+                },
+                "details": {
+                    "href": "ObjectEntryTemplate.html",
+                    "templateSelector": ".csc-object-entry-template",
+                    "targetSelector": ".div-for-recordEditor"
+                } 
+            },
+            "pageType": "object-tab" 
+        } 
+    },
+    "dependencies": {
+        "relatedRecordsTab": {
+            "funcName": "cspace.relatedRecordsTab",
+            "args": [
+                ".csc-object-tab",
+                "objects",
+                "{pageBuilder}.uispec",
+                "{pageBuilder}.applier"
+            ] 
+        } 
+    },
+    "depOpts": {
+        "relatedRecordsTab": {
+            "options": {
+                "listEditor": {
+                    "options": {
+                        "initList": "cspace.listEditor.receiveData",
+                        "data": "{pageBuilder}.applier.model.relations.objects",
+                        "dataContext": {
+                            "options": {
+                                "recordType": "objects"
+                            }
+                        }
+                    }
+                },
+                "relationManager": {
+                    "options": {
+                        "primaryRecordType": "{pageBuilder}.options.primaryRecordType"
+                    }
+                }
+            }
+        }
+    } 
+}
