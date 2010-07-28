@@ -22,8 +22,7 @@
             "args": [
                 ".csc-object-tab",
                 "objects",
-                "{pageBuilder}.uispec",
-                "{pageBuilder}.applier"
+                "{pageBuilder}.uispec"
             ] 
         } 
     },

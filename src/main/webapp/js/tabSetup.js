@@ -20,12 +20,11 @@ cspace = cspace || {};
         options = options || {};
                 
         options.fetchConfigCallback = options.fetchConfigCallback || function (config) {
+            config.dependencies.relatedRecordsTab.args[3] = applier;
             if (cspace.util.useLocalData()) {
                 config.depOpts.relatedRecordsTab.options.listEditor.options.dataContext.options.baseUrl = "data";
                 config.depOpts.relatedRecordsTab.options.listEditor.options.dataContext.options.fileExtension = ".json";
             }
-        };        
-        options.pageBuilder.options = {
         };
         return cspace.pageSetup(options);
         
