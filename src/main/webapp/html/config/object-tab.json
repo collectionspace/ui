@@ -32,7 +32,6 @@
                 "listEditor": {
                     "options": {
                         "initList": "cspace.listEditor.receiveData",
-                        "data": "{pageBuilder}.applier.model.relations.objects",
                         "dataContext": {
                             "options": {
                                 "recordType": "objects"

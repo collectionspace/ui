@@ -21,6 +21,7 @@ cspace = cspace || {};
                 
         options.fetchConfigCallback = options.fetchConfigCallback || function (config) {
             config.dependencies.relatedRecordsTab.args[3] = applier;
+            config.depOpts.relatedRecordsTab.options.listEditor.options.data = applier.model.relations.objects;
             if (cspace.util.useLocalData()) {
                 config.depOpts.relatedRecordsTab.options.listEditor.options.dataContext.options.baseUrl = "data";
                 config.depOpts.relatedRecordsTab.options.listEditor.options.dataContext.options.fileExtension = ".json";
