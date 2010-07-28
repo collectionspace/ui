@@ -20,8 +20,13 @@ cspace = cspace || {};
         options = options || {};
                 
         options.fetchConfigCallback = options.fetchConfigCallback || function (config) {
+            // configuration options specific to the current context:
             config.dependencies.relatedRecordsTab.args[3] = applier;
-            config.depOpts.relatedRecordsTab.options.listEditor.options.data = applier.model.relations.objects;
+            config.depOpts.relatedRecordsTab.options.relationManager.options.primaryRecordType = options.primaryRecordType;
+            config.depOpts.relatedRecordsTab.options.listEditor.options.data =
+                applier.model.relations[config.depOpts.relatedRecordsTab.options.listEditor.options.dataContext.options.recordType];
+
+            // configuration options specific to local-file-system use:
             if (cspace.util.useLocalData()) {
                 config.depOpts.relatedRecordsTab.options.listEditor.options.dataContext.options.baseUrl = "data";
                 config.depOpts.relatedRecordsTab.options.listEditor.options.dataContext.options.fileExtension = ".json";

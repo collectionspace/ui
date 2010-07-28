@@ -72,6 +72,13 @@ cspace = cspace || {};
         that.events.pageReady.fire();
     };
     
+    /**
+     * 
+     * @param {Object} container
+     * @param {Object} recordType   The record type of the records being listed
+     * @param {Object} uispec
+     * @param {Object} options
+     */
     cspace.listEditor = function (container, recordType, uispec, options) {
         var that = fluid.initView("cspace.listEditor", container, options);
         that.recordType = recordType;
