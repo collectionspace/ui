@@ -110,4 +110,13 @@ cspace = cspace || {};
             }
         }
     };
+    
+    cspace.util.createBaseModel = function () {
+        return {
+            csid: null,
+            fields: {},
+            termsUsed: [],
+            relations: {}
+        };
+    };
 })(jQuery, fluid);

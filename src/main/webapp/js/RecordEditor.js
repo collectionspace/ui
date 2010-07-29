@@ -55,6 +55,16 @@ cspace = cspace || {};
         }
         return true;
     };
+    
+    var recordSaveHandler = function (that, data, action) {
+        var message = action.toLowerCase() + "SuccessfulMessage";
+        that.applier.requestChange("", data);
+        fluid.model.copyModel(that.model, data);
+        that.refreshView();
+        cspace.util.displayTimestampedMessage(that, that.options.strings[message], Date());
+        that.unsavedChanges = false;
+        that.events["after" + action + "ObjectDataSuccess"].fire(data, that.options.strings[message]);
+    };
 
     var bindEventHandlers = function (that) {
         $(that.options.selectors.confirmationInclude + ":not(" + that.options.selectors.confirmationExclude + ")").live("click", that.showConfirmation);
@@ -70,19 +80,12 @@ cspace = cspace || {};
         });
 
         that.dataContext.events.afterCreate.addListener(function (data) {
-            that.applier.requestChange("csid", data.csid);
-            that.locate("deleteButton").removeAttr("disabled").removeClass("deactivate");
-            that.events.afterCreateObjectDataSuccess.fire(data, that.options.strings.createSuccessfulMessage);
-            that.applier.requestChange("termsUsed", data.termsUsed);
-	        cspace.util.displayTimestampedMessage(that, that.options.strings.createSuccessfulMessage, Date());
-            that.unsavedChanges = false;
+            recordSaveHandler(that, data, "Create");
+            that.locate("deleteButton").removeAttr("disabled").removeClass("deactivate");            
         });
 
         that.dataContext.events.afterUpdate.addListener(function (data) {
-            that.events.afterUpdateObjectDataSuccess.fire(data, that.options.strings.updateSuccessfulMessage);
-            that.applier.requestChange("termsUsed", data.termsUsed);
-	        cspace.util.displayTimestampedMessage(that, that.options.strings.updateSuccessfulMessage, Date());
-            that.unsavedChanges = false;
+            recordSaveHandler(that, data, "Update");
         });
 
         that.dataContext.events.afterRemove.addListener(function () {
@@ -97,11 +100,9 @@ cspace = cspace || {};
             that.unsavedChanges = false;
         });
         
-        var setUnchanged = function () {
+        that.applier.modelChanged.addListener("fields", function (model, oldModel, changeRequest) {
             that.unsavedChanges = true;
-        };
-        
-        that.applier.modelChanged.addListener("*", setUnchanged);
+        });
 
         that.events.afterRender.addListener(function () {
             that.locate("save").click(that.requestSave);
