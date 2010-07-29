@@ -104,7 +104,9 @@ cspace = cspace || {};
          * addNewListRow - add an empty row to the list and display cleared and ready for editing details.
          */
         that.addNewListRow = function () {
-            fluid.model.copyModel(that.model.details, {});
+            var model = cspace.util.createBaseModel();
+            cspace.util.createEmptyModel(model, that.uispec.details);            
+            fluid.model.copyModel(that.model.details, model);
             that.details.refreshView();
             showDetails(that.dom, true);
             that.events.afterAddNewListRow.fire();

@@ -233,5 +233,25 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         setupObjects(options);
         stop();        
     });
+    
+    objectsTests.test("Go To Record", function () {
+        var options = {
+            depOpts: {
+                recordEditor: {
+                    options: {
+                        listeners: {
+                            afterRender: function () {
+                                jqUnit.notVisible("On the main record tab link 'Go to record' should be invisible", $(".csc-goto"));
+                                jqUnit.assertUndefined("Link for the invisible 'Go to record' should not have href attribute", $(".csc-goto").attr("href"));
+                                start();                  
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        setupObjects(options);
+        stop();
+    });
 }(jQuery));
 

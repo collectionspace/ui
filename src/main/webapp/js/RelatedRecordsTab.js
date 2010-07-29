@@ -40,6 +40,14 @@ cspace = cspace || {};
             }];
             that.relationManager.addRelations({items: newRelation});
         });
+        that.listEditor.details.events.afterRender.addListener(function () {
+            var csid = that.listEditor.details.model.csid;
+            if (csid) {
+                var gotoLink = that.locate("goToRecord");
+                gotoLink.attr("href", "./" + that.recordType + ".html?csid=" + csid);
+                gotoLink.show();
+            }
+        });
     };
     
     var createListUpdater = function (applier, primaryRecordType, recordType) {
@@ -98,7 +106,8 @@ cspace = cspace || {};
         selectors: {
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
-            timestamp: ".csc-timestamp"
+            timestamp: ".csc-timestamp",
+            goToRecord: ".csc-goto"
         },
         events: {
             afterRender: null

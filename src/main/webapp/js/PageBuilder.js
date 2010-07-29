@@ -94,17 +94,8 @@ cspace = cspace || {};
         that.events.pageReady.fire();
     };
     
-    var createBaseModel = function () {
-        return {
-            csid: null,
-            fields: {},
-            termsUsed: [],
-            relations: {}
-        };
-    };
-    
     var setUpPageBuilder = function (that) {
-        that.model = createBaseModel();
+        that.model = cspace.util.createBaseModel();
         cspace.util.createEmptyModel(that.model, that.uispec);
         fluid.log("PageBuilder.js after creating empty model");
         that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
@@ -188,6 +179,9 @@ cspace = cspace || {};
             // TODO:    Workaround until App layer is generating role uispecs:
             if (that.options.pageType === "role") {
                 uispecUrl = "./uispecs/role/uispec.json";
+            }
+            if (that.options.pageType === "users") {
+            	uispecUrl = "./uispecs/users/uispec.json";
             }
             
             jQuery.ajax({

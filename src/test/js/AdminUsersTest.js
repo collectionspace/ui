@@ -142,15 +142,17 @@ var adminUsersTester = function () {
                     dataType: "json",
                     type: "POST",
                     data: JSON.stringify({
+                    	csid:"",
                         fields: {
+                        	account: [],
                             status: "",
                             email: testDataCreateUser.email,
                             screenName: testDataCreateUser.userName,
                             password: testDataCreateUser.validPassword,
-                            passwordConfirm: testDataCreateUser.validPassword,
                             userId: testDataCreateUser.email
                         },
-                        csid: ""
+                        termsUsed: [],
+                        relations: {}
                     })
                 };
                 
@@ -270,12 +272,13 @@ var adminUsersTester = function () {
         testOpts.listeners = {
             afterRender: function () {
                 var userListEditorSelectors = adminUsers.userListEditor.options.selectors;
-                adminUsers.userListEditor.details.events.afterRender.addListener(function () {                
+                adminUsers.userListEditor.details.events.afterRender.addListener(function () {
+                    adminUsers.userListEditor.details.events.afterRender.removeListener("initialSelect");                
                     var saveResult = adminUsers.userListEditor.details.requestSave();
                     jqUnit.assertTrue("Save should succeed (validation should not prevent save)", saveResult);
                     jqUnit.isVisible("message container is visible", userListEditorSelectors.messageContainer);
                     start();
-                });
+                }, "initialSelect");
                 jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
             }
         };
@@ -461,7 +464,6 @@ var adminUsersTester = function () {
                     re.remove();
                     jqUnit.assertEquals("Confirmation Text Should Say", "Delete this record?", re.confirmation.locate("message:", re.confirmation.dlg).text());
                     start();
-                    re.confirmation.locate("act", re.confirmation.dlg).click();
                 }, "initialSelect");
                 jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
             }
@@ -485,7 +487,6 @@ var adminUsersTester = function () {
                     jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.locate("message:", re.confirmation.dlg).eq(0).text());
                     jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.locate("message:", re.confirmation.dlg).eq(1).text());                    
                     start();
-                    re.confirmation.locate("act", re.confirmation.dlg).click();
                 }, "initialSelect");
                 jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
             }

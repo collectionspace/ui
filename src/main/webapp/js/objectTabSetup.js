@@ -62,20 +62,16 @@ cspace = cspace || {};
         if (local) {
             tabOpts.listEditor.options.dataContext.options.baseUrl = "data/";
             tabOpts.listEditor.options.dataContext.options.fileExtension = ".json";
-            tabOpts.relationManager = {
+            tabOpts.relationManager.options.dataContext = {
                 options: {
-                    dataContext: {
-                        options: {
-                            baseUrl: "data/",
-                            fileExtension: ".json"
-                        }
-                    }
+                    baseUrl: "data/",
+                    fileExtension: ".json"
                 }
             };
         }
         
         var dependencies = {
-            relatedRecords: {
+            relatedRecordsTab: {
                 funcName: "cspace.relatedRecordsTab",
                 args: [".csc-object-tab", "objects", "{pageBuilder}.uispec", applier, tabOpts]  // ******
             }
