@@ -11,36 +11,30 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 /*global jqUnit, jQuery, cspace, fluid, start, stop, ok, expect*/
 "use strict";
 
-var tabsTester = function($){
+(function ($) {
 
     var tabsTest = new jqUnit.TestCase("Tabs Tests", function () {
         cspace.util.isTest = true;
-        tabsTest.fetchTemplate("../../main/webapp/html/objects.html", ".fl-container-1024");
+        tabsTest.fetchTemplate("../../main/webapp/html/intake.html", ".fl-container-1024");
     });
 
     tabsTest.test("Required identification number in cataloging tab (CSPACE-2294)", function () {
         var opts = {
             pageBuilderOpts: {
-                uispecUrl: "../../main/webapp/html/uispecs/loanin/uispec.json",
+                uispecUrl: "../../main/webapp/html/uispecs/intake/uispec.json",
                 listeners: {
                     pageReady: function () {
                         var tab = $("a[href^=#ui-tabs]")[0];
                         $(tab).click();
-                        jqUnit.assertValue("loan in should have a record editor", loanIn.components.recordEditor);
+                        jqUnit.assertValue("intake should have a record editor", intake.components.recordEditor);
                         start();
                     }, 
                     onDependencySetup: function (uispec) {
                         // Change the template URL for the number pattern chooser.
-                        uispec.recordEditor[".csc-loanIn-loanInNumber-patternChooserContainer"].decorators[0].options.templateUrl
+                        uispec.recordEditor[".csc-intake-entry-number-container"].decorators[0].options.templateUrl
                             = "../../main/webapp/html/NumberPatternChooser.html";
                     }
                 }
-            },
-            tabsOpts: {
-                tabList: [
-                    {name: "Loan In", target: "#primaryTab"},
-                    {name: "Cataloging", target: "../../main/webapp/html/objectTabPlaceholder.html"}
-                ]
             },
             sideBarOpts: {
                 relatedRecordsList: {
@@ -69,8 +63,8 @@ var tabsTester = function($){
             templateUrlPrefix: "../../main/webapp/html/"
         };
         
-        var loanIn = cspace.loanInSetup(opts);
+        var intake = cspace.intakeSetup(opts);
         stop();
 
     });
-}(jQuery);
+}(jQuery));

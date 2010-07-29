@@ -81,10 +81,6 @@ cspace = cspace || {};
             }
         };
         
-        var fullUrl = function (templateName) {
-            return options.templateUrlPrefix ? options.templateUrlPrefix + templateName : templateName;
-        };
-            
         var pageBuilderOpts = options.pageBuilderOpts || {};
         pageBuilderOpts.dataContext = {
             options: {
@@ -94,32 +90,32 @@ cspace = cspace || {};
         
         pageBuilderOpts.pageSpec = {
             header: {
-                href: fullUrl("header.html"),
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "header.html"),
                 templateSelector: ".csc-header-template",
                 targetSelector: ".csc-header-container"
             },
             titleBar: {
-                href: fullUrl("loanInTitleBar.html"),
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "loanInTitleBar.html"),
                 templateSelector: ".csc-loanIn-titleBar-template",
                 targetSelector: ".csc-loanIn-titleBar-container"
             },
             tabs: {
-                href: fullUrl("tabsTemplate.html"),
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "tabsTemplate.html"),
                 templateSelector: ".csc-tabs-template",
                 targetSelector: ".csc-tabs-container"
             },
             dateEntry: {
-                href: fullUrl("loanInTemplate.html"),
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "loanInTemplate.html"),
                 templateSelector: ".csc-loanIn-template",
                 targetSelector: ".csc-record-edit-container"
             },
             sidebar: {
-                href: fullUrl("right-sidebar.html"),
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "right-sidebar.html"),
                 templateSelector: ".csc-right-sidebar",
                 targetSelector: ".csc-sidebar-container"
             },
             footer: {
-                href: fullUrl("footer.html"),
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "footer.html"),
                 templateSelector: ".csc-footer",
                 targetSelector: ".csc-footer-container"
             }

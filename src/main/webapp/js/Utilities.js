@@ -119,4 +119,9 @@ cspace = cspace || {};
             relations: {}
         };
     };
+
+    cspace.util.fullUrl = function (prefix, templateName) {
+        return prefix ? prefix + templateName : templateName;
+    };
+            
 })(jQuery, fluid);

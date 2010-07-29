@@ -9,15 +9,17 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, window, cspace*/
+/*global fluid, jQuery, window, cspace*/
+"use strict";
 
 cspace = cspace || {};
 
 (function ($) {
 
-    cspace.intakeSetup = function () {
+    cspace.intakeSetup = function (options) {
         fluid.log("intakeSetup.js loaded");
 
+        options = options || {};
         var tbOpts = {
             uispec: "{pageBuilder}.uispec.titleBar"
         };
@@ -29,7 +31,7 @@ cspace = cspace || {};
             tabList: [
 				{name: "Intake", target: "#primaryTab"},
                 {name: "Acquisition", target: null},
-                {name: "Cataloging", target: "objectTabPlaceholder.html"},
+                {name: "Cataloging", target: cspace.util.fullUrl(options.templateUrlPrefix, "objectTabPlaceholder.html")},
                 {name: "Intake - related", target: null},
                 {name: "Loan In", target: null},
                 {name: "Loan Out", target: null},
@@ -64,63 +66,63 @@ cspace = cspace || {};
             recordEditor: {
                 funcName: "cspace.recordEditor",
                 args: [".csc-object-intake-template", "{pageBuilder}.dataContext", 
-                	"{pageBuilder}.applier", "{pageBuilder}.uispec.recordEditor", reOpts]
+                    "{pageBuilder}.applier", "{pageBuilder}.uispec.recordEditor", reOpts]
             },
             sidebar: {
                 funcName: "cspace.sidebar",
                 args: [".csc-sidebar", "{pageBuilder}.applier", sbOpts]
             }
         };
-        var options = {
-            dataContext: {
-                options: {
-                    recordType: "intake"
-                }
-            },
-            pageSpec: {
-                tabs: {
-                    href: "tabsTemplate.html",
-                    templateSelector: ".csc-tabs-template",
-                    targetSelector: ".csc-tabs-container"
-                },
-                header: {
-                    href: "header.html",
-                    templateSelector: ".csc-header-template",
-                    targetSelector: ".csc-header-container"
-                },
-                titleBar: {
-                    href: "IntakeTitleBar.html",
-                    templateSelector: ".csc-object-intake-titleBar-template",
-                    targetSelector: ".csc-object-intake-titleBar-container"
-                },
-                recordEditor: {
-                    href: "IntakeTemplate.html",
-                    templateSelector: ".csc-object-intake-template",
-                    targetSelector: ".csc-record-edit-container"
-                },
-                sidebar: {
-                    href: "right-sidebar.html",
-                    templateSelector: ".csc-right-sidebar",
-                    targetSelector: ".csc-sidebar-container"
-                },
-                footer: {
-                    href: "footer.html",
-                    templateSelector: ".csc-footer",
-                    targetSelector: ".csc-footer-container"
-                }
-            },
-            pageType: "intake"
+        var pageBuilderOpts = options.pageBuilderOpts || {};
+        pageBuilderOpts.dataContext = {
+            options: {
+                recordType: "intake"
+            }
         };
+        pageBuilderOpts.pageSpec = {
+            header: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "header.html"),
+                templateSelector: ".csc-header-template",
+                targetSelector: ".csc-header-container"
+            },
+            titleBar: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "IntakeTitleBar.html"),
+                templateSelector: ".csc-object-intake-titleBar-template",
+                targetSelector: ".csc-object-intake-titleBar-container"
+            },
+            tabs: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "tabsTemplate.html"),
+                templateSelector: ".csc-tabs-template",
+                targetSelector: ".csc-tabs-container"
+            },
+            recordEditor: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "IntakeTemplate.html"),
+                templateSelector: ".csc-object-intake-template",
+                targetSelector: ".csc-record-edit-container"
+            },
+            sidebar: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "right-sidebar.html"),
+                templateSelector: ".csc-right-sidebar",
+                targetSelector: ".csc-sidebar-container"
+            },
+            footer: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "footer.html"),
+                templateSelector: ".csc-footer",
+                targetSelector: ".csc-footer-container"
+            }
+        };
+        pageBuilderOpts.pageType = "intake";
+
         var csid = cspace.util.getUrlParameter("csid");
         if (csid) {
-            options.csid = csid;
+            pageBuilderOpts.csid = csid;
         }
         
         if (cspace.util.useLocalData()) {
-            options.dataContext.options.baseUrl = "data";
-            options.dataContext.options.fileExtension = ".json";
+            pageBuilderOpts.dataContext.options.baseUrl = "data";
+            pageBuilderOpts.dataContext.options.fileExtension = ".json";
         }
-        cspace.pageBuilder(dependencies, options);
+        return cspace.pageBuilder(dependencies, pageBuilderOpts);
     };
 
 })(jQuery);
