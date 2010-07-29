@@ -2,7 +2,7 @@
 Copyright 2010 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
-ou may not use this file except in compliance with this License.
+You may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
@@ -41,7 +41,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     });  
     
     confirmationTests.test("Confirmation creation", function () {
-        expect(6);
+        expect(9);
         var confirmation;
                
         testOpts.listeners = {
@@ -55,6 +55,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 confirmation.open(expectedHREF);
                 jqUnit.isVisible("dialog is visible", jQuery(".csc-confirmationDialog"));
                 jqUnit.assertTrue("href is expected string", confirmation.model.href === expectedHREF);
+                jqUnit.assertTrue("Default button style should be added to cancel", jQuery(".csc-confirmationDialogButton-cancel").hasClass("cs-confirmationDialogButton-cancel"));
+                jqUnit.assertTrue("Default button style should be added to proceed", jQuery(".csc-confirmationDialogButton-proceed").hasClass("cs-confirmationDialogButton-proceed"));
+                jqUnit.assertTrue("Default button style should be added to act", jQuery(".csc-confirmationDialogButton-act").hasClass("cs-confirmationDialogButton-act"));
                 start();
             }
         };

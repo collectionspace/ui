@@ -2,7 +2,7 @@
 Copyright 2009-2010 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
-ou may not use this file except in compliance with this License.
+You may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
@@ -43,20 +43,23 @@ cspace = cspace || {};
         });
 	};
 	
-	var addButtonToTree = function (id, strings) {
+	var addButtonToTree = function (id, strings, styles) {
 	    return {
             ID: id,
-            decorators: {
+            decorators: [{
                 type: "attrs",
                 attributes: {
                     alt: strings[id + "Alt"],
                     value: strings[id + "Text"]
                 } 
-            }
+            }, {
+                type: "addClass",
+                classes: styles[id]
+            }]
         };
 	};
 	
-	var buildTree = function (strings, enableButtons) {	    
+	var buildTree = function (strings, styles, enableButtons) {	    
 	    var tree = {
 	        children: [{
 	            ID: "message:",
@@ -73,7 +76,7 @@ cspace = cspace || {};
 	    };
 	    
 	    $.each(enableButtons, function (index, button) {
-	        tree.children.push(addButtonToTree(button, strings));
+	        tree.children.push(addButtonToTree(button, strings, styles));
 	    });
                 
         if (strings.secondaryMessage) {
@@ -116,7 +119,7 @@ cspace = cspace || {};
         };
         
         that.refreshView = function () {
-            fluid.reRender(that.templates, that.dlg, buildTree(that.options.strings, that.options.enableButtons), {
+            fluid.reRender(that.templates, that.dlg, buildTree(that.options.strings, that.options.styles, that.options.enableButtons), {
                 messageLocator: fluid.messageLocator(that.options.strings, fluid.stringTemplate)
             });
             bindEvents(that);
@@ -149,7 +152,7 @@ cspace = cspace || {};
         selectors: {
             cancel: ".csc-confirmationDialogButton-cancel",
             proceed: ".csc-confirmationDialogButton-proceed",
-            act: ".csc-confirmationDialogButton-save",
+            act: ".csc-confirmationDialogButton-act",
 			close: ".csc-confirmationDialog-closeBtn",
 			// Had to add a : because we currently can not use the expander
 			// with repeating rows and message bundle at the same time.
@@ -173,6 +176,11 @@ cspace = cspace || {};
             afterOpen: null,
             afterClose: null,
             afterFetchTemplate: null
+        },
+        styles: {
+            cancel: "cs-confirmationDialogButton-cancel",
+            proceed: "cs-confirmationDialogButton-proceed",
+            act: "cs-confirmationDialogButton-act"
         },
         confirmationTemplateUrl: "../html/Confirmation.html"
     });
