@@ -74,12 +74,24 @@ cspace = cspace || {};
                 args: [".csc-sidebar", "{pageBuilder}.applier", sbOpts]
             }
         };
-        var pageBuilderOpts = options.pageBuilderOpts || {};
-        pageBuilderOpts.dataContext = {
-            options: {
-                recordType: "intake"
+        var pageBuilderOpts = {
+            dataContext:{
+                options: {
+                    recordType: "intake"
+                }
             }
         };
+        if (cspace.util.useLocalData()) {
+            $.extend(true, pageBuilderOpts, {
+                dataContext: {
+                    options: {
+                        baseUrl: "data",
+                        fileExtension: ".json"
+                    }
+                }
+            })
+        }
+
         pageBuilderOpts.pageSpec = {
             header: {
                 href: cspace.util.fullUrl(options.templateUrlPrefix, "header.html"),
@@ -113,16 +125,13 @@ cspace = cspace || {};
             }
         };
         pageBuilderOpts.pageType = "intake";
-
+        $.extend(true, pageBuilderOpts, options.pageBuilderOpts);
+        
         var csid = cspace.util.getUrlParameter("csid");
         if (csid) {
             pageBuilderOpts.csid = csid;
         }
         
-        if (cspace.util.useLocalData()) {
-            pageBuilderOpts.dataContext.options.baseUrl = "data";
-            pageBuilderOpts.dataContext.options.fileExtension = ".json";
-        }
         return cspace.pageBuilder(dependencies, pageBuilderOpts);
     };
 

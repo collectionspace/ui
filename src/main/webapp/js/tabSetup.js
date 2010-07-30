@@ -31,7 +31,6 @@ cspace = cspace || {};
                 config.depOpts.relatedRecordsTab.options.listEditor.options.dataContext.options.baseUrl = "data";
                 config.depOpts.relatedRecordsTab.options.listEditor.options.dataContext.options.fileExtension = ".json";
             }
-            $.extend(true, config, options.config);
             
         };
         return cspace.pageSetup(options);
