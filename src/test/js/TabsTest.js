@@ -64,6 +64,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                             var messageContainer = $(reSelectors.messageContainer, details);
                                             var message = $($(reSelectors.feedbackMessage, messageContainer)[0]);
                                             jqUnit.notVisible("Before testing, message should not be visible", message);
+                                            $(".csc-object-identification-object-number", details).text("");
                                             $(reSelectors.save, details).click();
                                             jqUnit.isVisible("After clicking save, message should be visible", message);
                                             jqUnit.assertEquals("Message should be ", "Please specify an Identification Number", message.text());
