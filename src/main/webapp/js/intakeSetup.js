@@ -23,13 +23,13 @@ cspace = cspace || {};
         var tbOpts = {
             uispec: "{pageBuilder}.uispec.titleBar"
         };
-        var reOpts = {
-            selectors: {identificationNumber: ".csc-intake-entry-number"},
-            strings: {identificationNumberRequired: "Please specify an Intake Entry Number"}
-        };
+        var reOpts = options.recordEditorOpts || {};
+        reOpts.selectors = {identificationNumber: ".csc-intake-entry-number"};
+        reOpts.strings = {identificationNumberRequired: "Please specify an Intake Entry Number"};
+
         var tabsOpts = {
             tabList: [
-				{name: "Intake", target: "#primaryTab"},
+                {name: "Intake", target: "#primaryTab"},
                 {name: "Acquisition", target: null},
                 {name: "Cataloging", target: cspace.util.fullUrl(options.templateUrlPrefix, "objectTabPlaceholder.html")},
                 {name: "Intake - related", target: null},
@@ -49,10 +49,11 @@ cspace = cspace || {};
                 }
             ]
         };
-        var sbOpts = {
-            uispec: "{pageBuilder}.uispec.sidebar",
-            primaryRecordType: "intake"
-        };
+        $.extend(true, tabsOpts, options.tabsOpts);
+
+        var sbOpts = options.sideBarOpts || {};
+        sbOpts.uispec = "{pageBuilder}.uispec.sidebar";
+        sbOpts.primaryRecordType = "intake";
 
         var dependencies = {
             titleBar: {

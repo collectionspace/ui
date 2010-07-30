@@ -19,15 +19,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     });
 
     tabsTest.test("Required identification number in cataloging tab (CSPACE-2294)", function () {
+        var intake;
         var opts = {
             pageBuilderOpts: {
                 uispecUrl: "../../main/webapp/html/uispecs/intake/uispec.json",
                 listeners: {
                     pageReady: function () {
-                        var tab = $("a[href^=#ui-tabs]")[0];
-                        $(tab).click();
                         jqUnit.assertValue("intake should have a record editor", intake.components.recordEditor);
-                        start();
+                        intake.components.tabs.locate("tabsContainer").tabs("select", 1);
                     }, 
                     onDependencySetup: function (uispec) {
                         // Change the template URL for the number pattern chooser.
@@ -35,6 +34,61 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             = "../../main/webapp/html/NumberPatternChooser.html";
                     }
                 }
+            },
+            tabsOpts: {
+                tabSetups: [
+                    null,   // primary tab
+                    {       // first active tab at time of test writing: cataloging
+                        options: {
+                            configURL: "../../main/webapp/html/config/object-tab.json",
+                            config: {
+                                pageBuilder: {
+                                    options: {
+                                        uispecUrl: "../../main/webapp/html/uispecs/object-tab/uispec.json",
+                                        pageSpec: {
+                                            list: {
+                                                href: "../../main/webapp/html/objectTabRecordListTemplate.html"
+                                            },
+                                            details: {
+                                                href: "../../main/webapp/html/ObjectEntryTemplate.html"
+                                            }
+                                        },
+                                        listeners: {
+                                            pageReady: function () {
+                                                jqUnit.assertTrue("we have arrived at the tab's pageReady", true);
+                                                start();
+                                            }, 
+                                            onDependencySetup: function (uispec) {
+                                                // Change the template URL for the number pattern chooser.
+                                                uispec.details[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl
+                                                    = "../../main/webapp/html/NumberPatternChooser.html";
+                                            }
+                                        }
+                                    }
+                                },
+                                depOpts: {
+                                    relatedRecordsTab: {
+                                        options: {
+                                            listEditor: {
+                                                options: {
+                                                    details: {
+                                                        options: {
+                                                            confirmation: {
+                                                                options: {
+                                                                    confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
             },
             sideBarOpts: {
                 relatedRecordsList: {
@@ -63,7 +117,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             templateUrlPrefix: "../../main/webapp/html/"
         };
         
-        var intake = cspace.intakeSetup(opts);
+        intake = cspace.intakeSetup(opts);
         stop();
 
     });
