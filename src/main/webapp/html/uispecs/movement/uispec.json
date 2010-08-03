@@ -1,0 +1,184 @@
+{
+    "sidebar": {
+        "relatedObjects": {
+            ".csc-recordList-row:": {
+                "children": [
+                    {
+                        ".csc-related-summary": "${items.0.summary}",
+                        ".csc-related-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}" 
+                        } 
+                    } 
+                ] 
+            } 
+        },
+        "relatedProcedures": {
+            ".csc-recordList-row:": {
+                "children": [
+                    {
+                        ".csc-related-summary": "${items.0.summary}",
+                        ".csc-related-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}" 
+                        },
+                        ".csc-related-recordtype": "${items.0.recordtype}" 
+                    } 
+                ] 
+            } 
+        },
+        "termsUsed": {
+            ".csc-recordList-row:": {
+                "children": [
+                    {
+                        ".csc-related-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}" 
+                        },
+                        ".csc-related-field": "${items.0.sourceFieldName}",
+                        ".csc-related-recordtype": "${items.0.recordtype}" 
+                    } 
+                ] 
+            } 
+        } 
+    },
+    "titleBar": {
+        ".csc-titleBar-currentLocation": "${fields.currentLocation}" 
+    },
+    "recordEditor": {
+        ".csc-movement-currentLocation": "${fields.currentLocation}",
+        ".csc-movement-currentLocationFitness": {
+            "default": "0",
+            "optionnames": [
+                "Dangerous",
+                "Suitable",
+                "Temporary",
+                "Unsuitable" 
+            ],
+            "optionlist": [
+                "dangerous",
+                "suitable",
+                "temporary",
+                "unsuitable" 
+            ],
+            "selection": "${fields.currentLocationFitness}" 
+        },
+        ".csc-movement-currentLocationNote": "${fields.currentLocationNote}",
+        ".csc-movement-locationDate": "${fields.locationDate}",
+        ".csc-movement-locationDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid" 
+                } 
+            ] 
+        },
+        ".csc-movement-normalLocation": {
+            "valuebinding": "${fields.normalLocation}",
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/movement/autocomplete/normalLocation",
+                        "vocabUrl": "../../chain/movement/source-vocab/normalLocation"
+                    }
+                }
+            ]
+        },
+        ".csc-movement-movementContact": "${fields.movementContact}",
+        ".csc-movement-movementMethods": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.movementMethods",
+                        "protoTree": {
+                            ".csc-movement-movementMethods": {
+                                "default": "0",
+                                "optionnames": [
+                                    "Forklift",
+                                    "Handcarried",
+                                    "Trolley" 
+                                ],
+                                "optionlist": [
+                                    "forklift",
+                                    "handcarried",
+                                    "trolley" 
+                                ],
+                                "selection": "${fields.movementMethods.0.movementMethod}" 
+                            } 
+                        } 
+                    } 
+                } 
+            ] 
+        },
+        ".csc-movement-movementNote": "${fields.movementNote}",
+        ".csc-movement-movementReferenceNumber-patternChooserContainer": {
+            "decorators": [
+                {
+                    "func": "cspace.numberPatternChooser",
+                    "type": "fluid",
+                    "options": {
+                        "model": {
+                            "names": [
+                                "Movement" 
+                            ],
+                            "list": [
+                                "movement" 
+                            ],
+                            "samples": [
+                                "MV2010.001" 
+                            ] 
+                        },
+                        "selectors": {
+                            "numberField": ".csc-movement-movementReferenceNumber" 
+                        } 
+                    } 
+                } 
+            ] 
+        },
+        ".csc-movement-movementReferenceNumber": "${fields.movementReferenceNumber}",
+        ".csc-movement-plannedRemovalDate": "${fields.plannedRemovalDate}",
+        ".csc-movement-plannedRemovalDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid" 
+                } 
+            ] 
+        },
+        ".csc-movement-removalDate": "${fields.removalDate}",
+        ".csc-movement-removalDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid" 
+                } 
+            ] 
+        },
+        ".csc-movement-reasonForMove": {
+            "default": "0",
+            "optionnames": [
+                "Conservation",
+                "Exhibition",
+                "Inventory",
+                "Loan",
+                "New Storage Location",
+                "Photography",
+                "Research" 
+            ],
+            "optionlist": [
+                "conservation",
+                "exhibition",
+                "inventory",
+                "loan",
+                "newstoragelocation",
+                "photography",
+                "research" 
+            ],
+            "selection": "${fields.reasonForMove}" 
+        } 
+    }
+}

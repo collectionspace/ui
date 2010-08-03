@@ -85,7 +85,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         }, options);
-        pageBuilder = cspace.objectSetup(options, "../../main/webapp/html/config/objects.json").pageBuilder;
+        pageBuilder = cspace.recordSetup(options, "../../main/webapp/html/config/objects.json").pageBuilder;
     };
     
     objectsTests.test("Initialization", function () {

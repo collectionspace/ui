@@ -83,7 +83,14 @@ cspace = cspace || {};
                         fetchModel("loanout"),
                         "{pageBuilder}.uispec.proceduresLoanout",
                         stringOptions]
-          }
+                },
+                proceduresMovement: {
+                    funcName: "cspace.recordList",
+                    args: [".movement-records-group",
+                        fetchModel("movement"),
+                        "{pageBuilder}.uispec.proceduresMovement",
+                        stringOptions]
+                }
         };
         
         var options = {
