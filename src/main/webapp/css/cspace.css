@@ -636,3 +636,20 @@ div.cs-rep eatable-content input{float:left;}
 input.cs-repeatable-primary {width: 5%; position: relative; vertical-align: top;}
 input.cs-repeatable-delete {width: 16px; height:18px; vertical-align: top; padding:0px; background:transparent url('../images/icnDeleteIdle.png') no-repeat 1px 2px; /*color: transparent; background-color: transparent; line-height:100%; font-size:11px; height:15px; line-height:80%; margin:2px 0;*/}
 input.cs-repeatable-delete:hover, input.cs-repeatable-delete:focus {color: white; /*background-color: blue;*/ background:transparent url('../images/icnDelete.png') no-repeat 1px 2px;}
+
+/***********    CSS For New Markup on Location and Movement Control Record    ***********/
+/* Note: The scoping of these styles to the movement template is temporary, until the styles are approved */
+.csc-movement-template .fl-table {
+    display:table;
+}
+.csc-movement-template .fl-table-row {
+    display:table-row;
+}
+.csc-movement-template .fl-table-cell {
+    display:table-cell;
+    vertical-align:middle;
+}
+.csc-movement-template .cs-date-picker {margin-top: 18px;}
+.csc-movement-template .cs-calendar-button:focus {outline: 1px solid black;}
+.csc-movement-template .input-alpha, .csc-movement-template .input-textarea {border: 1px solid #C7CFD4}
+.csc-movement-template .button-row {padding-bottom: 32px;}

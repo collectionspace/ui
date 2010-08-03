@@ -1,0 +1,28 @@
+{
+    "csid": "112.442.1",
+    "fields": {
+        "currentLocation": "Sample Location",
+        "currentLocationFitness": "suitable",
+        "currentLocationNote": "Sample Current Location Note",
+        "locationDate": "March 26, 2010",
+        "normalLocation": "Sample Location",
+        "movementContact": "The Big Lebowsky",
+        "movementMethods": [
+            {
+                "_primary": false,
+                "movementMethod": "forklift" 
+            },
+            {
+                "_primary": true,
+                "movementMethod": "trolley" 
+            }
+        ],
+        "movementNote": "Sample movement note",
+        "movementReferenceNumber": "211.442.1",
+        "plannedRemovalDate": "May 26, 2010",
+        "removalDate": "May 25, 2010",
+        "reasonForMove": "photography" 
+    },
+    "termsUsed": [],
+    "relations": {}
+}

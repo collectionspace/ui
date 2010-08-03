@@ -65,6 +65,7 @@
 														<div class="radio-button"><input id="new-acquisition-radio" type="radio" name="recordtype" value="acquisition.html" /> <label for="new-acquisition-radio">Acquisition</label></div>
 														<div class="radio-button"><input id="new-loanin-radio" type="radio" name="recordtype" value="loanin.html" /> <label for="new-loanin-radio">Loan In</label></div>
 														<div class="radio-button"><input id="new-loanout-radio" type="radio" name="recordtype" value="loanout.html" /> <label for="new-loanout-radio">Loan Out</label></div>
+														<div class="radio-button"><input id="new-movement-radio" type="radio" name="recordtype" value="movement.html" /> <label for="new-movement-radio">Location and movement control</label></div>
 														<div class="radio-button disabled"><input id="new-exit-radio" type="radio" name="recordtype" value="objectexit" disabled="disabled" /> <label for="new-exit-radio">Object Exit</label></div>
 													</div>
 												</div>
@@ -109,7 +110,7 @@
 								</div>
 								<div class="clear"></div>
 								<div class="button-row-left-center">
-									<input type="button" onclick="getRadioValue();" value="Create Quick Record" />
+									<input type="button" onclick="getRadioValue();" value="Create" />
 									<!--<input type="button" disabled="disabled" value="Create New" />
 									<input type="button" disabled="disabled" value="Create From Existing" />
 									<input type="button" disabled="disabled" value="Create From Template" />-->
@@ -136,6 +137,7 @@
 													<option value="acquisition">Acquisition</option>
                                                     <option value="loanin">Loan In</option>
                                                     <option value="loanout">Loan Out</option>
+                                                    <option value="movement">Location and Movement Control</option>
                                                     <option value="authorities-person">Person</option>
                                                     <option value="authorities-organization">Organization</option>
 												</select></div>
