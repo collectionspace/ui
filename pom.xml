@@ -26,7 +26,7 @@
     <profile>
       <id>tomcat</id>
       <properties>
-        <cspace.server.home>${env.CATLINA_HOME}</cspace.server.home>
+        <cspace.server.home>${env.CATALINA_HOME}</cspace.server.home>
         <!-- using the tomcat 6.x container -->
         <cargo.container>tomcat6x</cargo.container>
       </properties>

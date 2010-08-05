@@ -29,13 +29,14 @@
         "copyNumber": "17",
         "otherNumbers": [
             {
-                "otherNumberType": "unknown",
-                "otherNumber": "42" 
-            },
-            {
                 "otherNumberType": "obsolete",
-                "otherNumber": "7" 
-            } 
+                "otherNumber": "7"
+            }, 
+            {
+                "otherNumberType": "unknown",
+                "otherNumber": "42" ,
+                "_primary": true
+            }
         ],
         "otherNumberType": "obsolete",
         "otherNumber": "2",
