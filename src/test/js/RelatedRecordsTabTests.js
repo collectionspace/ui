@@ -152,6 +152,98 @@ var relatedRecordsTabTester = function ($) {
         stop();
     });
     
+    relatedRecordsTabTest.test("Validation of required fields in related records (CSPACE-2294)", function () {
+        var  objTab, primaryApplier;
+        $.ajax({
+            url: "../../main/webapp/html/data/intake/IN2004.002.json",
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                model = data;
+                primaryApplier = fluid.makeChangeApplier(model);
+            },
+            error: function (xhr, textStatus, error) {
+                fluid.log("Unable to load object's data for testing");
+            }
+        });
+        var options = {
+            primaryRecordType: "intake",
+            configURL: "../../main/webapp/html/config/object-tab.json",
+            pageBuilder: {
+                options: {
+                    uispecUrl: "../../main/webapp/html/uispecs/object-tab/uispec.json",
+                    pageSpec: {
+                        list: {
+                            href: "../../main/webapp/html/objectTabRecordListTemplate.html"
+                        },
+                        details: {
+                            href: "../../main/webapp/html/ObjectEntryTemplate.html"
+                        }
+                    },
+                    listeners: {
+                        onDependencySetup: function (uispec) {
+                            // Change the template URL for the number pattern chooser.
+                            uispec.details[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl
+                                = "../../main/webapp/html/NumberPatternChooser.html";
+                        },
+                        pageReady: function () {
+                                var details = objTab.pageBuilder.components.relatedRecordsTab.listEditor.details;
+                                details.events.afterRender.addListener(function () {
+                                    var reSelectors = details.options.selectors;
+                                    var messageContainer = $(reSelectors.messageContainer, details.container);
+                                    var message = $($(reSelectors.feedbackMessage, messageContainer)[0]);
+                                    jqUnit.notVisible("Before testing, message should not be visible", message);
+                                    $(".csc-object-identification-object-number", details.container).val("");
+                                    var ret = details.requestSave();
+                                    jqUnit.isVisible("After clicking save, message should be visible", message);
+                                    jqUnit.assertEquals("Message should be ", "Please specify an Identification Number", message.text());
+                                    details.events.afterRender.removeListener("testFunc");
+                                    start();
+                                }, "testFunc");
+                                $(".csc-recordList-row:first").click();
+                            }
+                    }
+                }
+            },
+            depOpts: {
+                relatedRecordsTab: {
+                    options: {
+                        relationManager: {
+                            options: {
+                                searchToRelateDialog: {
+                                    options: {
+                                        templates: {
+                                            dialog: "../../main/webapp/html/searchToRelate.html"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        listEditor: {
+                            options: {
+                                dataContext: {
+                                    options: {
+                                        baseUrl: "../../main/webapp/html/data"
+                                    }
+                                },
+                                details: {
+                                    options: {
+                                        confirmation: {
+                                            options: {
+                                                confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        objTab = cspace.tabSetup(primaryApplier, options);
+        stop();
+    });
 };
 
 (function () {

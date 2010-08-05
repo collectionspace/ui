@@ -15,6 +15,11 @@ cspace = cspace || {};
 
 (function ($) {
 
+    /**
+     * 
+     * @param {Object} applier  ChangeApplier for the primary record's data model
+     * @param {Object} options
+     */
     cspace.tabSetup = function (applier, options) {
         
         options = options || {};

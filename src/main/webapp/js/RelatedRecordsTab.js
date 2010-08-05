@@ -21,9 +21,6 @@ cspace = cspace || {};
         that.applier.modelChanged.addListener(elPath, function () {
             that.listEditor.options.updateList(that.listEditor, that.listEditor.list.refreshView);
         });
-        that.listEditor.events.pageReady.addListener(function () {
-            that.events.afterRender.fire();
-        });
         that.relationManager.events.onCreateNewRecord.addListener(that.listEditor.addNewListRow);
         that.listEditor.detailsDC.events.afterCreate.addListener(function (data) {
             var newRelation = [{
@@ -87,7 +84,14 @@ cspace = cspace || {};
         ]);
         
         that.options.listEditor.options.updateList = createListUpdater(that.applier, that.relationManager.options.primaryRecordType, that.recordType);
-        
+
+        $.extend(true, that.options.listEditor.options, {
+            listeners: {
+                pageReady: function () {
+                    that.events.afterRender.fire();
+                }
+            }
+        });        
         that.listEditor = fluid.initSubcomponent(that, "listEditor", [that.container, that.recordType, 
             that.uispec, fluid.COMPONENT_OPTIONS]);
             
