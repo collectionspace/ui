@@ -33,23 +33,12 @@ cspace = cspace || {};
             listEditor: {
                 options: {
                     initList: cspace.listEditor.receiveData,
-                    data: applier.model.relations.objects,  // ******
+                    data: applier.model.relations.objects,
                     dataContext: {
                         options: {
-                            recordType: "objects"  // ******
+                            recordType: "objects"
                         }
                     }
-    ,
-    details: {
-        options: {
-            selectors: {
-                identificationNumber: ".csc-object-identification-object-number"  // ******
-            },
-            strings: {
-                "identificationNumberRequired": "Please specify an Identification Number"   // ******
-            }
-        }
-    }
                 }
             },
             relationManager: {
@@ -73,25 +62,25 @@ cspace = cspace || {};
         var dependencies = {
             relatedRecordsTab: {
                 funcName: "cspace.relatedRecordsTab",
-                args: [".csc-object-tab", "objects", "{pageBuilder}.uispec", applier, tabOpts]  // ******
+                args: [".csc-object-tab", "objects", "{pageBuilder}.uispec", applier, tabOpts]
             }
         };
 
-        var opts = {
+        var options = {
             pageSpec: {
-                list: {  // ******
+                list: {
                     href: "objectTabRecordListTemplate.html",
                     templateSelector: ".csc-object-tab-record-list",
                     targetSelector: ".div-for-list-of-records"
                 },
-                details: {  // ******
+                details: {
                     href: "ObjectEntryTemplate.html",
                     templateSelector: ".csc-object-entry-template",
                     targetSelector: ".div-for-recordEditor"
                 } 
-            },  // ******
+            },
             pageType: "object-tab"
         };
-        cspace.pageBuilder(dependencies, opts);        
+        cspace.pageBuilder(dependencies, options);        
     };
 })(jQuery, fluid);

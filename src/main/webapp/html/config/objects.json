@@ -53,7 +53,7 @@
             "funcName": "cspace.tabs",
             "args": [
                 ".csc-tabs-template",
-                "{pageBuilder}.applier"
+                "{pageBuilder}.applier" 
             ] 
         },
         "recordEditor": {
