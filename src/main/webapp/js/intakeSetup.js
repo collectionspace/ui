@@ -3,7 +3,7 @@ Copyright 2009-2010 University of Toronto
 Copyright 2009 University of Cambridge
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
-ou may not use this file except in compliance with this License.
+You may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
@@ -23,9 +23,13 @@ cspace = cspace || {};
         var tbOpts = {
             uispec: "{pageBuilder}.uispec.titleBar"
         };
-        var reOpts = options.recordEditorOpts || {};
-        reOpts.selectors = {identificationNumber: ".csc-intake-entry-number"};
-        reOpts.strings = {identificationNumberRequired: "Please specify an Intake Entry Number"};
+        $.extend(true, tbOpts, options.titleBarOpts);
+
+        var reOpts = {
+            selectors: {identificationNumber: ".csc-intake-entry-number"},
+            strings: {identificationNumberRequired: "Please specify an Intake Entry Number"}
+        };
+        $.extend(true, reOpts, options.recordEditorOpts);
 
         var tabsOpts = {
             tabList: [
@@ -51,9 +55,11 @@ cspace = cspace || {};
         };
         $.extend(true, tabsOpts, options.tabsOpts);
 
-        var sbOpts = options.sideBarOpts || {};
-        sbOpts.uispec = "{pageBuilder}.uispec.sidebar";
-        sbOpts.primaryRecordType = "intake";
+        var sbOpts = {
+            uispec: "{pageBuilder}.uispec.sidebar",
+            primaryRecordType: "intake"
+        };
+        $.extend(true, sbOpts, optinos.sideBarOpts);
 
         var dependencies = {
             titleBar: {
@@ -74,6 +80,7 @@ cspace = cspace || {};
                 args: [".csc-sidebar", "{pageBuilder}.applier", sbOpts]
             }
         };
+
         var pageBuilderOpts = {
             dataContext:{
                 options: {
@@ -91,7 +98,6 @@ cspace = cspace || {};
                 }
             })
         }
-
         pageBuilderOpts.pageSpec = {
             header: {
                 href: cspace.util.fullUrl(options.templateUrlPrefix, "header.html"),

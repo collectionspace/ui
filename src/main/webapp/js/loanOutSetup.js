@@ -15,12 +15,15 @@ cspace = cspace || {};
 
 (function ($) {
 
-    cspace.loanOutSetup = function () {
+    cspace.loanOutSetup = function (options) {
         fluid.log("loanOutSetup.js loaded");
 
+        options = options || {};
         var tbOpts = {
             uispec: "{pageBuilder}.uispec.titleBar"
         };
+        $.extend(true, tbOpts, options.titleBarOpts);
+
         var tabsOpts = {
             tabList: [
                 {name: "Loan Out", target: "#primaryTab"},
@@ -34,21 +37,27 @@ cspace = cspace || {};
             ],
             tabSetups: [
                 null, {
-                    func: "cspace.objectTabSetup",
+                    func: "cspace.tabSetup",
                     options: {
-                        primaryRecordType: "loanout"
+                        primaryRecordType: "loanout",
+                        configURL: "./config/object-tab.json"
                     }
                 }
             ]
         };
+        $.extend(true, tabsOpts, options.tabsOpts);
+
         var reOpts = {
             selectors: {identificationNumber: ".csc-loanOut-loanOutNumber"},
             strings: {identificationNumberRequired: "Please specify a Loan Out Number"}
         };
+        $.extend(true, reOpts, options.recordEditorOpts);
+
         var sbOpts = {
             uispec: "{pageBuilder}.uispec.sidebar",
             primaryRecordType: "loanout"
         };
+        $.extend(true, sbOpts, options.sideBarOpts);
         
         var dependencies = {
             titleBar: {
@@ -69,55 +78,65 @@ cspace = cspace || {};
                 args: [".csc-sidebar", "{pageBuilder}.applier", sbOpts]
             }
         };
-        var options = {
-            dataContext: {
+
+        var pageBuilderOpts = {
+            dataContext:{
                 options: {
-                    recordType: "loanout"
+                    recordType: "loanOut"
                 }
-            },
-            pageSpec: {
-                header: {
-                    href: "header.html",
-                    templateSelector: ".csc-header-template",
-                    targetSelector: ".csc-header-container"
-                },
-                titleBar: {
-                    href: "loanOutTitleBar.html",
-                    templateSelector: ".csc-loanOut-titleBar-template",
-                    targetSelector: ".csc-loanOut-titleBar-container"
-                },
-                tabs: {
-                    href: "tabsTemplate.html",
-                    templateSelector: ".csc-tabs-template",
-                    targetSelector: ".csc-tabs-container"
-                },
-                dateEntry: {
-                    href: "loanOutTemplate.html",
-                    templateSelector: ".csc-loanOut-template",
-                    targetSelector: ".csc-record-edit-container"
-                },
-                sidebar: {
-                    href: "right-sidebar.html",
-                    templateSelector: ".csc-right-sidebar",
-                    targetSelector: ".csc-sidebar-container"
-                },
-                footer: {
-                    href: "footer.html",
-                    templateSelector: ".csc-footer",
-                    targetSelector: ".csc-footer-container"
-                }
-            },
-            pageType: "loanout"
+            }
         };
+        if (cspace.util.useLocalData()) {
+            $.extend(true, pageBuilderOpts, {
+                dataContext: {
+                    options: {
+                        baseUrl: "data",
+                        fileExtension: ".json"
+                    }
+                }
+            })
+        }
+        pageBuilderOpts.pageSpec = {
+            header: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "header.html"),
+                templateSelector: ".csc-header-template",
+                targetSelector: ".csc-header-container"
+            },
+            titleBar: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "loanOutTitleBar.html"),
+                templateSelector: ".csc-loanOut-titleBar-template",
+                targetSelector: ".csc-loanOut-titleBar-container"
+            },
+            tabs: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "tabsTemplate.html"),
+                templateSelector: ".csc-tabs-template",
+                targetSelector: ".csc-tabs-container"
+            },
+            dateEntry: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "loanOutTemplate.html"),
+                templateSelector: ".csc-loanOut-template",
+                targetSelector: ".csc-record-edit-container"
+            },
+            sidebar: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "right-sidebar.html"),
+                templateSelector: ".csc-right-sidebar",
+                targetSelector: ".csc-sidebar-container"
+            },
+            footer: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "footer.html"),
+                templateSelector: ".csc-footer",
+                targetSelector: ".csc-footer-container"
+            }
+        };
+        pageBuilderOpts.pageType = "loanout"
+        $.extend(true, pageBuilderOpts, options.pageBuilderOpts);
+
         var csid = cspace.util.getUrlParameter("csid");
         if (csid) {
-            options.csid = csid;
+            pageBuilderOpts.csid = csid;
         }
-        if (cspace.util.useLocalData()) {
-            options.dataContext.options.baseUrl = "data";
-            options.dataContext.options.fileExtension = ".json";
-        }
-        cspace.pageBuilder(dependencies, options);
+
+        return cspace.pageBuilder(dependencies, pageBuilderOpts);
     };
     
 })(jQuery);

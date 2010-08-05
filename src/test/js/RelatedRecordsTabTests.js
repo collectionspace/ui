@@ -13,14 +13,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 var relatedRecordsTabTester = function ($) {
     var testApplier = {};
+    var model, applier, pageBuilder;
+    
     var relatedRecordsTabTest = new jqUnit.TestCase("Related Records Tab Tests", function () {
         cspace.util.isTest = true;
         relatedRecordsTabTest.fetchTemplate("../../main/webapp/html/tabsTemplate.html", ".csc-tabs-template", $(".template1"));
         relatedRecordsTabTest.fetchTemplate("../../main/webapp/html/objectTabPlaceholder.html", ".csc-object-tab", $(".template2"));
         fluid.model.copyModel(testApplier, applier);        
     });
-    
-    var model, applier;
     
     $.ajax({
         url: "../../main/webapp/html/data/objects/1984.068.0335b.json",
@@ -125,7 +125,7 @@ var relatedRecordsTabTester = function ($) {
                     jqUnit.assertEquals("href for the 'Go to record' should be", "./objects.html?csid=2005.018.1383", $(".csc-goto").attr("href"));
                     start();
                 });
-                le.list.locate("row").eq(1).click()                
+                le.list.locate("row").eq(1).click();
             }
         });
         stop();
@@ -144,9 +144,9 @@ var relatedRecordsTabTester = function ($) {
                         jqUnit.assertEquals("href for the 'Go to record' should now be", "./objects.html?csid=1984.068.0338", $(".csc-goto").attr("href"));
                         start();
                     });
-                    le.list.locate("row").eq(0).click()                    
+                    le.list.locate("row").eq(0).click();
                 }, "firstSelect");
-                le.list.locate("row").eq(1).click()                
+                le.list.locate("row").eq(1).click();
             }
         });
         stop();

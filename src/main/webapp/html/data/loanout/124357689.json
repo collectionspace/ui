@@ -16,5 +16,6 @@
         "loanOutDate": "March 26, 2010",
         "loanReturnDate": "April 26, 2010",
         "loanRenewalApplicationDate": "April 25, 2010"
-    }
+    },
+    "relations": {}
 }

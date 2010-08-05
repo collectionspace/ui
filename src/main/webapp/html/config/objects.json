@@ -84,9 +84,10 @@
                 "tabSetups": [
                     "null",
                     {
-                        "func": "cspace.objectTabSetup",
+                        "func": "cspace.tabSetup",
                         "options": {
-                            "primaryRecordType": "objects" 
+                            "primaryRecordType": "objects",
+                            "configURL": "./config/object-tab.json"
                         } 
                     } 
                 ] 
