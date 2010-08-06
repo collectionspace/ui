@@ -396,6 +396,52 @@ var rendererTester = function(){
         var cutpoints = cspace.renderUtils.cutpointsFromUISpec(testUISpec);        
         jqUnit.assertDeepEq("Cutpoints are properly generated from the uispec ", expectedCutpoints, cutpoints);        
     });
+    
+    rendererTest.test("cspace.renderUtils.buildSelectorsFromUISpec() with expander", function () {
+        var testUISpec = {            
+            ".csc-role-group": "${fields.groupName}",
+            "expander": {
+                "type": "fluid.renderer.repeat",
+                "controlledBy": "fields.permissions",
+                "pathAs": "row",
+                "repeatID": ".csc-permissions-record-row:",
+                "tree": {
+                    ".csc-permissions-record-type": "${{row}.recordType}",
+                    "expander": {
+                        "type": "fluid.renderer.selection.inputs",
+                        "rowID": ".csc-permissions-radio:",
+                        "labelID": ".csc-permissions-record-permission-label",
+                        "inputID": ".csc-permissions-record-permission",
+                        "selectID": "permissions-select",
+                        "tree": {
+                            "selection": "${{row}.permission}",
+                            "optionlist": ["none", "read", "write", "delete"],
+                            "optionnames": ["none", "read", "write", "delete"],
+                            "default": "write"
+                        }
+                    }
+                }
+            }
+        };
+        var expectedSelectors = {
+            ".csc-role-group": ".csc-role-group",
+            ".csc-permissions-record-row:": ".csc-permissions-record-row",
+            ".csc-permissions-record-type": ".csc-permissions-record-type",
+            ".csc-permissions-radio:": ".csc-permissions-radio",
+            ".csc-permissions-record-permission-label": ".csc-permissions-record-permission-label",
+            ".csc-permissions-record-permission": ".csc-permissions-record-permission",
+            
+            // TODO: Selectors below are actually a bug and should be ingored in the uispec.
+            "selection": "selection",
+            "optionlist": "optionlist",
+            "optionnames": "optionnames",
+            "default": "default"
+            
+        };
+        var selectors = {};
+        cspace.renderUtils.buildSelectorsFromUISpec(testUISpec, selectors);        
+        jqUnit.assertDeepEq("Selectors are properly generated from the uispec ", expectedSelectors, selectors);        
+    });
 };
 
 (function () {

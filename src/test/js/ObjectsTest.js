@@ -128,7 +128,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                 jqUnit.assertEquals("Initally, there is 1 row in the 'brief description' repeatable fields", 1, $(".csc-object-identification-brief-description").length);
                                 jqUnit.assertEquals("Initally, Repeatable field has a value of ", "This is brief description.", $(".csc-object-identification-brief-description").val());
                                 pageBuilder.applier.modelChanged.addListener("*", function(model, oldModel, changeRequest){
-                                    jqUnit.assertEquals("Request model elPath should be ", "fields.briefDescriptions", changeRequest.path);
+                                    jqUnit.assertEquals("Request model elPath should be ", "fields.briefDescriptions", changeRequest[0].path);
                                     jqUnit.assertEquals("After '+field' clicked, there have to be 2 brief descriptions", 2, model.fields.briefDescriptions.length);
                                     jqUnit.assertDeepEq("(In the model) First brief descriptions is still correct", {
                                         "briefDescription": "This is brief description.",
@@ -191,7 +191,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                 $(".csc-object-identification-brief-description").val("New Test Description").change();
                                 pageBuilder.applier.modelChanged.addListener("*", function (model, oldModel, changeRequest) {
                                     jqUnit.assertEquals("Request model elPath should be ", 
-                                        "fields.briefDescriptions", changeRequest.path);
+                                        "fields.briefDescriptions", changeRequest[0].path);
                                     jqUnit.assertEquals("After '+field' clicked, there have to be 2 bried descriptions", 
                                         2, model.fields.briefDescriptions.length);
                                     jqUnit.assertDeepEq("(In the model) First brief descriptions is still", {

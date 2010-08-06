@@ -7855,8 +7855,7 @@ var fluid = fluid || fluid_1_2;
         return !value || valueType === "string" || valueType === "boolean" || valueType === "number" || valueType === "function";
     };
         
-    function mergeImpl(policy, basePath, target, source) {
-        var thisPolicy = policy && typeof(policy) !== "string"? policy[basePath] : policy;
+    function mergeImpl(policy, basePath, target, source, thisPolicy) {
         if (typeof(thisPolicy) === "function") {
             thisPolicy.apply(null, target, source);
             return target;
@@ -7867,17 +7866,20 @@ var fluid = fluid || fluid_1_2;
       
         for (var name in source) {
             var path = (basePath? basePath + ".": "") + name;
+            var newPolicy = policy && typeof(policy) !== "string"? policy[path] : policy;
             var thisTarget = target[name];
             var thisSource = source[name];
             var primitiveTarget = fluid.isPrimitive(thisTarget);
     
             if (thisSource !== undefined) {
                 if (thisSource !== null && typeof thisSource === 'object' &&
-                      !thisSource.nodeType && !thisSource.jquery && thisSource !== fluid.VALUE) {
+                      !thisSource.nodeType && !thisSource.jquery && thisSource !== fluid.VALUE 
+                      && (thisTarget !== undefined || newPolicy !== "preserve")
+                      ) {
                     if (primitiveTarget) {
                         target[name] = thisTarget = thisSource instanceof Array? [] : {};
                     }
-                    mergeImpl(policy, path, thisTarget, thisSource);
+                    mergeImpl(policy, path, thisTarget, thisSource, newPolicy);
                 }
                 else {
                     if (thisTarget === null || thisTarget === undefined || thisPolicy !== "reverse") {
@@ -7910,7 +7912,7 @@ var fluid = fluid || fluid_1_2;
         for (var i = 2; i < arguments.length; ++i) {
             var source = arguments[i];
             if (source !== null && source !== undefined) {
-                mergeImpl(policy, path, target, source);
+                mergeImpl(policy, path, target, source, policy ? policy[""] : null);
             }
         }
         if (policy && typeof(policy) !== "string") {
@@ -7990,6 +7992,13 @@ var fluid = fluid || fluid_1_2;
     fluid.event = {};
         
     var fluid_guid = 1;
+    
+    fluid.event.identifyListener = function(listener) {
+        if (!listener.$$guid) {
+            listener.$$guid = fluid_guid++;
+        }
+        return listener.$$guid;
+    };
     /** Construct an "event firer" object which can be used to register and deregister 
      * listeners, to which "events" can be fired. These events consist of an arbitrary
      * function signature. General documentation on the Fluid events system is at
@@ -8002,10 +8011,30 @@ var fluid = fluid || fluid_1_2;
      */
     
     fluid.event.getEventFirer = function (unicast, preventable) {
-        var log = fluid.log;
         var listeners = {};
+        
+        function fireToListeners(listeners, args, wrapper) {
+            for (var i in listeners) {
+                var lisrec = listeners[i];
+                var listener = lisrec.listener;
+                if (lisrec.predicate && !lisrec.predicate(listener, args)) {
+                    continue;
+                }
+                try {
+                    var ret = (wrapper? wrapper(listener) : listener).apply(null, args);
+                    if (preventable && ret === false) {
+                        return false;
+                    }
+                }
+                catch (e) {
+                    fluid.log("FireEvent received exception " + e.message + " e " + e + " firing to listener " + i);
+                    throw (e);       
+                }
+            }
+        }
+        
         return {
-            addListener: function (listener, namespace, predicate) {
+           addListener: function (listener, namespace, predicate) {
                 if (!listener) {
                     return;
                 }
@@ -8013,10 +8042,7 @@ var fluid = fluid || fluid_1_2;
                     namespace = "unicast";
                 }
                 if (!namespace) {
-                    if (!listener.$$guid) {
-                        listener.$$guid = fluid_guid++;
-                    }
-                    namespace = listener.$$guid;
+                    namespace = fluid.event.identifyListener(listener);
                 }
 
                 listeners[namespace] = {listener: listener, predicate: predicate};
@@ -8030,25 +8056,15 @@ var fluid = fluid || fluid_1_2;
                     delete listeners[listener.$$guid];
                 }
             },
-        
+            // NB - this method exists currently solely for the convenience of the new,
+            // transactional changeApplier. As it exists it is hard to imagine the function
+            // being helpful to any other client. We need to get more experience on the kinds
+            // of listeners that are useful, and ultimately factor this method away.
+            fireToListeners: function (listeners, args, wrapper) {
+                return fireToListeners(listeners, args, wrapper);
+            },
             fire: function () {
-                for (var i in listeners) {
-                    var lisrec = listeners[i];
-                    var listener = lisrec.listener;
-                    if (lisrec.predicate && !lisrec.predicate(listener, arguments)) {
-                        continue;
-                    }
-                    try {
-                        var ret = listener.apply(null, arguments);
-                        if (preventable && ret === false) {
-                            return false;
-                        }
-                    }
-                    catch (e) {
-                        log("FireEvent received exception " + e.message + " e " + e + " firing to listener " + i);
-                        throw (e);       
-                    }
-                }
+                return fireToListeners(listeners, arguments);
             }
         };
     };
@@ -8074,15 +8090,20 @@ var fluid = fluid || fluid_1_2;
         return String(EL).split('.');
     };
     
+    /** Compose an EL expression from two separate EL expressions. The returned 
+     * expression will be the one that will navigate the first expression, and then
+     * the second, from the value reached by the first. Either prefix or suffix may be
+     * the empty string **/
+    
     fluid.model.composePath = function (prefix, suffix) {
-        return prefix === ""? suffix : prefix + "." + suffix;
+        return prefix === ""? suffix : (suffix === ""? prefix : prefix + "." + suffix);
     };
 
     fluid.model.getPenultimate = function (root, EL, environment, create) {
         var segs = fluid.model.parseEL(EL);
         for (var i = 0; i < segs.length - 1; ++i) {
             if (!root) {
-                return root;
+                return {root: root };
             }
             var segment = segs[i];
             if (environment && environment[segment]) {
@@ -8233,14 +8254,13 @@ var fluid = fluid || fluid_1_2;
         return element.id;
     };
     
-        
     // Functional programming utilities.
     
     function transformInternal(source, togo, key, args) {
         var transit = source[key];
-            for (var j = 0; j < args.length - 1; ++ j) {
-                transit = args[j + 1](transit, key);
-            }
+        for (var j = 0; j < args.length - 1; ++ j) {
+            transit = args[j + 1](transit, key);
+        }
         togo[key] = transit; 
     }
     
@@ -8575,7 +8595,7 @@ fluid_1_2 = fluid_1_2 || {};
     };
       
 })(jQuery, fluid_1_2);
-  /*
+/*
 Copyright 2007-2010 University of Cambridge
 Copyright 2007-2009 University of Toronto
 Copyright 2007-2009 University of California, Berkeley
@@ -8862,7 +8882,7 @@ fluid_1_2 = fluid_1_2 || {};
     fluid.pathUtil.matchPath = function(spec, path) {
         var togo = "";
         while (true) {
-          if (!spec) {break;}
+          if (!spec || path === "") {break;}
           if (!path) {return null;}
           var spechead = fluid.pathUtil.getHeadPath(spec);
           var pathhead = fluid.pathUtil.getHeadPath(path);
@@ -8876,21 +8896,43 @@ fluid_1_2 = fluid_1_2 || {};
         }
         return togo;
       };
-  
-  
-    fluid.model.applyChangeRequest = function(model, request) {
+      
+    fluid.model.isNullChange = function(model, request) {
         if (request.type === "ADD") {
-            fluid.model.setBeanValue(model, request.path, request.value);
+            var existing = fluid.model.getBeanValue(model, request.path);
+            if (existing === request.value) {
+                return true;
             }
-        else if (request.type === "DELETE") {
-            var totail = fluid.pathUtil.getToTailPath(request.path);
-            var tail = fluid.pathUtil.getTailPath(request.path);
-            var penult = fluid.model.getBeanValue(model, penult);
-            delete penult[tail];
         }
     };
-  
-    fluid.model.bindRequestChange = function(that) {
+    /** Applies the supplied ChangeRequest object directly to the supplied model.
+     */
+    fluid.model.applyChangeRequest = function(model, request) {
+        var pen = fluid.model.getPenultimate(model, request.path);
+        if (request.type === "ADD" || request.type === "MERGE") {
+            if (pen.last === "" || request.type === "MERGE") {
+               if (request.type === "ADD") {
+                   fluid.clear(pen.root);
+               }
+               $.extend(true, pen.last === ""? pen.root: pen.root[pen.last], request.value);
+            }
+            else {
+                pen.root[pen.last] = request.value;
+            }
+        }
+        else if (request.type === "DELETE") {
+            if (pen.last === "") {
+                fluid.clear(pen.root);
+            }
+            else {
+                delete pen.root[pen.last];
+            }
+        }
+    };
+    
+    // Utility shared between changeApplier and superApplier
+    
+    function bindRequestChange(that) {
         that.requestChange = function(path, value, type) {
             var changeRequest = {
                 path: path,
@@ -8899,51 +8941,250 @@ fluid_1_2 = fluid_1_2 || {};
             };
         that.fireChangeRequest(changeRequest);
         }
-    };
+    }
+    
   
-    fluid.makeChangeApplier = function(model) {
+    fluid.makeChangeApplier = function(model, options) {
+        options = options || {};
         var baseEvents = {
             guards: fluid.event.getEventFirer(false, true),
+            postGuards: fluid.event.getEventFirer(false, true),
             modelChanged: fluid.event.getEventFirer(false, false)
         };
         var that = {
             model: model
         };
-        function makePredicate(listenerMember, requestIndex) {
-          return function(listener, args) {
-                var changeRequest = args[requestIndex];
-                return fluid.pathUtil.matchPath(listener[listenerMember], changeRequest.path);
-            };
+        
+        function makeGuardWrapper(cullUnchanged) {
+            if (!cullUnchanged) {
+                return null;
+            }
+            var togo = function(guard) {
+                return function(model, changeRequest, internalApplier) {
+                    var oldRet = guard(model, changeRequest, internalApplier);
+                    if (oldRet === false) { return false;}
+                    else {
+                        if (fluid.model.isNullChange(model, changeRequest)) {
+                            togo.culled = true;
+                            return false;
+                        }
+                    }
+                }
+            }
+            return togo;
         }
-        function adaptListener(that, name, listenerMember, requestIndex) {
-            var predicate = makePredicate(listenerMember, requestIndex);
+
+        function wrapListener(listener, spec) {
+             var pathSpec = spec;
+             var transactional = false;
+             var priority = Number.MAX_VALUE;
+             if (typeof (spec) !== "string") {
+                 pathSpec = spec.path;
+                 transactional = spec.transactional;
+                 if (spec.priority !== undefined) {
+                     priority = spec.priority;
+                     }
+                 }
+             else {
+                 if (pathSpec.charAt(0) === "!") {
+                     transactional = true;
+                     pathSpec = pathSpec.substring(1);
+                 }
+             }
+             return function(changePath, fireSpec, accum) {
+                 var guid = fluid.event.identifyListener(listener);
+                 var exist = fireSpec.guids[guid];
+                 if (!exist) {
+                     var match = fluid.pathUtil.matchPath(pathSpec, changePath);
+                     if (match !== null) {
+                         var record = {
+                             changePath: changePath,
+                             pathSpec: pathSpec,
+                             listener: listener,
+                             priority: priority,
+                             transactional: transactional
+                             };
+                         if (accum) {
+                             record.accumulate = [accum];
+                         }
+                         fireSpec.guids[guid] = record;
+                         var collection = transactional? "transListeners": "listeners";
+                         fireSpec[collection].push(record);
+                         fireSpec.all.push(record);
+                     }
+                 }
+                 else if (accum) {
+                     if (!exist.accumulate) {
+                        exist.accumulate = [];
+                     }
+                     exist.accumulate.push(accum);
+                 }
+           };
+        }
+        
+        function fireFromSpec(name, fireSpec, args, category, wrapper) {
+            return baseEvents[name].fireToListeners(fireSpec[category], args, wrapper);
+        }
+        
+        function fireComparator(recA, recB) {
+            return recA.priority - recB.priority;
+        }
+
+        function prepareFireEvent(name, changePath, fireSpec, accum) {
+            baseEvents[name].fire(changePath, fireSpec, accum);
+            fireSpec.all.sort(fireComparator);
+            fireSpec.listeners.sort(fireComparator);
+            fireSpec.transListeners.sort(fireComparator);
+        }
+        
+        function makeFireSpec() {
+            return {guids: {}, all: [], listeners: [], transListeners: []};
+        }
+        
+        function getFireSpec(name, changePath) {
+            var fireSpec = makeFireSpec();
+            prepareFireEvent(name, changePath, fireSpec);
+            return fireSpec;
+        }
+        
+        function fireEvent(name, changePath, args, wrapper) {
+            var fireSpec = getFireSpec(name, changePath);
+            return fireFromSpec(name, fireSpec, args, "all", wrapper);
+        }
+        
+        function adaptListener(that, name) {
             that[name] = {
-                addListener: function(pathSpec, listener, namespace) {
-                    listener[listenerMember] = pathSpec;
-                    baseEvents[name].addListener(listener, namespace, predicate);
+                addListener: function(spec, listener, namespace) {
+                    baseEvents[name].addListener(wrapListener(listener, spec), namespace);
                 },
                 removeListener: function(listener) {
                     baseEvents[name].removeListener(listener);
                 }
             };
         }
+        adaptListener(that, "guards");
+        adaptListener(that, "postGuards");
+        adaptListener(that, "modelChanged");
         
-        adaptListener(that, "guards", "guardedPathSpec", 1);
-        adaptListener(that, "modelChanged", "triggerPathSpec", 2);
-        that.fireChangeRequest = function(changeRequest) {
+        function preFireChangeRequest(changeRequest) {
             if (!changeRequest.type) {
                 changeRequest.type = "ADD";
             }
-            var prevent = baseEvents.guards.fire(model, changeRequest);
-            if (prevent === false) {
-                return;
+        }
+
+        var bareApplier = {
+            fireChangeRequest: function(changeRequest) {
+                that.fireChangeRequest(changeRequest, true);
             }
-            var oldModel = {};
-            fluid.model.copyModel(oldModel, model);
-            fluid.model.applyChangeRequest(model, changeRequest);
-            baseEvents.modelChanged.fire(model, oldModel, changeRequest);
         };
-        fluid.model.bindRequestChange(that);
+        bindRequestChange(bareApplier);
+
+        that.fireChangeRequest = function(changeRequest, defeatGuards) {
+            preFireChangeRequest(changeRequest);
+            var guardFireSpec = defeatGuards? null : getFireSpec("guards", changeRequest.path);
+            if (guardFireSpec && guardFireSpec.transListeners.length > 0) {
+                var ation = that.initiate();
+                ation.fireChangeRequest(changeRequest, guardFireSpec);
+                ation.commit();
+            }
+            else {
+                if (!defeatGuards) {
+                    // TODO: this use of "listeners" seems pointless since we have just verified that there are no transactional listeners
+                    var prevent = fireFromSpec("guards", guardFireSpec, [model, changeRequest, bareApplier], "listeners");
+                    if (prevent === false) {
+                        return false;
+                    }
+                }
+                var oldModel = model;
+                if (!options.thin) {
+                    oldModel = {};
+                    fluid.model.copyModel(oldModel, model);                    
+                }
+                fluid.model.applyChangeRequest(model, changeRequest);
+                fireEvent("modelChanged", changeRequest.path, [model, oldModel, [changeRequest]]);
+            }
+        };
+        
+        bindRequestChange(that);
+
+        function fireAgglomerated(eventName, formName, changes, args, accpos) {
+            var fireSpec = makeFireSpec();
+            for (var i = 0; i < changes.length; ++ i) {
+                prepareFireEvent(eventName, changes[i].path, fireSpec, changes[i]);
+                }
+            for (var i = 0; i < fireSpec[formName].length; ++ i) {
+                var spec = fireSpec[formName][i];
+                if (accpos) {
+                    args[accpos] = spec.accumulate;
+                }
+                var ret = spec.listener.apply(null, args);
+                if (ret === false) {
+                    return false;
+                }
+            }
+        }
+
+        that.initiate = function(newModel) {
+            var cancelled = false;
+            var changes = [];
+            if (options.thin) {
+                newModel = model;
+            }
+            else {
+                newModel = newModel || {};
+                fluid.model.copyModel(newModel, model);
+            }
+            // the guard in the inner world is given a private applier to "fast track"
+            // and glob collateral changes it requires
+            var internalApplier = 
+              {fireChangeRequest: function(changeRequest) {
+                    preFireChangeRequest(changeRequest);
+                    fluid.model.applyChangeRequest(newModel, changeRequest);
+                    changes.push(changeRequest);
+                }};
+            bindRequestChange(internalApplier);
+            var ation = {
+                commit: function() {
+                    if (cancelled) {
+                        return false;
+                    }
+                    var ret = fireAgglomerated("postGuards", "transListeners", changes, [newModel, null, internalApplier], 1);
+                    if (ret === false) {
+                        return false;
+                    }
+                    if (options.thin) {
+                        oldModel = model;
+                    }
+                    else {
+                        var oldModel = {};
+                        fluid.model.copyModel(oldModel, model);
+                        fluid.clear(model);
+                        fluid.model.copyModel(model, newModel);
+                    }
+                    fireAgglomerated("modelChanged", "all", changes, [model, oldModel, null], 2);
+                },
+                fireChangeRequest: function(changeRequest) {
+                     preFireChangeRequest(changeRequest);
+                     if (options.cullUnchanged && fluid.model.isNullChange(model, changeRequest)) {
+                         return;
+                     } 
+                     var wrapper = makeGuardWrapper(options.cullUnchanged);
+                     var prevent = fireEvent("guards", changeRequest.path, [newModel, changeRequest, internalApplier], wrapper);
+                     if (prevent === false && !(wrapper && wrapper.culled)) {
+                         cancelled = true;
+                     }
+                     if (!cancelled) {
+                         if (!(wrapper && wrapper.culled)) {
+                             fluid.model.applyChangeRequest(newModel, changeRequest);
+                             changes.push(changeRequest);
+                         }
+                     }
+                }
+            };
+            bindRequestChange(ation);
+
+            return ation;
+        };
         
         return that;
     };
@@ -8966,6 +9207,7 @@ fluid_1_2 = fluid_1_2 || {};
                 }
             }
         };
+        bindRequestChange(that);
         return that;
     };
     
@@ -9680,6 +9922,205 @@ var fluid = fluid || fluid_1_2;
 
   
   })(jQuery, fluid_1_2);
+/*
+Copyright 2007-2010 University of Cambridge
+Copyright 2007-2009 University of Toronto
+
+Licensed under the Educational Community License (ECL), Version 2.0 or the New
+BSD license. You may not use this file except in compliance with one these
+Licenses.
+
+You may obtain a copy of the ECL 2.0 License and BSD License at
+https://source.fluidproject.org/svn/LICENSE.txt
+*/
+
+// Declare dependencies.
+/*global jQuery*/
+
+var fluid_1_2 = fluid_1_2 || {};
+
+(function ($, fluid) {
+
+    var singleThreadLocal = {};
+    
+    fluid.singleThreadLocal = function() {
+        return singleThreadLocal;
+    };
+
+    fluid.threadLocal = fluid.singleThreadLocal; // TODO: Apply IoC system to IoC system!
+
+    fluid.withEnvironment = function(envAdd, func) {
+        var root = fluid.threadLocal();
+        try {
+            $.extend(root, envAdd);
+            return func();
+        }
+        finally {
+            for (var key in envAdd) {
+               delete root[key];
+            }
+        }
+    };
+    
+    fluid.extractEL = function(string, options) {
+        if (options.ELstyle === "ALL") {
+            return string;
+        }
+        else if (options.ELstyle.length === 1) {
+            if (string.charAt(0) === options.ELstyle) {
+                return string.substring(1);
+            }
+        }
+        else if (options.ELstyle === "${}") {
+            var i1 = string.indexOf("${");
+            var i2 = string.lastIndexOf("}");
+            if (i1 === 0 && i2 !== -1) {
+                return string.substring(2, i2);
+            }
+        }
+    };
+    
+    fluid.extractELWithContext = function(string, options) {
+        var EL = fluid.extractEL(string, options);
+        if (EL && EL.charAt(0) === "{") {
+            return fluid.parseContextReference(EL, 0);
+        }
+        return EL? {path: EL} : EL;
+    };
+
+    /* An EL extraction utlity suitable for context expressions which occur in 
+     * expanding component trees. It assumes that any context expressions refer
+     * to EL paths that are to be referred to the "true (direct) model" - since
+     * the context during expansion may not agree with the context during rendering.
+     * It satisfies the same contract as fluid.extractEL, in that it will either return
+     * an EL path, or undefined if the string value supplied cannot be interpreted
+     * as an EL path with respect to the supplied options.
+     */
+        
+    fluid.extractContextualPath = function (string, options, env) {
+        var parsed = fluid.extractELWithContext(string, options);
+        if (parsed) {
+            if (parsed.context) {
+                var fetched = env[parsed.context];
+                if (typeof(fetched) !== "string") {
+                    fluid.fail("Could not look up context path named " + parsed.context + " to string value");
+                }
+                return fluid.model.composePath(fetched, parsed.path);
+            }
+            else {
+                return parsed.path;
+            }
+        }
+    };
+
+    // to integrate with FluidIoC
+    fluid.parseContextReference = function(reference, index, delimiter) {
+        var endcpos = reference.indexOf("}", index + 1);
+        if (endcpos === -1) {
+            fluid.fail("Malformed context reference without }");
+        }
+        var context = reference.substring(index + 1, endcpos);
+        var endpos = delimiter? reference.indexOf(delimiter, endcpos + 1) : reference.length;
+        var path = reference.substring(endcpos + 1, endpos);
+        if (path.charAt(0) === ".") {
+            path = path.substring(1);
+        }
+        return {context: context, path: path, endpos: endpos};
+    };
+    
+    fluid.fetchContextReference = function(parsed, directModel, env) {
+        var base = parsed.context? env[parsed.context] : directModel;
+        if (!base) {
+            return base;
+        }
+        return fluid.model.getBeanValue(base, parsed.path);
+    };
+    
+    function resolveValue(string, directModel, env, options) {
+        if (options.bareContextRefs && string.charAt(0) === "{") {
+            var parsed = fluid.parseContextReference(string, 0);
+            return fluid.fetchContextReference(parsed, directModel, env);        
+        }
+        else if (options.ELstyle && options.ELstyle !== "${}") {
+            var parsed = fluid.extractELWithContext(string, options);
+            if (parsed) {
+                return fluid.fetchContextReference(parsed, directModel, env);
+            }
+        }
+        while (typeof(string) === "string") {
+            var i1 = string.indexOf("${");
+            var i2 = string.indexOf("}", i1 + 2);
+            var all = (i1 === 0 && i2 === string.length - 1); 
+            if (i1 !== -1 && i2 !== -1) {
+                var parsed;
+                if (string.charAt(i1 + 2) === "{") {
+                    parsed = fluid.parseContextReference(string, i1 + 2, "}");
+                    i2 = parsed.endpos;
+                }
+                else {
+                    parsed = {path: string.substring(i1 + 2, i2)};
+                }
+                var subs = fluid.fetchContextReference(parsed, directModel, env);
+                // TODO: test case for all undefined substitution
+                if (subs === undefined || subs === null) {
+                    return subs;
+                    }
+                string = all? subs : string.substring(0, i1) + subs + string.substring(i2 + 1);
+            }
+            else {
+                break;
+            }
+        }
+        return string;
+    }
+    
+    function resolveEnvironmentImpl(obj, directModel, env, options) {
+        function recurse(arg) {
+            return resolveEnvironmentImpl(arg, directModel, env, options);
+        }
+        if (typeof(obj) === "string") {
+            return resolveValue(obj, directModel, env, options);
+        }
+        else if (fluid.isPrimitive(obj)) {
+            return obj;
+        }
+        else if (options.filter) {
+            return options.filter(obj, recurse);
+        }
+        else return fluid.transform(obj, function(value, key) {
+            return resolveEnvironmentImpl(value, directModel, env, options);
+        });
+    }
+    
+    fluid.defaults("fluid.resolveEnvironment", 
+        {ELstyle:     "${}",
+         bareContextRefs: true});
+    
+    fluid.resolveEnvironment = function(obj, directModel, options) {
+        directModel = directModel || {};
+        options = options || fluid.defaults("fluid.resolveEnvironment");
+        var env = fluid.threadLocal();
+        return resolveEnvironmentImpl(obj, directModel, env, options);
+    };
+          
+})(jQuery, fluid_1_2);
+/*
+Copyright 2008-2009 University of Toronto
+Copyright 2008-2009 University of California, Berkeley
+
+Licensed under the Educational Community License (ECL), Version 2.0 or the New
+BSD license. You may not use this file except in compliance with one these
+Licenses.
+
+You may obtain a copy of the ECL 2.0 License and BSD License at
+https://source.fluidproject.org/svn/LICENSE.txt
+*/
+
+(function ($) {
+	// Note: the use of fl-ProgEnhance-basic is deprecated, and replaced by fl-progEnhance-basic.
+	// It is included here for backward compatibility only.
+    $("head").append("<style type='text/css'>.fl-progEnhance-basic, .fl-ProgEnhance-basic { display: none; }</style>");
+})(jQuery);
 // =========================================================================
 //
 // tinyxmlsax.js - an XML SAX parser in JavaScript compressed for downloading
@@ -10720,9 +11161,32 @@ fluid_1_2 = fluid_1_2 || {};
 
 (function ($, fluid) {
   
-  function debugPosition(component) {
-      return "as child of " + (component.parent.fullID? "component with full ID " + component.parent.fullID : "root");
-  }
+    function debugPosition(component) {
+        return "as child of " + (component.parent.fullID? "component with full ID " + component.parent.fullID : "root");
+    }
+  
+    /** Better jQuery.each which works on hashes as well as having the arguments
+     * the right way round */
+    fluid.each = function (source, func) {
+        if (fluid.isArrayable(source)) {
+            for (var i = 0; i < source.length; ++ i) {
+                if (func(source[i], i) === false) { return false;}
+            }
+        }
+        else {
+            for (var key in source) {
+                if (func(source[key], key) === false) { return false;}
+            }
+        }
+    };
+    
+    fluid.arrayToHash = function(array) {
+        var togo = {};
+        fluid.each(array, function(el) {
+            togo[el] = true;
+        });
+        return togo;
+    };
   
   function computeFullID(component) {
       var togo = "";
@@ -10825,26 +11289,37 @@ fluid_1_2 = fluid_1_2 || {};
       fixupValue(holder[property], model);
   }
   
-  var duckMap = {children: "UIContainer", 
+  renderer.duckMap = {children: "UIContainer", 
         value: "UIBound", valuebinding: "UIBound", messagekey: "UIMessage", 
         markup: "UIVerbatim", selection: "UISelect", target: "UILink",
         choiceindex: "UISelectChoice", functionname: "UIInitBlock"};
   
+  var boundMap = {
+      UISelect:   ["selection", "optionlist", "optionnames"],
+      UILink:     ["target", "linktext"],
+      UIVerbatim: ["markup"]
+  };
+  
+  renderer.boundMap = fluid.transform(boundMap, fluid.arrayToHash);
+  
   renderer.inferComponentType = function(component) {
-      for (var key in duckMap) {
+      for (var key in renderer.duckMap) {
           if (component[key] !== undefined) {
-              component.componentType = duckMap[key];
-              break;
+              return renderer.duckMap[key];
           }
       }
+  };
+  
+  renderer.applyComponentType = function(component) {
+      component.componentType = renderer.inferComponentType(component);
       if (component.componentType === undefined && component.ID !== undefined) {
           component.componentType = "UIBound";
       }
-  }    
+  };
   
   function unzipComponent(component, model) {
       if (component) {
-          renderer.inferComponentType(component);
+          renderer.applyComponentType(component);
       }
       if (!component || component.componentType === undefined) {
           var decorators = component.decorators;
@@ -10856,17 +11331,13 @@ fluid_1_2 = fluid_1_2 || {};
       if (cType === "UIContainer") {
           component.children = fixChildren(component.children);
       }
-      else if (cType === "UISelect") {
-          upgradeBound(component, "selection", model);
-          upgradeBound(component, "optionlist", model);
-          upgradeBound(component, "optionnames", model);
-      }
-      else if (cType === "UILink") {
-          upgradeBound(component, "target", model);
-          upgradeBound(component, "linktext", model);
-      }
-      else if (cType === "UIVerbatim") {
-          upgradeBound(component, "markup", model);
+      else {
+          map = renderer.boundMap[cType];
+          if (map) {
+              fluid.each(map, function(value, key) {
+                  upgradeBound(component, key, model);
+              });
+          }
       }
       
       return component;
@@ -10881,7 +11352,7 @@ fluid_1_2 = fluid_1_2 || {};
     }
     
     if (tree.children) {
-       tree.childmap = {};
+      tree.childmap = {};
       for (var i = 0; i < tree.children.length; ++ i) {
         var child = tree.children[i];
         if (child.componentType === undefined) {
@@ -12223,6 +12694,365 @@ fluid_1_2 = fluid_1_2 || {};
 
 })(jQuery, fluid_1_2);
 /*
+Copyright 2008-2010 University of Cambridge
+Copyright 2008-2009 University of Toronto
+
+Licensed under the Educational Community License (ECL), Version 2.0 or the New
+BSD license. You may not use this file except in compliance with one these
+Licenses.
+
+You may obtain a copy of the ECL 2.0 License and BSD License at
+https://source.fluidproject.org/svn/LICENSE.txt
+*/
+
+/*global jQuery*/
+/*global fluid_1_2*/
+
+fluid_1_2 = fluid_1_2 || {};
+
+(function ($, fluid) {
+
+    if (!fluid.renderer) {
+        fluid.fail("fluidRenderer.js is a necessary dependency of RendererUtilities");
+        }
+  
+    fluid.registerNamespace("fluid.renderer.selection");
+    
+    // TODO: rescued from kettleCouchDB.js - clean up in time
+    fluid.expect = function (name, members, target) {
+        fluid.transform($.makeArray(members), function(key) {
+            if (!target[key]) {
+                fluid.fail(name + " missing required parameter " + key);
+            }
+        });
+    };
+    
+    /** Returns an array of size count, filled with increasing integers, 
+     *  starting at 0 or at the index specified by first. 
+     */
+    
+    fluid.iota = function (count, first) {
+        first = first || 0;
+        var togo = [];
+        for (var i = 0; i < count; ++ i) {
+            togo[togo.length] = first++;
+        }
+        return togo;
+    };
+    
+    fluid.renderer.selection.inputs = function(options, container, key, config) {
+        fluid.expect("Selection to inputs expander", ["selectID", "inputID", "labelID", "rowID"], options);
+        var selection = config.expander(options.tree);
+        var rows = fluid.transform(selection.optionlist.value, function(option, index) {
+            var togo = {};
+            var element =  {parentRelativeID: "..::" + options.selectID, choiceindex: index};
+            togo[options.inputID] = element;
+            togo[options.labelID] = fluid.copy(element); 
+            return togo;
+         });
+        var togo = {}; // TODO: JICO needs to support "quoted literal key initialisers" :P
+        togo[options.selectID] = selection;
+        togo[options.rowID] = {children: rows};
+        togo = config.expander(togo);
+        return togo;
+    };
+    
+    fluid.renderer.repeat = function(options, container, key, config) {
+        fluid.expect("Repetition expander", ["controlledBy", "tree"], options);
+        var path = fluid.extractContextualPath(options.controlledBy, {ELstyle: "ALL"}, fluid.threadLocal());
+        var list = fluid.model.getBeanValue(config.model, path);
+        
+        var togo = {};
+        if (!list || list.length === 0) {
+            return options.ifEmpty? config.expander(options.ifEmpty) : togo;
+        }
+        fluid.setLogging(true);
+        fluid.log("fluid.repeat controlledBy " + options.controlledBy);
+        fluid.log("Argument tree: " + JSON.stringify(options.tree));
+        var expanded = fluid.transform(list, function(element, i) {
+            var EL = fluid.model.composePath(path, i); 
+            var envAdd = {};
+            if (options.pathAs) {
+                envAdd[options.pathAs] = EL;
+            }
+            if (options.valueAs) {
+                envAdd[options.valueAs] = fluid.model.getBeanValue(config.model, EL);
+            }
+            var expandrow = fluid.withEnvironment(envAdd, function() {return config.expander(options.tree)});
+            return fluid.isArrayable(expandrow)? {children: expandrow} : expandrow;
+        });
+        fluid.log("Expanded to " + JSON.stringify(expanded));
+        var repeatID = options.repeatID;
+        if (repeatID.indexOf(":") === -1) {
+            repeatID = repeatID + ":";
+            }
+        fluid.each(expanded, function(entry) {entry.ID = repeatID});
+        return expanded;
+    };
+  
+    var removeSelectors = function (selectors, selectorsToIgnore) {
+        if (selectorsToIgnore) {
+            $.each(selectorsToIgnore, function (index, selectorToIgnore) {
+                delete selectors[selectorToIgnore];
+            });
+        }
+        return selectors;
+    };
+
+    var markRepeated = function (selector, repeatingSelectors) {
+        if (repeatingSelectors) {
+            $.each(repeatingSelectors, function (index, repeatingSelector) {
+                if (selector === repeatingSelector) {
+                    selector = selector + ":";
+                }
+            });
+        }
+        return selector;
+    };
+
+    fluid.renderer.selectorsToCutpoints = function (selectors, options) {
+        var togo = [];
+        options = options || {};
+        selectors = fluid.copy(selectors); // Make a copy before potentially destructively changing someone's selectors.
+    
+        if (options.selectorsToIgnore) {
+            selectors = removeSelectors(selectors, options.selectorsToIgnore);
+        }
+    
+        for (var selector in selectors) {
+            togo.push({
+                id: markRepeated(selector, options.repeatingSelectors),
+                selector: selectors[selector]
+            });
+        }
+    
+        return togo;
+    };
+  
+      /** A special "shallow copy" operation suitable for nondestructively
+     * merging trees of components. jQuery.extend in shallow mode will 
+     * neglect null valued properties.
+     */
+    fluid.renderer.mergeComponents = function (target, source) {
+        for (var key in source) {
+            target[key] = source[key];
+        }
+        return target;
+    };
+
+    /** Create a "protoComponent expander" with the supplied set of options.
+     * The returned value will be a function which accepts a "protoComponent tree"
+     * as argument, and returns a "fully expanded" tree suitable for supplying
+     * directly to the renderer.
+     * A "protoComponent tree" is similar to the "dehydrated form" accepted by
+     * the historical renderer - only
+     * i) The input format is unambiguous - this expander will NOT accept hydrated
+     * components in the {ID: "myId, myfield: "myvalue"} form - but ONLY in
+     * the dehydrated {myID: {myfield: myvalue}} form.
+     * ii) This expander has considerably greater power to expand condensed trees.
+     * In particular, an "EL style" option can be supplied which will expand bare
+     * strings found as values in the tree into UIBound components by a configurable
+     * strategy. Supported values for "ELstyle" are a) "ALL" - every string will be
+     * interpreted as an EL reference and assigned to the "valuebinding" member of
+     * the UIBound, or b) any single character, which if it appears as the first
+     * character of the string, will mark it out as an EL reference - otherwise it
+     * will be considered a literal value, or c) the value "${}" which will be
+     * recognised bracketing any other EL expression.
+     * 
+     * This expander will be upgraded in the future to support even more powerful
+     * forms of expansion, including model-directed expansion such as selection and
+     * repetition.
+     */
+
+    fluid.renderer.makeProtoExpander = function (expandOptions) {
+        var options = $.extend({}, expandOptions); // shallow copy of options
+        var IDescape = options.IDescape || "\\";
+        
+        function fetchEL(string) {
+            var env = fluid.threadLocal();
+            return fluid.extractContextualPath(string, options, env);
+        }
+        
+        function expandBound(value, concrete) {
+            if (value.messagekey !== undefined) {
+                return {
+                    componentType: "UIMessage",
+                    messagekey: value.messagekey,
+                    args: expandLight(value.args)
+                };
+            }
+            var proto;
+            if (!fluid.isPrimitive(value) && !fluid.isArrayable(value)) {
+                proto = value;
+                if (proto.decorators) {
+                   proto.decorators = expandLight(proto.decorators);
+                }
+            }
+            else {
+                proto = {};
+                var EL = typeof(value) === "string"? fetchEL(value) : null;
+                if (EL) {
+                    proto.valuebinding = EL;
+                }
+                else {
+                    proto.value = value;
+                }
+            }
+            if (options.model && proto.valuebinding && proto.value === undefined) {
+                proto.value = fluid.model.getBeanValue(options.model, proto.valuebinding);
+                }
+            if (concrete) {
+                proto.componentType = "UIBound";
+            }
+            return proto;
+        }
+        
+        options.filter = function (obj, recurse) {
+            if (fluid.isArrayable(obj)) {
+                return fluid.transform(obj, function(value) {return recurse(value);});
+            }
+            var togo = {};
+            for (var key in obj) {
+                var value = obj[key];
+                if (key === "expander" && value.type === "fluid.renderer.noexpand") {
+                    $.extend(togo, value.tree);
+                }
+                else {
+                    togo[key] = recurse(value);
+                }
+            };
+            return togo;
+        };
+        
+        var expandLight = function(source) {
+            return fluid.resolveEnvironment(source, options.model, options); 
+        };
+        
+        var expandEntry = function(entry) {
+            var comp = [];
+            expandCond(entry, comp);
+            return {children: comp};
+        }
+        
+        var expandExternal = function(entry) {
+            var singleTarget;
+            var target = [];
+            var pusher = function(comp) {
+                singleTarget = comp;
+            }
+            expandLeafOrCond(entry, target, pusher);
+            return singleTarget || target;
+        }
+        
+        var expandConfig = {
+            model: options.model,
+            expander: expandExternal
+        };
+        
+        var expandLeaf = function(leaf, componentType) {
+            var togo = {componentType: componentType};
+            var map = fluid.renderer.boundMap[componentType] || {};
+            for (var key in leaf) {
+                if (/decorators|args/.test(key)) {
+                    togo[key] = expandLight(leaf[key]);
+                    continue;
+                }
+                else if (map[key]) {
+                    togo[key] = expandBound(leaf[key]);
+                }
+                else togo[key] = leaf[key];
+            }
+            return togo;
+        };
+        
+        // A child entry may be a cond, a leaf, or another "thing with children".
+        // Unlike the case with a cond's contents, these must be homogeneous - at least
+        // they may either be ALL leaves, or else ALL cond/childed etc. 
+        // In all of these cases, the key will be THE PARENT'S KEY
+        var expandChildren = function (entry, pusher) {
+            var children = entry.children;
+            for (var i = 0; i < children.length; ++ i) {
+                // each child in this list will lead to a WHOLE FORKED set of children.
+                var target = [];
+                var comp = { children: target};
+                var child = children[i];
+                var childPusher = function(comp) {
+                    target[target.length] = comp;
+                }
+                expandLeafOrCond(child, target, childPusher);
+                pusher(comp); 
+            }
+        };
+        
+        function detectBareBound(entry) {
+            return fluid.each(entry, function (value, key) {
+                return key !== "decorators";
+            }) === false;
+        }
+        
+        // We have reached something which is either a leaf or Cond - either inside
+        // a Cond or as an entry in children.
+        var expandLeafOrCond = function (entry, target, pusher) {
+            var componentType = fluid.renderer.inferComponentType(entry);
+            if (!componentType && detectBareBound(entry)) {
+                componentType = "UIBound";
+            }
+            if (componentType) {
+                pusher(componentType === "UIBound"? expandBound(entry, true): expandLeaf(entry, componentType));
+            }
+            else {
+              // we couldn't recognise it as a leaf, so it must be a cond
+              // this may be illegal if we are already in a cond.
+                if (!target) {
+                    fluid.fail("Illegal cond->cond transition");
+                }
+                expandCond(entry, target);
+            }
+        }
+        
+        // cond entry may be a leaf, "thing with children" or a "direct bound".
+        // a Cond can ONLY occur as a direct member of "children". Each "cond" entry may
+        // give rise to one or many elements with the SAME key - if "expandSingle" discovers
+        // "thing with children" they will all share the same key found in proto. 
+        var expandCond = function (proto, target) {
+            for (var key in proto) {
+                var entry = proto[key];
+                if (key.charAt(0) === IDescape) {
+                    key = key.substring(1);
+                }
+                if (key === "expander") {
+                    var expander = entry;
+                    var expanded = fluid.invokeGlobalFunction(expander.type, [expander, proto, key, expandConfig]);
+                    fluid.each(expanded, function(el) {target[target.length] = el});
+                }
+                else if (entry) {
+                    var condPusher = function (comp) {
+                        comp.ID = key;
+                        target[target.length] = comp; 
+                        }
+                    var comp;
+                    if (entry.children) {
+                        if (key.indexOf(":") === -1) {
+                            key = key + ":";
+                        }
+                        expandChildren(entry, condPusher);
+                    }
+                    else if (fluid.renderer.isBoundPrimitive(entry)) {
+                        condPusher(expandBound(entry, true));
+                        }
+                    else {
+                        expandLeafOrCond(entry, null, condPusher);
+                    }
+                }
+            }
+                
+        };
+        
+        return expandEntry;
+    };
+    
+})(jQuery, fluid_1_2);
+    /*
  * jQuery Tooltip plugin 1.2
  *
  * http://bassistance.de/jquery-plugins/jquery-plugin-tooltip/

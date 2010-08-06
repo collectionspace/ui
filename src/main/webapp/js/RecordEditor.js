@@ -125,7 +125,7 @@ cspace = cspace || {};
     
     var renderPage = function (that) {
         fluid.log("RecordEditor.js renderPage start");
-        var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
+        var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}", model: that.model});
         var protoTree = cspace.renderUtils.buildProtoTree(that.uispec, that);
         fluid.log("RecordEditor.js after buildProtoTree");
         var tree = expander(protoTree);
@@ -135,7 +135,7 @@ cspace = cspace || {};
         cspace.renderUtils.buildSelectorsFromUISpec(that.uispec, selectors);
         fluid.log("RecordEditor.js after building selectors");
         var renderOpts = {
-            cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(selectors, {}),
+            cutpoints: fluid.renderer.selectorsToCutpoints(selectors, {}),
             model: that.model,
             // debugMode: true,
             autoBind: true,

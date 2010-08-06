@@ -93,7 +93,7 @@ cspace = cspace || {};
         var resources = {
             confirmation: {
                 href: that.options.confirmationTemplateUrl,
-                cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(that.options.selectors, {})
+                cutpoints: fluid.renderer.selectorsToCutpoints(that.options.selectors, {})
             }
         };
         fluid.fetchResources(resources, function () {

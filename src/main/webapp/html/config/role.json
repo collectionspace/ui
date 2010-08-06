@@ -1,0 +1,34 @@
+{
+    "pageBuilder": {
+        "options": {
+            "pageSpec": {
+                "header": {
+                    "href": "header.html",
+                    "templateSelector": ".csc-header-template",
+                    "targetSelector": ".csc-header-container" 
+                },
+                "footer": {
+                    "href": "footer.html",
+                    "templateSelector": ".csc-footer",
+                    "targetSelector": ".csc-footer-container" 
+                } 
+            },
+            "pageType": "role"
+        } 
+    },
+    "dependencies": {
+        "role": {
+            "funcName": "cspace.adminRoles",
+            "args": [
+                ".csc-roles-roleAdmin" 
+            ] 
+        } 
+    },
+    "depOpts": {
+        "role": {
+            "options": {
+                "uispec": "{pageBuilder}.uispec" 
+            } 
+        } 
+    } 
+}

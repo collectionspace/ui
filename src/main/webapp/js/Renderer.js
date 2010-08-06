@@ -123,12 +123,30 @@ cspace = cspace || {};
         }
     };
     
+    var extractExpanderSelectors = function (selectors, expander) {
+        var keys = {
+            "fluid.renderer.selection.inputs": ["rowID", "inputID", "labelID"],
+            "fluid.renderer.repeat": ["repeatID"]
+        };
+        
+        var keyArray = keys[expander.type];
+        if (!keyArray) {
+            return;
+        }
+        
+        for (var index in keyArray) {
+            var selector = expander[keyArray[index]];
+            var columnIndex = selector.lastIndexOf(":");
+            selectors[selector] = columnIndex === selector.length - 1 ? selector.substring(0, columnIndex) : selector;
+        }
+    };
+    
     cspace.renderUtils = {
         
         cutpointsFromUISpec: function (uispec) {
             var selectors = {};
             cspace.renderUtils.buildSelectorsFromUISpec(uispec, selectors);
-            return fluid.engage.renderUtils.selectorsToCutpoints(selectors, {});            
+            return fluid.renderer.selectorsToCutpoints(selectors, {});            
         },
         
         // TODO: need to make expander's API to be consistent with all expanders in the future.
@@ -142,9 +160,16 @@ cspace = cspace || {};
 
         buildSelectorsFromUISpec: function (uispec, selectors) {
             for (var key in uispec) {
-                if (uispec.hasOwnProperty(key)) {
-                    selectors[key] = (key.indexOf(":") === key.length-1 ? key.substring(0, key.length-1) : key);
+                if (!uispec.hasOwnProperty(key)) {
+                    continue;
                 }
+                if (key === "expander" && uispec[key].tree) {
+                    var expander = uispec[key];
+                    extractExpanderSelectors(selectors, expander);
+                    cspace.renderUtils.buildSelectorsFromUISpec(expander.tree, selectors);
+                    continue;
+                }
+                selectors[key] = (key.indexOf(":") === key.length - 1 ? key.substring(0, key.length - 1) : key);                                
                 if (uispec[key].children) {
                     for (var i = 0; i < uispec[key].children.length; i++) {
                         cspace.renderUtils.buildSelectorsFromUISpec(uispec[key].children[i], selectors);

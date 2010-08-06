@@ -14,11 +14,11 @@
 
         <script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
         <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.tabs.js"></script>        
-        <script type="text/javascript" src="../engage-core-framework/js/engageRenderUtils.js"></script>
+        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.tabs.js"></script>
 
         <script type="text/javascript" src="../js/cspace.js"></script>
         <script type="text/javascript" src="../js/Utilities.js"></script>
+        <script type="text/javascript" src="../js/PageSetup.js"></script>
         <script type="text/javascript" src="../js/Renderer.js"></script>
         <script type="text/javascript" src="../js/Confirmation.js"></script>
         <script type="text/javascript" src="../js/DataContext.js"></script>
@@ -28,7 +28,7 @@
         <script type="text/javascript" src="../js/RecordList.js"></script>
         <script type="text/javascript" src="../js/AdminRoles.js"></script>
         <script type="text/javascript" src="../js/PageBuilder.js"></script>
-        <script type="text/javascript" src="../js/rolesSetup.js"></script>
+        <script type="text/javascript" src="../js/roleSetup.js"></script>
     </head>
     <body>
 	
@@ -70,16 +70,11 @@
 												<div class="overflow-role-list csc-listEditor-list">
 													<table class="role-table">
 														<tbody>
-<!--
-															<tr>
-																<td class="header">Group Name</td>
-															</tr>
--->
                                                             <tr class="add-new-row csc-listEditor-addNew" style="display:none;">
                                                                 <td>New Role - Edit Details <img src="../images/new_user_arrow.png" width=16 height=10 alt=""/></td>
                                                             </tr>
 															<tr class="csc-recordList-row">
-																<td class="csc-role-roleList-name">test role name</td>
+																<td class="csc-role-roleList-name"></td>
                                                                 <td class="hidden csc-listEditor-list-csid"></td>
 															</tr>
 														</tbody>
@@ -101,16 +96,6 @@
     												<div class="fl-container-flex fl-fix information-subgroup csc-listEditor-details">
     													<div class="info-column fl-force-left">
     														<div class="info-column2-50 fl-force-left">
-<!--
-    															<div class="info-column2-50 fl-force-left">
-    																<div class="info-pair">
-    																	<div class="label">Group</div>
-    																	<div class="content">
-    																		<input type="text" class="csc-role-group" />
-    																	</div>
-    																</div>
-    															</div>
--->
     															<div class="info-column2-50 fl-force-left">
     																<div class="info-pair">
     																	<div class="label">Role Name</div>
@@ -135,129 +120,18 @@
     														<div class="info-pair">
     															<div class="label">Permissions</div>
                                                                 <div class="cs-permissions-table">
-                                                                    <div class="flc-cabinet-mainheader"><span class="label">None</span><span class="label">Read</span><span class="label">Write</span><span class="label">Delete</span></div>
-    
+                                                                    <div class="flc-cabinet-mainheader"><span class="label">None</span><span class="label">Read</span><span class="label">Write</span><span class="label">Delete</span></div>    
 																	<div class="cs-permissions-row csc-permissions-record-row">
-																		<div class="radio-row">
-																			<span class="radio"><input type="radio"  csc-permissions-record-permissions name="group1" /></span>
-																			<span class="radio"><input type="radio" name="group1" /></span>
-																			<span class="radio"><input type="radio" name="group1" /></span>
-																			<span class="radio"><input type="radio" name="group1" /></span>
+																		<div class="radio-row  csc-permissions-radio">
+																			<span class="radio">
+																			    <input type="radio" class="radio csc-permissions-record-permission" />
+																			    <label class="csc-permissions-record-permission-label" style="display:none;"></label>
+																			</span>
 																		</div>
 																		<div class="permission-name csc-permissions-record-type">record type name</div>
 																		<div class="clear"></div>
 																	</div>
                                                                 </div>
-    
-    
-    <!--
-                                                                <div id="test-cabinet2" class="flc-cabinet">
-    																<div class="flc-cabinet-mainheader"><span class="label">None</span><span class="label">Read</span><span class="label">Write</span><span class="label">Delete</span></div>
-    																<div class="flc-cabinet-drawer">
-    																	<div class="flc-cabinet-header flc-cabinet-handle">
-                                                                            <div class="radio-row">
-                                                                                <span class="radio"><input type="radio" name="group1" /></span>
-                                                                                <span class="radio"><input type="radio" name="group1" /></span>
-                                                                                <span class="radio"><input type="radio" name="group1" /></span>
-                                                                                <span class="radio"><input type="radio" name="group1" /></span>
-                                                                             </div>
-    																		<div class="permission-name"><a href="#_" class="flc-cabinet-header">Object Cataloguing</a></div><div class="clear"></div>
-    																	</div>
-    																	<div class="flc-cabinet-contents">
-    																		<div class="flc-cabinet-drawer">
-    																			<div class="flc-cabinet-header flc-cabinet-handle">
-                                                                                    <div class="radio-row">
-                                                                                        <span class="radio"><input type="radio" name="group2" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group2" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group2" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group2" /></span>
-                                                                                     </div>
-    																				<div class="permission-name"><a href="#_" class="flc-cabinet-header">Intake</a></div><div class="clear"></div>
-    																			</div>
-    																			<div class="flc-cabinet-contents">
-    																				<div class="flc-cabinet-drawer">
-    																					<div class="flc-cabinet-header flc-cabinet-handle">
-                                                                                    <div class="radio-row">
-                                                                                        <span class="radio"><input type="radio" name="group3" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group3" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group3" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group3" /></span>
-                                                                                     </div>
-    																						<div class="permission-name"><a href="#_" class="flc-cabinet-header">Sublevel</a></div><div class="clear"></div>
-    																					</div>
-    																					
-    																					<div class="flc-cabinet-contents">
-    																						<div class="flc-cabinet-drawer">
-    																							<div class="flc-cabinet-row">
-                                                                                    <div class="radio-row">
-                                                                                        <span class="radio"><input type="radio" name="group4" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group4" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group4" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group4" /></span>
-                                                                                     </div>
-    																								<div  class="permission-name">Other</div><div class="clear"></div>
-    																							</div>
-    																							<div class="flc-cabinet-row">
-                                                                                    <div class="radio-row">
-                                                                                        <span class="radio"><input type="radio" name="group5" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group5" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group5" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group5" /></span>
-                                                                                     </div>
-    																								<div class="permission-name">Something</div><div class="clear"></div>
-    																							</div>
-    																						</div>
-    																					</div>
-    																					
-    																					<div class="flc-cabinet-row">
-                                                                                    <div class="radio-row">
-                                                                                        <span class="radio"><input type="radio" name="group6" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group6" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group6" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group6" /></span>
-                                                                                     </div>
-    																						<div class="permission-name">Another Something</div><div class="clear"></div>
-    																					</div>
-    																				</div>
-    																			</div>
-    																		</div>
-    																		<div class="flc-cabinet-drawer">
-    																			<div class="flc-cabinet-header flc-cabinet-handle">
-                                                                                    <div class="radio-row">
-                                                                                        <span class="radio"><input type="radio" name="group7" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group7" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group7" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group7" /></span>
-                                                                                     </div>
-    																				<div class="permission-name"><a href="#_" class="flc-cabinet-header">Name Authority</a></div><div class="clear"></div>
-    																			</div>
-    																			<div class="flc-cabinet-contents">
-    																				<div class="flc-cabinet-drawer">
-    																					<div class="flc-cabinet-row">
-                                                                                    <div class="radio-row">
-                                                                                        <span class="radio"><input type="radio" name="group8" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group8" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group8" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group8" /></span>
-                                                                                     </div>
-    																						<div  class="permission-name">Fish</div><div class="clear"></div>
-    																					</div>
-    																					<div class="flc-cabinet-row">
-                                                                                    <div class="radio-row">
-                                                                                        <span class="radio"><input type="radio" name="group9" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group9" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group9" /></span>
-                                                                                        <span class="radio"><input type="radio" name="group9" /></span>
-                                                                                     </div>
-    																						<div class="permission-name">Chips</div><div class="clear"></div>
-    																					</div>
-    																				</div>
-    																			</div>
-    																		</div>
-    																	</div>
-    																</div>
-    															</div>
-    -->
     														</div>
     													</div>
     													<div class="clear"></div>
@@ -291,9 +165,7 @@
 			</div> <!-- END footer block -->
 		</div>
         <script type="text/javascript">
-            jQuery(document).ready(function(){
-                cspace.rolesSetup();
-            });
+            cspace.roleSetup();
         </script>
 	</body>
 

@@ -58,7 +58,7 @@ cspace = cspace || {};
     };
 
     var renderList = function (that) {
-        var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
+        var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}", model: that.model});
         var protoTree = cspace.renderUtils.buildProtoTree(that.uispec, that);
         var tree = expander(protoTree);
         if (that.model.items.length <= 0) {
@@ -71,7 +71,7 @@ cspace = cspace || {};
         cspace.renderUtils.buildSelectorsFromUISpec(that.uispec, selectors);
         selectors[that.options.selectors.nothingYet] = that.options.selectors.nothingYet;
         var renderOpts = {
-            cutpoints: fluid.engage.renderUtils.selectorsToCutpoints(selectors, {}),
+            cutpoints: fluid.renderer.selectorsToCutpoints(selectors, {}),
             model: that.model,
             // debugMode: true,
             autoBind: true
