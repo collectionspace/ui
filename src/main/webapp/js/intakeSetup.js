@@ -59,7 +59,7 @@ cspace = cspace || {};
             uispec: "{pageBuilder}.uispec.sidebar",
             primaryRecordType: "intake"
         };
-        $.extend(true, sbOpts, optinos.sideBarOpts);
+        $.extend(true, sbOpts, options.sideBarOpts);
 
         var dependencies = {
             titleBar: {
