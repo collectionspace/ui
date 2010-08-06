@@ -33,6 +33,8 @@ cspace = cspace || {};
         var tbOpts = {
             uispec: "{pageBuilder}.uispec.titleBar"
         };
+        $.extend(true, tbOpts, options.titleBarOpts);
+
         var tabsOpts = {
             tabList: [
                 {name: "Loan In", target: "#primaryTab"},
@@ -46,20 +48,28 @@ cspace = cspace || {};
             ],
             tabSetups: [
                 null, {
-                    func: "cspace.objectTabSetup",
+                    func: "cspace.tabSetup",
                     options: {
-                        primaryRecordType: "loanin"
+                        primaryRecordType: "loanin",
+                        configURL: "./config/object-tab.json"
                     }
                 }
             ]
         };
-        var reOpts = options.recordEditorOpts || {};
-        reOpts.selectors = {identificationNumber: ".csc-loanIn-loanInNumber"};
-        reOpts.strings = {identificationNumberRequired: "Please specify a Loan In Number"};
+        $.extend(true, tabsOpts, options.tabsOpts);
 
-        var sbOpts = options.sideBarOpts || {};
-        sbOpts.uispec = "{pageBuilder}.uispec.sidebar";
-        sbOpts.primaryRecordType = "loanin";
+        var reOpts = options.recordEditorOpts || {};
+        var reOpts = {
+            selectors: {identificationNumber: ".csc-loanIn-loanInNumber"},
+            strings: {identificationNumberRequired: "Please specify a Loan In Number"}
+        };
+        $.extend(true, reOpts, options.recordEditorOpts);
+
+        var sbOpts = {
+            uispec: "{pageBuilder}.uispec.sidebar",
+            primaryRecordType: "loanin"
+        };
+        $.extend(true, sbOpts, options.sideBarOpts);
         
         var dependencies = {
             titleBar: {
@@ -81,59 +91,61 @@ cspace = cspace || {};
             }
         };
         
-        var fullUrl = function (templateName) {
-            return options.templateUrlPrefix ? options.templateUrlPrefix + templateName : templateName;
-        };
-            
-        var pageBuilderOpts = options.pageBuilderOpts || {};
-        pageBuilderOpts.dataContext = {
-            options: {
-                recordType: "loanin"
+        var pageBuilderOpts = {
+            dataContext:{
+                options: {
+                    recordType: "loanin"
+                }
             }
         };
-        
+        if (cspace.util.useLocalData()) {
+            $.extend(true, pageBuilderOpts, {
+                dataContext: {
+                    options: {
+                        baseUrl: "data",
+                        fileExtension: ".json"
+                    }
+                }
+            })
+        }
         pageBuilderOpts.pageSpec = {
             header: {
-                href: fullUrl("header.html"),
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "header.html"),
                 templateSelector: ".csc-header-template",
                 targetSelector: ".csc-header-container"
             },
             titleBar: {
-                href: fullUrl("loanInTitleBar.html"),
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "loanInTitleBar.html"),
                 templateSelector: ".csc-loanIn-titleBar-template",
                 targetSelector: ".csc-loanIn-titleBar-container"
             },
             tabs: {
-                href: fullUrl("tabsTemplate.html"),
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "tabsTemplate.html"),
                 templateSelector: ".csc-tabs-template",
                 targetSelector: ".csc-tabs-container"
             },
             dateEntry: {
-                href: fullUrl("loanInTemplate.html"),
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "loanInTemplate.html"),
                 templateSelector: ".csc-loanIn-template",
                 targetSelector: ".csc-record-edit-container"
             },
             sidebar: {
-                href: fullUrl("right-sidebar.html"),
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "right-sidebar.html"),
                 templateSelector: ".csc-right-sidebar",
                 targetSelector: ".csc-sidebar-container"
             },
             footer: {
-                href: fullUrl("footer.html"),
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "footer.html"),
                 templateSelector: ".csc-footer",
                 targetSelector: ".csc-footer-container"
             }
         };
-        
         pageBuilderOpts.pageType = "loanin";
+        $.extend(true, pageBuilderOpts, options.pageBuilderOpts);
 
         var csid = cspace.util.getUrlParameter("csid");
         if (csid) {
             pageBuilderOpts.csid = csid;
-        }
-        if (cspace.util.useLocalData()) {
-            pageBuilderOpts.dataContext.options.baseUrl = "data";
-            pageBuilderOpts.dataContext.options.fileExtension = ".json";
         }
         
         return cspace.pageBuilder(dependencies, pageBuilderOpts);

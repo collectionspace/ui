@@ -54,6 +54,17 @@ cspace = cspace || {};
         });
     };
 
+    /**
+     * The "tabSetups" option to cspace.tabs is an array of objects (one per tab) of the form
+     *   { func: <function>,  // the setup function to call to initialize the tab
+     *     options: {}        // options to pass to the setup function
+     *   }
+     * The function will be called the first time the tab is activated, to populate its contents.
+     * 
+     * @param {Object} container
+     * @param {Object} applier
+     * @param {Object} options
+     */
     cspace.tabs = function (container, applier, options) {
         var that = fluid.initView("cspace.tabs", container, options);
         that.applier = applier;

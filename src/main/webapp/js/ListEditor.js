@@ -72,6 +72,13 @@ cspace = cspace || {};
         that.events.pageReady.fire();
     };
     
+    /**
+     * 
+     * @param {Object} container
+     * @param {Object} recordType   The record type of the records being listed
+     * @param {Object} uispec
+     * @param {Object} options
+     */
     cspace.listEditor = function (container, recordType, uispec, options) {
         var that = fluid.initView("cspace.listEditor", container, options);
         that.recordType = recordType;
@@ -133,7 +140,7 @@ cspace = cspace || {};
             }
         });
 
-        that.options.initList(that, function () {
+        var initListFunction = function () {
             that.list = fluid.initSubcomponent(that, "list", [
                 $(that.options.selectors.list, container),
                 {
@@ -144,7 +151,12 @@ cspace = cspace || {};
                 fluid.COMPONENT_OPTIONS
             ]);
             setUpListEditor(that);
-        });
+        };
+        if (typeof(that.options.initList) === "function") {
+            that.options.initList(that, initListFunction);
+        } else {
+            fluid.invokeGlobalFunction(that.options.initList, [that, initListFunction]);
+        }
         return that;
     };
 

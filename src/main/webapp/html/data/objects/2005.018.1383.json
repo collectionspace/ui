@@ -92,7 +92,8 @@
                 "briefDescription": "brief" 
             },
             {
-                "briefDescription": "more brief" 
+                "briefDescription": "more brief",
+                "_primary": true
             },
             {
                 "briefDescription": "less brief" 

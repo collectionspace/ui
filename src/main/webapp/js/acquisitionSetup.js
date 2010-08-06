@@ -16,8 +16,9 @@ cspace = cspace || {};
 (function ($) {
     fluid.log("acquistionSetup.js loaded");
 
-    cspace.acquisitionSetup = function () {
+    cspace.acquisitionSetup = function (options) {
 
+        options = options || {};
         var tbOpts = {
             uispec: "{pageBuilder}.uispec.titleBar"
         };
@@ -34,21 +35,27 @@ cspace = cspace || {};
             ],
             tabSetups: [
                 null, {
-                    func: "cspace.objectTabSetup",
+                    func: "cspace.tabSetup",
                     options: {
-                        primaryRecordType: "acquisition"
+                        primaryRecordType: "acquisition",
+                        configURL: "./config/object-tab.json"
                     }
                 }
             ]
         };
+        $.extend(true, tabsOpts, options.tabsOpts);
+
         var reOpts = {
             selectors: {identificationNumber: ".csc-acquisition-numberPatternChooser-reference-number"},
             strings: {identificationNumberRequired: "Please specify an Acquisition Reference Number"}
         };
+        $.extend(true, reOpts, options.recordEditorOpts);
+
         var sbOpts = {
             uispec: "{pageBuilder}.uispec.sidebar",
             primaryRecordType: "acquisition"
         };
+        $.extend(true, sbOpts, options.sideBarOpts);
         
         var dependencies = {
             titleBar: {
@@ -69,55 +76,63 @@ cspace = cspace || {};
                 args: [".csc-sidebar", "{pageBuilder}.applier", sbOpts]
             }
         };
-        var options = {
-            dataContext: {
+
+        var pageBuilderOpts = {
+            dataContext:{
                 options: {
                     recordType: "acquisition"
                 }
-            },
-            pageSpec: {
-                header: {
-                    href: "header.html",
-                    templateSelector: ".csc-header-template",
-                    targetSelector: ".csc-header-container"
-                },
-                titleBar: {
-                    href: "acquisitionTitleBar.html",
-                    templateSelector: ".csc-acquisition-titleBar-template",
-                    targetSelector: ".csc-acquisition-titleBar-container"
-                },
-                tabs: {
-                    href: "tabsTemplate.html",
-                    templateSelector: ".csc-tabs-template",
-                    targetSelector: ".csc-tabs-container"
-                },
-                dateEntry: {
-                    href: "acquisitionTemplate.html",
-                    templateSelector: ".csc-acquisition-template",
-                    targetSelector: ".csc-record-edit-container"
-                },
-                sidebar: {
-                    href: "right-sidebar.html",
-                    templateSelector: ".csc-right-sidebar",
-                    targetSelector: ".csc-sidebar-container"
-                },
-                footer: {
-                    href: "footer.html",
-                    templateSelector: ".csc-footer",
-                    targetSelector: ".csc-footer-container"
-                }
-            },
-            pageType: "acquisition"
+            }
         };
+        if (cspace.util.useLocalData()) {
+            $.extend(true, pageBuilderOpts, {
+                dataContext: {
+                    options: {
+                        baseUrl: "data",
+                        fileExtension: ".json"
+                    }
+                }
+            })
+        }
+
+        pageBuilderOpts.pageSpec = {
+            header: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "header.html"),
+                templateSelector: ".csc-header-template",
+                targetSelector: ".csc-header-container"
+            },
+            titleBar: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "acquisitionTitleBar.html"),
+                templateSelector: ".csc-acquisition-titleBar-template",
+                targetSelector: ".csc-acquisition-titleBar-container"
+            },
+            tabs: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "tabsTemplate.html"),
+                templateSelector: ".csc-tabs-template",
+                targetSelector: ".csc-tabs-container"
+            },
+            recordEditor: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "acquisitionTemplate.html"),
+                templateSelector: ".csc-acquisition-template",
+                targetSelector: ".csc-record-edit-container"
+            },
+            sidebar: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "right-sidebar.html"),
+                templateSelector: ".csc-right-sidebar",
+                targetSelector: ".csc-sidebar-container"
+            },
+            footer: {
+                href: cspace.util.fullUrl(options.templateUrlPrefix, "footer.html"),
+                templateSelector: ".csc-footer",
+                targetSelector: ".csc-footer-container"
+            }
+        };
+        pageBuilderOpts.pageType = "acquisition"
         var csid = cspace.util.getUrlParameter("csid");
         if (csid) {
-            options.csid = csid;
+            pageBuilderOpts.csid = csid;
         }
-        if (cspace.util.useLocalData()) {
-            options.dataContext.options.baseUrl = "data";
-            options.dataContext.options.fileExtension = ".json";
-        }
-        cspace.pageBuilder(dependencies, options);
+        return cspace.pageBuilder(dependencies, pageBuilderOpts);
     };
     
 })(jQuery);

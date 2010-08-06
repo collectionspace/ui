@@ -1,0 +1,60 @@
+{
+    "pageBuilder": {
+        "options": {
+            "pageSpec": {
+                "list": {
+                    "href": "objectTabRecordListTemplate.html",
+                    "templateSelector": ".csc-object-tab-record-list",
+                    "targetSelector": ".div-for-list-of-records"
+                },
+                "details": {
+                    "href": "ObjectEntryTemplate.html",
+                    "templateSelector": ".csc-object-entry-template",
+                    "targetSelector": ".div-for-recordEditor"
+                } 
+            },
+            "pageType": "object-tab" 
+        } 
+    },
+    "dependencies": {
+        "relatedRecordsTab": {
+            "funcName": "cspace.relatedRecordsTab",
+            "args": [
+                ".csc-object-tab",
+                "objects",
+                "{pageBuilder}.uispec"
+            ] 
+        } 
+    },
+    "depOpts": {
+        "relatedRecordsTab": {
+            "options": {
+                "listEditor": {
+                    "options": {
+                        "initList": "cspace.listEditor.receiveData",
+                        "dataContext": {
+                            "options": {
+                                "recordType": "objects"
+                            }
+                        },
+                        "details": {
+                            "options": {
+                                "selectors": {
+                                    "identificationNumber": ".csc-object-identification-object-number" 
+                                },
+                                "strings": {
+                                    "identificationNumberRequired": "Please specify an Identification Number" 
+                                } 
+                            } 
+                        }
+                    }
+                },
+                "relationManager": {
+                    "options": {
+                        "primaryRecordType": "{pageBuilder}.options.primaryRecordType"
+                    }
+                }
+            }
+        }
+    } 
+}
