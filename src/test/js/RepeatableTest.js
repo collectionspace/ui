@@ -553,6 +553,28 @@ var repeatableTester = function ($) {
         jqUnit.assertEquals("The ul does not contain divs", 0, $("ul", "#markupPresent").has("div").length);
         jqUnit.assertEquals("Container should containe a ul", 1, container.has("ul").length);        
     });
+    
+    repeatableTest.test("Prepare repeatable model with primary", function () {        
+        var model = {
+            myTexts: []
+        };        
+        var options = {
+            model: model,
+            applier: fluid.makeChangeApplier(model),
+            protoTree: {
+                "myTextField": "${myTexts.0.myText}"
+            },
+            renderOptions: {
+                cutpoints: [{
+                    id: "myTextField",
+                    selector: ".csc-repeatable-li-text"
+                }]
+            },
+            elPath: "myTexts"
+        };        
+        var myRepeatable = cspace.makeRepeatable(".csc-repeatable-li", options);
+        jqUnit.assertTrue("Newly prepared model should have a set primary field", myRepeatable.model.myTexts[0]._primary);
+    });
 
 };
 

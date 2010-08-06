@@ -115,6 +115,9 @@ cspace = cspace || {};
         var list = fluid.model.getBeanValue(model, elPath);
         if (!list || list.length === 0) {
             list = addRow([]);
+            list[0] = {
+                _primary: true
+            };
             applier.requestChange(elPath, list);
             fluid.model.setBeanValue(model, elPath, list);
         }
