@@ -7882,7 +7882,10 @@ var fluid = fluid || fluid_1_2;
                     mergeImpl(policy, path, thisTarget, thisSource, newPolicy);
                 }
                 else {
-                    if (thisTarget === null || thisTarget === undefined || thisPolicy !== "reverse") {
+                    if (typeof(newPolicy) === "function") {
+                        newPolicy.call(null, target, source, name);
+                    }
+                    else if (thisTarget === null || thisTarget === undefined || thisPolicy !== "reverse") {
                         target[name] = thisSource;
                     }
                 }
@@ -7993,9 +7996,15 @@ var fluid = fluid || fluid_1_2;
         
     var fluid_guid = 1;
     
+    /** Allocate an integer value that will be unique for this session **/
+    
+    fluid.allocateGuid = function() {
+        return fluid_guid++;
+    }
+    
     fluid.event.identifyListener = function(listener) {
         if (!listener.$$guid) {
-            listener.$$guid = fluid_guid++;
+            listener.$$guid = fluid.allocateGuid();
         }
         return listener.$$guid;
     };
@@ -8052,7 +8061,7 @@ var fluid = fluid || fluid_1_2;
                 if (typeof(listener) === 'string') {
                     delete listeners[listener];
                 }
-                else if (typeof(listener) === 'object' && listener.$$guid) {
+                else if (listener.$$guid) {
                     delete listeners[listener.$$guid];
                 }
             },
@@ -8249,7 +8258,7 @@ var fluid = fluid || fluid_1_2;
     fluid.allocateSimpleId = function (element) {
         element = fluid.unwrap(element);
         if (!element.id) {
-            element.id = "fluid-id-" + (fluid_guid++); 
+            element.id = "fluid-id-" + fluid.allocateGuid(); 
         }
         return element.id;
     };
@@ -8289,6 +8298,27 @@ var fluid = fluid || fluid_1_2;
             }
         }  
         return togo;
+    };
+    
+    /** Better jQuery.each which works on hashes as well as having the arguments
+     * the right way round. Also allows iteration to be terminated early by means of
+     * return of <code>false</code> (specific value, "falsy" is not good enough. This
+     * will cause the overall function to return <code>false</code> 
+     * @param source {Arrayable or Object} The container to be iterated over
+     * @param func {Function} A function accepting (value, key) for each iterated
+     * object. This function may return <code>false</code> to terminate the iteration
+     */
+    fluid.each = function (source, func) {
+        if (fluid.isArrayable(source)) {
+            for (var i = 0; i < source.length; ++ i) {
+                if (func(source[i], i) === false) { return false;}
+            }
+        }
+        else {
+            for (var key in source) {
+                if (func(source[key], key) === false) { return false;}
+            }
+        }
     };
     
     /** Scan through a list of objects, terminating on and returning the first member which
@@ -10078,7 +10108,7 @@ var fluid_1_2 = fluid_1_2 || {};
         function recurse(arg) {
             return resolveEnvironmentImpl(arg, directModel, env, options);
         }
-        if (typeof(obj) === "string") {
+        if (typeof(obj) === "string" && !options.noValue) {
             return resolveValue(obj, directModel, env, options);
         }
         else if (fluid.isPrimitive(obj)) {
@@ -10096,11 +10126,93 @@ var fluid_1_2 = fluid_1_2 || {};
         {ELstyle:     "${}",
          bareContextRefs: true});
     
-    fluid.resolveEnvironment = function(obj, directModel, options) {
+    fluid.resolveEnvironment = function(obj, directModel, userOptions) {
         directModel = directModel || {};
-        options = options || fluid.defaults("fluid.resolveEnvironment");
+        var options = fluid.merge(null, {}, fluid.defaults("fluid.resolveEnvironment"), userOptions);
         var env = fluid.threadLocal();
         return resolveEnvironmentImpl(obj, directModel, env, options);
+    };
+    
+    fluid.registerNamespace("fluid.expander");
+    /** "light" expanders, starting with support functions for the "deferredFetcher" expander **/
+  
+    fluid.expander.makeDefaultFetchOptions = function (successdisposer, failid, options) {
+        return $.extend(true, {dataType: "text"}, options, {
+            success: function(response, environmentdisposer) {
+                var json = JSON.parse(response);
+                environmentdisposer(successdisposer(json));
+            },
+            error: function(response, textStatus) {
+                fluid.log("Error fetching " + failid + ": " + textStatus);
+            }
+        });
+    };
+  
+    fluid.expander.makeFetchExpander = function (options) {
+        return { expander: {
+            type: "fluid.expander.deferredFetcher",
+            href: options.url,
+            options: fluid.expander.makeDefaultFetchOptions(options.disposer, options.url, options.options),
+            resourceSpecCollector: "{resourceSpecCollector}",
+            fetchKey: options.fetchKey
+        }};
+    };
+    
+    fluid.expander.deferredFetcher = function(target, source) {
+        var expander = source.expander;
+        var spec = fluid.copy(expander);
+        // fetch the "global" collector specified in the external environment to receive
+        // this resourceSpec
+        var collector = fluid.resolveEnvironment(expander.resourceSpecCollector);
+        delete spec.type;
+        delete spec.resourceSpecCollector;
+        delete spec.fetchKey;
+        var environmentdisposer = function(disposed) {
+            $.extend(target, disposed);
+        }
+        // replace the callback which is there (taking 2 arguments) with one which
+        // directly responds to the request, passing in the result and OUR "disposer" - 
+        // which once the user has processed the response (say, parsing JSON and repackaging)
+        // finally deposits it in the place of the expander in the tree to which this reference
+        // has been stored at the point this expander was evaluated.
+        spec.options.success = function(response) {
+             expander.options.success(response, environmentdisposer);
+        };
+        var key = expander.fetchKey || fluid.allocateGuid();
+        collector[key] = spec;
+    };
+    
+    // The "noexpand" expander which simply unwraps one level of expansion and ceases.
+    fluid.expander.noexpand = function(target, source) {
+        $.extend(target, source.expander.tree);
+    };
+  
+  
+    fluid.expander.lightFilter = function (obj, recurse) {
+          if (fluid.isArrayable(obj)) {
+              return fluid.transform(obj, function(value) {return recurse(value);});
+          }
+          var togo = {};
+          for (var key in obj) {
+              var value = obj[key];
+              var expander;
+              if (key === "expander") {
+                  expander = fluid.getGlobalValue(value.type);  
+                  if (expander) {
+                      expander.call(null, togo, obj);
+                  }
+              }
+              if (key !== "expander" || !expander) {
+                  togo[key] = recurse(value);
+              }
+          };
+          return togo;
+      };
+      
+    fluid.expander.expandLight = function (source, expandOptions) {
+        var options = $.extend({}, expandOptions);
+        options.filter = fluid.expander.lightFilter;
+        return fluid.resolveEnvironment(source, options.model, options);       
     };
           
 })(jQuery, fluid_1_2);
@@ -10619,44 +10731,44 @@ fluid_1_2 = fluid_1_2 || {};
       
       XMLLump = function (lumpindex, nestingdepth) {
           return {
-            //rsfID: "",
-            //text: "",
-            //downmap: {},
-            //attributemap: {},
-            //finallump: {},
-            nestingdepth: nestingdepth,
-            lumpindex: lumpindex,
-            parent: t
+              //rsfID: "",
+              //text: "",
+              //downmap: {},
+              //attributemap: {},
+              //finallump: {},
+              nestingdepth: nestingdepth,
+              lumpindex: lumpindex,
+              parent: t
           };
-        };
+      };
       
       function init(baseURLin, debugModeIn, cutpointsIn) {
-        t.rootlump = XMLLump(0, -1);
-        tagstack = [t.rootlump];
-        lumpindex = 0;
-        nestingdepth = 0;
-        justended = false;
-        defstart = -1;
-        defend = -1;
-        baseURL = baseURLin;
-        debugMode = debugModeIn;
-        cutpoints = cutpointsIn;
-        if (cutpoints) {
-          for (var i = 0; i < cutpoints.length; ++ i) {
-            cutstatus[i] = [];
-            cutpoints[i].tree = fluid.parseSelector(cutpoints[i].selector);
-            }
+          t.rootlump = XMLLump(0, -1);
+          tagstack = [t.rootlump];
+          lumpindex = 0;
+          nestingdepth = 0;
+          justended = false;
+          defstart = -1;
+          defend = -1;
+          baseURL = baseURLin;
+          debugMode = debugModeIn;
+          cutpoints = cutpointsIn;
+          if (cutpoints) {
+              for (var i = 0; i < cutpoints.length; ++ i) {
+                  cutstatus[i] = [];
+                  cutpoints[i].tree = fluid.parseSelector(cutpoints[i].selector);
+              }
           }
-        }
+      }
       
       function findTopContainer() {
-        for (var i = tagstack.length - 1; i >= 0; --i ) {
-          var lump = tagstack[i];
-          if (lump.rsfID !== undefined) {
-            return lump;
+          for (var i = tagstack.length - 1; i >= 0; --i ) {
+              var lump = tagstack[i];
+              if (lump.rsfID !== undefined) {
+                  return lump;
+              }
           }
-        }
-        return t.rootlump;
+          return t.rootlump;
       }
       
       function newLump() {
@@ -10673,32 +10785,32 @@ fluid_1_2 = fluid_1_2 || {};
       
       function addLump(mmap, ID, lump) {
           var list = mmap[ID];
-              if (!list) {
-                  list = [];
-                  mmap[ID] = list;
-              }
-              list[list.length] = lump;
+          if (!list) {
+              list = [];
+              mmap[ID] = list;
           }
+          list[list.length] = lump;
+      }
         
       function checkContribute(ID, lump) {
           if (ID.indexOf("scr=contribute-") !== -1) {
               var scr = ID.substring("scr=contribute-".length);
               addLump(t.collectmap, scr, lump);
-              }
           }
+      }
       
       function debugLump(lump) {
         // TODO expand this to agree with the Firebug "self-selector" idiom
           return "<" + lump.tagname + ">";
-          }
+      }
       
       function hasCssClass(clazz, totest) {
-        if (!totest) {
-            return false;
-        }
-        // algorithm from JQuery
-        return (" " + totest + " ").indexOf(" " + clazz + " ") !== -1;
-        }
+          if (!totest) {
+              return false;
+          }
+          // algorithm from JQuery
+          return (" " + totest + " ").indexOf(" " + clazz + " ") !== -1;
+      }
       
       function matchNode(term, headlump) {
         if (term.predList) {
@@ -10961,70 +11073,131 @@ fluid_1_2 = fluid_1_2 || {};
       firstdocumentindex: -1
     };
   };
+
+ /** Utilities for fluid.fetchResources **/
+
+  var composeCallbacks = function(internal, external) {
+      return external? function() {
+          try {
+              external.apply(null, arguments);
+          }
+          catch (e) {
+              fluid.log("Exception applying external fetchResources callback: " + e);
+          }
+          internal.apply(null, arguments); // call the internal callback without fail
+      } : internal;
+  };
+  
+  var composePolicy = function(target, source, key) {
+      target[key] = composeCallbacks(target[key], source[key]);
+  };
+  
+  fluid.defaults("fluid.fetchResources", {
+      mergePolicy: {
+          success: composePolicy,
+          error: composePolicy,
+          url: "reverse"
+      }
+  });
+  
+  function timeSuccessCallback(resourceSpec) {
+      if (resourceSpec.timeSuccess && resourceSpec.options && resourceSpec.options.success) {
+          var success = resourceSpec.options.success;
+          resourceSpec.options.success = function() {
+          var startTime = new Date();
+          var ret = success.apply(null, arguments);
+          fluid.log("External callback for URL " + resourceSpec.href + " completed - callback time: " + 
+                  (new Date().getTime() - startTime.getTime()) + "ms");
+          return ret;
+          };
+      }
+  }
   
   /** Accepts a hash of structures with free keys, where each entry has either
    * href or nodeId set - on completion, callback will be called with the populated
    * structure with fetched resource text in the field "resourceText" for each
    * entry.
    */
-  fluid.fetchResources = function(resourceSpecs, callback) {
-    var resourceCallback = function (thisSpec) {
-      return {
-        success: function(response) {
-          thisSpec.resourceText = response;
-          thisSpec.resourceKey = thisSpec.href;
-          thisSpec.queued = false; 
-          fluid.fetchResources(resourceSpecs, callback);
-          },
-        error: function(response, textStatus, errorThrown) {
-          thisSpec.fetchError = {
-            status: response.status,
-            textStatus: response.textStatus,
-            errorThrown: errorThrown
-            };
-          thisSpec.queued = false;
-          fluid.fetchResources(resourceSpecs, callback);
+  var fetchResourcesImpl = function(specStructure, callback) {
+      var resourceCallback = function (thisSpec) {
+          function completeRequest() {
+              thisSpec.queued = false;
+              thisSpec.completeTime = new Date();
+              fluid.log("Request to URL " + thisSpec.href + " completed - total elapsed time: " + 
+                  (thisSpec.completeTime.getTime() - thisSpec.initTime.getTime()) + "ms");
+              fetchResourcesImpl(specStructure, callback);         
           }
-          
-        };
+          return {
+              success: function(response) {
+                  thisSpec.resourceText = response;
+                  thisSpec.resourceKey = thisSpec.href;
+                  completeRequest();
+              },
+              error: function(response, textStatus, errorThrown) {
+                  thisSpec.fetchError = {
+                      status: response.status,
+                      textStatus: response.textStatus,
+                      errorThrown: errorThrown
+                  };
+                  completeRequest();
+              }
+              
+          };
       };
-    
-    var complete = true;
-    for (var key in resourceSpecs) {
-      var resourceSpec = resourceSpecs[key];
-      if (resourceSpec.href && !(resourceSpec.resourceKey || resourceSpec.fetchError)) {
-         if (!resourceSpec.queued) {
-           var thisCallback = resourceCallback(resourceSpec);
-           var options = {url: resourceSpec.href, success: thisCallback.success, error: thisCallback.error}; 
-           $.extend(true, options, resourceSpec.options);
-           resourceSpec.queued = true;
-           $.ajax(options);
-         }
-         if (resourceSpec.queued) {
-           complete = false;
-         }             
-        }
-      else if (resourceSpec.nodeId && !resourceSpec.resourceText) {
-        var node = document.getElementById(resourceSpec.nodeId);
-        // upgrade this to somehow detect whether node is "armoured" somehow
-        // with comment or CDATA wrapping
-        resourceSpec.resourceText = fluid.dom.getElementText(node);
-        resourceSpec.resourceKey = resourceSpec.nodeId;
+      
+      var complete = true;
+      var allSync = true;
+      var resourceSpecs = specStructure.specs;
+      for (var key in resourceSpecs) {
+          var resourceSpec = resourceSpecs[key];
+          if (!resourceSpec.options || resourceSpec.options.async) {
+              allSync = false;
+          }
+          if (resourceSpec.href && !resourceSpec.completeTime) {
+               if (!resourceSpec.queued) {
+                   var thisCallback = resourceCallback(resourceSpec);
+                   var options = {  
+                       url:     resourceSpec.href, 
+                       success: thisCallback.success, 
+                       error:   thisCallback.error};
+                   timeSuccessCallback(resourceSpec);
+                   fluid.merge(fluid.defaults("fluid.fetchResources").mergePolicy,
+                                options, resourceSpec.options);
+                   resourceSpec.queued = true;
+                   resourceSpec.initTime = new Date();
+                   fluid.log("Request with key " + key + " queued for " + resourceSpec.href);
+                   $.ajax(options);
+               }
+               if (resourceSpec.queued) {
+                   complete = false;
+               }             
+          }
+          else if (resourceSpec.nodeId && !resourceSpec.resourceText) {
+              var node = document.getElementById(resourceSpec.nodeId);
+              // upgrade this to somehow detect whether node is "armoured" somehow
+              // with comment or CDATA wrapping
+              resourceSpec.resourceText = fluid.dom.getElementText(node);
+              resourceSpec.resourceKey = resourceSpec.nodeId;
+          }
       }
-    }
-    if (complete && !resourceSpecs.callbackCalled) {
-      resourceSpecs.callbackCalled = true;
-      if ($.browser.mozilla) {
-      // Defer this callback to avoid debugging problems on Firefox
-      setTimeout(function() {
-          callback(resourceSpecs);
-          }, 1);
+      if (complete && !specStructure.callbackCalled) {
+          specStructure.callbackCalled = true;
+          if ($.browser.mozilla && !allSync) {
+              // Defer this callback to avoid debugging problems on Firefox
+              setTimeout(function() {
+                  callback(resourceSpecs);
+                  }, 1);
+          }
+          else {
+              callback(resourceSpecs)
+          }
       }
-      else {
-          callback(resourceSpecs)
-      }
-    }
   };
+  
+    
+  fluid.fetchResources = function(resourceSpecs, callback) {
+      return fetchResourcesImpl({specs: resourceSpecs}, callback);
+  }
   
     // TODO: find faster encoder
   fluid.XMLEncode = function (text) {
@@ -11164,22 +11337,7 @@ fluid_1_2 = fluid_1_2 || {};
     function debugPosition(component) {
         return "as child of " + (component.parent.fullID? "component with full ID " + component.parent.fullID : "root");
     }
-  
-    /** Better jQuery.each which works on hashes as well as having the arguments
-     * the right way round */
-    fluid.each = function (source, func) {
-        if (fluid.isArrayable(source)) {
-            for (var i = 0; i < source.length; ++ i) {
-                if (func(source[i], i) === false) { return false;}
-            }
-        }
-        else {
-            for (var key in source) {
-                if (func(source[key], key) === false) { return false;}
-            }
-        }
-    };
-    
+     
     fluid.arrayToHash = function(array) {
         var togo = {};
         fluid.each(array, function(el) {
@@ -11253,16 +11411,16 @@ fluid_1_2 = fluid_1_2 || {};
           //              processed.localID = i;
           //            }
                       togo[togo.length] = processed;
-                      }
-                }
-                else {
-                    togo[togo.length] = processChild(value, key);
-                } 
-            }
-            return togo;
-        }
-        else {return children;}
-    }
+                  }
+              }
+              else {
+                  togo[togo.length] = processChild(value, key);
+              } 
+          }
+          return togo;
+      }
+      else {return children;}
+  }
   
   function fixupValue(uibound, model) {
       if (uibound.value === undefined && uibound.valuebinding !== undefined) {
@@ -12740,6 +12898,8 @@ fluid_1_2 = fluid_1_2 || {};
         return togo;
     };
     
+    /** Definition of expanders - firstly, "heavy" expanders **/
+    
     fluid.renderer.selection.inputs = function(options, container, key, config) {
         fluid.expect("Selection to inputs expander", ["selectID", "inputID", "labelID", "rowID"], options);
         var selection = config.expander(options.tree);
@@ -12789,7 +12949,8 @@ fluid_1_2 = fluid_1_2 || {};
         fluid.each(expanded, function(entry) {entry.ID = repeatID});
         return expanded;
     };
-  
+    
+
     var removeSelectors = function (selectors, selectorsToIgnore) {
         if (selectorsToIgnore) {
             $.each(selectorsToIgnore, function (index, selectorToIgnore) {
@@ -12858,13 +13019,10 @@ fluid_1_2 = fluid_1_2 || {};
      * character of the string, will mark it out as an EL reference - otherwise it
      * will be considered a literal value, or c) the value "${}" which will be
      * recognised bracketing any other EL expression.
-     * 
-     * This expander will be upgraded in the future to support even more powerful
-     * forms of expansion, including model-directed expansion such as selection and
-     * repetition.
      */
 
     fluid.renderer.makeProtoExpander = function (expandOptions) {
+      // shallow copy of options - cheaply avoid destroying model, and all others are primitive
         var options = $.extend({}, expandOptions); // shallow copy of options
         var IDescape = options.IDescape || "\\";
         
@@ -12907,22 +13065,7 @@ fluid_1_2 = fluid_1_2 || {};
             return proto;
         }
         
-        options.filter = function (obj, recurse) {
-            if (fluid.isArrayable(obj)) {
-                return fluid.transform(obj, function(value) {return recurse(value);});
-            }
-            var togo = {};
-            for (var key in obj) {
-                var value = obj[key];
-                if (key === "expander" && value.type === "fluid.renderer.noexpand") {
-                    $.extend(togo, value.tree);
-                }
-                else {
-                    togo[key] = recurse(value);
-                }
-            };
-            return togo;
-        };
+        options.filter = fluid.expander.lightFilter;
         
         var expandLight = function(source) {
             return fluid.resolveEnvironment(source, options.model, options); 

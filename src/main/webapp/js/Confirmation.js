@@ -16,9 +16,15 @@ cspace = cspace || {};
 (function ($, fluid) {
     fluid.log("Confirmation.js loaded");
     
-    var updateHandlerForEvents = function (action, events, handler) {
+    var updateHandlerForEvents = function (action, events, handler, namespace) {
         $.each(events, function (index, event) {
-            event[action + "Listener"](handler);
+            var updateListener = event[action + "Listener"];
+            if (action === "add") {
+                updateListener(handler, namespace);
+            }
+            else {
+                updateListener(namespace);
+            }
         });
     };
     
@@ -114,8 +120,8 @@ cspace = cspace || {};
         that.model = {href: "#"};   // destination to nav to on successful navigation
         
         that.updateEventListeners = function (action) {
-            updateHandlerForEvents(action, that.options.actionSuccessEvents, that.options.successHandler(that));
-            updateHandlerForEvents(action, that.options.actionErrorEvents, that.close);
+            updateHandlerForEvents(action, that.options.actionSuccessEvents, that.options.successHandler(that), "successHandler");
+            updateHandlerForEvents(action, that.options.actionErrorEvents, that.close, "errorHandler");
         };
         
         that.refreshView = function () {
