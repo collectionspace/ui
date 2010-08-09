@@ -491,9 +491,8 @@ table .input-select         {width: 100%; height:17px; /**height:22px;*/ padding
 .input-alpha-login       {width: 120px; height:18px;}
 .input-autocomplete	   {/*width:auto !important; */}
 .ui-autocomplete-input {/*width:99.75%*/ width:100%;}
-.repeatable .ui-autocomplete-input {/*width:99.75%*/ width:89%;}
+.repeatable .ui-autocomplete-input,.repeatable input,.repeatable textarea {border:1px solid #C7CFD4; width:89%;}
 .input-autocomplete, .ui-autocomplete-input {background: #fff url(../images/arrowPredictiveText.png) no-repeat right center;}
-.repeatable input {border:1px solid #C7CFD4;}
 
 .fl-container-pivot  select.recently-created-list {width:232px !important; height:20px; /**height:24px;*/}
 

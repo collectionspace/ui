@@ -126,7 +126,7 @@
             ],
             "selection": "${fields.termStatus}"
         },
-        ".csc-organization-historyNotes": {
+        ".csc-organizationAuthority-history": {
             "decorators": [
                 {
                     "func": "cspace.makeRepeatable",
@@ -140,7 +140,7 @@
                 }
             ]
         },
-        ".csc-organization-groups": {
+        ".csc-organizationAuthority-group": {
             "decorators": [
                 {
                     "func": "cspace.makeRepeatable",
@@ -154,7 +154,7 @@
                 }
             ]
         },
-        ".csc-organization-functions": {
+        ".csc-organizationAuthority-function": {
             "decorators": [
                 {
                     "func": "cspace.makeRepeatable",

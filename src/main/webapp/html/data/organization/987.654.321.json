@@ -20,7 +20,10 @@
             {"function": "to make beautiful music",
              "_primary": true }
         ],
-		"history": "history notes here",
+        "historyNotes": [
+            { "historyNote": "history notes here",
+              "_primary": true }
+        ],
 		"addressType1": "Work",
 		"addressText1": "22 Acacia Avenue",
 		"faxNumber1": "01223 123456",
