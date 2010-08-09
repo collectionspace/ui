@@ -7,7 +7,10 @@
 		"longName": "Bloggs & Co.",
         "subBodyName": "",
         "nameAdditions": "",
-		"contactName": "urn:cspace:org.collectionspace.demo:personauthority:name(TestPersonAuth):person(Fred Bloggs)'Fred Bloggs'",
+        "contactNames": [
+            { "contactName": "urn:cspace:org.collectionspace.demo:personauthority:name(TestPersonAuth):person(Fred Bloggs)'Fred Bloggs'",
+              "_primary": true }
+        ],
         "foundingDate": "",
         "foundingPlace": "Cambridge",
 		"dissolutionDate": "",

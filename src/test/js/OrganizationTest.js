@@ -119,12 +119,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     options: {
                         listeners: {
                             afterRender: function () {
-                                jqUnit.assertEquals("The Group field is repeatable, and has the correct number of entries", 
-                                    2, $(".csc-organizationAuthority-group").length);
-                                jqUnit.assertEquals("The Function field is repeatable, and has the correct number of entries", 
-                                    1, $(".csc-organizationAuthority-function").length);
-                                jqUnit.assertEquals("The History field is repeatable, and has the correct number of entries", 
-                                    1, $(".csc-organizationAuthority-history").length);
+                                jqUnit.assertTrue("Group field is repeatable", $(".csc-organizationAuthority-group").parent().hasClass("csc-repeatable-repeat"));
+                                jqUnit.assertTrue("Function field is repeatable", $(".csc-organizationAuthority-function").parent().hasClass("csc-repeatable-repeat"));
+                                jqUnit.assertTrue("History field is repeatable", $(".csc-organizationAuthority-history").parent().hasClass("csc-repeatable-repeat"));
+                                jqUnit.assertTrue("Contact Name field is repeatable", $(".csc-organizationAuthority-contactName").parent().parent().hasClass("csc-repeatable-repeat"));
                                 start();
                             }
                         }
