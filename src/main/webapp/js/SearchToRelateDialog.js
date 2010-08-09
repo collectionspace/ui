@@ -53,6 +53,12 @@ cspace = cspace || {};
             that.events.onCreateNewRecord.fire();
             that.dlg.dialog("close");
         });
+        that.search.events.onSearch.addListener(function () {
+            that.locate("addButton", that.dlg).hide();
+        });
+        that.search.events.afterSearch.addListener(function () {
+            that.locate("addButton", that.dlg).show();
+        });
     };
 
     var setupAddDialog = function (that) {
@@ -102,6 +108,7 @@ cspace = cspace || {};
             selectBoxContainer.empty();
             selectBoxContainer.append(that.locate(type + "Selecter", that.dlg).clone());
             that.search.hideResults();
+            that.locate("addButton", that.dlg).hide();
         };
 
         return that;
