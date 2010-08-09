@@ -84,9 +84,12 @@
 			
 			<div class="csc-search-results">
 				<div class="fl-container-flex header static button">
-					<div style="float:left;" class="found-records-content">
-						Found <span class="csc-search-results-count">0</span> records
-					</div>
+                    <span class="found-records-content csc-search-resultsCountContainer">
+                        Found <span class="csc-search-results-count cs-search-highlight">insert results count here</span> records for <span class="csc-search-queryString cs-search-highlight">insert keywords here</span>
+                    </span>
+                    <span class="found-records-content csc-search-lookingContainer">
+                        Looking for <span class="csc-search-queryString cs-search-highlight">insert keywords here</span>... <img src="../images/indeterminate_progress_indicator_true_transparent_16x16.gif" />
+                    </span>
 					<div class="add-more" style="float:right"><input type="button" value="Add to current record" class="csc-relate-button button" /></div>
 					<div class="clear"></div>
 				</div>
