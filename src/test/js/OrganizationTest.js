@@ -121,6 +121,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             afterRender: function () {
                                 jqUnit.assertEquals("The Group field is repeatable, and has the correct number of entries", 
                                     2, $(".csc-organization-groups").length);
+                                jqUnit.assertEquals("The Function field is repeatable, and has the correct number of entries", 
+                                    1, $(".csc-organization-functions").length);
                                 start();
                             }
                         }

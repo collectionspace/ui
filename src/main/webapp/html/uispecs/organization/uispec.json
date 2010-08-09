@@ -102,42 +102,6 @@
                 }
             ]
         },
-        ".csc-organization-functions": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "elPath": "fields.functions",
-                        "protoTree": {
-                            ".csc-organizationAuthority-function": {
-                                "optionnames": [
-                                    "academic institution",
-                                    "archives",
-                                    "distributor",
-                                    "gallery",
-                                    "library",
-                                    "museum",
-                                    "publisher",
-                                    "religious order"
-                                ],
-                                "optionlist": [
-                                    "academic institution",
-                                    "archives",
-                                    "distributor",
-                                    "gallery",
-                                    "library",
-                                    "museum",
-                                    "publisher",
-                                    "religious order"
-                                ],
-                                "selection": "${fields.functions.0.function}"
-                            }
-                        }
-                    }
-                }
-            ]
-        },
         ".csc-organizationAuthority-dissolutionDate-container": {
             "decorators": [
                 {
@@ -184,19 +148,21 @@
                     "options": {
                         "elPath": "fields.groups",
                         "protoTree": {
-                            ".csc-organizationAuthority-group-autocomplete": {
-                                "decorators": [
-                                    {
-                                        "func": "cspace.autocomplete",
-                                        "type": "fluid",
-                                        "options": {
-                                            "queryUrl": "../../chain/vocabularies/organization/autocomplete/group",
-                                            "vocabUrl": "../../chain/vocabularies/organization/source-vocab/group"
-                                        }
-                                    }
-                                ]
-                            },
                             ".csc-organizationAuthority-group": "${fields.groups.0.group}"
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-organization-functions": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.functions",
+                        "protoTree": {
+                            ".csc-organizationAuthority-function": "${fields.functions.0.function}"
                         }
                     }
                 }

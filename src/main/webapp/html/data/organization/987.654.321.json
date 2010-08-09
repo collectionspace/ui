@@ -16,7 +16,10 @@
             { "group": "Musicians",
               "_primary": true }
         ],
-        "function": "",
+        "functions": [
+            {"function": "to make beautiful music",
+             "_primary": true }
+        ],
 		"history": "history notes here",
 		"addressType1": "Work",
 		"addressText1": "22 Acacia Avenue",
