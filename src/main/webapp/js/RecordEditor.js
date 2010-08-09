@@ -109,6 +109,7 @@ cspace = cspace || {};
             that.locate("deleteButton").click(that.remove);
             that.locate("cancel").click(function () {
                 that.locate("messageContainer", "body").hide();
+                that.unsavedChanges = false;
                 that.events.onCancel.fire();
             });
 			cspace.util.setZIndex();

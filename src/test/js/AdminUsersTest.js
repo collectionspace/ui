@@ -142,9 +142,9 @@ var adminUsersTester = function () {
                     dataType: "json",
                     type: "POST",
                     data: JSON.stringify({
-                    	csid:"",
+                        csid: "",
                         fields: {
-                        	account: [],
+                            account: [],
                             status: "",
                             email: testDataCreateUser.email,
                             screenName: testDataCreateUser.userName,
@@ -486,6 +486,32 @@ var adminUsersTester = function () {
                     jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
                     jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.locate("message:", re.confirmation.dlg).eq(0).text());
                     jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.locate("message:", re.confirmation.dlg).eq(1).text());                    
+                    start();
+                }, "initialSelect");
+                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
+            }
+        };
+        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        stop();
+    });
+    
+    adminUsersTest.test("No Confirmation on navigation away after canceled changes", function () {
+        var adminUsers;
+        testOpts.userListEditor.options.details.options.confirmation.options.listeners = {
+            afterFetchTemplate: function () {
+                var re = adminUsers.userListEditor.details;
+                re.events.afterRender.addListener(function () {
+                    re.events.afterRender.removeListener("initialSelect");                    
+                    adminUsers.locate("userName").val("New Name").change();
+                    jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
+                    jqUnit.isVisible("Navigating without cancelling, confirmation should be visible", jQuery(".csc-confirmationDialog"));
+                    jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.locate("message:", re.confirmation.dlg).eq(0).text());
+                    jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.locate("message:", re.confirmation.dlg).eq(1).text());
+                    re.confirmation.close();
+                    re.locate("cancel").click();                    
+                    jqUnit.notVisible("After cancelling, user details should now be hidden", adminUsers.userListEditor.locate("details"));
+                    jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
+                    jqUnit.notVisible("Navigating away, there should be no visible confirmation", jQuery(".csc-confirmationDialog"));
                     start();
                 }, "initialSelect");
                 jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
