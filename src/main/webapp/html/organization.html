@@ -28,6 +28,7 @@
         <script type="text/javascript" src="../js/Confirmation.js"></script>
         <script type="text/javascript" src="../js/Autocomplete.js"></script>
         <script type="text/javascript" src="../js/Search.js"></script>
+        <script type="text/javascript" src="../js/Repeatable.js"></script>
 		<script type="text/javascript" src="../js/RecordEditor.js"></script>
         <script type="text/javascript" src="../js/RelationManager.js"></script>
         <script type="text/javascript" src="../js/SearchToRelateDialog.js"></script>
@@ -40,8 +41,10 @@
         <script type="text/javascript" src="../js/PageBuilder.js"></script>
 		<script type="text/javascript" src="../lib/goog/js/goog.ui.DatePicker.js"></script>
 		<script type="text/javascript" src="../js/DatePicker.js"></script>
+        <script type="text/javascript" src="../js/tabSetup.js"></script>
+        <script type="text/javascript" src="../js/PageSetup.js"></script>
         <script type="text/javascript" src="../js/Search.js"></script>
-		<script type="text/javascript" src="../js/organizationSetup.js"></script>
+		<script type="text/javascript" src="../js/recordSetup.js"></script>
 
 	</head>
 
@@ -55,9 +58,7 @@
             
             <div class="fl-container-1024-inner">
 
-                <!-- this div will be filled in with the contents of the Template -->
-                <div class="csc-organizationAuthority-titleBar-container">
-                </div>
+                <div class="csc-organizationAuthority-titleBar-container"></div>
                 
                 <!-- main content -->
                 <div id="all-content" class="fl-fix organization">
@@ -77,9 +78,6 @@
                     </div>
                 </div>
                 <!-- END main content -->
-
-
-
             </div>
             
         </div>
@@ -96,7 +94,9 @@
         </div>
 		
         <script type="text/javascript">
-            cspace.organizationSetup();
+            jQuery(document).ready(function(){
+                cspace.recordSetup();               
+            });
         </script>
 	</body>
 </html>

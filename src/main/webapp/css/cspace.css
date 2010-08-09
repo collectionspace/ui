@@ -493,7 +493,7 @@ table .input-select         {width: 100%; height:17px; /**height:22px;*/ padding
 .ui-autocomplete-input {/*width:99.75%*/ width:100%;}
 .repeatable .ui-autocomplete-input {/*width:99.75%*/ width:89%;}
 .input-autocomplete, .ui-autocomplete-input {background: #fff url(../images/arrowPredictiveText.png) no-repeat right center;}
-.repeatable input.ui-autocomplete-input {border:1px solid #C7CFD4;}
+.repeatable input {border:1px solid #C7CFD4;}
 
 .fl-container-pivot  select.recently-created-list {width:232px !important; height:20px; /**height:24px;*/}
 
@@ -632,6 +632,7 @@ table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; f
 input[type="button"].cs-repeatable-add {font-size:11px; height:17px; width:55px; position:absolute; right:25px; top:-2px;}
 li.cs-repeatable-repeat {list-style-type: none;  margin-bottom:1px;}
 .cs-repeatable-content {width: 89.2%;}
+.cs-repeatable-content > input {width: 89.2%;}
 div.cs-rep eatable-content input{float:left;}
 input.cs-repeatable-primary {width: 5%; position: relative; vertical-align: top;}
 input.cs-repeatable-delete {width: 16px; height:18px; vertical-align: top; padding:0px; background:transparent url('../images/icnDeleteIdle.png') no-repeat 1px 2px; /*color: transparent; background-color: transparent; line-height:100%; font-size:11px; height:15px; line-height:80%; margin:2px 0;*/}

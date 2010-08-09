@@ -11,7 +11,11 @@
         "foundingDate": "",
         "foundingPlace": "Cambridge",
 		"dissolutionDate": "",
-        "group": "Musicians",
+        "groups": [
+            { "group": "Cool people"},
+            { "group": "Musicians",
+              "_primary": true }
+        ],
         "function": "",
 		"history": "history notes here",
 		"addressType1": "Work",

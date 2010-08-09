@@ -40,7 +40,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             href: "../../main/webapp/html/tabsTemplate.html"
                         },
                         titleBar: {
-                            href: "../../main/webapp/html/bjectTitleBar.html"
+                            href: "../../main/webapp/html/objectTitleBar.html"
                         },
                         dateEntry: {
                             href: "../../main/webapp/html/ObjectEntryTemplate.html"

@@ -1,0 +1,109 @@
+{
+    "pageBuilder": {
+        "options": {
+            "dataContext": {
+                "options": {
+                    "recordType": "organization" 
+                } 
+            },
+            "pageSpec": {
+                "header": {
+                    "href": "header.html",
+                    "templateSelector": ".csc-header-template",
+                    "targetSelector": ".csc-header-container" 
+                },
+                "tabs": {
+                    "href": "tabsTemplate.html",
+                    "templateSelector": ".csc-tabs-template",
+                    "targetSelector": ".csc-tabs-container" 
+                },
+                "titleBar": {
+                    "href": "organizationTitleBar.html",
+                    "templateSelector": ".csc-organizationAuthority-titleBar-template",
+                    "targetSelector": ".csc-header-container" 
+                },
+                "recordEditor": {
+                    "href": "organizationTemplate.html",
+                    "templateSelector": ".csc-organizationAuthority-template",
+                    "targetSelector": ".csc-record-edit-container" 
+                },
+                "sidebar": {
+                    "href": "right-sidebar.html",
+                    "templateSelector": ".csc-right-sidebar",
+                    "targetSelector": ".csc-sidebar-container" 
+                },
+                "footer": {
+                    "href": "footer.html",
+                    "templateSelector": ".csc-footer",
+                    "targetSelector": ".csc-footer-container" 
+                } 
+            },
+            "pageType": "organization" 
+        } 
+    },
+    "dependencies": {
+        "titleBar": {
+            "funcName": "cspace.titleBar",
+            "args": [
+                ".csc-organizationAuthority-titleBar-template",
+                "{pageBuilder}.applier" 
+            ] 
+        },
+        "tabs": {
+            "funcName": "cspace.tabs",
+            "args": [
+                ".csc-tabs-template",
+                "{pageBuilder}.applier" 
+            ] 
+        },
+        "recordEditor": {
+            "funcName": "cspace.recordEditor",
+            "args": [
+                ".csc-organizationAuthority-template",
+                "{pageBuilder}.dataContext",
+                "{pageBuilder}.applier",
+                "{pageBuilder}.uispec.recordEditor" 
+            ] 
+        },
+        "sidebar": {
+            "funcName": "cspace.sidebar",
+            "args": [
+                ".csc-sidebar",
+                "{pageBuilder}.applier" 
+            ] 
+        } 
+    },
+    "depOpts": {
+        "titleBar": {
+            "options": {
+                "uispec": "{pageBuilder}.uispec.titleBar" 
+            } 
+        },
+        "tabs": {
+            "options": {
+                "tabList": [
+                    {"name": "Organization Name Authority", "target": "#primaryTab"}
+                ],
+                "tabSetups": [
+                    "null"
+                ] 
+            } 
+        },
+        "recordEditor": {
+            "options": {
+                "selectors": {
+                    "identificationNumber": ".csc-organizationAuthority-displayName" 
+                },
+                "strings": {
+                    "identificationNumberRequired": "Please specify a Display Name" 
+                } 
+            } 
+        },
+        "sidebar": {
+            "options": {
+                "uispec": "{pageBuilder}.uispec.sidebar",
+                "primaryRecordType": "objects" 
+            } 
+        } 
+    } 
+}

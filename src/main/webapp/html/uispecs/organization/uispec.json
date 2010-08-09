@@ -48,12 +48,35 @@
         ".csc-titleBar-foundationDate": "${fields.foundingDate}"
     },
     "recordEditor": {
-        ".csc-organizationAuthority-history": "${fields.history}",
+        ".csc-organization-contactNames": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.contactNames",
+                        "protoTree": {
+                            ".csc-organizationAuthority-contactName": "${fields.contactNames.0.contactName}",
+                            ".csc-organizationAuthority-contactName-autocomplete": {
+                                "decorators": [
+                                    {
+                                        "func": "cspace.autocomplete",
+                                        "type": "fluid",
+                                        "options": {
+                                            "queryUrl": "../../chain/vocabularies/organization/autocomplete/contactName",
+                                            "vocabUrl": "../../chain/vocabularies/organization/source-vocab/contactName"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        },
         ".csc-organizationAuthority-nameAdditions": "${fields.nameAdditions}",
-        ".csc-organizationAuthority-subBodyName": "${fields.subBody}",
         ".csc-organizationAuthority-displayName": "${fields.displayName}",
         ".csc-organizationAuthority-longName": "${fields.longName}",
-        ".csc-organizationAuthority-contactName": "${fields.contactName}",
         ".csc-organizationAuthority-foundingDate-container": {
             "decorators": [
                 {
@@ -62,28 +85,55 @@
                 }
             ]
         },
-        ".csc-organizationAuthority-contactName-autocomplete": {
+        ".csc-organization-shortIdentifier": "${fields.shortIdentifier}",
+        ".csc-organizationAuthority-foundingPlace": "${fields.foundingPlace}",
+        ".csc-organizationAuthority-dissolutionDate": "${fields.dissolutionDate}",
+        ".csc-organization-subBodies": {
             "decorators": [
                 {
-                    "func": "cspace.autocomplete",
+                    "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../chain/vocabularies/organization/autocomplete/contactName",
-                        "vocabUrl": "../../chain/vocabularies/organization/source-vocab/contactName"
+                        "elPath": "fields.subBodies",
+                        "protoTree": {
+                            ".csc-organizationAuthority-subBodyName": "${fields.subBodies.0.subBody}"
+                        }
                     }
                 }
             ]
         },
-        ".csc-organizationAuthority-foundingPlace": "${fields.foundingPlace}",
-        ".csc-organizationAuthority-dissolutionDate": "${fields.dissolutionDate}",
-        ".csc-organizationAuthority-group-autocomplete": {
+        ".csc-organization-functions": {
             "decorators": [
                 {
-                    "func": "cspace.autocomplete",
+                    "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../chain/vocabularies/organization/autocomplete/group",
-                        "vocabUrl": "../../chain/vocabularies/organization/source-vocab/group"
+                        "elPath": "fields.functions",
+                        "protoTree": {
+                            ".csc-organizationAuthority-function": {
+                                "optionnames": [
+                                    "academic institution",
+                                    "archives",
+                                    "distributor",
+                                    "gallery",
+                                    "library",
+                                    "museum",
+                                    "publisher",
+                                    "religious order"
+                                ],
+                                "optionlist": [
+                                    "academic institution",
+                                    "archives",
+                                    "distributor",
+                                    "gallery",
+                                    "library",
+                                    "museum",
+                                    "publisher",
+                                    "religious order"
+                                ],
+                                "selection": "${fields.functions.0.function}"
+                            }
+                        }
                     }
                 }
             ]
@@ -96,7 +146,7 @@
                 }
             ]
         },
-        ".csc-organizationAuthority-group": "${fields.group}",
+        ".csc-organizationAuthority-foundingDate": "${fields.foundingDate}",
         ".csc-organizationAuthority-status": {
             "optionnames": [
                 "Provisional",
@@ -110,31 +160,47 @@
                 "accepted",
                 "rejected"
             ],
-            "selection": "${fields.status}"
+            "selection": "${fields.termStatus}"
         },
-        ".csc-organizationAuthority-foundingDate": "${fields.foundingDate}",
-        ".csc-organizationAuthority-function": {
-            "optionnames": [
-                "academic institution",
-                "archives",
-                "distributor",
-                "gallery",
-                "library",
-                "museum",
-                "publisher",
-                "religious order"
-            ],
-            "optionlist": [
-                "academic institution",
-                "archives",
-                "distributor",
-                "gallery",
-                "library",
-                "museum",
-                "publisher",
-                "religious order"
-            ],
-            "selection": "${fields.function}"
+        ".csc-organization-historyNotes": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.historyNotes",
+                        "protoTree": {
+                            ".csc-organizationAuthority-history": "${fields.historyNotes.0.historyNote}"
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-organization-groups": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.groups",
+                        "protoTree": {
+                            ".csc-organizationAuthority-group-autocomplete": {
+                                "decorators": [
+                                    {
+                                        "func": "cspace.autocomplete",
+                                        "type": "fluid",
+                                        "options": {
+                                            "queryUrl": "../../chain/vocabularies/organization/autocomplete/group",
+                                            "vocabUrl": "../../chain/vocabularies/organization/source-vocab/group"
+                                        }
+                                    }
+                                ]
+                            },
+                            ".csc-organizationAuthority-group": "${fields.groups.0.group}"
+                        }
+                    }
+                }
+            ]
         },
         ".csc-organizationAuthority-foundingPlace-autocomplete": {
             "decorators": [
