@@ -122,7 +122,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                 jqUnit.assertTrue("Group field is repeatable", $(".csc-organizationAuthority-group").parent().hasClass("csc-repeatable-repeat"));
                                 jqUnit.assertTrue("Function field is repeatable", $(".csc-organizationAuthority-function").parent().hasClass("csc-repeatable-repeat"));
                                 jqUnit.assertTrue("History field is repeatable", $(".csc-organizationAuthority-history").parent().hasClass("csc-repeatable-repeat"));
+
+                                // authority fields are inside a container, and so we must check the grandparent for the repeatability indicator
                                 jqUnit.assertTrue("Contact Name field is repeatable", $(".csc-organizationAuthority-contactName").parent().parent().hasClass("csc-repeatable-repeat"));
+                                jqUnit.assertTrue("Sub-body field is repeatable", $(".csc-organizationAuthority-subBodyName").parent().parent().hasClass("csc-repeatable-repeat"));
+
                                 start();
                             }
                         }

@@ -74,6 +74,32 @@
                 }
             ]
         },
+        ".csc-organization-subBodies": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.subBodies",
+                        "protoTree": {
+                            ".csc-organizationAuthority-subBodyName": "${fields.subBodies.0.subBody}",
+                            ".csc-organizationAuthority-subBodyName-autocomplete": {
+                                "decorators": [
+                                    {
+                                        "func": "cspace.autocomplete",
+                                        "type": "fluid",
+                                        "options": {
+                                            "queryUrl": "../../chain/vocabularies/organization/autocomplete/subBodyName",
+                                            "vocabUrl": "../../chain/vocabularies/organization/source-vocab/subBodyName"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        },
         ".csc-organizationAuthority-nameAdditions": "${fields.nameAdditions}",
         ".csc-organizationAuthority-displayName": "${fields.displayName}",
         ".csc-organizationAuthority-longName": "${fields.longName}",
@@ -88,20 +114,6 @@
         ".csc-organization-shortIdentifier": "${fields.shortIdentifier}",
         ".csc-organizationAuthority-foundingPlace": "${fields.foundingPlace}",
         ".csc-organizationAuthority-dissolutionDate": "${fields.dissolutionDate}",
-        ".csc-organization-subBodies": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "elPath": "fields.subBodies",
-                        "protoTree": {
-                            ".csc-organizationAuthority-subBodyName": "${fields.subBodies.0.subBody}"
-                        }
-                    }
-                }
-            ]
-        },
         ".csc-organizationAuthority-dissolutionDate-container": {
             "decorators": [
                 {
