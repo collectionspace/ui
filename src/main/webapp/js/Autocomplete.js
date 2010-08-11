@@ -9,6 +9,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jQuery, fluid, cspace*/
+"use strict";
 
 cspace = cspace || {};
 
@@ -121,7 +122,7 @@ cspace = cspace || {};
     };
 
     var setupAutocomplete = function (that) {
-        that.hiddenInput = $("input", that.container.parent());
+        that.hiddenInput = that.container.is("input") ? that.container : $("input", that.container.parent());
         var autoCompleteInput = $("<input/>");
         autoCompleteInput.insertAfter(that.hiddenInput);
         that.hiddenInput.hide();
