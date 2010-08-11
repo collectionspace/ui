@@ -8655,6 +8655,48 @@ var fluid = fluid || fluid_1_2;
         return zeropad(date.getHours()) + ":" + zeropad(date.getMinutes()) + ":" + zeropad(date.getSeconds()) + "." + zeropad(date.getMilliseconds(), 3);
     };
     
+    function generate(c, count) {
+        var togo = "";
+        for (var i = 0; i < count; ++ i) {
+            togo += c;
+        }
+        return togo;
+    }
+    
+    function printImpl(obj, small, options) {
+        var big = small + options.indentChars;
+        if (obj === null) {
+            return "null";
+        }
+        else if (fluid.isPrimitive(obj)) {
+            return JSON.stringify(obj);
+        }
+        else {
+            var j = [];
+            if (fluid.isArrayable(obj)) {
+                if (obj.length === 0) {
+                    return "[]";
+                }
+                for (var i = 0; i < obj.length; ++ i) {
+                    j[i] = printImpl(obj[i], big, options);
+                }
+                return "[\n" + big + j.join(",\n" + big) + "\n" + small + "]";
+                }
+            else {
+                var i = 0;
+                fluid.each(obj, function(value, key) {
+                    j[i++] = JSON.stringify(key) + ": " + printImpl(value, big, options);
+                });
+                return "{\n" + big + j.join(",\n" + big) + "\n" + small + "}"; 
+            }
+        }
+    }
+    
+    fluid.prettyPrintJSON = function(obj, options) {
+        options = $.extend({indent: 4}, options);
+        options.indentChars = generate(" ", options.indent);
+        return printImpl(obj, "", options);
+    }
         
     /** 
      * Dumps a DOM element into a readily recognisable form for debugging - produces a
@@ -10726,6 +10768,7 @@ fluid_1_2 = fluid_1_2 || {};
       var debugMode = false;
       
       var cutpoints = []; // list of selector, tree, id
+      var simpleClassCutpoints = {};
       
       var cutstatus = [];
       
@@ -10742,6 +10785,10 @@ fluid_1_2 = fluid_1_2 || {};
           };
       };
       
+      function isSimpleClassCutpoint(tree) {
+          return tree.length === 1 && tree[0].predList.length === 1 && tree[0].predList[0].clazz;
+      }
+      
       function init(baseURLin, debugModeIn, cutpointsIn) {
           t.rootlump = XMLLump(0, -1);
           tagstack = [t.rootlump];
@@ -10752,11 +10799,17 @@ fluid_1_2 = fluid_1_2 || {};
           defend = -1;
           baseURL = baseURLin;
           debugMode = debugModeIn;
-          cutpoints = cutpointsIn;
-          if (cutpoints) {
-              for (var i = 0; i < cutpoints.length; ++ i) {
-                  cutstatus[i] = [];
-                  cutpoints[i].tree = fluid.parseSelector(cutpoints[i].selector);
+          if (cutpointsIn) {
+              for (var i = 0; i < cutpointsIn.length; ++ i) {
+                  var tree = fluid.parseSelector(cutpointsIn[i].selector);
+                  var clazz = isSimpleClassCutpoint(tree);
+                  if (clazz) {
+                      simpleClassCutpoints[clazz] = cutpointsIn[i].id;
+                  }
+                  else {
+                      cutstatus.push([]);
+                      cutpoints.push($.extend({}, cutpointsIn[i], {tree: tree}));
+                  }
               }
           }
       }
@@ -10812,12 +10865,12 @@ fluid_1_2 = fluid_1_2 || {};
           return (" " + totest + " ").indexOf(" " + clazz + " ") !== -1;
       }
       
-      function matchNode(term, headlump) {
+      function matchNode(term, headlump, headclazz) {
         if (term.predList) {
           for (var i = 0; i < term.predList.length; ++ i) {
             var pred = term.predList[i];
             if (pred.id && headlump.attributemap.id !== pred.id) {return false;}
-            if (pred.clazz && !hasCssClass(pred.clazz, headlump.attributemap["class"])) {return false;}
+            if (pred.clazz && !hasCssClass(pred.clazz, headclazz)) {return false;}
             if (pred.tag && headlump.tagname !== pred.tag) {return false;}
             }
           return true;
@@ -10826,8 +10879,17 @@ fluid_1_2 = fluid_1_2 || {};
       
       function tagStartCut(headlump) {
         var togo = undefined;
-        if (cutpoints) {
-          for (var i = 0; i < cutpoints.length; ++ i) {
+        var headclazz = headlump.attributemap["class"];
+        if (headclazz) {
+            var split = headclazz.split(" ");
+            for (var i = 0; i < split.length; ++ i) {
+                var simpleCut = simpleClassCutpoints[split[i].trim()];
+                if (simpleCut) {
+                    return simpleCut;
+                }
+            }
+        }
+        for (var i = 0; i < cutpoints.length; ++ i) {
             var cut = cutpoints[i];
             var cutstat = cutstatus[i];
             var nextterm = cutstat.length; // the next term for this node
@@ -10839,7 +10901,7 @@ fluid_1_2 = fluid_1_2 || {};
                   continue; // it is a failure to match if not at correct nesting depth 
                   }
                 }
-              var isMatch = matchNode(term, headlump);
+              var isMatch = matchNode(term, headlump, headclazz);
               if (isMatch) {
                 cutstat[cutstat.length] = headlump.nestingdepth;
                 if (cutstat.length === cut.tree.length) {
@@ -10856,7 +10918,6 @@ fluid_1_2 = fluid_1_2 || {};
                 }
               }
             }
-          }
         return togo;
         }
         
@@ -12647,12 +12708,15 @@ fluid_1_2 = fluid_1_2 || {};
       }
 
       that.renderTemplates = function() {
+          fluid.log("Before fixup");
           tree = fixupTree(tree, options.model);
           var template = templates[0];
           resolveBranches(templates.globalmap, tree, template.rootlump);
           renderedbindings = {};
           renderCollects();
+          fluid.log("Before renderRecurse");
           renderRecurse(tree, template.rootlump, template.lumps[template.firstdocumentindex]);
+          fluid.log("Rendering complete");
           return out;
       };  
       
@@ -12762,6 +12826,7 @@ fluid_1_2 = fluid_1_2 || {};
         else {
             node.innerHTML = "";
         }
+        fluid.log("Node emptied");
         var fossils = {};
         var renderer = fluid.renderer(templates, tree, options, fossils);
         var rendered = renderer.renderTemplates();
@@ -12778,6 +12843,7 @@ fluid_1_2 = fluid_1_2 || {};
         else {
           node.innerHTML = rendered;
         }
+        fluid.log("Markup applied");
         renderer.processDecoratorQueue();
         if (lastId) {
             var element = fluid.byId(lastId);
@@ -12828,7 +12894,9 @@ fluid_1_2 = fluid_1_2 || {};
         var resourceSpec = {base: {resourceText: template, 
                             href: ".", resourceKey: ".", cutpoints: options.cutpoints}
                             };
+        fluid.log("Begin parseTemplates");
         var templates = fluid.parseTemplates(resourceSpec, ["base"], options);
+        fluid.log("End parseTemplates");
         return fluid.reRender(templates, target, tree, options);    
     };
     
@@ -14721,7 +14789,7 @@ function FCKeditor_OnComplete(editorInstance) {
  * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) 
  * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
  *
- * $LastChangedDate: 2009-05-05 11:14:12 -0400 (Tue, 05 May 2009) $
+ * $LastChangedDate: 2009-05-05 09:14:12 -0600 (Tue, 05 May 2009) $
  * $Rev: 7137 $
  *
  * Version 2.1

@@ -2,13 +2,14 @@
 Copyright 2010 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
-ou may not use this file except in compliance with this License.
+You may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid, cspace*/
+/*global jQuery, fluid, cspace, fluid, window*/
+"use strict";
 
 cspace = cspace || {};
 
@@ -32,17 +33,13 @@ cspace = cspace || {};
     };
     
     var inject = function (docString, selector, container) {
-        if (!docString || docString === "") {
+        if (!docString) {
             return;
         }
-
 //        var headTag = docString.match(/<head(.|\s)*?\/head>/gi)[0];
         var bodyTag = docString.match(/<body(.|\s)*?\/body>/gi);
-        if (bodyTag) {
-            bodyTag = bodyTag[0];
-        } else {
-            bodyTag = docString;
-        }
+        bodyTag = bodyTag ? bodyTag[0] : docString;
+        
 // Currently, parsing the link and script tags is not working quite properly, so
 // for now, forego that process: assume the target HTML has everything you'd need
 //        var linkTags = [].concat(headTag.match(/<link(.|\s)*?\/>/gi)).concat(headTag.match(/<link(.|\s)*?\/link>/gi)),
@@ -57,28 +54,20 @@ cspace = cspace || {};
         container.append($(selector, templateContainer)); 
     };    
     
-    var expandOptions = function (pageBuilder, args) {        
-        $.each(args, function (index, arg) {
-            if (arg) {
-                var type = typeof(arg);
-                if (type === "object") {
-                    expandOptions(pageBuilder, arg);
-                }
-                else if (type === "string" && arg.indexOf("{pageBuilder}") === 0) {
-                    args[index] = fluid.model.getBeanValue(pageBuilder, arg.substring(14, arg.length));
-                }
-            }
-        });
-    };
-
-    var invokeDependencies = function (that) {
+    var setUpPageBuilder = function (that) {
+        cspace.util.createEmptyModel(that.model, that.uispec); 
         that.events.onDependencySetup.fire(that.uispec);
+        
+        fluid.withEnvironment({pageBuilder: that},
+                                function () {
+                                    that.dependencies = fluid.expander.expandLight(that.dependencies);
+                                }
+        );
         
         that.components = [];
         for (var region in that.dependencies) {
             if (that.dependencies.hasOwnProperty(region)) {
                 var dep = that.dependencies[region];
-                expandOptions(that, dep.args);
                 fluid.log("PageBuilder.js before executing " + dep.funcName);
                 that.components[region] = fluid.invokeGlobalFunction(dep.funcName, dep.args);
                 fluid.log("PageBuilder.js after executing " + dep.funcName);
@@ -86,87 +75,49 @@ cspace = cspace || {};
         }
     };
 
-    var setupModelAndDependencies = function (that) {
-        that.applier = fluid.makeChangeApplier(that.model);    
-        fluid.log("PageBuilder.js before invoking dependencies");
-        invokeDependencies(that);
-        fluid.log("PageBuilder.js after invoking dependencies");        
-        that.events.pageReady.fire();
-    };
-    
-    var setUpPageBuilder = function (that) {
-        that.model = cspace.util.createBaseModel();
-        cspace.util.createEmptyModel(that.model, that.uispec);
-        fluid.log("PageBuilder.js after creating empty model");
-        that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
-        that.dataContext.events.afterFetch.addListener(function () {
-            setupModelAndDependencies(that);
-        });
-        
-        if (that.options.csid) {
-            that.dataContext.fetch(that.options.csid);
-            fluid.log("PageBuilder.js after fetching record " + that.options.csid);
-        } else {
-            setupModelAndDependencies(that);
-        }
-    };
-
-    var assembleHTML = function (that) {
-        fluid.log("PageBuilder.js before fetching resources");
-        fluid.fetchResources(that.options.pageSpec, function (resourceSpecs) {
-            fluid.log("PageBuilder.js after fetching resources");
-            for (var regionName in resourceSpecs) {
-                if (resourceSpecs.hasOwnProperty(regionName) && (regionName !== "callbackCalled")) {
-                    var region = resourceSpecs[regionName];
-                    inject(region.resourceText, region.templateSelector, $(region.targetSelector));
-                }
-                
-            }
-            if (!that.options.htmlOnly) {
-                setUpPageBuilder(that);                
-            } else {
-                that.events.pageReady.fire();
-            }
-        });
-
-    };
-
     cspace.pageBuilder = function (dependencies, options) {
         var that = {
-            dependencies: dependencies
+            dependencies: dependencies,
+            model: cspace.util.createBaseModel()
         };
+        that.applier = fluid.makeChangeApplier(that.model);
 
         fluid.mergeComponentOptions(that, "cspace.pageBuilder", options);
         fluid.instantiateFirers(that, that.options);
+        
+        that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
 
-        fluid.log("PageBuilder.js before checking loginstatus");
-
-        // TODO: We should consider refactoring this work. We have several calls to the server that need
-        //       to happen synchronously - perhaps it should be rolled into a single call.
+        // everything we have got so far needs to be disposed as HTML
+        var resourceSpecs = that.options.pageSpec;
+        fluid.each(resourceSpecs, function (spec) {
+            spec.options = {
+                success:  function (text) {
+                    inject(text, spec.templateSelector, $(spec.targetSelector));
+                }
+            };
+        });
         
         // determine if logged in and redirect
         if (!cspace.util.useLocalData()) {
-            var loginRedirect = false;
-            jQuery.ajax({
-                async: false,
-                url: "../../chain/loginstatus",
-                cache: false,
-                type: "GET",
-                dataType: "json",
-                success: function (data, textStatus) {
-                    loginRedirect = !data.login;
-                    fluid.log("PageBuilder.js after checking loginstatus");
-                }
-            });
-            
-            if (loginRedirect) {
-                var currentUrl = document.location.href;
-                var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
-                window.location = loginUrl;     
-            }
+            resourceSpecs.loginStatus = {
+                href: "../../chain/loginstatus",
+                options: {
+                    dataType: "json",
+                    success: function (data) {
+                        if (!data.login) {
+                            var currentUrl = document.location.href;
+                            var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
+                            window.location = loginUrl;     
+                        }
+                    }
+                } 
+            };
         }
-            
-        fluid.log("PageBuilder.js before fetching uispec");
+        
+        if (that.options.csid) {
+            var dcthat = that.dataContext;
+            resourceSpecs.record = that.dataContext.getResourceSpec("fetch", dcthat.options, dcthat.events.afterFetch, dcthat.events, that.options.csid);
+        }
             
         // Fetch UI spec if required
         if (!that.uispec && that.options.pageType) {
@@ -181,32 +132,46 @@ cspace = cspace || {};
                 uispecUrl = "./uispecs/role/uispec.json";
             }
             if (that.options.pageType === "users") {
-            	uispecUrl = "./uispecs/users/uispec.json";
+                uispecUrl = "./uispecs/users/uispec.json";
             }
             if (that.options.pageType === "movement") {
                 uispecUrl = "./uispecs/movement/uispec.json";
             }
-            
-            jQuery.ajax({
-                async: false,
-                url: uispecUrl,
-                type: "GET",
-                dataType: "json",
-                success: function (data, textStatus) {
-                    that.uispec = data;
-                    fluid.log("PageBuilder.js after fetching uispec");
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    fluid.fail("Error fetching " + that.options.pageType + " uispec:" + textStatus);
+
+            resourceSpecs.uispec = {
+                href: uispecUrl,
+                options: {
+                    dataType: "json",
+                    success: function (data) {
+                        that.uispec = data;
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        fluid.fail("Error fetching " + that.options.pageType + " uispec:" + textStatus);
+                    }
                 }
-            });
-        }        
-        
-        if (options && options.pageSpec) {
-            assembleHTML(that);
-        } else {
-            setUpPageBuilder(that);
+            };
         }
+        
+        // for our dependencies, add any demands for model expansion to the spec list
+        fluid.withEnvironment({resourceSpecCollector: resourceSpecs},
+                                function () {
+                                    that.dependencies = fluid.expander.expandLight(that.dependencies, {noValue: true});
+                                }
+        );
+        fluid.each(resourceSpecs,
+                    function (spec) {
+                        spec.timeSuccess = true;
+                    }
+        );
+        
+        fluid.log("PageBuilder.js before issuing I/O"); // fetch EVERYTHING
+        fluid.fetchResources(resourceSpecs, function () {
+            fluid.log("PageBuilder.js completing initialisation - I/O returned");
+            if (!that.options.htmlOnly) {
+                setUpPageBuilder(that);                
+            }
+            that.events.pageReady.fire(); 
+        });
         
         return that;
     };
@@ -218,7 +183,8 @@ cspace = cspace || {};
         },
         dataContext: {
             type: "cspace.dataContext"
-        },        
+        },
+        pageSpec: {},
         htmlOnly: false,
         uispecUrl: "",
         pageType: ""

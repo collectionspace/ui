@@ -1,6 +1,7 @@
 This is a custom build of Fluid Infusion 1.2.x including: json, fss, framework, renderer, inlineEdit, pager and jQueryUIWidgets.
 
-It was built from revision r9986.
+It was built from revision r9987 of the Infusion trunk, at
+    http://source.fluidproject.org/svn/fluid/infusion/trunk/
 
 using the following command:
    ant customBuild -Dinclude="json, fss, framework, renderer, inlineEdit, pager, jQueryUIWidgets" -Djsfilename="CSpaceInfusion.js" -DnoMinify="true"

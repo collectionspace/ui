@@ -2,7 +2,7 @@
 Copyright 2009-2010 University of Toronto
 
 Licensed under the Educational Community License (ECL), Version 2.0. 
-ou may not use this file except in compliance with this License.
+You may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
@@ -32,15 +32,7 @@ cspace = cspace || {};
         }
     };
 
-    /*
-     * operation: string ("create", "fetch", "update", "remove", "addRelations"); will be displayed in the case of an error
-     * options: 
-     * successEvent: event to fire after success
-     * events: 
-     * csid: the csid to fetch (optional)
-     * data: the model or new relations to transmit (optional)
-     */
-    var ajax = function (operation, options, successEvent, events, csid, data) {
+    var buildOpts = function (operation, options, successEvent, events, csid, data) {
         var opts = {
             url: buildUrl(operation, options.baseUrl, options.recordType, csid, options.fileExtension),
             type: types[operation],
@@ -58,8 +50,20 @@ cspace = cspace || {};
         if (data) {
             opts.data = JSON.stringify(data);
         }
-        
-        jQuery.ajax(opts);
+        return opts;
+    };
+    
+    /*
+     * operation: string ("create", "fetch", "update", "remove", "addRelations"); will be displayed in the case of an error
+     * options: 
+     * successEvent: event to fire after success
+     * events: 
+     * csid: the csid to fetch (optional)
+     * data: the model or new relations to transmit (optional)
+     */
+    var ajax = function () {
+        var opts = buildOpts.apply(null, arguments);
+        $.ajax(opts);
     };
 
     var bindEventHandlers = function (that) {
@@ -86,6 +90,19 @@ cspace = cspace || {};
             fluid.model.copyModel(oldModel, that.model);
             fluid.model.copyModel(that.model, newModel);
             that.events.modelChanged.fire(that.model, oldModel, source);
+        };
+        
+        /** Get a resourceSpec structure that may be used to issue the required
+         * I/O for this dataContext operation at a later time. This currently causes
+         * a violation of encapsulation which we will need to fix up with IoC later */ 
+        that.getResourceSpec = function () {
+            var opts = buildOpts.apply(null, arguments);
+            var spec = {
+                options: opts
+            };
+            spec.href = opts.url;
+            delete spec.options.url;
+            return spec;
         };
         
         that.fetch = function (csid) {
