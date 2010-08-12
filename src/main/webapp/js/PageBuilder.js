@@ -134,9 +134,6 @@ cspace = cspace || {};
             if (that.options.pageType === "users") {
                 uispecUrl = "./uispecs/users/uispec.json";
             }
-            if (that.options.pageType === "movement") {
-                uispecUrl = "./uispecs/movement/uispec.json";
-            }
 
             resourceSpecs.uispec = {
                 href: uispecUrl,

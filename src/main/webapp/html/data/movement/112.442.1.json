@@ -1,12 +1,12 @@
 {
     "csid": "112.442.1",
     "fields": {
-        "currentLocation": "Sample Location",
-        "currentLocationFitness": "suitable",
-        "currentLocationNote": "Sample Current Location Note",
+        "currentLocation": "Front Porch",
+        "currentLocationFitness": "unsuitable",
+        "currentLocationNote": "not covered",
         "locationDate": "March 26, 2010",
-        "normalLocation": "Sample Location",
-        "movementContact": "The Big Lebowsky",
+        "normalLocation": "Back Porch",
+        "movementContact": "urn:cspace:org.collectionspace.demo:personauthority:name(TestPersonAuth):person:name(The Big Lebowsky)'The Big Lebowsky'",
         "movementMethods": [
             {
                 "_primary": false,
@@ -23,6 +23,13 @@
         "removalDate": "May 25, 2010",
         "reasonForMove": "photography" 
     },
-    "termsUsed": [],
+    "termsUsed": [
+        {
+            "csid": "123.456.789",
+            "number": "The Big Lebowsky",
+            "sourceFieldName": "movementContact",
+            "recordtype": "person" 
+        }
+    ],
     "relations": {}
 }
