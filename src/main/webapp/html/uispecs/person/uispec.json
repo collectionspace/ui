@@ -131,18 +131,6 @@
             "selection": "${fields.status}"
         },
         ".csc-personAuthority-birthDate": "${fields.birthDate}",
-        ".csc-personAuthority-nationality-autocomplete": {
-            "decorators": [
-                {
-                    "func": "cspace.autocomplete",
-                    "type": "fluid",
-                    "options": {
-                        "queryUrl": "../../chain/vocabularies/person/autocomplete/nationality",
-                        "vocabUrl": "../../chain/vocabularies/person/source-vocab/nationality"
-                    }
-                }
-            ]
-        },
         ".csc-personAuthority-gender": {
             "optionnames": [
                 "Male",
@@ -166,20 +154,55 @@
                 }
             ]
         },
-        ".csc-personAuthority-occupation": "${fields.occupation}",
-        ".csc-personAuthority-displayName": "${fields.displayName}",
-        ".csc-personAuthority-group-autocomplete": {
-            "decorators": [
-                {
-                    "func": "cspace.autocomplete",
-                    "type": "fluid",
-                    "options": {
-                        "queryUrl": "../../chain/vocabularies/person/autocomplete/group",
-                        "vocabUrl": "../../chain/vocabularies/person/source-vocab/group"
+        ".csc-personAuthority-occupation": {
+            "decorators": [{
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "fields.occupations",
+                    "protoTree": {
+                        ".csc-personAuthority-occupation": "${fields.occupations.0.occupation}"
                     }
                 }
-            ]
+            }]
         },
+        ".csc-personAuthority-schoolOrStyle": {
+            "decorators": [{
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "fields.schoolsOrStyles",
+                    "protoTree": {
+                        ".csc-personAuthority-schoolorstyle": "${fields.schoolsOrStyles.0.schoolOrStyle}"
+                    }
+                }
+            }]
+        },
+        ".csc-personAuthority-group": {
+            "decorators": [{
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "fields.groups",
+                    "protoTree": {
+                        ".csc-personAuthority-group": "${fields.groups.0.group}"
+                    }
+                }
+            }]
+        },
+        ".csc-personAuthority-nationality": {
+            "decorators": [{
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "fields.nationalities",
+                    "protoTree": {
+                        ".csc-personAuthority-nationality": "${fields.nationalities.0.nationality}"
+                    }
+                }
+            }]
+        },
+        ".csc-personAuthority-displayName": "${fields.displayName}",
         ".csc-personAuthority-birthDate-container": {
             "decorators": [
                 {
@@ -189,22 +212,8 @@
             ]
         },
         ".csc-personAuthority-deathDate": "${fields.deathDate}",
-        ".csc-personAuthority-group": "${fields.group}",
         ".csc-personAuthority-birthPlace": "${fields.birthPlace}",
-        ".csc-personAuthority-nationality": "${fields.nationality}",
         ".csc-personAuthority-bioNote": "${fields.bioNote}",
-        ".csc-personAuthority-occupation-autocomplete": {
-            "decorators": [
-                {
-                    "func": "cspace.autocomplete",
-                    "type": "fluid",
-                    "options": {
-                        "queryUrl": "../../chain/vocabularies/person/autocomplete/occupation",
-                        "vocabUrl": "../../chain/vocabularies/person/source-vocab/occupation"
-                    }
-                }
-            ]
-        },
         ".csc-personAuthority-deathPlace-autocomplete": {
             "decorators": [
                 {

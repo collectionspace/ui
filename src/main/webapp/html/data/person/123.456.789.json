@@ -15,13 +15,31 @@
         "referenceNumber": "1234",
         "status": "accepted",
         "gender": "male",
-		"occupation": "Musician",
-		"schoolOrStyle": "His own",
-		"group": "Bloggs & Co.",
-		"nationality": "English",
+        "occupations": [{
+            "occupation": "Musician",
+            "_primary": true
+        }, {
+            "occupation": "Singer",
+            "_primary": false
+        }],
+        "schoolsOrStyles": [{
+            "schoolOrStyle": "His own",
+            "_primary": true
+        }],
+        "groups": [{
+            "group": "Bloggs & Co.",
+            "_primary": true
+        }],
+        "nationalities": [{
+            "nationality": "English",
+            "_primary": false
+        }, {
+            "nationality": "Canadian",
+            "_primary": true
+        }],
 		"nameNote": "",
 		"bioNote": "",
-		"birthDate": "",
+		"birthDate": "Dec. 7, 1971",
 		"birthPlace": "Brighton",
 		"deathDate": "",
 		"deathPlace": "",
@@ -33,14 +51,6 @@
 		"postcode1": "CB1 2AZ",
 		"email1": ""
     },
-    "termsUsed": [
-        {
-            "csid": "987.654.321",
-            "number": "Bloggs & Co.",
-            "recordtype": "organization",
-            "relationshiptype": "uses",
-            "sourceFieldName": "group"
-        }
-    ],
+    "termsUsed": [],
     "relations": {}
 }
