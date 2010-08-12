@@ -4,12 +4,12 @@
         "entryMethods": [
             {
                 "entryMethod": "in-person",
-                "foo": [
-                    {"bar": "bat"},
-                    {"bar": "boo"},
-                    {"bar": "buzz"}
-                ]
-            }
+                "_primary": false 
+            },
+            {
+                "entryMethod": "post",
+                "_primary": true 
+            } 
         ],
         "returnDate": "",
         "currentOwner": "urn:cspace:org.collectionspace.demo:organizationauthority:name(TestOrgAuth):organization:name(Bloggs & Co.)'Bloggs & Co.'",
@@ -21,21 +21,23 @@
         "numObjects": "37",
         "description": "Pickled herring from \"Immer nie am Meer\"",
         "entryDate": "",
-        "donor": "Antonin Svoboda",
+        "donor": "Antonin Svoboda" 
     },
     "termsUsed": [
         {
             "csid": "987.654.321",
             "number": "Bloggs & Co.",
             "sourceFieldName": "currentOwner",
-            "recordtype": "organization"
+            "recordtype": "organization" 
         },
         {
             "csid": "123.456.789",
             "number": "Christoph Grissemann",
             "sourceFieldName": "depositor",
-            "recordtype": "person"
-        }
+            "recordtype": "person" 
+        } 
     ],
-    "relations": {}
+    "relations": {
+        
+    }
 }

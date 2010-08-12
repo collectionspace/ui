@@ -7,23 +7,21 @@
         "packingNote": "",
         "entryReason": "",
         "entryNumber": "IN2009.002",
-        "entryMethods": [
-            {"entryMethod": "found-on-doorstep"},
-            {"entryMethod": "post"}
-        ],
         "entryNote": "This record has multiple entry methods.",
         "numObjects": "1",
         "description": "GERTY",
         "entryDate": "",
-        "donor": "Sam Rockwell",
+        "donor": "Sam Rockwell" 
     },
-    "relations": {},
+    "relations": {
+        
+    },
     "termsUsed": [
         {
             "csid": "123.456.789",
             "number": "Duncan Jones",
             "sourceFieldName": "depositor",
-            "recordtype": "person"
-        }
+            "recordtype": "person" 
+        } 
     ]
 }

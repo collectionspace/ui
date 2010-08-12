@@ -10,29 +10,36 @@
         "entryNumber": "IN2009.001",
         "entryMethods": [
             {
-                "entryMethod": "found-on-doorstep"
+                "entryMethod": "in-person",
+                "_primary": false 
+            },
+            {
+                "entryMethod": "post",
+                "_primary": true 
             }
         ],
         "entryNote": "",
         "numObjects": "1",
         "description": "Small metal flower, fashioned from scraps",
         "entryDate": "",
-        "donor": "Wikus Van De Merwe"
-        
+        "donor": "Wikus Van De Merwe",
+        "fieldCollectionPlace": "Holland"
     },
     "termsUsed": [
         {
             "sourceFieldName": "currentOwner",
             "number": "Achmed Abdullah",
             "csid": "9f14f23e-381a-4dc6-9bd6",
-            "recordtype": "person"
+            "recordtype": "person" 
         },
         {
             "sourceFieldName": "depositor",
             "number": "Phyllis Allen",
             "csid": "13f09f22-794b-4ef9-9f7d",
-            "recordtype": "person"
-        }
+            "recordtype": "person" 
+        } 
     ],
-    "relations": {}
+    "relations": {
+        
+    }
 }

@@ -7,49 +7,63 @@
         "packingNote": "",
         "entryReason": "commission",
         "entryNumber": "IN2004.002",
-        "entryMethods": [{"entryMethod":"post"}],
+        "entryMethods": [
+            {
+                "entryMethod": "in-person",
+                "_primary": false 
+            },
+            {
+                "entryMethod": "post",
+                "_primary": true 
+            }
+        ],
         "entryNote": "",
         "numObjects": "42",
         "description": "Licensed merchandise figurines from The Nightmare Before Christmas and Beetlejuice",
         "entryDate": "",
         "donor": "Richard Gere",
-        "depositor": "urn:cspace:org.collectionspace.demo:personauthority:id(cc025527-3f1f-4a21-84fc):person:id(9f14f23e-381a-4dc6-9bd6)'Achmed+Abdullah'"
+        "depositor": "urn:cspace:org.collectionspace.demo:personauthority:id(cc025527-3f1f-4a21-84fc):person:id(9f14f23e-381a-4dc6-9bd6)'Achmed+Abdullah'" 
     },
     "termsUsed": [
-        {"sourceFieldName":"depositor","number":"Achmed Abdullah","csid":"9f14f23e-381a-4dc6-9bd6","recordtype":"person"}
+        {
+            "sourceFieldName": "depositor",
+            "number": "Achmed Abdullah",
+            "csid": "9f14f23e-381a-4dc6-9bd6",
+            "recordtype": "person"
+        } 
     ],
     "relations": {
-        "objects":
-            [
-                {
-                    "csid": "1984.068.0338",
-                    "number": "1984.068.0338",
-                    "summary": "somethings",
-                    "recordtype": "objects",
-                    "relationshiptype": "affects"
-                },{
-                    "csid": "1984.068.0335b",
-                    "number": "1984.068.0335b",
-                    "summary": "some other thing",
-                    "recordtype": "objects",
-                    "relationshiptype": "also affects"
-                }
-            ],
-        "procedures":
-            [
-                {
-                    "csid": "2007.4-a",
-                    "number": "2007.4-a",
-                    "summary": "yet other thing",
-                    "recordtype": "intake",
-                    "relationshiptype": "also affects somewhat"
-                },{
-                    "csid": "ACQ2009.2",
-                    "number": "ACQ2009.2",
-                    "summary": "different, yet",
-                    "recordtype": "acquisition",
-                    "relationshiptype": "also affects somewhat"
-                }
-            ]
+        "objects": [
+            {
+                "csid": "1984.068.0338",
+                "number": "1984.068.0338",
+                "summary": "somethings",
+                "recordtype": "objects",
+                "relationshiptype": "affects" 
+            },
+            {
+                "csid": "1984.068.0335b",
+                "number": "1984.068.0335b",
+                "summary": "some other thing",
+                "recordtype": "objects",
+                "relationshiptype": "also affects" 
+            } 
+        ],
+        "procedures": [
+            {
+                "csid": "2007.4-a",
+                "number": "2007.4-a",
+                "summary": "yet other thing",
+                "recordtype": "intake",
+                "relationshiptype": "also affects somewhat" 
+            },
+            {
+                "csid": "ACQ2009.2",
+                "number": "ACQ2009.2",
+                "summary": "different, yet",
+                "recordtype": "acquisition",
+                "relationshiptype": "also affects somewhat" 
+            } 
+        ] 
     }
 }

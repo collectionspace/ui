@@ -4,6 +4,6 @@
         {"number": "IN2004.002", "csid": "IN2004.002", "summary": "Achmed Abdullah", "recordtype": "intake"},
         {"number": "IN2009.001", "csid": "IN2009.001", "summary": "Phyllis Allen", "recordtype": "intake"},
         {"number": "IN2009.002", "csid": "IN2009.002", "summary": "Duncan Jones (This record has multiple entry methods.)", "recordtype": "intake"},
-        {"number": "IN2009.003", "csid": "IN2009.003", "summary": "yes, please", "recordtype": "intake"}
+        {"number": "IN2009.003", "csid": "IN2009.003", "summary": "yes, please (This record has every field filled in)", "recordtype": "intake"}
     ]
 }

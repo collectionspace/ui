@@ -73,14 +73,7 @@
 															<div class="label">Entry Method</div>
 														</div>
 														<div class="content">
-															<table id="addrow-entry-method">										
-																<tbody>
-																	<tr class="csc-intake-entry-method-row">
-																		<!--<td class="table-unselected"></td>-->
-																		<td><select class="csc-intake-entry-method input-select" /></td>
-																	</tr>
-																</tbody>
-															</table>
+														    <select class="csc-intake-entryMethod input-select" />
 														</div>
 													</div>
 													
@@ -91,16 +84,11 @@
 														<div class="header">
 															<div class="label">Return Date</div>
 														</div>
-														<div class="content csc-intake-return-date-container">
-															<table>
-																<tbody>
-																	<tr>
-																		<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-intake-return-date csc-calendar-date" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="" height="16" width="18" /></a></td>
-																	</tr>
-																</tbody>
-															</table>
-															<div class="csc-date-picker"></div>
-														</div>
+														<div class="content csc-intake-returnDate-container fl-table">
+                                                            <input type="text" disabled="disabled" class="fl-force-left input-date csc-intake-returnDate csc-calendar-date" />
+                                                            <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></a>
+                                                            <div class="csc-date-picker cs-date-picker"></div>
+                                                        </div>
 													</div>
 
 													<div class="info-pair">
@@ -301,72 +289,77 @@
 														<div class="header">
 															<div class="label">Field Collection Date</div>
 														</div>
-														<div class="content csc-intake-field-location-date-container">
-															<table>
-																<tbody>
-																	<tr>
-																		<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-intake-field-location-date csc-calendar-date" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="" height="16" width="18" /></a></td>
-																	</tr>
-																</tbody>
-															</table>
-															<div class="csc-date-picker"></div>
-														</div>
-													</div>
-													
+														<div class="content csc-intake-fieldCollectionDate-container fl-table">
+								                            <input type="text" disabled="disabled" class="fl-force-left input-date csc-intake-fieldCollectionDate csc-calendar-date" />
+								                            <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></a>
+								                            <div class="csc-date-picker cs-date-picker"></div>
+								                        </div>
+													</div>													
 													<div class="info-pair">
-														<div class="header">
-															<div class="label">Field Collection Event Name</div>
-														</div>
-														<div class="content">
-															<table id="addrow-entry-method">										
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="input-alpha-table csc-intake-field-collection-event-name" /></td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>											
-													</div>
-													
-													
-												</div>
+                                                        <div class="header">
+                                                            <div class="label">Field collection method</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <select class="input-select csc-intake-fieldCollectionMethod" />
+                                                        </div>
+                                                    </div>                                                    
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Field collection note</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <textarea class="input-textarea csc-intake-fieldCollectionNote" />
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Field collection number</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <input type="text" class="input-alpha csc-intake-fieldCollectionNumber" />
+                                                        </div>
+                                                    </div>
+                                                </div>
 												
 												<!-- Left-side column -->
 												<div class="info-column2-50 fl-force-right">
+												    
+												    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Field collection place</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <input type="text" class="input-alpha csc-intake-fieldCollectionPlace" />
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Field collection source</div>
+                                                        </div>
+                                                        <div class="content">
+	                                                        <input type="text" class="csc-intake-fieldCollectionSource" />
+	                                                    </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Field collector</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <input type="text" class="csc-intake-fieldCollector" />
+                                                        </div>
+                                                    </div>
+                                                    												
 													<div class="info-pair">
-														<div class="header">
-															<div class="label">Field Collection Number</div>
-														</div>
-														<div class="content">
-															<table id="addrow-entry-method">										
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td class="disabled"><input type="text" disabled="disabled" class="input-numeric csc-intake-field-collection-number" /></td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-													</div> 
-													
-													<div class="info-pair">
-														<div class="header">
-															<div class="label">Field Collector</div>
-														</div>
-														<div class="content">
-															<table id="addrow-entry-method">										
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td class="disabled"><input type="text" disabled="disabled" class="input-autocomplete csc-intake-field-collector" />
-                                                                            <!--<div class="csc-intake-field-collector-autocomplete"></div>--></td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-														
-													</div>
+                                                        <div class="header">
+                                                            <div class="label">Field collection event name</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <input type="text" class="input-alpha csc-intake-field-collection-event-name" />
+                                                        </div>
+                                                    </div>
 													
 												</div>
 												<div class="clear"></div>
@@ -390,15 +383,7 @@
 															<div class="label">Valuer</div>
 														</div>
 														<div class="content">
-															<table>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="input-autocomplete csc-intake-valuer" name="intake-valuer" />
-                                                                            <div class="csc-intake-valuer-autocomplete"></div></td>
-																	</tr>
-																</tbody>
-															</table>
+															<input type="text" class="input-autocomplete csc-intake-valuer" name="intake-valuer" />
 														</div>
 													</div>
 												</div>
@@ -439,15 +424,7 @@
 															<div class="label">Insurer</div>
 														</div>
 														<div class="content">
-															<table>										
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="input-autocomplete csc-intake-insurer" name="intake-insurer" />
-                                                                            <div class="csc-intake-insurer-autocomplete"></div></td>
-																	</tr>
-																</tbody>
-															</table>
+														    <input type="text" class="csc-intake-insurer" />
 														</div>
 													</div>	
 													
@@ -617,14 +594,7 @@
 															<div class="label">Condition Check Method</div>
 														</div>
 														<div class="content">
-															<table>										
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="input-alpha-table csc-intake-condition-check-method" /></td>
-																	</tr>
-																</tbody>
-															</table>
+															<select class="input-select csc-intake-conditionCheckMethod" />
 														</div>
 													</div>
 													
@@ -633,14 +603,7 @@
 															<div class="label">Condition Check Reason</div>
 														</div>
 														<div class="content">
-															<table>										
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="input-alpha-table csc-intake-condition-check-reason" /></td>
-																	</tr>
-																</tbody>
-															</table>
+															<select class="input-select csc-intake-conditionCheckReason" />
 														</div>
 													</div>
 													
@@ -649,15 +612,7 @@
 															<div class="label">Condition Check Assessor</div>
 														</div>
 														<div class="content">
-															<table>										
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="input-autocomplete csc-intake-condition-check-assessor" />
-                                                                            <div class="csc-intake-condition-check-assessor-autocomplete"></div></td>
-																	</tr>
-																</tbody>
-															</table>
+														    <input type="text" class="csc-intake-conditionCheckerOrAssessor" />
 														</div>
 													</div>
 												</div>
