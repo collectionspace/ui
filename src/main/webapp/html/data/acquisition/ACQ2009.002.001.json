@@ -1,35 +1,37 @@
 {
-    "termsUsed": [
-        
-    ],
-    "relations": {
-        
-    },
     "csid": "61807957-3001-481c-a697",
     "fields": {
-        "acquisitionReferenceNumber": "2005.017",
-        "acquisitionFunding": [{
-            "acquisitionFundingDenomination": "test1",
-            "acquisitionFundingValue": "test2",
-            "acquisitionFundingSource": "test3",
-            "acquisitionFundingSourceProvisos": "test4",
-            "_primary": true
+        "acquisitionFunding": [],
+        "groupPurchasePriceValue": "100",
+        "groupPurchasePriceCurrency": "usdollar",
+        "acquisitionReferenceNumber": "ACQ2009.2",
+        "acquisitionReason": "The museum likes it",
+        "acquisitionNote": "Some info about this acquisition",
+        "objectOfferPriceValue": "222",
+        "objectOfferPriceCurrency": "poundsterling",
+        "objectPurchaseOfferPriceCurrency": "euro",
+        "objectPurchaseOfferPriceValue": "145",
+        "objectPurchasePriceCurrency": "usdollar",
+        "objectPurchasePriceValue": "230",
+        "originalObjectPurchasePriceCurrency": "euro",
+        "originalObjectPurchasePriceValue": "500",
+        "accessionDate": "Aug 11, 2010",
+        "acquisitionProvisos": "A curator must say hello to it every day",
+        "acquisitionDates": [],
+        "acquisitionMethod": "treasure",
+        "owners": [{
+           "owner": "Some owner",
+           "_primary": true
+        }, {
+           "owner": "Co-owner",
+           "_primary": false
         }],
-        "acquisitionSources": [
-            {
-                "acquisitionSource": "Stephen Charla",
-                "_primary": false
-            },
-            {
-                "acquisitionSource": "Lebowsky",
-                "_primary": true
-            }
-        ],
-        "csid": "61807957-3001-481c-a697",
-        "owners": [
-            {
-                
-            }
-        ]
-    }
+        "transferOfTitleNumber": "1-2-3-4",
+        "fieldCollectionEventNames": [{
+            "fieldCollectionEventName": "Some event name",
+            "_primary": true
+        }]
+    },
+    "relations": {},
+    "termsUsed": []
 }

@@ -487,11 +487,11 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .input-select		   {width: auto; height:21px;}
 table .input-select         {width: 100%; height:17px; /**height:22px;*/ padding-top:0; border:none;}
 .input-textarea  {/*width: 99.5%;*/ width:100%; height:69px; overflow:auto;}
-.repeatable .input-textarea  {border:1px solid #C7CFD4;} /* need to clean up borders for all input types */
+.cs-repeatable-repeat .input-textarea  {border:1px solid #C7CFD4;} /* need to clean up borders for all input types */
 .input-alpha-login       {width: 120px; height:18px;}
 .input-autocomplete	   {/*width:auto !important; */}
 .ui-autocomplete-input {/*width:99.75%*/ width:100%;}
-.repeatable .ui-autocomplete-input,.repeatable input,.repeatable textarea {border:1px solid #C7CFD4; width:89%;}
+.cs-repeatable-repeat .ui-autocomplete-input,.cs-repeatable-repeat input,.cs-repeatable-repeat textarea {border:1px solid #C7CFD4; width:89%;}
 .input-autocomplete, .ui-autocomplete-input {background: #fff url(../images/arrowPredictiveText.png) no-repeat right center;}
 
 .fl-container-pivot  select.recently-created-list {width:232px !important; height:20px; /**height:24px;*/}
@@ -626,7 +626,7 @@ table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; f
 .csc-related-field {overflow:hidden;}
 
 /*  styling repeatable fields  */
-.content.repeatable {marg in-top:-17px;}
+.content .cs-repeatable-repeat {marg in-top:-17px;}
 .cs-repeatable-add {}
 input[type="button"].cs-repeatable-add {font-size:11px; height:17px; width:55px; position:absolute; right:25px; top:-2px;}
 li.cs-repeatable-repeat {list-style-type: none;  margin-bottom:1px;}

@@ -2,31 +2,59 @@
     "csid": "ACQ2009.2",
     "fields": {
         "acquisitionFunding": [{
-            "acquisitionFundingDenomination": "test1",
+            "acquisitionFundingCurrency": "usdollar",
             "acquisitionFundingValue": "test2",
             "acquisitionFundingSource": "test3",
             "acquisitionFundingSourceProvisos": "test4",
             "_primary": false
         }, {
-            "acquisitionFundingDenomination": "",
+            "acquisitionFundingCurrency": "",
             "acquisitionFundingValue": "",
             "acquisitionFundingSource": "Source",
             "acquisitionFundingSourceProvisos": "TEST",
             "_primary": true
         }],
+        "groupPurchasePriceValue": "100",
+        "groupPurchasePriceCurrency": "usdollar",
         "acquisitionReferenceNumber": "ACQ2009.2",
-    	"acquisitionDate": "",
-        "acquisitionAuthorizer": "",
-    	"acquisitionAccessionDate": "",
-    	"acquisitionPriceDesc": "",
-    	"objectPurchaseOfferPriceDenomination": "UK pound",
-    	"objectPurchaseOfferPriceValue": "10000",
-    	"acquisitionMethod": "treasure",
-    	"acquisitionSources": [],
-    	"transferOfTitleNumber": "1-2-3-4",
-    	"acquisitionReason": "The museum likes it",
-    	"acquisitionNote": "Some info about this acquisition",
-    	"acquisitionProviso": "A curator must say hello to it every day"
+        "acquisitionReason": "The museum likes it",
+        "acquisitionNote": "Some info about this acquisition",
+        "objectOfferPriceValue": "222",
+        "objectOfferPriceCurrency": "poundsterling",
+        "objectPurchaseOfferPriceCurrency": "euro",
+        "objectPurchaseOfferPriceValue": "145",
+        "objectPurchasePriceCurrency": "usdollar",
+        "objectPurchasePriceValue": "230",
+        "originalObjectPurchasePriceCurrency": "euro",
+        "originalObjectPurchasePriceValue": "500",
+        "accessionDate": "Aug 11, 2010",
+        "acquisitionAuthorizerDate": "Aug 9, 2009",
+        "acquisitionAuthorizer": "Some authorizer",
+        "acquisitionProvisos": "A curator must say hello to it every day",
+        "acquisitionDates": [{
+            "acquisitionDate": "Aug 9, 2009",
+            "_primary": false
+        }, {
+            "acquisitionDate": "Aug 9, 2010",
+            "_primary": true
+        }],
+        "acquisitionMethod": "treasure",
+    	"acquisitionSources": [{
+    	    "acquisitionSource": "Some source",
+    	    "_primary": true
+    	}],
+    	"owners": [{
+    	   "owner": "Some owner",
+    	   "_primary": true
+    	}, {
+           "owner": "Co-owner",
+           "_primary": false
+        }],
+        "transferOfTitleNumber": "1-2-3-4",
+        "fieldCollectionEventNames": [{
+            "fieldCollectionEventName": "Some event name",
+            "_primary": true
+        }]
     },
     "relations": {
         "procedures": [
