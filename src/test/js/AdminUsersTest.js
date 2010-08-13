@@ -472,7 +472,7 @@ var adminUsersTester = function () {
         stop();
     });
     
-    adminUsersTest.test("Confirmation delete + navigate", function () {
+    adminUsersTest.test("Confirmation delete + navigate (CSPACE-2646)", function () {
         var adminUsers;
         testOpts.userListEditor.options.details.options.confirmation.options.listeners = {
             afterFetchTemplate: function () {
@@ -480,12 +480,12 @@ var adminUsersTester = function () {
                 re.events.afterRender.addListener(function () {
                     re.events.afterRender.removeListener("initialSelect");                    
                     re.remove();
-                    jqUnit.assertEquals("Confirmation Text Should Say", "Delete this record?", re.confirmation.locate("message:", re.confirmation.dlg).text());
+                    jqUnit.assertEquals("After delete clicked, confirmation text should say", "Delete this record?", re.confirmation.locate("message:", re.confirmation.dlg).text());
                     re.confirmation.close();
                     adminUsers.locate("userName").val("New Name").change();
                     jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
-                    jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.locate("message:", re.confirmation.dlg).eq(0).text());
-                    jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.locate("message:", re.confirmation.dlg).eq(1).text());                    
+                    jqUnit.assertEquals("Delete cancelled, record edited, attempt to edit other user, confirmation text should say", "You are about to leave this record.", re.confirmation.locate("message:", re.confirmation.dlg).eq(0).text());
+                    jqUnit.assertEquals("Confirmation text should also say", "Save Changes?", re.confirmation.locate("message:", re.confirmation.dlg).eq(1).text());                    
                     start();
                 }, "initialSelect");
                 jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
