@@ -72,5 +72,8 @@
             "refid": "urn:cspace.org.collectionspace.demo.personauthority:name(cc025527-3f1f-4a21-84fc):person:name(00f49d87-46d9-467e-8824)'Alan+Alda'",
             "recordtype": "person"
         }
-    ]
+    ],
+    "pagination": {
+        "totalItems": 9
+    }
 }

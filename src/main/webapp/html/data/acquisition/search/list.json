@@ -2,5 +2,8 @@
     "results": [
         {"number": "ACQ2009.2", "csid": "ACQ2009.2", "summary": "", "recordtype": "acquisition"},
         {"number": "ACQ2009.002.001", "csid": "ACQ2009.002.001", "summary": "Lebowsky", "recordtype": "acquisition"}
-    ]
+    ],
+    "pagination": {
+        "totalItems": 2
+    }
 }

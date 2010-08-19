@@ -3,5 +3,8 @@
         {"number": "1984.068.0335b", "csid": "1984.068.0335b", "summary": "This record has two related cataloging records.", "recordtype": "objects"},
         {"number": "1984.068.0338", "csid": "1984.068.0338", "summary": "large post-conquest Ming Dynasty Chrome pan.", "recordtype": "objects"},
         {"number": "2005.018.1383", "csid": "2005.018.1383", "summary": "This record has every field filled in.", "recordtype": "objects"}
-    ]
+    ],
+    "pagination": {
+        "totalItems": 3
+    }
 }

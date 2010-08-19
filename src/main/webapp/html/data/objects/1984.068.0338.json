@@ -19,7 +19,7 @@
         }],
         "objectTitleLanguage": "English",
         "numberOfObjects": "1",
-		"title": "large post-conquest Ming Dynasty Chrome pan.",
+        "title": "large post-conquest Ming Dynasty Chrome pan.",
         "briefDescriptions": [
             {"briefDescription": "This is a slightly brief description."}
         ],
@@ -28,7 +28,7 @@
         ],
         "titleType": "Sample",
         "titleTranslation": "No translation",
-		"comments": "These are the comments"
+        "comments": "These are the comments"
     },
     "relations": {}
 }

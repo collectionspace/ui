@@ -19,14 +19,14 @@
         }],
         "objectTitleLanguage": "English",
         "numberOfObjects": "1",
-		"title": "This record has two related cataloging records.",
+        "title": "This record has two related cataloging records.",
         "briefDescriptions": [{
             "briefDescription": "This is brief description.",
             "_primary": true
         }],
         "titleType": "Sample",
         "titleTranslation": "No translation",
-		"comments": "These are the comments",
+        "comments": "These are the comments",
         "color": "blue"
     },
     "relations": {

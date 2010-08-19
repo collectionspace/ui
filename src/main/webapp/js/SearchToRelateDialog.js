@@ -18,7 +18,7 @@ cspace = cspace || {};
 
     var handleAddClick = function (that) {
         return function () {
-            var data = that.search.resultsPager.options.dataModel;
+            var data = that.search.resultsPager.options.dataModel.results;
             var newIndex = 0;
             var newRelations = [];
             var source = {
@@ -106,7 +106,7 @@ cspace = cspace || {};
         that.prepareDialog = function (type) {
             var selectBoxContainer = that.locate("selectBoxContainer", that.dlg);
             selectBoxContainer.empty();
-            selectBoxContainer.append(that.locate(type + "Selecter", that.dlg).clone());
+            selectBoxContainer.append(that.locate(type + "Selector", that.dlg).clone());
             that.search.hideResults();
             that.locate("addButton", that.dlg).hide();
         };
@@ -120,8 +120,8 @@ cspace = cspace || {};
             recordTypeString: ".csc-record-type",
             selectBoxContainer: ".csc-select-box-container",
             selectBoxes: ".csc-select-boxes",
-            objectsSelecter: ".csc-recordTypeSelecter-object",
-            proceduresSelecter: ".csc-recordTypeSelecter-procedures",
+            objectsSelector: ".csc-recordTypeSelector-object",
+            proceduresSelector: ".csc-recordTypeSelector-procedures",
             closeButton: ".csc-searchToRelate-closeBtn",
             createNewButton: ".csc-create-submit"
         },
@@ -134,7 +134,7 @@ cspace = cspace || {};
             afterRender: null
         },
         search: {
-            type: "cspace.search",
+            type: "cspace.search.searchView",
             options: {
                 resultsSelectable: true
             }

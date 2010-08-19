@@ -15,7 +15,7 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     fluid.log("Search.js loaded");
-
+    
     var displayLookingMessage = function (domBinder, keywords) {
         domBinder.locate("resultsCountContainer").hide();
         domBinder.locate("queryString").text(keywords);
@@ -29,17 +29,9 @@ cspace = cspace || {};
         domBinder.locate("resultsCountContainer").show();
     };
 
-    var defaultSearchUrlBuilder = function (recordType, keywords) {
-        var recordTypeParts = recordType.split('-');        
-        return "../../chain/" + recordTypeParts.join('/') + "/search?query=" + keywords;
-    };
+    fluid.registerNamespace("cspace.search");
 
-    var colDefsGenerated = function (columnList, recordType, selectable) {
-        // CSPACE-1139
-        if (recordType.indexOf("authorities-") === 0) {
-            recordType = recordType.substring(12);
-        }
-
+    cspace.search.colDefsGenerator = function (columnList, recordType, selectable) {
         var colDefs = fluid.transform(columnList, function (object, index) {
             var key = "col:";
             var comp;
@@ -47,8 +39,8 @@ cspace = cspace || {};
             if (object === "number") {
                 key = "number";
                 comp = {
-                    target: recordType + ".html?csid=${*.csid}",
-                    linktext: "${*.number}" 
+                    target: "${searchModel.recordType}.html?csid=${*.csid}",
+                    linktext: "${*.number}"
                 };
             } else if (object === "csid") {
                 key = "csid";
@@ -71,102 +63,88 @@ cspace = cspace || {};
         }
         return colDefs;
     };
+    
+    cspace.search.makeCutpoints = function (selectors, selectable) {
+        var rendererCutpoints = [
+            {id: "header:", selector: selectors.resultsHeader},
+            {id: "row:", selector: selectors.resultsRow},
+            {id: "number", selector: selectors.columns.number},
+            {id: "col:", selector: selectors.columns.col}
+        ];
+
+        if (selectable) {
+            rendererCutpoints.push({
+                id: "selected",
+                selector: selectors.columns.select
+            });
+        }
+        return rendererCutpoints;
+    };
 
     var displaySearchResults = function (that) {
-        var colList = that.options.columnList;
-        var results = (that.model.results || []);
+        var range = that.model.pagination.totalItems; // TODO: dependency on external model
+        var pagerModel = that.resultsPager.model;
 
-        var rendererCutpoints = [
-            {id: "header:", selector: that.options.selectors.resultsHeader},
-            {id: "row:", selector: that.options.selectors.resultsRow},
-            {id: "number", selector: that.options.selectors.columns.number},
-            {id: "col:", selector: that.options.selectors.columns.col}
-        ];
-
-        if (that.options.resultsSelectable) {
-            that.model.results = fluid.transform(results, function (object, index) {
-                object.selected = false;
-                return object;
-            });
-            rendererCutpoints[rendererCutpoints.length] = {
-                id: "selected",
-                selector: that.options.selectors.columns.select
-            };
-        }
-        var pagerArguments = [
-            that.options.selectors.resultsContainer,
-            {
-                dataModel: that.model.results,
-                columnDefs: colDefsGenerated(colList, that.model.recordType, that.options.resultsSelectable),
-                bodyRenderer: {
-                    type: "fluid.pager.selfRender",
-                    options: {
-                        renderOptions: {
-                            cutpoints: rendererCutpoints,
-                            autoBind: true,
-                            model: that.model.results
-                        }
-                    }
-                },
-                pagerBar: {
-                    type: "fluid.pager.pagerBar",
-                    options: {
-                        pageList: {
-                            type: "fluid.pager.renderedPageList"
-                        }
-                    }
-                }
-            }
-        ];
-        if (that.resultsPager) {
-            fluid.model.copyModel(that.resultsPager.options.dataModel, that.model.results);
-            fluid.model.copyModel(that.resultsPager.options.columnDefs, colDefsGenerated(colList, that.model.recordType, that.options.resultsSelectable));
-            // you're not supposed to touch the pager's model, but there's a bug in this version, so...
-            that.resultsPager.model.totalRange = that.model.results.length;
-            that.resultsPager.events.initiatePageChange.fire({pageIndex: 0, forceUpdate: true});
-        } else {
-            that.resultsPager = fluid.initSubcomponent(that, "resultsPager", pagerArguments);
-        }
-        displayResultsCount(that.dom, that.resultsPager.model.totalRange, that.model.keywords);
+        // you're not supposed to touch the pager's model, but there's a bug in this version, so...
+        pagerModel.totalRange = range;
+        that.resultsPager.events.initiatePageChange.fire({pageIndex: pagerModel.pageIndex, forceUpdate: true});
+            
+        displayResultsCount(that.dom, range, that.model.searchModel.keywords);
         that.locate("resultsContainer").show();
         that.events.afterSearch.fire();
     };
 
-    var submitSearch = function (url, model, successEvent, errorEvent) {
-        jQuery.ajax({
-            url: url,
-            type: "GET",
-            dataType: "json",
-            success: function (data, textStatus) {
-                fluid.model.copyModel(model.results, data.results);
-                successEvent.fire();
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                errorEvent.fire("search", textStatus);
-            }
-        });
+    // TODO: start to interact with this model using a proper ChangeApplier
+    var updateModel = function (searchModel, newModel) {
+        searchModel.keywords = newModel.keywords;
+        searchModel.recordTypeLong = newModel.recordTypeLong;
+        var recordType = newModel.recordTypeLong;
+        // CSPACE-1139
+        searchModel.recordType = recordType.indexOf("authorities-") === 0 ? 
+            recordType.substring(12) : recordType;
     };
 
-    var submitSearchRequest = function (that) {
+    var handleSubmitSearch = function (that) {
         return function () {
             that.locate("errorMessage").hide();
-            that.model.recordType = that.locate("recordType").val();
-// CSPACE-701
-            if (cspace.util.useLocalData() && (that.model.recordType === "object")) {
-                that.model.recordType = "objects";
-            }
-            that.model.keywords = that.locate("keywords").val();
+            updateModel(that.model.searchModel, { 
+                keywords: that.locate("keywords").val(),
+                recordTypeLong: that.locate("recordType").val()
+            });
             that.search();
         };
     };
 
+    cspace.search.makeModelFilter = function (that) {
+        return function (directModel, newModel, permutation) {
+            var searchModel = that.model.searchModel;
+            fluid.log("modelFilter: initialState " + searchModel.initialState 
+                + ", renderRequest " + searchModel.renderRequest);
+            if (searchModel.initialState) {
+                searchModel.initialState = false;
+                return [];
+            }
+            if (!searchModel.renderRequest) {
+                that.search(newModel); // if made through interaction we need to perform "search" to refetch
+            }
+            searchModel.renderRequest = false;
+            return fluid.transform(directModel, function (row, index) {
+                return {
+                    index: index,
+                    row: $.extend(row, {selected: false})
+                };
+            });
+        };
+      
+    };
+
     var bindEventHandlers = function (that) {
-        var searchSubmitHandler = submitSearchRequest(that);
+        var searchSubmitHandler = handleSubmitSearch(that);
         that.locate("searchButton").click(searchSubmitHandler);
         that.locate("keywords").fluid("activatable", searchSubmitHandler);
 
         that.events.modelChanged.addListener(function () {
-            displaySearchResults(that, that.model.recordType);
+            displaySearchResults(that);
         });
         
         that.events.onError.addListener(function (action, status) {
@@ -174,9 +152,37 @@ cspace = cspace || {};
             that.locate("errorMessage").show();
         });
     };
+    
+    var makeSearcher = function (that) {
+        return function (newPagerModel) {
+            displayLookingMessage(that.dom, that.model.searchModel.keywords);
+            var searchModel = that.model.searchModel;
+            var pagerModel = newPagerModel || that.resultsPager.model;
+            searchModel.pageSize = pagerModel.pageSize;
+            searchModel.pageNum = pagerModel.pageIndex;
+            var url = that.options.searchUrlBuilder(that.model.searchModel);
+            var oldSearchModel = $.extend(true, {}, that.model.searchModel);
+            that.events.onSearch.fire();
+            fluid.log("Querying url " + url);
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                success: function (data, textStatus) {
+                    fluid.model.copyModel(that.model.results, data.results);
+                    fluid.model.copyModel(that.model.pagination, data.pagination);
+                    that.model.searchModel.renderRequest = true;
+                    that.events.modelChanged.fire();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    that.events.onError.fire("search", textStatus);
+                }
+            });
+        };
+    };
 
-    cspace.search = function (container, options) {
-        var that = fluid.initView("cspace.search", container, options);
+    cspace.search.searchView = function (container, options) {
+        var that = fluid.initView("cspace.search.searchView", container, options);
         
         that.hideResults = function () {
             that.locate("resultsContainer").hide();
@@ -186,41 +192,59 @@ cspace = cspace || {};
         };
         
         that.model = {
-            keywords: cspace.util.getUrlParameter("keywords"),
-            recordType: cspace.util.getUrlParameter("recordtype"),
-            results: []
+            searchModel: {
+                initialState: true
+            },
+            results: [],
+            pagination: {}
         };
 
-        that.search = function () {
-            displayLookingMessage(that.dom, that.model.keywords);
-            that.events.onSearch.fire();
-            submitSearch(that.options.searchUrlBuilder(that.model.recordType, that.model.keywords), that.model, that.events.modelChanged, that.events.onError);
+        that.search = makeSearcher(that);
+        
+        that.updateModel = function (newModel) {
+            updateModel(that.model.searchModel, newModel);
         };
+        
+        that.updateModel({
+            keywords: cspace.util.getUrlParameter("keywords"),
+            recordTypeLong: cspace.util.getUrlParameter("recordtype")
+        });
 
         bindEventHandlers(that);
         that.hideResults();
+        
+        fluid.initDependents(that);
 
-        if (that.model.keywords) {
-            that.locate("keywords").val(that.model.keywords);
-            that.locate("recordType").val(that.model.recordType);
+        if (that.model.searchModel.keywords) {
+            that.locate("keywords").val(that.model.searchModel.keywords);
+            that.locate("recordType").val(that.model.searchModel.recordTypeLong);
             that.search();
         }
 
         return that;
     };
     
-    cspace.search.localSearchUrlBuilder = function (recordType, keywords) {
-        // CSPACE-1139
-        if (recordType.indexOf("authorities-") === 0) {
-            recordType = recordType.substring(12);
+    cspace.search.defaultSearchUrlBuilder = function (options) {
+        var recordTypeParts = options.recordTypeLong.split('-');        
+        var sofar = "../../chain/" + recordTypeParts.join('/') + "/search?query=" + options.keywords;
+        if (options.pageSize !== undefined && options.pageNum !== undefined) {
+            sofar += "&pageNum=" + options.pageNum + "&pageSize=" + options.pageSize;
         }
+        return sofar;
+    };
+    
+    cspace.search.localSearchUrlBuilder = function (searchModel) {
+        // CSPACE-1139
+        var recordType = searchModel.recordTypeLong;
         var recordTypeParts = recordType.split('-');        
         return "./data/" + recordTypeParts.join('/') + "/search/list.json";
     };
 
+    fluid.demands("fluid.pager", "cspace.search.searchView", 
+      ["{searchView}.dom.resultsContainer", fluid.COMPONENT_OPTIONS]);
 
 
-    fluid.defaults("cspace.search", {
+    fluid.defaults("cspace.search.searchView", {
         selectors: {
             keywords: ".csc-search-keywords",
             recordType: ".csc-select-box-container .csc-search-record-type",
@@ -248,13 +272,57 @@ cspace = cspace || {};
         },
         
         columnList: ["number", "summary", "recordtype"],
+        resultsSelectable: false,
 
-        searchUrlBuilder: defaultSearchUrlBuilder,
-
-        resultsPager: {
-            type: "fluid.pager"
-        },
+        searchUrlBuilder: cspace.search.defaultSearchUrlBuilder,
         
-        resultsSelectable: false
+        components: {
+
+            resultsPager: {
+                type: "fluid.pager",
+                options: {
+                    dataModel: "{searchView}.model",
+                    dataOffset: "results",
+                    modelFilter: {
+                        expander: {
+                            type: "fluid.deferredCall",
+                            func: "cspace.search.makeModelFilter",
+                            args: ["{searchView}"]
+                        }
+                    },
+                    columnDefs: {
+                        expander: {
+                            type: "fluid.deferredCall",
+                            func: "cspace.search.colDefsGenerator",
+                            args: ["{searchView}.options.columnList", "{searchView}.model.searchModel.recordType", "{searchView}.options.resultsSelectable"]
+                        }
+                    },
+                    bodyRenderer: {
+                        type: "fluid.pager.selfRender",
+                        options: {
+                            renderOptions: {
+                                cutpoints: {
+                                    expander: {
+                                        type: "fluid.deferredCall",
+                                        func: "cspace.search.makeCutpoints",
+                                        args: ["{searchView}.options.selectors", "{searchView}.options.resultsSelectable"]
+                                    }
+                                },
+                                autoBind: true
+                            }
+                        }
+                    },
+                    pagerBar: {
+                        type: "fluid.pager.pagerBar",
+                        options: {
+                            pageList: {
+                                type: "fluid.pager.renderedPageList"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
     });
 })(jQuery, fluid);

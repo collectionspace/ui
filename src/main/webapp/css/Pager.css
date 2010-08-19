@@ -34,6 +34,12 @@
 	color:#6E9FCE;
 	text-decoration:underline;
 }
+.fl-pager .fl-pager-ui .fl-pager-disabled a, .fl-pager .fl-pager-ui .fl-pager-disabled a:hover, .fl-pager .fl-pager-ui .fl-pager-disabled a:focus {
+    color:#000;
+    text-decoration:none;
+    cursor:default;
+}
+
 .fl-pager .fl-pager-ui .fl-pager-links a {    
     border:1px solid #ccc;
     background-color:#fff;
@@ -46,9 +52,7 @@
     background-color:transparent;
     text-decoration:none;
 }
-.fl-pager .fl-pager-ui .fl-pager-links .fl-pager-currentPage:hover, .fl-pager .fl-pager-ui .fl-pager-links .fl-pager-currentPage:focus {
-	text-decoration:underline;
-}
+
 .fl-pager .fl-pager-ui .fl-pager-links a:hover {
     background-color:#0287C5;
     color:#fff;

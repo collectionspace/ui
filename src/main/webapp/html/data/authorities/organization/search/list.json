@@ -8,5 +8,8 @@
             "refid": "urn:cspace.org.collectionspace.demo.personauthority:name(987.654.321):person:name(987.654.321)'Bloggs & Co.'",
             "recordtype": "person"
         }
-    ]
+    ],
+    "pagination": {
+        "totalItems": 1
+    }
 }

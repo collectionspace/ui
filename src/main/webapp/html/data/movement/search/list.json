@@ -1,5 +1,8 @@
 {
     "results": [
         {"number": "Front Porch", "csid": "112.442.1", "summary": "not covered", "recordtype": "movement"}
-    ]
+    ],
+    "pagination": {
+        "totalItems": 1
+    }
 }

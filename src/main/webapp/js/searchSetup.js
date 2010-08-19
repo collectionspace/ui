@@ -8,7 +8,8 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, window, cspace*/
+/*global jQuery, window, cspace, fluid*/
+"use strict";
 
 cspace = cspace || {};
 
@@ -19,18 +20,11 @@ cspace = cspace || {};
         
         var searchOpts = {};
         if (cspace.util.useLocalData()) {
-            searchOpts.searchUrlBuilder = function (recordType, query) {
-            	// CSPACE-1139
-                if (recordType.indexOf("authorities-") === 0) {
-                    recordType = recordType.substring(12);
-                }
-                var recordTypeParts = recordType.split('-');        
-                return "./data/" + recordTypeParts.join('/') + "/search/list.json";
-            };
+            searchOpts.searchUrlBuilder = cspace.search.localSearchUrlBuilder;
         }
         var dependencies = {
             search: {
-                funcName: "cspace.search",
+                funcName: "cspace.search.searchView",
                 args: [".main-search-page", searchOpts]
             }
         };
