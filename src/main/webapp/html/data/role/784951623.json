@@ -2,11 +2,11 @@
     "csid": "784951623",
     "fields": {
         "permissions": [
-            {"recordType": "Object Cataloging", "permission": "write"},
-            {"recordType": "Intake", "permission": "read"},
-            {"recordType": "Acquisition", "permission": "read"},
-            {"recordType": "Loan In", "permission": "none"},
-            {"recordType": "Loan out", "permission": "none"}
+            {"resourceName": "Object Cataloging", "permission": "write"},
+            {"resourceName": "Intake", "permission": "read"},
+            {"resourceName": "Acquisition", "permission": "read"},
+            {"resourceName": "Loan In", "permission": "none"},
+            {"resourceName": "Loan out", "permission": "none"}
         ],
         "roleName": "Scanning Intern",
         "description": "Interns responsible for scanning documents"

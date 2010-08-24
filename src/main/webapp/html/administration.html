@@ -14,8 +14,7 @@
         <script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
         
         <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.tabs.js"></script>        
-        <script type="text/javascript" src="../engage-core-framework/js/engageRenderUtils.js"></script>
+        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.tabs.js"></script>
 
         <script type="text/javascript" src="../js/cspace.js"></script>
         <script type="text/javascript" src="../js/Utilities.js"></script>
@@ -110,42 +109,70 @@
                                                     <div class="user-details-fields csc-listEditor-details-none">
                                                         No user selected. Please select a user from the list, or create a new user.
                                                     </div>
-													<div class="user-details-fields csc-listEditor-details">    
-                                                        <div class="info-pair">
-                                                            <div class="label">Email Address <span class="required">*</span></div><div class="user-input"><input type="text" class="input-alpha csc-user-email csc-required" name=""/></div>
-                                                        </div>
-<!--
-														<div class="info-pair">
-															<div class="label">User ID</div><div class="user-input"><input type="text" class="input-alpha csc-user-userID csc-required" name=""/></div>
-														</div>
--->													
-														<div class="info-pair no-padding">
-															<div class="label">Full Name  <span class="required">*</span></div><div class="user-input"><input type="text" class="input-alpha csc-user-userName csc-required" name=""/></div>
-														</div>
-
-                                                        <div class="csc-details-hideOnEdit">
-															<div class="info-pair">
-																<div class="password-instructions">Password must be between 8 and 24 characters.</div>
-    															<div class="label">Password  <span class="required">*</span></div><div class="user-input"><input type="password" class="input-alpha csc-user-password csc-required csc-passwordValidator-password" name=""/></div>
-    														</div>
-    													
-    														<div class="info-pair">
-    															<div class="label">Confirm Password  <span class="required">*</span></div><div class="user-input"><input type="password" class="input-alpha csc-user-passwordConfirm csc-required" name=""/></div>
-    														</div>
-                                                        </div>
-                                                        <div class="csc-details-hideOnCreate">
-    														<div class="info-pair">
-    															<div class="label">Status <span class="required">*</span></div><div class="user-input">
-                                                                    <select class="csc-user-status csc-required" disabled="disabled"> </select> 
-                                                                </div>
-    														</div>
-                                                        </div>
-                                                        <div class="fl-container-flex button-row">
+													<div class="user-details-fields csc-listEditor-details">
+													    <div class="fl-container-flex button-row">
                                                             <input type="button" class="primary saveButton csc-save" value="Save" />
                                                             <input type="button" class="csc-cancel cancelButton" value="Cancel" />
                                                             <input type="button" class="csc-delete deleteButton" value="Delete" />
                                                             <div class="clear"></div>
                                                         </div>
+                                                        <div class="info-column2-50 fl-force-left">
+	                                                        <div class="info-pair">
+	                                                            <div class="label">Email Address <span class="required">*</span></div><div class="user-input"><input type="text" class="input-alpha csc-user-email csc-required" name=""/></div>
+	                                                        </div>
+	<!--
+															<div class="info-pair">
+																<div class="label">User ID</div><div class="user-input"><input type="text" class="input-alpha csc-user-userID csc-required" name=""/></div>
+															</div>
+	-->													
+															<div class="info-pair no-padding">
+																<div class="label">Full Name  <span class="required">*</span></div><div class="user-input"><input type="text" class="input-alpha csc-user-userName csc-required" name=""/></div>
+															</div>
+	
+	                                                        <div class="csc-details-hideOnEdit">
+																<div class="info-pair">
+																	<div class="password-instructions">Password must be between 8 and 24 characters.</div>
+	    															<div class="label">Password  <span class="required">*</span></div><div class="user-input"><input type="password" class="input-alpha csc-user-password csc-required csc-passwordValidator-password" name=""/></div>
+	    														</div>    													
+	    														<div class="info-pair">
+	    															<div class="label">Confirm Password  <span class="required">*</span></div><div class="user-input"><input type="password" class="input-alpha csc-user-passwordConfirm csc-required" name=""/></div>
+	    														</div>
+	                                                        </div>
+	                                                        <div class="csc-details-hideOnCreate">
+	    														<div class="info-pair">
+	    															<div class="label">Status <span class="required">*</span></div><div class="user-input">
+	                                                                    <select class="csc-user-status csc-required" disabled="disabled"> </select> 
+	                                                                </div>
+	    														</div>
+	                                                        </div>
+	                                                    </div>
+	                                                    <div class="info-column2-50 fl-force-right">
+	                                                        <div class="info-pair">
+	                                                            <div class="header">
+											                        <div class="label">Roles</div>
+											                    </div>
+                                                                <div class="content">
+                                                                    <table>
+		                                                                <thead>
+		                                                                    <tr>
+		                                                                        <td></td>
+		                                                                        <td>Role name</td>
+		                                                                        <td>Group</td>
+		                                                                    </tr>
+		                                                                </thead>
+		                                                                <tbody>		                                                                    
+		                                                                    <tr class="csc-accountrole-roles-row">
+		                                                                        <td>
+		                                                                            <input type="checkbox" class="csc-accountrole-role-selected"/>
+		                                                                        </td>
+		                                                                        <td class="csc-accountrole-account-rolename"></td>
+		                                                                        <td class="csc-accountrole-role-rolegroup"></td>
+		                                                                    </tr>
+		                                                                </tbody>
+		                                                            </table>
+                                                                </div>
+                                                            </div>
+	                                                    </div>
 													</div>
 													<div class="clear"></div>
 												</div>

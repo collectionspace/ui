@@ -13,7 +13,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 var utilitiesTester = function ($) {
     
-    var uispec, expectedBase;
+    var uispec, expectedBase, schema;
     
     var repeatable = {
         decorators: [
@@ -77,6 +77,30 @@ var utilitiesTester = function ($) {
                 otherNumbers: []
             }
         };
+        schema = {
+            "fields": {
+                "type": "object",
+                "properties": {
+                    "role": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object"
+                            },
+                            "role": {
+                                "type": "array",
+                                "default": [{
+                                    "roleName": "ROLE_ADMINISTRATOR",
+                                    "roleId": "1",
+                                    "roleGroup": "Museum staff",
+                                    "roleAssigned": true
+                                }]
+                            }
+                        }
+                    }
+                }
+            }
+        };
     });
     
     utilitiesTest.test("Test cspace.util.createEmptyModel simple", function () {
@@ -97,6 +121,118 @@ var utilitiesTester = function ($) {
         cspace.util.createEmptyModel(model, uispec);
         jqUnit.assertDeepEq("Given uispec with nested repeatable, model is build with proper array property", 
             expectedBase, model);
+    });
+    
+    var setExpectedSchemaBasedModel = function () {
+        expectedBase.fields = {
+            role: {
+                account: {},
+                role: [{
+                    "roleName": "ROLE_ADMINISTRATOR",
+                    "roleId": "1",
+                    "roleGroup": "Museum staff",
+                    "roleAssigned": true
+                }]
+            }
+        };
+    };
+    
+    utilitiesTest.test("Full model from schema with getBeanValue", function () {        
+        setExpectedSchemaBasedModel();
+        var model = cspace.util.getBeanValue({}, "new", {
+            "new": {
+                type: "object",
+                properties: schema
+            }
+        });
+        jqUnit.assertDeepEq("Given a schema, model is build with proper structure and defaults", 
+            expectedBase, model);
+    });
+    
+    utilitiesTest.test("Model from schema with getBeanValue", function () {        
+        setExpectedSchemaBasedModel();
+        var model = cspace.util.getBeanValue({}, "fields", schema);
+        jqUnit.assertDeepEq("Given a schema, model is build with proper structure and defaults", 
+            expectedBase.fields, model);
+    });
+    
+    utilitiesTest.test("Model from schema with getBeanValue empty array", function () {        
+        setExpectedSchemaBasedModel();
+        schema.fields.properties.role.properties.role = {
+            type: "array"
+        };
+        expectedBase.fields.role.role = [];
+        var model = cspace.util.getBeanValue({}, "fields", schema);
+        jqUnit.assertDeepEq("Given a schema, model is build with proper structure and defaults", 
+            expectedBase.fields, model);
+    });
+    
+    utilitiesTest.test("Model from schema with getBeanValue with nesting", function () {
+        schema.fields.properties.role.properties.newRoleArray = {
+            type: "array",
+            items: {
+                type: "object",
+                properties: {
+                    nestedRole: {
+                        type: "array",
+                        "default": [{
+                            roleName: "ROLE_ADMINISTRATOR",
+                            roleId: "1",
+                            roleGroup: "Museum staff",
+                            roleAssigned: true
+                        }]
+                    }
+                }
+            }
+        };
+        setExpectedSchemaBasedModel();
+        expectedBase.fields.role.newRoleArray = [{
+            nestedRole: [{
+                roleName: "ROLE_ADMINISTRATOR",
+                roleId: "1",
+                roleGroup: "Museum staff",
+                roleAssigned: true
+            }]
+        }];
+        var model = cspace.util.getBeanValue({}, "fields", schema);
+        jqUnit.assertDeepEq("Given a schema, model is build with proper structure and defaults", 
+            expectedBase.fields, model);
+    });
+    
+    utilitiesTest.test("Create a model from schema with simple defaults", function () {
+        schema.fields.properties.newProperty = {
+            type: "string",
+            "default": "This is a default"
+        };
+        setExpectedSchemaBasedModel();        
+        expectedBase.fields.newProperty = "This is a default";
+        var model = cspace.util.getBeanValue({}, "fields", schema);
+        jqUnit.assertDeepEq("Given a schema, model is build with proper structure and defaults", 
+            expectedBase.fields, model);
+    });
+    
+    utilitiesTest.test("Get a model with schema and existing model", function () {
+        var model = {
+            fields: {
+                role: {
+                    role: []
+                }
+            }
+        }; 
+        var fields = cspace.util.getBeanValue(model, "fields", schema);
+        jqUnit.assertDeepEq("Given a schema, model is build with proper structure and defaults", 
+            model.fields, fields);
+    });
+    
+    utilitiesTest.test("GetBeanValue inside the default in schema", function () {        
+        setExpectedSchemaBasedModel();
+        schema.fields.properties.role["default"] = {
+            role: [{
+                roleId: 1
+            }]
+        };
+        var roleId = cspace.util.getBeanValue({}, "fields.role.role.0.roleId", schema);
+        jqUnit.assertEquals("The correct value should be drawn from default", 1, roleId);
     });
 };
 

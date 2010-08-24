@@ -1,0 +1,35 @@
+{
+    "users": {
+        "type": "object",
+        "properties": {
+            "csid": {
+                "type": "string",
+                "default": null
+            },
+            "fields": {
+                "type": "object",
+                "properties": {
+                    "role": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object" 
+                            },
+                            "role": {
+                                "type": "array",
+                                "default": [
+                                    {
+                                        "roleName": "ROLE_ADMINISTRATOR",
+                                        "roleId": "1",
+                                        "roleGroup": "Museum staff",
+                                        "roleAssigned": true 
+                                    }
+                                ] 
+                            } 
+                        } 
+                    } 
+                } 
+            } 
+        } 
+    } 
+}

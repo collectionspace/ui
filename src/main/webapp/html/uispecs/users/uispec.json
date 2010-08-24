@@ -25,6 +25,17 @@
                     ".csc-accountrole-account-accountid": "${fields.account.0.accountId}"
                 }
             ]
+        },
+        "expander": {
+            "type": "fluid.renderer.repeat",
+            "controlledBy": "fields.role.role",
+            "pathAs": "role",
+            "repeatID": ".csc-accountrole-roles-row:",
+            "tree": {
+                ".csc-accountrole-account-rolename": "${{role}.roleName}",
+                ".csc-accountrole-role-rolegroup": "${{role}.roleGroup}",
+                ".csc-accountrole-role-selected": "${{role}.roleSelected}"
+            }
         }
     },
     "list": {

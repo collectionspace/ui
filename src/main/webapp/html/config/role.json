@@ -27,7 +27,12 @@
     "depOpts": {
         "role": {
             "options": {
-                "uispec": "{pageBuilder}.uispec" 
+                "uispec": "{pageBuilder}.uispec",
+                "roleListEditor": {
+                    "options": {
+                        "schema": "{pageBuilder}.schema"
+                    }
+                }
             } 
         } 
     } 

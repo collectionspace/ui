@@ -23,15 +23,11 @@ cspace = cspace || {};
         options.fetchConfigCallback = options.fetchConfigCallback || function (config) {
             if (cspace.util.useLocalData()) {
                 config.depOpts.role.options.recordType = "role/records/list.json";
-                config.depOpts.role.options.roleListEditor = {
+                config.depOpts.role.options.roleListEditor.options.baseUrl = "data/";
+                config.depOpts.role.options.roleListEditor.options.dataContext = {
                     options: {
                         baseUrl: "data/",
-                        dataContext: {
-                            options: {
-                                baseUrl: "data/",
-                                fileExtension: ".json"
-                            }
-                        }
+                        fileExtension: ".json"
                     }
                 };
             }

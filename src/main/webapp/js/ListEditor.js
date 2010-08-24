@@ -104,8 +104,18 @@ cspace = cspace || {};
          * addNewListRow - add an empty row to the list and display cleared and ready for editing details.
          */
         that.addNewListRow = function () {
-            var model = cspace.util.createBaseModel();
-            cspace.util.createEmptyModel(model, that.uispec.details);            
+            // TODO: Once we have a real schema from the app layer this code will be cleaned up. 
+            //       The else statement will go away completely and the first parameter to 'getBeanValue' will be the actual model.
+            //       We are currently not doing this because our inferred empty model is likely to have an incorrect structure
+            //       that may cause errors upon save. 
+            var model;
+            if (that.options.schema) {                
+                model = cspace.util.getBeanValue({}, that.options.dataContext.options.recordType, that.options.schema);
+            }
+            else {
+                model = cspace.util.createBaseModel();
+                cspace.util.createEmptyModel(model, that.uispec.details);
+            }
             fluid.model.copyModel(that.model.details, model);
             that.details.refreshView();
             showDetails(that.dom, true);

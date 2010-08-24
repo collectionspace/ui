@@ -1,10 +1,29 @@
 {
     "csid": "147258369",
     "fields": {
+        "csid": "147258369",
         "userId": "anastasia",
         "screenName": "Anastasia Cheethem",
         "password": "testpassword",
         "email": "anastasia.cheetham@collectionspace.org",
         "status": "inactive",
+        "role": {
+            "role": [{
+                "roleId": "1",
+                "roleName": "Administrator",
+                "roleSelected": true,
+                "roleGroup": "Museum staff"
+            }, {
+                "roleId": "2",
+                "roleName": "Educator",
+                "roleSelected": false,
+                "roleGroup": "Museum staff"
+            }, {
+                "roleId": "3",
+                "roleName": "Registrar",
+                "roleSelected": true,
+                "roleGroup": "Collection staff"
+            }]
+        }
     }
 }

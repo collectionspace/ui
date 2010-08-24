@@ -61,10 +61,10 @@ cspace = cspace || {};
 
     cspace.util.corner = function () {
     };
-
-    cspace.util.getDefaultConfigURL = function () {
+    
+    cspace.util.getDefaultURL = function (resource) {
         var url = window.location.pathname;
-        return ".\/config" + url.substring(url.lastIndexOf("/"), url.indexOf(".html")) + ".json";
+        return ".\/" + resource + url.substring(url.lastIndexOf("/"), url.indexOf(".html")) + ".json";
     };
     
     var buildModelStructure = function (model, elPath) {
@@ -122,6 +122,52 @@ cspace = cspace || {};
 
     cspace.util.fullUrl = function (prefix, templateName) {
         return prefix ? prefix + templateName : templateName;
+    };
+    
+    cspace.util.getBeanValue = function (root, EL, schema) {
+        if (EL === "" || EL === null || EL === undefined) {
+            return root;
+        }
+        var segs = fluid.model.parseEL(EL);
+        for (var i = 0; i < segs.length; ++i) {
+            var seg = segs[i];
+            if (!root[seg] && !schema) {
+                return root;
+            }
+            if (root[seg]) {
+                root = root[seg];
+                continue;
+            }
+            var subSchema = schema[seg];
+            if (!subSchema) {
+                return root;
+            }
+            var type = subSchema.type;
+            if (!type) {
+                // Schema doesn't have a type.
+                fluid.fail("Schema for " + seg + "is incorrect: type is missting");
+            }
+            var defaultValue = subSchema["default"];
+            if (typeof defaultValue !== "undefined") {
+                root = defaultValue;
+                continue;
+            }
+            if (type === "array") {
+                var items = subSchema.items;
+                subSchema = items ? [items] : [];
+                root[seg] = [];
+            }
+            else {
+                subSchema = subSchema.properties;
+                root[seg] = {};
+            }
+            root = root[seg];
+            // TODO: This will show you the whole WORLD, whether you want it or not.
+            for (var subSegment in subSchema) {
+                root[subSegment] = cspace.util.getBeanValue(root, subSegment, subSchema);
+            }
+        }
+        return root;
     };
 
 })(jQuery, fluid);

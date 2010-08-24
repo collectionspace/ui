@@ -2,11 +2,11 @@
     "csid": "362951847",
     "fields": {
         "permissions": [
-            {"recordType": "Object Cataloging", "permission": "read"},
-            {"recordType": "Intake", "permission": "read"},
-            {"recordType": "Acquisition", "permission": "read"},
-            {"recordType": "Loan In", "permission": "read"},
-            {"recordType": "Loan out", "permission": "read"}
+            {"resourceName": "Object Cataloging", "permission": "read"},
+            {"resourceName": "Intake", "permission": "read"},
+            {"resourceName": "Acquisition", "permission": "read"},
+            {"resourceName": "Loan In", "permission": "read"},
+            {"resourceName": "Loan out", "permission": "read"}
         ],
         "roleName": "Curator",
         "description": "Full-time museum curators"

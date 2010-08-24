@@ -55,7 +55,19 @@ cspace = cspace || {};
     };    
     
     var setUpPageBuilder = function (that) {
-        cspace.util.createEmptyModel(that.model, that.uispec); 
+        // TODO: Once we have a real schema from the app layer this code will be cleaned up. 
+        //       The else statement will go away completely and the first parameter to 'getBeanValue' will be the actual model.
+        //       We are currently not doing this because our inferred empty model is likely to have an incorrect structure
+        //       that may cause errors upon save. 
+        //       Note: this block is almost identical to a code block in ListEditor around line 106
+        if (that.schema) {
+        	var model = cspace.util.getBeanValue({}, that.options.pageType, that.schema);
+            that.applier.requestChange("", model);
+        }
+        else {
+            cspace.util.createEmptyModel(that.model, that.uispec);
+        }
+        
         that.events.onDependencySetup.fire(that.uispec);
         
         fluid.withEnvironment({pageBuilder: that},
@@ -113,6 +125,19 @@ cspace = cspace || {};
                 } 
             };
         }
+        
+        resourceSpecs.schema = {
+            href: that.options.schemaUrl || cspace.util.getDefaultURL("schema"),
+            options: {
+                dataType: "json",
+                success: function (data) {
+                    that.schema = data;
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    // Because there is no schema we will infer it from the uispec later.
+                }
+            }
+        };
         
         if (that.options.csid) {
             var dcthat = that.dataContext;
@@ -184,6 +209,7 @@ cspace = cspace || {};
         pageSpec: {},
         htmlOnly: false,
         uispecUrl: "",
+        schemaUrl: "",
         pageType: ""
     });
 })(jQuery, fluid);

@@ -18,22 +18,23 @@ cspace = cspace || {};
         fluid.log("adminSetup.js loaded");
 
         var adminOpts = {
-            uispec: "{pageBuilder}.uispec"
+            uispec: "{pageBuilder}.uispec",
+            userListEditor: {
+                options: {
+                    schema: "{pageBuilder}.schema"
+                }
+            }
         };
         if (cspace.util.useLocalData()) {
             adminOpts.recordType = "users/records/list.json";
             adminOpts.queryURL = "data/users/search/list.json";
-            adminOpts.userListEditor = {
+            adminOpts.userListEditor.options.baseUrl = "data/";
+            adminOpts.userListEditor.options.dataContext = {
                 options: {
                     baseUrl: "data/",
-                    dataContext: {
-                        options: {
-                            baseUrl: "data/",
-                            fileExtension: ".json"
-                        }
-                    }
+                    fileExtension: ".json"
                 }
-            };       
+            };     
         }
         var dependencies = {
             users: {

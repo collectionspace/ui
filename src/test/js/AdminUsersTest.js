@@ -123,53 +123,7 @@ var adminUsersTester = function () {
         adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
         stop();
     });
-    
-    adminUsersTest.test("Save new user - successful ajax call", function () {
-        var adminUsers;
-        testOpts.listeners = {
-            afterRender: function () {
-                jQuery(adminUsers.userListEditor.options.selectors.addNewListRowButton).click();
-                
-                var adminUsersSelectors = adminUsers.options.selectors;                
-                jQuery(adminUsersSelectors.email).val(testDataCreateUser.email).change();
-                jQuery(adminUsersSelectors.userName).val(testDataCreateUser.userName).change();
-                jQuery(adminUsersSelectors.password).val(testDataCreateUser.validPassword).change();
-                jQuery(adminUsersSelectors.passwordConfirm).val(testDataCreateUser.validPassword).change();
-                
-                var ajaxMock = new jqMock.Mock(jQuery, "ajax");
-                var expectedAjaxParams = {
-                    url: "../../main/webapp/html/data/users/",
-                    dataType: "json",
-                    type: "POST",
-                    data: JSON.stringify({
-                        csid: "",
-                        fields: {
-                            account: [],
-                            status: "",
-                            email: testDataCreateUser.email,
-                            screenName: testDataCreateUser.userName,
-                            password: testDataCreateUser.validPassword,
-                            userId: testDataCreateUser.email
-                        },
-                        termsUsed: [],
-                        relations: {}
-                    })
-                };
-                
-                ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams));               
-                jQuery(adminUsers.userListEditor.details.options.selectors.save).click();
-                              
-                ajaxMock.verify();              
-                ajaxMock.restore();
-                                               
-                start();
-            }
-        };
         
-        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
-        stop();
-    });
-    
     adminUsersTest.test("Save new user - successful save - save function returns true", function () {
         var adminUsers;
         testOpts.listeners = {

@@ -6,5 +6,23 @@
         "password": "testpassword",
         "email": "carl.hogsden@collectionspace.org",
         "status": "active",
+        "role": {
+            "role": [{
+                "roleId": "1",
+                "roleName": "Administrator",
+                "roleSelected": true,
+                "roleGroup": "Museum staff"
+            }, {
+                "roleId": "2",
+                "roleName": "Educator",
+                "roleSelected": true,
+                "roleGroup": "Museum staff"
+            }, {
+                "roleId": "3",
+                "roleName": "Registrar",
+                "roleSelected": true,
+                "roleGroup": "Collection staff"
+            }]
+        }
     }
 }

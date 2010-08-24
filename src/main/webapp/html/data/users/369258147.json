@@ -6,5 +6,23 @@
         "password": "testpassword",
         "email": "megan.forbes@collectionspace.org",
         "status": "active",
+        "role": {
+            "role": [{
+                "roleId": "1",
+                "roleName": "Administrator",
+                "roleSelected": false,
+                "roleGroup": "Museum staff"
+            }, {
+                "roleId": "2",
+                "roleName": "Educator",
+                "roleSelected": false,
+                "roleGroup": "Museum staff"
+            }, {
+                "roleId": "3",
+                "roleName": "Registrar",
+                "roleSelected": true,
+                "roleGroup": "Collection staff"
+            }]
+        }
     }
 }
