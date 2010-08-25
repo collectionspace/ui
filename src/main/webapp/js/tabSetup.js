@@ -26,10 +26,10 @@ cspace = cspace || {};
                 
         options.fetchConfigCallback = options.fetchConfigCallback || function (config) {
             // configuration options specific to the current context:
-            config.dependencies.relatedRecordsTab.args[3] = applier;
-            config.depOpts.relatedRecordsTab.options.relationManager.options.primaryRecordType = options.primaryRecordType;
+            config.dependencies.relatedRecordsTab.args[1] = options.primaryRecordType;
+            config.dependencies.relatedRecordsTab.args[4] = applier;
             config.depOpts.relatedRecordsTab.options.listEditor.options.data =
-                applier.model.relations[config.depOpts.relatedRecordsTab.options.listEditor.options.dataContext.options.recordType];
+                applier.model.relations[config.dependencies.relatedRecordsTab.args[2]];
 
             // configuration options specific to local-file-system use:
             if (cspace.util.useLocalData()) {

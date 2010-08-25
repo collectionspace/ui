@@ -15,38 +15,53 @@ cspace = cspace || {};
 (function ($, fluid) {
     fluid.log("RelatedRecordsList.js loaded");
 
+    // TODO: This is a hard-coded list of procedures, which should be replaced by something
+    //       provided by the server
+    var procedureList = ["procedures", "intake", "acquisition", "loanin", "loanout", "movement"];
+
     // TODO: This has to be done in the app layer i.e. provide an array of procedures in relations block.
     // This way wouldn't have to write this work around. Related to CSPACE-1977.
-    var buildRelationsList = function (relations, recordType) {
-        if (recordType !== "procedures") {
-            return relations[recordType];
+    var buildRelationsList = function (relations, relatedRecordType) {
+        if (relatedRecordType !== "procedures") {
+            return relations[relatedRecordType];
         }
-        var procedures = ["procedures", "intake", "acquisition", "loanin", "loanout"];
         var relationList = [];
-        $.each(procedures, function (index, value) {
+        $.each(procedureList, function (index, value) {
             relationList = relationList.concat(relations[value] || []);
         });
         return relationList;     
     };
     
-    bindEventHandlers = function (that) {
-        var elPath = "relations." + that.options.recordType;
+    var bindModelChangedListener = function (that, recordType) {
+        var elPath = "relations." + recordType;
         that.applier.modelChanged.addListener(elPath, function(model, oldModel, changeRequest) {
-        	// TODO: This should be just model.relations[that.options.recordType]
-        	// Related to CSPACE-1977.
-            fluid.model.copyModel(that.recordList.model.items, buildRelationsList(model.relations, that.options.recordType) || []);
+            // TODO: This should be just model.relations[that.relatedRecordType]
+            // Related to CSPACE-1977.
+            fluid.model.copyModel(that.recordList.model.items, buildRelationsList(model.relations, that.relatedRecordType) || []);
             that.recordList.refreshView();
         });
     };
 
-    cspace.relatedRecordsList = function (container, applier, options) {
+    var bindEventHandlers = function (that) {
+        if (!that.relatedRecordType || that.relatedRecordType === "procedures") {
+            $.each(procedureList, function (index, value) {
+                bindModelChangedListener(that, value);
+            });            
+        } else {
+            bindModelChangedListener(that, that.relatedRecordType);
+        }
+    };
+
+    cspace.relatedRecordsList = function (container, primaryRecordType, relatedRecordType, applier, options) {
         var that = fluid.initView("cspace.relatedRecordsList", container, options);
+        that.primaryRecordType = primaryRecordType;
+        that.relatedRecordType = relatedRecordType;
         that.applier = applier;
 
         var listModel = {
-        	// TODO: This should be just that.applier.model.relations[that.options.recordType]
+        	// TODO: This should be just that.applier.model.relations[that.relatedRecordType]
         	// Related to CSPACE-1977.
-            items: buildRelationsList(that.applier.model.relations, that.options.recordType) || [],
+            items: buildRelationsList(that.applier.model.relations, that.relatedRecordType) || [],
             selectionIndex: -1
         };
         that.recordList = fluid.initSubcomponent(that, "recordList", [
@@ -58,7 +73,8 @@ cspace = cspace || {};
         
         that.relationManager = fluid.initSubcomponent(that, "relationManager", [
             that.container,
-            that.options.recordType,
+            that.primaryRecordType,
+            that.relatedRecordType,
             that.applier,
             fluid.COMPONENT_OPTIONS
         ]);

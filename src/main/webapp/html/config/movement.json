@@ -1,6 +1,7 @@
 {
     "pageBuilder": {
         "options": {
+            "pageType": "movement",
             "dataContext": {
                 "options": {
                     "recordType": "movement" 
@@ -37,8 +38,7 @@
                     "templateSelector": ".csc-footer",
                     "targetSelector": ".csc-footer-container" 
                 } 
-            },
-            "pageType": "movement" 
+            } 
         } 
     },
     "dependencies": {
@@ -96,7 +96,7 @@
                     {
                         "func": "cspace.tabSetup",
                         "options": {
-                            "primaryRecordType": "movement",
+                            "primaryRecordType": "{pageBuilder}.options.pageType",
                             "configURL": "./config/object-tab.json"
                         } 
                     } 
@@ -116,7 +116,7 @@
         "sidebar": {
             "options": {
                 "uispec": "{pageBuilder}.uispec.sidebar",
-                "primaryRecordType": "movement" 
+                "primaryRecordType": "{pageBuilder}.options.pageType" 
             } 
         } 
     } 

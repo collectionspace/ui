@@ -47,7 +47,7 @@ cspace = cspace || {};
                 {       // first active tab: cataloging
                     func: "cspace.tabSetup",
                     options: {
-                        primaryRecordType: "intake",
+                        primaryRecordType: "{pageBuilder}.options.pageType",
                         configURL: "./config/object-tab.json"
                     }
                 }
@@ -57,7 +57,7 @@ cspace = cspace || {};
 
         var sbOpts = {
             uispec: "{pageBuilder}.uispec.sidebar",
-            primaryRecordType: "intake"
+            primaryRecordType: "{pageBuilder}.options.pageType"
         };
         $.extend(true, sbOpts, options.sideBarOpts);
 

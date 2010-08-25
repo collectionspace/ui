@@ -1,6 +1,5 @@
     <div class="cs-add-related-records-dialog main-search-page csc-confirmationDialog cs-confirmationDialog">
 		<div class="csc-searchToRelate-closeBtn cs-dialog-closeBtn"><img src="../images/btnCloseTop.png" /></div>
-		<!--<div class="label">Add new <span class="csc-record-type">type</span> records to the current record:</div><div class="clear"></div>-->
 		<div class="csc-confirmationDialog-inner">
 			<div class="info-column fl-force-left">
 				<div class="add-related-steps stepOne">
@@ -35,24 +34,15 @@
 								<div class="content">
 									<input name="keywords" type="text" class="csc-search-keywords" />
 									<input class="csc-search-submit searchButton" type="button" value="Search" />
-									<div class="csc-select-box-container"></div>
-
-									<div class="csc-select-boxes hidden">
-										<div class="select-recordtype csc-recordTypeSelector-object hidden">
-											<select name="recordtype" class="csc-search-record-type">
-												<option value="objects">Cataloging</option>
-											</select>
-										</div>
-										<div class="select-recordtype csc-recordTypeSelector-procedures">
-											<span class="recordtype-label">Record Type</span>
-											<select name="recordtype" class="csc-search-record-type">
-												<option value="intake">Intake</option>
-												<option value="acquisition">Acquisition</option>
-                                                <option value="loanin">Loan In</option>
-                                                <option value="loanout">Loan Out</option>
-                                                <option value="movement">Location and Movement Control</option>
-											</select>
-										</div>
+									<div class="select-recordtype csc-searchToRelate-recordTypes">
+										<span class="recordtype-label">Record Type</span>
+										<select name="recordtype" class="csc-search-recordType">
+											<option value="intake">Intake</option>
+											<option value="acquisition">Acquisition</option>
+                                            <option value="loanin">Loan In</option>
+                                            <option value="loanout">Loan Out</option>
+                                            <option value="movement">Location and Movement Control</option>
+										</select>
 									</div>
 									<div class="csc-search-error-message hidden">
                                         We've encountered an error retrieving search results. Please try again.
@@ -71,7 +61,7 @@
 									<div class="clear"></div>
 								</div>
 								<div class="content">
-									<input type="button" style="margin-bottom:-2px; cursor:default;" class="csc-create-submit button" value="Create" />
+									<input type="button" style="margin-bottom:-2px; cursor:default;" class="csc-searchToRelate-createButton button" value="Create" />
 								</div>
 								<div class="clear"></div>
 							</div>
@@ -89,7 +79,7 @@
                     <span class="found-records-content csc-search-lookingContainer">
                         Looking for <span class="csc-search-queryString cs-search-highlight">insert keywords here</span>... <img src="../images/indeterminate_progress_indicator_true_transparent_16x16.gif" />
                     </span>
-                    <div class="add-more" style="float:right"><input type="button" value="Add to current record" class="csc-relate-button button" /></div>
+                    <div class="add-more" style="float:right"><input type="button" value="Add to current record" class="csc-searchToRelate-addButton button" /></div>
                     <div class="clear"></div>
                 </div>
 			<div class="csc-search-results">

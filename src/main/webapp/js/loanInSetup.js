@@ -39,7 +39,7 @@ cspace = cspace || {};
             tabList: [
                 {name: "Loan In", target: "#primaryTab"},
                 {name: "Acquisition", target: null},
-                {name: "Cataloging", target: "objectTabPlaceholder.html"},
+                {name: "Cataloging", target: cspace.util.fullUrl(options.templateUrlPrefix, "objectTabPlaceholder.html")},
                 {name: "Intake", target: null},
                 {name: "Loan In - related", target: null},
                 {name: "Loan Out", target: null},
@@ -50,7 +50,7 @@ cspace = cspace || {};
                 null, {
                     func: "cspace.tabSetup",
                     options: {
-                        primaryRecordType: "loanin",
+                        primaryRecordType: "{pageBuilder}.options.pageType",
                         configURL: "./config/object-tab.json"
                     }
                 }
@@ -67,7 +67,7 @@ cspace = cspace || {};
 
         var sbOpts = {
             uispec: "{pageBuilder}.uispec.sidebar",
-            primaryRecordType: "loanin"
+            primaryRecordType: "{pageBuilder}.options.pageType"
         };
         $.extend(true, sbOpts, options.sideBarOpts);
         

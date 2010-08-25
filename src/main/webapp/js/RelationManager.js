@@ -16,12 +16,12 @@ cspace = cspace || {};
 (function ($, fluid) {
     fluid.log("RelationManager.js loaded");
 
-    var updateRelations = function (applier, recordType) {
+    var updateRelations = function (applier, relatedRecordType) {
         // TODO: Fluid transform candidate.
         return function (relations) {
             var newModelRelations = [];
-            var elPath = "relations." + recordType;
-            fluid.model.copyModel(newModelRelations, applier.model.relations[recordType]);
+            var elPath = "relations." + relatedRecordType;
+            fluid.model.copyModel(newModelRelations, applier.model.relations[relatedRecordType]);
             var relIndex = newModelRelations.length;            
             for (var i = 0; i < relations.items.length; i++) {
                 var relation = relations.items[i];
@@ -37,46 +37,44 @@ cspace = cspace || {};
         that.locate("addButton").click(function (e) {
             if (that.applier.model.csid) {
                 that.locate("messageContainer", "body").hide();
-                cspace.addDialogInst.prepareDialog(that.recordType);
-                cspace.addDialogInst.dlg.bind("dialogopen", function () {
-                    cspace.addDialogInst.events.addRelations.addListener(that.addRelations, "addRelationsListener");
-                    cspace.addDialogInst.events.onCreateNewRecord.addListener(that.events.onCreateNewRecord.fire, "onCreateNewRecordListener");
+                that.addDialog = makeDialog(that);
+                that.addDialog.dlg.bind( "dialogclose", function(event, ui) {
+                    that.addDialog.dlg.dialog("destroy");
+                    that.addDialog.dlg.remove();
+                    that.addDialog = undefined;
                 });
-                cspace.addDialogInst.dlg.bind("dialogclose", function () {
-                    cspace.addDialogInst.events.addRelations.removeListener("addRelationsListener");
-                    cspace.addDialogInst.events.onCreateNewRecord.removeListener("onCreateNewRecordListener");
-                });
-                cspace.addDialogInst.dlg.dialog("open");
             } else {
                 cspace.util.displayTimestampedMessage(that.dom, that.options.strings.pleaseSaveFirst);
             }
         });
-        that.dataContext.events.afterAddRelations.addListener(updateRelations(that.applier, that.recordType));
+        that.dataContext.events.afterAddRelations.addListener(updateRelations(that.applier, that.relatedRecordType));
     };
     
     var makeDialog = function (that) {
         var dlgOpts = that.options.searchToRelateDialog.options || {};
-        dlgOpts.primaryRecordType = that.options.primaryRecordType || that.recordType;
+        dlgOpts.listeners = dlgOpts.listeners || {};
+        dlgOpts.listeners.addRelations = that.addRelations;
+        dlgOpts.listeners.onCreateNewRecord = that.events.onCreateNewRecord.fire;
+        dlgOpts.relatedRecordType = that.relatedRecordType;
         if (cspace.util.useLocalData()) {
             $.extend(true, dlgOpts, { search : { options: { searchUrlBuilder : cspace.search.localSearchUrlBuilder }}});
         }
-        return fluid.initSubcomponent(that, "searchToRelateDialog", [that.container, that.applier, dlgOpts]);
+        return fluid.initSubcomponent(that, "searchToRelateDialog", [that.container, that.primaryRecordType, that.applier, dlgOpts]);
     };
     
-    cspace.relationManager = function (container, recordType, applier, options) {
+    cspace.relationManager = function (container, primaryRecordType, relatedRecordType, applier, options) {
         var that = fluid.initView("cspace.relationManager", container, options);
         that.applier = applier;
-        that.recordType = recordType;
+        that.primaryRecordType = primaryRecordType;
+        that.relatedRecordType = relatedRecordType;
         
         that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.applier.model, fluid.COMPONENT_OPTIONS]); 
-        
-        cspace.addDialogInst = cspace.addDialogInst || makeDialog(that);
         
         // TODO: add relations should be overridden high up if local.
         // something like this: that.addRelations = that.options.addRelations;
         that.addRelations = function (relations) {
             if (cspace.util.useLocalData()) {
-                updateRelations(that.applier, that.recordType)(relations);
+                updateRelations(that.applier, that.relatedRecordType)(relations);
             }
             else {
                 that.dataContext.addRelations(relations);
@@ -108,8 +106,7 @@ cspace = cspace || {};
         },
         events: {
             onCreateNewRecord: null
-        },
-        primaryRecordType: null
+        }
     });
     
 })(jQuery, fluid);

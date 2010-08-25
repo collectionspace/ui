@@ -36,47 +36,33 @@ cspace = cspace || {};
             that.integratedAuthorities.refreshView();
         });
 
-        // TODO: looks like a bug that I need to specify the current record type twice. 
-        var rpOpts = {
-            recordType : "procedures",
-            primaryRecordType : that.options.primaryRecordType,
-            uispec : that.options.uispec.relatedProcedures,
-            relationManager : {
-                options: {
-                    primaryRecordType: that.options.primaryRecordType
-                }
-            }
+        var rrlOpts = {
+            uispec : that.options.uispec.relatedProcedures
         };
-        fluid.merge({}, rpOpts, that.options.relatedRecordsList.options);
-        
-        var roOpts = {
-            recordType: "objects",
-            primaryRecordType: that.options.primaryRecordType,
-            uispec: that.options.uispec.relatedObjects,
-            relationManager: {
-                options: {
-                    primaryRecordType: that.options.primaryRecordType
-                }
-            }
-        };
-        fluid.merge({}, roOpts, that.options.relatedRecordsList.options);
-        
         if (cspace.util.useLocalData()) {
-            var localOpts = {
-                options: {
-                    baseUrl: "data/",
-                    fileExtension: ".json"
+            $.extend(true, rrlOpts, {
+                relationManager: {
+                    options: {
+                        dataContext: {
+                            baseUrl: "data/",
+                            fileExtension: ".json"
+                        }
+                    }
                 }
-            };
-            rpOpts.relationManager.options.dataContext = localOpts;
-            roOpts.relationManager.options.dataContext = localOpts;
+            });
         }
+        $.extend(true, rrlOpts, that.options.relatedRecordsList.options);
+
         that.relatedProcedures = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedProcedures,
-              that.applier,
-              rpOpts]);
+            that.options.primaryRecordType,
+            "procedures",
+            that.applier,
+            rrlOpts]);
         that.relatedObjects = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedObjects,
-              that.applier,
-              roOpts]);
+            that.options.primaryRecordType,
+            "objects",
+            that.applier,
+            rrlOpts]);
 
         return that;
     };

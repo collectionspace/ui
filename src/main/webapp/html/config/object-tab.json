@@ -21,8 +21,10 @@
             "funcName": "cspace.relatedRecordsTab",
             "args": [
                 ".csc-object-tab",
+                "{pageBuilder}.pageType",
                 "objects",
-                "{pageBuilder}.uispec"
+                "{pageBuilder}.uispec",
+                "{pageBuilder}.applier"
             ] 
         } 
     },

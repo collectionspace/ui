@@ -19,7 +19,7 @@
         }],
         "objectTitleLanguage": "English",
         "numberOfObjects": "1",
-        "title": "This record has two related cataloging records.",
+		"title": "This record has at least one related record of each type that there's a tab active for",
         "briefDescriptions": [{
             "briefDescription": "This is brief description.",
             "_primary": true
@@ -31,22 +31,32 @@
     },
     "relations": {
         "objects": [
-        {
-            "summary": "Stamp albums. Famous stars series stamp album.",
-            "csid": "1984.068.0338",
-            "number": "1984.068.0338",
-            "relid": "19ba9f30-75c3-41c8-b3e6",
-            "relationshiptype": "affects",
-            "recordtype": "objects"
-        },
-        {
-            "summary": "Souvenir books. Molly O' Play Book.",
-            "csid": "2005.018.1383",
-            "number": "2005.018.1383",
-            "relid": "e8d20612-e1f5-4e90-bc36",
-            "relationshiptype": "affects",
-            "recordtype": "objects"
-        }
+            {
+                "summary": "Stamp albums. Famous stars series stamp album.",
+                "csid": "1984.068.0338",
+                "number": "1984.068.0338",
+                "relid": "19ba9f30-75c3-41c8-b3e6",
+                "relationshiptype": "affects",
+                "recordtype": "objects"
+            },
+            {
+                "summary": "Souvenir books. Molly O' Play Book.",
+                "csid": "2005.018.1383",
+                "number": "2005.018.1383",
+                "relid": "e8d20612-e1f5-4e90-bc36",
+                "relationshiptype": "affects",
+                "recordtype": "objects"
+            }
+       ],
+    "movement": [
+            {
+                "summary": "summary here",
+                "csid": "112.442.1",
+                "number": "number here",
+                "relid": "relid here",
+                "relationshiptype": "affects",
+                "recordtype": "movement"
+            }
     ]
 
     }

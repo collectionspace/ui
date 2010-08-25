@@ -15,13 +15,6 @@ var relatedRecordsTabTester = function ($) {
     var testApplier = {};
     var model, applier, pageBuilder;
 
-    var relatedRecordsTabTest = new jqUnit.TestCase("Related Records Tab Tests", function () {
-        cspace.util.isTest = true;
-        relatedRecordsTabTest.fetchTemplate("../../main/webapp/html/tabsTemplate.html", ".csc-tabs-template", $(".template1"));
-        relatedRecordsTabTest.fetchTemplate("../../main/webapp/html/objectTabPlaceholder.html", ".csc-object-tab", $(".template2"));
-        fluid.model.copyModel(testApplier, applier);        
-    });
-
     $.ajax({
         url: "../../main/webapp/html/data/objects/1984.068.0335b.json",
         async: false,
@@ -35,7 +28,16 @@ var relatedRecordsTabTester = function ($) {
         }
     });
     
-    var setupTab = function (opts) {        
+    var relatedRecordsTabTest = new jqUnit.TestCase("Related Records Tab Tests", function () {
+        cspace.util.isTest = true;
+        relatedRecordsTabTest.fetchTemplate("../../main/webapp/html/tabsTemplate.html", ".csc-tabs-template", $(".template1"));
+        relatedRecordsTabTest.fetchTemplate("../../main/webapp/html/objectTabPlaceholder.html", ".csc-object-tab", $(".template2"));
+        fluid.model.copyModel(testApplier, applier);        
+    });
+
+    var setupTab = function (opts) {
+        var testPrimaryType = "intake";
+        var testRelatedType = "objects";
         var options = {
             uispecUrl: "../../main/webapp/html/uispecs/object-tab/uispec.json",
             listeners: {
@@ -62,7 +64,7 @@ var relatedRecordsTabTester = function ($) {
         var dependencies = {
             relatedRecordsTab: {
                 funcName: "cspace.relatedRecordsTab",
-                args: [".csc-object-tab", "objects", "{pageBuilder}.uispec", testApplier, {
+                args: [".csc-object-tab", testPrimaryType, testRelatedType, "{pageBuilder}.uispec", testApplier, {
                     listEditor: {
                         options: {
                             listeners: opts.listEditorListeners,
@@ -70,7 +72,7 @@ var relatedRecordsTabTester = function ($) {
                             data: testApplier.model.relations.objects,
                             dataContext: {
                                 options: {
-                                    recordType: "objects",
+                                    recordType: testRelatedType,
                                     fileExtension: ".json",
                                     baseUrl: "../../main/webapp/html/data/"
                                 }
@@ -94,7 +96,6 @@ var relatedRecordsTabTester = function ($) {
                     },
                     relationManager: {
                         options: {
-                            primaryRecordType: "objects",
                             dataContext: {
                                 options: {
                                     baseUrl: "data/",
@@ -105,14 +106,15 @@ var relatedRecordsTabTester = function ($) {
                                 options: {
                                     templates: {
                                         dialog: "../../main/webapp/html/searchToRelate.html"
-                                    }
+                                    },
+                                    listeners: opts.searchToRelateListeners
                                 }
                             }
                         }
                     }
                 }]
             }
-        };        
+        };
         pageBuilder = cspace.pageBuilder(dependencies, options);
     };
     
@@ -167,10 +169,14 @@ var relatedRecordsTabTester = function ($) {
             }
         });
         var options = {
+            // TODO: These record types are required, not options. They need to be factored
+            //       into the function signature proper
             primaryRecordType: "intake",
+            relatedRecordType: "objects",
             configURL: "../../main/webapp/html/config/object-tab.json",
             pageBuilder: {
                 options: {
+                    pageType: "intake",
                     uispecUrl: "../../main/webapp/html/uispecs/object-tab/uispec.json",
                     pageSpec: {
                         list: {
@@ -244,6 +250,23 @@ var relatedRecordsTabTester = function ($) {
         objTab = cspace.tabSetup(primaryApplier, options);
         stop();
     });
+
+    relatedRecordsTabTest.test("Using SearchToRelateDialog", function () {
+        setupTab({
+            pageReadyListener: function () {
+                var le = pageBuilder.components.relatedRecordsTab.listEditor;
+                $(pageBuilder.components.relatedRecordsTab.relationManager.options.selectors.addButton).click();
+            },
+            searchToRelateListeners: {
+                afterRender: function(){
+                    $(pageBuilder.components.relatedRecordsTab.relationManager.addDialog.options.selectors.closeButton).click();
+                    start();
+                }
+            }
+        });
+        stop();
+    });
+    
 };
 
 (function () {
