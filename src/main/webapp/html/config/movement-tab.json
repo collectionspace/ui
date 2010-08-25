@@ -1,17 +1,17 @@
 {
     "pageBuilder": {
         "options": {
-            "pageType": "object-tab",
+            "pageType": "movement-tab",
             "pageSpec": {
                 "list": {
-                    "href": "objectTabRecordListTemplate.html",
-                    "templateSelector": ".csc-object-tab-record-list",
-                    "targetSelector": ".csc-object-tab .div-for-list-of-records"
+                    "href": "movementTabRecordListTemplate.html",
+                    "templateSelector": ".csc-movement-tab-record-list",
+                    "targetSelector": ".csc-movement-tab .div-for-list-of-records"
                 },
                 "details": {
-                    "href": "ObjectEntryTemplate.html",
-                    "templateSelector": ".csc-object-entry-template",
-                    "targetSelector": ".csc-object-tab .div-for-recordEditor"
+                    "href": "MovementTemplate.html",
+                    "templateSelector": ".csc-movement-template",
+                    "targetSelector": ".csc-movement-tab .div-for-recordEditor"
                 } 
             }
         } 
@@ -20,9 +20,9 @@
         "relatedRecordsTab": {
             "funcName": "cspace.relatedRecordsTab",
             "args": [
-                ".csc-object-tab",
+                ".csc-movement-tab",
                 "{pageBuilder}.pageType",
-                "objects",
+                "movement",
                 "{pageBuilder}.uispec",
                 "{pageBuilder}.applier"
             ] 
@@ -36,16 +36,16 @@
                         "initList": "cspace.listEditor.receiveData",
                         "dataContext": {
                             "options": {
-                                "recordType": "objects"
+                                "recordType": "movement"
                             }
                         },
                         "details": {
                             "options": {
                                 "selectors": {
-                                    "identificationNumber": ".csc-object-identification-object-number" 
+                                    "identificationNumber": ".csc-movement-currentLocation" 
                                 },
                                 "strings": {
-                                    "identificationNumberRequired": "Please specify an Identification Number" 
+                                    "identificationNumberRequired": "Please specify a Current Location" 
                                 } 
                             } 
                         }

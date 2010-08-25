@@ -47,18 +47,17 @@
                 "relationshiptype": "affects",
                 "recordtype": "objects"
             }
-       ],
-    "movement": [
+        ],
+        "movement": [
             {
-                "summary": "summary here",
+                "summary": "Front Porch",
                 "csid": "112.442.1",
-                "number": "number here",
-                "relid": "relid here",
+                "number": "112.442.1",
+                "relid": "19ba9f30-abcd-fede-abcd",
                 "relationshiptype": "affects",
                 "recordtype": "movement"
             }
-    ]
-
+        ]
     }
 }
 

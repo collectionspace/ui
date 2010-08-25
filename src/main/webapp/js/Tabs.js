@@ -77,16 +77,7 @@ cspace = cspace || {};
             tabsContainer: ".csc-tabs-container",
             list: "menu-record"
         },
-        tabList: [
-            {name: "Cataloging", target: "#primaryTab"},
-			{name: "Acquisition", target: null},
-			{name: "Cataloging - related", target: "objectTabPlaceholder.html"},
-            {name: "Intake", target: null},
-            {name: "Loan In", target: null},
-            {name: "Loan Out", target: null},
-            {name: "Location &amp; Movement", target: null},
-            {name: "Media", target: null}
-        ],
+        tabList: [],
         styles: {
             listContainer: "secondary-nav-menu",
             list: "menu-record",

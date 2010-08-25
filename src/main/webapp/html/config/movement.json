@@ -88,7 +88,7 @@
                     {"name": "Intake", "target": null},
                     {"name": "Loan In", "target": null},
                     {"name": "Loan Out", "target": null},
-                    {"name": "Location &amp; Movement - related", "target": null},
+                    {"name": "Location &amp; Movement - related", "target": "movementTab.html"},
                     {"name": "Media", "target": null}
                 ],
                 "tabSetups": [
@@ -99,7 +99,14 @@
                             "primaryRecordType": "{pageBuilder}.options.pageType",
                             "configURL": "./config/object-tab.json"
                         } 
-                    } 
+                    },
+                    {
+                        "func": "cspace.tabSetup",
+                        "options": {
+                            "primaryRecordType": "{pageBuilder}.options.pageType",
+                            "configURL": "./config/movement-tab.json"
+                        } 
+                    }
                 ] 
             } 
         },

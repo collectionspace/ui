@@ -43,7 +43,7 @@ cspace = cspace || {};
                 {name: "Intake", target: null},
                 {name: "Loan In - related", target: null},
                 {name: "Loan Out", target: null},
-                {name: "Location &amp; Movement", target: null},
+                {name: "Location &amp; Movement", target: cspace.util.fullUrl(options.templateUrlPrefix, "movementTab.html")},
                 {name: "Media", target: null}
             ],
             tabSetups: [
@@ -53,6 +53,13 @@ cspace = cspace || {};
                         primaryRecordType: "{pageBuilder}.options.pageType",
                         configURL: "./config/object-tab.json"
                     }
+                },
+                {
+                    func: "cspace.tabSetup",
+                    options: {
+                        primaryRecordType: "{pageBuilder}.options.pageType",
+                        configURL: "./config/movement-tab.json"
+                    } 
                 }
             ]
         };
