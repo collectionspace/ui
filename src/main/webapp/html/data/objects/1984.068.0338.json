@@ -1,34 +1,485 @@
 {
     "csid": "1984.068.0338",
     "fields": {
-        "distinguishingFeatures": "These are distinguishing features.",
-        "objectNames": [{
-            "objectName": "Some object",
-            "objectNameCurrency": "archaic",
-            "objectNameLevel": "group",
-            "objectNameSystem": "nomenclature",
-            "objectNameType": "denomination",
-            "objectNameLanguage": "ancientgreek",
-            "objectNameNote": "No note",
-            "_primary": true
-        }],
-        "objectNumber": "1984.068.0338",
-        "responsibleDepartments": [{
-            "responsibleDepartment": "herpetology",
-            "_primary": true 
-        }],
-        "objectTitleLanguage": "English",
-        "numberOfObjects": "1",
-        "title": "large post-conquest Ming Dynasty Chrome pan.",
+        "ownersReferences": [
+            {
+                "_primary": false,
+                "ownersReference": "test"
+            },
+            {
+                "_primary": true,
+                "ownersReference": "test p"
+            }
+        ],
+        "contentPlaces": [
+            {
+                "_primary": true
+            },
+            {
+                
+            }
+        ],
+        "assocPeoples": [
+            {
+                "_primary": true,
+                "assocPeople": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(f3215856-3077-4d0f-a1cb)'+++++fgvgv'",
+                "assocPeopleNote": "test"
+            }
+        ],
+        "viewersReferences": [
+            {
+                "_primary": true,
+                "viewersReference": "sdas"
+            },
+            {
+                "viewersReference": "sda22"
+            }
+        ],
+        "contentActivities": [
+            {
+                "_primary": false,
+                "contentActivity": "TEST"
+            },
+            {
+                "contentActivity": "TEST 2",
+                "_primary": true
+            }
+        ],
+        "assocConcepts": [
+            {
+                "_primary": false,
+                "assocConceptNote": "test",
+                "assocConcept": "test"
+            },
+            {
+                "assocConcept": "test",
+                "assocConceptNote": "test",
+                "_primary": true
+            }
+        ],
+        "assocCulturalContexts": [
+            {
+                "_primary": false,
+                "assocCulturalContext": "test",
+                "assocCulturalContextNote": "test"
+            },
+            {
+                "assocCulturalContext": "test",
+                "_primary": true,
+                "assocCulturalContextNote": "test"
+            }
+        ],
+        "assocEventPersons": [
+            {
+                "_primary": true,
+                "assocEventPerson": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(c5a49321-24ee-447c-bb57)'+bgdfgh'"
+            },
+            {
+                "assocEventPerson": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(92c67965-32b2-4ec9-80e4)'%2C.%2C.%2C.%2C.'"
+            }
+        ],
+        "responsibleDepartments": [
+            {
+                "_primary": false,
+                "responsibleDepartment": "paintings-sculpture"
+            },
+            {
+                "_primary": true,
+                "responsibleDepartment": "paintings-sculpture"
+            }
+        ],
+        "fieldCollectionSources": [
+            {
+                "_primary": true,
+                "fieldCollectionSource": "test"
+            }
+        ],
+        "objectProductionDates": [
+            {
+                "_primary": true
+            },
+            {
+                
+            }
+        ],
+        "forms": [
+            {
+                "_primary": false
+            },
+            {
+                "_primary": true,
+                "form": "thin-section"
+            }
+        ],
+        "owners": [
+            {
+                "_primary": true,
+                "owner": "urn:cspace:org.collectionspace.demo:orgauthority:id(ac8eb0df-eff4-4047-91bb):organization:id(3831db38-45b7-447e-8b69)'hhdd1'"
+            },
+            {
+                "owner": "urn:cspace:org.collectionspace.demo:orgauthority:id(ac8eb0df-eff4-4047-91bb):organization:id(ac137052-78ec-40db-be8a)'dd33dd'"
+            }
+        ],
+        "dimensions": [
+            {
+                "_primary": false,
+                "value": "test",
+                "measurementUnit": "cubic-centimeters",
+                "valueQualifier": "TEST",
+                "valueDate": "Aug 1, 2010"
+            },
+            {
+                "_primary": true,
+                "measuredPart": "framed",
+                "dimension": "depth",
+                "value": "test 2 ",
+                "measurementUnit": "kilograms",
+                "valueQualifier": "TSET",
+                "valueDate": "Aug 2, 2010"
+            },
+            {
+                "measuredPart": "mount",
+                "dimension": "target",
+                "value": "tewt222",
+                "measurementUnit": "millimeters",
+                "valueQualifier": "TEST",
+                "valueDate": "Aug 23, 2010"
+            },
+            {
+                "measuredPart": "paper-size",
+                "dimension": "circumference",
+                "value": "saaa",
+                "measurementUnit": "feet",
+                "valueQualifier": "TEST",
+                "valueDate": "Aug 22, 2010"
+            },
+            {
+                "measuredPart": "mount",
+                "dimension": "diameter",
+                "value": "sssdd",
+                "measurementUnit": "liters",
+                "valueQualifier": "TEST",
+                "valueDate": "Aug 30, 2010"
+            },
+            {
+                "measuredPart": "unframed",
+                "dimension": "depth",
+                "value": "asdasdasd",
+                "measurementUnit": "liters",
+                "valueQualifier": "TEST",
+                "valueDate": "Aug 6, 2010"
+            }
+        ],
+        "objectNameGroup": [
+            {
+                "_primary": false,
+                "objectName": "TEST",
+                "objectNameCurrency": "archaic",
+                "objectNameSystem": "nomenclature",
+                "objectNameLanguage": "chinese",
+                "objectNameNote": "TEST"
+            },
+            {
+                "objectName": "TEST 2",
+                "_primary": true,
+                "objectNameLevel": "subgroup",
+                "objectNameType": "simple",
+                "objectNameNote": "TEST"
+            }
+        ],
+        "assocEventPlaces": [
+            {
+                "_primary": true
+            }
+        ],
+        "objectProductionReasons": [
+            {
+                "_primary": false,
+                "objectProductionReason": "test"
+            },
+            {
+                "objectProductionReason": "test p",
+                "_primary": true
+            }
+        ],
+        "assocPlaces": [
+            {
+                "_primary": true,
+                "assocPlaceNote": "test"
+            }
+        ],
+        "fieldCollectors": [
+            {
+                "_primary": true,
+                "fieldCollector": "test p"
+            },
+            {
+                "fieldCollector": "test"
+            }
+        ],
+        "contentScripts": [
+            {
+                "_primary": false,
+                "contentScript": "gothic-script"
+            },
+            {
+                "_primary": true,
+                "contentScript": "spencerian-method"
+            }
+        ],
+        "references": [
+            {
+                "_primary": false,
+                "reference": "2"
+            },
+            {
+                "_primary": true,
+                "reference": "s"
+            }
+        ],
+        "contentPeoples": [
+            {
+                "_primary": false
+            },
+            {
+                "contentPeople": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(86daa23c-bc2f-4048-878b)'12312312312321333'",
+                "_primary": true
+            }
+        ],
+        "assocEventOrganizations": [
+            {
+                "_primary": true,
+                "assocEventOrganization": "urn:cspace:org.collectionspace.demo:orgauthority:id(ac8eb0df-eff4-4047-91bb):organization:id(bb886d92-fa72-47c5-b769)'0125888'"
+            }
+        ],
+        "contentOrganizations": [
+            {
+                "_primary": false,
+                "contentOrganization": "urn:cspace:org.collectionspace.demo:orgauthority:id(ac8eb0df-eff4-4047-91bb):organization:id(9b25aebd-fdc4-448e-b89a)'hhghghg'"
+            },
+            {
+                "_primary": true,
+                "contentOrganization": "urn:cspace:org.collectionspace.demo:orgauthority:id(ac8eb0df-eff4-4047-91bb):organization:id(6cec8f6f-b065-42ba-a07f)'gsdsfsr'"
+            }
+        ],
+        "otherNumberList": [
+            {
+                "_primary": false,
+                "otherNumber": "test",
+                "otherNumberType": "unknown"
+            },
+            {
+                "otherNumber": "test",
+                "_primary": true,
+                "otherNumberType": "previous"
+            }
+        ],
+        "contentConcepts": [
+            {
+                "_primary": false,
+                "contentConcept": "TEST"
+            },
+            {
+                "contentConcept": "TEST",
+                "_primary": true
+            }
+        ],
+        "contentLanguages": [
+            {
+                "_primary": false,
+                "contentLanguage": "arabic"
+            },
+            {
+                "contentLanguage": "korean",
+                "_primary": true
+            }
+        ],
+        "assocPersons": [
+            {
+                "_primary": false,
+                "assocPerson": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(ac365e52-43f4-45a5-ac45)'12333332'",
+                "assocPersonNote": "test"
+            },
+            {
+                "_primary": true,
+                "assocPerson": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(d0acd84a-e56f-4f2e-99c3)'sads222'",
+                "assocPersonNote": "test"
+            }
+        ],
+        "colors": [
+            {
+                "_primary": false,
+                "color": "TEST"
+            },
+            {
+                "color": "TEST P",
+                "_primary": true
+            }
+        ],
+        "assocOrganizations": [
+            {
+                "_primary": true,
+                "assocOrganization": "urn:cspace:org.collectionspace.demo:orgauthority:id(ac8eb0df-eff4-4047-91bb):organization:id(5bd6e89e-d2ec-4f8a-ae62)'dsdd'",
+                "assocOrganizationNote": "test"
+            },
+            {
+                "assocOrganization": "urn:cspace:org.collectionspace.demo:orgauthority:id(ac8eb0df-eff4-4047-91bb):organization:id(77c69c66-4828-4698-ba62)'%2C%2C%2C%2C'",
+                "assocOrganizationNote": "test"
+            }
+        ],
+        "fieldCollectionMethods": [
+            {
+                "_primary": false,
+                "fieldCollectionMethod": "sadsa"
+            },
+            {
+                "_primary": true,
+                "fieldCollectionMethod": "22222"
+            }
+        ],
+        "styles": [
+            {
+                "_primary": false,
+                "style": "TEST"
+            },
+            {
+                "style": "TEST P",
+                "_primary": true
+            }
+        ],
+        "contentPositions": [
+            {
+                "_primary": true,
+                "contentPosition": "base"
+            },
+            {
+                "contentPosition": "front"
+            }
+        ],
+        "contentPersons": [
+            {
+                "_primary": true,
+                "contentPerson": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(404e22af-8c96-4a67-8f87)'5435435'"
+            },
+            {
+                "contentPerson": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(5636a279-ebcb-45f0-981f)'324466'"
+            }
+        ],
+        "comments": [
+            {
+                "_primary": false,
+                "comment": "test"
+            },
+            {
+                "comment": "test",
+                "_primary": true
+            }
+        ],
         "briefDescriptions": [
-            {"briefDescription": "This is a slightly brief description."}
+            {
+                "_primary": false,
+                "briefDescription": "test"
+            },
+            {
+                "briefDescription": "test",
+                "_primary": true
+            }
         ],
-        "otherNumbers": [
-            {"otherNumber": "2", "otherNumberType": "lender"}
+        "assocEventPeoples": [
+            {
+                "_primary": true,
+                "assocEventPeople": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(38900cbd-e923-4a30-ad47)'fcvw43'"
+            },
+            {
+                "assocEventPeople": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(60f71574-a066-47a0-a85c)'bbvg'"
+            }
         ],
-        "titleType": "Sample",
-        "titleTranslation": "No translation",
-        "comments": "These are the comments"
+        "ownershipExchangeMethod": "purchase",
+        "inscriptionContentPosition": "left",
+        "sex": "female",
+        "technicalAttributeMeasurement": "78",
+        "titleType": "series",
+        "titleTranslationLanguage": "oldenglish",
+        "recordStatus": "new",
+        "objectComponentInformation": "",
+        "ageUnit": "weeks",
+        "objectComponentName": "handle",
+        "inscriptionContentType": "graffiti",
+        "inscriptionContentLanguage": "portuguese",
+        "titleLanguage": "arabic",
+        "collection": "study-collection",
+        "technicalAttribute": "record-speed",
+        "ownershipExchangePriceCurrency": "euro",
+        "ownershipAccess": "open",
+        "inscriptionContentScript": "rustic-capitals",
+        "technicalAttributeMeasurementUnit": "",
+        "inscriptionDescriptionPosition": "",
+        "objectStatus": "paralectotype",
+        "ownershipCategory": "public",
+        "inscriptionDescriptionType": "",
+        "phase": "nymph",
+        "contentObjectType": "",
+        "objectNumber": "2010.1.13",
+        "distinguishingFeatures": "test",
+        "title": "test",
+        "titleTranslation": "test",
+        "copyNumber": "TEST",
+        "editionNumber": "TEST",
+        "age": "TEST",
+        "ageQualifier": "TEST",
+        "materialComponentNote": "TEST",
+        "materialName": "TEST",
+        "physicalDescription": "TEST",
+        "dimensionSummary": "TEST",
+        "contentDescription": "TEST",
+        "contentObject": "TEST",
+        "contentNote": "TEST",
+        "inscriptionContent": "TEST",
+        "inscriptionContentInscriber": "urn:cspace:org.collectionspace.demo:orgauthority:id(ac8eb0df-eff4-4047-91bb):organization:id(36ea68a4-edd4-44d8-9b29)'iii1111'",
+        "inscriptionContentDate": "Aug 5, 2010",
+        "inscriptionContentInterpretation": "TEST",
+        "inscriptionContentTranslation": "TEST",
+        "inscriptionContentTransliteration": "TEST",
+        "inscriptionDescription": "TEST",
+        "inscriptionDescriptionInscriber": "urn:cspace:org.collectionspace.demo:orgauthority:id(ac8eb0df-eff4-4047-91bb):organization:id(eff151a0-b19e-4ac5-8c08)'iiii12323'",
+        "inscriptionDescriptionInterpretation": "testtest",
+        "technique": "test",
+        "techniqueType": "test",
+        "objectProductionPlaceRole": "test",
+        "objectProductionNote": "test",
+        "objectProductionPeopleRole": "test",
+        "objectProductionPersonRole": "test",
+        "objectProductionOrganizationRole": "test",
+        "objectProductionPeople": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(236c5b61-0da5-4991-9f95)'aasd1%6012'",
+        "objectProductionPerson": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(2181f019-6f82-4b80-a249)'00...'",
+        "objectProductionOrganization": "urn:cspace:org.collectionspace.demo:orgauthority:id(ac8eb0df-eff4-4047-91bb):organization:id(a5db5c69-63ac-4c0c-8bfc)'32dx'",
+        "assocActivity": "test",
+        "assocActivityNote": "test",
+        "assocEventName": "test",
+        "assocEventNameType": "test",
+        "assocObject": "test",
+        "assocObjectType": "test",
+        "assocEventNote": "test",
+        "assocDate": "Aug 23, 2010",
+        "assocDateNote": "test",
+        "objectHistoryNote": "test",
+        "usageNote": "test",
+        "ownershipDates": "Aug 17, 2010",
+        "ownershipExchangeNote": "xzc",
+        "ownershipExchangePriceValue": "asdasd",
+        "ownersPersonalExperience": "test",
+        "ownersPersonalResponse": "test",
+        "ownersContributionNote": "test",
+        "viewersRole": "test",
+        "viewersPersonalExperience": "test",
+        "viewersPersonalResponse": "test",
+        "viewersContributionNote": "test",
+        "catalogNumber": "123",
+        "fieldCollectionDate": "Aug 12, 2010",
+        "fieldCollectionNote": "dxzdf",
+        "fieldCollectionNumber": "test",
+        "fieldCollectionEventName": "test",
+        "fieldCollectionPlace": "test"
     },
     "relations": {}
 }

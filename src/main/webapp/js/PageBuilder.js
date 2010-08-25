@@ -126,18 +126,22 @@ cspace = cspace || {};
             };
         }
         
-        resourceSpecs.schema = {
-            href: that.options.schemaUrl || cspace.util.getDefaultURL("schema"),
-            options: {
-                dataType: "json",
-                success: function (data) {
-                    that.schema = data;
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    // Because there is no schema we will infer it from the uispec later.
+        // TODO: This is a hack which is in place because we aren't getting schemas from the app layer yet
+        //       Currently we only have hardcoded schemas for users and roles which are fetched from the file system.
+        if (that.options.pageType === "role" || that.options.pageType === "users") {
+            resourceSpecs.schema = {
+                href: that.options.schemaUrl || cspace.util.getDefaultURL("schema"),
+                options: {
+                    dataType: "json",
+                    success: function (data) {
+                        that.schema = data;
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        // Because there is no schema we will infer it from the uispec later.
+                    }
                 }
-            }
-        };
+            };
+        }
         
         if (that.options.csid) {
             var dcthat = that.dataContext;

@@ -7,7 +7,6 @@
 											<input type="button" class="csc-save saveButton primary" value="Save"/>
 											<a href="findedit.html"><input type="button" class="cancelButton" value="Cancel" /></a>
 											<a style="display:none;" class="csc-goto"><input type="button" class="gotoButton" value="Go To Record" /></a>
-
 											<div class="clear"></div>
 										</div>
 										<div class="time-stamp"> </div>
@@ -18,7 +17,6 @@
 								<div class="object-entry-outer-border">
 
 									<div class="hidden csc-message-container cs-message">
-
 										<span class="csc-timestamp cs-timestamp">time</span>
 										<span class="csc-message">Save successful!</span>
 									</div>
@@ -29,7 +27,6 @@
 												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon"/></span>
 												Object Identification Information
 											</div>
-
 											
 											<div class="fl-container-flex fl-fix content main" id="toggle-object-identification-information">
 												<div class="info-column">
@@ -39,7 +36,6 @@
 															<div class="content csc-object-identification-object-number-container">
 																<input type="text" class="csc-object-identification-object-number pattern-chooser-input" />
 															</div>
-
 														</div>
 														
 														<div class="info-pair">
@@ -47,20 +43,11 @@
 																<div class="label">Number of Objects</div>
 															</div>
 															<div class="content">
-																<table style="width:auto;">
-																	<tbody>
-
-																		<tr>
-																			<!--<td class="table-unselected"></td>-->
-																			<td><input type="text" class="input-numeric-medium csc-object-identification-number-objects"/></td>
-																		</tr>
-																	</tbody>
-																</table>
+																<input type="text" class="input-numeric-medium csc-object-identification-number-objects"/>
 															</div>
 														</div>
 													
 														<div class="info-pair">
-
 															<div class="header">
 																<div class="label">Other Number</div>
 															</div>
@@ -69,7 +56,6 @@
 																	<thead>
 																		<tr>
 																			<!--<td class="table-select"></td>-->
-
 																			<td>Number</td>
 																			<td>Number Type</td>
 																		</tr>
@@ -78,7 +64,6 @@
 																		<tr class="csc-object-identification-otherNumbers">
 																			<!--<td class="table-unselected"></td>-->
 																			<td><input type="text" class="csc-object-identification-other-number"/></td>
-
 																			<td><select class="csc-object-identification-other-number-type input-select"/></td>
 																		</tr>
 																	</tbody>
@@ -89,9 +74,8 @@
 														<div class="info-pair-select">
 															<div class="header">
                                                                 <div class="label">Responsible Department</div>
-
                                                             </div>
-                                                            <div class="content repeatable">
+                                                            <div class="content">
                                                                 <select class="csc-object-identification-responsible-department input-select"/>
                                                             </div>
 														</div>
@@ -99,18 +83,9 @@
 														<div class="info-pair-select">
 															<div class="header">
 																<div class="label">Collection</div>
-
 															</div>
 															<div class="content">
-																<table>
-																	<tbody>
-																		<tr>
-																			<!--<td class="table-unselected"></td>-->
-																			<td><select class="csc-object-identification-collection input-select"/></td>
-																		</tr>
-																	</tbody>
-
-																</table>
+																<select class="csc-object-identification-collection input-select"/>
 															</div>
 														</div>
 														
@@ -119,17 +94,8 @@
 																<div class="label">Record Status</div>
 															</div>
 															<div class="content">
-
-																<table>
-																	<tbody>
-																		<tr>
-																			<!--<td class="table-unselected"></td>-->
-																			<td><select class="csc-object-identification-record-status input-select"/></td>
-																		</tr>
-																	</tbody>
-																</table>
+																<select class="csc-object-identification-record-status input-select"/>
 															</div>
-
 														</div>
 														<div class="clear"></div>
 													</div>
@@ -139,8 +105,7 @@
 															<div class="header">
 																<div class="label">Brief Description</div>
 															</div>
-
-															<div class="content repeatable">
+															<div class="content">
 																<textarea class="input-textarea csc-object-identification-brief-description"></textarea>
 															</div>
 														</div>
@@ -149,16 +114,8 @@
 															<div class="header">
 																<div class="label">Distinguishing Features</div>
 															</div>
-
 															<div class="content">
-																<table>
-																	<tbody>
-																		<tr>
-																			<td><textarea class="input-textarea csc-object-identification-distinguishing-features"></textarea></td>
-																		</tr>
-																	</tbody>
-																</table>
-
+																<textarea class="input-textarea csc-object-identification-distinguishing-features"></textarea>
 															</div>
 														</div>
 														
@@ -167,18 +124,9 @@
 																<div class="label">Comments</div>
 															</div>
 															<div class="content">
-																<table>											
-																	<tbody>
-
-																		<tr>
-																			<!--<td class="table-unselected"></td>-->
-																			<td><textarea class="input-textarea csc-object-identification-comments"></textarea></td>
-																		</tr>
-																	</tbody>
-																</table>
+																<textarea class="input-textarea csc-object-identification-comments"></textarea>
 															</div>
 														</div>
-
 														<div class="clear"></div>
 													</div>
 													<div class="clear"></div>
@@ -188,7 +136,6 @@
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Title</div>
-
 															<!--<div class="addrow"><img src="../images/btnAddRow.png" alt="add a row" title="click to add an additional row" height=13 width=31 /></div>-->
 															<div class="clear"></div>
 														</div>
@@ -196,35 +143,24 @@
 															<table>
 																<thead>
 																	<tr>
-																		<!--<td class="table-select"></td>-->
 																		<td>Title</td>
-
 																		<td>Title Language</td>
 																		<td>Title Translation</td>
+																		<td>Title Translation Language</td>
 																		<td>Title Type</td>
 																	</tr>
 																</thead>
 															
 																<tbody>
 																	<tr>
-
-																		<!--<td class="table-selected"></td>-->
 																		<td class="flc-inlineEdit-text" style="width:45%;"><input type="text" class="csc-object-identification-object-title editableText"/></td>
 																		<td class="flc-inlineEdit-text"><select class="csc-object-identification-object-title-language input-select"/></td>
 																		<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-object-title-translation editableText"/></td>
+																		<td class="flc-inlineEdit-text"><select class="csc-collection-object-titleTranslationLanguage input-select"/></td>
 																		<td class="flc-inlineEdit-text"><select class="csc-object-identification-object-title-type input-select"/></td>
 																	</tr>
-<!--																	<tr>
-																		<td class="table-unselected"></td>
-																		<td class="flc-inlineEdit-text" style="width:45%;"><input type="text" class="csc-object-identification-object-title editableText"></td>
-																		<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-object-title-language editableText"></td>
-																		<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-object-title-translation editableText"></td>
-																		<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-object-title-type editableText"></td>
-																	</tr>
--->
 																</tbody>
 															</table>
-
 														</div>
 													</div>
 												
@@ -234,16 +170,13 @@
 															<!--<div class="addrow"><img src="../images/btnAddRow.png" alt="add a row" title="click to add an additional row" height=13 width=31 /></div>-->
 															<div class="clear"></div>
 														</div>
-
 														<div class="content">
 															<table>
 																<thead>
 																	<tr>
-																		<!--<td class="table-select"></td>-->
 																		<td>Object Name</td>
 																		<td>Currency</td>
 																		<td>Level</td>
-
 																		<td>System</td>
 																		<td>Type</td>
 																		<td>Language</td>
@@ -251,17 +184,14 @@
 																	</tr>
 																</thead>																
 																<tbody>
-
-																	<tr class="csc-object-identification-object-names">
-																		<!--<td class="table-selected"></td>-->
-																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-identification-object-name"/></td>
+																	<tr class="csc-collection-object-objectNameGroup">
+																		<td><input type="text" class="csc-object-identification-object-name"/></td>
 																		<td><select class="csc-object-identification-object-currency input-select"/></td>
 																		<td><select class="csc-object-identification-object-level input-select"/></td>
 																		<td><select class="csc-object-identification-object-system input-select"/></td>
 																		<td><select class="csc-object-identification-object-type input-select"/></td>
 																		<td><select class="csc-object-identification-object-language input-select"/></td>	
 																		<td style="width:25%;"><input type="text" class="csc-object-identification-object-note"/></td>
-
 																	</tr>
 																</tbody>
 															</table>
@@ -271,7 +201,6 @@
 												</div>
 											</div>
 										</div>
-
 										
 									</div>	
 
@@ -284,38 +213,20 @@
 											<div class="fl-container-flex fl-fix content main" id="toggle-object-description-info">
 												<div class="info-column2-50 fl-force-left">
 													<div class="info-pair">
-
 														<div class="header">
 															<div class="label">Copy Number</div>
 														</div>
 														<div class="content">
-															<table>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-
-																		<td><input type="text" class="csc-object-description-copy-number"/></td>
-																	</tr>
-																</tbody>
-															</table>
+															<input type="text" class="csc-object-description-copy-number"/>
 														</div>
 													</div>
 													
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Object Status</div>
-
 														</div>
 														<div class="content">
-															<table>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><select class="csc-object-description-status input-select"/></td>
-																	</tr>
-																</tbody>
-
-															</table>
+															<select class="csc-object-description-status input-select"/>
 														</div>
 													</div>
 													
@@ -324,17 +235,8 @@
 															<div class="label">Sex</div>
 														</div>
 														<div class="content">
-
-															<table>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><select class="csc-object-description-sex input-select"/></td>
-																	</tr>
-																</tbody>
-															</table>
+															<select class="csc-object-description-sex input-select"/>
 														</div>
-
 													</div>
 													
 													<div class="info-pair">
@@ -342,61 +244,34 @@
 															<div class="label">Phase</div>
 														</div>
 														<div class="content">
-															<table>
-																<tbody>
-
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><select class="csc-object-description-phase input-select"/></td>
-																	</tr>
-																</tbody>
-															</table>
+															<select class="csc-object-description-phase input-select"/>
 														</div>
 													</div>
 													
 													<div class="info-column">
-
 														<div class="info-pair">
 															<div class="header">
 																<div class="label">Form</div>
 															</div>
 															<div class="content">
-																<table>											
-																	<tbody>
-																		<tr>
-																			<!--<td class="table-unselected"></td>-->
-
-																			<td><select class="csc-object-description-form input-select"/></td>
-																		</tr>
-																	</tbody>
-																</table>
+																<select class="csc-object-description-form input-select"/>
 															</div>
 														</div>
 													</div>
 												</div>
 												
 												<div class="info-column2-50 fl-force-right">
-
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Edition Number</div>
 														</div>
 														<div class="content">
-															<table>
-																<tbody>
-																	<tr>
-
-																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="csc-object-description-edition-number"/></td>
-																	</tr>
-																</tbody>
-															</table>
+															<input type="text" class="csc-object-description-edition-number"/>
 														</div>
 													</div>
 													
 													<div class="info-pair">
 														<div class="header">
-
 															<div class="label">Age</div>
 														</div>
 														<div class="content">
@@ -405,7 +280,6 @@
 																	<tr>
 																		<td>Age</td>
 																		<td>Age Qualifier</td>
-
 																		<td>Unit</td>
 																	</tr>
 																</thead>
@@ -414,7 +288,6 @@
 																		<td><input type="text" class="csc-object-description-age"/></td>
 																		<td><input type="text" class="csc-object-description-age-qualifier"/></td>
 																		<td><select class="csc-object-description-age-unit input-select"/></td>
-
 																	</tr>
 																</tbody>
 															</table>
@@ -425,17 +298,8 @@
 														<div class="header">
 															<div class="label">Style</div>
 														</div>
-
 														<div class="content">
-															<table>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-style"/></td>
-																	</tr>
-																</tbody>
-															</table>
-
+															<input type="text" class="csc-object-description-style"/>
 														</div>
 													</div>
 													
@@ -444,19 +308,10 @@
 															<div class="label">Color</div>
 														</div>
 														<div class="content">
-															<table>											
-																<tbody>
-
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="csc-object-description-color"/></td>
-																	</tr>
-																</tbody>
-															</table>
+															<input type="text" class="csc-object-description-color"/>
 														</div>
 													</div>
 													<div class="clear"></div>
-
 												</div>
 												<div class="clear"></div>
 												<div class="info-column">
@@ -465,7 +320,6 @@
 															<div class="label">Material</div>
 														</div>
 														<div class="content">
-
 															<table>
 																<thead>
 																	<tr>
@@ -473,7 +327,6 @@
 																		<td>Material</td>
 																		<td>Material Component</td>
 																		<td>Material Component Note</td>
-
 																		<td>Material Name</td>
 																		<td>Material Source</td>
 																	</tr>
@@ -481,8 +334,7 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-material"/></td>
-
+																		<td><input type="text" class="csc-object-description-material"/></td>
 																		<td><input type="text" class="csc-object-description-material-component" disabled="disabled"/></td>
 																		<td><input type="text" class="csc-object-description-material-component-note"/></td>
 																		<td><input type="text" class="csc-object-description-material-name"/></td>
@@ -492,28 +344,18 @@
 															</table>
 														</div>
 													</div>
-
 													
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Physical Description</div>
 														</div>
 														<div class="content">
-															<table>											
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-
-																		<td><textarea class="input-textarea csc-object-description-physical-description"></textarea></td>
-																	</tr>
-																</tbody>
-															</table>
+															<textarea class="input-textarea csc-object-description-physical-description"></textarea>
 														</div>
 													</div>
 												</div>
 												
 												<div class="info-column2-50 fl-force-left">
-
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Object Component</div>
@@ -522,7 +364,6 @@
 															<table>
 																<thead>
 																	<tr>
-
 																		<!--<td class="table-select"></td>-->
 																		<td>Name</td>
 																		<td>Information</td>
@@ -532,7 +373,6 @@
 																<tbody>
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
-
 																		<td><select class="csc-object-description-object-component-name input-select"/></td>
 																		<td class="disabled"><input type="text" class="csc-object-description-object-component-information" disabled="disabled"/></td>
 																	</tr>
@@ -543,7 +383,6 @@
 												</div>
 												
 												<div class="info-column2-50 fl-force-right">
-
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Technical Attribute</div>
@@ -552,7 +391,6 @@
 															<table>
 																<thead>
 																	<tr>
-
 																		<!--<td class="table-select"></td>-->
 																		<td>Technical Attribute</td>
 																		<td>Measurement</td>
@@ -560,7 +398,6 @@
 																	</tr>
 																</thead>
 																<tbody>
-
 																	<tr>
 																		<!--<td class="table-unselected"></td>-->
 																		<td><select class="csc-object-description-technical-attribute input-select"/></td>
@@ -570,44 +407,52 @@
 																</tbody>
 															</table>
 														</div>
-
 													</div>
 												</div>
 												<div class="clear"></div>
+												
+												<div class="info-column2-50 fl-force-left">
+													<div class="info-pair">
+	                                                    <div class="header">
+	                                                        <div class="label">Dimension summary</div>
+	                                                    </div>
+	                                                    <div class="content">
+	                                                        <input type="text" class="csc-collection-object-dimensionSummary"/>
+	                                                    </div>
+	                                                </div>
+	                                            </div>
 												
 												<div class="info-column">
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Dimension</div>
 														</div>
-
 														<div class="content">
 															<table>
 																<thead>
 																	<tr>
-																		<!--<td class="table-select"></td>-->
+																	    <td>Part</td>
+																	    <td>Dimension</td>
+																	    <td>Value</td>
+																	    <td>Dimension Unit</td>
+																	    <td>Value Qualifier</td>
 																		<td>Date</td>
-																		<td>Part</td>
-																		<td>Dimension</td>
-
-																		<td>Value</td>
-																		<td>Dimension Unit</td>
-																		<td>Value Qualifier</td>
 																	</tr>
 																</thead>
 																<tbody>
-																	<tr>
-
-																		<!--<td class="table-unselected"></td>-->
-																		<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-description-dimension-date csc-calendar-date" /><img src="../images/cal.png" alt="calendar"  height="16" width="18"/></td>
-																		<td><select class="csc-object-description-dimension-part input-select"/></td>
-																		<td><select class="csc-object-description-dimension input-select"/></td>
-																		<td><input type="text" class="csc-object-description-dimension-value"/></td>
-																		<td><select class="input-select csc-object-description-dimension-unit" /></td>
-																		<td class="field-cal disabled"><input type="text" disabled="disabled" class="csc-object-description-dimension-value-qualifier"/></td>
+																	<tr class="csc-collection-object-dimensions">
+																	    <td><select class="csc-object-description-dimension-part input-select"/></td>
+																	    <td><select class="csc-object-description-dimension input-select"/></td>
+																	    <td><input type="text" class="csc-object-description-dimension-value"/></td>
+																	    <td><select class="csc-object-description-dimension-unit input-select" /></td>
+																	    <td><input type="text" class="csc-object-description-dimension-value-qualifier"/></td>
+																	    <td class="csc-object-description-dimension-value-date-container fl-table">
+                                                                            <input type="text" disabled="disabled" class="fl-force-left input-date csc-object-description-dimension-value-date csc-calendar-date" />
+                                                                            <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></a>
+                                                                            <div class="csc-date-picker cs-date-picker"></div>
+                                                                        </td>
 																	</tr>
 																</tbody>
-
 															</table>
 														</div>
 													</div>
@@ -618,7 +463,6 @@
 													<div class="fl-container-flex fl-fix information-subgroup">
 														<div class="info-column fl-force-left">
 															<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-description-information-content', this); return false;">
-
 																<span class="header-toggle-sub"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
 																Content
 															</div>
@@ -628,17 +472,8 @@
 																		<div class="header">
 																			<div class="label">Description</div>
 																		</div>
-
 																		<div class="content">
-																			<table>											
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><textarea class="input-textarea csc-object-description-content-description"></textarea></td>
-																					</tr>
-																				</tbody>
-																			</table>
-
+																			<textarea class="input-textarea csc-object-description-content-description"></textarea>
 																		</div>
 																	</div>
 																</div>
@@ -648,17 +483,8 @@
 																		<div class="header">
 																			<div class="label">Language</div>
 																		</div>
-
 																		<div class="content">
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><select class="csc-object-description-content-language input-select"/></td>
-																					</tr>
-																				</tbody>
-																			</table>
-
+																			<select class="csc-object-description-content-language input-select"/>
 																		</div>
 																	</div>
 																	
@@ -667,52 +493,28 @@
 																			<div class="label">Activity</div>
 																		</div>
 																		<div class="content">
-																			<table>															
-																				<tbody>
-
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-content-activity"/></td>
-																					</tr>
-																				</tbody>
-																			</table>
+																			<input type="text" class="csc-object-description-content-activity"/>
 																		</div>
 																	</div>
 																	
 																	<div class="info-pair">
-
 																		<div class="header">
 																			<div class="label">Concept</div>
 																		</div>
 																		<div class="content">
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-content-concept"/></td>
-
-																					</tr>
-																				</tbody>
-																			</table>
+																			<input type="text" class="csc-object-description-content-concept"/>
 																		</div>
 																	</div>
 																	
 																	<div class="info-pair info-pair-date">
 																		<div class="header">
 																			<div class="label">Date</div>
-
 																		</div>
-																		<div class="content">
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-description-content-date"/><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></td>
-																					</tr>
-																				</tbody>
-
-																			</table>
-																		</div>
+																		<div class="content csc-object-description-content-date-container fl-table">
+												                            <input type="text" disabled="disabled" class="fl-force-left input-date csc-object-description-content-date csc-calendar-date" />
+												                            <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></a>
+												                            <div class="csc-date-picker cs-date-picker"></div>
+												                        </div>
 																	</div>
 																	
 																	<div class="info-pair">
@@ -720,17 +522,8 @@
 																			<div class="label">Position</div>
 																		</div>
 																		<div class="content">
-
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><select class="csc-object-description-content-position input-select"/></td>
-																					</tr>
-																				</tbody>
-																			</table>
+																			<select class="csc-object-description-content-position input-select"/>
 																		</div>
-
 																	</div>
 																	
 																	<div class="info-pair">
@@ -740,26 +533,21 @@
 																		<div class="content">
 																			<table>
 																				<thead>
-
 																					<tr>
-																						<!--<td class="table-select"></td>-->
 																						<td>Object</td>
 																						<td>Object Type</td>
 																					</tr>
 																				</thead>
 																				<tbody>
 																					<tr>
-
-																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" class="csc-object-description-content-object"/></td>
-																						<td class="disabled"><input type="text" class="csc-object-description-content-object-type" disabled="disabled"/></td>
+																						<td><select class="csc-object-description-content-object-type"/></td>
 																					</tr>
 																				</tbody>
 																			</table>
 																		</div>
 																	</div>
 																	<div class="clear"></div>
-
 																</div>
 																
 																<div class="info-column2-50 fl-force-right">
@@ -768,52 +556,25 @@
 																			<div class="label">People</div>
 																		</div>
 																		<div class="content">
-																			<table>															
-																				<tbody>
-
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" disabled="disabled" class="csc-object-description-content-people"/>
-                                                                                            <!--<div class="csc-object-description-content-people-autocomplete"></div>--></td>
-																					</tr>
-																				</tbody>
-																			</table>
+																			<input type="text" disabled="disabled" class="csc-object-description-content-people"/>
 																		</div>
 																	</div>
-
 																	
 																	<div class="info-pair">
 																		<div class="header">
 																			<div class="label">Person</div>
 																		</div>
 																		<div class="content">
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<td><input type="text" class="csc-object-description-content-person"/>
-
-                                                                                            <div class="csc-object-description-content-person-autocomplete"></div></td>
-																					</tr>
-																				</tbody>
-																			</table>
+																			<input type="text" class="csc-object-description-content-person"/>
 																		</div>
 																	</div>
 																	
 																	<div class="info-pair">
 																		<div class="header">
 																			<div class="label">Place</div>
-
 																		</div>
 																		<div class="content">
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-content-place"/></td>
-																					</tr>
-																				</tbody>
-
-																			</table>
+																			<input type="text" disabled="disabled" class="csc-object-description-content-place"/>
 																		</div>
 																	</div>
 																	
@@ -822,17 +583,8 @@
 																			<div class="label">Script</div>
 																		</div>
 																		<div class="content">
-
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><select class="csc-object-description-content-script input-select"/></td>
-																					</tr>
-																				</tbody>
-																			</table>
+																			<select class="csc-object-description-content-script input-select"/>
 																		</div>
-
 																	</div>
 																	
 																	<div class="info-pair">
@@ -840,21 +592,11 @@
 																			<div class="label">Organization</div>
 																		</div>
 																		<div class="content">
-																			<table>															
-																				<tbody>
-																					<tr>
-
-																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="csc-object-description-content-organization"/>
-                                                                                            <div class="csc-object-description-content-organization-autocomplete"></div></td>
-																					</tr>
-																				</tbody>
-																			</table>
+																			<input type="text" class="csc-object-description-content-organization"/>
 																		</div>
 																	</div>
 																	
 																	<div class="info-pair">
-
 																		<div class="header">
 																			<div class="label">Event Name</div>
 																		</div>
@@ -862,18 +604,14 @@
 																			<table>
 																				<thead>
 																					<tr>
-																						<!--<td class="table-select"></td>-->
-
 																						<td>Event Name</td>
 																						<td>Event Name Type</td>
 																					</tr>
 																				</thead>
 																				<tbody>
 																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-content-event-name"/></td>
-
-																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-content-event-name-type"/></td>
+																						<td><input type="text" class="csc-object-description-content-event-name"/></td>
+																						<td><input type="text" class="csc-object-description-content-event-name-type"/></td>
 																					</tr>
 																				</tbody>
 																			</table>
@@ -883,26 +621,21 @@
 																	<div class="info-pair">
 																		<div class="header">
 																			<div class="label">Other</div>
-
 																		</div>
 																		<div class="content">
 																			<table>
 																				<thead>
 																					<tr>
-																						<!--<td class="table-select"></td>-->
 																						<td>Other</td>
 																						<td>Other Type</td>
-
 																					</tr>
 																				</thead>
 																				<tbody>
 																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td class="disabled"><input type="text" class="csc-object-description-content-other" disabled="disabled"/></td>
-																						<td class="disabled"><input type="text" class="csc-object-description-content-other-type" disabled="disabled"/></td>
+																						<td><input type="text" class="csc-object-description-content-other" /></td>
+																						<td><input type="text" class="csc-object-description-content-other-type" /></td>
 																					</tr>
 																				</tbody>
-
 																			</table>
 																		</div>
 																	</div>
@@ -913,26 +646,16 @@
 																<div class="info-column">
 																	<div class="info-pair">
 																		<div class="header">
-
 																			<div class="label">Note</div>
 																		</div>
 																		<div class="content">
-																			<table>											
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><textarea class="input-textarea csc-object-description-content-note"></textarea></td>
-
-																					</tr>
-																				</tbody>
-																			</table>
+																			<textarea class="input-textarea csc-object-description-content-note"></textarea>
 																		</div>
 																	</div>
 																</div>
 																<div class="clear"></div>
 															</div>
 														</div>
-
 														<div class="clear"></div>
 													</div>
 													<div class="clear"></div>
@@ -943,7 +666,6 @@
 														<div class="info-column">
 															<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-description-information-inscription-content', this); return false;">
 																<span class="header-toggle-sub"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
-
 																Textual Inscription
 															</div>
 															<div class="fl-container-flex fl-fix content main" id="toggle-description-information-inscription-content">
@@ -953,17 +675,8 @@
 																			<div class="label">Inscription Content</div>
 																		</div>
 																		<div class="content">
-
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><textarea class="input-textarea csc-object-description-inscription-content"></textarea></td>
-																					</tr>
-																				</tbody>
-																			</table>
+																			<textarea class="input-textarea csc-object-description-inscription-content"></textarea>
 																		</div>
-
 																	</div>
 																</div>
 																
@@ -973,17 +686,7 @@
 																			<div class="label">Inscriber</div>
 																		</div>
 																		<div class="content">
-
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="csc-object-description-inscription-content-inscriber"/>
-                                                                                            <div class="csc-object-description-inscription-content-inscriber-autocomplete"></div></td>
-																					</tr>
-																				</tbody>
-																			</table>
-
+																			<input type="text" class="csc-object-description-inscription-content-inscriber"/>
 																		</div>
 																	</div>
 																	
@@ -992,53 +695,29 @@
 																			<div class="label">Language</div>
 																		</div>
 																		<div class="content">
-																			<table>															
-																				<tbody>
-
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><select class="csc-object-description-inscription-content-language input-select"/></td>
-																					</tr>
-																				</tbody>
-																			</table>
+																			<select class="csc-object-description-inscription-content-language input-select"/>
 																		</div>
 																	</div>
 																		
 																	<div class="info-pair info-pair-date">
-
 																		<div class="header">
 																			<div class="label">Date</div>
 																		</div>
-																		<div class="content">
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-description-inscription-content-date"/><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></td>
-
-																					</tr>
-																				</tbody>
-																			</table>
-																		</div>
+																		<div class="content csc-object-description-inscription-content-date-container fl-table">
+												                            <input type="text" disabled="disabled" class="fl-force-left input-date csc-object-description-inscription-content-date csc-calendar-date" />
+												                            <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></a>
+												                            <div class="csc-date-picker cs-date-picker"></div>
+												                        </div>
 																	</div>
 																</div>
 																
 																<div class="info-column2-50 fl-force-right">
 																	<div class="info-pair">
 																		<div class="header">
-
 																			<div class="label">Position</div>
 																		</div>
 																		<div class="content">
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><select class="csc-object-description-inscription-content-position input-select"/></td>
-																					</tr>
-
-																				</tbody>
-																			</table>
+																			<select class="csc-object-description-inscription-content-position input-select"/>
 																		</div>
 																	</div>
 																	
@@ -1046,17 +725,8 @@
 																		<div class="header">
 																			<div class="label">Script</div>
 																		</div>
-
 																		<div class="content">
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><select class="csc-object-description-inscription-content-script input-select"/></td>
-																					</tr>
-																				</tbody>
-																			</table>
-
+																			<select class="csc-object-description-inscription-content-script input-select"/>
 																		</div>
 																	</div>
 																	
@@ -1065,33 +735,16 @@
 																			<div class="label">Type</div>
 																		</div>
 																		<div class="content">
-																			<table>															
-																				<tbody>
-
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><select class="csc-object-description-inscription-content-type input-select"/></td>
-																					</tr>
-																				</tbody>
-																			</table>
+																			<select class="csc-object-description-inscription-content-type input-select"/>
 																		</div>
 																	</div>
 																	
 																	<div class="info-pair">
-
 																		<div class="header">
 																			<div class="label">Method</div>
 																		</div>
 																		<div class="content">
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="csc-object-description-inscription-content-method" disabled="disabled"/></td>
-
-																					</tr>
-																				</tbody>
-																			</table>
+																			<input type="text" class="csc-object-description-inscription-content-method"/>
 																		</div>
 																	</div>
 																</div>
@@ -1099,38 +752,20 @@
 																
 																<div class="info-column">
 																	<div class="info-pair">
-
 																		<div class="header">
 																			<div class="label">Interpretation</div>
 																		</div>
 																		<div class="content">
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td class="field-cal disabled"><textarea class="input-textarea csc-object-description-inscription-content-interpretation"></textarea></td>
-
-																					</tr>
-																				</tbody>
-																			</table>
+																			<textarea class="input-textarea csc-object-description-inscription-content-interpretation"></textarea>
 																		</div>
 																	</div>
 																	
 																	<div class="info-pair">
 																		<div class="header">
 																			<div class="label">Translation</div>
-
 																		</div>
 																		<div class="content">
-																			<table>
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="csc-object-description-inscription-content-translation"/></td>
-																					</tr>
-																				</tbody>
-
-																			</table>
+																			<input type="text" class="csc-object-description-inscription-content-translation"/>
 																		</div>
 																	</div>
 																	
@@ -1139,17 +774,8 @@
 																			<div class="label">Transliteration</div>
 																		</div>
 																		<div class="content">
-
-																			<table>
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="csc-object-description-inscription-content-transliteration"/></td>
-																					</tr>
-																				</tbody>
-																			</table>
+																			<input type="text" class="csc-object-description-inscription-content-transliteration"/>
 																		</div>
-
 																	</div>
 																	<div class="clear"></div>
 																</div>
@@ -1160,7 +786,6 @@
 												</div>
 												
 												<div class="info-column">
-
 													<div class="fl-container-flex fl-fix information-subgroup">
 														<div class="info-column">
 															<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-description-information-inscription-description', this); return false;">
@@ -1171,60 +796,34 @@
 															<div class="fl-container-flex fl-fix content main" id="toggle-description-information-inscription-description">
 																<div class="info-column">
 																	<div class="info-pair">
-
 																		<div class="header">
 																			<div class="label">Inscription Description</div>
 																		</div>
 																		<div class="content">
-																			<table>
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-
-																						<td><textarea class="input-textarea csc-object-description-inscription-description"></textarea></td>
-																					</tr>
-																				</tbody>
-																			</table>
+																			<textarea class="input-textarea csc-object-description-inscription-description"></textarea>
 																		</div>
 																	</div>
 																</div>
 																
 																<div class="info-column2-50 fl-force-left">
-
 																	<div class="info-pair">
 																		<div class="header">
 																			<div class="label">Inscriber</div>
 																		</div>
 																		<div class="content">
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-
-																						<td><input type="text" class="csc-object-description-inscription-description-inscriber"/>
-                                                                                            <div class="csc-object-description-inscription-description-inscriber-autocomplete"></div></td>
-																					</tr>
-																				</tbody>
-																			</table>
+																			<input type="text" class="csc-object-description-inscription-description-inscriber"/>
 																		</div>
 																	</div>
 																		
 																	<div class="info-pair info-pair-date">
 																		<div class="header">
-
 																			<div class="label">Date</div>
 																		</div>
-																		<div class="content">
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-description-inscription-description-date"/><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></td>
-																					</tr>
-
-																				</tbody>
-																			</table>
-																		</div>
+																		<div class="content csc-object-description-inscription-description-date-container fl-table">
+															                <input type="text" disabled="disabled" class="fl-force-left input-date csc-object-description-inscription-description-date csc-calendar-date" />
+															                <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></a>
+															                <div class="csc-date-picker cs-date-picker"></div>
+															            </div>
 																	</div>
 																	<div class="clear"></div>
 																</div>
@@ -1232,37 +831,19 @@
 																<div class="info-column2-50 fl-force-right">
 																	<div class="info-pair">
 																		<div class="header">
-
 																			<div class="label">Position</div>
 																		</div>
 																		<div class="content">
-																			<table>
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><select class="csc-object-description-inscription-description-position input-select"/></td>
-
-																					</tr>
-																				</tbody>
-																			</table>
+																			<select class="csc-object-description-inscription-description-position input-select"/>
 																		</div>
 																	</div>
 																	
 																	<div class="info-pair">
 																		<div class="header">
 																			<div class="label">Type</div>
-
 																		</div>
 																		<div class="content">
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><select class="csc-object-description-inscription-description-type input-select"/></td>
-																					</tr>
-																				</tbody>
-
-																			</table>
+																			<select class="csc-object-description-inscription-description-type input-select"/>
 																		</div>
 																	</div>
 																	
@@ -1271,17 +852,8 @@
 																			<div class="label">Method</div>
 																		</div>
 																		<div class="content">
-
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="csc-object-description-inscription-description-method" disabled="disabled"/></td>
-																					</tr>
-																				</tbody>
-																			</table>
+																			<input type="text" class="csc-object-description-inscription-description-method"/>
 																		</div>
-
 																	</div>
 																</div>
 																
@@ -1291,16 +863,7 @@
 																			<div class="label">Interpretation</div>
 																		</div>
 																		<div class="content">
-
-																			<table>
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><textarea class="input-textarea csc-object-description-inscription-description-interpretation"></textarea></td>
-																					</tr>
-																				</tbody>
-																			</table>
-
+																			<textarea class="input-textarea csc-object-description-inscription-description-interpretation"></textarea>
 																		</div>
 																	</div>
 																</div>
@@ -1310,7 +873,6 @@
 													</div>
 												</div>
 												<div class="clear"></div>
-
 											</div>
 										</div>
 									</div>
@@ -1321,163 +883,165 @@
 												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
 												Object Production Information
 											</div>
-
 											<div class="fl-container-flex fl-fix content main" id="toggle-object-production">
-												<div class="info-pair">
-													<div class="header">
-														<div class="label">Production Reason</div>
-													</div>
-													<div class="content">
-														<table>
-															<tbody>
-
-																<tr>
-																	<!--<td class="table-unselected"></td>-->
-																	<td><textarea class="input-textarea csc-object-production-reason"></textarea></td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
-												</div>
-
-										
-												<div class="info-column2-50 fl-force-left">
-													<div class="info-pair-date">
-														<div class="header">
-															<div class="label">Production Date</div>
-														</div>
-														<div class="content">
-															<table>
-																<tbody>
-
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-production-date csc-calendar-date" /><img src="../images/cal.png" alt="calendar"  height="16" width="18"/></td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-													</div>
-													<div class="info-pair">
-
-														<div class="header">
-															<div class="label">Production Technique</div>
-														</div>
-														<div class="content">
-															<table>
-																<thead>
-																	<tr>
-																		<td>Technique</td>
-
-																		<td>Technique Type</td>
-																	</tr>
-																</thead>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-production-technique"/></td>
-																		<td class="disabled"><select disabled="disabled" class="csc-object-production-technique-type input-select"/></td>
-
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-													</div>
-												</div>
-												
-												<div class="info-column2-50 fl-force-right">															
-													<div class="info-pair">
-														<div class="header">
-
-															<div class="label">Production People</div>
-														</div>
-														<div class="content">
-															<table>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" disabled="disabled" class="csc-object-production-people"/>
-
-                                                                            <!--<div class="csc-object-production-people-autocomplete"></div>--></td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-													</div>
-													<div class="info-pair">
-														<div class="header">
-															<div class="label">Production Person</div>
-
-														</div>
-														<div class="content">
-															<table>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="csc-object-production-person"/>
-                                                                            <div class="csc-object-production-person-autocomplete"></div></td>
-																	</tr>
-
-																</tbody>
-															</table>
-														</div>
-													</div>
-													<div class="info-pair">
-														<div class="header">
-															<div class="label">Production Place</div>
-														</div>
-
-														<div class="content">
-															<table>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-production-place"/></td>
-																	</tr>
-																</tbody>
-															</table>
-
-														</div>
-													</div>
-													<div class="info-pair">
-														<div class="header">
-															<div class="label">Production Organization</div>
-														</div>
-														<div class="content">
-															<table>
-
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="csc-object-production-organization"/>
-                                                                            <div class="csc-object-production-organization-autocomplete"></div></td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-
-													</div>
-												</div>
-												
-												<div class="info-column fl-force-left">
-													<div class="info-pair">
-														<div class="header">
-															<div class="label">Production Note</div>
-														</div>
-														<div class="content">
-
-															<table>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><textarea class="input-textarea csc-object-production-note"></textarea></td>
-																	</tr>
-																</tbody>
-															</table>
-
-														</div>
-													</div>
-												</div>
+											    <div class="info-column fl-force-left">
+												    <div class="info-column2-50 fl-force-left">
+								                        <div class="info-pair-date">
+	                                                        <div class="header">
+	                                                            <div class="label">Production Date</div>
+	                                                        </div>
+	                                                        <div class="content csc-object-production-date-container csc-collection-object-objectProductionDates fl-table">
+	                                                            <input type="text" disabled="disabled" class="fl-force-left input-date csc-object-production-date csc-calendar-date" />
+	                                                            <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></a>
+	                                                            <div class="csc-date-picker cs-date-picker"></div>
+	                                                        </div>
+	                                                    </div>
+								                    </div>
+								                    <div class="info-column2-50 fl-force-right">
+								                        <div class="info-pair">
+	                                                        <div class="header">
+	                                                            <div class="label">Production People</div>
+	                                                        </div>
+	                                                        <div class="content">
+	                                                            <table>
+	                                                                <thead>
+	                                                                    <tr>
+	                                                                        <td>Production people</td>
+	                                                                        <td>Role</td>
+	                                                                    </tr>
+	                                                                </thead>
+	                                                                <tbody>
+	                                                                    <tr>
+	                                                                        <td><input type="text" class="csc-object-production-people"/></td>
+	                                                                        <td><input type="text" class="csc-collection-object-objectProductionPeopleRole"/></td>
+	                                                                    </tr>
+	                                                                </tbody>
+	                                                            </table>
+	                                                        </div>
+	                                                    </div>
+								                    </div>
+											    </div>
+											    <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair">
+	                                                        <div class="header">
+	                                                            <div class="label">Production Technique</div>
+	                                                        </div>
+	                                                        <div class="content">
+	                                                            <table>
+	                                                                <thead>
+	                                                                    <tr>
+	                                                                        <td>Technique</td>
+	                                                                        <td>Technique Type</td>
+	                                                                    </tr>
+	                                                                </thead>
+	                                                                <tbody>
+	                                                                    <tr>
+	                                                                        <!--<td class="table-unselected"></td>-->
+	                                                                        <td><input type="text" class="csc-object-production-technique"/></td>
+	                                                                        <td><input type="text" class="csc-object-production-technique-type input-select"/></td>
+	                                                                    </tr>
+	                                                                </tbody>
+	                                                            </table>
+	                                                        </div>
+	                                                    </div>
+                                                    </div>
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-pair">
+	                                                        <div class="header">
+	                                                            <div class="label">Production Person</div>
+	                                                        </div>
+	                                                        <div class="content">
+	                                                            <table>
+	                                                                <thead>
+	                                                                    <tr>
+	                                                                        <td>Production person</td>
+	                                                                        <td>Role</td>
+	                                                                    </tr>
+	                                                                </thead>
+	                                                                <tbody>
+	                                                                    <tr>
+	                                                                        <td><input type="text" class="csc-object-production-person"/></td>
+	                                                                        <td><input type="text" class="csc-collection-object-objectProductionPersonRole"/></td>
+	                                                                    </tr>
+	                                                                </tbody>
+	                                                            </table>
+	                                                        </div>
+	                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair">
+	                                                        <div class="header">
+	                                                            <div class="label">Production Place</div>
+	                                                        </div>
+	                                                        <div class="content">
+	                                                            <table>
+	                                                                <thead>
+	                                                                    <tr>
+	                                                                        <td>Production place</td>
+	                                                                        <td>Role</td>
+	                                                                    </tr>
+	                                                                </thead>
+	                                                                <tbody>
+	                                                                    <tr>
+	                                                                        <td><input type="text" class="csc-object-production-place"/></td>
+	                                                                        <td><input type="text" class="csc-collection-object-objectProductionPlaceRole"/></td>
+	                                                                    </tr>
+	                                                                </tbody>
+	                                                            </table>
+	                                                        </div>
+	                                                    </div>
+                                                    </div>
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-pair">
+	                                                        <div class="header">
+	                                                            <div class="label">Production Organization</div>
+	                                                        </div>
+	                                                        <div class="content">
+	                                                            <table>
+	                                                                <thead>
+	                                                                    <tr>
+	                                                                        <td>Production organization</td>
+	                                                                        <td>Role</td>
+	                                                                    </tr>
+	                                                                </thead>
+	                                                                <tbody>
+	                                                                    <tr>
+	                                                                        <td><input type="text" class="csc-object-production-organization"/></td>
+	                                                                        <td><input type="text" class="csc-collection-object-objectProductionOrganizationRole"/></td>
+	                                                                    </tr>
+	                                                                </tbody>
+	                                                            </table>
+	                                                        </div>
+	                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair">
+		                                                    <div class="header">
+		                                                        <div class="label">Production Reason</div>
+		                                                    </div>
+		                                                    <div class="content">
+		                                                        <textarea class="input-textarea csc-object-production-reason"></textarea>
+		                                                    </div>
+		                                                </div>
+                                                    </div>
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-column fl-force-left">
+		                                                    <div class="info-pair">
+		                                                        <div class="header">
+		                                                            <div class="label">Production Note</div>
+		                                                        </div>
+		                                                        <div class="content">
+		                                                            <textarea class="input-textarea csc-object-production-note"></textarea>
+		                                                        </div>
+		                                                    </div>
+		                                                </div>
+                                                    </div>
+                                                </div>
 												<div class="clear"></div>
 											</div>
 										</div>
@@ -1485,7 +1049,6 @@
 									
 									<div class="fl-container-flex fl-fix information-group">
 										<div class="info-column">
-
 											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-history', this); return false;">
 												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
 												Object History and Association Information
@@ -1496,7 +1059,6 @@
 												<div class="info-column">
 													<div class="fl-container-flex fl-fix information-subgroup">
 														<div class="info-column">
-
 															<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-history-associations', this); return false;">
 																<span class="header-toggle-sub"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
 																Associations
@@ -1508,7 +1070,6 @@
 																	<div class="info-pair">
 																		<div class="header">
 																			<div class="label">Associated Activity</div>
-
 																		</div>
 																		<div class="content">
 																			<table>
@@ -1517,29 +1078,22 @@
 																						<td>Associated Activity</td>
 																						<td>Associated Activity Note</td>
 																					</tr>
-
 																				</thead>
 																				<tbody>
 																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-association-activity"/></td>
-																						<td><input type="text" class="csc-object-history-association-activity-note"/></td>
+																						<td><input type="text" class="csc-collection-object-assocActivity"/></td>
+																						<td><input type="text" class="csc-collection-object-assocActivityNote"/></td>
 																					</tr>
 																				</tbody>
 																			</table>
-
 																		</div>
 																	</div>
-																	
-																	
-																	
 																	<div class="info-pair">
 																		<div class="header">
 																			<div class="label">Associated Object</div>
 																		</div>
 																		<div class="content">
 																			<table>
-
 																				<thead>
 																					<tr>
 																						<td>Associated Object</td>
@@ -1548,151 +1102,145 @@
 																				</thead>
 																				<tbody>
 																					<tr>
-
-																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="csc-object-history-association-object"/></td>
-																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-association-object-type"/></td>
+																						<td><input type="text" class="csc-collection-object-assocObject"/></td>
+																						<td><input type="text" class="csc-collection-object-assocObjectType"/></td>
 																					</tr>
 																				</tbody>
 																			</table>
 																		</div>
 																	</div>
-																	
 																	<div class="info-pair">
-
-																		<div class="header">
-																			<div class="label">Associated Concept</div>
-																		</div>
-																		<div class="content">
-																			<table>
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-
-																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-association-concept"/></td>
-																					</tr>
-																				</tbody>
-																			</table>
-																		</div>
-																	</div>
-																	
+                                                                        <div class="header">
+                                                                            <div class="label">Associated Concept</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <table>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Concept</td>
+                                                                                        <td>Association note</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr class="csc-collection-object-assocConcepts">
+                                                                                        <td><input type="text" class="csc-collection-object-assocConcept"/></td>
+                                                                                        <td><input type="text" class="csc-collection-object-assocConceptNote"/></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Associated Cultural Affinity</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <table>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Cultural affinity</td>
+                                                                                        <td>Association note</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr class="csc-collection-object-assocCulturalContexts">
+                                                                                        <td><input type="text" class="csc-collection-object-assocCulturalContext"/></td>
+                                                                                        <td><input type="text" class="csc-collection-object-assocCulturalContextNote"/></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Associated Organization</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <table>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Organization</td>
+                                                                                        <td>Association note</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr class="csc-collection-object-assocOrganizations">
+                                                                                        <td><input type="text" class="csc-collection-object-assocOrganization"/></td>
+                                                                                        <td><input type="text" class="csc-collection-object-assocOrganizationNote"/></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Associated People</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <table>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>People</td>
+                                                                                        <td>Association note</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr class="csc-collection-object-assocPeoples">
+                                                                                        <td><input type="text" class="csc-collection-object-assocPeople"/></td>
+                                                                                        <td><input type="text" class="csc-collection-object-assocPeopleNote"/></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
 																	<div class="info-pair">
-																		<div class="header">
-																			<div class="label">Associated Cultural Affinity</div>
-
-																		</div>
-																		<div class="content">
-																			<table>
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-association-cultural-affinity"/></td>
-																					</tr>
-																				</tbody>
-
-																			</table>
-																		</div>
-																	</div>
-																	
+                                                                        <div class="header">
+                                                                            <div class="label">Associated Person</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <table>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Person</td>
+                                                                                        <td>Association note</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr class="csc-collection-object-assocPersons">
+                                                                                        <td><input type="text" class="csc-collection-object-assocPerson"/></td>
+                                                                                        <td><input type="text" class="csc-collection-object-assocPersonNote"/></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
 																	<div class="info-pair">
-																		<div class="header">
-																			<div class="label">Associated Organization</div>
-																		</div>
-																		<div class="content">
-
-																			<table>
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="csc-object-history-association-organization"/>
-																							<div class="csc-object-history-association-organization-autocomplete"></div></td>
-																					</tr>
-																				</tbody>
-																			</table>
-
-																		</div>
-																	</div>
-																	
-																	<div class="info-pair">
-																		<div class="header">
-																			<div class="label">Associated People</div>
-																		</div>
-																		<div class="content">
-																			<table>
-
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" disabled="disabled" class="csc-object-history-association-people"/>
-																							<!--<div class="csc-object-history-association-people-autocomplete"></div>--></td>
-																					</tr>
-																				</tbody>
-																			</table>
-																		</div>
-
-																	</div>
-																	
-																	<div class="info-pair">
-																		<div class="header">
-																			<div class="label">Associated Person</div>
-																		</div>
-																		<div class="content">
-																			<table>
-																				<tbody>
-
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="csc-object-history-association-person"/>
-																							<div class="csc-object-history-association-person-autocomplete"></div></td>
-																					</tr>
-																				</tbody>
-																			</table>
-																		</div>
-																	</div>
-
-																	
-																	<div class="info-pair">
-																		<div class="header">
-																			<div class="label">Associated Place</div>
-																		</div>
-																		<div class="content">
-																			<table>
-																				<tbody>
-																					<tr>
-
-																						<!--<td class="table-unselected"></td>-->
-																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-association-place"/></td>
-																					</tr>
-																				</tbody>
-																			</table>
-																		</div>
-																	</div>
-																	
-																	<div class="info-pair">
-																		<div class="header">
-
-																			<div class="label">Associated Type</div>
-																		</div>
-																		<div class="content">
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td class="disabled"><input disabled="disabled" class="csc-object-history-association-type"/></td>
-																					</tr>
-
-																				</tbody>
-																			</table>
-																		</div>
-																	</div>
-																	
-																	<div class="clear"></div>
+                                                                        <div class="header">
+                                                                            <div class="label">Associated Place</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <table>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Place</td>
+                                                                                        <td>Association note</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr class="csc-collection-object-assocPlaces">
+                                                                                        <td><input type="text" class="csc-collection-object-assocPlace"/></td>
+                                                                                        <td><input type="text" class="csc-collection-object-assocPlaceNote"/></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="clear"></div>
 																</div>
 																
 																<div class="info-column2-50 fl-force-right">
 																	<div class="info-pair">
 																		<div class="header">
-
 																			<div class="label">Associated Event Name</div>
 																		</div>
 																		<div class="content">
@@ -1701,17 +1249,14 @@
 																					<tr>
 																						<td>Associated Event Name</td>
 																						<td>Associated Event Name type</td>
-
 																					</tr>
 																				</thead>
 																				<tbody>
 																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-association-event"/></td>
-																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-association-event-name"/></td>
+																						<td><input type="text" class="csc-collection-object-assocEventName"/></td>
+																						<td><input type="text" class="csc-collection-object-assocEventNameType"/></td>
 																					</tr>
 																				</tbody>
-
 																			</table>
 																		</div>
 																	</div>
@@ -1721,17 +1266,7 @@
 																			<div class="label">Associated Event Organization</div>
 																		</div>
 																		<div class="content">
-
-																			<table>
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="csc-object-history-association-event-organization"/>
-																							<div class="csc-object-history-association-event-organization-autocomplete"></div></td>
-																					</tr>
-																				</tbody>
-																			</table>
-
+																			<input type="text" class="csc-object-history-association-event-organization"/>
 																		</div>
 																	</div>
 																	
@@ -1740,18 +1275,8 @@
 																			<div class="label">Associated Event People</div>
 																		</div>
 																		<div class="content">
-																			<table>
-
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" disabled="disabled" class="csc-object-history-association-event-people"/>
-																							<!--<div class="csc-object-history-association-event-people-autocomplete"></div>--></td>
-																					</tr>
-																				</tbody>
-																			</table>
+																			<input type="text" class="csc-object-history-association-event-people"/>
 																		</div>
-
 																	</div>
 																	
 																	
@@ -1760,79 +1285,58 @@
 																			<div class="label">Associated Event Person</div>
 																		</div>
 																		<div class="content">
-																			<table>
-																				<tbody>
-
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" class="csc-object-history-association-event-person"/>
-																							<div class="csc-object-history-association-event-person-autocomplete"></div></td>
-																					</tr>
-																				</tbody>
-																			</table>
+																			<input type="text" class="csc-object-history-association-event-person"/>
 																		</div>
 																	</div>
-
 																	
 																	<div class="info-pair">
 																		<div class="header">
 																			<div class="label">Associated Event Place</div>
 																		</div>
 																		<div class="content">
-																			<table>
-																				<tbody>
-																					<tr>
-
-																						<!--<td class="table-unselected"></td>-->
-																						<td><input type="text" disabled="disabled" class="csc-object-history-association-event-place"/>
-																							<!--<div class="csc-object-history-association-event-place-autocomplete"></div>--></td>
-																					</tr>
-																				</tbody>
-																			</table>
+																			<input type="text" class="csc-object-history-association-event-place"/>
 																		</div>
 																	</div>
-																	
-																	<div class="info-pair info-pair-date">
-
-																		<div class="header">
-																			<div class="label">Associated Date</div>
-																		</div>
-																		<div class="content">
-																			<table>															
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-history-association-date"/><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></td>
-
-																					</tr>
-																				</tbody>
-																			</table>
-																		</div>
-																	</div>
-																	
 																	<div class="info-pair">
-																		<div class="header">
-																			<div class="label">Association Note</div>
-
-																		</div>
-																		<div class="content">
-																			<table>
-																				<tbody>
-																					<tr>
-																						<!--<td class="table-unselected"></td>-->
-																						<td><textarea class="input-textarea csc-object-history-association-note"></textarea></td>
-																					</tr>
-
-																				</tbody>
-																			</table>
-																		</div>
-																	</div>
+                                                                        <div class="header">
+                                                                            <div class="label">Associated Event Note</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <input type="text" class="csc-collection-object-assocEventNote"/>
+                                                                        </div>
+                                                                    </div>
+																	<div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Associated Date</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <table>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Association note</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td>
+	                                                                                        <div class="content csc-collection-object-assocDate-container fl-table">
+					                                                                            <input type="text" disabled="disabled" class="fl-force-left input-date csc-collection-object-assocDate csc-calendar-date" />
+					                                                                            <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></a>
+					                                                                            <div class="csc-date-picker cs-date-picker"></div>
+					                                                                        </div>
+                                                                                        </td>
+                                                                                        <td><input type="text" class="csc-collection-object-assocDateNote"/></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
 																</div>
 																<div class="clear"></div>
 															</div>
 														</div>
 													</div>
-
 												</div>
 												<div class="clear"></div>
 												<!-- END Associations sub-group -->
@@ -1842,17 +1346,8 @@
 														<div class="header">
 															<div class="label">Object History Note</div>
 														</div>
-
 														<div class="content">
-															<table>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><textarea class="input-textarea csc-object-history-association-object-history-note"></textarea></td>
-																	</tr>
-																</tbody>
-
-															</table>
+															<textarea class="input-textarea csc-object-history-association-object-history-note"></textarea>
 														</div>
 													</div>
 												</div>
@@ -1861,7 +1356,6 @@
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Usage</div>
-
 														</div>
 														<div class="content">
 															<table>
@@ -1870,7 +1364,6 @@
 																		<td>Usage</td>
 																		<td>Usage Notes</td>
 																	</tr>
-
 																</thead>
 																<tbody>
 																	<tr>
@@ -1880,52 +1373,94 @@
 																</tbody>
 															</table>
 														</div>
-
 													</div>
 												</div>
 												
 												<div class="info-column fl-force-left">
+												    <div class="info-column2-50 fl-force-left">
+												        <div class="info-pair">
+	                                                        <div class="header">
+	                                                            <div class="label">Owner</div>
+	                                                        </div>
+	                                                        <div class="content">
+	                                                            <input type="text" class="csc-object-history-association-owner"/>
+	                                                        </div>
+	                                                    </div>
+												    </div>
+												    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-column2-50 fl-force-left">
+	                                                        <div class="info-pair">
+	                                                            <div class="header">
+	                                                                <div class="label">Ownership access</div>
+	                                                            </div>
+	                                                            <div class="content">
+	                                                                <select class="csc-object-history-association-access input-select"/>
+	                                                            </div>
+	                                                        </div>
+	                                                    </div>
+	                                                    <div class="info-column2-50 fl-force-right">
+                                                            <div class="info-pair">
+                                                                <div class="header">
+                                                                    <div class="label">Ownership category</div>
+                                                                </div>
+                                                                <div class="content">
+                                                                    <select class="csc-object-history-association-category input-select"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+												</div>
+												
+												<div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Ownership date</div>
+                                                            </div>
+                                                            <div class="content csc-object-history-association-dates-container fl-table">
+                                                                <input type="text" disabled="disabled" class="fl-force-left input-date csc-object-history-association-dates csc-calendar-date" />
+                                                                <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></a>
+                                                                <div class="csc-date-picker cs-date-picker"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Ownership place</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <input type="text" class="csc-object-history-association-owenership-place"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+												<div class="info-column">
 													<div class="info-pair">
 														<div class="header">
-															<div class="label">Owner</div>
+															<div class="label">Ownership exchange</div>
 														</div>
 														<div class="content">
-
 															<table>
 																<thead>
 																	<tr>
-																		<td>Owner</td>
-																		<td>Access</td>
-																		<td>Category</td>
-																		<td>Dates</td>
-
-																		<td>Exchange Method</td>
-																		<td>Exchange Note</td>
-																		<td>Exchange Price - Denotionation</td>
-																		<td>Exchange Price - Value</td>
-																		<td>Ownership Place</td>
+																		<td>Method</td>
+																		<td>Note</td>
+																		<td>Price - currency</td>
+																		<td>Price - value</td>
 																	</tr>
-
 																</thead>
 																<tbody>
 																	<tr>
-																		<td><input type="text" class="csc-object-history-association-owner"/>
-																			<div class="csc-object-history-association-owener-autocomplete"></div></td>
-																		<td><select class="csc-object-history-association-access input-select"/></td>
-																		<td><select class="csc-object-history-association-category input-select"/></td>
-																		<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-history-association-dates disabled"/><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></td>
 																		<td><select class="csc-object-history-association-exchange-method input-select"/></td>
-
 																		<td><input type="text" class="csc-object-history-association-exchange-note"/></td>
 																		<td><select class="csc-object-history-association-denomination input-select"/></td>
 																		<td><input type="text" class="csc-object-history-association-exchange-price-value"/></td>
-																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-association-owenership-place"/></td>
 																	</tr>
 																</tbody>
 															</table>
 														</div>
 													</div>
-
 												</div>
 												<div class="clear"></div>
 											</div>
@@ -1936,7 +1471,6 @@
 										<div class="info-column">
 											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-owner', this); return false;">
 												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
-
 												Object Owner's Contribution Information
 											</div>
 											<div class="fl-container-flex fl-fix content main" id="toggle-object-owner">
@@ -1946,16 +1480,7 @@
 															<div class="label">Owner's Personal Experience</div>
 														</div>
 														<div class="content">
-
-															<table>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><textarea class="input-textarea csc-object-owner-experience"></textarea></td>
-																	</tr>
-																</tbody>
-															</table>
-
+															<textarea class="input-textarea csc-object-owner-experience"></textarea>
 														</div>
 													</div>
 												</div>
@@ -1965,17 +1490,8 @@
 														<div class="header">
 															<div class="label">Owner's Personal Response</div>
 														</div>
-
 														<div class="content">
-															<table>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><textarea class="input-textarea csc-object-owner-response"></textarea></td>
-																	</tr>
-																</tbody>
-
-															</table>
+															<textarea class="input-textarea csc-object-owner-response"></textarea>
 														</div>
 													</div>
 												</div>
@@ -1984,18 +1500,9 @@
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Owner's Reference</div>
-
 														</div>
 														<div class="content">
-															<table>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="csc-object-owner-reference"/></td>
-																	</tr>
-																</tbody>
-
-															</table>
+															<input type="text" class="csc-object-owner-reference"/>
 														</div>
 													</div>
 												</div>
@@ -2004,18 +1511,9 @@
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Owner's Contribution Note</div>
-
 														</div>
 														<div class="content">
-															<table>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><textarea class="input-textarea csc-object-owner-contribution-note"></textarea></td>
-																	</tr>
-
-																</tbody>
-															</table>
+															<textarea class="input-textarea csc-object-owner-contribution-note"></textarea>
 														</div>
 													</div>
 												</div>
@@ -2023,7 +1521,6 @@
 											</div>
 										</div>
 									</div>
-
 									
 									<div class="fl-container-flex fl-fix information-group">
 										<div class="info-column">
@@ -2034,64 +1531,36 @@
 											<div class="fl-container-flex fl-fix content main" id="toggle-object-viewer">
 												<div class="info-column fl-force-left">
 													<div class="info-pair">
-
 														<div class="header">
 															<div class="label">Viewer's Role</div>
 														</div>
 														<div class="content">
-															<table>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-
-																		<td><input type="text" class="csc-object-viewer-role"/></td>
-																	</tr>
-																</tbody>
-															</table>
+															<input type="text" class="csc-object-viewer-role"/>
 														</div>
 													</div>
 												</div>
 												
 												<div class="info-column fl-force-left">
 													<div class="info-pair">
-
 														<div class="header">
 															<div class="label">Viewer's Personal Experience</div>
 														</div>
 														<div class="content">
-															<table>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-
-																		<td><textarea class="input-textarea csc-object-viewer-experience"></textarea></td>
-																	</tr>
-																</tbody>
-															</table>
+															<textarea class="input-textarea csc-object-viewer-experience"></textarea>
 														</div>
 													</div>
 												</div>
 												
 												<div class="info-column fl-force-left">
-
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Viewer's Personal Response</div>
 														</div>
 														<div class="content">
-															<table>
-																<tbody>
-																	<tr>
-
-																		<!--<td class="table-unselected"></td>-->
-																		<td><textarea class="input-textarea csc-object-viewer-response"></textarea></td>
-																	</tr>
-																</tbody>
-															</table>
+															<textarea class="input-textarea csc-object-viewer-response"></textarea>
 														</div>
 													</div>
 												</div>
-
 												
 												<div class="info-column fl-force-left">
 													<div class="info-pair">
@@ -2099,19 +1568,10 @@
 															<div class="label">Viewer's Reference</div>
 														</div>
 														<div class="content">
-															<table>
-																<tbody>
-
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="csc-object-viewer-reference"/></td>
-																	</tr>
-																</tbody>
-															</table>
+															<input type="text" class="csc-object-viewer-reference"/>
 														</div>
 													</div>
 												</div>
-
 												
 												<div class="info-column fl-force-left">
 													<div class="info-pair">
@@ -2119,18 +1579,9 @@
 															<div class="label">Viewer's Contribution Note</div>
 														</div>
 														<div class="content">
-															<table>
-																<tbody>
-
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><textarea class="input-textarea csc-object-viewer-contribution-note"></textarea></td>
-																	</tr>
-																</tbody>
-															</table>
+															<textarea class="input-textarea csc-object-viewer-contribution-note"></textarea>
 														</div>
 													</div>
-
 												</div>
 												<div class="clear"></div>
 											</div>
@@ -2143,7 +1594,6 @@
 										<div class="info-column">
 											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-ref-info', this); return false;">
 												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
-
 												Reference Information
 											</div>
 											<div class="fl-container-flex fl-fix content main" id="toggle-ref-info">
@@ -2153,17 +1603,8 @@
 															<div class="label">Reference</div>
 														</div>
 														<div class="content">
-
-															<table>
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td class="disabled"><input type="text" disabled="disabled" class="csc-reference-reference"/></td>
-																	</tr>
-																</tbody>
-															</table>
+															<input type="text" class="csc-reference-reference"/>
 														</div>
-
 													</div>	
 												</div>
 												
@@ -2173,19 +1614,10 @@
 															<div class="label">Catalog Number</div>
 														</div>
 														<div class="content">
-															<table>
-
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td><input type="text" class="csc-reference-catalog-number"/></td>
-																	</tr>
-																</tbody>
-															</table>
+															<input type="text" class="csc-reference-catalog-number"/>
 														</div>
 													</div>	
 												</div>
-
 												<div class="clear"></div>
 											</div>
 										</div>
@@ -2197,28 +1629,98 @@
 												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
 												Object Collection Information
 											</div>
-
 											<div class="fl-container-flex fl-fix content main" id="toggle-object-collection">
 												<div class="info-column fl-force-left">
-													<div class="info-pair">
-														<div class="header">
-															<div class="label">Field Collection Event Name</div>
-														</div>
-														<div class="content">
-															<table>
-
-																<tbody>
-																	<tr>
-																		<!--<td class="table-unselected"></td>-->
-																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-collection-field-collection-event-name"/></td>
-																	</tr>
-																</tbody>
-															</table>
-														</div>
-													</div>	
-												</div>
-
-												<div class="clear"></div>
+									                <div class="info-column2-50 fl-force-left">
+									                    <div class="info-pair-date">
+									                        <div class="header">
+									                            <div class="label">Field collection date</div>
+									                        </div>
+									                        <div class="content csc-collection-object-fieldCollectionDate-container fl-table">
+									                            <input type="text" disabled="disabled" class="fl-force-left input-date csc-collection-object-fieldCollectionDate csc-calendar-date" />
+									                            <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></a>
+									                            <div class="csc-date-picker cs-date-picker"></div>
+									                        </div>
+									                    </div>
+									                </div>
+									                <div class="info-column2-50 fl-force-right">
+									                    <div class="info-pair">
+									                        <div class="header">
+									                            <div class="label">Field collection place</div>
+									                        </div>                            
+									                        <div class="content">
+									                            <input type="text" class="input-alpha csc-collection-object-fieldCollectionPlace" />
+									                        </div>
+									                    </div>
+									                </div>
+									            </div>
+									            <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair-date">
+                                                            <div class="header">
+                                                                <div class="label">Field collection method</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <input type="text" class="input-alpha csc-collection-object-fieldCollectionMethod" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Field collection source</div>
+                                                            </div>                            
+                                                            <div class="content">
+                                                                <input type="text" class="input-alpha csc-collection-object-fieldCollectionSource" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair-date">
+                                                            <div class="header">
+                                                                <div class="label">Field collection note</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <textarea class="input-textarea csc-collection-object-fieldCollectionNote"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Field collection collector</div>
+                                                            </div>                            
+                                                            <div class="content">
+                                                                <input type="text" class="input-alpha csc-collection-object-fieldCollector" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Field collection event name</div>
+                                                            </div>                            
+                                                            <div class="content">
+                                                                <input type="text" class="input-alpha csc-collection-object-fieldCollectionEventName" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair-date">
+                                                            <div class="header">
+                                                                <div class="label">Field collection number</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <input type="text" class="input-alpha csc-collection-object-fieldCollectionNumber" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+									            <div class="clear"></div>
 											</div>
 										</div>
 									</div>
@@ -2324,7 +1826,6 @@
 									<div class="hidden csc-message-container cs-message">
 										<span class="csc-timestamp cs-timestamp">time</span>
 										<span class="csc-message">Save successful!</span>
-
 									</div>
 
 									<div class="csc-error-dialog">
@@ -2335,7 +1836,6 @@
 								<div class="fl-container-flex button-row">
 									<a href="#"><input type="button" class="primary saveButton csc-save" value="Save" /></a>
 									<a href="findedit.html"><input type="button" class="cancelButton" value="Cancel" /></a>
-
 									<div class="clear"></div>
 								</div>
 								

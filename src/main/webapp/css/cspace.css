@@ -319,6 +319,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .info-pair-date .content,
 .info-pair-select .content {width:100%; float:left; border:none;}
 
+.info-pair .content > select {width:100%; border-spacing:0; margin-top:0px; border:1px solid #C7CFD4; padding:0;}
 .info-pair .content table,
 .info-pair-date .content table,
 .info-pair-select table {width:100%; border-spacing:0; background-color:#FFF; margin-top:0px; border:1px solid #C7CFD4; /*border:1px solid #C7CFD4; border-bottom: 0px solid #C7CFD4;*/ padding:0;}
@@ -633,19 +634,12 @@ td input.cs-repeatable-primary {margin:0 0 0 2px;  vertical-align:bottom;}
 input.cs-repeatable-delete {float:right; border:none; width: 16px; height:18px; vertical-align:top; padding:0px; background:transparent url('../images/icnDeleteIdle.png') no-repeat 1px 2px;}
 input.cs-repeatable-delete:hover, input.cs-repeatable-delete:focus {color: white; background:transparent url('../images/icnDelete.png') no-repeat 1px 2px;}
 
+
+/*   styling the date pickers   */
+.cs-date-picker {margin-top: 18px;}
+.cs-calendar-button:focus {outline: 1px solid black;}
+
+
 /***********    CSS For New Markup on Location and Movement Control Record    ***********/
 /* Note: The scoping of these styles to the movement template is temporary, until the styles are approved */
-.csc-movement-template .fl-table {
-    display:table;
-}
-.csc-movement-template .fl-table-row {
-    display:table-row;
-}
-.csc-movement-template .fl-table-cell {
-    display:table-cell;
-    vertical-align:middle;
-}
-.csc-movement-template .cs-date-picker {margin-top: 18px;}
-.csc-movement-template .cs-calendar-button:focus {outline: 1px solid black;}
-.csc-movement-template .input-alpha, .csc-movement-template .input-textarea {border: 1px solid #C7CFD4}
 .csc-movement-template .button-row {padding-bottom: 32px;}
