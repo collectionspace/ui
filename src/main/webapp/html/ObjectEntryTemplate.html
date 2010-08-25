@@ -7,6 +7,7 @@
 											<input type="button" class="csc-save saveButton primary" value="Save"/>
 											<a href="findedit.html"><input type="button" class="cancelButton" value="Cancel" /></a>
 											<a style="display:none;" class="csc-goto"><input type="button" class="gotoButton" value="Go To Record" /></a>
+
 											<div class="clear"></div>
 										</div>
 										<div class="time-stamp"> </div>
@@ -17,6 +18,7 @@
 								<div class="object-entry-outer-border">
 
 									<div class="hidden csc-message-container cs-message">
+
 										<span class="csc-timestamp cs-timestamp">time</span>
 										<span class="csc-message">Save successful!</span>
 									</div>
@@ -27,6 +29,7 @@
 												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon"/></span>
 												Object Identification Information
 											</div>
+
 											
 											<div class="fl-container-flex fl-fix content main" id="toggle-object-identification-information">
 												<div class="info-column">
@@ -36,6 +39,7 @@
 															<div class="content csc-object-identification-object-number-container">
 																<input type="text" class="csc-object-identification-object-number pattern-chooser-input" />
 															</div>
+
 														</div>
 														
 														<div class="info-pair">
@@ -45,7 +49,9 @@
 															<div class="content">
 																<table style="width:auto;">
 																	<tbody>
+
 																		<tr>
+																			<!--<td class="table-unselected"></td>-->
 																			<td><input type="text" class="input-numeric-medium csc-object-identification-number-objects"/></td>
 																		</tr>
 																	</tbody>
@@ -54,6 +60,7 @@
 														</div>
 													
 														<div class="info-pair">
+
 															<div class="header">
 																<div class="label">Other Number</div>
 															</div>
@@ -61,13 +68,17 @@
 																<table>
 																	<thead>
 																		<tr>
+																			<!--<td class="table-select"></td>-->
+
 																			<td>Number</td>
 																			<td>Number Type</td>
 																		</tr>
 																	</thead>
 																	<tbody>
 																		<tr class="csc-object-identification-otherNumbers">
+																			<!--<td class="table-unselected"></td>-->
 																			<td><input type="text" class="csc-object-identification-other-number"/></td>
+
 																			<td><select class="csc-object-identification-other-number-type input-select"/></td>
 																		</tr>
 																	</tbody>
@@ -78,6 +89,7 @@
 														<div class="info-pair-select">
 															<div class="header">
                                                                 <div class="label">Responsible Department</div>
+
                                                             </div>
                                                             <div class="content repeatable">
                                                                 <select class="csc-object-identification-responsible-department input-select"/>
@@ -87,14 +99,17 @@
 														<div class="info-pair-select">
 															<div class="header">
 																<div class="label">Collection</div>
+
 															</div>
 															<div class="content">
 																<table>
 																	<tbody>
 																		<tr>
+																			<!--<td class="table-unselected"></td>-->
 																			<td><select class="csc-object-identification-collection input-select"/></td>
 																		</tr>
 																	</tbody>
+
 																</table>
 															</div>
 														</div>
@@ -104,14 +119,17 @@
 																<div class="label">Record Status</div>
 															</div>
 															<div class="content">
+
 																<table>
 																	<tbody>
 																		<tr>
+																			<!--<td class="table-unselected"></td>-->
 																			<td><select class="csc-object-identification-record-status input-select"/></td>
 																		</tr>
 																	</tbody>
 																</table>
 															</div>
+
 														</div>
 														<div class="clear"></div>
 													</div>
@@ -121,6 +139,7 @@
 															<div class="header">
 																<div class="label">Brief Description</div>
 															</div>
+
 															<div class="content repeatable">
 																<textarea class="input-textarea csc-object-identification-brief-description"></textarea>
 															</div>
@@ -130,6 +149,7 @@
 															<div class="header">
 																<div class="label">Distinguishing Features</div>
 															</div>
+
 															<div class="content">
 																<table>
 																	<tbody>
@@ -138,6 +158,7 @@
 																		</tr>
 																	</tbody>
 																</table>
+
 															</div>
 														</div>
 														
@@ -145,10 +166,19 @@
 															<div class="header">
 																<div class="label">Comments</div>
 															</div>
-															<div class="content repeatable">
-																<textarea class="input-textarea csc-object-identification-comments"></textarea>
+															<div class="content">
+																<table>											
+																	<tbody>
+
+																		<tr>
+																			<!--<td class="table-unselected"></td>-->
+																			<td><textarea class="input-textarea csc-object-identification-comments"></textarea></td>
+																		</tr>
+																	</tbody>
+																</table>
 															</div>
 														</div>
+
 														<div class="clear"></div>
 													</div>
 													<div class="clear"></div>
@@ -158,6 +188,7 @@
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Title</div>
+
 															<!--<div class="addrow"><img src="../images/btnAddRow.png" alt="add a row" title="click to add an additional row" height=13 width=31 /></div>-->
 															<div class="clear"></div>
 														</div>
@@ -165,7 +196,9 @@
 															<table>
 																<thead>
 																	<tr>
+																		<!--<td class="table-select"></td>-->
 																		<td>Title</td>
+
 																		<td>Title Language</td>
 																		<td>Title Translation</td>
 																		<td>Title Type</td>
@@ -174,6 +207,8 @@
 															
 																<tbody>
 																	<tr>
+
+																		<!--<td class="table-selected"></td>-->
 																		<td class="flc-inlineEdit-text" style="width:45%;"><input type="text" class="csc-object-identification-object-title editableText"/></td>
 																		<td class="flc-inlineEdit-text"><select class="csc-object-identification-object-title-language input-select"/></td>
 																		<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-object-title-translation editableText"/></td>
@@ -189,21 +224,26 @@
 -->
 																</tbody>
 															</table>
+
 														</div>
 													</div>
 												
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Object Name</div>
+															<!--<div class="addrow"><img src="../images/btnAddRow.png" alt="add a row" title="click to add an additional row" height=13 width=31 /></div>-->
 															<div class="clear"></div>
 														</div>
+
 														<div class="content">
 															<table>
 																<thead>
 																	<tr>
+																		<!--<td class="table-select"></td>-->
 																		<td>Object Name</td>
 																		<td>Currency</td>
 																		<td>Level</td>
+
 																		<td>System</td>
 																		<td>Type</td>
 																		<td>Language</td>
@@ -211,7 +251,9 @@
 																	</tr>
 																</thead>																
 																<tbody>
+
 																	<tr class="csc-object-identification-object-names">
+																		<!--<td class="table-selected"></td>-->
 																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-identification-object-name"/></td>
 																		<td><select class="csc-object-identification-object-currency input-select"/></td>
 																		<td><select class="csc-object-identification-object-level input-select"/></td>
@@ -219,6 +261,7 @@
 																		<td><select class="csc-object-identification-object-type input-select"/></td>
 																		<td><select class="csc-object-identification-object-language input-select"/></td>	
 																		<td style="width:25%;"><input type="text" class="csc-object-identification-object-note"/></td>
+
 																	</tr>
 																</tbody>
 															</table>
@@ -228,6 +271,7 @@
 												</div>
 											</div>
 										</div>
+
 										
 									</div>	
 
@@ -240,6 +284,7 @@
 											<div class="fl-container-flex fl-fix content main" id="toggle-object-description-info">
 												<div class="info-column2-50 fl-force-left">
 													<div class="info-pair">
+
 														<div class="header">
 															<div class="label">Copy Number</div>
 														</div>
@@ -247,6 +292,8 @@
 															<table>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+
 																		<td><input type="text" class="csc-object-description-copy-number"/></td>
 																	</tr>
 																</tbody>
@@ -257,14 +304,17 @@
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Object Status</div>
+
 														</div>
 														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td><select class="csc-object-description-status input-select"/></td>
 																	</tr>
 																</tbody>
+
 															</table>
 														</div>
 													</div>
@@ -274,14 +324,17 @@
 															<div class="label">Sex</div>
 														</div>
 														<div class="content">
+
 															<table>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td><select class="csc-object-description-sex input-select"/></td>
 																	</tr>
 																</tbody>
 															</table>
 														</div>
+
 													</div>
 													
 													<div class="info-pair">
@@ -291,7 +344,9 @@
 														<div class="content">
 															<table>
 																<tbody>
+
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td><select class="csc-object-description-phase input-select"/></td>
 																	</tr>
 																</tbody>
@@ -300,6 +355,7 @@
 													</div>
 													
 													<div class="info-column">
+
 														<div class="info-pair">
 															<div class="header">
 																<div class="label">Form</div>
@@ -308,6 +364,8 @@
 																<table>											
 																	<tbody>
 																		<tr>
+																			<!--<td class="table-unselected"></td>-->
+
 																			<td><select class="csc-object-description-form input-select"/></td>
 																		</tr>
 																	</tbody>
@@ -318,6 +376,7 @@
 												</div>
 												
 												<div class="info-column2-50 fl-force-right">
+
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Edition Number</div>
@@ -326,6 +385,8 @@
 															<table>
 																<tbody>
 																	<tr>
+
+																		<!--<td class="table-unselected"></td>-->
 																		<td><input type="text" class="csc-object-description-edition-number"/></td>
 																	</tr>
 																</tbody>
@@ -335,6 +396,7 @@
 													
 													<div class="info-pair">
 														<div class="header">
+
 															<div class="label">Age</div>
 														</div>
 														<div class="content">
@@ -343,6 +405,7 @@
 																	<tr>
 																		<td>Age</td>
 																		<td>Age Qualifier</td>
+
 																		<td>Unit</td>
 																	</tr>
 																</thead>
@@ -351,6 +414,7 @@
 																		<td><input type="text" class="csc-object-description-age"/></td>
 																		<td><input type="text" class="csc-object-description-age-qualifier"/></td>
 																		<td><select class="csc-object-description-age-unit input-select"/></td>
+
 																	</tr>
 																</tbody>
 															</table>
@@ -361,14 +425,17 @@
 														<div class="header">
 															<div class="label">Style</div>
 														</div>
+
 														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-style"/></td>
 																	</tr>
 																</tbody>
 															</table>
+
 														</div>
 													</div>
 													
@@ -379,7 +446,9 @@
 														<div class="content">
 															<table>											
 																<tbody>
+
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td><input type="text" class="csc-object-description-color"/></td>
 																	</tr>
 																</tbody>
@@ -387,6 +456,7 @@
 														</div>
 													</div>
 													<div class="clear"></div>
+
 												</div>
 												<div class="clear"></div>
 												<div class="info-column">
@@ -395,19 +465,24 @@
 															<div class="label">Material</div>
 														</div>
 														<div class="content">
+
 															<table>
 																<thead>
 																	<tr>
+																		<!--<td class="table-select"></td>-->
 																		<td>Material</td>
 																		<td>Material Component</td>
 																		<td>Material Component Note</td>
+
 																		<td>Material Name</td>
 																		<td>Material Source</td>
 																	</tr>
 																</thead>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-material"/></td>
+
 																		<td><input type="text" class="csc-object-description-material-component" disabled="disabled"/></td>
 																		<td><input type="text" class="csc-object-description-material-component-note"/></td>
 																		<td><input type="text" class="csc-object-description-material-name"/></td>
@@ -417,6 +492,7 @@
 															</table>
 														</div>
 													</div>
+
 													
 													<div class="info-pair">
 														<div class="header">
@@ -426,6 +502,8 @@
 															<table>											
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+
 																		<td><textarea class="input-textarea csc-object-description-physical-description"></textarea></td>
 																	</tr>
 																</tbody>
@@ -435,6 +513,7 @@
 												</div>
 												
 												<div class="info-column2-50 fl-force-left">
+
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Object Component</div>
@@ -443,6 +522,8 @@
 															<table>
 																<thead>
 																	<tr>
+
+																		<!--<td class="table-select"></td>-->
 																		<td>Name</td>
 																		<td>Information</td>
 																	</tr>
@@ -450,6 +531,8 @@
 																
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+
 																		<td><select class="csc-object-description-object-component-name input-select"/></td>
 																		<td class="disabled"><input type="text" class="csc-object-description-object-component-information" disabled="disabled"/></td>
 																	</tr>
@@ -460,6 +543,7 @@
 												</div>
 												
 												<div class="info-column2-50 fl-force-right">
+
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Technical Attribute</div>
@@ -468,13 +552,17 @@
 															<table>
 																<thead>
 																	<tr>
+
+																		<!--<td class="table-select"></td>-->
 																		<td>Technical Attribute</td>
 																		<td>Measurement</td>
 																		<td>Unit</td>
 																	</tr>
 																</thead>
 																<tbody>
+
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td><select class="csc-object-description-technical-attribute input-select"/></td>
 																		<td><select class="csc-object-description-technical-attribute-measurement input-select"/></td>
 																		<td><select class="csc-object-description-technical-attribute-unit input-select"/></td>
@@ -482,6 +570,7 @@
 																</tbody>
 															</table>
 														</div>
+
 													</div>
 												</div>
 												<div class="clear"></div>
@@ -491,13 +580,16 @@
 														<div class="header">
 															<div class="label">Dimension</div>
 														</div>
+
 														<div class="content">
 															<table>
 																<thead>
 																	<tr>
+																		<!--<td class="table-select"></td>-->
 																		<td>Date</td>
 																		<td>Part</td>
 																		<td>Dimension</td>
+
 																		<td>Value</td>
 																		<td>Dimension Unit</td>
 																		<td>Value Qualifier</td>
@@ -505,6 +597,8 @@
 																</thead>
 																<tbody>
 																	<tr>
+
+																		<!--<td class="table-unselected"></td>-->
 																		<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-description-dimension-date csc-calendar-date" /><img src="../images/cal.png" alt="calendar"  height="16" width="18"/></td>
 																		<td><select class="csc-object-description-dimension-part input-select"/></td>
 																		<td><select class="csc-object-description-dimension input-select"/></td>
@@ -513,6 +607,7 @@
 																		<td class="field-cal disabled"><input type="text" disabled="disabled" class="csc-object-description-dimension-value-qualifier"/></td>
 																	</tr>
 																</tbody>
+
 															</table>
 														</div>
 													</div>
@@ -523,6 +618,7 @@
 													<div class="fl-container-flex fl-fix information-subgroup">
 														<div class="info-column fl-force-left">
 															<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-description-information-content', this); return false;">
+
 																<span class="header-toggle-sub"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
 																Content
 															</div>
@@ -532,14 +628,17 @@
 																		<div class="header">
 																			<div class="label">Description</div>
 																		</div>
+
 																		<div class="content">
 																			<table>											
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><textarea class="input-textarea csc-object-description-content-description"></textarea></td>
 																					</tr>
 																				</tbody>
 																			</table>
+
 																		</div>
 																	</div>
 																</div>
@@ -549,14 +648,17 @@
 																		<div class="header">
 																			<div class="label">Language</div>
 																		</div>
+
 																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><select class="csc-object-description-content-language input-select"/></td>
 																					</tr>
 																				</tbody>
 																			</table>
+
 																		</div>
 																	</div>
 																	
@@ -567,7 +669,9 @@
 																		<div class="content">
 																			<table>															
 																				<tbody>
+
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-content-activity"/></td>
 																					</tr>
 																				</tbody>
@@ -576,6 +680,7 @@
 																	</div>
 																	
 																	<div class="info-pair">
+
 																		<div class="header">
 																			<div class="label">Concept</div>
 																		</div>
@@ -583,7 +688,9 @@
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-content-concept"/></td>
+
 																					</tr>
 																				</tbody>
 																			</table>
@@ -593,14 +700,17 @@
 																	<div class="info-pair info-pair-date">
 																		<div class="header">
 																			<div class="label">Date</div>
+
 																		</div>
 																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-description-content-date"/><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></td>
 																					</tr>
 																				</tbody>
+
 																			</table>
 																		</div>
 																	</div>
@@ -610,14 +720,17 @@
 																			<div class="label">Position</div>
 																		</div>
 																		<div class="content">
+
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><select class="csc-object-description-content-position input-select"/></td>
 																					</tr>
 																				</tbody>
 																			</table>
 																		</div>
+
 																	</div>
 																	
 																	<div class="info-pair">
@@ -627,13 +740,17 @@
 																		<div class="content">
 																			<table>
 																				<thead>
+
 																					<tr>
+																						<!--<td class="table-select"></td>-->
 																						<td>Object</td>
 																						<td>Object Type</td>
 																					</tr>
 																				</thead>
 																				<tbody>
 																					<tr>
+
+																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" class="csc-object-description-content-object"/></td>
 																						<td class="disabled"><input type="text" class="csc-object-description-content-object-type" disabled="disabled"/></td>
 																					</tr>
@@ -642,6 +759,7 @@
 																		</div>
 																	</div>
 																	<div class="clear"></div>
+
 																</div>
 																
 																<div class="info-column2-50 fl-force-right">
@@ -652,7 +770,9 @@
 																		<div class="content">
 																			<table>															
 																				<tbody>
+
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" disabled="disabled" class="csc-object-description-content-people"/>
                                                                                             <!--<div class="csc-object-description-content-people-autocomplete"></div>--></td>
 																					</tr>
@@ -660,6 +780,7 @@
 																			</table>
 																		</div>
 																	</div>
+
 																	
 																	<div class="info-pair">
 																		<div class="header">
@@ -670,6 +791,7 @@
 																				<tbody>
 																					<tr>
 																						<td><input type="text" class="csc-object-description-content-person"/>
+
                                                                                             <div class="csc-object-description-content-person-autocomplete"></div></td>
 																					</tr>
 																				</tbody>
@@ -680,14 +802,17 @@
 																	<div class="info-pair">
 																		<div class="header">
 																			<div class="label">Place</div>
+
 																		</div>
 																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-content-place"/></td>
 																					</tr>
 																				</tbody>
+
 																			</table>
 																		</div>
 																	</div>
@@ -697,14 +822,17 @@
 																			<div class="label">Script</div>
 																		</div>
 																		<div class="content">
+
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><select class="csc-object-description-content-script input-select"/></td>
 																					</tr>
 																				</tbody>
 																			</table>
 																		</div>
+
 																	</div>
 																	
 																	<div class="info-pair">
@@ -715,6 +843,8 @@
 																			<table>															
 																				<tbody>
 																					<tr>
+
+																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" class="csc-object-description-content-organization"/>
                                                                                             <div class="csc-object-description-content-organization-autocomplete"></div></td>
 																					</tr>
@@ -724,6 +854,7 @@
 																	</div>
 																	
 																	<div class="info-pair">
+
 																		<div class="header">
 																			<div class="label">Event Name</div>
 																		</div>
@@ -731,13 +862,17 @@
 																			<table>
 																				<thead>
 																					<tr>
+																						<!--<td class="table-select"></td>-->
+
 																						<td>Event Name</td>
 																						<td>Event Name Type</td>
 																					</tr>
 																				</thead>
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-content-event-name"/></td>
+
 																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-description-content-event-name-type"/></td>
 																					</tr>
 																				</tbody>
@@ -748,21 +883,26 @@
 																	<div class="info-pair">
 																		<div class="header">
 																			<div class="label">Other</div>
+
 																		</div>
 																		<div class="content">
 																			<table>
 																				<thead>
 																					<tr>
+																						<!--<td class="table-select"></td>-->
 																						<td>Other</td>
 																						<td>Other Type</td>
+
 																					</tr>
 																				</thead>
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td class="disabled"><input type="text" class="csc-object-description-content-other" disabled="disabled"/></td>
 																						<td class="disabled"><input type="text" class="csc-object-description-content-other-type" disabled="disabled"/></td>
 																					</tr>
 																				</tbody>
+
 																			</table>
 																		</div>
 																	</div>
@@ -773,13 +913,16 @@
 																<div class="info-column">
 																	<div class="info-pair">
 																		<div class="header">
+
 																			<div class="label">Note</div>
 																		</div>
 																		<div class="content">
 																			<table>											
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><textarea class="input-textarea csc-object-description-content-note"></textarea></td>
+
 																					</tr>
 																				</tbody>
 																			</table>
@@ -789,6 +932,7 @@
 																<div class="clear"></div>
 															</div>
 														</div>
+
 														<div class="clear"></div>
 													</div>
 													<div class="clear"></div>
@@ -799,6 +943,7 @@
 														<div class="info-column">
 															<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-description-information-inscription-content', this); return false;">
 																<span class="header-toggle-sub"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+
 																Textual Inscription
 															</div>
 															<div class="fl-container-flex fl-fix content main" id="toggle-description-information-inscription-content">
@@ -808,14 +953,17 @@
 																			<div class="label">Inscription Content</div>
 																		</div>
 																		<div class="content">
+
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><textarea class="input-textarea csc-object-description-inscription-content"></textarea></td>
 																					</tr>
 																				</tbody>
 																			</table>
 																		</div>
+
 																	</div>
 																</div>
 																
@@ -825,14 +973,17 @@
 																			<div class="label">Inscriber</div>
 																		</div>
 																		<div class="content">
+
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" class="csc-object-description-inscription-content-inscriber"/>
                                                                                             <div class="csc-object-description-inscription-content-inscriber-autocomplete"></div></td>
 																					</tr>
 																				</tbody>
 																			</table>
+
 																		</div>
 																	</div>
 																	
@@ -843,7 +994,9 @@
 																		<div class="content">
 																			<table>															
 																				<tbody>
+
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><select class="csc-object-description-inscription-content-language input-select"/></td>
 																					</tr>
 																				</tbody>
@@ -852,6 +1005,7 @@
 																	</div>
 																		
 																	<div class="info-pair info-pair-date">
+
 																		<div class="header">
 																			<div class="label">Date</div>
 																		</div>
@@ -859,7 +1013,9 @@
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-description-inscription-content-date"/><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></td>
+
 																					</tr>
 																				</tbody>
 																			</table>
@@ -870,14 +1026,17 @@
 																<div class="info-column2-50 fl-force-right">
 																	<div class="info-pair">
 																		<div class="header">
+
 																			<div class="label">Position</div>
 																		</div>
 																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><select class="csc-object-description-inscription-content-position input-select"/></td>
 																					</tr>
+
 																				</tbody>
 																			</table>
 																		</div>
@@ -887,14 +1046,17 @@
 																		<div class="header">
 																			<div class="label">Script</div>
 																		</div>
+
 																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><select class="csc-object-description-inscription-content-script input-select"/></td>
 																					</tr>
 																				</tbody>
 																			</table>
+
 																		</div>
 																	</div>
 																	
@@ -905,7 +1067,9 @@
 																		<div class="content">
 																			<table>															
 																				<tbody>
+
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><select class="csc-object-description-inscription-content-type input-select"/></td>
 																					</tr>
 																				</tbody>
@@ -914,6 +1078,7 @@
 																	</div>
 																	
 																	<div class="info-pair">
+
 																		<div class="header">
 																			<div class="label">Method</div>
 																		</div>
@@ -921,7 +1086,9 @@
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" class="csc-object-description-inscription-content-method" disabled="disabled"/></td>
+
 																					</tr>
 																				</tbody>
 																			</table>
@@ -932,6 +1099,7 @@
 																
 																<div class="info-column">
 																	<div class="info-pair">
+
 																		<div class="header">
 																			<div class="label">Interpretation</div>
 																		</div>
@@ -939,7 +1107,9 @@
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td class="field-cal disabled"><textarea class="input-textarea csc-object-description-inscription-content-interpretation"></textarea></td>
+
 																					</tr>
 																				</tbody>
 																			</table>
@@ -949,14 +1119,17 @@
 																	<div class="info-pair">
 																		<div class="header">
 																			<div class="label">Translation</div>
+
 																		</div>
 																		<div class="content">
 																			<table>
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" class="csc-object-description-inscription-content-translation"/></td>
 																					</tr>
 																				</tbody>
+
 																			</table>
 																		</div>
 																	</div>
@@ -966,14 +1139,17 @@
 																			<div class="label">Transliteration</div>
 																		</div>
 																		<div class="content">
+
 																			<table>
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" class="csc-object-description-inscription-content-transliteration"/></td>
 																					</tr>
 																				</tbody>
 																			</table>
 																		</div>
+
 																	</div>
 																	<div class="clear"></div>
 																</div>
@@ -984,6 +1160,7 @@
 												</div>
 												
 												<div class="info-column">
+
 													<div class="fl-container-flex fl-fix information-subgroup">
 														<div class="info-column">
 															<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-description-information-inscription-description', this); return false;">
@@ -994,6 +1171,7 @@
 															<div class="fl-container-flex fl-fix content main" id="toggle-description-information-inscription-description">
 																<div class="info-column">
 																	<div class="info-pair">
+
 																		<div class="header">
 																			<div class="label">Inscription Description</div>
 																		</div>
@@ -1001,6 +1179,8 @@
 																			<table>
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+
 																						<td><textarea class="input-textarea csc-object-description-inscription-description"></textarea></td>
 																					</tr>
 																				</tbody>
@@ -1010,6 +1190,7 @@
 																</div>
 																
 																<div class="info-column2-50 fl-force-left">
+
 																	<div class="info-pair">
 																		<div class="header">
 																			<div class="label">Inscriber</div>
@@ -1018,6 +1199,8 @@
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+
 																						<td><input type="text" class="csc-object-description-inscription-description-inscriber"/>
                                                                                             <div class="csc-object-description-inscription-description-inscriber-autocomplete"></div></td>
 																					</tr>
@@ -1028,14 +1211,17 @@
 																		
 																	<div class="info-pair info-pair-date">
 																		<div class="header">
+
 																			<div class="label">Date</div>
 																		</div>
 																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-description-inscription-description-date"/><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></td>
 																					</tr>
+
 																				</tbody>
 																			</table>
 																		</div>
@@ -1046,13 +1232,16 @@
 																<div class="info-column2-50 fl-force-right">
 																	<div class="info-pair">
 																		<div class="header">
+
 																			<div class="label">Position</div>
 																		</div>
 																		<div class="content">
 																			<table>
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><select class="csc-object-description-inscription-description-position input-select"/></td>
+
 																					</tr>
 																				</tbody>
 																			</table>
@@ -1062,14 +1251,17 @@
 																	<div class="info-pair">
 																		<div class="header">
 																			<div class="label">Type</div>
+
 																		</div>
 																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><select class="csc-object-description-inscription-description-type input-select"/></td>
 																					</tr>
 																				</tbody>
+
 																			</table>
 																		</div>
 																	</div>
@@ -1079,14 +1271,17 @@
 																			<div class="label">Method</div>
 																		</div>
 																		<div class="content">
+
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" class="csc-object-description-inscription-description-method" disabled="disabled"/></td>
 																					</tr>
 																				</tbody>
 																			</table>
 																		</div>
+
 																	</div>
 																</div>
 																
@@ -1096,13 +1291,16 @@
 																			<div class="label">Interpretation</div>
 																		</div>
 																		<div class="content">
+
 																			<table>
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><textarea class="input-textarea csc-object-description-inscription-description-interpretation"></textarea></td>
 																					</tr>
 																				</tbody>
 																			</table>
+
 																		</div>
 																	</div>
 																</div>
@@ -1112,6 +1310,7 @@
 													</div>
 												</div>
 												<div class="clear"></div>
+
 											</div>
 										</div>
 									</div>
@@ -1122,6 +1321,7 @@
 												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
 												Object Production Information
 											</div>
+
 											<div class="fl-container-flex fl-fix content main" id="toggle-object-production">
 												<div class="info-pair">
 													<div class="header">
@@ -1130,13 +1330,16 @@
 													<div class="content">
 														<table>
 															<tbody>
+
 																<tr>
+																	<!--<td class="table-unselected"></td>-->
 																	<td><textarea class="input-textarea csc-object-production-reason"></textarea></td>
 																</tr>
 															</tbody>
 														</table>
 													</div>
 												</div>
+
 										
 												<div class="info-column2-50 fl-force-left">
 													<div class="info-pair-date">
@@ -1146,7 +1349,9 @@
 														<div class="content">
 															<table>
 																<tbody>
+
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-production-date csc-calendar-date" /><img src="../images/cal.png" alt="calendar"  height="16" width="18"/></td>
 																	</tr>
 																</tbody>
@@ -1154,6 +1359,7 @@
 														</div>
 													</div>
 													<div class="info-pair">
+
 														<div class="header">
 															<div class="label">Production Technique</div>
 														</div>
@@ -1162,13 +1368,16 @@
 																<thead>
 																	<tr>
 																		<td>Technique</td>
+
 																		<td>Technique Type</td>
 																	</tr>
 																</thead>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-production-technique"/></td>
 																		<td class="disabled"><select disabled="disabled" class="csc-object-production-technique-type input-select"/></td>
+
 																	</tr>
 																</tbody>
 															</table>
@@ -1179,13 +1388,16 @@
 												<div class="info-column2-50 fl-force-right">															
 													<div class="info-pair">
 														<div class="header">
+
 															<div class="label">Production People</div>
 														</div>
 														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td><input type="text" disabled="disabled" class="csc-object-production-people"/>
+
                                                                             <!--<div class="csc-object-production-people-autocomplete"></div>--></td>
 																	</tr>
 																</tbody>
@@ -1195,14 +1407,17 @@
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Production Person</div>
+
 														</div>
 														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td><input type="text" class="csc-object-production-person"/>
                                                                             <div class="csc-object-production-person-autocomplete"></div></td>
 																	</tr>
+
 																</tbody>
 															</table>
 														</div>
@@ -1211,14 +1426,17 @@
 														<div class="header">
 															<div class="label">Production Place</div>
 														</div>
+
 														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-production-place"/></td>
 																	</tr>
 																</tbody>
 															</table>
+
 														</div>
 													</div>
 													<div class="info-pair">
@@ -1227,14 +1445,17 @@
 														</div>
 														<div class="content">
 															<table>
+
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td><input type="text" class="csc-object-production-organization"/>
                                                                             <div class="csc-object-production-organization-autocomplete"></div></td>
 																	</tr>
 																</tbody>
 															</table>
 														</div>
+
 													</div>
 												</div>
 												
@@ -1244,13 +1465,16 @@
 															<div class="label">Production Note</div>
 														</div>
 														<div class="content">
+
 															<table>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td><textarea class="input-textarea csc-object-production-note"></textarea></td>
 																	</tr>
 																</tbody>
 															</table>
+
 														</div>
 													</div>
 												</div>
@@ -1261,6 +1485,7 @@
 									
 									<div class="fl-container-flex fl-fix information-group">
 										<div class="info-column">
+
 											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-history', this); return false;">
 												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
 												Object History and Association Information
@@ -1271,6 +1496,7 @@
 												<div class="info-column">
 													<div class="fl-container-flex fl-fix information-subgroup">
 														<div class="info-column">
+
 															<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-history-associations', this); return false;">
 																<span class="header-toggle-sub"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
 																Associations
@@ -1282,6 +1508,7 @@
 																	<div class="info-pair">
 																		<div class="header">
 																			<div class="label">Associated Activity</div>
+
 																		</div>
 																		<div class="content">
 																			<table>
@@ -1290,14 +1517,17 @@
 																						<td>Associated Activity</td>
 																						<td>Associated Activity Note</td>
 																					</tr>
+
 																				</thead>
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-association-activity"/></td>
 																						<td><input type="text" class="csc-object-history-association-activity-note"/></td>
 																					</tr>
 																				</tbody>
 																			</table>
+
 																		</div>
 																	</div>
 																	
@@ -1309,6 +1539,7 @@
 																		</div>
 																		<div class="content">
 																			<table>
+
 																				<thead>
 																					<tr>
 																						<td>Associated Object</td>
@@ -1317,6 +1548,8 @@
 																				</thead>
 																				<tbody>
 																					<tr>
+
+																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" class="csc-object-history-association-object"/></td>
 																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-association-object-type"/></td>
 																					</tr>
@@ -1326,6 +1559,7 @@
 																	</div>
 																	
 																	<div class="info-pair">
+
 																		<div class="header">
 																			<div class="label">Associated Concept</div>
 																		</div>
@@ -1333,6 +1567,8 @@
 																			<table>
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
+
 																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-association-concept"/></td>
 																					</tr>
 																				</tbody>
@@ -1343,14 +1579,17 @@
 																	<div class="info-pair">
 																		<div class="header">
 																			<div class="label">Associated Cultural Affinity</div>
+
 																		</div>
 																		<div class="content">
 																			<table>
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-association-cultural-affinity"/></td>
 																					</tr>
 																				</tbody>
+
 																			</table>
 																		</div>
 																	</div>
@@ -1360,14 +1599,17 @@
 																			<div class="label">Associated Organization</div>
 																		</div>
 																		<div class="content">
+
 																			<table>
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" class="csc-object-history-association-organization"/>
 																							<div class="csc-object-history-association-organization-autocomplete"></div></td>
 																					</tr>
 																				</tbody>
 																			</table>
+
 																		</div>
 																	</div>
 																	
@@ -1377,14 +1619,17 @@
 																		</div>
 																		<div class="content">
 																			<table>
+
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" disabled="disabled" class="csc-object-history-association-people"/>
 																							<!--<div class="csc-object-history-association-people-autocomplete"></div>--></td>
 																					</tr>
 																				</tbody>
 																			</table>
 																		</div>
+
 																	</div>
 																	
 																	<div class="info-pair">
@@ -1394,7 +1639,9 @@
 																		<div class="content">
 																			<table>
 																				<tbody>
+
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" class="csc-object-history-association-person"/>
 																							<div class="csc-object-history-association-person-autocomplete"></div></td>
 																					</tr>
@@ -1402,6 +1649,7 @@
 																			</table>
 																		</div>
 																	</div>
+
 																	
 																	<div class="info-pair">
 																		<div class="header">
@@ -1411,6 +1659,8 @@
 																			<table>
 																				<tbody>
 																					<tr>
+
+																						<!--<td class="table-unselected"></td>-->
 																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-association-place"/></td>
 																					</tr>
 																				</tbody>
@@ -1420,14 +1670,17 @@
 																	
 																	<div class="info-pair">
 																		<div class="header">
+
 																			<div class="label">Associated Type</div>
 																		</div>
 																		<div class="content">
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td class="disabled"><input disabled="disabled" class="csc-object-history-association-type"/></td>
 																					</tr>
+
 																				</tbody>
 																			</table>
 																		</div>
@@ -1439,6 +1692,7 @@
 																<div class="info-column2-50 fl-force-right">
 																	<div class="info-pair">
 																		<div class="header">
+
 																			<div class="label">Associated Event Name</div>
 																		</div>
 																		<div class="content">
@@ -1447,14 +1701,17 @@
 																					<tr>
 																						<td>Associated Event Name</td>
 																						<td>Associated Event Name type</td>
+
 																					</tr>
 																				</thead>
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-association-event"/></td>
 																						<td class="disabled"><input type="text" disabled="disabled" class="csc-object-history-association-event-name"/></td>
 																					</tr>
 																				</tbody>
+
 																			</table>
 																		</div>
 																	</div>
@@ -1464,14 +1721,17 @@
 																			<div class="label">Associated Event Organization</div>
 																		</div>
 																		<div class="content">
+
 																			<table>
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" class="csc-object-history-association-event-organization"/>
 																							<div class="csc-object-history-association-event-organization-autocomplete"></div></td>
 																					</tr>
 																				</tbody>
 																			</table>
+
 																		</div>
 																	</div>
 																	
@@ -1481,14 +1741,17 @@
 																		</div>
 																		<div class="content">
 																			<table>
+
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" disabled="disabled" class="csc-object-history-association-event-people"/>
 																							<!--<div class="csc-object-history-association-event-people-autocomplete"></div>--></td>
 																					</tr>
 																				</tbody>
 																			</table>
 																		</div>
+
 																	</div>
 																	
 																	
@@ -1499,7 +1762,9 @@
 																		<div class="content">
 																			<table>
 																				<tbody>
+
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" class="csc-object-history-association-event-person"/>
 																							<div class="csc-object-history-association-event-person-autocomplete"></div></td>
 																					</tr>
@@ -1507,6 +1772,7 @@
 																			</table>
 																		</div>
 																	</div>
+
 																	
 																	<div class="info-pair">
 																		<div class="header">
@@ -1516,6 +1782,8 @@
 																			<table>
 																				<tbody>
 																					<tr>
+
+																						<!--<td class="table-unselected"></td>-->
 																						<td><input type="text" disabled="disabled" class="csc-object-history-association-event-place"/>
 																							<!--<div class="csc-object-history-association-event-place-autocomplete"></div>--></td>
 																					</tr>
@@ -1525,6 +1793,7 @@
 																	</div>
 																	
 																	<div class="info-pair info-pair-date">
+
 																		<div class="header">
 																			<div class="label">Associated Date</div>
 																		</div>
@@ -1532,7 +1801,9 @@
 																			<table>															
 																				<tbody>
 																					<tr>
+																						<!--<td class="table-unselected"></td>-->
 																						<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-history-association-date"/><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></td>
+
 																					</tr>
 																				</tbody>
 																			</table>
@@ -1542,14 +1813,16 @@
 																	<div class="info-pair">
 																		<div class="header">
 																			<div class="label">Association Note</div>
+
 																		</div>
 																		<div class="content">
 																			<table>
 																				<tbody>
 																					<tr>
-																						
+																						<!--<td class="table-unselected"></td>-->
 																						<td><textarea class="input-textarea csc-object-history-association-note"></textarea></td>
 																					</tr>
+
 																				</tbody>
 																			</table>
 																		</div>
@@ -1559,6 +1832,7 @@
 															</div>
 														</div>
 													</div>
+
 												</div>
 												<div class="clear"></div>
 												<!-- END Associations sub-group -->
@@ -1568,13 +1842,16 @@
 														<div class="header">
 															<div class="label">Object History Note</div>
 														</div>
+
 														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td><textarea class="input-textarea csc-object-history-association-object-history-note"></textarea></td>
 																	</tr>
 																</tbody>
+
 															</table>
 														</div>
 													</div>
@@ -1584,6 +1861,7 @@
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Usage</div>
+
 														</div>
 														<div class="content">
 															<table>
@@ -1592,6 +1870,7 @@
 																		<td>Usage</td>
 																		<td>Usage Notes</td>
 																	</tr>
+
 																</thead>
 																<tbody>
 																	<tr>
@@ -1601,6 +1880,7 @@
 																</tbody>
 															</table>
 														</div>
+
 													</div>
 												</div>
 												
@@ -1610,6 +1890,7 @@
 															<div class="label">Owner</div>
 														</div>
 														<div class="content">
+
 															<table>
 																<thead>
 																	<tr>
@@ -1617,12 +1898,14 @@
 																		<td>Access</td>
 																		<td>Category</td>
 																		<td>Dates</td>
+
 																		<td>Exchange Method</td>
 																		<td>Exchange Note</td>
 																		<td>Exchange Price - Denotionation</td>
 																		<td>Exchange Price - Value</td>
 																		<td>Ownership Place</td>
 																	</tr>
+
 																</thead>
 																<tbody>
 																	<tr>
@@ -1632,6 +1915,7 @@
 																		<td><select class="csc-object-history-association-category input-select"/></td>
 																		<td class="field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-object-history-association-dates disabled"/><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></td>
 																		<td><select class="csc-object-history-association-exchange-method input-select"/></td>
+
 																		<td><input type="text" class="csc-object-history-association-exchange-note"/></td>
 																		<td><select class="csc-object-history-association-denomination input-select"/></td>
 																		<td><input type="text" class="csc-object-history-association-exchange-price-value"/></td>
@@ -1641,6 +1925,7 @@
 															</table>
 														</div>
 													</div>
+
 												</div>
 												<div class="clear"></div>
 											</div>
@@ -1651,6 +1936,7 @@
 										<div class="info-column">
 											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-owner', this); return false;">
 												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+
 												Object Owner's Contribution Information
 											</div>
 											<div class="fl-container-flex fl-fix content main" id="toggle-object-owner">
@@ -1660,13 +1946,16 @@
 															<div class="label">Owner's Personal Experience</div>
 														</div>
 														<div class="content">
+
 															<table>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td><textarea class="input-textarea csc-object-owner-experience"></textarea></td>
 																	</tr>
 																</tbody>
 															</table>
+
 														</div>
 													</div>
 												</div>
@@ -1676,13 +1965,16 @@
 														<div class="header">
 															<div class="label">Owner's Personal Response</div>
 														</div>
+
 														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td><textarea class="input-textarea csc-object-owner-response"></textarea></td>
 																	</tr>
 																</tbody>
+
 															</table>
 														</div>
 													</div>
@@ -1692,14 +1984,17 @@
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Owner's Reference</div>
+
 														</div>
 														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td><input type="text" class="csc-object-owner-reference"/></td>
 																	</tr>
 																</tbody>
+
 															</table>
 														</div>
 													</div>
@@ -1709,13 +2004,16 @@
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Owner's Contribution Note</div>
+
 														</div>
 														<div class="content">
 															<table>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td><textarea class="input-textarea csc-object-owner-contribution-note"></textarea></td>
 																	</tr>
+
 																</tbody>
 															</table>
 														</div>
@@ -1725,6 +2023,7 @@
 											</div>
 										</div>
 									</div>
+
 									
 									<div class="fl-container-flex fl-fix information-group">
 										<div class="info-column">
@@ -1735,6 +2034,7 @@
 											<div class="fl-container-flex fl-fix content main" id="toggle-object-viewer">
 												<div class="info-column fl-force-left">
 													<div class="info-pair">
+
 														<div class="header">
 															<div class="label">Viewer's Role</div>
 														</div>
@@ -1742,6 +2042,8 @@
 															<table>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+
 																		<td><input type="text" class="csc-object-viewer-role"/></td>
 																	</tr>
 																</tbody>
@@ -1752,6 +2054,7 @@
 												
 												<div class="info-column fl-force-left">
 													<div class="info-pair">
+
 														<div class="header">
 															<div class="label">Viewer's Personal Experience</div>
 														</div>
@@ -1759,6 +2062,8 @@
 															<table>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
+
 																		<td><textarea class="input-textarea csc-object-viewer-experience"></textarea></td>
 																	</tr>
 																</tbody>
@@ -1768,6 +2073,7 @@
 												</div>
 												
 												<div class="info-column fl-force-left">
+
 													<div class="info-pair">
 														<div class="header">
 															<div class="label">Viewer's Personal Response</div>
@@ -1776,6 +2082,8 @@
 															<table>
 																<tbody>
 																	<tr>
+
+																		<!--<td class="table-unselected"></td>-->
 																		<td><textarea class="input-textarea csc-object-viewer-response"></textarea></td>
 																	</tr>
 																</tbody>
@@ -1783,6 +2091,7 @@
 														</div>
 													</div>
 												</div>
+
 												
 												<div class="info-column fl-force-left">
 													<div class="info-pair">
@@ -1792,7 +2101,9 @@
 														<div class="content">
 															<table>
 																<tbody>
+
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td><input type="text" class="csc-object-viewer-reference"/></td>
 																	</tr>
 																</tbody>
@@ -1800,6 +2111,7 @@
 														</div>
 													</div>
 												</div>
+
 												
 												<div class="info-column fl-force-left">
 													<div class="info-pair">
@@ -1809,13 +2121,16 @@
 														<div class="content">
 															<table>
 																<tbody>
+
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td><textarea class="input-textarea csc-object-viewer-contribution-note"></textarea></td>
 																	</tr>
 																</tbody>
 															</table>
 														</div>
 													</div>
+
 												</div>
 												<div class="clear"></div>
 											</div>
@@ -1828,6 +2143,7 @@
 										<div class="info-column">
 											<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-ref-info', this); return false;">
 												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+
 												Reference Information
 											</div>
 											<div class="fl-container-flex fl-fix content main" id="toggle-ref-info">
@@ -1837,14 +2153,17 @@
 															<div class="label">Reference</div>
 														</div>
 														<div class="content">
+
 															<table>
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td class="disabled"><input type="text" disabled="disabled" class="csc-reference-reference"/></td>
 																	</tr>
 																</tbody>
 															</table>
 														</div>
+
 													</div>	
 												</div>
 												
@@ -1855,8 +2174,10 @@
 														</div>
 														<div class="content">
 															<table>
+
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td><input type="text" class="csc-reference-catalog-number"/></td>
 																	</tr>
 																</tbody>
@@ -1864,6 +2185,7 @@
 														</div>
 													</div>	
 												</div>
+
 												<div class="clear"></div>
 											</div>
 										</div>
@@ -1875,6 +2197,7 @@
 												<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
 												Object Collection Information
 											</div>
+
 											<div class="fl-container-flex fl-fix content main" id="toggle-object-collection">
 												<div class="info-column fl-force-left">
 													<div class="info-pair">
@@ -1883,8 +2206,10 @@
 														</div>
 														<div class="content">
 															<table>
+
 																<tbody>
 																	<tr>
+																		<!--<td class="table-unselected"></td>-->
 																		<td class="disabled"><input type="text" disabled="disabled" class="csc-object-collection-field-collection-event-name"/></td>
 																	</tr>
 																</tbody>
@@ -1892,6 +2217,7 @@
 														</div>
 													</div>	
 												</div>
+
 												<div class="clear"></div>
 											</div>
 										</div>
@@ -1998,6 +2324,7 @@
 									<div class="hidden csc-message-container cs-message">
 										<span class="csc-timestamp cs-timestamp">time</span>
 										<span class="csc-message">Save successful!</span>
+
 									</div>
 
 									<div class="csc-error-dialog">
@@ -2008,6 +2335,7 @@
 								<div class="fl-container-flex button-row">
 									<a href="#"><input type="button" class="primary saveButton csc-save" value="Save" /></a>
 									<a href="findedit.html"><input type="button" class="cancelButton" value="Cancel" /></a>
+
 									<div class="clear"></div>
 								</div>
 								
