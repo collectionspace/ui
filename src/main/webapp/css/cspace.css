@@ -410,7 +410,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .empty-required, .empty-required:focus {outline:1px solid #D10010; background-color:#FFE7E3;}
 .csc-role-list {padding-top:12px;}
 .csc-listEditor-details-none {background-color:#C2D7EC; padding:30px; color:white; font-size:40px; font-weight:bold; line-height:110%;}
-.details-none {background:transparent url("../images/whiteArrow.png") no-repeat 0 center; padding-left:45px; margin-top:20px; font-size:26px; line-height:110%;}
+.details-none {background:transparent url("../images/whiteArrow.png") no-repeat 0 center; padding: 5px 0 0 45px; margin-top:15px; height: 35px; font-size:26px; line-height:110%;}
 
 .permission-retails {}
 
