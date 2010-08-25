@@ -80,8 +80,8 @@
 
                                 <div class="csc-user-list">
 									<div class="fl-container-flex fl-fix information-group">
-										<div class="fl-container-flex fl-fix content-no">
-											<div class="info-column2-30 fl-force-left">
+										<div class="fl-container-flex fl-fix">
+											<div class="info-column2-25 fl-force-left">
 												<div>
 													<div class="fl-container-flex header fl-force-left">Users</div>
 													<input type="submit" class="cs-new-user-submit csc-listEditor-createNew button fl-force-right" value="Create New User" />
@@ -112,13 +112,13 @@
 												<div class="clear"></div>
 											</div>
 											
-											<div class="info-column2-70 fl-force-right">
+											<div class="info-column2-75 fl-force-right">
 												<div class="fl-container-flex header">User Details</div>
 												<div class="user-details">
 													<div class="user-details-fields csc-listEditor-details-none">
-														No user selected. Please select a user from the list, or create a new user.
+														No user selected. <div class="details-none">Please select a user from the list, or create a new user.</div>
 													</div>
-													<div class="user-details-fields csc-listEditor-details">
+													<div class="user-details-fields information-subgroup csc-listEditor-details">
 													    <div class="fl-container-flex button-row details">
                                                             <input type="button" class="primary saveButton csc-save" value="Save" />
                                                             <input type="button" class="csc-cancel cancelButton" value="Cancel" />
@@ -134,20 +134,15 @@
 	                                                        <div class="info-pair">
 	                                                            <div class="label">Email Address <span class="required">*</span></div><div class="user-input"><input type="text" class="input-alpha csc-user-email csc-required" name=""/></div>
 	                                                        </div>
-	<!--
-															<div class="info-pair">
-																<div class="label">User ID</div><div class="user-input"><input type="text" class="input-alpha csc-user-userID csc-required" name=""/></div>
-															</div>
-	-->													
 															<div class="info-pair no-padding">
 																<div class="label">Full Name  <span class="required">*</span></div><div class="user-input"><input type="text" class="input-alpha csc-user-userName csc-required" name=""/></div>
 															</div>
 	
 	                                                        <div class="csc-details-hideOnEdit">
 																<div class="info-pair">
+																	<div class="label">Password  <span class="required">*</span></div><div class="user-input"><input type="password" class="input-alpha csc-user-password csc-required csc-passwordValidator-password" name=""/></div>
 																	<div class="password-instructions">Password must be between 8 and 24 characters.</div>
-	    															<div class="label">Password  <span class="required">*</span></div><div class="user-input"><input type="password" class="input-alpha csc-user-password csc-required csc-passwordValidator-password" name=""/></div>
-	    														</div>    													
+																</div>    													
 	    														<div class="info-pair">
 	    															<div class="label">Confirm Password  <span class="required">*</span></div><div class="user-input"><input type="password" class="input-alpha csc-user-passwordConfirm csc-required" name=""/></div>
 	    														</div>
@@ -187,6 +182,7 @@
                                                                 </div>
                                                             </div>
 	                                                    </div>
+														<div class="clear"></div>
 													</div>
 													<div class="clear"></div>
 												</div>
