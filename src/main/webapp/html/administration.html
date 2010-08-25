@@ -43,8 +43,21 @@
 				</div>
 			
 				<div id="all-content" class="fl-fix">
+					<div id="secondary-tab">
+						<div id="secondary-nav-menu">
+							<ul class="menu-record ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+								<li><a href="administration.html" class="primary current">Users</a></li>
+								<li><a href="role.html">Roles and Permissions</a></li>
+								<li><a class="inactive">Help Management</a></li>
+								<li><a class="inactive">Reporting</a></li>
+								<li><a class="inactive">Numbering</a></li>
+								<li><a class="inactive">Templates</a></li>
+							</ul>
+						</div>
+					</div>
+				
 					<div class="fl-fix fl-container-flex fl-col-mixed2">
-						<div class="fl-container-pivot-users fl-container-admin-menu fl-force-left">
+						<!--<div class="fl-container-pivot-users fl-container-admin-menu fl-force-left">
 							<div class="fl-container-left-inner">
 								<ul>
 									<li class="selected">Users</li>
@@ -55,9 +68,9 @@
 									<li class="inactive">Templates</li>
 								</ul>
 							</div>
-						</div>
+						</div>-->
 						
-						<div class="fl-container-admin fl-force-right">
+						<div class="fl-container-admin fl-force-left">
 							<div class="main-users-page csc-users-userAdmin">
                                 <!-- search form -->
 								<div id="search-box">
@@ -67,14 +80,14 @@
 
                                 <div class="csc-user-list">
 									<div class="fl-container-flex fl-fix information-group">
-										<div class="fl-container-flex fl-fix content">
-											<div class="info-column2-40 fl-force-left">
+										<div class="fl-container-flex fl-fix content-no">
+											<div class="info-column2-30 fl-force-left">
 												<div>
 													<div class="fl-container-flex header fl-force-left">Users</div>
 													<input type="submit" class="cs-new-user-submit csc-listEditor-createNew button fl-force-right" value="Create New User" />
 													<div class="clear"></div>
 												</div>
-												<div class="overflow-user-list csc-listEditor-list">
+												<div class="overflow-list csc-listEditor-list">
 													<table class="user-table">
 														<thead>
 															<tr>
@@ -99,23 +112,24 @@
 												<div class="clear"></div>
 											</div>
 											
-											<div class="info-column2-60 fl-force-right">
+											<div class="info-column2-70 fl-force-right">
 												<div class="fl-container-flex header">User Details</div>
 												<div class="user-details">
-                                                    <div class="hidden csc-message-container cs-message">
-                                                        <span class="csc-timestamp cs-timestamp">time</span>
-                                                        <span class="csc-message">Save successful!</span>
-                                                    </div>
-                                                    <div class="user-details-fields csc-listEditor-details-none">
-                                                        No user selected. Please select a user from the list, or create a new user.
-                                                    </div>
+													<div class="user-details-fields csc-listEditor-details-none">
+														No user selected. Please select a user from the list, or create a new user.
+													</div>
 													<div class="user-details-fields csc-listEditor-details">
-													    <div class="fl-container-flex button-row">
+													    <div class="fl-container-flex button-row details">
                                                             <input type="button" class="primary saveButton csc-save" value="Save" />
                                                             <input type="button" class="csc-cancel cancelButton" value="Cancel" />
                                                             <input type="button" class="csc-delete deleteButton" value="Delete" />
                                                             <div class="clear"></div>
                                                         </div>
+														 
+														<div class="hidden csc-message-container cs-message">
+															<span class="csc-timestamp cs-timestamp">time</span>
+															<span class="csc-message">Save successful!</span>
+														</div>
                                                         <div class="info-column2-50 fl-force-left">
 	                                                        <div class="info-pair">
 	                                                            <div class="label">Email Address <span class="required">*</span></div><div class="user-input"><input type="text" class="input-alpha csc-user-email csc-required" name=""/></div>
@@ -146,12 +160,12 @@
 	    														</div>
 	                                                        </div>
 	                                                    </div>
-	                                                    <div class="info-column2-50 fl-force-right">
+	                                                    <div class="info-column2-50 fl-force-left">
 	                                                        <div class="info-pair">
 	                                                            <div class="header">
 											                        <div class="label">Roles</div>
 											                    </div>
-                                                                <div class="content">
+                                                                <div class="overflowdiv-admin">
                                                                     <table>
 		                                                                <thead>
 		                                                                    <tr>

@@ -9,7 +9,7 @@ a.flc-cabinet-header {text-decoration:none;}
 .radio-row {/*position:absolute; left:0;*/ float:left;}
 .radio {padding: 0 8px;}
 .permission-name {padding-left:10px; margin:0; margin-top:3px; float:left;}
-.role-buttons {padding-top:10px;}
+.role-buttons {margin-top:-38px; margin-bottom:12px; /*position:relative; top:-35px; margin-bottom:-35px;*/}
 .addrole {float:right; margin-bottom:-18px;}
 
 .cs-permissions-table {border: 1px solid #C7CFD4; font-size:11px; line-height:100%;}
