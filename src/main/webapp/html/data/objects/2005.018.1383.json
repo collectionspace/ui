@@ -159,5 +159,17 @@
             "csid": "48c74123-e547-4ff1-81d2",
             "recordtype": "person" 
         } 
-    ]
+    ],
+    "relations": {
+        "loanin": [
+            {
+                "summary": "Bing Crosby Ice Cream Sales, Inc.",
+                "csid": "741-852-963",
+                "number": "LI2010.1",
+                "relid": "e8d20612-eaea-4e90-bc36",
+                "relationshiptype": "affects",
+                "recordtype": "loanin"
+            }
+        ]
+    }
 }

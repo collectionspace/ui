@@ -47,6 +47,19 @@
         ".csc-loanIn-lender-titlebar": "${fields.lenders.0.lender}"
     },
     "recordEditor": {
+        ".csc-loanin-borrowersAuthorizer": {
+            "valuebinding": "${fields.borrowersAuthorizer}",
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/loanin/autocomplete/borrowersAuthorizer",
+                        "vocabUrl": "../../chain/loanin/source-vocab/borrowersAuthorizer"
+                    }
+                }
+            ]
+        },
         ".csc-loanIn-loanInContact": {
             "valuebinding": "${fields.loanInContact}",
             "decorators": [
@@ -87,14 +100,6 @@
                 }
             ]
         },
-        ".csc-loanIn-loanInDate-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
-        },
         ".csc-loanIn-loanInNumber-patternChooserContainer": {
             "decorators": [
                 {
@@ -120,7 +125,23 @@
             ]
         },
         ".csc-loanIn-loanInNote": "${fields.loanInNote}",
+        ".csc-loanIn-loanInDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
         ".csc-loanIn-loanReturnDate": "${fields.loanReturnDate}",
+        ".csc-loanIn-loanReturnDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
         ".csc-loanIn-lendersAuthorizer": {
             "valuebinding": "${fields.lendersAuthorizer}",
             "decorators": [
@@ -131,14 +152,6 @@
                         "queryUrl": "../../chain/loanin/autocomplete/lendersAuthorizer",
                         "vocabUrl": "../../chain/loanin/source-vocab/lendersAuthorizer"
                     }
-                }
-            ]
-        },
-        ".csc-loanIn-loanReturnDate-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
                 }
             ]
         },
