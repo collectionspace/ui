@@ -95,12 +95,11 @@ cspace = cspace || {};
                 dataType: "text",
                 success: function (data) {
                     var dataArray;
-                    if (data === "") {
+                    if (data === "[]") {
                         showConfirmation(request.term, that.hiddenInput, that.dom, that.options.vocabUrl);
                     } else {
                         cspace.autocomplete.addConfirmDlg.hide();
-                        var newdata = "[" + data.replace(/}\s*{/g, "},{") + "]";
-                        dataArray = JSON.parse(newdata);
+                        dataArray = JSON.parse(data);
                         callback(dataArray);
                     }
                 },
@@ -164,7 +163,7 @@ cspace = cspace || {};
             dataType: "json",
             type: "GET",
             success: function (data) {
-                postNewTerm(term, data.url, callback);
+                postNewTerm(term, data[0].url, callback);
             },
             error: function () {
                 fluid.fail("error getting new term url");
