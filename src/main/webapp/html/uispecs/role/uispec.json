@@ -3,7 +3,7 @@
         "expander": {
             "repeatID": ".csc-permissions-record-row:",
             "tree": {
-                ".csc-role-recordType": "${{row}.resourceName}",
+                ".csc-role-resourceName": "${{row}.resourceName}",
                 "expander": {
                     "inputID": ".csc-role-permission-input",
                     "tree": {

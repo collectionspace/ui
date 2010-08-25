@@ -152,10 +152,7 @@ cspace = cspace || {};
                 (cspace.util.useLocalData() ? "./uispecs/%pageType/uispec.json" : "../../chain/%pageType/uispec");                                
             var uispecUrl = fluid.stringTemplate(urlTemplate, {pageType: that.options.pageType});
 
-            // TODO:    Workaround until App layer is generating role uispecs:
-            if (that.options.pageType === "role") {
-                uispecUrl = "./uispecs/role/uispec.json";
-            }
+            // TODO:    Workaround until App layer is generating users uispecs correctly:
             if (that.options.pageType === "users") {
                 uispecUrl = "./uispecs/users/uispec.json";
             }
