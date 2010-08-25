@@ -251,6 +251,7 @@ var relatedRecordsTabTester = function ($) {
         stop();
     });
 
+    // TODO: this is ready to have tests added here.
     relatedRecordsTabTest.test("Using SearchToRelateDialog", function () {
         setupTab({
             pageReadyListener: function () {

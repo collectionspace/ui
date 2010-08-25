@@ -151,33 +151,6 @@
             ]
         },
         ".csc-object-description-content-note": "${fields.contentNote}",
-        ".csc-collection-object-assocPeoples": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "elPath": "fields.assocPeoples",
-                        "protoTree": {
-                            ".csc-collection-object-assocPeopleNote": "${fields.assocPeoples.0.assocPeopleNote}",
-                            ".csc-collection-object-assocPeople": {
-                                "valuebinding": "${fields.assocPeoples.0.assocPeople}",
-                                "decorators": [
-                                    {
-                                        "func": "cspace.autocomplete",
-                                        "type": "fluid",
-                                        "options": {
-                                            "queryUrl": "../../chain/objects/autocomplete/assocPeople",
-                                            "vocabUrl": "../../chain/objects/source-vocab/assocPeople"
-                                        }
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                }
-            ]
-        },
         ".csc-object-viewer-reference": {
             "decorators": [
                 {
@@ -187,6 +160,32 @@
                         "elPath": "fields.viewersReferences",
                         "protoTree": {
                             ".csc-object-viewer-reference": "${fields.viewersReferences.0.viewersReference}"
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-collection-object-assocPlace": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.assocPlaces",
+                        "protoTree": {
+                            ".csc-collection-object-assocPlace": {
+                                "valuebinding": "${fields.assocPlaces.0.assocPlace}",
+                                "decorators": [
+                                    {
+                                        "func": "cspace.autocomplete",
+                                        "type": "fluid",
+                                        "options": {
+                                            "queryUrl": "../../chain/objects/autocomplete/assocPlace",
+                                            "vocabUrl": "../../chain/objects/source-vocab/assocPlace"
+                                        }
+                                    }
+                                ]
+                            }
                         }
                     }
                 }
@@ -240,37 +239,7 @@
             ]
         },
         ".csc-collection-object-fieldCollectionPlace": "${fields.fieldCollectionPlace}",
-        ".csc-collection-object-assocConcepts": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "elPath": "fields.assocConcepts",
-                        "protoTree": {
-                            ".csc-collection-object-assocConcept": "${fields.assocConcepts.0.assocConcept}",
-                            ".csc-collection-object-assocConceptNote": "${fields.assocConcepts.0.assocConceptNote}"
-                        }
-                    }
-                }
-            ]
-        },
         ".csc-object-description-inscription-content-method": "${fields.inscriptionContentMethod}",
-        ".csc-collection-object-assocCulturalContexts": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "elPath": "fields.assocCulturalContexts",
-                        "protoTree": {
-                            ".csc-collection-object-assocCulturalContext": "${fields.assocCulturalContexts.0.assocCulturalContext}",
-                            ".csc-collection-object-assocCulturalContextNote": "${fields.assocCulturalContexts.0.assocCulturalContextNote}"
-                        }
-                    }
-                }
-            ]
-        },
         ".csc-object-history-association-event-person": {
             "decorators": [
                 {
@@ -364,6 +333,8 @@
             ]
         },
         ".csc-object-description-material-name": "${fields.materialName}",
+        ".csc-collection-object-assocOrganizationNote": "${fields.assocOrganizationNote}",
+        ".csc-collection-object-assocConceptNote": "${fields.assocConceptNote}",
         ".csc-object-description-sex": {
             "optionnames": [
                 "male",
@@ -557,6 +528,32 @@
                 }
             ]
         },
+        ".csc-collection-object-assocOrganization": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.assocOrganizations",
+                        "protoTree": {
+                            ".csc-collection-object-assocOrganization": {
+                                "valuebinding": "${fields.assocOrganizations.0.assocOrganization}",
+                                "decorators": [
+                                    {
+                                        "func": "cspace.autocomplete",
+                                        "type": "fluid",
+                                        "options": {
+                                            "queryUrl": "../../chain/objects/autocomplete/assocOrganization",
+                                            "vocabUrl": "../../chain/objects/source-vocab/assocOrganization"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        },
         ".csc-reference-catalog-number": "${fields.catalogNumber}",
         ".csc-collection-object-objectNameGroup": {
             "decorators": [
@@ -740,6 +737,7 @@
             ],
             "selection": "${fields.titleType}"
         },
+        ".csc-collection-object-assocCulturalContextNote": "${fields.assocCulturalContextNote}",
         ".csc-collection-object-titleTranslationLanguage": {
             "default": "13",
             "optionnames": [
@@ -885,33 +883,6 @@
                 "?"
             ],
             "selection": "${fields.objectComponentInformation}"
-        },
-        ".csc-collection-object-assocPlaces": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "elPath": "fields.assocPlaces",
-                        "protoTree": {
-                            ".csc-collection-object-assocPlaceNote": "${fields.assocPlaces.0.assocPlaceNote}",
-                            ".csc-collection-object-assocPlace": {
-                                "valuebinding": "${fields.assocPlaces.0.assocPlace}",
-                                "decorators": [
-                                    {
-                                        "func": "cspace.autocomplete",
-                                        "type": "fluid",
-                                        "options": {
-                                            "queryUrl": "../../chain/objects/autocomplete/assocPlace",
-                                            "vocabUrl": "../../chain/objects/source-vocab/assocPlace"
-                                        }
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                }
-            ]
         },
         ".csc-collection-object-fieldCollector": {
             "decorators": [
@@ -1086,6 +1057,33 @@
         },
         ".csc-object-description-inscription-description-date": "${fields.inscriptionDescriptionDate}",
         ".csc-object-identification-object-title-translation": "${fields.titleTranslation}",
+        ".csc-collection-object-assocPerson": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.assocPersons",
+                        "protoTree": {
+                            ".csc-collection-object-assocPerson": {
+                                "valuebinding": "${fields.assocPersons.0.assocPerson}",
+                                "decorators": [
+                                    {
+                                        "func": "cspace.autocomplete",
+                                        "type": "fluid",
+                                        "options": {
+                                            "queryUrl": "../../chain/objects/autocomplete/assocPerson",
+                                            "vocabUrl": "../../chain/objects/source-vocab/assocPerson"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-collection-object-assocPersonNote": "${fields.assocPersonNote}",
         ".csc-object-history-association-event-organization": {
             "decorators": [
                 {
@@ -1107,6 +1105,20 @@
                                     }
                                 ]
                             }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-collection-object-assocCulturalContext": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.assocCulturalContexts",
+                        "protoTree": {
+                            ".csc-collection-object-assocCulturalContext": "${fields.assocCulturalContexts.0.assocCulturalContext}"
                         }
                     }
                 }
@@ -1154,14 +1166,13 @@
                 }
             ]
         },
-        ".csc-collection-object-assocObjectType": "${fields.assocObjectType}",
         ".csc-object-identification-otherNumbers": {
             "decorators": [
                 {
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.otherNumberList",
+                        "elPath": "fields.otherNumber",
                         "protoTree": {
                             ".csc-object-identification-other-number-type": {
                                 "optionnames": [
@@ -1178,14 +1189,15 @@
                                     "serial",
                                     "unknown"
                                 ],
-                                "selection": "${fields.otherNumberList.0.otherNumberType}"
+                                "selection": "${fields.otherNumber.0.numberType}"
                             },
-                            ".csc-object-identification-other-number": "${fields.otherNumberList.0.otherNumber}"
+                            ".csc-object-identification-other-number": "${fields.otherNumber.0.numberValue}"
                         }
                     }
                 }
             ]
         },
+        ".csc-collection-object-assocObjectType": "${fields.assocObjectType}",
         ".csc-object-description-edition-number": "${fields.editionNumber}",
         ".csc-object-description-content-concept": {
             "decorators": [
@@ -1352,33 +1364,6 @@
         ".csc-object-owner-contribution-note": "${fields.ownersContributionNote}",
         ".csc-date-information-date-earliest-single-date": "${fields.dateEarliestSingle}",
         ".csc-object-identification-object-nametitle": "${fields.nametitle}",
-        ".csc-collection-object-assocPersons": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "elPath": "fields.assocPersons",
-                        "protoTree": {
-                            ".csc-collection-object-assocPerson": {
-                                "valuebinding": "${fields.assocPersons.0.assocPerson}",
-                                "decorators": [
-                                    {
-                                        "func": "cspace.autocomplete",
-                                        "type": "fluid",
-                                        "options": {
-                                            "queryUrl": "../../chain/objects/autocomplete/assocPerson",
-                                            "vocabUrl": "../../chain/objects/source-vocab/assocPerson"
-                                        }
-                                    }
-                                ]
-                            },
-                            ".csc-collection-object-assocPersonNote": "${fields.assocPersons.0.assocPersonNote}"
-                        }
-                    }
-                }
-            ]
-        },
         ".csc-object-description-content-date": "${fields.contentDate}",
         ".csc-object-description-color": {
             "decorators": [
@@ -1450,33 +1435,6 @@
             ],
             "selection": "${fields.ownershipExchangePriceCurrency}"
         },
-        ".csc-collection-object-assocOrganizations": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "elPath": "fields.assocOrganizations",
-                        "protoTree": {
-                            ".csc-collection-object-assocOrganizationNote": "${fields.assocOrganizations.0.assocOrganizationNote}",
-                            ".csc-collection-object-assocOrganization": {
-                                "valuebinding": "${fields.assocOrganizations.0.assocOrganization}",
-                                "decorators": [
-                                    {
-                                        "func": "cspace.autocomplete",
-                                        "type": "fluid",
-                                        "options": {
-                                            "queryUrl": "../../chain/objects/autocomplete/assocOrganization",
-                                            "vocabUrl": "../../chain/objects/source-vocab/assocOrganization"
-                                        }
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                }
-            ]
-        },
         ".csc-object-history-association-access": {
             "optionnames": [
                 "limited",
@@ -1532,6 +1490,7 @@
             "selection": "${fields.technicalAttributeMeasurementUnit}"
         },
         ".csc-date-information-date-latest-certainty": "${fields.dateLatestCertainty}",
+        ".csc-collection-object-assocPeopleNote": "${fields.assocPeopleNote}",
         ".csc-object-description-inscription-description-position": {
             "optionnames": [
                 "back",
@@ -1568,6 +1527,7 @@
         ".csc-object-viewer-contribution-note": "${fields.viewersContributionNote}",
         ".csc-object-description-copy-number": "${fields.copyNumber}",
         ".csc-collection-object-assocActivity": "${fields.assocActivity}",
+        ".csc-collection-object-assocPlaceNote": "${fields.assocPlaceNote}",
         ".csc-collection-object-fieldCollectionMethod": {
             "decorators": [
                 {
@@ -1801,6 +1761,20 @@
             "selection": "${fields.ownershipCategory}"
         },
         ".csc-date-information-date-latest-qualifier": "${fields.dateLatestQualifier}",
+        ".csc-collection-object-assocConcept": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.assocConcepts",
+                        "protoTree": {
+                            ".csc-collection-object-assocConcept": "${fields.assocConcepts.0.assocConcept}"
+                        }
+                    }
+                }
+            ]
+        },
         ".csc-date-information-date-earliest-single-certainty": "${fields.dateEarliestSingleCertainty}",
         ".csc-object-description-physical-description": "${fields.physicalDescription}",
         ".csc-object-viewer-response": "${fields.viewersPersonalResponse}",
@@ -1840,6 +1814,32 @@
                 "pupa"
             ],
             "selection": "${fields.phase}"
+        },
+        ".csc-collection-object-assocPeople": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.assocPeoples",
+                        "protoTree": {
+                            ".csc-collection-object-assocPeople": {
+                                "valuebinding": "${fields.assocPeoples.0.assocPeople}",
+                                "decorators": [
+                                    {
+                                        "func": "cspace.autocomplete",
+                                        "type": "fluid",
+                                        "options": {
+                                            "queryUrl": "../../chain/objects/autocomplete/assocPeople",
+                                            "vocabUrl": "../../chain/objects/source-vocab/assocPeople"
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
         },
         ".csc-date-information-date-latest-date": "${fields.dateLatest}",
         ".csc-object-description-content-object-type": {

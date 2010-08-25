@@ -22,11 +22,11 @@
                 
             }
         ],
+        "assocPeopleNote": "test",
         "assocPeoples": [
             {
                 "_primary": true,
-                "assocPeople": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(f3215856-3077-4d0f-a1cb)'+++++fgvgv'",
-                "assocPeopleNote": "test"
+                "assocPeople": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(f3215856-3077-4d0f-a1cb)'+++++fgvgv'"
             }
         ],
         "viewersReferences": [
@@ -48,28 +48,26 @@
                 "_primary": true
             }
         ],
+        "assocConceptNote": "test",
         "assocConcepts": [
             {
                 "_primary": false,
-                "assocConceptNote": "test",
                 "assocConcept": "test"
             },
             {
                 "assocConcept": "test",
-                "assocConceptNote": "test",
                 "_primary": true
             }
         ],
+        "assocCulturalContextNote": "test",
         "assocCulturalContexts": [
             {
                 "_primary": false,
-                "assocCulturalContext": "test",
-                "assocCulturalContextNote": "test"
+                "assocCulturalContext": "test"
             },
             {
                 "assocCulturalContext": "test",
-                "_primary": true,
-                "assocCulturalContextNote": "test"
+                "_primary": true
             }
         ],
         "assocEventPersons": [
@@ -205,10 +203,10 @@
                 "_primary": true
             }
         ],
+        "assocPlaceNote": "test",
         "assocPlaces": [
             {
-                "_primary": true,
-                "assocPlaceNote": "test"
+                "_primary": true
             }
         ],
         "fieldCollectors": [
@@ -265,16 +263,16 @@
                 "contentOrganization": "urn:cspace:org.collectionspace.demo:orgauthority:id(ac8eb0df-eff4-4047-91bb):organization:id(6cec8f6f-b065-42ba-a07f)'gsdsfsr'"
             }
         ],
-        "otherNumberList": [
+        "otherNumber": [
             {
                 "_primary": false,
-                "otherNumber": "test",
-                "otherNumberType": "unknown"
+                "numberValue": "test",
+                "numberType": "unknown"
             },
             {
-                "otherNumber": "test",
+                "numberValue": "test",
                 "_primary": true,
-                "otherNumberType": "previous"
+                "numberType": "previous"
             }
         ],
         "contentConcepts": [
@@ -297,16 +295,15 @@
                 "_primary": true
             }
         ],
+        "assocPersonNote": "test",
         "assocPersons": [
             {
                 "_primary": false,
-                "assocPerson": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(ac365e52-43f4-45a5-ac45)'12333332'",
-                "assocPersonNote": "test"
+                "assocPerson": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(ac365e52-43f4-45a5-ac45)'12333332'"
             },
             {
                 "_primary": true,
-                "assocPerson": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(d0acd84a-e56f-4f2e-99c3)'sads222'",
-                "assocPersonNote": "test"
+                "assocPerson": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(d0acd84a-e56f-4f2e-99c3)'sads222'"
             }
         ],
         "colors": [
@@ -319,15 +316,14 @@
                 "_primary": true
             }
         ],
+        "assocOrganizationNote": "test",
         "assocOrganizations": [
             {
                 "_primary": true,
-                "assocOrganization": "urn:cspace:org.collectionspace.demo:orgauthority:id(ac8eb0df-eff4-4047-91bb):organization:id(5bd6e89e-d2ec-4f8a-ae62)'dsdd'",
-                "assocOrganizationNote": "test"
+                "assocOrganization": "urn:cspace:org.collectionspace.demo:orgauthority:id(ac8eb0df-eff4-4047-91bb):organization:id(5bd6e89e-d2ec-4f8a-ae62)'dsdd'"
             },
             {
-                "assocOrganization": "urn:cspace:org.collectionspace.demo:orgauthority:id(ac8eb0df-eff4-4047-91bb):organization:id(77c69c66-4828-4698-ba62)'%2C%2C%2C%2C'",
-                "assocOrganizationNote": "test"
+                "assocOrganization": "urn:cspace:org.collectionspace.demo:orgauthority:id(ac8eb0df-eff4-4047-91bb):organization:id(77c69c66-4828-4698-ba62)'%2C%2C%2C%2C'"
             }
         ],
         "fieldCollectionMethods": [
