@@ -156,11 +156,6 @@ cspace = cspace || {};
                 (cspace.util.useLocalData() ? "./uispecs/%pageType/uispec.json" : "../../chain/%pageType/uispec");                                
             var uispecUrl = fluid.stringTemplate(urlTemplate, {pageType: that.options.pageType});
 
-            // TODO:    Workaround until App layer is generating users uispecs correctly:
-            if (that.options.pageType === "users") {
-                uispecUrl = "./uispecs/users/uispec.json";
-            }
-
             resourceSpecs.uispec = {
                 href: uispecUrl,
                 options: {

@@ -6,23 +6,18 @@
         "password": "testpassword",
         "email": "jesse.martinez@collectionspace.org",
         "status": "active",
-        "role": {
-            "role": [{
-                "roleId": "1",
+        "role": [{
                 "roleName": "Administrator",
-                "roleSelected": false,
+                "roleSelected": true,
                 "roleGroup": "Museum staff"
             }, {
-                "roleId": "2",
                 "roleName": "Educator",
                 "roleSelected": false,
                 "roleGroup": "Museum staff"
             }, {
-                "roleId": "3",
                 "roleName": "Registrar",
                 "roleSelected": false,
                 "roleGroup": "Collection staff"
-            }]
-        }
+        }]
     }
 }

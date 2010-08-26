@@ -7,23 +7,18 @@
         "password": "testpassword",
         "email": "anastasia.cheetham@collectionspace.org",
         "status": "inactive",
-        "role": {
-            "role": [{
-                "roleId": "1",
+        "role": [{
                 "roleName": "Administrator",
                 "roleSelected": true,
                 "roleGroup": "Museum staff"
             }, {
-                "roleId": "2",
                 "roleName": "Educator",
                 "roleSelected": false,
                 "roleGroup": "Museum staff"
             }, {
-                "roleId": "3",
                 "roleName": "Registrar",
                 "roleSelected": true,
                 "roleGroup": "Collection staff"
-            }]
-        }
+        }]
     }
 }

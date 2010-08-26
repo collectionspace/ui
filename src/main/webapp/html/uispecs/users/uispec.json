@@ -2,7 +2,7 @@
     "details": {
         ".csc-user-userName": "${fields.screenName}",
         ".csc-user-status": {
-            "default": "active",
+            "default": "0",
             "optionnames": [
                 "Active",
                 "Inactive"
@@ -13,30 +13,21 @@
             ],
             "selection": "${fields.status}"
         },
+        "expander": {
+            "repeatID": ".csc-accountrole-roles-row:",
+            "tree": {
+                ".csc-users-roleGroup": "${{row}.roleGroup}",
+                ".csc-users-roleSelected": "${{row}.roleSelected}",
+                ".csc-users-roleName": "${{row}.roleName}"
+            },
+            "type": "fluid.renderer.repeat",
+            "pathAs": "row",
+            "controlledBy": "fields.role"
+        },
         ".csc-users-createdAt": "${fields.createdAt}",
         ".csc-user-password": "${fields.password}",
         ".csc-user-userID": "${fields.userId}",
-        ".csc-user-email": "${fields.email}",
-        ".csc-accountrole-account-row:": {
-            "children": [
-                {
-                    ".csc-accountrole-account-userid": "${fields.account.0.userId}",
-                    ".csc-accountrole-account-screenname": "${fields.account.0.screenName}",
-                    ".csc-accountrole-account-accountid": "${fields.account.0.accountId}"
-                }
-            ]
-        },
-        "expander": {
-            "type": "fluid.renderer.repeat",
-            "controlledBy": "fields.role.role",
-            "pathAs": "role",
-            "repeatID": ".csc-accountrole-roles-row:",
-            "tree": {
-                ".csc-accountrole-account-rolename": "${{role}.roleName}",
-                ".csc-accountrole-role-rolegroup": "${{role}.roleGroup}",
-                ".csc-accountrole-role-selected": "${{role}.roleSelected}"
-            }
-        }
+        ".csc-user-email": "${fields.email}"
     },
     "list": {
         ".csc-recordList-row:": {

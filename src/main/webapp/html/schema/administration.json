@@ -10,24 +10,20 @@
                 "type": "object",
                 "properties": {
                     "role": {
-                        "type": "object",
-                        "properties": {
-                            "account": {
-                                "type": "object" 
+                        "type": "array",
+                        "default": [
+                            {
+                                "roleName": "ROLE_ADMINISTRATOR",
+                                "roleGroup": "Museum staff",
+                                "roleSelected": false 
                             },
-                            "role": {
-                                "type": "array",
-                                "default": [
-                                    {
-                                        "roleName": "ROLE_ADMINISTRATOR",
-                                        "roleId": "1",
-                                        "roleGroup": "Museum staff",
-                                        "roleAssigned": true 
-                                    }
-                                ] 
-                            } 
-                        } 
-                    } 
+                            {
+                                "roleName": "ROLE_READER",
+                                "roleGroup": "Museum staff",
+                                "roleSelected": true 
+                            }
+                        ]
+                    }
                 } 
             } 
         } 
