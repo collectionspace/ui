@@ -477,7 +477,16 @@
         "fieldCollectionDate": "Aug 12, 2010",
         "fieldCollectionNote": "dxzdf",
         "fieldCollectionNumber": "test",
-        "fieldCollectionEventName": "test",
+        "fieldColEventNames": [
+            {
+                "_primary": false,
+                "fieldColEventName": "test"
+            },
+            {
+                "fieldColEventName": "test primary",
+                "_primary": true
+            }
+        ],
         "fieldCollectionPlace": "test"
     },
     "termsUsed": [

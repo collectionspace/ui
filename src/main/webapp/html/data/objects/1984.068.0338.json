@@ -390,6 +390,16 @@
                 "assocEventPeople": "urn:cspace:org.collectionspace.demo:personauthority:id(ed9b89f7-c38d-48b4-afe1):person:id(60f71574-a066-47a0-a85c)'bbvg'"
             }
         ],
+        "fieldColEventNames": [
+            {
+                "_primary": false,
+                "fieldColEventName": "test"
+            },
+            {
+                "fieldColEventName": "test primary",
+                "_primary": true
+            }
+        ],
         "ownershipExchangeMethod": "purchase",
         "inscriptionContentPosition": "left",
         "sex": "female",
@@ -474,7 +484,6 @@
         "fieldCollectionDate": "Aug 12, 2010",
         "fieldCollectionNote": "dxzdf",
         "fieldCollectionNumber": "test",
-        "fieldCollectionEventName": "test",
         "fieldCollectionPlace": "test"
     },
     "relations": {}
