@@ -23,6 +23,24 @@ cspace = cspace || {};
 	    that.locate("datePicker").hide();
 		that.locate("calendarButton").focus();
     };
+    
+    var formatDate = function (date, format) {
+        // Pulling a full date from google datePicker into one of the formats that can be parsed by datejs. 
+        var fullDate = date.getYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+        return Date.parse(fullDate).toString(format);
+    };
+    
+    var validateDate = function (domBinder, date, message, format) {
+        // Parsing a date sting into a date object for datejs. If it is invalid null will be returned.
+        date = Date.parse(date);
+        if (!date) {
+            // If there is no date, we will display an invalid date message and emptying the date field.
+            cspace.util.displayTimestampedMessage(domBinder, message);
+            return "";
+        }
+        // Format validated date into a string.
+        return date.toString(format);
+    };
 
 	var bindEvents = function (that) {
 		
@@ -47,15 +65,29 @@ cspace = cspace || {};
             table.focus();
 		});
 		
+		calendarDate.change(function () {
+		    // If there is an error message clear it.
+		    that.locate("messageContainer", "body").hide();
+		    // Get a string value for a field.
+		    var dateFieldValue = calendarDate.val();
+		    // Get a validated string value for the same field.
+		    var date = validateDate(that.dom, dateFieldValue, that.options.strings.invalidDateMessage, that.options.defaultFormat);
+		    // If validated date is different from the original, put validated value into 
+		    // the date field and update the datePicker's selected date.
+		    if (dateFieldValue !== date) {
+		        calendarDate.val(date);
+		    }
+		    that.datePicker.setDate(Date.parse(date));
+		});
+	
 		var setDate = function () {
 			var date = that.datePicker.getDate();
-            // TODO: Better factor out the formatting of the date
-            calendarDate.val(that.options.months[date.getMonth()] + " " + date.getDate() + ", " + date.getYear());
+            calendarDate.val(formatDate(date, that.options.defaultFormat));
             calendarDate.change();
             closeCalendar(that);
-// CSPACE-707: Until we can better handle manually entered dates,
-// the input field will be disabled
-//            calendarDate.focus();
+            if (that.freeText) {
+                calendarDate.focus();
+            }
 		};
 		
 		that.locate("date").click(function (event) {			
@@ -117,11 +149,15 @@ cspace = cspace || {};
 		datePicker.create(datePickerObj[0]);
 		datePickerObj.addClass(datePickerClass);
 		datePickerObj.hide();
-// CSPACE-707: Until we can better handle manually entered dates,
-// the input field will be disabled
-        var dateField = that.locate("calendarDate");
-        dateField.attr("readonly", "readonly");
-        dateField.attr("disabled", true);
+		var calendarDate = that.locate(calendarDate);
+		// TODO: this is going to go away as soon as all dates are a combination of datePicker and free text date.
+		if (calendarDate.attr("disabled") !== "disabled") {
+		    that.freeText = true;
+		}
+		else {
+		    calendarDate.attr("readonly", "readonly");
+            calendarDate.attr("disabled", true);
+		}
 		return datePicker;
 	};
 	
@@ -137,15 +173,21 @@ cspace = cspace || {};
 	fluid.defaults("cspace.datePicker", {
 		selectors: {
 			date: ".goog-date-picker-date",
-			
 			calendarDate: ".csc-calendar-date",
 			datePicker: ".csc-date-picker",
-			calendarButton: ".csc-calendar-button"
+			calendarButton: ".csc-calendar-button",
+			messageContainer: ".csc-message-container",
+            feedbackMessage: ".csc-message",
+            timestamp: ".csc-timestamp",
 		},
         styles: {
 			focus: "focused"
         },
-        months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+        strings: {
+            invalidDateMessage: "Provided date has invalid format."
+        },
+        // Default format for valid date.
+        defaultFormat: "yyyy-MM-dd"
 	});
 	
 })(jQuery, fluid);
