@@ -51,8 +51,12 @@
 .ui-widget-overlay { background: #666666 url(images/ui-bg_diagonals-thick_20_666666_40x40.png) 50% 50% repeat; opacity: .50;filter:Alpha(Opacity=50); }
 .ui-widget-shadow { margin: -5px 0 0 -5px; padding: 5px; background: #000000 url(images/ui-bg_flat_10_000000_40x100.png) 50% 50% repeat-x; opacity: .20;filter:Alpha(Opacity=20); -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }/* Autocomplete
 ----------------------------------*/
-.ui-autocomplete { position: absolute; cursor: default; }   
-.ui-autocomplete-loading { /*background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat; */}
+.input-autocomplete    {/*width:auto !important; */}
+.ui-autocomplete-input {/*width:99.75%*/ width:100%;}
+.input-autocomplete, .ui-autocomplete-input {background: #fff url(../images/arrowPredictiveText.png) no-repeat right center;  border:1px solid #C7CFD4;}
+table .input-autocomplete, .ui-autocomplete-input {border:none;}
+.ui-autocomplete-loading { background: url(../images/indeterminate_progress_indicator_true_transparent_16x16.gif) right center no-repeat; }
+.ui-autocomplete { position: absolute; cursor: default; }
 
 /* workarounds */
 * html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
@@ -64,8 +68,6 @@
     padding: 2px;
     margin-left:0px;
     display:block;
-	background-color:#fff;
-	border:2px solid #C7CFD4;
 	max-height:150px;
 	overflow-x:hidden; overflow-y:auto;
 }
@@ -74,37 +76,69 @@
 }
 .ui-menu .ui-menu-item {
     margin:0;
-    padding: 0;
+    padding-left: 5px;
     width: 100%;
     list-style-type: none;
+
 }
 .ui-menu .ui-menu-item a {
     text-decoration:none;
     display:block;
     padding:.2em .4em;
-    line-height:1.5;
 }
-.ui-menu .ui-menu-item a.ui-state-hover,
-.ui-menu .ui-menu-item a.ui-state-active {
+
+.cs-autocomplete-addToPanel {
+    list-style: none;
+}
+
+.cs-autocomplete-authorityItem {
+    list-style-type: none;
+    padding-left: 25px;
+    padding-right: 5px;
+    background: url(../images/icnAdd_.png) no-repeat 5px center;
+    color: #679B41;
+}
+
+.ui-menu .ui-menu-item:hover {
     /*margin: -1px;*/
 	background-color:#F0F5FB;
 	cursor:pointer;
 }
 
-.cs-autocomplete-addConfirmation {
+.cs-autocomplete-authorityItem:hover {
+    /*margin: -1px;*/
+    background-color:#D7E9C8;
+    cursor:pointer;
+}
+
+
+.cs-autocomplete-popup {
+    background-color:#FAFBF7;
     width:auto;
     float:left; 
     border:2px solid #C7CFD4;
     position:absolute;
     z-index:9999 !important;
-	background-color:#fff;
 	margin:6px 0 0 -2px;
 	max-width:100%;
 	overflow:auto;
+	font-size: 1.2em;
+	font-weight:bold;
+	line-height:1.4;
+    -moz-box-shadow: 3px 3px 4px  #C7CFD4;
+    -webkit-box-shadow: 3px 3px 4px  #C7CFD4;
+    box-shadow: 3px 3px 4px  #C7CFD4;
 }
-.cs-autocomplete-addConfirmation .inner {padding:5px 10px 10px 10px;}
-.cs-autocomplete-addConfirmation  .dialog  {font-style:italic; color:#6E6E6E; padding-bottom:15px;}
-.cs-autocomplete-addConfirmation  .content {color:#000; padding-bottom:15px; float:none;}
-.cs-autocomplete-addConfirmation  .pad-right {padding-right:10px;}
+.cs-autocomplete-popup .inner {padding:5px 10px;}
+.cs-autocomplete-popup .cs-autocomplete-noMatches  {font-style:italic; color:#6E6E6E; padding-bottom:15px;}
+.cs-autocomplete-popup .content {color:#6E6E6E; padding-bottom:5px; float:none;}
+.cs-autocomplete-popup .pad-right {padding-right:10px;}
+.cs-autocomplete-popup hr {color:#AAA; background-color:#AAA; border: #AAA}
+
+/** TODO: this positioning was arrived at through blind experiment, more stable strategy needed
+to precipitate it directly on top of the "loading" indicator */
+
+.cs-autocomplete-closebutton { position:absolute; right:1px; bottom: 18px}
+
 
 

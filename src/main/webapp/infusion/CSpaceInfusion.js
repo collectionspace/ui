@@ -7446,12 +7446,11 @@ var fluid = fluid || fluid_1_2;
      * such key is found.
      */
     fluid.keyForValue = function (obj, value) {
-        for (var key in obj) {
-            if (obj[key] === value) {
+        return fluid.find(obj, function(thisValue, key) {
+            if (value === thisValue) {
                 return key;
             }
-        }
-        return null;
+        });
     };
     
     /**
@@ -7859,7 +7858,7 @@ var fluid = fluid || fluid_1_2;
         }
         for (i = 0; i < entries.length; ++ i) {
             entry = entries[i];
-            if (optindex !== -1 && entry.options) {
+            if (optindex !== -1) {
                 args[optindex] = entry.options;
             }
             togo[i] = fluid.initSubcomponentImpl(that, entry, args);
@@ -8310,7 +8309,7 @@ var fluid = fluid || fluid_1_2;
     /** Return a list or hash of objects, transformed by one or more functions. Similar to
      * jQuery.map, only will accept an arbitrary list of transformation functions and also
      * works on non-arrays.
-     * @param list {Array or Object} The initial container of objects to be transformed.
+     * @param source {Array or Object} The initial container of objects to be transformed.
      * @param fn1, fn2, etc. {Function} An arbitrary number of optional further arguments,
      * all of type Function, accepting the signature (object, index), where object is the
      * list member to be transformed, and index is its list index. Each function will be
@@ -8335,30 +8334,28 @@ var fluid = fluid || fluid_1_2;
     };
     
     /** Better jQuery.each which works on hashes as well as having the arguments
-     * the right way round. Also allows iteration to be terminated early by means of
-     * return of <code>false</code> (specific value, "falsy" is not good enough. This
-     * will cause the overall function to return <code>false</code> 
+     * the right way round. 
      * @param source {Arrayable or Object} The container to be iterated over
      * @param func {Function} A function accepting (value, key) for each iterated
-     * object. This function may return <code>false</code> to terminate the iteration
+     * object. This function may return a value to terminate the iteration
      */
     fluid.each = function (source, func) {
         if (fluid.isArrayable(source)) {
             for (var i = 0; i < source.length; ++ i) {
-                if (func(source[i], i) === false) { return false;}
+                func(source[i], i);
             }
         }
         else {
             for (var key in source) {
-                if (func(source[key], key) === false) { return false;}
+                func(source[key], key);
             }
         }
     };
     
-    /** Scan through a list of objects, terminating on and returning the first member which
+    /** Scan through a list or hash of objects, terminating on the first member which
      * matches a predicate function.
-     * @param list {Array} The list of objects to be searched.
-     * @param fn {Function} A predicate function, acting on a list member. A predicate which
+     * @param source {Arrayable or Object} The list or hash of objects to be searched.
+     * @param func {Function} A predicate function, acting on a member. A predicate which
      * returns any value which is not <code>null</code> or <code>undefined</code> will terminate
      * the search. The function accepts (object, index).
      * @param deflt {Object} A value to be returned in the case no predicate function matches
@@ -8366,11 +8363,17 @@ var fluid = fluid || fluid_1_2;
      * @return The first return value from the predicate function which is not <code>null</code>
      * or <code>undefined</code>
      */
-    fluid.find = function (list, fn, deflt) {
-        for (var i = 0; i < list.length; ++ i) {
-            var transit = fn(list[i], i);
-            if (transit !== null && transit !== undefined) {
-                return transit;
+    fluid.find = function (source, func, deflt) {
+        if (fluid.isArrayable(source)) {
+            for (var i = 0; i < source.length; ++ i) {
+                var disp = func(source[i], i);
+                if (disp !== undefined) { return disp;}
+            }
+        }
+        else {
+            for (var key in source) {
+                var disp = func(source[key], key);
+                if (disp !== undefined) { return disp;}
             }
         }
         return deflt;
@@ -8930,7 +8933,7 @@ fluid_1_2 = fluid_1_2 || {};
         return i;
         };
     
-    var globalAccept = []; // reentrancy risk
+    var globalAccept = []; // TODO: serious reentrancy risk here, why is this impl like this?
     
     fluid.pathUtil.getPathSegment = function(path, i) {
         getPathSegmentImpl(globalAccept, path, i);
@@ -10139,17 +10142,18 @@ var fluid_1_2 = fluid_1_2 || {};
      
     function resolveRvalue(thatStack, arg, initArgs, componentOptions) {
         var options = makeStackResolverOptions(thatStack);
+        var directModel = thatStack[0].model; // TODO: this convention may not always be helpful
         
         if (arg === fluid.COMPONENT_OPTIONS) {
-            arg = fluid.resolveEnvironment(componentOptions, thatStack[0].model, options);
+            arg = fluid.resolveEnvironment(componentOptions, directModel, options);
         }
         else {
-            if (arg.charAt(0) === "@") {
+            if (typeof(arg) === "string" && arg.charAt(0) === "@") { // Test cases for i) single-args, ii) composite args
                 var argpos = arg.substring(1);
                 arg = initArgs[argpos];
             }
             else {
-                arg = fluid.resolveContextValue(arg, options);
+                arg = fluid.resolveEnvironment(arg, directModel, options);
             }
         }
         return arg;
@@ -10162,7 +10166,10 @@ var fluid_1_2 = fluid_1_2 || {};
      * and argument list which is suitable to be executed directly by fluid.invokeGlobalFunction.
      */
     fluid.embodyDemands = function(thatStack, demandspec, initArgs, options) {
-        var demands = demandspec.args;
+        var demands = $.makeArray(demandspec.args);
+        if (demands.length === 0 && thatStack.length > 0) { // Guess that it is meant to be a subcomponent TODO: component grades
+            demands = [fluid.COMPONENT_OPTIONS];
+        }
         if (demands) {
             var args = [];
             for (var i = 0; i < demands.length; ++ i) {
@@ -10177,7 +10184,8 @@ var fluid_1_2 = fluid_1_2 || {};
                     args[i] = options;
                 }
                 else{
-                    var arg = resolveRvalue(thatStack, arg, initArgs, options);
+                    var arg = resolveRvalue(thatStack, arg, initArgs, options) || {};
+                    arg.typeName = demandspec.funcName; // TODO: investigate the general sanity of this
                     args[i] = arg;
                 }
             }
@@ -10199,16 +10207,19 @@ var fluid_1_2 = fluid_1_2 || {};
         var that = thatStack[thatStack.length - 1];
         var funcNames = $.makeArray(funcNames);
         var demandspec = fluid.locateDemands(funcNames, thatStack);
+   
         if (!demandspec) {
             demandspec = {};
         }
         if (demandspec.funcName) {
             funcNames[0] = demandspec.funcName;
+           /**    TODO: "redirects" disabled pending further thought
             var demandspec2 = fluid.fetchDirectDemands(funcNames[0], that.typeName);
             if (demandspec2) {
                 demandspec = demandspec2; // follow just one redirect
-            }
+            } **/
         }
+
         return {funcName: funcNames[0], args: demandspec.args};
     };
     
@@ -10260,32 +10271,39 @@ var fluid_1_2 = fluid_1_2 || {};
     
     var dependentStore = {};
     
-    function composeDemandKey(demandingName, contextName) {
-        return demandingName + "|" + contextName;
-    }
-    
     fluid.demands = function(demandingName, contextName, spec) {
         if (spec.length) {
             spec = {args: spec};
         }
-        dependentStore[composeDemandKey(demandingName, contextName)] = spec;
+        var exist = dependentStore[demandingName];
+        if (!exist) {
+            exist = [];
+            dependentStore[demandingName] = exist;
+        }
+        exist.push({contexts: $.makeArray(contextName), spec: spec});
     };
-    
-    fluid.fetchDirectDemands = function(demandingName, contextName) {
-        return dependentStore[composeDemandKey(demandingName, contextName)];
-    };
-    
+
     fluid.locateDemands = function(demandingNames, thatStack) {
-        var demands;
-        visitComponents(thatStack, function(component) {
-            for (var i = 0; i < demandingNames.length; ++ i) {
-                demands = fluid.fetchDirectDemands(demandingNames[i], component.typeName);
-                if (demands) {
-                    return true;
-                }
-            }
+        var searchStack = [fluid.staticEnvironment].concat(thatStack); // TODO: put in ThreadLocal "instance" too, and also accelerate lookup
+        var contextNames = {};
+        visitComponents(searchStack, function(component) {
+            contextNames[component.typeName] = true;
         });
-        return demands;
+        var matches = [];
+        for (var i = 0; i < demandingNames.length; ++ i) {
+            var rec = dependentStore[demandingNames[i]] || [];
+            for (var j = 0; j < rec.length; ++ j) {
+                var spec = rec[j];
+                var count = 0;
+                for (k = 0; k < spec.contexts.length; ++ k) {
+                    if (contextNames[spec.contexts[k]]) { ++ count;}
+                }
+                // TODO: Potentially more subtle algorithm here - also ambiguity reports  
+                matches.push({count: count, spec: spec.spec}); 
+            }
+        }
+        matches.sort(function(speca, specb) {return specb.count - speca.count;});
+        return matches.length === 0? null : matches[0].spec;
     };
     
     fluid.initDependent = function(that, name, thatStack) {
@@ -10601,7 +10619,7 @@ var fluid_1_2 = fluid_1_2 || {};
     
     // The "noexpand" expander which simply unwraps one level of expansion and ceases.
     fluid.expander.noexpand = function(target, source) {
-        $.extend(target, source.expander.tree);
+        return $.extend(target, source.expander.tree);
     };
   
     fluid.noexpand = fluid.expander.noexpand; // TODO: check naming and namespacing
@@ -11130,6 +11148,10 @@ fluid_1_2 = fluid_1_2 || {};
   fluid.parseTemplate = function(template, baseURL, scanStart, cutpoints_in, opts) {
       opts = opts || {};
     
+      if (!template) {
+          fluid.fail("empty template supplied to fluid.parseTemplate");
+      }
+    
       var t;
       var parser;
       var tagstack;
@@ -11357,7 +11379,12 @@ fluid_1_2 = fluid_1_2 || {};
           if (!downreg.downmap) {
             downreg.downmap = {};
             }
-          addLump(downreg.downmap, ID, headlump);
+          while(downreg) { // TODO: unusual fix for locating branches in parent contexts (applies to repetitive leaves)
+              if (downreg.downmap) {
+                  addLump(downreg.downmap, ID, headlump);
+              }
+              downreg = downreg.uplump;
+          }
           addLump(t.globalmap, ID, headlump);
           var colpos = ID.indexOf(":");
           if (colpos !== -1) {
@@ -11553,6 +11580,13 @@ fluid_1_2 = fluid_1_2 || {};
       }
   }
   
+  var resourceCache = {};
+  
+  // TODO: Integrate punch-through from old Engage implementation
+  function canonUrl(url) {
+      return url;
+  }
+  
   /** Accepts a hash of structures with free keys, where each entry has either
    * href or nodeId set - on completion, callback will be called with the populated
    * structure with fetched resource text in the field "resourceText" for each
@@ -11571,6 +11605,14 @@ fluid_1_2 = fluid_1_2 || {};
               success: function(response) {
                   thisSpec.resourceText = response;
                   thisSpec.resourceKey = thisSpec.href;
+                  if (thisSpec.forceCache) {
+                       var canon = canonUrl(thisSpec.href);
+                       var cached = resourceCache[canon];
+                       if (cached.$$firer$$) {
+                           resourceCache[canon] = response;      
+                           cached.fire(response);
+                       }
+                  }
                   completeRequest();
               },
               error: function(response, textStatus, errorThrown) {
@@ -11593,11 +11635,14 @@ fluid_1_2 = fluid_1_2 || {};
           if (!resourceSpec.options || resourceSpec.options.async) {
               allSync = false;
           }
+          if (resourceSpec.url && !resourceSpec.href) {
+              resourceSpec.href = resourceSpec.url;
+          }
           if (resourceSpec.href && !resourceSpec.completeTime) {
                if (!resourceSpec.queued) {
                    var thisCallback = resourceCallback(resourceSpec);
                    var options = {  
-                       url:     resourceSpec.href, 
+                       url:     resourceSpec.href,
                        success: thisCallback.success, 
                        error:   thisCallback.error};
                    timeSuccessCallback(resourceSpec);
@@ -11606,11 +11651,36 @@ fluid_1_2 = fluid_1_2 || {};
                    resourceSpec.queued = true;
                    resourceSpec.initTime = new Date();
                    fluid.log("Request with key " + key + " queued for " + resourceSpec.href);
-                   $.ajax(options);
+                   var canon = canonUrl(resourceSpec.href);
+                   if (resourceSpec.forceCache) {
+                       var cached = resourceCache[canon];
+                       if (!cached) {
+                           fluid.log("First request for cached resource with url " + canon);
+                           cached = fluid.event.getEventFirer();
+                           cached.$$firer$$ = true;
+                           resourceCache[canon] = cached;
+                           options.cache = false; // TODO: Getting weird "not modified" issues on Firefox
+                           $.ajax(options);
+                       }
+                       else {
+                           if (!cached.$$firer$$) {
+                               options.success(cached);
+                           }
+                           else {
+                               fluid.log("Request for cached resource which is in flight: url " + canon);
+                               cached.addListener(function(response) {
+                                   options.success(cached);
+                               });
+                           }
+                       }
+                   }
+                   else {
+                       $.ajax(options);
+                   }
                }
                if (resourceSpec.queued) {
                    complete = false;
-               }             
+               }
           }
           else if (resourceSpec.nodeId && !resourceSpec.resourceText) {
               var node = document.getElementById(resourceSpec.nodeId);
@@ -11620,7 +11690,7 @@ fluid_1_2 = fluid_1_2 || {};
               resourceSpec.resourceKey = resourceSpec.nodeId;
           }
       }
-      if (complete && !specStructure.callbackCalled) {
+      if (complete && callback && !specStructure.callbackCalled) {
           specStructure.callbackCalled = true;
           if ($.browser.mozilla && !allSync) {
               // Defer this callback to avoid debugging problems on Firefox
@@ -12894,10 +12964,10 @@ fluid_1_2 = fluid_1_2 || {};
       function findChild(sourcescope, child) {
           var split = fluid.SplitID(child.ID);
           var headlumps = sourcescope.downmap[child.ID];
-          if (headlumps === null) {
+          if (!headlumps) {
               headlumps = sourcescope.downmap[split.prefix + ":"];
           }
-          return headlumps === null ? null : headlumps[0];
+          return headlumps? headlumps[0]: null;
       }
       
       function renderRecurse(basecontainer, parentlump, baselump) {
@@ -13339,6 +13409,118 @@ fluid_1_2 = fluid_1_2 || {};
         }
         return togo;
     };
+
+    /** "Renderer component" infrastructure **/
+  // TODO: fix this up with IoC and improved handling of templateSource as well as better 
+  // options layout (model appears in both rOpts and eOpts)
+    fluid.renderer.createRendererFunction = function (container, selectors, options, model) {
+        function modelise(opts, defs) {
+            return $.extend({}, defs, opts, model? {model: model} : null);
+        }
+        options = options || {};
+        container = $(container);
+        var source = options.templateSource ? options.templateSource: {node: container};
+        var rendererOptions = modelise(options.rendererOptions);
+        var expanderOptions = modelise(options.expanderOptions, {ELstyle: "$()"});
+        var expander = options.noExpand? null : fluid.renderer.makeProtoExpander(expanderOptions);
+        
+        var templates = null;
+        return function (tree) {
+            if (expander) {
+                tree = expander(tree);
+            }
+            var cutpointFn = options.cutpointGenerator || "fluid.renderer.selectorsToCutpoints";
+            rendererOptions.cutpoints = rendererOptions.cutpoints || fluid.invokeGlobalFunction(cutpointFn, [selectors, options]);
+        
+            if (templates) {
+                fluid.reRender(templates, container, tree, rendererOptions);
+            } else {
+                if (typeof(source) === "function") { // TODO: make a better attempt than this at asynchrony
+                    source = source();  
+                }
+                templates = fluid.render(source, container, tree, rendererOptions);
+            }
+        };
+    };
+    
+     // TODO: Integrate with FLUID-3681 branch
+    fluid.initRendererComponent = function(componentName, container, options) {
+        var that = fluid.initView(componentName, container, options);
+        that.model = that.options.model || {};
+        
+        fluid.fetchResources(that.options.resources); // TODO: deal with asynchrony
+        
+        var rendererOptions = that.options.rendererOptions || {};
+        if (!rendererOptions.messageSource && that.options.strings) {
+            rendererOptions.messageSource = {type: "data", messages: that.options.strings}; 
+        }
+
+        var rendererFnOptions = $.extend({}, that.options.rendererFnOptions, 
+           {rendererOptions: rendererOptions,
+           repeatingSelectors: that.options.repeatingSelectors,
+           selectorsToIgnore: that.options.selectorsToIgnore});
+        if (that.options.resources.template) {
+            rendererFnOptions.templateSource = function() { // TODO: don't obliterate, multitemplates, etc.
+                return that.options.resources.template.resourceText;
+            };
+        }
+        
+        var rendererFn = fluid.renderer.createRendererFunction(container, that.options.selectors, rendererFnOptions, that.model);
+        
+        that.render = rendererFn;
+        
+        return that;
+    };
+    
+    var removeSelectors = function (selectors, selectorsToIgnore) {
+        if (selectorsToIgnore) {
+            $.each(selectorsToIgnore, function (index, selectorToIgnore) {
+                delete selectors[selectorToIgnore];
+            });
+        }
+        return selectors;
+    };
+
+    var markRepeated = function (selector, repeatingSelectors) {
+        if (repeatingSelectors) {
+            $.each(repeatingSelectors, function (index, repeatingSelector) {
+                if (selector === repeatingSelector) {
+                    selector = selector + ":";
+                }
+            });
+        }
+        return selector;
+    };
+
+    fluid.renderer.selectorsToCutpoints = function (selectors, options) {
+        var togo = [];
+        options = options || {};
+        selectors = fluid.copy(selectors); // Make a copy before potentially destructively changing someone's selectors.
+    
+        if (options.selectorsToIgnore) {
+            selectors = removeSelectors(selectors, options.selectorsToIgnore);
+        }
+    
+        for (var selector in selectors) {
+            togo.push({
+                id: markRepeated(selector, options.repeatingSelectors),
+                selector: selectors[selector]
+            });
+        }
+    
+        return togo;
+    };
+  
+      /** A special "shallow copy" operation suitable for nondestructively
+     * merging trees of components. jQuery.extend in shallow mode will 
+     * neglect null valued properties.
+     */
+    fluid.renderer.mergeComponents = function (target, source) {
+        for (var key in source) {
+            target[key] = source[key];
+        }
+        return target;
+    };
     
     /** Definition of expanders - firstly, "heavy" expanders **/
     
@@ -13393,56 +13575,6 @@ fluid_1_2 = fluid_1_2 || {};
     };
     
 
-    var removeSelectors = function (selectors, selectorsToIgnore) {
-        if (selectorsToIgnore) {
-            $.each(selectorsToIgnore, function (index, selectorToIgnore) {
-                delete selectors[selectorToIgnore];
-            });
-        }
-        return selectors;
-    };
-
-    var markRepeated = function (selector, repeatingSelectors) {
-        if (repeatingSelectors) {
-            $.each(repeatingSelectors, function (index, repeatingSelector) {
-                if (selector === repeatingSelector) {
-                    selector = selector + ":";
-                }
-            });
-        }
-        return selector;
-    };
-
-    fluid.renderer.selectorsToCutpoints = function (selectors, options) {
-        var togo = [];
-        options = options || {};
-        selectors = fluid.copy(selectors); // Make a copy before potentially destructively changing someone's selectors.
-    
-        if (options.selectorsToIgnore) {
-            selectors = removeSelectors(selectors, options.selectorsToIgnore);
-        }
-    
-        for (var selector in selectors) {
-            togo.push({
-                id: markRepeated(selector, options.repeatingSelectors),
-                selector: selectors[selector]
-            });
-        }
-    
-        return togo;
-    };
-  
-      /** A special "shallow copy" operation suitable for nondestructively
-     * merging trees of components. jQuery.extend in shallow mode will 
-     * neglect null valued properties.
-     */
-    fluid.renderer.mergeComponents = function (target, source) {
-        for (var key in source) {
-            target[key] = source[key];
-        }
-        return target;
-    };
-
     /** Create a "protoComponent expander" with the supplied set of options.
      * The returned value will be a function which accepts a "protoComponent tree"
      * as argument, and returns a "fully expanded" tree suitable for supplying
@@ -13465,7 +13597,7 @@ fluid_1_2 = fluid_1_2 || {};
 
     fluid.renderer.makeProtoExpander = function (expandOptions) {
       // shallow copy of options - cheaply avoid destroying model, and all others are primitive
-        var options = $.extend({}, expandOptions); // shallow copy of options
+        var options = $.extend({ELstyle: "${}"}, expandOptions); // shallow copy of options
         var IDescape = options.IDescape || "\\";
         
         function fetchEL(string) {
@@ -13487,16 +13619,18 @@ fluid_1_2 = fluid_1_2 || {};
                 if (proto.decorators) {
                    proto.decorators = expandLight(proto.decorators);
                 }
+                value = proto.value;
+                delete proto.value;
             }
             else {
                 proto = {};
-                var EL = typeof(value) === "string"? fetchEL(value) : null;
-                if (EL) {
-                    proto.valuebinding = EL;
-                }
-                else {
-                    proto.value = value;
-                }
+            }
+            var EL = typeof(value) === "string"? fetchEL(value) : null;
+            if (EL) {
+                proto.valuebinding = EL;
+            }
+            else {
+                proto.value = value;
             }
             if (options.model && proto.valuebinding && proto.value === undefined) {
                 proto.value = fluid.model.getBeanValue(options.model, proto.valuebinding);
@@ -13565,21 +13699,25 @@ fluid_1_2 = fluid_1_2 || {};
                     target[target.length] = comp;
                 }
                 expandLeafOrCond(child, target, childPusher);
+                // Rescue the case of an expanded leaf into single component - TODO: check what sense this makes of the grammar
+                if (comp.children.length === 1 && !comp.children[0].ID) {
+                    comp = comp.children[0];
+                }
                 pusher(comp); 
             }
         };
         
         function detectBareBound(entry) {
-            return fluid.each(entry, function (value, key) {
-                return key !== "decorators";
-            }) === false;
+            return fluid.find(entry, function (value, key) {
+                return key === "decorators";
+            }) !== false;
         }
         
         // We have reached something which is either a leaf or Cond - either inside
         // a Cond or as an entry in children.
         var expandLeafOrCond = function (entry, target, pusher) {
             var componentType = fluid.renderer.inferComponentType(entry);
-            if (!componentType && detectBareBound(entry)) {
+            if (!componentType && (fluid.isPrimitive(entry) || detectBareBound(entry))) {
                 componentType = "UIBound";
             }
             if (componentType) {
@@ -14003,7 +14141,7 @@ fluid_1_2 = fluid_1_2 || {};
      * @param {Object} options a collection of options settings
      */
     fluid.undoDecorator = function (component, userOptions) {
-        var that = fluid.initView("undo", null, userOptions);
+        var that = fluid.initLittleComponent("undo", userOptions);
         that.container = that.options.renderer(that, component.container);
         fluid.initDomBinder(that);
         fluid.tabindex(that.locate("undoControl"), 0);
@@ -14711,7 +14849,7 @@ fluid_1_2 = fluid_1_2 || {};
         
         tooltipId: "tooltip",
         
-        useTooltip: false,
+        useTooltip: true,
         
         tooltipDelay: 1000,
         

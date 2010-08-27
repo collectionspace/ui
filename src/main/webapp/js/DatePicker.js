@@ -15,13 +15,15 @@ cspace = cspace || {};
 (function ($, fluid) {
     fluid.log("DatePicker.js loaded");
 
-	var keyCode = function (evt) {
+    var keyCode = function (evt) {
         return evt.keyCode ? evt.keyCode : (evt.which ? evt.which : 0);          
     };
-	
-    var closeCalendar =  function (that) {
-	    that.locate("datePicker").hide();
-		that.locate("calendarButton").focus();
+    
+    var closeCalendar = function (that) {
+        var datePicker = that.locate("datePicker");
+        datePicker.hide();
+        that.locate("calendarButton").focus();
+        cspace.util.globalDismissal(datePicker);
     };
     
     var formatDate = function (date, format) {
@@ -42,71 +44,75 @@ cspace = cspace || {};
         return date.toString(format);
     };
 
-	var bindEvents = function (that) {
-		
-		var datePicker = that.locate("datePicker");
-		var calendarDate = that.locate("calendarDate");
-		var table = $(that.datePicker.tableBody_);
-		
+    var bindEvents = function (that) {
+        
+        var datePicker = that.locate("datePicker");
+        var calendarDate = that.locate("calendarDate");
+        var calendarButton = that.locate("calendarButton");
+        var table = $(that.datePicker.tableBody_);
+        
         fluid.deadMansBlur(datePicker, table, function () {
             closeCalendar(that);
         });
 
-		table.blur(function (e) {
-			table.removeClass(that.options.styles.focus);
-		});
-		
-		table.focus(function (e) {
+        table.blur(function (e) {
+            table.removeClass(that.options.styles.focus);
+        });
+        
+        table.focus(function (e) {
             table.addClass(that.options.styles.focus);
         });
-		
-		that.locate("calendarButton").click(function (event) {
-			datePicker.toggle();
+        
+        calendarButton.click(function (event) {
+            datePicker.toggle();
+            cspace.util.globalDismissal($(datePicker).add(calendarButton), function() {
+                closeCalendar(that);
+            });
             table.focus();
-		});
-		
-		calendarDate.change(function () {
-		    // If there is an error message clear it.
-		    that.locate("messageContainer", "body").hide();
-		    // Get a string value for a field.
-		    var dateFieldValue = calendarDate.val();
-		    // Get a validated string value for the same field.
-		    var date = validateDate(that.dom, dateFieldValue, that.options.strings.invalidDateMessage, that.options.defaultFormat);
-		    // If validated date is different from the original, put validated value into 
-		    // the date field and update the datePicker's selected date.
-		    if (dateFieldValue !== date) {
-		        calendarDate.val(date);
-		    }
-		    that.datePicker.setDate(Date.parse(date));
-		});
-	
-		var setDate = function () {
-			var date = that.datePicker.getDate();
+        });
+        
+        calendarDate.change(function () {
+            // If there is an error message clear it.
+            that.locate("messageContainer", "body").hide();
+            // Get a string value for a field.
+            var dateFieldValue = calendarDate.val();
+            // Get a validated string value for the same field.
+            var date = validateDate(that.dom, dateFieldValue, that.options.strings.invalidDateMessage, that.options.defaultFormat);
+            // If validated date is different from the original, put validated value into 
+            // the date field and update the datePicker's selected date.
+            if (dateFieldValue !== date) {
+                calendarDate.val(date);
+            }
+            that.datePicker.setDate(Date.parse(date));
+        });
+    
+        var setDate = function () {
+            var date = that.datePicker.getDate();
             calendarDate.val(formatDate(date, that.options.defaultFormat));
             calendarDate.change();
             closeCalendar(that);
             if (that.freeText) {
                 calendarDate.focus();
             }
-		};
-		
-		that.locate("date").click(function (event) {			
-			that.datePicker.handleGridClick_(event);
-			setDate();	
-			return false;
-		});
-		
-		datePicker.keydown(function (event) {
-			var key = keyCode(event);
-			if (key === $.ui.keyCode.RIGHT || key === $.ui.keyCode.TOP ||
-			    key === $.ui.keyCode.LEFT || key === $.ui.keyCode.DOWN) {
-				if (!table.hasClass(that.options.styles.focus)) {
+        };
+        
+        that.locate("date").click(function (event) {            
+            that.datePicker.handleGridClick_(event);
+            setDate();    
+            return false;
+        });
+        
+        datePicker.keydown(function (event) {
+            var key = keyCode(event);
+            if (key === $.ui.keyCode.RIGHT || key === $.ui.keyCode.TOP ||
+                key === $.ui.keyCode.LEFT || key === $.ui.keyCode.DOWN) {
+                if (!table.hasClass(that.options.styles.focus)) {
                     return false;
                 }
-			}
-		});
-		
-//		datePicker.keyup(function (event) {
+            }
+        });
+        
+//        datePicker.keyup(function (event) {
 //            var key = keyCode(event);
 //            if (key === $.ui.keyCode.RIGHT || key === $.ui.keyCode.TOP ||
 //                key === $.ui.keyCode.LEFT || key === $.ui.keyCode.DOWN) {
@@ -115,79 +121,80 @@ cspace = cspace || {};
 //                }
 //            }
 //        });
-		
-		datePicker.keypress(function (event) {
-			switch (keyCode(event)) {
-			case $.ui.keyCode.RIGHT:
-			case $.ui.keyCode.TOP:
-			case $.ui.keyCode.LEFT:
-			case $.ui.keyCode.DOWN:
-			    if (!table.hasClass(that.options.styles.focus)) {
+        
+        datePicker.keypress(function (event) {
+            switch (keyCode(event)) {
+            case $.ui.keyCode.RIGHT:
+            case $.ui.keyCode.TOP:
+            case $.ui.keyCode.LEFT:
+            case $.ui.keyCode.DOWN:
+                if (!table.hasClass(that.options.styles.focus)) {
                     return false;
                 }
-				break;
-			case $.ui.keyCode.ESCAPE:
+                break;
+            case $.ui.keyCode.ESCAPE:
                 closeCalendar(that);
-			    break;
-			case $.ui.keyCode.ENTER:
-			case $.ui.keyCode.SPACE:
-			    if (table.hasClass(that.options.styles.focus)) {
-	                setDate();
-	            }
-			    break;
-			default:
-			    break; 
-			}
-		});
+                break;
+            case $.ui.keyCode.ENTER:
+            case $.ui.keyCode.SPACE:
+                if (table.hasClass(that.options.styles.focus)) {
+                    setDate();
+                }
+                break;
+            default:
+                break; 
+            }
+        });
 
-	};
-	
-	var setupDatePicker = function (that) {
-		var datePicker = new goog.ui.DatePicker();		
-		var datePickerObj = that.locate("datePicker");
-		var datePickerClass = datePickerObj[0].className;
-		datePicker.create(datePickerObj[0]);
-		datePickerObj.addClass(datePickerClass);
-		datePickerObj.hide();
-		var calendarDate = that.locate(calendarDate);
-		// TODO: this is going to go away as soon as all dates are a combination of datePicker and free text date.
-		if (calendarDate.attr("disabled") !== "disabled") {
-		    that.freeText = true;
-		}
-		else {
-		    calendarDate.attr("readonly", "readonly");
+    };
+    
+    var setupDatePicker = function (that) {
+        var datePicker = new goog.ui.DatePicker();        
+        var datePickerObj = that.locate("datePicker");
+        var datePickerClass = datePickerObj[0].className;
+        datePicker.create(datePickerObj[0]);
+        datePickerObj.addClass(datePickerClass);
+        datePickerObj.hide();
+        var calendarDate = that.locate(calendarDate);
+        // TODO: this is going to go away as soon as all dates are a combination of datePicker and free text date.
+        if (calendarDate.attr("disabled") !== "disabled") {
+            that.freeText = true;
+        }
+        else {
+            calendarDate.attr("readonly", "readonly");
             calendarDate.attr("disabled", true);
-		}
-		return datePicker;
-	};
-	
-	cspace.datePicker = function (container, options) {
-		var that = fluid.initView("cspace.datePicker", container, options);
-		that.datePicker = setupDatePicker(that);
-		
-		bindEvents(that);
-				
-		return that;
-	};
-	
-	fluid.defaults("cspace.datePicker", {
-		selectors: {
-			date: ".goog-date-picker-date",
-			calendarDate: ".csc-calendar-date",
-			datePicker: ".csc-date-picker",
-			calendarButton: ".csc-calendar-button",
-			messageContainer: ".csc-message-container",
+        }
+
+        return datePicker;
+    };
+    
+    cspace.datePicker = function (container, options) {
+        var that = fluid.initView("cspace.datePicker", container, options);
+        that.datePicker = setupDatePicker(that);
+        
+        bindEvents(that);
+                
+        return that;
+    };
+    
+    fluid.defaults("cspace.datePicker", {
+        selectors: {
+            date: ".goog-date-picker-date",
+            calendarDate: ".csc-calendar-date",
+            datePicker: ".csc-date-picker",
+            calendarButton: ".csc-calendar-button",
+            messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
-            timestamp: ".csc-timestamp",
-		},
+            timestamp: ".csc-timestamp"
+        },
         styles: {
-			focus: "focused"
+            focus: "focused"
         },
         strings: {
             invalidDateMessage: "Provided date has invalid format."
         },
         // Default format for valid date.
         defaultFormat: "yyyy-MM-dd"
-	});
-	
+    });
+    
 })(jQuery, fluid);

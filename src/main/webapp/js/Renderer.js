@@ -8,9 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid*/
-
-cspace = cspace || {};
+/*global jQuery, fluid, cspace*/
 
 (function ($, fluid) {
     fluid.log("Renderer.js loaded");
@@ -50,30 +48,6 @@ cspace = cspace || {};
         }
     };
 
-    var fixSelections = function (comp) {
-        if (comp.selection) {
-            for (var j = 0; j < comp.optionlist.length; j++) {
-                comp.optionlist[j] = comp.optionlist[j].value;
-                comp.optionnames[j] = comp.optionnames[j].value;
-            }
-        } else if (comp.valuebinding && comp.valuebinding.valuebinding) {
-            // Workaround for ENGAGE-382            
-            comp.valuebinding = comp.valuebinding.valuebinding;
-        } else if (comp.children) {
-            for (var i = 0; i < comp.children.length; i++) {
-                fixSelections(comp.children[i]);
-            }
-        }
-    };
-
-    var extractEL = function (string) {
-        var i1 = string.indexOf("${");
-        var i2 = string.indexOf("}");
-        if (i1 !== -1 && i2 !== -1) {
-            return string.substring(2, i2);
-        }
-    };
-
     var replaceWithValues = function (string, model) {
         var b = string.indexOf("${");
         var e = string.indexOf("}");
@@ -84,19 +58,6 @@ cspace = cspace || {};
             e = string.indexOf("}");
         }
         return string;
-    };
-
-
-    // the renderer extracts an actual value out of the model for selections
-    // even if they are valuebound. If our model is empty, this causes an error
-    var fixModelForSelection = function (entry, model) {
-        if (entry.selection) {
-            var elPath = extractEL(entry.selection);
-            var modelVal = fluid.model.getBeanValue(model, elPath);
-            if (!modelVal) {
-                fluid.model.setBeanValue(model, elPath, "");
-            }
-        }
     };
 
     // TODO: Note that this assumes absolutely NO binding to the data model
@@ -141,6 +102,23 @@ cspace = cspace || {};
         }
     };
     
+    var correctDoubleValueBinding = function (tree) {
+        return fluid.transform(tree, function(value, key) {
+            if (fluid.isPrimitive(value)) {
+                return value;
+            }
+            else if (value.valuebinding && value.valuebinding.charAt(0) === "$") {
+                // TODO: We decided to forbid this "double reference" phenomenon but it is enshrined in the UISpec
+                value.value = value.valuebinding;
+                delete value.valuebinding;
+                return value;
+                }
+            else {
+                return correctDoubleValueBinding(value);
+            }
+        });
+    };
+    
     cspace.renderUtils = {
         
         cutpointsFromUISpec: function (uispec) {
@@ -151,10 +129,10 @@ cspace = cspace || {};
         
         // TODO: need to make expander's API to be consistent with all expanders in the future.
         expander: function (uispec, that) {
-            var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
+            var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}", model: that.model});
             var protoTree = cspace.renderUtils.buildProtoTree(uispec, that);
+            protoTree = correctDoubleValueBinding(protoTree);
             var tree = expander(protoTree);
-            cspace.renderUtils.fixSelectionsInTree(tree);
             return tree;
         },
 
@@ -177,62 +155,59 @@ cspace = cspace || {};
                 }
             }
         },
-    
-        // the protoExpander doesn't yet handle selections, so the tree it creates needs some adjustment
-        fixSelectionsInTree: function (tree) {
-            for (var i = 0; i < tree.children.length; i++) {
-                fixSelections(tree.children[i]);
-            }
-        },
-        
+
         buildProtoTree: function (uispec, that) {
             var protoTree = {};
             fluid.model.copyModel(protoTree, uispec);
 
             for (var key in protoTree) {
-                if (protoTree.hasOwnProperty(key)) {
-                    var entry = protoTree[key];
-
-                    fixModelForSelection(entry, that.model);
-                    
-                    // add decorator options from that
-                    if (entry.decorators) {
-                        for (var i = 0; i < entry.decorators.length; i++) {
-                            var dec = entry.decorators[i];
-                            if (fluid.getGlobalValue(dec.func + ".extendDecoratorOptions")) {
-                                dec.options = dec.options || {};
-                                fluid.invokeGlobalFunction(dec.func + ".extendDecoratorOptions", [dec.options, that]);
+                var entry = protoTree[key];
+                
+                // add decorator options from that
+                if (entry.decorators) {
+                    for (var i = 0; i < entry.decorators.length; i++) {
+                        var dec = entry.decorators[i];
+                        if (fluid.getGlobalValue(dec.func + ".extendDecoratorOptions")) {
+                            dec.options = dec.options || {};
+                            fluid.invokeGlobalFunction(dec.func + ".extendDecoratorOptions", [dec.options, that]);
+                            if (dec.options.protoTree) { // TODO: consistent model required for this
+                                dec.options.protoTree = {
+                                    expander: {
+                                        type: "fluid.expander.noexpand",
+                                        tree: dec.options.protoTree
+                                    }
+                                };
                             }
                         }
                     }
+                }
 
-                    // multiply template rows based on model
-                    if (key.indexOf(":") !== -1) {
-                        var row = entry.children[0];
-                        var elPath;
-                        for (var subkey in row) {
-                            elPath = findValueBinding(row[subkey]);
-                            if (elPath) {
-                                break;
-                            }
-                        }
-                        var data = fluid.model.getBeanValue(that.model, elPath);
-                        if (!data) {
-                            fluid.model.setBeanValue(that.model, elPath, []);
-                        }
-                        else {
-                            for (var j = 1; j < data.length; j++) {
-                                entry.children[j] = {};
-                                fluid.model.copyModel(entry.children[j], entry.children[0]);
-                                replaceIndex(entry.children[j], 0, j);
-                            }
+                // multiply template rows based on model
+                if (key.indexOf(":") !== -1) {
+                    var row = entry.children[0];
+                    var elPath;
+                    for (var subkey in row) {
+                        elPath = findValueBinding(row[subkey]);
+                        if (elPath) {
+                            break;
                         }
                     }
-
-                    // build static links (assumes no data binding for link elements!)
-                    if ((typeof(entry) === "object") && !entry.decorators) {
-                        constructLinks(entry, that.model);
+                    var data = fluid.model.getBeanValue(that.model, elPath);
+                    if (!data) {
+                        fluid.model.setBeanValue(that.model, elPath, []);
                     }
+                    else {
+                        for (var j = 1; j < data.length; j++) {
+                            entry.children[j] = {};
+                            fluid.model.copyModel(entry.children[j], entry.children[0]);
+                            replaceIndex(entry.children[j], 0, j);
+                        }
+                    }
+                }
+
+                // build static links (assumes no data binding for link elements!)
+                if ((typeof(entry) === "object") && !entry.decorators) {
+                    constructLinks(entry, that.model);
                 }
             }
 

@@ -130,8 +130,6 @@ cspace = cspace || {};
         var protoTree = cspace.renderUtils.buildProtoTree(that.uispec, that);
         fluid.log("RecordEditor.js after buildProtoTree");
         var tree = expander(protoTree);
-        cspace.renderUtils.fixSelectionsInTree(tree);
-        fluid.log("RecordEditor.js after tree is fixed");
         var selectors = {};
         cspace.renderUtils.buildSelectorsFromUISpec(that.uispec, selectors);
         fluid.log("RecordEditor.js after building selectors");

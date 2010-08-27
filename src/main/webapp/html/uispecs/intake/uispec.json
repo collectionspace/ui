@@ -75,6 +75,18 @@
             ] 
         },
         ".csc-intake-current-owner": "${fields.currentOwner}",
+        ".csc-intake-current-owner-autocomplete": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/intake/autocomplete/currentOwner",
+                        "vocabUrl": "../../chain/intake/source-vocab/currentOwner" 
+                    } 
+                } 
+            ] 
+        },
         ".csc-intake-entry-date-container": {
             "decorators": [
                 {
@@ -202,6 +214,7 @@
                 } 
             ] 
         },
+        ".csc-intake-packing-note": "${fields.packingNote}",
         ".csc-intake-depositor-requirements": "${fields.depositorsRequirements}",
         ".csc-intake-insurance-renewal-date": "${fields.insuranceRenewalDate}",
         ".csc-intake-entry-number": "${fields.entryNumber}",
@@ -237,19 +250,6 @@
                                 "selection": "${fields.entryMethods.0.entryMethod}" 
                             } 
                         } 
-                    } 
-                } 
-            ] 
-        },
-        ".csc-intake-packing-note": "${fields.packingNote}",
-        ".csc-intake-current-owner-autocomplete": {
-            "decorators": [
-                {
-                    "func": "cspace.autocomplete",
-                    "type": "fluid",
-                    "options": {
-                        "queryUrl": "../../chain/intake/autocomplete/currentOwner",
-                        "vocabUrl": "../../chain/intake/source-vocab/currentOwner" 
                     } 
                 } 
             ] 

@@ -1,0 +1,13 @@
+[
+{
+"url":"vocabularies/person",
+"type":"person",
+"fullName": "Default person authority"
+},
+{
+"url":"vocabularies/personpamha",
+"type":"person",
+"fullName": "Pamha person authority"
+}
+
+]

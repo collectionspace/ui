@@ -318,43 +318,6 @@ var rendererTester = function(){
         jqUnit.assertDeepEq("New selectors should overwrite existing selectors", expectedSelectors, testSelectors);
     });
     
-    rendererTest.test("fixSelectionsInTree()", function () {
-        var testProtoTree = {
-            selector: {
-                selection: "${field1}",
-                optionlist: ["opt1", "opt2"],
-                optionnames: ["Option 1", "Option 2"]
-            }
-        };
-        var expectedBadTree = {
-            children: [{
-                ID: "selector",
-                selection: { valuebinding: "field1" },
-                optionlist: [
-                    {value: "opt1"},
-                    {value: "opt2"}
-                ],
-                optionnames: [
-                    {value: "Option 1"},
-                    {value: "Option 2"}
-                ]
-            }]
-        };
-        var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}"});
-        var testTree = expander(testProtoTree);
-        jqUnit.assertDeepEq("First, confirm the bug is present in the expander", expectedBadTree, testTree);
-        var expectedFixedTree = {
-            children: [{
-                ID: "selector",
-                selection: { valuebinding: "field1" },
-                optionlist: ["opt1", "opt2"],
-                optionnames: ["Option 1", "Option 2"]
-            }]
-        };
-        cspace.renderUtils.fixSelectionsInTree(testTree);
-        jqUnit.assertDeepEq("Selections should be fixed", expectedFixedTree, testTree);
-    });
-    
     rendererTest.test("cspace.renderUtils.expander()", function () {
         var testUISpec = {
             selector1: "${field1}",
