@@ -368,119 +368,6 @@
                 }
             ]
         },
-        ".csc-collection-object-dimensions": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "elPath": "fields.dimensions",
-                        "protoTree": {
-                            ".csc-object-description-dimension-part": {
-                                "optionnames": [
-                                    "base",
-                                    "frame",
-                                    "framed",
-                                    "image size",
-                                    "mount",
-                                    "paper size",
-                                    "plate size",
-                                    "unframed"
-                                ],
-                                "optionlist": [
-                                    "base",
-                                    "frame",
-                                    "framed",
-                                    "image-size",
-                                    "mount",
-                                    "paper-size",
-                                    "plate-size",
-                                    "unframed"
-                                ],
-                                "selection": "${fields.dimensions.0.measuredPart}"
-                            },
-                            ".csc-object-description-dimension-unit": {
-                                "optionnames": [
-                                    "carats",
-                                    "centimeters",
-                                    "cubic centimeters",
-                                    "feet",
-                                    "inches",
-                                    "kilograms",
-                                    "liters",
-                                    "millimeters",
-                                    "meters",
-                                    "minutes",
-                                    "pixels",
-                                    "square feet",
-                                    "stories"
-                                ],
-                                "optionlist": [
-                                    "carats",
-                                    "centimeters",
-                                    "cubic-centimeters",
-                                    "feet",
-                                    "inches",
-                                    "kilograms",
-                                    "liters",
-                                    "millimeters",
-                                    "meters",
-                                    "minutes",
-                                    "pixels",
-                                    "square-feet",
-                                    "stories"
-                                ],
-                                "selection": "${fields.dimensions.0.measurementUnit}"
-                            },
-                            ".csc-object-description-dimension": {
-                                "optionnames": [
-                                    "area",
-                                    "base",
-                                    "circumference",
-                                    "count",
-                                    "depth",
-                                    "diameter",
-                                    "height",
-                                    "length",
-                                    "running time",
-                                    "target",
-                                    "volume",
-                                    "weight",
-                                    "width"
-                                ],
-                                "optionlist": [
-                                    "area",
-                                    "base",
-                                    "circumference",
-                                    "count",
-                                    "depth",
-                                    "diameter",
-                                    "height",
-                                    "length",
-                                    "running-time",
-                                    "target",
-                                    "volume",
-                                    "weight",
-                                    "width"
-                                ],
-                                "selection": "${fields.dimensions.0.dimension}"
-                            },
-                            ".csc-object-description-dimension-value-qualifier": "${fields.dimensions.0.valueQualifier}",
-                            ".csc-object-description-dimension-value-date-container": {
-                                "decorators": [
-                                    {
-                                        "func": "cspace.datePicker",
-                                        "type": "fluid"
-                                    }
-                                ]
-                            },
-                            ".csc-object-description-dimension-value-date": "${fields.dimensions.0.valueDate}",
-                            ".csc-object-description-dimension-value": "${fields.dimensions.0.value}"
-                        }
-                    }
-                }
-            ]
-        },
         ".csc-collection-object-assocOrganization": {
             "decorators": [
                 {
@@ -534,46 +421,46 @@
                                 "selection": "${fields.objectNameGroup.0.objectNameType}"
                             },
                             ".csc-object-identification-object-language": {
-                                "default": "4",
+                                "default": "6",
                                 "optionnames": [
                                     "Please select an item",
-                                    "Korean",
-                                    "Middle English",
-                                    "Russian",
-                                    "English",
                                     "Spanish",
+                                    "Middle English",
+                                    "Hebrew",
+                                    "Portuguese",
+                                    "German",
+                                    "English",
+                                    "Japanese",
                                     "French",
                                     "Ancient Greek",
-                                    "Arabic",
                                     "Latin",
-                                    "Hebrew",
-                                    "Chinese",
-                                    "Portuguese",
-                                    "Italian",
                                     "Old English",
-                                    "German",
+                                    "Russian",
+                                    "Arabic",
+                                    "Korean",
                                     "Swahili",
-                                    "Japanese"
+                                    "Italian",
+                                    "Chinese"
                                 ],
                                 "optionlist": [
                                     "",
-                                    "korean",
-                                    "middleenglish",
-                                    "russian",
-                                    "eng",
                                     "spn",
+                                    "middleenglish",
+                                    "hebrew",
+                                    "portuguese",
+                                    "german",
+                                    "eng",
+                                    "japanese",
                                     "french",
                                     "ancientgreek",
-                                    "arabic",
                                     "latin",
-                                    "hebrew",
-                                    "chinese",
-                                    "portuguese",
-                                    "italian",
                                     "oldenglish",
-                                    "german",
+                                    "russian",
+                                    "arabic",
+                                    "korean",
                                     "swahili",
-                                    "japanese"
+                                    "italian",
+                                    "chinese"
                                 ],
                                 "selection": "${fields.objectNameGroup.0.objectNameLanguage}"
                             },
@@ -691,46 +578,46 @@
         },
         ".csc-collection-object-assocCulturalContextNote": "${fields.assocCulturalContextNote}",
         ".csc-collection-object-titleTranslationLanguage": {
-            "default": "4",
+            "default": "6",
             "optionnames": [
                 "Please select a value",
-                "Korean",
-                "Middle English",
-                "Russian",
-                "English",
                 "Spanish",
+                "Middle English",
+                "Hebrew",
+                "Portuguese",
+                "German",
+                "English",
+                "Japanese",
                 "French",
                 "Ancient Greek",
-                "Arabic",
                 "Latin",
-                "Hebrew",
-                "Chinese",
-                "Portuguese",
-                "Italian",
                 "Old English",
-                "German",
+                "Russian",
+                "Arabic",
+                "Korean",
                 "Swahili",
-                "Japanese"
+                "Italian",
+                "Chinese"
             ],
             "optionlist": [
                 "",
-                "korean",
-                "middleenglish",
-                "russian",
-                "eng",
                 "spn",
+                "middleenglish",
+                "hebrew",
+                "portuguese",
+                "german",
+                "eng",
+                "japanese",
                 "french",
                 "ancientgreek",
-                "arabic",
                 "latin",
-                "hebrew",
-                "chinese",
-                "portuguese",
-                "italian",
                 "oldenglish",
-                "german",
+                "russian",
+                "arabic",
+                "korean",
                 "swahili",
-                "japanese"
+                "italian",
+                "chinese"
             ],
             "selection": "${fields.titleTranslationLanguage}"
         },
@@ -1168,91 +1055,91 @@
         ".csc-object-description-material": "${fields.material}",
         ".csc-object-description-material-component-note": "${fields.materialComponentNote}",
         ".csc-object-description-inscription-content-language": {
-            "default": "4",
+            "default": "6",
             "optionnames": [
                 "Please select a value",
-                "Korean",
-                "Middle English",
-                "Russian",
-                "English",
                 "Spanish",
+                "Middle English",
+                "Hebrew",
+                "Portuguese",
+                "German",
+                "English",
+                "Japanese",
                 "French",
                 "Ancient Greek",
-                "Arabic",
                 "Latin",
-                "Hebrew",
-                "Chinese",
-                "Portuguese",
-                "Italian",
                 "Old English",
-                "German",
+                "Russian",
+                "Arabic",
+                "Korean",
                 "Swahili",
-                "Japanese"
+                "Italian",
+                "Chinese"
             ],
             "optionlist": [
                 "",
-                "korean",
-                "middleenglish",
-                "russian",
-                "eng",
                 "spn",
+                "middleenglish",
+                "hebrew",
+                "portuguese",
+                "german",
+                "eng",
+                "japanese",
                 "french",
                 "ancientgreek",
-                "arabic",
                 "latin",
-                "hebrew",
-                "chinese",
-                "portuguese",
-                "italian",
                 "oldenglish",
-                "german",
+                "russian",
+                "arabic",
+                "korean",
                 "swahili",
-                "japanese"
+                "italian",
+                "chinese"
             ],
             "selection": "${fields.inscriptionContentLanguage}"
         },
         ".csc-object-production-note": "${fields.objectProductionNote}",
         ".csc-object-identification-object-title-language": {
-            "default": "4",
+            "default": "6",
             "optionnames": [
                 "Please select a value",
-                "Korean",
-                "Middle English",
-                "Russian",
-                "English",
                 "Spanish",
+                "Middle English",
+                "Hebrew",
+                "Portuguese",
+                "German",
+                "English",
+                "Japanese",
                 "French",
                 "Ancient Greek",
-                "Arabic",
                 "Latin",
-                "Hebrew",
-                "Chinese",
-                "Portuguese",
-                "Italian",
                 "Old English",
-                "German",
+                "Russian",
+                "Arabic",
+                "Korean",
                 "Swahili",
-                "Japanese"
+                "Italian",
+                "Chinese"
             ],
             "optionlist": [
                 "",
-                "korean",
-                "middleenglish",
-                "russian",
-                "eng",
                 "spn",
+                "middleenglish",
+                "hebrew",
+                "portuguese",
+                "german",
+                "eng",
+                "japanese",
                 "french",
                 "ancientgreek",
-                "arabic",
                 "latin",
-                "hebrew",
-                "chinese",
-                "portuguese",
-                "italian",
                 "oldenglish",
-                "german",
+                "russian",
+                "arabic",
+                "korean",
                 "swahili",
-                "japanese"
+                "italian",
+                "chinese"
             ],
             "selection": "${fields.titleLanguage}"
         },
@@ -1265,46 +1152,46 @@
                         "elPath": "fields.contentLanguages",
                         "protoTree": {
                             ".csc-object-description-content-language": {
-                                "default": "4",
+                                "default": "6",
                                 "optionnames": [
                                     "Please select a value",
-                                    "Korean",
-                                    "Middle English",
-                                    "Russian",
-                                    "English",
                                     "Spanish",
+                                    "Middle English",
+                                    "Hebrew",
+                                    "Portuguese",
+                                    "German",
+                                    "English",
+                                    "Japanese",
                                     "French",
                                     "Ancient Greek",
-                                    "Arabic",
                                     "Latin",
-                                    "Hebrew",
-                                    "Chinese",
-                                    "Portuguese",
-                                    "Italian",
                                     "Old English",
-                                    "German",
+                                    "Russian",
+                                    "Arabic",
+                                    "Korean",
                                     "Swahili",
-                                    "Japanese"
+                                    "Italian",
+                                    "Chinese"
                                 ],
                                 "optionlist": [
                                     "",
-                                    "korean",
-                                    "middleenglish",
-                                    "russian",
-                                    "eng",
                                     "spn",
+                                    "middleenglish",
+                                    "hebrew",
+                                    "portuguese",
+                                    "german",
+                                    "eng",
+                                    "japanese",
                                     "french",
                                     "ancientgreek",
-                                    "arabic",
                                     "latin",
-                                    "hebrew",
-                                    "chinese",
-                                    "portuguese",
-                                    "italian",
                                     "oldenglish",
-                                    "german",
+                                    "russian",
+                                    "arabic",
+                                    "korean",
                                     "swahili",
-                                    "japanese"
+                                    "italian",
+                                    "chinese"
                                 ],
                                 "selection": "${fields.contentLanguages.0.contentLanguage}"
                             }
@@ -1366,24 +1253,24 @@
             "selection": "${fields.technicalAttribute}"
         },
         ".csc-object-history-association-denomination": {
-            "default": "0",
+            "default": "6",
             "optionnames": [
-                "US Dollar",
-                "Swiss Franc",
-                "Danish Krone",
                 "Canadian Dollar",
+                "Euro",
+                "Danish Krone",
                 "Swedish Krona",
+                "Swiss Franc",
                 "Pound Sterling",
-                "Euro"
+                "US Dollar"
             ],
             "optionlist": [
-                "usdollar",
-                "swissfranc",
-                "danishkrone",
                 "canadiandollar",
+                "euro",
+                "danishkrone",
                 "swedishkrona",
+                "swissfranc",
                 "poundsterling",
-                "euro"
+                "usdollar"
             ],
             "selection": "${fields.ownershipExchangePriceCurrency}"
         },
@@ -1488,7 +1375,37 @@
                     "options": {
                         "elPath": "fields.fieldCollectionMethods",
                         "protoTree": {
-                            ".csc-collection-object-fieldCollectionMethod": "${fields.fieldCollectionMethods.0.fieldCollectionMethod}"
+                            ".csc-collection-object-fieldCollectionMethod": {
+                                "optionnames": [
+                                    "Please select an item",
+                                    "trapped",
+                                    "borehole",
+                                    "metal detector",
+                                    "salvaged",
+                                    "exchanged",
+                                    "found dead",
+                                    "netted",
+                                    "purchased",
+                                    "commissioned",
+                                    "shot",
+                                    "photographed"
+                                ],
+                                "optionlist": [
+                                    "",
+                                    "trapped",
+                                    "borehole",
+                                    "metaldetector",
+                                    "salvaged",
+                                    "exchanged",
+                                    "founddead",
+                                    "netted",
+                                    "purchased",
+                                    "commissioned",
+                                    "shot",
+                                    "photographed"
+                                ],
+                                "selection": "${fields.fieldCollectionMethods.0.fieldCollectionMethod}"
+                            }
                         }
                     }
                 }
@@ -1499,6 +1416,119 @@
                 {
                     "func": "cspace.datePicker",
                     "type": "fluid"
+                }
+            ]
+        },
+        ".csc-collection-object-dimensionGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.dimensionGroup",
+                        "protoTree": {
+                            ".csc-object-description-dimension-part": {
+                                "optionnames": [
+                                    "base",
+                                    "frame",
+                                    "framed",
+                                    "image size",
+                                    "mount",
+                                    "paper size",
+                                    "plate size",
+                                    "unframed"
+                                ],
+                                "optionlist": [
+                                    "base",
+                                    "frame",
+                                    "framed",
+                                    "image-size",
+                                    "mount",
+                                    "paper-size",
+                                    "plate-size",
+                                    "unframed"
+                                ],
+                                "selection": "${fields.dimensionGroup.0.measuredPart}"
+                            },
+                            ".csc-object-description-dimension-unit": {
+                                "optionnames": [
+                                    "carats",
+                                    "centimeters",
+                                    "cubic centimeters",
+                                    "feet",
+                                    "inches",
+                                    "kilograms",
+                                    "liters",
+                                    "millimeters",
+                                    "meters",
+                                    "minutes",
+                                    "pixels",
+                                    "square feet",
+                                    "stories"
+                                ],
+                                "optionlist": [
+                                    "carats",
+                                    "centimeters",
+                                    "cubic-centimeters",
+                                    "feet",
+                                    "inches",
+                                    "kilograms",
+                                    "liters",
+                                    "millimeters",
+                                    "meters",
+                                    "minutes",
+                                    "pixels",
+                                    "square-feet",
+                                    "stories"
+                                ],
+                                "selection": "${fields.dimensionGroup.0.measurementUnit}"
+                            },
+                            ".csc-object-description-dimension": {
+                                "optionnames": [
+                                    "area",
+                                    "base",
+                                    "circumference",
+                                    "count",
+                                    "depth",
+                                    "diameter",
+                                    "height",
+                                    "length",
+                                    "running time",
+                                    "target",
+                                    "volume",
+                                    "weight",
+                                    "width"
+                                ],
+                                "optionlist": [
+                                    "area",
+                                    "base",
+                                    "circumference",
+                                    "count",
+                                    "depth",
+                                    "diameter",
+                                    "height",
+                                    "length",
+                                    "running-time",
+                                    "target",
+                                    "volume",
+                                    "weight",
+                                    "width"
+                                ],
+                                "selection": "${fields.dimensionGroup.0.dimension}"
+                            },
+                            ".csc-object-description-dimension-value-qualifier": "${fields.dimensionGroup.0.valueQualifier}",
+                            ".csc-object-description-dimension-value-date-container": {
+                                "decorators": [
+                                    {
+                                        "func": "cspace.datePicker",
+                                        "type": "fluid"
+                                    }
+                                ]
+                            },
+                            ".csc-object-description-dimension-value-date": "${fields.dimensionGroup.0.valueDate}",
+                            ".csc-object-description-dimension-value": "${fields.dimensionGroup.0.value}"
+                        }
+                    }
                 }
             ]
         },

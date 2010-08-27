@@ -118,7 +118,7 @@
                 "owner": "urn:cspace:org.collectionspace.demo:orgauthority:id(ac8eb0df-eff4-4047-91bb):organization:id(ac137052-78ec-40db-be8a)'dd33dd'"
             }
         ],
-        "dimensions": [
+        "dimensionGroup": [
             {
                 "_primary": false,
                 "value": "test",
