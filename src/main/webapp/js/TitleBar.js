@@ -22,7 +22,9 @@ cspace = cspace || {};
 
     var makeFieldUpdater = function (selector) {
         return function (model, oldModel, changeRequest) {
-            updateField(selector, fluid.model.getBeanValue(model, changeRequest.path));
+        	// We always select the first element in changeRequest array.
+        	// We currently do not use multiple changes API.
+            updateField(selector, fluid.model.getBeanValue(model, changeRequest[0].path));
         };
     };
 
