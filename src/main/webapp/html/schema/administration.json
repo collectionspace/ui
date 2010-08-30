@@ -15,12 +15,8 @@
                             {
                                 "roleName": "ROLE_ADMINISTRATOR",
                                 "roleGroup": "Museum staff",
-                                "roleSelected": false 
-                            },
-                            {
-                                "roleName": "ROLE_READER",
-                                "roleGroup": "Museum staff",
-                                "roleSelected": true 
+                                "roleSelected": false,
+                                "roleId": "1" 
                             }
                         ]
                     }
