@@ -329,11 +329,11 @@
         "fieldCollectionMethods": [
             {
                 "_primary": false,
-                "fieldCollectionMethod": "sadsa"
+                "fieldCollectionMethod": "commissioned"
             },
             {
                 "_primary": true,
-                "fieldCollectionMethod": "22222"
+                "fieldCollectionMethod": "founddead"
             }
         ],
         "styles": [
