@@ -18,7 +18,8 @@
             "tree": {
                 ".csc-users-roleGroup": "${{row}.roleGroup}",
                 ".csc-users-roleSelected": "${{row}.roleSelected}",
-                ".csc-users-roleName": "${{row}.roleName}"
+                ".csc-users-roleName": "${{row}.roleName}",
+                ".csc-users-roleId": "${{row}.roleId}"
             },
             "type": "fluid.renderer.repeat",
             "pathAs": "row",

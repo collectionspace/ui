@@ -13,13 +13,19 @@
                         "type": "array",
                         "default": [
                             {
-                                "roleName": "ROLE_ADMINISTRATOR",
                                 "roleGroup": "Museum staff",
-                                "roleSelected": false,
-                                "roleId": "1" 
-                            }
-                        ]
-                    }
+                                "roleId": "2b29002c-efdc-4f17-b0bd-c88e963bebcf",
+                                "roleName": "ROLE_TENANT_ADMINISTRATOR",
+                                "roleSelected": false 
+                            },
+                            {
+                                "roleGroup": "Museum staff",
+                                "roleId": "f7c8991e-5cfb-4a16-a8f6-c61c1b453d2f",
+                                "roleName": "ROLE_TENANT_READER",
+                                "roleSelected": false 
+                            } 
+                        ] 
+                    } 
                 } 
             } 
         } 
