@@ -47,7 +47,8 @@
 
 .cs-autocomplete-popup {
     background-color:#FAFBF7;
-    width:auto;
+    /*width:auto;*/
+	width:280px;
     float:left; 
     border:2px solid #C7CFD4;
     position:absolute;
@@ -62,7 +63,7 @@
     -webkit-box-shadow: 3px 3px 4px  #C7CFD4;
     box-shadow: 3px 3px 4px  #C7CFD4;
 }
-.cs-autocomplete-popup .inner {padding:5px 10px;}
+.cs-autocomplete-popup .inner {padding:3px;}
 .cs-autocomplete-popup .cs-autocomplete-noMatches  {font-style:italic; color:#6E6E6E; padding-bottom:15px;}
 .cs-autocomplete-popup .content {color:#6E6E6E; padding-bottom:5px; float:none;}
 .cs-autocomplete-popup .pad-right {padding-right:10px;}
@@ -71,7 +72,7 @@
 /** TODO: this positioning was arrived at through blind experiment, more stable strategy needed
 to precipitate it directly on top of the "loading" indicator */
 
-.cs-autocomplete-closebutton { position:absolute; right:1px; bottom: 20px}
-
+/*.cs-autocomplete-closebutton { position:absolute; right:1px; bottom: 20px}*/
+.cs-autocomplete-closebutton { position:relative; left:-1px; bottom: 15px; /*right:19px;*/ margin-bottom:-18px; float:right; }
 
 

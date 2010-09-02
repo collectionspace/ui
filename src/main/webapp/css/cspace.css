@@ -146,7 +146,7 @@ li .flc-pager-pageLink {margin-top:-1px;}
 /* header global nav */
 .header-menu-row {width:auto; margin-bottom:2px; border-bottom: 0px solid #D3D2CE; background:#fff url('../images/header-menu-row-buffer.png') repeat-x bottom right;}
 .header-menu-row .inner {float:left; background-color:#fff;}
-.menu-item {/*padding: 0 25px 2px 0;*/ margin-right:3px; margin-bottom:7px; border-bottom:0px solid #D3D2CE; color:#A6A6A6; font-size: 14px; 
+.menu-item {/*padding: 0 25px 2px 0;*/ margin-right:3px; margin-bottom:7px; border-bottom:none; color:#A6A6A6; font-size: 14px; 
 	font-weight:bold; background-color:#fff; cursor:pointer; float:left;}
 .menu-item a {position:relative;}
 .menu-item.selected {color:#646464; border-bottom-color:#646464;}
@@ -165,7 +165,7 @@ li .flc-pager-pageLink {margin-top:-1px;}
 
 
 /* secondary navigation menu */
-#secondary-nav {padding-bottom:0px;}
+#secondary-nav {padding-bottom:0;}
 #secondary-nav-menu {padding-top:6px; width:100%; margin-bottom:0px;}
 #secondary-nav-menu .menu-record {padding-bottom:15px;}
 #secondary-nav-menu ul.menu-record { white-space:nowrap;}
@@ -185,7 +185,7 @@ li .flc-pager-pageLink {margin-top:-1px;}
 /*search page related */ /* need to revisit */
 #search-box {padding: 10px 0 10px 10px; border:0px solid #CECFD1; margin-bottom:20px; /*background-color:#F2F2F3;*/}
 #search-box input {margin-right:10px;}
-#create-box {padding: 12px 0 12px 12px; margin:0 0 20px 0; /*background-color:#E6E6E6;*/ border:0px solid #CECFD1;}
+#create-box {padding: 12px 0 12px 12px; margin:0 0 20px 0; /*background-color:#E6E6E6;*/ border:none;}
 .search-box {background-color:#E6E6E6; border:1px solid #CECFD1;}
 .main-users-page #search-box {background-color:#E8E8E8; margin-bottom:24px; max-width:675px;}
 .search-bar {}
@@ -315,17 +315,17 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .info-pair-date .label,
 .info-pair-select .label {/*width:100%;*/ /*float:left;*/ padding-bottom:4px; font-weight:bold; color:#333333; font-size:11px; line-height:11px;}
 
-.info-pair .content td.label {float:none; padding-bottom:0px; font-weight:normal; font-size:inherit; line-height:inherit;}
+.info-pair .content td.label {float:none; padding-bottom:0; font-weight:normal; font-size:inherit; line-height:inherit;}
 
 .info-pair .content,
 .info-pair-date .content,
 .info-pair-select .content {width:100%; float:left; border:none;}
 .info-pair-date .content {width:auto;}
 
-.info-pair .content > select {width:100%; border-spacing:0; margin-top:0px; border:1px solid #C7CFD4; padding:0;}
+.info-pair .content > select {width:100%; border-spacing:0; margin-top:0; border:1px solid #C7CFD4; padding:0;}
 .info-pair .content table,
 .info-pair-date .content table,
-.info-pair-select table {width:100%; border-spacing:0; background-color:#FFF; margin-top:0px; border:1px solid #C7CFD4; /*border:1px solid #C7CFD4; border-bottom: 0px solid #C7CFD4;*/ padding:0;}
+.info-pair-select table {width:100%; border-spacing:0; background-color:#FFF; margin-top:0; border:1px solid #C7CFD4; /*border:1px solid #C7CFD4; border-bottom: 0px solid #C7CFD4;*/ padding:0;}
 
 .info-pair .content table table,
 .info-pair-date .content table  table,
@@ -341,7 +341,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .info-pair .content thead td {border:1px solid #C7CFD4; background-color:#F8F8F7; color:#3B3B3C; padding:2px; font-size:11px; line-height:11px;}
 .info-pair .content tbody tr {}
 .info-pair .content tbody td {border: 1px solid #C7CFD4; /*border-bottom:1px solid #C7CFD4;*/}
-.info-pair .content tbody td input {*margin:0 -2px 0 2px;}
+.info-pair .content tbody td input {*margin:0 -2px 0 2px; /*position:relative;*/}
 
 .find-edit .fl-container-left .information-group .content, .related-records  .information-group  .content {padding:0 !important;}
 /*.find-edit .fl-container-left .information-group  table {font-size:12px; background-color:#00FFFF; border:0px solid #ADADAD; }
@@ -492,7 +492,7 @@ table .input-select         {width: 100%; height:17px; /**height:22px;*/ padding
 .cs-repeatable-repeat .input-textarea  {border:1px solid #C7CFD4;} /* need to clean up borders for all input types */
 .input-alpha-login       {width: 120px; height:18px;}
 
-.cs-repeatable-repeat input,.cs-repeatable-repeat textarea {border:1px solid #C7CFD4; width:88.5%;}
+.cs-repeatable-repeat input,.cs-repeatable-repeat textarea {border:1px solid #C7CFD4; width:88.5%; float:left;}
 .fl-container-pivot  select.recently-created-list {width:232px !important; height:20px; /**height:24px;*/}
 
 .cal img {padding:0 1px 1px 1px;}
@@ -502,7 +502,7 @@ table .field-cal {width:162px; background-color:#C7CFD4;}
 .field-cal img {padding: 0; margin:0 0 -4px -1px;}
 
 #footer {margin-top:20px; border-top: 2px solid #D8D9DA; padding-top:7px;}
-#footer .footer-text {text-align: center; color: #656565; font-weight: bold; font-size:11px; line-height: 120%;}
+#footer .footer-text {text-align: center; color: #656565; font-weight: bold; font-size:11px; line-height:120%;}
 
 .gen-num-overlay {}
 .gen-num-overlay-header {padding:8px 20px; color:#fff; background-color:#9D9FA2; font-size:15px; border-bottom: 1px solid #BFDF94;}
@@ -515,10 +515,10 @@ table .field-cal {width:162px; background-color:#C7CFD4;}
 .gen-num-overlay-body table tbody td.type {color:#818183;}
 .gen-num-overlay-body table tbody td.prefix {color:#0F96D7;}
 .gen-num-overlay table tr:hover td {background-color:#FFD6F7;}
-.gen-num-overlay table tr:hover td.type {color:#3 33399;}
-.gen-num-overlay table tr:hover td.prefix {color:#3 33399;}
+.gen-num-overlay table tr:hover td.type {/*color:#3 33399;*/}
+.gen-num-overlay table tr:hover td.prefix {/*color:#3 33399;*/}
 
-.pivot-search-box {margin-bottom:20px; margin-top:0px; border:0px solid #999999; border-top:none; background-color:#E8E7E7;}
+.pivot-search-box {margin-bottom:20px; margin-top:0px; border:none; border-top:none; background-color:#E8E7E7;}
 .pivot-search-box .header {background-color:#6E9FCE; color:#FFFFFF; font-size:13px;  padding:5px 0 6px 5px; width:auto;}
 .pivot-search-box .content {border:none; padding: 10px;}
 
@@ -623,7 +623,9 @@ table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; f
 .content .cs-repeatable-repeat {marg in-top:-17px; clear:both;}
 tr.csc-repeatable-headerRow td:first-child, tr.csc-repeatable-headerRow td:last-child {width:13px;}
 .cs-repeatable-add {}
-input[type="button"].cs-repeatable-add {font-size:11px; height:17px; width:44px; position:absolute; right:37px; top:-2px;}
+input[type="button"].cs-repeatable-add, .info-pair-date input[type="button"].cs-repeatable-add 
+{font-size:11px; height:17px; width:44px; position:absolute; left:80%; top:-2px;}
+.info-pair-date input[type="button"].cs-repeatable-add {right:0; left:136px;}
 li.cs-repeatable-repeat {list-style-type: none;  margin-bottom:1px;   width:99%}
 .cs-repeatable-content {/*width: 90.2%;*/ width:89%; /*margin:0 0px 0 14px;*/ float:left;}
 .cs-repeatable-content > input {width: 89.2%;}
@@ -631,8 +633,10 @@ li.cs-repeatable-repeat {list-style-type: none;  margin-bottom:1px;   width:99%}
 div.cs-rep eatable-content input{float:left;}
 input.cs-repeatable-primary {width: 11px; position: relative; vertical-align:top; border:none; margin-right:3px; /*margin-right: -20px;*/ float:left;}
 td input.cs-repeatable-primary {margin:0 0 0 2px;  vertical-align:bottom;}
-input.cs-repeatable-delete {/*float:right;*/ border:none; width: 16px; height:18px; vertical-align:top; padding:0px; background:transparent url('../images/icnDeleteIdle.png') no-repeat 1px 2px;}
-input.cs-repeatable-delete:hover, input.cs-repeatable-delete:focus {color: white; background:transparent url('../images/icnDelete.png') no-repeat 1px 2px;}
+input.cs-repeatable-delete, table tr.csc-repeatable-repeat input.cs-repeatable-delete {float:left; border:none; /*width: 16px;*/ width:5%; height:17px; vertical-align:top; padding:0px; background:transparent url('../images/icnDeleteIdle.png') no-repeat 1px 2px;}
+table tr.csc-repeatable-repeat input.cs-repeatable-delete {width: 16px;}
+input.cs-repeatable-delete:hover, input.cs-repeatable-delete:focus,
+table tr.csc-repeatable-repeat input.cs-repeatable-delete:hover, table tr.csc-repeatable-repeat input.cs-repeatable-delete:focus {color: white; background:transparent url('../images/icnDelete.png') no-repeat 1px 2px;}
 
 
 /*   styling the date pickers   */
