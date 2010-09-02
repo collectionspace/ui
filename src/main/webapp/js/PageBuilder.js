@@ -61,7 +61,7 @@ cspace = cspace || {};
         //       that may cause errors upon save. 
         //       Note: this block is almost identical to a code block in ListEditor around line 106
         if (that.schema) {
-        	var model = cspace.util.getBeanValue({}, that.options.pageType, that.schema);
+            var model = cspace.util.getBeanValue({}, that.options.pageType, that.schema);
             that.applier.requestChange("", model);
         }
         else {

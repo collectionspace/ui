@@ -7479,7 +7479,7 @@ var fluid = fluid || fluid_1_2;
     
     fluid.identity = function(arg) {
         return arg;
-    }
+    };
     
     // Framework and instantiation functions.
     
@@ -7626,7 +7626,7 @@ var fluid = fluid || fluid_1_2;
      */
     fluid.isArrayable = function(totest) {
         return typeof(totest) !== "string" && typeof(totest.length) === "number";
-    }
+    };
     
     /**
      * Attaches the user's listeners to a set of events.
@@ -7664,7 +7664,7 @@ var fluid = fluid || fluid_1_2;
      * Sets up a component's declared events.
      * Events are specified in the options object by name. There are three different types of events that can be
      * specified: 
-     * 1. an ordinary multicast event, specified by "null. 
+     * 1. an ordinary multicast event, specified by "null". 
      * 2. a unicast event, which allows only one listener to be registered
      * 3. a preventable event
      * 
@@ -7689,7 +7689,7 @@ var fluid = fluid || fluid_1_2;
     fluid.computeNickName = function(typeName) {
         var segs = fluid.model.parseEL(typeName);
         return segs[segs.length - 1];
-    }
+    };
     
     /**
      * Merges the component's declared defaults, as obtained from fluid.defaults(),
@@ -7703,6 +7703,9 @@ var fluid = fluid || fluid_1_2;
      */
     fluid.mergeComponentOptions = function (that, componentName, userOptions) {
         var defaults = fluid.defaults(componentName); 
+        if (fluid.expandOptions) {
+            defaults = fluid.expandOptions(fluid.copy(defaults));
+        }
         that.options = fluid.merge(defaults? defaults.mergePolicy: null, {}, defaults, userOptions);    
     };
     
@@ -7732,7 +7735,7 @@ var fluid = fluid || fluid_1_2;
      */
     fluid.initView = function (componentName, container, userOptions) {
         fluid.expectFilledSelector(container, "Error instantiating component with name \"" + componentName);
-        var container = fluid.container(container, true);
+        container = fluid.container(container, true);
         if (!container) {
             return null;
         }
@@ -7764,7 +7767,7 @@ var fluid = fluid || fluid_1_2;
     fluid.isMarker = function(totest, type) {
         if (typeof (totest) !== 'object' || totest.type !== "fluid.marker") return false;
         if (!type) return true;
-        return totest.value === type;
+        return totest.value === type || totest.value === type.value;
     };
     
     /** Construct a dummy or "placeholder" subcomponent, that optionally provides empty
@@ -7773,8 +7776,9 @@ var fluid = fluid || fluid_1_2;
     fluid.emptySubcomponent = function (options) {
         var that = {};
         options = $.makeArray(options);
+        var empty = function () {};
         for (var i = 0; i < options.length; ++ i) {
-            that[options[i]] = function () {};
+            that[options[i]] = empty;
         }
         return that;
     };
@@ -7788,7 +7792,7 @@ var fluid = fluid || fluid_1_2;
      * @param {Object} options user-supplied options to merge with the defaults
      */
     fluid.initLittleComponent = function(name, options) {
-        var that = {typeName: name, id: fluid_guid++};
+        var that = {typeName: name, id: fluid.allocateGuid()};
         fluid.mergeComponentOptions(that, name, options);
         that.nickName = that.options.nickName? that.options.nickName: fluid.computeNickName(that.typeName);    
         return that;
@@ -7977,8 +7981,10 @@ var fluid = fluid || fluid_1_2;
     };
     
     fluid.getGlobalValue = function(path, env) {
-        env = env || fluid.environment;
-        return fluid.model.getBeanValue(globalObject, path, env);
+        if (path) {
+            env = env || fluid.environment;
+            return fluid.model.getBeanValue(globalObject, path, env);
+        }
     };
     
     /**
@@ -8028,7 +8034,7 @@ var fluid = fluid || fluid_1_2;
     
     fluid.allocateGuid = function() {
         return fluid_guid++;
-    }
+    };
     
     fluid.event.identifyListener = function(listener) {
         if (!listener.$$guid) {
@@ -8134,6 +8140,11 @@ var fluid = fluid || fluid_1_2;
     
     fluid.model.composePath = function (prefix, suffix) {
         return prefix === ""? suffix : (suffix === ""? prefix : prefix + "." + suffix);
+    };
+    
+    /** Compose any number of path segments, none of which may be empty **/
+    fluid.model.composeSegments = function () {
+        return $.makeArray(arguments).join(".");
     };
 
     fluid.model.resolvePathSegment = function(root, segment, create) {
@@ -8813,6 +8824,13 @@ fluid_1_2 = fluid_1_2 || {};
     fluid.bindFossils = function(node, data, fossils) {
         $.data(node, fluid.BINDING_ROOT_KEY, {data: data, fossils: fossils});
         };
+        
+    fluid.boundPathForNode = function(node, fossils) {
+        node = fluid.unwrap(node);
+        var key = node.name || node.id;
+        var record = fossils[key];
+        return record? record.EL: null;
+    };
   
     fluid.findForm = function (node) {
       return fluid.findAncestor(node, 
@@ -8830,7 +8848,6 @@ fluid_1_2 = fluid_1_2 || {};
             node = node[0];
             multiple = true;
         }
-        var jNode = $(node);
         if ("input" !== node.nodeName.toLowerCase()
            || ! /radio|checkbox/.test(node.type)) {return $(node).val(newValue);}
         var name = node.name;
@@ -8842,7 +8859,7 @@ fluid_1_2 = fluid_1_2 || {};
             elements = nodeIn;
         }
         else {
-            var elements = document.getElementsByName(name);
+            elements = document.getElementsByName(name);
             var scope = fluid.findForm(node);
             elements = $.grep(elements, 
               function(element) {
@@ -8923,10 +8940,11 @@ fluid_1_2 = fluid_1_2 || {};
             }
             else {
                 escaped = false;
-                if (segment !== null)
+                if (segment !== null) {
                     accept += c;
                 }
             }
+        }
         if (segment !== null) {
             accept[0] = segment;
         }
@@ -9049,7 +9067,7 @@ fluid_1_2 = fluid_1_2 || {};
                 type: type
             };
         that.fireChangeRequest(changeRequest);
-        }
+        };
     }
     
   
@@ -9078,8 +9096,8 @@ fluid_1_2 = fluid_1_2 || {};
                             return false;
                         }
                     }
-                }
-            }
+                };
+            };
             return togo;
         }
 
@@ -9254,6 +9272,7 @@ fluid_1_2 = fluid_1_2 || {};
             bindRequestChange(internalApplier);
             var ation = {
                 commit: function() {
+                    var oldModel;
                     if (cancelled) {
                         return false;
                     }
@@ -9265,7 +9284,7 @@ fluid_1_2 = fluid_1_2 || {};
                         oldModel = model;
                     }
                     else {
-                        var oldModel = {};
+                        oldModel = {};
                         fluid.model.copyModel(oldModel, model);
                         fluid.clear(model);
                         fluid.model.copyModel(model, newModel);
@@ -9337,7 +9356,7 @@ fluid_1_2 = fluid_1_2 || {};
        var model = {};
        var superApplier = fluid.makeSuperApplier();
        var togo = {model: model, applier: superApplier};
-       for (path in modelSpec) {
+       for (var path in modelSpec) {
            var rec = modelSpec[path];
            fluid.attachModel(model, path, rec.model);
            if (rec.applier) {
@@ -9842,6 +9861,10 @@ var fluid = fluid || fluid_1_2;
             that.selectables.unbind("blur." + NAMESPACE_KEY);
             that.selectables.bind("focus."+ NAMESPACE_KEY, selectableFocusHandler(that));
             that.selectables.bind("blur." + NAMESPACE_KEY, selectableBlurHandler(that));
+            if (keyMap && that.options.noBubbleListeners) {
+                that.selectables.unbind("keydown."+NAMESPACE_KEY);
+                that.selectables.bind("keydown."+NAMESPACE_KEY, arrowKeyHandler(that, keyMap));
+            }
             if (focusedItem) {
                 selectElement(focusedItem, that);
             }
@@ -9863,7 +9886,7 @@ var fluid = fluid || fluid_1_2;
         };
         
         // Add various handlers to the container.
-        if (keyMap) {
+        if (keyMap && !that.options.noBubbleListeners) {
             container.keydown(arrowKeyHandler(that, keyMap));
         }
         container.keydown(tabKeyHandler(that));
@@ -10056,7 +10079,7 @@ var fluid_1_2 = fluid_1_2 || {};
     
     var inCreationMarker = "__CURRENTLY_IN_CREATION__";
     
-    findMatchingComponent = function(that, visitor, except) {
+    var findMatchingComponent = function(that, visitor, except) {
         for (var name in that) {
             var component = that[name];
             if (component === except || !component.typeName) {continue;}
@@ -10068,7 +10091,7 @@ var fluid_1_2 = fluid_1_2 || {};
     };
     
     // thatStack contains an increasing list of MORE SPECIFIC thats.
-    visitComponents = function(thatStack, visitor) {
+    var visitComponents = function(thatStack, visitor) {
         var lastDead;
         for (var i = thatStack.length - 1; i >= 0; -- i) {
             var that = thatStack[i];
@@ -10116,7 +10139,7 @@ var fluid_1_2 = fluid_1_2 || {};
         else {
             return getValueGingerly(thatStack, atval, segs, ind + 1);
         }
-    };
+    }
 
     function makeStackFetcher(thatStack) {
         var fetcher = function(parsed) {
@@ -10144,7 +10167,7 @@ var fluid_1_2 = fluid_1_2 || {};
         var options = makeStackResolverOptions(thatStack);
         var directModel = thatStack[0].model; // TODO: this convention may not always be helpful
         
-        if (arg === fluid.COMPONENT_OPTIONS) {
+        if (fluid.isMarker(arg, fluid.COMPONENT_OPTIONS)) {
             arg = fluid.resolveEnvironment(componentOptions, directModel, options);
         }
         else {
@@ -10170,23 +10193,23 @@ var fluid_1_2 = fluid_1_2 || {};
         if (demands.length === 0 && thatStack.length > 0) { // Guess that it is meant to be a subcomponent TODO: component grades
             demands = [fluid.COMPONENT_OPTIONS];
         }
+        var args = [];
         if (demands) {
-            var args = [];
             for (var i = 0; i < demands.length; ++ i) {
                 var arg = demands[i];
                 if (typeof(arg) === "object" && !fluid.isMarker(arg)) {
-                    var options = {};
-                    for (key in arg) {
+                    var resolvedOptions = {};
+                    for (var key in arg) {
                         var ref = arg[key];
                         var rvalue = resolveRvalue(thatStack, ref, initArgs, options);
-                        fluid.model.setBeanValue(options, key, rvalue);
+                        fluid.model.setBeanValue(resolvedOptions, key, rvalue);
                     }
-                    args[i] = options;
+                    args[i] = resolvedOptions;
                 }
                 else{
-                    var arg = resolveRvalue(thatStack, arg, initArgs, options) || {};
-                    arg.typeName = demandspec.funcName; // TODO: investigate the general sanity of this
-                    args[i] = arg;
+                    var resolvedArg = resolveRvalue(thatStack, arg, initArgs, options) || {};
+                    resolvedArg.typeName = demandspec.funcName; // TODO: investigate the general sanity of this
+                    args[i] = resolvedArg;
                 }
             }
         }
@@ -10199,41 +10222,121 @@ var fluid_1_2 = fluid_1_2 || {};
             funcName: demandspec.funcName
         };
         return togo;
-    } 
+    };
+   
+    var dependentStore = {};
+    
+    function searchDemands(demandingName, contextNames) {
+        var exist = dependentStore[demandingName] || [];
+        outer: for (var i = 0; i < exist.length; ++ i) {
+            var rec = exist[i];
+            for (var j = 0; j < contextNames.length; ++ j) {
+                 if (rec.contexts[j] !== contextNames[j]) {
+                     continue outer;
+                 }
+            }
+            return rec.spec;   
+        }
+    }
+    
+    fluid.demands = function(demandingName, contextName, spec) {
+        var contextNames = $.makeArray(contextName).sort(); 
+        if (!spec) {
+            return searchDemands(demandingName, contextNames);
+        }
+        else if (spec.length) {
+            spec = {args: spec};
+        }
+        var exist = dependentStore[demandingName];
+        if (!exist) {
+            exist = [];
+            dependentStore[demandingName] = exist;
+        }
+        exist.push({contexts: contextNames, spec: spec});
+    };
+    
+    fluid.getEnvironmentalThatStack = function() {
+         return [fluid.staticEnvironment];
+    };
+
+    fluid.locateDemands = function(demandingNames, thatStack) {
+        var searchStack = fluid.getEnvironmentalThatStack().concat(thatStack); // TODO: put in ThreadLocal "instance" too, and also accelerate lookup
+        var contextNames = {};
+        visitComponents(searchStack, function(component) {
+            contextNames[component.typeName] = true;
+        });
+        var matches = [];
+        for (var i = 0; i < demandingNames.length; ++ i) {
+            var rec = dependentStore[demandingNames[i]] || [];
+            for (var j = 0; j < rec.length; ++ j) {
+                var spec = rec[j];
+                var record = {spec: spec.spec, intersect: 0, uncess: 0};
+                for (var k = 0; k < spec.contexts.length; ++ k) {
+                    ++record[contextNames[spec.contexts[k]]? "intersect" : "uncess"];
+                }
+                // TODO: Potentially more subtle algorithm here - also ambiguity reports  
+                matches.push(record); 
+            }
+        }
+        matches.sort(function(speca, specb) {
+            var p1 = specb.intersect - speca.intersect; 
+            return p1 === 0? speca.uncess - specb.uncess : p1;
+            });
+        return matches.length === 0 || matches[0].intersect === 0? null : matches[0].spec;
+    };
+    
     /** Determine the appropriate demand specification held in the fluid.demands environment 
      * relative to "thatStack" for the function name(s) funcNames.
      */
     fluid.determineDemands = function (thatStack, funcNames) {
         var that = thatStack[thatStack.length - 1];
-        var funcNames = $.makeArray(funcNames);
+        funcNames = $.makeArray(funcNames);
         var demandspec = fluid.locateDemands(funcNames, thatStack);
    
         if (!demandspec) {
             demandspec = {};
         }
+        var newFuncName = funcNames[0];
         if (demandspec.funcName) {
-            funcNames[0] = demandspec.funcName;
+            newFuncName = demandspec.funcName;
            /**    TODO: "redirects" disabled pending further thought
             var demandspec2 = fluid.fetchDirectDemands(funcNames[0], that.typeName);
             if (demandspec2) {
                 demandspec = demandspec2; // follow just one redirect
             } **/
         }
-
-        return {funcName: funcNames[0], args: demandspec.args};
+        var mergeArgs = [];
+        if (demandspec.parent) {
+            var parent = searchDemands(funcNames[0], $.makeArray(demandspec.parent).sort());
+            if (parent) {
+                mergeArgs = parent.args; // TODO: is this really a necessary feature?
+            }
+        }
+        var args = [];
+        fluid.merge(null, args, $.makeArray(mergeArgs), $.makeArray(demandspec.args)); // TODO: avoid so much copying
+        return {funcName: newFuncName, args: args};
     };
     
     fluid.resolveDemands = function (thatStack, funcNames, initArgs, options) {
         var demandspec = fluid.determineDemands(thatStack, funcNames);
         return fluid.embodyDemands(thatStack, demandspec, initArgs, options);
     };
-
-
-   
-    // fluid.invoke is not really supportable as a result of thatStack requirement - 
-    // fluid.bindInvoker is recommended instead
-    fluid.invoke = function(that, functionName, args, environment) {
-        var invokeSpec = fluid.resolveDemands($.makeArray(that), functionName, args);
+    
+    /** Corrected version of jQuery makearray that returns an empty array on undefined rather than crashing **/
+    fluid.makeArray = function(arg) {
+        if (arg === null || arg === undefined) {
+            return [];
+        }
+        else {
+            return $.makeArray(arg);
+        }
+    };
+    
+    // TODO: make a *slightly* more performant version of fluid.invoke that perhaps caches the demands
+    // after the first successful invocation
+    fluid.invoke = function(functionName, args, that, environment) {
+        args = fluid.makeArray(args);
+        var invokeSpec = fluid.resolveDemands(fluid.getEnvironmentalThatStack().concat(fluid.makeArray(that)), functionName, args, args[0]);
         return fluid.invokeGlobalFunction(invokeSpec.funcName, invokeSpec.args, environment);
     };
     
@@ -10248,72 +10351,61 @@ var fluid_1_2 = fluid_1_2 || {};
         return function() {
             var invokeSpec = fluid.embodyDemands(fluid.staticEnvironment, demandSpec, arguments);
             return fluid.invokeGlobalFunction(invokeSpec.funcName, invokeSpec.args, environment);
-        }
+        };
     };
     
     fluid.makeInvoker = function(thatStack, demandspec, functionName, environment) {
-        var demandspec = demandspec || fluid.determineDemands(thatStack, functionName);
+        demandspec = demandspec || fluid.determineDemands(thatStack, functionName);
         thatStack = $.makeArray(thatStack); // take a copy of this since it will most likely go away
         return function() {
             var invokeSpec = fluid.embodyDemands(thatStack, demandspec, arguments);
             return fluid.invokeGlobalFunction(invokeSpec.funcName, invokeSpec.args, environment);
         };
-    }
+    };
     
     fluid.addBoiledListener = function(thatStack, eventName, listener, namespace, predicate) {
-        var thatStack = $.makeArray(thatStack);
+        thatStack = $.makeArray(thatStack);
         var topThat = thatStack[thatStack.length - 1];
         topThat.events[eventName].addListener(function(args) {
             var resolved = fluid.resolveDemands(thatStack, eventName, args);
             listener.apply(null, resolved.args);
         }, namespace, predicate);
     };
-    
-    var dependentStore = {};
-    
-    fluid.demands = function(demandingName, contextName, spec) {
-        if (spec.length) {
-            spec = {args: spec};
+    /** Expand a set of component options with respect to a set of "expanders" (essentially only
+     *  deferredCall) -  This substitution is destructive since it is assumed that the options are already "live" as the
+     *  result of environmental substitutions. Note that options contained inside "components" will not be expanded
+     *  by this call directly to avoid linearly increasing expansion depth if this call is occuring as a result of
+     *  "initDependents" */
+     // TODO: This needs to be integrated with "embodyDemands" above which makes a call to "resolveEnvironment" directly
+     // but with very similarly derived options (makeStackResolverOptions)
+     // The whole merge/expansion pipeline needs an overhaul once we have "grades" to allow merging and
+     // defaulting to occur smoothly across a "demands" stack - right now, "demanded" options have exactly
+     // the same status as user options whereas they should slot into the right place between 
+     // "earlyDefaults"/"defaults"/"demands"/"user options". Demands should be allowed to say whether they
+     // integrate with or override defaults.
+    fluid.expandOptions = function(args, thatStack) {
+        if (fluid.isPrimitive(args)) {
+            return args;
         }
-        var exist = dependentStore[demandingName];
-        if (!exist) {
-            exist = [];
-            dependentStore[demandingName] = exist;
+        thatStack = thatStack || fluid.getEnvironmentalThatStack();
+        var expandOptions = makeStackResolverOptions(thatStack);
+        expandOptions.noValue = true;
+        expandOptions.noCopy = true;
+        var components = args.components;
+        delete args.components;
+        var expanded = fluid.expander.expandLight(args, expandOptions);
+        if (components !== undefined) {
+            expanded.components = components;
         }
-        exist.push({contexts: $.makeArray(contextName), spec: spec});
-    };
-
-    fluid.locateDemands = function(demandingNames, thatStack) {
-        var searchStack = [fluid.staticEnvironment].concat(thatStack); // TODO: put in ThreadLocal "instance" too, and also accelerate lookup
-        var contextNames = {};
-        visitComponents(searchStack, function(component) {
-            contextNames[component.typeName] = true;
-        });
-        var matches = [];
-        for (var i = 0; i < demandingNames.length; ++ i) {
-            var rec = dependentStore[demandingNames[i]] || [];
-            for (var j = 0; j < rec.length; ++ j) {
-                var spec = rec[j];
-                var count = 0;
-                for (k = 0; k < spec.contexts.length; ++ k) {
-                    if (contextNames[spec.contexts[k]]) { ++ count;}
-                }
-                // TODO: Potentially more subtle algorithm here - also ambiguity reports  
-                matches.push({count: count, spec: spec.spec}); 
-            }
-        }
-        matches.sort(function(speca, specb) {return specb.count - speca.count;});
-        return matches.length === 0? null : matches[0].spec;
+        return expanded;
     };
     
     fluid.initDependent = function(that, name, thatStack) {
         if (!that) { return; }
         var component = that.options.components[name];
         var invokeSpec = fluid.resolveDemands(thatStack, [component.type, name], [], component.options);
-        var expandOptions = makeStackResolverOptions(thatStack);
-        expandOptions.noValue = true;
-        expandOptions.noCopy = true;
-        invokeSpec.args = fluid.expander.expandLight(invokeSpec.args, expandOptions);
+        // TODO: only want to expand "options" or all args? See "component rescuing" in expandOptions above
+        invokeSpec.args = fluid.expandOptions(invokeSpec.args, thatStack); 
         var instance = fluid.initSubcomponentImpl(that, {type: invokeSpec.funcName}, invokeSpec.args);
         if (instance) { // TODO: more fallibility
             that[name] = instance;
@@ -10539,9 +10631,11 @@ var fluid_1_2 = fluid_1_2 || {};
         else if (options.filter) {
             return options.filter(obj, recurse, options);
         }
-        else return (options.noCopy? fluid.each : fluid.transform)(obj, function(value, key) {
-            return resolveEnvironmentImpl(value, options);
-        });
+        else {
+            return (options.noCopy? fluid.each : fluid.transform)(obj, function(value, key) {
+                return resolveEnvironmentImpl(value, options);
+            });
+        }
     }
     
     fluid.defaults("fluid.resolveEnvironment", 
@@ -10596,7 +10690,7 @@ var fluid_1_2 = fluid_1_2 || {};
         delete spec.fetchKey;
         var environmentdisposer = function(disposed) {
             $.extend(target, disposed);
-        }
+        };
         // replace the callback which is there (taking 2 arguments) with one which
         // directly responds to the request, passing in the result and OUR "disposer" - 
         // which once the user has processed the response (say, parsing JSON and repackaging)
@@ -10612,10 +10706,19 @@ var fluid_1_2 = fluid_1_2 || {};
     
     fluid.expander.deferredCall = function(target, source) {
         var expander = source.expander;
-        return fluid.invokeGlobalFunction(expander.func, expander.args);
+        var args = (!expander.args || fluid.isArrayable(expander.args))? expander.args : $.makeArray(expander.args); 
+        return fluid.invokeGlobalFunction(expander.func, args);
     };
     
     fluid.deferredCall = fluid.expander.deferredCall; // put in top namespace for convenience
+    
+    // TODO: The case of an "invoke" call as part of the course of resolving some component options
+    // proved problematic here and interrupted the ability to resolve contextualised values inside the invoker.
+    fluid.deferredInvokeCall = function(target, source) {
+        var expander = source.expander;
+        var args = (!expander.args || fluid.isArrayable(expander.args))? expander.args : $.makeArray(expander.args); 
+        return fluid.invoke(expander.func, args);
+    };
     
     // The "noexpand" expander which simply unwraps one level of expansion and ceases.
     fluid.expander.noexpand = function(target, source) {
@@ -10630,7 +10733,7 @@ var fluid_1_2 = fluid_1_2 || {};
               togo = (options.noCopy? fluid.each: fluid.transform)(obj, function(value) {return recurse(value);});
           }
           else {
-              var togo = options.noCopy? obj : {};
+              togo = options.noCopy? obj : {};
               for (var key in obj) {
                   var value = obj[key];
                   var expander;
@@ -11284,7 +11387,7 @@ fluid_1_2 = fluid_1_2 || {};
         if (headclazz) {
             var split = headclazz.split(" ");
             for (var i = 0; i < split.length; ++ i) {
-                var simpleCut = simpleClassCutpoints[split[i].trim()];
+                var simpleCut = simpleClassCutpoints[$.trim(split[i])];
                 if (simpleCut) {
                     return simpleCut;
                 }
@@ -11707,7 +11810,13 @@ fluid_1_2 = fluid_1_2 || {};
     
   fluid.fetchResources = function(resourceSpecs, callback) {
       return fetchResourcesImpl({specs: resourceSpecs}, callback);
-  }
+  };
+  
+  fluid.primeCacheFromResources = function(componentName) {
+      var resources = fluid.defaults(componentName).resources;
+      var expanded = fluid.expandOptions(fluid.copy(resources));
+      fluid.fetchResources(expanded);
+  };
   
     // TODO: find faster encoder
   fluid.XMLEncode = function (text) {
@@ -11890,7 +11999,7 @@ fluid_1_2 = fluid_1_2 || {};
   renderer.isBoundPrimitive = function(value) {
       return fluid.isPrimitive(value) || value instanceof Array 
              && (value.length === 0 || typeof(value[0]) === "string");
-  }
+  };
   
   function processChild(value, key) {
       if (renderer.isBoundPrimitive(value)) {
@@ -12426,10 +12535,11 @@ fluid_1_2 = fluid_1_2 || {};
       function dumpBoundFields(/** UIBound**/ torender, parent) {
           if (torender) {
               var holder = parent? parent : torender;
-              if (directFossils && holder.submittingname && holder.valuebinding) {
+              if (directFossils && holder.valuebinding) {
+                  var fossilKey = holder.submittingname || torender.finalID;
                 // TODO: this will store multiple times for each member of a UISelect
-                  directFossils[holder.submittingname] = {
-                    name: holder.submittingname,
+                  directFossils[fossilKey] = {
+                    name: fossilKey,
                     EL: holder.valuebinding,
                     oldvalue: holder.value};
                 // But this has to happen multiple times
@@ -12583,7 +12693,7 @@ fluid_1_2 = fluid_1_2 || {};
       }
       
       function resolveArgs(args) {
-          if (!args) {return args};
+          if (!args) {return args;}
           return fluid.transform(args, function(arg, index) {
               upgradeBound(args, index, renderOptions.model);
               return args[index].value;
@@ -12638,10 +12748,11 @@ fluid_1_2 = fluid_1_2 || {};
               }
       
               var submittingname = parent? parent.selection.submittingname : torender.submittingname;
-              if (tagname === "input" || tagname === "textarea") {
-                  if (!parent) {
-                      submittingname = assignSubmittingName(attrcopy, torender);
+              if (!parent && torender.valuebinding) {
+                  // Do this for all bound fields even if non submitting so that finalID is set in order to track fossils (FLUID-3387)
+                  submittingname = assignSubmittingName(attrcopy, torender);
                   }
+              if (tagname === "input" || tagname === "textarea") {
                   if (submittingname !== undefined) {
                       attrcopy.name = submittingname;
                       }
@@ -13168,7 +13279,7 @@ fluid_1_2 = fluid_1_2 || {};
       
       that.processDecoratorQueue = function() {
           processDecoratorQueue();
-      }
+      };
       return that;
       
   };
@@ -13272,7 +13383,8 @@ fluid_1_2 = fluid_1_2 || {};
         else {
             node.innerHTML = "";
         }
-        var fossils = {};
+        var fossils = options.fossils || {};
+        fluid.clear(fossils);
         var renderer = fluid.renderer(templates, tree, options, fossils);
         var rendered = renderer.renderTemplates();
         if (options.renderRaw) {
@@ -13338,9 +13450,7 @@ fluid_1_2 = fluid_1_2 || {};
         var resourceSpec = {base: {resourceText: template, 
                             href: ".", resourceKey: ".", cutpoints: options.cutpoints}
                             };
-        fluid.log("Begin parseTemplates");
         var templates = fluid.parseTemplates(resourceSpec, ["base"], options);
-        fluid.log("End parseTemplates");
         return fluid.reRender(templates, target, tree, options);    
     };
     
@@ -13413,7 +13523,7 @@ fluid_1_2 = fluid_1_2 || {};
     /** "Renderer component" infrastructure **/
   // TODO: fix this up with IoC and improved handling of templateSource as well as better 
   // options layout (model appears in both rOpts and eOpts)
-    fluid.renderer.createRendererFunction = function (container, selectors, options, model) {
+    fluid.renderer.createRendererFunction = function (container, selectors, options, model, fossils) {
         function modelise(opts, defs) {
             return $.extend({}, defs, opts, model? {model: model} : null);
         }
@@ -13421,6 +13531,9 @@ fluid_1_2 = fluid_1_2 || {};
         container = $(container);
         var source = options.templateSource ? options.templateSource: {node: container};
         var rendererOptions = modelise(options.rendererOptions);
+        if (fossils) {
+            rendererOptions.fossils = fossils;
+        }
         var expanderOptions = modelise(options.expanderOptions, {ELstyle: "$()"});
         var expander = options.noExpand? null : fluid.renderer.makeProtoExpander(expanderOptions);
         
@@ -13455,6 +13568,13 @@ fluid_1_2 = fluid_1_2 || {};
             rendererOptions.messageSource = {type: "data", messages: that.options.strings}; 
         }
 
+        var renderer = {
+            fossils: {},
+            boundPathForNode: function(node) {
+               return fluid.boundPathForNode(node, renderer.fossils);
+            }
+        };
+
         var rendererFnOptions = $.extend({}, that.options.rendererFnOptions, 
            {rendererOptions: rendererOptions,
            repeatingSelectors: that.options.repeatingSelectors,
@@ -13465,9 +13585,10 @@ fluid_1_2 = fluid_1_2 || {};
             };
         }
         
-        var rendererFn = fluid.renderer.createRendererFunction(container, that.options.selectors, rendererFnOptions, that.model);
+        var rendererFn = fluid.renderer.createRendererFunction(container, that.options.selectors, rendererFnOptions, that.model, renderer.fossils);
         
-        that.render = rendererFn;
+        that.render = renderer.render = rendererFn;
+        that.renderer = renderer;
         
         return that;
     };
@@ -13562,7 +13683,7 @@ fluid_1_2 = fluid_1_2 || {};
             if (options.valueAs) {
                 envAdd[options.valueAs] = fluid.model.getBeanValue(config.model, EL);
             }
-            var expandrow = fluid.withEnvironment(envAdd, function() {return config.expander(options.tree)});
+            var expandrow = fluid.withEnvironment(envAdd, function() {return config.expander(options.tree);});
             return fluid.isArrayable(expandrow)? {children: expandrow} : expandrow;
         });
         fluid.log("Expanded to " + JSON.stringify(expanded));
@@ -13570,7 +13691,7 @@ fluid_1_2 = fluid_1_2 || {};
         if (repeatID.indexOf(":") === -1) {
             repeatID = repeatID + ":";
             }
-        fluid.each(expanded, function(entry) {entry.ID = repeatID});
+        fluid.each(expanded, function(entry) {entry.ID = repeatID;});
         return expanded;
     };
     
@@ -13651,17 +13772,17 @@ fluid_1_2 = fluid_1_2 || {};
             var comp = [];
             expandCond(entry, comp);
             return {children: comp};
-        }
+        };
         
         var expandExternal = function(entry) {
             var singleTarget;
             var target = [];
             var pusher = function(comp) {
                 singleTarget = comp;
-            }
+            };
             expandLeafOrCond(entry, target, pusher);
             return singleTarget || target;
-        }
+        };
         
         var expandConfig = {
             model: options.model,
@@ -13679,7 +13800,9 @@ fluid_1_2 = fluid_1_2 || {};
                 else if (map[key]) {
                     togo[key] = expandBound(leaf[key]);
                 }
-                else togo[key] = leaf[key];
+                else {
+                    togo[key] = leaf[key];
+                }
             }
             return togo;
         };
@@ -13695,9 +13818,9 @@ fluid_1_2 = fluid_1_2 || {};
                 var target = [];
                 var comp = { children: target};
                 var child = children[i];
-                var childPusher = function(comp) {
+                var childPusher = function(comp) { // linting problem - however, I believe this is ok
                     target[target.length] = comp;
-                }
+                };
                 expandLeafOrCond(child, target, childPusher);
                 // Rescue the case of an expanded leaf into single component - TODO: check what sense this makes of the grammar
                 if (comp.children.length === 1 && !comp.children[0].ID) {
@@ -13731,7 +13854,7 @@ fluid_1_2 = fluid_1_2 || {};
                 }
                 expandCond(entry, target);
             }
-        }
+        };
         
         // cond entry may be a leaf, "thing with children" or a "direct bound".
         // a Cond can ONLY occur as a direct member of "children". Each "cond" entry may
@@ -13746,13 +13869,13 @@ fluid_1_2 = fluid_1_2 || {};
                 if (key === "expander") {
                     var expander = entry;
                     var expanded = fluid.invokeGlobalFunction(expander.type, [expander, proto, key, expandConfig]);
-                    fluid.each(expanded, function(el) {target[target.length] = el});
+                    fluid.each(expanded, function(el) {target[target.length] = el;});
                 }
                 else if (entry) {
-                    var condPusher = function (comp) {
+                    var condPusher = function(comp) {
                         comp.ID = key;
                         target[target.length] = comp; 
-                        }
+                        };
                     var comp;
                     if (entry.children) {
                         if (key.indexOf(":") === -1) {
@@ -14072,11 +14195,11 @@ fluid_1_2 = fluid_1_2 || {};
             "<a href='#' class='flc-undo-undoControl'>" + str.undo + "</a>" + 
             "<a href='#' class='flc-undo-redoControl'>" + str.redo + "</a>" + 
             "</span>";
-		var markupNode = $(markup).attr({
-			"role": "region",  
-			"aria-live": "polite", 
-			"aria-relevant": "all"
-		});
+        var markupNode = $(markup).attr({
+            "role": "region",  
+            "aria-live": "polite", 
+            "aria-relevant": "all"
+        });
         targetContainer.append(markupNode);
         return markupNode;
     }
@@ -14107,7 +14230,7 @@ fluid_1_2 = fluid_1_2 || {};
                     refreshView(that);
                     that.locate("redoControl").focus();
                 }
-				return false;
+                return false;
             }
         );
         that.locate("redoControl").click( 
@@ -14118,7 +14241,7 @@ fluid_1_2 = fluid_1_2 || {};
                     refreshView(that);
                     that.locate("undoControl").focus();
                 }
-				return false;
+                return false;
             }
         );
         return {

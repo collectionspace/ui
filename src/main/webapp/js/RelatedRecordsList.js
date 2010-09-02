@@ -59,8 +59,8 @@ cspace = cspace || {};
         that.applier = applier;
 
         var listModel = {
-        	// TODO: This should be just that.applier.model.relations[that.relatedRecordType]
-        	// Related to CSPACE-1977.
+            // TODO: This should be just that.applier.model.relations[that.relatedRecordType]
+            // Related to CSPACE-1977.
             items: buildRelationsList(that.applier.model.relations, that.relatedRecordType) || [],
             selectionIndex: -1
         };

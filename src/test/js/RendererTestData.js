@@ -1,27 +1,27 @@
 var testSpec =  {
     "spec": {
-		"records": {
-			"selector": ".csc-record-list-row",
-			"repeated": {
-		        "objectTitle": {
-		            "selector": ".csc-object-title",
-		            "validators": [],
-		            "decorators": []
-		        },
-		        "accessionNumber": {
-		            "selector": ".csc-accession-number",
-		            "validators": [],
-		            "decorators": []
-		        },
-		        "lastEdit": {
-		            "selector": ".csc-last-edit",
-		            "validators": [],
-		            "decorators": []
-		        }
-			}
-		}
+        "records": {
+            "selector": ".csc-record-list-row",
+            "repeated": {
+                "objectTitle": {
+                    "selector": ".csc-object-title",
+                    "validators": [],
+                    "decorators": []
+                },
+                "accessionNumber": {
+                    "selector": ".csc-accession-number",
+                    "validators": [],
+                    "decorators": []
+                },
+                "lastEdit": {
+                    "selector": ".csc-last-edit",
+                    "validators": [],
+                    "decorators": []
+                }
+            }
+        }
     },
-	"modelToResourceMap": {
+    "modelToResourceMap": {
         "*": "/objects"
     }
 };
@@ -68,16 +68,16 @@ var testCutpoints = [
 var defaultEmptyModel = {
     spec: {
         "spec": {
-    	    "entryMethod": {
-    	        "selector": ".csc-intake-entry-method",
-    	        "options": ["in-person", "post", "found-on-doorstep"],
-    	        "options-text": ["In person", "Post", "Found on doorstep"],
-    			"default": "1",
-    	        "validators": [],
-    	        "decorators": []
-    	    }
+            "entryMethod": {
+                "selector": ".csc-intake-entry-method",
+                "options": ["in-person", "post", "found-on-doorstep"],
+                "options-text": ["In person", "Post", "Found on doorstep"],
+                "default": "1",
+                "validators": [],
+                "decorators": []
+            }
         },
-    	"modelToResourceMap": {
+        "modelToResourceMap": {
             "*": "/intake"
         }
     },
@@ -98,15 +98,15 @@ var defaultEmptyModel = {
 var noDefaultEmptyModel = {
     spec: {
         "spec": {
-    	    "entryReason": {
-    	        "selector": ".csc-intake-entry-reason",
-    	        "options": ["enquiry", "commission", "loan"],
-    	        "options-text": ["Enquiry", "Commission", "Loan"],
-    	        "validators": [],
-    	        "decorators": []
-    	    }
+            "entryReason": {
+                "selector": ".csc-intake-entry-reason",
+                "options": ["enquiry", "commission", "loan"],
+                "options-text": ["Enquiry", "Commission", "Loan"],
+                "validators": [],
+                "decorators": []
+            }
         },
-    	"modelToResourceMap": {
+        "modelToResourceMap": {
             "*": "/intake"
         }
     },
@@ -127,16 +127,16 @@ var noDefaultEmptyModel = {
 var defaultWithModel = {
     spec: {
         "spec": {
-    	    "entryMethod": {
-    	        "selector": ".csc-intake-entry-method",
-    	        "options": ["in-person", "post", "found-on-doorstep"],
-    	        "options-text": ["In person", "Post", "Found on doorstep"],
-    			"default": "1",
-    	        "validators": [],
-    	        "decorators": []
-    	    }
+            "entryMethod": {
+                "selector": ".csc-intake-entry-method",
+                "options": ["in-person", "post", "found-on-doorstep"],
+                "options-text": ["In person", "Post", "Found on doorstep"],
+                "default": "1",
+                "validators": [],
+                "decorators": []
+            }
         },
-    	"modelToResourceMap": {
+        "modelToResourceMap": {
             "*": "/intake"
         }
     },
@@ -157,15 +157,15 @@ var defaultWithModel = {
 var noDefaultWithModel = {
     spec: {
         "spec": {
-    	    "entryReason": {
-    	        "selector": ".csc-intake-entry-reason",
-    	        "options": ["enquiry", "commission", "loan"],
-    	        "options-text": ["Enquiry", "Commission", "Loan"],
-    	        "validators": [],
-    	        "decorators": []
-    	    }
+            "entryReason": {
+                "selector": ".csc-intake-entry-reason",
+                "options": ["enquiry", "commission", "loan"],
+                "options-text": ["Enquiry", "Commission", "Loan"],
+                "validators": [],
+                "decorators": []
+            }
         },
-    	"modelToResourceMap": {
+        "modelToResourceMap": {
             "*": "/intake"
         }
     },
@@ -188,17 +188,17 @@ var repeatedTermLists = {
             entryReasons: {
                 selector: ".csc-intake-entry-reason-row",
                 repeated: {
-            	    "entryReason": {
-            	        "selector": ".csc-intake-entry-reason",
-            	        "options": ["enquiry", "commission", "loan"],
-            	        "options-text": ["Enquiry", "Commission", "Loan"],
-            	        "validators": [],
-            	        "decorators": []
-            	    }
+                    "entryReason": {
+                        "selector": ".csc-intake-entry-reason",
+                        "options": ["enquiry", "commission", "loan"],
+                        "options-text": ["Enquiry", "Commission", "Loan"],
+                        "validators": [],
+                        "decorators": []
+                    }
                 }
             }
         },
-    	"modelToResourceMap": {
+        "modelToResourceMap": {
             "*": "/intake"
         }
     },

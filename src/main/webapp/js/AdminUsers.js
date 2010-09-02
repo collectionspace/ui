@@ -30,7 +30,7 @@ cspace = cspace || {};
         
         var password = domBinder.locate("password");
         if (password.is(":visible") && (password.val() !== domBinder.locate("passwordConfirm").val())) {
-        	cspace.util.displayTimestampedMessage(domBinder, "Passwords don't match");
+            cspace.util.displayTimestampedMessage(domBinder, "Passwords don't match");
             return false;
         }
         
@@ -87,7 +87,7 @@ cspace = cspace || {};
         });
         
         that.userListEditor.events.afterAddNewListRow.addListener(function () {
-        	that.passwordValidator.bindEvents();
+            that.passwordValidator.bindEvents();
         });
     };
 
@@ -114,7 +114,7 @@ cspace = cspace || {};
             }
         },
         passwordValidator: {
-        	type: "cspace.passwordValidator"
+            type: "cspace.passwordValidator"
         },
         selectors: {
             searchField: ".csc-user-searchField",

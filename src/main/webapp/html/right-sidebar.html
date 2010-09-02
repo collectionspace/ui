@@ -1,158 +1,158 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>CollectionSpace - Sidebar</title>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>CollectionSpace - Sidebar</title>
 
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-reset.css" />
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-layout.css" />
-		<link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
+        <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
-		<!--[if lt IE 9]> <link rel="stylesheet" type="text/css" href="../css/cspace_ie.css"> <![endif]-->
+        <!--[if lt IE 9]> <link rel="stylesheet" type="text/css" href="../css/cspace_ie.css"> <![endif]-->
     </head>
     <body>
     <div class="csc-right-sidebar">
-		<div id="secondary-nav" class="pivot">
-			<div id="secondary-nav-menu">
-				<ul class="menu-record">
-					<li class="selected"><a href="#">Relationships</a></li>
-					<li><a href="#" class="inactive">Audit</a></li>
-				</ul>
-			</div>
-		</div>
-		
-		<div class="fl-force-right right-sidebar csc-sidebar" id="csc-right-sidebar">
-			<!--<img src="../images/media-snapshot.png" alt="media snapshot" height=253 width=248 />-->
-			<div class="pivot-box media-snapshot csc-media-snapshot">
-				<div class="header toggle" onclick="ShowHide('#toggle-media-snapshot', this); return false;">
-					<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
-					Media Snapshot
-				</div>
-				<div class="content" id="toggle-media-snapshot"><img src="../images/sample.png" alt="sample image" title="sample media image" width="200" height="238" /></div>
-			</div>
-			
-			<div class="pivot-box csc-integrated-authorities">
-				<div class="header toggle" onclick="ShowHide('#toggle-integrated-authorities', this); return false;">
-					<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
-					Terms Used <span class="csc-num-items">(0)</span>
-				</div>
-				
-				<div class="content integrated-authorities list-table" id="toggle-integrated-authorities">
-					<table>
-						<thead>
-							<tr>
-								<td>Term</td>
-								<td>Vocabulary</td>
-								<td>Field</td>
+        <div id="secondary-nav" class="pivot">
+            <div id="secondary-nav-menu">
+                <ul class="menu-record">
+                    <li class="selected"><a href="#">Relationships</a></li>
+                    <li><a href="#" class="inactive">Audit</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="fl-force-right right-sidebar csc-sidebar" id="csc-right-sidebar">
+            <!--<img src="../images/media-snapshot.png" alt="media snapshot" height=253 width=248 />-->
+            <div class="pivot-box media-snapshot csc-media-snapshot">
+                <div class="header toggle" onclick="ShowHide('#toggle-media-snapshot', this); return false;">
+                    <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
+                    Media Snapshot
+                </div>
+                <div class="content" id="toggle-media-snapshot"><img src="../images/sample.png" alt="sample image" title="sample media image" width="200" height="238" /></div>
+            </div>
+            
+            <div class="pivot-box csc-integrated-authorities">
+                <div class="header toggle" onclick="ShowHide('#toggle-integrated-authorities', this); return false;">
+                    <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
+                    Terms Used <span class="csc-num-items">(0)</span>
+                </div>
+                
+                <div class="content integrated-authorities list-table" id="toggle-integrated-authorities">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Term</td>
+                                <td>Vocabulary</td>
+                                <td>Field</td>
                                 <td></td>
-							</tr>
-						</thead>
-						<tbody>
-    					    <tr><td colspan="4" class="hidden csc-error-message cs-message">This is the error message</td></tr>
-							<tr class="pivot-box-data csc-recordList-row">
-								<td><a href="#" class="link csc-related-number"></a></td>
-								<td class="csc-related-recordtype"></td>
-								<td class="csc-related-field"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="4" class="hidden csc-error-message cs-message">This is the error message</td></tr>
+                            <tr class="pivot-box-data csc-recordList-row">
+                                <td><a href="#" class="link csc-related-number"></a></td>
+                                <td class="csc-related-recordtype"></td>
+                                <td class="csc-related-field"></td>
                                 <td class="csc-no-items-message"></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			
-			<div class="pivot-box csc-related-records used-by">
-			
-				<div class="header toggle" onclick="ShowHide('#toggle-used-by', this); return false;">
-					<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
-					Used By <span class="csc-num-items">(0)</span>
-				</div>
-				
-				<div class="content" id="toggle-used-by" style=""> <!-- begin bundle -->
-			
-					<div class="pivot-box csc-related-procedures">
-						<div class="add-more">
-							<a href="#add" class="add-link csc-confirmation-exclusion"><input class="csc-add-related-record-button tertiary" type="button" value="Add" /></a>
-						</div>
-						<div class="csc-relatedRecordsList-recordList">
-							<div class="header toggle" onclick="ShowHide('#toggle-related-procedures', this); return false;">
-								<div class="fl-force-left">
-									<span class="header-toggle"><img height="12" width="12" alt="toggle-less" src="../images/toggle-less.png" /></span>
-									Procedures
-									<span class="csc-num-items"></span>
-								</div>						
-								<div class="clear"></div>
-							</div>
-							
-							<div class="content related-procedures list-table" id="toggle-related-procedures">
-								<table>
-									<thead>
-										<tr>
-											<td>Number</td>
-											<td>Summary</td>
-											<td>Type</td>
-											<td></td>
-										</tr>
-									</thead>
-									<tbody >
-										<tr><td colspan="4" class="hidden csc-error-message cs-message">This is the error message</td></tr>
-										<tr class="pivot-box-data csc-recordList-row">
-											<td><a href="#" class="link csc-related-number"></a></td>
-											<td class="csc-related-summary"></td>
-											<td class="csc-related-recordtype"></td>
-											<td class="csc-no-items-message"></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				
-					<div class="pivot-box csc-related-objects">
-						<div class="add-more">
-							<a href="#add" class="add-link csc-confirmation-exclusion"><input class="csc-add-related-record-button tertiary" type="button" value="Add" /></a>
-						</div>
-						<div class="csc-relatedRecordsList-recordList">
-							<div class="header toggle" onclick="ShowHide('#toggle-related-objects', this); return false;">
-								<div class="fl-force-left">
-									<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
-									Cataloging
-									<span class="csc-num-items"></span>
-								</div>
-								<div class="clear"></div>
-							</div>
-							
-							<div class="content related-objects list-table" id="toggle-related-objects">
-								<table>
-									<thead>
-										<tr>
-											<td>Number</td>
-											<td>Summary</td>
-											<td>Type</td>
-											<td></td>
-										</tr>
-									</thead>
-									<tbody>
-										<tr><td colspan="3" class="hidden csc-error-message cs-message">This is the error message</td></tr>
-										<tr class="pivot-box-data csc-recordList-row">
-											<td><a href="#" class="link csc-related-number"></a></td>
-											<td class="csc-related-summary"></td>
-											<td class="csc-related-recordtype"></td>
-											<td class="csc-no-items-message"></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				
-				</div> <!-- end bundle -->
-				
-				
-			</div>
-			<div class="clear"></div>
-		</div>
-		<div class="clear"></div>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="pivot-box csc-related-records used-by">
+            
+                <div class="header toggle" onclick="ShowHide('#toggle-used-by', this); return false;">
+                    <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
+                    Used By <span class="csc-num-items">(0)</span>
+                </div>
+                
+                <div class="content" id="toggle-used-by" style=""> <!-- begin bundle -->
+            
+                    <div class="pivot-box csc-related-procedures">
+                        <div class="add-more">
+                            <a href="#add" class="add-link csc-confirmation-exclusion"><input class="csc-add-related-record-button tertiary" type="button" value="Add" /></a>
+                        </div>
+                        <div class="csc-relatedRecordsList-recordList">
+                            <div class="header toggle" onclick="ShowHide('#toggle-related-procedures', this); return false;">
+                                <div class="fl-force-left">
+                                    <span class="header-toggle"><img height="12" width="12" alt="toggle-less" src="../images/toggle-less.png" /></span>
+                                    Procedures
+                                    <span class="csc-num-items"></span>
+                                </div>                        
+                                <div class="clear"></div>
+                            </div>
+                            
+                            <div class="content related-procedures list-table" id="toggle-related-procedures">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td>Number</td>
+                                            <td>Summary</td>
+                                            <td>Type</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        <tr><td colspan="4" class="hidden csc-error-message cs-message">This is the error message</td></tr>
+                                        <tr class="pivot-box-data csc-recordList-row">
+                                            <td><a href="#" class="link csc-related-number"></a></td>
+                                            <td class="csc-related-summary"></td>
+                                            <td class="csc-related-recordtype"></td>
+                                            <td class="csc-no-items-message"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="pivot-box csc-related-objects">
+                        <div class="add-more">
+                            <a href="#add" class="add-link csc-confirmation-exclusion"><input class="csc-add-related-record-button tertiary" type="button" value="Add" /></a>
+                        </div>
+                        <div class="csc-relatedRecordsList-recordList">
+                            <div class="header toggle" onclick="ShowHide('#toggle-related-objects', this); return false;">
+                                <div class="fl-force-left">
+                                    <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
+                                    Cataloging
+                                    <span class="csc-num-items"></span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            
+                            <div class="content related-objects list-table" id="toggle-related-objects">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td>Number</td>
+                                            <td>Summary</td>
+                                            <td>Type</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td colspan="3" class="hidden csc-error-message cs-message">This is the error message</td></tr>
+                                        <tr class="pivot-box-data csc-recordList-row">
+                                            <td><a href="#" class="link csc-related-number"></a></td>
+                                            <td class="csc-related-summary"></td>
+                                            <td class="csc-related-recordtype"></td>
+                                            <td class="csc-no-items-message"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div> <!-- end bundle -->
+                
+                
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
     </div>
     </body>
 </html>

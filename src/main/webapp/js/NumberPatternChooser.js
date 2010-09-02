@@ -192,12 +192,12 @@ cspace = cspace || {};
             row: ".csc-numberPatternChooser-patternRow",
             name: ".csc-numberPatternChooser-name",
             sample: ".csc-numberPatternChooser-sample",
-	        checkmark: ".csc-numberPatternChooser-checkmark"
+            checkmark: ".csc-numberPatternChooser-checkmark"
         },
-		styles: {
-	        selected: "cs-numberPatternChooser-selected",
+        styles: {
+            selected: "cs-numberPatternChooser-selected",
             selecting: "cs-selecting"
-	    },
+        },
         model: null,
         selected: null,
         events: {

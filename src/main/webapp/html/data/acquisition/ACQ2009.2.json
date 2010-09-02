@@ -39,14 +39,14 @@
             "_primary": true
         }],
         "acquisitionMethod": "treasure",
-    	"acquisitionSources": [{
-    	    "acquisitionSource": "Some source",
-    	    "_primary": true
-    	}],
-    	"owners": [{
-    	   "owner": "Some owner",
-    	   "_primary": true
-    	}, {
+        "acquisitionSources": [{
+            "acquisitionSource": "Some source",
+            "_primary": true
+        }],
+        "owners": [{
+           "owner": "Some owner",
+           "_primary": true
+        }, {
            "owner": "Co-owner",
            "_primary": false
         }],

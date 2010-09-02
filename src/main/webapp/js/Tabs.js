@@ -29,11 +29,11 @@ cspace = cspace || {};
             } else {
                 link.addClass(that.options.styles.inactive);
             }
-           	if (tabspec.target === "#primaryTab") {
-				link.addClass(that.options.styles.primary).addClass(that.options.styles.current);
-			}
+               if (tabspec.target === "#primaryTab") {
+                link.addClass(that.options.styles.primary).addClass(that.options.styles.current);
+            }
         }
-		
+        
         that.locate("tabsContainer").prepend(tabs);
         that.locate("tabsContainer").tabs({
             cache: true,
@@ -83,7 +83,7 @@ cspace = cspace || {};
             list: "menu-record",
             current: "current",
             inactive: "inactive",
-			primary: "primary"
+            primary: "primary"
         },
         mergePolicy: {
             tabList: "replace"

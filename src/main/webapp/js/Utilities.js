@@ -31,6 +31,49 @@ fluid.registerNamespace("cspace.util");
             return results[1];
         }
     };
+    
+    fluid.defaults("cspace.specBuilderImpl", {
+        urlRenderer: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.urlExpander"
+            }
+        }  
+    });
+    
+    cspace.specBuilderImpl = function(options) {
+        // build a false "component" just to get easy access to options merging
+        var that = fluid.initLittleComponent("cspace.specBuilderImpl", options);
+        if (that.options.urlPrefix) {
+            that.options.spec.url = that.options.urlPrefix + that.options.spec.url;
+        }
+        else if (that.options.urlRenderer) {
+            that.options.spec.url = that.options.urlRenderer(that.options.spec.url);
+        }
+        return that.options.spec;
+    };
+
+    cspace.specBuilder = function(options) {
+        return fluid.invoke("cspace.specBuilderImpl", {spec: options});
+    }
+    
+    // a convenience wrapper for specBuilderImpl that lets us pass the URL as a simple string
+    cspace.simpleSpecBuilder = function(urlStub) {
+        return fluid.invoke("cspace.specBuilderImpl", {url: urlStub});
+    };
+    
+    cspace.urlExpander = function(options) {
+        var that = fluid.initLittleComponent("cspace.urlExpander", options);
+        return function(url) {
+            return fluid.stringTemplate(url, that.options.vars);
+        };
+    };
+    
+    fluid.defaults("cspace.urlExpander", {
+        vars: {
+            webapp: ".."
+        }
+    });
 
     cspace.util.useLocalData = function () {
         return cspace.util.isTest || document.location.protocol === "file:";
@@ -54,8 +97,11 @@ fluid.registerNamespace("cspace.util");
     // TODO: integrate with Engage conception and knock the rough corners off
     cspace.URLDataSource = function(options) {
         var that = fluid.initLittleComponent(options.typeName, options);
-        
+        var wrapper = that.options.delay? function(func) {
+            setTimeout(func, that.options.delay);} : function(func) {func()};
+
         function resolveUrl(directModel) {
+            var expander = fluid.invoke("cspace.urlExpander");
             var map = fluid.copy(that.options.termMap) || {};
             map = fluid.transform(map, function(entry) {
                 var encode = false;
@@ -71,7 +117,9 @@ fluid.registerNamespace("cspace.util");
                 }
                 return entry;
             } );
-            return fluid.stringTemplate(that.options.url, map);
+            var replaced = fluid.stringTemplate(that.options.url, map);
+            replaced = expander(replaced);
+            return replaced;
         }
         
         that.makeAjaxOpts = function(model, directModel, callback, type) {
@@ -99,7 +147,9 @@ fluid.registerNamespace("cspace.util");
 
         that.get = function(directModel, callback) {
             var ajaxOpts = that.makeAjaxOpts(null, directModel, callback, "GET");
-            $.ajax(ajaxOpts);
+            wrapper(function() {
+                $.ajax(ajaxOpts);
+            });
         };
         if (options.writeable) {
             that.put = function(model, directModel, callback) {

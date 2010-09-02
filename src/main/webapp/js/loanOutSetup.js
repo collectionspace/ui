@@ -78,7 +78,7 @@ cspace = cspace || {};
             recordEditor: {
                 funcName: "cspace.recordEditor",
                 args: [".csc-loanOut-template", "{pageBuilder}.dataContext", 
-                	"{pageBuilder}.applier", "{pageBuilder}.uispec.recordEditor", reOpts]
+                    "{pageBuilder}.applier", "{pageBuilder}.uispec.recordEditor", reOpts]
             },
             sidebar: {
                 funcName: "cspace.sidebar",

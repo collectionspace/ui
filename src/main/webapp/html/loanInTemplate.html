@@ -1,90 +1,90 @@
 <div class="csc-loanIn-template">
-	<div class="csc-loanIn">
-		<div id="secondary-nav">
-			<div id="secondary-nav-menu-sub">
-				<div class="button-row">
-					<input type="button" class="csc-save saveButton primary" value="Save"/>
-					<a href="findedit.html"><input type="button" class="cancelButton" value="Cancel" /></a>
-					<div class="clear"></div>
-				</div>
-				<div class="time-stamp"> </div>
-				<div class="clear"></div>
-			</div>
-		</div>
-		
-		<div class="loanIn-outer-border">
-			<div class="hidden csc-message-container cs-message">
-				<span class="csc-timestamp cs-timestamp">time</span>
-				<span class="csc-message">Save successful!</span>
-			</div>
+    <div class="csc-loanIn">
+        <div id="secondary-nav">
+            <div id="secondary-nav-menu-sub">
+                <div class="button-row">
+                    <input type="button" class="csc-save saveButton primary" value="Save"/>
+                    <a href="findedit.html"><input type="button" class="cancelButton" value="Cancel" /></a>
+                    <div class="clear"></div>
+                </div>
+                <div class="time-stamp"> </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        
+        <div class="loanIn-outer-border">
+            <div class="hidden csc-message-container cs-message">
+                <span class="csc-timestamp cs-timestamp">time</span>
+                <span class="csc-message">Save successful!</span>
+            </div>
 
-			<div class="fl-container-flex fl-fix information-group">
-				<div class="info-column">
-					<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-loanIn-information', this); return false;">
-						<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
-						Object Entry Information
-					</div>
-					
-					<div class="fl-container-flex fl-fix content main" id="toggle-loanIn-information">
-						<div class="info-column fl-force-left">
-							<div class="info-column2-50 fl-force-left">
-								<div class="info-pair">
-									<div class="label">Loan In Number <span class="required">*</span></div>
-									<div class="content csc-loanIn-loanInNumber-patternChooserContainer">
-										<input type="text" class="input-numeric-long csc-loanIn-loanInNumber pattern-chooser-input" />
-									</div>
-								</div>
-							</div>
-							<div class="info-column2-50 fl-force-right">
-								<div class="info-pair-select">
-									<div class="header">
-										<div class="label">Loan Purpose</div>
-									</div>
-									<div class="content">
-										<select class="csc-loanIn-loanPurpose input-select" />
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="info-column fl-force-left">
-							<div class="info-column1 fl-force-left">
-								<div class="info-pair">
-									<div class="header">
-										<div class="label">Lender</div>
-									</div>
-									<div class="content">
-										<table>
-											<thead>
-												<tr>
-													<td>Lender</td>
-													<td>Lender's Contact</td>
-													<td>Lender's Authorizer</td>
-													<td>Authorization Date</td>
-												</tr>
-											</thead>
-											<tbody>
-												<tr class="csc-loanIn-lender-row">
-													<td><input type="text" class="csc-loanIn-lender" />
+            <div class="fl-container-flex fl-fix information-group">
+                <div class="info-column">
+                    <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-loanIn-information', this); return false;">
+                        <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                        Object Entry Information
+                    </div>
+                    
+                    <div class="fl-container-flex fl-fix content main" id="toggle-loanIn-information">
+                        <div class="info-column fl-force-left">
+                            <div class="info-column2-50 fl-force-left">
+                                <div class="info-pair">
+                                    <div class="label">Loan In Number <span class="required">*</span></div>
+                                    <div class="content csc-loanIn-loanInNumber-patternChooserContainer">
+                                        <input type="text" class="input-numeric-long csc-loanIn-loanInNumber pattern-chooser-input" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-column2-50 fl-force-right">
+                                <div class="info-pair-select">
+                                    <div class="header">
+                                        <div class="label">Loan Purpose</div>
+                                    </div>
+                                    <div class="content">
+                                        <select class="csc-loanIn-loanPurpose input-select" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-column fl-force-left">
+                            <div class="info-column1 fl-force-left">
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label">Lender</div>
+                                    </div>
+                                    <div class="content">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Lender</td>
+                                                    <td>Lender's Contact</td>
+                                                    <td>Lender's Authorizer</td>
+                                                    <td>Authorization Date</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="csc-loanIn-lender-row">
+                                                    <td><input type="text" class="csc-loanIn-lender" />
                                                     </td>
-													<td><input type="text" class="csc-loanIn-lendersContact" />
+                                                    <td><input type="text" class="csc-loanIn-lendersContact" />
                                                     </td>
-													<td><input type="text" class="csc-loanIn-lendersAuthorizer" />
+                                                    <td><input type="text" class="csc-loanIn-lendersAuthorizer" />
                                                     </td>
-													<td class="field-cal csc-loanIn-lendersAuthorizerDate-container disabled"><input type="text" disabled="disabled" class="input-date csc-loanIn-lendersAuthorizerDate csc-calendar-date" /><img src="../images/cal.png" class="csc-calendar-button" alt="calendar"  height="16" width="18" />
+                                                    <td class="field-cal csc-loanIn-lendersAuthorizerDate-container disabled"><input type="text" disabled="disabled" class="input-date csc-loanIn-lendersAuthorizerDate csc-calendar-date" /><img src="../images/cal.png" class="csc-calendar-button" alt="calendar"  height="16" width="18" />
                                                         <div class="csc-date-picker"></div></td>
-												</tr>
-											</tbody>
-										</table>
-										<div class="csc-date-picker"></div>
-									</div>
-								</div>
-							</div>
-							<div class="clear"></div>
-						</div>
-						
-						<div class="info-column fl-force-left">
-					        <div class="info-column2-50 fl-force-left">
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="csc-date-picker"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        
+                        <div class="info-column fl-force-left">
+                            <div class="info-column2-50 fl-force-left">
                                 <div class="info-pair">
                                     <div class="header">
                                         <div class="label">Loan in Contact</div>
@@ -105,91 +105,91 @@
                                 </div>
                             </div>
                          </div>
-						
-						<div class="info-column fl-force-left">
-							<div class="info-column2-50 fl-force-left">
-								<div class="info-pair">
-									<div class="header">
-										<div class="label">Loan In Conditions</div>
-									</div>
-									<div class="content">
-										<textarea class="input-textarea csc-loanIn-loanInConditions" />
-									</div>
-								</div>
-							</div>
-							
-							<div class="info-column2-50 fl-force-right">
-								<div class="info-pair">
-									<div class="header">
-										<div class="label">Loan In Note</div>
-									</div>
-									<div class="content">
-										<textarea class="input-textarea csc-loanIn-loanInNote" />
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="info-column fl-force-left">
-							<div class="info-column3 fl-force-left">
-								<div class="info-pair-date">
-									<div class="header">
-										<div class="label">Loan In Date</div>
-									</div>
-									<div class="content csc-loanIn-loanInDate-container fl-table">
-			                            <input type="text" disabled="disabled" class="fl-force-left input-date csc-loanIn-loanInDate csc-calendar-date" />
-			                            <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></a>
-			                            <div class="csc-date-picker cs-date-picker"></div>
-			                        </div>
-								</div>
-							</div>
-							
-							<div class="info-column3 fl-force-left">
-								<div class="info-pair-date">
-									<div class="header">
-										<div class="label">Loan Return Date</div>
-									</div>
-									<div class="content csc-loanIn-loanReturnDate-container fl-table">
+                        
+                        <div class="info-column fl-force-left">
+                            <div class="info-column2-50 fl-force-left">
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label">Loan In Conditions</div>
+                                    </div>
+                                    <div class="content">
+                                        <textarea class="input-textarea csc-loanIn-loanInConditions" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-column2-50 fl-force-right">
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label">Loan In Note</div>
+                                    </div>
+                                    <div class="content">
+                                        <textarea class="input-textarea csc-loanIn-loanInNote" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-column fl-force-left">
+                            <div class="info-column3 fl-force-left">
+                                <div class="info-pair-date">
+                                    <div class="header">
+                                        <div class="label">Loan In Date</div>
+                                    </div>
+                                    <div class="content csc-loanIn-loanInDate-container fl-table">
+                                        <input type="text" disabled="disabled" class="fl-force-left input-date csc-loanIn-loanInDate csc-calendar-date" />
+                                        <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></a>
+                                        <div class="csc-date-picker cs-date-picker"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-column3 fl-force-left">
+                                <div class="info-pair-date">
+                                    <div class="header">
+                                        <div class="label">Loan Return Date</div>
+                                    </div>
+                                    <div class="content csc-loanIn-loanReturnDate-container fl-table">
                                         <input type="text" disabled="disabled" class="fl-force-left input-date csc-loanIn-loanReturnDate csc-calendar-date" />
                                         <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></a>
                                         <div class="csc-date-picker cs-date-picker"></div>
                                     </div>
-								</div>
-							</div>
-							
-							<div class="info-column3 fl-force-left">
-								<div class="info-pair-date">
-									<div class="header">
-										<div class="label">Loan Renewal Application Date</div>
-									</div>
-									<div class="content csc-loanIn-loanRenewalApplicationDate-container fl-table">
+                                </div>
+                            </div>
+                            
+                            <div class="info-column3 fl-force-left">
+                                <div class="info-pair-date">
+                                    <div class="header">
+                                        <div class="label">Loan Renewal Application Date</div>
+                                    </div>
+                                    <div class="content csc-loanIn-loanRenewalApplicationDate-container fl-table">
                                         <input type="text" disabled="disabled" class="fl-force-left input-date csc-loanIn-loanRenewalApplicationDate csc-calendar-date" />
                                         <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="16" width="18" /></a>
                                         <div class="csc-date-picker cs-date-picker"></div>
                                     </div>
-								</div>
-							</div>
-						</div>
-						<div class="clear"></div>
-					</div>
-				</div>
-			</div>
-			
-			<div class="hidden csc-message-container cs-message">
-				<span class="csc-timestamp cs-timestamp">time</span>
-				<span class="csc-message">Save successful!</span>
-			</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hidden csc-message-container cs-message">
+                <span class="csc-timestamp cs-timestamp">time</span>
+                <span class="csc-message">Save successful!</span>
+            </div>
 
-			<div class="csc-error-dialog">
-				<p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
-			</div>
-		</div>
+            <div class="csc-error-dialog">
+                <p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
+            </div>
+        </div>
 
-		<div class="fl-container-flex button-row">
-			<a href="#"><input type="button" class="csc-save saveButton primary" value="Save" /></a>
-			<a href="findedit.html"><input type="button" class="cancelButton" value="Cancel" /></a>
-			<div class="clear"></div>
-		</div>
-	</div>
+        <div class="fl-container-flex button-row">
+            <a href="#"><input type="button" class="csc-save saveButton primary" value="Save" /></a>
+            <a href="findedit.html"><input type="button" class="cancelButton" value="Cancel" /></a>
+            <div class="clear"></div>
+        </div>
+    </div>
 
 </div>

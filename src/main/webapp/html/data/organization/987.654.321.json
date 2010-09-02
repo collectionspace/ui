@@ -4,7 +4,7 @@
         "displayName": "Bloggs & Co.",
         "referenceNumber": "1234",
         "status": "accepted",
-		"longName": "Bloggs & Co.",
+        "longName": "Bloggs & Co.",
         "shortIdentifier": "Bloggs",
         "subBodies": [
             { "subBody": "",
@@ -17,7 +17,7 @@
         ],
         "foundingDate": "",
         "foundingPlace": "Cambridge",
-		"dissolutionDate": "",
+        "dissolutionDate": "",
         "groups": [
             { "group": "Cool people"},
             { "group": "Musicians",
@@ -31,13 +31,13 @@
             { "historyNote": "history notes here",
               "_primary": true }
         ],
-		"addressType1": "Work",
-		"addressText1": "22 Acacia Avenue",
-		"faxNumber1": "01223 123456",
-		"place": "Cambridge",
-		"telephoneNumber1": "01223 654321",
-		"postcode1": "CB1 2AZ",
-		"email1": ""
+        "addressType1": "Work",
+        "addressText1": "22 Acacia Avenue",
+        "faxNumber1": "01223 123456",
+        "place": "Cambridge",
+        "telephoneNumber1": "01223 654321",
+        "postcode1": "CB1 2AZ",
+        "email1": ""
     },
     "termsUsed": [
         {

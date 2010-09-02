@@ -37,9 +37,9 @@ cspace = cspace || {};
             return true;
         };
 
-		// TODO: In general, we shouldn't make a component's event binding public.
-		// Password validation should probably be more of a decorator-type function.
-		// This is captured in CSPACE-1829
+        // TODO: In general, we shouldn't make a component's event binding public.
+        // Password validation should probably be more of a decorator-type function.
+        // This is captured in CSPACE-1829
         that.bindEvents = function () {
             bindEvents(that);
         };

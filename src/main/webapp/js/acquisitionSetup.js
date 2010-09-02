@@ -25,13 +25,13 @@ cspace = cspace || {};
         var tabsOpts = {
             tabList: [
                 {name: "Acquisition", target: "#primaryTab"},
-				{name: "Acquisition - related", target: null},
-				{name: "Cataloging", target: cspace.util.fullUrl(options.templateUrlPrefix, "objectTabPlaceholder.html")},
-				{name: "Intake", target: null},
-				{name: "Loan In", target: null},
-				{name: "Loan Out", target: null},
-				{name: "Location &amp; Movement", target: cspace.util.fullUrl(options.templateUrlPrefix, "movementTab.html")},
-				{name: "Media", target: null}
+                {name: "Acquisition - related", target: null},
+                {name: "Cataloging", target: cspace.util.fullUrl(options.templateUrlPrefix, "objectTabPlaceholder.html")},
+                {name: "Intake", target: null},
+                {name: "Loan In", target: null},
+                {name: "Loan Out", target: null},
+                {name: "Location &amp; Movement", target: cspace.util.fullUrl(options.templateUrlPrefix, "movementTab.html")},
+                {name: "Media", target: null}
             ],
             tabSetups: [
                 null, {
@@ -76,7 +76,7 @@ cspace = cspace || {};
             recordEditor: {
                 funcName: "cspace.recordEditor",
                 args: [".csc-acquisition-template", "{pageBuilder}.dataContext", 
-                	"{pageBuilder}.applier", "{pageBuilder}.uispec.recordEditor", reOpts]
+                    "{pageBuilder}.applier", "{pageBuilder}.uispec.recordEditor", reOpts]
             },
             sidebar: {
                 funcName: "cspace.sidebar",

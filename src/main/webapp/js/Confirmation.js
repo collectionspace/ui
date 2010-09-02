@@ -28,11 +28,11 @@ cspace = cspace || {};
         });
     };
     
-	var bindEvents = function (that) {
-		that.locate("cancel", that.dlg).click(function () {
+    var bindEvents = function (that) {
+        that.locate("cancel", that.dlg).click(function () {
             that.close();
         });
-		that.locate("close", that.dlg).click(function () {
+        that.locate("close", that.dlg).click(function () {
             that.close();
         });
         that.locate("proceed", that.dlg).click(function (e) {
@@ -47,10 +47,10 @@ cspace = cspace || {};
         that.dlg.bind("dialogopen", function () {
             that.events.afterOpen.fire();
         });
-	};
-	
-	var addButtonToTree = function (id, strings, styles) {
-	    return {
+    };
+    
+    var addButtonToTree = function (id, strings, styles) {
+        return {
             ID: id,
             decorators: [{
                 type: "attrs",
@@ -63,14 +63,14 @@ cspace = cspace || {};
                 classes: styles[id]
             }]
         };
-	};
-	
-	var buildTree = function (strings, styles, enableButtons) {	    
-	    var tree = {
-	        children: [{
-	            ID: "message:",
+    };
+    
+    var buildTree = function (strings, styles, enableButtons) {        
+        var tree = {
+            children: [{
+                ID: "message:",
                 messagekey: "primaryMessage"
-	        }, {
+            }, {
                 ID: "close",
                 decorators: {
                     type: "attrs",
@@ -79,11 +79,11 @@ cspace = cspace || {};
                     }
                 }
             }]
-	    };
-	    
-	    $.each(enableButtons, function (index, button) {
-	        tree.children.push(addButtonToTree(button, strings, styles));
-	    });
+        };
+        
+        $.each(enableButtons, function (index, button) {
+            tree.children.push(addButtonToTree(button, strings, styles));
+        });
                 
         if (strings.secondaryMessage) {
             tree.children.push({
@@ -92,9 +92,9 @@ cspace = cspace || {};
             });
         }
         
-	    return tree;
-	};
-	
+        return tree;
+    };
+    
     var setupConfirmation = function (that) {
         var resources = {
             confirmation: {
@@ -115,8 +115,8 @@ cspace = cspace || {};
         });
     };
 
-	cspace.confirmation = function (container, options) {
-		var that = fluid.initView("cspace.confirmation", container, options);
+    cspace.confirmation = function (container, options) {
+        var that = fluid.initView("cspace.confirmation", container, options);
         that.model = {href: "#"};   // destination to nav to on successful navigation
         
         that.updateEventListeners = function (action) {
@@ -143,26 +143,26 @@ cspace = cspace || {};
         };
         
         setupConfirmation(that);
-		return that;
-	};
-	
-	cspace.confirmation.provideSuccessHandler = function (confirmation) {
-	    return function () {
-	        confirmation.updateEventListeners("remove");
+        return that;
+    };
+    
+    cspace.confirmation.provideSuccessHandler = function (confirmation) {
+        return function () {
+            confirmation.updateEventListeners("remove");
             window.location = confirmation.model.href;
-	    };
-	};
-	
-	fluid.defaults("cspace.confirmation", {
-	    successHandler: cspace.confirmation.provideSuccessHandler,
+        };
+    };
+    
+    fluid.defaults("cspace.confirmation", {
+        successHandler: cspace.confirmation.provideSuccessHandler,
         selectors: {
             cancel: ".csc-confirmationDialogButton-cancel",
             proceed: ".csc-confirmationDialogButton-proceed",
             act: ".csc-confirmationDialogButton-act",
-			close: ".csc-confirmationDialog-closeBtn",
-			// Had to add a : because we currently can not use the expander
-			// with repeating rows and message bundle at the same time.
-			"message:": ".csc-confirmationDialog-text"
+            close: ".csc-confirmationDialog-closeBtn",
+            // Had to add a : because we currently can not use the expander
+            // with repeating rows and message bundle at the same time.
+            "message:": ".csc-confirmationDialog-text"
         },
         enableButtons: ["act", "proceed", "cancel"],    // selector names
         strings: {
@@ -190,5 +190,5 @@ cspace = cspace || {};
         },
         confirmationTemplateUrl: "../html/Confirmation.html"
     });
-	
+    
 })(jQuery, fluid);

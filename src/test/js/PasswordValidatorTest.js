@@ -18,20 +18,20 @@ var passwordValidatorTester = function(){
         cspace.util.isTest = true;
     });
     var samplePasswords = {
-    		invalidTooSmall : "1234567",
-    		invalidTooLong : "1234567890123456789012345",
-    		validMinLength : "12345678",
-    		validMaxLength : "123456789012345678901234",
-    		validInBetween : "1234567890"
+            invalidTooSmall : "1234567",
+            invalidTooLong : "1234567890123456789012345",
+            validMinLength : "12345678",
+            validMaxLength : "123456789012345678901234",
+            validInBetween : "1234567890"
     };
     
     passwordValidatorTest.test("Check sample password lengths used in these tests", function () {
         var pv = cspace.passwordValidator("#main");
-    	jqUnit.assertTrue("invalid too small password is less than minLength", samplePasswords.invalidTooSmall.length < pv.options.minLength);
-    	jqUnit.assertTrue("invalid too long password is greater than maxLength", samplePasswords.invalidTooLong.length > pv.options.maxLength);
-    	jqUnit.assertTrue("valid min length password is minLength", samplePasswords.validMinLength.length === pv.options.minLength);
-    	jqUnit.assertTrue("valid max length password is maxLength", samplePasswords.validMaxLength.length === pv.options.maxLength);
-    	jqUnit.assertTrue("valid in between password is more than minLength and less than maxLength", samplePasswords.validInBetween.length > pv.options.minLength && samplePasswords.validInBetween.length < pv.options.maxLength);
+        jqUnit.assertTrue("invalid too small password is less than minLength", samplePasswords.invalidTooSmall.length < pv.options.minLength);
+        jqUnit.assertTrue("invalid too long password is greater than maxLength", samplePasswords.invalidTooLong.length > pv.options.maxLength);
+        jqUnit.assertTrue("valid min length password is minLength", samplePasswords.validMinLength.length === pv.options.minLength);
+        jqUnit.assertTrue("valid max length password is maxLength", samplePasswords.validMaxLength.length === pv.options.maxLength);
+        jqUnit.assertTrue("valid in between password is more than minLength and less than maxLength", samplePasswords.validInBetween.length > pv.options.minLength && samplePasswords.validInBetween.length < pv.options.maxLength);
     });
 
     passwordValidatorTest.test("Show hide appropriately", function () {

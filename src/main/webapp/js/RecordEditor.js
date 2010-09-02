@@ -112,8 +112,8 @@ cspace = cspace || {};
                 that.unsavedChanges = false;
                 that.events.onCancel.fire();
             });
-			cspace.util.setZIndex();
-			cspace.util.corner();
+            cspace.util.setZIndex();
+            cspace.util.corner();
         });
 
         that.dataContext.events.onError.addListener(makeDCErrorHandler(that));
@@ -126,10 +126,7 @@ cspace = cspace || {};
     
     var renderPage = function (that) {
         fluid.log("RecordEditor.js renderPage start");
-        var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}", model: that.model});
-        var protoTree = cspace.renderUtils.buildProtoTree(that.uispec, that);
-        fluid.log("RecordEditor.js after buildProtoTree");
-        var tree = expander(protoTree);
+        var tree = cspace.renderUtils.expander(that.uispec, that);
         var selectors = {};
         cspace.renderUtils.buildSelectorsFromUISpec(that.uispec, selectors);
         fluid.log("RecordEditor.js after building selectors");
@@ -262,7 +259,7 @@ cspace = cspace || {};
             type: "cspace.confirmation"
         },
         events: {
-	        onSave: "preventable",
+            onSave: "preventable",
             onCancel: null,
             afterCreateObjectDataSuccess: null,  // params: data, textStatus
             afterUpdateObjectDataSuccess: null,  // params: data, textStatus

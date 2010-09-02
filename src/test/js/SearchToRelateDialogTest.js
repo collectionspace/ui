@@ -12,42 +12,42 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 "use strict";
 
 var searchToRelateDialogTester = function () {
-	var baseModel = {
-		csid : "123.456.789",
-		relations : []
-	};
+    var baseModel = {
+        csid : "123.456.789",
+        relations : []
+    };
 
-	var baseTestOpts = {
-		templates : {
-			dialog : "../../main/webapp/html/searchToRelate.html"
-		}
-	};
+    var baseTestOpts = {
+        templates : {
+            dialog : "../../main/webapp/html/searchToRelate.html"
+        }
+    };
 
-	var testModel;
-	var testOpts;
-	var applier;
-	var searchToRelateDialog;
+    var testModel;
+    var testOpts;
+    var applier;
+    var searchToRelateDialog;
 
-	var searchToRelateDialogTest = new jqUnit.TestCase("SearchToRelateDialog Tests", 
-		function () { // setUp
-			testModel = {};
-			fluid.model.copyModel(testModel, baseModel);
-			applier = fluid.makeChangeApplier(testModel);
-			testOpts = {};
-			fluid.model.copyModel(testOpts, baseTestOpts);
-		}, function () { // tearDown
-			jQuery(".ui-dialog-content").remove();
-			searchToRelateDialog.dlg.dialog("destroy");
-		});
+    var searchToRelateDialogTest = new jqUnit.TestCase("SearchToRelateDialog Tests", 
+        function () { // setUp
+            testModel = {};
+            fluid.model.copyModel(testModel, baseModel);
+            applier = fluid.makeChangeApplier(testModel);
+            testOpts = {};
+            fluid.model.copyModel(testOpts, baseTestOpts);
+        }, function () { // tearDown
+            jQuery(".ui-dialog-content").remove();
+            searchToRelateDialog.dlg.dialog("destroy");
+        });
 
-	/**
-	 * note that intake is the first value on the record types list should
-	 * parameterize this function and set the record type rather than hard
-	 * coding in intake.
-	 */
-	var testSearchUrlBuilder = function () {
-		return "../../main/webapp/html/data/intake/search/list.json";
-	};
+    /**
+     * note that intake is the first value on the record types list should
+     * parameterize this function and set the record type rather than hard
+     * coding in intake.
+     */
+    var testSearchUrlBuilder = function () {
+        return "../../main/webapp/html/data/intake/search/list.json";
+    };
 
     searchToRelateDialogTest.test("Creation for particular record type (objects, relating to acquisition)",
         function () {
@@ -318,5 +318,5 @@ var searchToRelateDialogTester = function () {
 };
 
 (function () {
-	searchToRelateDialogTester();
+    searchToRelateDialogTester();
 }());

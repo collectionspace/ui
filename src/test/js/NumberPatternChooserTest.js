@@ -11,19 +11,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 /*global jQuery, jqUnit, cspace*/
 
 (function ($) {
-	
+    
     var model = {
-		    "list": ["val1", "val2", "val3"],
-			"samples": ["sample1", "sample2", "sample3"],
-			"names": ["name1", "name2", "name3"]
+            "list": ["val1", "val2", "val3"],
+            "samples": ["sample1", "sample2", "sample3"],
+            "names": ["name1", "name2", "name3"]
     };
     
     var testOpts = {
-    	model: model,
+        model: model,
         templateUrl: "../../main/webapp/html/NumberPatternChooser.html"
     };
 
-	
+    
     var numberPatternChooserTest = new jqUnit.TestCase("NumberPatternChooser Tests", function () {
         cspace.util.isTest = true;
     });
@@ -32,7 +32,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var numberPatternChooser;
         testOpts.listeners = {
             afterRender: function () {
-            	jqUnit.isVisible("Number pattern chooser button should be visible", $(".csc-numberPatternChooser-button"));
+                jqUnit.isVisible("Number pattern chooser button should be visible", $(".csc-numberPatternChooser-button"));
                 start();
             }
         };

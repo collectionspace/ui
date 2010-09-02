@@ -19,7 +19,7 @@
         }],
         "objectTitleLanguage": "English",
         "numberOfObjects": "1",
-		"title": "This record has at least one related record of each type that there's a tab active for",
+        "title": "This record has at least one related record of each type that there's a tab active for",
         "briefDescriptions": [{
             "briefDescription": "This is brief description.",
             "_primary": true
