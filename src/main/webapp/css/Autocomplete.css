@@ -10,8 +10,8 @@
     padding: 2px;
     margin-left:0px;
     display:block;
-	max-height:150px;
-	overflow-x:hidden; overflow-y:auto;
+    max-height:150px;
+    overflow-x:hidden; overflow-y:auto;
 }
 
 .cs-autocomplete-MatchItem {
@@ -35,8 +35,8 @@
 }
 
 .cs-autocomplete-matchItem:hover, .cs-autocomplete-matchItem-select {
-	background-color:#F0F5FB;
-	cursor:pointer;
+    background-color:#F0F5FB;
+    cursor:pointer;
 }
 
 .cs-autocomplete-authorityItem:hover, .cs-autocomplete-authorityItem-select {
@@ -47,32 +47,34 @@
 
 .cs-autocomplete-popup {
     background-color:#FAFBF7;
-    /*width:auto;*/
-	width:280px;
+    width:auto;
     float:left; 
     border:2px solid #C7CFD4;
     position:absolute;
     z-index:9999 !important;
-	margin:6px 0 0 -2px;
-	max-width:100%;
-	overflow:auto;
-	font-size: 1.2em;
-	font-weight:bold;
-	line-height:1.4;
+    margin:6px 0 0 -2px;
+    max-width:100%;
+    overflow:auto;
+    font-size: 1.2em;
+    font-weight:bold;
+    line-height:1.4;
     -moz-box-shadow: 3px 3px 4px  #C7CFD4;
     -webkit-box-shadow: 3px 3px 4px  #C7CFD4;
     box-shadow: 3px 3px 4px  #C7CFD4;
 }
-.cs-autocomplete-popup .inner {padding:3px;}
+.cs-autocomplete-popup .inner {padding:5px 10px;}
 .cs-autocomplete-popup .cs-autocomplete-noMatches  {font-style:italic; color:#6E6E6E; padding-bottom:15px;}
 .cs-autocomplete-popup .content {color:#6E6E6E; padding-bottom:5px; float:none;}
 .cs-autocomplete-popup .pad-right {padding-right:10px;}
-.cs-autocomplete-popup hr {color:#AAA; background-color:#AAA; border: #AAA}
+.cs-autocomplete-popup hr {color:#AAA; background-color:#AAA; border: solid 1px #AAA}
 
-/** TODO: this positioning was arrived at through blind experiment, more stable strategy needed
-to precipitate it directly on top of the "loading" indicator */
+/* An "invisible strut" consisting of the longest list item dumped at top level 
+in the dialog in order to ensure its "preferred width" is large enough. Otherwise
+the "overflow" properties on "Matches" prevent it being seen */
 
-/*.cs-autocomplete-closebutton { position:absolute; right:1px; bottom: 20px}*/
-.cs-autocomplete-closebutton { position:relative; left:-1px; bottom: 15px; /*right:19px;*/ margin-bottom:-18px; float:right; }
-
-
+.csc-autocomplete-longestMatch {
+    padding-right: 50px;
+    opacity: 0;
+    filter: alpha(opacity=0); /* For idiot IE */
+    height: 0px;
+}

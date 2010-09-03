@@ -41,6 +41,33 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
     };
     
+    // Inspiration from http://stackoverflow.com/questions/158070/jquery-how-to-position-one-element-relative-to-another
+    cspace.internalPositioner = function(jTarget, jToPosition, adjustX, adjustY) {
+        var pos = jTarget.position();
+        var target = fluid.unwrap(jTarget); var toPosition = fluid.unwrap(jToPosition);
+        var left = pos.left + target.offsetWidth - toPosition.offsetWidth + adjustX;
+        var top = pos.top + (target.offsetHeight - toPosition.offsetHeight) / 2 + adjustY;
+        jToPosition.css({
+            position: "absolute",
+            zIndex: 5000,
+            left: left + "px",
+            top: top + "px"
+        });
+    };
+    
+    cspace.autocomplete.longest = function(list) {
+        var length = 0;
+        var longest = "";
+        fluid.each(list, function(item) {
+            var label = item.label;
+            if (label.length > length) {
+                length = label.length;
+                longest = label;
+            }    
+        });
+        return longest;
+    };
+    
     /** A vestigial "autocomplete component" which does nothing other than track keystrokes
      * and fire events. It also deals with styling of a progress indicator attached to the
      * managed element, probably an <input>. */ 
@@ -179,17 +206,28 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         styles: {
             button: "cs-autocomplete-closebutton"
         },
-        buttonUrl: "../images/icnDelete.png",
-        markup: "<a href=\"#\"><img /></a>"
+        buttonImageUrl: "../images/icnDelete.png",
+        markup: "<a href=\"#\"><img /></a>",
+        positionAdjustment: {
+           x: -1,
+           y: 1
+        }
     });
     
     cspace.autocomplete.closeButton = function(container, options) {
         var that = fluid.initView("cspace.autocomplete.closeButton", container, options);
         var button = $(that.options.markup);
-        $("img", button).attr("src", that.options.buttonUrl);
+        $("img", button).attr("src", that.options.buttonImageUrl);
         button.addClass(that.options.styles.button);
-        that.container.append(button);
+        button.insertAfter(that.container);
         button.hide();
+        that.show = function() {
+            button.show();
+            cspace.internalPositioner(that.container, button, that.options.positionAdjustment.x, that.options.positionAdjustment.y);
+        }
+        that.hide = function() {
+            button.hide();
+        }
         that.button = button;
         return that;
     };
@@ -231,6 +269,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
         else {
             tree.matches = {};
+            tree.longestMatch = cspace.autocomplete.longest(model.matches);
             tree.matchItem = cspace.autocomplete.makeSelectionTree(model, "matches", "label");
         }
         return tree;
@@ -267,11 +306,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             that.render(tree);
             
             var activatables = that.locate("authorityItem").add(that.locate("matchItem"));
-            fluid.activatable(activatables, activateFunction); 
+            fluid.activatable(activatables, activateFunction);
             
             var selectables = $(activatables).add(input);
             that.selectable.selectables = selectables;
             that.selectable.selectablesUpdated();
+            that.container.show();
             
             that.container.dialog("open");
             cspace.util.globalDismissal(union, function() {
@@ -332,6 +372,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             noMatches: ".csc-autocomplete-noMatches",
             matches: ".csc-autocomplete-matches",
             matchItem: ".csc-autocomplete-matchItem",
+            longestMatch: ".csc-autocomplete-longestMatch",
             addTermTo: ".csc-autocomplete-addTermTo"
             },
         styles: {
@@ -387,7 +428,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     var makeButtonAdjustor = function(closeButton, model) {
         return function(hide) {
-            closeButton.button[model.term === model.baseRecord.label || hide? "hide": "show"] ();
+            closeButton[model.term === model.baseRecord.label || hide? "hide": "show"] ();
         };
     };
 
@@ -472,7 +513,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
       ["{autocomplete}.popupElement", fluid.COMPONENT_OPTIONS]);
       
     fluid.demands("cspace.autocomplete.closeButton", "cspace.autocomplete", 
-      ["{autocomplete}.parent", fluid.COMPONENT_OPTIONS]);
+      ["{autocomplete}.autocompleteInput", fluid.COMPONENT_OPTIONS]);
     
     fluid.defaults("cspace.autocomplete", {
         termSaverFn: cspace.autocomplete.ajaxTermSaver,
