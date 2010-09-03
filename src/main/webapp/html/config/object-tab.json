@@ -36,7 +36,12 @@
                         "initList": "cspace.listEditor.receiveData",
                         "dataContext": {
                             "options": {
-                                "recordType": "objects"
+                                "recordType": "objects",
+                                "dataSource": {
+                                    "options": {
+                                        "uispec": "{pageBuilder}.uispec.details" 
+                                    }
+                                }
                             }
                         },
                         "details": {

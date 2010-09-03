@@ -36,7 +36,12 @@
                         "initList": "cspace.listEditor.receiveData",
                         "dataContext": {
                             "options": {
-                                "recordType": "movement"
+                                "recordType": "movement",
+                                "dataSource": {
+                                    "options": {
+                                        "uispec": "{pageBuilder}.uispec.details" 
+                                    }
+                                }
                             }
                         },
                         "details": {

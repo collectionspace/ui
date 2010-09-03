@@ -72,22 +72,6 @@ cspace = cspace || {};
         that.events.pageReady.fire();
     };
     
-    var createEmptyModelDetails = function (schema, uispec, recordType) {
-        // TODO: Once we have a real schema from the app layer this code will be cleaned up. 
-        //       The else statement will go away completely and the first parameter to 'getBeanValue' will be the actual model.
-        //       We are currently not doing this because our inferred empty model is likely to have an incorrect structure
-        //       that may cause errors upon save. 
-        var details;
-        if (schema) {                
-            details = cspace.util.getBeanValue({}, recordType, schema);
-        }
-        else {
-            details = cspace.util.createBaseModel();
-            cspace.util.createEmptyModel(details, uispec);
-        }
-        return details;
-    };
-    
     /**
      * 
      * @param {Object} container
@@ -101,11 +85,12 @@ cspace = cspace || {};
         that.uispec = uispec;
         that.model = {
             list: [],
-            details: createEmptyModelDetails(that.options.schema, that.uispec.details, that.options.dataContext.options.recordType)
+            details: {}
         };
 
         that.detailsApplier = fluid.makeChangeApplier(that.model.details);
         that.detailsDC = fluid.initSubcomponent(that, "dataContext", [that.model.details, fluid.COMPONENT_OPTIONS]);
+        that.detailsDC.fetch();
 
         that.details = fluid.initSubcomponent(that, "details", [
             $(that.options.selectors.details, that.container),
@@ -120,9 +105,7 @@ cspace = cspace || {};
          * addNewListRow - add an empty row to the list and display cleared and ready for editing details.
          */
         that.addNewListRow = function () {
-            fluid.model.copyModel(that.model.details, 
-                createEmptyModelDetails(that.options.schema, that.uispec.details, that.options.dataContext.options.recordType));
-            that.details.refreshView();
+            that.detailsDC.fetch();
             showDetails(that.dom, true);
             that.events.afterAddNewListRow.fire();
         };

@@ -21,15 +21,13 @@ cspace = cspace || {};
         options = options || {};
                 
         options.fetchConfigCallback = options.fetchConfigCallback || function (config) {
+            config.depOpts.role.options.roleListEditor.options.dataContext.options.dataSource.options.sources.permission.merge = cspace.dataSource.mergePermissions;
             if (cspace.util.useLocalData()) {
                 config.depOpts.role.options.recordType = "role/records/list.json";
                 config.depOpts.role.options.roleListEditor.options.baseUrl = "data/";
-                config.depOpts.role.options.roleListEditor.options.dataContext = {
-                    options: {
-                        baseUrl: "data/",
-                        fileExtension: ".json"
-                    }
-                };
+                config.depOpts.role.options.roleListEditor.options.dataContext.options.baseUrl = "data/";
+                config.depOpts.role.options.roleListEditor.options.dataContext.options.fileExtension = ".json";
+                config.depOpts.role.options.roleListEditor.options.dataContext.options.dataSource.options.sources.permission.href = "data/permission/list.json";
             }
         };        
         return cspace.pageSetup(options);

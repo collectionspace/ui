@@ -24,17 +24,9 @@ cspace = cspace || {};
         addRelations: "POST"
     };
 
-    var buildUrl = function (operation, baseUrl, recordType, csid, fileExtension) {
-        if (operation === "addRelations") {
-            return cspace.util.addTrailingSlash(baseUrl) + "relationships/";
-        } else {
-            return cspace.util.addTrailingSlash(baseUrl) + recordType + "/" + (csid ? csid + fileExtension : "");
-        }
-    };
-
     var buildOpts = function (operation, options, successEvent, events, csid, data) {
         var opts = {
-            url: buildUrl(operation, options.baseUrl, options.recordType, csid, options.fileExtension),
+            url: cspace.util.buildUrl(operation, options.baseUrl, options.recordType, csid, options.fileExtension),
             type: types[operation],
             dataType: options.dataType,
             success: function (data, textStatus) {
@@ -92,6 +84,21 @@ cspace = cspace || {};
             that.events.modelChanged.fire(that.model, oldModel, source);
         };
         
+        if (that.options.dataSource.options) {
+            that.options.dataSource.options = that.options.dataSource.options || {};
+            fluid.merge(null, that.options.dataSource.options, {
+                baseUrl: that.options.baseUrl,
+                fileExtension: that.options.fileExtension,
+                recordType: that.options.recordType
+            });
+            that.dataSource = fluid.initSubcomponent(that, "dataSource", [
+                fluid.COMPONENT_OPTIONS 
+            ]);
+            that.dataSource.events.afterFetchResources.addListener(function (data) {
+                that.events.afterFetch.fire(data);
+            });
+        }
+        
         /** Get a resourceSpec structure that may be used to issue the required
          * I/O for this dataContext operation at a later time. This currently causes
          * a violation of encapsulation which we will need to fix up with IoC later */ 
@@ -106,7 +113,12 @@ cspace = cspace || {};
         };
         
         that.fetch = function (csid) {
-            ajax("fetch", that.options, that.events.afterFetch, that.events, csid);
+            if (that.dataSource) {
+                that.dataSource.provideModel(csid);
+            }
+            else {
+                ajax("fetch", that.options, that.events.afterFetch, that.events, csid);
+            }
         };
         
         that.update = function () {
@@ -134,6 +146,9 @@ cspace = cspace || {};
     };
 
     fluid.defaults("cspace.dataContext", {
+        dataSource: {
+            type: "cspace.dataSource"
+        },
         events: {
             modelChanged: null,    // newModel, oldModel, source
             afterCreate: null,   // data

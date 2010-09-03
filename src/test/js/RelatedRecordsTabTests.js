@@ -74,7 +74,12 @@ var relatedRecordsTabTester = function ($) {
                                 options: {
                                     recordType: testRelatedType,
                                     fileExtension: ".json",
-                                    baseUrl: "../../main/webapp/html/data/"
+                                    baseUrl: "../../main/webapp/html/data/",
+                                    dataSource: {
+                                        options: {
+                                            uispec: "{pageBuilder}.uispec.details" 
+                                        }
+                                    }
                                 }
                             },
                             list: {
@@ -229,7 +234,12 @@ var relatedRecordsTabTester = function ($) {
                             options: {
                                 dataContext: {
                                     options: {
-                                        baseUrl: "../../main/webapp/html/data"
+                                        baseUrl: "../../main/webapp/html/data",
+                                        dataSource: {
+                                            options: {
+                                                uispec: "{pageBuilder}.uispec.details" 
+                                            }
+                                        }
                                     }
                                 },
                                 details: {

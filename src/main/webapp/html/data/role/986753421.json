@@ -2,11 +2,11 @@
     "csid": "986753421",
     "fields": {
         "permissions": [
-            {"resourceName": "Object Cataloging", "permission": "write"},
-            {"resourceName": "Intake", "permission": "delete"},
-            {"resourceName": "Acquisition", "permission": "delete"},
-            {"resourceName": "Loan In", "permission": "delete"},
-            {"resourceName": "Loan out", "permission": "delete"}
+            {"resourceName": "idgenerators", "permission": "write"},
+            {"resourceName": "id", "permission": "none"},
+            {"resourceName": "collectionobjects", "permission": "write"},
+            {"resourceName": "intakes", "permission": "delete"},
+            {"resourceName": "loansin", "permission": "delete"}
         ],
         "roleName": "Director",
         "description": "The big boss"

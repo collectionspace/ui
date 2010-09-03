@@ -8,17 +8,9 @@
         "email": "anastasia.cheetham@collectionspace.org",
         "status": "inactive",
         "role": [{
-                "roleName": "Administrator",
-                "roleSelected": true,
-                "roleGroup": "Museum staff"
-            }, {
-                "roleName": "Educator",
-                "roleSelected": false,
-                "roleGroup": "Museum staff"
-            }, {
-                "roleName": "Registrar",
-                "roleSelected": true,
-                "roleGroup": "Collection staff"
+            "roleId": "1b375821-709d-4080-8294-174318d56c71",
+            "roleName": "ROLE_ART JUGGLER",
+            "roleSelected": true
         }]
     }
 }

@@ -326,5 +326,13 @@ fluid.registerNamespace("cspace.util");
         }
         return root;
     };
+    
+    cspace.util.buildUrl = function (operation, baseUrl, recordType, csid, fileExtension) {
+        if (operation === "addRelations") {
+            return cspace.util.addTrailingSlash(baseUrl) + "relationships/";
+        } else {
+            return cspace.util.addTrailingSlash(baseUrl) + recordType + "/" + (csid ? csid + fileExtension : "");
+        }
+    };
 
 })(jQuery, fluid);

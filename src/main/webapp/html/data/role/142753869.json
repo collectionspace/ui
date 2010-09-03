@@ -2,11 +2,11 @@
     "csid": "142753869",
     "fields": {
         "permissions": [
-            {"resourceName": "Object Cataloging", "permission": "write"},
-            {"resourceName": "Intake", "permission": "write"},
-            {"resourceName": "Acquisition", "permission": "write"},
-            {"resourceName": "Loan In", "permission": "read"},
-            {"resourceName": "Loan out", "permission": "read"}
+            {"resourceName": "idgenerators", "permission": "read"},
+            {"resourceName": "id", "permission": "write"},
+            {"resourceName": "collectionobjects", "permission": "write"},
+            {"resourceName": "intakes", "permission": "read"},
+            {"resourceName": "loansin", "permission": "read"}
         ],
         "roleName": "Media Intern",
         "description": "Interns responsible for working with media records"

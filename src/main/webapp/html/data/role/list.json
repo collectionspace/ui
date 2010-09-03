@@ -1,0 +1,31 @@
+{
+    "items": [
+        {
+            "summary": "generated tenant admin role",
+            "csid": "94bf9d26-7147-421e-8e99-a2f0308dba20",
+            "number": "ROLE_TENANT_ADMINISTRATOR",
+            "recordtype": "role"
+        },
+        {
+            "summary": "generated tenant read only role",
+            "csid": "a9bf8595-ffc6-40b6-9d86-d4dc8ff7e62e",
+            "number": "ROLE_TENANT_READER",
+            "recordtype": "role"
+        },
+        {
+            "summary": "Expert at juggling with art",
+            "csid": "1b375821-709d-4080-8294-174318d56c71",
+            "number": "ROLE_ART JUGGLER",
+            "recordtype": "role"
+        }
+    ],
+    "pagination": {
+        "separatelists": [
+            [
+                "94bf9d26-7147-421e-8e99-a2f0308dba20",
+                "a9bf8595-ffc6-40b6-9d86-d4dc8ff7e62e",
+                "1b375821-709d-4080-8294-174318d56c71"
+            ]
+        ]
+    }
+}

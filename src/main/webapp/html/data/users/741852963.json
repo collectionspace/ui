@@ -6,18 +6,22 @@
         "password": "testpassword",
         "email": "jesse.martinez@collectionspace.org",
         "status": "active",
-        "role": [{
-                "roleName": "Administrator",
-                "roleSelected": true,
-                "roleGroup": "Museum staff"
-            }, {
-                "roleName": "Educator",
-                "roleSelected": false,
-                "roleGroup": "Museum staff"
-            }, {
-                "roleName": "Registrar",
-                "roleSelected": false,
-                "roleGroup": "Collection staff"
-        }]
+        "role": [
+            {
+                "roleId": "94bf9d26-7147-421e-8e99-a2f0308dba20",
+                "roleName": "ROLE_TENANT_ADMINISTRATOR",
+                "roleSelected": true
+            },
+            {
+                "roleId": "a9bf8595-ffc6-40b6-9d86-d4dc8ff7e62e",
+                "roleName": "ROLE_TENANT_READER",
+                "roleSelected": true
+            },
+            {
+                "roleId": "1b375821-709d-4080-8294-174318d56c71",
+                "roleName": "ROLE_ART JUGGLER",
+                "roleSelected": true
+            }
+        ]
     }
 }

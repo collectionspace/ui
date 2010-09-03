@@ -30,6 +30,22 @@
                 "uispec": "{pageBuilder}.uispec",
                 "roleListEditor": {
                     "options": {
+                        "dataContext": {
+                            "options": {
+                                "dataSource": {
+                                    "options": {
+                                        "schema": "{pageBuilder}.schema",
+                                        "sources": {
+                                            "permission": {
+                                                "href": "../../chain/permission",
+                                                "path": "fields.permissions",
+                                                "resourcePath": "items"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
                         "schema": "{pageBuilder}.schema"
                     }
                 }

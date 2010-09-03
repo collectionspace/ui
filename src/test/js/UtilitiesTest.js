@@ -234,6 +234,34 @@ var utilitiesTester = function ($) {
         var roleId = cspace.util.getBeanValue({}, "fields.role.role.0.roleId", schema);
         jqUnit.assertEquals("The correct value should be drawn from default", 1, roleId);
     });
+    
+    utilitiesTest.test("cspace.util.buildUrl", function () {        
+        var args = [[
+            "fetch", "base", "someType", "123", ""
+        ], [
+            "fetch", "base/", "someType", "123", ""
+        ], [
+            "fetch", "base/", "someType", "123", ".json"
+        ], [
+            "fetch", "base/", "someType"
+        ], [
+            "addRelations", "base/"
+        ], [
+            "addRelations", "base/", "ignore_stuff"
+        ]];
+        var expected = [
+            "base/someType/123",
+            "base/someType/123",
+            "base/someType/123.json",
+            "base/someType/",
+            "base/relationships/",
+            "base/relationships/"
+        ];
+        for (var i in args) {
+            jqUnit.assertEquals("Built url value is equal to the expected", 
+                expected[i], cspace.util.buildUrl.apply(null, args[i]));
+        }
+    });
 };
 
 (function () {

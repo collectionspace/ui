@@ -21,7 +21,23 @@ cspace = cspace || {};
             uispec: "{pageBuilder}.uispec",
             userListEditor: {
                 options: {
-                    schema: "{pageBuilder}.schema"
+                    dataContext: {
+                        options: {
+                            dataSource: {
+                                options: {
+                                    schema: "{pageBuilder}.schema",
+                                    sources: {
+                                        role: {
+                                            href: "../../chain/role",
+                                            path: "fields.role",
+                                            resourcePath: "items",
+                                            merge: cspace.dataSource.mergeRoles
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         };
@@ -29,12 +45,9 @@ cspace = cspace || {};
             adminOpts.recordType = "users/records/list.json";
             adminOpts.queryURL = "data/users/search/list.json";
             adminOpts.userListEditor.options.baseUrl = "data/";
-            adminOpts.userListEditor.options.dataContext = {
-                options: {
-                    baseUrl: "data/",
-                    fileExtension: ".json"
-                }
-            };     
+            adminOpts.userListEditor.options.dataContext.options.baseUrl = "data/";
+            adminOpts.userListEditor.options.dataContext.options.fileExtension = ".json";
+            adminOpts.userListEditor.options.dataContext.options.dataSource.options.sources.role.href = "data/role/list.json";
         }
         var dependencies = {
             users: {

@@ -2,11 +2,11 @@
     "csid": "362951847",
     "fields": {
         "permissions": [
-            {"resourceName": "Object Cataloging", "permission": "read"},
-            {"resourceName": "Intake", "permission": "read"},
-            {"resourceName": "Acquisition", "permission": "read"},
-            {"resourceName": "Loan In", "permission": "read"},
-            {"resourceName": "Loan out", "permission": "read"}
+            {"resourceName": "idgenerators", "permission": "write"},
+            {"resourceName": "id", "permission": "delete"},
+            {"resourceName": "collectionobjects", "permission": "read"},
+            {"resourceName": "intakes", "permission": "none"},
+            {"resourceName": "loansin", "permission": "write"}
         ],
         "roleName": "Curator",
         "description": "Full-time museum curators"

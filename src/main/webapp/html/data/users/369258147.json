@@ -7,17 +7,9 @@
         "email": "megan.forbes@collectionspace.org",
         "status": "active",
         "role": [{
-                "roleName": "Administrator",
-                "roleSelected": false,
-                "roleGroup": "Museum staff"
-            }, {
-                "roleName": "Educator",
-                "roleSelected": false,
-                "roleGroup": "Museum staff"
-            }, {
-                "roleName": "Registrar",
-                "roleSelected": true,
-                "roleGroup": "Collection staff"
+            "roleId": "a9bf8595-ffc6-40b6-9d86-d4dc8ff7e62e",
+            "roleName": "ROLE_TENANT_READER",
+            "roleSelected": true
         }]
     }
 }

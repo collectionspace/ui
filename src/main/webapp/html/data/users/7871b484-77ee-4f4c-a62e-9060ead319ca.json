@@ -1,0 +1,23 @@
+{
+    "message": "",
+    "relations": [
+        
+    ],
+    "csid": "7871b484-77ee-4f4c-a62e-9060ead319ca",
+    "ok": true,
+    "fields": {
+        "email": "test@test.test",
+        "status": "active",
+        "createdAt": "2010-09-01T12:56:40.000",
+        "userId": "test@test.test",
+        "screenName": "Kasper Markus",
+        "role": [
+            {
+                "roleSelected": true,
+                "roleName": "ROLE_TENANT_READER",
+                "roleId": "f7c8991e-5cfb-4a16-a8f6-c61c1b453d2f"
+            }
+        ],
+        "csid": "7871b484-77ee-4f4c-a62e-9060ead319ca"
+    }
+}
