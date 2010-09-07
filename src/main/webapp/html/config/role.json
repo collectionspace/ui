@@ -37,7 +37,7 @@
                                         "schema": "{pageBuilder}.schema",
                                         "sources": {
                                             "permission": {
-                                                "href": "../../chain/permission",
+                                                "href": "../../chain/permission/search?actGrp=CRUDL",
                                                 "path": "fields.permissions",
                                                 "resourcePath": "items"
                                             }
