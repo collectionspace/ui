@@ -63,6 +63,7 @@ cspace = cspace || {};
         that.refreshView();
         cspace.util.displayTimestampedMessage(that, that.options.strings[message], Date());
         that.unsavedChanges = false;
+        that.locate("save").removeAttr("disabled");
         that.events["after" + action + "ObjectDataSuccess"].fire(data, that.options.strings[message]);
     };
 
@@ -188,6 +189,7 @@ cspace = cspace || {};
         that.requestSave = function () {
             var ret = that.events.onSave.fire(that.model);
             if (ret !== false) {
+                that.locate("save").attr("disabled", "disabled");
                 if (that.model.csid) {
                     that.dataContext.update();
                 } else {
