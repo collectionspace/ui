@@ -280,7 +280,7 @@ cspace = cspace || {};
             timestamp: ".csc-timestamp",
             relatedRecords: ".csc-related-records",
             requiredFields: ".csc-required:visible",
-            confirmationInclude: "a",
+            confirmationInclude: "a, .csc-global-search-submit, .logout",
             confirmationExclude: "[href*=#], .csc-confirmation-exclusion, .ui-autocomplete a"
         },
         strings: {
