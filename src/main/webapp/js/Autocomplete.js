@@ -85,21 +85,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
     });
 
-    fluid.autocomplete.bindListener = function(container, options, onSearch) {
-        var outFirer;
-        var oldValue = container.val();
-        container.keydown(function() {
-            clearTimeout(outFirer);
-            outFirer = setTimeout(function() {
-                var newValue = container.val();
-                if (newValue !== oldValue) {
-                    oldValue = newValue;
-                    onSearch.fire(newValue, newValue.length >= options.minChars);
+    fluid.autocomplete.bindListener = function(that) {
+        that.container.keydown(function() {
+            clearTimeout(that.outFirer);
+            that.outFirer = setTimeout(function() {
+                var newValue = that.container.val();
+                if (newValue !== that.oldValue) {
+                    that.oldValue = newValue;
+                    that.events.onSearch.fire(newValue, newValue.length >= that.options.minChars);
                 }
-            }, options.delay);
+            }, that.options.delay);
         });
-        container.change(function() {
-            oldValue = container.val();
+        that.container.change(function() {
+            that.oldValue = that.container.val();
         });
     };
 
@@ -108,7 +106,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var that = fluid.initView("fluid.autocomplete.autocompleteView", container, options);
         that.container.addClass(that.options.styles.baseStyle);
         
-        fluid.autocomplete.bindListener(container, that.options, that.events.onSearch);
+        fluid.autocomplete.bindListener(that);
         
         that.events.onSearch.addListener(function(term, permitted) {
             if (permitted) {
@@ -119,6 +117,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.events.onSearchDone.addListener(function() {
             container.removeClass(that.options.styles.loadingStyle);
         });
+        
+        that.suppress = function() {
+            clearTimeout(that.outFirer);
+            that.outFirer = null;
+            that.oldValue = that.container.val();
+        };
+        that.suppress();
         
         return that;
     };
@@ -220,6 +225,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         $("img", button).attr("src", that.options.buttonImageUrl);
         button.addClass(that.options.styles.button);
         button.insertAfter(that.container);
+        //$("body").append(button);
         button.hide();
         that.show = function() {
             button.show();
@@ -314,6 +320,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             that.container.show();
             
             that.container.dialog("open");
+            that.container.position({
+                my: "top left",
+                at: "bottom left",
+                of: that.options.inputField,
+                offset: "0 6"
+            });
             cspace.util.globalDismissal(union, function() {
                 that.close();
             });
@@ -340,18 +352,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             selectableElements: that.options.inputField,
             noBubbleListeners: true,
             onSelect: makeHighlighter("addClass"),
-            onUnselect: makeHighlighter("removeClass")
+            onUnselect: makeHighlighter("removeClass"),
+            selectablesTabindex: ""
             });
             
         that.escapeHandler = function(event) { // TODO: too annoying to use plugin because of FLUID-1313
             if (event.keyCode === $.ui.keyCode.ESCAPE) {
                 that.events.revertState.fire();
-                return false;
             }
         };
-        // ALL THREE of these are necessary in order to defeat pernicious default effect on all browsers
-        union.keypress(that.escapeHandler);
-        union.keydown(that.escapeHandler);
+        // We trigger only on KEYUP since at least Firefox has a totally unpreventable
+        // default effect in between keypress and keyup of returning the field to its
+        // old value.
         union.keyup(that.escapeHandler); 
         
         that.events.selectAuthority.addListener(that.close);
@@ -405,9 +417,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     function updateAuthoritatively(that, termRecord) {
         that.hiddenInput.val(termRecord.urn);
         that.hiddenInput.change();
+        fluid.log("New value " + termRecord.label);
         that.autocompleteInput.val(termRecord.label);
         that.model.baseRecord = fluid.copy(termRecord);
         that.model.term = termRecord.label;
+        if (that.autocomplete) {
+            that.autocomplete.suppress();
+        }
     }
 
     var setupAutocomplete = function (that) {

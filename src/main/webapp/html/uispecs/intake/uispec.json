@@ -143,7 +143,8 @@
                 }
             ] 
         },
-        ".csc-intake-depositor-autocomplete": {
+        ".csc-intake-depositor": {
+            "value": "${fields.depositor}",
             "decorators": [
                 {
                     "func": "cspace.autocomplete",
@@ -223,7 +224,6 @@
         ".csc-intake-date-association": "${fields.associationDate}",
         ".csc-intake-valuation-reference-number": "${fields.valuationReferenceNumber}",
         ".csc-intake-condition-check-reference-number": "${fields.conditionCheckReferenceNumber}",
-        ".csc-intake-depositor": "${fields.depositor}",
         ".csc-intake-condition-check-note": "${fields.conditionCheckNote}",
         ".csc-intake-current-location-fitness": "${fields.currentLocationFitness}",
         ".csc-intake-date-latest": "${fields.latestDate}",

@@ -9649,12 +9649,14 @@ var fluid = fluid || fluid_1_2;
     var NO_SELECTION = -32768;
 
     var cleanUpWhenLeavingContainer = function(selectionContext) {
-        if (selectionContext.options.onLeaveContainer) {
-            selectionContext.options.onLeaveContainer(
-              selectionContext.selectables[selectionContext.activeItemIndex]);
-        } else if (selectionContext.options.onUnselect) {
-            selectionContext.options.onUnselect(
-            selectionContext.selectables[selectionContext.activeItemIndex]);
+        if (selectionContext.activeItemIndex !== NO_SELECTION) {
+            if (selectionContext.options.onLeaveContainer) {
+                selectionContext.options.onLeaveContainer(
+                  selectionContext.selectables[selectionContext.activeItemIndex]);
+            } else if (selectionContext.options.onUnselect) {
+                selectionContext.options.onUnselect(
+                selectionContext.selectables[selectionContext.activeItemIndex]);
+            }
         }
 
         if (!selectionContext.options.rememberSelectionState) {
@@ -10082,7 +10084,7 @@ var fluid_1_2 = fluid_1_2 || {};
     var findMatchingComponent = function(that, visitor, except) {
         for (var name in that) {
             var component = that[name];
-            if (component === except || !component.typeName) {continue;}
+            if (!component || component === except || !component.typeName) {continue;}
             if (visitor(component, name)) {
                 return true;
             }
@@ -10478,7 +10480,7 @@ var fluid_1_2 = fluid_1_2 || {};
     };
     
         
-    fluid.staticEnvironment = {};
+    fluid.staticEnvironment = fluid.typeTag("fluid.staticEnvironment");
     
     fluid.staticEnvironment.environmentClass = fluid.typeTag("fluid.browser");
     

@@ -37,6 +37,7 @@ fluid.demands("cspace.specBuilderImpl", "cspace.test", {
     
     function pressEscKey(autocomplete) {
         autocomplete.popup.container.trigger({type: "keydown", keyCode: $.ui.keyCode.ESCAPE});
+        autocomplete.popup.container.trigger({type: "keyup", keyCode: $.ui.keyCode.ESCAPE});
     }
     
     var openAndCloseInteraction = function (container, closeFunc) {
