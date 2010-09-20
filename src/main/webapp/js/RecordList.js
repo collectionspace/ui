@@ -27,6 +27,7 @@ cspace = cspace || {};
         var list = that.container;
         var rows = that.locate("row");
         
+        // TODO:  This is smelly - why aren't we using our regular event binding system?
         that.events.onSelect.addListener(that.options.onSelectHandler);
         
         list.fluid("selectable", {
@@ -105,7 +106,22 @@ cspace = cspace || {};
         events.afterSelect.fire(model);    
     };
     
+    cspace.recordList.afterSelectHandlerDefault = function (model) {
+        var record = model.items[model.selectionIndex];
+        if (!record) {
+            return;
+        }
+        var expander = cspace.urlExpander({
+            vars: {
+                recordType: record.recordtype,
+                csid: record.csid
+            }
+        });
+        window.location = expander("%recordType.html?csid=%csid");
+    };
+    
     fluid.defaults("cspace.recordList", {
+    	// TODO: smelly - why is the onSelectHandler here instead of inside a listeners block?
         onSelectHandler: cspace.recordList.onSelectHandlerDefault,
         selectors: {
             numberOfItems: ".csc-num-items",    // present in sidebar, not in find/edit

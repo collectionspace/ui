@@ -197,6 +197,10 @@ cspace = cspace || {};
      * @param {Object} detailsDC    The DataContext used for the 'details' section of the component
      */
     cspace.listEditor.loadDetails = function (model, detailsDC) {
+        var selectedModel = model.items[model.selectionIndex];
+        if (!selectedModel) {
+            return;
+        }
         detailsDC.fetch(model.items[model.selectionIndex].csid);
     };
 

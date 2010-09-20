@@ -36,7 +36,10 @@ cspace = cspace || {};
     };
 
     cspace.setupFindEdit = function () {
-        var stringOptions = {
+        var opts = {
+            listeners: {
+                afterSelect: cspace.recordList.afterSelectHandlerDefault
+            },
             strings: {
                 nothingYet: "No records yet"
             }
@@ -47,42 +50,42 @@ cspace = cspace || {};
                 args: [".object-records-group",
                         makeArrayExpander("objects"),
                         "{pageBuilder}.uispec.objects",
-                        stringOptions]
+                        opts]
             },
             proceduresIntake: {
                 funcName: "cspace.recordList",
                 args: [".intake-records-group",
                         makeArrayExpander("intake"),
                         "{pageBuilder}.uispec.proceduresIntake",
-                        stringOptions]
+                        opts]
             },
             proceduresAcquisition: {
                 funcName: "cspace.recordList",
                 args: [".acquisition-records-group",
                         makeArrayExpander("acquisition"),
                         "{pageBuilder}.uispec.proceduresAcquisition",
-                        stringOptions]
+                        opts]
             },
             proceduresLoanIn: {
                 funcName: "cspace.recordList",
                 args: [".loanIn-records-group",
                     makeArrayExpander("loanin"),
                     "{pageBuilder}.uispec.proceduresLoanin",
-                    stringOptions]
+                    opts]
             },
             proceduresLoanOut: {
                 funcName: "cspace.recordList",
                 args: [".loanOut-records-group",
                     makeArrayExpander("loanout"),
                     "{pageBuilder}.uispec.proceduresLoanout",
-                    stringOptions]
+                    opts]
             },
             proceduresMovement: {
                 funcName: "cspace.recordList",
                 args: [".movement-records-group",
                     makeArrayExpander("movement"),
                     "{pageBuilder}.uispec.proceduresMovement",
-                    stringOptions]
+                    opts]
             }
         };
         

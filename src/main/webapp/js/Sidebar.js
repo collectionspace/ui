@@ -24,12 +24,19 @@ cspace = cspace || {};
             items: that.applier.model.termsUsed || [],
             selectionIndex: -1
         };
+        
+        // TODO: There is a bug here - we are ignoring options passed to the recordList subcomponent
         that.integratedAuthorities = fluid.initSubcomponent(that, "recordList", [that.options.selectors.termsUsed,
             intAuthModel,
             that.options.uispec.termsUsed,
-             {recordType: "authorities",
-              csid: that.applier.model.csid,
-              strings: {nothingYet: "No Authority terms used yet"}}]);
+            {
+                recordType: "authorities",
+                listeners: {
+                    afterSelect: that.options.recordListAfterSelectHandler
+                },
+                csid: that.applier.model.csid,
+                strings: {nothingYet: "No Authority terms used yet"}
+            }]);
 
         that.applier.modelChanged.addListener("termsUsed", function (model, oldModel, changeRequest) {
             fluid.model.copyModel(that.integratedAuthorities.model.items, model.termsUsed);
@@ -47,6 +54,13 @@ cspace = cspace || {};
                             baseUrl: "data/",
                             fileExtension: ".json"
                         }
+                    }
+                },
+                recordList: {
+                    options: {
+                    	listeners: {
+	                        afterSelect: that.options.recordListAfterSelectHandler
+	                    }
                     }
                 }
             });
@@ -69,8 +83,14 @@ cspace = cspace || {};
     
     fluid.defaults("cspace.sidebar", {
         recordList: {
-            type: "cspace.recordList"
+            type: "cspace.recordList", 
+            options: {
+                listeners: {
+                    afterSelect: cspace.recordList.afterSelectHandlerDefault
+                }
+            }
         },
+        recordListAfterSelectHandler: cspace.recordList.afterSelectHandlerDefault,
         relatedRecordsList: {
             type: "cspace.relatedRecordsList"
         },
