@@ -9,7 +9,7 @@ fieldset, table, pre {margin-bottom:0em;}
 p {margin-bottom:1em;}
 ul {margin:0; width:auto;}
 textarea {overflow:auto; resize:none;}
-:focus {outline: none;}
+:focus {outline: none; outline-offset:0 !important;}
 select {border:1px solid #C7CFD4;}
 table select, table ~ select {border:none;}
 
@@ -20,7 +20,7 @@ input, textarea {font-family:inherit; font-size:12px; font-weight:inherit; line-
 input[type="button"], input[type="submit"], input[type="checkbox"] {height:auto; /*-moz-border-radius: 3px; -webkit-border-radius: 3px;*/}
 input:focus, textarea:focus {outline:1px solid black;}
 input[type="text"], input[type="password"], textarea {width:100%; margin:0;}
-input[type="submit"].logout {font-weight:bold; color:#333; background-color:#F3F3F3; padding-left:15px; padding-right:14px; font-size:13px;}
+input[type="submit"].logout {font-weight:bold; color:#333; background-color:#F3F3F3; padding-left:12px; padding-right:13px; font-size:13px;}
 input[type="submit"].logout:hover {background-color:#333; color:#FFF;}
 input[type="button"], input[type="submit"]	{background-color:#73AA4F; height:21px; padding-left:12px; padding-right:12px; font-weight:bold; color:#fff; cursor:pointer; font-size:13px; line-height:13px; border:none;}
 input[type="button"]:hover, input[type="submit"]:hover	{background-color:#48722D;}
@@ -60,7 +60,9 @@ a.add-link:hover, a.add-link:focus {color:#000; text-decoration:underline;}
 
 .menu-item a, .menu-item a:link, .menu-item a:visited, .menu-item a:active {color:#A6A6A6; text-decoration:none; border-bottom:3px solid #CFCECE; padding-right:25px; padding-bottom:2px;}
 .menu-item.selected a:link, .menu-item.selected a:visited, .menu-item.selected a:active {color:#646464; border-bottom:3px solid #646464; text-decoration:none;}
-.menu-item:not(.no-cursor):hover, .menu-item:not(.no-cursor) a:hover, .menu-item:focus, .menu-item a:focus {color:#646464; border-bottom-color:#646464;}
+/*.menu-item:not(.no-cursor):hover, .menu-item:not(.no-cursor) a:hover, .menu-item:focus, .menu-item a:focus {color:#646464; border-bottom-color:#646464;}*/
+.menu-item:hover, .menu-item a:hover, .menu-item:focus, .menu-item a:focus {color:#646464; border-bottom-color:#646464;}
+.menu-item.no-cursor a{color:#A6A6A6; border-bottom-color:#CFCECE;}
 
 .menu-record a {background:none repeat scroll 0 0 #6F9DCE; color:#fff; font-weight:bold;	padding:0.2em .3em; 
 	text-decoration:none; border:2px solid #6F9DCE; border-bottom:none; *margin-right:2px; 
@@ -298,7 +300,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .fl-container-left  .information-subgroup .header.toggle   {font-size:11px; line-height:11px; background-color:#AAAAAA; color:#000; padding:6px 0 7px 5px; width:auto; height:auto;}
 
 /*.found-records-box.header {font-size:13px; line-height:13px; background-color:#AAA; cursor:default; color:#fff; padding: 0;}*/
-.header.static {cursor:default; padding:5px 0 7px 5px; height:auto; width:auto;}
+.header.static {cursor:default; padding:5px 0 7px 5px; height:15px; width:auto;}
 
 
 .fl-container-left .upper-save {float:right;}
@@ -614,6 +616,7 @@ table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; f
 #search .header-menu-row .findedit a,
 #findedit .header-menu-row .findedit a,
 #createnew .header-menu-row .createnew a,
+#mycollectionspace .header-menu-row .mycollectionspace a,
 #administration .header-menu-row .administration a
 {color:#646464; border-bottom-color: #646464; text-decoration:none;}
 

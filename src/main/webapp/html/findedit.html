@@ -1,304 +1,190 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>CollectionSpace - Find and Edit</title>
-
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>CollectionSpace - Search Results</title>
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-reset.css" />
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-layout.css" />
         <link rel="stylesheet" type="text/css" href="../infusion/framework/fss/css/fss-text.css" />
+        <link rel="stylesheet" type="text/css" href="../css/Pager.css" />
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
         <!--[if lt IE 9]> <link rel="stylesheet" type="text/css" href="../css/cspace_ie.css"> <![endif]-->
         
         <script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
-        
+        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.tabs.js"></script>
+
         <script type="text/javascript" src="../js/cspace.js"></script>
         <script type="text/javascript" src="../js/Utilities.js"></script>
         <script type="text/javascript" src="../js/Renderer.js"></script>
-        <script type="text/javascript" src="../js/DataContext.js"></script>
-        <script type="text/javascript" src="../js/RecordList.js"></script>
         <script type="text/javascript" src="../js/PageBuilder.js"></script>
-        <script type="text/javascript" src="../js/findEditSetup.js"></script>
+        <script type="text/javascript" src="../js/DataContext.js"></script>
+        <script type="text/javascript" src="../js/Search.js"></script>
+        <script type="text/javascript" src="../js/searchSetup.js"></script>
     </head>
-
-    <body id="findedit">
-
+    <body id="search">
+        
         <div class="fl-container-1024 fl-centered">
-            <div id="name-header" class="csc-header-container">
+            <div class="csc-header-container" id="name-header">
                 <!-- this div will be filled in with the contents of the Template -->
             </div>
             <div class="fl-container-1024-inner">
                 <div id="title-bar" class="nobg">
                     <div class="content">
-                        <div class="header-name">Find and Edit Records</div>
+                        <div class="header-name">Search</div>
                         <div class="clear"></div>
                     </div>
                 </div>
-
-                <div id="all-content" class="fl-fix find-edit">
+                
+                <div id="all-content" class="fl-fix">
                     <div class="fl-fix fl-container-flex fl-col-mixed2">
-                        <div class="fl-container-content fl-force-left fl-container-left">
-                            <div class="fl-container-left-inner">
-                                <div class="fl-container-flex fl-fix information-group object-records-group">
-                                    <div class="info-column">    
-                                        <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-records', this); return false;">
-                                            <span class="header-toggle"><img src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-                                            Cataloging Records
-                                        </div>
-
-                                        <div class="fl-container-flex fl-fix content main" id="toggle-object-records">
-                                            <div class="hidden csc-error-message cs-message">This is the error message</div>
-                                            <div class="info-column">
-                                                <div class="find-edit-object-records">
-                                                    <div class="info-pair-table list-table">
-                                                        <div class="info-value overflowdiv">
-                                                            <table>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <td width=25%>Identification Number</td>
-                                                                        <td width=75%>Summary</td>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr class="csc-recordList-row">
-                                                                        <td ><a class="csc-accession-number link" href="objects.html"></a>&nbsp;</td>
-                                                                        <td class="csc-summary"></td>
-                                                                        <td class="csc-no-items-message"></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clear"></div>
-                                                    <div class="footer"><!-- --></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="fl-container-left fl-force-left">
+                            <!--<div class="fl-container-flex fl-fix information-group search-leader">
+                                <div class="fl-container-flex header">
+                                    <div class="label" style="float:left;">Latest Search:&nbsp;</div>
+                                    <div class="value" style="float:left;">&nbsp;</div>
+                                    <div class="clear"></div>
                                 </div>
-
-                                <div class="fl-container-flex fl-fix information-group">
-                                    <div class="info-column">    
-                                        <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-procedural-records', this); return false;">
-                                            <span class="header-toggle"><img src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-                                            Procedural Records
-                                        </div>
-
-                                        <div class="fl-container-flex fl-fix content main" id="toggle-procedural-records">
-                                            <div class="info-column">
-                                                <div class="find-edit-object-records">
-                                                    <div class="info-pair-table intake-records-group list-table">
-                                                        <div class="sub-header">Intake Records</div>
-                                                        <div class="hidden csc-error-message cs-message">This is the error message</div>
-                                                        <div class="info-value overflowdiv">
-                                                            <table>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <td width=25%>Entry Number</td>
-                                                                        <td width=75%>Summary</td>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr class="csc-recordList-row">
-                                                                        <td><a class="csc-entry-number link" href="intake.html"></a></td>
-                                                                        <td class="csc-summary"></td>
-                                                                        <td class="csc-no-items-message"></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clear"></div>
-                                                    <div class="footer"><!-- --></div>
-                                                    
-                                                    <div class="info-pair-table acquisition-records-group">
-                                                        <div class="sub-header">Acquisition Records</div>
-                                                        <div class="hidden csc-error-message cs-message">This is the error message</div>
-                                                        <div class="info-value overflowdiv list-table">
-                                                            <table>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <td width=25%>Entry Number</td>
-                                                                        <td width=75%>Summary</td>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr class="csc-recordList-row">
-                                                                        <td><a class="csc-entry-number link" href="acquisition.html"></a></td>
-                                                                        <td class="csc-summary"></td>
-                                                                        <td class="csc-no-items-message"></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clear"></div>
-                                                    <div class="footer"><!-- --></div>
-
-                                                    <div class="info-pair-table loanIn-records-group">
-                                                        <div class="sub-header">Loan In Records</div>
-                                                        <div class="hidden csc-error-message cs-message">This is the error message</div>
-                                                        <div class="info-value overflowdiv list-table">
-                                                            <table>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <td width=25%>Loan In Number</td>
-                                                                        <td width=75%>Summary</td>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr class="csc-recordList-row">
-                                                                        <td><a class="csc-entry-number link" href="loanin.html"></a></td>
-                                                                        <td class="csc-summary"></td>
-                                                                        <td class="csc-no-items-message"></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clear"></div>
-                                                    <div class="footer"></div>
-
-                                                    <div class="info-pair-table loanOut-records-group">
-                                                        <div class="sub-header">Loan Out Records</div>
-                                                        <div class="hidden csc-error-message cs-message">This is the error message</div>
-                                                        <div class="info-value overflowdiv list-table">
-                                                            <table>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <td width=25%>Loan Out Number</td>
-                                                                        <td width=75%>Summary</td>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr class="csc-recordList-row">
-                                                                        <td><a class="csc-entry-number link" href="loanout.html"></a></td>
-                                                                        <td class="csc-summary"></td>
-                                                                        <td class="csc-no-items-message"></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clear"></div>
-                                                    <div class="footer"></div>
-                                                    
-                                                    <div class="info-pair-table movement-records-group">
-                                                        <div class="sub-header">Location and Movement</div>
-                                                        <div class="hidden csc-error-message cs-message">This is the error message</div>
-                                                        <div class="info-value overflowdiv list-table">
-                                                            <table>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <td width=25%>Current Location</td>
-                                                                        <td width=75%>Summary</td>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr class="csc-recordList-row">
-                                                                        <td><a class="csc-entry-number link" href="movement.html"></a></td>
-                                                                        <td class="csc-summary"></td>
-                                                                        <td class="csc-no-items-message"></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clear"></div>
-                                                    <div class="footer"></div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            </div>-->
                             
-                                <div class="fl-container-flex fl-fix information-group organizational-records-group">
-                                    <div class="info-column">
-                                        <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-organizational-records', this); return false;">
-                                            <span class="header-toggle"><img src="../images/toggle-less.png" height=12 width=12 alt="toggle icon" /></span>
-                                            Storage, Media Records
+                            <div class="fl-container-flex fl-fix information-group object-records-group">
+                                <div class="info-column">
+                                    <div class="main-search-page">
+                                        <div id="search-box">
+                                            <!--<input name="keywords" type="text" class="csc-search-keywords" /><a href="#" class="csc-search-submit globalSearchButton">Search</a>-->
+                                            <input name="keywords" type="text" class="csc-search-keywords" /><input type="button" class="csc-search-submit searchButton" type="submit" value="Search" />
+                                            <div class="select-recordtype csc-select-box-container">
+                                                <span class="recordtype-label">Record Type</span>
+                                                <select name="recordtype" class="csc-search-recordType">
+                                                    <option value="objects">Cataloging</option>
+                                                    <option value="intake">Intake</option>
+                                                    <option value="acquisition">Acquisition</option>
+                                                    <option value="loanin">Loan In</option>
+                                                    <option value="loanout">Loan Out</option>
+                                                    <option value="movement">Location and Movement</option>
+                                                    <option value="authorities-person">Person</option>
+                                                    <option value="authorities-organization">Organization</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="fl-container-flex fl-fix content main disabled" id="toggle-organizational-records">
-                                            <div class="info-column">
-                                                <div class="find-edit-object-records authority-records-group">
-                                                    <div class="info-pair-table list-table">
-                                                        <div class="info-value overflowdiv">
-                                                            <table>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <td width=30%>ID Number</td>
-                                                                        <td width=15%>Type</td>
-                                                                        <td width=55%>Summary</td>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>&nbsp;</td>
-                                                                        <td>&nbsp;</td>
-                                                                        <td>&nbsp;</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
+
+                                        <div class="csc-search-error-message hidden">
+                                            We've encountered an error retrieving search results. Please try again.
+                                        </div>
+                                        
+                                        <div class="fl-container-flex header static found-records-box">
+                                            <span class="found-records-content csc-search-resultsCountContainer">
+                                                Found <span class="csc-search-results-count cs-search-highlight">insert results count here</span> records for <span class="csc-search-queryString cs-search-highlight">insert keywords here</span>
+                                            </span>
+                                            <span class="found-records-content csc-search-lookingContainer">
+                                                Looking for <span class="csc-search-queryString cs-search-highlight">insert keywords here</span>... <img src="../images/indeterminate_progress_indicator_true_transparent_16x16.gif" />
+                                            </span>
+                                        </div>
+                                        <div class="csc-search-results">
+                                            
+                                            <!-- search results -->
+                                            <div class="fl-pager list-table" id="toggle-records">
+                                                <!--<ul id="pager-top" class="fl-pager-ui flc-pager-top">
+                                                    <li class="flc-pager-previous">
+                                                        <a href="#">&lt; previous</a>
+                                                    </li>
+                                                    <li>
+                                                        <ul class="pager-links fl-pager-links flc-pager-links">
+                                                            <li class="flc-pager-pageLink"><a href="#">1</a></li>
+                                                            <li class="flc-pager-pageLink-disabled">2</li>
+                                                            <li class="flc-pager-pageLink"><a href="#">3</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="flc-pager-next">
+                                                        <a href="#">next &gt;</a>
+                                                    </li>
+                                                    <li class="flc-per-page">
+                                                        Show <span>
+                                                            <select class="flc-pager-page-size">
+                                                                <option value="5">5</option>
+                                                                <option value="10">10</option>
+                                                                <option value="20">20</option>
+                                                                <option value="50">50</option>
+                                                            </select>
+                                                        </span>
+                                                        per page
+                                                    </li>
                                                     <div class="clear"></div>
-                                                    <div class="footer"><!-- --></div>
-                                                </div>
+                                                </ul>
+                                                <div class="clear"></div>-->
+                                                <table summary="search results" id="search-results" class="fl-pager-data">
+                                                    <thead>
+                                                        <tr rsf:id="header:" class="csc-header">
+                                                            <th class="flc-pager-sort-header">ID Number</th>
+                                                            <th class="flc-pager-sort-header">Summary</th>
+                                                            <th class="flc-pager-sort-header">Type</th>
+                                                            <!--<th class="flc-pager-sort-header">Record Type</th>-->
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="flc-pager-body-template">
+                                                        <tr class="csc-row">
+                                                            <td><a href="x" class="csc-number link"></a></td>
+                                                            <td class="csc-col"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <ul id="pager-bottom" class="fl-pager-ui flc-pager-bottom">
+                                                    <li class="flc-per-page">
+                                                        Show <span>
+                                                            <select class="flc-pager-page-size">
+                                                                <option value="1">1</option>
+                                                                <option value="10">10</option>
+                                                                <option value="20">20</option>
+                                                                <option value="50">50</option>
+                                                            </select>
+                                                        </span>
+                                                        per page
+                                                    </li>
+                                                    <li class="flc-pager-previous">
+                                                        <a href="#">&lt; previous</a>
+                                                    </li>
+                                                    <li>
+                                                        <ul class="pager-links fl-pager-links flc-pager-links">
+                                                            <li value="1" class= "flc-pager-pageLink"><a href="#">1</a></li>
+                                                            <li class="flc-pager-pageLink-disabled">2</li>
+                                                            <li value="2" class="flc-pager-pageLink"><a href="#">3</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="flc-pager-next">
+                                                        <a href="#">next &gt;</a>
+                                                    </li>
+                                                    <li class="flc-pager-summary" style="width:100px; text-align:right;">
+                                                        1-10 of 500 items
+                                                    </li>
+                                                    <div class="clear"></div>
+                                                </ul>
                                                 <div class="clear"></div>
                                             </div>
                                         </div>
+                                        <!-- end search results -->
                                     </div>
                                 </div>
-                            </div>
+                            </div>    
                         </div>
                         
                         <div class="fl-container-pivot fl-force-right csc-right-sidebar" id="csc-right-sidebar">
-                            <div class="pivot-search-box">
-                                <div class="info-column1">
-                                    <div class="header">
-                                        Search
-                                    </div>
-                                
-                                    <div class="content">
-                                        <div class="pivot-menu-search">
-                                            <form action="search.html">
-                                                <input name="keywords" type="text" class="csc-search-pivot-keywords" />
-                                                <div><span class="recordtype-label">Record Type</span>
-                                                    <select name="recordtype" class="csc-search-pivot-record-type">
-                                                        <option value="objects">Cataloging</option>
-                                                        <option value="intake">Intake</option>
-                                                        <option value="acquisition">Acquisition</option>
-                                                        <option value="loanin">Loan In</option>
-                                                        <option value="loanout">Loan Out</option>
-                                                        <option value="movement">Location and Movement</option>
-                                                        <option value="authorities-person">Person</option>
-                                                        <option value="authorities-organization">Organization</option>
-                                                    </select>
-                                                </div>
-                                                <div class="csc-search-pivot-submit-container"><input type="submit" value="Search" class="csc-search-pivot-submit searchButton" /></div>
-                                            </form>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </div>
-                                    <div class="clear"></div>
-                                </div>
-                            </div>
-                        </div>
+                                <!-- this div will be filled in with the contents of the Template -->
+                        </div> <!-- END sub-main content -->
+                        <div class="clear"></div>
                     </div>
-                    <div class="clear"></div>
                 </div>
             </div>
-
+            
             <div class="csc-footer-container" id="footer">
                 <!-- this div will be filled in with the contents of the Template -->
             </div>
         </div>
-
+        
         <script type="text/javascript">
-            cspace.setupFindEdit();
+            $(document).ready(function(){
+                cspace.searchSetup();
+            });
         </script>
-
     </body>
+
 </html>
