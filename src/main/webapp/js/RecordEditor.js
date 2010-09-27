@@ -67,8 +67,17 @@ cspace = cspace || {};
         that.events["after" + action + "ObjectDataSuccess"].fire(data, that.options.strings[message]);
     };
 
+    var confirmationTriggerMaker = function(exclusions, handler) {
+        return function() {
+            if (!$(this).is(exclusions)) {
+                return handler($(this).attr("href"));
+            }
+        }
+    };
+
     var bindEventHandlers = function (that) {
-        $(that.options.selectors.confirmationInclude + ":not(" + that.options.selectors.confirmationExclude + ")").live("click", that.showConfirmation);
+        $(that.options.selectors.confirmationInclude).live("click", 
+            confirmationTriggerMaker(that.options.selectors.confirmationExclude, that.showConfirmation));
 
         that.events.onSave.addListener(validateIdentificationNumber(that.dom, that.container, that.options.strings.identificationNumberRequired));
 
@@ -241,11 +250,9 @@ cspace = cspace || {};
             }, that.options.confirmation.options) 
         ]);
         
-        that.showConfirmation = function () {
+        that.showConfirmation = function(href) {
             if (that.unsavedChanges) {
-                // TODO: confirmation only works on element clicks that have an href
-                // http://issues.collectionspace.org/browse/CSPACE-1813
-                that.confirmation.open($(this).attr("href"));
+                that.confirmation.open(href);
                 return false;
             }
         };
