@@ -629,13 +629,13 @@ table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; f
 tr.csc-repeatable-headerRow td:first-child, tr.csc-repeatable-headerRow td:last-child {width:13px;}
 .cs-repeatable-add {}
 input[type="button"].cs-repeatable-add, .info-pair-date input[type="button"].cs-repeatable-add 
-{font-size:11px; height:17px; width:44px; position:absolute; left:80%; top:-2px;}
+{font-size:11px; height:17px; width:44px; position:absolute; left:80%; top:-2px; padding: 0px}
 .info-pair-date input[type="button"].cs-repeatable-add {right:0; left:136px;}
 li.cs-repeatable-repeat {list-style-type: none;  margin-bottom:1px;   width:99%}
 .cs-repeatable-content {/*width: 90.2%;*/ width:89%; /*margin:0 0px 0 14px;*/ float:left;}
 .cs-repeatable-content > input {width: 89.2%;}
 .cs-repeatable-content .ui-autocomplete-input {width:100%;}
-div.cs-rep eatable-content input{float:left;}
+div.cs-repeatable-content input{float:left;}
 input.cs-repeatable-primary {width: 11px; position: relative; vertical-align:top; border:none; margin-right:3px; /*margin-right: -20px;*/ float:left;}
 td input.cs-repeatable-primary {margin:0 0 0 2px;  vertical-align:bottom;}
 input.cs-repeatable-delete, table tr.csc-repeatable-repeat input.cs-repeatable-delete {float:left; border:none; /*width: 16px;*/ width:5%; height:17px; vertical-align:top; padding:0px; background:transparent url('../images/icnDeleteIdle.png') no-repeat 1px 2px;}
@@ -649,6 +649,25 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete:hover, table tr.csc-re
 .cs-calendar-button:focus {outline: 1px solid black;}
 
 
+/*   styling the loading progress indicator */
+.cs-loading-root {
+    position: absolute;
+    background-color: white;
+    opacity: 0.85;
+    filter:alpha(opacity=85);
+    z-index: 5000;
+    text-align: center;
+    }
+
+.cs-loading-centre {
+    padding-top: 150px;
+    font-size: 3em;
+    opacity: 1;
+    }
+
+.cs-loading-centre img {
+    padding: 100px
+    }
 /***********    CSS For New Markup on Location and Movement Control Record    ***********/
 /* Note: The scoping of these styles to the movement template is temporary, until the styles are approved */
 .csc-movement-template .button-row {padding-bottom: 32px;}

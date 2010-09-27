@@ -71,9 +71,9 @@ cspace = cspace || {};
         that.events.onDependencySetup.fire(that.uispec);
         
         fluid.withEnvironment({pageBuilder: that},
-                                function () {
-                                    that.dependencies = fluid.expander.expandLight(that.dependencies);
-                                }
+            function () {
+                that.dependencies = fluid.expander.expandLight(that.dependencies);
+            }
         );
         
         that.components = [];
@@ -172,24 +172,31 @@ cspace = cspace || {};
         
         // for our dependencies, add any demands for model expansion to the spec list
         fluid.withEnvironment({resourceSpecCollector: resourceSpecs},
-                                function () {
-                                    that.dependencies = fluid.expander.expandLight(that.dependencies, {noValue: true});
-                                }
+            function () {
+                that.dependencies = fluid.expander.expandLight(that.dependencies, {noValue: true});
+            }
         );
         fluid.each(resourceSpecs,
-                    function (spec) {
-                        spec.timeSuccess = true;
-                    }
+            function (spec) {
+                spec.timeSuccess = true;
+            }
         );
         
+        var indicator = cspace.util.globalLoadingAssociator();
+        indicator.supplySpecs(resourceSpecs);
+        
         fluid.log("PageBuilder.js before issuing I/O"); // fetch EVERYTHING
-        fluid.fetchResources(resourceSpecs, function () {
+        
+        var fetchCallback = function () {
             fluid.log("PageBuilder.js completing initialisation - I/O returned");
             if (!that.options.htmlOnly) {
                 setUpPageBuilder(that);                
             }
             that.events.pageReady.fire(); 
-        });
+        };
+        fetchCallback = indicator.wrapCallback(fetchCallback);
+        
+        fluid.fetchResources(resourceSpecs, fetchCallback);
         
         return that;
     };

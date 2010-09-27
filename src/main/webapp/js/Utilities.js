@@ -334,5 +334,106 @@ fluid.registerNamespace("cspace.util");
             return cspace.util.addTrailingSlash(baseUrl) + recordType + "/" + (csid ? csid + fileExtension : "");
         }
     };
+    
+    cspace.util.invokeWithoutFail = function(toInvoke, args) {
+        if (toInvoke) {
+            try {
+                toInvoke.apply(null, args);
+            }
+            catch (e) {
+                fluid.log("Exception applying callback: " + e);
+            }
+        }
+    };
+    
+    cspace.util.composeCallbacks = function(first, second) {
+        return function() {
+            cspace.util.invokeWithoutFail(first, arguments);
+            return cspace.util.invokeWithoutFail(second, arguments);
+        };
+    };
+    
+    function createMarkup(that) {
+        var markup = $(that.options.markup);
+        markup.hide();
+        markup.addClass(that.options.styles.rootClass);
+        that.locate("image", markup).attr("src", that.options.imageUrl);
+        that.locate("message", markup).text(that.options.strings.loadingMessage);
+        $("body").append(markup);
+        return markup;
+    }
+    
+    function updateDimensions(that) {
+        var target = that.container[0];
+        that.indicator.css({
+            left: target.offsetLeft + "px",
+            top: (target.offsetTop - that.options.heightExpand) + "px",
+            width: target.offsetWidth + "px",
+            height: (target.offsetHeight + that.options.heightExpand * 2) + "px" 
+        });
+    }
+    
+    cspace.util.globalLoadingIndicator = function(container, options) {
+        var that = fluid.initView("cspace.util.globalLoadingIndicator", container, options);
+        that.indicator = createMarkup(that);
+        that.show = function() {
+            that.indicator.show();
+            that.update();
+        };
+        
+        that.update = function() {
+            updateDimensions(that);
+        };
+        
+        that.hide = function() {
+            that.indicator.hide();
+        };
+        
+        return that;  
+    };
+    
+    fluid.defaults("cspace.util.globalLoadingIndicator",{
+        imageUrl: "../images/indeterminateProgressSpinner_92x92_blackonwhite.gif",
+        selectors: {
+            image: "img",
+            message: "span"  
+        },
+        styles: {
+            rootClass: "cs-loading-root"
+        },
+        strings: {
+            loadingMessage: "Loading record..."          
+        },
+        heightExpand: 5,
+        markup: "<div><div class=\"cs-loading-centre\"><span>Message here</span><br/><img src=\"#\"/></div></div>"
+    });
+    
+    cspace.util.globalLoadingAssociator = function(options) {
+        var that = fluid.initLittleComponent("cspace.util.globalLoadingAssociator", options);
+        var indicator = cspace.util.globalLoadingIndicator(that.options.indicatorTarget, that.options.indicatorOptions);
+        that.supplySpecs = function(resourceSpecs) {
+            var mainWait = that.options.mainWaitSpec;
+            if (!mainWait) {
+                indicator.show();
+            }
+            fluid.each(resourceSpecs, function(spec, key) {
+                spec.options.success = cspace.util.composeCallbacks(spec.options.success, key === mainWait? indicator.show: indicator.update);
+            });
+            if (!resourceSpecs[mainWait]) {
+                indicator.show();
+            }
+        };
+        that.wrapCallback = function(callback) {
+            return cspace.util.composeCallbacks(
+                indicator.hide, callback
+                );
+        };
+        return that;     
+    };
 
+    fluid.defaults("cspace.util.globalLoadingAssociator", {
+        indicatorTarget: "#all-content",
+        mainWaitSpec: "recordEditor",
+        indicatorOptions: {}
+    });
 })(jQuery, fluid);
