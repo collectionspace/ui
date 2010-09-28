@@ -86,6 +86,42 @@ cspace = cspace || {};
             }
         }
     };
+    
+    cspace.pageSpecManager = function(pageSpecs) {
+        var texts = {};
+        function attemptApply() {
+            fluid.each(texts, function(entry, key) {
+                if (!entry.applied) {
+                    var spec = pageSpecs[key];
+                    var target = $(spec.targetSelector);
+                    if (target.length > 0) {
+                        inject(entry.text, spec.templateSelector, target);
+                        entry.applied = true;
+                    }
+                    else {
+                        fluid.log("Deferring application to selector " + spec.targetSelector);
+                    }
+                }
+            });
+        }
+        var that = {
+            makeCallback: function (spec, key) {
+                return function(text) {
+                    texts[key] = {text: text};
+                    attemptApply();
+                };
+            },
+            conclude: function() {
+                fluid.each(texts, function(entry, key) {
+                    if (!entry.applied) {
+                        var spec = pageSpecs[key];
+                        fluid.fail("Error applying templates - template with URL " + spec.href + " could not be applied to target selector " + spec.targetSelector);
+                    }
+                });
+            }
+        };
+        return that;
+    };
 
     cspace.pageBuilder = function (dependencies, options) {
         var that = {
@@ -100,12 +136,12 @@ cspace = cspace || {};
         that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
 
         // everything we have got so far needs to be disposed as HTML
-        var resourceSpecs = that.options.pageSpec;
-        fluid.each(resourceSpecs, function (spec) {
+        var pageSpecs = fluid.copy(that.options.pageSpec);
+        var resourceSpecs = fluid.copy(pageSpecs);
+        var pageSpecManager = cspace.pageSpecManager(pageSpecs);
+        fluid.each(resourceSpecs, function (spec, key) {
             spec.options = {
-                success:  function (text) {
-                    inject(text, spec.templateSelector, $(spec.targetSelector));
-                }
+                success: pageSpecManager.makeCallback(spec, key)
             };
         });
         
@@ -188,6 +224,7 @@ cspace = cspace || {};
         fluid.log("PageBuilder.js before issuing I/O"); // fetch EVERYTHING
         
         var fetchCallback = function () {
+            pageSpecManager.conclude();
             fluid.log("PageBuilder.js completing initialisation - I/O returned");
             if (!that.options.htmlOnly) {
                 setUpPageBuilder(that);                
