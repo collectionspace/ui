@@ -254,24 +254,6 @@ var rendererTester = function(){
         jqUnit.assertDeepEq("Decorator should be in protoTree", expectedProtoTree, protoTree);
     });
 
-    rendererTest.test("buildProtoTree(): Fix of selections if model empty", function () {
-        var testUISpec = {
-            selector: {
-                selection: "${field1}",
-                optionlist: ["opt1", "opt2"],
-                optionnames: ["Option 1", "Option 2"]
-            }
-        };
-        var testThat = {
-            model: {}
-        };
-        var expectedModel = {
-            field1: ""
-        };
-        var protoTree = cspace.renderUtils.buildProtoTree(testUISpec, testThat);
-        jqUnit.assertDeepEq("Process should add missing fields to model", expectedModel, testThat.model);
-    });
-
     rendererTest.test("buildProtoTree(): Links", function () {
         var testUISpec = {
             selector1: {
@@ -327,12 +309,15 @@ var rendererTester = function(){
         var expectedTree = {
             children: [{
                 ID: "selector1",
+                componentType: "UIBound",
                 valuebinding: "field1"
             }, {
                 ID: "selector2",
+                componentType: "UIBound",
                 valuebinding: "field2"
             }, {
                 ID: "selector3",
+                componentType: "UIBound",
                 valuebinding: "field3"
             }]
         };

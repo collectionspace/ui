@@ -133,8 +133,8 @@ cspace = cspace || {};
         };
         
         that.close = function () {
-            that.updateEventListeners("remove");
             that.dlg.dialog("close");
+            that.updateEventListeners("remove");
         };
         that.open = function (targetHref) {
             that.model.href = targetHref;
