@@ -107,6 +107,7 @@ cspace = cspace || {};
     var handleSubmitSearch = function (that) {
         return function () {
             that.locate("errorMessage").hide();
+            fluid.clear(that.model.results);
             updateModel(that.model.searchModel, { 
                 keywords: that.locate("keywords").val(),
                 recordTypeLong: that.locate("recordType").val()
@@ -124,16 +125,19 @@ cspace = cspace || {};
                 searchModel.initialState = false;
                 return [];
             }
-            if (!searchModel.renderRequest) {
+            var dataRequired = false;
+            var limit = fluid.pager.computePageLimit(newModel);
+            for (var i = newModel.pageSize * newModel.pageNum; i < limit; ++ i) {
+                if (!directModel[i]) {
+                    dataRequired = true;
+                    break;
+                }
+            } 
+            if (!searchModel.renderRequest && dataRequired) {
                 that.search(newModel); // if made through interaction we need to perform "search" to refetch
             }
             searchModel.renderRequest = false;
-            return fluid.transform(directModel, function (row, index) {
-                return {
-                    index: index,
-                    row: $.extend(row, {selected: false})
-                };
-            });
+            return fluid.pager.directModelFilter(directModel, newModel, permutation);
         };
       
     };
@@ -153,6 +157,28 @@ cspace = cspace || {};
         });
     };
     
+    var applyResults = function(that, data) {
+        var searchModel = that.model.searchModel;
+        var results = that.model.results;
+        var offset = searchModel.pageNum * searchModel.pageSize;
+
+        fluid.model.copyModel(that.model.pagination, data.pagination);
+
+        if (data.pagination.totalItems !== that.model.pagination.totalItems) {
+            fluid.clear(results);
+        }
+
+        fluid.each(data.results, function(row, index) {
+            var fullIndex = offset + index;
+            if (!results[fullIndex]) { 
+                results[fullIndex] = row;
+                results[fullIndex].selected = false;
+            }
+        });
+        that.model.searchModel.renderRequest = true;
+        that.events.modelChanged.fire();
+    };
+    
     var makeSearcher = function (that) {
         return function (newPagerModel) {
             displayLookingMessage(that.dom, that.model.searchModel.keywords);
@@ -169,10 +195,7 @@ cspace = cspace || {};
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {
-                    fluid.model.copyModel(that.model.results, data.results);
-                    fluid.model.copyModel(that.model.pagination, data.pagination);
-                    that.model.searchModel.renderRequest = true;
-                    that.events.modelChanged.fire();
+                    applyResults(that, data);
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     that.events.onError.fire("search", textStatus);

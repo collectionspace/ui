@@ -18,14 +18,13 @@ cspace = cspace || {};
 
     var handleAddClick = function (that) {
         return function () {
-            var data = that.search.resultsPager.options.dataModel.results;
+            var data = that.search.model.results;
             var newIndex = 0;
             var newRelations = [];
             var source = {
                 csid: that.applier.model.csid,
                 recordtype: that.primaryRecordType
             };
-            // TODO: Candidate for transform.
             for (var i = 0; i < data.length; i++) {
                 if (data[i].selected) {
                     newRelations[newIndex] = {
@@ -34,7 +33,7 @@ cspace = cspace || {};
                         type: "affects",
                         "one-way": false
                     };
-                    newIndex += 1;
+                    ++newIndex;
                 }
             }
             that.events.addRelations.fire({
@@ -106,7 +105,8 @@ cspace = cspace || {};
 
         return addDialog;        
     };
-
+    
+ // TODO: All this really needs is the csid, not the "applier"!
     cspace.searchToRelateDialog = function (container, primaryRecordType, applier, options) {
         
         var that = fluid.initView("cspace.searchToRelateDialog", container, options);

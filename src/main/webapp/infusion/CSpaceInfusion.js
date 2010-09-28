@@ -12612,7 +12612,7 @@ fluid_1_2 = fluid_1_2 || {};
         // uniquify the id that it will be derived from
           adjustForID(attrcopy, component, true, component.fullID);
           if (submitting.submittingname === undefined && submitting.willinput !== false) {
-              submitting.submittingname = submitting.fullID;
+              submitting.submittingname = submitting.finalID || submitting.fullID;
           }
           return submitting.submittingname;
       }
@@ -13386,7 +13386,7 @@ fluid_1_2 = fluid_1_2 || {};
             node.innerHTML = "";
         }
         var fossils = options.fossils || {};
-        fluid.clear(fossils);
+        
         var renderer = fluid.renderer(templates, tree, options, fossils);
         var rendered = renderer.renderTemplates();
         if (options.renderRaw) {
@@ -13533,9 +13533,8 @@ fluid_1_2 = fluid_1_2 || {};
         container = $(container);
         var source = options.templateSource ? options.templateSource: {node: container};
         var rendererOptions = modelise(options.rendererOptions);
-        if (fossils) {
-            rendererOptions.fossils = fossils;
-        }
+        rendererOptions.fossils = fossils || {};
+        
         var expanderOptions = modelise(options.expanderOptions, {ELstyle: "$()"});
         var expander = options.noExpand? null : fluid.renderer.makeProtoExpander(expanderOptions);
         
@@ -13548,6 +13547,7 @@ fluid_1_2 = fluid_1_2 || {};
             rendererOptions.cutpoints = rendererOptions.cutpoints || fluid.invokeGlobalFunction(cutpointFn, [selectors, options]);
         
             if (templates) {
+                fluid.clear(rendererOptions.fossils);
                 fluid.reRender(templates, container, tree, rendererOptions);
             } else {
                 if (typeof(source) === "function") { // TODO: make a better attempt than this at asynchrony
@@ -15572,15 +15572,15 @@ fluid_1_2 = fluid_1_2 || {};
     function computePageCount(model) {
         model.pageCount = Math.max(1, Math.floor((model.totalRange - 1) / model.pageSize) + 1);
     }
-    
-    function computePageLimit(model) {
-        return Math.min(model.totalRange, (model.pageIndex + 1) * model.pageSize);
-    }
 
     fluid.pager = function () {
         return fluid.pagerImpl.apply(null, arguments);
     };
     
+    fluid.pager.computePageLimit = function(model) {
+        return Math.min(model.totalRange, (model.pageIndex + 1) * model.pageSize);
+    };
+
     fluid.pager.directPageList = function (container, events, options) {
         var that = fluid.initView("fluid.pager.directPageList", container, options);
         that.pageLinks = that.locate("pageLinks");
@@ -15695,7 +15695,9 @@ fluid_1_2 = fluid_1_2 || {};
             function (newModel, oldModel) {
                 var pages = that.options.pageStrategy(newModel.pageCount, 0, newModel.pageIndex);
                 var pageTree = fluid.transform(pages, pageToComponent(newModel.pageIndex));
-                pageTree[pageTree.length - 1].value = pageTree[pageTree.length - 1].value + strings.last;
+                if (pageTree.length > 1) {
+                    pageTree[pageTree.length - 1].value = pageTree[pageTree.length - 1].value + strings.last;
+                }
                 events.onRenderPageLinks.fire(pageTree, newModel);
                 fluid.reRender(template, root, pageTree, renderOptions);
                 updateStyles(that, newModel, oldModel);
@@ -15822,7 +15824,6 @@ fluid_1_2 = fluid_1_2 || {};
                 value: fluid.pager.fetchValue(overallThat, dataModel, i, columnDef.valuebinding, roots)
             };
         }
-        var columnType = typeof sortrecs[0].value;
         function sortfunc(arec, brec) {
             var a = arec.value;
             var b = brec.value;
@@ -15835,7 +15836,7 @@ fluid_1_2 = fluid_1_2 || {};
     
     fluid.pager.directModelFilter = function (model, pagerModel, perm) {
         var togo = [];
-        var limit = computePageLimit(pagerModel);
+        var limit = fluid.pager.computePageLimit(pagerModel);
         for (var i = pagerModel.pageIndex * pagerModel.pageSize; i < limit; ++ i) {
             var index = perm? perm[i]: i;
             togo[togo.length] = {index: index, row: model[index]};
@@ -15965,7 +15966,7 @@ fluid_1_2 = fluid_1_2 || {};
     function isCurrentColumnSortable(columnDefs, model) {
         var columnDef = model.sortKey? fluid.pager.findColumnDef(columnDefs, model.sortKey) : null;
         return columnDef ? columnDef.sortable : false;
-    };
+    }
     
     function setModelSortHeaderClass(newModel, opts) {
         var styles = opts.overallOptions.styles;
@@ -16057,7 +16058,7 @@ fluid_1_2 = fluid_1_2 || {};
                             function (filteredRow) {
                                 var roots = getRoots(expOpts, overallThat, filteredRow.index);
                                 if (columnDefs === "explode") {
-                                    return fluid.explode(filteredRow.row, root);
+                                    return fluid.explode(filteredRow.row, roots.longRoot);
                                 }
                                 else if (columnDefs.length) {
                                     return expandColumnDefs(filteredRow, expOpts);
@@ -16083,11 +16084,11 @@ fluid_1_2 = fluid_1_2 || {};
         selectors: {
             root: ".flc-pager-body-template"
         },
-		
-		styles: {
-			root: "fl-pager"
+        
+        styles: {
+            root: "fl-pager"
         },
-		
+        
         keyStrategy: "id",
         keyPrefix: "",
         row: "row:",
@@ -16105,7 +16106,7 @@ fluid_1_2 = fluid_1_2 || {};
                     onModelChange: function (newModel, oldModel) {
                         var text = fluid.stringTemplate(options.message, {
                             first: newModel.pageIndex * newModel.pageSize + 1,
-                            last: computePageLimit(newModel),
+                            last: fluid.pager.computePageLimit(newModel),
                             total: newModel.totalRange
                         });
                         if (node.length > 0) {
@@ -16160,7 +16161,7 @@ fluid_1_2 = fluid_1_2 || {};
                     var page = cell.pageIndex;
                     var start = page * tModel.pageSize;
                     tModel.pageIndex = page;
-                    var limit = computePageLimit(tModel);
+                    var limit = fluid.pager.computePageLimit(tModel);
                     var iValue = fetchValue(start);
                     var lValue = fetchValue(limit - 1);
                     
