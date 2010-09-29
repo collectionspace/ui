@@ -16,6 +16,16 @@ fluid.registerNamespace("cspace.util");
 (function ($, fluid) {
     fluid.log("Utilities.js loaded");
 
+    // Attach a 'live' handler to the keydown event on all selects
+    // Prevents this upsetting and undesirable behaviour (CSPACE-2840)
+    // Note: this is not a utility but rather gets run when this file loads 
+    //       - we might consider moving it to a framework file if we create one.
+    $("select").live("keydown", function (event) {
+        if (event.keyCode === $.ui.keyCode.BACKSPACE) {
+            return false;
+        }
+    });
+
     cspace.util.addTrailingSlash = function (url) {
         return url + ((url.charAt(url.length - 1) !== "/") ? "/" : "");
     };
@@ -40,8 +50,8 @@ fluid.registerNamespace("cspace.util");
             }
         }  
     });
-    
-    cspace.specBuilderImpl = function(options) {
+
+    cspace.specBuilderImpl = function (options) {
         // build a false "component" just to get easy access to options merging
         var that = fluid.initLittleComponent("cspace.specBuilderImpl", options);
         if (that.options.urlPrefix) {
@@ -53,18 +63,18 @@ fluid.registerNamespace("cspace.util");
         return that.options.spec;
     };
 
-    cspace.specBuilder = function(options) {
+    cspace.specBuilder = function (options) {
         return fluid.invoke("cspace.specBuilderImpl", {spec: options});
-    }
+    };
     
     // a convenience wrapper for specBuilderImpl that lets us pass the URL as a simple string
-    cspace.simpleSpecBuilder = function(urlStub) {
+    cspace.simpleSpecBuilder = function (urlStub) {
         return fluid.invoke("cspace.specBuilderImpl", {url: urlStub});
     };
     
-    cspace.urlExpander = function(options) {
+    cspace.urlExpander = function (options) {
         var that = fluid.initLittleComponent("cspace.urlExpander", options);
-        return function(url) {
+        return function (url) {
             return fluid.stringTemplate(url, that.options.vars);
         };
     };
@@ -111,15 +121,15 @@ fluid.registerNamespace("cspace.util");
      * with the exception of calls routed through fluid.fetchResources (the two methods may
      * be combined by use of makeAjaxOpts and conversion into a resourceSpec) */   
     // TODO: integrate with Engage conception and knock the rough corners off
-    cspace.URLDataSource = function(options) {
+    cspace.URLDataSource = function (options) {
         var that = fluid.initLittleComponent(options.typeName, options);
-        var wrapper = that.options.delay? function(func) {
-            setTimeout(func, that.options.delay);} : function(func) {func()};
+        var wrapper = that.options.delay? function (func) {
+            setTimeout(func, that.options.delay);} : function (func) {func();};
 
         function resolveUrl(directModel) {
             var expander = fluid.invoke("cspace.urlExpander");
             var map = fluid.copy(that.options.termMap) || {};
-            map = fluid.transform(map, function(entry) {
+            map = fluid.transform(map, function (entry) {
                 var encode = false;
                 if (entry.indexOf(eUC) === 0) {
                     encode = true;
@@ -132,25 +142,25 @@ fluid.registerNamespace("cspace.util");
                     entry = encodeURIComponent(entry);
                 }
                 return entry;
-            } );
+            });
             var replaced = fluid.stringTemplate(that.options.url, map);
             replaced = expander(replaced);
             return replaced;
         }
         
-        that.makeAjaxOpts = function(model, directModel, callback, type) {
+        that.makeAjaxOpts = function (model, directModel, callback, type) {
             var togo = {
                 type: type,
                 url: resolveUrl(directModel),
                 contentType: "application/json; charset=UTF-8",
                 dataType: "json",
-                success: function(data) {
+                success: function (data) {
                     if (that.options.responseParser) {
                         data = that.options.responseParser(data, directModel);
                     }
                     callback(data);
                 },
-                error: function(xhr, textStatus, errorThrown) {
+                error: function (xhr, textStatus, errorThrown) {
                     fluid.log("Data fetch error for url " + togo.url + " - textStatus: " + textStatus);
                     fluid.log("ErrorThrown: " + errorThrown);
                 }                
@@ -161,14 +171,14 @@ fluid.registerNamespace("cspace.util");
             return togo;
         };
 
-        that.get = function(directModel, callback) {
+        that.get = function (directModel, callback) {
             var ajaxOpts = that.makeAjaxOpts(null, directModel, callback, "GET");
-            wrapper(function() {
+            wrapper(function () {
                 $.ajax(ajaxOpts);
             });
         };
         if (options.writeable) {
-            that.put = function(model, directModel, callback) {
+            that.put = function (model, directModel, callback) {
                 var ajaxOpts = that.makeAjaxOpts(model, directModel, callback, "POST");
                 $.ajax(ajaxOpts);
             }; 
@@ -184,24 +194,24 @@ fluid.registerNamespace("cspace.util");
     
     var dismissList = {};
     
-    $(document).click(function(event) {
+    $(document).click(function (event) {
         var target = event.target;
-        while(target) {
+        while (target) {
             if (dismissList[target.id]) {
                 return;
             }
             target = target.parentNode;
         }
-        fluid.each(dismissList, function(dismissFunc, key) {
+        fluid.each(dismissList, function (dismissFunc, key) {
             dismissFunc();
             delete dismissList[key];
         });
     });
     
-    cspace.util.globalDismissal = function(nodes, dismissFunc) {
+    cspace.util.globalDismissal = function (nodes, dismissFunc) {
         nodes = $(nodes);
-        fluid.each(nodes, function(node) {
-        var id = fluid.allocateSimpleId(node);
+        fluid.each(nodes, function (node) {
+            var id = fluid.allocateSimpleId(node);
             if (dismissFunc) {
                 dismissList[id] = dismissFunc;
             }
@@ -351,7 +361,7 @@ fluid.registerNamespace("cspace.util");
         }
     };
     
-    cspace.util.invokeWithoutFail = function(toInvoke, args) {
+    cspace.util.invokeWithoutFail = function (toInvoke, args) {
         if (toInvoke) {
             try {
                 toInvoke.apply(null, args);
@@ -362,8 +372,8 @@ fluid.registerNamespace("cspace.util");
         }
     };
     
-    cspace.util.composeCallbacks = function(first, second) {
-        return function() {
+    cspace.util.composeCallbacks = function (first, second) {
+        return function () {
             cspace.util.invokeWithoutFail(first, arguments);
             return cspace.util.invokeWithoutFail(second, arguments);
         };
@@ -389,26 +399,26 @@ fluid.registerNamespace("cspace.util");
         });
     }
     
-    cspace.util.globalLoadingIndicator = function(container, options) {
+    cspace.util.globalLoadingIndicator = function (container, options) {
         var that = fluid.initView("cspace.util.globalLoadingIndicator", container, options);
         that.indicator = createMarkup(that);
-        that.show = function() {
+        that.show = function () {
             that.indicator.show();
             that.update();
         };
         
-        that.update = function() {
+        that.update = function () {
             updateDimensions(that);
         };
         
-        that.hide = function() {
+        that.hide = function () {
             that.indicator.hide();
         };
         
         return that;  
     };
     
-    fluid.defaults("cspace.util.globalLoadingIndicator",{
+    fluid.defaults("cspace.util.globalLoadingIndicator", {
         imageUrl: "../images/indeterminateProgressSpinner_92x92_blackonwhite.gif",
         selectors: {
             image: "img",
@@ -424,22 +434,22 @@ fluid.registerNamespace("cspace.util");
         markup: "<div><div class=\"cs-loading-centre\"><span>Message here</span><br/><img src=\"#\"/></div></div>"
     });
     
-    cspace.util.globalLoadingAssociator = function(options) {
+    cspace.util.globalLoadingAssociator = function (options) {
         var that = fluid.initLittleComponent("cspace.util.globalLoadingAssociator", options);
         var indicator = cspace.util.globalLoadingIndicator(that.options.indicatorTarget, that.options.indicatorOptions);
-        that.supplySpecs = function(resourceSpecs) {
+        that.supplySpecs = function (resourceSpecs) {
             var mainWait = that.options.mainWaitSpec;
             if (!mainWait) {
                 indicator.show();
             }
-            fluid.each(resourceSpecs, function(spec, key) {
-                spec.options.success = cspace.util.composeCallbacks(spec.options.success, key === mainWait? indicator.show: indicator.update);
+            fluid.each(resourceSpecs, function (spec, key) {
+                spec.options.success = cspace.util.composeCallbacks(spec.options.success, key === mainWait ? indicator.show : indicator.update);
             });
             if (!resourceSpecs[mainWait]) {
                 indicator.show();
             }
         };
-        that.wrapCallback = function(callback) {
+        that.wrapCallback = function (callback) {
             return cspace.util.composeCallbacks(
                 indicator.hide, callback
                 );
