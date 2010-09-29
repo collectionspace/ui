@@ -15,6 +15,8 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     fluid.log("AdminUsers.js loaded");
+    
+    fluid.registerNamespace("cspace.adminUsers");
 
     var validate = function (domBinder, userDetailsApplier, passwordValidator) {
         // In the default configuration, the email address used as the userid.
@@ -89,17 +91,26 @@ cspace = cspace || {};
         that.userListEditor.events.afterAddNewListRow.addListener(function () {
             that.passwordValidator.bindEvents();
         });
+        
+        that.userListEditor.details.events.afterRender.addListener(function () {
+            that.locate("deleteButton")[that.isCurrentUser(that.userListEditor.details.model.csid) ? "hide" : "show"]();
+       });
     };
 
     cspace.adminUsers = function (container, options) {
         var that = fluid.initView("cspace.adminUsers", container, options);
+        
         that.userListEditor = fluid.initSubcomponent(that, "userListEditor", [that.container, that.options.recordType, 
             that.options.uispec, fluid.COMPONENT_OPTIONS]);
         that.passwordValidator = fluid.initSubcomponent(that, "passwordValidator", [that.container, fluid.COMPONENT_OPTIONS]);
-        bindEventHandlers(that);
         
+        fluid.initDependents(that);
+        bindEventHandlers(that);
+                
         return that;
     };
+    
+    fluid.demands("isCurrentUser", "cspace.adminUsers", fluid.COMPONENT_OPTIONS);
 
     fluid.defaults("cspace.adminUsers", {
         recordType: "users",
@@ -116,8 +127,17 @@ cspace = cspace || {};
         passwordValidator: {
             type: "cspace.passwordValidator"
         },
+        components: {
+            isCurrentUser: {
+                type: "cspace.util.isCurrentUser",
+                options: {
+                    csid: "{adminUsers}.options.currentUserId"
+                }
+            }
+        },
         selectors: {
             searchField: ".csc-user-searchField",
+            deleteButton: ".csc-delete",
             searchButton: ".csc-user-searchButton",
             unSearchButton: ".csc-user-unSearchButton",
             messageContainer: ".csc-message-container",

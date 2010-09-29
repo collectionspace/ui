@@ -421,6 +421,33 @@ var adminUsersTester = function () {
             };
         });
     });
+    
+    var currentUserTests = function (userCSID, index, visibility) {
+        var adminUsers;
+        testOpts.currentUserId = userCSID;
+        testOpts.listeners = {
+            afterRender: function () {
+                var record = adminUsers.userListEditor.details;
+                var adminUsersSelectors = adminUsers.options.selectors;
+                record.events.afterRender.addListener(function () {
+                    jqUnit[visibility]("Delete button is " + visibility + " current user", 
+                        adminUsersSelectors.deleteButton);
+                    start();
+                });
+                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[index]).click();
+            }
+        };
+        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        stop();
+    };
+    
+    adminUsersTest.test("Currently logged in user should have invisible delete button", function () {
+        currentUserTests("147258369", 2, "notVisible");
+    });
+    
+    adminUsersTest.test("Currently logged in user should see delete button for other users", function () {
+        currentUserTests("1111", 1, "isVisible");
+    }); 
 };
 
 (function () {

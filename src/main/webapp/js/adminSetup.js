@@ -19,6 +19,7 @@ cspace = cspace || {};
 
         var adminOpts = {
             uispec: "{pageBuilder}.uispec",
+            currentUserId: "{pageBuilder}.currentUserId",
             userListEditor: {
                 options: {
                     dataContext: {

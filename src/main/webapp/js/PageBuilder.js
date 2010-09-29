@@ -157,6 +157,7 @@ cspace = cspace || {};
                             var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
                             window.location = loginUrl;     
                         }
+                        that.currentUserId = data.csid;
                     }
                 } 
             };
