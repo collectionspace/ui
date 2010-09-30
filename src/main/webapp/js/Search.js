@@ -155,6 +155,32 @@ cspace = cspace || {};
             that.locate("resultsContainer").hide();
             that.locate("errorMessage").show();
         });
+        
+        if (that.options.pivoting) {
+            // TODO: Change the event we listen to once pager gives us a more suitable event
+            // It is a bit dangerous to use the 'onModelChange' event of pager 
+            // because it doesn't assure us that pager rendering is complete
+            // but pager does not give us a more suitable event to listen to
+            that.resultsPager.events.onModelChange.addListener(function () {
+                that.locate("resultsRow").click(function (event) {
+                    var row = $(event.currentTarget);
+                    var rows = that.locate("resultsRow");
+                    var index = rows.index(row);
+                    var record = that.model.results[index];
+                    if (!record) {
+                        return;
+                    }
+                    var expander = cspace.urlExpander({
+                        vars: {
+                            recordType: record.recordtype,
+                            csid: record.csid
+                        }
+                    });
+                    window.location = expander("%recordType.html?csid=%csid");
+                    return false;
+               });
+            });
+        }
     };
     
     var applyResults = function(that, data) {
@@ -233,10 +259,10 @@ cspace = cspace || {};
             recordTypeLong: cspace.util.getUrlParameter("recordtype")
         });
 
-        bindEventHandlers(that);
         that.hideResults();
         
         fluid.initDependents(that);
+        bindEventHandlers(that);
 
         if (that.model.searchModel.keywords) {
             that.locate("keywords").val(that.model.searchModel.keywords);

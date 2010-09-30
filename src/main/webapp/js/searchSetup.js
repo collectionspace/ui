@@ -18,7 +18,9 @@ cspace = cspace || {};
 
     cspace.searchSetup = function () {
         
-        var searchOpts = {};
+        var searchOpts = {
+            pivoting: true
+        };
         if (cspace.util.useLocalData()) {
             searchOpts.searchUrlBuilder = cspace.search.localSearchUrlBuilder;
         }
