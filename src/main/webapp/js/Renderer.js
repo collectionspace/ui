@@ -128,6 +128,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         
         // TODO: need to make expander's API to be consistent with all expanders in the future.
+        // TODO: this signature is currently broken because of the requirement to access "that" in any "extendDecoratorOptions"
+        // encountered. This should be corrected once we have a replacement involving "component grading" etc.
         expander: function (uispec, that) {
             var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}", model: that.model});
             var protoTree = cspace.renderUtils.buildProtoTree(uispec, that);

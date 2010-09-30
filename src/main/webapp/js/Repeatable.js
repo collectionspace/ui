@@ -53,10 +53,21 @@ cspace = cspace || {};
             radioButtons[index].checked = field._primary || false;
         });
     };
+    
+    var renderFinalRow = function(that) {
+        var tree = getExpandedTree(that);
+        var children = tree.children;
+        tree.children = [children[children.length - 1]];
+        var markup = fluid.reRender(that.template, that.tempContainer, tree, that.options.renderOptions);
+        var repeats = that.locate("repeat");
+        var lastRepeat = $(repeats[repeats.length - 1]);
+        var newRepeat = that.locate("repeat", that.tempContainer);
+        lastRepeat.after(newRepeat);
+    };
 
     var requestChange = function (that, callback, index) {
         var elPath = that.options.elPath;
-        that.applier.requestChange(elPath, callback(fluid.model.getBeanValue(that.model, elPath), index));
+        that.applier.requestChange(elPath, callback(that.fetchModel(), index));
     };
 
     var bindEventHandlers = function (that) {        
@@ -65,45 +76,64 @@ cspace = cspace || {};
         // Waiting to ensure that the change request went through before changing the model.
         // Also fires when fields get modified.
         that.applier.modelChanged.addListener(elPath, function (model) {             
-            fluid.model.setBeanValue(that.model, elPath, fluid.model.getBeanValue(model, elPath));
+            fluid.model.setBeanValue(that.model, elPath, that.fetchModel(model));
         });
         
         // Make a change request to add an extra row.
-        that.locate("add").click(function () {
+        that.container.delegate("click", that.options.selectors.add, function () {
             requestChange(that, addRow);
-            that.refreshView();
+            //that.refreshView();
+            renderFinalRow(that);
+            that.events.afterRender.fire();
             that.events.afterAdd.fire();
         });
         
-        that.locate("remove").click(function () {
+        that.container.delegate("click", that.options.selectors.remove, function () {
             var index = that.locate("remove").index(this);
-            requestChange(that, deleteRow, index);            
-            that.refreshView();
+            requestChange(that, deleteRow, index);
+            var repeats = that.locate("repeat");
+            $(repeats[index]).remove();
+            //that.refreshView();
+            that.events.afterRender.fire(); // the test cases rely on this, though no user would
             that.events.afterDelete.fire();
         });
 
-        that.locate("primary").click(function () {
+        that.container.delegate("click", that.options.selectors.primary, function () {
             var index = that.locate("primary").index(this);
             requestChange(that, updatePrimary, index);
             that.events.afterUpdatePrimary.fire();
         });
     };
     
-    var renderPage = function (that) {
-        that.options.renderOptions.cutpoints.push({id: "repeat:", selector: that.options.selectors.repeat});
-        
-        // TODO: We should pass the args to the expander that are consistent with generic expanders.
+    function getExpandedTree(that) {
+        // TODO: We are sitting on a tower of evil here - we cannot correct the signature here because of the
+        // possibility of extendDecoratorOptions. We are both a producer and a consumer of this problem.
         var tree = fluid.invokeGlobalFunction(that.options.expander, [that.options.protoTree, that]);
-        that.options.renderOptions.model = that.model;
-        that.options.renderOptions.applier = that.applier;
+        return tree;
+    }
+    
+    function positionAddButton(button, target) {
+        var offset = $(target).offset();
+        var poffset = $(button.offsetParent).offset();
+        var tleft = offset.left - poffset.left;
+        $(button).css("left", tleft - button.offsetWidth + "px");
+    }
+    
+    var renderPage = function (that, blankRowOnly) {
+        var tree = getExpandedTree(that);
+        fluid.clear(that.options.renderOptions.fossils);
         if (that.template) {
             fluid.reRender(that.template, that.container, tree, that.options.renderOptions);
         }
         else {
             that.template = fluid.selfRender(that.container, tree, that.options.renderOptions);
         }
-        bindEventHandlers(that);
-        setupPrimary(that.locate("primary"), fluid.model.getBeanValue(that.model, that.options.elPath));
+        positionAddButton(that.locate("add")[0], that.locate("remove")[0]);
+        // This following line ought to work but fails on the first render on IE8 - it appears that assumptions
+        // about relationship between CSS position and absolute position are violated during jQuery.offset() for 
+        // this freshly created element.
+        //that.locate("add").position({my: "right bottom", at: "right top", of: $(that.locate("repeat")[0]), offset: "0 -2"});
+        setupPrimary(that.locate("primary"), that.fetchModel());
         that.events.afterRender.fire();
     };
 
@@ -111,6 +141,7 @@ cspace = cspace || {};
      * Repeated fields are expected to save the fields even if they're empty.
      * In this case, we require at least one instance of the field in the model.
      */
+    // TODO: Make most of this code go away by supporting "offset models" in the applier
     var prepareModel = function (model, elPath, applier) {
         var list = fluid.model.getBeanValue(model, elPath);
         if (!list || list.length === 0) {
@@ -136,15 +167,15 @@ cspace = cspace || {};
      * @node content node that will contain primary and delete
      */
     var addPrimaryAndDelete = function (that, node) {
-        // TODO: we need to programatically generate the 'name' attribute since we need more then one group of radio buttons on a page. 
-        var primary = $("<input class=\"csc-repeatable-primary \" type=\"radio\" name=\"primary-" + that.options.elPath + "\" />").addClass(that.options.styles.primary);
-        var remove = $("<input class=\"csc-repeatable-delete \" type=\"button\" value=\"\"/>").addClass(that.options.styles.remove);
-        
         if (that.locate("primary").length === 0) {
+            var primary = $(that.options.markup.primaryControl).addClass(that.options.styles.primary);
+            // TODO: we need to programatically generate the 'name' attribute since we need more then one group of radio buttons on a page.
+            primary.attr("name", "primary-" + that.options.elPath);
             node.prepend(primary);
         }
         
         if (that.locate("remove").length === 0) {
+            var remove = $(that.options.markup.deleteControl).addClass(that.options.styles.remove);
             node.append(remove);
         }
                 
@@ -159,7 +190,6 @@ cspace = cspace || {};
         
     };
     
-    
     /**
      * Repeatable is a markup generating component. If it does not find things in the markup that are specified 
      * in the default selectors, it generates nodes appropriately and puts the default selector classes into the markup.
@@ -172,29 +202,52 @@ cspace = cspace || {};
         that.model = that.options.model;
         prepareModel(that.model, that.options.elPath, that.applier);
         fluid.invokeGlobalFunction(that.options.generateMarkup, [that]);
+        that.options.renderOptions.model = that.model;
+        that.options.renderOptions.applier = that.applier;
+        that.options.renderOptions.fossils = {};
+        that.options.renderOptions.cutpoints.push({id: "repeat:", selector: that.options.selectors.repeat});
+        // A "temporary container" for rendering additional rows. This is currently a more stable strategy than
+        // using renderer template juggling to render partial templates.
+        that.tempContainer = cspace.repeatable.cleanseClone(that.container);
         
         that.refreshView = function () {
             renderPage(that);
         };
-            
-        that.refreshView();        
+        
+        that.fetchModel = function(model) {
+            model = model || that.model;
+            return fluid.model.getBeanValue(that.model, that.options.elPath);
+        };
+
+        that.refreshView();
+        bindEventHandlers(that);        
         return that;
     };
+    
+    // Remove id attributes from a cloned tree    
+    cspace.repeatable.cleanseClone = function(toClone) {
+        var node = toClone.clone();
+        fluid.dom.iterateDom(node.get(0), function (node) {
+            node.removeAttribute("id");
+        });
+        return node.removeAttr("id").hide().insertAfter(toClone);
+    }
     
     cspace.repeatable.generateMarkup = function (that) {
         // Check for the add button and generate it if required 
         if (that.locate("add").length === 0) {
-            that.container.prepend("<input class=\"csc-repeatable-add " + 
-                    that.options.styles.add + 
-                    "\" type=\"button\" value=\"" + 
-                    that.options.strings.add + 
-                    "\" />");
+            var button = $(that.options.markup.addControl);
+            that.container.prepend(button);
+            button.val(that.options.strings.add); // TODO: generalise this to recognise non-input
+            button.addClass(that.options.styles.add);
+            button.css("position", "absolute");
         }
         
         var node = that.locate("repeat");
         // TODO: check that we have a repeating node - if not what should we do? grab the first thing? grab everything?
         
         if (!node.is("tr") && !node.is("li")) {
+            // TODO: explain why this manipulation is done, and what assumptions it makes about the markup
             node.wrap("<ul><li class=\"csc-repeatable-repeat " + that.options.styles.repeat + "\"/></ul>");            
             // TODO: there is probably a bug here when the 'repeat' selector is overridden - write a test to prove this
             //       to fix the issue we need to add another selector - repeatable-content
@@ -207,6 +260,7 @@ cspace = cspace || {};
     };
 
     // TODO: This is a cspace specific function, we need to take it out to utilities for example.
+    // TODO: extendDecoratorOptions must be globally destroyed. The other use is in NumberPatternChooser
     cspace.repeatable.extendDecoratorOptions = function (options, parentComponent) {
         $.extend(true, options, {
             applier: parentComponent.applier,
@@ -252,9 +306,18 @@ cspace = cspace || {};
             content: "cs-repeatable-content",
             repeat: "cs-repeatable-repeat"     
         },
+        markup: {
+            addControl:     "<input class=\"csc-repeatable-add\" type=\"button\" />",
+            deleteControl:  "<input class=\"csc-repeatable-delete \" type=\"button\" value=\"\"/>",
+            primaryControl: "<input class=\"csc-repeatable-primary \" type=\"radio\" name=\"primary\" />"
+        },
+        mergePolicy: { // TODO: GRADES, when they exist
+            model: "preserve",
+            applier: "preserve"
+        },
         applier: null,      // Applier for the main record that cspace.repeatable belongs to. REQUIRED
         model: null,        // Model for the main record that cspace.repeatable belongs to. REQUIRED
-        elPath: "items",         // Path into the model that points to the collection of fields to be repeated - it should be an array.
+        elPath: "items",    // Path into the model that points to the collection of fields to be repeated - it should reference an array.
         protoTree: {},      // A dehydrated tree that will be expanded by the expander and rendered in the component's refreshView.
         expander: "cspace.repeatable.expander",     // Expands the protoTree to take form of the componentTree comprehendable by the renderer.
         renderOptions: {    // Render options that (including cutpoints) that will be passed to the renderer in the component's refreshView.

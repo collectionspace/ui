@@ -268,18 +268,18 @@ var repeatableTester = function ($) {
     repeatableTest.test("Add Functionality + applier/model consistency", function () {   
         expect(7);
         var myRepeatable = basicSetup({text: "thyme"});  
-        var field = $(".cst-simpleTestField");
+        var field = $(".cst-simpleTestField", myRepeatable.container);
         var expectedModel = {myText: "oregano"};
         
         jqUnit.assertEquals("Model is of lenth 1 initially", 1, fluid.model.getBeanValue(myRepeatable.model, myRepeatable.options.elPath).length);
         jqUnit.assertEquals("Initially, value matched model", "thyme", field.val());
         field.val("oregano").change();
         
-        jqUnit.assertEquals("Before adding a row, first value is changed to 'oregano'", "oregano", $(".cst-simpleTestField").val());
-        jqUnit.assertDeepEq("After changing field to 'oregano', model should be 'oregano", expectedModel, fluid.model.getBeanValue(myRepeatable.model, myRepeatable.options.elPath)[0]);
+        jqUnit.assertEquals("Before adding a row, first value is changed to 'oregano'", "oregano", field.val());
+        jqUnit.assertDeepEq("After changing field to 'oregano', model should be 'oregano'", expectedModel, fluid.model.getBeanValue(myRepeatable.model, myRepeatable.options.elPath)[0]);
         myRepeatable.applier.modelChanged.addListener("*", function () {
             jqUnit.assertEquals("After clicking 'add', model is now of length 2", 2, fluid.model.getBeanValue(myRepeatable.model, myRepeatable.options.elPath).length);
-            jqUnit.assertEquals("After adding a row, first value is still 'oregano'", "oregano", field.val());
+            jqUnit.assertEquals("After adding a row, first value is still 'oregano'", "oregano", $(".cst-simpleTestField", myRepeatable.container).val());
             jqUnit.assertDeepEq("After adding a row, model for first field should be 'oregano", expectedModel, fluid.model.getBeanValue(myRepeatable.model, myRepeatable.options.elPath)[0]);
         });
         myRepeatable.locate("add").click();
