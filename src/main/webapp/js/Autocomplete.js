@@ -41,6 +41,20 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
     };
     
+    // Generic manual positioning function, currently unused - inserted for reference purposes   
+    function makeAdjustRelative(target, container) {
+        return function(pos) {
+            var targetOff = $(target[0].offsetParent).offset();
+            var contOff = $(container[0].offsetParent).offset();;
+            var trueleft = pos.left + targetOff.left - contOff.left;
+            var truetop = pos.top + targetOff.top - contOff.top;
+            container.css({
+                left: trueleft + "px",
+                top: truetop + "px"
+            });
+        };
+    }
+    
     // Inspiration from http://stackoverflow.com/questions/158070/jquery-how-to-position-one-element-relative-to-another
     cspace.internalPositioner = function(jTarget, jToPosition, adjustX, adjustY) {
         var pos = jTarget.position();
@@ -317,14 +331,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             var selectables = $(activatables).add(input);
             that.selectable.selectables = selectables;
             that.selectable.selectablesUpdated();
-            that.container.show();
+            var container = that.container;
+            container.show();
             
-            that.container.dialog("open");
-            that.container.position({
-                my: "top left",
-                at: "bottom left",
-                of: that.options.inputField,
-                offset: "0 6"
+            container.dialog("open");
+            container.position({
+                my: "left top",
+                at: "left bottom",
+                of: that.options.inputField
             });
             cspace.util.globalDismissal(union, function() {
                 that.close();
@@ -425,6 +439,22 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             that.autocomplete.suppress();
         }
     }
+    
+    // find the HIGHEST ancestor which has non-default position
+    function findTopRelative(node) {
+        var lastPos;
+        while(node) {
+            var jNode = $(node);
+            if (jNode.is("body")) {
+                return lastPos || jNode;
+            }
+            var position = jNode.css("position");
+            if (position === "relative" || position === "absolute") {
+                lastPos = jNode;
+            } 
+            node = node.parentNode; 
+        }
+    }
 
     var setupAutocomplete = function (that) {
         that.hiddenInput = that.container.is("input") ? that.container : $("input", that.container.parent());
@@ -435,7 +465,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.autocompleteInput = autocompleteInput;
         
         var popup = $("<div></div>");
-        popup.insertAfter(autocompleteInput);
+        var topRelative = findTopRelative(autocompleteInput[0]);
+        topRelative.append(popup);
+        // neither of these two options work for layout - input sibling fails on with, body never appears at all
+        //popup.insertAfter(autocompleteInput);
+        //$("body").append(popup);
         that.popupElement = popup;
 
         var initialRec = cspace.autocomplete.urnToRecord(that.hiddenInput.val());

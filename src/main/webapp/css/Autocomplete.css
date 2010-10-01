@@ -52,8 +52,7 @@
     border:2px solid #C7CFD4;
     position:absolute;
     z-index:9999 !important;
-    margin:6px 0 0 -2px;
-    max-width:100%;
+    margin:2px 0 0 -2px;
     overflow:auto;
     font-size: 1.2em;
     font-weight:bold;
