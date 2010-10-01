@@ -87,18 +87,20 @@ cspace = cspace || {};
             list: [],
             details: {}
         };
-
+        
+        //TODO: This component needs to be IOC'ed.
+        
         that.detailsApplier = fluid.makeChangeApplier(that.model.details);
         that.detailsDC = fluid.initSubcomponent(that, "dataContext", [that.model.details, fluid.COMPONENT_OPTIONS]);
         that.detailsDC.fetch();
-
-        that.details = fluid.initSubcomponent(that, "details", [
-            $(that.options.selectors.details, that.container),
-            that.detailsDC,
-            that.detailsApplier,
-            that.uispec.details,
-            fluid.COMPONENT_OPTIONS
-        ]);
+        
+        that.options.details.options = that.options.details.options || {};
+        that.options.details.options.applier = that.detailsApplier;
+        that.options.details.options.dataContext = that.detailsDC;
+        that.options.details.options.model = that.model.details;
+        that.options.details.options.uispec = that.uispec.details;
+        that.details = fluid.initSubcomponent(that, "details", 
+            [$(that.options.selectors.details, that.container), fluid.COMPONENT_OPTIONS]);
         hideDetails(that.dom);
         
         /**
@@ -139,15 +141,13 @@ cspace = cspace || {};
         });
 
         var initListFunction = function () {
-            that.list = fluid.initSubcomponent(that, "list", [
-                $(that.options.selectors.list, container),
-                {
-                    items: that.model.list,
-                    selectionIndex: -1
-                },
-                that.uispec.list,
-                fluid.COMPONENT_OPTIONS
-            ]);
+            that.options.list.options.model = {
+                items: that.model.list,
+                selectionIndex: -1
+            };
+            that.options.list.options.uispec = that.uispec.list;
+            that.list = fluid.initSubcomponent(that, "list", 
+                [$(that.options.selectors.list, container), fluid.COMPONENT_OPTIONS]);
             setUpListEditor(that);
         };
         if (typeof(that.options.initList) === "function") {

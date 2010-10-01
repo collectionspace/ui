@@ -76,7 +76,7 @@ cspace = cspace || {};
             }
         );
         
-        that.components = [];
+        that.components = {};
         for (var region in that.dependencies) {
             if (that.dependencies.hasOwnProperty(region)) {
                 var dep = that.dependencies[region];
@@ -128,9 +128,11 @@ cspace = cspace || {};
             dependencies: dependencies,
             model: cspace.util.createBaseModel()
         };
-        that.applier = fluid.makeChangeApplier(that.model);
 
         fluid.mergeComponentOptions(that, "cspace.pageBuilder", options);
+        that.model = that.options.model || that.model;
+        that.applier = that.options.applier || fluid.makeChangeApplier(that.model);
+        
         fluid.instantiateFirers(that, that.options);
         
         that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
@@ -251,6 +253,10 @@ cspace = cspace || {};
         htmlOnly: false,
         uispecUrl: "",
         schemaUrl: "",
-        pageType: ""
+        pageType: "",
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
+        }
     });
 })(jQuery, fluid);

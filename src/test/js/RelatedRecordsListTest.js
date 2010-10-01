@@ -13,15 +13,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 (function ($) {
     
-    var relManagerOpts = {
-        searchToRelateDialog: {
-            options: {
-                templates: {
-                    dialog: "../../main/webapp/html/searchToRelate.html"
-                }
-            }
-        }
-    };
     var testModel = {
         csid: "123456789",
         relations: [{
@@ -56,106 +47,76 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     var relatedRecordsListTest = new jqUnit.TestCase("RelatedRecordsList Tests", function () {
         cspace.util.isTest = true;
         relatedRecordsListTest.fetchTemplate("../../main/webapp/html/right-sidebar.html", ".csc-right-sidebar");
+    }, function () {
+        $(".ui-dialog").detach();
     });
     
-    var createRelatedRecordsList = function (model, primaryRecordType, relatedRecordType, opts, inApplier) {
+    var createRelatedRecordsList = function (model, primary, related, opts, inApplier) {
         applier = inApplier || fluid.makeChangeApplier(model);
         var defaultOpts = {
+            related: related,
+            primary: primary,
+            model: model,
+            applier: applier,
             uispec: uispec.relatedObjects,
-            relationManager: {
-                options: {
-                    searchToRelateDialog: {
-                        options: {
-                            templates: {
-                                dialog: "../../main/webapp/html/searchToRelate.html"
+            components: {
+                relationManager: {
+                    options: {
+                        components: {
+                            searchToRelateDialog: {
+                                options: {
+                                    templates: {
+                                        dialog: "../../main/webapp/html/searchToRelate.html"
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
         };
-        $.extend(true, defaultOpts, opts);
-        relatedRecordsList = cspace.relatedRecordsList(".csc-related-objects", primaryRecordType, relatedRecordType, applier, defaultOpts);
+        fluid.merge(null, defaultOpts, opts);
+        relatedRecordsList = cspace.relatedRecordsList(".csc-related-objects", defaultOpts);
+    };
+    
+    var configureSTRDialog = function (handler, primary, related) {
+        var opts = {
+            components: {
+                relationManager: {
+                    options: {
+                        components: {
+                            searchToRelateDialog: {
+                                options: {
+                                    listeners: {
+                                        afterRender: handler
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        createRelatedRecordsList(testModel, primary, related, opts);
+        stop();
+    };
+    
+    var basicConfigureTest = function (visibility, related) {
+        configureSTRDialog(function () {
+            relatedRecordsList.relationManager.locate("addButton").click();
+            jqUnit.isVisible("Search to relate Dialog is visible after click", $(".ui-dialog"));
+            jqUnit[visibility]("Record-type drop-down is " + visibility + " (search should be limited to loanout)", relatedRecordsList.relationManager.searchToRelateDialog.options.selectors.recordTypeSelector);
+            relatedRecordsList.relationManager.searchToRelateDialog.dlg.dialog("close");
+            jqUnit.notVisible("Search to relate Dialog is invisible after close", $(".ui-dialog"));
+            start();
+        }, "objects", related);
     };
 
     relatedRecordsListTest.test("Configure SearchToRelate Dialog with correct target record type (loanout)", function () {
-        var opts = {
-            relationManager: {
-                options: {
-                    searchToRelateDialog: {
-                        options: {
-                            listeners: {
-                                afterRender: function () {
-                                    jqUnit.isVisible("Search to relate Dialog is visible after click", $(".ui-dialog"));
-                                    jqUnit.notVisible("Record-type drop-down is not visible (search should be limited to loanout)", relatedRecordsList.relationManager.addDialog.options.selectors.recordTypeSelector);
-                                    relatedRecordsList.relationManager.addDialog.dlg.dialog("close");
-                                    relatedRecordsList.recordList.refreshView();
-                                    jqUnit.assertFalse("Search to relate Dialog doesn't exist after close", relatedRecordsList.relationManager.addDialog);
-                                    start();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        };
-        createRelatedRecordsList(testModel, "objects", "loanout", opts);
-        jqUnit.assertFalse("Search to relate Dialog initially doesn't exist", relatedRecordsList.relationManager.addDialog);
-        relatedRecordsList.relationManager.locate("addButton").click();
-        stop();
+        basicConfigureTest("notVisible", "loanout");
     });
 
     relatedRecordsListTest.test("Configure SearchToRelate Dialog for all procedure types (using 'procedures' configuration)", function () {
-        var opts = {
-            relationManager: {
-                options: {
-                    searchToRelateDialog: {
-                        options: {
-                            listeners: {
-                                afterRender: function () {
-                                    jqUnit.isVisible("Search to relate Dialog is visible after click", $(".ui-dialog"));
-                                    jqUnit.isVisible("Record-type drop-down is visible", relatedRecordsList.relationManager.addDialog.options.selectors.recordTypeSelector);
-                                    relatedRecordsList.relationManager.addDialog.dlg.dialog("close");
-                                    relatedRecordsList.recordList.refreshView();
-                                    jqUnit.assertFalse("Search to relate Dialog doesn't exist after close", relatedRecordsList.relationManager.addDialog);
-                                    start();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        };
-        createRelatedRecordsList(testModel, "objects", "procedures", opts);
-        jqUnit.assertFalse("Search to relate Dialog initially doesn't exist", relatedRecordsList.relationManager.addDialog);
-        relatedRecordsList.relationManager.locate("addButton").click();
-        stop();
-    });
-
-    relatedRecordsListTest.test("Configure SearchToRelate Dialog for all procedure types (using auto configuration)", function () {
-        var opts = {
-            relationManager: {
-                options: {
-                    searchToRelateDialog: {
-                        options: {
-                            listeners: {
-                                afterRender: function () {
-                                    jqUnit.isVisible("Search to relate Dialog is visible after click", $(".ui-dialog"));
-                                    jqUnit.isVisible("Record-type drop-down is visible", relatedRecordsList.relationManager.addDialog.options.selectors.recordTypeSelector);
-                                    relatedRecordsList.relationManager.addDialog.dlg.dialog("close");
-                                    relatedRecordsList.recordList.refreshView();
-                                    jqUnit.assertFalse("Search to relate Dialog doesn't exist after close", relatedRecordsList.relationManager.addDialog);
-                                    start();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        };
-        createRelatedRecordsList(testModel, "objects", null, opts);
-        jqUnit.assertFalse("Search to relate Dialog initially doesn't exist", relatedRecordsList.relationManager.addDialog);
-        relatedRecordsList.relationManager.locate("addButton").click();
-        stop();
+        basicConfigureTest("isVisible", "procedures");
     });
 })(jQuery);

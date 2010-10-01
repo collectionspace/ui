@@ -15,22 +15,24 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     fluid.log("RelatedRecordsTab.js loaded");
+    
+    fluid.registerNamespace("cspace.relatedRecordsTab");
  
     var bindEventHandlers = function (that) {
-        var elPath = "relations." + that.relatedRecordType;
-        that.applier.modelChanged.addListener(elPath, function () {
+        var elPath = "relations." + that.related;
+        that.applier.modelChanged.addListener(elPath, function (model, oldModel, changeRequest) {
             that.listEditor.options.updateList(that.listEditor, that.listEditor.list.refreshView);
         });
         that.relationManager.events.onCreateNewRecord.addListener(that.listEditor.addNewListRow);
         that.listEditor.detailsDC.events.afterCreate.addListener(function (data) {
             var newRelation = [{
                 source: {
-                    csid: that.applier.model.csid,
-                    recordtype: that.primaryRecordType
+                    csid: that.model.csid,
+                    recordtype: that.primary
                 },
                 target: {
                     csid: data.csid,
-                    recordtype: that.relatedRecordType
+                    recordtype: that.related
                 },
                 type: "affects",
                 "one-way": false
@@ -41,19 +43,19 @@ cspace = cspace || {};
             var csid = that.listEditor.details.model.csid;
             if (csid) {
                 var gotoLink = that.locate("goToRecord");
-                gotoLink.attr("href", "./" + that.relatedRecordType + ".html?csid=" + csid);
+                gotoLink.attr("href", "./" + that.related + ".html?csid=" + csid);
                 gotoLink.show();
             }
         });
     };
     
-    var createListUpdater = function (applier, primaryRecordType, relatedRecordType) {
+    var createListUpdater = function (model, primary, related) {
         return function (listEditor, callback) {
             $.ajax({
-                url: listEditor.options.baseUrl + primaryRecordType + "/" + applier.model.csid,
+                url: listEditor.options.baseUrl + primary + "/" + model.csid,
                 dataType: "json",
                 success: function (data) {
-                    fluid.model.copyModel(listEditor.model.list, data.relations[relatedRecordType]);
+                    fluid.model.copyModel(listEditor.model.list, data.relations[related]);
                     if (callback) {
                         callback();
                     }
@@ -65,28 +67,21 @@ cspace = cspace || {};
     /**
      * 
      * @param {Object} container
-     * @param {Object} primaryRecordType
-     * @param {Object} relatedRecordType
      * @param {Object} uispec
      * @param {Object} applier  The applier holding the data model of the primary record
      * @param {Object} options
      */
-    cspace.relatedRecordsTab = function (container, primaryRecordType, relatedRecordType, uispec, applier, options) {
+    cspace.relatedRecordsTab = function (container, options) {
         var that = fluid.initView("cspace.relatedRecordsTab", container, options);
-        that.primaryRecordType = primaryRecordType;
-        that.relatedRecordType = relatedRecordType;
-        that.uispec = uispec;
-        that.applier = applier;
-            
-        that.relationManager = fluid.initSubcomponent(that, "relationManager", [
-            that.container,
-            that.primaryRecordType,
-            that.relatedRecordType,
-            that.applier,
-            fluid.COMPONENT_OPTIONS
-        ]);
+        that.primary = that.options.primary;
+        that.related = that.options.related;
+        that.applier = that.options.applier;
+        that.model = that.options.model;
         
-        that.options.listEditor.options.updateList = createListUpdater(that.applier, that.primaryRecordType, that.relatedRecordType);
+        fluid.initDependents(that);
+        
+        // TODO: ListEditor needs to be IOC'ed
+        that.options.listEditor.options.updateList = createListUpdater(that.model, that.primary, that.related);
 
         $.extend(true, that.options.listEditor.options, {
             listeners: {
@@ -95,20 +90,31 @@ cspace = cspace || {};
                 }
             }
         });        
-        that.listEditor = fluid.initSubcomponent(that, "listEditor", [that.container, that.relatedRecordType, 
-            that.uispec, fluid.COMPONENT_OPTIONS]);
+        that.listEditor = fluid.initSubcomponent(that, "listEditor", [that.container, that.related, 
+            that.options.uispec, fluid.COMPONENT_OPTIONS]);
             
         bindEventHandlers(that);
         
         return that;
     };
     
+    fluid.demands("relationManager", "cspace.relatedRecordsTab", 
+        ["{relatedRecordsTab}.container", fluid.COMPONENT_OPTIONS]);
+    
     fluid.defaults("cspace.relatedRecordsTab", {
+        components: {
+            relationManager: {
+                type: "cspace.relationManager",
+                options: {
+                    primary: "{relatedRecordsTab}.primary",
+                    related: "{relatedRecordsTab}.related",
+                    model: "{relatedRecordsTab}.model",
+                    applier: "{relatedRecordsTab}.applier"
+                }
+            }
+        },
         listEditor: {
             type: "cspace.listEditor"
-        },
-        relationManager: {
-            type: "cspace.relationManager"
         },
         selectors: {
             messageContainer: ".csc-message-container",
@@ -118,6 +124,10 @@ cspace = cspace || {};
         },
         events: {
             afterRender: null
+        },
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
         }
     });
     

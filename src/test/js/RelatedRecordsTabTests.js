@@ -59,12 +59,19 @@ var relatedRecordsTabTester = function ($) {
                     targetSelector: ".div-for-recordEditor"
                 } 
             },
+            applier: testApplier,
+            model: testApplier.model,
             pageType: "object-tab"
         };
         var dependencies = {
             relatedRecordsTab: {
                 funcName: "cspace.relatedRecordsTab",
-                args: [".csc-object-tab", testPrimaryType, testRelatedType, "{pageBuilder}.uispec", testApplier, {
+                args: [".csc-object-tab", {
+                    primary: testPrimaryType,
+                    related: testRelatedType,
+                    uispec: "{pageBuilder}.uispec",
+                    applier: testApplier,
+                    model: testApplier.model,
                     listEditor: {
                         options: {
                             listeners: opts.listEditorListeners,
@@ -99,20 +106,29 @@ var relatedRecordsTabTester = function ($) {
                             }
                         }
                     },
-                    relationManager: {
-                        options: {
-                            dataContext: {
-                                options: {
-                                    baseUrl: "data/",
-                                    fileExtension: ".json"
-                                }
-                            },
-                            searchToRelateDialog: {
-                                options: {
-                                    templates: {
-                                        dialog: "../../main/webapp/html/searchToRelate.html"
-                                    },
-                                    listeners: opts.searchToRelateListeners
+                    components: {
+                        relationManager: {
+                            options: {
+                                addRelations: cspace.relationManager.provideLocalAddRelations,
+                                dataContext: {
+                                    options: {
+                                        baseUrl: "data/",
+                                        fileExtension: ".json"
+                                    }
+                                },
+                                primary: "{pageBuilder}.options.primaryRecordType",
+                                related: "objects",
+                                model: "{pageBuilder}.model",
+                                applier: "{pageBuilder}.applier",
+                                components: {
+                                    searchToRelateDialog: {
+                                        options: {
+                                            templates: {
+                                                dialog: "../../main/webapp/html/searchToRelate.html"
+                                            },
+                                            listeners: opts.searchToRelateListeners
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -174,6 +190,8 @@ var relatedRecordsTabTester = function ($) {
             }
         });
         var options = {
+            model: model,
+            applier: primaryApplier,
             // TODO: These record types are required, not options. They need to be factored
             //       into the function signature proper
             primaryRecordType: "intake",
@@ -211,6 +229,11 @@ var relatedRecordsTabTester = function ($) {
                                     details.events.afterRender.removeListener("testFunc");
                                     start();
                                 }, "testFunc");
+                                jqUnit.assertEquals("Verify that the model is still primary model", 
+                                    model, objTab.pageBuilder.components.relatedRecordsTab.model);
+                                    jqUnit.assertEquals("Verify that the model is still primary applier", 
+                                    primaryApplier, objTab.pageBuilder.components.relatedRecordsTab.applier);
+                                objTab.pageBuilder.components.relatedRecordsTab
                                 $(".csc-recordList-row:first").click();
                             }
                     }
@@ -219,14 +242,28 @@ var relatedRecordsTabTester = function ($) {
             depOpts: {
                 relatedRecordsTab: {
                     options: {
-                        relationManager: {
-                            options: {
-                                searchToRelateDialog: {
-                                    options: {
-                                        templates: {
-                                            dialog: "../../main/webapp/html/searchToRelate.html"
+                        primary: "{pageBuilder}.options.primaryRecordType",
+                        related: "objects",
+                        applier: "{pageBuilder}.applier",
+                        model: "{pageBuilder}.model",
+                        uispec: "{pageBuilder}.uispec",
+                        components: {
+                            relationManager: {
+                                options: {
+                                    addRelations: cspace.relationManager.provideLocalAddRelations,
+                                    components: {
+                                        searchToRelateDialog: {
+                                            options: {
+                                                templates: {
+                                                    dialog: "../../main/webapp/html/searchToRelate.html"
+                                                }
+                                            }
                                         }
-                                    }
+                                    },
+                                    primary: "{pageBuilder}.options.primaryRecordType",
+                                    related: "objects",
+                                    model: "{pageBuilder}.model",
+                                    applier: "{pageBuilder}.applier"
                                 }
                             }
                         },
@@ -257,27 +294,9 @@ var relatedRecordsTabTester = function ($) {
                 }
             }
         };
-        objTab = cspace.tabSetup(primaryApplier, options);
+        objTab = cspace.tabSetup(options);
         stop();
     });
-
-    // TODO: this is ready to have tests added here.
-    relatedRecordsTabTest.test("Using SearchToRelateDialog", function () {
-        setupTab({
-            pageReadyListener: function () {
-                var le = pageBuilder.components.relatedRecordsTab.listEditor;
-                $(pageBuilder.components.relatedRecordsTab.relationManager.options.selectors.addButton).click();
-            },
-            searchToRelateListeners: {
-                afterRender: function(){
-                    $(pageBuilder.components.relatedRecordsTab.relationManager.addDialog.options.selectors.closeButton).click();
-                    start();
-                }
-            }
-        });
-        stop();
-    });
-    
 };
 
 (function () {

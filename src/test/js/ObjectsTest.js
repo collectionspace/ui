@@ -54,31 +54,57 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }
                 }
             },
+            templateUrlPrefix: "../../main/webapp/html/",
             depOpts: {
-                sidebar: {
-                    options: {
-                        relatedRecordsList: {
-                            options: {
-                                relationManager: {
-                                    options: {
-                                        searchToRelateDialog: {
-                                            options: {
-                                                templates: {
-                                                    dialog: "../../main/webapp/html/searchToRelate.html"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
                 recordEditor: {
                     options: {
                         confirmation: {
                             options: {
                                 confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
+                            }
+                        }
+                    }
+                },
+                sidebar: {
+                    options: {
+                        components: {
+                            objects: {
+                                options: {
+                                    components: {
+                                        relationManager: {
+                                            options: {
+                                                components: {
+                                                    searchToRelateDialog: {
+                                                        options: {
+                                                            templates: {
+                                                                dialog: "../../main/webapp/html/searchToRelate.html"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            procedures: {
+                                options: {
+                                    components: {
+                                        relationManager: {
+                                            options: {
+                                                components: {
+                                                    searchToRelateDialog: {
+                                                        options: {
+                                                            templates: {
+                                                                dialog: "../../main/webapp/html/searchToRelate.html"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -107,133 +133,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         setupObjects(options);
         stop();
     });
-    
-    objectsTests.test("Test Repeatable Field Add", function () {
-        var options = {
-            pageBuilder: {
-                options: {
-                    csid: "1984.068.0335b",
-                    dataContext: {
-                        options: {
-                            baseUrl: "../../main/webapp/html/data"
-                        }
-                    }
-                }
-            },
-            depOpts: {
-                recordEditor: {
-                    options: {
-                        listeners: {
-                            afterRender: function(){
-                                jqUnit.assertEquals("Initally, there is 1 row in the 'brief description' repeatable fields", 1, $(".csc-object-identification-brief-description").length);
-                                jqUnit.assertEquals("Initally, Repeatable field has a value of ", "This is brief description.", $(".csc-object-identification-brief-description").val());
-                                pageBuilder.applier.modelChanged.addListener("*", function(model, oldModel, changeRequest){
-                                    jqUnit.assertEquals("Request model elPath should be ", "fields.briefDescriptions", changeRequest[0].path);
-                                    jqUnit.assertEquals("After '+field' clicked, there have to be 2 brief descriptions", 2, model.fields.briefDescriptions.length);
-                                    jqUnit.assertDeepEq("(In the model) First brief descriptions is still correct", {
-                                        "briefDescription": "This is brief description.",
-                                        "_primary": true
-                                    }, model.fields.briefDescriptions[0]);
-                                    jqUnit.assertDeepEq("(In the model) Second brief descriptions is empty", {}, model.fields.briefDescriptions[1]);
-                                    // TODO: The index of '2' requires careful knowledge of how many repeated fields, and which one is the brief description
-                                    var repeatableContainer = $(".csc-repeatable-add").eq(2).parent("div");
-                                    var domModifiedListener = function(){
-                                        // The first DOMSubtreeModified will be the Renderer clearing the DOM; we want
-                                        // to test after the second event, which will be after the new DOM is rendered
-                                        repeatableContainer.unbind("DOMSubtreeModified", this);
-                                        repeatableContainer.bind("DOMSubtreeModified", function(){
-                                            jqUnit.assertDeepEq("(On the page) First brief descriptions is still", "This is brief description.", $(".csc-object-identification-brief-description").eq(0).val());
-                                            jqUnit.assertDeepEq("(On the page) Second brief descriptions is empty", "", $(".csc-object-identification-brief-description").eq(1).val());
-                                            start();
-                                        });
-                                    };
-                                    repeatableContainer.bind("DOMSubtreeModified", domModifiedListener);
-                                });
-                                // TODO: The index of '2' requires careful knowledge of how many repeated fields, and which one is the brief description
-                                $(".csc-repeatable-add").eq(2).click();
-                            }
-                        },
-                        confirmation: {
-                            options: {
-                                confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
-                            }
-                        }
-                    }
-                }
-            }
-        };
-        setupObjects(options);
-        stop();        
         
-    });
-    
-    objectsTests.test("Test Repeatable Field Update + Add", function () {
-        var options = {
-            pageBuilder: {
-                options: {
-                    csid: "1984.068.0335b",
-                    dataContext: {
-                        options: {
-                            baseUrl: "../../main/webapp/html/data"
-                        }
-                    }
-                }
-            },
-            depOpts: {
-                recordEditor: {
-                    options: {
-                        listeners: {
-                            afterRender: function () {
-                                jqUnit.assertEquals("Initally, there is 1 row of repeatable fields", 
-                                    1, $(".csc-object-identification-brief-description").length);
-                                jqUnit.assertEquals("Initally, Repeatable field has a value of ", 
-                                    "This is brief description.", $(".csc-object-identification-brief-description").val());
-                                $(".csc-object-identification-brief-description").val("New Test Description").change();
-                                pageBuilder.applier.modelChanged.addListener("*", function (model, oldModel, changeRequest) {
-                                    jqUnit.assertEquals("Request model elPath should be ", 
-                                        "fields.briefDescriptions", changeRequest[0].path);
-                                    jqUnit.assertEquals("After '+field' clicked, there have to be 2 bried descriptions", 
-                                        2, model.fields.briefDescriptions.length);
-                                    jqUnit.assertDeepEq("(In the model) First brief descriptions is still", {
-                                        "briefDescription": "New Test Description",
-                                        "_primary": true
-                                    }, model.fields.briefDescriptions[0]);
-                                    jqUnit.assertDeepEq("(In the model) Second brief descriptions is empty", 
-                                        {}, model.fields.briefDescriptions[1]);
-                                    // TODO: The index of '2' requires careful knowledge of how many repeated fields, and which one is the brief description
-                                    var repeatableContainer = $(".csc-repeatable-add").eq(2).parent("div");
-                                    var domModifiedListener = function () {
-                                        // The first DOMSubtreeModified will be the Renderer clearing the DOM; we want
-                                        // to test after the second event, which will be after the new DOM is rendered
-                                        repeatableContainer.unbind("DOMSubtreeModified", this);
-                                        repeatableContainer.bind("DOMSubtreeModified", function () { 
-                                            jqUnit.assertDeepEq("(On the page) First brief descriptions is still", 
-                                                "New Test Description", $(".csc-object-identification-brief-description").eq(0).val());
-                                            jqUnit.assertDeepEq("(On the page) Second brief descriptions is empty", 
-                                                "", $(".csc-object-identification-brief-description").eq(1).val());
-                                            start();
-                                        });
-                                    };
-                                    repeatableContainer.bind("DOMSubtreeModified", domModifiedListener);
-                                });
-                                
-                                // TODO: The index of '2' requires careful knowledge of how many repeated fields, and which one is the brief description
-                                $(".csc-repeatable-add").eq(2).click();
-                            }
-                        }
-                    },
-                    confirmation: {
-                        options: {
-                            confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
-                        }
-                    }
-                }
-            }
-        };
-        setupObjects(options);
-        stop();        
-    });
-    
     objectsTests.test("Go To Record", function () {
         var options = {
             depOpts: {

@@ -20,17 +20,18 @@
         "relatedRecordsTab": {
             "funcName": "cspace.relatedRecordsTab",
             "args": [
-                ".csc-movement-tab",
-                "{pageBuilder}.pageType",
-                "movement",
-                "{pageBuilder}.uispec",
-                "{pageBuilder}.applier"
+                ".csc-movement-tab"
             ] 
         } 
     },
     "depOpts": {
         "relatedRecordsTab": {
             "options": {
+                "primary": "{pageBuilder}.options.primaryRecordType",
+                "related": "movement",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model",
+                "uispec": "{pageBuilder}.uispec",
                 "listEditor": {
                     "options": {
                         "initList": "cspace.listEditor.receiveData",
@@ -54,11 +55,6 @@
                                 } 
                             } 
                         }
-                    }
-                },
-                "relationManager": {
-                    "options": {
-                        "primaryRecordType": "{pageBuilder}.options.primaryRecordType"
                     }
                 }
             }

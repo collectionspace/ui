@@ -24,8 +24,9 @@ cspace = cspace || {};
             success: function (config) {
                 if (callback) {
                     callback(config);
-                }                
-                that.options = $.extend(true, config, that.options);
+                }
+                fluid.merge(null, config, that.options);
+                that.options = config;
             },
             error: function (xhr, textStatus, errorThrown) {
                 fluid.fail("fetchConfig: " + errorThrown);
@@ -62,7 +63,11 @@ cspace = cspace || {};
         fetchConfigCallback: null,
         dependencies: {},
         depOpts: {},
-        configURL: ""
+        configURL: "",
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
+        }
     });
     
 })(jQuery);

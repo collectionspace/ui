@@ -360,7 +360,7 @@ var adminUsersTester = function () {
                 re.events.afterRender.removeListener("initialSelect");
                 re.remove();
                 jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());                        
-                re.dataContext.events.afterRemove.addListener(function () {                        
+                re.options.dataContext.events.afterRemove.addListener(function () {                        
                     jqUnit.assertTrue("Successfully executed remove", true);
                     jqUnit.notVisible("Confirmation Dialog is now invisible", jQuery(".csc-confirmationDialog"));
                     jqUnit.notVisible("No record selected", adminUsers.locate("userName"));

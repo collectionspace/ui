@@ -114,9 +114,13 @@ cspace = cspace || {};
     
     function positionAddButton(button, target) {
         var offset = $(target).offset();
-        var poffset = $(button.offsetParent).offset();
-        var tleft = offset.left - poffset.left;
-        $(button).css("left", tleft - button.offsetWidth + "px");
+        // TODO: Do something when the offset parent is null
+        var offsetParent = button.offsetParent;
+        if (offsetParent) {
+            var poffset = $(offsetParent).offset();
+            var tleft = offset.left - poffset.left;
+            $(button).css("left", tleft - button.offsetWidth + "px");
+        }
     }
     
     var renderPage = function (that, blankRowOnly) {
@@ -129,6 +133,7 @@ cspace = cspace || {};
             that.template = fluid.selfRender(that.container, tree, that.options.renderOptions);
         }
         positionAddButton(that.locate("add")[0], that.locate("remove")[0]);
+
         // This following line ought to work but fails on the first render on IE8 - it appears that assumptions
         // about relationship between CSS position and absolute position are violated during jQuery.offset() for 
         // this freshly created element.
@@ -262,13 +267,13 @@ cspace = cspace || {};
     // TODO: This is a cspace specific function, we need to take it out to utilities for example.
     // TODO: extendDecoratorOptions must be globally destroyed. The other use is in NumberPatternChooser
     cspace.repeatable.extendDecoratorOptions = function (options, parentComponent) {
-        $.extend(true, options, {
-            applier: parentComponent.applier,
-            model: parentComponent.model,
+        fluid.merge(null, options, {
             renderOptions: {
                 cutpoints: cspace.renderUtils.cutpointsFromUISpec(options.protoTree)
             }
         });
+        options.applier = parentComponent.options.applier;
+        options.model = parentComponent.model;
     };
 
     cspace.repeatable.expander = function (preProtoTree, that) {
@@ -283,6 +288,10 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.repeatable", {
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
+        },
         selectors: {
             add: ".csc-repeatable-add",
             remove: ".csc-repeatable-delete",

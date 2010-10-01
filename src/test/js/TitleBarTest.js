@@ -19,6 +19,9 @@ var titleBarTester = function ($) {
     
     var setupTitleBarWithAutobinding = function (container, model, options) {
         var applier = fluid.makeChangeApplier(model);
+        options.applier = applier;
+        options.model = model;
+        
         var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}", model: model});
         
         fluid.selfRender($("#main"), expander({
@@ -32,7 +35,7 @@ var titleBarTester = function ($) {
             autoBind: true,
             applier: applier
         });
-        return cspace.titleBar(container, applier, options);
+        return cspace.titleBar(container, options);
     };
     
     titleBarTest.test("Test titleBar is in sync with the field that is put in title bar", function () {

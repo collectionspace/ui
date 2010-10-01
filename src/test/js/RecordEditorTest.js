@@ -34,22 +34,23 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 field3: "C"
             }
         };
-        var dc = cspace.dataContext(testModel, {baseUrl: "."});
-        var uispec = {
+        var opts = {};
+        fluid.model.copyModel(opts, baseOpts);
+        opts.applier = fluid.makeChangeApplier(testModel);
+        opts.dataContext = cspace.dataContext(testModel, {baseUrl: "."});
+        opts.model = testModel,
+        opts.uispec = {
             ".csc-test-1": "${fields.field1}",
             ".csc-test-2": "${fields.field2}",
             ".csc-test-3": "${fields.field3}"
         };
-        var applier = fluid.makeChangeApplier(testModel);
-        var opts = {};
-        fluid.model.copyModel(opts, baseOpts);
         opts.listeners = {
             afterRender: function () {
                 jqUnit.assertEquals("foo", testModel.fields.field1, jQuery(".csc-test-1").val());
                 start();
             }
         };
-        recordEditor = cspace.recordEditor("#main", dc, applier, uispec, opts);
+        recordEditor = cspace.recordEditor("#main", opts);
         stop();
     });
     
@@ -60,26 +61,21 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             csid: "123.456.789",
             fields: {}
         };
-        var dc = cspace.dataContext(testModel, {baseUrl: "http://mymuseum.org", recordType: "thisRecordType"});
-        var uispec = {};
-        var applier = fluid.makeChangeApplier(testModel);
-        $.extend(true, opts, {
-            confirmation: {
-                options: {
-                    listeners: {
-                        afterFetchTemplate: function () {                                                                
-                            recordEditor.remove();
-                            recordEditor.dataContext.events.afterRemove.addListener(function () {
-                                jqUnit.assertTrue("Successfully executed remove", true);
-                                start();
-                            });
-                            recordEditor.confirmation.locate("act", recordEditor.confirmation.dlg).click();
-                        }
-                    }
-                }
+        opts.model = testModel;
+        opts.dataContext = cspace.dataContext(testModel, {baseUrl: "http://mymuseum.org", recordType: "thisRecordType"});
+        opts.uispec = {};
+        opts.applier = fluid.makeChangeApplier(testModel);
+        opts.confirmation.options.listeners = {
+            afterFetchTemplate: function () {                                                                
+                recordEditor.remove();
+                recordEditor.options.dataContext.events.afterRemove.addListener(function () {
+                    jqUnit.assertTrue("Successfully executed remove", true);
+                    start();
+                });
+                recordEditor.confirmation.locate("act", recordEditor.confirmation.dlg).click();
             }
-        });
-        recordEditor = cspace.recordEditor("#main", dc, applier, uispec, opts);
+        };
+        recordEditor = cspace.recordEditor("#main", opts);
         stop();
     });
 

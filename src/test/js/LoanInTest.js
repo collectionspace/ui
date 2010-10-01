@@ -20,29 +20,90 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     loanInTests.test("Creation", function () {
         var opts = {
-            pageBuilderOpts: {
-                uispecUrl: "../../main/webapp/html/uispecs/loanin/uispec.json",
-                listeners: {
-                    pageReady: function () {
-                        jqUnit.assertValue("loan in should have a record editor", loanIn.components.recordEditor);
-                        start();
-                    }, 
-                    onDependencySetup: function (uispec) {
-                        // Change the template URL for the number pattern chooser.
-                        uispec.recordEditor[".csc-loanIn-loanInNumber-patternChooserContainer"].decorators[0].options.templateUrl
-                            = "../../main/webapp/html/NumberPatternChooser.html";
+            configURL: "../../main/webapp/html/config/loanin.json",
+            pageBuilder: {
+                options: {
+                    uispecUrl: "../../main/webapp/html/uispecs/loanin/uispec.json",
+                    listeners: {
+                        pageReady: function () {
+                            jqUnit.assertValue("loan in should have a record editor", loanIn.pageBuilder.components.recordEditor);
+                            start();
+                        }, 
+                        onDependencySetup: function (uispec) {
+                            // Change the template URL for the number pattern chooser.
+                            uispec.recordEditor[".csc-loanIn-loanInNumber-patternChooserContainer"].decorators[0].options.templateUrl
+                                = "../../main/webapp/html/NumberPatternChooser.html";
+                        }
+                    },
+                    pageSpec: {
+                        header: {
+                            href: "../../main/webapp/html/header.html"
+                        },
+                        tabs: {
+                            href: "../../main/webapp/html/tabsTemplate.html"
+                        },
+                        titleBar: {
+                            href: "../../main/webapp/html/loanInTitleBar.html"
+                        },
+                        dateEntry: {
+                            href: "../../main/webapp/html/loanInTemplate.html"
+                        },
+                        sidebar: {
+                            href: "../../main/webapp/html/right-sidebar.html"
+                        },
+                        footer: {
+                            href: "../../main/webapp/html/footer.html"
+                        }
                     }
                 }
             },
-            sideBarOpts: {
-                relatedRecordsList: {
+            depOpts: {
+                recordEditor: {
                     options: {
-                        relationManager: {
+                        confirmation: {
                             options: {
-                                searchToRelateDialog: {
-                                    options: {
-                                        templates: {
-                                            dialog: "../../main/webapp/html/searchToRelate.html"
+                                confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
+                            }
+                        }
+                    }
+                },
+                sidebar: {
+                    options: {
+                        components: {
+                            objects: {
+                                options: {
+                                    components: {
+                                        relationManager: {
+                                            options: {
+                                                components: {
+                                                    searchToRelateDialog: {
+                                                        options: {
+                                                            templates: {
+                                                                dialog: "../../main/webapp/html/searchToRelate.html"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            procedures: {
+                                options: {
+                                    components: {
+                                        relationManager: {
+                                            options: {
+                                                components: {
+                                                    searchToRelateDialog: {
+                                                        options: {
+                                                            templates: {
+                                                                dialog: "../../main/webapp/html/searchToRelate.html"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -51,17 +112,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }
                 }
             },
-            recordEditorOpts: {
-                confirmation: {
-                    options: {
-                        confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
-                    }
-                }
-            },
             templateUrlPrefix: "../../main/webapp/html/"
         };
         
-        var loanIn = cspace.loanInSetup(opts);
+        var loanIn = cspace.recordSetup(opts);
         stop();
 
     });

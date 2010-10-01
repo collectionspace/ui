@@ -34,58 +34,45 @@ cspace = cspace || {};
             }
         });
     };
-
-    cspace.setupFindEdit = function () {
-        var opts = {
+    
+    var makeOpts = function (recordType, uispecPath) {
+        return {
             listeners: {
                 afterSelect: cspace.recordList.afterSelectHandlerDefault
             },
             strings: {
                 nothingYet: "No records yet"
-            }
+            },
+            uispec: "{pageBuilder}.uispec." + (uispecPath || recordType),
+            model: makeArrayExpander(recordType)
         };
+    };
+
+    cspace.setupFindEdit = function () {
         var dependencies = {
             objects: {
                 funcName: "cspace.recordList",
-                args: [".object-records-group",
-                        makeArrayExpander("objects"),
-                        "{pageBuilder}.uispec.objects",
-                        opts]
+                args: [".object-records-group", makeOpts("objects")]
             },
             proceduresIntake: {
                 funcName: "cspace.recordList",
-                args: [".intake-records-group",
-                        makeArrayExpander("intake"),
-                        "{pageBuilder}.uispec.proceduresIntake",
-                        opts]
+                args: [".intake-records-group", makeOpts("intake", "proceduresIntake")]
             },
             proceduresAcquisition: {
                 funcName: "cspace.recordList",
-                args: [".acquisition-records-group",
-                        makeArrayExpander("acquisition"),
-                        "{pageBuilder}.uispec.proceduresAcquisition",
-                        opts]
+                args: [".acquisition-records-group", makeOpts("acquisition", "proceduresAcquisition")]
             },
             proceduresLoanIn: {
                 funcName: "cspace.recordList",
-                args: [".loanIn-records-group",
-                    makeArrayExpander("loanin"),
-                    "{pageBuilder}.uispec.proceduresLoanin",
-                    opts]
+                args: [".loanIn-records-group", makeOpts("loanin", "proceduresLoanin")]
             },
             proceduresLoanOut: {
                 funcName: "cspace.recordList",
-                args: [".loanOut-records-group",
-                    makeArrayExpander("loanout"),
-                    "{pageBuilder}.uispec.proceduresLoanout",
-                    opts]
+                args: [".loanOut-records-group", makeOpts("loanout", "proceduresLoanout")]
             },
             proceduresMovement: {
                 funcName: "cspace.recordList",
-                args: [".movement-records-group",
-                    makeArrayExpander("movement"),
-                    "{pageBuilder}.uispec.proceduresMovement",
-                    opts]
+                args: [".movement-records-group", makeOpts("movement", "proceduresMovement")]
             }
         };
         

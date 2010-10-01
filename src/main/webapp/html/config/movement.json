@@ -45,51 +45,71 @@
         "titleBar": {
             "funcName": "cspace.titleBar",
             "args": [
-                ".csc-movement-template",
-                "{pageBuilder}.applier" 
+                ".csc-movement-template" 
             ] 
         },
         "tabs": {
             "funcName": "cspace.tabs",
             "args": [
-                ".csc-tabs-template",
-                "{pageBuilder}.applier" 
+                ".csc-tabs-template" 
             ] 
         },
         "recordEditor": {
             "funcName": "cspace.recordEditor",
             "args": [
-                ".csc-movement-template",
-                "{pageBuilder}.dataContext",
-                "{pageBuilder}.applier",
-                "{pageBuilder}.uispec.recordEditor" 
+                ".csc-movement-template" 
             ] 
         },
         "sidebar": {
             "funcName": "cspace.sidebar",
             "args": [
-                ".csc-sidebar",
-                "{pageBuilder}.applier" 
+                ".csc-sidebar" 
             ] 
         } 
     },
     "depOpts": {
         "titleBar": {
             "options": {
-                "uispec": "{pageBuilder}.uispec.titleBar" 
+                "uispec": "{pageBuilder}.uispec.titleBar",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model" 
             } 
         },
         "tabs": {
             "options": {
                 "tabList": [
-                    {"name": "Location &amp; Movement", "target": "#primaryTab"},
-                    {"name": "Acquisition", "target": null},
-                    {"name": "Cataloging", "target": "objectTabPlaceholder.html"},
-                    {"name": "Intake", "target": null},
-                    {"name": "Loan In", "target": null},
-                    {"name": "Loan Out", "target": null},
-                    {"name": "Location &amp; Movement - related", "target": "movementTab.html"},
-                    {"name": "Media", "target": null}
+                    {
+                        "name": "Location &amp; Movement",
+                        "target": "#primaryTab" 
+                    },
+                    {
+                        "name": "Acquisition",
+                        "target": null 
+                    },
+                    {
+                        "name": "Cataloging",
+                        "target": "objectTabPlaceholder.html" 
+                    },
+                    {
+                        "name": "Intake",
+                        "target": null 
+                    },
+                    {
+                        "name": "Loan In",
+                        "target": null 
+                    },
+                    {
+                        "name": "Loan Out",
+                        "target": null 
+                    },
+                    {
+                        "name": "Location &amp; Movement - related",
+                        "target": "movementTab.html" 
+                    },
+                    {
+                        "name": "Media",
+                        "target": null 
+                    } 
                 ],
                 "tabSetups": [
                     "null",
@@ -97,17 +117,21 @@
                         "func": "cspace.tabSetup",
                         "options": {
                             "primaryRecordType": "{pageBuilder}.options.pageType",
-                            "configURL": "./config/object-tab.json"
+                            "applier": "{pageBuilder}.applier",
+                            "model": "{pageBuilder}.model",
+                            "configURL": "./config/object-tab.json" 
                         } 
                     },
                     {
                         "func": "cspace.tabSetup",
                         "options": {
                             "primaryRecordType": "{pageBuilder}.options.pageType",
-                            "configURL": "./config/movement-tab.json"
+                            "applier": "{pageBuilder}.applier",
+                            "model": "{pageBuilder}.model",
+                            "configURL": "./config/movement-tab.json" 
                         } 
-                    }
-                ] 
+                    } 
+                ]
             } 
         },
         "recordEditor": {
@@ -117,13 +141,19 @@
                 },
                 "strings": {
                     "identificationNumberRequired": "Please specify Current Location" 
-                } 
+                },
+                "dataContext": "{pageBuilder}.dataContext",
+                "applier": "{pageBuilder}.applier",
+                "uispec": "{pageBuilder}.uispec.recordEditor",
+                "model": "{pageBuilder}.model" 
             } 
         },
         "sidebar": {
             "options": {
                 "uispec": "{pageBuilder}.uispec.sidebar",
-                "primaryRecordType": "{pageBuilder}.options.pageType" 
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model",
+                "primaryRecordType": "{pageBuilder}.options.pageType"
             } 
         } 
     } 

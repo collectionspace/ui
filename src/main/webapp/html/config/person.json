@@ -1,0 +1,112 @@
+{
+    "pageBuilder": {
+        "options": {
+            "dataContext": {
+                "options": {
+                    "recordType": "person",
+                    "baseUrl": "../../chain/vocabularies" 
+                } 
+            },
+            "pageSpec": {
+                "header": {
+                    "href": "header.html",
+                    "templateSelector": ".csc-header-template",
+                    "targetSelector": ".csc-header-container" 
+                },
+                "tabs": {
+                    "href": "tabsTemplate.html",
+                    "templateSelector": ".csc-tabs-template",
+                    "targetSelector": ".csc-tabs-container" 
+                },
+                "titleBar": {
+                    "href": "personTitleBar.html",
+                    "templateSelector": ".csc-personAuthority-titleBar-template",
+                    "targetSelector": ".csc-header-container" 
+                },
+                "recordEditor": {
+                    "href": "personTemplate.html",
+                    "templateSelector": ".csc-personAuthority-template",
+                    "targetSelector": ".csc-record-edit-container"
+                },
+                "sidebar": {
+                    "href": "right-sidebar.html",
+                    "templateSelector": ".csc-right-sidebar",
+                    "targetSelector": ".csc-sidebar-container" 
+                },
+                "footer": {
+                    "href": "footer.html",
+                    "templateSelector": ".csc-footer",
+                    "targetSelector": ".csc-footer-container" 
+                } 
+            },
+            "pageType": "person" 
+        } 
+    },
+    "dependencies": {
+        "titleBar": {
+            "funcName": "cspace.titleBar",
+            "args": [
+                ".csc-personAuthority-titleBar-template"
+            ] 
+        },
+        "tabs": {
+            "funcName": "cspace.tabs",
+            "args": [
+                ".csc-tabs-template"
+            ] 
+        },
+        "recordEditor": {
+            "funcName": "cspace.recordEditor",
+            "args": [
+                ".csc-personAuthority-template"
+            ] 
+        },
+        "sidebar": {
+            "funcName": "cspace.sidebar",
+            "args": [
+                ".csc-sidebar"
+            ] 
+        } 
+    },
+    "depOpts": {
+        "titleBar": {
+            "options": {
+                "uispec": "{pageBuilder}.uispec.titleBar",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model"
+            } 
+        },
+        "tabs": {
+            "options": {
+                "tabList": [
+                    {"name": "Person Name Authority", "target": "#primaryTab"}
+                ],
+                "tabSetups": [
+                    "null"
+                ] 
+            } 
+        },
+        "recordEditor": {
+            "options": {
+                "selectors": {
+                    "identificationNumber": ".csc-personAuthority-displayName"
+                },
+                "strings": {
+                    "identificationNumberRequired": "Please specify a Display Name"
+                },
+                "dataContext": "{pageBuilder}.dataContext",
+                "applier": "{pageBuilder}.applier",
+                "uispec": "{pageBuilder}.uispec.recordEditor",
+                "model": "{pageBuilder}.model"
+            } 
+        },
+        "sidebar": {
+            "options": {
+                "uispec": "{pageBuilder}.uispec.sidebar",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model",
+                "primaryRecordType": "{pageBuilder}.options.pageType"
+            } 
+        } 
+    } 
+}

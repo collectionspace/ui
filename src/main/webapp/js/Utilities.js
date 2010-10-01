@@ -299,7 +299,14 @@ fluid.registerNamespace("cspace.util");
             csid: null,
             fields: {},
             termsUsed: [],
-            relations: {}
+            relations: {
+                objects: [],
+                loanin: [],
+                loanout: [],
+                movement: [],
+                intake: [], 
+                acquisition: []
+            }
         };
     };
 

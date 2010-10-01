@@ -27,12 +27,12 @@
         <script type="text/javascript" src="../../main/webapp/js/DatePicker.js"></script>
         <script type="text/javascript" src="../../main/webapp/js/Confirmation.js"></script>
         <script type="text/javascript" src="../../main/webapp/js/RecordList.js"></script>
+        <script type="text/javascript" src="../../main/webapp/js/Search.js"></script>
+        <script type="text/javascript" src="../../main/webapp/js/SearchToRelateDialog.js"></script>
         <script type="text/javascript" src="../../main/webapp/js/RelationManager.js"></script>
         <script type="text/javascript" src="../../main/webapp/js/RelatedRecordsList.js"></script>
         <script type="text/javascript" src="../../main/webapp/js/Autocomplete.js"></script>
         <script type="text/javascript" src="../../main/webapp/js/RecordEditor.js"></script>
-        <script type="text/javascript" src="../../main/webapp/js/Search.js"></script>
-        <script type="text/javascript" src="../../main/webapp/js/SearchToRelateDialog.js"></script>
         <script type="text/javascript" src="../../main/webapp/js/Sidebar.js"></script>
         <script type="text/javascript" src="../../main/webapp/js/TitleBar.js"></script>
         <script type="text/javascript" src="../../main/webapp/js/Tabs.js"></script>
@@ -51,7 +51,28 @@
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
-        <!-- Test HTML -->
-        <div id="main"></div>
+        <div id="main">
+            <div class="fl-container-1024 fl-centered">
+            <div class="csc-header-container"></div>
+            <div class="fl-container-1024-inner">
+                <div class="csc-organizationAuthority-titleBar-container"></div>
+                <div id="all-content" class="fl-fix organization">
+                    <div class="fl-fix fl-container-flex fl-col-mixed2">
+                        <div class="fl-container-left fl-force-left">
+                            <div class="csc-tabs-container"></div>
+                        </div>
+                        <div class="fl-container-pivot fl-force-right">
+                            <div class="csc-sidebar-container"></div>
+                        </div>
+                        <div class="clear"></div>
+                       </div>
+                    </div>
+	            </div>
+	        </div>
+            <div class="csc-footer-container" id="footer">
+	        </div><div class="csc-error-dialog">
+	            <p class="csc-error-message">This text should be replaced by the error message.</p>
+	        </div>
+        </div>
     </body>
 </html>

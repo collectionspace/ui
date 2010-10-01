@@ -181,7 +181,7 @@ cspace = cspace || {};
     // TODO: This makes *obvious*  assumptions about the nature of the parentComponent!
     cspace.numberPatternChooser.extendDecoratorOptions = function (options, parentComponent) {
         $.extend(true, options, {
-            baseUrl: parentComponent.dataContext.options.baseUrl
+            baseUrl: parentComponent.options.dataContext.options.baseUrl
         });
     };
 

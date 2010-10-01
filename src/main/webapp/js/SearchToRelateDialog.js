@@ -22,8 +22,8 @@ cspace = cspace || {};
             var newIndex = 0;
             var newRelations = [];
             var source = {
-                csid: that.applier.model.csid,
-                recordtype: that.primaryRecordType
+                csid: that.model.csid,
+                recordtype: that.options.primary
             };
             for (var i = 0; i < data.length; i++) {
                 if (data[i].selected) {
@@ -67,57 +67,54 @@ cspace = cspace || {};
             }
         };
         
-        var addDialog = $("<div></div>", that.container[0])
-            .dialog({
-                autoOpen: false,
-                modal: true,
-                minWidth: 700,
-                draggable: true,
-                dialogClass: "cs-search-dialog",
-                position: ['center', 100],
-                title: "Add Related Object/Procedural Record"                
-            });
-        
-        addDialog.parent().css("overflow", "visible");
-        
         fluid.fetchResources(resources, function () {
             // TODO: check why we are fetching resources after we create the dialog. 
             var templates = fluid.parseTemplates(resources, ["addDialog"], {});
-            fluid.reRender(templates, addDialog, {});
+            that.dlg = $("<div></div>", that.container[0])
+                .dialog({
+                    autoOpen: false,
+                    modal: true,
+                    minWidth: 700,
+                    draggable: true,
+                    dialogClass: "cs-search-dialog",
+                    position: ['center', 100],
+                    title: "Add Related Object/Procedural Record"                
+                });        
+            that.dlg.parent().css("overflow", "visible");
+            
+            fluid.reRender(templates, that.dlg, {});
             // TODO: We are hard coding a selector in here for search. 
             //       The selector should conform to cspace standards and should be specified in the options block
-            $.extend(true, that.options.search.options, {recordType: that.options.relatedRecordType});
-            that.search = fluid.initSubcomponent(that, "search", [$(".main-search-page"), fluid.COMPONENT_OPTIONS]);
+            $.extend(true, that.options.search.options, {recordType: that.options.related});
+            that.search = fluid.initSubcomponent(that, "search", [that.dlg, fluid.COMPONENT_OPTIONS]);
             
-            bindEventHandlers(that, addDialog);
+            bindEventHandlers(that, that.dlg);
             
             that.search.hideResults();
-            if (that.options.relatedRecordType && (that.options.relatedRecordType !== "procedures")) {
+            if (that.options.related && (that.options.related !== "procedures")) {
                 // TODO: This makes serious DOM assumptions!!
-                that.locate("recordTypeSelector", addDialog).append("<option value=\"" + that.options.relatedRecordType + "\"></option>");
-                that.locate("recordTypeSelector", addDialog).val(that.options.relatedRecordType);
-                that.locate("recordTypes", addDialog).hide();
+                that.locate("recordTypeSelector", that.dlg).append("<option value=\"" + that.options.related + "\"></option>");
+                that.locate("recordTypeSelector", that.dlg).val(that.options.related);
+                that.locate("recordTypes", that.dlg).hide();
             }
             that.locate("addButton", that.dlg).hide();
-            addDialog.dialog("open");
+            
             that.events.afterRender.fire();
         });
-
-        return addDialog;        
     };
     
  // TODO: All this really needs is the csid, not the "applier"!
-    cspace.searchToRelateDialog = function (container, primaryRecordType, applier, options) {
-        
+    cspace.searchToRelateDialog = function (container, options) {        
         var that = fluid.initView("cspace.searchToRelateDialog", container, options);
-        that.primaryRecordType = primaryRecordType;
-        that.applier = applier;
-        that.dlg = setupAddDialog(that);
-
+        that.model = that.options.model;
+        setupAddDialog(that);
         return that;
     };
     
     fluid.defaults("cspace.searchToRelateDialog", {
+        mergePolicy: {
+            model: "preserve"
+        },
         selectors: {
             addButton: ".csc-searchToRelate-addButton",
             recordTypeSelector: ".csc-search-recordType",

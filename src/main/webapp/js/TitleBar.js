@@ -33,18 +33,23 @@ cspace = cspace || {};
             if (that.options.uispec.hasOwnProperty(selector)) {
                 var val = that.options.uispec[selector];
                 var el = val.substring(val.indexOf("${") + 2, val.indexOf("}"));
-                that.applier.modelChanged.addListener(el, makeFieldUpdater(selector));
-                updateField(selector, fluid.model.getBeanValue(that.applier.model, el));
+                that.options.applier.modelChanged.addListener(el, makeFieldUpdater(selector));
+                updateField(selector, fluid.model.getBeanValue(that.model, el));
             }
         }
     };
 
-    cspace.titleBar = function (container, applier, options) {
+    cspace.titleBar = function (container, options) {
         var that = fluid.initView("cspace.titleBar", container, options);
-        that.applier = applier;
-        
+        that.model = that.options.model;
         setupTitleBar(that);
-
         return that;
     };
+    
+    fluid.defaults("cspace.titleBar", {
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
+        }
+    });
 })(jQuery, fluid);

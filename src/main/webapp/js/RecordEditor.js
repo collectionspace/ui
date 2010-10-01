@@ -26,7 +26,7 @@ cspace = cspace || {};
             if (operation === "create") {
                 // This is only temporary until http://issues.collectionspace.org/browse/CSPACE-263
                 // is resolved
-                that.applier.requestChange("csid", undefined);
+                that.options.applier.requestChange("csid", undefined);
             }
         };
     };
@@ -58,8 +58,7 @@ cspace = cspace || {};
     
     var recordSaveHandler = function (that, data, action) {
         var message = action.toLowerCase() + "SuccessfulMessage";
-        that.applier.requestChange("", data);
-        fluid.model.copyModel(that.model, data);
+        that.options.applier.requestChange("", data);
         that.refreshView();
         cspace.util.displayTimestampedMessage(that, that.options.strings[message], Date());
         that.unsavedChanges = false;
@@ -89,28 +88,28 @@ cspace = cspace || {};
             return validateRequiredFields(that.dom, that.options.strings.missingRequiredFields);
         });
 
-        that.dataContext.events.afterCreate.addListener(function (data) {
+        that.options.dataContext.events.afterCreate.addListener(function (data) {
             recordSaveHandler(that, data, "Create");
             that.locate("deleteButton").removeAttr("disabled").removeClass("deactivate");            
         });
 
-        that.dataContext.events.afterUpdate.addListener(function (data) {
+        that.options.dataContext.events.afterUpdate.addListener(function (data) {
             recordSaveHandler(that, data, "Update");
         });
 
-        that.dataContext.events.afterRemove.addListener(function () {
+        that.options.dataContext.events.afterRemove.addListener(function () {
             that.events.afterRemove.fire(that.options.strings.removeSuccessfulMessage);
         });
 
-        that.dataContext.events.modelChanged.addListener(function (data) {
+        that.options.dataContext.events.modelChanged.addListener(function (data) {
             that.refreshView();
         });
         
-        that.dataContext.events.afterFetch.addListener(function () {
+        that.options.dataContext.events.afterFetch.addListener(function () {
             that.unsavedChanges = false;
         });
         
-        that.applier.modelChanged.addListener("fields", function (model, oldModel, changeRequest) {
+        that.options.applier.modelChanged.addListener("fields", function (model, oldModel, changeRequest) {
             that.unsavedChanges = true;
         });
 
@@ -126,7 +125,7 @@ cspace = cspace || {};
             cspace.util.corner();
         });
 
-        that.dataContext.events.onError.addListener(makeDCErrorHandler(that));
+        that.options.dataContext.events.onError.addListener(makeDCErrorHandler(that));
     };
     
     var setupDataEntry = function (that) {
@@ -136,16 +135,16 @@ cspace = cspace || {};
     
     var renderPage = function (that) {
         fluid.log("RecordEditor.js renderPage start");
-        var tree = cspace.renderUtils.expander(that.uispec, that);
+        var tree = cspace.renderUtils.expander(that.options.uispec, that);
         var selectors = {};
-        cspace.renderUtils.buildSelectorsFromUISpec(that.uispec, selectors);
+        cspace.renderUtils.buildSelectorsFromUISpec(that.options.uispec, selectors);
         fluid.log("RecordEditor.js after building selectors");
         var renderOpts = {
             cutpoints: fluid.renderer.selectorsToCutpoints(selectors, {}),
             model: that.model,
             // debugMode: true,
             autoBind: true,
-            applier: that.applier
+            applier: that.options.applier
         };
         fluid.log("RecordEditor.js before render");
         if (that.template) {
@@ -171,13 +170,10 @@ cspace = cspace || {};
     /**
      * Object Entry component
      */
-    cspace.recordEditor = function (container, dataContext, applier, uispec, options) {
+    cspace.recordEditor = function (container, options) {
         var that = fluid.initView("cspace.recordEditor", container, options);
-        that.dataContext = dataContext;
-        that.applier = applier;
-        that.uispec = uispec;
-        that.model = that.applier.model;
-
+        
+        that.model = that.options.model;
         that.refreshView = function () {
             renderPage(that);
         };
@@ -200,10 +196,10 @@ cspace = cspace || {};
             if (ret !== false) {
                 that.locate("save").attr("disabled", "disabled");
                 if (that.model.csid) {
-                    that.dataContext.update();
+                    that.options.dataContext.update();
                 } else {
-                    that.applier.requestChange("csid", "");
-                    that.dataContext.create();
+                    that.options.applier.requestChange("csid", "");
+                    that.options.dataContext.create();
                 }
                 return true;
             }
@@ -215,9 +211,9 @@ cspace = cspace || {};
             fluid.model.copyModel(oldOptions, that.confirmation.options);
             $.extend(true, that.confirmation.options, {
                 action: function () {
-                    that.dataContext.remove(that.model.csid);
+                    that.options.dataContext.remove(that.model.csid);
                 },
-                actionSuccessEvents: [that.dataContext.events.afterRemove, that.confirmation.events.afterClose],
+                actionSuccessEvents: [that.options.dataContext.events.afterRemove, that.confirmation.events.afterClose],
                 successHandler: function (confirmation) {
                     return function () {
                         if (confirmation.dlg.dialog("isOpen")) {
@@ -264,6 +260,10 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.recordEditor", {
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
+        },
         confirmation: {
             type: "cspace.confirmation"
         },

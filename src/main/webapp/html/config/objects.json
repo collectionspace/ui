@@ -45,39 +45,35 @@
         "titleBar": {
             "funcName": "cspace.titleBar",
             "args": [
-                ".csc-object-entry-template",
-                "{pageBuilder}.applier" 
+                ".csc-object-entry-template"
             ] 
         },
         "tabs": {
             "funcName": "cspace.tabs",
             "args": [
-                ".csc-tabs-template",
-                "{pageBuilder}.applier" 
+                ".csc-tabs-template"
             ] 
         },
         "recordEditor": {
             "funcName": "cspace.recordEditor",
             "args": [
-                ".csc-object-entry-template",
-                "{pageBuilder}.dataContext",
-                "{pageBuilder}.applier",
-                "{pageBuilder}.uispec.recordEditor" 
+                ".csc-object-entry-template"
             ] 
         },
         "sidebar": {
             "funcName": "cspace.sidebar",
             "args": [
-                ".csc-sidebar",
-                "{pageBuilder}.applier" 
+                ".csc-sidebar"
             ] 
         } 
     },
     "depOpts": {
         "titleBar": {
             "options": {
-                "uispec": "{pageBuilder}.uispec.titleBar" 
-            } 
+                "uispec": "{pageBuilder}.uispec.titleBar",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model" 
+            }
         },
         "tabs": {
             "options": {
@@ -97,6 +93,8 @@
                         "func": "cspace.tabSetup",
                         "options": {
                             "primaryRecordType": "{pageBuilder}.options.pageType",
+                            "applier": "{pageBuilder}.applier",
+                            "model": "{pageBuilder}.model",
                             "configURL": "./config/object-tab.json"
                         } 
                     },
@@ -104,6 +102,8 @@
                         "func": "cspace.tabSetup",
                         "options": {
                             "primaryRecordType": "{pageBuilder}.options.pageType",
+                            "applier": "{pageBuilder}.applier",
+                            "model": "{pageBuilder}.model",
                             "configURL": "./config/movement-tab.json"
                         } 
                     }
@@ -117,12 +117,18 @@
                 },
                 "strings": {
                     "identificationNumberRequired": "Please specify an Identification Number" 
-                } 
+                },
+                "dataContext": "{pageBuilder}.dataContext",
+                "applier": "{pageBuilder}.applier",
+                "uispec": "{pageBuilder}.uispec.recordEditor",
+                "model": "{pageBuilder}.model"
             } 
         },
         "sidebar": {
             "options": {
                 "uispec": "{pageBuilder}.uispec.sidebar",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model",
                 "primaryRecordType": "{pageBuilder}.options.pageType" 
             } 
         } 

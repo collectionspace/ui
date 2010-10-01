@@ -60,7 +60,7 @@ cspace = cspace || {};
 
     var renderList = function (that) {
         var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}", model: that.model});
-        var protoTree = cspace.renderUtils.buildProtoTree(that.uispec, that);
+        var protoTree = cspace.renderUtils.buildProtoTree(that.options.uispec, that);
         var tree = expander(protoTree);
         if (that.model.items.length <= 0) {
             tree.children[0].children = [{
@@ -69,13 +69,14 @@ cspace = cspace || {};
             }];
         }
         var selectors = {};
-        cspace.renderUtils.buildSelectorsFromUISpec(that.uispec, selectors);
+        cspace.renderUtils.buildSelectorsFromUISpec(that.options.uispec, selectors);
         selectors[that.options.selectors.nothingYet] = that.options.selectors.nothingYet;
         var renderOpts = {
             cutpoints: fluid.renderer.selectorsToCutpoints(selectors, {}),
             model: that.model,
             // debugMode: true,
-            autoBind: true
+            autoBind: true,
+            applier: that.applier
         };
         if (!that.renderTemplate) {
             that.renderTemplate = fluid.selfRender(that.container, tree, renderOpts);
@@ -85,10 +86,11 @@ cspace = cspace || {};
         that.locate("numberOfItems").text("(" + that.model.items.length + ")");
     };
 
-    cspace.recordList = function (container, model, uispec, options) {
+    cspace.recordList = function (container, options) {
         var that = fluid.initView("cspace.recordList", container, options);
-        that.model = model;
-        that.uispec = uispec;
+        that.model = that.options.model;
+        that.applier = fluid.makeChangeApplier(that.model);
+        
         that.refreshView = function () {
             renderList(that);
             bindEventHandlers(that);
@@ -139,6 +141,9 @@ cspace = cspace || {};
         styles: {
             selecting: "cs-selecting",
             selected: "cs-selected"
+        },
+        mergePolicy: {
+            model: "preserve"
         }
     });
 

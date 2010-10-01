@@ -42,7 +42,7 @@ cspace = cspace || {};
                     var tabIndex = that.locate("tabsContainer").tabs('option', 'selected');
                     var setupObj = that.options.tabSetups[tabIndex];
                     if (setupObj && setupObj.func) {
-                        fluid.invokeGlobalFunction(setupObj.func, [that.applier, setupObj.options]);
+                        fluid.invokeGlobalFunction(setupObj.func, [setupObj.options]);
                     }
                 }
             },
@@ -65,9 +65,8 @@ cspace = cspace || {};
      * @param {Object} applier
      * @param {Object} options
      */
-    cspace.tabs = function (container, applier, options) {
+    cspace.tabs = function (container, options) {
         var that = fluid.initView("cspace.tabs", container, options);
-        that.applier = applier;
         buildTabs(that);
         return that;
     };
@@ -86,7 +85,8 @@ cspace = cspace || {};
             primary: "primary"
         },
         mergePolicy: {
-            tabList: "replace"
+            tabList: "replace",
+            tabSetups: "preserve"
         }
     });
 })(jQuery, fluid);

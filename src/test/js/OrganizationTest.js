@@ -17,7 +17,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
     var organizationTests = new jqUnit.TestCase("Organization Tests", function () {
         cspace.util.isTest = true;
-        organizationTests.fetchTemplate("../../main/webapp/html/organization.html", ".fl-container-1024");
     });
     
     var setupOrganization = function (options) {
@@ -49,25 +48,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             },
             depOpts: {
-                sidebar: {
-                    options: {
-                        relatedRecordsList: {
-                            options: {
-                                relationManager: {
-                                    options: {
-                                        searchToRelateDialog: {
-                                            options: {
-                                                templates: {
-                                                    dialog: "../../main/webapp/html/searchToRelate.html"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
                 recordEditor: {
                     options: {
                         confirmation: {
@@ -76,8 +56,53 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             }
                         }
                     }
+                },
+                sidebar: {
+                    options: {
+                        components: {
+                            objects: {
+                                options: {
+                                    components: {
+                                        relationManager: {
+                                            options: {
+                                                components: {
+                                                    searchToRelateDialog: {
+                                                        options: {
+                                                            templates: {
+                                                                dialog: "../../main/webapp/html/searchToRelate.html"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            procedures: {
+                                options: {
+                                    components: {
+                                        relationManager: {
+                                            options: {
+                                                components: {
+                                                    searchToRelateDialog: {
+                                                        options: {
+                                                            templates: {
+                                                                dialog: "../../main/webapp/html/searchToRelate.html"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-            }
+            },
+            templateUrlPrefix: "../../main/webapp/html/"
         }, options);
         pageBuilder = cspace.recordSetup(options, "../../main/webapp/html/config/organization.json").pageBuilder;
     };

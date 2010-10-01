@@ -15,85 +15,112 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     fluid.log("Sidebar.js loaded");
+    
+    fluid.registerNamespace("cspace.sidebar");
 
-    cspace.sidebar = function (container, applier, options) {
+    cspace.sidebar = function (container, options) {
         var that = fluid.initView("cspace.sidebar", container, options);
-        that.applier = applier;
         
-        var intAuthModel = {
-            items: that.applier.model.termsUsed || [],
-            selectionIndex: -1
-        };
-        
-        // TODO: There is a bug here - we are ignoring options passed to the recordList subcomponent
-        that.integratedAuthorities = fluid.initSubcomponent(that, "recordList", [that.options.selectors.termsUsed,
-            intAuthModel,
-            that.options.uispec.termsUsed,
-            {
-                recordType: "authorities",
-                listeners: {
-                    afterSelect: that.options.recordListAfterSelectHandler
-                },
-                csid: that.applier.model.csid,
-                strings: {nothingYet: "No Authority terms used yet"}
-            }]);
+        that.model = that.options.model;
 
-        that.applier.modelChanged.addListener("termsUsed", function (model, oldModel, changeRequest) {
-            fluid.model.copyModel(that.integratedAuthorities.model.items, model.termsUsed);
-            that.integratedAuthorities.refreshView();
+        fluid.initDependents(that);
+        
+        that.options.applier.modelChanged.addListener("termsUsed", function (model, oldModel, changeRequest) {
+            that.termsUsed.applier.requestChange("items", model.termsUsed);
+            that.termsUsed.refreshView();
         });
-
-        var rrlOpts = {
-            uispec : that.options.uispec.relatedProcedures
-        };
-        if (cspace.util.useLocalData()) {
-            $.extend(true, rrlOpts, {
-                relationManager: {
-                    options: {
-                        dataContext: {
-                            baseUrl: "data/",
-                            fileExtension: ".json"
-                        }
-                    }
-                },
-                recordList: {
-                    options: {
-                    	listeners: {
-	                        afterSelect: that.options.recordListAfterSelectHandler
-	                    }
-                    }
-                }
-            });
-        }
-        $.extend(true, rrlOpts, that.options.relatedRecordsList.options);
-
-        that.relatedProcedures = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedProcedures,
-            that.options.primaryRecordType,
-            "procedures",
-            that.applier,
-            rrlOpts]);
-        that.relatedObjects = fluid.initSubcomponent(that, "relatedRecordsList", [that.options.selectors.relatedObjects,
-            that.options.primaryRecordType,
-            "objects",
-            that.applier,
-            rrlOpts]);
 
         return that;
     };
     
-    fluid.defaults("cspace.sidebar", {
-        recordList: {
-            type: "cspace.recordList", 
-            options: {
-                listeners: {
-                    afterSelect: cspace.recordList.afterSelectHandlerDefault
+    cspace.sidebar.localRelatedRecordListOpts = function (container, options) {
+        var that = fluid.initLittleComponent("cspace.sidebar.localRelatedRecordListOpts", options);
+        return cspace.relatedRecordsList(container, that.options);
+    };
+    
+    fluid.defaults("cspace.sidebar.localRelatedRecordListOpts", {
+        components: {
+            relationManager: {
+                options: {
+                    dataContext: {
+                        baseUrl: "data/",
+                        fileExtension: ".json"
+                    }
                 }
             }
         },
-        recordListAfterSelectHandler: cspace.recordList.afterSelectHandlerDefault,
-        relatedRecordsList: {
-            type: "cspace.relatedRecordsList"
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
+        }
+    });
+    
+    fluid.demands("cspace.recordList", "cspace.sidebar", 
+        ["{sidebar}.options.selectors.termsUsed", fluid.COMPONENT_OPTIONS]);
+    
+    fluid.demands("procedures",  ["cspace.localData", "cspace.sidebar"], {
+        funcName: "cspace.sidebar.localRelatedRecordListOpts",
+        args: ["{sidebar}.options.selectors.relatedProcedures", fluid.COMPONENT_OPTIONS]
+    });
+    
+    fluid.demands("procedures", "cspace.sidebar", 
+        ["{sidebar}.options.selectors.relatedProcedures", fluid.COMPONENT_OPTIONS]);
+    
+    fluid.demands("objects",  ["cspace.localData", "cspace.sidebar"], {
+        funcName: "cspace.sidebar.localRelatedRecordListOpts",
+        args: ["{sidebar}.options.selectors.relatedObjects", fluid.COMPONENT_OPTIONS]
+    });
+    
+    fluid.demands("objects", "cspace.sidebar", 
+        ["{sidebar}.options.selectors.relatedObjects", fluid.COMPONENT_OPTIONS]);
+    
+    fluid.defaults("cspace.sidebar", {
+        components: {
+            termsUsed: {
+                type: "cspace.recordList",
+                options: {
+                    listeners: {
+                        afterSelect: "{sidebar}.options.recordListAfterSelectHandler"
+                    },
+                    model: {
+                        items: "{sidebar}.model.termsUsed",
+                        selectionIndex: -1
+                    },
+                    uispec : "{sidebar}.options.uispec.termsUsed",
+                    recordType: "authorities",
+                    strings: {
+                        nothingYet: "No Authority terms used yet"
+                    }
+                }
+            },
+            objects: {
+                type: "cspace.relatedRecordsList",
+                options: {
+                    primary: "{sidebar}.options.primaryRecordType",
+                    related: "objects",
+                    applier: "{sidebar}.options.applier",
+                    uispec : "{sidebar}.options.uispec.relatedObjects",
+                    model: "{sidebar}.model",
+                    recordListAfterSelectHandler: "{sidebar}.options.recordListAfterSelectHandler"
+                }
+            },
+            procedures: {
+                type: "cspace.relatedRecordsList",
+                options: {
+                    primary: "{sidebar}.options.primaryRecordType",
+                    related: "procedures",
+                    applier: "{sidebar}.options.applier",
+                    uispec : "{sidebar}.options.uispec.relatedProcedures",
+                    model: "{sidebar}.model",
+                    recordListAfterSelectHandler: "{sidebar}.options.recordListAfterSelectHandler"
+                }
+            }
         },
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
+        },
+        recordListAfterSelectHandler: cspace.recordList.afterSelectHandlerDefault,        
         selectors: {
             mediaSnapshot: ".csc-media-snapshot",
             termsUsed: ".csc-integrated-authorities",

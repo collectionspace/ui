@@ -1,0 +1,136 @@
+{
+    "pageBuilder": {
+        "options": {
+            "pageType": "intake",
+            "dataContext": {
+                "options": {
+                    "recordType": "intake" 
+                } 
+            },
+            "pageSpec": {
+                "header": {
+                    "href": "header.html",
+                    "templateSelector": ".csc-header-template",
+                    "targetSelector": ".csc-header-container" 
+                },
+                "tabs": {
+                    "href": "tabsTemplate.html",
+                    "templateSelector": ".csc-tabs-template",
+                    "targetSelector": ".csc-tabs-container" 
+                },
+                "titleBar": {
+                    "href": "IntakeTitleBar.html",
+                    "templateSelector": ".csc-object-intake-titleBar-template",
+                    "targetSelector": ".csc-object-intake-titleBar-container" 
+                },
+                "dateEntry": {
+                    "href": "IntakeTemplate.html",
+                    "templateSelector": ".csc-object-intake-template",
+                    "targetSelector": ".csc-record-edit-container"
+                },
+                "sidebar": {
+                    "href": "right-sidebar.html",
+                    "templateSelector": ".csc-right-sidebar",
+                    "targetSelector": ".csc-sidebar-container" 
+                },
+                "footer": {
+                    "href": "footer.html",
+                    "templateSelector": ".csc-footer",
+                    "targetSelector": ".csc-footer-container" 
+                } 
+            } 
+        } 
+    },
+    "dependencies": {
+        "titleBar": {
+            "funcName": "cspace.titleBar",
+            "args": [
+                ".csc-object-intake-titleBar-template" 
+            ] 
+        },
+        "tabs": {
+            "funcName": "cspace.tabs",
+            "args": [
+                ".csc-tabs-template" 
+            ] 
+        },
+        "recordEditor": {
+            "funcName": "cspace.recordEditor",
+            "args": [
+                ".csc-object-intake-template"
+            ] 
+        },
+        "sidebar": {
+            "funcName": "cspace.sidebar",
+            "args": [
+                ".csc-sidebar" 
+            ] 
+        } 
+    },
+    "depOpts": {
+        "titleBar": {
+            "options": {
+                "uispec": "{pageBuilder}.uispec.titleBar",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model" 
+            } 
+        },
+        "tabs": {
+            "options": {
+                "tabList": [
+                    {"name": "Intake", "target": "#primaryTab"},
+                    {"name": "Acquisition", "target": null},
+                    {"name": "Cataloging", "target": "objectTabPlaceholder.html"},
+                    {"name": "Intake - related", "target": null},
+                    {"name": "Loan In", "target": null},
+                    {"name": "Loan Out", "target": null},
+                    {"name": "Location &amp; Movement", "target": "movementTab.html"},
+                    {"name": "Media", "target": null}
+                ],
+                "tabSetups": [
+                    "null",
+                    {
+                        "func": "cspace.tabSetup",
+                        "options": {
+                            "primaryRecordType": "{pageBuilder}.options.pageType",
+                            "applier": "{pageBuilder}.applier",
+                            "model": "{pageBuilder}.model",
+                            "configURL": "./config/object-tab.json" 
+                        } 
+                    },
+                    {
+                        "func": "cspace.tabSetup",
+                        "options": {
+                            "primaryRecordType": "{pageBuilder}.options.pageType",
+                            "applier": "{pageBuilder}.applier",
+                            "model": "{pageBuilder}.model",
+                            "configURL": "./config/movement-tab.json" 
+                        } 
+                    } 
+                ] 
+            } 
+        },
+        "recordEditor": {
+            "options": {
+                "selectors": {
+                    "identificationNumber": ".csc-intake-entry-number" 
+                },
+                "strings": {
+                    "identificationNumberRequired": "Please specify an Intake Entry Number" 
+                },
+                "dataContext": "{pageBuilder}.dataContext",
+                "applier": "{pageBuilder}.applier",
+                "uispec": "{pageBuilder}.uispec.recordEditor",
+                "model": "{pageBuilder}.model" 
+            } 
+        },
+        "sidebar": {
+            "options": {
+                "uispec": "{pageBuilder}.uispec.sidebar",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model",
+                "primaryRecordType": "{pageBuilder}.options.pageType" 
+            } 
+        } 
+    } 
+}

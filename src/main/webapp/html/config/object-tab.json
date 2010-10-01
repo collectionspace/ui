@@ -6,31 +6,32 @@
                 "list": {
                     "href": "objectTabRecordListTemplate.html",
                     "templateSelector": ".csc-object-tab-record-list",
-                    "targetSelector": ".csc-object-tab .div-for-list-of-records"
+                    "targetSelector": ".csc-object-tab .div-for-list-of-records" 
                 },
                 "details": {
                     "href": "ObjectEntryTemplate.html",
                     "templateSelector": ".csc-object-entry-template",
-                    "targetSelector": ".csc-object-tab .div-for-recordEditor"
+                    "targetSelector": ".csc-object-tab .div-for-recordEditor" 
                 } 
             }
-        } 
+        }
     },
     "dependencies": {
         "relatedRecordsTab": {
             "funcName": "cspace.relatedRecordsTab",
             "args": [
-                ".csc-object-tab",
-                "{pageBuilder}.pageType",
-                "objects",
-                "{pageBuilder}.uispec",
-                "{pageBuilder}.applier"
+                ".csc-object-tab" 
             ] 
         } 
     },
     "depOpts": {
         "relatedRecordsTab": {
             "options": {
+                "primary": "{pageBuilder}.options.primaryRecordType",
+                "related": "objects",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model",
+                "uispec": "{pageBuilder}.uispec",
                 "listEditor": {
                     "options": {
                         "initList": "cspace.listEditor.receiveData",
@@ -40,9 +41,9 @@
                                 "dataSource": {
                                     "options": {
                                         "uispec": "{pageBuilder}.uispec.details" 
-                                    }
-                                }
-                            }
+                                    } 
+                                } 
+                            } 
                         },
                         "details": {
                             "options": {
@@ -53,15 +54,10 @@
                                     "identificationNumberRequired": "Please specify an Identification Number" 
                                 } 
                             } 
-                        }
-                    }
-                },
-                "relationManager": {
-                    "options": {
-                        "primaryRecordType": "{pageBuilder}.options.primaryRecordType"
-                    }
+                        } 
+                    } 
                 }
-            }
-        }
+            } 
+        } 
     } 
 }

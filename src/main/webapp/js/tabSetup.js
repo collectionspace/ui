@@ -20,16 +20,17 @@ cspace = cspace || {};
      * @param {Object} applier  ChangeApplier for the primary record's data model
      * @param {Object} options
      */
-    cspace.tabSetup = function (applier, options) {
+    cspace.tabSetup = function (options) {
         
         options = options || {};
                 
         options.fetchConfigCallback = options.fetchConfigCallback || function (config) {
             // configuration options specific to the current context:
-            config.dependencies.relatedRecordsTab.args[1] = options.primaryRecordType;
-            config.dependencies.relatedRecordsTab.args[4] = applier;
             config.depOpts.relatedRecordsTab.options.listEditor.options.data =
-                applier.model.relations[config.dependencies.relatedRecordsTab.args[2]];
+                options.model.relations[config.depOpts.relatedRecordsTab.options.related];
+            config.pageBuilder.options.primaryRecordType = options.primaryRecordType;
+            config.pageBuilder.options.model = options.model;
+            config.pageBuilder.options.applier = options.applier;
 
             // configuration options specific to local-file-system use:
             if (cspace.util.useLocalData()) {

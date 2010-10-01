@@ -46,38 +46,34 @@
         "titleBar": {
             "funcName": "cspace.titleBar",
             "args": [
-                ".csc-organizationAuthority-titleBar-template",
-                "{pageBuilder}.applier" 
+                ".csc-organizationAuthority-titleBar-template"
             ] 
         },
         "tabs": {
             "funcName": "cspace.tabs",
             "args": [
-                ".csc-tabs-template",
-                "{pageBuilder}.applier" 
+                ".csc-tabs-template"
             ] 
         },
         "recordEditor": {
             "funcName": "cspace.recordEditor",
             "args": [
-                ".csc-organizationAuthority-template",
-                "{pageBuilder}.dataContext",
-                "{pageBuilder}.applier",
-                "{pageBuilder}.uispec.recordEditor" 
+                ".csc-organizationAuthority-template"
             ] 
         },
         "sidebar": {
             "funcName": "cspace.sidebar",
             "args": [
-                ".csc-sidebar",
-                "{pageBuilder}.applier" 
+                ".csc-sidebar"
             ] 
         } 
     },
     "depOpts": {
         "titleBar": {
             "options": {
-                "uispec": "{pageBuilder}.uispec.titleBar" 
+                "uispec": "{pageBuilder}.uispec.titleBar",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model"
             } 
         },
         "tabs": {
@@ -97,13 +93,19 @@
                 },
                 "strings": {
                     "identificationNumberRequired": "Please specify a Display Name" 
-                } 
+                },
+                "dataContext": "{pageBuilder}.dataContext",
+                "applier": "{pageBuilder}.applier",
+                "uispec": "{pageBuilder}.uispec.recordEditor",
+                "model": "{pageBuilder}.model"
             } 
         },
         "sidebar": {
             "options": {
                 "uispec": "{pageBuilder}.uispec.sidebar",
-                "primaryRecordType": "objects" 
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model",
+                "primaryRecordType": "{pageBuilder}.options.pageType"
             } 
         } 
     } 
