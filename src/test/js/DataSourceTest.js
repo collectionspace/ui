@@ -17,7 +17,7 @@ var dataSourceTester = function ($) {
     var schema;
     
     $.ajax({
-        url: "../../main/webapp/html/schema/administration.json",
+        url: "../../main/webapp/html/uischema/users.json",
         async: false,
         dataType: "json",
         success: function (data) {
@@ -33,8 +33,10 @@ var dataSourceTester = function ($) {
     });
     
     var expectedBaseModel = {
-        "csid": null,
+        "relations": {},
+        "termsUsed": [],
         "fields": {
+            "status": "Active",
             "role": [
                 {
                     "roleId": "94bf9d26-7147-421e-8e99-a2f0308dba20",

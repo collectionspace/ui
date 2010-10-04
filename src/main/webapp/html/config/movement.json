@@ -2,6 +2,7 @@
     "pageBuilder": {
         "options": {
             "pageType": "movement",
+            "recordType": "movement",
             "dataContext": {
                 "options": {
                     "recordType": "movement" 

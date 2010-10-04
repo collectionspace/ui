@@ -220,8 +220,8 @@ cspace = cspace || {};
         };
         
         that.fetchModel = function(model) {
-            model = model || that.model;
-            return fluid.model.getBeanValue(that.model, that.options.elPath);
+            var model = model || that.model;
+            return fluid.model.getBeanValue(model, that.options.elPath);
         };
 
         that.refreshView();

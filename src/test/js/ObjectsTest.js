@@ -25,6 +25,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             configURL: "../../main/webapp/html/config/objects.json",
             pageBuilder: {
                 options: {
+                	recordType: "objects",
+                	pageType: "objects",
+                    schemaUrl: "../../main/webapp/html/uischema/objects.json",
                     uispecUrl: "../../main/webapp/html/uispecs/objects/uispec.json",
                     listeners: {
                         onDependencySetup: function (uispec) {

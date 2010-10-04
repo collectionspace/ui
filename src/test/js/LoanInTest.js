@@ -23,6 +23,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             configURL: "../../main/webapp/html/config/loanin.json",
             pageBuilder: {
                 options: {
+                    schemaUrl: "../../main/webapp/html/uischema/loanin.json",
                     uispecUrl: "../../main/webapp/html/uispecs/loanin/uispec.json",
                     listeners: {
                         pageReady: function () {

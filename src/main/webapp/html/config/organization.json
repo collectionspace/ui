@@ -1,6 +1,7 @@
 {
     "pageBuilder": {
         "options": {
+            "recordType": "organization",
             "dataContext": {
                 "options": {
                     "recordType": "organization",

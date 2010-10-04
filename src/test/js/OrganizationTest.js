@@ -24,6 +24,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             configURL: "../../main/webapp/html/config/organization.json",
             pageBuilder: {
                 options: {
+                    schemaUrl: "../../main/webapp/html/uischema/organization.json",
                     uispecUrl: "../../main/webapp/html/uispecs/organization/uispec.json",
                     pageSpec: {
                         header: {

@@ -2,6 +2,7 @@
     "pageBuilder": {
         "options": {
             "pageType": "intake",
+            "recordType": "intake",
             "dataContext": {
                 "options": {
                     "recordType": "intake" 

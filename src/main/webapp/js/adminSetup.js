@@ -58,6 +58,7 @@ cspace = cspace || {};
         };
 
         var options = {
+            recordType: "users",
             pageSpec: {
                 header: {
                     href: "header.html",

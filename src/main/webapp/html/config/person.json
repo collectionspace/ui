@@ -1,6 +1,7 @@
 {
     "pageBuilder": {
         "options": {
+            "recordType": "person",
             "dataContext": {
                 "options": {
                     "recordType": "person",

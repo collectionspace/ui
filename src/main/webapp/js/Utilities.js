@@ -245,9 +245,20 @@ fluid.registerNamespace("cspace.util");
     cspace.util.corner = function () {
     };
     
-    cspace.util.getDefaultURL = function (resource) {
+    cspace.util.getDefaultConfigURL = function () {
         var url = window.location.pathname;
-        return ".\/" + resource + url.substring(url.lastIndexOf("/"), url.indexOf(".html")) + ".json";
+        return ".\/config" + url.substring(url.lastIndexOf("/"), url.indexOf(".html")) + ".json";
+    };
+    
+    cspace.util.getDefaultSchemaURL = function (pageType) {
+        var url = window.location.pathname;
+        var pageType = pageType || url.substring(url.lastIndexOf("/"), url.indexOf(".html"));
+        if (cspace.util.useLocalData()) {
+            return ".\/uischema/" + pageType + ".json";
+        }
+        else {
+            return "../../chain/" + pageType + "/uischema"
+        }
     };
     
     var buildModelStructure = function (model, elPath) {
@@ -267,49 +278,6 @@ fluid.registerNamespace("cspace.util");
         }
     };
     
-    cspace.util.createEmptyModel = function (model, uispec) {
-        for (var key in uispec) {
-            if (!uispec.hasOwnProperty(key)) {
-                continue;                
-            }
-            var value = uispec[key];
-            if (!value) {
-                continue;
-            }
-            var type = typeof(value);
-            switch (type) {
-                case "object":
-                    cspace.util.createEmptyModel(model, value);
-                    break;
-                case "string":
-                    var i1 = value.indexOf("${");
-                    var i2 = value.indexOf("}");
-                    if (i1 === 0 && i2 !== -1 && value.search(/.0./gi) > -1) {
-                        buildModelStructure(model, value.substring(2, i2));
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
-
-    cspace.util.createBaseModel = function () {
-        return {
-            csid: null,
-            fields: {},
-            termsUsed: [],
-            relations: {
-                objects: [],
-                loanin: [],
-                loanout: [],
-                movement: [],
-                intake: [], 
-                acquisition: []
-            }
-        };
-    };
-
     cspace.util.fullUrl = function (prefix, templateName) {
         return prefix ? prefix + templateName : templateName;
     };
@@ -347,11 +315,17 @@ fluid.registerNamespace("cspace.util");
                 subSchema = items ? [items] : [];
                 root[seg] = [];
             }
-            else {
+            else if (type === "object") {
                 subSchema = subSchema.properties;
                 root[seg] = {};
             }
+            else {
+                root[seg] = undefined;
+            }
             root = root[seg];
+            if (!root) {
+                return root;
+            }
             // TODO: This will show you the whole WORLD, whether you want it or not.
             for (var subSegment in subSchema) {
                 root[subSegment] = cspace.util.getBeanValue(root, subSegment, subSchema);

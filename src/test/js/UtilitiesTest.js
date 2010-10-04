@@ -103,26 +103,6 @@ var utilitiesTester = function ($) {
         };
     });
     
-    utilitiesTest.test("Test cspace.util.createEmptyModel simple", function () {
-        uispec.recordEditor[".csc-object-identification-responsible-department"] = repeatable;
-        var model = {};
-        cspace.util.createEmptyModel(model, uispec);
-        jqUnit.assertDeepEq("Given uispec with repeatable, model is build with proper array property", 
-            expectedBase, model);
-    });
-    utilitiesTest.test("Test cspace.util.createEmptyModel nested", function () {
-        uispec.recordEditor[".csc-object-identification-responsible-department"] = repeatable;        
-        var protoTree = uispec.recordEditor[".csc-object-identification-responsible-department"].decorators[0].options.protoTree;
-        protoTree[".csc-test-nested"] = nestedRepeatable;
-        expectedBase.fields.otherNumbers.push({
-            otherNumber: []
-        });
-        var model = {};
-        cspace.util.createEmptyModel(model, uispec);
-        jqUnit.assertDeepEq("Given uispec with nested repeatable, model is build with proper array property", 
-            expectedBase, model);
-    });
-    
     var setExpectedSchemaBasedModel = function () {
         expectedBase.fields = {
             role: {
@@ -222,6 +202,21 @@ var utilitiesTester = function ($) {
         var fields = cspace.util.getBeanValue(model, "fields", schema);
         jqUnit.assertDeepEq("Given a schema, model is build with proper structure and defaults", 
             model.fields, fields);
+    });
+    
+    utilitiesTest.test("Create a model from schema with string fields", function () {
+        schema.fields.properties.newProperty = {
+            type: "string"
+        };
+        schema.fields.properties.newPropertyWithDefault = {
+            type: "string",
+            "default": "blabla"
+        };
+        setExpectedSchemaBasedModel();
+        expectedBase.fields.newPropertyWithDefault = "blabla";
+        var model = cspace.util.getBeanValue({}, "fields", schema);
+        jqUnit.assertDeepEq("Given a schema, model is build with proper structure and defaults", 
+            expectedBase.fields, model);
     });
     
     utilitiesTest.test("GetBeanValue inside the default in schema", function () {        
