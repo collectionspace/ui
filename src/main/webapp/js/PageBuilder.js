@@ -52,21 +52,20 @@ cspace = cspace || {};
         var templateContainer = $("<div></div>").html(bodyTag);
         var templateContent = $(selector, templateContainer);
         container.append($(selector, templateContainer)); 
-    };    
+    };
+    
+    var setupModel = function (applier, existingModel, pageType, recordType, schema) {
+        // TODO: This logic shouldn't really be here and needs to be moved to the dataSource once it
+        // replaces the dataContext and gathers all the model related logic inside.
+        if (!pageType || pageType.indexOf("tab") !== -1 || existingModel.csid) {
+            return;
+        }
+        applier.requestChange("", cspace.util.getBeanValue(existingModel, recordType, schema));
+    };
     
     var setUpPageBuilder = function (that) {
-        // TODO: Once we have a real schema from the app layer this code will be cleaned up. 
-        //       The else statement will go away completely and the first parameter to 'getBeanValue' will be the actual model.
-        //       We are currently not doing this because our inferred empty model is likely to have an incorrect structure
-        //       that may cause errors upon save. 
-        //       Note: this block is almost identical to a code block in ListEditor around line 106
-        if (that.schema) {
-            var model = cspace.util.getBeanValue({}, that.options.pageType, that.schema);
-            that.applier.requestChange("", model);
-        }
-        else {
-            cspace.util.createEmptyModel(that.model, that.uispec);
-        }
+        
+        setupModel(that.applier, that.model, that.options.pageType, that.options.recordType, that.schema);        
         
         that.events.onDependencySetup.fire(that.uispec);
         
@@ -126,7 +125,7 @@ cspace = cspace || {};
     cspace.pageBuilder = function (dependencies, options) {
         var that = {
             dependencies: dependencies,
-            model: cspace.util.createBaseModel()
+            model: {}
         };
 
         fluid.mergeComponentOptions(that, "cspace.pageBuilder", options);
@@ -165,18 +164,16 @@ cspace = cspace || {};
             };
         }
         
-        // TODO: This is a hack which is in place because we aren't getting schemas from the app layer yet
-        //       Currently we only have hardcoded schemas for users and roles which are fetched from the file system.
-        if (that.options.pageType === "role" || that.options.pageType === "users") {
+        if (that.options.recordType) {
             resourceSpecs.schema = {
-                href: that.options.schemaUrl || cspace.util.getDefaultURL("schema"),
+                href: that.options.schemaUrl || cspace.util.getDefaultSchemaURL(that.options.recordType),
                 options: {
                     dataType: "json",
                     success: function (data) {
                         that.schema = data;
                     },
                     error: function (xhr, textStatus, errorThrown) {
-                        // Because there is no schema we will infer it from the uispec later.
+                        fluid.fail("Error fetching " + that.options.recordType + " schema:" + textStatus);
                     }
                 }
             };
@@ -254,6 +251,7 @@ cspace = cspace || {};
         uispecUrl: "",
         schemaUrl: "",
         pageType: "",
+        recordType: "",
         mergePolicy: {
             model: "preserve",
             applier: "preserve"

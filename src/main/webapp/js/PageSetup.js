@@ -18,7 +18,7 @@ cspace = cspace || {};
 
     var fetchConfig = function (that, callback) {
         $.ajax({
-            url: that.options.configURL || cspace.util.getDefaultURL("config"),
+            url: that.options.configURL || cspace.util.getDefaultConfigURL(),
             dataType: "json",
             async: false,
             success: function (config) {

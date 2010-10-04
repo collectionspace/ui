@@ -2,6 +2,7 @@
     "pageBuilder": {
         "options": {
             "pageType": "movement-tab",
+            "recordType": "movement",
             "pageSpec": {
                 "list": {
                     "href": "movementTabRecordListTemplate.html",

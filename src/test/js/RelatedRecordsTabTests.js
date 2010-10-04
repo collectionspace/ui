@@ -16,7 +16,7 @@ var relatedRecordsTabTester = function ($) {
     var model, applier, pageBuilder;
 
     $.ajax({
-        url: "../../main/webapp/html/data/objects/1984.068.0335b.json",
+        url: "../../main/webapp/html/data/objects/1984.068.0338.json",
         async: false,
         dataType: "json",
         success: function (data) {
@@ -39,6 +39,7 @@ var relatedRecordsTabTester = function ($) {
         var testPrimaryType = "intake";
         var testRelatedType = "objects";
         var options = {
+            schemaUrl: "../../main/webapp/html/uischema/objects.json",
             uispecUrl: "../../main/webapp/html/uispecs/object-tab/uispec.json",
             listeners: {
                 onDependencySetup: function (uispec) {
@@ -199,7 +200,8 @@ var relatedRecordsTabTester = function ($) {
             configURL: "../../main/webapp/html/config/object-tab.json",
             pageBuilder: {
                 options: {
-                    pageType: "intake",
+                    pageType: "object-tab",
+                    schemaUrl: "../../main/webapp/html/uischema/objects.json",
                     uispecUrl: "../../main/webapp/html/uispecs/object-tab/uispec.json",
                     pageSpec: {
                         list: {

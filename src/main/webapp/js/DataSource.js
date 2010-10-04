@@ -58,11 +58,6 @@ cspace = cspace || {};
                 model = cspace.util.getBeanValue(model ? schemaModel : {}, recordType, schema);
             }
             
-            if (!model) {
-                model = cspace.util.createBaseModel();
-                cspace.util.createEmptyModel(model, that.options.uispec);
-            }
-            
             // For all aditional resources the existing model is merged with the data from those resources.
             fluid.each(resourceSpec, function (resource, key) {
                 var source = that.options.sources[key];

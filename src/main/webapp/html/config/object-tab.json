@@ -2,6 +2,7 @@
     "pageBuilder": {
         "options": {
             "pageType": "object-tab",
+            "recordType": "objects",
             "pageSpec": {
                 "list": {
                     "href": "objectTabRecordListTemplate.html",

@@ -210,7 +210,10 @@ cspace = cspace || {};
             options: {}
         },
         details: {
-            type: "cspace.recordEditor"
+            type: "cspace.recordEditor",
+            options: {
+                deferRendering: true
+            }
         },
         dataContext: {
             type: "cspace.dataContext",

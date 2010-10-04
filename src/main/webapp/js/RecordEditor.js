@@ -130,7 +130,9 @@ cspace = cspace || {};
     
     var setupDataEntry = function (that) {
         bindEventHandlers(that);
-        that.refreshView();
+        if (!that.options.deferRendering) {
+            that.refreshView();
+        }
     };
     
     var renderPage = function (that) {

@@ -1,6 +1,7 @@
 {
     "pageBuilder": {
         "options": {
+            "recordType": "role",
             "pageSpec": {
                 "header": {
                     "href": "header.html",

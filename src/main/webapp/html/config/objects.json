@@ -2,6 +2,7 @@
     "pageBuilder": {
         "options": {
             "pageType": "objects",
+            "recordType": "objects",
             "dataContext": {
                 "options": {
                     "recordType": "objects" 

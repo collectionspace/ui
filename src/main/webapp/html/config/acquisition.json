@@ -2,6 +2,7 @@
     "pageBuilder": {
         "options": {
             "pageType": "acquisition",
+            "recordType": "acquisition",
             "dataContext": {
                 "options": {
                     "recordType": "acquisition" 

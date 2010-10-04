@@ -2,6 +2,7 @@
     "pageBuilder": {
         "options": {
             "pageType": "loanin",
+            "recordType": "loanin",
             "dataContext": {
                 "options": {
                     "recordType": "loanin" 
