@@ -1,0 +1,74 @@
+{
+    "loanout": {
+        "properties": {
+            "relations": {
+                "default": {
+                    
+                },
+                "type": "object"
+            },
+            "termsUsed": {
+                "default": [
+                    
+                ],
+                "type": "array"
+            },
+            "csid": {
+                "type": "string"
+            },
+            "fields": {
+                "properties": {
+                    "lendersAuthorizer": {
+                        "type": "string"
+                    },
+                    "loanPurpose": {
+                        "default": "Exhibition",
+                        "type": "array"
+                    },
+                    "borrower": {
+                        "type": "string"
+                    },
+                    "loanedObjectStatus": {
+                        "default": "Requested",
+                        "type": "string"
+                    },
+                    "loanOutDate": {
+                        "type": "date"
+                    },
+                    "loanRenewalApplicationDate": {
+                        "type": "date"
+                    },
+                    "loanedObjectStatusNote": {
+                        "type": "string"
+                    },
+                    "lendersContact": {
+                        "type": "string"
+                    },
+                    "borrowersContact": {
+                        "type": "string"
+                    },
+                    "loanReturnDate": {
+                        "type": "date"
+                    },
+                    "loanedObjectStatusDate": {
+                        "type": "date"
+                    },
+                    "loanOutNote": {
+                        "type": "string"
+                    },
+                    "specialConditionsOfLoan": {
+                        "type": "string"
+                    },
+                    "lendersAuthorizationDate": {
+                        "type": "date"
+                    },
+                    "loanOutNumber": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "type": "object"
+    }
+}

@@ -1,0 +1,66 @@
+{
+    "users": {
+        "properties": {
+            "relations": {
+                "default": {
+                    
+                },
+                "type": "object"
+            },
+            "termsUsed": {
+                "default": [
+                    
+                ],
+                "type": "array"
+            },
+            "csid": {
+                "type": "string"
+            },
+            "fields": {
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "default": "Active",
+                        "type": "array"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "userId": {
+                        "type": "string"
+                    },
+                    "screenName": {
+                        "type": "string"
+                    },
+                    "role": {
+                        "items": {
+                            "properties": {
+                                "roleGroup": {
+                                    "type": "string"
+                                },
+                                "roleSelected": {
+                                    "type": "string"
+                                },
+                                "roleName": {
+                                    "type": "string"
+                                },
+                                "roleId": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "type": "object"
+    }
+}

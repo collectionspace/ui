@@ -1,0 +1,41 @@
+{
+    "permission": {
+        "properties": {
+            "relations": {
+                "default": {
+                    
+                },
+                "type": "object"
+            },
+            "csid": {
+                "type": "string"
+            },
+            "fields": {
+                "properties": {
+                    "effect": {
+                        "type": "string"
+                    },
+                    "action": {
+                        "items": {
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "actionGroup": {
+                        "type": "string"
+                    },
+                    "resourceName": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "type": "object"
+    }
+}

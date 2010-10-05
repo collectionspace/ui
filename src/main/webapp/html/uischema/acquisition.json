@@ -1,0 +1,173 @@
+{
+    "acquisition": {
+        "properties": {
+            "relations": {
+                "default": {
+                    
+                },
+                "type": "object"
+            },
+            "termsUsed": {
+                "default": [
+                    
+                ],
+                "type": "array"
+            },
+            "csid": {
+                "type": "string"
+            },
+            "fields": {
+                "properties": {
+                    "acquisitionReferenceNumber": {
+                        "type": "string"
+                    },
+                    "acquisitionDates": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "acquisitionDate": {
+                                    "type": "date"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "objectOfferPriceCurrency": {
+                        "default": "US Dollar",
+                        "type": "string"
+                    },
+                    "acquisitionFunding": {
+                        "items": {
+                            "properties": {
+                                "acquisitionFundingSourceProvisos": {
+                                    "type": "string"
+                                },
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "acquisitionFundingSource": {
+                                    "type": "string"
+                                },
+                                "acquisitionFundingCurrency": {
+                                    "default": "US Dollar",
+                                    "type": "string"
+                                },
+                                "acquisitionFundingValue": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "acquisitionAuthorizerDate": {
+                        "type": "date"
+                    },
+                    "groupPurchasePriceCurrency": {
+                        "default": "US Dollar",
+                        "type": "string"
+                    },
+                    "objectPurchasePriceCurrency": {
+                        "default": "US Dollar",
+                        "type": "string"
+                    },
+                    "accessionDate": {
+                        "type": "date"
+                    },
+                    "fieldCollectionEventNames": {
+                        "items": {
+                            "properties": {
+                                "fieldCollectionEventName": {
+                                    "type": "string"
+                                },
+                                "_primary": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "objectPurchasePriceValue": {
+                        "type": "string"
+                    },
+                    "groupPurchasePriceValue": {
+                        "type": "string"
+                    },
+                    "acquisitionSources": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "acquisitionSource": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "originalObjectPurchasePriceCurrency": {
+                        "default": "US Dollar",
+                        "type": "string"
+                    },
+                    "acquisitionReason": {
+                        "type": "string"
+                    },
+                    "acquisitionNote": {
+                        "type": "string"
+                    },
+                    "objectOfferPriceValue": {
+                        "type": "string"
+                    },
+                    "acquisitionMethod": {
+                        "default": "",
+                        "type": "array"
+                    },
+                    "originalObjectPurchasePriceValue": {
+                        "type": "string"
+                    },
+                    "objectPurchaseOfferPriceCurrency": {
+                        "default": "US Dollar",
+                        "type": "string"
+                    },
+                    "acquisitionProvisos": {
+                        "type": "string"
+                    },
+                    "transferOfTitleNumber": {
+                        "type": "string"
+                    },
+                    "acquisitionAuthorizer": {
+                        "type": "string"
+                    },
+                    "ownersource": {
+                        "type": "string"
+                    },
+                    "owners": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "owner": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "objectPurchaseOfferPriceValue": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "type": "object"
+    }
+}
