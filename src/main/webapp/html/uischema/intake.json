@@ -1,0 +1,240 @@
+{
+    "intake": {
+        "properties": {
+            "relations": {
+                "default": {
+                    
+                },
+                "type": "object"
+            },
+            "termsUsed": {
+                "default": [
+                    
+                ],
+                "type": "array"
+            },
+            "csid": {
+                "type": "string"
+            },
+            "fields": {
+                "properties": {
+                    "normalLocation": {
+                        "type": "string"
+                    },
+                    "entryNumber": {
+                        "type": "string"
+                    },
+                    "insurancePolicyNumber": {
+                        "type": "string"
+                    },
+                    "depositorsRequirements": {
+                        "type": "string"
+                    },
+                    "entryReason": {
+                        "default": "",
+                        "type": "array"
+                    },
+                    "insuranceReferenceNumber": {
+                        "type": "string"
+                    },
+                    "returnDate": {
+                        "type": "date"
+                    },
+                    "fieldCollectionMethods": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "fieldCollectionMethod": {
+                                    "default": "",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "valuer": {
+                        "type": "string"
+                    },
+                    "currentLocationFitness": {
+                        "default": "",
+                        "type": "string"
+                    },
+                    "conditionCheckNote": {
+                        "type": "string"
+                    },
+                    "conditionCheckReferenceNumber": {
+                        "type": "string"
+                    },
+                    "entryMethods": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "entryMethod": {
+                                    "default": "",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "fieldCollectionSources": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "fieldCollectionSource": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "valuationReferenceNumber": {
+                        "type": "string"
+                    },
+                    "insuranceNote": {
+                        "type": "string"
+                    },
+                    "fieldCollectionEventNames": {
+                        "items": {
+                            "properties": {
+                                "fieldCollectionEventName": {
+                                    "type": "string"
+                                },
+                                "_primary": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "entryNote": {
+                        "type": "string"
+                    },
+                    "currentLocationNote": {
+                        "type": "string"
+                    },
+                    "conditionCheckDate": {
+                        "type": "date"
+                    },
+                    "fieldCollectors": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "fieldCollector": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "insurers": {
+                        "items": {
+                            "properties": {
+                                "insurer": {
+                                    "type": "string"
+                                },
+                                "_primary": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "packingNote": {
+                        "type": "string"
+                    },
+                    "conditionCheckersOrAssessors": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "conditionCheckerOrAssessor": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "entryDate": {
+                        "type": "date"
+                    },
+                    "fieldCollectionNote": {
+                        "type": "string"
+                    },
+                    "insuranceRenewalDate": {
+                        "type": "date"
+                    },
+                    "currentLocation": {
+                        "type": "string"
+                    },
+                    "currentOwner": {
+                        "type": "string"
+                    },
+                    "conditionCheckReasons": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "conditionCheckReason": {
+                                    "default": "",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "fieldCollectionNumber": {
+                        "type": "string"
+                    },
+                    "locationDate": {
+                        "type": "date"
+                    },
+                    "conditionCheckMethods": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "conditionCheckMethod": {
+                                    "default": "",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "fieldCollectionPlace": {
+                        "type": "string"
+                    },
+                    "depositor": {
+                        "type": "string"
+                    },
+                    "fieldCollectionDate": {
+                        "type": "date"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "type": "object"
+    }
+}

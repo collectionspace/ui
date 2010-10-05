@@ -1,0 +1,153 @@
+{
+    "person": {
+        "properties": {
+            "relations": {
+                "default": {
+                    
+                },
+                "type": "object"
+            },
+            "csid": {
+                "type": "string"
+            },
+            "fields": {
+                "properties": {
+                    "surName": {
+                        "type": "string"
+                    },
+                    "birthPlace": {
+                        "type": "string"
+                    },
+                    "deathDate": {
+                        "type": "date"
+                    },
+                    "nationalities": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "nationality": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "shortIdentifier": {
+                        "type": "string"
+                    },
+                    "schoolsOrStyles": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "schoolOrStyle": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "title": {
+                        "default": "",
+                        "type": "array"
+                    },
+                    "faxNumber": {
+                        "type": "string"
+                    },
+                    "initials": {
+                        "type": "string"
+                    },
+                    "termStatus": {
+                        "default": "Provisional",
+                        "type": "array"
+                    },
+                    "nameNote": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "gender": {
+                        "default": "",
+                        "type": "array"
+                    },
+                    "birthDate": {
+                        "type": "date"
+                    },
+                    "foreName": {
+                        "type": "string"
+                    },
+                    "groups": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "group": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "nameAdditions": {
+                        "type": "string"
+                    },
+                    "middleName": {
+                        "type": "string"
+                    },
+                    "occupations": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "occupation": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "addressPlace": {
+                        "type": "string"
+                    },
+                    "bioNote": {
+                        "type": "string"
+                    },
+                    "web": {
+                        "type": "string"
+                    },
+                    "addressType": {
+                        "type": "string"
+                    },
+                    "deathPlace": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "telephoneNumber": {
+                        "type": "string"
+                    },
+                    "displayName": {
+                        "type": "string"
+                    },
+                    "salutation": {
+                        "default": "",
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "type": "object"
+    }
+}

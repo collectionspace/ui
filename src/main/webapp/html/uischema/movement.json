@@ -1,0 +1,77 @@
+{
+    "movement": {
+        "properties": {
+            "relations": {
+                "default": {
+                    
+                },
+                "type": "object"
+            },
+            "termsUsed": {
+                "default": [
+                    
+                ],
+                "type": "array"
+            },
+            "csid": {
+                "type": "string"
+            },
+            "fields": {
+                "properties": {
+                    "normalLocation": {
+                        "type": "string"
+                    },
+                    "movementContact": {
+                        "type": "string"
+                    },
+                    "movementReferenceNumber": {
+                        "type": "string"
+                    },
+                    "currentLocationFitness": {
+                        "default": "",
+                        "type": "array"
+                    },
+                    "removalDate": {
+                        "type": "date"
+                    },
+                    "locationDate": {
+                        "type": "date"
+                    },
+                    "plannedRemovalDate": {
+                        "type": "date"
+                    },
+                    "movementMethods": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "movementMethod": {
+                                    "default": "",
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "movementNote": {
+                        "type": "string"
+                    },
+                    "reasonForMove": {
+                        "default": "",
+                        "type": "array"
+                    },
+                    "currentLocation": {
+                        "type": "string"
+                    },
+                    "currentLocationNote": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "type": "object"
+    }
+}

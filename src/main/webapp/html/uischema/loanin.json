@@ -1,0 +1,67 @@
+{
+    "loanin": {
+        "properties": {
+            "relations": {
+                "default": {
+                    
+                },
+                "type": "object"
+            },
+            "termsUsed": {
+                "default": [
+                    
+                ],
+                "type": "array"
+            },
+            "csid": {
+                "type": "string"
+            },
+            "fields": {
+                "properties": {
+                    "loanInNumber": {
+                        "type": "string"
+                    },
+                    "lendersAuthorizer": {
+                        "type": "string"
+                    },
+                    "loanInNote": {
+                        "type": "string"
+                    },
+                    "loanPurpose": {
+                        "default": "Exhibition",
+                        "type": "array"
+                    },
+                    "loanRenewalApplicationDate": {
+                        "type": "date"
+                    },
+                    "borrowersAuthorizer": {
+                        "type": "string"
+                    },
+                    "loanInDate": {
+                        "type": "date"
+                    },
+                    "loanInContact": {
+                        "type": "string"
+                    },
+                    "loanInConditions": {
+                        "type": "string"
+                    },
+                    "lendersContact": {
+                        "type": "string"
+                    },
+                    "loanReturnDate": {
+                        "type": "date"
+                    },
+                    "lendersAuthorizationDate": {
+                        "type": "date"
+                    },
+                    "lender": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "type": "object"
+    }
+}

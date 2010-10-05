@@ -1,0 +1,39 @@
+{
+    "role": {
+        "properties": {
+            "csid": {
+                "type": "string"
+            },
+            "fields": {
+                "properties": {
+                    "roleGroup": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "permissions": {
+                        "items": {
+                            "properties": {
+                                "permission": {
+                                    "default": "delete",
+                                    "type": "array"
+                                },
+                                "resourceName": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "roleName": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "type": "object"
+    }
+}
