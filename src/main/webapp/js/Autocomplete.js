@@ -338,7 +338,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container.position({
                 my: "left top",
                 at: "left bottom",
-                of: that.options.inputField
+                of: that.options.inputField,
+                collision: "none"
             });
             cspace.util.globalDismissal(union, function() {
                 that.close();
