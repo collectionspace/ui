@@ -36,7 +36,7 @@ cspace = cspace || {};
             that.close();
         });
         that.locate("proceed", that.dlg).click(function (e) {
-            that.options.successHandler(that)();
+            that.successHandler();
         });
         that.locate("act", that.dlg).click(function (e) {
             that.options.action();
@@ -117,10 +117,9 @@ cspace = cspace || {};
 
     cspace.confirmation = function (container, options) {
         var that = fluid.initView("cspace.confirmation", container, options);
-        that.model = {href: "#"};   // destination to nav to on successful navigation
         
         that.updateEventListeners = function (action) {
-            updateHandlerForEvents(action, that.options.actionSuccessEvents, that.options.successHandler(that), "successHandler");
+            updateHandlerForEvents(action, that.options.actionSuccessEvents, that.successHandler, "successHandler");
             updateHandlerForEvents(action, that.options.actionErrorEvents, that.close, "errorHandler");
         };
         
@@ -136,8 +135,8 @@ cspace = cspace || {};
             that.dlg.dialog("close");
             that.updateEventListeners("remove");
         };
-        that.open = function (targetHref) {
-            that.model.href = targetHref;
+        that.open = function (successHandlerCreator, options) {
+            that.successHandler = (successHandlerCreator || that.options.successHandlerCreator)(that, options);
             that.updateEventListeners("add");
             that.dlg.dialog("open");
         };
@@ -146,15 +145,25 @@ cspace = cspace || {};
         return that;
     };
     
-    cspace.confirmation.provideSuccessHandler = function (confirmation) {
+    cspace.confirmation.defaultSuccessHandlerCreator = function (confirmation, options) {
+        var that = fluid.initLittleComponent("cspace.confirmation.defaultSuccessHandler", options);
         return function () {
-            confirmation.updateEventListeners("remove");
-            window.location = confirmation.model.href;
+            if (!that.options.href) {
+                confirmation.close();
+            }
+            else {
+                confirmation.updateEventListeners("remove");
+                window.location = that.options.href;
+            }
         };
     };
     
+    fluid.defaults("cspace.confirmation.defaultSuccessHandler", {
+        href: "#"
+    });
+    
     fluid.defaults("cspace.confirmation", {
-        successHandler: cspace.confirmation.provideSuccessHandler,
+        successHandlerCreator: cspace.confirmation.defaultSuccessHandlerCreator,
         selectors: {
             cancel: ".csc-confirmationDialogButton-cancel",
             proceed: ".csc-confirmationDialogButton-proceed",

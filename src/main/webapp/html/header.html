@@ -1,12 +1,14 @@
 <div id="header-menu" class="csc-header-template">
     <div class="header-menu-logo"><a href="createnew.html" title="CollectionSpace Create New">CollectionSpace</a></div>
     <div class="header-menu-right">
-        <form action="../../chain/logout">
-        <div class="header-menu-logout"><input type="submit" class="logout" value="Sign out"/></div>
+        <form action="../../chain/logout" class="csc-header-logout-form">
+            <div class="header-menu-logout">
+                <input type="submit" class="logout" value="Sign out"/>
+            </div>
         </form>
         <div class="clear"></div>
         <div class="header-menu-search">
-            <form action="findedit.html">
+            <form action="findedit.html" class="csc-header-search-form">
                 <select name="recordtype" class="csc-global-search-record-type input-select">
                     <option value="objects">Cataloging</option>
                     <option value="intake">Intake</option>
