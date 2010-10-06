@@ -120,19 +120,15 @@ cspace = cspace || {};
         $.extend(true, that.options.list.options, {
             onSelectHandler: function (model, rows, events, styles, newIndex) {
                 if (that.details.unsavedChanges) {
-                    // We save the oldSuccessHandler and then put it back in place once the event is triggered in 
-                    // order to keep the defualt functionality enabled. 
-                    var oldSuccessHandler = that.details.confirmation.options.successHandler; 
-                    that.details.confirmation.options.successHandler = function (confirmation) {
+                    that.details.confirmation.open(function (confirmation) {
                         return function () {
                             confirmation.updateEventListeners("remove");                            
                             confirmation.dlg.dialog("close");
-                            confirmation.options.successHandler = oldSuccessHandler;
                             that.details.unsavedChanges = false;
                             cspace.recordList.onSelectHandlerDefault(model, rows, events, styles, newIndex);
                         };
-                    };
-                    that.details.showConfirmation();
+                    });
+                    return false;
                 }
                 else {
                     cspace.recordList.onSelectHandlerDefault(model, rows, events, styles, newIndex);

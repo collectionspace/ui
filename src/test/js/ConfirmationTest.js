@@ -38,23 +38,30 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         cspace.util.isTest = true;
         testOpts = {};
         fluid.model.copyModel(testOpts, baseTestOpts);
-    });  
+    });
+    
+    var sampleSuccessHandlerCreator = function (conf, options) {
+        return function () {
+            return options.href;
+        };
+    };
     
     confirmationTests.test("Confirmation creation", function () {
         expect(9);
         var confirmation;
-               
+        testOpts.successHandlerCreator = sampleSuccessHandlerCreator;
         testOpts.listeners = {
             afterRender: function () {
                 var expectedDefaultHREF = "#";
                 jqUnit.assertTrue("dialog is on the page", jQuery(".csc-confirmationDialog").length !== 0);
                 jqUnit.notVisible("dialog is not visible", jQuery(".csc-confirmationDialog"));
-                jqUnit.assertTrue("href is expected string", confirmation.model.href === expectedDefaultHREF);
+                confirmation.successHandler = confirmation.options.successHandlerCreator(confirmation, {href: expectedDefaultHREF});
+                jqUnit.assertEquals("href is expected string", expectedDefaultHREF, confirmation.successHandler());
 
                 var expectedHREF = "";
-                confirmation.open(expectedHREF);
+                confirmation.open(sampleSuccessHandlerCreator, {href: expectedHREF});
                 jqUnit.isVisible("dialog is visible", jQuery(".csc-confirmationDialog"));
-                jqUnit.assertTrue("href is expected string", confirmation.model.href === expectedHREF);
+                jqUnit.assertEquals("href is expected string", expectedHREF, confirmation.successHandler());
                 jqUnit.assertTrue("Default button style should be added to cancel", jQuery(".csc-confirmationDialogButton-cancel").hasClass("cs-confirmationDialogButton-cancel"));
                 jqUnit.assertTrue("Default button style should be added to proceed", jQuery(".csc-confirmationDialogButton-proceed").hasClass("cs-confirmationDialogButton-proceed"));
                 jqUnit.assertTrue("Default button style should be added to act", jQuery(".csc-confirmationDialogButton-act").hasClass("cs-confirmationDialogButton-act"));

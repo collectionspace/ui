@@ -77,6 +77,18 @@ cspace = cspace || {};
     var bindEventHandlers = function (that) {
         $(that.options.selectors.confirmationInclude).live("click", 
             confirmationTriggerMaker(that.options.selectors.confirmationExclude, that.showConfirmation));
+        
+        $(that.options.selectors.forms).submit(function (event) {
+            var form = $(this);
+            if (that.unsavedChanges) {
+                that.confirmation.open(function (confirmation) {
+                    return function () {
+                        form[0].submit();
+                    };
+                });
+                return false;
+            }
+        });
 
         that.events.onSave.addListener(validateIdentificationNumber(that.dom, that.container, that.options.strings.identificationNumberRequired));
 
@@ -216,17 +228,6 @@ cspace = cspace || {};
                     that.options.dataContext.remove(that.model.csid);
                 },
                 actionSuccessEvents: [that.options.dataContext.events.afterRemove, that.confirmation.events.afterClose],
-                successHandler: function (confirmation) {
-                    return function () {
-                        if (confirmation.dlg.dialog("isOpen")) {
-                            confirmation.close();                            
-                        }
-                        else {
-                            confirmation.options = oldOptions;
-                            confirmation.refreshView();
-                        }
-                    };
-                },
                 enableButtons: ["act", "cancel"],
                 strings: {
                     primaryMessage: "Delete this record?",
@@ -236,7 +237,17 @@ cspace = cspace || {};
                 }
             });
             that.confirmation.refreshView();
-            that.confirmation.open();
+            that.confirmation.open(function (confirmation) {
+                return function () {
+                    if (confirmation.dlg.dialog("isOpen")) {
+                        confirmation.close();                            
+                    }
+                    else {
+                        confirmation.options = oldOptions;
+                        confirmation.refreshView();
+                    }
+                };
+            });
         };
         
         that.confirmation = fluid.initSubcomponent(that, "confirmation", [
@@ -250,7 +261,9 @@ cspace = cspace || {};
         
         that.showConfirmation = function(href) {
             if (that.unsavedChanges) {
-                that.confirmation.open(href);
+                that.confirmation.open(cspace.confirmation.defaultSuccessHandlerCreator, {
+                    href: href
+                });
                 return false;
             }
         };
@@ -289,8 +302,9 @@ cspace = cspace || {};
             timestamp: ".csc-timestamp",
             relatedRecords: ".csc-related-records",
             requiredFields: ".csc-required:visible",
-            confirmationInclude: "a, .csc-global-search-submit, .logout",
-            confirmationExclude: "[href*=#], .csc-confirmation-exclusion, .ui-autocomplete a"
+            confirmationInclude: "a",
+            confirmationExclude: "[href*=#], .csc-confirmation-exclusion, .ui-autocomplete a",
+            forms: ".csc-header-logout-form, .csc-header-search-form"
         },
         strings: {
             specFetchError: "I'm sorry, an error has occurred fetching the UISpec: ",
