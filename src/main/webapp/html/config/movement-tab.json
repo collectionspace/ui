@@ -41,7 +41,7 @@
                                 "recordType": "movement",
                                 "dataSource": {
                                     "options": {
-                                        "uispec": "{pageBuilder}.uispec.details" 
+                                        "schema": "{pageBuilder}.schema" 
                                     }
                                 }
                             }

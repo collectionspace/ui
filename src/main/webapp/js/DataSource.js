@@ -154,7 +154,6 @@ cspace = cspace || {};
         baseUrl: "../../chain", // Url that will be put in the base path when building main record's fetch url.
         fileExtension: "",
         schema: null, // Schema that will fill the model if necessary.
-        uispec: null, // If there is no schema and no existing model, uispec will be used to build an empty model. TODO: this will go away when schema is everywhere
         sources: null // Structure that describes all additional resources that will be merged with the base model.
     });
     

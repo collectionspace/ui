@@ -41,7 +41,7 @@
                                 "recordType": "objects",
                                 "dataSource": {
                                     "options": {
-                                        "uispec": "{pageBuilder}.uispec.details" 
+                                        "schema": "{pageBuilder}.schema" 
                                     } 
                                 } 
                             } 
