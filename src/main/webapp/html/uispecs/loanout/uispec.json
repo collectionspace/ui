@@ -182,6 +182,43 @@
                     }
                 }
             ]
+        },
+        ".csc-loanOut-loanedObjectStatusNote": "${fields.loanedObjectStatusNote}",
+        ".csc-loanOut-loanedObjectStatusDate": "${fields.loanedObjectStatusDate}",
+        ".csc-loanOut-loanedObjectStatus": {
+            "optionnames": [
+                "Please select a value",
+                "Sent",
+                "Agreed",
+                "Refused",
+                "Renewed",
+                "Requested",
+                "Conservation",
+                "Photography requested",
+                "Authorized",
+                "Returned" 
+            ],
+            "optionlist": [
+                "",
+                "sent",
+                "agreed",
+                "refused",
+                "renewed",
+                "requested",
+                "conservation",
+                "photographyrequested",
+                "authorized",
+                "returned" 
+            ],
+            "selection": "${fields.loanedObjectStatus}" 
+        },
+        ".csc-loanOut-loanedObjectStatusDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid" 
+                } 
+            ] 
         }
     }
 }
