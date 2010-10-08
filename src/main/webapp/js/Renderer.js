@@ -133,6 +133,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         expander: function (uispec, that) {
             var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}", model: that.model});
             var protoTree = cspace.renderUtils.buildProtoTree(uispec, that);
+            // TODO: Both correctDoubleValueBinding(protoTree) and expander(protoTree) corrupt the model and the applier in 
+            // decorator options for repeatable and thus repeatable has a different model and applier.
             protoTree = correctDoubleValueBinding(protoTree);
             var tree = expander(protoTree);
             return tree;

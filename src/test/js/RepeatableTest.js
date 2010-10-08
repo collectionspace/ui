@@ -269,7 +269,7 @@ var repeatableTester = function ($) {
         expect(7);
         var myRepeatable = basicSetup({text: "thyme"});  
         var field = $(".cst-simpleTestField", myRepeatable.container);
-        var expectedModel = {myText: "oregano"};
+        var expectedModel = {myText: "oregano", _primary: true};
         
         jqUnit.assertEquals("Model is of lenth 1 initially", 1, fluid.model.getBeanValue(myRepeatable.model, myRepeatable.options.elPath).length);
         jqUnit.assertEquals("Initially, value matched model", "thyme", field.val());
@@ -575,7 +575,26 @@ var repeatableTester = function ($) {
         var myRepeatable = cspace.makeRepeatable(".csc-repeatable-li", options);
         jqUnit.assertTrue("Newly prepared model should have a set primary field", myRepeatable.model.myTexts[0]._primary);
     });
-
+    
+    repeatableTest.test("Can not have less than one repeatable row", function () {
+        expect(6);
+        var myRepeatable = basicSetup({model: {
+            myTexts: [{
+                myText: "cat",
+                _primary: true
+            }]
+        }});
+        var add = myRepeatable.locate("add");
+        var firstRemove = myRepeatable.locate("remove").eq(0);
+        jqUnit.assertEquals("Initally the number of repeatable rows is equal to", 1, myRepeatable.locate("repeat").length);
+        jqUnit.assertTrue("Delete input must me disabled for the list of size one", firstRemove.is(":disabled"));
+        add.click();
+        jqUnit.assertEquals("After adding a row, # of repeatable rows is equal to", 2, myRepeatable.locate("repeat").length);
+        jqUnit.assertTrue("Delete input must me enabled for the list of size bigger than one", firstRemove.is(":not(:disabled)"));
+        firstRemove.click();
+        jqUnit.assertEquals("The number of repeatable rows should again be equal to", 1, myRepeatable.locate("repeat").length);
+        jqUnit.assertTrue("Delete input must me disabled again for the list of size one", myRepeatable.locate("remove").eq(0).is(":disabled"));
+    });
 };
 
 (function () {

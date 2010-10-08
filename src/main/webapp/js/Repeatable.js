@@ -34,16 +34,11 @@ cspace = cspace || {};
     };
             
     var deleteRow = function (fields, index) {
-        if (fields.length > 1) {
-            if (fields[index]._primary === true) {
-                var sucIndex = index === 0 ? 1 : index - 1;
-                fields[sucIndex]._primary = true;
-            }
-            fields.splice(index, 1);
-        } else {
-            // TODO: here we should clear the field
+        if (fields[index]._primary === true) {
+            var sucIndex = index === 0 ? 1 : index - 1;
+            fields[sucIndex]._primary = true;
         }
-        
+        fields.splice(index, 1);
         return fields;
     };
 
@@ -69,13 +64,17 @@ cspace = cspace || {};
         var elPath = that.options.elPath;
         that.applier.requestChange(elPath, callback(that.fetchModel(), index));
     };
+    
+    var processDeleteInput = function (input, model) {
+        input.attr("disabled", model.length > 1 ? "" : "disabled");
+    };
 
     var bindEventHandlers = function (that) {        
         var elPath = that.options.elPath;
         
         // Waiting to ensure that the change request went through before changing the model.
         // Also fires when fields get modified.
-        that.applier.modelChanged.addListener(elPath, function (model) {             
+        that.applier.modelChanged.addListener(elPath, function (model) {
             fluid.model.setBeanValue(that.model, elPath, that.fetchModel(model));
         });
         
@@ -89,13 +88,25 @@ cspace = cspace || {};
         });
         
         that.container.delegate("click", that.options.selectors.remove, function () {
+            // TODO: This functionality should be available on the public API for repeatable instead of hiding it away in an event handler.
+            if (that.fetchModel().length < 2) {
+                return false;
+            }
+            
             var index = that.locate("remove").index(this);
             requestChange(that, deleteRow, index);
             var repeats = that.locate("repeat");
             $(repeats[index]).remove();
+            setupPrimary(that.locate("primary"), that.fetchModel());
             //that.refreshView();
             that.events.afterRender.fire(); // the test cases rely on this, though no user would
             that.events.afterDelete.fire();
+        });
+        
+        $.each(["Delete", "Add"], function (i, event) {
+            that.events["after" + event].addListener(function () {
+                processDeleteInput(that.locate("remove").eq(0), that.fetchModel());
+            });
         });
 
         that.container.delegate("click", that.options.selectors.primary, function () {
@@ -149,14 +160,17 @@ cspace = cspace || {};
     // TODO: Make most of this code go away by supporting "offset models" in the applier
     var prepareModel = function (model, elPath, applier) {
         var list = fluid.model.getBeanValue(model, elPath);
-        if (!list || list.length === 0) {
-            list = addRow([]);
-            list[0] = {
-                _primary: true
-            };
-            applier.requestChange(elPath, list);
-            fluid.model.setBeanValue(model, elPath, list);
+        if (list && list.length > 1) {
+            return;
         }
+        if (list && list.length > 0 && list[0]._primary) {
+            return;
+        }
+        list = list && list.length > 0 ? list : addRow([]);
+        fluid.merge(null, list[0], {
+            _primary: true
+        });
+        applier.requestChange(elPath, list);
     };
 
     var addColumnsToHeader = function (headerRow) {
@@ -195,6 +209,12 @@ cspace = cspace || {};
         
     };
     
+    var setupRepeatable = function (that) {
+        that.refreshView();
+        processDeleteInput(that.locate("remove").eq(0), that.fetchModel());
+        bindEventHandlers(that);
+    };
+    
     /**
      * Repeatable is a markup generating component. If it does not find things in the markup that are specified 
      * in the default selectors, it generates nodes appropriately and puts the default selector classes into the markup.
@@ -223,9 +243,9 @@ cspace = cspace || {};
             var model = model || that.model;
             return fluid.model.getBeanValue(model, that.options.elPath);
         };
+        
+        setupRepeatable(that);
 
-        that.refreshView();
-        bindEventHandlers(that);        
         return that;
     };
     
