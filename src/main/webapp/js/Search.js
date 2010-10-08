@@ -127,7 +127,7 @@ cspace = cspace || {};
             }
             var dataRequired = false;
             var limit = fluid.pager.computePageLimit(newModel);
-            for (var i = newModel.pageSize * newModel.pageNum; i < limit; ++ i) {
+            for (var i = newModel.pageSize * newModel.pageIndex; i < limit; ++ i) {
                 if (!directModel[i]) {
                     dataRequired = true;
                     break;
@@ -186,7 +186,7 @@ cspace = cspace || {};
     var applyResults = function(that, data) {
         var searchModel = that.model.searchModel;
         var results = that.model.results;
-        var offset = searchModel.pageNum * searchModel.pageSize;
+        var offset = searchModel.pageIndex * searchModel.pageSize;
 
         fluid.model.copyModel(that.model.pagination, data.pagination);
 
@@ -211,7 +211,7 @@ cspace = cspace || {};
             var searchModel = that.model.searchModel;
             var pagerModel = newPagerModel || that.resultsPager.model;
             searchModel.pageSize = pagerModel.pageSize;
-            searchModel.pageNum = pagerModel.pageIndex;
+            searchModel.pageIndex = pagerModel.pageIndex;
             var url = that.options.searchUrlBuilder(that.model.searchModel);
             var oldSearchModel = $.extend(true, {}, that.model.searchModel);
             that.events.onSearch.fire();
@@ -276,8 +276,8 @@ cspace = cspace || {};
     cspace.search.defaultSearchUrlBuilder = function (options) {
         var recordTypeParts = options.recordTypeLong.split('-');        
         var sofar = "../../chain/" + recordTypeParts.join('/') + "/search?query=" + options.keywords;
-        if (options.pageSize !== undefined && options.pageNum !== undefined) {
-            sofar += "&pageNum=" + options.pageNum + "&pageSize=" + options.pageSize;
+        if (options.pageSize !== undefined && options.pageIndex !== undefined) {
+            sofar += "&pageNum=" + options.pageIndex + "&pageSize=" + options.pageSize;
         }
         return sofar;
     };
