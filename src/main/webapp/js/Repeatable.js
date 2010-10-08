@@ -81,9 +81,9 @@ cspace = cspace || {};
         // Make a change request to add an extra row.
         that.container.delegate("click", that.options.selectors.add, function () {
             requestChange(that, addRow);
-            //that.refreshView();
-            renderFinalRow(that);
-            that.events.afterRender.fire();
+            that.refreshView();
+//            renderFinalRow(that);
+//            that.events.afterRender.fire();
             that.events.afterAdd.fire();
         });
         
@@ -95,11 +95,11 @@ cspace = cspace || {};
             
             var index = that.locate("remove").index(this);
             requestChange(that, deleteRow, index);
-            var repeats = that.locate("repeat");
-            $(repeats[index]).remove();
-            setupPrimary(that.locate("primary"), that.fetchModel());
-            //that.refreshView();
-            that.events.afterRender.fire(); // the test cases rely on this, though no user would
+//            var repeats = that.locate("repeat");
+//            $(repeats[index]).remove();
+//            setupPrimary(that.locate("primary"), that.fetchModel());
+            that.refreshView();
+//            that.events.afterRender.fire(); // the test cases rely on this, though no user would
             that.events.afterDelete.fire();
         });
         
