@@ -585,13 +585,12 @@ var repeatableTester = function ($) {
             }]
         }});
         var add = myRepeatable.locate("add");
-        var firstRemove = myRepeatable.locate("remove").eq(0);
         jqUnit.assertEquals("Initally the number of repeatable rows is equal to", 1, myRepeatable.locate("repeat").length);
-        jqUnit.assertTrue("Delete input must me disabled for the list of size one", firstRemove.is(":disabled"));
+        jqUnit.assertTrue("Delete input must me disabled for the list of size one", myRepeatable.locate("remove").eq(0).is(":disabled"));
         add.click();
         jqUnit.assertEquals("After adding a row, # of repeatable rows is equal to", 2, myRepeatable.locate("repeat").length);
-        jqUnit.assertTrue("Delete input must me enabled for the list of size bigger than one", firstRemove.is(":not(:disabled)"));
-        firstRemove.click();
+        jqUnit.assertTrue("Delete input must me enabled for the list of size bigger than one", myRepeatable.locate("remove").eq(0).is(":not(:disabled)"));
+        myRepeatable.locate("remove").eq(0).click();
         jqUnit.assertEquals("The number of repeatable rows should again be equal to", 1, myRepeatable.locate("repeat").length);
         jqUnit.assertTrue("Delete input must me disabled again for the list of size one", myRepeatable.locate("remove").eq(0).is(":disabled"));
     });
