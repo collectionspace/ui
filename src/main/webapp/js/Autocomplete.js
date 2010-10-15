@@ -350,9 +350,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             cspace.util.globalDismissal(union);
             that.container.dialog("close");
             that.container.html("");
-            that.options.inputField.focus();
         };
         
+        that.closeWithFocus = function () {
+            that.close();
+            that.options.inputField.focus();
+        }
 
         function makeHighlighter(funcName) {
             return function(item) {
@@ -381,8 +384,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // old value.
         union.keyup(that.escapeHandler); 
         
-        that.events.selectAuthority.addListener(that.close);
-        that.events.selectMatch.addListener(that.close);
+        that.events.selectAuthority.addListener(that.closeWithFocus);
+        that.events.selectMatch.addListener(that.closeWithFocus);
         
         fluid.initDependents(that);
         
@@ -514,7 +517,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                        updateAuthoritatively(that, blankRec);
                    }
                    buttonAdjustor();
-                   that.popup.close();
+                   that.popup.closeWithFocus();
                 }
             });
         
@@ -538,7 +541,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             function() {
                 updateAuthoritatively(that, that.model.baseRecord);
                 buttonAdjustor();
-                that.popup.close();              
+                that.popup.closeWithFocus();              
             });
 
         // TODO: risk of asynchrony
@@ -550,11 +553,32 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             that.events.revertState.fire();
             return false;
         });
+        
+        cspace.autocomplete.deadMansBlur(that.autocompleteInput, that.popup.container, function () {
+            updateAuthoritatively(that, that.model.baseRecord);
+            buttonAdjustor();
+            that.popup.close();
+        });
 
         return that;
     };
     
-
+    cspace.autocomplete.deadMansBlur = function (control, exclusions, handler) {
+        var blurPending = false;
+        $(control).blur(function () {
+            blurPending = true;
+            setTimeout(function () {
+                if (blurPending) {
+                    handler(control);
+                }
+            }, 150);
+        });
+        var canceller = function () {
+            blurPending = false; 
+        };
+        exclusions.focusin(canceller);
+        exclusions.click(canceller);
+    };
 
     fluid.demands("fluid.autocomplete.autocompleteView", "cspace.autocomplete", 
       ["{autocomplete}.autocompleteInput", fluid.COMPONENT_OPTIONS]);

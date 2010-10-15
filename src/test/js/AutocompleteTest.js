@@ -116,4 +116,71 @@ fluid.demands("cspace.specBuilderImpl", "cspace.test", {
     submitTest("Choose match interaction with mouse item click", makeArgumentedTest(chooseMatchInteraction, clickMatch));
     submitTest("Choose match interaction with ENTER key", makeArgumentedTest(chooseMatchInteraction, enterMatch));
     
+    var focusBlurable = function (autocomplete) {
+        autocomplete.autocompleteInput.blur();
+        $("#blurable").focus();
+    };
+    
+    var focusMatch = function (autocomplete) {
+        var popup = autocomplete.popup;
+        popup.dom.locate("matchItem").focus();        
+    };
+    
+    var assertPopupOpen = function (autocomplete, state) {
+        jqUnit.assertEquals("Popup open: " + state, state, autocomplete.popup.container.html() !== "");
+    };
+    
+    var assertInputFocused = function (autocomplete, state) {
+        jqUnit.assertEquals("Input focus: " + state, state, document.activeElement === autocomplete.autocompleteInput[0]);
+    };
+    
+    var assertInput = function (autocomplete, value) {
+        jqUnit.assertEquals("Input", value, autocomplete.autocompleteInput.val());
+    };
+    
+    function clickAuthority(autocomplete) {
+        var popup = autocomplete.popup;
+        popup.dom.locate("authorityItem").eq(0).click();        
+    }
+    
+    var dmbInteraction = function (container, focusFunc, popupOpen, inputFocus, originalValue) {
+        expect(6);
+        var autocomplete = cspace.autocomplete(container);
+        var input = autocomplete.autocompleteInput;
+        autocomplete.autocomplete.events.onSearchDone.addListener(function() {
+            assertPopupOpen(autocomplete, true);
+            assertInputFocused(autocomplete, true);
+            focusFunc(autocomplete);
+            // NOTE: Waiting for 150ms that are equivalent to the timeout insidet the dead man's blur, 
+            // in order to verify that the handler fired or was prevented with exclusion. 
+            setTimeout(function () {
+                assertPopupOpen(autocomplete, popupOpen);
+                assertInputFocused(autocomplete, inputFocus);
+                assertInput(autocomplete, originalValue);
+                jqUnit.assertEquals("Model is consistent", autocomplete.model.term, originalValue);
+                start();
+            }, 150);
+        });
+        input.keydown();
+        input.val("karen");
+        input.focus();
+        stop();
+    };
+    
+    var dmbInteractionClick = function (container, focusFunc) {
+        dmbInteraction(container, focusFunc, false, true, "karen");
+    };
+    
+    var dmbInteractionBlur = function (container, focusFunc) {
+        dmbInteraction(container, focusFunc, false, false, "");
+    };
+    
+    var dmbInteractionExclude = function (container, focusFunc) {
+        dmbInteraction(container, focusFunc, true, false, "karen");
+    };
+    
+    submitTest("Test DMB interaction when click", makeArgumentedTest(dmbInteractionClick, clickAuthority));
+    submitTest("Test DMB interaction when blur should fire", makeArgumentedTest(dmbInteractionBlur, focusBlurable));
+    submitTest("Test DMB interaction with exclusion", makeArgumentedTest(dmbInteractionExclude, focusMatch));
+    
 })(jQuery);
