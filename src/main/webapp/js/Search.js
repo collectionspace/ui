@@ -161,12 +161,12 @@ cspace = cspace || {};
             // It is a bit dangerous to use the 'onModelChange' event of pager 
             // because it doesn't assure us that pager rendering is complete
             // but pager does not give us a more suitable event to listen to
-            that.resultsPager.events.onModelChange.addListener(function () {
+            that.resultsPager.events.onModelChange.addListener(function (newModel, oldModel) {
                 that.locate("resultsRow").click(function (event) {
                     var row = $(event.currentTarget);
                     var rows = that.locate("resultsRow");
                     var index = rows.index(row);
-                    var record = that.model.results[index];
+                    var record = that.model.results[newModel.pageSize * newModel.pageIndex + index];
                     if (!record) {
                         return;
                     }
