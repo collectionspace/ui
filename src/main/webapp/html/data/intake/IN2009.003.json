@@ -78,9 +78,19 @@
                 "_primary": true 
             }
         ],
-        "currentLocation": "upstairs",
-        "currentLocationFitness": "perfect",
-        "currentLocationNote": "do not look at or breath on",
+        "currentLocationGroup": [
+            {
+                "_primary": true,
+                "currentLocationFitness": "dangerous",
+                "currentLocation": "downstairs",
+                "currentLocationNote": "in a darkly-lit place"
+            },
+            {
+                "currentLocationFitness": "perfect",
+                "currentLocation": "upstairs",
+                "currentLocationNote": "do not look at or breathe on"
+            }
+        ],
         "locationDate": "Jan 1, 1900",
         "normalLocation": "foot rest",
         "conditionCheckDate": "Jan 1, 1922",
