@@ -79,7 +79,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 
         var testUpdateOpts = {
             baseUrl: "test-data",
-            recordType: "objects",
+            recordType: "cataloging",
             fileExtension: ".json",
             listeners: {
                 afterUpdate: function (data) {
@@ -91,7 +91,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     startIfDone(2);
                 },
                 onError: function (operation, message) {
-                    ok(false, "Error function shouldn't be called after successful update");
+                    ok(false, "Error function shouldn't be called after successful update"+message);
                     start();
                 }
             }
@@ -146,7 +146,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         };
         var testFetchOpts = {
             baseUrl: "test-data",
-            recordType: "objects",
+            recordType: "cataloging",
             fileExtension: ".json", 
             listeners: {
                 afterFetch: function (data) {

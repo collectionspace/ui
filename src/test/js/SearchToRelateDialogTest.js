@@ -63,7 +63,7 @@ var searchToRelateDialogTester = function () {
         stop();
     };
 
-    searchToRelateDialogTest.test("Creation for particular record type (objects, relating to acquisition)", function () {
+    searchToRelateDialogTest.test("Creation for particular record type (cataloging, relating to acquisition)", function () {
         createSearchToRelate("acquisition", "objects", {
             afterRender: function () {
                 // 1) The dialog should render

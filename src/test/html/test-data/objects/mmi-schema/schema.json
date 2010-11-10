@@ -25,7 +25,7 @@
         "decorators": []
     },
     "numberOfObjects": {
-        "selector": ".csc-num-objects .info-value",
+        "selector": ".csc-num-cataloging .info-value",
         "validators": [],
         "decorators": []
     },

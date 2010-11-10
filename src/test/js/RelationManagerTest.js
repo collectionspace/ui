@@ -24,7 +24,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         target: {
             csid: "987.654",
-            recordtype: "objects"
+            recordtype: "cataloging"
         },
         type: "affects",
         "one-way": true
@@ -34,7 +34,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         },
         target: {
             csid: "741.852",
-            recordtype: "objects"
+            recordtype: "cataloging"
         },
         type: "affects",
         "one-way": true
@@ -42,11 +42,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     var expectedRelations = [{
         "csid": "987.654",
         "relationshiptype": "affects",
-        "recordtype": "objects"
+        "recordtype": "cataloging"
     }, {
         "csid": "741.852",
         "relationshiptype": "affects",
-        "recordtype": "objects"
+        "recordtype": "cataloging"
     }];
     
     var relationManagerTest = new jqUnit.TestCase("RelationManager Tests", function () {
@@ -81,10 +81,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     relationManagerTest.test("Initialization", function () {
-        createRelationManager({}, "objects", "objects");
+        createRelationManager({}, "cataloging", "cataloging");
         jqUnit.assertValue("Relation Manager's data context initialized", relationManager.options.dataContext);
         jqUnit.assertDeepEq("Applier is properly initalized", applier, relationManager.options.applier);
-        jqUnit.assertDeepEq("Applier is properly initalized", "objects", relationManager.options.related);
+        jqUnit.assertDeepEq("Applier is properly initalized", "cataloging", relationManager.options.related);
     });
     
     var relationDialogSetup = function (callback, primery, related, model) {
@@ -111,7 +111,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             jqUnit.isVisible("Error message is visible", message);
             jqUnit.assertEquals("Object should be saved first", relationManager.options.strings.pleaseSaveFirst, message.text());
             start();
-        }, "objects", "objects");
+        }, "cataloging", "cataloging");
     });
     
     relationManagerTest.test("Add Relation Dialog, for specific record type", function () {
@@ -122,12 +122,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             var message = relationManager.locate("feedbackMessage");
             jqUnit.notVisible("Error message is invisible", message);
             jqUnit.isVisible("After clicking Add, Add Relation Dialog is visible", relationManager.searchToRelateDialog.dlg);
-            jqUnit.assertEquals("Dialog should have correct primary record type", "objects", relationManager.searchToRelateDialog.options.primary);
+            jqUnit.assertEquals("Dialog should have correct primary record type", "cataloging", relationManager.searchToRelateDialog.options.primary);
             jqUnit.notVisible("Record-type drop-down is not visible (search should be limited to 'loanin' records)", relationManager.searchToRelateDialog.options.selectors.recordTypeSelector);
             jqUnit.assertEquals("Dialog is set up to search for correct related record type", "loanin", $(relationManager.searchToRelateDialog.search.options.selectors.recordType).val());
             relationManager.searchToRelateDialog.dlg.dialog("close");
             start();
-        }, "objects", "loanin");
+        }, "cataloging", "loanin");
     });
     
     relationManagerTest.test("Add Relation Dialog, for all procedural records (using 'procedures' option)", function () {
@@ -138,17 +138,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             var message = relationManager.locate("feedbackMessage");
             jqUnit.notVisible("Error message is invisible", message);
             jqUnit.isVisible("After clicking Add, Add Relation Dialog is visible", relationManager.searchToRelateDialog.dlg);
-            jqUnit.assertEquals("Dialog should have correct primary record type", "objects", relationManager.searchToRelateDialog.options.primary);
+            jqUnit.assertEquals("Dialog should have correct primary record type", "cataloging", relationManager.searchToRelateDialog.options.primary);
             jqUnit.isVisible("Record-type drop-down is visible", relationManager.searchToRelateDialog.options.selectors.recordTypeSelector);
             relationManager.searchToRelateDialog.dlg.dialog("close");
             jqUnit.notVisible("Search to Relate Dialog is invisible after close", $(".ui-dialog"));
             start();
-        }, "objects", "procedures");
+        }, "cataloging", "procedures");
     });
     
     relationManagerTest.test("Add Relation Dialog, search for particular procedural record type", function () {
         var testRelatedRecordType = "loanin";
-        createRelationManager({}, "objects", "procedures", {
+        createRelationManager({}, "cataloging", "procedures", {
             stopTests: true,
             components: {
                 searchToRelateDialog: {
@@ -187,10 +187,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         createRelationManager({
                 csid: baseCSID,
                 relations: {}
-            }, "objects", "objects");
+            }, "cataloging", "cataloging");
         jqUnit.assertDeepEq("The object has no relations initially", {}, relationManager.model.relations);
         relationManager.addRelations({items: newRelations});
-        jqUnit.assertDeepEq("The object has new relations", expectedRelations, relationManager.model.relations.objects);
+        jqUnit.assertDeepEq("The object has new relations", expectedRelations, relationManager.model.relations.cataloging);
     });
     
     relationManagerTest.test("Add relations to none (through search to relate dialog)", function () {
@@ -202,11 +202,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         applier = fluid.makeChangeApplier(model);
         applier.modelChanged.addListener("relations", function (model, oldModel, changeRequest) {
             jqUnit.assertDeepEq("Listener oldModel paramter should be right", {}, oldModel.relations);
-            jqUnit.assertDeepEq("Listener model paramter should be right", expectedRelations, model.relations.objects);
-            jqUnit.assertDeepEq("The model has been updated with the new relations.", expectedRelations, relationManager.model.relations.objects);
+            jqUnit.assertDeepEq("Listener model paramter should be right", expectedRelations, model.relations.cataloging);
+            jqUnit.assertDeepEq("The model has been updated with the new relations.", expectedRelations, relationManager.model.relations.cataloging);
             start();
         });
-        createRelationManager(model, "objects", "objects", {stopTests: true}, applier);
+        createRelationManager(model, "cataloging", "cataloging", {stopTests: true}, applier);
         jqUnit.assertDeepEq("The object has no relations initially", {}, relationManager.model.relations);
         relationManager.addRelations({items: newRelations});
     });
@@ -226,7 +226,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 start();
             });
             $(relationManager.searchToRelateDialog.options.selectors.createNewButton).click();
-        }, "objects", "acquisition", model);
+        }, "cataloging", "acquisition", model);
     });
     
 })(jQuery, fluid);

@@ -71,7 +71,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 sidebar: {
                     options: {
                         components: {
-                            objects: {
+                			cataloging: {
                                 options: {
                                     components: {
                                         relationManager: {

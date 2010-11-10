@@ -22,7 +22,7 @@ var testSpec =  {
         }
     },
     "modelToResourceMap": {
-        "*": "/objects"
+        "*": "/cataloging"
     }
 };
 var testModel = {

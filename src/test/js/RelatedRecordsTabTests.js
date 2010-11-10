@@ -16,7 +16,7 @@ var relatedRecordsTabTester = function ($) {
     var model, applier, pageBuilder;
 
     $.ajax({
-        url: "../../main/webapp/html/data/objects/1984.068.0338.json",
+        url: "../../main/webapp/html/data/cataloging/1984.068.0338.json",
         async: false,
         dataType: "json",
         success: function (data) {
@@ -31,16 +31,16 @@ var relatedRecordsTabTester = function ($) {
     var relatedRecordsTabTest = new jqUnit.TestCase("Related Records Tab Tests", function () {
         cspace.util.isTest = true;
         relatedRecordsTabTest.fetchTemplate("../../main/webapp/html/tabsTemplate.html", ".csc-tabs-template", $(".template1"));
-        relatedRecordsTabTest.fetchTemplate("../../main/webapp/html/objectTabPlaceholder.html", ".csc-object-tab", $(".template2"));
+        relatedRecordsTabTest.fetchTemplate("../../main/webapp/html/objectTabPlaceholder.html", ".csc-cataloging-tab", $(".template2"));
         fluid.model.copyModel(testApplier, applier);        
     });
 
     var setupTab = function (opts) {
         var testPrimaryType = "intake";
-        var testRelatedType = "objects";
+        var testRelatedType = "cataloging";
         var options = {
-            schemaUrl: "../../main/webapp/html/uischema/objects.json",
-            uispecUrl: "../../main/webapp/html/uispecs/object-tab/uispec.json",
+            schemaUrl: "../../main/webapp/html/uischema/cataloging.json",
+            uispecUrl: "../../main/webapp/html/uispecs/cataloging-tab/uispec.json",
             listeners: {
                 onDependencySetup: function (uispec) {
                     // Change the template URL for the number pattern chooser.
@@ -51,7 +51,7 @@ var relatedRecordsTabTester = function ($) {
             pageSpec: {
                 list: {
                     href: "../../main/webapp/html/objectTabRecordListTemplate.html",
-                    templateSelector: ".csc-object-tab-record-list",
+                    templateSelector: ".csc-cataloging-tab-record-list",
                     targetSelector: ".div-for-list-of-records"
                 },
                 details: {
@@ -62,12 +62,12 @@ var relatedRecordsTabTester = function ($) {
             },
             applier: testApplier,
             model: testApplier.model,
-            pageType: "object-tab"
+            pageType: "cataloging-tab"
         };
         var dependencies = {
             relatedRecordsTab: {
                 funcName: "cspace.relatedRecordsTab",
-                args: [".csc-object-tab", {
+                args: [".csc-cataloging-tab", {
                     primary: testPrimaryType,
                     related: testRelatedType,
                     uispec: "{pageBuilder}.uispec",
@@ -77,7 +77,7 @@ var relatedRecordsTabTester = function ($) {
                         options: {
                             listeners: opts.listEditorListeners,
                             initList: cspace.listEditor.receiveData,
-                            data: testApplier.model.relations.objects,
+                            data: testApplier.model.relations.cataloging,
                             dataContext: {
                                 options: {
                                     recordType: testRelatedType,
@@ -118,7 +118,7 @@ var relatedRecordsTabTester = function ($) {
                                     }
                                 },
                                 primary: "{pageBuilder}.options.primaryRecordType",
-                                related: "objects",
+                                related: "cataloging",
                                 model: "{pageBuilder}.model",
                                 applier: "{pageBuilder}.applier",
                                 components: {
@@ -146,7 +146,7 @@ var relatedRecordsTabTester = function ($) {
                 var le = pageBuilder.components.relatedRecordsTab.listEditor;
                 le.details.events.afterRender.addListener(function () {
                     jqUnit.isVisible("Related record tab details should have visible link 'Go to record'", $(".csc-goto", le.details.container));
-                    jqUnit.assertEquals("href for the 'Go to record' should be", "./objects.html?csid=2005.018.1383", $(".csc-goto").attr("href"));
+                    jqUnit.assertEquals("href for the 'Go to record' should be", "./cataloging.html?csid=2005.018.1383", $(".csc-goto").attr("href"));
                     start();
                 });
                 le.list.locate("row").eq(1).click();
@@ -162,10 +162,10 @@ var relatedRecordsTabTester = function ($) {
                 le.details.events.afterRender.addListener(function () {
                     le.details.events.afterRender.removeListener("firstSelect");
                     jqUnit.isVisible("Related record tab details should have visible link 'Go to record'", $(".csc-goto", le.details.container));
-                    jqUnit.assertEquals("Initial href for the 'Go to record' should be", "./objects.html?csid=2005.018.1383", $(".csc-goto").attr("href"));
+                    jqUnit.assertEquals("Initial href for the 'Go to record' should be", "./cataloging.html?csid=2005.018.1383", $(".csc-goto").attr("href"));
                     le.details.events.afterRender.addListener(function () {
                         jqUnit.isVisible("Related record tab details should still have visible link 'Go to record'", $(".csc-goto", le.details.container));
-                        jqUnit.assertEquals("href for the 'Go to record' should now be", "./objects.html?csid=1984.068.0338", $(".csc-goto").attr("href"));
+                        jqUnit.assertEquals("href for the 'Go to record' should now be", "./cataloging.html?csid=1984.068.0338", $(".csc-goto").attr("href"));
                         start();
                     });
                     le.list.locate("row").eq(0).click();
@@ -196,13 +196,13 @@ var relatedRecordsTabTester = function ($) {
             // TODO: These record types are required, not options. They need to be factored
             //       into the function signature proper
             primaryRecordType: "intake",
-            relatedRecordType: "objects",
-            configURL: "../../main/webapp/html/config/object-tab.json",
+            relatedRecordType: "cataloging",
+            configURL: "../../main/webapp/html/config/cataloging-tab.json",
             pageBuilder: {
                 options: {
-                    pageType: "object-tab",
-                    schemaUrl: "../../main/webapp/html/uischema/objects.json",
-                    uispecUrl: "../../main/webapp/html/uispecs/object-tab/uispec.json",
+                    pageType: "cataloging-tab",
+                    schemaUrl: "../../main/webapp/html/uischema/cataloging.json",
+                    uispecUrl: "../../main/webapp/html/uispecs/cataloging-tab/uispec.json",
                     pageSpec: {
                         list: {
                             href: "../../main/webapp/html/objectTabRecordListTemplate.html"
@@ -245,7 +245,7 @@ var relatedRecordsTabTester = function ($) {
                 relatedRecordsTab: {
                     options: {
                         primary: "{pageBuilder}.options.primaryRecordType",
-                        related: "objects",
+                        related: "cataloging",
                         applier: "{pageBuilder}.applier",
                         model: "{pageBuilder}.model",
                         uispec: "{pageBuilder}.uispec",
@@ -263,7 +263,7 @@ var relatedRecordsTabTester = function ($) {
                                         }
                                     },
                                     primary: "{pageBuilder}.options.primaryRecordType",
-                                    related: "objects",
+                                    related: "cataloging",
                                     model: "{pageBuilder}.model",
                                     applier: "{pageBuilder}.applier"
                                 }

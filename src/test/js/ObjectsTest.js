@@ -17,18 +17,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
     var objectsTests = new jqUnit.TestCase("Objects Tests", function () {
         cspace.util.isTest = true;
-        objectsTests.fetchTemplate("../../main/webapp/html/objects.html", ".fl-container-1024");
+        objectsTests.fetchTemplate("../../main/webapp/html/cataloging.html", ".fl-container-1024");
     });
     
     var setupObjects = function (options) {
         options = $.extend(true, {
-            configURL: "../../main/webapp/html/config/objects.json",
+            configURL: "../../main/webapp/html/config/cataloging.json",
             pageBuilder: {
                 options: {
-                	recordType: "objects",
-                	pageType: "objects",
-                    schemaUrl: "../../main/webapp/html/uischema/objects.json",
-                    uispecUrl: "../../main/webapp/html/uispecs/objects/uispec.json",
+                	recordType: "cataloging",
+                	pageType: "cataloging",
+                    schemaUrl: "../../main/webapp/html/uischema/cataloging.json",
+                    uispecUrl: "../../main/webapp/html/uispecs/cataloging/uispec.json",
                     listeners: {
                         onDependencySetup: function (uispec) {
                             // Change the template URL for the number pattern chooser.
@@ -71,7 +71,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 sidebar: {
                     options: {
                         components: {
-                            objects: {
+                			cataloging: {
                                 options: {
                                     components: {
                                         relationManager: {
@@ -114,7 +114,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         }, options);
-        pageBuilder = cspace.recordSetup(options, "../../main/webapp/html/config/objects.json").pageBuilder;
+        pageBuilder = cspace.recordSetup(options, "../../main/webapp/html/config/cataloging.json").pageBuilder;
     };
     
     objectsTests.test("Initialization", function () {
