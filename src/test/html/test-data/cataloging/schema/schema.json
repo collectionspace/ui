@@ -1,0 +1,12 @@
+{
+    "objectTitle": {
+        "selector": "#object-title .info-value",
+        "validators": [],
+        "decorators": []
+    },
+    "description": {
+        "selector": "#description .info-value",
+        "validators": [],
+        "decorators": []
+    }
+}
