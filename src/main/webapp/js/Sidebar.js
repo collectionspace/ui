@@ -66,13 +66,13 @@ cspace = cspace || {};
     fluid.demands("procedures", "cspace.sidebar", 
         ["{sidebar}.options.selectors.relatedProcedures", fluid.COMPONENT_OPTIONS]);
     
-    fluid.demands("objects",  ["cspace.localData", "cspace.sidebar"], {
+    fluid.demands("cataloging",  ["cspace.localData", "cspace.sidebar"], {
         funcName: "cspace.sidebar.localRelatedRecordListOpts",
-        args: ["{sidebar}.options.selectors.relatedObjects", fluid.COMPONENT_OPTIONS]
+        args: ["{sidebar}.options.selectors.relatedCataloging", fluid.COMPONENT_OPTIONS]
     });
     
-    fluid.demands("objects", "cspace.sidebar", 
-        ["{sidebar}.options.selectors.relatedObjects", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("cataloging", "cspace.sidebar", 
+        ["{sidebar}.options.selectors.relatedCataloging", fluid.COMPONENT_OPTIONS]);
     
     fluid.defaults("cspace.sidebar", {
         components: {
@@ -93,13 +93,13 @@ cspace = cspace || {};
                     }
                 }
             },
-            objects: {
+            cataloging: {
                 type: "cspace.relatedRecordsList",
                 options: {
                     primary: "{sidebar}.options.primaryRecordType",
-                    related: "objects",
+                    related: "cataloging",
                     applier: "{sidebar}.options.applier",
-                    uispec : "{sidebar}.options.uispec.relatedObjects",
+                    uispec : "{sidebar}.options.uispec.relatedCataloging",
                     model: "{sidebar}.model",
                     recordListAfterSelectHandler: "{sidebar}.options.recordListAfterSelectHandler"
                 }
@@ -124,7 +124,7 @@ cspace = cspace || {};
         selectors: {
             mediaSnapshot: ".csc-media-snapshot",
             termsUsed: ".csc-integrated-authorities",
-            relatedObjects: ".csc-related-objects",
+            relatedCataloging: ".csc-related-cataloging",
             relatedProcedures: ".csc-related-procedures"
         }
     });

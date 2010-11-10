@@ -50,9 +50,9 @@ cspace = cspace || {};
 
     cspace.setupFindEdit = function () {
         var dependencies = {
-            objects: {
+        		cataloging: {
                 funcName: "cspace.recordList",
-                args: [".object-records-group", makeOpts("objects")]
+                args: [".object-records-group", makeOpts("cataloging")]
             },
             proceduresIntake: {
                 funcName: "cspace.recordList",

@@ -53,14 +53,14 @@
         }
     ],
     "relations": {
-        "objects": [
+        "cataloging": [
             {
                 "summary": "Souvenir books. Molly O' Play Book.",
                 "csid": "2005.018.1383",
                 "number": "2005.018.1383",
                 "relid": "e8d20612-e1f5-4e90-bc36",
                 "relationshiptype": "affects",
-                "recordtype": "objects"
+                "recordtype": "cataloging"
             }
         ]
     }

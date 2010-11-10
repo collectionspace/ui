@@ -120,7 +120,7 @@
                             "primaryRecordType": "{pageBuilder}.options.pageType",
                             "applier": "{pageBuilder}.applier",
                             "model": "{pageBuilder}.model",
-                            "configURL": "./config/object-tab.json" 
+                            "configURL": "./config/cataloging-tab.json" 
                         } 
                     },
                     {

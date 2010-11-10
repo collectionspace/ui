@@ -33,19 +33,19 @@
         } 
     ],
     "relations": {
-        "objects": [
+        "cataloging": [
             {
                 "csid": "1984.068.0338",
                 "number": "1984.068.0338",
                 "summary": "somethings",
-                "recordtype": "objects",
+                "recordtype": "cataloging",
                 "relationshiptype": "affects" 
             },
             {
                 "csid": "1984.068.0335b",
                 "number": "1984.068.0335b",
                 "summary": "some other thing",
-                "recordtype": "objects",
+                "recordtype": "cataloging",
                 "relationshiptype": "also affects" 
             } 
         ],

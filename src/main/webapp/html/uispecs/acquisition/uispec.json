@@ -1,6 +1,6 @@
 {
     "sidebar": {
-        "relatedObjects": {
+        "relatedCataloging": {
             ".csc-recordList-row:": {
                 "children": [
                     {
@@ -306,7 +306,7 @@
                                 "Library"
                             ],
                             "list": [
-                                "objects",
+                                "cataloging",
                                 "archives",
                                 "library"
                             ],

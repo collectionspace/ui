@@ -32,14 +32,14 @@
         }
     ],
     "relations": {
-        "objects": [
+        "cataloging": [
             {
                 "summary": "This record has at least one related record of each type that there's a tab active for",
                 "csid": "1984.068.0335b",
                 "number": "1984.068.0335b",
                 "relid": "19ba9f30-75c3-41c8-abcd",
                 "relationshiptype": "affects",
-                "recordtype": "objects"
+                "recordtype": "cataloging"
             }
         ],
         "movement": [

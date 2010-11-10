@@ -29,6 +29,6 @@
         }
     },
     "modelToResourceMap": {
-        "*": "/objects/"
+        "*": "/cataloging/"
     }
 }

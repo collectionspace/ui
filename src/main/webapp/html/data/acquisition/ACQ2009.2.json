@@ -72,12 +72,12 @@
                 "relationshiptype": "also affects somewhat"
             }
         ],
-        "objects": [
+        "cataloging": [
             {
             "csid": "1984.068.0335b",
             "number": "1984.068.0335b",
             "summary": "some other thing",
-            "recordtype": "objects",
+            "recordtype": "cataloging",
             "relationshiptype": "also affects"
             }
     ]
