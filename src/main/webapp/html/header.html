@@ -1,37 +1,22 @@
 <div id="header-menu" class="csc-header-template">
-    <div class="header-menu-logo"><a href="createnew.html" title="CollectionSpace Create New">CollectionSpace</a></div>
+    <div class="header-menu-logo"><a href="createnew.html" title="CollectionSpace Create New"></a></div>
     <div class="header-menu-right">
         <form action="../../chain/logout" class="csc-header-logout-form">
             <div class="header-menu-logout">
-                <input type="submit" class="logout" value="Sign out"/>
+                <input type="submit" class="csc-header-logout logout" />
             </div>
         </form>
         <div class="clear"></div>
-        <div class="header-menu-search">
-            <form action="findedit.html" class="csc-header-search-form">
-                <select name="recordtype" class="csc-global-search-record-type input-select">
-                    <option value="cataloging">Cataloging</option>
-                    <option value="intake">Intake</option>
-                    <option value="acquisition">Acquisition</option>
-                    <option value="loanin">Loan In</option>
-                    <option value="loanout">Loan Out</option>
-                    <option value="movement">Location and Movement</option>
-                    <option value="authorities-person">Person</option>
-                    <option value="authorities-organization">Organization</option>
-                </select>
-                <input name="keywords" type="text" class="csc-global-search-keywords" />
-                <input type="submit" class="csc-global-search-submit searchButton" value="Search" />
-            </form>
-        </div>
+        <div class="csc-header-searchBox"></div>
     </div>
     <div class="clear"></div>
     <div class="header-menu-row">
         <div class="inner">
-            <div class="menu-item mycollectionspace"><a href="myCollectionSpace.html">My CollectionSpace</a></div>
-            <div class="menu-item createnew"><a href="createnew.html">Create New</a></div>
-            <div class="menu-item findedit"><a href="findedit.html">Find and Edit</a></div>
-            <div class="menu-item no-cursor report"><a>Report</a></div>
-            <div class="menu-item administration"><a href="administration.html">Administration</a></div>
+            <div class="menu-item mycollectionspace"><a class="csc-header-myCollectionSpace" href="myCollectionSpace.html"></a></div>
+            <div class="menu-item createnew"><a class="csc-header-createNew" href="createnew.html"></a></div>
+            <div class="menu-item findedit"><a class="csc-header-findEdit" href="findedit.html"></a></div>
+            <div class="menu-item no-cursor report"><a class="csc-header-report"></a></div>
+            <div class="menu-item administration"><a class="csc-header-adminisrtation" href="administration.html"></a></div>
             <div class="clear"></div>
         </div>
         <div class="clear"></div>

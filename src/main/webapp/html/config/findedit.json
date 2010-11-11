@@ -1,0 +1,26 @@
+{
+    "pageBuilder": {
+        "options": {
+            "pageSpec": {
+                "footer": {
+                    "href": "footer.html",
+                    "templateSelector": ".csc-footer",
+                    "targetSelector": ".csc-footer-container" 
+                } 
+            }
+        } 
+    },
+    "dependencies": {
+        "search": {
+            "funcName": "cspace.search.searchView",
+            "args": [".main-search-page"]
+        }
+    },
+    "depOpts": {
+        "search": {
+            "options": {
+                "pivoting": true
+            }
+        } 
+    }
+}

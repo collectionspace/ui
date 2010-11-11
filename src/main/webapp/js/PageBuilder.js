@@ -15,6 +15,8 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     fluid.log("PageBuilder.js loaded");
+    
+    fluid.registerNamespace("cspace.pageBuilder");
 
     var injectElementsOfType = function (container, elementType, elements) {
         if (!elements || elements.length < 1) {
@@ -65,7 +67,9 @@ cspace = cspace || {};
     
     var setUpPageBuilder = function (that) {
         
-        setupModel(that.applier, that.model, that.options.pageType, that.options.recordType, that.schema);        
+        setupModel(that.applier, that.model, that.options.pageType, that.options.recordType, that.schema);
+        
+        fluid.initDependents(that);        
         
         that.events.onDependencySetup.fire(that.uispec);
         
@@ -86,10 +90,10 @@ cspace = cspace || {};
         }
     };
     
-    cspace.pageSpecManager = function(pageSpecs) {
+    cspace.pageSpecManager = function (pageSpecs) {
         var texts = {};
         function attemptApply() {
-            fluid.each(texts, function(entry, key) {
+            fluid.each(texts, function (entry, key) {
                 if (!entry.applied) {
                     var spec = pageSpecs[key];
                     var target = $(spec.targetSelector);
@@ -105,13 +109,13 @@ cspace = cspace || {};
         }
         var that = {
             makeCallback: function (spec, key) {
-                return function(text) {
+                return function (text) {
                     texts[key] = {text: text};
                     attemptApply();
                 };
             },
-            conclude: function() {
-                fluid.each(texts, function(entry, key) {
+            conclude: function () {
+                fluid.each(texts, function (entry, key) {
                     if (!entry.applied) {
                         var spec = pageSpecs[key];
                         fluid.fail("Error applying templates - template with URL " + spec.href + " could not be applied to target selector " + spec.targetSelector);
@@ -123,14 +127,11 @@ cspace = cspace || {};
     };
 
     cspace.pageBuilder = function (dependencies, options) {
-        var that = {
-            dependencies: dependencies,
-            model: {}
-        };
-
-        fluid.mergeComponentOptions(that, "cspace.pageBuilder", options);
-        that.model = that.options.model || that.model;
+        var that = fluid.initLittleComponent("cspace.pageBuilder", options);
+        that.dependencies = dependencies;
+        that.model = that.options.model || {};
         that.applier = that.options.applier || fluid.makeChangeApplier(that.model);
+        that.schema = {};
         
         fluid.instantiateFirers(that, that.options);
         
@@ -147,30 +148,44 @@ cspace = cspace || {};
         });
         
         // determine if logged in and redirect
-        if (!cspace.util.useLocalData()) {
-            resourceSpecs.loginStatus = {
-                href: "../../chain/loginstatus",
+        resourceSpecs.loginStatus = {
+            href: fluid.invoke("cspace.util.getLoginURL"),
+            options: {
+                dataType: "json",
+                success: function (data) {
+                    if (!data.login) {
+                        var currentUrl = document.location.href;
+                        var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
+                        window.location = loginUrl;     
+                    }
+                    that.currentUserId = data.csid;
+                    that.permissions = data.permissions;
+                }
+            } 
+        };
+        
+        fluid.each(that.options.schema, function (resource, key) {
+            resourceSpecs[resource] = {
+                href: fluid.invoke("cspace.util.getDefaultSchemaURL", resource),
                 options: {
                     dataType: "json",
                     success: function (data) {
-                        if (!data.login) {
-                            var currentUrl = document.location.href;
-                            var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
-                            window.location = loginUrl;     
-                        }
-                        that.currentUserId = data.csid;
+                        fluid.merge(null, that.schema, data);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        fluid.fail("Error fetching " + that.options.recordType + " schema:" + textStatus);
                     }
-                } 
+                }
             };
-        }
+        });
         
         if (that.options.recordType) {
             resourceSpecs.schema = {
-                href: that.options.schemaUrl || cspace.util.getDefaultSchemaURL(that.options.recordType),
+                href: that.options.schemaUrl || fluid.invoke("cspace.util.getDefaultSchemaURL", that.options.recordType),
                 options: {
                     dataType: "json",
                     success: function (data) {
-                        that.schema = data;
+                        fluid.merge(null, that.schema, data);
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         fluid.fail("Error fetching " + that.options.recordType + " schema:" + textStatus);
@@ -183,17 +198,10 @@ cspace = cspace || {};
             var dcthat = that.dataContext;
             resourceSpecs.record = that.dataContext.getResourceSpec("fetch", dcthat.options, dcthat.events.afterFetch, dcthat.events, that.options.csid);
         }
-            
-        // Fetch UI spec if required
-        if (!that.uispec && that.options.pageType) {
-            // TODO: Once we have changed our local versus remote strategy this can also be cleaned up.
-            //       Ideally, we would default to the server url and could configure for the local page and for tests
-            var urlTemplate = that.options.uispecUrl ||
-                (cspace.util.useLocalData() ? "./uispecs/%pageType/uispec.json" : "../../chain/%pageType/uispec");                                
-            var uispecUrl = fluid.stringTemplate(urlTemplate, {pageType: that.options.pageType});
 
+        if (that.options.pageType) {
             resourceSpecs.uispec = {
-                href: uispecUrl,
+                href: that.options.uispecUrl || fluid.invoke("cspace.util.getUISpecURL", that.options.pageType),
                 options: {
                     dataType: "json",
                     success: function (data) {
@@ -233,12 +241,37 @@ cspace = cspace || {};
         };
         fetchCallback = indicator.wrapCallback(fetchCallback);
         
-        fluid.fetchResources(resourceSpecs, fetchCallback);
+        fluid.fetchResources(resourceSpecs, fetchCallback, {amalgamateClasses: that.options.amalgamateClasses});
         
         return that;
     };
+    
+    fluid.demands("pivotSearch", "cspace.pageBuilder", 
+        ["{pageBuilder}.options.selectors.pivotSearch", fluid.COMPONENT_OPTIONS]);
+    
+    fluid.demands("header", "cspace.pageBuilder", 
+        ["{pageBuilder}.options.selectors.header", fluid.COMPONENT_OPTIONS]);
 
     fluid.defaults("cspace.pageBuilder", {
+        amalgamateClasses: [
+            "fastTemplate"
+        ],
+        selectors: {
+            header: ".csc-header-container",
+            pivotSearch: ".csc-pivot-searchBox"
+        },
+        components: {
+            header: {
+                type: "cspace.header",
+                options: {
+                    schema: "{pageBuilder}.schema",
+                    permissions: "{pageBuilder}.permissions"
+                }
+            }
+        },
+        schema: [
+            "recordlist"
+        ],
         events: {
             pageReady: null,
             onDependencySetup: null

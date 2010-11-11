@@ -50,7 +50,7 @@ cspace = cspace || {};
 
     cspace.setupFindEdit = function () {
         var dependencies = {
-        		cataloging: {
+            cataloging: {
                 funcName: "cspace.recordList",
                 args: [".object-records-group", makeOpts("cataloging")]
             },
@@ -78,15 +78,23 @@ cspace = cspace || {};
         
         var options = {
             pageSpec: {
-                header: {
-                    href: "header.html",
-                    templateSelector: ".csc-header-template",
-                    targetSelector: ".csc-header-container"
-                },
                 footer: {
                     href: "footer.html",
                     templateSelector: ".csc-footer",
                     targetSelector: ".csc-footer-container"
+                }
+            },
+            components: {
+                pivotSearch: {
+                    type: "cspace.searchBox",
+                    options: {
+                        strings: {
+                            recordTypeSelectLabel: "Record Type"
+                        },
+                        permissions: "{pageBuilder}.permissions",
+                        schema: "{pageBuilder}.schema",
+                        selfRender: true
+                    }
                 }
             },
             pageType: "find-edit"

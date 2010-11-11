@@ -66,8 +66,8 @@ cspace = cspace || {};
         that.events["after" + action + "ObjectDataSuccess"].fire(data, that.options.strings[message]);
     };
 
-    var confirmationTriggerMaker = function(exclusions, handler) {
-        return function() {
+    var confirmationTriggerMaker = function (exclusions, handler) {
+        return function () {
             if (!$(this).is(exclusions)) {
                 return handler($(this).attr("href"));
             }
@@ -259,7 +259,7 @@ cspace = cspace || {};
             }, that.options.confirmation.options) 
         ]);
         
-        that.showConfirmation = function(href) {
+        that.showConfirmation = function (href) {
             if (that.unsavedChanges) {
                 that.confirmation.open(cspace.confirmation.defaultSuccessHandlerCreator, {
                     href: href
@@ -302,9 +302,9 @@ cspace = cspace || {};
             timestamp: ".csc-timestamp",
             relatedRecords: ".csc-related-records",
             requiredFields: ".csc-required:visible",
-            confirmationInclude: "a",
+            confirmationInclude: "a, .csc-seachBox-button",
             confirmationExclude: "[href*=#], .csc-confirmation-exclusion, .ui-autocomplete a",
-            forms: ".csc-header-logout-form, .csc-header-search-form"
+            forms: ".csc-header-logout-form"
         },
         strings: {
             specFetchError: "I'm sorry, an error has occurred fetching the UISpec: ",

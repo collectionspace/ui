@@ -16,9 +16,12 @@
         <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.tabs.js"></script>
 
         <script type="text/javascript" src="../js/cspace.js"></script>
+        <script type="text/javascript" src="../js/Permissions.js"></script>
         <script type="text/javascript" src="../js/Utilities.js"></script>
-        <script type="text/javascript" src="../js/PageSetup.js"></script>
         <script type="text/javascript" src="../js/Renderer.js"></script>
+        <script type="text/javascript" src="../js/SearchBox.js"></script>
+        <script type="text/javascript" src="../js/Header.js"></script>
+        <script type="text/javascript" src="../js/PageSetup.js"></script>
         <script type="text/javascript" src="../js/Confirmation.js"></script>
         <script type="text/javascript" src="../js/DataSource.js"></script>
         <script type="text/javascript" src="../js/DataContext.js"></script>
@@ -28,7 +31,8 @@
         <script type="text/javascript" src="../js/RecordList.js"></script>
         <script type="text/javascript" src="../js/AdminRoles.js"></script>
         <script type="text/javascript" src="../js/PageBuilder.js"></script>
-        <script type="text/javascript" src="../js/roleSetup.js"></script>
+        <script type="text/javascript" src="../js/PageSetup.js"></script>
+        <script type="text/javascript" src="../js/recordSetup.js"></script>
     </head>
     <body>
     
@@ -171,7 +175,16 @@
             </div> <!-- END footer block -->
         </div>
         <script type="text/javascript">
-            cspace.roleSetup();
+            cspace.recordSetup({fetchConfigCallback: function (config) {
+                config.depOpts.role.options.roleListEditor.options.dataContext.options.dataSource.options.sources.permission.merge = cspace.dataSource.mergePermissions;
+	            if (cspace.util.useLocalData()) {
+	                config.depOpts.role.options.recordType = "role/records/list.json";
+	                config.depOpts.role.options.roleListEditor.options.baseUrl = "data/";
+	                config.depOpts.role.options.roleListEditor.options.dataContext.options.baseUrl = "data/";
+	                config.depOpts.role.options.roleListEditor.options.dataContext.options.fileExtension = ".json";
+	                config.depOpts.role.options.roleListEditor.options.dataContext.options.dataSource.options.sources.permission.href = "data/permission/list.json";
+	            }
+            }});
         </script>
     </body>
 

@@ -15,6 +15,13 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     fluid.log("Repeatable.js loaded");
+    
+    function getExpandedTree(that) {
+        // TODO: We are sitting on a tower of evil here - we cannot correct the signature here because of the
+        // possibility of extendDecoratorOptions. We are both a producer and a consumer of this problem.
+        var tree = fluid.invokeGlobalFunction(that.options.expander, [that.options.protoTree, that]);
+        return tree;
+    }
 
     // TODO: Account for an elPath into the model that points to undefined: not known whether it is a simple field or an object/row.
     //       We need to write a test for this but I think it is fixed now
@@ -49,7 +56,7 @@ cspace = cspace || {};
         });
     };
     
-    var renderFinalRow = function(that) {
+    var renderFinalRow = function (that) {
         var tree = getExpandedTree(that);
         var children = tree.children;
         tree.children = [children[children.length - 1]];
@@ -79,7 +86,7 @@ cspace = cspace || {};
         });
         
         // Make a change request to add an extra row.
-        that.container.delegate("click", that.options.selectors.add, function () {
+        that.container.delegate(that.options.selectors.add, "click", function () {
             requestChange(that, addRow);
             that.refreshView();
 //            renderFinalRow(that);
@@ -87,7 +94,7 @@ cspace = cspace || {};
             that.events.afterAdd.fire();
         });
         
-        that.container.delegate("click", that.options.selectors.remove, function () {
+        that.container.delegate(that.options.selectors.remove, "click", function () {
             // TODO: This functionality should be available on the public API for repeatable instead of hiding it away in an event handler.
             if (that.fetchModel().length < 2) {
                 return false;
@@ -109,19 +116,12 @@ cspace = cspace || {};
             });
         });
 
-        that.container.delegate("click", that.options.selectors.primary, function () {
+        that.container.delegate(that.options.selectors.primary, "click", function () {
             var index = that.locate("primary").index(this);
             requestChange(that, updatePrimary, index);
             that.events.afterUpdatePrimary.fire();
         });
     };
-    
-    function getExpandedTree(that) {
-        // TODO: We are sitting on a tower of evil here - we cannot correct the signature here because of the
-        // possibility of extendDecoratorOptions. We are both a producer and a consumer of this problem.
-        var tree = fluid.invokeGlobalFunction(that.options.expander, [that.options.protoTree, that]);
-        return tree;
-    }
     
     function positionAddButton(button, target) {
         var offset = $(target).offset();
@@ -239,9 +239,8 @@ cspace = cspace || {};
             renderPage(that);
         };
         
-        that.fetchModel = function(model) {
-            var model = model || that.model;
-            return fluid.model.getBeanValue(model, that.options.elPath);
+        that.fetchModel = function (model) {
+            return fluid.model.getBeanValue(model || that.model, that.options.elPath);
         };
         
         setupRepeatable(that);
@@ -250,13 +249,13 @@ cspace = cspace || {};
     };
     
     // Remove id attributes from a cloned tree    
-    cspace.repeatable.cleanseClone = function(toClone) {
+    cspace.repeatable.cleanseClone = function (toClone) {
         var node = toClone.clone();
         fluid.dom.iterateDom(node.get(0), function (node) {
             node.removeAttribute("id");
         });
         return node.removeAttr("id").hide().insertAfter(toClone);
-    }
+    };
     
     cspace.repeatable.generateMarkup = function (that) {
         // Check for the add button and generate it if required 
@@ -308,10 +307,6 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.repeatable", {
-        mergePolicy: {
-            model: "preserve",
-            applier: "preserve"
-        },
         selectors: {
             add: ".csc-repeatable-add",
             remove: ".csc-repeatable-delete",

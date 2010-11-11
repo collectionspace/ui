@@ -14,11 +14,15 @@
         <script type="text/javascript" src="../infusion/CSpaceInfusion.js"></script>
         
         <script type="text/javascript" src="../js/cspace.js"></script>
+        <script type="text/javascript" src="../js/Permissions.js"></script>
         <script type="text/javascript" src="../js/Utilities.js"></script>
         <script type="text/javascript" src="../js/Renderer.js"></script>
+        <script type="text/javascript" src="../js/SearchBox.js"></script>
+        <script type="text/javascript" src="../js/Header.js"></script>
         <script type="text/javascript" src="../js/DataContext.js"></script>
         <script type="text/javascript" src="../js/PageBuilder.js"></script>
-        <script type="text/javascript" src="../js/createNewSetup.js"></script>
+        <script type="text/javascript" src="../js/PageSetup.js"></script>
+        <script type="text/javascript" src="../js/recordSetup.js"></script>
     </head>
 
     <body id="createnew">
@@ -127,23 +131,7 @@
                                         Search
                                     </div>
                                     <div class="content">
-                                        <div class="pivot-menu-search">
-                                            <form action="search.html">
-                                                <input name="keywords" type="text" class="csc-search-pivot-keywords" />
-                                                <div><span class="recordtype-label">Record Type</span>
-                                                <select name="recordtype" class="csc-search-pivot-record-type">
-                                                    <option value="cataloging">Cataloging</option>
-                                                    <option value="intake">Intake</option>
-                                                    <option value="acquisition">Acquisition</option>
-                                                    <option value="loanin">Loan In</option>
-                                                    <option value="loanout">Loan Out</option>
-                                                    <option value="movement">Location and Movement Control</option>
-                                                    <option value="authorities-person">Person</option>
-                                                    <option value="authorities-organization">Organization</option>
-                                                </select></div>
-                                                <div class="csc-search-pivot-submit-container"><input type="submit" value="Search" class="csc-search-pivot-submit searchButton" /></div>
-                                            </form>
-                                        </div>
+                                        <div class="csc-pivot-searchBox cs-pivot-searchBox"></div>
                                         <div class="clear"></div>
                                     </div>
                                     <div class="clear"></div>
@@ -161,7 +149,7 @@
         </div>
 
         <script type="text/javascript">
-            cspace.setupCreateNew();
+            cspace.recordSetup({fetchConfigCallback: function () {}});
         </script>
     </body>
 </html>

@@ -15,12 +15,16 @@
         <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.tabs.js"></script>
 
         <script type="text/javascript" src="../js/cspace.js"></script>
+        <script type="text/javascript" src="../js/Permissions.js"></script>
         <script type="text/javascript" src="../js/Utilities.js"></script>
         <script type="text/javascript" src="../js/Renderer.js"></script>
+        <script type="text/javascript" src="../js/SearchBox.js"></script>
+        <script type="text/javascript" src="../js/Header.js"></script>
         <script type="text/javascript" src="../js/PageBuilder.js"></script>
+        <script type="text/javascript" src="../js/PageSetup.js"></script>
         <script type="text/javascript" src="../js/DataContext.js"></script>
         <script type="text/javascript" src="../js/Search.js"></script>
-        <script type="text/javascript" src="../js/searchSetup.js"></script>
+        <script type="text/javascript" src="../js/recordSetup.js"></script>
     </head>
     <body id="search">
         
@@ -38,15 +42,7 @@
                 
                 <div id="all-content" class="fl-fix">
                     <div class="fl-fix fl-container-flex fl-col-mixed2">
-                        <div class="fl-container-left fl-force-left">
-                            <!--<div class="fl-container-flex fl-fix information-group search-leader">
-                                <div class="fl-container-flex header">
-                                    <div class="label" style="float:left;">Latest Search:&nbsp;</div>
-                                    <div class="value" style="float:left;">&nbsp;</div>
-                                    <div class="clear"></div>
-                                </div>
-                            </div>-->
-                            
+                        <div class="fl-container-left fl-force-left">                            
                             <div class="fl-container-flex fl-fix information-group object-records-group">
                                 <div class="info-column">
                                     <div class="main-search-page">
@@ -84,41 +80,12 @@
                                             
                                             <!-- search results -->
                                             <div class="fl-pager list-table" id="toggle-records">
-                                                <!--<ul id="pager-top" class="fl-pager-ui flc-pager-top">
-                                                    <li class="flc-pager-previous">
-                                                        <a href="#">&lt; previous</a>
-                                                    </li>
-                                                    <li>
-                                                        <ul class="pager-links fl-pager-links flc-pager-links">
-                                                            <li class="flc-pager-pageLink"><a href="#">1</a></li>
-                                                            <li class="flc-pager-pageLink-disabled">2</li>
-                                                            <li class="flc-pager-pageLink"><a href="#">3</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="flc-pager-next">
-                                                        <a href="#">next &gt;</a>
-                                                    </li>
-                                                    <li class="flc-per-page">
-                                                        Show <span>
-                                                            <select class="flc-pager-page-size">
-                                                                <option value="5">5</option>
-                                                                <option value="10">10</option>
-                                                                <option value="20">20</option>
-                                                                <option value="50">50</option>
-                                                            </select>
-                                                        </span>
-                                                        per page
-                                                    </li>
-                                                    <div class="clear"></div>
-                                                </ul>
-                                                <div class="clear"></div>-->
                                                 <table summary="search results" id="search-results" class="fl-pager-data">
                                                     <thead>
                                                         <tr rsf:id="header:" class="csc-header">
                                                             <th class="flc-pager-sort-header">ID Number</th>
                                                             <th class="flc-pager-sort-header">Summary</th>
                                                             <th class="flc-pager-sort-header">Type</th>
-                                                            <!--<th class="flc-pager-sort-header">Record Type</th>-->
                                                         </tr>
                                                     </thead>
                                                     <tbody class="flc-pager-body-template">
@@ -181,9 +148,11 @@
         </div>
         
         <script type="text/javascript">
-            $(document).ready(function(){
-                cspace.searchSetup();
-            });
+            cspace.recordSetup({fetchConfigCallback: function (config) {
+                if (cspace.util.useLocalData()) {
+                    config.depOpts.search.options.searchUrlBuilder = cspace.search.localSearchUrlBuilder;
+                }
+            }});
         </script>
     </body>
 

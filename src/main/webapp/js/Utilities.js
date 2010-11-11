@@ -15,6 +15,15 @@ fluid.registerNamespace("cspace.util");
 
 (function ($, fluid) {
     fluid.log("Utilities.js loaded");
+    
+    // This should eventually go away [DEPRECATED].
+    cspace.util.useLocalData = function () {
+        return document.location.protocol === "file:";
+    };
+    
+    if (cspace.util.useLocalData()) {
+        fluid.staticEnvironment.cspaceEnvironment = fluid.typeTag("cspace.localData");
+    }
 
     // Attach a 'live' handler to the keydown event on all selects
     // Prevents this upsetting and undesirable behaviour (CSPACE-2840)
@@ -72,6 +81,14 @@ fluid.registerNamespace("cspace.util");
         return fluid.invoke("cspace.specBuilderImpl", {url: urlStub});
     };
     
+    fluid.demands("cspace.urlExpander", "cspace.localData", {
+        args: {
+            vars: {
+                chain: ".."
+            }
+        }
+    });
+    
     cspace.urlExpander = function (options) {
         var that = fluid.initLittleComponent("cspace.urlExpander", options);
         return function (url) {
@@ -81,13 +98,10 @@ fluid.registerNamespace("cspace.util");
     
     fluid.defaults("cspace.urlExpander", {
         vars: {
+            chain: "../../chain",
             webapp: ".."
         }
     });
-
-    cspace.util.useLocalData = function () {
-        return cspace.util.isTest || document.location.protocol === "file:";
-    };
     
     /**
      * cspace.util.isCurrentUser - currently a function that will verify the csid vs the currenly logged in user's csid.
@@ -109,10 +123,6 @@ fluid.registerNamespace("cspace.util");
      * decisions based on it can be performed out of line with application code.
      * By use of this "indirect dispatch" all test configuration code may now be
      * bundled in files that are not part of the production image */
-    
-    if (cspace.util.useLocalData()) {
-        fluid.staticEnvironment.cspaceEnvironment = fluid.typeTag("cspace.localData");
-    }
   
     var eUC = "encodeURIComponent:";
   
@@ -123,8 +133,11 @@ fluid.registerNamespace("cspace.util");
     // TODO: integrate with Engage conception and knock the rough corners off
     cspace.URLDataSource = function (options) {
         var that = fluid.initLittleComponent(options.typeName, options);
-        var wrapper = that.options.delay? function (func) {
-            setTimeout(func, that.options.delay);} : function (func) {func();};
+        var wrapper = that.options.delay ? function (func) {
+            setTimeout(func, that.options.delay);
+        } : function (func) {
+            func();
+        };
 
         function resolveUrl(directModel) {
             var expander = fluid.invoke("cspace.urlExpander");
@@ -250,47 +263,103 @@ fluid.registerNamespace("cspace.util");
         return ".\/config" + url.substring(url.lastIndexOf("/"), url.indexOf(".html")) + ".json";
     };
     
-    cspace.util.getDefaultSchemaURL = function (pageType) {
-        var url = window.location.pathname;
-        var pageType = pageType || url.substring(url.lastIndexOf("/"), url.indexOf(".html"));
-        if (cspace.util.useLocalData()) {
-            return ".\/uischema/" + pageType + ".json";
+    fluid.demands("cspace.util.getLoginURL", "cspace.localData", {
+        args: {
+            url: "%webapp/html/data/login/status.json"
         }
-        else {
-            return "../../chain/" + pageType + "/uischema"
-        }
+    });
+    
+    cspace.util.getLoginURL = function (options) {
+        var that = fluid.initLittleComponent("cspace.util.getLoginURL", options);
+        return that.options.urlRenderer(that.options.url);
     };
     
-    var buildModelStructure = function (model, elPath) {
-        var keys = elPath.split(".");        
-        for (var index = 0; index < keys.length - 1; index++) {
-            var key = keys[index];            
-            var isArray = keys[index + 1] === "0";
-            if (typeof(model) === "object" && typeof(model.length) === "number") {
-                if (model.length === 0) {
-                    model.push({});
-                }                
-                model = model[0];
+    fluid.defaults("cspace.util.getLoginURL", {
+        url: "%chain/loginstatus",
+        urlRenderer: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.urlExpander"
             }
-            model[key] = model[key] || (isArray ? [] : {});            
-            model = model[key];
-            index += isArray ? 1 : 0;
         }
+    });
+    
+    fluid.demands("cspace.util.getDefaultSchemaURL", "cspace.localData", {
+        args: ["@0", {
+            url: "%webapp/html/uischema/%pageType.json"
+        }]
+    });
+    
+    cspace.util.getDefaultSchemaURL = function (pageType, options) {
+        var that = fluid.initLittleComponent("cspace.util.getDefaultSchemaURL", options);
+        var url = fluid.stringTemplate(that.options.url, {
+            pageType: pageType
+        });
+        return that.options.urlRenderer(url);
     };
+    
+    fluid.defaults("cspace.util.getDefaultSchemaURL", {
+        url: "%chain/%pageType/uischema",
+        urlRenderer: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.urlExpander"
+            }
+        }
+    });
+    
+    fluid.demands("cspace.util.getUISpecURL", "cspace.localData", {
+        args: ["@0", {
+            url: "%webapp/html/uispecs/%pageType/uispec.json"
+        }]
+    });
+    
+    cspace.util.getUISpecURL = function (pageType, options) {
+        var that = fluid.initLittleComponent("cspace.util.getUISpecURL", options);
+        var url = fluid.stringTemplate(that.options.url, {
+            pageType: pageType
+        });
+        return that.options.urlRenderer(url);
+    };
+    
+    fluid.defaults("cspace.util.getUISpecURL", {
+        url: "%chain/%pageType/uispec",
+        urlRenderer: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.urlExpander"
+            }
+        }
+    });
     
     cspace.util.fullUrl = function (prefix, templateName) {
         return prefix ? prefix + templateName : templateName;
     };
     
-    cspace.util.getBeanValue = function (root, EL, schema) {
+    cspace.util.resolvePermissions = function (source, permManager) {
+        fluid.remove_if(source, function (sourceItem) {
+            if (sourceItem && typeof sourceItem === "object") {
+                fluid.each(sourceItem, function (elem) {
+                    cspace.util.resolvePermissions(elem, permManager);
+                });
+            }
+            return !permManager.resolve(sourceItem);
+        });
+    };
+    
+    // This will eventually go away once the getBeanValue strategy is used everywhere.
+    cspace.util.getBeanValue = function (root, EL, schema, permManager) {
         if (EL === "" || EL === null || EL === undefined) {
             return root;
         }
         var segs = fluid.model.parseEL(EL);
         for (var i = 0; i < segs.length; ++i) {
             var seg = segs[i];
+            if (permManager && !permManager.resolve(seg)) {
+                return undefined;
+            }
             if (!root[seg] && !schema) {
-                return root;
+                return undefined;
             }
             if (root[seg]) {
                 root = root[seg];
@@ -298,7 +367,7 @@ fluid.registerNamespace("cspace.util");
             }
             var subSchema = schema[seg];
             if (!subSchema) {
-                return root;
+                return undefined;
             }
             var type = subSchema.type;
             if (!type) {
@@ -307,6 +376,9 @@ fluid.registerNamespace("cspace.util");
             }
             var defaultValue = subSchema["default"];
             if (typeof defaultValue !== "undefined") {
+                if (permManager) {
+                    cspace.util.resolvePermissions(defaultValue, permManager);
+                }
                 root = defaultValue;
                 continue;
             }
@@ -333,6 +405,80 @@ fluid.registerNamespace("cspace.util");
         }
         return root;
     };
+    
+    fluid.registerNamespace("cspace.util.censorWithSchemaStrategy");
+    
+	// This should be split into 2 strategies since now getBeanValue
+	// can handle falsy resolved values.
+    cspace.util.censorWithSchemaStrategy = function (options) {
+        return {
+            init: function () {
+                var that = fluid.initLittleComponent("cspace.util.censorWithSchemaStrategy", options);
+                var schema = that.options.schema;
+                if (that.options.permissions) {
+                    fluid.initDependents(that);
+                }
+                return function (root, segment, index) {
+                    if (that.permManager && !that.permManager.resolve(segment)) {
+                        return;
+                    }
+                    if (!root[segment] && !schema) {
+                        return;
+                    }
+                    if (root[segment]) {
+                        return root[segment];
+                    }
+                    schema = schema[segment];
+                    if (!schema) {
+                        return;
+                    }
+                    var type = schema.type;
+                    if (!type) {
+                        // Schema doesn't have a type.
+                        fluid.fail("Schema for " + segment + "is incorrect: type is missing");
+                    }
+                    var defaultValue = schema["default"];
+                    if (typeof defaultValue !== "undefined") {
+                        if (that.permManager) {
+                            cspace.util.resolvePermissions(defaultValue, that.permManager);
+                        }
+                        return defaultValue;
+                    }
+                    if (type === "array") {
+                        var items = schema.items;
+                        schema = items ? [items] : [];
+                        return [];
+                    }
+                    else if (type === "object") {
+                        schema = schema.properties;
+                        return {};
+                    }
+                    else {
+                        return;
+                    }
+                };
+            }
+        };
+    };
+    
+    fluid.demands("permManager", "cspace.util.censorWithSchemaStrategy", [fluid.COMPONENT_OPTIONS]);
+    
+    fluid.defaults("cspace.util.censorWithSchemaStrategy", {
+        mergePolicy: {
+            schema: "preserve"
+        },
+        components: {
+            permManager: {
+                type: "cspace.permissions.manager",
+                options: {
+                    permissions: "{censorWithSchemaStrategy}.options.permissions",
+                    method: "{censorWithSchemaStrategy}.options.method",
+                    operations: "{censorWithSchemaStrategy}.options.operations",
+                    ifEmpty: "{censorWithSchemaStrategy}.options.ifEmpty"
+                }
+            }
+        }
+    });
     
     cspace.util.buildUrl = function (operation, baseUrl, recordType, csid, fileExtension) {
         if (operation === "addRelations") {
@@ -443,4 +589,18 @@ fluid.registerNamespace("cspace.util");
         mainWaitSpec: "recordEditor",
         indicatorOptions: {}
     });
+    
+    cspace.util.refreshComponents = function (that) {
+        fluid.each(that.options.components, function (component, name) {
+            var subComponent = that[name];
+            if (subComponent.refreshView) {
+                subComponent.refreshView();
+            }
+        });
+    };
+    
+    cspace.util.elStylefy = function (str) {
+        return "${" + str + "}";
+    };
+    
 })(jQuery, fluid);

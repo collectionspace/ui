@@ -27,9 +27,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     schemaUrl: "../../main/webapp/html/uischema/organization.json",
                     uispecUrl: "../../main/webapp/html/uispecs/organization/uispec.json",
                     pageSpec: {
-                        header: {
-                            href: "../../main/webapp/html/header.html"
-                        },
                         tabs: {
                             href: "../../main/webapp/html/tabsTemplate.html"
                         },
@@ -61,7 +58,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 sidebar: {
                     options: {
                         components: {
-                			cataloging: {
+                            cataloging: {
                                 options: {
                                     components: {
                                         relationManager: {

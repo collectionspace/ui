@@ -9,11 +9,6 @@
                 } 
             },
             "pageSpec": {
-                "header": {
-                    "href": "header.html",
-                    "templateSelector": ".csc-header-template",
-                    "targetSelector": ".csc-header-container" 
-                },
                 "tabs": {
                     "href": "tabsTemplate.html",
                     "templateSelector": ".csc-tabs-template",
@@ -22,7 +17,7 @@
                 "titleBar": {
                     "href": "organizationTitleBar.html",
                     "templateSelector": ".csc-organizationAuthority-titleBar-template",
-                    "targetSelector": ".csc-header-container" 
+                    "targetSelector": ".csc-organizationAuthority-titleBar-container"
                 },
                 "recordEditor": {
                     "href": "organizationTemplate.html",
@@ -47,7 +42,7 @@
         "titleBar": {
             "funcName": "cspace.titleBar",
             "args": [
-                ".csc-organizationAuthority-titleBar-template"
+                ".csc-organizationAuthority-template"
             ] 
         },
         "tabs": {

@@ -25,8 +25,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             configURL: "../../main/webapp/html/config/cataloging.json",
             pageBuilder: {
                 options: {
-                	recordType: "cataloging",
-                	pageType: "cataloging",
+                    recordType: "cataloging",
+                    pageType: "cataloging",
                     schemaUrl: "../../main/webapp/html/uischema/cataloging.json",
                     uispecUrl: "../../main/webapp/html/uispecs/cataloging/uispec.json",
                     listeners: {
@@ -36,9 +36,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         }
                     },
                     pageSpec: {
-                        header: {
-                            href: "../../main/webapp/html/header.html"
-                        },
                         tabs: {
                             href: "../../main/webapp/html/tabsTemplate.html"
                         },
@@ -71,7 +68,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 sidebar: {
                     options: {
                         components: {
-                			cataloging: {
+                            cataloging: {
                                 options: {
                                     components: {
                                         relationManager: {

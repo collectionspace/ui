@@ -14,7 +14,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 (function ($, fluid) {
     fluid.log("Autocomplete.js loaded");
 
-    cspace.autocomplete = function() {
+    cspace.autocomplete = function () {
         return cspace.autocompleteImpl.apply(null, arguments);
     };
 
@@ -43,9 +43,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     // Generic manual positioning function, currently unused - inserted for reference purposes   
     function makeAdjustRelative(target, container) {
-        return function(pos) {
+        return function (pos) {
             var targetOff = $(target[0].offsetParent).offset();
-            var contOff = $(container[0].offsetParent).offset();;
+            var contOff = $(container[0].offsetParent).offset();
             var trueleft = pos.left + targetOff.left - contOff.left;
             var truetop = pos.top + targetOff.top - contOff.top;
             container.css({
@@ -56,9 +56,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     }
     
     // Inspiration from http://stackoverflow.com/questions/158070/jquery-how-to-position-one-element-relative-to-another
-    cspace.internalPositioner = function(jTarget, jToPosition, adjustX, adjustY) {
+    cspace.internalPositioner = function (jTarget, jToPosition, adjustX, adjustY) {
         var pos = jTarget.position();
-        var target = fluid.unwrap(jTarget); var toPosition = fluid.unwrap(jToPosition);
+        var target = fluid.unwrap(jTarget); 
+        var toPosition = fluid.unwrap(jToPosition);
         var left = pos.left + target.offsetWidth - toPosition.offsetWidth + adjustX;
         var top = pos.top + (target.offsetHeight - toPosition.offsetHeight) / 2 + adjustY;
         jToPosition.css({
@@ -69,10 +70,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
     };
     
-    cspace.autocomplete.longest = function(list) {
+    cspace.autocomplete.longest = function (list) {
         var length = 0;
         var longest = "";
-        fluid.each(list, function(item) {
+        fluid.each(list, function (item) {
             var label = item.label;
             if (label.length > length) {
                 length = label.length;
@@ -99,10 +100,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
     });
 
-    fluid.autocomplete.bindListener = function(that) {
-        that.container.keydown(function() {
+    fluid.autocomplete.bindListener = function (that) {
+        that.container.keydown(function () {
             clearTimeout(that.outFirer);
-            that.outFirer = setTimeout(function() {
+            that.outFirer = setTimeout(function () {
                 var newValue = that.container.val();
                 if (newValue !== that.oldValue) {
                     that.oldValue = newValue;
@@ -110,29 +111,29 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }, that.options.delay);
         });
-        that.container.change(function() {
+        that.container.change(function () {
             that.oldValue = that.container.val();
         });
     };
 
 
-    fluid.autocomplete.autocompleteView = function(container, options) {
+    fluid.autocomplete.autocompleteView = function (container, options) {
         var that = fluid.initView("fluid.autocomplete.autocompleteView", container, options);
         that.container.addClass(that.options.styles.baseStyle);
         
         fluid.autocomplete.bindListener(that);
         
-        that.events.onSearch.addListener(function(term, permitted) {
+        that.events.onSearch.addListener(function (term, permitted) {
             if (permitted) {
                 container.addClass(that.options.styles.loadingStyle);
             }
         });
         
-        that.events.onSearchDone.addListener(function() {
+        that.events.onSearchDone.addListener(function () {
             container.removeClass(that.options.styles.loadingStyle);
         });
         
-        that.suppress = function() {
+        that.suppress = function () {
             clearTimeout(that.outFirer);
             that.outFirer = null;
             that.oldValue = that.container.val();
@@ -176,18 +177,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     /**** Definitions for testing environment - TODO: move to separate file somewhere ****/    
     fluid.defaults("cspace.autocomplete.testAuthoritiesDataSource", {
         url: "%webapp/html/data/autocomplete/authorities.json"
-        }
-    );
+    });
+    
     cspace.autocomplete.testAuthoritiesDataSource = cspace.URLDataSource;
    
     fluid.demands("cspace.autocomplete.authoritiesDataSource",  ["cspace.localData", "cspace.autocomplete"],
         {funcName: "cspace.autocomplete.testAuthoritiesDataSource"});
 
 
-    cspace.autocomplete.testMatchesParser = function(data, directModel) {
+    cspace.autocomplete.testMatchesParser = function (data, directModel) {
         var togo = [];
         var lowterm = directModel.term.toLowerCase();
-        fluid.each(data, function(item) {
+        fluid.each(data, function (item) {
             if (item.label.toLowerCase().indexOf(lowterm) !== -1) {
                 togo.push(item);
             }
@@ -200,8 +201,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         url: "%webapp/html/data/autocomplete/matches.json",
         responseParser: cspace.autocomplete.testMatchesParser,
         delay: 1
-        }
-    );
+    });
+    
     cspace.autocomplete.testMatchesDataSource = cspace.URLDataSource;
         
     fluid.demands("cspace.autocomplete.matchesDataSource", ["cspace.localData", "cspace.autocomplete"],
@@ -210,11 +211,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     fluid.demands("cspace.autocomplete.newTermDataSource",  ["cspace.localData", "cspace.autocomplete"],
         {funcName: "cspace.autocomplete.testNewTermDataSource"});
     
-    cspace.autocomplete.testNewTermDataSource = function(options) {
+    cspace.autocomplete.testNewTermDataSource = function (options) {
         return {
-            put: function(model, directModel, callback) {
+            put: function (model, directModel, callback) {
                 fluid.log("Post of new term record " + JSON.stringify(model) + " to URL " + directModel.termURL);
-                callback({ urn: "urn:"+fluid.allocateGuid(), label: model.fields.displayName});
+                callback({urn: "urn:" + fluid.allocateGuid(), label: model.fields.displayName});
             }
         };
     };
@@ -228,12 +229,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         buttonImageUrl: "../images/icnDelete.png",
         markup: "<a href=\"#\"><img /></a>",
         positionAdjustment: {
-           x: -1,
-           y: 1
+            x: -1,
+            y: 1
         }
     });
     
-    cspace.autocomplete.closeButton = function(container, options) {
+    cspace.autocomplete.closeButton = function (container, options) {
         var that = fluid.initView("cspace.autocomplete.closeButton", container, options);
         var button = $(that.options.markup);
         $("img", button).attr("src", that.options.buttonImageUrl);
@@ -241,22 +242,22 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         button.insertAfter(that.container);
         //$("body").append(button);
         button.hide();
-        that.show = function() {
+        that.show = function () {
             button.show();
             cspace.internalPositioner(that.container, button, that.options.positionAdjustment.x, that.options.positionAdjustment.y);
-        }
-        that.hide = function() {
+        };
+        that.hide = function () {
             button.hide();
-        }
+        };
         that.button = button;
         return that;
     };
     
-    cspace.autocomplete.makeSelectionTree = function(model, listPath, fieldName) {
+    cspace.autocomplete.makeSelectionTree = function (model, listPath, fieldName) {
         var list = fluid.model.getBeanValue(model, listPath);
         return { // TODO: This could *really* be done by an expander but it looks like right now the API is not suitable
             children: 
-                fluid.transform(list, function(value, key) {
+                fluid.transform(list, function (value, key) {
                     return {
                         valuebinding: fluid.model.composeSegments(listPath, key, fieldName)
                     };
@@ -265,13 +266,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         };
     };
     
-    cspace.autocomplete.matchTerm = function(label, term) {
+    cspace.autocomplete.matchTerm = function (label, term) {
         return label.toLowerCase() === term.toLowerCase();
     };
     
-    cspace.autocomplete.modelToTree = function(model, events) {
+    cspace.autocomplete.modelToTree = function (model, events) {
         var tree = {};
-        var index = fluid.find(model.matches, function(match, index) {
+        var index = fluid.find(model.matches, function (match, index) {
             if (cspace.autocomplete.matchTerm(match.label, model.term)) {
                 return index;
             }
@@ -295,13 +296,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         return tree;
     };
     
-    cspace.autocomplete.popup = function(container, options) {
+    cspace.autocomplete.popup = function (container, options) {
         var that = fluid.initRendererComponent("cspace.autocomplete.popup", container, options);
         that.events = that.options.events;
         var input = fluid.unwrap(that.options.inputField);
         var union = $(container).add(input);
         
-        var decodeItem = function(item) { // TODO: make a generic utility for this (integrate with ViewParameters for URLs)
+        var decodeItem = function (item) { // TODO: make a generic utility for this (integrate with ViewParameters for URLs)
             var togo = {
                 EL: that.renderer.boundPathForNode(item) 
             };
@@ -313,15 +314,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             return togo;
         };
         
-        var activateFunction = function(item) {
+        var activateFunction = function (item) {
             var decoded = decodeItem(item.target);
             if (decoded.type) {
-                that.events[decoded.type === "authorities"? "selectAuthority" : "selectMatch"].fire(decoded.index);
+                that.events[decoded.type === "authorities" ? "selectAuthority" : "selectMatch"].fire(decoded.index);
             }
         };
         that.container.click(activateFunction);
         
-        that.open = function() {
+        that.open = function () {
             var tree = that.treeBuilder();
             that.render(tree);
             
@@ -341,12 +342,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 of: that.options.inputField,
                 collision: "none"
             });
-            cspace.util.globalDismissal(union, function() {
+            cspace.util.globalDismissal(union, function () {
                 that.close();
             });
         };
         
-        that.close = function() {
+        that.close = function () {
             cspace.util.globalDismissal(union);
             that.container.dialog("close");
             that.container.html("");
@@ -355,10 +356,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
 
         function makeHighlighter(funcName) {
-            return function(item) {
+            return function (item) {
                 var decoded = decodeItem(item); 
                 if (decoded.type) {
-                    $(item)[funcName] (that.options.styles[decoded.type + "Select"]);
+                    $(item)[funcName](that.options.styles[decoded.type + "Select"]);
                 }
             };
         }
@@ -369,9 +370,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             onSelect: makeHighlighter("addClass"),
             onUnselect: makeHighlighter("removeClass"),
             selectablesTabindex: ""
-            });
+        });
             
-        that.escapeHandler = function(event) { // TODO: too annoying to use plugin because of FLUID-1313
+        that.escapeHandler = function (event) { // TODO: too annoying to use plugin because of FLUID-1313
             if (event.keyCode === $.ui.keyCode.ESCAPE) {
                 that.events.revertState.fire();
             }
@@ -401,7 +402,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             matchItem: ".csc-autocomplete-matchItem",
             longestMatch: ".csc-autocomplete-longestMatch",
             addTermTo: ".csc-autocomplete-addTermTo"
-            },
+        },
         styles: {
             authoritiesSelect: "cs-autocomplete-authorityItem-select",
             matchesSelect: "cs-autocomplete-matchItem-select"
@@ -420,6 +421,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     func: "cspace.specBuilder",
                     args: {
                         forceCache: true,
+                        fetchClass: "slowTemplate",
                         url: "%webapp/html/AutocompleteAddPopup.html"
                     }
                 }
@@ -427,7 +429,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
     });
 
-    fluid.primeCacheFromResources("cspace.autocomplete.popup");
+    fluid.fetchResources.primeCacheFromResources("cspace.autocomplete.popup");
 
     function updateAuthoritatively(that, termRecord) {
         that.hiddenInput.val(termRecord.urn);
@@ -444,7 +446,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     // find the HIGHEST ancestor which has non-default position
     function findTopRelative(node) {
         var lastPos;
-        while(node) {
+        while (node) {
             var jNode = $(node);
             if (jNode.is("body")) {
                 return lastPos || jNode;
@@ -477,9 +479,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         updateAuthoritatively(that, initialRec);
     };
     
-    var makeButtonAdjustor = function(closeButton, model) {
-        return function(hide) {
-            closeButton[model.term === model.baseRecord.label || hide? "hide": "show"] ();
+    var makeButtonAdjustor = function (closeButton, model) {
+        return function (hide) {
+            closeButton[model.term === model.baseRecord.label || hide ? "hide": "show"]();
         };
     };
 
@@ -497,56 +499,56 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var buttonAdjustor = makeButtonAdjustor(that.closeButton, that.model);
        
         that.autocomplete.events.onSearch.addListener(
-            function(newValue, permitted) {
+            function (newValue, permitted) {
                 that.model.term = newValue; // TODO: use applier and use "double wait" in "flapjax style"
                 if (permitted) {
                     buttonAdjustor(true); // hide the button to show the "loading indicator"
-                    that.matchesSource.get(that.model, function(matches) {
+                    that.matchesSource.get(that.model, function (matches) {
                         that.model.matches = matches;
                         buttonAdjustor();
                         that.popup.open();
                         that.autocomplete.events.onSearchDone.fire(newValue);
-                        });
+                    });
                 }
                 else {
-                   if (newValue === "") { // CSPACE-1651
-                       var blankRec = cspace.autocomplete.urnToRecord("");
-                       updateAuthoritatively(that, blankRec);
-                   }
-                   buttonAdjustor();
-                   that.popup.close();
+                    if (newValue === "") { // CSPACE-1651
+                        var blankRec = cspace.autocomplete.urnToRecord("");
+                        updateAuthoritatively(that, blankRec);
+                    }
+                    buttonAdjustor();
+                    that.popup.close();
                 }
             });
         
         that.events.selectMatch.addListener(
-            function(key) {
+            function (key) {
                 var match = that.model.matches[key];
                 updateAuthoritatively(that, match);
                 buttonAdjustor();
             });
             
         that.events.selectAuthority.addListener(
-            function(key) {
+            function (key) {
                 var authority = that.model.authorities[key];
                 that.newTermSource.put({fields: {displayName: that.model.term}}, {termUrl: authority.url}, 
-                    function(response) {
+                    function (response) {
                         updateAuthoritatively(that, response);
                         buttonAdjustor();
                     });
             });
         that.events.revertState.addListener(
-            function() {
+            function () {
                 updateAuthoritatively(that, that.model.baseRecord);
                 buttonAdjustor();
                 that.popup.close();              
             });
 
         // TODO: risk of asynchrony
-        that.authoritiesSource.get(null, function(authorities) {
+        that.authoritiesSource.get(null, function (authorities) {
             that.model.authorities = authorities;
         });
 
-        that.closeButton.button.click(function() {
+        that.closeButton.button.click(function () {
             that.events.revertState.fire();
             return false;
         });

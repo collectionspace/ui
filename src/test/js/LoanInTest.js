@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jqUnit */
+/*global jqUnit, cspace, start, stop */
 "use strict";
 
 (function () {
@@ -32,14 +32,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         }, 
                         onDependencySetup: function (uispec) {
                             // Change the template URL for the number pattern chooser.
-                            uispec.recordEditor[".csc-loanIn-loanInNumber-patternChooserContainer"].decorators[0].options.templateUrl
-                                = "../../main/webapp/html/NumberPatternChooser.html";
+                            uispec.recordEditor[".csc-loanIn-loanInNumber-patternChooserContainer"].decorators[0].options.templateUrl = 
+                                "../../main/webapp/html/NumberPatternChooser.html";
                         }
                     },
                     pageSpec: {
-                        header: {
-                            href: "../../main/webapp/html/header.html"
-                        },
                         tabs: {
                             href: "../../main/webapp/html/tabsTemplate.html"
                         },
@@ -71,7 +68,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 sidebar: {
                     options: {
                         components: {
-                			cataloging: {
+                            cataloging: {
                                 options: {
                                     components: {
                                         relationManager: {

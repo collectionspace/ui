@@ -17,6 +17,7 @@ var adminUsersTester = function () {
     jqUnit.ok = ok;
     
     var testUISpec = {};
+    var schema = {};
     jQuery.ajax({
         async: false,
         url: "../../main/webapp/html/uispecs/users/uispec.json",
@@ -26,6 +27,17 @@ var adminUsersTester = function () {
         },
         error: function (xhr, textStatus, error) {
             fluid.log("Unable to load users uispec for testing");
+        }
+    });
+    jQuery.ajax({
+        async: false,
+        url: "../../main/webapp/html/uischema/users.json",
+        dataType: "json",
+        success: function (data) {
+            schema = data;
+        },
+        error: function (xhr, textStatus, error) {
+            fluid.log("Unable to load users schema for testing");
         }
     });
     var baseTestOpts = {
@@ -40,7 +52,7 @@ var adminUsersTester = function () {
                         fileExtension: ".json",
                         dataSource: {
                             options: {
-                                schema: "{pageBuilder}.schema",
+                                schema: schema,
                                 sources: {
                                     role: {
                                         href: "../../main/webapp/html/data/role/list.json",

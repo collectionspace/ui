@@ -8,6 +8,9 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
+/*global cspace, fluid*/
+"use strict";
+
 // Include this file before Utilities.js in any CSpace tests
 
 fluid.registerNamespace("cspace.util");
@@ -18,10 +21,11 @@ fluid.staticEnvironment.cspaceTests = fluid.typeTag("cspace.test");
 
 fluid.registerNamespace("cspace.tests");
 
-fluid.demands("cspace.urlExpander", "cspace.test", 
+fluid.demands("cspace.urlExpander", ["cspace.localData", "cspace.test"],
     {
     args: {
         vars: {
+            chain: "..",
             webapp: "../../main/webapp"
         }
     }

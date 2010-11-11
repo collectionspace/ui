@@ -67,6 +67,67 @@ var utilitiesTester = function ($) {
         ]
     };
     
+    var schemaForPerms = schema = {
+        "loanout": {
+            "type": "object",
+            "properties": {
+                "fields": {
+                    "type": "object",
+                    "properties": {
+                        "role": {
+                            "type": "object",
+                            "properties": {
+                                "account": {
+                                    "type": "object"
+                                },
+                                "role": {
+                                    "type": "array",
+                                    "default": [{
+                                        "roleName": "ROLE_ADMINISTRATOR",
+                                        "roleId": "1",
+                                        "roleGroup": "Museum staff",
+                                        "roleAssigned": true
+                                    }]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "acquisition": {
+            "type": "object",
+            "properties": {
+                "fields": {
+                    "type": "object",
+                    "properties": {
+                        "role": {
+                            "type": "object",
+                            "properties": {
+                                "account": {
+                                    "type": "object"
+                                },
+                                "role": {
+                                    "type": "array",
+                                    "default": [{
+                                        "roleName": "ROLE_ADMINISTRATOR",
+                                        "roleId": "1",
+                                        "roleGroup": "Museum staff",
+                                        "roleAssigned": true
+                                    }]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "recordlist": {
+            "default": ["person", "intake", "location", "loanin", "loanout", "contact", "acquisition", "organization", "objects", "movement"],
+            "type": "array"
+        }
+    };
+    
     var utilitiesTest = new jqUnit.TestCase("Utilities Tests", function () {
         cspace.util.isTest = true;
         uispec = {
@@ -116,6 +177,35 @@ var utilitiesTester = function ($) {
             }
         };
     };
+    
+    var perms = {
+        "person": ["create", "read", "update", "delete", "list"],
+        "loanout": ["create", "read", "update", "delete", "list"],
+        "loanin": ["read", "list"],
+        "acquisition": [],
+        "organization": ["create", "read", "update", "delete", "list"],
+        "movement": ["create", "read", "update", "delete", "list"],
+        "objects": ["create", "read", "update", "delete", "list"]
+    };
+    
+    var validate = function (expected, el, method) {
+        jqUnit.assertDeepEq("Test schema + permissions", expected, 
+            fluid.model.getBeanValue({}, el, [cspace.util.censorWithSchemaStrategy({
+                schema: schemaForPerms,
+                permissions: perms,
+                method: method,
+                operations: ["create", "read", "update", "delete", "list"]
+        })]));
+    };
+    
+    utilitiesTest.test("Permissions with permissionAwareAccessor", function () {
+        validate({}, "loanout", "OR");
+        validate(undefined, "acquisition", "OR");
+        validate(["person", "intake", "location", "loanin", "loanout", "contact", "organization", "objects", "movement"], 
+            "recordlist", "OR");
+        validate(["person", "intake", "location", "loanout", "contact", "organization", "objects", "movement"], 
+            "recordlist", "AND");
+    });
     
     utilitiesTest.test("Full model from schema with getBeanValue", function () {        
         setExpectedSchemaBasedModel();
@@ -256,6 +346,12 @@ var utilitiesTester = function ($) {
             jqUnit.assertEquals("Built url value is equal to the expected", 
                 expected[i], cspace.util.buildUrl.apply(null, args[i]));
         }
+    });
+    
+    utilitiesTest.test("cspace.util.getDefaultSchemaURL", function () {
+        cspace.util.getDefaultSchemaURL("intake");
+        jqUnit.assertEquals("Default URL should be", "../../main/webapp/html/uischema/intake.json", 
+            fluid.invoke("cspace.util.getDefaultSchemaURL", "intake"));
     });
 };
 

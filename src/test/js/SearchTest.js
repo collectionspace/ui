@@ -20,7 +20,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     var searchTests = new jqUnit.TestCase("Search Tests", function () {
         cspace.util.isTest = true;
-        searchTests.fetchTemplate("../../main/webapp/html/search.html", ".main-search-page");
+        searchTests.fetchTemplate("../../main/webapp/html/findedit.html", ".main-search-page");
     });
     
     var setupSearch = function (options) {
@@ -36,7 +36,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var model = {
             recordTypeLong: "intake"
         };
-        var callback = callback || function (search) {
+        callback = callback || function (search) {
             search.updateModel(model);
             search.search();
         }; 
@@ -77,7 +77,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         };
-        fluid.merge(null, opts, options)
+        fluid.merge(null, opts, options);
         search = setupSearch(opts);
         initialSearchTets(search);
         stop();
