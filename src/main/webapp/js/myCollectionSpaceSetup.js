@@ -14,7 +14,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($) {
-    fluid.log("findEditSetup.js loaded");
+    fluid.log("myCollectionSpaceSetup.js loaded");
 
     var buildUrl = function (recordType) {
         if (cspace.util.useLocalData()) {
@@ -48,7 +48,7 @@ cspace = cspace || {};
         };
     };
 
-    cspace.setupFindEdit = function () {
+    cspace.setupMyCollectionSpace = function () {
         var dependencies = {
             cataloging: {
                 funcName: "cspace.recordList",
@@ -97,7 +97,7 @@ cspace = cspace || {};
                     }
                 }
             },
-            pageType: "find-edit"
+            pageType: "myCollectionSpace"
         };
         cspace.pageBuilder(dependencies, options);
     };
