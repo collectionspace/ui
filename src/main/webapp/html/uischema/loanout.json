@@ -3,13 +3,13 @@
         "properties": {
             "relations": {
                 "default": {
-                    
+
                 },
                 "type": "object"
             },
             "termsUsed": {
                 "default": [
-                    
+
                 ],
                 "type": "array"
             },
@@ -21,25 +21,39 @@
                     "lendersAuthorizer": {
                         "type": "string"
                     },
-                    "loanPurpose": {
-                        "default": "Exhibition",
-                        "type": "array"
-                    },
                     "borrower": {
                         "type": "string"
                     },
-                    "loanedObjectStatus": {
-                        "default": "Requested",
-                        "type": "string"
+                    "loanPurpose": {
+                        "default": "",
+                        "type": "array"
+                    },
+                    "loanedObjectStatusGroup": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "loanedObjectStatus": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "loanedObjectStatusDate": {
+                                    "type": "date"
+                                },
+                                "loanedObjectStatusNote": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
                     },
                     "loanOutDate": {
                         "type": "date"
                     },
                     "loanRenewalApplicationDate": {
                         "type": "date"
-                    },
-                    "loanedObjectStatusNote": {
-                        "type": "string"
                     },
                     "lendersContact": {
                         "type": "string"
@@ -50,13 +64,10 @@
                     "loanReturnDate": {
                         "type": "date"
                     },
-                    "loanedObjectStatusDate": {
-                        "type": "date"
-                    },
-                    "loanOutNote": {
+                    "specialConditionsOfLoan": {
                         "type": "string"
                     },
-                    "specialConditionsOfLoan": {
+                    "loanOutNote": {
                         "type": "string"
                     },
                     "lendersAuthorizationDate": {

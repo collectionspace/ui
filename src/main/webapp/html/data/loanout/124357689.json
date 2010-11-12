@@ -10,12 +10,23 @@
         "lendersAuthorizationDate": "April 1, 2010",
         "loanOutConditions": "very good",
         "loanOutNote": "Take good care of it",
-        "loanedObjectStatus": "photographyrequested",
-        "loanedObjectStatusDate": "March 25, 2010",
-        "loanedObjectStatusNote": "Please take a nice picture - you know: good lighting, nice background...",
+        "loanedObjectStatusGroup": [
+            {
+                "_primary": true,
+                "loanedObjectStatus": "returned",
+                "loanedObjectStatusDate": "November 9, 2011",
+                "loanedObjectStatusNote": "Back in the barn."
+            },
+            {
+                "loanedObjectStatus": "photographyrequested",
+                "loanedObjectStatusDate": "March 25, 2010",
+                "loanedObjectStatusNote": "Please take a nice picture - you know: good lighting, nice background..."
+            }
+        ],
         "loanOutDate": "March 26, 2010",
         "loanReturnDate": "April 26, 2010",
         "loanRenewalApplicationDate": "April 25, 2010"
+
     },
     "relations": {}
 }
