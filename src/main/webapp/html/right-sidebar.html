@@ -13,23 +13,35 @@
     </head>
     <body>
     <div class="csc-right-sidebar">
-        <div id="secondary-nav" class="pivot">
+        <!--<div id="secondary-nav" class="pivot">
             <div id="secondary-nav-menu">
                 <ul class="menu-record">
                     <li class="selected"><a href="#">Relationships</a></li>
                     <li><a href="#" class="inactive">Audit</a></li>
                 </ul>
             </div>
-        </div>
+        </div>-->
         
         <div class="fl-force-right right-sidebar csc-sidebar" id="csc-right-sidebar">
             <!--<img src="../images/media-snapshot.png" alt="media snapshot" height=253 width=248 />-->
+			
+			<div class="pivot-box create-report">
+				 <div class="header">
+					Create Report
+                </div>
+                <select disabled="disabled">
+					<option value="yes">Yes</option>
+					<option value="no">No</option>
+				</select>
+				<input type="button" value="Create" disabled="disabled">
+            </div>
+			
             <div class="pivot-box media-snapshot csc-media-snapshot">
                 <div class="header toggle" onclick="ShowHide('#toggle-media-snapshot', this); return false;">
                     <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
                     Media Snapshot
                 </div>
-                <div class="content" id="toggle-media-snapshot"><img src="../images/sample.png" alt="sample image" title="sample media image" width="200" height="238" /></div>
+                <div class="content" id="toggle-media-snapshot"><img src="../images/sample.png" alt="sample image" title="sample media image" /></div>
             </div>
             
             <div class="pivot-box csc-integrated-authorities">
@@ -61,14 +73,14 @@
                 </div>
             </div>
             
-            <div class="pivot-box csc-related-records used-by">
+            <!-- <div class="pivot-box csc-related-records used-by">-->
             
-                <div class="header toggle" onclick="ShowHide('#toggle-used-by', this); return false;">
+                <!--<div class="header toggle" onclick="ShowHide('#toggle-used-by', this); return false;">
                     <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
                     Used By <span class="csc-num-items">(0)</span>
-                </div>
+                </div>-->
                 
-                <div class="content" id="toggle-used-by" style=""> <!-- begin bundle -->
+                <!-- <div class="content" id="toggle-used-by" style=""> --> <!-- begin bundle -->
             
                     <div class="pivot-box csc-related-procedures">
                         <div class="add-more">
@@ -146,14 +158,14 @@
                         </div>
                     </div>
                 
-                </div> <!-- end bundle -->
+               <!-- </div>--> <!-- end bundle -->
                 
                 
             </div>
             <div class="clear"></div>
         </div>
         <div class="clear"></div>
-    </div>
+    <!--</div>-->
     </body>
 </html>
         

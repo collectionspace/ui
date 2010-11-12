@@ -321,7 +321,7 @@ cspace = cspace || {};
             afterUpdatePrimary: null
         },    
         strings: {
-            add: "+ Field"
+            add: "+"
         },
         styles: {
             add: "cs-repeatable-add",

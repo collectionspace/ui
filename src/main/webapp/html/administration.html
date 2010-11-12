@@ -38,9 +38,11 @@
             <div id="header-menu" class="csc-header-container"></div>
             
             <div class="fl-container-1024-inner">
-                <div id="title-bar" class="nobg">
+                <div id="title-bar">
                     <div class="content">
                         <div class="header-name">Administration</div>
+						<div class="record-type">Users</div>
+						<div class="clear"></div>
                     </div>
                 </div>
             
@@ -57,145 +59,136 @@
                             </ul>
                         </div>
                     </div>
-                
-                    <div class="fl-fix fl-container-flex fl-col-mixed2">
-                        <!--<div class="fl-container-pivot-users fl-container-admin-menu fl-force-left">
-                            <div class="fl-container-left-inner">
-                                <ul>
-                                    <li class="selected">Users</li>
-                                    <li><a href="role.html">Roles and Permissions</a></li>
-                                    <li class="inactive">Help Management</li>
-                                    <li class="inactive">Reporting</li>
-                                    <li class="inactive">Numbering</li>
-                                    <li class="inactive">Templates</li>
-                                </ul>
-                            </div>
-                        </div>-->
-                        
-                        <div class="fl-container-admin fl-force-left">
-                            <div class="main-users-page csc-users-userAdmin">
-                                <!-- search form -->
-                                <div id="search-box">
-                                    <input name="keyword" type="text" class="cs-search-user csc-user-searchField" /><input type="submit" class="csc-user-searchButton searchButton" value="Find User" /> (searches Full Name) &nbsp;&nbsp;<input type="submit" class="csc-user-unSearchButton searchButton" value="Show all users" />
-                                </div>
-                                <!-- end search form -->
+					
+					<div id="primaryTab">
+						<div class="fl-fix fl-container-flex fl-col-mixed2" >
+							   
+							<div class="fl-container-admin fl-force-left">
+								<div class="main-users-page csc-users-userAdmin">
+									<!-- search form -->
+									<div id="search-box">
+										<input name="keyword" type="text" class="cs-search-user csc-user-searchField" /><input type="submit" class="csc-user-searchButton searchButton" value="Find User" /> (searches Full Name) &nbsp;&nbsp;<input type="submit" class="csc-user-unSearchButton searchButton" value="Show all users" />
+									</div>
+									<!-- end search form -->
 
-                                <div class="csc-user-list">
-                                    <div class="fl-container-flex fl-fix information-group">
-                                        <div class="fl-container-flex fl-fix">
-                                            <div class="info-column2-25 fl-force-left">
-                                                <div>
-                                                    <div class="fl-container-flex header fl-force-left">Users</div>
-                                                    <input type="submit" class="cs-new-user-submit csc-listEditor-createNew button fl-force-right" value="Create New User" />
-                                                    <div class="clear"></div>
-                                                </div>
-                                                <div class="overflow-list csc-listEditor-list">
-                                                    <table class="user-table">
-                                                        <thead>
-                                                            <tr>
-                                                                <td>User's Full Name</td>
-                                                                <td>Status</td>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr class="add-new-row csc-listEditor-addNew" style="display:none;">
-                                                                <td>New User</td>
-                                                                <td>Edit Details <img src="../images/new_user_arrow.png" width="16" height="10" alt=""/></td>
-                                                            </tr>
-                                                            <tr class="csc-recordList-row">
-                                                                <td class="csc-user-userList-name"></td>
-                                                                <td class="csc-user-userList-status"></td>
-                                                                <td class="hidden csc-user-userList-csid"></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                
-                                                <div class="clear"></div>
-                                            </div>
-                                            
-                                            <div class="info-column2-75 fl-force-right">
-                                                <div class="fl-container-flex header">User Details</div>
-                                                <div class="user-details">
-                                                    <div class="user-details-fields csc-listEditor-details-none">
-                                                        No user selected. <div class="details-none">Please select a user from the list, or create a new user.</div>
-                                                    </div>
-                                                    <div class="user-details-fields information-subgroup csc-listEditor-details">
-                                                        <div class="fl-container-flex button-row details">
-                                                            <input type="button" class="primary saveButton csc-save" value="Save" />
-                                                            <input type="button" class="csc-cancel cancelButton" value="Cancel" />
-                                                            <input type="button" class="csc-delete deleteButton" value="Delete" />
-                                                            <div class="clear"></div>
-                                                        </div>
-                                                         
-                                                        <div class="hidden csc-message-container cs-message">
-                                                            <span class="csc-timestamp cs-timestamp">time</span>
-                                                            <span class="csc-message">Save successful!</span>
-                                                        </div>
-                                                        <div class="info-column2-50 fl-force-left">
-                                                            <div class="info-pair">
-                                                                <div class="label">Email Address <span class="required">*</span></div><div class="user-input"><input type="text" class="input-alpha csc-user-email csc-required" name=""/></div>
-                                                            </div>
-                                                            <div class="info-pair no-padding">
-                                                                <div class="label">Full Name  <span class="required">*</span></div><div class="user-input"><input type="text" class="input-alpha csc-user-userName csc-required" name=""/></div>
-                                                            </div>
-    
-                                                            <div class="csc-details-hideOnEdit">
-                                                                <div class="info-pair">
-                                                                    <div class="label">Password  <span class="required">*</span></div><div class="user-input"><input type="password" class="input-alpha csc-user-password csc-required csc-passwordValidator-password" name=""/></div>
-                                                                    <div class="password-instructions">Password must be between 8 and 24 characters.</div>
-                                                                </div>                                                        
-                                                                <div class="info-pair">
-                                                                    <div class="label">Confirm Password  <span class="required">*</span></div><div class="user-input"><input type="password" class="input-alpha csc-user-passwordConfirm csc-required" name=""/></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="csc-details-hideOnCreate">
-                                                                <div class="info-pair">
-                                                                    <div class="label">Status <span class="required">*</span></div><div class="user-input">
-                                                                        <select class="csc-user-status csc-required" disabled="disabled"> </select> 
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="info-column2-50 fl-force-left">
-                                                            <div class="info-pair">
-                                                                <div class="label">Roles</div>
-                                                                <div class="overflowdiv-admin">
-                                                                    <table>
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <td></td>
-                                                                                <td>Role name</td>
-                                                                                <td>Group</td>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>                                                                            
-                                                                            <tr class="csc-accountrole-roles-row">
-                                                                                <td>
-                                                                                    <input type="checkbox" class="csc-users-roleSelected"/>
-                                                                                </td>
-                                                                                <td class="csc-users-roleName"></td>
-                                                                                <td class="csc-users-roleGroup"></td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                    </div>
-                                                    <div class="clear"></div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>                                    
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
+									<div class="csc-user-list">
+										<div class="fl-container-flex fl-fix information-group">
+											<div class="fl-container-flex fl-fix">
+												<div class="info-column2-25 fl-force-left">
+													<div>
+														<div class="fl-container-flex header fl-force-left">Users</div>
+														<input type="submit" class="cs-new-user-submit csc-listEditor-createNew button fl-force-right" value="+ User" />
+														<div class="clear"></div>
+													</div>
+													<div class="overflow-list csc-listEditor-list">
+														<table class="user-table">
+															<thead>
+																<tr>
+																	<td>User's Full Name</td>
+																	<td>Status</td>
+																</tr>
+															</thead>
+															<tbody>
+																<tr class="add-new-row csc-listEditor-addNew" style="display:none;">
+																	<td>New User</td>
+																	<td>Edit Details <img src="../images/new_user_arrow.png" width="16" height="10" alt=""/></td>
+																</tr>
+																<tr class="csc-recordList-row">
+																	<td class="csc-user-userList-name"></td>
+																	<td class="csc-user-userList-status"></td>
+																	<td class="hidden csc-user-userList-csid"></td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+													
+													<div class="clear"></div>
+												</div>
+												
+												<div class="info-column2-75 fl-force-right">
+													<div class="fl-container-flex header">User Details</div>
+													<div class="user-details">
+														<div class="user-details-fields csc-listEditor-details-none">
+															No user selected. <div class="details-none">Please select a user from the list, or create a new user.</div>
+														</div>
+														<div class="user-details-fields information-subgroup csc-listEditor-details">
+															<div class="fl-container-flex button-row details">
+																<input type="button" class="primary saveButton csc-save" value="Save" />
+																<input type="button" class="csc-cancel cancelButton" value="Cancel" />
+																<input type="button" class="csc-delete deleteButton" value="Delete" />
+																<div class="clear"></div>
+															</div>
+															 
+															<div class="hidden csc-message-container cs-message">
+																<span class="csc-timestamp cs-timestamp">time</span>
+																<span class="csc-message">Save successful!</span>
+															</div>
+															<div class="info-column2-50 fl-force-left">
+																<div class="info-pair">
+																	<div class="label">Email Address <span class="required">*</span></div><div class="user-input"><input type="text" class="input-alpha csc-user-email csc-required" name=""/></div>
+																</div>
+																<div class="info-pair no-padding">
+																	<div class="label">Full Name  <span class="required">*</span></div><div class="user-input"><input type="text" class="input-alpha csc-user-userName csc-required" name=""/></div>
+																</div>
+		
+																<div class="csc-details-hideOnEdit">
+																	<div class="info-pair">
+																		<div class="label">Password  <span class="required">*</span></div><div class="user-input"><input type="password" class="input-alpha csc-user-password csc-required csc-passwordValidator-password" name=""/></div>
+																		<div class="password-instructions">Password must be between 8 and 24 characters.</div>
+																	</div>                                                        
+																	<div class="info-pair">
+																		<div class="label">Confirm Password  <span class="required">*</span></div><div class="user-input"><input type="password" class="input-alpha csc-user-passwordConfirm csc-required" name=""/></div>
+																	</div>
+																</div>
+																<div class="csc-details-hideOnCreate">
+																	<div class="info-pair">
+																		<div class="label">Status <span class="required">*</span></div><div class="user-input">
+																			<select class="csc-user-status csc-required" disabled="disabled"> </select> 
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="info-column2-50 fl-force-left">
+																<div class="info-pair">
+																	<div class="label">Roles</div>
+																	<div class="overflowdiv-admin">
+																		<table>
+																			<thead>
+																				<tr>
+																					<td></td>
+																					<td>Role name</td>
+																					<td>Group</td>
+																				</tr>
+																			</thead>
+																			<tbody>                                                                            
+																				<tr class="csc-accountrole-roles-row">
+																					<td>
+																						<input type="checkbox" class="csc-users-roleSelected"/>
+																					</td>
+																					<td class="csc-users-roleName"></td>
+																					<td class="csc-users-roleGroup"></td>
+																				</tr>
+																			</tbody>
+																		</table>
+																	</div>
+																</div>
+															</div>
+															<div class="clear"></div>
+														</div>
+														<div class="clear"></div>
+													</div>
+													<div class="clear"></div>
+												</div>
+												<div class="clear"></div>
+											</div>                                    
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+						
+					</div>
                 </div>
             </div>
             

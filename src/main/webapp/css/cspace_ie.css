@@ -3,7 +3,9 @@ input, textarea {margin-bottom:0px;}
 
 .add-more {margin:4px 4px 0 0;}
 
-.menu-record a {padding:2px 4px;}
+.menu-record a.current {padding-bottom:4px;}
+
+#secondary-nav-menu .menu-record {padding-bottom:3px;}
 
 /*.info-pair-date input {height:17px;}*/
 *table .input-select {height:20px;}
@@ -44,3 +46,5 @@ li .flc-pager-pageLink {margin-top:-1px;}
 .viewbutton {margin-top:-24px;}
 
 .info-pair-select .content table {width:100%;}
+
+.fl-container-pivot .right-sidebar {padding-top:33px;}
