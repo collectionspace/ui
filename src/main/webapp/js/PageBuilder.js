@@ -179,21 +179,6 @@ cspace = cspace || {};
             };
         });
         
-        if (that.options.recordType) {
-            resourceSpecs.schema = {
-                href: that.options.schemaUrl || fluid.invoke("cspace.util.getDefaultSchemaURL", that.options.recordType),
-                options: {
-                    dataType: "json",
-                    success: function (data) {
-                        fluid.merge(null, that.schema, data);
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        fluid.fail("Error fetching " + that.options.recordType + " schema:" + textStatus);
-                    }
-                }
-            };
-        }
-        
         if (that.options.csid) {
             var dcthat = that.dataContext;
             resourceSpecs.record = that.dataContext.getResourceSpec("fetch", dcthat.options, dcthat.events.afterFetch, dcthat.events, that.options.csid);

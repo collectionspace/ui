@@ -1,6 +1,10 @@
 {
     "pageBuilder": {
         "options": {
+            "schema": [
+                "recordlist",
+                "role"
+            ],
             "recordType": "role",
             "pageSpec": {
                 "footer": {

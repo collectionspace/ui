@@ -1,6 +1,10 @@
 {
     "pageBuilder": {
         "options": {
+            "schema": [
+                "recordlist",
+                "loanin"
+            ],
             "pageType": "loanin",
             "recordType": "loanin",
             "dataContext": {

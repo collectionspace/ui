@@ -286,20 +286,20 @@ fluid.registerNamespace("cspace.util");
     
     fluid.demands("cspace.util.getDefaultSchemaURL", "cspace.localData", {
         args: ["@0", {
-            url: "%webapp/html/uischema/%pageType.json"
+            url: "%webapp/html/uischema/%recordType.json"
         }]
     });
     
-    cspace.util.getDefaultSchemaURL = function (pageType, options) {
+    cspace.util.getDefaultSchemaURL = function (recordType, options) {
         var that = fluid.initLittleComponent("cspace.util.getDefaultSchemaURL", options);
         var url = fluid.stringTemplate(that.options.url, {
-            pageType: pageType
+            recordType: recordType
         });
         return that.options.urlRenderer(url);
     };
     
     fluid.defaults("cspace.util.getDefaultSchemaURL", {
-        url: "%chain/%pageType/uischema",
+        url: "%chain/%recordType/uischema",
         urlRenderer: {
             expander: {
                 type: "fluid.deferredInvokeCall",

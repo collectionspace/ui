@@ -1,6 +1,10 @@
 {
     "pageBuilder": {
         "options": {
+            "schema": [
+                "recordlist",
+                "intake"
+            ],
             "pageType": "intake",
             "recordType": "intake",
             "dataContext": {

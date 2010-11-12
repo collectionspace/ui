@@ -1,6 +1,10 @@
 {
     "pageBuilder": {
         "options": {
+            "schema": [
+                "recordlist",
+                "acquisition"
+            ],
             "pageType": "acquisition",
             "recordType": "acquisition",
             "dataContext": {

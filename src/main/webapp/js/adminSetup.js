@@ -58,6 +58,10 @@ cspace = cspace || {};
         };
 
         var options = {
+            schema: [
+                "recordlist",
+                "users"
+            ],
             recordType: "users",
             pageSpec: {
                 header: {

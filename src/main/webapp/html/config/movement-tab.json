@@ -1,6 +1,10 @@
 {
     "pageBuilder": {
         "options": {
+            "schema": [
+                "recordlist",
+                "movement"
+            ],
             "pageType": "movement-tab",
             "recordType": "movement",
             "pageSpec": {
