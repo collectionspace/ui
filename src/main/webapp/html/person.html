@@ -46,7 +46,6 @@
         <script type="text/javascript" src="../lib/datejs/src/core.js"></script>
         <script type="text/javascript" src="../lib/datejs/src/parser.js"></script>
         <script type="text/javascript" src="../js/DatePicker.js"></script>
-        <script type="text/javascript" src="../js/recordSetup.js"></script>
     </head>
 
     <body id="person">
@@ -59,8 +58,7 @@
             
             <div class="fl-container-1024-inner">
                 <!-- this div will be filled in with the contents of the Template -->
-                <div class="csc-personAuthority-titleBar-container">
-                </div>
+                <div class="csc-personAuthority-titleBar-container"></div>
                 
                 <!-- main content -->
                 <div id="all-content" class="fl-fix authority">
@@ -96,7 +94,7 @@
         </div>
         
         <script type="text/javascript">
-            cspace.recordSetup();
+            cspace.setup("cspace.record");
         </script>
     </body>
 </html>

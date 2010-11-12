@@ -98,7 +98,8 @@ var repeatableTester = function ($) {
         return cspace.makeRepeatable(".csc-object-identification-brief-description", options);
     };
     
-    var basicMarkupGenerateTest = function (container, repeatEl, text) {
+    var basicMarkupGenerateTest = function (repeatable, repeatEl, text) {
+        var container = repeatable.container;
         // 13 asserts
         
         var ul = $("ul", container);
@@ -121,7 +122,7 @@ var repeatableTester = function ($) {
 
         var addButton = $(".csc-repeatable-add", container);
         jqUnit.exists("The add button has been generated inside container", addButton);
-        jqUnit.assertEquals("The text of the add button is correct", "+ Field", addButton.val());
+        jqUnit.assertEquals("The text of the add button is correct", repeatable.options.strings.add, addButton.val());
         jqUnit.notExists("The add button is not in the ul", $(".csc-repeatable-add", ul));        
     };
     
@@ -129,7 +130,7 @@ var repeatableTester = function ($) {
         expect(13);
         var myRepeatable = basicSetup({text: "blue"});
         
-        basicMarkupGenerateTest(myRepeatable.container, ".cst-simpleTestField", "blue");
+        basicMarkupGenerateTest(myRepeatable, ".cst-simpleTestField", "blue");
     });
    
     repeatableTest.test("Markup Generation For a Table", function () {
@@ -342,7 +343,7 @@ var repeatableTester = function ($) {
         jqUnit.assertFalse("The container is not the element we are repeating", container.hasClass("cst-simpleTestFieldNoContainer"));
         jqUnit.assertEquals("the container is a div ", "DIV", container[0].tagName);
         
-        basicMarkupGenerateTest(container, ".cst-simpleTestFieldNoContainer", "Bruges");    
+        basicMarkupGenerateTest(myRepeatable, ".cst-simpleTestFieldNoContainer", "Bruges");    
     });
     
     repeatableTest.test("Delete Functionality", function () {    
@@ -437,7 +438,7 @@ var repeatableTester = function ($) {
     repeatableTest.test("Init test for brief description", function () {
         expect(13);
         var myRepeatable = setupRepeatableWithBriefDesc();
-        basicMarkupGenerateTest(myRepeatable.container, ".csc-object-identification-brief-description", "This is brief description.");
+        basicMarkupGenerateTest(myRepeatable, ".csc-object-identification-brief-description", "This is brief description.");
 
     });
     

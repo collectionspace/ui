@@ -24,7 +24,6 @@
         <script type="text/javascript" src="../js/PageSetup.js"></script>
         <script type="text/javascript" src="../js/DataContext.js"></script>
         <script type="text/javascript" src="../js/Search.js"></script>
-        <script type="text/javascript" src="../js/recordSetup.js"></script>
     </head>
     <body id="search">
         
@@ -148,11 +147,7 @@
         </div>
         
         <script type="text/javascript">
-            cspace.recordSetup({fetchConfigCallback: function (config) {
-                if (cspace.util.useLocalData()) {
-                    config.depOpts.search.options.searchUrlBuilder = cspace.search.localSearchUrlBuilder;
-                }
-            }});
+            cspace.setup("cspace.findedit");
         </script>
     </body>
 

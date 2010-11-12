@@ -24,8 +24,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             configURL: "../../main/webapp/html/config/organization.json",
             pageBuilder: {
                 options: {
-                    schemaUrl: "../../main/webapp/html/uischema/organization.json",
-                    uispecUrl: "../../main/webapp/html/uispecs/organization/uispec.json",
                     pageSpec: {
                         tabs: {
                             href: "../../main/webapp/html/tabsTemplate.html"
@@ -100,9 +98,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }
                 }
             },
-            templateUrlPrefix: "../../main/webapp/html/"
         }, options);
-        pageBuilder = cspace.recordSetup(options, "../../main/webapp/html/config/organization.json").pageBuilder;
+        pageBuilder = cspace.pageSetup(options).pageBuilder;
     };
     
     organizationTests.test("Initialization", function () {

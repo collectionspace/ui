@@ -21,7 +21,7 @@
                 "titleBar": {
                     "href": "personTitleBar.html",
                     "templateSelector": ".csc-personAuthority-titleBar-template",
-                    "targetSelector": ".csc-header-container" 
+                    "targetSelector": ".csc-personAuthority-titleBar-container" 
                 },
                 "recordEditor": {
                     "href": "personTemplate.html",

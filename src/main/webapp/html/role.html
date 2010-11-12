@@ -21,7 +21,6 @@
         <script type="text/javascript" src="../js/Renderer.js"></script>
         <script type="text/javascript" src="../js/SearchBox.js"></script>
         <script type="text/javascript" src="../js/Header.js"></script>
-        <script type="text/javascript" src="../js/PageSetup.js"></script>
         <script type="text/javascript" src="../js/Confirmation.js"></script>
         <script type="text/javascript" src="../js/DataSource.js"></script>
         <script type="text/javascript" src="../js/DataContext.js"></script>
@@ -32,7 +31,6 @@
         <script type="text/javascript" src="../js/AdminRoles.js"></script>
         <script type="text/javascript" src="../js/PageBuilder.js"></script>
         <script type="text/javascript" src="../js/PageSetup.js"></script>
-        <script type="text/javascript" src="../js/recordSetup.js"></script>
     </head>
     <body id="role">
     
@@ -166,16 +164,7 @@
             </div> <!-- END footer block -->
         </div>
         <script type="text/javascript">
-            cspace.recordSetup({fetchConfigCallback: function (config) {
-                config.depOpts.role.options.roleListEditor.options.dataContext.options.dataSource.options.sources.permission.merge = cspace.dataSource.mergePermissions;
-	            if (cspace.util.useLocalData()) {
-	                config.depOpts.role.options.recordType = "role/records/list.json";
-	                config.depOpts.role.options.roleListEditor.options.baseUrl = "data/";
-	                config.depOpts.role.options.roleListEditor.options.dataContext.options.baseUrl = "data/";
-	                config.depOpts.role.options.roleListEditor.options.dataContext.options.fileExtension = ".json";
-	                config.depOpts.role.options.roleListEditor.options.dataContext.options.dataSource.options.sources.permission.href = "data/permission/list.json";
-	            }
-            }});
+            cspace.setup("cspace.role");
         </script>
     </body>
 

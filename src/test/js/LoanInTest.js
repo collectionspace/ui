@@ -23,8 +23,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             configURL: "../../main/webapp/html/config/loanin.json",
             pageBuilder: {
                 options: {
-                    schemaUrl: "../../main/webapp/html/uischema/loanin.json",
-                    uispecUrl: "../../main/webapp/html/uispecs/loanin/uispec.json",
                     listeners: {
                         pageReady: function () {
                             jqUnit.assertValue("loan in should have a record editor", loanIn.pageBuilder.components.recordEditor);
@@ -109,11 +107,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         }
                     }
                 }
-            },
-            templateUrlPrefix: "../../main/webapp/html/"
+            }
         };
         
-        var loanIn = cspace.recordSetup(opts);
+        var loanIn = cspace.pageSetup(opts);
         stop();
 
     });

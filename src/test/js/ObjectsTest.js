@@ -27,8 +27,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 options: {
                     recordType: "cataloging",
                     pageType: "cataloging",
-                    schemaUrl: "../../main/webapp/html/uischema/cataloging.json",
-                    uispecUrl: "../../main/webapp/html/uispecs/cataloging/uispec.json",
                     listeners: {
                         onDependencySetup: function (uispec) {
                             // Change the template URL for the number pattern chooser.
@@ -111,7 +109,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         }, options);
-        pageBuilder = cspace.recordSetup(options, "../../main/webapp/html/config/cataloging.json").pageBuilder;
+        pageBuilder = cspace.pageSetup(options).pageBuilder;
     };
     
     objectsTests.test("Initialization", function () {

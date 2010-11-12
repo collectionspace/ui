@@ -56,6 +56,77 @@ cspace = cspace || {};
         return that;
     };
     
+    cspace.pageSetup.recordFetchConfigCallback = function (config) {
+        config.pageBuilder.options.csid = cspace.util.getUrlParameter("csid");
+    };
+    
+    cspace.pageSetup.localRecordFetchConfigCallback = function (config) {
+        cspace.pageSetup.recordFetchConfigCallback(config);
+        config.pageBuilder.options.dataContext.options.baseUrl = "data";
+        config.pageBuilder.options.dataContext.options.fileExtension = ".json";
+    };
+    
+    cspace.pageSetup.localFindeditFetchConfigCallback = function (config) {
+        config.depOpts.search.options.searchUrlBuilder = cspace.search.localSearchUrlBuilder;
+    };
+    
+    cspace.pageSetup.roleFetchConfigCallback = function (config) {
+        config.depOpts.role.options.roleListEditor.options.dataContext.options.dataSource.options.sources.permission.merge = 
+            cspace.dataSource.mergePermissions;
+    };
+    
+    cspace.pageSetup.localRoleFetchConfigCallback = function (config) {
+        cspace.pageSetup.roleFetchConfigCallback(config);
+        config.depOpts.role.options.recordType = "role/records/list.json";
+        config.depOpts.role.options.roleListEditor.options.baseUrl = "data/";
+        config.depOpts.role.options.roleListEditor.options.dataContext.options.baseUrl = "data/";
+        config.depOpts.role.options.roleListEditor.options.dataContext.options.fileExtension = ".json";
+        config.depOpts.role.options.roleListEditor.options.dataContext.options.dataSource.options.sources.permission.href = 
+            "data/permission/list.json";
+    };
+    
+    cspace.pageSetup.resolvePageSetup = function (options, callback) {
+        fluid.merge(null, options, {
+            fetchConfigCallback: callback
+        });
+        return cspace.pageSetup(options);
+    };
+    
+    fluid.demands("cspace.pageSetup", ["cspace.createnew"], {
+        funcName: "cspace.pageSetup.resolvePageSetup",
+        args: [fluid.COMPONENT_OPTIONS]
+    });
+    
+    fluid.demands("cspace.pageSetup", ["cspace.record"], {
+        funcName: "cspace.pageSetup.resolvePageSetup",
+        args: [fluid.COMPONENT_OPTIONS, cspace.pageSetup.recordFetchConfigCallback]
+    });
+    
+    fluid.demands("cspace.pageSetup", ["cspace.record", "cspace.localData"], {
+        funcName: "cspace.pageSetup.resolvePageSetup",
+        args: [fluid.COMPONENT_OPTIONS, cspace.pageSetup.localRecordFetchConfigCallback]
+    });
+    
+    fluid.demands("cspace.pageSetup", ["cspace.findedit"], {
+        funcName: "cspace.pageSetup.resolvePageSetup",
+        args: [fluid.COMPONENT_OPTIONS]
+    });
+    
+    fluid.demands("cspace.pageSetup", ["cspace.findedit", "cspace.localData"], {
+        funcName: "cspace.pageSetup.resolvePageSetup",
+        args: [fluid.COMPONENT_OPTIONS, cspace.pageSetup.localFindeditFetchConfigCallback]
+    });
+    
+    fluid.demands("cspace.pageSetup", ["cspace.role"], {
+        funcName: "cspace.pageSetup.resolvePageSetup",
+        args: [fluid.COMPONENT_OPTIONS, cspace.pageSetup.roleFetchConfigCallback]
+    });
+    
+    fluid.demands("cspace.pageSetup", ["cspace.role", "cspace.localData"], {
+        funcName: "cspace.pageSetup.resolvePageSetup",
+        args: [fluid.COMPONENT_OPTIONS, cspace.pageSetup.localRoleFetchConfigCallback]
+    });
+    
     fluid.defaults("cspace.pageSetup", {
         pageBuilder: {
             type: "cspace.pageBuilder"
@@ -69,5 +140,10 @@ cspace = cspace || {};
             applier: "preserve"
         }
     });
+    
+    cspace.setup = function (tag) {
+        fluid.staticEnvironment.cspacePage = fluid.typeTag(tag);
+        fluid.invoke("cspace.pageSetup");
+    };
     
 })(jQuery);
