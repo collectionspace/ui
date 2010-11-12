@@ -140,7 +140,7 @@ li .flc-pager-pageLink {margin-top:-1px;}
 .header-menu-logo a {display:block; height:60px; text-indent:-9999px; padding-bottom:8px;}
 .header-menu-right {width:500px; float:right;}
 .header-menu-right input, .header-menu-right select {margin-left:5px; vertical-align:bottom;}
-.header-menu-logout {padding:4px 0 12px 0; float:right;}
+.header-menu-logout {padding:4px 0 8px 0; float:right;}
 .header-menu-button {margin-right:6px; float:left; width:200px; height:30px;}
 .header-menu-search {float:right;}
 .header-menu-search select {margin-bottom:-1px;}
@@ -676,15 +676,16 @@ input.cs-repeatable-delete[disabled]:focus, table tr.csc-repeatable-repeat input
 .csc-movement-template .button-row {padding-bottom: 32px;}
 
 /***********    CSS For New Markup for SearchBox widget    ***********/
-.cs-searchBox {float:right;}
-.cs-searchBox select {margin-bottom:-1px;}
-.cs-searchBox .cs-seachBox-button {background:#73AA4F url('../images/icnSearch.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#FFF; float:right;}
+.cs-searchBox {/*float:right;*/padding:12px 14px 12px 0; background-color:#F5F5F5;}
+.cs-searchBox select {/*margin-bottom:-1px;*/}
+.cs-searchBox .cs-seachBox-button {background:#73AA4F url('../images/icnSearch.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#FFF; /*float:right;*/}
 .cs-searchBox .cs-seachBox-button:hover {background-color:#48722D;}
 .cs-searchBox .cs-searchBox-selectRecordType {width: auto; height:21px; color:#000; /**margin-bottom:-1px;*/}
-.cs-searchBox .cs-seachBox-query {width:140px !important; margin:0 8px 0 2px; height:17px; border:1px solid #BCBDBD;
+.cs-searchBox .cs-seachBox-query {width:205px !important; /*margin:0 8px 0 2px;*/ height:17px; border:1px solid #BCBDBD;
 	padding:1px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}
 .cs-searchBox .cs-searchBox-selectRecordTypeLabel {padding-right:8px; padding-top:3px; font-size:12px; color:#6D6E71;}
 
-.cs-pivot-searchBox .cs-searchBox {width: 99%;}
+.cs-pivot-searchBox .cs-searchBox {width: 99%; background-color:inherit; padding:0;}
 .cs-pivot-searchBox .cs-searchBox select {margin-top:10px;}
-.cs-pivot-searchBox .cs-searchBox .cs-seachBox-query {width:99% !important; margin:0 8px 8px 0; display:block;}
+.cs-searchBox .cs-seachBox-button {float:right;}
+.cs-pivot-searchBox .cs-searchBox .cs-seachBox-query {width:99% !important; margin:8px 8px 8px 0; display:block;}
