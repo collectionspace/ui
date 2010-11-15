@@ -85,6 +85,22 @@ cspace = cspace || {};
             "data/permission/list.json";
     };
     
+    cspace.pageSetup.usersFetchConfigCallback = function (config) {
+        config.depOpts.users.options.userListEditor.options.dataContext.options.dataSource.options.sources.role.merge = 
+            cspace.dataSource.mergeRoles;
+    };
+    
+    cspace.pageSetup.localUsersFetchConfigCallback = function (config) {
+        cspace.pageSetup.usersFetchConfigCallback(config);
+        config.depOpts.users.options.recordType = "users/records/list.json";
+        config.depOpts.users.options.queryURL = "data/users/search/list.json";
+        config.depOpts.users.options.userListEditor.options.baseUrl = "data/";
+        config.depOpts.users.options.userListEditor.options.dataContext.options.baseUrl = "data/";
+        config.depOpts.users.options.userListEditor.options.dataContext.options.fileExtension = ".json";
+        config.depOpts.users.options.userListEditor.options.dataContext.options.dataSource.options.sources.role.href = 
+            "data/role/list.json";
+    };
+    
     cspace.pageSetup.resolvePageSetup = function (options, callback) {
         fluid.merge(null, options, {
             fetchConfigCallback: callback
@@ -125,6 +141,16 @@ cspace = cspace || {};
     fluid.demands("cspace.pageSetup", ["cspace.role", "cspace.localData"], {
         funcName: "cspace.pageSetup.resolvePageSetup",
         args: [fluid.COMPONENT_OPTIONS, cspace.pageSetup.localRoleFetchConfigCallback]
+    });
+    
+    fluid.demands("cspace.pageSetup", ["cspace.users"], {
+        funcName: "cspace.pageSetup.resolvePageSetup",
+        args: [fluid.COMPONENT_OPTIONS, cspace.pageSetup.usersFetchConfigCallback]
+    });
+    
+    fluid.demands("cspace.pageSetup", ["cspace.users", "cspace.localData"], {
+        funcName: "cspace.pageSetup.resolvePageSetup",
+        args: [fluid.COMPONENT_OPTIONS, cspace.pageSetup.localUsersFetchConfigCallback]
     });
     
     fluid.defaults("cspace.pageSetup", {

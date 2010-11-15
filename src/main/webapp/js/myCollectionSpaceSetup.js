@@ -84,7 +84,6 @@ cspace = cspace || {};
                     targetSelector: ".csc-footer-container"
                 }
             },
-            uispecUrl: "../../chain/find-edit/uispec",
             components: {
                 pivotSearch: {
                     type: "cspace.searchBox",
