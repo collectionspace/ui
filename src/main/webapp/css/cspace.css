@@ -130,7 +130,7 @@ li .flc-pager-pageLink {margin-top:-1px;}
 
 /*set min-height for record pages */
 #all-content {min-height:400px; height:auto !important; height:400px;}
-#name-header-login {padding-top:20px;}
+#name-header-login {padding-top:30px;}
 
 
 /* header selectors */
@@ -313,7 +313,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .fl-container-left .acquisition-outer-border,
 .fl-container-left .authority-outer-border
 	{border: none; /*padding: 0 0 10px 10px;*/ /*padding: 0 10px;*/ margin-bottom:10px; /*border:2px solid #6F9ECD; border-top:none; background-color:#FFF;*/}
-.login-outer-border {border: none; padding:100px 0 10px 0px;}
+.login-outer-border {border: none; padding:80px 0 10px 0px;}
 	
 .info-pair .header, .info-pair-date .header, .info-pair-select .header {padding:0; margin:0; color:#000; cursor:default;}
 
