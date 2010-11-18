@@ -7713,7 +7713,7 @@ var fluid = fluid || fluid_1_2;
      * 2nd argument to detect any marker
      */
     fluid.isMarker = function(totest, type) {
-        if (typeof (totest) !== 'object' || totest.type !== "fluid.marker") return false;
+        if (!totest || typeof (totest) !== 'object' || totest.type !== "fluid.marker") return false;
         if (!type) return true;
         return totest.value === type || totest.value === type.value;
     };
@@ -7838,7 +7838,7 @@ var fluid = fluid || fluid_1_2;
     fluid.mergePolicyIs = function(policy, test) {
         return typeof(policy) === "string" && policy.indexOf(test) !== -1;
     };
-        
+    
     function mergeImpl(policy, basePath, target, source, thisPolicy) {
         if (typeof(thisPolicy) === "function") {
             thisPolicy.apply(null, target, source);
@@ -7869,7 +7869,9 @@ var fluid = fluid || fluid_1_2;
                         newPolicy.call(null, target, source, name);
                     }
                     else if (thisTarget === null || thisTarget === undefined || !fluid.mergePolicyIs(thisPolicy, "reverse")) {
-                        target[name] = thisSource;
+                        // TODO: When "grades" are implemented, grandfather in any paired applier to perform these operations
+                        // NB: mergePolicy of "preserve" now creates dependency on DataBinding.js
+                        target[name] = fluid.mergePolicyIs(newPolicy, "preserve")? fluid.model.mergeModel(thisTarget, thisSource) : thisSource;
                     }
                 }
             }
@@ -8311,6 +8313,17 @@ var fluid = fluid || fluid_1_2;
         return element.id;
     };
     
+        
+    /** Corrected version of jQuery makearray that returns an empty array on undefined rather than crashing **/
+    fluid.makeArray = function(arg) {
+        if (arg === null || arg === undefined) {
+            return [];
+        }
+        else {
+            return $.makeArray(arg);
+        }
+    };
+    
     // Functional programming utilities.
     
     function transformInternal(source, togo, key, args) {
@@ -8450,6 +8463,135 @@ var fluid = fluid || fluid_1_2;
         }
         return newString;
     };
+    
+})(jQuery, fluid_1_2);
+/*
+Copyright 2007-2010 University of Cambridge
+Copyright 2007-2009 University of Toronto
+
+Licensed under the Educational Community License (ECL), Version 2.0 or the New
+BSD license. You may not use this file except in compliance with one these
+Licenses.
+
+You may obtain a copy of the ECL 2.0 License and BSD License at
+https://source.fluidproject.org/svn/LICENSE.txt
+*/
+
+/** This file contains functions which depend on the presence of a DOM document
+ * but which do not depend on the contents of Fluid.js **/
+
+// Declare dependencies.
+/*global jQuery*/
+
+var fluid_1_2 = fluid_1_2 || {};
+
+(function ($, fluid) {
+
+    // Private constants.
+    var NAMESPACE_KEY = "fluid-scoped-data";
+
+    /**
+     * Gets stored state from the jQuery instance's data map.
+     * NOT A PART OF THE STABLE FLUID API.
+     */
+    fluid.getScopedData = function(target, key) {
+        var data = $(target).data(NAMESPACE_KEY);
+        return data ? data[key] : undefined;
+    };
+
+    /**
+     * Stores state in the jQuery instance's data map. Unlike jQuery's version,
+     * accepts multiple-element jQueries.
+     * NOT A PART OF THE STABLE FLUID API.
+     */
+    fluid.setScopedData = function(target, key, value) {
+        $(target).each(function() {
+            var data = $.data(this, NAMESPACE_KEY) || {};
+            data[key] = value;
+
+            $.data(this, NAMESPACE_KEY, data);
+        });
+    };
+
+    /** Global focus manager - makes use of "focusin" event supported in jquery 1.4.2 or later.
+     */
+
+    var lastFocusedElement = null;
+    
+    $(document).bind("focusin", function(event){
+        lastFocusedElement = event.target;
+    });
+    
+    fluid.getLastFocusedElement = function () {
+        return lastFocusedElement;
+    }
+
+
+    var ENABLEMENT_KEY = "enablement";
+
+    /** Queries or sets the enabled status of a control. An activatable node
+     * may be "disabled" in which case its keyboard bindings will be inoperable
+     * (but still stored) until it is reenabled again.
+     */
+     
+    fluid.enabled = function(target, state) {
+        target = $(target);
+        if (state === undefined) {
+            return fluid.getScopedData(target, ENABLEMENT_KEY) !== false;
+        }
+        else {
+            $("*", target).each(function() {
+                if (fluid.getScopedData(this, ENABLEMENT_KEY) !== undefined) {
+                    fluid.setScopedData(this, ENABLEMENT_KEY, state);
+                }
+                else if (/select|textarea|input/i.test(this.nodeName)) {
+                    $(this).attr("disabled", !state);
+                }
+            });
+            fluid.setScopedData(target, ENABLEMENT_KEY, state);
+        }
+    };
+    
+    fluid.initEnablement = function(target) {
+        fluid.setScopedData(target, ENABLEMENT_KEY, true);
+    }
+    /** Sets an interation on a target control, which morally manages a "blur" for
+     * a possibly composite region.
+     * A timed blur listener is set on the control, which waits for a short period of
+     * time (options.delay, defaults to 150ms) to discover whether the reason for the 
+     * blur interaction is that either a focus or click is being serviced on a nominated
+     * set of "exclusions" (options.exclusions, a free hash of elements or jQueries). 
+     * If no such event is received within the window, options.handler will be called
+     * with the argument "control", to service whatever interaction is required of the
+     * blur.
+     */
+    
+    fluid.deadMansBlur = function (control, options) {
+        // TODO: framework-free version of component construction, review whether we
+        // can put this in fluidView.js once it exists
+        var that = {options: $.extend(true, {}, options)};
+        that.options.delay = that.options.delay || 150;
+        that.blurPending = false;
+        $(control).blur(function () {
+            that.blurPending = true;
+            setTimeout(function () {
+                if (that.blurPending) {
+                    that.options.handler(control);
+                }
+            }, that.options.delay);
+        });
+        that.canceller = function () {
+            that.blurPending = false; 
+        };
+        for (var key in that.options.exclusions) {
+            var exclusion = $(that.options.exclusions[key]);  
+            exclusion.focusin(that.canceller);
+            exclusion.click(that.canceller);
+        }
+        return that;
+    };
+    
+
     
 })(jQuery, fluid_1_2);
 /*
@@ -8810,8 +8952,6 @@ fluid_1_2 = fluid_1_2 || {};
 
 (function ($, fluid) {
     
-    fluid.VALUE = {};
-    
     fluid.BINDING_ROOT_KEY = "fluid-binding-root";
     
     /** Recursively find any data stored under a given name from a node upwards
@@ -9027,6 +9167,15 @@ fluid_1_2 = fluid_1_2 || {};
         }
         return togo;
       };
+    
+    fluid.model.mergeModel = function(target, source, applier) {
+        var copySource = fluid.copy(source);
+        applier = applier || fluid.makeChangeApplier(source);
+        applier.fireChangeRequest({type: "ADD", path: "", value: target});
+        applier.fireChangeRequest({type: "MERGE", path: "", value: copySource});
+        return source; 
+    };
+        
       
     fluid.model.isNullChange = function(model, request, resolverGetConfig) {
         if (request.type === "ADD") {
@@ -9439,42 +9588,6 @@ var fluid = fluid || fluid_1_2;
     fluid.thatistBridge("fluid", fluid);
     fluid.thatistBridge("fluid_1_2", fluid_1_2);
 
-    // Private constants.
-    var NAMESPACE_KEY = "fluid-keyboard-a11y";
-
-    /**
-     * Gets stored state from the jQuery instance's data map.
-     */
-    var getData = function(target, key) {
-        var data = $(target).data(NAMESPACE_KEY);
-        return data ? data[key] : undefined;
-    };
-
-    /**
-     * Stores state in the jQuery instance's data map. Unlike jQuery's version,
-     * accepts multiple-element jQueries.
-     */
-    var setData = function(target, key, value) {
-        $(target).each(function() {
-            var data = $.data(this, NAMESPACE_KEY) || {};
-            data[key] = value;
-
-            $.data(this, NAMESPACE_KEY, data);
-        });
-    };
-/** Global focus manager - makes use of "focusin" event supported in jquery 1.4.2 or later.
- */
-
-    var lastFocusedElement = null;
-    
-    $(document).bind("focusin", function(event){
-        lastFocusedElement = event.target;
-    });
-    
-    fluid.getLastFocusedElement = function () {
-        return lastFocusedElement;
-    }
-
 /*************************************************************************
  * Tabindex normalization - compensate for browser differences in naming
  * and function of "tabindex" attribute and tabbing order.
@@ -9567,33 +9680,7 @@ var fluid = fluid || fluid_1_2;
         return fluid.tabindex.hasAttr(target) || canHaveDefaultTabindex(target);
     };
 
-    var ENABLEMENT_KEY = "enablement";
-
-    /** Queries or sets the enabled status of a control. An activatable node
-     * may be "disabled" in which case its keyboard bindings will be inoperable
-     * (but still stored) until it is reenabled again.
-     */
-     
-    fluid.enabled = function(target, state) {
-        target = $(target);
-        if (state === undefined) {
-            return getData(target, ENABLEMENT_KEY) !== false;
-        }
-        else {
-            $("*", target).each(function() {
-                if (getData(this, ENABLEMENT_KEY) !== undefined) {
-                    setData(this, ENABLEMENT_KEY, state);
-                }
-                else if (/select|textarea|input/i.test(this.nodeName)) {
-                    $(this).attr("disabled", !state);
-                }
-            });
-            setData(target, ENABLEMENT_KEY, state);
-        }
-    };
-    
-
-// Keyboard navigation
+    // Keyboard navigation
     // Public, static constants needed by the rest of the library.
     fluid.a11y = $.a11y || {};
 
@@ -9857,13 +9944,13 @@ var fluid = fluid || fluid_1_2;
             if (typeof(that.options.selectablesTabindex) === "number") {
                 that.selectables.fluid("tabindex", that.options.selectablesTabindex);
             }
-            that.selectables.unbind("focus." + NAMESPACE_KEY);
-            that.selectables.unbind("blur." + NAMESPACE_KEY);
-            that.selectables.bind("focus."+ NAMESPACE_KEY, selectableFocusHandler(that));
-            that.selectables.bind("blur." + NAMESPACE_KEY, selectableBlurHandler(that));
+            that.selectables.unbind("focus." + CONTEXT_KEY);
+            that.selectables.unbind("blur." + CONTEXT_KEY);
+            that.selectables.bind("focus."+ CONTEXT_KEY, selectableFocusHandler(that));
+            that.selectables.bind("blur." + CONTEXT_KEY, selectableBlurHandler(that));
             if (keyMap && that.options.noBubbleListeners) {
-                that.selectables.unbind("keydown."+NAMESPACE_KEY);
-                that.selectables.bind("keydown."+NAMESPACE_KEY, arrowKeyHandler(that, keyMap));
+                that.selectables.unbind("keydown."+CONTEXT_KEY);
+                that.selectables.bind("keydown."+CONTEXT_KEY, arrowKeyHandler(that, keyMap));
             }
             if (focusedItem) {
                 selectElement(focusedItem, that);
@@ -9907,7 +9994,7 @@ var fluid = fluid || fluid_1_2;
     fluid.selectable = function(target, options) {
         target = $(target);
         var that = makeElementsSelectable(target, fluid.selectable.defaults, options);
-        setData(target, CONTEXT_KEY, that);
+        fluid.setScopedData(target, CONTEXT_KEY, that);
         return that;
     };
 
@@ -9923,7 +10010,7 @@ var fluid = fluid || fluid_1_2;
      */
     fluid.selectable.selectNext = function(target) {
         target = $(target);
-        focusNextElement(getData(target, CONTEXT_KEY));
+        focusNextElement(fluid.getScopedData(target, CONTEXT_KEY));
     };
 
     /**
@@ -9931,7 +10018,7 @@ var fluid = fluid || fluid_1_2;
      */
     fluid.selectable.selectPrevious = function(target) {
         target = $(target);
-        focusPreviousElement(getData(target, CONTEXT_KEY));
+        focusPreviousElement(fluid.getScopedData(target, CONTEXT_KEY));
     };
 
     /**
@@ -9939,7 +10026,7 @@ var fluid = fluid || fluid_1_2;
      */
     fluid.selectable.currentSelection = function(target) {
         target = $(target);
-        var that = getData(target, CONTEXT_KEY);
+        var that = fluid.getScopedData(target, CONTEXT_KEY);
         return $(that.selectedElement());
     };
 
@@ -10017,7 +10104,7 @@ var fluid = fluid || fluid_1_2;
             bindings = bindings.concat(options.additionalBindings);
         }
 
-        setData(elements, ENABLEMENT_KEY, true);
+        fluid.initEnablement(elements);
 
         // Add listeners for each key binding.
         for (var i = 0; i < bindings.length; ++ i) {
@@ -10318,16 +10405,6 @@ var fluid_1_2 = fluid_1_2 || {};
     fluid.resolveDemands = function (thatStack, funcNames, initArgs, options) {
         var demandspec = fluid.determineDemands(thatStack, funcNames);
         return fluid.embodyDemands(thatStack, demandspec, initArgs, options);
-    };
-    
-    /** Corrected version of jQuery makearray that returns an empty array on undefined rather than crashing **/
-    fluid.makeArray = function(arg) {
-        if (arg === null || arg === undefined) {
-            return [];
-        }
-        else {
-            return $.makeArray(arg);
-        }
     };
     
     // TODO: make a *slightly* more performant version of fluid.invoke that perhaps caches the demands
@@ -10693,54 +10770,7 @@ var fluid_1_2 = fluid_1_2 || {};
     };
 
     /** "light" expanders, starting with support functions for the "deferredFetcher" expander **/
-  
-    fluid.expander.makeDefaultFetchOptions = function (successdisposer, failid, options) {
-        return $.extend(true, {dataType: "text"}, options, {
-            success: function(response, environmentdisposer) {
-                var json = JSON.parse(response);
-                environmentdisposer(successdisposer(json));
-            },
-            error: function(response, textStatus) {
-                fluid.log("Error fetching " + failid + ": " + textStatus);
-            }
-        });
-    };
-  
-    fluid.expander.makeFetchExpander = function (options) {
-        return { expander: {
-            type: "fluid.expander.deferredFetcher",
-            href: options.url,
-            options: fluid.expander.makeDefaultFetchOptions(options.disposer, options.url, options.options),
-            resourceSpecCollector: "{resourceSpecCollector}",
-            fetchKey: options.fetchKey
-        }};
-    };
-    
-    fluid.expander.deferredFetcher = function(target, source) {
-        var expander = source.expander;
-        var spec = fluid.copy(expander);
-        // fetch the "global" collector specified in the external environment to receive
-        // this resourceSpec
-        var collector = fluid.resolveEnvironment(expander.resourceSpecCollector);
-        delete spec.type;
-        delete spec.resourceSpecCollector;
-        delete spec.fetchKey;
-        var environmentdisposer = function(disposed) {
-            $.extend(target, disposed);
-        };
-        // replace the callback which is there (taking 2 arguments) with one which
-        // directly responds to the request, passing in the result and OUR "disposer" - 
-        // which once the user has processed the response (say, parsing JSON and repackaging)
-        // finally deposits it in the place of the expander in the tree to which this reference
-        // has been stored at the point this expander was evaluated.
-        spec.options.success = function(response) {
-             expander.options.success(response, environmentdisposer);
-        };
-        var key = expander.fetchKey || fluid.allocateGuid();
-        collector[key] = spec;
-        return target;
-    };
-    
+
     fluid.expander.deferredCall = function(target, source) {
         var expander = source.expander;
         var args = (!expander.args || fluid.isArrayable(expander.args))? expander.args : $.makeArray(expander.args); 
@@ -10794,6 +10824,320 @@ var fluid_1_2 = fluid_1_2 || {};
         return fluid.resolveEnvironment(source, options.model, options);       
     };
           
+})(jQuery, fluid_1_2);
+/*
+Copyright 2007-2010 University of Cambridge
+Copyright 2007-2009 University of Toronto
+
+Licensed under the Educational Community License (ECL), Version 2.0 or the New
+BSD license. You may not use this file except in compliance with one these
+Licenses.
+
+You may obtain a copy of the ECL 2.0 License and BSD License at
+https://source.fluidproject.org/svn/LICENSE.txt
+*/
+
+// Declare dependencies.
+/*global jQuery*/
+
+var fluid_1_2 = fluid_1_2 || {};
+
+(function ($, fluid) {
+
+    /** Framework-global caching state for fluid.fetchResources **/
+
+    var resourceCache = {};
+  
+    var pendingClass = {};
+ 
+    /** Accepts a hash of structures with free keys, where each entry has either
+     * href/url or nodeId set - on completion, callback will be called with the populated
+     * structure with fetched resource text in the field "resourceText" for each
+     * entry. Each structure may contain "options" holding raw options to be forwarded
+     * to jQuery.ajax().
+     */
+  
+    fluid.fetchResources = function(resourceSpecs, callback, options) {
+        var that = fluid.initLittleComponent("fluid.fetchResources", options);
+        that.resourceSpecs = resourceSpecs;
+        that.callback = callback;
+        that.operate = function() {
+            fluid.fetchResources.fetchResourcesImpl(that);
+        };
+        fluid.each(resourceSpecs, function(resourceSpec) {
+             resourceSpec.recurseFirer = fluid.event.getEventFirer();
+             resourceSpec.recurseFirer.addListener(that.operate);
+             if (resourceSpec.url && !resourceSpec.href) {
+                resourceSpec.href = resourceSpec.url;
+             }
+        });
+        if (that.options.amalgamateClasses) {
+            fluid.fetchResources.amalgamateClasses(resourceSpecs, that.options.amalgamateClasses, that.operate);
+        }
+        that.operate();
+        return that;
+    };
+  
+    // Add "synthetic" elements of *this* resourceSpec list corresponding to any
+    // still pending elements matching the PROLEPTICK CLASS SPECIFICATION supplied 
+    fluid.fetchResources.amalgamateClasses = function(specs, classes, operator) {
+        fluid.each(classes, function(clazz) {
+            var pending = pendingClass[clazz];
+            fluid.each(pending, function(pendingrec, canon) {
+                specs[clazz+"!"+canon] = pendingrec;
+                pendingrec.recurseFirer.addListener(operator);
+            });
+        });
+    };
+  
+    fluid.fetchResources.timeSuccessCallback = function(resourceSpec) {
+        if (resourceSpec.timeSuccess && resourceSpec.options && resourceSpec.options.success) {
+            var success = resourceSpec.options.success;
+            resourceSpec.options.success = function() {
+            var startTime = new Date();
+            var ret = success.apply(null, arguments);
+            fluid.log("External callback for URL " + resourceSpec.href + " completed - callback time: " + 
+                    (new Date().getTime() - startTime.getTime()) + "ms");
+            return ret;
+            };
+        }
+    };
+    
+    // TODO: Integrate punch-through from old Engage implementation
+    function canonUrl(url) {
+        return url;
+    }
+    
+    fluid.fetchResources.clearResourceCache = function(url) {
+        if (url) {
+            delete resourceCache[canonUrl(url)];
+        }
+        else {
+            fluid.clear(resourceCache);
+        }  
+    };
+  
+    fluid.fetchResources.handleCachedRequest = function(resourceSpec, response) {
+         var canon = canonUrl(resourceSpec.href);
+         var cached = resourceCache[canon];
+         if (cached.$$firer$$) {
+             fluid.log("Handling request for " + canon + " from cache");
+             var fetchClass = resourceSpec.fetchClass;
+             if (fetchClass && pendingClass[fetchClass]) {
+                 fluid.log("Clearing pendingClass entry for class " + fetchClass);
+                 delete pendingClass[fetchClass][canon];
+             }
+             resourceCache[canon] = response;      
+             cached.fire(response);
+         }
+    };
+    
+    fluid.fetchResources.completeRequest = function(thisSpec, recurseCall) {
+        thisSpec.queued = false;
+        thisSpec.completeTime = new Date();
+        fluid.log("Request to URL " + thisSpec.href + " completed - total elapsed time: " + 
+            (thisSpec.completeTime.getTime() - thisSpec.initTime.getTime()) + "ms");
+        thisSpec.recurseFirer.fire();
+    };
+  
+    fluid.fetchResources.makeResourceCallback = function(thisSpec) {
+        return {
+            success: function(response) {
+                thisSpec.resourceText = response;
+                thisSpec.resourceKey = thisSpec.href;
+                if (thisSpec.forceCache) {
+                    fluid.fetchResources.handleCachedRequest(thisSpec, response);
+                }
+                fluid.fetchResources.completeRequest(thisSpec);
+            },
+            error: function(response, textStatus, errorThrown) {
+                thisSpec.fetchError = {
+                    status: response.status,
+                    textStatus: response.textStatus,
+                    errorThrown: errorThrown
+                };
+                fluid.fetchResources.completeRequest(thisSpec);
+            }
+            
+        };
+    };
+    
+        
+    fluid.fetchResources.issueCachedRequest = function(resourceSpec, options) {
+         var canon = canonUrl(resourceSpec.href);
+         var cached = resourceCache[canon];
+         if (!cached) {
+             fluid.log("First request for cached resource with url " + canon);
+             cached = fluid.event.getEventFirer();
+             cached.$$firer$$ = true;
+             resourceCache[canon] = cached;
+             var fetchClass = resourceSpec.fetchClass;
+             if (fetchClass) {
+                 if (!pendingClass[fetchClass]) {
+                     pendingClass[fetchClass] = {};
+                 }
+                 pendingClass[fetchClass][canon] = resourceSpec;
+             }
+             options.cache = false; // TODO: Getting weird "not modified" issues on Firefox
+             $.ajax(options);
+         }
+         else {
+             if (!cached.$$firer$$) {
+                 options.success(cached);
+             }
+             else {
+                 fluid.log("Request for cached resource which is in flight: url " + canon);
+                 cached.addListener(function(response) {
+                     options.success(response);
+                 });
+             }
+         }
+    };
+    
+    // Compose callbacks in such a way that the 2nd, marked "external" will be applied
+    // first if it exists, but in all cases, the first, marked internal, will be 
+    // CALLED WITHOUT FAIL
+    fluid.fetchResources.composeCallbacks = function(internal, external) {
+        return external? function() {
+            try {
+                external.apply(null, arguments);
+            }
+            catch (e) {
+                fluid.log("Exception applying external fetchResources callback: " + e);
+            }
+            internal.apply(null, arguments); // call the internal callback without fail
+        } : internal;
+    };
+    
+    fluid.fetchResources.composePolicy = function(target, source, key) {
+        target[key] = fluid.fetchResources.composeCallbacks(target[key], source[key]);
+    };
+    
+    fluid.defaults("fluid.fetchResources.issueRequest", {
+        mergePolicy: {
+            success: fluid.fetchResources.composePolicy,
+            error: fluid.fetchResources.composePolicy,
+            url: "reverse"
+        }
+    });
+    
+    fluid.fetchResources.issueRequest = function(resourceSpec, key) {
+        var thisCallback = fluid.fetchResources.makeResourceCallback(resourceSpec);
+        var options = {  
+             url:     resourceSpec.href,
+             success: thisCallback.success, 
+             error:   thisCallback.error};
+        fluid.fetchResources.timeSuccessCallback(resourceSpec);
+        fluid.merge(fluid.defaults("fluid.fetchResources.issueRequest").mergePolicy,
+                      options, resourceSpec.options);
+        resourceSpec.queued = true;
+        resourceSpec.initTime = new Date();
+        fluid.log("Request with key " + key + " queued for " + resourceSpec.href);
+
+        if (resourceSpec.forceCache) {
+            fluid.fetchResources.issueCachedRequest(resourceSpec, options);
+        }
+        else {
+            $.ajax(options);
+        }
+    };
+    
+    fluid.fetchResources.fetchResourcesImpl = function(that) {
+        var complete = true;
+        var allSync = true;
+        var resourceSpecs = that.resourceSpecs;
+        for (var key in resourceSpecs) {
+            var resourceSpec = resourceSpecs[key];
+            if (!resourceSpec.options || resourceSpec.options.async) {
+                allSync = false;
+            }
+            if (resourceSpec.href && !resourceSpec.completeTime) {
+                 if (!resourceSpec.queued) {
+                     fluid.fetchResources.issueRequest(resourceSpec, key);  
+                 }
+                 if (resourceSpec.queued) {
+                     complete = false;
+                 }
+            }
+            else if (resourceSpec.nodeId && !resourceSpec.resourceText) {
+                var node = document.getElementById(resourceSpec.nodeId);
+                // upgrade this to somehow detect whether node is "armoured" somehow
+                // with comment or CDATA wrapping
+                resourceSpec.resourceText = fluid.dom.getElementText(node);
+                resourceSpec.resourceKey = resourceSpec.nodeId;
+            }
+        }
+        if (complete && that.callback && !that.callbackCalled) {
+            that.callbackCalled = true;
+            if ($.browser.mozilla && !allSync) {
+                // Defer this callback to avoid debugging problems on Firefox
+                setTimeout(function() {
+                    that.callback(resourceSpecs);
+                    }, 1);
+            }
+            else {
+                that.callback(resourceSpecs);
+            }
+        }
+    };
+    
+    fluid.fetchResources.primeCacheFromResources = function(componentName) {
+        var resources = fluid.defaults(componentName).resources;
+        var expanded = (fluid.expandOptions? fluid.expandOptions : fluid.identity)(fluid.copy(resources));
+        fluid.fetchResources(expanded);
+    };
+    
+    /** Utilities invoking requests for expansion **/
+    fluid.registerNamespace("fluid.expander");
+      
+    fluid.expander.makeDefaultFetchOptions = function (successdisposer, failid, options) {
+        return $.extend(true, {dataType: "text"}, options, {
+            success: function(response, environmentdisposer) {
+                var json = JSON.parse(response);
+                environmentdisposer(successdisposer(json));
+            },
+            error: function(response, textStatus) {
+                fluid.log("Error fetching " + failid + ": " + textStatus);
+            }
+        });
+    };
+  
+    fluid.expander.makeFetchExpander = function (options) {
+        return { expander: {
+            type: "fluid.expander.deferredFetcher",
+            href: options.url,
+            options: fluid.expander.makeDefaultFetchOptions(options.disposer, options.url, options.options),
+            resourceSpecCollector: "{resourceSpecCollector}",
+            fetchKey: options.fetchKey
+        }};
+    };
+    
+    fluid.expander.deferredFetcher = function(target, source) {
+        var expander = source.expander;
+        var spec = fluid.copy(expander);
+        // fetch the "global" collector specified in the external environment to receive
+        // this resourceSpec
+        var collector = fluid.resolveEnvironment(expander.resourceSpecCollector);
+        delete spec.type;
+        delete spec.resourceSpecCollector;
+        delete spec.fetchKey;
+        var environmentdisposer = function(disposed) {
+            $.extend(target, disposed);
+        };
+        // replace the callback which is there (taking 2 arguments) with one which
+        // directly responds to the request, passing in the result and OUR "disposer" - 
+        // which once the user has processed the response (say, parsing JSON and repackaging)
+        // finally deposits it in the place of the expander in the tree to which this reference
+        // has been stored at the point this expander was evaluated.
+        spec.options.success = function(response) {
+             expander.options.success(response, environmentdisposer);
+        };
+        var key = expander.fetchKey || fluid.allocateGuid();
+        collector[key] = spec;
+        return target;
+    };
+    
+    
 })(jQuery, fluid_1_2);
 /*
 Copyright 2008-2009 University of Toronto
@@ -11691,248 +12035,6 @@ fluid_1_2 = fluid_1_2 || {};
       firstdocumentindex: -1
     };
   };
-
-    /** Framework-global caching state for fluid.fetchResources **/
-
-    var resourceCache = {};
-  
-    var pendingClass = {};
- 
-    /** Accepts a hash of structures with free keys, where each entry has either
-     * href or nodeId set - on completion, callback will be called with the populated
-     * structure with fetched resource text in the field "resourceText" for each
-     * entry.
-     */
-  
-    fluid.fetchResources = function(resourceSpecs, callback, options) {
-        var that = fluid.initLittleComponent("fluid.fetchResources", options);
-        that.resourceSpecs = resourceSpecs;
-        that.callback = callback;
-        that.operate = function() {
-            fluid.fetchResources.fetchResourcesImpl(that);
-        };
-        fluid.each(resourceSpecs, function(resourceSpec) {
-             resourceSpec.recurseFirer = fluid.event.getEventFirer();
-             resourceSpec.recurseFirer.addListener(that.operate);
-             if (resourceSpec.url && !resourceSpec.href) {
-                resourceSpec.href = resourceSpec.url;
-             }
-        });
-        if (that.options.amalgamateClasses) {
-            fluid.fetchResources.amalgamateClasses(resourceSpecs, that.options.amalgamateClasses, that.operate);
-        }
-        that.operate();
-        return that;
-    };
-  
-    // Add "synthetic" elements of *this* resourceSpec list corresponding to any
-    // still pending elements matching the PROLEPTICK CLASS SPECIFICATION supplied 
-    fluid.fetchResources.amalgamateClasses = function(specs, classes, operator) {
-        fluid.each(classes, function(clazz) {
-            var pending = pendingClass[clazz];
-            fluid.each(pending, function(pendingrec, canon) {
-                specs[clazz+"!"+canon] = pendingrec;
-                pendingrec.recurseFirer.addListener(operator);
-            });
-        });
-    };
-  
-    fluid.fetchResources.timeSuccessCallback = function(resourceSpec) {
-        if (resourceSpec.timeSuccess && resourceSpec.options && resourceSpec.options.success) {
-            var success = resourceSpec.options.success;
-            resourceSpec.options.success = function() {
-            var startTime = new Date();
-            var ret = success.apply(null, arguments);
-            fluid.log("External callback for URL " + resourceSpec.href + " completed - callback time: " + 
-                    (new Date().getTime() - startTime.getTime()) + "ms");
-            return ret;
-            };
-        }
-    };
-    
-    // TODO: Integrate punch-through from old Engage implementation
-    function canonUrl(url) {
-        return url;
-    }
-    
-    fluid.fetchResources.clearResourceCache = function(url) {
-        if (url) {
-            delete resourceCache[canonUrl(url)];
-        }
-        else {
-            fluid.clear(resourceCache);
-        }  
-    };
-  
-    fluid.fetchResources.handleCachedRequest = function(resourceSpec, response) {
-         var canon = canonUrl(resourceSpec.href);
-         var cached = resourceCache[canon];
-         if (cached.$$firer$$) {
-             fluid.log("Handling request for " + canon + " from cache");
-             var fetchClass = resourceSpec.fetchClass;
-             if (fetchClass && pendingClass[fetchClass]) {
-                 fluid.log("Clearing pendingClass entry for class " + fetchClass);
-                 delete pendingClass[fetchClass][canon];
-             }
-             resourceCache[canon] = response;      
-             cached.fire(response);
-         }
-    };
-    
-    fluid.fetchResources.completeRequest = function(thisSpec, recurseCall) {
-        thisSpec.queued = false;
-        thisSpec.completeTime = new Date();
-        fluid.log("Request to URL " + thisSpec.href + " completed - total elapsed time: " + 
-            (thisSpec.completeTime.getTime() - thisSpec.initTime.getTime()) + "ms");
-        thisSpec.recurseFirer.fire();
-    };
-  
-    fluid.fetchResources.makeResourceCallback = function(thisSpec) {
-        return {
-            success: function(response) {
-                thisSpec.resourceText = response;
-                thisSpec.resourceKey = thisSpec.href;
-                if (thisSpec.forceCache) {
-                    fluid.fetchResources.handleCachedRequest(thisSpec, response);
-                }
-                fluid.fetchResources.completeRequest(thisSpec);
-            },
-            error: function(response, textStatus, errorThrown) {
-                thisSpec.fetchError = {
-                    status: response.status,
-                    textStatus: response.textStatus,
-                    errorThrown: errorThrown
-                };
-                fluid.fetchResources.completeRequest(thisSpec);
-            }
-            
-        };
-    };
-    
-        
-    fluid.fetchResources.issueCachedRequest = function(resourceSpec, options) {
-         var canon = canonUrl(resourceSpec.href);
-         var cached = resourceCache[canon];
-         if (!cached) {
-             fluid.log("First request for cached resource with url " + canon);
-             cached = fluid.event.getEventFirer();
-             cached.$$firer$$ = true;
-             resourceCache[canon] = cached;
-             var fetchClass = resourceSpec.fetchClass;
-             if (fetchClass) {
-                 if (!pendingClass[fetchClass]) {
-                     pendingClass[fetchClass] = {};
-                 }
-                 pendingClass[fetchClass][canon] = resourceSpec;
-             }
-             options.cache = false; // TODO: Getting weird "not modified" issues on Firefox
-             $.ajax(options);
-         }
-         else {
-             if (!cached.$$firer$$) {
-                 options.success(cached);
-             }
-             else {
-                 fluid.log("Request for cached resource which is in flight: url " + canon);
-                 cached.addListener(function(response) {
-                     options.success(response);
-                 });
-             }
-         }
-    };
-    
-    // Compose callbacks in such a way that the 2nd, marked "external" will be applied
-    // first if it exists, but in all cases, the first, marked internal, will be 
-    // CALLED WITHOUT FAIL
-    fluid.fetchResources.composeCallbacks = function(internal, external) {
-        return external? function() {
-            try {
-                external.apply(null, arguments);
-            }
-            catch (e) {
-                fluid.log("Exception applying external fetchResources callback: " + e);
-            }
-            internal.apply(null, arguments); // call the internal callback without fail
-        } : internal;
-    };
-    
-    fluid.fetchResources.composePolicy = function(target, source, key) {
-        target[key] = fluid.fetchResources.composeCallbacks(target[key], source[key]);
-    };
-    
-    fluid.defaults("fluid.fetchResources.issueRequest", {
-        mergePolicy: {
-            success: fluid.fetchResources.composePolicy,
-            error: fluid.fetchResources.composePolicy,
-            url: "reverse"
-        }
-    });
-    
-    fluid.fetchResources.issueRequest = function(resourceSpec, key) {
-        var thisCallback = fluid.fetchResources.makeResourceCallback(resourceSpec);
-        var options = {  
-             url:     resourceSpec.href,
-             success: thisCallback.success, 
-             error:   thisCallback.error};
-        fluid.fetchResources.timeSuccessCallback(resourceSpec);
-        fluid.merge(fluid.defaults("fluid.fetchResources.issueRequest").mergePolicy,
-                      options, resourceSpec.options);
-        resourceSpec.queued = true;
-        resourceSpec.initTime = new Date();
-        fluid.log("Request with key " + key + " queued for " + resourceSpec.href);
-
-        if (resourceSpec.forceCache) {
-            fluid.fetchResources.issueCachedRequest(resourceSpec, options);
-        }
-        else {
-            $.ajax(options);
-        }
-    };
-    
-    fluid.fetchResources.fetchResourcesImpl = function(that) {
-        var complete = true;
-        var allSync = true;
-        var resourceSpecs = that.resourceSpecs;
-        for (var key in resourceSpecs) {
-            var resourceSpec = resourceSpecs[key];
-            if (!resourceSpec.options || resourceSpec.options.async) {
-                allSync = false;
-            }
-            if (resourceSpec.href && !resourceSpec.completeTime) {
-                 if (!resourceSpec.queued) {
-                     fluid.fetchResources.issueRequest(resourceSpec, key);  
-                 }
-                 if (resourceSpec.queued) {
-                     complete = false;
-                 }
-            }
-            else if (resourceSpec.nodeId && !resourceSpec.resourceText) {
-                var node = document.getElementById(resourceSpec.nodeId);
-                // upgrade this to somehow detect whether node is "armoured" somehow
-                // with comment or CDATA wrapping
-                resourceSpec.resourceText = fluid.dom.getElementText(node);
-                resourceSpec.resourceKey = resourceSpec.nodeId;
-            }
-        }
-        if (complete && that.callback && !that.callbackCalled) {
-            that.callbackCalled = true;
-            if ($.browser.mozilla && !allSync) {
-                // Defer this callback to avoid debugging problems on Firefox
-                setTimeout(function() {
-                    that.callback(resourceSpecs);
-                    }, 1);
-            }
-            else {
-                that.callback(resourceSpecs);
-            }
-        }
-    };
-    
-    fluid.fetchResources.primeCacheFromResources = function(componentName) {
-        var resources = fluid.defaults(componentName).resources;
-        var expanded = (fluid.expandOptions? fluid.expandOptions : fluid.identity)(fluid.copy(resources));
-        fluid.fetchResources(expanded);
-    };
   
     // TODO: find faster encoder
   fluid.XMLEncode = function (text) {
@@ -13873,7 +13975,7 @@ fluid_1_2 = fluid_1_2 || {};
             if (value.messagekey !== undefined) {
                 return {
                     componentType: "UIMessage",
-                    messagekey: value.messagekey,
+                    messagekey: expandBound(value.messagekey),
                     args: expandLight(value.args)
                 };
             }
@@ -14542,24 +14644,7 @@ fluid_1_2 = fluid_1_2 || {};
         }
         catch (e) {} 
     };
-    
-    fluid.deadMansBlur = function (control, exclusions, handler) {
-        var blurPending = false;
-        $(control).blur(function () {
-            blurPending = true;
-            setTimeout(function () {
-                if (blurPending) {
-                    handler(control);
-                }
-            }, 150);
-        });
-        var canceller = function () {
-            blurPending = false; 
-        };
-        exclusions.focus(canceller);
-        exclusions.click(canceller);
-    };
-    
+
     var switchToViewMode = function (that) {
         that.editContainer.hide();
         that.displayModeRenderer.show();
@@ -14596,6 +14681,10 @@ fluid_1_2 = fluid_1_2 || {};
         switchToViewMode(that);
     };
     
+    /** 
+     * Do not allow the textEditButton to regain focus upon completion unless
+     * the keypress is enter or esc.
+     */  
     var bindEditFinish = function (that) {
         if (that.options.submitOnEnter === undefined) {
             that.options.submitOnEnter = "textarea" !== fluid.unwrap(that.editField).nodeName.toLowerCase();
@@ -14607,18 +14696,23 @@ fluid_1_2 = fluid_1_2 || {};
         var escHandler = function (evt) {
             var code = keyCode(evt);
             if (code === $.ui.keyCode.ESCAPE) {
+                that.textEditButton.focus(0);
                 cancel(that);
                 return false;
             }
         };
         var finishHandler = function (evt) {
             var code = keyCode(evt);
+            
             if (code !== $.ui.keyCode.ENTER) {
+                that.textEditButton.blur();
                 return true;
             }
+            else {
+                finish(that);
+                that.textEditButton.focus(0);
+            }
             
-            finish(that);
-            that.viewEl.focus();  // Moved here from inside "finish" to fix FLUID-857
             return false;
         };
         if (that.options.submitOnEnter) {
@@ -14738,17 +14832,12 @@ fluid_1_2 = fluid_1_2 || {};
         
     var makeIsEditing = function (that) {
         var isEditing = false;
-        
+
         that.events.onBeginEdit.addListener(function () {
             isEditing = true;
         });
         that.events.afterFinishEdit.addListener(function () {
             isEditing = false; 
-            
-            // Allow textEditButton to regain focus upon completion.
-            if (that.textEditButton) {
-                that.textEditButton.focus(0);
-            }
         });
         return function () {
             return isEditing;
@@ -14791,12 +14880,12 @@ fluid_1_2 = fluid_1_2 || {};
         }
     };
     
+    var calculateInitialPadding = function (viewEl) {
+        var padding = viewEl.css("padding-right");
+        return padding ? parseFloat(padding) : 0;
+    };
+    
     var setupInlineEdit = function (componentContainer, that) {
-        var padding = that.viewEl.css("padding-right");
-        that.existingPadding = padding ? parseFloat(padding) : 0;
-        
-        initModel(that, that.displayView.value());
-
         // Hide the edit container to start
         if (that.editContainer) {
             that.editContainer.hide();
@@ -14910,8 +14999,11 @@ fluid_1_2 = fluid_1_2 || {};
             updateModelValue(that, newModel.value, source);
         };
         
-        that.displayModeRenderer = that.options.displayModeRenderer(that);        
+        that.existingPadding = calculateInitialPadding(that.viewEl);
         
+        initModel(that, that.displayView.value());
+        
+        that.displayModeRenderer = that.options.displayModeRenderer(that);  
         initializeEditView(that, true);
         setupInlineEdit(componentContainer, that);
         
@@ -15095,9 +15187,9 @@ fluid_1_2 = fluid_1_2 || {};
              * Set text for the button and listen
              * for modelChanged to keep it updated
              */ 
-            fluid.inlineEdit.updateTextEditButton(markup, that.model, opts.strings);
+            fluid.inlineEdit.updateTextEditButton(markup, that.model.value || opts.defaultViewText, opts.strings.textEditButton);
             that.events.modelChanged.addListener(function () {
-                fluid.inlineEdit.updateTextEditButton(markup, that.model, opts.strings);
+                fluid.inlineEdit.updateTextEditButton(markup, that.model.value || opts.defaultViewText, opts.strings.textEditButton);
             });        
             
             that.locate("text").after(markup);
@@ -15115,9 +15207,9 @@ fluid_1_2 = fluid_1_2 || {};
      * @param {String} model The current value of the inline editable text
      * @param {Object} strings Text option for the textEditButton
      */
-    fluid.inlineEdit.updateTextEditButton = function (textEditButton, model, strings) {
-        var buttonText = fluid.stringTemplate(strings.textEditButton, {
-            text: model.value
+    fluid.inlineEdit.updateTextEditButton = function (textEditButton, value, stringTemplate) {
+        var buttonText = fluid.stringTemplate(stringTemplate, {
+            text: value
         });
         textEditButton.text(buttonText);
     };
@@ -15590,9 +15682,12 @@ fluid_1_2 = fluid_1_2 || {};
 
             // NB - this section has no effect - on most browsers no focus events
             // are delivered to the actual body
-            fluid.deadMansBlur(that.editField, $(editorBody), function () {
-                that.cancel();
-            });
+            fluid.deadMansBlur(that.editField, 
+                {exclusions: {body: $(editorBody)}, 
+                 handler: function () {
+                     that.cancel();
+                 }
+                 });
         });
             
         that.events.afterBeginEdit.addListener(function () {
@@ -15643,6 +15738,7 @@ fluid_1_2 = fluid_1_2 || {};
             type: "fluid.inlineEdit.tinyMCE.viewAccessor"
         },
         lazyEditView: true,
+        defaultViewText: "Click Edit",
         modelComparator: fluid.inlineEdit.htmlComparator,
         blurHandlerBinder: fluid.inlineEdit.tinyMCE.blurHandlerBinder,
         displayModeRenderer: fluid.inlineEdit.richTextDisplayModeRenderer,
@@ -15751,6 +15847,7 @@ fluid_1_2 = fluid_1_2 || {};
             type: "fluid.inlineEdit.FCKEditor.viewAccessor"
         },
         lazyEditView: true,
+        defaultViewText: "Click Edit",
         modelComparator: fluid.inlineEdit.htmlComparator,
         blurHandlerBinder: fluid.inlineEdit.FCKEditor.blurHandlerBinder,
         displayModeRenderer: fluid.inlineEdit.richTextDisplayModeRenderer,
@@ -15851,6 +15948,7 @@ fluid_1_2 = fluid_1_2 || {};
             type: "fluid.inlineEdit.CKEditor.viewAccessor"
         },
         lazyEditView: true,
+        defaultViewText: "Click Edit",
         modelComparator: fluid.inlineEdit.CKEditor.htmlComparator,
         blurHandlerBinder: fluid.inlineEdit.CKEditor.blurHandlerBinder,
         displayModeRenderer: fluid.inlineEdit.richTextDisplayModeRenderer,
@@ -15889,12 +15987,12 @@ fluid_1_2 = fluid_1_2 || {};
     };
    
     fluid.inlineEdit.dropdown.blurHandlerBinder = function (that) {
-        fluid.deadMansBlur(that.editField,
-            $("div.selectbox-wrapper li", that.editContainer),
-            function () {
+        fluid.deadMansBlur(that.editField, {
+             exclusions: {selectBox: $("div.selectbox-wrapper li", that.editContainer)},
+             handler: function () {
                 that.cancel();
-            }
-        );
+                }
+            });
     };
     
     fluid.defaults("fluid.inlineEdit.dropdown", {
@@ -15916,7 +16014,7 @@ function FCKeditor_OnComplete(editorInstance) {
  * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) 
  * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
  *
- * $LastChangedDate: 2009-05-05 11:14:12 -0400 (Tue, 05 May 2009) $
+ * $LastChangedDate: 2009-05-05 09:14:12 -0600 (Tue, 05 May 2009) $
  * $Rev: 7137 $
  *
  * Version 2.1

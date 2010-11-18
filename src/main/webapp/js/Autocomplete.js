@@ -351,9 +351,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             cspace.util.globalDismissal(union);
             that.container.dialog("close");
             that.container.html("");
-            that.options.inputField.focus();
         };
         
+        that.closeWithFocus = function () {
+            that.close();
+            that.options.inputField.focus();
+        }
 
         function makeHighlighter(funcName) {
             return function (item) {
@@ -382,9 +385,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // old value.
         union.keyup(that.escapeHandler); 
         
-        that.events.selectAuthority.addListener(that.close);
-        that.events.selectMatch.addListener(that.close);
-        
+        that.events.selectAuthority.addListener(that.closeWithFocus);
+        that.events.selectMatch.addListener(that.closeWithFocus);
+       
         fluid.initDependents(that);
         
         return that;
@@ -516,7 +519,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         updateAuthoritatively(that, blankRec);
                     }
                     buttonAdjustor();
-                    that.popup.close();
+                    that.popup.closeWithFocus();
                 }
             });
         
@@ -551,6 +554,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.closeButton.button.click(function () {
             that.events.revertState.fire();
             return false;
+        });
+        
+        fluid.deadMansBlur(that.autocompleteInput, {
+            exclusions: {popup: that.popup.container}, 
+            handler: function () {
+                updateAuthoritatively(that, that.model.baseRecord);
+                buttonAdjustor();
+                that.popup.close();
+            }
         });
 
         return that;
