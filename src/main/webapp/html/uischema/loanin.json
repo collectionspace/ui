@@ -3,13 +3,13 @@
         "properties": {
             "relations": {
                 "default": {
-                    
+
                 },
                 "type": "object"
             },
             "termsUsed": {
                 "default": [
-                    
+
                 ],
                 "type": "array"
             },
@@ -18,27 +18,34 @@
             },
             "fields": {
                 "properties": {
+                    "loanInDate": {
+                        "type": "date"
+                    },
                     "loanInNumber": {
                         "type": "string"
                     },
-                    "lendersAuthorizer": {
-                        "type": "string"
-                    },
-                    "loanInNote": {
-                        "type": "string"
-                    },
-                    "loanPurpose": {
-                        "default": "Exhibition",
+                    "lenderGroup": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "lendersAuthorizer": {
+                                    "type": "string"
+                                },
+                                "lendersContact": {
+                                    "type": "string"
+                                },
+                                "lendersAuthorizationDate": {
+                                    "type": "date"
+                                },
+                                "lender": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
                         "type": "array"
-                    },
-                    "loanRenewalApplicationDate": {
-                        "type": "date"
-                    },
-                    "borrowersAuthorizer": {
-                        "type": "string"
-                    },
-                    "loanInDate": {
-                        "type": "date"
                     },
                     "loanInContact": {
                         "type": "string"
@@ -46,16 +53,20 @@
                     "loanInConditions": {
                         "type": "string"
                     },
-                    "lendersContact": {
+                    "loanInNote": {
                         "type": "string"
                     },
                     "loanReturnDate": {
                         "type": "date"
                     },
-                    "lendersAuthorizationDate": {
+                    "loanPurpose": {
+                        "default": "",
+                        "type": "array"
+                    },
+                    "loanRenewalApplicationDate": {
                         "type": "date"
                     },
-                    "lender": {
+                    "borrowersAuthorizer": {
                         "type": "string"
                     }
                 },

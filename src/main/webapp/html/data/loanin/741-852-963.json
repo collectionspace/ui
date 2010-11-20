@@ -2,16 +2,22 @@
     "csid": "741-852-963",
     "fields": {
         "loanInNumber": "LI2010.1",
-        "lenders": [
+        "lenderGroup": [
             {
+                "_primary": true,
+                "lendersAuthorizer": "urn:cspace:org.collectionspace.demo:personauthority:id(cc025527-efde-4a21-84fc):person:id(6b8d2766-d17a-4db5-81f3)'Fred+Bloggs'",
+                "lendersContact": "urn:cspace:org.collectionspace.demo:personauthority:id(cc025527-abcd-4a21-84fc):person:id(6b8d2766-d17a-4db5-81f3)'Margaret+Brodie'",
+                "lendersAuthorizationDate": "October 29, 2009",
                 "lender": "urn:cspace:org.collectionspace.demo:orgauthority:id(00c0a279-973c-41cf-9f5a):organization:id(ede71f8a-3f07-4565-9063)'Bloggs & Co.'"
+            },
+            {
+                "lendersAuthorizer": "",
+                "lendersContact": "",
+                "lendersAuthorizationDate": "October 30, 2009",
+                "lender": ""
             }
         ],
-        "lendersAuthorizationDate": "June 22, 2001",
         "borrowersAuthorizer": "urn:cspace:org.collectionspace.demo:personauthority:id(cc025527-efde-acde-84fc):person:id(6b8d2766-d17a-4db5-81f3)'Sydney+Hardie'",
-        "lendersAuthorizer": "urn:cspace:org.collectionspace.demo:personauthority:id(cc025527-efde-4a21-84fc):person:id(6b8d2766-d17a-4db5-81f3)'Fred+Bloggs'",
-        "lendersAuthorizerDate": "never",
-        "lendersContact": "urn:cspace:org.collectionspace.demo:personauthority:id(cc025527-abcd-4a21-84fc):person:id(6b8d2766-d17a-4db5-81f3)'Margaret+Brodie'",
         "loanInContact": "urn:cspace:org.collectionspace.demo:personauthority:id(cc025527-3f1f-4a21-84fc):person:id(6b8d2766-d17a-4db5-81f3)'Hiram+Abrams'",
         "loanInConditions": "very good",
         "loanInDate": "March 24, 2010",
@@ -65,3 +71,5 @@
         ]
     }
 }
+
+
