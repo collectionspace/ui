@@ -123,7 +123,7 @@ var utilitiesTester = function ($) {
             }
         },
         "recordlist": {
-            "default": ["person", "intake", "location", "loanin", "loanout", "contact", "acquisition", "organization", "objects", "movement"],
+            "default": ["person", "intake", "location", "loanin", "loanout", "contact", "acquisition", "organization", "objects", "movement", "objectexit"],
             "type": "array"
         }
     };
@@ -185,6 +185,7 @@ var utilitiesTester = function ($) {
         "acquisition": [],
         "organization": ["create", "read", "update", "delete", "list"],
         "movement": ["create", "read", "update", "delete", "list"],
+        "objectexit": ["create", "read", "update", "delete", "list"],
         "objects": ["create", "read", "update", "delete", "list"]
     };
     
@@ -201,9 +202,9 @@ var utilitiesTester = function ($) {
     utilitiesTest.test("Permissions with permissionAwareAccessor", function () {
         validate({}, "loanout", "OR");
         validate(undefined, "acquisition", "OR");
-        validate(["person", "intake", "location", "loanin", "loanout", "contact", "organization", "objects", "movement"], 
+        validate(["person", "intake", "location", "loanin", "loanout", "contact", "organization", "objects", "movement", "objectexit"],
             "recordlist", "OR");
-        validate(["person", "intake", "location", "loanout", "contact", "organization", "objects", "movement"], 
+        validate(["person", "intake", "location", "loanout", "contact", "organization", "objects", "movement", "objectexit"], 
             "recordlist", "AND");
     });
     

@@ -85,6 +85,7 @@
                     {"name": "Loan In - related", "target": null},
                     {"name": "Loan Out", "target": null},
                     {"name": "Location &amp; Movement", "target": "movementTab.html"},
+                    {"name": "Object Exit", "target": "objectexitTab.html"},
                     {"name": "Media", "target": null}
                 ],
                 "tabSetups": [

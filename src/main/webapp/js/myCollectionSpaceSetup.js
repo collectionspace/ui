@@ -73,6 +73,10 @@ cspace = cspace || {};
             proceduresMovement: {
                 funcName: "cspace.recordList",
                 args: [".movement-records-group", makeOpts("movement", "proceduresMovement")]
+            },
+            proceduresObjectexit: {
+                funcName: "cspace.recordList",
+                args: [".objectexit-records-group", makeOpts("objectexit", "proceduresObjectexit")]
             }
         };
         

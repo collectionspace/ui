@@ -25,7 +25,8 @@ var permissionsTester = function ($) {
             "acquisition": [],
             "organization": ["create", "read", "update", "delete", "list"],
             "movement": ["create", "read", "update", "delete", "list"],
-            "objects": ["create", "read", "update", "delete", "list"]
+            "objects": ["create", "read", "update", "delete", "list"],
+            "objectexit": ["create", "read", "update", "delete", "list"]
         }
     };
     

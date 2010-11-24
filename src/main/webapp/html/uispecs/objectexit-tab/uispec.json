@@ -1,0 +1,145 @@
+{
+    "details": {
+        ".csc-objectexit-plannedRemovalDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
+        ".csc-objectexit-objectexitReferenceNumber-container": {
+            "decorators": [
+                {
+                    "func": "cspace.numberPatternChooser",
+                    "type": "fluid",
+                    "options": {
+                        "model": {
+                            "names": [
+                                "Objectexit"
+                            ],
+                            "list": [
+                                "objectexit"
+                            ],
+                            "samples": [
+                                "OET2010.001"
+                            ]
+                        },
+                        "selectors": {
+                            "numberField": ".csc-objectexit-objectexitReferenceNumber"
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-objectexit-objectexitNote": "${fields.objectexitNote}",
+        ".csc-objectexit-plannedRemovalDate": "${fields.plannedRemovalDate}",
+        ".csc-objectexit-currentLocation": "${fields.currentLocation}",
+        ".csc-objectexit-objectexitContact": {
+            "valuebinding": "${fields.objectexitContact}",
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/objectexit/autocomplete/objectexitContact",
+                        "vocabUrl": "../../chain/objectexit/source-vocab/objectexitContact"
+                    }
+                }
+            ]
+        },
+        ".csc-objectexit-removalDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
+        ".csc-objectexit-locationDate": "${fields.locationDate}",
+        ".csc-objectexit-currentLocationFitness": {
+            "optionnames": [
+                "Dangerous",
+                "Suitable",
+                "Temporary",
+                "Unsuitable"
+            ],
+            "optionlist": [
+                "dangerous",
+                "suitable",
+                "temporary",
+                "unsuitable"
+            ],
+            "selection": "${fields.currentLocationFitness}"
+        },
+        ".csc-objectexit-normalLocation": "${fields.normalLocation}",
+        ".csc-objectexit-objectexitMethods": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.objectexitMethods",
+                        "protoTree": {
+                            ".csc-objectexit-objectexitMethods": {
+                                "optionnames": [
+                                    "Forklift",
+                                    "Handcarried",
+                                    "Trolley"
+                                ],
+                                "optionlist": [
+                                    "forklift",
+                                    "handcarried",
+                                    "trolley"
+                                ],
+                                "selection": "${fields.objectexitMethods.0.objectexitMethod}"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-objectexit-currentLocationNote": "${fields.currentLocationNote}",
+        ".csc-objectexit-locationDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
+        ".csc-objectexit-objectexitReferenceNumber": "${fields.objectexitReferenceNumber}",
+        ".csc-objectexit-reasonForMove": {
+            "optionnames": [
+                "Conservation",
+                "Exhibition",
+                "Inventory",
+                "Loan",
+                "New Storage Location",
+                "Photography",
+                "Research"
+            ],
+            "optionlist": [
+                "conservation",
+                "exhibition",
+                "inventory",
+                "loan",
+                "newstoragelocation",
+                "photography",
+                "research"
+            ],
+            "selection": "${fields.reasonForMove}"
+        },
+        ".csc-objectexit-removalDate": "${fields.removalDate}"
+    },
+    "list": {
+        ".csc-recordList-row:": {
+            "children": [
+                {
+                    ".csc-related-summary": "${items.0.summary}",
+                    ".csc-related-number": "${items.0.number}"
+                }
+            ]
+        }
+    }
+}

@@ -20,7 +20,7 @@ cspace = cspace || {};
     // TODO: This is a hard-coded list of procedures, which should be replaced by something
     //       provided by the server. 
     // NOTE: CSPACE-1977 - services and app layer do not have the concept of procedure.
-    var procedureList = ["intake", "acquisition", "loanin", "loanout", "movement"];
+    var procedureList = ["intake", "acquisition", "loanin", "loanout", "movement", "objectexit"];
 
     var buildRelationsList = function (relations, related) {
         if (related !== "procedures") {

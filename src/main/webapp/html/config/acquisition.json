@@ -107,6 +107,10 @@
                         "target": "movementTab.html"
                     },
                     {
+                        "name": "Object Exit",
+                        "target": "objectexitTab.html"
+                    },
+                    {
                         "name": "Media",
                         "target": null
                     } 
