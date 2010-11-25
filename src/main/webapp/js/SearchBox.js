@@ -168,7 +168,8 @@ cspace = cspace || {};
             person: "Person",
             organization: "Organization",
             "location": "Storage Location",
-            contact: "Contact" 
+            contact: "Contact",
+            objectexit: "Object Exit"
         },
         model: {},                  // A default data model object.
         resolverGetConfig: null,    // An option used by initRendererComponent as a strategy when 
