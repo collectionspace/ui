@@ -58,7 +58,7 @@ var searchBoxTester = function ($) {
     
     var searchBoxTest = new jqUnit.TestCase("SearchBox Tests");
     
-    var setupSeachBox = function (options) {
+    var setupSearchBox = function (options) {
         options = options || {};
         fluid.merge(null, options, {
             permissions: permissions,
@@ -68,14 +68,14 @@ var searchBoxTester = function ($) {
     };
     
     searchBoxTest.test("Init and render", function () {
-        var searchBox = setupSeachBox();
+        var searchBox = setupSearchBox();
         searchBox.refreshView();
         jqUnit.assertEquals("SearchBox dropdown\'s number of recordTypes is equal to", 7, $("option", searchBox.locate("recordTypeSelect")).length);
         jqUnit.assertEquals("Label is ", "", searchBox.locate("recordTypeSelectLabel").text());
     });
     
     searchBoxTest.test("Init and render with Label", function () {
-        var searchBox = setupSeachBox({
+        var searchBox = setupSearchBox({
             strings: {
                 recordTypeSelectLabel: "Record Type"
             }

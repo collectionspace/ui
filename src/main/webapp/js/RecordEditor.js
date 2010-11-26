@@ -302,7 +302,7 @@ cspace = cspace || {};
             timestamp: ".csc-timestamp",
             relatedRecords: ".csc-related-records",
             requiredFields: ".csc-required:visible",
-            confirmationInclude: "a, .csc-seachBox-button",
+            confirmationInclude: "a, .csc-searchBox-button",
             confirmationExclude: "[href*=#], .csc-confirmation-exclusion, .ui-autocomplete a",
             forms: ".csc-header-logout-form"
         },
