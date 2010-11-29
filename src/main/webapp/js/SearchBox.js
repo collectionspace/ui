@@ -146,15 +146,15 @@ cspace = cspace || {};
         selectors: {                // Set of selectors that the component is interested in rendering.
             recordTypeSelect: ".csc-searchBox-selectRecordType",
             recordTypeSelectLabel: ".csc-searchBox-selectRecordTypeLabel",
-            searchQuery: ".csc-seachBox-query",
-            searchButton: ".csc-seachBox-button"
+            searchQuery: ".csc-searchBox-query",
+            searchButton: ".csc-searchBox-button"
         },
         styles: {                   // Set of styles that the component will be adding onto selectors.
             searchBox: "cs-searchBox",
             recordTypeSelect: "cs-searchBox-selectRecordType",
             recordTypeSelectLabel: "cs-searchBox-selectRecordTypeLabel",
-            searchQuery: "cs-seachBox-query",
-            searchButton: "cs-seachBox-button"
+            searchQuery: "cs-searchBox-query",
+            searchButton: "cs-searchBox-button"
         },
         strings: {                  // List of strings that the component will render (for l10n and i18n).
             searchButtonText: "Search",
@@ -169,7 +169,8 @@ cspace = cspace || {};
             person: "Person",
             organization: "Organization",
             "location": "Storage Location",
-            contact: "Contact" 
+            contact: "Contact",
+            objectexit: "Object Exit"
         },
         model: {},                  // A default data model object.
         resolverGetConfig: null,    // An option used by initRendererComponent as a strategy when 
