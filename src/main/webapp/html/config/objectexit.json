@@ -1,0 +1,165 @@
+{
+    "pageBuilder": {
+        "options": {
+            "schema": [
+                "recordlist",
+                "objectexit"
+            ],
+            "pageType": "objectexit",
+            "recordType": "objectexit",
+            "dataContext": {
+                "options": {
+                    "recordType": "objectexit"
+                } 
+            },
+            "pageSpec": {
+                "tabs": {
+                    "href": "tabsTemplate.html",
+                    "templateSelector": ".csc-tabs-template",
+                    "targetSelector": ".csc-tabs-container" 
+                },
+                "titleBar": {
+                    "href": "objectexitTitleBar.html",
+                    "templateSelector": ".csc-objectexit-titleBar-template",
+                    "targetSelector": ".csc-objectexit-titleBar-container"
+                },
+                "dateEntry": {
+                    "href": "ObjectexitTemplate.html",
+                    "templateSelector": ".csc-objectexit-template",
+                    "targetSelector": ".csc-record-edit-container" 
+                },
+                "sidebar": {
+                    "href": "right-sidebar.html",
+                    "templateSelector": ".csc-right-sidebar",
+                    "targetSelector": ".csc-sidebar-container" 
+                },
+                "footer": {
+                    "href": "footer.html",
+                    "templateSelector": ".csc-footer",
+                    "targetSelector": ".csc-footer-container" 
+                } 
+            } 
+        } 
+    },
+    "dependencies": {
+        "titleBar": {
+            "funcName": "cspace.titleBar",
+            "args": [
+                ".csc-objectexit-template"
+            ] 
+        },
+        "tabs": {
+            "funcName": "cspace.tabs",
+            "args": [
+                ".csc-tabs-template" 
+            ] 
+        },
+        "recordEditor": {
+            "funcName": "cspace.recordEditor",
+            "args": [
+                ".csc-objectexit-template"
+            ] 
+        },
+        "sidebar": {
+            "funcName": "cspace.sidebar",
+            "args": [
+                ".csc-sidebar" 
+            ] 
+        } 
+    },
+    "depOpts": {
+        "titleBar": {
+            "options": {
+                "uispec": "{pageBuilder}.uispec.titleBar",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model" 
+            } 
+        },
+        "tabs": {
+            "options": {
+                "tabList": [
+                    {
+                        "name": "Object Exit",
+                        "target": "#primaryTab" 
+                    },
+                    {
+                        "name": "Acquisition",
+                        "target": null 
+                    },
+                    {
+                        "name": "Cataloging",
+                        "target": "objectTabPlaceholder.html" 
+                    },
+                    {
+                        "name": "Intake",
+                        "target": null 
+                    },
+                    {
+                        "name": "Loan In",
+                        "target": null 
+                    },
+                    {
+                        "name": "Loan Out",
+                        "target": null
+                    },
+                    {
+                        "name": "Location &amp; Movement",
+                        "target": "movementTab.html"  
+                    },
+
+                    {
+                        "name": "Object Exit - related",
+                        "target": "objectexitTab.html"
+                    },
+                    {
+                        "name": "Media",
+                        "target": null 
+                    } 
+                ],
+                "tabSetups": [
+                    "null",
+                    {
+                        "func": "cspace.tabSetup",
+                        "options": {
+                            "primaryRecordType": "{pageBuilder}.options.pageType",
+                            "applier": "{pageBuilder}.applier",
+                            "model": "{pageBuilder}.model",
+                            "configURL": "./config/cataloging-tab.json" 
+                        } 
+                    },
+                    {
+                        "func": "cspace.tabSetup",
+                        "options": {
+                            "primaryRecordType": "{pageBuilder}.options.pageType",
+                            "applier": "{pageBuilder}.applier",
+                            "model": "{pageBuilder}.model",
+                            "configURL": "./config/objectexit-tab.json"
+                        } 
+                    } 
+                ]
+            } 
+        },
+        "recordEditor": {
+            "options": {
+                "selectors": {
+                    "identificationNumber": ".csc-objectexit-currentLocation" 
+                },
+                "strings": {
+                    "identificationNumberRequired": "Please specify Current Location" 
+                },
+                "dataContext": "{pageBuilder}.dataContext",
+                "applier": "{pageBuilder}.applier",
+                "uispec": "{pageBuilder}.uispec.recordEditor",
+                "model": "{pageBuilder}.model" 
+            } 
+        },
+        "sidebar": {
+            "options": {
+                "uispec": "{pageBuilder}.uispec.sidebar",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model",
+                "primaryRecordType": "{pageBuilder}.options.pageType"
+            } 
+        } 
+    } 
+}

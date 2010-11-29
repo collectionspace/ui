@@ -1,0 +1,68 @@
+{
+    "pageBuilder": {
+        "options": {
+            "schema": [
+                "recordlist",
+                "objectexit"
+            ],
+            "pageType": "objectexit-tab",
+            "recordType": "objectexit",
+            "pageSpec": {
+                "list": {
+                    "href": "objectexitTabRecordListTemplate.html",
+                    "templateSelector": ".csc-objectexit-tab-record-list",
+                    "targetSelector": ".csc-objectexit-tab .div-for-list-of-records"
+                },
+                "details": {
+                    "href": "ObjectexitTemplate.html",
+                    "templateSelector": ".csc-objectexit-template",
+                    "targetSelector": ".csc-objectexit-tab .div-for-recordEditor"
+                } 
+            }
+        } 
+    },
+    "dependencies": {
+        "relatedRecordsTab": {
+            "funcName": "cspace.relatedRecordsTab",
+            "args": [
+                ".csc-objectexit-tab"
+            ] 
+        } 
+    },
+    "depOpts": {
+        "relatedRecordsTab": {
+            "options": {
+                "primary": "{pageBuilder}.options.primaryRecordType",
+                "related": "objectexit",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model",
+                "uispec": "{pageBuilder}.uispec",
+                "listEditor": {
+                    "options": {
+                        "initList": "cspace.listEditor.receiveData",
+                        "dataContext": {
+                            "options": {
+                                "recordType": "objectexit",
+                                "dataSource": {
+                                    "options": {
+                                        "schema": "{pageBuilder}.schema" 
+                                    }
+                                }
+                            }
+                        },
+                        "details": {
+                            "options": {
+                                "selectors": {
+                                    "identificationNumber": ".csc-objectexit-currentLocation"
+                                },
+                                "strings": {
+                                    "identificationNumberRequired": "Please specify a Current Location" 
+                                } 
+                            } 
+                        }
+                    }
+                }
+            }
+        }
+    } 
+}

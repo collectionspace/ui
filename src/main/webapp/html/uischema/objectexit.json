@@ -1,0 +1,77 @@
+{
+    "objectexit": {
+        "properties": {
+            "relations": {
+                "default": {
+                    
+                },
+                "type": "object"
+            },
+            "termsUsed": {
+                "default": [
+                    
+                ],
+                "type": "array"
+            },
+            "csid": {
+                "type": "string"
+            },
+            "fields": {
+                "properties": {
+                    "normalLocation": {
+                        "type": "string"
+                    },
+                    "objectexitContact": {
+                        "type": "string"
+                    },
+                    "objectexitReferenceNumber": {
+                        "type": "string"
+                    },
+                    "currentLocationFitness": {
+                        "default": "",
+                        "type": "array"
+                    },
+                    "removalDate": {
+                        "type": "date"
+                    },
+                    "locationDate": {
+                        "type": "date"
+                    },
+                    "plannedRemovalDate": {
+                        "type": "date"
+                    },
+                    "objectexitMethods": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "objectexitMethod": {
+                                    "default": "",
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "objectexitNote": {
+                        "type": "string"
+                    },
+                    "reasonForMove": {
+                        "default": "",
+                        "type": "array"
+                    },
+                    "currentLocation": {
+                        "type": "string"
+                    },
+                    "currentLocationNote": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "type": "object"
+    }
+}
