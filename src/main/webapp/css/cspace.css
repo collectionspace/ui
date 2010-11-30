@@ -724,3 +724,46 @@ ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6
 .cs-pivot-searchBox .cs-searchBox select {margin-top:10px;}
 .cs-searchBox .cs-searchBox-button {float:right;}
 .cs-pivot-searchBox .cs-searchBox .cs-searchBox-query {width:99% !important; margin:8px 8px 8px 0; display:block;}
+
+/***********    CSS For New Markup for Create New    ***********/
+.cs-createNew-content {
+    width: 98%;
+    position: relative;
+}
+
+.cs-createNew-content .cs-createNew-category {
+    margin-bottom: 10px;
+}
+
+.cs-createNew-content .cs-createNew-categoryHeader {
+    -moz-border-radius:6px 6px 0 0;
+    cursor:default;
+   height:15px;
+    padding:5px 0 7px 5px;
+    width:auto;
+    background-color:#929292;
+    color:#FFFFFF;
+    line-height:13px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.cs-createNew-content .cs-createNew-recordRow {
+    background-color:#F3F3F4;
+    border-bottom:1px solid white;
+    font-size:14px;
+    line-height:14px;
+    min-width:100px;
+    padding:6px 20px 6px 10px;
+}
+
+.cs-createNew-content .cs-createNew-totalOfOneCategories {width: 98%;}
+.cs-createNew-content .cs-createNew-totalOfOneCategories .cs-createNew-category1 {width: 100%;}
+.cs-createNew-content .cs-createNew-totalOfTwoCategories {width: 98%;}
+.cs-createNew-content .cs-createNew-totalOfTwoCategories .cs-createNew-category1 {width: 49%; float: left; display:inline;}
+.cs-createNew-content .cs-createNew-totalOfTwoCategories .cs-createNew-category2 {width: 49%; float: right;}
+.cs-createNew-content .cs-createNew-totalOfThreeCategories {width: 98%;}
+.cs-createNew-content .cs-createNew-totalOfThreeCategories .cs-createNew-category1 {width: 49%;}
+.cs-createNew-content .cs-createNew-totalOfThreeCategories .cs-createNew-category2 {width: 49%}
+.cs-createNew-content .cs-createNew-totalOfThreeCategories .cs-createNew-category3 {width: 49%; float: right;}
+

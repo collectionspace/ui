@@ -6,6 +6,9 @@
             "targetSelector": ".csc-footer-container" 
         } 
     },
+    "selectors": {
+        "createNew": ".csc-createNew-main"
+    },
     "components": {
         "pivotSearch": {
             "type": "cspace.searchBox",
@@ -16,6 +19,12 @@
                 "permissions": "{pageBuilder}.permissions",
                 "schema": "{pageBuilder}.schema",
                 "selfRender": true
+            }
+        },
+        "createNew": {
+            "type": "cspace.createNew",
+            "options": {
+                "permissions": "{pageBuilder}.permissions"
             }
         }
     }

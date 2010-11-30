@@ -29,19 +29,6 @@ function ShowHide(toggleme, source) {
     
 }*/
 
- 
-function getRadioValue() {
-    for (var i=0; i < document.selecttype.recordtype.length; i++) {
-        if (document.selecttype.recordtype[i].checked) {
-            var rad_val = document.selecttype.recordtype[i].value;
-            window.open(rad_val, "_self", "");
-            return;
-        }
-    }
-
-}
-
-
 jQuery(document).ready(function() {
     
     $currentFocus = null;
