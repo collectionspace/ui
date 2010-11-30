@@ -51,5 +51,8 @@ cspace = cspace || {};
             afterRender: null
         }
     });
+    
+    fluid.demands("role", "cspace.pageBuilder", 
+        ["{pageBuilder}.options.selectors.role", fluid.COMPONENT_OPTIONS]);
 
 })(jQuery, fluid);

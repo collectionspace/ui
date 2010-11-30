@@ -1,26 +1,20 @@
 {
-    "pageBuilder": {
-        "options": {
-            "pageSpec": {
-                "footer": {
-                    "href": "footer.html",
-                    "templateSelector": ".csc-footer",
-                    "targetSelector": ".csc-footer-container" 
-                } 
-            }
+    "pageSpec": {
+        "footer": {
+            "href": "footer.html",
+            "templateSelector": ".csc-footer",
+            "targetSelector": ".csc-footer-container" 
         } 
     },
-    "dependencies": {
-        "search": {
-            "funcName": "cspace.search.searchView",
-            "args": [".main-search-page"]
-        }
+    "selectors": {
+        "search": ".main-search-page"
     },
-    "depOpts": {
+    "components": {
         "search": {
+            "type": "cspace.search.searchView",
             "options": {
                 "pivoting": true
             }
-        } 
+        }
     }
 }

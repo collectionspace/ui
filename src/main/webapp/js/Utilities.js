@@ -337,13 +337,16 @@ fluid.registerNamespace("cspace.util");
     };
     
     cspace.util.resolvePermissions = function (source, permManager) {
-        fluid.remove_if(source, function (sourceItem) {
-            if (sourceItem && typeof sourceItem === "object") {
-                fluid.each(sourceItem, function (elem) {
-                    cspace.util.resolvePermissions(elem, permManager);
-                });
+        fluid.remove_if(source, function (sourceItem, key) {
+            if (!permManager.resolve(key)) {
+                return true;
             }
-            return !permManager.resolve(sourceItem);
+            if (sourceItem && typeof sourceItem === "object") {
+                cspace.util.resolvePermissions(sourceItem, permManager);
+            }
+            else {
+                return !permManager.resolve(sourceItem);
+            }
         });
     };
     
@@ -415,7 +418,8 @@ fluid.registerNamespace("cspace.util");
             init: function () {
                 var that = fluid.initLittleComponent("cspace.util.censorWithSchemaStrategy", options);
                 var schema = that.options.schema;
-                if (that.options.permissions) {
+                that.permManager = that.options.permManager;
+                if (!that.permManager && that.options.permissions) {
                     fluid.initDependents(that);
                 }
                 return function (root, segment, index) {
@@ -426,6 +430,9 @@ fluid.registerNamespace("cspace.util");
                         return;
                     }
                     if (root[segment]) {
+                        if (that.permManager) {
+                            cspace.util.resolvePermissions(root[segment], that.permManager);
+                        }
                         return root[segment];
                     }
                     schema = schema[segment];
@@ -599,8 +606,8 @@ fluid.registerNamespace("cspace.util");
         });
     };
     
-    cspace.util.elStylefy = function (str) {
-        return "${" + str + "}";
+    cspace.util.elStylefy = function (str, postfix) {
+        return "${" + str + "}." + (postfix || "");
     };
     
 })(jQuery, fluid);

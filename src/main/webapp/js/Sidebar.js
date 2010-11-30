@@ -128,4 +128,8 @@ cspace = cspace || {};
             relatedProcedures: ".csc-related-procedures"
         }
     });
+    
+    fluid.demands("sidebar", "cspace.pageBuilder", 
+        ["{pageBuilder}.options.selectors.sidebar", fluid.COMPONENT_OPTIONS]);
+        
 })(jQuery, fluid);

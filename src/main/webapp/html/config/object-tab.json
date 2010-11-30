@@ -1,39 +1,30 @@
 {
-    "pageBuilder": {
-        "options": {
-            "schema": [
-                "recordlist",
-                "cataloging"
-            ],
-            "pageType": "cataloging-tab",
-            "recordType": "cataloging",
-            "pageSpec": {
-                "list": {
-                    "href": "objectTabRecordListTemplate.html",
-                    "templateSelector": ".csc-cataloging-tab-record-list",
-                    "targetSelector": ".csc-cataloging-tab .div-for-list-of-records" 
-                },
-                "details": {
-                    "href": "ObjectEntryTemplate.html",
-                    "templateSelector": ".csc-object-entry-template",
-                    "targetSelector": ".csc-cataloging-tab .div-for-recordEditor" 
-                } 
-            }
-        }
-    },
-    "dependencies": {
-        "relatedRecordsTab": {
-            "funcName": "cspace.relatedRecordsTab",
-            "args": [
-                ".csc-cataloging-tab" 
-            ] 
+    "schema": [
+        "recordlist",
+        "cataloging"
+    ],
+    "pageType": "cataloging-tab",
+    "recordType": "cataloging",
+    "pageSpec": {
+        "list": {
+            "href": "objectTabRecordListTemplate.html",
+            "templateSelector": ".csc-cataloging-tab-record-list",
+            "targetSelector": ".csc-cataloging-tab .div-for-list-of-records" 
+        },
+        "details": {
+            "href": "ObjectEntryTemplate.html",
+            "templateSelector": ".csc-object-entry-template",
+            "targetSelector": ".csc-cataloging-tab .div-for-recordEditor" 
         } 
     },
-    "depOpts": {
+    "selectors": {
+        "relatedRecordsTab": ".csc-cataloging-tab"
+    },
+    "components": {
         "relatedRecordsTab": {
+            "type": "cspace.relatedRecordsTab",
             "options": {
                 "primary": "{pageBuilder}.options.primaryRecordType",
-                "related": "cataloging",
                 "applier": "{pageBuilder}.applier",
                 "model": "{pageBuilder}.model",
                 "uispec": "{pageBuilder}.uispec",
@@ -62,7 +53,7 @@
                         } 
                     } 
                 }
-            } 
-        } 
-    } 
+            }
+        }
+    }
 }

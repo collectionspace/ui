@@ -374,4 +374,8 @@ cspace = cspace || {};
         }
 
     });
+    
+    fluid.demands("search", "cspace.pageBuilder", 
+        ["{pageBuilder}.options.selectors.search", fluid.COMPONENT_OPTIONS]);
+        
 })(jQuery, fluid);

@@ -12,7 +12,7 @@
                 ]
             }
     },
-    "proceduresIntake": {
+    "intake": {
             ".csc-recordList-row:": {
                 "children": [
                     {
@@ -25,7 +25,7 @@
                 ]
             }
     },
-    "proceduresAcquisition": {
+    "acquisition": {
             ".csc-recordList-row:": {
                 "children": [
                     {
@@ -38,7 +38,7 @@
                 ]
             }
     },
-    "proceduresLoanin": {
+    "loanin": {
             ".csc-recordList-row:": {
                 "children": [
                     {
@@ -51,7 +51,7 @@
                 ]
             }
     },
-    "proceduresLoanout": {
+    "loanout": {
             ".csc-recordList-row:": {
                 "children": [
                     {
@@ -64,7 +64,7 @@
                 ]
             }
     },
-    "proceduresMovement": {
+    "movement": {
             ".csc-recordList-row:": {
                 "children": [
                     {

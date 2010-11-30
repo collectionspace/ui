@@ -323,4 +323,8 @@ cspace = cspace || {};
             missingRequiredFields: "Some required fields are empty"
         }
     });
+    
+    fluid.demands("recordEditor", "cspace.pageBuilder", 
+        ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
+        
 })(jQuery, fluid);

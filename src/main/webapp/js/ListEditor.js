@@ -165,6 +165,11 @@ cspace = cspace || {};
             url: listEditor.options.baseUrl + listEditor.recordType,
             dataType: "json",
             success: function (data) {
+                if (listEditor.list) {
+                    // We have to requestChange here in order for the recordList
+                    // to update the list of records with new model.
+                    listEditor.list.applier.requestChange("items", data.items);
+                }
                 fluid.model.copyModel(listEditor.model.list, data.items);
                 if (callback) {
                     callback();
@@ -180,6 +185,11 @@ cspace = cspace || {};
      * @param {Function} callback   An optional callback function that will be called on success
      */
     cspace.listEditor.receiveData = function (listEditor, callback) {
+        if (listEditor.list) {
+            // We have to requestChange here in order for the recordList
+            // to update the list of records with new model.
+            listEditor.list.applier.requestChange("items", listEditor.options.data);
+        }
         fluid.model.copyModel(listEditor.model.list, listEditor.options.data);
         if (callback) {
             callback();

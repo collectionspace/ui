@@ -1,116 +1,51 @@
 {
-    "pageBuilder": {
+    "schema": [
+        "recordlist",
+        "loanin"
+    ],
+    "pageType": "loanin",
+    "recordType": "loanin",
+    "dataContext": {
         "options": {
-            "schema": [
-                "recordlist",
-                "loanin"
-            ],
-            "pageType": "loanin",
-            "recordType": "loanin",
-            "dataContext": {
-                "options": {
-                    "recordType": "loanin" 
-                } 
-            },
-            "pageSpec": {
-                "tabs": {
-                    "href": "tabsTemplate.html",
-                    "templateSelector": ".csc-tabs-template",
-                    "targetSelector": ".csc-tabs-container" 
-                },
-                "titleBar": {
-                    "href": "loanInTitleBar.html",
-                    "templateSelector": ".csc-loanIn-titleBar-template",
-                    "targetSelector": ".csc-loanIn-titleBar-container"
-                },
-                "dateEntry": {
-                    "href": "loanInTemplate.html",
-                    "templateSelector": ".csc-loanIn-template",
-                    "targetSelector": ".csc-record-edit-container"
-                },
-                "sidebar": {
-                    "href": "right-sidebar.html",
-                    "templateSelector": ".csc-right-sidebar",
-                    "targetSelector": ".csc-sidebar-container" 
-                },
-                "footer": {
-                    "href": "footer.html",
-                    "templateSelector": ".csc-footer",
-                    "targetSelector": ".csc-footer-container" 
-                } 
-            } 
+            "recordType": "loanin" 
         } 
     },
-    "dependencies": {
+    "pageSpec": {
         "titleBar": {
-            "funcName": "cspace.titleBar",
-            "args": [
-                ".csc-loanIn-titleBar-template" 
-            ] 
+            "href": "loanInTitleBar.html",
+            "templateSelector": ".csc-loanIn-titleBar-template",
+            "targetSelector": ".csc-loanIn-titleBar-container"
         },
-        "tabs": {
-            "funcName": "cspace.tabs",
-            "args": [
-                ".csc-tabs-template" 
-            ] 
-        },
-        "recordEditor": {
-            "funcName": "cspace.recordEditor",
-            "args": [
-                ".csc-loanIn-template"
-            ] 
+        "dateEntry": {
+            "href": "loanInTemplate.html",
+            "templateSelector": ".csc-loanIn-template",
+            "targetSelector": ".csc-record-edit-container"
         },
         "sidebar": {
-            "funcName": "cspace.sidebar",
-            "args": [
-                ".csc-sidebar" 
-            ] 
+            "href": "right-sidebar.html",
+            "templateSelector": ".csc-right-sidebar",
+            "targetSelector": ".csc-sidebar-container" 
+        },
+        "footer": {
+            "href": "footer.html",
+            "templateSelector": ".csc-footer",
+            "targetSelector": ".csc-footer-container" 
         } 
     },
-    "depOpts": {
-        "titleBar": {
-            "options": {
-                "uispec": "{pageBuilder}.uispec.titleBar",
-                "applier": "{pageBuilder}.applier",
-                "model": "{pageBuilder}.model" 
-            } 
-        },
+    "selectors": {
+        "titleBar": ".csc-loanIn-titleBar-template",
+        "recordEditor": ".csc-loanIn-template",
+        "sidebar": ".csc-sidebar"
+    },
+    "components": {
         "tabs": {
-            "options": {
-                "tabList": [
-                    {"name": "Loan In", "target": "#primaryTab"},
-                    {"name": "Acquisition", "target": null},
-                    {"name": "Cataloging", "target": "objectTabPlaceholder.html"},
-                    {"name": "Intake", "target": null},
-                    {"name": "Loan In - related", "target": null},
-                    {"name": "Loan Out", "target": null},
-                    {"name": "Location &amp; Movement", "target": "movementTab.html"},
-                    {"name": "Media", "target": null}
-                ],
-                "tabSetups": [
-                    "null",
-                    {
-                        "func": "cspace.tabSetup",
-                        "options": {
-                            "primaryRecordType": "{pageBuilder}.options.pageType",
-                            "applier": "{pageBuilder}.applier",
-                            "model": "{pageBuilder}.model",
-                            "configURL": "./config/cataloging-tab.json" 
-                        } 
-                    },
-                    {
-                        "func": "cspace.tabSetup",
-                        "options": {
-                            "primaryRecordType": "{pageBuilder}.options.pageType",
-                            "applier": "{pageBuilder}.applier",
-                            "model": "{pageBuilder}.model",
-                            "configURL": "./config/movement-tab.json" 
-                        } 
-                    } 
-                ] 
-            } 
+            "type": "cspace.tabs"
+        },
+        "titleBar": {
+            "type": "cspace.titleBar"
         },
         "recordEditor": {
+            "type":  "cspace.recordEditor",
             "options": {
                 "selectors": {
                     "identificationNumber": ".csc-loanIn-loanInNumber"
@@ -122,15 +57,16 @@
                 "applier": "{pageBuilder}.applier",
                 "uispec": "{pageBuilder}.uispec.recordEditor",
                 "model": "{pageBuilder}.model" 
-            } 
+            }
         },
         "sidebar": {
+            "type": "cspace.sidebar",
             "options": {
                 "uispec": "{pageBuilder}.uispec.sidebar",
                 "applier": "{pageBuilder}.applier",
                 "model": "{pageBuilder}.model",
-                "primaryRecordType": "{pageBuilder}.options.pageType" 
-            } 
-        } 
-    } 
+                "primaryRecordType": "{pageBuilder}.options.pageType"
+            }
+        }
+    }
 }

@@ -52,4 +52,13 @@ cspace = cspace || {};
             applier: "preserve"
         }
     });
+    
+    fluid.demands("titleBar", "cspace.pageBuilder", {
+        args: ["{pageBuilder}.options.selectors.titleBar", {
+            uispec: "{pageBuilder}.uispec.titleBar",
+            applier: "{pageBuilder}.applier",
+            model: "{pageBuilder}.model"
+        }]
+    });
+    
 })(jQuery, fluid);

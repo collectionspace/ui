@@ -1,39 +1,31 @@
 {
-    "pageBuilder": {
-        "options": {
-            "schema": [
-                "recordlist",
-                "movement"
-            ],
-            "pageType": "movement-tab",
-            "recordType": "movement",
-            "pageSpec": {
-                "list": {
-                    "href": "movementTabRecordListTemplate.html",
-                    "templateSelector": ".csc-movement-tab-record-list",
-                    "targetSelector": ".csc-movement-tab .div-for-list-of-records"
-                },
-                "details": {
-                    "href": "MovementTemplate.html",
-                    "templateSelector": ".csc-movement-template",
-                    "targetSelector": ".csc-movement-tab .div-for-recordEditor"
-                } 
-            }
+    "schema": [
+        "recordlist",
+        "movement"
+    ],
+    "pageType": "movement-tab",
+    "recordType": "movement",
+    "pageSpec": {
+        "list": {
+            "href": "movementTabRecordListTemplate.html",
+            "templateSelector": ".csc-movement-tab-record-list",
+            "targetSelector": ".csc-movement-tab .div-for-list-of-records"
+        },
+        "details": {
+            "href": "MovementTemplate.html",
+            "templateSelector": ".csc-movement-template",
+            "targetSelector": ".csc-movement-tab .div-for-recordEditor"
         } 
     },
-    "dependencies": {
-        "relatedRecordsTab": {
-            "funcName": "cspace.relatedRecordsTab",
-            "args": [
-                ".csc-movement-tab"
-            ] 
-        } 
+    "selectors": {
+        "relatedRecordsTab": ".csc-movement-tab"
     },
-    "depOpts": {
+    "components": {
         "relatedRecordsTab": {
+            "type": "cspace.relatedRecordsTab",
             "options": {
-                "primary": "{pageBuilder}.options.primaryRecordType",
-                "related": "movement",
+                "primary": "{pageBuilder}.options.primary",
+                "related": "{pageBuilder}.options.related",
                 "applier": "{pageBuilder}.applier",
                 "model": "{pageBuilder}.model",
                 "uispec": "{pageBuilder}.uispec",
@@ -64,5 +56,5 @@
                 }
             }
         }
-    } 
+    }
 }

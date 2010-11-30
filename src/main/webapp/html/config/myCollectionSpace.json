@@ -1,0 +1,33 @@
+{
+    "pageSpec": {
+        "footer": {
+            "href": "footer.html",
+            "templateSelector": ".csc-footer",
+            "targetSelector": ".csc-footer-container" 
+        } 
+    },
+    "selectors": {
+        "myCollectionSpace": ".csc-myCollectionSpace-container"
+    },
+    "components": {
+        "pivotSearch": {
+            "type": "cspace.searchBox",
+            "options": {
+                "strings": {
+                    "recordTypeSelectLabel": "Record Type"
+                },
+                "permissions": "{pageBuilder}.permissions",
+                "schema": "{pageBuilder}.schema",
+                "selfRender": true
+            }
+        },
+        "myCollectionSpace": {
+            "type": "cspace.myCollectionSpace",
+            "options": {
+                "uispec": "{pageBuilder}.uispec",
+                "schema": "{pageBuilder}.schema"
+            }
+        }
+    },
+    "pageType": "myCollectionSpace"
+}
