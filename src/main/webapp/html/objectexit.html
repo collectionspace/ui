@@ -43,13 +43,11 @@
         <script type="text/javascript" src="../js/ListEditor.js"></script>
         <script type="text/javascript" src="../js/RelatedRecordsTab.js"></script>
         <script type="text/javascript" src="../js/PageBuilder.js"></script>
-        <script type="text/javascript" src="../js/tabSetup.js"></script>
         <script type="text/javascript" src="../lib/goog/js/goog.ui.DatePicker.js"></script>
         <script type="text/javascript" src="../lib/datejs/src/globalization/en-US.js"></script>
         <script type="text/javascript" src="../lib/datejs/src/core.js"></script>
         <script type="text/javascript" src="../lib/datejs/src/parser.js"></script>
         <script type="text/javascript" src="../js/DatePicker.js"></script>
-        <script type="text/javascript" src="../js/PageSetup.js"></script>
         
     </head>
 
@@ -69,9 +67,16 @@
                     <!-- sub-main content broken down into two column containers of unequal size: left side and right side -->
                     <div class="fl-fix fl-container-flex fl-col-mixed2">
     
-                        <!-- left-side container. Contains bulk of Location and Movement forms and fields -->
+                        <!-- left-side container. Contains bulk of Object Exit forms and fields -->
                         <div class="fl-container-left fl-force-left">
-                            <div class="csc-tabs-container"></div>
+                            <div class="csc-tabs-container">
+                                <div id="secondary-nav" class="csc-tabs-template">
+                                    <div id="secondary-nav-menu" class="csc-tabs-container">
+                                        <div class="csc-tabs-tabsList-container"></div>
+                                        <div id="primaryTab" class="csc-record-edit-container"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
     
                         <div class="fl-container-pivot fl-force-right">

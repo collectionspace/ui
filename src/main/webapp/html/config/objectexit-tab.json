@@ -1,39 +1,31 @@
 {
-    "pageBuilder": {
-        "options": {
-            "schema": [
-                "recordlist",
-                "objectexit"
-            ],
-            "pageType": "objectexit-tab",
-            "recordType": "objectexit",
-            "pageSpec": {
-                "list": {
-                    "href": "objectexitTabRecordListTemplate.html",
-                    "templateSelector": ".csc-objectexit-tab-record-list",
-                    "targetSelector": ".csc-objectexit-tab .div-for-list-of-records"
-                },
-                "details": {
-                    "href": "ObjectexitTemplate.html",
-                    "templateSelector": ".csc-objectexit-template",
-                    "targetSelector": ".csc-objectexit-tab .div-for-recordEditor"
-                } 
-            }
+    "schema": [
+        "recordlist",
+        "objectexit"
+    ],
+    "pageType": "objectexit-tab",
+    "recordType": "objectexit",
+    "pageSpec": {
+        "list": {
+            "href": "objectexitTabRecordListTemplate.html",
+            "templateSelector": ".csc-objectexit-tab-record-list",
+            "targetSelector": ".csc-objectexit-tab .div-for-list-of-records"
+        },
+        "details": {
+            "href": "ObjectexitTemplate.html",
+            "templateSelector": ".csc-objectexit-template",
+            "targetSelector": ".csc-objectexit-tab .div-for-recordEditor"
         } 
     },
-    "dependencies": {
-        "relatedRecordsTab": {
-            "funcName": "cspace.relatedRecordsTab",
-            "args": [
-                ".csc-objectexit-tab"
-            ] 
-        } 
+    "selectors": {
+        "relatedRecordsTab": ".csc-objectexit-tab"
     },
-    "depOpts": {
+    "components": {
         "relatedRecordsTab": {
+            "type": "cspace.relatedRecordsTab",
             "options": {
-                "primary": "{pageBuilder}.options.primaryRecordType",
-                "related": "objectexit",
+                "primary": "{pageBuilder}.options.primary",
+                "related": "{pageBuilder}.options.related",
                 "applier": "{pageBuilder}.applier",
                 "model": "{pageBuilder}.model",
                 "uispec": "{pageBuilder}.uispec",
@@ -53,10 +45,10 @@
                         "details": {
                             "options": {
                                 "selectors": {
-                                    "identificationNumber": ".csc-objectexit-currentLocation"
+                                    "identificationNumber": ".csc-objectexit-exitNumber"
                                 },
                                 "strings": {
-                                    "identificationNumberRequired": "Please specify a Current Location" 
+                                    "identificationNumberRequired": "Please specify an Exit Number" 
                                 } 
                             } 
                         }
@@ -64,5 +56,5 @@
                 }
             }
         }
-    } 
+    }
 }
