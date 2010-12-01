@@ -77,7 +77,7 @@
                 ]
             }
     },
-    "proceduresObjectexit": {
+    "objectexit": {
             ".csc-recordList-row:": {
                 "children": [
                     {
