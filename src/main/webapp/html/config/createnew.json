@@ -1,26 +1,31 @@
 {
-    "pageBuilder": {
-        "options": {
-            "pageSpec": {
-                "footer": {
-                    "href": "footer.html",
-                    "templateSelector": ".csc-footer",
-                    "targetSelector": ".csc-footer-container" 
-                } 
-            },
-            "components": {
-                "pivotSearch": {
-                    "type": "cspace.searchBox",
-                    "options": {
-                        "strings": {
-                            "recordTypeSelectLabel": "Record Type"
-                        },
-                        "permissions": "{pageBuilder}.permissions",
-                        "schema": "{pageBuilder}.schema",
-                        "selfRender": true
-                    }
-                }
-            }
+    "pageSpec": {
+        "footer": {
+            "href": "footer.html",
+            "templateSelector": ".csc-footer",
+            "targetSelector": ".csc-footer-container" 
         } 
+    },
+    "selectors": {
+        "createNew": ".csc-createNew-main"
+    },
+    "components": {
+        "pivotSearch": {
+            "type": "cspace.searchBox",
+            "options": {
+                "strings": {
+                    "recordTypeSelectLabel": "Record Type"
+                },
+                "permissions": "{pageBuilder}.permissions",
+                "schema": "{pageBuilder}.schema",
+                "selfRender": true
+            }
+        },
+        "createNew": {
+            "type": "cspace.createNew",
+            "options": {
+                "permissions": "{pageBuilder}.permissions"
+            }
+        }
     }
 }

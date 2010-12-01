@@ -207,6 +207,9 @@ cspace = cspace || {};
         }
     });
     
+    fluid.demands("pivotSearch", "cspace.pageBuilder", 
+        ["{pageBuilder}.options.selectors.pivotSearch", fluid.COMPONENT_OPTIONS]);
+    
     // This funtction executes on file load and starts the fetch process of component's template.
     fluid.fetchResources.primeCacheFromResources("cspace.searchBoxImpl");
     

@@ -1,33 +1,30 @@
 {
-    "pageBuilder": {
-        "options": {
-            "schema": [
-                "recordlist",
-                "role"
-            ],
-            "recordType": "role",
-            "pageSpec": {
-                "footer": {
-                    "href": "footer.html",
-                    "templateSelector": ".csc-footer",
-                    "targetSelector": ".csc-footer-container" 
-                } 
-            },
-            "pageType": "role"
+    "schema": [
+        "recordlist",
+        "role"
+    ],
+    "recordType": "role",
+    "pageSpec": {
+        "footer": {
+            "href": "footer.html",
+            "templateSelector": ".csc-footer",
+            "targetSelector": ".csc-footer-container" 
         } 
     },
-    "dependencies": {
-        "role": {
-            "funcName": "cspace.adminRoles",
-            "args": [
-                ".csc-roles-roleAdmin" 
-            ] 
-        } 
+    "pageType": "role",
+    "selectors": {
+        "role": ".csc-roles-roleAdmin" 
     },
-    "depOpts": {
+    "components": {
         "role": {
+            "type": "cspace.adminRoles",
             "options": {
-                "uispec": "{pageBuilder}.uispec",
+                "expander": {
+                    "type": "fluid.expander.noexpand",
+                    "tree": {
+                        "uispec": "{pageBuilder}.uispec"
+                    }
+                },
                 "roleListEditor": {
                     "options": {
                         "dataContext": {
@@ -49,7 +46,7 @@
                         "schema": "{pageBuilder}.schema"
                     }
                 }
-            } 
-        } 
-    } 
+            }
+        }
+    }
 }

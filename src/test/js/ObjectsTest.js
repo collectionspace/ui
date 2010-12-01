@@ -13,7 +13,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 (function ($) {
     
-    var pageBuilder;
+    var cataloging;
 
     var objectsTests = new jqUnit.TestCase("Objects Tests", function () {
         cspace.util.isTest = true;
@@ -23,78 +23,77 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     var setupObjects = function (options) {
         options = $.extend(true, {
             configURL: "../../main/webapp/html/config/cataloging.json",
-            pageBuilder: {
-                options: {
-                    recordType: "cataloging",
-                    pageType: "cataloging",
-                    listeners: {
-                        onDependencySetup: function (uispec) {
-                            // Change the template URL for the number pattern chooser.
-                            uispec.recordEditor[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl = "../../main/webapp/html/NumberPatternChooser.html";
-                        }
-                    },
-                    pageSpec: {
-                        tabs: {
-                            href: "../../main/webapp/html/tabsTemplate.html"
-                        },
-                        titleBar: {
-                            href: "../../main/webapp/html/objectTitleBar.html"
-                        },
-                        dateEntry: {
-                            href: "../../main/webapp/html/ObjectEntryTemplate.html"
-                        },
-                        sidebar: {
-                            href: "../../main/webapp/html/right-sidebar.html"
-                        },
-                        footer: {
-                            href: "../../main/webapp/html/footer.html"
-                        }
-                    }
-                }
-            },
-            templateUrlPrefix: "../../main/webapp/html/",
-            depOpts: {
-                recordEditor: {
+            components: {
+                pageBuilderSetup: {
                     options: {
-                        confirmation: {
-                            options: {
-                                confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
+                        recordType: "cataloging",
+                        pageType: "cataloging",
+                        listeners: {
+                            onDependencySetup: function (uispec) {
+                                // Change the template URL for the number pattern chooser.
+                                uispec.recordEditor[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl = "../../main/webapp/html/NumberPatternChooser.html";
                             }
-                        }
-                    }
-                },
-                sidebar: {
-                    options: {
+                        },
+                        pageSpec: {
+                            titleBar: {
+                                href: "../../main/webapp/html/objectTitleBar.html"
+                            },
+                            dateEntry: {
+                                href: "../../main/webapp/html/ObjectEntryTemplate.html"
+                            },
+                            sidebar: {
+                                href: "../../main/webapp/html/right-sidebar.html"
+                            },
+                            footer: {
+                                href: "../../main/webapp/html/footer.html"
+                            }
+                        },
+                        templateUrlPrefix: "../../main/webapp/html/",
                         components: {
-                            cataloging: {
+                            recordEditor: {
+                                options: {
+                                    confirmation: {
+                                        options: {
+                                            confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
+                                        }
+                                    }
+                                }
+                            },
+                            sidebar: {
                                 options: {
                                     components: {
-                                        relationManager: {
+                                        cataloging: {
                                             options: {
                                                 components: {
-                                                    searchToRelateDialog: {
+                                                    relationManager: {
                                                         options: {
-                                                            templates: {
-                                                                dialog: "../../main/webapp/html/searchToRelate.html"
+                                                            components: {
+                                                                searchToRelateDialog: {
+                                                                    options: {
+                                                                        templates: {
+                                                                            dialog: "../../main/webapp/html/searchToRelate.html"
+                                                                        }
+                                                                    }
+                                                                }
                                                             }
                                                         }
                                                     }
                                                 }
                                             }
-                                        }
-                                    }
-                                }
-                            },
-                            procedures: {
-                                options: {
-                                    components: {
-                                        relationManager: {
+                                        },
+                                        procedures: {
                                             options: {
                                                 components: {
-                                                    searchToRelateDialog: {
+                                                    relationManager: {
                                                         options: {
-                                                            templates: {
-                                                                dialog: "../../main/webapp/html/searchToRelate.html"
+                                                            components: {
+                                                                searchToRelateDialog: {
+                                                                    options: {
+                                                                        templates: {
+                                                                            dialog: "../../main/webapp/html/searchToRelate.html"
+                                                                        }
+                                                                    }
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -109,39 +108,23 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         }, options);
-        pageBuilder = cspace.pageSetup(options).pageBuilder;
+        cataloging = cspace.setup("cspace.record", options);
+        stop();
     };
     
     objectsTests.test("Initialization", function () {
         var options = {
-            pageBuilder: {
-                options: {
-                    listeners: {
-                        pageReady: function () {
-                            jqUnit.assertValue("Objects should have a record editor", pageBuilder.components.recordEditor);
-                            jqUnit.assertValue("Objects should have a side bar", pageBuilder.components.sidebar);
-                            jqUnit.assertValue("Objects should have a title bar", pageBuilder.components.titleBar);
-                            jqUnit.assertValue("Objects should have tabs", pageBuilder.components.tabs);
-                            start();
-                        }
-                    }
-                }
-            }
-        };
-        setupObjects(options);
-        stop();
-    });
-        
-    objectsTests.test("Go To Record", function () {
-        var options = {
-            depOpts: {
-                recordEditor: {
+            components: {
+                pageBuilderSetup: {
                     options: {
                         listeners: {
-                            afterRender: function () {
-                                jqUnit.notVisible("On the main record tab link 'Go to record' should be invisible", $(".csc-goto"));
-                                jqUnit.assertUndefined("Link for the invisible 'Go to record' should not have href attribute", $(".csc-goto").attr("href"));
-                                start();                  
+                            pageReady: function () {
+                                var pageBuilder = cataloging.pageBuilderSetup.pageBuilder;
+                                jqUnit.assertValue("Objects should have a record editor", pageBuilder.recordEditor);
+                                jqUnit.assertValue("Objects should have a side bar", pageBuilder.sidebar);
+                                jqUnit.assertValue("Objects should have a title bar", pageBuilder.titleBar);
+                                jqUnit.assertValue("Objects should have tabs", pageBuilder.tabs);
+                                start();
                             }
                         }
                     }
@@ -149,7 +132,31 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         };
         setupObjects(options);
-        stop();
+    });
+        
+    objectsTests.test("Go To Record", function () {
+        var options = {
+            components: {
+                pageBuilderSetup: {
+                    options: {
+                        components: {
+                            recordEditor: {
+                                options: {
+                                    listeners: {
+                                        afterRender: function () {
+                                            jqUnit.notVisible("On the main record tab link 'Go to record' should be invisible", $(".csc-goto"));
+                                            jqUnit.assertUndefined("Link for the invisible 'Go to record' should not have href attribute", $(".csc-goto").attr("href"));
+                                            start();                  
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        setupObjects(options);
     });
 }(jQuery));
 

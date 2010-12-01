@@ -1,92 +1,52 @@
 {
-    "pageBuilder": {
+    "schema": [
+        "recordlist",
+        "organization"
+    ],
+    "recordType": "organization",
+    "dataContext": {
         "options": {
-            "schema": [
-                "recordlist",
-                "organization"
-            ],
             "recordType": "organization",
-            "dataContext": {
-                "options": {
-                    "recordType": "organization",
-                    "baseUrl": "../../chain/vocabularies" 
-                } 
-            },
-            "pageSpec": {
-                "tabs": {
-                    "href": "tabsTemplate.html",
-                    "templateSelector": ".csc-tabs-template",
-                    "targetSelector": ".csc-tabs-container" 
-                },
-                "titleBar": {
-                    "href": "organizationTitleBar.html",
-                    "templateSelector": ".csc-organizationAuthority-titleBar-template",
-                    "targetSelector": ".csc-organizationAuthority-titleBar-container"
-                },
-                "recordEditor": {
-                    "href": "organizationTemplate.html",
-                    "templateSelector": ".csc-organizationAuthority-template",
-                    "targetSelector": ".csc-record-edit-container" 
-                },
-                "sidebar": {
-                    "href": "right-sidebar.html",
-                    "templateSelector": ".csc-right-sidebar",
-                    "targetSelector": ".csc-sidebar-container" 
-                },
-                "footer": {
-                    "href": "footer.html",
-                    "templateSelector": ".csc-footer",
-                    "targetSelector": ".csc-footer-container" 
-                } 
-            },
-            "pageType": "organization" 
+            "baseUrl": "../../chain/vocabularies" 
         } 
     },
-    "dependencies": {
+    "pageSpec": {
         "titleBar": {
-            "funcName": "cspace.titleBar",
-            "args": [
-                ".csc-organizationAuthority-template"
-            ] 
-        },
-        "tabs": {
-            "funcName": "cspace.tabs",
-            "args": [
-                ".csc-tabs-template"
-            ] 
+            "href": "organizationTitleBar.html",
+            "templateSelector": ".csc-organizationAuthority-titleBar-template",
+            "targetSelector": ".csc-organizationAuthority-titleBar-container"
         },
         "recordEditor": {
-            "funcName": "cspace.recordEditor",
-            "args": [
-                ".csc-organizationAuthority-template"
-            ] 
+            "href": "organizationTemplate.html",
+            "templateSelector": ".csc-organizationAuthority-template",
+            "targetSelector": ".csc-record-edit-container" 
         },
         "sidebar": {
-            "funcName": "cspace.sidebar",
-            "args": [
-                ".csc-sidebar"
-            ] 
+            "href": "right-sidebar.html",
+            "templateSelector": ".csc-right-sidebar",
+            "targetSelector": ".csc-sidebar-container" 
+        },
+        "footer": {
+            "href": "footer.html",
+            "templateSelector": ".csc-footer",
+            "targetSelector": ".csc-footer-container" 
         } 
     },
-    "depOpts": {
-        "titleBar": {
-            "options": {
-                "uispec": "{pageBuilder}.uispec.titleBar",
-                "applier": "{pageBuilder}.applier",
-                "model": "{pageBuilder}.model"
-            } 
-        },
+    "pageType": "organization",
+    "selectors": {
+        "titleBar": ".csc-organizationAuthority-template",
+        "recordEditor": ".csc-organizationAuthority-template",
+        "sidebar": ".csc-sidebar"
+    },
+    "components": {
         "tabs": {
-            "options": {
-                "tabList": [
-                    {"name": "Organization Name Authority", "target": "#primaryTab"}
-                ],
-                "tabSetups": [
-                    "null"
-                ] 
-            } 
+            "type": "cspace.tabs"
+        },
+        "titleBar": {
+            "type": "cspace.titleBar"
         },
         "recordEditor": {
+            "type":  "cspace.recordEditor",
             "options": {
                 "selectors": {
                     "identificationNumber": ".csc-organizationAuthority-displayName" 
@@ -98,15 +58,16 @@
                 "applier": "{pageBuilder}.applier",
                 "uispec": "{pageBuilder}.uispec.recordEditor",
                 "model": "{pageBuilder}.model"
-            } 
+            }
         },
         "sidebar": {
+            "type": "cspace.sidebar",
             "options": {
                 "uispec": "{pageBuilder}.uispec.sidebar",
                 "applier": "{pageBuilder}.applier",
                 "model": "{pageBuilder}.model",
                 "primaryRecordType": "{pageBuilder}.options.pageType"
-            } 
-        } 
-    } 
+            }
+        }
+    }
 }

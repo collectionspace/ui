@@ -55,6 +55,11 @@ cspace = cspace || {};
                 url: listEditor.options.baseUrl + primary + "/" + model.csid,
                 dataType: "json",
                 success: function (data) {
+                    if (listEditor.list) {
+                        // We have to requestChange here in order for the recordList
+                        // to update the list of records with new model.
+                        listEditor.list.applier.requestChange("items", data.relations[related]);
+                    }
                     fluid.model.copyModel(listEditor.model.list, data.relations[related]);
                     if (callback) {
                         callback();
@@ -130,5 +135,8 @@ cspace = cspace || {};
             applier: "preserve"
         }
     });
+    
+    fluid.demands("relatedRecordsTab", "cspace.pageBuilder", 
+        ["{pageBuilder}.options.selectors.relatedRecordsTab", fluid.COMPONENT_OPTIONS]);
     
 })(jQuery, fluid);

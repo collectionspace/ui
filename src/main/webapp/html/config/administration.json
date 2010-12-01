@@ -1,36 +1,33 @@
 {
-    "pageBuilder": {
-        "options": {
-            "schema": [
-                "recordlist",
-                "users" 
-            ],
-            "recordType": "users",
-            "header": {
-                "href": "header.html",
-                "templateSelector": ".csc-header-template",
-                "targetSelector": ".csc-header-container" 
-            },
-            "footer": {
-                "href": "footer.html",
-                "templateSelector": ".csc-footer",
-                "targetSelector": ".csc-footer-container" 
-            },
-            "pageType": "users" 
-        } 
+    "schema": [
+        "recordlist",
+        "users" 
+    ],
+    "recordType": "users",
+    "header": {
+        "href": "header.html",
+        "templateSelector": ".csc-header-template",
+        "targetSelector": ".csc-header-container" 
     },
-    "dependencies": {
-        "users": {
-            "funcName": "cspace.adminUsers",
-            "args": [
-                ".csc-users-userAdmin" 
-            ] 
-        } 
+    "footer": {
+        "href": "footer.html",
+        "templateSelector": ".csc-footer",
+        "targetSelector": ".csc-footer-container" 
     },
-    "depOpts": {
+    "pageType": "users",
+    "selectors": {
+        "users": ".csc-users-userAdmin"
+    },
+    "components": {
         "users": {
+            "type": "cspace.adminUsers",
             "options": {
-                "uispec": "{pageBuilder}.uispec",
+                "expander": {
+                    "type": "fluid.expander.noexpand",
+                    "tree": {
+                        "uispec": "{pageBuilder}.uispec"
+                    }
+                },
                 "currentUserId": "{pageBuilder}.currentUserId",
                 "userListEditor": {
                     "options": {
@@ -53,7 +50,7 @@
                         "schema": "{pageBuilder}.schema" 
                     } 
                 } 
-            } 
-        } 
-    } 
+            }
+        }
+    }
 }

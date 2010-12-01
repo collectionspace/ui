@@ -66,28 +66,9 @@ cspace = cspace || {};
     };
     
     var setUpPageBuilder = function (that) {
-        
         setupModel(that.applier, that.model, that.options.pageType, that.options.recordType, that.schema);
-        
-        fluid.initDependents(that);        
-        
         that.events.onDependencySetup.fire(that.uispec);
-        
-        fluid.withEnvironment({pageBuilder: that},
-            function () {
-                that.dependencies = fluid.expander.expandLight(that.dependencies);
-            }
-        );
-        
-        that.components = {};
-        for (var region in that.dependencies) {
-            if (that.dependencies.hasOwnProperty(region)) {
-                var dep = that.dependencies[region];
-                fluid.log("PageBuilder.js before executing " + dep.funcName);
-                that.components[region] = fluid.invokeGlobalFunction(dep.funcName, dep.args);
-                fluid.log("PageBuilder.js after executing " + dep.funcName);
-            }
-        }
+        fluid.initDependents(that);
     };
     
     cspace.pageSpecManager = function (pageSpecs) {
@@ -126,9 +107,27 @@ cspace = cspace || {};
         return that;
     };
 
-    cspace.pageBuilder = function (dependencies, options) {
+    cspace.pageBuilderSetup = function (options) {
+        var that = {};
+        fluid.fetchResources({
+            config: {
+                href: options.configURL || cspace.util.getDefaultConfigURL(),
+                options: {
+                    dataType: "json"
+                }
+            }
+        }, function (resourceSpecs) {
+            fluid.merge({
+                model: "preserve",
+                applier: "preserve"
+            }, resourceSpecs.config.resourceText, options);
+            that.pageBuilder = cspace.pageBuilder(resourceSpecs.config.resourceText);
+        });
+        return that;
+    };
+    
+    cspace.pageBuilder = function (options) {
         var that = fluid.initLittleComponent("cspace.pageBuilder", options);
-        that.dependencies = dependencies;
         that.model = that.options.model || {};
         that.applier = that.options.applier || fluid.makeChangeApplier(that.model);
         that.schema = {};
@@ -199,12 +198,6 @@ cspace = cspace || {};
             };
         }
         
-        // for our dependencies, add any demands for model expansion to the spec list
-        fluid.withEnvironment({resourceSpecCollector: resourceSpecs},
-            function () {
-                that.dependencies = fluid.expander.expandLight(that.dependencies, {noValue: true});
-            }
-        );
         fluid.each(resourceSpecs,
             function (spec) {
                 spec.timeSuccess = true;
@@ -225,17 +218,9 @@ cspace = cspace || {};
             that.events.pageReady.fire(); 
         };
         fetchCallback = indicator.wrapCallback(fetchCallback);
-        
         fluid.fetchResources(resourceSpecs, fetchCallback, {amalgamateClasses: that.options.amalgamateClasses});
-        
         return that;
     };
-    
-    fluid.demands("pivotSearch", "cspace.pageBuilder", 
-        ["{pageBuilder}.options.selectors.pivotSearch", fluid.COMPONENT_OPTIONS]);
-    
-    fluid.demands("header", "cspace.pageBuilder", 
-        ["{pageBuilder}.options.selectors.header", fluid.COMPONENT_OPTIONS]);
 
     fluid.defaults("cspace.pageBuilder", {
         amalgamateClasses: [
@@ -243,7 +228,8 @@ cspace = cspace || {};
         ],
         selectors: {
             header: ".csc-header-container",
-            pivotSearch: ".csc-pivot-searchBox"
+            pivotSearch: ".csc-pivot-searchBox",
+            tabs: ".csc-tabs-template"
         },
         components: {
             header: {
@@ -275,4 +261,349 @@ cspace = cspace || {};
             applier: "preserve"
         }
     });
+    
+    cspace.pageBuilderSetup.setupRecord = function (options) {
+        var that = fluid.initLittleComponent("cspace.pageBuilderSetup.setupRecord", options);
+        return cspace.pageBuilderSetup(that.options);
+    };
+    
+    fluid.defaults("cspace.pageBuilderSetup.setupRecord", {
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
+        },
+        csid: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.util.getUrlParameter",
+                args: "csid"
+            }
+        }
+    });
+    
+    cspace.pageBuilderSetup.setupLocalRecord = function (options) {
+        var that = fluid.initLittleComponent("cspace.pageBuilderSetup.setupLocalRecord", options);
+        return cspace.pageBuilderSetup(that.options);
+    };
+    
+    fluid.defaults("cspace.pageBuilderSetup.setupLocalRecord", {
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
+        },
+        csid: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.util.getUrlParameter",
+                args: "csid"
+            }
+        },
+        dataContext: {
+            options: {
+                baseUrl: "data",
+                fileExtension: ".json"
+            }
+        }
+    });
+    
+    cspace.pageBuilderSetup.setupLocalFindEdit = function (options) {
+        var that = fluid.initLittleComponent("cspace.pageBuilderSetup.setupLocalFindEdit", options);
+        return cspace.pageBuilderSetup(that.options);
+    };
+    
+    fluid.defaults("cspace.pageBuilderSetup.setupLocalFindEdit", {
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
+        },
+        components: {
+            search: {
+                options: {
+                    searchUrlBuilder: cspace.search.localSearchUrlBuilder
+                }
+            }
+        }
+    });
+    
+    cspace.pageBuilderSetup.setupRole = function (options) {
+        var that = fluid.initLittleComponent("cspace.pageBuilderSetup.setupRole", options);
+        return cspace.pageBuilderSetup(that.options);
+    };
+    
+    fluid.defaults("cspace.pageBuilderSetup.setupRole", {
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
+        },
+        components: {
+            role: {
+                options: {
+                    roleListEditor: {
+                        options: {
+                            dataContext: {
+                                options: {
+                                    dataSource: {
+                                        options: {
+                                            sources: {
+                                                permission: {
+                                                    merge: cspace.dataSource.mergePermissions
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    cspace.pageBuilderSetup.setupLocalRole = function (options) {
+        var that = fluid.initLittleComponent("cspace.pageBuilderSetup.setupLocalRole", options);
+        return cspace.pageBuilderSetup(that.options);
+    };
+    
+    fluid.defaults("cspace.pageBuilderSetup.setupLocalRole", {
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
+        },
+        components: {
+            role: {
+                options: {
+                    recordType: "role/records/list.json",
+                    roleListEditor: {
+                        options: {
+                            baseUrl: "data/",
+                            dataContext: {
+                                options: {
+                                    baseUrl: "data/",
+                                    fileExtension: ".json",
+                                    dataSource: {
+                                        options: {
+                                            sources: {
+                                                permission: {
+                                                    merge: cspace.dataSource.mergePermissions,
+                                                    href: "data/permission/list.json"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    cspace.pageBuilderSetup.setupUsers = function (options) {
+        var that = fluid.initLittleComponent("cspace.pageBuilderSetup.setupUsers", options);
+        return cspace.pageBuilderSetup(that.options);
+    };
+    
+    fluid.defaults("cspace.pageBuilderSetup.setupUsers", {
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
+        },
+        components: {
+            users: {
+                options: {
+                    userListEditor: {
+                        options: {
+                            dataContext: {
+                                options: {
+                                    dataSource: {
+                                        options: {
+                                            sources: {
+                                                role: {
+                                                    merge: cspace.dataSource.mergeRoles
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    cspace.pageBuilderSetup.setupLocalUsers = function (options) {
+        var that = fluid.initLittleComponent("cspace.pageBuilderSetup.setupLocalUsers", options);
+        return cspace.pageBuilderSetup(that.options);
+    };
+    
+    fluid.defaults("cspace.pageBuilderSetup.setupLocalUsers", {
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
+        },
+        components: {
+            users: {
+                options: {
+                    recordType: "users/records/list.json",
+                    queryURL: "data/users/search/list.json",
+                    userListEditor: {
+                        options: {
+                            baseUrl: "data/",
+                            dataContext: {
+                                options: {
+                                    baseUrl: "data/",
+                                    fileExtension: ".json",
+                                    dataSource: {
+                                        options: {
+                                            sources: {
+                                                role: {
+                                                    merge: cspace.dataSource.mergeRoles,
+                                                    href: "data/role/list.json"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    cspace.pageBuilderSetup.setupTabs = function (options) {
+        var that = fluid.initLittleComponent("cspace.pageBuilderSetup.setupTabs", options);
+        that.options.components = {
+            relatedRecordsTab: {
+                options: {
+                    listEditor: {
+                        options: {
+                            data: options.model.relations[that.options.related] 
+                        }
+                    }
+                }
+            }
+        };
+        return cspace.pageBuilderSetup(that.options);
+    };
+    
+    fluid.defaults("cspace.pageBuilderSetup.setupTabs", {
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
+        }
+    });
+    
+    cspace.pageBuilderSetup.setupLocalTabs = function (options) {
+        var that = fluid.initLittleComponent("cspace.pageBuilderSetup.setupLocalTabs", options);
+        that.options.components.relatedRecordsTab.options.listEditor.options.data =
+            options.model.relations[that.options.related];
+        return cspace.pageBuilderSetup(that.options);
+    };
+    
+    fluid.defaults("cspace.pageBuilderSetup.setupLocalTabs", {
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
+        },
+        components: {
+            relatedRecordsTab: {
+                options: {
+                    listEditor: {
+                        options: {
+                            dataContext: {
+                                options: {
+                                    baseUrl: "data",
+                                    fileExtension: ".json"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    fluid.demands("cspace.pageBuilderSetup", ["cspace.tabs"], {
+        funcName: "cspace.pageBuilderSetup.setupTabs",
+        args: fluid.COMPONENT_OPTIONS
+    });
+    
+    fluid.demands("cspace.pageBuilderSetup", ["cspace.tabs", "cspace.localData"], {
+        funcName: "cspace.pageBuilderSetup.setupLocalTabs",
+        args: fluid.COMPONENT_OPTIONS
+    });
+    
+    fluid.demands("cspace.pageBuilderSetup", ["cspace.role"], {
+        funcName: "cspace.pageBuilderSetup.setupRole",
+        args: fluid.COMPONENT_OPTIONS
+    });
+    
+    fluid.demands("cspace.pageBuilderSetup", ["cspace.role", "cspace.localData"], {
+        funcName: "cspace.pageBuilderSetup.setupLocalRole",
+        args: fluid.COMPONENT_OPTIONS
+    });
+    
+    fluid.demands("cspace.pageBuilderSetup", ["cspace.users"], {
+        funcName: "cspace.pageBuilderSetup.setupUsers",
+        args: fluid.COMPONENT_OPTIONS
+    });
+    
+    fluid.demands("cspace.pageBuilderSetup", ["cspace.users", "cspace.localData"], {
+        funcName: "cspace.pageBuilderSetup.setupLocalUsers",
+        args: fluid.COMPONENT_OPTIONS
+    });
+    
+    fluid.demands("cspace.pageBuilderSetup", ["cspace.findedit"], fluid.COMPONENT_OPTIONS);
+    
+    fluid.demands("cspace.pageBuilderSetup", ["cspace.findedit", "cspace.localData"], {
+        funcName: "cspace.pageBuilderSetup.setupLocalFindEdit",
+        args: fluid.COMPONENT_OPTIONS
+    });
+    
+    fluid.demands("cspace.pageBuilderSetup", ["cspace.record"], {
+        funcName: "cspace.pageBuilderSetup.setupRecord",
+        args: fluid.COMPONENT_OPTIONS
+    });
+    
+    fluid.demands("cspace.pageBuilderSetup", ["cspace.record", "cspace.localData"], {
+        funcName: "cspace.pageBuilderSetup.setupLocalRecord",
+        args: fluid.COMPONENT_OPTIONS
+    });
+    
+    fluid.demands("cspace.pageBuilderSetup", ["cspace.createnew"], fluid.COMPONENT_OPTIONS);
+    
+    fluid.demands("cspace.pageBuilderSetup", ["cspace.myCollectionSpace"], fluid.COMPONENT_OPTIONS);
+    
+    cspace.setup = function (tag, options) {
+        fluid.staticEnvironment.cspacePage = fluid.typeTag(tag);
+        var that = fluid.initLittleComponent("cspace.setup", options);
+        fluid.initDependents(that);
+        return that;
+    };
+    
+    fluid.defaults("cspace.setup", {
+        components: {
+            pageBuilderSetup: {
+                type: "cspace.pageBuilderSetup",
+                options: {
+                    model: "{setup}.options.model",
+                    applier: "{setup}.options.applier",
+                    related: "{setup}.options.related",
+                    primary: "{setup}.options.primary",
+                    configURL: "{setup}.options.configURL"
+                }
+            }
+        },
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve"
+        }
+    });
+    
 })(jQuery, fluid);

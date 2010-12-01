@@ -18,10 +18,12 @@
         <script type="text/javascript" src="../js/Utilities.js"></script>
         <script type="text/javascript" src="../js/Renderer.js"></script>
         <script type="text/javascript" src="../js/SearchBox.js"></script>
+        <script type="text/javascript" src="../js/CreateNew.js"></script>
         <script type="text/javascript" src="../js/Header.js"></script>
+        <script type="text/javascript" src="../js/DataSource.js"></script>
         <script type="text/javascript" src="../js/DataContext.js"></script>
+        <script type="text/javascript" src="../js/Search.js"></script>
         <script type="text/javascript" src="../js/PageBuilder.js"></script>
-        <script type="text/javascript" src="../js/PageSetup.js"></script>
     </head>
 
     <body id="createnew">
@@ -41,114 +43,34 @@
                     <div class="fl-fix fl-container-flex fl-col-mixed2">
                         <div class="fl-container-content fl-force-left fl-container-left">
                             <div class="fl-container-left-inner">
-                                <div class="info-column2-50 fl-force-left">
-                                    <form name="selecttype">
-                                        <div class="fl-container-flex fl-fix information-group">
-                                            <div class="info-column">    
-                                                <div class="fl-container-flex header static">
-                                                    Cataloging Records
-                                                </div>
-                                                
-                                                <div class="fl-container-flex fl-fix content main" id="toggle-object-records">
-                                                    <div class="radio-buttons">
-                                                        <div class="radio-button"><input id="new-object-radio" type="radio" name="recordtype" value="cataloging.html" checked="checked" /> <label for="new-object-radio">Cataloging</label></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="fl-container-flex fl-fix information-group">
-                                            <div class="info-column">    
-                                                <div class="fl-container-flex header static" >
-                                                    Procedural Records
-                                                </div>                            
-                                                <div class="fl-container-flex fl-fix content main" id="toggle-procedural-records">
-                                                    <div class="radio-buttons">
-                                                        <div class="radio-button"><input id="new-intake-radio" type="radio" name="recordtype" value="intake.html" /> <label for="new-intake-radio">Intake</label></div>
-                                                        <div class="radio-button"><input id="new-acquisition-radio" type="radio" name="recordtype" value="acquisition.html" /> <label for="new-acquisition-radio">Acquisition</label></div>
-                                                        <div class="radio-button"><input id="new-loanin-radio" type="radio" name="recordtype" value="loanin.html" /> <label for="new-loanin-radio">Loan In</label></div>
-                                                        <div class="radio-button"><input id="new-loanout-radio" type="radio" name="recordtype" value="loanout.html" /> <label for="new-loanout-radio">Loan Out</label></div>
-                                                        <div class="radio-button"><input id="new-movement-radio" type="radio" name="recordtype" value="movement.html" /> <label for="new-movement-radio">Location and movement control</label></div>
-                                                        <div class="radio-button"><input id="new-objectexit-radio" type="radio" name="recordtype" value="objectexit.html" /> <label for="new-objectexit-radio">Object Exit control</label></div>
-                                                        <div class="radio-button disabled"><input type="radio" id="new-media-records-radio" name="recordtype" value="mediasupport" disabled="disabled" /> <label for="new-media-records-radio">Media Records</label></div>
-														<div class="radio-button disabled"><input id="new-exit-radio" type="radio" name="recordtype" value="objectexit" disabled="disabled" /> <label for="new-exit-radio">Object Exit</label></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                </div>
-                                <div class="info-column2-50 fl-force-left">
-                                        <div class="fl-container-flex fl-fix information-group">
-                                            <div class="info-column">
-                                                <div class="fl-container-flex header static" >
-                                                    Vocabulary Terms
-                                                </div>
-                                                <div class="fl-container-flex fl-fix content main" id="toggle-vocab-records">
-                                                    <div class="radio-buttons">
-                                                        <div class="radio-button"><input type="radio" id="new-person-radio" name="recordtype" value="person.html"/> <label for="new-person-radio">Person</label></div>
-                                                        <div class="radio-button"><input type="radio" id="new-org-radio" name="recordtype" value="organization.html"/> <label for="new-org-radio">Organization</label></div>
-                                                        <div class="radio-button disabled"><input type="radio" id="new-storage-location-radio" name="recordtype" value="location" disabled="disabled" /> <label for="new-storage-location-radio">Storage Location</label></div>
-														<div class="radio-button disabled"><input type="radio" id="new-place-radio" name="recordtype" value="location" disabled="disabled" /> <label for="new-place-radio">Place</label></div>
-                                                        <div class="radio-button disabled"><input type="radio" id="new-subject-radio" name="recordtype" value="mediasupport" disabled="disabled" /> <label for="new-subject-radio">Subject</label></div>
-                                                        <div class="radio-button disabled"><input type="radio" id="new-concept-radio" name="recordtype" value="collection" disabled="disabled" /> <label for="new-concept-radio">Concept</label></div>
-                                                        <div class="radio-button disabled"><input type="radio" id="new-exhibition-radio" name="recordtype" value="collection" disabled="disabled" /> <label for="new-exhibition-radio">Exhibition</label></div>
-                                                        <div class="radio-button disabled"><input type="radio" id="new-collection-event-radio" name="recordtype" value="collection" disabled="disabled" /> <label for="new-collecting-event-radio">Collecting Event</label></div>
-                                                        <div class="radio-button disabled"><input type="radio" id="new-citation-radio" name="recordtype" value="collection" disabled="disabled" /> <label for="new-citation-radio">Citation</label></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    
-                                        <!--<div class="fl-container-flex fl-fix information-group">
-                                            <div class="info-column">    
-                                                <div class="fl-container-flex header static" >
-                                                    Other
-                                                </div>
-                                                <div class="fl-container-flex fl-fix content main" id="toggle-other-records">
-                                                    <div class="radio-buttons">
-                                                      
-                                                        
-                                                        <div class="radio-button disabled"><input type="radio" id="new-collection-radio" name="recordtype" value="collection" disabled="disabled" /> <label for="new-collection-radio">Collection</label></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>-->
-                                </div>
+                                <div class="csc-createNew-main cs-createNew-main"></div>
                                 <div class="clear"></div>
-                                <div class="button-row-left-center">
-                                    <input type="button" onclick="getRadioValue();" value="Create" />
-                                    <!--<input type="button" disabled="disabled" value="Create New" />
-                                    <input type="button" disabled="disabled" value="Create From Existing" />
-                                    <input type="button" disabled="disabled" value="Create From Template" />-->
-                                </div>
-								<div class="clear"></div>
-                                </form>
-                                </div>
                             </div>
                         </div>
-                        
-                        <div class="fl-container-pivot fl-force-right csc-right-sidebar" id="csc-right-sidebar">
-                            <div class="pivot-search-box">
-                                <div class="info-column">
-                                    <div class="header">
-                                        Search
-                                    </div>
-                                    <div class="content">
-                                        <div class="csc-pivot-searchBox cs-pivot-searchBox"></div>
-                                        <div class="clear"></div>
-                                    </div>
+                    </div>
+
+                    <div class="fl-container-pivot fl-force-right csc-right-sidebar" id="csc-right-sidebar">
+                        <div class="pivot-search-box">
+                            <div class="info-column">
+                                <div class="header">
+                                    Search
+                                </div>
+                                <div class="content">
+                                    <div class="csc-pivot-searchBox cs-pivot-searchBox"></div>
                                     <div class="clear"></div>
                                 </div>
+                                <div class="clear"></div>
                             </div>
                         </div>
-                        <div class="clear"></div>
                     </div>
+                    <div class="clear"></div>
                 </div>
             </div>
+        </div>
 
-            <div class="csc-footer-container" id="footer">
-                <!-- this div will be filled in with the contents of the Template -->
-            </div>
+        <div class="csc-footer-container" id="footer">
+            <!-- this div will be filled in with the contents of the Template -->
+        </div>
         </div>
 
         <script type="text/javascript">

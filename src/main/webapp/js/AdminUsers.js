@@ -64,6 +64,9 @@ cspace = cspace || {};
                     // applier.requestChange("*", data);
                     // requestChange() to "*" doesn't work (see FLUID-3507)
                     // the following workaround compensates:
+                    // We have to requestChange here in order for the recordList
+                    // to update the list of records with new model.
+                    listEditor.list.applier.requestChange("items", data.results);
                     fluid.model.copyModel(model.list, data.results);                    
                     listEditor.refreshView();
                     domBinder.locate("unSearchButton").show();
@@ -155,5 +158,8 @@ cspace = cspace || {};
         },
         queryURL: "../../chain/users/search?query="
     });
+    
+    fluid.demands("users", "cspace.pageBuilder", 
+        ["{pageBuilder}.options.selectors.users", fluid.COMPONENT_OPTIONS]);
 
 })(jQuery, fluid);

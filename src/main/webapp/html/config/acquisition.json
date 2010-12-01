@@ -1,144 +1,46 @@
 {
-    "pageBuilder": {
+    "schema": [
+        "recordlist",
+        "acquisition"
+    ],
+    "pageType": "acquisition",
+    "recordType": "acquisition",
+    "dataContext": {
         "options": {
-            "schema": [
-                "recordlist",
-                "acquisition"
-            ],
-            "pageType": "acquisition",
-            "recordType": "acquisition",
-            "dataContext": {
-                "options": {
-                    "recordType": "acquisition" 
-                } 
-            },
-            "pageSpec": {
-                "tabs": {
-                    "href": "tabsTemplate.html",
-                    "templateSelector": ".csc-tabs-template",
-                    "targetSelector": ".csc-tabs-container" 
-                },
-                "titleBar": {
-                    "href": "acquisitionTitleBar.html",
-                    "templateSelector": ".csc-acquisition-titleBar-template",
-                    "targetSelector": ".csc-acquisition-titleBar-container" 
-                },
-                "dateEntry": {
-                    "href": "acquisitionTemplate.html",
-                    "templateSelector": ".csc-acquisition-template",
-                    "targetSelector": ".csc-record-edit-container" 
-                },
-                "sidebar": {
-                    "href": "right-sidebar.html",
-                    "templateSelector": ".csc-right-sidebar",
-                    "targetSelector": ".csc-sidebar-container" 
-                },
-                "footer": {
-                    "href": "footer.html",
-                    "templateSelector": ".csc-footer",
-                    "targetSelector": ".csc-footer-container" 
-                } 
-            } 
+            "recordType": "acquisition" 
         } 
     },
-    "dependencies": {
+    "pageSpec": {
         "titleBar": {
-            "funcName": "cspace.titleBar",
-            "args": [
-                ".csc-acquisition-titleBar-template" 
-            ] 
+            "href": "acquisitionTitleBar.html",
+            "templateSelector": ".csc-acquisition-titleBar-template",
+            "targetSelector": ".csc-acquisition-titleBar-container" 
         },
-        "tabs": {
-            "funcName": "cspace.tabs",
-            "args": [
-                ".csc-tabs-template" 
-            ] 
-        },
-        "recordEditor": {
-            "funcName": "cspace.recordEditor",
-            "args": [
-                ".csc-acquisition-template" 
-            ] 
+        "dateEntry": {
+            "href": "acquisitionTemplate.html",
+            "templateSelector": ".csc-acquisition-template",
+            "targetSelector": ".csc-record-edit-container" 
         },
         "sidebar": {
-            "funcName": "cspace.sidebar",
-            "args": [
-                ".csc-sidebar" 
-            ] 
+            "href": "right-sidebar.html",
+            "templateSelector": ".csc-right-sidebar",
+            "targetSelector": ".csc-sidebar-container" 
+        },
+        "footer": {
+            "href": "footer.html",
+            "templateSelector": ".csc-footer",
+            "targetSelector": ".csc-footer-container" 
         } 
     },
-    "depOpts": {
-        "titleBar": {
-            "options": {
-                "uispec": "{pageBuilder}.uispec.titleBar",
-                "applier": "{pageBuilder}.applier",
-                "model": "{pageBuilder}.model" 
-            } 
-        },
+    "components": {
         "tabs": {
-            "options": {
-                "tabList": [
-                    {
-                        "name": "Acquisition",
-                        "target": "#primaryTab"
-                    },
-                    {
-                        "name": "Acquisition - related",
-                        "target": null
-                    },
-                    {
-                        "name": "Cataloging",
-                        "target": "objectTabPlaceholder.html"
-                    },
-                    {
-                        "name": "Intake",
-                        "target": null
-                    },
-                    {
-                        "name": "Loan In",
-                        "target": null
-                    },
-                    {
-                        "name": "Loan Out",
-                        "target": null
-                    },
-                    {
-                        "name": "Location &amp; Movement",
-                        "target": "movementTab.html"
-                    },
-                    {
-                        "name": "Object Exit",
-                        "target": "objectexitTab.html"
-                    },
-                    {
-                        "name": "Media",
-                        "target": null
-                    } 
-                ],
-                "tabSetups": [
-                    "null",
-                    {
-                        "func": "cspace.tabSetup",
-                        "options": {
-                            "primaryRecordType": "{pageBuilder}.options.pageType",
-                            "applier": "{pageBuilder}.applier",
-                            "model": "{pageBuilder}.model",
-                            "configURL": "./config/cataloging-tab.json" 
-                        } 
-                    },
-                    {
-                        "func": "cspace.tabSetup",
-                        "options": {
-                            "primaryRecordType": "{pageBuilder}.options.pageType",
-                            "applier": "{pageBuilder}.applier",
-                            "model": "{pageBuilder}.model",
-                            "configURL": "./config/movement-tab.json" 
-                        } 
-                    } 
-                ] 
-            } 
+            "type": "cspace.tabs"
+        },
+        "titleBar": {
+            "type": "cspace.titleBar"
         },
         "recordEditor": {
+            "type":  "cspace.recordEditor",
             "options": {
                 "selectors": {
                     "identificationNumber": ".csc-acquisition-numberPatternChooser-reference-number" 
@@ -150,15 +52,21 @@
                 "applier": "{pageBuilder}.applier",
                 "uispec": "{pageBuilder}.uispec.recordEditor",
                 "model": "{pageBuilder}.model" 
-            } 
+            }
         },
         "sidebar": {
+            "type": "cspace.sidebar",
             "options": {
                 "uispec": "{pageBuilder}.uispec.sidebar",
                 "applier": "{pageBuilder}.applier",
                 "model": "{pageBuilder}.model",
-                "primaryRecordType": "{pageBuilder}.options.pageType" 
-            } 
-        } 
-    } 
+                "primaryRecordType": "{pageBuilder}.options.pageType"
+            }
+        }
+    },
+    "selectors": {
+        "titleBar": ".csc-acquisition-titleBar-template",
+        "recordEditor": ".csc-acquisition-template",
+        "sidebar": ".csc-sidebar"
+    }
 }
