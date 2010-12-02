@@ -3,13 +3,13 @@
         "properties": {
             "relations": {
                 "default": {
-                    
+
                 },
                 "type": "object"
             },
             "termsUsed": {
                 "default": [
-                    
+
                 ],
                 "type": "array"
             },
@@ -18,35 +18,22 @@
             },
             "fields": {
                 "properties": {
-                    "normalLocation": {
+                    "exitNote": {
                         "type": "string"
                     },
-                    "objectexitContact": {
+                    "currentOwner": {
                         "type": "string"
                     },
-                    "objectexitReferenceNumber": {
-                        "type": "string"
-                    },
-                    "currentLocationFitness": {
-                        "default": "",
-                        "type": "array"
-                    },
-                    "removalDate": {
+                    "exitDate": {
                         "type": "date"
                     },
-                    "locationDate": {
-                        "type": "date"
-                    },
-                    "plannedRemovalDate": {
-                        "type": "date"
-                    },
-                    "objectexitMethods": {
+                    "exitMethods": {
                         "items": {
                             "properties": {
                                 "_primary": {
                                     "type": "boolean"
                                 },
-                                "objectexitMethod": {
+                                "exitMethod": {
                                     "default": "",
                                     "type": "array"
                                 }
@@ -55,17 +42,17 @@
                         },
                         "type": "array"
                     },
-                    "objectexitNote": {
+                    "exitNumber": {
                         "type": "string"
                     },
-                    "reasonForMove": {
+                    "packingNote": {
+                        "type": "string"
+                    },
+                    "exitReason": {
                         "default": "",
                         "type": "array"
                     },
-                    "currentLocation": {
-                        "type": "string"
-                    },
-                    "currentLocationNote": {
+                    "depositor": {
                         "type": "string"
                     }
                 },

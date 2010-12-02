@@ -68,4 +68,54 @@ fluid.registerNamespace("cspace.permissions");
         method: "", // AND or OR // Style of resolving permission.
         ifEmpty: true // Instruction to perm.manager how to resolve a resource when we have no permissions.
     });
+    
+    
+    /** NEW PERMISSIONS RESOLVER HERE **/
+    
+    cspace.permissions.hasPermission = function (permissions, target, permission) {
+        return fluid.makeArray(permissions[target]).indexOf(permission) > -1;
+    };
+    
+    cspace.permissions.logicalCombine = function(values, applyAnd) {
+        if (values.length === 0) {
+            return false;
+        }
+        var found = fluid.find(values, function(value) {
+            if (value !== applyAnd) {
+                return !applyAnd;
+            }
+        });
+        return found === undefined? applyAnd: found;
+    };
+    
+    cspace.permissions.resolver = function (options) {
+        var that = fluid.initLittleComponent("cspace.permissions.resolver", options);
+        that.resolve = function(resOpts) {
+            var target = fluid.makeArray(resOpts.target);
+            var values = fluid.transform(target, function(thisTarget) {
+                return cspace.permissions.hasPermission(options.permissions, thisTarget, resOpts.permission);
+            });
+            return cspace.permissions.logicalCombine(values, resOpts.method === "AND");
+        };
+        return that;
+    };
+    
+    cspace.permissions.resolve = function (options) {
+        var resOpts = {};
+        if (options.oneOf) {
+            resOpts.method = "OR";
+            resOpts.target = options.oneOf;
+        }
+        if (options.allOf) {
+            resOpts.method = "AND";
+            resOpts.target = options.allOf; 
+        }
+        if (options.target) {
+            resOpts.method = options.method || "AND";
+            resOpts.target = options.target; 
+        }
+        resOpts.permission = options.permission;
+        var resolver = cspace.permissions.resolver({permissions: options.permissions});
+        return resolver.resolve(resOpts);
+    };
 })(jQuery, fluid);

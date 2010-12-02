@@ -1,6 +1,20 @@
 {
     "details": {
-        ".csc-objectexit-plannedRemovalDate-container": {
+        ".csc-objectexit-currentOwner": {
+            "valuebinding": "${fields.currentOwner}",
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/objectexit/autocomplete/currentOwner",
+                        "vocabUrl": "../../chain/objectexit/source-vocab/currentOwner"
+                    }
+                }
+            ]
+        },
+        ".csc-objectexit-exitNote": "${fields.exitNote}",
+        ".csc-objectexit-exitDate-container": {
             "decorators": [
                 {
                     "func": "cspace.datePicker",
@@ -8,7 +22,38 @@
                 }
             ]
         },
-        ".csc-objectexit-objectexitReferenceNumber-container": {
+        ".csc-objectexit-exitDate": "${fields.exitDate}",
+        ".csc-objectexit-exitNumber": "${fields.exitNumber}",
+        ".csc-objectexit-depositor": {
+            "valuebinding": "${fields.depositor}",
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/objectexit/autocomplete/depositor",
+                        "vocabUrl": "../../chain/objectexit/source-vocab/depositor"
+                    }
+                }
+            ]
+        },
+        ".csc-objectexit-exitReason": {
+            "default": "0",
+            "optionnames": [
+                "Please select a value",
+                "Deaccession",
+                "Disposal",
+                "Return of Loan"
+            ],
+            "optionlist": [
+                "",
+                "deaccession",
+                "disposal",
+                "returnofloan"
+            ],
+            "selection": "${fields.exitReason}"
+        },
+        ".csc-objectexit-exitNumber-container": {
             "decorators": [
                 {
                     "func": "cspace.numberPatternChooser",
@@ -16,121 +61,52 @@
                     "options": {
                         "model": {
                             "names": [
-                                "Objectexit"
+                                "objectexit"
                             ],
                             "list": [
                                 "objectexit"
                             ],
                             "samples": [
-                                "OET2010.001"
+                                "EX2010.1"
                             ]
                         },
                         "selectors": {
-                            "numberField": ".csc-objectexit-objectexitReferenceNumber"
+                            "numberField": ".csc-objectexit-exitNumber"
                         }
                     }
                 }
             ]
         },
-        ".csc-objectexit-objectexitNote": "${fields.objectexitNote}",
-        ".csc-objectexit-plannedRemovalDate": "${fields.plannedRemovalDate}",
-        ".csc-objectexit-currentLocation": "${fields.currentLocation}",
-        ".csc-objectexit-objectexitContact": {
-            "valuebinding": "${fields.objectexitContact}",
-            "decorators": [
-                {
-                    "func": "cspace.autocomplete",
-                    "type": "fluid",
-                    "options": {
-                        "queryUrl": "../../chain/objectexit/autocomplete/objectexitContact",
-                        "vocabUrl": "../../chain/objectexit/source-vocab/objectexitContact"
-                    }
-                }
-            ]
-        },
-        ".csc-objectexit-removalDate-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
-        },
-        ".csc-objectexit-locationDate": "${fields.locationDate}",
-        ".csc-objectexit-currentLocationFitness": {
-            "optionnames": [
-                "Dangerous",
-                "Suitable",
-                "Temporary",
-                "Unsuitable"
-            ],
-            "optionlist": [
-                "dangerous",
-                "suitable",
-                "temporary",
-                "unsuitable"
-            ],
-            "selection": "${fields.currentLocationFitness}"
-        },
-        ".csc-objectexit-normalLocation": "${fields.normalLocation}",
-        ".csc-objectexit-objectexitMethods": {
+        ".csc-objectexit-packingNote": "${fields.packingNote}",
+        ".csc-objectexit-exitMethod": {
             "decorators": [
                 {
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.objectexitMethods",
+                        "elPath": "fields.exitMethods",
                         "protoTree": {
-                            ".csc-objectexit-objectexitMethods": {
+                            ".csc-objectexit-exitMethod": {
+                                "default": "0",
                                 "optionnames": [
-                                    "Forklift",
-                                    "Handcarried",
-                                    "Trolley"
+                                    "Please select a value",
+                                    "Courier",
+                                    "In Person",
+                                    "Post"
                                 ],
                                 "optionlist": [
-                                    "forklift",
-                                    "handcarried",
-                                    "trolley"
+                                    "",
+                                    "courier",
+                                    "inperson",
+                                    "post"
                                 ],
-                                "selection": "${fields.objectexitMethods.0.objectexitMethod}"
+                                "selection": "${fields.exitMethods.0.exitMethod}"
                             }
                         }
                     }
                 }
             ]
-        },
-        ".csc-objectexit-currentLocationNote": "${fields.currentLocationNote}",
-        ".csc-objectexit-locationDate-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
-        },
-        ".csc-objectexit-objectexitReferenceNumber": "${fields.objectexitReferenceNumber}",
-        ".csc-objectexit-reasonForMove": {
-            "optionnames": [
-                "Conservation",
-                "Exhibition",
-                "Inventory",
-                "Loan",
-                "New Storage Location",
-                "Photography",
-                "Research"
-            ],
-            "optionlist": [
-                "conservation",
-                "exhibition",
-                "inventory",
-                "loan",
-                "newstoragelocation",
-                "photography",
-                "research"
-            ],
-            "selection": "${fields.reasonForMove}"
-        },
-        ".csc-objectexit-removalDate": "${fields.removalDate}"
+        }
     },
     "list": {
         ".csc-recordList-row:": {

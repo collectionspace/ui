@@ -757,13 +757,13 @@ ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6
     padding:6px 20px 6px 10px;
 }
 
-.cs-createNew-content .cs-createNew-totalOfOneCategories {width: 98%;}
+.cs-createNew-content .cs-createNew-totalOfOneCategories {width: 100%;}
 .cs-createNew-content .cs-createNew-totalOfOneCategories .cs-createNew-category1 {width: 100%;}
-.cs-createNew-content .cs-createNew-totalOfTwoCategories {width: 98%;}
-.cs-createNew-content .cs-createNew-totalOfTwoCategories .cs-createNew-category1 {width: 49%; float: left; display:inline;}
+.cs-createNew-content .cs-createNew-totalOfTwoCategories {width: 100%;}
+.cs-createNew-content .cs-createNew-totalOfTwoCategories .cs-createNew-category1 {width: 49%; float: left; margin-right:10px;}
 .cs-createNew-content .cs-createNew-totalOfTwoCategories .cs-createNew-category2 {width: 49%; float: right;}
-.cs-createNew-content .cs-createNew-totalOfThreeCategories {width: 98%;}
-.cs-createNew-content .cs-createNew-totalOfThreeCategories .cs-createNew-category1 {width: 49%;}
-.cs-createNew-content .cs-createNew-totalOfThreeCategories .cs-createNew-category2 {width: 49%}
-.cs-createNew-content .cs-createNew-totalOfThreeCategories .cs-createNew-category3 {width: 49%; float: right;}
+.cs-createNew-content .cs-createNew-totalOfThreeCategories {width: 100%;}
+.cs-createNew-content .cs-createNew-totalOfThreeCategories .cs-createNew-category1 {width: 49%; float: left; margin-right:10px;}
+.cs-createNew-content .cs-createNew-totalOfThreeCategories .cs-createNew-category2 {width: 49%; float: right;}
+.cs-createNew-content .cs-createNew-totalOfThreeCategories .cs-createNew-category3 {width: 49%; float: left; margin-right:10px;}
 

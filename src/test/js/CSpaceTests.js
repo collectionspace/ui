@@ -20,6 +20,16 @@ cspace.util.isTest = true;
 fluid.staticEnvironment.cspaceTests = fluid.typeTag("cspace.test");
 
 fluid.registerNamespace("cspace.tests");
+   
+cspace.tests.sampleUserPerms = {
+        "person": ["create", "read", "update", "delete", "list"],
+        "loanout": ["create", "read", "update", "delete", "list"],
+        "loanin": ["read", "list"],
+        "acquisition": [],
+        "organization": ["create", "read", "update", "delete", "list"],
+        "movement": ["create", "read", "update", "delete", "list"],
+        "cataloging": ["create", "read", "update", "delete", "list"]
+};
 
 fluid.demands("cspace.urlExpander", ["cspace.localData", "cspace.test"],
     {
