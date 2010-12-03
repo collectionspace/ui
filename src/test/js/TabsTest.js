@@ -72,12 +72,12 @@ var tabsTester = function ($) {
         var tabs = setupTabs({
             permissions: perms
         });
-        jqUnit.assertEquals("Loainin tab must be excluded, total number of tabs is", 8, tabs.tabsList.locate("tab:").length);
+        jqUnit.assertEquals("Loainin tab must be excluded, total number of tabs is", 9, tabs.tabsList.locate("tab:").length);
         jqUnit.assertEquals("Loainin tab must be excluded", 1, tabs.tabsList.locate("tabLink").filter(":contains('Loan In')").length);
     });
     tabsTest.test("Initialization with restricted Loan In", function () {
         var tabs = setupTabs();
-        jqUnit.assertEquals("Loainin tab must be excluded, total number of tabs is", 7, tabs.tabsList.locate("tab:").length);
+        jqUnit.assertEquals("Loainin tab must be excluded, total number of tabs is", 8, tabs.tabsList.locate("tab:").length);
         jqUnit.assertEquals("Loainin tab must be excluded", 0, tabs.tabsList.locate("tabLink").filter(":contains('Loan In')").length);
     });
 };

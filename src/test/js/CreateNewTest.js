@@ -58,7 +58,7 @@ var createNewTester = function ($) {
         var createNewPage = createNew();
         createNewPage.refreshView();
         jqUnit.assertEquals("Number of headers shown:", 3, createNewPage.locate("categoryHeader").length);
-        jqUnit.assertEquals("Number of records shown ", 8, createNewPage.locate("radio").length);
+        jqUnit.assertEquals("Number of records shown ", 9, createNewPage.locate("radio").length);
         //styling:
         assertStyling(createNewPage, createNewPage.options.styles.totalOf3);        
     });
@@ -76,7 +76,7 @@ var createNewTester = function ($) {
             createNewPage.refreshView();
 
             jqUnit.assertEquals("All headers shown:", 3, createNewPage.locate("categoryHeader").length);
-            jqUnit.assertEquals("Number of records shown ", 5, createNewPage.locate("radio").length);
+            jqUnit.assertEquals("Number of records shown ", 6, createNewPage.locate("radio").length);
             //acquisition:
             var str = createNewPage.options.strings.acquisition;
             jqUnit.assertTrue("Aquisition ("+str+") not shown", $('label:contains("'+str+'")').length < 1);

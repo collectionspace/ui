@@ -71,7 +71,7 @@ var searchBoxTester = function ($) {
     searchBoxTest.test("Init and render", function () {
         var searchBox = setupSearchBox();
         searchBox.refreshView();
-        jqUnit.assertEquals("SearchBox dropdown\'s number of recordTypes is equal to", 7, $("option", searchBox.locate("recordTypeSelect")).length);
+        jqUnit.assertEquals("SearchBox dropdown\'s number of recordTypes is equal to", 8, $("option", searchBox.locate("recordTypeSelect")).length);
         jqUnit.assertEquals("Label is ", "", searchBox.locate("recordTypeSelectLabel").text());
     });
     
