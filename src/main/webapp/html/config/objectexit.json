@@ -1,0 +1,72 @@
+{
+    "schema": [
+        "recordlist",
+        "objectexit"
+    ],
+    "pageType": "objectexit",
+    "recordType": "objectexit",
+    "dataContext": {
+        "options": {
+            "recordType": "objectexit"
+        }
+    },
+    "pageSpec": {
+        "titleBar": {
+            "href": "objectexitTitleBar.html",
+            "templateSelector": ".csc-objectexit-titleBar-template",
+            "targetSelector": ".csc-objectexit-titleBar-container"
+        },
+        "dateEntry": {
+            "href": "ObjectexitTemplate.html",
+            "templateSelector": ".csc-objectexit-template",
+            "targetSelector": ".csc-record-edit-container"
+        },
+        "sidebar": {
+            "href": "right-sidebar.html",
+            "templateSelector": ".csc-right-sidebar",
+            "targetSelector": ".csc-sidebar-container"
+        },
+        "footer": {
+            "href": "footer.html",
+            "templateSelector": ".csc-footer",
+            "targetSelector": ".csc-footer-container"
+        }
+    },
+    "selectors": {
+        "titleBar": ".csc-objectexit-template",
+        "recordEditor": ".csc-objectexit-template",
+        "sidebar": ".csc-sidebar"
+    },
+    "components": {
+        "tabs": {
+            "type": "cspace.tabs"
+        },
+        "titleBar": {
+            "type": "cspace.titleBar"
+        },
+        "recordEditor": {
+            "type":  "cspace.recordEditor",
+            "options": {
+                "selectors": {
+                    "identificationNumber": ".csc-objectexit-exitNumber"
+                },
+                "strings": {
+                    "identificationNumberRequired": "Please specify Exit Number"
+                },
+                "dataContext": "{pageBuilder}.dataContext",
+                "applier": "{pageBuilder}.applier",
+                "uispec": "{pageBuilder}.uispec.recordEditor",
+                "model": "{pageBuilder}.model"
+            }
+        },
+        "sidebar": {
+            "type": "cspace.sidebar",
+            "options": {
+                "uispec": "{pageBuilder}.uispec.sidebar",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model",
+                "primaryRecordType": "{pageBuilder}.options.pageType"
+            }
+        }
+    }
+}

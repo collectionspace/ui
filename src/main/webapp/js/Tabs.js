@@ -84,7 +84,8 @@ cspace = cspace || {};
             loanin: "Loan In",
             loanout: "Loan Out",
             movement: "Location & Movement",
-            media: "Media"
+            media: "Media",
+            objectexit: "Object Exit"
         },
         model: {
             tabs: {
@@ -101,7 +102,8 @@ cspace = cspace || {};
                 movement: {
                     href: "%webapp/html/movementTab.html"
                 },
-                media: {}
+                media: {},
+                objectexit: {}
             }
         },
         selectors: {

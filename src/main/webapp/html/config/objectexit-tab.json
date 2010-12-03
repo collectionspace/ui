@@ -1,0 +1,60 @@
+{
+    "schema": [
+        "recordlist",
+        "objectexit"
+    ],
+    "pageType": "objectexit-tab",
+    "recordType": "objectexit",
+    "pageSpec": {
+        "list": {
+            "href": "objectexitTabRecordListTemplate.html",
+            "templateSelector": ".csc-objectexit-tab-record-list",
+            "targetSelector": ".csc-objectexit-tab .div-for-list-of-records"
+        },
+        "details": {
+            "href": "ObjectexitTemplate.html",
+            "templateSelector": ".csc-objectexit-template",
+            "targetSelector": ".csc-objectexit-tab .div-for-recordEditor"
+        } 
+    },
+    "selectors": {
+        "relatedRecordsTab": ".csc-objectexit-tab"
+    },
+    "components": {
+        "relatedRecordsTab": {
+            "type": "cspace.relatedRecordsTab",
+            "options": {
+                "primary": "{pageBuilder}.options.primary",
+                "related": "{pageBuilder}.options.related",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model",
+                "uispec": "{pageBuilder}.uispec",
+                "listEditor": {
+                    "options": {
+                        "initList": "cspace.listEditor.receiveData",
+                        "dataContext": {
+                            "options": {
+                                "recordType": "objectexit",
+                                "dataSource": {
+                                    "options": {
+                                        "schema": "{pageBuilder}.schema" 
+                                    }
+                                }
+                            }
+                        },
+                        "details": {
+                            "options": {
+                                "selectors": {
+                                    "identificationNumber": ".csc-objectexit-exitNumber"
+                                },
+                                "strings": {
+                                    "identificationNumberRequired": "Please specify an Exit Number" 
+                                } 
+                            } 
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

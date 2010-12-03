@@ -1,0 +1,64 @@
+{
+    "objectexit": {
+        "properties": {
+            "relations": {
+                "default": {
+
+                },
+                "type": "object"
+            },
+            "termsUsed": {
+                "default": [
+
+                ],
+                "type": "array"
+            },
+            "csid": {
+                "type": "string"
+            },
+            "fields": {
+                "properties": {
+                    "exitNote": {
+                        "type": "string"
+                    },
+                    "currentOwner": {
+                        "type": "string"
+                    },
+                    "exitDate": {
+                        "type": "date"
+                    },
+                    "exitMethods": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "exitMethod": {
+                                    "default": "",
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "exitNumber": {
+                        "type": "string"
+                    },
+                    "packingNote": {
+                        "type": "string"
+                    },
+                    "exitReason": {
+                        "default": "",
+                        "type": "array"
+                    },
+                    "depositor": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "type": "object"
+    }
+}

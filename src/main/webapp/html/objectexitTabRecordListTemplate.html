@@ -1,0 +1,54 @@
+<div class="csc-objectexit-tab-record-list">
+
+    <!--<p>The list of  records goes here.</p>-->
+    <div id="secondary-nav">
+        <div id="secondary-nav-menu-sub">
+            <div class="upper-save"><input class="csc-add-related-record-button addButton" type="button" value="Add record" /></div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    
+    <div class="csc-related-records related-records">
+        <div class="hidden csc-message-container cs-message">
+            <span class="csc-timestamp cs-timestamp">time</span>
+            <span class="csc-message">Save successful!</span>
+        </div>
+    
+        <div class="fl-container-flex fl-fix information-group">
+            <div class="info-column">
+                <div class="csc-related-procedures" id="toggle-related-records">
+                    <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-related-records .main', this); return false;">
+                        <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                        Related <span class="csc-record-type">Object Exit</span> Records
+                    </div>
+
+                    <div class="content main related-procedures" id="toggle-related-objectexittab-records">
+                        <div class="info-pair overflowdiv list-table csc-listEditor-list">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td>ID Number</td>
+                                            <td>Summary</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td colspan="2" class="hidden csc-error-message cs-message">This is the error message</td></tr>
+                                        <tr class="add-new-record csc-listEditor-addNew" style="display:none;">
+                                            <td>New Object Exit Record</td>
+                                        </tr>
+                                        <tr class="csc-recordList-row">
+                                            <td class="csc-related-number"></td>
+                                            <td class="csc-related-summary"></td>
+                                            <td class="csc-no-items-message"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

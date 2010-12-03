@@ -149,7 +149,8 @@ cspace = cspace || {};
                 "intake",
                 "loanin",
                 "loanout",
-                "movement"
+                "movement",
+                "objectexit"
                 ]
             }, {
                 name: "vocabularyCategory",
@@ -202,6 +203,7 @@ cspace = cspace || {};
             loanin: "Loan In",
             loanout: "Loan Out",
             movement: "Location and Movement",
+            objectexit: "Object Exit",
             person: "Person",
             organization: "Organization",
             //create new button:

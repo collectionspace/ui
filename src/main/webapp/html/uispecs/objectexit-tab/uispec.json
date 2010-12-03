@@ -1,0 +1,121 @@
+{
+    "details": {
+        ".csc-objectexit-currentOwner": {
+            "valuebinding": "${fields.currentOwner}",
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/objectexit/autocomplete/currentOwner",
+                        "vocabUrl": "../../chain/objectexit/source-vocab/currentOwner"
+                    }
+                }
+            ]
+        },
+        ".csc-objectexit-exitNote": "${fields.exitNote}",
+        ".csc-objectexit-exitDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
+        ".csc-objectexit-exitDate": "${fields.exitDate}",
+        ".csc-objectexit-exitNumber": "${fields.exitNumber}",
+        ".csc-objectexit-depositor": {
+            "valuebinding": "${fields.depositor}",
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/objectexit/autocomplete/depositor",
+                        "vocabUrl": "../../chain/objectexit/source-vocab/depositor"
+                    }
+                }
+            ]
+        },
+        ".csc-objectexit-exitReason": {
+            "default": "0",
+            "optionnames": [
+                "Please select a value",
+                "Deaccession",
+                "Disposal",
+                "Return of Loan"
+            ],
+            "optionlist": [
+                "",
+                "deaccession",
+                "disposal",
+                "returnofloan"
+            ],
+            "selection": "${fields.exitReason}"
+        },
+        ".csc-objectexit-exitNumber-container": {
+            "decorators": [
+                {
+                    "func": "cspace.numberPatternChooser",
+                    "type": "fluid",
+                    "options": {
+                        "model": {
+                            "names": [
+                                "objectexit"
+                            ],
+                            "list": [
+                                "objectexit"
+                            ],
+                            "samples": [
+                                "EX2010.1"
+                            ]
+                        },
+                        "selectors": {
+                            "numberField": ".csc-objectexit-exitNumber"
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-objectexit-packingNote": "${fields.packingNote}",
+        ".csc-objectexit-exitMethod": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.exitMethods",
+                        "protoTree": {
+                            ".csc-objectexit-exitMethod": {
+                                "default": "0",
+                                "optionnames": [
+                                    "Please select a value",
+                                    "Courier",
+                                    "In Person",
+                                    "Post"
+                                ],
+                                "optionlist": [
+                                    "",
+                                    "courier",
+                                    "inperson",
+                                    "post"
+                                ],
+                                "selection": "${fields.exitMethods.0.exitMethod}"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "list": {
+        ".csc-recordList-row:": {
+            "children": [
+                {
+                    ".csc-related-summary": "${items.0.summary}",
+                    ".csc-related-number": "${items.0.number}"
+                }
+            ]
+        }
+    }
+}

@@ -18,7 +18,7 @@ var searchBoxTester = function ($) {
     var container = "#main";
     var schema = {
         "recordlist": {
-            "default": ["person", "intake", "loanin", "loanout", "acquisition", "organization", "cataloging", "movement"],
+            "default": ["person", "intake", "loanin", "loanout", "acquisition", "organization", "cataloging", "movement", "objectexit"],
             "type": "array"
         }
     };
@@ -36,6 +36,7 @@ var searchBoxTester = function ($) {
         "organization": ["create", "read", "update", "delete", "list"],
         "locations": ["create", "read", "update", "delete", "list"],
         "movement": ["create", "read", "update", "delete", "list"],
+        "objectexit": ["create", "read", "update", "delete", "list"],
         "role": ["create", "read", "update", "delete", "list"],
         "dimensions": ["create", "read", "update", "delete", "list"],
         "authorization/roles/accountroles": ["create", "read", "update", "delete", "list"],

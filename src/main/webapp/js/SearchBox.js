@@ -165,6 +165,7 @@ cspace = cspace || {};
             loanin: "Loan In",
             loanout: "Loan Out",
             movement: "Location and Movement",
+            objectexit: "Object Exit",
             person: "Person",
             organization: "Organization",
             "location": "Storage Location",

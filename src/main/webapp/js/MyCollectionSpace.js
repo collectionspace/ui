@@ -85,6 +85,9 @@ cspace = cspace || {};
         
     fluid.demands("movement", "cspace.myCollectionSpace", 
         ["{myCollectionSpace}.dom.movement", fluid.COMPONENT_OPTIONS]);
+        
+    fluid.demands("objectexit", "cspace.myCollectionSpace", 
+        ["{myCollectionSpace}.dom.objectexit", fluid.COMPONENT_OPTIONS]);
     
     fluid.defaults("cspace.myCollectionSpace", {
         selectors: {
@@ -93,7 +96,8 @@ cspace = cspace || {};
             acquisition: ".acquisition-records-group",
             loanin: ".loanIn-records-group",
             loanout: ".loanOut-records-group",
-            movement: ".movement-records-group"
+            movement: ".movement-records-group",
+            objectexit: ".objectexit-records-group"
         },
         components: {
             cataloging: {
@@ -112,6 +116,9 @@ cspace = cspace || {};
                 type: "cspace.recordList"
             },
             movement: {
+                type: "cspace.recordList"
+            },
+            objectexit: {
                 type: "cspace.recordList"
             }
         }

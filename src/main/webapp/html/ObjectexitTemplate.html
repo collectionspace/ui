@@ -1,0 +1,137 @@
+<div class="csc-objectexit-template csc-listEditor-details">
+    <div id="secondary-nav">
+        <div id="secondary-nav-menu-sub">
+            <div class="button-row">
+                <input type="button" class="csc-save saveButton primary" value="Save"/>
+                <a href="findedit.html"><input type="button" class="cancelButton" value="Cancel" /></a>
+                <a style="display:none;" class="csc-goto"><input type="button" class="gotoButton" value="Go To Record" /></a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="hidden csc-message-container cs-message">
+        <span class="csc-timestamp cs-timestamp"></span>
+        <span class="csc-message"></span>
+    </div>
+    
+   	<div class="fl-container-flex fl-fix information-group">
+		<div class="fl-container-flex header toggle" 	onclick="ShowHide('#toggle-objectExit', this); return false;">
+            <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+            Object Exit Information
+        </div>
+        
+        <div class="fl-container-flex fl-fix content main" id="toggle-objectExit"> 
+            <div class="info-column fl-force-left">
+				<div class="info-column2-50 fl-force-left" >	
+					<div class="info-pair">
+						<div class="label">Exit Number</div>
+						<div class="content csc-objectexit-exitNumber-container">
+							<input type="text" class="input-numeric-long csc-objectexit-exitNumber pattern-chooser-input" />
+						</div>
+					</div>
+				</div>
+					
+				<div class="info-column2-50 fl-force-right">
+					 <div class="info-column2-50 fl-force-left">
+						<div class="info-pair-date">
+							<div class="header">
+								<div class="label">Exit Date</div>
+							</div>
+							<div class="content csc-objectexit-exitDate-container fl-table">
+								<input type="text" class="fl-force-left input-date csc-objectexit-exitDate csc-calendar-date" />
+								<a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="17" width="16" /></a>
+								<div class="csc-date-picker cs-date-picker"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> <!-- End of info-column div -->
+            <div class="info-column fl-force-left">
+                <div class="info-column2-50 fl-force-left">
+                	<div class="info-column2-50 fl-force-left">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label">Current Owner</div>
+							</div>
+							<div class="content">
+								<input type="text" class="input-alpha csc-objectexit-currentOwner" />
+							</div>
+						</div>
+					</div>
+                </div>
+                <div class="info-column2-50 fl-force-right">
+                    <div class="info-pair-select">
+                        <div class="header">
+                            <div class="label">Exit Method</div>
+                        </div>                            
+                        <div class="content repeatable">
+                             <select class="csc-objectexit-exitMethods input-select"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="info-column fl-force-left">
+                <div class="info-column2-50 fl-force-left">
+                	<div class="info-column2-50 fl-force-left">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label">Depositor</div>
+							</div>
+							<div class="content">
+								<input type="text" class="input-alpha csc-objectexit-depositor" />
+							</div>
+						</div>
+					</div>
+                </div>
+                <div class="info-column2-50 fl-force-right">
+                	<div class="info-column2-50 fl-force-left">
+                        <div class="info-pair-select">
+                            <div class="header">
+                                <div class="label">Exit Reason</div>
+                            </div>
+                            <div class="content">
+                                <select class="csc-objectexit-exitReason input-select"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="info-column fl-force-left">              
+				<div class="info-pair">
+					<div class="header">
+						<div class="label">Exit Note</div>
+					</div>
+					<div class="content">
+						<textarea class="input-textarea csc-objectexit-exitNote" ></textarea>
+					</div>
+				</div>
+            </div>
+            <div class="info-column fl-force-left">              
+				<div class="info-pair">
+					<div class="header">
+						<div class="label">Packing Note</div>
+					</div>
+					<div class="content">
+						<textarea class="input-textarea csc-objectexit-packingNote" ></textarea>
+					</div>
+				</div>
+            </div>
+        	<div class="clear"></div>    
+        </div>  <!-- end of 'content main' div -->
+	</div> <!-- end tag to information-group div -->
+            
+    <div class="hidden csc-message-container cs-message">
+        <span class="csc-timestamp cs-timestamp">time</span>
+        <span class="csc-message">Save successful!</span>
+    </div>
+
+    <div class="csc-error-dialog">
+        <p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
+    </div>
+
+    <div class="fl-container-flex button-row">
+        <input type="button" class="csc-save saveButton primary" value="Save"/>
+        <a href="findedit.html"><input type="button" class="cancelButton" value="Cancel" /></a>
+    </div>
+    <div class="clear"></div>
+</div>
