@@ -88,7 +88,7 @@ cspace = cspace || {};
             return validate(that.dom, that.userListEditor.detailsApplier, that.passwordValidator);
         });
         that.userListEditor.events.pageReady.addListener(function () {
-            that.events.afterRender.fire();
+            that.events.afterRender.fire(that);
         });
         
         that.userListEditor.events.afterAddNewListRow.addListener(function () {
@@ -109,7 +109,9 @@ cspace = cspace || {};
         
         fluid.initDependents(that);
         bindEventHandlers(that);
-                
+        
+        that.events.afterSetup.fire(that);
+        
         return that;
     };
     
@@ -154,7 +156,8 @@ cspace = cspace || {};
         },
         events: {
             afterRender: null,
-            afterSearch: null
+            afterSearch: null,
+            afterSetup: null
         },
         queryURL: "../../chain/users/search?query="
     });

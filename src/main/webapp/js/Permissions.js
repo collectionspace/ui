@@ -100,6 +100,30 @@ fluid.registerNamespace("cspace.permissions");
         return that;
     };
     
+    cspace.permissions.ensureResolver = function(options) {
+        if (!options.resolver) {
+            options.resolver = cspace.permissions.resolver({permissions: options.permissions});
+        }
+    };
+    
+    cspace.permissions.filterList = function (options) {
+        options = fluid.copy(options);
+        cspace.permissions.ensureResolver(options);
+        return fluid.remove_if(fluid.copy(options.toFilter), function(item) {
+            options.target = item;
+            return !options.resolver.resolve(options);     
+        });
+    };
+    
+    cspace.permissions.getPermissibleRelatedRecords = function(related, resolver, recordTypeManager, permission) {
+        var toFilter = recordTypeManager.recordTypesForCategory(related);
+        return cspace.permissions.filterList({
+            toFilter: toFilter,
+            permission: permission,
+            resolver: resolver
+        });
+    };
+    
     cspace.permissions.resolve = function (options) {
         var resOpts = {};
         if (options.oneOf) {
@@ -115,7 +139,7 @@ fluid.registerNamespace("cspace.permissions");
             resOpts.target = options.target; 
         }
         resOpts.permission = options.permission;
-        var resolver = cspace.permissions.resolver({permissions: options.permissions});
-        return resolver.resolve(resOpts);
+        cspace.permissions.ensureResolver(options);
+        return options.resolver.resolve(resOpts);
     };
 })(jQuery, fluid);

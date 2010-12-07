@@ -16,7 +16,7 @@ fluid.registerNamespace("cspace.util");
 (function ($, fluid) {
     fluid.log("Utilities.js loaded");
     
-    // This should eventually go away [DEPRECATED].
+    // Calls to this should cease to appear in application code
     cspace.util.useLocalData = function () {
         return document.location.protocol === "file:";
     };
@@ -34,6 +34,22 @@ fluid.registerNamespace("cspace.util");
             return false;
         }
     });
+    // TODO: possibly derive this information from the GLOBAL SCHEMA (see CSPACE-1977)
+    cspace.recordTypes = {
+        all: ["person", "intake", "loanin", "loanout", "acquisition", "organization", "cataloging", "movement", "objectexit"],
+        procedures: ["intake", "acquisition", "loanin", "loanout", "movement"],
+        vocabulary: ["person", "organization"]
+        //cataloging: ["objects"] // So far in permissions this is a 1-element set
+    };
+    
+    cspace.recordTypeManager = function(options) {
+        var that = fluid.initLittleComponent("cspace.recordTypeManager", options);
+        that.recordTypesForCategory = function(category) {
+            var classEntry = cspace.recordTypes[category]
+            return classEntry? classEntry : [category];
+        };
+        return that;
+    };
 
     cspace.util.addTrailingSlash = function (url) {
         return url + ((url.charAt(url.length - 1) !== "/") ? "/" : "");
@@ -49,6 +65,19 @@ fluid.registerNamespace("cspace.util");
         } else {
             return results[1];
         }
+    };
+
+    cspace.prolepticResourceSpec = function(options) {
+        return {expander: {
+            type: "fluid.deferredInvokeCall",
+            func: "cspace.specBuilder",
+                args: {
+                    forceCache: true,
+                    fetchClass: options.fetchClass,
+                    url: options.url,
+                }
+            }
+        };
     };
     
     fluid.defaults("cspace.specBuilderImpl", {
@@ -103,6 +132,38 @@ fluid.registerNamespace("cspace.util");
         }
     });
     
+    /** Resolution of the global message bundle(s) */
+        
+    cspace.globalBundle = function(options) {
+        var that = fluid.initLittleComponent("cspace.globalBundle", options);
+        // assuming correct environment, this I/O will resolve synchronously from the cache
+        fluid.fetchResources(that.options.resources); 
+        fluid.initDependents(that);
+        return that.messageResolver;
+    }
+    
+    fluid.defaults("cspace.globalBundle", {
+        components: {
+            messageResolver: {
+                type: "fluid.messageResolver",
+                options: {
+                    parseFunc: fluid.parseJavaProperties,
+                    resolveFunc: fluid.formatMessage,
+                    messageBase: "{globalBundle}.options.resources.globalBundle.resourceText"
+                }
+            }
+        },
+        resources: {
+            globalBundle: 
+                cspace.prolepticResourceSpec({
+                    fetchClass: "fastResource",
+                    url: "%webapp/html/bundle/core-messages.properties"
+            })
+        }
+    });
+    
+    fluid.fetchResources.primeCacheFromResources("cspace.globalBundle");
+    
     /**
      * cspace.util.isCurrentUser - currently a function that will verify the csid vs the currenly logged in user's csid.
      * Potientially might have more permission related functionality.
@@ -132,7 +193,7 @@ fluid.registerNamespace("cspace.util");
      * be combined by use of makeAjaxOpts and conversion into a resourceSpec) */   
     // TODO: integrate with Engage conception and knock the rough corners off
     cspace.URLDataSource = function (options) {
-        var that = fluid.initLittleComponent(options.typeName, options);
+        var that = fluid.initLittleComponent(options.targetTypeName, options);
         var wrapper = that.options.delay ? function (func) {
             setTimeout(func, that.options.delay);
         } : function (func) {
@@ -255,9 +316,6 @@ fluid.registerNamespace("cspace.util");
         }
     };
 
-    cspace.util.corner = function () {
-    };
-    
     cspace.util.getDefaultConfigURL = function () {
         var url = window.location.pathname;
         return ".\/config" + url.substring(url.lastIndexOf("/"), url.indexOf(".html")) + ".json";
@@ -336,6 +394,8 @@ fluid.registerNamespace("cspace.util");
         return prefix ? prefix + templateName : templateName;
     };
     
+    // TODO: This should be removed as soon as createNew stops using the
+    // resolverGetCongig.
     cspace.util.resolvePermissions = function (source, permManager) {
         fluid.remove_if(source, function (sourceItem, key) {
             if (!permManager.resolve(key)) {
@@ -349,6 +409,97 @@ fluid.registerNamespace("cspace.util");
             }
         });
     };
+    
+    cspace.util.applyClassSelectorOrFail = function(node, selector) {
+        if (!selector || !selector.charAt(0) === "." || fluid.SAXStrings.indexOfWhitespace(selector) !== -1) {
+            fluid.fail("selector " + selector + " needs to be a pure class-based selector");
+        }
+        var clazz = selector.substring(1);
+        $(node).addClass(clazz);
+    };
+    
+    cspace.util.waitMultiple = function(options) {
+        var that = fluid.initLittleComponent("cspace.util.waitMultiple", options);
+        that.waitSet = {};
+        
+        function checkComplete() {
+            if (that.options.once && that.fired) {
+                return;
+            }
+            var complete = true;
+            for (var key in that.waitSet) {
+                if (!that.waitSet[key].complete) {
+                    fluid.log("Wait for " + key + " still required");
+                    complete = false;
+                }
+            }
+            if (complete) {
+                fluid.log("Firing external callback");
+                that.fired = true;
+                that.options.callback.apply(null, that.options.outerKey && that.waitSet[that.options.outerKey]? 
+                    that.waitSet[that.options.outerKey].args : null);
+
+            }
+        } 
+        that.getListener = function(key) {
+            var keyStruct = {};
+            that.waitSet[key] = keyStruct;
+            return function() {
+                keyStruct.args = fluid.makeArray(arguments);
+                keyStruct.complete = true;
+                checkComplete();
+            };
+        };
+        that.clear = function(newCallback) {
+            for (var key in that.waitSet) {
+                fluid.clear(that.waitSet[key]);
+            }
+            that.fired = false;
+            that.options.callback = newCallback;
+        };
+        return that; 
+    };
+    
+    cspace.util.recordTypeSelector = function(options) {
+        var that = fluid.initLittleComponent("cspace.util.recordTypeSelector", options);
+        var model = cspace.permissions.getPermissibleRelatedRecords(
+                that.options.related, that.options.permissionsResolver, that.options.recordTypeManager, "read");
+        that.model = model;
+        
+        that.produceComponent = function() {
+            var togo = {};
+            if (model.length > 0) {
+                togo[that.options.componentID] = {
+                    selection: model[0], 
+                    optionlist: model,
+                    optionnames: fluid.transform(model, function(recordType) {
+                        return that.options.messageResolver.resolve(recordType);
+                    })
+                };
+            }
+            return togo;
+        };
+                 
+        that.returnedOptions = {
+            listeners: {
+                afterRender: function() {  
+                    if (that.model.length < 2) {
+                        fluid.enabled(that.options.dom.locate(that.options.selector), false);
+                    }
+                }
+            }
+        };
+        fluid.log("Record type selector constructed");
+        return that;
+    };
+    
+    fluid.defaults("cspace.util.recordTypeSelector", {
+        // TODO: These should actually be possible to configure as directly injected
+       // components by means of a suitable demands block, in Infusion 1.4
+        recordTypeManager: "{recordTypeManager}",
+        permissionsResolver: "{permissionsResolver}",
+        messageResolver: "{globalBundle}"
+    });
     
     // This will eventually go away once the getBeanValue strategy is used everywhere.
     cspace.util.getBeanValue = function (root, EL, schema, permManager) {
@@ -604,10 +755,6 @@ fluid.registerNamespace("cspace.util");
                 subComponent.refreshView();
             }
         });
-    };
-    
-    cspace.util.elStylefy = function (str, postfix) {
-        return "${" + str + "}." + (postfix || "");
     };
     
 })(jQuery, fluid);

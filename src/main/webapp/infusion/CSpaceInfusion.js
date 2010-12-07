@@ -7648,7 +7648,7 @@ var fluid = fluid || fluid_1_2;
     fluid.mergeComponentOptions = function (that, componentName, userOptions) {
         var defaults = fluid.defaults(componentName); 
         if (fluid.expandOptions) {
-            defaults = fluid.expandOptions(fluid.copy(defaults));
+            defaults = fluid.expandOptions(fluid.copy(defaults), that);
         }
         that.options = fluid.merge(defaults? defaults.mergePolicy: null, {}, defaults, userOptions);    
     };
@@ -7741,8 +7741,9 @@ var fluid = fluid || fluid_1_2;
      */
     fluid.initLittleComponent = function(name, options) {
         var that = {typeName: name, id: fluid.allocateGuid()};
+        // TODO: nickName must be available earlier than other merged options so that component may resolve to itself
+        that.nickName = options && options.nickName? options.nickName: fluid.computeNickName(that.typeName);
         fluid.mergeComponentOptions(that, name, options);
-        that.nickName = that.options.nickName? that.options.nickName: fluid.computeNickName(that.typeName);    
         return that;
     };
     
@@ -8452,7 +8453,7 @@ var fluid = fluid || fluid_1_2;
         return source;
     };
     
-    // Other useful helpers.
+    // Message resolution and templating
     
     /**
      * Simple string template system. 
@@ -8472,6 +8473,67 @@ var fluid = fluid || fluid_1_2;
         return newString;
     };
     
+
+    fluid.messageResolver = function (options) {
+        var that = fluid.initLittleComponent("fluid.messageResolver", options);
+        that.messageBase = that.options.parseFunc(that.options.messageBase);
+        
+        that.lookup = function(messagecodes) {
+            var resolved = fluid.messageResolver.resolveOne(that.messageBase, messagecodes);
+            if (resolved === undefined) {
+                return fluid.find(that.options.parents, function(parent) {
+                    return parent.lookup(messagecodes);
+                });
+            }
+            else {
+                return {template: resolved, resolveFunc: that.options.resolveFunc};
+            }
+        };
+        that.resolve = function(messagecodes, args) {
+            if (!messagecodes) {
+                return "[No messagecodes provided]";
+            }
+            messagecodes = fluid.makeArray(messagecodes);
+            var looked = that.lookup(messagecodes);
+            return looked? looked.resolveFunc(looked.template, args)
+                :"[Message string for key " + messagecodes[0] + " not found]" 
+        };
+        
+        return that;  
+    };
+    
+    fluid.defaults("fluid.messageResolver", {
+        mergePolicy: {
+            messageBase: "preserve"  
+        },
+        resolveFunc: fluid.stringTemplate,
+        parseFunc: fluid.identity,
+        messageBase: {},
+        parents: []
+    });
+    
+    fluid.messageResolver.resolveOne = function(messageBase, messagecodes) {
+        for (var i = 0; i < messagecodes.length; ++ i) {
+            var code = messagecodes[i];
+            var message = messageBase[code];
+            if (message !== undefined) {
+                return message;
+            }
+        }
+    };
+          
+    /** Converts a data structure consisting of a mapping of keys to message strings,
+     * into a "messageLocator" function which maps an array of message codes, to be 
+     * tried in sequence until a key is found, and an array of substitution arguments,
+     * into a substituted message string.
+     */
+    fluid.messageLocator = function (messageBase, resolveFunc) {
+        var resolver = fluid.messageResolver({messageBase: messageBase, resolveFunc: resolveFunc});
+        return function(messagecodes, args) {
+            return resolver.resolve(messagecodes, args);
+        };
+    };
+
 })(jQuery, fluid_1_2);
 /*
 Copyright 2007-2010 University of Cambridge
@@ -8548,7 +8610,7 @@ var fluid_1_2 = fluid_1_2 || {};
             return fluid.getScopedData(target, ENABLEMENT_KEY) !== false;
         }
         else {
-            $("*", target).each(function() {
+            $("*", target).add(target).each(function() {
                 if (fluid.getScopedData(this, ENABLEMENT_KEY) !== undefined) {
                     fluid.setScopedData(this, ENABLEMENT_KEY, state);
                 }
@@ -10230,7 +10292,10 @@ var fluid_1_2 = fluid_1_2 || {};
     };
 
     function makeStackFetcher(thatStack, directModel) {
+      // TODO: This is a bit crazy, shouldn't the "dynamic environment" go right into the thatStack? Right now it is
+      // incorrectly beaten by the static environment
         var envFetcher = fluid.environmentFetcher(directModel);
+        var fetchStrategies = [fluid.model.funcResolverStrategy, makeGingerStrategy(thatStack)]; 
         var fetcher = function(parsed) {
             var context = parsed.context;
             var foundComponent;
@@ -10239,6 +10304,10 @@ var fluid_1_2 = fluid_1_2 || {};
                     foundComponent = component;
                     return true; // YOUR VISIT IS AT AN END!!
                 }
+                if (component.options && component.options.components && component.options.components[context] && !component[context]) {
+                    foundComponent = fluid.model.getBeanValue(component, context, fetchStrategies);
+                    return true;
+                }
             });
             if (!foundComponent) {
                 return envFetcher(parsed);
@@ -10246,22 +10315,25 @@ var fluid_1_2 = fluid_1_2 || {};
                 // to the environment for FLUID-3818
                 //fluid.fail("No context matched for name " + context + " from root of type " + thatStack[0].typeName);
             }
-            return fluid.model.getBeanValue(foundComponent, parsed.path, 
-                [fluid.model.funcResolverStrategy, makeGingerStrategy(thatStack)]);
+            return fluid.model.getBeanValue(foundComponent, parsed.path, fetchStrategies);
         };
         return fetcher;
     }
      
     function makeStackResolverOptions(thatStack, directModel) {
-        return $.extend({}, fluid.defaults("fluid.resolveEnvironment"), {fetcher: makeStackFetcher(thatStack, directModel)}); 
+        return $.extend({}, fluid.defaults("fluid.resolveEnvironment"), {
+            noCopy: true,
+            fetcher: makeStackFetcher(thatStack, directModel)
+            }); 
     } 
      
     function resolveRvalue(thatStack, arg, initArgs, componentOptions) {
         var directModel = thatStack[0].model; // TODO: this convention may not always be helpful
         var options = makeStackResolverOptions(thatStack, directModel);
+        options.model = directModel;
         
         if (fluid.isMarker(arg, fluid.COMPONENT_OPTIONS)) {
-            arg = fluid.resolveEnvironment(componentOptions, directModel, options);
+            arg = fluid.expander.expandLight(componentOptions, options); //fluid.resolveEnvironment(componentOptions, directModel, options);
         }
         else {
             if (typeof(arg) === "string" && arg.charAt(0) === "@") { // Test cases for i) single-args, ii) composite args
@@ -10269,7 +10341,7 @@ var fluid_1_2 = fluid_1_2 || {};
                 arg = initArgs[argpos];
             }
             else {
-                arg = fluid.resolveEnvironment(arg, directModel, options);
+                arg = fluid.expander.expandLight(arg, options); // fluid.resolveEnvironment(arg, directModel, options);
             }
         }
         return arg;
@@ -10299,10 +10371,12 @@ var fluid_1_2 = fluid_1_2 || {};
                     }
                     args[i] = resolvedOptions;
                 }
-                else{
+                else {
                     var resolvedArg = resolveRvalue(thatStack, arg, initArgs, options) || {};
-                    resolvedArg.typeName = demandspec.funcName; // TODO: investigate the general sanity of this
                     args[i] = resolvedArg;
+                }
+                if (i === demands.length - 1 && args[i] && typeof(args[i]) === "object" && !args[i].typeName && !args[i].targetTypeName) {
+                    args[i].targetTypeName = demandspec.funcName; // TODO: investigate the general sanity of this
                 }
             }
         }
@@ -10351,6 +10425,12 @@ var fluid_1_2 = fluid_1_2 || {};
     fluid.getEnvironmentalThatStack = function() {
          return [fluid.staticEnvironment];
     };
+    
+    fluid.getDynamicEnvironmentalThatStack = function() {
+        var root = fluid.threadLocal();
+        var dynamic = root["fluid.initDependents"]
+        return dynamic? dynamic : fluid.getEnvironmentalThatStack();
+    };
 
     fluid.locateDemands = function(demandingNames, thatStack) {
         var searchStack = fluid.getEnvironmentalThatStack().concat(thatStack); // TODO: put in ThreadLocal "instance" too, and also accelerate lookup
@@ -10365,7 +10445,10 @@ var fluid_1_2 = fluid_1_2 || {};
                 var spec = rec[j];
                 var record = {spec: spec.spec, intersect: 0, uncess: 0};
                 for (var k = 0; k < spec.contexts.length; ++ k) {
-                    ++record[contextNames[spec.contexts[k]]? "intersect" : "uncess"];
+                    record[contextNames[spec.contexts[k]]? "intersect" : "uncess"] += 2;
+                }
+                if (spec.contexts.length === 0) { // allow weak priority for contextless matches
+                    record.intersect ++;
                 }
                 // TODO: Potentially more subtle algorithm here - also ambiguity reports  
                 matches.push(record); 
@@ -10419,8 +10502,10 @@ var fluid_1_2 = fluid_1_2 || {};
     // after the first successful invocation
     fluid.invoke = function(functionName, args, that, environment) {
         args = fluid.makeArray(args);
-        var invokeSpec = fluid.resolveDemands(fluid.getEnvironmentalThatStack().concat(fluid.makeArray(that)), functionName, args, args[0]);
-        return fluid.invokeGlobalFunction(invokeSpec.funcName, invokeSpec.args, environment);
+        return fluid.withNewComponent(that || {typeName: functionName}, function(thatStack) {
+            var invokeSpec = fluid.resolveDemands(thatStack, functionName, args, args[0]);
+            return fluid.invokeGlobalFunction(invokeSpec.funcName, invokeSpec.args, environment);
+        });
     };
     
     /** Make a function which performs only "static redispatch" of the supplied function name - 
@@ -10465,7 +10550,7 @@ var fluid_1_2 = fluid_1_2 || {};
     
     fluid.expander.preserveFromExpansion = function(options) {
         var preserve = {};
-        var preserveList = ["mergePolicy", "components"];
+        var preserveList = ["mergePolicy", "components", "invokers"];
         fluid.each(options.mergePolicy, function(value, key) {
             if (fluid.mergePolicyIs(value, "noexpand")) {
                 preserveList.push(key);
@@ -10501,38 +10586,41 @@ var fluid_1_2 = fluid_1_2 || {};
      // the same status as user options whereas they should slot into the right place between 
      // "earlyDefaults"/"defaults"/"demands"/"user options". Demands should be allowed to say whether they
      // integrate with or override defaults.
-    fluid.expandOptions = function(args, thatStack) {
+    fluid.expandOptions = function(args, that) {
         if (fluid.isPrimitive(args)) {
             return args;
         }
-        thatStack = thatStack || fluid.getEnvironmentalThatStack();
-        var expandOptions = makeStackResolverOptions(thatStack);
-        expandOptions.noValue = true;
-        expandOptions.noCopy = true; // It is still possible a model may be fetched even though it is preserved
-        if (!fluid.isArrayable(args)) {
-            var pres = fluid.expander.preserveFromExpansion(args);
-        }
-        var expanded = fluid.expander.expandLight(args, expandOptions);
-        if (pres) {
-            pres.restore(expanded);
-        }
-        return expanded;
+        return fluid.withNewComponent(that, function(thatStack) {
+            var expandOptions = makeStackResolverOptions(thatStack);
+            expandOptions.noCopy = true; // It is still possible a model may be fetched even though it is preserved
+            if (!fluid.isArrayable(args)) {
+                var pres = fluid.expander.preserveFromExpansion(args);
+            }
+            var expanded = fluid.expander.expandLight(args, expandOptions);
+            if (pres) {
+                pres.restore(expanded);
+            }
+            return expanded;
+        });
     };
     
     fluid.initDependent = function(that, name, thatStack) {
-        if (!that) { return; }
+        if (!that || that[name]) { return; }
         var component = that.options.components[name];
         var invokeSpec = fluid.resolveDemands(thatStack, [component.type, name], [], component.options);
         // TODO: only want to expand "options" or all args? See "component rescuing" in expandOptions above
-        invokeSpec.args = fluid.expandOptions(invokeSpec.args, thatStack); 
+        //invokeSpec.args = fluid.expandOptions(invokeSpec.args, thatStack, true); 
         var instance = fluid.initSubcomponentImpl(that, {type: invokeSpec.funcName}, invokeSpec.args);
         if (instance) { // TODO: more fallibility
             that[name] = instance;
         }
     };
-        
-    fluid.initDependents = function(that) {
-        var options = that.options;
+    
+    // NON-API function    
+    fluid.withNewComponent = function(that, func) {
+        if (!that) {
+            return func(fluid.getEnvironmentalThatStack());
+        }
         that[inCreationMarker] = true;
         // push a dynamic stack of "currently resolving components" onto the current thread
         var root = fluid.threadLocal();
@@ -10545,6 +10633,17 @@ var fluid_1_2 = fluid_1_2 || {};
             thatStack.push(that);
         }
         try {
+            return func(thatStack);
+        }
+        finally {
+            thatStack.pop();
+            delete that[inCreationMarker];
+        }              
+    };
+        
+    fluid.initDependents = function(that) {
+        var options = that.options;
+        fluid.withNewComponent(that, function(thatStack) {
             var components = options.components || {};
             for (var name in components) {
                 fluid.initDependent(that, name, thatStack);
@@ -10555,11 +10654,7 @@ var fluid_1_2 = fluid_1_2 || {};
                 var funcName = typeof(invokerec) === "string"? invokerec : null;
                 that[name] = fluid.makeInvoker(thatStack, funcName? null : invokerec, funcName);
             }
-        }
-        finally {
-            thatStack.pop();
-            delete that[inCreationMarker];
-        }
+        });
     };
     
     // Standard Fluid component types
@@ -10779,9 +10874,10 @@ var fluid_1_2 = fluid_1_2 || {};
 
     /** "light" expanders, starting with support functions for the "deferredFetcher" expander **/
 
-    fluid.expander.deferredCall = function(target, source) {
+    fluid.expander.deferredCall = function(target, source, recurse) {
         var expander = source.expander;
-        var args = (!expander.args || fluid.isArrayable(expander.args))? expander.args : $.makeArray(expander.args); 
+        var args = (!expander.args || fluid.isArrayable(expander.args))? expander.args : $.makeArray(expander.args);
+        args = recurse(args); 
         return fluid.invokeGlobalFunction(expander.func, args);
     };
     
@@ -10789,7 +10885,7 @@ var fluid_1_2 = fluid_1_2 || {};
     
     // TODO: The case of an "invoke" call as part of the course of resolving some component options
     // proved problematic here and interrupted the ability to resolve contextualised values inside the invoker.
-    fluid.deferredInvokeCall = function(target, source) {
+    fluid.deferredInvokeCall = function(target, source, recurse) {
         var expander = source.expander;
         var args = (!expander.args || fluid.isArrayable(expander.args))? expander.args : $.makeArray(expander.args); 
         return fluid.invoke(expander.func, args);
@@ -10805,7 +10901,8 @@ var fluid_1_2 = fluid_1_2 || {};
     fluid.expander.lightFilter = function (obj, recurse, options) {
           var togo;
           if (fluid.isArrayable(obj)) {
-              togo = (options.noCopy? fluid.each: fluid.transform)(obj, function(value) {return recurse(value);});
+              togo = options.noCopy? obj : [];
+              fluid.each(obj, function(value, key) {togo[key] = recurse(value);});
           }
           else {
               togo = options.noCopy? obj : {};
@@ -10815,7 +10912,7 @@ var fluid_1_2 = fluid_1_2 || {};
                   if (key === "expander" && !(options.expandOnly && options.expandOnly[value.type])){
                       expander = fluid.getGlobalValue(value.type);  
                       if (expander) {
-                          return expander.call(null, togo, obj);
+                          return expander.call(null, togo, obj, recurse);
                       }
                   }
                   if (key !== "expander" || !expander) {
@@ -13549,34 +13646,7 @@ fluid_1_2 = fluid_1_2 || {};
          });
     };
   
-      
-    /** Converts a data structure consisting of a mapping of keys to message strings,
-     * into a "messageLocator" function which maps an array of message codes, to be 
-     * tried in sequence until a key is found, and an array of substitution arguments,
-     * into a substituted message string.
-     */
-    fluid.messageLocator = function (messageBase, resolveFunc) {
-        resolveFunc = resolveFunc || fluid.stringTemplate;
-        return function (messagecodes, args) {
-            if (!messagecodes) {
-                return "[No messagecodes provided]";
-            }
-            if (typeof(messagecodes) === "string") {
-                messagecodes = [messagecodes];
-            }
-            for (var i = 0; i < messagecodes.length; ++ i) {
-                var code = messagecodes[i];
-                var message = messageBase[code];
-                if (message === undefined) {
-                    continue;
-                }
-                return resolveFunc(message, args);
-            }
-            return "[Message string for key " + messagecodes[0] + " not found]";
-        };
-    };
-  
-    fluid.resolveMessageSource = function (messageSource) {
+    fluid.resolveMessageSource = function(messageSource) {
         if (messageSource.type === "data") {
             if (messageSource.url === undefined) {
                 return fluid.messageLocator(messageSource.messages, messageSource.resolveFunc);
@@ -13584,6 +13654,9 @@ fluid_1_2 = fluid_1_2 || {};
             else {
               // TODO: fetch via AJAX, and convert format if necessary
             }
+        }
+        else if (messageSource.type === "resolver") {
+            return messageSource.resolver.resolve;
         }
     };
     
@@ -13769,8 +13842,7 @@ fluid_1_2 = fluid_1_2 || {};
   // options layout (model appears in both rOpts and eOpts)
     fluid.renderer.createRendererFunction = function (container, selectors, options, model, fossils) {
         options = options || {};
-        container = $(container);
-        var source = options.templateSource ? options.templateSource: {node: container};
+        var source = options.templateSource ? options.templateSource: {node: $(container)};
         var rendererOptions = fluid.renderer.modeliseOptions(options.rendererOptions, null, model);
         rendererOptions.fossils = fossils || {};
         
@@ -13785,7 +13857,8 @@ fluid_1_2 = fluid_1_2 || {};
             }
             var cutpointFn = options.cutpointGenerator || "fluid.renderer.selectorsToCutpoints";
             rendererOptions.cutpoints = rendererOptions.cutpoints || fluid.invokeGlobalFunction(cutpointFn, [selectors, options]);
-        
+            container = typeof(container) === "function"? container() : $(container);
+              
             if (templates) {
                 fluid.clear(rendererOptions.fossils);
                 fluid.reRender(templates, container, tree, rendererOptions);
@@ -13807,8 +13880,13 @@ fluid_1_2 = fluid_1_2 || {};
         fluid.fetchResources(that.options.resources); // TODO: deal with asynchrony
         
         var rendererOptions = that.options.rendererOptions || {};
+        var messageResolver;
         if (!rendererOptions.messageSource && that.options.strings) {
-            rendererOptions.messageSource = {type: "data", messages: that.options.strings}; 
+            messageResolver = fluid.messageResolver(
+                {messageBase: that.options.strings,
+                 resolveFunc: that.options.messageResolverFunction,
+                 parents: fluid.makeArray(that.options.parentBundle)});
+            rendererOptions.messageSource = {type: "resolver", resolver: messageResolver}; 
         }
         fluid.renderer.reverseMerge(rendererOptions, that.options, ["resolverGetConfig", "resolverSetConfig"]);
 
@@ -13829,21 +13907,30 @@ fluid_1_2 = fluid_1_2 || {};
                 return that.options.resources.template.resourceText;
             };
         }
+        if (that.options.produceTree) {
+            that.produceTree = that.options.produceTree;  
+        }
         if (that.options.protoTree && !that.produceTree) {
             that.produceTree = function() {
                 return that.options.protoTree;
             }
         }
         fluid.renderer.reverseMerge(rendererFnOptions, that.options, ["resolverGetConfig", "resolverSetConfig"]);
+        if (rendererFnOptions.rendererTargetSelector) {
+            container = function() {return that.dom.locate(rendererFnOptions.rendererTargetSelector)};
+        }
        
         var rendererFn = fluid.renderer.createRendererFunction(container, that.options.selectors, rendererFnOptions, that.model, renderer.fossils);
         
         that.render = renderer.render = rendererFn;
         that.renderer = renderer;
+        if (messageResolver) {
+            that.messageResolver = messageResolver;
+        }
 
         if (that.produceTree) {
             that.refreshView = renderer.refreshView = function() {
-                renderer.render(that.produceTree());
+                renderer.render(that.produceTree(that));
             }
         }
         
@@ -13851,11 +13938,9 @@ fluid_1_2 = fluid_1_2 || {};
     };
     
     var removeSelectors = function (selectors, selectorsToIgnore) {
-        if (selectorsToIgnore) {
-            fluid.each(selectorsToIgnore, function (selectorToIgnore) {
-                delete selectors[selectorToIgnore];
-            });
-        }
+        fluid.each(fluid.makeArray(selectorsToIgnore), function (selectorToIgnore) {
+            delete selectors[selectorToIgnore];
+        });
         return selectors;
     };
 
@@ -13995,7 +14080,7 @@ fluid_1_2 = fluid_1_2 || {};
             if (!fluid.isPrimitive(value) && !fluid.isArrayable(value)) {
                 proto = $.extend({}, value);
                 if (proto.decorators) {
-                   proto.decorators = expandLight(proto.decorators);
+                    proto.decorators = expandLight(proto.decorators);
                 }
                 value = proto.value;
                 delete proto.value;
@@ -14158,6 +14243,141 @@ fluid_1_2 = fluid_1_2 || {};
     
 })(jQuery, fluid_1_2);
     /*
+ * jQuery UI Tooltip @VERSION
+ *
+ * Copyright 2010, AUTHORS.txt
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Tooltip
+ *
+ * Depends:
+ *	jquery.ui.core.js
+ *	jquery.ui.widget.js
+ *	jquery.ui.position.js
+ */
+(function($) {
+
+var increments = 0;
+
+$.widget("ui.tooltip", {
+	options: {
+		items: "[title]",
+		content: function() {
+			return $(this).attr("title");
+		},
+		position: {
+			my: "left center",
+			at: "right center",
+			offset: "15 0"
+		}
+	},
+	_create: function() {
+		var self = this;
+		this.tooltip = $("<div></div>")
+			.attr("id", "ui-tooltip-" + increments++)
+			.attr("role", "tooltip")
+			.attr("aria-hidden", "true")
+			.addClass("ui-tooltip ui-widget ui-corner-all ui-widget-content")
+			.appendTo(document.body)
+			.hide();
+		this.tooltipContent = $("<div></div>")
+			.addClass("ui-tooltip-content")
+			.appendTo(this.tooltip);
+		this.opacity = this.tooltip.css("opacity");
+		this.element
+			.bind("focus.tooltip mouseover.tooltip", function(event) {
+				self.open( event );
+			})
+			.bind("blur.tooltip mouseout.tooltip", function(event) {
+				self.close( event );
+			});
+	},
+	
+	enable: function() {
+		this.options.disabled = false;
+	},
+	
+	disable: function() {
+		this.options.disabled = true;
+	},
+	
+	destroy: function() {
+		this.tooltip.remove();
+		$.Widget.prototype.destroy.apply(this, arguments);
+	},
+	
+	widget: function() {
+		return this.element.pushStack(this.tooltip.get());
+	},
+	
+	open: function(event) {
+		var target = $(event && event.target || this.element).closest(this.options.items);
+		// already visible? possible when both focus and mouseover events occur
+		if (this.current && this.current[0] == target[0])
+			return;
+		var self = this;
+		this.current = target;
+		this.currentTitle = target.attr("title");
+		var content = this.options.content.call(target[0], function(response) {
+			// IE may instantly serve a cached response, need to give it a chance to finish with _show before that
+			setTimeout(function() {
+				// ignore async responses that come in after the tooltip is already hidden
+				if (self.current == target)
+					self._show(event, target, response);
+			}, 13);
+		});
+		if (content) {
+			self._show(event, target, content);
+		}
+	},
+	
+	_show: function(event, target, content) {
+		if (!content)
+			return;
+		
+		target.attr("title", "");
+		
+		if (this.options.disabled)
+			return;
+			
+		this.tooltipContent.html(content);
+		this.tooltip.css({
+			top: 0,
+			left: 0
+		}).show().position( $.extend({
+			of: target
+		}, this.options.position )).hide();
+		
+		this.tooltip.attr("aria-hidden", "false");
+		target.attr("aria-describedby", this.tooltip.attr("id"));
+
+		this.tooltip.stop(false, true).fadeIn();
+
+		this._trigger( "open", event );
+	},
+	
+	close: function(event) {
+		if (!this.current)
+			return;
+		
+		var current = this.current.attr("title", this.currentTitle);
+		this.current = null;
+		
+		if (this.options.disabled)
+			return;
+		
+		current.removeAttr("aria-describedby");
+		this.tooltip.attr("aria-hidden", "true");
+		
+		this.tooltip.stop(false, true).fadeOut();
+		
+		this._trigger( "close", event );
+	}
+	
+});
+
+})(jQuery);/*
 Copyright 2008-2009 University of Cambridge
 Copyright 2008-2010 University of Toronto
 
@@ -14478,7 +14698,6 @@ fluid_1_2 = fluid_1_2 || {};
         // Work around for FLUID-726
         // Without 'setTimeout' the finish handler gets called with the event and the edit field is inactivated.       
         setTimeout(function () {
-            that.editField.focus();
             fluid.setCaretToEnd(that.editField[0], that.editView.value());
             if (that.options.selectOnEdit) {
                 that.editField[0].select();
@@ -14565,10 +14784,6 @@ fluid_1_2 = fluid_1_2 || {};
         }; 
     };    
     
-    var setTooltipTitle = function (element, title) {
-        fluid.wrap(element).attr("title", title);
-    };
-    
     // Initialize the tooltip once the document is ready.
     // For more details, see http://issues.fluidproject.org/browse/FLUID-1030
     var initTooltips = function (that) {
@@ -14642,7 +14857,7 @@ fluid_1_2 = fluid_1_2 || {};
     fluid.inlineEdit = function (componentContainer, userOptions) {   
         var that = fluid.initView("inlineEdit", componentContainer, userOptions);
         
-        that.viewEl = fluid.inlineEdit.setupDisplayView(that);
+        that.viewEl = fluid.inlineEdit.setupDisplayText(that);
         
         that.displayView = fluid.initSubcomponent(that, "displayView", that.viewEl);
         $.extend(true, that.displayView, fluid.initSubcomponent(that, "displayAccessor", that.viewEl));
@@ -14872,7 +15087,7 @@ fluid_1_2 = fluid_1_2 || {};
      * 
      * @return {jQuery} The display text
      */
-    fluid.inlineEdit.setupDisplayView = function (that) {
+    fluid.inlineEdit.setupDisplayText = function (that) {
         var viewEl = that.locate("text");
 
         /*
@@ -14882,7 +15097,6 @@ fluid_1_2 = fluid_1_2 || {};
          */
         viewEl.attr("tabindex", "-1");
         viewEl.addClass(that.options.styles.text);
-        setTooltipTitle(viewEl, that.options.tooltipText);
         
         return viewEl;
     };
@@ -14901,7 +15115,6 @@ fluid_1_2 = fluid_1_2 || {};
             var markup = $("<a href='#_' class='flc-inlineEdit-textEditButton'></a>");
             markup.addClass(opts.styles.textEditButton);
             markup.text(opts.tooltipText);            
-            setTooltipTitle(markup, that.options.tooltipText);      
             
             /**
              * Set text for the button and listen
@@ -15071,14 +15284,6 @@ fluid_1_2 = fluid_1_2 || {};
         };
     };
     
-    fluid.inlineEdit.richTextViewAccessor = function (element) {
-        return {
-            value: function (newValue) {
-                return $(element).html(newValue);
-            }
-        };
-    };
-    
     fluid.inlineEdit.standardDisplayView = function (viewEl) {
         var that = {
             refreshView: function (componentThat, source) {
@@ -15144,7 +15349,7 @@ fluid_1_2 = fluid_1_2 || {};
             focus: "fl-inlineEdit-focus",
             tooltip: "fl-inlineEdit-tooltip",
             editModeInstruction: "fl-inlineEdit-editModeInstruction",
-            displayView: "fl-inlineEdit-underline fl-inlineEdit-inlineBlock",
+            displayView: "fl-inlineEdit-simple-editableText fl-inlineEdit-textContainer",
             textEditButton: "fl-offScreen-hidden"
         },
         
@@ -15269,6 +15474,14 @@ fluid_1_2 = fluid_1_2 || {};
         };
     };
     
+    fluid.inlineEdit.richTextViewAccessor = function (element) {
+        return {
+            value: function (newValue) {
+                return $(element).html(newValue);
+            }
+        };
+    };        
+    
     var configureInlineEdit = function (configurationName, container, options) {
         var defaults = fluid.defaults(configurationName); 
         var assembleOptions = fluid.merge(defaults ? defaults.mergePolicy: null, {}, defaults, options);
@@ -15310,7 +15523,6 @@ fluid_1_2 = fluid_1_2 || {};
         if  (textEditButton.length === 0) {
             var markup = $("<a href='#_' class='flc-inlineEdit-textEditButton'></a>");
             markup.text(opts.strings.textEditButton);
-            markup.attr("title", opts.tooltipText);
             
             that.locate("text").after(markup);
             
@@ -15444,7 +15656,7 @@ fluid_1_2 = fluid_1_2 || {};
         },
         styles: {
             invitation: "fl-inlineEdit-richText-invitation",
-            displayView: "fl-inlineEdit-inlineBlock",
+            displayView: "fl-inlineEdit-textContainer",
             text: ""
                 
         },
@@ -15462,8 +15674,7 @@ fluid_1_2 = fluid_1_2 || {};
         modelComparator: fluid.inlineEdit.htmlComparator,
         blurHandlerBinder: fluid.inlineEdit.tinyMCE.blurHandlerBinder,
         displayModeRenderer: fluid.inlineEdit.richTextDisplayModeRenderer,
-        editModeRenderer: fluid.inlineEdit.tinyMCE.editModeRenderer,
-        renderKeyboardTooltip: false
+        editModeRenderer: fluid.inlineEdit.tinyMCE.editModeRenderer
     });
     
     
@@ -15554,7 +15765,7 @@ fluid_1_2 = fluid_1_2 || {};
         },
         styles: {
             invitation: "fl-inlineEdit-richText-invitation",
-            displayView: "fl-inlineEdit-inlineBlock",
+            displayView: "fl-inlineEdit-textContainer",
             text: ""
         },
         strings: {
@@ -15572,7 +15783,6 @@ fluid_1_2 = fluid_1_2 || {};
         blurHandlerBinder: fluid.inlineEdit.FCKEditor.blurHandlerBinder,
         displayModeRenderer: fluid.inlineEdit.richTextDisplayModeRenderer,
         editModeRenderer: fluid.inlineEdit.FCKEditor.editModeRenderer,
-        renderKeyboardTooltip: false,
         FCKEditor: {
             BasePath: "fckeditor/"    
         }
@@ -15655,7 +15865,7 @@ fluid_1_2 = fluid_1_2 || {};
         },
         styles: {
             invitation: "fl-inlineEdit-richText-invitation",
-            displayView: "fl-inlineEdit-inlineBlock",
+            displayView: "fl-inlineEdit-textContainer",
             text: ""
         },
         strings: {
@@ -15673,7 +15883,6 @@ fluid_1_2 = fluid_1_2 || {};
         blurHandlerBinder: fluid.inlineEdit.CKEditor.blurHandlerBinder,
         displayModeRenderer: fluid.inlineEdit.richTextDisplayModeRenderer,
         editModeRenderer: fluid.inlineEdit.CKEditor.editModeRenderer,
-        renderKeyboardTooltip: false,
         CKEditor: {
             // CKEditor-specific configuration goes here.
         }
@@ -15718,8 +15927,7 @@ fluid_1_2 = fluid_1_2 || {};
     fluid.defaults("fluid.inlineEdit.dropdown", {
         applyEditPadding: false,
         blurHandlerBinder: fluid.inlineEdit.dropdown.blurHandlerBinder,
-        editModeRenderer: fluid.inlineEdit.dropdown.editModeRenderer,
-        renderKeyboardTooltip: false
+        editModeRenderer: fluid.inlineEdit.dropdown.editModeRenderer
     });
 })(jQuery, fluid_1_2);
 
@@ -15867,8 +16075,6 @@ fluid_1_2 = fluid_1_2 || {};
         }
         var pageLink = pageListThat.pageLinks.eq(newModel.pageIndex);
         pageLink.addClass(pageListThat.options.styles.currentPage); 
-
-
     }
     
     function bindLinkClick(link, events, eventArg) {
@@ -15949,10 +16155,23 @@ fluid_1_2 = fluid_1_2 || {};
         };
     };
     
+    fluid.pager.setCurrentPageDesc = function (that) {
+        var descMarkup = $(that.options.markup.currentPageDescription, {
+            text: that.options.strings.currentPageIndexMsg,
+            "class": that.options.styles.currentPageDesc
+        });
+        
+        fluid.allocateSimpleId(descMarkup);
+        that.container.append(descMarkup);     
+        
+        return descMarkup;
+    }; 
+    
     fluid.pager.renderedPageList = function (container, events, pagerBarOptions, options, strings) {
         options = $.extend(true, pagerBarOptions, options);
         var that = fluid.initView("fluid.pager.renderedPageList", container, options);
         options = that.options; // pick up any defaults
+        var currentPageDescId = fluid.pager.setCurrentPageDesc(that).attr("id");
         var idMap = {};
         var renderOptions = {
             cutpoints: [ {
@@ -15962,10 +16181,6 @@ fluid_1_2 = fluid_1_2 || {};
             {
                 id: "page-link:skip",
                 selector: pagerBarOptions.selectors.pageLinkSkip
-            },
-            {
-                id: "page-link:disabled",
-                selector: pagerBarOptions.selectors.pageLinkDisabled
             }],
             idMap: idMap
         };
@@ -15975,28 +16190,48 @@ fluid_1_2 = fluid_1_2 || {};
                 id: "payload-component",
                 selector: options.linkBody
             };
-        }        
+        }   
+        
+        var assembleComponent = function (page, isCurrent) {
+            var obj = {
+                ID: "page-link:link",
+                localID: page + 1,
+                value: page + 1,
+                pageIndex: page,
+                decorators: [
+                    {type: "jQuery",
+                         func: "click", 
+                         args: function (event) {
+                             events.initiatePageChange.fire({pageIndex: page});
+                             event.preventDefault();
+                        }
+                     }
+                 ]
+            };
+            
+            if (isCurrent) {
+                obj.current = true;
+                obj.decorators = obj.decorators.concat([
+                    {type: "addClass",
+                         classes: that.options.styles.currentPage},                           
+                    {type: "jQuery",
+                        func: "attr", 
+                        args: ["aria-describedby", currentPageDescId] 
+                    }
+                ]);
+            }
+            
+            return obj;
+        };
+             
         function pageToComponent(current) {
             return function (page) {
                 return page === -1? {
                     ID: "page-link:skip"
-                } : 
-                {
-                    ID: page === current? "page-link:link": "page-link:link",
-                    localID: page + 1,
-                    value: page + 1,
-                    pageIndex: page,
-                    decorators: [
-                        {type: "jQuery",
-                             func: "click", 
-                             args: function () {events.initiatePageChange.fire({pageIndex: page}); }
-                         },
-                        {type: page === current? "addClass" : "null",
-                             classes: that.options.styles.currentPage}
-                         ]
-                };
+                } : assembleComponent(page, page === current);
             };
         }
+        
         var root = that.locate("root");
         fluid.expectFilledSelector(root, "Error finding root template for fluid.pager.renderedPageList");
         
@@ -16033,7 +16268,10 @@ fluid_1_2 = fluid_1_2 || {};
                 root: ".flc-pager-links"
             },
             linkBody: "a",
-            pageStrategy: fluid.pager.everyPageStrategy
+            pageStrategy: fluid.pager.everyPageStrategy,
+            markup: {
+                currentPageDescription: "<div></div>"
+            }
         }
     );
     
@@ -16089,14 +16327,18 @@ fluid_1_2 = fluid_1_2 || {};
         selectors: {
             pageLinks: ".flc-pager-pageLink",
             pageLinkSkip: ".flc-pager-pageLink-skip",
-            pageLinkDisabled: ".flc-pager-pageLink-disabled",
             previous: ".flc-pager-previous",
             next: ".flc-pager-next"
         },
         
         styles: {
             currentPage: "fl-pager-currentPage",
+            currentPageDesc: "fl-offScreen-hidden",
             disabled: "fl-pager-disabled"
+        },
+        
+        strings: {
+            currentPageIndexMsg: "Current page"
         }
     });
 
@@ -16281,6 +16523,10 @@ fluid_1_2 = fluid_1_2 || {};
         element.removeClass(styles.descendingHeader);
         if (sort !== 0) {
             element.addClass(sort === 1? styles.ascendingHeader : styles.descendingHeader);
+            //aria-sort property are specified in the w3 WAI spec, ascending, descending, none, other.
+            //since pager currently uses ascending and descending, we do not support the others.
+            //http://www.w3.org/WAI/PF/aria/states_and_properties#aria-sort
+            element.attr('aria-sort', sort === 1? 'ascending' : 'descending'); 
         }
     }
     
@@ -16418,9 +16664,18 @@ fluid_1_2 = fluid_1_2 || {};
         renderOptions: {}
     });
 
+    fluid.pager.summaryAria = function (element) {
+        element.attr({
+            "aria-relevant": "all",
+            "aria-atomic": "false",
+            "aria-live": "assertive",
+            "role": "status"
+        })     
+    };
 
     fluid.pager.summary = function (dom, options) {
         var node = dom.locate("summary");
+        fluid.pager.summaryAria(node);
         return {
             returnedOptions: {
                 listeners: {
@@ -16428,7 +16683,8 @@ fluid_1_2 = fluid_1_2 || {};
                         var text = fluid.stringTemplate(options.message, {
                             first: newModel.pageIndex * newModel.pageSize + 1,
                             last: fluid.pager.computePageLimit(newModel),
-                            total: newModel.totalRange
+                            total: newModel.totalRange,
+                            currentPage: newModel.pageIndex + 1
                         });
                         if (node.length > 0) {
                             node.text(text);
@@ -16453,7 +16709,6 @@ fluid_1_2 = fluid_1_2 || {};
                 that.events.initiatePageSizeChange.fire(node.val());
             });
         }
-        return that;
     };
 
 
@@ -16497,17 +16752,19 @@ fluid_1_2 = fluid_1_2 || {};
                         };
                     }
                     
-                    var decorators = [
-                        {
-                            type: "jQuery",
-                            func: "tooltip",
-                            args: tooltipOpts
-                        },
-                        {
-                            identify: page
-                        }
-                    ];
-                    cell.decorators = cell.decorators.concat(decorators);
+                    if (!cell.current) {
+                        var decorators = [
+                            {
+                                type: "jQuery",
+                                func: "tooltip",
+                                args: tooltipOpts
+                            },
+                            {
+                                identify: page
+                            }
+                        ];
+                        cell.decorators = cell.decorators.concat(decorators);
+                    }
                 }
             });
         });
@@ -16603,7 +16860,7 @@ fluid_1_2 = fluid_1_2 || {};
             options: null},
         
         summary: {type: "fluid.pager.summary", options: {
-            message: "%first-%last of %total items"
+            message: "Viewing page %currentPage. Showing records %first - %last of %total items"
         }},
         
         pageSize: {

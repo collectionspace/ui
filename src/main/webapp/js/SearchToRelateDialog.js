@@ -39,18 +39,18 @@ cspace = cspace || {};
             that.events.addRelations.fire({
                 items: newRelations
             });
-            that.dlg.dialog("close");
+            that.close();
         };
     };
     
     var bindEventHandlers = function (that, addDialog) {
         that.locate("addButton", addDialog).click(handleAddClick(that));
         that.locate("closeButton", addDialog).click(function () {
-            addDialog.dialog("close");
+            that.close();
         });
         that.locate("createNewButton", addDialog).click(function () {
             that.events.onCreateNewRecord.fire();
-            that.dlg.dialog("close");
+            that.close();
         });
         that.search.events.onSearch.addListener(function () {
             that.locate("addButton", that.dlg).hide();
@@ -59,82 +59,131 @@ cspace = cspace || {};
             that.locate("addButton", that.dlg).show();
         });
     };
-
-    var setupAddDialog = function (that) {
-        var resources = {
-            addDialog: {
-                href: that.options.templates.dialog
-            }
-        };
-        
-        fluid.fetchResources(resources, function () {
-            // TODO: check why we are fetching resources after we create the dialog. 
-            var templates = fluid.parseTemplates(resources, ["addDialog"], {});
-            that.dlg = $("<div></div>", that.container[0])
-                .dialog({
-                    autoOpen: false,
-                    modal: true,
-                    minWidth: 700,
-                    draggable: true,
-                    dialogClass: "cs-search-dialog",
-                    position: ['center', 100],
-                    title: "Add Related Object/Procedural Record"                
-                });        
-            that.dlg.parent().css("overflow", "visible");
-            
-            fluid.reRender(templates, that.dlg, {});
-            // TODO: We are hard coding a selector in here for search. 
-            //       The selector should conform to cspace standards and should be specified in the options block
-            $.extend(true, that.options.search.options, {recordType: that.options.related});
-            that.search = fluid.initSubcomponent(that, "search", [that.dlg, fluid.COMPONENT_OPTIONS]);
-            
-            bindEventHandlers(that, that.dlg);
-            
-            that.search.hideResults();
-            if (that.options.related && (that.options.related !== "procedures")) {
-                // TODO: This makes serious DOM assumptions!!
-                that.locate("recordTypeSelector", that.dlg).append("<option value=\"" + that.options.related + "\"></option>");
-                that.locate("recordTypeSelector", that.dlg).val(that.options.related);
-                that.locate("recordTypes", that.dlg).hide();
-            }
-            that.locate("addButton", that.dlg).hide();
-            
-            that.events.afterRender.fire();
-        });
-    };
     
- // TODO: All this really needs is the csid, not the "applier"!
     cspace.searchToRelateDialog = function (container, options) {        
-        var that = fluid.initView("cspace.searchToRelateDialog", container, options);
+        var that = fluid.initRendererComponent("cspace.searchToRelateDialog", container, options);
         that.model = that.options.model;
-        setupAddDialog(that);
+        var recordName = that.messageResolver.resolve(that.options.related);
+        var title = that.messageResolver.resolve("title", {recordType: recordName});
+        that.container.dialog({
+            autoOpen: false,
+            modal: true,
+            minWidth: 700,
+            draggable: true,
+            dialogClass: "cs-search-dialog",
+            position: ["center", 100],
+            title: title                
+        });
+        
+        //that.dlg.parent().css("overflow", "visible");
+        
+        that.open = function() {
+            that.container.dialog("open");        
+        };
+        that.close = function() {
+            that.container.dialog("close");
+        };
+        fluid.initDependents(that);
+
+        that.search.hideResults();
+        that.locate("addButton", that.container).hide();
+
+        that.events.afterRender.fire(that);
+
+        bindEventHandlers(that, that.container);
+        that.events.afterSetup.fire(that);
         return that;
     };
+
+    cspace.searchToRelateDialog.produceTree = function(that) {
+        return that.recordTypeSelector.produceComponent();
+    };
+    
+    // Sequence required: i) recordTypeSelector, ii) render, iii) searchView
+    cspace.searchToRelateDialog.initRenderer = function(that) {
+        fluid.log("Rendering dialog");
+        that.refreshView();
+        return {};
+    };
+    
+    cspace.searchToRelateDialog.getDialogGetter = function(that) {
+        return function() {
+            return that.container;
+        }
+    };
+    
+    // TODO: hack for gingerness
+    fluid.demands("cspace.searchToRelateDialog.initRenderer", ["cspace.searchToRelateDialog"], 
+         { args:  ["{searchToRelateDialog}", "{searchToRelateDialog}.recordTypeSelector"]});
+    
+    fluid.demands("cspace.search.searchView", "cspace.searchToRelateDialog", 
+        ["{searchToRelateDialog}.container", fluid.COMPONENT_OPTIONS]);
     
     fluid.defaults("cspace.searchToRelateDialog", {
         mergePolicy: {
             model: "preserve"
         },
         selectors: {
+            dialog: { // See comments for Confirmation.js - we adopt a common strategy now
+            // since the problem in THIS component is that it invokes jquery.dialog on startup, thus
+            // causing its container to move.
+                expander: {
+                    type: "fluid.deferredCall",
+                    func: "cspace.searchToRelateDialog.getDialogGetter",
+                    args: ["{searchToRelateDialog}"]
+                }
+            },
             addButton: ".csc-searchToRelate-addButton",
-            recordTypeSelector: ".csc-search-recordType",
-            recordTypes: ".csc-searchToRelate-recordTypes",
+            recordType: ".csc-search-recordType",
             closeButton: ".csc-searchToRelate-closeBtn",
             createNewButton: ".csc-searchToRelate-createButton"
         },
-        templates: {
-            dialog: "../html/searchToRelate.html"
-        },
+        selectorsToIgnore: ["addButton", "closeButton", "createNewButton", "dialog"],
         events: {
             addRelations: null,
             onCreateNewRecord: null,
-            afterRender: null
+            afterRender: null,
+            afterSetup: null
         },
-        search: {
-            type: "cspace.search.searchView",
-            options: {
-                resultsSelectable: true
-            }
+        rendererFnOptions: {
+            rendererTargetSelector: "dialog"
+        },
+        produceTree: cspace.searchToRelateDialog.produceTree,
+        parentBundle: "{globalBundle}",
+        strings: {
+            procedures: "Procedural",
+            title: "Add Related %recordType Record"   
+        },
+        components: {
+            search: {
+                type: "cspace.search.searchView",
+                options: {
+                    resultsSelectable: true,
+                    recordType: "{searchToRelateDialog}.options.related",
+                    dependentHack: "{searchToRelateDialog}.initRenderer" // TODO: hack for gingerness
+                }
+            },
+            initRenderer: {
+                type: "cspace.searchToRelateDialog.initRenderer"
+            },
+            recordTypeSelector: {
+                type: "cspace.util.recordTypeSelector",
+                options: {
+                    related: "{searchToRelateDialog}.options.related",
+                    dom: "{searchToRelateDialog}.dom",
+                    componentID: "recordType",
+                    selector: "recordType"
+                }
+            },              
+        },
+        resources: {
+            template: cspace.prolepticResourceSpec({
+                fetchClass: "slowTemplate",
+                url: "%webapp/html/searchToRelate.html"
+            })
         }
     });
+    
+    fluid.fetchResources.primeCacheFromResources("cspace.searchToRelateDialog");
+    
 })(jQuery, fluid);

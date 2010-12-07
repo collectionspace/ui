@@ -22,12 +22,7 @@
         "users": {
             "type": "cspace.adminUsers",
             "options": {
-                "expander": {
-                    "type": "fluid.expander.noexpand",
-                    "tree": {
-                        "uispec": "{pageBuilder}.uispec"
-                    }
-                },
+                "uispec": "{pageBuilder}.uispec",
                 "currentUserId": "{pageBuilder}.currentUserId",
                 "userListEditor": {
                     "options": {

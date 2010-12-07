@@ -69,7 +69,8 @@ cspace = cspace || {};
     var setUpListEditor = function (that) {
         that.locate("newListRow").hide();
         bindEventHandlers(that);
-        that.events.pageReady.fire();
+        fluid.log("listEditor pageReady");
+        that.events.pageReady.fire(that);
     };
     
     /**
@@ -151,6 +152,7 @@ cspace = cspace || {};
         } else {
             fluid.invokeGlobalFunction(that.options.initList, [that, initListFunction]);
         }
+        that.events.afterSetup.fire(that);
         return that;
     };
 
@@ -244,6 +246,7 @@ cspace = cspace || {};
             addNewListRowButton: ".csc-listEditor-createNew"
         },
         events: {
+            afterSetup: null,
             pageReady: null,
             afterAddNewListRow: null
         },

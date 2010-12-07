@@ -189,25 +189,6 @@ var utilitiesTester = function ($) {
         "objects": ["create", "read", "update", "delete", "list"]
     };
     
-    var validate = function (expected, el, method) {
-        jqUnit.assertDeepEq("Test schema + permissions", expected, 
-            fluid.model.getBeanValue({}, el, [cspace.util.censorWithSchemaStrategy({
-                schema: schemaForPerms,
-                permissions: perms,
-                method: method,
-                operations: ["create", "read", "update", "delete", "list"]
-        })]));
-    };
-    
-    utilitiesTest.test("Permissions with permissionAwareAccessor", function () {
-        validate({}, "loanout", "OR");
-        validate(undefined, "acquisition", "OR");
-        validate(["person", "intake", "location", "loanin", "loanout", "contact", "organization", "objects", "movement", "objectexit"],
-            "recordlist", "OR");
-        validate(["person", "intake", "location", "loanout", "contact", "organization", "objects", "movement", "objectexit"], 
-            "recordlist", "AND");
-    });
-    
     utilitiesTest.test("Full model from schema with getBeanValue", function () {        
         setExpectedSchemaBasedModel();
         var model = cspace.util.getBeanValue({}, "new", {

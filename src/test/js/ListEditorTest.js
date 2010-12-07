@@ -33,23 +33,15 @@ var listEditorTester = function(){
                 fileExtension: ".json",
                 recordType: "users"
             }
-        },
-        details: {
-            options: {
-                confirmation: {
-                    options: {
-                        confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
-                    }
-                }
-            }
         }
     };
     var testOpts = {};
-    var listEditorTest = new jqUnit.TestCase("ListEditor Tests", function () {
-        cspace.util.isTest = true;
+    var bareListEditorTest = new jqUnit.TestCase("ListEditor Tests", function () {
         fluid.model.copyModel(testOpts, baseTestOpts);
-        listEditorTest.fetchTemplate("../../main/webapp/html/administration.html", ".csc-users-userAdmin");
+        bareListEditorTest.fetchTemplate("../../main/webapp/html/administration.html", ".csc-users-userAdmin");
     });
+    
+    var listEditorTest = cspace.tests.testEnvironment({testCase: bareListEditorTest});
     
     listEditorTest.test("Initial setup (default strategy: fetch)", function () {
         var listEditor;

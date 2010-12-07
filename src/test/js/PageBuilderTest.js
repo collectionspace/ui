@@ -171,14 +171,14 @@ cspace = cspace || {};
         cspace.testComponent4 = function (container, options) {
             jqUnit.assertTrue("TestComponent4 instantiated", true);
             jqUnit.assertEquals("TestComponent4 initiated with correct container", "#recordEditorContainer", container);
-            optionsWithComponentsWithOptions.components.dateEntry.options.typeName = "cspace.testComponent4";
+            delete options["targetTypeName"];
             jqUnit.assertDeepEq("TestComponent4 initiated with correct options", optionsWithComponentsWithOptions.components.dateEntry.options, options);
         };
     
         cspace.testComponent5 = function (container, options) {
             jqUnit.assertTrue("TestComponent5 instantiated", true);
             jqUnit.assertEquals("TestComponent5 initiated with correct container", "#linksContainer", container);
-            optionsWithComponentsWithOptions.components.relatedRecords.options.typeName = "cspace.testComponent5";
+            delete options["targetTypeName"];
             jqUnit.assertDeepEq("TestComponent5 initiated with correct options", optionsWithComponentsWithOptions.components.relatedRecords.options, options);
         };
         
@@ -224,7 +224,7 @@ cspace = cspace || {};
             cspace.pageBuilder(options);
             stop();
         });
-    
+
         pageBuilderTest.test("Assembly of HTML", function () {
             expect(3);
             
@@ -246,6 +246,7 @@ cspace = cspace || {};
             cspace.pageBuilder(options);
             stop();
         });
+
     
         pageBuilderTest.test("Invocation of dependent components: container parameter", function () {
             expect(4);    // this is total num of assertions in the test components

@@ -16,9 +16,8 @@
                 "strings": {
                     "recordTypeSelectLabel": "Record Type"
                 },
-                "permissions": "{pageBuilder}.permissions",
-                "schema": "{pageBuilder}.schema",
-                "selfRender": true
+                "selfRender": true,
+                "related": "all"
             }
         },
         "createNew": {

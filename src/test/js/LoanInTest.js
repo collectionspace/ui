@@ -13,10 +13,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 (function () { 
 
-    var loanInTests = new jqUnit.TestCase("Loan In Tests", function () {
+    var bareLoanInTests = new jqUnit.TestCase("Loan In Tests", function () {
         cspace.util.isTest = true;
-        loanInTests.fetchTemplate("../../main/webapp/html/loanin.html", ".fl-container-1024");
+        bareLoanInTests.fetchTemplate("../../main/webapp/html/loanin.html", ".fl-container-1024");
     });
+    
+    var loanInTests = cspace.tests.testEnvironment({testCase: bareLoanInTests});
     
     loanInTests.test("Creation", function () {
         var opts = {
@@ -47,61 +49,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             },
                             footer: {
                                 href: "../../main/webapp/html/footer.html"
-                            }
-                        },
-                        components: {
-                            recordEditor: {
-                                options: {
-                                    confirmation: {
-                                        options: {
-                                            confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
-                                        }
-                                    }
-                                }
-                            },
-                            sidebar: {
-                                options: {
-                                    components: {
-                                        cataloging: {
-                                            options: {
-                                                components: {
-                                                    relationManager: {
-                                                        options: {
-                                                            components: {
-                                                                searchToRelateDialog: {
-                                                                    options: {
-                                                                        templates: {
-                                                                            dialog: "../../main/webapp/html/searchToRelate.html"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        procedures: {
-                                            options: {
-                                                components: {
-                                                    relationManager: {
-                                                        options: {
-                                                            components: {
-                                                                searchToRelateDialog: {
-                                                                    options: {
-                                                                        templates: {
-                                                                            dialog: "../../main/webapp/html/searchToRelate.html"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
                             }
                         }
                     }

@@ -29,16 +29,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         action: saveAction,
         actionSuccessEvents: afterSuccessSave,
         actionErrorEvents: onError,
-        confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
     };
     
     var testOpts;
     
-    var confirmationTests = new jqUnit.TestCase("Confirmation Tests", function () {
-        cspace.util.isTest = true;
+    var bareConfirmationTests = new jqUnit.TestCase("Confirmation Tests", function () {
         testOpts = {};
         fluid.model.copyModel(testOpts, baseTestOpts);
     });
+    
+    var confirmationTests = cspace.tests.testEnvironment({testCase: bareConfirmationTests});
     
     var sampleSuccessHandlerCreator = function (conf, options) {
         return function () {
@@ -48,10 +48,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     confirmationTests.test("Confirmation creation", function () {
         expect(9);
-        var confirmation;
         testOpts.successHandlerCreator = sampleSuccessHandlerCreator;
         testOpts.listeners = {
-            afterRender: function () {
+            afterRender: function (confirmation) {
                 var expectedDefaultHREF = "#";
                 jqUnit.assertTrue("dialog is on the page", jQuery(".csc-confirmationDialog").length !== 0);
                 jqUnit.notVisible("dialog is not visible", jQuery(".csc-confirmationDialog"));
@@ -70,7 +69,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         };
         
         jqUnit.assertTrue("dialog is not on the page", jQuery(".csc-confirmationDialog").length === 0);
-        confirmation = cspace.confirmation(jQuery("#main"), testOpts);
+        var confirmation = cspace.confirmation(jQuery("#main"), testOpts);
         stop();
     });
     

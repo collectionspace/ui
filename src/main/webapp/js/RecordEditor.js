@@ -125,20 +125,19 @@ cspace = cspace || {};
             that.unsavedChanges = true;
         });
 
-        that.events.afterRender.addListener(function () {
-            that.locate("save").click(that.requestSave);
-            that.locate("deleteButton").click(that.remove);
-            that.locate("cancel").click(function () {
-                that.locate("messageContainer", "body").hide();
-                that.unsavedChanges = false;
-                that.events.onCancel.fire();
-            });
-            cspace.util.setZIndex();
-            cspace.util.corner();
-        });
-
         that.options.dataContext.events.onError.addListener(makeDCErrorHandler(that));
     };
+    
+    var bindHandlers = function(that) {
+        that.locate("save").click(that.requestSave);
+        that.locate("deleteButton").click(that.remove);
+        that.locate("cancel").click(function () {
+            that.locate("messageContainer", "body").hide();
+            that.unsavedChanges = false;
+            that.events.onCancel.fire();
+        });
+        cspace.util.setZIndex();      
+    }
     
     var setupDataEntry = function (that) {
         bindEventHandlers(that);
@@ -177,7 +176,8 @@ cspace = cspace || {};
             that.locate("deleteButton").removeAttr("disabled").removeClass("deactivate");
         }
         that.locate("messageContainer", "body").hide();
-        that.events.afterRender.fire();
+        bindHandlers(that);
+        that.events.afterRender.fire(that);
         fluid.log("RecordEditor.js renderPage end");
     };
 
@@ -223,7 +223,8 @@ cspace = cspace || {};
         that.remove = function () {
             var oldOptions = {}; 
             fluid.model.copyModel(oldOptions, that.confirmation.options);
-            $.extend(true, that.confirmation.options, {
+            var oldStrings = fluid.copy(that.confirmation.options.strings);
+            fluid.merge(null, that.confirmation.options, {
                 action: function () {
                     that.options.dataContext.remove(that.model.csid);
                 },
@@ -243,7 +244,13 @@ cspace = cspace || {};
                         confirmation.close();                            
                     }
                     else {
-                        confirmation.options = oldOptions;
+                      // TODO: Make sure this is refactored and no confirmation options are changed during the its lifetime.
+                      // This needs to be done in order to preserve the same reference to confirmations strings options so
+                      // the renderer could render the updated strings.
+                        var strings = confirmation.options.strings;
+                        fluid.model.copyModel(confirmation.options, oldOptions);
+                        confirmation.options.strings = strings;
+                        fluid.model.copyModel(confirmation.options.strings, oldStrings);
                         confirmation.refreshView();
                     }
                 };
@@ -256,7 +263,7 @@ cspace = cspace || {};
                 action: that.requestSave,
                 actionSuccessEvents: [that.events.afterCreateObjectDataSuccess, that.events.afterUpdateObjectDataSuccess],
                 actionErrorEvents: [that.events.onError]
-            }, that.options.confirmation.options) 
+            }, that.options.confirmation.options)
         ]);
         
         that.showConfirmation = function (href) {

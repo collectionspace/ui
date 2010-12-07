@@ -28,12 +28,13 @@ var relatedRecordsTabTester = function ($) {
         }
     });
     
-    var relatedRecordsTabTest = new jqUnit.TestCase("Related Records Tab Tests", function () {
-        cspace.util.isTest = true;
-        relatedRecordsTabTest.fetchTemplate("../../main/webapp/html/tabsTemplate.html", ".csc-tabs-template", $(".template1"));
-        relatedRecordsTabTest.fetchTemplate("../../main/webapp/html/objectTabPlaceholder.html", ".csc-cataloging-tab", $(".template2"));
+    var bareRelatedRecordsTabTest = new jqUnit.TestCase("Related Records Tab Tests", function () {
+        bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/html/tabsTemplate.html", ".csc-tabs-template", $(".template1"));
+        bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/html/objectTabPlaceholder.html", ".csc-cataloging-tab", $(".template2"));
         fluid.model.copyModel(testApplier, applier);        
     });
+    
+    var relatedRecordsTabTest = cspace.tests.testEnvironment({testCase: bareRelatedRecordsTabTest});
 
     var setupTab = function (opts) {
         var testPrimaryType = "intake";
@@ -99,11 +100,6 @@ var relatedRecordsTabTester = function ($) {
                                 },
                                 details: {
                                     options: {
-                                        confirmation: {
-                                            options: {
-                                                confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
-                                            }
-                                        },
                                         listeners: opts.detailsListeners
                                     }
                                 }
@@ -126,9 +122,6 @@ var relatedRecordsTabTester = function ($) {
                                     components: {
                                         searchToRelateDialog: {
                                             options: {
-                                                templates: {
-                                                    dialog: "../../main/webapp/html/searchToRelate.html"
-                                                },
                                                 listeners: opts.searchToRelateListeners
                                             }
                                         }
@@ -255,15 +248,6 @@ var relatedRecordsTabTester = function ($) {
                                         relationManager: {
                                             options: {
                                                 addRelations: cspace.relationManager.provideLocalAddRelations,
-                                                components: {
-                                                    searchToRelateDialog: {
-                                                        options: {
-                                                            templates: {
-                                                                dialog: "../../main/webapp/html/searchToRelate.html"
-                                                            }
-                                                        }
-                                                    }
-                                                },
                                                 primary: "{pageBuilder}.options.primaryRecordType",
                                                 related: "cataloging",
                                                 model: "{pageBuilder}.model",
@@ -279,15 +263,6 @@ var relatedRecordsTabTester = function ($) {
                                                     dataSource: {
                                                         options: {
                                                             uispec: "{pageBuilder}.uispec.details" 
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            details: {
-                                                options: {
-                                                    confirmation: {
-                                                        options: {
-                                                            confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
                                                         }
                                                     }
                                                 }

@@ -57,6 +57,7 @@ cspace = cspace || {};
         
         fluid.initDependents(that);        
         bindEventHandlers(that);
+        that.events.afterSetup.fire(that);
         return that;
     };
     
@@ -116,6 +117,9 @@ cspace = cspace || {};
                     addRelations: "{relatedRecordsList}.options.addRelations"
                 }
             }
+        },
+        events: {
+            afterSetup: null  
         },
         addRelations: cspace.relationManager.proveAddRelations,
         recordListAfterSelectHandler: cspace.recordList.afterSelectHandlerDefault,

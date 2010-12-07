@@ -40,14 +40,19 @@ cspace = cspace || {};
     };
     
     var bindEventHandlers = function (that) {
-        that.locate("addButton").click(function (e) {
-            if (that.model.csid) {
-                that.locate("messageContainer", "body").hide();
-                that.searchToRelateDialog.dlg.dialog("open");
-            } else {
-                cspace.util.displayTimestampedMessage(that.dom, that.options.strings.pleaseSaveFirst);
-            }
-        });
+        if (that.showAddButton.visible) {
+            that.locate("addButton").click(function (e) {
+                if (that.model.csid) {
+                    that.locate("messageContainer", "body").hide();
+                    that.searchToRelateDialog.open();
+                } else {
+                    cspace.util.displayTimestampedMessage(that.dom, that.options.strings.pleaseSaveFirst);
+                }
+            });
+        }
+        else {
+            that.locate("addButton").hide();
+        }
         that.dataContext.events.afterAddRelations.addListener(updateRelations(that.options.applier, that.model));
     };
     
@@ -58,8 +63,9 @@ cspace = cspace || {};
                 
         that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
         that.addRelations = that.options.addRelations(that);
+        that.dialogNode = that.locate("searchDialog"); // since blasted jQuery UI dialog will move it out of our container
         
-        fluid.initDependents(that);        
+        fluid.initDependents(that);
         bindEventHandlers(that);
         return that;
     };
@@ -72,15 +78,20 @@ cspace = cspace || {};
         return updateRelations(relationManager.options.applier, relationManager.model);
     };
     
-    cspace.relationManager.localsearchToRelateDialog = function (container, options) {
-        var that = fluid.initLittleComponent("cspace.relationManager.localsearchToRelateDialog", options);
+    cspace.relationManager.localSearchToRelateDialog = function (container, options) {
+        var that = fluid.initLittleComponent("cspace.relationManager.localSearchToRelateDialog", options);
         return cspace.searchToRelateDialog(container, that.options);
     };
     
-    fluid.defaults("cspace.relationManager.localsearchToRelateDialog", {
-        search: {
-            options: {
-                searchUrlBuilder: cspace.search.localSearchUrlBuilder
+    // TODO: Approach is interesting but not correct - has fragile dependence on exact 
+    // options structure. UrlBuilder itself needs to be IoC-resolved directly, as with 
+    // specs 
+    fluid.defaults("cspace.relationManager.localSearchToRelateDialog", {
+        components: {
+            search: {
+                options: {
+                    searchUrlBuilder: cspace.search.localSearchUrlBuilder
+                }
             }
         },
         mergePolicy: {
@@ -89,12 +100,20 @@ cspace = cspace || {};
     });
     
     fluid.demands("cspace.searchToRelateDialog", ["cspace.localData", "cspace.relationManager"], {
-        funcName: "cspace.relationManager.localsearchToRelateDialog",
-        args: ["{relationManager}.container", fluid.COMPONENT_OPTIONS]
+        funcName: "cspace.relationManager.localSearchToRelateDialog",
+        args: ["{relationManager}.dom.searchDialog", fluid.COMPONENT_OPTIONS]
     });
     
     fluid.demands("cspace.searchToRelateDialog", "cspace.relationManager", 
-        ["{relationManager}.container", fluid.COMPONENT_OPTIONS]);
+        ["{relationManager}.dom.searchDialog", fluid.COMPONENT_OPTIONS]);
+
+    cspace.relationManager.permissionResolver = function(options) {
+        var that = fluid.initLittleComponent("cspace.relationManager.permissionResolver", options);
+        options.target = that.options.recordTypeManager.recordTypesForCategory(options.recordClass);
+        that.visible = cspace.permissions.resolve(options);
+        return that;
+    };
+
     
     fluid.defaults("cspace.relationManager", {
         components: {
@@ -109,7 +128,20 @@ cspace = cspace || {};
                     related: "{relationManager}.options.related",
                     primary: "{relationManager}.options.primary"
                 }
-            }
+            },
+    // TODO: this should really not be a component but in fact it requires access to 
+    // already merged option values and so cannot use an expander - also, the 
+    // indirection on recordClass cannot be performed directly via IoC
+            showAddButton: {
+               type:  "cspace.relationManager.permissionResolver",
+               options: {
+                   recordTypeManager: "{recordTypeManager}",
+                   resolver: "{permissionsResolver}",
+                   permission: "update",
+                   method: "OR",
+                   recordClass: "{relationManager}.options.related"
+               },
+           }
         },
         dataContext: {
             type: "cspace.dataContext",
@@ -119,11 +151,13 @@ cspace = cspace || {};
         },
         addRelations: cspace.relationManager.provideAddRelations,
         selectors: {
+            searchDialog: ".csc-search-related-dialog",
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
             timestamp: ".csc-timestamp",
             addButton: ".csc-add-related-record-button"
         },
+
         strings: {
             pleaseSaveFirst: "Please save the record you are creating before trying to relate other records to it."
         },

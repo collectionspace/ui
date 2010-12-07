@@ -53,8 +53,7 @@ cspace = cspace || {};
             searchBox: {
                 type: "cspace.searchBox",
                 options: {
-                    permissions: "{header}.options.permissions",
-                    schema: "{header}.options.schema"
+                    related: "all"
                 }
             }
         },

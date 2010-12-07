@@ -64,15 +64,6 @@ var adminUsersTester = function () {
                             }
                         }
                     }
-                },
-                details: {
-                    options: {
-                        confirmation: {
-                            options: {
-                                confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -86,13 +77,13 @@ var adminUsersTester = function () {
         invalidPassword: "123"
     };
 
-    var adminUsersTest = new jqUnit.TestCase("AdminUsers Tests", function () {
-        cspace.util.isTest = true;
+    var bareAdminUsersTest = new jqUnit.TestCase("AdminUsers Tests", function () {
         jQuery(".ui-dialog").detach();
-        adminUsersTest.fetchTemplate("../../main/webapp/html/administration.html", ".csc-users-userAdmin");
+        bareAdminUsersTest.fetchTemplate("../../main/webapp/html/administration.html", ".csc-users-userAdmin");
         testOpts = {};
         fluid.model.copyModel(testOpts, baseTestOpts);
     });
+    var adminUsersTest = cspace.tests.testEnvironment({testCase: bareAdminUsersTest});
     
     var changeDetails = function (adminUsersSelectors, testDataCreateUser, confPassword) {
         jQuery(adminUsersSelectors.email).val(testDataCreateUser.email).change();
@@ -274,163 +265,161 @@ var adminUsersTester = function () {
         stop();
     });
     
-    var setupConfirmation = function (reAfterRenderListener) {
+    var setupConfirmation = function (testFunc) {
         var adminUsers;
-        testOpts.userListEditor.options.details.options.confirmation.options.listeners = {
-            afterFetchTemplate: function () {
-                var re = adminUsers.userListEditor.details;
-                re.events.afterRender.addListener(reAfterRenderListener(re, adminUsers), "initialSelect");
-                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
-            }
-        };
+        var waitMultiple;
+        fluid.log("Begin setupConfirmation");
+        var callback = function() {
+            fluid.log("Final test callback firing"); 
+            var re = adminUsers.userListEditor.details;
+            waitMultiple.clear(function() {
+                testFunc(re, adminUsers);
+                });
+            delete waitMultiple.waitSet["pageReady"];
+            $(adminUsers.userListEditor.list.locate("row")[2]).click();
+        }; 
+        var waitMultiple = cspace.util.waitMultiple(
+            {outerKey: "pageReady",
+             callback: callback,
+             once: true}); 
+        var testOpts = fluid.copy(baseTestOpts);
+        fluid.model.setBeanValue(testOpts, "userListEditor.options.listeners", {
+            pageReady: waitMultiple.getListener("pageReady")
+        });
+        fluid.model.setBeanValue(testOpts, "userListEditor.options.details.options.listeners", {
+            afterRender: waitMultiple.getListener("detailsRendered")
+        });
+        // This is currently ok since there is at least ONE async call e.g. for userListEditor
         adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
         stop();
     };
     
     adminUsersTest.test("Confirmation", function () {
         setupConfirmation(function (re, adminUsers) {
-            return function () {
-                adminUsers.userListEditor.details.events.afterRender.removeListener("initialSelect");
-                jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());
-                jqUnit.notVisible("Confiration dialog is invisible initially", adminUsers.userListEditor.details.confirmation.dlg);
-                adminUsers.locate("userName").val("New Name").change();
-                adminUsers.userListEditor.details.confirmation.events.afterOpen.addListener(function () {
-                    jqUnit.isVisible("Confiration dialog should now be visible", adminUsers.userListEditor.details.confirmation.dlg);
-                });
-                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
-                start();
-            };
+            jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());
+            jqUnit.notVisible("Confiration dialog is invisible initially", adminUsers.userListEditor.details.confirmation.dlg);
+            adminUsers.locate("userName").val("New Name").change();
+            adminUsers.userListEditor.details.confirmation.events.afterOpen.addListener(function () {
+                jqUnit.isVisible("Confirmation dialog should now be visible", adminUsers.userListEditor.details.confirmation.dlg);
+            });
+            jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
+            start();
         });
     });
     
     adminUsersTest.test("Confirmation cancel", function () {
         setupConfirmation(function (re, adminUsers) {
-            return function () {
-                adminUsers.userListEditor.details.events.afterRender.removeListener("initialSelect");                    
-                adminUsers.locate("userName").val("New Name").change();
-                adminUsers.userListEditor.details.confirmation.events.afterOpen.addListener(function () {
-                    adminUsers.userListEditor.details.confirmation.events.afterClose.addListener(function () {
-                        jqUnit.notVisible("Confiration dialog is now invisible", adminUsers.userListEditor.details.confirmation.dlg);
-                        jqUnit.assertEquals("User Name should still be", "New Name", adminUsers.locate("userName").val());
-                    });
-                    adminUsers.userListEditor.details.confirmation.locate("cancel", adminUsers.userListEditor.details.confirmation.dlg).click();                        
+            adminUsers.userListEditor.details.events.afterRender.removeListener("initialSelect");                    
+            adminUsers.locate("userName").val("New Name").change();
+            adminUsers.userListEditor.details.confirmation.events.afterOpen.addListener(function () {
+                adminUsers.userListEditor.details.confirmation.events.afterClose.addListener(function () {
+                    jqUnit.notVisible("Confirmation dialog is now invisible", adminUsers.userListEditor.details.confirmation.dlg);
+                    jqUnit.assertEquals("User Name should still be", "New Name", adminUsers.locate("userName").val());
                 });
-                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
-                start();
-            };
-        });
+                adminUsers.userListEditor.details.confirmation.locate("cancel", adminUsers.userListEditor.details.confirmation.dlg).click();                        
+            });
+            jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
+            start();
+         });
     });
     
     adminUsersTest.test("Confirmation proceed", function () {
         setupConfirmation(function (re, adminUsers) {
-            return function () {
-                re.events.afterRender.removeListener("initialSelect");                    
-                adminUsers.locate("userName").val("New Name").change();
-                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
-                re.events.afterRender.addListener(function () {
-                    jqUnit.notVisible("Confiration dialog is now invisible", re.confirmation.dlg);
-                    jqUnit.assertEquals("User Name should now be", "Megan Forbes", adminUsers.locate("userName").val());
-                    start();
-                });
-                re.confirmation.locate("proceed", re.confirmation.dlg).click();
-            };
+            re.events.afterRender.removeListener("initialSelect");                    
+            adminUsers.locate("userName").val("New Name").change();
+            jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
+            re.events.afterRender.addListener(function () {
+                jqUnit.notVisible("Confirmation dialog is now invisible", re.confirmation.dlg);
+                jqUnit.assertEquals("User Name should now be", "Megan Forbes", adminUsers.locate("userName").val());
+                start();
+            });
+            re.confirmation.locate("proceed", re.confirmation.dlg).click();
         });
     });
     
     adminUsersTest.test("Confirmation delete", function () {
         setupConfirmation(function (re) {
-            return function () {
-                re.events.afterRender.removeListener("initialSelect");
-                re.remove();
-                jqUnit.assertEquals("Confirmation Text Should Say", "Delete this record?", re.confirmation.locate("message:", re.confirmation.dlg).text());
-                jqUnit.isVisible("Delete button should be visible", re.confirmation.locate("act", re.confirmation.dlg));
-                jqUnit.isVisible("Cancel button should be visible", re.confirmation.locate("cancel", re.confirmation.dlg));
-                jqUnit.assertEquals("Proceed / Don't Save button should not be rendered", 0, re.confirmation.locate("proceed", re.confirmation.dlg).length);
-                start();
-            };
+            re.events.afterRender.removeListener("initialSelect");
+            re.remove();
+            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this record?", re.confirmation.locate("message:", re.confirmation.dlg).text());
+            jqUnit.isVisible("Delete button should be visible", re.confirmation.locate("act", re.confirmation.dlg));
+            jqUnit.isVisible("Cancel button should be visible", re.confirmation.locate("cancel", re.confirmation.dlg));
+            jqUnit.assertEquals("Proceed / Don't Save button should not be rendered", 0, re.confirmation.locate("proceed", re.confirmation.dlg).length);
+            start();
         });
     });
     
     adminUsersTest.test("Confirmation delete + cancel", function () {
         setupConfirmation(function (re, adminUsers) {
-            return function () {
-                re.events.afterRender.removeListener("initialSelect");
-                re.remove();
-                jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());
-                jqUnit.isVisible("Confirmation Dialog is now visible", jQuery(".csc-confirmationDialog"));
-                re.confirmation.locate("cancel", re.confirmation.dlg).click();
-                jqUnit.notVisible("Confirmation Dialog is now invisible", jQuery(".csc-confirmationDialog"));
-                jqUnit.assertEquals("Selected username is still", "Anastasia Cheethem", adminUsers.locate("userName").val());
-                start();
-            };
+            re.events.afterRender.removeListener("initialSelect");
+            re.remove();
+            jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());
+            jqUnit.isVisible("Confirmation Dialog is now visible", jQuery(".csc-confirmationDialog"));
+            re.confirmation.locate("cancel", re.confirmation.dlg).click();
+            jqUnit.notVisible("Confirmation Dialog is now invisible", jQuery(".csc-confirmationDialog"));
+            jqUnit.assertEquals("Selected username is still", "Anastasia Cheethem", adminUsers.locate("userName").val());
+            start();
         });
     });
     
     adminUsersTest.test("Confirmation delete + proceed", function () {
         setupConfirmation(function (re, adminUsers) {
-            return function () {
-                re.events.afterRender.removeListener("initialSelect");
-                re.remove();
-                jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());                        
-                re.options.dataContext.events.afterRemove.addListener(function () {                        
-                    jqUnit.assertTrue("Successfully executed remove", true);
-                    jqUnit.notVisible("Confirmation Dialog is now invisible", jQuery(".csc-confirmationDialog"));
-                    jqUnit.notVisible("No record selected", adminUsers.locate("userName"));
-                    start();
-                });
-                re.confirmation.locate("act", re.confirmation.dlg).click();
-            };
+            re.events.afterRender.removeListener("initialSelect");
+            re.remove();
+            jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());                        
+            re.options.dataContext.events.afterRemove.addListener(function () {                        
+                jqUnit.assertTrue("Successfully executed remove", true);
+                jqUnit.notVisible("Confirmation Dialog is now invisible", jQuery(".csc-confirmationDialog"));
+                jqUnit.notVisible("No record selected", adminUsers.locate("userName"));
+                start();
+            });
+            re.confirmation.locate("act", re.confirmation.dlg).click();
         });
     });
     
     adminUsersTest.test("Confirmation navigate + delete", function () {
         setupConfirmation(function (re, adminUsers) {
-            return function () {
-                re.events.afterRender.removeListener("initialSelect");                    
-                adminUsers.locate("userName").val("New Name").change();
-                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
-                jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.locate("message:", re.confirmation.dlg).eq(0).text());
-                jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.locate("message:", re.confirmation.dlg).eq(1).text());
-                re.confirmation.close();
-                re.remove();
-                jqUnit.assertEquals("Confirmation Text Should Say", "Delete this record?", re.confirmation.locate("message:", re.confirmation.dlg).text());
-                start();
-            };
+            re.events.afterRender.removeListener("initialSelect");                    
+            adminUsers.locate("userName").val("New Name").change();
+            jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
+            jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.locate("message:", re.confirmation.dlg).eq(0).text());
+            jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.locate("message:", re.confirmation.dlg).eq(1).text());
+            re.confirmation.close();
+            re.remove();
+            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this record?", re.confirmation.locate("message:", re.confirmation.dlg).text());
+            start();
         });
     });
     
     adminUsersTest.test("Confirmation delete + navigate (CSPACE-2646)", function () {
         setupConfirmation(function (re, adminUsers) {
-            return function () {
-                re.events.afterRender.removeListener("initialSelect");                    
-                re.remove();
-                jqUnit.assertEquals("After delete clicked, confirmation text should say", "Delete this record?", re.confirmation.locate("message:", re.confirmation.dlg).text());
-                re.confirmation.close();
-                adminUsers.locate("userName").val("New Name").change();
-                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
-                jqUnit.assertEquals("Delete cancelled, record edited, attempt to edit other user, confirmation text should say", "You are about to leave this record.", re.confirmation.locate("message:", re.confirmation.dlg).eq(0).text());
-                jqUnit.assertEquals("Confirmation text should also say", "Save Changes?", re.confirmation.locate("message:", re.confirmation.dlg).eq(1).text());                    
-                start();
-            };
+            re.events.afterRender.removeListener("initialSelect");                    
+            re.remove();
+            jqUnit.assertEquals("After delete clicked, confirmation text should say", "Delete this record?", re.confirmation.locate("message:", re.confirmation.dlg).text());
+            re.confirmation.close();
+            adminUsers.locate("userName").val("New Name").change();
+            jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
+            jqUnit.assertEquals("Delete cancelled, record edited, attempt to edit other user, confirmation text should say", "You are about to leave this record.", re.confirmation.locate("message:", re.confirmation.dlg).eq(0).text());
+            jqUnit.assertEquals("Confirmation text should also say", "Save Changes?", re.confirmation.locate("message:", re.confirmation.dlg).eq(1).text());                    
+            start();
         });
     });
     
     adminUsersTest.test("No Confirmation on navigation away after canceled changes", function () {
         setupConfirmation(function (re, adminUsers) {
-            return function () {
-                re.events.afterRender.removeListener("initialSelect");                    
-                adminUsers.locate("userName").val("New Name").change();
-                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
-                jqUnit.isVisible("Navigating without cancelling, confirmation should be visible", jQuery(".csc-confirmationDialog"));
-                jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.locate("message:", re.confirmation.dlg).eq(0).text());
-                jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.locate("message:", re.confirmation.dlg).eq(1).text());
-                re.confirmation.close();
-                re.locate("cancel").click();                    
-                jqUnit.notVisible("After cancelling, user details should now be hidden", adminUsers.userListEditor.locate("details"));
-                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
-                jqUnit.notVisible("Navigating away, there should be no visible confirmation", jQuery(".csc-confirmationDialog"));
-                start();
-            };
+            re.events.afterRender.removeListener("initialSelect");                    
+            adminUsers.locate("userName").val("New Name").change();
+            jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
+            jqUnit.isVisible("Navigating without cancelling, confirmation should be visible", re.confirmation.dlg);
+            jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.locate("message:", re.confirmation.dlg).eq(0).text());
+            jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.locate("message:", re.confirmation.dlg).eq(1).text());
+            re.confirmation.close();
+            jqUnit.notVisible("Dialog should close", re.confirmation.dlg);
+            re.locate("cancel").click();                    
+            jqUnit.notVisible("After cancelling, user details should now be hidden", adminUsers.userListEditor.locate("details"));
+            jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
+            jqUnit.notVisible("Navigating away, there should be no visible confirmation", re.confirmation.dlg);
+            start();
         });
     });
     

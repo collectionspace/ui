@@ -40,3 +40,57 @@ fluid.demands("cspace.urlExpander", ["cspace.localData", "cspace.test"],
         }
     }
 });
+
+cspace.tests.filterToKeys = function(toFilter, keyHolder) {
+    return fluid.remove_if($.extend({}, toFilter), function(value, key) {
+        return !keyHolder[key];
+    });
+};
+
+cspace.tests.testEnvironment = function(options) {
+    var that = fluid.initLittleComponent("cspace.tests.testEnvironment", options);
+    that.environment = {};
+
+    var withResources = function(callback) {
+        fluid.fetchResources({}, callback, {amalgamateClasses: ["fastResource", "slowTemplate", "fastTemplate"]});
+    };
+    withResources(function() {
+        fluid.initDependents(that);
+        that.environment = cspace.tests.filterToKeys(that, that.options.components);
+    });
+
+    that.test = function(message, func) {
+        withResources(function() {
+            that.options.testCase.test(message, 
+                function() {fluid.withEnvironment(that.environment, func)}
+                );
+        });
+    };
+    
+    return that;
+};
+
+/* Automatically construct a "test harness environment" composed from a set of
+subcomponents, in order to properly contextualise tests which require environmental
+resolution, without bringing in the whole of pageBuilder as a component root */ 
+
+fluid.defaults("cspace.tests.testEnvironment", {
+    mergePolicy: {
+        permissions: "replace"  
+    },
+    permissions: cspace.tests.sampleUserPerms,
+    components: {
+        permissionsResolver: {
+            type: "cspace.permissions.resolver",
+            options: {
+                permissions: "{testEnvironment}.options.permissions"
+            }
+        },
+        recordTypeManager: {
+            type: "cspace.recordTypeManager"
+        },
+        globalBundle: {
+            type: "cspace.globalBundle",
+        } 
+    }
+});

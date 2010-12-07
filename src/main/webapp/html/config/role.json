@@ -19,12 +19,7 @@
         "role": {
             "type": "cspace.adminRoles",
             "options": {
-                "expander": {
-                    "type": "fluid.expander.noexpand",
-                    "tree": {
-                        "uispec": "{pageBuilder}.uispec"
-                    }
-                },
+                "uispec": "{pageBuilder}.uispec",
                 "roleListEditor": {
                     "options": {
                         "dataContext": {

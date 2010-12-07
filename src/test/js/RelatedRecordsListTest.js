@@ -32,7 +32,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }]
     };
 
-    var relatedRecordsList;    
     var uispec;
     $.ajax({
         async: false,
@@ -44,79 +43,54 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
     });
     
-    var relatedRecordsListTest = new jqUnit.TestCase("RelatedRecordsList Tests", function () {
-        cspace.util.isTest = true;
-        relatedRecordsListTest.fetchTemplate("../../main/webapp/html/right-sidebar.html", ".csc-right-sidebar");
+    var bareRelatedRecordsListTest = new jqUnit.TestCase("RelatedRecordsList Tests", function () {
+        bareRelatedRecordsListTest.fetchTemplate("../../main/webapp/html/right-sidebar.html", ".csc-right-sidebar");
     }, function () {
         $(".ui-dialog").detach();
     });
     
+    var relatedRecordsListTest = cspace.tests.testEnvironment({testCase: bareRelatedRecordsListTest});
+    
     var createRelatedRecordsList = function (model, primary, related, opts, inApplier) {
-        applier = inApplier || fluid.makeChangeApplier(model);
+        var applier = inApplier || fluid.makeChangeApplier(model);
         var defaultOpts = {
             related: related,
             primary: primary,
             model: model,
             applier: applier,
             uispec: uispec.relatedCataloging,
-            components: {
-                relationManager: {
-                    options: {
-                        components: {
-                            searchToRelateDialog: {
-                                options: {
-                                    templates: {
-                                        dialog: "../../main/webapp/html/searchToRelate.html"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         };
         fluid.merge(null, defaultOpts, opts);
-        relatedRecordsList = cspace.relatedRecordsList(".csc-related-cataloging", defaultOpts);
+        var relatedRecordsList = cspace.relatedRecordsList(".csc-related-cataloging", defaultOpts);
     };
     
     var configureSTRDialog = function (handler, primary, related) {
         var opts = {
-            components: {
-                relationManager: {
-                    options: {
-                        components: {
-                            searchToRelateDialog: {
-                                options: {
-                                    listeners: {
-                                        afterRender: handler
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+            listeners: {
+                afterSetup: handler
             }
         };
         createRelatedRecordsList(testModel, primary, related, opts);
         stop();
     };
     
-    var basicConfigureTest = function (visibility, related) {
-        configureSTRDialog(function () {
+    var basicConfigureTest = function (sel, condition, related) {
+        configureSTRDialog(function (relatedRecordsList) {
             relatedRecordsList.relationManager.locate("addButton").click();
             jqUnit.isVisible("Search to relate Dialog is visible after click", $(".ui-dialog"));
-            jqUnit[visibility]("Record-type drop-down is " + visibility + " (search should be limited to loanout)", relatedRecordsList.relationManager.searchToRelateDialog.options.selectors.recordTypeSelector);
-            relatedRecordsList.relationManager.searchToRelateDialog.dlg.dialog("close");
+            jqUnit.assertEquals("Record-type drop-down is " +sel + " - " + condition + " (search should be limited to loanout)", 
+                condition, relatedRecordsList.relationManager.searchToRelateDialog.locate("recordType").is(sel));
+            relatedRecordsList.relationManager.searchToRelateDialog.close();
             jqUnit.notVisible("Search to relate Dialog is invisible after close", $(".ui-dialog"));
             start();
         }, "cataloging", related);
     };
 
     relatedRecordsListTest.test("Configure SearchToRelate Dialog with correct target record type (loanout)", function () {
-        basicConfigureTest("notVisible", "loanout");
+        basicConfigureTest(":disabled", true, "loanout");
     });
 
     relatedRecordsListTest.test("Configure SearchToRelate Dialog for all procedure types (using 'procedures' configuration)", function () {
-        basicConfigureTest("isVisible", "procedures");
+        basicConfigureTest(":disabled", false, "procedures");
     });
 })(jQuery);

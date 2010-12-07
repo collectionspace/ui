@@ -73,20 +73,25 @@ cspace = cspace || {};
     
     cspace.pageSpecManager = function (pageSpecs) {
         var texts = {};
-        function attemptApply() {
-            fluid.each(texts, function (entry, key) {
-                if (!entry.applied) {
-                    var spec = pageSpecs[key];
-                    var target = $(spec.targetSelector);
-                    if (target.length > 0) {
-                        inject(entry.text, spec.templateSelector, target);
-                        entry.applied = true;
+        function attemptApply() { // Further soundness in correcting FLUID-2792
+            var anyApplied = true;
+            while (anyApplied) {
+                anyApplied = false;
+                fluid.each(texts, function (entry, key) {
+                    if (!entry.applied) {
+                        var spec = pageSpecs[key];
+                        var target = $(spec.targetSelector);
+                        if (target.length > 0) {
+                            inject(entry.text, spec.templateSelector, target);
+                            entry.applied = true;
+                            anyApplied = true;
+                        }
+                        else {
+                            fluid.log("Deferring application to selector " + spec.targetSelector);
+                        }
                     }
-                    else {
-                        fluid.log("Deferring application to selector " + spec.targetSelector);
-                    }
-                }
-            });
+                });
+            }
         }
         var that = {
             makeCallback: function (spec, key) {
@@ -238,6 +243,18 @@ cspace = cspace || {};
                     schema: "{pageBuilder}.schema",
                     permissions: "{pageBuilder}.permissions"
                 }
+            },
+            permissionsResolver: {
+                type: "cspace.permissions.resolver",
+                options: {
+                    permissions: "{pageBuilder}.permissions"
+                }
+            },
+            recordTypeManager: {
+                type: "cspace.recordTypeManager"
+            },
+            globalBundle: {
+                type: "cspace.globalBundle",
             }
         },
         schema: [

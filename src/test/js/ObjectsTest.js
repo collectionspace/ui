@@ -49,61 +49,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             }
                         },
                         templateUrlPrefix: "../../main/webapp/html/",
-                        components: {
-                            recordEditor: {
-                                options: {
-                                    confirmation: {
-                                        options: {
-                                            confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
-                                        }
-                                    }
-                                }
-                            },
-                            sidebar: {
-                                options: {
-                                    components: {
-                                        cataloging: {
-                                            options: {
-                                                components: {
-                                                    relationManager: {
-                                                        options: {
-                                                            components: {
-                                                                searchToRelateDialog: {
-                                                                    options: {
-                                                                        templates: {
-                                                                            dialog: "../../main/webapp/html/searchToRelate.html"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        procedures: {
-                                            options: {
-                                                components: {
-                                                    relationManager: {
-                                                        options: {
-                                                            components: {
-                                                                searchToRelateDialog: {
-                                                                    options: {
-                                                                        templates: {
-                                                                            dialog: "../../main/webapp/html/searchToRelate.html"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             }

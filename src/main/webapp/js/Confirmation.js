@@ -94,41 +94,25 @@ cspace = cspace || {};
         
         return tree;
     };
-    
-    var setupConfirmation = function (that) {
-        var resources = {
-            confirmation: {
-                href: that.options.confirmationTemplateUrl,
-                cutpoints: fluid.renderer.selectorsToCutpoints(that.options.selectors, {})
-            }
-        };
-        fluid.fetchResources(resources, function () {
-            that.templates = fluid.parseTemplates(resources, ["confirmation"], {});
-            that.dlg = $("<div></div>", that.container[0].ownerDocument)
-                .dialog({
-                    autoOpen: false,
-                    modal: true,
-                    title: that.options.strings.confirmationTitle
-                });
-            that.refreshView();
-            that.events.afterFetchTemplate.fire();
-        });
-    };
 
     cspace.confirmation = function (container, options) {
-        var that = fluid.initView("cspace.confirmation", container, options);
+        var that = fluid.initRendererComponent("cspace.confirmation", container, options);
         
         that.updateEventListeners = function (action) {
             updateHandlerForEvents(action, that.options.actionSuccessEvents, that.successHandler, "successHandler");
             updateHandlerForEvents(action, that.options.actionErrorEvents, that.close, "errorHandler");
         };
         
+        that.dlg = $("<div></div>", that.container[0].ownerDocument).dialog({
+            autoOpen: false,
+            modal: true,
+            title: that.options.strings.confirmationTitle
+        });
+        
         that.refreshView = function () {
-            fluid.reRender(that.templates, that.dlg, buildTree(that.options.strings, that.options.styles, that.options.enableButtons), {
-                messageLocator: fluid.messageLocator(that.options.strings, fluid.stringTemplate)
-            });
+            that.renderer.refreshView();
             bindEvents(that);
-            that.events.afterRender.fire();
+            that.events.afterRender.fire(that);
         };
         
         that.close = function () {
@@ -141,8 +125,18 @@ cspace = cspace || {};
             that.dlg.dialog("open");
         };
         
-        setupConfirmation(that);
+        that.refreshView();
         return that;
+    };
+    
+    cspace.confirmation.getDialogGetter = function(that) {
+        return function() {
+            return that.dlg;
+        }
+    };
+    
+    cspace.confirmation.produceTree = function(that) {
+        return buildTree(that.options.strings, that.options.styles, that.options.enableButtons);
     };
     
     cspace.confirmation.defaultSuccessHandlerCreator = function (confirmation, options) {
@@ -165,6 +159,15 @@ cspace = cspace || {};
     fluid.defaults("cspace.confirmation", {
         successHandlerCreator: cspace.confirmation.defaultSuccessHandlerCreator,
         selectors: {
+            dialog: { // This shenanigans is necessary since right now the DOM binder is specified
+            // to accept only a context-free function, and the dialog markup will not be created until
+            // after initRendererFunction returns. This could be resolved by means of the "ginger world".
+                expander: {
+                    type: "fluid.deferredCall",
+                    func: "cspace.confirmation.getDialogGetter",
+                    args: ["{confirmation}"]
+                }
+            },
             cancel: ".csc-confirmationDialogButton-cancel",
             proceed: ".csc-confirmationDialogButton-proceed",
             act: ".csc-confirmationDialogButton-act",
@@ -173,6 +176,7 @@ cspace = cspace || {};
             // with repeating rows and message bundle at the same time.
             "message:": ".csc-confirmationDialog-text"
         },
+        selectorsToIgnore: "dialog",
         enableButtons: ["act", "proceed", "cancel"],    // selector names
         strings: {
             primaryMessage: "You are about to leave this record.",
@@ -186,18 +190,30 @@ cspace = cspace || {};
             proceedAlt: "proceed without saving",
             closeAlt: "close dialog"
         },
+        rendererFnOptions: {
+            rendererTargetSelector: "dialog",
+            noexpand: true, // TODO: These two options are provisional in Infusion 1.3
+        },
+        produceTree: cspace.confirmation.produceTree,
         events: {
             afterRender: null,
             afterOpen: null,
             afterClose: null,
-            afterFetchTemplate: null
         },
         styles: {
             cancel: "cs-confirmationDialogButton-cancel",
             proceed: "cs-confirmationDialogButton-proceed",
             act: "cs-confirmationDialogButton-act"
         },
-        confirmationTemplateUrl: "../html/Confirmation.html"
+        resources: {
+            template: cspace.prolepticResourceSpec({
+                fetchClass: "slowTemplate",
+                url: "%webapp/html/Confirmation.html"
+            })
+        }
     });
+    
+    fluid.fetchResources.primeCacheFromResources("cspace.confirmation");
+    
     
 })(jQuery, fluid);

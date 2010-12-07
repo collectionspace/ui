@@ -92,7 +92,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     findEditTests.test("Use the local search url option to override the default search url", function () {
         findEditUrlTest({
             searchUrlBuilder: cspace.search.localSearchUrlBuilder
-        }, "./data/intake/search/list.json");
+        }, "../../main/webapp/html/data/intake/search/list.json");
     });
     
     findEditTests.test("FindEdit URL through form inputs", function () {

@@ -16,12 +16,7 @@ cspace.test = cspace.test || {};
 var searchBoxTester = function ($) {
     
     var container = "#main";
-    var schema = {
-        "recordlist": {
-            "default": ["person", "intake", "loanin", "loanout", "acquisition", "organization", "cataloging", "movement", "objectexit"],
-            "type": "array"
-        }
-    };
+
     var permissions = {
         "users": ["create", "read", "update", "delete", "list"],
         "person": [],
@@ -55,22 +50,21 @@ var searchBoxTester = function ($) {
         "notes": ["create", "read", "update", "delete", "list"]
     };
     
-    fluid.demands("cspace.searchBox", "cspace.test", [container, fluid.COMPONENT_OPTIONS]);
+    var bareSearchBoxTest = new jqUnit.TestCase("SearchBox Tests");
     
-    var searchBoxTest = new jqUnit.TestCase("SearchBox Tests");
+    var searchBoxTest = cspace.tests.testEnvironment(
+        {testCase: bareSearchBoxTest,
+         permissions: permissions
+        });
     
     var setupSearchBox = function (options) {
-        options = options || {};
-        fluid.merge(null, options, {
-            permissions: permissions,
-            schema: schema
-        });
-        return fluid.invoke("cspace.searchBox", [options]);
+        return cspace.searchBox(container, options);
     };
     
     searchBoxTest.test("Init and render", function () {
-        var searchBox = setupSearchBox();
+        var searchBox = setupSearchBox({related: "all"});
         searchBox.refreshView();
+        // 8 expected for 9 members of "all" category minus person which has no read permission
         jqUnit.assertEquals("SearchBox dropdown\'s number of recordTypes is equal to", 8, $("option", searchBox.locate("recordTypeSelect")).length);
         jqUnit.assertEquals("Label is ", "", searchBox.locate("recordTypeSelectLabel").text());
     });
