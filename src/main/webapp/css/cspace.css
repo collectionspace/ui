@@ -364,11 +364,10 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .list-table {border-bottom:0px solid #D2D0D0; background-color:#FFF;}
 .list-table .header {}
 .list-table  .content {padding:0 !important;}
-.list-table  table {font-size:12px; line-height:120%; /*background-color:#00FFFF;*/ border:0px solid #ADADAD; width:100%;}
+.list-table  table {font-size:12px; line-height:120%; background-color:#F0F5FB; border:none; width:100%;}
 .list-table  table thead tr td, .list-table  table thead tr th {font-size:11px; background-color:#EFEFEF; padding:4px 2px 3px 4px; border:none; color:#333; /*font-weight:bold;*/ border-bottom:2px solid #C7CACE;}
-.list-table  table {background-color:#F0F4FA;}
-.list-table  table tbody tr td {background-color:#FFF; padding: 5px 2px 4px 4px; border-bottom:0px solid #ADADAD; color:#000; vertical-align:top;}
-.list-table  table tbody tr td a, .list-table  table tbody tr td a:hover {color:#33669A;}
+.list-table  table tbody tr td {background-color:#F0F5FB; padding: 5px 2px 4px 4px; border-bottom:0px solid #ADADAD; color:#000; vertical-align:top;}
+.list-table  table tbody tr td a, .list-table  table tbody tr td a:hover {color:#F0FBF5;}
 .list-table  table tbody tr:hover td {/*background-color:#BFF4FF; cursor:pointer;*/ background-color:#C3D9E9;}
 .list-table  table tbody tr:hover td.csc-related-number {cursor:pointer;}
 .list-table  table tbody tr:hover td.csc-related-number:hover {text-decoration:underline;}
@@ -536,14 +535,14 @@ td .field-cal img, td .csc-calendar-button img {border:none;}
 .media-snapshot .content img {margin-left:auto; margin-right:auto; display:block;}
 .pivot-box .content, .pivot-box-content, .pivot-search-box-content, .pivot-users-box-content 
 	{font-size:10px; line-height:10px; color:#7F8083; /*border-bottom:1px solid #D2D0D0;*/ background-color:#fff;}
-.pivot-box .header, .pivot-search-box-header, .pivot-users-box-header 
+.pivot-box .header, .pivot-search-box-header, .pivot-users-box-header, .create-report .header
 	{background-color:#6F9ECD; /*padding:4px 4px 4px 8px;*/ color:#FFF; font-size:13px; cursor:pointer; height:13px; width:auto;}
 .pivot-box .header:hover, .pivot-box .header:focus {background-color:#438CC9;}
 .pivot-box .header.toggle {height:25px;}
 .header.static.button {height:21px; padding:4px 0 0px 4px;}
-.pivot-box.create-report {padding-left:10px; background-color:inherit; margin-bottom:20px;}
-.pivot-box.create-report .header {background-color:inherit; padding-bottom:6px; color:#4D4D4D; cursor:auto;}
-.pivot-box.create-report select {width:70%;}
+.create-report {padding-left:10px; background-color:inherit; margin-bottom:20px;}
+.create-report .header {background-color:#F0F5FB; padding-bottom:6px; color:#4D4D4D; cursor:auto;}
+.create-report select {width:70%;}
 .pivot-search-box-header, .pivot-users-box .header {cursor:auto;}
 .pivot-header {color:#606060;}
 .pivot-box-data {padding:3px 0 3px 8px;}
@@ -675,15 +674,20 @@ input.cs-repeatable-delete[disabled]:focus, table tr.csc-repeatable-repeat input
 #mycollectionspace .fl-container-1024-inner {background-color:#FFF;}
 	
 /* Person and Organization Authority specific stylings */
-#person .fl-container-1024-inner, #organization .fl-container-1024-inner {background-color:#F1EDF3;}
-#person #title-bar .record-type, #organization #title-bar .record-type {color:#551188;}
+#person .fl-container-1024-inner, #organization .fl-container-1024-inner {background-color:#F0F5FB;}
+#person #title-bar .record-type, #organization #title-bar .record-type {color:#58267F;}
 #person .menu-record a:hover, #person .menu-record a:focus,
 #organization .menu-record a:hover, #organization .menu-record a:focus {background:none repeat scroll 0 0 #330066; border:2px solid #330066;}
 #person .menu-record a, #organization .menu-record a  {color:#FFF; border:2px solid #551188; background-color:#551188;}
 #person .menu-record a.current, #person.menu-record li.selected a, 
 #organization .menu-record a.current, #organization .menu-record li.selected a {color:#551188; background-color:#FFF; border:2px solid #551188; border-bottom:2px solid #fff;}
-#organization #primaryTab, #person #primaryTab {border:2px solid #551188;}
+#organization #primaryTab, #person #primaryTab {border:2px solid #78449A;}
 #organization .menu-record a.inactive, #person .menu-record a.inactive {cursor:default; background-color:#CCC; border:2px solid #CCC; border-bottom:none;}
+#organization .pivot-box .header, #organization .pivot-search-box-header, #organization .pivot-users-box-header,
+#person .pivot-box .header, #person .pivot-search-box-header, #person .pivot-users-box-header {background-color:#78449A;}
+
+#organization .pivot-box .header:hover, #organization .pivot-search-box-header:hover, #organization .pivot-users-box-header:hover,
+#person .pivot-box .header:hover, #person .pivot-search-box-header:hover, #person .pivot-users-box-header:hover {background-color:#58267F;}
 
 /* Administration specific stylings */
 #administration .fl-container-1024-inner, #role .fl-container-1024-inner {background-color:#FFF;}
