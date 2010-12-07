@@ -68,38 +68,20 @@ cspace = cspace || {};
             $(value).addClass(styles["category" + (index + 1)]);
         });
     };
-    
-    // A public funtion that returns a defined array of strategies used by fluid.model.getBeanValue
-    // to resolve values in the model based on permissions and schema.
-    cspace.createNew.provideResolverGetConfig = function (options) {
-        return [cspace.util.censorWithSchemaStrategy(options)];
-    };
 
     // A public function that is called as createNew's refreshView method, renders the component and
     // binds the event handlers.
     cspace.createNew.refreshView = function (that) {
-        //We need to hide categories if we dont have permissions to any record in category
-        fluid.remove_if(that.model.categories, function (category, index) {
-            return fluid.model.getBeanValue(category, "arr", that.options.resolverGetConfig).length < 1;
-        });
-        
-        // No need to pass arguments to treeBuilder since it is an invoker.
-        var tree = that.treeBuilder();
-        // Render the component.
-        that.render(tree);
-        // Bind event handlers.
+        that.renderer.refreshView();
         bindEvents(that);
-        // Stiles
         cspace.createNew.stylefy(that);
     };
 
     // A public function that is called as createNew's treeBuilder method and builds a component tree.
-    cspace.createNew.modelToTree = function (model, options) {
-        var tree = {
-            //Fix all the text strings:           
-            //create new button:
+    cspace.createNew.produceTree = function () {
+        return {
             createButton: {
-                messagekey: "createButtonText"  // Key into the strings structure in component's options
+                messagekey: "createButtonText"
             },
             expander: {
                 repeatID: "category",
@@ -132,34 +114,53 @@ cspace = cspace || {};
                 }
             }
         };
-        return tree;
+    };
+    
+    cspace.createNew.censorModel = function (model, records) {
+        fluid.remove_if(model.categories, function (category, key) {
+            fluid.remove_if(category.arr, function (recordType, index) {
+                return $.inArray(recordType, records) < 0;
+            });
+            return category.arr.length < 1;
+        });
+        return model;
     };
     
     fluid.defaults("cspace.createNew", {
         model: {
-            // TDOD: need to get this model from the app layer!
-            categories: [ 
-            {
-                name: "catalogingCategory",
-                arr: ["cataloging"]
-            } , {
-                name: "proceduresCategory",
-                arr: [
-                "acquisition",
-                "intake",
-                "loanin",
-                "loanout",
-                "movement",
-                "objectexit"
-                ]
-            }, {
-                name: "vocabularyCategory",
-                arr: [
-                "person",
-                "organization"
-                ]
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.util.modelBuilder",
+                args: {
+                    related: "all",
+                    resolver: "{permissionsResolver}",
+                    recordTypeManager: "{recordTypeManager}",
+                    permission: "update",
+                    model: {
+                        categories: [{
+                            name: "catalogingCategory",
+                            arr: ["cataloging"]
+                        } , {
+                            name: "proceduresCategory",
+                            arr: [
+                            "acquisition",
+                            "intake",
+                            "loanin",
+                            "loanout",
+                            "movement",
+                            "objectexit"
+                            ]
+                        }, {
+                            name: "vocabularyCategory",
+                            arr: [
+                            "person",
+                            "organization"
+                            ]
+                        }]
+                    },
+                    callback: "cspace.createNew.censorModel"
+                }
             }
-            ]
         },
         mergePolicy: {
             model: "preserve"       // If the model is passed to the component, preserve the original 
@@ -209,13 +210,8 @@ cspace = cspace || {};
             //create new button:
             createButtonText: "Create"
         },
-        resolverGetConfig: null,    // An option used by initRendererComponent as a strategy when 
-        // resolving values in the model (through fluid.model.getBeanValue)
-        invokers: {                 // Component's public functions with arguments that are resolved at the time of invokation.
-            treeBuilder: {          // A public method that builds component tree for rendering.
-                funcName: "cspace.createNew.modelToTree",
-                args: ["{createNew}.model", "{createNew}.options"]
-            },
+        produceTree: cspace.createNew.produceTree,
+        invokers: {
             refreshView: {          // A public method that renders the component and binds event handlers anew.
                 funcName: "cspace.createNew.refreshView",
                 args: ["{createNew}"]
@@ -226,36 +222,15 @@ cspace = cspace || {};
             }
         },
         newRecordUrl: "%recordUrl.html",
-        resources: {                // A set of resources that will get resolved and fetched at some point during initialization.
-            template: {
-                expander: {
-                    type: "fluid.deferredInvokeCall",
-                    func: "cspace.specBuilder",
-                    args: {
-                        forceCache: true,
-                        fetchClass: "fastTemplate", // Class name that indicates to pageBuilder that the 
-                        // template is necessary on page's initialization.
-                        url: "%webapp/html/createNewTemplate.html"
-                    }
-                }
-            }
+        resources: {
+            template: cspace.prolepticResourceSpec({
+                fetchClass: "fastTemplate",
+                url: "%webapp/html/createNewTemplate.html"
+            })
         }
     });
     
-    fluid.demands("createNew", "cspace.pageBuilder", {
-        funcName: "cspace.createNew.provideCreateNew",
-        args: ["{pageBuilder}.options.selectors.createNew", fluid.COMPONENT_OPTIONS]
-    });
-
-    cspace.createNew.provideCreateNew = function (container, options) {
-        options.resolverGetConfig = options.resolverGetConfig ||
-            [cspace.util.censorWithSchemaStrategy({
-                permissions: options.permissions,
-                operations: ["create", "update", "delete"],
-                method: "OR"
-            })];
-        return cspace.createNew(container, options);
-    };
+    fluid.demands("createNew", "cspace.pageBuilder", ["{pageBuilder}.options.selectors.createNew", fluid.COMPONENT_OPTIONS]);
     
     // This funtction executes on file load and starts the fetch process of component's template.
     fluid.fetchResources.primeCacheFromResources("cspace.createNew");
