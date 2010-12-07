@@ -17,7 +17,7 @@ cspace = cspace || {};
 
     var setupTabList = function (that) {
         cspace.tabsList.fixupModel(that.model, that.options);
-        that.refreshView();
+        that.renderer.refreshView();
         cspace.tabsList.stylefy(that);
     };
     
@@ -47,13 +47,8 @@ cspace = cspace || {};
         tabLinks.filter(primaryHrefFilter).addClass(styles.primary).addClass(styles.current);
     };
     
-    cspace.tabsList.refreshView = function (that) {
-        var tree = that.treeBuilder();
-        that.render(tree);
-    };
-    
-    cspace.tabsList.modelToTree = function (model, options) {
-        var tree = {
+    cspace.tabsList.produceTree = function () {
+        return {
             expander: {
                 repeatID: "tab:",
                 tree: {
@@ -69,7 +64,13 @@ cspace = cspace || {};
                 controlledBy: "tabs"
             }
         };
-        return tree;
+    };
+    
+    cspace.tabsList.censorModel = function (model, records) {
+        fluid.remove_if(model.tabs, function (tab, key) {
+            return key !== "primary" && $.inArray(key, records) < 0;
+        });
+        return model;
     };
     
     fluid.defaults("cspace.tabsList", {
@@ -88,22 +89,36 @@ cspace = cspace || {};
             objectexit: "Object Exit"
         },
         model: {
-            tabs: {
-                primary: {
-                    href: "#primaryTab"
-                },
-                acquisition: {},
-                cataloging: {
-                    href: "%webapp/html/objectTabPlaceholder.html"
-                },
-                intake: {},
-                loanin: {},
-                loanout: {},
-                movement: {
-                    href: "%webapp/html/movementTab.html"
-                },
-                media: {},
-                objectexit: {}
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.util.modelBuilder",
+                args: {
+                    related: "all",
+                    resolver: "{permissionsResolver}",
+                    recordTypeManager: "{recordTypeManager}",
+                    permission: "list",
+                    model: {
+                        tabs: {
+                            primary: {
+                                href: "#primaryTab"
+                            },
+                            acquisition: {},
+                            cataloging: {
+                                href: "%webapp/html/objectTabPlaceholder.html"
+                            },
+                            intake: {},
+                            loanin: {},
+                            loanout: {},
+                            movement: {
+                                href: "%webapp/html/movementTab.html"
+                            },
+                            objectexit: {
+                                href: "%webapp/html/objectexitTab.html"
+                            }
+                        }
+                    },
+                    callback: "cspace.tabsList.censorModel"
+                }
             }
         },
         selectors: {
@@ -112,6 +127,7 @@ cspace = cspace || {};
             tabLink: ".csc-tabs-tab-link"
         },
         selectorsToIgnore: ["tabList"],
+        produceTree: cspace.tabsList.produceTree,
         styles: {
             tabList: "menu-record", // TODO: This needs to be moved to "cs-tabs-tabList" style,
             tab: "cs-tabs-tab",
@@ -120,29 +136,11 @@ cspace = cspace || {};
             current: "current", // TODO: This needs to be moved to "cs-tabs-current" style,
             inactive: "inactive" // TODO: This needs to be moved to "cs-tabs-inactive" style
         },
-        invokers: {
-            treeBuilder: {
-                funcName: "cspace.tabsList.modelToTree",
-                args: ["{tabsList}.model", "{tabsList}.options"]
-            },
-            refreshView: {
-                funcName: "cspace.tabsList.refreshView",
-                args: ["{tabsList}"]
-            }
-        },
-        resolverGetConfig: null,
         resources: {
-            template: {
-                expander: {
-                    type: "fluid.deferredInvokeCall",
-                    func: "cspace.specBuilder",
-                    args: {
-                        forceCache: true,
-                        fetchClass: "fastTemplate", 
-                        url: "%webapp/html/TabsTemplate.html"
-                    }
-                }
-            }
+            template: cspace.prolepticResourceSpec({
+                fetchClass: "fastTemplate",
+                url: "%webapp/html/TabsTemplate.html"
+            })
         }
     });
     
@@ -211,23 +209,8 @@ cspace = cspace || {};
                 }
             }
         });
-        return cspace.tabs.provideTabsList(container, options);
+        return cspace.tabsList(container, options);
     };
-    
-    cspace.tabs.provideTabsList = function (container, options) {
-        var that = fluid.initLittleComponent("cspace.tabs.provideTabsList", options);
-        that.options.resolverGetConfig = that.options.resolverGetConfig || [cspace.util.censorWithSchemaStrategy({
-            permissions: that.options.permissions,
-            operations: that.options.operations,
-            method: that.options.method
-        })];
-        return cspace.tabsList(container, that.options);
-    };
-    
-    fluid.defaults("cspace.tabs.provideTabsList", {
-        operations: ["create", "read", "update", "delete", "list"],
-        method: "OR"
-    });
     
     fluid.demands("tabsList", ["cspace.tabs", "cspace.person"], {
         funcName: "cspace.tabs.provideAuthorityTabsList",
@@ -239,18 +222,12 @@ cspace = cspace || {};
         args: ["{tabs}.dom.tabsList", fluid.COMPONENT_OPTIONS]
     });
     
-    fluid.demands("tabsList", ["cspace.tabs"], {
-        funcName: "cspace.tabs.provideTabsList",
-        args: ["{tabs}.dom.tabsList", fluid.COMPONENT_OPTIONS]
-    });
+    fluid.demands("tabsList", ["cspace.tabs"], ["{tabs}.dom.tabsList", fluid.COMPONENT_OPTIONS]);
 
     fluid.defaults("cspace.tabs", {
         components: {
             tabsList: {
-                type: "cspace.tabsList",
-                options: {
-                    permissions: "{tabs}.options.permissions"
-                }
+                type: "cspace.tabsList"
             }
         },
         invokers: {
@@ -272,7 +249,6 @@ cspace = cspace || {};
     
     fluid.demands("tabs", "cspace.pageBuilder", {
         args: ["{pageBuilder}.options.selectors.tabs", {
-            permissions: "{pageBuilder}.permissions",
             primaryRecordType: "{pageBuilder}.options.pageType",
             applier: "{pageBuilder}.applier",
             model: "{pageBuilder}.model"

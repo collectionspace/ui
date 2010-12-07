@@ -757,4 +757,9 @@ fluid.registerNamespace("cspace.util");
         });
     };
     
+    cspace.util.modelBuilder = function (options) {
+        var records = cspace.permissions.getPermissibleRelatedRecords(options.related, options.resolver, options.recordTypeManager, options.permission)
+        return fluid.invokeGlobalFunction(options.callback, [options.model, records])
+    };
+    
 })(jQuery, fluid);
