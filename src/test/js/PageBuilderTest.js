@@ -67,7 +67,8 @@ cspace = cspace || {};
                 relatedRecords: {
                     type: "cspace.testComponent3"
                 }
-            }
+            },
+            permissions: cspace.tests.sampleUserPerms
         };
         
         var optionsWithComponentsWithOptions = {
@@ -93,7 +94,8 @@ cspace = cspace || {};
                     }
                 }
             },
-            listeners: basicTestListeners
+            listeners: basicTestListeners,
+            permissions: cspace.tests.sampleUserPerms
         };
         
         var optionsWithComponentsWithIOCdemands = {
@@ -114,7 +116,8 @@ cspace = cspace || {};
             },
             option1: "September",
             option2: "Toronto",
-            listeners: basicTestListeners
+            listeners: basicTestListeners,
+            permissions: cspace.tests.sampleUserPerms
         };
         
         var optionsWithComponentsWithAdditionalParameters = {
@@ -129,7 +132,8 @@ cspace = cspace || {};
                     }
                 }
             },
-            listeners: basicTestListeners
+            listeners: basicTestListeners,
+            permissions: cspace.tests.sampleUserPerms
         };
         
         var optionsWithComponentsWithDemandInParameters = {
@@ -145,7 +149,8 @@ cspace = cspace || {};
                 }
             },
             pbOpt: "Jacob",
-            listeners: basicTestListeners
+            listeners: basicTestListeners,
+            permissions: cspace.tests.sampleUserPerms
         };
         
         cspace.testComponent1 = function (container, options) {
@@ -240,7 +245,8 @@ cspace = cspace || {};
                     dateEntry: {
                         type: "cspace.testComponent1"
                     }
-                }
+                },
+                permissions: cspace.tests.sampleUserPerms
             };
             done = 0;
             cspace.pageBuilder(options);

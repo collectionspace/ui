@@ -40,6 +40,7 @@ var relatedRecordsTabTester = function ($) {
         var testPrimaryType = "intake";
         var testRelatedType = "cataloging";
         var options = {
+            permissions: cspace.tests.sampleUserPerms,
             schemaUrl: "../../main/webapp/html/uischema/cataloging.json",
             uispecUrl: "../../main/webapp/html/uispecs/cataloging-tab/uispec.json",
             listeners: {
@@ -187,6 +188,7 @@ var relatedRecordsTabTester = function ($) {
             }
         });
         var options = {
+            permissions: cspace.tests.sampleUserPerms,
             model: model,
             applier: primaryApplier,
             related: "cataloging",

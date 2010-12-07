@@ -120,6 +120,25 @@ cspace = cspace || {};
                 options: {
                     dataType: "json"
                 }
+            },
+            loginstatus: { //get login status and permissions
+                href: fluid.invoke("cspace.util.getLoginURL"),
+                options: {
+                    dataType: "json",
+                    success: function (data) {
+                        if (!data.login) {
+                            var currentUrl = document.location.href;
+                            var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
+                            window.location = loginUrl;     
+                        } else {
+                            options.permissions = data.permissions;
+                            options.currentUserId = data.currentUserId;
+                        }
+                    },
+                    fail: function () {
+                        fluid.fail("PageBuilder was not able to retrieve login info and permissions, so failing");
+                    }
+                }
             }
         }, function (resourceSpecs) {
             fluid.merge({
@@ -136,6 +155,8 @@ cspace = cspace || {};
         that.model = that.options.model || {};
         that.applier = that.options.applier || fluid.makeChangeApplier(that.model);
         that.schema = {};
+        that.permissions = that.options.permissions;
+        that.currentUserId = that.options.currentUserId;
         
         fluid.instantiateFirers(that, that.options);
         
@@ -150,23 +171,6 @@ cspace = cspace || {};
                 success: pageSpecManager.makeCallback(spec, key)
             };
         });
-        
-        // determine if logged in and redirect
-        resourceSpecs.loginStatus = {
-            href: fluid.invoke("cspace.util.getLoginURL"),
-            options: {
-                dataType: "json",
-                success: function (data) {
-                    if (!data.login) {
-                        var currentUrl = document.location.href;
-                        var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
-                        window.location = loginUrl;     
-                    }
-                    that.currentUserId = data.csid;
-                    that.permissions = data.permissions;
-                }
-            } 
-        };
         
         fluid.each(that.options.schema, function (resource, key) {
             resourceSpecs[resource] = {
