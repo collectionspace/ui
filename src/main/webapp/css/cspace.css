@@ -367,7 +367,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .list-table  table {font-size:12px; line-height:120%; background-color:#F0F5FB; border:none; width:100%;}
 .list-table  table thead tr td, .list-table  table thead tr th {font-size:11px; background-color:#EFEFEF; padding:4px 2px 3px 4px; border:none; color:#333; /*font-weight:bold;*/ border-bottom:2px solid #C7CACE;}
 .list-table  table tbody tr td {background-color:#F0F5FB; padding: 5px 2px 4px 4px; border-bottom:0px solid #ADADAD; color:#000; vertical-align:top;}
-.list-table  table tbody tr td a, .list-table  table tbody tr td a:hover {color:#F0FBF5;}
+.list-table  table tbody tr td a, .list-table  table tbody tr td a:hover {/*color:#F0FBF5;*/}
 .list-table  table tbody tr:hover td {/*background-color:#BFF4FF; cursor:pointer;*/ background-color:#C3D9E9;}
 .list-table  table tbody tr:hover td.csc-related-number {cursor:pointer;}
 .list-table  table tbody tr:hover td.csc-related-number:hover {text-decoration:underline;}
@@ -700,7 +700,9 @@ input.cs-repeatable-delete[disabled]:focus, table tr.csc-repeatable-repeat input
 #role .menu-record a.current, #role .menu-record li.selected a {color:#77AA44 ; background-color:#FFF; border:2px solid #77AA44; border-bottom:2px solid #fff;}
 #role #primaryTab, #administration #primaryTab {border:2px solid #77AA44;}
 #administration .menu-record a.inactive, #role .menu-record a.inactive {cursor:default; background-color:#CCC; border:2px solid #CCC; border-bottom:none;}
-	
+
+/* CreateNew specific stylings */
+#search .fl-container-1024-inner {padding:0; background-color:inherit;}
 	
 /* rounded corners */
 .info-column .header {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6px 0 0;}
