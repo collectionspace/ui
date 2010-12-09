@@ -773,3 +773,7 @@ ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6
 .cs-createNew-content .cs-createNew-totalOfThreeCategories .cs-createNew-category2 {width: 49%; float: right;}
 .cs-createNew-content .cs-createNew-totalOfThreeCategories .cs-createNew-category3 {width: 49%; float: left; margin-right:10px;}
 
+.cs-myCollectionSpace-categoryHeader {height:inherit; padding:6px 0 6px 2.5%; width:97.5%;}
+.cs-myCollectionSpace-expanded {background:transparent url('../images/toggle-less.png') no-repeat 4px 6px;}
+.cs-myCollectionSpace-collapsed {background:transparent url('../images/toggle-more.png') no-repeat 4px 6px;}
+

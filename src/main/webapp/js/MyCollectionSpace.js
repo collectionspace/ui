@@ -55,10 +55,30 @@ cspace = cspace || {};
         });
     };
     
+    var bindEvents = function (that) {
+        that.locate("header").click(function () {
+            var source = $(this);
+            source.next(that.options.selectors.togglable).toggle();
+            source.toggleClass(that.options.styles.expanded);
+            source.toggleClass(that.options.styles.collapsed);
+            return false;
+        });
+    };
+    
+    var setupMyCollectionSpace = function (that) {
+        var options = that.options;
+        fluid.remove_if(options.components, function (component, key) {
+            return $.inArray(key, options.records) < 0;
+        });
+        makeComponentsOpts(options);
+        that.renderer.refreshView();
+        bindEvents(that);
+    };
+    
     cspace.myCollectionSpace = function (container, options) {
-        var that = fluid.initView("cspace.myCollectionSpace", container, options);        
+        var that = fluid.initRendererComponent("cspace.myCollectionSpace", container, options);       
         var resourceSpecs = {};
-        makeComponentsOpts(that.options);
+        setupMyCollectionSpace(that);
         fluid.withEnvironment({resourceSpecCollector: resourceSpecs}, function () {
             that.options.components = fluid.expander.expandLight(that.options.components, {noValue: true});
         });
@@ -66,6 +86,60 @@ cspace = cspace || {};
             fluid.initDependents(that);
         });
         return that;
+    };
+    
+    cspace.myCollectionSpace.censorModel = function (model, records) {
+        fluid.remove_if(model.categories, function (category, key) {
+            fluid.remove_if(category.list, function (recordType, key) {
+                return $.inArray(key, records) < 0;
+            });
+            return $.isEmptyObject(category.list);
+        });
+        return model;
+    };
+    
+    cspace.myCollectionSpace.provideRecords = function (options) {
+        return cspace.permissions.getPermissibleRelatedRecords(options.related, options.resolver, options.recordTypeManager, options.permission);
+    };
+    
+    cspace.myCollectionSpace.produceTree = function (that) {
+        return {
+            expander: {
+                repeatID: "category",
+                type: "fluid.renderer.repeat",
+                pathAs: "category",
+                controlledBy: "categories",
+                tree: {
+                    header: {
+                        messagekey: "${{category}.name}"
+                    },
+                    expander: {
+                        repeatID: "group",
+                        type: "fluid.renderer.repeat",
+                        pathAs: "recordType",
+                        valueAs: "recordTypeValue",
+                        controlledBy: "{category}.list",
+                        tree: {
+                            groupType: {
+                                messagekey: "${{recordType}.groupName}"
+                            },
+                            groupContainer: {
+                                decorators: [{
+                                    type: "addClass",
+                                    classes: "{recordTypeValue}.groupClass"
+                                }]
+                            },
+                            groupNumber: {
+                                messagekey: "${{recordType}.numberName}"
+                            },
+                            groupSummary: {
+                                messagekey: "summary"
+                            }
+                        }
+                    }
+                }
+            }
+        };
     };
     
     fluid.demands("cataloging", "cspace.myCollectionSpace", 
@@ -91,13 +165,120 @@ cspace = cspace || {};
     
     fluid.defaults("cspace.myCollectionSpace", {
         selectors: {
-            cataloging: ".object-records-group",
-            intake: ".intake-records-group",
-            acquisition: ".acquisition-records-group",
-            loanin: ".loanIn-records-group",
-            loanout: ".loanOut-records-group",
-            movement: ".movement-records-group",
-            objectexit: ".objectexit-records-group"
+            "category:": ".csc-myCollectionSpace-category", 
+            "group:": ".csc-myCollectionSpace-group",
+            groupContainer: ".csc-myCollectionSpace-group-container",
+            groupType: ".csc-myCollectionSpace-groupType",
+            groupSummary: ".csc-myCollectionSpace-group-summary",
+            groupNumber: ".csc-myCollectionSpace-group-number",
+            header: ".csc-myCollectionSpace-categoryHeader",
+            cataloging: ".csc-myCollectionSpace-cataloging-group",
+            intake: ".csc-myCollectionSpace-intake-group",
+            acquisition: ".csc-myCollectionSpace-acquisition-group",
+            loanin: ".csc-myCollectionSpace-loanin-group",
+            loanout: ".csc-myCollectionSpace-loanout-group",
+            movement: ".csc-myCollectionSpace-movement-group",
+            objectexit: ".csc-myCollectionSpace-objectexit-group",
+            togglable: ".csc-toggle-selector"
+        },
+        selectorsToIgnore: "togglable",
+        strings: {
+            cataloging: "Cataloging Records",
+            procedures: "Procedural Records",
+            intake: "Intake Records",
+            acquisition: "Acquisition Records",
+            loanin: "Loanin Records",
+            loanout: "Loanout Records",
+            movement: "Movement Records",
+            objectexit: "Object Exit Records",
+            summary: "Summary",
+            identificationNumber: "Identification Number",
+            entryNumber: "Entry Number",
+            loaninNumber: "Loan In Number",
+            loanoutNumber: "Loan Out Number",
+            currentLocation: "Current Location",
+            exitNumber: "Exit Number"
+        },
+        styles: {
+            expanded: "cs-myCollectionSpace-expanded",
+            collapsed: "cs-myCollectionSpace-collapsed"
+        },
+        produceTree:cspace.myCollectionSpace.produceTree,
+        // TODO: Once component sibbling options are resolvable with each other, "records"
+        // can be used to resolve and censor a model.
+        records: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.myCollectionSpace.provideRecords",
+                args: {
+                    related: "all",
+                    resolver: "{permissionsResolver}",
+                    recordTypeManager: "{recordTypeManager}",
+                    permission: "list"
+                }
+            }
+        },
+        model: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.util.modelBuilder",
+                args: {
+                    related: "all",
+                    resolver: "{permissionsResolver}",
+                    recordTypeManager: "{recordTypeManager}",
+                    permission: "list",
+                    model: {
+                        categories: {
+                            cataloging: {
+                                "name": "cataloging",
+                                list: {
+                                    cataloging: {
+                                        groupName: "cataloging",
+                                        groupClass: "csc-myCollectionSpace-cataloging-group",
+                                        numberName: "identificationNumber"
+                                    }
+                                }
+                            },
+                            procedures: {
+                                "name": "procedures",
+                                list: {
+                                    intake: {
+                                        groupName: "intake",
+                                        groupClass: "csc-myCollectionSpace-intake-group",
+                                        numberName: "entryNumber"
+                                    }, 
+                                    acquisition: {
+                                        groupName: "acquisition",
+                                        groupClass: "csc-myCollectionSpace-acquisition-group",
+                                        numberName: "entryNumber"
+                                    },
+                                    loanin: {
+                                        groupName: "loanin",
+                                        groupClass: "csc-myCollectionSpace-loanin-group",
+                                        numberName: "loaninNumber"
+                                    },
+                                    loanout: {
+                                        groupName: "loanout",
+                                        groupClass: "csc-myCollectionSpace-loanout-group",
+                                        numberName: "loanoutNumber"
+                                    },
+                                    movement: {
+                                        groupName: "movement",
+                                        groupClass: "csc-myCollectionSpace-movement-group",
+                                        numberName: "currentLocation"
+                                    },
+                                    objectexit: {
+                                        groupName: "objectexit",
+                                        groupClass: "csc-myCollectionSpace-objectexit-group",
+                                        numberName: "exitNumber"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    callback: "cspace.myCollectionSpace.censorModel"
+                }
+            }
         },
         components: {
             cataloging: {
@@ -121,10 +302,18 @@ cspace = cspace || {};
             objectexit: {
                 type: "cspace.recordList"
             }
+        },
+        resources: {
+            template: cspace.prolepticResourceSpec({
+                fetchClass: "fastTemplate",
+                url: "%webapp/html/MyCollectionSpaceTemplate.html"
+            })
         }
     });
     
     fluid.demands("myCollectionSpace", "cspace.pageBuilder", 
         ["{pageBuilder}.options.selectors.myCollectionSpace", fluid.COMPONENT_OPTIONS]);
+    
+    fluid.fetchResources.primeCacheFromResources("cspace.myCollectionSpace");
     
 })(jQuery, fluid);
