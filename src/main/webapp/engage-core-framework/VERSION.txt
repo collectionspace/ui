@@ -1,3 +1,0 @@
-This directory contains a copy of version 0.3 beta 3 of the Fluid Engage framework. It should be considered read-only, and was taken directly from the engage-core-0.3b3 tag in the Fluid repository:
-
-https://source.fluidproject.org/svn/fluid/engage/fluid-engage-core/tags/engage-core-0.3b3/framework/
