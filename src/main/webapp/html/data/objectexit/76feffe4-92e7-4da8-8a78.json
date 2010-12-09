@@ -1,0 +1,58 @@
+{
+    "termsUsed": [
+        {
+            "sourceFieldName": "currentOwner",
+            "sourceFieldType": "objectexit",
+            "sourceFieldselector": ".csc-objectexit-currentOwner",
+            "number": "Jim Nabors",
+            "csid": "urn:cspace:name(jimnabors)",
+            "recordtype": "person"
+        },
+        {
+            "sourceFieldName": "depositor",
+            "sourceFieldType": "objectexit",
+            "sourceFieldselector": ".csc-objectexit-depositor",
+            "number": "Zsa Zsa Gabor",
+            "csid": "urn:cspace:name(zsazsagabor)",
+            "recordtype": "person"
+        }
+    ],
+    "relations": {
+        "cataloging": [
+            {
+                "summary": "Petrified Ogre",
+                "summarylist": {
+                    "nametitle": "Petrified Ogre",
+                    "objectNumber": "CompleteObject001"
+                },
+                "csid": "370f7563-4885-4625-b7a8",
+                "number": "CompleteObject001",
+                "relid": "0e60565a-af00-440a-ae77",
+                "relationshiptype": "affects",
+                "recordtype": "cataloging"
+            }
+        ]
+    },
+    "csid": "76feffe4-92e7-4da8-8a78",
+    "fields": {
+        "exitNote": "This object has been declared a World Heritage Nuisance and must be disposed of forthwith.",
+        "currentOwner": "urn:cspace:org.collectionspace.demo:personauthority:name(person):person:name(jimnabors)'Jim+Nabors'",
+        "exitDate": "July 1, 2010",
+        "exitMethods": [
+            {
+                "_primary": true,
+                "exitMethod": "courier"
+            },
+            {
+                "exitMethod": "post"
+            }
+        ],
+        "exitNumber": "CompleteObjectExit001",
+        "csid": "76feffe4-92e7-4da8-8a78",
+        "packingNote": "Packed really, really, really well. Sealed in thick layers of aluminium foil and holiday wrapping paper.",
+        "exitReason": "disposal",
+        "de-urned-currentOwner": "Jim Nabors",
+        "depositor": "urn:cspace:org.collectionspace.demo:personauthority:name(person):person:name(zsazsagabor)'Zsa+Zsa+Gabor'",
+        "de-urned-depositor": "Zsa Zsa Gabor"
+    }
+}

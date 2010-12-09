@@ -17,7 +17,7 @@
             "targetSelector": ".csc-loanIn-titleBar-container"
         },
         "dateEntry": {
-            "href": "loanInTemplate.html",
+            "href": "%readonlyloanInTemplate.html",
             "templateSelector": ".csc-loanIn-template",
             "targetSelector": ".csc-record-edit-container"
         },

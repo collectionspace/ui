@@ -12,7 +12,7 @@
             "targetSelector": ".csc-objectexit-tab .div-for-list-of-records"
         },
         "details": {
-            "href": "ObjectexitTemplate.html",
+            "href": "%readonlyObjectexitTemplate.html",
             "templateSelector": ".csc-objectexit-template",
             "targetSelector": ".csc-objectexit-tab .div-for-recordEditor"
         } 

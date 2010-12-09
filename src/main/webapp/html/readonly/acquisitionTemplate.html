@@ -1,0 +1,298 @@
+<div class="csc-acquisition-template" id="read-only">
+                            <div class="csc-acquisition">
+                                <div id="secondary-nav">
+                                    <div id="secondary-nav-menu-sub">
+                                        <div class="button-row">
+                                            <!--<input type="button" class="csc-save saveButton primary" value="Save"/>
+                                            <a href="findedit.html"><input type="button" class="cancelButton" value="Cancel" /></a>
+                                            <div class="clear"></div>-->
+                                        </div>
+                                        <div class="time-stamp"> </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="acquisition-outer-border">
+                                    <div class="hidden csc-message-container cs-message">
+                                        <span class="csc-timestamp cs-timestamp">time</span>
+                                        <span class="csc-message">Save successful!</span>
+                                    </div>
+                    
+                                    <div class="fl-container-flex fl-fix information-group">
+                                        <div class="info-column">
+                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-acquisition-information', this); return false;">
+                                                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                                                Acquisition Information
+                                            </div>
+                                            
+                                            <div class="fl-container-flex fl-fix content main" id="toggle-acquisition-information">
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair">
+                                                            <div class="label">Acquisition Reference Number <span class="required">*</span></div>
+                                                            <div class="content csc-acquisition-reference-number-patternChooserContainer">
+                                                                <div class="input-alpha csc-acquisition-numberPatternChooser-reference-number pattern-chooser-input" />
+                                                            </div>
+                                                        </div>
+                                                    
+                                                        <div class="info-pair-date">
+                                                            <div class="header">
+                                                                <div class="label">Accession Date</div>
+                                                            </div>
+                                                            <div class="content csc-acquisition-accession-date-container">
+                                                                <table>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="field-cal"><div class="input-date csc-acquisition-accession-date csc-calendar-date" ></div></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                                <div class="csc-date-picker"></div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Acquisition Authorizer</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <table>
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Acquisition authorizer</td>
+                                                                            <td>Acquisition authorizer date</td>
+                                                                        </tr>
+                                                                    </thead>                                                                    
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <div type="text" class="csc-acquisition-acquisitionAuthorizer" ></div>
+                                                                            </td>
+                                                                            <td class="field-cal csc-acquisition-acquisitionAuthorizerDate-container fl-table">
+                                                                                <div class="fl-force-left input-date csc-acquisition-acquisitionAuthorizerDate csc-calendar-date" ></div>    
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="info-pair-date">
+                                                            <div class="header">
+                                                                <div class="label">Acquisition Date</div>
+                                                            </div>
+                                                            <div class="content csc-acquisition-acquisition-date-container fl-table csc-acquisition-acquisitionDates">
+                                                                <div class="fl-force-left input-date csc-acquisition-date csc-calendar-date" ></div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="info-pair-select">
+                                                            <div class="header">
+                                                                <div class="label">Acquisition Method</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <table>
+                                                                    <tbody>
+                                                                        <tr class="csc-acquisition-acquisition-method-row">
+                                                                            <td><div class="csc-acquisition-acquisition-method input-select" ></div></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Acquisition Source</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="input-alpha csc-acquisition-acquisitionSource" ></div>                                                         
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Owner</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="input-alpha csc-acquisition-owner" ></div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Transfer of Title Number</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="input-alpha csc-acquisition-transfer-of-title-number" ></div>                                                                                                                           
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Group purchase price</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <table>
+                                                                    <thead>
+                                                                        <td>Purchase Price Type</td>
+                                                                        <td>Currency</td>
+                                                                        <td>Value</td>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="label">Group purchace price</td>
+                                                                            <td><div class="csc-acquisition-group-purchase-price-currency input-select input-money-type" ></div></td>
+                                                                            <td><div class="input-alpha csc-acquisition-group-purchase-price-value" value=""></div></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="label">Object offer price</td>
+                                                                            <td><div class="csc-acquisition-object-offer-price-currency input-select input-money-type" ></div></td>
+                                                                            <td><div class="input-alpha csc-acquisition-object-offer-price-value" value=""></div></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="label">Object purchase offer price</td>
+                                                                            <td><div class="csc-acquisition-object-purchase-offer-price-currency input-select input-money-type" ></div></td>
+                                                                            <td><div class="input-numeric-medium csc-acquisition-object-purchase-offer-price-value" value="" ></div></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="label">Object purchase price</td>
+                                                                            <td><div class="csc-acquisition-object-purchase-price-currency input-select input-money-type" ></div></td>
+                                                                            <td><div class="input-numeric-medium csc-acquisition-object-purchase-price-value" value="" ></div></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="label">Original object purchase price</td>
+                                                                            <td><div class="csc-acquisition-original-object-purchase-price-currency input-select input-money-type"  ></div></td>
+                                                                            <td><div class="input-numeric-medium csc-acquisition-original-object-purchase-price-value" value="" ></div></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Acquisition Reason</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <table>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td><div class="input-textarea csc-acquisition-acquisition-reason" ></div></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Acquisition Note</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <table>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td><div class="input-textarea csc-acquisition-acquisition-note"  ></div></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Acquisition Provisos</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <table>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td><div class="input-textarea csc-acquisition-acquisition-provisos"  ></div></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Acquisition Funding</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td>Currency</td>
+                                                                        <td>Value</td>
+                                                                        <td>Source</td>
+                                                                        <td>Source provisos</td>
+                                                                    </tr>
+                                                                </thead>                                                                    
+                                                                <tbody>
+                                                                    <tr class="csc-acquisition-acquisitionFunding">                                                                    
+                                                                        <td><div class="csc-acquisition-acquisitionFundingCurrency input-select input-money-type" ></div></td>
+                                                                        <td><div class="input-numeric-medium csc-acquisition-acquisitionFundingValue" ></div></td>
+                                                                        <td><div class="csc-acquisition-acquisitionFundingSource" ></div></td>
+                                                                        <td><div class="csc-acquisition-acquisitionFundingSourceProvisos" ></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <div class="fl-container-flex fl-fix information-group">
+                                        <div class="info-column">
+                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-collection-information', this); return false;">
+                                                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                                                Object Collection Information
+                                            </div>
+                                            
+                                            <div class="fl-container-flex fl-fix content main " id="toggle-object-collection-information">
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left ">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Field collection event name</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="input-alpha csc-acquisition-fieldCollectionEventName" ></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="hidden csc-message-container cs-message">
+                                        <span class="csc-timestamp cs-timestamp">time</span>
+                                        <span class="csc-message">Save successful!</span>
+                                    </div>
+
+                                    <div class="csc-error-dialog">
+                                        <p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
+                                    </div>
+                                </div>
+
+                                <div class="fl-container-flex button-row">
+                                    <a href="#"><input type="button" class="csc-save saveButton primary" value="Save" /></a>
+                                    <a href="findedit.html"><input type="button" class="cancelButton" value="Cancel" /></a>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+
+</div>

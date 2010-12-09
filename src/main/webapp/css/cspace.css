@@ -773,6 +773,22 @@ ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6
 .cs-createNew-content .cs-createNew-totalOfThreeCategories .cs-createNew-category2 {width: 49%; float: right;}
 .cs-createNew-content .cs-createNew-totalOfThreeCategories .cs-createNew-category3 {width: 49%; float: left; margin-right:10px;}
 
+/* Read-only page styling selectors */
+#read-only .info-pair .content thead td , #read-only .info-pair .content table, #read-only .info-pair-date .content table, #read-only .info-pair-select table {background-color:inherit;}
+#read-only .fl-container-left  .information-group .content.main, #read-only .information-group .content.main {background-color:#F2F2F2;}
+#read-only input[disabled], #read-only select[disabled], #read-only textarea[disabled] {background-color:#F2F2F2; color:#000;}
+#read-only .input-date, #read-only .input-textarea, #read-only .input-alpha, #read-only .input-select {border:1px solid #CCC;}
+#read-only table .input-date, #read-only  table.input-textarea, #read-only table .input-alpha, #read-only table .input-select {border:none;}
+#read-only .input-date, #read-only .input-alpha , #read-only .input-select {padding:2px 0 2px 2px; min-height:11px;}
+#read-only .input-select {height:11px;}
+#read-only select.input-select {height:auto;}
+#read-only .cs-repeatable-content {width:94%;}
+#read-only .cs-autocomplete-input {background-image:none !important;}
+
+/* hack! Need to remove controls programatically */
+#read-only .cs-repeatable-add, #read-only .cs-repeatable-delete {display:none;}
+#read-only .cs-repeatable-primary {}
+
 .cs-myCollectionSpace-categoryHeader {height:inherit; padding:6px 0 6px 2.5%; width:97.5%;}
 .cs-myCollectionSpace-expanded {background:transparent url('../images/toggle-less.png') no-repeat 4px 6px;}
 .cs-myCollectionSpace-collapsed {background:transparent url('../images/toggle-more.png') no-repeat 4px 6px;}

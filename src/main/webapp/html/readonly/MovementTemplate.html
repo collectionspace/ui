@@ -1,0 +1,171 @@
+<div class="csc-movement-template csc-listEditor-details" id="read-only">
+    <div id="secondary-nav">
+        <div id="secondary-nav-menu-sub">
+            <div class="button-row">
+                <a style="display:none;" class="csc-goto"><input type="button" class="gotoButton" value="Go To Record" /></a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="hidden csc-message-container cs-message">
+        <span class="csc-timestamp cs-timestamp"></span>
+        <span class="csc-message"></span>
+    </div>
+    
+    <div class="fl-container-flex fl-fix information-group">
+		<div class="info-column">
+			<div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-locationAndMovement', this); return false;">
+				<span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+				Location and Movement
+			</div>
+        
+			<div class="fl-container-flex fl-fix content main" id="toggle-locationAndMovement">
+				<div class="info-column fl-force-left">
+					<div class="info-pair">
+						<div class="header">
+							<div class="label">Current Location</div>
+						</div>
+						<div class="content">
+							<table>
+								<thead>
+									<tr>
+										<td>Current Location<span class="required">*</span></td>
+										<td>Fitness</td>
+										<td>Note</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><div class="csc-movement-currentLocation input-alpha" ></div></td>
+										<td><div class="csc-movement-currentLocationFitness input-alpha" ></div></td>                                                
+										<td><div class="csc-movement-currentLocationNote input-alpha" ></div></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>                            
+				</div>
+				<div class="info-column fl-force-left">
+					<div class="info-column2-50 fl-force-left">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label">Location Date</div>
+							</div>
+							<div class="content csc-movement-locationDate-container fl-table">
+								<div class="fl-force-left input-date csc-movement-locationDate" ></div>
+							</div>
+						</div>
+					</div>
+					<div class="info-column2-50 fl-force-right">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label">Normal Location</div>
+							</div>                            
+							<div class="content">
+								<div type="text" class="input-alpha csc-movement-normalLocation" ></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+    </div>
+    
+    <div class="fl-container-flex fl-fix information-group">
+        <div class="info-column">
+            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-movement-control-information', this); return false;">
+                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                Movement Control Information
+            </div>
+            <div class="fl-container-flex fl-fix content main" id="toggle-movement-control-information">
+                <div class="info-column fl-force-left">
+                    <div class="info-column2-50 fl-force-left">
+                        <div class="info-pair">
+                            <div class="label">Reference Number</div>
+                            <div class="content ">
+                                <div class="csc-movement-movementReferenceNumber input-alpha" ></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-column2-50 fl-force-right">
+                        <div class="info-pair">
+                            <div class="header">
+                                <div class="label">Contact</div>
+                            </div>
+                            <div class="content">
+                                <div type="text" class="input-alpha csc-movement-movementContact"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-column fl-force-left">
+                    <div class="info-column2-50 fl-force-left">
+                        <div class="info-column2-50 fl-force-left">
+                            <div class="info-pair">
+                                <div class="header">
+                                    <div class="label">Planned removal date</div>
+                                </div>
+                                <div class="content csc-movement-plannedRemovalDate-container fl-table">
+                                    <div type="text" class="fl-force-left input-date csc-movement-plannedRemovalDate"></div>                            
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-column2-50 fl-force-right">
+                            <div class="info-pair">
+                                <div class="header">
+                                    <div class="label">Removal date</div>
+                                </div>
+                                <div class="content csc-movement-removalDate-container fl-table">
+                                    <div type="text" class="fl-force-left input-date csc-movement-removalDate"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-column2-50 fl-force-right">
+                        <div class="info-pair-select">
+                            <div class="header">
+                                <div class="label">Method</div>
+                            </div>
+                            <div class="content">
+                                    <div class="csc-movement-movementMethods input-select"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-column fl-force-left">
+                    <div class="info-column2-50 fl-force-left">
+                        <div class="info-pair">
+                            <div class="header">
+                                <div class="label">Reason for move</div>
+                            </div>
+                            <div class="content">
+                                <div class="csc-movement-reasonForMove input-select"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-column2-50 fl-force-right">
+                        <div class="info-pair">
+                            <div class="header">
+                                <div class="label">Note</div>
+                            </div>
+                            <div class="content">
+                                <div class="input-textarea csc-movement-movementNote"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+                
+    <div class="hidden csc-message-container cs-message">
+        <span class="csc-timestamp cs-timestamp">time</span>
+        <span class="csc-message">Save successful!</span>
+    </div>
+
+    <div class="csc-error-dialog">
+        <p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
+    </div>
+</div>

@@ -1,0 +1,355 @@
+            <div class="csc-organizationAuthority-template" id="read-only">
+
+                            <div class="csc-authority-container info-column">
+                                <div id="secondary-nav">
+                                    <div id="secondary-nav-menu-sub">
+                                        <div class="button-row">
+                                            <!--<input type="button" class="csc-save saveButton primary" value="Save"/>
+                                            <a href="findedit.html"><input type="button" class="cancelButton" value="Cancel" /></a>
+                                            <div class="clear"></div>-->
+                                        </div>
+                                        <div class="time-stamp"> </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            
+                                <div class="authority-outer-border">
+                                    <div class="hidden csc-message-container cs-message">
+                                        <span class="csc-timestamp cs-timestamp">time</span>
+                                        <span class="csc-message">Save successful!</span>
+                                    </div>
+                                    
+                                    <div class="fl-container-flex fl-fix information-group" id="toggle-authority-information">
+                                        <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-name', this); return false;">
+                                            <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                                            Organization Name Authority
+                                        </div>
+                                    
+                                        <div class="fl-container-flex fl-fix content main" id="toggle-name">
+                                            <div class="info-column">
+                                                <div class="info-column">
+                                                    <div class="info-column2-40 fl-force-left">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Display Name</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <table>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <!--<td class="table-unselected"></td>-->
+                                                                            <td><div class="input-alpha csc-organizationAuthority-displayName" ></div></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                    
+<!--
+                                                    <div class="info-column2-60 fl-force-right">
+                                                        <div class="info-column2-60 fl-force-left">
+                                                            <div class="info-pair">
+                                                                <div class="header">
+                                                                    <div class="label">Reference Number</div>
+                                                                </div>
+                                                                <div class="content">
+                                                                    <table>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td><div class="csc-organizationAuthority-referenceNumber" /></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clear"></div>
+                                                        </div>
+-->
+                                                        
+                                                        <div class="info-column2-40 fl-force-right">
+                                                            <div class="info-pair-select">
+                                                                <div class="header">
+                                                                    <div class="label">Status</div>
+                                                                </div>
+                                                                <div class="content">
+                                                                    <table>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td><div class="csc-organizationAuthority-status input-select" ></div></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clear"></div>
+                                                        </div>
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Name</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td>Main Body name</td>
+                                                                        <td>Short name</td>
+                                                                        <td>Addition to name</td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr class="csc-organization-mainBodyGroup">
+                                                                        <td><div class="input-alpha csc-organizationAuthority-longName" ></div></td>
+                                                                        <td><div class="input-alpha csc-organizationAuthority-shortName" ></div></td>
+                                                                        <td><div class="input-alpha csc-organizationAuthority-nameAdditions"></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                    
+                                                <div class="info-column2-50 fl-force-left">
+                                                    <div class="info-pair-date">
+                                                        <div class="header">
+                                                            <div class="label">Foundation Date</div>
+                                                        </div>
+                                                        <div class="content csc-organizationAuthority-foundingDate-container">
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="field-cal"><div class="input-date csc-organizationAuthority-foundingDate csc-calendar-date"></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Foundation Place</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><div class="input-alpha csc-organizationAuthority-foundingPlace" ></div>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-pair-date">
+                                                        <div class="header">
+                                                            <div class="label">Dissolution Date</div>
+                                                        </div>
+                                                        <div class="content csc-organizationAuthority-dissolutionDate-container">
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="field-cal"><div class="input-date csc-organizationAuthority-dissolutionDate csc-calendar-date" ></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Contact name</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-alpha csc-organizationAuthority-contactName" ></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Sub-body</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-alpha csc-organizationAuthority-subBodyName" ></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="clear"></div>
+                                                </div>
+                                                
+                                                <div class="info-column2-50 fl-force-right">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Group</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-alpha csc-organizationAuthority-group" ></div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-pair-select">
+                                                        <div class="header">
+                                                            <div class="label">Function</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-alpha csc-organizationAuthority-function" ></div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">History</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-textarea csc-organizationAuthority-history" ></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    
+                                    <div class="fl-container-flex fl-fix information-group" id="toggle-authority-contact-information">
+                                        <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-contact', this); return false;">
+                                            <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                                            Contact Information
+                                        </div>
+                                        <div class="fl-container-flex fl-fix content main" id="toggle-contact">
+                                            <div class="info-column">
+                                                <div class="info-column2-40 fl-force-left">
+                                                    <div class="info-pair-select">
+                                                        <div class="header">
+                                                            <div class="label">Address Type</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="disabled"><div class="csc-contact-addressType1 input-select" disabled="disabled" ></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Fax Number</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="disabled"><div class="input-alpha csc-contact-faxNumber1" disabled="disabled" ></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Telephone Number</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="disabled"><div class="input-alpha csc-contact-telephoneNumber1" disabled="disabled" ></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                
+                                                <div class="info-column2-60 fl-force-right">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Address</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="disabled"><div class="input-alpha csc-contact-addressText1" disabled="disabled" ></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Place</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="disabled"><div class="input-alpha csc-contact-place" disabled="disabled" ></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Postcode</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="disabled"><div class="input-alpha csc-contact-postcode1" disabled="disabled" ></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Email</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="disabled"><div class="input-alpha csc-contact-email1" disabled="disabled" ></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    
+                                    <div class="csc-error-dialog">
+                                        <p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="fl-container-flex button-row">
+                                    <!--<div><input type="button" class="csc-save primary saveButton" value="Save"/></div>
+                                    <a href="organization.html"><input type="button" class="cancelButton" value="Cancel" /></a>
+                                    <div class="clear"></div>-->
+                                </div>    
+                            </div>

@@ -12,7 +12,7 @@
             "targetSelector": ".csc-cataloging-tab .div-for-list-of-records" 
         },
         "details": {
-            "href": "ObjectEntryTemplate.html",
+            "href": "%readonlyObjectEntryTemplate.html",
             "templateSelector": ".csc-object-entry-template",
             "targetSelector": ".csc-cataloging-tab .div-for-recordEditor" 
         } 

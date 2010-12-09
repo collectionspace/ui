@@ -42,11 +42,11 @@ fluid.registerNamespace("cspace.util");
         //cataloging: ["objects"] // So far in permissions this is a 1-element set
     };
     
-    cspace.recordTypeManager = function(options) {
+    cspace.recordTypeManager = function (options) {
         var that = fluid.initLittleComponent("cspace.recordTypeManager", options);
-        that.recordTypesForCategory = function(category) {
-            var classEntry = cspace.recordTypes[category]
-            return classEntry? classEntry : [category];
+        that.recordTypesForCategory = function (category) {
+            var classEntry = cspace.recordTypes[category];
+            return classEntry ? classEntry : [category];
         };
         return that;
     };
@@ -67,14 +67,15 @@ fluid.registerNamespace("cspace.util");
         }
     };
 
-    cspace.prolepticResourceSpec = function(options) {
-        return {expander: {
-            type: "fluid.deferredInvokeCall",
-            func: "cspace.specBuilder",
+    cspace.prolepticResourceSpec = function (options) {
+        return {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.specBuilder",
                 args: {
                     forceCache: true,
                     fetchClass: options.fetchClass,
-                    url: options.url,
+                    url: options.url
                 }
             }
         };
@@ -134,13 +135,13 @@ fluid.registerNamespace("cspace.util");
     
     /** Resolution of the global message bundle(s) */
         
-    cspace.globalBundle = function(options) {
+    cspace.globalBundle = function (options) {
         var that = fluid.initLittleComponent("cspace.globalBundle", options);
         // assuming correct environment, this I/O will resolve synchronously from the cache
         fluid.fetchResources(that.options.resources); 
         fluid.initDependents(that);
         return that.messageResolver;
-    }
+    };
     
     fluid.defaults("cspace.globalBundle", {
         components: {
@@ -154,10 +155,9 @@ fluid.registerNamespace("cspace.util");
             }
         },
         resources: {
-            globalBundle: 
-                cspace.prolepticResourceSpec({
-                    fetchClass: "fastResource",
-                    url: "%webapp/html/bundle/core-messages.properties"
+            globalBundle: cspace.prolepticResourceSpec({
+                fetchClass: "fastResource",
+                url: "%webapp/html/bundle/core-messages.properties"
             })
         }
     });
@@ -410,7 +410,7 @@ fluid.registerNamespace("cspace.util");
         });
     };
     
-    cspace.util.applyClassSelectorOrFail = function(node, selector) {
+    cspace.util.applyClassSelectorOrFail = function (node, selector) {
         if (!selector || !selector.charAt(0) === "." || fluid.SAXStrings.indexOfWhitespace(selector) !== -1) {
             fluid.fail("selector " + selector + " needs to be a pure class-based selector");
         }
@@ -418,7 +418,7 @@ fluid.registerNamespace("cspace.util");
         $(node).addClass(clazz);
     };
     
-    cspace.util.waitMultiple = function(options) {
+    cspace.util.waitMultiple = function (options) {
         var that = fluid.initLittleComponent("cspace.util.waitMultiple", options);
         that.waitSet = {};
         
@@ -436,21 +436,21 @@ fluid.registerNamespace("cspace.util");
             if (complete) {
                 fluid.log("Firing external callback");
                 that.fired = true;
-                that.options.callback.apply(null, that.options.outerKey && that.waitSet[that.options.outerKey]? 
+                that.options.callback.apply(null, that.options.outerKey && that.waitSet[that.options.outerKey] ? 
                     that.waitSet[that.options.outerKey].args : null);
 
             }
         } 
-        that.getListener = function(key) {
+        that.getListener = function (key) {
             var keyStruct = {};
             that.waitSet[key] = keyStruct;
-            return function() {
+            return function () {
                 keyStruct.args = fluid.makeArray(arguments);
                 keyStruct.complete = true;
                 checkComplete();
             };
         };
-        that.clear = function(newCallback) {
+        that.clear = function (newCallback) {
             for (var key in that.waitSet) {
                 fluid.clear(that.waitSet[key]);
             }
@@ -460,19 +460,19 @@ fluid.registerNamespace("cspace.util");
         return that; 
     };
     
-    cspace.util.recordTypeSelector = function(options) {
+    cspace.util.recordTypeSelector = function (options) {
         var that = fluid.initLittleComponent("cspace.util.recordTypeSelector", options);
         var model = cspace.permissions.getPermissibleRelatedRecords(
                 that.options.related, that.options.permissionsResolver, that.options.recordTypeManager, "read");
         that.model = model;
         
-        that.produceComponent = function() {
+        that.produceComponent = function () {
             var togo = {};
             if (model.length > 0) {
                 togo[that.options.componentID] = {
                     selection: model[0], 
                     optionlist: model,
-                    optionnames: fluid.transform(model, function(recordType) {
+                    optionnames: fluid.transform(model, function (recordType) {
                         return that.options.messageResolver.resolve(recordType);
                     })
                 };
@@ -482,7 +482,7 @@ fluid.registerNamespace("cspace.util");
                  
         that.returnedOptions = {
             listeners: {
-                afterRender: function() {  
+                afterRender: function () {  
                     if (that.model.length < 2) {
                         fluid.enabled(that.options.dom.locate(that.options.selector), false);
                     }
@@ -684,6 +684,146 @@ fluid.registerNamespace("cspace.util");
         });
     }
     
+    var isDecorator = function (source, type) {
+        if (!source.decorators || !source.decorators[0]) {
+            return false;
+        }
+        return  source.decorators[0].func && source.decorators[0].func === type;
+    };
+
+    cspace.util.urnToStringFieldConverter = function (container, options) {
+        var that = fluid.initView("cspace.util.urnToStringFieldConverter", container, options);
+        that.container.text(that.options.convert(that.container.text()));
+        return that;   
+    };
+    
+    /*
+     * Takes a string in URN format and returns it in Human Readable format
+     * @param urn a string in URN format
+     * @return the text of the URN format (human readable)
+     */
+    cspace.util.urnToString = function (urn) {
+        if (!urn) {
+            return "";
+        }
+        return decodeURIComponent(urn.slice(urn.indexOf("'") + 1, urn.length - 1)).replace(/\+/g, " ");            
+    };
+    
+    fluid.defaults("cspace.util.urnToStringFieldConverter", {
+        convert: cspace.util.urnToString 
+    });
+    
+    /**
+     * Used for substituting the text of the continer based on the variables of the options
+     * parameter. The options block is expected to hold to arrays: keys and values.
+     * The text of the container is looked up in keys and substituted with the 
+     * string from the index in options.
+     * @param container the container in which to replace text
+     * @param options expected to hold to arrays: keys and values. They should be of
+     * same length.
+     */
+    cspace.util.nameForValueFinder = function (container, options) {
+        var that = fluid.initView("cspace.util.nameForValueFinder", container, options);
+        fluid.initDependents(that);
+        that.assignValue();
+        return that;
+    };
+    
+    cspace.util.nameForValueFinder.assignValue = function (selector, options) {
+        if (!options.list || !options.names) {
+            return;
+        }
+        var listValue = selector.text();
+        if (!listValue) {
+            return;
+        }
+        var index = $.inArray(listValue, options.list);
+        if (index < 0) {
+            return;
+        } 
+        selector.text(options.names[index]);
+    };
+    
+    fluid.defaults("cspace.util.nameForValueFinder", {
+        invokers: {
+            assignValue: {
+                funcName: "cspace.util.nameForValueFinder.assignValue",
+                args: ["{nameForValueFinder}.container", "{nameForValueFinder}.options"]
+            }
+        }
+    });
+    
+    /** Function to generate a readonly uispec based on a regular uispec. 
+     * @param uispec the uispec to be converted to Read only.
+     * @param search if this is defined, each time this string appear in any of the values
+     *         of fields, this will be replaced by the value defined in the replace
+     *         parameter. This is needed for pathAs in repeatable fields. 
+     * @param replace if search is defined, this value will replace the occurences of 
+     *        the string defined in search. This is needed for pathAs in repeatable fields. 
+     * @return a new uispec modified to be in read only mode.
+     */
+    var resolveReadOnlyUISpecImpl = function (uispec) {
+        var newspec = {};
+        fluid.each(uispec, function (val, key) {
+            if (!val) {
+                return;
+            }
+            if (typeof val === "string") {
+                newspec[key] = val;
+            } 
+            else if (val.selection) { 
+                newspec[key] = {
+                    valuebinding: val.selection,
+                    decorators: [{
+                        func: "cspace.util.nameForValueFinder",
+                        type: "fluid",
+                        options: {
+                            list: val.optionlist,
+                            names: val.optionnames
+                        }
+                    }]
+                };
+            }
+            else if (isDecorator(val, "cspace.autocomplete")) {
+                newspec[key] = {
+                    valuebinding: val.valuebinding,
+                    decorators: [{
+                        func: "cspace.util.urnToStringFieldConverter",
+                        type: "fluid"   
+                    }]
+                };                
+            } 
+            else if (isDecorator(val, "cspace.makeRepeatable")) {
+                var decorator = val.decorators[0];
+                var opts = decorator.options;               
+                newspec[key] = {
+                    decorators: [{
+                        func: decorator.func,
+                        type: decorator.type,
+                        options: {
+                            elPath: opts.elPath,
+                            protoTree: resolveReadOnlyUISpecImpl(opts.protoTree)
+                        }
+                    }]
+                };
+            }
+        });  
+        return newspec;   
+    };
+    
+    /** Function to return an apropriate uispec, based on the two parameters.
+     * If the readOnly parameter is set to true, a call to UISpecToReadOnlyImpl is 
+     * made. This will modify the uispec to be a read only version of the 
+     * generate a readonly uispec based on the passed uispec. If readOnly is false,
+     * the uispec will be returned unmodified.
+     * @param uispec the uispec that potentially should be converted to Read only.
+     * @param readOnly flag telling whether the uispec should be modified to readonly
+     * @return unmodified uispec if readOnly is false. Else the uispec modified to read only
+     */
+    cspace.util.resolveReadOnlyUISpec = function (uispec, readOnly) {
+        return readOnly ? resolveReadOnlyUISpecImpl(uispec) : uispec;
+    };
+        
     cspace.util.globalLoadingIndicator = function (container, options) {
         var that = fluid.initView("cspace.util.globalLoadingIndicator", container, options);
         that.indicator = createMarkup(that);
@@ -758,8 +898,8 @@ fluid.registerNamespace("cspace.util");
     };
     
     cspace.util.modelBuilder = function (options) {
-        var records = cspace.permissions.getPermissibleRelatedRecords(options.related, options.resolver, options.recordTypeManager, options.permission)
-        return fluid.invokeGlobalFunction(options.callback, [options.model, records])
+        var records = cspace.permissions.getPermissibleRelatedRecords(options.related, options.resolver, options.recordTypeManager, options.permission);
+        return fluid.invokeGlobalFunction(options.callback, [options.model, records]);
     };
     
 })(jQuery, fluid);

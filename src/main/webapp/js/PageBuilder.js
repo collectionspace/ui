@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid, cspace, fluid, window*/
+/*global jQuery, fluid, cspace:true, fluid, window*/
 "use strict";
 
 cspace = cspace || {};
@@ -56,10 +56,14 @@ cspace = cspace || {};
         container.append($(selector, templateContainer)); 
     };
     
+    var isTab = function (pageType) {
+        return pageType.indexOf("tab") !== -1;
+    };
+    
     var setupModel = function (applier, existingModel, pageType, recordType, schema) {
         // TODO: This logic shouldn't really be here and needs to be moved to the dataSource once it
         // replaces the dataContext and gathers all the model related logic inside.
-        if (!pageType || pageType.indexOf("tab") !== -1 || existingModel.csid) {
+        if (!pageType || isTab(pageType) || existingModel.csid) {
             return;
         }
         applier.requestChange("", cspace.util.getBeanValue(existingModel, recordType, schema));
@@ -166,12 +170,27 @@ cspace = cspace || {};
         var pageSpecs = fluid.copy(that.options.pageSpec);
         var resourceSpecs = fluid.copy(pageSpecs);
         var pageSpecManager = cspace.pageSpecManager(pageSpecs);
+        
+        that.readOnly = cspace.pageBuilder.resolveReadOnly({
+            permissions: that.permissions,
+            csid: that.options.csid,
+            readOnly: that.options.readOnly,
+            target: that.options.recordType
+        });
+            
+        var urlExpander = cspace.urlExpander({
+            vars: {
+                readonly: that.readOnly ? that.options.readOnlyUrlVar : ""
+            }
+        });
+        
         fluid.each(resourceSpecs, function (spec, key) {
+            spec.href = urlExpander(spec.href);
             spec.options = {
                 success: pageSpecManager.makeCallback(spec, key)
             };
         });
-        
+
         fluid.each(that.options.schema, function (resource, key) {
             resourceSpecs[resource] = {
                 href: fluid.invoke("cspace.util.getDefaultSchemaURL", resource),
@@ -199,6 +218,10 @@ cspace = cspace || {};
                     dataType: "json",
                     success: function (data) {
                         that.uispec = data;
+                        var recordPath = isTab(that.options.pageType) ? "details" : "recordEditor";
+                        if (that.uispec[recordPath]) {
+                            that.uispec[recordPath] = cspace.util.resolveReadOnlyUISpec(that.uispec[recordPath], that.readOnly);
+                        }
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         fluid.fail("Error fetching " + that.options.pageType + " uispec:" + textStatus);
@@ -258,7 +281,7 @@ cspace = cspace || {};
                 type: "cspace.recordTypeManager"
             },
             globalBundle: {
-                type: "cspace.globalBundle",
+                type: "cspace.globalBundle"
             }
         },
         schema: [
@@ -271,6 +294,7 @@ cspace = cspace || {};
         dataContext: {
             type: "cspace.dataContext"
         },
+        readOnlyUrlVar: "readonly/",
         pageSpec: {},
         htmlOnly: false,
         uispecUrl: "",
@@ -281,6 +305,31 @@ cspace = cspace || {};
             model: "preserve",
             applier: "preserve"
         }
+    });
+    
+    cspace.pageBuilder.resolveReadOnly = function (options) {
+        // Return true if read only is enforced.
+        if (options.readOnly) {
+            return true;
+        }
+        // If there's no target (recordType) there is no concept of read only and thus we return false.
+        if (!options.target) {
+            return false;
+        }
+        var that = fluid.initLittleComponent("cspace.pageBuilder.resolveReadOnly", options);
+        that.recordPerms = {};
+        fluid.each(that.options.perms, function (permission) {
+            that.recordPerms[permission] = cspace.permissions.resolve({
+                permission: permission,
+                target: that.options.target,
+                permissions: that.options.permissions
+            });
+        });
+        return !(that.options.csid && that.recordPerms.update || that.recordPerms.create);
+    };
+    
+    fluid.defaults("cspace.pageBuilder.resolveReadOnly", {
+        perms: ["create", "update"]
     });
     
     cspace.pageBuilderSetup.setupRecord = function (options) {

@@ -19,7 +19,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             if (comp.hasOwnProperty(key)) {
                 var val = comp[key];
                 if ((typeof(val) === "string") && (val.indexOf("${") !== -1)) {
-                    comp[key] = val.replace(re, newInd+"");
+                    comp[key] = val.replace(re, newInd + "");
                 } else if (typeof(val) === "object") {
                     replaceIndex(val, oldInd, newInd);
                 }
@@ -28,7 +28,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
 
     var getElPathOfArray = function (binding) {
-        return binding.substring(binding.indexOf("${")+2, binding.indexOf("0")-1);
+        return binding.substring(binding.indexOf("${") + 2, binding.indexOf("0") - 1);
     };
 
     var findValueBinding = function (comp) {
@@ -52,8 +52,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var b = string.indexOf("${");
         var e = string.indexOf("}");
         while (b !== -1) {
-            var el = string.slice(b+2,e);
-            string = string.replace("${"+el+"}", fluid.model.getBeanValue(model, el));
+            var el = string.slice(b + 2, e);
+            string = string.replace("${" + el + "}", fluid.model.getBeanValue(model, el));
             b = string.indexOf("${");
             e = string.indexOf("}");
         }
@@ -103,7 +103,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     var correctDoubleValueBinding = function (tree) {
-        return fluid.transform(tree, function(value, key) {
+        return fluid.transform(tree, function (value, key) {
             if (fluid.isPrimitive(value)) {
                 return value;
             }
@@ -112,7 +112,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 value.value = value.valuebinding;
                 delete value.valuebinding;
                 return value;
-                }
+            }
             else {
                 return correctDoubleValueBinding(value);
             }
@@ -145,10 +145,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 if (!uispec.hasOwnProperty(key)) {
                     continue;
                 }
-                if (key === "expander" && uispec[key].tree) {
-                    var expander = uispec[key];
-                    extractExpanderSelectors(selectors, expander);
-                    cspace.renderUtils.buildSelectorsFromUISpec(expander.tree, selectors);
+                if (key === "expander") {
+                    var expanders = fluid.makeArray(uispec[key]);
+                    fluid.each(expanders, function (expander) {
+                        if (!expander.tree) {
+                            return;
+                        }
+                        extractExpanderSelectors(selectors, expander);
+                        cspace.renderUtils.buildSelectorsFromUISpec(expander.tree, selectors);
+                    });
                     continue;
                 }
                 selectors[key] = (key.indexOf(":") === key.length - 1 ? key.substring(0, key.length - 1) : key);                                

@@ -17,7 +17,7 @@
             "targetSelector": ".csc-acquisition-titleBar-container" 
         },
         "dateEntry": {
-            "href": "acquisitionTemplate.html",
+            "href": "%readonlyacquisitionTemplate.html",
             "templateSelector": ".csc-acquisition-template",
             "targetSelector": ".csc-record-edit-container" 
         },

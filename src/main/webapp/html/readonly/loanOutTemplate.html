@@ -1,0 +1,250 @@
+<div class="csc-loanOut-template" id="read-only">
+    <div class="csc-loanOut">
+        <div id="secondary-nav">
+            <div id="secondary-nav-menu-sub">
+                <div class="button-row">
+                   <!-- <input type="button" class="csc-save saveButton primary" value="Save"/>
+                    <a href="findedit.html"><input type="button" class="cancelButton" value="Cancel" /></a>
+                    <div class="clear"></div>-->
+                </div>
+                <div class="time-stamp"> </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        
+        <div class="acquisition-outer-border">
+            <div class="hidden csc-message-container cs-message">
+                <span class="csc-timestamp cs-timestamp">time</span>
+                <span class="csc-message">Save successful!</span>
+            </div>
+
+            <div class="fl-container-flex fl-fix information-group">
+                <div class="info-column">
+                    <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-loanout-information', this); return false;">
+                        <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                        Loans Out Information
+                    </div>
+                    
+                    <div class="fl-container-flex fl-fix content main" id="toggle-loanout-information">
+                        <div class="info-column fl-force-left">
+                            <div class="info-column2-50 fl-force-left">
+                                <div class="info-pair">
+                                    <div class="label">Loan Out Number <span class="required">*</span></div>
+                                    <div class="content csc-loanOut-loanOutNumber-patternChooserContainer">
+                                        <div class="input-alpha csc-loanOut-loanOutNumber pattern-chooser-input" ></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label">Borrower</div>
+                                    </div>
+                                    <div class="content">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Borrower</td>
+                                                    <td>Contact</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><div type="text" class="input-alpha csc-loanOut-borrower" ></div>
+                                                    <!--<div class="csc-loanOut -borrower-autocomplete"></div>-->
+                                                    </td>
+                                                    <td><div type="text" class="input-alpha csc-loanOut-borrowersContact" ></div>
+                                                    <!--<div class="csc-loanOut -borrowersContact-autocomplete"></div>-->
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label">Loan Out Conditions</div>
+                                    </div>
+                                    <div class="content">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td><div class="input-textarea csc-loanOut-loanOutConditions"></div></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="info-column2-50 fl-force-right">
+                                <div class="info-pair-select">
+                                    <div class="header">
+                                        <div class="label">Loan Purpose</div>
+                                    </div>
+                                    <div class="content">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td><div class="csc-loanOut-loanPurpose input-select" ></div></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label">Lender</div>
+                                    </div>
+                                    <div class="content csc-acquisition-authorizer-date-container">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td>Lender's Authorizer</td>
+                                                    <td>Lender's Contact</td>
+                                                    <td>Lender's Authorization Date</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><div class="input-alpha csc-loanOut-lendersAuthorizer" ></div>
+                                                    <!--div class="csc-loanOut -lendersAuthorizer-autocomplete"></div>-->
+                                                    </td>
+                                                    <td><div class="input-alpha csc-loanOut-lendersContact" ></div>
+                                                    <!--<div class="csc-loanOut -lendersContact-autocomplete"></div>-->
+													</td>
+                                                    <td class="field-cal csc-loanOut-lendersAuthorizationDate-container"><div class="input-date csc-loanOut-lendersAuthorizationDate csc-calendar-date" ></div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label">Loan Out Note</div>
+                                    </div>
+                                    <div class="content">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td><div class="input-textarea csc-loanOut-loanOutNote"></div></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-column fl-force-left">
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label">Loaned Object Status</div>
+                                    </div>
+                                    <div class="content csc-acquisition-authorizer-date-container">
+                                        <table id="">
+                                            <thead>
+                                                <tr>
+                                                    <td>Status</td>
+                                                    <td>Status Date</td>
+                                                    <td>Status Note</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="csc-loanout-loanedObjectStatusGroup">
+                                                    <td><div class="input-select csc-loanOut-loanedObjectStatus" ></div></td>
+                                                    <td><div class="input-date csc-loanOut-loanedObjectStatusDate csc-calendar-date" ></div></td>
+                                                    <td><div class="input-alpha csc-loanOut-loanedObjectStatusNote" ></div></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-column fl-force-left">
+                                <div class="info-column3 fl-force-left">
+                                    <div class="info-pair-date">
+                                        <div class="header">
+                                            <div class="label">Loan Out Date</div>
+                                        </div>
+                                        <div class="content">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="field-cal csc-loanOut-loanOutDate-container">
+                                                            <div class="input-date csc-loanOut-loanOutDate csc-calendar-date" /></div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="info-column3 fl-force-left">
+                                    <div class="info-pair-date">
+                                        <div class="header">
+                                            <div class="label">Loan Return Date</div>
+                                        </div>
+                                        <div class="content">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="field-cal csc-loanOut-loanReturnDate-container">
+                                                            <div type="text" class="input-date csc-loanOut-loanReturnDate csc-calendar-date" ></div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="info-column3 fl-force-left">
+                                    <div class="info-pair-date">
+                                        <div class="header">
+                                            <div class="label">Loan Renewal Application Date</div>
+                                        </div>
+                                        <div class="content">
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="field-cal csc-loanOut-loanRenewalApplicationDate-container">
+                                                            <div class="input-date csc-loanOut-loanRenewalApplicationDate csc-calendar-date" ></div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hidden csc-message-container cs-message">
+                <span class="csc-timestamp cs-timestamp">time</span>
+                <span class="csc-message">Save successful!</span>
+            </div>
+
+            <div class="csc-error-dialog">
+                <p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
+            </div>
+        </div> <!-- end outer border-->
+
+        <!-- Button container -->
+        <div class="fl-container-flex button-row">
+            <!--<a href="#"><input type="button" class="csc-save saveButton primary" value="Save" /></a>
+            <a href="findedit.html"><input type="button" class="cancelButton" value="Cancel" /></a>
+            <div class="clear"></div>-->
+        </div>
+    </div>
+
+</div>

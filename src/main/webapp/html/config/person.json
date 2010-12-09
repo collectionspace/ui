@@ -17,7 +17,7 @@
             "targetSelector": ".csc-personAuthority-titleBar-container" 
         },
         "recordEditor": {
-            "href": "personTemplate.html",
+            "href": "%readonlypersonTemplate.html",
             "templateSelector": ".csc-personAuthority-template",
             "targetSelector": ".csc-record-edit-container"
         },

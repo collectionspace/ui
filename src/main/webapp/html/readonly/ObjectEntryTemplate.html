@@ -1,0 +1,1710 @@
+        <div class="csc-object-entry-template" id="read-only">
+                            <div class="csc-object-entry csc-listEditor-details">
+                                <!-- Object Data Entry specific sub-menu -->
+                                <div id="secondary-nav">
+                                    <div id="secondary-nav-menu-sub">
+                                        <div class="button-row">
+                                            <!--<input type="button" class="csc-save saveButton primary" value="Save"/>
+                                            <a href="findedit.html"><input type="button" class="cancelButton" value="Cancel" /></a>
+                                            <a style="display:none;" class="csc-goto"><input type="button" class="gotoButton" value="Go To Record" /></a>
+                                            <div class="clear"></div>-->
+                                        </div>
+                                        <div class="time-stamp"> </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="object-entry-outer-border">
+
+                                    <div class="hidden csc-message-container cs-message">
+                                        <span class="csc-timestamp cs-timestamp">time</span>
+                                        <span class="csc-message">Save successful!</span>
+                                    </div>
+                                    
+                                    <div class="fl-container-flex fl-fix information-group">
+                                        <div class="info-column">
+                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-identification-information', this); return false;">
+                                                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon"/></span>
+                                                Object Identification Information
+                                            </div>
+                                            
+                                            <div class="fl-container-flex fl-fix content main" id="toggle-object-identification-information">
+                                                <div class="info-column">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair">
+                                                            <div class="label">Identification Number <span class="required">*</span></div>
+                                                            <div class="content csc-object-identification-object-number-container">
+                                                                <div class="input-alpha csc-object-identification-object-number pattern-chooser-input" ></div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Number of Objects</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="input-alpha input-numeric-medium csc-object-identification-number-objects"></div>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Other Number</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <table>
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Number</td>
+                                                                            <td>Number Type</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr class="csc-object-identification-otherNumbers">
+                                                                            <td><div class="input-alpha csc-object-identification-other-number" ></div></td>
+                                                                            <td><div class="input-alpha csc-object-identification-other-number-type input-select"></div></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="info-pair-select">
+                                                            <div class="header">
+                                                                <div class="label">Responsible Department</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="csc-object-identification-responsible-department input-select"></div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="info-pair-select">
+                                                            <div class="header">
+                                                                <div class="label">Collection</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="csc-object-identification-collection input-select"></div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="info-pair-select">
+                                                            <div class="header">
+                                                                <div class="label">Record Status</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="csc-object-identification-record-status input-select"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                    
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Brief Description</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="input-textarea csc-object-identification-brief-description"></div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Distinguishing Features</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="input-textarea csc-object-identification-distinguishing-features"></div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Comments</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="input-textarea csc-object-identification-comments"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                
+                                                <div class="info-column" id="multipleEdit">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Title</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td>Title</td>
+                                                                        <td>Title Language</td>
+                                                                        <td>Title Translation</td>
+                                                                        <td>Title Translation Language</td>
+                                                                        <td>Title Type</td>
+                                                                    </tr>
+                                                                </thead>
+                                                            
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="flc-inlineEdit-text" style="width:45%;"><div class="input-alpha csc-object-identification-object-title editableText"></div></td>
+                                                                        <td class="flc-inlineEdit-text"><div class="csc-object-identification-object-title-language input-select"></div></td>
+                                                                        <td class="flc-inlineEdit-text"><div class="input-alpha csc-object-identification-object-title-translation editableText"></div></td>
+                                                                        <td class="flc-inlineEdit-text"><div class="csc-collection-object-titleTranslationLanguage input-select"></div></td>
+                                                                        <td class="flc-inlineEdit-text"><div class="csc-object-identification-object-title-type input-select"></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Object Name</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td>Object Name</td>
+                                                                        <td>Currency</td>
+                                                                        <td>Level</td>
+                                                                        <td>System</td>
+                                                                        <td>Type</td>
+                                                                        <td>Language</td>
+                                                                        <td>Note</td>
+                                                                    </tr>
+                                                                </thead>                                                                
+                                                                <tbody>
+                                                                    <tr class="csc-collection-object-objectNameGroup">
+                                                                        <td><div class="input-alpha csc-object-identification-object-name"></div></td>
+                                                                        <td><div class="csc-object-identification-object-currency input-select"></div></td>
+                                                                        <td><div class="csc-object-identification-object-level input-select"></div></td>
+                                                                        <td><div class="csc-object-identification-object-system input-select"></div></td>
+                                                                        <td><div class="csc-object-identification-object-type input-select"></div></td>
+                                                                        <td><div class="csc-object-identification-object-language input-select"></div></td>    
+                                                                        <td style="width:25%;"><div class="input-alpha csc-object-identification-object-note"></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>    
+
+                                    <div class="fl-container-flex fl-fix information-group">
+                                        <div class="info-column">
+                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-description-info', this); return false;">
+                                                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                                                Object Description Information
+                                            </div>
+                                            <div class="fl-container-flex fl-fix content main" id="toggle-object-description-info">
+                                                <div class="info-column2-50 fl-force-left">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Copy Number</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-alpha csc-object-description-copy-number"></div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Object Status</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="csc-object-description-status input-select"></div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Sex</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="csc-object-description-sex input-select"></div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Phase</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="csc-object-description-phase input-select"></div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-column">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Form</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="csc-object-description-form input-select"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="info-column2-50 fl-force-right">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Edition Number</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-alpha csc-object-description-edition-number"></div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Age</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td>Age</td>
+                                                                        <td>Age Qualifier</td>
+                                                                        <td>Unit</td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><div class="input-alpha csc-object-description-age"></div></td>
+                                                                        <td><div class="input-alpha csc-object-description-age-qualifier"></div></td>
+                                                                        <td><div class="csc-object-description-age-unit input-select"></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>        
+                                                    
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Style</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-alpha csc-object-description-style"></div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Color</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-alpha csc-object-description-color"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                <div class="clear"></div>
+                                                <div class="info-column">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Material</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td>Material</td>
+                                                                        <td>Material Component</td>
+                                                                        <td>Material Component Note</td>
+                                                                        <td>Material Name</td>
+                                                                        <td>Material Source</td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><div class="input-alpha csc-object-description-material"></div></td>
+                                                                        <td><div class="input-alpha csc-object-description-material-component" disabled="disabled"></div></td>
+                                                                        <td><div class="input-alpha csc-object-description-material-component-note"></div></td>
+                                                                        <td><div class="input-alpha csc-object-description-material-name"></div></td>
+                                                                        <td><div class="input-alpha csc-object-description-material-source"></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Physical Description</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-textarea csc-object-description-physical-description"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="info-column2-50 fl-force-left">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Object Component</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td>Name</td>
+                                                                        <td>Information</td>
+                                                                    </tr>
+                                                                </thead>
+                                                                
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><div class="csc-object-description-object-component-name input-select"></div></td>
+                                                                        <td><div class="input-alpha csc-object-description-object-component-information" ></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="info-column2-50 fl-force-right">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Technical Attribute</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td>Technical Attribute</td>
+                                                                        <td>Measurement</td>
+                                                                        <td>Unit</td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><div class="csc-object-description-technical-attribute input-select"></div></td>
+                                                                        <td><div class="csc-object-description-technical-attribute-measurement input-select"></div></td>
+                                                                        <td><div class="csc-object-description-technical-attribute-unit input-select"></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                                
+                                                <div class="info-column2-50 fl-force-left">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Dimension summary</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-alpha csc-collection-object-dimensionSummary"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="info-column">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Dimension</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td>Part</td>
+                                                                        <td>Dimension</td>
+                                                                        <td>Value</td>
+                                                                        <td>Dimension Unit</td>
+                                                                        <td>Value Qualifier</td>
+                                                                        <td>Date</td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr class="csc-collection-object-dimensionGroup">
+                                                                        <td><div class="csc-object-description-dimension-part input-select"></div></td>
+                                                                        <td><div class="csc-object-description-dimension input-select"></div></td>
+                                                                        <td><div class="input-alpha csc-object-description-dimension-value"></div></td>
+                                                                        <td><div class="csc-object-description-dimension-unit input-select" ></div></td>
+                                                                        <td><div class="input-alpha csc-object-description-dimension-value-qualifier"></div></td>
+                                                                        <td class="csc-object-description-dimension-value-date-container fl-table">
+                                                                            <div class="fl-force-left input-date csc-object-description-dimension-value-date csc-calendar-date" ></div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                
+                                                <div class="info-column">
+                                                    <div class="fl-container-flex fl-fix information-subgroup">
+                                                        <div class="info-column fl-force-left">
+                                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-description-information-content', this); return false;">
+                                                                <span class="header-toggle-sub"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                                                                Content
+                                                            </div>
+                                                            <div class="fl-container-flex fl-fix content main" id="toggle-description-information-content">
+                                                                <div class="info-column">
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Description</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-textarea csc-object-description-content-description"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="info-column2-50 fl-force-left">
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Language</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="csc-object-description-content-language input-select"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Activity</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-alpha csc-object-description-content-activity"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Concept</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-alpha csc-object-description-content-concept"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair info-pair-date">
+                                                                        <div class="header">
+                                                                            <div class="label">Date</div>
+                                                                        </div>
+                                                                        <div class="content csc-object-description-content-date-container fl-table">
+                                                                            <div class="fl-force-left input-date csc-object-description-content-date csc-calendar-date" ></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Position</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="csc-object-description-content-position input-select"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Object</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <table>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Object</td>
+                                                                                        <td>Object Type</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td><div class="input-alpha csc-object-description-content-object"></div></td>
+                                                                                        <td><div class="input-alpha csc-object-description-content-object-type"></div></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </div>
+                                                                
+                                                                <div class="info-column2-50 fl-force-right">
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">People</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-alpha csc-object-description-content-people"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Person</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-alpha csc-object-description-content-person"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Place</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-alpha csc-object-description-content-place"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Script</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="csc-object-description-content-script input-select"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Organization</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-alpha csc-object-description-content-organization"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Event Name</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <table>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Event Name</td>
+                                                                                        <td>Event Name Type</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td><div class="input-alpha csc-object-description-content-event-name"></div></td>
+                                                                                        <td><div class="input-alpha csc-object-description-content-event-name-type"></div></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Other</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <table>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Other</td>
+                                                                                        <td>Other Type</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td><div class="input-alpha csc-object-description-content-other" ></div></td>
+                                                                                        <td><div class="input-alpha csc-object-description-content-other-type" ></div></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </div>
+                                                                <div class="clear"></div>
+                                                                
+                                                                <div class="info-column">
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Note</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-textarea csc-object-description-content-note"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clear"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                                </div>
+                                                
+                                                <div class="info-column">
+                                                    <div class="fl-container-flex fl-fix information-subgroup">
+                                                        <div class="info-column">
+                                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-description-information-inscription-content', this); return false;">
+                                                                <span class="header-toggle-sub"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                                                                Textual Inscription
+                                                            </div>
+                                                            <div class="fl-container-flex fl-fix content main" id="toggle-description-information-inscription-content">
+                                                                <div class="info-column">
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Inscription Content</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-textarea csc-object-description-inscription-content"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="info-column2-50 fl-force-left">
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Inscriber</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-alpha csc-object-description-inscription-content-inscriber"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Language</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="csc-object-description-inscription-content-language input-select"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                        
+                                                                    <div class="info-pair info-pair-date">
+                                                                        <div class="header">
+                                                                            <div class="label">Date</div>
+                                                                        </div>
+                                                                        <div class="content csc-object-description-inscription-content-date-container fl-table">
+                                                                            <div class="fl-force-left input-date csc-object-description-inscription-content-date csc-calendar-date" ></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="info-column2-50 fl-force-right">
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Position</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="csc-object-description-inscription-content-position input-select"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Script</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="csc-object-description-inscription-content-script input-select"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Type</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="csc-object-description-inscription-content-type input-select"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Method</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-alpha csc-object-description-inscription-content-method"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clear"></div>
+                                                                
+                                                                <div class="info-column">
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Interpretation</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-textarea csc-object-description-inscription-content-interpretation"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Translation</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-alpha csc-object-description-inscription-content-translation"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Transliteration</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-alpha csc-object-description-inscription-content-transliteration"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </div>
+                                                                <div class="clear"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="info-column">
+                                                    <div class="fl-container-flex fl-fix information-subgroup">
+                                                        <div class="info-column">
+                                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-description-information-inscription-description', this); return false;">
+                                                                <span class="header-toggle-sub"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                                                                Non-Textual Inscription
+                                                            </div>
+                                                            
+                                                            <div class="fl-container-flex fl-fix content main" id="toggle-description-information-inscription-description">
+                                                                <div class="info-column">
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Inscription Description</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-textarea csc-object-description-inscription-description"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="info-column2-50 fl-force-left">
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Inscriber</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-alpha csc-object-description-inscription-description-inscriber"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                        
+                                                                    <div class="info-pair info-pair-date">
+                                                                        <div class="header">
+                                                                            <div class="label">Date</div>
+                                                                        </div>
+                                                                        <div class="content csc-object-description-inscription-description-date-container fl-table">
+                                                                            <div class="fl-force-left input-date csc-object-description-inscription-description-date csc-calendar-date" ></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </div>
+                                                                
+                                                                <div class="info-column2-50 fl-force-right">
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Position</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="csc-object-description-inscription-description-position input-select"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Type</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="csc-object-description-inscription-description-type input-select"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Method</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-alpha csc-object-description-inscription-description-method"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="info-column">
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Interpretation</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-textarea csc-object-description-inscription-description-interpretation"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clear"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="fl-container-flex fl-fix information-group">
+                                        <div class="info-column">
+                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-production', this); return false;">
+                                                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                                                Object Production Information
+                                            </div>
+                                            <div class="fl-container-flex fl-fix content main" id="toggle-object-production">
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair-date">
+                                                            <div class="header">
+                                                                <div class="label">Production Date</div>
+                                                            </div>
+                                                            <div class="content csc-object-production-date-container csc-collection-object-objectProductionDates fl-table">
+                                                                <div class="fl-force-left input-date csc-object-production-date csc-calendar-date" ></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Production People</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <table>
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Production people</td>
+                                                                            <td>Role</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td><div class="input-alpha csc-object-production-people"></div></td>
+                                                                            <td><div class="input-alpha csc-collection-object-objectProductionPeopleRole"></div></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Production Technique</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <table>
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Technique</td>
+                                                                            <td>Technique Type</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td><div class="input-alpha csc-object-production-technique"></div></td>
+                                                                            <td><div class="csc-object-production-technique-type input-select"></div></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Production Person</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <table>
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Production person</td>
+                                                                            <td>Role</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td><div class="input-alpha csc-object-production-person"></div></td>
+                                                                            <td><div class="input-alpha csc-collection-object-objectProductionPersonRole"></div></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Production Place</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <table>
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Production place</td>
+                                                                            <td>Role</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td><div class="input-alpha csc-object-production-place"></div></td>
+                                                                            <td><div class="input-alpha csc-collection-object-objectProductionPlaceRole"></div></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Production Organization</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <table>
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Production organization</td>
+                                                                            <td>Role</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td><div class="input-alpha csc-object-production-organization"></div></td>
+                                                                            <td><div class="input-alpha csc-collection-object-objectProductionOrganizationRole"></div></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Production Reason</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="input-textarea csc-object-production-reason"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-column fl-force-left">
+                                                            <div class="info-pair">
+                                                                <div class="header">
+                                                                    <div class="label">Production Note</div>
+                                                                </div>
+                                                                <div class="content">
+                                                                    <div class="input-textarea csc-object-production-note"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="fl-container-flex fl-fix information-group">
+                                        <div class="info-column">
+                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-history', this); return false;">
+                                                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                                                Object History and Association Information
+                                            </div>
+                                            <div class="fl-container-flex fl-fix content main" id="toggle-object-history">
+                                            
+                                                <!-- BEGIN Associations sub-group -->
+                                                <div class="info-column">
+                                                    <div class="fl-container-flex fl-fix information-subgroup">
+                                                        <div class="info-column">
+                                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-history-associations', this); return false;">
+                                                                <span class="header-toggle-sub"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                                                                Associations
+                                                            </div>
+                                                            
+                                                            <div class="fl-container-flex fl-fix content main" id="toggle-object-history-associations">
+                                                            
+                                                                <div class="info-column2-50 fl-force-left">
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Associated Activity</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <table>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Associated Activity</td>
+                                                                                        <td>Associated Activity Note</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td><div class="input-alpha csc-collection-object-assocActivity"></div></td>
+                                                                                        <td><div class="input-alpha csc-collection-object-assocActivityNote"></div></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Associated Object</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <table>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Associated Object</td>
+                                                                                        <td>Associated Object Type</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td><div class="input-alpha csc-collection-object-assocObject"></div></td>
+                                                                                        <td><div class="input-alpha csc-collection-object-assocObjectType"></div></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info-pair">
+                                                                        <div class="info-column fl-force-left">
+                                                                            <div class="info-column">
+                                                                                <div class="header">
+                                                                                    <div class="label">Associated concept</div>
+                                                                                </div>
+                                                                                <div class="content">
+                                                                                    <div class="input-alpha csc-collection-object-assocConcept"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="info-column fl-force-left">
+                                                                                <div class="header">
+                                                                                    <div class="label">Association note</div>
+                                                                                </div>
+                                                                                <div class="content">
+                                                                                    <div class="input-alpha csc-collection-object-assocConceptNote"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info-pair">
+                                                                        <div class="info-column fl-force-left">
+                                                                            <div class="info-column">
+                                                                                <div class="header">
+                                                                                    <div class="label">Associated Cultural Affinity</div>
+                                                                                </div>
+                                                                                <div class="content">
+                                                                                    <div class="input-alpha csc-collection-object-assocCulturalContext"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="info-column fl-force-left">
+                                                                                <div class="header">
+                                                                                    <div class="label">Association note</div>
+                                                                                </div>
+                                                                                <div class="content">
+                                                                                    <div class="input-alpha csc-collection-object-assocCulturalContextNote"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info-pair">
+                                                                        <div class="info-column fl-force-left">
+                                                                            <div class="info-column">
+                                                                                <div class="header">
+                                                                                    <div class="label">Associated Organization</div>
+                                                                                </div>
+                                                                                <div class="content">
+                                                                                    <div class="input-alpha csc-collection-object-assocOrganization"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="info-column fl-force-left">
+                                                                                <div class="header">
+                                                                                    <div class="label">Association note</div>
+                                                                                </div>
+                                                                                <div class="content">
+                                                                                    <div class="input-alpha csc-collection-object-assocOrganizationNote"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info-pair">
+                                                                        <div class="info-column fl-force-left">
+                                                                            <div class="info-column">
+                                                                                <div class="header">
+                                                                                    <div class="label">Associated People</div>
+                                                                                </div>
+                                                                                <div class="content">
+                                                                                    <div class="input-alpha csc-collection-object-assocPeople"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="info-column fl-force-left">
+                                                                                <div class="header">
+                                                                                    <div class="label">Association note</div>
+                                                                                </div>
+                                                                                <div class="content">
+                                                                                    <div class="input-alpha csc-collection-object-assocPeopleNote"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info-pair">
+                                                                        <div class="info-column fl-force-left">
+                                                                            <div class="info-column">
+                                                                                <div class="header">
+                                                                                    <div class="label">Associated Person</div>
+                                                                                </div>
+                                                                                <div class="content">
+                                                                                    <div class="input-alpha csc-collection-object-assocPerson"/>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="info-column fl-force-left">
+                                                                                <div class="header">
+                                                                                    <div class="label">Association note</div>
+                                                                                </div>
+                                                                                <div class="content">
+                                                                                    <div class="input-alpha csc-collection-object-assocPersonNote"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info-pair">
+                                                                        <div class="info-column fl-force-left">
+                                                                            <div class="info-column">
+                                                                                <div class="header">
+                                                                                    <div class="label">Associated Place</div>
+                                                                                </div>
+                                                                                <div class="content">
+                                                                                    <div class="input-alpha csc-collection-object-assocPlace"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="info-column fl-force-left">
+                                                                                <div class="header">
+                                                                                    <div class="label">Association note</div>
+                                                                                </div>
+                                                                                <div class="content">
+                                                                                    <div class="input-alpha csc-collection-object-assocPlaceNote"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="clear"></div>
+                                                                </div>
+                                                                
+                                                                <div class="info-column2-50 fl-force-right">
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Associated Event Name</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <table>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Associated Event Name</td>
+                                                                                        <td>Associated Event Name type</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td><div class="input-alpha csc-collection-object-assocEventName"></div></td>
+                                                                                        <td><div class="input-alpha csc-collection-object-assocEventNameType"></div></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Associated Event Organization</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-alpha csc-object-history-association-event-organization"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Associated Event People</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-alpha csc-object-history-association-event-people"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Associated Event Person</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-alpha csc-object-history-association-event-person"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Associated Event Place</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-alpha csc-object-history-association-event-place"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Associated Event Note</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <div class="input-alpha csc-collection-object-assocEventNote"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="info-pair">
+                                                                        <div class="header">
+                                                                            <div class="label">Associated Date</div>
+                                                                        </div>
+                                                                        <div class="content">
+                                                                            <table>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <td>Date</td>
+                                                                                        <td>Association note</td>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <div class="content csc-collection-object-assocDate-container fl-table">
+                                                                                                <div class="fl-force-left input-date csc-collection-object-assocDate csc-calendar-date" ></div>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td><div class="input-alpha csc-collection-object-assocDateNote"/></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clear"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                                <!-- END Associations sub-group -->
+                                                
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Object History Note</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-textarea csc-object-history-association-object-history-note"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Usage</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td>Usage</td>
+                                                                        <td>Usage Notes</td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><div class="input-alpha csc-object-history-association-usage"></div></td>
+                                                                        <td><div class="input-alpha csc-object-history-association-usage-notes"></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Owner</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="input-alpha csc-object-history-association-owner"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-column2-50 fl-force-left">
+                                                            <div class="info-pair">
+                                                                <div class="header">
+                                                                    <div class="label">Ownership access</div>
+                                                                </div>
+                                                                <div class="content">
+                                                                    <div class="csc-object-history-association-access input-select"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="info-column2-50 fl-force-right">
+                                                            <div class="info-pair">
+                                                                <div class="header">
+                                                                    <div class="label">Ownership category</div>
+                                                                </div>
+                                                                <div class="content">
+                                                                    <div class="csc-object-history-association-category input-select"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Ownership date</div>
+                                                            </div>
+                                                            <div class="content csc-object-history-association-dates-container fl-table">
+                                                                <div class="fl-force-left input-date csc-object-history-association-dates csc-calendar-date" ></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Ownership place</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="input-alpha csc-object-history-association-ownership-place"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-column">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Ownership exchange</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td>Method</td>
+                                                                        <td>Note</td>
+                                                                        <td>Price - currency</td>
+                                                                        <td>Price - value</td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><div class="csc-object-history-association-exchange-method input-select"></div></td>
+                                                                        <td><div class="input-alpha csc-object-history-association-exchange-note"></div></td>
+                                                                        <td><div class="csc-object-history-association-denomination input-select"></div></td>
+                                                                        <td><div class="input-alpha csc-object-history-association-exchange-price-value"></div></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="fl-container-flex fl-fix information-group">
+                                        <div class="info-column">
+                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-owner', this); return false;">
+                                                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                                                Object Owner's Contribution Information
+                                            </div>
+                                            <div class="fl-container-flex fl-fix content main" id="toggle-object-owner">
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Owner's Personal Experience</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-textarea csc-object-owner-experience"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Owner's Personal Response</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-textarea csc-object-owner-response"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Owner's Reference</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-alpha csc-object-owner-reference"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Owner's Contribution Note</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-textarea csc-object-owner-contribution-note"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="fl-container-flex fl-fix information-group">
+                                        <div class="info-column">
+                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-viewer', this); return false;">
+                                                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                                                Object Viewer's Contribution Information
+                                            </div>
+                                            <div class="fl-container-flex fl-fix content main" id="toggle-object-viewer">
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Viewer's Role</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-alpha csc-object-viewer-role"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Viewer's Personal Experience</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-textarea csc-object-viewer-experience"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Viewer's Personal Response</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-textarea csc-object-viewer-response"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Viewer's Reference</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-alpha csc-object-viewer-reference"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Viewer's Contribution Note</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-textarea csc-object-viewer-contribution-note"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                    <div class="fl-container-flex fl-fix information-group">
+                                        <div class="info-column">
+                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-ref-info', this); return false;">
+                                                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                                                Reference Information
+                                            </div>
+                                            <div class="fl-container-flex fl-fix content main" id="toggle-ref-info">
+                                                <div class="info-column2-50 fl-force-left">
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Reference</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-alpha csc-reference-reference"></div>
+                                                        </div>
+                                                    </div>    
+                                                </div>
+                                                
+                                                <div class="info-column2-50 fl-force-right">                                                            
+                                                    <div class="info-pair">
+                                                        <div class="header">
+                                                            <div class="label">Catalog Number</div>
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="input-alpha csc-reference-catalog-number"></div>
+                                                        </div>
+                                                    </div>    
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="fl-container-flex fl-fix information-group">
+                                        <div class="info-column">
+                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-object-collection', this); return false;">
+                                                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
+                                                Object Collection Information
+                                            </div>
+                                            <div class="fl-container-flex fl-fix content main" id="toggle-object-collection">
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair-date">
+                                                            <div class="header">
+                                                                <div class="label">Field collection date</div>
+                                                            </div>
+                                                            <div class="content csc-collection-object-fieldCollectionDate-container fl-table">
+                                                                <div class="fl-force-left input-date csc-collection-object-fieldCollectionDate csc-calendar-date" ></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Field collection place</div>
+                                                            </div>                            
+                                                            <div class="content">
+                                                                <div class="input-alpha csc-collection-object-fieldCollectionPlace" ></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Field collection method</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="input-select csc-collection-object-fieldCollectionMethod" ></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Field collection source</div>
+                                                            </div>                            
+                                                            <div class="content">
+                                                                <div class="input-alpha csc-collection-object-fieldCollectionSource" ></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Field collection note</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="input-textarea csc-collection-object-fieldCollectionNote"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Field collection collector</div>
+                                                            </div>                            
+                                                            <div class="content">
+                                                                <div class="input-alpha csc-collection-object-fieldCollector" ></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-column2-50 fl-force-right">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Field collection event name</div>
+                                                            </div>                            
+                                                            <div class="content">
+                                                                <div class="input-alpha csc-collection-object-fieldColEventName" ></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-column fl-force-left">
+                                                    <div class="info-column2-50 fl-force-left">
+                                                        <div class="info-pair">
+                                                            <div class="header">
+                                                                <div class="label">Field collection number</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="input-alpha csc-collection-object-fieldCollectionNumber"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="hidden csc-message-container cs-message">
+                                        <span class="csc-timestamp cs-timestamp">time</span>
+                                        <span class="csc-message">Save successful!</span>
+                                    </div>
+
+                                    <div class="csc-error-dialog">
+                                        <p class="csc-error-message">I'm sorry, an error has occurred. Please try refreshing your browser.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="fl-container-flex button-row">
+                                    <!--<a href="#"><input type="button" class="primary saveButton csc-save" value="Save" /></a>
+                                    <a href="findedit.html"><input type="button" class="cancelButton" value="Cancel" /></a>
+                                    <div class="clear"></div>-->
+                                </div>
+                                
+                            </div>
+        </div>

@@ -17,7 +17,7 @@
             "targetSelector": ".csc-organizationAuthority-titleBar-container"
         },
         "recordEditor": {
-            "href": "organizationTemplate.html",
+            "href": "%readonlyorganizationTemplate.html",
             "templateSelector": ".csc-organizationAuthority-template",
             "targetSelector": ".csc-record-edit-container" 
         },
