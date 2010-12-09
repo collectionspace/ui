@@ -41,7 +41,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             titleBar: {
                                 href: "../../main/webapp/html/loanInTitleBar.html"
                             },
-                            dateEntry: {
+                            recordEditor: {
                                 href: "../../main/webapp/html/loanInTemplate.html"
                             },
                             sidebar: {

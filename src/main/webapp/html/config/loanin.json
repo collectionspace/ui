@@ -16,7 +16,7 @@
             "templateSelector": ".csc-loanIn-titleBar-template",
             "targetSelector": ".csc-loanIn-titleBar-container"
         },
-        "dateEntry": {
+        "recordEditor": {
             "href": "%readonlyloanInTemplate.html",
             "templateSelector": ".csc-loanIn-template",
             "targetSelector": ".csc-record-edit-container"

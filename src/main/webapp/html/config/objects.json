@@ -16,7 +16,7 @@
             "templateSelector": ".csc-object-entry-titleBar-template",
             "targetSelector": ".csc-object-entry-titleBar-container" 
         },
-        "dateEntry": {
+        "recordEditor": {
             "href": "%readonlyObjectEntryTemplate.html",
             "templateSelector": ".csc-object-entry-template",
             "targetSelector": ".csc-record-edit-container" 

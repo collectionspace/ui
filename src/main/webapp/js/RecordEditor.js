@@ -139,7 +139,7 @@ cspace = cspace || {};
         cspace.util.setZIndex();      
     }
     
-    var setupDataEntry = function (that) {
+    var setupRecordEditor = function (that) {
         bindEventHandlers(that);
         if (!that.options.deferRendering) {
             that.refreshView();
@@ -275,7 +275,7 @@ cspace = cspace || {};
             }
         };
 
-        setupDataEntry(that);
+        setupRecordEditor(that);
         that.unsavedChanges = false;
 
         return that;

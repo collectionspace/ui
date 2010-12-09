@@ -16,7 +16,7 @@
             "templateSelector": ".csc-movement-titleBar-template",
             "targetSelector": ".csc-movement-titleBar-container" 
         },
-        "dateEntry": {
+        "recordEditor": {
             "href": "%readonlyMovementTemplate.html",
             "templateSelector": ".csc-movement-template",
             "targetSelector": ".csc-record-edit-container" 

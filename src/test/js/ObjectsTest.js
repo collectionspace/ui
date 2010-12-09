@@ -38,7 +38,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             titleBar: {
                                 href: "../../main/webapp/html/objectTitleBar.html"
                             },
-                            dateEntry: {
+                            recordEditor: {
                                 href: "../../main/webapp/html/ObjectEntryTemplate.html"
                             },
                             sidebar: {

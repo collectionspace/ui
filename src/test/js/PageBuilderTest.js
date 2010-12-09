@@ -57,11 +57,11 @@ cspace = cspace || {};
             option2: "cat",
             listeners: basicTestListeners,
             selectors: {
-                dateEntry: "#recordEditorContainer",
+                recordEditor: "#recordEditorContainer",
                 relatedRecords: "#linksContainer"
             },
             components: {
-                dateEntry: {
+                recordEditor: {
                     type: "cspace.testComponent2"
                 },
                 relatedRecords: {
@@ -73,11 +73,11 @@ cspace = cspace || {};
         
         var optionsWithComponentsWithOptions = {
             selectors: {
-                dateEntry: "#recordEditorContainer",
+                recordEditor: "#recordEditorContainer",
                 relatedRecords: "#linksContainer"
             },
             components: {
-                dateEntry: {
+                recordEditor: {
                     type: "cspace.testComponent4",
                     options: {
                         foo: "bar",
@@ -177,7 +177,7 @@ cspace = cspace || {};
             jqUnit.assertTrue("TestComponent4 instantiated", true);
             jqUnit.assertEquals("TestComponent4 initiated with correct container", "#recordEditorContainer", container);
             delete options["targetTypeName"];
-            jqUnit.assertDeepEq("TestComponent4 initiated with correct options", optionsWithComponentsWithOptions.components.dateEntry.options, options);
+            jqUnit.assertDeepEq("TestComponent4 initiated with correct options", optionsWithComponentsWithOptions.components.recordEditor.options, options);
         };
     
         cspace.testComponent5 = function (container, options) {
@@ -233,16 +233,16 @@ cspace = cspace || {};
         pageBuilderTest.test("Assembly of HTML", function () {
             expect(3);
             
-            fluid.demands("dateEntry", "cspace.pageBuilder", 
-                ["{pageBuilder}.options.selectors.dateEntry", fluid.COMPONENT_OPTIONS]);
+            fluid.demands("recordEditor", "cspace.pageBuilder", 
+                ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
                 
             var options = {
                 pageSpec: testPageSpec,
                 selectors: {
-                    dateEntry: "#recordEditorContainer"
+                    recordEditor: "#recordEditorContainer"
                 },
                 components: {
-                    dateEntry: {
+                    recordEditor: {
                         type: "cspace.testComponent1"
                     }
                 },
@@ -256,8 +256,8 @@ cspace = cspace || {};
     
         pageBuilderTest.test("Invocation of dependent components: container parameter", function () {
             expect(4);    // this is total num of assertions in the test components
-            fluid.demands("dateEntry", "cspace.pageBuilder", 
-                ["{pageBuilder}.options.selectors.dateEntry", fluid.COMPONENT_OPTIONS]);
+            fluid.demands("recordEditor", "cspace.pageBuilder", 
+                ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
             fluid.demands("relatedRecords", "cspace.pageBuilder", 
                 ["{pageBuilder}.options.selectors.relatedRecords", fluid.COMPONENT_OPTIONS]);
             cspace.pageBuilder(testIOCoptions);
@@ -266,8 +266,8 @@ cspace = cspace || {};
     
         pageBuilderTest.test("Invocation of dependent components: container plus options only", function () {
             expect(6);
-            fluid.demands("dateEntry", "cspace.pageBuilder", 
-                ["{pageBuilder}.options.selectors.dateEntry", fluid.COMPONENT_OPTIONS]);
+            fluid.demands("recordEditor", "cspace.pageBuilder", 
+                ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
             fluid.demands("relatedRecords", "cspace.pageBuilder", 
                 ["{pageBuilder}.options.selectors.relatedRecords", fluid.COMPONENT_OPTIONS]);
             cspace.pageBuilder(optionsWithComponentsWithOptions);
