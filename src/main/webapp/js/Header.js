@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global cspace, jQuery, fluid*/
+/*global cspace:true, jQuery, fluid*/
 "use strict";
 
 cspace = cspace || {};

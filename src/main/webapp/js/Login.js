@@ -9,7 +9,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid*/
+/*global jQuery, fluid, cspace:true*/
 
 cspace = cspace || {};
 
@@ -55,7 +55,7 @@ cspace = cspace || {};
 
     var makeRequiredFieldsValidator = function (domBinder, formType, message) {
         return function (e) {
-            var requiredFields = domBinder.locate(formType+"Required");
+            var requiredFields = domBinder.locate(formType + "Required");
             var missing = false;
             var firstMissing = -1;
             for (var i = 0; i < requiredFields.length; i++) {
@@ -94,7 +94,7 @@ cspace = cspace || {};
 
     var submitEmail = function (email, url, that) {
         if (cspace.util.useLocalData()) {
-            var mockResponse = {message: "Success", ok:true};
+            var mockResponse = {message: "Success", ok: true};
             that.events.emailSubmitted.fire(mockResponse);
         } else {
             jQuery.ajax({
@@ -110,7 +110,7 @@ cspace = cspace || {};
     
     var submitNewPassword = function (password, url, that) {
         if (cspace.util.useLocalData()) {
-            var mockResponse = {message: "Success", ok:true};
+            var mockResponse = {message: "Success", ok: true};
             showPasswordReset(that.dom, mockResponse);
             that.events.passwordSubmitted.fire(mockResponse);
         } else {
@@ -136,15 +136,9 @@ cspace = cspace || {};
             that.submitNewPassword();
         };
     };
-
-    var makeErrorHandler = function (domBinder, text) {
-        return function(XMLHttpRequest, textStatus, errorThrown){
-            cspace.util.displayTimestampedMessage(domBinder, text);
-        };
-    };
     
     var bindEventHandlers = function (that) {
-        that.locate("requestReset").click(function(e){
+        that.locate("requestReset").click(function (e) {
             cspace.util.hideMessage(that.dom);
             showResetRequestForm(that.dom);
         });
@@ -173,11 +167,11 @@ cspace = cspace || {};
         if (cspace.util.useLocalData()) {
             that.locate("loginForm").attr("action", "createnew.html");
         } else {
-            that.locate("loginForm").attr("action", cspace.util.addTrailingSlash(that.options.baseUrl)+"login");
+            that.locate("loginForm").attr("action", cspace.util.addTrailingSlash(that.options.baseUrl) + "login");
         }
 
         var result = cspace.util.getUrlParameter("result");
-        if (result == "fail") {
+        if (result === "fail") {
             cspace.util.displayTimestampedMessage(that.dom, that.options.strings.invalid);
         } else {
             cspace.util.hideMessage(that.dom);

@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
  */
 
-/*global cspace, jQuery, fluid, window*/
+/*global cspace:true, jQuery, fluid, window*/
 "use strict";
 
 cspace = cspace || {};
@@ -52,10 +52,10 @@ cspace = cspace || {};
         window.location = url;
     };
 
-    cspace.createNew.stylefy = function(that) {
+    cspace.createNew.stylefy = function (that) {
         //apply styles:
         var styles = that.options.styles;
-        fluid.each(styles, function(style, key) {
+        fluid.each(styles, function (style, key) {
             if (that.options.selectors[key]) {
                 that.locate(key).addClass(style);
             }
@@ -144,21 +144,21 @@ cspace = cspace || {};
                         categories: [{
                             name: "catalogingCategory",
                             arr: ["cataloging"]
-                        } , {
+                        }, {
                             name: "proceduresCategory",
                             arr: [
-                            "acquisition",
-                            "intake",
-                            "loanin",
-                            "loanout",
-                            "movement",
-                            "objectexit"
+                                "acquisition",
+                                "intake",
+                                "loanin",
+                                "loanout",
+                                "movement",
+                                "objectexit"
                             ]
                         }, {
                             name: "vocabularyCategory",
                             arr: [
-                            "person",
-                            "organization"
+                                "person",
+                                "organization"
                             ]
                         }]
                     },

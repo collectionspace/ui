@@ -41,20 +41,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }
     };
     
-    // Generic manual positioning function, currently unused - inserted for reference purposes   
-    function makeAdjustRelative(target, container) {
-        return function (pos) {
-            var targetOff = $(target[0].offsetParent).offset();
-            var contOff = $(container[0].offsetParent).offset();
-            var trueleft = pos.left + targetOff.left - contOff.left;
-            var truetop = pos.top + targetOff.top - contOff.top;
-            container.css({
-                left: trueleft + "px",
-                top: truetop + "px"
-            });
-        };
-    }
-    
     // Inspiration from http://stackoverflow.com/questions/158070/jquery-how-to-position-one-element-relative-to-another
     cspace.internalPositioner = function (jTarget, jToPosition, adjustX, adjustY) {
         var pos = jTarget.position();
@@ -356,7 +342,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.closeWithFocus = function () {
             that.close();
             that.options.inputField.focus();
-        }
+        };
 
         function makeHighlighter(funcName) {
             return function (item) {

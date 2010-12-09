@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid, window, cspace*/
+/*global jQuery, fluid, window, cspace:true*/
 "use strict";
 
 cspace = cspace || {};
@@ -129,13 +129,13 @@ cspace = cspace || {};
         return that;
     };
     
-    cspace.confirmation.getDialogGetter = function(that) {
-        return function() {
+    cspace.confirmation.getDialogGetter = function (that) {
+        return function () {
             return that.dlg;
-        }
+        };
     };
     
-    cspace.confirmation.produceTree = function(that) {
+    cspace.confirmation.produceTree = function (that) {
         return buildTree(that.options.strings, that.options.styles, that.options.enableButtons);
     };
     
@@ -192,13 +192,13 @@ cspace = cspace || {};
         },
         rendererFnOptions: {
             rendererTargetSelector: "dialog",
-            noexpand: true, // TODO: These two options are provisional in Infusion 1.3
+            noexpand: true // TODO: These two options are provisional in Infusion 1.3
         },
         produceTree: cspace.confirmation.produceTree,
         events: {
             afterRender: null,
             afterOpen: null,
-            afterClose: null,
+            afterClose: null
         },
         styles: {
             cancel: "cs-confirmationDialogButton-cancel",

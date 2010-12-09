@@ -22,54 +22,9 @@ function ShowHide(toggleme, source) {
     jQuery(source).find("img").attr("src", image);
 }
 
-/*function ToggleTabs(toggleme, toggleother, toggleSelected) {
-    jQuery(toggleother).hide();
-    jQuery(toggleme).show();
-    jQuery(toggleSelected).removeClass("selected");
-    
-}*/
-
 jQuery(document).ready(function() {
-    
     $currentFocus = null;
     jQuery(':input').focus( function() {
         $currentFocus = this;
-        
-    });
-
-
-    /*$switch = false;
-    jQuery('#primary').val($switch);
-    
-    jQuery('#primary').focus(function() {
-    
-        if ( $switch === false ) { //ok to change focus to secondary
-            jQuery('#primary').removeClass('activate').addClass('deactivate');
-            jQuery('#secondary').removeClass('hidden').addClass('show');
-            jQuery('#secondary').focus();
-        }
-        
-        else {
-            jQuery('#primary').removeClass('deactivate').addClass('activate');
-        }
-        
-        $switch = false;
-            
-        jQuery('#primary').val($switch);
-    });
-    
-    jQuery('#primary').blur(function() {
-        $switch = false;
-    });
-    
-    jQuery('#secondary').blur(function() {
-            jQuery('#secondary').removeClass('show').addClass('hidden');
-            
-            jQuery('#primary').removeClass('deactivate').addClass('activate');
-            
-            $switch = true;
-
-            jQuery('#primary').val($switch);
-    });*/
-        
+    }); 
 });

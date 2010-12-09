@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global cspace, jQuery, fluid*/
+/*global cspace:true, jQuery, fluid, window*/
 "use strict";
 
 cspace = cspace || {};
@@ -119,8 +119,8 @@ cspace = cspace || {};
     cspace.search.makeModelFilter = function (that) {
         return function (directModel, newModel, permutation) {
             var searchModel = that.model.searchModel;
-            fluid.log("modelFilter: initialState " + searchModel.initialState 
-                + ", renderRequest " + searchModel.renderRequest);
+            fluid.log("modelFilter: initialState " + searchModel.initialState + 
+                ", renderRequest " + searchModel.renderRequest);
             if (searchModel.initialState) {
                 searchModel.initialState = false;
                 return [];
@@ -178,12 +178,12 @@ cspace = cspace || {};
                     });
                     window.location = expander("%recordType.html?csid=%csid");
                     return false;
-               });
+                });
             });
         }
     };
     
-    var applyResults = function(that, data) {
+    var applyResults = function (that, data) {
         var searchModel = that.model.searchModel;
         var results = that.model.results;
         var offset = searchModel.pageIndex * searchModel.pageSize;
@@ -194,7 +194,7 @@ cspace = cspace || {};
             fluid.clear(results);
         }
 
-        fluid.each(data.results, function(row, index) {
+        fluid.each(data.results, function (row, index) {
             var fullIndex = offset + index;
             if (!results[fullIndex]) { 
                 results[fullIndex] = row;
@@ -213,7 +213,6 @@ cspace = cspace || {};
             searchModel.pageSize = pagerModel.pageSize;
             searchModel.pageIndex = pagerModel.pageIndex;
             var url = that.options.searchUrlBuilder(that.model.searchModel);
-            var oldSearchModel = $.extend(true, {}, that.model.searchModel);
             that.events.onSearch.fire();
             fluid.log("Querying url " + url);
             $.ajax({
@@ -287,7 +286,7 @@ cspace = cspace || {};
         var recordType = searchModel.recordTypeLong;
         var recordTypeParts = recordType.split('-');
         // TODO: IoC resolve this and remove the "localSearchToRelateDialog" from RelationManager.js
-        var prefix = cspace.util.isTest? "../../main/webapp/html/data/" : "./data/";
+        var prefix = cspace.util.isTest ? "../../main/webapp/html/data/" : "./data/";
         return prefix + recordTypeParts.join('/') + "/search/list.json";
     };
 

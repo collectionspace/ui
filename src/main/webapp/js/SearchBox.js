@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global cspace, jQuery, fluid, window*/
+/*global cspace:true, jQuery, fluid, window*/
 "use strict";
 
 cspace = cspace || {};
@@ -25,7 +25,7 @@ cspace = cspace || {};
     cspace.searchBox = function (container, options) {
         var that = fluid.initRendererComponent("cspace.searchBox", container, options);
         fluid.initDependents(that);
-        that.refreshView = function() {
+        that.refreshView = function () {
             that.renderer.refreshView();
             bindEvents(that);    
         };
@@ -46,7 +46,7 @@ cspace = cspace || {};
     };
     
     // A public function that is called as searchBox's treeBuilder method and builds a component tree.
-    cspace.searchBox.produceTree = function(that) {
+    cspace.searchBox.produceTree = function (that) {
         var tree = {
             searchButton: {
                 messagekey: "searchButtonText"
@@ -86,7 +86,7 @@ cspace = cspace || {};
         },
         strings: {                  // List of strings that the component will render (for l10n and i18n).
             searchButtonText: "Search",
-            recordTypeSelectLabel: "",
+            recordTypeSelectLabel: ""
         },
         parentBundle: "{globalBundle}",
         model: {},                  // A default data model object.

@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global cspace, jQuery, fluid, window*/
+/*global cspace:true, jQuery, fluid, window*/
 "use strict";
 
 cspace = cspace || {};
@@ -203,7 +203,7 @@ cspace = cspace || {};
             expanded: "cs-myCollectionSpace-expanded",
             collapsed: "cs-myCollectionSpace-collapsed"
         },
-        produceTree:cspace.myCollectionSpace.produceTree,
+        produceTree: cspace.myCollectionSpace.produceTree,
         // TODO: Once component sibbling options are resolvable with each other, "records"
         // can be used to resolve and censor a model.
         records: {

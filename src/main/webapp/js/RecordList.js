@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global cspace, jQuery, fluid*/
+/*global cspace:true, jQuery, fluid, window*/
 "use strict";
 
 cspace = cspace || {};
@@ -123,7 +123,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.recordList", {
-    	// TODO: smelly - why is the onSelectHandler here instead of inside a listeners block?
+        // TODO: smelly - why is the onSelectHandler here instead of inside a listeners block?
         onSelectHandler: cspace.recordList.onSelectHandlerDefault,
         selectors: {
             numberOfItems: ".csc-num-items",    // present in sidebar, not in find/edit

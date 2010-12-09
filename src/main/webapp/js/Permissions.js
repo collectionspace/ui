@@ -76,23 +76,23 @@ fluid.registerNamespace("cspace.permissions");
         return fluid.makeArray(permissions[target]).indexOf(permission) > -1;
     };
     
-    cspace.permissions.logicalCombine = function(values, applyAnd) {
+    cspace.permissions.logicalCombine = function (values, applyAnd) {
         if (values.length === 0) {
             return false;
         }
-        var found = fluid.find(values, function(value) {
+        var found = fluid.find(values, function (value) {
             if (value !== applyAnd) {
                 return !applyAnd;
             }
         });
-        return found === undefined? applyAnd: found;
+        return found === undefined ? applyAnd: found;
     };
     
     cspace.permissions.resolver = function (options) {
         var that = fluid.initLittleComponent("cspace.permissions.resolver", options);
-        that.resolve = function(resOpts) {
+        that.resolve = function (resOpts) {
             var target = fluid.makeArray(resOpts.target);
-            var values = fluid.transform(target, function(thisTarget) {
+            var values = fluid.transform(target, function (thisTarget) {
                 return cspace.permissions.hasPermission(options.permissions, thisTarget, resOpts.permission);
             });
             return cspace.permissions.logicalCombine(values, resOpts.method === "AND");
@@ -100,7 +100,7 @@ fluid.registerNamespace("cspace.permissions");
         return that;
     };
     
-    cspace.permissions.ensureResolver = function(options) {
+    cspace.permissions.ensureResolver = function (options) {
         if (!options.resolver) {
             options.resolver = cspace.permissions.resolver({permissions: options.permissions});
         }
@@ -109,13 +109,13 @@ fluid.registerNamespace("cspace.permissions");
     cspace.permissions.filterList = function (options) {
         options = fluid.copy(options);
         cspace.permissions.ensureResolver(options);
-        return fluid.remove_if(fluid.copy(options.toFilter), function(item) {
+        return fluid.remove_if(fluid.copy(options.toFilter), function (item) {
             options.target = item;
             return !options.resolver.resolve(options);     
         });
     };
     
-    cspace.permissions.getPermissibleRelatedRecords = function(related, resolver, recordTypeManager, permission) {
+    cspace.permissions.getPermissibleRelatedRecords = function (related, resolver, recordTypeManager, permission) {
         var toFilter = recordTypeManager.recordTypesForCategory(related);
         return cspace.permissions.filterList({
             toFilter: toFilter,

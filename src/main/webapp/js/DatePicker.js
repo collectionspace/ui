@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid, goog*/
+/*global jQuery, fluid, goog, cspace:true*/
 
 cspace = cspace || {};
 
@@ -65,7 +65,7 @@ cspace = cspace || {};
         
         calendarButton.click(function (event) {
             datePicker.toggle();
-            cspace.util.globalDismissal($(datePicker).add(calendarButton), function() {
+            cspace.util.globalDismissal($(datePicker).add(calendarButton), function () {
                 closeCalendar(that);
             });
             table.focus();

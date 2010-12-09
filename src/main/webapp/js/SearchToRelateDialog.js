@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, cspace, fluid*/
+/*global jQuery, cspace:true, fluid*/
 "use strict";
 
 cspace = cspace || {};
@@ -77,10 +77,10 @@ cspace = cspace || {};
         
         //that.dlg.parent().css("overflow", "visible");
         
-        that.open = function() {
+        that.open = function () {
             that.container.dialog("open");        
         };
-        that.close = function() {
+        that.close = function () {
             that.container.dialog("close");
         };
         fluid.initDependents(that);
@@ -95,21 +95,21 @@ cspace = cspace || {};
         return that;
     };
 
-    cspace.searchToRelateDialog.produceTree = function(that) {
+    cspace.searchToRelateDialog.produceTree = function (that) {
         return that.recordTypeSelector.produceComponent();
     };
     
     // Sequence required: i) recordTypeSelector, ii) render, iii) searchView
-    cspace.searchToRelateDialog.initRenderer = function(that) {
+    cspace.searchToRelateDialog.initRenderer = function (that) {
         fluid.log("Rendering dialog");
         that.refreshView();
         return {};
     };
     
-    cspace.searchToRelateDialog.getDialogGetter = function(that) {
-        return function() {
+    cspace.searchToRelateDialog.getDialogGetter = function (that) {
+        return function () {
             return that.container;
-        }
+        };
     };
     
     // TODO: hack for gingerness
@@ -174,7 +174,7 @@ cspace = cspace || {};
                     componentID: "recordType",
                     selector: "recordType"
                 }
-            },              
+            }         
         },
         resources: {
             template: cspace.resourceSpecExpander({

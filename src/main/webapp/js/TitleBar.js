@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, cspace, fluid*/
+/*global jQuery, cspace:true, fluid*/
 "use strict";
 
 cspace = cspace || {};
@@ -22,8 +22,8 @@ cspace = cspace || {};
 
     var makeFieldUpdater = function (selector) {
         return function (model, oldModel, changeRequest) {
-        	// We always select the first element in changeRequest array.
-        	// We currently do not use multiple changes API.
+            // We always select the first element in changeRequest array.
+            // We currently do not use multiple changes API.
             updateField(selector, fluid.model.getBeanValue(model, changeRequest[0].path));
         };
     };

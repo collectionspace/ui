@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid, cspace*/
+/*global jQuery, fluid, cspace:true*/
 
 cspace = cspace || {};
 
@@ -34,7 +34,7 @@ cspace = cspace || {};
     };
     
     var addModelChangeListener = function (applier, recordList, recordType, related) {
-        applier.modelChanged.addListener("relations." + recordType, function(model, oldModel, changeRequest) {
+        applier.modelChanged.addListener("relations." + recordType, function (model, oldModel, changeRequest) {
             recordList.applier.requestChange("items", buildRelationsList(model.relations, related || recordType));
             recordList.refreshView();
         });
@@ -85,8 +85,8 @@ cspace = cspace || {};
     });
     
     fluid.demands("cspace.relationManager", ["cspace.localData", "cspace.relatedRecordsList"], {
-       funcName: "cspace.relatedRecordsList.provideLocalRelationManager",
-       args: ["{relatedRecordsList}.container", fluid.COMPONENT_OPTIONS]
+        funcName: "cspace.relatedRecordsList.provideLocalRelationManager",
+        args: ["{relatedRecordsList}.container", fluid.COMPONENT_OPTIONS]
     });
     
     fluid.demands("cspace.relationManager", "cspace.relatedRecordsList", 

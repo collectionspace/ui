@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, cspace, fluid*/
+/*global jQuery, cspace:true, fluid*/
 "use strict";
 
 cspace = cspace || {};
@@ -107,7 +107,7 @@ cspace = cspace || {};
     fluid.demands("cspace.searchToRelateDialog", "cspace.relationManager", 
         ["{relationManager}.dom.searchDialog", fluid.COMPONENT_OPTIONS]);
 
-    cspace.relationManager.permissionResolver = function(options) {
+    cspace.relationManager.permissionResolver = function (options) {
         var that = fluid.initLittleComponent("cspace.relationManager.permissionResolver", options);
         options.target = that.options.recordTypeManager.recordTypesForCategory(options.recordClass);
         that.visible = cspace.permissions.resolve(options);
@@ -133,15 +133,15 @@ cspace = cspace || {};
     // already merged option values and so cannot use an expander - also, the 
     // indirection on recordClass cannot be performed directly via IoC
             showAddButton: {
-               type:  "cspace.relationManager.permissionResolver",
-               options: {
-                   recordTypeManager: "{recordTypeManager}",
-                   resolver: "{permissionsResolver}",
-                   permission: "update",
-                   method: "OR",
-                   recordClass: "{relationManager}.options.related"
-               },
-           }
+                type: "cspace.relationManager.permissionResolver",
+                options: {
+                    recordTypeManager: "{recordTypeManager}",
+                    resolver: "{permissionsResolver}",
+                    permission: "update",
+                    method: "OR",
+                    recordClass: "{relationManager}.options.related"
+                }
+            }
         },
         dataContext: {
             type: "cspace.dataContext",

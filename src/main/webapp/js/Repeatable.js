@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid, cspace*/
+/*global jQuery, fluid, cspace:true*/
 "use strict";
 
 cspace = cspace || {};
@@ -56,16 +56,16 @@ cspace = cspace || {};
         });
     };
     
-    var renderFinalRow = function (that) {
-        var tree = getExpandedTree(that);
-        var children = tree.children;
-        tree.children = [children[children.length - 1]];
-        var markup = fluid.reRender(that.template, that.tempContainer, tree, that.options.renderOptions);
-        var repeats = that.locate("repeat");
-        var lastRepeat = $(repeats[repeats.length - 1]);
-        var newRepeat = that.locate("repeat", that.tempContainer);
-        lastRepeat.after(newRepeat);
-    };
+//    var renderFinalRow = function (that) {
+//        var tree = getExpandedTree(that);
+//        var children = tree.children;
+//        tree.children = [children[children.length - 1]];
+//        var markup = fluid.reRender(that.template, that.tempContainer, tree, that.options.renderOptions);
+//        var repeats = that.locate("repeat");
+//        var lastRepeat = $(repeats[repeats.length - 1]);
+//        var newRepeat = that.locate("repeat", that.tempContainer);
+//        lastRepeat.after(newRepeat);
+//    };
 
     var requestChange = function (that, callback, index) {
         var elPath = that.options.elPath;

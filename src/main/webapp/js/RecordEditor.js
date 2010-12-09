@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jQuery, fluid, cspace*/
+/*global jQuery, fluid, cspace:true*/
 "use strict";
 
 cspace = cspace || {};
@@ -71,7 +71,7 @@ cspace = cspace || {};
             if (!$(this).is(exclusions)) {
                 return handler($(this).attr("href"));
             }
-        }
+        };
     };
 
     var bindEventHandlers = function (that) {
@@ -128,7 +128,7 @@ cspace = cspace || {};
         that.options.dataContext.events.onError.addListener(makeDCErrorHandler(that));
     };
     
-    var bindHandlers = function(that) {
+    var bindHandlers = function (that) {
         that.locate("save").click(that.requestSave);
         that.locate("deleteButton").click(that.remove);
         that.locate("cancel").click(function () {
@@ -137,7 +137,7 @@ cspace = cspace || {};
             that.events.onCancel.fire();
         });
         cspace.util.setZIndex();      
-    }
+    };
     
     var setupRecordEditor = function (that) {
         bindEventHandlers(that);
