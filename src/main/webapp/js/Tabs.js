@@ -137,7 +137,7 @@ cspace = cspace || {};
             inactive: "inactive" // TODO: This needs to be moved to "cs-tabs-inactive" style
         },
         resources: {
-            template: cspace.prolepticResourceSpec({
+            template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
                 url: "%webapp/html/TabsTemplate.html"
             })

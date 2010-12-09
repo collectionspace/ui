@@ -177,7 +177,7 @@ cspace = cspace || {};
             },              
         },
         resources: {
-            template: cspace.prolepticResourceSpec({
+            template: cspace.resourceSpecExpander({
                 fetchClass: "slowTemplate",
                 url: "%webapp/html/searchToRelate.html"
             })

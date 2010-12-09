@@ -206,7 +206,7 @@ cspace = cspace || {};
             act: "cs-confirmationDialogButton-act"
         },
         resources: {
-            template: cspace.prolepticResourceSpec({
+            template: cspace.resourceSpecExpander({
                 fetchClass: "slowTemplate",
                 url: "%webapp/html/Confirmation.html"
             })

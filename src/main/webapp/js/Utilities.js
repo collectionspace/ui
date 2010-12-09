@@ -67,7 +67,7 @@ fluid.registerNamespace("cspace.util");
         }
     };
 
-    cspace.prolepticResourceSpec = function (options) {
+    cspace.resourceSpecExpander = function (options) {
         return {
             expander: {
                 type: "fluid.deferredInvokeCall",
@@ -155,7 +155,7 @@ fluid.registerNamespace("cspace.util");
             }
         },
         resources: {
-            globalBundle: cspace.prolepticResourceSpec({
+            globalBundle: cspace.resourceSpecExpander({
                 fetchClass: "fastResource",
                 url: "%webapp/html/bundle/core-messages.properties"
             })

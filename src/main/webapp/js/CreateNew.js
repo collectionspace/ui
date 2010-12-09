@@ -223,7 +223,7 @@ cspace = cspace || {};
         },
         newRecordUrl: "%recordUrl.html",
         resources: {
-            template: cspace.prolepticResourceSpec({
+            template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
                 url: "%webapp/html/createNewTemplate.html"
             })

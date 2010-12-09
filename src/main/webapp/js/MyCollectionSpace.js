@@ -304,7 +304,7 @@ cspace = cspace || {};
             }
         },
         resources: {
-            template: cspace.prolepticResourceSpec({
+            template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
                 url: "%webapp/html/MyCollectionSpaceTemplate.html"
             })

@@ -111,7 +111,7 @@ cspace = cspace || {};
         selfRender: false,          // An options that indicates whether the component needs to render on initialization.
         searchUrl: "findedit.html?recordtype=%recordtype&keywords=%keywords",   // Search page's url template.
         resources: {                // A set of resources that will get resolved and fetched at some point during initialization.
-            template: cspace.prolepticResourceSpec({
+            template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
                 url: "%webapp/html/SearchBoxTemplate.html"
             })
