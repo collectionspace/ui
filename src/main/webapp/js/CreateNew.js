@@ -67,6 +67,10 @@ cspace = cspace || {};
         $.each(categories, function (index, value) {
             $(value).addClass(styles["category" + (index + 1)]);
         });
+        //if there are no categories visible, hide the create new button:
+        if (categories.length === 0) {
+            that.locate("createButton").hide();
+        }
     };
 
     // A public function that is called as createNew's refreshView method, renders the component and

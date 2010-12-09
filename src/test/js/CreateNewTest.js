@@ -103,6 +103,23 @@ var createNewTester = function ($) {
         jqUnit.assertEquals("Number of headers shown:", 2, createNewPage.locate("categoryHeader").length);
         assertStyling(createNewPage, createNewPage.options.styles.totalOf2);
     });
+    
+    lessCategories.person = [];
+    lessCategories.loanout = [];
+    lessCategories.loanin = [];
+    lessCategories.movement = [];
+    
+    
+    var createNewTestOneCategories = cspace.tests.testEnvironment({
+        testCase: bareCreateNewTest,
+        permissions: lessCategories
+    });
+    
+    createNewTestOneCategories.test("No Categories", function () {
+        var createNewPage = setupCreateNew();
+        jqUnit.assertEquals("Number of headers shown", 0, createNewPage.locate("categoryHeader").length);
+        jqUnit.notVisible("Create button should be invisible", createNewPage.locate("createButton"));  
+    });
 };
 
 (function () {
