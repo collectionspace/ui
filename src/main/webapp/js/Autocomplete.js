@@ -30,7 +30,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         else if (string.substring(0, 4) === "urn:") {
             return {
                 urn: string,
-                label: string.slice(string.indexOf("'") + 1, string.length - 1).replace(/\+/g, " ")
+                label: cspace.util.urnToString(string)
             };
         }
         else {
