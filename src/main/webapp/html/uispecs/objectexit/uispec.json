@@ -125,7 +125,7 @@
             ]
         },
         ".csc-objectexit-packingNote": "${fields.packingNote}",
-        ".csc-objectexit-exitMethod": {
+        ".csc-objectexit-exitMethods": {
             "decorators": [
                 {
                     "func": "cspace.makeRepeatable",
@@ -133,7 +133,7 @@
                     "options": {
                         "elPath": "fields.exitMethods",
                         "protoTree": {
-                            ".csc-objectexit-exitMethod": {
+                            ".csc-objectexit-exitMethods": {
                                 "default": "0",
                                 "optionnames": [
                                     "Please select a value",
