@@ -348,6 +348,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .info-pair .content tbody tr {}
 .info-pair .content tbody td {border: 1px solid #C7CFD4; /*border-bottom:1px solid #C7CFD4;*/}
 .info-pair .content tbody td input {*margin:0 -2px 0 2px; /*position:relative;*/}
+.info-pair .content tbody td .content {width:159px;}
 
 .find-edit .fl-container-left .information-group .content, .related-records  .information-group  .content {padding:0 !important;}
 /*.find-edit .fl-container-left .information-group  table {font-size:12px; background-color:#00FFFF; border:0px solid #ADADAD; }
@@ -490,7 +491,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 
 .input-numeric-small   {width: 60px  !important;}
 .input-numeric-medium {width: 120px !important;}
-.input-date	 		   {width: 142px !important; padding-left:2px;}
+.input-date	 		   {width: 142px !important;}
 /*table.input-date	 	   {padding-left:2px;}*/
 .input-money-amount	   {width: 120px !important;}
 .input-select		   {width: auto; height:21px;}
