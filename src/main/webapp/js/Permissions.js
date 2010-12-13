@@ -73,7 +73,7 @@ fluid.registerNamespace("cspace.permissions");
     /** NEW PERMISSIONS RESOLVER HERE **/
     
     cspace.permissions.hasPermission = function (permissions, target, permission) {
-        return fluid.makeArray(permissions[target]).indexOf(permission) > -1;
+        return $.inArray(permission, fluid.makeArray(permissions[target])) > -1;
     };
     
     cspace.permissions.logicalCombine = function (values, applyAnd) {
