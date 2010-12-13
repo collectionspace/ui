@@ -51,8 +51,11 @@ cspace = cspace || {};
         var calendarButton = that.locate("calendarButton");
         var table = $(that.datePicker.tableBody_);
         
-        fluid.deadMansBlur(datePicker, table, function () {
-            closeCalendar(that);
+        fluid.deadMansBlur(datePicker, {
+            exclusions: {table: table}, 
+            handler: function () {
+                closeCalendar(that);
+            }
         });
 
         table.blur(function (e) {

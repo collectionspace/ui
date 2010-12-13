@@ -96,8 +96,11 @@ cspace = cspace || {};
             }
         });
         
-        fluid.deadMansBlur(rows, rows, function (event) {
-            list.hide();
+        fluid.deadMansBlur(rows, {
+            exclusions: {rows: rows}, 
+            handler: function () {
+                list.hide();
+            }
         });
 
         var keyCode = function (evt) {
