@@ -80,9 +80,9 @@ var searchToRelateDialogTester = function () {
         });
     });
 
-    searchToRelateDialogTest.test("Creation for procedures (will try to relate a loanout to the primary loanin)", function () {
+    searchToRelateDialogTest.test("Creation for procedures (will try to relate a loanout to the primary movement)", function () {
         var testRecordType = "loanout";
-        createSearchToRelate("loanin", "procedures", {
+        createSearchToRelate("movement", "procedures", {
             afterSetup: function (dialog) {
                 dialog.open();
                 var recordType = dialog.locate("recordType");
@@ -93,7 +93,7 @@ var searchToRelateDialogTester = function () {
                 fluid.each(options, function(option) {
                     values[$(option).attr("value")] = true;
                 });
-                fluid.each({loanin: true, loanout: true, movement: true, intake: undefined}, function(value, key) {
+                fluid.each({loanout: true, movement: true, intake: undefined}, function(value, key) {
                     jqUnit.assertEquals("Rendering of record type " + key, value, values[key]);
                 });
                 recordType.val(testRecordType);
@@ -116,9 +116,9 @@ var searchToRelateDialogTester = function () {
     });
     
     var readAllPermissions = {
-        loanin: ["read"],
-        loanout: ["read"],
-        intake: ["read"]  
+        loanin: ["list", "read", "create", "update"],
+        loanout: ["list", "read", "create", "update"],
+        intake: ["list", "read", "create", "update"]
     };
 
     var readPermsTest = cspace.tests.testEnvironment({
@@ -228,7 +228,7 @@ var searchToRelateDialogTester = function () {
     });
 
     readPermsTest.test("Create multiple relationships from search results", function () {
-        var primaryRecordType = "loanin";
+        var primaryRecordType = "movement";
         var testRecordType = "intake";
         createSearchToRelate(primaryRecordType, "procedures", {
             afterSetup: function (dialog) {

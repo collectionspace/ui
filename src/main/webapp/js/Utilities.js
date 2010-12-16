@@ -463,7 +463,7 @@ fluid.registerNamespace("cspace.util");
     cspace.util.recordTypeSelector = function (options) {
         var that = fluid.initLittleComponent("cspace.util.recordTypeSelector", options);
         var model = cspace.permissions.getPermissibleRelatedRecords(
-                that.options.related, that.options.permissionsResolver, that.options.recordTypeManager, "read");
+                that.options.related, that.options.permissionsResolver, that.options.recordTypeManager, that.options.permission);
         that.model = model;
         
         that.produceComponent = function () {
@@ -498,7 +498,8 @@ fluid.registerNamespace("cspace.util");
        // components by means of a suitable demands block, in Infusion 1.4
         recordTypeManager: "{recordTypeManager}",
         permissionsResolver: "{permissionsResolver}",
-        messageResolver: "{globalBundle}"
+        messageResolver: "{globalBundle}",
+        permission: "read"
     });
     
     // This will eventually go away once the getBeanValue strategy is used everywhere.

@@ -137,7 +137,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     });
     
     relationManagerTest.test("Add Relation Dialog, search for particular procedural record type", function () {
-        var testRelatedRecordType = "loanin";
+        var testRelatedRecordType = "movement";
         var relationManager;
         var afterSetupListener = function(searchDialog) {
             relationManager.options.applier.requestChange("csid", "123456798");

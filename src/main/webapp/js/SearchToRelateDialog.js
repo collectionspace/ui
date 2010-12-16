@@ -172,7 +172,8 @@ cspace = cspace || {};
                     related: "{searchToRelateDialog}.options.related",
                     dom: "{searchToRelateDialog}.dom",
                     componentID: "recordType",
-                    selector: "recordType"
+                    selector: "recordType",
+                    permission: "update"
                 }
             }         
         },
