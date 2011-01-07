@@ -7325,6 +7325,7 @@ if ( !$.offset.setOffset ) {
 Copyright 2007-2010 University of Cambridge
 Copyright 2007-2009 University of Toronto
 Copyright 2007-2009 University of California, Berkeley
+Copyright 2010 Lucendo Development Ltd.
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -7335,14 +7336,14 @@ https://source.fluidproject.org/svn/LICENSE.txt
 */
 
 // Declare dependencies.
-/*global jQuery, YAHOO, opera*/
+/*global jQuery, YAHOO, opera, window, console*/
 
-var fluid_1_2 = fluid_1_2 || {};
-var fluid = fluid || fluid_1_2;
+var fluid_1_3 = fluid_1_3 || {};
+var fluid = fluid || fluid_1_3;
 
 (function ($, fluid) {
     
-    fluid.version = "Infusion 1.3-SNAPSHOT";
+    fluid.version = "Infusion 1.3";
     
     fluid.environment = {
         fluid: fluid
@@ -7356,852 +7357,9 @@ var fluid = fluid || fluid_1_2;
      */
     fluid.fail = function (message) {
         fluid.setLogging(true);
-        fluid.log(message.message? message.message : message);
-        //throw new Error(message);
-        message.fail(); // Intentionally cause a browser error by invoking a nonexistent function.
-    };
-    
-    /**
-     * Wraps an object in a jQuery if it isn't already one. This function is useful since
-     * it ensures to wrap a null or otherwise falsy argument to itself, rather than the
-     * often unhelpful jQuery default of returning the overall document node.
-     * 
-     * @param {Object} obj the object to wrap in a jQuery
-     */
-    fluid.wrap = function (obj) {
-        return ((!obj || obj.jquery) ? obj : $(obj)); 
-    };
-    
-    /**
-     * If obj is a jQuery, this function will return the first DOM element within it.
-     * 
-     * @param {jQuery} obj the jQuery instance to unwrap into a pure DOM element
-     */
-    fluid.unwrap = function (obj) {
-        return obj && obj.jquery && obj.length === 1 ? obj[0] : obj; // Unwrap the element if it's a jQuery.
-    };
-    
-    /** 
-     * Searches through the supplied object for the first value which matches the one supplied.
-     * @param obj {Object} the Object to be searched through
-     * @param value {Object} the value to be found. This will be compared against the object's
-     * member using === equality.
-     * @return {String} The first key whose value matches the one supplied, or <code>null</code> if no
-     * such key is found.
-     */
-    fluid.keyForValue = function (obj, value) {
-        return fluid.find(obj, function(thisValue, key) {
-            if (value === thisValue) {
-                return key;
-            }
-        });
-    };
-    
-    /**
-     * This method is now deprecated and will be removed in a future release of Infusion. 
-     * See fluid.keyForValue instead.
-     */
-    fluid.findKeyInObject = fluid.keyForValue;
-    
-    /** 
-     * Clears an object or array of its contents. For objects, each property is deleted.
-     * 
-     * @param {Object|Array} target the target to be cleared
-     */
-    fluid.clear = function (target) {
-        if (target instanceof Array) {
-            target.length = 0;
-        }
-        else {
-            for (var i in target) {
-                delete target[i];
-            }
-        }
-    };
-    
-    /** A basic utility that returns its argument unchanged */
-    
-    fluid.identity = function(arg) {
-        return arg;
-    };
-    
-    // Framework and instantiation functions.
-    
-    /**
-     * Fetches a single container element and returns it as a jQuery.
-     * 
-     * @param {String||jQuery||element} containerSpec an id string, a single-element jQuery, or a DOM element specifying a unique container
-     * @param {Boolean} fallible <code>true</code> if an empty container is to be reported as a valid condition
-     * @return a single-element jQuery of container
-     */
-    fluid.container = function (containerSpec, fallible) {
-        var container = fluid.wrap(containerSpec);
-        if (fallible && !container || container.length === 0) {
-            return null;
-        }
-        
-        // Throw an exception if we've got more or less than one element.
-        if (!container || !container.jquery || container.length !== 1) {
-            if (typeof(containerSpec) !== "string") {
-                containerSpec = container.selector;
-            }
-            var count = container.length !== undefined? container.length : 0;
-            fluid.fail({
-                name: "NotOne",
-                message: count > 1? "More than one (" + count + ") container elements were "
-                : "No container element was found for selector " + containerSpec
-            });
-        }
-        
-        return container;
-    };
-    
-    // stubs for two functions in FluidDebugging.js
-    fluid.dumpEl = fluid.identity;
-    fluid.renderTimestamp = fluid.identity;
-    
-    /**
-     * Retreives and stores a component's default settings centrally.
-     * @param {boolean} (options) if true, manipulate a global option (for the head
-     *   component) rather than instance options.
-     * @param {String} componentName the name of the component
-     * @param {Object} (optional) an container of key/value pairs to set
-     * 
-     */
-    var defaultsStore = {};
-    var globalDefaultsStore = {};
-    fluid.defaults = function () {
-        var offset = 0;
-        var store = defaultsStore;
-        if (typeof arguments[0] === "boolean") {
-            store = globalDefaultsStore;
-            offset = 1;
-        }
-        var componentName = arguments[offset];
-        var defaultsObject = arguments[offset + 1];
-        if (defaultsObject !== undefined) {
-            store[componentName] = defaultsObject;   
-            return defaultsObject;
-        }
-        
-        return store[componentName];
-    };
-    
-    /**
-     * Creates a new DOM Binder instance, used to locate elements in the DOM by name.
-     * 
-     * @param {Object} container the root element in which to locate named elements
-     * @param {Object} selectors a collection of named jQuery selectors
-     */
-    fluid.createDomBinder = function (container, selectors) {
-        var cache = {}, that = {};
-        
-        function cacheKey(name, thisContainer) {
-            return fluid.allocateSimpleId(thisContainer) + "-" + name;
-        }
-
-        function record(name, thisContainer, result) {
-            cache[cacheKey(name, thisContainer)] = result;
-        }
-
-        that.locate = function (name, localContainer) {
-            var selector, thisContainer, togo;
-            
-            selector = selectors[name];
-            thisContainer = localContainer? localContainer: container;
-            if (!thisContainer) {
-                fluid.fail("DOM binder invoked for selector " + name + " without container");
-            }
-
-            if (!selector) {
-                return thisContainer;
-            }
-
-            if (typeof(selector) === "function") {
-                togo = $(selector.call(null, fluid.unwrap(thisContainer)));
-            } else {
-                togo = $(selector, thisContainer);
-            }
-            if (togo.get(0) === document) {
-                togo = [];
-                //fluid.fail("Selector " + name + " with value " + selectors[name] +
-                //            " did not find any elements with container " + fluid.dumpEl(container));
-            }
-            if (!togo.selector) {
-                togo.selector = selector;
-                togo.context = thisContainer;
-            }
-            togo.selectorName = name;
-            record(name, thisContainer, togo);
-            return togo;
-        };
-        that.fastLocate = function (name, localContainer) {
-            var thisContainer = localContainer? localContainer: container;
-            var key = cacheKey(name, thisContainer);
-            var togo = cache[key];
-            return togo? togo : that.locate(name, localContainer);
-        };
-        that.clear = function () {
-            cache = {};
-        };
-        that.refresh = function (names, localContainer) {
-            var thisContainer = localContainer? localContainer: container;
-            if (typeof names === "string") {
-                names = [names];
-            }
-            if (thisContainer.length === undefined) {
-                thisContainer = [thisContainer];
-            }
-            for (var i = 0; i < names.length; ++ i) {
-                for (var j = 0; j < thisContainer.length; ++ j) {
-                    that.locate(names[i], thisContainer[j]);
-                }
-            }
-        };
-        that.resolvePathSegment = that.locate;
-        
-        return that;
-    };
-    
-    /** Determines whether the supplied object can be treated as an array, by 
-     * iterating an index towards its length. The test functions by detecting
-     * a property named "length" which is of type "number", but excluding objects
-     * which are themselves of type "string".
-     */
-    fluid.isArrayable = function(totest) {
-        return totest && typeof(totest) !== "string" && typeof(totest.length) === "number";
-    };
-    
-    /**
-     * Attaches the user's listeners to a set of events.
-     * 
-     * @param {Object} events a collection of named event firers
-     * @param {Object} listeners optional listeners to add
-     */
-    fluid.mergeListeners = function (events, listeners) {
-        if (listeners) {
-            for (var key in listeners) {
-                var value = listeners[key];
-                var keydot = key.indexOf(".");
-                var namespace;
-                if (keydot !== -1) {
-                    namespace = key.substring(keydot + 1);
-                    key = key.substring(0, keydot);
-                }
-                if (!events[key]) {
-                    events[key] = fluid.event.getEventFirer();
-                }   
-                var firer = events[key];
-                if (typeof(value) === "function") {
-                    firer.addListener(value, namespace);
-                }
-                else if (value && fluid.isArrayable(value)) {
-                    for (var i = 0; i < value.length; ++ i) {
-                        firer.addListener(value[i], namespace);
-                    }
-                }
-            }
-        }    
-    };
-    
-    /**
-     * Sets up a component's declared events.
-     * Events are specified in the options object by name. There are three different types of events that can be
-     * specified: 
-     * 1. an ordinary multicast event, specified by "null". 
-     * 2. a unicast event, which allows only one listener to be registered
-     * 3. a preventable event
-     * 
-     * @param {Object} that the component
-     * @param {Object} options the component's options structure, containing the declared event names and types
-     */
-    fluid.instantiateFirers = function (that, options) {
-        that.events = {};
-        if (options.events) {
-            for (var event in options.events) {
-                var eventType = options.events[event];
-                that.events[event] = fluid.event.getEventFirer(eventType === "unicast", eventType === "preventable");
-            }
-        }
-        fluid.mergeListeners(that.events, options.listeners);
-    };
-    
-    /** Compute a "nickname" given a fully qualified typename, by returning the last path
-     * segment.
-     */
-    
-    fluid.computeNickName = function(typeName) {
-        var segs = fluid.model.parseEL(typeName);
-        return segs[segs.length - 1];
-    };
-    
-    /**
-     * Merges the component's declared defaults, as obtained from fluid.defaults(),
-     * with the user's specified overrides.
-     * 
-     * @param {Object} that the instance to attach the options to
-     * @param {String} componentName the unique "name" of the component, which will be used
-     * to fetch the default options from store. By recommendation, this should be the global
-     * name of the component's creator function.
-     * @param {Object} userOptions the user-specified configuration options for this component
-     */
-    fluid.mergeComponentOptions = function (that, componentName, userOptions) {
-        var defaults = fluid.defaults(componentName); 
-        if (fluid.expandOptions) {
-            defaults = fluid.expandOptions(fluid.copy(defaults), that);
-        }
-        that.options = fluid.merge(defaults? defaults.mergePolicy: null, {}, defaults, userOptions);    
-    };
-    
-    
-    /** Expect that an output from the DOM binder has resulted in a non-empty set of 
-     * results. If none are found, this function will fail with a diagnostic message, 
-     * with the supplied message prepended.
-     */
-    fluid.expectFilledSelector = function (result, message) {
-        if (result && result.length === 0 && result.jquery) {
-            fluid.fail(message + ": selector \"" + result.selector + "\" with name " + result.selectorName +
-                       " returned no results in context " + fluid.dumpEl(result.context));
-        }
-    };
-    
-    /** 
-     * The central initialiation method called as the first act of every Fluid
-     * component. This function automatically merges user options with defaults,
-     * attaches a DOM Binder to the instance, and configures events.
-     * 
-     * @param {String} componentName The unique "name" of the component, which will be used
-     * to fetch the default options from store. By recommendation, this should be the global
-     * name of the component's creator function.
-     * @param {jQueryable} container A specifier for the single root "container node" in the
-     * DOM which will house all the markup for this component.
-     * @param {Object} userOptions The configuration options for this component.
-     */
-    fluid.initView = function (componentName, container, userOptions) {
-        fluid.expectFilledSelector(container, "Error instantiating component with name \"" + componentName);
-        container = fluid.container(container, true);
-        if (!container) {
-            return null;
-        }
-        var that = fluid.initLittleComponent(componentName, userOptions); 
-        that.container = container;
-        fluid.initDomBinder(that);
-        
-        fluid.instantiateFirers(that, that.options);
-
-        return that;
-    };
-    
-    /** A special "marker object" which is recognised as one of the arguments to 
-     * fluid.initSubcomponents. This object is recognised by reference equality - 
-     * where it is found, it is replaced in the actual argument position supplied
-     * to the specific subcomponent instance, with the particular options block
-     * for that instance attached to the overall "that" object.
-     */
-    fluid.COMPONENT_OPTIONS = {type: "fluid.marker", value: "COMPONENT_OPTIONS"};
-    
-    /** Another special "marker object" representing that a distinguished 
-     * (probably context-dependent) value should be substituted.
-     */
-    fluid.VALUE = {type: "fluid.marker", value: "VALUE"};
-    
-    /** Another special "marker object" representing that no value is present (where
-     * signalling using the value "undefined" is not possible) */
-    fluid.NO_VALUE = {type: "fluid.marker", value: "NO_VALUE"};
-    
-    /** Determine whether an object is any marker, or a particular marker - omit the
-     * 2nd argument to detect any marker
-     */
-    fluid.isMarker = function(totest, type) {
-        if (!totest || typeof (totest) !== 'object' || totest.type !== "fluid.marker") return false;
-        if (!type) return true;
-        return totest.value === type || totest.value === type.value;
-    };
-    
-    /** Construct a dummy or "placeholder" subcomponent, that optionally provides empty
-     * implementations for a set of methods.
-     */
-    fluid.emptySubcomponent = function (options) {
-        var that = {};
-        options = $.makeArray(options);
-        var empty = function () {};
-        for (var i = 0; i < options.length; ++ i) {
-            that[options[i]] = empty;
-        }
-        return that;
-    };
-    
-    /**
-     * Creates a new "little component": a that-ist object with options merged into it by the framework.
-     * This method is a convenience for creating small objects that have options but don't require full
-     * View-like features such as the DOM Binder or events
-     * 
-     * @param {Object} name the name of the little component to create
-     * @param {Object} options user-supplied options to merge with the defaults
-     */
-    fluid.initLittleComponent = function(name, options) {
-        var that = {typeName: name, id: fluid.allocateGuid()};
-        // TODO: nickName must be available earlier than other merged options so that component may resolve to itself
-        that.nickName = options && options.nickName? options.nickName: fluid.computeNickName(that.typeName);
-        fluid.mergeComponentOptions(that, name, options);
-        return that;
-    };
-    
-    fluid.initSubcomponent = function (that, className, args) {
-        return fluid.initSubcomponents(that, className, args)[0];
-    };
-    
-    fluid.initSubcomponentImpl = function(that, entry, args) {
-        var togo;
-        if (typeof(entry) !== "function") {
-            var entryType = typeof(entry) === "string"? entry : entry.type;
-            var globDef = fluid.defaults(true, entryType);
-            fluid.merge("reverse", that.options, globDef);
-            togo = entryType === "fluid.emptySubcomponent"?
-               fluid.emptySubcomponent(entry.options) : 
-               fluid.invokeGlobalFunction(entryType, args);
-        }
-        else {
-            togo = entry.apply(null, args);
-        }
-
-        var returnedOptions = togo? togo.returnedOptions : null;
-        if (returnedOptions) {
-            fluid.merge(that.options.mergePolicy, that.options, returnedOptions);
-            if (returnedOptions.listeners) {
-                fluid.mergeListeners(that.events, returnedOptions.listeners);
-            }
-        }
-        return togo;
-    };
-    
-    /** Initialise all the "subcomponents" which are configured to be attached to 
-     * the supplied top-level component, which share a particular "class name".
-     * @param {Component} that The top-level component for which sub-components are
-     * to be instantiated. It contains specifications for these subcomponents in its
-     * <code>options</code> structure.
-     * @param {String} className The "class name" or "category" for the subcomponents to
-     * be instantiated. A class name specifies an overall "function" for a class of 
-     * subcomponents and represents a category which accept the same signature of
-     * instantiation arguments.
-     * @param {Array of Object} args The instantiation arguments to be passed to each 
-     * constructed subcomponent. These will typically be members derived from the
-     * top-level <code>that</code> or perhaps globally discovered from elsewhere. One
-     * of these arguments may be <code>fluid.COMPONENT_OPTIONS</code> in which case this
-     * placeholder argument will be replaced by instance-specific options configured
-     * into the member of the top-level <code>options</code> structure named for the
-     * <code>className</code>
-     * @return {Array of Object} The instantiated subcomponents, one for each member
-     * of <code>that.options[className]</code>.
-     */
-    
-    fluid.initSubcomponents = function (that, className, args) {
-        var entry = that.options[className];
-        if (!entry) {
-            return;
-        }
-        var entries = $.makeArray(entry);
-        var optindex = -1;
-        var togo = [];
-        args = $.makeArray(args);
-        for (var i = 0; i < args.length; ++ i) {
-            if (args[i] === fluid.COMPONENT_OPTIONS) {
-                optindex = i;
-            }
-        }
-        for (i = 0; i < entries.length; ++ i) {
-            entry = entries[i];
-            if (optindex !== -1) {
-                args[optindex] = entry.options;
-            }
-            togo[i] = fluid.initSubcomponentImpl(that, entry, args);
-        }
-        return togo;
-    };
-    
-    /**
-     * Creates a new DOM Binder instance for the specified component and mixes it in.
-     * 
-     * @param {Object} that the component instance to attach the new DOM Binder to
-     */
-    fluid.initDomBinder = function (that) {
-        that.dom = fluid.createDomBinder(that.container, that.options.selectors);
-        that.locate = that.dom.locate;      
-    };
-    
-    
-    /** Returns true if the argument is a primitive type **/
-    fluid.isPrimitive = function (value) {
-        var valueType = typeof(value);
-        return !value || valueType === "string" || valueType === "boolean" || valueType === "number" || valueType === "function";
-    };
-        
-    fluid.mergePolicyIs = function(policy, test) {
-        return typeof(policy) === "string" && policy.indexOf(test) !== -1;
-    };
-    
-    function mergeImpl(policy, basePath, target, source, thisPolicy) {
-        if (typeof(thisPolicy) === "function") {
-            thisPolicy.apply(null, target, source);
-            return target;
-        }
-        if (fluid.mergePolicyIs(thisPolicy, "replace")) {
-            fluid.clear(target);
-        }
-      
-        for (var name in source) {
-            var path = (basePath? basePath + ".": "") + name;
-            var newPolicy = policy && typeof(policy) !== "string"? policy[path] : policy;
-            var thisTarget = target[name];
-            var thisSource = source[name];
-            var primitiveTarget = fluid.isPrimitive(thisTarget);
-    
-            if (thisSource !== undefined) {
-                if (thisSource !== null && typeof thisSource === 'object' &&
-                      !thisSource.nodeType && !thisSource.jquery && thisSource !== fluid.VALUE 
-                       && !fluid.mergePolicyIs(newPolicy, "preserve")) {
-                    if (primitiveTarget) {
-                        target[name] = thisTarget = thisSource instanceof Array? [] : {};
-                    }
-                    mergeImpl(policy, path, thisTarget, thisSource, newPolicy);
-                }
-                else {
-                    if (typeof(newPolicy) === "function") {
-                        newPolicy.call(null, target, source, name);
-                    }
-                    else if (thisTarget === null || thisTarget === undefined || !fluid.mergePolicyIs(thisPolicy, "reverse")) {
-                        // TODO: When "grades" are implemented, grandfather in any paired applier to perform these operations
-                        // NB: mergePolicy of "preserve" now creates dependency on DataBinding.js
-                        target[name] = fluid.mergePolicyIs(newPolicy, "preserve")? fluid.model.mergeModel(thisTarget, thisSource) : thisSource;
-                    }
-                }
-            }
-        }
-        return target;
-    }
-    
-    /** Merge a collection of options structures onto a target, following an optional policy.
-     * This function is typically called automatically, as a result of an invocation of
-     * <code>fluid.iniView</code>. The behaviour of this function is explained more fully on
-     * the page http://wiki.fluidproject.org/display/fluid/Options+Merging+for+Fluid+Components .
-     * @param policy {Object/String} A "policy object" specifiying the type of merge to be performed.
-     * If policy is of type {String} it should take on the value "reverse" or "replace" representing
-     * a static policy. If it is an
-     * Object, it should contain a mapping of EL paths onto these String values, representing a
-     * fine-grained policy. If it is an Object, the values may also themselves be EL paths 
-     * representing that a default value is to be taken from that path.
-     * @param target {Object} The options structure which is to be modified by receiving the merge results.
-     * @param options1, options2, .... {Object} an arbitrary list of options structure which are to
-     * be merged "on top of" the <code>target</code>. These will not be modified.    
-     */
-    
-    fluid.merge = function (policy, target) {
-        var path = "";
-        
-        for (var i = 2; i < arguments.length; ++i) {
-            var source = arguments[i];
-            if (source !== null && source !== undefined) {
-                mergeImpl(policy, path, target, source, policy ? policy[""] : null);
-            }
-        }
-        if (policy && typeof(policy) !== "string") {
-            for (var key in policy) {
-                var elrh = policy[key];
-                if (typeof(elrh) === 'string' && elrh !== "replace") {
-                    var oldValue = fluid.model.getBeanValue(target, key);
-                    if (oldValue === null || oldValue === undefined) {
-                        var value = fluid.model.getBeanValue(target, elrh);
-                        fluid.model.setBeanValue(target, key, value);
-                    }
-                }
-            }
-        }
-        return target;     
-    };
-    
-    /** Return an empty container as the same type as the argument (either an
-     * array or hash */
-    fluid.freshContainer = function(tocopy) {
-        return fluid.isArrayable(tocopy)? [] : {};   
-    };
-    
-    /** Performs a deep copy (clone) of its argument **/
-    
-    fluid.copy = function (tocopy) {
-        if (fluid.isPrimitive(tocopy)) {
-            return tocopy;
-        }
-        return $.extend(true, fluid.freshContainer(tocopy), tocopy);
-    };
-    
-    fluid.getGlobalValue = function(path, env) {
-        if (path) {
-            env = env || fluid.environment;
-            var envFetcher = fluid.model.environmentStrategy(env);
-            return fluid.model.getBeanValue(globalObject, path, [envFetcher].concat(fluid.model.defaultGetConfig));
-        }
-    };
-    
-    /**
-     * Allows for the calling of a function from an EL expression "functionPath", with the arguments "args", scoped to an framework version "environment".
-     * @param {Object} functionPath - An EL expression
-     * @param {Object} args - An array of arguments to be applied to the function, specified in functionPath
-     * @param {Object} environment - (optional) The object to scope the functionPath to  (typically the framework root for version control)
-     */
-    fluid.invokeGlobalFunction = function (functionPath, args, environment) {
-        var func = fluid.getGlobalValue(functionPath, environment);
-        if (!func) {
-            fluid.fail("Error invoking global function: " + functionPath + " could not be located");
-        } else {
-            return func.apply(null, args);
-        }
-    };
-    
-    /** Registers a new global function at a given path (currently assumes that
-     * it lies within the fluid namespace)
-     */
-    
-    fluid.registerGlobalFunction = function (functionPath, func, env) {
-        env = env || fluid.environment;
-        var envFetcher = fluid.model.environmentStrategy(env);
-        fluid.model.setBeanValue(globalObject, functionPath, func, [envFetcher].concat(fluid.model.defaultSetConfig));
-    };
-    
-    fluid.setGlobalValue = fluid.registerGlobalFunction;
-    
-    /** Ensures that an entry in the global namespace exists **/
-    fluid.registerNamespace = function (naimspace, env) {
-        env = env || fluid.environment;
-        var existing = fluid.getGlobalValue(naimspace, env);
-        if (!existing) {
-            existing = {};
-            fluid.setGlobalValue(naimspace, existing, env);
-        }
-        return existing;
-    };
-    
-    // The Model Events system.
-    
-    fluid.event = {};
-        
-    var fluid_guid = 1;
-    
-    /** Allocate an integer value that will be unique for this session **/
-    
-    fluid.allocateGuid = function() {
-        return fluid_guid++;
-    };
-    
-    fluid.event.identifyListener = function(listener) {
-        if (!listener.$$guid) {
-            listener.$$guid = fluid.allocateGuid();
-        }
-        return listener.$$guid;
-    };
-    /** Construct an "event firer" object which can be used to register and deregister 
-     * listeners, to which "events" can be fired. These events consist of an arbitrary
-     * function signature. General documentation on the Fluid events system is at
-     * http://wiki.fluidproject.org/display/fluid/The+Fluid+Event+System .
-     * @param {Boolean} unicast If <code>true</code>, this is a "unicast" event which may only accept
-     * a single listener.
-     * @param {Boolean} preventable If <code>true</code> the return value of each handler will 
-     * be checked for <code>false</code> in which case further listeners will be shortcircuited, and this
-     * will be the return value of fire()
-     */
-    
-    fluid.event.getEventFirer = function (unicast, preventable) {
-        var listeners = {};
-        
-        function fireToListeners(listeners, args, wrapper) {
-            for (var i in listeners) {
-                var lisrec = listeners[i];
-                var listener = lisrec.listener;
-                if (lisrec.predicate && !lisrec.predicate(listener, args)) {
-                    continue;
-                }
-                try {
-                    var ret = (wrapper? wrapper(listener) : listener).apply(null, args);
-                    if (preventable && ret === false) {
-                        return false;
-                    }
-                }
-                catch (e) {
-                    fluid.log("FireEvent received exception " + e.message + " e " + e + " firing to listener " + i);
-                    throw (e);       
-                }
-            }
-        }
-        
-        return {
-           addListener: function (listener, namespace, predicate) {
-                if (!listener) {
-                    return;
-                }
-                if (unicast) {
-                    namespace = "unicast";
-                }
-                if (!namespace) {
-                    namespace = fluid.event.identifyListener(listener);
-                }
-
-                listeners[namespace] = {listener: listener, predicate: predicate};
-            },
-
-            removeListener: function (listener) {
-                if (typeof(listener) === 'string') {
-                    delete listeners[listener];
-                }
-                else if (listener.$$guid) {
-                    delete listeners[listener.$$guid];
-                }
-            },
-            // NB - this method exists currently solely for the convenience of the new,
-            // transactional changeApplier. As it exists it is hard to imagine the function
-            // being helpful to any other client. We need to get more experience on the kinds
-            // of listeners that are useful, and ultimately factor this method away.
-            fireToListeners: function (listeners, args, wrapper) {
-                return fireToListeners(listeners, args, wrapper);
-            },
-            fire: function () {
-                return fireToListeners(listeners, arguments);
-            }
-        };
-    };
-    
-    
-    // Model functions
-    
-    fluid.model = {};
-   
-    /** Copy a source "model" onto a target **/
-    fluid.model.copyModel = function (target, source) {
-        fluid.clear(target);
-        $.extend(true, target, source);
-    };
-    
-    /** Parse an EL expression separated by periods (.) into its component segments.
-     * @param {String} EL The EL expression to be split
-     * @return {Array of String} the component path expressions.
-     * TODO: This needs to be upgraded to handle (the same) escaping rules (as RSF), so that
-     * path segments containing periods and backslashes etc. can be processed.
-     */
-    fluid.model.parseEL = function (EL) {
-        return String(EL).split('.');
-    };
-    
-    /** Compose an EL expression from two separate EL expressions. The returned 
-     * expression will be the one that will navigate the first expression, and then
-     * the second, from the value reached by the first. Either prefix or suffix may be
-     * the empty string **/
-    
-    fluid.model.composePath = function (prefix, suffix) {
-        return prefix === ""? suffix : (suffix === ""? prefix : prefix + "." + suffix);
-    };
-    
-    /** Compose any number of path segments, none of which may be empty **/
-    fluid.model.composeSegments = function () {
-        return $.makeArray(arguments).join(".");
-    };
-
-    /** Standard strategies for resolving path segments **/
-    fluid.model.environmentStrategy = function(initEnvironment) {
-        return {
-            init: function() {
-                var environment = initEnvironment;
-                return function(root, segment, index) {
-                    if (environment && environment[segment]) {
-                        var togo = environment[segment];
-                    }
-                    environment = null;
-                    return togo; 
-                };
-            }
-        };
-    };
-
-    fluid.model.defaultCreatorStrategy = function(root, segment) {
-        if (root[segment] === undefined) {
-            return root[segment] = {};
-            }
-        };
-    
-    fluid.model.defaultFetchStrategy = function(root, segment) {
-        return root[segment];
-        };
-        
-    fluid.model.funcResolverStrategy = function(root, segment) {
-        if (root.resolvePathSegment) {
-            return root.resolvePathSegment(segment);
-        }
-    };
-    
-    fluid.model.makeResolver = function(root, EL, config) {
-        var that = {
-            segs: fluid.model.parseEL(EL),
-            root: root,
-            index: 0,
-            strategies: fluid.transform(config, function(figel) {
-                return figel.init? figel.init() : figel;
-            })
-        };
-        that.next = function() {
-            if (!that.root) {return;}
-            var accepted;
-            for (var i = 0; i < that.strategies.length; ++ i) {
-                var value = that.strategies[i](that.root, that.segs[that.index], that.index);
-                if (accepted === undefined) {
-                    accepted = value;
-                }
-            }
-            if (accepted === fluid.NO_VALUE) {
-                accepted = undefined;
-            }
-            that.root = accepted;
-            ++that.index;
-        };
-        that.step = function(limit) {
-            for (var i = 0; i < limit; ++ i) {
-                that.next();
-            }
-            that.last = that.segs[that.index];
-        };
-        return that;
-    }    
-
-    fluid.model.defaultSetConfig = [fluid.model.funcResolverStrategy, fluid.model.defaultFetchStrategy, fluid.model.defaultCreatorStrategy];
-    
-    fluid.model.getPenultimate = function(root, EL, config) {
-        config = config || fluid.model.defaultGetConfig;
-        var resolver = fluid.model.makeResolver(root, EL, config);
-        resolver.step(resolver.segs.length - 1);
-        return resolver;
-    }
-    
-    fluid.model.setBeanValue = function(root, EL, newValue, config) {
-        config = config || fluid.model.defaultSetConfig;
-        var resolver = fluid.model.getPenultimate(root, EL, config);
-        resolver.root[resolver.last] = newValue;
-    };
-
-    fluid.model.defaultGetConfig = [fluid.model.funcResolverStrategy, fluid.model.defaultFetchStrategy];
-    
-    /** Evaluates an EL expression by fetching a dot-separated list of members
-     * recursively from a provided root.
-     * @param root The root data structure in which the EL expression is to be evaluated
-     * @param {string} EL The EL expression to be evaluated
-     * @param environment An optional "environment" which, if it contains any members
-     * at top level, will take priority over the root data structure.
-     * @return The fetched data value.
-     */
-    
-    fluid.model.getBeanValue = function (root, EL, config) {
-        if (EL === "" || EL === null || EL === undefined) {
-            return root;
-        }
-        config = config || fluid.model.defaultGetConfig;
-        var resolver = fluid.model.makeResolver(root, EL, config);
-        resolver.step(resolver.segs.length);
-        return resolver.root;
+        fluid.log(message.message ? message.message : message);
+        throw new Error(message);
+        //message.fail(); // Intentionally cause a browser error by invoking a nonexistent function.
     };
     
     // Logging
@@ -8238,85 +7396,71 @@ var fluid = fluid || fluid_1_2;
             }
         }
     };
+    
+    /**
+     * Wraps an object in a jQuery if it isn't already one. This function is useful since
+     * it ensures to wrap a null or otherwise falsy argument to itself, rather than the
+     * often unhelpful jQuery default of returning the overall document node.
+     * 
+     * @param {Object} obj the object to wrap in a jQuery
+     */
+    fluid.wrap = function (obj) {
+        return ((!obj || obj.jquery) ? obj : $(obj)); 
+    };
+    
+    /**
+     * If obj is a jQuery, this function will return the first DOM element within it.
+     * 
+     * @param {jQuery} obj the jQuery instance to unwrap into a pure DOM element
+     */
+    fluid.unwrap = function (obj) {
+        return obj && obj.jquery && obj.length === 1 ? obj[0] : obj; // Unwrap the element if it's a jQuery.
+    };
+    
+    // Functional programming utilities.
+            
+    /** Return an empty container as the same type as the argument (either an
+     * array or hash */
+    fluid.freshContainer = function (tocopy) {
+        return fluid.isArrayable(tocopy) ? [] : {};   
+    };
+    
+    /** Performs a deep copy (clone) of its argument **/
+    
+    fluid.copy = function (tocopy) {
+        if (fluid.isPrimitive(tocopy)) {
+            return tocopy;
+        }
+        return $.extend(true, fluid.freshContainer(tocopy), tocopy);
+    };
+    
+    /** A basic utility that returns its argument unchanged */
+    
+    fluid.identity = function (arg) {
+        return arg;
+    };
+    
+    // Framework and instantiation functions.
 
-    // DOM Utilities.
     
-    /**
-     * Finds the nearest ancestor of the element that passes the test
-     * @param {Element} element DOM element
-     * @param {Function} test A function which takes an element as a parameter and return true or false for some test
-     */
-    fluid.findAncestor = function (element, test) {
-        element = fluid.unwrap(element);
-        while (element) {
-            if (test(element)) {
-                return element;
-            }
-            element = element.parentNode;
-        }
+    /** Returns true if the argument is a primitive type **/
+    fluid.isPrimitive = function (value) {
+        var valueType = typeof(value);
+        return !value || valueType === "string" || valueType === "boolean" || valueType === "number" || valueType === "function";
     };
     
-    /**
-     * Returns a jQuery object given the id of a DOM node. In the case the element
-     * is not found, will return an empty list.
+    /** Determines whether the supplied object can be treated as an array, by 
+     * iterating an index towards its length. The test functions by detecting
+     * a property named "length" which is of type "number", but excluding objects
+     * which are themselves of primitive types (in particular functions and strings)
      */
-    fluid.jById = function (id, dokkument) {
-        dokkument = dokkument && dokkument.nodeType === 9? dokkument : document;
-        var element = fluid.byId(id, dokkument);
-        var togo = element? $(element) : [];
-        togo.selector = "#" + id;
-        togo.context = dokkument;
-        return togo;
+    fluid.isArrayable = function (totest) {
+        return totest && !fluid.isPrimitive(totest) && typeof(totest.length) === "number";
     };
     
-    /**
-     * Returns an DOM element quickly, given an id
-     * 
-     * @param {Object} id the id of the DOM node to find
-     * @param {Document} dokkument the document in which it is to be found (if left empty, use the current document)
-     * @return The DOM element with this id, or null, if none exists in the document.
-     */
-    fluid.byId = function (id, dokkument) {
-        dokkument = dokkument && dokkument.nodeType === 9? dokkument : document;
-        var el = dokkument.getElementById(id);
-        if (el) {
-            if (el.getAttribute("id") !== id) {
-                fluid.fail("Problem in document structure - picked up element " +
-                    fluid.dumpEl(el) + " for id " + id +
-                    " without this id - most likely the element has a name which conflicts with this id");
-            }
-            return el;
-        }
-        else {
-            return null;
-        }
-    };
-    
-    /**
-     * Returns the id attribute from a jQuery or pure DOM element.
-     * 
-     * @param {jQuery||Element} element the element to return the id attribute for
-     */
-    fluid.getId = function (element) {
-        return fluid.unwrap(element).getAttribute("id");
-    };
-    
-    /** 
-     * Allocate an id to the supplied element if it has none already, by a simple
-     * scheme resulting in ids "fluid-id-nnnn" where nnnn is an increasing integer.
-     */
-    
-    fluid.allocateSimpleId = function (element) {
-        element = fluid.unwrap(element);
-        if (!element.id) {
-            element.id = "fluid-id-" + fluid.allocateGuid(); 
-        }
-        return element.id;
-    };
-    
-        
+            
     /** Corrected version of jQuery makearray that returns an empty array on undefined rather than crashing **/
-    fluid.makeArray = function(arg) {
+    fluid.makeArray = function (arg) {
         if (arg === null || arg === undefined) {
             return [];
         }
@@ -8324,8 +7468,6 @@ var fluid = fluid || fluid_1_2;
             return $.makeArray(arg);
         }
     };
-    
-    // Functional programming utilities.
     
     function transformInternal(source, togo, key, args) {
         var transit = source[key];
@@ -8393,16 +7535,21 @@ var fluid = fluid || fluid_1_2;
      * or <code>undefined</code>
      */
     fluid.find = function (source, func, deflt) {
+        var disp;
         if (fluid.isArrayable(source)) {
             for (var i = 0; i < source.length; ++ i) {
-                var disp = func(source[i], i);
-                if (disp !== undefined) { return disp;}
+                disp = func(source[i], i);
+                if (disp !== undefined) {
+                    return disp;
+                }
             }
         }
         else {
             for (var key in source) {
-                var disp = func(source[key], key);
-                if (disp !== undefined) { return disp;}
+                disp = func(source[key], key);
+                if (disp !== undefined) {
+                    return disp;
+                }
             }
         }
         return deflt;
@@ -8453,6 +7600,912 @@ var fluid = fluid || fluid_1_2;
         return source;
     };
     
+    
+    /** 
+     * Searches through the supplied object for the first value which matches the one supplied.
+     * @param obj {Object} the Object to be searched through
+     * @param value {Object} the value to be found. This will be compared against the object's
+     * member using === equality.
+     * @return {String} The first key whose value matches the one supplied, or <code>null</code> if no
+     * such key is found.
+     */
+    fluid.keyForValue = function (obj, value) {
+        return fluid.find(obj, function (thisValue, key) {
+            if (value === thisValue) {
+                return key;
+            }
+        });
+    };
+    
+    /**
+     * This method is now deprecated and will be removed in a future release of Infusion. 
+     * See fluid.keyForValue instead.
+     */
+    fluid.findKeyInObject = fluid.keyForValue;
+    
+    /** 
+     * Clears an object or array of its contents. For objects, each property is deleted.
+     * 
+     * @param {Object|Array} target the target to be cleared
+     */
+    fluid.clear = function (target) {
+        if (target instanceof Array) {
+            target.length = 0;
+        }
+        else {
+            for (var i in target) {
+                delete target[i];
+            }
+        }
+    };
+        
+    // Model functions
+    fluid.model = {}; // cannot call registerNamespace yet since it depends on fluid.model
+       
+    /** Another special "marker object" representing that a distinguished 
+     * (probably context-dependent) value should be substituted.
+     */
+    fluid.VALUE = {type: "fluid.marker", value: "VALUE"};
+    
+    /** Another special "marker object" representing that no value is present (where
+     * signalling using the value "undefined" is not possible) */
+    fluid.NO_VALUE = {type: "fluid.marker", value: "NO_VALUE"};
+    
+    /** Determine whether an object is any marker, or a particular marker - omit the
+     * 2nd argument to detect any marker
+     */
+    fluid.isMarker = function (totest, type) {
+        if (!totest || typeof(totest) !== 'object' || totest.type !== "fluid.marker") {
+            return false;
+        }
+        if (!type) {
+            return true;
+        }
+        return totest.value === type || totest.value === type.value;
+    };
+   
+    /** Copy a source "model" onto a target **/
+    fluid.model.copyModel = function (target, source) {
+        fluid.clear(target);
+        $.extend(true, target, source);
+    };
+    
+    /** Parse an EL expression separated by periods (.) into its component segments.
+     * @param {String} EL The EL expression to be split
+     * @return {Array of String} the component path expressions.
+     * TODO: This needs to be upgraded to handle (the same) escaping rules (as RSF), so that
+     * path segments containing periods and backslashes etc. can be processed.
+     */
+    fluid.model.parseEL = function (EL) {
+        return String(EL).split('.');
+    };
+    
+    /** Compose an EL expression from two separate EL expressions. The returned 
+     * expression will be the one that will navigate the first expression, and then
+     * the second, from the value reached by the first. Either prefix or suffix may be
+     * the empty string **/
+    
+    fluid.model.composePath = function (prefix, suffix) {
+        return prefix === "" ? suffix : (suffix === "" ? prefix : prefix + "." + suffix);
+    };
+    
+    /** Compose any number of path segments, none of which may be empty **/
+    fluid.model.composeSegments = function () {
+        return $.makeArray(arguments).join(".");
+    };
+
+    /** Standard strategies for resolving path segments **/
+    fluid.model.environmentStrategy = function (initEnvironment) {
+        return {
+            init: function () {
+                var environment = initEnvironment;
+                return function (root, segment, index) {
+                    var togo;
+                    if (environment && environment[segment]) {
+                        togo = environment[segment];
+                    }
+                    environment = null;
+                    return togo; 
+                };
+            }
+        };
+    };
+
+    fluid.model.defaultCreatorStrategy = function (root, segment) {
+        if (root[segment] === undefined) {
+            root[segment] = {};
+            return root[segment];
+        }
+    };
+    
+    fluid.model.defaultFetchStrategy = function (root, segment) {
+        return root[segment];
+    };
+        
+    fluid.model.funcResolverStrategy = function (root, segment) {
+        if (root.resolvePathSegment) {
+            return root.resolvePathSegment(segment);
+        }
+    };
+    
+    fluid.model.makeResolver = function (root, EL, config) {
+        var that = {
+            segs: fluid.model.parseEL(EL),
+            root: root,
+            index: 0,
+            strategies: fluid.transform(config, function (figel) {
+                return figel.init ? figel.init() : figel;
+            })
+        };
+        that.next = function () {
+            if (!that.root) {
+                return;
+            }
+            var accepted;
+            for (var i = 0; i < that.strategies.length; ++ i) {
+                var value = that.strategies[i](that.root, that.segs[that.index], that.index);
+                if (accepted === undefined) {
+                    accepted = value;
+                }
+            }
+            if (accepted === fluid.NO_VALUE) {
+                accepted = undefined;
+            }
+            that.root = accepted;
+            ++that.index;
+        };
+        that.step = function (limit) {
+            for (var i = 0; i < limit; ++ i) {
+                that.next();
+            }
+            that.last = that.segs[that.index];
+        };
+        return that;
+    };
+
+    fluid.model.defaultSetConfig = [fluid.model.funcResolverStrategy, fluid.model.defaultFetchStrategy, fluid.model.defaultCreatorStrategy];
+    
+    fluid.model.getPenultimate = function (root, EL, config) {
+        config = config || fluid.model.defaultGetConfig;
+        var resolver = fluid.model.makeResolver(root, EL, config);
+        resolver.step(resolver.segs.length - 1);
+        return resolver;
+    };
+    
+    fluid.set = function (root, EL, newValue, config) {
+        config = config || fluid.model.defaultSetConfig;
+        var resolver = fluid.model.getPenultimate(root, EL, config);
+        resolver.root[resolver.last] = newValue;
+    };
+    
+    fluid.model.defaultGetConfig = [fluid.model.funcResolverStrategy, fluid.model.defaultFetchStrategy];
+    
+    /** Evaluates an EL expression by fetching a dot-separated list of members
+     * recursively from a provided root.
+     * @param root The root data structure in which the EL expression is to be evaluated
+     * @param {string} EL The EL expression to be evaluated
+     * @param environment An optional "environment" which, if it contains any members
+     * at top level, will take priority over the root data structure.
+     * @return The fetched data value.
+     */
+    
+    fluid.get = function (root, EL, config) {
+        if (EL === "" || EL === null || EL === undefined) {
+            return root;
+        }
+        config = config || fluid.model.defaultGetConfig;
+        var resolver = fluid.model.makeResolver(root, EL, config);
+        resolver.step(resolver.segs.length);
+        return resolver.root;
+    };
+
+    // This backward compatibility will be maintained for a number of releases, probably until Fluid 2.0
+    fluid.model.setBeanValue = fluid.set;
+    fluid.model.getBeanValue = fluid.get;
+    
+    fluid.getGlobalValue = function (path, env) {
+        if (path) {
+            env = env || fluid.environment;
+            var envFetcher = fluid.model.environmentStrategy(env);
+            return fluid.get(globalObject, path, [envFetcher].concat(fluid.model.defaultGetConfig));
+        }
+    };
+    
+    /**
+     * Allows for the calling of a function from an EL expression "functionPath", with the arguments "args", scoped to an framework version "environment".
+     * @param {Object} functionPath - An EL expression
+     * @param {Object} args - An array of arguments to be applied to the function, specified in functionPath
+     * @param {Object} environment - (optional) The object to scope the functionPath to  (typically the framework root for version control)
+     */
+    fluid.invokeGlobalFunction = function (functionPath, args, environment) {
+        var func = fluid.getGlobalValue(functionPath, environment);
+        if (!func) {
+            fluid.fail("Error invoking global function: " + functionPath + " could not be located");
+        } else {
+            return func.apply(null, args);
+        }
+    };
+    
+    /** Registers a new global function at a given path (currently assumes that
+     * it lies within the fluid namespace)
+     */
+    
+    fluid.registerGlobalFunction = function (functionPath, func, env) {
+        env = env || fluid.environment;
+        var envFetcher = fluid.model.environmentStrategy(env);
+        fluid.set(globalObject, functionPath, func, [envFetcher].concat(fluid.model.defaultSetConfig));
+    };
+    
+    fluid.setGlobalValue = fluid.registerGlobalFunction;
+    
+    /** Ensures that an entry in the global namespace exists **/
+    fluid.registerNamespace = function (naimspace, env) {
+        env = env || fluid.environment;
+        var existing = fluid.getGlobalValue(naimspace, env);
+        if (!existing) {
+            existing = {};
+            fluid.setGlobalValue(naimspace, existing, env);
+        }
+        return existing;
+    };
+    
+    fluid.registerNamespace("fluid.event");
+    
+    fluid.event.addListenerToFirer = function (firer, value, namespace) {
+        if (typeof(value) === "function") {
+            firer.addListener(value, namespace);
+        }
+        else if (value && typeof(value) === "object") {
+            firer.addListener(value.listener, namespace, value.predicate, value.priority);
+        }
+    };
+    /**
+     * Attaches the user's listeners to a set of events.
+     * 
+     * @param {Object} events a collection of named event firers
+     * @param {Object} listeners optional listeners to add
+     */
+    fluid.mergeListeners = function (events, listeners) {
+        fluid.each(listeners, function (value, key) {
+            var keydot = key.indexOf(".");
+            var namespace;
+            if (keydot !== -1) {
+                namespace = key.substring(keydot + 1);
+                key = key.substring(0, keydot);
+            }
+            if (!events[key]) {
+                events[key] = fluid.event.getEventFirer();
+            }
+            var firer = events[key];
+            if (fluid.isArrayable(value)) {
+                for (var i = 0; i < value.length; ++ i) {
+                    fluid.event.addListenerToFirer(firer, value[i], namespace); 
+                }
+            }
+            else {
+                fluid.event.addListenerToFirer(firer, value, namespace);
+            } 
+        });
+    };
+    
+    /**
+     * Sets up a component's declared events.
+     * Events are specified in the options object by name. There are three different types of events that can be
+     * specified: 
+     * 1. an ordinary multicast event, specified by "null". 
+     * 2. a unicast event, which allows only one listener to be registered
+     * 3. a preventable event
+     * 
+     * @param {Object} that the component
+     * @param {Object} options the component's options structure, containing the declared event names and types
+     */
+    fluid.instantiateFirers = function (that, options) {
+        that.events = {};
+        if (options.events) {
+            for (var event in options.events) {
+                var eventType = options.events[event];
+                that.events[event] = fluid.event.getEventFirer(eventType === "unicast", eventType === "preventable");
+            }
+        }
+        fluid.mergeListeners(that.events, options.listeners);
+    };
+    
+        
+    // stubs for two functions in FluidDebugging.js
+    fluid.dumpEl = fluid.identity;
+    fluid.renderTimestamp = fluid.identity;
+    
+    /**
+     * Retreives and stores a component's default settings centrally.
+     * @param {boolean} (options) if true, manipulate a global option (for the head
+     *   component) rather than instance options.
+     * @param {String} componentName the name of the component
+     * @param {Object} (optional) an container of key/value pairs to set
+     * 
+     */
+    var defaultsStore = {};
+    var globalDefaultsStore = {};
+    fluid.defaults = function () {
+        var offset = 0;
+        var store = defaultsStore;
+        if (typeof arguments[0] === "boolean") {
+            store = globalDefaultsStore;
+            offset = 1;
+        }
+        var componentName = arguments[offset];
+        var defaultsObject = arguments[offset + 1];
+        if (defaultsObject !== undefined) {
+            store[componentName] = defaultsObject;   
+            return defaultsObject;
+        }
+        
+        return store[componentName];
+    };
+    
+                
+    fluid.mergePolicyIs = function (policy, test) {
+        return typeof(policy) === "string" && policy.indexOf(test) !== -1;
+    };
+    
+    function mergeImpl(policy, basePath, target, source, thisPolicy) {
+        if (typeof(thisPolicy) === "function") {
+            thisPolicy.apply(null, target, source);
+            return target;
+        }
+        if (fluid.mergePolicyIs(thisPolicy, "replace")) {
+            fluid.clear(target);
+        }
+      
+        for (var name in source) {
+            var path = (basePath ? basePath + ".": "") + name;
+            var newPolicy = policy && typeof(policy) !== "string" ? policy[path] : policy;
+            var thisTarget = target[name];
+            var thisSource = source[name];
+            var primitiveTarget = fluid.isPrimitive(thisTarget);
+    
+            if (thisSource !== undefined) {
+                if (thisSource !== null && typeof thisSource === 'object' &&
+                      !thisSource.nodeType && !thisSource.jquery && thisSource !== fluid.VALUE &&
+                       !fluid.mergePolicyIs(newPolicy, "preserve")) {
+                    if (primitiveTarget) {
+                        target[name] = thisTarget = thisSource instanceof Array ? [] : {};
+                    }
+                    mergeImpl(policy, path, thisTarget, thisSource, newPolicy);
+                }
+                else {
+                    if (typeof(newPolicy) === "function") {
+                        newPolicy.call(null, target, source, name);
+                    }
+                    else if (thisTarget === null || thisTarget === undefined || !fluid.mergePolicyIs(newPolicy, "reverse")) {
+                        // TODO: When "grades" are implemented, grandfather in any paired applier to perform these operations
+                        // NB: mergePolicy of "preserve" now creates dependency on DataBinding.js
+                        target[name] = fluid.mergePolicyIs(newPolicy, "preserve") ? fluid.model.mergeModel(thisTarget, thisSource) : thisSource;
+                    }
+                }
+            }
+        }
+        return target;
+    }
+    
+    /** Merge a collection of options structures onto a target, following an optional policy.
+     * This function is typically called automatically, as a result of an invocation of
+     * <code>fluid.iniView</code>. The behaviour of this function is explained more fully on
+     * the page http://wiki.fluidproject.org/display/fluid/Options+Merging+for+Fluid+Components .
+     * @param policy {Object/String} A "policy object" specifiying the type of merge to be performed.
+     * If policy is of type {String} it should take on the value "reverse" or "replace" representing
+     * a static policy. If it is an
+     * Object, it should contain a mapping of EL paths onto these String values, representing a
+     * fine-grained policy. If it is an Object, the values may also themselves be EL paths 
+     * representing that a default value is to be taken from that path.
+     * @param target {Object} The options structure which is to be modified by receiving the merge results.
+     * @param options1, options2, .... {Object} an arbitrary list of options structure which are to
+     * be merged "on top of" the <code>target</code>. These will not be modified.    
+     */
+    
+    fluid.merge = function (policy, target) {
+        var path = "";
+        
+        for (var i = 2; i < arguments.length; ++i) {
+            var source = arguments[i];
+            if (source !== null && source !== undefined) {
+                mergeImpl(policy, path, target, source, policy ? policy[""] : null);
+            }
+        }
+        if (policy && typeof(policy) !== "string") {
+            for (var key in policy) {
+                var elrh = policy[key];
+                if (typeof(elrh) === 'string' && elrh !== "replace") {
+                    var oldValue = fluid.get(target, key);
+                    if (oldValue === null || oldValue === undefined) {
+                        var value = fluid.get(target, elrh);
+                        fluid.set(target, key, value);
+                    }
+                }
+            }
+        }
+        return target;     
+    };
+
+    /**
+     * Merges the component's declared defaults, as obtained from fluid.defaults(),
+     * with the user's specified overrides.
+     * 
+     * @param {Object} that the instance to attach the options to
+     * @param {String} componentName the unique "name" of the component, which will be used
+     * to fetch the default options from store. By recommendation, this should be the global
+     * name of the component's creator function.
+     * @param {Object} userOptions the user-specified configuration options for this component
+     */
+    fluid.mergeComponentOptions = function (that, componentName, userOptions) {
+        var defaults = fluid.defaults(componentName); 
+        if (fluid.expandOptions) {
+            defaults = fluid.expandOptions(fluid.copy(defaults), that);
+        }
+        that.options = fluid.merge(defaults ? defaults.mergePolicy: null, {}, defaults, userOptions);    
+    };
+    
+        
+    /** A special "marker object" which is recognised as one of the arguments to 
+     * fluid.initSubcomponents. This object is recognised by reference equality - 
+     * where it is found, it is replaced in the actual argument position supplied
+     * to the specific subcomponent instance, with the particular options block
+     * for that instance attached to the overall "that" object.
+     */
+    fluid.COMPONENT_OPTIONS = {type: "fluid.marker", value: "COMPONENT_OPTIONS"};
+    
+    /** Construct a dummy or "placeholder" subcomponent, that optionally provides empty
+     * implementations for a set of methods.
+     */
+    fluid.emptySubcomponent = function (options) {
+        var that = {};
+        options = $.makeArray(options);
+        var empty = function () {};
+        for (var i = 0; i < options.length; ++ i) {
+            that[options[i]] = empty;
+        }
+        return that;
+    };
+    
+    /** Compute a "nickname" given a fully qualified typename, by returning the last path
+     * segment.
+     */
+    
+    fluid.computeNickName = function (typeName) {
+        var segs = fluid.model.parseEL(typeName);
+        return segs[segs.length - 1];
+    };
+    
+    /**
+     * Creates a new "little component": a that-ist object with options merged into it by the framework.
+     * This method is a convenience for creating small objects that have options but don't require full
+     * View-like features such as the DOM Binder or events
+     * 
+     * @param {Object} name the name of the little component to create
+     * @param {Object} options user-supplied options to merge with the defaults
+     */
+    fluid.initLittleComponent = function (name, options) {
+        var that = {typeName: name, id: fluid.allocateGuid()};
+        // TODO: nickName must be available earlier than other merged options so that component may resolve to itself
+        that.nickName = options && options.nickName ? options.nickName: fluid.computeNickName(that.typeName);
+        fluid.mergeComponentOptions(that, name, options);
+        return that;
+    };
+
+
+    // The Model Events system.
+    
+    var fluid_guid = 1;
+    
+    /** Allocate an integer value that will be unique for this session **/
+    
+    fluid.allocateGuid = function () {
+        return fluid_guid++;
+    };
+    
+    fluid.event.identifyListener = function (listener) {
+        if (!listener.$$guid) {
+            listener.$$guid = fluid.allocateGuid();
+        }
+        return listener.$$guid;
+    };
+    
+    fluid.event.mapPriority = function (priority) {
+        return (priority === null || priority === undefined ? 0 : 
+           (priority === "last" ? -Number.MAX_VALUE :
+              (priority === "first" ? Number.MAX_VALUE : priority)));
+    };
+    
+    fluid.event.listenerComparator = function (recA, recB) {
+        return recB.priority - recA.priority;
+    };
+    
+    fluid.event.sortListeners = function (listeners) {
+        var togo = [];
+        fluid.each(listeners, function (listener) {
+            togo.push(listener);
+        });
+        return togo.sort(fluid.event.listenerComparator);
+    };
+    /** Construct an "event firer" object which can be used to register and deregister 
+     * listeners, to which "events" can be fired. These events consist of an arbitrary
+     * function signature. General documentation on the Fluid events system is at
+     * http://wiki.fluidproject.org/display/fluid/The+Fluid+Event+System .
+     * @param {Boolean} unicast If <code>true</code>, this is a "unicast" event which may only accept
+     * a single listener.
+     * @param {Boolean} preventable If <code>true</code> the return value of each handler will 
+     * be checked for <code>false</code> in which case further listeners will be shortcircuited, and this
+     * will be the return value of fire()
+     */
+    
+    fluid.event.getEventFirer = function (unicast, preventable) {
+        var listeners = {};
+        var sortedListeners = [];
+        
+        function fireToListeners(listeners, args, wrapper) {
+            for (var i in listeners) {
+                var lisrec = listeners[i];
+                var listener = lisrec.listener;
+                if (lisrec.predicate && !lisrec.predicate(listener, args)) {
+                    continue;
+                }
+                try {
+                    var ret = (wrapper ? wrapper(listener) : listener).apply(null, args);
+                    if (preventable && ret === false) {
+                        return false;
+                    }
+                }
+                catch (e) {
+                    fluid.log("FireEvent received exception " + e.message + " e " + e + " firing to listener " + i);
+                    throw (e);       
+                }
+            }
+        }
+        
+        return {
+            addListener: function (listener, namespace, predicate, priority) {
+                if (!listener) {
+                    return;
+                }
+                if (unicast) {
+                    namespace = "unicast";
+                }
+                if (!namespace) {
+                    namespace = fluid.event.identifyListener(listener);
+                }
+
+                listeners[namespace] = {listener: listener, predicate: predicate, priority: 
+                    fluid.event.mapPriority(priority)};
+                sortedListeners = fluid.event.sortListeners(listeners);
+            },
+
+            removeListener: function (listener) {
+                if (typeof(listener) === 'string') {
+                    delete listeners[listener];
+                }
+                else if (listener.$$guid) {
+                    delete listeners[listener.$$guid];
+                }
+                sortedListeners = fluid.event.sortListeners(listeners);
+            },
+            // NB - this method exists currently solely for the convenience of the new,
+            // transactional changeApplier. As it exists it is hard to imagine the function
+            // being helpful to any other client. We need to get more experience on the kinds
+            // of listeners that are useful, and ultimately factor this method away.
+            fireToListeners: function (listeners, args, wrapper) {
+                return fireToListeners(listeners, args, wrapper);
+            },
+            fire: function () {
+                return fireToListeners(sortedListeners, arguments);
+            }
+        };
+    };
+
+  // **** VIEW-DEPENDENT DEFINITIONS BELOW HERE
+
+    /**
+     * Fetches a single container element and returns it as a jQuery.
+     * 
+     * @param {String||jQuery||element} containerSpec an id string, a single-element jQuery, or a DOM element specifying a unique container
+     * @param {Boolean} fallible <code>true</code> if an empty container is to be reported as a valid condition
+     * @return a single-element jQuery of container
+     */
+    fluid.container = function (containerSpec, fallible) {
+        var container = fluid.wrap(containerSpec);
+        if (fallible && !container || container.length === 0) {
+            return null;
+        }
+        
+        // Throw an exception if we've got more or less than one element.
+        if (!container || !container.jquery || container.length !== 1) {
+            if (typeof(containerSpec) !== "string") {
+                containerSpec = container.selector;
+            }
+            var count = container.length !== undefined ? container.length : 0;
+            fluid.fail({
+                name: "NotOne",
+                message: count > 1 ? "More than one (" + count + ") container elements were "
+                : "No container element was found for selector " + containerSpec
+            });
+        }
+        
+        return container;
+    };
+    
+    /**
+     * Creates a new DOM Binder instance, used to locate elements in the DOM by name.
+     * 
+     * @param {Object} container the root element in which to locate named elements
+     * @param {Object} selectors a collection of named jQuery selectors
+     */
+    fluid.createDomBinder = function (container, selectors) {
+        var cache = {}, that = {};
+        
+        function cacheKey(name, thisContainer) {
+            return fluid.allocateSimpleId(thisContainer) + "-" + name;
+        }
+
+        function record(name, thisContainer, result) {
+            cache[cacheKey(name, thisContainer)] = result;
+        }
+
+        that.locate = function (name, localContainer) {
+            var selector, thisContainer, togo;
+            
+            selector = selectors[name];
+            thisContainer = localContainer ? localContainer: container;
+            if (!thisContainer) {
+                fluid.fail("DOM binder invoked for selector " + name + " without container");
+            }
+
+            if (!selector) {
+                return thisContainer;
+            }
+
+            if (typeof(selector) === "function") {
+                togo = $(selector.call(null, fluid.unwrap(thisContainer)));
+            } else {
+                togo = $(selector, thisContainer);
+            }
+            if (togo.get(0) === document) {
+                togo = [];
+                //fluid.fail("Selector " + name + " with value " + selectors[name] +
+                //            " did not find any elements with container " + fluid.dumpEl(container));
+            }
+            if (!togo.selector) {
+                togo.selector = selector;
+                togo.context = thisContainer;
+            }
+            togo.selectorName = name;
+            record(name, thisContainer, togo);
+            return togo;
+        };
+        that.fastLocate = function (name, localContainer) {
+            var thisContainer = localContainer ? localContainer: container;
+            var key = cacheKey(name, thisContainer);
+            var togo = cache[key];
+            return togo ? togo : that.locate(name, localContainer);
+        };
+        that.clear = function () {
+            cache = {};
+        };
+        that.refresh = function (names, localContainer) {
+            var thisContainer = localContainer ? localContainer: container;
+            if (typeof names === "string") {
+                names = [names];
+            }
+            if (thisContainer.length === undefined) {
+                thisContainer = [thisContainer];
+            }
+            for (var i = 0; i < names.length; ++ i) {
+                for (var j = 0; j < thisContainer.length; ++ j) {
+                    that.locate(names[i], thisContainer[j]);
+                }
+            }
+        };
+        that.resolvePathSegment = that.locate;
+        
+        return that;
+    };
+    
+    /** Expect that an output from the DOM binder has resulted in a non-empty set of 
+     * results. If none are found, this function will fail with a diagnostic message, 
+     * with the supplied message prepended.
+     */
+    fluid.expectFilledSelector = function (result, message) {
+        if (result && result.length === 0 && result.jquery) {
+            fluid.fail(message + ": selector \"" + result.selector + "\" with name " + result.selectorName +
+                       " returned no results in context " + fluid.dumpEl(result.context));
+        }
+    };
+    
+    /** 
+     * The central initialiation method called as the first act of every Fluid
+     * component. This function automatically merges user options with defaults,
+     * attaches a DOM Binder to the instance, and configures events.
+     * 
+     * @param {String} componentName The unique "name" of the component, which will be used
+     * to fetch the default options from store. By recommendation, this should be the global
+     * name of the component's creator function.
+     * @param {jQueryable} container A specifier for the single root "container node" in the
+     * DOM which will house all the markup for this component.
+     * @param {Object} userOptions The configuration options for this component.
+     */
+    fluid.initView = function (componentName, container, userOptions) {
+        fluid.expectFilledSelector(container, "Error instantiating component with name \"" + componentName);
+        container = fluid.container(container, true);
+        if (!container) {
+            return null;
+        }
+        var that = fluid.initLittleComponent(componentName, userOptions); 
+        that.container = container;
+        fluid.initDomBinder(that);
+        
+        fluid.instantiateFirers(that, that.options);
+
+        return that;
+    };
+
+    
+    fluid.initSubcomponent = function (that, className, args) {
+        return fluid.initSubcomponents(that, className, args)[0];
+    };
+    
+    fluid.initSubcomponentImpl = function (that, entry, args) {
+        var togo;
+        if (typeof(entry) !== "function") {
+            var entryType = typeof(entry) === "string" ? entry : entry.type;
+            var globDef = fluid.defaults(true, entryType);
+            fluid.merge("reverse", that.options, globDef);
+            togo = entryType === "fluid.emptySubcomponent" ?
+               fluid.emptySubcomponent(entry.options) : 
+               fluid.invokeGlobalFunction(entryType, args);
+        }
+        else {
+            togo = entry.apply(null, args);
+        }
+
+        var returnedOptions = togo ? togo.returnedOptions : null;
+        if (returnedOptions) {
+            fluid.merge(that.options.mergePolicy, that.options, returnedOptions);
+            if (returnedOptions.listeners) {
+                fluid.mergeListeners(that.events, returnedOptions.listeners);
+            }
+        }
+        return togo;
+    };
+    
+    /** Initialise all the "subcomponents" which are configured to be attached to 
+     * the supplied top-level component, which share a particular "class name".
+     * @param {Component} that The top-level component for which sub-components are
+     * to be instantiated. It contains specifications for these subcomponents in its
+     * <code>options</code> structure.
+     * @param {String} className The "class name" or "category" for the subcomponents to
+     * be instantiated. A class name specifies an overall "function" for a class of 
+     * subcomponents and represents a category which accept the same signature of
+     * instantiation arguments.
+     * @param {Array of Object} args The instantiation arguments to be passed to each 
+     * constructed subcomponent. These will typically be members derived from the
+     * top-level <code>that</code> or perhaps globally discovered from elsewhere. One
+     * of these arguments may be <code>fluid.COMPONENT_OPTIONS</code> in which case this
+     * placeholder argument will be replaced by instance-specific options configured
+     * into the member of the top-level <code>options</code> structure named for the
+     * <code>className</code>
+     * @return {Array of Object} The instantiated subcomponents, one for each member
+     * of <code>that.options[className]</code>.
+     */
+    
+    fluid.initSubcomponents = function (that, className, args) {
+        var entry = that.options[className];
+        if (!entry) {
+            return;
+        }
+        var entries = $.makeArray(entry);
+        var optindex = -1;
+        var togo = [];
+        args = $.makeArray(args);
+        for (var i = 0; i < args.length; ++ i) {
+            if (args[i] === fluid.COMPONENT_OPTIONS) {
+                optindex = i;
+            }
+        }
+        for (i = 0; i < entries.length; ++ i) {
+            entry = entries[i];
+            if (optindex !== -1) {
+                args[optindex] = entry.options;
+            }
+            togo[i] = fluid.initSubcomponentImpl(that, entry, args);
+        }
+        return togo;
+    };
+    
+    /**
+     * Creates a new DOM Binder instance for the specified component and mixes it in.
+     * 
+     * @param {Object} that the component instance to attach the new DOM Binder to
+     */
+    fluid.initDomBinder = function (that) {
+        that.dom = fluid.createDomBinder(that.container, that.options.selectors);
+        that.locate = that.dom.locate;      
+    };
+
+
+
+    // DOM Utilities.
+    
+    /**
+     * Finds the nearest ancestor of the element that passes the test
+     * @param {Element} element DOM element
+     * @param {Function} test A function which takes an element as a parameter and return true or false for some test
+     */
+    fluid.findAncestor = function (element, test) {
+        element = fluid.unwrap(element);
+        while (element) {
+            if (test(element)) {
+                return element;
+            }
+            element = element.parentNode;
+        }
+    };
+    
+    /**
+     * Returns a jQuery object given the id of a DOM node. In the case the element
+     * is not found, will return an empty list.
+     */
+    fluid.jById = function (id, dokkument) {
+        dokkument = dokkument && dokkument.nodeType === 9 ? dokkument : document;
+        var element = fluid.byId(id, dokkument);
+        var togo = element ? $(element) : [];
+        togo.selector = "#" + id;
+        togo.context = dokkument;
+        return togo;
+    };
+    
+    /**
+     * Returns an DOM element quickly, given an id
+     * 
+     * @param {Object} id the id of the DOM node to find
+     * @param {Document} dokkument the document in which it is to be found (if left empty, use the current document)
+     * @return The DOM element with this id, or null, if none exists in the document.
+     */
+    fluid.byId = function (id, dokkument) {
+        dokkument = dokkument && dokkument.nodeType === 9 ? dokkument : document;
+        var el = dokkument.getElementById(id);
+        if (el) {
+            if (el.getAttribute("id") !== id) {
+                fluid.fail("Problem in document structure - picked up element " +
+                    fluid.dumpEl(el) + " for id " + id +
+                    " without this id - most likely the element has a name which conflicts with this id");
+            }
+            return el;
+        }
+        else {
+            return null;
+        }
+    };
+    
+    /**
+     * Returns the id attribute from a jQuery or pure DOM element.
+     * 
+     * @param {jQuery||Element} element the element to return the id attribute for
+     */
+    fluid.getId = function (element) {
+        return fluid.unwrap(element).getAttribute("id");
+    };
+    
+    /** 
+     * Allocate an id to the supplied element if it has none already, by a simple
+     * scheme resulting in ids "fluid-id-nnnn" where nnnn is an increasing integer.
+     */
+    
+    fluid.allocateSimpleId = function (element) {
+        element = fluid.unwrap(element);
+        if (!element.id) {
+            element.id = "fluid-id-" + fluid.allocateGuid(); 
+        }
+        return element.id;
+    };
+    
+
     // Message resolution and templating
     
     /**
@@ -8478,10 +8531,10 @@ var fluid = fluid || fluid_1_2;
         var that = fluid.initLittleComponent("fluid.messageResolver", options);
         that.messageBase = that.options.parseFunc(that.options.messageBase);
         
-        that.lookup = function(messagecodes) {
+        that.lookup = function (messagecodes) {
             var resolved = fluid.messageResolver.resolveOne(that.messageBase, messagecodes);
             if (resolved === undefined) {
-                return fluid.find(that.options.parents, function(parent) {
+                return fluid.find(that.options.parents, function (parent) {
                     return parent.lookup(messagecodes);
                 });
             }
@@ -8489,14 +8542,14 @@ var fluid = fluid || fluid_1_2;
                 return {template: resolved, resolveFunc: that.options.resolveFunc};
             }
         };
-        that.resolve = function(messagecodes, args) {
+        that.resolve = function (messagecodes, args) {
             if (!messagecodes) {
                 return "[No messagecodes provided]";
             }
             messagecodes = fluid.makeArray(messagecodes);
             var looked = that.lookup(messagecodes);
-            return looked? looked.resolveFunc(looked.template, args)
-                :"[Message string for key " + messagecodes[0] + " not found]" 
+            return looked ? looked.resolveFunc(looked.template, args) :
+                "[Message string for key " + messagecodes[0] + " not found]";
         };
         
         return that;  
@@ -8512,7 +8565,7 @@ var fluid = fluid || fluid_1_2;
         parents: []
     });
     
-    fluid.messageResolver.resolveOne = function(messageBase, messagecodes) {
+    fluid.messageResolver.resolveOne = function (messageBase, messagecodes) {
         for (var i = 0; i < messagecodes.length; ++ i) {
             var code = messagecodes[i];
             var message = messageBase[code];
@@ -8529,15 +8582,16 @@ var fluid = fluid || fluid_1_2;
      */
     fluid.messageLocator = function (messageBase, resolveFunc) {
         var resolver = fluid.messageResolver({messageBase: messageBase, resolveFunc: resolveFunc});
-        return function(messagecodes, args) {
+        return function (messagecodes, args) {
             return resolver.resolve(messagecodes, args);
         };
     };
 
-})(jQuery, fluid_1_2);
+})(jQuery, fluid_1_3);
 /*
 Copyright 2007-2010 University of Cambridge
 Copyright 2007-2009 University of Toronto
+Copyright 2010 Lucendo Development Ltd.
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -8553,7 +8607,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 // Declare dependencies.
 /*global jQuery*/
 
-var fluid_1_2 = fluid_1_2 || {};
+var fluid_1_3 = fluid_1_3 || {};
 
 (function ($, fluid) {
 
@@ -8562,7 +8616,7 @@ var fluid_1_2 = fluid_1_2 || {};
 
     /**
      * Gets stored state from the jQuery instance's data map.
-     * NOT A PART OF THE STABLE FLUID API.
+     * This function is unsupported: It is not really intended for use by implementors.
      */
     fluid.getScopedData = function(target, key) {
         var data = $(target).data(NAMESPACE_KEY);
@@ -8572,7 +8626,7 @@ var fluid_1_2 = fluid_1_2 || {};
     /**
      * Stores state in the jQuery instance's data map. Unlike jQuery's version,
      * accepts multiple-element jQueries.
-     * NOT A PART OF THE STABLE FLUID API.
+     * This function is unsupported: It is not really intended for use by implementors.
      */
     fluid.setScopedData = function(target, key, value) {
         $(target).each(function() {
@@ -8592,7 +8646,7 @@ var fluid_1_2 = fluid_1_2 || {};
         lastFocusedElement = event.target;
     });
     
-    fluid.getLastFocusedElement = function () {
+    fluid.getLastFocusedElement = function() {
         return lastFocusedElement;
     }
 
@@ -8602,6 +8656,7 @@ var fluid_1_2 = fluid_1_2 || {};
     /** Queries or sets the enabled status of a control. An activatable node
      * may be "disabled" in which case its keyboard bindings will be inoperable
      * (but still stored) until it is reenabled again.
+     * This function is unsupported: It is not really intended for use by implementors.
      */
      
     fluid.enabled = function(target, state) {
@@ -8624,46 +8679,26 @@ var fluid_1_2 = fluid_1_2 || {};
     
     fluid.initEnablement = function(target) {
         fluid.setScopedData(target, ENABLEMENT_KEY, true);
-    }
-    /** Sets an interation on a target control, which morally manages a "blur" for
-     * a possibly composite region.
-     * A timed blur listener is set on the control, which waits for a short period of
-     * time (options.delay, defaults to 150ms) to discover whether the reason for the 
-     * blur interaction is that either a focus or click is being serviced on a nominated
-     * set of "exclusions" (options.exclusions, a free hash of elements or jQueries). 
-     * If no such event is received within the window, options.handler will be called
-     * with the argument "control", to service whatever interaction is required of the
-     * blur.
-     */
-    
-    fluid.deadMansBlur = function (control, options) {
-        // TODO: framework-free version of component construction, review whether we
-        // can put this in fluidView.js once it exists
-        var that = {options: $.extend(true, {}, options)};
-        that.options.delay = that.options.delay || 150;
-        that.blurPending = false;
-        $(control).blur(function () {
-            that.blurPending = true;
-            setTimeout(function () {
-                if (that.blurPending) {
-                    that.options.handler(control);
-                }
-            }, that.options.delay);
-        });
-        that.canceller = function () {
-            that.blurPending = false; 
-        };
-        for (var key in that.options.exclusions) {
-            var exclusion = $(that.options.exclusions[key]);  
-            exclusion.focusin(that.canceller);
-            exclusion.click(that.canceller);
-        }
-        return that;
     };
     
-
+    // This function is necessary since simulation of focus events by jQuery under IE
+    // is not sufficiently good to intercept the "focusin" binding. Any code which triggers
+    // focus or blur synthetically throughout the framework and client code must use this function,
+    // especially if correct cross-platform interaction is required with the "deadMansBlur" function.
     
-})(jQuery, fluid_1_2);
+    function applyOp(node, func) {
+        node = $(node);
+        node.trigger("fluid-"+func);
+        node[func]();
+    }
+    
+    $.each(["focus", "blur"], function(i, name) {
+        fluid[name] = function(elem) {
+            applyOp(elem, name);
+        }
+    });
+    
+})(jQuery, fluid_1_3);
 /*
 Copyright 2008-2010 University of Cambridge
 Copyright 2008-2009 University of Toronto
@@ -8679,7 +8714,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 // Declare dependencies.
 /*global jQuery */
 
-var fluid_1_2 = fluid_1_2 || {};
+var fluid_1_3 = fluid_1_3 || {};
 
 (function ($, fluid) {
     
@@ -8769,10 +8804,11 @@ var fluid_1_2 = fluid_1_2 || {};
         return text; 
     };
     
-})(jQuery, fluid_1_2);
+})(jQuery, fluid_1_3);
 /*
 Copyright 2008-2010 University of Cambridge
 Copyright 2008-2009 University of Toronto
+Copyright 2010 Lucendo Development Ltd.
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -8783,9 +8819,9 @@ https://source.fluidproject.org/svn/LICENSE.txt
 */
 
 /*global jQuery*/
-/*global fluid_1_2*/
+/*global fluid_1_3*/
 
-fluid_1_2 = fluid_1_2 || {};
+fluid_1_3 = fluid_1_3 || {};
 
 (function ($, fluid) {
       
@@ -8888,11 +8924,13 @@ fluid_1_2 = fluid_1_2 || {};
         return messageString;
     };
       
-})(jQuery, fluid_1_2);
+})(jQuery, fluid_1_3);
 /*
 Copyright 2007-2010 University of Cambridge
 Copyright 2007-2009 University of Toronto
 Copyright 2007-2009 University of California, Berkeley
+Copyright 2010 OCAD University
+Copyright 2010 Lucendo Development Ltd.
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -8905,8 +8943,8 @@ https://source.fluidproject.org/svn/LICENSE.txt
 // Declare dependencies.
 /*global jQuery, YAHOO, opera*/
 
-var fluid_1_2 = fluid_1_2 || {};
-var fluid = fluid || fluid_1_2;
+var fluid_1_3 = fluid_1_3 || {};
+var fluid = fluid || fluid_1_3;
 
 (function ($, fluid) {
        
@@ -9002,10 +9040,11 @@ var fluid = fluid || fluid_1_2;
         return togo;
     };
         
-})(jQuery, fluid_1_2);
+})(jQuery, fluid_1_3);
     /*
 Copyright 2008-2010 University of Cambridge
 Copyright 2008-2009 University of Toronto
+Copyright 2010 Lucendo Development Ltd.
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -9015,10 +9054,9 @@ You may obtain a copy of the ECL 2.0 License and BSD License at
 https://source.fluidproject.org/svn/LICENSE.txt
 */
 
-/*global jQuery*/
-/*global fluid_1_2*/
+/*global jQuery, fluid_1_3:true*/
 
-fluid_1_2 = fluid_1_2 || {};
+var fluid_1_3 = fluid_1_3 || {};
 
 (function ($, fluid) {
     
@@ -9027,28 +9065,31 @@ fluid_1_2 = fluid_1_2 || {};
     /** Recursively find any data stored under a given name from a node upwards
      * in its DOM hierarchy **/
      
-    fluid.findData = function(elem, name) {
+    fluid.findData = function (elem, name) {
         while (elem) {
             var data = $.data(elem, name);
-            if (data) {return data;}
-            elem = elem.parentNode;
+            if (data) {
+                return data;
             }
-        };
+            elem = elem.parentNode;
+        }
+    };
   
-    fluid.bindFossils = function(node, data, fossils) {
+    fluid.bindFossils = function (node, data, fossils) {
         $.data(node, fluid.BINDING_ROOT_KEY, {data: data, fossils: fossils});
-        };
+    };
         
-    fluid.boundPathForNode = function(node, fossils) {
+    fluid.boundPathForNode = function (node, fossils) {
         node = fluid.unwrap(node);
         var key = node.name || node.id;
         var record = fossils[key];
-        return record? record.EL: null;
+        return record ? record.EL: null;
     };
   
     fluid.findForm = function (node) {
-      return fluid.findAncestor(node, 
-          function(element) {return element.nodeName.toLowerCase() === "form";});
+        return fluid.findAncestor(node, function (element) {
+            return element.nodeName.toLowerCase() === "form";
+        });
     };
     
     /** A generalisation of jQuery.val to correctly handle the case of acquiring and
@@ -9062,8 +9103,9 @@ fluid_1_2 = fluid_1_2 || {};
             node = node[0];
             multiple = true;
         }
-        if ("input" !== node.nodeName.toLowerCase()
-           || ! /radio|checkbox/.test(node.type)) {return $(node).val(newValue);}
+        if ("input" !== node.nodeName.toLowerCase() || ! /radio|checkbox/.test(node.type)) {
+            return $(node).val(newValue);
+        }
         var name = node.name;
         if (name === undefined) {
             fluid.fail("Cannot acquire value from node " + fluid.dumpEl(node) + " which does not have name attribute set");
@@ -9076,39 +9118,43 @@ fluid_1_2 = fluid_1_2 || {};
             elements = document.getElementsByName(name);
             var scope = fluid.findForm(node);
             elements = $.grep(elements, 
-              function(element) {
-                if (element.name !== name) {return false;}
+            function (element) {
+                if (element.name !== name) {
+                    return false;
+                }
                 return !scope || fluid.dom.isContainer(scope, element);
-              });
+            });
         }
         if (newValue !== undefined) {
             if (typeof(newValue) === "boolean") {
-                newValue = (newValue? "true" : "false");
+                newValue = (newValue ? "true" : "false");
             }
           // jQuery gets this partially right, but when dealing with radio button array will
           // set all of their values to "newValue" rather than setting the checked property
           // of the corresponding control. 
-            $.each(elements, function() {
-               this.checked = (newValue instanceof Array? 
-                 $.inArray(this.value, newValue) !== -1 : newValue === this.value);
+            $.each(elements, function () {
+                this.checked = (newValue instanceof Array ? 
+                    $.inArray(this.value, newValue) !== -1 : newValue === this.value);
             });
         }
         else { // this part jQuery will not do - extracting value from <input> array
-            var checked = $.map(elements, function(element) {
-                return element.checked? element.value : null;
+            var checked = $.map(elements, function (element) {
+                return element.checked ? element.value : null;
             });
-            return node.type === "radio"? checked[0] : checked;
-            }
-       };
+            return node.type === "radio" ? checked[0] : checked;
+        }
+    };
     
     /** "Automatically" apply to whatever part of the data model is
      * relevant, the changed value received at the given DOM node*/
-    fluid.applyChange = function(node, newValue, applier) {
+    fluid.applyChange = function (node, newValue, applier) {
         node = fluid.unwrap(node);
         if (newValue === undefined) {
             newValue = fluid.value(node);
         }
-        if (node.nodeType === undefined && node.length > 0) {node = node[0];} // assume here that they share name and parent
+        if (node.nodeType === undefined && node.length > 0) {
+            node = node[0];
+        } // assume here that they share name and parent
         var root = fluid.findData(node, fluid.BINDING_ROOT_KEY);
         if (!root) {
             fluid.fail("Bound data could not be discovered in any node above " + fluid.dumpEl(node));
@@ -9119,20 +9165,20 @@ fluid_1_2 = fluid_1_2 || {};
             fluid.fail("No fossil discovered for name " + name + " in fossil record above " + fluid.dumpEl(node));
         }
         if (typeof(fossil.oldvalue) === "boolean") { // deal with the case of an "isolated checkbox"
-            newValue = newValue[0]? true: false;
+            newValue = newValue[0] ? true: false;
         }
         var EL = root.fossils[name].EL;
         if (applier) {
             applier.fireChangeRequest({path: EL, value: newValue, source: node.id});
         }
         else {
-            fluid.model.setBeanValue(root.data, EL, newValue);
+            fluid.set(root.data, EL, newValue);
         }    
-        };
+    };
    
     fluid.pathUtil = {};
    
-    var getPathSegmentImpl = function(accept, path, i) {
+    var getPathSegmentImpl = function (accept, path, i) {
         var segment = null; // TODO: rewrite this with regexes and replaces
         if (accept) {
             segment = "";
@@ -9144,10 +9190,10 @@ fluid_1_2 = fluid_1_2 || {};
             if (!escaped) {
                 if (c === '.') {
                     break;
-                    }
+                }
                 else if (c === '\\') {
                     escaped = true;
-                    }
+                }
                 else if (segment !== null) {
                     segment += c;
                 }
@@ -9163,42 +9209,42 @@ fluid_1_2 = fluid_1_2 || {};
             accept[0] = segment;
         }
         return i;
-        };
+    };
     
     var globalAccept = []; // TODO: serious reentrancy risk here, why is this impl like this?
     
-    fluid.pathUtil.getPathSegment = function(path, i) {
+    fluid.pathUtil.getPathSegment = function (path, i) {
         getPathSegmentImpl(globalAccept, path, i);
         return globalAccept[0];
-        }; 
+    }; 
   
-    fluid.pathUtil.getHeadPath = function(path) {
+    fluid.pathUtil.getHeadPath = function (path) {
         return fluid.pathUtil.getPathSegment(path, 0);
-        };
+    };
   
-    fluid.pathUtil.getFromHeadPath = function(path) {
+    fluid.pathUtil.getFromHeadPath = function (path) {
         var firstdot = getPathSegmentImpl(null, path, 0);
         return firstdot === path.length ? null
             : path.substring(firstdot + 1);
-        };
+    };
     
     function lastDotIndex(path) {
         // TODO: proper escaping rules
         return path.lastIndexOf(".");
-        }
+    }
     
-    fluid.pathUtil.getToTailPath = function(path) {
+    fluid.pathUtil.getToTailPath = function (path) {
         var lastdot = lastDotIndex(path);
-        return lastdot == -1 ? null : path.substring(0, lastdot);
-        };
+        return lastdot === -1 ? null : path.substring(0, lastdot);
+    };
 
   /** Returns the very last path component of a bean path */
-    fluid.pathUtil.getTailPath = function(path) {
+    fluid.pathUtil.getTailPath = function (path) {
         var lastdot = lastDotIndex(path);
         return fluid.pathUtil.getPathSegment(path, lastdot + 1);
-        };
+    };
     
-    var composeSegment = function(prefix, toappend) {
+    var composeSegment = function (prefix, toappend) {
         for (var i = 0; i < toappend.length; ++i) {
             var c = toappend.charAt(i);
             if (c === '.' || c === '\\' || c === '}') {
@@ -9213,32 +9259,36 @@ fluid_1_2 = fluid_1_2 || {};
      * Compose a prefix and suffix EL path, where the prefix is already escaped.
      * Prefix may be empty, but not null. The suffix will become escaped.
      */
-    fluid.pathUtil.composePath = function(prefix, suffix) {
+    fluid.pathUtil.composePath = function (prefix, suffix) {
         if (prefix.length !== 0) {
             prefix += '.';
         }
         return composeSegment(prefix, suffix);
-        };    
+    };    
    
-    fluid.pathUtil.matchPath = function(spec, path) {
+    fluid.pathUtil.matchPath = function (spec, path) {
         var togo = "";
         while (true) {
-          if (!spec || path === "") {break;}
-          if (!path) {return null;}
-          var spechead = fluid.pathUtil.getHeadPath(spec);
-          var pathhead = fluid.pathUtil.getHeadPath(path);
-          // if we fail to match on a specific component, fail.
-          if (spechead !== "*" && spechead !== pathhead) {
-              return null;
-          }
-          togo = fluid.pathUtil.composePath(togo, pathhead);
-          spec = fluid.pathUtil.getFromHeadPath(spec);
-          path = fluid.pathUtil.getFromHeadPath(path);
+            if (!spec || path === "") {
+                break;
+            }
+            if (!path) {
+                return null;
+            }
+            var spechead = fluid.pathUtil.getHeadPath(spec);
+            var pathhead = fluid.pathUtil.getHeadPath(path);
+            // if we fail to match on a specific component, fail.
+            if (spechead !== "*" && spechead !== pathhead) {
+                return null;
+            }
+            togo = fluid.pathUtil.composePath(togo, pathhead);
+            spec = fluid.pathUtil.getFromHeadPath(spec);
+            path = fluid.pathUtil.getFromHeadPath(path);
         }
         return togo;
-      };
+    };
     
-    fluid.model.mergeModel = function(target, source, applier) {
+    fluid.model.mergeModel = function (target, source, applier) {
         var copySource = fluid.copy(source);
         applier = applier || fluid.makeChangeApplier(source);
         applier.fireChangeRequest({type: "ADD", path: "", value: target});
@@ -9247,9 +9297,9 @@ fluid_1_2 = fluid_1_2 || {};
     };
         
       
-    fluid.model.isNullChange = function(model, request, resolverGetConfig) {
+    fluid.model.isNullChange = function (model, request, resolverGetConfig) {
         if (request.type === "ADD") {
-            var existing = fluid.model.getBeanValue(model, request.path, resolverGetConfig);
+            var existing = fluid.get(model, request.path, resolverGetConfig);
             if (existing === request.value) {
                 return true;
             }
@@ -9257,15 +9307,15 @@ fluid_1_2 = fluid_1_2 || {};
     };
     /** Applies the supplied ChangeRequest object directly to the supplied model.
      */
-    fluid.model.applyChangeRequest = function(model, request, resolverSetConfig) {
+    fluid.model.applyChangeRequest = function (model, request, resolverSetConfig) {
         var pen = fluid.model.getPenultimate(model, request.path, resolverSetConfig || fluid.model.defaultSetConfig);
         
         if (request.type === "ADD" || request.type === "MERGE") {
             if (pen.last === "" || request.type === "MERGE") {
-               if (request.type === "ADD") {
-                   fluid.clear(pen.root);
-               }
-               $.extend(true, pen.last === ""? pen.root: pen.root[pen.last], request.value);
+                if (request.type === "ADD") {
+                    fluid.clear(pen.root);
+                }
+                $.extend(true, pen.last === "" ? pen.root: pen.root[pen.last], request.value);
             }
             else {
                 pen.root[pen.last] = request.value;
@@ -9284,18 +9334,18 @@ fluid_1_2 = fluid_1_2 || {};
     // Utility shared between changeApplier and superApplier
     
     function bindRequestChange(that) {
-        that.requestChange = function(path, value, type) {
+        that.requestChange = function (path, value, type) {
             var changeRequest = {
                 path: path,
                 value: value,
                 type: type
             };
-        that.fireChangeRequest(changeRequest);
+            that.fireChangeRequest(changeRequest);
         };
     }
     
   
-    fluid.makeChangeApplier = function(model, options) {
+    fluid.makeChangeApplier = function (model, options) {
         options = options || {};
         var baseEvents = {
             guards: fluid.event.getEventFirer(false, true),
@@ -9310,10 +9360,12 @@ fluid_1_2 = fluid_1_2 || {};
             if (!cullUnchanged) {
                 return null;
             }
-            var togo = function(guard) {
-                return function(model, changeRequest, internalApplier) {
+            var togo = function (guard) {
+                return function (model, changeRequest, internalApplier) {
                     var oldRet = guard(model, changeRequest, internalApplier);
-                    if (oldRet === false) { return false;}
+                    if (oldRet === false) {
+                        return false;
+                    }
                     else {
                         if (fluid.model.isNullChange(model, changeRequest)) {
                             togo.culled = true;
@@ -9326,51 +9378,51 @@ fluid_1_2 = fluid_1_2 || {};
         }
 
         function wrapListener(listener, spec) {
-             var pathSpec = spec;
-             var transactional = false;
-             var priority = Number.MAX_VALUE;
-             if (typeof (spec) !== "string") {
-                 pathSpec = spec.path;
-                 transactional = spec.transactional;
-                 if (spec.priority !== undefined) {
-                     priority = spec.priority;
-                     }
-                 }
-             else {
-                 if (pathSpec.charAt(0) === "!") {
-                     transactional = true;
-                     pathSpec = pathSpec.substring(1);
-                 }
-             }
-             return function(changePath, fireSpec, accum) {
-                 var guid = fluid.event.identifyListener(listener);
-                 var exist = fireSpec.guids[guid];
-                 if (!exist) {
-                     var match = fluid.pathUtil.matchPath(pathSpec, changePath);
-                     if (match !== null) {
-                         var record = {
-                             changePath: changePath,
-                             pathSpec: pathSpec,
-                             listener: listener,
-                             priority: priority,
-                             transactional: transactional
-                             };
-                         if (accum) {
-                             record.accumulate = [accum];
-                         }
-                         fireSpec.guids[guid] = record;
-                         var collection = transactional? "transListeners": "listeners";
-                         fireSpec[collection].push(record);
-                         fireSpec.all.push(record);
-                     }
-                 }
-                 else if (accum) {
-                     if (!exist.accumulate) {
+            var pathSpec = spec;
+            var transactional = false;
+            var priority = Number.MAX_VALUE;
+            if (typeof (spec) !== "string") {
+                pathSpec = spec.path;
+                transactional = spec.transactional;
+                if (spec.priority !== undefined) {
+                    priority = spec.priority;
+                }
+            }
+            else {
+                if (pathSpec.charAt(0) === "!") {
+                    transactional = true;
+                    pathSpec = pathSpec.substring(1);
+                }
+            }
+            return function (changePath, fireSpec, accum) {
+                var guid = fluid.event.identifyListener(listener);
+                var exist = fireSpec.guids[guid];
+                if (!exist) {
+                    var match = fluid.pathUtil.matchPath(pathSpec, changePath);
+                    if (match !== null) {
+                        var record = {
+                            changePath: changePath,
+                            pathSpec: pathSpec,
+                            listener: listener,
+                            priority: priority,
+                            transactional: transactional
+                        };
+                        if (accum) {
+                            record.accumulate = [accum];
+                        }
+                        fireSpec.guids[guid] = record;
+                        var collection = transactional ? "transListeners": "listeners";
+                        fireSpec[collection].push(record);
+                        fireSpec.all.push(record);
+                    }
+                }
+                else if (accum) {
+                    if (!exist.accumulate) {
                         exist.accumulate = [];
-                     }
-                     exist.accumulate.push(accum);
-                 }
-           };
+                    }
+                    exist.accumulate.push(accum);
+                }
+            };
         }
         
         function fireFromSpec(name, fireSpec, args, category, wrapper) {
@@ -9405,10 +9457,10 @@ fluid_1_2 = fluid_1_2 || {};
         
         function adaptListener(that, name) {
             that[name] = {
-                addListener: function(spec, listener, namespace) {
+                addListener: function (spec, listener, namespace) {
                     baseEvents[name].addListener(wrapListener(listener, spec), namespace);
                 },
-                removeListener: function(listener) {
+                removeListener: function (listener) {
                     baseEvents[name].removeListener(listener);
                 }
             };
@@ -9424,15 +9476,15 @@ fluid_1_2 = fluid_1_2 || {};
         }
 
         var bareApplier = {
-            fireChangeRequest: function(changeRequest) {
+            fireChangeRequest: function (changeRequest) {
                 that.fireChangeRequest(changeRequest, true);
             }
         };
         bindRequestChange(bareApplier);
 
-        that.fireChangeRequest = function(changeRequest, defeatGuards) {
+        that.fireChangeRequest = function (changeRequest, defeatGuards) {
             preFireChangeRequest(changeRequest);
-            var guardFireSpec = defeatGuards? null : getFireSpec("guards", changeRequest.path);
+            var guardFireSpec = defeatGuards ? null : getFireSpec("guards", changeRequest.path);
             if (guardFireSpec && guardFireSpec.transListeners.length > 0) {
                 var ation = that.initiate();
                 ation.fireChangeRequest(changeRequest, guardFireSpec);
@@ -9462,9 +9514,9 @@ fluid_1_2 = fluid_1_2 || {};
             var fireSpec = makeFireSpec();
             for (var i = 0; i < changes.length; ++ i) {
                 prepareFireEvent(eventName, changes[i].path, fireSpec, changes[i]);
-                }
-            for (var i = 0; i < fireSpec[formName].length; ++ i) {
-                var spec = fireSpec[formName][i];
+            }
+            for (var j = 0; j < fireSpec[formName].length; ++ j) {
+                var spec = fireSpec[formName][j];
                 if (accpos) {
                     args[accpos] = spec.accumulate;
                 }
@@ -9475,7 +9527,7 @@ fluid_1_2 = fluid_1_2 || {};
             }
         }
 
-        that.initiate = function(newModel) {
+        that.initiate = function (newModel) {
             var cancelled = false;
             var changes = [];
             if (options.thin) {
@@ -9488,14 +9540,14 @@ fluid_1_2 = fluid_1_2 || {};
             // the guard in the inner world is given a private applier to "fast track"
             // and glob collateral changes it requires
             var internalApplier = 
-              {fireChangeRequest: function(changeRequest) {
+              {fireChangeRequest: function (changeRequest) {
                     preFireChangeRequest(changeRequest);
                     fluid.model.applyChangeRequest(newModel, changeRequest, options.resolverSetConfig);
                     changes.push(changeRequest);
                 }};
             bindRequestChange(internalApplier);
             var ation = {
-                commit: function() {
+                commit: function () {
                     var oldModel;
                     if (cancelled) {
                         return false;
@@ -9515,22 +9567,22 @@ fluid_1_2 = fluid_1_2 || {};
                     }
                     fireAgglomerated("modelChanged", "all", changes, [model, oldModel, null], 2);
                 },
-                fireChangeRequest: function(changeRequest) {
-                     preFireChangeRequest(changeRequest);
-                     if (options.cullUnchanged && fluid.model.isNullChange(model, changeRequest, options.resolverGetConfig)) {
-                         return;
-                     } 
-                     var wrapper = makeGuardWrapper(options.cullUnchanged);
-                     var prevent = fireEvent("guards", changeRequest.path, [newModel, changeRequest, internalApplier], wrapper);
-                     if (prevent === false && !(wrapper && wrapper.culled)) {
-                         cancelled = true;
-                     }
-                     if (!cancelled) {
-                         if (!(wrapper && wrapper.culled)) {
-                             fluid.model.applyChangeRequest(newModel, changeRequest, options.resolverSetConfig);
-                             changes.push(changeRequest);
-                         }
-                     }
+                fireChangeRequest: function (changeRequest) {
+                    preFireChangeRequest(changeRequest);
+                    if (options.cullUnchanged && fluid.model.isNullChange(model, changeRequest, options.resolverGetConfig)) {
+                        return;
+                    } 
+                    var wrapper = makeGuardWrapper(options.cullUnchanged);
+                    var prevent = fireEvent("guards", changeRequest.path, [newModel, changeRequest, internalApplier], wrapper);
+                    if (prevent === false && !(wrapper && wrapper.culled)) {
+                        cancelled = true;
+                    }
+                    if (!cancelled) {
+                        if (!(wrapper && wrapper.culled)) {
+                            fluid.model.applyChangeRequest(newModel, changeRequest, options.resolverSetConfig);
+                            changes.push(changeRequest);
+                        }
+                    }
                 }
             };
             bindRequestChange(ation);
@@ -9541,13 +9593,13 @@ fluid_1_2 = fluid_1_2 || {};
         return that;
     };
     
-    fluid.makeSuperApplier = function() {
+    fluid.makeSuperApplier = function () {
         var subAppliers = [];
         var that = {};
-        that.addSubApplier = function(path, subApplier) {
+        that.addSubApplier = function (path, subApplier) {
             subAppliers.push({path: path, subApplier: subApplier});
         };
-        that.fireChangeRequest = function(request) {
+        that.fireChangeRequest = function (request) {
             for (var i = 0; i < subAppliers.length; ++ i) {
                 var path = subAppliers[i].path;
                 if (request.path.indexOf(path) === 0) {
@@ -9563,7 +9615,7 @@ fluid_1_2 = fluid_1_2 || {};
         return that;
     };
     
-    fluid.attachModel = function(baseModel, path, model) {
+    fluid.attachModel = function (baseModel, path, model) {
         var segs = fluid.model.parseEL(path);
         for (var i = 0; i < segs.length - 1; ++ i) {
             var seg = segs[i];
@@ -9577,23 +9629,24 @@ fluid_1_2 = fluid_1_2 || {};
     };
     
     fluid.assembleModel = function (modelSpec) {
-       var model = {};
-       var superApplier = fluid.makeSuperApplier();
-       var togo = {model: model, applier: superApplier};
-       for (var path in modelSpec) {
-           var rec = modelSpec[path];
-           fluid.attachModel(model, path, rec.model);
-           if (rec.applier) {
-              superApplier.addSubApplier(path, rec.applier);
-           }
-       }
-       return togo;
+        var model = {};
+        var superApplier = fluid.makeSuperApplier();
+        var togo = {model: model, applier: superApplier};
+        for (var path in modelSpec) {
+            var rec = modelSpec[path];
+            fluid.attachModel(model, path, rec.model);
+            if (rec.applier) {
+                superApplier.addSubApplier(path, rec.applier);
+            }
+        }
+        return togo;
     };
 
-})(jQuery, fluid_1_2);
+})(jQuery, fluid_1_3);
 /*
 Copyright 2008-2010 University of Cambridge
-Copyright 2008-2009 University of Toronto
+Copyright 2008-2010 University of Toronto
+Copyright 2010 Lucendo Development Ltd.
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -9605,8 +9658,8 @@ https://source.fluidproject.org/svn/LICENSE.txt
 
 /*global jQuery*/
 
-var fluid_1_2 = fluid_1_2 || {};
-var fluid = fluid || fluid_1_2;
+var fluid_1_3 = fluid_1_3 || {};
+var fluid = fluid || fluid_1_3;
 
 (function ($, fluid) {
 
@@ -9656,7 +9709,7 @@ var fluid = fluid || fluid_1_2;
     };
 
     fluid.thatistBridge("fluid", fluid);
-    fluid.thatistBridge("fluid_1_2", fluid_1_2);
+    fluid.thatistBridge("fluid_1_3", fluid_1_3);
 
 /*************************************************************************
  * Tabindex normalization - compensate for browser differences in naming
@@ -9889,7 +9942,7 @@ var fluid = fluid || fluid_1_2;
             sc_that.activeItemIndex = elements.length - 1;
         }
         if (sc_that.activeItemIndex >= 0) {
-            $(elements[sc_that.activeItemIndex]).focus();
+            fluid.focus(elements[sc_that.activeItemIndex]);
         }
     };
 
@@ -9897,7 +9950,7 @@ var fluid = fluid || fluid_1_2;
         // FLUID-3590: FF 3.6 and Safari 4.x won't fire blur() when programmatically moving focus.
         var selElm = selectionContext.selectedElement();
         if (selElm) {
-            selElm.blur();
+            fluid.blur(selElm);
         }
 
         unselectElement(selectionContext.selectedElement(), selectionContext);
@@ -9974,7 +10027,7 @@ var fluid = fluid || fluid_1_2;
                 if (selectionContext.activeItemIndex === NO_SELECTION) {
                     selectionContext.activeItemIndex = 0;
                 }
-                $(selectionContext.selectables[selectionContext.activeItemIndex]).focus();
+                fluid.focus(selectionContext.selectables[selectionContext.activeItemIndex]);
             }
 
            // Force focus not to bubble on some browsers.
@@ -10072,7 +10125,7 @@ var fluid = fluid || fluid_1_2;
      * Selects the specified element.
      */
     fluid.selectable.select = function(target, toSelect) {
-        $(toSelect).focus();
+        fluid.focus(toSelect);
     };
 
     /**
@@ -10210,10 +10263,140 @@ var fluid = fluid || fluid_1_2;
     };
 
   
-  })(jQuery, fluid_1_2);
+  })(jQuery, fluid_1_3);
+/*
+Copyright 2010 Lucendo Development Ltd.
+
+Licensed under the Educational Community License (ECL), Version 2.0 or the New
+BSD license. You may not use this file except in compliance with one these
+Licenses.
+
+You may obtain a copy of the ECL 2.0 License and BSD License at
+https://source.fluidproject.org/svn/LICENSE.txt
+*/
+
+/** This file contains functions which depend on the presence of a DOM document
+ *  and which depend on the contents of Fluid.js **/
+
+// Declare dependencies.
+/*global jQuery*/
+
+var fluid_1_3 = fluid_1_3 || {};
+
+(function ($, fluid) {
+
+    fluid.defaults("fluid.ariaLabeller", {
+        labelAttribute: "aria-label",
+        liveRegionMarkup: "<div class=\"liveRegion fl-offScreen-hidden\" aria-live=\"polite\"></div>",
+        liveRegionId: "fluid-ariaLabeller-liveRegion",
+        invokers: {
+            generateLiveElement: {funcName: "fluid.ariaLabeller.generateLiveElement", args: ["{ariaLabeller}"]}
+        }
+    });
+ 
+    fluid.ariaLabeller = function(element, options) {
+        var that = fluid.initView("fluid.ariaLabeller", element, options);
+        fluid.initDependents(that);
+
+        that.update = function(newOptions) {
+            newOptions = newOptions || that.options;
+            that.container.attr(that.options.labelAttribute, newOptions.text);
+            if (newOptions.dynamicLabel) {
+                var live = fluid.jById(that.options.liveRegionId); 
+                if (live.length === 0) {
+                    live = that.generateLiveElement();
+                }
+                live.text(newOptions.text);
+            }
+        }
+        that.update();
+        return that;
+    };
+    
+    fluid.ariaLabeller.generateLiveElement = function(that) {
+        var liveEl = $(that.options.liveRegionMarkup);
+        liveEl.attr("id", that.options.liveRegionId);
+        $("body").append(liveEl);
+        return liveEl;
+    };
+    
+    var LABEL_KEY = "aria-labelling";
+    
+    fluid.getAriaLabeller = function(element) {
+        element = $(element);
+        var that = fluid.getScopedData(element, LABEL_KEY);
+        return that;      
+    };
+    
+    /** Manages an ARIA-mediated label attached to a given DOM element. An
+     * aria-labelledby attribute and target node is fabricated in the document
+     * if they do not exist already, and a "little component" is returned exposing a method
+     * "update" that allows the text to be updated. */
+    
+    fluid.updateAriaLabel = function(element, text, options) {
+        var options = $.extend({}, options || {}, {text: text});
+        var that = fluid.getAriaLabeller(element);
+        if (!that) {
+            that = fluid.ariaLabeller(element, options);
+            fluid.setScopedData(element, LABEL_KEY, that);
+        }
+        else that.update(options);
+        return that;
+    };
+    
+    /** Sets an interation on a target control, which morally manages a "blur" for
+     * a possibly composite region.
+     * A timed blur listener is set on the control, which waits for a short period of
+     * time (options.delay, defaults to 150ms) to discover whether the reason for the 
+     * blur interaction is that either a focus or click is being serviced on a nominated
+     * set of "exclusions" (options.exclusions, a free hash of elements or jQueries). 
+     * If no such event is received within the window, options.handler will be called
+     * with the argument "control", to service whatever interaction is required of the
+     * blur.
+     */
+    
+    fluid.deadMansBlur = function (control, options) {
+        var that = fluid.initLittleComponent("fluid.deadMansBlur", options);
+        that.blurPending = false;
+        that.lastCancel = 0;
+        $(control).bind("focusout", function (event) {
+            fluid.log("Starting blur timer for element " + fluid.dumpEl(event.target));
+            var now = new Date().getTime();
+            fluid.log("back delay: " + (now - that.lastCancel));
+            if (now - that.lastCancel > that.options.backDelay) {
+                that.blurPending = true;
+            }
+            setTimeout(function () {
+                if (that.blurPending) {
+                    that.options.handler(control);
+                }
+            }, that.options.delay);
+        });
+        that.canceller = function (event) {
+            fluid.log("Cancellation through " + event.type + " on " + fluid.dumpEl(event.target)); 
+            that.lastCancel = new Date().getTime();
+            that.blurPending = false;
+        };
+        fluid.each(that.options.exclusions, function(exclusion) {
+            var exclusion = $(exclusion);
+            fluid.each(exclusion, function(excludeEl) {
+                $(excludeEl).bind("focusin", that.canceller)
+                            .bind("fluid-focus", that.canceller)
+                            .click(that.canceller);
+            });
+        });
+        return that;
+    };
+
+    fluid.defaults("fluid.deadMansBlur", {
+        delay: 150,
+        backDelay: 100
+    });
+    
+})(jQuery, fluid_1_3);
 /*
 Copyright 2007-2010 University of Cambridge
-Copyright 2007-2009 University of Toronto
+Copyright 2010 Lucendo Development Ltd.
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -10226,7 +10409,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 // Declare dependencies.
 /*global jQuery*/
 
-var fluid_1_2 = fluid_1_2 || {};
+var fluid_1_3 = fluid_1_3 || {};
 
 (function ($, fluid) {
 
@@ -10292,9 +10475,6 @@ var fluid_1_2 = fluid_1_2 || {};
     };
 
     function makeStackFetcher(thatStack, directModel) {
-      // TODO: This is a bit crazy, shouldn't the "dynamic environment" go right into the thatStack? Right now it is
-      // incorrectly beaten by the static environment
-        var envFetcher = fluid.environmentFetcher(directModel);
         var fetchStrategies = [fluid.model.funcResolverStrategy, makeGingerStrategy(thatStack)]; 
         var fetcher = function(parsed) {
             var context = parsed.context;
@@ -10305,17 +10485,14 @@ var fluid_1_2 = fluid_1_2 || {};
                     return true; // YOUR VISIT IS AT AN END!!
                 }
                 if (component.options && component.options.components && component.options.components[context] && !component[context]) {
-                    foundComponent = fluid.model.getBeanValue(component, context, fetchStrategies);
+                    foundComponent = fluid.get(component, context, fetchStrategies);
                     return true;
                 }
             });
-            if (!foundComponent) {
-                return envFetcher(parsed);
                 // TODO: we used to get a helpful diagnostic when we failed to match a context name before we fell back
                 // to the environment for FLUID-3818
                 //fluid.fail("No context matched for name " + context + " from root of type " + thatStack[0].typeName);
-            }
-            return fluid.model.getBeanValue(foundComponent, parsed.path, fetchStrategies);
+            return fluid.get(foundComponent, parsed.path, fetchStrategies);
         };
         return fetcher;
     }
@@ -10333,7 +10510,7 @@ var fluid_1_2 = fluid_1_2 || {};
         options.model = directModel;
         
         if (fluid.isMarker(arg, fluid.COMPONENT_OPTIONS)) {
-            arg = fluid.expander.expandLight(componentOptions, options); //fluid.resolveEnvironment(componentOptions, directModel, options);
+            arg = fluid.expander.expandLight(componentOptions, options);
         }
         else {
             if (typeof(arg) === "string" && arg.charAt(0) === "@") { // Test cases for i) single-args, ii) composite args
@@ -10355,8 +10532,16 @@ var fluid_1_2 = fluid_1_2 || {};
      */
     fluid.embodyDemands = function(thatStack, demandspec, initArgs, options) {
         var demands = $.makeArray(demandspec.args);
-        if (demands.length === 0 && thatStack.length > 0) { // Guess that it is meant to be a subcomponent TODO: component grades
-            demands = [fluid.COMPONENT_OPTIONS];
+        options = options || {};
+        if (demands.length === 0) {
+            if (options.componentOptions) { // Guess that it is meant to be a subcomponent TODO: component grades
+               demands = [fluid.COMPONENT_OPTIONS];
+            }
+            else if (options.passArgs) {
+                demands = fluid.transform(initArgs, function(arg, index) {
+                    return "@"+index;
+                });
+            }
         }
         var args = [];
         if (demands) {
@@ -10366,13 +10551,13 @@ var fluid_1_2 = fluid_1_2 || {};
                     var resolvedOptions = {};
                     for (var key in arg) {
                         var ref = arg[key];
-                        var rvalue = resolveRvalue(thatStack, ref, initArgs, options);
-                        fluid.model.setBeanValue(resolvedOptions, key, rvalue);
+                        var rvalue = resolveRvalue(thatStack, ref, initArgs, options.componentOptions);
+                        fluid.set(resolvedOptions, key, rvalue);
                     }
                     args[i] = resolvedOptions;
                 }
                 else {
-                    var resolvedArg = resolveRvalue(thatStack, arg, initArgs, options) || {};
+                    var resolvedArg = resolveRvalue(thatStack, arg, initArgs, options.componentOptions);
                     args[i] = resolvedArg;
                 }
                 if (i === demands.length - 1 && args[i] && typeof(args[i]) === "object" && !args[i].typeName && !args[i].targetTypeName) {
@@ -10503,7 +10688,7 @@ var fluid_1_2 = fluid_1_2 || {};
     fluid.invoke = function(functionName, args, that, environment) {
         args = fluid.makeArray(args);
         return fluid.withNewComponent(that || {typeName: functionName}, function(thatStack) {
-            var invokeSpec = fluid.resolveDemands(thatStack, functionName, args, args[0]);
+            var invokeSpec = fluid.resolveDemands(thatStack, functionName, args, {passArgs: true});
             return fluid.invokeGlobalFunction(invokeSpec.funcName, invokeSpec.args, environment);
         });
     };
@@ -10560,14 +10745,14 @@ var fluid_1_2 = fluid_1_2 || {};
             var pen = fluid.model.getPenultimate(options, path);
             var value = pen.root[pen.last];
             delete pen.root[pen.last];
-            fluid.model.setBeanValue(preserve, path, value);  
+            fluid.set(preserve, path, value);  
         });
         return {
             restore: function(target) {
                 fluid.each(preserveList, function(path) {
-                    var preserved = fluid.model.getBeanValue(preserve, path);
+                    var preserved = fluid.get(preserve, path);
                     if (preserved !== undefined) {
-                        fluid.model.setBeanValue(target, path, preserved)
+                        fluid.set(target, path, preserved)
                     }
                 });
             }
@@ -10607,7 +10792,7 @@ var fluid_1_2 = fluid_1_2 || {};
     fluid.initDependent = function(that, name, thatStack) {
         if (!that || that[name]) { return; }
         var component = that.options.components[name];
-        var invokeSpec = fluid.resolveDemands(thatStack, [component.type, name], [], component.options);
+        var invokeSpec = fluid.resolveDemands(thatStack, [component.type, name], [], {componentOptions: component.options});
         // TODO: only want to expand "options" or all args? See "component rescuing" in expandOptions above
         //invokeSpec.args = fluid.expandOptions(invokeSpec.args, thatStack, true); 
         var instance = fluid.initSubcomponentImpl(that, {type: invokeSpec.funcName}, invokeSpec.args);
@@ -10618,10 +10803,8 @@ var fluid_1_2 = fluid_1_2 || {};
     
     // NON-API function    
     fluid.withNewComponent = function(that, func) {
-        if (!that) {
-            return func(fluid.getEnvironmentalThatStack());
-        }
         that[inCreationMarker] = true;
+
         // push a dynamic stack of "currently resolving components" onto the current thread
         var root = fluid.threadLocal();
         var thatStack = root["fluid.initDependents"];
@@ -10630,10 +10813,11 @@ var fluid_1_2 = fluid_1_2 || {};
             root["fluid.initDependents"] = thatStack;
         }
         else {
-            thatStack.push(that);
+            thatStack.push(that)
         }
+        var fullStack = [fluid.staticEnvironment, fluid.threadLocal()].concat(fluid.makeArray(thatStack));
         try {
-            return func(thatStack);
+            return func(fullStack);
         }
         finally {
             thatStack.pop();
@@ -10700,7 +10884,7 @@ var fluid_1_2 = fluid_1_2 || {};
     
     fluid.demands("fluid.threadLocal", "fluid.browser", {funcName: "fluid.singleThreadLocal"});
 
-    var singleThreadLocal = {};
+    var singleThreadLocal = fluid.typeTag("fluid.dynamicEnvironment");
     
     fluid.singleThreadLocal = function() {
         return singleThreadLocal;
@@ -10791,7 +10975,7 @@ var fluid_1_2 = fluid_1_2 || {};
         if (!base) {
             return base;
         }
-        return fluid.model.getBeanValue(base, parsed.path);
+        return fluid.get(base, parsed.path);
     };
     
     fluid.resolveContextValue = function(string, options) {
@@ -10883,11 +11067,10 @@ var fluid_1_2 = fluid_1_2 || {};
     
     fluid.deferredCall = fluid.expander.deferredCall; // put in top namespace for convenience
     
-    // TODO: The case of an "invoke" call as part of the course of resolving some component options
-    // proved problematic here and interrupted the ability to resolve contextualised values inside the invoker.
     fluid.deferredInvokeCall = function(target, source, recurse) {
         var expander = source.expander;
-        var args = (!expander.args || fluid.isArrayable(expander.args))? expander.args : $.makeArray(expander.args); 
+        var args = (!expander.args || fluid.isArrayable(expander.args))? expander.args : $.makeArray(expander.args);
+        args = recurse(args);  
         return fluid.invoke(expander.func, args);
     };
     
@@ -10929,7 +11112,7 @@ var fluid_1_2 = fluid_1_2 || {};
         return fluid.resolveEnvironment(source, options.model, options);       
     };
           
-})(jQuery, fluid_1_2);
+})(jQuery, fluid_1_3);
 /*
 Copyright 2007-2010 University of Cambridge
 Copyright 2007-2009 University of Toronto
@@ -10945,7 +11128,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 // Declare dependencies.
 /*global jQuery*/
 
-var fluid_1_2 = fluid_1_2 || {};
+var fluid_1_3 = fluid_1_3 || {};
 
 (function ($, fluid) {
 
@@ -10983,6 +11166,9 @@ var fluid_1_2 = fluid_1_2 || {};
         return that;
     };
   
+    /*
+     * This function is unsupported: It is not really intended for use by implementors.
+     */
     // Add "synthetic" elements of *this* resourceSpec list corresponding to any
     // still pending elements matching the PROLEPTICK CLASS SPECIFICATION supplied 
     fluid.fetchResources.amalgamateClasses = function(specs, classes, operator) {
@@ -10995,6 +11181,9 @@ var fluid_1_2 = fluid_1_2 || {};
         });
     };
   
+    /*
+     * This function is unsupported: It is not really intended for use by implementors.
+     */
     fluid.fetchResources.timeSuccessCallback = function(resourceSpec) {
         if (resourceSpec.timeSuccess && resourceSpec.options && resourceSpec.options.success) {
             var success = resourceSpec.options.success;
@@ -11022,6 +11211,9 @@ var fluid_1_2 = fluid_1_2 || {};
         }  
     };
   
+    /*
+     * This function is unsupported: It is not really intended for use by implementors.
+     */
     fluid.fetchResources.handleCachedRequest = function(resourceSpec, response) {
          var canon = canonUrl(resourceSpec.href);
          var cached = resourceCache[canon];
@@ -11037,6 +11229,9 @@ var fluid_1_2 = fluid_1_2 || {};
          }
     };
     
+    /*
+     * This function is unsupported: It is not really intended for use by implementors.
+     */
     fluid.fetchResources.completeRequest = function(thisSpec, recurseCall) {
         thisSpec.queued = false;
         thisSpec.completeTime = new Date();
@@ -11045,6 +11240,9 @@ var fluid_1_2 = fluid_1_2 || {};
         thisSpec.recurseFirer.fire();
     };
   
+    /*
+     * This function is unsupported: It is not really intended for use by implementors.
+     */
     fluid.fetchResources.makeResourceCallback = function(thisSpec) {
         return {
             success: function(response) {
@@ -11068,6 +11266,9 @@ var fluid_1_2 = fluid_1_2 || {};
     };
     
         
+    /*
+     * This function is unsupported: It is not really intended for use by implementors.
+     */
     fluid.fetchResources.issueCachedRequest = function(resourceSpec, options) {
          var canon = canonUrl(resourceSpec.href);
          var cached = resourceCache[canon];
@@ -11099,6 +11300,9 @@ var fluid_1_2 = fluid_1_2 || {};
          }
     };
     
+    /*
+     * This function is unsupported: It is not really intended for use by implementors.
+     */
     // Compose callbacks in such a way that the 2nd, marked "external" will be applied
     // first if it exists, but in all cases, the first, marked internal, will be 
     // CALLED WITHOUT FAIL
@@ -11114,6 +11318,9 @@ var fluid_1_2 = fluid_1_2 || {};
         } : internal;
     };
     
+    /*
+     * This function is unsupported: It is not really intended for use by implementors.
+     */
     fluid.fetchResources.composePolicy = function(target, source, key) {
         target[key] = fluid.fetchResources.composeCallbacks(target[key], source[key]);
     };
@@ -11126,6 +11333,9 @@ var fluid_1_2 = fluid_1_2 || {};
         }
     });
     
+    /*
+     * This function is unsupported: It is not really intended for use by implementors.
+     */
     fluid.fetchResources.issueRequest = function(resourceSpec, key) {
         var thisCallback = fluid.fetchResources.makeResourceCallback(resourceSpec);
         var options = {  
@@ -11188,13 +11398,17 @@ var fluid_1_2 = fluid_1_2 || {};
     
     fluid.fetchResources.primeCacheFromResources = function(componentName) {
         var resources = fluid.defaults(componentName).resources;
-        var expanded = (fluid.expandOptions? fluid.expandOptions : fluid.identity)(fluid.copy(resources));
+        var that = {typeName: "fluid.fetchResources.primeCacheFromResources"};
+        var expanded = (fluid.expandOptions ? fluid.expandOptions : fluid.identity)(fluid.copy(resources), that);
         fluid.fetchResources(expanded);
     };
     
     /** Utilities invoking requests for expansion **/
     fluid.registerNamespace("fluid.expander");
       
+    /*
+     * This function is unsupported: It is not really intended for use by implementors.
+     */
     fluid.expander.makeDefaultFetchOptions = function (successdisposer, failid, options) {
         return $.extend(true, {dataType: "text"}, options, {
             success: function(response, environmentdisposer) {
@@ -11207,6 +11421,9 @@ var fluid_1_2 = fluid_1_2 || {};
         });
     };
   
+    /*
+     * This function is unsupported: It is not really intended for use by implementors.
+     */
     fluid.expander.makeFetchExpander = function (options) {
         return { expander: {
             type: "fluid.expander.deferredFetcher",
@@ -11243,24 +11460,7 @@ var fluid_1_2 = fluid_1_2 || {};
     };
     
     
-})(jQuery, fluid_1_2);
-/*
-Copyright 2008-2009 University of Toronto
-Copyright 2008-2009 University of California, Berkeley
-
-Licensed under the Educational Community License (ECL), Version 2.0 or the New
-BSD license. You may not use this file except in compliance with one these
-Licenses.
-
-You may obtain a copy of the ECL 2.0 License and BSD License at
-https://source.fluidproject.org/svn/LICENSE.txt
-*/
-
-(function ($) {
-    // Note: the use of fl-ProgEnhance-basic is deprecated, and replaced by fl-progEnhance-basic.
-    // It is included here for backward compatibility only.
-    $("head").append("<style type='text/css'>.fl-progEnhance-basic, .fl-ProgEnhance-basic { display: none; }</style>");
-})(jQuery);
+})(jQuery, fluid_1_3);
 // =========================================================================
 //
 // tinyxmlsax.js - an XML SAX parser in JavaScript compressed for downloading
@@ -11313,7 +11513,7 @@ freely, subject to the following restrictions:
     distribution.
  */
 
-var fluid_1_2 = fluid_1_2 || {};
+var fluid_1_3 = fluid_1_3 || {};
 
 (function ($, fluid) {
     
@@ -11726,10 +11926,12 @@ var fluid_1_2 = fluid_1_2 || {};
         return strD.substring(iB, iE).split(strF).join(strR);
         };
             
-})(jQuery, fluid_1_2);
+})(jQuery, fluid_1_3);
         /*
 Copyright 2008-2010 University of Cambridge
 Copyright 2008-2009 University of Toronto
+Copyright 2010 OCAD University
+Copyright 2010 Lucendo Development Ltd.
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -11740,9 +11942,9 @@ https://source.fluidproject.org/svn/LICENSE.txt
 */
 
 /*global jQuery*/
-/*global fluid_1_2*/
+/*global fluid_1_3*/
 
-fluid_1_2 = fluid_1_2 || {};
+fluid_1_3 = fluid_1_3 || {};
 
 (function ($, fluid) {
     
@@ -12256,10 +12458,11 @@ fluid_1_2 = fluid_1_2 || {};
     return togo;
     };
     
-})(jQuery, fluid_1_2);
+})(jQuery, fluid_1_3);
 /*
 Copyright 2008-2010 University of Cambridge
 Copyright 2008-2009 University of Toronto
+Copyright 2010 Lucendo Development Ltd.
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -12270,9 +12473,9 @@ https://source.fluidproject.org/svn/LICENSE.txt
 */
 
 /*global jQuery*/
-/*global fluid_1_2*/
+/*global fluid_1_3*/
 
-fluid_1_2 = fluid_1_2 || {};
+fluid_1_3 = fluid_1_3 || {};
 
 (function ($, fluid) {
   
@@ -12370,7 +12573,7 @@ fluid_1_2 = fluid_1_2 || {};
               fluid.fail("Cannot perform value fixup for valuebinding " 
                 + uibound.valuebinding + " since no model was supplied to rendering");
           }
-          uibound.value = fluid.model.getBeanValue(model, uibound.valuebinding, resolverGetConfig);
+          uibound.value = fluid.get(model, uibound.valuebinding, resolverGetConfig);
       }
   }
   
@@ -12928,6 +13131,9 @@ fluid_1_2 = fluid_1_2 || {};
           return attrcopy.id;
       }
       
+    /*
+     * This function is unsupported: It is not really intended for use by implementors.
+     */
       function assignSubmittingName(attrcopy, component, parent) {
           var submitting = parent || component;
         // if a submittingName is required, we must already go out to the document to 
@@ -13610,6 +13816,9 @@ fluid_1_2 = fluid_1_2 || {};
   
   jQuery.extend(true, fluid.renderer, renderer);
 
+    /*
+     * This function is unsupported: It is not really intended for use by implementors.
+     */
   fluid.ComponentReference = function(reference) {
       this.reference = reference;
   };
@@ -13775,10 +13984,11 @@ fluid_1_2 = fluid_1_2 || {};
          return fluid.render({node: node, armouring: options.armouring}, node, tree, options);
      };
 
-})(jQuery, fluid_1_2);
+})(jQuery, fluid_1_3);
 /*
 Copyright 2008-2010 University of Cambridge
 Copyright 2008-2009 University of Toronto
+Copyright 2010 Lucendo Development Ltd.
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -13789,9 +13999,9 @@ https://source.fluidproject.org/svn/LICENSE.txt
 */
 
 /*global jQuery*/
-/*global fluid_1_2*/
+/*global fluid_1_3*/
 
-fluid_1_2 = fluid_1_2 || {};
+fluid_1_3 = fluid_1_3 || {};
 
 (function ($, fluid) {
 
@@ -13804,7 +14014,7 @@ fluid_1_2 = fluid_1_2 || {};
     // TODO: rescued from kettleCouchDB.js - clean up in time
     fluid.expect = function (name, members, target) {
         fluid.transform($.makeArray(members), function(key) {
-            if (!target[key]) {
+            if (typeof target[key] === "undefined") {
                 fluid.fail(name + " missing required parameter " + key);
             }
         });
@@ -13974,9 +14184,10 @@ fluid_1_2 = fluid_1_2 || {};
         return togo;
     };
   
-      /** A special "shallow copy" operation suitable for nondestructively
+    /** A special "shallow copy" operation suitable for nondestructively
      * merging trees of components. jQuery.extend in shallow mode will 
      * neglect null valued properties.
+     * This function is unsupported: It is not really intended for use by implementors.
      */
     fluid.renderer.mergeComponents = function (target, source) {
         for (var key in source) {
@@ -14007,7 +14218,7 @@ fluid_1_2 = fluid_1_2 || {};
     fluid.renderer.repeat = function(options, container, key, config) {
         fluid.expect("Repetition expander", ["controlledBy", "tree"], options);
         var path = fluid.extractContextualPath(options.controlledBy, {ELstyle: "ALL"}, fluid.threadLocal());
-        var list = fluid.model.getBeanValue(config.model, path, config.resolverGetConfig);
+        var list = fluid.get(config.model, path, config.resolverGetConfig);
         
         var togo = {};
         if (!list || list.length === 0) {
@@ -14023,7 +14234,7 @@ fluid_1_2 = fluid_1_2 || {};
                 envAdd[options.pathAs] = EL;
             }
             if (options.valueAs) {
-                envAdd[options.valueAs] = fluid.model.getBeanValue(config.model, EL, config.resolverGetConfig);
+                envAdd[options.valueAs] = fluid.get(config.model, EL, config.resolverGetConfig);
             }
             var expandrow = fluid.withEnvironment(envAdd, function() {return config.expander(options.tree);});
             return fluid.isArrayable(expandrow)? {children: expandrow} : expandrow;
@@ -14035,6 +14246,23 @@ fluid_1_2 = fluid_1_2 || {};
             }
         fluid.each(expanded, function(entry) {entry.ID = repeatID;});
         return expanded;
+    };
+    
+    fluid.renderer.condition = function (options, container, key, config) {
+        fluid.expect("Selection to condition expander", ["falseTree", "trueTree", "condition"], options);
+        var condition;
+        if (options.condition.funcName) {
+            var args = config.expandLight(options.condition.args);
+            condition = fluid.invoke(options.condition.funcName, args);
+        }
+        else if (options.condition.expander) {
+            condition = config.expander(options.condition);
+        }
+        else {
+            condition = options.condition;
+        }
+        var tree = (condition ? options.trueTree : options.falseTree);
+        return config.expander(tree);
     };
     
 
@@ -14096,7 +14324,7 @@ fluid_1_2 = fluid_1_2 || {};
                 proto.value = value;
             }
             if (options.model && proto.valuebinding && proto.value === undefined) {
-                proto.value = fluid.model.getBeanValue(options.model, proto.valuebinding, options.resolverGetConfig);
+                proto.value = fluid.get(options.model, proto.valuebinding, options.resolverGetConfig);
                 }
             if (concrete) {
                 proto.componentType = "UIBound";
@@ -14130,7 +14358,8 @@ fluid_1_2 = fluid_1_2 || {};
             model: options.model,
             resolverGetConfig: options.resolverGetConfig,
             resolverSetConfig: options.resolverSetConfig,
-            expander: expandExternal
+            expander: expandExternal,
+            expandLight: expandLight
         };
         
         var expandLeaf = function(leaf, componentType) {
@@ -14243,7 +14472,7 @@ fluid_1_2 = fluid_1_2 || {};
         return expandEntry;
     };
     
-})(jQuery, fluid_1_2);
+})(jQuery, fluid_1_3);
     /*
  * jQuery UI Tooltip @VERSION
  *
@@ -14382,6 +14611,7 @@ $.widget("ui.tooltip", {
 })(jQuery);/*
 Copyright 2008-2009 University of Cambridge
 Copyright 2008-2010 University of Toronto
+Copyright 2010 Lucendo Development Ltd.
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -14391,10 +14621,9 @@ You may obtain a copy of the ECL 2.0 License and BSD License at
 https://source.fluidproject.org/svn/LICENSE.txt
 */
 
-/*global jQuery*/
-/*global fluid_1_2*/
+/*global jQuery, fluid_1_3:true*/
 
-fluid_1_2 = fluid_1_2 || {};
+var fluid_1_3 = fluid_1_3 || {};
 
 (function ($, fluid) {
     
@@ -14516,7 +14745,122 @@ fluid_1_2 = fluid_1_2 || {};
         renderer: defaultRenderer
     });
         
-})(jQuery, fluid_1_2);
+})(jQuery, fluid_1_3);
+/*
+Copyright 2010 OCAD University
+
+Licensed under the Educational Community License (ECL), Version 2.0 or the New
+BSD license. You may not use this file except in compliance with one these
+Licenses.
+
+You may obtain a copy of the ECL 2.0 License and BSD License at
+https://source.fluidproject.org/svn/LICENSE.txt
+*/
+
+/*global jQuery, fluid_1_3:true*/
+
+var fluid_1_3 = fluid_1_3 || {};
+
+(function ($, fluid) {
+    
+    var createContentFunc = function (content) {
+        return typeof content === "function" ? content : function () {
+            return content;
+        };
+    };
+
+    var setup = function (that) {
+        that.container.tooltip({
+            content: createContentFunc(that.options.content),
+            position: that.options.position,
+            items: that.options.items,
+            open: function (event) {
+                var tt = $(event.target).tooltip("widget");
+                tt.stop(false, true);
+                tt.hide();
+                if (that.options.delay) {
+                    tt.delay(that.options.delay).fadeIn("default", that.events.afterOpen.fire());
+                } else {
+                    tt.show();
+                    that.events.afterOpen.fire();
+                }
+            },
+            close: function (event) {
+                var tt = $(event.target).tooltip("widget");
+                tt.stop(false, true);
+                tt.hide();
+                tt.clearQueue();
+                that.events.afterClose.fire();
+            } 
+        });
+        
+        that.elm = that.container.tooltip("widget");
+        
+        that.elm.addClass(that.options.styles.tooltip);
+    };
+
+    fluid.tooltip = function (container, options) {
+        var that = fluid.initView("fluid.tooltip", container, options);
+        
+        /**
+         * Updates the contents displayed in the tooltip
+         * 
+         * @param {Object} content, the content to be displayed in the tooltip
+         */
+        that.updateContent = function (content) {
+            that.container.tooltip("option", "content", createContentFunc(content));
+        };
+        
+        /**
+         * Destroys the underlying jquery ui tooltip
+         */
+        that.destroy = function () {
+            that.container.tooltip("destroy");
+        };
+        
+        /**
+         * Manually displays the tooltip
+         */
+        that.open = function () {
+            that.container.tooltip("open");
+        };
+        
+        /**
+         * Manually hides the tooltip
+         */
+        that.close = function () {
+            that.container.tooltip("close");
+        };
+        
+        setup(that);
+        
+        return that;
+    };
+    
+    fluid.defaults("fluid.tooltip", {
+        styles: {
+            tooltip: ""
+        },
+        
+        events: {
+            afterOpen: null,
+            afterClose: null  
+        },
+        
+        content: "",
+        
+        position: {
+            my: "left top",
+            at: "left bottom",
+            offset: "0 5"
+        },
+        
+        items: "*",
+        
+        delay: 300
+    });
+
+})(jQuery, fluid_1_3);
 /*
 Copyright 2008-2009 University of Cambridge
 Copyright 2008-2010 University of Toronto
@@ -14531,9 +14875,9 @@ You may obtain a copy of the ECL 2.0 License and BSD License at
 https://source.fluidproject.org/svn/LICENSE.txt
 */
 
-/*global jQuery, fluid_1_2, document, setTimeout*/
+/*global jQuery, fluid_1_3:true, document, setTimeout*/
 
-fluid_1_2 = fluid_1_2 || {};
+var fluid_1_3 = fluid_1_3 || {};
 
 (function ($, fluid) {
     
@@ -14708,9 +15052,10 @@ fluid_1_2 = fluid_1_2 || {};
         that.events.afterBeginEdit.fire();
     };
 
-    var clearEmptyViewStyles = function (textEl, defaultViewStyle, originalViewPadding) {
-        textEl.removeClass(defaultViewStyle);
+    var clearEmptyViewStyles = function (textEl, styles, originalViewPadding) {
+        textEl.removeClass(styles.defaultViewStyle);
         textEl.css('padding-right', originalViewPadding);
+        textEl.removeClass(styles.emptyDefaultViewText);
     };
     
     var showDefaultViewText = function (that) {
@@ -14733,7 +15078,7 @@ fluid_1_2 = fluid_1_2 || {};
 
     var showEditedText = function (that) {
         that.displayView.value(that.model.value);
-        clearEmptyViewStyles(that.viewEl, that.options.styles.defaultViewStyle, that.existingPadding);
+        clearEmptyViewStyles(that.viewEl, that.options.styles, that.existingPadding);
     };
     
     var refreshView = function (that, source) {
@@ -14789,31 +15134,24 @@ fluid_1_2 = fluid_1_2 || {};
     // Initialize the tooltip once the document is ready.
     // For more details, see http://issues.fluidproject.org/browse/FLUID-1030
     var initTooltips = function (that) {
-        var tooltipStyle = that.options.styles.tooltip;
         var tooltipOptions = {
-            content: function () { 
-                return that.options.tooltipText;
-            },
+            content: that.options.tooltipText,
             position: {
                 my: "left top",
                 at: "left bottom",
                 offset: "0 5"
             },
-            items: "*",
-            open: function(event) {
-                $(event.target).tooltip("widget").stop(false, true).hide().delay(that.options.tooltipDelay).fadeIn();
-            },
-            close: function(event) {
-                $(event.target).tooltip("widget").stop(false, true).hide().clearQueue();
-            }          
+            target: "*",
+            delay: that.options.tooltipDelay,
+            styles: {
+                tooltip: that.options.styles.tooltip
+            }     
         };
         
-        that.viewEl.tooltip(tooltipOptions);
-        that.viewEl.tooltip("widget").addClass(tooltipStyle);
+        fluid.tooltip(that.viewEl, tooltipOptions);
         
         if (that.textEditButton) {
-            that.textEditButton.tooltip(tooltipOptions);
-            that.textEditButton.tooltip("widget").addClass(tooltipStyle);
+            fluid.tooltip(that.textEditButton, tooltipOptions);
         }
     };
     
@@ -15297,9 +15635,12 @@ fluid_1_2 = fluid_1_2 || {};
                     showNothing(componentThat);
                 }
                 // If necessary, pad the view element enough that it will be evident to the user.
-                if (($.trim(componentThat.viewEl.text()).length === 0) &&
-                    (componentThat.existingPadding < componentThat.options.paddings.minimumView)) {
-                    componentThat.viewEl.css('padding-right', componentThat.options.paddings.minimumView);
+                if ($.trim(componentThat.viewEl.text()).length === 0) {
+                    componentThat.viewEl.addClass(componentThat.options.styles.emptyDefaultViewText);
+                    
+                    if (componentThat.existingPadding < componentThat.options.paddings.minimumView) {
+                        componentThat.viewEl.css('padding-right', componentThat.options.paddings.minimumView);
+                    }
                 }
             }
         };
@@ -15348,6 +15689,7 @@ fluid_1_2 = fluid_1_2 || {};
             edit: "fl-inlineEdit-edit",
             invitation: "fl-inlineEdit-invitation",
             defaultViewStyle: "fl-inlineEdit-emptyText-invitation",
+            emptyDefaultViewText: "fl-inlineEdit-emptyDefaultViewText",
             focus: "fl-inlineEdit-focus",
             tooltip: "fl-inlineEdit-tooltip",
             editModeInstruction: "fl-inlineEdit-editModeInstruction",
@@ -15416,8 +15758,6 @@ fluid_1_2 = fluid_1_2 || {};
         // this is here for backwards API compatibility, but should be in the strings block
         tooltipText: "Select or press Enter to edit",
         
-        tooltipId: "tooltip",
-        
         tooltipDelay: 1000,
 
         selectOnEdit: false        
@@ -15428,7 +15768,7 @@ fluid_1_2 = fluid_1_2 || {};
             editables: ".flc-inlineEditable"
         }
     });
-})(jQuery, fluid_1_2);
+})(jQuery, fluid_1_3);
 /*
 Copyright 2008-2009 University of Cambridge
 Copyright 2008-2010 University of Toronto
@@ -15443,10 +15783,10 @@ https://source.fluidproject.org/svn/LICENSE.txt
 */
 
 /*global setTimeout*/
-/*global jQuery, fluid_1_2, fluid*/
+/*global jQuery, fluid_1_3:true, fluid*/
 /*global tinyMCE, FCKeditor, FCKeditorAPI, CKEDITOR*/
 
-fluid_1_2 = fluid_1_2 || {};
+var fluid_1_3 = fluid_1_3 || {};
 
 (function ($, fluid) {
 
@@ -15618,10 +15958,10 @@ fluid_1_2 = fluid_1_2 || {};
             // are delivered to the actual body
             fluid.deadMansBlur(that.editField, 
                 {exclusions: {body: $(editorBody)}, 
-                 handler: function () {
-                     that.cancel();
-                 }
-                 });
+                    handler: function () {
+                        that.cancel();
+                    }
+                });
         });
             
         that.events.afterBeginEdit.addListener(function () {
@@ -15919,11 +16259,11 @@ fluid_1_2 = fluid_1_2 || {};
    
     fluid.inlineEdit.dropdown.blurHandlerBinder = function (that) {
         fluid.deadMansBlur(that.editField, {
-             exclusions: {selectBox: $("div.selectbox-wrapper li", that.editContainer)},
-             handler: function () {
+            exclusions: {selectBox: $("div.selectbox-wrapper", that.editContainer)},
+            handler: function () {
                 that.cancel();
-                }
-            });
+            }
+        });
     };
     
     fluid.defaults("fluid.inlineEdit.dropdown", {
@@ -15931,7 +16271,7 @@ fluid_1_2 = fluid_1_2 || {};
         blurHandlerBinder: fluid.inlineEdit.dropdown.blurHandlerBinder,
         editModeRenderer: fluid.inlineEdit.dropdown.editModeRenderer
     });
-})(jQuery, fluid_1_2);
+})(jQuery, fluid_1_3);
 
 
 // This must be written outside any scope as a result of the FCKEditor event model.
@@ -16046,6 +16386,8 @@ if (!$.browser.version)
 })(jQuery);/*
 Copyright 2008-2009 University of Cambridge
 Copyright 2008-2009 University of Toronto
+Copyright 2010 OCAD University
+Copyright 2010 Lucendo Development Ltd.
 
 Licensed under the Educational Community License (ECL), Version 2.0 or the New
 BSD license. You may not use this file except in compliance with one these
@@ -16055,10 +16397,9 @@ You may obtain a copy of the ECL 2.0 License and BSD License at
 https://source.fluidproject.org/svn/LICENSE.txt
 */
 
-/*global jQuery*/
-/*global fluid_1_2*/
+/*global jQuery, fluid_1_3:true*/
 
-fluid_1_2 = fluid_1_2 || {};
+var fluid_1_3 = fluid_1_3 || {};
 
 (function ($, fluid) {
 
@@ -16081,7 +16422,9 @@ fluid_1_2 = fluid_1_2 || {};
     
     function bindLinkClick(link, events, eventArg) {
         link.unbind("click.fluid.pager");
-        link.bind("click.fluid.pager", function () {events.initiatePageChange.fire(eventArg); });
+        link.bind("click.fluid.pager", function () {
+            events.initiatePageChange.fire(eventArg);
+        });
     }
     
     // 10 -> 1, 11 -> 2
@@ -16093,7 +16436,7 @@ fluid_1_2 = fluid_1_2 || {};
         return fluid.pagerImpl.apply(null, arguments);
     };
     
-    fluid.pager.computePageLimit = function(model) {
+    fluid.pager.computePageLimit = function (model) {
         return Math.min(model.totalRange, (model.pageIndex + 1) * model.pageSize);
     };
 
@@ -16157,23 +16500,11 @@ fluid_1_2 = fluid_1_2 || {};
         };
     };
     
-    fluid.pager.setCurrentPageDesc = function (that) {
-        var descMarkup = $(that.options.markup.currentPageDescription, {
-            text: that.options.strings.currentPageIndexMsg,
-            "class": that.options.styles.currentPageDesc
-        });
-        
-        fluid.allocateSimpleId(descMarkup);
-        that.container.append(descMarkup);     
-        
-        return descMarkup;
-    }; 
     
     fluid.pager.renderedPageList = function (container, events, pagerBarOptions, options, strings) {
         options = $.extend(true, pagerBarOptions, options);
         var that = fluid.initView("fluid.pager.renderedPageList", container, options);
         options = that.options; // pick up any defaults
-        var currentPageDescId = fluid.pager.setCurrentPageDesc(that).attr("id");
         var idMap = {};
         var renderOptions = {
             cutpoints: [ {
@@ -16201,14 +16532,15 @@ fluid_1_2 = fluid_1_2 || {};
                 value: page + 1,
                 pageIndex: page,
                 decorators: [
-                    {type: "jQuery",
-                         func: "click", 
-                         args: function (event) {
-                             events.initiatePageChange.fire({pageIndex: page});
-                             event.preventDefault();
+                    {
+                        type: "jQuery",
+                        func: "click", 
+                        args: function (event) {
+                            events.initiatePageChange.fire({pageIndex: page});
+                            event.preventDefault();
                         }
-                     }
-                 ]
+                    }
+                ]
             };
             
             if (isCurrent) {
@@ -16218,7 +16550,7 @@ fluid_1_2 = fluid_1_2 || {};
                          classes: that.options.styles.currentPage},                           
                     {type: "jQuery",
                         func: "attr", 
-                        args: ["aria-describedby", currentPageDescId] 
+                        args: ["aria-label", that.options.strings.currentPageIndexMsg] 
                     }
                 ]);
             }
@@ -16228,7 +16560,7 @@ fluid_1_2 = fluid_1_2 || {};
              
         function pageToComponent(current) {
             return function (page) {
-                return page === -1? {
+                return page === -1 ? {
                     ID: "page-link:skip"
                 } : assembleComponent(page, page === current);
             };
@@ -16270,10 +16602,7 @@ fluid_1_2 = fluid_1_2 || {};
                 root: ".flc-pager-links"
             },
             linkBody: "a",
-            pageStrategy: fluid.pager.everyPageStrategy,
-            markup: {
-                currentPageDescription: "<div></div>"
-            }
+            pageStrategy: fluid.pager.everyPageStrategy
         }
     );
     
@@ -16335,7 +16664,6 @@ fluid_1_2 = fluid_1_2 || {};
         
         styles: {
             currentPage: "fl-pager-currentPage",
-            currentPageDesc: "fl-offScreen-hidden",
             disabled: "fl-pager-disabled"
         },
         
@@ -16356,7 +16684,7 @@ fluid_1_2 = fluid_1_2 || {};
     };
     
     function getRoots(target, overallThat, index) {
-        var cellRoot = (overallThat.options.dataOffset? overallThat.options.dataOffset + ".": "");
+        var cellRoot = (overallThat.options.dataOffset ? overallThat.options.dataOffset + ".": "");
         target.shortRoot = index;
         target.longRoot = cellRoot + target.shortRoot;
     }
@@ -16374,7 +16702,7 @@ fluid_1_2 = fluid_1_2 || {};
         getRoots(roots, that, index);
 
         var path = expandPath(valuebinding, roots.shortRoot, roots.longRoot);
-        return fluid.model.getBeanValue(dataModel, path);
+        return fluid.get(dataModel, path);
     };
     
     fluid.pager.basicSorter = function (overallThat, model) {        
@@ -16392,10 +16720,12 @@ fluid_1_2 = fluid_1_2 || {};
         function sortfunc(arec, brec) {
             var a = arec.value;
             var b = brec.value;
-            return a === b? 0 : (a > b? model.sortDir : -model.sortDir); 
+            return a === b ? 0 : (a > b ? model.sortDir : -model.sortDir); 
         }
         sortrecs.sort(sortfunc);
-        return fluid.transform(sortrecs, function (row) {return row.index; });
+        return fluid.transform(sortrecs, function (row) {
+            return row.index;
+        });
     };
 
     
@@ -16403,7 +16733,7 @@ fluid_1_2 = fluid_1_2 || {};
         var togo = [];
         var limit = fluid.pager.computePageLimit(pagerModel);
         for (var i = pagerModel.pageIndex * pagerModel.pageSize; i < limit; ++ i) {
-            var index = perm? perm[i]: i;
+            var index = perm ? perm[i]: i;
             togo[togo.length] = {index: index, row: model[index]};
         }
         return togo;
@@ -16429,7 +16759,7 @@ fluid_1_2 = fluid_1_2 || {};
                     EL = expandPath(EL, opts.shortRoot, opts.longRoot);
                 }
 
-                var val = fluid.model.getBeanValue(opts.dataModel, EL);
+                var val = fluid.get(opts.dataModel, EL);
                 togo += val;
                 index = endi + 1;
             }
@@ -16452,13 +16782,15 @@ fluid_1_2 = fluid_1_2 || {};
                 target[i] = expandPath(tree[i], opts);
             }
             else if (typeof(val) === 'object') {
-                target[i] = val.length !== undefined? [] : {};
+                target[i] = val.length !== undefined ? [] : {};
                 expandPaths(target[i], val, opts);
             }
             else if (typeof(val) === 'string') {
                 target[i] = expandVariables(val, opts);
             }
-            else {target[i] = tree[i]; }
+            else {
+                target[i] = tree[i];
+            }
         }
         return target;
     }
@@ -16476,7 +16808,7 @@ fluid_1_2 = fluid_1_2 || {};
             var segs = fluid.model.parseEL(EL);
             key = segs[segs.length - 1];
         }
-        var ID = (options.keyPrefix? options.keyPrefix : "") + key;
+        var ID = (options.keyPrefix ? options.keyPrefix : "") + key;
         return ID;
     }
    
@@ -16504,7 +16836,7 @@ fluid_1_2 = fluid_1_2 || {};
     }
    
     function fetchModel(overallThat) {
-        return fluid.model.getBeanValue(overallThat.options.dataModel, 
+        return fluid.get(overallThat.options.dataModel, 
             overallThat.options.dataOffset);
     }
    
@@ -16512,10 +16844,13 @@ fluid_1_2 = fluid_1_2 || {};
     function bigHeaderForKey(key, opts) {
         var id = opts.options.renderOptions.idMap["header:" + key];
         var smallHeader = fluid.jById(id);
-        if (smallHeader.length === 0) {return null; }
+        if (smallHeader.length === 0) {
+            return null;
+        }
         var headerSortStylisticOffset = opts.overallOptions.selectors.headerSortStylisticOffset;
         var bigHeader = fluid.findAncestor(smallHeader, function (element) {
-            return $(element).is(headerSortStylisticOffset); });
+            return $(element).is(headerSortStylisticOffset); 
+        });
         return bigHeader;
     }
    
@@ -16524,16 +16859,16 @@ fluid_1_2 = fluid_1_2 || {};
         element.removeClass(styles.ascendingHeader);
         element.removeClass(styles.descendingHeader);
         if (sort !== 0) {
-            element.addClass(sort === 1? styles.ascendingHeader : styles.descendingHeader);
+            element.addClass(sort === 1 ? styles.ascendingHeader : styles.descendingHeader);
             //aria-sort property are specified in the w3 WAI spec, ascending, descending, none, other.
             //since pager currently uses ascending and descending, we do not support the others.
             //http://www.w3.org/WAI/PF/aria/states_and_properties#aria-sort
-            element.attr('aria-sort', sort === 1? 'ascending' : 'descending'); 
+            element.attr('aria-sort', sort === 1 ? 'ascending' : 'descending'); 
         }
     }
     
     function isCurrentColumnSortable(columnDefs, model) {
-        var columnDef = model.sortKey? fluid.pager.findColumnDef(columnDefs, model.sortKey) : null;
+        var columnDef = model.sortKey ? fluid.pager.findColumnDef(columnDefs, model.sortKey) : null;
         return columnDef ? columnDef.sortable : false;
     }
     
@@ -16555,9 +16890,9 @@ fluid_1_2 = fluid_1_2 || {};
             that.permutation = sorted;
             that.events.onModelChange.fire(newModel, that.model, that);
             fluid.model.copyModel(that.model, newModel);
-        }            
+        }
     }
- 
+
     function generateColumnClick(overallThat, columnDef, opts) {
         return function () {
             if (columnDef.sortable === true) {
@@ -16576,7 +16911,9 @@ fluid_1_2 = fluid_1_2 || {};
                 else if (newModel.sortKey === columnDef.key) {
                     newModel.sortDir = -1 * newModel.sortDir;
                 }
-                else {return false; }
+                else {
+                    return false;
+                }
                 newModel.pageIndex = 0;
                 fireModelChange(overallThat, newModel, true);
                 setModelSortHeaderClass(newModel, opts);                
@@ -16586,19 +16923,28 @@ fluid_1_2 = fluid_1_2 || {};
     }
    
     function fetchHeaderDecorators(decorators, columnDef) {
-        return decorators[columnDef.sortable? "sortableHeader" : "unsortableHeader"];
+        return decorators[columnDef.sortable ? "sortableHeader" : "unsortableHeader"];
     }
    
     function generateHeader(overallThat, newModel, columnDefs, opts) {
+        var sortableColumnTxt = opts.options.strings.sortableColumnText;
+        if (newModel.sortDir === 1) {
+            sortableColumnTxt = opts.options.strings.sortableColumnTextAsc;
+        } else if (newModel.sortDir === -1) {
+            sortableColumnTxt = opts.options.strings.sortableColumnTextDesc;
+        }
+
         return {
             children:  
                 fluid.transform(columnDefs, function (columnDef) {
                 return {
                     ID: iDforColumn(columnDef, opts),
                     value: columnDef.label,
-                    decorators: [
+                    decorators: [ 
                         {"jQuery": ["click", generateColumnClick(overallThat, columnDef, opts)]},
-                        {identify: "header:" + columnDef.key}].concat(fetchHeaderDecorators(opts.overallOptions.decorators, columnDef))
+                        {identify: "header:" + columnDef.key},
+                        {type: "attrs", attributes: { title: (columnDef.key === newModel.sortKey) ? sortableColumnTxt : opts.options.strings.sortableColumnText}}
+                    ].concat(fetchHeaderDecorators(opts.overallOptions.decorators, columnDef))
                 };
             }
        )};
@@ -16662,6 +17008,13 @@ fluid_1_2 = fluid_1_2 || {};
         keyPrefix: "",
         row: "row:",
         header: "header:",
+        
+        strings: {
+            sortableColumnText: "Select to sort",
+            sortableColumnTextDesc: "Select to sort in ascending, currently in descending order.",
+            sortableColumnTextAsc: "Select to sort in descending, currently in ascending order."
+        },
+
         // Options passed upstream to the renderer
         renderOptions: {}
     });
@@ -16672,7 +17025,7 @@ fluid_1_2 = fluid_1_2 || {};
             "aria-atomic": "false",
             "aria-live": "assertive",
             "role": "status"
-        })     
+        });
     };
 
     fluid.pager.summary = function (dom, options) {
@@ -16728,7 +17081,7 @@ fluid_1_2 = fluid_1_2 || {};
             var columnDef = fluid.pager.findColumnDef(columnDefs, column);
             
             function fetchValue(index) {
-                index = that.permutation? that.permutation[index] : index;
+                index = that.permutation ? that.permutation[index] : index;
                 return fluid.pager.fetchValue(that, dataModel, index, columnDef.valuebinding, roots);
             }
             var tModel = {};
@@ -16743,7 +17096,7 @@ fluid_1_2 = fluid_1_2 || {};
                     var iValue = fetchValue(start);
                     var lValue = fetchValue(limit - 1);
                     
-                    var tooltipOpts = fluid.copy(that.options.tooltipOptions);
+                    var tooltipOpts = fluid.copy(that.options.tooltip.options) || {};
                     
                     if (!tooltipOpts.content) {
                         tooltipOpts.content = function () { 
@@ -16757,9 +17110,9 @@ fluid_1_2 = fluid_1_2 || {};
                     if (!cell.current) {
                         var decorators = [
                             {
-                                type: "jQuery",
-                                func: "tooltip",
-                                args: tooltipOpts
+                                type: "fluid",
+                                func: that.options.tooltip.type,
+                                options: tooltipOpts
                             },
                             {
                                 identify: page
@@ -16778,13 +17131,7 @@ fluid_1_2 = fluid_1_2 || {};
     
     fluid.pagerImpl = function (container, options) {
         var that = fluid.initView("fluid.pager", container, options);
-        
-        var pageIndexConformer = function (model, changeRequest) {
-            if (changeRequest.value < 0) {
-                changeRequest.value = 0;
-            }
-        };
-        
+                
         that.container.attr("role", "application");
         
         that.events.initiatePageChange.addListener(
@@ -16847,7 +17194,7 @@ fluid_1_2 = fluid_1_2 || {};
         }
         that.applier = fluid.makeChangeApplier(that.model);
 
-        that.events.initiatePageChange.fire({pageIndex: that.model.pageIndex? that.model.pageIndex: 0, 
+        that.events.initiatePageChange.fire({pageIndex: that.model.pageIndex ? that.model.pageIndex: 0, 
            forceUpdate: true});
 
         return that;
@@ -16862,7 +17209,7 @@ fluid_1_2 = fluid_1_2 || {};
             options: null},
         
         summary: {type: "fluid.pager.summary", options: {
-            message: "Viewing page %currentPage. Showing records %first - %last of %total items"
+            message: "Viewing page %currentPage. Showing records %first - %last of %total items." 
         }},
         
         pageSize: {
@@ -16892,19 +17239,8 @@ fluid_1_2 = fluid_1_2 || {};
         
         annotateColumnRange: undefined,
         
-        tooltipOptions: {
-            position: {
-                my: "left top",
-                at: "left bottom",
-                offset: "0 5"
-            },
-            items: "*",
-            open: function(event) {
-                $(event.target).tooltip("widget").stop(false, true).show();
-            },
-            close: function(event) {
-                $(event.target).tooltip("widget").stop(false, true).hide();
-            }
+        tooltip: {
+            type: "fluid.tooltip"
         },
         
         rangeAnnotator: {
@@ -16944,7 +17280,7 @@ fluid_1_2 = fluid_1_2 || {};
             rangeAnnotation: "<b> %first </b><br/>&mdash;<br/><b> %last </b>"
         }
     });
-})(jQuery, fluid_1_2);
+})(jQuery, fluid_1_3);
 /*
  * jQuery UI Draggable 1.8
  *

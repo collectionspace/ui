@@ -1,6 +1,6 @@
 This is a custom build of Fluid Infusion 1.2.x including: json, fss, framework, renderer, inlineEdit, pager and jQueryUIWidgets.
 
-It was built from revision r10350 of the Infusion trunk, at
+It was built from revision r10457 of the Infusion trunk, at
     http://source.fluidproject.org/svn/fluid/infusion/trunk/
 
 using the following command:

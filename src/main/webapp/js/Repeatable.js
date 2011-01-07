@@ -311,8 +311,8 @@ cspace = cspace || {};
             model: "preserve",
             applier: "preserve"
         },
-        applier: "{applier}",      // Applier for the main record that cspace.repeatable belongs to. REQUIRED
-        model: "{model}",        // Model for the main record that cspace.repeatable belongs to. REQUIRED
+        applier: "{parent}.options.applier",      // Applier for the main record that cspace.repeatable belongs to. REQUIRED
+        model: "{parent}.model",        // Model for the main record that cspace.repeatable belongs to. REQUIRED
         elPath: "items",    // Path into the model that points to the collection of fields to be repeated - it should reference an array.
         protoTree: {},      // A dehydrated tree that will be expanded by the expander and rendered in the component's refreshView.
         renderOptions: {

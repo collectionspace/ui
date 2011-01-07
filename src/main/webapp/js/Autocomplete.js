@@ -168,7 +168,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     cspace.autocomplete.testAuthoritiesDataSource = cspace.URLDataSource;
    
     fluid.demands("cspace.autocomplete.authoritiesDataSource",  ["cspace.localData", "cspace.autocomplete"],
-        {funcName: "cspace.autocomplete.testAuthoritiesDataSource"});
+        {funcName: "cspace.autocomplete.testAuthoritiesDataSource",
+         args: {}});
 
 
     cspace.autocomplete.testMatchesParser = function (data, directModel) {
@@ -192,10 +193,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     cspace.autocomplete.testMatchesDataSource = cspace.URLDataSource;
         
     fluid.demands("cspace.autocomplete.matchesDataSource", ["cspace.localData", "cspace.autocomplete"],
-        {funcName: "cspace.autocomplete.testMatchesDataSource"});
+        {funcName: "cspace.autocomplete.testMatchesDataSource",
+         args: {}});
     
     fluid.demands("cspace.autocomplete.newTermDataSource",  ["cspace.localData", "cspace.autocomplete"],
-        {funcName: "cspace.autocomplete.testNewTermDataSource"});
+        {funcName: "cspace.autocomplete.testNewTermDataSource",
+         args: {}});
     
     cspace.autocomplete.testNewTermDataSource = function (options) {
         return {
@@ -286,7 +289,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var that = fluid.initRendererComponent("cspace.autocomplete.popup", container, options);
         that.events = that.options.events;
         var input = fluid.unwrap(that.options.inputField);
-        var union = $(container).add(input);
+        that.union = $(container).add(input);
         
         var decodeItem = function (item) { // TODO: make a generic utility for this (integrate with ViewParameters for URLs)
             var togo = {
@@ -320,21 +323,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             that.selectable.selectablesUpdated();
             var container = that.container;
             container.show();
-            
             container.dialog("open");
+// NB: on IE8, the above creates a cyclically linked DOM structure! The following
+// or variant may help with styling issues            
+//            container.appendTo(document.body);
             container.position({
                 my: "left top",
                 at: "left bottom",
                 of: that.options.inputField,
                 collision: "none"
             });
-            cspace.util.globalDismissal(union, function () {
-                that.close();
-            });
         };
         
         that.close = function () {
-            cspace.util.globalDismissal(union);
             that.container.dialog("close");
             that.container.html("");
         };
@@ -343,6 +344,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             that.close();
             that.options.inputField.focus();
         };
+        
+        that.blurHandler = fluid.deadMansBlur(that.union, {
+                exclusions: {union: that.union}, 
+                    handler: function () {
+                    that.events.revertState.fire();
+                }
+        });
 
         function makeHighlighter(funcName) {
             return function (item) {
@@ -352,8 +360,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             };
         }
+        that.selectableContainer = that.container.parent();
         // TODO: sloppy use of "parent" here is necessary to prevent removal of tabindex order
-        that.selectable = fluid.selectable(that.container.parent(), {
+        that.selectable = fluid.selectable(that.selectableContainer, {
             selectableElements: that.options.inputField,
             noBubbleListeners: true,
             onSelect: makeHighlighter("addClass"),
@@ -369,7 +378,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // We trigger only on KEYUP since at least Firefox has a totally unpreventable
         // default effect in between keypress and keyup of returning the field to its
         // old value.
-        union.keyup(that.escapeHandler); 
+        that.union.keyup(that.escapeHandler);
         
         that.events.selectAuthority.addListener(that.closeWithFocus);
         that.events.selectMatch.addListener(that.closeWithFocus);
@@ -542,15 +551,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             return false;
         });
         
-        fluid.deadMansBlur(that.autocompleteInput, {
-            exclusions: {popup: that.popup.container}, 
-            handler: function () {
-                updateAuthoritatively(that, that.model.baseRecord);
-                buttonAdjustor();
-                that.popup.close();
-            }
-        });
-
         return that;
     };
     
@@ -601,7 +601,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         },
         strings: {
-            noMatches:    "- No matches -",
+            noMatches:   "- No matches -",
             addTermTo:   "Add \"%term\" to:",
             closeButton: "Cancel edit, and return this field to the most recent authority value"
         },

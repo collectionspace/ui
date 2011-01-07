@@ -183,9 +183,7 @@ cspace = cspace || {};
         that.refreshView = function () {
             fluid.log("RecordEditor.js before render");
             fluid.withEnvironment({
-                applier: that.options.applier,
-                model: that.model,
-                dataContext: that.options.dataContext
+                parent: that
             }, function () {
                 that.renderer.refreshView();
             });

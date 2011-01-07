@@ -197,20 +197,22 @@ cspace = cspace || {};
     };
     
     cspace.tabs.provideAuthorityTabsList = function (container, options) {
-        fluid.merge(null, options, {
-            strings: {
-                primary: "Current record"
-            },
-            model: {
-                tabs: {
-                    primary: {
-                        href: "#primaryTab"
-                    }
+        var that = fluid.initLittleComponent("cspace.tabs.provideAuthorityTabsList", options);
+        return cspace.tabsList(container, that.options);
+    };
+    
+    fluid.defaults("cspace.tabs.provideAuthorityTabsList", {
+        strings: {
+            primary: "Current record"
+        },
+        model: {
+            tabs: {
+                primary: {
+                    href: "#primaryTab"
                 }
             }
-        });
-        return cspace.tabsList(container, options);
-    };
+        }
+    });
     
     fluid.demands("tabsList", ["cspace.tabs", "cspace.person"], {
         funcName: "cspace.tabs.provideAuthorityTabsList",

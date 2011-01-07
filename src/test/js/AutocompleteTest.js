@@ -143,22 +143,26 @@ fluid.demands("cspace.specBuilderImpl", "cspace.test", {
         popup.dom.locate("authorityItem").eq(0).click();        
     }
     
-    var dmbInteraction = function (container, focusFunc, popupOpen, inputFocus, originalValue) {
+    var gdInteraction = function (container, focusFunc, popupOpen, inputFocus, originalValue) {
         expect(6);
         var autocomplete = cspace.autocomplete(container);
         var input = autocomplete.autocompleteInput;
         autocomplete.autocomplete.events.onSearchDone.addListener(function() {
             assertPopupOpen(autocomplete, true);
             assertInputFocused(autocomplete, true);
-            focusFunc(autocomplete);
-            // NOTE: Waiting for 150ms that are equivalent to the timeout insidet the dead man's blur, 
-            // in order to verify that the handler fired or was prevented with exclusion. 
-            setTimeout(function () {
-                assertPopupOpen(autocomplete, popupOpen);
-                assertInputFocused(autocomplete, inputFocus);
-                assertInput(autocomplete, originalValue);
-                jqUnit.assertEquals("Model is consistent", autocomplete.model.term, originalValue);
-                start();
+            // this OUTER wait is necessary between operation of the input field and applying a blur in order
+            // to evade the "proleptic blur" functionality required to evade out-of-order event sequencing on IE 
+            setTimeout(function() {
+                focusFunc(autocomplete);
+                // NOTE: Waiting for 200ms that are equivalent to the timeout insidet the dead man's blur, 
+                // in order to verify that the handler fired or was prevented with exclusion. 
+                setTimeout(function () {
+                    assertPopupOpen(autocomplete, popupOpen);
+                    assertInputFocused(autocomplete, inputFocus);
+                    assertInput(autocomplete, originalValue);
+                    jqUnit.assertEquals("Model is consistent", autocomplete.model.term, originalValue);
+                    start();
+                }, 200);
             }, 150);
         });
         input.keydown();
@@ -167,20 +171,20 @@ fluid.demands("cspace.specBuilderImpl", "cspace.test", {
         stop();
     };
     
-    var dmbInteractionClick = function (container, focusFunc) {
-        dmbInteraction(container, focusFunc, false, true, "karen");
+    var gdInteractionClick = function (container, focusFunc) {
+        gdInteraction(container, focusFunc, false, true, "karen");
     };
     
-    var dmbInteractionBlur = function (container, focusFunc) {
-        dmbInteraction(container, focusFunc, false, false, "");
+    var gdInteractionBlur = function (container, focusFunc) {
+        gdInteraction(container, focusFunc, false, false, "");
     };
     
-    var dmbInteractionExclude = function (container, focusFunc) {
-        dmbInteraction(container, focusFunc, true, false, "karen");
+    var gdInteractionExclude = function (container, focusFunc) {
+        gdInteraction(container, focusFunc, true, false, "karen");
     };
     
-    submitTest("Test DMB interaction when click", makeArgumentedTest(dmbInteractionClick, clickAuthority));
-    submitTest("Test DMB interaction when blur should fire", makeArgumentedTest(dmbInteractionBlur, focusBlurable));
-    submitTest("Test DMB interaction with exclusion", makeArgumentedTest(dmbInteractionExclude, focusMatch));
+    submitTest("Test Global Dismissal interaction when click", makeArgumentedTest(gdInteractionClick, clickAuthority));
+    submitTest("Test Global Dismissal interaction when blur should fire", makeArgumentedTest(gdInteractionBlur, focusBlurable));
+    submitTest("Test Global Dismissal interaction with exclusion", makeArgumentedTest(gdInteractionExclude, focusMatch));
     
 })(jQuery);
