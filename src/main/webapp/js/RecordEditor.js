@@ -234,6 +234,7 @@ cspace = cspace || {};
             that.confirmation.confirmationDialog.events.onClose.addListener(function (userAction) {
                 if (userAction === "act") {
                     that.options.dataContext.remove(that.model.csid);
+                    that.unsavedChanges = false;
                 }
             });
         };
