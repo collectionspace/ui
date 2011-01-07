@@ -173,19 +173,8 @@ cspace = cspace || {};
     cspace.numberPatternChooser = function (container, options) {
         var that = fluid.initView("cspace.numberPatternChooser", container, options);
         that.model = that.options.model;
-        
-        that.refreshView = function () {            
-        };
-        
         setupChooser(that);
         return that;
-    };
-
-    // TODO: This makes *obvious*  assumptions about the nature of the parentComponent!
-    cspace.numberPatternChooser.extendDecoratorOptions = function (options, parentComponent) {
-        $.extend(true, options, {
-            baseUrl: parentComponent.options.dataContext.options.baseUrl
-        });
     };
 
     fluid.defaults("cspace.numberPatternChooser", {
@@ -206,6 +195,7 @@ cspace = cspace || {};
         events: {
             afterRender: null
         },
-        templateUrl: "../html/NumberPatternChooser.html"
+        templateUrl: "../html/NumberPatternChooser.html",
+        baseUrl: "{dataContext}.options.baseUrl"
     });
 })(jQuery, fluid);

@@ -1,18 +1,5 @@
 {
     "sidebar": {
-        "relatedCataloging": {
-            ".csc-recordList-row:": {
-                "children": [
-                    {
-                        ".csc-related-summary": "${items.0.summary}",
-                        ".csc-related-number": {
-                            "linktext": "${items.0.number}",
-                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
-                        }
-                    }
-                ]
-            }
-        },
         "relatedProcedures": {
             ".csc-recordList-row:": {
                 "children": [
@@ -40,6 +27,19 @@
                     }
                 ]
             }
+        },
+        "relatedCataloging": {
+            ".csc-recordList-row:": {
+                "children": [
+                    {
+                        ".csc-related-summary": "${items.0.summary}",
+                        ".csc-related-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
+                        }
+                    }
+                ]
+            }
         }
     },
     "titleBar": {
@@ -56,7 +56,20 @@
                     "options": {
                         "elPath": "fields.historyNotes",
                         "protoTree": {
-                            ".csc-organizationAuthority-history": "${fields.historyNotes.0.historyNote}"
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-organizationAuthority-history": "${{row}.historyNote}"
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.historyNotes"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
                         }
                     }
                 }
@@ -70,18 +83,31 @@
                     "options": {
                         "elPath": "fields.subBodies",
                         "protoTree": {
-                            ".csc-organizationAuthority-subBodyName": {
-                                "valuebinding": "${fields.subBodies.0.subBody}",
-                                "decorators": [
-                                    {
-                                        "func": "cspace.autocomplete",
-                                        "type": "fluid",
-                                        "options": {
-                                            "queryUrl": "../../chain/vocabularies/organization/autocomplete/subBody",
-                                            "vocabUrl": "../../chain/vocabularies/organization/source-vocab/subBody"
-                                        }
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-organizationAuthority-subBodyName": {
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.autocomplete",
+                                                        "type": "fluid",
+                                                        "options": {
+                                                            "queryUrl": "../../chain/vocabularies/organization/autocomplete/subBody",
+                                                            "vocabUrl": "../../chain/vocabularies/organization/source-vocab/subBody"
+                                                        }
+                                                    }
+                                                ],
+                                                "value": "${{row}.subBody}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.subBodies"
                                     }
-                                ]
+                                },
+                                "type": "fluid.noexpand"
                             }
                         }
                     }
@@ -97,18 +123,31 @@
                     "options": {
                         "elPath": "fields.contactNames",
                         "protoTree": {
-                            ".csc-organizationAuthority-contactName": {
-                                "valuebinding": "${fields.contactNames.0.contactName}",
-                                "decorators": [
-                                    {
-                                        "func": "cspace.autocomplete",
-                                        "type": "fluid",
-                                        "options": {
-                                            "queryUrl": "../../chain/vocabularies/organization/autocomplete/contactName",
-                                            "vocabUrl": "../../chain/vocabularies/organization/source-vocab/contactName"
-                                        }
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-organizationAuthority-contactName": {
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.autocomplete",
+                                                        "type": "fluid",
+                                                        "options": {
+                                                            "queryUrl": "../../chain/vocabularies/organization/autocomplete/contactName",
+                                                            "vocabUrl": "../../chain/vocabularies/organization/source-vocab/contactName"
+                                                        }
+                                                    }
+                                                ],
+                                                "value": "${{row}.contactName}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.contactNames"
                                     }
-                                ]
+                                },
+                                "type": "fluid.noexpand"
                             }
                         }
                     }
@@ -133,9 +172,22 @@
                     "options": {
                         "elPath": "fields.mainBodyGroup",
                         "protoTree": {
-                            ".csc-organizationAuthority-nameAdditions": "${fields.mainBodyGroup.0.nameAdditions}",
-                            ".csc-organizationAuthority-longName": "${fields.mainBodyGroup.0.longName}",
-                            ".csc-organizationAuthority-shortName": "${fields.mainBodyGroup.0.shortName}"
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-organizationAuthority-nameAdditions": "${{row}.nameAdditions}",
+                                            ".csc-organizationAuthority-longName": "${{row}.longName}",
+                                            ".csc-organizationAuthority-shortName": "${{row}.shortName}"
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.mainBodyGroup"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
                         }
                     }
                 }
@@ -158,7 +210,20 @@
                     "options": {
                         "elPath": "fields.groups",
                         "protoTree": {
-                            ".csc-organizationAuthority-group": "${fields.groups.0.group}"
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-organizationAuthority-group": "${{row}.group}"
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.groups"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
                         }
                     }
                 }
@@ -188,7 +253,20 @@
                     "options": {
                         "elPath": "fields.functions",
                         "protoTree": {
-                            ".csc-organizationAuthority-function": "${fields.functions.0.function}"
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-organizationAuthority-function": "${{row}.function}"
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.functions"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
                         }
                     }
                 }

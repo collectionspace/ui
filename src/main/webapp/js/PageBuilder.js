@@ -283,6 +283,9 @@ cspace = cspace || {};
             },
             globalBundle: {
                 type: "cspace.globalBundle"
+            },
+            globalEvents: {
+                type: "cspace.globalEvents"
             }
         },
         schema: [

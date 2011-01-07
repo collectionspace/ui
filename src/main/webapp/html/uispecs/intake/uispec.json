@@ -1,18 +1,5 @@
 {
     "sidebar": {
-        "relatedCataloging": {
-            ".csc-recordList-row:": {
-                "children": [
-                    {
-                        ".csc-related-summary": "${items.0.summary}",
-                        ".csc-related-number": {
-                            "linktext": "${items.0.number}",
-                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
-                        }
-                    }
-                ]
-            }
-        },
         "relatedProcedures": {
             ".csc-recordList-row:": {
                 "children": [
@@ -40,6 +27,19 @@
                     }
                 ]
             }
+        },
+        "relatedCataloging": {
+            ".csc-recordList-row:": {
+                "children": [
+                    {
+                        ".csc-related-summary": "${items.0.summary}",
+                        ".csc-related-number": {
+                            "linktext": "${items.0.number}",
+                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
+                        }
+                    }
+                ]
+            }
         }
     },
     "titleBar": {
@@ -49,7 +49,6 @@
     "recordEditor": {
         ".csc-intake-condition-check-date": "${fields.conditionCheckDate}",
         ".csc-intake-current-owner": {
-            "valuebinding": "${fields.currentOwner}",
             "decorators": [
                 {
                     "func": "cspace.autocomplete",
@@ -59,10 +58,10 @@
                         "vocabUrl": "../../chain/intake/source-vocab/currentOwner"
                     }
                 }
-            ]
+            ],
+            "value": "${fields.currentOwner}"
         },
         ".csc-intake-depositor": {
-            "valuebinding": "${fields.depositor}",
             "decorators": [
                 {
                     "func": "cspace.autocomplete",
@@ -72,7 +71,8 @@
                         "vocabUrl": "../../chain/intake/source-vocab/depositor"
                     }
                 }
-            ]
+            ],
+            "value": "${fields.depositor}"
         },
         ".csc-intake-conditionCheckerOrAssessor": {
             "decorators": [
@@ -82,18 +82,31 @@
                     "options": {
                         "elPath": "fields.conditionCheckersOrAssessors",
                         "protoTree": {
-                            ".csc-intake-conditionCheckerOrAssessor": {
-                                "valuebinding": "${fields.conditionCheckersOrAssessors.0.conditionCheckerOrAssessor}",
-                                "decorators": [
-                                    {
-                                        "func": "cspace.autocomplete",
-                                        "type": "fluid",
-                                        "options": {
-                                            "queryUrl": "../../chain/intake/autocomplete/conditionCheckerOrAssessor",
-                                            "vocabUrl": "../../chain/intake/source-vocab/conditionCheckerOrAssessor"
-                                        }
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-conditionCheckerOrAssessor": {
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.autocomplete",
+                                                        "type": "fluid",
+                                                        "options": {
+                                                            "queryUrl": "../../chain/intake/autocomplete/conditionCheckerOrAssessor",
+                                                            "vocabUrl": "../../chain/intake/source-vocab/conditionCheckerOrAssessor"
+                                                        }
+                                                    }
+                                                ],
+                                                "value": "${{row}.conditionCheckerOrAssessor}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.conditionCheckersOrAssessors"
                                     }
-                                ]
+                                },
+                                "type": "fluid.noexpand"
                             }
                         }
                     }
@@ -117,25 +130,38 @@
                     "options": {
                         "elPath": "fields.currentLocationGroup",
                         "protoTree": {
-                            ".csc-intake-current-location": "${fields.currentLocationGroup.0.currentLocation}",
-                            ".csc-intake-current-location-fitness": {
-                                "optionnames": [
-                                    "Please select a value",
-                                    "Suitable",
-                                    "Dangerous",
-                                    "Unsuitable",
-                                    "Reasonable"
-                                ],
-                                "optionlist": [
-                                    "",
-                                    "suitable",
-                                    "dangerous",
-                                    "unsuitable",
-                                    "reasonable"
-                                ],
-                                "selection": "${fields.currentLocationGroup.0.currentLocationFitness}"
-                            },
-                            ".csc-intake-current-location-note": "${fields.currentLocationGroup.0.currentLocationNote}"
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-current-location": "${{row}.currentLocation}",
+                                            ".csc-intake-current-location-fitness": {
+                                                "optionnames": [
+                                                    "Please select a value",
+                                                    "Unsuitable",
+                                                    "Dangerous",
+                                                    "Reasonable",
+                                                    "Suitable"
+                                                ],
+                                                "optionlist": [
+                                                    "",
+                                                    "unsuitable",
+                                                    "dangerous",
+                                                    "reasonable",
+                                                    "suitable"
+                                                ],
+                                                "selection": "${{row}.currentLocationFitness}"
+                                            },
+                                            ".csc-intake-current-location-note": "${{row}.currentLocationNote}"
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.currentLocationGroup"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
                         }
                     }
                 }
@@ -152,18 +178,31 @@
                     "options": {
                         "elPath": "fields.conditionCheckMethods",
                         "protoTree": {
-                            ".csc-intake-conditionCheckMethod": {
-                                "optionnames": [
-                                    "Please select a value",
-                                    "Observed",
-                                    "X-Rayed"
-                                ],
-                                "optionlist": [
-                                    "",
-                                    "observed",
-                                    "xrayed"
-                                ],
-                                "selection": "${fields.conditionCheckMethods.0.conditionCheckMethod}"
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-conditionCheckMethod": {
+                                                "optionnames": [
+                                                    "Please select a value",
+                                                    "X-Rayed",
+                                                    "Observed"
+                                                ],
+                                                "optionlist": [
+                                                    "",
+                                                    "xrayed",
+                                                    "observed"
+                                                ],
+                                                "selection": "${{row}.conditionCheckMethod}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.conditionCheckMethods"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
                             }
                         }
                     }
@@ -179,24 +218,37 @@
                     "options": {
                         "elPath": "fields.conditionCheckReasons",
                         "protoTree": {
-                            ".csc-intake-conditionCheckReason": {
-                                "optionnames": [
-                                    "Please select a value",
-                                    "Conservation",
-                                    "Damaged in transit",
-                                    "Loan in",
-                                    "Consideration",
-                                    "Enquiry"
-                                ],
-                                "optionlist": [
-                                    "",
-                                    "conservation",
-                                    "damagedintransit",
-                                    "loanin",
-                                    "consideration",
-                                    "enquiry"
-                                ],
-                                "selection": "${fields.conditionCheckReasons.0.conditionCheckReason}"
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-conditionCheckReason": {
+                                                "optionnames": [
+                                                    "Please select a value",
+                                                    "Loan in",
+                                                    "Enquiry",
+                                                    "Conservation",
+                                                    "Consideration",
+                                                    "Damaged in transit"
+                                                ],
+                                                "optionlist": [
+                                                    "",
+                                                    "loanin",
+                                                    "enquiry",
+                                                    "conservation",
+                                                    "consideration",
+                                                    "damagedintransit"
+                                                ],
+                                                "selection": "${{row}.conditionCheckReason}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.conditionCheckReasons"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
                             }
                         }
                     }
@@ -238,7 +290,20 @@
                     "options": {
                         "elPath": "fields.fieldCollectionEventNames",
                         "protoTree": {
-                            ".csc-intake-field-collection-event-name": "${fields.fieldCollectionEventNames.0.fieldCollectionEventName}"
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-field-collection-event-name": "${{row}.fieldCollectionEventName}"
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.fieldCollectionEventNames"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
                         }
                     }
                 }
@@ -270,7 +335,7 @@
                             "list": [
                                 "intake",
                                 "study",
-                                "evaluations"
+                                "evaluation"
                             ],
                             "samples": [
                                 "IN2009.1",
@@ -286,7 +351,6 @@
             ]
         },
         ".csc-intake-valuer": {
-            "valuebinding": "${fields.valuer}",
             "decorators": [
                 {
                     "func": "cspace.autocomplete",
@@ -296,7 +360,8 @@
                         "vocabUrl": "../../chain/intake/source-vocab/valuer"
                     }
                 }
-            ]
+            ],
+            "value": "${fields.valuer}"
         },
         ".csc-intake-entry-date": "${fields.entryDate}",
         ".csc-intake-fieldCollectionDate-container": {
@@ -310,6 +375,7 @@
         ".csc-intake-insurance-renewal-date": "${fields.insuranceRenewalDate}",
         ".csc-intake-depositor-requirements": "${fields.depositorsRequirements}",
         ".csc-intake-entry-number": "${fields.entryNumber}",
+        ".csc-intake-tenantID": "${fields.tenantID}",
         ".csc-intake-entryMethod": {
             "decorators": [
                 {
@@ -318,20 +384,33 @@
                     "options": {
                         "elPath": "fields.entryMethods",
                         "protoTree": {
-                            ".csc-intake-entryMethod": {
-                                "optionnames": [
-                                    "Please select a value",
-                                    "Found on doorstep",
-                                    "In person",
-                                    "Post"
-                                ],
-                                "optionlist": [
-                                    "",
-                                    "foundondoorstep",
-                                    "inperson",
-                                    "post"
-                                ],
-                                "selection": "${fields.entryMethods.0.entryMethod}"
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-entryMethod": {
+                                                "optionnames": [
+                                                    "Please select a value",
+                                                    "In person",
+                                                    "Found on doorstep",
+                                                    "Post"
+                                                ],
+                                                "optionlist": [
+                                                    "",
+                                                    "inperson",
+                                                    "foundondoorstep",
+                                                    "post"
+                                                ],
+                                                "selection": "${{row}.entryMethod}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.entryMethods"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
                             }
                         }
                     }
@@ -347,42 +426,56 @@
                     "options": {
                         "elPath": "fields.fieldCollectionMethods",
                         "protoTree": {
-                            ".csc-intake-fieldCollectionMethod": {
-                                "optionnames": [
-                                    "Please select a value",
-                                    "salvaged",
-                                    "borehole",
-                                    "exchanged",
-                                    "purchased",
-                                    "shot",
-                                    "photographed",
-                                    "netted",
-                                    "commissioned",
-                                    "found dead",
-                                    "trapped",
-                                    "metal detector"
-                                ],
-                                "optionlist": [
-                                    "",
-                                    "salvaged",
-                                    "borehole",
-                                    "exchanged",
-                                    "purchased",
-                                    "shot",
-                                    "photographed",
-                                    "netted",
-                                    "commissioned",
-                                    "founddead",
-                                    "trapped",
-                                    "metaldetector"
-                                ],
-                                "selection": "${fields.fieldCollectionMethods.0.fieldCollectionMethod}"
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-fieldCollectionMethod": {
+                                                "optionnames": [
+                                                    "Please select a value",
+                                                    "purchased",
+                                                    "trapped",
+                                                    "commissioned",
+                                                    "netted",
+                                                    "salvaged",
+                                                    "borehole",
+                                                    "metal detector",
+                                                    "photographed",
+                                                    "found dead",
+                                                    "shot",
+                                                    "exchanged"
+                                                ],
+                                                "optionlist": [
+                                                    "",
+                                                    "purchased",
+                                                    "trapped",
+                                                    "commissioned",
+                                                    "netted",
+                                                    "salvaged",
+                                                    "borehole",
+                                                    "metaldetector",
+                                                    "photographed",
+                                                    "founddead",
+                                                    "shot",
+                                                    "exchanged"
+                                                ],
+                                                "selection": "${{row}.fieldCollectionMethod}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.fieldCollectionMethods"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
                             }
                         }
                     }
                 }
             ]
         },
+        ".csc-intake-createdAt": "${fields.createdAt}",
         ".csc-intake-fieldCollector": {
             "decorators": [
                 {
@@ -391,18 +484,31 @@
                     "options": {
                         "elPath": "fields.fieldCollectors",
                         "protoTree": {
-                            ".csc-intake-fieldCollector": {
-                                "valuebinding": "${fields.fieldCollectors.0.fieldCollector}",
-                                "decorators": [
-                                    {
-                                        "func": "cspace.autocomplete",
-                                        "type": "fluid",
-                                        "options": {
-                                            "queryUrl": "../../chain/intake/autocomplete/fieldCollector",
-                                            "vocabUrl": "../../chain/intake/source-vocab/fieldCollector"
-                                        }
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-fieldCollector": {
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.autocomplete",
+                                                        "type": "fluid",
+                                                        "options": {
+                                                            "queryUrl": "../../chain/intake/autocomplete/fieldCollector",
+                                                            "vocabUrl": "../../chain/intake/source-vocab/fieldCollector"
+                                                        }
+                                                    }
+                                                ],
+                                                "value": "${{row}.fieldCollector}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.fieldCollectors"
                                     }
-                                ]
+                                },
+                                "type": "fluid.noexpand"
                             }
                         }
                     }
@@ -411,6 +517,7 @@
         },
         ".csc-intake-normal-location": "${fields.normalLocation}",
         ".csc-intake-valuation-reference-number": "${fields.valuationReferenceNumber}",
+        ".csc-intake-updatedAt": "${fields.updatedAt}",
         ".csc-intake-insurer": {
             "decorators": [
                 {
@@ -419,18 +526,31 @@
                     "options": {
                         "elPath": "fields.insurers",
                         "protoTree": {
-                            ".csc-intake-insurer": {
-                                "valuebinding": "${fields.insurers.0.insurer}",
-                                "decorators": [
-                                    {
-                                        "func": "cspace.autocomplete",
-                                        "type": "fluid",
-                                        "options": {
-                                            "queryUrl": "../../chain/intake/autocomplete/insurer",
-                                            "vocabUrl": "../../chain/intake/source-vocab/insurer"
-                                        }
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-insurer": {
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.autocomplete",
+                                                        "type": "fluid",
+                                                        "options": {
+                                                            "queryUrl": "../../chain/intake/autocomplete/insurer",
+                                                            "vocabUrl": "../../chain/intake/source-vocab/insurer"
+                                                        }
+                                                    }
+                                                ],
+                                                "value": "${{row}.insurer}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.insurers"
                                     }
-                                ]
+                                },
+                                "type": "fluid.noexpand"
                             }
                         }
                     }
@@ -464,18 +584,31 @@
                     "options": {
                         "elPath": "fields.fieldCollectionSources",
                         "protoTree": {
-                            ".csc-intake-fieldCollectionSource": {
-                                "valuebinding": "${fields.fieldCollectionSources.0.fieldCollectionSource}",
-                                "decorators": [
-                                    {
-                                        "func": "cspace.autocomplete",
-                                        "type": "fluid",
-                                        "options": {
-                                            "queryUrl": "../../chain/intake/autocomplete/fieldCollectionSource",
-                                            "vocabUrl": "../../chain/intake/source-vocab/fieldCollectionSource"
-                                        }
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-fieldCollectionSource": {
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.autocomplete",
+                                                        "type": "fluid",
+                                                        "options": {
+                                                            "queryUrl": "../../chain/intake/autocomplete/fieldCollectionSource",
+                                                            "vocabUrl": "../../chain/intake/source-vocab/fieldCollectionSource"
+                                                        }
+                                                    }
+                                                ],
+                                                "value": "${{row}.fieldCollectionSource}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.fieldCollectionSources"
                                     }
-                                ]
+                                },
+                                "type": "fluid.noexpand"
                             }
                         }
                     }

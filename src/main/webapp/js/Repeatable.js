@@ -15,13 +15,6 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     fluid.log("Repeatable.js loaded");
-    
-    function getExpandedTree(that) {
-        // TODO: We are sitting on a tower of evil here - we cannot correct the signature here because of the
-        // possibility of extendDecoratorOptions. We are both a producer and a consumer of this problem.
-        var tree = fluid.invokeGlobalFunction(that.options.expander, [that.options.protoTree, that]);
-        return tree;
-    }
 
     // TODO: Account for an elPath into the model that points to undefined: not known whether it is a simple field or an object/row.
     //       We need to write a test for this but I think it is fixed now
@@ -135,7 +128,8 @@ cspace = cspace || {};
     }
     
     var renderPage = function (that, blankRowOnly) {
-        var tree = getExpandedTree(that);
+        var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}", model: that.model});
+        var tree = expander(that.options.protoTree);
         fluid.clear(that.options.renderOptions.fossils);
         if (that.template) {
             fluid.reRender(that.template, that.container, tree, that.options.renderOptions);
@@ -230,6 +224,7 @@ cspace = cspace || {};
         that.options.renderOptions.model = that.model;
         that.options.renderOptions.applier = that.applier;
         that.options.renderOptions.fossils = {};
+        that.options.renderOptions.cutpoints = that.options.renderOptions.cutpoints || cspace.renderUtils.cutpointsFromUISpec(that.options.protoTree);
         that.options.renderOptions.cutpoints.push({id: "repeat:", selector: that.options.selectors.repeat});
         // A "temporary container" for rendering additional rows. This is currently a more stable strategy than
         // using renderer template juggling to render partial templates.
@@ -282,29 +277,6 @@ cspace = cspace || {};
 
         addPrimaryAndDelete(that, node);        
     };
-
-    // TODO: This is a cspace specific function, we need to take it out to utilities for example.
-    // TODO: extendDecoratorOptions must be globally destroyed. The other use is in NumberPatternChooser
-    cspace.repeatable.extendDecoratorOptions = function (options, parentComponent) {
-        fluid.merge(null, options, {
-            renderOptions: {
-                cutpoints: cspace.renderUtils.cutpointsFromUISpec(options.protoTree)
-            }
-        });
-        options.applier = parentComponent.options.applier;
-        options.model = parentComponent.model;
-    };
-
-    cspace.repeatable.expander = function (preProtoTree, that) {
-        var rowSelector = "repeat:";
-        var protoTree = {};
-        protoTree[rowSelector] = {
-            children : [preProtoTree]
-        };
-        
-        // TODO: this depends on cspace utilities - once the functionality is in infusion remove the dependency
-        return cspace.renderUtils.expander(protoTree, that);
-    };
     
     fluid.defaults("cspace.repeatable", {
         selectors: {
@@ -339,14 +311,12 @@ cspace = cspace || {};
             model: "preserve",
             applier: "preserve"
         },
-        applier: null,      // Applier for the main record that cspace.repeatable belongs to. REQUIRED
-        model: null,        // Model for the main record that cspace.repeatable belongs to. REQUIRED
+        applier: "{applier}",      // Applier for the main record that cspace.repeatable belongs to. REQUIRED
+        model: "{model}",        // Model for the main record that cspace.repeatable belongs to. REQUIRED
         elPath: "items",    // Path into the model that points to the collection of fields to be repeated - it should reference an array.
         protoTree: {},      // A dehydrated tree that will be expanded by the expander and rendered in the component's refreshView.
-        expander: "cspace.repeatable.expander",     // Expands the protoTree to take form of the componentTree comprehendable by the renderer.
-        renderOptions: {    // Render options that (including cutpoints) that will be passed to the renderer in the component's refreshView.
+        renderOptions: {
             autoBind: true
-           // debugMode: true
         },
         generateMarkup: "cspace.repeatable.generateMarkup"
     });
@@ -374,7 +344,5 @@ cspace = cspace || {};
         
         return cspace.repeatable(element.parent("div"), options);
     };
-
-    cspace.makeRepeatable.extendDecoratorOptions = cspace.repeatable.extendDecoratorOptions;
 
 })(jQuery, fluid);

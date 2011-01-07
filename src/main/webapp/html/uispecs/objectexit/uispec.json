@@ -48,7 +48,6 @@
     },
     "recordEditor": {
         ".csc-objectexit-currentOwner": {
-            "valuebinding": "${fields.currentOwner}",
             "decorators": [
                 {
                     "func": "cspace.autocomplete",
@@ -58,7 +57,8 @@
                         "vocabUrl": "../../chain/objectexit/source-vocab/currentOwner"
                     }
                 }
-            ]
+            ],
+            "value": "${fields.currentOwner}"
         },
         ".csc-objectexit-exitNote": "${fields.exitNote}",
         ".csc-objectexit-exitDate-container": {
@@ -72,7 +72,6 @@
         ".csc-objectexit-exitDate": "${fields.exitDate}",
         ".csc-objectexit-exitNumber": "${fields.exitNumber}",
         ".csc-objectexit-depositor": {
-            "valuebinding": "${fields.depositor}",
             "decorators": [
                 {
                     "func": "cspace.autocomplete",
@@ -82,7 +81,8 @@
                         "vocabUrl": "../../chain/objectexit/source-vocab/depositor"
                     }
                 }
-            ]
+            ],
+            "value": "${fields.depositor}"
         },
         ".csc-objectexit-exitReason": {
             "default": "0",
@@ -108,7 +108,7 @@
                     "options": {
                         "model": {
                             "names": [
-                                "objectexit"
+                                "Object Exit"
                             ],
                             "list": [
                                 "objectexit"
@@ -124,7 +124,6 @@
                 }
             ]
         },
-        ".csc-objectexit-packingNote": "${fields.packingNote}",
         ".csc-objectexit-exitMethods": {
             "decorators": [
                 {
@@ -133,26 +132,40 @@
                     "options": {
                         "elPath": "fields.exitMethods",
                         "protoTree": {
-                            ".csc-objectexit-exitMethods": {
-                                "default": "0",
-                                "optionnames": [
-                                    "Please select a value",
-                                    "Courier",
-                                    "In Person",
-                                    "Post"
-                                ],
-                                "optionlist": [
-                                    "",
-                                    "courier",
-                                    "inperson",
-                                    "post"
-                                ],
-                                "selection": "${fields.exitMethods.0.exitMethod}"
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-objectexit-exitMethods": {
+                                                "default": "0",
+                                                "optionnames": [
+                                                    "Please select a value",
+                                                    "Courier",
+                                                    "In Person",
+                                                    "Post"
+                                                ],
+                                                "optionlist": [
+                                                    "",
+                                                    "courier",
+                                                    "inperson",
+                                                    "post"
+                                                ],
+                                                "selection": "${{row}.exitMethod}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.exitMethods"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
                             }
                         }
                     }
                 }
             ]
-        }
+        },
+        ".csc-objectexit-packingNote": "${fields.packingNote}"
     }
 }

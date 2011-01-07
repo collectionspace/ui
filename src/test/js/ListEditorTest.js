@@ -14,6 +14,7 @@ var listEditorTester = function(){
     fluid.setLogging(true);
 
     var testUISpec = {};
+    var testData;
     $.ajax({
         async: false,
         url: "../../main/webapp/html/uispecs/users/uispec.json",
@@ -25,6 +26,14 @@ var listEditorTester = function(){
             fluid.log("Unable to load users uispec for testing");
         }
     });
+    
+    $.ajax({
+        async: false,
+        url: "../../main/webapp/html/data/users/records/list.json",
+        dataType: "json",
+        success: function (data) {testData = data.items;}
+    });
+        
     var baseTestOpts = {
         baseUrl: "../../main/webapp/html/data/",
         dataContext: {                    
@@ -39,26 +48,26 @@ var listEditorTester = function(){
     var bareListEditorTest = new jqUnit.TestCase("ListEditor Tests", function () {
         fluid.model.copyModel(testOpts, baseTestOpts);
         bareListEditorTest.fetchTemplate("../../main/webapp/html/administration.html", ".csc-users-userAdmin");
+    }, function () {
+        $(".ui-dialog").detach();
     });
     
     var listEditorTest = cspace.tests.testEnvironment({testCase: bareListEditorTest});
     
     listEditorTest.test("Initial setup (default strategy: fetch)", function () {
         var listEditor;
-        testOpts.list = {
-            options: {
-                listeners: {
-                    afterRender: function(){
-                        jqUnit.assertEquals("Model should have right number of entries", 4, listEditor.model.list.length);
-                        jqUnit.assertEquals("Model should contain expected entry", "Megan Forbes", listEditor.model.list[1].screenName);
-                        jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, $(".csc-recordList-row", "#main").length);
-                        jqUnit.notVisible("Details should be invisible initially", listEditor.options.selectors.details);
-                        jqUnit.notVisible("Add new row should be invisible initially", listEditor.options.selectors.newListRow);
-                        start();
-                    }
-                }
+        testOpts.listPopulationStrategy = cspace.listEditor.receiveStrategy;
+        testOpts.listeners = {
+            pageReady: function(){
+                jqUnit.assertEquals("Model should have right number of entries", 4, listEditor.model.list.length);
+                jqUnit.assertEquals("Model should contain expected entry", "Megan Forbes", listEditor.model.list[1].screenName);
+                jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, $(".csc-recordList-row", "#main").length);
+                jqUnit.notVisible("Details should be invisible initially", listEditor.options.selectors.details);
+                jqUnit.notVisible("Add new row should be invisible initially", listEditor.options.selectors.newListRow);
+                start();
             }
         };
+        testOpts.data = testData;
         listEditor = cspace.listEditor(".csc-users-userAdmin", "users/records/list.json", testUISpec, testOpts);
         stop();
     });
@@ -66,26 +75,17 @@ var listEditorTester = function(){
     listEditorTest.test("Initial setup (receive strategy)", function () {
         var listEditor;
         testOpts.listPopulationStrategy = cspace.listEditor.receiveStrategy;
-        $.ajax({
-            async: false,
-            url: "../../main/webapp/html/data/users/records/list.json",
-            dataType: "json",
-            success: function (data) {testOpts.data = data.items;}
-        });
-        testOpts.list = {
-            options: {
-                listeners: {
-                    afterRender: function(){
-                        jqUnit.assertEquals("Model should have right number of entries", 4, listEditor.model.list.length);
-                        jqUnit.assertEquals("Model should contain expected entry", "Megan Forbes", listEditor.model.list[1].screenName);
-                        jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, $(".csc-recordList-row", "#main").length);
-                        jqUnit.notVisible("Details should be invisible initially", listEditor.options.selectors.details);
-                        jqUnit.notVisible("New Entry row should be invisible initially", listEditor.options.selectors.newListRow);
-                        start();
-                    }
-                }
+        testOpts.listeners = {
+            pageReady: function(){
+                jqUnit.assertEquals("Model should have right number of entries", 4, listEditor.model.list.length);
+                jqUnit.assertEquals("Model should contain expected entry", "Megan Forbes", listEditor.model.list[1].screenName);
+                jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, $(".csc-recordList-row", "#main").length);
+                jqUnit.notVisible("Details should be invisible initially", listEditor.options.selectors.details);
+                jqUnit.notVisible("New Entry row should be invisible initially", listEditor.options.selectors.newListRow);
+                start();
             }
         };
+        testOpts.data = testData;
         listEditor = cspace.listEditor(".csc-users-userAdmin", "users/records/list.json", testUISpec, testOpts);
         stop();
     });
@@ -93,6 +93,7 @@ var listEditorTester = function(){
     listEditorTest.test("onSelect: details showing", function () {
         var listEditor;
         var detailsTester = function(){
+            listEditor.details.events.afterRender.removeListener("afterRender");
             jqUnit.isVisible("Details should be visible after activating an item in the list", listEditor.options.selectors.details);
             jqUnit.notVisible("New Entry row should be invisible initially", listEditor.options.selectors.newListRow);
             jqUnit.isVisible("We can see the details that should be visible on edit", listEditor.options.selectors.hideOnCreate);
@@ -102,8 +103,8 @@ var listEditorTester = function(){
         };
         testOpts.listeners = {
             pageReady: function () {
-                listEditor.details.events.afterRender.addListener(detailsTester);
-                $(".csc-recordList-row:eq(1)", "#main").click();
+                listEditor.details.events.afterRender.addListener(detailsTester, "afterRender");
+                listEditor.list.locate("row").eq(1).click();
             }
         };
         listEditor = cspace.listEditor(".csc-users-userAdmin", "users/records/list.json", testUISpec, testOpts);
@@ -144,7 +145,7 @@ var listEditorTester = function(){
         testOpts.listeners = {
             pageReady: function () {
                 listEditor.details.events.afterRender.addListener(detailsTester, "afterRenderHandler");
-                $(".csc-recordList-row:eq(1)", "#main").click();
+                listEditor.list.locate("row").eq(1).click();
             }
         };
         listEditor = cspace.listEditor(".csc-users-userAdmin", "users/records/list.json", testUISpec, testOpts);

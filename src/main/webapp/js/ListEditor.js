@@ -118,24 +118,12 @@ cspace = cspace || {};
             hideDetails(that.dom);
         };
         
-        $.extend(true, that.options.list.options, {
-            onSelectHandler: function (model, rows, events, styles, newIndex) {
-                if (that.details.unsavedChanges) {
-                    that.details.confirmation.open(function (confirmation) {
-                        return function () {
-                            confirmation.updateEventListeners("remove");                            
-                            confirmation.dlg.dialog("close");
-                            that.details.unsavedChanges = false;
-                            cspace.recordList.onSelectHandlerDefault(model, rows, events, styles, newIndex);
-                        };
-                    });
-                    return false;
-                }
-                else {
-                    cspace.recordList.onSelectHandlerDefault(model, rows, events, styles, newIndex);
-                }
-            }
-        });
+        that.options.list.options.onSelectHandler = function (model, rows, events, styles, newIndex) {
+            that.options.globalEvents.onPerformNavigation.fire(function () {
+                that.details.unsavedChanges = false;
+                cspace.recordList.onSelectHandlerDefault(model, rows, events, styles, newIndex);
+            });
+        };
 
         var initListFunction = function () {
             that.options.list.options.model = {
@@ -223,6 +211,7 @@ cspace = cspace || {};
                 deferRendering: true
             }
         },
+        globalEvents: "{globalEvents}",
         dataContext: {
             type: "cspace.dataContext",
             options: {

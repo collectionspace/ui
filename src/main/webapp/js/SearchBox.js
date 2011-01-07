@@ -38,11 +38,13 @@ cspace = cspace || {};
     // A public function that is called as searchBox's navigateToSearch method and redirects to
     // the search results page.
     cspace.searchBox.navigateToSearch = function (that) {
-        var url = fluid.stringTemplate(that.options.searchUrl, {
-            recordtype: that.locate("recordTypeSelect").val(),
-            keywords: that.locate("searchQuery").val() || ""
+        that.options.globalEvents.onPerformNavigation.fire(function () {
+            var url = fluid.stringTemplate(that.options.searchUrl, {
+                recordtype: that.locate("recordTypeSelect").val(),
+                keywords: that.locate("searchQuery").val() || ""
+            });
+            window.location = url;
         });
-        window.location = url;
     };
     
     // A public function that is called as searchBox's treeBuilder method and builds a component tree.
@@ -89,6 +91,7 @@ cspace = cspace || {};
             recordTypeSelectLabel: ""
         },
         parentBundle: "{globalBundle}",
+        globalEvents: "{globalEvents}",
         model: {},                  // A default data model object.
         produceTree: cspace.searchBox.produceTree, // direct method expected by interim impl of initRendererComponent
         components: {

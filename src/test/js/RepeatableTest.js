@@ -40,7 +40,15 @@ var repeatableTester = function ($) {
                 elPath: "myTexts",
                 applier: fluid.makeChangeApplier(model),
                 protoTree: {
-                    "myTextField": "${myTexts.0.myText}"
+                    expander: {
+                        repeatID: "repeat:",
+                        type: "fluid.renderer.repeat",
+                        pathAs: "row",
+                        controlledBy: "myTexts",
+                        tree: {
+                            "myTextField": "${{row}.myText}"
+                        }
+                    }
                 },
                 renderOptions: {
                     cutpoints: cutpoints
@@ -87,15 +95,15 @@ var repeatableTester = function ($) {
         var opts = {
             model : model,
             applier : fluid.makeChangeApplier(model),
-            renderOptions : {
-                cutpoints: cspace.renderUtils.cutpointsFromUISpec(briefDescUISpec.options.protoTree)
-            }
+            protoTree : briefDescUISpec.options.protoTree.expander.tree
         };
-
-        jQuery.extend(true, options, briefDescUISpec.options, opts); 
+        
+        fluid.merge({
+            protoTree: "replace"
+        }, briefDescUISpec.options, opts);
 
         repeatableTest.fetchTemplate("../../main/webapp/html/ObjectEntryTemplate.html", ".csc-object-identification-brief-description");
-        return cspace.makeRepeatable(".csc-object-identification-brief-description", options);
+        return cspace.makeRepeatable(".csc-object-identification-brief-description", briefDescUISpec.options);
     };
     
     var basicMarkupGenerateTest = function (repeatable, repeatEl, text) {
@@ -140,7 +148,7 @@ var repeatableTester = function ($) {
             cutpoints: [{
                 id: "myTextField",
                 selector: ".cst-tableTestField"
-            }], 
+            }],
             text: "circle"
         });
         var container = myRepeatable.container;
@@ -327,7 +335,15 @@ var repeatableTester = function ($) {
             model: model,
             applier: fluid.makeChangeApplier(model),
             protoTree: {
-                "myTextField": "${myTexts.0.myText}"
+                expander: {
+                    repeatID: "repeat:",
+                    type: "fluid.renderer.repeat",
+                    pathAs: "row",
+                    controlledBy: "myTexts",
+                    tree: {
+                        "myTextField": "${{row}.myText}"
+                    }
+                }
             },
             renderOptions: {
                 cutpoints: [{
@@ -513,7 +529,15 @@ var repeatableTester = function ($) {
             model: model,
             applier: fluid.makeChangeApplier(model),
             protoTree: {
-                "myTextField": "${myTexts.0.myText}"
+                expander: {
+                    repeatID: "repeat:",
+                    type: "fluid.renderer.repeat",
+                    pathAs: "row",
+                    controlledBy: "myTexts",
+                    tree: {
+                        "myTextField": "${{row}.myText}"
+                    }
+                }
             },
             renderOptions: {
                 cutpoints: [{
@@ -540,7 +564,15 @@ var repeatableTester = function ($) {
             model: model,
             applier: fluid.makeChangeApplier(model),
             protoTree: {
-                "myTextField": "${myTexts.0.myText}"
+                expander: {
+                    repeatID: "repeat:",
+                    type: "fluid.renderer.repeat",
+                    pathAs: "row",
+                    controlledBy: "myTexts",
+                    tree: {
+                        "myTextField": "${{row}.myText}"
+                    }
+                }
             },
             renderOptions: {
                 cutpoints: [{
@@ -563,7 +595,15 @@ var repeatableTester = function ($) {
             model: model,
             applier: fluid.makeChangeApplier(model),
             protoTree: {
-                "myTextField": "${myTexts.0.myText}"
+                expander: {
+                    repeatID: "repeat:",
+                    type: "fluid.renderer.repeat",
+                    pathAs: "row",
+                    controlledBy: "myTexts",
+                    tree: {
+                        "myTextField": "${{row}.myText}"
+                    }
+                }
             },
             renderOptions: {
                 cutpoints: [{

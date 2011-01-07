@@ -65,29 +65,52 @@ cspace = cspace || {};
         that.locate("save").removeAttr("disabled");
         that.events["after" + action + "ObjectDataSuccess"].fire(data, that.options.strings[message]);
     };
-
-    var confirmationTriggerMaker = function (exclusions, handler) {
-        return function () {
-            if (!$(this).is(exclusions)) {
-                return handler($(this).attr("href"));
-            }
-        };
+    
+    var processSaveConfiramtion = function (that, callback) {
+        if (that.unsavedChanges) {
+            that.confirmation.open("cspace.confirmation.saveDialog");
+            that.confirmation.confirmationDialog.events.onClose.addListener(function (userAction) {
+                if (userAction === "act") {
+                    that.options.dataContext.events.afterSave.addListener(function () {
+                        callback();
+                    });
+                    that.requestSave();
+                }
+                else if (userAction === "proceed") {
+                    callback();
+                }
+            });
+            return false;
+        }
+        else {
+            callback();
+        }
     };
 
     var bindEventHandlers = function (that) {
-        $(that.options.selectors.confirmationInclude).live("click", 
-            confirmationTriggerMaker(that.options.selectors.confirmationExclude, that.showConfirmation));
         
-        $(that.options.selectors.forms).submit(function (event) {
-            var form = $(this);
-            if (that.unsavedChanges) {
-                that.confirmation.open(function (confirmation) {
-                    return function () {
-                        form[0].submit();
-                    };
+        $(that.options.selectors.confirmationInclude).live("click", function () {
+            if (!that.unsavedChanges) {
+                return;
+            }
+            var target = $(this);
+            if (!target.is(that.options.selectors.confirmationExclude)) {
+                that.options.globalEvents.onPerformNavigation.fire(function () {
+                    window.location = target.attr("href");
                 });
                 return false;
             }
+        });
+                
+        $(that.options.selectors.forms).submit(function (event) {
+            if (!that.unsavedChanges) {
+                return;
+            }
+            var form = $(this);
+            that.options.globalEvents.onPerformNavigation.fire(function () {
+                form[0].submit();
+            });
+            return false;
         });
 
         that.events.onSave.addListener(validateIdentificationNumber(that.dom, that.container, that.options.strings.identificationNumberRequired));
@@ -126,6 +149,10 @@ cspace = cspace || {};
         });
 
         that.options.dataContext.events.onError.addListener(makeDCErrorHandler(that));
+        
+        that.options.globalEvents.onPerformNavigation.addListener(function (callback) {
+            return processSaveConfiramtion(that, callback);
+        });
     };
     
     var bindHandlers = function (that) {
@@ -145,51 +172,33 @@ cspace = cspace || {};
             that.refreshView();
         }
     };
-    
-    var renderPage = function (that) {
-        fluid.log("RecordEditor.js renderPage start");
-        var tree = cspace.renderUtils.expander(that.options.uispec, that);
-        var selectors = {};
-        cspace.renderUtils.buildSelectorsFromUISpec(that.options.uispec, selectors);
-        fluid.log("RecordEditor.js after building selectors");
-        var renderOpts = {
-            cutpoints: fluid.renderer.selectorsToCutpoints(selectors, {}),
-            model: that.model,
-            // debugMode: true,
-            autoBind: true,
-            applier: that.options.applier
-        };
-        fluid.log("RecordEditor.js before render");
-        if (that.template) {
-            fluid.reRender(that.template, that.container, tree, renderOpts);
-            fluid.log("RecordEditor.js after reRender");
-        }
-        else {
-            that.template = fluid.selfRender(that.container, tree, renderOpts);
-            fluid.log("RecordEditor.js after selfRender");
-        }
-        // TODO: This comparison against admin@collectionspace.org is a hack put in place for the 0.6
-        // release to prevent testers from deleting the test account. It should be removed asap
-        if (!that.model.csid || (that.model.fields.email === "admin@collectionspace.org")) {
-            that.locate("deleteButton").attr("disabled", "disabled").addClass("deactivate");
-        } else {
-            that.locate("deleteButton").removeAttr("disabled").removeClass("deactivate");
-        }
-        that.locate("messageContainer", "body").hide();
-        bindHandlers(that);
-        that.events.afterRender.fire(that);
-        fluid.log("RecordEditor.js renderPage end");
-    };
 
     /**
      * Object Entry component
      */
     cspace.recordEditor = function (container, options) {
-        var that = fluid.initView("cspace.recordEditor", container, options);
+        var that = fluid.initRendererComponent("cspace.recordEditor", container, options);
+        fluid.initDependents(that);
         
-        that.model = that.options.model;
         that.refreshView = function () {
-            renderPage(that);
+            fluid.log("RecordEditor.js before render");
+            fluid.withEnvironment({
+                applier: that.options.applier,
+                model: that.model,
+                dataContext: that.options.dataContext
+            }, function () {
+                that.renderer.refreshView();
+            });
+            if (!that.model.csid || (that.model.fields.email === "admin@collectionspace.org")) {
+                that.locate("deleteButton").attr("disabled", "disabled").addClass("deactivate");
+            } else {
+                that.locate("deleteButton").removeAttr("disabled").removeClass("deactivate");
+            }
+            that.unsavedChanges = false;
+            that.locate("messageContainer", "body").hide();
+            bindHandlers(that);
+            that.events.afterRender.fire(that);
+            fluid.log("RecordEditor.js renderPage end");
         };
         
         that.showSpecErrorMessage = function (msg) {
@@ -221,58 +230,12 @@ cspace = cspace || {};
         };
         
         that.remove = function () {
-            var oldOptions = {}; 
-            fluid.model.copyModel(oldOptions, that.confirmation.options);
-            var oldStrings = fluid.copy(that.confirmation.options.strings);
-            fluid.merge(null, that.confirmation.options, {
-                action: function () {
+            that.confirmation.open("cspace.confirmation.deleteDialog");
+            that.confirmation.confirmationDialog.events.onClose.addListener(function (userAction) {
+                if (userAction === "act") {
                     that.options.dataContext.remove(that.model.csid);
-                },
-                actionSuccessEvents: [that.options.dataContext.events.afterRemove, that.confirmation.events.afterClose],
-                enableButtons: ["act", "cancel"],
-                strings: {
-                    primaryMessage: "Delete this record?",
-                    secondaryMessage: "",
-                    actText: "Delete",
-                    actAlt: "delete record"
                 }
             });
-            that.confirmation.refreshView();
-            that.confirmation.open(function (confirmation) {
-                return function () {
-                    if (confirmation.dlg.dialog("isOpen")) {
-                        confirmation.close();                            
-                    }
-                    else {
-                      // TODO: Make sure this is refactored and no confirmation options are changed during the its lifetime.
-                      // This needs to be done in order to preserve the same reference to confirmations strings options so
-                      // the renderer could render the updated strings.
-                        var strings = confirmation.options.strings;
-                        fluid.model.copyModel(confirmation.options, oldOptions);
-                        confirmation.options.strings = strings;
-                        fluid.model.copyModel(confirmation.options.strings, oldStrings);
-                        confirmation.refreshView();
-                    }
-                };
-            });
-        };
-        
-        that.confirmation = fluid.initSubcomponent(that, "confirmation", [
-            that.container,
-            $.extend(true, {
-                action: that.requestSave,
-                actionSuccessEvents: [that.events.afterCreateObjectDataSuccess, that.events.afterUpdateObjectDataSuccess],
-                actionErrorEvents: [that.events.onError]
-            }, that.options.confirmation.options)
-        ]);
-        
-        that.showConfirmation = function (href) {
-            if (that.unsavedChanges) {
-                that.confirmation.open(cspace.confirmation.defaultSuccessHandlerCreator, {
-                    href: href
-                });
-                return false;
-            }
         };
 
         setupRecordEditor(that);
@@ -281,14 +244,28 @@ cspace = cspace || {};
         return that;
     };
     
+    cspace.recordEditor.produceTree = function (that) {
+        return that.options.uispec;
+    };
+    
+    cspace.recordEditor.cutpointGenerator = function (selectors, options) {
+        return cspace.renderUtils.cutpointsFromUISpec(options.uispec);
+    };
+    
     fluid.defaults("cspace.recordEditor", {
         mergePolicy: {
             model: "preserve",
-            applier: "preserve"
+            applier: "preserve",
+            "rendererFnOptions.uispec": "uispec",
+            "rendererOptions.applier": "applier"
         },
-        confirmation: {
-            type: "cspace.confirmation"
+        components: {
+            confirmation: {
+                type: "cspace.confirmation"
+            }
         },
+        globalEvents: "{globalEvents}",
+        produceTree: cspace.recordEditor.produceTree,
         events: {
             onSave: "preventable",
             onCancel: null,
@@ -307,11 +284,19 @@ cspace = cspace || {};
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
             timestamp: ".csc-timestamp",
-            relatedRecords: ".csc-related-records",
             requiredFields: ".csc-required:visible",
-            confirmationInclude: "a, .csc-searchBox-button",
+            confirmationInclude: "a",
             confirmationExclude: "[href*=#], .csc-confirmation-exclusion, .ui-autocomplete a",
             forms: ".csc-header-logout-form"
+        },
+        selectorsToIgnore: ["errorDialog", "errorMessage", "save", "cancel", "deleteButton", "messageContainer", 
+            "feedbackMessage", "timestamp", "requiredFields", "confirmationInclude", "confirmationExclude", "forms",
+            "identificationNumber"],
+        rendererFnOptions: {
+            cutpointGenerator: "cspace.recordEditor.cutpointGenerator",
+        },
+        rendererOptions: {
+            autoBind: true
         },
         strings: {
             specFetchError: "I'm sorry, an error has occurred fetching the UISpec: ",

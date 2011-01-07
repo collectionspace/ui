@@ -36,7 +36,6 @@
         ".csc-movement-plannedRemovalDate": "${fields.plannedRemovalDate}",
         ".csc-movement-currentLocation": "${fields.currentLocation}",
         ".csc-movement-movementContact": {
-            "valuebinding": "${fields.movementContact}",
             "decorators": [
                 {
                     "func": "cspace.autocomplete",
@@ -46,7 +45,8 @@
                         "vocabUrl": "../../chain/movement/source-vocab/movementContact"
                     }
                 }
-            ]
+            ],
+            "value": "${fields.movementContact}"
         },
         ".csc-movement-removalDate-container": {
             "decorators": [
@@ -58,13 +58,16 @@
         },
         ".csc-movement-locationDate": "${fields.locationDate}",
         ".csc-movement-currentLocationFitness": {
+            "default": "0",
             "optionnames": [
+                "Please select a value",
                 "Dangerous",
                 "Suitable",
                 "Temporary",
                 "Unsuitable"
             ],
             "optionlist": [
+                "",
                 "dangerous",
                 "suitable",
                 "temporary",
@@ -81,18 +84,34 @@
                     "options": {
                         "elPath": "fields.movementMethods",
                         "protoTree": {
-                            ".csc-movement-movementMethods": {
-                                "optionnames": [
-                                    "Forklift",
-                                    "Handcarried",
-                                    "Trolley"
-                                ],
-                                "optionlist": [
-                                    "forklift",
-                                    "handcarried",
-                                    "trolley"
-                                ],
-                                "selection": "${fields.movementMethods.0.movementMethod}"
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-movement-movementMethods": {
+                                                "default": "0",
+                                                "optionnames": [
+                                                    "Please select a value",
+                                                    "Forklift",
+                                                    "Handcarried",
+                                                    "Trolley"
+                                                ],
+                                                "optionlist": [
+                                                    "",
+                                                    "forklift",
+                                                    "handcarried",
+                                                    "trolley"
+                                                ],
+                                                "selection": "${{row}.movementMethod}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.movementMethods"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
                             }
                         }
                     }
@@ -110,7 +129,9 @@
         },
         ".csc-movement-movementReferenceNumber": "${fields.movementReferenceNumber}",
         ".csc-movement-reasonForMove": {
+            "default": "0",
             "optionnames": [
+                "Please select a value",
                 "Conservation",
                 "Exhibition",
                 "Inventory",
@@ -120,6 +141,7 @@
                 "Research"
             ],
             "optionlist": [
+                "",
                 "conservation",
                 "exhibition",
                 "inventory",

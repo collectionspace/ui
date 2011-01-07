@@ -133,6 +133,12 @@ fluid.registerNamespace("cspace.util");
         }
     });
     
+    cspace.globalEvents = function (options) {
+        var that = fluid.initLittleComponent("cspace.globalEvents", options);
+        that.onPerformNavigation = fluid.event.getEventFirer(undefined, true);
+        return that;
+    };
+    
     /** Resolution of the global message bundle(s) */
         
     cspace.globalBundle = function (options) {
@@ -774,7 +780,7 @@ fluid.registerNamespace("cspace.util");
             } 
             else if (val.selection) { 
                 newspec[key] = {
-                    valuebinding: val.selection,
+                    value: val.selection,
                     decorators: [{
                         func: "cspace.util.nameForValueFinder",
                         type: "fluid",
@@ -787,7 +793,7 @@ fluid.registerNamespace("cspace.util");
             }
             else if (isDecorator(val, "cspace.autocomplete")) {
                 newspec[key] = {
-                    valuebinding: val.valuebinding,
+                    value: val.value,
                     decorators: [{
                         func: "cspace.util.urnToStringFieldConverter",
                         type: "fluid"   
@@ -803,7 +809,20 @@ fluid.registerNamespace("cspace.util");
                         type: decorator.type,
                         options: {
                             elPath: opts.elPath,
-                            protoTree: resolveReadOnlyUISpecImpl(opts.protoTree)
+                            protoTree: {
+                                expander: {
+                                    tree: {
+                                        expander: {
+                                            repeatID: opts.protoTree.expander.tree.expander.repeatID,
+                                            tree: resolveReadOnlyUISpecImpl(opts.protoTree.expander.tree.expander.tree),
+                                            type: opts.protoTree.expander.tree.expander.type,
+                                            pathAs: opts.protoTree.expander.tree.expander.pathAs,
+                                            controlledBy: opts.protoTree.expander.tree.expander.controlledBy 
+                                        }
+                                    },
+                                    type: opts.protoTree.expander.type
+                                }
+                            }
                         }
                     }]
                 };

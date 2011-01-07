@@ -65,7 +65,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         start();
                     });
                     recordEditor.remove();
-                    recordEditor.confirmation.locate("act", recordEditor.confirmation.dlg).click();
+                    recordEditor.confirmation.confirmationDialog.locate("act").click();
                 }
             }
         };

@@ -2,288 +2,256 @@
     "items": [
         {
             "summary": "idgenerators",
-            "csid": "b96414eb-f4c0-43b8-9537-9e7daebe3b88",
+            "display": "none",
+            "csid": "7cfd49a3-fee5-42c1-b48a-4f9fffa5214f",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
             "summary": "id",
-            "csid": "dcae9eb6-58b5-4607-8250-f5e53bc02904",
+            "display": "none",
+            "csid": "87eedcd8-7c7d-4cd4-b008-e69dbe34b956",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
-            "summary": "collectionobjects",
-            "csid": "997fe75c-d1cc-49fb-bdde-526a64357319",
+            "summary": "cataloging",
+            "display": "show",
+            "csid": "443d603a-673b-4a19-88d0-12cf5ca4a3c3",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
-            "summary": "intakes",
-            "csid": "a3862038-1072-4453-a909-a59c9a5decaf",
+            "summary": "blobs",
+            "display": "none",
+            "csid": "d33aede4-fd7d-46c5-95ae-8f4fe46aed2a",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
-            "summary": "loansin",
-            "csid": "8e0533dd-522e-4c2c-bc76-5358e234c5a0",
+            "summary": "intake",
+            "display": "show",
+            "csid": "9cd46872-a73d-4301-afbd-324be989a79c",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
-            "summary": "loansout",
-            "csid": "3bebbd9d-1409-4b39-a1bb-3df6ec33d206",
+            "summary": "loanin",
+            "display": "show",
+            "csid": "7495aedb-d799-4b45-a713-e88d1d9e85ef",
+            "number": "CRUDL",
+            "recordtype": "permission"
+        },
+        {
+            "summary": "loanout",
+            "display": "show",
+            "csid": "b48bcf27-553d-4f81-9cb0-3da7445728da",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
             "summary": "objectexit",
-            "csid": "a96a1b15-326d-47b9-b0a4-eb4c7986e7f3",
+            "display": "show",
+            "csid": "f9bb1f79-b77c-4ebe-a9e6-3cffb7a73c42",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
-            "summary": "movements",
-            "csid": "395a02eb-26a1-4f06-a8b9-688cd600fe84",
+            "summary": "media",
+            "display": "none",
+            "csid": "f8298117-f773-4bd4-aa9a-b94ef80426b8",
+            "number": "CRUDL",
+            "recordtype": "permission"
+        },
+        {
+            "summary": "movement",
+            "display": "show",
+            "csid": "fe109f9a-693a-4dda-8850-c2a380507de7",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
             "summary": "reports",
-            "csid": "f8ba3058-77d7-497c-8423-93488aef45f3",
+            "display": "none",
+            "csid": "879e1fb9-903d-4090-8776-12ee6e3c39f2",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
-            "summary": "vocabularies",
-            "csid": "7e5d9642-fe2a-40b6-a427-4c188c68ce1a",
+            "summary": "vocab",
+            "display": "show",
+            "csid": "a5afe127-8409-459c-b457-04098750248e",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
             "summary": "vocabularyitems",
-            "csid": "8f560a95-e67d-4816-9de5-e07eb4560bf8",
+            "display": "none",
+            "csid": "4975c182-ed5c-4b85-af81-7f001466fcf2",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
-            "summary": "orgauthorities",
-            "csid": "eaf8af9f-8036-4bf1-b385-2a9364a2c559",
+            "summary": "organization",
+            "display": "show",
+            "csid": "a7043dfe-5814-456c-a8f7-92b1fafe3bc9",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
             "summary": "organizations",
-            "csid": "408f9a71-7d43-4c2e-935a-6d07fa6c242c",
+            "display": "none",
+            "csid": "e1bba8f6-27a3-42e7-8383-106440df11bf",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
-            "summary": "personauthorities",
-            "csid": "7d81d1c3-9ee1-49f3-b78d-30c3f50ed4cd",
+            "summary": "person",
+            "display": "show",
+            "csid": "51e3c4f5-84b8-4d38-a50f-a1db624c7bcc",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
             "summary": "persons",
-            "csid": "ffd7b745-48b2-483f-8361-54c71c1f61d4",
+            "display": "none",
+            "csid": "0e341e65-5f3a-4206-b74c-87aa66a52c25",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
-            "summary": "locationauthorities",
-            "csid": "a04839a5-781c-4820-97fb-2c6458c3f2b5",
+            "summary": "location",
+            "display": "none",
+            "csid": "88cc9c8d-6a43-4d17-87a9-f452eef07018",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
             "summary": "locations",
-            "csid": "fca41315-c472-4db1-89ea-025e80d1ae53",
+            "display": "none",
+            "csid": "9d1bc46a-283e-42df-9483-de99332e3d9e",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
-            "summary": "acquisitions",
-            "csid": "334e7806-a85b-4040-81e1-cc2f2c56e09e",
+            "summary": "acquisition",
+            "display": "show",
+            "csid": "eb8a0877-bc0c-4bca-90bb-6f856000f07d",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
             "summary": "relations",
-            "csid": "ead3935f-d70f-49ef-951b-667b4611fa00",
+            "display": "none",
+            "csid": "7a4d236d-678c-4b7d-8ffc-e4e15741b681",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
-            "summary": "accounts",
-            "csid": "ff68c2de-3ddc-4913-9f8b-41c4f9fbdf5e",
+            "summary": "users",
+            "display": "show",
+            "csid": "d0ef3220-c053-4b06-86f5-0cc595b9c410",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
             "summary": "dimensions",
-            "csid": "eca4201f-c420-4d17-8bd7-27665574db5f",
+            "display": "none",
+            "csid": "17812a2f-46e1-4a18-b5b7-fdf29e7f7ba5",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
-            "summary": "contacts",
-            "csid": "f5f99bc5-1dc8-47c8-b095-b87367beebf8",
+            "summary": "contact",
+            "display": "show",
+            "csid": "999ee321-ba82-438d-9cf7-f117ad0be3d2",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
             "summary": "notes",
-            "csid": "d131e918-eb99-4a6c-8e78-1a0e24985e5e",
+            "display": "none",
+            "csid": "1804ddfc-ec86-4f46-99c6-4d5b29ccce18",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
-            "summary": "authorization/roles",
-            "csid": "9639f321-8257-407a-a424-cc3a936a112a",
+            "summary": "role",
+            "display": "show",
+            "csid": "854f5106-2bfe-40f3-8fff-418733754f7a",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
-            "summary": "authorization/permissions",
-            "csid": "fc1e536a-f531-45a2-a5bb-375030f315a8",
+            "summary": "permission",
+            "display": "none",
+            "csid": "b8e31904-2188-4de0-ab88-ed30b6dad61f",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
             "summary": "authorization/permissions/permroles",
-            "csid": "5bda0a5f-c70b-44dc-a760-6a9909fc18cf",
+            "display": "none",
+            "csid": "7575979d-ac91-4cc8-9e50-33372c669644",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
-            "summary": "accounts/accountroles",
-            "csid": "3a9b7bc0-d4e2-41a5-ae8e-2b46ee0fa085",
+            "summary": "userrole",
+            "display": "show",
+            "csid": "1057df35-9abc-42fc-b601-c9f11adaf912",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
-            "summary": "authorization/roles/permroles",
-            "csid": "a2b236dd-08a0-4b25-a9ea-2fb53d060ed1",
+            "summary": "permrole",
+            "display": "show",
+            "csid": "3bf02234-6003-4206-9326-f34d6aa40801",
             "number": "CRUDL",
             "recordtype": "permission"
         },
         {
-            "summary": "idgenerators",
-            "csid": "ecbcce7a-378b-4ae6-ac85-356d116f545a",
-            "number": "RL",
-            "recordtype": "permission"
-        },
-        {
-            "summary": "id",
-            "csid": "7000a23f-293f-43c7-b9c0-a3d45ebea75c",
-            "number": "RL",
-            "recordtype": "permission"
-        },
-        {
-            "summary": "collectionobjects",
-            "csid": "dab5532b-c3af-4887-b7f8-fb73b9669793",
-            "number": "RL",
-            "recordtype": "permission"
-        },
-        {
-            "summary": "intakes",
-            "csid": "feaad095-b228-4053-a597-00ed9db47859",
-            "number": "RL",
-            "recordtype": "permission"
-        },
-        {
-            "summary": "loansin",
-            "csid": "7e07cc01-3714-4490-ade0-37dec5dd9eff",
-            "number": "RL",
-            "recordtype": "permission"
-        },
-        {
-            "summary": "loansout",
-            "csid": "5a016b15-0184-4a47-80b1-342a7d832e7c",
-            "number": "RL",
-            "recordtype": "permission"
-        },
-        {
-            "summary": "objectexit",
-            "csid": "517b8909-5751-4258-aeda-33b894a3fe4d",
-            "number": "RL",
-            "recordtype": "permission"
-        },
-        {
-            "summary": "movements",
-            "csid": "fa245fd3-3011-481e-8dcb-c0c1a2a411c8",
-            "number": "RL",
-            "recordtype": "permission"
-        },
-        {
-            "summary": "reports",
-            "csid": "5a285965-1869-4294-b456-73d962403cfc",
-            "number": "RL",
-            "recordtype": "permission"
-        },
-        {
-            "summary": "vocabularies",
-            "csid": "302fa560-f935-4580-b425-cbc38914a2b1",
-            "number": "RL",
-            "recordtype": "permission"
-        },
-        {
-            "summary": "vocabularyitems",
-            "csid": "9955cc1d-7dfd-470a-806c-7c59f4c8b666",
-            "number": "RL",
-            "recordtype": "permission"
-        },
-        {
-            "summary": "orgauthorities",
-            "csid": "476cd773-aa2b-4c93-9315-8217f71f38bb",
-            "number": "RL",
+            "summary": "authorization/roles/accountroles",
+            "display": "none",
+            "csid": "ffffa4dc-817f-4cea-9971-7b1f70e53dad",
+            "number": "CRUDL",
             "recordtype": "permission"
         }
     ],
     "pagination": {
         "separatelists": [
             [
-                "b96414eb-f4c0-43b8-9537-9e7daebe3b88",
-                "dcae9eb6-58b5-4607-8250-f5e53bc02904",
-                "997fe75c-d1cc-49fb-bdde-526a64357319",
-                "a3862038-1072-4453-a909-a59c9a5decaf",
-                "8e0533dd-522e-4c2c-bc76-5358e234c5a0",
-                "3bebbd9d-1409-4b39-a1bb-3df6ec33d206",
-                "a96a1b15-326d-47b9-b0a4-eb4c7986e7f3",
-                "395a02eb-26a1-4f06-a8b9-688cd600fe84",
-                "f8ba3058-77d7-497c-8423-93488aef45f3",
-                "7e5d9642-fe2a-40b6-a427-4c188c68ce1a",
-                "8f560a95-e67d-4816-9de5-e07eb4560bf8",
-                "eaf8af9f-8036-4bf1-b385-2a9364a2c559",
-                "408f9a71-7d43-4c2e-935a-6d07fa6c242c",
-                "7d81d1c3-9ee1-49f3-b78d-30c3f50ed4cd",
-                "ffd7b745-48b2-483f-8361-54c71c1f61d4",
-                "a04839a5-781c-4820-97fb-2c6458c3f2b5",
-                "fca41315-c472-4db1-89ea-025e80d1ae53",
-                "334e7806-a85b-4040-81e1-cc2f2c56e09e",
-                "ead3935f-d70f-49ef-951b-667b4611fa00",
-                "ff68c2de-3ddc-4913-9f8b-41c4f9fbdf5e",
-                "eca4201f-c420-4d17-8bd7-27665574db5f",
-                "f5f99bc5-1dc8-47c8-b095-b87367beebf8",
-                "d131e918-eb99-4a6c-8e78-1a0e24985e5e",
-                "9639f321-8257-407a-a424-cc3a936a112a",
-                "fc1e536a-f531-45a2-a5bb-375030f315a8",
-                "5bda0a5f-c70b-44dc-a760-6a9909fc18cf",
-                "3a9b7bc0-d4e2-41a5-ae8e-2b46ee0fa085",
-                "a2b236dd-08a0-4b25-a9ea-2fb53d060ed1",
-                "ecbcce7a-378b-4ae6-ac85-356d116f545a",
-                "7000a23f-293f-43c7-b9c0-a3d45ebea75c",
-                "dab5532b-c3af-4887-b7f8-fb73b9669793",
-                "feaad095-b228-4053-a597-00ed9db47859",
-                "7e07cc01-3714-4490-ade0-37dec5dd9eff",
-                "5a016b15-0184-4a47-80b1-342a7d832e7c",
-                "517b8909-5751-4258-aeda-33b894a3fe4d",
-                "fa245fd3-3011-481e-8dcb-c0c1a2a411c8",
-                "5a285965-1869-4294-b456-73d962403cfc",
-                "302fa560-f935-4580-b425-cbc38914a2b1",
-                "9955cc1d-7dfd-470a-806c-7c59f4c8b666",
-                "476cd773-aa2b-4c93-9315-8217f71f38bb"
+                "7cfd49a3-fee5-42c1-b48a-4f9fffa5214f",
+                "87eedcd8-7c7d-4cd4-b008-e69dbe34b956",
+                "443d603a-673b-4a19-88d0-12cf5ca4a3c3",
+                "d33aede4-fd7d-46c5-95ae-8f4fe46aed2a",
+                "9cd46872-a73d-4301-afbd-324be989a79c",
+                "7495aedb-d799-4b45-a713-e88d1d9e85ef",
+                "b48bcf27-553d-4f81-9cb0-3da7445728da",
+                "f9bb1f79-b77c-4ebe-a9e6-3cffb7a73c42",
+                "f8298117-f773-4bd4-aa9a-b94ef80426b8",
+                "fe109f9a-693a-4dda-8850-c2a380507de7",
+                "879e1fb9-903d-4090-8776-12ee6e3c39f2",
+                "a5afe127-8409-459c-b457-04098750248e",
+                "4975c182-ed5c-4b85-af81-7f001466fcf2",
+                "a7043dfe-5814-456c-a8f7-92b1fafe3bc9",
+                "e1bba8f6-27a3-42e7-8383-106440df11bf",
+                "51e3c4f5-84b8-4d38-a50f-a1db624c7bcc",
+                "0e341e65-5f3a-4206-b74c-87aa66a52c25",
+                "88cc9c8d-6a43-4d17-87a9-f452eef07018",
+                "9d1bc46a-283e-42df-9483-de99332e3d9e",
+                "eb8a0877-bc0c-4bca-90bb-6f856000f07d",
+                "7a4d236d-678c-4b7d-8ffc-e4e15741b681",
+                "d0ef3220-c053-4b06-86f5-0cc595b9c410",
+                "17812a2f-46e1-4a18-b5b7-fdf29e7f7ba5",
+                "999ee321-ba82-438d-9cf7-f117ad0be3d2",
+                "1804ddfc-ec86-4f46-99c6-4d5b29ccce18",
+                "854f5106-2bfe-40f3-8fff-418733754f7a",
+                "b8e31904-2188-4de0-ab88-ed30b6dad61f",
+                "7575979d-ac91-4cc8-9e50-33372c669644",
+                "1057df35-9abc-42fc-b601-c9f11adaf912",
+                "3bf02234-6003-4206-9326-f34d6aa40801",
+                "ffffa4dc-817f-4cea-9971-7b1f70e53dad"
             ]
         ]
     }

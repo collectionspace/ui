@@ -12,65 +12,79 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 "use strict";
 
 (function () {
-
-    var saveAction = function () {
-        fluid.log("save me");
-    };
     
-    var afterSuccessSave = function () {
-        fluid.log("success save");
-    };
+    var bareConfirmationTest = new jqUnit.TestCase("Confirmation Tests");
     
-    var onError = function () {
-        fluid.log("error");
-    };
-    
-    var baseTestOpts = {
-        action: saveAction,
-        actionSuccessEvents: afterSuccessSave,
-        actionErrorEvents: onError,
-    };
-    
-    var testOpts;
-    
-    var bareConfirmationTests = new jqUnit.TestCase("Confirmation Tests", function () {
-        testOpts = {};
-        fluid.model.copyModel(testOpts, baseTestOpts);
+    var confirmationTest = cspace.tests.testEnvironment({
+        testCase: bareConfirmationTest
     });
     
-    var confirmationTests = cspace.tests.testEnvironment({testCase: bareConfirmationTests});
-    
-    var sampleSuccessHandlerCreator = function (conf, options) {
-        return function () {
-            return options.href;
-        };
+    var setupConfirmation = function (options) {
+        return cspace.confirmation(options);
     };
     
-    confirmationTests.test("Confirmation creation", function () {
-        expect(9);
-        testOpts.successHandlerCreator = sampleSuccessHandlerCreator;
-        testOpts.listeners = {
-            afterRender: function (confirmation) {
-                var expectedDefaultHREF = "#";
-                jqUnit.assertTrue("dialog is on the page", jQuery(".csc-confirmationDialog").length !== 0);
-                jqUnit.notVisible("dialog is not visible", jQuery(".csc-confirmationDialog"));
-                confirmation.successHandler = confirmation.options.successHandlerCreator(confirmation, {href: expectedDefaultHREF});
-                jqUnit.assertEquals("href is expected string", expectedDefaultHREF, confirmation.successHandler());
-
-                var expectedHREF = "";
-                confirmation.open(sampleSuccessHandlerCreator, {href: expectedHREF});
-                jqUnit.isVisible("dialog is visible", jQuery(".csc-confirmationDialog"));
-                jqUnit.assertEquals("href is expected string", expectedHREF, confirmation.successHandler());
-                jqUnit.assertTrue("Default button style should be added to cancel", jQuery(".csc-confirmationDialogButton-cancel").hasClass("cs-confirmationDialogButton-cancel"));
-                jqUnit.assertTrue("Default button style should be added to proceed", jQuery(".csc-confirmationDialogButton-proceed").hasClass("cs-confirmationDialogButton-proceed"));
-                jqUnit.assertTrue("Default button style should be added to act", jQuery(".csc-confirmationDialogButton-act").hasClass("cs-confirmationDialogButton-act"));
-                start();
+    var testBasicRenderedConfirmation = function (confirmation, strings) {
+        jqUnit.isVisible("Confirmation should be visible", confirmation.popup);
+        fluid.each(strings, function (value, str) {
+            jqUnit.isVisible(str + " should be visible", confirmation.confirmationDialog.locate(str));
+            jqUnit.assertEquals(str + " should read", value, confirmation.confirmationDialog.locate(str).val());
+        });
+    };
+    
+    var testConfirmationEvents = function (button, strategy, event) {
+        var confirmation = setupConfirmation({
+            listeners: {
+                afterClose: function (event) {
+                    jqUnit.assertEquals("The confirmation is closed due to", event || button, event);
+                }
             }
-        };
-        
-        jqUnit.assertTrue("dialog is not on the page", jQuery(".csc-confirmationDialog").length === 0);
-        var confirmation = cspace.confirmation(jQuery("#main"), testOpts);
-        stop();
+        });
+        confirmation.open(strategy);
+        confirmation.confirmationDialog.locate(button).click();
+    };
+    
+    var testDelete = function (confirmation) {
+        confirmation.open("cspace.confirmation.deleteDialog");
+        jqUnit.assertEquals("Proceed should not be rendered", 0, confirmation.confirmationDialog.locate("proceed").length);
+        testBasicRenderedConfirmation(confirmation, {
+            act: "Delete",
+            cancel: "Cancel"
+        });
+    };
+    
+    var testSave = function (confirmation) {
+        confirmation.open("cspace.confirmation.saveDialog");
+        jqUnit.isVisible("Proceed should be visible", confirmation.confirmationDialog.locate("proceed"));
+        jqUnit.assertEquals("Proceed should read", "Don't Save", confirmation.confirmationDialog.locate("proceed").val());
+        testBasicRenderedConfirmation(confirmation, {
+            act: "Save",
+            cancel: "Cancel"
+        });
+    };
+    
+    confirmationTest.test("Initialize confirmation delete", function () {
+        var confirmation = setupConfirmation();
+        testDelete(confirmation);
+        testConfirmationEvents("close", "cspace.confirmation.deleteDialog", "cancel");
+        testConfirmationEvents("act", "cspace.confirmation.deleteDialog");
+        testConfirmationEvents("cancel", "cspace.confirmation.deleteDialog");
     });
     
+    confirmationTest.test("Initialize confirmation save", function () {
+        var confirmation = setupConfirmation();
+        testSave(confirmation);
+        testConfirmationEvents("close", "cspace.confirmation.saveDialog", "cancel");
+        testConfirmationEvents("act", "cspace.confirmation.saveDialog");
+        testConfirmationEvents("cancel", "cspace.confirmation.saveDialog");
+        testConfirmationEvents("proceed", "cspace.confirmation.saveDialog");
+    });
+    
+    confirmationTest.test("Test both save and delete", function () {
+        var confirmation = setupConfirmation();
+        testDelete(confirmation);
+        confirmation.popup.dialog("close");
+        testSave(confirmation);
+        confirmation.popup.dialog("close");
+        testDelete(confirmation);
+    });
 }());

@@ -134,7 +134,7 @@ var utilitiesTester = function ($) {
             ".csc-movement-plannedRemovalDate": "${fields.plannedRemovalDate}",
             ".csc-movement-currentLocation": "${fields.currentLocation}",
             ".csc-movement-movementContact": {
-                "valuebinding": "${fields.movementContact}",
+                "value": "${fields.movementContact}",
                 "decorators": [{
                     "func": "cspace.util.urnToStringFieldConverter",
                     "type": "fluid"   
@@ -142,18 +142,20 @@ var utilitiesTester = function ($) {
             },
             ".csc-movement-locationDate": "${fields.locationDate}",
             ".csc-movement-currentLocationFitness": {
-                "valuebinding": "${fields.currentLocationFitness}", 
+                "value": "${fields.currentLocationFitness}", 
                 "decorators": [{
                     "func": "cspace.util.nameForValueFinder",
                     "type": "fluid",
                     "options": {
                         "list": [
+                            "",
                             "dangerous",
                             "suitable",
                             "temporary",
                             "unsuitable"
                         ],
                         "names": [
+                            "Please select a value",
                             "Dangerous",
                             "Suitable",
                             "Temporary",
@@ -171,24 +173,39 @@ var utilitiesTester = function ($) {
                         "options": {
                             "elPath": "fields.movementMethods",
                             "protoTree": {
-                                ".csc-movement-movementMethods": {
-                                    "valuebinding": "${fields.movementMethods.0.movementMethod}",
-                                    "decorators": [{
-                                        "func": "cspace.util.nameForValueFinder",
-                                        "type": "fluid",
-                                        "options": {
-                                            "list": [
-                                                "forklift",
-                                                "handcarried",
-                                                "trolley"
-                                            ],
-                                            "names": [
-                                                "Forklift",
-                                                "Handcarried",
-                                                "Trolley"
-                                            ]
+                                "expander": {
+                                    "tree": {
+                                        "expander": {
+                                            "repeatID": "repeat:",
+                                            "tree": {
+                                                ".csc-movement-movementMethods": {
+                                                    "value": "${{row}.movementMethod}",
+                                                    "decorators": [{
+                                                        "func": "cspace.util.nameForValueFinder",
+                                                        "type": "fluid",
+                                                        "options": {
+                                                            "list": [
+                                                                "",
+                                                                "forklift",
+                                                                "handcarried",
+                                                                "trolley"
+                                                            ],
+                                                            "names": [
+                                                                "Please select a value",
+                                                                "Forklift",
+                                                                "Handcarried",
+                                                                "Trolley"
+                                                            ]
+                                                        }
+                                                    }]
+                                                }
+                                            },
+                                            "type": "fluid.renderer.repeat",
+                                            "pathAs": "row",
+                                            "controlledBy": "fields.movementMethods"
                                         }
-                                    }]
+                                    },
+                                    "type": "fluid.noexpand"
                                 }
                             }
                         }
@@ -198,12 +215,13 @@ var utilitiesTester = function ($) {
             ".csc-movement-currentLocationNote": "${fields.currentLocationNote}",
             ".csc-movement-movementReferenceNumber": "${fields.movementReferenceNumber}",
             ".csc-movement-reasonForMove": {
-                "valuebinding": "${fields.reasonForMove}", 
+                "value": "${fields.reasonForMove}", 
                 "decorators": [{
                     "func": "cspace.util.nameForValueFinder",
                     "type": "fluid",
                     "options": {
                         "list": [
+                            "",
                             "conservation",
                             "exhibition",
                             "inventory",
@@ -213,6 +231,7 @@ var utilitiesTester = function ($) {
                             "research"
                         ],
                         "names": [
+                            "Please select a value",
                             "Conservation",
                             "Exhibition",
                             "Inventory",
@@ -231,30 +250,30 @@ var utilitiesTester = function ($) {
     var readOnlyAcquisitionSpec = {
         "recordEditor": {
             ".csc-acquisition-object-purchase-price-currency": {
-                "valuebinding": "${fields.objectPurchasePriceCurrency}", 
+                "value": "${fields.objectPurchasePriceCurrency}", 
                 "decorators": [{
                     "func": "cspace.util.nameForValueFinder",
                     "type": "fluid",
                     "options": {
                         "list": [
                             "",
-                            "euro",
-                            "poundsterling",
-                            "swissfranc",
-                            "canadiandollar",
+                            "danishkrone",
                             "swedishkrona",
-                            "usdollar",
-                            "danishkrone"
+                            "usd",
+                            "canadiandollar",
+                            "gbp",
+                            "eur",
+                            "swissfranc"
                         ],
                         "names": [
-                            "Please select an item",
-                            "Euro",
-                            "Pound Sterling",
-                            "Swiss Franc",
-                            "Canadian Dollar",
+                            "Please select a value",
+                            "Danish Krone",
                             "Swedish Krona",
                             "US Dollar",
-                            "Danish Krone"
+                            "Canadian Dollar",
+                            "Pound Sterling",
+                            "Euro",
+                            "Swiss Franc"
                         ]
                     }
                 }]
@@ -266,44 +285,57 @@ var utilitiesTester = function ($) {
                     "func": "cspace.makeRepeatable",
                     "options": {
                         "protoTree": {
-                            ".csc-acquisition-acquisitionFundingCurrency": {
-                                "valuebinding": "${fields.acquisitionFunding.0.acquisitionFundingCurrency}", 
-                                "decorators": [{
-                                    "func": "cspace.util.nameForValueFinder",
-                                    "type": "fluid",
-                                    "options": {
-                                        "list": [
-                                            "",
-                                            "euro",
-                                            "poundsterling",
-                                            "swissfranc",
-                                            "canadiandollar",
-                                            "swedishkrona",
-                                            "usdollar",
-                                            "danishkrone"
-                                        ],
-                                        "names": [
-                                            "Please select an item",
-                                            "Euro",
-                                            "Pound Sterling",
-                                            "Swiss Franc",
-                                            "Canadian Dollar",
-                                            "Swedish Krona",
-                                            "US Dollar",
-                                            "Danish Krone"
-                                        ]
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-acquisition-acquisitionFundingCurrency": {
+                                                "value": "${{row}.acquisitionFundingCurrency}", 
+                                                "decorators": [{
+                                                    "func": "cspace.util.nameForValueFinder",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "list": [
+                                                            "",
+                                                            "danishkrone",
+                                                            "swedishkrona",
+                                                            "usd",
+                                                            "canadiandollar",
+                                                            "gbp",
+                                                            "eur",
+                                                            "swissfranc"
+                                                        ],
+                                                        "names": [
+                                                            "Please select a value",
+                                                            "Danish Krone",
+                                                            "Swedish Krona",
+                                                            "US Dollar",
+                                                            "Canadian Dollar",
+                                                            "Pound Sterling",
+                                                            "Euro",
+                                                            "Swiss Franc"
+                                                        ]
+                                                    }
+                                                }]
+                                            },
+                                            ".csc-acquisition-acquisitionFundingValue": "${{row}.acquisitionFundingValue}",
+                                            ".csc-acquisition-acquisitionFundingSource": {
+                                                "value": "${{row}.acquisitionFundingSource}",
+                                                "decorators": [{
+                                                    "func": "cspace.util.urnToStringFieldConverter",
+                                                    "type": "fluid"   
+                                                }]
+                                            },
+                                            ".csc-acquisition-acquisitionFundingSourceProvisos": "${{row}.acquisitionFundingSourceProvisos}"
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.acquisitionFunding"
                                     }
-                                }]
-                            },
-                            ".csc-acquisition-acquisitionFundingValue": "${fields.acquisitionFunding.0.acquisitionFundingValue}",
-                            ".csc-acquisition-acquisitionFundingSource": {
-                                "valuebinding": "${fields.acquisitionFunding.0.acquisitionFundingSource}",
-                                "decorators": [{
-                                    "func": "cspace.util.urnToStringFieldConverter",
-                                    "type": "fluid"   
-                                }]
-                            },
-                            ".csc-acquisition-acquisitionFundingSourceProvisos": "${fields.acquisitionFunding.0.acquisitionFundingSourceProvisos}"
+                                },
+                                "type": "fluid.noexpand"
+                            }
                         },
                         "elPath": "fields.acquisitionFunding"
                     }
@@ -320,12 +352,25 @@ var utilitiesTester = function ($) {
                         "options": {
                             "elPath": "fields.owners",
                             "protoTree": {
-                                ".csc-acquisition-owner": {
-                                    "valuebinding": "${fields.owners.0.owner}",
-                                    "decorators": [{
-                                        "func": "cspace.util.urnToStringFieldConverter",
-                                        "type": "fluid"   
-                                    }]
+                                "expander": {
+                                    "tree": {
+                                        "expander": {
+                                            "repeatID": "repeat:",
+                                            "tree": {
+                                                ".csc-acquisition-owner": {
+                                                    "value": "${{row}.owner}",
+                                                    "decorators": [{
+                                                        "func": "cspace.util.urnToStringFieldConverter",
+                                                        "type": "fluid"   
+                                                    }]
+                                                }
+                                            },
+                                            "type": "fluid.renderer.repeat",
+                                            "pathAs": "row",
+                                            "controlledBy": "fields.owners"
+                                        }
+                                    },
+                                    "type": "fluid.noexpand"
                                 }
                             }
                         }
@@ -335,94 +380,95 @@ var utilitiesTester = function ($) {
             ".csc-acquisition-object-offer-price-value": "${fields.objectOfferPriceValue}",
             ".csc-acquisition-numberPatternChooser-reference-number": "${fields.acquisitionReferenceNumber}",
             ".csc-acquisition-object-offer-price-currency": {
-                "valuebinding": "${fields.objectOfferPriceCurrency}", 
+                "value": "${fields.objectOfferPriceCurrency}", 
                 "decorators": [{
                     "func": "cspace.util.nameForValueFinder",
                     "type": "fluid",
                     "options": {
                         "list": [
                             "",
-                            "euro",
-                            "poundsterling",
-                            "swissfranc",
-                            "canadiandollar",
+                            "danishkrone",
                             "swedishkrona",
-                            "usdollar",
-                            "danishkrone"
+                            "usd",
+                            "canadiandollar",
+                            "gbp",
+                            "eur",
+                            "swissfranc"
                         ],
                         "names": [
-                            "Please select an item",
-                            "Euro",
-                            "Pound Sterling",
-                            "Swiss Franc",
-                            "Canadian Dollar",
+                            "Please select a value",
+                            "Danish Krone",
                             "Swedish Krona",
                             "US Dollar",
-                            "Danish Krone"
+                            "Canadian Dollar",
+                            "Pound Sterling",
+                            "Euro",
+                            "Swiss Franc"
                         ]
                     }
                 }]
             },
             ".csc-acquisition-object-purchase-offer-price-currency": {
-                "valuebinding": "${fields.objectPurchaseOfferPriceCurrency}", 
+                "value": "${fields.objectPurchaseOfferPriceCurrency}", 
                 "decorators": [{
                     "func": "cspace.util.nameForValueFinder",
                     "type": "fluid",
                     "options": {
                         "list": [
                             "",
-                            "euro",
-                            "poundsterling",
-                            "swissfranc",
-                            "canadiandollar",
+                            "danishkrone",
                             "swedishkrona",
-                            "usdollar",
-                            "danishkrone"
+                            "usd",
+                            "canadiandollar",
+                            "gbp",
+                            "eur",
+                            "swissfranc"
                         ],
                         "names": [
-                            "Please select an item",
-                            "Euro",
-                            "Pound Sterling",
-                            "Swiss Franc",
-                            "Canadian Dollar",
+                            "Please select a value",
+                            "Danish Krone",
                             "Swedish Krona",
                             "US Dollar",
-                            "Danish Krone"
+                            "Canadian Dollar",
+                            "Pound Sterling",
+                            "Euro",
+                            "Swiss Franc"
                         ]
                     }
                 }]
             },
+            ".csc-object-identification-object-nametitle": "${fields.ownersource}",
             ".csc-acquisition-original-object-purchase-price-currency": {
-                "valuebinding": "${fields.originalObjectPurchasePriceCurrency}", 
+                "value": "${fields.originalObjectPurchasePriceCurrency}", 
                 "decorators": [{
                     "func": "cspace.util.nameForValueFinder",
                     "type": "fluid",
                     "options": {
                         "list": [
                             "",
-                            "euro",
-                            "poundsterling",
-                            "swissfranc",
-                            "canadiandollar",
+                            "danishkrone",
                             "swedishkrona",
-                            "usdollar",
-                            "danishkrone"
+                            "usd",
+                            "canadiandollar",
+                            "gbp",
+                            "eur",
+                            "swissfranc"
                         ],
                         "names": [
-                            "Please select an item",
-                            "Euro",
-                            "Pound Sterling",
-                            "Swiss Franc",
-                            "Canadian Dollar",
+                            "Please select a value",
+                            "Danish Krone",
                             "Swedish Krona",
                             "US Dollar",
-                            "Danish Krone"
+                            "Canadian Dollar",
+                            "Pound Sterling",
+                            "Euro",
+                            "Swiss Franc"
                         ]
                     }
                 }]
             },
             ".csc-acquisition-acquisition-method": {
-                "valuebinding": "${fields.acquisitionMethod}", 
+                "value": "${fields.acquisitionMethod}", 
                 "decorators": [{
                     "func": "cspace.util.nameForValueFinder",
                     "type": "fluid",
@@ -453,12 +499,25 @@ var utilitiesTester = function ($) {
                         "options": {
                             "elPath": "fields.acquisitionSources",
                             "protoTree": {
-                                ".csc-acquisition-acquisitionSource": {
-                                    "valuebinding": "${fields.acquisitionSources.0.acquisitionSource}",
-                                    "decorators": [{
-                                        "func": "cspace.util.urnToStringFieldConverter",
-                                        "type": "fluid"   
-                                    }]
+                                "expander": {
+                                    "tree": {
+                                        "expander": {
+                                            "repeatID": "repeat:",
+                                            "tree": {
+                                                ".csc-acquisition-acquisitionSource": {
+                                                    "value": "${{row}.acquisitionSource}",
+                                                    "decorators": [{
+                                                        "func": "cspace.util.urnToStringFieldConverter",
+                                                        "type": "fluid"   
+                                                    }]
+                                                }
+                                            },
+                                            "type": "fluid.renderer.repeat",
+                                            "pathAs": "row",
+                                            "controlledBy": "fields.acquisitionSources"
+                                        }
+                                    },
+                                    "type": "fluid.noexpand"
                                 }
                             }
                         }
@@ -466,30 +525,30 @@ var utilitiesTester = function ($) {
                 ]
             },
             ".csc-acquisition-group-purchase-price-currency": {
-                "valuebinding": "${fields.groupPurchasePriceCurrency}", 
+                "value": "${fields.groupPurchasePriceCurrency}", 
                 "decorators": [{
                     "func": "cspace.util.nameForValueFinder",
                     "type": "fluid",
                     "options": {
                         "list": [
                             "",
-                            "euro",
-                            "poundsterling",
-                            "swissfranc",
-                            "canadiandollar",
+                            "danishkrone",
                             "swedishkrona",
-                            "usdollar",
-                            "danishkrone"
+                            "usd",
+                            "canadiandollar",
+                            "gbp",
+                            "eur",
+                            "swissfranc"
                         ],
                         "names": [
-                            "Please select an item",
-                            "Euro",
-                            "Pound Sterling",
-                            "Swiss Franc",
-                            "Canadian Dollar",
+                            "Please select a value",
+                            "Danish Krone",
                             "Swedish Krona",
                             "US Dollar",
-                            "Danish Krone"
+                            "Canadian Dollar",
+                            "Pound Sterling",
+                            "Euro",
+                            "Swiss Franc"
                         ]
                     }
                 }]
@@ -497,7 +556,7 @@ var utilitiesTester = function ($) {
             ".csc-acquisition-group-purchase-price-value": "${fields.groupPurchasePriceValue}",
             ".csc-acquisition-acquisition-note": "${fields.acquisitionNote}",
             ".csc-acquisition-acquisitionAuthorizer": {
-                "valuebinding": "${fields.acquisitionAuthorizer}",
+                "value": "${fields.acquisitionAuthorizer}",
                 "decorators": [{
                     "func": "cspace.util.urnToStringFieldConverter",
                     "type": "fluid"   
@@ -514,7 +573,20 @@ var utilitiesTester = function ($) {
                         "options": {
                             "elPath": "fields.acquisitionDates",
                             "protoTree": {
-                                ".csc-acquisition-date": "${fields.acquisitionDates.0.acquisitionDate}"
+                                "expander": {
+                                    "tree": {
+                                        "expander": {
+                                            "repeatID": "repeat:",
+                                            "tree": {
+                                                ".csc-acquisition-date": "${{row}.acquisitionDate}"
+                                            },
+                                            "type": "fluid.renderer.repeat",
+                                            "pathAs": "row",
+                                            "controlledBy": "fields.acquisitionDates"
+                                        }
+                                    },
+                                    "type": "fluid.noexpand"
+                                }
                             }
                         }
                     }
@@ -528,12 +600,19 @@ var utilitiesTester = function ($) {
                         "options": {
                             "elPath": "fields.fieldCollectionEventNames",
                             "protoTree": {
-                                ".csc-acquisition-fieldCollectionEventName": {
-                                    "valuebinding": "${fields.fieldCollectionEventNames.0.fieldCollectionEventName}",
-                                    "decorators": [{
-                                        "func": "cspace.util.urnToStringFieldConverter",
-                                        "type": "fluid"   
-                                    }]
+                                "expander": {
+                                    "tree": {
+                                        "expander": {
+                                            "repeatID": "repeat:",
+                                            "tree": {
+                                                ".csc-acquisition-fieldCollectionEventName": "${{row}.fieldCollectionEventName}"
+                                            },
+                                            "type": "fluid.renderer.repeat",
+                                            "pathAs": "row",
+                                            "controlledBy": "fields.fieldCollectionEventNames"
+                                        }
+                                    },
+                                    "type": "fluid.noexpand"
                                 }
                             }
                         }

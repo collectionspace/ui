@@ -103,6 +103,9 @@ fluid.defaults("cspace.tests.testEnvironment", {
         },
         globalBundle: {
             type: "cspace.globalBundle"
-        } 
+        },
+        globalEvents: {
+            type: "cspace.globalEvents",
+        }
     }
 });
