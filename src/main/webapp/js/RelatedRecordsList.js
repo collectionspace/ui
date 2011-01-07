@@ -17,50 +17,53 @@ cspace = cspace || {};
     
     fluid.registerNamespace("cspace.relatedRecordsList");
 
-    // TODO: This is a hard-coded list of procedures, which should be replaced by something
-    //       provided by the server. 
-    // NOTE: CSPACE-1977 - services and app layer do not have the concept of procedure.
-    var procedureList = ["intake", "acquisition", "loanin", "loanout", "movement", "objectexit"];
-
     var buildRelationsList = function (relations, related) {
-        if (related !== "procedures") {
-            return relations[related];
-        }
         var relationList = [];
-        $.each(procedureList, function (index, value) {
+        fluid.each(cspace.recordTypes[related], function (value) {
             relationList = relationList.concat(relations[value] || []);
-        });
-        return relationList;     
+        });   
+        return relationList;
     };
     
     var addModelChangeListener = function (applier, recordList, recordType, related) {
-        applier.modelChanged.addListener("relations." + recordType, function (model, oldModel, changeRequest) {
-            recordList.applier.requestChange("items", buildRelationsList(model.relations, related || recordType));
+        applier.modelChanged.addListener("relations." + recordType, function (model) {
+            recordList.applier.requestChange("items", buildRelationsList(model.relations, related));
             recordList.refreshView();
         });
     };
 
     var bindEventHandlers = function (that) {
-        if (that.options.related === "procedures") {
-            $.each(procedureList, function (index, value) {
-                addModelChangeListener(that.options.applier, that.recordList, value, that.options.related);
-            });
-        }
-        else {
-            addModelChangeListener(that.options.applier, that.recordList, that.options.related);
-        }
+        fluid.each(cspace.recordTypes[that.options.related], function (value) {
+            addModelChangeListener(that.options.applier, that.recordList, value, that.options.related);
+        });
     };
 
     cspace.relatedRecordsList = function (container, options) {
-        var that = fluid.initView("cspace.relatedRecordsList", container, options);
-        that.model = that.options.model;
-        
+        var that = fluid.initRendererComponent("cspace.relatedRecordsList", container, options);
+        that.renderer.refreshView();
         fluid.initDependents(that);        
         bindEventHandlers(that);
         that.events.afterSetup.fire(that);
         return that;
     };
     
+    cspace.relatedRecordsList.produceTree = function(that) {
+        return {
+            mainHeader: {
+                messagekey: that.options.related //holds key for stringBundle lookup
+            },
+            numberHeader: {
+                messagekey: "numberHeader"
+            },
+            summaryHeader: {
+                messagekey: "summaryHeader"
+            },
+            typeHeader: {
+                messagekey: "typeHeader"
+            }
+        };
+    };
+
     cspace.relatedRecordsList.provideRecordList = function (container, selector, relations, related, options) {
         options.model = {
             items: buildRelationsList(relations, related),
@@ -123,11 +126,31 @@ cspace = cspace || {};
         },
         addRelations: cspace.relationManager.proveAddRelations,
         recordListAfterSelectHandler: cspace.recordList.afterSelectHandlerDefault,
+        parentBundle: "{globalBundle}",
+        produceTree: cspace.relatedRecordsList.produceTree,
         selectors: {
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
             timestamp: ".csc-timestamp",
-            recordListSelector: ".csc-relatedRecordsList-recordList"
+            recordListSelector: ".csc-relatedRecordsList-recordList",
+            mainHeader: ".csc-related-mainheader",
+            numberHeader: ".csc-related-number-header",
+            summaryHeader: ".csc-related-summary-header",
+            typeHeader: ".csc-related-recordtype-header"
+        },
+        selectorsToIgnore: ["recordListSelector", "messageContainer", "feedbackMessage", "timestamp"],
+        strings: {
+            numberHeader: "Number",
+            summaryHeader: "Summary",
+            typeHeader: "Type"
+        },
+        resources: {
+            template: cspace.resourceSpecExpander({
+                fetchClass: "fastTemplate",
+                url: "%webapp/html/RelatedRecordListTemplate.html"
+            })
         }
     });
+
+    fluid.fetchResources.primeCacheFromResources("cspace.relatedRecordsList");
 })(jQuery, fluid);

@@ -31,6 +31,18 @@ cspace.tests.sampleUserPerms = {
         "cataloging": ["create", "read", "update", "delete", "list"]
 };
 
+cspace.tests.fullPerms = {
+        "cataloging": ["create", "read", "update", "delete", "list"],
+        "intake": ["create", "read", "update", "delete", "list"],
+        "acquisition": ["create", "read", "update", "delete", "list"],
+        "loanout": ["create", "read", "update", "delete", "list"],
+        "loanin": ["create", "read", "update", "delete", "list"],
+        "movement": ["create", "read", "update", "delete", "list"],
+        "objectexit": ["create", "read", "update", "delete", "list"],
+        "person": ["create", "read", "update", "delete", "list"],
+        "organization": ["create", "read", "update", "delete", "list"]
+};
+
 fluid.demands("cspace.urlExpander", ["cspace.localData", "cspace.test"],
     {
     args: {
@@ -42,7 +54,7 @@ fluid.demands("cspace.urlExpander", ["cspace.localData", "cspace.test"],
 });
 
 cspace.tests.filterToKeys = function(toFilter, keyHolder) {
-    return fluid.remove_if($.extend({}, toFilter), function(value, key) {
+    return fluid.remove_if(jQuery.extend({}, toFilter), function(value, key) {
         return !keyHolder[key];
     });
 };
@@ -62,7 +74,7 @@ cspace.tests.testEnvironment = function(options) {
     that.test = function(message, func) {
         withResources(function() {
             that.options.testCase.test(message, 
-                function() {fluid.withEnvironment(that.environment, func)}
+                function() {fluid.withEnvironment(that.environment, func);}
                 );
         });
     };
@@ -90,7 +102,7 @@ fluid.defaults("cspace.tests.testEnvironment", {
             type: "cspace.recordTypeManager"
         },
         globalBundle: {
-            type: "cspace.globalBundle",
+            type: "cspace.globalBundle"
         } 
     }
 });

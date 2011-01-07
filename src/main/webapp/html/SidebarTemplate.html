@@ -1,0 +1,52 @@
+<div class="csc-right-sidebar">
+    <div class="fl-force-right right-sidebar" id="csc-right-sidebar">
+        <!--<img src="../images/media-snapshot.png" alt="media snapshot" height=253 width=248 />-->
+		<div class="create-report">
+		    <div class="header">Create Report</div>
+            <select disabled="disabled">
+				<option value="yes">Yes</option>
+				<option value="no">No</option>
+			</select>
+            <input type="button" value="Create" disabled="disabled" />
+        </div>
+		
+        <div class="pivot-box media-snapshot csc-media-snapshot">
+            <div class="header toggle" onclick="ShowHide('#toggle-media-snapshot', this); return false;">
+                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
+                Media Snapshot
+            </div>
+            <div class="content" id="toggle-media-snapshot"><img src="../images/sample.png" alt="sample image" title="sample media image" /></div>
+        </div>
+        
+        <div class="pivot-box csc-integrated-authorities">
+            <div class="header toggle" onclick="ShowHide('#toggle-integrated-authorities', this); return false;">
+                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
+                Terms Used <span class="csc-num-items">(0)</span>
+            </div>
+            
+            <div class="content integrated-authorities list-table" id="toggle-integrated-authorities">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Term</td>
+                            <td>Vocabulary</td>
+                            <td>Field</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="4" class="hidden csc-error-message cs-message">This is the error message</td></tr>
+                        <tr class="pivot-box-data csc-recordList-row">
+                            <td><a href="#" class="link csc-related-number"></a></td>
+                            <td class="csc-related-recordtype"></td>
+                            <td class="csc-related-field"></td>
+                            <td class="csc-no-items-message"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="csc-related-record"><!-- relatedRecordListTemplate here --></div>
+    </div>
+    <div class="clear"></div>
+</div>

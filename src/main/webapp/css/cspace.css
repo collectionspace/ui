@@ -794,3 +794,4 @@ ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6
 .cs-myCollectionSpace-expanded {background:transparent url('../images/toggle-less.png') no-repeat 4px 6px;}
 .cs-myCollectionSpace-collapsed {background:transparent url('../images/toggle-more.png') no-repeat 4px 6px;}
 
+.csc-related-mainheader {display:inline;}

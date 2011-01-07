@@ -21,11 +21,6 @@
             "templateSelector": ".csc-organizationAuthority-template",
             "targetSelector": ".csc-record-edit-container" 
         },
-        "sidebar": {
-            "href": "right-sidebar.html",
-            "templateSelector": ".csc-right-sidebar",
-            "targetSelector": ".csc-sidebar-container" 
-        },
         "footer": {
             "href": "footer.html",
             "templateSelector": ".csc-footer",
@@ -35,8 +30,7 @@
     "pageType": "organization",
     "selectors": {
         "titleBar": ".csc-organizationAuthority-template",
-        "recordEditor": ".csc-organizationAuthority-template",
-        "sidebar": ".csc-sidebar"
+        "recordEditor": ".csc-organizationAuthority-template"
     },
     "components": {
         "tabs": {

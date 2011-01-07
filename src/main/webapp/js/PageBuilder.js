@@ -261,7 +261,8 @@ cspace = cspace || {};
         selectors: {
             header: ".csc-header-container",
             pivotSearch: ".csc-pivot-searchBox",
-            tabs: ".csc-tabs-template"
+            tabs: ".csc-tabs-template",
+            sidebar: ".csc-sidebar-container"
         },
         components: {
             header: {

@@ -41,9 +41,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             recordEditor: {
                                 href: "../../main/webapp/html/ObjectEntryTemplate.html"
                             },
-                            sidebar: {
-                                href: "../../main/webapp/html/right-sidebar.html"
-                            },
                             footer: {
                                 href: "../../main/webapp/html/footer.html"
                             }

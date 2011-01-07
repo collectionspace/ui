@@ -44,7 +44,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     });
     
     var bareRelatedRecordsListTest = new jqUnit.TestCase("RelatedRecordsList Tests", function () {
-        bareRelatedRecordsListTest.fetchTemplate("../../main/webapp/html/right-sidebar.html", ".csc-right-sidebar");
+        bareRelatedRecordsListTest.fetchTemplate("../../main/webapp/html/SidebarTemplate.html", ".csc-right-sidebar");
     }, function () {
         $(".ui-dialog").detach();
     });
@@ -58,10 +58,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             primary: primary,
             model: model,
             applier: applier,
-            uispec: uispec.relatedCataloging,
+            uispec: uispec.relatedCataloging
         };
         fluid.merge(null, defaultOpts, opts);
-        var relatedRecordsList = cspace.relatedRecordsList(".csc-related-cataloging", defaultOpts);
+        var relatedRecordsList = cspace.relatedRecordsList(".csc-related-record", defaultOpts);
     };
     
     var configureSTRDialog = function (handler, primary, related) {
@@ -78,7 +78,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         configureSTRDialog(function (relatedRecordsList) {
             relatedRecordsList.relationManager.locate("addButton").click();
             jqUnit.isVisible("Search to relate Dialog is visible after click", $(".ui-dialog"));
-            jqUnit.assertEquals("Record-type drop-down is " +sel + " - " + condition + " (search should be limited to loanout)", 
+            jqUnit.assertEquals("Record-type drop-down is " +sel + " - " + condition, 
                 condition, relatedRecordsList.relationManager.searchToRelateDialog.locate("recordType").is(sel));
             relatedRecordsList.relationManager.searchToRelateDialog.close();
             jqUnit.notVisible("Search to relate Dialog is invisible after close", $(".ui-dialog"));
@@ -86,8 +86,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }, "cataloging", related);
     };
 
-    relatedRecordsListTest.test("Configure SearchToRelate Dialog with correct target record type (loanout)", function () {
-        basicConfigureTest(":disabled", true, "loanout");
+    relatedRecordsListTest.test("Configure SearchToRelate Dialog for cataloging", function () {
+        //expect drop down to be disabled since cataloging is the only record type in this category
+        basicConfigureTest(":disabled", true, "cataloging");
     });
 
     relatedRecordsListTest.test("Configure SearchToRelate Dialog for all procedure types (using 'procedures' configuration)", function () {

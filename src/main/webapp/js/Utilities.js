@@ -38,8 +38,8 @@ fluid.registerNamespace("cspace.util");
     cspace.recordTypes = {
         all: ["person", "intake", "loanin", "loanout", "acquisition", "organization", "cataloging", "movement", "objectexit"],
         procedures: ["intake", "acquisition", "loanin", "loanout", "movement", "objectexit"],
-        vocabulary: ["person", "organization"]
-        //cataloging: ["objects"] // So far in permissions this is a 1-element set
+        vocabulary: ["person", "organization"],
+        cataloging: ["cataloging"]
     };
     
     cspace.recordTypeManager = function (options) {

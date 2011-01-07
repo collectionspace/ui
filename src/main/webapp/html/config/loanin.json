@@ -21,11 +21,6 @@
             "templateSelector": ".csc-loanIn-template",
             "targetSelector": ".csc-record-edit-container"
         },
-        "sidebar": {
-            "href": "right-sidebar.html",
-            "templateSelector": ".csc-right-sidebar",
-            "targetSelector": ".csc-sidebar-container" 
-        },
         "footer": {
             "href": "footer.html",
             "templateSelector": ".csc-footer",
@@ -34,8 +29,7 @@
     },
     "selectors": {
         "titleBar": ".csc-loanIn-titleBar-template",
-        "recordEditor": ".csc-loanIn-template",
-        "sidebar": ".csc-sidebar"
+        "recordEditor": ".csc-loanIn-template"
     },
     "components": {
         "tabs": {
