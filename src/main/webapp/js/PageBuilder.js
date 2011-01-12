@@ -284,8 +284,8 @@ cspace = cspace || {};
             globalBundle: {
                 type: "cspace.globalBundle"
             },
-            globalEvents: {
-                type: "cspace.globalEvents"
+            globalNavigator: {
+                type: "cspace.util.globalNavigator"
             }
         },
         schema: [

@@ -36,18 +36,14 @@ cspace = cspace || {};
     };
     
     // A public function that is called as searchBox's navigateToSearch method and redirects to
-    // the search results page.
-    cspace.searchBox.navigateToSearchDefault = function (that) {
-        var url = fluid.stringTemplate(that.options.searchUrl, {
-            recordtype: that.locate("recordTypeSelect").val(),
-            keywords: that.locate("searchQuery").val() || ""
-        });
-        window.location = url;
-    };
-    
+    // the search results page.    
     cspace.searchBox.navigateToSearch = function (that) {
-        that.options.globalEvents.onPerformNavigation.fire(function () {
-            cspace.searchBox.navigateToSearchDefault(that);
+        that.options.globalNavigator.events.onPerformNavigation.fire(function () {
+            var url = fluid.stringTemplate(that.options.searchUrl, {
+                recordtype: that.locate("recordTypeSelect").val(),
+                keywords: that.locate("searchQuery").val() || ""
+            });
+            window.location = url;
         });
     };
     
@@ -95,7 +91,7 @@ cspace = cspace || {};
             recordTypeSelectLabel: ""
         },
         parentBundle: "{globalBundle}",
-        globalEvents: "{globalEvents}",
+        globalNavigator: "{globalNavigator}",
         model: {},                  // A default data model object.
         produceTree: cspace.searchBox.produceTree, // direct method expected by interim impl of initRendererComponent
         components: {
@@ -111,7 +107,7 @@ cspace = cspace || {};
         },
         invokers: {                 // Component's public functions with arguments that are resolved at the time of invokation.
             navigateToSearch: {     // A public method that builds search page's url and navigates to that page.
-                funcName: "cspace.searchBox.navigateToSearchDefault",
+                funcName: "cspace.searchBox.navigateToSearch",
                 args: ["{searchBox}"]
             }
         },
@@ -122,19 +118,6 @@ cspace = cspace || {};
                 fetchClass: "fastTemplate",
                 url: "%webapp/html/SearchBoxTemplate.html"
             })
-        }
-    });
-    
-    cspace.searchBox.recordSearchBox = function (container, options) {
-        var that = fluid.initLittleComponent("cspace.searchBox.recordSearchBox", options);
-        return cspace.searchBox(container, that.options);
-    };
-    
-    fluid.defaults("cspace.searchBox.recordSearchBox", {
-        invokers: {
-            navigateToSearch: {
-                funcName: "cspace.searchBox.navigateToSearch"
-            }
         }
     });
     

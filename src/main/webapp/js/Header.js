@@ -42,11 +42,6 @@ cspace = cspace || {};
         return that;
     };
     
-    fluid.demands("searchBox", ["cspace.record", "cspace.header"], {
-        funcName: "cspace.searchBox.recordSearchBox",
-        args: ["{header}.options.selectors.searchBox", fluid.COMPONENT_OPTIONS]
-    });
-    
     fluid.demands("searchBox", "cspace.header", ["{header}.options.selectors.searchBox", fluid.COMPONENT_OPTIONS]);
     
     fluid.defaults("cspace.header", {

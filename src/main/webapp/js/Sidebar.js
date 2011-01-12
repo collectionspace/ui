@@ -25,7 +25,7 @@ cspace = cspace || {};
         that.renderer.refreshView();
         fluid.initDependents(that);
         
-        that.options.applier.modelChanged.addListener("termsUsed", function (model, oldModel, changeRequest) {
+        that.options.recordApplier.modelChanged.addListener("termsUsed", function (model, oldModel, changeRequest) {
             that.termsUsed.applier.requestChange("items", model.termsUsed);
             that.termsUsed.refreshView();
         });
@@ -142,7 +142,7 @@ cspace = cspace || {};
                         afterSelect: "{sidebar}.options.recordListAfterSelectHandler"
                     },
                     model: {
-                        items: "{sidebar}.model.termsUsed",
+                        items: "{sidebar}.options.recordModel.termsUsed",
                         selectionIndex: -1
                     },
                     uispec : "{sidebar}.options.uispec.termsUsed",
@@ -157,9 +157,9 @@ cspace = cspace || {};
                 options: {
                     primary: "{sidebar}.options.primaryRecordType",
                     related: "cataloging",
-                    applier: "{sidebar}.options.applier",
+                    applier: "{sidebar}.options.recordApplier",
                     uispec : "{sidebar}.options.uispec.relatedCataloging",
-                    model: "{sidebar}.model",
+                    model: "{sidebar}.options.recordModel",
                     recordListAfterSelectHandler: "{sidebar}.options.recordListAfterSelectHandler"
                 }
             },
@@ -168,9 +168,9 @@ cspace = cspace || {};
                 options: {
                     primary: "{sidebar}.options.primaryRecordType",
                     related: "procedures",
-                    applier: "{sidebar}.options.applier",
+                    applier: "{sidebar}.options.recordApplier",
                     uispec : "{sidebar}.options.uispec.relatedProcedures",
-                    model: "{sidebar}.model",
+                    model: "{sidebar}.options.recordModel",
                     recordListAfterSelectHandler: "{sidebar}.options.recordListAfterSelectHandler"
                 }
             }
@@ -213,9 +213,13 @@ cspace = cspace || {};
         },
         produceTree: cspace.sidebar.produceTree,
         mergePolicy: {
-            model: "preserve",
-            applier: "preserve"
+            recordModel: "preserve",
+            recordApplier: "preserve"
         },
+        primaryRecordType: "{pageBuilder}.options.pageType",
+        uispec: "{pageBuilder}.uispec.sidebar",
+        recordApplier: "{pageBuilder}.applier",
+        recordModel: "{pageBuilder}.model",
         recordListAfterSelectHandler: cspace.recordList.afterSelectHandlerDefault,        
         resolver: "{permissionsResolver}",
         recordTypeManager: "{recordTypeManager}", //used to decide whether to show RelatedRecordsLists

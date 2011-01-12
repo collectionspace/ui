@@ -133,12 +133,6 @@ fluid.registerNamespace("cspace.util");
         }
     });
     
-    cspace.globalEvents = function (options) {
-        var that = fluid.initLittleComponent("cspace.globalEvents", options);
-        that.onPerformNavigation = fluid.event.getEventFirer(undefined, true);
-        return that;
-    };
-    
     /** Resolution of the global message bundle(s) */
         
     cspace.globalBundle = function (options) {
@@ -921,5 +915,52 @@ fluid.registerNamespace("cspace.util");
         var records = cspace.permissions.getPermissibleRelatedRecords(options.related, options.resolver, options.recordTypeManager, options.permission);
         return fluid.invokeGlobalFunction(options.callback, [options.model, records]);
     };
+    
+    cspace.util.globalNavigator = function (options) {
+        var that = fluid.initView("cspace.util.globalNavigator", "body", options);
+        fluid.initDependents(that);
+        that.bindEvents();
+        return that;
+    };
+    
+    cspace.util.globalNavigator.bindEvents = function (that) {
+        that.container.delegate(that.options.selectors.include, "click", function () {
+            var target = $(this);
+            if (target.is(that.options.selectors.exclude)) {
+                return;
+            }
+            that.events.onPerformNavigation.fire(function () {
+                window.location = target.attr("href");
+            });
+            return false;
+        });
+        that.container.delegate(that.options.selectors.forms, "submit", function () {
+            var form = $(this);
+            that.events.onPerformNavigation.fire(function () {
+                form[0].submit();
+            });
+            return false;
+        });
+        that.events.onPerformNavigation.addListener(function (callback) {
+            callback();
+        }, "onPerformNavigationFinal", undefined, "last");
+    };
+    
+    fluid.defaults("cspace.util.globalNavigator", {
+        selectors: {
+            include: "a",
+            exclude: "[href*=#], .csc-confirmation-exclusion, .ui-autocomplete a",
+            forms: ".csc-header-logout-form"
+        },
+        invokers: {
+            bindEvents: {
+                funcName: "cspace.util.globalNavigator.bindEvents",
+                args: ["{globalNavigator}"]
+            }
+        },
+        events: {
+            onPerformNavigation: "preventable"
+        }
+    });
     
 })(jQuery, fluid);
