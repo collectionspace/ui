@@ -16,11 +16,11 @@ cspace = cspace || {};
 (function ($, fluid) {
     fluid.log("RecordList.js loaded");
 
-    var selectItem = function (row, model, domBinder, events, styles) {
+    var selectItem = function (that, row) {
         row = $(row);
-        var rows = domBinder.locate("row");
-        var newIndex = rows.index(row);        
-        events.onSelect.fire(model, rows, events, styles, newIndex);
+        var rows = that.locate("row");
+        var newIndex = rows.index(row);
+        that.events.onSelect.fire(that, rows, newIndex);
     };
 
     var bindEventHandlers = function (that) {
@@ -50,11 +50,11 @@ cspace = cspace || {};
         });
 
         rows.click(function (event) {
-            selectItem(event.currentTarget, that.model, that.dom, that.events, that.options.styles);
+            selectItem(that, event.currentTarget);
         });
 
         rows.fluid("activatable", function (event) {
-            selectItem(event.currentTarget, that.model, that.dom, that.events, that.options.styles);
+            selectItem(that, event.currentTarget);
         });
     };
 
@@ -101,25 +101,28 @@ cspace = cspace || {};
         return that;
     };
     
-    cspace.recordList.onSelectHandlerDefault = function (model, rows, events, styles, newIndex) {
+    cspace.recordList.onSelectHandlerDefault = function (list, rows, newIndex) {
+        var styles = list.options.styles;
         rows.removeClass(styles.selected);
         rows.eq(newIndex).addClass(styles.selected);
-        model.selectionIndex = newIndex;
-        events.afterSelect.fire(model);    
+        list.model.selectionIndex = newIndex;
+        list.events.afterSelect.fire(list);    
     };
     
-    cspace.recordList.afterSelectHandlerDefault = function (model) {
-        var record = model.items[model.selectionIndex];
+    cspace.recordList.afterSelectHandlerDefault = function (list) {
+        var record = list.model.items[list.model.selectionIndex];
         if (!record) {
             return;
         }
-        var expander = cspace.urlExpander({
-            vars: {
-                recordType: record.recordtype,
-                csid: record.csid
-            }
+        list.options.globalNavigator.events.onPerformNavigation.fire(function () {
+            var expander = cspace.urlExpander({
+                vars: {
+                    recordType: record.recordtype,
+                    csid: record.csid
+                }
+            });
+            window.location = expander("%recordType.html?csid=%csid");
         });
-        window.location = expander("%recordType.html?csid=%csid");
     };
     
     fluid.defaults("cspace.recordList", {
@@ -130,6 +133,7 @@ cspace = cspace || {};
             nothingYet: ".csc-no-items-message",
             row: ".csc-recordList-row"
         },
+        globalNavigator: "{globalNavigator}",
         events: {
             onSelect: null,
             afterSelect: null,

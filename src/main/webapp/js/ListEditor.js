@@ -59,8 +59,8 @@ cspace = cspace || {};
             hideDetails(that.dom);
         });
         
-        that.list.events.afterSelect.addListener(function (model) {
-            that.options.loadDetails(model, that.detailsDC);
+        that.list.events.afterSelect.addListener(function (list) {
+            that.options.loadDetails(list.model, that.detailsDC);
         });
         
         that.locate("addNewListRowButton").click(that.addNewListRow);
@@ -118,9 +118,9 @@ cspace = cspace || {};
             hideDetails(that.dom);
         };
         
-        that.options.list.options.onSelectHandler = function (model, rows, events, styles, newIndex) {
+        that.options.list.options.onSelectHandler = function (list, rows, newIndex) {
             that.options.globalNavigator.events.onPerformNavigation.fire(function () {
-                cspace.recordList.onSelectHandlerDefault(model, rows, events, styles, newIndex);
+                cspace.recordList.onSelectHandlerDefault(list, rows, newIndex);
             });
         };
 
