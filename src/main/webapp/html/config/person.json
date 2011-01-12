@@ -55,13 +55,7 @@
             }
         },
         "sidebar": {
-            "type": "cspace.sidebar",
-            "options": {
-                "uispec": "{pageBuilder}.uispec.sidebar",
-                "applier": "{pageBuilder}.applier",
-                "model": "{pageBuilder}.model",
-                "primaryRecordType": "{pageBuilder}.options.pageType"
-            }
+            "type": "cspace.sidebar"
         }
     }
 }

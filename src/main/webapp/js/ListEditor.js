@@ -119,8 +119,7 @@ cspace = cspace || {};
         };
         
         that.options.list.options.onSelectHandler = function (model, rows, events, styles, newIndex) {
-            that.options.globalEvents.onPerformNavigation.fire(function () {
-                that.details.unsavedChanges = false;
+            that.options.globalNavigator.events.onPerformNavigation.fire(function () {
                 cspace.recordList.onSelectHandlerDefault(model, rows, events, styles, newIndex);
             });
         };
@@ -211,7 +210,7 @@ cspace = cspace || {};
                 deferRendering: true
             }
         },
-        globalEvents: "{globalEvents}",
+        globalNavigator: "{globalNavigator}",
         dataContext: {
             type: "cspace.dataContext",
             options: {

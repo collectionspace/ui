@@ -65,54 +65,9 @@ cspace = cspace || {};
         that.locate("save").removeAttr("disabled");
         that.events["after" + action + "ObjectDataSuccess"].fire(data, that.options.strings[message]);
     };
-    
-    var processSaveConfiramtion = function (that, callback) {
-        if (that.unsavedChanges) {
-            that.confirmation.open("cspace.confirmation.saveDialog");
-            that.confirmation.confirmationDialog.events.onClose.addListener(function (userAction) {
-                if (userAction === "act") {
-                    that.options.dataContext.events.afterSave.addListener(function () {
-                        callback();
-                    });
-                    that.requestSave();
-                }
-                else if (userAction === "proceed") {
-                    callback();
-                }
-            });
-            return false;
-        }
-        else {
-            callback();
-        }
-    };
 
     var bindEventHandlers = function (that) {
         
-        $(that.options.selectors.confirmationInclude).live("click", function () {
-            if (!that.unsavedChanges) {
-                return;
-            }
-            var target = $(this);
-            if (!target.is(that.options.selectors.confirmationExclude)) {
-                that.options.globalEvents.onPerformNavigation.fire(function () {
-                    window.location = target.attr("href");
-                });
-                return false;
-            }
-        });
-                
-        $(that.options.selectors.forms).submit(function (event) {
-            if (!that.unsavedChanges) {
-                return;
-            }
-            var form = $(this);
-            that.options.globalEvents.onPerformNavigation.fire(function () {
-                form[0].submit();
-            });
-            return false;
-        });
-
         that.events.onSave.addListener(validateIdentificationNumber(that.dom, that.container, that.options.strings.identificationNumberRequired));
 
         that.events.onSave.addListener(function () {
@@ -150,9 +105,29 @@ cspace = cspace || {};
 
         that.options.dataContext.events.onError.addListener(makeDCErrorHandler(that));
         
-        that.options.globalEvents.onPerformNavigation.addListener(function (callback) {
-            return processSaveConfiramtion(that, callback);
-        });
+        that.options.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
+            if (that.unsavedChanges) {
+                that.confirmation.open("cspace.confirmation.saveDialog", undefined, {
+                    listeners: {
+                        onClose: function (userAction) {
+                            if (userAction === "act") {
+                                that.options.dataContext.events.afterSave.addListener(function () {
+                                    callback();
+                                });
+                                that.requestSave();
+                            }
+                            else if (userAction === "proceed") {
+                                callback();
+                            }
+                        }
+                    }
+                });
+            }
+            else {
+                callback();
+            }
+            return false;
+        }, "onPerformNavigationRecordEditor");
     };
     
     var bindHandlers = function (that) {
@@ -228,11 +203,14 @@ cspace = cspace || {};
         };
         
         that.remove = function () {
-            that.confirmation.open("cspace.confirmation.deleteDialog");
-            that.confirmation.confirmationDialog.events.onClose.addListener(function (userAction) {
-                if (userAction === "act") {
-                    that.options.dataContext.remove(that.model.csid);
-                    that.unsavedChanges = false;
+            that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+                listeners: {
+                    onClose: function (userAction) {
+                        if (userAction === "act") {
+                            that.options.dataContext.remove(that.model.csid);
+                            that.unsavedChanges = false;
+                        }
+                    }
                 }
             });
         };
@@ -263,7 +241,7 @@ cspace = cspace || {};
                 type: "cspace.confirmation"
             }
         },
-        globalEvents: "{globalEvents}",
+        globalNavigator: "{globalNavigator}",
         produceTree: cspace.recordEditor.produceTree,
         events: {
             onSave: "preventable",
@@ -283,14 +261,10 @@ cspace = cspace || {};
             messageContainer: ".csc-message-container",
             feedbackMessage: ".csc-message",
             timestamp: ".csc-timestamp",
-            requiredFields: ".csc-required:visible",
-            confirmationInclude: "a",
-            confirmationExclude: "[href*=#], .csc-confirmation-exclusion, .ui-autocomplete a",
-            forms: ".csc-header-logout-form"
+            requiredFields: ".csc-required:visible"
         },
         selectorsToIgnore: ["errorDialog", "errorMessage", "save", "cancel", "deleteButton", "messageContainer", 
-            "feedbackMessage", "timestamp", "requiredFields", "confirmationInclude", "confirmationExclude", "forms",
-            "identificationNumber"],
+            "feedbackMessage", "timestamp", "requiredFields", "identificationNumber"],
         rendererFnOptions: {
             cutpointGenerator: "cspace.recordEditor.cutpointGenerator",
         },

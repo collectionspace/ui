@@ -13,33 +13,31 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 var adminUsersTester = function () {
 
-    // jqMock requires jqUnit.ok to exist
-    jqUnit.ok = ok;
-    
     var testUISpec = {};
     var schema = {};
-    jQuery.ajax({
-        async: false,
-        url: "../../main/webapp/html/uispecs/users/uispec.json",
-        dataType: "json",
-        success: function (data) {
-            testUISpec = data;
+    fluid.fetchResources({
+        uispec: {
+            href: "../../main/webapp/html/uispecs/users/uispec.json",
+            options: {
+                dataType: "json",
+                success: function (data) {
+                    testUISpec = data;
+                },
+                async: false
+            }
         },
-        error: function (xhr, textStatus, error) {
-            fluid.log("Unable to load users uispec for testing");
+        schema: {
+            href: "../../main/webapp/html/uischema/users.json",
+            options: {
+                dataType: "json",
+                success: function (data) {
+                    schema = data;
+                },
+                async: false
+            }
         }
     });
-    jQuery.ajax({
-        async: false,
-        url: "../../main/webapp/html/uischema/users.json",
-        dataType: "json",
-        success: function (data) {
-            schema = data;
-        },
-        error: function (xhr, textStatus, error) {
-            fluid.log("Unable to load users schema for testing");
-        }
-    });
+    
     var baseTestOpts = {
         recordType: "users/records/list.json",
         uispec: testUISpec,
@@ -68,21 +66,24 @@ var adminUsersTester = function () {
             }
         }
     };
-
-    var testOpts;
+    
     var testDataCreateUser = {
         email: "rj@dio.com",
         userName: "R J Dio",
         validPassword: "123456789",
         invalidPassword: "123"
     };
+    
+    cspace.tests.onTearDown = fluid.event.getEventFirer();
 
     var bareAdminUsersTest = new jqUnit.TestCase("AdminUsers Tests", function () {
-        jQuery(".ui-dialog").detach();
         bareAdminUsersTest.fetchTemplate("../../main/webapp/html/administration.html", ".csc-users-userAdmin");
-        testOpts = {};
-        fluid.model.copyModel(testOpts, baseTestOpts);
-    });
+        cspace.tests.onTearDown.addListener(function (re) {
+            re.options.globalNavigator.events.onPerformNavigation.removeListener("onPerformNavigationRecordEditor");
+            re.confirmation.popup.dialog("destroy").remove();
+        }, "tearDown");
+    }, cspace.tests.onTearDown.removeListener("tearDown"));
+    
     var adminUsersTest = cspace.tests.testEnvironment({testCase: bareAdminUsersTest});
     
     var changeDetails = function (adminUsersSelectors, testDataCreateUser, confPassword) {
@@ -90,125 +91,103 @@ var adminUsersTester = function () {
         jQuery(adminUsersSelectors.userName).val(testDataCreateUser.userName).change();
         jQuery(adminUsersSelectors.password).val(testDataCreateUser.validPassword).change();
         jQuery(adminUsersSelectors.passwordConfirm).val(confPassword).change();
-    };    
-    var setupSaveNewUserInvalidPassword = function (confPassword, message) {
+    };
+    
+    var basicAdminUsersSetup = function (callback, opts) {
         var adminUsers;
-        testOpts.listeners = {
+        var testOpts = fluid.copy(baseTestOpts);
+        fluid.merge(null, testOpts, opts);
+        fluid.model.setBeanValue(testOpts, "listeners", {
             afterRender: function () {
-                var userListEditorSelectors = adminUsers.userListEditor.options.selectors;
-                jQuery(userListEditorSelectors.addNewListRowButton).click();
-                
-                var adminUsersSelectors = adminUsers.options.selectors;                
-                changeDetails(adminUsersSelectors, testDataCreateUser, confPassword);
-                
-                var saveResult = adminUsers.userListEditor.details.requestSave();
-                jqUnit.assertFalse("details.save returns false if " + message, saveResult);
-                jqUnit.isVisible("message container is visible", userListEditorSelectors.messageContainer);
-
-                start();
+                callback(adminUsers, adminUsers.userListEditor, adminUsers.userListEditor.details);
             }
-        };
-        
+        });
         adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
         stop();
     };
     
-    adminUsersTest.test("Creation", function () {
-        var adminUsers;
-        testOpts.listeners = {
-            afterRender: function () {
-                jqUnit.assertEquals("User list model should have right number of entries", 4, adminUsers.userListEditor.model.list.length);
-                jqUnit.assertEquals("User list model should contain expected user", "Megan Forbes", adminUsers.userListEditor.model.list[1].screenName);
-                jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, jQuery(".csc-recordList-row", "#main").length);
-                
-                //check for details view visibility
-                var userListEditorSelectors = adminUsers.userListEditor.options.selectors;
-                jqUnit.notVisible("message container is hidden", userListEditorSelectors.messageContainer);
-                jqUnit.isVisible("details none is visible", userListEditorSelectors.detailsNone);
-                jqUnit.notVisible("details is not visible", userListEditorSelectors.details);
-                jqUnit.notVisible("hide on create is hidden", userListEditorSelectors.hideOnCreate);
-                jqUnit.notVisible("hide on edit is visible", userListEditorSelectors.hideOnEdit);
-                jqUnit.notVisible("new list row is hidden", userListEditorSelectors.newListRow);
+    var setupSaveNewUserInvalidPassword = function (confPassword, message) {
+        basicAdminUsersSetup(function (adminUsers, le, re) {
+            le.events.afterAddNewListRow.addListener(function () {
+                changeDetails(adminUsers.options.selectors, testDataCreateUser, confPassword);
+                var saveResult = re.requestSave();
+                jqUnit.assertFalse("details.save returns false if " + message, saveResult);
+                jqUnit.isVisible("message container is visible", le.locate("messageContainer"));
+                cspace.tests.onTearDown.fire(re);
                 start();
-            }
-        };
-        
-        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
-        stop();
+            });
+            le.locate("addNewListRowButton").click();
+        });
+    };
+    
+    adminUsersTest.test("Creation", function () {
+        basicAdminUsersSetup(function (adminUsers, le, re) {
+            var list =le.model.list;
+            var selectors = le.options.selectors;
+            jqUnit.assertEquals("User list model should have right number of entries", 4, list.length);
+            jqUnit.assertEquals("User list model should contain expected user", "Megan Forbes", list[1].screenName);
+            jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, le.list.locate("row").length);
+            jqUnit.notVisible("message container is hidden", selectors.messageContainer);
+            jqUnit.isVisible("details none is visible", selectors.detailsNone);
+            jqUnit.notVisible("details is not visible", selectors.details);
+            jqUnit.notVisible("hide on create is hidden", selectors.hideOnCreate);
+            jqUnit.notVisible("hide on edit is visible", selectors.hideOnEdit);
+            jqUnit.notVisible("new list row is hidden", selectors.newListRow);
+            cspace.tests.onTearDown.fire(re);
+            start();
+        });
     });
     
     adminUsersTest.test("Click new user button", function () {
-        var adminUsers;
-        testOpts.listeners = {
-            afterRender: function () {
-                var userListEditorSelectors = adminUsers.userListEditor.options.selectors;
-                jQuery(userListEditorSelectors.addNewListRowButton).click();
-                
-                var adminUsersSelectors = adminUsers.options.selectors;                
-                jqUnit.assertEquals("Email is blank", jQuery(adminUsersSelectors.email).val(), "");
-                jqUnit.assertEquals("Full name is blank", jQuery(adminUsersSelectors.userName).val(), "");
-                jqUnit.assertEquals("Password is blank", jQuery(adminUsersSelectors.password).val(), "");
-                jqUnit.assertEquals("Password confirm is blank", jQuery(adminUsersSelectors.passwordConfirm).val(), "");
-                
-                var deleteButton = jQuery(adminUsers.userListEditor.details.options.selectors.deleteButton);
+        basicAdminUsersSetup(function (adminUsers, le, re) {
+            var selectors = le.options.selectors;
+            var deleteButton = re.locate("deleteButton");
+            le.events.afterAddNewListRow.addListener(function () {
+                jqUnit.assertEquals("Email is blank", adminUsers.locate("email").val(), "");
+                jqUnit.assertEquals("Full name is blank", adminUsers.locate("userName").val(), "");
+                jqUnit.assertEquals("Password is blank", adminUsers.locate("password").val(), "");
+                jqUnit.assertEquals("Password confirm is blank", adminUsers.locate("passwordConfirm").val(), "");
                 jqUnit.assertTrue("Delete button has deactivated style", deleteButton.hasClass("deactivate"));
                 jqUnit.assertTrue("Delete button is disabled", deleteButton.attr("disabled"));
-                
-                jqUnit.notVisible("message container is hidden", userListEditorSelectors.messageContainer);
-                jqUnit.notVisible("details none is hidden", userListEditorSelectors.detailsNone);
-                jqUnit.isVisible("details is visible", userListEditorSelectors.details);
-                jqUnit.notVisible("hide on create is hidden", userListEditorSelectors.hideOnCreate);
-                jqUnit.isVisible("hide on edit is visible", userListEditorSelectors.hideOnEdit);
-                jqUnit.isVisible("new list row is visible", userListEditorSelectors.newListRow);
+                jqUnit.notVisible("message container is hidden", selectors.messageContainer);
+                jqUnit.notVisible("details none is hidden", selectors.detailsNone);
+                jqUnit.isVisible("details is visible", selectors.details);
+                jqUnit.notVisible("hide on create is hidden", selectors.hideOnCreate);
+                jqUnit.isVisible("hide on edit is visible", selectors.hideOnEdit);
+                jqUnit.isVisible("new list row is visible", selectors.newListRow);
+                cspace.tests.onTearDown.fire(re);
                 start();
-            }
-        };
-        
-        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
-        stop();
+            });
+            le.locate("addNewListRowButton").click();
+        });
     });
         
     adminUsersTest.test("Save new user - successful save - save function returns true", function () {
-        var adminUsers;
-        testOpts.listeners = {
-            afterRender: function () {
-                jQuery(adminUsers.userListEditor.options.selectors.addNewListRowButton).click();
-                
-                var adminUsersSelectors = adminUsers.options.selectors;
-                changeDetails(adminUsersSelectors, testDataCreateUser, testDataCreateUser.validPassword);
-                
-                var saveResult = adminUsers.userListEditor.details.requestSave();
+        basicAdminUsersSetup(function (adminUsers, le, re) {
+            le.events.afterAddNewListRow.addListener(function () {
+                changeDetails(adminUsers.options.selectors, testDataCreateUser, testDataCreateUser.validPassword);
+                var saveResult = re.requestSave();
                 jqUnit.assertTrue("details.save returns true for successful save", saveResult);
-                               
+                cspace.tests.onTearDown.fire(re);
                 start();
-            }
-        };
-        
-        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
-        stop();
+            });
+            le.locate("addNewListRowButton").click();
+        });
     });  
     
     adminUsersTest.test("Save new user - empty form field - expect save to return false", function () {
-        var adminUsers;
-        testOpts.listeners = {
-            afterRender: function () {
-                var userListEditorSelectors = adminUsers.userListEditor.options.selectors;
-                jQuery(userListEditorSelectors.addNewListRowButton).click();
-                
-                var adminUsersSelectors = adminUsers.options.selectors;
-                changeDetails(adminUsersSelectors, testDataCreateUser, testDataCreateUser.validPassword);
-                jQuery(adminUsersSelectors.email).val("").change();
-                
-                var saveResult = adminUsers.userListEditor.details.requestSave();
+        basicAdminUsersSetup(function (adminUsers, le, re) {
+            le.events.afterAddNewListRow.addListener(function () {
+                changeDetails(adminUsers.options.selectors, testDataCreateUser, testDataCreateUser.validPassword);
+                adminUsers.locate("email").val("").change();
+                var saveResult = re.requestSave();
                 jqUnit.assertFalse("details.save returns false if passwords do not match", saveResult);
-                jqUnit.isVisible("message container is visible", userListEditorSelectors.messageContainer);
-
+                jqUnit.isVisible("message container is visible", le.locate("messageContainer"));
+                cspace.tests.onTearDown.fire(re);
                 start();
-            }
-        };
-        
-        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
-        stop();
+            });
+            le.locate("addNewListRowButton").click();
+        });
     });
     
     adminUsersTest.test("Save new user - mismatched passwords - expect save to return false", function () {
@@ -220,62 +199,60 @@ var adminUsersTester = function () {
     });    
     
     adminUsersTest.test("Valid edit of existing user: save should succeed", function () {
-        var adminUsers;
-        testOpts.listeners = {
-            afterRender: function () {
-                var userListEditorSelectors = adminUsers.userListEditor.options.selectors;
-                adminUsers.userListEditor.details.events.afterRender.addListener(function () {
-                    adminUsers.userListEditor.details.events.afterRender.removeListener("initialSelect");                
-                    var saveResult = adminUsers.userListEditor.details.requestSave();
-                    jqUnit.assertTrue("Save should succeed (validation should not prevent save)", saveResult);
-                    jqUnit.isVisible("message container is visible", userListEditorSelectors.messageContainer);
-                    start();
-                }, "initialSelect");
-                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[2]).click();
-            }
-        };
-        
-        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
-        stop();
+        basicAdminUsersSetup(function (adminUsers, le, re) {
+            re.events.afterRender.addListener(function () {
+                re.events.afterRender.removeListener("initialSelect");                
+                var saveResult = re.requestSave();
+                jqUnit.assertTrue("Save should succeed (validation should not prevent save)", saveResult);
+                jqUnit.isVisible("message container is visible", le.locate("messageContainer"));
+                cspace.tests.onTearDown.fire(re);
+                start();
+            }, "initialSelect");
+            adminUsers.userListEditor.list.locate("row").eq(2).click();
+        });
     });
     
     adminUsersTest.test("Test search/unsearch functionality", function () {
         var adminUsers;
-        testOpts.queryURL = "../../main/webapp/html/data/users/search/list.json";
-        testOpts.listeners = {
+        var testOpts = fluid.copy(baseTestOpts);
+        fluid.model.setBeanValue(testOpts, "queryURL", "../../main/webapp/html/data/users/search/list.json");
+        fluid.model.setBeanValue(testOpts, "listeners", {
             afterSearch: function () {
                 jqUnit.isVisible("Unsearch is visible after search", adminUsers.options.selectors.unSearchButton);
                 jqUnit.assertEquals("There are 2 users in the list after search", 2, adminUsers.userListEditor.model.list.length);
                 adminUsers.userListEditor.list.events.afterRender.addListener(function () {
                     jqUnit.notVisible("Unsearch is invisible after unsearch", adminUsers.options.selectors.unSearchButton);
                     jqUnit.assertEquals("There are 4 users in the list after unsearch", 4, adminUsers.userListEditor.model.list.length);
+                    cspace.tests.onTearDown.fire(adminUsers.userListEditor.details);
+                    start();
                 });
                 adminUsers.locate("unSearchButton").click();
-                start();
             },
-            afterRender: function () {               
+            afterRender: function () {
                 jqUnit.assertEquals("Initially there are 4 users in the list", 4, adminUsers.userListEditor.model.list.length);
                 jqUnit.notVisible("Unsearch is invisible initially", adminUsers.options.selectors.unSearchButton);
-                adminUsers.dom.locate("searchField").val("test");
-                jqUnit.assertEquals("Value in seatch fiels is 'test'", "test", adminUsers.dom.locate("searchField").val());
+                adminUsers.locate("searchField").val("test").change();
+                jqUnit.assertEquals("Value in seatch fiels is 'test'", "test", adminUsers.locate("searchField").val());
                 adminUsers.locate("searchButton").click();
             }
-        };
+        });
         adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
         stop();
     });
     
     var setupConfirmation = function (testFunc) {
-        var adminUsers;
         var waitMultiple;
         fluid.log("Begin setupConfirmation");
         var callback = function() {
             fluid.log("Final test callback firing"); 
-            var re = adminUsers.userListEditor.details;
+            var pageReadyArgs = waitMultiple.waitSet.pageReady.args;
+            var setupArgs = waitMultiple.waitSet.afterSetup.args;
+            var adminUsers = setupArgs[0];
             waitMultiple.clear(function() {
-                testFunc(re, adminUsers);
+                testFunc.apply(null, [pageReadyArgs[0].details, adminUsers]);
                 });
             delete waitMultiple.waitSet["pageReady"];
+            delete waitMultiple.waitSet["afterSetup"];
             $(adminUsers.userListEditor.list.locate("row")[2]).click();
         }; 
         var waitMultiple = cspace.util.waitMultiple(
@@ -289,51 +266,56 @@ var adminUsersTester = function () {
         fluid.model.setBeanValue(testOpts, "userListEditor.options.details.options.listeners", {
             afterRender: waitMultiple.getListener("detailsRendered")
         });
-        // This is currently ok since there is at least ONE async call e.g. for userListEditor
-        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        fluid.model.setBeanValue(testOpts, "listeners", {
+            afterSetup: waitMultiple.getListener("afterSetup")
+        });
+        cspace.adminUsers(".csc-users-userAdmin", testOpts);
         stop();
     };
     
     adminUsersTest.test("Confirmation", function () {
         setupConfirmation(function (re, adminUsers) {
             jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());
-            jqUnit.notVisible("Confiration dialog is invisible initially", adminUsers.userListEditor.details.confirmation.dlg);
+            jqUnit.notVisible("Confiration dialog is invisible initially", re.confirmation.popup);
             adminUsers.locate("userName").val("New Name").change();
-            adminUsers.userListEditor.details.confirmation.events.afterOpen.addListener(function () {
-                jqUnit.isVisible("Confirmation dialog should now be visible", adminUsers.userListEditor.details.confirmation.dlg);
+            re.confirmation.popup.bind("dialogopen", function () {
+                jqUnit.isVisible("Confirmation dialog should now be visible", re.confirmation.popup);
+                cspace.tests.onTearDown.fire(re);
+                start();
             });
-            jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
-            start();
+            adminUsers.userListEditor.list.locate("row").eq(1).click();
         });
     });
     
     adminUsersTest.test("Confirmation cancel", function () {
         setupConfirmation(function (re, adminUsers) {
-            adminUsers.userListEditor.details.events.afterRender.removeListener("initialSelect");                    
             adminUsers.locate("userName").val("New Name").change();
-            adminUsers.userListEditor.details.confirmation.events.afterOpen.addListener(function () {
-                adminUsers.userListEditor.details.confirmation.events.afterClose.addListener(function () {
-                    jqUnit.notVisible("Confirmation dialog is now invisible", adminUsers.userListEditor.details.confirmation.dlg);
+            re.confirmation.popup.bind("dialogopen", function () {
+                re.confirmation.popup.bind("dialogclose", function () {
+                    jqUnit.notVisible("Confirmation dialog is now invisible", re.confirmation.popup);
                     jqUnit.assertEquals("User Name should still be", "New Name", adminUsers.locate("userName").val());
+                    cspace.tests.onTearDown.fire(re);
+                    start();
                 });
-                adminUsers.userListEditor.details.confirmation.locate("cancel", adminUsers.userListEditor.details.confirmation.dlg).click();                        
+                re.confirmation.confirmationDialog.locate("cancel").click();                        
             });
-            jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
-            start();
+            adminUsers.userListEditor.list.locate("row").eq(1).click();
          });
     });
     
     adminUsersTest.test("Confirmation proceed", function () {
         setupConfirmation(function (re, adminUsers) {
-            re.events.afterRender.removeListener("initialSelect");                    
             adminUsers.locate("userName").val("New Name").change();
-            jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
-            re.events.afterRender.addListener(function () {
-                jqUnit.notVisible("Confirmation dialog is now invisible", re.confirmation.dlg);
-                jqUnit.assertEquals("User Name should now be", "Megan Forbes", adminUsers.locate("userName").val());
-                start();
+            re.confirmation.popup.bind("dialogopen", function () {
+                re.events.afterRender.addListener(function () {
+                    jqUnit.notVisible("Confirmation dialog is now invisible", re.confirmation.popup);
+                    jqUnit.assertEquals("User Name should now be", "Megan Forbes", adminUsers.locate("userName").val());
+                    cspace.tests.onTearDown.fire(re);
+                    start();
+                });
+                re.confirmation.confirmationDialog.locate("proceed").click();
             });
-            re.confirmation.locate("proceed", re.confirmation.dlg).click();
+            adminUsers.userListEditor.list.locate("row").eq(1).click();
         });
     });
     
@@ -341,10 +323,11 @@ var adminUsersTester = function () {
         setupConfirmation(function (re) {
             re.events.afterRender.removeListener("initialSelect");
             re.remove();
-            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this record?", re.confirmation.locate("message:", re.confirmation.dlg).text());
-            jqUnit.isVisible("Delete button should be visible", re.confirmation.locate("act", re.confirmation.dlg));
-            jqUnit.isVisible("Cancel button should be visible", re.confirmation.locate("cancel", re.confirmation.dlg));
-            jqUnit.assertEquals("Proceed / Don't Save button should not be rendered", 0, re.confirmation.locate("proceed", re.confirmation.dlg).length);
+            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this record?", re.confirmation.confirmationDialog.locate("message:").text());
+            jqUnit.isVisible("Delete button should be visible", re.confirmation.confirmationDialog.locate("act"));
+            jqUnit.isVisible("Cancel button should be visible", re.confirmation.confirmationDialog.locate("cancel"));
+            jqUnit.assertEquals("Proceed / Don't Save button should not be rendered", 0, re.confirmation.confirmationDialog.locate("proceed").length);
+            cspace.tests.onTearDown.fire(re);
             start();
         });
     });
@@ -354,10 +337,11 @@ var adminUsersTester = function () {
             re.events.afterRender.removeListener("initialSelect");
             re.remove();
             jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());
-            jqUnit.isVisible("Confirmation Dialog is now visible", jQuery(".csc-confirmationDialog"));
-            re.confirmation.locate("cancel", re.confirmation.dlg).click();
-            jqUnit.notVisible("Confirmation Dialog is now invisible", jQuery(".csc-confirmationDialog"));
+            jqUnit.isVisible("Confirmation Dialog is now visible", re.confirmation.popup);
+            re.confirmation.confirmationDialog.locate("cancel").click();
+            jqUnit.notVisible("Confirmation Dialog is now invisible", re.confirmation.popup);
             jqUnit.assertEquals("Selected username is still", "Anastasia Cheethem", adminUsers.locate("userName").val());
+            cspace.tests.onTearDown.fire(re);
             start();
         });
     });
@@ -369,11 +353,12 @@ var adminUsersTester = function () {
             jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());                        
             re.options.dataContext.events.afterRemove.addListener(function () {                        
                 jqUnit.assertTrue("Successfully executed remove", true);
-                jqUnit.notVisible("Confirmation Dialog is now invisible", jQuery(".csc-confirmationDialog"));
+                jqUnit.notVisible("Confirmation Dialog is now invisible", re.confirmation.popup);
                 jqUnit.notVisible("No record selected", adminUsers.locate("userName"));
+                cspace.tests.onTearDown.fire(re);
                 start();
             });
-            re.confirmation.locate("act", re.confirmation.dlg).click();
+            re.confirmation.confirmationDialog.locate("act").click();
         });
     });
     
@@ -381,12 +366,13 @@ var adminUsersTester = function () {
         setupConfirmation(function (re, adminUsers) {
             re.events.afterRender.removeListener("initialSelect");                    
             adminUsers.locate("userName").val("New Name").change();
-            jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
-            jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.locate("message:", re.confirmation.dlg).eq(0).text());
-            jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.locate("message:", re.confirmation.dlg).eq(1).text());
-            re.confirmation.close();
+            adminUsers.userListEditor.list.locate("row").eq(1).click();
+            jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.confirmationDialog.locate("message:").eq(0).text());
+            jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.confirmationDialog.locate("message:").eq(1).text());
+            re.confirmation.confirmationDialog.locate("close").click();
             re.remove();
-            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this record?", re.confirmation.locate("message:", re.confirmation.dlg).text());
+            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this record?", re.confirmation.confirmationDialog.locate("message:").text());
+            cspace.tests.onTearDown.fire(re);
             start();
         });
     });
@@ -395,12 +381,13 @@ var adminUsersTester = function () {
         setupConfirmation(function (re, adminUsers) {
             re.events.afterRender.removeListener("initialSelect");                    
             re.remove();
-            jqUnit.assertEquals("After delete clicked, confirmation text should say", "Delete this record?", re.confirmation.locate("message:", re.confirmation.dlg).text());
-            re.confirmation.close();
+            jqUnit.assertEquals("After delete clicked, confirmation text should say", "Delete this record?", re.confirmation.confirmationDialog.locate("message:").text());
+            re.confirmation.confirmationDialog.locate("close").click();
             adminUsers.locate("userName").val("New Name").change();
-            jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
-            jqUnit.assertEquals("Delete cancelled, record edited, attempt to edit other user, confirmation text should say", "You are about to leave this record.", re.confirmation.locate("message:", re.confirmation.dlg).eq(0).text());
-            jqUnit.assertEquals("Confirmation text should also say", "Save Changes?", re.confirmation.locate("message:", re.confirmation.dlg).eq(1).text());                    
+            adminUsers.userListEditor.list.locate("row").eq(1).click();
+            jqUnit.assertEquals("Delete cancelled, record edited, attempt to edit other user, confirmation text should say", "You are about to leave this record.", re.confirmation.confirmationDialog.locate("message:").eq(0).text());
+            jqUnit.assertEquals("Confirmation text should also say", "Save Changes?", re.confirmation.confirmationDialog.locate("message:").eq(1).text());
+            cspace.tests.onTearDown.fire(re);
             start();
         });
     });
@@ -409,37 +396,34 @@ var adminUsersTester = function () {
         setupConfirmation(function (re, adminUsers) {
             re.events.afterRender.removeListener("initialSelect");                    
             adminUsers.locate("userName").val("New Name").change();
-            jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
-            jqUnit.isVisible("Navigating without cancelling, confirmation should be visible", re.confirmation.dlg);
-            jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.locate("message:", re.confirmation.dlg).eq(0).text());
-            jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.locate("message:", re.confirmation.dlg).eq(1).text());
-            re.confirmation.close();
-            jqUnit.notVisible("Dialog should close", re.confirmation.dlg);
-            re.locate("cancel").click();                    
-            jqUnit.notVisible("After cancelling, user details should now be hidden", adminUsers.userListEditor.locate("details"));
-            jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[1]).click();
-            jqUnit.notVisible("Navigating away, there should be no visible confirmation", re.confirmation.dlg);
-            start();
+            re.confirmation.popup.bind("dialogopen", function () {
+                jqUnit.isVisible("Navigating without cancelling, confirmation should be visible", re.confirmation.popup);
+                jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.confirmationDialog.locate("message:").eq(0).text());
+                jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.confirmationDialog.locate("message:").eq(1).text());
+                re.confirmation.confirmationDialog.locate("close").click();
+                jqUnit.notVisible("Dialog should close", re.confirmation.popup);
+                re.locate("cancel").click();
+                jqUnit.notVisible("After cancelling, user details should now be hidden", adminUsers.userListEditor.locate("details"));
+                re.events.afterRender.addListener(function () {
+                    jqUnit.notVisible("Navigating away, there should be no visible confirmation", re.confirmation.popup);
+                    cspace.tests.onTearDown.fire(re);
+                    start();
+                });
+                adminUsers.userListEditor.list.locate("row").eq(1).click();
+            });
+            adminUsers.userListEditor.list.locate("row").eq(1).click();
         });
     });
     
     var currentUserTests = function (userCSID, index, visibility) {
-        var adminUsers;
-        testOpts.currentUserId = userCSID;
-        testOpts.listeners = {
-            afterRender: function () {
-                var record = adminUsers.userListEditor.details;
-                var adminUsersSelectors = adminUsers.options.selectors;
-                record.events.afterRender.addListener(function () {
-                    jqUnit[visibility]("Delete button is " + visibility + " current user", 
-                        adminUsersSelectors.deleteButton);
-                    start();
-                });
-                jQuery(jQuery(adminUsers.userListEditor.list.options.selectors.row)[index]).click();
-            }
-        };
-        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
-        stop();
+        basicAdminUsersSetup(function (adminUsers, le, re) {
+            re.events.afterRender.addListener(function () {
+                jqUnit[visibility]("Delete button is " + visibility + " current user", adminUsers.options.selectors.deleteButton);
+                cspace.tests.onTearDown.fire(re);
+                start();
+            });
+            adminUsers.userListEditor.list.locate("row").eq(index).click();
+        }, {currentUserId: userCSID});
     };
     
     adminUsersTest.test("Currently logged in user should have invisible delete button", function () {

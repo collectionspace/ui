@@ -56,7 +56,71 @@ var createNewTester = function ($) {
     };
 
     var setupSidebar = function (options) {
-        options.applier = fluid.makeChangeApplier(options.model);
+        options.recordModel = options.recordModel || {
+            "relations": {
+                "cataloging": [
+                    {
+                        "summary": "Stamp albums. Famous stars series stamp album.",
+                        "csid": "1984.068.0338",
+                        "number": "1984.068.0338",
+                        "relid": "19ba9f30-75c3-41c8-b3e6",
+                        "relationshiptype": "affects",
+                        "recordtype": "cataloging"
+                    },
+                    {
+                        "summary": "Souvenir books. Molly O' Play Book.",
+                        "csid": "2005.018.1383",
+                        "number": "2005.018.1383",
+                        "relid": "e8d20612-e1f5-4e90-bc36",
+                        "relationshiptype": "affects",
+                        "recordtype": "cataloging"
+                    }
+                ],
+                "movement": [
+                    {
+                        "summary": "Front Porch",
+                        "csid": "112.442.1",
+                        "number": "112.442.1",
+                        "relid": "19ba9f30-abcd-fede-abcd",
+                        "relationshiptype": "affects",
+                        "recordtype": "movement"
+                    }
+                ]
+            },
+            "termsUsed": [
+                {
+                    "sourceFieldName": "collectionobjects_common:inscriber",
+                    "number": "Margaret Brodie",
+                    "csid": "c0fd9987-7625-4b5f-bbac",
+                    "recordtype": "person" 
+                },
+                {
+                    "sourceFieldName": "collectionobjects_common:contentOrganization",
+                    "number": "Hardie & Co.",
+                    "csid": "c0fd9987-7625-4b5f-foo",
+                    "recordtype": "organization" 
+                },
+                {
+                    "sourceFieldName": "collectionobjects_common:inscriptionDescriptionInscriber",
+                    "number": "Ann Young",
+                    "csid": "48c74123-e547-4ff1-81d2",
+                    "recordtype": "person" 
+                },
+                {
+                    "sourceFieldName": "collectionobjects_common:contentPeople",
+                    "number": "Margaret Brodie",
+                    "csid": "c0fd9987-7625-4b5f-bbac",
+                    "recordtype": "person" 
+                },
+                {
+                    "sourceFieldName": "collectionobjects_common:ContentPerson",
+                    "number": "Ann Young",
+                    "csid": "48c74123-e547-4ff1-81d2",
+                    "recordtype": "person" 
+                } 
+            ]
+        };
+        options.recordApplier = fluid.makeChangeApplier(options.recordModel);
         return cspace.sidebar(container, options);
     };
 
