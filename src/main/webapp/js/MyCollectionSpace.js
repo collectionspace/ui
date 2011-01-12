@@ -36,7 +36,7 @@ cspace = cspace || {};
         });
     };
     
-    var makeOpts = function (recordType) {
+    var makeOpts = function (recordType, options) {
         return {
             listeners: {
                 afterSelect: cspace.recordList.afterSelectHandlerDefault
@@ -45,13 +45,14 @@ cspace = cspace || {};
                 nothingYet: "No records yet"
             },
             uispec: "{myCollectionSpace}.options.uispec." + recordType,
-            model: makeArrayExpander(recordType)
+            model: makeArrayExpander(recordType),
+            globalNavigator: options.globalNavigator
         };
     };
     
     var makeComponentsOpts = function (options) {
         fluid.each(options.components, function (component, key) {
-            component.options = makeOpts(key);
+            component.options = makeOpts(key, options);
         });
     };
     
@@ -203,6 +204,7 @@ cspace = cspace || {};
             expanded: "cs-myCollectionSpace-expanded",
             collapsed: "cs-myCollectionSpace-collapsed"
         },
+        globalNavigator: "{globalNavigator}",
         produceTree: cspace.myCollectionSpace.produceTree,
         // TODO: Once component sibbling options are resolvable with each other, "records"
         // can be used to resolve and censor a model.

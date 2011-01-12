@@ -100,7 +100,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             model: testModel,
             uispec: testUISpec,
             listeners: {
-                afterSelect: function (model) {
+                afterSelect: function (list) {
+                    var model = list.model;
                     jqUnit.assertEquals("After activation, selected index should be correct", 1, model.selectionIndex);
                     jqUnit.deepEq("Model of selected index should be correct", testModel.items[1], model.items[model.selectionIndex]);
                     jqUnit.assertTrue("Selected row should have selected class", $(".csc-recordList-row:eq(1)", "#main").hasClass(recordList.options.styles.selected));
