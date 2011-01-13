@@ -30,6 +30,11 @@ cspace = cspace || {};
             type: types[operation],
             dataType: options.dataType,
             success: function (data, textStatus) {
+                // TODO: This should be handled by a pageBuilder subcomponent that takes care of error messaging (CSPACE-3142).
+                if (!data.ok) {
+                    events.onError.fire(operation, data.message);
+                    return;
+                }
                 successEvent.fire(data);
                 if (operation !== "fetch") {
                     events.afterSave.fire(data);
