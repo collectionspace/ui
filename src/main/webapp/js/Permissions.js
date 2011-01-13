@@ -124,7 +124,7 @@ fluid.registerNamespace("cspace.permissions");
         });
     };
     
-    cspace.permissions.resolve = function (options) {
+    var buildResOpts = function (options) {
         var resOpts = {};
         if (options.oneOf) {
             resOpts.method = "OR";
@@ -138,8 +138,29 @@ fluid.registerNamespace("cspace.permissions");
             resOpts.method = options.method || "AND";
             resOpts.target = options.target; 
         }
+        return resOpts;
+    };
+    
+    cspace.permissions.resolve = function (options) {
+        var resOpts = buildResOpts(options);
         resOpts.permission = options.permission;
         cspace.permissions.ensureResolver(options);
         return options.resolver.resolve(resOpts);
     };
+    
+    cspace.permissions.resolveMultiple = function (options) {
+        if (options.permission) {
+            return cspace.permissions.resolve(options);
+        }
+        var resOpts = buildResOpts(options);
+        if (!resOpts.target) {
+            return false;
+        }
+        cspace.permissions.ensureResolver(options);
+        return cspace.permissions.logicalCombine(fluid.transform(resOpts.target, function (thisTarget) {
+            thisTarget.resolver = options.resolver;
+            return cspace.permissions.resolveMultiple(thisTarget);
+        }), resOpts.method === "AND");
+    };
+    
 })(jQuery, fluid);

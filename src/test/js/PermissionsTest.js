@@ -53,6 +53,23 @@ var permissionsTester = function ($) {
         testResolve({permission: "golf", allOf: ["person", "loanout", "loanin", "acquisition"]}, false);
     });
     
+    permissionsTest.test("cspace.permissions.resolveMultiple", function() {
+        function testResolve(options, result) {
+            jqUnit.assertEquals(JSON.stringify(options) + ": ",
+                result, cspace.permissions.resolveMultiple($.extend(true, {permissions: cspace.tests.sampleUserPerms}, options)));
+        }
+        testResolve({allOf: [{oneOf: ["loanout", "movement"], permission: "update"}, {target: "cataloging", permission: "update"}]}, true);
+        testResolve({allOf: [{oneOf: ["loanout", "movement"], permission: "update"}, {target: "loanin", permission: "update"}]}, false);
+        testResolve({allOf: [{oneOf: ["loanin", "movement"], permission: "update"}, {target: "cataloging", permission: "update"}]}, true);
+        testResolve({allOf: [{allOf: ["loanin", "movement"], permission: "update"}, {target: "cataloging", permission: "update"}]}, false);
+        testResolve({allOf: [{oneOf: ["loanin", "acquisition"], permission: "update"}, {target: "cataloging", permission: "update"}]}, false);
+        testResolve({target: [{oneOf: ["loanout", "movement"], permission: "update"}, {target: "cataloging", permission: "update"}]}, true);
+        testResolve({allOf: [{oneOf: ["loanout", "movement"], permission: "update"}, {target: "cataloging", permission: "update"}, 
+            {allOf: [{allOf: ["person", "organization"], permission: "read"}, {target: "cataloging", permission: "delete"}]}]}, true);
+        testResolve({allOf: [{oneOf: ["loanout", "movement"], permission: "update"}, {target: "cataloging", permission: "update"}, 
+            {allOf: [{allOf: ["person", "acquisition"], permission: "read"}, {target: "cataloging", permission: "delete"}]}]}, false);
+    });
+    
     permissionsTest.test("cspace.permissions.manager", function () {
         expect(14);        
         var manager = cspace.permissions.manager({permissions: cspace.tests.sampleUserPerms});
