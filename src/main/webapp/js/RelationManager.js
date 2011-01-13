@@ -109,8 +109,11 @@ cspace = cspace || {};
 
     cspace.relationManager.permissionResolver = function (options) {
         var that = fluid.initLittleComponent("cspace.relationManager.permissionResolver", options);
-        options.target = that.options.recordTypeManager.recordTypesForCategory(options.recordClass);
-        that.visible = cspace.permissions.resolve(options);
+        options.allOf.push({
+            permission: options.recordClassPermission,
+            oneOf: that.options.recordTypeManager.recordTypesForCategory(options.recordClass)
+        });
+        that.visible = cspace.permissions.resolveMultiple(options);
         return that;
     };
 
@@ -137,9 +140,12 @@ cspace = cspace || {};
                 options: {
                     recordTypeManager: "{recordTypeManager}",
                     resolver: "{permissionsResolver}",
-                    permission: "update",
-                    method: "OR",
-                    recordClass: "{relationManager}.options.related"
+                    recordClass: "{relationManager}.options.related",
+                    recordClassPermission: "update",
+                    allOf: [{
+                        target: "{relationManager}.options.primary",
+                        permission: "update"
+                    }]
                 }
             }
         },

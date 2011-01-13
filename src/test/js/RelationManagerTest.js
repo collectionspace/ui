@@ -117,7 +117,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                  relationManager.searchToRelateDialog.locate("recordType").val());
             relationManager.searchToRelateDialog.close();
             start();
-        }, "cataloging", "loanin", {}, {loanin: ["read", "update"]});
+        }, "cataloging", "loanin", {}, {loanin: ["read", "update"], cataloging: ["update"]});
     });
     
     relationManagerTest.test("Add Relation Dialog, for all procedural records (using 'procedures' option)", function () {
@@ -228,7 +228,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 start();
             });
             $(relationManager.searchToRelateDialog.options.selectors.createNewButton).click();
-        }, "cataloging", "acquisition", model, {acquisition: ["update"]});
+        }, "cataloging", "acquisition", model, {acquisition: ["update"], cataloging: "update"});
     });
     
 })(jQuery, fluid);
