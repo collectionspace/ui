@@ -23,7 +23,6 @@ cspace = cspace || {};
         var datePicker = that.locate("datePicker");
         datePicker.hide();
         that.locate("calendarButton").focus();
-        cspace.util.globalDismissal(datePicker);
     };
     
     var formatDate = function (date, format) {
@@ -52,7 +51,7 @@ cspace = cspace || {};
         var table = $(that.datePicker.tableBody_);
         
         fluid.deadMansBlur(datePicker, {
-            exclusions: {table: table}, 
+            exclusions: {picker: datePicker}, 
             handler: function () {
                 closeCalendar(that);
             }
@@ -68,9 +67,6 @@ cspace = cspace || {};
         
         calendarButton.click(function (event) {
             datePicker.toggle();
-            cspace.util.globalDismissal($(datePicker).add(calendarButton), function () {
-                closeCalendar(that);
-            });
             table.focus();
         });
         

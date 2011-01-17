@@ -260,41 +260,6 @@ fluid.registerNamespace("cspace.util");
         return that;
     };
     
-    /** "Global Dismissal Handler" for the entire page. Attaches a click handler to the
-     *  document root that will cause dismissal of any elements (typically dialogs) which
-     *  have registered themselves. Dismissal through this route will automatically clean up
-     *  the record - however, the dismisser themselves must take care to deregister in the case
-     *  dismissal is triggered through the dialog interface itself. */
-    
-    var dismissList = {};
-    
-    $(document).click(function (event) {
-        var target = event.target;
-        while (target) {
-            if (dismissList[target.id]) {
-                return;
-            }
-            target = target.parentNode;
-        }
-        fluid.each(dismissList, function (dismissFunc, key) {
-            dismissFunc();
-            delete dismissList[key];
-        });
-    });
-    
-    cspace.util.globalDismissal = function (nodes, dismissFunc) {
-        nodes = $(nodes);
-        fluid.each(nodes, function (node) {
-            var id = fluid.allocateSimpleId(node);
-            if (dismissFunc) {
-                dismissList[id] = dismissFunc;
-            }
-            else {
-                delete dismissList[id];
-            }
-        });
-    };
-    
     cspace.util.displayTimestampedMessage = function (locater, msg, time) {
         var messageContainer = locater.locate("messageContainer", "body");
         locater.locate("feedbackMessage", messageContainer).text(msg);
