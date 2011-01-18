@@ -50,7 +50,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         }, options);
-        cataloging = cspace.setup("cspace.record", options);
+        cataloging = cspace.globalSetup()("cspace.record", options);
         stop();
     };
     

@@ -166,14 +166,18 @@ cspace = cspace || {};
         return that;
     };
     
-    cspace.tabs.setupTab = function (tabName, options) {
+    cspace.tabs.setupTab = function (tabName, that) {
+        var options = that.options;
         var urlExpander = fluid.invoke("cspace.urlExpander");
-        cspace.setup("cspace.tabs", {
-            model: options.model,
-            applier: options.applier,
-            related: tabName,
-            primary: options.primaryRecordType,
-            configURL: fluid.stringTemplate(urlExpander(options.configURLTemplate), {record: tabName})
+        // Adding globalNavigator to cspace.setup's stack.
+        fluid.withNewComponent(that.options.globalNavigator, function () {
+            cspace.setup("cspace.tabs", {
+                model: options.model,
+                applier: options.applier,
+                related: tabName,
+                primary: options.primaryRecordType,
+                configURL: fluid.stringTemplate(urlExpander(options.configURLTemplate), {record: tabName})
+            });
         });
     };
     
@@ -190,8 +194,21 @@ cspace = cspace || {};
                 }
             },
             select: function (event, ui) {
-                tabsList.locate("tabLink").removeClass(styles.current);
-                $(ui.tab).addClass(styles.current);
+                // noPrevent environment is set when user selects an option on the dialog
+                // at the point we don't want the dialog to show again.
+                if (!fluid.resolveEnvironment("{noPrevent}")) {
+                    that.options.globalNavigator.events.onPerformNavigation.fire(function () {
+                        tabsList.locate("tabLink").removeClass(styles.current);
+                        $(ui.tab).addClass(styles.current);
+                        // set the noPrevent environment and trigger the select on the tab.
+                        fluid.withEnvironment({
+                            noPrevent: true
+                        }, function () {
+                            tabContainer.tabs("select", ui.index);
+                        });
+                    });
+                    return false;
+                }
             }
         });
     };
@@ -235,7 +252,7 @@ cspace = cspace || {};
         invokers: {
             setupTab: {
                 funcName: "cspace.tabs.setupTab",
-                args: ["@0", "{tabs}.options"]
+                args: ["@0", "{tabs}"]
             }
         },
         configURLTemplate: "%webapp/html/config/%record-tab.json",
@@ -246,7 +263,8 @@ cspace = cspace || {};
         mergePolicy: {
             model: "preserve",
             applier: "preserve"
-        }
+        },
+        globalNavigator: "{globalNavigator}"
     });
     
     fluid.demands("tabs", "cspace.pageBuilder", {

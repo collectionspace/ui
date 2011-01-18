@@ -112,22 +112,21 @@ cspace = cspace || {};
                         onClose: function (userAction) {
                             if (userAction === "act") {
                                 that.options.dataContext.events.afterSave.addListener(function () {
+                                    that.unsavedChanges = false;
                                     callback();
                                 });
                                 that.requestSave();
                             }
                             else if (userAction === "proceed") {
+                                that.unsavedChanges = false;
                                 callback();
                             }
                         }
                     }
                 });
+                return false;
             }
-            else {
-                callback();
-            }
-            return false;
-        }, "onPerformNavigationRecordEditor");
+        }, that.options.navigationEventNamespace);
     };
     
     var bindHandlers = function (that) {
@@ -241,6 +240,7 @@ cspace = cspace || {};
                 type: "cspace.confirmation"
             }
         },
+        navigationEventNamespace: undefined,
         globalNavigator: "{globalNavigator}",
         produceTree: cspace.recordEditor.produceTree,
         events: {

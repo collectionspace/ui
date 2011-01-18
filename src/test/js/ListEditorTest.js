@@ -77,7 +77,6 @@ var listEditorTester = function(){
             jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, $(".csc-recordList-row", "#main").length);
             jqUnit.notVisible("Details should be invisible initially", listEditor.options.selectors.details);
             jqUnit.notVisible("Add new row should be invisible initially", listEditor.options.selectors.newListRow);
-            listEditor.details.options.globalNavigator.events.onPerformNavigation.removeListener("onPerformNavigationRecordEditor");
             start();
         });
     });
@@ -89,7 +88,6 @@ var listEditorTester = function(){
             jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, $(".csc-recordList-row", "#main").length);
             jqUnit.notVisible("Details should be invisible initially", listEditor.options.selectors.details);
             jqUnit.notVisible("New Entry row should be invisible initially", listEditor.options.selectors.newListRow);
-            listEditor.details.options.globalNavigator.events.onPerformNavigation.removeListener("onPerformNavigationRecordEditor");
             start();
         }, {
             listPopulationStrategy: cspace.listEditor.receiveStrategy
@@ -105,7 +103,6 @@ var listEditorTester = function(){
                 jqUnit.isVisible("We can see the details that should be visible on edit", listEditor.options.selectors.hideOnCreate);
                 jqUnit.notVisible("We can't see the details that are invisible on edit", listEditor.options.selectors.hideOnEdit);
                 jqUnit.assertEquals("Details should be from the correct item", "Megan Forbes", $(".csc-user-userName").val());
-                listEditor.details.options.globalNavigator.events.onPerformNavigation.removeListener("onPerformNavigationRecordEditor");
                 start();
             };
         };
@@ -124,7 +121,6 @@ var listEditorTester = function(){
             jqUnit.isVisible("Details should be visible", listEditor.options.selectors.details);
             jqUnit.isVisible("New Entry row should be visible", listEditor.options.selectors.newListRow);
             jqUnit.deepEq("Details Model should still be empty when trying to create a new row", {}, listEditor.model.details);
-            listEditor.details.options.globalNavigator.events.onPerformNavigation.removeListener("onPerformNavigationRecordEditor");
             start();
         });
     });
@@ -140,7 +136,6 @@ var listEditorTester = function(){
                 jqUnit.isVisible("Details should be visible", listEditor.options.selectors.details);
                 jqUnit.isVisible("New Entry row should be visible", listEditor.options.selectors.newListRow);
                 jqUnit.deepEq("Details Model should still be empty when trying to create a new row", {}, listEditor.model.details);
-                listEditor.details.options.globalNavigator.events.onPerformNavigation.removeListener("onPerformNavigationRecordEditor");
                 start();
             };
         };

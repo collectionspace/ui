@@ -68,6 +68,7 @@ var relatedRecordsTabTester = function ($) {
             selectors: {
                 relatedRecordsTab: ".csc-cataloging-tab"
             },
+            globalNavigator: cspace.util.globalNavigator(),
             components: {
                 relatedRecordsTab: {
                     type: "cspace.relatedRecordsTab",
@@ -278,7 +279,7 @@ var relatedRecordsTabTester = function ($) {
                 }
             }
         };
-        objTab = cspace.setup("cspace.tabs", options);
+        objTab = cspace.globalSetup()("cspace.tabs", options);
         stop();
     });
 };

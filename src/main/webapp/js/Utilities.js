@@ -928,4 +928,22 @@ fluid.registerNamespace("cspace.util");
         }
     });
     
+    cspace.globalSetup = function (options) {
+        var that = fluid.littleComponent("cspace.globalSetup")(options);
+        return function (tag, options) {
+            // Adding globalSetup to the environment.
+            return fluid.withNewComponent(that, function () {
+                return cspace.setup(tag, options);
+            });
+        };
+    };
+    
+    fluid.defaults("cspace.globalSetup", {
+        components: {
+            globalNavigator: {
+                type: "cspace.util.globalNavigator"
+            }
+        }
+    });
+    
 })(jQuery, fluid);
