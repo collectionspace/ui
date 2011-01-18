@@ -114,7 +114,7 @@ cspace = cspace || {};
                                 that.options.dataContext.events.afterSave.addListener(function () {
                                     that.unsavedChanges = false;
                                     callback();
-                                });
+                                }, undefined, undefined, "last");
                                 that.requestSave();
                             }
                             else if (userAction === "proceed") {

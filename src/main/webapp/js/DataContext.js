@@ -36,9 +36,6 @@ cspace = cspace || {};
                     return;
                 }
                 successEvent.fire(data);
-                if (operation !== "fetch") {
-                    events.afterSave.fire(data);
-                }
             },
             error: function (xhr, textStatus, errorThrown) {
                 events.onError.fire(operation, textStatus);
@@ -64,6 +61,13 @@ cspace = cspace || {};
     };
 
     var bindEventHandlers = function (that) {
+        
+        fluid.each(["afterCreate", "afterRemove", "afterUpdate", "afterAddRelations"], function (event) {
+            that.events[event].addListener(function (data) {
+                that.events.afterSave.fire(data);
+            }, undefined, undefined, "last");
+        });
+        
         that.events.afterFetch.addListener(function (data) {
             that.updateModel(data);
         });
