@@ -25,7 +25,8 @@ cspace = cspace || {};
                 csid: that.model.csid,
                 recordtype: that.options.primary
             };
-            for (var i = 0; i < data.length; i++) {
+            // NOTE: using for in so that we don't loop through data that we haven't actually fetched yet. 
+            for (var i in data) {
                 if (data[i].selected) {
                     newRelations[newIndex] = {
                         source: source,
