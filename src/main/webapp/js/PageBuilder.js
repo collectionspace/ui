@@ -72,6 +72,7 @@ cspace = cspace || {};
     var setUpPageBuilder = function (that) {
         setupModel(that.applier, that.model, that.options.pageType, that.options.recordType, that.schema);
         that.events.onDependencySetup.fire(that.uispec);
+        that.globalNavigator = that.options.globalNavigator;
         fluid.initDependents(that);
     };
     
@@ -283,9 +284,6 @@ cspace = cspace || {};
             },
             globalBundle: {
                 type: "cspace.globalBundle"
-            },
-            globalNavigator: {
-                type: "cspace.util.globalNavigator"
             }
         },
         schema: [
@@ -670,7 +668,9 @@ cspace = cspace || {};
                     applier: "{setup}.options.applier",
                     related: "{setup}.options.related",
                     primary: "{setup}.options.primary",
-                    configURL: "{setup}.options.configURL"
+                    configURL: "{setup}.options.configURL",
+                    // TODO: FIX PAGE BUILDER SETUP!!!
+                    globalNavigator: "{globalNavigator}"
                 }
             }
         },

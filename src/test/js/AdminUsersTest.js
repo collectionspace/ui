@@ -43,6 +43,11 @@ var adminUsersTester = function () {
         uispec: testUISpec,
         userListEditor: {
             options: {
+                details: {
+                    options: {
+                        navigationEventNamespace: "onPerformNavigationRecordEditor"
+                    }
+                },
                 baseUrl: "../../main/webapp/html/data/",
                 dataContext: {
                     options: {

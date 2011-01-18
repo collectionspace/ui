@@ -95,7 +95,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         }, options);
-        organization = cspace.setup("cspace.record", options);
+        organization = cspace.globalSetup()("cspace.record", options);
     };
     
     organizationTests.test("Initialization", function () {
