@@ -9,7 +9,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jQuery, cspace:true, fluid*/
-"use strict";
 
 cspace = cspace || {};
 
@@ -19,13 +18,14 @@ cspace = cspace || {};
     var handleAddClick = function (that) {
         return function () {
             var data = that.search.model.results;
-            var newIndex = 0;
+            var i, newIndex = 0;
             var newRelations = [];
             var source = {
                 csid: that.model.csid,
                 recordtype: that.options.primary
             };
-            for (var i = 0; i < data.length; i++) {
+            // NOTE: using for in so that we don't loop through data that we haven't actually fetched yet. 
+            for (i in data) {
                 if (data[i].selected) {
                     newRelations[newIndex] = {
                         source: source,
