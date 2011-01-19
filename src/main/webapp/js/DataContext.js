@@ -31,7 +31,7 @@ cspace = cspace || {};
             dataType: options.dataType,
             success: function (data, textStatus) {
                 // TODO: This should be handled by a pageBuilder subcomponent that takes care of error messaging (CSPACE-3142).
-                if (data.ok === false) {
+                if (data && data.ok === false) {
                     events.onError.fire(operation, data.message);
                     return;
                 }
