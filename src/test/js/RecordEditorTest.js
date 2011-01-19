@@ -17,60 +17,94 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     var bareRecordEditorTest = new jqUnit.TestCase("recordEditor Tests", null, function () {
         $(".ui-dialog").detach();
     });
+    
     var recordEditorTest = cspace.tests.testEnvironment({testCase: bareRecordEditorTest});
     
+    var setupRecordEditor = function (options, callback) {
+        var recordEditor;
+        fluid.merge(null, options, {
+            applier: fluid.makeChangeApplier(options.model),
+            listeners: {
+                "afterRender.initialRender": callback
+            }
+        });
+        recordEditor = cspace.recordEditor("#main", options);
+        stop();
+    };
+    
     recordEditorTest.test("Creation", function () {
-        var testModel = {
+        var model = {
             fields: {
                 field1: "A",
                 field2: "B",
                 field3: "C"
             }
         };
-        var opts = {};
-        opts.applier = fluid.makeChangeApplier(testModel);
-        opts.dataContext = cspace.dataContext(testModel, {baseUrl: "."});
-        opts.model = testModel,
-        opts.uispec = {
-            ".csc-test-1": "${fields.field1}",
-            ".csc-test-2": "${fields.field2}",
-            ".csc-test-3": "${fields.field3}"
-        };
-        opts.listeners = {
-            afterRender: function () {
-                jqUnit.assertEquals("foo", testModel.fields.field1, jQuery(".csc-test-1").val());
-                start();
+        setupRecordEditor({
+            model: model,
+            dataContext: cspace.dataContext(model, {baseUrl: "."}),
+            uispec: {
+                ".csc-test-1": "${fields.field1}",
+                ".csc-test-2": "${fields.field2}",
+                ".csc-test-3": "${fields.field3}"
             }
-        };
-        var recordEditor = cspace.recordEditor("#main", opts);
-        stop();
+        }, function (re) {
+            jqUnit.assertEquals("foo", model.fields.field1, jQuery(".csc-test-1").val());
+            start();
+        });
     });
     
     recordEditorTest.test("Delete", function () {
-        var opts = {};
-        var testModel = {
+        var model = {
             csid: "123.456.789",
             fields: {}
         };
-        var opts = {
-            model: testModel,
-            dataContext: cspace.dataContext(testModel, {baseUrl: "http://mymuseum.org", recordType: "thisRecordType"}),
-            uispec: {},
-            applier: fluid.makeChangeApplier(testModel),
-            listeners: {
-                afterRender: function(recordEditor) {
-                    fluid.log("RETest: afterRender");
-                    recordEditor.options.dataContext.events.afterRemove.addListener(function () {
-                        jqUnit.assertTrue("Successfully executed remove", true);
-                        start();
-                    });
-                    recordEditor.remove();
-                    recordEditor.confirmation.confirmationDialog.locate("act").click();
-                }
+        setupRecordEditor({
+            model: model,
+            dataContext: cspace.dataContext(model, {baseUrl: "http://mymuseum.org", recordType: "thisRecordType"}),
+            uispec: {}
+        }, function (re) {
+            fluid.log("RETest: afterRender");
+            re.confirmation.popup.bind("dialogopen", function () {
+                re.options.dataContext.events.afterRemove.addListener(function () {
+                    jqUnit.assertTrue("Successfully executed remove", true);
+                    start();
+                });
+                re.confirmation.confirmationDialog.locate("act").click();
+            });
+            re.remove();
+        });
+    });
+    
+    recordEditorTest.test("Rollback test", function () {
+        var model = {
+            csid: "123.456.789",
+            fields: {
+                testField: "TEST"
             }
         };
-        var recordEditor = cspace.recordEditor("#main", opts);
-        stop();
+        var field = ".csc-test-1";
+        var uispec = {};
+        uispec[field] = "${fields.testField}";
+        setupRecordEditor({
+            model: model,
+            dataContext: cspace.dataContext(model, {baseUrl: "http://mymuseum.org", recordType: "thisRecordType"}),
+            uispec: uispec
+        }, function (re) {
+            re.events.afterRender.removeListener("initialRender");
+            fluid.log("RETest: afterRender");
+            jqUnit.assertEquals("Original value of the field is", "TEST", jQuery(field).val());
+            jQuery(field).val("NEW VALUE").change();
+            jqUnit.assertEquals("New value of the field is", "NEW VALUE", jQuery(field).val());
+            re.confirmation.popup.bind("dialogopen", function () {
+                jqUnit.assertEquals("The value of the field should still be", "NEW VALUE", jQuery(field).val());
+                re.confirmation.confirmationDialog.locate("proceed").click();
+            });
+            re.options.globalNavigator.events.onPerformNavigation.fire(function () {
+                jqUnit.assertEquals("The value of the field should roll back to", "TEST", jQuery(field).val());
+                start();
+            });
+        });
     });
 
 }());

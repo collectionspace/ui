@@ -312,7 +312,7 @@ var adminUsersTester = function () {
         setupConfirmation(function (re, adminUsers) {
             adminUsers.locate("userName").val("New Name").change();
             re.confirmation.popup.bind("dialogopen", function () {
-                re.events.afterRender.addListener(function () {
+                adminUsers.userListEditor.detailsDC.events.afterFetch.addListener(function () {
                     jqUnit.notVisible("Confirmation dialog is now invisible", re.confirmation.popup);
                     jqUnit.assertEquals("User Name should now be", "Megan Forbes", adminUsers.locate("userName").val());
                     cspace.tests.onTearDown.fire(re);

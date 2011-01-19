@@ -118,7 +118,7 @@ cspace = cspace || {};
                                 that.requestSave();
                             }
                             else if (userAction === "proceed") {
-                                that.unsavedChanges = false;
+                                that.rollback();
                                 callback();
                             }
                         }
@@ -145,6 +145,7 @@ cspace = cspace || {};
         if (!that.options.deferRendering) {
             that.refreshView();
         }
+        that.unsavedChanges = false;
     };
 
     /**
@@ -167,6 +168,7 @@ cspace = cspace || {};
                 that.locate("deleteButton").removeAttr("disabled").removeClass("deactivate");
             }
             that.unsavedChanges = false;
+            that.rollbackModel = fluid.copy(that.model.fields);
             that.locate("messageContainer", "body").hide();
             bindHandlers(that);
             that.events.afterRender.fire(that);
@@ -215,9 +217,13 @@ cspace = cspace || {};
         };
 
         setupRecordEditor(that);
-        that.unsavedChanges = false;
 
         return that;
+    };
+    
+    cspace.recordEditor.rollback = function (that) {
+        that.options.applier.requestChange("fields", that.rollbackModel);
+        that.refreshView();
     };
     
     cspace.recordEditor.produceTree = function (that) {
@@ -238,6 +244,12 @@ cspace = cspace || {};
         components: {
             confirmation: {
                 type: "cspace.confirmation"
+            }
+        },
+        invokers: {
+            rollback: {
+                funcName: "cspace.recordEditor.rollback",
+                args: "{recordEditor}"
             }
         },
         navigationEventNamespace: undefined,
