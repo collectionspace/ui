@@ -24,13 +24,13 @@ var relatedRecordsTabTester = function ($) {
             applier = fluid.makeChangeApplier(model);
         },
         error: function (xhr, textStatus, error) {
-            fluid.log("Unable to load object's data for testing");
+            fluid.log("Unable to load cataloging data for testing");
         }
     });
     
     var bareRelatedRecordsTabTest = new jqUnit.TestCase("Related Records Tab Tests", function () {
-        bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/html/tabsTemplate.html", ".csc-tabs-template", $(".template1"));
-        bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/html/objectTabPlaceholder.html", ".csc-cataloging-tab", $(".template2"));
+        bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/html/TabsTemplate.html", ".csc-tabs-tabList", $(".template1"));
+        bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/html/CatalogingTab.html", ".csc-cataloging-tab", $(".template2"));
         fluid.model.copyModel(testApplier, applier);        
     });
     
@@ -52,13 +52,13 @@ var relatedRecordsTabTester = function ($) {
             },
             pageSpec: {
                 list: {
-                    href: "../../main/webapp/html/objectTabRecordListTemplate.html",
+                    href: "../../main/webapp/html/CatalogingTabRecordListTemplate.html",
                     templateSelector: ".csc-cataloging-tab-record-list",
                     targetSelector: ".div-for-list-of-records"
                 },
                 details: {
-                    href: "../../main/webapp/html/ObjectEntryTemplate.html",
-                    templateSelector: ".csc-object-entry-template",
+                    href: "../../main/webapp/html/CatalogingTemplate.html",
+                    templateSelector: ".csc-cataloging-template",
                     targetSelector: ".div-for-recordEditor"
                 } 
             },
@@ -185,7 +185,7 @@ var relatedRecordsTabTester = function ($) {
                 primaryApplier = fluid.makeChangeApplier(model);
             },
             error: function (xhr, textStatus, error) {
-                fluid.log("Unable to load object's data for testing");
+                fluid.log("Unable to load cataloging data for testing");
             }
         });
         var options = {
@@ -205,10 +205,10 @@ var relatedRecordsTabTester = function ($) {
                         uispecUrl: "../../main/webapp/html/uispecs/cataloging-tab/uispec.json",
                         pageSpec: {
                             list: {
-                                href: "../../main/webapp/html/objectTabRecordListTemplate.html"
+                                href: "../../main/webapp/html/CatalogingTabRecordListTemplate.html"
                             },
                             details: {
-                                href: "../../main/webapp/html/ObjectEntryTemplate.html"
+                                href: "../../main/webapp/html/CatalogingTemplate.html"
                             }
                         },
                         listeners: {

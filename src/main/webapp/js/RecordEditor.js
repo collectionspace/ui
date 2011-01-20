@@ -63,7 +63,6 @@ cspace = cspace || {};
         cspace.util.displayTimestampedMessage(that, that.options.strings[message], Date());
         that.unsavedChanges = false;
         that.locate("save").removeAttr("disabled");
-        that.events["after" + action + "ObjectDataSuccess"].fire(data, that.options.strings[message]);
     };
 
     var bindEventHandlers = function (that) {
@@ -147,10 +146,7 @@ cspace = cspace || {};
         }
         that.unsavedChanges = false;
     };
-
-    /**
-     * Object Entry component
-     */
+    
     cspace.recordEditor = function (container, options) {
         var that = fluid.initRendererComponent("cspace.recordEditor", container, options);
         fluid.initDependents(that);
@@ -258,8 +254,6 @@ cspace = cspace || {};
         events: {
             onSave: "preventable",
             onCancel: null,
-            afterCreateObjectDataSuccess: null,  // params: data, textStatus
-            afterUpdateObjectDataSuccess: null,  // params: data, textStatus
             afterRemove: null, // params: textStatus
             onError: null,  // params: operation
             afterRender: null

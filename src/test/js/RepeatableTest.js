@@ -69,7 +69,7 @@ var repeatableTester = function ($) {
                     briefDescUISpec = data.recordEditor[".csc-object-identification-brief-description"].decorators[0];
                 },
                 error: function (xhr, textStatus, error) {
-                    fluid.log("Unable to load object uispec for testing");
+                    fluid.log("Unable to load cataloging uispec for testing");
                 }
             }); 
         }
@@ -83,7 +83,7 @@ var repeatableTester = function ($) {
                     briefDescModel = data;
                 },
                 error: function (xhr, textStatus, error) {
-                    fluid.log("Unable to load object data for testing");
+                    fluid.log("Unable to load cataloging data for testing");
                 }
             });
             
@@ -102,7 +102,7 @@ var repeatableTester = function ($) {
             protoTree: "replace"
         }, briefDescUISpec.options, opts);
 
-        repeatableTest.fetchTemplate("../../main/webapp/html/ObjectEntryTemplate.html", ".csc-object-identification-brief-description");
+        repeatableTest.fetchTemplate("../../main/webapp/html/CatalogingTemplate.html", ".csc-object-identification-brief-description");
         return cspace.makeRepeatable(".csc-object-identification-brief-description", briefDescUISpec.options);
     };
     

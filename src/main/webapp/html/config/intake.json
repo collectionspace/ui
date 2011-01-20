@@ -13,12 +13,12 @@
     "pageSpec": {
         "titleBar": {
             "href": "IntakeTitleBar.html",
-            "templateSelector": ".csc-object-intake-titleBar-template",
-            "targetSelector": ".csc-object-intake-titleBar-container" 
+            "templateSelector": ".csc-intake-titleBar-template",
+            "targetSelector": ".csc-intake-titleBar-container" 
         },
         "recordEditor": {
             "href": "%readonlyIntakeTemplate.html",
-            "templateSelector": ".csc-object-intake-template",
+            "templateSelector": ".csc-intake-template",
             "targetSelector": ".csc-record-edit-container"
         },
         "footer": {
@@ -28,8 +28,8 @@
         } 
     },
     "selectors": {
-        "titleBar": ".csc-object-intake-titleBar-template",
-        "recordEditor": ".csc-object-intake-template"
+        "titleBar": ".csc-intake-titleBar-template",
+        "recordEditor": ".csc-intake-template"
     },
     "components": {
         "tabs": {

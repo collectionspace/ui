@@ -12,13 +12,13 @@
     },
     "pageSpec": {
         "titleBar": {
-            "href": "ObjectTitleBar.html",
-            "templateSelector": ".csc-object-entry-titleBar-template",
-            "targetSelector": ".csc-object-entry-titleBar-container" 
+            "href": "catalogingTitleBar.html",
+            "templateSelector": ".csc-cataloging-titleBar-template",
+            "targetSelector": ".csc-cataloging-titleBar-container" 
         },
         "recordEditor": {
-            "href": "%readonlyObjectEntryTemplate.html",
-            "templateSelector": ".csc-object-entry-template",
+            "href": "%readonlyCatalogingTemplate.html",
+            "templateSelector": ".csc-cataloging-template",
             "targetSelector": ".csc-record-edit-container" 
         },
         "footer": {
@@ -28,8 +28,8 @@
         } 
     },
     "selectors": {
-        "titleBar": ".csc-object-entry-template",
-        "recordEditor": ".csc-object-entry-template"
+        "titleBar": ".csc-cataloging-template",
+        "recordEditor": ".csc-cataloging-template"
     },
     "components": {
         "tabs": {

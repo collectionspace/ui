@@ -7,13 +7,13 @@
     "recordType": "cataloging",
     "pageSpec": {
         "list": {
-            "href": "objectTabRecordListTemplate.html",
+            "href": "CatalogingTabRecordListTemplate.html",
             "templateSelector": ".csc-cataloging-tab-record-list",
             "targetSelector": ".csc-cataloging-tab .div-for-list-of-records" 
         },
         "details": {
-            "href": "%readonlyObjectEntryTemplate.html",
-            "templateSelector": ".csc-object-entry-template",
+            "href": "%readonlyCatalogingTemplate.html",
+            "templateSelector": ".csc-cataloging-template",
             "targetSelector": ".csc-cataloging-tab .div-for-recordEditor" 
         } 
     },

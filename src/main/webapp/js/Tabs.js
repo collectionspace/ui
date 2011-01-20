@@ -104,7 +104,7 @@ cspace = cspace || {};
                             },
                             acquisition: {},
                             cataloging: {
-                                href: "%webapp/html/objectTabPlaceholder.html"
+                                href: "%webapp/html/CatalogingTab.html"
                             },
                             intake: {},
                             loanin: {},

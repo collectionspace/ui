@@ -308,7 +308,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 
 
 .fl-container-left .upper-save {float:right;}
-.fl-container-left .object-entry-outer-border,
+.fl-container-left .cataloging-outer-border,
 .fl-container-left .intake-outer-border,
 .fl-container-left .acquisition-outer-border,
 .fl-container-left .authority-outer-border
@@ -432,7 +432,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .create-new .radio-button input {border:none;}
 .create-new .button-row {padding:15px 0; width:625px; margin-left:auto; margin-right:auto;}
 
-.object-entry .fl-container-pivot {padding-top:0px;}
+.cataloging .fl-container-pivot {padding-top:0px;}
 
 .fl-container-pivot .right-sidebar {padding-top:23px;}
 /*.create-new .fl-container-left .button {margin-right: 7px; float:left;}*/

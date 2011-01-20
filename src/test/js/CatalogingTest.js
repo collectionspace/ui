@@ -15,12 +15,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     var cataloging;
 
-    var objectsTests = new jqUnit.TestCase("Objects Tests", function () {
+    var catalogingTests = new jqUnit.TestCase("Cataloging Tests", function () {
         cspace.util.isTest = true;
-        objectsTests.fetchTemplate("../../main/webapp/html/cataloging.html", ".fl-container-1024");
+        catalogingTests.fetchTemplate("../../main/webapp/html/cataloging.html", ".fl-container-1024");
     });
     
-    var setupObjects = function (options) {
+    var setupCataloging = function (options) {
         options = $.extend(true, {
             configURL: "../../main/webapp/html/config/cataloging.json",
             components: {
@@ -36,10 +36,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         },
                         pageSpec: {
                             titleBar: {
-                                href: "../../main/webapp/html/objectTitleBar.html"
+                                href: "../../main/webapp/html/catalogingTitleBar.html"
                             },
                             recordEditor: {
-                                href: "../../main/webapp/html/ObjectEntryTemplate.html"
+                                href: "../../main/webapp/html/CatalogingTemplate.html"
                             },
                             footer: {
                                 href: "../../main/webapp/html/footer.html"
@@ -54,7 +54,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         stop();
     };
     
-    objectsTests.test("Initialization", function () {
+    catalogingTests.test("Initialization", function () {
         var options = {
             components: {
                 pageBuilderSetup: {
@@ -62,10 +62,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         listeners: {
                             pageReady: function () {
                                 var pageBuilder = cataloging.pageBuilderSetup.pageBuilder;
-                                jqUnit.assertValue("Objects should have a record editor", pageBuilder.recordEditor);
-                                jqUnit.assertValue("Objects should have a side bar", pageBuilder.sidebar);
-                                jqUnit.assertValue("Objects should have a title bar", pageBuilder.titleBar);
-                                jqUnit.assertValue("Objects should have tabs", pageBuilder.tabs);
+                                jqUnit.assertValue("Cataloging should have a record editor", pageBuilder.recordEditor);
+                                jqUnit.assertValue("Cataloging should have a side bar", pageBuilder.sidebar);
+                                jqUnit.assertValue("Cataloging should have a title bar", pageBuilder.titleBar);
+                                jqUnit.assertValue("Cataloging should have tabs", pageBuilder.tabs);
                                 start();
                             }
                         }
@@ -73,10 +73,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         };
-        setupObjects(options);
+        setupCataloging(options);
     });
         
-    objectsTests.test("Go To Record", function () {
+    catalogingTests.test("Go To Record", function () {
         var options = {
             components: {
                 pageBuilderSetup: {
@@ -98,7 +98,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         };
-        setupObjects(options);
+        setupCataloging(options);
     });
 }(jQuery));
 
