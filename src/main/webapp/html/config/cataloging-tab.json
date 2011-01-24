@@ -1,6 +1,7 @@
 {
     "schema": [
         "recordlist",
+        "recordtypes",
         "cataloging"
     ],
     "pageType": "cataloging-tab",

@@ -17,24 +17,24 @@ cspace = cspace || {};
     
     fluid.registerNamespace("cspace.relatedRecordsList");
 
-    var buildRelationsList = function (relations, related) {
+    var buildRelationsList = function (recordTypes, relations, related) {
         var relationList = [];
-        fluid.each(cspace.recordTypes[related], function (value) {
+        fluid.each(recordTypes[related], function (value) {
             relationList = relationList.concat(relations[value] || []);
         });   
         return relationList;
     };
     
-    var addModelChangeListener = function (applier, recordList, recordType, related) {
+    var addModelChangeListener = function (recordTypes, applier, recordList, recordType, related) {
         applier.modelChanged.addListener("relations." + recordType, function (model) {
-            recordList.applier.requestChange("items", buildRelationsList(model.relations, related));
+            recordList.applier.requestChange("items", buildRelationsList(recordTypes, model.relations, related));
             recordList.refreshView();
         });
     };
 
     var bindEventHandlers = function (that) {
-        fluid.each(cspace.recordTypes[that.options.related], function (value) {
-            addModelChangeListener(that.options.applier, that.recordList, value, that.options.related);
+        fluid.each(that.options.recordTypes[that.options.related], function (value) {
+            addModelChangeListener(that.options.recordTypes, that.options.applier, that.recordList, value, that.options.related);
         });
     };
 
@@ -64,9 +64,9 @@ cspace = cspace || {};
         };
     };
 
-    cspace.relatedRecordsList.provideRecordList = function (container, selector, relations, related, options) {
+    cspace.relatedRecordsList.provideRecordList = function (container, selector, recordTypes, relations, related, options) {
         options.model = {
-            items: buildRelationsList(relations, related),
+            items: buildRelationsList(recordTypes, relations, related),
             selectionIndex: -1
         };
         return cspace.recordList($(selector, container), options);
@@ -80,7 +80,8 @@ cspace = cspace || {};
     fluid.demands("cspace.recordList", "cspace.relatedRecordsList", {
         funcName: "cspace.relatedRecordsList.provideRecordList",
         args: ["{relatedRecordsList}.container",
-               "{relatedRecordsList}.options.selectors.recordListSelector", 
+               "{relatedRecordsList}.options.selectors.recordListSelector",
+               "{recordTypes}",
                "{relatedRecordsList}.model.relations", 
                "{relatedRecordsList}.options.related",
                fluid.COMPONENT_OPTIONS
@@ -127,6 +128,7 @@ cspace = cspace || {};
         addRelations: cspace.relationManager.proveAddRelations,
         recordListAfterSelectHandler: cspace.recordList.afterSelectHandlerDefault,
         parentBundle: "{globalBundle}",
+        recordTypes: "{recordTypes}",
         produceTree: cspace.relatedRecordsList.produceTree,
         selectors: {
             messageContainer: ".csc-message-container",

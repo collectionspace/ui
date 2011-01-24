@@ -284,10 +284,17 @@ cspace = cspace || {};
             },
             globalBundle: {
                 type: "cspace.globalBundle"
+            },
+            recordTypes: {
+                type: "cspace.recordTypes",
+                options: {
+                    schema: "{pageBuilder}.schema"
+                }
             }
         },
         schema: [
-            "recordlist"
+            "recordlist",
+            "recordtypes"
         ],
         events: {
             pageReady: null,

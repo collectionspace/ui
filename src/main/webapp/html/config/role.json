@@ -1,6 +1,7 @@
 {
     "schema": [
         "recordlist",
+        "recordtypes",
         "role"
     ],
     "recordType": "role",

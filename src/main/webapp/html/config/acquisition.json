@@ -1,6 +1,7 @@
 {
     "schema": [
         "recordlist",
+        "recordtypes",
         "acquisition"
     ],
     "pageType": "acquisition",

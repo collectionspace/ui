@@ -1,6 +1,7 @@
 {
     "schema": [
         "recordlist",
+        "recordtypes",
         "movement"
     ],
     "pageType": "movement-tab",

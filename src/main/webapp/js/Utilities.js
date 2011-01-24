@@ -34,22 +34,19 @@ fluid.registerNamespace("cspace.util");
             return false;
         }
     });
-    // TODO: possibly derive this information from the GLOBAL SCHEMA (see CSPACE-1977)
-    cspace.recordTypes = {
-        all: ["person", "intake", "loanin", "loanout", "acquisition", "organization", "cataloging", "movement", "objectexit"],
-        procedures: ["intake", "acquisition", "loanin", "loanout", "movement", "objectexit"],
-        vocabulary: ["person", "organization"],
-        cataloging: ["cataloging"]
-    };
     
     cspace.recordTypeManager = function (options) {
         var that = fluid.initLittleComponent("cspace.recordTypeManager", options);
         that.recordTypesForCategory = function (category) {
-            var classEntry = cspace.recordTypes[category];
+            var classEntry = that.options.recordTypes[category];
             return classEntry ? classEntry : [category];
         };
         return that;
     };
+    
+    fluid.defaults("cspace.recordTypeManager", {
+        recordTypes: "{recordTypes}"
+    });
 
     cspace.util.addTrailingSlash = function (url) {
         return url + ((url.charAt(url.length - 1) !== "/") ? "/" : "");
@@ -604,6 +601,53 @@ fluid.registerNamespace("cspace.util");
         }
     });
     
+    cspace.util.schemaStrategy = function (options) {
+        return {
+            init: function () {
+                var that = fluid.initLittleComponent("cspace.util.schemaStrategy", options);
+                var schema = that.options.schema;
+                return function (root, segment, index) {
+                    if (!root[segment] && !schema) {
+                        return;
+                    }
+                    if (root[segment]) {
+                        return root[segment];
+                    }
+                    schema = schema[segment];
+                    if (!schema) {
+                        return;
+                    }
+                    var type = schema.type;
+                    if (!type) {
+                        // Schema doesn't have a type.
+                        fluid.fail("Schema for " + segment + "is incorrect: type is missing");
+                    }
+                    var defaultValue = schema["default"];
+                    if (typeof defaultValue !== "undefined") {
+                        return defaultValue;
+                    }
+                    if (type === "array") {
+                        var items = schema.items;
+                        schema = items ? [items] : [];
+                        return [];
+                    }
+                    else if (type === "object") {
+                        schema = schema.properties;
+                        return {};
+                    }
+                    else {
+                        return;
+                    }
+                };
+            }
+        };
+    };
+    fluid.defaults("cspace.util.schemaStrategy", {
+        mergePolicy: {
+            schema: "preserve"
+        }
+    });
+    
     cspace.util.buildUrl = function (operation, baseUrl, recordType, csid, fileExtension) {
         if (operation === "addRelations") {
             return cspace.util.addTrailingSlash(baseUrl) + "relationships/";
@@ -944,6 +988,39 @@ fluid.registerNamespace("cspace.util");
                 type: "cspace.util.globalNavigator"
             }
         }
+    });
+    
+    cspace.recordTypes = function (options) {
+        var that = fluid.littleComponent("cspace.recordTypes")(options);
+        that.setup();
+        return that;
+    };
+    
+    cspace.recordTypes.setup = function (that) {
+        that.config = [that.options.strategy(that.options)];
+        that.all = that.getRecordTypes("recordlist");
+        that.procedures = that.getRecordTypes("recordtypes.procedures");
+        that.vocabulary = that.getRecordTypes("recordtypes.vocabularies");
+        that.cataloging = that.getRecordTypes("recordtypes.cataloging");
+    };
+    
+    fluid.defaults("cspace.recordTypes", {
+        mergePolicy: {
+            schema: "preserve",
+            model: "preserve"
+        },
+        invokers: {
+            setup: {
+                funcName: "cspace.recordTypes.setup",
+                args: "{recordTypes}"
+            },
+            getRecordTypes: {
+                funcName: "fluid.get",
+                args: ["{recordTypes}.options.model", "@0", "{recordTypes}.config"]
+            }
+        },
+        model: {},
+        strategy: cspace.util.schemaStrategy
     });
     
 })(jQuery, fluid);

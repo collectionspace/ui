@@ -20,6 +20,52 @@ cspace.util.isTest = true;
 fluid.staticEnvironment.cspaceTests = fluid.typeTag("cspace.test");
 
 fluid.registerNamespace("cspace.tests");
+
+cspace.tests.sampleSchema = {
+    "recordtypes": {
+        "type": "object",
+        "properties": {
+            "vocabularies": {
+                "default": [
+                    "person",
+                    "organization"
+                ],
+                "type": "array"
+            },
+            "cataloging": {
+                "default": [
+                    "cataloging"
+                ],
+                "type": "array"
+            },
+            "procedures": {
+                "default": [
+                    "intake",
+                    "loanin",
+                    "loanout",
+                    "acquisition",
+                    "movement",
+                    "objectexit"
+                ],
+                "type": "array"
+            }
+        }
+    },
+    "recordlist": {
+        "default": [
+            "person",
+            "intake",
+            "loanin",
+            "loanout",
+            "acquisition",
+            "organization",
+            "cataloging",
+            "movement",
+            "objectexit"
+        ],
+        "type": "array"
+    }
+};
    
 cspace.tests.sampleUserPerms = {
         "person": ["create", "read", "update", "delete", "list"],
@@ -88,9 +134,11 @@ resolution, without bringing in the whole of pageBuilder as a component root */
 
 fluid.defaults("cspace.tests.testEnvironment", {
     mergePolicy: {
-        permissions: "replace"  
+        permissions: "replace",
+        schema: "replace"  
     },
     permissions: cspace.tests.sampleUserPerms,
+    schema: cspace.tests.sampleSchema,
     components: {
         permissionsResolver: {
             type: "cspace.permissions.resolver",
@@ -106,6 +154,12 @@ fluid.defaults("cspace.tests.testEnvironment", {
         },
         globalNavigator: {
             type: "cspace.util.globalNavigator",
+        },
+        recordTypes: {
+            type: "cspace.recordTypes",
+            options: {
+                schema: "{testEnvironment}.options.schema"
+            }
         }
     }
 });

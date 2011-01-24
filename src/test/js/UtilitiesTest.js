@@ -622,7 +622,7 @@ var utilitiesTester = function ($) {
         },
     }
     
-    var utilitiesTest = new jqUnit.TestCase("Utilities Tests", function () {
+    var baserUtilitiesTest = new jqUnit.TestCase("Utilities Tests", function () {
         cspace.util.isTest = true;
         uispec = {
             recordEditor: {}
@@ -657,6 +657,8 @@ var utilitiesTester = function ($) {
             }
         };
     });
+    
+    var utilitiesTest = cspace.tests.testEnvironment({testCase: baserUtilitiesTest});
     
     var setExpectedSchemaBasedModel = function () {
         expectedBase.fields = {
@@ -878,6 +880,38 @@ var utilitiesTester = function ($) {
             names: ["FOO NAME", "TEST NAME"]
         });
         jqUnit.assertEquals("Value should be converted to the following text", "TEST NAME", $(selector).text());
+    });
+    
+    utilitiesTest.test("cspace.recordTypes", function () {
+        var recTypes = cspace.recordTypes({
+            schema: cspace.tests.sampleSchema
+        });
+        jqUnit.assertDeepEq("all should contain", [
+            "person",
+            "intake",
+            "loanin",
+            "loanout",
+            "acquisition",
+            "organization",
+            "cataloging",
+            "movement",
+            "objectexit"
+        ], recTypes.all);
+        jqUnit.assertDeepEq("cataloging should contain", [
+            "cataloging"
+        ], recTypes.cataloging);
+        jqUnit.assertDeepEq("procedures should contain", [
+            "intake",
+            "loanin",
+            "loanout",
+            "acquisition",
+            "movement",
+            "objectexit"
+        ], recTypes.procedures);
+        jqUnit.assertDeepEq("vocabulary should contain", [
+            "person",
+            "organization"
+        ], recTypes.vocabulary);
     });
 };
 

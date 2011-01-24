@@ -3,10 +3,8 @@
         "default": [
             "person",
             "intake",
-            "location",
             "loanin",
             "loanout",
-            "contact",
             "acquisition",
             "organization",
             "cataloging",

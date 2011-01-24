@@ -166,7 +166,7 @@ var createNewTester = function ($) {
     //test not rendering procedures
     var noProceduresSidebarTest = cspace.tests.testEnvironment({
         testCase: bareSidebarTest,
-        permissions: getLimitedPermissions(cspace.recordTypes.procedures)
+        permissions: getLimitedPermissions(["intake", "loanin", "loanout", "acquisition", "movement", "objectexit"])
     });
 
     noProceduresSidebarTest.test("RelatedRecordsList: procedures not rendering", function () {
