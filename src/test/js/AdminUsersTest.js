@@ -440,6 +440,6 @@ var adminUsersTester = function () {
     }); 
 };
 
-(function () {
+jQuery(document).ready(function () {
     adminUsersTester();
-}());
+});

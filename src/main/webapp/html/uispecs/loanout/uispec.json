@@ -42,10 +42,6 @@
             }
         }
     },
-    "titleBar": {
-        ".csc-titleBar-loanOutNumber": "${fields.loanOutNumber}",
-        ".csc-loanOut-borrower-titlebar": "${fields.borrower}"
-    },
     "recordEditor": {
         ".csc-loanOut-lendersContact": {
             "decorators": [

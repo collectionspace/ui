@@ -12,11 +12,6 @@
         } 
     },
     "pageSpec": {
-        "titleBar": {
-            "href": "acquisitionTitleBar.html",
-            "templateSelector": ".csc-acquisition-titleBar-template",
-            "targetSelector": ".csc-acquisition-titleBar-container" 
-        },
         "recordEditor": {
             "href": "%readonlyacquisitionTemplate.html",
             "templateSelector": ".csc-acquisition-template",
@@ -33,7 +28,17 @@
             "type": "cspace.tabs"
         },
         "titleBar": {
-            "type": "cspace.titleBar"
+            "type": "cspace.titleBar",
+            "options": {
+                "fields": [
+                    "fields.acquisitionReferenceNumber", {
+                    "type": "repeatableMatch",
+                    "queryPath": "fields.acquisitionSources",
+                    "childPath": "_primary",
+                    "value": true,
+                    "path": "acquisitionSource"
+                }]
+            }
         },
         "recordEditor": {
             "type":  "cspace.recordEditor",
@@ -55,7 +60,6 @@
         }
     },
     "selectors": {
-        "titleBar": ".csc-acquisition-titleBar-template",
         "recordEditor": ".csc-acquisition-template"
     }
 }

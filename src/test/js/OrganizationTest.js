@@ -26,9 +26,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 pageBuilderSetup: {
                     options: {
                         pageSpec: {
-                            titleBar: {
-                                href: "../../main/webapp/html/organizationTitleBar.html"
-                            },
                             recordEditor: {
                                 href: "../../main/webapp/html/organizationTemplate.html"
                             },

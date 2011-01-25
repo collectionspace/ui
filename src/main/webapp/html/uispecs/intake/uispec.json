@@ -42,10 +42,6 @@
             }
         }
     },
-    "titleBar": {
-        ".csc-titleBar-intake-entry-number": "${fields.entryNumber}",
-        ".csc-intake-current-owner-titlebar": "${fields.currentOwner}"
-    },
     "recordEditor": {
         ".csc-intake-condition-check-date": "${fields.conditionCheckDate}",
         ".csc-intake-current-owner": {

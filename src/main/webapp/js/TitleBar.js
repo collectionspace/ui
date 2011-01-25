@@ -15,50 +15,130 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     fluid.log("TitleBar.js loaded");
-
-    var updateField = function (selector, value) {
-        $(selector).text(value);
-    };
-
-    var makeFieldUpdater = function (selector) {
-        return function (model, oldModel, changeRequest) {
-            // We always select the first element in changeRequest array.
-            // We currently do not use multiple changes API.
-            updateField(selector, fluid.model.getBeanValue(model, changeRequest[0].path));
-        };
-    };
-
+    
     var setupTitleBar = function (that) {
-        for (var selector in that.options.uispec) {
-            if (that.options.uispec.hasOwnProperty(selector)) {
-                var val = that.options.uispec[selector];
-                var el = val.substring(val.indexOf("${") + 2, val.indexOf("}"));
-                that.options.applier.modelChanged.addListener(el, makeFieldUpdater(selector));
-                updateField(selector, fluid.model.getBeanValue(that.model, el));
-            }
-        }
+        // Create a resolvers' config for titleBar's fluid.get
+        that.config = $.extend(true, fluid.model.defaultGetConfig, {
+            resolvers: that.options.resolvers
+        });
     };
-
+    
     cspace.titleBar = function (container, options) {
-        var that = fluid.initView("cspace.titleBar", container, options);
-        that.model = that.options.model;
+        var that = fluid.initRendererComponent("cspace.titleBar", container, options);
+        fluid.initDependents(that);
         setupTitleBar(that);
+        that.renderer.refreshView();
+        that.bindEvents();
         return that;
     };
     
+    cspace.titleBar.repeatableMatchResolver = function (options, trundler) {
+        trundler = trundler.trundle(options.queryPath);
+        return fluid.find(trundler.root, function(value, key) {
+            var trundleKey = trundler.trundle(key);
+            var trundleChild = trundleKey.trundle(options.childPath);
+            if (trundleChild.root === options.value) {
+                return trundleKey;
+            } 
+        });
+    };
+    
+    cspace.titleBar.bindEvents = function (that) {
+        fluid.each(that.options.fields, function (field) {
+            if (!field) {
+                return;
+            }
+            var path = field.queryPath || field;
+            if (typeof path !== "string") {
+                return;
+            }
+            that.options.recordApplier.modelChanged.addListener(path, function () {
+                that.renderer.refreshView();
+            });
+        });
+    };
+    
+    cspace.titleBar.fixFieldValue = function (fieldValue) {
+        if (!fieldValue) {
+            return "";
+        }
+        return fieldValue.indexOf("urn") < 0 ? fieldValue : cspace.util.urnToString(fieldValue);
+    };
+    
+    cspace.titleBar.buildTitle = function (that) {
+        var title = "";
+        if (that.options.fields.length < 1) {
+            return title;
+        }
+        var separatorIndex = 0;
+        fluid.each(that.options.fields, function (field) {
+            var fieldValue = cspace.titleBar.fixFieldValue(fluid.copy(fluid.get(that.options.recordModel, field, that.config)));
+            if (fieldValue) {
+                title += (separatorIndex !== 0 ? that.options.separator : "") + fieldValue;
+                ++separatorIndex;
+            }
+        });
+        return title;
+    }; 
+    
+    cspace.titleBar.produceTree = function (that) {
+        return {
+            recordType: {
+                messagekey: "${recordType}"
+            },
+            title: {
+                value: that.buildTitle()
+            }
+        };
+    };
+    
     fluid.defaults("cspace.titleBar", {
+        selectors: {
+            title: ".csc-titleBar-value",
+            recordType: ".csc-titleBar-recordType"
+        },
+        invokers: {
+            bindEvents: {
+                funcName: "cspace.titleBar.bindEvents",
+                args: "{titleBar}"
+            },
+            buildTitle: {
+                funcName: "cspace.titleBar.buildTitle",
+                args: "{titleBar}"
+            },
+            fixFieldValue: {
+                funcNale: "cspace.titleBar.fixFieldValue",
+                args: "@0"
+            }
+        },
         mergePolicy: {
             model: "preserve",
-            applier: "preserve"
+            recordModel: "preserve",
+            recordApplier: "preserve"
+        },
+        resolvers: {
+            repeatableMatch: cspace.titleBar.repeatableMatchResolver
+        },
+        strings: {},
+        fields: [],
+        parentBundle: "{globalBundle}",
+        produceTree: cspace.titleBar.produceTree,
+        recordApplier: "{pageBuilder}.applier",
+        recordModel: "{pageBuilder}.model",
+        model: {
+            recordType: "{pageBuilder}.options.recordType"
+        },
+        separator: " - ",
+        resources: {
+            template: cspace.resourceSpecExpander({
+                fetchClass: "fastTemplate",
+                url: "%webapp/html/TitleBarTemplate.html"
+            })
         }
     });
     
-    fluid.demands("titleBar", "cspace.pageBuilder", {
-        args: ["{pageBuilder}.options.selectors.titleBar", {
-            uispec: "{pageBuilder}.uispec.titleBar",
-            applier: "{pageBuilder}.applier",
-            model: "{pageBuilder}.model"
-        }]
-    });
-    
+    fluid.demands("titleBar", "cspace.pageBuilder", 
+        ["{pageBuilder}.options.selectors.titleBar", fluid.COMPONENT_OPTIONS]);
+
+    fluid.fetchResources.primeCacheFromResources("cspace.titleBar");
 })(jQuery, fluid);

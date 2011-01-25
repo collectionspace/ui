@@ -11,7 +11,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 /*global jQuery, jqUnit, cspace*/
 "use strict";
 
-(function ($) {
+var rrlTester = function ($) {
     
     var testModel = {
         csid: "123456789",
@@ -94,4 +94,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     relatedRecordsListTest.test("Configure SearchToRelate Dialog for all procedure types (using 'procedures' configuration)", function () {
         basicConfigureTest(":disabled", false, "procedures");
     });
-})(jQuery);
+};
+
+jQuery(document).ready(function () {
+    rrlTester(jQuery);
+});

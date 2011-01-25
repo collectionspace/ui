@@ -42,10 +42,6 @@
             }
         }
     },
-    "titleBar": {
-        ".csc-objectexit-currentOwner-titlebar": "${fields.currentOwner}",
-        ".csc-objectexit-exitNumber-titlebar": "${fields.exitNumber}"
-    },
     "recordEditor": {
         ".csc-objectexit-currentOwner": {
             "decorators": [

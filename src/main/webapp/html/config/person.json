@@ -12,11 +12,6 @@
         } 
     },
     "pageSpec": {
-        "titleBar": {
-            "href": "personTitleBar.html",
-            "templateSelector": ".csc-personAuthority-titleBar-template",
-            "targetSelector": ".csc-personAuthority-titleBar-container" 
-        },
         "recordEditor": {
             "href": "%readonlypersonTemplate.html",
             "templateSelector": ".csc-personAuthority-template",
@@ -30,7 +25,6 @@
     },
     "pageType": "person",
     "selectors": {
-        "titleBar": ".csc-personAuthority-titleBar-template",
         "recordEditor": ".csc-personAuthority-template"
     },
     "components": {
@@ -38,7 +32,12 @@
             "type": "cspace.tabs"
         },
         "titleBar": {
-            "type": "cspace.titleBar"
+            "type": "cspace.titleBar",
+            "options": {
+                "fields": [
+                    "fields.displayName"
+                ]
+            }
         },
         "recordEditor": {
             "type":  "cspace.recordEditor",

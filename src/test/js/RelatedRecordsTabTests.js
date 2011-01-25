@@ -284,6 +284,6 @@ var relatedRecordsTabTester = function ($) {
     });
 };
 
-(function () {
+jQuery(document).ready(function () {
     relatedRecordsTabTester(jQuery);
-}());
+});

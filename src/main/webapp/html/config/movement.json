@@ -12,11 +12,6 @@
         } 
     },
     "pageSpec": {
-        "titleBar": {
-            "href": "movementTitleBar.html",
-            "templateSelector": ".csc-movement-titleBar-template",
-            "targetSelector": ".csc-movement-titleBar-container" 
-        },
         "recordEditor": {
             "href": "%readonlyMovementTemplate.html",
             "templateSelector": ".csc-movement-template",
@@ -29,7 +24,6 @@
         } 
     },
     "selectors": {
-        "titleBar": ".csc-movement-template",
         "recordEditor": ".csc-movement-template"
     },
     "components": {
@@ -37,7 +31,13 @@
             "type": "cspace.tabs"
         },
         "titleBar": {
-            "type": "cspace.titleBar"
+            "type": "cspace.titleBar",
+            "options": {
+                "fields": [
+                    "fields.currentLocation",
+                    "fields.locationDate" 
+                ]
+            }
         },
         "recordEditor": {
             "type":  "cspace.recordEditor",

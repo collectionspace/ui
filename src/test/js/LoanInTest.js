@@ -38,9 +38,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             }
                         },
                         pageSpec: {
-                            titleBar: {
-                                href: "../../main/webapp/html/loanInTitleBar.html"
-                            },
                             recordEditor: {
                                 href: "../../main/webapp/html/loanInTemplate.html"
                             },

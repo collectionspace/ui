@@ -523,84 +523,6 @@ fluid.registerNamespace("cspace.util");
         return root;
     };
     
-    fluid.registerNamespace("cspace.util.censorWithSchemaStrategy");
-    
-	// This should be split into 2 strategies since now getBeanValue
-	// can handle falsy resolved values.
-    cspace.util.censorWithSchemaStrategy = function (options) {
-        return {
-            init: function () {
-                var that = fluid.initLittleComponent("cspace.util.censorWithSchemaStrategy", options);
-                var schema = that.options.schema;
-                that.permManager = that.options.permManager;
-                if (!that.permManager && that.options.permissions) {
-                    fluid.initDependents(that);
-                }
-                return function (root, segment, index) {
-                    if (that.permManager && !that.permManager.resolve(segment)) {
-                        return;
-                    }
-                    if (!root[segment] && !schema) {
-                        return;
-                    }
-                    if (root[segment]) {
-                        if (that.permManager) {
-                            cspace.util.resolvePermissions(root[segment], that.permManager);
-                        }
-                        return root[segment];
-                    }
-                    schema = schema[segment];
-                    if (!schema) {
-                        return;
-                    }
-                    var type = schema.type;
-                    if (!type) {
-                        // Schema doesn't have a type.
-                        fluid.fail("Schema for " + segment + "is incorrect: type is missing");
-                    }
-                    var defaultValue = schema["default"];
-                    if (typeof defaultValue !== "undefined") {
-                        if (that.permManager) {
-                            cspace.util.resolvePermissions(defaultValue, that.permManager);
-                        }
-                        return defaultValue;
-                    }
-                    if (type === "array") {
-                        var items = schema.items;
-                        schema = items ? [items] : [];
-                        return [];
-                    }
-                    else if (type === "object") {
-                        schema = schema.properties;
-                        return {};
-                    }
-                    else {
-                        return;
-                    }
-                };
-            }
-        };
-    };
-    
-    fluid.demands("permManager", "cspace.util.censorWithSchemaStrategy", [fluid.COMPONENT_OPTIONS]);
-    
-    fluid.defaults("cspace.util.censorWithSchemaStrategy", {
-        mergePolicy: {
-            schema: "preserve"
-        },
-        components: {
-            permManager: {
-                type: "cspace.permissions.manager",
-                options: {
-                    permissions: "{censorWithSchemaStrategy}.options.permissions",
-                    method: "{censorWithSchemaStrategy}.options.method",
-                    operations: "{censorWithSchemaStrategy}.options.operations",
-                    ifEmpty: "{censorWithSchemaStrategy}.options.ifEmpty"
-                }
-            }
-        }
-    });
-    
     cspace.util.schemaStrategy = function (options) {
         return {
             init: function () {
@@ -997,7 +919,9 @@ fluid.registerNamespace("cspace.util");
     };
     
     cspace.recordTypes.setup = function (that) {
-        that.config = [that.options.strategy(that.options)];
+        that.config = {
+            strategies: [that.options.strategy(that.options)]
+        };
         that.all = that.getRecordTypes("recordlist");
         that.procedures = that.getRecordTypes("recordtypes.procedures");
         that.vocabulary = that.getRecordTypes("recordtypes.vocabularies");

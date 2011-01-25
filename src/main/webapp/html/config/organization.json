@@ -12,11 +12,6 @@
         } 
     },
     "pageSpec": {
-        "titleBar": {
-            "href": "organizationTitleBar.html",
-            "templateSelector": ".csc-organizationAuthority-titleBar-template",
-            "targetSelector": ".csc-organizationAuthority-titleBar-container"
-        },
         "recordEditor": {
             "href": "%readonlyorganizationTemplate.html",
             "templateSelector": ".csc-organizationAuthority-template",
@@ -30,7 +25,6 @@
     },
     "pageType": "organization",
     "selectors": {
-        "titleBar": ".csc-organizationAuthority-template",
         "recordEditor": ".csc-organizationAuthority-template"
     },
     "components": {
@@ -38,7 +32,12 @@
             "type": "cspace.tabs"
         },
         "titleBar": {
-            "type": "cspace.titleBar"
+            "type": "cspace.titleBar",
+            "options": {
+                "fields": [
+                    "fields.displayName"
+                ]
+            }
         },
         "recordEditor": {
             "type":  "cspace.recordEditor",

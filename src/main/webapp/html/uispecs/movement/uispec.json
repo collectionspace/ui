@@ -42,9 +42,6 @@
             }
         }
     },
-    "titleBar": {
-        ".csc-titleBar-currentLocation": "${fields.currentLocation}"
-    },
     "recordEditor": {
         ".csc-movement-plannedRemovalDate-container": {
             "decorators": [

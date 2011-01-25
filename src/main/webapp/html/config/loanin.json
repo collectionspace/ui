@@ -12,11 +12,6 @@
         } 
     },
     "pageSpec": {
-        "titleBar": {
-            "href": "loanInTitleBar.html",
-            "templateSelector": ".csc-loanIn-titleBar-template",
-            "targetSelector": ".csc-loanIn-titleBar-container"
-        },
         "recordEditor": {
             "href": "%readonlyloanInTemplate.html",
             "templateSelector": ".csc-loanIn-template",
@@ -29,7 +24,6 @@
         } 
     },
     "selectors": {
-        "titleBar": ".csc-loanIn-titleBar-template",
         "recordEditor": ".csc-loanIn-template"
     },
     "components": {
@@ -37,7 +31,17 @@
             "type": "cspace.tabs"
         },
         "titleBar": {
-            "type": "cspace.titleBar"
+            "type": "cspace.titleBar",
+            "options": {
+                "fields": [
+                    "fields.loanInNumber", {
+                    "type": "repeatableMatch",
+                    "queryPath": "fields.lenderGroup",
+                    "childPath": "_primary",
+                    "value": true,
+                    "path": "lender"
+                }]
+            }
         },
         "recordEditor": {
             "type":  "cspace.recordEditor",

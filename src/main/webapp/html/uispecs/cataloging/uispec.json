@@ -42,10 +42,6 @@
             }
         }
     },
-    "titleBar": {
-        ".csc-titleBar-object-identification-object-number": "${fields.objectNumber}",
-        ".csc-titleBar-object-identification-object-title": "${fields.titleGroup.0.title}"
-    },
     "recordEditor": {
         ".csc-object-description-inscription-content-inscriber": {
             "decorators": [

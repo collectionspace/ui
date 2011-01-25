@@ -42,10 +42,6 @@
             }
         }
     },
-    "titleBar": {
-        ".csc-titleBar-loanInNumber": "${fields.loanInNumber}",
-        ".csc-loanIn-lender-titlebar": "${fields.lenderGroup.0.lender}"
-    },
     "recordEditor": {
         ".csc-loanin-borrowersAuthorizer": {
             "decorators": [

@@ -12,11 +12,6 @@
         } 
     },
     "pageSpec": {
-        "titleBar": {
-            "href": "catalogingTitleBar.html",
-            "templateSelector": ".csc-cataloging-titleBar-template",
-            "targetSelector": ".csc-cataloging-titleBar-container" 
-        },
         "recordEditor": {
             "href": "%readonlyCatalogingTemplate.html",
             "templateSelector": ".csc-cataloging-template",
@@ -29,7 +24,6 @@
         } 
     },
     "selectors": {
-        "titleBar": ".csc-cataloging-template",
         "recordEditor": ".csc-cataloging-template"
     },
     "components": {
@@ -37,7 +31,17 @@
             "type": "cspace.tabs"
         },
         "titleBar": {
-            "type": "cspace.titleBar"
+            "type": "cspace.titleBar",
+            "options": {
+                "fields": [
+                    "fields.objectNumber", {
+                    "type": "repeatableMatch",
+                    "queryPath": "fields.titleGroup",
+                    "childPath": "_primary",
+                    "value": true,
+                    "path": "title"
+                }]
+            }
         },
         "recordEditor": {
             "type":  "cspace.recordEditor",

@@ -42,9 +42,6 @@
             }
         }
     },
-    "titleBar": {
-        ".csc-titleBar-acquisition-reference-number": "${fields.acquisitionReferenceNumber}"
-    },
     "recordEditor": {
         ".csc-acquisition-object-purchase-price-currency": {
             "optionnames": [

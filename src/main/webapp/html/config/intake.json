@@ -12,11 +12,6 @@
         } 
     },
     "pageSpec": {
-        "titleBar": {
-            "href": "IntakeTitleBar.html",
-            "templateSelector": ".csc-intake-titleBar-template",
-            "targetSelector": ".csc-intake-titleBar-container" 
-        },
         "recordEditor": {
             "href": "%readonlyIntakeTemplate.html",
             "templateSelector": ".csc-intake-template",
@@ -29,7 +24,6 @@
         } 
     },
     "selectors": {
-        "titleBar": ".csc-intake-titleBar-template",
         "recordEditor": ".csc-intake-template"
     },
     "components": {
@@ -37,7 +31,13 @@
             "type": "cspace.tabs"
         },
         "titleBar": {
-            "type": "cspace.titleBar"
+            "type": "cspace.titleBar",
+            "options": {
+                "fields": [
+                    "fields.entryNumber",
+                    "fields.currentOwner" 
+                ]
+            }
         },
         "recordEditor": {
             "type":  "cspace.recordEditor",

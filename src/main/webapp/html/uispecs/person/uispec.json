@@ -42,11 +42,6 @@
             }
         }
     },
-    "titleBar": {
-        ".csc-titleBar-displayName": "${fields.displayName}",
-        ".csc-titleBar-birthDate": "${fields.birthDate}",
-        ".csc-titleBar-deathDate": "${fields.deathDate}"
-    },
     "recordEditor": {
         ".csc-personAuthority-nameNote": "${fields.nameNote}",
         ".csc-personAuthority-deathPlace": "${fields.deathPlace}",

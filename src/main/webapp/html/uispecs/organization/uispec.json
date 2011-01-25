@@ -42,11 +42,6 @@
             }
         }
     },
-    "titleBar": {
-        ".csc-titleBar-dissolutionDate": "${fields.dissolutionDate}",
-        ".csc-titleBar-displayName": "${fields.displayName}",
-        ".csc-titleBar-foundationDate": "${fields.foundingDate}"
-    },
     "recordEditor": {
         ".csc-organizationAuthority-history": {
             "decorators": [

@@ -147,8 +147,8 @@ var listEditorTester = function(){
 
 };
 
-(function () {
+jQuery(document).ready(function () {
     listEditorTester();
-}());
+});
 
 
