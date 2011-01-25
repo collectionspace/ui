@@ -30,7 +30,7 @@ cspace = cspace || {};
             var passwordLength = password.length;
             if (passwordLength < that.options.minLength || passwordLength > that.options.maxLength) {
                 var msg = fluid.stringTemplate(that.options.messages.length, {min: that.options.minLength, max: that.options.maxLength});
-                cspace.util.displayTimestampedMessage(that.dom, msg);
+                cspace.util.displayTimestampedMessage(that.dom, msg, null, true);
                 return false;
             }
             cspace.util.hideMessage(that.dom);

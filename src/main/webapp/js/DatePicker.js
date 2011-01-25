@@ -36,7 +36,7 @@ cspace = cspace || {};
         date = Date.parse(date);
         if (!date) {
             // If there is no date, we will display an invalid date message and emptying the date field.
-            cspace.util.displayTimestampedMessage(domBinder, message);
+            cspace.util.displayTimestampedMessage(domBinder, message, null, true);
             return "";
         }
         // Format validated date into a string.

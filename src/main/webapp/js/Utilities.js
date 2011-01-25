@@ -257,10 +257,11 @@ fluid.registerNamespace("cspace.util");
         return that;
     };
     
-    cspace.util.displayTimestampedMessage = function (locater, msg, time) {
+    cspace.util.displayTimestampedMessage = function (locater, msg, time, isError) {
         var messageContainer = locater.locate("messageContainer", "body");
         locater.locate("feedbackMessage", messageContainer).text(msg);
         locater.locate("timestamp", messageContainer).text(time ? time : "");
+        messageContainer[isError? "addClass": "removeClass"]("cs-message-error");
         messageContainer.show();
     };
 

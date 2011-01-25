@@ -26,13 +26,13 @@ cspace = cspace || {};
         }
         
         if (domBinder.locate("password").is(":visible") && (domBinder.locate("password").val() !== domBinder.locate("passwordConfirm").val())) {
-            cspace.util.displayTimestampedMessage(domBinder, "Passwords don't match");
+            cspace.util.displayTimestampedMessage(domBinder, "Passwords don't match", null, true);
             return false;
         }
         
         var password = domBinder.locate("password");
         if (password.is(":visible") && (password.val() !== domBinder.locate("passwordConfirm").val())) {
-            cspace.util.displayTimestampedMessage(domBinder, "Passwords don't match");
+            cspace.util.displayTimestampedMessage(domBinder, "Passwords don't match", null, true);
             return false;
         }
         

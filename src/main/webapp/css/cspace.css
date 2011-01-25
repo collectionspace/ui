@@ -583,6 +583,7 @@ input[disabled]:hover, input[disabled]:hover	{background-color:#CCC !important;}
 
 .cs-message {background-color: #D1D2D4;	border:2px solid black; font-size: 1.2em; font-weight:bold; padding: 4px; margin: 0 0 8px 0;}
 table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; font-weight:inherit; padding: 0; margin:0;}
+.cs-message-error {color:#C60018; border:2px solid #C60018}
 
 .cs-timestamp {float:right; font-weight:normal; font-size: 1em;}
 .hidden {display: none;}

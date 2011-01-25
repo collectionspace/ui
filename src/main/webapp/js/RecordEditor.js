@@ -18,10 +18,19 @@ cspace = cspace || {};
 
     // operation = one of "create", "delete", "fetch", "update"
     var makeDCErrorHandler = function (that) {
-        return function (operation, message) {
-            var msgKey = operation + "FailedMessage";
-            var msg = that.options.strings[msgKey] + message;
-            cspace.util.displayTimestampedMessage(that.dom, msg, "");
+        return function (operation, message, data) {
+            if (data && data.messages) {
+                // TODO: expand this branch as sophistication increases for CSPACE-3142
+                fluid.each(data.messages, function(message) {
+                    cspace.util.displayTimestampedMessage(that.dom, message.message, null, data.isError);
+                });
+            }
+            else {
+                var msgKey = operation + "FailedMessage";
+                var msg = that.options.strings[msgKey] + message;
+                cspace.util.displayTimestampedMessage(that.dom, msg, null, true);
+            }
+            that.locate("save").removeAttr("disabled");
             that.events.onError.fire(operation);
             if (operation === "create") {
                 // This is only temporary until http://issues.collectionspace.org/browse/CSPACE-263
@@ -38,7 +47,7 @@ cspace = cspace || {};
                 return true;
             }
             if ($.trim(required.val()) === "") {
-                cspace.util.displayTimestampedMessage(domBinder, message);
+                cspace.util.displayTimestampedMessage(domBinder, message, null, true);
                 return false;
             }
             return true;
@@ -49,7 +58,7 @@ cspace = cspace || {};
         var required = domBinder.locate("requiredFields");
         for (var i = 0; i < required.length; i++) {
             if (required[i].value === "") {
-                cspace.util.displayTimestampedMessage(domBinder, message);
+                cspace.util.displayTimestampedMessage(domBinder, message, null, true);
                 return false;
             }
         }

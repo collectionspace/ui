@@ -30,7 +30,12 @@ cspace = cspace || {};
             type: types[operation],
             dataType: options.dataType,
             success: function (data, textStatus) {
-                successEvent.fire(data);
+                if (data && data.isError) {
+                    events.onError.fire(operation, "Application error", data);
+                }
+                else {
+                    successEvent.fire(data);
+                }
             },
             error: function (xhr, textStatus, errorThrown) {
                 events.onError.fire(operation, textStatus);

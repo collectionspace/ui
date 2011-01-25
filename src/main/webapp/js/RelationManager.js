@@ -46,7 +46,7 @@ cspace = cspace || {};
                     that.locate("messageContainer", "body").hide();
                     that.searchToRelateDialog.open();
                 } else {
-                    cspace.util.displayTimestampedMessage(that.dom, that.options.strings.pleaseSaveFirst);
+                    cspace.util.displayTimestampedMessage(that.dom, that.options.strings.pleaseSaveFirst, null, true);
                 }
             });
         }
