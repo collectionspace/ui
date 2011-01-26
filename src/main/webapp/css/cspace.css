@@ -15,7 +15,7 @@ table select, table ~ select {border:none;}
 
 /* input form selectors */
 input, textarea {font-family:inherit; font-size:12px; font-weight:inherit; line-height:15px; padding:0; margin:0;
-	border:none; overflow:visible; height:17px;}
+	border:none; overflow:visible; height:19px;}
 .content > input, .content > textarea {border:1px solid #C7CFD4;}
 .information-subgroup .content > input, .information-subgroup .content > textarea {border:none;}
 input[type="button"], input[type="submit"], input[type="checkbox"] {height:auto; /*-moz-border-radius: 3px; -webkit-border-radius: 3px;*/}
@@ -447,7 +447,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .info-pair-termlist table select {border:0;}
 .fl-container-left .information-group .info-pair-date .info-pair .content  table {width:auto;}
 .fl-container-left .information-group .info-pair-select .info-pair .content  table {width:auto;}
-.info-pair-select select {height:19px; border:1 px solid #C7CFD4;}
+.info-pair-select select {border:1px solid #C7CFD4;}
 
 .login-text {padding:0 10px 15px 0px;}
 .login-forms {width:100%;}
@@ -496,7 +496,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .input-money-amount	   {width: 120px !important;}
 .input-select		   {width: auto; height:21px;}
 table .input-select         {width: 100%; height:17px; /**height:22px;*/ padding-top:0; border:none;}
-.input-textarea  {/*width: 99.5%;*/ width:100%; height:69px; overflow:auto;}
+.input-textarea  {/*width: 99.5%;*/ width:100%; height:72px; overflow:auto;}
 .cs-repeatable-repeat .input-textarea  {border:1px solid #C7CFD4;} /* need to clean up borders for all input types */
 .input-alpha-login       {width: 120px; height:18px;}
 
@@ -709,7 +709,8 @@ input.cs-repeatable-delete[disabled]:focus, table tr.csc-repeatable-repeat input
 /* rounded corners */
 .info-column .header {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6px 0 0;}
 ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6px 0 0;}
-.saveButton {-moz-border-radius:4px; -webkit-border-radius:4px;}
+.saveButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton {-moz-border-radius:4px; -webkit-border-radius:4px;}
+.cs-createNew-createButton {float:right;}
 .cs-searchBox {-moz-border-radius:8px; -webkit-border-radius:8px;}
 .cs-repeatable-add {-moz-border-radius:4px 4px 0 0; -webkit-border-radius:4px 4px 0 0;}
 .main-users-page #search-box {-moz-border-radius:8px; -webkit-border-radius:8px;}

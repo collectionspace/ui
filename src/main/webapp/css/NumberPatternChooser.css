@@ -2,21 +2,24 @@
 	width:400px;
 	float:left; 
 	width:100%;
-	position:absolute;
 	z-index:999 !important;
+}
+.cs-numberPatternChooserContainer {
+	float: left;
 }
 .pattern-chooser-input {
 	width:51% !important;
+	float: left;
 	border:1px solid #C7CFD4;
 }
 
 input.numberPatternChooserButton{
 	border:none;
 	background-color:#73AA4F; 
+	margin-left: 6px;
 	padding: 2px 12px;
 	color:#fff; 
 	float:right;
-	margin-top:-21px;
 	cursor:pointer;
 	font-size:11px;
 	font-weight:bold;

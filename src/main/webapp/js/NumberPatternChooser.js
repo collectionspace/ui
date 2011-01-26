@@ -162,7 +162,7 @@ cspace = cspace || {};
         // Get the template, create the tree and render the table of contents
         fluid.fetchResources(resources, function () {
             var templates = fluid.parseTemplates(resources, ["chooser"], {});
-            var node = $("<div></div>", that.container[0].ownerDocument);
+            var node = $("<div></div>", that.container[0].ownerDocument).addClass(that.options.styles.container);
             fluid.reRender(templates, node, buildTree(that.model), {model: that.model});
             that.container.append(node);
             setupNode(that);
@@ -189,7 +189,8 @@ cspace = cspace || {};
         },
         styles: {
             selected: "cs-numberPatternChooser-selected",
-            selecting: "cs-selecting"
+            selecting: "cs-selecting",
+            container: "cs-numberPatternChooserContainer"
         },
         model: null,
         selected: null,
