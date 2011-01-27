@@ -122,9 +122,6 @@ cspace = cspace || {};
             type: "cspace.listEditor"
         },
         selectors: {
-            messageContainer: ".csc-message-container",
-            feedbackMessage: ".csc-message",
-            timestamp: ".csc-timestamp",
             goToRecord: ".csc-goto"
         },
         events: {

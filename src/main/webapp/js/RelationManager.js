@@ -43,10 +43,10 @@ cspace = cspace || {};
         if (that.showAddButton.visible) {
             that.locate("addButton").click(function (e) {
                 if (that.model.csid) {
-                    that.locate("messageContainer", "body").hide();
+                    that.options.messageBar.hide();
                     that.searchToRelateDialog.open();
                 } else {
-                    cspace.util.displayTimestampedMessage(that.dom, that.options.strings.pleaseSaveFirst, null, true);
+                    that.options.messageBar.show(that.options.strings.pleaseSaveFirst, null, true);
                 }
             });
         }
@@ -158,12 +158,9 @@ cspace = cspace || {};
         addRelations: cspace.relationManager.provideAddRelations,
         selectors: {
             searchDialog: ".csc-search-related-dialog",
-            messageContainer: ".csc-message-container",
-            feedbackMessage: ".csc-message",
-            timestamp: ".csc-timestamp",
             addButton: ".csc-add-related-record-button"
         },
-
+        messageBar: "{messageBar}",
         strings: {
             pleaseSaveFirst: "Please save the record you are creating before trying to relate other records to it."
         },

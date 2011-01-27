@@ -94,9 +94,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             jqUnit.notVisible("Search to Relate Dialog is invisible initially", $(".ui-dialog"));
             relationManager.locate("addButton").click();
             jqUnit.notVisible("Search to Relate Dialog is invisible if the record is not saved", $(".ui-dialog"));
-            var message = relationManager.locate("feedbackMessage");
-            jqUnit.isVisible("Error message is visible", message);
-            jqUnit.assertEquals("Object should be saved first", relationManager.options.strings.pleaseSaveFirst, message.text());
+            jqUnit.isVisible("Error message is visible", relationManager.options.messageBar.container);
+            jqUnit.assertEquals("Object should be saved first", relationManager.options.strings.pleaseSaveFirst, relationManager.options.messageBar.locate("message").text());
             start();
         }, "cataloging", "cataloging");
     });
@@ -106,8 +105,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             relationManager.options.applier.requestChange("csid", "123456798");
             jqUnit.notVisible("Search to Relate Dialog is invisible initially", $(".ui-dialog"));
             relationManager.locate("addButton").click();
-            var message = relationManager.locate("feedbackMessage");
-            jqUnit.notVisible("Error message is invisible", message);
+            jqUnit.notVisible("Error message is invisible", relationManager.options.messageBar.container);
             jqUnit.isVisible("After clicking Add, Add Relation Dialog is visible", relationManager.dialogNode);
             jqUnit.assertEquals("Dialog should have correct primary record type", "cataloging", 
                  relationManager.searchToRelateDialog.options.primary);
@@ -125,8 +123,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             relationManager.options.applier.requestChange("csid", "123456798");
             jqUnit.notVisible("Search to Relate Dialog is invisible initially", $(".ui-dialog"));
             relationManager.locate("addButton").click();
-            var message = relationManager.locate("feedbackMessage");
-            jqUnit.notVisible("Error message is invisible", message);
+            jqUnit.notVisible("Error message is invisible", relationManager.options.messageBar.container);
             jqUnit.isVisible("After clicking Add, Add Relation Dialog is visible", relationManager.dialogNode);
             jqUnit.assertEquals("Dialog should have correct primary record type", "cataloging", relationManager.searchToRelateDialog.options.primary);
             jqUnit.isVisible("Record-type drop-down is visible", relationManager.searchToRelateDialog.locate("recordType"));
@@ -143,8 +140,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             relationManager.options.applier.requestChange("csid", "123456798");
             jqUnit.notVisible("Search to Relate Dialog is invisible initially", $(".ui-dialog"));
             relationManager.locate("addButton").click();
-            var message = relationManager.locate("feedbackMessage");
-            jqUnit.notVisible("Error message is invisible", message);
+            jqUnit.notVisible("Error message is invisible", relationManager.options.messageBar.container);
             jqUnit.isVisible("After clicking Add, Add Relation Dialog is visible", relationManager.searchToRelateDialog.container);
             jqUnit.isVisible("Record-type drop-down is visible", relationManager.searchToRelateDialog.options.selectors.recordType);
             

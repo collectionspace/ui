@@ -131,16 +131,13 @@ cspace = cspace || {};
         recordTypes: "{recordTypes}",
         produceTree: cspace.relatedRecordsList.produceTree,
         selectors: {
-            messageContainer: ".csc-message-container",
-            feedbackMessage: ".csc-message",
-            timestamp: ".csc-timestamp",
             recordListSelector: ".csc-relatedRecordsList-recordList",
             mainHeader: ".csc-related-mainheader",
             numberHeader: ".csc-related-number-header",
             summaryHeader: ".csc-related-summary-header",
             typeHeader: ".csc-related-recordtype-header"
         },
-        selectorsToIgnore: ["recordListSelector", "messageContainer", "feedbackMessage", "timestamp"],
+        selectorsToIgnore: ["recordListSelector"],
         strings: {
             numberHeader: "Number",
             summaryHeader: "Summary",

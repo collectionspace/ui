@@ -160,6 +160,9 @@ fluid.defaults("cspace.tests.testEnvironment", {
             options: {
                 schema: "{testEnvironment}.options.schema"
             }
+        },
+        messageBar: {
+            type: "cspace.messageBar"
         }
     }
 });

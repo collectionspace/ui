@@ -256,18 +256,6 @@ fluid.registerNamespace("cspace.util");
         }
         return that;
     };
-    
-    cspace.util.displayTimestampedMessage = function (locater, msg, time, isError) {
-        var messageContainer = locater.locate("messageContainer", "body");
-        locater.locate("feedbackMessage", messageContainer).text(msg);
-        locater.locate("timestamp", messageContainer).text(time ? time : "");
-        messageContainer[isError? "addClass": "removeClass"]("cs-message-error");
-        messageContainer.show();
-    };
-
-    cspace.util.hideMessage = function (locater) {
-        locater.locate("messageContainer", "body").hide();
-    };
 
     cspace.util.setZIndex = function () {
         if ($.browser.msie) {
@@ -898,7 +886,7 @@ fluid.registerNamespace("cspace.util");
     cspace.globalSetup = function (options) {
         var that = fluid.littleComponent("cspace.globalSetup")(options);
         return function (tag, options) {
-            // Adding globalSetup to the environment.
+            // Adding globalSetup as the root of the environment tree.
             return fluid.withNewComponent(that, function () {
                 return cspace.setup(tag, options);
             });
@@ -909,6 +897,9 @@ fluid.registerNamespace("cspace.util");
         components: {
             globalNavigator: {
                 type: "cspace.util.globalNavigator"
+            },
+            messageBar: {
+                type: "cspace.messageBar"
             }
         }
     });

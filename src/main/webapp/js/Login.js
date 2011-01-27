@@ -29,12 +29,24 @@ cspace = cspace || {};
         domBinder.locate("email").focus();
         domBinder.locate("resetRequest").hide();
     };
+    
+    var displayMessage = function (messageBar, data) {
+        if (data.messages) {
+            // TODO: expand this branch as sophistication increases for CSPACE-3142
+            fluid.each(data.messages, function(message) {
+                messageBar.show(message.message, null, data.isError);
+            });
+        }
+        else {
+            messageBar.show(data.message, null, data.isError);
+        }
+    };
 
-    var showEmailSubmittedPage = function (domBinder, data) {
-        if (data.ok) {
+    var showEmailSubmittedPage = function (messageBar, domBinder, data) {
+        if (data.isError !== true) {
             domBinder.locate("enterEmailForm").hide();
         }
-        cspace.util.displayTimestampedMessage(domBinder, data.message);
+        displayMessage(messageBar, data)
     };
 
     var showReset = function (domBinder) {
@@ -44,16 +56,16 @@ cspace = cspace || {};
         domBinder.locate("newPassword").focus();
     };
 
-    var showPasswordReset = function (domBinder, data) {
-        if (data.ok) {
+    var showPasswordReset = function (messageBar, domBinder, data) {
+        if (data.isError !== true) {
             domBinder.locate("signIn").show();
             domBinder.locate("enterEmail").hide();
             domBinder.locate("resetRequest").hide();
         }
-        cspace.util.displayTimestampedMessage(domBinder, data.message);
+        displayMessage(messageBar, data)
     };
 
-    var makeRequiredFieldsValidator = function (domBinder, formType, message) {
+    var makeRequiredFieldsValidator = function (messageBar, domBinder, formType, message) {
         return function (e) {
             var requiredFields = domBinder.locate(formType + "Required");
             var missing = false;
@@ -66,26 +78,26 @@ cspace = cspace || {};
                 }
             }
             if (!missing) {
-                cspace.util.hideMessage(domBinder);
+                messageBar.hide();
                 return true;
             } else {
-                cspace.util.displayTimestampedMessage(domBinder, message);
+                messageBar.show(message, null, true);
                 requiredFields[firstMissing].focus();
                 return false;
             }
         };
     };
 
-    var emailFormValid = function (domBinder, message) {
-        return makeRequiredFieldsValidator(domBinder, "email", message)();      
+    var emailFormValid = function (messageBar, domBinder, message) {
+        return makeRequiredFieldsValidator(messageBar, domBinder, "email", message)();      
     };
 
-    var passwordFormValid = function (domBinder, allRequiredMessage, mustMatchMessage) {
-        if (!makeRequiredFieldsValidator(domBinder, "password", allRequiredMessage)()) {
+    var passwordFormValid = function (messageBar, domBinder, allRequiredMessage, mustMatchMessage) {
+        if (!makeRequiredFieldsValidator(messageBar, domBinder, "password", allRequiredMessage)()) {
             return false;
         }
         if (domBinder.locate("newPassword").val() !== domBinder.locate("confirmPassword").val()) {
-            cspace.util.displayTimestampedMessage(domBinder, mustMatchMessage);
+            messageBar.show(mustMatchMessage, null, true);
             domBinder.locate("newPassword").focus();
             return false;
         }
@@ -110,8 +122,8 @@ cspace = cspace || {};
     
     var submitNewPassword = function (password, url, that) {
         if (cspace.util.useLocalData()) {
-            var mockResponse = {message: "Success", ok: true};
-            showPasswordReset(that.dom, mockResponse);
+            var mockResponse = {message: "Success", isError: false};
+            showPasswordReset(that.messageBar, that.dom, mockResponse);
             that.events.passwordSubmitted.fire(mockResponse);
         } else {
             jQuery.ajax({
@@ -139,27 +151,25 @@ cspace = cspace || {};
     
     var bindEventHandlers = function (that) {
         that.locate("requestReset").click(function (e) {
-            cspace.util.hideMessage(that.dom);
+            that.messageBar.hide();
             showResetRequestForm(that.dom);
         });
         that.locate("submitEmail").click(makeEmailSubmitter(that));
         that.locate("submitNewPassword").click(makePasswordSubmitter(that));
 
         that.events.emailSubmitted.addListener(function (data, statusText) {
-            showEmailSubmittedPage(that.dom, data);
+            showEmailSubmittedPage(that.messageBar, that.dom, data);
         });
         that.events.passwordSubmitted.addListener(function (data, statusText) {
-            showPasswordReset(that.dom, data);
+            showPasswordReset(that.messageBar, that.dom, data);
         });
         
         that.events.onError.addListener(function () {
-            cspace.util.displayTimestampedMessage(that.dom, that.options.strings.generalError);            
+            that.messageBar.show(that.options.strings.generalError, null, true);            
         });
 
-        that.locate("loginForm").submit(makeRequiredFieldsValidator(that.dom, "login", that.options.strings.allFieldsRequired));
-        that.locate("resetRequest").submit(makeRequiredFieldsValidator(that.dom, "password", that.options.strings.allFieldsRequired));
-
-        cspace.passwordValidator(that.container);
+        that.locate("loginForm").submit(makeRequiredFieldsValidator(that.messageBar, that.dom, "login", that.options.strings.allFieldsRequired));
+        that.locate("resetRequest").submit(makeRequiredFieldsValidator(that.messageBar, that.dom, "password", that.options.strings.allFieldsRequired));
     };
 
     var setupLogin = function (that) {  
@@ -172,9 +182,9 @@ cspace = cspace || {};
 
         var result = cspace.util.getUrlParameter("result");
         if (result === "fail") {
-            cspace.util.displayTimestampedMessage(that.dom, that.options.strings.invalid);
+            that.messageBar.show(that.options.strings.invalid, null, true);
         } else {
-            cspace.util.hideMessage(that.dom);
+            that.messageBar.hide();
         }
         var resetToken = cspace.util.getUrlParameter("token");
         var email = cspace.util.getUrlParameter("email");
@@ -196,15 +206,16 @@ cspace = cspace || {};
      */
     cspace.login = function (container, options) {
         var that = fluid.initView("cspace.login", container, options);
+        fluid.initDependents(that);
 
         that.submitEmail = function () {
-            if (emailFormValid(that.dom, that.options.strings.emailRequired)) {
+            if (emailFormValid(that.messageBar, that.dom, that.options.strings.emailRequired)) {
                 submitEmail(that.locate("email").val(), that.options.baseUrl, that);
             }
         };
         
         that.submitNewPassword = function () {
-            if (passwordFormValid(that.dom, that.options.strings.allFieldsRequired, that.options.strings.passwordsMustMatch)) {
+            if (passwordFormValid(that.messageBar, that.dom, that.options.strings.allFieldsRequired, that.options.strings.passwordsMustMatch)) {
                 submitNewPassword(that.locate("newPassword").val(), that.options.baseUrl, that);
             }
         };
@@ -241,11 +252,16 @@ cspace = cspace || {};
             newPassword: ".csc-login-newPassword",
             confirmPassword: ".csc-login-confirmPassword",
             submitNewPassword: ".csc-login-submitNewPassword",
-            passwordRequired: ".csc-login-passwordRequired",
-
-            messageContainer: ".csc-message-container",
-            feedbackMessage: ".csc-message",
-            timestamp: ".csc-timestamp"
+            passwordRequired: ".csc-login-passwordRequired"
+        },
+        
+        components: {
+            messageBar: {
+                type: "cspace.messageBar"
+            },
+            passwordValidator: {
+                type: "cspace.passwordValidator"
+            }
         },
 
         strings: {

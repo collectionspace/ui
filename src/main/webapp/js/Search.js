@@ -106,7 +106,7 @@ cspace = cspace || {};
 
     var handleSubmitSearch = function (that) {
         return function () {
-            that.locate("errorMessage").hide();
+            that.options.messageBar.hide();
             fluid.clear(that.model.results);
             updateModel(that.model.searchModel, { 
                 keywords: that.locate("keywords").val(),
@@ -153,7 +153,7 @@ cspace = cspace || {};
         
         that.events.onError.addListener(function (action, status) {
             that.locate("resultsContainer").hide();
-            that.locate("errorMessage").show();
+            that.options.messageBar.show(that.options.strings.errorMessage, null, true);
         });
         
         if (that.options.pivoting) {
@@ -236,7 +236,7 @@ cspace = cspace || {};
             that.locate("resultsContainer").hide();
             that.locate("resultsCountContainer").hide();
             that.locate("lookingContainer").hide();
-            that.locate("errorMessage").hide();
+            that.options.messageBar.hide();
         };
         
         that.model = {
@@ -298,7 +298,6 @@ cspace = cspace || {};
         selectors: {
             keywords: ".csc-search-keywords",
             recordType: ".csc-search-recordType",
-            errorMessage: ".csc-search-error-message",
             searchButton: ".csc-search-submit",
             resultsContainer: ".csc-search-results",
             resultsCountContainer: ".csc-search-resultsCountContainer",
@@ -313,7 +312,10 @@ cspace = cspace || {};
                 select: ".csc-search-select"
             }
         },
-        
+        strings: {
+            errorMessage: "We've encountered an error retrieving search results. Please try again."
+        },
+        messageBar: "{messageBar}",
         events: {
             modelChanged: null,
             onSearch: null,

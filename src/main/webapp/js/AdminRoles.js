@@ -42,11 +42,6 @@ cspace = cspace || {};
                 }
             }
         },
-        selectors: {
-            messageContainer: ".csc-message-container",
-            feedbackMessage: ".csc-message",
-            timestamp: ".csc-timestamp"
-        },
         events: {
             afterRender: null
         }

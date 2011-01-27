@@ -73,6 +73,8 @@ cspace = cspace || {};
         setupModel(that.applier, that.model, that.options.pageType, that.options.recordType, that.schema);
         that.events.onDependencySetup.fire(that.uispec);
         that.globalNavigator = that.options.globalNavigator;
+        that.messageBar = that.options.messageBar;
+        that.globalSetup = that.options.globalSetup;
         fluid.initDependents(that);
     };
     
@@ -678,7 +680,9 @@ cspace = cspace || {};
                     primary: "{setup}.options.primary",
                     configURL: "{setup}.options.configURL",
                     // TODO: FIX PAGE BUILDER SETUP!!!
-                    globalNavigator: "{globalNavigator}"
+                    globalNavigator: "{globalNavigator}",
+                    globalSetup: "{globalSetup}",
+                    messageBar: "{messageBar}"
                 }
             }
         },

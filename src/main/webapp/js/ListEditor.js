@@ -46,7 +46,7 @@ cspace = cspace || {};
         });
         that.detailsDC.events.afterRemove.addListener(function () {
             hideDetails(that.dom);
-            cspace.util.hideMessage(that.dom);
+            that.options.messageBar.hide();
         });
         that.detailsDC.events.onError.addListener(function (operation, message) {
             that.locate("newListRow").hide();
@@ -211,6 +211,7 @@ cspace = cspace || {};
             }
         },
         globalNavigator: "{globalNavigator}",
+        messageBar: "{messageBar}",
         dataContext: {
             type: "cspace.dataContext",
             options: {
@@ -220,9 +221,6 @@ cspace = cspace || {};
             }
         },
         selectors: {
-            messageContainer: ".csc-message-container",
-            feedbackMessage: ".csc-message",
-            timestamp: ".csc-timestamp",
             list: ".csc-listEditor-list",
             csid: ".csc-listEditor-list-csid",
             listRow: ".csc-listEditor-list-row",

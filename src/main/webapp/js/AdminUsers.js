@@ -18,7 +18,7 @@ cspace = cspace || {};
     
     fluid.registerNamespace("cspace.adminUsers");
 
-    var validate = function (domBinder, userDetailsApplier, passwordValidator) {
+    var validate = function (messageBar, domBinder, userDetailsApplier, passwordValidator, strings) {
         // In the default configuration, the email address used as the userid.
         // If all required fields are present and the userid is not set, use the email
         if (!domBinder.locate("userId").val()) {
@@ -26,13 +26,13 @@ cspace = cspace || {};
         }
         
         if (domBinder.locate("password").is(":visible") && (domBinder.locate("password").val() !== domBinder.locate("passwordConfirm").val())) {
-            cspace.util.displayTimestampedMessage(domBinder, "Passwords don't match", null, true);
+            messageBar.show(strings.passwordsDoNotMatch, null, true);
             return false;
         }
         
         var password = domBinder.locate("password");
         if (password.is(":visible") && (password.val() !== domBinder.locate("passwordConfirm").val())) {
-            cspace.util.displayTimestampedMessage(domBinder, "Passwords don't match", null, true);
+            messageBar.show(strings.passwordsDoNotMatch, null, true);
             return false;
         }
         
@@ -50,7 +50,7 @@ cspace = cspace || {};
         };
     };
 
-    var submitSearch = function (listEditor, domBinder, queryURL, successEvent) {
+    var submitSearch = function (messageBar, listEditor, domBinder, queryURL, successEvent, strings) {
         return function () {
             var query = cspace.util.useLocalData() ? "" : domBinder.locate("searchField").val();
             var model = listEditor.model;
@@ -73,7 +73,7 @@ cspace = cspace || {};
                     successEvent.fire();
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    fluid.fail("Error retrieving search results:" + textStatus);
+                    messageBar.show(strings.searchError + textStatus, null, true);
                 }
             });
         };
@@ -81,11 +81,11 @@ cspace = cspace || {};
 
     var bindEventHandlers = function (that) {
 
-        that.locate("searchButton").click(submitSearch(that.userListEditor, that.dom, that.options.queryURL, that.events.afterSearch));
+        that.locate("searchButton").click(submitSearch(that.options.messageBar, that.userListEditor, that.dom, that.options.queryURL, that.events.afterSearch, that.options.strings));
         that.locate("unSearchButton").click(restoreUserList(that.userListEditor, that.dom)).hide();
 
         that.userListEditor.details.events.onSave.addListener(function () {
-            return validate(that.dom, that.userListEditor.detailsApplier, that.passwordValidator);
+            return validate(that.options.messageBar, that.dom, that.userListEditor.detailsApplier, that.passwordValidator, that.options.strings);
         });
         that.userListEditor.events.pageReady.addListener(function () {
             that.events.afterRender.fire(that);
@@ -105,7 +105,6 @@ cspace = cspace || {};
         
         that.userListEditor = fluid.initSubcomponent(that, "userListEditor", [that.container, that.options.recordType, 
             that.options.uispec, fluid.COMPONENT_OPTIONS]);
-        that.passwordValidator = fluid.initSubcomponent(that, "passwordValidator", [that.container, fluid.COMPONENT_OPTIONS]);
         
         fluid.initDependents(that);
         bindEventHandlers(that);
@@ -129,15 +128,15 @@ cspace = cspace || {};
                 }
             }
         },
-        passwordValidator: {
-            type: "cspace.passwordValidator"
-        },
         components: {
             isCurrentUser: {
                 type: "cspace.util.isCurrentUser",
                 options: {
                     csid: "{adminUsers}.options.currentUserId"
                 }
+            },
+            passwordValidator: {
+                type: "cspace.passwordValidator"
             }
         },
         selectors: {
@@ -145,9 +144,6 @@ cspace = cspace || {};
             deleteButton: ".csc-delete",
             searchButton: ".csc-user-searchButton",
             unSearchButton: ".csc-user-unSearchButton",
-            messageContainer: ".csc-message-container",
-            feedbackMessage: ".csc-message",
-            timestamp: ".csc-timestamp",
             userId: ".csc-user-userID",
             email: ".csc-user-email",
             userName: ".csc-user-userName",
@@ -159,6 +155,11 @@ cspace = cspace || {};
             afterSearch: null,
             afterSetup: null
         },
+        strings: {
+            searchError: "Error retrieving search results: ",
+            passwordsDoNotMatch: "Passwords don't match."
+        },
+        messageBar: "{messageBar}",
         queryURL: "../../chain/users/search?query="
     });
     

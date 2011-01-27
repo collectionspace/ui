@@ -30,10 +30,10 @@ cspace = cspace || {};
             var passwordLength = password.length;
             if (passwordLength < that.options.minLength || passwordLength > that.options.maxLength) {
                 var msg = fluid.stringTemplate(that.options.messages.length, {min: that.options.minLength, max: that.options.maxLength});
-                cspace.util.displayTimestampedMessage(that.dom, msg, null, true);
+                that.options.messageBar.show(msg, null, true);
                 return false;
             }
-            cspace.util.hideMessage(that.dom);
+            that.options.messageBar.hide();
             return true;
         };
 
@@ -43,22 +43,25 @@ cspace = cspace || {};
         that.bindEvents = function () {
             bindEvents(that);
         };
-        
-        cspace.util.hideMessage(that.dom);
+        that.options.messageBar.hide();
         return that;
     };
 
     fluid.defaults("cspace.passwordValidator", {
         selectors: {
-            passwordField: ".csc-passwordValidator-password",
-            messageContainer: ".csc-message-container",
-            feedbackMessage: ".csc-message",
-            timestamp: ".csc-timestamp"
+            passwordField: ".csc-passwordValidator-password"
         },
         messages: {
             length: "Passwords must be between %min and %max characters in length."
         },
         minLength: 8,
-        maxLength: 24
+        maxLength: 24,
+        messageBar: "{messageBar}"
     });
+    
+    fluid.demands("passwordValidator", "cspace.adminUsers", 
+        ["{adminUsers}.container", fluid.COMPONENT_OPTIONS]);
+        
+    fluid.demands("passwordValidator", "cspace.login", 
+        ["{login}.container", fluid.COMPONENT_OPTIONS]);
 })(jQuery, fluid);

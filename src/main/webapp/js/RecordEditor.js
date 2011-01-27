@@ -22,13 +22,13 @@ cspace = cspace || {};
             if (data && data.messages) {
                 // TODO: expand this branch as sophistication increases for CSPACE-3142
                 fluid.each(data.messages, function(message) {
-                    cspace.util.displayTimestampedMessage(that.dom, message.message, null, data.isError);
+                    that.options.messageBar.show(message.message, null, data.isError);
                 });
             }
             else {
                 var msgKey = operation + "FailedMessage";
                 var msg = that.options.strings[msgKey] + message;
-                cspace.util.displayTimestampedMessage(that.dom, msg, null, true);
+                that.options.messageBar.show(msg, null, true);
             }
             that.locate("save").removeAttr("disabled");
             that.events.onError.fire(operation);
@@ -40,25 +40,25 @@ cspace = cspace || {};
         };
     };
 
-    var validateIdentificationNumber = function (domBinder, container, message) {
+    var validateIdentificationNumber = function (domBinder, container, messageBar, message) {
         return function () {
             var required = domBinder.locate("identificationNumber");
             if (required === container) {
                 return true;
             }
             if ($.trim(required.val()) === "") {
-                cspace.util.displayTimestampedMessage(domBinder, message, null, true);
+                messageBar.show(message, null, true);
                 return false;
             }
             return true;
         };
     };
     
-    var validateRequiredFields = function (domBinder, message) {
+    var validateRequiredFields = function (domBinder, messageBar, message) {
         var required = domBinder.locate("requiredFields");
         for (var i = 0; i < required.length; i++) {
             if (required[i].value === "") {
-                cspace.util.displayTimestampedMessage(domBinder, message, null, true);
+                messageBar.show(message, null, true);
                 return false;
             }
         }
@@ -69,21 +69,21 @@ cspace = cspace || {};
         var message = action.toLowerCase() + "SuccessfulMessage";
         that.options.applier.requestChange("", data);
         that.refreshView();
-        cspace.util.displayTimestampedMessage(that, that.options.strings[message], Date());
+        that.options.messageBar.show(that.options.strings[message], Date());
         that.unsavedChanges = false;
         that.locate("save").removeAttr("disabled");
     };
 
     var bindEventHandlers = function (that) {
         
-        that.events.onSave.addListener(validateIdentificationNumber(that.dom, that.container, that.options.strings.identificationNumberRequired));
+        that.events.onSave.addListener(validateIdentificationNumber(that.dom, that.container, that.options.messageBar, that.options.strings.identificationNumberRequired));
 
         that.events.onSave.addListener(function () {
-            cspace.util.displayTimestampedMessage(that, that.options.strings.savingMessage, "");
+            that.options.messageBar.show(that.options.strings.savingMessage);
         });
         
         that.events.onSave.addListener(function () {
-            return validateRequiredFields(that.dom, that.options.strings.missingRequiredFields);
+            return validateRequiredFields(that.dom, that.options.messageBar, that.options.strings.missingRequiredFields);
         });
 
         that.options.dataContext.events.afterCreate.addListener(function (data) {
@@ -141,7 +141,7 @@ cspace = cspace || {};
         that.locate("save").click(that.requestSave);
         that.locate("deleteButton").click(that.remove);
         that.locate("cancel").click(function () {
-            that.locate("messageContainer", "body").hide();
+            that.options.messageBar.hide();
             that.unsavedChanges = false;
             that.events.onCancel.fire();
         });
@@ -174,18 +174,10 @@ cspace = cspace || {};
             }
             that.unsavedChanges = false;
             that.rollbackModel = fluid.copy(that.model.fields);
-            that.locate("messageContainer", "body").hide();
+            that.options.messageBar.hide();
             bindHandlers(that);
             that.events.afterRender.fire(that);
             fluid.log("RecordEditor.js renderPage end");
-        };
-        
-        that.showSpecErrorMessage = function (msg) {
-            that.locate("errorMessage", "body").text(msg);
-            that.locate("errorDialog", "body").dialog({
-                modal: true,
-                dialogClass: "fl-widget"
-            });
         };
 
         /*
@@ -259,6 +251,7 @@ cspace = cspace || {};
         },
         navigationEventNamespace: undefined,
         globalNavigator: "{globalNavigator}",
+        messageBar: "{messageBar}",
         produceTree: cspace.recordEditor.produceTree,
         events: {
             onSave: "preventable",
@@ -268,18 +261,12 @@ cspace = cspace || {};
             afterRender: null
         },
         selectors: {
-            errorDialog: ".csc-error-dialog",
-            errorMessage: ".csc-error-message",
             save: ".csc-save",
             cancel: ".csc-cancel",
             deleteButton: ".csc-delete",
-            messageContainer: ".csc-message-container",
-            feedbackMessage: ".csc-message",
-            timestamp: ".csc-timestamp",
             requiredFields: ".csc-required:visible"
         },
-        selectorsToIgnore: ["errorDialog", "errorMessage", "save", "cancel", "deleteButton", "messageContainer", 
-            "feedbackMessage", "timestamp", "requiredFields", "identificationNumber"],
+        selectorsToIgnore: ["save", "cancel", "deleteButton", "requiredFields", "identificationNumber"],
         rendererFnOptions: {
             cutpointGenerator: "cspace.recordEditor.cutpointGenerator",
         },

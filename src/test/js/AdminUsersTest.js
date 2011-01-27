@@ -117,7 +117,7 @@ var adminUsersTester = function () {
                 changeDetails(adminUsers.options.selectors, testDataCreateUser, confPassword);
                 var saveResult = re.requestSave();
                 jqUnit.assertFalse("details.save returns false if " + message, saveResult);
-                jqUnit.isVisible("message container is visible", le.locate("messageContainer"));
+                jqUnit.isVisible("message container is visible", le.options.messageBar.container);
                 cspace.tests.onTearDown.fire(re);
                 start();
             });
@@ -132,7 +132,7 @@ var adminUsersTester = function () {
             jqUnit.assertEquals("User list model should have right number of entries", 4, list.length);
             jqUnit.assertEquals("User list model should contain expected user", "Megan Forbes", list[1].screenName);
             jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, le.list.locate("row").length);
-            jqUnit.notVisible("message container is hidden", selectors.messageContainer);
+            jqUnit.notVisible("message container is hidden", le.options.messageBar.container);
             jqUnit.isVisible("details none is visible", selectors.detailsNone);
             jqUnit.notVisible("details is not visible", selectors.details);
             jqUnit.notVisible("hide on create is hidden", selectors.hideOnCreate);
@@ -154,7 +154,7 @@ var adminUsersTester = function () {
                 jqUnit.assertEquals("Password confirm is blank", adminUsers.locate("passwordConfirm").val(), "");
                 jqUnit.assertTrue("Delete button has deactivated style", deleteButton.hasClass("deactivate"));
                 jqUnit.assertTrue("Delete button is disabled", deleteButton.attr("disabled"));
-                jqUnit.notVisible("message container is hidden", selectors.messageContainer);
+                jqUnit.notVisible("message container is hidden", le.options.messageBar.container);
                 jqUnit.notVisible("details none is hidden", selectors.detailsNone);
                 jqUnit.isVisible("details is visible", selectors.details);
                 jqUnit.notVisible("hide on create is hidden", selectors.hideOnCreate);
@@ -187,7 +187,7 @@ var adminUsersTester = function () {
                 adminUsers.locate("email").val("").change();
                 var saveResult = re.requestSave();
                 jqUnit.assertFalse("details.save returns false if passwords do not match", saveResult);
-                jqUnit.isVisible("message container is visible", le.locate("messageContainer"));
+                jqUnit.isVisible("message container is visible", le.options.messageBar.container);
                 cspace.tests.onTearDown.fire(re);
                 start();
             });
@@ -209,7 +209,7 @@ var adminUsersTester = function () {
                 re.events.afterRender.removeListener("initialSelect");                
                 var saveResult = re.requestSave();
                 jqUnit.assertTrue("Save should succeed (validation should not prevent save)", saveResult);
-                jqUnit.isVisible("message container is visible", le.locate("messageContainer"));
+                jqUnit.isVisible("message container is visible", le.options.messageBar.container);
                 cspace.tests.onTearDown.fire(re);
                 start();
             }, "initialSelect");

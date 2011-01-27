@@ -581,11 +581,6 @@ input[disabled]:hover, input[disabled]:hover	{background-color:#CCC !important;}
 .overflowdiv {overflow-y:auto; overflow-x:hidden; /*max-height:183px;*/ max-height:180px;} /*  min-height */
 .overflowdiv-admin {overflow-y:auto; overflow-x:hidden; /*max-height:183px;*/ max-height:180px;} /*  min-height */
 
-.cs-message {background-color: #D1D2D4;	border:2px solid black; font-size: 1.2em; font-weight:bold; padding: 4px; margin: 0 0 8px 0;}
-table .cs-message {background-color: #D1D2D4;	border:none; font-size: inherit; font-weight:inherit; padding: 0; margin:0;}
-.cs-message-error {color:#C60018; border:2px solid #C60018}
-
-.cs-timestamp {float:right; font-weight:normal; font-size: 1em;}
 .hidden {display: none;}
 .show {display: block;}
 .clear {clear:both; margin:0 0 -1px; padding:0; height:1px; overflow:hidden; visibility:hidden; display:block;}
@@ -797,3 +792,13 @@ ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6
 .cs-myCollectionSpace-collapsed {background:transparent url('../images/toggle-more.png') no-repeat 4px 6px;}
 
 .csc-related-mainheader {display:inline;}
+
+/* Message Bar styling. */
+.cs-messageBar {font-size: 1.2em; font-weight:bold; position: fixed; bottom: 0px; z-index: 10; background-color:#D1D2D4; height: 40px; width: 100%; border-top:2px solid #000000; margin-left: -4px; padding-top: 11px; padding-left: 10px;}
+.cs-messageBar-message {padding-right: 15px; padding-left: 15px;}
+.cs-messageBar-time {float:right; font-weight:normal; font-size: 1em; padding-right: 14px;}
+.cs-message-error {color:#C60018; border-top: 2px solid #C60018;}
+.cs-messageBar .cs-messageBar-cancel {background-color:#73AA4F;}
+.cs-messageBar .cs-messageBar-cancel:hover {background-color:#73AA4F;}
+.cs-message-error .cs-messageBar-cancel {background-color:#C60018;}
+.cs-message-error .cs-messageBar-cancel:hover {background-color:#C60018;}

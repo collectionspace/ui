@@ -15,12 +15,13 @@
 
         <script type="text/javascript" src="../js/cspace.js"></script>
         <script type="text/javascript" src="../js/Utilities.js"></script>
+        <script type="text/javascript" src="../js/MessageBar.js"></script>
         <script type="text/javascript" src="../js/PasswordValidator.js"></script>
         <script type="text/javascript" src="../js/Login.js"></script>
         <script type="text/javascript" src="../js/loginSetup.js"></script>
     </head>
 
-    <body>
+    <body class="csc-login">
         <!-- body content -->
         <div class="fl-container-1000 fl-centered">
         
@@ -35,7 +36,7 @@
                         
                         <!-- outer-border block -->
                         <div class="login-outer-border">
-                            <div class="fl-container-flex fl-fix csc-login" id="login">    
+                            <div class="fl-container-flex fl-fix" id="login">    
                                 <div class="info-column2-60 fl-force-left">
                                     <div class="login-text">
                                         <div class="info-pair">
@@ -62,13 +63,6 @@
                                                 
                                                 <div class="content sign-in">
                                                     <div class="inner">
-                                                        <div class="">
-                                                            <div class="login-error hidden csc-message-container">
-                                                                <span class="csc-timestamp cs-timestamp">time</span>
-                                                                <span class="csc-message">Save successful!</span>
-                                                            </div>
-                                                            <div class="clear"></div>
-                                                        </div>
                                                         <div class="login-block">
                                                             <div class="login-pair">
                                                                 <!--
@@ -108,13 +102,6 @@
                                             </div>
                                             <div class="content">
                                                 <div class="inner">
-                                                    <div class="">
-                                                        <div class="login-error hidden csc-message-container">
-                                                            <span class="csc-timestamp cs-timestamp">time</span>
-                                                            <span class="csc-message">Save successful!</span>
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                    </div>
                                                     <div class="csc-login-enterEmailForm">
                                                         <div class="csc-login-enterEmailMessage">
                                                             Please enter the email address associated with your account.
@@ -149,13 +136,6 @@
                                                 <div class="inner">
                                                     <div class="">
                                                         Enter the new password for <span class="csc-login-email">email address</span>
-                                                    </div>
-                                                    <div class="login-pair">
-                                                        <div class="login-error hidden csc-message-container">
-                                                            <span class="csc-timestamp cs-timestamp">time</span>
-                                                            <span class="csc-message">Save successful!</span>
-                                                        </div>
-                                                        <div class="clear"></div>
                                                     </div>
                                                     <div class="login-block">
                                                         <div class="password-instructions">Password must be between 8 and 24 characters.</div>
@@ -202,7 +182,6 @@
             </div> <!-- END footer block -->
             
         </div> <!-- END body content -->
-
         <script type="text/javascript">
             cspace.login(".csc-login");
         </script>

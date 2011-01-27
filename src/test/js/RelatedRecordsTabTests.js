@@ -39,6 +39,7 @@ var relatedRecordsTabTester = function ($) {
     var setupTab = function (opts) {
         var testPrimaryType = "intake";
         var testRelatedType = "cataloging";
+        var globalSetup = cspace.globalSetup();
         var options = {
             permissions: cspace.tests.sampleUserPerms,
             schemaUrl: "../../main/webapp/html/uischema/cataloging.json",
@@ -69,6 +70,8 @@ var relatedRecordsTabTester = function ($) {
                 relatedRecordsTab: ".csc-cataloging-tab"
             },
             globalNavigator: cspace.util.globalNavigator(),
+            messageBar: cspace.messageBar("body"),
+            globalSetup: cspace.globalSetup(),
             components: {
                 relatedRecordsTab: {
                     type: "cspace.relatedRecordsTab",
@@ -221,13 +224,11 @@ var relatedRecordsTabTester = function ($) {
                                     var details = objTab.pageBuilderSetup.pageBuilder.relatedRecordsTab.listEditor.details;
                                     details.events.afterRender.addListener(function () {
                                         var reSelectors = details.options.selectors;
-                                        var messageContainer = $(reSelectors.messageContainer, details.container);
-                                        var message = $($(reSelectors.feedbackMessage, messageContainer)[0]);
-                                        jqUnit.notVisible("Before testing, message should not be visible", message);
+                                        jqUnit.notVisible("Before testing, message should not be visible", details.options.messageBar.container);
                                         $(".csc-object-identification-object-number", details.container).val("");
                                         var ret = details.requestSave();
-                                        jqUnit.isVisible("After clicking save, message should be visible", message);
-                                        jqUnit.assertEquals("Message should be ", "Please specify an Identification Number", message.text());
+                                        jqUnit.isVisible("After clicking save, message should be visible", details.options.messageBar.container);
+                                        jqUnit.assertEquals("Message should be ", "Please specify an Identification Number", details.options.messageBar.locate("message").text());
                                         details.events.afterRender.removeListener("testFunc");
                                         start();
                                     }, "testFunc");

@@ -14,17 +14,18 @@ var loginTester = function(){
     // jqMock requires jqUnit.ok to exist
     jqUnit.ok = ok;
 
-    var loginTest = new jqUnit.TestCase("Login Tests", function () {
+    var bareLoginTest = new jqUnit.TestCase("Login Tests", function () {
         cspace.util.isTest = true;
-        loginTest.fetchTemplate("../../main/webapp/html/index.html", ".csc-login");
     });
+    
+    var loginTest = cspace.tests.testEnvironment({testCase: bareLoginTest});
 
     loginTest.test("Basic login form visibility, actions", function () {
         var login = cspace.login(".csc-login", {baseUrl: "http://foo.com/bar"});
         jqUnit.isVisible("Basic login should be visible", login.options.selectors.signIn);
         jqUnit.notVisible("Email entry should not be visible", login.options.selectors.enterEmail);
         jqUnit.notVisible("New password entry should not be visible", login.options.selectors.resetRequest);
-        jqUnit.notVisible("Message should not be visible", login.options.selectors.messageContainer);
+        jqUnit.notVisible("Message should not be visible", login.messageBar.container);
         jqUnit.assertEquals("In local mode, login form action should be set to local option", "createnew.html", jQuery(login.options.selectors.loginForm).attr("action"));
 
         var tempIsLocal = cspace.util.useLocalData;
@@ -36,32 +37,32 @@ var loginTester = function(){
 
     loginTest.test("Basic login required fields", function () {
         var login = cspace.login(".csc-login", {baseUrl: "http://foo.com/bar"});
-        jqUnit.notVisible("Before login, message should not be visible", login.options.selectors.messageContainer);
+        jqUnit.notVisible("Before login, message should not be visible", login.messageBar.container);
 
         jQuery(login.options.selectors.loginForm).submit();
-        jqUnit.isVisible("Logging in with empty fields should show error message", login.options.selectors.messageContainer);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery.trim(jQuery(login.options.selectors.messageContainer + ":visible").text()));
+        jqUnit.isVisible("Logging in with empty fields should show error message", login.messageBar.container);
+        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, login.messageBar.locate("message").text());
 
         jQuery(login.options.selectors.messageContainer).hide();
         jQuery(login.options.selectors.userid).val("userid");
         jQuery(login.options.selectors.loginForm).submit();
-        jqUnit.isVisible("Logging in with only user id should show error message", login.options.selectors.messageContainer);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery.trim(jQuery(login.options.selectors.messageContainer + ":visible").text()));
+        jqUnit.isVisible("Logging in with only user id should show error message", login.messageBar.container);
+        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, login.messageBar.locate("message").text());
 
         jQuery(login.options.selectors.messageContainer).hide();
         jQuery(login.options.selectors.userid).val("");
         jQuery(login.options.selectors.password).val("password");
         jQuery(login.options.selectors.loginForm).submit();
-        jqUnit.isVisible("Logging in with only password should show error message", login.options.selectors.messageContainer);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery.trim(jQuery(login.options.selectors.messageContainer + ":visible").text()));
+        jqUnit.isVisible("Logging in with only password should show error message", login.messageBar.container);
+        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, login.messageBar.locate("message").text());
     });
 
     loginTest.test("Email submit required field", function () {
         var login = cspace.login(".csc-login", {baseUrl: "http://foo.com/bar"});
-        jqUnit.notVisible("Before login, message should not be visible", login.options.selectors.messageContainer);
+        jqUnit.notVisible("Before login, message should not be visible", login.messageBar.container);
         login.submitEmail();
-        jqUnit.isVisible("Submitting email with empty fields should show error message", login.options.selectors.messageContainer);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.emailRequired, jQuery.trim(jQuery(login.options.selectors.messageContainer + ":visible").text()));
+        jqUnit.isVisible("Submitting email with empty fields should show error message", login.messageBar.container);
+        jqUnit.assertEquals("Message should describe required fields", login.options.strings.emailRequired, login.messageBar.locate("message").text());
     });
 
     loginTest.test("Email submit (local)", function () {
@@ -73,7 +74,7 @@ var loginTester = function(){
         jQuery(login.options.selectors.email).val("test@collectionspace.org");
         login.submitEmail();
         jqUnit.notVisible("On success, after submit email form should be hidden", login.options.selectors.enterEmailForm);
-        jqUnit.isVisible("On success, response message should be displayed", login.options.selectors.messageContainer);
+        jqUnit.isVisible("On success, response message should be displayed", login.messageBar.container);
     });
 
     loginTest.test("Email submit Ajax parameters", function () {
@@ -99,31 +100,31 @@ var loginTester = function(){
 
     loginTest.test("New password submission required fields", function () {
         var login = cspace.login(".csc-login", {baseUrl: "http://foo.com/bar"});
-        jqUnit.notVisible("Before login, message should not be visible", login.options.selectors.messageContainer);
+        jqUnit.notVisible("Before login, message should not be visible", login.messageBar.container);
         login.submitNewPassword();
-        jqUnit.isVisible("Submitting password with empty fields should show error message", login.options.selectors.messageContainer);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery.trim(jQuery(login.options.selectors.messageContainer + ":visible").text()));
+        jqUnit.isVisible("Submitting password with empty fields should show error message", login.messageBar.container);
+        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, login.messageBar.locate("message").text());
 
         jQuery(login.options.selectors.messageContainer).hide();
         jQuery(login.options.selectors.newPassword).val("newPass");
         login.submitNewPassword();
-        jqUnit.isVisible("Submitting password with only one field should show error message", login.options.selectors.messageContainer);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery.trim(jQuery(login.options.selectors.messageContainer + ":visible").text()));
+        jqUnit.isVisible("Submitting password with only one field should show error message", login.messageBar.container);
+        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, login.messageBar.locate("message").text());
 
         jQuery(login.options.selectors.messageContainer).hide();
         jQuery(login.options.selectors.newPassword).val("");
         jQuery(login.options.selectors.confirmPassword).val("newPass");
         login.submitNewPassword();
-        jqUnit.isVisible("Submitting password with only other field should show error message", login.options.selectors.messageContainer);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, jQuery.trim(jQuery(login.options.selectors.messageContainer + ":visible").text()));
+        jqUnit.isVisible("Submitting password with only other field should show error message", login.messageBar.container);
+        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, login.messageBar.locate("message").text());
 
 
         jQuery(login.options.selectors.messageContainer).hide();
         jQuery(login.options.selectors.newPassword).val("newPassOne");
         jQuery(login.options.selectors.confirmPassword).val("newPassTwo");
         login.submitNewPassword();
-        jqUnit.isVisible("Submitting password with non-matching password should show error message", login.options.selectors.messageContainer);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.passwordsMustMatch, jQuery.trim(jQuery(login.options.selectors.messageContainer + ":visible").text()));
+        jqUnit.isVisible("Submitting password with non-matching password should show error message", login.messageBar.container);
+        jqUnit.assertEquals("Message should describe required fields", login.options.strings.passwordsMustMatch, login.messageBar.locate("message").text());
     });
 
     loginTest.test("New password submission (local)", function () {
@@ -161,14 +162,14 @@ var loginTester = function(){
         expect(4);
         var login = cspace.login(".csc-login", {baseUrl: "http://foo.com/bar"});
         $(login.options.selectors.requestReset).click();
-        jqUnit.notVisible("Initally, error messages should not be visible", login.options.selectors.messageContainer);
+        jqUnit.notVisible("Initally, error messages should not be visible", login.messageBar.container);
         var dummyBadEmailServerResponse = {
             message: "Could not find a user with email foofer@doodle.com",
-            ok: false
+            isError: true
         };
         login.events.emailSubmitted.fire(dummyBadEmailServerResponse);
-        jqUnit.isVisible("Firing 'email submitted' with 'invalid email' message should show error messages", login.options.selectors.messageContainer);
-        jqUnit.assertEquals("Message should describe bad email", dummyBadEmailServerResponse.message, jQuery.trim(jQuery(login.options.selectors.messageContainer + ":visible").text()));
+        jqUnit.isVisible("Firing 'email submitted' with 'invalid email' message should show error messages", login.messageBar.container);
+        jqUnit.assertEquals("Message should describe bad email", dummyBadEmailServerResponse.message, login.messageBar.locate("message").text());
         jqUnit.isVisible("Field to enter email should still be visible", login.options.selectors.email);
     });
 
@@ -176,14 +177,16 @@ var loginTester = function(){
         expect(4);
         var login = cspace.login(".csc-login", {baseUrl: "http://foo.com/bar"});
         $(login.options.selectors.requestReset).click();
-        jqUnit.notVisible("Initally, error messages should not be visible", login.options.selectors.messageContainer);
+        jqUnit.notVisible("Initally, error messages should not be visible", login.messageBar.container);
         var dummyBadEmailServerResponse = {
-            message: "Email sent to foofer@doodle.com",
-            ok: true
+            messages: [{
+                message: "Email sent to foofer@doodle.com",
+            }],
+            isError: false
         };
         login.events.emailSubmitted.fire(dummyBadEmailServerResponse);
-        jqUnit.isVisible("Firing 'email submitted' with 'email sent' message should show success message", login.options.selectors.messageContainer);
-        jqUnit.assertEquals("Message should describe bad email", dummyBadEmailServerResponse.message, jQuery.trim(jQuery(login.options.selectors.messageContainer + ":visible").text()));
+        jqUnit.isVisible("Firing 'email submitted' with 'email sent' message should show success message", login.messageBar.container);
+        jqUnit.assertEquals("Message should describe bad email", dummyBadEmailServerResponse.messages[0].message, login.messageBar.locate("message").text());
         jqUnit.notVisible("Field to enter email should no longer be visible", login.options.selectors.email);
     });
 };

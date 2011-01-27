@@ -18,10 +18,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     var query = "barbar";
     var findEdit;
     
-    var findEditTests = new jqUnit.TestCase("Find Edit Tests", function () {
+    var bareFindEditTests = new jqUnit.TestCase("Find Edit Tests", function () {
         cspace.util.isTest = true;
-        findEditTests.fetchTemplate("../../main/webapp/html/findedit.html", ".main-search-page");
+        bareFindEditTests.fetchTemplate("../../main/webapp/html/findedit.html", ".main-search-page");
     });
+    
+    var findEditTests = cspace.tests.testEnvironment({testCase: bareFindEditTests});
     
     var setupFindEdit = function (options) {
         return cspace.search.searchView(".main-search-page", options);
@@ -60,7 +62,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         jqUnit.notVisible("Initially, results container should be hidden", jQuery(findEdit.options.selectors.resultsContainer));
         jqUnit.notVisible("Initially, results count container should be hidden", jQuery(findEdit.options.selectors.resultsCountContainer));
         jqUnit.notVisible("Initially, 'looking' message should be hidden", jQuery(findEdit.options.selectors.lookingContainer));
-        jqUnit.notVisible("Initially, error message should be hidden", jQuery(findEdit.options.selectors.errorMessage));
+        jqUnit.notVisible("Initially, error message should be hidden", findEdit.options.messageBar.container);
         findEdit.model.searchModel.recordType = "loanin";
         findEdit.model.searchModel.keywords = query;
         findEdit.search();
@@ -131,13 +133,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 onSearch: function () {
                     jqUnit.notVisible("When search submitted, results container should be hidden", jQuery(findEdit.options.selectors.resultsContainer));
                     var lookingContainer = jQuery(findEdit.options.selectors.lookingContainer);
-                    jqUnit.notVisible("When search submitted, error message should be hidden", jQuery(findEdit.options.selectors.errorMessage));
+                    jqUnit.notVisible("When search submitted, error message should be hidden", findEdit.options.messageBar.container);
 
                 },
                 afterSearch: function () {
                     jqUnit.isVisible("After search, results container should be visible", jQuery(findEdit.options.selectors.resultsContainer));
                     var resultsCountContainer = jQuery(findEdit.options.selectors.resultsCountContainer);
-                    jqUnit.notVisible("After search submitted, error message should be hidden", jQuery(findEdit.options.selectors.errorMessage));
+                    jqUnit.notVisible("After search submitted, error message should be hidden", findEdit.options.messageBar.container);
                     start();
                 }
             }

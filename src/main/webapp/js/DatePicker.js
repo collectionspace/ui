@@ -31,12 +31,12 @@ cspace = cspace || {};
         return Date.parse(fullDate).toString(format);
     };
     
-    var validateDate = function (domBinder, date, message, format) {
+    var validateDate = function (messageBar, date, message, format) {
         // Parsing a date sting into a date object for datejs. If it is invalid null will be returned.
         date = Date.parse(date);
         if (!date) {
             // If there is no date, we will display an invalid date message and emptying the date field.
-            cspace.util.displayTimestampedMessage(domBinder, message, null, true);
+            messageBar.show(message, null, true);
             return "";
         }
         // Format validated date into a string.
@@ -72,11 +72,11 @@ cspace = cspace || {};
         
         calendarDate.change(function () {
             // If there is an error message clear it.
-            that.locate("messageContainer", "body").hide();
+            that.options.messageBar.hide();
             // Get a string value for a field.
             var dateFieldValue = calendarDate.val();
             // Get a validated string value for the same field.
-            var date = validateDate(that.dom, dateFieldValue, that.options.strings.invalidDateMessage, that.options.defaultFormat);
+            var date = validateDate(that.options.messageBar, dateFieldValue, that.options.strings.invalidDateMessage, that.options.defaultFormat);
             // If validated date is different from the original, put validated value into 
             // the date field and update the datePicker's selected date.
             if (dateFieldValue !== date) {
@@ -181,10 +181,7 @@ cspace = cspace || {};
             date: ".goog-date-picker-date",
             calendarDate: ".csc-calendar-date",
             datePicker: ".csc-date-picker",
-            calendarButton: ".csc-calendar-button",
-            messageContainer: ".csc-message-container",
-            feedbackMessage: ".csc-message",
-            timestamp: ".csc-timestamp"
+            calendarButton: ".csc-calendar-button"
         },
         styles: {
             focus: "focused"
@@ -193,7 +190,8 @@ cspace = cspace || {};
             invalidDateMessage: "Provided date has invalid format."
         },
         // Default format for valid date.
-        defaultFormat: "yyyy-MM-dd"
+        defaultFormat: "yyyy-MM-dd",
+        messageBar: "{parent}.options.messageBar"
     });
     
 })(jQuery, fluid);

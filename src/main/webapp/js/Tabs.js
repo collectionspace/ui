@@ -170,7 +170,7 @@ cspace = cspace || {};
         var options = that.options;
         var urlExpander = fluid.invoke("cspace.urlExpander");
         // Adding globalNavigator to cspace.setup's stack.
-        fluid.withNewComponent(that.options.globalNavigator, function () {
+        fluid.withNewComponent(that.options.globalSetup, function () {
             cspace.setup("cspace.tabs", {
                 model: options.model,
                 applier: options.applier,
@@ -264,7 +264,8 @@ cspace = cspace || {};
             model: "preserve",
             applier: "preserve"
         },
-        globalNavigator: "{globalNavigator}"
+        globalNavigator: "{globalNavigator}",
+        globalSetup: "{globalSetup}"
     });
     
     fluid.demands("tabs", "cspace.pageBuilder", {
