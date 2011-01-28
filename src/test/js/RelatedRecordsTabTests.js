@@ -39,7 +39,6 @@ var relatedRecordsTabTester = function ($) {
     var setupTab = function (opts) {
         var testPrimaryType = "intake";
         var testRelatedType = "cataloging";
-        var globalSetup = cspace.globalSetup();
         var options = {
             permissions: cspace.tests.sampleUserPerms,
             schemaUrl: "../../main/webapp/html/uischema/cataloging.json",
@@ -71,7 +70,6 @@ var relatedRecordsTabTester = function ($) {
             },
             globalNavigator: cspace.util.globalNavigator(),
             messageBar: cspace.messageBar("body"),
-            globalSetup: cspace.globalSetup(),
             components: {
                 relatedRecordsTab: {
                     type: "cspace.relatedRecordsTab",
@@ -280,7 +278,7 @@ var relatedRecordsTabTester = function ($) {
                 }
             }
         };
-        objTab = cspace.globalSetup()("cspace.tabs", options);
+        objTab = cspace.globalSetup("cspace.tabs", options);
         stop();
     });
 };

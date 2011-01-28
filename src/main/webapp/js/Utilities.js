@@ -883,14 +883,11 @@ fluid.registerNamespace("cspace.util");
         }
     });
     
-    cspace.globalSetup = function (options) {
-        var that = fluid.littleComponent("cspace.globalSetup")(options);
-        return function (tag, options) {
-            // Adding globalSetup as the root of the environment tree.
-            return fluid.withNewComponent(that, function () {
-                return cspace.setup(tag, options);
-            });
-        };
+    cspace.globalSetup = function (tag, options) {
+        var that = fluid.littleComponent("cspace.globalSetup")();
+        return fluid.withNewComponent(that, function () {
+            return cspace.setup(tag, options);
+        });
     };
     
     fluid.defaults("cspace.globalSetup", {
