@@ -154,7 +154,7 @@ fluid.registerNamespace("cspace.util");
         resources: {
             globalBundle: cspace.resourceSpecExpander({
                 fetchClass: "fastResource",
-                url: "%webapp/html/bundle/core-messages.properties"
+                url: "%webapp/bundle/core-messages.properties"
             })
         }
     });
