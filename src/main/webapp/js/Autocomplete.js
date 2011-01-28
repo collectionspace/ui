@@ -162,7 +162,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
     /**** Definitions for testing environment - TODO: move to separate file somewhere ****/    
     fluid.defaults("cspace.autocomplete.testAuthoritiesDataSource", {
-        url: "%webapp/html/data/autocomplete/authorities.json"
+        url: "%test/data/autocomplete/authorities.json"
     });
     
     cspace.autocomplete.testAuthoritiesDataSource = cspace.URLDataSource;
@@ -185,7 +185,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 
     fluid.defaults("cspace.autocomplete.testMatchesDataSource", {
-        url: "%webapp/html/data/autocomplete/matches.json",
+        url: "%test/data/autocomplete/matches.json",
         responseParser: cspace.autocomplete.testMatchesParser,
         delay: 1
     });

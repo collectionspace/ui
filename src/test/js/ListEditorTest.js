@@ -27,7 +27,7 @@ var listEditorTester = function(){
             }
         },
         schema: {
-            href: "../../main/webapp/html/data/users/records.json",
+            href: "../data/users/records.json",
             options: {
                 dataType: "json",
                 success: function (data) {
@@ -39,10 +39,10 @@ var listEditorTester = function(){
     });
         
     var baseTestOpts = {
-        baseUrl: "../../main/webapp/html/data/",
+        baseUrl: "../data/",
         dataContext: {                    
             options: {
-                baseUrl: "../../main/webapp/html/data/",
+                baseUrl: "../data/",
                 fileExtension: ".json",
                 recordType: "users"
             }

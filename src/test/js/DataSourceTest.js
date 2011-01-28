@@ -61,11 +61,11 @@ var dataSourceTester = function ($) {
         var options = fluid.merge(null, {
             recordType: "users",
             schema: schema,
-            baseUrl: "../../main/webapp/html/data/",
+            baseUrl: "../data/",
             fileExtension: ".json",
             sources: {
                 role: {
-                    href: "../../main/webapp/html/data/role/list.json",
+                    href: "../data/role/list.json",
                     path: "fields.role",
                     resourcePath: "items",
                     merge: cspace.dataSource.mergeRoles

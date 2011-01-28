@@ -26,7 +26,7 @@ var searchToRelateDialogTester = function () {
     var searchToRelateDialogTest = cspace.tests.testEnvironment({testCase: bareSearchToRelateDialogTest});
 
     var testSearchUrlBuilder = function () {
-        return "../../main/webapp/html/data/intake/search.json";
+        return "../data/intake/search.json";
     };
     
     var createSearchToRelate = function (primary, related, listeners, searchOpts) {
@@ -65,7 +65,7 @@ var searchToRelateDialogTester = function () {
             }
         }, {
             searchUrlBuilder: function (searchModel) {
-                return "../../main/webapp/html/data/" + searchModel.recordType + "/search.json";
+                return "../data/" + searchModel.recordType + "/search.json";
             },
             listeners: {
                 onSearch: function () {
@@ -101,7 +101,7 @@ var searchToRelateDialogTester = function () {
             }
         }, {
             searchUrlBuilder: function (searchModel) {
-                return "../../main/webapp/html/data/" + searchModel.recordType + "/search.json";
+                return "../data/" + searchModel.recordType + "/search.json";
             },
             listeners: {
                 onSearch: function () {
@@ -139,7 +139,7 @@ var searchToRelateDialogTester = function () {
             }
         }, {
             searchUrlBuilder: function (searchModel) {
-                return "../../main/webapp/html/data/" + searchModel.recordType + "/search.json";
+                return "../data/" + searchModel.recordType + "/search.json";
             },
             listeners: {
                 onSearch : function () {
@@ -216,7 +216,7 @@ var searchToRelateDialogTester = function () {
             }
         }, {
             searchUrlBuilder: function (searchModel) {
-                return "../../main/webapp/html/data/" + searchModel.recordType + "/search.json";
+                return "../data/" + searchModel.recordType + "/search.json";
             },
             listeners: {
                 afterSearch : function () {
@@ -246,7 +246,7 @@ var searchToRelateDialogTester = function () {
             }
         }, {
             searchUrlBuilder: function (searchModel) {
-                return "../../main/webapp/html/data/" + searchModel.recordType + "/search.json";
+                return "../data/" + searchModel.recordType + "/search.json";
             },
             listeners: {
                 afterSearch : function () {

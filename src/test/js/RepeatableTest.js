@@ -77,7 +77,7 @@ var repeatableTester = function ($) {
         if (!briefDescModel) {
             jQuery.ajax({
                 async: false,
-                url: "../../main/webapp/html/data/cataloging/1984.068.0335b.json",
+                url: "../data/cataloging/1984.068.0335b.json",
                 dataType: "json",
                 success: function (data) {
                     briefDescModel = data;

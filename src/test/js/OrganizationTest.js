@@ -126,7 +126,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         csid: "987.654.321",
                         dataContext: {
                             options: {
-                                baseUrl: "../../main/webapp/html/data"
+                                baseUrl: "../data"
                             }
                         },
                         components: {

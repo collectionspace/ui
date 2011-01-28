@@ -16,7 +16,7 @@ var relatedRecordsTabTester = function ($) {
     var model, applier, pageBuilder;
 
     $.ajax({
-        url: "../../main/webapp/html/data/cataloging/1984.068.0338.json",
+        url: "../data/cataloging/1984.068.0338.json",
         async: false,
         dataType: "json",
         success: function (data) {
@@ -88,7 +88,7 @@ var relatedRecordsTabTester = function ($) {
                                     options: {
                                         recordType: testRelatedType,
                                         fileExtension: ".json",
-                                        baseUrl: "../../main/webapp/html/data/",
+                                        baseUrl: "../data/",
                                         dataSource: {
                                             options: {
                                                 uispec: "{pageBuilder}.uispec.details" 
@@ -114,7 +114,7 @@ var relatedRecordsTabTester = function ($) {
                                     addRelations: cspace.relationManager.provideLocalAddRelations,
                                     dataContext: {
                                         options: {
-                                            baseUrl: "data/",
+                                            baseUrl: "../data/",
                                             fileExtension: ".json"
                                         }
                                     },
@@ -178,7 +178,7 @@ var relatedRecordsTabTester = function ($) {
     relatedRecordsTabTest.test("Validation of required fields in related records (CSPACE-2294)", function () {
         var  objTab, primaryApplier;
         $.ajax({
-            url: "../../main/webapp/html/data/intake/IN2004.002.json",
+            url: "../data/intake/IN2004.002.json",
             async: false,
             dataType: "json",
             success: function (data) {
@@ -261,7 +261,7 @@ var relatedRecordsTabTester = function ($) {
                                         options: {
                                             dataContext: {
                                                 options: {
-                                                    baseUrl: "../../main/webapp/html/data",
+                                                    baseUrl: "../data",
                                                     dataSource: {
                                                         options: {
                                                             uispec: "{pageBuilder}.uispec.details" 

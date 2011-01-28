@@ -382,7 +382,7 @@ cspace = cspace || {};
         },
         dataContext: {
             options: {
-                baseUrl: "data",
+                baseUrl: "../../../test/data",
                 fileExtension: ".json"
             }
         }
@@ -458,17 +458,17 @@ cspace = cspace || {};
                     recordType: "role/records.json",
                     roleListEditor: {
                         options: {
-                            baseUrl: "data/",
+                            baseUrl: "../../../test/data/",
                             dataContext: {
                                 options: {
-                                    baseUrl: "data/",
+                                    baseUrl: "../../../test/data/",
                                     fileExtension: ".json",
                                     dataSource: {
                                         options: {
                                             sources: {
                                                 permission: {
                                                     merge: cspace.dataSource.mergePermissions,
-                                                    href: "data/permission/list.json"
+                                                    href: "../../../test/data/permission/list.json"
                                                 }
                                             }
                                         }
@@ -531,20 +531,20 @@ cspace = cspace || {};
             users: {
                 options: {
                     recordType: "users/records.json",
-                    queryURL: "data/users/search.json",
+                    queryURL: "../../../test/data/users/search.json",
                     userListEditor: {
                         options: {
-                            baseUrl: "data/",
+                            baseUrl: "../../../test/data/",
                             dataContext: {
                                 options: {
-                                    baseUrl: "data/",
+                                    baseUrl: "../../../test/data/",
                                     fileExtension: ".json",
                                     dataSource: {
                                         options: {
                                             sources: {
                                                 role: {
                                                     merge: cspace.dataSource.mergeRoles,
-                                                    href: "data/role/list.json"
+                                                    href: "../../../test/data/role/list.json"
                                                 }
                                             }
                                         }
@@ -600,7 +600,7 @@ cspace = cspace || {};
                         options: {
                             dataContext: {
                                 options: {
-                                    baseUrl: "data",
+                                    baseUrl: "../../../test/data",
                                     fileExtension: ".json"
                                 }
                             }

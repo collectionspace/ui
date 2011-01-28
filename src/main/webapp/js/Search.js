@@ -286,7 +286,7 @@ cspace = cspace || {};
         var recordType = searchModel.recordTypeLong;
         var recordTypeParts = recordType.split('-');
         // TODO: IoC resolve this and remove the "localSearchToRelateDialog" from RelationManager.js
-        var prefix = cspace.util.isTest ? "../../main/webapp/html/data/" : "./data/";
+        var prefix = cspace.util.isTest ? "../data/" : "../../../test/data/";
         return prefix + recordTypeParts.join('/') + "/search.json";
     };
 

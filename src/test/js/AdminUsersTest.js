@@ -48,17 +48,17 @@ var adminUsersTester = function () {
                         navigationEventNamespace: "onPerformNavigationRecordEditor"
                     }
                 },
-                baseUrl: "../../main/webapp/html/data/",
+                baseUrl: "../data/",
                 dataContext: {
                     options: {
-                        baseUrl: "../../main/webapp/html/data/",
+                        baseUrl: "../data/",
                         fileExtension: ".json",
                         dataSource: {
                             options: {
                                 schema: schema,
                                 sources: {
                                     role: {
-                                        href: "../../main/webapp/html/data/role/list.json",
+                                        href: "../data/role/list.json",
                                         path: "fields.role",
                                         resourcePath: "items",
                                         merge: cspace.dataSource.mergeRoles
@@ -220,7 +220,7 @@ var adminUsersTester = function () {
     adminUsersTest.test("Test search/unsearch functionality", function () {
         var adminUsers;
         var testOpts = fluid.copy(baseTestOpts);
-        fluid.model.setBeanValue(testOpts, "queryURL", "../../main/webapp/html/data/users/search.json");
+        fluid.model.setBeanValue(testOpts, "queryURL", "../data/users/search.json");
         fluid.model.setBeanValue(testOpts, "listeners", {
             afterSearch: function () {
                 jqUnit.isVisible("Unsearch is visible after search", adminUsers.options.selectors.unSearchButton);

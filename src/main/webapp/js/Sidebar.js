@@ -102,7 +102,7 @@ cspace = cspace || {};
             relationManager: {
                 options: {
                     dataContext: {
-                        baseUrl: "data/",
+                        baseUrl: "../../../test/data/",
                         fileExtension: ".json"
                     }
                 }

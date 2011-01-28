@@ -275,7 +275,7 @@ fluid.registerNamespace("cspace.util");
     
     fluid.demands("cspace.util.getLoginURL", "cspace.localData", {
         args: {
-            url: "%webapp/html/data/login/status.json"
+            url: "%test/data/login/status.json"
         }
     });
     
