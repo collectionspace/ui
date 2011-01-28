@@ -31,7 +31,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         listeners: {
                             onDependencySetup: function (uispec) {
                                 // Change the template URL for the number pattern chooser.
-                                uispec.recordEditor[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl = "../../main/webapp/html/NumberPatternChooser.html";
+                                uispec.recordEditor[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl = "../../main/webapp/html/components/NumberPatternChooser.html";
                             }
                         },
                         pageSpec: {
@@ -39,7 +39,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                 href: "../../main/webapp/html/CatalogingTemplate.html"
                             },
                             footer: {
-                                href: "../../main/webapp/html/footer.html"
+                                href: "../../main/webapp/html/components/footer.html"
                             }
                         },
                         templateUrlPrefix: "../../main/webapp/html/",

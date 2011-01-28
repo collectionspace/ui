@@ -102,7 +102,7 @@ cspace = cspace || {};
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "slowTemplate",
-                url: "%webapp/html/Confirmation.html"
+                url: "%webapp/html/components/Confirmation.html"
             })
         }
     });

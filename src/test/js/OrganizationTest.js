@@ -30,7 +30,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                 href: "../../main/webapp/html/organizationTemplate.html"
                             },
                             footer: {
-                                href: "../../main/webapp/html/footer.html"
+                                href: "../../main/webapp/html/components/footer.html"
                             }
                         },
                         components: {
@@ -38,7 +38,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                 options: {
                                     confirmation: {
                                         options: {
-                                            confirmationTemplateUrl: "../../main/webapp/html/Confirmation.html"
+                                            confirmationTemplateUrl: "../../main/webapp/html/components/Confirmation.html"
                                         }
                                     }
                                 }

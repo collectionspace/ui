@@ -420,7 +420,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     args: {
                         forceCache: true,
                         fetchClass: "slowTemplate",
-                        url: "%webapp/html/AutocompleteAddPopup.html"
+                        url: "%webapp/html/components/AutocompleteAddPopup.html"
                     }
                 }
             }

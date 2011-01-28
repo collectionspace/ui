@@ -29,7 +29,7 @@ var relatedRecordsTabTester = function ($) {
     });
     
     var bareRelatedRecordsTabTest = new jqUnit.TestCase("Related Records Tab Tests", function () {
-        bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/html/TabsTemplate.html", ".csc-tabs-tabList", $(".template1"));
+        bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/html/components/TabsTemplate.html", ".csc-tabs-tabList", $(".template1"));
         bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/html/CatalogingTab.html", ".csc-cataloging-tab", $(".template2"));
         fluid.model.copyModel(testApplier, applier);        
     });
@@ -46,7 +46,7 @@ var relatedRecordsTabTester = function ($) {
             listeners: {
                 onDependencySetup: function (uispec) {
                     // Change the template URL for the number pattern chooser.
-                    uispec.details[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl = "../../main/webapp/html/NumberPatternChooser.html";
+                    uispec.details[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl = "../../main/webapp/html/components/NumberPatternChooser.html";
                 },
                 pageReady: opts.pageReadyListener
             },
@@ -216,7 +216,7 @@ var relatedRecordsTabTester = function ($) {
                             onDependencySetup: function (uispec) {
                                 // Change the template URL for the number pattern chooser.
                                 uispec.details[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl
-                                    = "../../main/webapp/html/NumberPatternChooser.html";
+                                    = "../../main/webapp/html/components/NumberPatternChooser.html";
                             },
                             pageReady: function () {
                                     var details = objTab.pageBuilderSetup.pageBuilder.relatedRecordsTab.listEditor.details;

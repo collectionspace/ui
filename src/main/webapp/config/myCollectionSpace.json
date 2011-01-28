@@ -1,7 +1,7 @@
 {
     "pageSpec": {
         "footer": {
-            "href": "footer.html",
+            "href": "components/footer.html",
             "templateSelector": ".csc-footer",
             "targetSelector": ".csc-footer-container" 
         } 

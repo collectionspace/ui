@@ -197,7 +197,7 @@ cspace = cspace || {};
         events: {
             afterRender: null
         },
-        templateUrl: "../html/NumberPatternChooser.html",
+        templateUrl: "../html/components/NumberPatternChooser.html",
         baseUrl: "{parent}.options.dataContext.options.baseUrl"
     });
 })(jQuery, fluid);

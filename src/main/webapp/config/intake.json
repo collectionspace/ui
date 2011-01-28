@@ -18,7 +18,7 @@
             "targetSelector": ".csc-record-edit-container"
         },
         "footer": {
-            "href": "footer.html",
+            "href": "components/footer.html",
             "templateSelector": ".csc-footer",
             "targetSelector": ".csc-footer-container" 
         } 

@@ -116,7 +116,7 @@ cspace = cspace || {};
         resources: {                // A set of resources that will get resolved and fetched at some point during initialization.
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
-                url: "%webapp/html/SearchBoxTemplate.html"
+                url: "%webapp/html/components/SearchBoxTemplate.html"
             })
         }
     });

@@ -132,7 +132,7 @@ cspace = cspace || {};
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
-                url: "%webapp/html/TitleBarTemplate.html"
+                url: "%webapp/html/components/TitleBarTemplate.html"
             })
         }
     });

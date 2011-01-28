@@ -20,7 +20,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     var testOpts = {
         model: model,
-        templateUrl: "../../main/webapp/html/NumberPatternChooser.html"
+        templateUrl: "../../main/webapp/html/components/NumberPatternChooser.html"
     };
 
     

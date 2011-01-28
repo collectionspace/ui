@@ -139,7 +139,7 @@ cspace = cspace || {};
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
-                url: "%webapp/html/TabsTemplate.html"
+                url: "%webapp/html/components/TabsTemplate.html"
             })
         }
     });

@@ -34,7 +34,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             onDependencySetup: function (uispec) {
                                 // Change the template URL for the number pattern chooser.
                                 uispec.recordEditor[".csc-loanIn-loanInNumber-patternChooserContainer"].decorators[0].options.templateUrl = 
-                                    "../../main/webapp/html/NumberPatternChooser.html";
+                                    "../../main/webapp/html/components/NumberPatternChooser.html";
                             }
                         },
                         pageSpec: {
@@ -42,7 +42,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                 href: "../../main/webapp/html/loanInTemplate.html"
                             },
                             footer: {
-                                href: "../../main/webapp/html/footer.html"
+                                href: "../../main/webapp/html/components/footer.html"
                             }
                         }
                     }

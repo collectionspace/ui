@@ -80,7 +80,7 @@ cspace = cspace || {};
                     args: {
                         forceCache: true,
                         fetchClass: "fastTemplate",
-                        url: "%webapp/html/header.html"
+                        url: "%webapp/html/components/header.html"
                     }
                 }
             }
