@@ -39,7 +39,7 @@ var adminUsersTester = function () {
     });
     
     var baseTestOpts = {
-        recordType: "users/records/list.json",
+        recordType: "users/records.json",
         uispec: testUISpec,
         userListEditor: {
             options: {
@@ -220,7 +220,7 @@ var adminUsersTester = function () {
     adminUsersTest.test("Test search/unsearch functionality", function () {
         var adminUsers;
         var testOpts = fluid.copy(baseTestOpts);
-        fluid.model.setBeanValue(testOpts, "queryURL", "../../main/webapp/html/data/users/search/list.json");
+        fluid.model.setBeanValue(testOpts, "queryURL", "../../main/webapp/html/data/users/search.json");
         fluid.model.setBeanValue(testOpts, "listeners", {
             afterSearch: function () {
                 jqUnit.isVisible("Unsearch is visible after search", adminUsers.options.selectors.unSearchButton);

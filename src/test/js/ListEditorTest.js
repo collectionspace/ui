@@ -27,7 +27,7 @@ var listEditorTester = function(){
             }
         },
         schema: {
-            href: "../../main/webapp/html/data/users/records/list.json",
+            href: "../../main/webapp/html/data/users/records.json",
             options: {
                 dataType: "json",
                 success: function (data) {
@@ -66,7 +66,7 @@ var listEditorTester = function(){
                 callback(listEditor);
             }
         });
-        listEditor = cspace.listEditor(".csc-users-userAdmin", "users/records/list.json", testUISpec, testOpts);
+        listEditor = cspace.listEditor(".csc-users-userAdmin", "users/records.json", testUISpec, testOpts);
         stop();
     };
     

@@ -287,7 +287,7 @@ cspace = cspace || {};
         var recordTypeParts = recordType.split('-');
         // TODO: IoC resolve this and remove the "localSearchToRelateDialog" from RelationManager.js
         var prefix = cspace.util.isTest ? "../../main/webapp/html/data/" : "./data/";
-        return prefix + recordTypeParts.join('/') + "/search/list.json";
+        return prefix + recordTypeParts.join('/') + "/search.json";
     };
 
     fluid.demands("fluid.pager", "cspace.search.searchView", 

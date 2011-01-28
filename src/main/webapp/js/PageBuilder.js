@@ -455,7 +455,7 @@ cspace = cspace || {};
         components: {
             role: {
                 options: {
-                    recordType: "role/records/list.json",
+                    recordType: "role/records.json",
                     roleListEditor: {
                         options: {
                             baseUrl: "data/",
@@ -530,8 +530,8 @@ cspace = cspace || {};
         components: {
             users: {
                 options: {
-                    recordType: "users/records/list.json",
-                    queryURL: "data/users/search/list.json",
+                    recordType: "users/records.json",
+                    queryURL: "data/users/search.json",
                     userListEditor: {
                         options: {
                             baseUrl: "data/",
