@@ -17,7 +17,7 @@ var adminUsersTester = function () {
     var schema = {};
     fluid.fetchResources({
         uispec: {
-            href: "../../main/webapp/html/uispecs/users/uispec.json",
+            href: "../../main/webapp/html/uispecs/users.json",
             options: {
                 dataType: "json",
                 success: function (data) {
