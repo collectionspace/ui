@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jqUnit, jQuery, jqMock, cspace, fluid, start, stop, ok, expect*/
+/*global jqUnit, jQuery, cspace, fluid, start, stop, ok, expect*/
 
 var listEditorTester = function(){
     fluid.setLogging(true);

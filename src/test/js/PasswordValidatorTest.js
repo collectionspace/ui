@@ -8,11 +8,9 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jqUnit, jQuery, jqMock, cspace, fluid, start, stop, ok, expect*/
+/*global jqUnit, jQuery, cspace, fluid, start, stop, expect*/
 
 var passwordValidatorTester = function(){
-    // jqMock requires jqUnit.ok to exist
-    jqUnit.ok = ok;
 
     var barePasswordValidatorTest = new jqUnit.TestCase("PasswordValidator Tests", function () {
         cspace.util.isTest = true;

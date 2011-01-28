@@ -8,7 +8,7 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-/*global jqUnit, jQuery, jqMock, cspace, fluid, start, stop, ok, same*/
+/*global jqUnit, jQuery, cspace, fluid, start, stop, ok, same*/
 
 var rendererTester = function(){
 
