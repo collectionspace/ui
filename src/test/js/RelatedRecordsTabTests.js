@@ -41,7 +41,7 @@ var relatedRecordsTabTester = function ($) {
         var testRelatedType = "cataloging";
         var options = {
             permissions: cspace.tests.sampleUserPerms,
-            schemaUrl: "../../main/webapp/html/uischema/cataloging.json",
+            schemaUrl: "../uischema/cataloging.json",
             uispecUrl: "../../main/webapp/html/uispecs/cataloging-tab.json",
             listeners: {
                 onDependencySetup: function (uispec) {
@@ -202,7 +202,7 @@ var relatedRecordsTabTester = function ($) {
                         //       into the function signature proper
                         primaryRecordType: "intake",
                         pageType: "cataloging-tab",
-                        schemaUrl: "../../main/webapp/html/uischema/cataloging.json",
+                        schemaUrl: "../uischema/cataloging.json",
                         uispecUrl: "../../main/webapp/html/uispecs/cataloging-tab.json",
                         pageSpec: {
                             list: {

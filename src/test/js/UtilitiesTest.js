@@ -863,7 +863,7 @@ var utilitiesTester = function ($) {
         
     utilitiesTest.test("cspace.util.getDefaultSchemaURL", function () {
         cspace.util.getDefaultSchemaURL("intake");
-        jqUnit.assertEquals("Default URL should be", "../../main/webapp/html/uischema/intake.json", 
+        jqUnit.assertEquals("Default URL should be", "../uischema/intake.json", 
             fluid.invoke("cspace.util.getDefaultSchemaURL", "intake"));
     });
     

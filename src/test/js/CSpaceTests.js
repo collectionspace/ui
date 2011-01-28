@@ -94,7 +94,8 @@ fluid.demands("cspace.urlExpander", ["cspace.localData", "cspace.test"],
     args: {
         vars: {
             chain: "..",
-            webapp: "../../main/webapp"
+            webapp: "../../main/webapp",
+            test: ".."
         }
     }
 });

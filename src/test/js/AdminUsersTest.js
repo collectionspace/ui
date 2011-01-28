@@ -27,7 +27,7 @@ var adminUsersTester = function () {
             }
         },
         schema: {
-            href: "../../main/webapp/html/uischema/users.json",
+            href: "../uischema/users.json",
             options: {
                 dataType: "json",
                 success: function (data) {

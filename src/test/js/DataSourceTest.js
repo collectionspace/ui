@@ -17,7 +17,7 @@ var dataSourceTester = function ($) {
     var schema;
     
     $.ajax({
-        url: "../../main/webapp/html/uischema/users.json",
+        url: "../uischema/users.json",
         async: false,
         dataType: "json",
         success: function (data) {

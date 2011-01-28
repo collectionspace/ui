@@ -126,7 +126,8 @@ fluid.registerNamespace("cspace.util");
     fluid.defaults("cspace.urlExpander", {
         vars: {
             chain: "../../chain",
-            webapp: ".."
+            webapp: "..",
+            test: "../../../test"
         }
     });
     
@@ -295,7 +296,7 @@ fluid.registerNamespace("cspace.util");
     
     fluid.demands("cspace.util.getDefaultSchemaURL", "cspace.localData", {
         args: ["@0", {
-            url: "%webapp/html/uischema/%recordType.json"
+            url: "%test/uischema/%recordType.json"
         }]
     });
     
