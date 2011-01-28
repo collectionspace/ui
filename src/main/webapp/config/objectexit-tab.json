@@ -8,7 +8,7 @@
     "recordType": "objectexit",
     "pageSpec": {
         "list": {
-            "href": "objectexitTabRecordListTemplate.html",
+            "href": "pages/ObjectexitTabRecordListTemplate.html",
             "templateSelector": ".csc-objectexit-tab-record-list",
             "targetSelector": ".csc-objectexit-tab .div-for-list-of-records"
         },

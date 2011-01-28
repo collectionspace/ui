@@ -8,7 +8,7 @@
     "recordType": "movement",
     "pageSpec": {
         "list": {
-            "href": "movementTabRecordListTemplate.html",
+            "href": "pages/MovementTabRecordListTemplate.html",
             "templateSelector": ".csc-movement-tab-record-list",
             "targetSelector": ".csc-movement-tab .div-for-list-of-records"
         },

@@ -30,7 +30,7 @@ var relatedRecordsTabTester = function ($) {
     
     var bareRelatedRecordsTabTest = new jqUnit.TestCase("Related Records Tab Tests", function () {
         bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/html/components/TabsTemplate.html", ".csc-tabs-tabList", $(".template1"));
-        bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/html/CatalogingTab.html", ".csc-cataloging-tab", $(".template2"));
+        bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/html/pages/CatalogingTabTemplate.html", ".csc-cataloging-tab", $(".template2"));
         fluid.model.copyModel(testApplier, applier);        
     });
     
@@ -52,7 +52,7 @@ var relatedRecordsTabTester = function ($) {
             },
             pageSpec: {
                 list: {
-                    href: "../../main/webapp/html/CatalogingTabRecordListTemplate.html",
+                    href: "../../main/webapp/html/pages/CatalogingTabRecordListTemplate.html",
                     templateSelector: ".csc-cataloging-tab-record-list",
                     targetSelector: ".div-for-list-of-records"
                 },
@@ -206,7 +206,7 @@ var relatedRecordsTabTester = function ($) {
                         uispecUrl: "../uispecs/cataloging-tab.json",
                         pageSpec: {
                             list: {
-                                href: "../../main/webapp/html/CatalogingTabRecordListTemplate.html"
+                                href: "../../main/webapp/html/pages/CatalogingTabRecordListTemplate.html"
                             },
                             details: {
                                 href: "../../main/webapp/html/pages/CatalogingTemplate.html"

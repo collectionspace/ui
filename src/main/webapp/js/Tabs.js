@@ -104,16 +104,16 @@ cspace = cspace || {};
                             },
                             acquisition: {},
                             cataloging: {
-                                href: "%webapp/html/CatalogingTab.html"
+                                href: "%webapp/html/pages/CatalogingTabTemplate.html"
                             },
                             intake: {},
                             loanin: {},
                             loanout: {},
                             movement: {
-                                href: "%webapp/html/movementTab.html"
+                                href: "%webapp/html/pages/MovementTabTemplate.html"
                             },
                             objectexit: {
-                                href: "%webapp/html/objectexitTab.html"
+                                href: "%webapp/html/pages/ObjectexitTabTemplate.html"
                             }
                         }
                     },

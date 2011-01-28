@@ -8,7 +8,7 @@
     "recordType": "cataloging",
     "pageSpec": {
         "list": {
-            "href": "CatalogingTabRecordListTemplate.html",
+            "href": "pages/CatalogingTabRecordListTemplate.html",
             "templateSelector": ".csc-cataloging-tab-record-list",
             "targetSelector": ".csc-cataloging-tab .div-for-list-of-records" 
         },
