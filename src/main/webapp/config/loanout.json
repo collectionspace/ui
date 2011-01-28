@@ -13,7 +13,7 @@
     },
     "pageSpec": {
         "recordEditor": {
-            "href": "%readonlyloanOutTemplate.html",
+            "href": "%readonlypages/LoanoutTemplate.html",
             "templateSelector": ".csc-loanOut-template",
             "targetSelector": ".csc-record-edit-container"
         },

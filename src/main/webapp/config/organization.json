@@ -13,7 +13,7 @@
     },
     "pageSpec": {
         "recordEditor": {
-            "href": "%readonlyorganizationTemplate.html",
+            "href": "%readonlypages/OrganizationTemplate.html",
             "templateSelector": ".csc-organizationAuthority-template",
             "targetSelector": ".csc-record-edit-container" 
         },

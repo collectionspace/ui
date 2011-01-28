@@ -57,7 +57,7 @@ var relatedRecordsTabTester = function ($) {
                     targetSelector: ".div-for-list-of-records"
                 },
                 details: {
-                    href: "../../main/webapp/html/CatalogingTemplate.html",
+                    href: "../../main/webapp/html/pages/CatalogingTemplate.html",
                     templateSelector: ".csc-cataloging-template",
                     targetSelector: ".div-for-recordEditor"
                 } 
@@ -209,7 +209,7 @@ var relatedRecordsTabTester = function ($) {
                                 href: "../../main/webapp/html/CatalogingTabRecordListTemplate.html"
                             },
                             details: {
-                                href: "../../main/webapp/html/CatalogingTemplate.html"
+                                href: "../../main/webapp/html/pages/CatalogingTemplate.html"
                             }
                         },
                         listeners: {

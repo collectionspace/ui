@@ -229,7 +229,7 @@ cspace = cspace || {};
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
-                url: "%webapp/html/createNewTemplate.html"
+                url: "%webapp/html/pages/CreateNewTemplate.html"
             })
         }
     });

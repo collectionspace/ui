@@ -13,7 +13,7 @@
             "targetSelector": ".csc-cataloging-tab .div-for-list-of-records" 
         },
         "details": {
-            "href": "%readonlyCatalogingTemplate.html",
+            "href": "%readonlypages/CatalogingTemplate.html",
             "templateSelector": ".csc-cataloging-template",
             "targetSelector": ".csc-cataloging-tab .div-for-recordEditor" 
         } 

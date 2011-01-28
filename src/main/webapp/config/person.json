@@ -13,7 +13,7 @@
     },
     "pageSpec": {
         "recordEditor": {
-            "href": "%readonlypersonTemplate.html",
+            "href": "%readonlypages/PersonTemplate.html",
             "templateSelector": ".csc-personAuthority-template",
             "targetSelector": ".csc-record-edit-container"
         },

@@ -13,7 +13,7 @@
     },
     "pageSpec": {
         "recordEditor": {
-            "href": "%readonlyIntakeTemplate.html",
+            "href": "%readonlypages/IntakeTemplate.html",
             "templateSelector": ".csc-intake-template",
             "targetSelector": ".csc-record-edit-container"
         },

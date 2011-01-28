@@ -39,7 +39,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         },
                         pageSpec: {
                             recordEditor: {
-                                href: "../../main/webapp/html/loanInTemplate.html"
+                                href: "../../main/webapp/html/pages/LoaninTemplate.html"
                             },
                             footer: {
                                 href: "../../main/webapp/html/components/footer.html"

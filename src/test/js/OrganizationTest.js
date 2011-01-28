@@ -27,7 +27,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     options: {
                         pageSpec: {
                             recordEditor: {
-                                href: "../../main/webapp/html/organizationTemplate.html"
+                                href: "../../main/webapp/html/pages/OrganizationTemplate.html"
                             },
                             footer: {
                                 href: "../../main/webapp/html/components/footer.html"

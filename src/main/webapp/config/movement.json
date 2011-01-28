@@ -13,7 +13,7 @@
     },
     "pageSpec": {
         "recordEditor": {
-            "href": "%readonlyMovementTemplate.html",
+            "href": "%readonlypages/MovementTemplate.html",
             "templateSelector": ".csc-movement-template",
             "targetSelector": ".csc-record-edit-container" 
         },

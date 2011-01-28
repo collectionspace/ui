@@ -13,7 +13,7 @@
             "targetSelector": ".csc-movement-tab .div-for-list-of-records"
         },
         "details": {
-            "href": "%readonlyMovementTemplate.html",
+            "href": "%readonlypages/MovementTemplate.html",
             "templateSelector": ".csc-movement-template",
             "targetSelector": ".csc-movement-tab .div-for-recordEditor"
         } 

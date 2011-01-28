@@ -13,7 +13,7 @@
     },
     "pageSpec": {
         "recordEditor": {
-            "href": "%readonlyCatalogingTemplate.html",
+            "href": "%readonlypages/CatalogingTemplate.html",
             "templateSelector": ".csc-cataloging-template",
             "targetSelector": ".csc-record-edit-container" 
         },
