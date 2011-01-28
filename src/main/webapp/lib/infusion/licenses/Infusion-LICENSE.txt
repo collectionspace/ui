@@ -1,15 +1,3 @@
-Fluid is available under either the terms of the New BSD license or the
-Educational Community License, Version 2.0. As a recipient of Fluid, you may
-choose which license to receive this code under (except as noted in per-module
-LICENSE files). All modules are Copyright 2007 University of Toronto except
-where noted otherwise in the code itself, or if the modules reside in a separate
-directory, they may contain explicit declarations of copyright in both the
-LICENSE file in the directory in which they reside and in the code itself. No
-external contributions are allowed under licenses which are fundamentally
-incompatible with the ECL or BSD licenses that Fluid is distributed under.
-
-The text of the ECL and BSD licenses is reproduced below.
-
 Educational Community License, Version 2.0
 *************************************
 Copyright 2007 University of Toronto
@@ -192,36 +180,3 @@ incurred by, or claims asserted against, such Contributor by reason of your
 accepting any such warranty or additional liability.
 
 END OF TERMS AND CONDITIONS FOR ECL 2.0
-
-The New BSD license
-**********************
-
-Copyright 2007 University of Toronto.
-
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without modification,
-are permitted provided that the following conditions are met:
-
-    * Redistributions of source code must retain the above copyright notice,
-this list of conditions and the following disclaimer.
-    * Redistributions in binary form must reproduce the above copyright notice,
-this list of conditions and the following disclaimer in the documentation
-and/or other materials provided with the distribution.
-    * Neither the name of the University of Toronto nor the names of its
-contributors may be used to endorse or promote products derived from this
-software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,
-OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
-IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
-OF SUCH DAMAGE.
-
-END OF TERMS AND CONDITIONS FOR THE NEW BSD LICENSE
