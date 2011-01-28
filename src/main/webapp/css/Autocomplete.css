@@ -1,3 +1,13 @@
+/*
+Copyright 2010
+
+Licensed under the Educational Community License (ECL), Version 2.0. 
+You may not use this file except in compliance with this License.
+
+You may obtain a copy of the ECL 2.0 License at
+https://source.collectionspace.org/collection-space/LICENSE.txt
+*/
+
 .cs-autocomplete-closebutton {position: absolute}
 .cs-autocomplete-input {/*width:99.75%*/ width:100%;}
 .cs-autocomplete-input {background: #fff url(../images/arrowPredictiveText.png) no-repeat right center; }
