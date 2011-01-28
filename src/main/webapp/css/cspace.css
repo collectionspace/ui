@@ -12,7 +12,7 @@ CollectionSpace 1.3 default CSS selectors
 
 /* core HTML elements*/
 html{font-size: 100%;} 
-body {font-size:13px; line-height:13px; padding:5px 4px 0 4px; margin:0;}
+body {font-size: 12px; line-height:13px; padding:5px 4px 0 4px; margin:0;}
 table {border-collapse:collapse;}
 table tr, table tr td, table tr th  {border:0; padding:0; margin:0; text-align:left; font-weight:normal;}
 fieldset, table, pre {margin-bottom:0em;}
@@ -124,18 +124,6 @@ li .flc-pager-pageLink {margin-top:-1px;}
 	
 /* Fluid Infusion related selectors */
 .csc-search-error-message {text-align:center; font-size:16px; margin:10px 0; background-color:#D1D2D4; border:2px solid black; padding: 10px 0;}
-.flc-pager-top, .flc-pager-bottom {background-color:#F2F2F3; padding:4px 12px; font-size:11px; line-height:11px;}
-.flc-pager-top {/*border -top:1px solid #CECFD1;*/}
-.flc-pager-bottom {/*border -bottom:1px solid #CECFD1;*/}
-.fl-pager .fl-pager-ui li {float:left; padding-top:1px;}
-.fl-pager .fl-pager-ui li.flc-pager-summary  {float:right; color:#6D6E71;}
-.fl-pager .fl-pager-ui li.flc-per-page {/*margin-top:-4px;*/}
-.fl-pager .fl-pager-ui li.flc-per-page {float:left; color:#6D6E71;}
-.pager-links {display:inline; padding-top:5px;}
-.fl-pager .fl-pager-ui  {/*padding -top:5px;*/}
-#pager-top {padding:6px 12px 2px 7px;}
-#pager-bottom {padding:4px 12px 1px 12px; background-color:#E8E8E8; border-bottom: 1px solid #C8C6C6; height:100%;}
-#pager-bottom  .flc-per-page {width:320px; margin-top:-3px;}
 
 
 /*set min-height for record pages */
