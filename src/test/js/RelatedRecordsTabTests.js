@@ -196,7 +196,7 @@ var relatedRecordsTabTester = function ($) {
             model: model,
             applier: primaryApplier,
             related: "cataloging",
-            configURL: "../../main/webapp/html/config/cataloging-tab.json",
+            configURL: "../../main/webapp/config/cataloging-tab.json",
             components: {
                 pageBuilderSetup: {
                     options: {

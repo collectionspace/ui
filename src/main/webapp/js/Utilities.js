@@ -269,7 +269,7 @@ fluid.registerNamespace("cspace.util");
 
     cspace.util.getDefaultConfigURL = function () {
         var url = window.location.pathname;
-        return ".\/config" + url.substring(url.lastIndexOf("/"), url.indexOf(".html")) + ".json";
+        return "..\/config" + url.substring(url.lastIndexOf("/"), url.indexOf(".html")) + ".json";
     };
     
     fluid.demands("cspace.util.getLoginURL", "cspace.localData", {

@@ -255,7 +255,7 @@ cspace = cspace || {};
                 args: ["@0", "{tabs}"]
             }
         },
-        configURLTemplate: "%webapp/html/config/%record-tab.json",
+        configURLTemplate: "%webapp/config/%record-tab.json",
         selectors: {
             tabs: ".csc-tabs-container",
             tabsList: ".csc-tabs-tabsList-container"

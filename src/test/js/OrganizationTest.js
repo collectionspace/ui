@@ -21,7 +21,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     var setupOrganization = function (options) {
         options = $.extend(true, {
-            configURL: "../../main/webapp/html/config/organization.json",
+            configURL: "../../main/webapp/config/organization.json",
             components: {
                 pageBuilderSetup: {
                     options: {

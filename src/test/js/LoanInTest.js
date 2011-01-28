@@ -22,7 +22,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     loanInTests.test("Creation", function () {
         var opts = {
-            configURL: "../../main/webapp/html/config/loanin.json",
+            configURL: "../../main/webapp/config/loanin.json",
             components: {
                 pageBuilderSetup: {
                     options: {

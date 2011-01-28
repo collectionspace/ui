@@ -22,7 +22,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     var setupCataloging = function (options) {
         options = $.extend(true, {
-            configURL: "../../main/webapp/html/config/cataloging.json",
+            configURL: "../../main/webapp/config/cataloging.json",
             components: {
                 pageBuilderSetup: {
                     options: {
