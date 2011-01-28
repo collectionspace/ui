@@ -36,7 +36,7 @@ var rrlTester = function ($) {
     $.ajax({
         async: false,
         data: "json",
-        url: "../../main/webapp/html/uispecs/cataloging.json",
+        url: "../uispecs/cataloging.json",
         success: function (data) {
             data = JSON.parse(data);
             uispec = data.sidebar;

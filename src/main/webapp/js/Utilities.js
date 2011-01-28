@@ -320,7 +320,7 @@ fluid.registerNamespace("cspace.util");
     
     fluid.demands("cspace.util.getUISpecURL", "cspace.localData", {
         args: ["@0", {
-            url: "%webapp/html/uispecs/%pageType.json"
+            url: "%test/uispecs/%pageType.json"
         }]
     });
     

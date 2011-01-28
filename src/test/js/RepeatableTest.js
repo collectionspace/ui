@@ -63,7 +63,7 @@ var repeatableTester = function ($) {
         if (!briefDescUISpec) {
             jQuery.ajax({
                 async: false,
-                url: "../../main/webapp/html/uispecs/cataloging.json",
+                url: "../uispecs/cataloging.json",
                 dataType: "json",
                 success: function (data) {
                     briefDescUISpec = data.recordEditor[".csc-object-identification-brief-description"].decorators[0];

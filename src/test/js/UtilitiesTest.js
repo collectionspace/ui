@@ -830,7 +830,7 @@ var utilitiesTester = function ($) {
         //expect(1);
         fluid.fetchResources({ 
             uispecs: {
-                href: "../../main/webapp/html/uispecs/movement.json",
+                href: "../uispecs/movement.json",
                 options: {
                     dataType: "json"
                 }               
@@ -848,7 +848,7 @@ var utilitiesTester = function ($) {
         //expect(1);
         fluid.fetchResources({ 
             uispecs: {
-                href: "../../main/webapp/html/uispecs/acquisition.json",
+                href: "../uispecs/acquisition.json",
                 options: {
                     dataType: "json"
                 }               

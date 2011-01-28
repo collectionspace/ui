@@ -42,7 +42,7 @@ var relatedRecordsTabTester = function ($) {
         var options = {
             permissions: cspace.tests.sampleUserPerms,
             schemaUrl: "../uischema/cataloging.json",
-            uispecUrl: "../../main/webapp/html/uispecs/cataloging-tab.json",
+            uispecUrl: "../uispecs/cataloging-tab.json",
             listeners: {
                 onDependencySetup: function (uispec) {
                     // Change the template URL for the number pattern chooser.
@@ -203,7 +203,7 @@ var relatedRecordsTabTester = function ($) {
                         primaryRecordType: "intake",
                         pageType: "cataloging-tab",
                         schemaUrl: "../uischema/cataloging.json",
-                        uispecUrl: "../../main/webapp/html/uispecs/cataloging-tab.json",
+                        uispecUrl: "../uispecs/cataloging-tab.json",
                         pageSpec: {
                             list: {
                                 href: "../../main/webapp/html/CatalogingTabRecordListTemplate.html"
