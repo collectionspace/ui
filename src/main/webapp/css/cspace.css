@@ -771,7 +771,7 @@ ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6
 .cs-createNew-content .cs-createNew-categoryHeader {
     -moz-border-radius:6px 6px 0 0;
     cursor:default;
-   height:15px;
+    height:15px;
     padding:5px 0 7px 5px;
     width:auto;
     background-color:#666;
@@ -851,12 +851,12 @@ ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6
 	color:#333333; 
 	border-top: 1px solid #C60018;
 	background: #d8d8d8; 
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6e6e6', endColorstr='#d8d8d8'); /* for IE */
-	background: -webkit-gradient(linear, top, bottom, from(#e6e6e6), to(#d8d8d8)); 
-	background: -moz-linear-gradient(top, #e6e6e6, #d8d8d8);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6e6e6', endColorstr='#d1d1d1'); /* for IE */
+	background: -webkit-gradient(linear, top, bottom, from(#e6e6e6), to(#d1d1d1)); 
+	background: -moz-linear-gradient(top, #e6e6e6, #d1d1d1);
 	}
 .cs-messageBar .cs-messageBar-cancel {background-color:#73AA4F;}
-.cs-messageBar .cs-messageBar-cancel:hover {background-color:#73AA4F;}
+.cs-messageBar .cs-messageBar-cancel:hover {background-color:#48722D;}
 .cs-message-error .cs-messageBar-cancel {background-color:#C60018;}
-.cs-message-error .cs-messageBar-cancel:hover {background-color:#C60018;}
+.cs-message-error .cs-messageBar-cancel:hover {background-color:#9E0022;}
 
