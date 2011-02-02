@@ -104,16 +104,16 @@ cspace = cspace || {};
                             },
                             acquisition: {},
                             cataloging: {
-                                href: "%webapp/html/pages/CatalogingTabTemplate.html"
+                                href: "%webapp/html/pages/RelatedRecordsTabTemplate.html"
                             },
                             intake: {},
                             loanin: {},
                             loanout: {},
                             movement: {
-                                href: "%webapp/html/pages/MovementTabTemplate.html"
+                                href: "%webapp/html/pages/RelatedRecordsTabTemplate.html"
                             },
                             objectexit: {
-                                href: "%webapp/html/pages/ObjectexitTabTemplate.html"
+                                href: "%webapp/html/pages/RelatedRecordsTabTemplate.html"
                             }
                         }
                     },
@@ -204,6 +204,8 @@ cspace = cspace || {};
                         fluid.withEnvironment({
                             noPrevent: true
                         }, function () {
+                            var recordType = fluid.find(tabsList.model.tabs, findStrategy(ui.index))["name"]
+                            $(ui.panel).addClass(that.options.selectors.tab.substr(1) + "-" + recordType);
                             tabContainer.tabs("select", ui.index);
                         });
                     });
@@ -258,7 +260,8 @@ cspace = cspace || {};
         configURLTemplate: "%webapp/config/%record-tab.json",
         selectors: {
             tabs: ".csc-tabs-container",
-            tabsList: ".csc-tabs-tabsList-container"
+            tabsList: ".csc-tabs-tabsList-container",
+            tab: ".csc-relatedRecordsTab"
         },
         mergePolicy: {
             model: "preserve",

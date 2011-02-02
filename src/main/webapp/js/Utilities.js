@@ -940,7 +940,8 @@ fluid.registerNamespace("cspace.util");
     cspace.util.togglable = function (container, options) {
         var that = fluid.initView("cspace.util.togglable", container, options);
         
-        that.locate("header").addClass(that.options.styles[that.options["default"]]);
+        that.locate("header").addClass(that.options.styles[that.options["default"]])
+            .addClass(that.options.styles.header);
         that.container.delegate(that.options.selectors.header, "click", function () {
             var source = $(this);
             source.next(that.options.selectors.togglable).toggle();
@@ -958,7 +959,8 @@ fluid.registerNamespace("cspace.util");
         },
         styles: {
             expanded: "cs-togglable-expanded",
-            collapsed: "cs-togglable-collapsed"
+            collapsed: "cs-togglable-collapsed",
+            header: "cs-togglable-header"
         },
         "default": "expanded"
     });

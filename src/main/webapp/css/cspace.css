@@ -816,7 +816,7 @@ ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6
 #read-only .cs-repeatable-add, #read-only .cs-repeatable-delete {display:none;}
 #read-only .cs-repeatable-primary {}
 
-.cs-myCollectionSpace-categoryHeader {height:inherit; padding:6px 0 6px 2.5%; width:97.5%;}
+.cs-togglable-header {height:inherit; padding:6px 0 6px 2.5%; width:97.5%;}
 .cs-togglable-expanded {background:transparent url('../images/toggle-less.png') no-repeat 4px 6px;}
 .cs-togglable-collapsed {background:transparent url('../images/toggle-more.png') no-repeat 4px 6px;}
 

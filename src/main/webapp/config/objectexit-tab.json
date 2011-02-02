@@ -7,19 +7,14 @@
     "pageType": "objectexit-tab",
     "recordType": "objectexit",
     "pageSpec": {
-        "list": {
-            "href": "pages/ObjectexitTabRecordListTemplate.html",
-            "templateSelector": ".csc-objectexit-tab-record-list",
-            "targetSelector": ".csc-objectexit-tab .div-for-list-of-records"
-        },
         "details": {
             "href": "%readonlypages/ObjectexitTemplate.html",
             "templateSelector": ".csc-objectexit-template",
-            "targetSelector": ".csc-objectexit-tab .div-for-recordEditor"
+            "targetSelector": ".csc-relatedRecordsTab-objectexit .csc-relatedRecordsTab-recordEditor"
         } 
     },
     "selectors": {
-        "relatedRecordsTab": ".csc-objectexit-tab"
+        "relatedRecordsTab": ".csc-relatedRecordsTab-objectexit"
     },
     "components": {
         "relatedRecordsTab": {
@@ -30,6 +25,11 @@
                 "applier": "{pageBuilder}.applier",
                 "model": "{pageBuilder}.model",
                 "uispec": "{pageBuilder}.uispec",
+                "strings": {
+                    "editRecord": "Edit Object Exit Record",
+                    "recordList": "Related Object Exit Records",
+                    "newRecordRow": "New Object Exit Record"
+                },
                 "listEditor": {
                     "options": {
                         "initList": "cspace.listEditor.receiveData",

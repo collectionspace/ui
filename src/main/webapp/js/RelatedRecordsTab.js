@@ -77,11 +77,13 @@ cspace = cspace || {};
      * @param {Object} options
      */
     cspace.relatedRecordsTab = function (container, options) {
-        var that = fluid.initView("cspace.relatedRecordsTab", container, options);
+        var that = fluid.initRendererComponent("cspace.relatedRecordsTab", container, options);
         that.primary = that.options.primary;
         that.related = that.options.related;
         that.applier = that.options.applier;
         that.model = that.options.model;
+        
+        that.renderer.refreshView();
         
         fluid.initDependents(that);
         
@@ -103,7 +105,30 @@ cspace = cspace || {};
         return that;
     };
     
+    cspace.relatedRecordsTab.produceTree = function (that) {
+        return {
+            recordHeader: {
+                messagekey: "editRecord"
+            },
+            listHeader: {
+                messagekey: "recordList"
+            },
+            newRecordRow: {
+                messagekey: "newRecordRow"
+            },
+            idNumber: {
+                messagekey: "idNumber"
+            },
+            summary: {
+                messagekey: "summary"
+            }
+        };
+    };
+    
     fluid.demands("relationManager", "cspace.relatedRecordsTab", 
+        ["{relatedRecordsTab}.container", fluid.COMPONENT_OPTIONS]);
+    
+    fluid.demands("togglable", "cspace.relatedRecordsTab", 
         ["{relatedRecordsTab}.container", fluid.COMPONENT_OPTIONS]);
     
     fluid.defaults("cspace.relatedRecordsTab", {
@@ -116,20 +141,42 @@ cspace = cspace || {};
                     model: "{relatedRecordsTab}.model",
                     applier: "{relatedRecordsTab}.applier"
                 }
+            },
+            togglable: {
+                type: "cspace.util.togglable",
+                options: {
+                    selectors: {
+                        header: "{relatedRecordsTab}.options.selectors.header",
+                        togglable: "{relatedRecordsTab}.options.selectors.togglable"
+                    }
+                }
             }
         },
+        produceTree: cspace.relatedRecordsTab.produceTree,
         listEditor: {
             type: "cspace.listEditor"
         },
         selectors: {
-            goToRecord: ".csc-goto"
+            goToRecord: ".csc-goto",
+            recordHeader: ".csc-relatedRecordsTab-recordHeader",
+            togglable: ".csc-relatedRecordsTab-togglable",
+            listHeader: ".csc-relatedRecordsTab-listHeader",
+            header: ".csc-relatedRecordsTab-header",
+            newRecordRow: ".csc-relatedRecordsTab-newRecordRow",
+            idNumber: ".csc-relatedRecordsTab-idNumber",
+            summary: ".csc-relatedRecordsTab-summary"
         },
+        selectorsToIgnore: ["goToRecord", "togglable", "header"],
         events: {
             afterRender: null
         },
         mergePolicy: {
             model: "preserve",
             applier: "preserve"
+        },
+        strings: {
+            idNumber: "ID Number",
+            summary: "Summary"
         }
     });
     

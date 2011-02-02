@@ -7,19 +7,14 @@
     "pageType": "movement-tab",
     "recordType": "movement",
     "pageSpec": {
-        "list": {
-            "href": "pages/MovementTabRecordListTemplate.html",
-            "templateSelector": ".csc-movement-tab-record-list",
-            "targetSelector": ".csc-movement-tab .div-for-list-of-records"
-        },
         "details": {
             "href": "%readonlypages/MovementTemplate.html",
             "templateSelector": ".csc-movement-template",
-            "targetSelector": ".csc-movement-tab .div-for-recordEditor"
+            "targetSelector": ".csc-relatedRecordsTab-movement .csc-relatedRecordsTab-recordEditor"
         } 
     },
     "selectors": {
-        "relatedRecordsTab": ".csc-movement-tab"
+        "relatedRecordsTab": ".csc-relatedRecordsTab-movement"
     },
     "components": {
         "relatedRecordsTab": {
@@ -30,6 +25,11 @@
                 "applier": "{pageBuilder}.applier",
                 "model": "{pageBuilder}.model",
                 "uispec": "{pageBuilder}.uispec",
+                "strings": {
+                    "editRecord": "Edit Location and Movement Control Record",
+                    "recordList": "Related Location and Movement Control Records",
+                    "newRecordRow": "New Location and Movement Control Record"
+                },
                 "listEditor": {
                     "options": {
                         "initList": "cspace.listEditor.receiveData",

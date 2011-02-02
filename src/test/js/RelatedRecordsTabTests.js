@@ -30,7 +30,6 @@ var relatedRecordsTabTester = function ($) {
     
     var bareRelatedRecordsTabTest = new jqUnit.TestCase("Related Records Tab Tests", function () {
         bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/html/components/TabsTemplate.html", ".csc-tabs-tabList", $(".template1"));
-        bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/html/pages/CatalogingTabTemplate.html", ".csc-cataloging-tab", $(".template2"));
         fluid.model.copyModel(testApplier, applier);        
     });
     
@@ -51,22 +50,17 @@ var relatedRecordsTabTester = function ($) {
                 pageReady: opts.pageReadyListener
             },
             pageSpec: {
-                list: {
-                    href: "../../main/webapp/html/pages/CatalogingTabRecordListTemplate.html",
-                    templateSelector: ".csc-cataloging-tab-record-list",
-                    targetSelector: ".div-for-list-of-records"
-                },
                 details: {
                     href: "../../main/webapp/html/pages/CatalogingTemplate.html",
                     templateSelector: ".csc-cataloging-template",
-                    targetSelector: ".div-for-recordEditor"
+                    targetSelector: ".csc-relatedRecordsTab-cataloging .csc-relatedRecordsTab-recordEditor"
                 } 
             },
             applier: testApplier,
             model: testApplier.model,
             pageType: "cataloging-tab",
             selectors: {
-                relatedRecordsTab: ".csc-cataloging-tab"
+                relatedRecordsTab: ".csc-relatedRecordsTab-cataloging"
             },
             globalNavigator: cspace.util.globalNavigator(),
             messageBar: cspace.messageBar("body"),
@@ -205,9 +199,6 @@ var relatedRecordsTabTester = function ($) {
                         schemaUrl: "../uischema/cataloging.json",
                         uispecUrl: "../uispecs/cataloging-tab.json",
                         pageSpec: {
-                            list: {
-                                href: "../../main/webapp/html/pages/CatalogingTabRecordListTemplate.html"
-                            },
                             details: {
                                 href: "../../main/webapp/html/pages/CatalogingTemplate.html"
                             }

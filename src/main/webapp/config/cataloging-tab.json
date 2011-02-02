@@ -7,19 +7,14 @@
     "pageType": "cataloging-tab",
     "recordType": "cataloging",
     "pageSpec": {
-        "list": {
-            "href": "pages/CatalogingTabRecordListTemplate.html",
-            "templateSelector": ".csc-cataloging-tab-record-list",
-            "targetSelector": ".csc-cataloging-tab .div-for-list-of-records" 
-        },
         "details": {
             "href": "%readonlypages/CatalogingTemplate.html",
             "templateSelector": ".csc-cataloging-template",
-            "targetSelector": ".csc-cataloging-tab .div-for-recordEditor" 
+            "targetSelector": ".csc-relatedRecordsTab-cataloging .csc-relatedRecordsTab-recordEditor" 
         } 
     },
     "selectors": {
-        "relatedRecordsTab": ".csc-cataloging-tab"
+        "relatedRecordsTab": ".csc-relatedRecordsTab-cataloging"
     },
     "components": {
         "relatedRecordsTab": {
@@ -30,6 +25,11 @@
                 "applier": "{pageBuilder}.applier",
                 "model": "{pageBuilder}.model",
                 "uispec": "{pageBuilder}.uispec",
+                "strings": {
+                    "editRecord": "Edit Cataloging Record",
+                    "recordList": "Related Cataloging Records",
+                    "newRecordRow": "New Cataloging Record"
+                },
                 "listEditor": {
                     "options": {
                         "initList": "cspace.listEditor.receiveData",
