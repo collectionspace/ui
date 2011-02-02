@@ -52,28 +52,20 @@ cspace = cspace || {};
     
     var makeComponentsOpts = function (options) {
         fluid.each(options.components, function (component, key) {
+            if (component.type !== "cspace.recordList") {
+                return;
+            }
             component.options = makeOpts(key, options);
-        });
-    };
-    
-    var bindEvents = function (that) {
-        that.locate("header").click(function () {
-            var source = $(this);
-            source.next(that.options.selectors.togglable).toggle();
-            source.toggleClass(that.options.styles.expanded);
-            source.toggleClass(that.options.styles.collapsed);
-            return false;
         });
     };
     
     var setupMyCollectionSpace = function (that) {
         var options = that.options;
         fluid.remove_if(options.components, function (component, key) {
-            return $.inArray(key, options.records) < 0;
+            return component.type === "cspace.recordList" && $.inArray(key, options.records) < 0;
         });
         makeComponentsOpts(options);
         that.renderer.refreshView();
-        bindEvents(that);
     };
     
     cspace.myCollectionSpace = function (container, options) {
@@ -163,6 +155,9 @@ cspace = cspace || {};
         
     fluid.demands("objectexit", "cspace.myCollectionSpace", 
         ["{myCollectionSpace}.dom.objectexit", fluid.COMPONENT_OPTIONS]);
+        
+    fluid.demands("togglable", "cspace.myCollectionSpace", 
+        ["{myCollectionSpace}.container", fluid.COMPONENT_OPTIONS]);
     
     fluid.defaults("cspace.myCollectionSpace", {
         selectors: {
@@ -199,10 +194,6 @@ cspace = cspace || {};
             loanoutNumber: "Loan Out Number",
             currentLocation: "Current Location",
             exitNumber: "Exit Number"
-        },
-        styles: {
-            expanded: "cs-myCollectionSpace-expanded",
-            collapsed: "cs-myCollectionSpace-collapsed"
         },
         globalNavigator: "{globalNavigator}",
         produceTree: cspace.myCollectionSpace.produceTree,
@@ -303,6 +294,15 @@ cspace = cspace || {};
             },
             objectexit: {
                 type: "cspace.recordList"
+            },
+            togglable: {
+                type: "cspace.util.togglable",
+                options: {
+                    selectors: {
+                        header: "{myCollectionSpace}.options.selectors.header",
+                        togglable: "{myCollectionSpace}.options.selectors.togglable"
+                    }
+                }
             }
         },
         resources: {

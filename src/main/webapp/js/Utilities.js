@@ -937,4 +937,30 @@ fluid.registerNamespace("cspace.util");
         strategy: cspace.util.schemaStrategy
     });
     
+    cspace.util.togglable = function (container, options) {
+        var that = fluid.initView("cspace.util.togglable", container, options);
+        
+        that.locate("header").addClass(that.options.styles[that.options["default"]]);
+        that.container.delegate(that.options.selectors.header, "click", function () {
+            var source = $(this);
+            source.next(that.options.selectors.togglable).toggle();
+            source.toggleClass(that.options.styles.expanded);
+            source.toggleClass(that.options.styles.collapsed);
+            return false;
+        });
+        
+        return that;
+    };
+    fluid.defaults("cspace.util.togglable", {
+        selectors: {
+            header: ".csc-togglable-header",
+            togglable: ".csc-togglable-togglable"
+        },
+        styles: {
+            expanded: "cs-togglable-expanded",
+            collapsed: "cs-togglable-collapsed"
+        },
+        "default": "expanded"
+    });
+    
 })(jQuery, fluid);
