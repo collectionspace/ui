@@ -1,0 +1,61 @@
+{
+    "schema": [
+        "recordlist",
+        "recordtypes",
+        "loanin"
+    ],
+    "pageType": "loanin-tab",
+    "recordType": "loanin",
+    "pageSpec": {
+        "details": {
+            "href": "%readonlypages/LoaninTemplate.html",
+            "templateSelector": ".csc-loanIn-template",
+            "targetSelector": ".csc-relatedRecordsTab-loanin .csc-relatedRecordsTab-recordEditor"
+        } 
+    },
+    "selectors": {
+        "relatedRecordsTab": ".csc-relatedRecordsTab-loanin"
+    },
+    "components": {
+        "relatedRecordsTab": {
+            "type": "cspace.relatedRecordsTab",
+            "options": {
+                "primary": "{pageBuilder}.options.primary",
+                "related": "{pageBuilder}.options.related",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model",
+                "uispec": "{pageBuilder}.uispec",
+                "strings": {
+                    "editRecord": "Edit Loan In Record",
+                    "recordList": "Related Loan In Records",
+                    "newRecordRow": "New Loan In Record"
+                },
+                "listEditor": {
+                    "options": {
+                        "initList": "cspace.listEditor.receiveData",
+                        "dataContext": {
+                            "options": {
+                                "recordType": "loanin",
+                                "dataSource": {
+                                    "options": {
+                                        "schema": "{pageBuilder}.schema" 
+                                    }
+                                }
+                            }
+                        },
+                        "details": {
+                            "options": {
+                                "selectors": {
+                                    "identificationNumber": ".csc-loanin-currentLocation" 
+                                },
+                                "strings": {
+                                    "identificationNumberRequired": "Please specify a Current Location" 
+                                } 
+                            } 
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

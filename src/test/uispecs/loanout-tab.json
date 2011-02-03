@@ -1,0 +1,219 @@
+{
+    "details": {
+        ".csc-loanOut-lendersContact": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/loanout/autocomplete/lendersContact",
+                        "vocabUrl": "../../chain/loanout/source-vocab/lendersContact"
+                    }
+                }
+            ],
+            "value": "${fields.lendersContact}"
+        },
+        ".csc-loanOut-borrowersContact": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/loanout/autocomplete/borrowersContact",
+                        "vocabUrl": "../../chain/loanout/source-vocab/borrowersContact"
+                    }
+                }
+            ],
+            "value": "${fields.borrowersContact}"
+        },
+        ".csc-loanout-tenantID": "${fields.tenantID}",
+        ".csc-loanOut-lendersAuthorizationDate": "${fields.lendersAuthorizationDate}",
+        ".csc-loanOut-borrower": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/loanout/autocomplete/borrower",
+                        "vocabUrl": "../../chain/loanout/source-vocab/borrower"
+                    }
+                }
+            ],
+            "value": "${fields.borrower}"
+        },
+        ".csc-loanOut-loanReturnDate": "${fields.loanReturnDate}",
+        ".csc-loanOut-loanPurpose": {
+            "default": "0",
+            "optionnames": [
+                "Please select a value",
+                "Exhibition",
+                "Research",
+                "Scientific or exhibit preparation",
+                "Analysis",
+                "Photography",
+                "Conservation or other requested services",
+                "Long-term collections management and storage"
+            ],
+            "optionlist": [
+                "",
+                "exhibition",
+                "research",
+                "scientificorexhibitpreparation",
+                "analysis",
+                "photography",
+                "conservationotherrequestedservices",
+                "longtermcollectionsmanagementandstorage"
+            ],
+            "selection": "${fields.loanPurpose}"
+        },
+        ".csc-loanout-createdAt": "${fields.createdAt}",
+        ".csc-loanOut-loanReturnDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
+        ".csc-loanOut-loanOutDate": "${fields.loanOutDate}",
+        ".csc-loanOut-loanRenewalApplicationDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
+        ".csc-loanout-updatedAt": "${fields.updatedAt}",
+        ".csc-loanOut-loanOutNumber-patternChooserContainer": {
+            "decorators": [
+                {
+                    "func": "cspace.numberPatternChooser",
+                    "type": "fluid",
+                    "options": {
+                        "model": {
+                            "names": [
+                                "Loan Out"
+                            ],
+                            "list": [
+                                "loanout"
+                            ],
+                            "samples": [
+                                "LO2010.1"
+                            ]
+                        },
+                        "selectors": {
+                            "numberField": ".csc-loanOut-loanOutNumber"
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-loanOut-lendersAuthorizationDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
+        ".csc-loanOut-loanOutConditions": "${fields.specialConditionsOfLoan}",
+        ".csc-loanOut-loanOutNumber": "${fields.loanOutNumber}",
+        ".csc-loanOut-loanOutDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
+        ".csc-loanOut-loanOutNote": "${fields.loanOutNote}",
+        ".csc-loanout-loanedObjectStatusGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.loanedObjectStatusGroup",
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-loanOut-loanedObjectStatus": {
+                                                "optionnames": [
+                                                    "Please select a value",
+                                                    "Photography requested",
+                                                    "Sent",
+                                                    "Requested",
+                                                    "Refused",
+                                                    "Authorized",
+                                                    "Agreed",
+                                                    "Conservation",
+                                                    "Returned",
+                                                    "Renewed"
+                                                ],
+                                                "optionlist": [
+                                                    "",
+                                                    "photographyrequested",
+                                                    "sent",
+                                                    "requested",
+                                                    "refused",
+                                                    "authorized",
+                                                    "agreed",
+                                                    "conservation",
+                                                    "returned",
+                                                    "renewed"
+                                                ],
+                                                "selection": "${{row}.loanedObjectStatus}"
+                                            },
+                                            ".csc-loanOut-loanedObjectStatusNote": "${{row}.loanedObjectStatusNote}",
+                                            ".csc-loanOut-loanedObjectStatusDate-container": {
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.datePicker",
+                                                        "type": "fluid"
+                                                    }
+                                                ]
+                                            },
+                                            ".csc-loanOut-loanedObjectStatusDate": "${{row}.loanedObjectStatusDate}"
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.loanedObjectStatusGroup"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-loanOut-loanRenewalApplicationDate": "${fields.loanRenewalApplicationDate}",
+        ".csc-loanOut-lendersAuthorizer": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/loanout/autocomplete/lendersAuthorizer",
+                        "vocabUrl": "../../chain/loanout/source-vocab/lendersAuthorizer"
+                    }
+                }
+            ],
+            "value": "${fields.lendersAuthorizer}"
+        }
+    },
+    "list": {
+        ".csc-recordList-row:": {
+            "children": [
+                {
+                    ".csc-related-summary": "${items.0.summary}",
+                    ".csc-related-number": "${items.0.number}"
+                }
+            ]
+        }
+    }
+}

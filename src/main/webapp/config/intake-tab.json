@@ -1,0 +1,61 @@
+{
+    "schema": [
+        "recordlist",
+        "recordtypes",
+        "intake"
+    ],
+    "pageType": "intake-tab",
+    "recordType": "intake",
+    "pageSpec": {
+        "details": {
+            "href": "%readonlypages/IntakeTemplate.html",
+            "templateSelector": ".csc-intake-template",
+            "targetSelector": ".csc-relatedRecordsTab-intake .csc-relatedRecordsTab-recordEditor"
+        } 
+    },
+    "selectors": {
+        "relatedRecordsTab": ".csc-relatedRecordsTab-intake"
+    },
+    "components": {
+        "relatedRecordsTab": {
+            "type": "cspace.relatedRecordsTab",
+            "options": {
+                "primary": "{pageBuilder}.options.primary",
+                "related": "{pageBuilder}.options.related",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model",
+                "uispec": "{pageBuilder}.uispec",
+                "strings": {
+                    "editRecord": "Edit Intake Record",
+                    "recordList": "Related Intake Records",
+                    "newRecordRow": "New Intake Record"
+                },
+                "listEditor": {
+                    "options": {
+                        "initList": "cspace.listEditor.receiveData",
+                        "dataContext": {
+                            "options": {
+                                "recordType": "intake",
+                                "dataSource": {
+                                    "options": {
+                                        "schema": "{pageBuilder}.schema" 
+                                    }
+                                }
+                            }
+                        },
+                        "details": {
+                            "options": {
+                                "selectors": {
+                                    "identificationNumber": ".csc-intake-currentLocation" 
+                                },
+                                "strings": {
+                                    "identificationNumberRequired": "Please specify a Current Location" 
+                                } 
+                            } 
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

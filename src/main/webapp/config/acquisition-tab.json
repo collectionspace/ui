@@ -1,0 +1,61 @@
+{
+    "schema": [
+        "recordlist",
+        "recordtypes",
+        "acquisition"
+    ],
+    "pageType": "acquisition-tab",
+    "recordType": "acquisition",
+    "pageSpec": {
+        "details": {
+            "href": "%readonlypages/AcquisitionTemplate.html",
+            "templateSelector": ".csc-acquisition-template",
+            "targetSelector": ".csc-relatedRecordsTab-acquisition .csc-relatedRecordsTab-recordEditor"
+        } 
+    },
+    "selectors": {
+        "relatedRecordsTab": ".csc-relatedRecordsTab-acquisition"
+    },
+    "components": {
+        "relatedRecordsTab": {
+            "type": "cspace.relatedRecordsTab",
+            "options": {
+                "primary": "{pageBuilder}.options.primary",
+                "related": "{pageBuilder}.options.related",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model",
+                "uispec": "{pageBuilder}.uispec",
+                "strings": {
+                    "editRecord": "Edit Acquisition Record",
+                    "recordList": "Related Acquisition Records",
+                    "newRecordRow": "New Acquisition Record"
+                },
+                "listEditor": {
+                    "options": {
+                        "initList": "cspace.listEditor.receiveData",
+                        "dataContext": {
+                            "options": {
+                                "recordType": "acquisition",
+                                "dataSource": {
+                                    "options": {
+                                        "schema": "{pageBuilder}.schema" 
+                                    }
+                                }
+                            }
+                        },
+                        "details": {
+                            "options": {
+                                "selectors": {
+                                    "identificationNumber": ".csc-acquisition-currentLocation" 
+                                },
+                                "strings": {
+                                    "identificationNumberRequired": "Please specify a Current Location" 
+                                } 
+                            } 
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

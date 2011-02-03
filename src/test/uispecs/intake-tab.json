@@ -1,0 +1,582 @@
+{
+    "details": {
+        ".csc-intake-condition-check-date": "${fields.conditionCheckDate}",
+        ".csc-intake-current-owner": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/intake/autocomplete/currentOwner",
+                        "vocabUrl": "../../chain/intake/source-vocab/currentOwner"
+                    }
+                }
+            ],
+            "value": "${fields.currentOwner}"
+        },
+        ".csc-intake-depositor": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/intake/autocomplete/depositor",
+                        "vocabUrl": "../../chain/intake/source-vocab/depositor"
+                    }
+                }
+            ],
+            "value": "${fields.depositor}"
+        },
+        ".csc-intake-conditionCheckerOrAssessor": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.conditionCheckersOrAssessors",
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-conditionCheckerOrAssessor": {
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.autocomplete",
+                                                        "type": "fluid",
+                                                        "options": {
+                                                            "queryUrl": "../../chain/intake/autocomplete/conditionCheckerOrAssessor",
+                                                            "vocabUrl": "../../chain/intake/source-vocab/conditionCheckerOrAssessor"
+                                                        }
+                                                    }
+                                                ],
+                                                "value": "${{row}.conditionCheckerOrAssessor}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.conditionCheckersOrAssessors"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-intake-condition-check-note": "${fields.conditionCheckNote}",
+        ".csc-intake-entry-date-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
+        ".csc-intake-currentLocationGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.currentLocationGroup",
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-current-location": "${{row}.currentLocation}",
+                                            ".csc-intake-current-location-fitness": {
+                                                "optionnames": [
+                                                    "Please select a value",
+                                                    "Suitable",
+                                                    "Reasonable",
+                                                    "Unsuitable",
+                                                    "Dangerous"
+                                                ],
+                                                "optionlist": [
+                                                    "",
+                                                    "suitable",
+                                                    "reasonable",
+                                                    "unsuitable",
+                                                    "dangerous"
+                                                ],
+                                                "selection": "${{row}.currentLocationFitness}"
+                                            },
+                                            ".csc-intake-current-location-note": "${{row}.currentLocationNote}"
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.currentLocationGroup"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-intake-fieldCollectionNumber": "${fields.fieldCollectionNumber}",
+        ".csc-intake-insurance-policy-number": "${fields.insurancePolicyNumber}",
+        ".csc-intake-fieldCollectionDate": "${fields.fieldCollectionDate}",
+        ".csc-intake-conditionCheckMethod": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.conditionCheckMethods",
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-conditionCheckMethod": {
+                                                "optionnames": [
+                                                    "Please select a value",
+                                                    "X-Rayed",
+                                                    "Observed"
+                                                ],
+                                                "optionlist": [
+                                                    "",
+                                                    "xrayed",
+                                                    "observed"
+                                                ],
+                                                "selection": "${{row}.conditionCheckMethod}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.conditionCheckMethods"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-intake-packing-note": "${fields.packingNote}",
+        ".csc-intake-conditionCheckReason": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.conditionCheckReasons",
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-conditionCheckReason": {
+                                                "optionnames": [
+                                                    "Please select a value",
+                                                    "Enquiry",
+                                                    "Loan in",
+                                                    "Consideration",
+                                                    "Conservation",
+                                                    "Damaged in transit"
+                                                ],
+                                                "optionlist": [
+                                                    "",
+                                                    "enquiry",
+                                                    "loanin",
+                                                    "consideration",
+                                                    "conservation",
+                                                    "damagedintransit"
+                                                ],
+                                                "selection": "${{row}.conditionCheckReason}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.conditionCheckReasons"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-intake-insurance-note": "${fields.insuranceNote}",
+        ".csc-intake-entry-reason": {
+            "default": "0",
+            "optionnames": [
+                "Please select a value",
+                "Enquiry",
+                "Consideration",
+                "Commission",
+                "Loan"
+            ],
+            "optionlist": [
+                "",
+                "enquiry",
+                "consideration",
+                "commission",
+                "loan"
+            ],
+            "selection": "${fields.entryReason}"
+        },
+        ".csc-intake-location-date-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
+        ".csc-intake-field-collection-event-name": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.fieldCollectionEventNames",
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-field-collection-event-name": "${{row}.fieldCollectionEventName}"
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.fieldCollectionEventNames"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-intake-fieldCollectionNote": "${fields.fieldCollectionNote}",
+        ".csc-intake-insurance-renewal-date-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
+        ".csc-intake-insurance-reference-number": "${fields.insuranceReferenceNumber}",
+        ".csc-intake-returnDate": "${fields.returnDate}",
+        ".csc-intake-entry-number-container": {
+            "decorators": [
+                {
+                    "func": "cspace.numberPatternChooser",
+                    "type": "fluid",
+                    "options": {
+                        "model": {
+                            "names": [
+                                "Intake",
+                                "Study",
+                                "Evaluation"
+                            ],
+                            "list": [
+                                "intake",
+                                "study",
+                                "evaluation"
+                            ],
+                            "samples": [
+                                "IN2009.1",
+                                "ST2009.1",
+                                "EV2009.1"
+                            ]
+                        },
+                        "selectors": {
+                            "numberField": ".csc-intake-entry-number"
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-intake-valuer": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/intake/autocomplete/valuer",
+                        "vocabUrl": "../../chain/intake/source-vocab/valuer"
+                    }
+                }
+            ],
+            "value": "${fields.valuer}"
+        },
+        ".csc-intake-entry-date": "${fields.entryDate}",
+        ".csc-intake-fieldCollectionDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
+        ".csc-intake-insurance-renewal-date": "${fields.insuranceRenewalDate}",
+        ".csc-intake-depositor-requirements": "${fields.depositorsRequirements}",
+        ".csc-intake-entry-number": "${fields.entryNumber}",
+        ".csc-intake-tenantID": "${fields.tenantID}",
+        ".csc-intake-entryMethod": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.entryMethods",
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-entryMethod": {
+                                                "optionnames": [
+                                                    "Please select a value",
+                                                    "In person",
+                                                    "Found on doorstep",
+                                                    "Post"
+                                                ],
+                                                "optionlist": [
+                                                    "",
+                                                    "inperson",
+                                                    "foundondoorstep",
+                                                    "post"
+                                                ],
+                                                "selection": "${{row}.entryMethod}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.entryMethods"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-intake-entry-note": "${fields.entryNote}",
+        ".csc-intake-fieldCollectionMethod": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.fieldCollectionMethods",
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-fieldCollectionMethod": {
+                                                "optionnames": [
+                                                    "Please select a value",
+                                                    "commissioned",
+                                                    "netted",
+                                                    "metal detector",
+                                                    "shot",
+                                                    "trapped",
+                                                    "borehole",
+                                                    "photographed",
+                                                    "purchased",
+                                                    "salvaged",
+                                                    "exchanged",
+                                                    "found dead"
+                                                ],
+                                                "optionlist": [
+                                                    "",
+                                                    "commissioned",
+                                                    "netted",
+                                                    "metaldetector",
+                                                    "shot",
+                                                    "trapped",
+                                                    "borehole",
+                                                    "photographed",
+                                                    "purchased",
+                                                    "salvaged",
+                                                    "exchanged",
+                                                    "founddead"
+                                                ],
+                                                "selection": "${{row}.fieldCollectionMethod}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.fieldCollectionMethods"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-intake-createdAt": "${fields.createdAt}",
+        ".csc-intake-fieldCollector": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.fieldCollectors",
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-fieldCollector": {
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.autocomplete",
+                                                        "type": "fluid",
+                                                        "options": {
+                                                            "queryUrl": "../../chain/intake/autocomplete/fieldCollector",
+                                                            "vocabUrl": "../../chain/intake/source-vocab/fieldCollector"
+                                                        }
+                                                    }
+                                                ],
+                                                "value": "${{row}.fieldCollector}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.fieldCollectors"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-intake-normal-location": "${fields.normalLocation}",
+        ".csc-intake-valuation-reference-number": "${fields.valuationReferenceNumber}",
+        ".csc-intake-updatedAt": "${fields.updatedAt}",
+        ".csc-intake-insurer": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.insurers",
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-insurer": {
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.autocomplete",
+                                                        "type": "fluid",
+                                                        "options": {
+                                                            "queryUrl": "../../chain/intake/autocomplete/insurer",
+                                                            "vocabUrl": "../../chain/intake/source-vocab/insurer"
+                                                        }
+                                                    }
+                                                ],
+                                                "value": "${{row}.insurer}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.insurers"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-intake-fieldCollectionPlace": "${fields.fieldCollectionPlace}",
+        ".csc-intake-condition-check-reference-number": "${fields.conditionCheckReferenceNumber}",
+        ".csc-intake-returnDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
+        ".csc-intake-condition-check-date-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
+        ".csc-intake-location-date": "${fields.locationDate}",
+        ".csc-intake-fieldCollectionSource": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.fieldCollectionSources",
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-intake-fieldCollectionSource": {
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.autocomplete",
+                                                        "type": "fluid",
+                                                        "options": {
+                                                            "queryUrl": "../../chain/intake/autocomplete/fieldCollectionSource",
+                                                            "vocabUrl": "../../chain/intake/source-vocab/fieldCollectionSource"
+                                                        }
+                                                    }
+                                                ],
+                                                "value": "${{row}.fieldCollectionSource}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.fieldCollectionSources"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "list": {
+        ".csc-recordList-row:": {
+            "children": [
+                {
+                    ".csc-related-summary": "${items.0.summary}",
+                    ".csc-related-number": "${items.0.number}"
+                }
+            ]
+        }
+    }
+}

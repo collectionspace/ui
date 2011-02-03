@@ -1,0 +1,61 @@
+{
+    "schema": [
+        "recordlist",
+        "recordtypes",
+        "loanout"
+    ],
+    "pageType": "loanout-tab",
+    "recordType": "loanout",
+    "pageSpec": {
+        "details": {
+            "href": "%readonlypages/LoanoutTemplate.html",
+            "templateSelector": ".csc-loanOut-template",
+            "targetSelector": ".csc-relatedRecordsTab-loanout .csc-relatedRecordsTab-recordEditor"
+        } 
+    },
+    "selectors": {
+        "relatedRecordsTab": ".csc-relatedRecordsTab-loanout"
+    },
+    "components": {
+        "relatedRecordsTab": {
+            "type": "cspace.relatedRecordsTab",
+            "options": {
+                "primary": "{pageBuilder}.options.primary",
+                "related": "{pageBuilder}.options.related",
+                "applier": "{pageBuilder}.applier",
+                "model": "{pageBuilder}.model",
+                "uispec": "{pageBuilder}.uispec",
+                "strings": {
+                    "editRecord": "Edit Loan Out Record",
+                    "recordList": "Related Loan Out Records",
+                    "newRecordRow": "New Loan Out Record"
+                },
+                "listEditor": {
+                    "options": {
+                        "initList": "cspace.listEditor.receiveData",
+                        "dataContext": {
+                            "options": {
+                                "recordType": "loanout",
+                                "dataSource": {
+                                    "options": {
+                                        "schema": "{pageBuilder}.schema" 
+                                    }
+                                }
+                            }
+                        },
+                        "details": {
+                            "options": {
+                                "selectors": {
+                                    "identificationNumber": ".csc-loanout-currentLocation" 
+                                },
+                                "strings": {
+                                    "identificationNumberRequired": "Please specify a Current Location" 
+                                } 
+                            } 
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

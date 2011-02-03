@@ -102,13 +102,21 @@ cspace = cspace || {};
                             primary: {
                                 href: "#primaryTab"
                             },
-                            acquisition: {},
+                            acquisition: {
+                                href: "%webapp/html/pages/RelatedRecordsTabTemplate.html"
+                            },
                             cataloging: {
                                 href: "%webapp/html/pages/RelatedRecordsTabTemplate.html"
                             },
-                            intake: {},
-                            loanin: {},
-                            loanout: {},
+                            intake: {
+                                href: "%webapp/html/pages/RelatedRecordsTabTemplate.html"
+                            },
+                            loanin: {
+                                href: "%webapp/html/pages/RelatedRecordsTabTemplate.html"
+                            },
+                            loanout: {
+                                href: "%webapp/html/pages/RelatedRecordsTabTemplate.html"
+                            },
                             movement: {
                                 href: "%webapp/html/pages/RelatedRecordsTabTemplate.html"
                             },
