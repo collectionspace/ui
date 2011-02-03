@@ -908,10 +908,10 @@ var utilitiesTester = function ($) {
             "movement",
             "objectexit"
         ], recTypes.procedures);
-        jqUnit.assertDeepEq("vocabulary should contain", [
+        jqUnit.assertDeepEq("vocabularies should contain", [
             "person",
             "organization"
-        ], recTypes.vocabulary);
+        ], recTypes.vocabularies);
     });
 };
 

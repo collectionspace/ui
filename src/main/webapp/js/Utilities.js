@@ -914,7 +914,7 @@ fluid.registerNamespace("cspace.util");
         };
         that.all = that.getRecordTypes("recordlist");
         that.procedures = that.getRecordTypes("recordtypes.procedures");
-        that.vocabulary = that.getRecordTypes("recordtypes.vocabularies");
+        that.vocabularies = that.getRecordTypes("recordtypes.vocabularies");
         that.cataloging = that.getRecordTypes("recordtypes.cataloging");
     };
     
