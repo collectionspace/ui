@@ -20,9 +20,10 @@ cspace = cspace || {};
     var bindEvents = function (that) {
         // Bind a click event on the create button to trigger createNew's navigateToRecord
         that.locate("createButton").click(that.createRecord);
-    };    
+    };
 
     var setupCreateNew = function (that) {
+        cspace.util.modelBuilder.fixupModel(that.model);
         // Check whether the components needs to be rendered as part of its initialization.
         that.refreshView();
         that.locate("radio").filter(":first").attr('checked', true);
@@ -120,51 +121,55 @@ cspace = cspace || {};
         };
     };
     
-    cspace.createNew.censorModel = function (model, records) {
-        fluid.remove_if(model.categories, function (category, key) {
-            fluid.remove_if(category.arr, function (recordType, index) {
-                return $.inArray(recordType, records) < 0;
-            });
-            return category.arr.length < 1;
-        });
-        return model;
+    cspace.createNew.buildModel = function (options, records) {
+        if (!records || records.length < 1) {
+            return;
+        }
+        return {
+            "name": options.related + "Category",
+            arr: records
+        };
     };
     
     fluid.defaults("cspace.createNew", {
         model: {
-            expander: {
-                type: "fluid.deferredInvokeCall",
-                func: "cspace.util.modelBuilder",
-                args: {
-                    related: "all",
-                    resolver: "{permissionsResolver}",
-                    recordTypeManager: "{recordTypeManager}",
-                    permission: "update",
-                    model: {
-                        categories: [{
-                            name: "catalogingCategory",
-                            arr: ["cataloging"]
-                        }, {
-                            name: "proceduresCategory",
-                            arr: [
-                                "acquisition",
-                                "intake",
-                                "loanin",
-                                "loanout",
-                                "movement",
-                                "objectexit"
-                            ]
-                        }, {
-                            name: "vocabularyCategory",
-                            arr: [
-                                "person",
-                                "organization"
-                            ]
-                        }]
-                    },
-                    callback: "cspace.createNew.censorModel"
+            categories: [{
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.modelBuilder",
+                    args: {
+                        callback: "cspace.createNew.buildModel",
+                        related: "cataloging",
+                        resolver: "{permissionsResolver}",
+                        recordTypeManager: "{recordTypeManager}",
+                        permission: "update"
+                    }
                 }
-            }
+            }, {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.modelBuilder",
+                    args: {
+                        callback: "cspace.createNew.buildModel",
+                        related: "procedures",
+                        resolver: "{permissionsResolver}",
+                        recordTypeManager: "{recordTypeManager}",
+                        permission: "update"
+                    }
+                }
+            }, {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.modelBuilder",
+                    args: {
+                        callback: "cspace.createNew.buildModel",
+                        related: "vocabularies",
+                        resolver: "{permissionsResolver}",
+                        recordTypeManager: "{recordTypeManager}",
+                        permission: "update"
+                    }
+                }
+            }]
         },
         mergePolicy: {
             model: "preserve"       // If the model is passed to the component, preserve the original 
@@ -200,20 +205,11 @@ cspace = cspace || {};
             //headers
             catalogingCategory: "Cataloging Records",
             proceduresCategory: "Procedural Records",
-            vocabularyCategory: "Vocabulary Terms",
-            //labels for radio buttons:
-            cataloging: "Cataloging Record",
-            intake: "Intake",
-            acquisition: "Acquisition",
-            loanin: "Loan In",
-            loanout: "Loan Out",
-            movement: "Location and Movement",
-            objectexit: "Object Exit",
-            person: "Person",
-            organization: "Organization",
+            vocabulariesCategory: "Vocabulary Terms",
             //create new button:
             createButtonText: "Create"
         },
+        parentBundle: "{globalBundle}",
         produceTree: cspace.createNew.produceTree,
         invokers: {
             refreshView: {          // A public method that renders the component and binds event handlers anew.

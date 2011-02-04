@@ -60,6 +60,7 @@ cspace = cspace || {};
     };
     
     var setupMyCollectionSpace = function (that) {
+        cspace.util.modelBuilder.fixupModel(that.model);
         var options = that.options;
         fluid.remove_if(options.components, function (component, key) {
             return component.type === "cspace.recordList" && $.inArray(key, options.records) < 0;
@@ -81,14 +82,20 @@ cspace = cspace || {};
         return that;
     };
     
-    cspace.myCollectionSpace.censorModel = function (model, records) {
-        fluid.remove_if(model.categories, function (category, key) {
-            fluid.remove_if(category.list, function (recordType, key) {
-                return $.inArray(key, records) < 0;
-            });
-            return $.isEmptyObject(category.list);
-        });
-        return model;
+    cspace.myCollectionSpace.buildModel = function (options, records) {
+        if (!records || records.length < 1) {
+            return;
+        }
+        return {
+            "name": options.related,
+            list: fluid.transform(records, function (record) {
+                return {
+                    groupName: record,
+                    groupClass: "csc-myCollectionSpace-" + record + "-group",
+                    numberName: record + ".number"
+                };
+            })
+        };
     };
     
     cspace.myCollectionSpace.provideRecords = function (options) {
@@ -180,21 +187,9 @@ cspace = cspace || {};
         selectorsToIgnore: "togglable",
         strings: {
             cataloging: "Cataloging Records",
-            procedures: "Procedural Records",
-            intake: "Intake Records",
-            acquisition: "Acquisition Records",
-            loanin: "Loanin Records",
-            loanout: "Loanout Records",
-            movement: "Movement Records",
-            objectexit: "Object Exit Records",
-            summary: "Summary",
-            identificationNumber: "Identification Number",
-            entryNumber: "Entry Number",
-            loaninNumber: "Loan In Number",
-            loanoutNumber: "Loan Out Number",
-            currentLocation: "Current Location",
-            exitNumber: "Exit Number"
+            procedures: "Procedural Records"
         },
+        parentBundle: "{globalBundle}",
         globalNavigator: "{globalNavigator}",
         produceTree: cspace.myCollectionSpace.produceTree,
         // TODO: Once component sibbling options are resolvable with each other, "records"
@@ -212,66 +207,31 @@ cspace = cspace || {};
             }
         },
         model: {
-            expander: {
-                type: "fluid.deferredInvokeCall",
-                func: "cspace.util.modelBuilder",
-                args: {
-                    related: "all",
-                    resolver: "{permissionsResolver}",
-                    recordTypeManager: "{recordTypeManager}",
-                    permission: "list",
-                    model: {
-                        categories: {
-                            cataloging: {
-                                "name": "cataloging",
-                                list: {
-                                    cataloging: {
-                                        groupName: "cataloging",
-                                        groupClass: "csc-myCollectionSpace-cataloging-group",
-                                        numberName: "identificationNumber"
-                                    }
-                                }
-                            },
-                            procedures: {
-                                "name": "procedures",
-                                list: {
-                                    intake: {
-                                        groupName: "intake",
-                                        groupClass: "csc-myCollectionSpace-intake-group",
-                                        numberName: "entryNumber"
-                                    }, 
-                                    acquisition: {
-                                        groupName: "acquisition",
-                                        groupClass: "csc-myCollectionSpace-acquisition-group",
-                                        numberName: "entryNumber"
-                                    },
-                                    loanin: {
-                                        groupName: "loanin",
-                                        groupClass: "csc-myCollectionSpace-loanin-group",
-                                        numberName: "loaninNumber"
-                                    },
-                                    loanout: {
-                                        groupName: "loanout",
-                                        groupClass: "csc-myCollectionSpace-loanout-group",
-                                        numberName: "loanoutNumber"
-                                    },
-                                    movement: {
-                                        groupName: "movement",
-                                        groupClass: "csc-myCollectionSpace-movement-group",
-                                        numberName: "currentLocation"
-                                    },
-                                    objectexit: {
-                                        groupName: "objectexit",
-                                        groupClass: "csc-myCollectionSpace-objectexit-group",
-                                        numberName: "exitNumber"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    callback: "cspace.myCollectionSpace.censorModel"
+            categories: [{
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.modelBuilder",
+                    args: {
+                        callback: "cspace.myCollectionSpace.buildModel",
+                        related: "cataloging",
+                        resolver: "{permissionsResolver}",
+                        recordTypeManager: "{recordTypeManager}",
+                        permission: "list"
+                    }
                 }
-            }
+            }, {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.modelBuilder",
+                    args: {
+                        callback: "cspace.myCollectionSpace.buildModel",
+                        related: "procedures",
+                        resolver: "{permissionsResolver}",
+                        recordTypeManager: "{recordTypeManager}",
+                        permission: "list"
+                    }
+                }
+            }]
         },
         components: {
             cataloging: {

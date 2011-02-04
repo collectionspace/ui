@@ -834,7 +834,13 @@ fluid.registerNamespace("cspace.util");
     
     cspace.util.modelBuilder = function (options) {
         var records = cspace.permissions.getPermissibleRelatedRecords(options.related, options.resolver, options.recordTypeManager, options.permission);
-        return fluid.invokeGlobalFunction(options.callback, [options.model, records]);
+        return fluid.invokeGlobalFunction(options.callback, [options, records]);
+    };
+    
+    cspace.util.modelBuilder.fixupModel = function (model) {
+        fluid.remove_if(model.categories, function (category) {
+            return category === undefined;
+        });
     };
     
     cspace.util.globalNavigator = function (options) {
@@ -916,6 +922,7 @@ fluid.registerNamespace("cspace.util");
         that.procedures = that.getRecordTypes("recordtypes.procedures");
         that.vocabularies = that.getRecordTypes("recordtypes.vocabularies");
         that.cataloging = that.getRecordTypes("recordtypes.cataloging");
+        that.nonVocabularies = that.cataloging.concat(that.procedures);
     };
     
     fluid.defaults("cspace.recordTypes", {

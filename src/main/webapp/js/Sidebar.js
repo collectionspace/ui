@@ -41,6 +41,7 @@ cspace = cspace || {};
      * @return modified that.options.component based on permissions
      */
     var restrictRelatedRecordLists = function (that) {
+        cspace.util.modelBuilder.fixupModel(that.model);
         //TODO: alternatively have the relatedRecordListcomponents
         // call this function before rendering, so we can avoid
         // looking through each component:
@@ -53,20 +54,16 @@ cspace = cspace || {};
             }
         });
     };
-
-    /**
-     * Censors the model to ensure that the markup is removed for any
-     * related record lists that does any permissible content to be shown
-     * (ie. user does not have permissions any content of the relatedRecordList)
-     */
-    cspace.sidebar.censorModel = function (model, records) {
-        fluid.remove_if(model.categories, function (category, key) {
-            fluid.remove_if(category.list, function (recordType, key) {
-                return $.inArray(key, records) < 0;
-            });
-            return $.isEmptyObject(category.list);
-        });
-        return model;
+    
+    cspace.sidebar.buildModel = function (options, records) {
+        if (!records || records.length < 1) {
+            return;
+        }
+        return {
+            "name": options.related,
+            categoryClass: "csc-related-" + options.related,
+            list: records
+        };
     };
 
     /**
@@ -176,40 +173,31 @@ cspace = cspace || {};
             }
         },
         model: {
-            expander: {
-                type: "fluid.deferredInvokeCall",
-                func: "cspace.util.modelBuilder",
-                args: {
-                    related: "all",
-                    resolver: "{permissionsResolver}",
-                    recordTypeManager: "{recordTypeManager}",
-                    permission: "list",
-                    model: {
-                        categories: {
-                            cataloging: {
-                                "name": "cataloging",
-                                categoryClass: "csc-related-cataloging",
-                                list: {
-                                    cataloging: "cataloging"
-                                }
-                            },
-                            procedures: {
-                                "name": "procedures",
-                               categoryClass: "csc-related-procedures",
-                               list: {
-                                    intake: "intake",
-                                    acquisition: "acquisition",
-                                    loanin: "loanin",
-                                    loanout: "loanout",
-                                    movement: "movement",
-                                    objectexit: "objectexit"
-                                }
-                            }
-                        }
-                    },
-                    callback: "cspace.sidebar.censorModel"
+            categories: [{
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.modelBuilder",
+                    args: {
+                        callback: "cspace.sidebar.buildModel",
+                        related: "cataloging",
+                        resolver: "{permissionsResolver}",
+                        recordTypeManager: "{recordTypeManager}",
+                        permission: "list"
+                    }
                 }
-            }
+            }, {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.modelBuilder",
+                    args: {
+                        callback: "cspace.sidebar.buildModel",
+                        related: "procedures",
+                        resolver: "{permissionsResolver}",
+                        recordTypeManager: "{recordTypeManager}",
+                        permission: "list"
+                    }
+                }
+            }]
         },
         produceTree: cspace.sidebar.produceTree,
         mergePolicy: {

@@ -16,7 +16,6 @@ cspace = cspace || {};
     fluid.log("Tabs.js loaded");
 
     var setupTabList = function (that) {
-        cspace.tabsList.fixupModel(that.model, that.options);
         that.renderer.refreshView();
         cspace.tabsList.stylefy(that);
     };
@@ -28,22 +27,17 @@ cspace = cspace || {};
         return that;
     };
     
-    cspace.tabsList.fixupModel = function (model, options) {
-        var urlExpander = fluid.invoke("cspace.urlExpander");
-        fluid.each(model.tabs, function (tab, tabName) {
-            tab["name"] = tabName;
-            if (tab.href) {
-                tab.href = urlExpander(tab.href);
-            }
-        });
-    };
-    
     cspace.tabsList.stylefy = function (that) {
         var styles = that.options.styles;
         var tabLinks = that.locate("tabLink");
         that.locate("tabList").addClass(styles.tabList);
         tabLinks.filter(":not([href])").addClass(styles.inactive);
-        var primaryHrefFilter = "[href='" + that.options.model.tabs.primary.href + "']";
+        var primary = fluid.find(that.model.tabs, function (tab) {
+            if (tab["name"] === "primary") {
+                return tab;
+            }
+        });
+        var primaryHrefFilter = "[href='" + primary.href + "']";
         tabLinks.filter(primaryHrefFilter).addClass(styles.primary).addClass(styles.current);
     };
     
@@ -66,9 +60,19 @@ cspace = cspace || {};
         };
     };
     
-    cspace.tabsList.censorModel = function (model, records) {
-        fluid.remove_if(model.tabs, function (tab, key) {
-            return key !== "primary" && $.inArray(key, records) < 0;
+    cspace.tabsList.buildModel = function (options, records) {
+        var urlExpander = fluid.invoke("cspace.urlExpander");
+        var model = {
+            tabs: [{
+                "name": "primary",
+                href: "#primaryTab"
+            }]
+        };
+        fluid.each(records, function (record) {
+            model.tabs.push({
+                "name": record,
+                href: urlExpander(options.href)
+            });
         });
         return model;
     };
@@ -78,54 +82,20 @@ cspace = cspace || {};
             model: "replace"
         },
         strings: {
-            primary: "Current record",
-            acquisition: "Acquisition",
-            cataloging: "Cataloging",
-            intake: "Intake",
-            loanin: "Loan In",
-            loanout: "Loan Out",
-            movement: "Location & Movement",
-            media: "Media",
-            objectexit: "Object Exit"
+            primary: "Current record"
         },
+        parentBundle: "{globalBundle}",
         model: {
             expander: {
                 type: "fluid.deferredInvokeCall",
                 func: "cspace.util.modelBuilder",
                 args: {
-                    related: "all",
+                    related: "nonVocabularies",
                     resolver: "{permissionsResolver}",
                     recordTypeManager: "{recordTypeManager}",
                     permission: "list",
-                    model: {
-                        tabs: {
-                            primary: {
-                                href: "#primaryTab"
-                            },
-                            acquisition: {
-                                href: "%webapp/html/pages/RelatedRecordsTabTemplate.html"
-                            },
-                            cataloging: {
-                                href: "%webapp/html/pages/RelatedRecordsTabTemplate.html"
-                            },
-                            intake: {
-                                href: "%webapp/html/pages/RelatedRecordsTabTemplate.html"
-                            },
-                            loanin: {
-                                href: "%webapp/html/pages/RelatedRecordsTabTemplate.html"
-                            },
-                            loanout: {
-                                href: "%webapp/html/pages/RelatedRecordsTabTemplate.html"
-                            },
-                            movement: {
-                                href: "%webapp/html/pages/RelatedRecordsTabTemplate.html"
-                            },
-                            objectexit: {
-                                href: "%webapp/html/pages/RelatedRecordsTabTemplate.html"
-                            }
-                        }
-                    },
-                    callback: "cspace.tabsList.censorModel"
+                    href: "%webapp/html/pages/RelatedRecordsTabTemplate.html",
+                    callback: "cspace.tabsList.buildModel"
                 }
             }
         },
@@ -235,6 +205,7 @@ cspace = cspace || {};
         model: {
             tabs: {
                 primary: {
+                    "name": "primary",
                     href: "#primaryTab"
                 }
             }

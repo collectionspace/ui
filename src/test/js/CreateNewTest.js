@@ -59,15 +59,15 @@ var createNewTester = function ($) {
         jqUnit.assertEquals("All headers shown:", 3, createNewPage.locate("categoryHeader").length);
         jqUnit.assertEquals("Number of records shown ", 5, createNewPage.locate("radio").length);
         //acquisition:
-        var str = createNewPage.options.strings.acquisition;
+        var str = createNewPage.options.parentBundle.messageBase.acquisition;
         jqUnit.assertTrue("Aquisition ("+str+") not shown", $('label:contains("'+str+'")').length < 1);
-        str = createNewPage.options.strings.movement;
+        str = createNewPage.options.parentBundle.messageBase.movement;
         jqUnit.assertTrue("Movement ("+str+") not shown", $('label:contains("'+str+'")').length < 1);
-        str = createNewPage.options.strings.loanin;
+        str = createNewPage.options.parentBundle.messageBase.loanin;
         jqUnit.assertTrue("Loan In ("+str+") not shown", $('label:contains("'+str+'")').length < 1);
-        str = createNewPage.options.strings.intake;
+        str = createNewPage.options.parentBundle.messageBase.intake;
         jqUnit.assertTrue("Intake ("+str+") shown", $('label:contains("'+str+'")').length == 1);
-        str = createNewPage.options.strings.loanout;
+        str = createNewPage.options.parentBundle.messageBase.loanout;
         jqUnit.assertTrue("Loan out ("+str+") shown", $('label:contains("'+str+'")').length == 1);
         //styling:
         assertStyling(createNewPage, createNewPage.options.styles.totalOf3);

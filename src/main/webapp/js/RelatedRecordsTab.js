@@ -170,13 +170,13 @@ cspace = cspace || {};
         events: {
             afterRender: null
         },
+        parentBundle: "{globalBundle}",
         mergePolicy: {
             model: "preserve",
             applier: "preserve"
         },
         strings: {
-            idNumber: "ID Number",
-            summary: "Summary"
+            idNumber: "ID Number"
         }
     });
     
