@@ -349,6 +349,7 @@ cspace = cspace || {};
                             args: ["{searchView}.options.columnList", "{searchView}.model.searchModel.recordType", "{searchView}.options.resultsSelectable"]
                         }
                     },
+                    annotateColumnRange: "{searchView}.options.columnList.0",
                     bodyRenderer: {
                         type: "fluid.pager.selfRender",
                         options: {
