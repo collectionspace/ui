@@ -32,7 +32,9 @@ cspace = cspace || {};
         date = Date.parse(date);
         if (!date) {
             // If there is no date, we will display an invalid date message and emptying the date field.
-            messageBar.show(message, null, true);
+            if (messageBar) {
+                messageBar.show(message, null, true);
+            }
             return "";
         }
         // Format validated date into a string.
@@ -68,7 +70,9 @@ cspace = cspace || {};
         
         calendarDate.change(function () {
             // If there is an error message clear it.
-            that.options.messageBar.hide();
+            if (that.options.messageBar) {
+                that.options.messageBar.hide();
+            }
             // Get a string value for a field.
             var dateFieldValue = calendarDate.val();
             // Get a validated string value for the same field.
