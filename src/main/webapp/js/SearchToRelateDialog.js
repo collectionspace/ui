@@ -52,11 +52,8 @@ cspace = cspace || {};
             that.events.onCreateNewRecord.fire();
             that.close();
         });
-        that.search.events.onSearch.addListener(function () {
-            that.locate("addButton", that.dlg).hide();
-        });
         that.search.events.afterSearch.addListener(function () {
-            that.locate("addButton", that.dlg).show();
+            that.locate("addButton").show();
         });
     };
     
@@ -75,17 +72,17 @@ cspace = cspace || {};
             title: title                
         });
         
-        //that.dlg.parent().css("overflow", "visible");
-        
         that.open = function () {
+            that.search.hideResults();
+            that.locate("addButton").hide();
             that.container.dialog("open");        
         };
         that.close = function () {
             that.container.dialog("close");
         };
+        that.renderer.refreshView();
         fluid.initDependents(that);
 
-        that.search.hideResults();
         that.locate("addButton", that.container).hide();
 
         that.events.afterRender.fire(that);
@@ -95,14 +92,7 @@ cspace = cspace || {};
         return that;
     };
 
-    cspace.searchToRelateDialog.produceTree = function (that) {
-        return that.recordTypeSelector.produceComponent();
-    };
-    
-    // Sequence required: i) recordTypeSelector, ii) render, iii) searchView
-    cspace.searchToRelateDialog.initRenderer = function (that) {
-        fluid.log("Rendering dialog");
-        that.refreshView();
+    cspace.searchToRelateDialog.produceTree = function () {
         return {};
     };
     
@@ -111,10 +101,6 @@ cspace = cspace || {};
             return that.container;
         };
     };
-    
-    // TODO: hack for gingerness
-    fluid.demands("cspace.searchToRelateDialog.initRenderer", ["cspace.searchToRelateDialog"], 
-         { args:  ["{searchToRelateDialog}", "{searchToRelateDialog}.recordTypeSelector"]});
     
     fluid.demands("cspace.search.searchView", "cspace.searchToRelateDialog", 
         ["{searchToRelateDialog}.container", fluid.COMPONENT_OPTIONS]);
@@ -134,7 +120,6 @@ cspace = cspace || {};
                 }
             },
             addButton: ".csc-searchToRelate-addButton",
-            recordType: ".csc-search-recordType",
             closeButton: ".csc-searchToRelate-closeBtn",
             createNewButton: ".csc-searchToRelate-createButton"
         },
@@ -160,22 +145,19 @@ cspace = cspace || {};
                 options: {
                     resultsSelectable: true,
                     recordType: "{searchToRelateDialog}.options.related",
-                    dependentHack: "{searchToRelateDialog}.initRenderer" // TODO: hack for gingerness
+                    components: {
+                        mainSearch: {
+                            options: {
+                                strings: {
+                                    recordTypeSelectLabel: "Search existing:" 
+                                },
+                                related: "{searchToRelateDialog}.options.related",
+                                permission: "update"
+                            }
+                        }
+                    }
                 }
-            },
-            initRenderer: {
-                type: "cspace.searchToRelateDialog.initRenderer"
-            },
-            recordTypeSelector: {
-                type: "cspace.util.recordTypeSelector",
-                options: {
-                    related: "{searchToRelateDialog}.options.related",
-                    dom: "{searchToRelateDialog}.dom",
-                    componentID: "recordType",
-                    selector: "recordType",
-                    permission: "update"
-                }
-            }         
+            }
         },
         resources: {
             template: cspace.resourceSpecExpander({

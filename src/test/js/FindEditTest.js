@@ -15,6 +15,32 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     // jqMock requires jqUnit.ok to exist
     jqUnit.ok = ok;
     
+    var opts = {
+        "components": {
+            "mainSearch": {
+                "type": "cspace.searchBox",
+                "options": {
+                    "strings": {
+                        "recordTypeSelectLabel": "Record Type" 
+                    },
+                    "selfRender": true,
+                    "related": "all",
+                    "invokers": {
+                        "navigateToSearch": {
+                            "funcName": "cspace.search.handleSubmitSearch",
+                            "args": {
+                                "expander": {
+                                    "type": "fluid.noexpand",
+                                    "tree": ["{searchBox}", "{searchView}"]
+                                }
+                            }
+                        }
+                    } 
+                }
+            } 
+        }
+    }
+
     var query = "barbar";
     var findEdit;
     
@@ -23,7 +49,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         bareFindEditTests.fetchTemplate("../../main/webapp/html/findedit.html", ".main-search-page");
     });
     
-    var findEditTests = cspace.tests.testEnvironment({testCase: bareFindEditTests});
+    var findEditTests = cspace.tests.testEnvironment({
+        testCase: bareFindEditTests
+    });
     
     var setupFindEdit = function (options) {
         return cspace.search.searchView(".main-search-page", options);
@@ -69,7 +97,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     var findEditInitTests = function (options) {
-        var opts = {
+        var localOpts = {
             searchUrlBuilder: function (searchModel) {
                 return "../data/" + searchModel.recordType + "/search.json";
             },
@@ -79,29 +107,29 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         };
-        fluid.merge(null, opts, options);
-        findEdit = setupFindEdit(opts);
+        fluid.merge(null, localOpts, options, opts);
+        findEdit = setupFindEdit(localOpts);
         initialfindEditTets(findEdit);
         stop();
     };
     
     findEditTests.test("Basic findEdit URL with query", function () {
-        findEditUrlTest(null, "../../chain/intake/search?query=foofer&pageNum=0&pageSize=10", {
+        findEditUrlTest(opts, "../../chain/intake/search?query=foofer&pageNum=0&pageSize=10", {
             keywords: "foofer"
         });
     });
     
     findEditTests.test("Use the local search url option to override the default search url", function () {
-        findEditUrlTest({
-            searchUrlBuilder: cspace.search.localSearchUrlBuilder
-        }, "../data/intake/search.json");
+        var options = fluid.copy(opts) || {};
+        options.searchUrlBuilder = cspace.search.localSearchUrlBuilder;
+        findEditUrlTest(options, "../data/intake/search.json");
     });
     
     findEditTests.test("FindEdit URL through form inputs", function () {
-        findEditUrlTest(null, "../../chain/acquisition/search?query=doodle&pageNum=0&pageSize=10", null, function (findEdit) {
-            jQuery(findEdit.options.selectors.keywords).val("doodle");
-            jQuery(findEdit.options.selectors.recordType).val("acquisition");
-            jQuery(findEdit.options.selectors.searchButton).click();
+        findEditUrlTest(opts, "../../chain/loanin/search?query=doodle&pageNum=0&pageSize=10", null, function (findEdit) {
+            jQuery(findEdit.mainSearch.options.selectors.searchQuery).val("doodle");
+            jQuery(findEdit.mainSearch.options.selectors.recordTypeSelect).val("loanin");
+            jQuery(findEdit.mainSearch.options.selectors.searchButton).click();
         });
     });
 
@@ -145,4 +173,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
     });
+
+    fluid.demands("mainSearch", "cspace.search.searchView",
+    ["{searchView}.dom.mainSearch", fluid.COMPONENT_OPTIONS]);
 })();

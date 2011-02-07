@@ -110,9 +110,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             jqUnit.assertEquals("Dialog should have correct primary record type", "cataloging", 
                  relationManager.searchToRelateDialog.options.primary);
             jqUnit.assertTrue("Record-type drop-down is not visible (search should be limited to 'loanin' records)", 
-                 relationManager.searchToRelateDialog.locate("recordType").is(":disabled"));
+                 relationManager.searchToRelateDialog.search.mainSearch.locate("recordTypeSelect").is(":disabled"));
             jqUnit.assertEquals("Dialog is set up to search for correct related record type", "loanin", 
-                 relationManager.searchToRelateDialog.locate("recordType").val());
+                 relationManager.searchToRelateDialog.search.mainSearch.locate("recordTypeSelect").val());
             relationManager.searchToRelateDialog.close();
             start();
         }, "cataloging", "loanin", {}, {loanin: ["read", "update"], cataloging: ["update"]});
@@ -142,10 +142,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             relationManager.locate("addButton").click();
             jqUnit.notVisible("Error message is invisible", relationManager.options.messageBar.container);
             jqUnit.isVisible("After clicking Add, Add Relation Dialog is visible", relationManager.searchToRelateDialog.container);
-            jqUnit.isVisible("Record-type drop-down is visible", relationManager.searchToRelateDialog.options.selectors.recordType);
+            jqUnit.isVisible("Record-type drop-down is visible", relationManager.searchToRelateDialog.search.mainSearch.locate("recordTypeSelect"));
             
-            searchDialog.locate("recordType").val(testRelatedRecordType);
-            searchDialog.search.locate("searchButton").click();
+            relationManager.searchToRelateDialog.search.mainSearch.locate("recordTypeSelect").val(testRelatedRecordType);
+            searchDialog.search.mainSearch.locate("searchButton").click();
 
         };
         relationManager = createRelationManager({}, {

@@ -60,8 +60,8 @@ var searchToRelateDialogTester = function () {
             afterSetup: function (dialog) {
                 dialog.open();
                 jqUnit.assertTrue("Searching for a particular record type, the drop-down should not be enabled", 
-                    dialog.locate("recordType").is(":disabled"));
-                dialog.search.locate("searchButton").click();
+                    dialog.search.mainSearch.locate("recordTypeSelect").is(":disabled"));
+                dialog.search.mainSearch.locate("searchButton").click();
             }
         }, {
             searchUrlBuilder: function (searchModel) {
@@ -85,7 +85,7 @@ var searchToRelateDialogTester = function () {
         createSearchToRelate("movement", "procedures", {
             afterSetup: function (dialog) {
                 dialog.open();
-                var recordType = dialog.locate("recordType");
+                var recordType = dialog.search.mainSearch.locate("recordTypeSelect");
                 jqUnit.assertTrue("Searching for all procedure types, the drop-down should be enabled", recordType.is(":enabled"));
                 // Check that missing permissions for "intake" record type have removed it from rendering
                 var options = $("option", recordType);
@@ -97,7 +97,7 @@ var searchToRelateDialogTester = function () {
                     jqUnit.assertEquals("Rendering of record type " + key, value, values[key]);
                 });
                 recordType.val(testRecordType);
-                dialog.search.locate("searchButton").click();
+                dialog.search.mainSearch.locate("searchButton").click();
             }
         }, {
             searchUrlBuilder: function (searchModel) {
@@ -133,9 +133,9 @@ var searchToRelateDialogTester = function () {
             afterSetup: function (dialog) {
                 // 1) The dialog should render
                 dialog.open();
-                jqUnit.isVisible("Searching for all procedure types, the drop-down should be visible", searchToRelateDialog.options.selectors.recordType);
+                jqUnit.isVisible("Searching for all procedure types, the drop-down should be visible", dialog.search.mainSearch.locate("recordTypeSelect"));
                 dialog.locate("recordType").val(testRecordType);
-                dialog.search.locate("searchButton").click();
+                dialog.search.mainSearch.locate("searchButton").click();
             }
         }, {
             searchUrlBuilder: function (searchModel) {
@@ -172,7 +172,7 @@ var searchToRelateDialogTester = function () {
             afterSetup: function (dialog) {
                 dialog.open();
                 dialog.locate("recordType").val(testRecordType);
-                dialog.search.locate("searchButton").click();
+                dialog.search.mainSearch.locate("searchButton").click();
             }
         }, {
             // no search url builder - rely on default - which will return an error
@@ -204,8 +204,8 @@ var searchToRelateDialogTester = function () {
         var testRecordType = "loanout";
         createSearchToRelate(primaryRecordType, "procedures", {
             afterSetup: function (dialog) {
-                dialog.locate("recordType").val(testRecordType);
-                dialog.search.locate("searchButton").click();
+                dialog.search.mainSearch.locate("recordTypeSelect").val(testRecordType);
+                dialog.search.mainSearch.locate("searchButton").click();
             },
             addRelations: function (data) {
                 jqUnit.assertEquals("On creation of one new relation, number of relations submitted should be correct", 1, data.items.length);
@@ -233,7 +233,7 @@ var searchToRelateDialogTester = function () {
         createSearchToRelate(primaryRecordType, "procedures", {
             afterSetup: function (dialog) {
                 dialog.locate("recordType").val(testRecordType);
-                dialog.search.locate("searchButton").click();
+                dialog.search.mainSearch.locate("searchButton").click();
             },
             addRelations: function (data) {
                 jqUnit.assertEquals("On creation of one new relation, number of relations submitted should be correct", 2, data.items.length);

@@ -20,7 +20,7 @@ cspace = cspace || {};
 
     var updateRelations = function (applier, model) {
         return function (relations) {
-            if (!relations.items || !relations.items[0].target) {
+            if (!relations.items || !relations.items[0] || !relations.items[0].target) {
                 return;
             }
             

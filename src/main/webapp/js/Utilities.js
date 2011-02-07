@@ -1010,4 +1010,8 @@ fluid.registerNamespace("cspace.util");
         "default": "expanded"
     });
     
+    cspace.util.keyCode = function (evt) {
+        return evt.keyCode ? evt.keyCode : (evt.which ? evt.which : 0);          
+    };
+    
 })(jQuery, fluid);

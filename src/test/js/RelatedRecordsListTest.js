@@ -79,7 +79,7 @@ var rrlTester = function ($) {
             relatedRecordsList.relationManager.locate("addButton").click();
             jqUnit.isVisible("Search to relate Dialog is visible after click", $(".ui-dialog"));
             jqUnit.assertEquals("Record-type drop-down is " +sel + " - " + condition, 
-                condition, relatedRecordsList.relationManager.searchToRelateDialog.locate("recordType").is(sel));
+                condition, relatedRecordsList.relationManager.searchToRelateDialog.search.mainSearch.locate("recordTypeSelect").is(sel));
             relatedRecordsList.relationManager.searchToRelateDialog.close();
             jqUnit.notVisible("Search to relate Dialog is invisible after close", $(".ui-dialog"));
             start();

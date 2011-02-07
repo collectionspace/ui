@@ -10,7 +10,7 @@
         <link rel="stylesheet" type="text/css" href="../css/Pager.css" />
         <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
         <!--[if lt IE 9]> <link rel="stylesheet" type="text/css" href="../css/cspace_ie.css"> <![endif]-->
-        
+
         <script type="text/javascript" src="../lib/infusion/CSpaceInfusion.js"></script>
         <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.tabs.js"></script>
 
@@ -27,7 +27,7 @@
         <script type="text/javascript" src="../js/PageBuilder.js"></script>
     </head>
     <body id="search">
-        
+
         <div class="fl-container-1024 fl-centered">
             <div class="csc-header-container" id="name-header">
                 <!-- this div will be filled in with the contents of the Template -->
@@ -39,32 +39,14 @@
                         <div class="clear"></div>
                     </div>
                 </div>
-                
+
                 <div id="all-content" class="fl-fix">
                     <div class="fl-fix fl-container-flex fl-col-mixed2">
                         <div class="fl-container-left fl-force-left">                            
                             <div class="fl-container-flex fl-fix information-group cataloging-records-group">
                                 <div class="info-column">
                                     <div class="main-search-page">
-                                        <div id="search-box">
-                                            <!--<input name="keywords" type="text" class="csc-search-keywords" /><a href="#" class="csc-search-submit globalSearchButton">Search</a>-->
-                                            <input name="keywords" type="text" class="csc-search-keywords" /><input type="button" class="csc-search-submit searchButton" value="Search" />
-                                            <div class="select-recordtype csc-select-box-container">
-                                                <span class="recordtype-label">Record Type</span>
-                                                <select name="recordtype" class="csc-search-recordType">
-                                                    <option value="cataloging">Cataloging</option>
-                                                    <option value="intake">Intake</option>
-                                                    <option value="acquisition">Acquisition</option>
-                                                    <option value="loanin">Loan In</option>
-                                                    <option value="loanout">Loan Out</option>
-                                                    <option value="movement">Location and Movement</option>
-                                                    <option value="objectexit">Object Exit</option>
-                                                    <option value="authorities-person">Person</option>
-                                                    <option value="authorities-organization">Organization</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        
+                                        <div class="csc-search-box"></div>
                                         <div class="fl-container-flex header static found-records-box">
                                             <span class="found-records-content csc-search-resultsCountContainer">
                                                 Found <span class="csc-search-results-count cs-search-highlight">insert results count here</span> records for <span class="csc-search-queryString cs-search-highlight">insert keywords here</span>
@@ -74,7 +56,7 @@
                                             </span>
                                         </div>
                                         <div class="csc-search-results">
-                                            
+
                                             <!-- search results -->
                                             <div class="fl-pager list-table" id="toggle-records">
                                                 <table summary="search results" id="search-results" class="fl-pager-data">
@@ -128,15 +110,15 @@
                                 </div>
                             </div>    
                         </div>
-                        
+
                         <div class="fl-container-pivot fl-force-right csc-right-sidebar" id="csc-right-sidebar">
-                                <!-- this div will be filled in with the contents of the Template -->
+                            <!-- this div will be filled in with the contents of the Template -->
                         </div> <!-- END sub-main content -->
                         <div class="clear"></div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="csc-footer-container" id="footer">
                 <!-- this div will be filled in with the contents of the Template -->
             </div>

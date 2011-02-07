@@ -14,10 +14,6 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     fluid.log("DatePicker.js loaded");
-
-    var keyCode = function (evt) {
-        return evt.keyCode ? evt.keyCode : (evt.which ? evt.which : 0);          
-    };
     
     var closeCalendar = function (that) {
         var datePicker = that.locate("datePicker");
@@ -102,7 +98,7 @@ cspace = cspace || {};
         });
         
         datePicker.keydown(function (event) {
-            var key = keyCode(event);
+            var key = cspace.util.keyCode(event);
             if (key === $.ui.keyCode.RIGHT || key === $.ui.keyCode.TOP ||
                 key === $.ui.keyCode.LEFT || key === $.ui.keyCode.DOWN) {
                 if (!table.hasClass(that.options.styles.focus)) {
@@ -112,7 +108,7 @@ cspace = cspace || {};
         });
         
 //        datePicker.keyup(function (event) {
-//            var key = keyCode(event);
+//            var key = cspace.util.keyCode(event);
 //            if (key === $.ui.keyCode.RIGHT || key === $.ui.keyCode.TOP ||
 //                key === $.ui.keyCode.LEFT || key === $.ui.keyCode.DOWN) {
 //                if (!table.hasClass(that.options.styles.focus)) {
@@ -122,7 +118,7 @@ cspace = cspace || {};
 //        });
         
         datePicker.keypress(function (event) {
-            switch (keyCode(event)) {
+            switch (cspace.util.keyCode(event)) {
             case $.ui.keyCode.RIGHT:
             case $.ui.keyCode.TOP:
             case $.ui.keyCode.LEFT:

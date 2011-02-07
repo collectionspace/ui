@@ -104,20 +104,9 @@ cspace = cspace || {};
             recordType.substring(12) : recordType;
     };
 
-    var handleSubmitSearch = function (that) {
-        return function () {
-            that.options.messageBar.hide();
-            fluid.clear(that.model.results);
-            updateModel(that.model.searchModel, { 
-                keywords: that.locate("keywords").val(),
-                recordTypeLong: that.locate("recordType").val()
-            });
-            that.search();
-        };
-    };
-
     cspace.search.makeModelFilter = function (that) {
         return function (directModel, newModel, permutation) {
+            var i;
             var searchModel = that.model.searchModel;
             fluid.log("modelFilter: initialState " + searchModel.initialState + 
                 ", renderRequest " + searchModel.renderRequest);
@@ -127,7 +116,7 @@ cspace = cspace || {};
             }
             var dataRequired = false;
             var limit = fluid.pager.computePageLimit(newModel);
-            for (var i = newModel.pageSize * newModel.pageIndex; i < limit; ++ i) {
+            for (i = newModel.pageSize * newModel.pageIndex; i < limit; ++ i) {
                 if (!directModel[i]) {
                     dataRequired = true;
                     break;
@@ -143,10 +132,6 @@ cspace = cspace || {};
     };
 
     var bindEventHandlers = function (that) {
-        var searchSubmitHandler = handleSubmitSearch(that);
-        that.locate("searchButton").click(searchSubmitHandler);
-        that.locate("keywords").fluid("activatable", searchSubmitHandler);
-
         that.events.modelChanged.addListener(function () {
             displaySearchResults(that);
         });
@@ -182,7 +167,7 @@ cspace = cspace || {};
             });
         }
     };
-    
+
     var applyResults = function (that, data) {
         var searchModel = that.model.searchModel;
         var results = that.model.results;
@@ -207,6 +192,8 @@ cspace = cspace || {};
     
     var makeSearcher = function (that) {
         return function (newPagerModel) {
+            that.mainSearch.locate("searchQuery").val(that.model.searchModel.keywords);
+            that.mainSearch.locate("recordTypeSelect").val(that.model.searchModel.recordTypeLong);
             displayLookingMessage(that.dom, that.model.searchModel.keywords);
             var searchModel = that.model.searchModel;
             var pagerModel = newPagerModel || that.resultsPager.model;
@@ -254,22 +241,29 @@ cspace = cspace || {};
         };
         
         that.updateModel({
-            keywords: cspace.util.getUrlParameter("keywords"),
+            keywords: decodeURI(cspace.util.getUrlParameter("keywords")),
             recordTypeLong: cspace.util.getUrlParameter("recordtype")
         });
 
         that.hideResults();
-        
+
         fluid.initDependents(that);
         bindEventHandlers(that);
 
-        if (that.model.searchModel.keywords) {
-            that.locate("keywords").val(that.model.searchModel.keywords);
-            that.locate("recordType").val(that.model.searchModel.recordTypeLong);
+        if (that.model.searchModel.recordTypeLong) {
             that.search();
         }
-
         return that;
+    };
+    
+    cspace.search.handleSubmitSearch = function (searchBox, that) {
+        that.options.messageBar.hide();
+        fluid.clear(that.model.results);
+        that.updateModel({
+            keywords: searchBox.locate("searchQuery").val(),
+            recordTypeLong: searchBox.locate("recordTypeSelect").val()
+        });
+        that.search();
     };
     
     cspace.search.defaultSearchUrlBuilder = function (options) {
@@ -291,14 +285,14 @@ cspace = cspace || {};
     };
 
     fluid.demands("fluid.pager", "cspace.search.searchView", 
-      ["{searchView}.dom.resultsContainer", fluid.COMPONENT_OPTIONS]);
+        ["{searchView}.dom.resultsContainer", fluid.COMPONENT_OPTIONS]);
 
+    fluid.demands("mainSearch", "cspace.search.searchView",
+        ["{searchView}.dom.mainSearch", fluid.COMPONENT_OPTIONS]);
 
     fluid.defaults("cspace.search.searchView", {
         selectors: {
-            keywords: ".csc-search-keywords",
-            recordType: ".csc-search-recordType",
-            searchButton: ".csc-search-submit",
+            mainSearch: ".csc-search-box",
             resultsContainer: ".csc-search-results",
             resultsCountContainer: ".csc-search-resultsCountContainer",
             resultsCount: ".csc-search-results-count",
@@ -329,7 +323,27 @@ cspace = cspace || {};
         searchUrlBuilder: cspace.search.defaultSearchUrlBuilder,
         
         components: {
-
+            mainSearch: {
+                type: "cspace.searchBox",
+                options: {
+                    strings: {
+                        recordTypeSelectLabel: "Record Type" 
+                    },
+                    selfRender: true,
+                    related: "all",
+                    invokers: {
+                        navigateToSearch: {
+                            funcName: "cspace.search.handleSubmitSearch",
+                            args: {
+                                expander: {
+                                    type: "fluid.noexpand",
+                                    tree: ["{searchBox}", "{searchView}"]
+                                }
+                            }
+                        }
+                    } 
+                }
+            },
             resultsPager: {
                 type: "fluid.pager",
                 options: {

@@ -752,6 +752,8 @@ ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6
 .cs-searchBox .cs-searchBox-button {float:right;}
 .cs-pivot-searchBox .cs-searchBox .cs-searchBox-query {width:99% !important; margin:8px 8px 8px 0; display:block;}
 
+.cs-add-related-records-dialog .cs-searchBox {background-color:#EBEBEB;}
+
 /***********    CSS For New Markup for Create New    ***********/
 .cs-createNew-content {
     width: 98%;

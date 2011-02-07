@@ -20,6 +20,11 @@ cspace = cspace || {};
     var bindEvents = function (that) {
         // Bind a click event on search button to trigger searchBox's navigateToSearch
         that.locate("searchButton").click(that.navigateToSearch);
+        that.locate("searchQuery").keypress(function (e) {
+            if (cspace.util.keyCode(e) === $.ui.keyCode.ENTER) {
+                that.navigateToSearch();
+            }
+        });
     };
     
     cspace.searchBox = function (container, options) {
@@ -31,6 +36,7 @@ cspace = cspace || {};
         };
         if (that.options.selfRender) {
             that.refreshView();
+            that.events.afterRender.fire();
         }
         return that;
     };
@@ -101,7 +107,8 @@ cspace = cspace || {};
                     related: "{searchBox}.options.related",
                     dom: "{searchBox}.dom",
                     componentID: "recordTypeSelect",
-                    selector: "recordTypeSelect"
+                    selector: "recordTypeSelect",
+                    permission: "{searchBox}.options.permission"
                 }
             }          
         },
@@ -118,6 +125,9 @@ cspace = cspace || {};
                 fetchClass: "fastTemplate",
                 url: "%webapp/html/components/SearchBoxTemplate.html"
             })
+        },
+        events: {
+            afterRender: null
         }
     });
     
