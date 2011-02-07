@@ -123,7 +123,7 @@ cspace = cspace || {};
         var that = {};
         fluid.fetchResources({
             config: {
-                href: options.configURL || cspace.util.getDefaultConfigURL(),
+                href: options.configURL || fluid.invoke("cspace.util.getDefaultConfigURL"),
                 options: {
                     dataType: "json"
                 }

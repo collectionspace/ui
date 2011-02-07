@@ -45,11 +45,17 @@ cspace = cspace || {};
     // function will simply redirect user to a page where he is presented with an empty
     // record
     cspace.createNew.createRecord = function (that) {
-        //find entry in model based on index:
-        var selectedRecord = that.locate("radio").filter(":checked").attr("value");
         var url = fluid.stringTemplate(that.options.newRecordUrl, {
-            recordUrl: selectedRecord
+            recordUrl: that.locate("radio").filter(":checked").attr("value")
         });
+        window.location = url;
+    };
+    
+    cspace.createNew.createRecordLocal = function (that) {
+        var url = fluid.stringTemplate(that.options.newRecordUrl, {
+            recordUrl: "record"
+        });
+        url += "?recordtype=" + that.locate("radio").filter(":checked").attr("value");
         window.location = url;
     };
 
@@ -230,7 +236,26 @@ cspace = cspace || {};
         }
     });
     
+    cspace.createNew.createNewLocal = function (container, options) {
+        var that = fluid.initLittleComponent("cspace.createNew.createNewLocal", options);
+        return cspace.createNew(container, that.options);
+    };
+    fluid.defaults("cspace.createNew.createNewLocal", {
+        mergePolicy: {
+            model: "preserve"
+        },
+        invokers: {
+            createRecord: {
+                funcName: "cspace.createNew.createRecordLocal"
+            }
+        }
+    });
+    
     fluid.demands("createNew", "cspace.pageBuilder", ["{pageBuilder}.options.selectors.createNew", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("createNew", ["cspace.pageBuilder", "cspace.localData"], {
+        funcName: "cspace.createNew.createNewLocal",
+        args: ["{pageBuilder}.options.selectors.createNew", fluid.COMPONENT_OPTIONS]
+    });
     
     // This funtction executes on file load and starts the fetch process of component's template.
     fluid.fetchResources.primeCacheFromResources("cspace.createNew");

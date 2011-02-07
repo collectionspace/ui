@@ -628,13 +628,7 @@ input[disabled]:hover, input[disabled]:hover	{background-color:#CCC !important;}
 .required {color:red;}
 
 /* id/class selector combinations to activate proper header tabs*/
-#intake .header-menu-row .findedit a,
-#cataloging .header-menu-row .findedit a,
-#acquisition .header-menu-row .findedit a,
-#loanin .header-menu-row .findedit a,
-#loanout .header-menu-row .findedit a,
-#person .header-menu-row .findedit a,
-#organization .header-menu-row .findedit a,
+.record .header-menu-row .findedit a,
 #search .header-menu-row .findedit a,
 #findedit .header-menu-row .findedit a,
 #createnew .header-menu-row .createnew a,

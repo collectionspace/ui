@@ -267,11 +267,49 @@ fluid.registerNamespace("cspace.util");
             });
         }
     };
-
-    cspace.util.getDefaultConfigURL = function () {
-        var url = window.location.pathname;
-        return "..\/config" + url.substring(url.lastIndexOf("/"), url.indexOf(".html")) + ".json";
+    
+    fluid.demands("cspace.util.getDefaultConfigURL", ["cspace.record", "cspace.localData"], [{
+        invokers: {
+            getRecordType: {
+                funcName: "cspace.util.getDefaultConfigURL.getRecordTypeLocal"
+            }
+        }
+    }]);
+    fluid.demands("cspace.util.getDefaultConfigURL", "cspace.localData", fluid.COMPONENT_OPTIONS);
+    fluid.demands("cspace.util.getDefaultConfigURL", "cspace.record", fluid.COMPONENT_OPTIONS);
+    
+    cspace.util.getDefaultConfigURL = function (options) {
+        var that = fluid.initLittleComponent("cspace.util.getDefaultConfigURL", options);
+        fluid.initDependents(that);
+        var url = fluid.stringTemplate(that.options.url, {
+            recordType: that.getRecordType()
+        });
+        return that.options.urlRenderer(url);
     };
+    
+    cspace.util.getDefaultConfigURL.getRecordTypeLocal = function () {
+        return cspace.util.getUrlParameter("recordtype");
+    };
+    
+    cspace.util.getDefaultConfigURL.getRecordType = function () {
+        var url = window.location.pathname;
+        return url.substring(url.lastIndexOf("/") + 1, url.indexOf(".html"));
+    };
+    
+    fluid.defaults("cspace.util.getDefaultConfigURL", {
+        url: "%webapp/config/%recordType.json",
+        invokers: {
+            getRecordType: {
+                funcName: "cspace.util.getDefaultConfigURL.getRecordType"
+            }
+        },
+        urlRenderer: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.urlExpander"
+            }
+        }
+    });
     
     fluid.demands("cspace.util.getLoginURL", "cspace.localData", {
         args: {
