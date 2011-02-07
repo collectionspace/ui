@@ -17,7 +17,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
     var catalogingTests = new jqUnit.TestCase("Cataloging Tests", function () {
         cspace.util.isTest = true;
-        catalogingTests.fetchTemplate("../../main/webapp/html/cataloging.html", ".fl-container-1024");
+        catalogingTests.fetchTemplate("../../main/webapp/html/record.html", ".fl-container-1024");
     });
     
     var setupCataloging = function (options) {

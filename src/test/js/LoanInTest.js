@@ -15,7 +15,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
     var bareLoanInTests = new jqUnit.TestCase("Loan In Tests", function () {
         cspace.util.isTest = true;
-        bareLoanInTests.fetchTemplate("../../main/webapp/html/loanin.html", ".fl-container-1024");
+        bareLoanInTests.fetchTemplate("../../main/webapp/html/record.html", ".fl-container-1024");
     });
     
     var loanInTests = cspace.tests.testEnvironment({testCase: bareLoanInTests});
