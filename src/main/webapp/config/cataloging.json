@@ -30,6 +30,13 @@
         "tabs": {
             "type": "cspace.tabs"
         },
+        "header": {
+            "type": "cspace.header",
+            "options": {
+                "schema": "{pageBuilder}.schema",
+                "permissions": "{pageBuilder}.permissions"
+            }
+        },
         "titleBar": {
             "type": "cspace.titleBar",
             "options": {

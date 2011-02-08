@@ -15,6 +15,13 @@
             "options": {
                 "pivoting": true
             }
+        },
+        "header": {
+            "type": "cspace.header",
+            "options": {
+                "schema": "{pageBuilder}.schema",
+                "permissions": "{pageBuilder}.permissions"
+            }
         }
     }
 }

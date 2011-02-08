@@ -120,7 +120,8 @@ cspace = cspace || {};
     };
 
     cspace.pageBuilderSetup = function (options) {
-        var that = {};
+        var that = fluid.initLittleComponent("cspace.pageBuilderSetup");
+        fluid.initDependents(that);
         fluid.fetchResources({
             config: {
                 href: options.configURL || fluid.invoke("cspace.util.getDefaultConfigURL"),
@@ -133,13 +134,14 @@ cspace = cspace || {};
                 options: {
                     dataType: "json",
                     success: function (data) {
-                        if (!data.login) {
-                            var currentUrl = document.location.href;
-                            var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
-                            window.location = loginUrl;     
-                        } else {
+                        if (data.login || that.noLogin) {
                             options.permissions = data.permissions;
                             options.currentUserId = data.currentUserId;
+                        }
+                        else {
+                            var currentUrl = document.location.href;
+                            var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
+                            window.location = loginUrl;
                         }
                     },
                     fail: function () {
@@ -156,6 +158,21 @@ cspace = cspace || {};
         });
         return that;
     };
+    
+    cspace.pageBuilderSetup.noLogin = function (options) {
+        var that = fluid.initLittleComponent("cspace.pageBuilderSetup.noLogin", options);
+        return that.options.noLogin;
+    };
+    fluid.demands("noLogin", "cspace.login", [{
+        noLogin: true
+    }]);
+    fluid.defaults("cspace.pageBuilderSetup", {
+        components: {
+            noLogin: {
+                type: "cspace.pageBuilderSetup.noLogin"
+            }
+        }
+    });
     
     cspace.pageBuilder = function (options) {
         var that = fluid.initLittleComponent("cspace.pageBuilder", options);
@@ -269,13 +286,6 @@ cspace = cspace || {};
             sidebar: ".csc-sidebar-container"
         },
         components: {
-            header: {
-                type: "cspace.header",
-                options: {
-                    schema: "{pageBuilder}.schema",
-                    permissions: "{pageBuilder}.permissions"
-                }
-            },
             permissionsResolver: {
                 type: "cspace.permissions.resolver",
                 options: {
@@ -587,6 +597,8 @@ cspace = cspace || {};
             options.model.relations[that.options.related];
         return cspace.pageBuilderSetup(that.options);
     };
+    
+    fluid.demands("cspace.pageBuilderSetup", "cspace.login", fluid.COMPONENT_OPTIONS);
     
     fluid.defaults("cspace.pageBuilderSetup.setupLocalTabs", {
         mergePolicy: {

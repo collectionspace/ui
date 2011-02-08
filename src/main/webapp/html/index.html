@@ -14,11 +14,16 @@
         <script type="text/javascript" src="../lib/infusion/CSpaceInfusion.js"></script>
 
         <script type="text/javascript" src="../js/cspace.js"></script>
+        <script type="text/javascript" src="../js/Permissions.js"></script>
         <script type="text/javascript" src="../js/Utilities.js"></script>
         <script type="text/javascript" src="../js/MessageBar.js"></script>
         <script type="text/javascript" src="../js/PasswordValidator.js"></script>
         <script type="text/javascript" src="../js/Login.js"></script>
-        <script type="text/javascript" src="../js/loginSetup.js"></script>
+        <script type="text/javascript" src="../js/DataSource.js"></script>
+        <script type="text/javascript" src="../js/DataContext.js"></script>
+        <script type="text/javascript" src="../js/Search.js"></script>
+        <script type="text/javascript" src="../js/PageBuilder.js"></script>
+        
     </head>
 
     <body class="csc-login">
@@ -40,9 +45,9 @@
                                 <div class="info-column2-60 fl-force-left">
                                     <div class="login-text">
                                         <div class="info-pair">
-                                            <div class="header">Current Release 1.3 Information</div>
+                                            <div class="header">Current Release 1.4 Information</div>
                                             <div class="content csc-news-info">
-                                            <p>The CollectionSpace project team is pleased to announce the release of CollectionSpace 1.3. </p>
+                                            <p>The CollectionSpace project team is pleased to announce the release of CollectionSpace 1.4. </p>
 																						<p>To access the demo, use email: <strong>admin@collectionspace.org</strong> and password: <strong>Administrator</strong>,<br />
 																						or use the read-only account: <strong>reader@collectionspace.org</strong> and password: <strong>reader</strong></p>
                                             </div>
@@ -174,16 +179,12 @@
                     <div class="clear"></div>
                 </div> <!-- END sub-main content -->
                 
+                <div class="csc-footer-container" id="footer"></div>
+                
             </div> <!-- END main content -->
-            
-            <!-- footer block -->
-            <div id="footer">
-                <div class="footer-text">&copy; 2009-2010 CollectionSpace &nbsp;&ndash;&nbsp; CollectionSpace <a href="http://www.collectionspace.org/current_release">Release 1.3</a> &nbsp;&ndash;&nbsp; <a href="http://www.collectionspace.org">About CollectionSpace</a> &nbsp;&ndash;&nbsp; <a href="http://wiki.collectionspace.org/display/collectionspace/Release+1.3+Feedback">Leave Feedback</a></div>
-            </div> <!-- END footer block -->
-            
         </div> <!-- END body content -->
         <script type="text/javascript">
-            cspace.login(".csc-login");
+            cspace.globalSetup("cspace.login");
         </script>
     </body>
 </html>

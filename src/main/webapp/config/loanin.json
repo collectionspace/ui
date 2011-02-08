@@ -60,6 +60,13 @@
         },
         "sidebar": {
             "type": "cspace.sidebar"
+        },
+        "header": {
+            "type": "cspace.header",
+            "options": {
+                "schema": "{pageBuilder}.schema",
+                "permissions": "{pageBuilder}.permissions"
+            }
         }
     }
 }

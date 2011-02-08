@@ -26,6 +26,13 @@
                 "uispec": "{pageBuilder}.uispec",
                 "schema": "{pageBuilder}.schema"
             }
+        },
+        "header": {
+            "type": "cspace.header",
+            "options": {
+                "schema": "{pageBuilder}.schema",
+                "permissions": "{pageBuilder}.permissions"
+            }
         }
     },
     "pageType": "myCollectionSpace"

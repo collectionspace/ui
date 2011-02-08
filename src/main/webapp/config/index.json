@@ -1,0 +1,17 @@
+{
+    "pageSpec": {
+        "footer": {
+            "href": "components/footer.html",
+            "templateSelector": ".csc-footer",
+            "targetSelector": ".csc-footer-container" 
+        } 
+    },
+    "selectors": {
+        "login": ".csc-login" 
+    },
+    "components": {
+        "login": {
+            "type": "cspace.login" 
+        } 
+    }
+}

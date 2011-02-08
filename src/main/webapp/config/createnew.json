@@ -25,6 +25,13 @@
             "options": {
                 "permissions": "{pageBuilder}.permissions"
             }
+        },
+        "header": {
+            "type": "cspace.header",
+            "options": {
+                "schema": "{pageBuilder}.schema",
+                "permissions": "{pageBuilder}.permissions"
+            }
         }
     }
 }

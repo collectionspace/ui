@@ -275,4 +275,6 @@ cspace = cspace || {};
         baseUrl: "../../chain/"
     });
     
+    fluid.demands("login", "cspace.pageBuilder", ["{pageBuilder}.options.selectors.login", fluid.COMPONENT_OPTIONS]);
+    
 })(jQuery, fluid);

@@ -21,7 +21,7 @@
             "href": "components/footer.html",
             "templateSelector": ".csc-footer",
             "targetSelector": ".csc-footer-container" 
-        } 
+        }
     },
     "components": {
         "tabs": {
@@ -57,6 +57,13 @@
         },
         "sidebar": {
             "type": "cspace.sidebar"
+        },
+        "header": {
+            "type": "cspace.header",
+            "options": {
+                "schema": "{pageBuilder}.schema",
+                "permissions": "{pageBuilder}.permissions"
+            }
         }
     },
     "selectors": {

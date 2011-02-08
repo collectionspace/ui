@@ -826,7 +826,7 @@ fluid.registerNamespace("cspace.util");
             rootClass: "cs-loading-root"
         },
         strings: {
-            loadingMessage: "Loading record..."          
+            loadingMessage: "Loading..."          
         },
         heightExpand: 5,
         markup: "<div><div class=\"cs-loading-centre\"><span>Message here</span><br/><img src=\"#\"/></div></div>"
