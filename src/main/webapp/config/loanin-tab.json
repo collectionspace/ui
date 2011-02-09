@@ -46,10 +46,10 @@
                         "details": {
                             "options": {
                                 "selectors": {
-                                    "identificationNumber": ".csc-loanin-currentLocation" 
+                                    "identificationNumber": ".csc-loanIn-loanInNumber"
                                 },
                                 "strings": {
-                                    "identificationNumberRequired": "Please specify a Current Location" 
+                                    "identificationNumberRequired": "Please specify a Loan In Number"
                                 } 
                             } 
                         }
