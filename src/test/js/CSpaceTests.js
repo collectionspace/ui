@@ -126,6 +126,14 @@ cspace.tests.testEnvironment = function(options) {
         });
     };
     
+    that.asyncTest = function(message, func) {
+        withResources(function() {
+            that.options.testCase.asyncTest(message, 
+                function() {fluid.withEnvironment(that.environment, func);}
+                );
+        });
+    };
+    
     return that;
 };
 

@@ -52,10 +52,9 @@ var searchToRelateDialogTester = function () {
         }
         testOpts.listeners.afterSetup = [acquireDialogListener].concat(fluid.makeArray(testOpts.listeners.afterSetup));
         cspace.searchToRelateDialog("#main .csc-search-related-dialog", testOpts);
-        stop();
     };
 
-    searchToRelateDialogTest.test("Creation for particular record type (cataloging, relating to acquisition)", function () {
+    searchToRelateDialogTest.asyncTest("Creation for particular record type (cataloging, relating to acquisition)", function () {
         createSearchToRelate("acquisition", "cataloging", {
             afterSetup: function (dialog) {
                 dialog.open();
@@ -80,7 +79,7 @@ var searchToRelateDialogTester = function () {
         });
     });
 
-    searchToRelateDialogTest.test("Creation for procedures (will try to relate a loanout to the primary movement)", function () {
+    searchToRelateDialogTest.asyncTest("Creation for procedures (will try to relate a loanout to the primary movement)", function () {
         var testRecordType = "loanout";
         createSearchToRelate("movement", "procedures", {
             afterSetup: function (dialog) {
@@ -126,7 +125,7 @@ var searchToRelateDialogTester = function () {
         permissions: readAllPermissions
         });
 
-    readPermsTest.test("Search results display", function () {
+    readPermsTest.asyncTest("Search results display", function () {
         expect(8);
         var testRecordType = "intake";
         createSearchToRelate("acquisition", "procedures", {
@@ -165,7 +164,7 @@ var searchToRelateDialogTester = function () {
         });
     });
 
-    searchToRelateDialogTest.test("Results display on search error", function () {
+    searchToRelateDialogTest.asyncTest("Results display on search error", function () {
         var testRecordType = "intake";
         expect(1);
         createSearchToRelate("loanout", "procedures", {
@@ -186,7 +185,7 @@ var searchToRelateDialogTester = function () {
         });
     });
 
-    searchToRelateDialogTest.test("Create all-new record", function () {
+    searchToRelateDialogTest.asyncTest("Create all-new record", function () {
         createSearchToRelate("cataloging", "intake", {
             afterSetup: function (dialog) {
                 dialog.locate("createNewButton").click();
@@ -199,7 +198,7 @@ var searchToRelateDialogTester = function () {
         // TODO: this test very incomplete
     });
 
-    readPermsTest.test("Create relationship from search results", function () {
+    readPermsTest.asyncTest("Create relationship from search results", function () {
         var primaryRecordType = "intake";
         var testRecordType = "loanout";
         createSearchToRelate(primaryRecordType, "procedures", {
@@ -227,7 +226,7 @@ var searchToRelateDialogTester = function () {
         });
     });
 
-    readPermsTest.test("Create multiple relationships from search results", function () {
+    readPermsTest.asyncTest("Create multiple relationships from search results", function () {
         var primaryRecordType = "movement";
         var testRecordType = "intake";
         createSearchToRelate(primaryRecordType, "procedures", {

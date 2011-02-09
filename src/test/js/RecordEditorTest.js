@@ -29,10 +29,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
         recordEditor = cspace.recordEditor("#main", options);
-        stop();
     };
     
-    recordEditorTest.test("Creation", function () {
+    recordEditorTest.asyncTest("Creation", function () {
         var model = {
             fields: {
                 field1: "A",
@@ -54,7 +53,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
     });
     
-    recordEditorTest.test("Delete", function () {
+    recordEditorTest.asyncTest("Delete", function () {
         var model = {
             csid: "123.456.789",
             fields: {}
@@ -76,7 +75,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
     });
     
-    recordEditorTest.test("Rollback test", function () {
+    recordEditorTest.asyncTest("Rollback test", function () {
         var model = {
             csid: "123.456.789",
             fields: {
