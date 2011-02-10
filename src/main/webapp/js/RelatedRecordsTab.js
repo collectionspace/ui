@@ -139,7 +139,10 @@ cspace = cspace || {};
                     primary: "{relatedRecordsTab}.primary",
                     related: "{relatedRecordsTab}.related",
                     model: "{relatedRecordsTab}.model",
-                    applier: "{relatedRecordsTab}.applier"
+                    applier: "{relatedRecordsTab}.applier",
+                    strings: {
+                        addButton: "Add record"
+                    }
                 }
             },
             togglable: {
