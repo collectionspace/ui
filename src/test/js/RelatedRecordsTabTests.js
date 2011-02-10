@@ -133,7 +133,7 @@ var relatedRecordsTabTester = function ($) {
         pageBuilder = cspace.pageBuilder(options);
     };
     
-    relatedRecordsTabTest.test("Initialization", function () {
+    relatedRecordsTabTest.asyncTest("Initialization", function () {
         setupTab({
             pageReadyListener: function () {
                 var le = pageBuilder.relatedRecordsTab.listEditor;
@@ -145,10 +145,9 @@ var relatedRecordsTabTester = function ($) {
                 le.list.locate("row").eq(1).click();
             }
         });
-        stop();
     });
     
-    relatedRecordsTabTest.test("Changing Record", function () {
+    relatedRecordsTabTest.asyncTest("Changing Record", function () {
         setupTab({
             pageReadyListener: function () {
                 var le = pageBuilder.relatedRecordsTab.listEditor;
@@ -166,10 +165,9 @@ var relatedRecordsTabTester = function ($) {
                 le.list.locate("row").eq(1).click();
             }
         });
-        stop();
     });
     
-    relatedRecordsTabTest.test("Validation of required fields in related records (CSPACE-2294)", function () {
+    relatedRecordsTabTest.asyncTest("Validation of required fields in related records (CSPACE-2294)", function () {
         var  objTab, primaryApplier;
         $.ajax({
             url: "../data/intake/IN2004.002.json",
@@ -270,7 +268,6 @@ var relatedRecordsTabTester = function ($) {
             }
         };
         objTab = cspace.globalSetup("cspace.tabs", options);
-        stop();
     });
 };
 

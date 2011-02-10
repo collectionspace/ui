@@ -28,9 +28,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         pageSpec: {
                             recordEditor: {
                                 href: "../../main/webapp/html/pages/OrganizationTemplate.html"
-                            },
-                            footer: {
-                                href: "../../main/webapp/html/components/footer.html"
                             }
                         },
                         components: {
@@ -95,7 +92,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         organization = cspace.globalSetup("cspace.record", options);
     };
     
-    organizationTests.test("Initialization", function () {
+    organizationTests.asyncTest("Initialization", function () {
         var options = {
             components: {
                 pageBuilderSetup: {
@@ -115,10 +112,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         };
         setupOrganization(options);
-        stop();
     });
 
-    organizationTests.test("Repeatable fields: existence", function () {
+    organizationTests.asyncTest("Repeatable fields: existence", function () {
         var options = {
             components: {
                 pageBuilderSetup: {
@@ -153,7 +149,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         };
         setupOrganization(options);
-        stop();        
     });    
 }(jQuery));
 

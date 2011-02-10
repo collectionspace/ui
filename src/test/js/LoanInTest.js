@@ -20,7 +20,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     var loanInTests = cspace.tests.testEnvironment({testCase: bareLoanInTests});
     
-    loanInTests.test("Creation", function () {
+    loanInTests.asyncTest("Creation", function () {
         var opts = {
             configURL: "../../main/webapp/config/loanin.json",
             components: {
@@ -40,18 +40,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         pageSpec: {
                             recordEditor: {
                                 href: "../../main/webapp/html/pages/LoaninTemplate.html"
-                            },
-                            footer: {
-                                href: "../../main/webapp/html/components/footer.html"
                             }
                         }
                     }
                 }
             }
         };
-        
         var loanIn = cspace.setup("cspace.record", opts);
-        stop();
     });
 }());
 

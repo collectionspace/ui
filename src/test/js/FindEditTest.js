@@ -110,7 +110,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.merge(null, localOpts, options, opts);
         findEdit = setupFindEdit(localOpts);
         initialfindEditTets(findEdit);
-        stop();
     };
     
     findEditTests.test("Basic findEdit URL with query", function () {
@@ -133,7 +132,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
     });
 
-    findEditTests.test("FindEdit initialization", function () {
+    findEditTests.asyncTest("FindEdit initialization", function () {
         expect(10);
         findEditInitTests({
             listeners: {
@@ -141,12 +140,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     jqUnit.notVisible("When search submitted, results count should be hidden", jQuery(findEdit.options.selectors.resultsCountContainer));
                     var lookingContainer = jQuery(findEdit.options.selectors.lookingContainer);
                     jqUnit.isVisible("When search submitted, 'looking' message should be visible", lookingContainer);
-                    jqUnit.assertEquals("When search submitted, 'looking' message should include query", query, jQuery(findEdit.options.selectors.queryString, lookingContainer).text());
+                    jqUnit.assertEquals("When search submitted, 'looking' message should include query", "Looking for "+ query + "...", jQuery(findEdit.options.selectors.lookingString, lookingContainer).text());
                 },
                 afterSearch: function () {
                     var resultsContainer = jQuery(findEdit.options.selectors.resultsCountContainer);
                     jqUnit.isVisible("After search, results count should be visible", resultsContainer);
-                    jqUnit.assertEquals("After search submitted, results count should include query string", query, jQuery(findEdit.options.selectors.queryString, resultsContainer).text());
+                    jqUnit.assertEquals("After search submitted, results count should include query string", "Found 1 records for "+ query, jQuery(findEdit.options.selectors.resultsCount, resultsContainer).text());
                     jqUnit.notVisible("When search submitted, 'looking' message should be hidden", jQuery(findEdit.options.selectors.lookingContainer));
                     start();
                 }
@@ -154,7 +153,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
     });
 
-    findEditTests.test("FindEdit results: progress indication", function () {
+    findEditTests.asyncTest("FindEdit results: progress indication", function () {
         expect(8);
         findEditInitTests({
             listeners: {

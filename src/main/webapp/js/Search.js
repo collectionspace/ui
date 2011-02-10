@@ -16,16 +16,15 @@ cspace = cspace || {};
 (function ($, fluid) {
     fluid.log("Search.js loaded");
     
-    var displayLookingMessage = function (domBinder, keywords) {
+    var displayLookingMessage = function (domBinder, keywords, strings) {
         domBinder.locate("resultsCountContainer").hide();
-        domBinder.locate("queryString").text(keywords);
+        domBinder.locate("lookingString").text(fluid.stringTemplate(strings.looking, {query: keywords || ""}));
         domBinder.locate("lookingContainer").show();
     };
     
-    var displayResultsCount = function (domBinder, count, keywords) {
+    var displayResultsCount = function (domBinder, count, keywords, strings) {
         domBinder.locate("lookingContainer").hide();
-        domBinder.locate("resultsCount").text(count);
-        domBinder.locate("queryString").text(keywords);
+        domBinder.locate("resultsCount").text(fluid.stringTemplate(strings.resultsCount, {count: count, query: keywords || ""}));
         domBinder.locate("resultsCountContainer").show();
     };
 
@@ -89,7 +88,7 @@ cspace = cspace || {};
         pagerModel.totalRange = range;
         that.resultsPager.events.initiatePageChange.fire({pageIndex: pagerModel.pageIndex, forceUpdate: true});
             
-        displayResultsCount(that.dom, range, that.model.searchModel.keywords);
+        displayResultsCount(that.dom, range, that.model.searchModel.keywords, that.options.strings);
         that.locate("resultsContainer").show();
         that.events.afterSearch.fire();
     };
@@ -194,7 +193,7 @@ cspace = cspace || {};
         return function (newPagerModel) {
             that.mainSearch.locate("searchQuery").val(that.model.searchModel.keywords);
             that.mainSearch.locate("recordTypeSelect").val(that.model.searchModel.recordTypeLong);
-            displayLookingMessage(that.dom, that.model.searchModel.keywords);
+            displayLookingMessage(that.dom, that.model.searchModel.keywords, that.options.strings);
             var searchModel = that.model.searchModel;
             var pagerModel = newPagerModel || that.resultsPager.model;
             searchModel.pageSize = pagerModel.pageSize;
@@ -297,7 +296,7 @@ cspace = cspace || {};
             resultsCountContainer: ".csc-search-resultsCountContainer",
             resultsCount: ".csc-search-results-count",
             lookingContainer: ".csc-search-lookingContainer",
-            queryString: ".csc-search-queryString",
+            lookingString: ".csc-search-lookingString",
             resultsHeader: ".csc-header",
             resultsRow: ".csc-row",
             columns: {
@@ -307,7 +306,9 @@ cspace = cspace || {};
             }
         },
         strings: {
-            errorMessage: "We've encountered an error retrieving search results. Please try again."
+            errorMessage: "We've encountered an error retrieving search results. Please try again.",
+            resultsCount: "Found %count records for %query",
+            looking: "Looking for %query..."
         },
         messageBar: "{messageBar}",
         events: {

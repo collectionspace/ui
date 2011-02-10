@@ -201,6 +201,7 @@ li .flc-pager-pageLink {margin-top:-1px;}
 .cs-search-user {/*mar gin-top:8px;*/}
 .found-records-box {/*padding:4px 0 14px 6px;*/}
 .found-records-content {font-weight: normal;}
+.found-records-content-looking {font-weight: normal; background-image: url(../images/indeterminate_progress_indicator_true_transparent_16x16.gif); background-repeat: no-repeat; background-position:right; padding-right: 20px;}
 .cs-search-highlight {font-weight:bold;}
 
 .csc-global-search-keywords, .csc-search-pivot-keywords {width:140px !important; margin:0 8px 0 2px; height:17px; border:1px solid #BCBDBD; 

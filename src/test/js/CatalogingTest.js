@@ -37,9 +37,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         pageSpec: {
                             recordEditor: {
                                 href: "../../main/webapp/html/pages/CatalogingTemplate.html"
-                            },
-                            footer: {
-                                href: "../../main/webapp/html/components/footer.html"
                             }
                         },
                         templateUrlPrefix: "../../main/webapp/html/",
@@ -48,10 +45,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         }, options);
         cataloging = cspace.globalSetup("cspace.record", options);
-        stop();
     };
     
-    catalogingTests.test("Initialization", function () {
+    catalogingTests.asyncTest("Initialization", function () {
         var options = {
             components: {
                 pageBuilderSetup: {
@@ -73,7 +69,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         setupCataloging(options);
     });
         
-    catalogingTests.test("Go To Record", function () {
+    catalogingTests.asyncTest("Go To Record", function () {
         var options = {
             components: {
                 pageBuilderSetup: {

@@ -92,8 +92,49 @@ cspace = cspace || {};
         return that;
     };
 
-    cspace.searchToRelateDialog.produceTree = function () {
-        return {};
+    cspace.searchToRelateDialog.produceTree = function (that) {
+        return {
+            closeButtonImg: {
+                decorators: {
+                    type: "attrs",
+                    attributes: {
+                        alt: that.options.strings.closeAlt
+                    }
+                }
+            },
+            relationshipType: {
+                messagekey: "relationshipType"
+            },
+            createNew: {
+                messagekey: "createNew"
+            },
+            addButton: {
+                decorators: {
+                    type: "attrs",
+                    attributes: {
+                        value: that.options.strings.addButton
+                    }
+                }
+            },
+            headerSelect: {
+                messagekey: "headerSelect"
+            },
+            headerNumber: {
+                messagekey: "headerNumber"
+            },
+            headerDetails: {
+                messagekey: "headerDetails"
+            },
+            headerType: {
+                messagekey: "headerType"
+            },
+            next: {
+                messagekey: "next"
+            },
+            previous: {
+                messagekey: "previous"
+            }
+        };
     };
     
     cspace.searchToRelateDialog.getDialogGetter = function (that) {
@@ -121,9 +162,18 @@ cspace = cspace || {};
             },
             addButton: ".csc-searchToRelate-addButton",
             closeButton: ".csc-searchToRelate-closeBtn",
-            createNewButton: ".csc-searchToRelate-createButton"
+            closeButtonImg: ".csc-searchToRelate-closeBtnImg",
+            createNewButton: ".csc-searchToRelate-createButton",
+            relationshipType: ".csc-searchToRelate-relationshipTypeSelect",
+            createNew: ".csc-searchToRelate-createNew",
+            headerSelect: ".csc-searchToRelate-headerSelect",
+            headerNumber: ".csc-searchToRelate-headerNumber",
+            headerDetails: ".csc-searchToRelate-headerDetails",
+            headerType: ".csc-searchToRelate-headerType",
+            previous: ".csc-searchToRelate-previous",
+            next: ".csc-searchToRelate-next"
         },
-        selectorsToIgnore: ["addButton", "closeButton", "createNewButton", "dialog"],
+        selectorsToIgnore: ["closeButton", "createNewButton", "dialog"],
         events: {
             addRelations: null,
             onCreateNewRecord: null,
@@ -137,7 +187,17 @@ cspace = cspace || {};
         parentBundle: "{globalBundle}",
         strings: {
             procedures: "Procedural",
-            title: "Add Related %recordType Record"   
+            title: "Add Related %recordType Record",
+            closeAlt: "close button",
+            relationshipType: "Select relationship type:",
+            createNew: "Create new record:",
+            addButton: "Add to current record",
+            headerSelect: "Select",
+            headerNumber: "ID Number",
+            headerDetails: "Detail",
+            headerType: "Record Type",
+            next: "next >",
+            previous: "< previous"
         },
         components: {
             search: {

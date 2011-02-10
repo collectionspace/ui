@@ -209,7 +209,7 @@ cspace = cspace || {};
             jqUnit.assertDeepEq("testComponent8 initiated with correct option", "Danny Kaye", options.option1);
         };
             
-        pageBuilderTest.test("Assembly of HTML only", function () {
+        pageBuilderTest.asyncTest("Assembly of HTML only", function () {
             var options = {
                 pageSpec: testPageSpec,
                 htmlOnly: true,
@@ -227,10 +227,9 @@ cspace = cspace || {};
             };
             done = 0;
             cspace.pageBuilder(options);
-            stop();
         });
 
-        pageBuilderTest.test("Assembly of HTML", function () {
+        pageBuilderTest.asyncTest("Assembly of HTML", function () {
             expect(3);
             
             fluid.demands("recordEditor", "cspace.pageBuilder", 
@@ -250,55 +249,49 @@ cspace = cspace || {};
             };
             done = 0;
             cspace.pageBuilder(options);
-            stop();
         });
 
     
-        pageBuilderTest.test("Invocation of dependent components: container parameter", function () {
+        pageBuilderTest.asyncTest("Invocation of dependent components: container parameter", function () {
             expect(4);    // this is total num of assertions in the test components
             fluid.demands("recordEditor", "cspace.pageBuilder", 
                 ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
             fluid.demands("relatedRecords", "cspace.pageBuilder", 
                 ["{pageBuilder}.options.selectors.relatedRecords", fluid.COMPONENT_OPTIONS]);
             cspace.pageBuilder(testIOCoptions);
-            stop();
         });
     
-        pageBuilderTest.test("Invocation of dependent components: container plus options only", function () {
+        pageBuilderTest.asyncTest("Invocation of dependent components: container plus options only", function () {
             expect(6);
             fluid.demands("recordEditor", "cspace.pageBuilder", 
                 ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
             fluid.demands("relatedRecords", "cspace.pageBuilder", 
                 ["{pageBuilder}.options.selectors.relatedRecords", fluid.COMPONENT_OPTIONS]);
             cspace.pageBuilder(optionsWithComponentsWithOptions);
-            stop();
         });
         
-        pageBuilderTest.test("Invocation of dependent components: mini IOC", function () {
+        pageBuilderTest.asyncTest("Invocation of dependent components: mini IOC", function () {
             expect(5);
             fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.test1");
             fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.test1"], 
                 ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
             cspace.pageBuilder(optionsWithComponentsWithIOCdemands);
-            stop();
         });
         
-        pageBuilderTest.test("Invocation of dependent components: additional parameters to components", function () {
+        pageBuilderTest.asyncTest("Invocation of dependent components: additional parameters to components", function () {
             expect(4);
             fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.test2");
             fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.test2"], 
                 ["{pageBuilder}.options.selectors.recordEditor", "extraParameter", fluid.COMPONENT_OPTIONS]);
             cspace.pageBuilder(optionsWithComponentsWithAdditionalParameters);
-            stop();
         });
         
-        pageBuilderTest.test("Invocation of dependent components: IOC in additional parameters", function () {
+        pageBuilderTest.asyncTest("Invocation of dependent components: IOC in additional parameters", function () {
             expect(4);
             fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.test3");
             fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.test3"], 
                 ["{pageBuilder}.options.selectors.recordEditor", "{pageBuilder}.options.pbOpt", fluid.COMPONENT_OPTIONS]);
             cspace.pageBuilder(optionsWithComponentsWithDemandInParameters);
-            stop();
         });
     };
     
