@@ -1,17 +1,12 @@
 <div class="pivot-box csc-relatedRecord-template">
     <div class="hidden csc-search-related-dialog"></div>
-    <div class="add-more">
-        <input class="add-link csc-add-related-record-button tertiary" type="button" value="Add" />
-    </div>
     <div class="csc-relatedRecordsList-recordList">
-        <div class="header toggle" onclick="ShowHide('#toggle-related-procedures', this); return false;">
-            <span class="header-toggle"><img height="12" width="12" alt="toggle-less" src="../images/toggle-less.png" /></span>
-            <div class="csc-related-mainheader"></div>
+        <div class="csc-sidebar-header cs-sidebar-header fl-container-flex header toggle">
+            <span class="csc-related-mainheader"></span>
             <span class="csc-num-items"></span>
-            <div class="clear"></div>
+            <input class="fl-force-right csc-add-related-record-button tertiary" type="button" />
         </div>
-
-        <div class="content related-procedures list-table" id="toggle-related-procedures">
+        <div class="csc-sidebar-togglable content list-table">
             <table>
                 <thead>
                     <tr>

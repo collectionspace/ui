@@ -1,36 +1,28 @@
 <div class="csc-right-sidebar">
     <div class="fl-force-right right-sidebar" id="csc-right-sidebar">
-        <!--<img src="../images/media-snapshot.png" alt="media snapshot" height=253 width=248 />-->
 		<div class="create-report">
-		    <div class="header">Create Report</div>
+		    <div class="csc-sidebar-reportHeader header"></div>
             <select disabled="disabled">
-				<option value="yes">Yes</option>
-				<option value="no">No</option>
+				<option value=""></option>
 			</select>
-            <input type="button" value="Create" disabled="disabled" />
+            <input class="csc-sidebar-reportButton" type="button" disabled="disabled" />
         </div>
-		
         <div class="pivot-box media-snapshot csc-media-snapshot">
-            <div class="header toggle" onclick="ShowHide('#toggle-media-snapshot', this); return false;">
-                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
-                Media Snapshot
-            </div>
-            <div class="content" id="toggle-media-snapshot"><img src="../images/sample.png" alt="sample image" title="sample media image" /></div>
+            <div class="csc-sidebar-mediaHeader cs-sidebar-header csc-sidebar-header fl-container-flex header toggle"></div>
+            <div class="csc-sidebar-togglable content cs-sidebar-mediaImage"></div>
         </div>
-        
         <div class="pivot-box csc-integrated-authorities">
-            <div class="header toggle" onclick="ShowHide('#toggle-integrated-authorities', this); return false;">
-                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle-less" /></span>
-                Terms Used <span class="csc-num-items">(0)</span>
+            <div class="csc-sidebar-header cs-sidebar-header fl-container-flex header toggle">
+                <span class="csc-sidebar-termsHeader"></span>
+                <span class="csc-num-items">(0)</span>
             </div>
-            
-            <div class="content integrated-authorities list-table" id="toggle-integrated-authorities">
+            <div class="csc-sidebar-togglable content list-table">
                 <table>
                     <thead>
                         <tr>
-                            <td>Term</td>
-                            <td>Vocabulary</td>
-                            <td>Field</td>
+                            <td class="csc-sidebar-termsHeaderTerm"></td>
+                            <td class="csc-sidebar-termsHeaderVocabulary"></td>
+                            <td class="csc-sidebar-termsHeaderField"></td>
                             <td></td>
                         </tr>
                     </thead>

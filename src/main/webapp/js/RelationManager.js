@@ -48,6 +48,7 @@ cspace = cspace || {};
                 } else {
                     that.options.messageBar.show(that.options.strings.pleaseSaveFirst, null, true);
                 }
+                return false;
             });
         }
         else {
@@ -57,10 +58,8 @@ cspace = cspace || {};
     };
     
     cspace.relationManager = function (container, options) {
-        var that = fluid.initView("cspace.relationManager", container, options);
-        
-        that.model = that.options.model;
-                
+        var that = fluid.initRendererComponent("cspace.relationManager", container, options);
+        that.renderer.refreshView();                
         that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
         that.addRelations = that.options.addRelations(that);
         that.dialogNode = that.locate("searchDialog"); // since blasted jQuery UI dialog will move it out of our container
@@ -116,9 +115,22 @@ cspace = cspace || {};
         that.visible = cspace.permissions.resolveMultiple(options);
         return that;
     };
-
+    
+    cspace.relationManager.produceTree = function (that) {
+        return {
+            addButton: {
+                decorators: {
+                    type: "attrs",
+                    attributes: {
+                        value: that.options.strings.addButton                        
+                    }
+                }
+            }
+        };
+    };
     
     fluid.defaults("cspace.relationManager", {
+        produceTree: cspace.relationManager.produceTree,
         components: {
             searchToRelateDialog: {
                 type: "cspace.searchToRelateDialog",
@@ -160,9 +172,11 @@ cspace = cspace || {};
             searchDialog: ".csc-search-related-dialog",
             addButton: ".csc-add-related-record-button"
         },
+        selectorsToIgnore: "searchDialog",
         messageBar: "{messageBar}",
         strings: {
-            pleaseSaveFirst: "Please save the record you are creating before trying to relate other records to it."
+            pleaseSaveFirst: "Please save the record you are creating before trying to relate other records to it.",
+            addButton: "Add"
         },
         events: {
             onCreateNewRecord: null

@@ -561,6 +561,7 @@ td .field-cal img, td .csc-calendar-button img {border:none;}
 .pivot-search-box .content {border:none; padding: 10px; background-color:#E8E7E7;}
 
 .right-sidebar {width:100%; border-bottom:3px solid #CDE2F2;}
+.cs-sidebar-mediaImage {background-image: url(../images/sample.png); background-repeat: no-repeat; background-position:center; min-height:165px;}
 /*.pivot-box, .pivot-users-box {padding-top:5px; }*/
 .media-snapshot .content {padding:6px;}
 .media-snapshot .content img {margin-left:auto; margin-right:auto; display:block;}
@@ -813,7 +814,7 @@ ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6
 #read-only .cs-repeatable-add, #read-only .cs-repeatable-delete {display:none;}
 #read-only .cs-repeatable-primary {}
 
-.cs-togglable-header {height:inherit; padding:6px 0 6px 2.5%; width:97.5%;}
+.cs-togglable-header {height:inherit; padding:6px 0 6px 20px; width:97.5%;}
 .cs-togglable-expanded {background:transparent url('../images/toggle-less.png') no-repeat 4px 6px;}
 .cs-togglable-collapsed {background:transparent url('../images/toggle-more.png') no-repeat 4px 6px;}
 
@@ -857,3 +858,4 @@ ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6
 .cs-message-error .cs-messageBar-cancel {background-color:#C60018;}
 .cs-message-error .cs-messageBar-cancel:hover {background-color:#9E0022;}
 
+.cs-sidebar-header {padding-right: 5px;}

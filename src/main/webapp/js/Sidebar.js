@@ -73,6 +73,32 @@ cspace = cspace || {};
      */
     cspace.sidebar.produceTree = function (that) {
         return {
+            reportHeader: {
+                messagekey: "reportHeader"
+            },
+            mediaHeader: {
+                messagekey: "mediaHeader"
+            },
+            termsHeader: {
+                messagekey: "termsHeader"
+            },
+            termsHeaderTerm: {
+                messagekey: "termsHeaderTerm"
+            },
+            termsHeaderVocabulary: {
+                messagekey: "termsHeaderVocabulary"
+            },
+            termsHeaderField: {
+                messagekey: "termsHeaderField"
+            },
+            reportButton: {
+                decorators: {
+                    type: "attrs",
+                    attributes: {
+                        value: that.options.strings.reportButton                        
+                    }
+                }
+            },
             expander: {
                 repeatID: "categoryContainer",
                 type: "fluid.renderer.repeat",
@@ -129,6 +155,9 @@ cspace = cspace || {};
     
     fluid.demands("cataloging", "cspace.sidebar", 
         ["{sidebar}.options.selectors.relatedCataloging", fluid.COMPONENT_OPTIONS]);
+        
+    fluid.demands("togglable", "cspace.sidebar", 
+        ["{sidebar}.container", fluid.COMPONENT_OPTIONS]);
     
     fluid.defaults("cspace.sidebar", {
         components: {
@@ -169,6 +198,15 @@ cspace = cspace || {};
                     uispec : "{sidebar}.options.uispec.relatedProcedures",
                     model: "{sidebar}.options.recordModel",
                     recordListAfterSelectHandler: "{sidebar}.options.recordListAfterSelectHandler"
+                }
+            },
+            togglable: {
+                type: "cspace.util.togglable",
+                options: {
+                    selectors: {
+                        header: "{sidebar}.options.selectors.header",
+                        togglable: "{sidebar}.options.selectors.togglable"
+                    }
                 }
             }
         },
@@ -216,14 +254,32 @@ cspace = cspace || {};
             termsUsed: ".csc-integrated-authorities",
             "categoryContainer:": ".csc-related-record", //to be repeated
             relatedCataloging: ".csc-related-cataloging",
-            relatedProcedures: ".csc-related-procedures"
+            relatedProcedures: ".csc-related-procedures",
+            reportHeader: ".csc-sidebar-reportHeader",
+            reportButton: ".csc-sidebar-reportButton",
+            mediaHeader: ".csc-sidebar-mediaHeader",
+            termsHeader: ".csc-sidebar-termsHeader",
+            termsHeaderTerm: ".csc-sidebar-termsHeaderTerm",
+            termsHeaderVocabulary: ".csc-sidebar-termsHeaderVocabulary",
+            termsHeaderField: ".csc-sidebar-termsHeaderField",
+            header: ".csc-sidebar-header",
+            togglable: ".csc-sidebar-togglable"
         },
-        selectorsToIgnore: [ "mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures" ],
+        selectorsToIgnore: ["mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable"],
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
                 url: "%webapp/html/components/SidebarTemplate.html"
             })
+        },
+        strings: {
+            reportHeader: "Create Report",
+            mediaHeader: "Media Snapshot",
+            termsHeader: "Terms Used",
+            termsHeaderTerm: "Term",
+            termsHeaderVocabulary: "Vocabulary",
+            termsHeaderField: "Field",
+            reportButton: "Create"
         }
     });
     
