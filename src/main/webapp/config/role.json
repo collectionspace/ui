@@ -5,13 +5,6 @@
         "role"
     ],
     "recordType": "role",
-    "pageSpec": {
-        "footer": {
-            "href": "components/footer.html",
-            "templateSelector": ".csc-footer",
-            "targetSelector": ".csc-footer-container" 
-        } 
-    },
     "pageType": "role",
     "selectors": {
         "role": ".csc-roles-roleAdmin" 

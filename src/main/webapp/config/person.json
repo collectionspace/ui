@@ -16,12 +16,7 @@
             "href": "%readonlypages/PersonTemplate.html",
             "templateSelector": ".csc-personAuthority-template",
             "targetSelector": ".csc-record-edit-container"
-        },
-        "footer": {
-            "href": "components/footer.html",
-            "templateSelector": ".csc-footer",
-            "targetSelector": ".csc-footer-container" 
-        } 
+        }
     },
     "pageType": "person",
     "selectors": {

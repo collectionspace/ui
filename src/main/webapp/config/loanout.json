@@ -16,12 +16,7 @@
             "href": "%readonlypages/LoanoutTemplate.html",
             "templateSelector": ".csc-loanOut-template",
             "targetSelector": ".csc-record-edit-container"
-        },
-        "footer": {
-            "href": "components/footer.html",
-            "templateSelector": ".csc-footer",
-            "targetSelector": ".csc-footer-container" 
-        } 
+        }
     },
     "selectors": {
         "recordEditor": ".csc-loanOut-template"

@@ -16,11 +16,6 @@
             "href": "%readonlypages/IntakeTemplate.html",
             "templateSelector": ".csc-intake-template",
             "targetSelector": ".csc-record-edit-container"
-        },
-        "footer": {
-            "href": "components/footer.html",
-            "templateSelector": ".csc-footer",
-            "targetSelector": ".csc-footer-container" 
         } 
     },
     "selectors": {

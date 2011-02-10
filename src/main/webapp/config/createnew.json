@@ -1,11 +1,4 @@
 {
-    "pageSpec": {
-        "footer": {
-            "href": "components/footer.html",
-            "templateSelector": ".csc-footer",
-            "targetSelector": ".csc-footer-container" 
-        } 
-    },
     "selectors": {
         "createNew": ".csc-createNew-main"
     },

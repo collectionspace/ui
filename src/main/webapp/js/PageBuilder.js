@@ -280,6 +280,7 @@ cspace = cspace || {};
         ],
         selectors: {
             header: ".csc-header-container",
+            footer: ".csc-footer-container",
             titleBar: ".csc-titleBar-container",
             pivotSearch: ".csc-pivot-searchBox",
             tabs: ".csc-tabs-template",
@@ -303,6 +304,9 @@ cspace = cspace || {};
                 options: {
                     schema: "{pageBuilder}.schema"
                 }
+            },
+            footer: {
+                type: "cspace.footer"
             }
         },
         schema: [

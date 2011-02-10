@@ -16,11 +16,6 @@
             "href": "%readonlypages/ObjectexitTemplate.html",
             "templateSelector": ".csc-objectexit-template",
             "targetSelector": ".csc-record-edit-container"
-        },
-        "footer": {
-            "href": "components/footer.html",
-            "templateSelector": ".csc-footer",
-            "targetSelector": ".csc-footer-container"
         }
     },
     "selectors": {

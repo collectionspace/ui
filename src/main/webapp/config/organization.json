@@ -16,12 +16,7 @@
             "href": "%readonlypages/OrganizationTemplate.html",
             "templateSelector": ".csc-organizationAuthority-template",
             "targetSelector": ".csc-record-edit-container" 
-        },
-        "footer": {
-            "href": "components/footer.html",
-            "templateSelector": ".csc-footer",
-            "targetSelector": ".csc-footer-container" 
-        } 
+        }
     },
     "pageType": "organization",
     "selectors": {

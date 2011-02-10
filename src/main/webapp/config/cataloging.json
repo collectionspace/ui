@@ -16,12 +16,7 @@
             "href": "%readonlypages/CatalogingTemplate.html",
             "templateSelector": ".csc-cataloging-template",
             "targetSelector": ".csc-record-edit-container" 
-        },
-        "footer": {
-            "href": "components/footer.html",
-            "templateSelector": ".csc-footer",
-            "targetSelector": ".csc-footer-container" 
-        } 
+        }
     },
     "selectors": {
         "recordEditor": ".csc-cataloging-template"

@@ -275,7 +275,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             tree.authorityItem = cspace.autocomplete.makeSelectionTree(model, "authorities", "fullName");
         }
         if (model.matches.length === 0) {
-            tree.noMatches = {};
+            tree.noMatches = {
+                messagekey: "noMatches"
+            };
         }
         else {
             tree.matches = {};

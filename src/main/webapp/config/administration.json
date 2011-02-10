@@ -5,13 +5,6 @@
         "users" 
     ],
     "recordType": "users",
-    "pageSpec": {
-        "footer": {
-            "href": "components/footer.html",
-            "templateSelector": ".csc-footer",
-            "targetSelector": ".csc-footer-container" 
-        }
-    },
     "pageType": "users",
     "selectors": {
         "users": ".csc-users-userAdmin"
