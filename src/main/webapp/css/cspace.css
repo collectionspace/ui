@@ -52,10 +52,11 @@ input[type="button"].duplicateButton, input[type="submit"].duplicateButton {back
 input[type="button"].duplicateButton:hover, input[type="submit"].duplicateButton:hover {background-color:#DAEDD1;}
 input[type="button"].searchButton, input[type="submit"].searchButton {background:#73AA4F url('../images/icnSearch.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#FFF;}
 input[type="button"].searchButton:hover, input[type="submit"].searchButton:hover {background-color:#48722D;}
-input[type="button"].gotoButton, input[type="submit"].gotoButton {background:transparent url('../images/icnGoTo.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
-input[type="button"].gotoButton:hover, input[type="submit"].gotoButton:hover {background-color:#DAEDD1;}
 input[type="button"].addButton, input[type="submit"].addButton {background:#73AA4F url('../images/icnAdd_.png') no-repeat 8px 4px; padding-left:24px; font-size:11px; padding-right:8px; color:#FFF;}
 input[type="button"].addButton:hover, input[type="submit"].addButton:hover {background-color:#48722D;}
+
+.gotoButton {background:transparent url('../images/icnGoTo.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#669922;}
+.gotoButton:hover {background-color:#DAEDD1;}
 
 .button-row input[type="button"], .button-row-right input[type="button"] {margin-left:10px; float:right; margin-bottom:5px;}
 .button-row-left input[type="button"], .button-row-left-center input[type="button"] {margin-right:10px; margin-top:10px;}

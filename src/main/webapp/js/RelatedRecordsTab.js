@@ -43,7 +43,7 @@ cspace = cspace || {};
             var csid = that.listEditor.details.model.csid;
             if (csid) {
                 var gotoLink = that.locate("goToRecord");
-                gotoLink.attr("href", "./" + that.related + ".html?csid=" + csid);
+                gotoLink.attr("href", fluid.stringTemplate(that.options.urls.goTo, {related: that.related, csid: csid}));
                 gotoLink.show();
             }
         });
@@ -121,6 +121,9 @@ cspace = cspace || {};
             },
             summary: {
                 messagekey: "summary"
+            },
+            goToRecord: {
+                messagekey: "goToRecord"
             }
         };
     };
@@ -169,7 +172,7 @@ cspace = cspace || {};
             idNumber: ".csc-relatedRecordsTab-idNumber",
             summary: ".csc-relatedRecordsTab-summary"
         },
-        selectorsToIgnore: ["goToRecord", "togglable", "header"],
+        selectorsToIgnore: ["togglable", "header"],
         events: {
             afterRender: null
         },
@@ -179,8 +182,12 @@ cspace = cspace || {};
             applier: "preserve"
         },
         strings: {
-            idNumber: "ID Number"
-        }
+            idNumber: "ID Number",
+            goToRecord: "Go To Record"
+        },
+        urls: cspace.componentUrlBuilder({
+            "goTo": "%webapp/html/%related.html?csid=%csid"
+        })
     });
     
     fluid.demands("relatedRecordsTab", "cspace.pageBuilder", 
