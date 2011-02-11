@@ -397,24 +397,23 @@ var adminUsersTester = function () {
         });
     });
     
-    adminUsersTest.test("No Confirmation on navigation away after canceled changes", function () {
+    adminUsersTest.test("Confirmation on navigation away after canceled changes", function () {
         setupConfirmation(function (re, adminUsers) {
             re.events.afterRender.removeListener("initialSelect");                    
             adminUsers.locate("userName").val("New Name").change();
             re.confirmation.popup.bind("dialogopen", function () {
+                re.confirmation.popup.unbind("dialogopen");
                 jqUnit.isVisible("Navigating without cancelling, confirmation should be visible", re.confirmation.popup);
                 jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.confirmationDialog.locate("message:").eq(0).text());
                 jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.confirmationDialog.locate("message:").eq(1).text());
                 re.confirmation.confirmationDialog.locate("close").click();
                 jqUnit.notVisible("Dialog should close", re.confirmation.popup);
-                re.locate("cancel").click();
-                jqUnit.notVisible("After cancelling, user details should now be hidden", adminUsers.userListEditor.locate("details"));
-                re.events.afterRender.addListener(function () {
-                    jqUnit.notVisible("Navigating away, there should be no visible confirmation", re.confirmation.popup);
+                re.confirmation.popup.bind("dialogopen", function () {
+                    jqUnit.isVisible("Cancelling, confirmation should be visible", re.confirmation.popup);
                     cspace.tests.onTearDown.fire(re);
                     start();
                 });
-                adminUsers.userListEditor.list.locate("row").eq(1).click();
+                re.locate("cancel").click();
             });
             adminUsers.userListEditor.list.locate("row").eq(1).click();
         });

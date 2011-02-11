@@ -139,7 +139,7 @@ var relatedRecordsTabTester = function ($) {
                 var le = pageBuilder.relatedRecordsTab.listEditor;
                 le.details.events.afterRender.addListener(function () {
                     jqUnit.isVisible("Related record tab details should have visible link 'Go to record'", $(".csc-goto", le.details.container));
-                    jqUnit.assertEquals("href for the 'Go to record' should be", "./cataloging.html?csid=2005.018.1383", $(".csc-goto").attr("href"));
+                    jqUnit.assertEquals("href for the 'Go to record' should be", "../../main/webapp/html/cataloging.html?csid=2005.018.1383", $(".csc-goto").attr("href"));
                     start();
                 });
                 le.list.locate("row").eq(1).click();
@@ -154,10 +154,10 @@ var relatedRecordsTabTester = function ($) {
                 le.details.events.afterRender.addListener(function () {
                     le.details.events.afterRender.removeListener("firstSelect");
                     jqUnit.isVisible("Related record tab details should have visible link 'Go to record'", $(".csc-goto", le.details.container));
-                    jqUnit.assertEquals("Initial href for the 'Go to record' should be", "./cataloging.html?csid=2005.018.1383", $(".csc-goto").attr("href"));
+                    jqUnit.assertEquals("Initial href for the 'Go to record' should be", "../../main/webapp/html/cataloging.html?csid=2005.018.1383", $(".csc-goto").attr("href"));
                     le.details.events.afterRender.addListener(function () {
                         jqUnit.isVisible("Related record tab details should still have visible link 'Go to record'", $(".csc-goto", le.details.container));
-                        jqUnit.assertEquals("href for the 'Go to record' should now be", "./cataloging.html?csid=1984.068.0338", $(".csc-goto").attr("href"));
+                        jqUnit.assertEquals("href for the 'Go to record' should now be", "../../main/webapp/html/cataloging.html?csid=1984.068.0338", $(".csc-goto").attr("href"));
                         start();
                     });
                     le.list.locate("row").eq(0).click();
