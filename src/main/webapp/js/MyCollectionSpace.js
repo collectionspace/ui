@@ -92,7 +92,7 @@ cspace = cspace || {};
                 return {
                     groupName: record,
                     groupClass: "csc-myCollectionSpace-" + record + "-group",
-                    numberName: record + ".number"
+                    numberName: record + "-number"
                 };
             })
         };
