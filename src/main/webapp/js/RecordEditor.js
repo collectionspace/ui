@@ -140,7 +140,11 @@ cspace = cspace || {};
     var bindHandlers = function (that) {
         that.locate("save").click(that.requestSave);
         that.locate("deleteButton").click(that.remove);
-        that.locate("cancel").click(that.cancel);
+        that.locate("cancel").click(function () {
+            that.options.globalNavigator.events.onPerformNavigation.fire(function () {
+                that.cancel();
+            });
+        });
         cspace.util.setZIndex();      
     };
     
