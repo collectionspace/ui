@@ -156,6 +156,9 @@ cspace = cspace || {};
         that.unsavedChanges = false;
     };
     
+    fluid.demands("recordEditorTogglable", "cspace.recordEditor", 
+        ["{recordEditor}.container", fluid.COMPONENT_OPTIONS]);
+    
     cspace.recordEditor = function (container, options) {
         var that = fluid.initRendererComponent("cspace.recordEditor", container, options);
         fluid.initDependents(that);
@@ -270,6 +273,15 @@ cspace = cspace || {};
         components: {
             confirmation: {
                 type: "cspace.confirmation"
+            },
+            recordEditorTogglable: {
+                type: "cspace.util.togglable",
+                options: {
+                    selectors: {
+                        header: "{recordEditor}.options.selectors.header",
+                        togglable: "{recordEditor}.options.selectors.togglable"
+                    }
+                }
             }
         },
         invokers: {
@@ -297,9 +309,11 @@ cspace = cspace || {};
             save: ".csc-save",
             cancel: ".csc-cancel",
             deleteButton: ".csc-delete",
-            requiredFields: ".csc-required:visible"
+            requiredFields: ".csc-required:visible",
+            header: ".csc-recordEditor-header",
+            togglable: ".csc-recordEditor-togglable"
         },
-        selectorsToIgnore: ["deleteButton", "requiredFields", "identificationNumber"],
+        selectorsToIgnore: ["deleteButton", "requiredFields", "identificationNumber", "header", "togglable"],
         rendererFnOptions: {
             cutpointGenerator: "cspace.recordEditor.cutpointGenerator",
         },

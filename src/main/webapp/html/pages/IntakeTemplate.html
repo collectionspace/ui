@@ -17,14 +17,10 @@
                                 <div class="intake-outer-border" id="intake-record">
                                     <!-- Each section of Intake is broken down into information-blocks.
                                           This corresponds to Information groups within Spectrum's Object Entry prodedure. -->
-                                    <div class="fl-container-flex fl-fix information-group" id="toggle-intake-information">
-                                        <div class="info-column">    
-                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-intake-information .main', this); return false;">
-                                                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon"/></span>
-                                                Object Entry
-                                            </div>
-                                            
-                                            <div class="fl-container-flex fl-fix content main" >
+                                    <div class="fl-container-flex fl-fix information-group">
+                                        <div class="info-column">  
+                                            <div class="csc-recordEditor-header fl-container-flex header toggle">Object Entry</div>
+                                            <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main" >
                                                 
                                                 <div class="info-column2-50 fl-force-left" >
                                                     
@@ -168,115 +164,10 @@
                                             </div>
                                         </div>
                                         
-                                    </div>
-                                    
-                                    <!--<div class="fl-container-flex fl-fix information-group" id="toggle-date-info">
+                                    </div><div class="fl-container-flex fl-fix information-group">
                                         <div class="info-column">
-                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-date-info .main', this); return false;">
-                                                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon" /></span>
-                                                Date Information
-                                            </div>
-                                            <div class="fl-container-flex fl-fix content main">
-                                                <div class="info-column2-50 fl-force-left">
-                                                    <div class="info-pair">
-                                                        <div class="header">
-                                                            <div class="label">Date Association</div>
-                                                        </div>
-                                                        <div class="content">
-                                                            <table>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td><input type="text" class="input-alpha csc-intake-date-association" /></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>    
-                                                </div>
-                                                
-                                                <div class="info-column2-50 fl-force-right">                                                            
-                                                    <div class="info-pair">
-                                                        <div class="header">
-                                                            <div class="label">Date Period</div>
-                                                        </div>
-                                                        <div class="content">
-                                                            <table>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td><input type="text" class="input-alpha csc-intake-date-period" /></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>    
-                                                </div>
-                                                <div class="clear"></div>
-                                                <div class="info-column fl-force-left">
-                                                    <div class="info-pair">
-                                                        <div class="header">
-                                                            <div class="label">Date</div>
-                                                        </div>
-                                                        <div class="content">
-                                                            <table>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <td title="">Date Type</td>
-                                                                        <td title="">Date</td>
-                                                                        <td title="">Certainty</td>
-                                                                        <td title="">Qualifier</td>
-                                                                    </tr>
-                                                                </thead>
-                                                                    
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td class="label">Date - Earliest/single</td>
-                                                                        <td class="field-cal csc-intake-date-earliest-single-container disabled"><input type="text" disabled="disabled" class="input-date csc-intake-date-earliest-single csc-calendar-date" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="" height="17" width="16" /></a>
-                                                                            <span class="csc-date-picker"></span>
-                                                                        </td>
-                                                                        <td><input type="text" class="input-alpha-table csc-intake-date-earliest-single-certainty" /></td>
-                                                                        <td><input type="text" class="input-alpha-table csc-intake-date-earliest-single-qualifier" /></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="label">Date - Latest</td>
-                                                                        <td class="csc-intake-date-latest-single-container field-cal disabled"><input type="text" disabled="disabled" class="input-date csc-intake-date-latest csc-calendar-date" /><a href="#_bottom" class="csc-calendar-button" ><img src="../images/cal.png" alt="calendar" title="" height="17" width="16" /></a>
-                                                                            <div class="csc-date-picker"></div>
-                                                                        </td>
-                                                                        <td><input type="text" class="input-alpha-table csc-intake-date-latest-certainty" /></td>
-                                                                        <td><input type="text" class="input-alpha-table csc-intake-date-latest-qualifier" /></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                
-                                                    <div class="info-pair">
-                                                        <div class="header">
-                                                            <div class="label">Date Text</div>
-                                                        </div>
-                                                        <div class="content">
-                                                            <table>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td><textarea class="input-textarea csc-intake-date-text" /></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                    
-                                    <div class="fl-container-flex fl-fix information-group" id="toggle-collection">
-                                        <div class="info-column">
-                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-collection .main', this); return false;">
-                                                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon"/></span>
-                                                Object Collection Information
-                                            </div>
-                                            
-                                            <div class="fl-container-flex fl-fix content main">
+                                            <div class="csc-recordEditor-header fl-container-flex header toggle">Object Collection Information</div>
+                                            <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
                                                 <!-- Left-side column -->
                                                 <div class="info-column2-50 fl-force-left">
                                                     
@@ -363,14 +254,10 @@
                                         
                                     </div>
                                     
-                                    <div class="fl-container-flex fl-fix information-group" id="toggle-valuation">
+                                    <div class="fl-container-flex fl-fix information-group">
                                         <div class="info-column">
-                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-valuation .main', this); return false;">
-                                                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon"/></span>
-                                                Valuation
-                                            </div>
-                                            
-                                            <div class="fl-container-flex fl-fix content main">
+                                            <div class="csc-recordEditor-header fl-container-flex header toggle">Valuation</div>
+                                            <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
                                                 <!-- Left-side column -->
                                                 <div class="info-column2-50 fl-force-left">
                                                     <div class="info-pair">
@@ -405,13 +292,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="fl-container-flex fl-fix information-group" id="toggle-insurance">
+                                    <div class="fl-container-flex fl-fix information-group">
                                         <div class="info-column">
-                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-insurance .main', this); return false;">
-                                                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon"/></span>
-                                                Insurance
-                                            </div>
-                                            <div class="fl-container-flex fl-fix content main">
+                                            <div class="csc-recordEditor-header fl-container-flex header toggle">Insurance</div>
+                                            <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
                                                 <!-- Left-side column -->
                                                 <div class="info-column2-50 fl-force-left">
                                                     <div class="info-pair">
@@ -495,13 +379,10 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="fl-container-flex fl-fix information-group" id="toggle-location">
+                                    <div class="fl-container-flex fl-fix information-group">
                                         <div class="info-column">
-                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-location .main', this); return false;">
-                                                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon"/></span>
-                                                Location
-                                            </div>
-                                            <div class="fl-container-flex fl-fix content main">
+                                            <div class="csc-recordEditor-header fl-container-flex header toggle">Location</div>
+                                            <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
                                                 <!-- Left-side column -->
                                                 <div class="info-column fl-force-left">
                                                     <div class="info-pair">
@@ -575,13 +456,10 @@
                                         
                                     </div>
                                     
-                                    <div class="fl-container-flex fl-fix information-group" id="toggle-condition">
+                                    <div class="fl-container-flex fl-fix information-group">
                                         <div class="info-column">
-                                            <div class="fl-container-flex header toggle" onclick="ShowHide('#toggle-condition .main', this); return false;">
-                                                <span class="header-toggle"><img src="../images/toggle-less.png" height="12" width="12" alt="toggle icon"/></span>
-                                                Condition
-                                            </div>
-                                            <div class="fl-container-flex fl-fix content main">
+                                            <div class="csc-recordEditor-header fl-container-flex header toggle">Condition</div>
+                                            <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
                                                 <!-- Left-side column -->
                                                 <div class="info-column2-50 fl-force-left">
                                                     <div class="info-pair">

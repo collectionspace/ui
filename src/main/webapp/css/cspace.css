@@ -330,7 +330,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 	line-height:11px; 
 	background-color:#666; 
 	color:#fff; 
-	padding:6px 0 7px 5px; 
+	padding:6px 0 7px 20px; 
 	width:auto; 
 	height:auto;}
 
@@ -729,6 +729,8 @@ input.cs-repeatable-delete[disabled]:focus, table tr.csc-repeatable-repeat input
 	
 /* rounded corners */
 .info-column .header {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6px 0 0;}
+.info-column .cs-togglable-expanded.header {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6px 0 0;}
+.info-column .cs-togglable-collapsed.header {-moz-border-radius:6px 6px 6px 6px; -webkit-border-radius:6px 6px 6px 6px;}
 ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6px 0 0;}
 .saveButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-messageBar-cancel {-moz-border-radius:4px; -webkit-border-radius:4px;}
 .cs-createNew-createButton {float:right;}
