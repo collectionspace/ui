@@ -131,6 +131,36 @@ fluid.registerNamespace("cspace.util");
         }
     });
     
+    cspace.util.urlBuilder = function (url, options) {
+        var that = fluid.initLittleComponent("cspace.util.urlBuilder", options);
+        if (typeof url === "strings") {
+            return that.options.urlExpander(url);
+        } 
+        fluid.each(url, function (thisUrl, key) {
+            url[key] = that.options.urlExpander(thisUrl);
+        });
+        return url;
+    };
+    
+    fluid.defaults("cspace.util.urlBuilder", {
+        urlExpander: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.urlExpander"
+            }
+        }
+    });
+    
+    cspace.componentUrlBuilder = function (urls) {
+        return {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.util.urlBuilder",
+                args: urls
+            }
+        };
+    };
+    
     /** Resolution of the global message bundle(s) */
         
     cspace.globalBundle = function (options) {

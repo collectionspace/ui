@@ -140,11 +140,7 @@ cspace = cspace || {};
     var bindHandlers = function (that) {
         that.locate("save").click(that.requestSave);
         that.locate("deleteButton").click(that.remove);
-        that.locate("cancel").click(function () {
-            that.options.messageBar.hide();
-            that.unsavedChanges = false;
-            that.events.onCancel.fire();
-        });
+        that.locate("cancel").click(that.cancel);
         cspace.util.setZIndex();      
     };
     
@@ -224,12 +220,41 @@ cspace = cspace || {};
     };
     
     cspace.recordEditor.produceTree = function (that) {
-        return that.options.uispec;
+        return fluid.merge(null, {
+            save: {
+                decorators: {
+                    type: "attrs",
+                    attributes: {
+                        value: that.options.strings.save                        
+                    }
+                }
+            },
+            cancel: {
+                decorators: {
+                    type: "attrs",
+                    attributes: {
+                        value: that.options.strings.cancel
+                    }
+                }
+            }
+        }, that.options.uispec);
     };
     
     cspace.recordEditor.cutpointGenerator = function (selectors, options) {
-        return cspace.renderUtils.cutpointsFromUISpec(options.uispec);
+        var cutpoints = options.cutpoints || fluid.renderer.selectorsToCutpoints(selectors, options) || [];
+        return cutpoints.concat(cspace.renderUtils.cutpointsFromUISpec(options.uispec));
     };
+    
+    cspace.recordEditor.cancel = function (that) {
+        that.options.messageBar.hide();
+        that.unsavedChanges = false;
+        that.events.onCancel.fire();
+    }
+    
+    cspace.recordEditor.cancelRecord = function (that) {
+        that.events.onCancel.fire();
+        window.location = that.options.urls.cancel;
+    }
     
     fluid.defaults("cspace.recordEditor", {
         mergePolicy: {
@@ -246,6 +271,10 @@ cspace = cspace || {};
         invokers: {
             rollback: {
                 funcName: "cspace.recordEditor.rollback",
+                args: "{recordEditor}"
+            },
+            cancel: {
+                funcName: "cspace.recordEditor.cancel",
                 args: "{recordEditor}"
             }
         },
@@ -266,7 +295,7 @@ cspace = cspace || {};
             deleteButton: ".csc-delete",
             requiredFields: ".csc-required:visible"
         },
-        selectorsToIgnore: ["save", "cancel", "deleteButton", "requiredFields", "identificationNumber"],
+        selectorsToIgnore: ["deleteButton", "requiredFields", "identificationNumber"],
         rendererFnOptions: {
             cutpointGenerator: "cspace.recordEditor.cutpointGenerator",
         },
@@ -287,8 +316,36 @@ cspace = cspace || {};
             addRelationsFailedMessage: "Error adding related records: ",
             defaultTermIndicator: " (default)",
             noDefaultInvitation: "-- Select an item from the list --",
-            missingRequiredFields: "Some required fields are empty"
+            missingRequiredFields: "Some required fields are empty",
+            save: "Save",
+            cancel: "Cancel"
+        },
+        urls: cspace.componentUrlBuilder({
+            cancel: "%webapp/html/findedit.html"
+        })
+    });
+    
+    cspace.recordEditor.pageRecordEditor = function (container, options) {
+        var that = fluid.initLittleComponent("cspace.recordEditor.pageRecordEditor", options);
+        return cspace.recordEditor(container, that.options);
+    };
+    fluid.defaults("cspace.recordEditor.pageRecordEditor", {
+        mergePolicy: {
+            model: "preserve",
+            applier: "preserve",
+            "rendererFnOptions.uispec": "uispec",
+            "rendererOptions.applier": "applier"
+        },
+        invokers: {
+            cancel: {
+                funcName: "cspace.recordEditor.cancelRecord"
+            }
         }
+    });
+    
+    fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.record"], {
+        funcName: "cspace.recordEditor.pageRecordEditor",
+        args: ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]
     });
     
     fluid.demands("recordEditor", "cspace.pageBuilder", 
