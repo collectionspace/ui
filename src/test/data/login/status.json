@@ -30,7 +30,8 @@
         "relations": ["create", "read", "update", "delete", "list"],
         "authorization/permissions/permroles": ["create", "read", "update", "delete", "list"],
         "notes": ["create", "read", "update", "delete", "list"],
-        "vocab": ["create", "read", "update", "delete", "list"]
+        "vocab": ["create", "read", "update", "delete", "list"],
+        "media": ["create", "read", "update", "delete", "list"]
     },
     "login": true,
     "csid": "251f98f3-0292-4f3e-aa95-455314050e1b"

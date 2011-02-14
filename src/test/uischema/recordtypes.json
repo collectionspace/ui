@@ -22,7 +22,8 @@
                     "loanout",
                     "acquisition",
                     "movement",
-                    "objectexit"
+                    "objectexit",
+                    "media"
                 ],
                 "type": "array"
             }

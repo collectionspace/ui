@@ -38,7 +38,7 @@ var createNewTester = function ($) {
     createNewTest.test("All headers and records shown", function () {
         var createNewPage = setupCreateNew();
         jqUnit.assertEquals("Number of headers shown:", 3, createNewPage.locate("categoryHeader").length);
-        jqUnit.assertEquals("Number of records shown ", 5, createNewPage.locate("radio").length);
+        jqUnit.assertEquals("Number of records shown ", 6, createNewPage.locate("radio").length);
         //styling:
         assertStyling(createNewPage, createNewPage.options.styles.totalOf3);        
     });
@@ -57,7 +57,7 @@ var createNewTester = function ($) {
     createNewTestLessPerms.test("Hiding Records", function () {
         var createNewPage = setupCreateNew();
         jqUnit.assertEquals("All headers shown:", 3, createNewPage.locate("categoryHeader").length);
-        jqUnit.assertEquals("Number of records shown ", 5, createNewPage.locate("radio").length);
+        jqUnit.assertEquals("Number of records shown ", 6, createNewPage.locate("radio").length);
         //acquisition:
         var str = createNewPage.options.parentBundle.messageBase.acquisition;
         jqUnit.assertTrue("Aquisition ("+str+") not shown", $('label:contains("'+str+'")').length < 1);
@@ -108,6 +108,7 @@ var createNewTester = function ($) {
     lessCategories.loanout = [];
     lessCategories.loanin = [];
     lessCategories.movement = [];
+    lessCategories.media = [];
     
     
     var createNewTestOneCategories = cspace.tests.testEnvironment({

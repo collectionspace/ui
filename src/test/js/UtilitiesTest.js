@@ -895,7 +895,8 @@ var utilitiesTester = function ($) {
             "organization",
             "cataloging",
             "movement",
-            "objectexit"
+            "objectexit",
+            "media"
         ], recTypes.all);
         jqUnit.assertDeepEq("cataloging should contain", [
             "cataloging"
@@ -906,7 +907,8 @@ var utilitiesTester = function ($) {
             "loanout",
             "acquisition",
             "movement",
-            "objectexit"
+            "objectexit",
+            "media"
         ], recTypes.procedures);
         jqUnit.assertDeepEq("vocabularies should contain", [
             "person",

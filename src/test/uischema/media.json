@@ -1,0 +1,182 @@
+{
+    "media": {
+        "properties": {
+            "relations": {
+                "default": {
+                    
+                },
+                "type": "object" 
+            },
+            "termsUsed": {
+                "default": [
+                    
+                ],
+                "type": "array" 
+            },
+            "csid": {
+                "type": "string" 
+            },
+            "fields": {
+                "properties": {
+                    "contributor": {
+                        "type": "string" 
+                    },
+                    "copyrightStatement": {
+                        "type": "string" 
+                    },
+                    "coverage": {
+                        "type": "string" 
+                    },
+                    "creator": {
+                        "type": "string" 
+                    },
+                    "dates": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean" 
+                                },
+                                "date": {
+                                    "type": "date" 
+                                } 
+                            },
+                            "type": "object" 
+                        },
+                        "type": "array" 
+                    },
+                    "dateCreated": {
+                        "type": "date" 
+                    },
+                    "dateModified": {
+                        "type": "date" 
+                    },
+                    "description": {
+                        "type": "string" 
+                    },
+                    "dimensionsSummary": {
+                        "type": "string"
+                    },
+                    "dimensions": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean" 
+                                },
+                                "dimension": {
+                                    "default": "",
+                                    "type": "string" 
+                                },
+                                "measuredBy": {
+                                    "type": "string" 
+                                },
+                                "measurementUnit": {
+                                    "default": "",
+                                    "type": "string" 
+                                },
+                                "measurementMethod": {
+                                    "default": "",
+                                    "type": "string" 
+                                },
+                                "value": {
+                                    "type": "string" 
+                                },
+                                "valueDate": {
+                                    "type": "date" 
+                                },
+                                "valueQualifier": {
+                                    "type": "string" 
+                                } 
+                            },
+                            "type": "object" 
+                        },
+                        "type": "array" 
+                    },
+                    "fileName": {
+                        "type": "string" 
+                    },
+                    "format": {
+                        "type": "string" 
+                    },
+                    "identificationNumber": {
+                        "type": "string" 
+                    },
+                    "languages": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean" 
+                                },
+                                "language": {
+                                    "default": "",
+                                    "type": "string" 
+                                } 
+                            },
+                            "type": "object" 
+                        },
+                        "type": "array" 
+                    },
+                    "location": {
+                        "type": "string" 
+                    },
+                    "publisher": {
+                        "type": "string" 
+                    },
+                    "relations": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean" 
+                                },
+                                "relation": {
+                                    "type": "string" 
+                                } 
+                            },
+                            "type": "object" 
+                        },
+                        "type": "array" 
+                    },
+                    "rightsHolder": {
+                        "type": "string" 
+                    },
+                    "source": {
+                        "type": "string" 
+                    },
+                    "subjects": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean" 
+                                },
+                                "subject": {
+                                    "type": "string" 
+                                } 
+                            },
+                            "type": "object" 
+                        },
+                        "type": "array" 
+                    },
+                    "title": {
+                        "type": "string" 
+                    },
+                    "types": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean" 
+                                },
+                                "type": {
+                                    "default": "",
+                                    "type": "string" 
+                                } 
+                            },
+                            "type": "object" 
+                        },
+                        "type": "array" 
+                    } 
+                },
+                "type": "object" 
+            } 
+        },
+        "type": "object" 
+    }
+}

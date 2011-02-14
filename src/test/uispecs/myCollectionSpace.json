@@ -90,5 +90,18 @@
             ]
         }
     },
+    "media": {
+        ".csc-recordList-row:": {
+            "children": [
+                {
+                    ".csc-entry-number": {
+                        "linktext": "${items.0.number}",
+                        "target": "objectexit.html?csid=${items.0.csid}"
+                     },
+                    ".csc-summary": "${items.0.summary}"
+                }
+            ]
+        }
+    },
     "authorityTerms": {}
 }

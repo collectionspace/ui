@@ -162,6 +162,9 @@ cspace = cspace || {};
         
     fluid.demands("objectexit", "cspace.myCollectionSpace", 
         ["{myCollectionSpace}.dom.objectexit", fluid.COMPONENT_OPTIONS]);
+    
+    fluid.demands("media", "cspace.myCollectionSpace", 
+        ["{myCollectionSpace}.dom.media", fluid.COMPONENT_OPTIONS]);
         
     fluid.demands("togglable", "cspace.myCollectionSpace", 
         ["{myCollectionSpace}.container", fluid.COMPONENT_OPTIONS]);
@@ -182,6 +185,7 @@ cspace = cspace || {};
             loanout: ".csc-myCollectionSpace-loanout-group",
             movement: ".csc-myCollectionSpace-movement-group",
             objectexit: ".csc-myCollectionSpace-objectexit-group",
+            media: ".csc-myCollectionSpace-media-group",
             togglable: ".csc-toggle-selector"
         },
         selectorsToIgnore: "togglable",
@@ -253,6 +257,9 @@ cspace = cspace || {};
                 type: "cspace.recordList"
             },
             objectexit: {
+                type: "cspace.recordList"
+            },
+            media: {
                 type: "cspace.recordList"
             },
             togglable: {

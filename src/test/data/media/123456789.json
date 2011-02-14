@@ -1,0 +1,86 @@
+{
+    "termsUsed": [
+        
+    ],
+    "relations": {
+        
+    },
+    "csid": "123456789",
+    "fields": {
+        "csid": "123456789",
+        "contributor": "urn:cspace:org.collectionspace.demo:personauthority:name(person):person:name(johnsmith)'John+Smith'",
+        "copyrightStatement": "This is copyright",
+        "coverage": "This is a place authority",
+        "creator": "urn:cspace:org.collectionspace.demo:personauthority:name(person):person:name(johnsmith)'John+Smith'",
+        "dates": [
+            {
+                "date": "July 1, 2010",
+                "_primary": false 
+            },
+            {
+                "date": "July 2, 2010",
+                "_primary": true 
+            } 
+        ],
+        "dateCreated": "July 2, 2011",
+        "dateModified": "July 3, 2011",
+        "description": "This is description",
+        "dimansionsSummary": "This is dimension summary",
+        "dimensions": [
+            {
+                "_primary": true,
+                "dimension": "file",
+                "measuredBy": "urn:cspace:org.collectionspace.demo:personauthority:name(person):person:name(johnsmith)'John+Smith'",
+                "measurementUnit": "carats",
+                "measurementMethod": "protractor",
+                "value": "123",
+                "valueDate": "July 2, 2010",
+                "valueQualifier": "exact" 
+            } 
+        ],
+        "fileName": "sample_file.jpg",
+        "format": "JPEG Image",
+        "identificationNumber": "MH2011.3",
+        "languages": [
+            {
+                "language": "ancientgreek",
+                "_primary": false 
+            },
+            {
+                "language": "ancientgreek",
+                "_primary": true 
+            } 
+        ],
+        "location": "someserve.org/img/sample_file.jpg",
+        "publisher": "urn: cspace: org.collectionspace.demo: personauthority: name(person): person: name(johnjohn)'John+John'",
+        "relations": [
+            {
+                "relation": "Some relation",
+                "_primary": false 
+            },
+            {
+                "relation": "Primary relation",
+                "_primary": true 
+            } 
+        ],
+        "rightsHolder": "urn: cspace: org.collectionspace.demo: personauthority: name(person): person: name(jimnabors)'Jim+Nabors'",
+        "source": "This is source",
+        "subjects": [
+            {
+                "subject": "This is topic",
+                "_primary": true 
+            } 
+        ],
+        "title": "Sample File",
+        "types": [
+            {
+                "type": "document",
+                "_primary": true 
+            },
+            {
+                "type": "dataset",
+                "_primary": false 
+            } 
+        ] 
+    }
+}

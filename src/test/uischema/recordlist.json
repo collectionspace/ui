@@ -9,7 +9,8 @@
             "organization",
             "cataloging",
             "movement",
-            "objectexit"
+            "objectexit",
+            "media"
         ],
         "type": "array"
     }

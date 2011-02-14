@@ -1,0 +1,8 @@
+{ 
+    "results": [
+        { "number": "MH2011.3", "csid": "123456789", "summary": "Sample File, July 3, 2011", "recordtype": "media"}
+    ],
+    "pagination": {
+        "totalItems": 1
+    }
+}

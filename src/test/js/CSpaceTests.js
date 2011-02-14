@@ -45,7 +45,8 @@ cspace.tests.sampleSchema = {
                     "loanout",
                     "acquisition",
                     "movement",
-                    "objectexit"
+                    "objectexit",
+                    "media"
                 ],
                 "type": "array"
             }
@@ -61,7 +62,8 @@ cspace.tests.sampleSchema = {
             "organization",
             "cataloging",
             "movement",
-            "objectexit"
+            "objectexit",
+            "media"
         ],
         "type": "array"
     }
@@ -74,7 +76,8 @@ cspace.tests.sampleUserPerms = {
         "acquisition": [],
         "organization": ["create", "read", "update", "delete", "list"],
         "movement": ["create", "read", "update", "delete", "list"],
-        "cataloging": ["create", "read", "update", "delete", "list"]
+        "cataloging": ["create", "read", "update", "delete", "list"],
+        "media": ["create", "read", "update", "delete", "list"]
 };
 
 cspace.tests.fullPerms = {
@@ -86,7 +89,8 @@ cspace.tests.fullPerms = {
         "movement": ["create", "read", "update", "delete", "list"],
         "objectexit": ["create", "read", "update", "delete", "list"],
         "person": ["create", "read", "update", "delete", "list"],
-        "organization": ["create", "read", "update", "delete", "list"]
+        "organization": ["create", "read", "update", "delete", "list"],
+        "media": ["create", "read", "update", "delete", "list"]
 };
 
 fluid.demands("cspace.urlExpander", ["cspace.localData", "cspace.test"],
