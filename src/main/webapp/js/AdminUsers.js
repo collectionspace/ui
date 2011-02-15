@@ -96,7 +96,7 @@ cspace = cspace || {};
         });
         
         that.userListEditor.details.events.afterRender.addListener(function () {
-            that.locate("deleteButton")[that.isCurrentUser(that.userListEditor.details.model.csid) ? "hide" : "show"]();
+            that.locate("deleteButton")[that.options.login.options.csid === that.userListEditor.details.model.csid ? "hide" : "show"]();
         });
     };
 
@@ -129,12 +129,6 @@ cspace = cspace || {};
             }
         },
         components: {
-            isCurrentUser: {
-                type: "cspace.util.isCurrentUser",
-                options: {
-                    csid: "{adminUsers}.options.currentUserId"
-                }
-            },
             passwordValidator: {
                 type: "cspace.passwordValidator"
             }
@@ -159,6 +153,7 @@ cspace = cspace || {};
             searchError: "Error retrieving search results: ",
             passwordsDoNotMatch: "Passwords don't match."
         },
+        login: "{userLogin}",
         messageBar: "{messageBar}",
         queryURL: "../../chain/users/search?query="
     });

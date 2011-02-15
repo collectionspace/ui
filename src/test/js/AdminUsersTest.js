@@ -427,7 +427,9 @@ var adminUsersTester = function () {
                 start();
             });
             adminUsers.userListEditor.list.locate("row").eq(index).click();
-        }, {currentUserId: userCSID});
+        }, {
+            login: cspace.util.login({csid: userCSID})
+        });
     };
     
     adminUsersTest.test("Currently logged in user should have invisible delete button", function () {

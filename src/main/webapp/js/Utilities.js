@@ -192,22 +192,6 @@ fluid.registerNamespace("cspace.util");
     
     fluid.fetchResources.primeCacheFromResources("cspace.globalBundle");
     
-    /**
-     * cspace.util.isCurrentUser - currently a function that will verify the csid vs the currenly logged in user's csid.
-     * Potientially might have more permission related functionality.
-     * % options - an object with options that is currently only interested in csid (current user's csid).
-     */
-    cspace.util.isCurrentUser = function (options) {
-        var that = fluid.initLittleComponent("cspace.util.isCurrentUser", options);
-        return function (csid) {
-            return csid === that.options.csid;
-        };
-    };
-    
-    fluid.defaults("cspace.util.isCurrentUser", {
-        csid: null
-    });
-    
     /** Convert the global state of using local data into an IoC "type tag" so that
      * decisions based on it can be performed out of line with application code.
      * By use of this "indirect dispatch" all test configuration code may now be
@@ -1042,6 +1026,10 @@ fluid.registerNamespace("cspace.util");
     
     cspace.util.keyCode = function (evt) {
         return evt.keyCode ? evt.keyCode : (evt.which ? evt.which : 0);          
+    };
+    
+    cspace.util.login = function (options) {
+        return fluid.initLittleComponent("cspace.util.login", options);
     };
     
 })(jQuery, fluid);

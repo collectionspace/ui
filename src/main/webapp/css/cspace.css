@@ -97,6 +97,8 @@ a.add-link:hover, a.add-link:focus {color:#000; text-decoration:underline;}
 #all-content-login a:active {color:#656565; }
 #all-content-login a:hover, #all-content-login a:focus   {color:#6699C8; text-decoration:none;}
 
+.cs-header-userGroup {display: inline; float: right; padding: 8px 5px 0 0;}
+.cs-header-userName {color: #6F9ECD; font-weight:bold;}
 .header-menu-logout a:link, .header-menu-logout a:visited {color:#656565; text-decoration:none;}
 .header-menu-logout a:active {color:#656565;}
 .header-menu-logout a:hover, .header-menu-logout a:focus  {color:#6699C8; text-decoration:underline;}

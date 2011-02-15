@@ -168,6 +168,9 @@ fluid.defaults("cspace.tests.testEnvironment", {
         globalNavigator: {
             type: "cspace.util.globalNavigator",
         },
+        userLogin: {
+            type: "cspace.util.login",
+        },
         recordTypes: {
             type: "cspace.recordTypes",
             options: {

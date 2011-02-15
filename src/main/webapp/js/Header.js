@@ -25,6 +25,11 @@ cspace = cspace || {};
             fluid.each(strings, function (str, selector) {
                 tree[selector] = {messagekey: selector};
             });
+            tree.user = that.options.login ? {messagekey: "user"} : {};
+            tree.userName = that.options.login ? {
+                messagekey: "userName",
+                args: {userName: that.options.login.options.screenName}
+            } : {};
             return tree;
         };
         
@@ -64,7 +69,9 @@ cspace = cspace || {};
             findEdit: ".csc-header-findEdit",
             report: ".csc-header-report",
             adminisrtation: ".csc-header-adminisrtation",
-            logout: ".csc-header-logout"
+            logout: ".csc-header-logout",
+            user: ".csc-header-user",
+            userName: ".csc-header-userName"
         },
         invokers: {
             refreshComponents: {
@@ -86,13 +93,16 @@ cspace = cspace || {};
             }
         },
         schema: {},
+        login: "{userLogin}",
         strings: {
             myCollectionSpace: "My CollectionSpace",
             createNew: "Create New",
             findEdit: "Find and Edit",
             report: "Report",
             adminisrtation: "Administration",
-            logout: "Sign out"
+            logout: "Sign out",
+            user: "Hi,",
+            userName: "%userName"
         }
     });
     

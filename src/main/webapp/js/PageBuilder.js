@@ -136,7 +136,7 @@ cspace = cspace || {};
                     success: function (data) {
                         if (data.login || that.noLogin) {
                             options.permissions = data.permissions;
-                            options.currentUserId = data.currentUserId;
+                            options.userLogin = data;
                         }
                         else {
                             var currentUrl = document.location.href;
@@ -150,10 +150,7 @@ cspace = cspace || {};
                 }
             }
         }, function (resourceSpecs) {
-            fluid.merge({
-                model: "preserve",
-                applier: "preserve"
-            }, resourceSpecs.config.resourceText, options);
+            fluid.merge({model: "preserve", applier: "preserve"}, resourceSpecs.config.resourceText, options);
             that.pageBuilder = cspace.pageBuilder(resourceSpecs.config.resourceText);
         });
         return that;
@@ -180,7 +177,6 @@ cspace = cspace || {};
         that.applier = that.options.applier || fluid.makeChangeApplier(that.model);
         that.schema = {};
         that.permissions = that.options.permissions;
-        that.currentUserId = that.options.currentUserId;
         
         fluid.instantiateFirers(that, that.options);
         
@@ -295,6 +291,14 @@ cspace = cspace || {};
             },
             recordTypeManager: {
                 type: "cspace.recordTypeManager"
+            },
+            userLogin: {
+                type: "cspace.util.login",
+                options: {
+                    screenName: "{pageBuilder}.options.userLogin.screenName",
+                    userId: "{pageBuilder}.options.userLogin.userId",
+                    csid: "{pageBuilder}.options.userLogin.csid"
+                }
             },
             globalBundle: {
                 type: "cspace.globalBundle"
