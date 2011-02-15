@@ -7,12 +7,12 @@
                         ".csc-related-summary": "${items.0.summary}",
                         ".csc-related-number": {
                             "linktext": "${items.0.number}",
-                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}" 
+                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
                         },
-                        ".csc-related-recordtype": "${items.0.recordtype}" 
-                    } 
-                ] 
-            } 
+                        ".csc-related-recordtype": "${items.0.recordtype}"
+                    }
+                ]
+            }
         },
         "termsUsed": {
             ".csc-recordList-row:": {
@@ -20,13 +20,13 @@
                     {
                         ".csc-related-number": {
                             "linktext": "${items.0.number}",
-                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}" 
+                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
                         },
                         ".csc-related-field": "${items.0.sourceFieldName}",
-                        ".csc-related-recordtype": "${items.0.recordtype}" 
-                    } 
-                ] 
-            } 
+                        ".csc-related-recordtype": "${items.0.recordtype}"
+                    }
+                ]
+            }
         },
         "relatedCataloging": {
             ".csc-recordList-row:": {
@@ -35,29 +35,17 @@
                         ".csc-related-summary": "${items.0.summary}",
                         ".csc-related-number": {
                             "linktext": "${items.0.number}",
-                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}" 
-                        } 
-                    } 
-                ] 
-            } 
-        } 
+                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "titleBar": {
+        ".csc-media-identificationNumber-titlebar": "${fields.identificationNumber}"
     },
     "recordEditor": {
-        ".csc-media-contributor": {
-            "decorators": [
-                {
-                    "func": "cspace.autocomplete",
-                    "type": "fluid",
-                    "options": {
-                        "queryUrl": "../../chain/media/autocomplete/contributor",
-                        "vocabUrl": "../../chain/media/source-vocab/contributor" 
-                    } 
-                } 
-            ],
-            "value": "${fields.contributor}" 
-        },
-        ".csc-media-copyrightStatement": "${fields.copyrightStatement}",
-        ".csc-media-coverage": "${fields.coverage}",
         ".csc-media-creator": {
             "decorators": [
                 {
@@ -65,12 +53,13 @@
                     "type": "fluid",
                     "options": {
                         "queryUrl": "../../chain/media/autocomplete/creator",
-                        "vocabUrl": "../../chain/media/source-vocab/creator" 
-                    } 
-                } 
+                        "vocabUrl": "../../chain/media/source-vocab/creator"
+                    }
+                }
             ],
-            "value": "${fields.creator}" 
+            "value": "${fields.creator}"
         },
+        ".csc-blob-id": "${fields.id}",
         ".csc-media-dates": {
             "decorators": [
                 {
@@ -84,33 +73,74 @@
                                     "expander": {
                                         "repeatID": "repeat:",
                                         "tree": {
-                                            ".csc-media-date": "${{row}.date}",
                                             ".csc-media-date-container": {
                                                 "decorators": [
                                                     {
                                                         "func": "cspace.datePicker",
-                                                        "type": "fluid" 
-                                                    } 
-                                                ] 
-                                            } 
+                                                        "type": "fluid"
+                                                    }
+                                                ]
+                                            },
+                                            ".csc-media-date": "${{row}.date}"
                                         },
                                         "type": "fluid.renderer.repeat",
                                         "pathAs": "row",
-                                        "controlledBy": "fields.dates" 
-                                    } 
+                                        "controlledBy": "fields.dates"
+                                    }
                                 },
-                                "type": "fluid.noexpand" 
-                            } 
-                        } 
-                    } 
-                } 
-            ] 
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
         },
-        ".csc-media-dateCreated": "${fields.dateCreated}",
-        ".csc-media-dateModified": "${fields.dateModified}",
-        ".csc-media-description": "${fields.description}",
-        ".csc-media-dimensionsSummary": "${fields.dimansionsSummary}",
-        ".csc-media-dimensions": {
+        ".csc-blob-length": "${fields.length}",
+        ".csc-media-coverage": "${fields.coverage}",
+        ".csc-media-relation": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.relations",
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-media-relation": "${{row}.relation}"
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.relations"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-media-contributor": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/media/autocomplete/contributor",
+                        "vocabUrl": "../../chain/media/source-vocab/contributor"
+                    }
+                }
+            ],
+            "value": "${fields.contributor}"
+        },
+        ".csc-media-format": "${fields.format}",
+        ".csc-blob-mime-type": "${fields.mime-type}",
+        ".csc-media-dimensionSummary": "${fields.dimensionSummary}",
+        ".csc-media-dimension": {
             "decorators": [
                 {
                     "func": "cspace.makeRepeatable",
@@ -123,55 +153,16 @@
                                     "expander": {
                                         "repeatID": "repeat:",
                                         "tree": {
-                                            ".csc-media-dimensions-dimension": {
-                                                "default": "0",
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Base",
-                                                    "Circumference",
-                                                    "Count",
-                                                    "Depth",
-                                                    "Diameter",
-                                                    "Height",
-                                                    "Length",
-                                                    "Running Time",
-                                                    "Target",
-                                                    "Volume",
-                                                    "Weight",
-                                                    "Width" 
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "area",
-                                                    "base",
-                                                    "circumference",
-                                                    "count",
-                                                    "depth",
-                                                    "diameter",
-                                                    "height",
-                                                    "length",
-                                                    "running_time",
-                                                    "target",
-                                                    "volume",
-                                                    "weight",
-                                                    "width" 
-                                                ],
-                                                "selection": "${{row}.dimension}" 
-                                            },
-                                            ".csc-media-dimensions-measuredBy": {
+                                            ".csc-dimension-value": "${{row}.value}",
+                                            ".csc-dimension-valueDate-container": {
                                                 "decorators": [
                                                     {
-                                                        "func": "cspace.autocomplete",
-                                                        "type": "fluid",
-                                                        "options": {
-                                                            "queryUrl": "../../chain/media/autocomplete/measuredBy",
-                                                            "vocabUrl": "../../chain/media/source-vocab/measuredBy" 
-                                                        } 
-                                                    } 
-                                                ],
-                                                "value": "${{row}.measuredBy}" 
+                                                        "func": "cspace.datePicker",
+                                                        "type": "fluid"
+                                                    }
+                                                ]
                                             },
-                                            ".csc-media-dimensions-measurementUnit": {
+                                            ".csc-dimension-measurementUnit": {
                                                 "default": "0",
                                                 "optionnames": [
                                                     "Please select a value",
@@ -187,7 +178,7 @@
                                                     "Minutes",
                                                     "Pixels",
                                                     "Square Feet",
-                                                    "Stories" 
+                                                    "Stories"
                                                 ],
                                                 "optionlist": [
                                                     "",
@@ -203,11 +194,61 @@
                                                     "minutes",
                                                     "pixels",
                                                     "square_feet",
-                                                    "stories" 
+                                                    "stories"
                                                 ],
-                                                "selection": "${{row}.measurementUnit}" 
+                                                "selection": "${{row}.measurementUnit}"
                                             },
-                                            ".csc-media-dimensions-measurementMethod": {
+                                            ".csc-dimension-measuredBy": {
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.autocomplete",
+                                                        "type": "fluid",
+                                                        "options": {
+                                                            "queryUrl": "../../chain/dimension/autocomplete/measuredBy",
+                                                            "vocabUrl": "../../chain/dimension/source-vocab/measuredBy"
+                                                        }
+                                                    }
+                                                ],
+                                                "value": "${{row}.measuredBy}"
+                                            },
+                                            ".csc-dimension-valueQualifier": "${{row}.valueQualifier}",
+                                            ".csc-dimension-dimension": {
+                                                "default": "0",
+                                                "optionnames": [
+                                                    "Please select a value",
+                                                    "Area",
+                                                    "Base",
+                                                    "Circumference",
+                                                    "Count",
+                                                    "Depth",
+                                                    "Diameter",
+                                                    "Height",
+                                                    "Length",
+                                                    "Running Time",
+                                                    "Target",
+                                                    "Volume",
+                                                    "Weight",
+                                                    "Width"
+                                                ],
+                                                "optionlist": [
+                                                    "",
+                                                    "area",
+                                                    "base",
+                                                    "circumference",
+                                                    "count",
+                                                    "depth",
+                                                    "diameter",
+                                                    "height",
+                                                    "length",
+                                                    "running_time",
+                                                    "target",
+                                                    "volume",
+                                                    "weight",
+                                                    "width"
+                                                ],
+                                                "selection": "${{row}.dimension}"
+                                            },
+                                            ".csc-dimension-measurementMethod": {
                                                 "default": "0",
                                                 "optionnames": [
                                                     "Please select a value",
@@ -255,170 +296,28 @@
                                                     "spring_scale",
                                                     "hydraulic_or_pneumatic_scale"
                                                 ],
-                                                "selection": "${{row}.measurementMethod}" 
+                                                "selection": "${{row}.measurementMethod}"
                                             },
-                                            ".csc-media-dimensions-value": "${{row}.value}",
-                                            ".csc-media-dimensions-valueQualifier": "${{row}.valueQualifier}",
-                                            ".csc-media-dimensions-valueDate": "${{row}.valueDate}",
-                                            ".csc-media-dimensions-valueDate-container": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.datePicker",
-                                                        "type": "fluid" 
-                                                    } 
-                                                ] 
-                                            } 
+                                            ".csc-dimension-valueDate": "${{row}.valueDate}"
                                         },
                                         "type": "fluid.renderer.repeat",
                                         "pathAs": "row",
-                                        "controlledBy": "fields.dimensions" 
-                                    } 
+                                        "controlledBy": "fields.dimensions"
+                                    }
                                 },
-                                "type": "fluid.noexpand" 
-                            } 
-                        } 
-                    } 
-                } 
-            ] 
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
         },
-        ".csc-media-fileName": "${fields.fileName}",
-        ".csc-media-format": "${fields.format}",
-        ".csc-media-identificationNumber": "${fields.identificationNumber}",
-        ".csc-media-identificationNumber-container": {
-            "decorators": [
-                {
-                    "func": "cspace.numberPatternChooser",
-                    "type": "fluid",
-                    "options": {
-                        "model": {
-                            "names": [
-                                "Media Handling" 
-                            ],
-                            "list": [
-                                "media" 
-                            ],
-                            "samples": [
-                                "MH2010.1" 
-                            ] 
-                        },
-                        "selectors": {
-                            "numberField": ".csc-media-identificationNumber" 
-                        } 
-                    } 
-                } 
-            ] 
-        },
-        ".csc-media-languages": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "elPath": "fields.languages",
-                        "protoTree": {
-                            "expander": {
-                                "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-media-languages": {
-                                                "default": "0",
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Old English",
-                                                    "Chinese",
-                                                    "English",
-                                                    "Hebrew",
-                                                    "Ancient Greek",
-                                                    "Portuguese",
-                                                    "Arabic",
-                                                    "Russian",
-                                                    "Korean",
-                                                    "French",
-                                                    "German",
-                                                    "Swahili",
-                                                    "Italian",
-                                                    "Middle English",
-                                                    "Latin",
-                                                    "Japanese",
-                                                    "Spanish" 
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "oldenglish",
-                                                    "chinese",
-                                                    "eng",
-                                                    "hebrew",
-                                                    "ancientgreek",
-                                                    "portuguese",
-                                                    "arabic",
-                                                    "russian",
-                                                    "korean",
-                                                    "french",
-                                                    "german",
-                                                    "swahili",
-                                                    "italian",
-                                                    "middleenglish",
-                                                    "latin",
-                                                    "japanese",
-                                                    "spn" 
-                                                ],
-                                                "selection": "${{row}.language}" 
-                                            } 
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.languages" 
-                                    } 
-                                },
-                                "type": "fluid.noexpand" 
-                            } 
-                        } 
-                    } 
-                } 
-            ] 
-        },
+        ".csc-blob-name": "${fields.name}",
+        ".csc-media-dateCreated": "${fields.dateCreated}",
+        ".csc-blob-uri": "${fields.uri}",
+        ".csc-media-dateModified": "${fields.dateModified}",
+        ".csc-media-updatedAt": "${fields.updatedAt}",
         ".csc-media-location": "${fields.location}",
-        ".csc-media-publisher": {
-            "decorators": [
-                {
-                    "func": "cspace.autocomplete",
-                    "type": "fluid",
-                    "options": {
-                        "queryUrl": "../../chain/media/autocomplete/publisher",
-                        "vocabUrl": "../../chain/media/source-vocab/publisher" 
-                    } 
-                } 
-            ],
-            "value": "${fields.publisher}" 
-        },
-        ".csc-media-relations": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "elPath": "fields.relations",
-                        "protoTree": {
-                            "expander": {
-                                "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-media-relations": "${{row}.relation}" 
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.relations" 
-                                    } 
-                                },
-                                "type": "fluid.noexpand" 
-                            } 
-                        } 
-                    } 
-                } 
-            ] 
-        },
         ".csc-media-rightsHolder": {
             "decorators": [
                 {
@@ -426,42 +325,15 @@
                     "type": "fluid",
                     "options": {
                         "queryUrl": "../../chain/media/autocomplete/rightsHolder",
-                        "vocabUrl": "../../chain/media/source-vocab/rightsHolder" 
-                    } 
-                } 
+                        "vocabUrl": "../../chain/media/source-vocab/rightsHolder"
+                    }
+                }
             ],
-            "value": "${fields.rightsHolder}" 
+            "value": "${fields.rightsHolder}"
         },
-        ".csc-media-source": "${fields.source}",
-        ".csc-media-subjects": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "elPath": "fields.subjects",
-                        "protoTree": {
-                            "expander": {
-                                "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-media-subjects": "${{row}.subject}" 
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.subjects" 
-                                    } 
-                                },
-                                "type": "fluid.noexpand" 
-                            } 
-                        } 
-                    } 
-                } 
-            ] 
-        },
-        ".csc-media-title": "${fields.title}",
-        ".csc-media-types": {
+        ".csc-media-tenantID": "${fields.tenantID}",
+        ".csc-media-copyrightStatement": "${fields.copyrightStatement}",
+        ".csc-media-type": {
             "decorators": [
                 {
                     "func": "cspace.makeRepeatable",
@@ -474,7 +346,7 @@
                                     "expander": {
                                         "repeatID": "repeat:",
                                         "tree": {
-                                            ".csc-media-types": {
+                                            ".csc-media-type": {
                                                 "default": "0",
                                                 "optionnames": [
                                                     "Please select a value",
@@ -482,7 +354,7 @@
                                                     "Document",
                                                     "Moving Image",
                                                     "Still Image",
-                                                    "Sound" 
+                                                    "Sound"
                                                 ],
                                                 "optionlist": [
                                                     "",
@@ -490,22 +362,166 @@
                                                     "document",
                                                     "moving_image",
                                                     "still_image",
-                                                    "sound" 
+                                                    "sound"
                                                 ],
-                                                "selection": "${{row}.type}" 
-                                            } 
+                                                "selection": "${{row}.type}"
+                                            }
                                         },
                                         "type": "fluid.renderer.repeat",
                                         "pathAs": "row",
-                                        "controlledBy": "fields.types" 
-                                    } 
+                                        "controlledBy": "fields.types"
+                                    }
                                 },
-                                "type": "fluid.noexpand" 
-                            } 
-                        } 
-                    } 
-                } 
-            ] 
-        } 
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-media-source": "${fields.source}",
+        ".csc-media-subject": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.subjects",
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-media-subject": "${{row}.subject}"
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.subjects"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-media-blobCsid": "${fields.blobCsid}",
+        ".csc-media-title": "${fields.title}",
+        ".csc-blob-encoding": "${fields.encoding}",
+        ".csc-media-identificationNumber": "${fields.identificationNumber}",
+        ".csc-media-filename": "${fields.filename}",
+        ".csc-media-description": "${fields.description}",
+        ".csc-blob-digest": "${fields.digest}",
+        ".csc-blob-data": "${fields.data}",
+        ".csc-media-createdAt": "${fields.createdAt}",
+        ".csc-media-uri": "${fields.uri}",
+        ".csc-media-language": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.languages",
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-media-language": {
+                                                "optionnames": [
+                                                    "Please select a value",
+                                                    "Middle English",
+                                                    "Portuguese",
+                                                    "Japanese",
+                                                    "Swahili",
+                                                    "French",
+                                                    "Arabic",
+                                                    "Spanish",
+                                                    "Chinese",
+                                                    "Hebrew",
+                                                    "Ancient Greek",
+                                                    "Italian",
+                                                    "German",
+                                                    "English",
+                                                    "Korean",
+                                                    "Russian",
+                                                    "Old English",
+                                                    "Latin"
+                                                ],
+                                                "optionlist": [
+                                                    "",
+                                                    "middleenglish",
+                                                    "portuguese",
+                                                    "japanese",
+                                                    "swahili",
+                                                    "french",
+                                                    "arabic",
+                                                    "spn",
+                                                    "chinese",
+                                                    "hebrew",
+                                                    "ancientgreek",
+                                                    "italian",
+                                                    "german",
+                                                    "eng",
+                                                    "korean",
+                                                    "russian",
+                                                    "oldenglish",
+                                                    "latin"
+                                                ],
+                                                "selection": "${{row}.language}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.languages"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-media-publisher": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/media/autocomplete/publisher",
+                        "vocabUrl": "../../chain/media/source-vocab/publisher"
+                    }
+                }
+            ],
+            "value": "${fields.publisher}"
+        },
+        ".csc-media-identificationNumber-container": {
+            "decorators": [
+                {
+                    "func": "cspace.numberPatternChooser",
+                    "type": "fluid",
+                    "options": {
+                        "model": {
+                            "names": [
+                                "Media Handling"
+                            ],
+                            "list": [
+                                "media"
+                            ],
+                            "samples": [
+                                "MH2010.1"
+                            ]
+                        },
+                        "selectors": {
+                            "numberField": ".csc-media-identificationNumber"
+                        }
+                    }
+                }
+            ]
+        }
     }
 }
