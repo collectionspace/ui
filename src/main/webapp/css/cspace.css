@@ -313,7 +313,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 	background-color:#666; 
 	cursor:pointer; 
 	color:#fff; 
-	height:25px; 
+	height:19px; 
 	padding-bottom:0;}
 .fl-container-left  .information-group       .header.toggle:hover,
 .fl-container-left  .information-subgroup .header.toggle:hover  {
@@ -337,7 +337,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 	height:auto;}
 
 /*.found-records-box.header {font-size:13px; line-height:13px; background-color:#AAA; cursor:default; color:#fff; padding: 0;}*/
-.header.static {cursor:default; padding:5px 0 7px 5px; height:15px; width:auto;}
+.header.static {cursor:default; padding:5px 0 5px 5px; height:14px; width:auto;}
 
 
 .fl-container-left .upper-save {float:right;}
@@ -560,7 +560,7 @@ td .field-cal img, td .csc-calendar-button img {border:none;}
 .gen-num-overlay table tr:hover td.prefix {/*color:#333399;*/}
 
 .pivot-search-box {margin-bottom:20px; margin-top:0px; border:none; border-top:none; }
-.pivot-search-box .header {background-color:#74AC4D; color:#FFFFFF; font-size:13px;  padding:5px 0 6px 5px; width:auto;}
+.pivot-search-box .header {background-color:#74AC4D; color:#FFFFFF; font-size:13px;  padding:5px 0 5px 5px; width:auto;}
 .pivot-search-box .content {border:none; padding: 10px; background-color:#E8E7E7;}
 
 .right-sidebar {width:100%; border-bottom:3px solid #CDE2F2;}
@@ -573,7 +573,7 @@ td .field-cal img, td .csc-calendar-button img {border:none;}
 .pivot-box .header, .pivot-search-box-header, .pivot-users-box-header, .create-report .header
 	{background-color:#6F9ECD; /*padding:4px 4px 4px 8px;*/ color:#FFF; font-size:13px; cursor:pointer; height:13px; width:auto;}
 .pivot-box .header:hover, .pivot-box .header:focus {background-color:#438CC9;}
-.pivot-box .header.toggle {height:25px;}
+.pivot-box .header.toggle {height:19px;}
 .header.static.button {height:21px; padding:4px 0 0px 4px;}
 .create-report {padding-left:10px; background-color:inherit; margin-bottom:20px;}
 .create-report .header {background-color:#F0F5FB; padding-bottom:6px; color:#4D4D4D; cursor:auto;}
@@ -774,8 +774,8 @@ ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6
 .cs-createNew-content .cs-createNew-categoryHeader {
     -moz-border-radius:6px 6px 0 0;
     cursor:default;
-    height:15px;
-    padding:5px 0 7px 5px;
+    height:14px;
+    padding:5px 0 5px 5px;
     width:auto;
     background-color:#666;
     color:#fff;
@@ -819,7 +819,7 @@ ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6
 #read-only .cs-repeatable-add, #read-only .cs-repeatable-delete {display:none;}
 #read-only .cs-repeatable-primary {}
 
-.cs-togglable-header {height:inherit; padding:6px 0 6px 20px; width:97.5%;}
+.cs-togglable-header {height:inherit; padding:5px 0 5px 20px; width:auto;}
 .cs-togglable-expanded {background:transparent url('../images/toggle-less.png') no-repeat 4px 6px;}
 .cs-togglable-collapsed {background:transparent url('../images/toggle-more.png') no-repeat 4px 6px;}
 

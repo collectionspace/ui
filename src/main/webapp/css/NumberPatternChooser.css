@@ -27,7 +27,7 @@ input.numberPatternChooserButton{
 	border:none;
 	background-color:#73AA4F; 
 	margin-left: 6px;
-	padding: 2px 12px;
+	padding: 2px 8px;
 	color:#fff; 
 	float:right;
 	cursor:pointer;
@@ -79,3 +79,9 @@ td.csc-numberPatternChooser-checkmark {
 	background:url('../images/checkmark.png') no-repeat center center;
 }
 
+.info-pair .content table.cs-numberPatternChooser-list { 
+	width:393px; 
+	position:absolute; 
+	left:0;
+	z-index:10000;
+}
