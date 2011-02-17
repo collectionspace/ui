@@ -148,11 +148,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 if (key === "expander") {
                     var expanders = fluid.makeArray(uispec[key]);
                     fluid.each(expanders, function (expander) {
-                        if (!expander.tree) {
-                            return;
-                        }
-                        extractExpanderSelectors(selectors, expander);
-                        cspace.renderUtils.buildSelectorsFromUISpec(expander.tree, selectors);
+                        fluid.each(["tree", "trueTree", "falseTree"], function (tree) {
+                            if (!expander[tree]) {return;}
+                            extractExpanderSelectors(selectors, expander);
+                            cspace.renderUtils.buildSelectorsFromUISpec(expander[tree], selectors);
+                        });
                     });
                     continue;
                 }

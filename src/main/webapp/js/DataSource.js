@@ -103,7 +103,7 @@ cspace = cspace || {};
      * %param source: source structure that will be used to alter the target structure. 
      */
     cspace.dataSource.mergeRoles = function (target, source) {
-        fluid.transform(target, function (item, key) {
+        fluid.transform(target, function (item) {
             item.roleId = item.csid;
             item.roleName = item.number;
             item.roleSelected = false;
@@ -128,21 +128,17 @@ cspace = cspace || {};
      * %param source: source structure that will be used to alter the target structure. 
      */
     cspace.dataSource.mergePermissions = function (target, source) {
-        fluid.transform(target, function (item, key) {
+        fluid.transform(target, function (item) {
             item.resourceName = item.summary;
-            item.permission = "delete";
+            item.permission = fluid.find(source, function (value) {
+                if (item.resourceName === value.resourceName) {
+                    return value.permission;
+                }
+            }) || "delete";
+            delete item.summary;
             delete item.number;
             delete item.csid;
-            delete item.summary;
             delete item.recordtype;
-            if (source) {
-                $.each(source, function (i, value) {
-                    if (item.resourceName === value.resourceName) {
-                        item.permission = value.permission;
-                        return false;
-                    }
-                });
-            }
         });
     };    
     

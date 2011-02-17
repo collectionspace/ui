@@ -29,6 +29,10 @@ cspace = cspace || {};
         bindEventHandlers(that);
         return that;
     };
+    
+    cspace.adminRoles.assertDisplay = function (displayString) {
+        return displayString !== "none";
+    };
 
     fluid.defaults("cspace.adminRoles", {
         recordType: "role",

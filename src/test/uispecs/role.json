@@ -3,32 +3,42 @@
         "expander": {
             "repeatID": ".csc-permissions-record-row:",
             "tree": {
-                ".csc-role-resourceName": "${{row}.resourceName}",
                 "expander": {
-                    "inputID": ".csc-role-permission-input",
-                    "tree": {
-                        "optionnames": [
-                            "none",
-                            "read",
-                            "write",
-                            "delete" 
-                        ],
-                        "optionlist": [
-                            "none",
-                            "read",
-                            "write",
-                            "delete" 
-                        ],
-                        "selection": "${{row}.permission}" 
+                    "type": "fluid.renderer.condition",
+                    "condition": {
+                        "funcName": "cspace.adminRoles.assertDisplay",
+                        "args": "{rowValue}.display"
                     },
-                    "rowID": ".csc-role-permission-row:",
-                    "selectID": "permission",
-                    "labelID": ".csc-role-permission-label",
-                    "type": "fluid.renderer.selection.inputs" 
-                } 
+                    "trueTree": {
+                        ".csc-role-resourceName": "${{row}.resourceName}",
+                        "expander": {
+                            "inputID": ".csc-role-permission-input",
+                            "tree": {
+                                "optionnames": [
+                                    "none",
+                                    "read",
+                                    "write",
+                                    "delete" 
+                                ],
+                                "optionlist": [
+                                    "none",
+                                    "read",
+                                    "write",
+                                    "delete" 
+                                ],
+                                "selection": "${{row}.permission}" 
+                            },
+                            "rowID": ".csc-role-permission-row:",
+                            "selectID": "permission",
+                            "labelID": ".csc-role-permission-label",
+                            "type": "fluid.renderer.selection.inputs" 
+                        } 
+                    }
+                }
             },
             "type": "fluid.renderer.repeat",
             "pathAs": "row",
+            "valueAs": "rowValue",
             "controlledBy": "fields.permissions" 
         },
         ".csc-role-name": "${fields.roleName}",
