@@ -24,8 +24,7 @@ select {border:1px solid #C7CFD4;}
 table select, table ~ select {border:none;}
 
 /* input form selectors */
-input, textarea {font-family:inherit; font-size:12px; font-weight:inherit; line-height:15px; padding:0; margin:0;
-	border:none; overflow:visible; height:19px;}
+input, textarea {font-family:inherit; font-size:12px; font-weight:inherit; line-height:15px; padding:0; margin:0; border:none; overflow:visible; height:19px;}
 .content > input, .content > textarea {border:1px solid #C7CFD4;}
 .information-subgroup .content > input, .information-subgroup .content > textarea {border:none;}
 input[type="button"], input[type="submit"], input[type="checkbox"] {height:auto;}
@@ -702,14 +701,14 @@ ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6
 .csc-movement-template .button-row {padding-bottom: 32px;}
 
 /***********    CSS For New Markup for SearchBox widget    ***********/
-.cs-searchBox {/*float:right;*/padding:12px 14px 12px 0; background-color:#F5F5F5;}
+.cs-searchBox {padding:12px 14px 12px 0; background-color:#F5F5F5; }
 .cs-searchBox select {}
 .cs-searchBox .cs-searchBox-button {background:#73AA4F url('../images/icnSearch.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#FFF;}
 .cs-searchBox .cs-searchBox-button:hover {background-color:#48722D;}
-.cs-searchBox .cs-searchBox-selectRecordType {width: auto; height:21px; color:#000;}
-.cs-searchBox .cs-searchBox-query {width:200px !important; height:17px; border:1px solid #BCBDBD;
-	padding:1px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}
-.cs-searchBox .cs-searchBox-selectRecordTypeLabel {padding-right:8px; padding-top:3px; font-size:12px; color:#6D6E71;}
+.cs-searchBox .cs-searchBox-selectRecordType {width: auto; color:#000;}
+.cs-searchBox .cs-searchBox-query {width:200px !important; border:1px solid #BCBDBD;
+	font-size:13px; line-height:13px;}
+.cs-searchBox .cs-searchBox-selectRecordTypeLabel {padding: 3px 8px 0 15px; font-size:12px; color:#6D6E71;}
 
 .cs-pivot-searchBox .cs-searchBox {width: 99%; background-color:inherit; padding:0;}
 .cs-pivot-searchBox .cs-searchBox select {margin-top:10px;}
@@ -828,3 +827,5 @@ table .cs-calendar-button, .information-subgroup .cs-calendar-button { border:no
 .cs-calendar-button  img{margin:0 0 -1px 2px; padding: 1px 1px 0 0; width:16px; height:17px}
 .info-pair-date .content {background-color:#fff;}
 .info-pair-date .content input {border-right:none; width:142px !important; float:left;}
+
+.found-records-box { margin-top: 20px}
