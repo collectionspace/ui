@@ -127,7 +127,9 @@ li .flc-pager-pageLink {margin-top:-1px;}
 
 
 /*set min-height for record pages */
-#all-content {min-height:400px; height:auto !important; height:400px;}
+#all-content {
+	min-height:400px; 
+	height:auto !important;}
 #name-header-login {padding-top:30px;}
 
 
@@ -165,7 +167,11 @@ li .flc-pager-pageLink {margin-top:-1px;}
 
 
 /* inner body formatting */
-#primaryTab, .ui-tabs-panel, #csc-right-sidebar .right-sidebar-inner {padding:10px; margin-bottom:30px; background-color:#FFF; border:2px solid #6F9ECD;}
+#primaryTab, .ui-tabs-panel, #csc-right-sidebar .right-sidebar-inner {
+	padding:10px; 
+	margin-bottom:30px; 
+	background-color:#FFF; 
+	border:2px solid #6F9ECD;}
 
 
 /* secondary navigation menu */
@@ -186,40 +192,6 @@ li .flc-pager-pageLink {margin-top:-1px;}
 #secondary-nav-menu-sub .time-stamp {float:right; padding-top:6px; font-size:10px; color:#BEBEBE;}
 
 
-/*search page related */ /* need to revisit */
-#search-box {padding: 12px 0 12px 12px; margin-bottom:20px;}
-#search-box input {margin-right:10px;}
-#create-box {padding: 12px 0 12px 12px; margin:0 0 20px 0; border:none;}
-.search-box {background-color:#E6E6E6; border:1px solid #CECFD1;}
-.main-users-page #search-box {background-color:#F5F5F5; margin-bottom:24px; max-width:675px;}
-.search-bar {}
-.main-search-page {border-top:1px solid #F2F2F3; border-bottom:1px solid #F2F2F3;}
-.cs-new-user-submit {float:right;}
-.csc-search-pivot-submit-container {padding:14px 0 0 8px; float:right;}
-.csc-search-keywords, .cs-search-user {width:40% !important; margin:0 12px 0 0; border:1px solid #BCBDBD; 
-	padding:2px 0 1px 2px; font-size:13px; line-height:13px;}
-.cs-search-user {}
-.found-records-box {}
-.found-records-content {font-weight: normal;}
-.found-records-content-looking {font-weight: normal; background-image: url(../images/indeterminate_progress_indicator_true_transparent_16x16.gif); background-repeat: no-repeat; background-position:right; padding-right: 20px;}
-.cs-search-highlight {font-weight:bold;}
-
-.csc-global-search-keywords, .csc-search-pivot-keywords {width:140px !important; margin:0 8px 0 2px; height:17px; border:1px solid #BCBDBD; 
-	padding:1px 0 1px 2px; *padding:3px 0 0px 2px; font-size:13px; line-height:13px;}
-.csc-search-pivot-keywords {width:99% !important; margin:0 8px 8px 0; display:block;}
-.csc-search-record-type, .csc-global-search-record-type, .csc-search-pivot-record-type {color:#000;}
-
-.csc-user-list, .csc-user-details {}
-.csc-user-list .header {background-color:white;}
-
-.select-recordtype {padding-top:8px;}
-.recordtype-label {padding-right:8px; padding-top:3px; font-size:12px; color:#6D6E71;}
-
-
-table#search-results .fl-pager-ui a {text-decoration:none; color:#6D6E71;}
-table#search-results .fl-pager-ui a:hover {text-decoration:underline;}
-table#search-results .fl-pager .fl-pager-ui .fl-pager-links a {border:none;}
-table#search-results .fl-pager .fl-pager-ui .fl-pager-link {}
 
 
 table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
@@ -417,8 +389,6 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .csc-listEditor-details-none {background-color:#C2D7EC; padding:30px; color:white; font-size:40px; font-weight:bold; line-height:110%;}
 .details-none {background:transparent url("../images/whiteArrow.png") no-repeat 0 center; padding: 5px 0 0 45px; margin-top:15px; height: 35px; font-size:26px; line-height:110%;}
 
-.permission-retails {}
-
 .create-new .fl-container-left  .information-group       {padding:0;}
 .create-new .fl-container-left  .information-group .info-column  {width:98%;}
 .create-new .fl-container-left  .information-group .info-column  .main {padding:2px 0 0 0; margin-bottom:10px; border:none; background-color:#F3F3F4;}
@@ -489,7 +459,7 @@ table tbody.highlight tr:hover td {background-color:#BFF4FF !important;}
 .content select		{width: auto; height:21px; border:1px solid #C7CFD4;}
 .content table select      {width: 100%; height:17px; padding-top:0; border:none;}
 .content textarea 		{ width:100%; height:72px; overflow:auto;}
-.cs-repeatable-repeat .input-textarea  {border:1px solid #C7CFD4;} /* need to clean up borders for all input types */
+.cs-repeatable-repeat .input-textarea  {border:1px solid #C7CFD4;} 
 .input-alpha-login       {width: 120px; height:18px;}
 
 .fl-container-pivot  select.recently-created-list {width:232px !important; height:20px;}
@@ -501,8 +471,19 @@ table .field-cal {width:162px; background-color:inherit;}
 .field-cal img, .csc-calendar-button img {padding:0; margin:0 0 -4px 1px; background-color:#fff;}
 td .field-cal img, td .csc-calendar-button img {border:none;}
 
-#footer {border-top: 2px solid #D8D9DA; padding-top:7px;}
-#footer .footer-text {text-align: center; color: #656565; font-weight: bold; font-size:11px; line-height:120%;}
+#footer {
+	border-top: 2px solid #D8D9DA; 
+	padding-top:7px; 
+	bottom: 0px; 
+	position: relative; 
+	bottom: 0px; 
+	width: 100%; }
+#footer .footer-text {
+	text-align: center; 
+	color: #656565; 
+	font-weight: bold; 
+	font-size:11px; 
+	line-height:120%;}
 
 .gen-num-overlay {}
 .gen-num-overlay-header {padding:8px 20px; color:#fff; background-color:#9D9FA2; font-size:15px; border-bottom: 1px solid #BFDF94;}
@@ -518,32 +499,6 @@ td .field-cal img, td .csc-calendar-button img {border:none;}
 .gen-num-overlay table tr:hover td.type {}
 .gen-num-overlay table tr:hover td.prefix {}
 
-.pivot-search-box {margin-bottom:20px; margin-top:0px; border:none; border-top:none; }
-.pivot-search-box .header {background-color:#74AC4D; color:#FFFFFF; font-size:13px;  padding:5px 0 5px 5px; width:auto;}
-.pivot-search-box .content {border:none; padding: 10px; background-color:#E8E7E7;}
-
-.right-sidebar {width:100%; border-bottom:3px solid #CDE2F2;}
-.cs-sidebar-mediaImage {background-image: url(../images/sample.png); background-repeat: no-repeat; background-position:center; min-height:165px;}
-.media-snapshot .content {padding:6px;}
-.media-snapshot .content img {margin-left:auto; margin-right:auto; display:block;}
-.pivot-box .content, .pivot-box-content, .pivot-search-box-content, .pivot-users-box-content 
-	{font-size:10px; line-height:10px; color:#7F8083; background-color:#fff;}
-.pivot-box .header, .pivot-search-box-header, .pivot-users-box-header, .create-report .header
-	{background-color:#6F9ECD; color:#FFF; font-size:13px; cursor:pointer; height:13px; width:auto;}
-.pivot-box .header:hover, .pivot-box .header:focus {background-color:#438CC9;}
-.pivot-box .header.toggle {height:19px;}
-.header.static.button {height:21px; padding:4px 0 0px 4px;}
-.create-report {padding-left:10px; background-color:inherit; margin-bottom:20px;}
-.create-report .header {background-color:#F0F5FB; padding-bottom:6px; color:#4D4D4D; cursor:auto;}
-.create-report select {width:70%;}
-.pivot-search-box-header, .pivot-users-box .header {cursor:auto;}
-.pivot-header {color:#606060;}
-.pivot-box-data {padding:3px 0 3px 8px;}
-.pivot-search-box-data  {padding:10px 0 10px 8px; border:none;}
-.pivot-box .data  {padding:10px 0 10px 8px;}
-.pivot-menu-search select {margin-top:10px;}
-
-.date-table {}
 
 .search-label {font-weight: normal; font-size: 12px; line-height:12px;}
 	
@@ -655,24 +610,22 @@ input.cs-repeatable-delete[disabled]:focus, table tr.csc-repeatable-repeat input
 #mycollectionspace .fl-container-1024-inner {background-color:#FFF;}
 	
 /* Person and Organization Authority specific stylings */
-#person .fl-container-1024-inner, #organization .fl-container-1024-inner {background-color:#F0F5FB;}
+#person .fl-container-1024-inner, #organization .fl-container-1024-inner {background-color:#F3EDF6;}
 #person #title-bar .record-type, #organization #title-bar .record-type {color:#58267F;}
 #person .menu-record a:hover, #person .menu-record a:focus,
 #organization .menu-record a:hover, #organization .menu-record a:focus {background:none repeat scroll 0 0 #330066; border:2px solid #330066;}
 #person .menu-record a, #organization .menu-record a  {color:#FFF; border:2px solid #551188; background-color:#551188;}
 #person .menu-record a.current, #person.menu-record li.selected a, 
 #organization .menu-record a.current, #organization .menu-record li.selected a {color:#551188; background-color:#FFF; border:2px solid #551188; border-bottom:2px solid #fff;}
-#organization #primaryTab, #person #primaryTab {border:2px solid #78449A;}
+#organization #primaryTab, #person #primaryTab {border:2px solid #58267F;}
 #organization .menu-record a.inactive, #person .menu-record a.inactive {cursor:default; background-color:#CCC; border:2px solid #CCC; border-bottom:none;}
 #organization .pivot-box .header, #organization .pivot-search-box-header, #organization .pivot-users-box-header,
 #person .pivot-box .header, #person .pivot-search-box-header, #person .pivot-users-box-header {background-color:#78449A;}
 
-#organization .pivot-box .header:hover, #organization .pivot-search-box-header:hover, #organization .pivot-users-box-header:hover,
-#person .pivot-box .header:hover, #person .pivot-search-box-header:hover, #person .pivot-users-box-header:hover {background-color:#58267F;}
+#organization .pivot-box .header:hover, #organization .pivot-search-box-header:hover, #organization .pivot-users-box-header:hover, #person .pivot-box .header:hover, #person .pivot-search-box-header:hover, #person .pivot-users-box-header:hover {background-color:#58267F;}
 
 /* Administration specific stylings */
-#administration .fl-container-1024-inner, #role .fl-container-1024-inner {background-color:#FFF;}
-#administration #title-bar, #role #title-bar {background-color:#EEF4D7;}
+#administration .fl-container-1024-inner, #role .fl-container-1024-inner {background-color:#EEF4D7;}
 #administration #title-bar .record-type, #role #title-bar .record-type {color:#77AA44;}
 #administration .menu-record a:hover, #administration .menu-record a:focus,
 #role .menu-record a:hover, #role .menu-record a:focus {background:none repeat scroll 0 0 #48722D; border:2px solid #48722D;}
@@ -693,7 +646,7 @@ ul.menu-record li a {-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6
 .saveButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-messageBar-cancel {-moz-border-radius:4px; -webkit-border-radius:4px;}
 .cs-createNew-createButton {float:right;}
 .cs-searchBox {-moz-border-radius:8px; -webkit-border-radius:8px;}
-.cs-repeatable-add {-moz-border-radius:4px 4px 0 0; -webkit-border-radius:4px 4px 0 0;}
+.cs-repeatable-add, .csc-user-searchButton, .cs-new-user-submit {-moz-border-radius:4px 4px 0 0; -webkit-border-radius:4px 4px 0 0;}
 .main-users-page #search-box {-moz-border-radius:8px; -webkit-border-radius:8px;}
 	
 /***********    CSS For New Markup on Location and Movement Control Record    ***********/

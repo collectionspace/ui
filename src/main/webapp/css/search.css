@@ -1,0 +1,72 @@
+/*search page related */ 
+#search-box {
+	padding: 12px 0 12px 12px; 
+	margin-bottom:20px;}
+#search-box input {
+	margin-right:10px;}
+#create-box {
+	padding: 12px 0 12px 12px; 
+	margin-bottom:20px; 
+	border:none;}
+.search-box {
+	background-color: #E6E6E6; 
+	border:1px solid #CECFD1;}
+.main-users-page #search-box {
+	background-color:#F5F5F5; 
+	margin-bottom:24px; 
+	max-width:675px;}
+.search-bar {}
+.main-search-page {
+	border-top:1px solid #F2F2F3; 
+	border-bottom:1px solid #F2F2F3;}
+.cs-new-user-submit {
+	float:right;}
+.csc-search-pivot-submit-container {
+	padding:14px 0 0 8px; 
+	float:right;}
+.csc-search-keywords, .cs-search-user {
+	width:40% !important; 
+	margin:0 12px 0 0; 
+	border:1px solid #BCBDBD; 
+	padding:2px 0 1px 2px; 
+	font-size:13px; 
+	line-height:13px;}
+.found-records-box {}
+.found-records-content {
+	font-weight: normal;}
+.found-records-content-looking {
+	font-weight: normal; background-image: url(../images/indeterminate_progress_indicator_true_transparent_16x16.gif); 
+	background-repeat: no-repeat; 
+	background-position:right; 
+	padding-right: 20px;}
+.cs-search-highlight {
+	font-weight:bold;}
+.csc-global-search-keywords, .csc-search-pivot-keywords {
+	width:140px !important; 
+	margin:0 8px 0 2px; 
+	height:17px; 
+	border:1px solid #BCBDBD; 
+	font-size:13px; 
+	line-height:13px;}
+.csc-search-pivot-keywords {
+	width:99% !important; 
+	margin:0 8px 8px 0; 
+	display:block;}
+.csc-search-record-type, .csc-global-search-record-type, .csc-search-pivot-record-type {
+	color:#000;}
+.csc-user-list .header {
+	background-color:white;}
+.select-recordtype {
+	padding-top:8px;}
+.recordtype-label {
+	padding-right:8px; 
+	padding-top:3px; 
+	font-size:12px; 
+	color:#6D6E71;}
+table#search-results .fl-pager-ui a {
+	text-decoration:none; 
+	color:#6D6E71;}
+table#search-results .fl-pager-ui a:hover {
+	text-decoration:underline;}
+table#search-results .fl-pager .fl-pager-ui .fl-pager-links a {
+	border:none;}
