@@ -320,6 +320,7 @@ cspace = cspace || {};
         rendererOptions: {
             autoBind: true
         },
+        parentBundle: "{globalBundle}",
         strings: {
             specFetchError: "I'm sorry, an error has occurred fetching the UISpec: ",
             errorRecoverySuggestion: "Please try refreshing your browser",

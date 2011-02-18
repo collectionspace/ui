@@ -1,29 +1,17 @@
 {
     "details": {
-        ".csc-objectexit-currentOwner": {
-            "decorators": [
-                {
-                    "func": "cspace.autocomplete",
-                    "type": "fluid",
-                    "options": {
-                        "queryUrl": "../../chain/objectexit/autocomplete/currentOwner",
-                        "vocabUrl": "../../chain/objectexit/source-vocab/currentOwner"
-                    }
-                }
-            ],
-            "value": "${fields.currentOwner}"
+        ".csc-objectexit-updatedAt-label": {
+            "messagekey": "objectexit-updatedAtLabel"
         },
+        ".csc-objectexit-exitDate-label": {
+            "messagekey": "objectexit-exitDateLabel"
+        },
+        ".csc-objectexit-packingNote": "${fields.packingNote}",
+        ".csc-objectexit-createdAt": "${fields.createdAt}",
         ".csc-objectexit-exitNote": "${fields.exitNote}",
-        ".csc-objectexit-exitDate-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
+        ".csc-objectexit-packingNote-label": {
+            "messagekey": "objectexit-packingNoteLabel"
         },
-        ".csc-objectexit-exitDate": "${fields.exitDate}",
-        ".csc-objectexit-exitNumber": "${fields.exitNumber}",
         ".csc-objectexit-depositor": {
             "decorators": [
                 {
@@ -36,22 +24,6 @@
                 }
             ],
             "value": "${fields.depositor}"
-        },
-        ".csc-objectexit-exitReason": {
-            "default": "0",
-            "optionnames": [
-                "Please select a value",
-                "Deaccession",
-                "Disposal",
-                "Return of Loan"
-            ],
-            "optionlist": [
-                "",
-                "deaccession",
-                "disposal",
-                "returnofloan"
-            ],
-            "selection": "${fields.exitReason}"
         },
         ".csc-objectexit-exitNumber-container": {
             "decorators": [
@@ -76,6 +48,45 @@
                     }
                 }
             ]
+        },
+        ".csc-objectexit-tenantID-label": {
+            "messagekey": "objectexit-tenantIDLabel"
+        },
+        ".csc-objectexit-tenantID": "${fields.tenantID}",
+        ".csc-objectexit-currentOwner": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/objectexit/autocomplete/currentOwner",
+                        "vocabUrl": "../../chain/objectexit/source-vocab/currentOwner"
+                    }
+                }
+            ],
+            "value": "${fields.currentOwner}"
+        },
+        ".csc-objectexit-updatedAt": "${fields.updatedAt}",
+        ".csc-objectexit-exitDate-container": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
+        ".csc-objectexit-exitReason-label": {
+            "messagekey": "objectexit-exitReasonLabel"
+        },
+        ".csc-objectexit-currentOwner-label": {
+            "messagekey": "objectexit-currentOwnerLabel"
+        },
+        ".csc-objectexit-createdAt-label": {
+            "messagekey": "objectexit-createdAtLabel"
+        },
+        ".csc-objectexit-exitNumber": "${fields.exitNumber}",
+        ".csc-objectexit-objectexitInformation-label": {
+            "messagekey": "objectexit-objectexitInformationLabel"
         },
         ".csc-objectexit-exitMethods": {
             "decorators": [
@@ -119,7 +130,35 @@
                 }
             ]
         },
-        ".csc-objectexit-packingNote": "${fields.packingNote}"
+        ".csc-objectexit-depositor-label": {
+            "messagekey": "objectexit-depositorLabel"
+        },
+        ".csc-objectexit-exitDate": "${fields.exitDate}",
+        ".csc-objectexit-exitReason": {
+            "default": "0",
+            "optionnames": [
+                "Please select a value",
+                "Deaccession",
+                "Disposal",
+                "Return of Loan"
+            ],
+            "optionlist": [
+                "",
+                "deaccession",
+                "disposal",
+                "returnofloan"
+            ],
+            "selection": "${fields.exitReason}"
+        },
+        ".csc-objectexit-exitNumber-label": {
+            "messagekey": "objectexit-exitNumberLabel"
+        },
+        ".csc-objectexit-exitNote-label": {
+            "messagekey": "objectexit-exitNoteLabel"
+        },
+        ".csc-objectexit-exitMethods-label": {
+            "messagekey": "objectexit-exitMethodsLabel"
+        }
     },
     "list": {
         ".csc-recordList-row:": {

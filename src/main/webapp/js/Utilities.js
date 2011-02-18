@@ -744,7 +744,10 @@ fluid.registerNamespace("cspace.util");
             }
             if (typeof val === "string") {
                 newspec[key] = val;
-            } 
+            }
+            else if (val.messagekey) {
+                newspec[key] = val;
+            }
             else if (val.selection) { 
                 newspec[key] = {
                     value: val.selection,
