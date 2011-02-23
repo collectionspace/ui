@@ -16,14 +16,14 @@
                     <div class="authority-outer-border">
         
                         <div class="fl-container-flex fl-fix information-group">
-                            <div class="csc-recordEditor-header fl-container-flex header toggle">Person Name Authority</div>
+                            <div class="csc-person-personNameAuthorityInformation-label csc-recordEditor-header fl-container-flex header toggle"></div>
                             <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
                                 <div class="info-column">
                                     <div class="info-column">
                                         <div class="info-column2-40 fl-force-left">
                                             <div class="info-pair">
                                                 <div class="header">
-                                                    <div class="label">Display Name</div>
+                                                    <div class="csc-person-displayName-label label"></div>
                                                 </div>
                                                 <div class="content">
                                                     <table>
@@ -38,38 +38,15 @@
                                             </div>
                                             <div class="clear"></div>
                                         </div>
-                                        
-<!--
-                                        <div class="info-column2-60 fl-force-right">
-                                            <div class="info-column2-60 fl-force-left">
-                                                <div class="info-pair">
-                                                    <div class="header">
-                                                        <div class="label">Reference Number</div>
-                                                    </div>
-                                                    <div class="content">
-                                                        <table>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td><input type="text" class="csc-personAuthority-referenceNumber" /></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            </div>
--->
-                                            
                                             <div class="info-column2-40 fl-force-right">
                                                 <div class="info-pair-select">
                                                     <div class="header">
-                                                        <div class="label">Status</div>
+                                                        <div class="csc-person-termStatus-label label"></div>
                                                     </div>
                                                     <div class="content">
                                                         <table>
                                                             <tbody>
                                                                 <tr>
-                                                                    <!--<td class="table-unselected"></td>-->
                                                                     <td><select class="csc-personAuthority-status input-select"><option value="">Options not loaded</option></select></td>
                                                                 </tr>
                                                             </tbody>
@@ -86,19 +63,19 @@
                                     <div class="info-column fl-force-left">
                                         <div class="info-pair">
                                             <div class="header">
-                                                <div class="label">Name</div>
+                                                <div class="csc-person-name-label label"></div>
                                             </div>
                                             <div class="content">
                                                 <table>
                                                     <thead>
                                                         <tr>
-                                                            <td>Salutation</td>
-                                                            <td>Title</td>
-                                                            <td>Forename</td>
-                                                            <td>Middle name</td>
-                                                            <td>Surname</td>
-                                                            <td>Addition to name</td>
-                                                            <td>Initials</td>
+                                                            <td class="csc-person-salutation-label"></td>
+                                                            <td class="csc-person-title-label"></td>
+                                                            <td class="csc-person-foreName-label"></td>
+                                                            <td class="csc-person-middleName-label"></td>
+                                                            <td class="csc-person-surName-label"></td>
+                                                            <td class="csc-person-nameAdditions-label"></td>
+                                                            <td class="csc-person-initials-label"></td>
                                                         </tr>
                                                     </thead>                                                        
                                                     <tbody>
@@ -121,7 +98,7 @@
                                     <div class="info-column2-40 fl-force-left">
                                         <div class="info-pair-select">
                                             <div class="header">
-                                                <div class="label">Gender</div>
+                                                <div class="csc-person-gender-label label"></div>
                                             </div>
                                             <div class="content">
                                                 <table>
@@ -137,7 +114,7 @@
                                         
                                         <div class="info-pair">
                                             <div class="header">
-                                                <div class="label">Occupation</div>
+                                                <div class="csc-person-occupations-label label"></div>
                                             </div>
                                             <div class="content">
                                                 <input type="text" class="csc-personAuthority-occupation" />
@@ -146,7 +123,7 @@
                                         
                                         <div class="info-pair">
                                             <div class="header">
-                                                <div class="label">School/Style</div>
+                                                <div class="csc-person-schoolsOrStyles-label label"></div>
                                             </div>
                                             <div class="content">
                                                 <input type="text" class="csc-personAuthority-schoolOrStyle" />
@@ -155,7 +132,7 @@
                                         
                                         <div class="info-pair">
                                             <div class="header">
-                                                <div class="label">Group</div>
+                                                <div class="csc-person-groups-label label"></div>
                                             </div>
                                             <div class="content">
                                                 <input type="text" class="csc-personAuthority-group" />
@@ -164,7 +141,7 @@
                                         
                                         <div class="info-pair">
                                             <div class="header">
-                                                <div class="label">Nationality</div>
+                                                <div class="csc-person-nationalities-label label"></div>
                                             </div>
                                             <div class="content">
                                                 <input type="text" class="csc-personAuthority-nationality" />
@@ -176,13 +153,12 @@
                                     <div class="info-column2-60 fl-force-right">
                                         <div class="info-pair">
                                             <div class="header">
-                                                <div class="label">Name Notes</div>
+                                                <div class="csc-person-nameNote-label label"></div>
                                             </div>
                                             <div class="content">
                                                 <table>
                                                     <tbody>
                                                         <tr>
-                                                            <!--<td class="table-unselected"></td>-->
                                                             <td><textarea rows="4" cols="30" class="input-textarea csc-personAuthority-nameNote" ></textarea></td>
                                                         </tr>
                                                     </tbody>
@@ -193,7 +169,7 @@
                                         <div class="info-column2-40 fl-force-left">
                                             <div class="info-pair-date">
                                                 <div class="header">
-                                                    <div class="label">Birth Date</div>
+                                                    <div class="csc-person-birthDate-label label"></div>
                                                 </div>
                                                 <div class="content csc-personAuthority-birthDate-container">
                                                     <table>
@@ -209,7 +185,7 @@
                                             
                                             <div class="info-pair-date">
                                                 <div class="header">
-                                                    <div class="label">Death Date</div>
+                                                    <div class="csc-person-deathDate-label label"></div>
                                                 </div>
                                                 <div class="content csc-personAuthority-deathDate-container">
                                                     <table>
@@ -228,14 +204,13 @@
                                         <div class="info-column2-60 fl-force-right">
                                             <div class="info-pair">
                                                 <div class="header">
-                                                    <div class="label">Place of Birth</div>
+                                                    <div class="csc-person-birthPlace-label label"></div>
                                                 </div>
                                                 <div class="content">
                                                     <table>
                                                         <tbody>
                                                             <tr>
-                                                                <td><input type="text" class="csc-personAuthority-birthPlace" />
-                                                                    <!--<div class="csc-personAuthority-birthPlace-autocomplete"></div>--></td>
+                                                                <td><input type="text" class="csc-personAuthority-birthPlace" /></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -244,14 +219,13 @@
                                             
                                             <div class="info-pair">
                                                 <div class="header">
-                                                    <div class="label">Place of Death</div>
+                                                    <div class="csc-person-deathPlace-label label"></div>
                                                 </div>
                                                 <div class="content">
                                                     <table>
                                                         <tbody>
                                                             <tr>
-                                                                <td><input type="text" class="csc-personAuthority-deathPlace" />
-                                                                    <!--<div class="csc-personAuthority-deathPlace-autocomplete"></div>--></td>
+                                                                <td><input type="text" class="csc-personAuthority-deathPlace" /></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -262,7 +236,7 @@
                                         
                                         <div class="info-pair">
                                             <div class="header">
-                                                <div class="label">Biographical Note</div>
+                                                <div class="csc-person-bioNote-label label"></div>
                                             </div>
                                             <div class="content">
                                                 <table>
@@ -285,7 +259,7 @@
                         </div>
                         
                         <div class="fl-container-flex fl-fix information-group">
-                            <div class="csc-recordEditor-header fl-container-flex header toggle">Contact Information</div>
+                            <div class="csc-person-contactInformation-label csc-recordEditor-header fl-container-flex header toggle"></div>
                             <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
                                 <div class="info-column">
                                     <div class="info-column2-40 fl-force-left">
