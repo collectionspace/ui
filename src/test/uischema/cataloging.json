@@ -3,13 +3,13 @@
         "properties": {
             "relations": {
                 "default": {
-
+                    
                 },
                 "type": "object"
             },
             "termsUsed": {
                 "default": [
-
+                    
                 ],
                 "type": "array"
             },
@@ -66,32 +66,11 @@
                         },
                         "type": "array"
                     },
-                    "references": {
-                        "items": {
-                            "properties": {
-                                "_primary": {
-                                    "type": "boolean"
-                                },
-                                "reference": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "type": "array"
-                    },
                     "ownershipPlace": {
-                        "type": "string"
-                    },
-                    "catalogNumber": {
                         "type": "string"
                     },
                     "assocEventNote": {
                         "type": "string"
-                    },
-                    "objectStatus": {
-                        "default": "",
-                        "type": "array"
                     },
                     "responsibleDepartments": {
                         "items": {
@@ -112,10 +91,6 @@
                         "default": "",
                         "type": "array"
                     },
-                    "inscriptionContentPosition": {
-                        "default": "",
-                        "type": "array"
-                    },
                     "contentPositions": {
                         "items": {
                             "properties": {
@@ -131,7 +106,14 @@
                         },
                         "type": "array"
                     },
+                    "inscriptionContentPosition": {
+                        "default": "",
+                        "type": "array"
+                    },
                     "inscriptionContentTransliteration": {
+                        "type": "string"
+                    },
+                    "dateLatestQualifier": {
                         "type": "string"
                     },
                     "styles": {
@@ -147,9 +129,6 @@
                             "type": "object"
                         },
                         "type": "array"
-                    },
-                    "dateLatestQualifier": {
-                        "type": "string"
                     },
                     "nametitle": {
                         "type": "string"
@@ -263,19 +242,16 @@
                     "ownersContributionNote": {
                         "type": "string"
                     },
-                    "assocCulturalContext": {
+                    "referenceGroup": {
                         "items": {
                             "properties": {
+                                "referenceNote": {
+                                    "type": "string"
+                                },
                                 "_primary": {
                                     "type": "boolean"
                                 },
-                                "assocCulturalContextType": {
-                                    "type": "string"
-                                },
-                                "assocCulturalContext": {
-                                    "type": "string"
-                                },
-                                "assocCulturalContextNote": {
+                                "reference": {
                                     "type": "string"
                                 }
                             },
@@ -332,15 +308,18 @@
                         },
                         "type": "array"
                     },
-                    "inscriptionContent": {
-                        "type": "string"
-                    },
                     "collection": {
                         "default": "",
                         "type": "array"
                     },
+                    "inscriptionContent": {
+                        "type": "string"
+                    },
                     "contentDate": {
                         "type": "date"
+                    },
+                    "createdAt": {
+                        "type": "string"
                     },
                     "assocConceptGroup": {
                         "items": {
@@ -392,6 +371,9 @@
                     "viewersPersonalExperience": {
                         "type": "string"
                     },
+                    "tenantID": {
+                        "type": "string"
+                    },
                     "dateEarliestSingle": {
                         "type": "date"
                     },
@@ -424,6 +406,21 @@
                     },
                     "fieldCollectionNote": {
                         "type": "string"
+                    },
+                    "objectStatusList": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "objectStatus": {
+                                    "default": "",
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
                     },
                     "viewersReferences": {
                         "items": {
@@ -479,11 +476,11 @@
                         },
                         "type": "array"
                     },
-                    "fieldCollectionPlace": {
-                        "type": "string"
-                    },
                     "dateLatest": {
                         "type": "date"
+                    },
+                    "fieldCollectionPlace": {
+                        "type": "string"
                     },
                     "fieldCollectionDate": {
                         "type": "date"
@@ -557,6 +554,9 @@
                         },
                         "type": "array"
                     },
+                    "viewersRole": {
+                        "type": "string"
+                    },
                     "materialGroup": {
                         "items": {
                             "properties": {
@@ -583,7 +583,7 @@
                         },
                         "type": "array"
                     },
-                    "viewersRole": {
+                    "ownersPersonalExperience": {
                         "type": "string"
                     },
                     "usageGroup": {
@@ -602,9 +602,6 @@
                             "type": "object"
                         },
                         "type": "array"
-                    },
-                    "ownersPersonalExperience": {
-                        "type": "string"
                     },
                     "assocActivityGroup": {
                         "items": {
@@ -628,6 +625,26 @@
                     },
                     "ageUnit": {
                         "default": "",
+                        "type": "array"
+                    },
+                    "assocCulturalContextGroup": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "assocCulturalContextType": {
+                                    "type": "string"
+                                },
+                                "assocCulturalContext": {
+                                    "type": "string"
+                                },
+                                "assocCulturalContextNote": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
                         "type": "array"
                     },
                     "contentOrganizations": {
@@ -888,13 +905,13 @@
                         },
                         "type": "array"
                     },
-                    "phase": {
-                        "default": "",
-                        "type": "array"
-                    },
                     "inscriptionContentLanguage": {
                         "default": "eng",
                         "type": "string"
+                    },
+                    "phase": {
+                        "default": "",
+                        "type": "array"
                     },
                     "contentNote": {
                         "type": "string"
@@ -963,12 +980,12 @@
                         },
                         "type": "array"
                     },
+                    "numberOfObjects": {
+                        "type": "string"
+                    },
                     "recordStatus": {
                         "default": "new",
                         "type": "array"
-                    },
-                    "numberOfObjects": {
-                        "type": "string"
                     },
                     "technicalAttributeGroup": {
                         "items": {
@@ -1151,6 +1168,9 @@
                         "type": "array"
                     },
                     "datePeriod": {
+                        "type": "string"
+                    },
+                    "updatedAt": {
                         "type": "string"
                     },
                     "ownershipExchangeNote": {
