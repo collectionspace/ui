@@ -1,0 +1,27 @@
+/*Administration Pages*/
+
+#administration .fl-container-1024-inner, #role .fl-container-1024-inner {
+	background-color:#EEF4D7;}
+#administration #title-bar .record-type, #role #title-bar .record-type {
+	color:#77AA44;}
+#administration .menu-record a:hover, #administration .menu-record a:focus,
+#role .menu-record a:hover, #role .menu-record a:focus {
+	background:none repeat scroll 0 0 #48722D; 
+	border:2px solid #48722D;}
+#administration .menu-record a, #role .menu-record a  {
+	color:#FFF; 
+	border:2px solid #77AA44; 
+	background-color:#77AA44;}
+#administration .menu-record a.current, #administration.menu-record li.selected a, 
+#role .menu-record a.current, #role .menu-record li.selected a {
+	color:#77AA44 ; 
+	background-color:#FFF; 
+	border:2px solid #77AA44; 
+	border-bottom:2px solid #fff;}
+#role #primaryTab, #administration #primaryTab {
+	border:2px solid #77AA44;}
+#administration .menu-record a.inactive, #role .menu-record a.inactive {
+	cursor:default; 
+	background-color:#CCC; 
+	border:2px solid #CCC; 
+	border-bottom:none;}

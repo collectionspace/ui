@@ -1,0 +1,63 @@
+/*  styling repeatable fields  */
+.cs-repeatable-repeat .input-textarea  {border:1px solid #C7CFD4;} 
+.content .cs-repeatable-repeat {
+	/*margin-top:-17px; */
+	clear:both;}
+tr.csc-repeatable-headerRow td:first-child, tr.csc-repeatable-headerRow td:last-child {
+	width:13px;}
+.cs-repeatable-add {}
+#read-only .cs-repeatable-add, #read-only .cs-repeatable-delete {
+	display:none;}
+#read-only .cs-repeatable-primary {}
+.cs-repeatable-repeat input,.cs-repeatable-repeat textarea {
+	border:1px solid #C7CFD4; 
+	width:88.5%; 
+	float:left;}
+input[type="button"].cs-repeatable-add, .info-pair-date input[type="button"].cs-repeatable-add {
+	font-size:14px; 
+	height:16px; 
+	width:14px; 
+	font-weight:bold; 
+	position:absolute; 
+	top:0; 
+	padding:0}
+.info-pair-date input[type="button"].cs-repeatable-add {
+	right:0; 
+	left:136px;}
+li.cs-repeatable-repeat {
+	list-style-type: none; 
+	margin-bottom:1px; 
+	width:99%}
+.cs-repeatable-content {
+	width:89%;  
+	float:left;}
+.cs-repeatable-content > input {
+	width: 89.2%;}
+.cs-repeatable-content .ui-autocomplete-input {
+	width:100%;}
+input.cs-repeatable-primary {
+	width: 11px; 
+	position: relative; 
+	vertical-align:top; 
+	border:none; 
+	margin-right:3px; 
+	float:left;}
+td input.cs-repeatable-primary {
+	margin:0 0 0 2px;  
+	vertical-align:bottom;}
+input.cs-repeatable-delete, table tr.csc-repeatable-repeat input.cs-repeatable-delete {
+	float:left; 
+	border:none; 
+	height:17px; 
+	vertical-align:top; 
+	padding:0px; 
+	background:transparent url('../images/icnDeleteIdle.png') no-repeat 1px 2px;}
+input.cs-repeatable-delete {
+	width:16px;}
+input.cs-repeatable-delete:hover, input.cs-repeatable-delete:focus,
+table tr.csc-repeatable-repeat input.cs-repeatable-delete:hover, table tr.csc-repeatable-repeat input.cs-repeatable-delete:focus {
+	color: white; 
+	background: transparent url('../images/icnDelete.png') no-repeat 1px 2px;}
+input.cs-repeatable-delete[disabled], table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled], input.cs-repeatable-delete[disabled]:hover, table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:hover, input.cs-repeatable-delete[disabled]:focus, table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
+	background-color:transparent !important; 
+	background: url('../images/icnDeleteDisabled.png') no-repeat 1px 2px; }
