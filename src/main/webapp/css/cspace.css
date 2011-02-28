@@ -204,7 +204,7 @@ a.add-link:hover, a.add-link:focus {
 	background-color:#6F9ECD; 
 	color:#fff; 
 	font-weight:bold;	
-	padding:2px 3px;
+	padding:2px 3px 0px 3px;
 	text-decoration:none; 
 	border:2px solid #6F9ECD; 
 	border-bottom:none; 
@@ -217,7 +217,7 @@ a.add-link:hover, a.add-link:focus {
 	background: no-repeat scroll 0 0 #FFF; 
 	color:#6F9ECD; 
 	padding-top:6px; 
-	padding-bottom:2px; 
+	padding-bottom:0px; 
 	border:2px solid #6F9ECD; 
 	border-bottom:2px solid #fff;}
 .menu-record a.inactive {
@@ -440,14 +440,14 @@ li .flc-pager-pageLink {
 	width:100%; 	
 	margin-bottom:0px;}
 #secondary-nav-menu .menu-record {
-	padding-bottom:4px; 
-	padding-left:10px;}
+	padding-bottom:1px; 
+	padding-left:6px;}
 #secondary-nav-menu ul.menu-record {
 	white-space:nowrap;}
 #secondary-nav-menu ul.menu-record li{
 	display:inline; 
 	list-style-type:none; 
-	margin-right:3px;}
+	margin-right:0px;}
 #secondary-nav.pivot {
 	padding-bottom:0;}
 #secondary-nav.pivot .menu-record {}
@@ -1239,18 +1239,15 @@ input[disabled]:hover, input[disabled]:hover	{
     opacity: 0.85;
     filter:alpha(opacity=85);
     z-index: 5000;
-    text-align: center;
-    }
+    text-align: center;}
 
 .cs-loading-centre {
     padding-top: 150px;
     font-size: 3em;
-    opacity: 1;
-    }
+    opacity: 1;}
 
 .cs-loading-centre img {
-    padding: 100px
-    }
+    padding: 100px;}
 
 /* Search specific stylings */
 #search .fl-container-1024-inner {
@@ -1274,15 +1271,16 @@ input[disabled]:hover, input[disabled]:hover	{
 ul.menu-record li a {
 	-moz-border-radius:6px 6px 0 0; 
 	-webkit-border-radius:6px 6px 0 0;}
-.saveButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-messageBar-cancel {
+.saveButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-messageBar-cancel, .cs-confirmationDialogButton, .cs-user-searchButton, .cs-user-unSearchButton {
 	-moz-border-radius:4px; 
-	-webkit-border-radius:4px;}
+	-webkit-border-radius:4px;
+	line-height: 1.5;}
 .cs-createNew-createButton {
 	float:right;}
 .cs-searchBox {
 	-moz-border-radius:8px; 
 	-webkit-border-radius:8px;}
-.cs-repeatable-add, .csc-user-searchButton, .cs-new-user-submit {
+.cs-repeatable-add, .cs-new-user-submit {
 	-moz-border-radius:4px 4px 0 0; 
 	-webkit-border-radius:4px 4px 0 0;}
 .main-users-page #search-box {
@@ -1291,47 +1289,87 @@ ul.menu-record li a {
 	
 /***********    CSS For New Markup on Location and Movement Control Record    ***********/
 /* Note: The scoping of these styles to the movement template is temporary, until the styles are approved */
-.csc-movement-template .button-row {padding-bottom: 32px;}
+.csc-movement-template .button-row {
+	padding-bottom: 32px;}
 
 /***********    CSS For New Markup for SearchBox widget    ***********/
-.cs-searchBox {padding:12px 14px 12px 0; background-color:#F5F5F5; }
+.cs-searchBox {
+	padding:12px 14px 12px 0; 
+	background-color:#F5F5F5; }
 .cs-searchBox select {}
-.cs-searchBox .cs-searchBox-button {background:#73AA4F url('../images/icnSearch.png') no-repeat 8px 4px; padding-left:24px; padding-right:8px; color:#FFF;}
-.cs-searchBox .cs-searchBox-button:hover {background-color:#48722D;}
-.cs-searchBox .cs-searchBox-selectRecordType {width: auto; color:#000;}
-.cs-searchBox .cs-searchBox-query {width:200px !important; border:1px solid #BCBDBD;
-	font-size:13px; line-height:13px;}
-.cs-searchBox .cs-searchBox-selectRecordTypeLabel {padding: 3px 8px 0 15px; font-size:12px; color:#6D6E71;}
-
-.cs-pivot-searchBox .cs-searchBox {width: 99%; background-color:inherit; padding:0;}
-.cs-pivot-searchBox .cs-searchBox select {margin-top:10px;}
-.cs-searchBox .cs-searchBox-button {float:right;}
-.cs-pivot-searchBox .cs-searchBox .cs-searchBox-query {width:99% !important; margin:8px 8px 8px 0; display:block;}
-
-.cs-add-related-records-dialog .cs-searchBox {background-color:#EBEBEB;}
+.cs-searchBox .cs-searchBox-button {
+	background:#73AA4F url('../images/icnSearch.png') no-repeat 8px 4px; 
+	padding-left:24px; 
+	padding-right:8px; 
+	color:#FFF;}
+.cs-searchBox .cs-searchBox-button:hover {
+	background-color:#48722D;}
+.cs-searchBox .cs-searchBox-selectRecordType {
+	width: auto; 
+	color:#000;}
+.cs-searchBox .cs-searchBox-query {
+	width:200px !important; 
+	border:1px solid #BCBDBD;
+	font-size:13px; 
+	line-height:13px;}
+.cs-searchBox .cs-searchBox-selectRecordTypeLabel {
+	padding: 3px 8px 0 15px; 
+	font-size:12px; 
+	color:#6D6E71;}
+.cs-pivot-searchBox .cs-searchBox {
+	width: 99%; 
+	background-color:inherit; 
+	padding:0;}
+.cs-pivot-searchBox .cs-searchBox select {
+	margin-top:10px;}
+.cs-searchBox .cs-searchBox-button {
+	float:right;}
+.cs-pivot-searchBox .cs-searchBox .cs-searchBox-query {
+	width:99% !important; 
+	margin:8px 8px 8px 0; 
+	display:block;}
+.cs-add-related-records-dialog .cs-searchBox {
+	background-color:#EBEBEB;}
 
 
 
 /* Read-only page styling selectors */
-#read-only .info-pair .content thead td , #read-only .info-pair .content table, #read-only .info-pair-date .content table, #read-only .info-pair-select table {background-color:inherit;}
-#read-only .fl-container-left  .information-group .content.main, #read-only .information-group .content.main {background-color:#F2F2F2;}
-#read-only input[disabled], #read-only select[disabled], #read-only textarea[disabled] {background-color:#F2F2F2; color:#000;}
-#read-only .input-date, #read-only .input-textarea, #read-only .input-alpha, #read-only .input-select {border:1px solid #CCC;}
-#read-only table .input-date, #read-only  table.input-textarea, #read-only table .input-alpha, #read-only table .input-select {border:none;}
-#read-only .input-date, #read-only .input-alpha , #read-only .input-select {padding:2px 0 2px 2px; min-height:11px;}
-#read-only .input-select {height:11px;}
-#read-only select.input-select {height:auto;}
-#read-only .cs-repeatable-content {width:94%;}
-#read-only .cs-autocomplete-input {background-image:none !important;}
+#read-only .info-pair .content thead td , #read-only .info-pair .content table, #read-only .info-pair-date .content table, #read-only .info-pair-select table {
+	background-color:inherit;}
+#read-only .fl-container-left  .information-group .content.main, #read-only .information-group .content.main {
+	background-color:#F2F2F2;}
+#read-only input[disabled], #read-only select[disabled], #read-only textarea[disabled] {
+	background-color:#F2F2F2; 
+	color:#000;}
+#read-only .input-date, #read-only .input-textarea, #read-only .input-alpha, #read-only .input-select {
+	border:1px solid #CCC;}
+#read-only table .input-date, #read-only  table.input-textarea, #read-only table .input-alpha, #read-only table .input-select {
+	border:none;}
+#read-only .input-date, #read-only .input-alpha , #read-only .input-select {
+	padding:2px 0 2px 2px; 
+	min-height:11px;}
+#read-only .input-select {
+	height:11px;}
+#read-only select.input-select {
+	height:auto;}
+#read-only .cs-repeatable-content {
+	width:94%;}
+#read-only .cs-autocomplete-input {
+	background-image:none !important;}
 
 /* hack! Need to remove controls programatically */
 
 
-.cs-togglable-header {height:inherit; padding:5px 0 5px 20px; width:auto;}
-.cs-togglable-expanded {background:transparent url('../images/toggle-less.png') no-repeat 4px 6px;}
-.cs-togglable-collapsed {background:transparent url('../images/toggle-more.png') no-repeat 4px 6px;}
-
-.csc-related-mainheader {display:inline;}
+.cs-togglable-header {
+	height:inherit; 
+	padding:5px 0 5px 20px; 
+	width:auto;}
+.cs-togglable-expanded {
+	background:transparent url('../images/toggle-less.png') no-repeat 4px 6px;}
+.cs-togglable-collapsed {
+	background:transparent url('../images/toggle-more.png') no-repeat 4px 6px;}
+.csc-related-mainheader {
+	display:inline;}
 
 /* Message Bar styling. */
 .cs-messageBar {
@@ -1364,20 +1402,35 @@ ul.menu-record li a {
 	background: #d8d8d8; 
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e6e6e6', endColorstr='#d1d1d1'); /* for IE */
 	background: -webkit-gradient(linear, top, bottom, from(#e6e6e6), to(#d1d1d1)); 
-	background: -moz-linear-gradient(top, #e6e6e6, #d1d1d1);
-	}
-.cs-messageBar .cs-messageBar-cancel {background-color:#73AA4F;}
-.cs-messageBar .cs-messageBar-cancel:hover {background-color:#48722D;}
-.cs-message-error .cs-messageBar-cancel {background-color:#C60018;}
-.cs-message-error .cs-messageBar-cancel:hover {background-color:#9E0022;}
-
-.cs-sidebar-header {padding-right: 5px;}
+	background: -moz-linear-gradient(top, #e6e6e6, #d1d1d1);}
+.cs-messageBar .cs-messageBar-cancel {
+	background-color:#73AA4F;}
+.cs-messageBar .cs-messageBar-cancel:hover {
+	background-color:#48722D;}
+.cs-message-error .cs-messageBar-cancel {
+	background-color:#C60018;}
+.cs-message-error .cs-messageBar-cancel:hover {
+	background-color:#9E0022;}
+.cs-sidebar-header {
+	padding-right: 5px;}
 
 /*  Unifying and cleaning up the calenday date picker widget */
-.cs-calendar-button { border:1px solid #C7CFD4; border-left:none; float:left;}
-table .cs-calendar-button, .information-subgroup .cs-calendar-button { border:none;}
-.cs-calendar-button  img{margin:0 0 -1px 2px; padding: 1px 1px 0 0; width:16px; height:17px}
-.info-pair-date .content {background-color:#fff;}
-.info-pair-date .content input {border-right:none; width:142px !important; float:left;}
-
-.found-records-box { margin-top: 20px}
+.cs-calendar-button { 
+	border:1px solid #C7CFD4; 
+	border-left:none; 
+	float:left;}
+table .cs-calendar-button, .information-subgroup .cs-calendar-button { 
+	border:none;}
+.cs-calendar-button  img{
+	margin:0 0 -1px 2px; 
+	padding: 1px 1px 0 0; 
+	width:16px; 
+	height:17px}
+.info-pair-date .content {
+	background-color:#fff;}
+.info-pair-date .content input {
+	border-right:none; 
+	width:142px !important; 
+	float:left;}
+.found-records-box { 
+	margin-top: 20px}
