@@ -148,7 +148,7 @@ cspace = cspace || {};
                         related: "cataloging",
                         resolver: "{permissionsResolver}",
                         recordTypeManager: "{recordTypeManager}",
-                        permission: "update"
+                        permission: "create"
                     }
                 }
             }, {
@@ -160,7 +160,7 @@ cspace = cspace || {};
                         related: "procedures",
                         resolver: "{permissionsResolver}",
                         recordTypeManager: "{recordTypeManager}",
-                        permission: "update"
+                        permission: "create"
                     }
                 }
             }, {
@@ -172,7 +172,7 @@ cspace = cspace || {};
                         related: "vocabularies",
                         resolver: "{permissionsResolver}",
                         recordTypeManager: "{recordTypeManager}",
-                        permission: "update"
+                        permission: "create"
                     }
                 }
             }]

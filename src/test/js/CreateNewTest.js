@@ -111,15 +111,30 @@ var createNewTester = function ($) {
     lessCategories.media = [];
     
     
-    var createNewTestOneCategories = cspace.tests.testEnvironment({
+    var createNewTestNoCategories = cspace.tests.testEnvironment({
         testCase: bareCreateNewTest,
         permissions: lessCategories
     });
     
-    createNewTestOneCategories.test("No Categories", function () {
+    createNewTestNoCategories.test("No Categories", function () {
         var createNewPage = setupCreateNew();
         jqUnit.assertEquals("Number of headers shown", 0, createNewPage.locate("categoryHeader").length);
         jqUnit.notVisible("Create button should be invisible", createNewPage.locate("createButton"));  
+    });
+
+    // ----- Tests for header/menu-item: -------
+    var setupHeader = function (options) {
+        return cspace.header(container, options);
+    };
+
+    createNewTestNoCategories.test("Menu item hidden when no create permissions", function() {
+        var header = setupHeader();
+        jqUnit.assertTrue("The Create new menu item is not rendered",  header.locate("label").filter(':contains("'+header.options.strings.createNew+'")').length < 1);
+    });
+
+    createNewTestOneCategories.test("Menu item shown with at least one create permissions", function() {
+        var header = setupHeader();
+        jqUnit.assertTrue("The Create new menu item is rendered",  header.locate("label").filter(':contains("'+header.options.strings.createNew+'")').length > 0);
     });
 };
 
