@@ -46,7 +46,7 @@ cspace = cspace || {};
             },
             uispec: "{myCollectionSpace}.options.uispec." + recordType,
             model: makeArrayExpander(recordType),
-            globalNavigator: options.globalNavigator
+            globalNavigator: "{myCollectionSpace}.options.globalNavigator"
         };
     };
     
@@ -70,13 +70,12 @@ cspace = cspace || {};
     };
     
     cspace.myCollectionSpace = function (container, options) {
-        var that = fluid.initRendererComponent("cspace.myCollectionSpace", container, options);       
-        var resourceSpecs = {};
+        var that = fluid.initRendererComponent("cspace.myCollectionSpace", container, options);
         setupMyCollectionSpace(that);
-        fluid.withEnvironment({resourceSpecCollector: resourceSpecs}, function () {
+        fluid.withEnvironment({resourceSpecCollector: that.options.collector}, function () {
             that.options.components = fluid.expander.expandLight(that.options.components, {noValue: true});
         });
-        fluid.fetchResources(resourceSpecs, function () {
+        fluid.fetchResources(that.options.collector, function () {
             fluid.initDependents(that);
         });
         return that;
@@ -193,6 +192,7 @@ cspace = cspace || {};
             cataloging: "Cataloging Records",
             procedures: "Procedural Records"
         },
+        collector: {},
         parentBundle: "{globalBundle}",
         globalNavigator: "{globalNavigator}",
         produceTree: cspace.myCollectionSpace.produceTree,

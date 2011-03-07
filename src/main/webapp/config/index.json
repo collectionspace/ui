@@ -1,10 +1,14 @@
 {
-    "selectors": {
-        "login": ".csc-login" 
-    },
-    "components": {
-        "login": {
-            "type": "cspace.login" 
-        } 
+    "pageBuilder": {
+        "options": {
+            "selectors": {
+                "login": ".csc-login" 
+            },
+            "components": {
+                "login": {
+                    "type": "cspace.login" 
+                } 
+            }
+        }
     }
 }

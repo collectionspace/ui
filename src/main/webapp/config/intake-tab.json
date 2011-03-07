@@ -1,57 +1,62 @@
 {
-    "schema": [
-        "recordlist",
-        "recordtypes",
-        "intake"
-    ],
-    "pageType": "intake-tab",
-    "recordType": "intake",
-    "pageSpec": {
-        "details": {
-            "href": "%readonlypages/IntakeTemplate.html",
-            "templateSelector": ".csc-intake-template",
-            "targetSelector": ".csc-relatedRecordsTab-intake .csc-relatedRecordsTab-recordEditor"
-        } 
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "intake",
+             "schema": [
+                "recordlist",
+                "recordtypes",
+                "intake"
+            ],
+            "pageSpec": {
+                "details": {
+                    "href": "%readonlypages/IntakeTemplate.html",
+                    "templateSelector": ".csc-intake-template",
+                    "targetSelector": ".csc-relatedRecordsTab-intake .csc-relatedRecordsTab-recordEditor"
+                } 
+            }
+        }
     },
-    "selectors": {
-        "relatedRecordsTab": ".csc-relatedRecordsTab-intake"
-    },
-    "components": {
-        "relatedRecordsTab": {
-            "type": "cspace.relatedRecordsTab",
-            "options": {
-                "primary": "{pageBuilder}.options.primary",
-                "related": "{pageBuilder}.options.related",
-                "applier": "{pageBuilder}.applier",
-                "model": "{pageBuilder}.model",
-                "uispec": "{pageBuilder}.uispec",
-                "strings": {
-                    "editRecord": "Edit Intake Record",
-                    "recordList": "Related Intake Records",
-                    "newRecordRow": "New Intake Record"
-                },
-                "listEditor": {
+    "pageBuilder": {
+        "options": {
+            "pageType": "intake-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-intake"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
                     "options": {
-                        "initList": "cspace.listEditor.receiveData",
-                        "dataContext": {
-                            "options": {
-                                "recordType": "intake",
-                                "dataSource": {
-                                    "options": {
-                                        "schema": "{pageBuilder}.schema" 
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "applier": "{pageBuilder}.applier",
+                        "model": "{pageBuilder}.model",
+                        "uispec": "{pageBuilder}.options.uispec",
+                        "strings": {
+                            "editRecord": "Edit Intake Record",
+                            "recordList": "Related Intake Records",
+                            "newRecordRow": "New Intake Record"
+                        },
+                        "components": {
+                            "listEditor": {
+                                "options": {
+                                    "initList": "cspace.listEditor.receiveData",
+                                    "dataContext": {
+                                        "options": {
+                                            "recordType": "intake"
+                                        }
+                                    },
+                                    "details": {
+                                        "options": {
+                                            "selectors": {
+                                                "identificationNumber": ".csc-intake-entry-number" 
+                                            },
+                                            "strings": {
+                                                "identificationNumberRequired": "Please specify an Intake Entry Number" 
+                                            } 
+                                        } 
                                     }
                                 }
                             }
-                        },
-                        "details": {
-                            "options": {
-                                "selectors": {
-                                    "identificationNumber": ".csc-intake-entry-number" 
-                                },
-                                "strings": {
-                                    "identificationNumberRequired": "Please specify an Intake Entry Number" 
-                                } 
-                            } 
                         }
                     }
                 }

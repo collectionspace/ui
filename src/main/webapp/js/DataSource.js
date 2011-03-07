@@ -35,7 +35,8 @@ cspace = cspace || {};
                 href: source.href,
                 options: {
                     dataType: "json"
-                }
+                },
+                forceCache: true
             };
         }
     };
@@ -72,7 +73,10 @@ cspace = cspace || {};
         };
     };
     
-    cspace.dataSource = function (options) {
+    cspace.dataSource = function (options, demandsOptions) {
+        options = options || {};
+        fluid.merge(null, options.value || options, demandsOptions);
+        
         var that = fluid.initLittleComponent("cspace.dataSource", options);
         
         buildResourceSpec(that);
@@ -149,8 +153,66 @@ cspace = cspace || {};
         recordType: "", // Main record's type, generally inhereted from parent dataContext.
         baseUrl: "../../chain", // Url that will be put in the base path when building main record's fetch url.
         fileExtension: "",
-        schema: null, // Schema that will fill the model if necessary.
+        schema: "{pageBuilder}.schema", // Schema that will fill the model if necessary.
         sources: null // Structure that describes all additional resources that will be merged with the base model.
     });
+    
+    fluid.demands("dataSource", "cspace.localData", fluid.COMPONENT_OPTIONS);
+    
+    fluid.demands("dataSource", ["cspace.role", "cspace.localData"], [fluid.COMPONENT_OPTIONS, {
+        sources: {
+            role: {
+                href: "../../../test/data/permission/list.json",
+                path: "fields.permissions",
+                resourcePath: "items",
+                merge: cspace.dataSource.mergePermissions
+            } 
+        } 
+    }]);
+    
+    fluid.demands("dataSource", "cspace.role", [fluid.COMPONENT_OPTIONS, {
+        sources: {
+            role: {
+                href: "../../chain/permission/search?actGrp=CRUDL",
+                path: "fields.permissions",
+                resourcePath: "items",
+                merge: cspace.dataSource.mergePermissions
+            } 
+        } 
+    }]);
+    
+    fluid.demands("dataSource", ["cspace.users", "cspace.localData", "cspace.test"], [fluid.COMPONENT_OPTIONS, {
+        schema: "{dataContext}options.schema",
+        sources: {
+            role: {
+                href: "../data/role/list.json",
+                path: "fields.role",
+                resourcePath: "items",
+                merge: cspace.dataSource.mergeRoles
+            } 
+        } 
+    }]);
+    
+    fluid.demands("dataSource", ["cspace.users", "cspace.localData"], [fluid.COMPONENT_OPTIONS, {
+        sources: {
+            role: {
+                href: "../../../test/data/role/list.json",
+                path: "fields.role",
+                resourcePath: "items",
+                merge: cspace.dataSource.mergeRoles
+            } 
+        } 
+    }]);
+    
+    fluid.demands("dataSource", "cspace.users", [fluid.COMPONENT_OPTIONS, {
+        sources: {
+            role: {
+                href: "../../chain/role",
+                path: "fields.role",
+                resourcePath: "items",
+                merge: cspace.dataSource.mergeRoles
+            } 
+        } 
+    }]);
     
 })(jQuery, fluid);

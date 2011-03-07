@@ -191,7 +191,9 @@ cspace = cspace || {};
         },
         // Default format for valid date.
         defaultFormat: "yyyy-MM-dd",
-        messageBar: "{parent}.options.messageBar"
+        messageBar: "{recordEditor}.options.messageBar"
     });
+    
+    fluid.demands("cspace.datePicker", "cspace.recordEditor", ["@0", fluid.COMPONENT_OPTIONS]);
     
 })(jQuery, fluid);

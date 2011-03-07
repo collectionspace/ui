@@ -20,70 +20,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     });
     
     var setupOrganization = function (options) {
-        options = $.extend(true, {
+        options = fluid.merge(null, {
             configURL: "../../main/webapp/config/organization.json",
-            components: {
-                pageBuilderSetup: {
-                    options: {
-                        pageSpec: {
-                            recordEditor: {
-                                href: "../../main/webapp/html/pages/OrganizationTemplate.html"
-                            }
-                        },
-                        components: {
-                            recordEditor: {
-                                options: {
-                                    confirmation: {
-                                        options: {
-                                            confirmationTemplateUrl: "../../main/webapp/html/components/Confirmation.html"
-                                        }
-                                    }
-                                }
-                            },
-                            sidebar: {
-                                options: {
-                                    components: {
-                                        cataloging: {
-                                            options: {
-                                                components: {
-                                                    relationManager: {
-                                                        options: {
-                                                            components: {
-                                                                searchToRelateDialog: {
-                                                                    options: {
-                                                                        templates: {
-                                                                            dialog: "../../main/webapp/html/searchToRelate.html"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        procedures: {
-                                            options: {
-                                                components: {
-                                                    relationManager: {
-                                                        options: {
-                                                            components: {
-                                                                searchToRelateDialog: {
-                                                                    options: {
-                                                                        templates: {
-                                                                            dialog: "../../main/webapp/html/searchToRelate.html"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+            pageBuilderIO: {
+                options: {
+                    pageSpec: {
+                        recordEditor: {
+                            href: "../../main/webapp/html/pages/OrganizationTemplate.html"
                         }
                     }
                 }
@@ -94,18 +37,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     organizationTests.asyncTest("Initialization", function () {
         var options = {
-            components: {
-                pageBuilderSetup: {
-                    options: {
-                        listeners: {
-                            pageReady: function () {
-                                var pageBuilder = organization.pageBuilderSetup.pageBuilder;
-                                jqUnit.assertValue("Organization should have a record editor", pageBuilder.recordEditor);
-                                jqUnit.assertValue("Organization should have a side bar", pageBuilder.sidebar);
-                                jqUnit.assertValue("Organization should have a title bar", pageBuilder.titleBar);
-                                jqUnit.assertValue("Organization should have tabs", pageBuilder.tabs);
-                                start();
-                            }
+            pageBuilderIO: {
+                options: {
+                    listeners: {
+                        pageReady: function () {
+                            var pageBuilder = organization.pageBuilderIO.pageBuilder;
+                            jqUnit.assertValue("Organization should have a record editor", pageBuilder.recordEditor);
+                            jqUnit.assertValue("Organization should have a side bar", pageBuilder.sidebar);
+                            jqUnit.assertValue("Organization should have a title bar", pageBuilder.titleBar);
+                            jqUnit.assertValue("Organization should have tabs", pageBuilder.tabs);
+                            start();
                         }
                     }
                 }
@@ -116,30 +57,27 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
     organizationTests.asyncTest("Repeatable fields: existence", function () {
         var options = {
-            components: {
-                pageBuilderSetup: {
-                    options: {
-                        csid: "987.654.321",
-                        dataContext: {
+            pageBuilderIO: {
+                options: {
+                    csid: "987.654.321"
+                }
+            },
+            pageBuilder: {
+                options: {
+                    components: {
+                        recordEditor: {
                             options: {
-                                baseUrl: "../data"
-                            }
-                        },
-                        components: {
-                            recordEditor: {
-                                options: {
-                                    listeners: {
-                                        afterRender: function () {
-                                            jqUnit.assertTrue("Group field is repeatable", $(".csc-organizationAuthority-group").parent().hasClass("csc-repeatable-repeat"));
-                                            jqUnit.assertTrue("Function field is repeatable", $(".csc-organizationAuthority-function").parent().hasClass("csc-repeatable-repeat"));
-                                            jqUnit.assertTrue("History field is repeatable", $(".csc-organizationAuthority-history").parent().hasClass("csc-repeatable-repeat"));
-            
-                                            // authority fields are inside a container, and so we must check the grandparent for the repeatability indicator
-                                            jqUnit.assertTrue("Contact Name field is repeatable", $(".csc-organizationAuthority-contactName").parent().hasClass("csc-repeatable-repeat"));
-                                            jqUnit.assertTrue("Sub-body field is repeatable", $(".csc-organizationAuthority-subBodyName").parent().hasClass("csc-repeatable-repeat"));
-            
-                                            start();
-                                        }
+                                listeners: {
+                                    afterRender: function () {
+                                        jqUnit.assertTrue("Group field is repeatable", $(".csc-organizationAuthority-group").parent().hasClass("csc-repeatable-repeat"));
+                                        jqUnit.assertTrue("Function field is repeatable", $(".csc-organizationAuthority-function").parent().hasClass("csc-repeatable-repeat"));
+                                        jqUnit.assertTrue("History field is repeatable", $(".csc-organizationAuthority-history").parent().hasClass("csc-repeatable-repeat"));
+        
+                                        // authority fields are inside a container, and so we must check the grandparent for the repeatability indicator
+                                        jqUnit.assertTrue("Contact Name field is repeatable", $(".csc-organizationAuthority-contactName").parent().hasClass("csc-repeatable-repeat"));
+                                        jqUnit.assertTrue("Sub-body field is repeatable", $(".csc-organizationAuthority-subBodyName").parent().hasClass("csc-repeatable-repeat"));
+        
+                                        start();
                                     }
                                 }
                             }

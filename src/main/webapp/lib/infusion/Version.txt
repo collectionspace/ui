@@ -4,4 +4,4 @@ It was built from commit 97baeb6edbd49194ffa944bb1bb925d3a15fb7d7 of Infusion pr
     http://github.com/fluid-project/infusion
 
 using the following command:
-   ant customBuild -Dinclude="json, fss, framework, renderer, inlineEdit, pager, jQueryUIWidgets" -Djsfilename="CSpaceInfusion.js" -DnoMinify="true"
+   ant customBuild -Dinclude="json, fss, framework, renderer, inlineEdit, uploader, pager, jQueryUIWidgets" -Djsfilename="CSpaceInfusion.js" -DnoMinify="true"

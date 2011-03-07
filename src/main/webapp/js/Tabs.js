@@ -20,7 +20,11 @@ cspace = cspace || {};
         cspace.tabsList.stylefy(that);
     };
     
-    cspace.tabsList = function (container, options) {
+    cspace.tabsList = function (container, options, demandsOptions) {
+        
+        options = options || {};
+        fluid.merge({model: "replace"}, options.value || options, demandsOptions);
+        
         var that = fluid.initRendererComponent("cspace.tabsList", container, options);
         fluid.initDependents(that);
         setupTabList(that);
@@ -148,14 +152,16 @@ cspace = cspace || {};
         var options = that.options;
         var urlExpander = fluid.invoke("cspace.urlExpander");
         // Adding globalNavigator to cspace.setup's stack.
-        fluid.withNewComponent(that.options.globalSetup, function () {
-            cspace.setup("cspace.tabs", {
-                model: options.model,
-                applier: options.applier,
-                related: tabName,
-                primary: options.primaryRecordType,
-                configURL: fluid.stringTemplate(urlExpander(options.configURLTemplate), {record: tabName})
-            });
+        that.options.globalSetup.init("cspace.tabs", {
+            pageBuilder: {
+                options: {
+                    model: options.model,
+                    applier: options.applier,
+                    related: tabName,
+                    primary: options.primaryRecordType
+                }
+            },
+            configURL: fluid.stringTemplate(urlExpander(options.configURLTemplate), {record: tabName})
         });
     };
     
@@ -193,12 +199,7 @@ cspace = cspace || {};
         });
     };
     
-    cspace.tabs.provideAuthorityTabsList = function (container, options) {
-        var that = fluid.initLittleComponent("cspace.tabs.provideAuthorityTabsList", options);
-        return cspace.tabsList(container, that.options);
-    };
-    
-    fluid.defaults("cspace.tabs.provideAuthorityTabsList", {
+    fluid.demands("tabsList", ["cspace.tabs", "cspace.person"], ["{tabs}.dom.tabsList", fluid.COMPONENT_OPTIONS, {
         strings: {
             primary: "Current record"
         },
@@ -210,17 +211,20 @@ cspace = cspace || {};
                 }
             }
         }
-    });
-    
-    fluid.demands("tabsList", ["cspace.tabs", "cspace.person"], {
-        funcName: "cspace.tabs.provideAuthorityTabsList",
-        args: ["{tabs}.dom.tabsList", fluid.COMPONENT_OPTIONS]
-    });
-    
-    fluid.demands("tabsList", ["cspace.tabs", "cspace.organization"], {
-        funcName: "cspace.tabs.provideAuthorityTabsList",
-        args: ["{tabs}.dom.tabsList", fluid.COMPONENT_OPTIONS]
-    });
+    }]);
+    fluid.demands("tabsList", ["cspace.tabs", "cspace.organization"], ["{tabs}.dom.tabsList", fluid.COMPONENT_OPTIONS, {
+        strings: {
+            primary: "Current record"
+        },
+        model: {
+            tabs: {
+                primary: {
+                    "name": "primary",
+                    href: "#primaryTab"
+                }
+            }
+        }
+    }]);
     
     fluid.demands("tabsList", ["cspace.tabs"], ["{tabs}.dom.tabsList", fluid.COMPONENT_OPTIONS]);
 
@@ -244,7 +248,8 @@ cspace = cspace || {};
         },
         mergePolicy: {
             model: "preserve",
-            applier: "preserve"
+            applier: "nomerge",
+            globalSetup: "nomerge"
         },
         globalNavigator: "{globalNavigator}",
         globalSetup: "{globalSetup}"

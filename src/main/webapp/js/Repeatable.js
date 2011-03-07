@@ -309,14 +309,19 @@ cspace = cspace || {};
         },
         mergePolicy: { // TODO: GRADES, when they exist
             model: "preserve",
-            applier: "preserve"
+            applier: "nomerge",
+            protoTree: "noexpand",
+            "renderOptions.instantiator": "nomerge",
+            "renderOptions.parentComponent": "nomerge"
         },
-        applier: "{parent}.options.applier",      // Applier for the main record that cspace.repeatable belongs to. REQUIRED
-        model: "{parent}.model",        // Model for the main record that cspace.repeatable belongs to. REQUIRED
+        applier: "{recordEditor}.options.applier",      // Applier for the main record that cspace.repeatable belongs to. REQUIRED
+        model: "{recordEditor}.model",        // Model for the main record that cspace.repeatable belongs to. REQUIRED
         elPath: "items",    // Path into the model that points to the collection of fields to be repeated - it should reference an array.
         protoTree: {},      // A dehydrated tree that will be expanded by the expander and rendered in the component's refreshView.
         renderOptions: {
-            autoBind: true
+            autoBind: true,
+            instantiator: "{instantiator}",
+            parentComponent: "{recordEditor}"
         },
         generateMarkup: "cspace.repeatable.generateMarkup"
     });
@@ -331,6 +336,7 @@ cspace = cspace || {};
      * @element a jqueryable selector
      */
     cspace.makeRepeatable = function (element, options) {
+        var that = fluid.initLittleComponent("cspace.makeRepeatable");
         element = $(element);
         element.addClass("csc-repeatable-repeat");
         
@@ -341,8 +347,25 @@ cspace = cspace || {};
         }
         
         element.wrap("<div />");
+        that.repeatableContainer = element.parent("div");
         
-        return cspace.repeatable(element.parent("div"), options);
+        that.options.components = {
+            repeatable: {
+                type: "cspace.repeatable",
+                options: options.value || options
+            }
+        };
+        fluid.initDependent(that, "repeatable", that.options.instantiator);
+        return that.repeatable;
     };
+    fluid.defaults("cspace.makeRepeatable", {
+        mergePolicy: {
+            instantiator: "nomerge"
+        },
+        instantiator: "{instantiator}"
+    });
+    fluid.demands("repeatable", "cspace.makeRepeatable", ["{makeRepeatable}.repeatableContainer", fluid.COMPONENT_OPTIONS]);
+    
+    fluid.demands("cspace.makeRepeatable", "cspace.recordEditor", ["@0", fluid.COMPONENT_OPTIONS]);
 
 })(jQuery, fluid);

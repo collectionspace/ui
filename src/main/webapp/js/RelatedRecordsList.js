@@ -16,25 +16,25 @@ cspace = cspace || {};
     fluid.log("RelatedRecordsList.js loaded");
     
     fluid.registerNamespace("cspace.relatedRecordsList");
-
-    var buildRelationsList = function (recordTypes, relations, related) {
-        var relationList = [];
-        fluid.each(recordTypes[related], function (value) {
-            relationList = relationList.concat(relations[value] || []);
-        });   
-        return relationList;
-    };
     
-    var addModelChangeListener = function (recordTypes, applier, recordList, recordType, related) {
+    var addModelChangeListener = function (that, recordTypes, applier, recordList, recordType, related) {
         applier.modelChanged.addListener("relations." + recordType, function (model) {
-            recordList.applier.requestChange("items", buildRelationsList(recordTypes, model.relations, related));
-            recordList.refreshView();
+//            recordList.applier.requestChange("items", cspace.relatedRecordsList.buildRelationsList(recordTypes, model.relations, related));
+//            recordList.refreshView();
+            var instantiator = that.options.instantiator;
+            that.renderer.refreshView();
+            fluid.each(that.options.components, function (component, name) {
+                if (that[name]) {
+                    instantiator.clearComponent(that, name);
+                }
+                fluid.initDependent(that, name, instantiator);
+            });
         });
     };
 
     var bindEventHandlers = function (that) {
         fluid.each(that.options.recordTypes[that.options.related], function (value) {
-            addModelChangeListener(that.options.recordTypes, that.options.applier, that.recordList, value, that.options.related);
+            addModelChangeListener(that, that.options.recordTypes, that.options.applier, that.recordList, value, that.options.related);
         });
     };
 
@@ -45,6 +45,14 @@ cspace = cspace || {};
         bindEventHandlers(that);
         that.events.afterSetup.fire(that);
         return that;
+    };
+    
+    cspace.relatedRecordsList.buildRelationsList = function (recordTypes, relations, related) {
+        var relationList = [];
+        fluid.each(recordTypes[related], function (value) {
+            relationList = relationList.concat(relations[value] || []);
+        });   
+        return relationList;
     };
     
     cspace.relatedRecordsList.produceTree = function(that) {
@@ -63,44 +71,30 @@ cspace = cspace || {};
             }
         };
     };
-
-    cspace.relatedRecordsList.provideRecordList = function (container, selector, recordTypes, relations, related, options) {
-        options.model = {
-            items: buildRelationsList(recordTypes, relations, related),
-            selectionIndex: -1
-        };
-        return cspace.recordList($(selector, container), options);
-    };
     
-    cspace.relatedRecordsList.provideLocalRelationManager = function (container, options) {
-        options.addRelations = cspace.relationManager.provideLocalAddRelations;
-        return cspace.relationManager(container, options);
-    };
+    fluid.demands("cspace.recordList", "cspace.relatedRecordsList", ["{relatedRecordsList}.dom.recordListSelector", fluid.COMPONENT_OPTIONS, {
+        model: {
+            selectionIndex: -1,
+            items: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.relatedRecordsList.buildRelationsList",
+                    args: ["{recordTypes}", "{relatedRecordsList}.model.relations", "{relatedRecordsList}.options.related"]
+                }
+            }
+        }
+    }]);
     
-    fluid.demands("cspace.recordList", "cspace.relatedRecordsList", {
-        funcName: "cspace.relatedRecordsList.provideRecordList",
-        args: ["{relatedRecordsList}.container",
-               "{relatedRecordsList}.options.selectors.recordListSelector",
-               "{recordTypes}",
-               "{relatedRecordsList}.model.relations", 
-               "{relatedRecordsList}.options.related",
-               fluid.COMPONENT_OPTIONS
-        ]
-    });
-    
-    fluid.demands("cspace.relationManager", ["cspace.localData", "cspace.relatedRecordsList"], {
-        funcName: "cspace.relatedRecordsList.provideLocalRelationManager",
-        args: ["{relatedRecordsList}.container", fluid.COMPONENT_OPTIONS]
-    });
-    
-    fluid.demands("cspace.relationManager", "cspace.relatedRecordsList", 
-        ["{relatedRecordsList}.container", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("cspace.relationManager", "cspace.relatedRecordsList", ["{relatedRecordsList}.container", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("togglableRelated", "cspace.relatedRecordsList", ["{relatedRecordsList}.container", fluid.COMPONENT_OPTIONS]);
 
     fluid.defaults("cspace.relatedRecordsList", {
         mergePolicy: {
             model: "preserve",
-            applier: "preserve"
+            applier: "nomerge",
+            instantiator: "nomerge"
         },
+        instantiator: "{instantiator}",
         components: {
             recordList: {
                 type: "cspace.recordList",
@@ -117,15 +111,22 @@ cspace = cspace || {};
                     primary: "{relatedRecordsList}.options.primary",
                     related: "{relatedRecordsList}.options.related",
                     applier: "{relatedRecordsList}.options.applier",
-                    model: "{relatedRecordsList}.model",
-                    addRelations: "{relatedRecordsList}.options.addRelations"
+                    model: "{relatedRecordsList}.model"
+                }
+            },
+            togglableRelated: {
+                type: "cspace.util.togglable",
+                options: {
+                    selectors: {
+                        header: "{relatedRecordsList}.options.selectors.header",
+                        togglable: "{relatedRecordsList}.options.selectors.togglable"
+                    }
                 }
             }
         },
         events: {
             afterSetup: null  
         },
-        addRelations: cspace.relationManager.proveAddRelations,
         recordListAfterSelectHandler: cspace.recordList.afterSelectHandlerDefault,
         parentBundle: "{globalBundle}",
         recordTypes: "{recordTypes}",
@@ -135,9 +136,11 @@ cspace = cspace || {};
             mainHeader: ".csc-related-mainheader",
             numberHeader: ".csc-related-number-header",
             summaryHeader: ".csc-related-summary-header",
-            typeHeader: ".csc-related-recordtype-header"
+            typeHeader: ".csc-related-recordtype-header",
+            header: ".csc-related-header",
+            togglable: ".csc-related-togglable"
         },
-        selectorsToIgnore: ["recordListSelector"],
+        selectorsToIgnore: ["recordListSelector", "header", "togglable"],
         strings: {
             numberHeader: "Number",
             summaryHeader: "Summary",

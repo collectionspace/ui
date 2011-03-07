@@ -1,57 +1,62 @@
 {
-    "schema": [
-        "recordlist",
-        "recordtypes",
-        "movement"
-    ],
-    "pageType": "movement-tab",
-    "recordType": "movement",
-    "pageSpec": {
-        "details": {
-            "href": "%readonlypages/MovementTemplate.html",
-            "templateSelector": ".csc-movement-template",
-            "targetSelector": ".csc-relatedRecordsTab-movement .csc-relatedRecordsTab-recordEditor"
-        } 
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "movement",
+             "schema": [
+                "recordlist",
+                "recordtypes",
+                "movement"
+            ],
+            "pageSpec": {
+                "details": {
+                    "href": "%readonlypages/MovementTemplate.html",
+                    "templateSelector": ".csc-movement-template",
+                    "targetSelector": ".csc-relatedRecordsTab-movement .csc-relatedRecordsTab-recordEditor"
+                } 
+            }
+        }
     },
-    "selectors": {
-        "relatedRecordsTab": ".csc-relatedRecordsTab-movement"
-    },
-    "components": {
-        "relatedRecordsTab": {
-            "type": "cspace.relatedRecordsTab",
-            "options": {
-                "primary": "{pageBuilder}.options.primary",
-                "related": "{pageBuilder}.options.related",
-                "applier": "{pageBuilder}.applier",
-                "model": "{pageBuilder}.model",
-                "uispec": "{pageBuilder}.uispec",
-                "strings": {
-                    "editRecord": "Edit Location and Movement Control Record",
-                    "recordList": "Related Location and Movement Control Records",
-                    "newRecordRow": "New Location and Movement Control Record"
-                },
-                "listEditor": {
+    "pageBuilder": {
+        "options": {
+            "pageType": "movement-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-movement"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
                     "options": {
-                        "initList": "cspace.listEditor.receiveData",
-                        "dataContext": {
-                            "options": {
-                                "recordType": "movement",
-                                "dataSource": {
-                                    "options": {
-                                        "schema": "{pageBuilder}.schema" 
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "applier": "{pageBuilder}.applier",
+                        "model": "{pageBuilder}.model",
+                        "uispec": "{pageBuilder}.options.uispec",
+                        "strings": {
+                            "editRecord": "Edit Location and Movement Control Record",
+                            "recordList": "Related Location and Movement Control Records",
+                            "newRecordRow": "New Location and Movement Control Record"
+                        },
+                        "components": {
+                            "listEditor": {
+                                "options": {
+                                    "initList": "cspace.listEditor.receiveData",
+                                    "dataContext": {
+                                        "options": {
+                                            "recordType": "movement"
+                                        }
+                                    },
+                                    "details": {
+                                        "options": {
+                                            "selectors": {
+                                                "identificationNumber": ".csc-movement-currentLocation" 
+                                            },
+                                            "strings": {
+                                                "identificationNumberRequired": "Please specify a Current Location" 
+                                            } 
+                                        } 
                                     }
                                 }
                             }
-                        },
-                        "details": {
-                            "options": {
-                                "selectors": {
-                                    "identificationNumber": ".csc-movement-currentLocation" 
-                                },
-                                "strings": {
-                                    "identificationNumberRequired": "Please specify a Current Location" 
-                                } 
-                            } 
                         }
                     }
                 }

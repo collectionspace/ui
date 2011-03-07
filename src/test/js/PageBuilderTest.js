@@ -52,10 +52,10 @@ cspace = cspace || {};
             }
         };
         
-        var testIOCoptions = {
-            option1: "bar", 
-            option2: "cat",
+        var testIOCoptionsPBIO = {
             listeners: basicTestListeners,
+        };
+        var testIOCoptionsPB = {
             selectors: {
                 recordEditor: "#recordEditorContainer",
                 relatedRecords: "#linksContainer"
@@ -68,89 +68,123 @@ cspace = cspace || {};
                     type: "cspace.testComponent3"
                 }
             },
-            permissions: cspace.tests.sampleUserPerms
+            userLogin: cspace.tests.userLogin,
+            option1: "bar", 
+            option2: "cat"
         };
         
         var optionsWithComponentsWithOptions = {
-            selectors: {
-                recordEditor: "#recordEditorContainer",
-                relatedRecords: "#linksContainer"
-            },
-            components: {
-                recordEditor: {
-                    type: "cspace.testComponent4",
-                    options: {
-                        foo: "bar",
-                        bat: "cat"
-                    }
-                },
-                relatedRecords: {
-                    type: "cspace.testComponent5",
-                    options: {
-                        foo: {
-                            bar: "bat",
-                            cat: "CATT"
+            pageBuilder: {
+                options: {
+                    selectors: {
+                        recordEditor: "#recordEditorContainer",
+                        relatedRecords: "#linksContainer"
+                    },
+                    components: {
+                        recordEditor: {
+                            type: "cspace.testComponent4",
+                            options: {
+                                foo: "bar",
+                                bat: "cat"
+                            }
+                        },
+                        relatedRecords: {
+                            type: "cspace.testComponent5",
+                            options: {
+                                foo: {
+                                    bar: "bat",
+                                    cat: "CATT"
+                                }
+                            }
                         }
-                    }
+                    },
+                    userLogin: cspace.tests.userLogin,
                 }
             },
-            listeners: basicTestListeners,
-            permissions: cspace.tests.sampleUserPerms
+            pageBuilderIO: {
+                options: {
+                    listeners: basicTestListeners
+                }
+            }
         };
         
         var optionsWithComponentsWithIOCdemands = {
-            selectors: {
-                recordEditor: "#recordEditorContainer"
+            pageBuilder: {
+                options: {
+                    selectors: {
+                        recordEditor: "#recordEditorContainer"
+                    },
+                    components: {
+                        recordEditor: {
+                            type: "cspace.testComponent6",
+                            options: {
+                                foo: "{pageBuilder}.options.option1",
+                                bat: "{pageBuilder}.options.option2",
+                                options: {
+                                    foobarSubcomponent: "{pageBuilder}.options.option1"
+                                }
+                            }
+                        }
+                    },
+                    userLogin: cspace.tests.userLogin,
+                    option1: "September",
+                    option2: "Toronto"
+                }
             },
-            components: {
-                recordEditor: {
-                    type: "cspace.testComponent6",
-                    options: {
-                        foo: "{pageBuilder}.options.option1",
-                        bat: "{pageBuilder}.options.option2",
-                        options: {
-                            foobarSubcomponent: "{pageBuilder}.options.option1"
+            pageBuilderIO: {
+                options: {
+                    listeners: basicTestListeners
+                }
+            }
+        };
+        
+        var optionsWithComponentsWithAdditionalParameters = {
+            pageBuilder: {
+                options: {
+                    userLogin: cspace.tests.userLogin,
+                    selectors: {
+                        recordEditor: "#recordEditorContainer"
+                    },
+                    components: {
+                        recordEditor: {
+                            type: "cspace.testComponent7",
+                            options: {
+                                option1: "Danny Kaye"
+                            }
                         }
                     }
                 }
             },
-            option1: "September",
-            option2: "Toronto",
-            listeners: basicTestListeners,
-            permissions: cspace.tests.sampleUserPerms
-        };
-        
-        var optionsWithComponentsWithAdditionalParameters = {
-            selectors: {
-                recordEditor: "#recordEditorContainer"
-            },
-            components: {
-                recordEditor: {
-                    type: "cspace.testComponent7",
-                    options: {
-                        option1: "Danny Kaye"
-                    }
+            pageBuilderIO: {
+                options: {
+                    listeners: basicTestListeners
                 }
-            },
-            listeners: basicTestListeners,
-            permissions: cspace.tests.sampleUserPerms
+            }
         };
         
         var optionsWithComponentsWithDemandInParameters = {
-            selectors: {
-                recordEditor: "#recordEditorContainer"
-            },
-            components: {
-                recordEditor: {
-                    type: "cspace.testComponent8",
-                    options: {
-                        option1: "Danny Kaye"
-                    }
+            pageBuilder: {
+                options: {
+                    userLogin: cspace.tests.userLogin,
+                    selectors: {
+                        recordEditor: "#recordEditorContainer"
+                    },
+                    components: {
+                        recordEditor: {
+                            type: "cspace.testComponent8",
+                            options: {
+                                option1: "Danny Kaye"
+                            }
+                        }
+                    },
+                    pbOpt: "Jacob"
                 }
             },
-            pbOpt: "Jacob",
-            listeners: basicTestListeners,
-            permissions: cspace.tests.sampleUserPerms
+            pageBuilderIO: {
+                options: {
+                    listeners: basicTestListeners
+                }
+            }
         };
         
         cspace.testComponent1 = function (container, options) {
@@ -176,43 +210,41 @@ cspace = cspace || {};
         cspace.testComponent4 = function (container, options) {
             jqUnit.assertTrue("TestComponent4 instantiated", true);
             jqUnit.assertEquals("TestComponent4 initiated with correct container", "#recordEditorContainer", container);
-            delete options["targetTypeName"];
-            jqUnit.assertDeepEq("TestComponent4 initiated with correct options", optionsWithComponentsWithOptions.components.recordEditor.options, options);
+            jqUnit.assertDeepEq("TestComponent4 initiated with correct options", optionsWithComponentsWithOptions.pageBuilder.options.components.recordEditor.options, options.value);
         };
     
         cspace.testComponent5 = function (container, options) {
             jqUnit.assertTrue("TestComponent5 instantiated", true);
             jqUnit.assertEquals("TestComponent5 initiated with correct container", "#linksContainer", container);
-            delete options["targetTypeName"];
-            jqUnit.assertDeepEq("TestComponent5 initiated with correct options", optionsWithComponentsWithOptions.components.relatedRecords.options, options);
+            jqUnit.assertDeepEq("TestComponent5 initiated with correct options", optionsWithComponentsWithOptions.pageBuilder.options.components.relatedRecords.options, options.value);
         };
         
         cspace.testComponent6 = function (container, options) {
             jqUnit.assertTrue("testComponent6 instantiated", true);
-            jqUnit.assertEquals("testComponent6 initiated with correct container", optionsWithComponentsWithIOCdemands.selectors.recordEditor, container);
-            jqUnit.assertDeepEq("testComponent6 initiated with correct IOC demanded option1", "September", options.foo);
-            jqUnit.assertDeepEq("testComponent6 initiated with correct IOC demanded option2", "Toronto", options.bat);
-            jqUnit.assertDeepEq("testComponent6 initiated with correct IOC demanded option1 for subcomponent", "September", options.options.foobarSubcomponent);
+            var that = fluid.initLittleComponent("cspace.testComponent6", options);
+            jqUnit.assertEquals("testComponent6 initiated with correct container", optionsWithComponentsWithIOCdemands.pageBuilder.options.selectors.recordEditor, container);
+            jqUnit.assertDeepEq("testComponent6 initiated with correct IOC demanded option1", "September", that.options.foo);
+            jqUnit.assertDeepEq("testComponent6 initiated with correct IOC demanded option2", "Toronto", that.options.bat);
+            jqUnit.assertDeepEq("testComponent6 initiated with correct IOC demanded option1 for subcomponent", "September", that.options.options.foobarSubcomponent);
         };
         
         cspace.testComponent7 = function (container, stringParam, options) {
             jqUnit.assertTrue("testComponent7 instantiated", true);
-            jqUnit.assertEquals("testComponent7 initiated with correct container", optionsWithComponentsWithAdditionalParameters.selectors.recordEditor, container);
+            jqUnit.assertEquals("testComponent7 initiated with correct container", optionsWithComponentsWithAdditionalParameters.pageBuilder.options.selectors.recordEditor, container);
             jqUnit.assertDeepEq("testComponent7 initiated with correct extra parameter", "extraParameter", stringParam);
-            jqUnit.assertDeepEq("testComponent7 initiated with correct option", "Danny Kaye", options.option1);
+            jqUnit.assertDeepEq("testComponent7 initiated with correct option", "Danny Kaye", options.value.option1);
         };
         
         cspace.testComponent8 = function (container, nameParam, options) {
             jqUnit.assertTrue("testComponent8 instantiated", true);
-            jqUnit.assertEquals("testComponent8 initiated with correct container", optionsWithComponentsWithDemandInParameters.selectors.recordEditor, container);
+            jqUnit.assertEquals("testComponent8 initiated with correct container", optionsWithComponentsWithDemandInParameters.pageBuilder.options.selectors.recordEditor, container);
             jqUnit.assertDeepEq("testComponent8 initiated with correct extra parameter demanded from PageBuilder", "Jacob", nameParam);
-            jqUnit.assertDeepEq("testComponent8 initiated with correct option", "Danny Kaye", options.option1);
+            jqUnit.assertDeepEq("testComponent8 initiated with correct option", "Danny Kaye", options.value.option1);
         };
             
         pageBuilderTest.asyncTest("Assembly of HTML only", function () {
-            var options = {
+            var pageBuilderIOOpts = {
                 pageSpec: testPageSpec,
-                htmlOnly: true,
                 listeners: {
                     pageReady: function () {
                         var body = $("body");
@@ -225,8 +257,12 @@ cspace = cspace || {};
                     }
                 }
             };
+            var pbIO = cspace.pageBuilderIO(pageBuilderIOOpts);
             done = 0;
-            cspace.pageBuilder(options);
+            pbIO.initPageBuilder({
+                htmlOnly: true,
+                userLogin: cspace.tests.userLogin
+            });
         });
 
         pageBuilderTest.asyncTest("Assembly of HTML", function () {
@@ -234,9 +270,12 @@ cspace = cspace || {};
             
             fluid.demands("recordEditor", "cspace.pageBuilder", 
                 ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
-                
-            var options = {
-                pageSpec: testPageSpec,
+            
+            var pageBuilderIOOpts = {
+                pageSpec: testPageSpec
+            };
+            var pbIO = cspace.pageBuilderIO(pageBuilderIOOpts);
+            var pageBuilderOpts = {
                 selectors: {
                     recordEditor: "#recordEditorContainer"
                 },
@@ -245,10 +284,10 @@ cspace = cspace || {};
                         type: "cspace.testComponent1"
                     }
                 },
-                permissions: cspace.tests.sampleUserPerms
+                userLogin: cspace.tests.userLogin
             };
             done = 0;
-            cspace.pageBuilder(options);
+            pbIO.initPageBuilder(pageBuilderOpts);
         });
 
     
@@ -258,7 +297,8 @@ cspace = cspace || {};
                 ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
             fluid.demands("relatedRecords", "cspace.pageBuilder", 
                 ["{pageBuilder}.options.selectors.relatedRecords", fluid.COMPONENT_OPTIONS]);
-            cspace.pageBuilder(testIOCoptions);
+            var pbIO = cspace.pageBuilderIO(testIOCoptionsPBIO);
+            pbIO.initPageBuilder(testIOCoptionsPB);
         });
     
         pageBuilderTest.asyncTest("Invocation of dependent components: container plus options only", function () {
@@ -267,7 +307,8 @@ cspace = cspace || {};
                 ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
             fluid.demands("relatedRecords", "cspace.pageBuilder", 
                 ["{pageBuilder}.options.selectors.relatedRecords", fluid.COMPONENT_OPTIONS]);
-            cspace.pageBuilder(optionsWithComponentsWithOptions);
+            var pbIO = cspace.pageBuilderIO(optionsWithComponentsWithOptions.pageBuilderIO.options);
+            pbIO.initPageBuilder(optionsWithComponentsWithOptions.pageBuilder.options);
         });
         
         pageBuilderTest.asyncTest("Invocation of dependent components: mini IOC", function () {
@@ -275,7 +316,8 @@ cspace = cspace || {};
             fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.test1");
             fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.test1"], 
                 ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
-            cspace.pageBuilder(optionsWithComponentsWithIOCdemands);
+            var pbIO = cspace.pageBuilderIO(optionsWithComponentsWithIOCdemands.pageBuilderIO.options);
+            pbIO.initPageBuilder(optionsWithComponentsWithIOCdemands.pageBuilder.options);
         });
         
         pageBuilderTest.asyncTest("Invocation of dependent components: additional parameters to components", function () {
@@ -283,7 +325,8 @@ cspace = cspace || {};
             fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.test2");
             fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.test2"], 
                 ["{pageBuilder}.options.selectors.recordEditor", "extraParameter", fluid.COMPONENT_OPTIONS]);
-            cspace.pageBuilder(optionsWithComponentsWithAdditionalParameters);
+            var pbIO = cspace.pageBuilderIO(optionsWithComponentsWithAdditionalParameters.pageBuilderIO.options);
+            pbIO.initPageBuilder(optionsWithComponentsWithAdditionalParameters.pageBuilder.options);
         });
         
         pageBuilderTest.asyncTest("Invocation of dependent components: IOC in additional parameters", function () {
@@ -291,7 +334,8 @@ cspace = cspace || {};
             fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.test3");
             fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.test3"], 
                 ["{pageBuilder}.options.selectors.recordEditor", "{pageBuilder}.options.pbOpt", fluid.COMPONENT_OPTIONS]);
-            cspace.pageBuilder(optionsWithComponentsWithDemandInParameters);
+            var pbIO = cspace.pageBuilderIO(optionsWithComponentsWithDemandInParameters.pageBuilderIO.options);
+            pbIO.initPageBuilder(optionsWithComponentsWithDemandInParameters.pageBuilder.options);
         });
     };
     

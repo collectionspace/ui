@@ -29,15 +29,11 @@ cspace = cspace || {};
     /*
  * Used for conditional expander in tree. Called on each of the menu items. 
  * If args.hide is true, the menu item is hidden.
- * @param args object that should contain a variable hide. If args.hide == true, the menu
- * item will be hidden
+ * @param hide boolean that is === true if we need to hide the tab.
  * @return true if the item should be _displayed_
  */
-    cspace.header.assertMenuItemDisplay = function(hide) { //return true to display menu item
-        if (hide && hide.toLowerCase() === 'false') {
-            hide = false;
-        }
-        return (!hide);
+    cspace.header.assertMenuItemDisplay = function(hide) {
+        return !hide;
     };
 
     /**

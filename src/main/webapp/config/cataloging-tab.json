@@ -1,59 +1,64 @@
 {
-    "schema": [
-        "recordlist",
-        "recordtypes",
-        "cataloging"
-    ],
-    "pageType": "cataloging-tab",
-    "recordType": "cataloging",
-    "pageSpec": {
-        "details": {
-            "href": "%readonlypages/CatalogingTemplate.html",
-            "templateSelector": ".csc-cataloging-template",
-            "targetSelector": ".csc-relatedRecordsTab-cataloging .csc-relatedRecordsTab-recordEditor" 
-        } 
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "cataloging",
+             "schema": [
+                "recordlist",
+                "recordtypes",
+                "cataloging"
+            ],
+            "pageSpec": {
+                "details": {
+                    "href": "%readonlypages/CatalogingTemplate.html",
+                    "templateSelector": ".csc-cataloging-template",
+                    "targetSelector": ".csc-relatedRecordsTab-cataloging .csc-relatedRecordsTab-recordEditor" 
+                } 
+            }
+        }
     },
-    "selectors": {
-        "relatedRecordsTab": ".csc-relatedRecordsTab-cataloging"
-    },
-    "components": {
-        "relatedRecordsTab": {
-            "type": "cspace.relatedRecordsTab",
-            "options": {
-                "primary": "{pageBuilder}.options.primary",
-                "related": "{pageBuilder}.options.related",
-                "applier": "{pageBuilder}.applier",
-                "model": "{pageBuilder}.model",
-                "uispec": "{pageBuilder}.uispec",
-                "strings": {
-                    "editRecord": "Edit Cataloging Record",
-                    "recordList": "Related Cataloging Records",
-                    "newRecordRow": "New Cataloging Record"
-                },
-                "listEditor": {
+    "pageBuilder": {
+        "options": {
+            "pageType": "cataloging-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-cataloging"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
                     "options": {
-                        "initList": "cspace.listEditor.receiveData",
-                        "dataContext": {
-                            "options": {
-                                "recordType": "cataloging",
-                                "dataSource": {
-                                    "options": {
-                                        "schema": "{pageBuilder}.schema" 
-                                    } 
-                                } 
-                            } 
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "applier": "{pageBuilder}.applier",
+                        "model": "{pageBuilder}.model",
+                        "uispec": "{pageBuilder}.options.uispec",
+                        "strings": {
+                            "editRecord": "Edit Cataloging Record",
+                            "recordList": "Related Cataloging Records",
+                            "newRecordRow": "New Cataloging Record"
                         },
-                        "details": {
-                            "options": {
-                                "selectors": {
-                                    "identificationNumber": ".csc-object-identification-object-number" 
-                                },
-                                "strings": {
-                                    "identificationNumberRequired": "Please specify an Identification Number" 
-                                } 
-                            } 
-                        } 
-                    } 
+                        "components": {
+                            "listEditor": {
+                                "options": {
+                                    "initList": "cspace.listEditor.receiveData",
+                                    "dataContext": {
+                                        "options": {
+                                            "recordType": "cataloging"
+                                        }
+                                    },
+                                    "details": {
+                                        "options": {
+                                            "selectors": {
+                                                "identificationNumber": ".csc-object-identification-object-number" 
+                                            },
+                                            "strings": {
+                                                "identificationNumberRequired": "Please specify an Identification Number" 
+                                            }
+                                        } 
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -93,6 +93,14 @@ cspace.tests.fullPerms = {
         "media": ["create", "read", "update", "delete", "list"]
 };
 
+cspace.tests.userLogin = {
+    permissions: cspace.tests.sampleUserPerms,
+    userId: "admin@collectionspace.org",
+    screenName: "admin@collectionspace.org",
+    login: true,
+    csid: "d4f9f4a8-c1a1-49a3-9414-b20fe7aef0b0"
+};
+
 fluid.demands("cspace.urlExpander", ["cspace.localData", "cspace.test"],
     {
     args: {

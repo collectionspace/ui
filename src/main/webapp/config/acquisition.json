@@ -1,67 +1,72 @@
 {
-    "schema": [
-        "recordlist",
-        "recordtypes",
-        "acquisition"
-    ],
-    "pageType": "acquisition",
-    "recordType": "acquisition",
-    "dataContext": {
+    "pageBuilder": {
         "options": {
-            "recordType": "acquisition" 
-        } 
-    },
-    "pageSpec": {
-        "recordEditor": {
-            "href": "%readonlypages/AcquisitionTemplate.html",
-            "templateSelector": ".csc-acquisition-template",
-            "targetSelector": ".csc-record-edit-container" 
+            "pageType": "acquisition",
+            "selectors": {
+                "recordEditor": ".csc-acquisition-template"
+            },
+            "components": {
+                "recordEditor": {
+                    "type":  "cspace.recordEditor",
+                    "options": {
+                        "selectors": {
+                            "identificationNumber": ".csc-acquisition-numberPatternChooser-reference-number" 
+                        },
+                        "strings": {
+                            "identificationNumberRequired": "Please specify an Acquisition Reference Number" 
+                        },
+                        "applier": "{pageBuilder}.applier",
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "model": "{pageBuilder}.model"
+                    }
+                },
+                "titleBar": {
+                    "type": "cspace.titleBar",
+                    "options": {
+                        "fields": [
+                            "fields.acquisitionReferenceNumber", {
+                            "type": "repeatableMatch",
+                            "queryPath": "fields.acquisitionSources",
+                            "childPath": "_primary",
+                            "value": true,
+                            "path": "acquisitionSource"
+                        }]
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                },
+                "tabs": {
+                    "type": "cspace.tabs"
+                },
+                "sidebar": {
+                    "type": "cspace.sidebar",
+                    "options": {
+                        "uispec": "{pageBuilder}.options.uispec.sidebar"
+                    }
+                }
+            }
         }
     },
-    "components": {
-        "tabs": {
-            "type": "cspace.tabs"
-        },
-        "titleBar": {
-            "type": "cspace.titleBar",
-            "options": {
-                "fields": [
-                    "fields.acquisitionReferenceNumber", {
-                    "type": "repeatableMatch",
-                    "queryPath": "fields.acquisitionSources",
-                    "childPath": "_primary",
-                    "value": true,
-                    "path": "acquisitionSource"
-                }]
-            }
-        },
-        "recordEditor": {
-            "type":  "cspace.recordEditor",
-            "options": {
-                "selectors": {
-                    "identificationNumber": ".csc-acquisition-numberPatternChooser-reference-number" 
-                },
-                "strings": {
-                    "identificationNumberRequired": "Please specify an Acquisition Reference Number" 
-                },
-                "dataContext": "{pageBuilder}.dataContext",
-                "applier": "{pageBuilder}.applier",
-                "uispec": "{pageBuilder}.uispec.recordEditor",
-                "model": "{pageBuilder}.model" 
-            }
-        },
-        "sidebar": {
-            "type": "cspace.sidebar"
-        },
-        "header": {
-            "type": "cspace.header",
-            "options": {
-                "schema": "{pageBuilder}.schema",
-                "permissions": "{pageBuilder}.permissions"
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "acquisition",
+             "schema": [
+                "recordlist",
+                "recordtypes",
+                "acquisition"
+            ],
+            "pageSpec": {
+                "recordEditor": {
+                    "href": "%readonlypages/AcquisitionTemplate.html",
+                    "templateSelector": ".csc-acquisition-template",
+                    "targetSelector": ".csc-record-edit-container" 
+                }
             }
         }
-    },
-    "selectors": {
-        "recordEditor": ".csc-acquisition-template"
     }
 }

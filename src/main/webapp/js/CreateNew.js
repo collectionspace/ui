@@ -138,6 +138,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.createNew", {
+        parentBundle: "{globalBundle}",
         model: {
             categories: [{
                 expander: {
@@ -215,17 +216,13 @@ cspace = cspace || {};
             //create new button:
             createButtonText: "Create"
         },
-        parentBundle: "{globalBundle}",
         produceTree: cspace.createNew.produceTree,
         invokers: {
             refreshView: {          // A public method that renders the component and binds event handlers anew.
                 funcName: "cspace.createNew.refreshView",
                 args: ["{createNew}"]
             },
-            createRecord: {     // A public method that builds new page's url.
-                funcName: "cspace.createNew.createRecord",
-                args: ["{createNew}"]
-            }
+            createRecord: "createRecord"
         },
         newRecordUrl: "%recordUrl.html",
         resources: {
@@ -236,26 +233,15 @@ cspace = cspace || {};
         }
     });
     
-    cspace.createNew.createNewLocal = function (container, options) {
-        var that = fluid.initLittleComponent("cspace.createNew.createNewLocal", options);
-        return cspace.createNew(container, that.options);
-    };
-    fluid.defaults("cspace.createNew.createNewLocal", {
-        mergePolicy: {
-            model: "preserve"
-        },
-        invokers: {
-            createRecord: {
-                funcName: "cspace.createNew.createRecordLocal"
-            }
-        }
+    fluid.demands("createRecord", ["cspace.pageBuilder", "cspace.localData"], {
+        funcName: "cspace.createNew.createRecordLocal",
+        args: ["{createNew}"]
     });
-    
+    fluid.demands("createRecord", "cspace.pageBuilder", {
+        funcName: "cspace.createNew.createRecord",
+        args: ["{createNew}"]
+    });
     fluid.demands("createNew", "cspace.pageBuilder", ["{pageBuilder}.options.selectors.createNew", fluid.COMPONENT_OPTIONS]);
-    fluid.demands("createNew", ["cspace.pageBuilder", "cspace.localData"], {
-        funcName: "cspace.createNew.createNewLocal",
-        args: ["{pageBuilder}.options.selectors.createNew", fluid.COMPONENT_OPTIONS]
-    });
     
     // This funtction executes on file load and starts the fetch process of component's template.
     fluid.fetchResources.primeCacheFromResources("cspace.createNew");

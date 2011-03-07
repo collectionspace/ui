@@ -1,62 +1,67 @@
-{    
-    "schema": [
-        "recordlist",
-        "recordtypes",
-        "movement"
-    ],
-    "pageType": "movement",
-    "recordType": "movement",
-    "dataContext": {
+{
+    "pageBuilder": {
         "options": {
-            "recordType": "movement" 
-        } 
-    },
-    "pageSpec": {
-        "recordEditor": {
-            "href": "%readonlypages/MovementTemplate.html",
-            "templateSelector": ".csc-movement-template",
-            "targetSelector": ".csc-record-edit-container" 
+            "pageType": "movement",
+            "selectors": {
+                "recordEditor": ".csc-movement-template"
+            },
+            "components": {
+                "recordEditor": {
+                    "type":  "cspace.recordEditor",
+                    "options": {
+                        "selectors": {
+                            "identificationNumber": ".csc-movement-currentLocation" 
+                        },
+                        "strings": {
+                            "identificationNumberRequired": "Please specify Current Location" 
+                        },
+                        "applier": "{pageBuilder}.applier",
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "model": "{pageBuilder}.model"
+                    }
+                },
+                "titleBar": {
+                    "type": "cspace.titleBar",
+                    "options": {
+                        "fields": [
+                            "fields.currentLocation",
+                            "fields.locationDate" 
+                        ]
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                },
+                "tabs": {
+                    "type": "cspace.tabs"
+                },
+                "sidebar": {
+                    "type": "cspace.sidebar",
+                    "options": {
+                        "uispec": "{pageBuilder}.options.uispec.sidebar"
+                    }
+                }
+            }
         }
     },
-    "selectors": {
-        "recordEditor": ".csc-movement-template"
-    },
-    "components": {
-        "tabs": {
-            "type": "cspace.tabs"
-        },
-        "titleBar": {
-            "type": "cspace.titleBar",
-            "options": {
-                "fields": [
-                    "fields.currentLocation",
-                    "fields.locationDate" 
-                ]
-            }
-        },
-        "recordEditor": {
-            "type":  "cspace.recordEditor",
-            "options": {
-                "selectors": {
-                    "identificationNumber": ".csc-movement-currentLocation" 
-                },
-                "strings": {
-                    "identificationNumberRequired": "Please specify Current Location" 
-                },
-                "dataContext": "{pageBuilder}.dataContext",
-                "applier": "{pageBuilder}.applier",
-                "uispec": "{pageBuilder}.uispec.recordEditor",
-                "model": "{pageBuilder}.model" 
-            }
-        },
-        "sidebar": {
-            "type": "cspace.sidebar"
-        },
-        "header": {
-            "type": "cspace.header",
-            "options": {
-                "schema": "{pageBuilder}.schema",
-                "permissions": "{pageBuilder}.permissions"
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "movement",
+             "schema": [
+                "recordlist",
+                "recordtypes",
+                "movement"
+            ],
+            "pageSpec": {
+                "recordEditor": {
+                    "href": "%readonlypages/MovementTemplate.html",
+                    "templateSelector": ".csc-movement-template",
+                    "targetSelector": ".csc-record-edit-container" 
+                }
             }
         }
     }

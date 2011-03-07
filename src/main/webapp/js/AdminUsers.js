@@ -100,37 +100,36 @@ cspace = cspace || {};
         });
     };
 
-    cspace.adminUsers = function (container, options) {
+    cspace.adminUsers = function (container, options, demandsOptions) {
+        options = options || {};
+        fluid.merge(null, options.value || options, demandsOptions);
+        
         var that = fluid.initView("cspace.adminUsers", container, options);
-        
-        that.userListEditor = fluid.initSubcomponent(that, "userListEditor", [that.container, that.options.recordType, 
-            that.options.uispec, fluid.COMPONENT_OPTIONS]);
-        
         fluid.initDependents(that);
         bindEventHandlers(that);
-        
         that.events.afterSetup.fire(that);
-        
         return that;
     };
     
     fluid.demands("isCurrentUser", "cspace.adminUsers", fluid.COMPONENT_OPTIONS);
+    fluid.demands("userListEditor", "cspace.adminUsers", ["{adminUsers}container", 
+        "{adminUsers}options.recordType", "{adminUsers}options.uispec", fluid.COMPONENT_OPTIONS]);
 
     fluid.defaults("cspace.adminUsers", {
         recordType: "users",
-        userListEditor: {
-            type: "cspace.listEditor",
-            options: {
-                dataContext: {
-                    options: {
-                        recordType: "users"
-                    }
-                }
-            }
-        },
         components: {
             passwordValidator: {
                 type: "cspace.passwordValidator"
+            },
+            userListEditor: {
+                type: "cspace.listEditor",
+                options: {
+                    dataContext: {
+                        options: {
+                            recordType: "users"
+                        }
+                    }
+                }
             }
         },
         selectors: {
@@ -158,7 +157,17 @@ cspace = cspace || {};
         queryURL: "../../chain/users/search?query="
     });
     
-    fluid.demands("users", "cspace.pageBuilder", 
-        ["{pageBuilder}.options.selectors.users", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("users", ["cspace.pageBuilder", "cspace.localData"], ["{pageBuilder}.options.selectors.users", fluid.COMPONENT_OPTIONS, {
+        recordType: "users/records.json",
+        queryURL: "../../../test/data/users/search.json",
+        components: {
+            userListEditor: {
+                options: {
+                    baseUrl: "../../../test/data/"
+                }
+            }
+        }
+    }]);
+    fluid.demands("users", "cspace.pageBuilder", ["{pageBuilder}.options.selectors.users", fluid.COMPONENT_OPTIONS]);
 
 })(jQuery, fluid);

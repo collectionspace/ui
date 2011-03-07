@@ -42,8 +42,6 @@ var listEditorTester = function(){
         baseUrl: "../data/",
         dataContext: {                    
             options: {
-                baseUrl: "../data/",
-                fileExtension: ".json",
                 recordType: "users"
             }
         }

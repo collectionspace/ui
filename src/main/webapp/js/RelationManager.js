@@ -57,62 +57,47 @@ cspace = cspace || {};
         that.dataContext.events.afterAddRelations.addListener(updateRelations(that.options.applier, that.model));
     };
     
-    cspace.relationManager = function (container, options) {
-        var that = fluid.initRendererComponent("cspace.relationManager", container, options);
-        that.renderer.refreshView();                
-        that.dataContext = fluid.initSubcomponent(that, "dataContext", [that.model, fluid.COMPONENT_OPTIONS]);
-        that.addRelations = that.options.addRelations(that);
-        that.dialogNode = that.locate("searchDialog"); // since blasted jQuery UI dialog will move it out of our container
+    cspace.relationManager = function (container, options, demandsOptions) {
         
+        options = options || {};
+        fluid.merge({model: "preserve", applier: "nomerge"}, options.value || options, demandsOptions);
+        
+        var that = fluid.initRendererComponent("cspace.relationManager", container, options);
+        that.renderer.refreshView();
+        
+        that.dialogNode = that.locate("searchDialog"); // since blasted jQuery UI dialog will move it out of our container
         fluid.initDependents(that);
+        
+        that.addRelations = that.searchToRelateDialog.options.listeners.addRelations;
+        
         bindEventHandlers(that);
         return that;
-    };
-    
-    cspace.relationManager.provideAddRelations = function (relationManager) {
-        return relationManager.dataContext.addRelations;
     };
     
     cspace.relationManager.provideLocalAddRelations = function (relationManager) {
         return updateRelations(relationManager.options.applier, relationManager.model);
     };
     
-    cspace.relationManager.localSearchToRelateDialog = function (container, options) {
-        var that = fluid.initLittleComponent("cspace.relationManager.localSearchToRelateDialog", options);
-        return cspace.searchToRelateDialog(container, that.options);
-    };
-    
-    // TODO: Approach is interesting but not correct - has fragile dependence on exact 
-    // options structure. UrlBuilder itself needs to be IoC-resolved directly, as with 
-    // specs 
-    fluid.defaults("cspace.relationManager.localSearchToRelateDialog", {
-        components: {
-            search: {
-                options: {
-                    searchUrlBuilder: cspace.search.localSearchUrlBuilder
+    fluid.demands("cspace.searchToRelateDialog", ["cspace.relationManager", "cspace.localData"], ["{relationManager}.dom.searchDialog", fluid.COMPONENT_OPTIONS, {
+        listeners: {
+            addRelations: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.relationManager.provideLocalAddRelations",
+                    args: "{relationManager}"
                 }
             }
-        },
-        mergePolicy: {
-            model: "preserve"
         }
-    });
-    
-    fluid.demands("cspace.searchToRelateDialog", ["cspace.localData", "cspace.relationManager"], {
-        funcName: "cspace.relationManager.localSearchToRelateDialog",
-        args: ["{relationManager}.dom.searchDialog", fluid.COMPONENT_OPTIONS]
-    });
-    
-    fluid.demands("cspace.searchToRelateDialog", "cspace.relationManager", 
-        ["{relationManager}.dom.searchDialog", fluid.COMPONENT_OPTIONS]);
+    }]);
+    fluid.demands("cspace.searchToRelateDialog", "cspace.relationManager", ["{relationManager}.dom.searchDialog", fluid.COMPONENT_OPTIONS]);
 
     cspace.relationManager.permissionResolver = function (options) {
         var that = fluid.initLittleComponent("cspace.relationManager.permissionResolver", options);
-        options.allOf.push({
-            permission: options.recordClassPermission,
-            oneOf: that.options.recordTypeManager.recordTypesForCategory(options.recordClass)
+        that.options.allOf.push({
+            permission: that.options.recordClassPermission,
+            oneOf: that.options.recordTypeManager.recordTypesForCategory(that.options.recordClass)
         });
-        that.visible = cspace.permissions.resolveMultiple(options);
+        that.visible = cspace.permissions.resolveMultiple(that.options);
         return that;
     };
     
@@ -132,11 +117,17 @@ cspace = cspace || {};
     fluid.defaults("cspace.relationManager", {
         produceTree: cspace.relationManager.produceTree,
         components: {
+            dataContext: {
+                type: "cspace.dataContext",
+                options: {
+                    recordType: "relationships"
+                }
+            },
             searchToRelateDialog: {
                 type: "cspace.searchToRelateDialog",
                 options: {
                     listeners: {
-                        addRelations: "{relationManager}.addRelations",
+                        addRelations: "{relationManager}.dataContext.addRelations",
                         onCreateNewRecord: "{relationManager}.events.onCreateNewRecord.fire"
                     },
                     model: "{relationManager}.model",
@@ -161,13 +152,6 @@ cspace = cspace || {};
                 }
             }
         },
-        dataContext: {
-            type: "cspace.dataContext",
-            options: {
-                recordType: "relationships"
-            }
-        },
-        addRelations: cspace.relationManager.provideAddRelations,
         selectors: {
             searchDialog: ".csc-search-related-dialog",
             addButton: ".csc-add-related-record-button"
@@ -183,7 +167,7 @@ cspace = cspace || {};
         },
         mergePolicy: {
             model: "preserve",
-            applier: "preserve"
+            applier: "nomerge"
         }
     });
     

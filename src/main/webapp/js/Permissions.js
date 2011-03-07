@@ -93,7 +93,7 @@ fluid.registerNamespace("cspace.permissions");
         that.resolve = function (resOpts) {
             var target = fluid.makeArray(resOpts.target);
             var values = fluid.transform(target, function (thisTarget) {
-                return cspace.permissions.hasPermission(options.permissions, thisTarget, resOpts.permission);
+                return cspace.permissions.hasPermission(that.options.permissions, thisTarget, resOpts.permission);
             });
             return cspace.permissions.logicalCombine(values, resOpts.method === "AND");
         };

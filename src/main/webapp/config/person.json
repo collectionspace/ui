@@ -1,62 +1,73 @@
 {
-    "schema": [
-        "recordlist",
-        "recordtypes",
-        "person"
-    ],
-    "recordType": "person",
-    "dataContext": {
+    "pageBuilder": {
         "options": {
-            "recordType": "person",
-            "baseUrl": "../../chain/vocabularies" 
-        } 
-    },
-    "pageSpec": {
-        "recordEditor": {
-            "href": "%readonlypages/PersonTemplate.html",
-            "templateSelector": ".csc-personAuthority-template",
-            "targetSelector": ".csc-record-edit-container"
+            "pageType": "person",
+            "selectors": {
+                "recordEditor": ".csc-personAuthority-template"
+            },
+            "components": {
+                "recordEditor": {
+                    "type":  "cspace.recordEditor",
+                    "options": {
+                        "selectors": {
+                            "identificationNumber": ".csc-personAuthority-displayName"
+                        },
+                        "strings": {
+                            "identificationNumberRequired": "Please specify a Display Name"
+                        },
+                        "applier": "{pageBuilder}.applier",
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "model": "{pageBuilder}.model"
+                    }
+                },
+                "titleBar": {
+                    "type": "cspace.titleBar",
+                    "options": {
+                        "fields": [
+                            "fields.displayName"
+                        ]
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                },
+                "tabs": {
+                    "type": "cspace.tabs"
+                },
+                "sidebar": {
+                    "type": "cspace.sidebar",
+                    "options": {
+                        "uispec": "{pageBuilder}.options.uispec.sidebar"
+                    }
+                }
+            }
         }
     },
-    "pageType": "person",
-    "selectors": {
-        "recordEditor": ".csc-personAuthority-template"
-    },
-    "components": {
-        "tabs": {
-            "type": "cspace.tabs"
-        },
-        "titleBar": {
-            "type": "cspace.titleBar",
-            "options": {
-                "fields": [
-                    "fields.displayName"
-                ]
-            }
-        },
-        "recordEditor": {
-            "type":  "cspace.recordEditor",
-            "options": {
-                "selectors": {
-                    "identificationNumber": ".csc-personAuthority-displayName"
-                },
-                "strings": {
-                    "identificationNumberRequired": "Please specify a Display Name"
-                },
-                "dataContext": "{pageBuilder}.dataContext",
-                "applier": "{pageBuilder}.applier",
-                "uispec": "{pageBuilder}.uispec.recordEditor",
-                "model": "{pageBuilder}.model"
-            }
-        },
-        "sidebar": {
-            "type": "cspace.sidebar"
-        },
-        "header": {
-            "type": "cspace.header",
-            "options": {
-                "schema": "{pageBuilder}.schema",
-                "permissions": "{pageBuilder}.permissions"
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "person",
+            "schema": [
+                "recordlist",
+                "recordtypes",
+                "person"
+            ],
+            "pageSpec": {
+                "recordEditor": {
+                    "href": "%readonlypages/PersonTemplate.html",
+                    "templateSelector": ".csc-personAuthority-template",
+                    "targetSelector": ".csc-record-edit-container"
+                }
+            },
+            "components": {
+                "dataContext": {
+                    "options": {
+                        "baseUrl": "../../chain/vocabularies"
+                    }
+                }
             }
         }
     }

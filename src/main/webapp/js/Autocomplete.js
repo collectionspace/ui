@@ -613,4 +613,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             selectMatch: null
         }
     });
+    
+    fluid.demands("cspace.autocomplete", "cspace.recordEditor", ["@0", fluid.COMPONENT_OPTIONS]);
 })(jQuery, fluid);

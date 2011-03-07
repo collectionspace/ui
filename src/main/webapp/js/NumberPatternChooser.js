@@ -198,6 +198,8 @@ cspace = cspace || {};
             afterRender: null
         },
         templateUrl: "../html/components/NumberPatternChooser.html",
-        baseUrl: "{parent}.options.dataContext.options.baseUrl"
+        baseUrl: "{recordEditor}.options.dataContext.options.baseUrl"
     });
+    
+    fluid.demands("cspace.numberPatternChooser", "cspace.recordEditor", ["@0", fluid.COMPONENT_OPTIONS]);
 })(jQuery, fluid);

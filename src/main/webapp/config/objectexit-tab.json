@@ -1,57 +1,62 @@
 {
-    "schema": [
-        "recordlist",
-        "recordtypes",
-        "objectexit"
-    ],
-    "pageType": "objectexit-tab",
-    "recordType": "objectexit",
-    "pageSpec": {
-        "details": {
-            "href": "%readonlypages/ObjectexitTemplate.html",
-            "templateSelector": ".csc-objectexit-template",
-            "targetSelector": ".csc-relatedRecordsTab-objectexit .csc-relatedRecordsTab-recordEditor"
-        } 
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "objectexit",
+             "schema": [
+                "recordlist",
+                "recordtypes",
+                "objectexit"
+            ],
+            "pageSpec": {
+                "details": {
+                    "href": "%readonlypages/ObjectexitTemplate.html",
+                    "templateSelector": ".csc-objectexit-template",
+                    "targetSelector": ".csc-relatedRecordsTab-objectexit .csc-relatedRecordsTab-recordEditor"
+                }
+            }
+        }
     },
-    "selectors": {
-        "relatedRecordsTab": ".csc-relatedRecordsTab-objectexit"
-    },
-    "components": {
-        "relatedRecordsTab": {
-            "type": "cspace.relatedRecordsTab",
-            "options": {
-                "primary": "{pageBuilder}.options.primary",
-                "related": "{pageBuilder}.options.related",
-                "applier": "{pageBuilder}.applier",
-                "model": "{pageBuilder}.model",
-                "uispec": "{pageBuilder}.uispec",
-                "strings": {
-                    "editRecord": "Edit Object Exit Record",
-                    "recordList": "Related Object Exit Records",
-                    "newRecordRow": "New Object Exit Record"
-                },
-                "listEditor": {
+    "pageBuilder": {
+        "options": {
+            "pageType": "objectexit-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-objectexit"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
                     "options": {
-                        "initList": "cspace.listEditor.receiveData",
-                        "dataContext": {
-                            "options": {
-                                "recordType": "objectexit",
-                                "dataSource": {
-                                    "options": {
-                                        "schema": "{pageBuilder}.schema" 
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "applier": "{pageBuilder}.applier",
+                        "model": "{pageBuilder}.model",
+                        "uispec": "{pageBuilder}.options.uispec",
+                        "strings": {
+                            "editRecord": "Edit Object Exit Record",
+                            "recordList": "Related Object Exit Records",
+                            "newRecordRow": "New Object Exit Record"
+                        },
+                        "components": {
+                            "listEditor": {
+                                "options": {
+                                    "initList": "cspace.listEditor.receiveData",
+                                    "dataContext": {
+                                        "options": {
+                                            "recordType": "objectexit"
+                                        }
+                                    },
+                                    "details": {
+                                        "options": {
+                                            "selectors": {
+                                                "identificationNumber": ".csc-objectexit-exitNumber"
+                                            },
+                                            "strings": {
+                                                "identificationNumberRequired": "Please specify an Exit Number" 
+                                            } 
+                                        } 
                                     }
                                 }
                             }
-                        },
-                        "details": {
-                            "options": {
-                                "selectors": {
-                                    "identificationNumber": ".csc-objectexit-exitNumber"
-                                },
-                                "strings": {
-                                    "identificationNumberRequired": "Please specify an Exit Number" 
-                                } 
-                            } 
                         }
                     }
                 }

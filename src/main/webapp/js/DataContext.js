@@ -79,11 +79,14 @@ cspace = cspace || {};
      * @param {Object} model the model that is bound to this data context
      * @param {Object} options configuration options
      */
-    cspace.dataContext = function (model, options) {
-        var that = {
-            model: model
-        };
-        fluid.mergeComponentOptions(that, "cspace.dataContext", options);
+    cspace.dataContext = function (model, options, demandsOptions) {
+        options = options || {};
+        fluid.merge(null, options.value || options, demandsOptions);
+        
+        var that = fluid.initLittleComponent("cspace.dataContext", options);
+        fluid.initDependents(that);
+        
+        that.model = model;
         fluid.instantiateFirers(that, that.options);
 
         that.updateModel = function (newModel, source) {
@@ -93,20 +96,25 @@ cspace = cspace || {};
             that.events.modelChanged.fire(that.model, oldModel, source);
         };
         
-        if (that.options.dataSource.options) {
-            that.options.dataSource.options = that.options.dataSource.options || {};
-            fluid.merge(null, that.options.dataSource.options, {
-                baseUrl: that.options.baseUrl,
-                fileExtension: that.options.fileExtension,
-                recordType: that.options.recordType
-            });
-            that.dataSource = fluid.initSubcomponent(that, "dataSource", [
-                fluid.COMPONENT_OPTIONS 
-            ]);
-            that.dataSource.events.afterFetchResources.addListener(function (data) {
-                that.events.afterFetch.fire(data);
-            });
-        }
+        that.initDataSource = function () {
+            if (that.dataSource) {
+                that.instantiator.clearComponent(that, "dataSource");
+            }
+            that.options.components.dataSource = {
+                type: "cspace.dataSource",
+                options: {
+                    baseUrl: that.options.baseUrl,
+                    fileExtension: that.options.fileExtension,
+                    recordType: that.options.recordType,
+                    listeners: {
+                        afterFetchResources: function (data) {
+                            that.events.afterFetch.fire(data);
+                        }
+                    }
+                }
+            };
+            fluid.initDependent(that, "dataSource", that.instantiator);
+        };
         
         /** Get a resourceSpec structure that may be used to issue the required
          * I/O for this dataContext operation at a later time. This currently causes
@@ -155,8 +163,8 @@ cspace = cspace || {};
     };
 
     fluid.defaults("cspace.dataContext", {
-        dataSource: {
-            type: "cspace.dataSource"
+        components: {
+            instantiator: "{instantiator}"
         },
         events: {
             modelChanged: null,    // newModel, oldModel, source
@@ -173,5 +181,25 @@ cspace = cspace || {};
         dataType: "json",
         fileExtension: ""
     });
+    
+    fluid.demands("detailsDC", ["cspace.listEditor", "cspace.test"], ["{listEditor}.model.details", fluid.COMPONENT_OPTIONS, {
+        baseUrl: "../data",
+        fileExtension: ".json"
+    }]);
+    fluid.demands("detailsDC", ["cspace.listEditor", "cspace.tabs"], ["{listEditor}.model.details", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("detailsDC", ["cspace.listEditor", "cspace.tabs", "cspace.localData"], ["{listEditor}.model.details", fluid.COMPONENT_OPTIONS, {
+        baseUrl: "../../../test/data",
+        fileExtension: ".json"
+    }]);
+    fluid.demands("dataContext", "cspace.relationManager", ["{relationManager}.model", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("dataContext", ["cspace.relationManager", "cspace.localData"], ["{relationManager}.model", fluid.COMPONENT_OPTIONS, {
+        baseUrl: "../../../test/data",
+        fileExtension: ".json"
+    }]);
+    fluid.demands("dataContext", "cspace.pageBuilderIO", ["{pageBuilderIO}.options.model", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("dataContext", ["cspace.pageBuilderIO", "cspace.localData"], ["{pageBuilderIO}.options.model", fluid.COMPONENT_OPTIONS, {
+        baseUrl: "../../../test/data",
+        fileExtension: ".json"
+    }]);
 
 })(jQuery, fluid);

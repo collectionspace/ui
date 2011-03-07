@@ -73,6 +73,9 @@ cspace = cspace || {};
         that.events.pageReady.fire(that);
     };
     
+    fluid.demands("details", "cspace.listEditor", ["{listEditor}.dom.details", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("list", "cspace.listEditor", ["{listEditor}.dom.list", fluid.COMPONENT_OPTIONS]);
+    
     /**
      * 
      * @param {Object} container
@@ -82,6 +85,7 @@ cspace = cspace || {};
      */
     cspace.listEditor = function (container, recordType, uispec, options) {
         var that = fluid.initView("cspace.listEditor", container, options);
+        fluid.initDependents(that);
         that.recordType = recordType;
         that.uispec = uispec;
         that.model = {
@@ -92,16 +96,27 @@ cspace = cspace || {};
         //TODO: This component needs to be IOC'ed.
         
         that.detailsApplier = fluid.makeChangeApplier(that.model.details);
-        that.detailsDC = fluid.initSubcomponent(that, "dataContext", [that.model.details, fluid.COMPONENT_OPTIONS]);
+        that.options.components.detailsDC = {
+            type: "cspace.dataContext",
+            options: that.options.dataContext.options
+        };
+        fluid.initDependent(that, "detailsDC", that.instantiator);
+        that.detailsDC.initDataSource();
         that.detailsDC.fetch();
         
-        that.options.details.options = that.options.details.options || {};
-        that.options.details.options.applier = that.detailsApplier;
-        that.options.details.options.dataContext = that.detailsDC;
-        that.options.details.options.model = that.model.details;
-        that.options.details.options.uispec = that.uispec.details;
-        that.details = fluid.initSubcomponent(that, "details", 
-            [$(that.options.selectors.details, that.container), fluid.COMPONENT_OPTIONS]);
+        that.options.components.details = fluid.merge({
+            "options.model": "preserve",
+            "options.applier": "nomerge"
+        }, that.options.details, {
+            options: {
+                applier: "{listEditor}detailsApplier",
+                model: "{listEditor}model.details",
+                uispec: "{listEditor}uispec.details"
+            }
+        });
+        
+        fluid.initDependent(that, "details", that.instantiator);
+        
         hideDetails(that.dom);
         
         /**
@@ -129,9 +144,12 @@ cspace = cspace || {};
                 items: that.model.list,
                 selectionIndex: -1
             };
-            that.options.list.options.uispec = that.uispec.list;
-            that.list = fluid.initSubcomponent(that, "list", 
-                [$(that.options.selectors.list, container), fluid.COMPONENT_OPTIONS]);
+            that.options.list.options.uispec = "{listEditor}uispec.list";
+            that.options.components.list = {
+                type: "cspace.recordList",
+                options: that.options.list.options
+            };
+            fluid.initDependent(that, "list", that.instantiator);
             setUpListEditor(that);
         };
         if (typeof(that.options.initList) === "function") {
@@ -212,6 +230,9 @@ cspace = cspace || {};
         },
         globalNavigator: "{globalNavigator}",
         messageBar: "{messageBar}",
+        components: {
+            instantiator: "{instantiator}"
+        },
         dataContext: {
             type: "cspace.dataContext",
             options: {

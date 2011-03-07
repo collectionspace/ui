@@ -1,57 +1,62 @@
 {
-    "schema": [
-        "recordlist",
-        "recordtypes",
-        "acquisition"
-    ],
-    "pageType": "acquisition-tab",
-    "recordType": "acquisition",
-    "pageSpec": {
-        "details": {
-            "href": "%readonlypages/AcquisitionTemplate.html",
-            "templateSelector": ".csc-acquisition-template",
-            "targetSelector": ".csc-relatedRecordsTab-acquisition .csc-relatedRecordsTab-recordEditor"
-        } 
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "acquisition",
+             "schema": [
+                "recordlist",
+                "recordtypes",
+                "acquisition"
+            ],
+            "pageSpec": {
+                "details": {
+                    "href": "%readonlypages/AcquisitionTemplate.html",
+                    "templateSelector": ".csc-acquisition-template",
+                    "targetSelector": ".csc-relatedRecordsTab-acquisition .csc-relatedRecordsTab-recordEditor"
+                }
+            }
+        }
     },
-    "selectors": {
-        "relatedRecordsTab": ".csc-relatedRecordsTab-acquisition"
-    },
-    "components": {
-        "relatedRecordsTab": {
-            "type": "cspace.relatedRecordsTab",
-            "options": {
-                "primary": "{pageBuilder}.options.primary",
-                "related": "{pageBuilder}.options.related",
-                "applier": "{pageBuilder}.applier",
-                "model": "{pageBuilder}.model",
-                "uispec": "{pageBuilder}.uispec",
-                "strings": {
-                    "editRecord": "Edit Acquisition Record",
-                    "recordList": "Related Acquisition Records",
-                    "newRecordRow": "New Acquisition Record"
-                },
-                "listEditor": {
+    "pageBuilder": {
+        "options": {
+            "pageType": "acquisition-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-acquisition"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
                     "options": {
-                        "initList": "cspace.listEditor.receiveData",
-                        "dataContext": {
-                            "options": {
-                                "recordType": "acquisition",
-                                "dataSource": {
-                                    "options": {
-                                        "schema": "{pageBuilder}.schema" 
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "applier": "{pageBuilder}.applier",
+                        "model": "{pageBuilder}.model",
+                        "uispec": "{pageBuilder}.options.uispec",
+                        "strings": {
+                            "editRecord": "Edit Acquisition Record",
+                            "recordList": "Related Acquisition Records",
+                            "newRecordRow": "New Acquisition Record"
+                        },
+                        "components": {
+                            "listEditor": {
+                                "options": {
+                                    "initList": "cspace.listEditor.receiveData",
+                                    "dataContext": {
+                                        "options": {
+                                            "recordType": "acquisition"
+                                        }
+                                    },
+                                    "details": {
+                                        "options": {
+                                            "selectors": {
+                                                "identificationNumber": ".csc-acquisition-numberPatternChooser-reference-number" 
+                                            },
+                                            "strings": {
+                                                "identificationNumberRequired": "Please specify an Acquisition Reference Number"
+                                            }
+                                        } 
                                     }
                                 }
                             }
-                        },
-                        "details": {
-                            "options": {
-                                "selectors": {
-                                    "identificationNumber": ".csc-acquisition-numberPatternChooser-reference-number" 
-                                },
-                                "strings": {
-                                    "identificationNumberRequired": "Please specify an Acquisition Reference Number"
-                                } 
-                            } 
                         }
                     }
                 }

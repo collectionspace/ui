@@ -1,32 +1,37 @@
 {
-    "selectors": {
-        "myCollectionSpace": ".csc-myCollectionSpace-container"
-    },
-    "components": {
-        "pivotSearch": {
-            "type": "cspace.searchBox",
-            "options": {
-                "strings": {
-                    "recordTypeSelectLabel": "Record Type"
+    "pageBuilder": {
+        "options": {
+            "selectors": {
+                "myCollectionSpace": ".csc-myCollectionSpace-container"
+            },
+            "components": {
+                "pivotSearch": {
+                    "type": "cspace.searchBox",
+                    "options": {
+                        "strings": {
+                            "recordTypeSelectLabel": "Record Type"
+                        },
+                        "related": "all",
+                        "selfRender": true,
+                        "permission": "list"
+                    }
                 },
-                "related": "all",
-                "selfRender": true
-            }
-        },
-        "myCollectionSpace": {
-            "type": "cspace.myCollectionSpace",
-            "options": {
-                "uispec": "{pageBuilder}.uispec",
-                "schema": "{pageBuilder}.schema"
-            }
-        },
-        "header": {
-            "type": "cspace.header",
-            "options": {
-                "schema": "{pageBuilder}.schema",
-                "permissions": "{pageBuilder}.permissions"
-            }
+                "myCollectionSpace": {
+                    "type": "cspace.myCollectionSpace",
+                    "options": {
+                        "uispec": "{pageBuilder}.options.uispec",
+                        "schema": "{pageBuilder}.schema"
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                }
+            },
+            "pageType": "myCollectionSpace"
         }
-    },
-    "pageType": "myCollectionSpace"
+    }
 }

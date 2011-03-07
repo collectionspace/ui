@@ -114,50 +114,11 @@ cspace = cspace || {};
             }
         };
     };
-
-    cspace.sidebar.localRelatedRecordListOpts = function (container, options) {
-        var that = fluid.initLittleComponent("cspace.sidebar.localRelatedRecordListOpts", options);
-        return cspace.relatedRecordsList(container, that.options);
-    };
     
-    fluid.defaults("cspace.sidebar.localRelatedRecordListOpts", {
-        components: {
-            relationManager: {
-                options: {
-                    dataContext: {
-                        baseUrl: "../../../test/data/",
-                        fileExtension: ".json"
-                    }
-                }
-            }
-        },
-        mergePolicy: {
-            model: "preserve",
-            applier: "preserve"
-        }
-    });
-    
-    fluid.demands("cspace.recordList", "cspace.sidebar", 
-        ["{sidebar}.options.selectors.termsUsed", fluid.COMPONENT_OPTIONS]);
-    
-    fluid.demands("procedures",  ["cspace.localData", "cspace.sidebar"], {
-        funcName: "cspace.sidebar.localRelatedRecordListOpts",
-        args: ["{sidebar}.options.selectors.relatedProcedures", fluid.COMPONENT_OPTIONS]
-    });
-    
-    fluid.demands("procedures", "cspace.sidebar", 
-        ["{sidebar}.options.selectors.relatedProcedures", fluid.COMPONENT_OPTIONS]);
-    
-    fluid.demands("cataloging",  ["cspace.localData", "cspace.sidebar"], {
-        funcName: "cspace.sidebar.localRelatedRecordListOpts",
-        args: ["{sidebar}.options.selectors.relatedCataloging", fluid.COMPONENT_OPTIONS]
-    });
-    
-    fluid.demands("cataloging", "cspace.sidebar", 
-        ["{sidebar}.options.selectors.relatedCataloging", fluid.COMPONENT_OPTIONS]);
-        
-    fluid.demands("togglable", "cspace.sidebar", 
-        ["{sidebar}.container", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("procedures", "cspace.sidebar", ["{sidebar}.options.selectors.relatedProcedures", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("cataloging", "cspace.sidebar", ["{sidebar}.options.selectors.relatedCataloging", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("cspace.recordList", "cspace.sidebar", ["{sidebar}.options.selectors.termsUsed", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("togglable", "cspace.sidebar", ["{sidebar}.container", fluid.COMPONENT_OPTIONS]);
     
     fluid.defaults("cspace.sidebar", {
         components: {
@@ -240,7 +201,7 @@ cspace = cspace || {};
         produceTree: cspace.sidebar.produceTree,
         mergePolicy: {
             recordModel: "preserve",
-            recordApplier: "preserve"
+            recordApplier: "nomerge"
         },
         primaryRecordType: "{pageBuilder}.options.pageType",
         uispec: "{pageBuilder}.uispec.sidebar",

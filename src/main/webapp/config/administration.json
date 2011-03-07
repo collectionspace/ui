@@ -1,48 +1,35 @@
 {
-    "schema": [
-        "recordlist",
-        "recordtypes",
-        "users" 
-    ],
-    "recordType": "users",
-    "pageType": "users",
-    "selectors": {
-        "users": ".csc-users-userAdmin"
-    },
-    "components": {
-        "users": {
-            "type": "cspace.adminUsers",
-            "options": {
-                "uispec": "{pageBuilder}.uispec",
-                "userListEditor": {
+    "pageBuilder": {
+        "options": {
+            "pageType": "users",
+            "selectors": {
+                "users": ".csc-users-userAdmin"
+            },
+            "components": {
+                "users": {
+                    "type": "cspace.adminUsers",
                     "options": {
-                        "dataContext": {
-                            "options": {
-                                "dataSource": {
-                                    "options": {
-                                        "schema": "{pageBuilder}.schema",
-                                        "sources": {
-                                            "role": {
-                                                "href": "../../chain/role",
-                                                "path": "fields.role",
-                                                "resourcePath": "items" 
-                                            } 
-                                        } 
-                                    } 
-                                } 
-                            } 
-                        },
-                        "schema": "{pageBuilder}.schema" 
-                    } 
-                } 
+                        "uispec": "{pageBuilder}.options.uispec"
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                }
             }
-        },
-        "header": {
-            "type": "cspace.header",
-            "options": {
-                "schema": "{pageBuilder}.schema",
-                "permissions": "{pageBuilder}.permissions"
-            }
+        }
+    },
+    "pageBuilderIO": {
+        "options": {
+            "schema": [
+                "recordlist",
+                "recordtypes",
+                "users" 
+            ],
+            "recordType": "users"
         }
     }
 }

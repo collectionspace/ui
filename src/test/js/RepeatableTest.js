@@ -350,7 +350,8 @@ var repeatableTester = function ($) {
                     id: "myTextField",
                     selector: ".cst-simpleTestFieldNoContainer"
                 }]
-            }
+            },
+            elPath: "myTexts"
         };
         
         var myRepeatable = cspace.makeRepeatable(".cst-simpleTestFieldNoContainer", options);
@@ -526,6 +527,7 @@ var repeatableTester = function ($) {
             ]
         };
         var options = {
+            elPath: "myTexts",
             model: model,
             applier: fluid.makeChangeApplier(model),
             protoTree: {
@@ -561,6 +563,7 @@ var repeatableTester = function ($) {
             ]
         };
         var options = {
+            elPath: "myTexts",
             model: model,
             applier: fluid.makeChangeApplier(model),
             protoTree: {

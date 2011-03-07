@@ -16,6 +16,8 @@ fluid.registerNamespace("cspace.util");
 (function ($, fluid) {
     fluid.log("Utilities.js loaded");
     
+    fluid.setLogging(true);
+    
     // Calls to this should cease to appear in application code
     cspace.util.useLocalData = function () {
         return document.location.protocol === "file:";
@@ -946,19 +948,82 @@ fluid.registerNamespace("cspace.util");
     });
     
     cspace.globalSetup = function (tag, options) {
-        var that = fluid.littleComponent("cspace.globalSetup")();
-        return fluid.withNewComponent(that, function () {
-            return cspace.setup(tag, options);
-        });
+        var that = fluid.initLittleComponent("cspace.globalSetup");
+        fluid.staticEnvironment.cspacePage = fluid.typeTag(tag);
+        fluid.initDependents(that);
+        that.init = function (tag, options) {
+            options = options || {};
+            if (tag) {
+                fluid.staticEnvironment.cspacePage = fluid.typeTag(tag);
+            }
+            fluid.fetchResources({
+                config: {
+                    href: options.configURL || fluid.invoke("cspace.util.getDefaultConfigURL"),
+                    options: {
+                        dataType: "json"
+                    }
+                },
+                loginstatus: {
+                    href: fluid.invoke("cspace.util.getLoginURL"),
+                    options: {
+                        dataType: "json",
+                        success: function (data) {
+                            if (!data.login && !that.noLogin) {
+                                var currentUrl = document.location.href;
+                                var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
+                                window.location = loginUrl;
+                            }
+                        },
+                        fail: function () {
+                            fluid.fail("PageBuilder was not able to retrieve login info and permissions, so failing");
+                        }
+                    }
+                }
+            }, function (resourceSpecs) {
+                options = fluid.merge({"pageBuilder.options.model": "preserve", "pageBuilder.options.applier": "nomerge"}, {
+                    pageBuilder: {
+                        options: {
+                            userLogin: resourceSpecs.loginstatus.resourceText
+                        }
+                    }, 
+                    pageBuilderIO: {
+                        options: {}
+                    }}, resourceSpecs.config.resourceText, options
+                );
+                if (that.pageBuilderIO) {
+                    that.instantiator.clearComponent(that, "pageBuilderIO");
+                }
+                that.options.components.pageBuilderIO = {
+                    type: "cspace.pageBuilderIO",
+                    options: options.pageBuilderIO.options
+                };
+                fluid.initDependent(that, "pageBuilderIO", that.instantiator);
+                that.pageBuilderIO.initPageBuilder(options.pageBuilder.options);
+            });
+        };
+        that.init(null, options);
+        return that;
     };
+    
+    cspace.globalSetup.noLogin = function (options) {
+        var that = fluid.initLittleComponent("cspace.globalSetup.noLogin", options);
+        return that.options.noLogin;
+    };
+    fluid.demands("noLogin", "cspace.login", [{
+        noLogin: true
+    }]);
     
     fluid.defaults("cspace.globalSetup", {
         components: {
+            instantiator: "{instantiator}",
             globalNavigator: {
                 type: "cspace.util.globalNavigator"
             },
             messageBar: {
                 type: "cspace.messageBar"
+            },
+            noLogin: {
+                type: "cspace.globalSetup.noLogin"
             }
         }
     });

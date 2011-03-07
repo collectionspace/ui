@@ -1,66 +1,71 @@
 {
-    "schema": [
-        "recordlist",
-        "recordtypes",
-        "loanin"
-    ],
-    "pageType": "loanin",
-    "recordType": "loanin",
-    "dataContext": {
+    "pageBuilder": {
         "options": {
-            "recordType": "loanin" 
-        } 
-    },
-    "pageSpec": {
-        "recordEditor": {
-            "href": "%readonlypages/LoaninTemplate.html",
-            "templateSelector": ".csc-loanIn-template",
-            "targetSelector": ".csc-record-edit-container"
+            "pageType": "loanin",
+            "selectors": {
+                "recordEditor": ".csc-loanIn-template"
+            },
+            "components": {
+                "recordEditor": {
+                    "type":  "cspace.recordEditor",
+                    "options": {
+                        "selectors": {
+                            "identificationNumber": ".csc-loanIn-loanInNumber"
+                        },
+                        "strings": {
+                            "identificationNumberRequired": "Please specify a Loan In Number"
+                        },
+                        "applier": "{pageBuilder}.applier",
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "model": "{pageBuilder}.model"
+                    }
+                },
+                "titleBar": {
+                    "type": "cspace.titleBar",
+                    "options": {
+                        "fields": [
+                            "fields.loanInNumber", {
+                            "type": "repeatableMatch",
+                            "queryPath": "fields.lenderGroup",
+                            "childPath": "_primary",
+                            "value": true,
+                            "path": "lender"
+                        }]
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                },
+                "tabs": {
+                    "type": "cspace.tabs"
+                },
+                "sidebar": {
+                    "type": "cspace.sidebar",
+                    "options": {
+                        "uispec": "{pageBuilder}.options.uispec.sidebar"
+                    }
+                }
+            }
         }
     },
-    "selectors": {
-        "recordEditor": ".csc-loanIn-template"
-    },
-    "components": {
-        "tabs": {
-            "type": "cspace.tabs"
-        },
-        "titleBar": {
-            "type": "cspace.titleBar",
-            "options": {
-                "fields": [
-                    "fields.loanInNumber", {
-                    "type": "repeatableMatch",
-                    "queryPath": "fields.lenderGroup",
-                    "childPath": "_primary",
-                    "value": true,
-                    "path": "lender"
-                }]
-            }
-        },
-        "recordEditor": {
-            "type":  "cspace.recordEditor",
-            "options": {
-                "selectors": {
-                    "identificationNumber": ".csc-loanIn-loanInNumber"
-                },
-                "strings": {
-                    "identificationNumberRequired": "Please specify a Loan In Number"
-                },
-                "dataContext": "{pageBuilder}.dataContext",
-                "applier": "{pageBuilder}.applier",
-                "uispec": "{pageBuilder}.uispec.recordEditor",
-                "model": "{pageBuilder}.model" 
-            }
-        },
-        "sidebar": {
-            "type": "cspace.sidebar"
-        },
-        "header": {
-            "type": "cspace.header",
-            "options": {
-                "schema": "{pageBuilder}.schema",
-                "permissions": "{pageBuilder}.permissions"
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "loanin",
+             "schema": [
+                "recordlist",
+                "recordtypes",
+                "loanin"
+            ],
+            "pageSpec": {
+                "recordEditor": {
+                    "href": "%readonlypages/LoaninTemplate.html",
+                    "templateSelector": ".csc-loanIn-template",
+                    "targetSelector": ".csc-record-edit-container"
+                }
             }
         }
     }

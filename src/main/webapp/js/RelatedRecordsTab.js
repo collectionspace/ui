@@ -49,7 +49,29 @@ cspace = cspace || {};
         });
     };
     
-    var createListUpdater = function (model, primary, related) {
+    /**
+     * 
+     * @param {Object} container
+     * @param {Object} uispec
+     * @param {Object} applier  The applier holding the data model of the primary record
+     * @param {Object} options
+     */
+    cspace.relatedRecordsTab = function (container, options) {
+        var that = fluid.initRendererComponent("cspace.relatedRecordsTab", container, options);
+        that.primary = that.options.primary;
+        that.related = that.options.related;
+        that.applier = that.options.applier;
+        that.model = that.options.model;
+        
+        that.renderer.refreshView();
+        fluid.initDependents(that);
+            
+        bindEventHandlers(that);
+        
+        return that;
+    };
+    
+    cspace.relatedRecordsTab.createListUpdater = function (model, primary, related) {
         return function (listEditor, callback) {
             $.ajax({
                 url: listEditor.options.baseUrl + primary + "/" + model.csid,
@@ -69,40 +91,8 @@ cspace = cspace || {};
         };
     };
     
-    /**
-     * 
-     * @param {Object} container
-     * @param {Object} uispec
-     * @param {Object} applier  The applier holding the data model of the primary record
-     * @param {Object} options
-     */
-    cspace.relatedRecordsTab = function (container, options) {
-        var that = fluid.initRendererComponent("cspace.relatedRecordsTab", container, options);
-        that.primary = that.options.primary;
-        that.related = that.options.related;
-        that.applier = that.options.applier;
-        that.model = that.options.model;
-        
-        that.renderer.refreshView();
-        
-        fluid.initDependents(that);
-        
-        // TODO: ListEditor needs to be IOC'ed
-        that.options.listEditor.options.updateList = createListUpdater(that.model, that.primary, that.related);
-
-        $.extend(true, that.options.listEditor.options, {
-            listeners: {
-                pageReady: function () {
-                    that.events.afterRender.fire();
-                }
-            }
-        });        
-        that.listEditor = fluid.initSubcomponent(that, "listEditor", [that.container, that.related, 
-            that.options.uispec, fluid.COMPONENT_OPTIONS]);
-            
-        bindEventHandlers(that);
-        
-        return that;
+    cspace.relatedRecordsTab.provideData = function (relations, related) {
+        return relations[related];
     };
     
     cspace.relatedRecordsTab.produceTree = function (that) {
@@ -130,9 +120,11 @@ cspace = cspace || {};
     
     fluid.demands("relationManager", "cspace.relatedRecordsTab", 
         ["{relatedRecordsTab}.container", fluid.COMPONENT_OPTIONS]);
-    
     fluid.demands("togglable", "cspace.relatedRecordsTab", 
         ["{relatedRecordsTab}.container", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("listEditor", "cspace.relatedRecordsTab", 
+        ["{relatedRecordsTab}.container", "{relatedRecordsTab}.related",
+         "{relatedRecordsTab}.options.uispec", fluid.COMPONENT_OPTIONS]);
     
     fluid.defaults("cspace.relatedRecordsTab", {
         components: {
@@ -156,12 +148,38 @@ cspace = cspace || {};
                         togglable: "{relatedRecordsTab}.options.selectors.togglable"
                     }
                 }
+            },
+            listEditor: {
+                type: "cspace.listEditor",
+                options: {
+                    data: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.relatedRecordsTab.provideData",
+                            args: [
+                                "{relatedRecordsTab}.model.relations",
+                                "{relatedRecordsTab}.related"
+                            ]
+                        }
+                    },
+                    updateList: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.relatedRecordsTab.createListUpdater",
+                            args: [
+                                "{relatedRecordsTab}.model", 
+                                "{relatedRecordsTab}.primary", 
+                                "{relatedRecordsTab}.related"
+                            ]
+                        }
+                    },
+                    listeners: {
+                        pageReady: "{relatedRecordsTab}.events.afterRender.fire"
+                    }
+                }
             }
         },
         produceTree: cspace.relatedRecordsTab.produceTree,
-        listEditor: {
-            type: "cspace.listEditor"
-        },
         selectors: {
             goToRecord: ".csc-goto",
             recordHeader: ".csc-relatedRecordsTab-recordHeader",

@@ -170,8 +170,7 @@ var searchToRelateDialogTester = function () {
         createSearchToRelate("loanout", "procedures", {
             afterSetup: function (dialog) {
                 dialog.open();
-                dialog.locate("recordType").val(testRecordType);
-                dialog.search.mainSearch.locate("searchButton").click();
+                dialog.search.events.onError.fire();
             }
         }, {
             // no search url builder - rely on default - which will return an error

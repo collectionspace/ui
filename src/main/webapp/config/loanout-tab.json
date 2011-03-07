@@ -1,57 +1,62 @@
 {
-    "schema": [
-        "recordlist",
-        "recordtypes",
-        "loanout"
-    ],
-    "pageType": "loanout-tab",
-    "recordType": "loanout",
-    "pageSpec": {
-        "details": {
-            "href": "%readonlypages/LoanoutTemplate.html",
-            "templateSelector": ".csc-loanOut-template",
-            "targetSelector": ".csc-relatedRecordsTab-loanout .csc-relatedRecordsTab-recordEditor"
-        } 
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "loanout",
+             "schema": [
+                "recordlist",
+                "recordtypes",
+                "loanout"
+            ],
+            "pageSpec": {
+                "details": {
+                    "href": "%readonlypages/LoanoutTemplate.html",
+                    "templateSelector": ".csc-loanOut-template",
+                    "targetSelector": ".csc-relatedRecordsTab-loanout .csc-relatedRecordsTab-recordEditor"
+                } 
+            }
+        }
     },
-    "selectors": {
-        "relatedRecordsTab": ".csc-relatedRecordsTab-loanout"
-    },
-    "components": {
-        "relatedRecordsTab": {
-            "type": "cspace.relatedRecordsTab",
-            "options": {
-                "primary": "{pageBuilder}.options.primary",
-                "related": "{pageBuilder}.options.related",
-                "applier": "{pageBuilder}.applier",
-                "model": "{pageBuilder}.model",
-                "uispec": "{pageBuilder}.uispec",
-                "strings": {
-                    "editRecord": "Edit Loan Out Record",
-                    "recordList": "Related Loan Out Records",
-                    "newRecordRow": "New Loan Out Record"
-                },
-                "listEditor": {
+    "pageBuilder": {
+        "options": {
+            "pageType": "loanout-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-loanout"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
                     "options": {
-                        "initList": "cspace.listEditor.receiveData",
-                        "dataContext": {
-                            "options": {
-                                "recordType": "loanout",
-                                "dataSource": {
-                                    "options": {
-                                        "schema": "{pageBuilder}.schema" 
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "applier": "{pageBuilder}.applier",
+                        "model": "{pageBuilder}.model",
+                        "uispec": "{pageBuilder}.options.uispec",
+                        "strings": {
+                            "editRecord": "Edit Loan Out Record",
+                            "recordList": "Related Loan Out Records",
+                            "newRecordRow": "New Loan Out Record"
+                        },
+                        "components": {
+                            "listEditor": {
+                                "options": {
+                                    "initList": "cspace.listEditor.receiveData",
+                                    "dataContext": {
+                                        "options": {
+                                            "recordType": "loanout"
+                                        }
+                                    },
+                                    "details": {
+                                        "options": {
+                                            "selectors": {
+                                                "identificationNumber": ".csc-loanOut-loanOutNumber"
+                                            },
+                                            "strings": {
+                                                "identificationNumberRequired": "Please specify a Loan Out Number"
+                                            } 
+                                        } 
                                     }
                                 }
                             }
-                        },
-                        "details": {
-                            "options": {
-                                "selectors": {
-                                    "identificationNumber": ".csc-loanOut-loanOutNumber"
-                                },
-                                "strings": {
-                                    "identificationNumberRequired": "Please specify a Loan Out Number"
-                                } 
-                            } 
                         }
                     }
                 }

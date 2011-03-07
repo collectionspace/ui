@@ -23,23 +23,24 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     var setupCataloging = function (options) {
         options = $.extend(true, {
             configURL: "../../main/webapp/config/cataloging.json",
-            components: {
-                pageBuilderSetup: {
-                    options: {
-                        recordType: "cataloging",
-                        pageType: "cataloging",
-                        listeners: {
-                            onDependencySetup: function (uispec) {
-                                // Change the template URL for the number pattern chooser.
-                                uispec.recordEditor[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl = "../../main/webapp/html/components/NumberPatternChooser.html";
-                            }
-                        },
-                        pageSpec: {
-                            recordEditor: {
-                                href: "../../main/webapp/html/pages/CatalogingTemplate.html"
-                            }
-                        },
-                        templateUrlPrefix: "../../main/webapp/html/",
+            pageBuilderIO: {
+                options: {
+                    recordType: "cataloging",
+                    pageSpec: {
+                        recordEditor: {
+                            href: "../../main/webapp/html/pages/CatalogingTemplate.html"
+                        }
+                    }
+                }
+            },
+            pageBuilder: {
+                options: {
+                    pageType: "cataloging",
+                    listeners: {
+                        onDependencySetup: function (uispec) {
+                            // Change the template URL for the number pattern chooser.
+                            uispec.recordEditor[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl = "../../main/webapp/html/components/NumberPatternChooser.html";
+                        }
                     }
                 }
             }
@@ -49,18 +50,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     catalogingTests.asyncTest("Initialization", function () {
         var options = {
-            components: {
-                pageBuilderSetup: {
-                    options: {
-                        listeners: {
-                            pageReady: function () {
-                                var pageBuilder = cataloging.pageBuilderSetup.pageBuilder;
-                                jqUnit.assertValue("Cataloging should have a record editor", pageBuilder.recordEditor);
-                                jqUnit.assertValue("Cataloging should have a side bar", pageBuilder.sidebar);
-                                jqUnit.assertValue("Cataloging should have a title bar", pageBuilder.titleBar);
-                                jqUnit.assertValue("Cataloging should have tabs", pageBuilder.tabs);
-                                start();
-                            }
+            pageBuilderIO: {
+                options: {
+                    listeners: {
+                        pageReady: function () {
+                            var pageBuilder = cataloging.pageBuilderIO.pageBuilder;
+                            jqUnit.assertValue("Cataloging should have a record editor", pageBuilder.recordEditor);
+                            jqUnit.assertValue("Cataloging should have a side bar", pageBuilder.sidebar);
+                            jqUnit.assertValue("Cataloging should have a title bar", pageBuilder.titleBar);
+                            jqUnit.assertValue("Cataloging should have tabs", pageBuilder.tabs);
+                            start();
                         }
                     }
                 }
@@ -71,18 +70,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
     catalogingTests.asyncTest("Go To Record", function () {
         var options = {
-            components: {
-                pageBuilderSetup: {
-                    options: {
-                        components: {
-                            recordEditor: {
-                                options: {
-                                    listeners: {
-                                        afterRender: function () {
-                                            jqUnit.notVisible("On the main record tab link 'Go to record' should be invisible", $(".csc-goto"));
-                                            jqUnit.assertUndefined("Link for the invisible 'Go to record' should not have href attribute", $(".csc-goto").attr("href"));
-                                            start();                  
-                                        }
+            pageBuilder: {
+                options: {
+                    components: {
+                        recordEditor: {
+                            options: {
+                                listeners: {
+                                    afterRender: function () {
+                                        jqUnit.notVisible("On the main record tab link 'Go to record' should be invisible", $(".csc-goto"));
+                                        jqUnit.assertUndefined("Link for the invisible 'Go to record' should not have href attribute", $(".csc-goto").attr("href"));
+                                        start();                  
                                     }
                                 }
                             }

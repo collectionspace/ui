@@ -1,62 +1,67 @@
 {
-    "schema": [
-        "recordlist",
-        "recordtypes",
-        "intake"
-    ],
-    "pageType": "intake",
-    "recordType": "intake",
-    "dataContext": {
+    "pageBuilder": {
         "options": {
-            "recordType": "intake" 
-        } 
-    },
-    "pageSpec": {
-        "recordEditor": {
-            "href": "%readonlypages/IntakeTemplate.html",
-            "templateSelector": ".csc-intake-template",
-            "targetSelector": ".csc-record-edit-container"
-        } 
-    },
-    "selectors": {
-        "recordEditor": ".csc-intake-template"
-    },
-    "components": {
-        "tabs": {
-            "type": "cspace.tabs"
-        },
-        "titleBar": {
-            "type": "cspace.titleBar",
-            "options": {
-                "fields": [
-                    "fields.entryNumber",
-                    "fields.currentOwner" 
-                ]
-            }
-        },
-        "recordEditor": {
-            "type":  "cspace.recordEditor",
-            "options": {
-                "selectors": {
-                    "identificationNumber": ".csc-intake-entry-number" 
+            "pageType": "intake",
+            "selectors": {
+                "recordEditor": ".csc-intake-template"
+            },
+            "components": {
+                "recordEditor": {
+                    "type":  "cspace.recordEditor",
+                    "options": {
+                        "selectors": {
+                            "identificationNumber": ".csc-intake-entry-number" 
+                        },
+                        "strings": {
+                            "identificationNumberRequired": "Please specify an Intake Entry Number" 
+                        },
+                        "applier": "{pageBuilder}.applier",
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "model": "{pageBuilder}.model"
+                    }
                 },
-                "strings": {
-                    "identificationNumberRequired": "Please specify an Intake Entry Number" 
+                "titleBar": {
+                    "type": "cspace.titleBar",
+                    "options": {
+                        "fields": [
+                            "fields.entryNumber",
+                            "fields.currentOwner" 
+                        ]
+                    }
                 },
-                "dataContext": "{pageBuilder}.dataContext",
-                "applier": "{pageBuilder}.applier",
-                "uispec": "{pageBuilder}.uispec.recordEditor",
-                "model": "{pageBuilder}.model" 
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                },
+                "tabs": {
+                    "type": "cspace.tabs"
+                },
+                "sidebar": {
+                    "type": "cspace.sidebar",
+                    "options": {
+                        "uispec": "{pageBuilder}.options.uispec.sidebar"
+                    }
+                }
             }
-        },
-        "sidebar": {
-            "type": "cspace.sidebar"
-        },
-        "header": {
-            "type": "cspace.header",
-            "options": {
-                "schema": "{pageBuilder}.schema",
-                "permissions": "{pageBuilder}.permissions"
+        }
+    },
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "intake",
+             "schema": [
+                "recordlist",
+                "recordtypes",
+                "intake"
+            ],
+            "pageSpec": {
+                "recordEditor": {
+                    "href": "%readonlypages/IntakeTemplate.html",
+                    "templateSelector": ".csc-intake-template",
+                    "targetSelector": ".csc-record-edit-container"
+                } 
             }
         }
     }

@@ -72,7 +72,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         relationManagerTest.test("Initialization: user permissions " + anyPerms, function() { 
             var relationManager = createRelationManager({}, {primary: "cataloging", related: "cataloging"});
             var addVisible = anyPerms;
-            jqUnit.assertValue("Relation Manager's data context initialized", relationManager.options.dataContext);
+            jqUnit.assertValue("Relation Manager's data context initialized", relationManager.dataContext);
             jqUnit.assertDeepEq("Related record is properly initalized", "cataloging", relationManager.options.related);
             jqUnit.assertTrue("Add button is visible: " + addVisible, relationManager.locate("addButton").is(":visible"));
         }, anyPerms? undefined : {});

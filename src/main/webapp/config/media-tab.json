@@ -1,57 +1,62 @@
 {
-    "schema": [
-        "recordlist",
-        "recordtypes",
-        "media"
-    ],
-    "pageType": "media-tab",
-    "recordType": "media",
-    "pageSpec": {
-        "details": {
-            "href": "%readonlypages/MediaTemplate.html",
-            "templateSelector": ".csc-media-template",
-            "targetSelector": ".csc-relatedRecordsTab-media .csc-relatedRecordsTab-recordEditor"
-        } 
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "media",
+             "schema": [
+                "recordlist",
+                "recordtypes",
+                "media"
+            ],
+            "pageSpec": {
+                "details": {
+                    "href": "%readonlypages/MediaTemplate.html",
+                    "templateSelector": ".csc-media-template",
+                    "targetSelector": ".csc-relatedRecordsTab-media .csc-relatedRecordsTab-recordEditor"
+                } 
+            }
+        }
     },
-    "selectors": {
-        "relatedRecordsTab": ".csc-relatedRecordsTab-media"
-    },
-    "components": {
-        "relatedRecordsTab": {
-            "type": "cspace.relatedRecordsTab",
-            "options": {
-                "primary": "{pageBuilder}.options.primary",
-                "related": "{pageBuilder}.options.related",
-                "applier": "{pageBuilder}.applier",
-                "model": "{pageBuilder}.model",
-                "uispec": "{pageBuilder}.uispec",
-                "strings": {
-                    "editRecord": "Edit Media Handling Record",
-                    "recordList": "Related Media Handling Records",
-                    "newRecordRow": "New Media Handling Record"
-                },
-                "listEditor": {
+    "pageBuilder": {
+        "options": {
+            "pageType": "media-tab",
+            "selectors": {
+                "relatedRecordsTab": ".csc-relatedRecordsTab-media"
+            },
+            "components": {
+                "relatedRecordsTab": {
+                    "type": "cspace.relatedRecordsTab",
                     "options": {
-                        "initList": "cspace.listEditor.receiveData",
-                        "dataContext": {
-                            "options": {
-                                "recordType": "media",
-                                "dataSource": {
-                                    "options": {
-                                        "schema": "{pageBuilder}.schema" 
+                        "primary": "{pageBuilder}.options.primary",
+                        "related": "{pageBuilder}.options.related",
+                        "applier": "{pageBuilder}.applier",
+                        "model": "{pageBuilder}.model",
+                        "uispec": "{pageBuilder}.options.uispec",
+                        "strings": {
+                            "editRecord": "Edit Media Handling Record",
+                            "recordList": "Related Media Handling Records",
+                            "newRecordRow": "New Media Handling Record"
+                        },
+                        "components": {
+                            "listEditor": {
+                                "options": {
+                                    "initList": "cspace.listEditor.receiveData",
+                                    "dataContext": {
+                                        "options": {
+                                            "recordType": "media"
+                                        }
+                                    },
+                                    "details": {
+                                        "options": {
+                                            "selectors": {
+                                                "identificationNumber": ".csc-media-identificationNumber"
+                                            },
+                                            "strings": {
+                                                "identificationNumberRequired": "Please specify an Identification Number" 
+                                            } 
+                                        } 
                                     }
                                 }
                             }
-                        },
-                        "details": {
-                            "options": {
-                                "selectors": {
-                                    "identificationNumber": ".csc-media-identificationNumber"
-                                },
-                                "strings": {
-                                    "identificationNumberRequired": "Please specify an Identification Number" 
-                                } 
-                            } 
                         }
                     }
                 }

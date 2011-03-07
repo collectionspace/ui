@@ -156,8 +156,19 @@ cspace = cspace || {};
         that.unsavedChanges = false;
     };
     
-    fluid.demands("recordEditorTogglable", "cspace.recordEditor", 
-        ["{recordEditor}.container", fluid.COMPONENT_OPTIONS]);
+    var initDeferredComponents = function (that) {
+        fluid.each(that.options.deferredComponents, function (component, name) {
+            var instantiator = that.options.rendererOptions.instantiator;
+            if (that[name]) {
+                instantiator.clearComponent(that, name);
+            }
+            that.options.components[name] = {
+                type: component.type,
+                options: component.options
+            };
+            fluid.initDependent(that, name, instantiator);
+        });
+    };
     
     cspace.recordEditor = function (container, options) {
         var that = fluid.initRendererComponent("cspace.recordEditor", container, options);
@@ -165,11 +176,7 @@ cspace = cspace || {};
         
         that.refreshView = function () {
             fluid.log("RecordEditor.js before render");
-            fluid.withEnvironment({
-                parent: that
-            }, function () {
-                that.renderer.refreshView();
-            });
+            that.renderer.refreshView();
             if (!that.model.csid || (that.model.fields.email === "admin@collectionspace.org")) {
                 that.locate("deleteButton").attr("disabled", "disabled").addClass("deactivate");
             } else {
@@ -180,6 +187,7 @@ cspace = cspace || {};
             that.options.messageBar.hide();
             bindHandlers(that);
             that.events.afterRender.fire(that);
+            initDeferredComponents(that);
             fluid.log("RecordEditor.js renderPage end");
         };
 
@@ -263,12 +271,17 @@ cspace = cspace || {};
         window.location = that.options.urls.cancel;
     }
     
+    fluid.demands("recordEditorTogglable", "cspace.recordEditor", ["{recordEditor}.container", fluid.COMPONENT_OPTIONS]);
+    
     fluid.defaults("cspace.recordEditor", {
         mergePolicy: {
             model: "preserve",
-            applier: "preserve",
+            applier: "nomerge",
+            "rendererOptions.instantiator": "nomerge",
+            "rendererOptions.parentComponent": "nomerge",
             "rendererFnOptions.uispec": "uispec",
-            "rendererOptions.applier": "applier"
+            "rendererOptions.applier": "applier",
+            "dataContext": "nomerge"
         },
         components: {
             confirmation: {
@@ -289,11 +302,9 @@ cspace = cspace || {};
                 funcName: "cspace.recordEditor.rollback",
                 args: "{recordEditor}"
             },
-            cancel: {
-                funcName: "cspace.recordEditor.cancel",
-                args: "{recordEditor}"
-            }
+            cancel: "cancel"
         },
+        dataContext: "{dataContext}",
         navigationEventNamespace: undefined,
         globalNavigator: "{globalNavigator}",
         messageBar: "{messageBar}",
@@ -318,7 +329,9 @@ cspace = cspace || {};
             cutpointGenerator: "cspace.recordEditor.cutpointGenerator",
         },
         rendererOptions: {
-            autoBind: true
+            autoBind: true,
+            instantiator: "{instantiator}",
+            parentComponent: "{recordEditor}"
         },
         parentBundle: "{globalBundle}",
         strings: {
@@ -344,30 +357,14 @@ cspace = cspace || {};
         })
     });
     
-    cspace.recordEditor.pageRecordEditor = function (container, options) {
-        var that = fluid.initLittleComponent("cspace.recordEditor.pageRecordEditor", options);
-        return cspace.recordEditor(container, that.options);
-    };
-    fluid.defaults("cspace.recordEditor.pageRecordEditor", {
-        mergePolicy: {
-            model: "preserve",
-            applier: "preserve",
-            "rendererFnOptions.uispec": "uispec",
-            "rendererOptions.applier": "applier"
-        },
-        invokers: {
-            cancel: {
-                funcName: "cspace.recordEditor.cancelRecord"
-            }
-        }
+    fluid.demands("cancel", ["cspace.pageBuilder", "cspace.record"], {
+        funcName: "cspace.recordEditor.cancelRecord",
+        args: "{recordEditor}"
     });
-    
-    fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.record"], {
-        funcName: "cspace.recordEditor.pageRecordEditor",
-        args: ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]
+    fluid.demands("cancel", "cspace.pageBuilder", {
+        funcName: "cspace.recordEditor.cancel",
+        args: "{recordEditor}"
     });
-    
-    fluid.demands("recordEditor", "cspace.pageBuilder", 
-        ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("recordEditor", "cspace.pageBuilder", ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
         
 })(jQuery, fluid);

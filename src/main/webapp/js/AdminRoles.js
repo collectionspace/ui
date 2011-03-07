@@ -22,13 +22,17 @@ cspace = cspace || {};
         });
     };
 
-    cspace.adminRoles = function (container, options) {
+    cspace.adminRoles = function (container, options, demandsOptions) {
+        options = options || {};
+        fluid.merge(null, options.value || options, demandsOptions);
         var that = fluid.initView("cspace.adminRoles", container, options);
-        that.roleListEditor = fluid.initSubcomponent(that, "roleListEditor", [that.container, that.options.recordType, 
-            that.options.uispec, fluid.COMPONENT_OPTIONS]);
+        fluid.initDependents(that);
         bindEventHandlers(that);
         return that;
     };
+    
+    fluid.demands("roleListEditor", "cspace.adminRoles", ["{adminRoles}container", 
+        "{adminRoles}options.recordType", "{adminRoles}options.uispec", fluid.COMPONENT_OPTIONS]);
     
     cspace.adminRoles.assertDisplay = function (displayString) {
         return displayString !== "none";
@@ -36,12 +40,14 @@ cspace = cspace || {};
 
     fluid.defaults("cspace.adminRoles", {
         recordType: "role",
-        roleListEditor: {
-            type: "cspace.listEditor",
-            options: {
-                dataContext: {
-                    options: {
-                        recordType: "role"
+        components: {
+            roleListEditor: {
+                type: "cspace.listEditor",
+                options: {
+                    dataContext: {
+                        options: {
+                            recordType: "role"
+                        }
                     }
                 }
             }
@@ -51,7 +57,17 @@ cspace = cspace || {};
         }
     });
     
-    fluid.demands("role", "cspace.pageBuilder", 
-        ["{pageBuilder}.options.selectors.role", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("role", ["cspace.pageBuilder", "cspace.localData"], ["{pageBuilder}.options.selectors.role", fluid.COMPONENT_OPTIONS, {
+        recordType: "role/records.json",
+        components: {
+            roleListEditor: {
+                options: {
+                    baseUrl: "../../../test/data/"
+                }
+            }
+        }
+    }]);
+    
+    fluid.demands("role", "cspace.pageBuilder", ["{pageBuilder}.options.selectors.role", fluid.COMPONENT_OPTIONS]);
 
 })(jQuery, fluid);

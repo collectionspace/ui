@@ -1,62 +1,67 @@
 {
-    "schema": [
-        "recordlist",
-        "recordtypes",
-        "loanout"
-    ],
-    "pageType": "loanout",
-    "recordType": "loanout",
-    "dataContext": {
+    "pageBuilder": {
         "options": {
-            "recordType": "loanout" 
-        } 
-    },
-    "pageSpec": {
-        "recordEditor": {
-            "href": "%readonlypages/LoanoutTemplate.html",
-            "templateSelector": ".csc-loanOut-template",
-            "targetSelector": ".csc-record-edit-container"
+            "pageType": "loanout",
+            "selectors": {
+                "recordEditor": ".csc-loanOut-template"
+            },
+            "components": {
+                "recordEditor": {
+                    "type":  "cspace.recordEditor",
+                    "options": {
+                        "selectors": {
+                            "identificationNumber": ".csc-loanOut-loanOutNumber"
+                        },
+                        "strings": {
+                            "identificationNumberRequired": "Please specify a Loan Out Number"
+                        },
+                        "applier": "{pageBuilder}.applier",
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "model": "{pageBuilder}.model"
+                    }
+                },
+                "titleBar": {
+                    "type": "cspace.titleBar",
+                    "options": {
+                        "fields": [
+                            "fields.loanOutNumber", 
+                            "fields.borrower"
+                        ]
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                },
+                "tabs": {
+                    "type": "cspace.tabs"
+                },
+                "sidebar": {
+                    "type": "cspace.sidebar",
+                    "options": {
+                        "uispec": "{pageBuilder}.options.uispec.sidebar"
+                    }
+                }
+            }
         }
     },
-    "selectors": {
-        "recordEditor": ".csc-loanOut-template"
-    },
-    "components": {
-        "tabs": {
-            "type": "cspace.tabs"
-        },
-        "titleBar": {
-            "type": "cspace.titleBar",
-            "options": {
-                "fields": [
-                    "fields.loanOutNumber", 
-                    "fields.borrower"
-                ]
-            }
-        },
-        "recordEditor": {
-            "type":  "cspace.recordEditor",
-            "options": {
-                "selectors": {
-                    "identificationNumber": ".csc-loanOut-loanOutNumber"
-                },
-                "strings": {
-                    "identificationNumberRequired": "Please specify a Loan Out Number"
-                },
-                "dataContext": "{pageBuilder}.dataContext",
-                "applier": "{pageBuilder}.applier",
-                "uispec": "{pageBuilder}.uispec.recordEditor",
-                "model": "{pageBuilder}.model" 
-            }
-        },
-        "sidebar": {
-            "type": "cspace.sidebar"
-        },
-        "header": {
-            "type": "cspace.header",
-            "options": {
-                "schema": "{pageBuilder}.schema",
-                "permissions": "{pageBuilder}.permissions"
+    "pageBuilderIO": {
+        "options": {
+            "recordType": "loanout",
+             "schema": [
+                "recordlist",
+                "recordtypes",
+                "loanout"
+            ],
+            "pageSpec": {
+                "recordEditor": {
+                    "href": "%readonlypages/LoanoutTemplate.html",
+                    "templateSelector": ".csc-loanOut-template",
+                    "targetSelector": ".csc-record-edit-container"
+                }
             }
         }
     }

@@ -1,19 +1,23 @@
 {
-    "selectors": {
-        "search": ".main-search-page"
-    },
-    "components": {
-        "search": {
-            "type": "cspace.search.searchView",
-            "options": {
-                "pivoting": true
-            }
-        },
-        "header": {
-            "type": "cspace.header",
-            "options": {
-                "schema": "{pageBuilder}.schema",
-                "permissions": "{pageBuilder}.permissions"
+    "pageBuilder": {
+        "options": {
+            "selectors": {
+                "search": ".main-search-page"
+            },
+            "components": {
+                "search": {
+                    "type": "cspace.search.searchView",
+                    "options": {
+                        "pivoting": true
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                }
             }
         }
     }
