@@ -41,32 +41,15 @@ var adminUsersTester = function () {
     var baseTestOpts = {
         recordType: "users/records.json",
         uispec: testUISpec,
-        userListEditor: {
-            options: {
-                details: {
-                    options: {
-                        navigationEventNamespace: "onPerformNavigationRecordEditor"
-                    }
-                },
-                baseUrl: "../data/",
-                dataContext: {
-                    options: {
-                        baseUrl: "../data/",
-                        fileExtension: ".json",
-                        dataSource: {
-                            options: {
-                                schema: schema,
-                                sources: {
-                                    role: {
-                                        href: "../data/role/list.json",
-                                        path: "fields.role",
-                                        resourcePath: "items",
-                                        merge: cspace.dataSource.mergeRoles
-                                    }
-                                }
-                            }
+        components: {
+            userListEditor: {
+                options: {
+                    details: {
+                        options: {
+                            navigationEventNamespace: "onPerformNavigationRecordEditor"
                         }
-                    }
+                    },
+                    baseUrl: "../data/"
                 }
             }
         }
@@ -108,7 +91,6 @@ var adminUsersTester = function () {
             }
         });
         adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
-        stop();
     };
     
     var setupSaveNewUserInvalidPassword = function (confPassword, message) {
@@ -125,7 +107,7 @@ var adminUsersTester = function () {
         });
     };
     
-    adminUsersTest.test("Creation", function () {
+    adminUsersTest.asyncTest("Creation", function () {
         basicAdminUsersSetup(function (adminUsers, le, re) {
             var list =le.model.list;
             var selectors = le.options.selectors;
@@ -143,17 +125,16 @@ var adminUsersTester = function () {
         });
     });
     
-    adminUsersTest.test("Click new user button", function () {
+    adminUsersTest.asyncTest("Click new user button", function () {
         basicAdminUsersSetup(function (adminUsers, le, re) {
             var selectors = le.options.selectors;
-            var deleteButton = re.locate("deleteButton");
             le.events.afterAddNewListRow.addListener(function () {
                 jqUnit.assertEquals("Email is blank", adminUsers.locate("email").val(), "");
                 jqUnit.assertEquals("Full name is blank", adminUsers.locate("userName").val(), "");
                 jqUnit.assertEquals("Password is blank", adminUsers.locate("password").val(), "");
                 jqUnit.assertEquals("Password confirm is blank", adminUsers.locate("passwordConfirm").val(), "");
-                jqUnit.assertTrue("Delete button has deactivated style", deleteButton.hasClass("deactivate"));
-                jqUnit.assertTrue("Delete button is disabled", deleteButton.attr("disabled"));
+                jqUnit.assertTrue("Delete button has deactivated style", re.locate("deleteButton").hasClass("deactivate"));
+                jqUnit.assertTrue("Delete button is disabled", re.locate("deleteButton").attr("disabled"));
                 jqUnit.notVisible("message container is hidden", le.options.messageBar.container);
                 jqUnit.notVisible("details none is hidden", selectors.detailsNone);
                 jqUnit.isVisible("details is visible", selectors.details);
@@ -167,7 +148,7 @@ var adminUsersTester = function () {
         });
     });
         
-    adminUsersTest.test("Save new user - successful save - save function returns true", function () {
+    adminUsersTest.asyncTest("Save new user - successful save - save function returns true", function () {
         basicAdminUsersSetup(function (adminUsers, le, re) {
             le.events.afterAddNewListRow.addListener(function () {
                 changeDetails(adminUsers.options.selectors, testDataCreateUser, testDataCreateUser.validPassword);
@@ -180,7 +161,7 @@ var adminUsersTester = function () {
         });
     });  
     
-    adminUsersTest.test("Save new user - empty form field - expect save to return false", function () {
+    adminUsersTest.asyncTest("Save new user - empty form field - expect save to return false", function () {
         basicAdminUsersSetup(function (adminUsers, le, re) {
             le.events.afterAddNewListRow.addListener(function () {
                 changeDetails(adminUsers.options.selectors, testDataCreateUser, testDataCreateUser.validPassword);
@@ -195,15 +176,15 @@ var adminUsersTester = function () {
         });
     });
     
-    adminUsersTest.test("Save new user - mismatched passwords - expect save to return false", function () {
+    adminUsersTest.asyncTest("Save new user - mismatched passwords - expect save to return false", function () {
         setupSaveNewUserInvalidPassword("1234567890", "passwords do not match");
     });  
 
-    adminUsersTest.test("Save new user - invalid length passwords - expect save to return false", function () {
+    adminUsersTest.asyncTest("Save new user - invalid length passwords - expect save to return false", function () {
         setupSaveNewUserInvalidPassword(testDataCreateUser.invalidPassword, "passwords are invalid");
     });    
     
-    adminUsersTest.test("Valid edit of existing user: save should succeed", function () {
+    adminUsersTest.asyncTest("Valid edit of existing user: save should succeed", function () {
         basicAdminUsersSetup(function (adminUsers, le, re) {
             re.events.afterRender.addListener(function () {
                 re.events.afterRender.removeListener("initialSelect");                
@@ -217,7 +198,7 @@ var adminUsersTester = function () {
         });
     });
     
-    adminUsersTest.test("Test search/unsearch functionality", function () {
+    adminUsersTest.asyncTest("Test search/unsearch functionality", function () {
         var adminUsers;
         var testOpts = fluid.copy(baseTestOpts);
         fluid.model.setBeanValue(testOpts, "queryURL", "../data/users/search.json");
@@ -242,7 +223,6 @@ var adminUsersTester = function () {
             }
         });
         adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
-        stop();
     });
     
     var setupConfirmation = function (testFunc) {
@@ -265,20 +245,19 @@ var adminUsersTester = function () {
              callback: callback,
              once: true}); 
         var testOpts = fluid.copy(baseTestOpts);
-        fluid.model.setBeanValue(testOpts, "userListEditor.options.listeners", {
+        fluid.model.setBeanValue(testOpts, "components.userListEditor.options.listeners", {
             pageReady: waitMultiple.getListener("pageReady")
         });
-        fluid.model.setBeanValue(testOpts, "userListEditor.options.details.options.listeners", {
+        fluid.model.setBeanValue(testOpts, "components.userListEditor.options.details.options.listeners", {
             afterRender: waitMultiple.getListener("detailsRendered")
         });
         fluid.model.setBeanValue(testOpts, "listeners", {
             afterSetup: waitMultiple.getListener("afterSetup")
         });
         cspace.adminUsers(".csc-users-userAdmin", testOpts);
-        stop();
     };
     
-    adminUsersTest.test("Confirmation", function () {
+    adminUsersTest.asyncTest("Confirmation", function () {
         setupConfirmation(function (re, adminUsers) {
             jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());
             jqUnit.notVisible("Confiration dialog is invisible initially", re.confirmation.popup);
@@ -292,7 +271,7 @@ var adminUsersTester = function () {
         });
     });
     
-    adminUsersTest.test("Confirmation cancel", function () {
+    adminUsersTest.asyncTest("Confirmation cancel", function () {
         setupConfirmation(function (re, adminUsers) {
             adminUsers.locate("userName").val("New Name").change();
             re.confirmation.popup.bind("dialogopen", function () {
@@ -308,7 +287,7 @@ var adminUsersTester = function () {
          });
     });
     
-    adminUsersTest.test("Confirmation proceed", function () {
+    adminUsersTest.asyncTest("Confirmation proceed", function () {
         setupConfirmation(function (re, adminUsers) {
             adminUsers.locate("userName").val("New Name").change();
             re.confirmation.popup.bind("dialogopen", function () {
@@ -324,7 +303,7 @@ var adminUsersTester = function () {
         });
     });
     
-    adminUsersTest.test("Confirmation delete", function () {
+    adminUsersTest.asyncTest("Confirmation delete", function () {
         setupConfirmation(function (re) {
             re.events.afterRender.removeListener("initialSelect");
             re.remove();
@@ -337,7 +316,7 @@ var adminUsersTester = function () {
         });
     });
     
-    adminUsersTest.test("Confirmation delete + cancel", function () {
+    adminUsersTest.asyncTest("Confirmation delete + cancel", function () {
         setupConfirmation(function (re, adminUsers) {
             re.events.afterRender.removeListener("initialSelect");
             re.remove();
@@ -351,7 +330,7 @@ var adminUsersTester = function () {
         });
     });
     
-    adminUsersTest.test("Confirmation delete + proceed", function () {
+    adminUsersTest.asyncTest("Confirmation delete + proceed", function () {
         setupConfirmation(function (re, adminUsers) {
             re.events.afterRender.removeListener("initialSelect");
             re.remove();
@@ -367,7 +346,7 @@ var adminUsersTester = function () {
         });
     });
     
-    adminUsersTest.test("Confirmation navigate + delete", function () {
+    adminUsersTest.asyncTest("Confirmation navigate + delete", function () {
         setupConfirmation(function (re, adminUsers) {
             re.events.afterRender.removeListener("initialSelect");                    
             adminUsers.locate("userName").val("New Name").change();
@@ -382,7 +361,7 @@ var adminUsersTester = function () {
         });
     });
     
-    adminUsersTest.test("Confirmation delete + navigate (CSPACE-2646)", function () {
+    adminUsersTest.asyncTest("Confirmation delete + navigate (CSPACE-2646)", function () {
         setupConfirmation(function (re, adminUsers) {
             re.events.afterRender.removeListener("initialSelect");                    
             re.remove();
@@ -397,7 +376,7 @@ var adminUsersTester = function () {
         });
     });
     
-    adminUsersTest.test("Confirmation on navigation away after canceled changes", function () {
+    adminUsersTest.asyncTest("Confirmation on navigation away after canceled changes", function () {
         setupConfirmation(function (re, adminUsers) {
             re.events.afterRender.removeListener("initialSelect");                    
             adminUsers.locate("userName").val("New Name").change();
@@ -432,11 +411,11 @@ var adminUsersTester = function () {
         });
     };
     
-    adminUsersTest.test("Currently logged in user should have invisible delete button", function () {
+    adminUsersTest.asyncTest("Currently logged in user should have invisible delete button", function () {
         currentUserTests("147258369", 2, "notVisible");
     });
     
-    adminUsersTest.test("Currently logged in user should see delete button for other users", function () {
+    adminUsersTest.asyncTest("Currently logged in user should see delete button for other users", function () {
         currentUserTests("1111", 1, "isVisible");
     }); 
 };
