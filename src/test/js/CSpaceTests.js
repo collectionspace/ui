@@ -161,7 +161,6 @@ fluid.defaults("cspace.tests.testEnvironment", {
     permissions: cspace.tests.sampleUserPerms,
     schema: cspace.tests.sampleSchema,
     components: {
-        instantiator: "{instantiator}",
         permissionsResolver: {
             type: "cspace.permissions.resolver",
             options: {

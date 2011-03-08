@@ -13,7 +13,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 var relatedRecordsTabTester = function ($) {
     var testApplier = {};
-    var model, applier, pbIO;
+    var model, applier, objTab;
 
     $.ajax({
         url: "../data/cataloging/1984.068.0338.json",
@@ -38,39 +38,40 @@ var relatedRecordsTabTester = function ($) {
     var setupTab = function (opts) {
         var testPrimaryType = "intake";
         var testRelatedType = "cataloging";
-        var options = {
+        options = {
             pageBuilder: {
                 options: {
+                    userLogin: cspace.tests.userLogin,
+                    model: model,
+                    applier: applier,
                     primary: testPrimaryType,
                     related: testRelatedType,
-                    userLogin: cspace.tests.userLogin,
+                    pageType: "cataloging-tab",
                     listeners: {
                         onDependencySetup: function (uispec) {
                             // Change the template URL for the number pattern chooser.
-                            uispec.details[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl = "../../main/webapp/html/components/NumberPatternChooser.html";
+                            uispec.details[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl
+                                = "../../main/webapp/html/components/NumberPatternChooser.html";
                         }
-                    },
-                    applier: testApplier,
-                    model: testApplier.model,
-                    pageType: "cataloging-tab",
-                    selectors: {
-                        relatedRecordsTab: ".csc-relatedRecordsTab-cataloging"
                     },
                     components: {
                         relatedRecordsTab: {
-                            type: "cspace.relatedRecordsTab",
                             options: {
-                                primary: "{pageBuilder}.options.primary",
-                                related: "{pageBuilder}.options.related",
-                                applier: "{pageBuilder}.applier",
-                                model: "{pageBuilder}.model",
-                                uispec: "{pageBuilder}.options.uispec",
                                 components: {
+                                    relationManager: {
+                                        options: {
+                                            components: {
+                                                searchToRelateDialog: {
+                                                    options: {
+                                                        listeners: opts.searchToRelateListeners
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
                                     listEditor: {
                                         options: {
                                             listeners: opts.listEditorListeners,
-                                            initList: cspace.listEditor.receiveData,
-                                            data: testApplier.model.relations.cataloging,
                                             dataContext: {
                                                 options: {
                                                     recordType: testRelatedType
@@ -87,21 +88,6 @@ var relatedRecordsTabTester = function ($) {
                                                 }
                                             }
                                         }
-                                    },
-                                    relationManager: {
-                                        options: {
-                                            primary: "{pageBuilder}.options.primaryRecordType",
-                                            related: "cataloging",
-                                            model: "{pageBuilder}.model",
-                                            applier: "{pageBuilder}.applier",
-                                            components: {
-                                                searchToRelateDialog: {
-                                                    options: {
-                                                        listeners: opts.searchToRelateListeners
-                                                    }
-                                                }
-                                            }
-                                        }
                                     }
                                 }
                             }
@@ -112,27 +98,26 @@ var relatedRecordsTabTester = function ($) {
             pageBuilderIO: {
                 options: {
                     uispecUrl: "../uispecs/cataloging-tab.json",
-                    listeners: {
-                        pageReady: opts.pageReadyListener
-                    },
                     pageSpec: {
                         details: {
-                            href: "../../main/webapp/html/pages/CatalogingTemplate.html",
-                            templateSelector: ".csc-cataloging-template",
-                            targetSelector: ".csc-relatedRecordsTab-cataloging .csc-relatedRecordsTab-recordEditor"
+                            href: "../../main/webapp/html/pages/CatalogingTemplate.html"
                         }
+                    },
+                    listeners: {
+                        pageReady: opts.pageReadyListener
                     }
                 }
-            }
+            },
+            configURL: "../../main/webapp/config/cataloging-tab.json"
         };
-        pbIO = cspace.pageBuilderIO(options.pageBuilderIO.options);
-        pbIO.initPageBuilder(options.pageBuilder.options);
+        
+        objTab = cspace.globalSetup("cspace.tabs", options);
     };
     
     relatedRecordsTabTest.asyncTest("Initialization", function () {
         setupTab({
             pageReadyListener: function () {
-                var le = pbIO.pageBuilder.relatedRecordsTab.listEditor;
+                var le = objTab.pageBuilderIO.pageBuilder.relatedRecordsTab.listEditor;
                 le.details.events.afterRender.addListener(function () {
                     jqUnit.isVisible("Related record tab details should have visible link 'Go to record'", $(".csc-goto", le.details.container));
                     jqUnit.assertEquals("href for the 'Go to record' should be", "../../main/webapp/html/cataloging.html?csid=2005.018.1383", $(".csc-goto").attr("href"));
@@ -146,7 +131,7 @@ var relatedRecordsTabTester = function ($) {
     relatedRecordsTabTest.asyncTest("Changing Record", function () {
         setupTab({
             pageReadyListener: function () {
-                var le = pbIO.pageBuilder.relatedRecordsTab.listEditor;
+                var le = objTab.pageBuilderIO.pageBuilder.relatedRecordsTab.listEditor;
                 le.details.events.afterRender.addListener(function () {
                     le.details.events.afterRender.removeListener("firstSelect");
                     jqUnit.isVisible("Related record tab details should have visible link 'Go to record'", $(".csc-goto", le.details.container));
@@ -164,7 +149,7 @@ var relatedRecordsTabTester = function ($) {
     });
     
     relatedRecordsTabTest.asyncTest("Validation of required fields in related records (CSPACE-2294)", function () {
-        var  objTab, primaryApplier, model;
+        var  primaryApplier, model;
         $.ajax({
             url: "../data/intake/IN2004.002.json",
             async: false,
