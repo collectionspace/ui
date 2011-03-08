@@ -197,7 +197,7 @@ cspace = cspace || {};
         parentBundle: "{globalBundle}",
         mergePolicy: {
             model: "preserve",
-            applier: "preserve"
+            applier: "nomerge"
         },
         strings: {
             idNumber: "ID Number",

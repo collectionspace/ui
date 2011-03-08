@@ -181,6 +181,7 @@ cspace = cspace || {};
         } 
     }]);
     
+    fluid.demands("dataSource", ["cspace.localData", "cspace.test"], fluid.COMPONENT_OPTIONS);
     fluid.demands("dataSource", ["cspace.users", "cspace.localData", "cspace.test"], [fluid.COMPONENT_OPTIONS, {
         schema: "{dataContext}options.schema",
         sources: {
