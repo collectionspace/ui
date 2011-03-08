@@ -154,8 +154,13 @@ input[type="button"].addButton:hover, input[type="submit"].addButton:hover {
 	background-color:#48722D;}
 .gotoButton {
 	background:transparent url('../images/icnGoTo.png') no-repeat 8px 4px; 
-	padding-left:24px; 
-	padding-right:8px; 
+	padding-left:28px; 
+	padding-right:8px;
+	margin-top:1px;
+	float:right;
+	font-size:bold;
+	line-height:1.65;
+	font-size:13px;
 	color:#669922;}
 .gotoButton:hover {
 	background-color:#DAEDD1;}
@@ -467,7 +472,7 @@ li .flc-pager-pageLink {
 #secondary-nav-menu-sub  {}
 #secondary-nav-menu-sub .upper-save {
 	float:right; 
-	padding-bottom:1px; 
+	padding-bottom:10px; 
 	margin-left:15px;}
 #secondary-nav-menu-sub .time-stamp {
 	float:right; 
@@ -719,6 +724,8 @@ table tbody.highlight tr:hover td {
 	border-bottom:0px solid #ADADAD; 
 	color:#000; 
 	vertical-align:top;}
+.list-table table tbody tr.add-new-record td{
+	background-color:#FFFBBC;}
 .list-table  table tbody tr td a, .list-table  table tbody tr td a:hover {}
 .list-table  table tbody tr:hover td {
 	background-color:#C3D9E9;}
