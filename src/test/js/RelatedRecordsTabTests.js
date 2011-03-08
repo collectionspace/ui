@@ -30,7 +30,7 @@ var relatedRecordsTabTester = function ($) {
     
     var bareRelatedRecordsTabTest = new jqUnit.TestCase("Related Records Tab Tests", function () {
         bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/html/components/TabsTemplate.html", ".csc-tabs-tabList", $(".template1"));
-        fluid.model.copyModel(testApplier, applier);        
+        fluid.model.copyModel(testApplier, applier);
     });
     
     var relatedRecordsTabTest = cspace.tests.testEnvironment({testCase: bareRelatedRecordsTabTest});
@@ -42,8 +42,8 @@ var relatedRecordsTabTester = function ($) {
             pageBuilder: {
                 options: {
                     userLogin: cspace.tests.userLogin,
-                    model: model,
-                    applier: applier,
+                    model: "{globalSetup}.model",
+                    applier: "{globalSetup}.applier",
                     primary: testPrimaryType,
                     related: testRelatedType,
                     pageType: "cataloging-tab",
@@ -112,6 +112,9 @@ var relatedRecordsTabTester = function ($) {
         };
         
         objTab = cspace.globalSetup("cspace.tabs", options);
+        // TODO: This needs to move to into some component or context or environment.
+        objTab.model = model;
+        objTab.applier = applier;
     };
     
     relatedRecordsTabTest.asyncTest("Initialization", function () {
@@ -166,8 +169,8 @@ var relatedRecordsTabTester = function ($) {
             pageBuilder: {
                 options: {
                     userLogin: cspace.tests.userLogin,
-                    model: model,
-                    applier: primaryApplier,
+                    model: "{globalSetup}.model",
+                    applier: "{globalSetup}.applier",
                     related: "cataloging",
                     primary: "intake",
                     pageType: "cataloging-tab",
@@ -230,6 +233,9 @@ var relatedRecordsTabTester = function ($) {
             configURL: "../../main/webapp/config/cataloging-tab.json"
         };
         objTab = cspace.globalSetup("cspace.tabs", options);
+        // TODO: This needs to move to into some component or context or environment.
+        objTab.model = model;
+        objTab.applier = primaryApplier;
     });
 };
 

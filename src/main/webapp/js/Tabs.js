@@ -151,12 +151,15 @@ cspace = cspace || {};
     cspace.tabs.setupTab = function (tabName, that) {
         var options = that.options;
         var urlExpander = fluid.invoke("cspace.urlExpander");
-        // Adding globalNavigator to cspace.setup's stack.
+        // Place model and applier somewhere accessible by the tab's
+        // pageBuilder which is in it's grand parent globalSetup.
+        that.options.globalSetup.model = options.model;
+        that.options.globalSetup.applier = options.applier;
         that.options.globalSetup.init("cspace.tabs", {
             pageBuilder: {
                 options: {
-                    model: options.model,
-                    applier: options.applier,
+                    model: "{globalSetup}.model",
+                    applier: "{globalSetup}.applier",
                     related: tabName,
                     primary: options.primaryRecordType
                 }
