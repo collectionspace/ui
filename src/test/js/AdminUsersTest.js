@@ -233,23 +233,21 @@ var adminUsersTester = function () {
             var pageReadyArgs = waitMultiple.waitSet.pageReady.args;
             var setupArgs = waitMultiple.waitSet.afterSetup.args;
             var adminUsers = setupArgs[0];
+            adminUsers.userListEditor.details.events.afterRender.addListener(waitMultiple.getListener("afterRender"));
             waitMultiple.clear(function() {
                 testFunc.apply(null, [pageReadyArgs[0].details, adminUsers]);
-                });
+            });
             delete waitMultiple.waitSet["pageReady"];
             delete waitMultiple.waitSet["afterSetup"];
             $(adminUsers.userListEditor.list.locate("row")[2]).click();
         }; 
-        var waitMultiple = cspace.util.waitMultiple(
+        waitMultiple = cspace.util.waitMultiple(
             {outerKey: "pageReady",
              callback: callback,
              once: true}); 
         var testOpts = fluid.copy(baseTestOpts);
         fluid.model.setBeanValue(testOpts, "components.userListEditor.options.listeners", {
             pageReady: waitMultiple.getListener("pageReady")
-        });
-        fluid.model.setBeanValue(testOpts, "components.userListEditor.options.details.options.listeners", {
-            afterRender: waitMultiple.getListener("detailsRendered")
         });
         fluid.model.setBeanValue(testOpts, "listeners", {
             afterSetup: waitMultiple.getListener("afterSetup")
