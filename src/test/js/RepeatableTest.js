@@ -14,10 +14,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 var repeatableTester = function ($) {
     var briefDescUISpec;
     var briefDescModel;
-
-    var repeatableTest = new jqUnit.TestCase("Repeatable Tests", function () {
+    
+    var bareRepeatableTest = new jqUnit.TestCase("Repeatable Tests", function () {
         cspace.util.isTest = true;
     });
+    
+    var repeatableTest = cspace.tests.testEnvironment({testCase: bareRepeatableTest});
     
     var basicSetup = function (options) {
         options = options || {};
@@ -102,7 +104,7 @@ var repeatableTester = function ($) {
             protoTree: "replace"
         }, briefDescUISpec.options, opts);
 
-        repeatableTest.fetchTemplate("../../main/webapp/html/pages/CatalogingTemplate.html", ".csc-object-identification-brief-description");
+        bareRepeatableTest.fetchTemplate("../../main/webapp/html/pages/CatalogingTemplate.html", ".csc-object-identification-brief-description");
         return cspace.makeRepeatable(".csc-object-identification-brief-description", briefDescUISpec.options);
     };
     
@@ -590,13 +592,41 @@ var repeatableTester = function ($) {
         jqUnit.assertEquals("Container should containe a ul", 1, container.has("ul").length);        
     });
     
-    repeatableTest.test("Prepare repeatable model with primary", function () {        
-        var model = {
-            myTexts: []
-        };        
+    repeatableTest.test("Can not have less than one repeatable row", function () {
+        expect(6);
+        var myRepeatable = basicSetup({model: {
+            myTexts: [{
+                myText: "cat",
+                _primary: true
+            }]
+        }});
+        var add = myRepeatable.locate("add");
+        jqUnit.assertEquals("Initally the number of repeatable rows is equal to", 1, myRepeatable.locate("repeat").length);
+        jqUnit.assertTrue("Delete input must me disabled for the list of size one", myRepeatable.locate("remove").eq(0).is(":disabled"));
+        add.click();
+        jqUnit.assertEquals("After adding a row, # of repeatable rows is equal to", 2, myRepeatable.locate("repeat").length);
+        jqUnit.assertTrue("Delete input must me enabled for the list of size bigger than one", myRepeatable.locate("remove").eq(0).is(":not(:disabled)"));
+        myRepeatable.locate("remove").eq(0).click();
+        jqUnit.assertEquals("The number of repeatable rows should again be equal to", 1, myRepeatable.locate("repeat").length);
+        jqUnit.assertTrue("Delete input must me disabled again for the list of size one", myRepeatable.locate("remove").eq(0).is(":disabled"));
+    });
+    
+    var model = {
+        myTexts: []
+    };
+    var applier = fluid.makeChangeApplier(model);
+    
+    var relatedRecordsTabTestPrepare = cspace.tests.testEnvironment({
+        testCase: bareRepeatableTest, model: model, applier: applier, components: {
+        modelHolder: {
+            type: "cspace.tests.modelHolder"
+        }
+    }});
+    
+    relatedRecordsTabTestPrepare.test("Prepare repeatable model with primary", function () {
         var options = {
-            model: model,
-            applier: fluid.makeChangeApplier(model),
+            model: "{modelHolder}.options.model",
+            applier: "{modelHolder}.options.applier",
             protoTree: {
                 expander: {
                     repeatID: "repeat:",
@@ -618,25 +648,6 @@ var repeatableTester = function ($) {
         };        
         var myRepeatable = cspace.makeRepeatable(".csc-repeatable-li", options);
         jqUnit.assertTrue("Newly prepared model should have a set primary field", myRepeatable.model.myTexts[0]._primary);
-    });
-    
-    repeatableTest.test("Can not have less than one repeatable row", function () {
-        expect(6);
-        var myRepeatable = basicSetup({model: {
-            myTexts: [{
-                myText: "cat",
-                _primary: true
-            }]
-        }});
-        var add = myRepeatable.locate("add");
-        jqUnit.assertEquals("Initally the number of repeatable rows is equal to", 1, myRepeatable.locate("repeat").length);
-        jqUnit.assertTrue("Delete input must me disabled for the list of size one", myRepeatable.locate("remove").eq(0).is(":disabled"));
-        add.click();
-        jqUnit.assertEquals("After adding a row, # of repeatable rows is equal to", 2, myRepeatable.locate("repeat").length);
-        jqUnit.assertTrue("Delete input must me enabled for the list of size bigger than one", myRepeatable.locate("remove").eq(0).is(":not(:disabled)"));
-        myRepeatable.locate("remove").eq(0).click();
-        jqUnit.assertEquals("The number of repeatable rows should again be equal to", 1, myRepeatable.locate("repeat").length);
-        jqUnit.assertTrue("Delete input must me disabled again for the list of size one", myRepeatable.locate("remove").eq(0).is(":disabled"));
     });
 };
 

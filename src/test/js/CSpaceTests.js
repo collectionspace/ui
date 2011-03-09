@@ -156,7 +156,9 @@ resolution, without bringing in the whole of pageBuilder as a component root */
 fluid.defaults("cspace.tests.testEnvironment", {
     mergePolicy: {
         permissions: "replace",
-        schema: "replace"  
+        schema: "replace",
+        model: "preserve",
+        applier: "nomerge"
     },
     permissions: cspace.tests.sampleUserPerms,
     schema: cspace.tests.sampleSchema,
@@ -188,5 +190,15 @@ fluid.defaults("cspace.tests.testEnvironment", {
         messageBar: {
             type: "cspace.messageBar"
         }
+    }
+});
+
+cspace.tests.modelHolder = fluid.littleComponent("cspace.tests.modelHolder");
+fluid.defaults("cspace.tests.modelHolder", {
+    model: "{testEnvironment}.options.model",
+    applier: "{testEnvironment}.options.applier",
+    mergePolicy: {
+        model: "preserve",
+        applier: "nomerge"
     }
 });

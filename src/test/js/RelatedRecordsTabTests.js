@@ -33,7 +33,13 @@ var relatedRecordsTabTester = function ($) {
         fluid.model.copyModel(testApplier, applier);
     });
     
-    var relatedRecordsTabTest = cspace.tests.testEnvironment({testCase: bareRelatedRecordsTabTest});
+    var relatedRecordsTabTest = cspace.tests.testEnvironment({
+        testCase: bareRelatedRecordsTabTest, model: model, applier: applier, components: {
+        instantiator: "{instantiator}",
+        modelHolder: {
+            type: "cspace.tests.modelHolder"
+        }
+    }});
 
     var setupTab = function (opts) {
         var testPrimaryType = "intake";
@@ -42,8 +48,8 @@ var relatedRecordsTabTester = function ($) {
             pageBuilder: {
                 options: {
                     userLogin: cspace.tests.userLogin,
-                    model: "{globalSetup}.model",
-                    applier: "{globalSetup}.applier",
+                    model: "{modelHolder}.options.model",
+                    applier: "{modelHolder}.options.applier",
                     primary: testPrimaryType,
                     related: testRelatedType,
                     pageType: "cataloging-tab",
@@ -112,9 +118,6 @@ var relatedRecordsTabTester = function ($) {
         };
         
         objTab = cspace.globalSetup("cspace.tabs", options);
-        // TODO: This needs to move to into some component or context or environment.
-        objTab.model = model;
-        objTab.applier = applier;
     };
     
     relatedRecordsTabTest.asyncTest("Initialization", function () {
@@ -151,26 +154,34 @@ var relatedRecordsTabTester = function ($) {
         });
     });
     
-    relatedRecordsTabTest.asyncTest("Validation of required fields in related records (CSPACE-2294)", function () {
-        var  primaryApplier, model;
-        $.ajax({
-            url: "../data/intake/IN2004.002.json",
-            async: false,
-            dataType: "json",
-            success: function (data) {
-                model = data;
-                primaryApplier = fluid.makeChangeApplier(model);
-            },
-            error: function (xhr, textStatus, error) {
-                fluid.log("Unable to load cataloging data for testing");
-            }
-        });
+    $.ajax({
+        url: "../data/intake/IN2004.002.json",
+        async: false,
+        dataType: "json",
+        success: function (data) {
+            model = data;
+            applier = fluid.makeChangeApplier(model);
+        },
+        error: function (xhr, textStatus, error) {
+            fluid.log("Unable to load cataloging data for testing");
+        }
+    });
+    
+    var relatedRecordsTabTestIntegrity = cspace.tests.testEnvironment({
+        testCase: bareRelatedRecordsTabTest, model: model, applier: applier, components: {
+        instantiator: "{instantiator}",
+        modelHolder: {
+            type: "cspace.tests.modelHolder"
+        }
+    }});
+    
+    relatedRecordsTabTestIntegrity.asyncTest("Validation of required fields in related records (CSPACE-2294)", function () {
         var options = {
             pageBuilder: {
                 options: {
                     userLogin: cspace.tests.userLogin,
-                    model: "{globalSetup}.model",
-                    applier: "{globalSetup}.applier",
+                    model: "{modelHolder}.options.model",
+                    applier: "{modelHolder}.options.applier",
                     related: "cataloging",
                     primary: "intake",
                     pageType: "cataloging-tab",
@@ -224,7 +235,7 @@ var relatedRecordsTabTester = function ($) {
                             jqUnit.assertEquals("Verify that the model is still primary model", 
                                 model, objTab.pageBuilderIO.pageBuilder.relatedRecordsTab.model);
                             jqUnit.assertEquals("Verify that the model is still primary applier", 
-                                primaryApplier, objTab.pageBuilderIO.pageBuilder.relatedRecordsTab.applier);
+                                applier, objTab.pageBuilderIO.pageBuilder.relatedRecordsTab.applier);
                             $(".csc-recordList-row:first").click();
                         }
                     }
@@ -233,9 +244,6 @@ var relatedRecordsTabTester = function ($) {
             configURL: "../../main/webapp/config/cataloging-tab.json"
         };
         objTab = cspace.globalSetup("cspace.tabs", options);
-        // TODO: This needs to move to into some component or context or environment.
-        objTab.model = model;
-        objTab.applier = primaryApplier;
     });
 };
 
