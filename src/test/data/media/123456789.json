@@ -26,7 +26,7 @@
         "dateModified": "July 3, 2011",
         "description": "This is description",
         "dimensionSummary": "This is dimension summary",
-        "dimensions": [
+        "dimensionGroup": [
             {
                 "_primary": true,
                 "dimension": "area",

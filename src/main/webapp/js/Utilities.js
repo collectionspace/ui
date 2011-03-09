@@ -673,6 +673,8 @@ fluid.registerNamespace("cspace.util");
         return that;   
     };
     
+    fluid.demands("cspace.util.urnToStringFieldConverter", "cspace.recordEditor", ["@0", fluid.COMPONENT_OPTIONS]);
+    
     /*
      * Takes a string in URN format and returns it in Human Readable format
      * @param urn a string in URN format
@@ -704,6 +706,8 @@ fluid.registerNamespace("cspace.util");
         that.assignValue();
         return that;
     };
+    
+    fluid.demands("cspace.util.nameForValueFinder", "cspace.recordEditor", ["@0", fluid.COMPONENT_OPTIONS]);
     
     cspace.util.nameForValueFinder.assignValue = function (selector, options) {
         if (!options.list || !options.names) {
