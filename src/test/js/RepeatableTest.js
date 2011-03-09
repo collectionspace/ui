@@ -52,7 +52,7 @@ var repeatableTester = function ($) {
                         }
                     }
                 },
-                renderOptions: {
+                rendererOptions: {
                     cutpoints: cutpoints
                 }
             }
@@ -347,7 +347,7 @@ var repeatableTester = function ($) {
                     }
                 }
             },
-            renderOptions: {
+            rendererOptions: {
                 cutpoints: [{
                     id: "myTextField",
                     selector: ".cst-simpleTestFieldNoContainer"
@@ -461,7 +461,7 @@ var repeatableTester = function ($) {
 
     });
     
-    repeatableTest.test("CSPACE-2212/2213 Inconsistent that.model and that.options.renderOptions.model", function () {
+    repeatableTest.test("CSPACE-2212/2213 Inconsistent that.model and that.options.rendererOptions.model", function () {
         expect(6);
 
         var myRepeatable = basicSetup({model: {
@@ -473,14 +473,14 @@ var repeatableTester = function ($) {
                 
         myRepeatable.events.afterRender.addListener(function () {
             jqUnit.assertDeepEq("After clicking add models should be the same",
-                myRepeatable.model, myRepeatable.options.renderOptions.model);
+                myRepeatable.model, myRepeatable.options.rendererOptions.model);
         }, "testAddRow2");
         myRepeatable.locate("add").click();
         myRepeatable.events.afterRender.removeListener("testAddRow2");
         
         myRepeatable.events.afterRender.addListener(function () {
             jqUnit.assertDeepEq("After deleting row 1 models should be the same",
-                myRepeatable.model, myRepeatable.options.renderOptions.model);
+                myRepeatable.model, myRepeatable.options.rendererOptions.model);
         }, "testRemoveRow1");
         myRepeatable.locate("remove").eq(1).click();
         myRepeatable.events.afterRender.removeListener("testRemoveRow1");
@@ -488,7 +488,7 @@ var repeatableTester = function ($) {
         myRepeatable.locate("add").click();
         myRepeatable.events.afterRender.addListener(function () {
             jqUnit.assertDeepEq("After changing row 2 value models should be the same",
-                myRepeatable.model, myRepeatable.options.renderOptions.model);
+                myRepeatable.model, myRepeatable.options.rendererOptions.model);
         }, "testAddRow2Value");
         $(".cst-simpleTestField", myRepeatable.locate("repeat").eq(1)).val("dog");
         myRepeatable.refreshView();
@@ -496,14 +496,14 @@ var repeatableTester = function ($) {
         
         myRepeatable.events.afterRender.addListener(function () {
             jqUnit.assertDeepEq("After clicking add again models should be the same",
-                myRepeatable.model, myRepeatable.options.renderOptions.model);
+                myRepeatable.model, myRepeatable.options.rendererOptions.model);
         }, "testAddRow3");
         myRepeatable.locate("add").click();
         myRepeatable.events.afterRender.removeListener("testAddRow3");
         
         myRepeatable.events.afterRender.addListener(function () {
             jqUnit.assertDeepEq("After changing row 3 value models should be the same",
-                myRepeatable.model, myRepeatable.options.renderOptions.model);
+                myRepeatable.model, myRepeatable.options.rendererOptions.model);
         }, "testAddRow3Value");
         $(".cst-simpleTestField", myRepeatable.locate("repeat").eq(2)).val("bird");
         myRepeatable.refreshView();
@@ -514,7 +514,7 @@ var repeatableTester = function ($) {
         
         myRepeatable.events.afterRender.addListener(function () {
             jqUnit.assertDeepEq("After clicking add after 2 delets models should be the same",
-                myRepeatable.model, myRepeatable.options.renderOptions.model);
+                myRepeatable.model, myRepeatable.options.rendererOptions.model);
         }, "testAddRow2AfterDelete");
         myRepeatable.locate("add").click();
         myRepeatable.events.afterRender.removeListener("testAddRow2AfterDelete");
@@ -543,7 +543,7 @@ var repeatableTester = function ($) {
                     }
                 }
             },
-            renderOptions: {
+            rendererOptions: {
                 cutpoints: [{
                     id: "myTextField",
                     selector: ".cst-tableTestField"
@@ -579,7 +579,7 @@ var repeatableTester = function ($) {
                     }
                 }
             },
-            renderOptions: {
+            rendererOptions: {
                 cutpoints: [{
                     id: "myTextField",
                     selector: ".csc-repeatable-li-text"
@@ -616,14 +616,14 @@ var repeatableTester = function ($) {
     };
     var applier = fluid.makeChangeApplier(model);
     
-    var relatedRecordsTabTestPrepare = cspace.tests.testEnvironment({
+    var repeatableTestPrepare = cspace.tests.testEnvironment({
         testCase: bareRepeatableTest, model: model, applier: applier, components: {
         modelHolder: {
             type: "cspace.tests.modelHolder"
         }
     }});
     
-    relatedRecordsTabTestPrepare.test("Prepare repeatable model with primary", function () {
+    repeatableTestPrepare.test("Prepare repeatable model with primary", function () {
         var options = {
             model: "{modelHolder}.options.model",
             applier: "{modelHolder}.options.applier",
@@ -638,7 +638,7 @@ var repeatableTester = function ($) {
                     }
                 }
             },
-            renderOptions: {
+            rendererOptions: {
                 cutpoints: [{
                     id: "myTextField",
                     selector: ".csc-repeatable-li-text"

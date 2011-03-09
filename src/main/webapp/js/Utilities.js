@@ -1104,4 +1104,13 @@ fluid.registerNamespace("cspace.util");
         return fluid.initLittleComponent("cspace.util.login", options);
     };
     
+    // TODO: This should be done by the renderer.
+    cspace.util.removeRendererDecorators = function (that) {
+        fluid.each(that, function (component, name) {
+            if (name.indexOf("**") > -1) {
+                that.options.rendererOptions.instantiator.clearComponent(that, name);
+            }
+        });
+    };
+    
 })(jQuery, fluid);

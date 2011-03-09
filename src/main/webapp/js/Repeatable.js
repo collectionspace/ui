@@ -53,7 +53,7 @@ cspace = cspace || {};
 //        var tree = getExpandedTree(that);
 //        var children = tree.children;
 //        tree.children = [children[children.length - 1]];
-//        var markup = fluid.reRender(that.template, that.tempContainer, tree, that.options.renderOptions);
+//        var markup = fluid.reRender(that.template, that.tempContainer, tree, that.options.rendererOptions);
 //        var repeats = that.locate("repeat");
 //        var lastRepeat = $(repeats[repeats.length - 1]);
 //        var newRepeat = that.locate("repeat", that.tempContainer);
@@ -128,14 +128,15 @@ cspace = cspace || {};
     }
     
     var renderPage = function (that, blankRowOnly) {
+        cspace.util.removeRendererDecorators(that);
         var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}", model: that.model});
         var tree = expander(that.options.protoTree);
-        fluid.clear(that.options.renderOptions.fossils);
+        fluid.clear(that.options.rendererOptions.fossils);
         if (that.template) {
-            fluid.reRender(that.template, that.container, tree, that.options.renderOptions);
+            fluid.reRender(that.template, that.container, tree, that.options.rendererOptions);
         }
         else {
-            that.template = fluid.selfRender(that.container, tree, that.options.renderOptions);
+            that.template = fluid.selfRender(that.container, tree, that.options.rendererOptions);
         }
         positionAddButton(that.locate("add")[0], that.locate("remove")[0]);
 
@@ -221,11 +222,11 @@ cspace = cspace || {};
         that.model = that.options.model;
         prepareModel(that.model, that.options.elPath, that.applier);
         fluid.invokeGlobalFunction(that.options.generateMarkup, [that]);
-        that.options.renderOptions.model = that.model;
-        that.options.renderOptions.applier = that.applier;
-        that.options.renderOptions.fossils = {};
-        that.options.renderOptions.cutpoints = that.options.renderOptions.cutpoints || cspace.renderUtils.cutpointsFromUISpec(that.options.protoTree);
-        that.options.renderOptions.cutpoints.push({id: "repeat:", selector: that.options.selectors.repeat});
+        that.options.rendererOptions.model = that.model;
+        that.options.rendererOptions.applier = that.applier;
+        that.options.rendererOptions.fossils = {};
+        that.options.rendererOptions.cutpoints = that.options.rendererOptions.cutpoints || cspace.renderUtils.cutpointsFromUISpec(that.options.protoTree);
+        that.options.rendererOptions.cutpoints.push({id: "repeat:", selector: that.options.selectors.repeat});
         // A "temporary container" for rendering additional rows. This is currently a more stable strategy than
         // using renderer template juggling to render partial templates.
         that.tempContainer = cspace.repeatable.cleanseClone(that.container);
@@ -311,17 +312,17 @@ cspace = cspace || {};
             model: "preserve",
             applier: "nomerge",
             protoTree: "noexpand",
-            "renderOptions.instantiator": "nomerge",
-            "renderOptions.parentComponent": "nomerge"
+            "rendererOptions.instantiator": "nomerge",
+            "rendererOptions.parentComponent": "nomerge"
         },
         applier: "{recordEditor}.options.applier",      // Applier for the main record that cspace.repeatable belongs to. REQUIRED
         model: "{recordEditor}.model",        // Model for the main record that cspace.repeatable belongs to. REQUIRED
         elPath: "items",    // Path into the model that points to the collection of fields to be repeated - it should reference an array.
         protoTree: {},      // A dehydrated tree that will be expanded by the expander and rendered in the component's refreshView.
-        renderOptions: {
+        rendererOptions: {
             autoBind: true,
             instantiator: "{instantiator}",
-            parentComponent: "{recordEditor}"
+            parentComponent: "{repeatable}"
         },
         generateMarkup: "cspace.repeatable.generateMarkup"
     });
