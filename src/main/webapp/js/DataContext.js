@@ -182,6 +182,10 @@ cspace = cspace || {};
         fileExtension: ""
     });
     
+    fluid.demands("detailsDC", ["cspace.listEditor", "cspace.localData"], ["{listEditor}.model.details", fluid.COMPONENT_OPTIONS, {
+        baseUrl: "../../../test/data",
+        fileExtension: ".json"
+    }]);
     fluid.demands("detailsDC", ["cspace.listEditor", "cspace.test", "cspace.localData"], ["{listEditor}.model.details", fluid.COMPONENT_OPTIONS, {
         baseUrl: "../data",
         fileExtension: ".json"
