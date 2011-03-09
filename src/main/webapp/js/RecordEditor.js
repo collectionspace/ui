@@ -170,14 +170,6 @@ cspace = cspace || {};
         });
     };
     
-    var removeRendererDecorators = function (that) {
-        fluid.each(that, function (component, name) {
-            if (name.indexOf("**") > -1) {
-                that.options.rendererOptions.instantiator.clearComponent(that, name);
-            }
-        });
-    };
-    
     cspace.recordEditor = function (container, options) {
         var that = fluid.initRendererComponent("cspace.recordEditor", container, options);
         fluid.initDependents(that);
@@ -185,7 +177,7 @@ cspace = cspace || {};
         that.refreshView = function () {
             fluid.log("RecordEditor.js before render");
             // TODO: This needs to be done by the renderer and not the component.
-            removeRendererDecorators(that);
+            cspace.util.removeRendererDecorators(that);
             that.renderer.refreshView();
             if (!that.model.csid || (that.model.fields.email === "admin@collectionspace.org")) {
                 that.locate("deleteButton").attr("disabled", "disabled").addClass("deactivate");
