@@ -10,32 +10,14 @@
                     "type":  "cspace.recordEditor",
                     "options": {
                         "selectors": {
-                            "identificationNumber": ".csc-media-identificationNumber",
-                            "uploader": ".csc-media-upload"
+                            "identificationNumber": ".csc-media-identificationNumber"
                         },
-                        "selectorsToIgnore": ["deleteButton", "requiredFields", "identificationNumber", "header", "togglable", "uploader"],
                         "strings": {
                             "identificationNumberRequired": "Please specify an Identification Number"
                         },
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model",
-                        "deferredComponents": {
-                            "uploader": {
-                                "type": "cspace.mediaUploader",
-                                "options": {
-                                    "urls": {
-                                        "expander": {
-                                            "type": "fluid.deferredInvokeCall",
-                                            "func": "cspace.componentUrlBuilder",
-                                            "args": {
-                                                "upload": "%chain/uploads/"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        "model": "{pageBuilder}.model"
                     }
                 },
                 "titleBar": {
