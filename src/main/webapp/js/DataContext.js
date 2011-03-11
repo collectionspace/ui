@@ -182,6 +182,12 @@ cspace = cspace || {};
         fileExtension: ""
     });
     
+    // TODO: Need to create an "application" context.
+    fluid.demands("detailsDC", "cspace.listEditor", ["{listEditor}.model.details", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("dataContext", "cspace.relationManager", ["{relationManager}.model", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("dataContext", "cspace.pageBuilderIO", ["{pageBuilderIO}.options.model", fluid.COMPONENT_OPTIONS]);
+    fluid.demands("detailsDC", ["cspace.listEditor", "cspace.tabs"], ["{listEditor}.model.details", fluid.COMPONENT_OPTIONS]);
+    
     fluid.demands("detailsDC", ["cspace.listEditor", "cspace.localData"], ["{listEditor}.model.details", fluid.COMPONENT_OPTIONS, {
         baseUrl: "../../../test/data",
         fileExtension: ".json"
@@ -190,17 +196,14 @@ cspace = cspace || {};
         baseUrl: "../data",
         fileExtension: ".json"
     }]);
-    fluid.demands("detailsDC", ["cspace.listEditor", "cspace.tabs"], ["{listEditor}.model.details", fluid.COMPONENT_OPTIONS]);
     fluid.demands("detailsDC", ["cspace.listEditor", "cspace.tabs", "cspace.localData"], ["{listEditor}.model.details", fluid.COMPONENT_OPTIONS, {
         baseUrl: "../../../test/data",
         fileExtension: ".json"
     }]);
-    fluid.demands("dataContext", "cspace.relationManager", ["{relationManager}.model", fluid.COMPONENT_OPTIONS]);
     fluid.demands("dataContext", ["cspace.relationManager", "cspace.localData"], ["{relationManager}.model", fluid.COMPONENT_OPTIONS, {
         baseUrl: "../../../test/data",
         fileExtension: ".json"
     }]);
-    fluid.demands("dataContext", "cspace.pageBuilderIO", ["{pageBuilderIO}.options.model", fluid.COMPONENT_OPTIONS]);
     fluid.demands("dataContext", ["cspace.pageBuilderIO", "cspace.localData"], ["{pageBuilderIO}.options.model", fluid.COMPONENT_OPTIONS, {
         baseUrl: "../../../test/data",
         fileExtension: ".json"
