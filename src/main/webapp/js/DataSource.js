@@ -85,15 +85,16 @@ cspace = cspace || {};
         // whether csid was provided or not.
         that.provideModel = function (csid) {
             var recordType = that.options.recordType;
+            var resourceSpec = fluid.copy(that.resourceSpec);
             if (csid) {
-                that.resourceSpec[recordType] = {
+                resourceSpec[recordType] = {
                     href: cspace.util.buildUrl(null, that.options.baseUrl, recordType, csid, that.options.fileExtension),
                     options: {
                         dataType: "json"
                     }
                 };
             }
-            fluid.fetchResources(that.resourceSpec, fetchResourcesCallback(that));
+            fluid.fetchResources(resourceSpec, fetchResourcesCallback(that));
         };
         
         // Need events in order to be able to track asynchronous resource fetching. 
@@ -157,11 +158,13 @@ cspace = cspace || {};
         sources: null // Structure that describes all additional resources that will be merged with the base model.
     });
     
+    // TODO: Need to create an "application" context.    
     fluid.demands("dataSource", "cspace.localData", fluid.COMPONENT_OPTIONS);
+    fluid.demands("dataSource", ["cspace.localData", "cspace.test"], fluid.COMPONENT_OPTIONS);
     
     fluid.demands("dataSource", ["cspace.role", "cspace.localData"], [fluid.COMPONENT_OPTIONS, {
         sources: {
-            role: {
+            permission: {
                 href: "../../../test/data/permission/list.json",
                 path: "fields.permissions",
                 resourcePath: "items",
@@ -169,10 +172,9 @@ cspace = cspace || {};
             } 
         } 
     }]);
-    
     fluid.demands("dataSource", "cspace.role", [fluid.COMPONENT_OPTIONS, {
         sources: {
-            role: {
+            permission: {
                 href: "../../chain/permission/search?actGrp=CRUDL",
                 path: "fields.permissions",
                 resourcePath: "items",
@@ -181,7 +183,7 @@ cspace = cspace || {};
         } 
     }]);
     
-    fluid.demands("dataSource", ["cspace.localData", "cspace.test"], fluid.COMPONENT_OPTIONS);
+    
     fluid.demands("dataSource", ["cspace.users", "cspace.localData", "cspace.test"], [fluid.COMPONENT_OPTIONS, {
         schema: "{dataContext}options.schema",
         sources: {
@@ -193,7 +195,6 @@ cspace = cspace || {};
             } 
         } 
     }]);
-    
     fluid.demands("dataSource", ["cspace.users", "cspace.localData"], [fluid.COMPONENT_OPTIONS, {
         sources: {
             role: {
@@ -204,7 +205,6 @@ cspace = cspace || {};
             } 
         } 
     }]);
-    
     fluid.demands("dataSource", "cspace.users", [fluid.COMPONENT_OPTIONS, {
         sources: {
             role: {
