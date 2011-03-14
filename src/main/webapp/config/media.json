@@ -42,8 +42,8 @@
                     "type": "cspace.titleBar",
                     "options": {
                         "fields": [
-                            "fields.title",
-                            "fields.dateModified"
+                            "fields.identificationNumber",
+                            "fields.title"
                         ]
                     }
                 },
