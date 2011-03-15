@@ -110,12 +110,26 @@ input[type="button"].saveButton, input[type="submit"].saveButton {
 input[type="button"].saveButton:hover, input[type="submit"].saveButton:hover {
 	background-color:#48722D;}
 input[type="button"].cancelButton, input[type="submit"].cancelButton {
+    -moz-border-radius:4px; 
+	-webkit-border-radius:4px;
 	background:transparent url('../images/icnCancel.png') no-repeat 8px 4px; 
 	padding-left:24px; 
 	padding-right:8px; 
 	color:#669922;}
 input[type="button"].cancelButton:hover, input[type="submit"].cancelButton:hover {
-	background-color:#DAEDD1;}
+	background-color:#DAEDD1;
+}
+input[type="button"].cancelButton[disabled], input[type="submit"].cancelButton[disabled] {
+    -moz-border-radius:4px; 
+	-webkit-border-radius:4px;
+	background:transparent url('../images/icnCancelDisabled.png') no-repeat 8px 4px; 
+	padding-left:24px; 
+	padding-right:8px; 
+	color:#CCC;}
+input[type="button"].cancelButton[disabled]:hover, input[type="submit"].cancelButton[disabled]:hover {
+	background-color:#ADADAD;
+    color:#606060
+}
 input[type="button"].editButton, input[type="submit"].editButton {
 	background:transparent url('../images/icnEdit.png') no-repeat 8px 4px; 
 	padding-left:24px; 

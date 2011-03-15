@@ -385,12 +385,11 @@ var adminUsersTester = function () {
                 jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.confirmationDialog.locate("message:").eq(1).text());
                 re.confirmation.confirmationDialog.locate("close").click();
                 jqUnit.notVisible("Dialog should close", re.confirmation.popup);
-                re.confirmation.popup.bind("dialogopen", function () {
-                    jqUnit.isVisible("Cancelling, confirmation should be visible", re.confirmation.popup);
-                    cspace.tests.onTearDown.fire(re);
-                    start();
-                });
+                jqUnit.assertEquals("Record name should still be changed.", "New Name", adminUsers.locate("userName").val());
                 re.locate("cancel").click();
+                jqUnit.assertEquals("Record should be rolled back.", "Anastasia Cheethem", adminUsers.locate("userName").val());
+                cspace.tests.onTearDown.fire(re);
+                start();
             });
             adminUsers.userListEditor.list.locate("row").eq(1).click();
         });

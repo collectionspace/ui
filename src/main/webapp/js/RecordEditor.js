@@ -65,12 +65,17 @@ cspace = cspace || {};
         return true;
     };
     
+    var processChanges = function (that, revert) {
+        that.unsavedChanges = revert;
+        that.locate("cancel").attr("disabled", !revert);
+    };
+    
     var recordSaveHandler = function (that, data, action) {
         var message = action.toLowerCase() + "SuccessfulMessage";
         that.options.applier.requestChange("", data);
         that.refreshView();
         that.options.messageBar.show(that.options.strings[message], Date());
-        that.unsavedChanges = false;
+        processChanges(that, false);
         that.locate("save").removeAttr("disabled");
     };
 
@@ -104,11 +109,11 @@ cspace = cspace || {};
         });
         
         that.options.dataContext.events.afterFetch.addListener(function () {
-            that.unsavedChanges = false;
+            processChanges(that, false);
         });
         
         that.options.applier.modelChanged.addListener("fields", function (model, oldModel, changeRequest) {
-            that.unsavedChanges = true;
+            processChanges(that, true);
         });
 
         that.options.dataContext.events.onError.addListener(makeDCErrorHandler(that));
@@ -120,7 +125,7 @@ cspace = cspace || {};
                         onClose: function (userAction) {
                             if (userAction === "act") {
                                 that.options.dataContext.events.afterSave.addListener(function () {
-                                    that.unsavedChanges = false;
+                                    processChanges(that, false);
                                     callback();
                                 }, undefined, undefined, "last");
                                 that.requestSave();
@@ -141,9 +146,7 @@ cspace = cspace || {};
         that.locate("save").click(that.requestSave);
         that.locate("deleteButton").click(that.remove);
         that.locate("cancel").click(function () {
-            that.options.globalNavigator.events.onPerformNavigation.fire(function () {
-                that.cancel();
-            });
+            that.cancel();
         });
         cspace.util.setZIndex();      
     };
@@ -153,7 +156,7 @@ cspace = cspace || {};
         if (!that.options.deferRendering) {
             that.refreshView();
         }
-        that.unsavedChanges = false;
+        processChanges(that, false);
     };
     
     var initDeferredComponents = function (that) {
@@ -184,7 +187,7 @@ cspace = cspace || {};
             } else {
                 that.locate("deleteButton").removeAttr("disabled").removeClass("deactivate");
             }
-            that.unsavedChanges = false;
+            processChanges(that, false);
             that.rollbackModel = fluid.copy(that.model.fields);
             that.options.messageBar.hide();
             bindHandlers(that);
@@ -219,7 +222,7 @@ cspace = cspace || {};
                     onClose: function (userAction) {
                         if (userAction === "act") {
                             that.options.dataContext.remove(that.model.csid);
-                            that.unsavedChanges = false;
+                            processChanges(that, false);
                         }
                     }
                 }
@@ -263,15 +266,8 @@ cspace = cspace || {};
     };
     
     cspace.recordEditor.cancel = function (that) {
-        that.options.messageBar.hide();
-        that.unsavedChanges = false;
-        that.events.onCancel.fire();
-    }
-    
-    cspace.recordEditor.cancelRecord = function (that) {
-        that.events.onCancel.fire();
-        window.location = that.options.urls.cancel;
-    }
+        that.rollback();
+    };
     
     fluid.demands("recordEditorTogglable", "cspace.recordEditor", ["{recordEditor}.container", fluid.COMPONENT_OPTIONS]);
     
@@ -352,18 +348,14 @@ cspace = cspace || {};
             noDefaultInvitation: "-- Select an item from the list --",
             missingRequiredFields: "Some required fields are empty",
             save: "Save",
-            cancel: "Cancel"
+            cancel: "Cancel changes"
         },
         urls: cspace.componentUrlBuilder({
             cancel: "%webapp/html/findedit.html"
         })
     });
-    
-    fluid.demands("cancel", ["cspace.pageBuilder", "cspace.record"], {
-        funcName: "cspace.recordEditor.cancelRecord",
-        args: "{recordEditor}"
-    });
-    fluid.demands("cancel", "cspace.pageBuilder", {
+
+    fluid.demands("cancel", "cspace.recordEditor", {
         funcName: "cspace.recordEditor.cancel",
         args: "{recordEditor}"
     });
