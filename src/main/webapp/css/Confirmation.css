@@ -47,7 +47,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 .ui-icon-closethick {
 	background-color:#fff;
-	flo at:right;
+	float:right;
 	color:#6B8DA7;
 	margin: -8px -4px 0 0;
 }
