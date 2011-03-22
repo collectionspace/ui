@@ -7756,6 +7756,7 @@ var fluid = fluid || fluid_1_4;
     
     /** Helpful alias for old-style API **/
     fluid.path = fluid.model.composeSegments;
+    fluid.composePath = fluid.model.composePath;
 
     /** Standard strategies for resolving path segments **/
     fluid.model.environmentStrategy = function (initEnvironment) {
@@ -9432,7 +9433,8 @@ var fluid_1_4 = fluid_1_4 || {};
             multiple = true;
         }
         if ("input" !== node.nodeName.toLowerCase() || ! /radio|checkbox/.test(node.type)) {
-            return $(node).val(newValue);
+            // resist changes to contract of jQuery.val() in jQuery 1.5.1 (see FLUID-4113)
+            return newValue === undefined? $(node).val() : $(node).val(newValue);
         }
         var name = node.name;
         if (name === undefined) {
@@ -10766,7 +10768,7 @@ var fluid_1_4 = fluid_1_4 || {};
         return component.options && component.options["fluid.visitComponents.fireBreak"];
     };
     
-    var findMatchingComponent = function(that, visitor, visited) {
+    fluid.visitComponentChildren = function(that, visitor, visited) {
         for (var name in that) {
             var component = that[name];
             //Every component *should* have an id, but some clients may not yet be compliant
@@ -10775,11 +10777,11 @@ var fluid_1_4 = fluid_1_4 || {};
             //}
             if (!component || !component.typeName || (component.id && visited[component.id])) {continue; }
             visited[component.id] = true;
-            if (visitor(component, name)) {
+            if (visitor(component, name, visited)) {
                 return true;
             }
             if (!fluid.isFireBreak(component)) {
-                findMatchingComponent(component, visitor, visited);
+                fluid.visitComponentChildren(component, visitor, visited);
             }
         }
     };
@@ -10798,7 +10800,7 @@ var fluid_1_4 = fluid_1_4 || {};
                     return;
                 }
             }
-            if (findMatchingComponent(that, visitor, visited)) {
+            if (fluid.visitComponentChildren(that, visitor, visited)) {
                 return;
             }
         }
@@ -10808,14 +10810,22 @@ var fluid_1_4 = fluid_1_4 || {};
     // components that it discovers along the EL path, if they have been defined but not yet
     // constructed. Spring, eat your heart out! Wot no SPR-2048?
     
-    function makeGingerStrategy(thatStack) {
+    function makeGingerStrategy(instantiator, that, thatStack) {
         return function(component, thisSeg) {
             var atval = component[thisSeg];
+            if (atval === undefined) {
+                var parentPath = instantiator.idToPath[component.id];
+                atval = instantiator.pathToComponent[fluid.composePath(parentPath, thisSeg)];
+                // if it was not attached to the component, but it is in the instantiator, it MUST be in creation - prepare to fail
+                if (atval) {
+                    atval[inCreationMarker] = true;
+                } 
+            }
             if (atval !== undefined) {
-                if (atval[inCreationMarker] && atval !== thatStack[0]) {
-                    fluid.fail("Component of type " + 
-                        atval.typeName + " cannot be used for lookup of path " + thisSeg +
-                        " since it is still in creation. Please reorganise your dependencies so that they no longer contain circular references");
+                if (atval[inCreationMarker]) {
+                    fluid.fail("Component " + fluid.dumpThat(atval) + " at path \"" + thisSeg 
+                        + "\" of parent " + fluid.dumpThat(component) + " cannot be used for lookup" 
+                        + " since it is still in creation. Please reorganise your dependencies so that they no longer contain circular references");
                 }
             }
             else {
@@ -10842,7 +10852,7 @@ var fluid_1_4 = fluid_1_4 || {};
     function makeStackFetcher(instantiator, parentThat, localRecord, expandOptions) {
         expandOptions = expandOptions || {};
         var thatStack = instantiator.getFullStack(parentThat);
-        var fetchStrategies = [fluid.model.funcResolverStrategy, makeGingerStrategy(thatStack)]; 
+        var fetchStrategies = [fluid.model.funcResolverStrategy, makeGingerStrategy(instantiator, parentThat, thatStack)]; 
         var fetcher = function(parsed) {
             var context = parsed.context;
             if (localRecord && localRecordExpected.test(context)) {
@@ -10924,6 +10934,11 @@ var fluid_1_4 = fluid_1_4 || {};
         };
         function recordComponent(component, path) {
             that.idToPath[component.id] = path;
+            if (that.pathToComponent[path]) {
+                fluid.fail("Error during instantiation - path " + path + " which has just created component " + fluid.dumpThat(component) 
+                    + " has already been used for component " + fluid.dumpThat(that.pathToComponent[path]) + " - this is a circular instantiation or other oversight."
+                    + " Please clear the component using instantiator.clearComponent() before reusing the path.");
+            }
             that.pathToComponent[path] = component;          
         }
         that.recordRoot = function(component) {
@@ -10945,8 +10960,12 @@ var fluid_1_4 = fluid_1_4 || {};
                 that.recordRoot(component);
             }
         };
-        that.clearComponent = function(component, name) {
+        that.clearComponent = function(component, name, visited) {
+            visited = visited || {};
             var child = component[name];
+            fluid.visitComponentChildren(child, function(gchild, gchildname, visited) {
+                that.clearComponent(child, gchildname, visited)
+            }, visited);
             var path = that.idToPath[child.id];
             delete that.idToPath[child.id];
             delete that.pathToComponent[path];
@@ -11394,6 +11413,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
                 that[name] = component;
             }
         });
+        fluid.log("Finished instantiation of component with name \"" + name + "\" as child of " + fluid.dumpThat(that));
     };
     
     // NON-API function
@@ -11458,9 +11478,11 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         for (var name in invokers) {
             var invokerec = invokers[name];
             var funcName = typeof(invokerec) === "string"? invokerec : null;
-            that[name] = fluid.withInstantiator(that, function(instantiator) { 
+            that[name] = fluid.withInstantiator(that, function(instantiator) {
+                fluid.log("Beginning instantiation of invoker with name \"" + name + "\" as child of " + fluid.dumpThat(that)); 
                 return fluid.makeInvoker(instantiator, that, funcName? null : invokerec, funcName);
             }); // jslint:ok
+            fluid.log("Finished instantiation of invoker with name \"" + name + "\" as child of " + fluid.dumpThat(that)); 
         }
     };
     
@@ -13366,9 +13388,11 @@ fluid_1_4 = fluid_1_4 || {};
         form: "action",
         applet: "codebase", object: "codebase" //jslint:ok
     };
+    
+    renderer.decoratorComponentPrefix = "**-renderer-";
   
     renderer.IDtoComponentName = function(ID, num) {
-        return "**-renderer-" + ID.replace(/\./g, "") + "-" + num;
+        return renderer.decoratorComponentPrefix + ID.replace(/\./g, "") + "-" + num;
     };
     
     renderer.invokeFluidDecorator = function(func, args, ID, num, options) {
@@ -14687,9 +14711,7 @@ fluid_1_4 = fluid_1_4 || {};
     if (!fluid.renderer) {
         fluid.fail("fluidRenderer.js is a necessary dependency of RendererUtilities");
         }
-  
-    fluid.registerNamespace("fluid.renderer.selection");
-    
+
     // TODO: rescued from kettleCouchDB.js - clean up in time
     fluid.expect = function (name, members, target) {
         fluid.transform($.makeArray(members), function (key) {
@@ -14710,6 +14732,14 @@ fluid_1_4 = fluid_1_4 || {};
             togo[togo.length] = first++;
         }
         return togo;
+    };
+
+    fluid.renderer.clearDecorators = function(instantiator, that) {
+        fluid.visitComponentChildren(that, function(component, name) {
+            if (name.indexOf(fluid.renderer.decoratorComponentPrefix) === 0) {
+                instantiator.clearComponent(that, name);
+            }
+        }, {});
     };
 
     // Utilities for coordinating options in renderer components - in theory this could
@@ -14827,6 +14857,9 @@ fluid_1_4 = fluid_1_4 || {};
 
         if (that.produceTree) {
             that.refreshView = renderer.refreshView = function () {
+                if (rendererOptions.instantiator && rendererOptions.parentComponent) {
+                    fluid.renderer.clearDecorators(rendererOptions.instantiator, rendererOptions.parentComponent);
+                }
                 renderer.render(that.produceTree(that));
             };
         }
@@ -14887,6 +14920,8 @@ fluid_1_4 = fluid_1_4 || {};
         return target;
     };
     
+    fluid.registerNamespace("fluid.renderer.selection");
+        
     /** Definition of expanders - firstly, "heavy" expanders **/
     
     fluid.renderer.selection.inputs = function (options, container, key, config) {
@@ -20669,10 +20704,7 @@ var fluid_1_4 = fluid_1_4 || {};
     };
     
     var setupUploader = function (that) {
-        // Setup the environment appropriate if we're in demo mode.
-        if (that.options.demo) {
-            that.demo = fluid.typeTag("fluid.uploader.demo");
-        }
+        that.demo = fluid.typeTag(that.options.demo? "fluid.uploader.demo" : "fluid.uploader.live");
         
         fluid.initDependents(that);                 
 
@@ -21030,6 +21062,9 @@ var fluid_1_4 = fluid_1_4 || {};
         }
     });
 
+    fluid.demands("uploaderImpl", ["fluid.uploader", "fluid.uploader.singleFile"], {
+        funcName: "fluid.uploader.singleFileUploader"
+    });
     
 })(jQuery, fluid_1_4);
 /*
@@ -22385,13 +22420,15 @@ var fluid_1_4 = fluid_1_4 || {};
     
     fluid.defaults("fluid.uploader.html5Strategy.remote", {
         gradeNames: ["fluid.eventedComponent"],
-        
+        argumentMap: {
+            options: 2  
+        },                
         invokers: {
             doUpload: "fluid.uploader.html5Strategy.doUpload"
         }
     });
     
-    fluid.demands("fluid.uploader.remote", "fluid.uploader.html5Strategy", {
+    fluid.demands("fluid.uploader.remote", ["fluid.uploader.html5Strategy", "fluid.uploader.live"], {
         funcName: "fluid.uploader.html5Strategy.remote",
         args: [
             "{multiFileUploader}.queue", 

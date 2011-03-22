@@ -179,8 +179,6 @@ cspace = cspace || {};
         
         that.refreshView = function () {
             fluid.log("RecordEditor.js before render");
-            // TODO: This needs to be done by the renderer and not the component.
-            cspace.util.removeRendererDecorators(that);
             that.renderer.refreshView();
             if (!that.model.csid || (that.model.fields.email === "admin@collectionspace.org")) {
                 that.locate("deleteButton").attr("disabled", "disabled").addClass("deactivate");

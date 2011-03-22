@@ -128,7 +128,7 @@ cspace = cspace || {};
     }
     
     var renderPage = function (that, blankRowOnly) {
-        cspace.util.removeRendererDecorators(that);
+        fluid.renderer.clearDecorators(that.options.rendererOptions.instantiator, that);
         var expander = fluid.renderer.makeProtoExpander({ELstyle: "${}", model: that.model});
         var tree = expander(that.options.protoTree);
         fluid.clear(that.options.rendererOptions.fossils);

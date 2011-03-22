@@ -116,7 +116,6 @@ var relatedRecordsTabTester = function ($) {
             },
             configURL: "../../main/webapp/config/cataloging-tab.json"
         };
-        
         objTab = cspace.globalSetup("cspace.tabs", options);
     };
     
@@ -134,7 +133,17 @@ var relatedRecordsTabTester = function ($) {
         });
     });
     
-    relatedRecordsTabTest.asyncTest("Changing Record", function () {
+    // Creating a different testEntivronment to be able to create a new
+    // clean tree of components (clean from the previous test).
+    var relatedRecordsTabTest2 = cspace.tests.testEnvironment({
+        testCase: bareRelatedRecordsTabTest, model: model, applier: applier, components: {
+        instantiator: "{instantiator}",
+        modelHolder: {
+            type: "cspace.tests.modelHolder"
+        }
+    }});
+    
+    relatedRecordsTabTest2.asyncTest("Changing Record", function () {
         setupTab({
             pageReadyListener: function () {
                 var le = objTab.pageBuilderIO.pageBuilder.relatedRecordsTab.listEditor;
