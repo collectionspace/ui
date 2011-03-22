@@ -41,7 +41,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         };
         setupRecordEditor({
             model: model,
-            dataContext: cspace.dataContext(model, {baseUrl: "."}),
+            dataContext: cspace.dataContext({baseUrl: ".", model: model}),
             uispec: {
                 ".csc-test-1": "${fields.field1}",
                 ".csc-test-2": "${fields.field2}",
@@ -60,7 +60,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         };
         setupRecordEditor({
             model: model,
-            dataContext: cspace.dataContext(model, {baseUrl: "http://mymuseum.org", recordType: "thisRecordType"}),
+            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
             uispec: {}
         }, function (re) {
             fluid.log("RETest: afterRender");
@@ -87,7 +87,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         uispec[field] = "${fields.testField}";
         setupRecordEditor({
             model: model,
-            dataContext: cspace.dataContext(model, {baseUrl: "http://mymuseum.org", recordType: "thisRecordType"}),
+            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
             uispec: uispec
         }, function (re) {
             re.events.afterRender.removeListener("initialRender");

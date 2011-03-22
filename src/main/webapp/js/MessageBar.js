@@ -57,6 +57,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.messageBarImpl", {
+        gradeNames: ["fluid.rendererComponent"],
         model: {},
         selectors: {
             messageBlock: ".csc-messageBar",
@@ -108,9 +109,8 @@ cspace = cspace || {};
         return that.messageBarImpl;
     };
     
-    fluid.demands("messageBarImpl", "cspace.messageBar", ["{messageBar}.options.selectors.messageBarContainer", fluid.COMPONENT_OPTIONS]);
-    
     fluid.defaults("cspace.messageBar", {
+        gradeNames: ["fluid.viewComponent"],
         components: {
             messageBarImpl: {
                 type: "cspace.messageBarImpl",
@@ -121,9 +121,5 @@ cspace = cspace || {};
             messageBarContainer: ".csc-messageBar-container"
         }
     });
-    
-    fluid.demands("messageBar", "cspace.globalSetup", ["body", fluid.COMPONENT_OPTIONS]);
-    fluid.demands("messageBar", "cspace.login", ["body", fluid.COMPONENT_OPTIONS]);
-    fluid.demands("messageBar", "cspace.test", ["body", fluid.COMPONENT_OPTIONS]);
     
 })(jQuery, fluid);

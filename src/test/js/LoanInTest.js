@@ -11,7 +11,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 /*global jqUnit, cspace, start, stop */
 "use strict";
 
-(function () { 
+var loaninTester = function () { 
 
     var bareLoanInTests = new jqUnit.TestCase("Loan In Tests", function () {
         cspace.util.isTest = true;
@@ -52,5 +52,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         };
         var loanIn = cspace.globalSetup("cspace.record", opts);
     });
-}());
+};
 
+jQuery(document).ready(function () {
+    loaninTester();
+});

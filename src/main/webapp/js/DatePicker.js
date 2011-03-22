@@ -177,6 +177,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.datePicker", {
+        gradeNames: ["fluid.viewComponent"],
         selectors: {
             date: ".goog-date-picker-date",
             calendarDate: ".csc-calendar-date",
@@ -191,9 +192,7 @@ cspace = cspace || {};
         },
         // Default format for valid date.
         defaultFormat: "yyyy-MM-dd",
-        messageBar: "{recordEditor}.options.messageBar"
+        messageBar: "{messageBar}"
     });
-    
-    fluid.demands("cspace.datePicker", "cspace.recordEditor", ["@0", fluid.COMPONENT_OPTIONS]);
     
 })(jQuery, fluid);

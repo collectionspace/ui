@@ -57,11 +57,7 @@ cspace = cspace || {};
         });
     };
     
-    cspace.searchToRelateDialog = function (container, options, demandsOptions) {
-        
-        options = options || {};
-        fluid.merge({model: "preserve"}, options.value || options, demandsOptions);
-        
+    cspace.searchToRelateDialog = function (container, options) {
         var that = fluid.initRendererComponent("cspace.searchToRelateDialog", container, options);
         var recordName = that.messageResolver.resolve(that.options.related);
         var title = that.messageResolver.resolve("title", {recordType: recordName});
@@ -147,6 +143,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.searchToRelateDialog", {
+        gradeNames: ["fluid.rendererComponent"],
         mergePolicy: {
             model: "preserve"
         },

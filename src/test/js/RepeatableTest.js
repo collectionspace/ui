@@ -183,7 +183,7 @@ var repeatableTester = function ($) {
 
     var basicMarkupGenTableTest = function (tableId, elName) {
         expect(3);
-        var headerRow = $(tableId + " " + fluid.defaults("cspace.repeatable").selectors.headerRow);
+        var headerRow = $(tableId + " " + fluid.defaults("cspace.makeRepeatable").selectors.headerRow);
         var previousHeaderColumnCount = $(elName, headerRow).length;
         var myRepeatable = tableSetup(tableId);
         var colHeaders = $(elName, headerRow);
@@ -208,7 +208,7 @@ var repeatableTester = function ($) {
     
     repeatableTest.test("Markup Generation For Table Headers: THEAD/TR/TD with multiple rows", function () {
         expect(3);
-        var headerRow = $("#tableContainerTheadMultipleTrTd " + fluid.defaults("cspace.repeatable").selectors.headerRow);
+        var headerRow = $("#tableContainerTheadMultipleTrTd " + fluid.defaults("cspace.makeRepeatable").selectors.headerRow);
         var previousHeaderColumnCount = $("td", headerRow).length;
         var myRepeatable = tableSetup("#tableContainerTheadMultipleTrTd");
     
@@ -221,7 +221,7 @@ var repeatableTester = function ($) {
     
     repeatableTest.test("Markup Generation For Table Headers: THEAD/TR, no TD", function () {
         expect(1);
-        var headerRow = $("#tableContainerTheadTrNoTd " + fluid.defaults("cspace.repeatable").selectors.headerRow);
+        var headerRow = $("#tableContainerTheadTrNoTd " + fluid.defaults("cspace.makeRepeatable").selectors.headerRow);
         var previousHeaderColumnCount = $("td", headerRow).length;
         var myRepeatable = tableSetup("#tableContainerTheadTrNoTd");
     
@@ -232,7 +232,7 @@ var repeatableTester = function ($) {
     repeatableTest.test("Markup Generation For Table Headers: no header present", function () {
         expect(2);
         
-        var headerRow = $("#tableContainerNoHeader " + fluid.defaults("cspace.repeatable").selectors.headerRow);
+        var headerRow = $("#tableContainerNoHeader " + fluid.defaults("cspace.makeRepeatable").selectors.headerRow);
         jqUnit.assertEquals("Before testing, there should be nothing with the header row selector", 0, headerRow.length);
         var myRepeatable = tableSetup("#tableContainerNoHeader");
         jqUnit.assertEquals("After initializing, there should still be nothing with the header row selector", 0, headerRow.length);
@@ -620,13 +620,12 @@ var repeatableTester = function ($) {
         testCase: bareRepeatableTest, model: model, applier: applier, components: {
         modelHolder: {
             type: "cspace.tests.modelHolder"
-        }
+        },
+        instantiator: "{instantiator}"
     }});
     
     repeatableTestPrepare.test("Prepare repeatable model with primary", function () {
         var options = {
-            model: "{modelHolder}.options.model",
-            applier: "{modelHolder}.options.applier",
             protoTree: {
                 expander: {
                     repeatID: "repeat:",
@@ -645,8 +644,20 @@ var repeatableTester = function ($) {
                 }]
             },
             elPath: "myTexts"
-        };        
-        var myRepeatable = cspace.makeRepeatable(".csc-repeatable-li", options);
+        };
+        fluid.demands("cspace.makeRepeatable", "cspace.tests.testEnvironment", {
+            container: ".csc-repeatable-li",
+            options: {
+                model: "{modelHolder}.options.model",
+                applier: "{modelHolder}.options.applier"
+            }
+        });
+        repeatableTestPrepare.options.components.myRepeatable = {
+            type: "cspace.makeRepeatable",
+            options: options
+        };
+        fluid.initDependent(repeatableTestPrepare, "myRepeatable", repeatableTestPrepare.instantiator);
+        var myRepeatable = repeatableTestPrepare.myRepeatable;
         jqUnit.assertTrue("Newly prepared model should have a set primary field", myRepeatable.model.myTexts[0]._primary);
     });
 };

@@ -20,11 +20,7 @@ cspace = cspace || {};
         cspace.tabsList.stylefy(that);
     };
     
-    cspace.tabsList = function (container, options, demandsOptions) {
-        
-        options = options || {};
-        fluid.merge({model: "replace"}, options.value || options, demandsOptions);
-        
+    cspace.tabsList = function (container, options) {
         var that = fluid.initRendererComponent("cspace.tabsList", container, options);
         fluid.initDependents(that);
         setupTabList(that);
@@ -82,6 +78,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.tabsList", {
+        gradeNames: ["fluid.rendererComponent"],
         mergePolicy: {
             model: "replace"
         },
@@ -201,37 +198,9 @@ cspace = cspace || {};
             }
         });
     };
-    
-    fluid.demands("tabsList", ["cspace.tabs", "cspace.person"], ["{tabs}.dom.tabsList", fluid.COMPONENT_OPTIONS, {
-        strings: {
-            primary: "Current record"
-        },
-        model: {
-            tabs: {
-                primary: {
-                    "name": "primary",
-                    href: "#primaryTab"
-                }
-            }
-        }
-    }]);
-    fluid.demands("tabsList", ["cspace.tabs", "cspace.organization"], ["{tabs}.dom.tabsList", fluid.COMPONENT_OPTIONS, {
-        strings: {
-            primary: "Current record"
-        },
-        model: {
-            tabs: {
-                primary: {
-                    "name": "primary",
-                    href: "#primaryTab"
-                }
-            }
-        }
-    }]);
-    
-    fluid.demands("tabsList", ["cspace.tabs"], ["{tabs}.dom.tabsList", fluid.COMPONENT_OPTIONS]);
 
     fluid.defaults("cspace.tabs", {
+        gradeNames: ["fluid.viewComponent"],
         components: {
             tabsList: {
                 type: "cspace.tabsList"
@@ -256,14 +225,6 @@ cspace = cspace || {};
         },
         globalNavigator: "{globalNavigator}",
         globalSetup: "{globalSetup}"
-    });
-    
-    fluid.demands("tabs", "cspace.pageBuilder", {
-        args: ["{pageBuilder}.options.selectors.tabs", {
-            primaryRecordType: "{pageBuilder}.options.pageType",
-            applier: "{pageBuilder}.applier",
-            model: "{pageBuilder}.model"
-        }]
     });
     
     fluid.fetchResources.primeCacheFromResources("cspace.tabsList");

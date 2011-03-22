@@ -76,6 +76,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.searchBox", {
+        gradeNames: ["fluid.rendererComponent"],
         mergePolicy: {
             model: "preserve"   
         },
@@ -130,9 +131,6 @@ cspace = cspace || {};
             afterRender: null
         }
     });
-    
-    fluid.demands("pivotSearch", "cspace.pageBuilder", 
-        ["{pageBuilder}.options.selectors.pivotSearch", fluid.COMPONENT_OPTIONS]);
     
     // This function executes on file load and starts the fetch process of component's template.
     fluid.fetchResources.primeCacheFromResources("cspace.searchBox");

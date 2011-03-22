@@ -76,6 +76,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     fluid.registerNamespace("fluid.autocomplete");
 
     fluid.defaults("fluid.autocomplete.autocompleteView", {
+        gradeNames: ["fluid.viewComponent"],
         events: {
             onSearch: null,
             onSearchDone: null
@@ -128,37 +129,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         return that;
     };
-     
-    fluid.demands("cspace.autocomplete.authoritiesDataSource", 
-                  "cspace.autocomplete", {
-        funcName: "cspace.URLDataSource",
-        args: {url: "{autocomplete}options.vocabUrl"}
-    });
-    
-    fluid.demands("cspace.autocomplete.matchesDataSource", 
-                  "cspace.autocomplete", {
-        funcName: "cspace.URLDataSource", 
-        args: {
-            url: "%queryUrl?q=%term",
-            termMap: {
-                queryUrl: "{autocomplete}options.queryUrl",
-                term: "encodeURIComponent:%term"
-            }
-        }
-    });
-
-    fluid.demands("cspace.autocomplete.newTermDataSource", 
-                  "cspace.autocomplete", {
-        funcName: "cspace.URLDataSource",
-        args: { 
-            url: "../../chain%termUrl",
-            termMap: {
-                termUrl: "%termUrl"
-            },
-            writeable: true  
-        }
-    });
-
 
     /**** Definitions for testing environment - TODO: move to separate file somewhere ****/    
     fluid.defaults("cspace.autocomplete.testAuthoritiesDataSource", {
@@ -167,11 +137,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.autocomplete.testAuthoritiesDataSource = cspace.URLDataSource;
    
-    fluid.demands("cspace.autocomplete.authoritiesDataSource",  ["cspace.localData", "cspace.autocomplete"],
-        {funcName: "cspace.autocomplete.testAuthoritiesDataSource",
-         args: {}});
-
-
     cspace.autocomplete.testMatchesParser = function (data, directModel) {
         var togo = [];
         var lowterm = directModel.term.toLowerCase();
@@ -191,14 +156,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     });
     
     cspace.autocomplete.testMatchesDataSource = cspace.URLDataSource;
-        
-    fluid.demands("cspace.autocomplete.matchesDataSource", ["cspace.localData", "cspace.autocomplete"],
-        {funcName: "cspace.autocomplete.testMatchesDataSource",
-         args: {}});
-    
-    fluid.demands("cspace.autocomplete.newTermDataSource",  ["cspace.localData", "cspace.autocomplete"],
-        {funcName: "cspace.autocomplete.testNewTermDataSource",
-         args: {}});
     
     cspace.autocomplete.testNewTermDataSource = function (options) {
         return {
@@ -212,6 +169,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     
     fluid.defaults("cspace.autocomplete.closeButton", {
+        gradeNames: ["fluid.viewComponent"],
         styles: {
             button: "cs-autocomplete-closebutton"
         },
@@ -289,7 +247,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.autocomplete.popup = function (container, options) {
         var that = fluid.initRendererComponent("cspace.autocomplete.popup", container, options);
-        that.events = that.options.events;
+        fluid.initDependents(that);
         var input = fluid.unwrap(that.options.inputField);
         that.union = $(container).add(input);
         
@@ -308,7 +266,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var activateFunction = function (item) {
             var decoded = decodeItem(item.target);
             if (decoded.type) {
-                that.events[decoded.type === "authorities" ? "selectAuthority" : "selectMatch"].fire(decoded.index);
+                that.eventHolder.events[decoded.type === "authorities" ? "selectAuthority" : "selectMatch"].fire(decoded.index);
             }
         };
         that.container.click(activateFunction);
@@ -350,7 +308,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.blurHandler = fluid.deadMansBlur(that.union, {
                 exclusions: {union: that.union}, 
                     handler: function () {
-                    that.events.revertState.fire();
+                    that.eventHolder.events.revertState.fire();
                 }
         });
 
@@ -374,7 +332,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             
         that.escapeHandler = function (event) { // TODO: too annoying to use plugin because of FLUID-1313
             if (event.keyCode === $.ui.keyCode.ESCAPE) {
-                that.events.revertState.fire();
+                that.eventHolder.events.revertState.fire();
             }
         };
         // We trigger only on KEYUP since at least Firefox has a totally unpreventable
@@ -382,8 +340,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // old value.
         that.union.keyup(that.escapeHandler);
         
-        that.events.selectAuthority.addListener(that.closeWithFocus);
-        that.events.selectMatch.addListener(that.closeWithFocus);
+        that.eventHolder.events.selectAuthority.addListener(that.closeWithFocus);
+        that.eventHolder.events.selectMatch.addListener(that.closeWithFocus);
        
         fluid.initDependents(that);
         
@@ -391,6 +349,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     fluid.defaults("cspace.autocomplete.popup", {
+        gradeNames: ["fluid.rendererComponent"],
         mergePolicy: {
             model: "preserve"
         },
@@ -411,7 +370,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         invokers: {
             treeBuilder: {
                 funcName: "cspace.autocomplete.modelToTree",
-                args: ["{popup}.model", "{popup}.events"]
+                args: ["{popup}.model", "{popup}.eventHolder.events"]
             }  
         },
         resources: {
@@ -426,6 +385,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }
                 }
             }
+        },
+        components: {
+            eventHolder: "{eventHolder}"
         }
     });
 
@@ -520,14 +482,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             });
         
-        that.events.selectMatch.addListener(
+        that.eventHolder.events.selectMatch.addListener(
             function (key) {
                 var match = that.model.matches[key];
                 updateAuthoritatively(that, match);
                 buttonAdjustor();
             });
             
-        that.events.selectAuthority.addListener(
+        that.eventHolder.events.selectAuthority.addListener(
             function (key) {
                 var authority = that.model.authorities[key];
                 that.newTermSource.put({fields: {displayName: that.model.term}}, {termUrl: authority.url}, 
@@ -536,7 +498,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         buttonAdjustor();
                     });
             });
-        that.events.revertState.addListener(
+        that.eventHolder.events.revertState.addListener(
             function () {
                 updateAuthoritatively(that, that.model.baseRecord);
                 buttonAdjustor();
@@ -549,26 +511,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
 
         that.closeButton.button.click(function () {
-            that.events.revertState.fire();
+            that.eventHolder.events.revertState.fire();
             return false;
         });
         
         return that;
     };
     
-
-
-    fluid.demands("fluid.autocomplete.autocompleteView", "cspace.autocomplete", 
-      ["{autocomplete}.autocompleteInput", fluid.COMPONENT_OPTIONS]);
-      
-          
-    fluid.demands("cspace.autocomplete.popup", "cspace.autocomplete", 
-      ["{autocomplete}.popupElement", fluid.COMPONENT_OPTIONS]);
-      
-    fluid.demands("cspace.autocomplete.closeButton", "cspace.autocomplete", 
-      ["{autocomplete}.autocompleteInput", fluid.COMPONENT_OPTIONS]);
-    
     fluid.defaults("cspace.autocomplete", {
+        gradeNames: ["fluid.viewComponent"],
         termSaverFn: cspace.autocomplete.ajaxTermSaver,
         minChars: 3,
         delay: 500,
@@ -580,11 +531,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     delay: "{autocomplete}.options.delay"
                 }
             },
+            eventHolder: {
+                type: "fluid.autocomplete.eventHolder"
+            },
             popup: {
                 type: "cspace.autocomplete.popup",
                 options: {
                     model: "{autocomplete}.model",
-                    events: "{autocomplete}.events",
                     inputField: "{autocomplete}.autocompleteInput",
                     strings: "{autocomplete}.options.strings"
                 }
@@ -606,13 +559,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             noMatches:   "- No matches -",
             addTermTo:   "Add \"%term\" to:",
             closeButton: "Cancel edit, and return this field to the most recent authority value"
-        },
+        }
+    });
+    
+    fluid.defaults("fluid.autocomplete.eventHolder", {
+        gradeNames: ["fluid.eventedComponent", "autoInit"],
         events: {
             revertState: null,
             selectAuthority: null,
             selectMatch: null
         }
     });
-    
-    fluid.demands("cspace.autocomplete", "cspace.recordEditor", ["@0", fluid.COMPONENT_OPTIONS]);
+        
 })(jQuery, fluid);

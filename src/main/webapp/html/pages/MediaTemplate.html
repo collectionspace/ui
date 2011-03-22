@@ -12,50 +12,67 @@
         <div class="csc-recordEditor-header fl-container-flex header toggle">File Information</div>
         <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
             <div class="info-column fl-force-left">
-                <div class="header">
-                    <div class="label">File</div>
-                </div>
                 <div class="info-pair">
-                    <div class="header">
-                        <div class="label">Upload</div>
-                    </div>
                     <div class="content">
                         <div class="csc-media-upload"></div>
                     </div>
                 </div>
-                <div class="info-pair">
-                    <div class="content">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td>Thumbnail</td>
-                                    <td>File name</td>
-                                    <td>File location</td>
-                                    <td>File format</td>
-                                    <td>Date created</td>
-                                    <td>Date modified</td>
-                                </tr>
-                            </thead>                                                        
-                            <tbody>
-                                <tr>
-                                    <td><span class="csc-media-image"/></td>
-                                    <td><span class="csc-media-filename"/></td>
-                                    <td><span class="csc-media-location"/></td>
-                                    <td><span class="csc-media-format"/></td>
-                                    <td><span class="csc-media-dateCreated"/></td>
-                                    <td><span class="csc-media-dateModified"/></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+            </div>
+            <div class="info-pair csc-blobs">
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Thumbnail</td>
+                                <td>File name</td>
+                                <td>File location</td>
+                                <td>File format</td>
+                                <td>Date created</td>
+                                <td>Date modified</td>
+                            </tr>
+                        </thead>                                                        
+                        <tbody>
+                            <tr>
+                                <td><span class="csc-media-image"/></td>
+                                <td><span class="csc-media-filename"/></td>
+                                <td><span class="csc-media-location"/></td>
+                                <td><span class="csc-media-format"/></td>
+                                <td><span class="csc-media-dateCreated"/></td>
+                                <td><span class="csc-media-dateModified"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+            <div class="clear"></div>
         </div>
     </div>
     <div class="fl-container-flex fl-fix information-group info-column">
         <div class="csc-recordEditor-header fl-container-flex header toggle">Media Handling Information</div>
         <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main"> 
             <div class="info-column fl-force-left">
+                <div class="info-column fl-force-left">
+                    <div class="info-column2-50 fl-force-left" >    
+                        <div class="info-pair">
+                            <div class="header">
+                                <div class="label">Title</div>
+                            </div>
+                            <div class="content">
+                                <input type="text" class="csc-media-title" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-column2-50 fl-force-right">
+                        <div class="info-pair">
+                            <div class="header">
+                                <div class="label">Identification Number</div>
+                            </div>
+                            <div class="content csc-media-identificationNumber-container">
+                                <input type="text" class="input-numeric-long csc-media-identificationNumber pattern-chooser-input" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="info-column fl-force-left">
                     <div class="info-column2-60 fl-force-left" >    
                         <div class="info-pair">
@@ -103,28 +120,6 @@
                         </table>
                     </div>
                 </div>
-                <div class="info-column fl-force-left">
-	                <div class="info-column2-50 fl-force-left" >    
-	                    <div class="info-pair">
-	                        <div class="header">
-	                            <div class="label">Title</div>
-	                        </div>
-	                        <div class="content">
-	                            <input type="text" class="csc-media-title" />
-	                        </div>
-	                    </div>
-	                </div>
-					<div class="info-column2-50 fl-force-right">
-					    <div class="info-pair">
-					        <div class="header">
-					            <div class="label">Identification Number</div>
-					        </div>
-					        <div class="content csc-media-identificationNumber-container">
-					            <input type="text" class="input-numeric-long csc-media-identificationNumber pattern-chooser-input" />
-					        </div>
-					    </div>
-					</div>
-	            </div>
 	            <div class="info-column fl-force-left">
                     <div class="info-column2-50 fl-force-left" >    
                         <div class="info-pair">

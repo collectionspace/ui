@@ -44,7 +44,9 @@ var listEditorTester = function(){
             options: {
                 recordType: "users"
             }
-        }
+        },
+        uispec: testUISpec,
+        recordType: "users/records.json"
     };
     
     var bareListEditorTest = new jqUnit.TestCase("ListEditor Tests", function () {
@@ -64,7 +66,7 @@ var listEditorTester = function(){
                 callback(listEditor);
             }
         });
-        listEditor = cspace.listEditor(".csc-users-userAdmin", "users/records.json", testUISpec, testOpts);
+        listEditor = cspace.listEditor(".csc-users-userAdmin", testOpts);
         stop();
     };
     

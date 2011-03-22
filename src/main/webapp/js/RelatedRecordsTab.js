@@ -118,15 +118,8 @@ cspace = cspace || {};
         };
     };
     
-    fluid.demands("relationManager", "cspace.relatedRecordsTab", 
-        ["{relatedRecordsTab}.container", fluid.COMPONENT_OPTIONS]);
-    fluid.demands("togglable", "cspace.relatedRecordsTab", 
-        ["{relatedRecordsTab}.container", fluid.COMPONENT_OPTIONS]);
-    fluid.demands("listEditor", "cspace.relatedRecordsTab", 
-        ["{relatedRecordsTab}.container", "{relatedRecordsTab}.related",
-         "{relatedRecordsTab}.options.uispec", fluid.COMPONENT_OPTIONS]);
-    
     fluid.defaults("cspace.relatedRecordsTab", {
+        gradeNames: ["fluid.rendererComponent"],
         components: {
             relationManager: {
                 type: "cspace.relationManager",
@@ -207,8 +200,5 @@ cspace = cspace || {};
             "goTo": "%webapp/html/%related.html?csid=%csid"
         })
     });
-    
-    fluid.demands("relatedRecordsTab", "cspace.pageBuilder", 
-        ["{pageBuilder}.options.selectors.relatedRecordsTab", fluid.COMPONENT_OPTIONS]);
     
 })(jQuery, fluid);

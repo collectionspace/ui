@@ -210,13 +210,8 @@ cspace = cspace || {};
         bindEventHandlers(that);
     };
     
-    /**
-     * Repeatable is a markup generating component. If it does not find things in the markup that are specified 
-     * in the default selectors, it generates nodes appropriately and puts the default selector classes into the markup.
-     *  
-     */
-    cspace.repeatable = function (container, options) {        
-        var that = fluid.initView("cspace.repeatable", container, options);
+    var makeRepeatable = function (container, options) {
+        var that = fluid.initView("cspace.makeRepeatable", container, options);
         
         that.applier = that.options.applier;
         that.model = that.options.model;
@@ -229,7 +224,7 @@ cspace = cspace || {};
         that.options.rendererOptions.cutpoints.push({id: "repeat:", selector: that.options.selectors.repeat});
         // A "temporary container" for rendering additional rows. This is currently a more stable strategy than
         // using renderer template juggling to render partial templates.
-        that.tempContainer = cspace.repeatable.cleanseClone(that.container);
+        that.tempContainer = cspace.makeRepeatable.cleanseClone(that.container);
         
         that.refreshView = function () {
             renderPage(that);
@@ -244,8 +239,32 @@ cspace = cspace || {};
         return that;
     };
     
+    var isListOrTable = function (elem) {
+        return $(elem).is("ul, ol, table");
+    };
+    
+    /**
+     * Repeatable is a markup generating component. If it does not find things in the markup that are specified 
+     * in the default selectors, it generates nodes appropriately and puts the default selector classes into the markup.
+     *  
+     */
+    cspace.makeRepeatable = function (container, options) {
+        container = $(container);
+        container.addClass("csc-repeatable-repeat");
+        if (container.is("tr") || container.is("li")) {
+            container = fluid.findAncestor(container, isListOrTable);
+            container = $(container);
+            $("thead tr", container).addClass("csc-repeatable-headerRow");
+        }
+        container.wrap("<div />");
+        
+        return makeRepeatable(container.parent("div"), options);
+    };
+    
+    cspace.repeatable = makeRepeatable;
+    
     // Remove id attributes from a cloned tree    
-    cspace.repeatable.cleanseClone = function (toClone) {
+    cspace.makeRepeatable.cleanseClone = function (toClone) {
         var node = toClone.clone();
         fluid.dom.iterateDom(node.get(0), function (node) {
             node.removeAttribute("id");
@@ -253,7 +272,7 @@ cspace = cspace || {};
         return node.removeAttr("id").hide().insertAfter(toClone);
     };
     
-    cspace.repeatable.generateMarkup = function (that) {
+    cspace.makeRepeatable.generateMarkup = function (that) {
         // Check for the add button and generate it if required 
         if (that.locate("add").length === 0) {
             var button = $(that.options.markup.addControl);
@@ -279,7 +298,8 @@ cspace = cspace || {};
         addPrimaryAndDelete(that, node);        
     };
     
-    fluid.defaults("cspace.repeatable", {
+    fluid.defaults("cspace.makeRepeatable", {
+        gradeNames: ["fluid.viewComponent"],
         selectors: {
             add: ".csc-repeatable-add",
             remove: ".csc-repeatable-delete",
@@ -315,58 +335,17 @@ cspace = cspace || {};
             "rendererOptions.instantiator": "nomerge",
             "rendererOptions.parentComponent": "nomerge"
         },
-        applier: "{recordEditor}.options.applier",      // Applier for the main record that cspace.repeatable belongs to. REQUIRED
-        model: "{recordEditor}.model",        // Model for the main record that cspace.repeatable belongs to. REQUIRED
+        applier: null,      // Applier for the main record that cspace.repeatable belongs to. REQUIRED
+        model: {},        // Model for the main record that cspace.repeatable belongs to. REQUIRED
         elPath: "items",    // Path into the model that points to the collection of fields to be repeated - it should reference an array.
         protoTree: {},      // A dehydrated tree that will be expanded by the expander and rendered in the component's refreshView.
         rendererOptions: {
             autoBind: true,
             instantiator: "{instantiator}",
-            parentComponent: "{repeatable}"
+            parentComponent: "{makeRepeatable}"
         },
-        generateMarkup: "cspace.repeatable.generateMarkup"
+        generateMarkup: "cspace.makeRepeatable.generateMarkup",
+        prepareMarkup: true
     });
-    
-     
-    var isListOrTable = function (elem) {
-        return $(elem).is("ul, ol, table");
-    };
-     
-    /**
-     * Convenience function to wrap the repeatable element in a suitable container div
-     * @element a jqueryable selector
-     */
-    cspace.makeRepeatable = function (element, options) {
-        var that = fluid.initLittleComponent("cspace.makeRepeatable");
-        element = $(element);
-        element.addClass("csc-repeatable-repeat");
-        
-        if (element.is("tr") || element.is("li")) {
-            element = fluid.findAncestor(element, isListOrTable);
-            element = $(element);
-            $("thead tr", element).addClass("csc-repeatable-headerRow");
-        }
-        
-        element.wrap("<div />");
-        that.repeatableContainer = element.parent("div");
-        
-        that.options.components = {
-            repeatable: {
-                type: "cspace.repeatable",
-                options: options.value || options
-            }
-        };
-        fluid.initDependent(that, "repeatable", that.options.instantiator);
-        return that.repeatable;
-    };
-    fluid.defaults("cspace.makeRepeatable", {
-        mergePolicy: {
-            instantiator: "nomerge"
-        },
-        instantiator: "{instantiator}"
-    });
-    fluid.demands("repeatable", "cspace.makeRepeatable", ["{makeRepeatable}.repeatableContainer", fluid.COMPONENT_OPTIONS]);
-    
-    fluid.demands("cspace.makeRepeatable", "cspace.recordEditor", ["@0", fluid.COMPONENT_OPTIONS]);
 
 })(jQuery, fluid);

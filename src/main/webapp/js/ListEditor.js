@@ -73,9 +73,6 @@ cspace = cspace || {};
         that.events.pageReady.fire(that);
     };
     
-    fluid.demands("details", "cspace.listEditor", ["{listEditor}.dom.details", fluid.COMPONENT_OPTIONS]);
-    fluid.demands("list", "cspace.listEditor", ["{listEditor}.dom.list", fluid.COMPONENT_OPTIONS]);
-    
     /**
      * 
      * @param {Object} container
@@ -83,11 +80,11 @@ cspace = cspace || {};
      * @param {Object} uispec
      * @param {Object} options
      */
-    cspace.listEditor = function (container, recordType, uispec, options) {
+    cspace.listEditor = function (container, options) {
         var that = fluid.initView("cspace.listEditor", container, options);
         fluid.initDependents(that);
-        that.recordType = recordType;
-        that.uispec = uispec;
+        that.recordType = that.options.recordType;
+        that.uispec = that.options.uispec;
         that.model = {
             list: [],
             details: {}
@@ -218,6 +215,7 @@ cspace = cspace || {};
     };
 
     fluid.defaults("cspace.listEditor", {
+        gradeNames: ["fluid.viewComponent"],
         list: {
             type: "cspace.recordList",
             options: {}

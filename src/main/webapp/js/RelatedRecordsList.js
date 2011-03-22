@@ -19,8 +19,6 @@ cspace = cspace || {};
     
     var addModelChangeListener = function (that, recordTypes, applier, recordList, recordType, related) {
         applier.modelChanged.addListener("relations." + recordType, function (model) {
-//            recordList.applier.requestChange("items", cspace.relatedRecordsList.buildRelationsList(recordTypes, model.relations, related));
-//            recordList.refreshView();
             var instantiator = that.options.instantiator;
             that.renderer.refreshView();
             fluid.each(that.options.components, function (component, name) {
@@ -71,24 +69,9 @@ cspace = cspace || {};
             }
         };
     };
-    
-    fluid.demands("cspace.recordList", "cspace.relatedRecordsList", ["{relatedRecordsList}.dom.recordListSelector", fluid.COMPONENT_OPTIONS, {
-        model: {
-            selectionIndex: -1,
-            items: {
-                expander: {
-                    type: "fluid.deferredInvokeCall",
-                    func: "cspace.relatedRecordsList.buildRelationsList",
-                    args: ["{recordTypes}", "{relatedRecordsList}.model.relations", "{relatedRecordsList}.options.related"]
-                }
-            }
-        }
-    }]);
-    
-    fluid.demands("cspace.relationManager", "cspace.relatedRecordsList", ["{relatedRecordsList}.container", fluid.COMPONENT_OPTIONS]);
-    fluid.demands("togglableRelated", "cspace.relatedRecordsList", ["{relatedRecordsList}.container", fluid.COMPONENT_OPTIONS]);
 
     fluid.defaults("cspace.relatedRecordsList", {
+        gradeNames: ["fluid.rendererComponent"],
         mergePolicy: {
             model: "preserve",
             applier: "nomerge",

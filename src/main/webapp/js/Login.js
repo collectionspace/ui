@@ -225,7 +225,7 @@ cspace = cspace || {};
     };
 
     fluid.defaults("cspace.login", {
-        
+        gradeNames: ["fluid.viewComponent"],
         events: {
             emailSubmitted: null,
             passwordSubmitted: null,
@@ -274,7 +274,4 @@ cspace = cspace || {};
        
         baseUrl: "../../chain/"
     });
-    
-    fluid.demands("login", "cspace.pageBuilder", ["{pageBuilder}.options.selectors.login", fluid.COMPONENT_OPTIONS]);
-    
 })(jQuery, fluid);

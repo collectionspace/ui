@@ -138,6 +138,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.createNew", {
+        gradeNames: ["fluid.rendererComponent"],
         parentBundle: "{globalBundle}",
         model: {
             categories: [{
@@ -232,16 +233,6 @@ cspace = cspace || {};
             })
         }
     });
-    
-    fluid.demands("createRecord", ["cspace.pageBuilder", "cspace.localData"], {
-        funcName: "cspace.createNew.createRecordLocal",
-        args: ["{createNew}"]
-    });
-    fluid.demands("createRecord", "cspace.pageBuilder", {
-        funcName: "cspace.createNew.createRecord",
-        args: ["{createNew}"]
-    });
-    fluid.demands("createNew", "cspace.pageBuilder", ["{pageBuilder}.options.selectors.createNew", fluid.COMPONENT_OPTIONS]);
     
     // This funtction executes on file load and starts the fetch process of component's template.
     fluid.fetchResources.primeCacheFromResources("cspace.createNew");

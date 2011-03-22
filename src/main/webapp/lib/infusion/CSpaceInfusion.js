@@ -7349,7 +7349,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global console, window, fluid:true, fluid_1_4:true, jQuery, opera, YAHOO*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 var fluid = fluid || fluid_1_4;
@@ -7375,22 +7375,26 @@ var fluid = fluid || fluid_1_4;
         fluid.log(message.message ? message.message : message);
         if (softFailure[0]) {
             throw new Error(message);
-        }
-        else {
+        } else {
             message.fail(); // Intentionally cause a browser error by invoking a nonexistent function.
         }
     };
     
-    fluid.pushSoftFailure = function(condition) {
-        if (typeof(condition) === "boolean") {
+    fluid.pushSoftFailure = function (condition) {
+        if (typeof (condition) === "boolean") {
             softFailure.unshift(condition);
-        }
-        else if (condition === -1) {
+        } else if (condition === -1) {
             softFailure.shift();
         }
     };
-    
+
     // Logging
+        
+    /** Returns whether logging is enabled **/
+    fluid.isLogging = function() {
+        return logging;
+    };
+
     var logging;
     /** method to allow user to enable logging (off by default) */
     fluid.setLogging = function (enabled) {
@@ -7409,17 +7413,15 @@ var fluid = fluid || fluid_1_4;
     fluid.log = function (str) {
         if (logging) {
             str = fluid.renderTimestamp(new Date()) + ":  " + str;
-            if (typeof(console) !== "undefined") {
+            if (typeof (console) !== "undefined") {
                 if (console.debug) {
                     console.debug(str);
                 } else {
                     console.log(str);
                 }
-            }
-            else if (typeof(YAHOO) !== "undefined") {
+            } else if (typeof (YAHOO) !== "undefined") {
                 YAHOO.log(str);
-            }
-            else if (typeof(opera) !== "undefined") {
+            } else if (typeof (opera) !== "undefined") {
                 opera.postError(str);
             }
         }
@@ -7472,20 +7474,20 @@ var fluid = fluid || fluid_1_4;
 
     
     /** Returns true if the argument is a value other than null or undefined **/
-    fluid.isValue = function(value) {
+    fluid.isValue = function (value) {
         return value !== undefined && value !== null;
     };
     
     /** Returns true if the argument is a primitive type **/
     fluid.isPrimitive = function (value) {
-        var valueType = typeof(value);
+        var valueType = typeof (value);
         return !value || valueType === "string" || valueType === "boolean" || valueType === "number" || valueType === "function";
     };
     
     fluid.isDOMNode = function (obj) {
       // This could be more sound, but messy: 
       // http://stackoverflow.com/questions/384286/javascript-isdom-how-do-you-check-if-a-javascript-object-is-a-dom-object
-        return obj && typeof(obj.nodeType) === "number";  
+        return obj && typeof (obj.nodeType) === "number";  
     };
     
     /** Determines whether the supplied object can be treated as an array, by 
@@ -7494,7 +7496,7 @@ var fluid = fluid || fluid_1_4;
      * which are themselves of primitive types (in particular functions and strings)
      */
     fluid.isArrayable = function (totest) {
-        return totest && !fluid.isPrimitive(totest) && typeof(totest.length) === "number";
+        return totest && !fluid.isPrimitive(totest) && typeof (totest.length) === "number";
     };
     
             
@@ -7502,8 +7504,7 @@ var fluid = fluid || fluid_1_4;
     fluid.makeArray = function (arg) {
         if (arg === null || arg === undefined) {
             return [];
-        }
-        else {
+        } else {
             return $.makeArray(arg);
         }
     };
@@ -7534,8 +7535,7 @@ var fluid = fluid || fluid_1_4;
             for (var i = 0; i < source.length; ++i) {
                 transformInternal(source, togo, i, arguments);
             }
-        }
-        else {
+        } else {
             for (var key in source) {
                 transformInternal(source, togo, key, arguments);
             }
@@ -7554,8 +7554,7 @@ var fluid = fluid || fluid_1_4;
             for (var i = 0; i < source.length; ++i) {
                 func(source[i], i);
             }
-        }
-        else {
+        } else {
             for (var key in source) {
                 func(source[key], key);
             }
@@ -7581,8 +7580,7 @@ var fluid = fluid || fluid_1_4;
                     return disp;
                 }
             }
-        }
-        else {
+        } else {
             for (var key in source) {
                 disp = func(source[key], key);
                 if (disp !== undefined) {
@@ -7627,8 +7625,7 @@ var fluid = fluid || fluid_1_4;
                     --i;
                 }
             }
-        }
-        else {
+        } else {
             for (var key in source) {
                 if (fn(source[key], key)) {
                     delete source[key];
@@ -7638,13 +7635,24 @@ var fluid = fluid || fluid_1_4;
         return source;
     };
     
-    fluid.filterKeys = function(toFilter, keys, exclude) {
-        return fluid.remove_if($.extend({}, toFilter), function(value, key) {
+    /** Accepts an object to be filtered, and a list of keys. Either all keys not present in
+     * the list are removed, or only keys present in the list are returned.
+     * @param toFilter {Array|Object} The object to be filtered - this will be modified by the operation
+     * @param keys {Array of String} The list of keys to operate with
+     * @param exclude {boolean} If <code>true</code>, the keys listed are removed rather than included
+     * @return the filtered object (the same object that was supplied as <code>toFilter</code>
+     */
+    
+    fluid.filterKeys = function (toFilter, keys, exclude) {
+        return fluid.remove_if($.extend({}, toFilter), function (value, key) {
             return exclude ^ ($.inArray(key, keys) === -1);
         });
     };
     
-    fluid.censorKeys = function(toCensor, keys) {
+    /** A convenience wrapper for <code>fluid.filterKeys</code> with the parameter <code>exclude</code> set to <code>true</code>
+     *  Returns the supplied object with listed keys removed */
+
+    fluid.censorKeys = function (toCensor, keys) {
         return fluid.filterKeys(toCensor, keys, true);
     };
     
@@ -7678,8 +7686,7 @@ var fluid = fluid || fluid_1_4;
     fluid.clear = function (target) {
         if (target instanceof Array) {
             target.length = 0;
-        }
-        else {
+        } else {
             for (var i in target) {
                 delete target[i];
             }
@@ -7707,7 +7714,7 @@ var fluid = fluid || fluid_1_4;
      * 2nd argument to detect any marker
      */
     fluid.isMarker = function (totest, type) {
-        if (!totest || typeof(totest) !== 'object' || totest.type !== "fluid.marker") {
+        if (!totest || typeof (totest) !== 'object' || totest.type !== "fluid.marker") {
             return false;
         }
         if (!type) {
@@ -7729,8 +7736,8 @@ var fluid = fluid || fluid_1_4;
      * path segments containing periods and backslashes etc. can be processed, and be harmonised
      * with the more complex implementations in fluid.pathUtil(data binding).
      */
-    fluid.model.parseEL = function(EL) {
-        return EL === ""? [] : String(EL).split('.');
+    fluid.model.parseEL = function (EL) {
+        return EL === "" ? [] : String(EL).split('.');
     };
     
     /** Compose an EL expression from two separate EL expressions. The returned 
@@ -7751,11 +7758,11 @@ var fluid = fluid || fluid_1_4;
     fluid.path = fluid.model.composeSegments;
 
     /** Standard strategies for resolving path segments **/
-    fluid.model.environmentStrategy = function(initEnvironment) {
+    fluid.model.environmentStrategy = function (initEnvironment) {
         return {
-            init: function() {
+            init: function () {
                 var environment = initEnvironment;
-                return function(root, segment, index) {
+                return function (root, segment, index) {
                     var togo;
                     if (environment && environment[segment]) {
                         togo = environment[segment];
@@ -7775,7 +7782,7 @@ var fluid = fluid || fluid_1_4;
     };
     
     fluid.model.defaultFetchStrategy = function (root, segment) {
-        return segment === ""? root : root[segment];
+        return segment === "" ? root : root[segment];
     };
         
     fluid.model.funcResolverStrategy = function (root, segment) {
@@ -7785,29 +7792,28 @@ var fluid = fluid || fluid_1_4;
     };
     
     // unsupported, NON-API function
-    fluid.model.applyStrategy = function(strategy, root, segment, index) {
-        if (typeof(strategy) === "function") { 
+    fluid.model.applyStrategy = function (strategy, root, segment, index) {
+        if (typeof (strategy) === "function") { 
             return strategy(root, segment, index);
-        }
-        else if (strategy && strategy.next) {
+        } else if (strategy && strategy.next) {
             return strategy.next(root, segment, index);
         }
     };
     
-    fluid.model.initStrategy = function(baseStrategy, index, oldStrategies) {
-        return baseStrategy.init? baseStrategy.init(oldStrategies? oldStrategies[index] : undefined) : baseStrategy;
+    fluid.model.initStrategy = function (baseStrategy, index, oldStrategies) {
+        return baseStrategy.init ? baseStrategy.init(oldStrategies ? oldStrategies[index] : undefined) : baseStrategy;
     };
     
     // unsupported, NON-API function
-    fluid.model.makeTrundler = function(root, config, oldStrategies) {
+    fluid.model.makeTrundler = function (root, config, oldStrategies) {
         var that = {
             root: root,
-            strategies: fluid.isArrayable(config)? config : 
+            strategies: fluid.isArrayable(config) ? config : 
                 fluid.transform(config.strategies, function (strategy, index) {
                     return fluid.model.initStrategy(strategy, index, oldStrategies); 
                 })
         };
-        that.trundle = function(EL, uncess) {
+        that.trundle = function (EL, uncess) {
             uncess = uncess || 0;
             var newThat = fluid.model.makeTrundler(that.root, config, that.strategies);
             newThat.segs = fluid.model.parseEL(EL);
@@ -7847,11 +7853,10 @@ var fluid = fluid || fluid_1_4;
     
     // unsupported, NON-API function
     // core trundling recursion point
-    fluid.model.trundleImpl = function(trundler, EL, config, uncess) {
-        if (typeof(EL) === "string") {
+    fluid.model.trundleImpl = function (trundler, EL, config, uncess) {
+        if (typeof (EL) === "string") {
             trundler = trundler.trundle(EL, uncess);
-        }
-        else {
+        } else {
             var key = EL.type || "default";
             var resolver = config.resolvers[key];
             if (!resolver) {
@@ -7867,7 +7872,7 @@ var fluid = fluid || fluid_1_4;
     
     // unsupported, NON-API function
     // entry point for initially unbased trundling
-    fluid.model.trundle = function(root, EL, config, uncess) {
+    fluid.model.trundle = function (root, EL, config, uncess) {
         EL = EL || "";
         config = config || fluid.model.defaultGetConfig;
         var trundler = fluid.model.makeTrundler(root, config);
@@ -7954,10 +7959,9 @@ var fluid = fluid || fluid_1_4;
     fluid.registerNamespace("fluid.event");
     
     fluid.event.addListenerToFirer = function (firer, value, namespace) {
-        if (typeof(value) === "function") {
+        if (typeof (value) === "function") {
             firer.addListener(value, namespace);
-        }
-        else if (value && typeof(value) === "object") {
+        } else if (value && typeof (value) === "object") {
             firer.addListener(value.listener, namespace, value.predicate, value.priority);
         }
     };
@@ -7967,28 +7971,56 @@ var fluid = fluid || fluid_1_4;
      * @param {Object} events a collection of named event firers
      * @param {Object} listeners optional listeners to add
      */
-    fluid.mergeListeners = function (events, listeners) {
+    fluid.mergeListeners = function (that, events, listeners) {
         fluid.each(listeners, function (value, key) {
-            var keydot = key.indexOf(".");
-            var namespace;
-            if (keydot !== -1) {
-                namespace = key.substring(keydot + 1);
-                key = key.substring(0, keydot);
+            var firer, namespace;
+            if (key.charAt(0) === "{") {
+                if (!fluid.expandOptions) {
+                    fluid.fail("fluid.expandOptions could not be loaded - please include FluidIoC.js in order to operate IoC-driven event with descriptor " + 
+                        key);
+                }
+                firer = fluid.expandOptions(key, that);
+            } else {
+                var keydot = key.indexOf(".");
+            
+                if (keydot !== -1) {
+                    namespace = key.substring(keydot + 1);
+                    key = key.substring(0, keydot);
+                }
+                if (!events[key]) {
+                    events[key] = fluid.event.getEventFirer();
+                }
+                firer = events[key];
             }
-            if (!events[key]) {
-                events[key] = fluid.event.getEventFirer();
-            }
-            var firer = events[key];
             if (fluid.isArrayable(value)) {
                 for (var i = 0; i < value.length; ++i) {
                     fluid.event.addListenerToFirer(firer, value[i], namespace); 
                 }
-            }
-            else {
+            } else {
                 fluid.event.addListenerToFirer(firer, value, namespace);
             } 
         });
     };
+    
+    function initEvents(that, events, pass) {
+        fluid.each(events, function (eventSpec, eventKey) { 
+            var isIoCEvent = eventSpec && (typeof (eventSpec) !== "string" || eventSpec.charAt(0) === "{");
+            var event;
+            if (isIoCEvent && pass === "IoC") {
+                if (!fluid.event.resolveEvent) {
+                    fluid.fail("fluid.event.resolveEvent could not be loaded - please include FluidIoC.js in order to operate IoC-driven event with descriptor " + 
+                        JSON.stringify(eventSpec));
+                } else {
+                    event = fluid.event.resolveEvent(that, eventKey, eventSpec);
+                }
+            } else if (pass === "flat") {
+                event = fluid.event.getEventFirer(eventSpec === "unicast", eventSpec === "preventable");
+            }
+            if (event) {
+                that.events[eventKey] = event;
+            } 
+        });
+    }
     
     /**
      * Sets up a component's declared events.
@@ -8003,13 +8035,12 @@ var fluid = fluid || fluid_1_4;
      */
     fluid.instantiateFirers = function (that, options) {
         that.events = {};
-        if (options.events) {
-            for (var event in options.events) {
-                var eventType = options.events[event];
-                that.events[event] = fluid.event.getEventFirer(eventType === "unicast", eventType === "preventable");
-            }
-        }
-        fluid.mergeListeners(that.events, options.listeners);
+        // TODO: manual 2-phase instantiation since we have no GINGER WORLD
+        initEvents(that, options.events, "flat"); 
+        initEvents(that, options.events, "IoC");
+        // TODO: manually expand these late so that members attached to ourselves with preInitFunction can be detected
+        var listeners = fluid.expandOptions? fluid.expandOptions(options.listeners, that) : options.listeners;
+        fluid.mergeListeners(that, that.events, listeners);
     };
     
         
@@ -8021,9 +8052,9 @@ var fluid = fluid || fluid_1_4;
     
     var defaultsStore = {};
         
-    var resolveGradesImpl = function(gs, gradeNames) {
+    var resolveGradesImpl = function (gs, gradeNames) {
         gradeNames = fluid.makeArray(gradeNames);
-        fluid.each(gradeNames, function(gradeName) {
+        fluid.each(gradeNames, function (gradeName) {
             var options = fluid.rawDefaults(gradeName);
             if (!options) {
                 return;
@@ -8031,7 +8062,7 @@ var fluid = fluid || fluid_1_4;
             gs.gradeHash[gradeName] = true;
             gs.gradeChain.push(gradeName);
             gs.optionsChain.push(options);
-            fluid.each(options.gradeNames, function(parent) {
+            fluid.each(options.gradeNames, function (parent) {
                 if (!gs.gradeHash[parent]) {
                     resolveGradesImpl(gs, parent);
                 }
@@ -8040,7 +8071,7 @@ var fluid = fluid || fluid_1_4;
         return gs;
     };
     
-    fluid.resolveGrade = function(gradeNames) {
+    fluid.resolveGradeStructure = function (gradeNames) {
         var gradeStruct = {
             gradeChain: [],
             gradeHash: {},
@@ -8048,30 +8079,38 @@ var fluid = fluid || fluid_1_4;
         };
         return resolveGradesImpl(gradeStruct, gradeNames);
     };
-
-    fluid.resolveGradedOptions = function(componentName) {
-        var defaults = fluid.rawDefaults(componentName);
-        if (!defaults) {
-            return defaults;
-        }
+    
+    fluid.resolveGrade = function (defaults, gradeNames) {
         var mergeArgs = [defaults];
-        var gradeNames = defaults.gradeNames;
         if (gradeNames) {
-            var gradeStruct = fluid.resolveGrade(gradeNames);
+            var gradeStruct = fluid.resolveGradeStructure(gradeNames);
             mergeArgs = gradeStruct.optionsChain.reverse().concat(mergeArgs);
         }
         mergeArgs = [{}, {}].concat(mergeArgs);
         var mergedDefaults = fluid.merge.apply(null, mergeArgs);
-        return mergedDefaults;
+        return mergedDefaults;      
+    };
+
+    fluid.resolveGradedOptions = function (componentName) {
+        var defaults = fluid.rawDefaults(componentName);
+        if (!defaults) {
+            return defaults;
+        } else {
+            return fluid.resolveGrade(defaults, defaults.gradeNames);
+        }
     };
     
-    fluid.rawDefaults = function(componentName, options) {
+    fluid.rawDefaults = function (componentName, options) {
         if (options === undefined) {
             return defaultsStore[componentName];
-        }
-        else {
+        } else {
             defaultsStore[componentName] = options;
         }
+    };
+    
+        
+    fluid.hasGrade = function (options, gradeName) {
+        return !options || !options.gradeNames ? false : $.inArray(gradeName, options.gradeNames) !== -1;
     };
     
      /**
@@ -8089,24 +8128,23 @@ var fluid = fluid || fluid_1_4;
         if (typeof arguments[0] === "boolean") {
             offset = 1;
         }
-        var componentName = (offset === 0? "" : "*.global-") + arguments[offset];
+        var componentName = (offset === 0 ? "" : "*.global-") + arguments[offset];
         var options = arguments[offset + 1];
         if (options === undefined) {
             return fluid.resolveGradedOptions(componentName);
-        }
-        else {
+        } else {
             fluid.rawDefaults(componentName, options);
-            if (options && options.gradeNames && $.inArray("autoInit", options.gradeNames) !== -1) {
+            if (fluid.hasGrade(options, "autoInit")) {
                 fluid.makeComponent(componentName, fluid.resolveGradedOptions(componentName));
             }
         }
     };
     
-    fluid.makeComponent = function(componentName, options) {
+    fluid.makeComponent = function (componentName, options) {
         if (!options.initFunction) {
             fluid.fail("Cannot autoInit component " + componentName + " which does not have an initFunction defined");
         }
-        fluid.setGlobalValue(componentName, function() {
+        fluid.setGlobalValue(componentName, function () {
             return fluid.initComponent(componentName, arguments);
         });
     };
@@ -8115,6 +8153,13 @@ var fluid = fluid || fluid_1_4;
         initFunction: "fluid.initLittleComponent",
         argumentMap: {
             options: 0
+        }
+    });
+    
+    fluid.defaults("fluid.eventedComponent", {
+        gradeNames: ["fluid.littleComponent"],
+        mergePolicy: {
+            listeners: "noexpand"
         }
     });
     
@@ -8130,7 +8175,7 @@ var fluid = fluid || fluid_1_4;
     });
     
     fluid.defaults("fluid.viewComponent", {
-        gradeNames: ["fluid.littleComponent", "fluid.modelComponent"],
+        gradeNames: ["fluid.littleComponent", "fluid.modelComponent", "fluid.eventedComponent"],
         initFunction: "fluid.initView",
         argumentMap: {
             container: 0,
@@ -8138,12 +8183,11 @@ var fluid = fluid || fluid_1_4;
         }
     });
     
-    fluid.guardCircularity = function(seenIds, source, message1, message2) {
+    fluid.guardCircularity = function (seenIds, source, message1, message2) {
         if (source && source.id) {
             if (!seenIds[source.id]) {
                 seenIds[source.id] = source;
-            }
-            else if (seenIds[source.id] === source) {
+            } else if (seenIds[source.id] === source) {
                 fluid.fail("Circularity in options " + message1 + " - component with typename " + source.typeName + " and id " + source.id 
                     + " has already been seen" + message2);  
             }
@@ -8151,11 +8195,11 @@ var fluid = fluid || fluid_1_4;
     };
                 
     fluid.mergePolicyIs = function (policy, test) {
-        return typeof(policy) === "string" && $.inArray(test, policy.split(/\s*,\s*/)) !== -1;
+        return typeof (policy) === "string" && $.inArray(test, policy.split(/\s*,\s*/)) !== -1;
     };
     
     function mergeImpl(policy, basePath, target, source, thisPolicy, rec) {
-        if (typeof(thisPolicy) === "function") {
+        if (typeof (thisPolicy) === "function") {
             thisPolicy.apply(null, target, source);
             return target;
         }
@@ -8166,7 +8210,7 @@ var fluid = fluid || fluid_1_4;
       
         for (var name in source) {
             var path = (basePath ? basePath + "." : "") + name;
-            var newPolicy = policy && typeof(policy) !== "string" ? policy[path] : policy;
+            var newPolicy = policy && typeof (policy) !== "string" ? policy[path] : policy;
             var thisTarget = target[name];
             var thisSource = source[name];
             var primitiveTarget = fluid.isPrimitive(thisTarget);
@@ -8179,12 +8223,10 @@ var fluid = fluid || fluid_1_4;
                         target[name] = thisTarget = thisSource instanceof Array ? [] : {};
                     }
                     mergeImpl(policy, path, thisTarget, thisSource, newPolicy, rec);
-                }
-                else {
-                    if (typeof(newPolicy) === "function") {
+                } else {
+                    if (typeof (newPolicy) === "function") {
                         newPolicy.call(null, target, source, name);
-                    }
-                    else if (!fluid.isValue(thisTarget) || !fluid.mergePolicyIs(newPolicy, "reverse")) {
+                    } else if (!fluid.isValue(thisTarget) || !fluid.mergePolicyIs(newPolicy, "reverse")) {
                         // TODO: When "grades" are implemented, grandfather in any paired applier to perform these operations
                         // NB: mergePolicy of "preserve" now creates dependency on DataBinding.js
                         target[name] = fluid.isValue(thisTarget) && fluid.mergePolicyIs(newPolicy, "preserve") ? fluid.model.mergeModel(thisTarget, thisSource) : thisSource;
@@ -8219,10 +8261,10 @@ var fluid = fluid || fluid_1_4;
                 mergeImpl(policy, path, target, source, policy ? policy[""] : null, {seenIds: {}});
             }
         }
-        if (policy && typeof(policy) !== "string") {
+        if (policy && typeof (policy) !== "string") {
             for (var key in policy) {
                 var elrh = policy[key];
-                if (typeof(elrh) === "string" && elrh !== "replace" && elrh !== "preserve") {
+                if (typeof (elrh) === "string" && elrh !== "replace" && elrh !== "preserve") {
                     var oldValue = fluid.get(target, key);
                     if (oldValue === null || oldValue === undefined) {
                         var value = fluid.get(target, elrh);
@@ -8246,13 +8288,12 @@ var fluid = fluid || fluid_1_4;
      */
     fluid.mergeComponentOptions = function (that, componentName, userOptions) {
         var defaults = fluid.defaults(componentName);
-        var mergePolicy = $.extend({}, defaults? defaults.mergePolicy : {});
+        var mergePolicy = $.extend({}, defaults ? defaults.mergePolicy : {});
         var mergeArgs = [mergePolicy, {}];
         var extraArgs;
         if (fluid.expandComponentOptions) {
             extraArgs = fluid.expandComponentOptions(defaults, userOptions, that);
-        }
-        else {
+        } else {
             extraArgs = [defaults, userOptions];
         }
         mergeArgs = mergeArgs.concat(extraArgs);
@@ -8265,6 +8306,9 @@ var fluid = fluid || fluid_1_4;
      * where it is found, it is replaced in the actual argument position supplied
      * to the specific subcomponent instance, with the particular options block
      * for that instance attached to the overall "that" object.
+     * NOTE: The use of this marker has been deprecated as of the Fluid 1.4 release in 
+     * favour of the contextual EL path "{options}" - it will be removed in a future
+     * release of the framework.
      */
     fluid.COMPONENT_OPTIONS = {type: "fluid.marker", value: "COMPONENT_OPTIONS"};
     
@@ -8293,7 +8337,7 @@ var fluid = fluid || fluid_1_4;
     /** Create a "type tag" component with no state but simply a type name and id. The most 
      *  minimal form of Fluid component */
        
-    fluid.typeTag = function(name) {
+    fluid.typeTag = function (name) {
         return {
             typeName: name,
             id: fluid.allocateGuid()
@@ -8308,41 +8352,48 @@ var fluid = fluid || fluid_1_4;
      * @param {Object} name the name of the little component to create
      * @param {Object} options user-supplied options to merge with the defaults
      */
-    fluid.initLittleComponent = function (name, options) {
+    // NOTE: the 3rd argument localOptions is NOT to be advertised as part of the stable API, it is present
+    // just to allow backward compatibility whilst grade specifications are not mandatory
+    fluid.initLittleComponent = function (name, options, localOptions) {
         var that = fluid.typeTag(name);
         // TODO: nickName must be available earlier than other merged options so that component may resolve to itself
-        that.nickName = options && options.nickName? options.nickName : fluid.computeNickName(that.typeName);
+        that.nickName = options && options.nickName ? options.nickName : fluid.computeNickName(that.typeName);
         fluid.mergeComponentOptions(that, name, options);
+        fluid.invokeLifecycleFunctions(that, "preInitFunction");
+        if (localOptions) {
+            localOptions = fluid.resolveGrade({}, localOptions.gradeNames);
+        }
+        if (fluid.hasGrade(that.options, "fluid.eventedComponent") || fluid.hasGrade(localOptions, "fluid.eventedComponent")) {
+            fluid.instantiateFirers(that, that.options);
+        } 
         return that;
     };
     
-    fluid.postInitModelComponent = function(that) {
+    fluid.postInitModelComponent = function (that) {
         that.model = that.options.model || {};
         that.applier = that.options.applier || fluid.makeChangeApplier(that.model, that.options.changeApplierOptions);
     };
     
-    fluid.invokeLifecycleFunction = function(that, func) {
-        if (typeof(func) === "string") {
+    fluid.invokeLifecycleFunction = function (that, func) {
+        if (typeof (func) === "string") {
             fluid.invokeGlobalFunction(func, [that]);
-        }
-        else if (typeof(func) === "function") {
+        } else if (typeof (func) === "function") {
             func.apply(null, [that]);
         }
     };
     
-    fluid.invokeLifecycleFunctions = function(that, element) {
+    fluid.invokeLifecycleFunctions = function (that, element) {
         var el = fluid.get(that, fluid.path("options", element));
         if (!fluid.isPrimitive(el)) {
-            fluid.each(el, function(elitem) {
+            fluid.each(el, function (elitem) {
                 fluid.invokeLifecycleFunction(that, elitem);
             });
-        }
-        else if (el) {
+        } else if (el) {
             fluid.invokeLifecycleFunction(that, el);
         }
     };
     
-    fluid.initComponent = function(componentName, initArgs) {
+    fluid.initComponent = function (componentName, initArgs) {
         var options = fluid.defaults(componentName);
         if (!options.gradeNames) {
             fluid.fail("Cannot initialise component " + componentName + " which has no gradeName registered");
@@ -8354,9 +8405,6 @@ var fluid = fluid || fluid_1_4;
             fluid.initDependents(that);
         }
         fluid.invokeLifecycleFunctions(that, "finalInitFunction");
-        if (that.options.finalInitFunction) {
-            fluid.invokeGlobalFunction(that.options.finalInitFunction, [that]);
-        }
         return that;
     };
 
@@ -8421,8 +8469,7 @@ var fluid = fluid || fluid_1_4;
                     if (preventable && ret === false) {
                         return false;
                     }
-                }
-                catch (e) {
+                } catch (e) {
                     fluid.log("FireEvent received exception " + e.message + " e " + e + " firing to listener " + i);
                     throw (e);       
                 }
@@ -8447,10 +8494,9 @@ var fluid = fluid || fluid_1_4;
             },
 
             removeListener: function (listener) {
-                if (typeof(listener) === 'string') {
+                if (typeof (listener) === 'string') {
                     delete listeners[listener];
-                }
-                else if (listener.$$guid) {
+                } else if (listener.$$guid) {
                     delete listeners[listener.$$guid];
                 }
                 sortedListeners = fluid.event.sortListeners(listeners);
@@ -8485,7 +8531,7 @@ var fluid = fluid || fluid_1_4;
         
         // Throw an exception if we've got more or less than one element.
         if (!container || !container.jquery || container.length !== 1) {
-            if (typeof(containerSpec) !== "string") {
+            if (typeof (containerSpec) !== "string") {
                 containerSpec = container.selector;
             }
             var count = container.length !== undefined ? container.length : 0;
@@ -8523,7 +8569,7 @@ var fluid = fluid || fluid_1_4;
             var selector, thisContainer, togo;
             
             selector = selectors[name];
-            thisContainer = localContainer? localContainer : container;
+            thisContainer = localContainer ? localContainer : container;
             if (!thisContainer) {
                 fluid.fail("DOM binder invoked for selector " + name + " without container");
             }
@@ -8532,7 +8578,7 @@ var fluid = fluid || fluid_1_4;
                 return thisContainer;
             }
 
-            if (typeof(selector) === "function") {
+            if (typeof (selector) === "function") {
                 togo = $(selector.call(null, fluid.unwrap(thisContainer)));
             } else {
                 togo = $(selector, thisContainer);
@@ -8551,7 +8597,7 @@ var fluid = fluid || fluid_1_4;
             return togo;
         };
         that.fastLocate = function (name, localContainer) {
-            var thisContainer = localContainer? localContainer : container;
+            var thisContainer = localContainer ? localContainer : container;
             var key = cacheKey(name, thisContainer);
             var togo = cache[key];
             return togo ? togo : that.locate(name, localContainer);
@@ -8560,7 +8606,7 @@ var fluid = fluid || fluid_1_4;
             cache = {};
         };
         that.refresh = function (names, localContainer) {
-            var thisContainer = localContainer? localContainer : container;
+            var thisContainer = localContainer ? localContainer : container;
             if (typeof names === "string") {
                 names = [names];
             }
@@ -8607,11 +8653,9 @@ var fluid = fluid || fluid_1_4;
         if (!container) {
             return null;
         }
-        var that = fluid.initLittleComponent(componentName, userOptions); 
+        var that = fluid.initLittleComponent(componentName, userOptions, {gradeNames: ["fluid.viewComponent"]}); 
         that.container = container;
         fluid.initDomBinder(that);
-        
-        fluid.instantiateFirers(that, that.options);
 
         return that;
     };
@@ -8619,15 +8663,14 @@ var fluid = fluid || fluid_1_4;
     
     fluid.initSubcomponentImpl = function (that, entry, args) {
         var togo;
-        if (typeof(entry) !== "function") {
-            var entryType = typeof(entry) === "string" ? entry : entry.type;
+        if (typeof (entry) !== "function") {
+            var entryType = typeof (entry) === "string" ? entry : entry.type;
             var globDef = fluid.defaults(true, entryType);
             fluid.merge("reverse", that.options, globDef);
             togo = entryType === "fluid.emptySubcomponent" ?
                 fluid.emptySubcomponent(entry.options) : 
                 fluid.invokeGlobalFunction(entryType, args);
-        }
-        else {
+        } else {
             togo = entry.apply(null, args);
         }
 
@@ -8635,7 +8678,7 @@ var fluid = fluid || fluid_1_4;
         if (returnedOptions) {
             fluid.merge(that.options.mergePolicy, that.options, returnedOptions);
             if (returnedOptions.listeners) {
-                fluid.mergeListeners(that.events, returnedOptions.listeners);
+                fluid.mergeListeners(that, that.events, returnedOptions.listeners);
             }
         }
         return togo;
@@ -8748,8 +8791,7 @@ var fluid = fluid || fluid_1_4;
                     " without this id - most likely the element has a name which conflicts with this id");
             }
             return el;
-        }
-        else {
+        } else {
             return null;
         }
     };
@@ -8808,8 +8850,7 @@ var fluid = fluid || fluid_1_4;
                 return fluid.find(that.options.parents, function (parent) {
                     return parent.lookup(messagecodes);
                 });
-            }
-            else {
+            } else {
                 return {template: resolved, resolveFunc: that.options.resolveFunc};
             }
         };
@@ -8879,7 +8920,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -8989,7 +9030,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery */
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -9099,7 +9140,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 fluid_1_4 = fluid_1_4 || {};
 
@@ -9224,7 +9265,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid:true, fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 var fluid = fluid || fluid_1_4;
@@ -9341,7 +9382,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -9949,7 +9990,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid:true, fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 var fluid = fluid || fluid_1_4;
@@ -10575,7 +10616,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -10708,7 +10749,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -10786,15 +10827,27 @@ var fluid_1_4 = fluid_1_4 || {};
             return atval;
         };
     }
+    
+    fluid.dumpThat = function(that) {
+        return "{ typeName: \"" + that.typeName + "\" id: " + that.id + "}";  
+    };
+    
+    fluid.dumpThatStack = function(thatStack) {
+        var togo = fluid.transform(thatStack, fluid.dumpThat);
+        return togo.join("\n");
+    };
 
-    function makeStackFetcher(instantiator, parentThat, localRecord) {
+    var localRecordExpected = /arguments|options|container/;
+
+    function makeStackFetcher(instantiator, parentThat, localRecord, expandOptions) {
+        expandOptions = expandOptions || {};
         var thatStack = instantiator.getFullStack(parentThat);
         var fetchStrategies = [fluid.model.funcResolverStrategy, makeGingerStrategy(thatStack)]; 
         var fetcher = function(parsed) {
             var context = parsed.context;
-            if (localRecord && localRecord[context]) {
+            if (localRecord && localRecordExpected.test(context)) {
                 var fetched = fluid.get(localRecord[context], parsed.path);
-                return context === "arguments"? fetched : {
+                return (context === "arguments" || expandOptions.direct)? fetched : {
                     marker: context === "options"? fluid.EXPAND : fluid.EXPAND_NOW,
                     value: fetched
                 };
@@ -10810,123 +10863,23 @@ var fluid_1_4 = fluid_1_4 || {};
                     return true;
                 }
             });
-                // TODO: we used to get a helpful diagnostic when we failed to match a context name before we fell back
-                // to the environment for FLUID-3818
-                //fluid.fail("No context matched for name " + context + " from root of type " + thatStack[0].typeName);
+            if (!foundComponent && parsed.path !== "") {
+                var ref = fluid.renderContextReference(parsed);
+                fluid.log("Failed to resolve reference " + ref + ": thatStack contains\n" + fluid.dumpThatStack(thatStack));
+                fluid.fail("Failed to resolve reference " + ref + " - could not match context with name " 
+                  + context + " from component root of type " + thatStack[0].typeName);
+            }
             return fluid.get(foundComponent, parsed.path, fetchStrategies);
         };
         return fetcher;
     }
      
-    function makeStackResolverOptions(instantiator, parentThat, localRecord) {
+    function makeStackResolverOptions(instantiator, parentThat, localRecord, expandOptions) {
         return $.extend({}, fluid.defaults("fluid.resolveEnvironment"), {
             noCopy: true,
-            fetcher: makeStackFetcher(instantiator, parentThat, localRecord)
+            fetcher: makeStackFetcher(instantiator, parentThat, localRecord, expandOptions)
         }); 
-    } 
-    
-    fluid.argMapToDemands = function(argMap) {
-        var togo = [];
-        fluid.each(argMap, function(value, key) {
-            togo[value] = "{" + key + "}";  
-        });
-        return togo;
-    };
-    
-    /** Given a concrete argument list and/or options, determine the final concrete
-     * "invocation specification" which is coded by the supplied demandspec in the 
-     * environment "thatStack" - the return is a package of concrete global function name
-     * and argument list which is suitable to be executed directly by fluid.invokeGlobalFunction.
-     */
-    fluid.embodyDemands = function(instantiator, parentThat, demandspec, initArgs, options) {
-        options = options || {};
-        options.componentRecord = $.extend(true, {}, options.componentRecord, 
-            fluid.censorKeys(demandspec, ["args", "funcName"]));
-        
-        var demands = $.makeArray(demandspec.args);
-        var upDefaults = fluid.defaults(demandspec.funcName); // I can SEE into TIME!!
-        var argMap = upDefaults? upDefaults.argumentMap : null;
-        if (!argMap && (upDefaults || (options && options.componentRecord)) && !options.passArgs) {
-            // infer that it must be a little component if we have any reason to believe it is a component
-            argMap = fluid.rawDefaults("fluid.littleComponent").argumentMap;
-        }
-        options = options || {};
-        if (demands.length === 0) {
-            if (options.passArgs) {
-                demands = fluid.transform(initArgs, function(arg, index) {
-                    return "{arguments}." + index;
-                });
-            }
-            else if (options.componentRecord) {
-                demands = fluid.argMapToDemands(argMap);
-            }
-        }
-        var localRecord = $.extend({"arguments": initArgs}, fluid.censorKeys(options.componentRecord, ["type"]));
-        var expandOptions = makeStackResolverOptions(instantiator, parentThat, localRecord);
-        var args = [];
-        if (demands) {
-            for (var i = 0; i < demands.length; ++i) {
-                var arg = demands[i];
-                // Weak detection since we cannot guarantee this material has not been copied
-                if (fluid.isMarker(arg) && arg.value === fluid.COMPONENT_OPTIONS.value) {
-                    arg = "{options}";//fluid.expandOptions(componentOptions, thatStack[thatStack.length - 1]); //fluid.expander.expandLight(componentOptions, options);
-                }
-                if (typeof(arg) === "string") {
-                    if (arg.charAt(0) === "@") {
-                        var argpos = arg.substring(1);
-                        arg = "{arguments}." + argpos;
-                    }
-                }
-                args[i] = fluid.expander.expandLight(arg, expandOptions);
-                if (args[i] && fluid.isMarker(args[i].marker, fluid.EXPAND_NOW)) {
-                    args[i] = fluid.expander.expandLight(args[i].value, expandOptions);
-                }
-                if (i === demands.length - 1 && args[i] && typeof(args[i]) === "object" && !args[i].typeName && !args[i].targetTypeName) {
-                    args[i].targetTypeName = demandspec.funcName; // TODO: investigate the general sanity of this
-                }
-            }
-        }
-        else {
-            args = initArgs? initArgs : [];
-        }
-
-        var togo = {
-            args: args,
-            funcName: demandspec.funcName
-        };
-        return togo;
-    };
-   
-    var dependentStore = {};
-    
-    function searchDemands(demandingName, contextNames) {
-        var exist = dependentStore[demandingName] || [];
-outer:  for (var i = 0; i < exist.length; ++i) {
-            var rec = exist[i];
-            for (var j = 0; j < contextNames.length; ++j) {
-                if (rec.contexts[j] !== contextNames[j]) {
-                    continue outer;
-                }
-            }
-            return rec.spec; // jslint:ok
-        }
     }
-    
-    fluid.demands = function(demandingName, contextName, spec) {
-        var contextNames = $.makeArray(contextName).sort(); 
-        if (!spec) {
-            return searchDemands(demandingName, contextNames);
-        }
-        else if (spec.length) {
-            spec = {args: spec};
-        }
-        var exist = dependentStore[demandingName];
-        if (!exist) {
-            exist = [];
-            dependentStore[demandingName] = exist;
-        }
-        exist.push({contexts: contextNames, spec: spec});
-    };
     
     fluid.instantiator = function(freeInstantiator) {
         // NB: We may not use the options merging framework itself here, since "withInstantiator" below
@@ -11008,13 +10961,161 @@ outer:  for (var i = 0; i < exist.length; ++i) {
     };
     
     fluid.freeInstantiator = fluid.instantiator(true);
+    
+    
+    fluid.argMapToDemands = function(argMap) {
+        var togo = [];
+        fluid.each(argMap, function(value, key) {
+            togo[value] = "{" + key + "}";  
+        });
+        return togo;
+    };
+    
+    fluid.makePassArgsSpec = function(initArgs) {
+        return fluid.transform(initArgs, function(arg, index) {
+                    return "{arguments}." + index;
+        });
+    };
+    
+    /** Given a concrete argument list and/or options, determine the final concrete
+     * "invocation specification" which is coded by the supplied demandspec in the 
+     * environment "thatStack" - the return is a package of concrete global function name
+     * and argument list which is suitable to be executed directly by fluid.invokeGlobalFunction.
+     */
+    fluid.embodyDemands = function(instantiator, parentThat, demandspec, initArgs, options) {
+        options = options || {};
+        options.componentRecord = $.extend(true, {}, options.componentRecord, 
+            fluid.censorKeys(demandspec, ["args", "funcName"]));
+        
+        var demands = $.makeArray(demandspec.args);
+        var upDefaults = fluid.defaults(demandspec.funcName); // I can SEE into TIME!!
+        var argMap = upDefaults? upDefaults.argumentMap : null;
+        var inferMap = false;
+        if (!argMap && (upDefaults || (options && options.componentRecord)) && !options.passArgs) {
+            inferMap = true;
+            // infer that it must be a little component if we have any reason to believe it is a component
+            if (demands.length < 2) {
+                argMap = fluid.rawDefaults("fluid.littleComponent").argumentMap;
+            }
+            else {
+                argMap = {options: demands.length - 1}; // wild guess in the old style
+            }
+        }
+        options = options || {};
+        if (demands.length === 0) {
+            if (options.componentRecord && argMap) {
+                demands = fluid.argMapToDemands(argMap);
+            }
+            else if (options.passArgs) {
+                demands = fluid.makePassArgsSpec(initArgs);
+            }
+        }
+        var localRecord = $.extend({"arguments": initArgs}, fluid.censorKeys(options.componentRecord, ["type"]));
+        fluid.each(argMap, function(index, name) {
+            if (initArgs.length > 0) {
+                localRecord[name] = localRecord["arguments"][index];
+            }
+            if (demandspec[name] !== undefined && localRecord[name] === undefined) {
+                localRecord[name] = demandspec[name];
+            }
+        });
+        var upstreamLocalRecord = $.extend({}, localRecord);
+        if (options.componentRecord.options !== undefined) {
+            upstreamLocalRecord.options = options.componentRecord.options;
+        }
+        var expandOptions = makeStackResolverOptions(instantiator, parentThat, localRecord);
+        var args = [];
+        if (demands) {
+            for (var i = 0; i < demands.length; ++i) {
+                var arg = demands[i];
+                // Weak detection since we cannot guarantee this material has not been copied
+                if (fluid.isMarker(arg) && arg.value === fluid.COMPONENT_OPTIONS.value) {
+                    arg = "{options}";
+                    // Backwards compatibility for non-users of GRADES - last-ditch chance to correct the inference
+                    if (inferMap) {
+                        argMap = {options: i};
+                    } 
+                }
+                if (typeof(arg) === "string") {
+                    if (arg.charAt(0) === "@") {
+                        var argpos = arg.substring(1);
+                        arg = "{arguments}." + argpos;
+                    }
+                }
+                if (!argMap || argMap.options !== i) {
+                    // defer expansion required if it is non-pseudoarguments demands and this argument *is* the options
+                    args[i] = fluid.expander.expandLight(arg, expandOptions);
+                }
+                else { // It is the component options
+                    if (arg && typeof(arg) === "object" && !arg.targetTypeName) {
+                        arg.targetTypeName = demandspec.funcName;
+                    }
+                    args[i] = {marker: fluid.EXPAND, value: arg, localRecord: upstreamLocalRecord};
+                }
+                if (args[i] && fluid.isMarker(args[i].marker, fluid.EXPAND_NOW)) {
+                    args[i] = fluid.expander.expandLight(args[i].value, expandOptions);
+                }
+            }
+        }
+        else {
+            args = initArgs? initArgs : [];
+        }
+
+        var togo = {
+            args: args,
+            funcName: demandspec.funcName
+        };
+        return togo;
+    };
+   
+    var dependentStore = {};
+    
+    function searchDemands(demandingName, contextNames) {
+        var exist = dependentStore[demandingName] || [];
+outer:  for (var i = 0; i < exist.length; ++i) {
+            var rec = exist[i];
+            for (var j = 0; j < contextNames.length; ++j) {
+                if (rec.contexts[j] !== contextNames[j]) {
+                    continue outer;
+                }
+            }
+            return rec.spec; // jslint:ok
+        }
+    }
+    
+    fluid.demands = function(demandingName, contextName, spec) {
+        var contextNames = $.makeArray(contextName).sort(); 
+        if (!spec) {
+            return searchDemands(demandingName, contextNames);
+        }
+        else if (spec.length) {
+            spec = {args: spec};
+        }
+        var exist = dependentStore[demandingName];
+        if (!exist) {
+            exist = [];
+            dependentStore[demandingName] = exist;
+        }
+        exist.push({contexts: contextNames, spec: spec});
+    };
 
     fluid.locateDemands = function(instantiator, parentThat, demandingNames) {
+        var demandLogging = fluid.isLogging() && demandingNames[0] !== "fluid.threadLocal";
+        if (demandLogging) {
+            fluid.log("Resolving demands for function names " + JSON.stringify(demandingNames) + " in context of " +
+              (parentThat? "component " + parentThat.typeName : "no component"));
+        }
+        
         var contextNames = {};
+        var visited = [];
         var thatStack = instantiator.getFullStack(parentThat);
         visitComponents(thatStack, function(component) {
             contextNames[component.typeName] = true;
+            visited.push(component);
         });
+        if (demandLogging) {
+            fluid.log("Components in scope for resolution:\n" + fluid.dumpThatStack(visited));  
+        }
         var matches = [];
         for (var i = 0; i < demandingNames.length; ++i) {
             var rec = dependentStore[demandingNames[i]] || [];
@@ -11035,7 +11136,12 @@ outer:  for (var i = 0; i < exist.length; ++i) {
             var p1 = specb.intersect - speca.intersect; 
             return p1 === 0? speca.uncess - specb.uncess : p1;
         });
-        return matches.length === 0 || matches[0].intersect === 0? null : matches[0].spec;
+        var demandspec = matches.length === 0 || matches[0].intersect === 0? null : matches[0].spec;
+        if (demandLogging) {
+            fluid.log(demandspec? "Located " + matches.length + " potential match" + (matches.length === 1? "" : "es") + ", selected best match with " + matches[0].intersect 
+                + " matched context names: " + JSON.stringify(demandspec): "No matches found for demands, using direct implementation");
+        }  
+        return demandspec;
     };
     
     /** Determine the appropriate demand specification held in the fluid.demands environment 
@@ -11057,6 +11163,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
                 demandspec = demandspec2; // follow just one redirect
             } **/
         }
+
         var mergeArgs = [];
         if (demandspec.parent) {
             var parent = searchDemands(funcNames[0], $.makeArray(demandspec.parent).sort());
@@ -11093,24 +11200,61 @@ outer:  for (var i = 0; i < exist.length; ++i) {
     fluid.makeFreeInvoker = function(functionName, environment) {
         var demandSpec = fluid.determineDemands(fluid.freeInstantiator, null, functionName);
         return function() {
-            var invokeSpec = fluid.embodyDemands(fluid.freeInstantiator, null, demandSpec, arguments);
-            return fluid.invokeGlobalFunction(invokeSpec.funcName, invokeSpec.args, environment);
-        };
-    };
-    // TODO: non-standard signature
-    fluid.makeInvoker = function(instantiator, that, demandspec, functionName, environment) {
-        demandspec = demandspec || fluid.determineDemands(instantiator, that, functionName);
-        return function() {
-            var invokeSpec = fluid.embodyDemands(instantiator, that, demandspec, arguments);
+            var invokeSpec = fluid.embodyDemands(fluid.freeInstantiator, null, demandSpec, arguments, {passArgs: true});
             return fluid.invokeGlobalFunction(invokeSpec.funcName, invokeSpec.args, environment);
         };
     };
     
-    fluid.addBoiledListener = function(instantiator, that, eventName, listener, namespace, predicate) {
-        that.events[eventName].addListener(function(args) {
-            var resolved = fluid.resolveDemands(instantiator, that, eventName, args);
+    fluid.makeInvoker = function(instantiator, that, demandspec, functionName, environment) {
+        demandspec = demandspec || fluid.determineDemands(instantiator, that, functionName);
+        return function() {
+            var invokeSpec = fluid.embodyDemands(instantiator, that, demandspec, arguments, {passArgs: true});
+            return fluid.invokeGlobalFunction(invokeSpec.funcName, invokeSpec.args, environment);
+        };
+    };
+    
+    fluid.event.dispatchListener = function(instantiator, that, listener, eventName, eventSpec) {
+        return function() {
+            var demandspec = fluid.determineDemands(instantiator, that, eventName);
+            if (demandspec.args.length === 0 && eventSpec.args) {
+                demandspec.args = eventSpec.args;
+            }
+            var resolved = fluid.embodyDemands(instantiator, that, demandspec, arguments, {passArgs: true, componentOptions: eventSpec}); 
             listener.apply(null, resolved.args);
-        }, namespace, predicate);
+        }; 
+    };
+    
+    fluid.event.resolveEvent = function(that, eventName, eventSpec) {
+        return fluid.withInstantiator(that, function(instantiator) {
+            if (typeof(eventSpec) === "string") {
+                return fluid.expandOptions(eventSpec, that);
+            }
+            else {
+                var event = eventSpec.event;
+                var origin;
+                if (!event) {
+                    fluid.fail("Event specification for event with name " + eventName + " does not include a base event specification");
+                }
+                if (event.charAt(0) === "{") {
+                    origin = fluid.expandOptions(event, that);
+                }
+                else {
+                    origin = that.events[event];
+                }
+                if (!origin) {
+                    fluid.fail("Error in event specification - could not resolve base event reference " + event + " to an event firer");
+                }
+                var firer = {};
+                fluid.each(["fire", "removeListener"], function(method) {
+                    firer[method] = function() {origin[method].apply(null, arguments);};
+                });
+                firer.addListener = function(listener, namespace, predicate, priority) {
+                        origin.addListener(fluid.event.dispatchListener(instantiator, that, listener, eventName, eventSpec),
+                            namespace, predicate, priority);
+                };
+                return firer;
+            };
+        }); 
     };
     
         
@@ -11123,7 +11267,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
     
     fluid.expander.preserveFromExpansion = function(options) {
         var preserve = {};
-        var preserveList = ["mergePolicy", "components", "invokers", "mergePaths"];
+        var preserveList = ["mergePolicy", "mergePaths", "components", "invokers", "events"];
         fluid.each(options.mergePolicy, function(value, key) {
             if (fluid.mergePolicyIs(value, "noexpand")) {
                 preserveList.push(key);
@@ -11154,18 +11298,13 @@ outer:  for (var i = 0; i < exist.length; ++i) {
      *  "initDependents" */
      // TODO: This needs to be integrated with "embodyDemands" above which makes a call to "resolveEnvironment" directly
      // but with very similarly derived options (makeStackResolverOptions)
-     // The whole merge/expansion pipeline needs an overhaul once we have "grades" to allow merging and
-     // defaulting to occur smoothly across a "demands" stack - right now, "demanded" options have exactly
-     // the same status as user options whereas they should slot into the right place between 
-     // "earlyDefaults"/"defaults"/"demands"/"user options". Demands should be allowed to say whether they
-     // integrate with or override defaults.
-    fluid.expandOptions = function(args, that) {
-        if (fluid.isPrimitive(args)) {
+    fluid.expandOptions = function(args, that, localRecord, outerExpandOptions) {
+        if (!args) {
             return args;
         }
         return fluid.withInstantiator(that, function(instantiator) {
-            fluid.log("expandOptions for " + that.typeName + " executing with instantiator " + instantiator.id);
-            var expandOptions = makeStackResolverOptions(instantiator, that);
+            //fluid.log("expandOptions for " + that.typeName + " executing with instantiator " + instantiator.id);
+            var expandOptions = makeStackResolverOptions(instantiator, that, localRecord, outerExpandOptions);
             expandOptions.noCopy = true; // It is still possible a model may be fetched even though it is preserved
             var pres;
             if (!fluid.isArrayable(args)) {
@@ -11181,16 +11320,32 @@ outer:  for (var i = 0; i < exist.length; ++i) {
     
     fluid.expandComponentOptions = function(defaults, userOptions, that) {
         defaults = fluid.expandOptions(fluid.copy(defaults), that);
+        var localRecord = {};
         if (userOptions && userOptions.marker === fluid.EXPAND) {
-            var toExpand = userOptions.value;
-            if (defaults && defaults.mergePolicy) {
-                toExpand.mergePolicy = defaults.mergePolicy;
+            // TODO: Somewhat perplexing... the local record itself, by any route we could get here, consists of unexpanded
+            // material taken from "componentOptions"
+            var localOptions = fluid.get(userOptions, "localRecord.options");
+            if (localOptions) {
+                if (defaults && defaults.mergePolicy) {
+                    localOptions.mergePolicy = defaults.mergePolicy;
+                }
+                localRecord.options = fluid.expandOptions(localOptions, that);
             }
-            userOptions = fluid.expandOptions(toExpand, that);
+            localRecord.arguments = fluid.get(userOptions, "localRecord.arguments");
+            var toExpand = userOptions.value;
+            userOptions = fluid.expandOptions(toExpand, that, localRecord, {direct:true});
         }
-        var mergePaths = (userOptions && userOptions.mergePaths) || ["{options}"];
+        localRecord.directOptions = userOptions;
+        if (!localRecord.options) {
+            // Catch the case where there is no demands block and everything is in the subcomponent record - 
+            // in this case, embodyDemands will not construct a localRecord and what the user refers to by "options"
+            // is really what we properly call "directOptions".
+            localRecord.options = userOptions;
+        }
+        var mergePaths = (userOptions && userOptions.mergePaths) || ["{directOptions}"];
         var togo = fluid.transform(mergePaths, function(path) {
-            return path === "{options}"? userOptions : fluid.expandOptions(path, that); 
+            // Avoid use of expandOptions in simple case to avoid infinite recursion when constructing instantiator
+            return path === "{directOptions}"? localRecord.directOptions : fluid.expandOptions(path, that, localRecord, {direct:true}); 
         });
         return [defaults].concat(togo);
     };
@@ -11198,6 +11353,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
     // The case without the instantiator is from the ginger strategy - this logic is still a little ragged
     fluid.initDependent = function(that, name, userInstantiator, directArgs) {
         if (!that || that[name]) { return; }
+        fluid.log("Beginning instantiation of component with name \"" + name + "\" as child of " + fluid.dumpThat(that));
         directArgs = directArgs || [];
         var root = fluid.threadLocal();
         if (userInstantiator) {
@@ -11208,7 +11364,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
             }
             else {
                 root["fluid.instantiator"] = userInstantiator;
-                fluid.log("*** initDependent for " + that.typeName + " member " + name + " was supplied USER instantiator with id " + userInstantiator.id + " - STORED");
+                // fluid.log("*** initDependent for " + that.typeName + " member " + name + " was supplied USER instantiator with id " + userInstantiator.id + " - STORED");
             }
         }
         
@@ -11248,34 +11404,58 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         var instantiator = root["fluid.instantiator"];
         if (!instantiator) {
             instantiator = root["fluid.instantiator"] = fluid.instantiator();
-            fluid.log("Created new instantiator with id " + instantiator.id + " in order to operate on component " + typeName);
+            //fluid.log("Created new instantiator with id " + instantiator.id + " in order to operate on component " + typeName);
         }
         try {
             if (that) {
                 instantiator.recordComponent(that);
             }
             instantiator.stack(1);
-            fluid.log("Instantiator stack +1 to " + instantiator.stackCount + " for " + typeName);
+            //fluid.log("Instantiator stack +1 to " + instantiator.stackCount + " for " + typeName);
             return func(instantiator);
         }
         finally {
             var count = instantiator.stack(-1);
-            fluid.log("Instantiator stack -1 to " + instantiator.stackCount + " for " + typeName);
+            //fluid.log("Instantiator stack -1 to " + instantiator.stackCount + " for " + typeName);
             if (count === 0) {
-                fluid.log("Clearing instantiator with id " + instantiator.id + " from threadLocal for end of " + typeName);
+                //fluid.log("Clearing instantiator with id " + instantiator.id + " from threadLocal for end of " + typeName);
                 delete root["fluid.instantiator"];
             }
         }              
     };
-        
+    
+    fluid.bindDeferredComponent = function(that, componentName, component) {
+        fluid.withInstantiator(that, function(instantiator) {
+            var events = fluid.makeArray(component.createOnEvent);
+            fluid.each(events, function(eventName) {
+                that.events[eventName].addListener(function() {
+                    if (that[componentName]) {
+                        instantiator.clearComponent(that, componentName);
+                    }
+                    fluid.initDependent(that, componentName, instantiator);
+                }, null, null, component.priority);
+            });
+        });
+    };
+    
     fluid.initDependents = function(that) {
         var options = that.options;
         var components = options.components || {};
-        for (var name in components) {
-            fluid.initDependent(that, name);
-        }
+        var componentSort = {};
+        fluid.each(components, function(component, name) {
+            if (!component.createOnEvent) {
+                componentSort[name] = {key: name, priority: fluid.event.mapPriority(component.priority)};
+            }
+            else {
+                fluid.bindDeferredComponent(that, name, component);
+            }
+        });
+        var componentList = fluid.event.sortListeners(componentSort);
+        fluid.each(componentList, function(entry) {
+            fluid.initDependent(that, entry.key);  
+        });
         var invokers = options.invokers || {};
-        for (var name in invokers) { // jslint:ok
+        for (var name in invokers) {
             var invokerec = invokers[name];
             var funcName = typeof(invokerec) === "string"? invokerec : null;
             that[name] = fluid.withInstantiator(that, function(instantiator) { 
@@ -11330,7 +11510,11 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         return singleThreadLocal;
     };
 
-    fluid.threadLocal = fluid.makeFreeInvoker("fluid.threadLocal");
+    fluid.threadLocal = function() {
+        // quick implementation since this is not very dynamic, a hazard to debugging, and used frequently within IoC itself
+        var demands = fluid.locateDemands(fluid.freeInstantiator, null, ["fluid.threadLocal"]);
+        return fluid.invokeGlobalFunction(demands.funcName, arguments);
+    };
 
     fluid.withEnvironment = function(envAdd, func) {
         var root = fluid.threadLocal();
@@ -11399,7 +11583,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
     fluid.parseContextReference = function(reference, index, delimiter) {
         var endcpos = reference.indexOf("}", index + 1);
         if (endcpos === -1) {
-            fluid.fail("Malformed context reference without }");
+            fluid.fail("Cannot parse context reference \"" + reference + "\": Malformed context reference without }");
         }
         var context = reference.substring(index + 1, endcpos);
         var endpos = delimiter? reference.indexOf(delimiter, endcpos + 1) : reference.length;
@@ -11408,6 +11592,10 @@ outer:  for (var i = 0; i < exist.length; ++i) {
             path = path.substring(1);
         }
         return {context: context, path: path, endpos: endpos};
+    };
+    
+    fluid.renderContextReference = function(parsed) {
+        return "{" + parsed.context + "}" + parsed.path;  
     };
     
     fluid.fetchContextReference = function(parsed, directModel, env) {
@@ -11573,7 +11761,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -11964,7 +12152,7 @@ freely, subject to the following restrictions:
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -12928,7 +13116,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 fluid_1_4 = fluid_1_4 || {};
 
@@ -14490,7 +14678,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 fluid_1_4 = fluid_1_4 || {};
 
@@ -15130,7 +15318,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -15270,7 +15458,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -15392,7 +15580,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -16303,7 +16491,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid, fluid_1_4:true, CKEDITOR, jQuery, FCKeditor, FCKeditorAPI, FCKeditor_OnComplete, tinyMCE*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -16799,6 +16987,1048 @@ var fluid_1_4 = fluid_1_4 || {};
 function FCKeditor_OnComplete(editorInstance) {
     fluid.inlineEdit.FCKEditor.complete.fire(editorInstance);
 }
+/* Copyright (c) 2006 Brandon Aaron (http://brandonaaron.net)
+ * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) 
+ * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
+ *
+ * $LastChangedDate$
+ * $Rev$
+ *
+ * Version 2.1
+ */
+
+(function($){
+
+/**
+ * The bgiframe is chainable and applies the iframe hack to get 
+ * around zIndex issues in IE6. It will only apply itself in IE 
+ * and adds a class to the iframe called 'bgiframe'. The iframe
+ * is appeneded as the first child of the matched element(s) 
+ * with a tabIndex and zIndex of -1.
+ * 
+ * By default the plugin will take borders, sized with pixel units,
+ * into account. If a different unit is used for the border's width,
+ * then you will need to use the top and left settings as explained below.
+ *
+ * NOTICE: This plugin has been reported to cause perfromance problems
+ * when used on elements that change properties (like width, height and
+ * opacity) a lot in IE6. Most of these problems have been caused by 
+ * the expressions used to calculate the elements width, height and 
+ * borders. Some have reported it is due to the opacity filter. All 
+ * these settings can be changed if needed as explained below.
+ *
+ * @example $('div').bgiframe();
+ * @before <div><p>Paragraph</p></div>
+ * @result <div><iframe class="bgiframe".../><p>Paragraph</p></div>
+ *
+ * @param Map settings Optional settings to configure the iframe.
+ * @option String|Number top The iframe must be offset to the top
+ * 		by the width of the top border. This should be a negative 
+ *      number representing the border-top-width. If a number is 
+ * 		is used here, pixels will be assumed. Otherwise, be sure
+ *		to specify a unit. An expression could also be used. 
+ * 		By default the value is "auto" which will use an expression 
+ * 		to get the border-top-width if it is in pixels.
+ * @option String|Number left The iframe must be offset to the left
+ * 		by the width of the left border. This should be a negative 
+ *      number representing the border-left-width. If a number is 
+ * 		is used here, pixels will be assumed. Otherwise, be sure
+ *		to specify a unit. An expression could also be used. 
+ * 		By default the value is "auto" which will use an expression 
+ * 		to get the border-left-width if it is in pixels.
+ * @option String|Number width This is the width of the iframe. If
+ *		a number is used here, pixels will be assume. Otherwise, be sure
+ * 		to specify a unit. An experssion could also be used.
+ *		By default the value is "auto" which will use an experssion
+ * 		to get the offsetWidth.
+ * @option String|Number height This is the height of the iframe. If
+ *		a number is used here, pixels will be assume. Otherwise, be sure
+ * 		to specify a unit. An experssion could also be used.
+ *		By default the value is "auto" which will use an experssion
+ * 		to get the offsetHeight.
+ * @option Boolean opacity This is a boolean representing whether or not
+ * 		to use opacity. If set to true, the opacity of 0 is applied. If
+ *		set to false, the opacity filter is not applied. Default: true.
+ * @option String src This setting is provided so that one could change 
+ *		the src of the iframe to whatever they need.
+ *		Default: "javascript:false;"
+ *
+ * @name bgiframe
+ * @type jQuery
+ * @cat Plugins/bgiframe
+ * @author Brandon Aaron (brandon.aaron@gmail.com || http://brandonaaron.net)
+ */
+$.fn.bgIframe = $.fn.bgiframe = function(s) {
+	// This is only for IE6
+	if ( $.browser.msie && parseInt($.browser.version) <= 6 ) {
+		s = $.extend({
+			top     : 'auto', // auto == .currentStyle.borderTopWidth
+			left    : 'auto', // auto == .currentStyle.borderLeftWidth
+			width   : 'auto', // auto == offsetWidth
+			height  : 'auto', // auto == offsetHeight
+			opacity : true,
+			src     : 'javascript:false;'
+		}, s || {});
+		var prop = function(n){return n&&n.constructor==Number?n+'px':n;},
+		    html = '<iframe class="bgiframe"frameborder="0"tabindex="-1"src="'+s.src+'"'+
+		               'style="display:block;position:absolute;z-index:-1;'+
+			               (s.opacity !== false?'filter:Alpha(Opacity=\'0\');':'')+
+					       'top:'+(s.top=='auto'?'expression(((parseInt(this.parentNode.currentStyle.borderTopWidth)||0)*-1)+\'px\')':prop(s.top))+';'+
+					       'left:'+(s.left=='auto'?'expression(((parseInt(this.parentNode.currentStyle.borderLeftWidth)||0)*-1)+\'px\')':prop(s.left))+';'+
+					       'width:'+(s.width=='auto'?'expression(this.parentNode.offsetWidth+\'px\')':prop(s.width))+';'+
+					       'height:'+(s.height=='auto'?'expression(this.parentNode.offsetHeight+\'px\')':prop(s.height))+';'+
+					'"/>';
+		return this.each(function() {
+			if ( $('> iframe.bgiframe', this).length == 0 )
+				this.insertBefore( document.createElement(html), this.firstChild );
+		});
+	}
+	return this;
+};
+
+// Add browser.version if it doesn't exist
+if (!$.browser.version)
+	$.browser.version = navigator.userAgent.toLowerCase().match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/)[1];
+
+})(jQuery);/*
+Copyright 2008-2009 University of Cambridge
+Copyright 2008-2009 University of Toronto
+Copyright 2010-2011 OCAD University
+Copyright 2010 Lucendo Development Ltd.
+
+Licensed under the Educational Community License (ECL), Version 2.0 or the New
+BSD license. You may not use this file except in compliance with one these
+Licenses.
+
+You may obtain a copy of the ECL 2.0 License and BSD License at
+https://source.fluidproject.org/svn/LICENSE.txt
+*/
+
+// Declare dependencies
+/*global fluid_1_4:true, jQuery*/
+
+// JSLint options 
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+
+var fluid_1_4 = fluid_1_4 || {};
+
+(function ($, fluid) {
+
+    /******************
+     * Pager Bar View *
+     ******************/
+
+    
+    function updateStyles(pageListThat, newModel, oldModel) {
+        if (!pageListThat.pageLinks) {
+            return;
+        }
+        if (oldModel.pageIndex !== undefined) {
+            var oldLink = pageListThat.pageLinks.eq(oldModel.pageIndex);
+            oldLink.removeClass(pageListThat.options.styles.currentPage);
+        }
+        var pageLink = pageListThat.pageLinks.eq(newModel.pageIndex);
+        pageLink.addClass(pageListThat.options.styles.currentPage); 
+    }
+    
+    function bindLinkClick(link, events, eventArg) {
+        link.unbind("click.fluid.pager");
+        link.bind("click.fluid.pager", function () {
+            events.initiatePageChange.fire(eventArg);
+        });
+    }
+    
+    // 10 -> 1, 11 -> 2
+    function computePageCount(model) {
+        model.pageCount = Math.max(1, Math.floor((model.totalRange - 1) / model.pageSize) + 1);
+    }
+
+    fluid.pager = function () {
+        return fluid.pagerImpl.apply(null, arguments);
+    };
+    
+    fluid.pager.computePageLimit = function (model) {
+        return Math.min(model.totalRange, (model.pageIndex + 1) * model.pageSize);
+    };
+
+    fluid.pager.directPageList = function (container, events, options) {
+        var that = fluid.initView("fluid.pager.directPageList", container, options);
+        that.pageLinks = that.locate("pageLinks");
+        for (var i = 0; i < that.pageLinks.length; ++i) {
+            var pageLink = that.pageLinks.eq(i);
+            bindLinkClick(pageLink, events, {pageIndex: i});
+        }
+        events.onModelChange.addListener(
+            function (newModel, oldModel) {
+                updateStyles(that, newModel, oldModel);
+            }
+        );
+        that.defaultModel = {
+            pageIndex: undefined,
+            pageSize: 1,
+            totalRange: that.pageLinks.length
+        };
+        return that;
+    };
+    
+    /** Returns an array of size count, filled with increasing integers, 
+     *  starting at 0 or at the index specified by first. 
+     */
+    
+    fluid.iota = function (count, first) {
+        first = first || 0;
+        var togo = [];
+        for (var i = 0; i < count; ++i) {
+            togo[togo.length] = first++;
+        }
+        return togo;
+    };
+    
+    fluid.pager.everyPageStrategy = fluid.iota;
+    
+    fluid.pager.gappedPageStrategy = function (locality, midLocality) {
+        if (!locality) {
+            locality = 3;
+        }
+        if (!midLocality) {
+            midLocality = locality;
+        }
+        return function (count, first, mid) {
+            var togo = [];
+            var j = 0;
+            var lastSkip = false;
+            for (var i = 0; i < count; ++i) {
+                if (i < locality || (count - i - 1) < locality || (i >= mid - midLocality && i <= mid + midLocality)) {
+                    togo[j++] = i;
+                    lastSkip = false;
+                } else if (!lastSkip) {
+                    togo[j++] = -1;
+                    lastSkip = true;
+                }
+            }
+            return togo;
+        };
+    };
+    
+    /**
+     * An impl of a page strategy that will always display same number of page links (including skip place holders). 
+     * @param   endLinkCount    int     The # of elements first and last trunks of elements
+     * @param   midLinkCount    int     The # of elements from beside the selected #
+     * @author  Eric Dalquist
+     */
+    fluid.pager.consistentGappedPageStrategy = function (endLinkCount, midLinkCount) {
+        if (!endLinkCount) {
+            endLinkCount = 1;
+        }
+        if (!midLinkCount) {
+            midLinkCount = endLinkCount;
+        }
+        var endWidth = endLinkCount + 2 + midLinkCount;
+
+        return function (count, first, mid) {
+            var pages = [];
+            var anchoredLeft = mid < endWidth;
+            var anchoredRight = mid >= count - endWidth;
+            var anchoredEndWidth = endWidth + midLinkCount;
+            var midStart = mid - midLinkCount;
+            var midEnd = mid + midLinkCount;
+            var lastSkip = false;
+            
+            for (var page = 0; page < count; page++) {
+                if (page < endLinkCount || // start pages
+                        count - page <= endLinkCount || // end pages
+                        (anchoredLeft && page < anchoredEndWidth) || // pages if no skipped pages between start and mid
+                        (anchoredRight && page >= count - anchoredEndWidth) || // pages if no skipped pages between mid and end
+                        (page >= midStart && page <= midEnd) // pages around the mid
+                        ) {
+                    pages.push(page);
+                    lastSkip = false;
+                } else if (!lastSkip) {
+                    pages.push(-1);
+                    lastSkip = true;
+                }
+            }
+            return pages;
+        };
+    };  
+    
+    fluid.pager.renderedPageList = function (container, events, pagerBarOptions, options, strings) {
+        options = $.extend(true, pagerBarOptions, options);
+        var that = fluid.initView("fluid.pager.renderedPageList", container, options);
+        options = that.options; // pick up any defaults
+        var idMap = {};
+        var renderOptions = {
+            cutpoints: [ 
+                {
+                    id: "page-link:link",
+                    selector: pagerBarOptions.selectors.pageLinks
+                },
+                {
+                    id: "page-link:skip",
+                    selector: pagerBarOptions.selectors.pageLinkSkip
+                }
+            ],
+            idMap: idMap
+        };
+        
+        if (options.linkBody) {
+            renderOptions.cutpoints[renderOptions.cutpoints.length] = {
+                id: "payload-component",
+                selector: options.linkBody
+            };
+        }   
+        
+        var assembleComponent = function (page, isCurrent) {
+            var obj = {
+                ID: "page-link:link",
+                localID: page + 1,
+                value: page + 1,
+                pageIndex: page,
+                decorators: [
+                    {
+                        type: "jQuery",
+                        func: "click", 
+                        args: function (event) {
+                            events.initiatePageChange.fire({pageIndex: page});
+                            event.preventDefault();
+                        }
+                    }
+                ]
+            };
+            
+            if (isCurrent) {
+                obj.current = true;
+                obj.decorators = obj.decorators.concat([
+                    {
+                        type: "addClass",
+                        classes: that.options.styles.currentPage
+                    },
+                    {
+                        type: "jQuery",
+                        func: "attr", 
+                        args: ["aria-label", that.options.strings.currentPageIndexMsg] 
+                    }
+                ]);
+            }
+            
+            return obj;
+        };
+             
+        function pageToComponent(current) {
+            return function (page) {
+                return page === -1 ? {
+                    ID: "page-link:skip"
+                } : assembleComponent(page, page === current);
+            };
+        }
+        
+        var root = that.locate("root");
+        fluid.expectFilledSelector(root, "Error finding root template for fluid.pager.renderedPageList");
+        
+        var template = fluid.selfRender(root, {}, renderOptions);
+        events.onModelChange.addListener(
+            function (newModel, oldModel) {
+                var pages = that.options.pageStrategy(newModel.pageCount, 0, newModel.pageIndex);
+                var pageTree = fluid.transform(pages, pageToComponent(newModel.pageIndex));
+                if (pageTree.length > 1) {
+                    pageTree[pageTree.length - 1].value = pageTree[pageTree.length - 1].value + strings.last;
+                }
+                events.onRenderPageLinks.fire(pageTree, newModel);
+                
+                //Destroys all the tooltips before rerendering the pagelinks.
+                //This will clean up the tooltips, which are all added to the end at the end of the DOM,
+                //and prevent the tooltips from sticking around when using the keyboard to activate
+                //the page links.
+                $.each(idMap, function (key, id) {
+                    var pageLink = fluid.jById(id);
+                    if (pageLink.tooltip) {
+                        pageLink.tooltip("destroy");
+                    }
+                });
+                fluid.reRender(template, root, pageTree, renderOptions);
+                updateStyles(that, newModel, oldModel);
+            }
+        );
+        return that;
+    };
+    
+    fluid.defaults("fluid.pager.renderedPageList", {
+        selectors: {
+            root: ".flc-pager-links"
+        },
+        linkBody: "a",
+        pageStrategy: fluid.pager.everyPageStrategy
+    });
+    
+    var updatePreviousNext = function (that, options, newModel) {
+        if (newModel.pageIndex === 0) {
+            that.previous.addClass(options.styles.disabled);
+        } else {
+            that.previous.removeClass(options.styles.disabled);
+        }
+        
+        if (newModel.pageIndex === newModel.pageCount - 1) {
+            that.next.addClass(options.styles.disabled);
+        } else {
+            that.next.removeClass(options.styles.disabled);
+        }
+    };
+    
+    fluid.pager.previousNext = function (container, events, options) {
+        var that = fluid.initView("fluid.pager.previousNext", container, options);
+        that.previous = that.locate("previous");
+        bindLinkClick(that.previous, events, {relativePage: -1});
+        that.next = that.locate("next");
+        bindLinkClick(that.next, events, {relativePage: +1});
+        events.onModelChange.addListener(
+            function (newModel, oldModel, overallThat) {
+                updatePreviousNext(that, options, newModel);
+            }
+        );
+        return that;
+    };
+
+    fluid.pager.pagerBar = function (events, container, options, strings) {
+        var that = fluid.initView("fluid.pager.pagerBar", container, options);
+        that.pageList = fluid.initSubcomponent(that, "pageList", 
+            [container, events, that.options, fluid.COMPONENT_OPTIONS, strings]);
+        that.previousNext = fluid.initSubcomponent(that, "previousNext", 
+            [container, events, that.options, fluid.COMPONENT_OPTIONS, strings]);
+        
+        return that;
+    };
+
+    
+    fluid.defaults("fluid.pager.pagerBar", {
+            
+        previousNext: {
+            type: "fluid.pager.previousNext"
+        },
+        
+        pageList: {
+            type: "fluid.pager.renderedPageList",
+            options: {
+                pageStrategy: fluid.pager.gappedPageStrategy(3, 1)
+            }
+        },
+        
+        selectors: {
+            pageLinks: ".flc-pager-pageLink",
+            pageLinkSkip: ".flc-pager-pageLink-skip",
+            previous: ".flc-pager-previous",
+            next: ".flc-pager-next"
+        },
+        
+        styles: {
+            currentPage: "fl-pager-currentPage",
+            disabled: "fl-pager-disabled"
+        },
+        
+        strings: {
+            currentPageIndexMsg: "Current page"
+        }
+    });
+
+    function getColumnDefs(that) {
+        return that.options.columnDefs;
+    }
+
+    fluid.pager.findColumnDef = function (columnDefs, key) {
+        var columnDef = $.grep(columnDefs, function (def) {
+            return def.key === key;
+        })[0];
+        return columnDef;
+    };
+    
+    function getRoots(target, overallThat, index) {
+        var cellRoot = (overallThat.options.dataOffset ? overallThat.options.dataOffset + "." : "");
+        target.shortRoot = index;
+        target.longRoot = cellRoot + target.shortRoot;
+    }
+    
+    function expandPath(EL, shortRoot, longRoot) {
+        if (EL.charAt(0) === "*") {
+            return longRoot + EL.substring(1); 
+        } else {
+            return EL.replace("*", shortRoot);
+        }
+    }
+    
+    fluid.pager.fetchValue = function (that, dataModel, index, valuebinding, roots) {
+        getRoots(roots, that, index);
+
+        var path = expandPath(valuebinding, roots.shortRoot, roots.longRoot);
+        return fluid.get(dataModel, path);
+    };
+    
+    fluid.pager.basicSorter = function (overallThat, model) {        
+        var dataModel = overallThat.options.dataModel;
+        var roots = {};
+        var columnDefs = getColumnDefs(overallThat);
+        var columnDef = fluid.pager.findColumnDef(columnDefs, model.sortKey);
+        var sortrecs = [];
+        for (var i = 0; i < model.totalRange; ++i) {
+            sortrecs[i] = {
+                index: i,
+                value: fluid.pager.fetchValue(overallThat, dataModel, i, columnDef.valuebinding, roots)
+            };
+        }
+        function sortfunc(arec, brec) {
+            var a = arec.value;
+            var b = brec.value;
+            return a === b ? 0 : (a > b ? model.sortDir : -model.sortDir); 
+        }
+        sortrecs.sort(sortfunc);
+        return fluid.transform(sortrecs, function (row) {
+            return row.index;
+        });
+    };
+
+    
+    fluid.pager.directModelFilter = function (model, pagerModel, perm) {
+        var togo = [];
+        var limit = fluid.pager.computePageLimit(pagerModel);
+        for (var i = pagerModel.pageIndex * pagerModel.pageSize; i < limit; ++i) {
+            var index = perm ? perm[i] : i;
+            togo[togo.length] = {index: index, row: model[index]};
+        }
+        return togo;
+    };
+    
+    function expandVariables(value, opts) {
+        var togo = "";
+        var index = 0;
+        while (true) {
+            var nextindex = value.indexOf("${", index);
+            if (nextindex === -1) {
+                togo += value.substring(index);
+                break;
+            } else {
+                togo += value.substring(index, nextindex);
+                var endi = value.indexOf("}", nextindex + 2);
+                var EL = value.substring(nextindex + 2, endi);
+                if (EL === "VALUE") {
+                    EL = opts.EL;
+                } else {
+                    EL = expandPath(EL, opts.shortRoot, opts.longRoot);
+                }
+                var val = fluid.get(opts.dataModel, EL);
+                togo += val;
+                index = endi + 1;
+            }
+        }
+        return togo;
+    }
+   
+    function expandPaths(target, tree, opts) {
+        for (var i in tree) {
+            var val = tree[i];
+            if (val === fluid.VALUE) {
+                if (i === "valuebinding") {
+                    target[i] = opts.EL;
+                } else {
+                    target[i] = {"valuebinding" : opts.EL};
+                }
+            } else if (i === "valuebinding") {
+                target[i] = expandPath(tree[i], opts);
+            } else if (typeof (val) === 'object') {
+                target[i] = val.length !== undefined ? [] : {};
+                expandPaths(target[i], val, opts);
+            } else if (typeof (val) === 'string') {
+                target[i] = expandVariables(val, opts);
+            } else {
+                target[i] = tree[i];
+            }
+        }
+        return target;
+    }
+   
+   // sets opts.EL, returns ID
+    function iDforColumn(columnDef, opts) {
+        var options = opts.options;
+        var EL = columnDef.valuebinding;
+        var key = columnDef.key;
+        if (!EL) {
+            fluid.fail("Error in definition for column with key " + key + ": valuebinding is not set");
+        }
+        opts.EL = expandPath(EL, opts.shortRoot, opts.longRoot);
+        if (!key) {
+            var segs = fluid.model.parseEL(EL);
+            key = segs[segs.length - 1];
+        }
+        var ID = (options.keyPrefix ? options.keyPrefix : "") + key;
+        return ID;
+    }
+   
+    function expandColumnDefs(filteredRow, opts) {
+        var tree = fluid.transform(opts.columnDefs, function (columnDef) {
+            var ID = iDforColumn(columnDef, opts);
+            var togo;
+            if (!columnDef.components) {
+                return {
+                    ID: ID,
+                    valuebinding: opts.EL
+                };
+            } else if (typeof columnDef.components === 'function') {
+                togo = columnDef.components(filteredRow.row, filteredRow.index);
+            } else {
+                togo = columnDef.components;
+            }
+            togo = expandPaths({}, togo, opts);
+            togo.ID = ID;
+            return togo;
+        });
+        return tree;
+    }
+   
+    function fetchModel(overallThat) {
+        return fluid.get(overallThat.options.dataModel, 
+            overallThat.options.dataOffset);
+    }
+   
+    
+    function bigHeaderForKey(key, opts) {
+        var id = opts.options.renderOptions.idMap["header:" + key];
+        var smallHeader = fluid.jById(id);
+        if (smallHeader.length === 0) {
+            return null;
+        }
+        var headerSortStylisticOffset = opts.overallOptions.selectors.headerSortStylisticOffset;
+        var bigHeader = fluid.findAncestor(smallHeader, function (element) {
+            return $(element).is(headerSortStylisticOffset); 
+        });
+        return bigHeader;
+    }
+   
+    function setSortHeaderClass(styles, element, sort) {
+        element = $(element);
+        element.removeClass(styles.ascendingHeader);
+        element.removeClass(styles.descendingHeader);
+        if (sort !== 0) {
+            element.addClass(sort === 1 ? styles.ascendingHeader : styles.descendingHeader);
+            //aria-sort property are specified in the w3 WAI spec, ascending, descending, none, other.
+            //since pager currently uses ascending and descending, we do not support the others.
+            //http://www.w3.org/WAI/PF/aria/states_and_properties#aria-sort
+            element.attr('aria-sort', sort === 1 ? 'ascending' : 'descending'); 
+        }
+    }
+    
+    function isCurrentColumnSortable(columnDefs, model) {
+        var columnDef = model.sortKey ? fluid.pager.findColumnDef(columnDefs, model.sortKey) : null;
+        return columnDef ? columnDef.sortable : false;
+    }
+    
+    function setModelSortHeaderClass(newModel, opts) {
+        var styles = opts.overallOptions.styles;
+        var sort = isCurrentColumnSortable(opts.columnDefs, newModel) ? newModel.sortDir : 0;
+        setSortHeaderClass(styles, bigHeaderForKey(newModel.sortKey, opts), sort);
+    }
+   
+    function fireModelChange(that, newModel, forceUpdate) {
+        computePageCount(newModel);
+        if (newModel.pageIndex >= newModel.pageCount) {
+            newModel.pageIndex = newModel.pageCount - 1;
+        }
+        if (forceUpdate || newModel.pageIndex !== that.model.pageIndex || newModel.pageSize !== that.model.pageSize || newModel.sortKey !== that.model.sortKey ||
+                newModel.sortDir !== that.model.sortDir) {
+            var sorted = isCurrentColumnSortable(getColumnDefs(that), newModel) ? 
+                that.options.sorter(that, newModel) : null;
+            that.permutation = sorted;
+            that.events.onModelChange.fire(newModel, that.model, that);
+            fluid.model.copyModel(that.model, newModel);
+        }
+    }
+
+    function generateColumnClick(overallThat, columnDef, opts) {
+        return function () {
+            if (columnDef.sortable === true) {
+                var model = overallThat.model;
+                var newModel = fluid.copy(model);
+                var styles = overallThat.options.styles;
+                var oldKey = model.sortKey;
+                if (columnDef.key !== model.sortKey) {
+                    newModel.sortKey = columnDef.key;
+                    newModel.sortDir = 1;
+                    var oldBig = bigHeaderForKey(oldKey, opts);
+                    if (oldBig) {
+                        setSortHeaderClass(styles, oldBig, 0);
+                    }
+                } else if (newModel.sortKey === columnDef.key) {
+                    newModel.sortDir = -1 * newModel.sortDir;
+                } else {
+                    return false;
+                }
+                newModel.pageIndex = 0;
+                fireModelChange(overallThat, newModel, true);
+                setModelSortHeaderClass(newModel, opts);                
+            }
+            return false;
+        };
+    }
+   
+    function fetchHeaderDecorators(decorators, columnDef) {
+        return decorators[columnDef.sortable ? "sortableHeader" : "unsortableHeader"];
+    }
+   
+    function generateHeader(overallThat, newModel, columnDefs, opts) {
+        var sortableColumnTxt = opts.options.strings.sortableColumnText;
+        if (newModel.sortDir === 1) {
+            sortableColumnTxt = opts.options.strings.sortableColumnTextAsc;
+        } else if (newModel.sortDir === -1) {
+            sortableColumnTxt = opts.options.strings.sortableColumnTextDesc;
+        }
+
+        return {
+            children:  
+                fluid.transform(columnDefs, function (columnDef) {
+                return {
+                    ID: iDforColumn(columnDef, opts),
+                    value: columnDef.label,
+                    decorators: [ 
+                        {"jQuery": ["click", generateColumnClick(overallThat, columnDef, opts)]},
+                        {identify: "header:" + columnDef.key},
+                        {type: "attrs", attributes: { title: (columnDef.key === newModel.sortKey) ? sortableColumnTxt : opts.options.strings.sortableColumnText}}
+                    ].concat(fetchHeaderDecorators(opts.overallOptions.decorators, columnDef))
+                };
+            })
+        };
+    }
+   
+    /** A body renderer implementation which uses the Fluid renderer to render a table section **/
+   
+    fluid.pager.selfRender = function (overallThat, inOptions) {
+        var that = fluid.initView("fluid.pager.selfRender", overallThat.container, inOptions);
+        var options = that.options;
+        options.renderOptions.idMap = options.renderOptions.idMap || {};
+        var idMap = options.renderOptions.idMap;
+        var root = that.locate("root");
+        var template = fluid.selfRender(root, {}, options.renderOptions);
+        root.addClass(options.styles.root);
+        var columnDefs = getColumnDefs(overallThat);
+        var expOpts = {options: options, columnDefs: columnDefs, overallOptions: overallThat.options, dataModel: overallThat.options.dataModel, idMap: idMap};
+        var directModel = fetchModel(overallThat);
+
+        return {
+            returnedOptions: {
+                listeners: {
+                    onModelChange: function (newModel, oldModel) {
+                        var filtered = overallThat.options.modelFilter(directModel, newModel, overallThat.permutation);
+                        var tree = fluid.transform(filtered, 
+                            function (filteredRow) {
+                                getRoots(expOpts, overallThat, filteredRow.index);
+                                if (columnDefs === "explode") {
+                                    return fluid.explode(filteredRow.row, expOpts.longRoot);
+                                } else if (columnDefs.length) {
+                                    return expandColumnDefs(filteredRow, expOpts);
+                                }
+                            });
+                        var fullTree = {};
+                        fullTree[options.row] = tree;
+                        if (typeof (columnDefs) === "object") {
+                            fullTree[options.header] = generateHeader(overallThat, newModel, columnDefs, expOpts);
+                        }
+                        options.renderOptions = options.renderOptions || {};
+                        options.renderOptions.model = expOpts.dataModel;
+                        fluid.reRender(template, root, fullTree, options.renderOptions);
+                        setModelSortHeaderClass(newModel, expOpts); // TODO, should this not be actually renderable?
+                    }
+                }
+            }
+        };
+    };
+
+    fluid.defaults("fluid.pager.selfRender", {
+        selectors: {
+            root: ".flc-pager-body-template"
+        },
+        
+        styles: {
+            root: "fl-pager"
+        },
+        
+        keyStrategy: "id",
+        keyPrefix: "",
+        row: "row:",
+        header: "header:",
+        
+        strings: {
+            sortableColumnText: "Select to sort",
+            sortableColumnTextDesc: "Select to sort in ascending, currently in descending order.",
+            sortableColumnTextAsc: "Select to sort in descending, currently in ascending order."
+        },
+
+        // Options passed upstream to the renderer
+        renderOptions: {}
+    });
+
+    fluid.pager.summaryAria = function (element) {
+        element.attr({
+            "aria-relevant": "all",
+            "aria-atomic": "false",
+            "aria-live": "assertive",
+            "role": "status"
+        });
+    };
+
+    fluid.pager.summary = function (dom, options) {
+        var node = dom.locate("summary");
+        fluid.pager.summaryAria(node);
+        return {
+            returnedOptions: {
+                listeners: {
+                    onModelChange: function (newModel, oldModel) {
+                        var text = fluid.stringTemplate(options.message, {
+                            first: newModel.pageIndex * newModel.pageSize + 1,
+                            last: fluid.pager.computePageLimit(newModel),
+                            total: newModel.totalRange,
+                            currentPage: newModel.pageIndex + 1
+                        });
+                        if (node.length > 0) {
+                            node.text(text);
+                        }
+                    }
+                }
+            }
+        };
+    };
+    
+    fluid.pager.directPageSize = function (that) {
+        var node = that.locate("pageSize");
+        if (node.length > 0) {
+            that.events.onModelChange.addListener(
+                function (newModel, oldModel) {
+                    if (node.val() !== newModel.pageSize) {
+                        node.val(newModel.pageSize);
+                    }
+                }
+            );
+            node.change(function () {
+                that.events.initiatePageSizeChange.fire(node.val());
+            });
+        }
+    };
+
+
+    fluid.pager.rangeAnnotator = function (that, options) {
+        var roots = {};
+        that.events.onRenderPageLinks.addListener(function (tree, newModel) {
+            var column = that.options.annotateColumnRange;
+            var dataModel = that.options.dataModel;
+            // TODO: reaching into another component's options like this is a bit unfortunate
+            var columnDefs = getColumnDefs(that);
+
+            if (!column || !dataModel || !columnDefs) {
+                return;
+            }
+            var columnDef = fluid.pager.findColumnDef(columnDefs, column);
+            
+            function fetchValue(index) {
+                index = that.permutation ? that.permutation[index] : index;
+                return fluid.pager.fetchValue(that, dataModel, index, columnDef.valuebinding, roots);
+            }
+            var tModel = {};
+            fluid.model.copyModel(tModel, newModel);
+            
+            fluid.transform(tree, function (cell) {
+                if (cell.ID === "page-link:link") {
+                    var page = cell.pageIndex;
+                    var start = page * tModel.pageSize;
+                    tModel.pageIndex = page;
+                    var limit = fluid.pager.computePageLimit(tModel);
+                    var iValue = fetchValue(start);
+                    var lValue = fetchValue(limit - 1);
+                    
+                    var tooltipOpts = fluid.copy(that.options.tooltip.options) || {};
+                    
+                    if (!tooltipOpts.content) {
+                        tooltipOpts.content = function () { 
+                            return fluid.stringTemplate(that.options.markup.rangeAnnotation, {
+                                first: iValue,
+                                last: lValue
+                            });
+                        };
+                    }
+                    
+                    if (!cell.current) {
+                        var decorators = [
+                            {
+                                type: "fluid",
+                                func: that.options.tooltip.type,
+                                options: tooltipOpts
+                            },
+                            {
+                                identify: page
+                            }
+                        ];
+                        cell.decorators = cell.decorators.concat(decorators);
+                    }
+                }
+            });
+        });
+    };
+
+    /*******************
+     * Pager Component *
+     *******************/
+    
+    fluid.pagerImpl = function (container, options) {
+        var that = fluid.initView("fluid.pager", container, options);
+                
+        that.container.attr("role", "application");
+        
+        that.events.initiatePageChange.addListener(
+            function (arg) {
+                var newModel = fluid.copy(that.model);
+                if (arg.relativePage !== undefined) {
+                    newModel.pageIndex = that.model.pageIndex + arg.relativePage;
+                } else {
+                    newModel.pageIndex = arg.pageIndex;
+                }
+                if (newModel.pageIndex === undefined || newModel.pageIndex < 0) {
+                    newModel.pageIndex = 0;
+                }
+                fireModelChange(that, newModel, arg.forceUpdate);
+            }
+        );
+        
+        that.events.initiatePageSizeChange.addListener(
+            function (arg) {
+                var newModel = fluid.copy(that.model);
+                newModel.pageSize = arg;
+                fireModelChange(that, newModel);     
+            }
+        );
+
+        // Setup the top and bottom pager bars.
+        var pagerBarElement = that.locate("pagerBar");
+        if (pagerBarElement.length > 0) {
+            that.pagerBar = fluid.initSubcomponent(that, "pagerBar", 
+                [that.events, pagerBarElement, fluid.COMPONENT_OPTIONS, that.options.strings]);
+        }
+        
+        var pagerBarSecondaryElement = that.locate("pagerBarSecondary");
+        if (pagerBarSecondaryElement.length > 0) {
+            that.pagerBarSecondary = fluid.initSubcomponent(that, "pagerBar",
+                [that.events, pagerBarSecondaryElement, fluid.COMPONENT_OPTIONS, that.options.strings]);
+        }
+ 
+        that.bodyRenderer = fluid.initSubcomponent(that, "bodyRenderer", [that, fluid.COMPONENT_OPTIONS]);
+        
+        that.summary = fluid.initSubcomponent(that, "summary", [that.dom, fluid.COMPONENT_OPTIONS]);
+        
+        that.pageSize = fluid.initSubcomponent(that, "pageSize", [that]);
+        
+        that.rangeAnnotator = fluid.initSubcomponent(that, "rangeAnnotator", [that, fluid.COMPONENT_OPTIONS]);
+ 
+        that.model = fluid.copy(that.options.model);
+        
+        var dataModel = fetchModel(that);
+        if (dataModel) {
+            that.model.totalRange = dataModel.length;
+        }
+        if (that.model.totalRange === undefined) {
+            if (!that.pagerBar) {
+                fluid.fail("Error in Pager configuration - cannot determine total range, " +
+                    " since not configured in model.totalRange and no PagerBar is configured");
+            }
+            that.model = that.pagerBar.pageList.defaultModel;
+        }
+        that.applier = fluid.makeChangeApplier(that.model);
+
+        that.events.initiatePageChange.fire({pageIndex: that.model.pageIndex ? that.model.pageIndex : 0, 
+            forceUpdate: true});
+
+        return that;
+    };
+    
+    fluid.defaults("fluid.pager", {
+        mergePolicy: {
+            dataModel: "preserve",
+            model: "preserve"
+        },
+        pagerBar: {
+            type: "fluid.pager.pagerBar"
+        },
+        
+        summary: {type: "fluid.pager.summary", options: {
+            message: "Viewing page %currentPage. Showing records %first - %last of %total items." 
+        }},
+        
+        pageSize: {
+            type: "fluid.pager.directPageSize"
+        },
+        
+        modelFilter: fluid.pager.directModelFilter,
+        
+        sorter: fluid.pager.basicSorter,
+        
+        bodyRenderer: {
+            type: "fluid.pager.selfRender"
+        },
+        
+        model: {
+            pageIndex: undefined,
+            pageSize: 10,
+            totalRange: undefined
+        },
+        
+        dataModel: undefined,
+        // Offset of the tree's "main" data from the overall dataModel root
+        dataOffset: "",
+        
+        // strategy for generating a tree row, either "explode" or an array of columnDef objects
+        columnDefs: [
+            {
+                key: "column1",
+                valuebinding: "*.value1",  
+                sortable: true
+            }
+        ],
+        
+        annotateColumnRange: "column1",
+        
+        tooltip: {
+            type: "fluid.tooltip"
+        },
+        
+        rangeAnnotator: {
+            type: "fluid.pager.rangeAnnotator"
+        },
+        
+        selectors: {
+            pagerBar: ".flc-pager-top",
+            pagerBarSecondary: ".flc-pager-bottom",
+            summary: ".flc-pager-summary",
+            pageSize: ".flc-pager-page-size",
+            headerSortStylisticOffset: ".flc-pager-sort-header"
+        },
+        
+        styles: {
+            ascendingHeader: "fl-pager-asc",
+            descendingHeader: "fl-pager-desc"
+        },
+        
+        decorators: {
+            sortableHeader: [],
+            unsortableHeader: []
+        },
+        
+        strings: {
+            last: " (last)"
+        },
+        
+        events: {
+            initiatePageChange: null,
+            initiatePageSizeChange: null,
+            onModelChange: null,
+            onRenderPageLinks: null
+        },
+        
+        markup: {
+            rangeAnnotation: "<b> %first </b><br/>&mdash;<br/><b> %last </b>"
+        }
+    });
+})(jQuery, fluid_1_4);
 /**
  * jQuery.ScrollTo
  * Copyright (c) 2007-2009 Ariel Flesler - aflesler(at)gmail(dot)com | http://flesler.blogspot.com
@@ -18787,7 +20017,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -19019,7 +20249,8 @@ var fluid_1_4 = fluid_1_4 || {};
         return that;  
     };
       
-    fluid.defaults("fluid.progress", {  
+    fluid.defaults("fluid.progress", {
+        gradeNames: "fluid.viewComponent",
         selectors: {
             displayElement: ".flc-progress", // required, the element that gets displayed when progress is displayed, could be the indicator or bar or some larger outer wrapper as in an overlay effect
             progressBar: ".flc-progress-bar", //required
@@ -19085,7 +20316,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global window, fluid_1_4:true, jQuery, swfobject*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -19111,17 +20342,14 @@ var fluid_1_4 = fluid_1_4 || {};
     };
     
     fluid.progressiveChecker = function (options) {
-        // TODO: Replace with fluid.makeArray() when merged into trunk.
-        var checks = options.checks ? $.makeArray(options.checks) : [];
-        for (var x = 0; x < checks.length; x++) {
-            var check = checks[x];
-                            
+        var that = fluid.initLittleComponent("fluid.progressiveChecker", options);
+        that.resolved = fluid.find(that.options.checks, function(check) {
             if (check.feature) {
                 return fluid.typeTag(check.contextName);
-            }
+            }}, that.options.defaultTypeTag
+        );
 
-        }
-        return options.defaultTypeTag;
+        return that;
     };
     
     fluid.defaults("fluid.progressiveChecker", {
@@ -19166,7 +20394,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global window, fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -19176,9 +20404,11 @@ var fluid_1_4 = fluid_1_4 || {};
 
 (function ($, fluid) {
     
+    fluid.setLogging(true);
+    
     var fileOrFiles = function (that, numFiles) {
         return (numFiles === 1) ? that.options.strings.progress.singleFile : 
-                                  that.options.strings.progress.pluralFiles;
+            that.options.strings.progress.pluralFiles;
     };
     
     var enableElement = function (that, elm) {
@@ -19316,8 +20546,7 @@ var fluid_1_4 = fluid_1_4 || {};
         
         if (that.queue.files.length === 0) {
             fileQueueTable.attr("summary", that.options.strings.queue.emptyQueue);
-        }
-        else {
+        } else {
             var queueSummary = fluid.stringTemplate(that.options.strings.queue.queueSummary, {
                 totalUploaded: that.queue.getUploadedFiles().length, 
                 totalInUploadQueue: that.queue.files.length - that.queue.getUploadedFiles().length
@@ -19465,37 +20694,27 @@ var fluid_1_4 = fluid_1_4 || {};
      * @param {Object} container the DOM element in which the Uploader lives
      * @param {Object} options configuration options for the component.
      */
-    fluid.uploader = function (container, options) {
-        var that = fluid.initLittleComponent("fluid.uploader");
+    fluid.uploader = function (container, uploaderOptions) {
+      // Do not try to expand uploaderOptions here or else our subcomponents will end up
+      // nested inside uploaderImpl
+        var that = fluid.initView("fluid.uploader", container);
+        that.uploaderOptions = uploaderOptions;
         fluid.initDependents(that);
-        // Set up the environment for progressive enhancement.
-        if (fluid.progressiveChecker) {
-            that.options.components.uploaderContext = that.options.deferredComponents.uploaderContext;
-            fluid.initDependent(that, "uploaderContext", that.instantiator);
-            fluid.staticEnvironment.uploaderContext = that.uploaderContext;
-        }
-        
-        // Invoke an Uploader implementation, which will be specifically resolved using IoC 
-        // based on the static environment configured by the progressiveChecker above.
-        that.options.deferredComponents.uploaderImpl.options = options;
-        that.options.deferredComponents.uploaderImpl.container = container;
-        that.options.components.uploaderImpl = that.options.deferredComponents.uploaderImpl;
-        fluid.initDependent(that, "uploaderImpl", that.instantiator);
         return that.uploaderImpl;
     };
     
     fluid.defaults("fluid.uploader", {
         components: {
-            instantiator: "{instantiator}"
-        },
-        deferredComponents: {
             uploaderContext: {
-                type: "fluid.progressiveChecker"
+                type: "fluid.progressiveChecker",
+                priority: "first"
             },
             uploaderImpl: {
-                type: "fluid.uploaderImpl"
+                type: "fluid.uploaderImpl",
+                container: "{uploader}.container",
+                options: "{uploader}.uploaderOptions"
             }
-        } 
+        }
     });
     
     fluid.demands("fluid.progressiveChecker", "fluid.uploader", {
@@ -19575,6 +20794,7 @@ var fluid_1_4 = fluid_1_4 || {};
     };
     
     fluid.defaults("fluid.uploader.multiFileUploader", {
+        gradeNames: "fluid.viewComponent",
         components: {
             strategy: {
                 type: "fluid.uploader.progressiveStrategy"
@@ -19584,8 +20804,7 @@ var fluid_1_4 = fluid_1_4 || {};
                 type: "fluid.uploader.fileQueueView",
                 options: {
                     model: "{multiFileUploader}.queue.files",
-                    uploaderContainer: "{multiFileUploader}.container",
-                    events: "{multiFileUploader}.events"
+                    uploaderContainer: "{multiFileUploader}.container"
                 }
             },
             
@@ -19691,21 +20910,13 @@ var fluid_1_4 = fluid_1_4 || {};
         },
         
         mergePolicy: {
-            model: "preserve"
+            "fileQueueView.options.model": "preserve"
         }
-    });
-    
-    fluid.demands("uploaderImpl", "fluid.uploader", {
-        funcName: "fluid.uploader.multiFileUploader",
-        args: ["{uploader}.options.deferredComponents.uploaderImpl.container", fluid.COMPONENT_OPTIONS]
     });
     
     fluid.demands("fluid.uploader.totalProgressBar", "fluid.uploader.multiFileUploader", {
         funcName: "fluid.progress",
-        args: [
-            "{multiFileUploader}.container",
-            fluid.COMPONENT_OPTIONS
-        ]
+        container: "{multiFileUploader}.container"
     });
     
         
@@ -19715,14 +20926,13 @@ var fluid_1_4 = fluid_1_4 || {};
     * @param {Number} bytes the files size, specified as in number bytes.
     */
     fluid.uploader.formatFileSize = function (bytes) {
-        if (typeof(bytes) === "number") {
+        if (typeof (bytes) === "number") {
             if (bytes === 0) {
                 return "0.0 KB";
             } else if (bytes > 0) {
                 if (bytes < 1048576) {
                     return (Math.ceil(bytes / 1024 * 10) / 10).toFixed(1) + " KB";
-                }
-                else {
+                } else {
                     return (Math.ceil(bytes / 1048576 * 10) / 10).toFixed(1) + " MB";
                 }
             }
@@ -19798,15 +21008,6 @@ var fluid_1_4 = fluid_1_4 || {};
         }
     };
 
-    // TODO: Need to resolve the issue of the gracefully degraded view being outside of the component's
-    // container. Perhaps we can embed a standard HTML 5 file input element right in the template, 
-    // and hide everything else?
-    var determineContainer = function (options) {
-        var defaults = fluid.defaults("fluid.uploader.singleFileStrategy");
-        return (options && options.container) ? options.container : defaults.container;
-    };
-
-
     /**
      * Single file Uploader implementation. Use fluid.uploader() for IoC-resolved, progressively
      * enhanceable Uploader, or call this directly if you only want a standard single file uploader.
@@ -19823,15 +21024,12 @@ var fluid_1_4 = fluid_1_4 || {};
     };
 
     fluid.defaults("fluid.uploader.singleFileUploader", {
+        gradeNames: "fluid.viewComponent",
         selectors: {
             basicUpload: ".fl-progEnhance-basic"
         }
     });
 
-    fluid.demands("uploaderImpl", ["fluid.uploader", "fluid.uploader.singleFile"], {
-        funcName: "fluid.uploader.singleFileUploader",
-        args: ["{uploader}.options.deferredComponents.uploaderImpl.container", fluid.COMPONENT_OPTIONS]
-    });
     
 })(jQuery, fluid_1_4);
 /*
@@ -19851,7 +21049,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery, SWFUpload*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -19898,8 +21096,8 @@ var fluid_1_4 = fluid_1_4 || {};
         
         that.shouldUploadNextFile = function () {
             return !that.shouldStop && 
-                   that.isUploading && 
-                   that.currentBatch.numFilesCompleted < that.currentBatch.files.length;
+                that.isUploading && 
+                that.currentBatch.numFilesCompleted < that.currentBatch.files.length;
         };
         
         /*****************************
@@ -20015,7 +21213,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -20272,21 +21470,6 @@ var fluid_1_4 = fluid_1_4 || {};
         }
     };
     
-    var bindModelEvents = function (that) {
-        that.returnedOptions = {
-            listeners: {
-                afterFileQueued: that.addFile,
-                onUploadStart: that.prepareForUpload,
-                onFileStart: that.showFileProgress,
-                onFileProgress: that.updateFileProgress,
-                onFileSuccess: that.markFileComplete,
-                onFileError: that.showErrorForFile,
-                afterFileComplete: that.hideFileProgress,
-                afterUploadComplete: that.refreshAfterUpload
-            }
-        };
-    };
-    
     var addKeyboardNavigation = function (that) {
         fluid.tabbable(that.container);
         that.selectableContext = fluid.selectable(that.container, {
@@ -20311,8 +21494,7 @@ var fluid_1_4 = fluid_1_4 || {};
     var setupFileQueue = function (that) {
         fluid.initDependents(that);
         prepareTemplateElements(that);         
-        addKeyboardNavigation(that); 
-        bindModelEvents(that);
+        addKeyboardNavigation(that);
     };
     
     /**
@@ -20322,11 +21504,10 @@ var fluid_1_4 = fluid_1_4 || {};
      * @param {fileQueue} queue a file queue model instance
      * @param {Object} options configuration options for the view
      */
-    fluid.uploader.fileQueueView = function (container, events, options) {
+    fluid.uploader.fileQueueView = function (container, options) {
         var that = fluid.initView("fluid.uploader.fileQueueView", container, options);
         that.fileProgressors = {};
         that.model = that.options.model;
-        that.events = events;
         
         that.addFile = function (file) {
             addFile(that, file);
@@ -20378,17 +21559,19 @@ var fluid_1_4 = fluid_1_4 || {};
         funcName: "fluid.uploader.fileQueueView",
         args: [
             "{multiFileUploader}.dom.fileQueue",
-            {
-                onFileRemoved: "{multiFileUploader}.events.onFileRemoved"
-            },
             fluid.COMPONENT_OPTIONS
         ]
     });
     
     fluid.defaults("fluid.uploader.fileQueueView", {
+        gradeNames: "fluid.viewComponent",
         components: {
             scroller: {
                 type: "fluid.scrollableTable"
+            },
+            
+            eventBinder: {
+                type: "fluid.uploader.fileQueueView.eventBinder"
             }
         },
         
@@ -20439,12 +21622,39 @@ var fluid_1_4 = fluid_1_4 || {};
             }
         },
         
+        events: {
+            onFileRemoved: "{multiFileUploader}.events.onFileRemoved",
+        },
+        
         mergePolicy: {
-            model: "preserve",
-            events: "preserve"
+            model: "preserve"
         }
     });
     
+    /**
+     * EventBinder declaratively binds FileQueueView's methods as listeners to Uploader events using IoC.
+     */
+    fluid.defaults("fluid.uploader.fileQueueView.eventBinder", {
+        gradeNames: ["fluid.eventedComponent", "autoInit"]
+    });
+    
+    fluid.demands("fluid.uploader.fileQueueView.eventBinder", [
+        "fluid.uploader.multiFileUploader",
+        "fluid.uploader.fileQueueView"
+    ], {
+        options: {
+            listeners: {
+                "{multiFileUploader}.events.afterFileQueued": "{fileQueueView}.addFile",
+                "{multiFileUploader}.events.onUploadStart": "{fileQueueView}.prepareForUpload",
+                "{multiFileUploader}.events.onFileStart": "{fileQueueView}.showFileProgress",
+                "{multiFileUploader}.events.onFileProgress": "{fileQueueView}.updateFileProgress",
+                "{multiFileUploader}.events.onFileSuccess": "{fileQueueView}.markFileComplete",
+                "{multiFileUploader}.events.onFileError": "{fileQueueView}.showErrorForFile",
+                "{multiFileUploader}.events.afterFileComplete": "{fileQueueView}.hideFileProgress",
+                "{multiFileUploader}.events.afterUploadComplete": "{fileQueueView}.refreshAfterUpload"
+            }
+        }
+    });
     
     /**************
      * Scrollable *
@@ -20459,9 +21669,8 @@ var fluid_1_4 = fluid_1_4 || {};
      * @return the scrollable component
      */
     fluid.scrollable = function (element, options) {
-        var that = fluid.initLittleComponent("fluid.scrollable", options);
-        element = fluid.container(element);
-        that.scrollable = that.options.makeScrollableFn(element, that.options);
+        var that = fluid.initView("fluid.scrollable", element, options);
+        that.scrollable = that.options.makeScrollableFn(that.container, that.options);
         that.maxHeight = that.scrollable.css("max-height");
 
         /**
@@ -20518,6 +21727,7 @@ var fluid_1_4 = fluid_1_4 || {};
     };
 
     fluid.defaults("fluid.scrollableTable", {
+        gradeNames: "fluid.viewComponent",
         makeScrollableFn: fluid.scrollable.makeTable,
         wrapperMarkup: "<div class='fl-scrollable-scroller'><div class='fl-scrollable-inner'></div></div>"
     });    
@@ -20547,7 +21757,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery, swfobject, SWFUpload */
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -20556,8 +21766,7 @@ var fluid_1_4 = fluid_1_4 || {};
     fluid.uploader = fluid.uploader || {};
     
     fluid.demands("uploaderImpl", ["fluid.uploader", "fluid.uploader.swfUpload"], {
-        funcName: "fluid.uploader.multiFileUploader",
-        args: ["{uploader}.options.deferredComponents.uploaderImpl.container", fluid.COMPONENT_OPTIONS]
+        funcName: "fluid.uploader.multiFileUploader"
     });
     
     /**********************
@@ -20917,7 +22126,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -21001,7 +22210,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global FormData, fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -21010,8 +22219,7 @@ var fluid_1_4 = fluid_1_4 || {};
     fluid.uploader = fluid.uploader || {};
     
     fluid.demands("uploaderImpl", ["fluid.uploader", "fluid.uploader.html5"], {
-        funcName: "fluid.uploader.multiFileUploader",
-        args: ["{uploader}.options.deferredComponents.uploaderImpl.container", fluid.COMPONENT_OPTIONS]
+        funcName: "fluid.uploader.multiFileUploader"
     });
     
     fluid.uploader.html5Strategy = function (options) {
@@ -21026,7 +22234,11 @@ var fluid_1_4 = fluid_1_4 || {};
                 type: "fluid.uploader.html5Strategy.local",
                 options: {
                     queueSettings: "{multiFileUploader}.options.queueSettings",
-                    events: "{multiFileUploader}.events"
+                    events: {
+                        afterFileDialog: "{multiFileUploader}.events.afterFileDialog",
+                        afterFileQueued: "{multiFileUploader}.events.afterFileQueued",
+                        onQueueError: "{multiFileUploader}.events.onQueueError"
+                   }
                 }
             },
             
@@ -21034,15 +22246,22 @@ var fluid_1_4 = fluid_1_4 || {};
                 type: "fluid.uploader.remote",
                 options: {
                     queueSettings: "{multiFileUploader}.options.queueSettings",
-                    events: "{multiFileUploader}.events"
+                     events: {
+                         afterReady: "{multiFileUploader}.events.afterReady",
+                         onFileStart: "{multiFileUploader}.events.onFileStart",
+                         onFileProgress: "{multiFileUploader}.events.onFileProgress",
+                         onFileSuccess: "{multiFileUploader}.events.onFileSuccess",
+                         onFileError: "{multiFileUploader}.events.onFileError",
+                         onFileComplete: "{multiFileUploader}.events.onFileComplete"
+                    }
                 }
             }
         },
         
         // Used for browsers that rely on File.getAsBinary(), such as Firefox 3.6,
         // which load the entire file to be loaded into memory.
-        // Set this option to a sane limit so your users won't experience crashes or slowdowns (FLUID-3937).
-        legacyBrowserFileLimit: 100,
+        // Set this option to a sane limit (100MB) so your users won't experience crashes or slowdowns (FLUID-3937).
+        legacyBrowserFileLimit: 100000,
         
         mergePolicy: {
             "components.local.options.events": "preserve",
@@ -21068,20 +22287,26 @@ var fluid_1_4 = fluid_1_4 || {};
     // TODO: The following two or three functions probably ultimately belong on a that responsible for
     // coordinating with the XHR. A fileConnection object or something similar.
     
-    fluid.uploader.html5Strategy.fileSuccessHandler = function (file, events) {
-        events.onFileSuccess.fire(file);
+    fluid.uploader.html5Strategy.fileSuccessHandler = function (file, events, xhr) {
+        events.onFileSuccess.fire(file, xhr.responseText, xhr);
         events.onFileComplete.fire(file);
     };
     
-    fluid.uploader.html5Strategy.fileErrorHandler = function (file, events) {
+    fluid.uploader.html5Strategy.fileErrorHandler = function (file, events, xhr) {
         file.filestatus = fluid.uploader.fileStatusConstants.ERROR;
-        events.onFileError.fire(file, fluid.uploader.errorConstants.UPLOAD_FAILED);
+        events.onFileError.fire(file, 
+                                fluid.uploader.errorConstants.UPLOAD_FAILED,
+                                xhr.status,
+                                xhr);
         events.onFileComplete.fire(file);
     };
     
-    fluid.uploader.html5Strategy.fileStopHandler = function (file, events) {
+    fluid.uploader.html5Strategy.fileStopHandler = function (file, events, xhr) {
         file.filestatus = fluid.uploader.fileStatusConstants.CANCELLED;
-        events.onFileError.fire(file, fluid.uploader.errorConstants.UPLOAD_STOPPED);
+        events.onFileError.fire(file, 
+                                fluid.uploader.errorConstants.UPLOAD_STOPPED,
+                                xhr.status,
+                                xhr);
         events.onFileComplete.fire(file);
     };
     
@@ -21107,11 +22332,11 @@ var fluid_1_4 = fluid_1_4 || {};
                 var status = xhr.status;
                 // TODO: See a pattern here? Fix it.
                 if (status === 200) {
-                    fluid.uploader.html5Strategy.fileSuccessHandler(file, events);
+                    fluid.uploader.html5Strategy.fileSuccessHandler(file, events, xhr);
                 } else if (status === 0) {
-                    fluid.uploader.html5Strategy.fileStopHandler(file, events);
+                    fluid.uploader.html5Strategy.fileStopHandler(file, events, xhr);
                 } else {
-                    fluid.uploader.html5Strategy.fileErrorHandler(file, events);
+                    fluid.uploader.html5Strategy.fileErrorHandler(file, events, xhr);
                 }
             }
         };
@@ -21135,7 +22360,6 @@ var fluid_1_4 = fluid_1_4 || {};
         var that = fluid.initLittleComponent("fluid.uploader.html5Strategy.remote", options);
         that.queue = queue;
         that.queueSettings = that.options.queueSettings;
-        that.events = that.options.events;
         
         // Upload files in the current batch without exceeding the fileUploadLimit
         that.uploadNextFile = function () {
@@ -21160,6 +22384,8 @@ var fluid_1_4 = fluid_1_4 || {};
     };
     
     fluid.defaults("fluid.uploader.html5Strategy.remote", {
+        gradeNames: ["fluid.eventedComponent"],
+        
         invokers: {
             doUpload: "fluid.uploader.html5Strategy.doUpload"
         }
@@ -21204,11 +22430,11 @@ var fluid_1_4 = fluid_1_4 || {};
         var multipart = "";
         multipart += "--" + boundary + CRLF;
         multipart += "Content-Disposition: form-data;" +
-                     " name=\"fileData\";" + 
-                     " filename=\"" + file.name + 
-                     "\"" + CRLF;
+            " name=\"fileData\";" + 
+            " filename=\"" + file.name + 
+            "\"" + CRLF;
         multipart += "Content-Type: " + file.type + CRLF + CRLF;
-        multipart += file.getAsBinary(); // TODO: Ack, concatting binary data to JS String!
+        multipart += file.getAsBinary(); // Concatting binary data to JS String; yes, FF will handle it.
         multipart += CRLF + "--" + boundary + "--" + CRLF;
         return multipart;
     };
@@ -21243,14 +22469,13 @@ var fluid_1_4 = fluid_1_4 || {};
     fluid.uploader.html5Strategy.local = function (queue, legacyBrowserFileLimit, options) {
         var that = fluid.initLittleComponent("fluid.uploader.html5Strategy.local", options);
         that.queue = queue;
-        that.events = that.options.events;
         that.queueSettings = that.options.queueSettings;
 
         // Add files to the file queue without exceeding the fileUploadLimit and the fileSizeLimit
-        // NOTE:  fileSizeLimit set to bytes for HTML5 Uploader (MB for SWF Uploader).  
+        // NOTE:  fileSizeLimit set to bytes for HTML5 Uploader (KB for SWF Uploader).  
         that.addFiles = function (files) {
             // TODO: These look like they should be part of a real model.
-            var sizeLimit = (legacyBrowserFileLimit || that.queueSettings.fileSizeLimit) * 1000000;
+            var sizeLimit = (legacyBrowserFileLimit || that.queueSettings.fileSizeLimit) * 1024;
             var fileLimit = that.queueSettings.fileUploadLimit;
             var uploaded = that.queue.getUploadedFiles().length;
             var queued = that.queue.getReadyFiles().length;
@@ -21290,6 +22515,11 @@ var fluid_1_4 = fluid_1_4 || {};
     };
     
     fluid.defaults("fluid.uploader.html5Strategy.local", {
+        argumentMap: {
+            options: 2  
+        },
+        gradeNames: ["fluid.eventedComponent"],
+        
         components: {
             browseButtonView: {
                 type: "fluid.uploader.html5Strategy.browseButtonView",
@@ -21299,7 +22529,6 @@ var fluid_1_4 = fluid_1_4 || {};
                         browseButton: "{multiFileUploader}.selectors.browseButton"
                     },
                     listeners: {
-                        onBrowse: "{local}.events.onFileDialog.fire", // TODO: Craziness?
                         onFilesQueued: "{local}.addFiles"
                     }
                 }
@@ -21355,8 +22584,6 @@ var fluid_1_4 = fluid_1_4 || {};
     
     var renderMultiFileInput = function (that) {
         var multiFileInput = $(that.options.multiFileInputMarkup);
-        var fileTypes = (that.options.queueSettings.fileTypes).replace(/\;/g, ',');       
-        //multiFileInput.attr("accept", fileTypes);
         bindEventsToFileInput(that, multiFileInput);
         return multiFileInput;
     };
@@ -21392,6 +22619,7 @@ var fluid_1_4 = fluid_1_4 || {};
     };
     
     fluid.defaults("fluid.uploader.html5Strategy.browseButtonView", {
+        gradeNames: "fluid.viewComponent",
         multiFileInputMarkup: "<input type='file' multiple='' class='flc-uploader-html5-input fl-hidden' />",
         
         queueSettings: {},
@@ -21408,12 +22636,17 @@ var fluid_1_4 = fluid_1_4 || {};
     });
 
     fluid.demands("fluid.uploader.html5Strategy.browseButtonView", "fluid.uploader.html5Strategy.local", {
-        args: [
-            "{multiFileUploader}.container",
-            fluid.COMPONENT_OPTIONS
-        ]
-    })
-})(jQuery, fluid_1_4);    
+        container: "{multiFileUploader}.container",
+        options: {
+            mergePaths: ["{options}", {
+                events: {
+                    onBrowse: "{local}.events.onFileDialog"
+                }
+            }]
+        }
+    });
+
+})(jQuery, fluid_1_4);
 /*
 Copyright 2009 University of Toronto
 Copyright 2009 University of California, Berkeley
@@ -21431,14 +22664,13 @@ https://source.fluidproject.org/svn/LICENSE.txt
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
 (function ($, fluid) {
     
     fluid.uploader = fluid.uploader || {};
-    fluid.uploader.swfUploadStrategy = fluid.uploader.swfUploadStrategy || {};
     
     var startUploading; // Define early due to subtle circular dependency.
     
@@ -21531,27 +22763,21 @@ var fluid_1_4 = fluid_1_4 || {};
     };
        
     /**
-     * The Demo Engine wraps a SWFUpload engine and simulates the upload process.
+     * The demo remote pretends to upload files to the server, firing all the appropriate events
+     * but without sending anything over the network or requiring a server to be running.
      * 
      * @param {FileQueue} queue the Uploader's file queue instance
      * @param {Object} the Uploader's bundle of event firers
-     * @param {Object} configuration options for SWFUpload (in its native dialect)
+     * @param {Object} configuration options
      */
-     // TODO: boil down events to only those we actually need.
-     // TODO: remove swfupload references and move into general namespace. Are there any real SWFUpload references here?
-    fluid.uploader.demoRemote = function (queue, events, options) {
+    fluid.uploader.demoRemote = function (queue, options) {
         var that = fluid.initLittleComponent("fluid.uploader.demoRemote", options);
         that.queue = queue;
-        that.events = events;
         
         that.uploadNextFile = function () {
             startUploading(that);   
         };
         
-        /**
-         * Cancels a simulated upload.
-         * This method overrides the default behaviour in SWFUploadManager.
-         */
         that.stop = function () {
             stopDemo(that);
         };
@@ -21572,6 +22798,22 @@ var fluid_1_4 = fluid_1_4 || {};
         setTimeout(fn, delay);
     };
     
+    fluid.defaults("fluid.uploader.demoRemote", {
+        gradeNames: ["fluid.eventedComponent"],
+        argumentMap: {
+            options: 1  
+        },
+        events: {
+            onFileProgress: "{multiFileUploader}.events.onFileProgress",
+            afterFileComplete: "{multiFileUploader}.events.afterFileComplete",
+            afterUploadComplete: "{multiFileUploader}.events.afterUploadComplete",
+            onFileSuccess: "{multiFileUploader}.events.onFileSuccess",
+            onFileStart: "{multiFileUploader}.events.onFileStart",
+            onFileError: "{multiFileUploader}.events.onFileError",
+            onUploadStop: "{multiFileUploader}.events.onUploadStop"
+        }
+    });
+    
     fluid.demands("fluid.uploader.remote", ["fluid.uploader.multiFileUploader", "fluid.uploader.demo"], {
         funcName: "fluid.uploader.demoRemote",
         args: [
@@ -21581,1048 +22823,6 @@ var fluid_1_4 = fluid_1_4 || {};
         ]
     });
     
-})(jQuery, fluid_1_4);
-/* Copyright (c) 2006 Brandon Aaron (http://brandonaaron.net)
- * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) 
- * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
- *
- * $LastChangedDate$
- * $Rev$
- *
- * Version 2.1
- */
-
-(function($){
-
-/**
- * The bgiframe is chainable and applies the iframe hack to get 
- * around zIndex issues in IE6. It will only apply itself in IE 
- * and adds a class to the iframe called 'bgiframe'. The iframe
- * is appeneded as the first child of the matched element(s) 
- * with a tabIndex and zIndex of -1.
- * 
- * By default the plugin will take borders, sized with pixel units,
- * into account. If a different unit is used for the border's width,
- * then you will need to use the top and left settings as explained below.
- *
- * NOTICE: This plugin has been reported to cause perfromance problems
- * when used on elements that change properties (like width, height and
- * opacity) a lot in IE6. Most of these problems have been caused by 
- * the expressions used to calculate the elements width, height and 
- * borders. Some have reported it is due to the opacity filter. All 
- * these settings can be changed if needed as explained below.
- *
- * @example $('div').bgiframe();
- * @before <div><p>Paragraph</p></div>
- * @result <div><iframe class="bgiframe".../><p>Paragraph</p></div>
- *
- * @param Map settings Optional settings to configure the iframe.
- * @option String|Number top The iframe must be offset to the top
- * 		by the width of the top border. This should be a negative 
- *      number representing the border-top-width. If a number is 
- * 		is used here, pixels will be assumed. Otherwise, be sure
- *		to specify a unit. An expression could also be used. 
- * 		By default the value is "auto" which will use an expression 
- * 		to get the border-top-width if it is in pixels.
- * @option String|Number left The iframe must be offset to the left
- * 		by the width of the left border. This should be a negative 
- *      number representing the border-left-width. If a number is 
- * 		is used here, pixels will be assumed. Otherwise, be sure
- *		to specify a unit. An expression could also be used. 
- * 		By default the value is "auto" which will use an expression 
- * 		to get the border-left-width if it is in pixels.
- * @option String|Number width This is the width of the iframe. If
- *		a number is used here, pixels will be assume. Otherwise, be sure
- * 		to specify a unit. An experssion could also be used.
- *		By default the value is "auto" which will use an experssion
- * 		to get the offsetWidth.
- * @option String|Number height This is the height of the iframe. If
- *		a number is used here, pixels will be assume. Otherwise, be sure
- * 		to specify a unit. An experssion could also be used.
- *		By default the value is "auto" which will use an experssion
- * 		to get the offsetHeight.
- * @option Boolean opacity This is a boolean representing whether or not
- * 		to use opacity. If set to true, the opacity of 0 is applied. If
- *		set to false, the opacity filter is not applied. Default: true.
- * @option String src This setting is provided so that one could change 
- *		the src of the iframe to whatever they need.
- *		Default: "javascript:false;"
- *
- * @name bgiframe
- * @type jQuery
- * @cat Plugins/bgiframe
- * @author Brandon Aaron (brandon.aaron@gmail.com || http://brandonaaron.net)
- */
-$.fn.bgIframe = $.fn.bgiframe = function(s) {
-	// This is only for IE6
-	if ( $.browser.msie && parseInt($.browser.version) <= 6 ) {
-		s = $.extend({
-			top     : 'auto', // auto == .currentStyle.borderTopWidth
-			left    : 'auto', // auto == .currentStyle.borderLeftWidth
-			width   : 'auto', // auto == offsetWidth
-			height  : 'auto', // auto == offsetHeight
-			opacity : true,
-			src     : 'javascript:false;'
-		}, s || {});
-		var prop = function(n){return n&&n.constructor==Number?n+'px':n;},
-		    html = '<iframe class="bgiframe"frameborder="0"tabindex="-1"src="'+s.src+'"'+
-		               'style="display:block;position:absolute;z-index:-1;'+
-			               (s.opacity !== false?'filter:Alpha(Opacity=\'0\');':'')+
-					       'top:'+(s.top=='auto'?'expression(((parseInt(this.parentNode.currentStyle.borderTopWidth)||0)*-1)+\'px\')':prop(s.top))+';'+
-					       'left:'+(s.left=='auto'?'expression(((parseInt(this.parentNode.currentStyle.borderLeftWidth)||0)*-1)+\'px\')':prop(s.left))+';'+
-					       'width:'+(s.width=='auto'?'expression(this.parentNode.offsetWidth+\'px\')':prop(s.width))+';'+
-					       'height:'+(s.height=='auto'?'expression(this.parentNode.offsetHeight+\'px\')':prop(s.height))+';'+
-					'"/>';
-		return this.each(function() {
-			if ( $('> iframe.bgiframe', this).length == 0 )
-				this.insertBefore( document.createElement(html), this.firstChild );
-		});
-	}
-	return this;
-};
-
-// Add browser.version if it doesn't exist
-if (!$.browser.version)
-	$.browser.version = navigator.userAgent.toLowerCase().match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/)[1];
-
-})(jQuery);/*
-Copyright 2008-2009 University of Cambridge
-Copyright 2008-2009 University of Toronto
-Copyright 2010-2011 OCAD University
-Copyright 2010 Lucendo Development Ltd.
-
-Licensed under the Educational Community License (ECL), Version 2.0 or the New
-BSD license. You may not use this file except in compliance with one these
-Licenses.
-
-You may obtain a copy of the ECL 2.0 License and BSD License at
-https://source.fluidproject.org/svn/LICENSE.txt
-*/
-
-// Declare dependencies
-/*global fluid_1_4:true, jQuery*/
-
-// JSLint options 
-/*jslint white: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
-
-var fluid_1_4 = fluid_1_4 || {};
-
-(function ($, fluid) {
-
-    /******************
-     * Pager Bar View *
-     ******************/
-
-    
-    function updateStyles(pageListThat, newModel, oldModel) {
-        if (!pageListThat.pageLinks) {
-            return;
-        }
-        if (oldModel.pageIndex !== undefined) {
-            var oldLink = pageListThat.pageLinks.eq(oldModel.pageIndex);
-            oldLink.removeClass(pageListThat.options.styles.currentPage);
-        }
-        var pageLink = pageListThat.pageLinks.eq(newModel.pageIndex);
-        pageLink.addClass(pageListThat.options.styles.currentPage); 
-    }
-    
-    function bindLinkClick(link, events, eventArg) {
-        link.unbind("click.fluid.pager");
-        link.bind("click.fluid.pager", function () {
-            events.initiatePageChange.fire(eventArg);
-        });
-    }
-    
-    // 10 -> 1, 11 -> 2
-    function computePageCount(model) {
-        model.pageCount = Math.max(1, Math.floor((model.totalRange - 1) / model.pageSize) + 1);
-    }
-
-    fluid.pager = function () {
-        return fluid.pagerImpl.apply(null, arguments);
-    };
-    
-    fluid.pager.computePageLimit = function (model) {
-        return Math.min(model.totalRange, (model.pageIndex + 1) * model.pageSize);
-    };
-
-    fluid.pager.directPageList = function (container, events, options) {
-        var that = fluid.initView("fluid.pager.directPageList", container, options);
-        that.pageLinks = that.locate("pageLinks");
-        for (var i = 0; i < that.pageLinks.length; ++i) {
-            var pageLink = that.pageLinks.eq(i);
-            bindLinkClick(pageLink, events, {pageIndex: i});
-        }
-        events.onModelChange.addListener(
-            function (newModel, oldModel) {
-                updateStyles(that, newModel, oldModel);
-            }
-        );
-        that.defaultModel = {
-            pageIndex: undefined,
-            pageSize: 1,
-            totalRange: that.pageLinks.length
-        };
-        return that;
-    };
-    
-    /** Returns an array of size count, filled with increasing integers, 
-     *  starting at 0 or at the index specified by first. 
-     */
-    
-    fluid.iota = function (count, first) {
-        first = first || 0;
-        var togo = [];
-        for (var i = 0; i < count; ++i) {
-            togo[togo.length] = first++;
-        }
-        return togo;
-    };
-    
-    fluid.pager.everyPageStrategy = fluid.iota;
-    
-    fluid.pager.gappedPageStrategy = function (locality, midLocality) {
-        if (!locality) {
-            locality = 3;
-        }
-        if (!midLocality) {
-            midLocality = locality;
-        }
-        return function (count, first, mid) {
-            var togo = [];
-            var j = 0;
-            var lastSkip = false;
-            for (var i = 0; i < count; ++i) {
-                if (i < locality || (count - i - 1) < locality || (i >= mid - midLocality && i <= mid + midLocality)) {
-                    togo[j++] = i;
-                    lastSkip = false;
-                } else if (!lastSkip) {
-                    togo[j++] = -1;
-                    lastSkip = true;
-                }
-            }
-            return togo;
-        };
-    };
-    
-    /**
-     * An impl of a page strategy that will always display same number of page links (including skip place holders). 
-     * @param   endLinkCount    int     The # of elements first and last trunks of elements
-     * @param   midLinkCount    int     The # of elements from beside the selected #
-     * @author  Eric Dalquist
-     */
-    fluid.pager.consistentGappedPageStrategy = function (endLinkCount, midLinkCount) {
-        if (!endLinkCount) {
-            endLinkCount = 1;
-        }
-        if (!midLinkCount) {
-            midLinkCount = endLinkCount;
-        }
-        var endWidth = endLinkCount + 2 + midLinkCount;
-
-        return function (count, first, mid) {
-            var pages = [];
-            var anchoredLeft = mid < endWidth;
-            var anchoredRight = mid >= count - endWidth;
-            var anchoredEndWidth = endWidth + midLinkCount;
-            var midStart = mid - midLinkCount;
-            var midEnd = mid + midLinkCount;
-            var lastSkip = false;
-            
-            for (var page = 0; page < count; page++) {
-                if (page < endLinkCount || // start pages
-                        count - page <= endLinkCount || // end pages
-                        (anchoredLeft && page < anchoredEndWidth) || // pages if no skipped pages between start and mid
-                        (anchoredRight && page >= count - anchoredEndWidth) || // pages if no skipped pages between mid and end
-                        (page >= midStart && page <= midEnd) // pages around the mid
-                        ) {
-                    pages.push(page);
-                    lastSkip = false;
-                } else if (!lastSkip) {
-                    pages.push(-1);
-                    lastSkip = true;
-                }
-            }
-            return pages;
-        };
-    };  
-    
-    fluid.pager.renderedPageList = function (container, events, pagerBarOptions, options, strings) {
-        options = $.extend(true, pagerBarOptions, options);
-        var that = fluid.initView("fluid.pager.renderedPageList", container, options);
-        options = that.options; // pick up any defaults
-        var idMap = {};
-        var renderOptions = {
-            cutpoints: [ 
-                {
-                    id: "page-link:link",
-                    selector: pagerBarOptions.selectors.pageLinks
-                },
-                {
-                    id: "page-link:skip",
-                    selector: pagerBarOptions.selectors.pageLinkSkip
-                }
-            ],
-            idMap: idMap
-        };
-        
-        if (options.linkBody) {
-            renderOptions.cutpoints[renderOptions.cutpoints.length] = {
-                id: "payload-component",
-                selector: options.linkBody
-            };
-        }   
-        
-        var assembleComponent = function (page, isCurrent) {
-            var obj = {
-                ID: "page-link:link",
-                localID: page + 1,
-                value: page + 1,
-                pageIndex: page,
-                decorators: [
-                    {
-                        type: "jQuery",
-                        func: "click", 
-                        args: function (event) {
-                            events.initiatePageChange.fire({pageIndex: page});
-                            event.preventDefault();
-                        }
-                    }
-                ]
-            };
-            
-            if (isCurrent) {
-                obj.current = true;
-                obj.decorators = obj.decorators.concat([
-                    {
-                        type: "addClass",
-                        classes: that.options.styles.currentPage
-                    },
-                    {
-                        type: "jQuery",
-                        func: "attr", 
-                        args: ["aria-label", that.options.strings.currentPageIndexMsg] 
-                    }
-                ]);
-            }
-            
-            return obj;
-        };
-             
-        function pageToComponent(current) {
-            return function (page) {
-                return page === -1 ? {
-                    ID: "page-link:skip"
-                } : assembleComponent(page, page === current);
-            };
-        }
-        
-        var root = that.locate("root");
-        fluid.expectFilledSelector(root, "Error finding root template for fluid.pager.renderedPageList");
-        
-        var template = fluid.selfRender(root, {}, renderOptions);
-        events.onModelChange.addListener(
-            function (newModel, oldModel) {
-                var pages = that.options.pageStrategy(newModel.pageCount, 0, newModel.pageIndex);
-                var pageTree = fluid.transform(pages, pageToComponent(newModel.pageIndex));
-                if (pageTree.length > 1) {
-                    pageTree[pageTree.length - 1].value = pageTree[pageTree.length - 1].value + strings.last;
-                }
-                events.onRenderPageLinks.fire(pageTree, newModel);
-                
-                //Destroys all the tooltips before rerendering the pagelinks.
-                //This will clean up the tooltips, which are all added to the end at the end of the DOM,
-                //and prevent the tooltips from sticking around when using the keyboard to activate
-                //the page links.
-                $.each(idMap, function (key, id) {
-                    var pageLink = fluid.jById(id);
-                    if (pageLink.tooltip) {
-                        pageLink.tooltip("destroy");
-                    }
-                });
-                fluid.reRender(template, root, pageTree, renderOptions);
-                updateStyles(that, newModel, oldModel);
-            }
-        );
-        return that;
-    };
-    
-    fluid.defaults("fluid.pager.renderedPageList", {
-        selectors: {
-            root: ".flc-pager-links"
-        },
-        linkBody: "a",
-        pageStrategy: fluid.pager.everyPageStrategy
-    });
-    
-    var updatePreviousNext = function (that, options, newModel) {
-        if (newModel.pageIndex === 0) {
-            that.previous.addClass(options.styles.disabled);
-        } else {
-            that.previous.removeClass(options.styles.disabled);
-        }
-        
-        if (newModel.pageIndex === newModel.pageCount - 1) {
-            that.next.addClass(options.styles.disabled);
-        } else {
-            that.next.removeClass(options.styles.disabled);
-        }
-    };
-    
-    fluid.pager.previousNext = function (container, events, options) {
-        var that = fluid.initView("fluid.pager.previousNext", container, options);
-        that.previous = that.locate("previous");
-        bindLinkClick(that.previous, events, {relativePage: -1});
-        that.next = that.locate("next");
-        bindLinkClick(that.next, events, {relativePage: +1});
-        events.onModelChange.addListener(
-            function (newModel, oldModel, overallThat) {
-                updatePreviousNext(that, options, newModel);
-            }
-        );
-        return that;
-    };
-
-    fluid.pager.pagerBar = function (events, container, options, strings) {
-        var that = fluid.initView("fluid.pager.pagerBar", container, options);
-        that.pageList = fluid.initSubcomponent(that, "pageList", 
-            [container, events, that.options, fluid.COMPONENT_OPTIONS, strings]);
-        that.previousNext = fluid.initSubcomponent(that, "previousNext", 
-            [container, events, that.options, fluid.COMPONENT_OPTIONS, strings]);
-        
-        return that;
-    };
-
-    
-    fluid.defaults("fluid.pager.pagerBar", {
-            
-        previousNext: {
-            type: "fluid.pager.previousNext"
-        },
-        
-        pageList: {
-            type: "fluid.pager.renderedPageList",
-            options: {
-                pageStrategy: fluid.pager.gappedPageStrategy(3, 1)
-            }
-        },
-        
-        selectors: {
-            pageLinks: ".flc-pager-pageLink",
-            pageLinkSkip: ".flc-pager-pageLink-skip",
-            previous: ".flc-pager-previous",
-            next: ".flc-pager-next"
-        },
-        
-        styles: {
-            currentPage: "fl-pager-currentPage",
-            disabled: "fl-pager-disabled"
-        },
-        
-        strings: {
-            currentPageIndexMsg: "Current page"
-        }
-    });
-
-    function getColumnDefs(that) {
-        return that.options.columnDefs;
-    }
-
-    fluid.pager.findColumnDef = function (columnDefs, key) {
-        var columnDef = $.grep(columnDefs, function (def) {
-            return def.key === key;
-        })[0];
-        return columnDef;
-    };
-    
-    function getRoots(target, overallThat, index) {
-        var cellRoot = (overallThat.options.dataOffset ? overallThat.options.dataOffset + "." : "");
-        target.shortRoot = index;
-        target.longRoot = cellRoot + target.shortRoot;
-    }
-    
-    function expandPath(EL, shortRoot, longRoot) {
-        if (EL.charAt(0) === "*") {
-            return longRoot + EL.substring(1); 
-        } else {
-            return EL.replace("*", shortRoot);
-        }
-    }
-    
-    fluid.pager.fetchValue = function (that, dataModel, index, valuebinding, roots) {
-        getRoots(roots, that, index);
-
-        var path = expandPath(valuebinding, roots.shortRoot, roots.longRoot);
-        return fluid.get(dataModel, path);
-    };
-    
-    fluid.pager.basicSorter = function (overallThat, model) {        
-        var dataModel = overallThat.options.dataModel;
-        var roots = {};
-        var columnDefs = getColumnDefs(overallThat);
-        var columnDef = fluid.pager.findColumnDef(columnDefs, model.sortKey);
-        var sortrecs = [];
-        for (var i = 0; i < model.totalRange; ++i) {
-            sortrecs[i] = {
-                index: i,
-                value: fluid.pager.fetchValue(overallThat, dataModel, i, columnDef.valuebinding, roots)
-            };
-        }
-        function sortfunc(arec, brec) {
-            var a = arec.value;
-            var b = brec.value;
-            return a === b ? 0 : (a > b ? model.sortDir : -model.sortDir); 
-        }
-        sortrecs.sort(sortfunc);
-        return fluid.transform(sortrecs, function (row) {
-            return row.index;
-        });
-    };
-
-    
-    fluid.pager.directModelFilter = function (model, pagerModel, perm) {
-        var togo = [];
-        var limit = fluid.pager.computePageLimit(pagerModel);
-        for (var i = pagerModel.pageIndex * pagerModel.pageSize; i < limit; ++i) {
-            var index = perm ? perm[i] : i;
-            togo[togo.length] = {index: index, row: model[index]};
-        }
-        return togo;
-    };
-    
-    function expandVariables(value, opts) {
-        var togo = "";
-        var index = 0;
-        while (true) {
-            var nextindex = value.indexOf("${", index);
-            if (nextindex === -1) {
-                togo += value.substring(index);
-                break;
-            } else {
-                togo += value.substring(index, nextindex);
-                var endi = value.indexOf("}", nextindex + 2);
-                var EL = value.substring(nextindex + 2, endi);
-                if (EL === "VALUE") {
-                    EL = opts.EL;
-                } else {
-                    EL = expandPath(EL, opts.shortRoot, opts.longRoot);
-                }
-                var val = fluid.get(opts.dataModel, EL);
-                togo += val;
-                index = endi + 1;
-            }
-        }
-        return togo;
-    }
-   
-    function expandPaths(target, tree, opts) {
-        for (var i in tree) {
-            var val = tree[i];
-            if (val === fluid.VALUE) {
-                if (i === "valuebinding") {
-                    target[i] = opts.EL;
-                } else {
-                    target[i] = {"valuebinding" : opts.EL};
-                }
-            } else if (i === "valuebinding") {
-                target[i] = expandPath(tree[i], opts);
-            } else if (typeof (val) === 'object') {
-                target[i] = val.length !== undefined ? [] : {};
-                expandPaths(target[i], val, opts);
-            } else if (typeof (val) === 'string') {
-                target[i] = expandVariables(val, opts);
-            } else {
-                target[i] = tree[i];
-            }
-        }
-        return target;
-    }
-   
-   // sets opts.EL, returns ID
-    function iDforColumn(columnDef, opts) {
-        var options = opts.options;
-        var EL = columnDef.valuebinding;
-        var key = columnDef.key;
-        if (!EL) {
-            fluid.fail("Error in definition for column with key " + key + ": valuebinding is not set");
-        }
-        opts.EL = expandPath(EL, opts.shortRoot, opts.longRoot);
-        if (!key) {
-            var segs = fluid.model.parseEL(EL);
-            key = segs[segs.length - 1];
-        }
-        var ID = (options.keyPrefix ? options.keyPrefix : "") + key;
-        return ID;
-    }
-   
-    function expandColumnDefs(filteredRow, opts) {
-        var tree = fluid.transform(opts.columnDefs, function (columnDef) {
-            var ID = iDforColumn(columnDef, opts);
-            var togo;
-            if (!columnDef.components) {
-                return {
-                    ID: ID,
-                    valuebinding: opts.EL
-                };
-            } else if (typeof columnDef.components === 'function') {
-                togo = columnDef.components(filteredRow.row, filteredRow.index);
-            } else {
-                togo = columnDef.components;
-            }
-            togo = expandPaths({}, togo, opts);
-            togo.ID = ID;
-            return togo;
-        });
-        return tree;
-    }
-   
-    function fetchModel(overallThat) {
-        return fluid.get(overallThat.options.dataModel, 
-            overallThat.options.dataOffset);
-    }
-   
-    
-    function bigHeaderForKey(key, opts) {
-        var id = opts.options.renderOptions.idMap["header:" + key];
-        var smallHeader = fluid.jById(id);
-        if (smallHeader.length === 0) {
-            return null;
-        }
-        var headerSortStylisticOffset = opts.overallOptions.selectors.headerSortStylisticOffset;
-        var bigHeader = fluid.findAncestor(smallHeader, function (element) {
-            return $(element).is(headerSortStylisticOffset); 
-        });
-        return bigHeader;
-    }
-   
-    function setSortHeaderClass(styles, element, sort) {
-        element = $(element);
-        element.removeClass(styles.ascendingHeader);
-        element.removeClass(styles.descendingHeader);
-        if (sort !== 0) {
-            element.addClass(sort === 1 ? styles.ascendingHeader : styles.descendingHeader);
-            //aria-sort property are specified in the w3 WAI spec, ascending, descending, none, other.
-            //since pager currently uses ascending and descending, we do not support the others.
-            //http://www.w3.org/WAI/PF/aria/states_and_properties#aria-sort
-            element.attr('aria-sort', sort === 1 ? 'ascending' : 'descending'); 
-        }
-    }
-    
-    function isCurrentColumnSortable(columnDefs, model) {
-        var columnDef = model.sortKey ? fluid.pager.findColumnDef(columnDefs, model.sortKey) : null;
-        return columnDef ? columnDef.sortable : false;
-    }
-    
-    function setModelSortHeaderClass(newModel, opts) {
-        var styles = opts.overallOptions.styles;
-        var sort = isCurrentColumnSortable(opts.columnDefs, newModel) ? newModel.sortDir : 0;
-        setSortHeaderClass(styles, bigHeaderForKey(newModel.sortKey, opts), sort);
-    }
-   
-    function fireModelChange(that, newModel, forceUpdate) {
-        computePageCount(newModel);
-        if (newModel.pageIndex >= newModel.pageCount) {
-            newModel.pageIndex = newModel.pageCount - 1;
-        }
-        if (forceUpdate || newModel.pageIndex !== that.model.pageIndex || newModel.pageSize !== that.model.pageSize || newModel.sortKey !== that.model.sortKey ||
-                newModel.sortDir !== that.model.sortDir) {
-            var sorted = isCurrentColumnSortable(getColumnDefs(that), newModel) ? 
-                that.options.sorter(that, newModel) : null;
-            that.permutation = sorted;
-            that.events.onModelChange.fire(newModel, that.model, that);
-            fluid.model.copyModel(that.model, newModel);
-        }
-    }
-
-    function generateColumnClick(overallThat, columnDef, opts) {
-        return function () {
-            if (columnDef.sortable === true) {
-                var model = overallThat.model;
-                var newModel = fluid.copy(model);
-                var styles = overallThat.options.styles;
-                var oldKey = model.sortKey;
-                if (columnDef.key !== model.sortKey) {
-                    newModel.sortKey = columnDef.key;
-                    newModel.sortDir = 1;
-                    var oldBig = bigHeaderForKey(oldKey, opts);
-                    if (oldBig) {
-                        setSortHeaderClass(styles, oldBig, 0);
-                    }
-                } else if (newModel.sortKey === columnDef.key) {
-                    newModel.sortDir = -1 * newModel.sortDir;
-                } else {
-                    return false;
-                }
-                newModel.pageIndex = 0;
-                fireModelChange(overallThat, newModel, true);
-                setModelSortHeaderClass(newModel, opts);                
-            }
-            return false;
-        };
-    }
-   
-    function fetchHeaderDecorators(decorators, columnDef) {
-        return decorators[columnDef.sortable ? "sortableHeader" : "unsortableHeader"];
-    }
-   
-    function generateHeader(overallThat, newModel, columnDefs, opts) {
-        var sortableColumnTxt = opts.options.strings.sortableColumnText;
-        if (newModel.sortDir === 1) {
-            sortableColumnTxt = opts.options.strings.sortableColumnTextAsc;
-        } else if (newModel.sortDir === -1) {
-            sortableColumnTxt = opts.options.strings.sortableColumnTextDesc;
-        }
-
-        return {
-            children:  
-                fluid.transform(columnDefs, function (columnDef) {
-                return {
-                    ID: iDforColumn(columnDef, opts),
-                    value: columnDef.label,
-                    decorators: [ 
-                        {"jQuery": ["click", generateColumnClick(overallThat, columnDef, opts)]},
-                        {identify: "header:" + columnDef.key},
-                        {type: "attrs", attributes: { title: (columnDef.key === newModel.sortKey) ? sortableColumnTxt : opts.options.strings.sortableColumnText}}
-                    ].concat(fetchHeaderDecorators(opts.overallOptions.decorators, columnDef))
-                };
-            })
-        };
-    }
-   
-    /** A body renderer implementation which uses the Fluid renderer to render a table section **/
-   
-    fluid.pager.selfRender = function (overallThat, inOptions) {
-        var that = fluid.initView("fluid.pager.selfRender", overallThat.container, inOptions);
-        var options = that.options;
-        options.renderOptions.idMap = options.renderOptions.idMap || {};
-        var idMap = options.renderOptions.idMap;
-        var root = that.locate("root");
-        var template = fluid.selfRender(root, {}, options.renderOptions);
-        root.addClass(options.styles.root);
-        var columnDefs = getColumnDefs(overallThat);
-        var expOpts = {options: options, columnDefs: columnDefs, overallOptions: overallThat.options, dataModel: overallThat.options.dataModel, idMap: idMap};
-        var directModel = fetchModel(overallThat);
-
-        return {
-            returnedOptions: {
-                listeners: {
-                    onModelChange: function (newModel, oldModel) {
-                        var filtered = overallThat.options.modelFilter(directModel, newModel, overallThat.permutation);
-                        var tree = fluid.transform(filtered, 
-                            function (filteredRow) {
-                                getRoots(expOpts, overallThat, filteredRow.index);
-                                if (columnDefs === "explode") {
-                                    return fluid.explode(filteredRow.row, expOpts.longRoot);
-                                } else if (columnDefs.length) {
-                                    return expandColumnDefs(filteredRow, expOpts);
-                                }
-                            });
-                        var fullTree = {};
-                        fullTree[options.row] = tree;
-                        if (typeof (columnDefs) === "object") {
-                            fullTree[options.header] = generateHeader(overallThat, newModel, columnDefs, expOpts);
-                        }
-                        options.renderOptions = options.renderOptions || {};
-                        options.renderOptions.model = expOpts.dataModel;
-                        fluid.reRender(template, root, fullTree, options.renderOptions);
-                        setModelSortHeaderClass(newModel, expOpts); // TODO, should this not be actually renderable?
-                    }
-                }
-            }
-        };
-    };
-
-    fluid.defaults("fluid.pager.selfRender", {
-        selectors: {
-            root: ".flc-pager-body-template"
-        },
-        
-        styles: {
-            root: "fl-pager"
-        },
-        
-        keyStrategy: "id",
-        keyPrefix: "",
-        row: "row:",
-        header: "header:",
-        
-        strings: {
-            sortableColumnText: "Select to sort",
-            sortableColumnTextDesc: "Select to sort in ascending, currently in descending order.",
-            sortableColumnTextAsc: "Select to sort in descending, currently in ascending order."
-        },
-
-        // Options passed upstream to the renderer
-        renderOptions: {}
-    });
-
-    fluid.pager.summaryAria = function (element) {
-        element.attr({
-            "aria-relevant": "all",
-            "aria-atomic": "false",
-            "aria-live": "assertive",
-            "role": "status"
-        });
-    };
-
-    fluid.pager.summary = function (dom, options) {
-        var node = dom.locate("summary");
-        fluid.pager.summaryAria(node);
-        return {
-            returnedOptions: {
-                listeners: {
-                    onModelChange: function (newModel, oldModel) {
-                        var text = fluid.stringTemplate(options.message, {
-                            first: newModel.pageIndex * newModel.pageSize + 1,
-                            last: fluid.pager.computePageLimit(newModel),
-                            total: newModel.totalRange,
-                            currentPage: newModel.pageIndex + 1
-                        });
-                        if (node.length > 0) {
-                            node.text(text);
-                        }
-                    }
-                }
-            }
-        };
-    };
-    
-    fluid.pager.directPageSize = function (that) {
-        var node = that.locate("pageSize");
-        if (node.length > 0) {
-            that.events.onModelChange.addListener(
-                function (newModel, oldModel) {
-                    if (node.val() !== newModel.pageSize) {
-                        node.val(newModel.pageSize);
-                    }
-                }
-            );
-            node.change(function () {
-                that.events.initiatePageSizeChange.fire(node.val());
-            });
-        }
-    };
-
-
-    fluid.pager.rangeAnnotator = function (that, options) {
-        var roots = {};
-        that.events.onRenderPageLinks.addListener(function (tree, newModel) {
-            var column = that.options.annotateColumnRange;
-            var dataModel = that.options.dataModel;
-            // TODO: reaching into another component's options like this is a bit unfortunate
-            var columnDefs = getColumnDefs(that);
-
-            if (!column || !dataModel || !columnDefs) {
-                return;
-            }
-            var columnDef = fluid.pager.findColumnDef(columnDefs, column);
-            
-            function fetchValue(index) {
-                index = that.permutation ? that.permutation[index] : index;
-                return fluid.pager.fetchValue(that, dataModel, index, columnDef.valuebinding, roots);
-            }
-            var tModel = {};
-            fluid.model.copyModel(tModel, newModel);
-            
-            fluid.transform(tree, function (cell) {
-                if (cell.ID === "page-link:link") {
-                    var page = cell.pageIndex;
-                    var start = page * tModel.pageSize;
-                    tModel.pageIndex = page;
-                    var limit = fluid.pager.computePageLimit(tModel);
-                    var iValue = fetchValue(start);
-                    var lValue = fetchValue(limit - 1);
-                    
-                    var tooltipOpts = fluid.copy(that.options.tooltip.options) || {};
-                    
-                    if (!tooltipOpts.content) {
-                        tooltipOpts.content = function () { 
-                            return fluid.stringTemplate(that.options.markup.rangeAnnotation, {
-                                first: iValue,
-                                last: lValue
-                            });
-                        };
-                    }
-                    
-                    if (!cell.current) {
-                        var decorators = [
-                            {
-                                type: "fluid",
-                                func: that.options.tooltip.type,
-                                options: tooltipOpts
-                            },
-                            {
-                                identify: page
-                            }
-                        ];
-                        cell.decorators = cell.decorators.concat(decorators);
-                    }
-                }
-            });
-        });
-    };
-
-    /*******************
-     * Pager Component *
-     *******************/
-    
-    fluid.pagerImpl = function (container, options) {
-        var that = fluid.initView("fluid.pager", container, options);
-                
-        that.container.attr("role", "application");
-        
-        that.events.initiatePageChange.addListener(
-            function (arg) {
-                var newModel = fluid.copy(that.model);
-                if (arg.relativePage !== undefined) {
-                    newModel.pageIndex = that.model.pageIndex + arg.relativePage;
-                } else {
-                    newModel.pageIndex = arg.pageIndex;
-                }
-                if (newModel.pageIndex === undefined || newModel.pageIndex < 0) {
-                    newModel.pageIndex = 0;
-                }
-                fireModelChange(that, newModel, arg.forceUpdate);
-            }
-        );
-        
-        that.events.initiatePageSizeChange.addListener(
-            function (arg) {
-                var newModel = fluid.copy(that.model);
-                newModel.pageSize = arg;
-                fireModelChange(that, newModel);     
-            }
-        );
-
-        // Setup the top and bottom pager bars.
-        var pagerBarElement = that.locate("pagerBar");
-        if (pagerBarElement.length > 0) {
-            that.pagerBar = fluid.initSubcomponent(that, "pagerBar", 
-                [that.events, pagerBarElement, fluid.COMPONENT_OPTIONS, that.options.strings]);
-        }
-        
-        var pagerBarSecondaryElement = that.locate("pagerBarSecondary");
-        if (pagerBarSecondaryElement.length > 0) {
-            that.pagerBarSecondary = fluid.initSubcomponent(that, "pagerBar",
-                [that.events, pagerBarSecondaryElement, fluid.COMPONENT_OPTIONS, that.options.strings]);
-        }
- 
-        that.bodyRenderer = fluid.initSubcomponent(that, "bodyRenderer", [that, fluid.COMPONENT_OPTIONS]);
-        
-        that.summary = fluid.initSubcomponent(that, "summary", [that.dom, fluid.COMPONENT_OPTIONS]);
-        
-        that.pageSize = fluid.initSubcomponent(that, "pageSize", [that]);
-        
-        that.rangeAnnotator = fluid.initSubcomponent(that, "rangeAnnotator", [that, fluid.COMPONENT_OPTIONS]);
- 
-        that.model = fluid.copy(that.options.model);
-        
-        var dataModel = fetchModel(that);
-        if (dataModel) {
-            that.model.totalRange = dataModel.length;
-        }
-        if (that.model.totalRange === undefined) {
-            if (!that.pagerBar) {
-                fluid.fail("Error in Pager configuration - cannot determine total range, " +
-                    " since not configured in model.totalRange and no PagerBar is configured");
-            }
-            that.model = that.pagerBar.pageList.defaultModel;
-        }
-        that.applier = fluid.makeChangeApplier(that.model);
-
-        that.events.initiatePageChange.fire({pageIndex: that.model.pageIndex ? that.model.pageIndex : 0, 
-            forceUpdate: true});
-
-        return that;
-    };
-    
-    fluid.defaults("fluid.pager", {
-        mergePolicy: {
-            dataModel: "preserve",
-            model: "preserve"
-        },
-        pagerBar: {
-            type: "fluid.pager.pagerBar"
-        },
-        
-        summary: {type: "fluid.pager.summary", options: {
-            message: "Viewing page %currentPage. Showing records %first - %last of %total items." 
-        }},
-        
-        pageSize: {
-            type: "fluid.pager.directPageSize"
-        },
-        
-        modelFilter: fluid.pager.directModelFilter,
-        
-        sorter: fluid.pager.basicSorter,
-        
-        bodyRenderer: {
-            type: "fluid.pager.selfRender"
-        },
-        
-        model: {
-            pageIndex: undefined,
-            pageSize: 10,
-            totalRange: undefined
-        },
-        
-        dataModel: undefined,
-        // Offset of the tree's "main" data from the overall dataModel root
-        dataOffset: "",
-        
-        // strategy for generating a tree row, either "explode" or an array of columnDef objects
-        columnDefs: [
-            {
-                key: "column1",
-                valuebinding: "*.value1",  
-                sortable: true
-            }
-        ],
-        
-        annotateColumnRange: "column1",
-        
-        tooltip: {
-            type: "fluid.tooltip"
-        },
-        
-        rangeAnnotator: {
-            type: "fluid.pager.rangeAnnotator"
-        },
-        
-        selectors: {
-            pagerBar: ".flc-pager-top",
-            pagerBarSecondary: ".flc-pager-bottom",
-            summary: ".flc-pager-summary",
-            pageSize: ".flc-pager-page-size",
-            headerSortStylisticOffset: ".flc-pager-sort-header"
-        },
-        
-        styles: {
-            ascendingHeader: "fl-pager-asc",
-            descendingHeader: "fl-pager-desc"
-        },
-        
-        decorators: {
-            sortableHeader: [],
-            unsortableHeader: []
-        },
-        
-        strings: {
-            last: " (last)"
-        },
-        
-        events: {
-            initiatePageChange: null,
-            initiatePageSizeChange: null,
-            onModelChange: null,
-            onRenderPageLinks: null
-        },
-        
-        markup: {
-            rangeAnnotation: "<b> %first </b><br/>&mdash;<br/><b> %last </b>"
-        }
-    });
 })(jQuery, fluid_1_4);
 /*
  * jQuery UI Draggable 1.8

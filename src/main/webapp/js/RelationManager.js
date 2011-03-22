@@ -57,11 +57,7 @@ cspace = cspace || {};
         that.dataContext.events.afterAddRelations.addListener(updateRelations(that.options.applier, that.model));
     };
     
-    cspace.relationManager = function (container, options, demandsOptions) {
-        
-        options = options || {};
-        fluid.merge({model: "preserve", applier: "nomerge"}, options.value || options, demandsOptions);
-        
+    cspace.relationManager = function (container, options) {
         var that = fluid.initRendererComponent("cspace.relationManager", container, options);
         that.renderer.refreshView();
         
@@ -77,19 +73,6 @@ cspace = cspace || {};
     cspace.relationManager.provideLocalAddRelations = function (relationManager) {
         return updateRelations(relationManager.options.applier, relationManager.model);
     };
-    
-    fluid.demands("cspace.searchToRelateDialog", ["cspace.relationManager", "cspace.localData"], ["{relationManager}.dom.searchDialog", fluid.COMPONENT_OPTIONS, {
-        listeners: {
-            addRelations: {
-                expander: {
-                    type: "fluid.deferredInvokeCall",
-                    func: "cspace.relationManager.provideLocalAddRelations",
-                    args: "{relationManager}"
-                }
-            }
-        }
-    }]);
-    fluid.demands("cspace.searchToRelateDialog", "cspace.relationManager", ["{relationManager}.dom.searchDialog", fluid.COMPONENT_OPTIONS]);
 
     cspace.relationManager.permissionResolver = function (options) {
         var that = fluid.initLittleComponent("cspace.relationManager.permissionResolver", options);
@@ -115,6 +98,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.relationManager", {
+        gradeNames: ["fluid.rendererComponent"],
         produceTree: cspace.relationManager.produceTree,
         components: {
             dataContext: {

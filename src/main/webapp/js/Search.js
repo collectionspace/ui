@@ -198,7 +198,7 @@ cspace = cspace || {};
             var pagerModel = newPagerModel || that.resultsPager.model;
             searchModel.pageSize = pagerModel.pageSize;
             searchModel.pageIndex = pagerModel.pageIndex;
-            var url = that.options.searchUrlBuilder(that.model.searchModel);
+            var url = fluid.invokeGlobalFunction(that.options.searchUrlBuilder, [that.model.searchModel]);
             that.events.onSearch.fire();
             fluid.log("Querying url " + url);
             $.ajax({
@@ -215,9 +215,7 @@ cspace = cspace || {};
         };
     };
 
-    cspace.search.searchView = function (container, options, demandsOptions) {
-        options = options || {};
-        fluid.merge(null, options.value || options, demandsOptions);
+    cspace.search.searchView = function (container, options) {
         var that = fluid.initView("cspace.search.searchView", container, options);
         
         that.hideResults = function () {
@@ -283,15 +281,10 @@ cspace = cspace || {};
         // TODO: IoC resolve this and remove the "localSearchToRelateDialog" from RelationManager.js
         var prefix = cspace.util.isTest ? "../data/" : "../../../test/data/";
         return prefix + recordTypeParts.join('/') + "/search.json";
-    };
-
-    fluid.demands("fluid.pager", "cspace.search.searchView", 
-        ["{searchView}.dom.resultsContainer", fluid.COMPONENT_OPTIONS]);
-
-    fluid.demands("mainSearch", "cspace.search.searchView",
-        ["{searchView}.dom.mainSearch", fluid.COMPONENT_OPTIONS]);
+    };    
 
     fluid.defaults("cspace.search.searchView", {
+        gradeNames: ["fluid.viewComponent"],
         selectors: {
             mainSearch: ".csc-search-box",
             resultsContainer: ".csc-search-results",
@@ -323,7 +316,7 @@ cspace = cspace || {};
         columnList: ["number", "summary", "recordtype"],
         resultsSelectable: false,
 
-        searchUrlBuilder: cspace.search.defaultSearchUrlBuilder,
+        searchUrlBuilder: "cspace.search.defaultSearchUrlBuilder",
         
         components: {
             mainSearch: {
@@ -390,17 +383,5 @@ cspace = cspace || {};
         }
 
     });
-    
-    fluid.demands("search", "cspace.searchToRelateDialog", ["{searchToRelateDialog}.container", fluid.COMPONENT_OPTIONS]);
-    // TODO: FIX THIS AS SOON AS GRADES ARE AVAILABLE.
-    fluid.demands("search", ["cspace.searchToRelateDialog", "cspace.localData"], ["{searchToRelateDialog}.container", fluid.COMPONENT_OPTIONS, {
-        searchUrlBuilder: cspace.search.localSearchUrlBuilder
-    }]);
-    fluid.demands("search", "cspace.pageBuilder", 
-        ["{pageBuilder}.options.selectors.search", fluid.COMPONENT_OPTIONS]);
-    // TODO: FIX THIS AS SOON AS GRADES ARE AVAILABLE.
-    fluid.demands("search", ["cspace.pageBuilder", "cspace.localData"], ["{pageBuilder}.options.selectors.search", fluid.COMPONENT_OPTIONS, {
-        searchUrlBuilder: cspace.search.localSearchUrlBuilder
-    }]);
         
 })(jQuery, fluid);

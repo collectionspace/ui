@@ -69,25 +69,6 @@ var permissionsTester = function ($) {
         testResolve({allOf: [{oneOf: ["loanout", "movement"], permission: "update"}, {target: "cataloging", permission: "update"}, 
             {allOf: [{allOf: ["person", "acquisition"], permission: "read"}, {target: "cataloging", permission: "delete"}]}]}, false);
     });
-    
-    permissionsTest.test("cspace.permissions.manager", function () {
-        expect(14);        
-        var manager = cspace.permissions.manager({permissions: cspace.tests.sampleUserPerms});
-        jqUnit.assertEquals("Base Resolve Permission, resolve", true, manager.resolvePermissions("loanout", "read"));
-        jqUnit.assertEquals("Base Resolve Permission, not resolve", false, manager.resolvePermissions("loanin", "create"));
-        jqUnit.assertEquals("Base Resolve Permission, empty", false, manager.resolvePermissions("acquisition", "list"));
-        jqUnit.assertEquals("resolvePermissionMin, resolve", true, manager.resolveOR("loanout", ["read", "create"]));
-        jqUnit.assertEquals("resolvePermissionMin, resolve", true, manager.resolveOR("loanin", ["read", "create"]));
-        jqUnit.assertEquals("resolvePermissionMin, not resolve", false, manager.resolveOR("loanin", ["create"]));
-        jqUnit.assertEquals("resolvePermissionMin, empty", false, manager.resolveOR("acquisition", "list"));
-        jqUnit.assertEquals("resolvePermissionAll, resolve", true, manager.resolveAND("loanout", ["read", "create"]));
-        jqUnit.assertEquals("resolvePermissionAll, resolve", false, manager.resolveAND("loanin", ["read", "create"]));
-        jqUnit.assertEquals("resolvePermissionAll, not resolve", false, manager.resolveAND("loanin", ["create"]));
-        jqUnit.assertEquals("resolvePermissionAll, resolve", true, manager.resolveAND("loanin", ["read", "list"]));
-        jqUnit.assertEquals("resolvePermissionAll, empty", false, manager.resolveAND("acquisition", "list"));
-        jqUnit.assertEquals("resolvePermissionAll, empty", true, manager.resolveAND("bla", "list"));
-        jqUnit.assertEquals("resolvePermissionAll, empty", true, manager.resolveAND("acquisition", ""));
-    });
 };
 
 (function () {

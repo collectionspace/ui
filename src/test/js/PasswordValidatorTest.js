@@ -104,6 +104,6 @@ var passwordValidatorTester = function(){
     });
 };
 
-(function () {
+jQuery(document).ready(function () {
     passwordValidatorTester();
-}());
+});

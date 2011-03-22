@@ -269,9 +269,8 @@ cspace = cspace || {};
         that.rollback();
     };
     
-    fluid.demands("recordEditorTogglable", "cspace.recordEditor", ["{recordEditor}.container", fluid.COMPONENT_OPTIONS]);
-    
     fluid.defaults("cspace.recordEditor", {
+        gradeNames: ["fluid.rendererComponent"],
         mergePolicy: {
             model: "preserve",
             applier: "nomerge",
@@ -354,11 +353,5 @@ cspace = cspace || {};
             cancel: "%webapp/html/findedit.html"
         })
     });
-
-    fluid.demands("cancel", "cspace.recordEditor", {
-        funcName: "cspace.recordEditor.cancel",
-        args: "{recordEditor}"
-    });
-    fluid.demands("recordEditor", "cspace.pageBuilder", ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
         
 })(jQuery, fluid);

@@ -52,6 +52,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.footer", {
+        gradeNames: ["fluid.rendererComponent"],
         mergePolicy: {
             model: "preserve"
         },
@@ -91,9 +92,6 @@ cspace = cspace || {};
             feedback: "Leave Feedback"
         }
     });
-    
-    fluid.demands("footer", "cspace.pageBuilder", 
-        ["{pageBuilder}.options.selectors.footer", fluid.COMPONENT_OPTIONS]);
     
     fluid.fetchResources.primeCacheFromResources("cspace.footer");
     

@@ -115,12 +115,8 @@ cspace = cspace || {};
         };
     };
     
-    fluid.demands("procedures", "cspace.sidebar", ["{sidebar}.options.selectors.relatedProcedures", fluid.COMPONENT_OPTIONS]);
-    fluid.demands("cataloging", "cspace.sidebar", ["{sidebar}.options.selectors.relatedCataloging", fluid.COMPONENT_OPTIONS]);
-    fluid.demands("cspace.recordList", "cspace.sidebar", ["{sidebar}.options.selectors.termsUsed", fluid.COMPONENT_OPTIONS]);
-    fluid.demands("togglable", "cspace.sidebar", ["{sidebar}.container", fluid.COMPONENT_OPTIONS]);
-    
     fluid.defaults("cspace.sidebar", {
+        gradeNames: ["fluid.rendererComponent"],
         components: {
             termsUsed: {
                 type: "cspace.recordList",
@@ -203,10 +199,6 @@ cspace = cspace || {};
             recordModel: "preserve",
             recordApplier: "nomerge"
         },
-        primaryRecordType: "{pageBuilder}.options.pageType",
-        uispec: "{pageBuilder}.uispec.sidebar",
-        recordApplier: "{pageBuilder}.applier",
-        recordModel: "{pageBuilder}.model",
         recordListAfterSelectHandler: cspace.recordList.afterSelectHandlerDefault,        
         resolver: "{permissionsResolver}",
         recordTypeManager: "{recordTypeManager}", //used to decide whether to show RelatedRecordsLists
@@ -243,9 +235,6 @@ cspace = cspace || {};
             reportButton: "Create"
         }
     });
-    
-    fluid.demands("sidebar", "cspace.pageBuilder", 
-        ["{pageBuilder}.options.selectors.sidebar", fluid.COMPONENT_OPTIONS]);
         
     fluid.fetchResources.primeCacheFromResources("cspace.sidebar");
         

@@ -52,7 +52,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             dataType: "json"
         };
         ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams));
-        var dc = cspace.dataContext(testModel, testOpts);
+        testOpts.model = testModel;
+        var dc = cspace.dataContext(testOpts);
         dc.create();
         ajaxMock.verify();
         ajaxMock.restore();
@@ -68,7 +69,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             dataType: "json"
         };
         ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams));
-        var dc = cspace.dataContext(testModel, testOpts);
+        testOpts.model = testModel;
+        var dc = cspace.dataContext(testOpts);
         dc.update();
         ajaxMock.verify();
         ajaxMock.restore();
@@ -96,8 +98,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         };
-
-        var dc = cspace.dataContext({csid: "12345"}, testUpdateOpts);
+        testUpdateOpts.model = {csid: "12345"};
+        var dc = cspace.dataContext(testUpdateOpts);
         dc.update();
         stop();
     });
@@ -111,7 +113,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             dataType: "json"
         };
         ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams));
-        var dc = cspace.dataContext(testModel, testOpts);
+        testOpts.model = testModel;
+        var dc = cspace.dataContext(testOpts);
         dc.fetch(77);
         ajaxMock.verify();
         ajaxMock.restore();
@@ -131,8 +134,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             jqUnit.assertEquals("Operation", "fetch", operation);
             start();
         };
-
-        var dc = cspace.dataContext(testEmptyModel, testFetchOpts);
+        testFetchOpts.model = testEmptyModel;
+        var dc = cspace.dataContext(testFetchOpts);
         dc.events.afterFetch.addListener(fetchSuccess);
         dc.events.onError.addListener(fetchError);
         stop();
@@ -170,7 +173,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         };
-        var dc = cspace.dataContext(testModel, testFetchOpts);
+        testFetchOpts.model = testModel;
+        var dc = cspace.dataContext(testFetchOpts);
         dc.fetch("1984.068.0335b");
         stop();
     });
@@ -200,8 +204,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             dataType: "json"
         };
         ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams));
-
-        var dc = cspace.dataContext(testModel, testOpts);
+        
+        testOpts.model = testModel;
+        var dc = cspace.dataContext(testOpts);
         dc.addRelations(testRelations);
         ajaxMock.verify();
         ajaxMock.restore();
@@ -215,8 +220,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             type: "DELETE"
         };
         ajaxMock.modify().args(jqMock.is.objectThatIncludes(expectedAjaxParams));
-
-        var dc = cspace.dataContext(testModel, testOpts);
+        testOpts.model = testModel;
+        var dc = cspace.dataContext(testOpts);
         dc.remove(testModel.csid);
 
         ajaxMock.verify();

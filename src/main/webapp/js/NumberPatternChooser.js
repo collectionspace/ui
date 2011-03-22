@@ -179,6 +179,7 @@ cspace = cspace || {};
     };
 
     fluid.defaults("cspace.numberPatternChooser", {
+        gradeNames: ["fluid.viewComponent"],
         selectors: {
             button: ".csc-numberPatternChooser-button",
             list: ".csc-numberPatternChooser-list",
@@ -198,8 +199,7 @@ cspace = cspace || {};
             afterRender: null
         },
         templateUrl: "../html/components/NumberPatternChooser.html",
-        baseUrl: "{recordEditor}.options.dataContext.options.baseUrl"
+        baseUrl: "../../chain"
     });
     
-    fluid.demands("cspace.numberPatternChooser", "cspace.recordEditor", ["@0", fluid.COMPONENT_OPTIONS]);
 })(jQuery, fluid);

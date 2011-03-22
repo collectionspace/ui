@@ -96,11 +96,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         findEdit.search();
     };
     
+    cspace.tests.urlBuilder = function (searchModel) {
+        return "../data/" + searchModel.recordType + "/search.json";
+    };
+    
     var findEditInitTests = function (options) {
         var localOpts = {
-            searchUrlBuilder: function (searchModel) {
-                return "../data/" + searchModel.recordType + "/search.json";
-            },
+            searchUrlBuilder: "cspace.tests.urlBuilder",
             listeners: {
                 onError: function () {
                     jqUnit.assertTrue("Error shouldn't happen", false);
@@ -120,7 +122,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     findEditTests.test("Use the local search url option to override the default search url", function () {
         var options = fluid.copy(opts) || {};
-        options.searchUrlBuilder = cspace.search.localSearchUrlBuilder;
+        options.searchUrlBuilder = "cspace.search.localSearchUrlBuilder";
         findEditUrlTest(options, "../data/intake/search.json");
     });
     

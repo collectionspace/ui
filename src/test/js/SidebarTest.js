@@ -13,7 +13,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 cspace.test = cspace.test || {};
 
-var createNewTester = function ($) {
+var sidebarTester = function ($) {
     var container = "#main";
     var sampleOptions = {
         uispec:{
@@ -177,6 +177,6 @@ var createNewTester = function ($) {
     });
 };
 
-(function () {
-    createNewTester(jQuery);
-}());
+jQuery(document).ready(function () {
+    sidebarTester(jQuery);
+});

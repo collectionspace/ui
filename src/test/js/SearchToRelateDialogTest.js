@@ -24,9 +24,9 @@ var searchToRelateDialogTester = function () {
     var bareSearchToRelateDialogTest = new jqUnit.TestCase("SearchToRelateDialog Tests");
         
     var searchToRelateDialogTest = cspace.tests.testEnvironment({testCase: bareSearchToRelateDialogTest});
-
-    var testSearchUrlBuilder = function () {
-        return "../data/intake/search.json";
+    
+    cspace.tests.searchUrlBuilder = function (searchModel) {
+        return "../data/" + searchModel.recordType + "/search.json";
     };
     
     var createSearchToRelate = function (primary, related, listeners, searchOpts) {
@@ -63,9 +63,7 @@ var searchToRelateDialogTester = function () {
                 dialog.search.mainSearch.locate("searchButton").click();
             }
         }, {
-            searchUrlBuilder: function (searchModel) {
-                return "../data/" + searchModel.recordType + "/search.json";
-            },
+            searchUrlBuilder: "cspace.tests.searchUrlBuilder",
             listeners: {
                 onSearch: function () {
                     jqUnit.assertEquals("Search should be set up to search for the correct record type", 
@@ -99,9 +97,7 @@ var searchToRelateDialogTester = function () {
                 dialog.search.mainSearch.locate("searchButton").click();
             }
         }, {
-            searchUrlBuilder: function (searchModel) {
-                return "../data/" + searchModel.recordType + "/search.json";
-            },
+            searchUrlBuilder: "cspace.tests.searchUrlBuilder",
             listeners: {
                 onSearch: function () {
                     jqUnit.assertEquals("Search should be set up to search for the correct record type", testRecordType, searchToRelateDialog.search.model.searchModel.recordType);
@@ -137,9 +133,7 @@ var searchToRelateDialogTester = function () {
                 dialog.search.mainSearch.locate("searchButton").click();
             }
         }, {
-            searchUrlBuilder: function (searchModel) {
-                return "../data/" + searchModel.recordType + "/search.json";
-            },
+            searchUrlBuilder: "cspace.tests.searchUrlBuilder",
             listeners: {
                 onSearch : function () {
                     jqUnit.notVisible("When search submitted, search results should be hidden",
@@ -213,9 +207,7 @@ var searchToRelateDialogTester = function () {
                 start();
             }
         }, {
-            searchUrlBuilder: function (searchModel) {
-                return "../data/" + searchModel.recordType + "/search.json";
-            },
+            searchUrlBuilder: "cspace.tests.searchUrlBuilder",
             listeners: {
                 afterSearch : function () {
                     searchToRelateDialog.search.model.results[0].selected = true;
@@ -243,9 +235,7 @@ var searchToRelateDialogTester = function () {
                 start();
             }
         }, {
-            searchUrlBuilder: function (searchModel) {
-                return "../data/" + searchModel.recordType + "/search.json";
-            },
+            searchUrlBuilder: "cspace.tests.searchUrlBuilder",
             listeners: {
                 afterSearch : function () {
                     searchToRelateDialog.search.model.results[0].selected = true;

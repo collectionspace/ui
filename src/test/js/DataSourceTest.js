@@ -68,7 +68,7 @@ var dataSourceTester = function ($) {
                     href: "../data/role/list.json",
                     path: "fields.role",
                     resourcePath: "items",
-                    merge: cspace.dataSource.mergeRoles
+                    merge: "cspace.dataSource.mergeRoles"
                 }
             }
         }, opts);

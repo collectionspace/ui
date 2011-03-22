@@ -43,6 +43,21 @@
         }
     },
     "recordEditor": {
+        "expander": {
+            "type": "fluid.renderer.condition",
+            "condition": "${fields.id}",
+            "trueTree": {
+                ".csc-blobs": {}
+            },
+            "falseTree": {
+                ".csc-blobs": {
+                    "decorators": {
+                        "type": "addClass",
+                        "classes": "hidden"
+                    }
+                }
+            }
+        },
         ".csc-media-creator": {
             "decorators": [
                 {

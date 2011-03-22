@@ -22,23 +22,19 @@ cspace = cspace || {};
         });
     };
 
-    cspace.adminRoles = function (container, options, demandsOptions) {
-        options = options || {};
-        fluid.merge(null, options.value || options, demandsOptions);
+    cspace.adminRoles = function (container, options) {
         var that = fluid.initView("cspace.adminRoles", container, options);
         fluid.initDependents(that);
         bindEventHandlers(that);
         return that;
     };
     
-    fluid.demands("roleListEditor", "cspace.adminRoles", ["{adminRoles}container", 
-        "{adminRoles}options.recordType", "{adminRoles}options.uispec", fluid.COMPONENT_OPTIONS]);
-    
     cspace.adminRoles.assertDisplay = function (displayString) {
         return displayString !== "none";
     };
 
     fluid.defaults("cspace.adminRoles", {
+        gradeNames: ["fluid.viewComponent"],
         recordType: "role",
         components: {
             roleListEditor: {
@@ -56,18 +52,5 @@ cspace = cspace || {};
             afterRender: null
         }
     });
-    
-    fluid.demands("role", ["cspace.pageBuilder", "cspace.localData"], ["{pageBuilder}.options.selectors.role", fluid.COMPONENT_OPTIONS, {
-        recordType: "role/records.json",
-        components: {
-            roleListEditor: {
-                options: {
-                    baseUrl: "../../../test/data/"
-                }
-            }
-        }
-    }]);
-    
-    fluid.demands("role", "cspace.pageBuilder", ["{pageBuilder}.options.selectors.role", fluid.COMPONENT_OPTIONS]);
 
 })(jQuery, fluid);

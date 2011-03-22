@@ -92,10 +92,9 @@ cspace = cspace || {};
         };
         return tree;
     };
-
-    fluid.demands("searchBox", "cspace.header", ["{header}.options.selectors.searchBox", fluid.COMPONENT_OPTIONS]);
     
     fluid.defaults("cspace.header", {
+        gradeNames: ["fluid.rendererComponent"],
         mergePolicy: {
             model: "preserve"
         },
@@ -192,9 +191,6 @@ cspace = cspace || {};
             userName: "%userName"
         }
     });
-    
-    fluid.demands("header", "cspace.pageBuilder",
-        ["{pageBuilder}.options.selectors.header", fluid.COMPONENT_OPTIONS]);
     
     fluid.fetchResources.primeCacheFromResources("cspace.header");
     

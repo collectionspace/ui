@@ -93,6 +93,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.titleBar", {
+        gradeNames: ["fluid.rendererComponent"],
         selectors: {
             title: ".csc-titleBar-value",
             recordType: ".csc-titleBar-recordType"
@@ -123,11 +124,6 @@ cspace = cspace || {};
         fields: [],
         parentBundle: "{globalBundle}",
         produceTree: cspace.titleBar.produceTree,
-        recordApplier: "{pageBuilder}.applier",
-        recordModel: "{pageBuilder}.model",
-        model: {
-            recordType: "{pageBuilder}.options.recordType"
-        },
         separator: " - ",
         resources: {
             template: cspace.resourceSpecExpander({
@@ -136,9 +132,6 @@ cspace = cspace || {};
             })
         }
     });
-    
-    fluid.demands("titleBar", "cspace.pageBuilder", 
-        ["{pageBuilder}.options.selectors.titleBar", fluid.COMPONENT_OPTIONS]);
 
     fluid.fetchResources.primeCacheFromResources("cspace.titleBar");
 })(jQuery, fluid);

@@ -186,6 +186,7 @@ cspace = cspace || {};
         return that;
     };
     fluid.defaults("cspace.pageBuilderIO", {
+        gradeNames: ["fluid.littleComponent"],
         schema: [
             "recordlist",
             "recordtypes"
@@ -225,15 +226,17 @@ cspace = cspace || {};
     });
     
     cspace.pageBuilderIO.resolveReadOnly = function (options) {
+        var that = fluid.initLittleComponent("cspace.pageBuilderIO.resolveReadOnly", options);
+        
         // Return true if read only is enforced.
-        if (options.readOnly) {
+        if (that.options.readOnly) {
             return true;
         }
         // If there's no target (recordType) there is no concept of read only and thus we return false.
-        if (!options.target) {
+        if (!that.options.target) {
             return false;
         }
-        var that = fluid.initLittleComponent("cspace.pageBuilderIO.resolveReadOnly", options);
+        
         that.recordPerms = {};
         fluid.each(that.options.perms, function (permission) {
             that.recordPerms[permission] = cspace.permissions.resolve({
@@ -246,6 +249,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.pageBuilderIO.resolveReadOnly", {
+        gradeNames: ["fluid.littleComponent"],
         perms: ["create", "update"]
     });
     
@@ -262,6 +266,7 @@ cspace = cspace || {};
     };
 
     fluid.defaults("cspace.pageBuilder", {
+        gradeNames: ["fluid.littleComponent"],
         dataContext: "{dataContext}",
         recordType: "{pageBuilderIO}.options.recordType",
         model: "{pageBuilderIO}.options.model",

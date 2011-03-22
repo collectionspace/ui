@@ -79,14 +79,11 @@ cspace = cspace || {};
      * @param {Object} model the model that is bound to this data context
      * @param {Object} options configuration options
      */
-    cspace.dataContext = function (model, options, demandsOptions) {
-        options = options || {};
-        fluid.merge(null, options.value || options, demandsOptions);
-        
+    cspace.dataContext = function (options) {
         var that = fluid.initLittleComponent("cspace.dataContext", options);
         fluid.initDependents(that);
         
-        that.model = model;
+        that.model = that.options.model;
         fluid.instantiateFirers(that, that.options);
 
         that.updateModel = function (newModel, source) {
@@ -163,6 +160,10 @@ cspace = cspace || {};
     };
 
     fluid.defaults("cspace.dataContext", {
+        gradeNames: ["fluid.littleComponent"],
+        mergePolicy: {
+            model: "preserve"
+        },
         components: {
             instantiator: "{instantiator}"
         },
@@ -181,32 +182,5 @@ cspace = cspace || {};
         dataType: "json",
         fileExtension: ""
     });
-    
-    // TODO: Need to create an "application" context.
-    fluid.demands("detailsDC", "cspace.listEditor", ["{listEditor}.model.details", fluid.COMPONENT_OPTIONS]);
-    fluid.demands("dataContext", "cspace.relationManager", ["{relationManager}.model", fluid.COMPONENT_OPTIONS]);
-    fluid.demands("dataContext", "cspace.pageBuilderIO", ["{pageBuilderIO}.options.model", fluid.COMPONENT_OPTIONS]);
-    fluid.demands("detailsDC", ["cspace.listEditor", "cspace.tabs"], ["{listEditor}.model.details", fluid.COMPONENT_OPTIONS]);
-    
-    fluid.demands("detailsDC", ["cspace.listEditor", "cspace.localData"], ["{listEditor}.model.details", fluid.COMPONENT_OPTIONS, {
-        baseUrl: "../../../test/data",
-        fileExtension: ".json"
-    }]);
-    fluid.demands("detailsDC", ["cspace.listEditor", "cspace.test", "cspace.localData"], ["{listEditor}.model.details", fluid.COMPONENT_OPTIONS, {
-        baseUrl: "../data",
-        fileExtension: ".json"
-    }]);
-    fluid.demands("detailsDC", ["cspace.listEditor", "cspace.tabs", "cspace.localData"], ["{listEditor}.model.details", fluid.COMPONENT_OPTIONS, {
-        baseUrl: "../../../test/data",
-        fileExtension: ".json"
-    }]);
-    fluid.demands("dataContext", ["cspace.relationManager", "cspace.localData"], ["{relationManager}.model", fluid.COMPONENT_OPTIONS, {
-        baseUrl: "../../../test/data",
-        fileExtension: ".json"
-    }]);
-    fluid.demands("dataContext", ["cspace.pageBuilderIO", "cspace.localData"], ["{pageBuilderIO}.options.model", fluid.COMPONENT_OPTIONS, {
-        baseUrl: "../../../test/data",
-        fileExtension: ".json"
-    }]);
 
 })(jQuery, fluid);

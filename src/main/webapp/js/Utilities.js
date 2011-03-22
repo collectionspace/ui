@@ -22,10 +22,6 @@ fluid.registerNamespace("cspace.util");
     cspace.util.useLocalData = function () {
         return document.location.protocol === "file:";
     };
-    
-    if (cspace.util.useLocalData()) {
-        fluid.staticEnvironment.cspaceEnvironment = fluid.typeTag("cspace.localData");
-    }
 
     // Attach a 'live' handler to the keydown event on all selects
     // Prevents this upsetting and undesirable behaviour (CSPACE-2840)
@@ -47,6 +43,7 @@ fluid.registerNamespace("cspace.util");
     };
     
     fluid.defaults("cspace.recordTypeManager", {
+        gradeNames: ["fluid.littleComponent"],
         recordTypes: "{recordTypes}"
     });
 
@@ -81,6 +78,7 @@ fluid.registerNamespace("cspace.util");
     };
     
     fluid.defaults("cspace.specBuilderImpl", {
+        gradeNames: ["fluid.littleComponent"],
         urlRenderer: {
             expander: {
                 type: "fluid.deferredInvokeCall",
@@ -110,14 +108,6 @@ fluid.registerNamespace("cspace.util");
         return fluid.invoke("cspace.specBuilderImpl", {url: urlStub});
     };
     
-    fluid.demands("cspace.urlExpander", "cspace.localData", {
-        args: {
-            vars: {
-                chain: ".."
-            }
-        }
-    });
-    
     cspace.urlExpander = function (options) {
         var that = fluid.initLittleComponent("cspace.urlExpander", options);
         return function (url) {
@@ -126,6 +116,7 @@ fluid.registerNamespace("cspace.util");
     };
     
     fluid.defaults("cspace.urlExpander", {
+        gradeNames: ["fluid.littleComponent"],
         vars: {
             chain: "../../chain",
             webapp: "..",
@@ -135,7 +126,7 @@ fluid.registerNamespace("cspace.util");
     
     cspace.util.urlBuilder = function (url, options) {
         var that = fluid.initLittleComponent("cspace.util.urlBuilder", options);
-        if (typeof url === "strings") {
+        if (typeof url === "string") {
             return that.options.urlExpander(url);
         } 
         fluid.each(url, function (thisUrl, key) {
@@ -174,6 +165,7 @@ fluid.registerNamespace("cspace.util");
     };
     
     fluid.defaults("cspace.globalBundle", {
+        gradeNames: ["fluid.littleComponent"],
         components: {
             messageResolver: {
                 type: "fluid.messageResolver",
@@ -207,7 +199,7 @@ fluid.registerNamespace("cspace.util");
      * be combined by use of makeAjaxOpts and conversion into a resourceSpec) */   
     // TODO: integrate with Engage conception and knock the rough corners off
     cspace.URLDataSource = function (options) {
-        var that = fluid.initLittleComponent(options.targetTypeName, options);
+        var that = fluid.initLittleComponent(options.value.targetTypeName, options);
         var wrapper = that.options.delay ? function (func) {
             setTimeout(func, that.options.delay);
         } : function (func) {
@@ -265,7 +257,7 @@ fluid.registerNamespace("cspace.util");
                 $.ajax(ajaxOpts);
             });
         };
-        if (options.writeable) {
+        if (that.options.writeable) {
             that.put = function (model, directModel, callback) {
                 var ajaxOpts = that.makeAjaxOpts(model, directModel, callback, "POST");
                 $.ajax(ajaxOpts);
@@ -283,16 +275,6 @@ fluid.registerNamespace("cspace.util");
             });
         }
     };
-    
-    fluid.demands("cspace.util.getDefaultConfigURL", ["cspace.record", "cspace.localData"], [{
-        invokers: {
-            getRecordType: {
-                funcName: "cspace.util.getDefaultConfigURL.getRecordTypeLocal"
-            }
-        }
-    }]);
-    fluid.demands("cspace.util.getDefaultConfigURL", "cspace.localData", fluid.COMPONENT_OPTIONS);
-    fluid.demands("cspace.util.getDefaultConfigURL", "cspace.record", fluid.COMPONENT_OPTIONS);
     
     cspace.util.getDefaultConfigURL = function (options) {
         var that = fluid.initLittleComponent("cspace.util.getDefaultConfigURL", options);
@@ -313,6 +295,7 @@ fluid.registerNamespace("cspace.util");
     };
     
     fluid.defaults("cspace.util.getDefaultConfigURL", {
+        gradeNames: ["fluid.littleComponent"],
         url: "%webapp/config/%recordType.json",
         invokers: {
             getRecordType: {
@@ -327,18 +310,13 @@ fluid.registerNamespace("cspace.util");
         }
     });
     
-    fluid.demands("cspace.util.getLoginURL", "cspace.localData", {
-        args: {
-            url: "%test/data/login/status.json"
-        }
-    });
-    
     cspace.util.getLoginURL = function (options) {
         var that = fluid.initLittleComponent("cspace.util.getLoginURL", options);
         return that.options.urlRenderer(that.options.url);
     };
     
     fluid.defaults("cspace.util.getLoginURL", {
+        gradeNames: ["fluid.littleComponent"],
         url: "%chain/loginstatus",
         urlRenderer: {
             expander: {
@@ -346,12 +324,6 @@ fluid.registerNamespace("cspace.util");
                 func: "cspace.urlExpander"
             }
         }
-    });
-    
-    fluid.demands("cspace.util.getDefaultSchemaURL", "cspace.localData", {
-        args: ["@0", {
-            url: "%test/uischema/%recordType.json"
-        }]
     });
     
     cspace.util.getDefaultSchemaURL = function (recordType, options) {
@@ -370,12 +342,6 @@ fluid.registerNamespace("cspace.util");
                 func: "cspace.urlExpander"
             }
         }
-    });
-    
-    fluid.demands("cspace.util.getUISpecURL", "cspace.localData", {
-        args: ["@0", {
-            url: "%test/uispecs/%pageType.json"
-        }]
     });
     
     cspace.util.getUISpecURL = function (pageType, options) {
@@ -500,8 +466,7 @@ fluid.registerNamespace("cspace.util");
     };
     
     fluid.defaults("cspace.util.recordTypeSelector", {
-        // TODO: These should actually be possible to configure as directly injected
-       // components by means of a suitable demands block, in Infusion 1.4
+        gradeNames: ["fluid.littleComponent"],
         recordTypeManager: "{recordTypeManager}",
         permissionsResolver: "{permissionsResolver}",
         messageResolver: "{globalBundle}",
@@ -673,8 +638,6 @@ fluid.registerNamespace("cspace.util");
         return that;   
     };
     
-    fluid.demands("cspace.util.urnToStringFieldConverter", "cspace.recordEditor", ["@0", fluid.COMPONENT_OPTIONS]);
-    
     /*
      * Takes a string in URN format and returns it in Human Readable format
      * @param urn a string in URN format
@@ -688,6 +651,7 @@ fluid.registerNamespace("cspace.util");
     };
     
     fluid.defaults("cspace.util.urnToStringFieldConverter", {
+        gradeNames: ["fluid.viewComponent"],
         convert: cspace.util.urnToString 
     });
     
@@ -707,8 +671,6 @@ fluid.registerNamespace("cspace.util");
         return that;
     };
     
-    fluid.demands("cspace.util.nameForValueFinder", "cspace.recordEditor", ["@0", fluid.COMPONENT_OPTIONS]);
-    
     cspace.util.nameForValueFinder.assignValue = function (selector, options) {
         if (!options.list || !options.names) {
             return;
@@ -725,6 +687,7 @@ fluid.registerNamespace("cspace.util");
     };
     
     fluid.defaults("cspace.util.nameForValueFinder", {
+        gradeNames: ["fluid.viewComponent"],
         invokers: {
             assignValue: {
                 funcName: "cspace.util.nameForValueFinder.assignValue",
@@ -840,6 +803,7 @@ fluid.registerNamespace("cspace.util");
     };
     
     fluid.defaults("cspace.util.globalLoadingIndicator", {
+        gradeNames: ["fluid.viewComponent"],
         imageUrl: "../images/indeterminateProgressSpinner_92x92_blackonwhite.gif",
         selectors: {
             image: "img",
@@ -879,6 +843,7 @@ fluid.registerNamespace("cspace.util");
     };
 
     fluid.defaults("cspace.util.globalLoadingAssociator", {
+        gradeNames: ["fluid.littleComponent"],
         indicatorTarget: "#all-content",
         mainWaitSpec: "recordEditor",
         indicatorOptions: {}
@@ -935,6 +900,7 @@ fluid.registerNamespace("cspace.util");
     };
     
     fluid.defaults("cspace.util.globalNavigator", {
+        gradeNames: ["fluid.viewComponent"],
         selectors: {
             include: "a",
             exclude: "[href*=#], .csc-confirmation-exclusion, .ui-autocomplete a",
@@ -1013,11 +979,9 @@ fluid.registerNamespace("cspace.util");
         var that = fluid.initLittleComponent("cspace.globalSetup.noLogin", options);
         return that.options.noLogin;
     };
-    fluid.demands("noLogin", "cspace.login", [{
-        noLogin: true
-    }]);
     
     fluid.defaults("cspace.globalSetup", {
+        gradeNames: ["fluid.littleComponent"],
         components: {
             instantiator: "{instantiator}",
             globalNavigator: {
@@ -1050,6 +1014,7 @@ fluid.registerNamespace("cspace.util");
     };
     
     fluid.defaults("cspace.recordTypes", {
+        gradeNames: ["fluid.littleComponent"],
         mergePolicy: {
             schema: "preserve",
             model: "preserve"
@@ -1084,6 +1049,7 @@ fluid.registerNamespace("cspace.util");
         return that;
     };
     fluid.defaults("cspace.util.togglable", {
+        gradeNames: ["fluid.viewComponent"],
         selectors: {
             header: ".csc-togglable-header",
             togglable: ".csc-togglable-togglable"
@@ -1103,6 +1069,9 @@ fluid.registerNamespace("cspace.util");
     cspace.util.login = function (options) {
         return fluid.initLittleComponent("cspace.util.login", options);
     };
+    fluid.defaults("cspace.util.login", {
+        gradeNames: ["fluid.littleComponent"]
+    });
     
     // TODO: This should be done by the renderer.
     cspace.util.removeRendererDecorators = function (that) {

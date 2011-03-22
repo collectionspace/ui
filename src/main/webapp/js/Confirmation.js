@@ -154,8 +154,6 @@ cspace = cspace || {};
         }
     });
     
-    fluid.demands("confirmation", "cspace.recordEditor", fluid.COMPONENT_OPTIONS);
-    
     cspace.confirmation.deleteDialog = function (container, options) {
         var that = fluid.initLittleComponent("cspace.confirmation.deleteDialog", options);
         return cspace.confirmationDialog(container, that.options);

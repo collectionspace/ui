@@ -195,28 +195,46 @@ cspace = cspace || {};
             start();
         };
         
+        fluid.defaults("cspace.testComponent2", {
+            gradeNames: ["fluid.viewComponent"]
+        });
         cspace.testComponent2 = function (container, options) {
-            var jContainer = $(container);
+            var that = fluid.initView("cspace.testComponent2", container, options);
             jqUnit.assertTrue("testComponent2 instantiated", true);
-            jqUnit.assertEquals("testComponent2 initiated with correct container", "#recordEditorContainer", container);
-        };
-    
-        cspace.testComponent3 = function (container, options) {
-            var jContainer = $(container);
-            jqUnit.assertTrue("testComponent3 instantiated", true);
-            jqUnit.assertEquals("testComponent3 initiated with correct container", "#linksContainer", container);
+            jqUnit.assertEquals("testComponent2 initiated with correct container", "recordEditorContainer", that.container.attr("id"));
         };
         
-        cspace.testComponent4 = function (container, options) {
-            jqUnit.assertTrue("TestComponent4 instantiated", true);
-            jqUnit.assertEquals("TestComponent4 initiated with correct container", "#recordEditorContainer", container);
-            jqUnit.assertDeepEq("TestComponent4 initiated with correct options", optionsWithComponentsWithOptions.pageBuilder.options.components.recordEditor.options, options.value);
+        fluid.defaults("cspace.testComponent3", {
+            gradeNames: ["fluid.viewComponent"]
+        });
+        cspace.testComponent3 = function (container, options) {
+            var that = fluid.initView("cspace.testComponent3", container, options);
+            jqUnit.assertTrue("testComponent3 instantiated", true);
+            jqUnit.assertEquals("testComponent3 initiated with correct container", "linksContainer", that.container.attr("id"));
         };
-    
+        
+        fluid.defaults("cspace.testComponent4", {
+            gradeNames: ["fluid.viewComponent"]
+        });
+        cspace.testComponent4 = function (container, options) {
+            var that = fluid.initView("cspace.testComponent4", container, options);
+            jqUnit.assertTrue("TestComponent4 instantiated", true);
+            jqUnit.assertEquals("TestComponent4 initiated with correct container", "recordEditorContainer", that.container.attr("id"));
+            var options = optionsWithComponentsWithOptions.pageBuilder.options.components.recordEditor.options;
+            jqUnit.assertDeepEq("TestComponent4 initiated with correct options", options.foo, that.options.foo);
+            jqUnit.assertDeepEq("TestComponent4 initiated with correct options", options.bat, that.options.bat);
+        };
+        
+        fluid.defaults("cspace.testComponent5", {
+            gradeNames: ["fluid.viewComponent"]
+        });
         cspace.testComponent5 = function (container, options) {
+            var that = fluid.initView("cspace.testComponent5", container, options);
             jqUnit.assertTrue("TestComponent5 instantiated", true);
-            jqUnit.assertEquals("TestComponent5 initiated with correct container", "#linksContainer", container);
-            jqUnit.assertDeepEq("TestComponent5 initiated with correct options", optionsWithComponentsWithOptions.pageBuilder.options.components.relatedRecords.options, options.value);
+            jqUnit.assertEquals("TestComponent5 initiated with correct container", "linksContainer", that.container.attr("id"));
+            var options = optionsWithComponentsWithOptions.pageBuilder.options.components.relatedRecords.options;
+            jqUnit.assertDeepEq("TestComponent4 initiated with correct options", options.bar, that.options.bar);
+            jqUnit.assertDeepEq("TestComponent4 initiated with correct options", options.cat, that.options.cat);
         };
         
         cspace.testComponent6 = function (container, options) {
@@ -230,16 +248,18 @@ cspace = cspace || {};
         
         cspace.testComponent7 = function (container, stringParam, options) {
             jqUnit.assertTrue("testComponent7 instantiated", true);
+            var that = fluid.initLittleComponent("cspace.testComponent6", options);
             jqUnit.assertEquals("testComponent7 initiated with correct container", optionsWithComponentsWithAdditionalParameters.pageBuilder.options.selectors.recordEditor, container);
             jqUnit.assertDeepEq("testComponent7 initiated with correct extra parameter", "extraParameter", stringParam);
-            jqUnit.assertDeepEq("testComponent7 initiated with correct option", "Danny Kaye", options.value.option1);
+            jqUnit.assertDeepEq("testComponent7 initiated with correct option", "Danny Kaye", that.options.option1);
         };
         
         cspace.testComponent8 = function (container, nameParam, options) {
             jqUnit.assertTrue("testComponent8 instantiated", true);
+            var that = fluid.initLittleComponent("cspace.testComponent6", options);
             jqUnit.assertEquals("testComponent8 initiated with correct container", optionsWithComponentsWithDemandInParameters.pageBuilder.options.selectors.recordEditor, container);
             jqUnit.assertDeepEq("testComponent8 initiated with correct extra parameter demanded from PageBuilder", "Jacob", nameParam);
-            jqUnit.assertDeepEq("testComponent8 initiated with correct option", "Danny Kaye", options.value.option1);
+            jqUnit.assertDeepEq("testComponent8 initiated with correct option", "Danny Kaye", that.options.option1);
         };
             
         pageBuilderTest.asyncTest("Assembly of HTML only", function () {
@@ -293,16 +313,18 @@ cspace = cspace || {};
     
         pageBuilderTest.asyncTest("Invocation of dependent components: container parameter", function () {
             expect(4);    // this is total num of assertions in the test components
-            fluid.demands("recordEditor", "cspace.pageBuilder", 
-                ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
-            fluid.demands("relatedRecords", "cspace.pageBuilder", 
-                ["{pageBuilder}.options.selectors.relatedRecords", fluid.COMPONENT_OPTIONS]);
+            fluid.demands("recordEditor", "cspace.pageBuilder", {
+                container: "{pageBuilder}.options.selectors.recordEditor"
+            });
+            fluid.demands("relatedRecords", "cspace.pageBuilder", {
+                container: "{pageBuilder}.options.selectors.relatedRecords"
+            });
             var pbIO = cspace.pageBuilderIO(testIOCoptionsPBIO);
             pbIO.initPageBuilder(testIOCoptionsPB);
         });
     
         pageBuilderTest.asyncTest("Invocation of dependent components: container plus options only", function () {
-            expect(6);
+            expect(8);
             fluid.demands("recordEditor", "cspace.pageBuilder", 
                 ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
             fluid.demands("relatedRecords", "cspace.pageBuilder", 

@@ -48,6 +48,7 @@ cspace = cspace || {};
     };
 
     fluid.defaults("cspace.passwordValidator", {
+        gradeNames: ["fluid.viewComponent"],
         selectors: {
             passwordField: ".csc-passwordValidator-password"
         },
@@ -58,10 +59,4 @@ cspace = cspace || {};
         maxLength: 24,
         messageBar: "{messageBar}"
     });
-    
-    fluid.demands("passwordValidator", "cspace.adminUsers", 
-        ["{adminUsers}.container", fluid.COMPONENT_OPTIONS]);
-        
-    fluid.demands("passwordValidator", "cspace.login", 
-        ["{login}.container", fluid.COMPONENT_OPTIONS]);
 })(jQuery, fluid);

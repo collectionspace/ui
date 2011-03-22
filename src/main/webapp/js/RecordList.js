@@ -86,9 +86,7 @@ cspace = cspace || {};
         that.locate("numberOfItems").text("(" + that.model.items.length + ")");
     };
 
-    cspace.recordList = function (container, options, demandsOptions) {
-        options = options || {};
-        fluid.merge({model: "preserve"}, options.value || options, demandsOptions);
+    cspace.recordList = function (container, options) {
         var that = fluid.initView("cspace.recordList", container, options);
         that.model = that.options.model;
         that.applier = fluid.makeChangeApplier(that.model);
@@ -128,6 +126,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.recordList", {
+        gradeNames: ["fluid.viewComponent"],
         // TODO: smelly - why is the onSelectHandler here instead of inside a listeners block?
         onSelectHandler: cspace.recordList.onSelectHandlerDefault,
         selectors: {

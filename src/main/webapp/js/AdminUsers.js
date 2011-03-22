@@ -100,22 +100,16 @@ cspace = cspace || {};
         });
     };
 
-    cspace.adminUsers = function (container, options, demandsOptions) {
-        options = options || {};
-        fluid.merge(null, options.value || options, demandsOptions);
-        
+    cspace.adminUsers = function (container, options) {
         var that = fluid.initView("cspace.adminUsers", container, options);
         fluid.initDependents(that);
         bindEventHandlers(that);
         that.events.afterSetup.fire(that);
         return that;
     };
-    
-    fluid.demands("isCurrentUser", "cspace.adminUsers", fluid.COMPONENT_OPTIONS);
-    fluid.demands("userListEditor", "cspace.adminUsers", ["{adminUsers}container", 
-        "{adminUsers}options.recordType", "{adminUsers}options.uispec", fluid.COMPONENT_OPTIONS]);
 
     fluid.defaults("cspace.adminUsers", {
+        gradeNames: ["fluid.viewComponent"],
         recordType: "users",
         components: {
             passwordValidator: {
@@ -156,18 +150,5 @@ cspace = cspace || {};
         messageBar: "{messageBar}",
         queryURL: "../../chain/users/search?query="
     });
-    
-    fluid.demands("users", ["cspace.pageBuilder", "cspace.localData"], ["{pageBuilder}.options.selectors.users", fluid.COMPONENT_OPTIONS, {
-        recordType: "users/records.json",
-        queryURL: "../../../test/data/users/search.json",
-        components: {
-            userListEditor: {
-                options: {
-                    baseUrl: "../../../test/data/"
-                }
-            }
-        }
-    }]);
-    fluid.demands("users", "cspace.pageBuilder", ["{pageBuilder}.options.selectors.users", fluid.COMPONENT_OPTIONS]);
 
 })(jQuery, fluid);

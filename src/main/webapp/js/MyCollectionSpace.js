@@ -141,34 +141,8 @@ cspace = cspace || {};
         };
     };
     
-    fluid.demands("cataloging", "cspace.myCollectionSpace", 
-        ["{myCollectionSpace}.dom.cataloging", fluid.COMPONENT_OPTIONS]);
-        
-    fluid.demands("intake", "cspace.myCollectionSpace", 
-        ["{myCollectionSpace}.dom.intake", fluid.COMPONENT_OPTIONS]);
-        
-    fluid.demands("acquisition", "cspace.myCollectionSpace", 
-        ["{myCollectionSpace}.dom.acquisition", fluid.COMPONENT_OPTIONS]);
-        
-    fluid.demands("loanin", "cspace.myCollectionSpace", 
-        ["{myCollectionSpace}.dom.loanin", fluid.COMPONENT_OPTIONS]);
-        
-    fluid.demands("loanout", "cspace.myCollectionSpace", 
-        ["{myCollectionSpace}.dom.loanout", fluid.COMPONENT_OPTIONS]);
-        
-    fluid.demands("movement", "cspace.myCollectionSpace", 
-        ["{myCollectionSpace}.dom.movement", fluid.COMPONENT_OPTIONS]);
-        
-    fluid.demands("objectexit", "cspace.myCollectionSpace", 
-        ["{myCollectionSpace}.dom.objectexit", fluid.COMPONENT_OPTIONS]);
-    
-    fluid.demands("media", "cspace.myCollectionSpace", 
-        ["{myCollectionSpace}.dom.media", fluid.COMPONENT_OPTIONS]);
-        
-    fluid.demands("togglable", "cspace.myCollectionSpace", 
-        ["{myCollectionSpace}.container", fluid.COMPONENT_OPTIONS]);
-    
     fluid.defaults("cspace.myCollectionSpace", {
+        gradeNames: ["fluid.rendererComponent"],
         selectors: {
             "category:": ".csc-myCollectionSpace-category", 
             "group:": ".csc-myCollectionSpace-group",
@@ -279,9 +253,6 @@ cspace = cspace || {};
             })
         }
     });
-    
-    fluid.demands("myCollectionSpace", "cspace.pageBuilder", 
-        ["{pageBuilder}.options.selectors.myCollectionSpace", fluid.COMPONENT_OPTIONS]);
     
     fluid.fetchResources.primeCacheFromResources("cspace.myCollectionSpace");
     
