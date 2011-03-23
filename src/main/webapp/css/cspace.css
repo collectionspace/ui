@@ -15,8 +15,8 @@ html{
 	font-size: 100%;} 
 body {
 	font-size: 12px; 
-	line-height:13px; 
-	padding:5px 4px 0 4px; 
+	line-height:1.2; 
+	padding:5px 4px 0 4px;
 	margin:0;}
 table {
 	border-collapse:collapse;}
@@ -36,32 +36,41 @@ textarea {
 	overflow:auto; 
 	resize:none;}
 :focus {
-	outline: none; 
-	outline-offset:0 !important;}
-select {
-	border:1px solid #C7CFD4;}
-table select, table ~ select {
-	border:none;}
+	outline: none;
+	-moz-outline:none;
+	-moz-outline-style:none;
+	outline-offset:0 !important;
+	-moz-box-shadow: #000 0 0 2px;
+	-webkit-box-shadow: #000 0 0 2px;
+	box-shadow: #000 0 0 2px;
+	/*outline:0px solid #000;*/
+	/* for Opera */
+	z-index: 1;}
+::-moz-focus-inner {border:0;}
+
 
 /* input form selectors */
-input, textarea {
+input, textarea, select {
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding;
+	background-clip: padding-box;
 	font-family:inherit; 
 	font-size:12px; 
 	font-weight:inherit; 
 	line-height:15px; 
 	padding:0; 
 	margin:0; 
-	border:none; 
+	border:1px solid #C7CFD4; 
 	overflow:visible; 
-	height:19px;}
-.content > input, .content > textarea {
-	border:1px solid #C7CFD4;}
+	height:19px;
+	vertical-align: middle;}
+select {height:21px;}
+table select, table ~ select, table input {
+	border:none;}
 .information-subgroup .content > input, .information-subgroup .content > textarea {
 	border:none;}
-input[type="button"], input[type="submit"], input[type="checkbox"] {
+input[type="button"], input[type="submit"], input[type="checkbox"], input[type="reset"] {
 	height:auto;}
-input:focus, textarea:focus {
-	outline:1px solid black;}
 input[type="text"], input[type="password"], textarea {
 	width:100%; 
 	margin:0;}
@@ -88,21 +97,6 @@ input[type="button"], input[type="submit"]	{
 	border:none;}
 input[type="button"]:hover, input[type="submit"]:hover {
 	background-color:#48722D;}
-input[type="button"].primary, input[type="submit"].primary	{
-	background-color:#73AA4F; 
-	padding-left:30px; 
-	padding-right:30px;}
-input[type="button"].primary:hover, input[type="submit"].primary:hover	{
-	background-color:#48722D;}
-input[type="button"].tertiary, input[type="submit"].tertiary {
-	height:17px; 
-	padding-left:4px; 
-	padding-right:4px; 
-	font-size:11px; 
-	background-color:#FFF; 
-	color:#73AA4F;}
-input[type="button"].tertiary:hover, input[type="submit"].tertiary:hover {
-	background-color:#FFFBCC;}
 input[type="button"].saveButton, input[type="submit"].saveButton {
 	background:#73AA4F url('../images/icnSave.png') no-repeat 24px 4px; 
 	padding-left:40px; 
@@ -166,6 +160,8 @@ input[type="button"].addButton, input[type="submit"].addButton {
 	color:#FFF;}
 input[type="button"].addButton:hover, input[type="submit"].addButton:hover {
 	background-color:#48722D;}
+input[type="button"].add {
+	height:16px;}
 .gotoButton {
 	background:transparent url('../images/icnGoTo.png') no-repeat 8px 4px; 
 	padding-left:28px; 
@@ -181,7 +177,7 @@ input[type="button"].addButton:hover, input[type="submit"].addButton:hover {
 .button-row input[type="button"], .button-row-right input[type="button"] {
 	margin-left:10px; 
 	float:right; 
-	margin-bottom:5px;}
+	margin-bottom:0px;}
 .button-row-left input[type="button"], .button-row-left-center input[type="button"] {
 	margin-right:10px; 
 	margin-top:10px;}
@@ -223,26 +219,26 @@ a.add-link:hover, a.add-link:focus {
 	background-color:#6F9ECD; 
 	color:#fff; 
 	font-weight:bold;	
-	padding:2px 3px 0px 3px;
+	padding:4px 5px 0px 5px;
 	text-decoration:none; 
-	border:2px solid #6F9ECD; 
+	/*border:2px solid #6F9ECD; */
 	border-bottom:none; 
 	margin-right:2px;}
 .menu-record a:hover, .menu-record a:focus {
 	background-color:#438CC9; 
-	border:2px solid #438CC9;	
+	/*border:2px solid #438CC9;	*/
 	border-bottom:none;}
 .menu-record a.current, .menu-record li.selected a { 
 	background: no-repeat scroll 0 0 #FFF; 
 	color:#6F9ECD; 
 	padding-top:6px; 
 	padding-bottom:0px; 
-	border:2px solid #6F9ECD; 
+	border:2px solid #6F9ECD;
 	border-bottom:2px solid #fff;}
 .menu-record a.inactive {
 	cursor:default; 
 	background-color:#CCC; 
-	border:2px solid #CCC; 
+	/*border:2px solid #CCC; */
 	border-bottom:none;}
 #secondary-nav-menu .menu-record a.primary {}
 .menu-record a.disabled , .menu-record a:hover.disabled {
@@ -386,7 +382,7 @@ li .flc-pager-pageLink {
 .header-menu-row .inner {
 	float:left; 
 	background-color:#fff; 
-	margin-bottom:-3px;}
+	margin-bottom:-6px;}
 .menu-item {
 	margin-right:3px; 
 	margin-bottom:7px; 
@@ -453,7 +449,7 @@ li .flc-pager-pageLink {
 
 /* secondary navigation menu */
 #secondary-nav {
-	padding-bottom:0;}
+	padding-bottom:10px;}
 #secondary-nav-menu {
 	padding-top:6px; 
 	width:100%; 	
@@ -486,11 +482,11 @@ li .flc-pager-pageLink {
 #secondary-nav-menu-sub  {}
 #secondary-nav-menu-sub .upper-save {
 	float:right; 
-	padding-bottom:10px; 
+	/*padding-bottom:10px; */
 	margin-left:15px;}
 #secondary-nav-menu-sub .time-stamp {
 	float:right; 
-	padding-top:6px; 
+	/*padding-top:6px; */
 	font-size:10px; 
 	color:#BEBEBE;}
 
@@ -645,7 +641,7 @@ table tbody.highlight tr:hover td {
 .fl-container-left .acquisition-outer-border,
 .fl-container-left .authority-outer-border {
 	border: none; 
-	margin-bottom:10px;}
+	/*margin-bottom:10px;*/}
 .login-outer-border {
 	border: none; 
 	padding:80px 0 10px 0px;}
@@ -938,6 +934,11 @@ table tbody.highlight tr:hover td {
 	font-size:12px; 
 	line-height:12px; 
 	float:left;}
+/*.info-pair:hover {
+	-moz-border-radius:5px 5px 5px;
+	border:1px solid #C2D7EF;
+	background-color:#DEEFFF;
+	margin:-1px;}*/		
 .info-pair-table.list-table {
 	padding-bottom:0px;}
 .info-pair-table.list-table.sub-group {
@@ -1059,16 +1060,16 @@ table tbody.highlight tr:hover td {
 	width: 120px !important;}
 .content select	{
 	width: auto; 
-	height:21px; 
-	border:1px solid #C7CFD4;}
+	/*height:21px; */
+	/*border:1px solid #C7CFD4;*/}
 .content table select {
 	width: 100%; 
-	height:17px; 
+	height:19px; 
 	padding-top:0; 
 	border:none;}
 .content textarea { 
 	width:100%; 
-	height:72px; 
+	height:75px; 
 	overflow:auto;}
 .input-alpha-login {
 	width: 120px; 
@@ -1251,7 +1252,7 @@ input[disabled]:hover, input[disabled]:hover	{
 .cs-date-picker {
 	margin-top: 18px;}
 .cs-calendar-button:focus {
-	outline: 1px solid black;}
+	/*outline: 1px solid black;*/}
 
 /*   styling the loading progress indicator */
 .cs-loading-root {
@@ -1435,10 +1436,11 @@ ul.menu-record li a {
 .cs-sidebar-header {
 	padding-right: 5px;}
 
-/*  Unifying and cleaning up the calenday date picker widget */
+/*  Unifying and cleaning up the calendar date picker widget */
 .cs-calendar-button { 
 	border:1px solid #C7CFD4; 
-	border-left:none; 
+	border-left:none;
+	height:19px;
 	float:left;}
 table .cs-calendar-button, .information-subgroup .cs-calendar-button { 
 	border:none;}

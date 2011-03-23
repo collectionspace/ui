@@ -10,7 +10,7 @@ tr.csc-repeatable-headerRow td:first-child, tr.csc-repeatable-headerRow td:last-
 	display:none;}
 #read-only .cs-repeatable-primary {}
 .cs-repeatable-repeat input,.cs-repeatable-repeat textarea {
-	border:1px solid #C7CFD4; 
+	/*border:1px solid #C7CFD4; */
 	width:88.5%; 
 	float:left;}
 input[type="button"].cs-repeatable-add, .info-pair-date input[type="button"].cs-repeatable-add {
@@ -40,10 +40,13 @@ input.cs-repeatable-primary {
 	position: relative; 
 	vertical-align:top; 
 	border:none; 
-	margin-right:3px; 
+	margin-right:3px;
+	margin-top:1px;
+	height:17px;
 	float:left;}
 td input.cs-repeatable-primary {
-	margin:0 0 0 2px;  
+	margin:2px 0 0 2px;
+	height:17px;
 	vertical-align:bottom;}
 input.cs-repeatable-delete, table tr.csc-repeatable-repeat input.cs-repeatable-delete {
 	float:left; 

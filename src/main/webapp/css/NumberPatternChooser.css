@@ -20,7 +20,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 .pattern-chooser-input {
 	width:51% !important;
 	float: left;
-	border:1px solid #C7CFD4;
+	/*border:1px solid #C7CFD4;*/
 }
 
 input.numberPatternChooserButton{

@@ -7,10 +7,10 @@
 #administration .menu-record a:hover, #administration .menu-record a:focus,
 #role .menu-record a:hover, #role .menu-record a:focus {
 	background:none repeat scroll 0 0 #48722D; 
-	border:2px solid #48722D;}
+	/*border:2px solid #48722D;*/}
 #administration .menu-record a, #role .menu-record a  {
 	color:#FFF; 
-	border:2px solid #77AA44; 
+	/*border:2px solid #77AA44; */
 	background-color:#77AA44;}
 #administration .menu-record a.current, #administration.menu-record li.selected a, 
 #role .menu-record a.current, #role .menu-record li.selected a {
