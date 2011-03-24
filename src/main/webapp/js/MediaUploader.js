@@ -126,8 +126,21 @@ cspace = cspace || {};
     
     cspace.mediaUploader.removeMedia = function (that) {
         return function () {
-            that.options.applier.requestChange(that.options.elPaths.linkUri, "");
-            that.events.onRemove.fire();
+            that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+                listeners: {
+                    onClose: function (userAction) {
+                        if (userAction === "act") {
+                            that.options.applier.requestChange(that.options.elPaths.linkUri, "");
+                            that.events.onRemove.fire();
+                        }
+                    }
+                },
+                strings: {
+                    primaryMessage: that.options.strings.confirmationPrimaryMessage,
+                    actText: that.options.strings.confirmationActText,
+                    actAlt: that.options.strings.confirmationActAlt
+                }
+            });
         };
     };
     
@@ -161,7 +174,10 @@ cspace = cspace || {};
             linkButton: "Link",
             removeButton: "Remove this media",
             uploadMediaLabel: "Upload Media",
-            linkMediaLabel: "Link To External Media"
+            linkMediaLabel: "Link To External Media",
+            confirmationPrimaryMessage: "Remove media from this record?",
+            confirmationActText: "Remove",
+            confirmationActAlt: "remove media"
         },
         styles: {
             button: "cs-mediaUploader-button",
@@ -174,8 +190,23 @@ cspace = cspace || {};
         },
         produceTree: cspace.mediaUploader.produceTree,
         components: {
+            uploaderContext: {
+                type: "fluid.progressiveChecker",
+                options: {
+                    checks: [{
+                        feature: "{fluid.browser.supportsBinaryXHR}",
+                        contextName: "fluid.uploader.html5"
+                    }, {
+                        feature: "{fluid.browser.supportsFlash}",
+                        contextName: "fluid.uploader.swfUpload"
+                    }],
+                    defaultTypeTag: fluid.typeTag("fluid.uploader.singleFile")
+                }
+            },
+            confirmation: "{confirmation}",
             fileUploader: {
                 type: "fluid.uploader",
+                container: "{mediaUploader}.dom.fileUploader",
                 options: {
                     components: {
                         fileQueueView: {

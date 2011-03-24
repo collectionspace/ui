@@ -451,7 +451,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         
         // Media upload demands
-        fluid.demands("fileUploader", "cspace.mediaUploader", ["{mediaUploader}.dom.fileUploader", fluid.COMPONENT_OPTIONS]);
         fluid.demands("uploader", "cspace.recordEditor", {
             container: "{recordEditor}.dom.uploader",
             options: {

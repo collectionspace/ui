@@ -10877,7 +10877,7 @@ var fluid_1_4 = fluid_1_4 || {};
                 var ref = fluid.renderContextReference(parsed);
                 fluid.log("Failed to resolve reference " + ref + ": thatStack contains\n" + fluid.dumpThatStack(thatStack));
                 fluid.fail("Failed to resolve reference " + ref + " - could not match context with name " 
-                  + context + " from component root of type " + thatStack[0].typeName);
+                    + context + " from component root of type " + thatStack[0].typeName);
             }
             return fluid.get(foundComponent, parsed.path, fetchStrategies);
         };
@@ -10964,7 +10964,7 @@ var fluid_1_4 = fluid_1_4 || {};
             visited = visited || {};
             var child = component[name];
             fluid.visitComponentChildren(child, function(gchild, gchildname, visited) {
-                that.clearComponent(child, gchildname, visited)
+                that.clearComponent(child, gchildname, visited);
             }, visited);
             var path = that.idToPath[child.id];
             delete that.idToPath[child.id];
@@ -10992,7 +10992,7 @@ var fluid_1_4 = fluid_1_4 || {};
     
     fluid.makePassArgsSpec = function(initArgs) {
         return fluid.transform(initArgs, function(arg, index) {
-                    return "{arguments}." + index;
+            return "{arguments}." + index;
         });
     };
     
@@ -11122,7 +11122,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         var demandLogging = fluid.isLogging() && demandingNames[0] !== "fluid.threadLocal";
         if (demandLogging) {
             fluid.log("Resolving demands for function names " + JSON.stringify(demandingNames) + " in context of " +
-              (parentThat? "component " + parentThat.typeName : "no component"));
+                (parentThat? "component " + parentThat.typeName : "no component"));
         }
         
         var contextNames = {};
@@ -11158,7 +11158,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         var demandspec = matches.length === 0 || matches[0].intersect === 0? null : matches[0].spec;
         if (demandLogging) {
             fluid.log(demandspec? "Located " + matches.length + " potential match" + (matches.length === 1? "" : "es") + ", selected best match with " + matches[0].intersect 
-                + " matched context names: " + JSON.stringify(demandspec): "No matches found for demands, using direct implementation");
+                + " matched context names: " + JSON.stringify(demandspec) : "No matches found for demands, using direct implementation");
         }  
         return demandspec;
     };
@@ -11168,31 +11168,22 @@ outer:  for (var i = 0; i < exist.length; ++i) {
      */
     fluid.determineDemands = function (instantiator, parentThat, funcNames) {
         funcNames = $.makeArray(funcNames);
-        var demandspec = fluid.locateDemands(instantiator, parentThat, funcNames);
-   
-        if (!demandspec) {
-            demandspec = {};
-        }
+        var demandspec = fluid.locateDemands(instantiator, parentThat, funcNames) || {};
         var newFuncName = funcNames[0];
+        
         if (demandspec.funcName) {
             newFuncName = demandspec.funcName;
-           /**    TODO: "redirects" disabled pending further thought
-            var demandspec2 = fluid.fetchDirectDemands(funcNames[0], that.typeName);
+            var demandspec2 = fluid.locateDemands(instantiator, parentThat, [newFuncName]);
             if (demandspec2) {
+                fluid.log("Followed redirect from function name " + demandspec.funcName);
                 demandspec = demandspec2; // follow just one redirect
-            } **/
-        }
-
-        var mergeArgs = [];
-        if (demandspec.parent) {
-            var parent = searchDemands(funcNames[0], $.makeArray(demandspec.parent).sort());
-            if (parent) {
-                mergeArgs = parent.args; // TODO: is this really a necessary feature?
+                if (demandspec.funcName) {
+                    newFuncName = demandspec.funcName;
+                }
             }
         }
-        var args = [];
-        fluid.merge(null, args, $.makeArray(mergeArgs), $.makeArray(demandspec.args)); // TODO: avoid so much copying
-        return $.extend({funcName: newFuncName, args: args}, fluid.censorKeys(demandspec, ["funcName", "args"]));
+        
+        return fluid.merge(null, {funcName: newFuncName, args: fluid.makeArray(demandspec.args)}, fluid.censorKeys(demandspec, ["funcName", "args"]));
     };
     
     fluid.resolveDemands = function(instantiator, parentThat, funcNames, initArgs, options) {
@@ -11268,11 +11259,11 @@ outer:  for (var i = 0; i < exist.length; ++i) {
                     firer[method] = function() {origin[method].apply(null, arguments);};
                 });
                 firer.addListener = function(listener, namespace, predicate, priority) {
-                        origin.addListener(fluid.event.dispatchListener(instantiator, that, listener, eventName, eventSpec),
-                            namespace, predicate, priority);
+                    origin.addListener(fluid.event.dispatchListener(instantiator, that, listener, eventName, eventSpec),
+                        namespace, predicate, priority);
                 };
                 return firer;
-            };
+            }
         }); 
     };
     
@@ -11326,7 +11317,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
             var expandOptions = makeStackResolverOptions(instantiator, that, localRecord, outerExpandOptions);
             expandOptions.noCopy = true; // It is still possible a model may be fetched even though it is preserved
             var pres;
-            if (!fluid.isArrayable(args)) {
+            if (!fluid.isArrayable(args) && !fluid.isPrimitive(args)) {
                 pres = fluid.expander.preserveFromExpansion(args);
             }
             var expanded = fluid.expander.expandLight(args, expandOptions);
@@ -11350,9 +11341,9 @@ outer:  for (var i = 0; i < exist.length; ++i) {
                 }
                 localRecord.options = fluid.expandOptions(localOptions, that);
             }
-            localRecord.arguments = fluid.get(userOptions, "localRecord.arguments");
+            localRecord["arguments"] = fluid.get(userOptions, "localRecord.arguments");
             var toExpand = userOptions.value;
-            userOptions = fluid.expandOptions(toExpand, that, localRecord, {direct:true});
+            userOptions = fluid.expandOptions(toExpand, that, localRecord, {direct: true});
         }
         localRecord.directOptions = userOptions;
         if (!localRecord.options) {
@@ -11364,7 +11355,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         var mergePaths = (userOptions && userOptions.mergePaths) || ["{directOptions}"];
         var togo = fluid.transform(mergePaths, function(path) {
             // Avoid use of expandOptions in simple case to avoid infinite recursion when constructing instantiator
-            return path === "{directOptions}"? localRecord.directOptions : fluid.expandOptions(path, that, localRecord, {direct:true}); 
+            return path === "{directOptions}"? localRecord.directOptions : fluid.expandOptions(path, that, localRecord, {direct: true}); 
         });
         return [defaults].concat(togo);
     };
@@ -11419,7 +11410,6 @@ outer:  for (var i = 0; i < exist.length; ++i) {
     // NON-API function
     // This function is stateful and MUST NOT be called by client code
     fluid.withInstantiator = function(that, func) {
-        var typeName = that? that.typeName : "[none]";
         var root = fluid.threadLocal();
         var instantiator = root["fluid.instantiator"];
         if (!instantiator) {
@@ -20356,8 +20346,7 @@ https://source.fluidproject.org/svn/LICENSE.txt
 var fluid_1_4 = fluid_1_4 || {};
 
 (function ($, fluid) {
-    
-    fluid.browser = fluid.browser || {};
+    fluid.registerNamespace("fluid.browser");
     
     fluid.browser.binaryXHR = function () {
         var canSendBinary = window.FormData || 
@@ -20385,6 +20374,12 @@ var fluid_1_4 = fluid_1_4 || {};
         );
 
         return that;
+    };
+    
+    fluid.progressiveCheckerForComponent = function (options) {
+        var that = fluid.initLittleComponent("fluid.progressiveCheckerForComponent", options);
+        var defaults = fluid.defaults(that.options.componentName);
+        return fluid.progressiveChecker(fluid.expandOptions(defaults.progressiveCheckerOptions, that));  
     };
     
     fluid.defaults("fluid.progressiveChecker", {
@@ -20736,9 +20731,11 @@ var fluid_1_4 = fluid_1_4 || {};
     };
     
     fluid.defaults("fluid.uploader", {
+        gradeNames: ["fluid.viewComponent"],
         components: {
             uploaderContext: {
-                type: "fluid.progressiveChecker",
+                type: "fluid.progressiveCheckerForComponent",
+                options: {componentName: "fluid.uploader"},
                 priority: "first"
             },
             uploaderImpl: {
@@ -20746,12 +20743,8 @@ var fluid_1_4 = fluid_1_4 || {};
                 container: "{uploader}.container",
                 options: "{uploader}.uploaderOptions"
             }
-        }
-    });
-    
-    fluid.demands("fluid.progressiveChecker", "fluid.uploader", {
-        funcName: "fluid.progressiveChecker",
-        args: [{
+        },
+        progressiveCheckerOptions: {
             checks: [
                 {
                     feature: "{fluid.browser.supportsBinaryXHR}",
@@ -20762,9 +20755,13 @@ var fluid_1_4 = fluid_1_4 || {};
                     contextName: "fluid.uploader.swfUpload"
                 }
             ],
-
             defaultTypeTag: fluid.typeTag("fluid.uploader.singleFile")
-        }]
+        }
+    });
+    
+    // Ensure that for all uploaders created via IoC, we bypass the wrapper and directly create the concrete uploader
+    fluid.demands("fluid.uploader", [], {
+        funcName: "fluid.uploaderImpl"
     });
     
     // This method has been deprecated as of Infusion 1.3. Use fluid.uploader() instead, 
@@ -21062,7 +21059,7 @@ var fluid_1_4 = fluid_1_4 || {};
         }
     });
 
-    fluid.demands("uploaderImpl", ["fluid.uploader", "fluid.uploader.singleFile"], {
+    fluid.demands("fluid.uploaderImpl", "fluid.uploader.singleFile", {
         funcName: "fluid.uploader.singleFileUploader"
     });
     
@@ -21658,7 +21655,7 @@ var fluid_1_4 = fluid_1_4 || {};
         },
         
         events: {
-            onFileRemoved: "{multiFileUploader}.events.onFileRemoved",
+            onFileRemoved: "{multiFileUploader}.events.onFileRemoved"
         },
         
         mergePolicy: {
@@ -21800,7 +21797,7 @@ var fluid_1_4 = fluid_1_4 || {};
 
     fluid.uploader = fluid.uploader || {};
     
-    fluid.demands("uploaderImpl", ["fluid.uploader", "fluid.uploader.swfUpload"], {
+    fluid.demands("fluid.uploaderImpl", "fluid.uploader.swfUpload", {
         funcName: "fluid.uploader.multiFileUploader"
     });
     
@@ -22119,17 +22116,9 @@ var fluid_1_4 = fluid_1_4 || {};
         events.onFileSuccess.addListener(manualModelUpdater);
     };
     
-    fluid.uploader.swfUploadStrategy.flash10EventBinder = function (model, events, local) {
+    fluid.uploader.swfUploadStrategy.flash10EventBinder = function (model, events) {
         unbindSWFUploadSelectFiles();      
               
-        events.onUploadStart.addListener(function () {
-            local.disableBrowseButton();
-        });
-        
-        events.afterUploadComplete.addListener(function () {
-            local.enableBrowseButton();            
-        });
-        
         fluid.uploader.swfUploadStrategy.bindFileEventListeners(model, events);
     };
     
@@ -22140,8 +22129,7 @@ var fluid_1_4 = fluid_1_4 || {};
         funcName: "fluid.uploader.swfUploadStrategy.flash10EventBinder",
         args: [
             "{multiFileUploader}.queue.files",
-            "{multiFileUploader}.events",
-            "{swfUploadStrategy}.local"
+            "{multiFileUploader}.events"
         ]
     });
 })(jQuery, fluid_1_4);
@@ -22167,8 +22155,7 @@ var fluid_1_4 = fluid_1_4 || {};
 
 (function ($, fluid) {
 
-    fluid.uploader = fluid.uploader || {};
-    fluid.uploader.swfUploadStrategy = fluid.uploader.swfUploadStrategy || {};
+    fluid.registerNamespace("fluid.uploader.swfUploadStrategy");
     
     /**********************************************************************************
      * The functions in this file, which provide support for Flash 9 in the Uploader, *
@@ -22253,7 +22240,7 @@ var fluid_1_4 = fluid_1_4 || {};
 
     fluid.uploader = fluid.uploader || {};
     
-    fluid.demands("uploaderImpl", ["fluid.uploader", "fluid.uploader.html5"], {
+    fluid.demands("fluid.uploaderImpl", "fluid.uploader.html5", {
         funcName: "fluid.uploader.multiFileUploader"
     });
     
@@ -22281,13 +22268,13 @@ var fluid_1_4 = fluid_1_4 || {};
                 type: "fluid.uploader.remote",
                 options: {
                     queueSettings: "{multiFileUploader}.options.queueSettings",
-                     events: {
-                         afterReady: "{multiFileUploader}.events.afterReady",
-                         onFileStart: "{multiFileUploader}.events.onFileStart",
-                         onFileProgress: "{multiFileUploader}.events.onFileProgress",
-                         onFileSuccess: "{multiFileUploader}.events.onFileSuccess",
-                         onFileError: "{multiFileUploader}.events.onFileError",
-                         onFileComplete: "{multiFileUploader}.events.onFileComplete"
+                    events: {
+                        afterReady: "{multiFileUploader}.events.afterReady",
+                        onFileStart: "{multiFileUploader}.events.onFileStart",
+                        onFileProgress: "{multiFileUploader}.events.onFileProgress",
+                        onFileSuccess: "{multiFileUploader}.events.onFileSuccess",
+                        onFileError: "{multiFileUploader}.events.onFileError",
+                        onFileComplete: "{multiFileUploader}.events.onFileComplete"
                     }
                 }
             }

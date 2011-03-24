@@ -36,7 +36,6 @@ var searchBoxTester = function ($) {
         "dimensions": ["create", "read", "update", "delete", "list"],
         "authorization/roles/accountroles": ["create", "read", "update", "delete", "list"],
         "cataloging": ["create", "read", "update", "delete", "list"],
-        "objectexit": ["create", "read", "update", "delete", "list"],
         "vocabularyitems": ["create", "read", "update", "delete", "list"],
         "reports": ["create", "read", "update", "delete", "list"],
         "intake": ["create", "read", "update", "delete", "list"],

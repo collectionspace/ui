@@ -25,7 +25,14 @@ var mediaUploaderTester = function ($) {
     
     var bareMediaUploaderTest = new jqUnit.TestCase("Media Uploader Tests");
     
-    var mediaUploaderTest = cspace.tests.testEnvironment({testCase: bareMediaUploaderTest});
+    var mediaUploaderTest = cspace.tests.testEnvironment({
+        testCase: bareMediaUploaderTest,
+        components: {
+            confirmation: {
+                type: "cspace.confirmation"
+            }
+        }
+    });
     
     var setupMediaUploader = function (options) {
         return cspace.mediaUploader(container, options);
@@ -82,7 +89,7 @@ var mediaUploaderTester = function ($) {
         jqUnit.isVisible("Remove media is visible", mediaUploader.locate("removeButton"));
     });
     
-    mediaUploaderTest.test("Remove media", function () {
+    mediaUploaderTest.asyncTest("Remove media", function () {
         expect(4);
         var model = fluid.copy(baseModel);
         var url = "http://testlink.com/media";
@@ -95,6 +102,7 @@ var mediaUploaderTester = function ($) {
                 onRemove: function () {
                     jqUnit.assertEquals("Model has a correct srcUri", "", fluid.get(model, mediaUploader.options.elPaths.linkUri));
                     jqUnit.assertTrue("Removing performed successfully", true);
+                    start();
                 }
             }
         });
@@ -102,6 +110,9 @@ var mediaUploaderTester = function ($) {
         var removeButton = mediaUploader.locate("removeButton");
         jqUnit.isVisible("Remove media is visible", removeButton);
         jqUnit.assertEquals("Model has a correct srcUri", url, fluid.get(model, mediaUploader.options.elPaths.linkUri));
+        mediaUploader.confirmation.popup.bind("dialogopen", function () {
+            mediaUploader.confirmation.confirmationDialog.locate("act").click();
+        });
         removeButton.click();
     });
 };

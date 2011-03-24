@@ -44,7 +44,7 @@ var relatedRecordsTabTester = function ($) {
     var setupTab = function (opts) {
         var testPrimaryType = "intake";
         var testRelatedType = "cataloging";
-        options = {
+        var options = {
             pageBuilder: {
                 options: {
                     userLogin: cspace.tests.userLogin,

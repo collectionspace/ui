@@ -15,7 +15,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 .ui-dialog.cs-search-dialog {
 	min-width:800px !important;
 }
-
+.ui-dialog-titlebar {
+    -moz-border-radius:6px 6px 0 0; 
+	-webkit-border-radius:6px 6px 0 0;
+}
 .cs-confirmationDialog {
 	color: #6E6E6E;
 	font-size:14px;
@@ -27,6 +30,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 	z-index:99999;
 	border:0px solid #CECECE;
 	padding:0 10px 10px 10px;
+    -moz-border-radius: 0 0 6px 6px; 
+	-webkit-border-radius: 0 0 6px 6px;
 }
 .cs-confirmationDialog .label {float:left; /*padding-left:10px;*/ font-size:12px;}
 

@@ -60,7 +60,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var relationManager = fluid.withEnvironment(testEnv.environment, function() { 
             return cspace.relationManager("#main", defaultOpts);
         });
-        globalRelationManager = relationManager;
         if (opts && opts.stopTests) {
             stop();
         }
