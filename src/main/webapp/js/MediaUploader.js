@@ -17,9 +17,14 @@ cspace = cspace || {};
     
     cspace.mediaUploader = function (container, options) {
         var that = fluid.initRendererComponent("cspace.mediaUploader", container, options);
-        that.renderer.refreshView();
         fluid.initDependents(that);
+        that.refreshView();
         return that;
+    };
+    
+    cspace.mediaUploader.refreshView = function (that) {
+        that.renderer.refreshView();
+        that.events.afterRender.fire();
     };
     
     cspace.mediaUploader.afterFileQueuedListener = function (input) {
@@ -28,9 +33,12 @@ cspace = cspace || {};
         };
     };
     
-    cspace.mediaUploader.afterUploadCompleteListener = function (input) {
-        return function () {
+    cspace.mediaUploader.onFileSuccess = function (that, input) {
+        return function (file, responseText, xhr) {
             input.text("");
+            var response = JSON.parse(responseText);
+            that.options.applier.requestChange(that.options.elPaths.srcUri, response.file);
+            that.events.onLink.fire();
         };
     };
     
@@ -38,7 +46,7 @@ cspace = cspace || {};
         return {
             expander: [{
                 type: "fluid.renderer.condition",
-                condition: "${" + that.options.elPaths.blobsId + "}",
+                condition: "${" + that.options.elPaths.blobCsid + "}",
                 trueTree: {
                     removeButton: {
                         messagekey: "removeButton",
@@ -48,7 +56,7 @@ cspace = cspace || {};
                         }, {
                             type: "jQuery",
                             func: "click",
-                            args: fluid.invokeGlobalFunction(that.options.removeMedia, [that])
+                            args: that.removeMedia
                         }]
                     },
                     uploader: {
@@ -89,7 +97,7 @@ cspace = cspace || {};
                 decorators: [{
                     type: "jQuery",
                     func: "keyup",
-                    args: fluid.invokeGlobalFunction(that.options.processLink, [that])
+                    args: that.processLink
                 }]
             },
             linkButton: {
@@ -104,55 +112,64 @@ cspace = cspace || {};
                 }, {
                     type: "jQuery",
                     func: "click",
-                    args: fluid.invokeGlobalFunction(that.options.linkMedia, [that])
+                    args: that.linkMedia
                 }]
             }
         };
     };
     
     cspace.mediaUploader.linkMedia = function (that) {
-        return function () {
-            var srcUri = that.locate("linkInput").val();
-            that.options.applier.requestChange(that.options.elPaths.linkUri, srcUri);
-            that.events.onLink.fire();
-        };
+        var srcUri = that.locate("linkInput").val();
+        that.options.applier.requestChange(that.options.elPaths.srcUri, srcUri);
+        that.events.onLink.fire();
     };
     
     cspace.mediaUploader.processLink = function (that) {
-        return function () {
-            that.locate("linkButton").attr("disabled", that.locate("linkInput").val() ? false : true);
-        };
+        that.locate("linkButton").attr("disabled", that.locate("linkInput").val() ? false : true);
     };
     
     cspace.mediaUploader.removeMedia = function (that) {
-        return function () {
-            that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
-                listeners: {
-                    onClose: function (userAction) {
-                        if (userAction === "act") {
-                            that.options.applier.requestChange(that.options.elPaths.linkUri, "");
-                            that.events.onRemove.fire();
-                        }
+        that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+            listeners: {
+                onClose: function (userAction) {
+                    if (userAction === "act") {
+                        that.options.applier.requestChange(that.options.elPaths.srcUri, "");
+                        that.events.onRemove.fire();
                     }
-                },
-                strings: {
-                    primaryMessage: that.options.strings.confirmationPrimaryMessage,
-                    actText: that.options.strings.confirmationActText,
-                    actAlt: that.options.strings.confirmationActAlt
                 }
-            });
-        };
+            },
+            strings: {
+                primaryMessage: that.options.strings.confirmationPrimaryMessage,
+                actText: that.options.strings.confirmationActText,
+                actAlt: that.options.strings.confirmationActAlt
+            }
+        });
     };
     
     fluid.defaults("cspace.mediaUploader", {
         gradeNames: ["fluid.rendererComponent"],
-        elPaths: {
-            blobsId: "fields.id",
-            linkUri: "fields.srcUri"
+        invokers: {
+            refreshView: {
+                funcName: "cspace.mediaUploader.refreshView",
+                args: "{mediaUploader}"
+            },
+            linkMedia: {
+                funcName: "cspace.mediaUploader.linkMedia",
+                args: "{mediaUploader}"
+            },
+            processLink: {
+                funcName: "cspace.mediaUploader.processLink",
+                args: "{mediaUploader}"
+            },
+            removeMedia: {
+                funcName: "cspace.mediaUploader.removeMedia",
+                args: "{mediaUploader}"
+            }
         },
-        linkMedia: "cspace.mediaUploader.linkMedia",
-        processLink: "cspace.mediaUploader.processLink",
-        removeMedia: "cspace.mediaUploader.removeMedia",
+        elPaths: {
+            blobCsid: "fields.blobCsid",
+            srcUri: "fields.srcUri"
+        },
         mergePolicy: {
             model: "preserve",
             applier: "nomerge"
@@ -186,7 +203,8 @@ cspace = cspace || {};
         },
         events: {
             onLink: null,
-            onRemove: null
+            onRemove: null,
+            afterRender: null
         },
         produceTree: cspace.mediaUploader.produceTree,
         components: {
@@ -206,6 +224,7 @@ cspace = cspace || {};
             confirmation: "{confirmation}",
             fileUploader: {
                 type: "fluid.uploader",
+                createOnEvent: "afterRender",
                 container: "{mediaUploader}.dom.fileUploader",
                 options: {
                     components: {
@@ -232,11 +251,11 @@ cspace = cspace || {};
                                 args: "{mediaUploader}.dom.uploadInput"
                             }
                         },
-                        afterUploadComplete: {
+                        onFileSuccess: {
                             expander: {
                                 type: "fluid.deferredInvokeCall",
-                                func: "cspace.mediaUploader.afterUploadCompleteListener",
-                                args: "{mediaUploader}.dom.uploadInput"
+                                func: "cspace.mediaUploader.onFileSuccess",
+                                args: ["{mediaUploader}", "{mediaUploader}.dom.uploadInput"]
                             }
                         }
                     }

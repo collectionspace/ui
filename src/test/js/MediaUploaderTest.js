@@ -19,7 +19,7 @@ var mediaUploaderTester = function ($) {
     
     var baseModel = {
         fields: {
-            id: "123"
+            blobCsid: "123"
         }
     };
     
@@ -48,7 +48,7 @@ var mediaUploaderTester = function ($) {
         jqUnit.assertTrue("Link button is disabled", mediaUploader.locate("linkButton").attr("disabled"));
     });
     
-    mediaUploaderTest.test("Linking", function () {
+    mediaUploaderTest.asyncTest("Linking", function () {
         expect(5);
         var url = "http://testlink.com/media";
         var model = fluid.copy({
@@ -60,8 +60,9 @@ var mediaUploaderTester = function ($) {
             applier: fluid.makeChangeApplier(model),
             listeners: {
                 onLink: function () {
-                    jqUnit.assertEquals("Model has a correct srcUri", url, fluid.get(model, mediaUploader.options.elPaths.linkUri));
+                    jqUnit.assertEquals("Model has a correct srcUri", url, fluid.get(model, mediaUploader.options.elPaths.srcUri));
                     jqUnit.assertTrue("Linking performed successfully", true);
+                    start();
                 }
             }
         });
@@ -72,7 +73,7 @@ var mediaUploaderTester = function ($) {
         linkInput.val(url);
         linkInput.keyup();
         jqUnit.assertFalse("Link button is enabled", linkButton.attr("disabled"));
-        jqUnit.assertUndefined("Model has no srcUri", fluid.get(model, mediaUploader.options.elPaths.linkUri));
+        jqUnit.assertUndefined("Model has no srcUri", fluid.get(model, mediaUploader.options.elPaths.srcUri));
         linkButton.click();
     });
     
@@ -100,7 +101,7 @@ var mediaUploaderTester = function ($) {
             applier: fluid.makeChangeApplier(model),
             listeners: {
                 onRemove: function () {
-                    jqUnit.assertEquals("Model has a correct srcUri", "", fluid.get(model, mediaUploader.options.elPaths.linkUri));
+                    jqUnit.assertEquals("Model has a correct srcUri", "", fluid.get(model, mediaUploader.options.elPaths.srcUri));
                     jqUnit.assertTrue("Removing performed successfully", true);
                     start();
                 }
@@ -109,7 +110,7 @@ var mediaUploaderTester = function ($) {
         
         var removeButton = mediaUploader.locate("removeButton");
         jqUnit.isVisible("Remove media is visible", removeButton);
-        jqUnit.assertEquals("Model has a correct srcUri", url, fluid.get(model, mediaUploader.options.elPaths.linkUri));
+        jqUnit.assertEquals("Model has a correct srcUri", url, fluid.get(model, mediaUploader.options.elPaths.srcUri));
         mediaUploader.confirmation.popup.bind("dialogopen", function () {
             mediaUploader.confirmation.confirmationDialog.locate("act").click();
         });

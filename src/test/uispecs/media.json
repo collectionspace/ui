@@ -45,7 +45,7 @@
     "recordEditor": {
         "expander": {
             "type": "fluid.renderer.condition",
-            "condition": "${fields.id}",
+            "condition": "${fields.blobCsid}",
             "trueTree": {
                 ".csc-blobs": {}
             },
