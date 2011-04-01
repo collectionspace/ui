@@ -93,15 +93,13 @@ var mediaUploaderTester = function ($) {
     mediaUploaderTest.asyncTest("Remove media", function () {
         expect(4);
         var model = fluid.copy(baseModel);
-        var url = "http://testlink.com/media";
-        model.fields.srcUri = url;
         
         var mediaUploader = setupMediaUploader({
             model: model,
             applier: fluid.makeChangeApplier(model),
             listeners: {
                 onRemove: function () {
-                    jqUnit.assertEquals("Model has a correct srcUri", "", fluid.get(model, mediaUploader.options.elPaths.srcUri));
+                    jqUnit.assertEquals("Model has a correct blobCsid", "", fluid.get(mediaUploader.model, mediaUploader.options.elPaths.blobCsid));
                     jqUnit.assertTrue("Removing performed successfully", true);
                     start();
                 }
@@ -110,7 +108,7 @@ var mediaUploaderTester = function ($) {
         
         var removeButton = mediaUploader.locate("removeButton");
         jqUnit.isVisible("Remove media is visible", removeButton);
-        jqUnit.assertEquals("Model has a correct srcUri", url, fluid.get(model, mediaUploader.options.elPaths.srcUri));
+        jqUnit.assertEquals("Model has a correct blobCsid", model.fields.blobCsid, fluid.get(mediaUploader.model, mediaUploader.options.elPaths.blobCsid));
         mediaUploader.confirmation.popup.bind("dialogopen", function () {
             mediaUploader.confirmation.confirmationDialog.locate("act").click();
         });

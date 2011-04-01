@@ -133,7 +133,7 @@ cspace = cspace || {};
             listeners: {
                 onClose: function (userAction) {
                     if (userAction === "act") {
-                        that.options.applier.requestChange(that.options.elPaths.srcUri, "");
+                        that.options.applier.requestChange(that.options.elPaths.blobCsid, "");
                         that.events.onRemove.fire();
                     }
                 }
