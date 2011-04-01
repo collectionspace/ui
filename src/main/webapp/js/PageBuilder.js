@@ -286,6 +286,9 @@ cspace = cspace || {};
                     permissions: "{pageBuilder}.permissions"
                 }
             },
+            relationResolver: {
+                type: "cspace.util.relationResolver"
+            },
             recordTypeManager: {
                 type: "cspace.recordTypeManager"
             },

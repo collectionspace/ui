@@ -169,6 +169,9 @@ fluid.defaults("cspace.tests.testEnvironment", {
                 permissions: "{testEnvironment}.options.permissions"
             }
         },
+        relationResolver: {
+            type: "cspace.util.relationResolver"
+        },
         recordTypeManager: {
             type: "cspace.recordTypeManager"
         },

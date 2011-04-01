@@ -168,6 +168,9 @@ cspace = cspace || {};
     };
 
     var applyResults = function (that, data) {
+        if (that.searchResultsResolver) {
+            that.searchResultsResolver.resolve(data);
+        }
         var searchModel = that.model.searchModel;
         var results = that.model.results;
         var offset = searchModel.pageIndex * searchModel.pageSize;
@@ -381,7 +384,25 @@ cspace = cspace || {};
                 }
             }
         }
-
     });
+    
+    fluid.defaults("cspace.search.searchResultsResolver", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        invokers: {
+            resolve: {
+                funcName: "cspace.search.searchResultsResolver.resolve",
+                args: ["{relationResolver}", "{arguments}.0"]
+            }
+        }
+    });
+    cspace.search.searchResultsResolver.resolve = function (relationResolver, data) {
+        if (!data.results || data.results.length < 1) {
+            return;
+        }
+        fluid.remove_if(data.results, function (result) {
+            return relationResolver.isPrimary(result.csid) || relationResolver.isRelated(result.recordtype, result.csid);
+        });
+        data.pagination.totalItems = data.results.length;
+    }
         
 })(jQuery, fluid);

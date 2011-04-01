@@ -175,9 +175,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         // searchView demands
         fluid.demands("search", ["cspace.searchToRelateDialog", "cspace.localData"], {
-            container: "{searchToRelateDialog}.container",
+           container: "{searchToRelateDialog}.container",
             options: {
-                searchUrlBuilder: "cspace.search.localSearchUrlBuilder"
+                searchUrlBuilder: "cspace.search.localSearchUrlBuilder",
+                components: {
+                    searchResultsResolver: {
+                        type: "cspace.search.searchResultsResolver"
+                    }
+                }
             }
         });
         fluid.demands("search", ["cspace.pageBuilder", "cspace.localData"], {
@@ -528,6 +533,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{relatedRecordsTab}.container"
         });
         
+        // relationResolver demands
+        fluid.demands("cspace.util.relationResolver", "cspace.pageBuilder", {
+            options: {
+                model: "{pageBuilder}.model"
+            }
+        });
+        
         // Related records tab demands
         fluid.demands("relatedRecordsTab", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.relatedRecordsTab"
@@ -550,7 +562,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // searchView deamnds
         fluid.demands("fluid.pager", "cspace.search.searchView", ["{searchView}.dom.resultsContainer", fluid.COMPONENT_OPTIONS]);
         fluid.demands("search", "cspace.searchToRelateDialog", {
-            container: "{searchToRelateDialog}.container"
+            container: "{searchToRelateDialog}.container",
+            options: {
+                components: {
+                    searchResultsResolver: {
+                        type: "cspace.search.searchResultsResolver"
+                    }
+                }
+            }
         });
         fluid.demands("search", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.search"
@@ -696,6 +715,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // Messagebar demands
         fluid.demands("messageBar", "cspace.test", {
             container: "body"
+        });
+        
+        // search demands
+        fluid.demands("search", ["cspace.searchToRelateDialog", "cspace.localData", "cspace.test"], {
+           container: "{searchToRelateDialog}.container",
+            options: {
+                searchUrlBuilder: "cspace.search.localSearchUrlBuilder"
+            }
         });
     };
     
