@@ -49,14 +49,16 @@
                 "relationshiptype": "also affects" 
             } 
         ],
-        "procedures": [
+        "intake": [
             {
                 "csid": "2007.4-a",
                 "number": "2007.4-a",
                 "summary": "yet other thing",
                 "recordtype": "intake",
                 "relationshiptype": "also affects somewhat" 
-            },
+            }
+        ],
+        "acquisition": [
             {
                 "csid": "ACQ2009.2",
                 "number": "ACQ2009.2",

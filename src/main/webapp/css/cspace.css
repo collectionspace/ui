@@ -138,6 +138,17 @@ input[type="button"].deleteButton, input[type="submit"].deleteButton {
 	color:#669922;}
 input[type="button"].deleteButton:hover, input[type="submit"].deleteButton:hover {
 	background-color:#DAEDD1;}
+input[type="button"].deleteButton[disabled], input[type="submit"].deleteButton[disabled] {
+    -moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	background:transparent url('../images/icnDeleteDisabled.png') no-repeat 8px 4px;
+	padding-left:24px; 
+	padding-right:8px;
+	color:#CCC;}
+input[type="button"].deleteButton[disabled]:hover, input[type="submit"].deleteButton[disabled]:hover {
+	background-color:#ADADAD;
+    color:#606060
+}
 input[type="button"].duplicateButton, input[type="submit"].duplicateButton {
 	background:transparent url('../images/icnDuplicate.png') no-repeat 8px 4px; 
 	padding-left:24px; 

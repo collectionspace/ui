@@ -6,7 +6,7 @@ You may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
-*/
+ */
 
 /*global jQuery, fluid, cspace:true*/
 "use strict";
@@ -93,7 +93,6 @@ cspace = cspace || {};
 
         that.options.dataContext.events.afterCreate.addListener(function (data) {
             recordSaveHandler(that, data, "Create");
-            that.locate("deleteButton").removeAttr("disabled").removeClass("deactivate");            
         });
 
         that.options.dataContext.events.afterUpdate.addListener(function (data) {
@@ -102,6 +101,10 @@ cspace = cspace || {};
 
         that.options.dataContext.events.afterRemove.addListener(function () {
             that.events.afterRemove.fire(that.options.strings.removeSuccessfulMessage);
+        });
+
+        that.options.dataContext.events.afterRemove.addListener(function () {
+            that.afterDeleteAction();
         });
 
         that.options.dataContext.events.modelChanged.addListener(function (data) {
@@ -150,7 +153,7 @@ cspace = cspace || {};
         });
         cspace.util.setZIndex();      
     };
-    
+
     var setupRecordEditor = function (that) {
         bindEventHandlers(that);
         if (!that.options.deferRendering) {
@@ -180,11 +183,6 @@ cspace = cspace || {};
         that.refreshView = function () {
             fluid.log("RecordEditor.js before render");
             that.renderer.refreshView();
-            if (!that.model.csid || (that.model.fields.email === "admin@collectionspace.org")) {
-                that.locate("deleteButton").attr("disabled", "disabled").addClass("deactivate");
-            } else {
-                that.locate("deleteButton").removeAttr("disabled").removeClass("deactivate");
-            }
             processChanges(that, false);
             that.rollbackModel = fluid.copy(that.model.fields);
             that.options.messageBar.hide();
@@ -219,10 +217,14 @@ cspace = cspace || {};
                 listeners: {
                     onClose: function (userAction) {
                         if (userAction === "act") {
+                            that.options.messageBar.show(that.options.strings.removingMessage, null, false);
                             that.options.dataContext.remove(that.model.csid);
                             processChanges(that, false);
                         }
                     }
+                },
+                strings: {
+                    primaryMessage: that.options.strings.deletePrimaryMessage
                 }
             });
         };
@@ -236,14 +238,64 @@ cspace = cspace || {};
         that.options.applier.requestChange("fields", that.rollbackModel);
         that.refreshView();
     };
+
+    /*
+     * Opens an alert box informing user printing the string defined in
+     * options.strings.removeSuccessfulMessage. After user dismisses dialog,
+     * user is redirected to the URL defined in: options.urls.deleteURL
+     * Note that deletion should already have taken place before this function is
+     * called. This function merely shows dialog to user and redirects.
+     */
+    cspace.recordEditor.redirectAfterDelete = function(that) {
+        that.confirmation.open("cspace.confirmation.alertDialog", undefined, {
+            listeners: {
+                onClose: function (userAction) {
+                    window.location = that.options.urls.deleteURL;
+                }
+            },
+            strings: {
+                primaryMessage: that.options.strings.removeSuccessfulMessage
+            }
+        });
+    }
+
+    /*
+     * Dismisses the record that the user was in (now deleted) and displays
+     * a message in the messagebar, informing the user that the record was
+     * deleted.
+     */
+    cspace.recordEditor.statusAfterDelete = function(that) {
+        //show messagebar
+        that.options.messageBar.show(that.options.strings.removeSuccessfulMessage, null, false);
+    }
     
     cspace.recordEditor.produceTree = function (that) {
-        return fluid.merge(null, {
+        var deleteButton = {
+            type: "fluid.renderer.condition",
+            condition: that.options.showDeleteButton,
+            trueTree: {
+                deleteButton: {
+                    decorators: [{
+                        type: "attrs",
+                        attributes: {
+                            value: that.options.strings.deleteButton
+                        }
+                    }, {
+                        type: "jQuery",
+                        func: "attr",
+                        args: {
+                            disabled: that.checkDeleteDisabling
+                        }
+                    }]
+                }
+            }
+        };
+        var tree = fluid.merge(null, {
             save: {
                 decorators: {
                     type: "attrs",
                     attributes: {
-                        value: that.options.strings.save                        
+                        value: that.options.strings.save
                     }
                 }
             },
@@ -256,8 +308,11 @@ cspace = cspace || {};
                 }
             }
         }, that.options.uispec);
+        tree.expander = fluid.makeArray(tree.expander); //make an expander array in case we have expanders in the uispec
+        tree.expander.push(deleteButton);
+        return tree;
     };
-    
+
     cspace.recordEditor.cutpointGenerator = function (selectors, options) {
         var cutpoints = options.cutpoints || fluid.renderer.selectorsToCutpoints(selectors, options) || [];
         return cutpoints.concat(cspace.renderUtils.cutpointsFromUISpec(options.uispec));
@@ -265,6 +320,41 @@ cspace = cspace || {};
     
     cspace.recordEditor.cancel = function (that) {
         that.rollback();
+    };
+
+    //Checks whether delete button should be disabled.
+    //returns true if the delete button should be disabled,
+    //else false
+    cspace.recordEditor.checkDeleteDisabling = function(that) {
+        //disable if: model.csid is not set (new record)
+        if (that.model && !that.model.csid) {
+            return true;
+        }
+        //disable if: if we are looking at admin account
+        if (that.model.fields.email === "admin@collectionspace.org") {
+            return true;
+        }
+        //check whether we need to disable delete button due to related records
+        //that we do not have update permission to (which we need since we will
+        //be modifying their relations when deleting the record)
+        var relations = that.model.relations;
+        //if relations isn't set, no need to check any further
+        if (!relations || relations.length < 1 || $.isEmptyObject(relations)) {
+            return false;
+        }
+        var relatedTypes = [];
+        fluid.each(relations, function (val, recordType) {
+            relatedTypes.push({
+                target: recordType,
+                permission: "update"
+            });
+        });
+        //now build opts for checking permissions
+        return (!cspace.permissions.resolveMultiple({
+            recordTypeManager: that.options.recordTypeManager,
+            resolver: that.options.resolver,
+            allOf: relatedTypes
+        }));
     };
     
     fluid.defaults("cspace.recordEditor", {
@@ -297,6 +387,8 @@ cspace = cspace || {};
                 funcName: "cspace.recordEditor.rollback",
                 args: "{recordEditor}"
             },
+            afterDeleteAction: "afterDelete",
+            checkDeleteDisabling: "checkDeleteDisabling", //whether to disable delete button
             cancel: "cancel"
         },
         dataContext: "{dataContext}",
@@ -311,6 +403,7 @@ cspace = cspace || {};
             onError: null,  // params: operation
             afterRender: null
         },
+        showDeleteButton: false,
         selectors: {
             save: ".csc-save",
             cancel: ".csc-cancel",
@@ -319,9 +412,9 @@ cspace = cspace || {};
             header: ".csc-recordEditor-header",
             togglable: ".csc-recordEditor-togglable"
         },
-        selectorsToIgnore: ["deleteButton", "requiredFields", "identificationNumber", "header", "togglable"],
+        selectorsToIgnore: ["requiredFields", "identificationNumber", "header", "togglable"],
         rendererFnOptions: {
-            cutpointGenerator: "cspace.recordEditor.cutpointGenerator",
+            cutpointGenerator: "cspace.recordEditor.cutpointGenerator"
         },
         rendererOptions: {
             autoBind: true,
@@ -329,10 +422,12 @@ cspace = cspace || {};
             parentComponent: "{recordEditor}"
         },
         parentBundle: "{globalBundle}",
+        resolver: "{permissionsResolver}",
         strings: {
             specFetchError: "I'm sorry, an error has occurred fetching the UISpec: ",
             errorRecoverySuggestion: "Please try refreshing your browser",
             savingMessage: "Saving, please wait...",
+            removingMessage: "Deleting, please wait...",
             updateSuccessfulMessage: "Record successfully saved",
             createSuccessfulMessage: "New Record successfully created",
             removeSuccessfulMessage: "Record successfully deleted",
@@ -345,11 +440,11 @@ cspace = cspace || {};
             noDefaultInvitation: "-- Select an item from the list --",
             missingRequiredFields: "Some required fields are empty",
             save: "Save",
-            cancel: "Cancel changes"
+            cancel: "Cancel changes",
+            deleteButton: "Delete"
         },
         urls: cspace.componentUrlBuilder({
-            cancel: "%webapp/html/findedit.html"
+            deleteURL: "%webapp/html/myCollectionSpace.html"
         })
     });
-        
 })(jQuery, fluid);

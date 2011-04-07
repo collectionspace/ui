@@ -299,7 +299,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
         fluid.demands("fluid.autocomplete.autocompleteView", "cspace.autocomplete", {
-            container: "{autocomplete}.autocompleteInput",
+            container: "{autocomplete}.autocompleteInput"
         }); 
         fluid.demands("cspace.autocomplete.popup", "cspace.autocomplete", {
             container: "{autocomplete}.popupElement"
@@ -395,14 +395,93 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("details", "cspace.listEditor", {
             container: "{listEditor}.dom.details"
         });
+        
         fluid.demands("recordEditor", "cspace.pageBuilder", {
-            container: "{pageBuilder}.options.selectors.recordEditor"
+            container: "{pageBuilder}.options.selectors.recordEditor",
+            options: {
+                showDeleteButton: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.permissions.resolve",
+                        args: {
+                            resolver: "{permissionsResolver}",
+                            permission: "delete",
+                            target: "{pageBuilderIO}.options.recordType"
+                        }
+                    }
+                }
+            }
         });
+        
         fluid.demands("cancel", "cspace.recordEditor", {
             funcName: "cspace.recordEditor.cancel",
             args: "{recordEditor}"
         });
+
+        fluid.demands("afterDelete", "cspace.recordEditor", {
+            funcName: "cspace.recordEditor.redirectAfterDelete",
+            args: "{recordEditor}"
+        });
+
+        fluid.demands("checkDeleteDisabling", "cspace.recordEditor", {
+            funcName: "cspace.recordEditor.checkDeleteDisabling",
+            args: "{recordEditor}"
+        });
+
+        fluid.demands("details", [ "cspace.listEditor", "cspace.role" ], {
+             container: "{listEditor}.dom.details",
+             options: {
+                showDeleteButton: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.permissions.resolve",
+                        args: {
+                            resolver: "{permissionsResolver}",
+                            permission: "delete",
+                            target: "{pageBuilderIO}.options.recordType"
+                        }
+                    }
+                },
+                strings: {
+                    deletePrimaryMessage: "Delete this role?",
+                    deleteFailedMessage: "Error deleting role: ",
+                    removeSuccessfulMessage: "Role successfully deleted"
+                }
+            }
+        });
+
+        fluid.demands("afterDelete", [ "cspace.listEditor", "cspace.role"], {
+            funcName: "cspace.recordEditor.statusAfterDelete",
+            args: "{recordEditor}"
+        });
         
+        fluid.demands("details", [ "cspace.listEditor", "cspace.users" ], {
+             container: "{listEditor}.dom.details",
+             options: {
+                showDeleteButton: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.permissions.resolve",
+                        args: {
+                            resolver: "{permissionsResolver}",
+                            permission: "delete",
+                            target: "{pageBuilderIO}.options.recordType"
+                        }
+                    }
+                },
+                strings: {
+                    deletePrimaryMessage: "Delete this user?",
+                    deleteFailedMessage: "Error deleting user: ",
+                    removeSuccessfulMessage: "User successfully deleted"
+                }
+            }
+        });
+
+        fluid.demands("afterDelete", [ "cspace.listEditor", "cspace.users"], {
+            funcName: "cspace.recordEditor.statusAfterDelete",
+            args: "{recordEditor}"
+        });
+
         // Record List demands
         fluid.demands("list", "cspace.listEditor", {
             container: "{listEditor}.dom.list"
@@ -593,7 +672,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 primaryRecordType: "{pageBuilder}.options.pageType",
                 uispec: "{pageBuilder}.options.uispec.sidebar",
                 recordApplier: "{pageBuilder}.applier",
-                recordModel: "{pageBuilder}.model",
+                recordModel: "{pageBuilder}.model"
             }
         });
         
@@ -711,7 +790,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
-        
+
         // Messagebar demands
         fluid.demands("messageBar", "cspace.test", {
             container: "body"

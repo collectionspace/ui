@@ -187,7 +187,26 @@ cspace = cspace || {};
             actText: "Save",
             actAlt: "save and proceed",
             proceedText: "Don't Save",
-            proceedAlt: "proceed without saving",
+            proceedAlt: "proceed without saving"
+        }
+    });
+
+    cspace.confirmation.alertDialog = function (container, options) {
+        var that = fluid.initLittleComponent("cspace.confirmation.alertDialog", options);
+        return cspace.confirmationDialog(container, that.options);
+    };
+
+    fluid.defaults("cspace.confirmation.alertDialog", {
+        enableButtons: ["act"],
+        model: {
+            messages: ["primaryMessage", "secondaryMessage"]
+        },
+        strings: {
+            title: "Alert",
+            primaryMessage: "Record Successfully Deleted",
+            secondaryMessage: "Redirecting..",
+            actText: "OK",
+            actAlt: "Accept"
         }
     });
     

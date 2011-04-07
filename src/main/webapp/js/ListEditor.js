@@ -46,7 +46,6 @@ cspace = cspace || {};
         });
         that.detailsDC.events.afterRemove.addListener(function () {
             hideDetails(that.dom);
-            that.options.messageBar.hide();
         });
         that.detailsDC.events.onError.addListener(function (operation, message) {
             that.locate("newListRow").hide();

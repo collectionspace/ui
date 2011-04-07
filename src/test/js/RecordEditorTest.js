@@ -1,7 +1,7 @@
 /*
 Copyright 2010 University of Toronto
 
-Licensed under the Educational Community License (ECL), Version 2.0. 
+Licensed under the Educational Community License (ECL), Version 2.0.
 ou may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
@@ -17,20 +17,21 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     var bareRecordEditorTest = new jqUnit.TestCase("recordEditor Tests", null, function () {
         $(".ui-dialog").detach();
     });
-    
+
     var recordEditorTest = cspace.tests.testEnvironment({testCase: bareRecordEditorTest});
-    
+
     var setupRecordEditor = function (options, callback) {
         var recordEditor;
         fluid.merge(null, options, {
             applier: fluid.makeChangeApplier(options.model),
             listeners: {
                 "afterRender.initialRender": callback
-            }
+            },
+            showDeleteButton: true
         });
         recordEditor = cspace.recordEditor("#main", options);
     };
-    
+
     recordEditorTest.asyncTest("Creation", function () {
         var model = {
             fields: {
@@ -52,7 +53,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             start();
         });
     });
-    
+
     recordEditorTest.asyncTest("Delete", function () {
         var model = {
             csid: "123.456.789",
@@ -74,7 +75,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             re.remove();
         });
     });
-    
+
     recordEditorTest.asyncTest("Rollback test", function () {
         var model = {
             csid: "123.456.789",
@@ -107,4 +108,3 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     });
 
 }());
-

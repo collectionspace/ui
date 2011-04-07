@@ -44,6 +44,11 @@ var adminUsersTester = function () {
         components: {
             userListEditor: {
                 options: {
+                    dataContext: {
+                        options: {
+                            schema: schema
+                        }
+                    },
                     details: {
                         options: {
                             navigationEventNamespace: "onPerformNavigationRecordEditor"
@@ -72,7 +77,15 @@ var adminUsersTester = function () {
         }, "tearDown");
     }, cspace.tests.onTearDown.removeListener("tearDown"));
     
-    var adminUsersTest = cspace.tests.testEnvironment({testCase: bareAdminUsersTest});
+    fluid.defaults("cspace.tests.pageBuilderIO", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        recordType: "users"
+    });
+    var adminUsersTest = cspace.tests.testEnvironment({testCase: bareAdminUsersTest, components: {
+        pageBuilderIO: {
+            type: "cspace.tests.pageBuilderIO"
+        }
+    }});
     
     var changeDetails = function (adminUsersSelectors, testDataCreateUser, confPassword) {
         jQuery(adminUsersSelectors.email).val(testDataCreateUser.email).change();
@@ -90,6 +103,7 @@ var adminUsersTester = function () {
                 callback(adminUsers, adminUsers.userListEditor, adminUsers.userListEditor.details);
             }
         });
+        fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.users");
         adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
     };
     
@@ -133,7 +147,6 @@ var adminUsersTester = function () {
                 jqUnit.assertEquals("Full name is blank", adminUsers.locate("userName").val(), "");
                 jqUnit.assertEquals("Password is blank", adminUsers.locate("password").val(), "");
                 jqUnit.assertEquals("Password confirm is blank", adminUsers.locate("passwordConfirm").val(), "");
-                jqUnit.assertTrue("Delete button has deactivated style", re.locate("deleteButton").hasClass("deactivate"));
                 jqUnit.assertTrue("Delete button is disabled", re.locate("deleteButton").attr("disabled"));
                 jqUnit.notVisible("message container is hidden", le.options.messageBar.container);
                 jqUnit.notVisible("details none is hidden", selectors.detailsNone);
@@ -252,6 +265,7 @@ var adminUsersTester = function () {
         fluid.model.setBeanValue(testOpts, "listeners", {
             afterSetup: waitMultiple.getListener("afterSetup")
         });
+        fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.users");
         cspace.adminUsers(".csc-users-userAdmin", testOpts);
     };
     
@@ -305,7 +319,7 @@ var adminUsersTester = function () {
         setupConfirmation(function (re) {
             re.events.afterRender.removeListener("initialSelect");
             re.remove();
-            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this record?", re.confirmation.confirmationDialog.locate("message:").text());
+            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this user?", re.confirmation.confirmationDialog.locate("message:").text());
             jqUnit.isVisible("Delete button should be visible", re.confirmation.confirmationDialog.locate("act"));
             jqUnit.isVisible("Cancel button should be visible", re.confirmation.confirmationDialog.locate("cancel"));
             jqUnit.assertEquals("Proceed / Don't Save button should not be rendered", 0, re.confirmation.confirmationDialog.locate("proceed").length);
@@ -353,7 +367,7 @@ var adminUsersTester = function () {
             jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.confirmationDialog.locate("message:").eq(1).text());
             re.confirmation.confirmationDialog.locate("close").click();
             re.remove();
-            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this record?", re.confirmation.confirmationDialog.locate("message:").text());
+            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this user?", re.confirmation.confirmationDialog.locate("message:").text());
             cspace.tests.onTearDown.fire(re);
             start();
         });
@@ -363,7 +377,7 @@ var adminUsersTester = function () {
         setupConfirmation(function (re, adminUsers) {
             re.events.afterRender.removeListener("initialSelect");                    
             re.remove();
-            jqUnit.assertEquals("After delete clicked, confirmation text should say", "Delete this record?", re.confirmation.confirmationDialog.locate("message:").text());
+            jqUnit.assertEquals("After delete clicked, confirmation text should say", "Delete this user?", re.confirmation.confirmationDialog.locate("message:").text());
             re.confirmation.confirmationDialog.locate("close").click();
             adminUsers.locate("userName").val("New Name").change();
             adminUsers.userListEditor.list.locate("row").eq(1).click();

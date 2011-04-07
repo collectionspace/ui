@@ -57,7 +57,7 @@
         }]
     },
     "relations": {
-        "procedures": [
+        "intake": [
             {
                 "csid": "IN2004.002",
                 "number": "IN2004.002",
