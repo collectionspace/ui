@@ -101,6 +101,9 @@ cspace = cspace || {};
         globalNavigator: "{globalNavigator}",
         model: {},                  // A default data model object.
         produceTree: cspace.searchBox.produceTree, // direct method expected by interim impl of initRendererComponent
+        rendererOptions: {
+            autoBind: false
+        },
         components: {
             recordTypeSelector: {
                 type: "cspace.util.recordTypeSelector",
