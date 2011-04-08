@@ -52,7 +52,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.footer", {
-        gradeNames: ["fluid.rendererComponent"],
+        gradeNames: ["fluid.IoCRendererComponent"],
         mergePolicy: {
             model: "preserve"
         },

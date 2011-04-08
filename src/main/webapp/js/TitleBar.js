@@ -93,7 +93,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.titleBar", {
-        gradeNames: ["fluid.rendererComponent"],
+        gradeNames: ["fluid.IoCRendererComponent"],
         selectors: {
             title: ".csc-titleBar-value",
             recordType: ".csc-titleBar-recordType"

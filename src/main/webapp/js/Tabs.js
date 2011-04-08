@@ -78,7 +78,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.tabsList", {
-        gradeNames: ["fluid.rendererComponent"],
+        gradeNames: ["fluid.IoCRendererComponent"],
         mergePolicy: {
             model: "replace"
         },
@@ -152,7 +152,7 @@ cspace = cspace || {};
         // pageBuilder which is in it's grand parent globalSetup.
         that.options.globalSetup.model = options.model;
         that.options.globalSetup.applier = options.applier;
-        that.options.globalSetup.init("cspace.tabs", {
+        that.options.globalSetup.init("cspace.tab", {
             pageBuilder: {
                 options: {
                     model: "{globalSetup}.model",

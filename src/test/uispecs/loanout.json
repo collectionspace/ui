@@ -1,47 +1,4 @@
 {
-    "sidebar": {
-        "relatedProcedures": {
-            ".csc-recordList-row:": {
-                "children": [
-                    {
-                        ".csc-related-summary": "${items.0.summary}",
-                        ".csc-related-number": {
-                            "linktext": "${items.0.number}",
-                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
-                        },
-                        ".csc-related-recordtype": "${items.0.recordtype}"
-                    }
-                ]
-            }
-        },
-        "termsUsed": {
-            ".csc-recordList-row:": {
-                "children": [
-                    {
-                        ".csc-related-number": {
-                            "linktext": "${items.0.number}",
-                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
-                        },
-                        ".csc-related-field": "${items.0.sourceFieldName}",
-                        ".csc-related-recordtype": "${items.0.recordtype}"
-                    }
-                ]
-            }
-        },
-        "relatedCataloging": {
-            ".csc-recordList-row:": {
-                "children": [
-                    {
-                        ".csc-related-summary": "${items.0.summary}",
-                        ".csc-related-number": {
-                            "linktext": "${items.0.number}",
-                            "target": "${items.0.recordtype}.html?csid=${items.0.csid}"
-                        }
-                    }
-                ]
-            }
-        }
-    },
     "recordEditor": {
         ".csc-loanOut-lendersContact": {
             "decorators": [

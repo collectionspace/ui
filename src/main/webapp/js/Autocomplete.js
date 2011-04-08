@@ -349,7 +349,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     fluid.defaults("cspace.autocomplete.popup", {
-        gradeNames: ["fluid.rendererComponent"],
+        gradeNames: ["fluid.IoCRendererComponent"],
         mergePolicy: {
             model: "preserve"
         },

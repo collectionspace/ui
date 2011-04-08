@@ -39,21 +39,17 @@
                         "components": {
                             "listEditor": {
                                 "options": {
-                                    "initList": "cspace.listEditor.receiveData",
-                                    "dataContext": {
-                                        "options": {
-                                            "recordType": "cataloging"
+                                    "components": {
+                                        "details": {
+                                            "options": {
+                                                "selectors": {
+                                                    "identificationNumber": ".csc-object-identification-object-number" 
+                                                },
+                                                "strings": {
+                                                    "identificationNumberRequired": "Please specify an Identification Number" 
+                                                }
+                                            } 
                                         }
-                                    },
-                                    "details": {
-                                        "options": {
-                                            "selectors": {
-                                                "identificationNumber": ".csc-object-identification-object-number" 
-                                            },
-                                            "strings": {
-                                                "identificationNumberRequired": "Please specify an Identification Number" 
-                                            }
-                                        } 
                                     }
                                 }
                             }

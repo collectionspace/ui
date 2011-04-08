@@ -1530,6 +1530,122 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
     width: 100%;
     cursor: text;
 }
+.cs-recordList {
+    width: 100%;
+}
+.cs-recordList li {
+    list-style: none;
+    line-height: 120%;
+    text-align: left;
+    font: inherit;
+}
+.cs-recordList .cs-selected {
+    background-color:#6E9FCE !important;
+    color:#fff !important; 
+}
+.cs-recordList .cs-recordList-title-columnValue {
+    float: left;
+    padding: 0 2px 0 4px;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    display: block;
+}
+.cs-recordList .cs-recordList-columnValue {
+    float: left;
+    padding: 0 2px 0 4px;
+}
+.cs-recordList .cs-recordList-column1 {
+    width: 98%;
+    min-width: 98%;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    display: block;
+}
+.cs-recordList .cs-recordList-column2 {
+    width: 47.75%;
+    min-width: 47.75%;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    display: block;
+}
+.cs-recordList .cs-recordList-column3 {
+    width: 31.5%;
+    min-width: 31.5%;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    display: block;
+}
+.cs-recordList .cs-recordList-column4 {
+    width: 24.5%;
+    min-width: 24.5%;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    display: block;
+}
+.cs-recordList .cs-recordList-title-row {
+    -moz-border-radius: 4px 0 0 0;
+	-webkit-border-radius: 4px 0 0 0;
+    min-height: 13px;
+    width: 100%;
+    background-color: #EFEFEF;
+    border-style: none none solid;
+    border-color: #C7CACE;
+    border-width: medium medium 2px;
+    color: #333333;
+    font-size: 11px;
+    padding: 4px 0 3px 0;
+}
+.cs-recordList-new {
+    min-height: 13px;
+    width: 100%;
+    padding: 8px 0 6px 4px;
+    background: #FFFBEB url('../images/new_user_arrow.png') no-repeat 95% center; 
+}
+.cs-recordList .csc-recordList-row:hover {
+    background-color: #C3D9E9;
+}
+.cs-recordList .csc-recordList-row:focus {
+    background-color: #C3D9E9;
+}
+.cs-recordList .csc-recordList-row {
+    padding: 5px 0 4px 0;
+    background-color: #F0F5FB;
+    border-bottom: 0 solid #ADADAD;
+    color: #000000;
+    vertical-align: top;
+    border: 0 none;
+    text-align: left;
+    min-height: 13px;
+    width: 100%;
+    cursor:pointer;
+}
+.cs-recordList .cs-recordList-no-items {
+    padding: 5px 0 4px 4px;
+    background-color: #F0F5FB;
+    border-bottom: 0 solid #ADADAD;
+    color: #000000;
+    vertical-align: top;
+    border: 0 none;
+    text-align: left;
+    min-height: 13px;
+    width: 100%;
+}
+.right-sidebar .cs-recordList-num-items {
+    width: 100%;
+    font-size: 13px;
+    font-weight: bold;
+    color: #FFF;
+    vertical-align: middle;
+}
+.cs-recordList .csc-recordList-row:last-child {
+    -moz-border-radius: 0 0 4px 4px;
+	-webkit-border-radius: 0 0 4px 4px;
+}
 .cs-mediaUploader-fileUploaderContainer .fl-uploader-browse input[type=file] {
     bottom: 0px;
     left: 0px;

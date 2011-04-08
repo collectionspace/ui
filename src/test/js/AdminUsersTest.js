@@ -42,19 +42,23 @@ var adminUsersTester = function () {
         recordType: "users/records.json",
         uispec: testUISpec,
         components: {
+            globalNavigator: {
+                type: "cspace.util.globalNavigator",
+            },
             userListEditor: {
                 options: {
-                    dataContext: {
-                        options: {
-                            schema: schema
+                    components: {
+                        detailsDC: {
+                            options: {
+                                schema: schema
+                            } 
+                        },
+                        details: {
+                            options: {
+                                navigationEventNamespace: "onPerformNavigationRecordEditor"
+                            }
                         }
-                    },
-                    details: {
-                        options: {
-                            navigationEventNamespace: "onPerformNavigationRecordEditor"
-                        }
-                    },
-                    baseUrl: "../data/"
+                    }
                 }
             }
         }
@@ -123,7 +127,7 @@ var adminUsersTester = function () {
     
     adminUsersTest.asyncTest("Creation", function () {
         basicAdminUsersSetup(function (adminUsers, le, re) {
-            var list =le.model.list;
+            var list =le.list.model.items;
             var selectors = le.options.selectors;
             jqUnit.assertEquals("User list model should have right number of entries", 4, list.length);
             jqUnit.assertEquals("User list model should contain expected user", "Megan Forbes", list[1].screenName);
@@ -133,7 +137,7 @@ var adminUsersTester = function () {
             jqUnit.notVisible("details is not visible", selectors.details);
             jqUnit.notVisible("hide on create is hidden", selectors.hideOnCreate);
             jqUnit.notVisible("hide on edit is visible", selectors.hideOnEdit);
-            jqUnit.notVisible("new list row is hidden", selectors.newListRow);
+            jqUnit.notVisible("new list row is hidden", le.list.options.selectors.newRow);
             cspace.tests.onTearDown.fire(re);
             start();
         });
@@ -142,7 +146,7 @@ var adminUsersTester = function () {
     adminUsersTest.asyncTest("Click new user button", function () {
         basicAdminUsersSetup(function (adminUsers, le, re) {
             var selectors = le.options.selectors;
-            le.events.afterAddNewListRow.addListener(function () {
+            le.events.afterShowDetails.addListener(function () {
                 jqUnit.assertEquals("Email is blank", adminUsers.locate("email").val(), "");
                 jqUnit.assertEquals("Full name is blank", adminUsers.locate("userName").val(), "");
                 jqUnit.assertEquals("Password is blank", adminUsers.locate("password").val(), "");
@@ -153,7 +157,7 @@ var adminUsersTester = function () {
                 jqUnit.isVisible("details is visible", selectors.details);
                 jqUnit.notVisible("hide on create is hidden", selectors.hideOnCreate);
                 jqUnit.isVisible("hide on edit is visible", selectors.hideOnEdit);
-                jqUnit.isVisible("new list row is visible", selectors.newListRow);
+                jqUnit.isVisible("new list row is visible", le.list.options.selectors.newRow);
                 cspace.tests.onTearDown.fire(re);
                 start();
             });
@@ -199,8 +203,8 @@ var adminUsersTester = function () {
     
     adminUsersTest.asyncTest("Valid edit of existing user: save should succeed", function () {
         basicAdminUsersSetup(function (adminUsers, le, re) {
-            re.events.afterRender.addListener(function () {
-                re.events.afterRender.removeListener("initialSelect");                
+            le.events.afterShowDetails.addListener(function () {
+                le.events.afterShowDetails.removeListener("initialSelect");                
                 var saveResult = re.requestSave();
                 jqUnit.assertTrue("Save should succeed (validation should not prevent save)", saveResult);
                 jqUnit.isVisible("message container is visible", le.options.messageBar.container);
@@ -218,23 +222,24 @@ var adminUsersTester = function () {
         fluid.model.setBeanValue(testOpts, "listeners", {
             afterSearch: function () {
                 jqUnit.isVisible("Unsearch is visible after search", adminUsers.options.selectors.unSearchButton);
-                jqUnit.assertEquals("There are 2 users in the list after search", 2, adminUsers.userListEditor.model.list.length);
+                jqUnit.assertEquals("There are 2 users in the list after search", 2, adminUsers.userListEditor.list.model.items.length);
                 adminUsers.userListEditor.list.events.afterRender.addListener(function () {
                     jqUnit.notVisible("Unsearch is invisible after unsearch", adminUsers.options.selectors.unSearchButton);
-                    jqUnit.assertEquals("There are 4 users in the list after unsearch", 4, adminUsers.userListEditor.model.list.length);
+                    jqUnit.assertEquals("There are 4 users in the list after unsearch", 4, adminUsers.userListEditor.list.model.items.length);
                     cspace.tests.onTearDown.fire(adminUsers.userListEditor.details);
                     start();
                 });
                 adminUsers.locate("unSearchButton").click();
             },
             afterRender: function () {
-                jqUnit.assertEquals("Initially there are 4 users in the list", 4, adminUsers.userListEditor.model.list.length);
+                jqUnit.assertEquals("Initially there are 4 users in the list", 4, adminUsers.userListEditor.list.model.items.length);
                 jqUnit.notVisible("Unsearch is invisible initially", adminUsers.options.selectors.unSearchButton);
                 adminUsers.locate("searchField").val("test").change();
                 jqUnit.assertEquals("Value in seatch fiels is 'test'", "test", adminUsers.locate("searchField").val());
                 adminUsers.locate("searchButton").click();
             }
         });
+        fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.users");
         adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
     });
     
@@ -246,7 +251,7 @@ var adminUsersTester = function () {
             var pageReadyArgs = waitMultiple.waitSet.pageReady.args;
             var setupArgs = waitMultiple.waitSet.afterSetup.args;
             var adminUsers = setupArgs[0];
-            adminUsers.userListEditor.details.events.afterRender.addListener(waitMultiple.getListener("afterRender"));
+            adminUsers.userListEditor.events.afterShowDetails.addListener(waitMultiple.getListener("afterShowDetails"));
             waitMultiple.clear(function() {
                 testFunc.apply(null, [pageReadyArgs[0].details, adminUsers]);
             });
@@ -411,7 +416,7 @@ var adminUsersTester = function () {
     
     var currentUserTests = function (userCSID, index, visibility) {
         basicAdminUsersSetup(function (adminUsers, le, re) {
-            re.events.afterRender.addListener(function () {
+            le.events.afterShowDetails.addListener(function () {
                 jqUnit[visibility]("Delete button is " + visibility + " current user", adminUsers.options.selectors.deleteButton);
                 cspace.tests.onTearDown.fire(re);
                 start();

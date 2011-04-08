@@ -46,14 +46,13 @@ cspace = cspace || {};
     var restoreUserList = function (userListEditor, domBinder) {
         return function () {
             domBinder.locate("unSearchButton").hide();
-            userListEditor.options.updateList(userListEditor, userListEditor.refreshView);
+            userListEditor.updateList();
         };
     };
 
     var submitSearch = function (messageBar, listEditor, domBinder, queryURL, successEvent, strings) {
         return function () {
             var query = cspace.util.useLocalData() ? "" : domBinder.locate("searchField").val();
-            var model = listEditor.model;
             // TODO: Use the DC for this
             var url = queryURL + query;
             $.ajax({
@@ -61,13 +60,7 @@ cspace = cspace || {};
                 type: "GET",
                 dataType: "json",
                 success: function (data, textStatus) {
-                    // applier.requestChange("*", data);
-                    // requestChange() to "*" doesn't work (see FLUID-3507)
-                    // the following workaround compensates:
-                    // We have to requestChange here in order for the recordList
-                    // to update the list of records with new model.
-                    listEditor.list.applier.requestChange("items", data.results);
-                    fluid.model.copyModel(model.list, data.results);                    
+                    listEditor.list.applier.requestChange("items", data.results);                    
                     listEditor.refreshView();
                     domBinder.locate("unSearchButton").show();
                     successEvent.fire();
@@ -85,7 +78,7 @@ cspace = cspace || {};
         that.locate("unSearchButton").click(restoreUserList(that.userListEditor, that.dom)).hide();
 
         that.userListEditor.details.events.onSave.addListener(function () {
-            return validate(that.options.messageBar, that.dom, that.userListEditor.detailsApplier, that.passwordValidator, that.options.strings);
+            return validate(that.options.messageBar, that.dom, that.userListEditor.options.detailsApplier, that.passwordValidator, that.options.strings);
         });
         that.userListEditor.events.pageReady.addListener(function () {
             that.events.afterRender.fire(that);
@@ -116,14 +109,7 @@ cspace = cspace || {};
                 type: "cspace.passwordValidator"
             },
             userListEditor: {
-                type: "cspace.listEditor",
-                options: {
-                    dataContext: {
-                        options: {
-                            recordType: "users"
-                        }
-                    }
-                }
+                type: "cspace.listEditor"
             }
         },
         selectors: {

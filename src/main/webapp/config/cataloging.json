@@ -44,10 +44,7 @@
                     "type": "cspace.tabs"
                 },
                 "sidebar": {
-                    "type": "cspace.sidebar",
-                    "options": {
-                        "uispec": "{pageBuilder}.options.uispec.sidebar"
-                    }
+                    "type": "cspace.sidebar"
                 }
             }
         }

@@ -41,7 +41,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 options: {
                     listeners: {
                         pageReady: function () {
-                            var pageBuilder = organization.pageBuilderIO.pageBuilder;
+                            var pageBuilder = cspace.tests.getPageBuilderIO(organization).pageBuilder;
                             jqUnit.assertValue("Organization should have a record editor", pageBuilder.recordEditor);
                             jqUnit.assertValue("Organization should have a side bar", pageBuilder.sidebar);
                             jqUnit.assertValue("Organization should have a title bar", pageBuilder.titleBar);

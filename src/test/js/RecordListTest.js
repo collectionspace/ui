@@ -11,109 +11,152 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 /*global jQuery, jqUnit, cspace*/
 "use strict";
 
-(function ($) {
+cspace.test = cspace.test || {};
+
+var recordListTester = function ($) {
     
-    var testUISpec = {
-        ".csc-recordList-row:": {
-            "children": [
-                {
-                    ".csc-recordList-field1": "${items.0.field1}",
-                    ".csc-recordList-field2": "${items.0.field2}"
-                }
-            ]
-        }
+    var container = "#main";
+    
+    var bareRecordListTest = new jqUnit.TestCase("Recordlist Tests");
+    
+    var recordListTest = cspace.tests.testEnvironment({testCase: bareRecordListTest});
+    
+    var setupRecordList = function (options) {
+        return cspace.recordList(container, options);
     };
-    var recordListTest = new jqUnit.TestCase("RecordList Tests", function () {
-        cspace.util.isTest = true;
-        recordListTest.fetchTemplate("test-data/RecordListTestTemplate.html", ".csc-recordList");
-    });
-
-    recordListTest.test("Construction: empty model", function () {
-        var testModel = {
-            items: [],
-            selectionIndex: -1
-        };
-        var recordList = cspace.recordList("#main", {
-            model: testModel,
-            uispec: testUISpec
+    
+    var validateRows = function (item, columns, row, recordList) {
+        fluid.each(columns, function (column, index) {
+            jqUnit.assertEquals(column + " for row " + row + " should be", item[column], 
+                recordList.locate("row").eq(row).children().children().eq(index).text());
         });
-        jqUnit.assertDeepEq("RecordList correctly initialized with empty model", testModel, recordList.model);
-        jqUnit.assertEquals("Rendered table has no data field visible", 0, $("[class^=csc-recordList-field]", "#main").length);
-        jqUnit.isVisible("Rendered table 'no items' row visible", $(".csc-no-items-message", "#main"));
-    });
-
-    recordListTest.test("Construction: 3 rows", function () {
-        var testModel = {
+    };
+    var validateRecordList = function (model, columns, recordList) {
+        fluid.each(model.items, function (rowValue, row) {
+            validateRows(model.items[row], columns, row, recordList);
+        });
+    };
+    
+    recordListTest.test("Initialization", function () {
+        var model = {
             items: [
-                {field1: "food", field2: "bar"},
-                {field1: "good", field2: "bat"},
-                {field1: "goop", field2: "cat"}
-            ],
-            selectionIndex: -1
+                {"number": "ACQ2009.2", "csid": "ACQ2009.2", "summary": "", "recordtype": "acquisition"},
+                {"number": "ACQ2009.002.001", "csid": "ACQ2009.002.001", "summary": "Lebowsky", "recordtype": "acquisition"}
+            ]
         };
-        var recordList = cspace.recordList("#main", {
-            model: testModel,
-            uispec: testUISpec
+        var columns = ["number", "summary", "recordtype"];
+        var recordList = setupRecordList({
+            model: model,
+            columns: columns,
+            elPaths: {
+                items: "items"
+            },
+            strings: {
+                number: "Number",
+                summary: "Summary",
+                recordtype: "Record Type"
+            }
         });
-        jqUnit.assertDeepEq("RecordList correctly initialized with 3-item model", testModel, recordList.model);
-        jqUnit.assertEquals("Rendered table has 3 data rows visible", 3, $(".csc-recordList-row", "#main").length);
-        jqUnit.assertEquals("Rendered table 'no items' row not visible", 0, $(".csc-no-items-message", "#main").length);
+        jqUnit.isVisible("Reordlist container should be visible", recordList.container);
+        jqUnit.assertEquals("Nothing yet message should be invisible", 0, recordList.locate("nothingYet").length);
+        jqUnit.assertEquals("Total number of records should be", model.items.length, recordList.locate("row").length);
+        jqUnit.assertEquals("Total number of records should be", model.items.length.toString(), recordList.locate("numberOfItems").text());
+        validateRecordList(model, columns, recordList);
+        recordList.options.showNumberOfItems = false;
+        recordList.renderer.refreshView();
+        jqUnit.assertEquals("Total number of records should not be rendered", 0, recordList.locate("numberOfItems").length);
     });
     
-    recordListTest.test("Selecting (no activation)", function () {
-        var recordList;
-        var testModel = {
-            items: [
-                {field1: "food", field2: "bar"},
-                {field1: "good", field2: "bat"},
-                {field1: "goop", field2: "cat"}
-            ],
-            selectionIndex: -1
-        };
-        stop();
-        recordList = cspace.recordList("#main", {
-            model: testModel,
-            uispec: testUISpec
-        });
-        jqUnit.assertEquals("Initially, selected index should be correct", -1, recordList.model.selectionIndex);
-        jqUnit.assertFalse("Nothing should have selecting class", $(".csc-recordList-row", "#main").hasClass(recordList.options.styles.selecting));
-        $(".csc-recordList-row").focus(function (model) {
-            jqUnit.assertEquals("After selection, selected index should still be -1", -1, recordList.model.selectionIndex);
-            jqUnit.assertTrue("Selecting row should have selecting class", $(".csc-recordList-row:eq(1)", "#main").hasClass(recordList.options.styles.selecting));
-            jqUnit.assertFalse("Other row should not have selecting class", $(".csc-recordList-row:eq(0)", "#main").hasClass(recordList.options.styles.selecting));
-            start();
-        });
-        $(".csc-recordList-row:eq(1)", "#main").focus();
-    });
-
-    recordListTest.test("Activation via click", function () {
-        var recordList;
-        var testModel = {
-            items: [
-                {field1: "food", field2: "bar"},
-                {field1: "good", field2: "bat"},
-                {field1: "goop", field2: "cat"}
-            ],
-            selectionIndex: -1
-        };
-        var opts = {
-            model: testModel,
-            uispec: testUISpec,
-            listeners: {
-                afterSelect: function (list) {
-                    var model = list.model;
-                    jqUnit.assertEquals("After activation, selected index should be correct", 1, model.selectionIndex);
-                    jqUnit.deepEq("Model of selected index should be correct", testModel.items[1], model.items[model.selectionIndex]);
-                    jqUnit.assertTrue("Selected row should have selected class", $(".csc-recordList-row:eq(1)", "#main").hasClass(recordList.options.styles.selected));
-                    jqUnit.assertFalse("Unselected row should not have selected class", $(".csc-recordList-row:eq(0)", "#main").hasClass(recordList.options.styles.selected));
-                    start();
+    var testEmptyModel = function (message, model) {
+        recordListTest.test(message, function () {
+            var columns = ["number", "summary", "recordtype"];
+            var recordList = setupRecordList({
+                model: model,
+                columns: columns,
+                elPaths: {
+                    items: "items"
                 }
-            }
+            });
+            jqUnit.isVisible("Nothing yet message should be invisible", recordList.locate("nothingYet"));
+            jqUnit.assertEquals("NothingYet text shouls say", recordList.options.strings.nothingYet, recordList.locate("nothingYet").text());
+            jqUnit.assertEquals("There should be no records listed", 0, recordList.locate("row").length);
+        });
+    };
+    testEmptyModel("Initialization with empty array model", {items: []});
+    testEmptyModel("Initialization with undefined array model", {items: undefined});
+    testEmptyModel("Initialization with undefined model", undefined);
+    
+    cspace.tests.selectNavigate = function (model, options, url) {
+        jqUnit.assertEquals("Url should be correct", "this is test url", url);
+    };
+    
+    recordListTest.test("Selecting", function () {
+        expect(4);
+        var model = {
+            items: [
+                {"number": "ACQ2009.2", "csid": "ACQ2009.2", "summary": "", "recordtype": "acquisition"},
+                {"number": "ACQ2009.002.001", "csid": "ACQ2009.002.001", "summary": "Lebowsky", "recordtype": "acquisition"}
+            ]
         };
-        stop();
-        recordList = cspace.recordList("#main", opts);
-        jqUnit.assertEquals("Initially, selected index should be correct", -1, recordList.model.selectionIndex);
-        jqUnit.assertFalse("Nothing should have selected class", $(".csc-recordList-row", "#main").hasClass(recordList.options.styles.selected));
-        $(".csc-recordList-row:eq(1)", "#main").click();
+        var columns = ["number", "summary", "recordtype"];
+        var index = 1;
+        var recordList = setupRecordList({
+            model: model,
+            columns: columns,
+            elPaths: {
+                items: "items"
+            },
+            strings: {
+                number: "Number",
+                summary: "Summary",
+                recordtype: "Record Type"
+            },
+            listeners: {
+                onSelect: function () {
+                    jqUnit.assertEquals("Current selection is", index, recordList.model.selectonIndex);
+                }
+            },
+            urls: {
+                navigateLocalTest: "this is test url"
+            }
+        });
+        recordList.locate("row").eq(1).click();
+        index = 0;
+        recordList.locate("row").eq(0).click();
     });
-})(jQuery);
+    
+    recordListTest.test("New Row", function () {
+        var model = {
+            items: [
+                {"number": "ACQ2009.2", "csid": "ACQ2009.2", "summary": "", "recordtype": "acquisition"},
+                {"number": "ACQ2009.002.001", "csid": "ACQ2009.002.001", "summary": "Lebowsky", "recordtype": "acquisition"}
+            ]
+        };
+        var columns = ["number", "summary", "recordtype"];
+        var recordList = setupRecordList({
+            model: model,
+            columns: columns,
+            elPaths: {
+                items: "items"
+            },
+            strings: {
+                number: "Number",
+                summary: "Summary",
+                recordtype: "Record Type"
+            },
+            urls: {
+                navigateLocalTest: "this is test url"
+            }
+        });
+        var newRow = recordList.locate("newRow");
+        jqUnit.notVisible("New Row is invisible by default", newRow);
+        recordList.handleNewRow("show");
+        jqUnit.isVisible("New Row should now be visible", newRow);
+        recordList.locate("row").eq(0).click();
+        jqUnit.notVisible("New Row should be invisible again", newRow);
+    });
+};
+
+(function () {
+    recordListTester(jQuery);
+}());

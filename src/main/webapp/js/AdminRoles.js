@@ -38,14 +38,7 @@ cspace = cspace || {};
         recordType: "role",
         components: {
             roleListEditor: {
-                type: "cspace.listEditor",
-                options: {
-                    dataContext: {
-                        options: {
-                            recordType: "role"
-                        }
-                    }
-                }
+                type: "cspace.listEditor"
             }
         },
         events: {

@@ -1,30 +1,13 @@
 <div class="pivot-box csc-relatedRecord-template">
-    <div class="hidden csc-search-related-dialog"></div>
-    <div class="csc-relatedRecordsList-recordList">
-        <div class="csc-related-header cs-sidebar-header fl-container-flex header toggle">
-            <span class="csc-related-mainheader"></span>
-            <span class="csc-num-items"></span>
-            <input class="fl-force-right csc-add-related-record-button add" type="button" />
-        </div>
-        <div class="csc-related-togglable content list-table">
-            <table>
-                <thead>
-                    <tr>
-                        <td class="csc-related-number-header"></td>
-                        <td class="csc-related-summary-header"></td>
-                        <td class="csc-related-recordtype-header"></td>
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody >
-                    <tr class="pivot-box-data csc-recordList-row">
-                        <td><a href="#" class="link csc-related-number"></a></td>
-                        <td class="csc-related-summary"></td>
-                        <td class="csc-related-recordtype"></td>
-                        <td class="csc-no-items-message"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="pivot-box">
+        <div class="csc-relatedRecordsList-relationManager">
+	        <div class="hidden csc-search-related-dialog"></div>
+	        <div class="csc-related-header cs-sidebar-header fl-container-flex header toggle">
+	            <span class="csc-related-mainheader"></span>
+	            <span class="csc-num-items"></span>
+	            <input class="fl-force-right csc-add-related-record-button add" type="button" />
+	        </div>
+	    </div>
+        <div class="csc-related-togglable content csc-relatedRecordsList-recordList"></div>
     </div>
 </div>

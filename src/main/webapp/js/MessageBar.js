@@ -23,7 +23,6 @@ cspace = cspace || {};
     
     cspace.messageBarImpl = function (container, options) {
         var that = fluid.initRendererComponent("cspace.messageBarImpl", container, options);
-        that.applier = fluid.makeChangeApplier(that.model);
         fluid.initDependents(that);
         that.refreshView = function () {
             that.renderer.refreshView();
@@ -113,8 +112,7 @@ cspace = cspace || {};
         gradeNames: ["fluid.viewComponent"],
         components: {
             messageBarImpl: {
-                type: "cspace.messageBarImpl",
-                options: "messageBar.options"
+                type: "cspace.messageBarImpl"
             }
         },
         selectors: {

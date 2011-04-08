@@ -82,14 +82,14 @@ cspace = cspace || {};
     var bindEventHandlers = function (that) {
         
         that.events.onSave.addListener(validateIdentificationNumber(that.dom, that.container, that.options.messageBar, that.options.strings.identificationNumberRequired));
-
-        that.events.onSave.addListener(function () {
-            that.options.messageBar.show(that.options.strings.savingMessage);
-        });
         
         that.events.onSave.addListener(function () {
             return validateRequiredFields(that.dom, that.options.messageBar, that.options.strings.missingRequiredFields);
         });
+        
+        that.events.onSave.addListener(function () {
+            that.options.messageBar.show(that.options.strings.savingMessage);
+        }, undefined, undefined, "last");
 
         that.options.dataContext.events.afterCreate.addListener(function (data) {
             recordSaveHandler(that, data, "Create");
@@ -358,7 +358,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.recordEditor", {
-        gradeNames: ["fluid.rendererComponent"],
+        gradeNames: ["fluid.IoCRendererComponent"],
         mergePolicy: {
             model: "preserve",
             applier: "nomerge",

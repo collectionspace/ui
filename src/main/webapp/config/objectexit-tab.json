@@ -39,21 +39,17 @@
                         "components": {
                             "listEditor": {
                                 "options": {
-                                    "initList": "cspace.listEditor.receiveData",
-                                    "dataContext": {
-                                        "options": {
-                                            "recordType": "objectexit"
-                                        }
-                                    },
-                                    "details": {
-                                        "options": {
-                                            "selectors": {
-                                                "identificationNumber": ".csc-objectexit-exitNumber"
-                                            },
-                                            "strings": {
-                                                "identificationNumberRequired": "Please specify an Exit Number" 
+                                    "components": {
+                                        "details": {
+                                            "options": {
+                                                "selectors": {
+                                                    "identificationNumber": ".csc-objectexit-exitNumber"
+                                                },
+                                                "strings": {
+                                                    "identificationNumberRequired": "Please specify an Exit Number" 
+                                                } 
                                             } 
-                                        } 
+                                        }
                                     }
                                 }
                             }

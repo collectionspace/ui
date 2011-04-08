@@ -76,7 +76,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.searchBox", {
-        gradeNames: ["fluid.rendererComponent"],
+        gradeNames: ["fluid.IoCRendererComponent"],
         mergePolicy: {
             model: "preserve"   
         },

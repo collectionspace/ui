@@ -39,21 +39,17 @@
                         "components": {
                             "listEditor": {
                                 "options": {
-                                    "initList": "cspace.listEditor.receiveData",
-                                    "dataContext": {
-                                        "options": {
-                                            "recordType": "acquisition"
+                                    "components": {
+                                        "details": {
+                                            "options": {
+                                                "selectors": {
+                                                    "identificationNumber": ".csc-acquisition-numberPatternChooser-reference-number" 
+                                                },
+                                                "strings": {
+                                                    "identificationNumberRequired": "Please specify an Acquisition Reference Number"
+                                                }
+                                            } 
                                         }
-                                    },
-                                    "details": {
-                                        "options": {
-                                            "selectors": {
-                                                "identificationNumber": ".csc-acquisition-numberPatternChooser-reference-number" 
-                                            },
-                                            "strings": {
-                                                "identificationNumberRequired": "Please specify an Acquisition Reference Number"
-                                            }
-                                        } 
                                     }
                                 }
                             }

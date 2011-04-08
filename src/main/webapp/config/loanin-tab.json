@@ -39,21 +39,17 @@
                         "components": {
                             "listEditor": {
                                 "options": {
-                                    "initList": "cspace.listEditor.receiveData",
-                                    "dataContext": {
-                                        "options": {
-                                            "recordType": "loanin"
-                                        }
-                                    },
-                                    "details": {
-                                        "options": {
-                                            "selectors": {
-                                                "identificationNumber": ".csc-loanIn-loanInNumber"
-                                            },
-                                            "strings": {
-                                                "identificationNumberRequired": "Please specify a Loan In Number"
+                                    "components": {
+                                        "details": {
+                                            "options": {
+                                                "selectors": {
+                                                    "identificationNumber": ".csc-loanIn-loanInNumber"
+                                                },
+                                                "strings": {
+                                                    "identificationNumberRequired": "Please specify a Loan In Number"
+                                                } 
                                             } 
-                                        } 
+                                        }
                                     }
                                 }
                             }

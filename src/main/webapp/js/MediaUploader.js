@@ -147,7 +147,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.mediaUploader", {
-        gradeNames: ["fluid.rendererComponent"],
+        gradeNames: ["fluid.IoCRendererComponent"],
         invokers: {
             refreshView: {
                 funcName: "cspace.mediaUploader.refreshView",

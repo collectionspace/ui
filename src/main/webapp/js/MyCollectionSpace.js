@@ -38,15 +38,18 @@ cspace = cspace || {};
     
     var makeOpts = function (recordType, options) {
         return {
-            listeners: {
-                afterSelect: cspace.recordList.afterSelectHandlerDefault
-            },
             strings: {
                 nothingYet: "No records yet"
             },
-            uispec: "{myCollectionSpace}.options.uispec." + recordType,
             model: makeArrayExpander(recordType),
-            globalNavigator: "{myCollectionSpace}.options.globalNavigator"
+            globalNavigator: "{myCollectionSpace}.options.globalNavigator",
+            parentBundle: "{myCollectionSpace}.options.parentBundle",
+            elPaths: {
+                items: "items"
+            },
+            columns: ["number", "summary"],
+            names: [recordType + "-number", "summary"],
+            showNumberOfItems: false
         };
     };
     
@@ -90,8 +93,7 @@ cspace = cspace || {};
             list: fluid.transform(records, function (record) {
                 return {
                     groupName: record,
-                    groupClass: "csc-myCollectionSpace-" + record + "-group",
-                    numberName: record + "-number"
+                    groupClass: "csc-myCollectionSpace-" + record + "-group"
                 };
             })
         };
@@ -127,12 +129,6 @@ cspace = cspace || {};
                                     type: "addClass",
                                     classes: "{recordTypeValue}.groupClass"
                                 }]
-                            },
-                            groupNumber: {
-                                messagekey: "${{recordType}.numberName}"
-                            },
-                            groupSummary: {
-                                messagekey: "summary"
                             }
                         }
                     }
@@ -142,14 +138,12 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.myCollectionSpace", {
-        gradeNames: ["fluid.rendererComponent"],
+        gradeNames: ["fluid.IoCRendererComponent"],
         selectors: {
             "category:": ".csc-myCollectionSpace-category", 
             "group:": ".csc-myCollectionSpace-group",
             groupContainer: ".csc-myCollectionSpace-group-container",
             groupType: ".csc-myCollectionSpace-groupType",
-            groupSummary: ".csc-myCollectionSpace-group-summary",
-            groupNumber: ".csc-myCollectionSpace-group-number",
             header: ".csc-myCollectionSpace-categoryHeader",
             cataloging: ".csc-myCollectionSpace-cataloging-group",
             intake: ".csc-myCollectionSpace-intake-group",

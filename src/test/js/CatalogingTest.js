@@ -54,7 +54,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 options: {
                     listeners: {
                         pageReady: function () {
-                            var pageBuilder = cataloging.pageBuilderIO.pageBuilder;
+                            var pageBuilder = cspace.tests.getPageBuilderIO(cataloging).pageBuilder;
                             jqUnit.assertValue("Cataloging should have a record editor", pageBuilder.recordEditor);
                             jqUnit.assertValue("Cataloging should have a side bar", pageBuilder.sidebar);
                             jqUnit.assertValue("Cataloging should have a title bar", pageBuilder.titleBar);

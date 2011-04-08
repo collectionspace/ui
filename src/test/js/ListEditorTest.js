@@ -13,25 +13,24 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 var listEditorTester = function(){
     fluid.setLogging(true);
 
-    var testUISpec = {};
-    var testData;
+    var schema, uispec;
     fluid.fetchResources({
         uispec: {
             href: "../uispecs/users.json",
             options: {
                 dataType: "json",
                 success: function (data) {
-                    testUISpec = data;
+                    uispec = data;
                 },
                 async: false
             }
         },
         schema: {
-            href: "../data/users/records.json",
+            href: "../uischema/users.json",
             options: {
                 dataType: "json",
                 success: function (data) {
-                    testData = data.items;
+                    schema = data;
                 },
                 async: false
             }
@@ -39,13 +38,18 @@ var listEditorTester = function(){
     });
         
     var baseTestOpts = {
-        baseUrl: "../data/",
-        dataContext: {                    
-            options: {
-                recordType: "users"
+        components: {
+            detailsDC: {
+                options: {
+                    recordType: "users",
+                    schema: schema
+                } 
+            },
+            globalNavigator: {
+                type: "cspace.util.globalNavigator",
             }
         },
-        uispec: testUISpec,
+        uispec: uispec,
         recordType: "users/records.json"
     };
     
@@ -55,7 +59,15 @@ var listEditorTester = function(){
         $(".ui-dialog").detach();
     });
     
-    var listEditorTest = cspace.tests.testEnvironment({testCase: bareListEditorTest});
+    fluid.defaults("cspace.tests.pageBuilderIO", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        recordType: "users"
+    });
+    var listEditorTest = cspace.tests.testEnvironment({testCase: bareListEditorTest, components: {
+        pageBuilderIO: {
+            type: "cspace.tests.pageBuilderIO"
+        }
+    }});
     
     var basicListEditorSetup = function (callback, opts) {
         var listEditor;
@@ -66,40 +78,28 @@ var listEditorTester = function(){
                 callback(listEditor);
             }
         });
+        fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.users");
         listEditor = cspace.listEditor(".csc-users-userAdmin", testOpts);
         stop();
     };
     
-    listEditorTest.test("Initial setup (default strategy: fetch)", function () {
+    listEditorTest.test("Initial setup", function () {
         basicListEditorSetup(function (listEditor) {
-            jqUnit.assertEquals("Model should have right number of entries", 4, listEditor.model.list.length);
-            jqUnit.assertEquals("Model should contain expected entry", "Megan Forbes", listEditor.model.list[1].screenName);
+            jqUnit.assertEquals("Model should have right number of entries", 4, listEditor.list.model.items.length);
+            jqUnit.assertEquals("Model should contain expected entry", "Megan Forbes", listEditor.list.model.items[1].screenName);
             jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, $(".csc-recordList-row", "#main").length);
             jqUnit.notVisible("Details should be invisible initially", listEditor.options.selectors.details);
-            jqUnit.notVisible("Add new row should be invisible initially", listEditor.options.selectors.newListRow);
+            jqUnit.notVisible("Add new row should be invisible initially", listEditor.list.options.selectors.newRow);
             start();
-        });
-    });
-    
-    listEditorTest.test("Initial setup (receive strategy)", function () {
-        basicListEditorSetup(function (listEditor) {
-            jqUnit.assertEquals("Model should have right number of entries", 4, listEditor.model.list.length);
-            jqUnit.assertEquals("Model should contain expected entry", "Megan Forbes", listEditor.model.list[1].screenName);
-            jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, $(".csc-recordList-row", "#main").length);
-            jqUnit.notVisible("Details should be invisible initially", listEditor.options.selectors.details);
-            jqUnit.notVisible("New Entry row should be invisible initially", listEditor.options.selectors.newListRow);
-            start();
-        }, {
-            listPopulationStrategy: cspace.listEditor.receiveStrategy
         });
     });
     
     listEditorTest.test("onSelect: details showing", function () {
         var detailsTester = function(listEditor){
             return function () {
-                listEditor.details.events.afterRender.removeListener("afterRender");
+                listEditor.events.afterShowDetails.removeListener("afterRender");
                 jqUnit.isVisible("Details should be visible after activating an item in the list", listEditor.options.selectors.details);
-                jqUnit.notVisible("New Entry row should be invisible initially", listEditor.options.selectors.newListRow);
+                jqUnit.notVisible("New Entry row should be invisible initially", listEditor.list.options.selectors.newRow);
                 jqUnit.isVisible("We can see the details that should be visible on edit", listEditor.options.selectors.hideOnCreate);
                 jqUnit.notVisible("We can't see the details that are invisible on edit", listEditor.options.selectors.hideOnEdit);
                 jqUnit.assertEquals("Details should be from the correct item", "Megan Forbes", $(".csc-user-userName").val());
@@ -107,20 +107,25 @@ var listEditorTester = function(){
             };
         };
         basicListEditorSetup(function (listEditor) {
-            listEditor.details.events.afterRender.addListener(detailsTester(listEditor), "afterRender");
+            listEditor.events.afterShowDetails.addListener(detailsTester(listEditor), "afterRender");
             listEditor.list.locate("row").eq(1).click();
         });
     });
     
     listEditorTest.test("addNewListRow", function () {
         basicListEditorSetup(function (listEditor) {
-            jqUnit.notVisible("New Entry row should be invisible initially", listEditor.options.selectors.newListRow);
+            jqUnit.notVisible("New Entry row should be invisible initially", listEditor.list.options.selectors.newRow);
             jqUnit.notVisible("Details should be invisible initially", listEditor.options.selectors.details);
-            jqUnit.deepEq("Details Model should be empty initially", {}, listEditor.model.details);
+            jqUnit.deepEq("Details Model should be empty initially", {}, listEditor.details.model);
             listEditor.addNewListRow();
             jqUnit.isVisible("Details should be visible", listEditor.options.selectors.details);
-            jqUnit.isVisible("New Entry row should be visible", listEditor.options.selectors.newListRow);
-            jqUnit.deepEq("Details Model should still be empty when trying to create a new row", {}, listEditor.model.details);
+            jqUnit.isVisible("New Entry row should be visible", listEditor.list.options.selectors.newRow);
+            jqUnit.assertValue("Details Model should be drawn from the schema", listEditor.details.model);
+            jqUnit.assertValue("Details Model should be drawn from the schema: termsUsed", listEditor.details.model.termsUsed);
+            jqUnit.assertEquals("Details Model should be drawn from the schema: termsUsed length", 0, listEditor.details.model.termsUsed.length);
+            jqUnit.assertValue("Details Model should be drawn from the schema: relations", listEditor.details.model.relations);
+            jqUnit.assertEquals("Details Model should be drawn from the schema: status", "Active", listEditor.details.model.fields.status);
+            jqUnit.assertEquals("Details Model should be drawn from the schema: role", 3, listEditor.details.model.fields.role.length);
             start();
         });
     });
@@ -128,19 +133,19 @@ var listEditorTester = function(){
     listEditorTest.test("addNewListRow after something was selected", function () {
          var detailsTester = function(listEditor){
             return function () {
-                listEditor.details.events.afterRender.removeListener("afterRenderHandler");
-                jqUnit.notVisible("New Entry row should be invisible initially", listEditor.options.selectors.newListRow);
+                listEditor.events.afterShowDetails.removeListener("afterRenderHandler");
+                jqUnit.notVisible("New Entry row should be invisible initially", listEditor.list.options.selectors.newRow);
                 jqUnit.isVisible("Details should be visible initially", listEditor.options.selectors.details);
-                jqUnit.deepEq("Details Model should be empty initially", listEditor.model.list[1], listEditor.model.details);
+                jqUnit.assertEquals("Details Model should be empty initially", listEditor.list.model.items[1].csid, listEditor.details.model.csid);
                 listEditor.addNewListRow();
                 jqUnit.isVisible("Details should be visible", listEditor.options.selectors.details);
-                jqUnit.isVisible("New Entry row should be visible", listEditor.options.selectors.newListRow);
-                jqUnit.deepEq("Details Model should still be empty when trying to create a new row", {}, listEditor.model.details);
+                jqUnit.isVisible("New Entry row should be visible", listEditor.list.options.selectors.newRow);
+                jqUnit.assertUndefined("Details Model should be 'new' when trying to create a new row", listEditor.details.model.csid);
                 start();
             };
         };
         basicListEditorSetup(function (listEditor) {
-            listEditor.details.events.afterRender.addListener(detailsTester(listEditor), "afterRenderHandler");
+            listEditor.events.afterShowDetails.addListener(detailsTester(listEditor), "afterRenderHandler");
             listEditor.list.locate("row").eq(1).click();
         });
     });

@@ -31,17 +31,6 @@ var rrlTester = function ($) {
             recordtype: "cataloging"
         }]
     };
-
-    var uispec;
-    $.ajax({
-        async: false,
-        data: "json",
-        url: "../uispecs/cataloging.json",
-        success: function (data) {
-            data = JSON.parse(data);
-            uispec = data.sidebar;
-        }
-    });
     
     var bareRelatedRecordsListTest = new jqUnit.TestCase("RelatedRecordsList Tests", function () {
         bareRelatedRecordsListTest.fetchTemplate("../../main/webapp/html/components/SidebarTemplate.html", ".csc-right-sidebar");
@@ -57,8 +46,7 @@ var rrlTester = function ($) {
             related: related,
             primary: primary,
             model: model,
-            applier: applier,
-            uispec: uispec.relatedCataloging
+            applier: applier
         };
         fluid.merge(null, defaultOpts, opts);
         var relatedRecordsList = cspace.relatedRecordsList(".csc-related-record", defaultOpts);

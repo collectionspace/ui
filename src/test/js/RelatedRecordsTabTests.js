@@ -78,19 +78,27 @@ var relatedRecordsTabTester = function ($) {
                                     listEditor: {
                                         options: {
                                             listeners: opts.listEditorListeners,
-                                            dataContext: {
-                                                options: {
-                                                    recordType: testRelatedType
-                                                }
-                                            },
-                                            list: {
-                                                options: {
-                                                    listeners: opts.listListeners
-                                                }
-                                            },
-                                            details: {
-                                                options: {
-                                                    listeners: opts.detailsListeners
+                                            components: {
+                                                detailsDC: {
+                                                    options: {
+                                                        recordType: testRelatedType
+                                                    }
+                                                },
+                                                list: {
+                                                    options: {
+                                                        listeners: opts.listListeners
+                                                    }
+                                                },
+                                                details: {
+                                                    options: {
+                                                        listeners: opts.detailsListeners,
+                                                        selectors: {
+                                                            identificationNumber: ".csc-object-identification-object-number"
+                                                        },
+                                                        strings: {
+                                                            identificationNumberRequired: "Please specify an Identification Number" 
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -116,16 +124,17 @@ var relatedRecordsTabTester = function ($) {
             },
             configURL: "../../main/webapp/config/cataloging-tab.json"
         };
-        objTab = cspace.globalSetup("cspace.tabs", options);
+        objTab = cspace.globalSetup("cspace.tab", options);
     };
     
     relatedRecordsTabTest.asyncTest("Initialization", function () {
         setupTab({
             pageReadyListener: function () {
-                var le = objTab.pageBuilderIO.pageBuilder.relatedRecordsTab.listEditor;
-                le.details.events.afterRender.addListener(function () {
-                    jqUnit.isVisible("Related record tab details should have visible link 'Go to record'", $(".csc-goto", le.details.container));
-                    jqUnit.assertEquals("href for the 'Go to record' should be", "../../main/webapp/html/cataloging.html?csid=2005.018.1383", $(".csc-goto").attr("href"));
+                var tab = cspace.tests.getPageBuilderIO(objTab).pageBuilder.relatedRecordsTab;
+                var le = tab.listEditor;
+                le.events.afterShowDetails.addListener(function () {
+                    jqUnit.isVisible("Related record tab details should have visible link 'Go to record'", tab.locate("goToRecord"));
+                    jqUnit.assertEquals("href for the 'Go to record' should be", "../../main/webapp/html/cataloging.html?csid=2005.018.1383", tab.locate("goToRecord").attr("href"));
                     start();
                 });
                 le.list.locate("row").eq(1).click();
@@ -146,14 +155,15 @@ var relatedRecordsTabTester = function ($) {
     relatedRecordsTabTest2.asyncTest("Changing Record", function () {
         setupTab({
             pageReadyListener: function () {
-                var le = objTab.pageBuilderIO.pageBuilder.relatedRecordsTab.listEditor;
-                le.details.events.afterRender.addListener(function () {
-                    le.details.events.afterRender.removeListener("firstSelect");
-                    jqUnit.isVisible("Related record tab details should have visible link 'Go to record'", $(".csc-goto", le.details.container));
-                    jqUnit.assertEquals("Initial href for the 'Go to record' should be", "../../main/webapp/html/cataloging.html?csid=2005.018.1383", $(".csc-goto").attr("href"));
-                    le.details.events.afterRender.addListener(function () {
-                        jqUnit.isVisible("Related record tab details should still have visible link 'Go to record'", $(".csc-goto", le.details.container));
-                        jqUnit.assertEquals("href for the 'Go to record' should now be", "../../main/webapp/html/cataloging.html?csid=1984.068.0338", $(".csc-goto").attr("href"));
+                var tab = cspace.tests.getPageBuilderIO(objTab).pageBuilder.relatedRecordsTab;
+                var le = tab.listEditor;
+                le.events.afterShowDetails.addListener(function () {
+                    le.events.afterShowDetails.removeListener("firstSelect");
+                    jqUnit.isVisible("Related record tab details should have visible link 'Go to record'", tab.locate("goToRecord"));
+                    jqUnit.assertEquals("Initial href for the 'Go to record' should be", "../../main/webapp/html/cataloging.html?csid=2005.018.1383", tab.locate("goToRecord").attr("href"));
+                    le.events.afterShowDetails.addListener(function () {
+                        jqUnit.isVisible("Related record tab details should still have visible link 'Go to record'", tab.locate("goToRecord"));
+                        jqUnit.assertEquals("href for the 'Go to record' should now be", "../../main/webapp/html/cataloging.html?csid=1984.068.0338", tab.locate("goToRecord").attr("href"));
                         start();
                     });
                     le.list.locate("row").eq(0).click();
@@ -207,9 +217,21 @@ var relatedRecordsTabTester = function ($) {
                                 components: {
                                     listEditor: {
                                         options: {
-                                            dataContext: {
-                                                options: {
-                                                    recordType: "cataloging"
+                                            components: {
+                                                detailsDC: {
+                                                    options: {
+                                                        recordType: "cataloging"
+                                                    }
+                                                },
+                                                details: {
+                                                    options: {
+                                                        selectors: {
+                                                            identificationNumber: ".csc-object-identification-object-number"
+                                                        },
+                                                        strings: {
+                                                            identificationNumberRequired: "Please specify an Identification Number" 
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -230,8 +252,10 @@ var relatedRecordsTabTester = function ($) {
                     },
                     listeners: {
                         pageReady: function () {
-                            var details = objTab.pageBuilderIO.pageBuilder.relatedRecordsTab.listEditor.details;
-                            details.events.afterRender.addListener(function () {
+                            var tab = cspace.tests.getPageBuilderIO(objTab).pageBuilder.relatedRecordsTab;
+                            var le = tab.listEditor;
+                            var details = le.details;
+                            le.events.afterShowDetails.addListener(function () {
                                 var reSelectors = details.options.selectors;
                                 jqUnit.notVisible("Before testing, message should not be visible", details.options.messageBar.container);
                                 $(".csc-object-identification-object-number", details.container).val("");
@@ -242,9 +266,9 @@ var relatedRecordsTabTester = function ($) {
                                 start();
                             }, "testFunc");
                             jqUnit.assertEquals("Verify that the model is still primary model", 
-                                model, objTab.pageBuilderIO.pageBuilder.relatedRecordsTab.model);
+                                model, cspace.tests.getPageBuilderIO(objTab).pageBuilder.relatedRecordsTab.model);
                             jqUnit.assertEquals("Verify that the model is still primary applier", 
-                                applier, objTab.pageBuilderIO.pageBuilder.relatedRecordsTab.applier);
+                                applier, cspace.tests.getPageBuilderIO(objTab).pageBuilder.relatedRecordsTab.applier);
                             $(".csc-recordList-row:first").click();
                         }
                     }
@@ -252,7 +276,7 @@ var relatedRecordsTabTester = function ($) {
             },
             configURL: "../../main/webapp/config/cataloging-tab.json"
         };
-        objTab = cspace.globalSetup("cspace.tabs", options);
+        objTab = cspace.globalSetup("cspace.tab", options);
     });
 };
 

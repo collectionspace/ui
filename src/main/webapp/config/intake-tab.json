@@ -39,21 +39,17 @@
                         "components": {
                             "listEditor": {
                                 "options": {
-                                    "initList": "cspace.listEditor.receiveData",
-                                    "dataContext": {
-                                        "options": {
-                                            "recordType": "intake"
-                                        }
-                                    },
-                                    "details": {
-                                        "options": {
-                                            "selectors": {
-                                                "identificationNumber": ".csc-intake-entry-number" 
-                                            },
-                                            "strings": {
-                                                "identificationNumberRequired": "Please specify an Intake Entry Number" 
+                                    "components": {
+                                        "details": {
+                                            "options": {
+                                                "selectors": {
+                                                    "identificationNumber": ".csc-intake-entry-number" 
+                                                },
+                                                "strings": {
+                                                    "identificationNumberRequired": "Please specify an Intake Entry Number" 
+                                                } 
                                             } 
-                                        } 
+                                        }
                                     }
                                 }
                             }

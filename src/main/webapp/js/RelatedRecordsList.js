@@ -27,6 +27,7 @@ cspace = cspace || {};
                 }
                 fluid.initDependent(that, name, instantiator);
             });
+            setupRelatedRecordsList(that);
         });
     };
 
@@ -35,12 +36,19 @@ cspace = cspace || {};
             addModelChangeListener(that, that.options.recordTypes, that.options.applier, that.recordList, value, that.options.related);
         });
     };
+    
+    var setupRelatedRecordsList = function (that) {
+        that.locate("numOfRelated").text(fluid.stringTemplate(that.options.strings.numOfRelated, {
+            numOfRelated: that.recordList.calculateRecordListSize()
+        }));
+    };
 
     cspace.relatedRecordsList = function (container, options) {
         var that = fluid.initRendererComponent("cspace.relatedRecordsList", container, options);
         that.renderer.refreshView();
         fluid.initDependents(that);        
         bindEventHandlers(that);
+        setupRelatedRecordsList(that);
         that.events.afterSetup.fire(that);
         return that;
     };
@@ -53,25 +61,25 @@ cspace = cspace || {};
         return relationList;
     };
     
+    cspace.relatedRecordsList.buildRelationsListColumns = function (related) {
+        var columnns = ["number"];
+        if (related !== "cataloging") {
+            columnns.push("recordtype");
+        }
+        columnns.push("summary");
+        return columnns;
+    };
+    
     cspace.relatedRecordsList.produceTree = function(that) {
         return {
             mainHeader: {
                 messagekey: that.options.related //holds key for stringBundle lookup
-            },
-            numberHeader: {
-                messagekey: "numberHeader"
-            },
-            summaryHeader: {
-                messagekey: "summaryHeader"
-            },
-            typeHeader: {
-                messagekey: "typeHeader"
             }
         };
     };
 
     fluid.defaults("cspace.relatedRecordsList", {
-        gradeNames: ["fluid.rendererComponent"],
+        gradeNames: ["fluid.IoCRendererComponent"],
         mergePolicy: {
             model: "preserve",
             applier: "nomerge",
@@ -82,10 +90,16 @@ cspace = cspace || {};
             recordList: {
                 type: "cspace.recordList",
                 options: {
-                    uispec: "{relatedRecordsList}.options.uispec",
-                    listeners: {
-                        afterSelect: "{relatedRecordsList}.options.recordListAfterSelectHandler"
-                    }
+                    elPaths: {
+                        items: "items"
+                    },
+                    strings: {
+                        number: "Number",
+                        summary: "Summary",
+                        recordtype: "Type",
+                        nothingYet: "No related records yet"
+                    },
+                    showNumberOfItems: false
                 }
             },
             relationManager: {
@@ -115,19 +129,16 @@ cspace = cspace || {};
         recordTypes: "{recordTypes}",
         produceTree: cspace.relatedRecordsList.produceTree,
         selectors: {
+            numOfRelated: ".csc-num-items",
+            relationManagerSelector: ".csc-relatedRecordsList-relationManager",
             recordListSelector: ".csc-relatedRecordsList-recordList",
             mainHeader: ".csc-related-mainheader",
-            numberHeader: ".csc-related-number-header",
-            summaryHeader: ".csc-related-summary-header",
-            typeHeader: ".csc-related-recordtype-header",
             header: ".csc-related-header",
             togglable: ".csc-related-togglable"
         },
-        selectorsToIgnore: ["recordListSelector", "header", "togglable"],
+        selectorsToIgnore: ["relationManagerSelector", "recordListSelector", "header", "togglable", "numOfRelated"],
         strings: {
-            numberHeader: "Number",
-            summaryHeader: "Summary",
-            typeHeader: "Type"
+            numOfRelated: "(%numOfRelated)"
         },
         resources: {
             template: cspace.resourceSpecExpander({

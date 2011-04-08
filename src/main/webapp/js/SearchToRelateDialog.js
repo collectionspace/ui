@@ -143,7 +143,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.searchToRelateDialog", {
-        gradeNames: ["fluid.rendererComponent"],
+        gradeNames: ["fluid.IoCRendererComponent"],
         mergePolicy: {
             model: "preserve"
         },

@@ -39,21 +39,17 @@
                         "components": {
                             "listEditor": {
                                 "options": {
-                                    "initList": "cspace.listEditor.receiveData",
-                                    "dataContext": {
-                                        "options": {
-                                            "recordType": "movement"
+                                    "components": {
+                                        "details": {
+                                            "options": {
+                                                "selectors": {
+                                                    "identificationNumber": ".csc-movement-currentLocation" 
+                                                },
+                                                "strings": {
+                                                    "identificationNumberRequired": "Please specify a Current Location" 
+                                                } 
+                                            }
                                         }
-                                    },
-                                    "details": {
-                                        "options": {
-                                            "selectors": {
-                                                "identificationNumber": ".csc-movement-currentLocation" 
-                                            },
-                                            "strings": {
-                                                "identificationNumberRequired": "Please specify a Current Location" 
-                                            } 
-                                        } 
                                     }
                                 }
                             }

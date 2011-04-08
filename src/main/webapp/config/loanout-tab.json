@@ -39,21 +39,17 @@
                         "components": {
                             "listEditor": {
                                 "options": {
-                                    "initList": "cspace.listEditor.receiveData",
-                                    "dataContext": {
-                                        "options": {
-                                            "recordType": "loanout"
-                                        }
-                                    },
-                                    "details": {
-                                        "options": {
-                                            "selectors": {
-                                                "identificationNumber": ".csc-loanOut-loanOutNumber"
-                                            },
-                                            "strings": {
-                                                "identificationNumberRequired": "Please specify a Loan Out Number"
+                                    "components": {
+                                        "details": {
+                                            "options": {
+                                                "selectors": {
+                                                    "identificationNumber": ".csc-loanOut-loanOutNumber"
+                                                },
+                                                "strings": {
+                                                    "identificationNumberRequired": "Please specify a Loan Out Number"
+                                                } 
                                             } 
-                                        } 
+                                        }
                                     }
                                 }
                             }

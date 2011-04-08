@@ -39,21 +39,17 @@
                         "components": {
                             "listEditor": {
                                 "options": {
-                                    "initList": "cspace.listEditor.receiveData",
-                                    "dataContext": {
-                                        "options": {
-                                            "recordType": "media"
-                                        }
-                                    },
-                                    "details": {
-                                        "options": {
-                                            "selectors": {
-                                                "identificationNumber": ".csc-media-identificationNumber"
-                                            },
-                                            "strings": {
-                                                "identificationNumberRequired": "Please specify an Identification Number" 
+                                    "components": {
+                                        "details": {
+                                            "options": {
+                                                "selectors": {
+                                                    "identificationNumber": ".csc-media-identificationNumber"
+                                                },
+                                                "strings": {
+                                                    "identificationNumberRequired": "Please specify an Identification Number" 
+                                                } 
                                             } 
-                                        } 
+                                        }
                                     }
                                 }
                             }

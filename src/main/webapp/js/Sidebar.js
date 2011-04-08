@@ -17,6 +17,12 @@ cspace = cspace || {};
     fluid.log("Sidebar.js loaded");
     
     fluid.registerNamespace("cspace.sidebar");
+    
+    var setupSideBar = function (that) {
+        that.locate("numOfTerms").text(fluid.stringTemplate(that.options.strings.numOfTerms, {
+            numOfTerms: that.termsUsed.calculateRecordListSize()
+        }));
+    }; 
 
     cspace.sidebar = function (container, options) {
         var that = fluid.initRendererComponent("cspace.sidebar", container, options);
@@ -28,8 +34,11 @@ cspace = cspace || {};
         that.options.recordApplier.modelChanged.addListener("termsUsed", function (model, oldModel, changeRequest) {
             that.termsUsed.applier.requestChange("items", model.termsUsed);
             that.termsUsed.refreshView();
+            setupSideBar(that);
         });
-
+        
+        setupSideBar(that);
+        
         return that;
     };
     
@@ -82,15 +91,6 @@ cspace = cspace || {};
             termsHeader: {
                 messagekey: "termsHeader"
             },
-            termsHeaderTerm: {
-                messagekey: "termsHeaderTerm"
-            },
-            termsHeaderVocabulary: {
-                messagekey: "termsHeaderVocabulary"
-            },
-            termsHeaderField: {
-                messagekey: "termsHeaderField"
-            },
             reportButton: {
                 decorators: {
                     type: "attrs",
@@ -116,23 +116,25 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.sidebar", {
-        gradeNames: ["fluid.rendererComponent"],
+        gradeNames: ["fluid.IoCRendererComponent"],
         components: {
             termsUsed: {
                 type: "cspace.recordList",
                 options: {
-                    listeners: {
-                        afterSelect: "{sidebar}.options.recordListAfterSelectHandler"
-                    },
                     model: {
-                        items: "{sidebar}.options.recordModel.termsUsed",
-                        selectionIndex: -1
+                        items: "{sidebar}.options.recordModel.termsUsed"
                     },
-                    uispec : "{sidebar}.options.uispec.termsUsed",
-                    recordType: "authorities",
+                    elPaths: {
+                        items: "items"
+                    },
+                    columns: ["number", "sourceFieldName", "recordtype"],
                     strings: {
+                        number: "Term",
+                        sourceFieldName: "Vocabulary",
+                        recordtype: "Field",
                         nothingYet: "No Authority terms used yet"
-                    }
+                    },
+                    showNumberOfItems: false
                 }
             },
             cataloging: {
@@ -142,8 +144,7 @@ cspace = cspace || {};
                     related: "cataloging",
                     applier: "{sidebar}.options.recordApplier",
                     uispec : "{sidebar}.options.uispec.relatedCataloging",
-                    model: "{sidebar}.options.recordModel",
-                    recordListAfterSelectHandler: "{sidebar}.options.recordListAfterSelectHandler"
+                    model: "{sidebar}.options.recordModel"
                 }
             },
             procedures: {
@@ -153,8 +154,7 @@ cspace = cspace || {};
                     related: "procedures",
                     applier: "{sidebar}.options.recordApplier",
                     uispec : "{sidebar}.options.uispec.relatedProcedures",
-                    model: "{sidebar}.options.recordModel",
-                    recordListAfterSelectHandler: "{sidebar}.options.recordListAfterSelectHandler"
+                    model: "{sidebar}.options.recordModel"
                 }
             },
             togglable: {
@@ -199,10 +199,10 @@ cspace = cspace || {};
             recordModel: "preserve",
             recordApplier: "nomerge"
         },
-        recordListAfterSelectHandler: cspace.recordList.afterSelectHandlerDefault,        
         resolver: "{permissionsResolver}",
         recordTypeManager: "{recordTypeManager}", //used to decide whether to show RelatedRecordsLists
         selectors: {
+            numOfTerms: ".csc-num-items-terms",
             mediaSnapshot: ".csc-media-snapshot",
             termsUsed: ".csc-integrated-authorities",
             "categoryContainer:": ".csc-related-record", //to be repeated
@@ -212,13 +212,10 @@ cspace = cspace || {};
             reportButton: ".csc-sidebar-reportButton",
             mediaHeader: ".csc-sidebar-mediaHeader",
             termsHeader: ".csc-sidebar-termsHeader",
-            termsHeaderTerm: ".csc-sidebar-termsHeaderTerm",
-            termsHeaderVocabulary: ".csc-sidebar-termsHeaderVocabulary",
-            termsHeaderField: ".csc-sidebar-termsHeaderField",
             header: ".csc-sidebar-header",
             togglable: ".csc-sidebar-togglable"
         },
-        selectorsToIgnore: ["mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable"],
+        selectorsToIgnore: ["numOfTerms", "mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable"],
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -226,12 +223,10 @@ cspace = cspace || {};
             })
         },
         strings: {
+            numOfTerms: "(%numOfTerms)",
             reportHeader: "Create Report",
             mediaHeader: "Media Snapshot",
             termsHeader: "Terms Used",
-            termsHeaderTerm: "Term",
-            termsHeaderVocabulary: "Vocabulary",
-            termsHeaderField: "Field",
             reportButton: "Create"
         }
     });

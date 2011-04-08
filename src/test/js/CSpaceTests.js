@@ -120,6 +120,19 @@ cspace.tests.filterToKeys = function(toFilter, keyHolder) {
     });
 };
 
+cspace.tests.getPageBuilderIO = function (globalSetup, index) {
+    index = index || 0;
+    var counter = 0; 
+    return fluid.find(globalSetup, function (component, name) {
+        if (name.indexOf("pageBuilderIO") > -1) {
+            if (counter === index) {
+                return component;
+            }
+            ++counter;
+        }
+    });
+};
+
 cspace.tests.testEnvironment = function(options) {
     var that = fluid.initLittleComponent("cspace.tests.testEnvironment", options);
     that.environment = {};
@@ -198,12 +211,8 @@ fluid.defaults("cspace.tests.testEnvironment", {
     }
 });
 
-cspace.tests.modelHolder = fluid.littleComponent("cspace.tests.modelHolder");
 fluid.defaults("cspace.tests.modelHolder", {
+    gradeNames: ["fluid.modelComponent", "autoInit"],
     model: "{testEnvironment}.options.model",
-    applier: "{testEnvironment}.options.applier",
-    mergePolicy: {
-        model: "preserve",
-        applier: "nomerge"
-    }
+    applier: "{testEnvironment}.options.applier"
 });

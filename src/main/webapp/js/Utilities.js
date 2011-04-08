@@ -960,15 +960,16 @@ fluid.registerNamespace("cspace.util");
                         options: {}
                     }}, resourceSpecs.config.resourceText, options
                 );
-                if (that.pageBuilderIO) {
-                    that.instantiator.clearComponent(that, "pageBuilderIO");
-                }
-                that.options.components.pageBuilderIO = {
+//                if (that.pageBuilderIO) {
+//                    that.instantiator.clearComponent(that, "pageBuilderIO");
+//                }
+                var newPageBuilderIOName = "pageBuilderIO-" + fluid.allocateGuid();
+                that.options.components[newPageBuilderIOName] = {
                     type: "cspace.pageBuilderIO",
                     options: options.pageBuilderIO.options
                 };
-                fluid.initDependent(that, "pageBuilderIO", that.instantiator);
-                that.pageBuilderIO.initPageBuilder(options.pageBuilder.options);
+                fluid.initDependent(that, newPageBuilderIOName, that.instantiator);
+                that[newPageBuilderIOName].initPageBuilder(options.pageBuilder.options);
             });
         };
         that.init(null, options);
@@ -987,9 +988,6 @@ fluid.registerNamespace("cspace.util");
             globalNavigator: {
                 type: "cspace.util.globalNavigator"
             },
-            messageBar: {
-                type: "cspace.messageBar"
-            },
             noLogin: {
                 type: "cspace.globalSetup.noLogin"
             }
@@ -997,7 +995,8 @@ fluid.registerNamespace("cspace.util");
     });
     
     cspace.recordTypes = function (options) {
-        var that = fluid.littleComponent("cspace.recordTypes")(options);
+        var that = fluid.initLittleComponent("cspace.recordTypes", options);
+        fluid.initDependents(that);
         that.setup();
         return that;
     };
@@ -1038,9 +1037,19 @@ fluid.registerNamespace("cspace.util");
         
         that.locate("header").addClass(that.options.styles[that.options["default"]])
             .addClass(that.options.styles.header);
+        
+        that.getNext = function (source) {
+            var next = source.next(that.options.selectors.togglable);
+            if (next.length > 0) {
+                return next;
+            }
+            // Assume that the source is last in the block.
+            return source.parent().next(that.options.selectors.togglable);
+        };
+            
         that.container.delegate(that.options.selectors.header, "click", function () {
             var source = $(this);
-            source.next(that.options.selectors.togglable).toggle();
+            that.getNext(source).toggle();
             source.toggleClass(that.options.styles.expanded);
             source.toggleClass(that.options.styles.collapsed);
             return false;

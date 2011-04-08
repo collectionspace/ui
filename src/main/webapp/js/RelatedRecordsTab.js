@@ -21,7 +21,7 @@ cspace = cspace || {};
     var bindEventHandlers = function (that) {
         var elPath = "relations." + that.related;
         that.applier.modelChanged.addListener(elPath, function (model, oldModel, changeRequest) {
-            that.listEditor.options.updateList(that.listEditor, that.listEditor.list.refreshView);
+            that.listEditor.updateList();
         });
         that.relationManager.events.onCreateNewRecord.addListener(that.listEditor.addNewListRow);
         that.listEditor.detailsDC.events.afterCreate.addListener(function (data) {
@@ -60,8 +60,6 @@ cspace = cspace || {};
         var that = fluid.initRendererComponent("cspace.relatedRecordsTab", container, options);
         that.primary = that.options.primary;
         that.related = that.options.related;
-        that.applier = that.options.applier;
-        that.model = that.options.model;
         
         that.renderer.refreshView();
         fluid.initDependents(that);
@@ -71,28 +69,10 @@ cspace = cspace || {};
         return that;
     };
     
-    cspace.relatedRecordsTab.createListUpdater = function (model, primary, related) {
-        return function (listEditor, callback) {
-            $.ajax({
-                url: listEditor.options.baseUrl + primary + "/" + model.csid,
-                dataType: "json",
-                success: function (data) {
-                    if (listEditor.list) {
-                        // We have to requestChange here in order for the recordList
-                        // to update the list of records with new model.
-                        listEditor.list.applier.requestChange("items", data.relations[related]);
-                    }
-                    fluid.model.copyModel(listEditor.model.list, data.relations[related]);
-                    if (callback) {
-                        callback();
-                    }
-                }
-            });
-        };
-    };
-    
     cspace.relatedRecordsTab.provideData = function (relations, related) {
-        return relations[related];
+        return {
+            items: relations[related]
+        };
     };
     
     cspace.relatedRecordsTab.produceTree = function (that) {
@@ -103,15 +83,6 @@ cspace = cspace || {};
             listHeader: {
                 messagekey: "recordList"
             },
-            newRecordRow: {
-                messagekey: "newRecordRow"
-            },
-            idNumber: {
-                messagekey: "idNumber"
-            },
-            summary: {
-                messagekey: "summary"
-            },
             goToRecord: {
                 messagekey: "goToRecord"
             }
@@ -119,7 +90,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.relatedRecordsTab", {
-        gradeNames: ["fluid.rendererComponent"],
+        gradeNames: ["fluid.IoCRendererComponent"],
         components: {
             relationManager: {
                 type: "cspace.relationManager",
@@ -145,23 +116,13 @@ cspace = cspace || {};
             listEditor: {
                 type: "cspace.listEditor",
                 options: {
-                    data: {
+                    recordType: "{relatedRecordsTab}.related",
+                    listModel: {
                         expander: {
                             type: "fluid.deferredInvokeCall",
                             func: "cspace.relatedRecordsTab.provideData",
                             args: [
                                 "{relatedRecordsTab}.model.relations",
-                                "{relatedRecordsTab}.related"
-                            ]
-                        }
-                    },
-                    updateList: {
-                        expander: {
-                            type: "fluid.deferredInvokeCall",
-                            func: "cspace.relatedRecordsTab.createListUpdater",
-                            args: [
-                                "{relatedRecordsTab}.model", 
-                                "{relatedRecordsTab}.primary", 
                                 "{relatedRecordsTab}.related"
                             ]
                         }
@@ -178,22 +139,14 @@ cspace = cspace || {};
             recordHeader: ".csc-relatedRecordsTab-recordHeader",
             togglable: ".csc-relatedRecordsTab-togglable",
             listHeader: ".csc-relatedRecordsTab-listHeader",
-            header: ".csc-relatedRecordsTab-header",
-            newRecordRow: ".csc-relatedRecordsTab-newRecordRow",
-            idNumber: ".csc-relatedRecordsTab-idNumber",
-            summary: ".csc-relatedRecordsTab-summary"
+            header: ".csc-relatedRecordsTab-header"
         },
         selectorsToIgnore: ["togglable", "header"],
         events: {
             afterRender: null
         },
         parentBundle: "{globalBundle}",
-        mergePolicy: {
-            model: "preserve",
-            applier: "nomerge"
-        },
         strings: {
-            idNumber: "ID Number",
             goToRecord: "Go To Record"
         },
         urls: cspace.componentUrlBuilder({
