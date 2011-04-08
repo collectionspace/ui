@@ -4,10 +4,10 @@
             "type": "fluid.renderer.condition",
             "condition": "${fields.blobCsid}",
             "trueTree": {
-                ".csc-blobs": {}
+                ".csc-media-blobs": {}
             },
             "falseTree": {
-                ".csc-blobs": {
+                ".csc-media-blobs": {
                     "decorators": {
                         "type": "addClass",
                         "classes": "hidden"
