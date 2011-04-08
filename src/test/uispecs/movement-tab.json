@@ -153,15 +153,5 @@
             "selection": "${fields.reasonForMove}"
         },
         ".csc-movement-removalDate": "${fields.removalDate}"
-    },
-    "list": {
-        ".csc-recordList-row:": {
-            "children": [
-                {
-                    ".csc-related-summary": "${items.0.summary}",
-                    ".csc-related-number": "${items.0.number}"
-                }
-            ]
-        }
     }
 }

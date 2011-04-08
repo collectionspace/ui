@@ -2,47 +2,75 @@
     <div id="secondary-nav">
         <div id="secondary-nav-menu-sub">
             <div class="button-row">
-                <input type="button" class="csc-save saveButton primary" />
-                <input type="button" class="csc-cancel cancelButton" />
                 <a style="display:none;" class="csc-goto gotoButton"></a>
             </div>
         </div>
     </div>
-    
+    <div class="fl-container-flex fl-fix information-group info-column">
+        <div class="csc-recordEditor-header fl-container-flex header toggle">File Information</div>
+        <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+            <div class="info-column fl-force-left">
+                <div class="info-pair">
+                    <div class="content">
+                        <div class="csc-media-upload cs-media-upload"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="info-pair csc-blobs">
+                <div class="content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Thumbnail</td>
+                                <td>File name</td>
+                                <td>File location</td>
+                                <td>File format</td>
+                                <td>Date created</td>
+                                <td>Date modified</td>
+                            </tr>
+                        </thead>                                                        
+                        <tbody>
+                            <tr>
+                                <td><div class="csc-media-image"></div></td>
+                                <td><div class="csc-media-filename"></div></td>
+                                <td><div class="csc-media-location"></div></td>
+                                <td><div class="csc-media-format"></div></td>
+                                <td><div class="csc-media-dateCreated"></div></td>
+                                <td><div class="csc-media-dateModified"></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
     <div class="fl-container-flex fl-fix information-group info-column">
         <div class="csc-recordEditor-header fl-container-flex header toggle">Media Handling Information</div>
         <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main"> 
             <div class="info-column fl-force-left">
-                <div class="info-pair">
-                    <div class="header">
-                        <div class="label">File</div>
+                <div class="info-column fl-force-left">
+                    <div class="info-column2-50 fl-force-left" >    
+                        <div class="info-pair">
+                            <div class="header">
+                                <div class="label">Title</div>
+                            </div>
+                            <div class="content">
+                                <span class="csc-media-title" ></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="content">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td>Upload</td>
-                                    <td>File name</td>
-                                    <td>File location</td>
-                                    <td>File format</td>
-                                    <td>Date created</td>
-                                    <td>Date modified</td>
-                                </tr>
-                            </thead>                                                        
-                            <tbody>
-                                <tr>
-                                    <td class="csc-media-upload" disabled="disabled" ></td>
-                                    <td><span class="csc-media-filename"/></td>
-                                    <td><span class="csc-media-location"/></td>
-                                    <td><span class="csc-media-format"/></td>
-                                    <td><span class="csc-media-dateCreated"/></td>
-                                    <td><span class="csc-media-dateModified"/></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="info-column2-50 fl-force-right">
+                        <div class="info-pair">
+                            <div class="header">
+                                <div class="label">Identification Number</div>
+                            </div>
+                            <div class="content csc-media-identificationNumber-container">
+                                <div class="input-numeric-long csc-media-identificationNumber" ></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="clear"></div>
                 <div class="info-column fl-force-left">
                     <div class="info-column2-60 fl-force-left" >    
                         <div class="info-pair">
@@ -50,7 +78,7 @@
                                 <div class="label">Dimension Summary</div>
                             </div>
                             <div class="content">
-                                <div class="csc-media-dimensionSummary input-alpha"></div>
+                                <div class="csc-media-dimensionSummary" ></div>
                             </div>
                         </div>
                     </div>
@@ -75,13 +103,13 @@
                             <tbody>
                                 <tr class="csc-media-dimensionGroup">
                                     <td><div class="csc-media-dimension input-select"></div></td>
-                                    <td><div class="csc-media-measuredBy input-alpha"></div></td>
+                                    <td><div class="csc-media-measuredBy"></div></td>
                                     <td><div class="csc-media-measurementMethod input-select"></div></td>
-                                    <td><div class="csc-media-value input-alpha"></div></td>
+                                    <td><div class="csc-media-value"></div></td>
                                     <td><div class="csc-media-measurementUnit input-select"></div></td>
-                                    <td><div class="csc-media-valueQualifier input-alpha"></div></td>
+                                    <td><div class="csc-media-valueQualifier"></div></td>
                                     <td class="csc-media-valueDate-container field-cal">
-                                        <div class="csc-media-valueDate input-date"><div>
+                                        <div class="input-date csc-media-valueDate" ></div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -89,35 +117,13 @@
                     </div>
                 </div>
                 <div class="info-column fl-force-left">
-	                <div class="info-column2-50 fl-force-left" >    
-	                    <div class="info-pair">
-	                        <div class="header">
-	                            <div class="label">Title</div>
-	                        </div>
-	                        <div class="content">
-	                            <div class="csc-media-title input-alpha"></div>
-	                        </div>
-	                    </div>
-	                </div>
-					<div class="info-column2-50 fl-force-right">
-					    <div class="info-pair">
-					        <div class="header">
-					            <div class="label">Identification Number</div>
-					        </div>
-					        <div class="content csc-media-identificationNumber-container">
-					            <div class="csc-media-identificationNumber input-alpha"></div>
-					        </div>
-					    </div>
-					</div>
-	            </div>
-	            <div class="info-column fl-force-left">
                     <div class="info-column2-50 fl-force-left" >    
                         <div class="info-pair">
                             <div class="header">
                                 <div class="label">Contributor</div>
                             </div>
                             <div class="content">
-                                <div class="csc-media-contributor input-alpha"></div>
+                                <div class="csc-media-contributor" ></div>
                             </div>
                         </div>
                     </div>
@@ -139,7 +145,7 @@
                                 <div class="label">Creator</div>
                             </div>
                             <div class="content">
-                                <div class="csc-media-creator input-alpha"></div>
+                                <div class="csc-media-creator" ></div>
                             </div>
                         </div>
                     </div>
@@ -149,7 +155,7 @@
                                 <div class="label">Coverage</div>
                             </div>
                             <div class="content">
-                                <div class="csc-media-coverage input-alpha"></div>
+                                <div class="csc-media-coverage" ></div>
                             </div>
                         </div>
                     </div>
@@ -171,7 +177,7 @@
                                 <div class="label">Dates</div>
                             </div>
                             <div class="content csc-media-dates csc-media-date-container">
-                                <div class="input-date csc-media-date"></div>
+                                <div class="input-date csc-media-date" ></div>
                             </div>
                         </div>
                     </div>
@@ -183,7 +189,7 @@
                                 <div class="label">Publisher</div>
                             </div>
                             <div class="content">
-                                <div class="csc-media-publisher input-alpha"></div>
+                                <div class="csc-media-publisher" ></div>
                             </div>
                         </div>
                     </div>
@@ -193,7 +199,7 @@
                                 <div class="label">Source</div>
                             </div>
                             <div class="content">
-                                <div class="csc-media-source input-alpha"></div>
+                                <div class="csc-media-source" ></div>
                             </div>
                         </div>
                     </div>
@@ -205,7 +211,7 @@
                                 <div class="label">Relations</div>
                             </div>
                             <div class="content">
-                                <div class="csc-media-relation input-alpha"></div>
+                                <div class="csc-media-relation" ></div>
                             </div>
                         </div>
                     </div>
@@ -215,7 +221,7 @@
                                 <div class="label">Subjects</div>
                             </div>
                             <div class="content">
-                                <div class="csc-media-subject input-alpha"></div>
+                                <div class="csc-media-subject" ></div>
                             </div>
                         </div>
                     </div>
@@ -227,7 +233,7 @@
                                 <div class="label">Copyright statement</div>
                             </div>
                             <div class="content">
-                                <div class="csc-media-copyrightStatement input-alpha"></div>
+                                <div class="csc-media-copyrightStatement" ></div>
                             </div>
                         </div>
                     </div>
@@ -237,7 +243,7 @@
                                 <div class="label">Rights holder</div>
                             </div>
                             <div class="content">
-                                <div class="csc-media-rightsHolder input-alpha"></div>
+                                <div class="csc-media-rightsHolder" ></div>
                             </div>
                         </div>
                     </div>
@@ -249,7 +255,7 @@
                                 <div class="label">Description</div>
                             </div>
                             <div class="content">
-                                <div class="input-textarea csc-media-description"></div>
+                                <div class="input-textarea csc-media-description" ></div>
                             </div>
                         </div>
                     </div>
@@ -258,10 +264,4 @@
             <div class="clear"></div>    
         </div>
     </div>
-
-    <div class="fl-container-flex button-row">
-        <input type="button" class="csc-save saveButton primary" />
-        <input type="button" class="csc-cancel cancelButton" />
-    </div>
-    <div class="clear"></div>
 </div>

@@ -568,15 +568,5 @@
                 }
             ]
         }
-    },
-    "list": {
-        ".csc-recordList-row:": {
-            "children": [
-                {
-                    ".csc-related-summary": "${items.0.summary}",
-                    ".csc-related-number": "${items.0.number}"
-                }
-            ]
-        }
     }
 }

@@ -1389,6 +1389,9 @@ ul.menu-record li a {
 	width:94%;}
 #read-only .cs-autocomplete-input {
 	background-image:none !important;}
+#read-only .cs-media-upload {
+    display: none;
+}
 
 /* hack! Need to remove controls programatically */
 

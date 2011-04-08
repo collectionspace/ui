@@ -1,5 +1,20 @@
 {
     "details": {
+        "expander": {
+            "type": "fluid.renderer.condition",
+            "condition": "${fields.blobCsid}",
+            "trueTree": {
+                ".csc-blobs": {}
+            },
+            "falseTree": {
+                ".csc-blobs": {
+                    "decorators": {
+                        "type": "addClass",
+                        "classes": "hidden"
+                    }
+                }
+            }
+        },
         ".csc-media-creator": {
             "decorators": [
                 {
@@ -475,16 +490,6 @@
                             "numberField": ".csc-media-identificationNumber"
                         }
                     }
-                }
-            ]
-        }
-    },
-    "list": {
-        ".csc-recordList-row:": {
-            "children": [
-                {
-                    ".csc-related-summary": "${items.0.summary}",
-                    ".csc-related-number": "${items.0.number}"
                 }
             ]
         }
