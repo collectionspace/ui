@@ -490,6 +490,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             funcName: "cspace.recordEditor.cancel",
             args: "{recordEditor}"
         });
+        
+        fluid.demands("remove", "cspace.recordEditor", {
+            funcName: "cspace.recordEditor.remove",
+            args: "{recordEditor}"
+        });
 
         fluid.demands("afterDelete", "cspace.recordEditor", {
             funcName: "cspace.recordEditor.redirectAfterDelete",
@@ -550,26 +555,56 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
 
-        fluid.demands("afterDelete", [ "cspace.listEditor", "cspace.users"], {
+        fluid.demands("afterDelete", ["cspace.listEditor", "cspace.users"], {
             funcName: "cspace.recordEditor.statusAfterDelete",
             args: "{recordEditor}"
+        });
+        
+        fluid.demands("details", ["cspace.listEditor", "cspace.tab"], {
+             container: "{listEditor}.dom.details",
+             options: {
+                showDeleteButton: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.permissions.resolveMultiple",
+                        args: {
+                            recordTypeManager: "{recordTypeManager}",
+                            resolver: "{permissionsResolver}",
+                            allOf: [{
+                                    target: "{relatedRecordsTab}.primary",
+                                    permission: "update"
+                                }, {
+                                    target: "{relatedRecordsTab}.related",
+                                    permission: "update"
+                                }
+                            ]
+                        }
+                    }
+                },
+                strings: {
+                    deleteButton: "Delete Relation",
+                    deletePrimaryMessage: "Delete this relation?",
+                    deleteFailedMessage: "Error deleting relation: ",
+                    removeSuccessfulMessage: "Relation successfully deleted"
+                }
+            }
+        });
+
+        fluid.demands("afterDelete", ["cspace.listEditor", "cspace.tab"], {
+            funcName: "cspace.recordEditor.statusAfterDelete",
+            args: "{recordEditor}"
+        });
+        
+        fluid.demands("remove", ["cspace.listEditor", "cspace.tab"], {
+            funcName: "cspace.relatedRecordsTab.deleteRelation",
+            args: ["{relatedRecordsTab}", "{recordEditor}"]
         });
 
         // Record List demands
         fluid.demands("list", "cspace.listEditor", {
             container: "{listEditor}.dom.list"
         });
-        fluid.demands("list", ["cspace.listEditor", "cspace.tab"], {
-            container: "{listEditor}.dom.list",
-            options: {
-                columns: ["number", "summary"],
-                strings: {
-                    number: "ID Number",
-                    summary: "Summary",
-                    newRow: "Creating New Related Record..."
-                }
-            }
-        });
+        
         fluid.demands("list", ["cspace.listEditor", "cspace.users"], {
             container: "{listEditor}.dom.list",
             options: {

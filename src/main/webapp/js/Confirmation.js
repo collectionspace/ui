@@ -134,11 +134,10 @@ cspace = cspace || {};
             if (!strategy) {
                 fluid.fail("Confirmation requires a strategy");
             }
-            var container = container || that.popup;
+            container = container || that.popup;
             if (typeof strategy === "string") {
                 that.confirmationDialog = fluid.invokeGlobalFunction(strategy, [container, options]);
-            }
-            else {
+            } else {
                 that.confirmationDialog = strategy.apply(null, [container, options]);
             }
             bindEvents(that);

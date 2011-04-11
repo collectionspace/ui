@@ -21,7 +21,8 @@ cspace = cspace || {};
         fetch: "GET",
         update: "PUT",
         remove: "DELETE",
-        addRelations: "POST"
+        addRelations: "POST",
+        removeRelations: "DELETE"
     };
 
     var buildOpts = function (operation, options, successEvent, events, csid, data) {
@@ -62,7 +63,7 @@ cspace = cspace || {};
 
     var bindEventHandlers = function (that) {
         
-        fluid.each(["afterCreate", "afterRemove", "afterUpdate", "afterAddRelations"], function (event) {
+        fluid.each(["afterCreate", "afterRemove", "afterUpdate", "afterAddRelations", "afterRemoveRelations"], function (event) {
             that.events[event].addListener(function (data) {
                 that.events.afterSave.fire(data);
             }, undefined, undefined, "last");
@@ -150,6 +151,10 @@ cspace = cspace || {};
         that.addRelations = function (newRelations) {
             ajax("addRelations", that.options, that.events.afterAddRelations, that.events, null, newRelations);
         };
+        
+        that.removeRelations = function (relations) {
+            ajax("removeRelations", that.options, that.events.afterRemoveRelations, that.events, null, relations);
+        };
 
         that.baseUrl = function () {
             return that.options.baseUrl;
@@ -174,6 +179,7 @@ cspace = cspace || {};
             afterFetch: null,  //  data
             afterUpdate: null,  //  data
             afterAddRelations: null,  //  data
+            afterRemoveRelations: null, // data
             afterSave: null,
             onError: null      // operation["create", "remove", "fetch", "update"], message
         },

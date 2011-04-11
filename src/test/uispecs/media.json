@@ -2,7 +2,10 @@
     "recordEditor": {
         "expander": {
             "type": "fluid.renderer.condition",
-            "condition": "${fields.blobCsid}",
+            "condition": {
+                "funcName": "cspace.mediaUploader.assertBlob",
+                "args": "${fields.blobCsid}"
+            },
             "trueTree": {
                 ".csc-media-blobs": {}
             },

@@ -179,7 +179,7 @@ input[type="button"].add {
 	padding-right:8px;
 	margin-top:1px;
 	float:right;
-	font-size:bold;
+	font-weight:bold;
 	line-height:1.65;
 	font-size:13px;
 	color:#669922;}
@@ -1567,8 +1567,8 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
     display: block;
 }
 .cs-recordList .cs-recordList-column2 {
-    width: 47.75%;
-    min-width: 47.75%;
+    width: 47.6%;
+    min-width: 47.6%;
     text-overflow:ellipsis;
     overflow:hidden;
     white-space:nowrap;
@@ -1645,9 +1645,16 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
     color: #FFF;
     vertical-align: middle;
 }
-.cs-recordList .csc-recordList-row:last-child {
+.cs-recordList .cs-recordList-row:last-child {
     -moz-border-radius: 0 0 4px 4px;
 	-webkit-border-radius: 0 0 4px 4px;
+}
+.cs-recordList .cs-recordList-deleteRelation {
+    background: transparent url('../images/icnDeleteIdle.png') no-repeat right center;
+    height: inherit;
+}
+.cs-recordList .cs-recordList-deleteRelation:hover {
+    background: transparent url('../images/icnDelete.png') no-repeat right center;
 }
 .cs-mediaUploader-fileUploaderContainer .fl-uploader-browse input[type=file] {
     bottom: 0px;
