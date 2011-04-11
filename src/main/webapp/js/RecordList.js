@@ -155,7 +155,7 @@ cspace = cspace || {};
                         valueAs: "rowValue",
                         controlledBy: "sorted",
                         tree: {
-                            expander: {
+                            expander: [{
                                 repeatID: "column",
                                 type: "fluid.renderer.repeat",
                                 pathAs: "column",
@@ -173,7 +173,7 @@ cspace = cspace || {};
                                         }]
                                     }
                                 }
-                            }
+                            }]
                         }
                     }, {
                         type: "fluid.renderer.condition",
@@ -203,6 +203,32 @@ cspace = cspace || {};
                 }
             }]
         };
+    };
+    
+    cspace.recordList.produceTreeTabs = function (that) {
+        var tree = cspace.recordList.produceTree(that);
+        tree.expander[1].trueTree.expander[0].tree.expander.push({
+            type: "fluid.renderer.condition",
+            condition: that.options.showDeleteButton,
+            trueTree: {
+                deleteRelation: {
+                    decorators: [{
+                        type: "addClass",
+                        classes: that.options.styles.deleteRelation
+                    }, {
+                        type: "attrs",
+                        attributes: {
+                            alt: that.options.strings.deleteRelation                        
+                        }
+                    }, {
+                        type: "jQuery",
+                        func: "click",
+                        args: that.deleteRelation
+                    }]
+                }
+            }
+        });
+        return tree;
     };
     
     cspace.recordList.selectNavigate = function (model, options, url) {
@@ -266,7 +292,8 @@ cspace = cspace || {};
             nothingYet: ".csc-recordList-no-items",
             row: ".csc-recordList-row",
             column: ".csc-recordList-column",
-            columnValue: ".csc-recordList-columnValue"
+            columnValue: ".csc-recordList-columnValue",
+            deleteRelation: ".csc-recordList-deleteRelation"
         },
         repeatingSelectors: ["column", "row", "titleColumn"],
         strings: {
@@ -300,11 +327,85 @@ cspace = cspace || {};
             })
         },
         urls: cspace.componentUrlBuilder({
-            navigate: "%webapp/%recordType.html?csid=%csid",
+            navigate: "%webapp/html/%recordType.html?csid=%csid",
             navigateLocal: "%webapp/html/record.html?recordtype=%recordType&csid=%csid"
         })
     });
     
     fluid.fetchResources.primeCacheFromResources("cspace.recordList");
+    
+    cspace.recordList.extractRowCsid = function (rows, row, model, elPath) {
+        return model[elPath][rows.index(row)].csid;
+    };
+    
+    cspace.recordList.deleteRelation = function (event, recordList, recordEditor, csid, primary, related) {
+        var targetCsid = cspace.recordList.extractRowCsid(recordList.locate("row"), 
+            $(event.target).parent(), recordList.model, recordList.options.elPaths.items);
+        recordEditor.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+            listeners: {
+                onClose: function (userAction) {
+                    if (userAction === "act") {
+                        recordEditor.options.messageBar.show(recordEditor.options.strings.removingMessage, null, false);
+                        recordEditor.options.dataContext.removeRelations({
+                            source: {
+                                csid: csid,
+                                recordtype: primary
+                            },
+                            target: {
+                                csid: targetCsid,
+                                recordtype: related
+                            },
+                            type: "affects",
+                            "one-way": false
+                        });
+                    }
+                }
+            },
+            strings: {
+                primaryMessage: recordEditor.options.strings.deletePrimaryMessage
+            }
+        });
+        return false;
+    };
+    
+    fluid.demands("list", ["cspace.listEditor", "cspace.tab"], {
+        container: "{listEditor}.dom.list",
+        options: {
+            showDeleteButton: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.permissions.resolveMultiple",
+                    args: {
+                        recordTypeManager: "{recordTypeManager}",
+                        resolver: "{permissionsResolver}",
+                        allOf: [{
+                            target: "{relatedRecordsTab}.primary",
+                            permission: "update"
+                        }, {
+                            target: "{relatedRecordsTab}.related",
+                            permission: "update"
+                        }]
+                    }
+                }
+            },
+            columns: ["number", "summary"],
+            produceTree: cspace.recordList.produceTreeTabs,
+            invokers: {
+                deleteRelation: {
+                    funcName: "cspace.recordList.deleteRelation",
+                    args: ["{arguments}.0", "{recordList}", "{details}", "{relatedRecordsTab}.model.csid", "{relatedRecordsTab}.primary", "{relatedRecordsTab}.related"]
+                }
+            },
+            styles: {
+                deleteRelation: "cs-recordList-deleteRelation"
+            },
+            strings: {
+                number: "ID Number",
+                summary: "Summary",
+                newRow: "Creating New Related Record...",
+                deleteRelation: "Delete this relation."
+            }
+        }
+    });
 
 })(jQuery, fluid);

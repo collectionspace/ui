@@ -55,6 +55,7 @@ cspace = cspace || {};
             that.locate("addButton").hide();
         }
         that.dataContext.events.afterAddRelations.addListener(updateRelations(that.options.applier, that.model));
+        that.dataContext.events.afterRemoveRelations.addListener(updateRelations(that.options.applier, that.model));
     };
     
     cspace.relationManager = function (container, options) {

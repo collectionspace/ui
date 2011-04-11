@@ -128,6 +128,10 @@ cspace = cspace || {};
         that.locate("linkButton").attr("disabled", that.locate("linkInput").val() ? false : true);
     };
     
+    cspace.mediaUploader.assertBlob = function (blobCsid) {
+        return !!blobCsid;
+    };
+    
     cspace.mediaUploader.removeMedia = function (that) {
         that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
             listeners: {

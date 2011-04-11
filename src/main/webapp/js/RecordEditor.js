@@ -21,11 +21,10 @@ cspace = cspace || {};
         return function (operation, message, data) {
             if (data && data.messages) {
                 // TODO: expand this branch as sophistication increases for CSPACE-3142
-                fluid.each(data.messages, function(message) {
+                fluid.each(data.messages, function (message) {
                     that.options.messageBar.show(message.message, null, data.isError);
                 });
-            }
-            else {
+            } else {
                 var msgKey = operation + "FailedMessage";
                 var msg = that.options.strings[msgKey] + message;
                 that.options.messageBar.show(msg, null, true);
@@ -56,7 +55,8 @@ cspace = cspace || {};
     
     var validateRequiredFields = function (domBinder, messageBar, message) {
         var required = domBinder.locate("requiredFields");
-        for (var i = 0; i < required.length; i++) {
+        var i;
+        for (i = 0; i < required.length; i++) {
             if (required[i].value === "") {
                 messageBar.show(message, null, true);
                 return false;
@@ -132,8 +132,7 @@ cspace = cspace || {};
                                     callback();
                                 }, undefined, undefined, "last");
                                 that.requestSave();
-                            }
-                            else if (userAction === "proceed") {
+                            } else if (userAction === "proceed") {
                                 that.rollback();
                                 callback();
                             }
@@ -211,27 +210,27 @@ cspace = cspace || {};
             }
             return false;
         };
-        
-        that.remove = function () {
-            that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
-                listeners: {
-                    onClose: function (userAction) {
-                        if (userAction === "act") {
-                            that.options.messageBar.show(that.options.strings.removingMessage, null, false);
-                            that.options.dataContext.remove(that.model.csid);
-                            processChanges(that, false);
-                        }
-                    }
-                },
-                strings: {
-                    primaryMessage: that.options.strings.deletePrimaryMessage
-                }
-            });
-        };
 
         setupRecordEditor(that);
 
         return that;
+    };
+    
+    cspace.recordEditor.remove = function (that) {
+        that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+            listeners: {
+                onClose: function (userAction) {
+                    if (userAction === "act") {
+                        that.options.messageBar.show(that.options.strings.removingMessage, null, false);
+                        that.options.dataContext.remove(that.model.csid);
+                        processChanges(that, false);
+                    }
+                }
+            },
+            strings: {
+                primaryMessage: that.options.strings.deletePrimaryMessage
+            }
+        });
     };
     
     cspace.recordEditor.rollback = function (that) {
@@ -246,7 +245,7 @@ cspace = cspace || {};
      * Note that deletion should already have taken place before this function is
      * called. This function merely shows dialog to user and redirects.
      */
-    cspace.recordEditor.redirectAfterDelete = function(that) {
+    cspace.recordEditor.redirectAfterDelete = function (that) {
         that.confirmation.open("cspace.confirmation.alertDialog", undefined, {
             listeners: {
                 onClose: function (userAction) {
@@ -257,17 +256,17 @@ cspace = cspace || {};
                 primaryMessage: that.options.strings.removeSuccessfulMessage
             }
         });
-    }
+    };
 
     /*
      * Dismisses the record that the user was in (now deleted) and displays
      * a message in the messagebar, informing the user that the record was
      * deleted.
      */
-    cspace.recordEditor.statusAfterDelete = function(that) {
+    cspace.recordEditor.statusAfterDelete = function (that) {
         //show messagebar
         that.options.messageBar.show(that.options.strings.removeSuccessfulMessage, null, false);
-    }
+    };
     
     cspace.recordEditor.produceTree = function (that) {
         var deleteButton = {
@@ -325,7 +324,7 @@ cspace = cspace || {};
     //Checks whether delete button should be disabled.
     //returns true if the delete button should be disabled,
     //else false
-    cspace.recordEditor.checkDeleteDisabling = function(that) {
+    cspace.recordEditor.checkDeleteDisabling = function (that) {
         //disable if: model.csid is not set (new record)
         if (that.model && !that.model.csid) {
             return true;
@@ -387,6 +386,7 @@ cspace = cspace || {};
                 funcName: "cspace.recordEditor.rollback",
                 args: "{recordEditor}"
             },
+            remove: "remove",
             afterDeleteAction: "afterDelete",
             checkDeleteDisabling: "checkDeleteDisabling", //whether to disable delete button
             cancel: "cancel"
@@ -436,6 +436,7 @@ cspace = cspace || {};
             deleteFailedMessage: "Error deleting Record: ",
             fetchFailedMessage: "Error retriving Record: ",
             addRelationsFailedMessage: "Error adding related records: ",
+            removeRelationsFailedMessage: "Error removing related records: ",
             defaultTermIndicator: " (default)",
             noDefaultInvitation: "-- Select an item from the list --",
             missingRequiredFields: "Some required fields are empty",

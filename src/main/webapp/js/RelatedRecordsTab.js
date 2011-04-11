@@ -1,7 +1,7 @@
 /*
 Copyright 2010 University of Toronto
 
-Licensed under the Educational Community License (ECL), Version 2.0. 
+Licensed under the Educational Community License (ECL), Version 2.0.
 You may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
@@ -15,9 +15,9 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     fluid.log("RelatedRecordsTab.js loaded");
-    
+
     fluid.registerNamespace("cspace.relatedRecordsTab");
- 
+
     var bindEventHandlers = function (that) {
         var elPath = "relations." + that.related;
         that.applier.modelChanged.addListener(elPath, function (model, oldModel, changeRequest) {
@@ -48,9 +48,9 @@ cspace = cspace || {};
             }
         });
     };
-    
+
     /**
-     * 
+     *
      * @param {Object} container
      * @param {Object} uispec
      * @param {Object} applier  The applier holding the data model of the primary record
@@ -60,19 +60,46 @@ cspace = cspace || {};
         var that = fluid.initRendererComponent("cspace.relatedRecordsTab", container, options);
         that.primary = that.options.primary;
         that.related = that.options.related;
-        
+
         that.renderer.refreshView();
         fluid.initDependents(that);
-            
+
         bindEventHandlers(that);
-        
+
         return that;
     };
-    
+
     cspace.relatedRecordsTab.provideData = function (relations, related) {
         return {
             items: relations[related]
         };
+    };
+
+    cspace.relatedRecordsTab.deleteRelation = function (that, recordEditor) {
+        recordEditor.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+            listeners: {
+                onClose: function (userAction) {
+                    if (userAction === "act") {
+                        recordEditor.options.messageBar.show(recordEditor.options.strings.removingMessage, null, false);
+                        recordEditor.options.dataContext.removeRelations({
+                            source: {
+                                csid: that.model.csid,
+                                recordtype: that.primary
+                            },
+                            target: {
+                                csid: recordEditor.model.csid,
+                                recordtype: that.related
+                            },
+                            "one-way": false,
+                            type: "affects"
+                        });
+                    }
+                }
+            },
+            strings: {
+                primaryMessage: recordEditor.options.strings.deletePrimaryMessage
+            }
+        });
     };
     
     cspace.relatedRecordsTab.produceTree = function (that) {
@@ -88,7 +115,7 @@ cspace = cspace || {};
             }
         };
     };
-    
+
     fluid.defaults("cspace.relatedRecordsTab", {
         gradeNames: ["fluid.IoCRendererComponent"],
         components: {
@@ -153,5 +180,5 @@ cspace = cspace || {};
             "goTo": "%webapp/html/%related.html?csid=%csid"
         })
     });
-    
+
 })(jQuery, fluid);
