@@ -11,11 +11,18 @@
                     "options": {
                         "selectors": {
                             "identificationNumber": ".csc-media-identificationNumber",
-                            "uploader": ".csc-media-upload"
+                            "uploader": ".csc-media-upload",
+                            "mediaImage": ".csc-media-image"
                         },
-                        "selectorsToIgnore": ["deleteButton", "requiredFields", "identificationNumber", "header", "togglable", "uploader"],
+                        "selectorsToIgnore": ["requiredFields", "identificationNumber", "header", "togglable", "uploader"],
                         "strings": {
                             "identificationNumberRequired": "Please specify an Identification Number"
+                        },
+                        "invokers": {
+                            "navigateToFullImage": "navigateToFullImage"
+                        },
+                        "styles": {
+                            "mediaImage": "cs-media-image"
                         },
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
