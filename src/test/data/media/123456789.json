@@ -7,6 +7,7 @@
     },
     "csid": "123456789",
     "fields": {
+        "blobCsid": "aa5d64e6-8e45-41f0-aa57",
         "csid": "123456789",
         "contributor": "urn:cspace:org.collectionspace.demo:personauthority:name(person):person:name(johnsmith)'John+Smith'",
         "copyrightStatement": "This is copyright",

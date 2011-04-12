@@ -43,11 +43,36 @@
                                         "details": {
                                             "options": {
                                                 "selectors": {
-                                                    "identificationNumber": ".csc-media-identificationNumber"
+                                                    "identificationNumber": ".csc-media-identificationNumber",
+                                                    "uploader": ".csc-media-upload",
+                                                    "mediaImage": ".csc-media-image"
                                                 },
+                                                "selectorsToIgnore": ["requiredFields", "identificationNumber", "header", "togglable", "uploader"],
                                                 "strings": {
                                                     "identificationNumberRequired": "Please specify an Identification Number" 
-                                                } 
+                                                },
+                                                "invokers": {
+                                                    "navigateToFullImage": "navigateToFullImage"
+                                                },
+                                                "styles": {
+                                                    "mediaImage": "cs-media-image"
+                                                },
+                                                "deferredComponents": {
+                                                    "uploader": {
+                                                        "type": "cspace.mediaUploader",
+                                                        "options": {
+                                                            "urls": {
+                                                                "expander": {
+                                                                    "type": "fluid.deferredInvokeCall",
+                                                                    "func": "cspace.componentUrlBuilder",
+                                                                    "args": {
+                                                                        "upload": "%chain/uploads/"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
                                             } 
                                         }
                                     }

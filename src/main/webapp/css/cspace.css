@@ -1664,3 +1664,6 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
     width: 100%;
     cursor: text;
 }
+.cs-media-image {
+    cursor:pointer;
+}

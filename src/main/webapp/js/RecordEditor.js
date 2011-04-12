@@ -315,6 +315,39 @@ cspace = cspace || {};
         tree.expander.push(deleteButton);
         return tree;
     };
+    
+    // NOTE: THIS IS A HACK BECAUSE THE SERVER DOES NOT RETURN ANY PAYLOAD RELATED TO THE MEDIA ATTACHED.
+    cspace.recordEditor.produceTreeMedia = function (that) {
+        var tree = cspace.recordEditor.produceTree(that);
+        fluid.merge(null, tree.expander[0].trueTree, {
+            mediaImage: {
+                decorators: [{
+                    type: "attrs",
+                    attributes: {
+                        src: fluid.stringTemplate(that.options.urls.thumbnailURL, {csid: that.model.fields.blobCsid})
+                    }
+                }, {
+                    type: "addClass",
+                    classes: that.options.styles.mediaImage
+                }, {
+                    type: "jQuery",
+                    func: "click",
+                    args: that.navigateToFullImage
+                }]
+            }
+        });
+        return tree;
+    };
+    
+    cspace.recordEditor.navigateToFullImage = function (that) {
+        that.options.globalNavigator.events.onPerformNavigation.fire(function () {
+            window.location = fluid.stringTemplate(that.options.urls.fullImageURL, {csid: that.model.fields.blobCsid});
+        });
+    };
+    
+    cspace.recordEditor.provideProduceTree = function (recordType) {
+        return recordType === "media" ? cspace.recordEditor.produceTreeMedia : cspace.recordEditor.produceTree;
+    };
 
     cspace.recordEditor.cutpointGenerator = function (selectors, options) {
         var cutpoints = options.cutpoints || fluid.renderer.selectorsToCutpoints(selectors, options) || [];
@@ -449,7 +482,10 @@ cspace = cspace || {};
             deleteButton: "Delete"
         },
         urls: cspace.componentUrlBuilder({
-            deleteURL: "%webapp/html/myCollectionSpace.html"
+            deleteURL: "%webapp/html/myCollectionSpace.html",
+            thumbnailURL: "http://nightly.collectionspace.org:8180/cspace-services/blobs/%csid/derivatives/Thumbnail/content",
+            fullImageURL: "http://nightly.collectionspace.org:8180/cspace-services/blobs/%csid/derivatives/Original/content"
         })
     });
+    
 })(jQuery, fluid);
