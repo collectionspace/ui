@@ -311,9 +311,6 @@ cspace = cspace || {};
             },
             footer: {
                 type: "cspace.footer"
-            },
-            messageBar: {
-                type: "cspace.messageBar"
             }
         },
         events: {

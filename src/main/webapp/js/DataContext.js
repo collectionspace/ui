@@ -30,12 +30,12 @@ cspace = cspace || {};
             url: cspace.util.buildUrl(operation, options.baseUrl, options.recordType, csid, options.fileExtension),
             type: types[operation],
             dataType: options.dataType,
-            success: function (data, textStatus) {
-                if (data && data.isError) {
-                    events.onError.fire(operation, "Application error", data);
+            success: function (responseData, textStatus) {
+                if (responseData && responseData.isError) {
+                    events.onError.fire(operation, "Application error", responseData);
                 }
                 else {
-                    successEvent.fire(data);
+                    successEvent.fire(responseData || data);
                 }
             },
             error: function (xhr, textStatus, errorThrown) {

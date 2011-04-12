@@ -135,7 +135,6 @@ var adminUsersTester = function () {
             jqUnit.notVisible("message container is hidden", le.options.messageBar.container);
             jqUnit.isVisible("details none is visible", selectors.detailsNone);
             jqUnit.notVisible("details is not visible", selectors.details);
-            jqUnit.notVisible("hide on create is hidden", selectors.hideOnCreate);
             jqUnit.notVisible("hide on edit is visible", selectors.hideOnEdit);
             jqUnit.notVisible("new list row is hidden", le.list.options.selectors.newRow);
             cspace.tests.onTearDown.fire(re);
@@ -155,7 +154,6 @@ var adminUsersTester = function () {
                 jqUnit.notVisible("message container is hidden", le.options.messageBar.container);
                 jqUnit.notVisible("details none is hidden", selectors.detailsNone);
                 jqUnit.isVisible("details is visible", selectors.details);
-                jqUnit.notVisible("hide on create is hidden", selectors.hideOnCreate);
                 jqUnit.isVisible("hide on edit is visible", selectors.hideOnEdit);
                 jqUnit.isVisible("new list row is visible", le.list.options.selectors.newRow);
                 cspace.tests.onTearDown.fire(re);

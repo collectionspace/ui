@@ -106,6 +106,10 @@ cspace = cspace || {};
         that.options.dataContext.events.afterRemove.addListener(function () {
             that.afterDeleteAction();
         });
+        
+        that.options.dataContext.events.afterRemoveRelations.addListener(function () {
+            that.afterDeleteAction();
+        });
 
         that.options.dataContext.events.modelChanged.addListener(function (data) {
             that.refreshView();

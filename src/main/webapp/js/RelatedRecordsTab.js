@@ -20,9 +20,7 @@ cspace = cspace || {};
 
     var bindEventHandlers = function (that) {
         var elPath = "relations." + that.related;
-        that.applier.modelChanged.addListener(elPath, function (model, oldModel, changeRequest) {
-            that.listEditor.updateList();
-        });
+        that.applier.modelChanged.addListener(elPath, that.listEditor.updateList);
         that.relationManager.events.onCreateNewRecord.addListener(that.listEditor.addNewListRow);
         that.listEditor.detailsDC.events.afterCreate.addListener(function (data) {
             var newRelation = [{
@@ -81,7 +79,7 @@ cspace = cspace || {};
                 onClose: function (userAction) {
                     if (userAction === "act") {
                         recordEditor.options.messageBar.show(recordEditor.options.strings.removingMessage, null, false);
-                        recordEditor.options.dataContext.removeRelations({
+                        that.relationManager.dataContext.removeRelations({
                             source: {
                                 csid: that.model.csid,
                                 recordtype: that.primary

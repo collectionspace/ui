@@ -100,7 +100,6 @@ var listEditorTester = function(){
                 listEditor.events.afterShowDetails.removeListener("afterRender");
                 jqUnit.isVisible("Details should be visible after activating an item in the list", listEditor.options.selectors.details);
                 jqUnit.notVisible("New Entry row should be invisible initially", listEditor.list.options.selectors.newRow);
-                jqUnit.isVisible("We can see the details that should be visible on edit", listEditor.options.selectors.hideOnCreate);
                 jqUnit.notVisible("We can't see the details that are invisible on edit", listEditor.options.selectors.hideOnEdit);
                 jqUnit.assertEquals("Details should be from the correct item", "Megan Forbes", $(".csc-user-userName").val());
                 start();

@@ -713,7 +713,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("messageBarImpl", "cspace.messageBar", {
             container: "{messageBar}.options.selectors.messageBarContainer"
         });
-        fluid.demands("messageBar", "cspace.pageBuilder", {
+        fluid.demands("messageBar", "cspace.globalSetup", {
             container: "body"
         });
         fluid.demands("messageBar", "cspace.login", {
