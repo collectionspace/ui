@@ -66,8 +66,8 @@ cspace = cspace || {};
         model: {
             about: "http://www.collectionspace.org",
             currentRelease: "http://www.collectionspace.org/current_release",
-            feedback: "http://wiki.collectionspace.org/display/collectionspace/Release+1.5+Feedback",
-            version: "1.5"
+            feedback: "http://wiki.collectionspace.org/display/collectionspace/Release+1.6+Feedback",
+            version: "1.6"
         },
         resources: {
             template: {
