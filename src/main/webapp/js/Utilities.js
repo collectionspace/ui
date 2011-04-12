@@ -992,6 +992,9 @@ fluid.registerNamespace("cspace.util");
             },
             noLogin: {
                 type: "cspace.globalSetup.noLogin"
+            },
+            messageBar: {
+                type: "cspace.messageBar"
             }
         }
     });

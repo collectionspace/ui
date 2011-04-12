@@ -74,6 +74,7 @@ cspace = cspace || {};
     };
 
     cspace.recordList.verifyColumnOrder = function (that) {
+        that.applier.requestChange("sorted", []);
         fluid.each(that.model[that.options.elPaths.items], function (item, index) {
             var sortedItem = [];
             fluid.each(that.model.columns, function (column) {
@@ -338,7 +339,7 @@ cspace = cspace || {};
         return model[elPath][rows.index(row)].csid;
     };
     
-    cspace.recordList.deleteRelation = function (event, recordList, recordEditor, csid, primary, related) {
+    cspace.recordList.deleteRelation = function (event, recordList, recordEditor, tab) {
         var targetCsid = cspace.recordList.extractRowCsid(recordList.locate("row"), 
             $(event.target).parent(), recordList.model, recordList.options.elPaths.items);
         recordEditor.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
@@ -346,14 +347,14 @@ cspace = cspace || {};
                 onClose: function (userAction) {
                     if (userAction === "act") {
                         recordEditor.options.messageBar.show(recordEditor.options.strings.removingMessage, null, false);
-                        recordEditor.options.dataContext.removeRelations({
+                        tab.relationManager.dataContext.removeRelations({
                             source: {
-                                csid: csid,
-                                recordtype: primary
+                                csid: tab.model.csid,
+                                recordtype: tab.primary
                             },
                             target: {
                                 csid: targetCsid,
-                                recordtype: related
+                                recordtype: tab.related
                             },
                             type: "affects",
                             "one-way": false
@@ -393,7 +394,7 @@ cspace = cspace || {};
             invokers: {
                 deleteRelation: {
                     funcName: "cspace.recordList.deleteRelation",
-                    args: ["{arguments}.0", "{recordList}", "{details}", "{relatedRecordsTab}.model.csid", "{relatedRecordsTab}.primary", "{relatedRecordsTab}.related"]
+                    args: ["{arguments}.0", "{recordList}", "{details}", "{relatedRecordsTab}"]
                 }
             },
             styles: {

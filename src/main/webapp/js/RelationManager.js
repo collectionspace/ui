@@ -18,19 +18,25 @@ cspace = cspace || {};
     
     fluid.registerNamespace("cspace.relationManager");
 
-    var updateRelations = function (applier, model) {
-        return function (relations) {
+    var updateRelations = function (applier, model, remove) {
+        return remove ? function (relations) {
+            var related = relations.target.recordtype;
+            var elPath = "relations." + related;
+            var csid = relations.target.csid;
+            var newModelRelations = fluid.copy(model.relations[related]);
+            fluid.remove_if(newModelRelations, function (relation) {
+                return relation.csid === csid;
+            });
+            applier.requestChange(elPath, newModelRelations);
+        }: function (relations) {
             if (!relations.items || !relations.items[0] || !relations.items[0].target) {
                 return;
             }
-            
-            var newModelRelations = [];
             var related = relations.items[0].target.recordtype;
+            var newModelRelations = fluid.copy(model.relations[related]) || [];
             var elPath = "relations." + related;
-            
-            fluid.model.copyModel(newModelRelations, model.relations[related]);
             var relIndex = newModelRelations.length;
-            $.each(relations.items, function (index, relation) {
+            fluid.each(relations.items, function (relation) {
                 newModelRelations[relIndex] = relation.target;
                 newModelRelations[relIndex].relationshiptype = relation.type;
                 ++relIndex;
@@ -55,7 +61,7 @@ cspace = cspace || {};
             that.locate("addButton").hide();
         }
         that.dataContext.events.afterAddRelations.addListener(updateRelations(that.options.applier, that.model));
-        that.dataContext.events.afterRemoveRelations.addListener(updateRelations(that.options.applier, that.model));
+        that.dataContext.events.afterRemoveRelations.addListener(updateRelations(that.options.applier, that.model, true));
     };
     
     cspace.relationManager = function (container, options) {
