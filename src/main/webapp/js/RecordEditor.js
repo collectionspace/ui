@@ -341,7 +341,7 @@ cspace = cspace || {};
     
     cspace.recordEditor.navigateToFullImage = function (that) {
         that.options.globalNavigator.events.onPerformNavigation.fire(function () {
-            window.location = fluid.stringTemplate(that.options.urls.fullImageURL, {csid: that.model.fields.blobCsid});
+            window.open(fluid.stringTemplate(that.options.urls.fullImageURL, {csid: that.model.fields.blobCsid}));
         });
     };
     
