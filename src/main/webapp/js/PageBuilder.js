@@ -201,6 +201,13 @@ cspace = cspace || {};
         },
         readOnlyUrlVar: "readonly/",
         components: {
+            pageCategory: {
+                type: "cspace.pageCategory",
+                priority: "first",
+                options: {
+                    pageCategory: "{pageBuilderIO}.options.pageCategory"
+                }
+            },
             instantiator: "{instantiator}",
             dataContext: {
                 type: "cspace.dataContext",

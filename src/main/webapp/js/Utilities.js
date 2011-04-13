@@ -16,8 +16,6 @@ fluid.registerNamespace("cspace.util");
 (function ($, fluid) {
     fluid.log("Utilities.js loaded");
     
-    fluid.setLogging(true);
-    
     // Calls to this should cease to appear in application code
     cspace.util.useLocalData = function () {
         return document.location.protocol === "file:";
@@ -286,7 +284,11 @@ fluid.registerNamespace("cspace.util");
     };
     
     cspace.util.getDefaultConfigURL.getRecordTypeLocal = function () {
-        return cspace.util.getUrlParameter("recordtype");
+        var url = cspace.util.getDefaultConfigURL.getRecordType();
+        if (url === "record") {
+            return cspace.util.getUrlParameter("recordtype");
+        }
+        return url;
     };
     
     cspace.util.getDefaultConfigURL.getRecordType = function () {
@@ -298,9 +300,7 @@ fluid.registerNamespace("cspace.util");
         gradeNames: ["fluid.littleComponent"],
         url: "%webapp/config/%recordType.json",
         invokers: {
-            getRecordType: {
-                funcName: "cspace.util.getDefaultConfigURL.getRecordType"
-            }
+            getRecordType: "getRecordType"
         },
         urlRenderer: {
             expander: {
@@ -921,13 +921,12 @@ fluid.registerNamespace("cspace.util");
     
     cspace.globalSetup = function (tag, options) {
         var that = fluid.initLittleComponent("cspace.globalSetup");
-        fluid.staticEnvironment.cspacePage = fluid.typeTag(tag);
+        that.options.components.noLogin.options = {
+            tag: tag
+        };
         fluid.initDependents(that);
         that.init = function (tag, options) {
             options = options || {};
-            if (tag) {
-                fluid.staticEnvironment.cspacePage = fluid.typeTag(tag);
-            }
             fluid.fetchResources({
                 config: {
                     href: options.configURL || fluid.invoke("cspace.util.getDefaultConfigURL"),
@@ -959,12 +958,11 @@ fluid.registerNamespace("cspace.util");
                         }
                     }, 
                     pageBuilderIO: {
-                        options: {}
+                        options: {
+                            pageCategory: tag
+                        }
                     }}, resourceSpecs.config.resourceText, options
                 );
-//                if (that.pageBuilderIO) {
-//                    that.instantiator.clearComponent(that, "pageBuilderIO");
-//                }
                 var newPageBuilderIOName = "pageBuilderIO-" + fluid.allocateGuid();
                 that.options.components[newPageBuilderIOName] = {
                     type: "cspace.pageBuilderIO",
@@ -974,13 +972,13 @@ fluid.registerNamespace("cspace.util");
                 that[newPageBuilderIOName].initPageBuilder(options.pageBuilder.options);
             });
         };
-        that.init(null, options);
+        that.init(tag, options);
         return that;
     };
     
     cspace.globalSetup.noLogin = function (options) {
         var that = fluid.initLittleComponent("cspace.globalSetup.noLogin", options);
-        return that.options.noLogin;
+        return that.options.tag === "cspace.login";
     };
     
     fluid.defaults("cspace.globalSetup", {
@@ -1113,5 +1111,13 @@ fluid.registerNamespace("cspace.util");
             }
         }) || false;
     };
+    
+    cspace.pageCategory = function (options) {
+        var that = fluid.initLittleComponent("cspace.pageCategory", options);
+        return fluid.typeTag(that.options.pageCategory);
+    };
+    fluid.defaults("cspace.pageCategory", {
+        gradeNames: "fluid.littleComponent"
+    });
     
 })(jQuery, fluid);

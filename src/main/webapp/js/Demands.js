@@ -17,6 +17,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.includeLocalDemands = function () {
         
+        // getDefaultConfigURL demands
+        fluid.demands("getRecordType", ["cspace.util.getDefaultConfigURL", "cspace.localData"], {
+            funcName: "cspace.util.getDefaultConfigURL.getRecordTypeLocal"
+        });
+        
         // Admin roles demands
         fluid.demands("role", ["cspace.pageBuilder", "cspace.localData"], {
             container: "{pageBuilder}.options.selectors.role",
@@ -232,18 +237,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
         
-        // getDefaultConfigURL demands
-        fluid.demands("cspace.util.getDefaultConfigURL", ["cspace.record", "cspace.localData"], {
-            options: {
-                invokers: {
-                    getRecordType: {
-                        funcName: "cspace.util.getDefaultConfigURL.getRecordTypeLocal"
-                    }
-                }
-            }
-        });
-        fluid.demands("cspace.util.getDefaultConfigURL", "cspace.localData", "{options}");
-        
         // getLoginURL demands
         fluid.demands("cspace.util.getLoginURL", "cspace.localData", {
             options: {
@@ -267,6 +260,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.includeDemands = function () {
+        
+        // getDefaultConfigURL demands
+        fluid.demands("getRecordType", "cspace.util.getDefaultConfigURL", {
+            funcName: "cspace.util.getDefaultConfigURL.getRecordType"
+        });
         
         // List Editor's demands
         fluid.demands("roleListEditor", "cspace.adminRoles", {
@@ -914,9 +912,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
         
-        // getDefaultConfigURL demands
-        fluid.demands("cspace.util.getDefaultConfigURL", "cspace.record", "{options}");
-        
         // urnToStringFieldConverter demands
         fluid.demands("cspace.util.urnToStringFieldConverter", "cspace.recordEditor", {
             container: "{arguments}.0"
@@ -925,13 +920,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // nameForValueFinder demands
         fluid.demands("cspace.util.nameForValueFinder", "cspace.recordEditor", {
             container: "{arguments}.0"
-        });
-        
-        // nologin demands
-        fluid.demands("noLogin", "cspace.login", {
-            options: {
-                noLogin: true
-            }
         });
     };
     
