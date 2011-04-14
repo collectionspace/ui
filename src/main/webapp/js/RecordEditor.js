@@ -483,8 +483,8 @@ cspace = cspace || {};
         },
         urls: cspace.componentUrlBuilder({
             deleteURL: "%webapp/html/myCollectionSpace.html",
-            thumbnailURL: "%chain/blobs/%csid/Thumbnail",
-            fullImageURL: "%chain/blobs/%csid/Original"
+            thumbnailURL: "%chain/download/%csid/Thumbnail",
+            fullImageURL: "%chain/download/%csid/Original"
         })
     });
     
