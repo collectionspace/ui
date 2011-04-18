@@ -134,6 +134,9 @@ cspace = cspace || {};
     
     cspace.mediaUploader.removeMedia = function (that) {
         that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+            model: {
+                messages: ["primaryMessage", "secondaryMessage"]
+            },
             listeners: {
                 onClose: function (userAction) {
                     if (userAction === "act") {
@@ -144,6 +147,7 @@ cspace = cspace || {};
             },
             strings: {
                 primaryMessage: that.options.strings.confirmationPrimaryMessage,
+                secondaryMessage: that.options.strings.confirmationSecondaryMessage,
                 actText: that.options.strings.confirmationActText,
                 actAlt: that.options.strings.confirmationActAlt
             }
@@ -197,6 +201,7 @@ cspace = cspace || {};
             uploadMediaLabel: "Upload Media",
             linkMediaLabel: "Link To External Media",
             confirmationPrimaryMessage: "Remove media from this record?",
+            confirmationSecondaryMessage: "This action can not be undone. Any changes on the media handling record will also be saved automatically.",
             confirmationActText: "Remove",
             confirmationActAlt: "remove media"
         },
