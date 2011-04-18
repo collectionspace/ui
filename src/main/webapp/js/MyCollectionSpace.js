@@ -47,8 +47,8 @@ cspace = cspace || {};
             elPaths: {
                 items: "items"
             },
-            columns: ["number", "summary"],
-            names: [recordType + "-number", "summary"],
+            columns: ["number", "summary", "summarylist.updatedAt"],
+            names: [recordType + "-number", "summary", "updatedAt"],
             showNumberOfItems: false
         };
     };

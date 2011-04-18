@@ -28,7 +28,7 @@ var recordListTester = function ($) {
     var validateRows = function (item, columns, row, recordList) {
         fluid.each(columns, function (column, index) {
             jqUnit.assertEquals(column + " for row " + row + " should be", item[column], 
-                recordList.locate("row").eq(row).children().children().eq(index).text());
+                recordList.locate("row").eq(row).children().eq(index).text());
         });
     };
     var validateRecordList = function (model, columns, recordList) {

@@ -75,10 +75,10 @@ cspace = cspace || {};
 
     cspace.recordList.verifyColumnOrder = function (that) {
         that.applier.requestChange("sorted", []);
-        fluid.each(that.model[that.options.elPaths.items], function (item, index) {
+        fluid.each(fluid.get(that.model, that.options.elPaths.items), function (item, index) {
             var sortedItem = [];
             fluid.each(that.model.columns, function (column) {
-                sortedItem.push(item[column]);
+                sortedItem.push(fluid.get(item, column));
             });
             that.applier.requestChange("sorted" + "." + index, sortedItem);
         });
@@ -127,16 +127,14 @@ cspace = cspace || {};
                         pathAs: "titleColumn",
                         controlledBy: "names",
                         tree: {
-                            titleColumnValue: {
-                                messagekey: "${{titleColumn}}",
-                                decorators: [{
-                                    type: "addClass",
-                                    classes: that.options.styles.titleColumnValue
-                                }, {
-                                    type: "addClass",
-                                    classes: that.options.styles.column + that.options.columns.length.toString()
-                                }]
-                            }
+                            messagekey: "${{titleColumn}}",
+                            decorators: [{
+                                type: "addClass",
+                                classes: that.options.styles.titleColumn
+                            }, {
+                                type: "addClass",
+                                classes: that.options.styles.column + that.options.columns.length.toString()
+                            }]
                         }
                     }
                 }
@@ -163,16 +161,14 @@ cspace = cspace || {};
                                 valueAs: "columnValue",
                                 controlledBy: "{row}",
                                 tree: {
-                                    columnValue: {
-                                        value: "${{column}}",
-                                        decorators: [{
-                                            type: "addClass",
-                                            classes: that.options.styles.column + that.options.columns.length.toString()
-                                        }, {
-                                            type: "addClass",
-                                            classes: that.options.styles.columnValue
-                                        }]
-                                    }
+                                    value: "${{column}}",
+                                    decorators: [{
+                                        type: "addClass",
+                                        classes: that.options.styles.column + that.options.columns.length.toString()
+                                    }, {
+                                        type: "addClass",
+                                        classes: that.options.styles.column
+                                    }]
                                 }
                             }]
                         }
@@ -233,7 +229,7 @@ cspace = cspace || {};
     };
     
     var selectNavigate = function (model, options, url, typePath) {
-        var record = model[options.elPaths.items][model.selectonIndex];
+        var record = fluid.get(model, options.elPaths.items)[model.selectonIndex];
         if (!record) {
             return;
         }
@@ -254,7 +250,7 @@ cspace = cspace || {};
     };
     
     cspace.recordList.selectFromList = function (model, options, dataContext) {
-        var record = model[options.elPaths.items][model.selectonIndex];
+        var record = fluid.get(model, options.elPaths.items)[model.selectonIndex];
         if (!record) {
             return;
         }
@@ -296,15 +292,13 @@ cspace = cspace || {};
             recordList: ".csc-recordList",
             titleRow: ".csc-recordList-title-row",
             titleColumn: ".csc-recordList-title-column",
-            titleColumnValue: ".csc-recordList-title-columnValue",
             numberOfItems: ".csc-recordList-num-items",
             nothingYet: ".csc-recordList-no-items",
             row: ".csc-recordList-row",
             column: ".csc-recordList-column",
-            columnValue: ".csc-recordList-columnValue",
             deleteRelation: ".csc-recordList-deleteRelation"
         },
-        repeatingSelectors: ["column", "row", "titleColumn"],
+        repeatingSelectors: ["row", "titleColumn", "column"],
         strings: {
             nothingYet: "No related records yet",
             newRow: "New Record",
@@ -317,8 +311,7 @@ cspace = cspace || {};
             titleRow: "cs-recordList-title-row",
             numberOfItems: "cs-recordList-num-items",
             nothingYet: "cs-recordList-no-items",
-            columnValue: "cs-recordList-columnValue",
-            titleColumnValue: "cs-recordList-title-columnValue",
+            titleColumn: "cs-recordList-title-column",
             column: "cs-recordList-column",
             column1: "cs-recordList-column1",
             column2: "cs-recordList-column2",
@@ -344,7 +337,7 @@ cspace = cspace || {};
     fluid.fetchResources.primeCacheFromResources("cspace.recordList");
     
     cspace.recordList.extractRowCsid = function (rows, row, model, elPath) {
-        return model[elPath][rows.index(row)].csid;
+        return fluid.get(model, elPath)[rows.index(row)].csid;
     };
     
     cspace.recordList.deleteRelation = function (event, recordList, recordEditor, tab) {

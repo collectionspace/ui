@@ -718,6 +718,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         args: ["{relatedRecordsList}.options.related"]
                     }
                 },
+                names: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.relatedRecordsList.buildRelationsListNames",
+                        args: ["{relatedRecordsList}.options.related"]
+                    }
+                },
                 model: {
                     items: {
                         expander: {

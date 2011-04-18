@@ -1,7 +1,33 @@
 {
-    "items": [
-        {"number": "1984.068.0335b", "csid": "1984.068.0335b", "summary": "This record has at least one related record of each type that there's a tab active for.", "recordtype": "cataloging"},
-        {"number": "1984.068.0338", "csid": "1984.068.0338", "summary": "large post-conquest Ming Dynasty Chrome pan.", "recordtype": "cataloging"},
-        {"number": "2005.018.1383", "csid": "2005.018.1383", "summary": "This record has every field filled in.", "recordtype": "cataloging"}
-    ]
+    "items": [{
+        "number": "1984.068.0335b", 
+        "csid": "1984.068.0335b", 
+        "summary": "", 
+        "recordtype": "cataloging",
+        "summarylist": {
+            "nametitle": "This record has at least one related record of each type that there's a tab active for.",
+            "objectNumber": "1984.068.0335b",
+            "updatedAt": "2011-04-18T18:11:41Z"
+        }
+    }, {
+        "number": "1984.068.0338", 
+        "csid": "1984.068.0338", 
+        "summary": "large post-conquest Ming Dynasty Chrome pan.", 
+        "recordtype": "cataloging",
+        "summarylist": {
+            "nametitle": "large post-conquest Ming Dynasty Chrome pan.",
+            "objectNumber": "1984.068.0338",
+            "updatedAt": "2011-04-18T17:22:21Z"
+        }
+    }, {
+        "number": "2005.018.1383", 
+        "csid": "2005.018.1383", 
+        "summary": "This record has every field filled in.", 
+        "recordtype": "cataloging",
+        "summarylist": {
+            "nametitle": "This record has every field filled in.",
+            "objectNumber": "2005.018.1383",
+            "updatedAt": "2011-04-18T16:31:11Z"
+        }
+    }]
 }

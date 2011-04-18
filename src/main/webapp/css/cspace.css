@@ -1546,7 +1546,7 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
     background-color:#6E9FCE !important;
     color:#fff !important; 
 }
-.cs-recordList .cs-recordList-title-columnValue {
+.cs-recordList .cs-recordList-title-column {
     float: left;
     padding: 0 2px 0 4px;
     text-overflow:ellipsis;
@@ -1554,41 +1554,24 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
     white-space:nowrap;
     display: block;
 }
-.cs-recordList .cs-recordList-columnValue {
-    float: left;
+.cs-recordList .cs-recordList-column {
     padding: 0 2px 0 4px;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    display: inline-block;
 }
 .cs-recordList .cs-recordList-column1 {
     width: 98%;
-    min-width: 98%;
-    text-overflow:ellipsis;
-    overflow:hidden;
-    white-space:nowrap;
-    display: block;
 }
 .cs-recordList .cs-recordList-column2 {
     width: 47.6%;
-    min-width: 47.6%;
-    text-overflow:ellipsis;
-    overflow:hidden;
-    white-space:nowrap;
-    display: block;
 }
 .cs-recordList .cs-recordList-column3 {
     width: 31.5%;
-    min-width: 31.5%;
-    text-overflow:ellipsis;
-    overflow:hidden;
-    white-space:nowrap;
-    display: block;
 }
 .cs-recordList .cs-recordList-column4 {
     width: 24.5%;
-    min-width: 24.5%;
-    text-overflow:ellipsis;
-    overflow:hidden;
-    white-space:nowrap;
-    display: block;
 }
 .cs-recordList .cs-recordList-title-row {
     -moz-border-radius: 4px 0 0 0;
@@ -1603,6 +1586,10 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
     font-size: 11px;
     padding: 4px 0 3px 0;
 }
+.right-sidebar .cs-recordList .cs-recordList-title-row {
+    -moz-border-radius: 0;
+	-webkit-border-radius: 0;
+}
 .cs-recordList-new {
     min-height: 13px;
     width: 100%;
@@ -1615,7 +1602,7 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
 .cs-recordList .csc-recordList-row:focus {
     background-color: #C3D9E9;
 }
-.cs-recordList .csc-recordList-row {
+.cs-recordList .cs-recordList-row {
     padding: 5px 0 4px 0;
     background-color: #F0F5FB;
     border-bottom: 0 solid #ADADAD;
@@ -1648,6 +1635,10 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
 .cs-recordList .cs-recordList-row:last-child {
     -moz-border-radius: 0 0 4px 4px;
 	-webkit-border-radius: 0 0 4px 4px;
+}
+.right-sidebar .cs-recordList .cs-recordList-row:last-child {
+    -moz-border-radius: 0;
+	-webkit-border-radius: 0;
 }
 .cs-recordList .cs-recordList-deleteRelation {
     background: transparent url('../images/icnDeleteIdle.png') no-repeat right center;

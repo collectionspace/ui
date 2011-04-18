@@ -62,12 +62,17 @@ cspace = cspace || {};
     };
     
     cspace.relatedRecordsList.buildRelationsListColumns = function (related) {
-        var columnns = ["number"];
         if (related !== "cataloging") {
-            columnns.push("recordtype");
+            return ["number", "recordtype", "summary"];
         }
-        columnns.push("summary");
-        return columnns;
+        return ["number", "summary", "summarylist.updatedAt"];
+    };
+    
+    cspace.relatedRecordsList.buildRelationsListNames = function (related) {
+        if (related !== "cataloging") {
+            return;
+        }
+        return ["number", "summary", "updatedAt"];
     };
     
     cspace.relatedRecordsList.produceTree = function(that) {
