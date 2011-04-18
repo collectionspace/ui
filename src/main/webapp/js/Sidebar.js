@@ -143,8 +143,8 @@ cspace = cspace || {};
                     primary: "{sidebar}.options.primaryRecordType",
                     related: "cataloging",
                     applier: "{sidebar}.options.recordApplier",
-                    uispec : "{sidebar}.options.uispec.relatedCataloging",
-                    model: "{sidebar}.options.recordModel"
+                    model: "{sidebar}.options.recordModel",
+                    relationsElPath: "{sidebar}.options.relationsElPath"
                 }
             },
             procedures: {
@@ -153,8 +153,8 @@ cspace = cspace || {};
                     primary: "{sidebar}.options.primaryRecordType",
                     related: "procedures",
                     applier: "{sidebar}.options.recordApplier",
-                    uispec : "{sidebar}.options.uispec.relatedProcedures",
-                    model: "{sidebar}.options.recordModel"
+                    model: "{sidebar}.options.recordModel",
+                    relationsElPath: "{sidebar}.options.relationsElPath"
                 }
             },
             togglable: {

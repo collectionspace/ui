@@ -232,17 +232,25 @@ cspace = cspace || {};
         return tree;
     };
     
-    cspace.recordList.selectNavigate = function (model, options, url) {
+    var selectNavigate = function (model, options, url, typePath) {
         var record = model[options.elPaths.items][model.selectonIndex];
         if (!record) {
             return;
         }
         options.globalNavigator.events.onPerformNavigation.fire(function () {
             window.location = fluid.stringTemplate(url, {
-                recordType: record.recordtype,
+                recordType: record[typePath].toLowerCase(),
                 csid: record.csid
             });
         });
+    };
+    
+    cspace.recordList.selectNavigateVocab = function (model, options, url) {
+        selectNavigate(model, options, url, "sourceFieldType");
+    };
+    
+    cspace.recordList.selectNavigate = function (model, options, url) {
+        selectNavigate(model, options, url, "recordtype");
     };
     
     cspace.recordList.selectFromList = function (model, options, dataContext) {

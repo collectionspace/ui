@@ -1,0 +1,81 @@
+{
+    "termsUsed": [
+        
+    ],
+    "relations": [
+        
+    ],
+    "csid": "0db43bf2-533b-4a0b-9ea5",
+    "refobjs": [
+        {
+            "summary": "New Location",
+            "sourceFieldName": "movementContact",
+            "summarylist": {
+                "movementReferenceNumber": "MV2011.1",
+                "docType": "Movement",
+                "sourceField": "movements_common:movementContact",
+                "docId": "4ff65945-fc97-4ef7-89b3",
+                "docNumber": "",
+                "uri": "movements/4ff65945-fc97-4ef7-89b3",
+                "currentLocation": "New Location"
+            },
+            "sourceFieldType": "Movement",
+            "sourceFieldselector": ".csc-movement-movementContact",
+            "csid": "4ff65945-fc97-4ef7-89b3",
+            "number": "MV2011.1"
+        },
+        {
+            "summary": "Zsa Zsa Gabor",
+            "sourceFieldName": "currentOwner",
+            "summarylist": {
+                "movementReferenceNumber": "",
+                "docType": "ObjectExit",
+                "sourceField": "objectexit_common:currentOwner",
+                "exitNumber": "EX2011.1",
+                "docId": "2b3da6fb-3b8b-4f43-a045",
+                "docNumber": "EX2011.1",
+                "uri": "objectexit/2b3da6fb-3b8b-4f43-a045",
+                "currentLocation": ""
+            },
+            "sourceFieldType": "ObjectExit",
+            "sourceFieldselector": ".csc-objectexit-currentOwner",
+            "csid": "2b3da6fb-3b8b-4f43-a045",
+            "number": "EX2011.1"
+        }
+    ],
+    "fields": {
+        "surName": "",
+        "birthPlace": "",
+        "deathDate": "",
+        "nationalities": [
+            
+        ],
+        "shortIdentifier": "zsazsagabor",
+        "schoolsOrStyles": [
+            
+        ],
+        "title": "",
+        "initials": "",
+        "nameNote": "",
+        "termStatus": "",
+        "gender": "",
+        "birthDate": "",
+        "foreName": "",
+        "groups": [
+            
+        ],
+        "nameAdditions": "",
+        "recordtype": "person",
+        "occupations": [
+            
+        ],
+        "middleName": "",
+        "bioNote": "",
+        "csid": "0db43bf2-533b-4a0b-9ea5",
+        "deathPlace": "",
+        "displayName": "Zsa Zsa Gabor",
+        "salutation": "",
+        "authorityid": "202514bf-18c2-48a2-922c",
+        "refid": "urn:cspace:org.collectionspace.demo:personauthority:id(202514bf-18c2-48a2-922c):person:id(0db43bf2-533b-4a0b-9ea5)'Zsa+Zsa+Gabor'"
+    }
+}

@@ -92,6 +92,7 @@ cspace = cspace || {};
     cspace.pageBuilderIO = function (options) {
         var that = fluid.initLittleComponent("cspace.pageBuilderIO", options);
         fluid.instantiateFirers(that, that.options);
+        that.recordTypeTag = fluid.typeTag(that.options.recordType);
         fluid.initDependents(that);
         
         that.options.components = {

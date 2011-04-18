@@ -18,7 +18,7 @@ cspace = cspace || {};
     fluid.registerNamespace("cspace.relatedRecordsList");
     
     var addModelChangeListener = function (that, recordTypes, applier, recordList, recordType, related) {
-        applier.modelChanged.addListener("relations." + recordType, function (model) {
+        applier.modelChanged.addListener(that.options.relationsElPath + "." + recordType, function (model) {
             var instantiator = that.options.instantiator;
             that.renderer.refreshView();
             fluid.each(that.options.components, function (component, name) {
@@ -108,7 +108,8 @@ cspace = cspace || {};
                     primary: "{relatedRecordsList}.options.primary",
                     related: "{relatedRecordsList}.options.related",
                     applier: "{relatedRecordsList}.options.applier",
-                    model: "{relatedRecordsList}.model"
+                    model: "{relatedRecordsList}.model",
+                    relationsElPath: "{relatedRecordsList}.options.relationsElPath"
                 }
             },
             togglableRelated: {

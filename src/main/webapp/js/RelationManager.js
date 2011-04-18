@@ -18,12 +18,12 @@ cspace = cspace || {};
     
     fluid.registerNamespace("cspace.relationManager");
 
-    var updateRelations = function (applier, model, remove) {
+    var updateRelations = function (relationsElPath, applier, model, remove) {
         return remove ? function (relations) {
             var related = relations.target.recordtype;
-            var elPath = "relations." + related;
+            var elPath = relationsElPath + "." + related;
             var csid = relations.target.csid;
-            var newModelRelations = fluid.copy(model.relations[related]);
+            var newModelRelations = fluid.copy(model[relationsElPath][related]);
             fluid.remove_if(newModelRelations, function (relation) {
                 return relation.csid === csid;
             });
@@ -33,8 +33,8 @@ cspace = cspace || {};
                 return;
             }
             var related = relations.items[0].target.recordtype;
-            var newModelRelations = fluid.copy(model.relations[related]) || [];
-            var elPath = "relations." + related;
+            var newModelRelations = fluid.copy(model[relationsElPath][related]) || [];
+            var elPath = relationsElPath + "." + related;
             var relIndex = newModelRelations.length;
             fluid.each(relations.items, function (relation) {
                 newModelRelations[relIndex] = relation.target;
@@ -60,8 +60,8 @@ cspace = cspace || {};
         else {
             that.locate("addButton").hide();
         }
-        that.dataContext.events.afterAddRelations.addListener(updateRelations(that.options.applier, that.model));
-        that.dataContext.events.afterRemoveRelations.addListener(updateRelations(that.options.applier, that.model, true));
+        that.dataContext.events.afterAddRelations.addListener(updateRelations(that.options.relationsElPath, that.options.applier, that.model));
+        that.dataContext.events.afterRemoveRelations.addListener(updateRelations(that.options.relationsElPath, that.options.applier, that.model, true));
     };
     
     cspace.relationManager = function (container, options) {
@@ -78,7 +78,7 @@ cspace = cspace || {};
     };
     
     cspace.relationManager.provideLocalAddRelations = function (relationManager) {
-        return updateRelations(relationManager.options.applier, relationManager.model);
+        return updateRelations(relationManager.options.relationsElPath, relationManager.options.applier, relationManager.model);
     };
 
     cspace.relationManager.permissionResolver = function (options) {

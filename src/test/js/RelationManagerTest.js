@@ -53,7 +53,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var defaultOpts = {
             applier: applier,
             model: model,
-            addRelations: cspace.relationManager.provideLocalAddRelations
+            addRelations: cspace.relationManager.provideLocalAddRelations,
+            relationsElPath: "relations"
         };
         fluid.merge(null, defaultOpts, opts);
         var testEnv = cspace.tests.testEnvironment({permissions: permissions});

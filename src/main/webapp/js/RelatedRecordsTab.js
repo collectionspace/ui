@@ -120,6 +120,7 @@ cspace = cspace || {};
             relationManager: {
                 type: "cspace.relationManager",
                 options: {
+                    relationsElPath: "relations",
                     primary: "{relatedRecordsTab}.primary",
                     related: "{relatedRecordsTab}.related",
                     model: "{relatedRecordsTab}.model",
