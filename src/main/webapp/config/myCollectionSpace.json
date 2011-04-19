@@ -30,8 +30,7 @@
                         "permissions": "{pageBuilder}.permissions"
                     }
                 }
-            },
-            "pageType": "myCollectionSpace"
+            }
         }
     }
 }

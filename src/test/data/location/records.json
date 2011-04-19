@@ -1,0 +1,6 @@
+{
+    "items": [
+        {"number": "MST:1:4B", "csid": "11223344", "summary": "MST:1:4B", "recordtype": "location"},
+        {"number": "MST:2:4B", "csid": "11223345", "summary": "MST:2:4B", "recordtype": "location"}
+    ]
+}

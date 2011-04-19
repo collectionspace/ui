@@ -1,0 +1,83 @@
+{   
+    "recordEditor": {
+        ".csc-location-displayName": "${fields.displayName}",
+        ".csc-location-name": "${fields.name}",
+        ".csc-location-accessNote": "${fields.accessNote}",
+        ".csc-location-address": "${fields.address}",
+        ".csc-location-conditionGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.conditionGroup",
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-location-conditionNote": "${{row}.conditionNote}",
+                                            ".csc-location-conditionNoteDate-container": {
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.datePicker",
+                                                        "type": "fluid"
+                                                    }
+                                                ]
+                                            },
+                                            ".csc-location-conditionNoteDate": "${{row}.conditionNoteDate}"
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.conditionGroup"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-location-securityNote": "${fields.securityNote}",
+        ".csc-location-type": {
+            "optionnames": [
+                "Please select a value",
+                "Building",
+                "Room", 
+                "Unit",
+                "Shelf", 
+                "Drawer", 
+                "Tray"
+            ],
+            "optionlist": [
+                "",
+                "building",
+                "room", 
+                "unit",
+                "shelf", 
+                "drawer", 
+                "tray" 
+            ],
+            "selection": "${fields.type}"
+        },
+        ".csc-location-termStatus": {
+            "optionnames": [
+                "Please select a value",
+                "Accepted", 
+                "Provisional", 
+                "Rejected", 
+                "Under Review"
+            ],
+            "optionlist": [
+                "",
+                "accepted", 
+                "provisional", 
+                "rejected", 
+                "underReview"
+            ],
+            "selection": "${fields.termStatus}"
+        }
+    }
+}

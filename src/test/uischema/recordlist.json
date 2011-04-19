@@ -10,7 +10,8 @@
             "cataloging",
             "movement",
             "objectexit",
-            "media"
+            "media",
+            "location"
         ],
         "type": "array"
     }
