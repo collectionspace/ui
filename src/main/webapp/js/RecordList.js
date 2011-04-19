@@ -204,7 +204,7 @@ cspace = cspace || {};
     
     cspace.recordList.produceTreeTabs = function (that) {
         var tree = cspace.recordList.produceTree(that);
-        tree.expander[1].trueTree.expander[0].tree.expander.push({
+        tree.expander[0].trueTree.expander[0].tree.expander.push({
             type: "fluid.renderer.condition",
             condition: that.options.showDeleteButton,
             trueTree: {
