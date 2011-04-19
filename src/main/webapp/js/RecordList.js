@@ -113,33 +113,6 @@ cspace = cspace || {};
             },
             expander: [{
                 type: "fluid.renderer.condition",
-                condition: that.options.showTitle,
-                trueTree: {
-                    titleRow: {
-                        decorators: {
-                            type: "addClass",
-                            classes: that.options.styles.titleRow
-                        }
-                    },
-                    expander: {
-                        repeatID: "titleColumn",
-                        type: "fluid.renderer.repeat",
-                        pathAs: "titleColumn",
-                        controlledBy: "names",
-                        tree: {
-                            messagekey: "${{titleColumn}}",
-                            decorators: [{
-                                type: "addClass",
-                                classes: that.options.styles.titleColumn
-                            }, {
-                                type: "addClass",
-                                classes: that.options.styles.column + that.options.columns.length.toString()
-                            }]
-                        }
-                    }
-                }
-            }, {
-                type: "fluid.renderer.condition",
                 condition: {
                     funcName: "cspace.recordList.assertItems",
                     args: {
@@ -184,6 +157,33 @@ cspace = cspace || {};
                                 decorators: {
                                     type: "addClass",
                                     classes: that.options.styles.numberOfItems
+                                }
+                            }
+                        }
+                    }, {
+                        type: "fluid.renderer.condition",
+                        condition: that.options.showTitle,
+                        trueTree: {
+                            titleRow: {
+                                decorators: {
+                                    type: "addClass",
+                                    classes: that.options.styles.titleRow
+                                }
+                            },
+                            expander: {
+                                repeatID: "titleColumn",
+                                type: "fluid.renderer.repeat",
+                                pathAs: "titleColumn",
+                                controlledBy: "names",
+                                tree: {
+                                    messagekey: "${{titleColumn}}",
+                                    decorators: [{
+                                        type: "addClass",
+                                        classes: that.options.styles.titleColumn
+                                    }, {
+                                        type: "addClass",
+                                        classes: that.options.styles.column + that.options.columns.length.toString()
+                                    }]
                                 }
                             }
                         }
