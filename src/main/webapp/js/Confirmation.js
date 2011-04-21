@@ -56,7 +56,8 @@ cspace = cspace || {};
             expander: {
                 repeatID: "message:",
                 tree: {
-                    messagekey: "${{message}}"
+                    messagekey: "${{message}}",
+                    args: that.options.termMap
                 },
                 type: "fluid.renderer.repeat",
                 pathAs: "message",

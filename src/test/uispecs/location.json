@@ -157,6 +157,14 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
+                                                            "strings": {
+                                                                "narrowerChange": "Warning: %narrower currently has broader term %broader. Change broader term?"
+                                                            },
+                                                            "invokers": {
+                                                                "selectMatch": {
+                                                                    "funcName": "cspace.autocomplete.selectMatchConfirm"
+                                                                }
+                                                            },
                                                             "queryUrl": "../../chain/location/autocomplete/narrowerContext",
                                                             "vocabUrl": "../../chain/location/source-vocab/narrowerContext"
                                                         }

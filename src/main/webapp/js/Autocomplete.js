@@ -440,12 +440,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var initialRec = cspace.autocomplete.urnToRecord(that.hiddenInput.val());
         updateAuthoritatively(that, initialRec);
     };
-    
-    var makeButtonAdjustor = function (closeButton, model) {
-        return function (hide) {
-            closeButton[model.term === model.baseRecord.label || hide ? "hide": "show"]();
-        };
-    };
 
     cspace.autocompleteImpl = function (container, options) {
         var that = fluid.initView("cspace.autocomplete", container, options);
@@ -458,16 +452,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.initDependents(that);
        
         that.closeButton.button.attr("title", that.options.strings.closeButton);
-        var buttonAdjustor = makeButtonAdjustor(that.closeButton, that.model);
        
         that.autocomplete.events.onSearch.addListener(
             function (newValue, permitted) {
                 that.model.term = newValue; // TODO: use applier and use "double wait" in "flapjax style"
                 if (permitted) {
-                    buttonAdjustor(true); // hide the button to show the "loading indicator"
+                    that.buttonAdjustor(true); // hide the button to show the "loading indicator"
                     that.matchesSource.get(that.model, function (matches) {
                         that.model.matches = matches;
-                        buttonAdjustor();
+                        that.buttonAdjustor();
                         that.popup.open();
                         that.autocomplete.events.onSearchDone.fire(newValue);
                     });
@@ -477,33 +470,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         var blankRec = cspace.autocomplete.urnToRecord("");
                         updateAuthoritatively(that, blankRec);
                     }
-                    buttonAdjustor();
+                    that.buttonAdjustor();
                     that.popup.closeWithFocus();
                 }
             });
         
-        that.eventHolder.events.selectMatch.addListener(
-            function (key) {
-                var match = that.model.matches[key];
-                updateAuthoritatively(that, match);
-                buttonAdjustor();
-            });
-            
-        that.eventHolder.events.selectAuthority.addListener(
-            function (key) {
-                var authority = that.model.authorities[key];
-                that.newTermSource.put({fields: {displayName: that.model.term}}, {termUrl: authority.url}, 
-                    function (response) {
-                        updateAuthoritatively(that, response);
-                        buttonAdjustor();
-                    });
-            });
-        that.eventHolder.events.revertState.addListener(
-            function () {
-                updateAuthoritatively(that, that.model.baseRecord);
-                buttonAdjustor();
-                that.popup.close();              
-            });
+        that.eventHolder.events.selectMatch.addListener(that.selectMatch);
+        that.eventHolder.events.selectAuthority.addListener(that.selectAuthority);
+        that.eventHolder.events.revertState.addListener(that.revertState);
 
         // TODO: risk of asynchrony
         that.authoritiesSource.get(null, function (authorities) {
@@ -518,11 +492,80 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         return that;
     };
     
+    cspace.autocomplete.buttonAdjustor = function (closeButton, model, hide) {
+        closeButton[model.term === model.baseRecord.label || hide ? "hide": "show"]();
+    };
+    
+    cspace.autocomplete.selectAuthority = function (that, key) {
+        var authority = that.model.authorities[key];
+        that.newTermSource.put({fields: {displayName: that.model.term}}, {termUrl: authority.url}, function (response) {
+            updateAuthoritatively(that, response);
+            that.buttonAdjustor();
+        });
+    };
+    
+    cspace.autocomplete.revertState = function (that) {
+        updateAuthoritatively(that, that.model.baseRecord);
+        that.buttonAdjustor();
+        that.popup.close();
+    };
+    
+    cspace.autocomplete.selectMatch = function (that, key) {
+        var match = that.model.matches[key];
+        updateAuthoritatively(that, match);
+        that.buttonAdjustor();
+    };
+    
+    cspace.autocomplete.selectMatchConfirm = function (that, key) {
+        that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+            listeners: {
+                onClose: function (userAction) {
+                    if (userAction === "act") {
+                        var match = that.model.matches[key];
+                        updateAuthoritatively(that, match);
+                        that.buttonAdjustor();
+                    } else {
+                        that.revertState();
+                    }
+                }
+            },
+            termMap: {
+                narrower: that.model.matches[key]["label"],
+                broader: "HERE GOES THE BROADER TERM"
+            },
+            strings: {
+                primaryMessage: that.options.strings.narrowerChange,
+                actText: "Yes",
+                actAlt: "yes",
+                cancelText: "No",
+                cancelAlt: "no"
+            }
+        });
+    };
+    
     fluid.defaults("cspace.autocomplete", {
         gradeNames: ["fluid.viewComponent"],
         termSaverFn: cspace.autocomplete.ajaxTermSaver,
         minChars: 3,
         delay: 500,
+        invokers: {
+            buttonAdjustor: {
+                funcName: "cspace.autocomplete.buttonAdjustor",
+                args: ["{autocomplete}.closeButton", "{autocomplete}.model", "{arguments}.0"]
+            },
+            selectAuthority: {
+                funcName: "cspace.autocomplete.selectAuthority",
+                args: ["{autocomplete}", "{arguments}.0"]
+            },
+            revertState: {
+                funcName: "cspace.autocomplete.revertState",
+                args: ["{autocomplete}"]
+            },
+            selectMatch: {
+                funcName: "cspace.autocomplete.selectMatch",
+                args: ["{autocomplete}", "{arguments}.0"]
+            }
+        },
         components: {
             autocomplete: {
                 type: "fluid.autocomplete.autocompleteView",

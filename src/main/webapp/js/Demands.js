@@ -386,6 +386,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete", "cspace.recordEditor", {
             container: "{arguments}.0"
         });
+        fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "location", "cspace.hierarchy"], {
+            container: "{arguments}.0",
+            options: {
+                components: {
+                    confirmation: "{confirmation}"
+                }
+            }
+        });
         
         // Confirmation demands
         fluid.demands("confirmation", "cspace.recordEditor", "{options}");
