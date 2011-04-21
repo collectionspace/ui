@@ -269,6 +269,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.includeDemands = function () {
         
+        // Hierarchy demands
+        fluid.demands("hierarchy", "cspace.recordEditor", {
+            container: "{recordEditor}.dom.hierarchy",
+            options: {
+                model: "{recordEditor}.model",
+                applier: "{recordEditor}.options.applier"
+            }
+        });
+        
         // getDefaultConfigURL demands
         fluid.demands("getRecordType", "cspace.util.getDefaultConfigURL", {
             funcName: "cspace.util.getDefaultConfigURL.getRecordType"
@@ -821,6 +830,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         fluid.demands("togglable", "cspace.sidebar", {
             container: "{sidebar}.container"
+        });
+        fluid.demands("hierarchyTogglable", "cspace.hierarchy", {
+            container: "{hierarchy}.container",
+            options: {
+                selectors: {
+                    header: "{hierarchy}.options.selectors.header",
+                    togglable: "{hierarchy}.options.selectors.togglable"
+                }
+            }
         });
         
         // Password validator demands

@@ -11,7 +11,19 @@
                     "options": {
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model"
+                        "model": "{pageBuilder}.model",
+                        "selectors": {
+                            "hierarchy": ".csc-location-hierarchy"
+                        },
+                        "selectorsToIgnore": ["requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
+                        "deferredComponents": {
+                            "hierarchy": {
+                                "type": "cspace.hierarchy",
+                                "options": {
+                                    "uispec": "{pageBuilder}.options.uispec.hierarchy"
+                                }
+                            }
+                        }
                     }
                 },
                 "titleBar": {

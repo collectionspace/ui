@@ -316,7 +316,7 @@ cspace = cspace || {};
         return tree;
     };
     
-    // NOTE: THIS IS A HACK BECAUSE THE SERVER DOES NOT RETURN ANY PAYLOAD RELATED TO THE MEDIA ATTACHED.
+    // NOTE: THIS IS A HACK BECAUSE THE SERVER DOES NOT RETURN ANY PAYLOAD RELATED TO THE MEDIA ATTACHED (CSPACE-3757).
     cspace.recordEditor.produceTreeMedia = function (that) {
         var tree = cspace.recordEditor.produceTree(that);
         fluid.merge(null, tree.expander[0].trueTree, {

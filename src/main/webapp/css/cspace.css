@@ -1658,3 +1658,11 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
 .cs-media-image {
     cursor:pointer;
 }
+.cs-hierarchy-equivalentContext {
+    background: #FFF;
+    display: block;
+    width: 100%;
+    border: 1px solid #C7CFD4;
+    height: 19px;
+    line-height: 15px;
+}

@@ -1,9 +1,13 @@
 {   
     "recordEditor": {
+        ".csc-location-tenantID": "${fields.tenantID}",
+        ".csc-location-createdAt": "${fields.createdAt}",
+        ".csc-location-updatedAt": "${fields.updatedAt}",
         ".csc-location-displayName": "${fields.displayName}",
         ".csc-location-name": "${fields.name}",
         ".csc-location-accessNote": "${fields.accessNote}",
         ".csc-location-address": "${fields.address}",
+        ".csc-location-shortIdentifier": "${fields.shortIdentifier}",
         ".csc-location-conditionGroup": {
             "decorators": [
                 {
@@ -44,40 +48,176 @@
         ".csc-location-type": {
             "optionnames": [
                 "Please select a value",
-                "Building",
-                "Room", 
+                "Shelf",
+                "Drawer",
+                "Tray",
                 "Unit",
-                "Shelf", 
-                "Drawer", 
-                "Tray"
+                "Room",
+                "Building"
             ],
             "optionlist": [
                 "",
-                "building",
-                "room", 
+                "shelf",
+                "drawer",
+                "tray",
                 "unit",
-                "shelf", 
-                "drawer", 
-                "tray" 
+                "room",
+                "building"
             ],
             "selection": "${fields.type}"
         },
         ".csc-location-termStatus": {
             "optionnames": [
                 "Please select a value",
-                "Accepted", 
-                "Provisional", 
-                "Rejected", 
-                "Under Review"
+                "Provisional",
+                "Under Review",
+                "Accepted",
+                "Rejected"
             ],
             "optionlist": [
                 "",
-                "accepted", 
-                "provisional", 
-                "rejected", 
-                "underReview"
+                "provisional",
+                "under review",
+                "accepted",
+                "rejected"
             ],
             "selection": "${fields.termStatus}"
+        }
+    },
+    "hierarchy": {
+        ".csc-location-broaderContext-label": {
+            "messagekey": "location-broaderContextLabel"
+        },
+        ".csc-location-broaderContext": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../chain/location/autocomplete/broaderContext",
+                        "vocabUrl": "../../chain/location/source-vocab/broaderContext"
+                    }
+                }
+            ],
+            "value": "${fields.broaderContext}"
+        },
+        "expander": [{
+            "type": "fluid.renderer.condition",
+            "condition": {
+                "funcName": "cspace.hierarchy.assertEquivalentContexts",
+                "args": {
+                    "equivalentContexts": "${fields.equivalentContexts}"
+                }
+            },
+            "trueTree": {
+                ".csc-location-equivalentContext-label": {
+                    "messagekey": "location-equivalentContextLabel"
+                }
+            },
+            "falseTree": {
+                ".csc-location-equivalentContext-label": {
+                    "decorators": {
+                        "type": "addClass",
+                        "classes": "hidden"
+                    }
+                }
+            }
+        }, {
+            "repeatID": ".csc-location-equivalentContext:",
+            "tree": {
+                "value": "${{row}.equivalentContext}",
+                "decorators": {
+                    "type": "addClass",
+                    "classes": "cs-hierarchy-equivalentContext"
+                }
+            },
+            "type": "fluid.renderer.repeat",
+            "pathAs": "row",
+            "controlledBy": "fields.equivalentContexts"
+        }],
+        ".csc-location-narrowerContext-label": {
+            "messagekey": "location-narrowerContextLabel"
+        },
+        ".csc-location-narrowerContext": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.narrowerContexts",
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-location-narrowerContext": {
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.autocomplete",
+                                                        "type": "fluid",
+                                                        "options": {
+                                                            "queryUrl": "../../chain/location/autocomplete/narrowerContext",
+                                                            "vocabUrl": "../../chain/location/source-vocab/narrowerContext"
+                                                        }
+                                                    }
+                                                ],
+                                                "value": "${{row}.narrowerContext}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.narrowerContexts"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-location-relatedTerm-label": {
+            "messagekey": "location-relatedTermLabel"
+        },
+        ".csc-location-relatedTerm": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.relatedTerms",
+                        "protoTree": {
+                            "expander": {
+                                "tree": {
+                                    "expander": {
+                                        "repeatID": "repeat:",
+                                        "tree": {
+                                            ".csc-location-relatedTerm": {
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.autocomplete",
+                                                        "type": "fluid",
+                                                        "options": {
+                                                            "queryUrl": "../../chain/location/autocomplete/relatedTerm",
+                                                            "vocabUrl": "../../chain/location/source-vocab/relatedTerm"
+                                                        }
+                                                    }
+                                                ],
+                                                "value": "${{row}.relatedTerm}"
+                                            }
+                                        },
+                                        "type": "fluid.renderer.repeat",
+                                        "pathAs": "row",
+                                        "controlledBy": "fields.relatedTerms"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        }
+                    }
+                }
+            ]
         }
     }
 }
