@@ -72,15 +72,22 @@ cspace = cspace || {};
         that.renderer.refreshView();
     };
     
+    var initDependent = function (that, key) {
+        return function () {
+            fluid.initDependent(that, key, that.options.instantiator);
+        };
+    };
+    
     cspace.myCollectionSpace = function (container, options) {
         var that = fluid.initRendererComponent("cspace.myCollectionSpace", container, options);
         setupMyCollectionSpace(that);
         fluid.withEnvironment({resourceSpecCollector: that.options.collector}, function () {
             that.options.components = fluid.expander.expandLight(that.options.components, {noValue: true});
         });
-        fluid.fetchResources(that.options.collector, function () {
-            fluid.initDependents(that);
+        fluid.each(that.options.collector, function (spec, key) {
+            spec.options.success = cspace.util.composeCallbacks(spec.options.success, initDependent(that, key));
         });
+        fluid.fetchResources(that.options.collector);
         return that;
     };
     
@@ -139,6 +146,10 @@ cspace = cspace || {};
     
     fluid.defaults("cspace.myCollectionSpace", {
         gradeNames: ["fluid.IoCRendererComponent"],
+        instantiator: "{instantiator}",
+        mergePolicy: {
+            instantiator: "nomerge"
+        },
         selectors: {
             "category:": ".csc-myCollectionSpace-category", 
             "group:": ".csc-myCollectionSpace-group",
