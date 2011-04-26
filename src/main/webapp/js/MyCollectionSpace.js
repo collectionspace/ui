@@ -87,6 +87,7 @@ cspace = cspace || {};
         fluid.each(that.options.collector, function (spec, key) {
             spec.options.success = cspace.util.composeCallbacks(spec.options.success, initDependent(that, key));
         });
+        fluid.initDependent(that, "togglable", that.options.instantiator);
         fluid.fetchResources(that.options.collector);
         return that;
     };

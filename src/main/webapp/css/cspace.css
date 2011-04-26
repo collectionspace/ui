@@ -1266,6 +1266,24 @@ input[disabled]:hover, input[disabled]:hover	{
 	/*outline: 1px solid black;*/}
 
 /*   styling the loading progress indicator */
+.cs-loading-indicator {
+    opacity: 0.85;
+    filter:alpha(opacity=85);
+    z-index: 9999;
+    background: #FFF url('../images/indeterminateProgressSpinner_92x92_blackonwhite.gif') no-repeat center center;
+    position: absolute;
+}
+.cs-loading-indicator.cs-loading-contain {
+    opacity: 0.85;
+    filter:alpha(opacity=85);
+    z-index: 9999;
+    background: #FFF url('../images/indeterminateProgressSpinner_92x92_blackonwhite.gif') no-repeat center center;
+    position: absolute;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+}
 .cs-loading-root {
     position: absolute;
     background-color: white;

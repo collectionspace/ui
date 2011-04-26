@@ -609,26 +609,6 @@ fluid.registerNamespace("cspace.util");
         };
     };
     
-    function createMarkup(that) {
-        var markup = $(that.options.markup);
-        markup.hide();
-        markup.addClass(that.options.styles.rootClass);
-        that.locate("image", markup).attr("src", that.options.imageUrl);
-        that.locate("message", markup).text(that.options.strings.loadingMessage);
-        $("body").append(markup);
-        return markup;
-    }
-    
-    function updateDimensions(that) {
-        var target = that.container[0];
-        that.indicator.css({
-            left: target.offsetLeft + "px",
-            top: (target.offsetTop - that.options.heightExpand) + "px",
-            width: target.offsetWidth + "px",
-            height: (target.offsetHeight + that.options.heightExpand * 2) + "px" 
-        });
-    }
-    
     var isDecorator = function (source, type) {
         if (!source.decorators || !source.decorators[0]) {
             return false;
@@ -786,72 +766,139 @@ fluid.registerNamespace("cspace.util");
     cspace.util.resolveReadOnlyUISpec = function (uispec, readOnly) {
         return readOnly ? resolveReadOnlyUISpecImpl(uispec) : uispec;
     };
+    
+//    function createMarkup(that) {
+//        var markup = $(that.options.markup);
+//        markup.hide();
+//        markup.addClass(that.options.styles.rootClass);
+//        that.locate("image", markup).attr("src", that.options.imageUrl);
+//        that.locate("message", markup).text(that.options.strings.loadingMessage);
+//        $("body").append(markup);
+//        return markup;
+//    }
+
+    function updateDimensions(that) {
+        var target = that.container[0];
+        that.indicator[target.offsetHeight < that.options.spinnerDimensions.height || 
+                       target.offsetWidth < that.options.spinnerDimensions.width ? 
+                       "addClass" : "removeClass"](that.options.styles.contain);
+        that.indicator.css({
+            left: target.offsetLeft + "px",
+            top: target.offsetTop + "px",
+            width: target.offsetWidth + "px",
+            height: target.offsetHeight + "px" 
+        });
+    }
+
+//    cspace.util.globalLoadingIndicator = function (container, options) {
+//        var that = fluid.initView("cspace.util.globalLoadingIndicator", container, options);
+//        that.indicator = createMarkup(that);
+//        that.show = function () {
+//            that.update();
+//            that.indicator.show();
+//        };
+//        
+//        that.update = function () {
+//            updateDimensions(that);
+//        };
+//        
+//        that.hide = function () {
+//            that.indicator.hide();
+//        };
+//        
+//        return that;  
+//    };
+
+    fluid.defaults("cspace.util.loadingIndicator", {
+        gradeNames: ["fluid.viewComponent", "autoInit"],
+        preInitFunction: "cspace.util.loadingIndicator.preInitFunction",
+        postInitFunction: "cspace.util.loadingIndicator.postInitFunction",
+        styles: {
+            loading: "cs-loading-indicator",
+            contain: "cs-loading-contain"
+        },
+        events: {
+            showOn: null,
+            hideOn: null
+        },
+        spinnerDimensions: {
+            height: 92,
+            width: 92
+        }
+    });
+    
+    cspace.util.loadingIndicator.postInitFunction = function (that) {
+        that.indicator = $("<div />");
+        that.indicator.hide();
+        that.indicator.addClass(that.options.styles.loading);
+        that.container.after(that.indicator);
         
-    cspace.util.globalLoadingIndicator = function (container, options) {
-        var that = fluid.initView("cspace.util.globalLoadingIndicator", container, options);
-        that.indicator = createMarkup(that);
-        that.show = function () {
-            that.indicator.show();
-            that.update();
-        };
-        
+        that.container.resize(that.update);
+        $(document).bind("DOMSubtreeModified", that.update);
+    };
+    
+    cspace.util.loadingIndicator.preInitFunction = function (that) {
         that.update = function () {
             updateDimensions(that);
         };
-        
+        that.show = function () {
+            that.update();
+            that.indicator.show();
+        };
         that.hide = function () {
             that.indicator.hide();
         };
-        
-        return that;  
+        that.options.listeners = {
+            showOn: that.show,
+            hideOn: that.hide
+        };
     };
     
-    fluid.defaults("cspace.util.globalLoadingIndicator", {
-        gradeNames: ["fluid.viewComponent"],
-        imageUrl: "../images/indeterminateProgressSpinner_92x92_blackonwhite.gif",
-        selectors: {
-            image: "img",
-            message: "span"  
-        },
-        styles: {
-            rootClass: "cs-loading-root"
-        },
-        strings: {
-            loadingMessage: "Loading..."          
-        },
-        heightExpand: 5,
-        markup: "<div><div class=\"cs-loading-centre\"><span>Message here</span><br/><img src=\"#\"/></div></div>"
-    });
-    
-    cspace.util.globalLoadingAssociator = function (options) {
-        var that = fluid.initLittleComponent("cspace.util.globalLoadingAssociator", options);
-        var indicator = cspace.util.globalLoadingIndicator(that.options.indicatorTarget, that.options.indicatorOptions);
-        that.supplySpecs = function (resourceSpecs) {
-            var mainWait = that.options.mainWaitSpec;
-            if (!mainWait) {
-                indicator.show();
-            }
-            fluid.each(resourceSpecs, function (spec, key) {
-                spec.options.success = cspace.util.composeCallbacks(spec.options.success, key === mainWait ? indicator.show : indicator.update);
-            });
-            if (!resourceSpecs[mainWait]) {
-                indicator.show();
-            }
-        };
-        that.wrapCallback = function (callback) {
-            return cspace.util.composeCallbacks(
-                indicator.hide, callback
-                );
-        };
-        return that;     
-    };
-
-    fluid.defaults("cspace.util.globalLoadingAssociator", {
-        gradeNames: ["fluid.littleComponent"],
-        indicatorTarget: "#all-content",
-        mainWaitSpec: "recordEditor",
-        indicatorOptions: {}
-    });
+//    fluid.defaults("cspace.util.globalLoadingIndicator", {
+//        gradeNames: ["fluid.viewComponent"],
+//        imageUrl: "../images/indeterminateProgressSpinner_92x92_blackonwhite.gif",
+//        selectors: {
+//            image: "img",
+//            message: "span"  
+//        },
+//        styles: {
+//            rootClass: "cs-loading-root"
+//        },
+//        strings: {
+//            loadingMessage: "Loading..."          
+//        },
+//        markup: "<div><div class=\"cs-loading-centre\"><span>Message here</span><br/><img src=\"#\"/></div></div>"
+//    });
+//    
+//    cspace.util.globalLoadingAssociator = function (options) {
+//        var that = fluid.initLittleComponent("cspace.util.globalLoadingAssociator", options);
+//        var indicator = cspace.util.globalLoadingIndicator(that.options.indicatorTarget, that.options.indicatorOptions);
+//        that.supplySpecs = function (resourceSpecs) {
+//            var mainWait = that.options.mainWaitSpec;
+//            if (!mainWait) {
+//                indicator.show();
+//            }
+//            fluid.each(resourceSpecs, function (spec, key) {
+//                spec.options.success = cspace.util.composeCallbacks(spec.options.success, key === mainWait ? indicator.show : indicator.update);
+//            });
+//            if (!resourceSpecs[mainWait]) {
+//                indicator.show();
+//            }
+//        };
+//        that.wrapCallback = function (callback) {
+//            return cspace.util.composeCallbacks(
+//                indicator.hide, callback
+//                );
+//        };
+//        return that;     
+//    };
+//
+//    fluid.defaults("cspace.util.globalLoadingAssociator", {
+//        gradeNames: ["fluid.littleComponent"],
+//        indicatorTarget: "#all-content",
+//        mainWaitSpec: "recordEditor",
+//        indicatorOptions: {}
+//    });
     
     cspace.util.refreshComponents = function (that) {
         fluid.each(that.options.components, function (component, name) {

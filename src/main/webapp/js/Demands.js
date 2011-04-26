@@ -272,6 +272,20 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.includeDemands = function () {
+    
+        // Loading indicator demands
+        fluid.demands("recordEditorLoadingIndicator", ["cspace.recordEditor", "cspace.listEditor"], {
+            container: "{listEditor}.dom.allDetails",
+            options: {
+                events: {
+                    showOn: "{recordEditor}.options.dataContext.events.onFetch",
+                    hideOn: "{recordEditor}.options.dataContext.events.afterFetch"
+                }
+            }
+        });
+        fluid.demands("recordEditorLoadingIndicator", ["cspace.recordEditor"], {
+            container: "{recordEditor}.container"
+        });
         
         // Hierarchy demands
         fluid.demands("hierarchy", "cspace.recordEditor", {
@@ -291,6 +305,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("roleListEditor", "cspace.adminRoles", {
             container: "{adminRoles}.container", 
             options: {
+                selectors: {
+                    allDetails: ".role-details"
+                },
+                selectorsToIgnore: ["allDetails"],
                 recordType: "role",
                 uispec: "{adminRoles}.options.uispec",
                 urls: {
@@ -301,6 +319,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("userListEditor", "cspace.adminUsers", {
             container: "{adminUsers}.container",
             options: {
+                selectors: {
+                    allDetails: ".user-details"
+                },
+                selectorsToIgnore: ["allDetails"],
                 recordType: "users",
                 uispec: "{adminUsers}.options.uispec",
                 urls: {

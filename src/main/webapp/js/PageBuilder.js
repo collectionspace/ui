@@ -170,7 +170,6 @@ cspace = cspace || {};
                     spec.timeSuccess = true;
                 }
             );
-            that.indicator.supplySpecs(resourceSpecs);
             
             var fetchCallback = function () {
                 if (!options.htmlOnly) {
@@ -180,7 +179,7 @@ cspace = cspace || {};
                 pageSpecManager.conclude();
                 that.events.pageReady.fire();
             };
-            fetchCallback = that.indicator.wrapCallback(fetchCallback);
+            that.events.beforeFetch.fire();
             fluid.fetchResources(resourceSpecs, fetchCallback, {amalgamateClasses: that.options.amalgamateClasses});
         };
         
@@ -216,8 +215,15 @@ cspace = cspace || {};
                     recordType: "{pageBuilderIO}.options.recordType"
                 }
             },
-            indicator: {
-                type: "cspace.util.globalLoadingAssociator"
+            loadingIndicator: {
+                type: "cspace.util.loadingIndicator",
+                container: "body",
+                options: {
+                    events: {
+                        showOn: "{pageBuilderIO}.events.beforeFetch",
+                        hideOn: "{pageBuilderIO}.events.pageReady"
+                    }
+                }
             }
         },
         pageSpec: {},
@@ -229,6 +235,7 @@ cspace = cspace || {};
             }
         },
         events: {
+            beforeFetch: null,
             pageReady: null
         }
     });

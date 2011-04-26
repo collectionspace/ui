@@ -52,7 +52,9 @@ cspace = cspace || {};
             pageReady: null,
             afterAddNewListRow: null,
             afterHideDetails: null,
-            afterShowDetails: null
+            afterShowDetails: null,
+            onListUpdate: null,
+            afterListUpdate: null
         },
         preInitFunction: "cspace.listEditor.preInitFunction",
         finalInitFunction: "cspace.listEditor.finalInitFunction",
@@ -69,6 +71,16 @@ cspace = cspace || {};
         globalNavigator: "{globalNavigator}",
         messageBar: "{messageBar}",
         components: {
+            listLoadingIndicator: {
+                type: "cspace.util.loadingIndicator",
+                container: "{listEditor}.dom.list",
+                options: {
+                    events: {
+                        showOn: "{listEditor}.events.onListUpdate",
+                        hideOn: "{listEditor}.events.afterListUpdate"
+                    }
+                }
+            },
             listSource: {
                 type: "cspace.listEditor.listDataSource"
             },
@@ -116,9 +128,11 @@ cspace = cspace || {};
         that.detailsDC.initDataSource();
         that.bindEvents();
         if (!that.options.listModel) {
+            that.events.onListUpdate.fire();
             that.listSource.get(null, function (listModel) {
                 that.options.listModel = listModel;
                 that.events.beforeCreateList.fire();
+                that.events.afterListUpdate.fire();
             });
         }
         else {
@@ -128,6 +142,7 @@ cspace = cspace || {};
     };
     
     cspace.listEditor.updateListRelated = function (that, primary, csid) {
+        that.events.onListUpdate.fire();
         that.listSource.get({
             recordType: primary,
             csid: csid
@@ -138,6 +153,7 @@ cspace = cspace || {};
     };
     
     cspace.listEditor.updateList = function (that) {
+        that.events.onListUpdate.fire();
         that.listSource.get(null, function (listModel) {
             that.list.applier.requestChange(that.list.options.elPaths.items, listModel[that.list.options.elPaths.items]);
             that.refreshView();
@@ -195,6 +211,7 @@ cspace = cspace || {};
     cspace.listEditor.refreshView = function (that) {
         that.list.refreshView();
         that.hideDetails();
+        that.events.afterListUpdate.fire();
     };
     
     fluid.defaults("cspace.listEditor.testUsersListDataSource", {

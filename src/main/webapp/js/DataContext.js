@@ -128,6 +128,7 @@ cspace = cspace || {};
         };
         
         that.fetch = function (csid) {
+            that.events.onFetch.fire();
             if (that.dataSource) {
                 that.dataSource.provideModel(csid);
             }
@@ -136,24 +137,29 @@ cspace = cspace || {};
             }
         };
         
+        function save () {
+            that.events.onSave.fire();
+            ajax.apply(null, arguments);
+        }
+        
         that.update = function () {
-            ajax("update", that.options, that.events.afterUpdate, that.events, that.model.csid, that.model);
+            save("update", that.options, that.events.afterUpdate, that.events, that.model.csid, that.model);
         };
         
         that.create = function () {
-            ajax("create", that.options, that.events.afterCreate, that.events, null, that.model);
+            save("create", that.options, that.events.afterCreate, that.events, null, that.model);
         };
 
         that.remove = function (csid) {
-            ajax("remove", that.options, that.events.afterRemove, that.events, csid);
+            save("remove", that.options, that.events.afterRemove, that.events, csid);
         };
 
         that.addRelations = function (newRelations) {
-            ajax("addRelations", that.options, that.events.afterAddRelations, that.events, null, newRelations);
+            save("addRelations", that.options, that.events.afterAddRelations, that.events, null, newRelations);
         };
         
         that.removeRelations = function (relations) {
-            ajax("removeRelations", that.options, that.events.afterRemoveRelations, that.events, null, relations);
+            save("removeRelations", that.options, that.events.afterRemoveRelations, that.events, null, relations);
         };
 
         that.baseUrl = function () {
@@ -176,10 +182,12 @@ cspace = cspace || {};
             modelChanged: null,    // newModel, oldModel, source
             afterCreate: null,   // data
             afterRemove: null, // 
+            onFetch: null,
             afterFetch: null,  //  data
             afterUpdate: null,  //  data
             afterAddRelations: null,  //  data
             afterRemoveRelations: null, // data
+            onSave: null,
             afterSave: null,
             onError: null      // operation["create", "remove", "fetch", "update"], message
         },

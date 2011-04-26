@@ -416,6 +416,15 @@ cspace = cspace || {};
                         togglable: "{recordEditor}.options.selectors.togglable"
                     }
                 }
+            },
+            recordEditorLoadingIndicator: {
+                type: "cspace.util.loadingIndicator",
+                options: {
+                    events: {
+                        showOn: "{recordEditor}.options.dataContext.events.onSave",
+                        hideOn: "{recordEditor}.events.afterRender"
+                    }
+                }
             }
         },
         invokers: {
