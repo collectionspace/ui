@@ -221,9 +221,11 @@ var repeatableTester = function ($) {
     
     repeatableTest.test("Markup Generation For Table Headers: THEAD/TR, no TD", function () {
         expect(1);
-        var headerRow = $("#tableContainerTheadTrNoTd " + fluid.defaults("cspace.makeRepeatable").selectors.headerRow);
+        var headerRow = $("#tableContainerTheadTrTh " + fluid.defaults("cspace.makeRepeatable").selectors.headerRow);
+        //clear the contents of the TR:
+        headerRow.empty();
         var previousHeaderColumnCount = $("td", headerRow).length;
-        var myRepeatable = tableSetup("#tableContainerTheadTrNoTd");
+        var myRepeatable = tableSetup("#tableContainerTheadTrTh");
     
         var colHeaders = $("td", headerRow);
         jqUnit.assertEquals("The table header row should have no columns added ", previousHeaderColumnCount, colHeaders.length);
