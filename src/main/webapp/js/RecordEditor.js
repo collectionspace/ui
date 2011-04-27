@@ -340,9 +340,12 @@ cspace = cspace || {};
     };
     
     cspace.recordEditor.navigateToFullImage = function (that) {
-        that.options.globalNavigator.events.onPerformNavigation.fire(function () {
-            window.open(fluid.stringTemplate(that.options.urls.fullImageURL, {csid: that.model.fields.blobCsid}));
-        });
+        window.open(fluid.stringTemplate(that.options.urls.fullImageURL, {
+            csid: that.model.fields.blobCsid
+        }), "_blank", fluid.stringTemplate(that.options.strings.originalMediaOptions, {
+            height: that.options.originalMediaDimensions.height,
+            width: that.options.originalMediaDimensions.width
+        }));
     };
     
     cspace.recordEditor.provideProduceTree = function (recordType) {
