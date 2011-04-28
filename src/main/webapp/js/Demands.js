@@ -342,6 +342,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("listEditor", "cspace.relatedRecordsTab", {
             container: "{relatedRecordsTab}.container",
             options: {
+                selectors: {
+                    allDetails: ".csc-relatedRecordsTab-recordEditor"
+                },
+                selectorsToIgnore: ["allDetails"],
                 uispec: "{relatedRecordsTab}.options.uispec",
                 urls: {
                     listUrl: "%chain/%recordType/%csid"
