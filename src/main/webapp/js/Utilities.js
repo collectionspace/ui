@@ -970,12 +970,14 @@ fluid.registerNamespace("cspace.util");
     
     cspace.globalSetup = function (tag, options) {
         var that = fluid.initLittleComponent("cspace.globalSetup");
+        fluid.instantiateFirers(that, that.options);
         that.options.components.noLogin.options = {
             tag: tag
         };
         fluid.initDependents(that);
         that.init = function (tag, options) {
             options = options || {};
+            that.events.onFetch.fire();
             fluid.fetchResources({
                 config: {
                     href: options.configURL || fluid.invoke("cspace.util.getDefaultConfigURL"),
@@ -1031,7 +1033,11 @@ fluid.registerNamespace("cspace.util");
     };
     
     fluid.defaults("cspace.globalSetup", {
-        gradeNames: ["fluid.littleComponent"],
+        gradeNames: ["fluid.eventedComponent"],
+        events: {
+            onFetch: null,
+            pageReady: null
+        },
         components: {
             instantiator: "{instantiator}",
             globalNavigator: {
@@ -1042,6 +1048,16 @@ fluid.registerNamespace("cspace.util");
             },
             messageBar: {
                 type: "cspace.messageBar"
+            },
+            loadingIndicator: {
+                type: "cspace.util.loadingIndicator",
+                container: "body",
+                options: {
+                    events: {
+                        showOn: "{globalSetup}.events.onFetch",
+                        hideOn: "{globalSetup}.events.pageReady"
+                    }
+                }
             }
         }
     });
@@ -1168,5 +1184,57 @@ fluid.registerNamespace("cspace.util");
     fluid.defaults("cspace.pageCategory", {
         gradeNames: "fluid.littleComponent"
     });
+    
+    cspace.util.isLocalStorage = function () {
+        try {
+            return "localStorage" in window && window["localStorage"] !== null;
+        } catch (e) {
+            return false;
+        }
+    };
+    fluid.defaults("cspace.util.localStorageDataSource", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        preInitFunction: "cspace.util.localStorageDataSource.preInitFunction",
+        invokers: {
+            get: {
+                funcName: "cspace.util.localStorageDataSource.get",
+                args: ["{localStorageDataSource}.resolveElPath", "{arguments}.0"]
+            },
+            set: {
+                funcName: "cspace.util.localStorageDataSource.set",
+                args: ["{localStorageDataSource}.resolveElPath", "{arguments}.0", "{arguments}.1"]
+            },
+            resolveElPath: {
+                funcName: "cspace.util.localStorageDataSource.resolveElPath",
+                args: ["{localStorageDataSource}.options.elPath", "{localStorageDataSource}.options.termMap", "{arguments}.0"]
+            }
+        },
+        elPath: "",
+        termMap: {}
+    });
+    cspace.util.localStorageDataSource.get = function (resolveElPath, directModel) {
+        return JSON.parse(localStorage[resolveElPath(directModel)]);
+    };
+    cspace.util.localStorageDataSource.set = function (resolveElPath, model, directModel) {
+        localStorage[resolveElPath(directModel)] = JSON.stringify(model);
+    };
+    cspace.util.localStorageDataSource.resolveElPath = function (elPath, termMap, directModel) {
+        var expander = fluid.invoke("cspace.urlExpander");
+        var map = fluid.copy(termMap);
+        map = fluid.transform(map, function (entry) {
+            if (entry.charAt(0) === "%") {
+                entry = fluid.get(directModel, entry.substring(1));
+            }
+            return entry;
+        });
+        var replaced = fluid.stringTemplate(elPath, map);
+        replaced = expander(replaced);
+        return replaced;
+    };
+    cspace.util.localStorageDataSource.preInitFunction = function () {
+        if (!cspace.util.isLocalStorage()) {
+            fluid.fail("Your browser does not support local storage!");
+        }
+    };
     
 })(jQuery, fluid);

@@ -179,7 +179,6 @@ cspace = cspace || {};
                 pageSpecManager.conclude();
                 that.events.pageReady.fire();
             };
-            that.events.beforeFetch.fire();
             fluid.fetchResources(resourceSpecs, fetchCallback, {amalgamateClasses: that.options.amalgamateClasses});
         };
         
@@ -214,16 +213,6 @@ cspace = cspace || {};
                 options: {
                     recordType: "{pageBuilderIO}.options.recordType"
                 }
-            },
-            loadingIndicator: {
-                type: "cspace.util.loadingIndicator",
-                container: "body",
-                options: {
-                    events: {
-                        showOn: "{pageBuilderIO}.events.beforeFetch",
-                        hideOn: "{pageBuilderIO}.events.pageReady"
-                    }
-                }
             }
         },
         pageSpec: {},
@@ -235,7 +224,6 @@ cspace = cspace || {};
             }
         },
         events: {
-            beforeFetch: null,
             pageReady: null
         }
     });

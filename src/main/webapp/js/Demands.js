@@ -272,6 +272,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.includeDemands = function () {
+        
+        // PageBuilderIO
+        fluid.demands("cspace.pageBuilderIO", "cspace.globalSetup", {
+            options: {
+                listeners: {
+                    pageReady: "{globalSetup}.events.pageReady.fire"
+                }
+            }
+        });
     
         // Loading indicator demands
         fluid.demands("recordEditorLoadingIndicator", ["cspace.recordEditor", "cspace.listEditor"], {

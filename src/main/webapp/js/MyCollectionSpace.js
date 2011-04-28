@@ -63,6 +63,8 @@ cspace = cspace || {};
     };
     
     var setupMyCollectionSpace = function (that) {
+        fluid.initDependent(that, "myCollectionSpaceLoadingIndicator", that.options.instantiator);
+        that.events.onFetch.fire();
         cspace.util.modelBuilder.fixupModel(that.model);
         var options = that.options;
         fluid.remove_if(options.components, function (component, key) {
@@ -88,7 +90,9 @@ cspace = cspace || {};
             spec.options.success = cspace.util.composeCallbacks(spec.options.success, initDependent(that, key));
         });
         fluid.initDependent(that, "togglable", that.options.instantiator);
-        fluid.fetchResources(that.options.collector);
+        fluid.fetchResources(that.options.collector, function () {
+            that.events.afterFetch.fire();
+        });
         return that;
     };
     
@@ -150,6 +154,10 @@ cspace = cspace || {};
         instantiator: "{instantiator}",
         mergePolicy: {
             instantiator: "nomerge"
+        },
+        events: {
+            onFetch: null,
+            afterFetch: null
         },
         selectors: {
             "category:": ".csc-myCollectionSpace-category", 
@@ -218,6 +226,16 @@ cspace = cspace || {};
             }]
         },
         components: {
+            myCollectionSpaceLoadingIndicator: {
+                type: "cspace.util.loadingIndicator",
+                container: "{myCollectionSpace}.container",
+                options: {
+                    events: {
+                        showOn: "{myCollectionSpace}.events.onFetch",
+                        hideOn: "{myCollectionSpace}.events.afterFetch"
+                    }
+                }
+            },
             cataloging: {
                 type: "cspace.recordList"
             },
