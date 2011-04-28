@@ -316,7 +316,7 @@ cspace = cspace || {};
             onError: null
         },
         
-        columnList: ["number", "summary", "recordtype"],
+        columnList: ["number", "summary", "recordtype", "summarylist.updatedAt"],
         resultsSelectable: false,
 
         searchUrlBuilder: "cspace.search.defaultSearchUrlBuilder",
