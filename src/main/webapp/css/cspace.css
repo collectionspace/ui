@@ -1322,7 +1322,7 @@ input[disabled]:hover, input[disabled]:hover	{
 ul.menu-record li a {
 	-moz-border-radius:6px 6px 0 0; 
 	-webkit-border-radius:6px 6px 0 0;}
-.saveButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-messageBar-cancel, .cs-confirmationDialogButton, .cs-user-searchButton, .cs-user-unSearchButton {
+.saveButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-messageBar-cancel, .cs-confirmationDialogButton, .cs-user-searchButton, .cs-user-unSearchButton, .cs-searchToRelate-createButton {
 	-moz-border-radius:4px; 
 	-webkit-border-radius:4px;
 	line-height: 1.5;}
@@ -1373,6 +1373,9 @@ ul.menu-record li a {
 	padding:0;}
 .cs-pivot-searchBox .cs-searchBox select {
 	margin-top:10px;}
+.cs-confirmationDialog .cs-searchBox .cs-searchBox-button {
+    float: none;
+}
 .cs-searchBox .cs-searchBox-button {
 	float:right;}
 .cs-pivot-searchBox .cs-searchBox .cs-searchBox-query {

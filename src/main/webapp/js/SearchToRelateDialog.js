@@ -104,8 +104,34 @@ cspace = cspace || {};
             relationshipType: {
                 messagekey: "relationshipType"
             },
-            createNew: {
-                messagekey: "createNew"
+            expander: {
+                type: "fluid.renderer.condition",
+                condition: that.options.showCreate || false,
+                trueTree: {
+                    createNew: {
+                        messagekey: "createNew"
+                    },
+                    createNewButton: {
+                        decorators: [{
+                            type: "attrs",
+                            attributes: {
+                                value: that.options.strings.createNewButton
+                            }
+                        }, {
+                            type: "addClass",
+                            classes: that.options.styles.createNewButton
+                        }]
+                    },
+                    multipleRelate: {
+                        decorators: [{
+                            type: "addClass",
+                            classes: that.options.styles.multipleRelate
+                        }]
+                    }
+                },
+                falseTree: {
+                    multipleRelate: {}
+                }
             },
             addButton: {
                 decorators: {
@@ -126,6 +152,9 @@ cspace = cspace || {};
             },
             headerType: {
                 messagekey: "headerType"
+            },
+            headerUpdatedAt: {
+                messagekey: "headerUpdatedAt"
             },
             next: {
                 messagekey: "next"
@@ -167,10 +196,16 @@ cspace = cspace || {};
             headerNumber: ".csc-searchToRelate-headerNumber",
             headerDetails: ".csc-searchToRelate-headerDetails",
             headerType: ".csc-searchToRelate-headerType",
+            headerUpdatedAt: ".csc-searchToRelate-headerUpdatedAt",
             previous: ".csc-searchToRelate-previous",
-            next: ".csc-searchToRelate-next"
+            next: ".csc-searchToRelate-next",
+            multipleRelate: ".csc-related-steps"
         },
-        selectorsToIgnore: ["closeButton", "createNewButton", "dialog"],
+        styles: {
+            multipleRelate: "cs-related-steps",
+            createNewButton: "cs-searchToRelate-createButton"
+        },
+        selectorsToIgnore: ["closeButton", "dialog"],
         events: {
             addRelations: null,
             onCreateNewRecord: null,
@@ -183,6 +218,7 @@ cspace = cspace || {};
         produceTree: cspace.searchToRelateDialog.produceTree,
         parentBundle: "{globalBundle}",
         strings: {
+            createNewButton: "Create",
             procedures: "Procedural",
             title: "Add Related %recordType Record",
             closeAlt: "close button",
@@ -193,6 +229,7 @@ cspace = cspace || {};
             headerNumber: "ID Number",
             headerDetails: "Detail",
             headerType: "Record Type",
+            headerUpdatedAt: "Updated At",
             next: "next >",
             previous: "< previous"
         },

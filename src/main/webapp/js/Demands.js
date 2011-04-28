@@ -209,6 +209,21 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.searchToRelateDialog", ["cspace.relationManager", "cspace.localData"], {
             container: "{relationManager}.dom.searchDialog",
             options: {
+                showCreate: true,
+                listeners: {
+                    addRelations: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.relationManager.provideLocalAddRelations",
+                            args: "{relationManager}"
+                        }
+                    }
+                }
+            }
+        });
+        fluid.demands("cspace.searchToRelateDialog", ["cspace.relationManager", "cspace.localData", "cspace.sidebar"], {
+            container: "{relationManager}.dom.searchDialog",
+            options: {
                 listeners: {
                     addRelations: {
                         expander: {
@@ -977,6 +992,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         // Search To Relate Dialog demands
         fluid.demands("cspace.searchToRelateDialog", "cspace.relationManager", {
+            container: "{relationManager}.dom.searchDialog",
+            options: {
+                showCreate: true
+            }
+        });
+        fluid.demands("cspace.searchToRelateDialog", ["cspace.relationManager", "cspace.sidebar"], {
             container: "{relationManager}.dom.searchDialog"
         });
         

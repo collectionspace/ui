@@ -40,6 +40,7 @@ var searchToRelateDialogTester = function () {
             applier: applier,
             model: testModel,
             listeners: listeners,
+            showCreate: true,
             components: {
                 search: {
                     options: searchOpts
