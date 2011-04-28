@@ -86,10 +86,6 @@ cspace = cspace || {};
         that.events.onSave.addListener(function () {
             return validateRequiredFields(that.dom, that.options.messageBar, that.options.strings.missingRequiredFields);
         });
-        
-        that.events.onSave.addListener(function () {
-            that.options.messageBar.show(that.options.strings.savingMessage);
-        }, undefined, undefined, "last");
 
         that.options.dataContext.events.afterCreate.addListener(function (data) {
             recordSaveHandler(that, data, "Create");
@@ -225,7 +221,6 @@ cspace = cspace || {};
             listeners: {
                 onClose: function (userAction) {
                     if (userAction === "act") {
-                        that.options.messageBar.show(that.options.strings.removingMessage, null, false);
                         that.options.dataContext.remove(that.model.csid);
                         processChanges(that, false);
                     }
@@ -475,8 +470,6 @@ cspace = cspace || {};
         strings: {
             specFetchError: "I'm sorry, an error has occurred fetching the UISpec: ",
             errorRecoverySuggestion: "Please try refreshing your browser",
-            savingMessage: "Saving, please wait...",
-            removingMessage: "Deleting, please wait...",
             updateSuccessfulMessage: "Record successfully saved",
             createSuccessfulMessage: "New Record successfully created",
             removeSuccessfulMessage: "Record successfully deleted",

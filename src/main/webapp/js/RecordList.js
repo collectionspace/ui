@@ -347,7 +347,6 @@ cspace = cspace || {};
             listeners: {
                 onClose: function (userAction) {
                     if (userAction === "act") {
-                        recordEditor.options.messageBar.show(recordEditor.options.strings.removingMessage, null, false);
                         tab.relationManager.dataContext.removeRelations({
                             source: {
                                 csid: tab.model.csid,
