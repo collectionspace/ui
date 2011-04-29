@@ -35,7 +35,7 @@
 .found-records-content {
 	font-weight: normal;}
 .found-records-content-looking {
-	font-weight: normal; background-image: url(../images/indeterminate_progress_indicator_true_transparent_16x16.gif); 
+	font-weight: normal; 
 	background-repeat: no-repeat; 
 	background-position:right; 
 	padding-right: 20px;}

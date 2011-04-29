@@ -301,7 +301,8 @@ cspace = cspace || {};
                 number: ".csc-number",
                 col: ".csc-col",
                 select: ".csc-search-select"
-            }
+            },
+            loadingIndicator: ".csc-search-loadingIndicator"
         },
         strings: {
             errorMessage: "We've encountered an error retrieving search results. Please try again.",
@@ -322,6 +323,16 @@ cspace = cspace || {};
         searchUrlBuilder: "cspace.search.defaultSearchUrlBuilder",
         
         components: {
+            searchLoadingIndicator: {
+                type: "cspace.util.loadingIndicator",
+                container: "{searchView}.dom.loadingIndicator",
+                options: {
+                    events: {
+                        showOn: "{searchView}.events.onSearch",
+                        hideOn: "{searchView}.events.afterSearch"
+                    }
+                }
+            },
             mainSearch: {
                 type: "cspace.searchBox",
                 options: {
