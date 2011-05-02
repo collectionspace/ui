@@ -19,7 +19,23 @@ cspace = cspace || {};
         var that = fluid.initRendererComponent("cspace.mediaUploader", container, options);
         fluid.initDependents(that);
         that.refreshView();
+        that.bindEvents();
         return that;
+    };
+    
+    // TODO: This is a hack to imitate focus on the file input and simulate a single file uploader. 
+    cspace.mediaUploader.bindEvents = function (that) {
+        var buttonView = that.fileUploader.strategy.local.browseButtonView;
+        buttonView.container.delegate(buttonView.options.selectors.fileInputs, "focus", function () {
+            buttonView.locate("browseButton").addClass(that.options.styles.fileInputFocused);
+            var existing = that.fileUploader.queue.files[0];
+            if (existing) {
+                that.fileUploader.removeFile(existing);
+            }
+        });
+        buttonView.container.delegate(buttonView.options.selectors.fileInputs, "blur", function () {
+            buttonView.locate("browseButton").removeClass(that.options.styles.fileInputFocused);
+        });
     };
     
     cspace.mediaUploader.refreshView = function (that) {
@@ -35,7 +51,6 @@ cspace = cspace || {};
     
     cspace.mediaUploader.onFileSuccess = function (that, input) {
         return function (file, responseText, xhr) {
-            input.text("");
             var response = JSON.parse(responseText);
             that.options.applier.requestChange(that.options.elPaths.srcUri, response.file);
             that.events.onLink.fire();
@@ -157,6 +172,10 @@ cspace = cspace || {};
     fluid.defaults("cspace.mediaUploader", {
         gradeNames: ["fluid.IoCRendererComponent"],
         invokers: {
+            bindEvents: {
+                funcName: "cspace.mediaUploader.bindEvents",
+                args: "{mediaUploader}"
+            },
             refreshView: {
                 funcName: "cspace.mediaUploader.refreshView",
                 args: "{mediaUploader}"
@@ -208,7 +227,8 @@ cspace = cspace || {};
         styles: {
             button: "cs-mediaUploader-button",
             hidden: "hidden",
-            removeButton: "cs-mediaUploader-removeMedia"
+            removeButton: "cs-mediaUploader-removeMedia",
+            fileInputFocused: "cs-mediaUploader-fileInputFocused"
         },
         events: {
             onLink: null,
