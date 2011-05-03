@@ -451,7 +451,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         // Confirmation demands
         fluid.demands("confirmation", "cspace.recordEditor", "{options}");
-        
+
         // CreateNew demands
         fluid.demands("createRecord", "cspace.pageBuilder", {
             funcName: "cspace.createNew.createRecord",
@@ -597,6 +597,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
         fluid.demands("checkDeleteDisabling", "cspace.recordEditor", {
             funcName: "cspace.recordEditor.checkDeleteDisabling",
+            args: "{recordEditor}"
+        });
+
+        fluid.demands("hasMediaAttached", "cspace.recordEditor", {
+            funcName: "cspace.recordEditor.hasMediaAttached",
+            args: "{recordEditor}"
+        });
+
+        fluid.demands("hasRelations", "cspace.recordEditor", {
+            funcName: "cspace.recordEditor.hasRelations",
             args: "{recordEditor}"
         });
 

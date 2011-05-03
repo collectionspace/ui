@@ -174,7 +174,7 @@ cspace = cspace || {};
             fluid.initDependent(that, name, instantiator);
         });
     };
-    
+
     cspace.recordEditor = function (container, options) {
         var that = fluid.initRendererComponent("cspace.recordEditor", container, options);
         fluid.initDependents(that);
@@ -191,6 +191,14 @@ cspace = cspace || {};
             fluid.log("RecordEditor.js renderPage end");
         };
 
+
+        cspace.recordEditor.hasMediaAttached = function (that) {
+            return (that.model.fields && that.model.fields.blobCsid);
+        };
+
+        cspace.recordEditor.hasRelations = function (that) {
+            return (that.model.csid && that.model.relations && !$.isEmptyObject(that.model.relations));
+        };
         /*
          * return: Boolean true if the save was submitted, false if it was prevented by any event listeners.
          * Note that a return value of true does not necessarily indicate that the save was successful, only that
@@ -228,6 +236,10 @@ cspace = cspace || {};
             },
             strings: {
                 primaryMessage: that.options.strings.deletePrimaryMessage
+            },
+            termMap: {
+                media: that.hasMediaAttached(that) ? that.options.strings.deleteMessageMediaAttached : "",
+                relations: that.hasRelations(that) ? that.options.strings.deleteMessageWithRelated : ""
             }
         });
     };
@@ -433,7 +445,9 @@ cspace = cspace || {};
             remove: "remove",
             afterDeleteAction: "afterDelete",
             checkDeleteDisabling: "checkDeleteDisabling", //whether to disable delete button
-            cancel: "cancel"
+            cancel: "cancel",
+            hasMediaAttached: "hasMediaAttached",
+            hasRelations: "hasRelations"
         },
         dataContext: "{dataContext}",
         navigationEventNamespace: undefined,
@@ -484,10 +498,13 @@ cspace = cspace || {};
             missingRequiredFields: "Some required fields are empty",
             save: "Save",
             cancel: "Cancel changes",
-            deleteButton: "Delete"
+            deleteButton: "Delete",
+            deletePrimaryMessage: "Delete this record%relations%media?",
+            deleteMessageWithRelated: " and its relationships",
+            deleteMessageMediaAttached: " and its attached media"
         },
         urls: cspace.componentUrlBuilder({
-            deleteURL: "%webapp/html/myCollectionSpace.html",
+            deleteURL: "%webapp/html/findedit.html",
             thumbnailURL: "%chain/download/%csid/Thumbnail",
             fullImageURL: "%chain/download/%csid/Original"
         })

@@ -1621,7 +1621,7 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
     padding: 8px 0 6px 4px;
     background: #FFFBEB url('../images/new_user_arrow.png') no-repeat 95% center; 
 }
-.cs-recordList .csc-recordList-row:hover {
+.cs-recordList .csc-recordList-row:hover, .cs-recordList .csc-recordList-row:nth-child(even):hover {
     background-color: #C3D9E9;
 }
 .cs-recordList .csc-recordList-row:focus {
@@ -1638,6 +1638,9 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
     min-height: 13px;
     width: 100%;
     cursor:pointer;
+}
+.cs-recordList .cs-recordList-row:nth-child(even) {
+    background-color: #FFF;
 }
 .cs-recordList .cs-recordList-no-items {
     padding: 5px 0 4px 4px;
