@@ -26,7 +26,7 @@ var loaninTester = function () {
             pageBuilderIO: {
                 options: {
                     listeners: {
-                        pageReady: function () {
+                        "pageReady.loanInCreationTest": function () {
                             jqUnit.assertValue("loan in should have a record editor", cspace.tests.getPageBuilderIO(loanIn).pageBuilder.recordEditor);
                             start();
                         }
