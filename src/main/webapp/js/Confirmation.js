@@ -122,7 +122,12 @@ cspace = cspace || {};
         that.popup.dialog({
             autoOpen: false,
             modal: true,
-            title: that.options.strings.title
+            title: that.options.strings.title,
+            open: function () {
+                // CSPACE-3811: Focusing on the first input element inside the 
+                // confirmation dialog for smooth keyboard navigation.
+                $("input", that.popup).eq(0).focus();
+            }
         });
     };
 

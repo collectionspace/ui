@@ -202,12 +202,14 @@ var adminUsersTester = function () {
     adminUsersTest.asyncTest("Valid edit of existing user: save should succeed", function () {
         basicAdminUsersSetup(function (adminUsers, le, re) {
             le.events.afterShowDetails.addListener(function () {
-                le.events.afterShowDetails.removeListener("initialSelect");                
+                le.events.afterShowDetails.removeListener("initialSelect");
+                re.options.dataContext.events.afterSave.addListener(function () {
+                    jqUnit.assertTrue("Save should succeed (validation should not prevent save)", saveResult);
+                    jqUnit.isVisible("message container is visible", le.options.messageBar.container);
+                    cspace.tests.onTearDown.fire(re);
+                    start();
+                });      
                 var saveResult = re.requestSave();
-                jqUnit.assertTrue("Save should succeed (validation should not prevent save)", saveResult);
-                jqUnit.isVisible("message container is visible", le.options.messageBar.container);
-                cspace.tests.onTearDown.fire(re);
-                start();
             }, "initialSelect");
             adminUsers.userListEditor.list.locate("row").eq(2).click();
         });
