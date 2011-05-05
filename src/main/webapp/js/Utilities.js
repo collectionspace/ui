@@ -831,10 +831,15 @@ fluid.registerNamespace("cspace.util");
         that.indicator = $("<div />");
         that.indicator.hide();
         that.indicator.addClass(that.options.styles.loading);
-        that.container.after(that.indicator);
+        that.container[that.container[0] === document.body ? "append" : "after"](that.indicator);
         
         that.container.resize(that.update);
-        $(document).bind("DOMSubtreeModified", that.update);
+        document.body.addEventListener("DOMSubtreeModified", function (event) {
+            if ($(event.target).hasClass(that.options.styles.loading)) {
+                return;
+            }
+            that.update();
+        }, false);
     };
     
     cspace.util.loadingIndicator.preInitFunction = function (that) {
