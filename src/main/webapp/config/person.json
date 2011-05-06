@@ -10,7 +10,7 @@
                     "type":  "cspace.recordEditor",
                     "options": {
                         "selectors": {
-                            "hierarchy": ".csc-location-hierarchy",
+                            "hierarchy": ".csc-hierarchy",
                             "identificationNumber": ".csc-personAuthority-displayName"
                         },
                         "selectorsToIgnore": ["requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
