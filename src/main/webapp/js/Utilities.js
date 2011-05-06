@@ -610,15 +610,20 @@ fluid.registerNamespace("cspace.util");
     };
     
     var isDecorator = function (source, type) {
-        if (!source.decorators || !source.decorators[0]) {
+        var decorator = fluid.makeArray(source.decorators)[0];
+        if (!decorator) {
             return false;
         }
-        return  source.decorators[0].func && source.decorators[0].func === type;
+        if (decorator.func) {
+            return decorator.func === type;
+        }
+        return  decorator.type === type;
     };
 
     cspace.util.urnToStringFieldConverter = function (container, options) {
         var that = fluid.initView("cspace.util.urnToStringFieldConverter", container, options);
-        that.container.text(that.options.convert(that.container.text()));
+        var func = that.container.val() ? "val" : "text";
+        that.container[func](that.options.convert(that.container[func]()));
         return that;   
     };
     
@@ -695,7 +700,17 @@ fluid.registerNamespace("cspace.util");
             if (!val) {
                 return;
             }
-            if (typeof val === "string") {
+            if (key === "expander") {
+                fluid.each(fluid.makeArray(val), function (expander) {
+                    fluid.each(["tree", "trueTree", "falseTree"], function (tree) {
+                        if (!expander[tree]) {return;}
+                        expander[tree] = resolveReadOnlyUISpecImpl(expander[tree]);
+                    });
+                    if (!newspec.expander) {newspec.expander = [];}
+                    newspec.expander.push(expander);
+                });
+            }
+            else if (typeof val === "string") {
                 newspec[key] = val;
             }
             else if (val.messagekey) {

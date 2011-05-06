@@ -88,6 +88,12 @@ cspace = cspace || {};
         };
         return that;
     };
+    
+    var resolveReadOnly = function (uispec, elPath, readOnly) {
+        if (uispec[elPath]) {
+            uispec[elPath] = cspace.util.resolveReadOnlyUISpec(uispec[elPath], readOnly);
+        }
+    };
 
     cspace.pageBuilderIO = function (options) {
         var that = fluid.initLittleComponent("cspace.pageBuilderIO", options);
@@ -151,13 +157,9 @@ cspace = cspace || {};
                     options: {
                         dataType: "json",
                         success: function (data) {
-                            // This is unfortunate but necessarry in order to prevent the expansion of uispec.
                             options.uispec = data;
-                            var recordPath = isTab(options.pageType) ? "details" : "recordEditor";
-                            if (options.uispec[recordPath]) {
-                                options.uispec[recordPath] = 
-                                    cspace.util.resolveReadOnlyUISpec(options.uispec[recordPath], readOnly);
-                            }
+                            resolveReadOnly(options.uispec, isTab(options.pageType) ? "details" : "recordEditor", readOnly);
+                            resolveReadOnly(options.uispec, "hierarchy", readOnly);
                         },
                         error: function (xhr, textStatus, errorThrown) {
                             fluid.fail("Error fetching " + options.pageType + " uispec:" + textStatus);
