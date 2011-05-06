@@ -316,7 +316,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{recordEditor}.dom.hierarchy",
             options: {
                 model: "{recordEditor}.model",
-                applier: "{recordEditor}.options.applier"
+                applier: "{recordEditor}.applier"
             }
         });
         
@@ -441,6 +441,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{arguments}.0"
         });
         fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "location", "cspace.hierarchy"], {
+            container: "{arguments}.0",
+            options: {
+                components: {
+                    confirmation: "{confirmation}"
+                }
+            }
+        });
+        fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "person", "cspace.hierarchy"], {
             container: "{arguments}.0",
             options: {
                 components: {

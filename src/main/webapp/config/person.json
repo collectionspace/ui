@@ -10,7 +10,17 @@
                     "type":  "cspace.recordEditor",
                     "options": {
                         "selectors": {
+                            "hierarchy": ".csc-location-hierarchy",
                             "identificationNumber": ".csc-personAuthority-displayName"
+                        },
+                        "selectorsToIgnore": ["requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
+                        "deferredComponents": {
+                            "hierarchy": {
+                                "type": "cspace.hierarchy",
+                                "options": {
+                                    "uispec": "{pageBuilder}.options.uispec.hierarchy"
+                                }
+                            }
                         },
                         "strings": {
                             "identificationNumberRequired": "Please specify a Display Name"
