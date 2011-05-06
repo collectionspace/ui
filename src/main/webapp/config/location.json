@@ -64,6 +64,13 @@
                     "templateSelector": ".csc-location-template",
                     "targetSelector": ".csc-record-edit-container" 
                 }
+            },
+            "components": {
+                "dataContext": {
+                    "options": {
+                        "baseUrl": "../../chain/vocabularies"
+                    }
+                }
             }
         }
     }
