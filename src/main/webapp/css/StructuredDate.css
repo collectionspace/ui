@@ -44,6 +44,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 	background:url('../images/icnStructuredDate.png') no-repeat scroll 98% center #fff;
 	border:1px solid #C7CFD4;
 }
+
+.info-pair .content td.label {
+	padding-bottom:3px;
+}
 /* Added by rjaffe, then commented out, 4 May 2010 */
 /* 
 .input-date-era {

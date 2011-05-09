@@ -39,19 +39,6 @@ ul {
 textarea {
 	overflow:auto; 
 	resize:none;}
-:focus {
-	outline: none;
-	-moz-outline:none;
-	-moz-outline-style:none;
-	outline-offset:0 !important;
-	-moz-box-shadow: #000 0 0 2px;
-	-webkit-box-shadow: #000 0 0 2px;
-	box-shadow: #000 0 0 2px;
-	/*outline:0px solid #000;*/
-	/* for Opera */
-	z-index: 1;}
-::-moz-focus-inner {border:0;}
-
 
 /* input form selectors */
 input, textarea, select {
@@ -585,6 +572,7 @@ table tbody.highlight tr:hover td {
 .info-column2-75 {width:  74%;}
 .info-column2-80 {width:  79%;}
 .info-column3 	 {width:  33%;}
+.info-column4 	 {width:  25%;}
 
 .fl-container-1024   {min-width: 990px; /* a little smaller to account for vertical scrolling */}
 .fl-container-900     {width:  900px;}
@@ -1492,7 +1480,7 @@ table .cs-calendar-button, .information-subgroup .cs-calendar-button {
 	background-color:#fff;}
 .info-pair-date .content input {
 	border-right:none; 
-	width:142px !important; 
+	/*width:142px !important; */
 	/*float:left;*/}
 .found-records-box { 
 	margin-top: 20px}
