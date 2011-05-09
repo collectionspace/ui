@@ -769,6 +769,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("media", "cspace.myCollectionSpace", {
             container: "{myCollectionSpace}.dom.media"
         });
+        fluid.demands("group", "cspace.myCollectionSpace", {
+            container: "{myCollectionSpace}.dom.group"
+        });
         fluid.demands("cspace.recordList", ["cspace.relatedRecordsList", "person"], {
             container: "{relatedRecordsList}.dom.recordListSelector",
             options: {

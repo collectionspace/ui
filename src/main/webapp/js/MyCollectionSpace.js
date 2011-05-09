@@ -173,6 +173,7 @@ cspace = cspace || {};
             movement: ".csc-myCollectionSpace-movement-group",
             objectexit: ".csc-myCollectionSpace-objectexit-group",
             media: ".csc-myCollectionSpace-media-group",
+            group: ".csc-myCollectionSpace-group-group",
             togglable: ".csc-toggle-selector"
         },
         selectorsToIgnore: "togglable",
@@ -258,6 +259,9 @@ cspace = cspace || {};
                 type: "cspace.recordList"
             },
             media: {
+                type: "cspace.recordList"
+            },
+            group: {
                 type: "cspace.recordList"
             },
             togglable: {
