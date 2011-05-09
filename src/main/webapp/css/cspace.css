@@ -20,7 +20,7 @@ body {
 	margin:0;}
 div:focus, p:focus, input:focus, a:focus, img:focus, span:focus, table:focus, tr:focus, td:focus, tbody:focus, thead:focus, li:focus, 
 ul:focus, button:focus, form:focus, h1:focus, h2:focus, h3:focus, h4:focus, h5:focus, label:focus, select:focus, textarea:focus {
-    border:1px solid #000 !important;
+    outline:1px solid #000 !important;
 }
 table {
 	border-collapse:collapse;}
