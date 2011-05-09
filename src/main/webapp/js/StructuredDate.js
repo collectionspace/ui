@@ -26,7 +26,7 @@ cspace = cspace || {};
         styles: {
             structuredDate: "cs-structuredDate-input"
         },
-        summaryElPath: "",
+        elPath: "",
         invokers: {
             showPopup: {
                 funcName: "cspace.structuredDate.showPopup",
@@ -49,7 +49,7 @@ cspace = cspace || {};
                     model: "{structuredDate}.model",
                     applier: "{structuredDate}.applier",
                     protoTree: "{structuredDate}.options.protoTree",
-                    summaryElPath: "{structuredDate}.options.summaryElPath"
+                    elPath: "{structuredDate}.options.elPath"
                 }
                 
             }
@@ -85,9 +85,9 @@ cspace = cspace || {};
         
         // If the value of the summary element in the model changes,
         // update the value of the container field to reflect that change.
-        if (that.options.summaryElPath) {
-            that.options.applier.modelChanged.addListener(that.options.summaryElPath, function (model) {
-                that.container.val(fluid.get(model, that.options.summaryElPath));
+        if (that.options.elPath) {
+            that.applier.modelChanged.addListener(that.options.elPath, function (model) {
+                that.container.val(fluid.get(model, that.options.elPath));
             });
         }
         
@@ -140,7 +140,7 @@ cspace = cspace || {};
         // NOTE ADDED BY RICK: 05 May 2011: 
         // dateText field dropped in favor of dateDisplayDate; 
         // concommitant changes made in selectors and strings below.
-        // dateText field replaced by dateDisplayDate in UISpec (value and SummaryElPath) 
+        // dateText field replaced by dateDisplayDate in UISpec (value and elPath) 
         // and UISchema, too, for development purposes. 
         // Also changed in StructuredDateTest.js.
         protoTree: {

@@ -197,7 +197,7 @@ var structuredDateTester = function ($) {
             protoTree: {
                 dateDisplayDate: "${someDate.dateDisplayDate}"
             },
-            summaryElPath: "someDate.dateDisplayDate"
+            elPath: "someDate.dateDisplayDate"
         });
 
         var newSummaryValue = "2011-04-05";

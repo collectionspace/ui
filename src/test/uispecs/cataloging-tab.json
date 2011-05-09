@@ -919,7 +919,7 @@
                    "func": "cspace.structuredDate",
                    "type": "fluid",
                    "options": {
-                       "summaryElPath": "fields.objectProductionDates.dateDisplayDate",
+                       "elPath": "fields.objectProductionDates.dateDisplayDate",
                        "protoTree": {
                             "expander": {
                                 "tree": {
