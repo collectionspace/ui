@@ -113,9 +113,6 @@
                     "inscriptionContentTransliteration": {
                         "type": "string"
                     },
-                    "dateLatestQualifier": {
-                        "type": "string"
-                    },
                     "styles": {
                         "items": {
                             "properties": {
@@ -365,17 +362,11 @@
                         },
                         "type": "array"
                     },
-                    "dateText": {
-                        "type": "string"
-                    },
                     "viewersPersonalExperience": {
                         "type": "string"
                     },
                     "tenantID": {
                         "type": "string"
-                    },
-                    "dateEarliestSingle": {
-                        "type": "date"
                     },
                     "inscriptionContentScript": {
                         "default": "",
@@ -807,9 +798,6 @@
                         },
                         "type": "array"
                     },
-                    "dateLatestCertainty": {
-                        "type": "string"
-                    },
                     "physicalDescription": {
                         "type": "string"
                     },
@@ -936,9 +924,6 @@
                         },
                         "type": "array"
                     },
-                    "dateEarliestSingleQualifier": {
-                        "type": "string"
-                    },
                     "contentPeoples": {
                         "items": {
                             "properties": {
@@ -1011,18 +996,89 @@
                         "type": "array"
                     },
                     "objectProductionDates": {
-                        "items": {
-                            "properties": {
-                                "_primary": {
-                                    "type": "boolean"
-                                },
-                                "objectProductionDate": {
-                                    "type": "date"
-                                }
+                        "properties": {
+                            "dateDisplayDate": {
+                            	"default": "",
+                            	"type": "string"
                             },
-                            "type": "object"
+                            "datePeriod": {
+                                "default": "",
+                                "type": "string"
+                            },
+                             "dateAssociation": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "dateNote": {
+                            	"default": "",
+                            	"type": "string"
+                            },
+                             "dateEarliestSingleYear": {
+                                "default": "",
+                                "type": "string"
+                            },
+                             "dateEarliestSingleMonth": {
+                                "default": "",
+                                "type": "string"
+                            },
+                             "dateEarliestSingleDay": {
+                                "default": "",
+                                "type": "string"
+                            },
+                             "dateEarliestSingleEra": {
+                                "default": "ce",
+                                "type": "string"
+                            },
+                            "dateEarliestSingleCertainty": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "dateEarliestSingleQualifier": {
+                                "default": "+",
+                                "type": "string"
+                            },
+                            "dateEarliestSingleQualifierValue": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "dateEarliestSingleQualifierUnit": {
+                                "default": "",
+                                "type": "string"
+                            },
+                             "dateLatestYear": {
+                            	"default": "",
+                            	"type": "string"
+                            },
+                             "dateLatestMonth": {
+                            	"default": "",
+                            	"type": "string"
+                            },
+                            "dateLatestDay": {
+                            	"default": "",
+                            	"type": "string"
+                            },
+                            "dateLatestEra": {
+                                "default": "ce",
+                                "type": "string"
+                            },
+                            "dateLatestCertainty": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "dateLatestQualifier": {
+                                "default": "+",
+                                "type": "string"
+                            },
+                            "dateLatestQualifierValue": {
+                                "default": "",
+                                "type": "string"
+                            },
+                            "dateLatestQualifierUnit": {
+                                "default": "",
+                                "type": "string"
+                            }
                         },
-                        "type": "array"
+                        "type": "object"
                     },
                     "objectProductionOrganizationGroup": {
                         "items": {
@@ -1079,9 +1135,6 @@
                     "distinguishingFeatures": {
                         "type": "string"
                     },
-                    "dateAssociation": {
-                        "type": "string"
-                    },
                     "objectProductionPersonGroup": {
                         "items": {
                             "properties": {
@@ -1098,9 +1151,6 @@
                             "type": "object"
                         },
                         "type": "array"
-                    },
-                    "dateEarliestSingleCertainty": {
-                        "type": "string"
                     },
                     "fieldCollectors": {
                         "items": {
@@ -1166,9 +1216,6 @@
                             "type": "object"
                         },
                         "type": "array"
-                    },
-                    "datePeriod": {
-                        "type": "string"
                     },
                     "updatedAt": {
                         "type": "string"

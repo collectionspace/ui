@@ -765,6 +765,11 @@ fluid.registerNamespace("cspace.util");
                     }]
                 };
             }
+            else if (isDecorator(val, "cspace.structuredDate")) {
+                newspec[key] = {
+                    value: val.value
+                };                
+            }
         });  
         return newspec;   
     };

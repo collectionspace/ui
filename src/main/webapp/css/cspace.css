@@ -1480,7 +1480,7 @@ ul.menu-record li a {
 	border:1px solid #C7CFD4; 
 	border-left:none;
 	height:19px;
-	float:left;}
+	/*float:left;*/}
 table .cs-calendar-button, .information-subgroup .cs-calendar-button { 
 	border:none;}
 .cs-calendar-button  img{
@@ -1493,7 +1493,7 @@ table .cs-calendar-button, .information-subgroup .cs-calendar-button {
 .info-pair-date .content input {
 	border-right:none; 
 	width:142px !important; 
-	float:left;}
+	/*float:left;*/}
 .found-records-box { 
 	margin-top: 20px}
 

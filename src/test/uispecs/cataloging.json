@@ -2024,40 +2024,156 @@
         ".csc-collection-object-assocObjectGroup-label": {
             "messagekey": "collection-object-assocObjectGroupLabel" 
         },
-        ".csc-collection-object-objectProductionDates": {
+        ".csc-object-production-date": {
+            "value": "${fields.objectProductionDates.dateDisplayDate}",
             "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "elPath": "fields.objectProductionDates",
-                        "protoTree": {
+               {
+                   "func": "cspace.structuredDate",
+                   "type": "fluid",
+                   "options": {
+                       "summaryElPath": "fields.objectProductionDates.dateDisplayDate",
+                       "protoTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-production-date": "${{row}.objectProductionDate}",
-                                            ".csc-object-production-date-container": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.datePicker",
-                                                        "type": "fluid" 
-                                                    } 
-                                                ] 
-                                            } 
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.objectProductionDates" 
-                                    } 
+                                    "dateDisplayDate": "${fields.objectProductionDates.dateDisplayDate}",
+                                    "datePeriod": "${fields.objectProductionDates.datePeriod}",
+                                    "dateAssociation": "${fields.objectProductionDates.dateAssociation}",
+                                    "dateNote": "${fields.objectProductionDates.dateNote}",
+                                    "dateEarliestSingleYear": "${fields.objectProductionDates.dateEarliestSingleYear}",
+                                    "dateEarliestSingleMonth": "${fields.objectProductionDates.dateEarliestSingleMonth}",
+                                    "dateEarliestSingleDay": "${fields.objectProductionDates.dateEarliestSingleDay}",
+                                    "dateEarliestSingleEra": {
+                                        "optionnames": [
+                                            "CE",
+                                            "BCE"
+                                        ],
+                                        "optionlist": [
+                                            "ce",
+                                            "bce" 
+                                        ],
+                                        "selection": "${fields.objectProductionDates.dateEarliestSingleEra}" 
+                                    }, 
+                                    "dateEarliestSingleCertainty": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "After", 
+                                            "Approximate", 
+                                            "Before", 
+                                            "Circa", 
+                                            "Probably", 
+                                            "Possibly" 
+                                        ],
+                                        "optionlist": [
+                                        	"",
+                                            "after", 
+                                            "approximate", 
+                                            "before", 
+                                            "circa", 
+                                            "probably", 
+                                            "possibly"    
+                                        ],
+                                        "selection": "${fields.objectProductionDates.dateEarliestSingleCertainty}" 
+                                    },
+                                    "dateEarliestSingleQualifier": {
+                                        "optionnames": [
+                                            "+/-",
+                                            "+",
+                                            "-" 
+                                        ],
+                                        "optionlist": [
+                                            "+/-",
+                                            "+",
+                                            "-"                                             
+                                        ],
+                                        "selection": "${fields.objectProductionDates.dateEarliestSingleQualifier}" 
+                                    },
+                                    "dateEarliestSingleQualifierValue": "${fields.objectProductionDates.dateEarliestSingleQualifierValue}",
+                                    "dateEarliestSingleQualifierUnit": {
+                                        "optionnames": [
+                                        	"Please select a value",
+                                            "Day(s)", 
+                                            "Month(s)", 
+                                            "Year(s)"
+                                        ],
+                                        "optionlist": [
+                                        	"",
+                                            "days", 
+                                            "months", 
+                                            "years" 
+                                        ],
+                                        "selection": "${fields.objectProductionDates.dateEarliestSingleQualifierUnit}" 
+                                    },
+                                    "dateLatestYear": "${fields.objectProductionDates.dateLatestYear}",
+                                    "dateLatestMonth": "${fields.objectProductionDates.dateLatestMonth}",
+                                    "dateLatestDay": "${fields.objectProductionDates.dateLatestDay}",
+                                    "dateLatestEra": {
+                                        "optionnames": [
+                                            "CE",
+                                            "BCE" 
+                                        ],
+                                        "optionlist": [
+                                            "ce",
+                                            "bce" 
+                                        ],
+                                        "selection": "${fields.objectProductionDates.dateLatestEra}" 
+                                    },
+                                    "dateLatestCertainty": {
+                                        "optionnames": [
+                                        	"Please select a value",
+                                            "After", 
+                                            "Approximate", 
+                                            "Before", 
+                                            "Circa", 
+                                            "Probably", 
+                                            "Possibly" 
+                                        ],
+                                        "optionlist": [
+                                        	"",
+                                            "after", 
+                                            "approximate", 
+                                            "before", 
+                                            "circa", 
+                                            "probably", 
+                                            "possibly"    
+                                        ],
+                                        "selection": "${fields.objectProductionDates.dateLatestCertainty}" 
+                                    },
+                                    "dateLatestQualifier": {
+                                        "optionnames": [
+                                            "+/-",
+                                            "+",
+                                            "-"
+                                        ],
+                                        "optionlist": [
+                                            "+/-",
+                                            "+",
+                                            "-" 
+                                        ],
+                                        "selection": "${fields.objectProductionDates.dateLatestQualifier}" 
+                                    },
+                                    "dateLatestQualifierValue": "${fields.objectProductionDates.dateLatestQualifierValue}",
+                                    "dateLatestQualifierUnit": {
+                                        "optionnames": [
+                                        	"Please select a value",
+                                            "Day(s)", 
+                                            "Month(s)", 
+                                            "Year(s)"
+                                        ],
+                                        "optionlist": [
+                                        	"",
+                                            "days", 
+                                            "months", 
+                                            "years" 
+                                        ],
+                                        "selection": "${fields.objectProductionDates.dateLatestQualifierUnit}" 
+                                    }
                                 },
-                                "type": "fluid.noexpand" 
-                            } 
-                        } 
-                    } 
-                } 
-            ] 
+                                "type": "fluid.noexpand"
+                            }
+                       }
+                   }
+               }
+            ]
         },
         ".csc-collection-object-assocEventOrganizations-label": {
             "messagekey": "collection-object-assocEventOrganizationsLabel" 

@@ -1028,6 +1028,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
         
+        // Structured date demands
+        fluid.demands("cspace.structuredDate", "cspace.recordEditor", {
+            container: "{arguments}.0",
+            options: {
+                applier: "{recordEditor}.applier",
+                model: "{recordEditor}.model"
+            }
+        });
+        
         // searchView deamnds
         fluid.demands("fluid.pager", "cspace.search.searchView", ["{searchView}.dom.resultsContainer", fluid.COMPONENT_OPTIONS]);
         fluid.demands("search", "cspace.searchToRelateDialog", {
