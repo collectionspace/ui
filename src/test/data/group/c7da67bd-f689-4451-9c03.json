@@ -1,0 +1,71 @@
+{
+    "termsUsed": [
+        
+    ],
+    "relations": {
+        "cataloging": [
+            {
+                "summary": "",
+                "summarylist": {
+                    "nametitle": "",
+                    "updatedAt": "2011-05-10T12:54:06Z",
+                    "objectNumber": "4"
+                },
+                "csid": "b2466018-3edd-4062-88a6",
+                "number": "4",
+                "relid": "f4140829-ed53-473e-ab7f",
+                "relationshiptype": "affects",
+                "recordtype": "cataloging"
+            },
+            {
+                "summary": "",
+                "summarylist": {
+                    "nametitle": "",
+                    "updatedAt": "2011-05-10T12:53:57Z",
+                    "objectNumber": "3"
+                },
+                "csid": "e6c2cba4-e892-4a1b-b40d",
+                "number": "3",
+                "relid": "29b77ce6-bb56-445d-bdb6",
+                "relationshiptype": "affects",
+                "recordtype": "cataloging"
+            },
+            {
+                "summary": "Petrified Ogre",
+                "summarylist": {
+                    "nametitle": "Petrified Ogre",
+                    "updatedAt": "2011-05-10T13:17:27Z",
+                    "objectNumber": "CompleteObject001"
+                },
+                "csid": "3420ca5c-d1d6-48fc-a5f9",
+                "number": "CompleteObject001",
+                "relid": "61db7f89-241b-40a3-8bff",
+                "relationshiptype": "affects",
+                "recordtype": "cataloging"
+            },
+            {
+                "summary": "Left-handed screwdriver",
+                "summarylist": {
+                    "nametitle": "Left-handed screwdriver",
+                    "updatedAt": "2011-05-10T12:58:07Z",
+                    "objectNumber": "32"
+                },
+                "csid": "eb85d607-b343-4514-9a16",
+                "number": "32",
+                "relid": "bee4c990-aad4-4b8f-af70",
+                "relationshiptype": "affects",
+                "recordtype": "cataloging"
+            }
+        ]
+    },
+    "csid": "c7da67bd-f689-4451-9c03",
+    "fields": {
+        "updatedAt": "2011-05-10T13:40:38Z",
+        "title": "Exhibition One",
+        "scopeNote": "",
+        "createdAt": "2011-05-10T13:40:38Z",
+        "responsibleDepartment": "paintings-sculpture",
+        "owner": "",
+        "csid": "c7da67bd-f689-4451-9c03"
+    }
+}

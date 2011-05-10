@@ -1,0 +1,47 @@
+{
+    "properties": {
+        "relations": {
+            "default": {
+                
+            },
+            "type": "object"
+        },
+        "termsUsed": {
+            "default": [
+                
+            ],
+            "type": "array"
+        },
+        "csid": {
+            "type": "string"
+        },
+        "fields": {
+            "properties": {
+                "updatedAt": {
+                    "type": "string"
+                },
+                "tenantID": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "scopeNote": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "responsibleDepartment": {
+                    "default": "",
+                    "type": "string"
+                },
+                "owner": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "type": "object"
+}

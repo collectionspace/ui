@@ -12,6 +12,13 @@
             "delete",
             "list"
         ],
+        "group": [
+            "create",
+            "read",
+            "update",
+            "delete",
+            "list"
+        ],
         "users": [
             "create",
             "read",
