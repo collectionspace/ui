@@ -1,23 +1,5 @@
 {
     "recordEditor": {
-        "expander": {
-            "type": "fluid.renderer.condition",
-            "condition": {
-                "funcName": "cspace.mediaUploader.assertBlob",
-                "args": "${fields.blobCsid}"
-            },
-            "trueTree": {
-                ".csc-media-blobs": {}
-            },
-            "falseTree": {
-                ".csc-media-blobs": {
-                    "decorators": {
-                        "type": "addClass",
-                        "classes": "hidden"
-                    }
-                }
-            }
-        },
         ".csc-media-creator": {
             "decorators": [
                 {
@@ -66,7 +48,7 @@
                 }
             ]
         },
-        ".csc-blobs-uri": "${fields.uri}",
+        ".csc-blobs-uri": "${fields.blobs.0.uri}",
         ".csc-media-coverage": "${fields.coverage}",
         ".csc-media-relation": {
             "decorators": [
@@ -96,7 +78,7 @@
             ]
         },
         ".csc-media-srcUri": "${fields.srcUri}",
-        ".csc-blobs-digest": "${fields.digest}",
+        ".csc-blobs-digest": "${fields.blobs.0.digest}",
         ".csc-media-contributor": {
             "decorators": [
                 {
@@ -111,10 +93,33 @@
             "value": "${fields.contributor}"
         },
         ".csc-media-format": "${fields.format}",
+        ".csc-blobs-mimeType": "${fields.blobs.0.mimeType}",
         ".csc-media-dateCreated": "${fields.dateCreated}",
         ".csc-media-dateModified": "${fields.dateModified}",
-        ".csc-blobs-name": "${fields.name}",
+        ".csc-blobs-imgThumb": "${fields.blobs.0.imgThumb}",
+        ".csc-blobs-name": "${fields.blobs.0.name}",
+        "expander": {
+            "trueTree": {
+                ".csc-media-blobs": {
+                    
+                }
+            },
+            "condition": {
+                "funcName": "cspace.mediaUploader.assertBlob",
+                "args": "${fields.blobCsid}"
+            },
+            "type": "fluid.renderer.condition",
+            "falseTree": {
+                ".csc-media-blobs": {
+                    "decorators": {
+                        "classes": "hidden",
+                        "type": "addClass"
+                    }
+                }
+            }
+        },
         ".csc-media-updatedAt": "${fields.updatedAt}",
+        ".csc-blobs-depth": "${fields.blobs.0.depth}",
         ".csc-media-location": "${fields.location}",
         ".csc-media-rightsHolder": {
             "decorators": [
@@ -130,6 +135,7 @@
             "value": "${fields.rightsHolder}"
         },
         ".csc-media-tenantID": "${fields.tenantID}",
+        ".csc-blobs-imgOrig": "${fields.blobs.0.imgOrig}",
         ".csc-media-copyrightStatement": "${fields.copyrightStatement}",
         ".csc-media-type": {
             "decorators": [
@@ -178,6 +184,9 @@
             ]
         },
         ".csc-media-source": "${fields.source}",
+        ".csc-blobs-updatedAt": "${fields.blobs.0.updatedAt}",
+        ".csc-blobs-width": "${fields.blobs.0.width}",
+        ".csc-media-externalMediaUrl": "${fields.externalMediaUrl}",
         ".csc-media-subject": {
             "decorators": [
                 {
@@ -205,8 +214,9 @@
                 }
             ]
         },
-        ".csc-blobs-encoding": "${fields.encoding}",
-        ".csc-blobs-id": "${fields.id}",
+        ".csc-blobs-encoding": "${fields.blobs.0.encoding}",
+        ".csc-blobs-createdAt": "${fields.blobs.0.createdAt}",
+        ".csc-blobs-id": "${fields.blobs.0.id}",
         ".csc-media-dimensionGroup": {
             "decorators": [
                 {
@@ -381,13 +391,15 @@
         },
         ".csc-media-blobCsid": "${fields.blobCsid}",
         ".csc-media-title": "${fields.title}",
-        ".csc-blobs-mime-type": "${fields.mime-type}",
-        ".csc-blobs-data": "${fields.data}",
+        ".csc-blobs-tenantID": "${fields.blobs.0.tenantID}",
+        ".csc-blobs-height": "${fields.blobs.0.height}",
+        ".csc-blobs-data": "${fields.blobs.0.data}",
         ".csc-media-identificationNumber": "${fields.identificationNumber}",
         ".csc-media-filename": "${fields.filename}",
+        ".csc-blobs-imgMedium": "${fields.blobs.0.imgMedium}",
         ".csc-media-description": "${fields.description}",
         ".csc-media-createdAt": "${fields.createdAt}",
-        ".csc-blobs-length": "${fields.length}",
+        ".csc-blobs-length": "${fields.blobs.0.length}",
         ".csc-media-dimensionSummary": "${fields.dimensionSummary}",
         ".csc-media-uri": "${fields.uri}",
         ".csc-media-language": {
@@ -408,18 +420,18 @@
                                                     "Please select a value",
                                                     "Middle English",
                                                     "Old English",
-                                                    "Latin",
                                                     "Swahili",
                                                     "Ancient Greek",
-                                                    "Japanese",
+                                                    "Latin",
                                                     "Korean",
-                                                    "Hebrew",
-                                                    "Arabic",
                                                     "Chinese",
+                                                    "Japanese",
+                                                    "Hebrew",
                                                     "Russian",
+                                                    "Arabic",
                                                     "German",
-                                                    "Italian",
                                                     "Portuguese",
+                                                    "Italian",
                                                     "French",
                                                     "Spanish",
                                                     "English"
@@ -428,18 +440,18 @@
                                                     "",
                                                     "middleenglish",
                                                     "oldenglish",
-                                                    "latin",
                                                     "swahili",
                                                     "ancientgreek",
-                                                    "japanese",
+                                                    "latin",
                                                     "korean",
-                                                    "hebrew",
-                                                    "arabic",
                                                     "chinese",
+                                                    "japanese",
+                                                    "hebrew",
                                                     "russian",
+                                                    "arabic",
                                                     "german",
-                                                    "italian",
                                                     "portuguese",
+                                                    "italian",
                                                     "french",
                                                     "spn",
                                                     "eng"
