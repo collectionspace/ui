@@ -517,11 +517,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.autocomplete.selectMatchConfirm = function (that, key) {
+        var match = that.model.matches[key];
+        if (!match.broader) {
+            updateAuthoritatively(that, match);
+            that.buttonAdjustor();
+            return;
+        }
         that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
             listeners: {
                 onClose: function (userAction) {
                     if (userAction === "act") {
-                        var match = that.model.matches[key];
                         updateAuthoritatively(that, match);
                         that.buttonAdjustor();
                     } else {
@@ -530,8 +535,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             },
             termMap: {
-                narrower: that.model.matches[key]["label"],
-                broader: "HERE GOES THE BROADER TERM"
+                narrower: match["label"],
+                broader: match.broader["label"]
             },
             strings: {
                 primaryMessage: that.options.strings.narrowerChange,
