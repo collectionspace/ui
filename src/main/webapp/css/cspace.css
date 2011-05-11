@@ -1678,8 +1678,9 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
     background: transparent url('../images/icnDelete.png') no-repeat right center;
 }
 .cs-recordList-thumbnail {
-    max-height: 19px;
-    max-width: 19px;
+    max-height: 10px;
+    max-width: 10px;
+    padding-left: 4.5px;
 }
 
 .cs-mediaUploader-fileUploaderContainer .fl-uploader-browse input[type=file] {

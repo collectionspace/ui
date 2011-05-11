@@ -210,12 +210,15 @@ cspace = cspace || {};
         },
         styles: {
             thumbnail: "cs-recordList-thumbnail"
-        }
+        },
+        urls: cspace.componentUrlBuilder({
+            icnMedia: "%webapp/images/icnMedia.png"
+        })
     });
     cspace.recordList.thumbRenderer.finalInitFunction = function (that) {
         var segs = fluid.model.parseEL(that.options.row);
         var item = that.model[that.options.elPath][segs[segs.length - 1]];
-        that.container.attr("src", item.imgThumb)
+        that.container.attr("src", item.imgThumb || that.options.urls.icnMedia)
             .attr("alt", that.options.strings.thumbnail)
             .addClass(that.options.styles.thumbnail);
     };
@@ -243,24 +246,15 @@ cspace = cspace || {};
                 }
             }
         });
-        tree.expander[0].trueTree.expander[0].tree.expander.push({
-            type: "fluid.renderer.condition",
-            condition: {
-                funcName: "cspace.recordList.showThumbnail",
-                args: [that.model, that.options.elPaths.items, "{row}"]
-            },
-            trueTree: {
-                thumbnail: {
-                    decorators: {
-                        type: "fluid",
-                        func: "cspace.recordList.thumbRenderer",
-                        options: {
-                            row: "{row}"
-                        }
-                    }
+        tree.expander[0].trueTree.expander[0].tree.thumbnail = {
+            decorators: {
+                type: "fluid",
+                func: "cspace.recordList.thumbRenderer",
+                options: {
+                    row: "{row}"
                 }
             }
-        });
+        };
         return tree;
     };
     
