@@ -326,12 +326,12 @@ cspace = cspace || {};
     // NOTE: THIS IS A HACK BECAUSE THE SERVER DOES NOT RETURN ANY PAYLOAD RELATED TO THE MEDIA ATTACHED (CSPACE-3757).
     cspace.recordEditor.produceTreeMedia = function (that) {
         var tree = cspace.recordEditor.produceTree(that);
-        fluid.merge(null, tree.expander[0].trueTree, {
+        fluid.merge(null, tree.expander[1].trueTree, {
             mediaImage: {
                 decorators: [{
                     type: "attrs",
                     attributes: {
-                        src: fluid.stringTemplate(that.options.urls.thumbnailURL, {csid: that.model.fields.blobCsid})
+                        src: "${fields.blobs.0.imgThumb}"
                     }
                 }, {
                     type: "addClass",
@@ -347,9 +347,7 @@ cspace = cspace || {};
     };
     
     cspace.recordEditor.navigateToFullImage = function (that) {
-        window.open(fluid.stringTemplate(that.options.urls.fullImageURL, {
-            csid: that.model.fields.blobCsid
-        }), "_blank", fluid.stringTemplate(that.options.strings.originalMediaOptions, {
+        window.open(that.model.fields.blobs[0].imgOrig, "_blank", fluid.stringTemplate(that.options.strings.originalMediaOptions, {
             height: that.options.originalMediaDimensions.height,
             width: that.options.originalMediaDimensions.width
         }));
@@ -504,9 +502,7 @@ cspace = cspace || {};
             deleteMessageMediaAttached: " and its attached media"
         },
         urls: cspace.componentUrlBuilder({
-            deleteURL: "%webapp/html/findedit.html",
-            thumbnailURL: "%chain/download/%csid/Thumbnail",
-            fullImageURL: "%chain/download/%csid/Original"
+            deleteURL: "%webapp/html/findedit.html"
         })
     });
     

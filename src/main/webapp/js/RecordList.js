@@ -137,7 +137,7 @@ cspace = cspace || {};
                                     value: "${{column}}",
                                     decorators: [{
                                         type: "addClass",
-                                        classes: that.options.styles.column + that.options.columns.length.toString()
+                                        classes: that.options.styles["column" + that.options.columns.length.toString()]
                                     }, {
                                         type: "addClass",
                                         classes: that.options.styles.column
@@ -182,7 +182,7 @@ cspace = cspace || {};
                                         classes: that.options.styles.titleColumn
                                     }, {
                                         type: "addClass",
-                                        classes: that.options.styles.column + that.options.columns.length.toString()
+                                        classes: that.options.styles["column" + that.options.columns.length.toString()]
                                     }]
                                 }
                             }
@@ -200,6 +200,24 @@ cspace = cspace || {};
                 }
             }]
         };
+    };
+    
+    fluid.defaults("cspace.recordList.thumbRenderer", {
+        gradeNames: ["fluid.viewComponent", "autoInit"],
+        finalInitFunction: "cspace.recordList.thumbRenderer.finalInitFunction",
+        strings: {
+            thumbnail: "This is a thumbnail for the related record."
+        },
+        styles: {
+            thumbnail: "cs-recordList-thumbnail"
+        }
+    });
+    cspace.recordList.thumbRenderer.finalInitFunction = function (that) {
+        var segs = fluid.model.parseEL(that.options.row);
+        var item = that.model[that.options.elPath][segs[segs.length - 1]];
+        that.container.attr("src", item.imgThumb)
+            .attr("alt", that.options.strings.thumbnail)
+            .addClass(that.options.styles.thumbnail);
     };
     
     cspace.recordList.produceTreeTabs = function (that) {
@@ -225,7 +243,31 @@ cspace = cspace || {};
                 }
             }
         });
+        tree.expander[0].trueTree.expander[0].tree.expander.push({
+            type: "fluid.renderer.condition",
+            condition: {
+                funcName: "cspace.recordList.showThumbnail",
+                args: [that.model, that.options.elPaths.items, "{row}"]
+            },
+            trueTree: {
+                thumbnail: {
+                    decorators: {
+                        type: "fluid",
+                        func: "cspace.recordList.thumbRenderer",
+                        options: {
+                            row: "{row}"
+                        }
+                    }
+                }
+            }
+        });
         return tree;
+    };
+    
+    cspace.recordList.showThumbnail = function (model, elPath, row) {
+        var segs = fluid.model.parseEL(row);
+        var item = model[elPath][segs[segs.length - 1]];
+        return !!(item && item.imgThumb);
     };
     
     var selectNavigate = function (model, options, url, typePath) {
@@ -296,7 +338,8 @@ cspace = cspace || {};
             nothingYet: ".csc-recordList-no-items",
             row: ".csc-recordList-row",
             column: ".csc-recordList-column",
-            deleteRelation: ".csc-recordList-deleteRelation"
+            deleteRelation: ".csc-recordList-deleteRelation",
+            thumbnail: ".csc-recordList-thumbnail"
         },
         repeatingSelectors: ["row", "titleColumn", "column"],
         strings: {
@@ -368,6 +411,48 @@ cspace = cspace || {};
         });
         return false;
     };
+    
+    fluid.demands("list", ["cspace.listEditor", "cspace.tab", "media"], {
+        container: "{listEditor}.dom.list",
+        options: {
+            showDeleteButton: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.permissions.resolveMultiple",
+                    args: {
+                        recordTypeManager: "{recordTypeManager}",
+                        resolver: "{permissionsResolver}",
+                        allOf: [{
+                            target: "{relatedRecordsTab}.primary",
+                            permission: "update"
+                        }, {
+                            target: "{relatedRecordsTab}.related",
+                            permission: "update"
+                        }]
+                    }
+                }
+            },
+            columns: ["number", "summary"],
+            produceTree: cspace.recordList.produceTreeTabs,
+            invokers: {
+                deleteRelation: {
+                    funcName: "cspace.recordList.deleteRelation",
+                    args: ["{arguments}.0", "{recordList}", "{details}", "{relatedRecordsTab}"]
+                }
+            },
+            styles: {
+                deleteRelation: "cs-recordList-deleteRelation",
+                titleColumn: "cs-recordList-title-column-tab",
+                column2: "cs-recordList-column2-tab"
+            },
+            strings: {
+                number: "ID Number",
+                summary: "Summary",
+                newRow: "Creating New Related Record...",
+                deleteRelation: "Delete this relation."
+            }
+        }
+    });
     
     fluid.demands("list", ["cspace.listEditor", "cspace.tab"], {
         container: "{listEditor}.dom.list",

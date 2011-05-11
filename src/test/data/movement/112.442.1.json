@@ -51,6 +51,17 @@
                 "relationshiptype": "affects",
                 "recordtype": "movement"
             }
+        ],
+        "media": [
+            {
+                "summary": "Sample File, July 3, 2011",
+                "csid": "123456789",
+                "number": "MH2011.3",
+                "relid": "19ba9f30-75c3-abcd-abcd",
+                "relationshiptype": "affects",
+                "recordtype": "media",
+                "imgThumb": "../../../test/data/images/Thumbnail.jpeg"
+            }
         ]
     }
 }

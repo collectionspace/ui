@@ -27,9 +27,9 @@ cspace = cspace || {};
     cspace.sidebar = function (container, options) {
         var that = fluid.initRendererComponent("cspace.sidebar", container, options);
         restrictRelatedRecordLists(that);
-
-        that.renderer.refreshView();
         fluid.initDependents(that);
+        that.renderer.refreshView();
+        that.events.afterRender.fire();
         
         that.options.recordApplier.modelChanged.addListener("termsUsed", function (model, oldModel, changeRequest) {
             that.termsUsed.applier.requestChange("items", model.termsUsed);
@@ -99,7 +99,7 @@ cspace = cspace || {};
                     }
                 }
             },
-            expander: {
+            expander: [{
                 repeatID: "categoryContainer",
                 type: "fluid.renderer.repeat",
                 pathAs: "category",
@@ -111,8 +111,42 @@ cspace = cspace || {};
                         classes: "{categoryName}.categoryClass"
                     }]
                 }
-            }
+            }, {
+                type: "fluid.renderer.condition",
+                condition: that.showMediumImage(),
+                trueTree: {
+                    mediumImage: {
+                        decorators: [{
+                            type: "addClass",
+                            classes: that.options.styles.mediumImage
+                        }, {
+                            type: "attrs",
+                            attributes: {
+                                alt: that.options.strings.mediumImage,
+                                src: that.options.recordModel.fields && that.options.recordModel.fields.blobs && that.options.recordModel.fields.blobs.length > 0 ? 
+                                    that.options.recordModel.fields.blobs[0].imgMedium : ""
+                            }
+                        }]
+                    },
+                    mediaSnapshot: {
+                        decorators: [{
+                            type: "addClass",
+                            classes: that.options.styles.mediaSnapshot
+                        }]
+                    }
+                },
+                falseTree: {
+                    mediaSnapshot: {}
+                }
+            }]
         };
+    };
+    
+    cspace.sidebar.showMediumImage = function (recordModel) {
+        if (!recordModel.fields) {
+            return false;
+        }
+        return !!(recordModel.fields.blobs && recordModel.fields.blobs.length > 0);
     };
     
     fluid.defaults("cspace.sidebar", {
@@ -120,6 +154,7 @@ cspace = cspace || {};
         components: {
             termsUsed: {
                 type: "cspace.recordList",
+                createOnEvent: "afterRender",
                 options: {
                     model: {
                         items: "{sidebar}.options.recordModel.termsUsed"
@@ -139,6 +174,7 @@ cspace = cspace || {};
             },
             cataloging: {
                 type: "cspace.relatedRecordsList",
+                createOnEvent: "afterRender",
                 options: {
                     primary: "{sidebar}.options.primaryRecordType",
                     related: "cataloging",
@@ -149,6 +185,7 @@ cspace = cspace || {};
             },
             procedures: {
                 type: "cspace.relatedRecordsList",
+                createOnEvent: "afterRender",
                 options: {
                     primary: "{sidebar}.options.primaryRecordType",
                     related: "procedures",
@@ -159,6 +196,7 @@ cspace = cspace || {};
             },
             togglable: {
                 type: "cspace.util.togglable",
+                createOnEvent: "afterRender",
                 options: {
                     selectors: {
                         header: "{sidebar}.options.selectors.header",
@@ -166,6 +204,15 @@ cspace = cspace || {};
                     }
                 }
             }
+        },
+        invokers: {
+            showMediumImage: {
+                funcName: "cspace.sidebar.showMediumImage",
+                args: "{sidebar}.options.recordModel"
+            }
+        },
+        events: {
+            afterRender: null
         },
         model: {
             categories: [{
@@ -204,6 +251,7 @@ cspace = cspace || {};
         selectors: {
             numOfTerms: ".csc-num-items-terms",
             mediaSnapshot: ".csc-media-snapshot",
+            mediumImage: ".csc-sidebar-mediumImage",
             termsUsed: ".csc-integrated-authorities",
             "categoryContainer:": ".csc-related-record", //to be repeated
             relatedCataloging: ".csc-related-cataloging",
@@ -215,7 +263,7 @@ cspace = cspace || {};
             header: ".csc-sidebar-header",
             togglable: ".csc-sidebar-togglable"
         },
-        selectorsToIgnore: ["numOfTerms", "mediaSnapshot", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable"],
+        selectorsToIgnore: ["numOfTerms", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable"],
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -227,7 +275,12 @@ cspace = cspace || {};
             reportHeader: "Create Report",
             mediaHeader: "Media Snapshot",
             termsHeader: "Terms Used",
-            reportButton: "Create"
+            reportButton: "Create",
+            mediumImage: "This is medium media image."
+        },
+        styles: {
+            mediumImage: "cs-sidebar-mediumImage",
+            mediaSnapshot: "cs-media-snapshot-image"
         }
     });
         

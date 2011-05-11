@@ -873,6 +873,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             funcName: "cspace.recordList.selectNavigateVocab",
             args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigate"]
         });
+        fluid.demands("cspace.recordList.thumbRenderer", "cspace.recordList", {
+            container: "{arguments}.0",
+            options: {
+                model: "{recordList}.model",
+                elPath: "{recordList}.options.elPaths.items"
+            }
+        });
         
         // Login demands
         fluid.demands("login", "cspace.pageBuilder", {
@@ -1093,6 +1100,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     },
                     nonVocabularies: {
                         type: "cspace.relatedRecordsList",
+                        createOnEvent: "afterRender",
                         options: {
                             primary: "{sidebar}.options.primaryRecordType",
                             related: "nonVocabularies",
@@ -1139,6 +1147,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     },
                     nonVocabularies: {
                         type: "cspace.relatedRecordsList",
+                        createOnEvent: "afterRender",
                         options: {
                             primary: "{sidebar}.options.primaryRecordType",
                             related: "nonVocabularies",
@@ -1185,6 +1194,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     },
                     nonVocabularies: {
                         type: "cspace.relatedRecordsList",
+                        createOnEvent: "afterRender",
                         options: {
                             primary: "{sidebar}.options.primaryRecordType",
                             related: "nonVocabularies",

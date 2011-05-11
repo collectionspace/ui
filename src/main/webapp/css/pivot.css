@@ -23,6 +23,10 @@
 	background-repeat: no-repeat; 
 	background-position:center; 
 	min-height:165px;}
+.cs-media-snapshot-image .cs-sidebar-mediaImage {
+    background: none;
+    min-height: 0;
+}
 .media-snapshot .content {
 	padding:6px;}
 .media-snapshot .content img {

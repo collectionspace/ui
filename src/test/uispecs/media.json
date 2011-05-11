@@ -98,7 +98,7 @@
         ".csc-media-dateModified": "${fields.dateModified}",
         ".csc-blobs-imgThumb": "${fields.blobs.0.imgThumb}",
         ".csc-blobs-name": "${fields.blobs.0.name}",
-        "expander": {
+        "expander": [{
             "trueTree": {
                 ".csc-media-blobs": {
                     
@@ -117,9 +117,22 @@
                     }
                 }
             }
-        },
+        }, {
+                "repeatID": ".csc-blobs-dimensionGroup:",
+                "tree": {
+                    ".csc-blobs-value": "${{row}.value}",
+                    ".csc-blobs-measurementMethod": "${{row}.measurementMethod}",
+                    ".csc-blobs-measuredBy": "${{row}.measuredBy}",
+                    ".csc-blobs-valueQualifier": "${{row}.valueQualifier}",
+                    ".csc-blobs-valueDate": "${{row}.valueDate}",
+                    ".csc-blobs-measurementUnit": "${{row}.measurementUnit}",
+                    ".csc-blobs-dimension": "${{row}.dimension}"
+                },
+                "type": "fluid.renderer.repeat",
+                "pathAs": "row",
+                "controlledBy": "fields.blobs.0.dimensionGroup"
+        }],
         ".csc-media-updatedAt": "${fields.updatedAt}",
-        ".csc-blobs-depth": "${fields.blobs.0.depth}",
         ".csc-media-location": "${fields.location}",
         ".csc-media-rightsHolder": {
             "decorators": [
@@ -185,7 +198,6 @@
         },
         ".csc-media-source": "${fields.source}",
         ".csc-blobs-updatedAt": "${fields.blobs.0.updatedAt}",
-        ".csc-blobs-width": "${fields.blobs.0.width}",
         ".csc-media-externalMediaUrl": "${fields.externalMediaUrl}",
         ".csc-media-subject": {
             "decorators": [
@@ -392,7 +404,6 @@
         ".csc-media-blobCsid": "${fields.blobCsid}",
         ".csc-media-title": "${fields.title}",
         ".csc-blobs-tenantID": "${fields.blobs.0.tenantID}",
-        ".csc-blobs-height": "${fields.blobs.0.height}",
         ".csc-blobs-data": "${fields.blobs.0.data}",
         ".csc-media-identificationNumber": "${fields.identificationNumber}",
         ".csc-media-filename": "${fields.filename}",
@@ -420,19 +431,19 @@
                                                     "Please select a value",
                                                     "Middle English",
                                                     "Old English",
-                                                    "Swahili",
-                                                    "Ancient Greek",
                                                     "Latin",
+                                                    "Ancient Greek",
+                                                    "Swahili",
                                                     "Korean",
-                                                    "Chinese",
-                                                    "Japanese",
                                                     "Hebrew",
-                                                    "Russian",
+                                                    "Japanese",
                                                     "Arabic",
+                                                    "Chinese",
+                                                    "Russian",
                                                     "German",
                                                     "Portuguese",
-                                                    "Italian",
                                                     "French",
+                                                    "Italian",
                                                     "Spanish",
                                                     "English"
                                                 ],
@@ -440,19 +451,19 @@
                                                     "",
                                                     "middleenglish",
                                                     "oldenglish",
-                                                    "swahili",
-                                                    "ancientgreek",
                                                     "latin",
+                                                    "ancientgreek",
+                                                    "swahili",
                                                     "korean",
-                                                    "chinese",
-                                                    "japanese",
                                                     "hebrew",
-                                                    "russian",
+                                                    "japanese",
                                                     "arabic",
+                                                    "chinese",
+                                                    "russian",
                                                     "german",
                                                     "portuguese",
-                                                    "italian",
                                                     "french",
+                                                    "italian",
                                                     "spn",
                                                     "eng"
                                                 ],

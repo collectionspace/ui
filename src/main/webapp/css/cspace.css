@@ -701,7 +701,10 @@ table tbody.highlight tr:hover td {
 	line-height:11px;}
 .info-pair .content tbody tr {}
 .info-pair .content tbody td {
-	border: 1px solid #C7CFD4;}
+	border: 1px solid #C7CFD4;
+    padding-left: 2px;
+    height: 19px;
+}
 .info-pair .content tbody td input {
 	/*margin:0 -2px 0 2px;*/}
 .info-pair .content tbody td .content {
@@ -1567,6 +1570,14 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
     white-space:nowrap;
     display: block;
 }
+.cs-recordList .cs-recordList-title-column-tab {
+    float: left;
+    padding: 0 2px 0 23px;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    display: block;
+}
 .cs-recordList .cs-recordList-column {
     padding: 0 2px 0 4px;
     text-overflow:ellipsis;
@@ -1579,6 +1590,9 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
 }
 .cs-recordList .cs-recordList-column2 {
     width: 47.6%;
+}
+.cs-recordList .cs-recordList-column2-tab {
+    width: 46.5%;
 }
 .cs-recordList .cs-recordList-column3 {
     width: 31.5%;
@@ -1663,6 +1677,10 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
 .cs-recordList .cs-recordList-deleteRelation:hover {
     background: transparent url('../images/icnDelete.png') no-repeat right center;
 }
+.cs-recordList-thumbnail {
+    max-height: 19px;
+    max-width: 19px;
+}
 
 .cs-mediaUploader-fileUploaderContainer .fl-uploader-browse input[type=file] {
     bottom: 19px;
@@ -1685,4 +1703,7 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
     border: 1px solid #C7CFD4;
     height: 19px;
     line-height: 15px;
+}
+.cs-sidebar-mediumImage {
+    max-height: 165px;
 }

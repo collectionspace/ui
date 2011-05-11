@@ -8,6 +8,51 @@
     "csid": "123456789",
     "fields": {
         "blobCsid": "aa5d64e6-8e45-41f0-aa57",
+        "blobs": [
+            {
+                "updatedAt": "2011-05-10T15:10:33Z",
+                "height": "67",
+                "createdAt": "2011-05-10T15:10:33Z",
+                "name": "CSpaceLogo.png",
+                "width": "349",
+                "length": "2108",
+                "mimeType": "image/png",
+                "depth": "8",
+                "imgOrig": "../../../test/data/images/Original.png",
+                "imgThumb": "../../../test/data/images/Thumbnail.jpeg",
+                "imgMedium": "../../../test/data/images/Medium.jpeg",
+                "dimensionGroup": [
+                    {
+                        "_primary": true,
+                        "dimension": "width",
+                        "measuredBy": "",
+                        "valueDate": "",
+                        "measurementUnit": "pixels",
+                        "value": "1200",
+                        "valueQualifier": "",
+                        "measurementMethod": ""
+                    },
+                    {
+                        "dimension": "height",
+                        "measuredBy": "",
+                        "valueDate": "",
+                        "measurementUnit": "pixels",
+                        "value": "900",
+                        "valueQualifier": "",
+                        "measurementMethod": ""
+                    },
+                    {
+                        "dimension": "depth",
+                        "measuredBy": "",
+                        "valueDate": "",
+                        "measurementUnit": "bits",
+                        "value": "8",
+                        "valueQualifier": "",
+                        "measurementMethod": ""
+                    }
+                ]
+            }
+        ],
         "csid": "123456789",
         "contributor": "urn:cspace:org.collectionspace.demo:personauthority:name(person):person:name(johnsmith)'John+Smith'",
         "copyrightStatement": "This is copyright",
