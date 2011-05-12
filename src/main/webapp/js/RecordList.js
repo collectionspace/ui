@@ -246,6 +246,11 @@ cspace = cspace || {};
                 }
             }
         });
+        return tree;
+    };
+    
+    cspace.recordList.produceTreeMediaTabs = function (that) {
+        var tree = cspace.recordList.produceTreeTabs(that);
         tree.expander[0].trueTree.expander[0].tree.thumbnail = {
             decorators: {
                 type: "fluid",
@@ -427,7 +432,7 @@ cspace = cspace || {};
                 }
             },
             columns: ["number", "summary"],
-            produceTree: cspace.recordList.produceTreeTabs,
+            produceTree: cspace.recordList.produceTreeMediaTabs,
             invokers: {
                 deleteRelation: {
                     funcName: "cspace.recordList.deleteRelation",
