@@ -19,19 +19,20 @@
 	width:100%; 
 	border-bottom:3px solid #CDE2F2;}
 .cs-sidebar-mediaImage {
-	background-image: url(../images/sample.png); 
+	/*background-image: url(../images/sample.png); */
 	background-repeat: no-repeat; 
 	background-position:center; 
-	min-height:165px;}
+	/*min-height:165px;*/}
 .cs-media-snapshot-image .cs-sidebar-mediaImage {
     background: none;
     min-height: 0;
 }
 .media-snapshot .content {
-	padding:6px;}
+	/*padding:6px;*/}
 .media-snapshot .content img {
 	margin-left:auto; 
 	margin-right:auto; 
+	padding:6px 0;
 	display:block;}
 .pivot-box .content, .pivot-box-content, .pivot-search-box-content, .pivot-users-box-content {
 	font-size:10px; 

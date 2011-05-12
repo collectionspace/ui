@@ -1367,7 +1367,7 @@ ul.menu-record li a {
 	background-color:inherit; 
 	padding:0;}
 .cs-pivot-searchBox .cs-searchBox select {
-	margin-top:10px;}
+	/*margin-top:10px;*/}
 .cs-confirmationDialog .cs-searchBox .cs-searchBox-button {
     float: none;
 }
@@ -1626,18 +1626,19 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
 .cs-recordList .csc-recordList-row:hover, .cs-recordList .csc-recordList-row:nth-child(even):hover {
     background-color: #C3D9E9;
 }
-.cs-recordList .csc-recordList-row:focus {
+.cs-recordList .cs-recordList-row:focus,
+.cs-recordList .cs-recordList-row:nth-child(even):focus {
     background-color: #C3D9E9;
 }
 .cs-recordList .cs-recordList-row {
-    padding: 5px 0 4px 0;
+    padding: 4px 0 1px 0;
     background-color: #F0F5FB;
     border-bottom: 0 solid #ADADAD;
     color: #000000;
     vertical-align: top;
     border: 0 none;
     text-align: left;
-    min-height: 13px;
+    min-height: 15px;
     width: 100%;
     cursor:pointer;
 }
