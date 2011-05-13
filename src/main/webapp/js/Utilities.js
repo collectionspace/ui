@@ -16,8 +16,6 @@ fluid.registerNamespace("cspace.util");
 (function ($, fluid) {
     fluid.log("Utilities.js loaded");
     
-    fluid.setLogging(true);
-    
     // Calls to this should cease to appear in application code
     cspace.util.useLocalData = function () {
         return document.location.protocol === "file:";
