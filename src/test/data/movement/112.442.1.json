@@ -60,7 +60,9 @@
                 "relid": "19ba9f30-75c3-abcd-abcd",
                 "relationshiptype": "affects",
                 "recordtype": "media",
-                "imgThumb": "../../../test/data/images/Thumbnail.jpeg"
+                "summarylist": {
+                    "imgThumb": "../../../test/data/images/Thumbnail.jpeg"
+                }
             }
         ]
     }
