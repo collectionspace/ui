@@ -66,7 +66,7 @@ cspace = cspace || {};
             modal: true,
             minWidth: 700,
             draggable: true,
-            dialogClass: "cs-search-dialog",
+            dialogClass: "cs-search-dialog cs-search-dialogFor-" + recordName.replace(/\s+/g,""),
             position: ["center", 100],
             title: title                
         });
