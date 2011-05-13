@@ -218,7 +218,7 @@ cspace = cspace || {};
     cspace.recordList.thumbRenderer.finalInitFunction = function (that) {
         var segs = fluid.model.parseEL(that.options.row);
         var item = that.model[that.options.elPath][segs[segs.length - 1]];
-        that.container.attr("src", item.imgThumb || that.options.urls.icnMedia)
+        that.container.attr("src", item.summarylist.imgThumb || that.options.urls.icnMedia)
             .attr("alt", that.options.strings.thumbnail)
             .addClass(that.options.styles.thumbnail);
     };
