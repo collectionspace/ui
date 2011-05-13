@@ -11266,7 +11266,7 @@ var fluid_1_4 = fluid_1_4 || {};
                     if (arg && typeof(arg) === "object" && !arg.targetTypeName) {
                         arg.targetTypeName = demandspec.funcName;
                     }
-                    args[i] = {marker: fluid.EXPAND, value: arg, localRecord: upstreamLocalRecord};
+                    args[i] = {marker: fluid.EXPAND, value: fluid.copy(arg), localRecord: upstreamLocalRecord};
                 }
                 if (args[i] && fluid.isMarker(args[i].marker, fluid.EXPAND_NOW)) {
                     args[i] = fluid.expander.expandLight(args[i].value, expandOptions);
