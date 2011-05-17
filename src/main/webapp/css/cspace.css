@@ -1190,6 +1190,8 @@ td.disabled, td.disabled input, input[disabled]  {
 	background-image:none;}
 input[disabled]:hover, input[disabled]:hover	{
 	background-color:#CCC !important;}
+.disabled input {
+	display:none;}
 .activate input {
 	color:black !important; 
 	background-color:#fff !important;}
@@ -1627,7 +1629,7 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
     background-color: #C3D9E9;
 }
 .cs-recordList .cs-recordList-row:focus,
-.cs-recordList .cs-recordList-row:nth-child(even):focus {
+.cs-recordList .cs-recordList-row:nth-child(even):focus f{
     background-color: #C3D9E9;
 }
 .cs-recordList .cs-recordList-row {
