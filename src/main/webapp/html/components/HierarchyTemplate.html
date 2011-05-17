@@ -2,8 +2,8 @@
     <div class="csc-hierarchy-header fl-container-flex header toggle"></div>
     <div class="csc-hierarchy-togglable fl-container-flex fl-fix content main"> 
         <div class="info-column fl-force-left">
-            <div class="info-column fl-force-left">
-                <div class="info-column2-70 fl-force-left" > 
+            <div class="info-column">
+                <div class="info-column" > 
 	                <div class="info-column2-40 fl-force-left" >    
 	                    <div class="info-pair">
 	                        <div class="header">
@@ -24,8 +24,11 @@
 	                        </div>
 	                    </div>
 	                </div>
+					<div class="clear"></div>
 	            </div>
-                <div class="info-column2-30 fl-force-right" >    
+			</div>
+			<div class="info-column2-40">
+                   
                     <div class="info-pair">
                         <div class="header">
                             <div class="csc-hierarchy-narrowerContexts-label label"></div>
@@ -34,7 +37,7 @@
                             <input type="text" class="csc-hierarchy-narrowerContext" />
                         </div>
                     </div>
-                </div>
+                
             </div>
             <div class="info-column fl-force-left">
                 <div class="info-column2-50 fl-force-left" >    
@@ -42,9 +45,11 @@
                         <div class="header">
                             <div class="csc-hierarchy-relatedTerms-label label"></div>
                         </div>
-                        <div class="content">
+                        <div class="content disabled">
                             <input type="text" class="csc-hierarchy-relatedTerm" />
                         </div>
+						<div><input type="text" disabled="disabled" /></div> 
+						<!-- temporary diabled field. remove once csc-hierarchy-relatedTerm is enabled -->
                     </div>
                 </div>
             </div>
