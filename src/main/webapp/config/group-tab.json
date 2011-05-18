@@ -43,7 +43,7 @@
                                         "details": {
                                             "options": {
                                                 "selectors": {
-                                                    "identificationNumber": ".csc-group-tile"
+                                                    "identificationNumber": ".csc-group-title"
                                                 },
                                                 "strings": {
                                                     "identificationNumberRequired": "Please specify a Title" 
