@@ -438,23 +438,23 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{autocomplete}.autocompleteInput"
         });
         fluid.demands("cspace.autocomplete", "cspace.recordEditor", {
-            container: "{arguments}.0"
+            container: "{arguments}.0" 
         });
         fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "location", "cspace.hierarchy"], {
             container: "{arguments}.0",
-            options: {
+            mergeAllOptions: [{
                 components: {
                     confirmation: "{confirmation}"
                 }
-            }
+            }, "{arguments}.1"]
         });
         fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "person", "cspace.hierarchy"], {
             container: "{arguments}.0",
-            options: {
+            mergeAllOptions: [{
                 components: {
                     confirmation: "{confirmation}"
                 }
-            }
+            }, "{arguments}.1"]
         });
         
         // Confirmation demands
@@ -918,9 +918,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // Number pattern chooser demands
         fluid.demands("cspace.numberPatternChooser", "cspace.recordEditor", {
             container: "{arguments}.0",
-            options: {
+            mergeAllOptions: [{
                 baseUrl: "{recordEditor}.options.dataContext.options.baseUrl"
-            }
+            }, "{arguments}.1"]
         });
         
         // Togglable demands
@@ -1032,19 +1032,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // Repeatable demands
         fluid.demands("cspace.makeRepeatable", "cspace.recordEditor", {
             container: "{arguments}.0",
-            options: {
-                applier: "{recordEditor}.options.applier",
+            mergeAllOptions: [{
+                applier: "{recordEditor}.applier",
                 model: "{recordEditor}.model"
-            }
+            }, "{arguments}.1"]
         });
         
         // Structured date demands
         fluid.demands("cspace.structuredDate", "cspace.recordEditor", {
             container: "{arguments}.0",
-            options: {
+            mergeAllOptions: [{
                 applier: "{recordEditor}.applier",
                 model: "{recordEditor}.model"
-            }
+            }, "{arguments}.1"]
         });
         
         // searchView deamnds
@@ -1312,6 +1312,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.includeTestDemands = function () {
         
+        // Record editor demands
+        fluid.demands("afterDelete", ["cspace.recordEditor", "cspace.test"], {
+            funcName: "cspace.tests.testAfterDelete",
+            args: "{recordEditor}"
+        });
+        
         // Record list demands
         fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test"], {
             funcName: "cspace.tests.selectNavigate",
@@ -1391,6 +1397,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         priority: "last"
                     }
                 }
+            }
+        });
+        
+        fluid.demands("dataContext", ["cspace.test", "cspace.localData"], {
+            options: {
+                fileExtension: ".json"
             }
         });
         

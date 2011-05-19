@@ -65,7 +65,6 @@ cspace = cspace || {};
             that.verifyColumnOrder();
             that.renderer.refreshView();
             bindEvents(that);
-            that.events.afterRender.fire();
         };
         
         that.refreshView();
@@ -322,12 +321,11 @@ cspace = cspace || {};
             selectonIndex: -1
         },
         events: {
-            onSelect: null,
-            afterRender: null
+            onSelect: null
         },
         showTitle: true,
         showNumberOfItems: true,
-        gradeNames: ["fluid.IoCRendererComponent"],
+        gradeNames: "fluid.rendererComponent",
         selectors: {
             newRow: ".csc-recordList-new",
             recordList: ".csc-recordList",

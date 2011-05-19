@@ -84,7 +84,9 @@ cspace = cspace || {};
         var that = fluid.initRendererComponent("cspace.myCollectionSpace", container, options);
         setupMyCollectionSpace(that);
         fluid.withEnvironment({resourceSpecCollector: that.options.collector}, function () {
-            that.options.components = fluid.expander.expandLight(that.options.components, {noValue: true});
+            that.options.components = fluid.expander.expandLight(that.options.components, {
+                fetcher: fluid.makeEnvironmentFetcher()
+            });
         });
         fluid.each(that.options.collector, function (spec, key) {
             spec.options.success = cspace.util.composeCallbacks(spec.options.success, initDependent(that, key));
@@ -150,7 +152,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.myCollectionSpace", {
-        gradeNames: ["fluid.IoCRendererComponent"],
+        gradeNames: "fluid.rendererComponent",
         instantiator: "{instantiator}",
         mergePolicy: {
             instantiator: "nomerge"

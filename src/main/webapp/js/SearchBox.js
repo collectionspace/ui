@@ -36,7 +36,6 @@ cspace = cspace || {};
         };
         if (that.options.selfRender) {
             that.refreshView();
-            that.events.afterRender.fire();
         }
         return that;
     };
@@ -76,7 +75,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.searchBox", {
-        gradeNames: ["fluid.IoCRendererComponent"],
+        gradeNames: "fluid.rendererComponent",
         mergePolicy: {
             model: "preserve"   
         },
@@ -129,9 +128,6 @@ cspace = cspace || {};
                 fetchClass: "fastTemplate",
                 url: "%webapp/html/components/SearchBoxTemplate.html"
             })
-        },
-        events: {
-            afterRender: null
         }
     });
     

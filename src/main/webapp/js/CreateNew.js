@@ -138,7 +138,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.createNew", {
-        gradeNames: ["fluid.IoCRendererComponent"],
+        gradeNames: "fluid.rendererComponent",
         parentBundle: "{globalBundle}",
         model: {
             categories: [{

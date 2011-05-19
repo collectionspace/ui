@@ -200,27 +200,25 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         return that;
     };
     
-    cspace.autocomplete.makeSelectionTree = function (model, listPath, fieldName) {
-        var list = fluid.model.getBeanValue(model, listPath);
-        return { // TODO: This could *really* be done by an expander but it looks like right now the API is not suitable
-            children: 
-                fluid.transform(list, function (value, key) {
-                    return {
-                        valuebinding: fluid.model.composeSegments(listPath, key, fieldName)
-                    };
-                }
-            )
-        };
+    cspace.autocomplete.makeSelectionTree = function (tree, repeatID, listPath, fieldName) {
+        tree.expander = fluid.makeArray(tree.expander);
+        tree.expander.push({
+            repeatID: repeatID,
+            type: "fluid.renderer.repeat",
+            pathAs: "row",
+            controlledBy: listPath,
+            tree: "${" + fluid.model.composeSegments("{row}", fieldName) + "}"
+        });
     };
     
     cspace.autocomplete.matchTerm = function (label, term) {
         return label.toLowerCase() === term.toLowerCase();
     };
     
-    cspace.autocomplete.modelToTree = function (model, events) {
+    cspace.autocomplete.produceTree = function (that) {
         var tree = {};
-        var index = fluid.find(model.matches, function (match, index) {
-            if (cspace.autocomplete.matchTerm(match.label, model.term)) {
+        var index = fluid.find(that.model.matches, function (match, index) {
+            if (cspace.autocomplete.matchTerm(match.label, that.model.term)) {
                 return index;
             }
         });
@@ -230,17 +228,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 messagekey: "addTermTo",
                 args: {term: "${term}"}
             };
-            tree.authorityItem = cspace.autocomplete.makeSelectionTree(model, "authorities", "fullName");
+            cspace.autocomplete.makeSelectionTree(tree, "authorityItem", "authorities", "fullName");
         }
-        if (model.matches.length === 0) {
+        if (that.model.matches.length === 0) {
             tree.noMatches = {
                 messagekey: "noMatches"
             };
         }
         else {
             tree.matches = {};
-            tree.longestMatch = cspace.autocomplete.longest(model.matches);
-            tree.matchItem = cspace.autocomplete.makeSelectionTree(model, "matches", "label");
+            tree.longestMatch = cspace.autocomplete.longest(that.model.matches);
+            cspace.autocomplete.makeSelectionTree(tree, "matchItem", "matches", "label");
         }
         return tree;
     };
@@ -272,8 +270,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.container.click(activateFunction);
         
         that.open = function () {
-            var tree = that.treeBuilder();
-            that.render(tree);
+            that.renderer.refreshView();
             
             var activatables = that.locate("authorityItem").add(that.locate("matchItem"));
             fluid.activatable(activatables, activateFunction);
@@ -349,7 +346,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     fluid.defaults("cspace.autocomplete.popup", {
-        gradeNames: ["fluid.IoCRendererComponent"],
+        gradeNames: "fluid.rendererComponent",
         mergePolicy: {
             model: "preserve"
         },
@@ -367,12 +364,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             matchesSelect: "cs-autocomplete-matchItem-select"
         },
         repeatingSelectors: ["matchItem", "authorityItem"],
-        invokers: {
-            treeBuilder: {
-                funcName: "cspace.autocomplete.modelToTree",
-                args: ["{popup}.model", "{popup}.eventHolder.events"]
-            }  
-        },
+        produceTree: "cspace.autocomplete.produceTree",
         resources: {
             template: {
                 expander: {

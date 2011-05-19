@@ -105,7 +105,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.relationManager", {
-        gradeNames: ["fluid.IoCRendererComponent"],
+        gradeNames: "fluid.rendererComponent",
         produceTree: cspace.relationManager.produceTree,
         components: {
             dataContext: {

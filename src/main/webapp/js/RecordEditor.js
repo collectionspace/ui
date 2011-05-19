@@ -178,6 +178,7 @@ cspace = cspace || {};
     cspace.recordEditor = function (container, options) {
         var that = fluid.initRendererComponent("cspace.recordEditor", container, options);
         fluid.initDependents(that);
+        that.rollbackModel = fluid.copy(that.model.fields);
         
         that.refreshView = function () {
             fluid.log("RecordEditor.js before render");
@@ -186,7 +187,6 @@ cspace = cspace || {};
             that.rollbackModel = fluid.copy(that.model.fields);
             that.options.messageBar.hide();
             bindHandlers(that);
-            that.events.afterRender.fire(that);
             initDeferredComponents(that);
             fluid.log("RecordEditor.js renderPage end");
         };
@@ -402,7 +402,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.recordEditor", {
-        gradeNames: ["fluid.IoCRendererComponent"],
+        gradeNames: "fluid.rendererComponent",
         mergePolicy: {
             model: "preserve",
             applier: "nomerge",
@@ -456,8 +456,7 @@ cspace = cspace || {};
             onSave: "preventable",
             onCancel: null,
             afterRemove: null, // params: textStatus
-            onError: null,  // params: operation
-            afterRender: null
+            onError: null  // params: operation
         },
         showDeleteButton: false,
         selectors: {

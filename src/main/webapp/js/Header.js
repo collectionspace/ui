@@ -94,7 +94,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.header", {
-        gradeNames: ["fluid.IoCRendererComponent"],
+        gradeNames: "fluid.rendererComponent",
         mergePolicy: {
             model: "preserve"
         },

@@ -37,17 +37,6 @@ var loaninTester = function () {
                         }
                     }
                 }
-            },
-            pageBuilder: {
-                options: {
-                    listeners: {
-                        onDependencySetup: function (uispec) {
-                            // Change the template URL for the number pattern chooser.
-                            uispec.recordEditor[".csc-loanIn-loanInNumber-patternChooserContainer"].decorators[0].options.templateUrl = 
-                                "../../main/webapp/html/components/NumberPatternChooser.html";
-                        }
-                    }
-                }
             }
         };
         var loanIn = cspace.globalSetup("cspace.record", opts);

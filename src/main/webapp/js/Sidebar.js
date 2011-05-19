@@ -29,7 +29,6 @@ cspace = cspace || {};
         restrictRelatedRecordLists(that);
         fluid.initDependents(that);
         that.renderer.refreshView();
-        that.events.afterRender.fire();
         
         that.options.recordApplier.modelChanged.addListener("termsUsed", function (model, oldModel, changeRequest) {
             that.termsUsed.applier.requestChange("items", model.termsUsed);
@@ -150,7 +149,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.sidebar", {
-        gradeNames: ["fluid.IoCRendererComponent"],
+        gradeNames: "fluid.rendererComponent",
         components: {
             termsUsed: {
                 type: "cspace.recordList",
@@ -210,9 +209,6 @@ cspace = cspace || {};
                 funcName: "cspace.sidebar.showMediumImage",
                 args: "{sidebar}.options.recordModel"
             }
-        },
-        events: {
-            afterRender: null
         },
         model: {
             categories: [{

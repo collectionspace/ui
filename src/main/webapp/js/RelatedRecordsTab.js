@@ -114,7 +114,7 @@ cspace = cspace || {};
     };
 
     fluid.defaults("cspace.relatedRecordsTab", {
-        gradeNames: ["fluid.IoCRendererComponent"],
+        gradeNames: "fluid.rendererComponent",
         components: {
             relationManager: {
                 type: "cspace.relationManager",

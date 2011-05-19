@@ -198,7 +198,7 @@ cspace = cspace || {};
         events: {
             afterRender: null
         },
-        templateUrl: "../html/components/NumberPatternChooser.html",
+        templateUrl: cspace.componentUrlBuilder("%webapp/html/components/NumberPatternChooser.html"),
         baseUrl: "../../chain"
     });
     

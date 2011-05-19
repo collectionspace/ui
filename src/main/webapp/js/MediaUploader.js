@@ -40,7 +40,6 @@ cspace = cspace || {};
     
     cspace.mediaUploader.refreshView = function (that) {
         that.renderer.refreshView();
-        that.events.afterRender.fire();
     };
     
     cspace.mediaUploader.afterFileQueuedListener = function (input) {
@@ -170,7 +169,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.mediaUploader", {
-        gradeNames: ["fluid.IoCRendererComponent"],
+        gradeNames: "fluid.rendererComponent",
         invokers: {
             bindEvents: {
                 funcName: "cspace.mediaUploader.bindEvents",
@@ -232,8 +231,7 @@ cspace = cspace || {};
         },
         events: {
             onLink: null,
-            onRemove: null,
-            afterRender: null
+            onRemove: null
         },
         produceTree: cspace.mediaUploader.produceTree,
         components: {

@@ -1038,12 +1038,6 @@ var utilitiesTester = function ($) {
             "organization"
         ], recTypes.vocabularies);
     });
-    
-    utilitiesTest.test("loader", function () {
-        var loader = cspace.util.loadingIndicator(".csc-loading");
-        loader.show();
-        loader.hide();
-    });
 };
 
 (function () {

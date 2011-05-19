@@ -93,7 +93,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.titleBar", {
-        gradeNames: ["fluid.IoCRendererComponent"],
+        gradeNames: "fluid.rendererComponent",
         selectors: {
             title: ".csc-titleBar-value",
             recordType: ".csc-titleBar-recordType"
@@ -113,9 +113,8 @@ cspace = cspace || {};
             }
         },
         mergePolicy: {
-            model: "preserve",
             recordModel: "preserve",
-            recordApplier: "preserve"
+            recordApplier: "nomerge"
         },
         resolvers: {
             repeatableMatch: cspace.titleBar.repeatableMatchResolver

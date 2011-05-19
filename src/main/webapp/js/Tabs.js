@@ -78,7 +78,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.tabsList", {
-        gradeNames: ["fluid.IoCRendererComponent"],
+        gradeNames: "fluid.rendererComponent",
         mergePolicy: {
             model: "replace"
         },
@@ -180,7 +180,7 @@ cspace = cspace || {};
             select: function (event, ui) {
                 // noPrevent environment is set when user selects an option on the dialog
                 // at the point we don't want the dialog to show again.
-                if (!fluid.resolveEnvironment("{noPrevent}")) {
+                if (!fluid.resolveEnvironment("{noPrevent}", {fetcher: fluid.makeEnvironmentFetcher()})) {
                     that.options.globalNavigator.events.onPerformNavigation.fire(function () {
                         tabsList.locate("tabLink").removeClass(styles.current);
                         $(ui.tab).addClass(styles.current);

@@ -32,17 +32,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         }
                     }
                 }
-            },
-            pageBuilder: {
-                options: {
-                    pageType: "cataloging",
-                    listeners: {
-                        onDependencySetup: function (uispec) {
-                            // Change the template URL for the number pattern chooser.
-                            uispec.recordEditor[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl = "../../main/webapp/html/components/NumberPatternChooser.html";
-                        }
-                    }
-                }
             }
         }, options);
         cataloging = cspace.globalSetup("cspace.record", options);

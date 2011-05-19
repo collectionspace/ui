@@ -147,17 +147,17 @@ cspace.tests.testEnvironment = function(options) {
 
     that.test = function(message, func) {
         withResources(function() {
-            that.options.testCase.test(message, 
-                function() {fluid.withEnvironment(that.environment, func);}
-                );
+            that.options.testCase.test(message, function() {
+                fluid.withEnvironment(that.environment, func);
+            });
         });
     };
     
     that.asyncTest = function(message, func) {
         withResources(function() {
-            that.options.testCase.asyncTest(message, 
-                function() {fluid.withEnvironment(that.environment, func);}
-                );
+            that.options.testCase.asyncTest(message, function() {
+                fluid.withEnvironment(that.environment, func);
+            });
         });
     };
     
@@ -169,11 +169,11 @@ subcomponents, in order to properly contextualise tests which require environmen
 resolution, without bringing in the whole of pageBuilder as a component root */ 
 
 fluid.defaults("cspace.tests.testEnvironment", {
+    gradeNames: "fluid.modelComponent",
     mergePolicy: {
         permissions: "replace",
         schema: "replace",
-        model: "preserve",
-        applier: "nomerge"
+        testCase: "nomerge"
     },
     permissions: cspace.tests.sampleUserPerms,
     schema: cspace.tests.sampleSchema,

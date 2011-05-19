@@ -26,7 +26,7 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.hierarchy", {
-        gradeNames: ["fluid.IoCRendererComponent", "autoInit"],
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
         mergePolicy: {
             "rendererFnOptions.uispec": "uispec",
             "rendererOptions.applier": "applier",

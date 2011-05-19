@@ -21,7 +21,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     var recordEditorTest = cspace.tests.testEnvironment({testCase: bareRecordEditorTest});
 
     var setupRecordEditor = function (options, callback) {
-        var recordEditor;
         fluid.merge(null, options, {
             applier: fluid.makeChangeApplier(options.model),
             listeners: {
@@ -29,7 +28,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             },
             showDeleteButton: true
         });
-        recordEditor = cspace.recordEditor("#main", options);
+        cspace.recordEditor("#main", options);
     };
 
     recordEditorTest.asyncTest("Creation", function () {
@@ -53,6 +52,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             start();
         });
     });
+    
+    cspace.tests.testAfterDelete = function (that) {
+        jqUnit.assertTrue("Successfully executed remove", true);
+        start();
+    };
 
     recordEditorTest.asyncTest("Delete", function () {
         var model = {
@@ -66,10 +70,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }, function (re) {
             fluid.log("RETest: afterRender");
             re.confirmation.popup.bind("dialogopen", function () {
-                re.options.dataContext.events.afterRemove.addListener(function () {
-                    jqUnit.assertTrue("Successfully executed remove", true);
-                    start();
-                });
                 re.confirmation.confirmationDialog.locate("act").click();
             });
             re.remove();

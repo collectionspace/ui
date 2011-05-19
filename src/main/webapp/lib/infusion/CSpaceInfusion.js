@@ -6503,80 +6503,35 @@ window.jQuery = window.$ = jQuery;
 
 })(window);
 /*!
- * jQuery UI 1.8
+ * jQuery UI 1.8.12
  *
- * Copyright (c) 2010 AUTHORS.txt (http://jqueryui.com/about)
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * and GPL (GPL-LICENSE.txt) licenses.
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
  *
  * http://docs.jquery.com/UI
  */
-;jQuery.ui || (function($) {
+(function( $, undefined ) {
 
-//Helper functions and ui object
-$.ui = {
-	version: "1.8",
+// prevent duplicate loading
+// this is only a problem because we proxy existing functions
+// and we don't want to double proxy them
+$.ui = $.ui || {};
+if ( $.ui.version ) {
+	return;
+}
 
-	// $.ui.plugin is deprecated.  Use the proxy pattern instead.
-	plugin: {
-		add: function(module, option, set) {
-			var proto = $.ui[module].prototype;
-			for(var i in set) {
-				proto.plugins[i] = proto.plugins[i] || [];
-				proto.plugins[i].push([option, set[i]]);
-			}
-		},
-		call: function(instance, name, args) {
-			var set = instance.plugins[name];
-			if(!set || !instance.element[0].parentNode) { return; }
-
-			for (var i = 0; i < set.length; i++) {
-				if (instance.options[set[i][0]]) {
-					set[i][1].apply(instance.element, args);
-				}
-			}
-		}
-	},
-
-	contains: function(a, b) {
-		return document.compareDocumentPosition
-			? a.compareDocumentPosition(b) & 16
-			: a !== b && a.contains(b);
-	},
-
-	hasScroll: function(el, a) {
-
-		//If overflow is hidden, the element might have extra content, but the user wants to hide it
-		if ($(el).css('overflow') == 'hidden') { return false; }
-
-		var scroll = (a && a == 'left') ? 'scrollLeft' : 'scrollTop',
-			has = false;
-
-		if (el[scroll] > 0) { return true; }
-
-		// TODO: determine which cases actually cause this to happen
-		// if the element doesn't have the scroll set, see if it's possible to
-		// set the scroll
-		el[scroll] = 1;
-		has = (el[scroll] > 0);
-		el[scroll] = 0;
-		return has;
-	},
-
-	isOverAxis: function(x, reference, size) {
-		//Determines when x coordinate is over "b" element axis
-		return (x > reference) && (x < (reference + size));
-	},
-
-	isOver: function(y, x, top, left, height, width) {
-		//Determines when x, y coordinates is over "b" element
-		return $.ui.isOverAxis(y, top, height) && $.ui.isOverAxis(x, left, width);
-	},
+$.extend( $.ui, {
+	version: "1.8.12",
 
 	keyCode: {
+		ALT: 18,
 		BACKSPACE: 8,
 		CAPS_LOCK: 20,
 		COMMA: 188,
+		COMMAND: 91,
+		COMMAND_LEFT: 91, // COMMAND
+		COMMAND_RIGHT: 93,
 		CONTROL: 17,
 		DELETE: 46,
 		DOWN: 40,
@@ -6586,6 +6541,7 @@ $.ui = {
 		HOME: 36,
 		INSERT: 45,
 		LEFT: 37,
+		MENU: 93, // COMMAND_RIGHT
 		NUMPAD_ADD: 107,
 		NUMPAD_DECIMAL: 110,
 		NUMPAD_DIVIDE: 111,
@@ -6599,42 +6555,31 @@ $.ui = {
 		SHIFT: 16,
 		SPACE: 32,
 		TAB: 9,
-		UP: 38
+		UP: 38,
+		WINDOWS: 91 // COMMAND
 	}
-};
+});
 
-//jQuery plugins
+// plugins
 $.fn.extend({
 	_focus: $.fn.focus,
-	focus: function(delay, fn) {
-		return typeof delay === 'number'
-			? this.each(function() {
+	focus: function( delay, fn ) {
+		return typeof delay === "number" ?
+			this.each(function() {
 				var elem = this;
 				setTimeout(function() {
-					$(elem).focus();
-					(fn && fn.call(elem));
-				}, delay);
-			})
-			: this._focus.apply(this, arguments);
-	},
-	
-	enableSelection: function() {
-		return this
-			.attr('unselectable', 'off')
-			.css('MozUserSelect', '')
-			.unbind('selectstart.ui');
-	},
-
-	disableSelection: function() {
-		return this
-			.attr('unselectable', 'on')
-			.css('MozUserSelect', 'none')
-			.bind('selectstart.ui', function() { return false; });
+					$( elem ).focus();
+					if ( fn ) {
+						fn.call( elem );
+					}
+				}, delay );
+			}) :
+			this._focus.apply( this, arguments );
 	},
 
 	scrollParent: function() {
 		var scrollParent;
-		if(($.browser.msie && (/(static|relative)/).test(this.css('position'))) || (/absolute/).test(this.css('position'))) {
+		if (($.browser.msie && (/(static|relative)/).test(this.css('position'))) || (/absolute/).test(this.css('position'))) {
 			scrollParent = this.parents().filter(function() {
 				return (/(relative|absolute|fixed)/).test($.curCSS(this,'position',1)) && (/(auto|scroll)/).test($.curCSS(this,'overflow',1)+$.curCSS(this,'overflow-y',1)+$.curCSS(this,'overflow-x',1));
 			}).eq(0);
@@ -6647,26 +6592,25 @@ $.fn.extend({
 		return (/fixed/).test(this.css('position')) || !scrollParent.length ? $(document) : scrollParent;
 	},
 
-	zIndex: function(zIndex) {
-		if (zIndex !== undefined) {
-			return this.css('zIndex', zIndex);
+	zIndex: function( zIndex ) {
+		if ( zIndex !== undefined ) {
+			return this.css( "zIndex", zIndex );
 		}
-		
-		if (this.length) {
-			var elem = $(this[0]), position, value;
-			while (elem.length && elem[0] !== document) {
+
+		if ( this.length ) {
+			var elem = $( this[ 0 ] ), position, value;
+			while ( elem.length && elem[ 0 ] !== document ) {
 				// Ignore z-index if position is set to a value where z-index is ignored by the browser
 				// This makes behavior of this function consistent across browsers
 				// WebKit always returns auto if the element is positioned
-				position = elem.css('position');
-				if (position == 'absolute' || position == 'relative' || position == 'fixed')
-				{
+				position = elem.css( "position" );
+				if ( position === "absolute" || position === "relative" || position === "fixed" ) {
 					// IE returns 0 when zIndex is not specified
 					// other browsers return a string
 					// we ignore the case of nested elements with an explicit value of 0
 					// <div style="z-index: -10;"><div style="z-index: 0;"></div></div>
-					value = parseInt(elem.css('zIndex'));
-					if (!isNaN(value) && value != 0) {
+					value = parseInt( elem.css( "zIndex" ), 10 );
+					if ( !isNaN( value ) && value !== 0 ) {
 						return value;
 					}
 				}
@@ -6675,61 +6619,232 @@ $.fn.extend({
 		}
 
 		return 0;
+	},
+
+	disableSelection: function() {
+		return this.bind( ( $.support.selectstart ? "selectstart" : "mousedown" ) +
+			".ui-disableSelection", function( event ) {
+				event.preventDefault();
+			});
+	},
+
+	enableSelection: function() {
+		return this.unbind( ".ui-disableSelection" );
 	}
 });
 
+$.each( [ "Width", "Height" ], function( i, name ) {
+	var side = name === "Width" ? [ "Left", "Right" ] : [ "Top", "Bottom" ],
+		type = name.toLowerCase(),
+		orig = {
+			innerWidth: $.fn.innerWidth,
+			innerHeight: $.fn.innerHeight,
+			outerWidth: $.fn.outerWidth,
+			outerHeight: $.fn.outerHeight
+		};
 
-//Additional selectors
-$.extend($.expr[':'], {
-	data: function(elem, i, match) {
-		return !!$.data(elem, match[3]);
+	function reduce( elem, size, border, margin ) {
+		$.each( side, function() {
+			size -= parseFloat( $.curCSS( elem, "padding" + this, true) ) || 0;
+			if ( border ) {
+				size -= parseFloat( $.curCSS( elem, "border" + this + "Width", true) ) || 0;
+			}
+			if ( margin ) {
+				size -= parseFloat( $.curCSS( elem, "margin" + this, true) ) || 0;
+			}
+		});
+		return size;
+	}
+
+	$.fn[ "inner" + name ] = function( size ) {
+		if ( size === undefined ) {
+			return orig[ "inner" + name ].call( this );
+		}
+
+		return this.each(function() {
+			$( this ).css( type, reduce( this, size ) + "px" );
+		});
+	};
+
+	$.fn[ "outer" + name] = function( size, margin ) {
+		if ( typeof size !== "number" ) {
+			return orig[ "outer" + name ].call( this, size );
+		}
+
+		return this.each(function() {
+			$( this).css( type, reduce( this, size, true, margin ) + "px" );
+		});
+	};
+});
+
+// selectors
+function visible( element ) {
+	return !$( element ).parents().andSelf().filter(function() {
+		return $.curCSS( this, "visibility" ) === "hidden" ||
+			$.expr.filters.hidden( this );
+	}).length;
+}
+
+$.extend( $.expr[ ":" ], {
+	data: function( elem, i, match ) {
+		return !!$.data( elem, match[ 3 ] );
 	},
 
-	focusable: function(element) {
+	focusable: function( element ) {
 		var nodeName = element.nodeName.toLowerCase(),
-			tabIndex = $.attr(element, 'tabindex');
-		return (/input|select|textarea|button|object/.test(nodeName)
+			tabIndex = $.attr( element, "tabindex" );
+		if ( "area" === nodeName ) {
+			var map = element.parentNode,
+				mapName = map.name,
+				img;
+			if ( !element.href || !mapName || map.nodeName.toLowerCase() !== "map" ) {
+				return false;
+			}
+			img = $( "img[usemap=#" + mapName + "]" )[0];
+			return !!img && visible( img );
+		}
+		return ( /input|select|textarea|button|object/.test( nodeName )
 			? !element.disabled
-			: 'a' == nodeName || 'area' == nodeName
-				? element.href || !isNaN(tabIndex)
-				: !isNaN(tabIndex))
+			: "a" == nodeName
+				? element.href || !isNaN( tabIndex )
+				: !isNaN( tabIndex ))
 			// the element and all of its ancestors must be visible
-			// the browser may report that the area is hidden
-			&& !$(element)['area' == nodeName ? 'parents' : 'closest'](':hidden').length;
+			&& visible( element );
 	},
 
-	tabbable: function(element) {
-		var tabIndex = $.attr(element, 'tabindex');
-		return (isNaN(tabIndex) || tabIndex >= 0) && $(element).is(':focusable');
+	tabbable: function( element ) {
+		var tabIndex = $.attr( element, "tabindex" );
+		return ( isNaN( tabIndex ) || tabIndex >= 0 ) && $( element ).is( ":focusable" );
 	}
 });
 
-})(jQuery);
+// support
+$(function() {
+	var body = document.body,
+		div = body.appendChild( div = document.createElement( "div" ) );
+
+	$.extend( div.style, {
+		minHeight: "100px",
+		height: "auto",
+		padding: 0,
+		borderWidth: 0
+	});
+
+	$.support.minHeight = div.offsetHeight === 100;
+	$.support.selectstart = "onselectstart" in div;
+
+	// set display to none to avoid a layout bug in IE
+	// http://dev.jquery.com/ticket/4014
+	body.removeChild( div ).style.display = "none";
+});
+
+
+
+
+
+// deprecated
+$.extend( $.ui, {
+	// $.ui.plugin is deprecated.  Use the proxy pattern instead.
+	plugin: {
+		add: function( module, option, set ) {
+			var proto = $.ui[ module ].prototype;
+			for ( var i in set ) {
+				proto.plugins[ i ] = proto.plugins[ i ] || [];
+				proto.plugins[ i ].push( [ option, set[ i ] ] );
+			}
+		},
+		call: function( instance, name, args ) {
+			var set = instance.plugins[ name ];
+			if ( !set || !instance.element[ 0 ].parentNode ) {
+				return;
+			}
+	
+			for ( var i = 0; i < set.length; i++ ) {
+				if ( instance.options[ set[ i ][ 0 ] ] ) {
+					set[ i ][ 1 ].apply( instance.element, args );
+				}
+			}
+		}
+	},
+	
+	// will be deprecated when we switch to jQuery 1.4 - use jQuery.contains()
+	contains: function( a, b ) {
+		return document.compareDocumentPosition ?
+			a.compareDocumentPosition( b ) & 16 :
+			a !== b && a.contains( b );
+	},
+	
+	// only used by resizable
+	hasScroll: function( el, a ) {
+	
+		//If overflow is hidden, the element might have extra content, but the user wants to hide it
+		if ( $( el ).css( "overflow" ) === "hidden") {
+			return false;
+		}
+	
+		var scroll = ( a && a === "left" ) ? "scrollLeft" : "scrollTop",
+			has = false;
+	
+		if ( el[ scroll ] > 0 ) {
+			return true;
+		}
+	
+		// TODO: determine which cases actually cause this to happen
+		// if the element doesn't have the scroll set, see if it's possible to
+		// set the scroll
+		el[ scroll ] = 1;
+		has = ( el[ scroll ] > 0 );
+		el[ scroll ] = 0;
+		return has;
+	},
+	
+	// these are odd functions, fix the API or move into individual plugins
+	isOverAxis: function( x, reference, size ) {
+		//Determines when x coordinate is over "b" element axis
+		return ( x > reference ) && ( x < ( reference + size ) );
+	},
+	isOver: function( y, x, top, left, height, width ) {
+		//Determines when x, y coordinates is over "b" element
+		return $.ui.isOverAxis( y, top, height ) && $.ui.isOverAxis( x, left, width );
+	}
+});
+
+})( jQuery );
 /*!
- * jQuery UI Widget 1.8
+ * jQuery UI Widget 1.8.12
  *
- * Copyright (c) 2010 AUTHORS.txt (http://jqueryui.com/about)
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * and GPL (GPL-LICENSE.txt) licenses.
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Widget
  */
-(function( $ ) {
+(function( $, undefined ) {
 
-var _remove = $.fn.remove;
-
-$.fn.remove = function( selector, keepData ) {
-	return this.each(function() {
-		if ( !keepData ) {
-			if ( !selector || $.filter( selector, [ this ] ).length ) {
-				$( "*", this ).add( this ).each(function() {
-					$( this ).triggerHandler( "remove" );
-				});
-			}
+// jQuery 1.4+
+if ( $.cleanData ) {
+	var _cleanData = $.cleanData;
+	$.cleanData = function( elems ) {
+		for ( var i = 0, elem; (elem = elems[i]) != null; i++ ) {
+			$( elem ).triggerHandler( "remove" );
 		}
-		return _remove.call( $(this), selector, keepData );
-	});
-};
+		_cleanData( elems );
+	};
+} else {
+	var _remove = $.fn.remove;
+	$.fn.remove = function( selector, keepData ) {
+		return this.each(function() {
+			if ( !keepData ) {
+				if ( !selector || $.filter( selector, [ this ] ).length ) {
+					$( "*", this ).add( [ this ] ).each(function() {
+						$( this ).triggerHandler( "remove" );
+					});
+				}
+			}
+			return _remove.call( $(this), selector, keepData );
+		});
+	};
+}
 
 $.widget = function( name, base, prototype ) {
 	var namespace = name.split( "." )[ 0 ],
@@ -6764,7 +6879,7 @@ $.widget = function( name, base, prototype ) {
 //			basePrototype[ key ] = $.extend( {}, val );
 //		}
 //	});
-	basePrototype.options = $.extend( {}, basePrototype.options );
+	basePrototype.options = $.extend( true, {}, basePrototype.options );
 	$[ namespace ][ name ].prototype = $.extend( true, basePrototype, {
 		namespace: namespace,
 		widgetName: name,
@@ -6787,7 +6902,7 @@ $.widget.bridge = function( name, object ) {
 			options;
 
 		// prevent calls to internal methods
-		if ( isMethodCall && options.substring( 0, 1 ) === "_" ) {
+		if ( isMethodCall && options.charAt( 0 ) === "_" ) {
 			return returnValue;
 		}
 
@@ -6797,6 +6912,15 @@ $.widget.bridge = function( name, object ) {
 					methodValue = instance && $.isFunction( instance[options] ) ?
 						instance[ options ].apply( instance, args ) :
 						instance;
+				// TODO: add this back in 1.9 and use $.error() (see #5972)
+//				if ( !instance ) {
+//					throw "cannot call methods on " + name + " prior to initialization; " +
+//						"attempted to call method '" + options + "'";
+//				}
+//				if ( !$.isFunction( instance[options] ) ) {
+//					throw "no such method '" + options + "' for " + name + " widget instance";
+//				}
+//				var methodValue = instance[ options ].apply( instance, args );
 				if ( methodValue !== instance && methodValue !== undefined ) {
 					returnValue = methodValue;
 					return false;
@@ -6806,10 +6930,7 @@ $.widget.bridge = function( name, object ) {
 			this.each(function() {
 				var instance = $.data( this, name );
 				if ( instance ) {
-					if ( options ) {
-						instance.option( options );
-					}
-					instance._init();
+					instance.option( options || {} )._init();
 				} else {
 					$.data( this, name, new object( options, this ) );
 				}
@@ -6836,10 +6957,11 @@ $.Widget.prototype = {
 	_createWidget: function( options, element ) {
 		// $.widget.bridge stores the plugin instance, but we do it anyway
 		// so that it's stored even before the _create function runs
-		this.element = $( element ).data( this.widgetName, this );
+		$.data( element, this.widgetName, this );
+		this.element = $( element );
 		this.options = $.extend( true, {},
 			this.options,
-			$.metadata && $.metadata.get( element )[ this.widgetName ],
+			this._getCreateOptions(),
 			options );
 
 		var self = this;
@@ -6848,7 +6970,11 @@ $.Widget.prototype = {
 		});
 
 		this._create();
+		this._trigger( "create" );
 		this._init();
+	},
+	_getCreateOptions: function() {
+		return $.metadata && $.metadata.get( this.element[0] )[ this.widgetName ];
 	},
 	_create: function() {},
 	_init: function() {},
@@ -6862,7 +6988,7 @@ $.Widget.prototype = {
 			.removeAttr( "aria-disabled" )
 			.removeClass(
 				this.widgetBaseClass + "-disabled " +
-				this.namespace + "-state-disabled" );
+				"ui-state-disabled" );
 	},
 
 	widget: function() {
@@ -6870,12 +6996,11 @@ $.Widget.prototype = {
 	},
 
 	option: function( key, value ) {
-		var options = key,
-			self = this;
+		var options = key;
 
 		if ( arguments.length === 0 ) {
 			// don't return a reference to the internal hash
-			return $.extend( {}, self.options );
+			return $.extend( {}, this.options );
 		}
 
 		if  (typeof key === "string" ) {
@@ -6886,11 +7011,17 @@ $.Widget.prototype = {
 			options[ key ] = value;
 		}
 
+		this._setOptions( options );
+
+		return this;
+	},
+	_setOptions: function( options ) {
+		var self = this;
 		$.each( options, function( key, value ) {
 			self._setOption( key, value );
 		});
 
-		return self;
+		return this;
 	},
 	_setOption: function( key, value ) {
 		this.options[ key ] = value;
@@ -6899,7 +7030,7 @@ $.Widget.prototype = {
 			this.widget()
 				[ value ? "addClass" : "removeClass"](
 					this.widgetBaseClass + "-disabled" + " " +
-					this.namespace + "-state-disabled" )
+					"ui-state-disabled" )
 				.attr( "aria-disabled", value );
 		}
 
@@ -6942,18 +7073,18 @@ $.Widget.prototype = {
 
 })( jQuery );
 /*!
- * jQuery UI Mouse 1.8
+ * jQuery UI Mouse 1.8.12
  *
- * Copyright (c) 2010 AUTHORS.txt (http://jqueryui.com/about)
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * and GPL (GPL-LICENSE.txt) licenses.
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Mouse
  *
  * Depends:
  *	jquery.ui.widget.js
  */
-(function($) {
+(function( $, undefined ) {
 
 $.widget("ui.mouse", {
 	options: {
@@ -6969,8 +7100,8 @@ $.widget("ui.mouse", {
 				return self._mouseDown(event);
 			})
 			.bind('click.'+this.widgetName, function(event) {
-				if(self._preventClickEvent) {
-					self._preventClickEvent = false;
+				if (true === $.data(event.target, self.widgetName + '.preventClickEvent')) {
+				    $.removeData(event.target, self.widgetName + '.preventClickEvent');
 					event.stopImmediatePropagation();
 					return false;
 				}
@@ -7018,6 +7149,11 @@ $.widget("ui.mouse", {
 			}
 		}
 
+		// Click event may never have fired (Gecko & Opera)
+		if (true === $.data(event.target, this.widgetName + '.preventClickEvent')) {
+			$.removeData(event.target, this.widgetName + '.preventClickEvent');
+		}
+
 		// these delegates are required to keep context
 		this._mouseMoveDelegate = function(event) {
 			return self._mouseMove(event);
@@ -7029,18 +7165,14 @@ $.widget("ui.mouse", {
 			.bind('mousemove.'+this.widgetName, this._mouseMoveDelegate)
 			.bind('mouseup.'+this.widgetName, this._mouseUpDelegate);
 
-		// preventDefault() is used to prevent the selection of text here -
-		// however, in Safari, this causes select boxes not to be selectable
-		// anymore, so this fix is needed
-		($.browser.safari || event.preventDefault());
-
+		event.preventDefault();
 		event.originalEvent.mouseHandled = true;
 		return true;
 	},
 
 	_mouseMove: function(event) {
 		// IE mouseup check - mouseup happened when mouse was out of window
-		if ($.browser.msie && !event.button) {
+		if ($.browser.msie && !(document.documentMode >= 9) && !event.button) {
 			return this._mouseUp(event);
 		}
 
@@ -7065,7 +7197,11 @@ $.widget("ui.mouse", {
 
 		if (this._mouseStarted) {
 			this._mouseStarted = false;
-			this._preventClickEvent = (event.target == this._mouseDownEvent.target);
+
+			if (event.target == this._mouseDownEvent.target) {
+			    $.data(event.target, this.widgetName + '.preventClickEvent', true);
+			}
+
 			this._mouseStop(event);
 		}
 
@@ -7093,22 +7229,21 @@ $.widget("ui.mouse", {
 
 })(jQuery);
 /*
- * jQuery UI Position 1.8
+ * jQuery UI Position 1.8.12
  *
- * Copyright (c) 2010 AUTHORS.txt (http://jqueryui.com/about)
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * and GPL (GPL-LICENSE.txt) licenses.
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Position
  */
-(function( $ ) {
+(function( $, undefined ) {
 
 $.ui = $.ui || {};
 
 var horizontalPositions = /left|center|right/,
-	horizontalDefault = "center",
 	verticalPositions = /top|center|bottom/,
-	verticalDefault = "center",
+	center = "center",
 	_position = $.fn.position,
 	_offset = $.fn.offset;
 
@@ -7121,21 +7256,23 @@ $.fn.position = function( options ) {
 	options = $.extend( {}, options );
 
 	var target = $( options.of ),
+		targetElem = target[0],
 		collision = ( options.collision || "flip" ).split( " " ),
 		offset = options.offset ? options.offset.split( " " ) : [ 0, 0 ],
 		targetWidth,
 		targetHeight,
 		basePosition;
 
-	if ( options.of.nodeType === 9 ) {
+	if ( targetElem.nodeType === 9 ) {
 		targetWidth = target.width();
 		targetHeight = target.height();
 		basePosition = { top: 0, left: 0 };
-	} else if ( options.of.scrollTo && options.of.document ) {
+	// TODO: use $.isWindow() in 1.9
+	} else if ( targetElem.setTimeout ) {
 		targetWidth = target.width();
 		targetHeight = target.height();
 		basePosition = { top: target.scrollTop(), left: target.scrollLeft() };
-	} else if ( options.of.preventDefault ) {
+	} else if ( targetElem.preventDefault ) {
 		// force left top to allow flipping
 		options.at = "left top";
 		targetWidth = targetHeight = 0;
@@ -7152,13 +7289,13 @@ $.fn.position = function( options ) {
 		var pos = ( options[this] || "" ).split( " " );
 		if ( pos.length === 1) {
 			pos = horizontalPositions.test( pos[0] ) ?
-				pos.concat( [verticalDefault] ) :
+				pos.concat( [center] ) :
 				verticalPositions.test( pos[0] ) ?
-					[ horizontalDefault ].concat( pos ) :
-					[ horizontalDefault, verticalDefault ];
+					[ center ].concat( pos ) :
+					[ center, center ];
 		}
-		pos[ 0 ] = horizontalPositions.test( pos[0] ) ? pos[ 0 ] : horizontalDefault;
-		pos[ 1 ] = verticalPositions.test( pos[1] ) ? pos[ 1 ] : verticalDefault;
+		pos[ 0 ] = horizontalPositions.test( pos[0] ) ? pos[ 0 ] : center;
+		pos[ 1 ] = verticalPositions.test( pos[1] ) ? pos[ 1 ] : center;
 		options[ this ] = pos;
 	});
 
@@ -7176,13 +7313,13 @@ $.fn.position = function( options ) {
 
 	if ( options.at[0] === "right" ) {
 		basePosition.left += targetWidth;
-	} else if (options.at[0] === horizontalDefault ) {
+	} else if ( options.at[0] === center ) {
 		basePosition.left += targetWidth / 2;
 	}
 
 	if ( options.at[1] === "bottom" ) {
 		basePosition.top += targetHeight;
-	} else if ( options.at[1] === verticalDefault ) {
+	} else if ( options.at[1] === center ) {
 		basePosition.top += targetHeight / 2;
 	}
 
@@ -7193,19 +7330,35 @@ $.fn.position = function( options ) {
 		var elem = $( this ),
 			elemWidth = elem.outerWidth(),
 			elemHeight = elem.outerHeight(),
-			position = $.extend( {}, basePosition );
+			marginLeft = parseInt( $.curCSS( this, "marginLeft", true ) ) || 0,
+			marginTop = parseInt( $.curCSS( this, "marginTop", true ) ) || 0,
+			collisionWidth = elemWidth + marginLeft +
+				( parseInt( $.curCSS( this, "marginRight", true ) ) || 0 ),
+			collisionHeight = elemHeight + marginTop +
+				( parseInt( $.curCSS( this, "marginBottom", true ) ) || 0 ),
+			position = $.extend( {}, basePosition ),
+			collisionPosition;
 
 		if ( options.my[0] === "right" ) {
 			position.left -= elemWidth;
-		} else if ( options.my[0] === horizontalDefault ) {
+		} else if ( options.my[0] === center ) {
 			position.left -= elemWidth / 2;
 		}
 
 		if ( options.my[1] === "bottom" ) {
 			position.top -= elemHeight;
-		} else if ( options.my[1] === verticalDefault ) {
+		} else if ( options.my[1] === center ) {
 			position.top -= elemHeight / 2;
 		}
+
+		// prevent fractions (see #5280)
+		position.left = Math.round( position.left );
+		position.top = Math.round( position.top );
+
+		collisionPosition = {
+			left: position.left - marginLeft,
+			top: position.top - marginTop
+		};
 
 		$.each( [ "left", "top" ], function( i, dir ) {
 			if ( $.ui.position[ collision[i] ] ) {
@@ -7214,6 +7367,9 @@ $.fn.position = function( options ) {
 					targetHeight: targetHeight,
 					elemWidth: elemWidth,
 					elemHeight: elemHeight,
+					collisionPosition: collisionPosition,
+					collisionWidth: collisionWidth,
+					collisionHeight: collisionHeight,
 					offset: offset,
 					my: options.my,
 					at: options.at
@@ -7232,41 +7388,44 @@ $.ui.position = {
 	fit: {
 		left: function( position, data ) {
 			var win = $( window ),
-				over = position.left + data.elemWidth - win.width() - win.scrollLeft();
-			position.left = over > 0 ? position.left - over : Math.max( 0, position.left );
+				over = data.collisionPosition.left + data.collisionWidth - win.width() - win.scrollLeft();
+			position.left = over > 0 ? position.left - over : Math.max( position.left - data.collisionPosition.left, position.left );
 		},
 		top: function( position, data ) {
 			var win = $( window ),
-				over = position.top + data.elemHeight - win.height() - win.scrollTop();
-			position.top = over > 0 ? position.top - over : Math.max( 0, position.top );
+				over = data.collisionPosition.top + data.collisionHeight - win.height() - win.scrollTop();
+			position.top = over > 0 ? position.top - over : Math.max( position.top - data.collisionPosition.top, position.top );
 		}
 	},
 
 	flip: {
 		left: function( position, data ) {
-			if ( data.at[0] === "center" ) {
+			if ( data.at[0] === center ) {
 				return;
 			}
 			var win = $( window ),
-				over = position.left + data.elemWidth - win.width() - win.scrollLeft(),
+				over = data.collisionPosition.left + data.collisionWidth - win.width() - win.scrollLeft(),
 				myOffset = data.my[ 0 ] === "left" ?
 					-data.elemWidth :
 					data.my[ 0 ] === "right" ?
 						data.elemWidth :
 						0,
+				atOffset = data.at[ 0 ] === "left" ?
+					data.targetWidth :
+					-data.targetWidth,
 				offset = -2 * data.offset[ 0 ];
-			position.left += position.left < 0 ?
-				myOffset + data.targetWidth + offset :
+			position.left += data.collisionPosition.left < 0 ?
+				myOffset + atOffset + offset :
 				over > 0 ?
-					myOffset - data.targetWidth + offset :
+					myOffset + atOffset + offset :
 					0;
 		},
 		top: function( position, data ) {
-			if ( data.at[1] === "center" ) {
+			if ( data.at[1] === center ) {
 				return;
 			}
 			var win = $( window ),
-				over = position.top + data.elemHeight - win.height() - win.scrollTop(),
+				over = data.collisionPosition.top + data.collisionHeight - win.height() - win.scrollTop(),
 				myOffset = data.my[ 1 ] === "top" ?
 					-data.elemHeight :
 					data.my[ 1 ] === "bottom" ?
@@ -7276,8 +7435,8 @@ $.ui.position = {
 					data.targetHeight :
 					-data.targetHeight,
 				offset = -2 * data.offset[ 1 ];
-			position.top += position.top < 0 ?
-				myOffset + data.targetHeight + offset :
+			position.top += data.collisionPosition.top < 0 ?
+				myOffset + atOffset + offset :
 				over > 0 ?
 					myOffset + atOffset + offset :
 					0;
@@ -7365,14 +7524,20 @@ var fluid = fluid || fluid_1_4;
     
     var softFailure = [false];
     
+    // This function will be patched from FluidIoC.js in order to describe complex activities
+    fluid.describeActivity = function() {
+        return [];
+    };
+    
     /**
      * Causes an error message to be logged to the console and a real runtime error to be thrown.
      * 
      * @param {String|Error} message the error message to log
+     * @param ... Additional arguments
      */
-    fluid.fail = function (message) {
+    fluid.fail = function (message /*, ... */) {
         fluid.setLogging(true);
-        fluid.log(message.message ? message.message : message);
+        fluid.log.apply(null, ["ASSERTION FAILED: "].concat(fluid.makeArray(arguments)).concat(fluid.describeActivity()));
         if (softFailure[0]) {
             throw new Error(message);
         } else {
@@ -7387,15 +7552,54 @@ var fluid = fluid || fluid_1_4;
             softFailure.shift();
         }
     };
+    
+    fluid.notrycatch = false;
+    
+    // A wrapper for the try/catch/finally language feature, to aid debugging on environments
+    // such as IE, where any try will destroy stack information for errors
+    fluid.tryCatch = function(tryfun, catchfun, finallyfun) {
+        finallyfun = finallyfun || fluid.identity;
+        if (fluid.notrycatch) {
+            var togo = tryfun();
+            finallyfun();
+            return togo;
+        }
+        else {
+            try {
+                return tryfun();  
+            }
+            catch (e) {
+                if (catchfun) {
+                    catchfun(e);
+                }
+                else { 
+                    throw(e);
+                }
+            }
+            finally {
+                finallyfun();
+            }
+        }
+    };
+    
+    // TODO: rescued from kettleCouchDB.js - clean up in time
+    fluid.expect = function (name, members, target) {
+        fluid.transform(fluid.makeArray(members), function (key) {
+            if (typeof target[key] === "undefined") {
+                fluid.fail(name + " missing required parameter " + key);
+            }
+        });
+    };
 
     // Logging
+
+    var logging;
         
     /** Returns whether logging is enabled **/
     fluid.isLogging = function() {
         return logging;
     };
 
-    var logging;
     /** method to allow user to enable logging (off by default) */
     fluid.setLogging = function (enabled) {
         if (typeof enabled === "boolean") {
@@ -7405,19 +7609,36 @@ var fluid = fluid || fluid_1_4;
         }
     };
 
+    // On some dodgy environments (notably IE9 and recent alphas of Firebug 1.8), 
+    // console.log/debug are incomplete function objects and need to be operated via
+    // this trick: http://stackoverflow.com/questions/5472938/does-ie9-support-console-log-and-is-it-a-real-function
+    fluid.applyHostFunction = function(obj, func, args) {
+        if (func.apply) {
+            func.apply(obj, args);
+        }
+        else {
+            var applier = Function.prototype.bind.call(func, obj);
+            applier.apply(obj, args);
+        }
+    };
+
     /** Log a message to a suitable environmental console. If the standard "console" 
      * stream is available, the message will be sent there - otherwise either the
      * YAHOO logger or the Opera "postError" stream will be used. Logging must first
-     * be enabled with a call fo the fluid.setLogging(true) function.
+     * be enabled with a call to the fluid.setLogging(true) function.
      */
-    fluid.log = function (str) {
+    fluid.log = function (message /*, ... */) {
         if (logging) {
-            str = fluid.renderTimestamp(new Date()) + ":  " + str;
+            var arg0 = fluid.renderTimestamp(new Date()) + ":  "; 
+            var args = [arg0].concat(fluid.makeArray(arguments));
+            var str = args.join("");
             if (typeof (console) !== "undefined") {
                 if (console.debug) {
-                    console.debug(str);
+                    fluid.applyHostFunction(console, console.debug, args);
+                } else if (typeof (console.log) === "function") {
+                    fluid.applyHostFunction(console, console.log, args);
                 } else {
-                    console.log(str);
+                    console.log(str); // this branch executes on old IE, fully synthetic console.log
                 }
             } else if (typeof (YAHOO) !== "undefined") {
                 YAHOO.log(str);
@@ -7666,6 +7887,18 @@ var fluid = fluid || fluid_1_4;
     };
     
     /** 
+     * Searches through the supplied object, and returns <code>true</code> if the supplied value
+     * can be found 
+     */
+    fluid.contains = function(obj, value) {
+        return obj? fluid.find(obj, function (thisValue, key) {
+            if (value === thisValue) {
+                return true;
+            }
+        }) : undefined;
+    };
+    
+    /** 
      * Searches through the supplied object for the first value which matches the one supplied.
      * @param obj {Object} the Object to be searched through
      * @param value {Object} the value to be found. This will be compared against the object's
@@ -7686,6 +7919,17 @@ var fluid = fluid || fluid_1_4;
      * See fluid.keyForValue instead.
      */
     fluid.findKeyInObject = fluid.keyForValue;
+    
+    /** Converts an array into an object whose keys are the elements of the array, each with the value "true"
+     */ 
+    
+    fluid.arrayToHash = function (array) {
+        var togo = {};
+        fluid.each(array, function (el) {
+            togo[el] = true;
+        });
+        return togo;
+    };
     
     /** 
      * Clears an object or array of its contents. For objects, each property is deleted.
@@ -7994,8 +8238,8 @@ var fluid = fluid || fluid_1_4;
         return listener.$$guid;
     };
     
-    fluid.event.mapPriority = function (priority) {
-        return (priority === null || priority === undefined ? 0 : 
+    fluid.event.mapPriority = function (priority, count) {
+        return (priority === null || priority === undefined ? -count : 
            (priority === "last" ? -Number.MAX_VALUE :
               (priority === "first" ? Number.MAX_VALUE : priority)));
     };
@@ -8031,7 +8275,7 @@ var fluid = fluid || fluid_1_4;
                 var lisrec = listeners[i];
                 var listener = lisrec.listener;
                 if (typeof(listener) === "string") {
-                    listenerFunc = fluid.getGlobalValue(listener);
+                    var listenerFunc = fluid.getGlobalValue(listener);
                     if (!listenerFunc) {
                         fluid.fail("Unable to look up name " + listener + " as a global function"); 
                     }
@@ -8042,14 +8286,20 @@ var fluid = fluid || fluid_1_4;
                 if (lisrec.predicate && !lisrec.predicate(listener, args)) {
                     continue;
                 }
-                try {
+                var value = fluid.tryCatch(function() {
                     var ret = (wrapper ? wrapper(listener) : listener).apply(null, args);
                     if (preventable && ret === false) {
                         return false;
                     }
-                } catch (e) {
+                    if (unicast) {
+                        return ret;
+                    }
+                }, function (e) {
                     fluid.log("FireEvent received exception " + e.message + " e " + e + " firing to listener " + i);
                     throw (e);       
+                });
+                if (value !== undefined) {
+                    return value;
                 }
             }
         }
@@ -8067,7 +8317,7 @@ var fluid = fluid || fluid_1_4;
                 }
 
                 listeners[namespace] = {listener: listener, predicate: predicate, priority: 
-                    fluid.event.mapPriority(priority)};
+                    fluid.event.mapPriority(priority, sortedListeners.length)};
                 sortedListeners = fluid.event.sortListeners(listeners);
             },
 
@@ -8128,6 +8378,7 @@ var fluid = fluid || fluid_1_4;
                     key = key.substring(0, keydot);
                 }
                 if (!events[key]) {
+                    fluid.fail("Listener registered for event " + key + " which is not defined for this component");
                     events[key] = fluid.event.getEventFirer();
                 }
                 firer = events[key];
@@ -8142,8 +8393,8 @@ var fluid = fluid || fluid_1_4;
             var event;
             if (isIoCEvent && pass === "IoC") {
                 if (!fluid.event.resolveEvent) {
-                    fluid.fail("fluid.event.resolveEvent could not be loaded - please include FluidIoC.js in order to operate IoC-driven event with descriptor " + 
-                        JSON.stringify(eventSpec));
+                    fluid.fail("fluid.event.resolveEvent could not be loaded - please include FluidIoC.js in order to operate IoC-driven event with descriptor ", 
+                        eventSpec);
                 } else {
                     event = fluid.event.resolveEvent(that, eventKey, eventSpec);
                 }
@@ -8177,6 +8428,13 @@ var fluid = fluid || fluid_1_4;
         fluid.mergeListeners(that, that.events, listeners);
     };
     
+    fluid.mergeListenersPolicy = function (target, source) {
+        var togo = target || {};
+        fluid.each(source, function(listeners, key) {
+            togo[key] = fluid.makeArray(source[key]).concat(fluid.makeArray(listeners));
+        });
+        return togo;
+    };
     
     /*** DEFAULTS AND OPTIONS MERGING SYSTEM ***/
     
@@ -8221,16 +8479,14 @@ var fluid = fluid || fluid_1_4;
     };
     
     fluid.rootMergePolicy = fluid.transform(fluid.lifecycleFunctions, function() {
-            return fluid.mergeLifecycleFunction;
-        }
-    );
+        return fluid.mergeLifecycleFunction;
+    });
         
     // unsupported, NON-API function
     fluid.makeLifecycleFirers = function() {
         return fluid.transform(fluid.lifecycleFunctions, function() {
-            return fluid.event.getEventFirer()
-            }
-        );
+            return fluid.event.getEventFirer();
+        });
     };
     
     // unsupported, NON-API function
@@ -8266,7 +8522,7 @@ var fluid = fluid || fluid_1_4;
     
         
     fluid.hasGrade = function (options, gradeName) {
-        return !options || !options.gradeNames ? false : $.inArray(gradeName, options.gradeNames) !== -1;
+        return !options || !options.gradeNames ? false : fluid.contains(options.gradeNames, gradeName);
     };
     
      /**
@@ -8330,7 +8586,7 @@ var fluid = fluid || fluid_1_4;
     fluid.defaults("fluid.eventedComponent", {
         gradeNames: ["fluid.littleComponent"],
         mergePolicy: {
-            listeners: "noexpand"
+            listeners: "fluid.mergeListenersPolicy"
         }
     });
     
@@ -8455,6 +8711,25 @@ var fluid = fluid || fluid_1_4;
         return target;     
     };
 
+    // unsupported, NON-API function
+    fluid.transformOptions = function (mergeArgs, transRec) {
+        fluid.expect("Options transformation record", ["transformer", "config"], transRec);
+        var transFunc = fluid.getGlobalValue(transRec.transformer);
+        var togo = fluid.transform(mergeArgs, function(value, key) {
+            return key === 0? value : transFunc.call(null, value, transRec.config);
+        });
+        return togo;
+    };
+    
+    // unsupporter, NON-API function
+    fluid.lastTransformationRecord = function(extraArgs) {
+        for (var i = extraArgs.length - 1; i >= 0; --i) {
+            if (extraArgs[i] && extraArgs[i].transformOptions) {
+                return extraArgs[i].transformOptions;
+            } 
+        }
+    };
+
     /**
      * Merges the component's declared defaults, as obtained from fluid.defaults(),
      * with the user's specified overrides.
@@ -8483,6 +8758,10 @@ var fluid = fluid || fluid_1_4;
             extraArgs = fluid.expandComponentOptions(defaults, userOptions, that);
         } else {
             extraArgs = [defaults, userOptions];
+        }
+        var transRec = fluid.lastTransformationRecord(extraArgs);
+        if (transRec) {
+            extraArgs = fluid.transformOptions(extraArgs, transRec);
         }
         mergeArgs = mergeArgs.concat(extraArgs);
         that.options = fluid.merge.apply(null, mergeArgs);
@@ -8527,10 +8806,18 @@ var fluid = fluid || fluid_1_4;
      *  minimal form of Fluid component */
        
     fluid.typeTag = function (name) {
-        return {
+        return name ? {
             typeName: name,
             id: fluid.allocateGuid()
-        };
+        } : null;
+    };
+    
+    /** A combined "component and grade name" which allows type tags to be declaratively constructed
+     * from options material */
+    
+    fluid.typeFount = function (options) {
+        var that = fluid.initLittleComponent("fluid.typeFount", options);
+        return fluid.typeTag(that.options.targetTypeName);
     };
     
     /**
@@ -8660,6 +8947,14 @@ var fluid = fluid || fluid_1_4;
 
   // **** VIEW-DEPENDENT DEFINITIONS BELOW HERE
 
+    fluid.checkTryCatchParameter = function() {
+        var location = window.location || { search: "", protocol: "file:" };
+        var GETParams = location.search.slice(1).split('&');
+        return fluid.contains(GETParams, "notrycatch");
+    };
+    
+    fluid.notrycatch = fluid.checkTryCatchParameter();
+    
     /**
      * Fetches a single container element and returns it as a jQuery.
      * 
@@ -8681,8 +8976,8 @@ var fluid = fluid || fluid_1_4;
             var count = container.length !== undefined ? container.length : 0;
             fluid.fail({
                 name: "NotOne",
-                message: count > 1 ? "More than one (" + count + ") container elements were "
-                    : "No container element was found for selector " + containerSpec
+                message: (count > 1 ? "More than one (" + count + ") container elements were"
+                    : "No container element was") + " found for selector " + containerSpec
             });
         }
         if (!fluid.isDOMNode(container[0])) {
@@ -10874,7 +11169,8 @@ var fluid_1_4 = fluid_1_4 || {};
             fluid.each(exclusion, function (excludeEl) {
                 $(excludeEl).bind("focusin", that.canceller).
                     bind("fluid-focus", that.canceller).
-                    click(that.canceller);
+                    click(that.canceller).mousedown(that.canceller);
+    // Mousedown is added for FLUID-4212, as a result of Chrome bug 6759, 14204
             });
         });
         return that;
@@ -10902,7 +11198,7 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, elsecatch: true, operator: true, jslintok: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 var fluid_1_4 = fluid_1_4 || {};
 
@@ -10945,7 +11241,7 @@ var fluid_1_4 = fluid_1_4 || {};
         options = options || {
             visited: {},
             flat: true
-        }
+        };
         var up = 0;
         for (var i = thatStack.length - 1; i >= 0; --i) {
             var that = thatStack[i];
@@ -11009,6 +11305,48 @@ var fluid_1_4 = fluid_1_4 || {};
         return togo.join("\n");
     };
 
+    // Return an array of objects describing the current activity
+    fluid.describeActivity = function() {
+        return fluid.threadLocal().activityStack || [];
+    };
+    
+    // Execute the supplied function with the specified activity description pushed onto the stack
+    fluid.pushActivity = function(func, message) {
+        if (!message) {
+            return func();
+        }
+        var root = fluid.threadLocal();
+        if (!root.activityStack) {
+            root.activityStack = [];
+        }
+        var frames = fluid.makeArray(message);
+        frames.push("\n");
+        frames.unshift("\n");
+        root.activityStack = frames.concat(root.activityStack);
+        return fluid.tryCatch(func, null, function() {
+            root.activityStack = root.activityStack.slice(frames.length);
+        });
+    };
+    
+    // Return a function wrapped by the activity of describing its activity
+    fluid.wrapActivity = function(func, messageSpec) {
+        return function() {
+            var args = fluid.makeArray(arguments);
+            var message = fluid.transform(fluid.makeArray(messageSpec), function(specEl) {
+                if (specEl.indexOf("arguments.") === 0) {
+                    var el = specEl.substring("arguments.".length);
+                    return fluid.get(args, el);
+                }
+                else {
+                    return specEl;
+                }
+            });
+            return fluid.pushActivity(function() {
+                return func.apply(null, args);
+            }, message);
+        };
+    };
+
     var localRecordExpected = /arguments|options|container/;
 
     function makeStackFetcher(instantiator, parentThat, localRecord, expandOptions) {
@@ -11051,7 +11389,6 @@ var fluid_1_4 = fluid_1_4 || {};
      
     function makeStackResolverOptions(instantiator, parentThat, localRecord, expandOptions) {
         return $.extend({}, fluid.defaults("fluid.resolveEnvironment"), {
-            noCopy: true,
             fetcher: makeStackFetcher(instantiator, parentThat, localRecord, expandOptions)
         }); 
     }
@@ -11173,19 +11510,19 @@ var fluid_1_4 = fluid_1_4 || {};
     }
     
     function upgradeMergeOptions(demandspec) {
-         mergeToMergeAll(demandspec);
-         if (demandspec.mergeAllOptions) {
-             if (demandspec.options) {
-                 fluid.fail("demandspec " + JSON.stringify(demandspec) 
-                 + " is invalid - cannot specify literal options together with mergeOptions or mergeAllOptions"); 
-             }
-             demandspec.options = {
-                 mergeAllOptions: demandspec.mergeAllOptions
-             };
-         }
-         if (demandspec.options) {
-             delete demandspec.options.mergeOptions;
-         }
+        mergeToMergeAll(demandspec);
+        if (demandspec.mergeAllOptions) {
+            if (demandspec.options) {
+                fluid.fail("demandspec ", demandspec, 
+                    " is invalid - cannot specify literal options together with mergeOptions or mergeAllOptions"); 
+            }
+            demandspec.options = {
+                mergeAllOptions: demandspec.mergeAllOptions
+            };
+        }
+        if (demandspec.options) {
+            delete demandspec.options.mergeOptions;
+        }
     }
     
     /** Given a concrete argument list and/or options, determine the final concrete
@@ -11198,8 +11535,13 @@ var fluid_1_4 = fluid_1_4 || {};
         options = options || {};
         
         upgradeMergeOptions(demandspec);
+        var oldOptions = fluid.get(options, "componentRecord.options");
         options.componentRecord = $.extend(true, {}, options.componentRecord, 
             fluid.censorKeys(demandspec, ["args", "funcName"]));
+        var mergeAllZero = fluid.get(options, "componentRecord.options.mergeAllOptions.0");
+        if (mergeAllZero === "{options}") {
+            fluid.set(options, "componentRecord.options.mergeAllOptions.0", oldOptions);
+        }
         
         var demands = $.makeArray(demandspec.args);
         var upDefaults = fluid.defaults(demandspec.funcName); // I can SEE into TIME!!
@@ -11266,6 +11608,8 @@ var fluid_1_4 = fluid_1_4 || {};
                     if (arg && typeof(arg) === "object" && !arg.targetTypeName) {
                         arg.targetTypeName = demandspec.funcName;
                     }
+                    // ensure to copy the arg since it is an alias of the demand block material (FLUID-4223)
+                    // and will be destructively expanded
                     args[i] = {marker: fluid.EXPAND, value: fluid.copy(arg), localRecord: upstreamLocalRecord};
                 }
                 if (args[i] && fluid.isMarker(args[i].marker, fluid.EXPAND_NOW)) {
@@ -11290,7 +11634,9 @@ var fluid_1_4 = fluid_1_4 || {};
         if (aliasName) {
             aliasTable[demandingName] = aliasName;
         }
-        else return aliasTable[demandingName];
+        else {
+            return aliasTable[demandingName];
+        }
     };
    
     var dependentStore = {};
@@ -11335,12 +11681,17 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         var p1 = speca.uncess - specb.uncess;
         return p1 === 0? specb.intersect - speca.intersect : p1;
     };
-
+    
     // unsupported, non-API function
-    fluid.locateDemands = function(instantiator, parentThat, demandingNames) {
-        var demandLogging = fluid.isLogging() && demandingNames[0] !== "fluid.threadLocal";
+    fluid.isDemandLogging = function(demandingNames) {
+        return fluid.isLogging() && demandingNames[0] !== "fluid.threadLocal";
+    };
+    
+    // unsupported, non-API function
+    fluid.locateAllDemands = function(instantiator, parentThat, demandingNames) {
+        var demandLogging = fluid.isDemandLogging(demandingNames);
         if (demandLogging) {
-            fluid.log("Resolving demands for function names " + JSON.stringify(demandingNames) + " in context of " +
+            fluid.log("Resolving demands for function names ", demandingNames, " in context of " +
                 (parentThat? "component " + parentThat.typeName : "no component"));
         }
         
@@ -11359,7 +11710,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
             var rec = dependentStore[demandingNames[i]] || [];
             for (var j = 0; j < rec.length; ++j) {
                 var spec = rec[j];
-                var record = {spec: spec.spec, intersect: 0, uncess: 0};
+                var record = {spec: spec, intersect: 0, uncess: 0};
                 for (var k = 0; k < spec.contexts.length; ++k) {
                     record[contextNames[spec.contexts[k]]? "intersect" : "uncess"] += 2;
                 }
@@ -11371,10 +11722,21 @@ outer:  for (var i = 0; i < exist.length; ++i) {
             }
         }
         matches.sort(fluid.compareDemands);
-        var demandspec = matches.length === 0 || matches[0].intersect === 0? null : matches[0].spec;
-        if (demandLogging) {
-            fluid.log(demandspec? "Located " + matches.length + " potential match" + (matches.length === 1? "" : "es") + ", selected best match with " + matches[0].intersect 
-                + " matched context names: " + JSON.stringify(demandspec) : "No matches found for demands, using direct implementation");
+        return matches;   
+    };
+
+    // unsupported, non-API function
+    fluid.locateDemands = function(instantiator, parentThat, demandingNames) {
+        var matches = fluid.locateAllDemands(instantiator, parentThat, demandingNames);
+        var demandspec = matches.length === 0 || matches[0].intersect === 0? null : matches[0].spec.spec;
+        if (fluid.isDemandLogging(demandingNames)) {
+            if (demandspec) {
+                fluid.log("Located " + matches.length + " potential match" + (matches.length === 1? "" : "es") + ", selected best match with " + matches[0].intersect 
+                    + " matched context names: ", demandspec);
+            }
+            else {
+                fluid.log("No matches found for demands, using direct implementation");
+            }
         }  
         return demandspec;
     };
@@ -11394,13 +11756,14 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         var aliasTo = fluid.alias(newFuncName);
         
         if (aliasTo) {
+            newFuncName = aliasTo;
             fluid.log("Following redirect from function name " + newFuncName + " to " + aliasTo);
             var demandspec2 = fluid.locateDemands(instantiator, parentThat, [aliasTo]);
             if (demandspec2) {
                 fluid.each(demandspec2, function(value, key) {
                     if (localRecordExpected.test(key)) {
-                        fluid.fail("Error in demands block " + JSON.stringify(demandspec2) + " - content with key \"" + key 
-                        + "\" is not supported since this demands block was resolved via an alias from \"" + newFuncName + "\"");
+                        fluid.fail("Error in demands block ", demandspec2, " - content with key \"" + key 
+                            + "\" is not supported since this demands block was resolved via an alias from \"" + newFuncName + "\"");
                     }  
                 });
                 if (demandspec2.funcName) {
@@ -11429,6 +11792,8 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         });
     };
     
+    fluid.invoke = fluid.wrapActivity(fluid.invoke, ["    while invoking function with name \"", "arguments.0", "\" from component", "arguments.2"]); 
+    
     /** Make a function which performs only "static redispatch" of the supplied function name - 
      * that is, taking only account of the contents of the "static environment". Since the static
      * environment is assumed to be constant, the dispatch of the call will be evaluated at the
@@ -11446,9 +11811,12 @@ outer:  for (var i = 0; i < exist.length; ++i) {
     fluid.makeInvoker = function(instantiator, that, demandspec, functionName, environment) {
         demandspec = demandspec || fluid.determineDemands(instantiator, that, functionName);
         return function() {
-            var invokeSpec = fluid.embodyDemands(instantiator, that, demandspec, arguments, {passArgs: true});
-            return fluid.invokeGlobalFunction(invokeSpec.funcName, invokeSpec.args, environment);
-        };
+            var args = arguments;
+            return fluid.pushActivity(function() {
+                var invokeSpec = fluid.embodyDemands(instantiator, that, demandspec, args, {passArgs: true});
+                return fluid.invokeGlobalFunction(invokeSpec.funcName, invokeSpec.args, environment);
+            }, ["    while invoking invoker with name " + functionName + " on component", that]);
+        }
     };
     
     // unsupported, non-API function
@@ -11488,7 +11856,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
                 if (!origin) {
                     fluid.fail("Error in event specification - could not resolve base event reference " + event + " to an event firer");
                 }
-                var firer = {};
+                var firer = {}; // jslint:ok - already defined
                 fluid.each(["fire", "removeListener"], function(method) {
                     firer[method] = function() {origin[method].apply(null, arguments);};
                 });
@@ -11511,13 +11879,13 @@ outer:  for (var i = 0; i < exist.length; ++i) {
     // unsupported, non-API function
     fluid.expander.preserveFromExpansion = function(options) {
         var preserve = {};
-        var preserveList = ["mergePolicy", "mergeAllOptions", "components", "invokers", "events"];
+        var preserveList = fluid.arrayToHash(["mergePolicy", "mergeAllOptions", "components", "invokers", "events", "listeners", "transformOptions"]);
         fluid.each(options.mergePolicy, function(value, key) {
             if (fluid.mergePolicyIs(value, "noexpand")) {
-                preserveList.push(key);
+                preserveList[key] = true;
             }
         });
-        fluid.each(preserveList, function(path) {
+        fluid.each(preserveList, function(xvalue, path) {
             var pen = fluid.model.getPenultimate(options, path);
             var value = pen.root[pen.last];
             delete pen.root[pen.last];
@@ -11525,7 +11893,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         });
         return {
             restore: function(target) {
-                fluid.each(preserveList, function(path) {
+                fluid.each(preserveList, function(xvalue, path) {
                     var preserved = fluid.get(preserve, path);
                     if (preserved !== undefined) {
                         fluid.set(target, path, preserved);
@@ -11562,6 +11930,15 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         });
     };
     
+    fluid.locateTransformationRecord = function(that) {
+        return fluid.withInstantiator(that, function(instantiator) {
+            var matches = fluid.locateAllDemands(instantiator, that, ["fluid.transformOptions"]);
+            return fluid.find(matches, function(match) {
+                return match.uncess === 0 && fluid.contains(match.spec.contexts, that.typeName)? match.spec.spec : undefined;
+            });
+        });
+    };
+    
     // unsupported, non-API function
     fluid.expandComponentOptions = function(defaults, userOptions, that) {
         defaults = fluid.expandOptions(fluid.copy(defaults), that);
@@ -11592,8 +11969,15 @@ outer:  for (var i = 0; i < exist.length; ++i) {
             // Avoid use of expandOptions in simple case to avoid infinite recursion when constructing instantiator
             return path === "{directOptions}"? localRecord.directOptions : fluid.expandOptions(path, that, localRecord, {direct: true}); 
         });
+        var transRec = fluid.locateTransformationRecord(that);
+        if (transRec) {
+            togo[0].transformOptions = transRec.options;
+        }
         return [defaults].concat(togo);
     };
+    
+    fluid.expandComponentOptions = fluid.wrapActivity(fluid.expandComponentOptions, 
+        ["    while expanding component options ", "arguments.1.value", " with record ", "arguments.1", " for component ", "arguments.2"]);
     
     // The case without the instantiator is from the ginger strategy - this logic is still a little ragged
     fluid.initDependent = function(that, name, userInstantiator, directArgs) {
@@ -11613,15 +11997,15 @@ outer:  for (var i = 0; i < exist.length; ++i) {
             }
         }
         
+        var component = that.options.components[name];
         fluid.withInstantiator(that, function(instantiator) {
-            var component = that.options.components[name];
             if (typeof(component) === "string") {
                 that[name] = fluid.expandOptions([component], that)[0]; // TODO: expose more sensible semantic for expandOptions 
             }
             else if (component.type) {
                 var invokeSpec = fluid.resolveDemands(instantiator, that, [component.type, name], directArgs, {componentRecord: component});
                 instantiator.pushUpcomingInstantiation(that, name);
-                try {
+                fluid.tryCatch(function() {
                     that[inCreationMarker] = true;
                     var instance = fluid.initSubcomponentImpl(that, {type: invokeSpec.funcName}, invokeSpec.args);
                     // The existing instantiator record will be provisional, adjust it to take account of the true return
@@ -11635,44 +12019,44 @@ outer:  for (var i = 0; i < exist.length; ++i) {
                         instantiator.recordKnownComponent(that, instance, name);
                     }
                     that[name] = instance;
-                }
-                finally {
+                }, null, function() {
                     delete that[inCreationMarker];
                     instantiator.pushUpcomingInstantiation();
-                }
+                });
             }
             else { 
                 that[name] = component;
             }
-        });
+        }, ["    while instantiating dependent component with name \"" + name + "\" with record ", component, " as child of ", that]);
         fluid.log("Finished instantiation of component with name \"" + name + "\" as child of " + fluid.dumpThat(that));
     };
     
     // NON-API function
     // This function is stateful and MUST NOT be called by client code
-    fluid.withInstantiator = function(that, func) {
+    fluid.withInstantiator = function(that, func, message) {
         var root = fluid.threadLocal();
         var instantiator = root["fluid.instantiator"];
         if (!instantiator) {
             instantiator = root["fluid.instantiator"] = fluid.instantiator();
             //fluid.log("Created new instantiator with id " + instantiator.id + " in order to operate on component " + typeName);
         }
-        try {
-            if (that) {
-                instantiator.recordComponent(that);
-            }
-            instantiator.stack(1);
-            //fluid.log("Instantiator stack +1 to " + instantiator.stackCount + " for " + typeName);
-            return func(instantiator);
-        }
-        finally {
-            var count = instantiator.stack(-1);
-            //fluid.log("Instantiator stack -1 to " + instantiator.stackCount + " for " + typeName);
-            if (count === 0) {
-                //fluid.log("Clearing instantiator with id " + instantiator.id + " from threadLocal for end of " + typeName);
-                delete root["fluid.instantiator"];
-            }
-        }              
+        return fluid.pushActivity( function() {
+            return fluid.tryCatch(function() {
+                if (that) {
+                    instantiator.recordComponent(that);
+                }
+                instantiator.stack(1);
+                //fluid.log("Instantiator stack +1 to " + instantiator.stackCount + " for " + typeName);
+                return func(instantiator);
+            }, null, function() {
+                var count = instantiator.stack(-1);
+                //fluid.log("Instantiator stack -1 to " + instantiator.stackCount + " for " + typeName);
+                if (count === 0) {
+                    //fluid.log("Clearing instantiator with id " + instantiator.id + " from threadLocal for end of " + typeName);
+                    delete root["fluid.instantiator"];
+                }
+            });
+        }, message);
     };
     
     // unsupported, non-API function
@@ -11690,13 +12074,21 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         });
     };
     
+    // unsupported, non-API function
+    fluid.priorityForComponent = function(component) {
+        return component.priority? component.priority : 
+            (component.type === "fluid.typeFount" || fluid.hasGrade(fluid.defaults(component.type), "fluid.typeFount"))?
+            "first" : undefined;  
+    };
+    
     fluid.initDependents = function(that) {
         var options = that.options;
         var components = options.components || {};
         var componentSort = {};
         fluid.each(components, function(component, name) {
             if (!component.createOnEvent) {
-                componentSort[name] = {key: name, priority: fluid.event.mapPriority(component.priority)};
+                var priority = fluid.priorityForComponent(component);
+                componentSort[name] = {key: name, priority: fluid.event.mapPriority(priority, 0)};
             }
             else {
                 fluid.bindDeferredComponent(that, name, component);
@@ -11712,9 +12104,9 @@ outer:  for (var i = 0; i < exist.length; ++i) {
                 var invokerec = invokers[name];
                 var funcName = typeof(invokerec) === "string"? invokerec : null;
                 that[name] = fluid.withInstantiator(that, function(instantiator) {
-                    fluid.log("Beginning instantiation of invoker with name \"" + name + "\" as child of " + fluid.dumpThat(that)); 
+                    fluid.log("Beginning instantiation of invoker with name \"" + name + "\" as child of " + fluid.dumpThat(that));
                     return fluid.makeInvoker(instantiator, that, funcName? null : invokerec, funcName);
-                }); // jslint:ok
+                }, ["    while instantiating invoker with name \"" + name + "\" with record ", invokerec, " as child of ", that]); // jslint:ok
                 fluid.log("Finished instantiation of invoker with name \"" + name + "\" as child of " + fluid.dumpThat(that)); 
             }
         });
@@ -11740,17 +12132,41 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         return fluid.invokeGlobalFunction(demands.funcName, arguments);
     };
 
-    fluid.withEnvironment = function(envAdd, func) {
+    function applyLocalChange(applier, type, path, value) {
+        var change = {
+            type: type,
+            path: path,
+            value: value
+        };
+        applier.fireChangeRequest(change);
+    }
+
+    // unsupported, non-API function
+    fluid.withEnvironment = function(envAdd, func, prefix) {
+        prefix = prefix || "";
         var root = fluid.threadLocal();
-        try {
+        var applier = fluid.makeChangeApplier(root, {thin: true});
+        return fluid.tryCatch(function() {
+            for (var key in envAdd) {
+                applyLocalChange(applier, "ADD", fluid.model.composePath(prefix, key), envAdd[key]);
+            }
             $.extend(root, envAdd);
             return func();
-        }
-        finally {
-            for (var key in envAdd) {
-                delete root[key];
+        }, null, function() {
+            for (var key in envAdd) { // jslint:ok duplicate "value"
+              // TODO: This could be much better through i) refactoring the ChangeApplier so we could naturally use "rollback" semantics 
+              // and/or implementing this material using some form of "prototype chain"
+                applyLocalChange(applier, "DELETE", fluid.model.composePath(prefix, key));
             }
-        }
+        });
+    };
+    
+    // unsupported, non-API function  
+    fluid.makeEnvironmentFetcher = function(prefix, directModel) {
+        return function(parsed) {
+            var env = fluid.get(fluid.threadLocal(), prefix);
+            return fluid.fetchContextReference(parsed, directModel, env);
+        };
     };
     
     // unsupported, non-API function  
@@ -11779,31 +12195,6 @@ outer:  for (var i = 0; i < exist.length; ++i) {
             return fluid.parseContextReference(EL, 0);
         }
         return EL? {path: EL} : EL;
-    };
-
-    /* An EL extraction utility suitable for context expressions which occur in 
-     * expanding component trees. It assumes that any context expressions refer
-     * to EL paths that are to be referred to the "true (direct) model" - since
-     * the context during expansion may not agree with the context during rendering.
-     * It satisfies the same contract as fluid.extractEL, in that it will either return
-     * an EL path, or undefined if the string value supplied cannot be interpreted
-     * as an EL path with respect to the supplied options.
-     */
-    // unsupported, non-API function
-    fluid.extractContextualPath = function (string, options, env) {
-        var parsed = fluid.extractELWithContext(string, options);
-        if (parsed) {
-            if (parsed.context) {
-                var fetched = env[parsed.context];
-                if (typeof(fetched) !== "string") {
-                    fluid.fail("Could not look up context path named " + parsed.context + " to string value");
-                }
-                return fluid.model.composePath(fetched, parsed.path);
-            }
-            else {
-                return parsed.path;
-            }
-        }
     };
 
     fluid.parseContextReference = function(reference, index, delimiter) {
@@ -11871,6 +12262,9 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         return string;
     };
     
+    fluid.resolveContextValue = fluid.wrapActivity(fluid.resolveContextValue, 
+        ["    while resolving context value ", "arguments.0"]);
+    
     function resolveEnvironmentImpl(obj, options) {
         fluid.guardCircularity(options.seenIds, obj, "expansion", 
              " - please ensure options are not circularly connected, or protect from expansion using the \"noexpand\" policy or expander");
@@ -11898,20 +12292,10 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         bareContextRefs: true
     });
     
-    fluid.environmentFetcher = function(directModel) {
-        var env = fluid.threadLocal();
-        return function(parsed) {
-            return fluid.fetchContextReference(parsed, directModel, env);
-        };
-    };
-    
-    fluid.resolveEnvironment = function(obj, directModel, userOptions) {
-        directModel = directModel || {};
-        var options = fluid.merge(null, fluid.defaults("fluid.resolveEnvironment"), userOptions);
+    fluid.resolveEnvironment = function(obj, options) {
+        options = fluid.merge(null, fluid.defaults("fluid.resolveEnvironment"), options);
         options.seenIds = {};
-        if (!options.fetcher) {
-            options.fetcher = fluid.environmentFetcher(directModel);
-        }
+        
         return resolveEnvironmentImpl(obj, options);
     };
 
@@ -11955,7 +12339,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
                 if (key === "expander" && !(options.expandOnly && options.expandOnly[value.type])) {
                     expander = fluid.getGlobalValue(value.type);  
                     if (expander) {
-                        return expander.call(null, togo, obj, recurse);
+                        return expander.call(null, togo, obj, recurse, options);
                     }
                 }
                 if (key !== "expander" || !expander) {
@@ -11970,7 +12354,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
     fluid.expander.expandLight = function (source, expandOptions) {
         var options = $.extend({}, expandOptions);
         options.filter = fluid.expander.lightFilter;
-        return fluid.resolveEnvironment(source, options.model, options);       
+        return fluid.resolveEnvironment(source, options);       
     };
           
 })(jQuery, fluid_1_4);
@@ -12298,12 +12682,12 @@ var fluid_1_4 = fluid_1_4 || {};
         }};
     };
     
-    fluid.expander.deferredFetcher = function(target, source) {
+    fluid.expander.deferredFetcher = function(target, source, recurse, expandOptions) {
         var expander = source.expander;
         var spec = fluid.copy(expander);
         // fetch the "global" collector specified in the external environment to receive
         // this resourceSpec
-        var collector = fluid.resolveEnvironment(expander.resourceSpecCollector);
+        var collector = fluid.resolveEnvironment(expander.resourceSpecCollector, expandOptions);
         delete spec.type;
         delete spec.resourceSpecCollector;
         delete spec.fetchKey;
@@ -13355,14 +13739,6 @@ fluid_1_4 = fluid_1_4 || {};
         return "as child of " + (component.parent.fullID ? "component with full ID " + component.parent.fullID : "root");
     }
      
-    fluid.arrayToHash = function (array) {
-        var togo = {};
-        fluid.each(array, function (el) {
-            togo[el] = true;
-        });
-        return togo;
-    };
-  
     function computeFullID(component) {
         var togo = "";
         var move = component;
@@ -13609,11 +13985,11 @@ fluid_1_4 = fluid_1_4 || {};
             var name = renderer.IDtoComponentName(ID, num);
             // TODO: The best we can do here without GRADES is to wildly guess 
             // that it is a view component with options in the 2nd place and container in first place
-            fluid.set(parent, fluid.path("options", "components", name), {type: func, options: args[1]});
+            fluid.set(parent, fluid.path("options", "components", name), {type: func});
             // This MIGHT really be a variant of fluid.invoke... only we often probably DO want the component
             // itself to be inserted into the that stack. This *ALSO* requires GRADES to resolve. A 
             // "function" is that which has no grade. The gradeless grade.
-            that = fluid.initDependent(options.parentComponent, name, options.instantiator, [args[0]]);
+            that = fluid.initDependent(options.parentComponent, name, options.instantiator, args);
         }
         else {
             that = fluid.invokeGlobalFunction(func, args);
@@ -13643,6 +14019,7 @@ fluid_1_4 = fluid_1_4 || {};
         var decoratorQueue = [];
         
         var renderedbindings = {}; // map of fullID to true for UISelects which have already had bindings written
+        var usedIDs = {};
         
         var that = {};
         
@@ -14016,7 +14393,7 @@ fluid_1_4 = fluid_1_4 || {};
             
             var count = 1;
             var baseid = attrcopy.id;
-            while (renderOptions.document.getElementById(attrcopy.id)) {
+            while (renderOptions.document.getElementById(attrcopy.id) || usedIDs[attrcopy.id]) {
                 attrcopy.id = baseid + "-" + (count++); 
             }
             component.finalID = attrcopy.id;
@@ -14078,8 +14455,11 @@ fluid_1_4 = fluid_1_4 || {};
                 if (type === "$") {type = decorator.type = "jQuery";}
                 if (type === "jQuery" || type === "event" || type === "fluid") {
                     var id = adjustForID(attrcopy, torender, true, finalID);
-                    decorator.id = id;
-                    decoratorQueue[decoratorQueue.length] = decorator;
+                    if (decorator.ids === undefined) {
+                        decorator.ids = [];
+                        decoratorQueue[decoratorQueue.length] = decorator; 
+                    }
+                    decorator.ids.push(id);
                 }
                 // honour these remaining types immediately
                 else if (type === "attrs") {
@@ -14352,6 +14732,9 @@ fluid_1_4 = fluid_1_4 || {};
                     out += rendered;
                     closeTag();
                 }
+            }
+            if (attrcopy.id !== undefined) {
+                usedIDs[attrcopy.id] = true;
             }
         }
              
@@ -14678,28 +15061,34 @@ fluid_1_4 = fluid_1_4 || {};
         function processDecoratorQueue() {
             for (var i = 0; i < decoratorQueue.length; ++i) {
                 var decorator = decoratorQueue[i];
-                var node = fluid.byId(decorator.id, renderOptions.document);
-                if (!node) {
-                    fluid.fail("Error during rendering - component with id " + decorator.id 
-                        + " which has a queued decorator was not found in the output markup");
-                }
-                if (decorator.type === "jQuery") {
-                    var jnode = $(node);
-                    jnode[decorator.func].apply(jnode, $.makeArray(decorator.args));
-                }
-                else if (decorator.type === "fluid") {
-                    var args = decorator.args;
-                    if (!args) {
-                        if (!decorator.container) {
-                            decorator.container = node;
-                        }
-                        args = [decorator.container, decorator.options];
+                for (var j = 0; j < decorator.ids.length; ++ j) {
+                    var id = decorator.ids[j];
+                    var node = fluid.byId(id, renderOptions.document);
+                    if (!node) {
+                        fluid.fail("Error during rendering - component with id " + id 
+                            + " which has a queued decorator was not found in the output markup");
                     }
-                    var that = renderer.invokeFluidDecorator(decorator.func, args, decorator.id, i, options);
-                    decorator.that = that;
-                }
-                else if (decorator.type === "event") {
-                    node[decorator.event] = decorator.handler; 
+                    if (decorator.type === "jQuery") {
+                        var jnode = $(node);
+                        jnode[decorator.func].apply(jnode, $.makeArray(decorator.args));
+                    }
+                    else if (decorator.type === "fluid") {
+                        var args = decorator.args;
+                        if (!args) {
+                            if (!decorator.container) {
+                                decorator.container = $(node);
+                            }
+                            else {
+                                decorator.container.push(node);
+                            }
+                            args = [node, decorator.options];
+                        }
+                        var that = renderer.invokeFluidDecorator(decorator.func, args, id, i, options);
+                        decorator.that = that;
+                    }
+                    else if (decorator.type === "event") {
+                        node[decorator.event] = decorator.handler; 
+                    }
                 }
             }
         }
@@ -14909,7 +15298,7 @@ https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
 /*global fluid_1_4:true, jQuery*/
 
 // JSLint options 
-/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+/*jslint white: true, funcinvoke: true, elsecatch: true, operator: true, jslintok:true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
 
 fluid_1_4 = fluid_1_4 || {};
 
@@ -14917,16 +15306,7 @@ fluid_1_4 = fluid_1_4 || {};
 
     if (!fluid.renderer) {
         fluid.fail("fluidRenderer.js is a necessary dependency of RendererUtilities");
-        }
-
-    // TODO: rescued from kettleCouchDB.js - clean up in time
-    fluid.expect = function (name, members, target) {
-        fluid.transform($.makeArray(members), function (key) {
-            if (typeof target[key] === "undefined") {
-                fluid.fail(name + " missing required parameter " + key);
-            }
-        });
-    };
+    }
     
     /** Returns an array of size count, filled with increasing integers, 
      *  starting at 0 or at the index specified by first. 
@@ -14935,7 +15315,7 @@ fluid_1_4 = fluid_1_4 || {};
     fluid.iota = function (count, first) {
         first = first || 0;
         var togo = [];
-        for (var i = 0; i < count; ++ i) {
+        for (var i = 0; i < count; ++i) {
             togo[togo.length] = first++;
         }
         return togo;
@@ -14951,7 +15331,7 @@ fluid_1_4 = fluid_1_4 || {};
 
     fluid.renderer.clearDecorators = function(instantiator, that) {
         fluid.renderer.visitDecorators(that, function(component, name) {
-                instantiator.clearComponent(that, name);
+            instantiator.clearComponent(that, name);
         });
     };
     
@@ -14980,7 +15360,7 @@ fluid_1_4 = fluid_1_4 || {};
     /** "Renderer component" infrastructure **/
   // TODO: fix this up with IoC and improved handling of templateSource as well as better 
   // options layout (model appears in both rOpts and eOpts)
-    fluid.renderer.createRendererFunction = function (container, selectors, options, baseObject, fossils) {
+    fluid.renderer.createRendererSubcomponent = function (container, selectors, options, baseObject, fossils) {
         options = options || {};
         var source = options.templateSource ? options.templateSource : {node: $(container)};
         var rendererOptions = fluid.renderer.modeliseOptions(options.rendererOptions, null, baseObject);
@@ -14988,27 +15368,29 @@ fluid_1_4 = fluid_1_4 || {};
         
         var expanderOptions = fluid.renderer.modeliseOptions(options.expanderOptions, {ELstyle: "${}"}, baseObject);
         fluid.renderer.reverseMerge(expanderOptions, options, ["resolverGetConfig", "resolverSetConfig"]);
-        var expander = options.noexpand ? null : fluid.renderer.makeProtoExpander(expanderOptions);
+        var that = {};
+        if (!options.noexpand) {
+            that.expander = fluid.renderer.makeProtoExpander(expanderOptions);
+        }
         
         var templates = null;
-        return function (tree) {
-            if (expander) {
-                tree = expander(tree);
-            }
+        that.render = function (tree) {
             var cutpointFn = options.cutpointGenerator || "fluid.renderer.selectorsToCutpoints";
             rendererOptions.cutpoints = rendererOptions.cutpoints || fluid.invokeGlobalFunction(cutpointFn, [selectors, options]);
-            container = typeof (container) === "function" ? container() : $(container);
+            container = typeof(container) === "function" ? container() : $(container);
               
             if (templates) {
                 fluid.clear(rendererOptions.fossils);
                 fluid.reRender(templates, container, tree, rendererOptions);
-            } else {
-                if (typeof (source) === "function") { // TODO: make a better attempt than this at asynchrony
+            } 
+            else {
+                if (typeof(source) === "function") { // TODO: make a better attempt than this at asynchrony
                     source = source();  
                 }
                 templates = fluid.render(source, container, tree, rendererOptions);
             }
         };
+        return that;
     };
     
     fluid.defaults("fluid.rendererComponent", {
@@ -15019,20 +15401,22 @@ fluid_1_4 = fluid_1_4 || {};
         },
         rendererOptions: {
             autoBind: true
+        },
+        events: {
+            prepareModelForRender: null,
+            onRenderTree: null,
+            afterRender: null,
+            produceTree: "unicast"
         }
     });
-    
-    fluid.defaults("fluid.IoCRendererComponent", {
-        gradeNames: ["fluid.rendererComponent"]  
-    });
-    
+
     fluid.initRendererComponent = function (componentName, container, options) {
         var that = fluid.initView(componentName, container, options, {gradeNames: ["fluid.rendererComponent"]});
         
         fluid.fetchResources(that.options.resources); // TODO: deal with asynchrony
         
         var rendererOptions = fluid.renderer.modeliseOptions(that.options.rendererOptions, null, that);
-        if (fluid.hasGrade(that.options, "fluid.IoCRendererComponent")) {
+        if (!that.options.noUpgradeDecorators) {
             fluid.withInstantiator(that, function(currentInst) {
                 rendererOptions.instantiator = currentInst;
                 rendererOptions.parentComponent = that;
@@ -15040,60 +15424,72 @@ fluid_1_4 = fluid_1_4 || {};
         }
         var messageResolver;
         if (!rendererOptions.messageSource && that.options.strings) {
-            messageResolver = fluid.messageResolver(
-                {messageBase: that.options.strings,
-                 resolveFunc: that.options.messageResolverFunction,
-                 parents: fluid.makeArray(that.options.parentBundle)});
+            messageResolver = fluid.messageResolver({
+                messageBase: that.options.strings,
+                resolveFunc: that.options.messageResolverFunction,
+                parents: fluid.makeArray(that.options.parentBundle)
+            });
             rendererOptions.messageSource = {type: "resolver", resolver: messageResolver}; 
         }
         fluid.renderer.reverseMerge(rendererOptions, that.options, ["resolverGetConfig", "resolverSetConfig"]);
 
-        var renderer = {
-            fossils: {},
-            boundPathForNode: function (node) {
-                return fluid.boundPathForNode(node, renderer.fossils);
-            }
-        };
 
-        var rendererFnOptions = $.extend({}, that.options.rendererFnOptions, 
-           {rendererOptions: rendererOptions,
-           repeatingSelectors: that.options.repeatingSelectors,
-           selectorsToIgnore: that.options.selectorsToIgnore});
+        var rendererFnOptions = $.extend({}, that.options.rendererFnOptions, { 
+            rendererOptions: rendererOptions,
+            repeatingSelectors: that.options.repeatingSelectors,
+            selectorsToIgnore: that.options.selectorsToIgnore,
+            expanderOptions: {
+                envAdd: {styles: that.options.styles}
+            }
+        });
            
         if (that.options.resources && that.options.resources.template) {
             rendererFnOptions.templateSource = function () { // TODO: don't obliterate, multitemplates, etc.
                 return that.options.resources.template.resourceText;
             };
         }
+        var produceTree = that.events.produceTree;
+        produceTree.addListener( function() {
+            return that.options.protoTree;
+            }
+        );
+        
         if (that.options.produceTree) {
-            that.produceTree = that.options.produceTree;  
+            produceTree.addListener(that.options.produceTree);
         }
-        if (that.options.protoTree && !that.produceTree) {
-            that.produceTree = function () {
-                return that.options.protoTree;
-            };
-        }
+
         fluid.renderer.reverseMerge(rendererFnOptions, that.options, ["resolverGetConfig", "resolverSetConfig"]);
         if (rendererFnOptions.rendererTargetSelector) {
             container = function () {return that.dom.locate(rendererFnOptions.rendererTargetSelector); };
         }
        
-        var rendererFn = fluid.renderer.createRendererFunction(container, that.options.selectors, rendererFnOptions, that, renderer.fossils);
+        var renderer = {
+            fossils: {},
+            boundPathForNode: function (node) {
+                return fluid.boundPathForNode(node, renderer.fossils);
+            }
+        };
+       
+        var rendererSub = fluid.renderer.createRendererSubcomponent(container, that.options.selectors, rendererFnOptions, that, renderer.fossils);
+        that.renderer = $.extend(renderer, rendererSub);
         
-        that.render = renderer.render = rendererFn;
-        that.renderer = renderer;
         if (messageResolver) {
             that.messageResolver = messageResolver;
         }
 
-        if (that.produceTree) {
-            that.refreshView = renderer.refreshView = function () {
-                if (rendererOptions.instantiator && rendererOptions.parentComponent) {
-                    fluid.renderer.clearDecorators(rendererOptions.instantiator, rendererOptions.parentComponent);
-                }
-                renderer.render(that.produceTree(that));
-            };
-        }
+        that.refreshView = renderer.refreshView = function () {
+            if (rendererOptions.instantiator && rendererOptions.parentComponent) {
+                fluid.renderer.clearDecorators(rendererOptions.instantiator, rendererOptions.parentComponent);
+            }
+            that.events.prepareModelForRender.fire(that.model, that.applier, that);
+            var tree = produceTree.fire(that);
+            if (that.renderer.expander) {
+                tree = that.renderer.expander(tree);
+            }
+            that.events.onRenderTree.fire(that, tree);
+            that.renderer.render(tree);
+            that.events.afterRender.fire(that);
+        };
         
         return that;
     };
@@ -15164,7 +15560,7 @@ fluid_1_4 = fluid_1_4 || {};
             togo[options.inputID] = element;
             togo[options.labelID] = fluid.copy(element); 
             return togo;
-         });
+        });
         var togo = {}; // TODO: JICO needs to support "quoted literal key initialisers" :P
         togo[options.selectID] = selection;
         togo[options.rowID] = {children: rows};
@@ -15191,10 +15587,10 @@ fluid_1_4 = fluid_1_4 || {};
             if (options.valueAs) {
                 envAdd[options.valueAs] = fluid.get(config.model, EL, config.resolverGetConfig);
             }
-            var expandrow = fluid.withEnvironment(envAdd, function () {return config.expander(options.tree); });
+            var expandrow = fluid.withEnvironment(envAdd, function () {return config.expander(options.tree); }, "rendererEnvironment");
             if (fluid.isArrayable(expandrow)) {
                 if (expandrow.length > 0) {
-                    expanded.push( {children: expandrow} );
+                    expanded.push({children: expandrow});
                 }
             }
             else if (expandrow !== fluid.renderer.NO_COMPONENT) {
@@ -15204,7 +15600,7 @@ fluid_1_4 = fluid_1_4 || {};
         var repeatID = options.repeatID;
         if (repeatID.indexOf(":") === -1) {
             repeatID = repeatID + ":";
-            }
+        }
         fluid.each(expanded, function (entry) {entry.ID = repeatID; });
         return expanded;
     };
@@ -15227,6 +15623,31 @@ fluid_1_4 = fluid_1_4 || {};
         return config.expander(tree);
     };
     
+    
+    /* An EL extraction utility suitable for context expressions which occur in 
+     * expanding component trees. It assumes that any context expressions refer
+     * to EL paths that are to be referred to the "true (direct) model" - since
+     * the context during expansion may not agree with the context during rendering.
+     * It satisfies the same contract as fluid.extractEL, in that it will either return
+     * an EL path, or undefined if the string value supplied cannot be interpreted
+     * as an EL path with respect to the supplied options.
+     */
+    // unsupported, non-API function
+    fluid.extractContextualPath = function (string, options, env) {
+        var parsed = fluid.extractELWithContext(string, options);
+        if (parsed) {
+            if (parsed.context) {
+                var fetched = env[parsed.context];
+                if (typeof(fetched) !== "string") {
+                    fluid.fail("Could not look up context path named " + parsed.context + " to string value");
+                }
+                return fluid.model.composePath(fetched, parsed.path);
+            }
+            else {
+                return parsed.path;
+            }
+        }
+    };
 
     /** Create a "protoComponent expander" with the supplied set of options.
      * The returned value will be a function which accepts a "protoComponent tree"
@@ -15250,16 +15671,19 @@ fluid_1_4 = fluid_1_4 || {};
 
     fluid.renderer.makeProtoExpander = function (expandOptions) {
       // shallow copy of options - cheaply avoid destroying model, and all others are primitive
-        var options = $.extend({ELstyle: "${}"}, expandOptions); // shallow copy of options
+        var options = $.extend({
+            ELstyle: "${}"
+        }, expandOptions); // shallow copy of options
+        options.fetcher = fluid.makeEnvironmentFetcher("rendererEnvironment", options.model); 
         var IDescape = options.IDescape || "\\";
         
         function fetchEL(string) {
-            var env = fluid.threadLocal();
+            var env = fluid.threadLocal().rendererEnvironment;
             return fluid.extractContextualPath(string, options, env);
         }
         
         var expandLight = function (source) {
-            return fluid.resolveEnvironment(source, options.model, options); 
+            return fluid.resolveEnvironment(source, options); 
         };
 
         var expandBound = function (value, concrete) {
@@ -15297,6 +15721,9 @@ fluid_1_4 = fluid_1_4 || {};
         };
         
         options.filter = fluid.expander.lightFilter;
+        
+        var expandCond;
+        var expandLeafOrCond;
         
         var expandEntry = function (entry) {
             var comp = [];
@@ -15347,14 +15774,14 @@ fluid_1_4 = fluid_1_4 || {};
         // In all of these cases, the key will be THE PARENT'S KEY
         var expandChildren = function (entry, pusher) {
             var children = entry.children;
-            for (var i = 0; i < children.length; ++ i) {
+            for (var i = 0; i < children.length; ++i) {
                 // each child in this list will lead to a WHOLE FORKED set of children.
                 var target = [];
                 var comp = { children: target};
                 var child = children[i];
-                var childPusher = function (comp) { // linting problem - however, I believe this is ok
+                var childPusher = function (comp) {
                     target[target.length] = comp;
-                };
+                }; // jslint:ok - function in loop 
                 expandLeafOrCond(child, target, childPusher);
                 // Rescue the case of an expanded leaf into single component - TODO: check what sense this makes of the grammar
                 if (comp.children.length === 1 && !comp.children[0].ID) {
@@ -15372,7 +15799,7 @@ fluid_1_4 = fluid_1_4 || {};
         
         // We have reached something which is either a leaf or Cond - either inside
         // a Cond or as an entry in children.
-        var expandLeafOrCond = function (entry, target, pusher) {
+        var expandLeafOrCond = function (entry, target, pusher) { // jslint:ok - forward declaration
             var componentType = fluid.renderer.inferComponentType(entry);
             if (!componentType && (fluid.isPrimitive(entry) || detectBareBound(entry))) {
                 componentType = "UIBound";
@@ -15393,7 +15820,7 @@ fluid_1_4 = fluid_1_4 || {};
         // a Cond can ONLY occur as a direct member of "children". Each "cond" entry may
         // give rise to one or many elements with the SAME key - if "expandSingle" discovers
         // "thing with children" they will all share the same key found in proto. 
-        var expandCond = function (proto, target) {
+        expandCond = function (proto, target) {
             for (var key in proto) {
                 var entry = proto[key];
                 if (key.charAt(0) === IDescape) {
@@ -15406,12 +15833,12 @@ fluid_1_4 = fluid_1_4 || {};
                         if (expanded !== fluid.renderer.NO_COMPONENT) {
                             fluid.each(expanded, function (el) {target[target.length] = el; });
                         }
-                    });
+                    }); // jslint:ok - function in loop
                 } else if (entry) {
                     var condPusher = function (comp) {
                         comp.ID = key;
                         target[target.length] = comp; 
-                    };
+                    }; // jslint:ok - function in loop
 
                     if (entry.children) {
                         if (key.indexOf(":") === -1) {
@@ -15428,7 +15855,12 @@ fluid_1_4 = fluid_1_4 || {};
                 
         };
         
-        return expandEntry;
+        return function(entry) {
+            var initEnvironment = $.extend({}, options.envAdd);
+            return fluid.withEnvironment({rendererEnvironment: initEnvironment}, function() {
+                return expandEntry(entry);
+            });
+        };
     };
     
 })(jQuery, fluid_1_4);
@@ -18243,15 +18675,9 @@ var fluid_1_4 = fluid_1_4 || {};
         dataOffset: "",
         
         // strategy for generating a tree row, either "explode" or an array of columnDef objects
-        columnDefs: [
-            {
-                key: "column1",
-                valuebinding: "*.value1",  
-                sortable: true
-            }
-        ],
+        columnDefs: [], // [{key: "columnName", valuebinding: "*.valuePath", sortable: true/false}]
         
-        annotateColumnRange: "column1",
+        annotateColumnRange: undefined, // specify a "key" from the columnDefs
         
         tooltip: {
             type: "fluid.tooltip"
@@ -20608,24 +21034,28 @@ var fluid_1_4 = fluid_1_4 || {};
     
     fluid.progressiveChecker = function (options) {
         var that = fluid.initLittleComponent("fluid.progressiveChecker", options);
-        return fluid.find(that.options.checks, function(check) {
+        return fluid.typeTag(fluid.find(that.options.checks, function(check) {
             if (check.feature) {
-                return fluid.typeTag(check.contextName);
-            }}, that.options.defaultTypeTag
-        );
+                return check.contextName;
+            }}, that.options.defaultContextName
+        ));
     };
+    
+    fluid.defaults("fluid.progressiveChecker", {
+        gradeNames: "fluid.typeFount",
+        checks: [], // [{"feature": "{IoC Expression}", "contextName": "context.name"}]
+        defaultContextName: undefined
+    });
     
     fluid.progressiveCheckerForComponent = function (options) {
         var that = fluid.initLittleComponent("fluid.progressiveCheckerForComponent", options);
         var defaults = fluid.defaults(that.options.componentName);
         return fluid.progressiveChecker(fluid.expandOptions(defaults.progressiveCheckerOptions, that));  
     };
-    
-    fluid.defaults("fluid.progressiveChecker", {
-        checks: [], // [{"feature": "{IoC Expression}", "contextName": "context.name"}]
-        defaultTypeTag: undefined
+
+    fluid.defaults("fluid.progressiveCheckerForComponent", {
+        gradeNames: "fluid.typeFount"
     });
-    
     
     /**********************************************************
      * This code runs immediately upon inclusion of this file *
@@ -20920,14 +21350,14 @@ var fluid_1_4 = fluid_1_4 || {};
         
         that.events.onFileError.addListener(function (file, error) {
             if (error === fluid.uploader.errorConstants.UPLOAD_STOPPED) {
-                that.queue.isUploading = false;
+                file.filestatus = fluid.uploader.fileStatusConstants.CANCELLED;
                 return;
-            }
-            
-            file.filestatus = fluid.uploader.fileStatusConstants.ERROR;
-            if (that.queue.isUploading) {
-                that.queue.currentBatch.totalBytesUploaded += file.size;
-                that.queue.currentBatch.numFilesErrored++;
+            } else {
+                file.filestatus = fluid.uploader.fileStatusConstants.ERROR;
+                if (that.queue.isUploading) {
+                    that.queue.currentBatch.totalBytesUploaded += file.size;
+                    that.queue.currentBatch.numFilesErrored++;
+                }
             }
         });
 
@@ -20969,13 +21399,17 @@ var fluid_1_4 = fluid_1_4 || {};
         return that.uploaderImpl;
     };
     
+    fluid.uploaderImpl = function () {
+        fluid.fail("Error creating uploader component - please make sure that a progressiveCheckerForComponent for \"fluid.uploader\" is registered either in the "
+          + "static environment or else is visible in the current component tree");
+    };
+    
     fluid.defaults("fluid.uploader", {
         gradeNames: ["fluid.viewComponent"],
         components: {
             uploaderContext: {
                 type: "fluid.progressiveCheckerForComponent",
-                options: {componentName: "fluid.uploader"},
-                priority: "first"
+                options: {componentName: "fluid.uploader"}
             },
             uploaderImpl: {
                 type: "fluid.uploaderImpl",
@@ -20994,7 +21428,7 @@ var fluid_1_4 = fluid_1_4 || {};
                     contextName: "fluid.uploader.swfUpload"
                 }
             ],
-            defaultTypeTag: fluid.typeTag("fluid.uploader.singleFile")
+            defaultContextName: "fluid.uploader.singleFile"
         }
     });
     
@@ -22488,7 +22922,7 @@ var fluid_1_4 = fluid_1_4 || {};
                         afterFileDialog: "{multiFileUploader}.events.afterFileDialog",
                         afterFileQueued: "{multiFileUploader}.events.afterFileQueued",
                         onQueueError: "{multiFileUploader}.events.onQueueError"
-                   }
+                    }
                 }
             },
             
@@ -22511,8 +22945,7 @@ var fluid_1_4 = fluid_1_4 || {};
         // Used for browsers that rely on File.getAsBinary(), such as Firefox 3.6,
         // which load the entire file to be loaded into memory.
         // Set this option to a sane limit (100MB) so your users won't experience crashes or slowdowns (FLUID-3937).
-        legacyBrowserFileLimit: 100000,
-    
+        legacyBrowserFileLimit: 100000
     });
     
     
@@ -22525,7 +22958,6 @@ var fluid_1_4 = fluid_1_4 || {};
     };
     
     fluid.uploader.html5Strategy.fileErrorHandler = function (file, events, xhr) {
-        file.filestatus = fluid.uploader.fileStatusConstants.ERROR;
         events.onFileError.fire(file, 
                                 fluid.uploader.errorConstants.UPLOAD_FAILED,
                                 xhr.status,
@@ -22534,7 +22966,6 @@ var fluid_1_4 = fluid_1_4 || {};
     };
     
     fluid.uploader.html5Strategy.fileStopHandler = function (file, events, xhr) {
-        file.filestatus = fluid.uploader.fileStatusConstants.CANCELLED;
         events.onFileError.fire(file, 
                                 fluid.uploader.errorConstants.UPLOAD_STOPPED,
                                 xhr.status,
@@ -22556,9 +22987,12 @@ var fluid_1_4 = fluid_1_4 || {};
         return that;
     };
     
-    var createFileUploadXHR = function (file, events) {
+    fluid.uploader.html5Strategy.createFileUploadXHR = function () {
         var xhr = new XMLHttpRequest();
-
+        return xhr;
+    };
+    
+    fluid.uploader.html5Strategy.monitorFileUploadXHR = function (file, events, xhr) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 var status = xhr.status;
@@ -22602,11 +23036,14 @@ var fluid_1_4 = fluid_1_4 || {};
         
         that.uploadFile = function (file) {
             that.events.onFileStart.fire(file);
-            that.currentXHR = createFileUploadXHR(file, that.events);
-            that.doUpload(file, that.queueSettings, that.currentXHR);            
+            var xhr = that.createXHR();
+            var formData = that.createFormData();
+            that.currentXHR = fluid.uploader.html5Strategy.monitorFileUploadXHR(file, that.events, xhr);
+            that.doUpload(file, that.queueSettings, that.currentXHR, formData);            
         };
 
         that.stop = function () {
+            that.queue.isUploading = false;
             that.currentXHR.abort();         
         };
         
@@ -22618,10 +23055,12 @@ var fluid_1_4 = fluid_1_4 || {};
     fluid.defaults("fluid.uploader.html5Strategy.remote", {
         gradeNames: ["fluid.eventedComponent"],
         argumentMap: {
-            options: 2  
+            options: 1  
         },                
         invokers: {
-            doUpload: "fluid.uploader.html5Strategy.doUpload"
+            doUpload: "fluid.uploader.html5Strategy.doUpload",
+            createXHR: "fluid.uploader.html5Strategy.createFileUploadXHR", 
+            createFormData: "fluid.uploader.html5Strategy.createFormData"
         }
     });
     
@@ -22635,19 +23074,20 @@ var fluid_1_4 = fluid_1_4 || {};
     
     var CRLF = "\r\n";
     
+    fluid.uploader.html5Strategy.createFormData = function () {
+        var formData = new FormData();
+        return formData;
+    };
+    
     /** 
      * Firefox 4  implementation.  FF4 has implemented a FormData function which
      * conveniently provides easy construct of set key/value pairs representing 
      * form fields and their values.  The FormData is then easily sent using the 
      * XMLHttpRequest send() method.  
      */
-    fluid.uploader.html5Strategy.doFormDataUpload = function (file, queueSettings, xhr) {
-        var formData = new FormData();
+    fluid.uploader.html5Strategy.doFormDataUpload = function (file, queueSettings, xhr, formData) {
         formData.append("file", file);
-        
         setPostParams(formData, queueSettings.postParams);
-        
-        // set post params here.
         xhr.open("POST", queueSettings.uploadURL, true);
         xhr.send(formData);
     };
@@ -22691,13 +23131,17 @@ var fluid_1_4 = fluid_1_4 || {};
         args: ["@0", "@1", "@2"]
     });
     
+    fluid.demands("fluid.uploader.html5Strategy.createFileUploadXHR", "fluid.uploader.html5Strategy.remote", {
+        funcName: "fluid.uploader.html5Strategy.createFileUploadXHR"
+    });    
+    
     // Configuration for FF4, Chrome, and Safari 4+, all of which support FormData correctly.
     fluid.demands("fluid.uploader.html5Strategy.doUpload", [
         "fluid.uploader.html5Strategy.remote", 
         "fluid.browser.supportsFormData"
     ], {
         funcName: "fluid.uploader.html5Strategy.doFormDataUpload",
-        args: ["@0", "@1", "@2"]
+        args: ["@0", "@1", "@2", "@3"]
     });
     
     fluid.uploader.html5Strategy.local = function (queue, legacyBrowserFileLimit, options) {
@@ -22854,7 +23298,7 @@ var fluid_1_4 = fluid_1_4 || {};
     
     fluid.defaults("fluid.uploader.html5Strategy.browseButtonView", {
         gradeNames: "fluid.viewComponent",
-        multiFileInputMarkup: "<input type='file' multiple='' class='flc-uploader-html5-input fl-hidden' />",
+        multiFileInputMarkup: "<input type='file' multiple='' class='flc-uploader-html5-input' />",
         
         queueSettings: {},
         
@@ -23057,11 +23501,11 @@ var fluid_1_4 = fluid_1_4 || {};
     
 })(jQuery, fluid_1_4);
 /*
- * jQuery UI Draggable 1.8
+ * jQuery UI Draggable 1.8.12
  *
- * Copyright (c) 2010 AUTHORS.txt (http://jqueryui.com/about)
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * and GPL (GPL-LICENSE.txt) licenses.
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Draggables
  *
@@ -23070,7 +23514,7 @@ var fluid_1_4 = fluid_1_4 || {};
  *	jquery.ui.mouse.js
  *	jquery.ui.widget.js
  */
-(function($) {
+(function( $, undefined ) {
 
 $.widget("ui.draggable", $.ui.mouse, {
 	widgetEventPrefix: "drag",
@@ -23250,8 +23694,8 @@ $.widget("ui.draggable", $.ui.mouse, {
 			this.dropped = false;
 		}
 		
-		//if the original element is removed, don't bother to continue
-		if(!this.element[0] || !this.element[0].parentNode)
+		//if the original element is removed, don't bother to continue if helper is set to "original"
+		if((!this.element[0] || !this.element[0].parentNode) && this.options.helper == "original")
 			return false;
 
 		if((this.options.revert == "invalid" && !dropped) || (this.options.revert == "valid" && dropped) || this.options.revert === true || ($.isFunction(this.options.revert) && this.options.revert.call(this.element, dropped))) {
@@ -23375,7 +23819,9 @@ $.widget("ui.draggable", $.ui.mouse, {
 	_cacheMargins: function() {
 		this.margins = {
 			left: (parseInt(this.element.css("marginLeft"),10) || 0),
-			top: (parseInt(this.element.css("marginTop"),10) || 0)
+			top: (parseInt(this.element.css("marginTop"),10) || 0),
+			right: (parseInt(this.element.css("marginRight"),10) || 0),
+			bottom: (parseInt(this.element.css("marginBottom"),10) || 0)
 		};
 	},
 
@@ -23391,10 +23837,10 @@ $.widget("ui.draggable", $.ui.mouse, {
 		var o = this.options;
 		if(o.containment == 'parent') o.containment = this.helper[0].parentNode;
 		if(o.containment == 'document' || o.containment == 'window') this.containment = [
-			0 - this.offset.relative.left - this.offset.parent.left,
-			0 - this.offset.relative.top - this.offset.parent.top,
-			$(o.containment == 'document' ? document : window).width() - this.helperProportions.width - this.margins.left,
-			($(o.containment == 'document' ? document : window).height() || document.body.parentNode.scrollHeight) - this.helperProportions.height - this.margins.top
+			(o.containment == 'document' ? 0 : $(window).scrollLeft()) - this.offset.relative.left - this.offset.parent.left,
+			(o.containment == 'document' ? 0 : $(window).scrollTop()) - this.offset.relative.top - this.offset.parent.top,
+			(o.containment == 'document' ? 0 : $(window).scrollLeft()) + $(o.containment == 'document' ? document : window).width() - this.helperProportions.width - this.margins.left,
+			(o.containment == 'document' ? 0 : $(window).scrollTop()) + ($(o.containment == 'document' ? document : window).height() || document.body.parentNode.scrollHeight) - this.helperProportions.height - this.margins.top
 		];
 
 		if(!(/^(document|window|parent)$/).test(o.containment) && o.containment.constructor != Array) {
@@ -23403,10 +23849,10 @@ $.widget("ui.draggable", $.ui.mouse, {
 			var over = ($(ce).css("overflow") != 'hidden');
 
 			this.containment = [
-				co.left + (parseInt($(ce).css("borderLeftWidth"),10) || 0) + (parseInt($(ce).css("paddingLeft"),10) || 0) - this.margins.left,
-				co.top + (parseInt($(ce).css("borderTopWidth"),10) || 0) + (parseInt($(ce).css("paddingTop"),10) || 0) - this.margins.top,
-				co.left+(over ? Math.max(ce.scrollWidth,ce.offsetWidth) : ce.offsetWidth) - (parseInt($(ce).css("borderLeftWidth"),10) || 0) - (parseInt($(ce).css("paddingRight"),10) || 0) - this.helperProportions.width - this.margins.left,
-				co.top+(over ? Math.max(ce.scrollHeight,ce.offsetHeight) : ce.offsetHeight) - (parseInt($(ce).css("borderTopWidth"),10) || 0) - (parseInt($(ce).css("paddingBottom"),10) || 0) - this.helperProportions.height - this.margins.top
+				co.left + (parseInt($(ce).css("borderLeftWidth"),10) || 0) + (parseInt($(ce).css("paddingLeft"),10) || 0),
+				co.top + (parseInt($(ce).css("borderTopWidth"),10) || 0) + (parseInt($(ce).css("paddingTop"),10) || 0),
+				co.left+(over ? Math.max(ce.scrollWidth,ce.offsetWidth) : ce.offsetWidth) - (parseInt($(ce).css("borderLeftWidth"),10) || 0) - (parseInt($(ce).css("paddingRight"),10) || 0) - this.helperProportions.width - this.margins.left - this.margins.right,
+				co.top+(over ? Math.max(ce.scrollHeight,ce.offsetHeight) : ce.offsetHeight) - (parseInt($(ce).css("borderTopWidth"),10) || 0) - (parseInt($(ce).css("paddingBottom"),10) || 0) - this.helperProportions.height - this.margins.top  - this.margins.bottom
 			];
 		} else if(o.containment.constructor == Array) {
 			this.containment = o.containment;
@@ -23517,7 +23963,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 });
 
 $.extend($.ui.draggable, {
-	version: "1.8"
+	version: "1.8.12"
 });
 
 $.ui.plugin.add("draggable", "connectToSortable", {
@@ -23533,7 +23979,7 @@ $.ui.plugin.add("draggable", "connectToSortable", {
 					instance: sortable,
 					shouldRevert: sortable.options.revert
 				});
-				sortable._refreshItems();	//Do a one-time refresh at start to refresh the containerCache
+				sortable.refreshPositions();	// Call the sortable's refreshPositions at drag start to refresh the containerCache since the sortable container cache is used in drag and needs to be up to date (this will ensure it's initialised as well as being kept in step with any changes that might have happened on the page).
 				sortable._trigger("activate", event, uiSortable);
 			}
 		});
@@ -23854,11 +24300,11 @@ $.ui.plugin.add("draggable", "zIndex", {
 
 })(jQuery);
 /*
- * jQuery UI Dialog 1.8
+ * jQuery UI Dialog 1.8.12
  *
- * Copyright (c) 2010 AUTHORS.txt (http://jqueryui.com/about)
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * and GPL (GPL-LICENSE.txt) licenses.
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Dialog
  *
@@ -23871,13 +24317,40 @@ $.ui.plugin.add("draggable", "zIndex", {
  *	jquery.ui.position.js
  *	jquery.ui.resizable.js
  */
-(function($) {
+(function( $, undefined ) {
 
 var uiDialogClasses =
-	'ui-dialog ' +
-	'ui-widget ' +
-	'ui-widget-content ' +
-	'ui-corner-all ';
+		'ui-dialog ' +
+		'ui-widget ' +
+		'ui-widget-content ' +
+		'ui-corner-all ',
+	sizeRelatedOptions = {
+		buttons: true,
+		height: true,
+		maxHeight: true,
+		maxWidth: true,
+		minHeight: true,
+		minWidth: true,
+		width: true
+	},
+	resizableRelatedOptions = {
+		maxHeight: true,
+		maxWidth: true,
+		minHeight: true,
+		minWidth: true
+	},
+	// support for jQuery 1.3.2 - handle common attrFn methods for dialog
+	attrFn = $.attrFn || {
+		val: true,
+		css: true,
+		html: true,
+		text: true,
+		data: true,
+		width: true,
+		height: true,
+		offset: true,
+		click: true
+	};
 
 $.widget("ui.dialog", {
 	options: {
@@ -23894,7 +24367,18 @@ $.widget("ui.dialog", {
 		minHeight: 150,
 		minWidth: 150,
 		modal: false,
-		position: 'center',
+		position: {
+			my: 'center',
+			at: 'center',
+			collision: 'fit',
+			// ensure that the titlebar is never outside the document
+			using: function(pos) {
+				var topOffset = $(this).css(pos).offset().top;
+				if (topOffset < 0) {
+					$(this).css('top', pos.top - topOffset);
+				}
+			}
+		},
 		resizable: true,
 		show: null,
 		stack: true,
@@ -23902,13 +24386,19 @@ $.widget("ui.dialog", {
 		width: 300,
 		zIndex: 1000
 	},
+
 	_create: function() {
 		this.originalTitle = this.element.attr('title');
+		// #5742 - .attr() might return a DOMElement
+		if ( typeof this.originalTitle !== "string" ) {
+			this.originalTitle = "";
+		}
 
+		this.options.title = this.options.title || this.originalTitle;
 		var self = this,
 			options = self.options,
 
-			title = options.title || self.originalTitle || '&#160;',
+			title = options.title || '&#160;',
 			titleId = $.ui.dialog.getTitleId(self.element),
 
 			uiDialog = (self.uiDialog = $('<div></div>'))
@@ -24016,6 +24506,7 @@ $.widget("ui.dialog", {
 			uiDialog.bgiframe();
 		}
 	},
+
 	_init: function() {
 		if ( this.options.autoOpen ) {
 			this.open();
@@ -24042,14 +24533,14 @@ $.widget("ui.dialog", {
 
 		return self;
 	},
-	
+
 	widget: function() {
 		return this.uiDialog;
 	},
 
 	close: function(event) {
 		var self = this,
-			maxZ;
+			maxZ, thisZ;
 		
 		if (false === self._trigger('beforeClose', event)) {
 			return;
@@ -24078,7 +24569,10 @@ $.widget("ui.dialog", {
 			maxZ = 0;
 			$('.ui-dialog').each(function() {
 				if (this !== self.uiDialog[0]) {
-					maxZ = Math.max(maxZ, $(this).css('z-index'));
+					thisZ = $(this).css('z-index');
+					if(!isNaN(thisZ)) {
+						maxZ = Math.max(maxZ, thisZ);
+					}
 				}
 			});
 			$.ui.dialog.maxZ = maxZ;
@@ -24097,12 +24591,12 @@ $.widget("ui.dialog", {
 		var self = this,
 			options = self.options,
 			saveScroll;
-		
+
 		if ((options.modal && !force) ||
 			(!options.stack && !options.modal)) {
 			return self._trigger('focus', event);
 		}
-		
+
 		if (options.zIndex > $.ui.dialog.maxZ) {
 			$.ui.dialog.maxZ = options.zIndex;
 		}
@@ -24130,9 +24624,6 @@ $.widget("ui.dialog", {
 			uiDialog = self.uiDialog;
 
 		self.overlay = options.modal ? new $.ui.dialog.overlay(self) : null;
-		if (uiDialog.next().length) {
-			uiDialog.appendTo('body');
-		}
 		self._size();
 		self._position(options.position);
 		uiDialog.show(options.show);
@@ -24144,11 +24635,11 @@ $.widget("ui.dialog", {
 				if (event.keyCode !== $.ui.keyCode.TAB) {
 					return;
 				}
-	
+
 				var tabbables = $(':tabbable', this),
 					first = tabbables.filter(':first'),
 					last  = tabbables.filter(':last');
-	
+
 				if (event.target === last[0] && !event.shiftKey) {
 					first.focus(1);
 					return false;
@@ -24161,15 +24652,12 @@ $.widget("ui.dialog", {
 
 		// set focus to the first tabbable element in the content area or the first button
 		// if there are no tabbable elements, set focus on the dialog itself
-		$([])
-			.add(uiDialog.find('.ui-dialog-content :tabbable:first'))
-			.add(uiDialog.find('.ui-dialog-buttonpane :tabbable:first'))
-			.add(uiDialog)
-			.filter(':first')
-			.focus();
+		$(self.element.find(':tabbable').get().concat(
+			uiDialog.find('.ui-dialog-buttonpane :tabbable').get().concat(
+				uiDialog.get()))).eq(0).focus();
 
-		self._trigger('open');
 		self._isOpen = true;
+		self._trigger('open');
 
 		return self;
 	},
@@ -24182,7 +24670,10 @@ $.widget("ui.dialog", {
 					'ui-dialog-buttonpane ' +
 					'ui-widget-content ' +
 					'ui-helper-clearfix'
-				);
+				),
+			uiButtonSet = $( "<div></div>" )
+				.addClass( "ui-dialog-buttonset" )
+				.appendTo( uiDialogButtonPane );
 
 		// if we already have a button pane, remove it
 		self.uiDialog.find('.ui-dialog-buttonpane').remove();
@@ -24193,11 +24684,26 @@ $.widget("ui.dialog", {
 			});
 		}
 		if (hasButtons) {
-			$.each(buttons, function(name, fn) {
+			$.each(buttons, function(name, props) {
+				props = $.isFunction( props ) ?
+					{ click: props, text: name } :
+					props;
 				var button = $('<button type="button"></button>')
-					.text(name)
-					.click(function() { fn.apply(self.element[0], arguments); })
-					.appendTo(uiDialogButtonPane);
+					.click(function() {
+						props.click.apply(self.element[0], arguments);
+					})
+					.appendTo(uiButtonSet);
+				// can't use .attr( props, true ) with jQuery 1.3.2.
+				$.each( props, function( key, value ) {
+					if ( key === "click" ) {
+						return;
+					}
+					if ( key in attrFn ) {
+						button[ key ]( value );
+					} else {
+						button.attr( key, value );
+					}
+				});
 				if ($.fn.button) {
 					button.button();
 				}
@@ -24305,40 +24811,34 @@ $.widget("ui.dialog", {
 			offset = [0, 0],
 			isVisible;
 
-		position = position || $.ui.dialog.prototype.options.position;
+		if (position) {
+			// deep extending converts arrays to objects in jQuery <= 1.3.2 :-(
+	//		if (typeof position == 'string' || $.isArray(position)) {
+	//			myAt = $.isArray(position) ? position : position.split(' ');
 
-		// deep extending converts arrays to objects in jQuery <= 1.3.2 :-(
-//		if (typeof position == 'string' || $.isArray(position)) {
-//			myAt = $.isArray(position) ? position : position.split(' ');
-
-		if (typeof position === 'string' || (typeof position === 'object' && '0' in position)) {
-			myAt = position.split ? position.split(' ') : [position[0], position[1]];
-			if (myAt.length === 1) {
-				myAt[1] = myAt[0];
-			}
-
-			$.each(['left', 'top'], function(i, offsetPosition) {
-				if (+myAt[i] === myAt[i]) {
-					offset[i] = myAt[i];
-					myAt[i] = offsetPosition;
+			if (typeof position === 'string' || (typeof position === 'object' && '0' in position)) {
+				myAt = position.split ? position.split(' ') : [position[0], position[1]];
+				if (myAt.length === 1) {
+					myAt[1] = myAt[0];
 				}
-			});
-		} else if (typeof position === 'object') {
-			if ('left' in position) {
-				myAt[0] = 'left';
-				offset[0] = position.left;
-			} else if ('right' in position) {
-				myAt[0] = 'right';
-				offset[0] = -position.right;
-			}
 
-			if ('top' in position) {
-				myAt[1] = 'top';
-				offset[1] = position.top;
-			} else if ('bottom' in position) {
-				myAt[1] = 'bottom';
-				offset[1] = -position.bottom;
-			}
+				$.each(['left', 'top'], function(i, offsetPosition) {
+					if (+myAt[i] === myAt[i]) {
+						offset[i] = myAt[i];
+						myAt[i] = offsetPosition;
+					}
+				});
+
+				position = {
+					my: myAt.join(" "),
+					at: myAt.join(" "),
+					offset: offset.join(" ")
+				};
+			} 
+
+			position = $.extend({}, $.ui.dialog.prototype.options.position, position);
+		} else {
+			position = $.ui.dialog.prototype.options.position;
 		}
 
 		// need to show the dialog to get the actual offset in the position plugin
@@ -24349,31 +24849,40 @@ $.widget("ui.dialog", {
 		this.uiDialog
 			// workaround for jQuery bug #5781 http://dev.jquery.com/ticket/5781
 			.css({ top: 0, left: 0 })
-			.position({
-				my: myAt.join(' '),
-				at: myAt.join(' '),
-				offset: offset.join(' '),
-				of: window,
-				collision: 'fit',
-				// ensure that the titlebar is never outside the document
-				using: function(pos) {
-					var topOffset = $(this).css(pos).offset().top;
-					if (topOffset < 0) {
-						$(this).css('top', pos.top - topOffset);
-					}
-				}
-			});
+			.position($.extend({ of: window }, position));
 		if (!isVisible) {
 			this.uiDialog.hide();
 		}
 	},
 
+	_setOptions: function( options ) {
+		var self = this,
+			resizableOptions = {},
+			resize = false;
+
+		$.each( options, function( key, value ) {
+			self._setOption( key, value );
+			
+			if ( key in sizeRelatedOptions ) {
+				resize = true;
+			}
+			if ( key in resizableRelatedOptions ) {
+				resizableOptions[ key ] = value;
+			}
+		});
+
+		if ( resize ) {
+			this._size();
+		}
+		if ( this.uiDialog.is( ":data(resizable)" ) ) {
+			this.uiDialog.resizable( "option", resizableOptions );
+		}
+	},
+
 	_setOption: function(key, value){
 		var self = this,
-			uiDialog = self.uiDialog,
-			isResizable = uiDialog.is(':data(resizable)'),
-			resize = false;
-		
+			uiDialog = self.uiDialog;
+
 		switch (key) {
 			//handling of deprecated beforeclose (vs beforeClose) option
 			//Ticket #4669 http://dev.jqueryui.com/ticket/4669
@@ -24385,7 +24894,7 @@ $.widget("ui.dialog", {
 				self._createButtons(value);
 				break;
 			case "closeText":
-				// convert whatever was passed in to a string, for text() to not throw up
+				// ensure that we always pass a string
 				self.uiDialogTitlebarCloseText.text("" + value);
 				break;
 			case "dialogClass":
@@ -24401,44 +24910,21 @@ $.widget("ui.dialog", {
 				}
 				break;
 			case "draggable":
-				if (value) {
+				var isDraggable = uiDialog.is( ":data(draggable)" );
+				if ( isDraggable && !value ) {
+					uiDialog.draggable( "destroy" );
+				}
+				
+				if ( !isDraggable && value ) {
 					self._makeDraggable();
-				} else {
-					uiDialog.draggable('destroy');
 				}
-				break;
-			case "height":
-				resize = true;
-				break;
-			case "maxHeight":
-				if (isResizable) {
-					uiDialog.resizable('option', 'maxHeight', value);
-				}
-				resize = true;
-				break;
-			case "maxWidth":
-				if (isResizable) {
-					uiDialog.resizable('option', 'maxWidth', value);
-				}
-				resize = true;
-				break;
-			case "minHeight":
-				if (isResizable) {
-					uiDialog.resizable('option', 'minHeight', value);
-				}
-				resize = true;
-				break;
-			case "minWidth":
-				if (isResizable) {
-					uiDialog.resizable('option', 'minWidth', value);
-				}
-				resize = true;
 				break;
 			case "position":
 				self._position(value);
 				break;
 			case "resizable":
 				// currently resizable, becoming non-resizable
+				var isResizable = uiDialog.is( ":data(resizable)" );
 				if (isResizable && !value) {
 					uiDialog.resizable('destroy');
 				}
@@ -24457,15 +24943,9 @@ $.widget("ui.dialog", {
 				// convert whatever was passed in o a string, for html() to not throw up
 				$(".ui-dialog-title", self.uiDialogTitlebar).html("" + (value || '&#160;'));
 				break;
-			case "width":
-				resize = true;
-				break;
 		}
 
 		$.Widget.prototype._setOption.apply(self, arguments);
-		if (resize) {
-			self._size();
-		}
 	},
 
 	_size: function() {
@@ -24473,12 +24953,20 @@ $.widget("ui.dialog", {
 		 * divs will both have width and height set, so we need to reset them
 		 */
 		var options = this.options,
-			nonContentHeight;
+			nonContentHeight,
+			minContentHeight,
+			isVisible = this.uiDialog.is( ":visible" );
 
 		// reset content sizing
-		// hide for non content measurement because height: 0 doesn't work in IE quirks mode (see #4350)
-		this.element.css('width', 'auto')
-			.hide();
+		this.element.show().css({
+			width: 'auto',
+			minHeight: 0,
+			height: 0
+		});
+
+		if (options.minWidth > options.width) {
+			options.width = options.minWidth;
+		}
 
 		// reset wrapper sizing
 		// determine the height of all the non-content elements
@@ -24487,16 +24975,26 @@ $.widget("ui.dialog", {
 				width: options.width
 			})
 			.height();
-
-		this.element
-			.css(options.height === 'auto' ? {
-					minHeight: Math.max(options.minHeight - nonContentHeight, 0),
-					height: 'auto'
-				} : {
-					minHeight: 0,
-					height: Math.max(options.height - nonContentHeight, 0)				
-			})
-			.show();
+		minContentHeight = Math.max( 0, options.minHeight - nonContentHeight );
+		
+		if ( options.height === "auto" ) {
+			// only needed for IE6 support
+			if ( $.support.minHeight ) {
+				this.element.css({
+					minHeight: minContentHeight,
+					height: "auto"
+				});
+			} else {
+				this.uiDialog.show();
+				var autoHeight = this.element.css( "height", "auto" ).height();
+				if ( !isVisible ) {
+					this.uiDialog.hide();
+				}
+				this.element.height( Math.max( autoHeight, minContentHeight ) );
+			}
+		} else {
+			this.element.height( Math.max( options.height - nonContentHeight, 0 ) );
+		}
 
 		if (this.uiDialog.is(':data(resizable)')) {
 			this.uiDialog.resizable('option', 'minHeight', this._minHeight());
@@ -24505,7 +25003,7 @@ $.widget("ui.dialog", {
 });
 
 $.extend($.ui.dialog, {
-	version: "1.8",
+	version: "1.8.12",
 
 	uuid: 0,
 	maxZ: 0,
@@ -24541,7 +25039,10 @@ $.extend($.ui.dialog.overlay, {
 				if ($.ui.dialog.overlay.instances.length) {
 					$(document).bind($.ui.dialog.overlay.events, function(event) {
 						// stop events if the z-index of the target is < the z-index of the overlay
-						return ($(event.target).zIndex() >= $.ui.dialog.overlay.maxZ);
+						// we cannot return true when we don't want to cancel the event (#3523)
+						if ($(event.target).zIndex() < $.ui.dialog.overlay.maxZ) {
+							return false;
+						}
 					});
 				}
 			}, 1);
@@ -24576,7 +25077,10 @@ $.extend($.ui.dialog.overlay, {
 	},
 
 	destroy: function($el) {
-		this.oldInstances.push(this.instances.splice($.inArray($el, this.instances), 1)[0]);
+		var indexOf = $.inArray($el, this.instances);
+		if (indexOf != -1){
+			this.oldInstances.push(this.instances.splice(indexOf, 1)[0]);
+		}
 
 		if (this.instances.length === 0) {
 			$([document, window]).unbind('.dialog-overlay');
@@ -24674,11 +25178,11 @@ $.extend($.ui.dialog.overlay.prototype, {
 
 }(jQuery));
 /*
- * jQuery UI Slider 1.8
+ * jQuery UI Slider 1.8.12
  *
- * Copyright (c) 2010 AUTHORS.txt (http://jqueryui.com/about)
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * and GPL (GPL-LICENSE.txt) licenses.
+ * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Slider
  *
@@ -24687,29 +25191,32 @@ $.extend($.ui.dialog.overlay.prototype, {
  *	jquery.ui.mouse.js
  *	jquery.ui.widget.js
  */
-
-(function($) {
+(function( $, undefined ) {
 
 // number of pages in a slider
 // (how many times can you page up/down to go through the whole range)
 var numPages = 5;
 
-$.widget("ui.slider", $.ui.mouse, {
+$.widget( "ui.slider", $.ui.mouse, {
+
 	widgetEventPrefix: "slide",
+
 	options: {
 		animate: false,
 		distance: 0,
 		max: 100,
 		min: 0,
-		orientation: 'horizontal',
+		orientation: "horizontal",
 		range: false,
 		step: 1,
 		value: 0,
 		values: null
 	},
-	_create: function() {
 
-		var self = this, o = this.options;
+	_create: function() {
+		var self = this,
+			o = this.options;
+
 		this._keySliding = false;
 		this._mouseSliding = false;
 		this._animateOff = true;
@@ -24718,197 +25225,218 @@ $.widget("ui.slider", $.ui.mouse, {
 		this._mouseInit();
 
 		this.element
-			.addClass("ui-slider"
-				+ " ui-slider-" + this.orientation
-				+ " ui-widget"
-				+ " ui-widget-content"
-				+ " ui-corner-all");
+			.addClass( "ui-slider" +
+				" ui-slider-" + this.orientation +
+				" ui-widget" +
+				" ui-widget-content" +
+				" ui-corner-all" );
 		
-		if (o.disabled) {
-			this.element.addClass('ui-slider-disabled ui-disabled');
+		if ( o.disabled ) {
+			this.element.addClass( "ui-slider-disabled ui-disabled" );
 		}
 
 		this.range = $([]);
 
-		if (o.range) {
-
-			if (o.range === true) {
-				this.range = $('<div></div>');
-				if (!o.values) o.values = [this._valueMin(), this._valueMin()];
-				if (o.values.length && o.values.length != 2) {
-					o.values = [o.values[0], o.values[0]];
+		if ( o.range ) {
+			if ( o.range === true ) {
+				this.range = $( "<div></div>" );
+				if ( !o.values ) {
+					o.values = [ this._valueMin(), this._valueMin() ];
+				}
+				if ( o.values.length && o.values.length !== 2 ) {
+					o.values = [ o.values[0], o.values[0] ];
 				}
 			} else {
-				this.range = $('<div></div>');
+				this.range = $( "<div></div>" );
 			}
 
 			this.range
-				.appendTo(this.element)
-				.addClass("ui-slider-range");
+				.appendTo( this.element )
+				.addClass( "ui-slider-range" );
 
-			if (o.range == "min" || o.range == "max") {
-				this.range.addClass("ui-slider-range-" + o.range);
+			if ( o.range === "min" || o.range === "max" ) {
+				this.range.addClass( "ui-slider-range-" + o.range );
 			}
 
 			// note: this isn't the most fittingly semantic framework class for this element,
 			// but worked best visually with a variety of themes
-			this.range.addClass("ui-widget-header");
-
+			this.range.addClass( "ui-widget-header" );
 		}
 
-		if ($(".ui-slider-handle", this.element).length == 0)
-			$('<a href="#"></a>')
-				.appendTo(this.element)
-				.addClass("ui-slider-handle");
-
-		if (o.values && o.values.length) {
-			while ($(".ui-slider-handle", this.element).length < o.values.length)
-				$('<a href="#"></a>')
-					.appendTo(this.element)
-					.addClass("ui-slider-handle");
+		if ( $( ".ui-slider-handle", this.element ).length === 0 ) {
+			$( "<a href='#'></a>" )
+				.appendTo( this.element )
+				.addClass( "ui-slider-handle" );
 		}
 
-		this.handles = $(".ui-slider-handle", this.element)
-			.addClass("ui-state-default"
-				+ " ui-corner-all");
+		if ( o.values && o.values.length ) {
+			while ( $(".ui-slider-handle", this.element).length < o.values.length ) {
+				$( "<a href='#'></a>" )
+					.appendTo( this.element )
+					.addClass( "ui-slider-handle" );
+			}
+		}
 
-		this.handle = this.handles.eq(0);
+		this.handles = $( ".ui-slider-handle", this.element )
+			.addClass( "ui-state-default" +
+				" ui-corner-all" );
 
-		this.handles.add(this.range).filter("a")
-			.click(function(event) {
+		this.handle = this.handles.eq( 0 );
+
+		this.handles.add( this.range ).filter( "a" )
+			.click(function( event ) {
 				event.preventDefault();
 			})
 			.hover(function() {
-				if (!o.disabled) {
-					$(this).addClass('ui-state-hover');
+				if ( !o.disabled ) {
+					$( this ).addClass( "ui-state-hover" );
 				}
 			}, function() {
-				$(this).removeClass('ui-state-hover');
+				$( this ).removeClass( "ui-state-hover" );
 			})
 			.focus(function() {
-				if (!o.disabled) {
-					$(".ui-slider .ui-state-focus").removeClass('ui-state-focus'); $(this).addClass('ui-state-focus');
+				if ( !o.disabled ) {
+					$( ".ui-slider .ui-state-focus" ).removeClass( "ui-state-focus" );
+					$( this ).addClass( "ui-state-focus" );
 				} else {
-					$(this).blur();
+					$( this ).blur();
 				}
 			})
 			.blur(function() {
-				$(this).removeClass('ui-state-focus');
+				$( this ).removeClass( "ui-state-focus" );
 			});
 
-		this.handles.each(function(i) {
-			$(this).data("index.ui-slider-handle", i);
+		this.handles.each(function( i ) {
+			$( this ).data( "index.ui-slider-handle", i );
 		});
 
-		this.handles.keydown(function(event) {
-
-			var ret = true;
-
-			var index = $(this).data("index.ui-slider-handle");
-
-			if (self.options.disabled)
-				return;
-
-			switch (event.keyCode) {
-				case $.ui.keyCode.HOME:
-				case $.ui.keyCode.END:
-				case $.ui.keyCode.PAGE_UP:
-				case $.ui.keyCode.PAGE_DOWN:
-				case $.ui.keyCode.UP:
-				case $.ui.keyCode.RIGHT:
-				case $.ui.keyCode.DOWN:
-				case $.ui.keyCode.LEFT:
-					ret = false;
-					if (!self._keySliding) {
-						self._keySliding = true;
-						$(this).addClass("ui-state-active");
-						self._start(event, index);
-					}
-					break;
-			}
-
-			var curVal, newVal, step = self._step();
-			if (self.options.values && self.options.values.length) {
-				curVal = newVal = self.values(index);
-			} else {
-				curVal = newVal = self.value();
-			}
-
-			switch (event.keyCode) {
-				case $.ui.keyCode.HOME:
-					newVal = self._valueMin();
-					break;
-				case $.ui.keyCode.END:
-					newVal = self._valueMax();
-					break;
-				case $.ui.keyCode.PAGE_UP:
-					newVal = curVal + ((self._valueMax() - self._valueMin()) / numPages);
-					break;
-				case $.ui.keyCode.PAGE_DOWN:
-					newVal = curVal - ((self._valueMax() - self._valueMin()) / numPages);
-					break;
-				case $.ui.keyCode.UP:
-				case $.ui.keyCode.RIGHT:
-					if(curVal == self._valueMax()) return;
-					newVal = curVal + step;
-					break;
-				case $.ui.keyCode.DOWN:
-				case $.ui.keyCode.LEFT:
-					if(curVal == self._valueMin()) return;
-					newVal = curVal - step;
-					break;
-			}
-
-			self._slide(event, index, newVal);
-
-			return ret;
-
-		}).keyup(function(event) {
-
-			var index = $(this).data("index.ui-slider-handle");
-
-			if (self._keySliding) {
-				self._keySliding = false;
-				self._stop(event, index);
-				self._change(event, index);
-				$(this).removeClass("ui-state-active");
-			}
-
-		});
+		this.handles
+			.keydown(function( event ) {
+				var ret = true,
+					index = $( this ).data( "index.ui-slider-handle" ),
+					allowed,
+					curVal,
+					newVal,
+					step;
+	
+				if ( self.options.disabled ) {
+					return;
+				}
+	
+				switch ( event.keyCode ) {
+					case $.ui.keyCode.HOME:
+					case $.ui.keyCode.END:
+					case $.ui.keyCode.PAGE_UP:
+					case $.ui.keyCode.PAGE_DOWN:
+					case $.ui.keyCode.UP:
+					case $.ui.keyCode.RIGHT:
+					case $.ui.keyCode.DOWN:
+					case $.ui.keyCode.LEFT:
+						ret = false;
+						if ( !self._keySliding ) {
+							self._keySliding = true;
+							$( this ).addClass( "ui-state-active" );
+							allowed = self._start( event, index );
+							if ( allowed === false ) {
+								return;
+							}
+						}
+						break;
+				}
+	
+				step = self.options.step;
+				if ( self.options.values && self.options.values.length ) {
+					curVal = newVal = self.values( index );
+				} else {
+					curVal = newVal = self.value();
+				}
+	
+				switch ( event.keyCode ) {
+					case $.ui.keyCode.HOME:
+						newVal = self._valueMin();
+						break;
+					case $.ui.keyCode.END:
+						newVal = self._valueMax();
+						break;
+					case $.ui.keyCode.PAGE_UP:
+						newVal = self._trimAlignValue( curVal + ( (self._valueMax() - self._valueMin()) / numPages ) );
+						break;
+					case $.ui.keyCode.PAGE_DOWN:
+						newVal = self._trimAlignValue( curVal - ( (self._valueMax() - self._valueMin()) / numPages ) );
+						break;
+					case $.ui.keyCode.UP:
+					case $.ui.keyCode.RIGHT:
+						if ( curVal === self._valueMax() ) {
+							return;
+						}
+						newVal = self._trimAlignValue( curVal + step );
+						break;
+					case $.ui.keyCode.DOWN:
+					case $.ui.keyCode.LEFT:
+						if ( curVal === self._valueMin() ) {
+							return;
+						}
+						newVal = self._trimAlignValue( curVal - step );
+						break;
+				}
+	
+				self._slide( event, index, newVal );
+	
+				return ret;
+	
+			})
+			.keyup(function( event ) {
+				var index = $( this ).data( "index.ui-slider-handle" );
+	
+				if ( self._keySliding ) {
+					self._keySliding = false;
+					self._stop( event, index );
+					self._change( event, index );
+					$( this ).removeClass( "ui-state-active" );
+				}
+	
+			});
 
 		this._refreshValue();
 
 		this._animateOff = false;
-
 	},
 
 	destroy: function() {
-
 		this.handles.remove();
 		this.range.remove();
 
 		this.element
-			.removeClass("ui-slider"
-				+ " ui-slider-horizontal"
-				+ " ui-slider-vertical"
-				+ " ui-slider-disabled"
-				+ " ui-widget"
-				+ " ui-widget-content"
-				+ " ui-corner-all")
-			.removeData("slider")
-			.unbind(".slider");
+			.removeClass( "ui-slider" +
+				" ui-slider-horizontal" +
+				" ui-slider-vertical" +
+				" ui-slider-disabled" +
+				" ui-widget" +
+				" ui-widget-content" +
+				" ui-corner-all" )
+			.removeData( "slider" )
+			.unbind( ".slider" );
 
 		this._mouseDestroy();
 
 		return this;
 	},
 
-	_mouseCapture: function(event) {
+	_mouseCapture: function( event ) {
+		var o = this.options,
+			position,
+			normValue,
+			distance,
+			closestHandle,
+			self,
+			index,
+			allowed,
+			offset,
+			mouseOverHandle;
 
-		var o = this.options;
-
-		if (o.disabled)
+		if ( o.disabled ) {
 			return false;
+		}
 
 		this.elementSize = {
 			width: this.element.outerWidth(),
@@ -24916,16 +25444,15 @@ $.widget("ui.slider", $.ui.mouse, {
 		};
 		this.elementOffset = this.element.offset();
 
-		var position = { x: event.pageX, y: event.pageY };
-		var normValue = this._normValueFromMouse(position);
-
-		var distance = this._valueMax() - this._valueMin() + 1, closestHandle;
-		var self = this, index;
-		this.handles.each(function(i) {
-			var thisDistance = Math.abs(normValue - self.values(i));
-			if (distance > thisDistance) {
+		position = { x: event.pageX, y: event.pageY };
+		normValue = this._normValueFromMouse( position );
+		distance = this._valueMax() - this._valueMin() + 1;
+		self = this;
+		this.handles.each(function( i ) {
+			var thisDistance = Math.abs( normValue - self.values(i) );
+			if ( distance > thisDistance ) {
 				distance = thisDistance;
-				closestHandle = $(this);
+				closestHandle = $( this );
 				index = i;
 			}
 		});
@@ -24933,216 +25460,221 @@ $.widget("ui.slider", $.ui.mouse, {
 		// workaround for bug #3736 (if both handles of a range are at 0,
 		// the first is always used as the one with least distance,
 		// and moving it is obviously prevented by preventing negative ranges)
-		if(o.range == true && this.values(1) == o.min) {
-			closestHandle = $(this.handles[++index]);
+		if( o.range === true && this.values(1) === o.min ) {
+			index += 1;
+			closestHandle = $( this.handles[index] );
 		}
 
-		this._start(event, index);
+		allowed = this._start( event, index );
+		if ( allowed === false ) {
+			return false;
+		}
 		this._mouseSliding = true;
 
 		self._handleIndex = index;
 
 		closestHandle
-			.addClass("ui-state-active")
+			.addClass( "ui-state-active" )
 			.focus();
 		
-		var offset = closestHandle.offset();
-		var mouseOverHandle = !$(event.target).parents().andSelf().is('.ui-slider-handle');
+		offset = closestHandle.offset();
+		mouseOverHandle = !$( event.target ).parents().andSelf().is( ".ui-slider-handle" );
 		this._clickOffset = mouseOverHandle ? { left: 0, top: 0 } : {
-			left: event.pageX - offset.left - (closestHandle.width() / 2),
-			top: event.pageY - offset.top
-				- (closestHandle.height() / 2)
-				- (parseInt(closestHandle.css('borderTopWidth'),10) || 0)
-				- (parseInt(closestHandle.css('borderBottomWidth'),10) || 0)
-				+ (parseInt(closestHandle.css('marginTop'),10) || 0)
+			left: event.pageX - offset.left - ( closestHandle.width() / 2 ),
+			top: event.pageY - offset.top -
+				( closestHandle.height() / 2 ) -
+				( parseInt( closestHandle.css("borderTopWidth"), 10 ) || 0 ) -
+				( parseInt( closestHandle.css("borderBottomWidth"), 10 ) || 0) +
+				( parseInt( closestHandle.css("marginTop"), 10 ) || 0)
 		};
 
-		normValue = this._normValueFromMouse(position);
-		this._slide(event, index, normValue);
+		if ( !this.handles.hasClass( "ui-state-hover" ) ) {
+			this._slide( event, index, normValue );
+		}
 		this._animateOff = true;
 		return true;
-
 	},
 
-	_mouseStart: function(event) {
+	_mouseStart: function( event ) {
 		return true;
 	},
 
-	_mouseDrag: function(event) {
-
-		var position = { x: event.pageX, y: event.pageY };
-		var normValue = this._normValueFromMouse(position);
+	_mouseDrag: function( event ) {
+		var position = { x: event.pageX, y: event.pageY },
+			normValue = this._normValueFromMouse( position );
 		
-		this._slide(event, this._handleIndex, normValue);
+		this._slide( event, this._handleIndex, normValue );
 
 		return false;
-
 	},
 
-	_mouseStop: function(event) {
-
-		this.handles.removeClass("ui-state-active");
+	_mouseStop: function( event ) {
+		this.handles.removeClass( "ui-state-active" );
 		this._mouseSliding = false;
-		this._stop(event, this._handleIndex);
-		this._change(event, this._handleIndex);
+
+		this._stop( event, this._handleIndex );
+		this._change( event, this._handleIndex );
+
 		this._handleIndex = null;
 		this._clickOffset = null;
-
 		this._animateOff = false;
-		return false;
 
+		return false;
 	},
 	
 	_detectOrientation: function() {
-		this.orientation = this.options.orientation == 'vertical' ? 'vertical' : 'horizontal';
+		this.orientation = ( this.options.orientation === "vertical" ) ? "vertical" : "horizontal";
 	},
 
-	_normValueFromMouse: function(position) {
+	_normValueFromMouse: function( position ) {
+		var pixelTotal,
+			pixelMouse,
+			percentMouse,
+			valueTotal,
+			valueMouse;
 
-		var pixelTotal, pixelMouse;
-		if ('horizontal' == this.orientation) {
+		if ( this.orientation === "horizontal" ) {
 			pixelTotal = this.elementSize.width;
-			pixelMouse = position.x - this.elementOffset.left - (this._clickOffset ? this._clickOffset.left : 0);
+			pixelMouse = position.x - this.elementOffset.left - ( this._clickOffset ? this._clickOffset.left : 0 );
 		} else {
 			pixelTotal = this.elementSize.height;
-			pixelMouse = position.y - this.elementOffset.top - (this._clickOffset ? this._clickOffset.top : 0);
+			pixelMouse = position.y - this.elementOffset.top - ( this._clickOffset ? this._clickOffset.top : 0 );
 		}
 
-		var percentMouse = (pixelMouse / pixelTotal);
-		if (percentMouse > 1) percentMouse = 1;
-		if (percentMouse < 0) percentMouse = 0;
-		if ('vertical' == this.orientation)
+		percentMouse = ( pixelMouse / pixelTotal );
+		if ( percentMouse > 1 ) {
+			percentMouse = 1;
+		}
+		if ( percentMouse < 0 ) {
+			percentMouse = 0;
+		}
+		if ( this.orientation === "vertical" ) {
 			percentMouse = 1 - percentMouse;
+		}
 
-		var valueTotal = this._valueMax() - this._valueMin(),
-			valueMouse = percentMouse * valueTotal,
-			valueMouseModStep = valueMouse % this.options.step,
-			normValue = this._valueMin() + valueMouse - valueMouseModStep;
+		valueTotal = this._valueMax() - this._valueMin();
+		valueMouse = this._valueMin() + percentMouse * valueTotal;
 
-		if (valueMouseModStep > (this.options.step / 2))
-			normValue += this.options.step;
-
-		// Since JavaScript has problems with large floats, round
-		// the final value to 5 digits after the decimal point (see #4124)
-		return parseFloat(normValue.toFixed(5));
-
+		return this._trimAlignValue( valueMouse );
 	},
 
-	_start: function(event, index) {
+	_start: function( event, index ) {
 		var uiHash = {
-			handle: this.handles[index],
+			handle: this.handles[ index ],
 			value: this.value()
 		};
-		if (this.options.values && this.options.values.length) {
-			uiHash.value = this.values(index);
+		if ( this.options.values && this.options.values.length ) {
+			uiHash.value = this.values( index );
 			uiHash.values = this.values();
 		}
-		this._trigger("start", event, uiHash);
+		return this._trigger( "start", event, uiHash );
 	},
 
-	_slide: function(event, index, newVal) {
+	_slide: function( event, index, newVal ) {
+		var otherVal,
+			newValues,
+			allowed;
 
-		var handle = this.handles[index];
+		if ( this.options.values && this.options.values.length ) {
+			otherVal = this.values( index ? 0 : 1 );
 
-		if (this.options.values && this.options.values.length) {
-
-			var otherVal = this.values(index ? 0 : 1);
-
-			if ((this.options.values.length == 2 && this.options.range === true) && 
-				((index == 0 && newVal > otherVal) || (index == 1 && newVal < otherVal))){
- 				newVal = otherVal;
+			if ( ( this.options.values.length === 2 && this.options.range === true ) && 
+					( ( index === 0 && newVal > otherVal) || ( index === 1 && newVal < otherVal ) )
+				) {
+				newVal = otherVal;
 			}
 
-			if (newVal != this.values(index)) {
-				var newValues = this.values();
-				newValues[index] = newVal;
+			if ( newVal !== this.values( index ) ) {
+				newValues = this.values();
+				newValues[ index ] = newVal;
 				// A slide can be canceled by returning false from the slide callback
-				var allowed = this._trigger("slide", event, {
-					handle: this.handles[index],
+				allowed = this._trigger( "slide", event, {
+					handle: this.handles[ index ],
 					value: newVal,
 					values: newValues
-				});
-				var otherVal = this.values(index ? 0 : 1);
-				if (allowed !== false) {
-					this.values(index, newVal, true);
+				} );
+				otherVal = this.values( index ? 0 : 1 );
+				if ( allowed !== false ) {
+					this.values( index, newVal, true );
 				}
 			}
-
 		} else {
-
-			if (newVal != this.value()) {
+			if ( newVal !== this.value() ) {
 				// A slide can be canceled by returning false from the slide callback
-				var allowed = this._trigger("slide", event, {
-					handle: this.handles[index],
+				allowed = this._trigger( "slide", event, {
+					handle: this.handles[ index ],
 					value: newVal
-				});
-				if (allowed !== false) {
-					this.value(newVal);
+				} );
+				if ( allowed !== false ) {
+					this.value( newVal );
 				}
-					
 			}
-
 		}
-
 	},
 
-	_stop: function(event, index) {
+	_stop: function( event, index ) {
 		var uiHash = {
-			handle: this.handles[index],
+			handle: this.handles[ index ],
 			value: this.value()
 		};
-		if (this.options.values && this.options.values.length) {
-			uiHash.value = this.values(index);
+		if ( this.options.values && this.options.values.length ) {
+			uiHash.value = this.values( index );
 			uiHash.values = this.values();
 		}
-		this._trigger("stop", event, uiHash);
+
+		this._trigger( "stop", event, uiHash );
 	},
 
-	_change: function(event, index) {
-		if (!this._keySliding && !this._mouseSliding) {
+	_change: function( event, index ) {
+		if ( !this._keySliding && !this._mouseSliding ) {
 			var uiHash = {
-				handle: this.handles[index],
+				handle: this.handles[ index ],
 				value: this.value()
 			};
-			if (this.options.values && this.options.values.length) {
-				uiHash.value = this.values(index);
+			if ( this.options.values && this.options.values.length ) {
+				uiHash.value = this.values( index );
 				uiHash.values = this.values();
 			}
-			this._trigger("change", event, uiHash);
+
+			this._trigger( "change", event, uiHash );
 		}
 	},
 
-	value: function(newValue) {
-
-		if (arguments.length) {
-			this.options.value = this._trimValue(newValue);
+	value: function( newValue ) {
+		if ( arguments.length ) {
+			this.options.value = this._trimAlignValue( newValue );
 			this._refreshValue();
-			this._change(null, 0);
+			this._change( null, 0 );
+			return;
 		}
 
 		return this._value();
-
 	},
 
-	values: function(index, newValue) {
+	values: function( index, newValue ) {
+		var vals,
+			newValues,
+			i;
 
-		if (arguments.length > 1) {
-			this.options.values[index] = this._trimValue(newValue);
+		if ( arguments.length > 1 ) {
+			this.options.values[ index ] = this._trimAlignValue( newValue );
 			this._refreshValue();
-			this._change(null, index);
+			this._change( null, index );
+			return;
 		}
 
-		if (arguments.length) {
-			if ($.isArray(arguments[0])) {
-				var vals = this.options.values, newValues = arguments[0];
-				for (var i = 0, l = vals.length; i < l; i++) {
-					vals[i] = this._trimValue(newValues[i]);
-					this._change(null, i);
+		if ( arguments.length ) {
+			if ( $.isArray( arguments[ 0 ] ) ) {
+				vals = this.options.values;
+				newValues = arguments[ 0 ];
+				for ( i = 0; i < vals.length; i += 1 ) {
+					vals[ i ] = this._trimAlignValue( newValues[ i ] );
+					this._change( null, i );
 				}
 				this._refreshValue();
 			} else {
-				if (this.options.values && this.options.values.length) {
-					return this._values(index);
+				if ( this.options.values && this.options.values.length ) {
+					return this._values( index );
 				} else {
 					return this.value();
 				}
@@ -25150,155 +25682,182 @@ $.widget("ui.slider", $.ui.mouse, {
 		} else {
 			return this._values();
 		}
-
 	},
 
-	_setOption: function(key, value) {
-		
+	_setOption: function( key, value ) {
 		var i,
 			valsLength = 0;
-		if ( jQuery.isArray(this.options.values) ) {
+
+		if ( $.isArray( this.options.values ) ) {
 			valsLength = this.options.values.length;
-		};
+		}
 
-		$.Widget.prototype._setOption.apply(this, arguments);
+		$.Widget.prototype._setOption.apply( this, arguments );
 
-		switch (key) {
-			case 'disabled':
-				if (value) {
-					this.handles.filter(".ui-state-focus").blur();
-					this.handles.removeClass("ui-state-hover");
-					this.handles.attr("disabled", "disabled");
-					this.element.addClass("ui-disabled");
+		switch ( key ) {
+			case "disabled":
+				if ( value ) {
+					this.handles.filter( ".ui-state-focus" ).blur();
+					this.handles.removeClass( "ui-state-hover" );
+					this.handles.attr( "disabled", "disabled" );
+					this.element.addClass( "ui-disabled" );
 				} else {
-					this.handles.removeAttr("disabled");
-					this.element.removeClass("ui-disabled");
+					this.handles.removeAttr( "disabled" );
+					this.element.removeClass( "ui-disabled" );
 				}
-			case 'orientation':
-
+				break;
+			case "orientation":
 				this._detectOrientation();
-				
 				this.element
-					.removeClass("ui-slider-horizontal ui-slider-vertical")
-					.addClass("ui-slider-" + this.orientation);
+					.removeClass( "ui-slider-horizontal ui-slider-vertical" )
+					.addClass( "ui-slider-" + this.orientation );
 				this._refreshValue();
 				break;
-			case 'value':
+			case "value":
 				this._animateOff = true;
 				this._refreshValue();
-				this._change(null, 0);
+				this._change( null, 0 );
 				this._animateOff = false;
 				break;
-			case 'values':
+			case "values":
 				this._animateOff = true;
 				this._refreshValue();
-				for (i = 0; i < valsLength; i++) {
-					this._change(null, i);
+				for ( i = 0; i < valsLength; i += 1 ) {
+					this._change( null, i );
 				}
 				this._animateOff = false;
 				break;
 		}
-
 	},
 
-	_step: function() {
-		var step = this.options.step;
-		return step;
-	},
-
+	//internal value getter
+	// _value() returns value trimmed by min and max, aligned by step
 	_value: function() {
-		//internal value getter
-		// _value() returns value trimmed by min and max
 		var val = this.options.value;
-		val = this._trimValue(val);
+		val = this._trimAlignValue( val );
 
 		return val;
 	},
 
-	_values: function(index) {
-		//internal values getter
-		// _values() returns array of values trimmed by min and max
-		// _values(index) returns single value trimmed by min and max
+	//internal values getter
+	// _values() returns array of values trimmed by min and max, aligned by step
+	// _values( index ) returns single value trimmed by min and max, aligned by step
+	_values: function( index ) {
+		var val,
+			vals,
+			i;
 
-		if (arguments.length) {
-			var val = this.options.values[index];
-			val = this._trimValue(val);
+		if ( arguments.length ) {
+			val = this.options.values[ index ];
+			val = this._trimAlignValue( val );
 
 			return val;
 		} else {
 			// .slice() creates a copy of the array
 			// this copy gets trimmed by min and max and then returned
-			var vals = this.options.values.slice();
-			for (var i = 0, l = vals.length; i < l; i++) {
-				vals[i] = this._trimValue(vals[i]);
+			vals = this.options.values.slice();
+			for ( i = 0; i < vals.length; i+= 1) {
+				vals[ i ] = this._trimAlignValue( vals[ i ] );
 			}
 
 			return vals;
 		}
-
 	},
 	
-	_trimValue: function(val) {
-		if (val < this._valueMin()) val = this._valueMin();
-		if (val > this._valueMax()) val = this._valueMax();
+	// returns the step-aligned value that val is closest to, between (inclusive) min and max
+	_trimAlignValue: function( val ) {
+		if ( val <= this._valueMin() ) {
+			return this._valueMin();
+		}
+		if ( val >= this._valueMax() ) {
+			return this._valueMax();
+		}
+		var step = ( this.options.step > 0 ) ? this.options.step : 1,
+			valModStep = (val - this._valueMin()) % step;
+			alignValue = val - valModStep;
 
-		return val;
+		if ( Math.abs(valModStep) * 2 >= step ) {
+			alignValue += ( valModStep > 0 ) ? step : ( -step );
+		}
+
+		// Since JavaScript has problems with large floats, round
+		// the final value to 5 digits after the decimal point (see #4124)
+		return parseFloat( alignValue.toFixed(5) );
 	},
 
 	_valueMin: function() {
-		var valueMin = this.options.min;
-		return valueMin;
+		return this.options.min;
 	},
 
 	_valueMax: function() {
-		var valueMax = this.options.max;
-		return valueMax;
+		return this.options.max;
 	},
 	
 	_refreshValue: function() {
+		var oRange = this.options.range,
+			o = this.options,
+			self = this,
+			animate = ( !this._animateOff ) ? o.animate : false,
+			valPercent,
+			_set = {},
+			lastValPercent,
+			value,
+			valueMin,
+			valueMax;
 
-		var oRange = this.options.range, o = this.options, self = this;
-		var animate = (!this._animateOff) ? o.animate : false;
-
-		if (this.options.values && this.options.values.length) {
-			var vp0, vp1;
-			this.handles.each(function(i, j) {
-				var valPercent = (self.values(i) - self._valueMin()) / (self._valueMax() - self._valueMin()) * 100;
-				var _set = {}; _set[self.orientation == 'horizontal' ? 'left' : 'bottom'] = valPercent + '%';
-				$(this).stop(1,1)[animate ? 'animate' : 'css'](_set, o.animate);
-				if (self.options.range === true) {
-					if (self.orientation == 'horizontal') {
-						(i == 0) && self.range.stop(1,1)[animate ? 'animate' : 'css']({ left: valPercent + '%' }, o.animate);
-						(i == 1) && self.range[animate ? 'animate' : 'css']({ width: (valPercent - lastValPercent) + '%' }, { queue: false, duration: o.animate });
+		if ( this.options.values && this.options.values.length ) {
+			this.handles.each(function( i, j ) {
+				valPercent = ( self.values(i) - self._valueMin() ) / ( self._valueMax() - self._valueMin() ) * 100;
+				_set[ self.orientation === "horizontal" ? "left" : "bottom" ] = valPercent + "%";
+				$( this ).stop( 1, 1 )[ animate ? "animate" : "css" ]( _set, o.animate );
+				if ( self.options.range === true ) {
+					if ( self.orientation === "horizontal" ) {
+						if ( i === 0 ) {
+							self.range.stop( 1, 1 )[ animate ? "animate" : "css" ]( { left: valPercent + "%" }, o.animate );
+						}
+						if ( i === 1 ) {
+							self.range[ animate ? "animate" : "css" ]( { width: ( valPercent - lastValPercent ) + "%" }, { queue: false, duration: o.animate } );
+						}
 					} else {
-						(i == 0) && self.range.stop(1,1)[animate ? 'animate' : 'css']({ bottom: (valPercent) + '%' }, o.animate);
-						(i == 1) && self.range[animate ? 'animate' : 'css']({ height: (valPercent - lastValPercent) + '%' }, { queue: false, duration: o.animate });
+						if ( i === 0 ) {
+							self.range.stop( 1, 1 )[ animate ? "animate" : "css" ]( { bottom: ( valPercent ) + "%" }, o.animate );
+						}
+						if ( i === 1 ) {
+							self.range[ animate ? "animate" : "css" ]( { height: ( valPercent - lastValPercent ) + "%" }, { queue: false, duration: o.animate } );
+						}
 					}
 				}
 				lastValPercent = valPercent;
 			});
 		} else {
-			var value = this.value(),
-				valueMin = this._valueMin(),
-				valueMax = this._valueMax(),
-				valPercent = valueMax != valueMin
-					? (value - valueMin) / (valueMax - valueMin) * 100
-					: 0;
-			var _set = {}; _set[self.orientation == 'horizontal' ? 'left' : 'bottom'] = valPercent + '%';
-			this.handle.stop(1,1)[animate ? 'animate' : 'css'](_set, o.animate);
+			value = this.value();
+			valueMin = this._valueMin();
+			valueMax = this._valueMax();
+			valPercent = ( valueMax !== valueMin ) ?
+					( value - valueMin ) / ( valueMax - valueMin ) * 100 :
+					0;
+			_set[ self.orientation === "horizontal" ? "left" : "bottom" ] = valPercent + "%";
+			this.handle.stop( 1, 1 )[ animate ? "animate" : "css" ]( _set, o.animate );
 
-			(oRange == "min") && (this.orientation == "horizontal") && this.range.stop(1,1)[animate ? 'animate' : 'css']({ width: valPercent + '%' }, o.animate);
-			(oRange == "max") && (this.orientation == "horizontal") && this.range[animate ? 'animate' : 'css']({ width: (100 - valPercent) + '%' }, { queue: false, duration: o.animate });
-			(oRange == "min") && (this.orientation == "vertical") && this.range.stop(1,1)[animate ? 'animate' : 'css']({ height: valPercent + '%' }, o.animate);
-			(oRange == "max") && (this.orientation == "vertical") && this.range[animate ? 'animate' : 'css']({ height: (100 - valPercent) + '%' }, { queue: false, duration: o.animate });
+			if ( oRange === "min" && this.orientation === "horizontal" ) {
+				this.range.stop( 1, 1 )[ animate ? "animate" : "css" ]( { width: valPercent + "%" }, o.animate );
+			}
+			if ( oRange === "max" && this.orientation === "horizontal" ) {
+				this.range[ animate ? "animate" : "css" ]( { width: ( 100 - valPercent ) + "%" }, { queue: false, duration: o.animate } );
+			}
+			if ( oRange === "min" && this.orientation === "vertical" ) {
+				this.range.stop( 1, 1 )[ animate ? "animate" : "css" ]( { height: valPercent + "%" }, o.animate );
+			}
+			if ( oRange === "max" && this.orientation === "vertical" ) {
+				this.range[ animate ? "animate" : "css" ]( { height: ( 100 - valPercent ) + "%" }, { queue: false, duration: o.animate } );
+			}
 		}
-
 	}
-	
+
 });
 
-$.extend($.ui.slider, {
-	version: "1.8"
+$.extend( $.ui.slider, {
+	version: "1.8.12"
 });
 
-})(jQuery);
+}(jQuery));
