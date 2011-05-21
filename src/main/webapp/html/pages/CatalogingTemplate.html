@@ -20,180 +20,202 @@
                                     <div class="fl-container-flex fl-fix information-group">
                                         <div class="info-column">
                                             <div class="csc-recordEditor-header fl-container-flex header toggle">Object Identification Information</div>
-                                            <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-                                                <div class="info-column">
-                                                    <div class="info-column2-50 fl-force-left">
-                                                        <div class="info-pair">
-                                                            <div class="label">Identification Number <span class="required">*</span></div>
-                                                            <div class="content csc-object-identification-object-number-container">
-                                                                <input type="text" class="csc-object-identification-object-number pattern-chooser-input" />
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="info-pair">
-                                                            <div class="header">
-                                                                <div class="label">Number of Objects</div>
-                                                            </div>
-                                                            <div class="content">
-                                                                <input type="text" class="input-numeric-medium csc-object-identification-number-objects"/>
-                                                            </div>
-                                                        </div>
-                                                    
-                                                        <div class="info-pair">
-                                                            <div class="header">
-                                                                <div class="label">Other Number</div>
-                                                            </div>
-                                                            <div class="content">
-                                                                <table>
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <!--<td class="table-select"></td>-->
-                                                                            <td>Number</td>
-                                                                            <td>Number Type</td>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <tr class="csc-object-identification-otherNumbers">
-                                                                            <td><input type="text" class="csc-object-identification-other-number"/></td>
-                                                                            <td><select class="csc-object-identification-other-number-type input-select"><option value="">Options not loaded</option></select></td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="info-pair-select">
-                                                            <div class="header">
-                                                                <div class="label">Responsible Department</div>
-                                                            </div>
-                                                            <div class="content">
-                                                                <select class="csc-object-identification-responsible-department input-select"><option value="">Options not loaded</option></select>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="info-pair-select">
-                                                            <div class="header">
-                                                                <div class="label">Collection</div>
-                                                            </div>
-                                                            <div class="content">
-                                                                <select class="csc-object-identification-collection input-select"><option value="">Options not loaded</option></select>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="info-pair-select">
-                                                            <div class="header">
-                                                                <div class="label">Record Status</div>
-                                                            </div>
-                                                            <div class="content">
-                                                                <select class="csc-object-identification-record-status input-select"><option value="">Options not loaded</option></select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                    </div>
-                                                    
-                                                    <div class="info-column2-50 fl-force-right">
-                                                        <div class="info-pair">
-                                                            <div class="header">
-                                                                <div class="label">Brief Description</div>
-                                                            </div>
-                                                            <div class="content">
-                                                                <textarea rows="4" cols="30" class="input-textarea csc-object-identification-brief-description"></textarea>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="info-pair">
-                                                            <div class="header">
-                                                                <div class="label">Distinguishing Features</div>
-                                                            </div>
-                                                            <div class="content">
-                                                                <textarea rows="4" cols="30" class="input-textarea csc-object-identification-distinguishing-features"></textarea>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="info-pair">
-                                                            <div class="header">
-                                                                <div class="label">Comments</div>
-                                                            </div>
-                                                            <div class="content">
-                                                                <textarea rows="4" cols="30" class="input-textarea csc-object-identification-comments"></textarea>
-                                                            </div>
-                                                        </div>
-                                                        <div class="clear"></div>
-                                                    </div>
-                                                    <div class="clear"></div>
-                                                </div>
-                                                
-                                                <div class="info-column" id="multipleEdit">
-                                                    <div class="info-pair">
-                                                        <div class="header">
-                                                            <div class="label">Title</div>
-                                                            <!--<div class="addrow"><img src="../images/btnAddRow.png" alt="add a row" title="click to add an additional row" height=13 width=31 /></div>-->
-                                                            <div class="clear"></div>
-                                                        </div>
-                                                        <div class="content">
-                                                            <table>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <td>Title</td>
-                                                                        <td>Title Language</td>
-                                                                        <td>Title Translation</td>
-                                                                        <td>Title Translation Language</td>
-                                                                        <td>Title Type</td>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr class="csc-collection-object-titleGroup">
-                                                                        <td class="flc-inlineEdit-text" style="width:45%;"><input type="text" class="csc-object-identification-object-title editableText"/></td>
-                                                                        <td class="flc-inlineEdit-text"><select class="csc-object-identification-object-title-language input-select"><option value="">Options not loaded</option></select></td>
-                                                                        <td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-object-title-translation editableText"/></td>
-                                                                        <td class="flc-inlineEdit-text"><select class="csc-collection-object-titleTranslationLanguage input-select"><option value="">Options not loaded</option></select></td>
-                                                                        <td class="flc-inlineEdit-text"><select class="csc-object-identification-object-title-type input-select"><option value="">Options not loaded</option></select></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                
-                                                    <div class="info-pair">
-                                                        <div class="header">
-                                                            <div class="label">Object Name</div>
-                                                            <!--<div class="addrow"><img src="../images/btnAddRow.png" alt="add a row" title="click to add an additional row" height=13 width=31 /></div>-->
-                                                            <div class="clear"></div>
-                                                        </div>
-                                                        <div class="content">
-                                                            <table>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <td>Object Name</td>
-                                                                        <td>Currency</td>
-                                                                        <td>Level</td>
-                                                                        <td>System</td>
-                                                                        <td>Type</td>
-                                                                        <td>Language</td>
-                                                                        <td>Note</td>
-                                                                    </tr>
-                                                                </thead>                                                                
-                                                                <tbody>
-                                                                    <tr class="csc-collection-object-objectNameGroup">
-                                                                        <td><input type="text" class="csc-object-identification-object-name"/></td>
-                                                                        <td><select class="csc-object-identification-object-currency input-select"><option value="">Options not loaded</option></select></td>
-                                                                        <td><select class="csc-object-identification-object-level input-select"><option value="">Options not loaded</option></select></td>
-                                                                        <td><select class="csc-object-identification-object-system input-select"><option value="">Options not loaded</option></select></td>
-                                                                        <td><select class="csc-object-identification-object-type input-select"><option value="">Options not loaded</option></select></td>
-                                                                        <td><select class="csc-object-identification-object-language input-select"><option value="">Options not loaded</option></select></td>    
-                                                                        <td style="width:25%;"><input type="text" class="csc-object-identification-object-note"/></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clear"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>    
+												<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+													<div class="info-column">
+														<div class="info-column2-50 fl-force-left">
+															<div class="info-pair">
+																<div class="label">Accession Number <span class="required">*</span></div>
+																<div class="content csc-object-identification-object-number-container">
+																	<input type="text" class="csc-object-identification-object-number pattern-chooser-input" />
+																</div>
+															</div>
+														</div>
+														<div class="info-column2-50 fl-force-right">
+															
+															<div class="info-pair-select">
+																<div class="header">
+																	<div class="label">Collection</div>
+																</div>
+																<div class="content">
+																	<select class="csc-object-identification-collection input-select"><option value="">Options not loaded</option></select>
+																</div>
+															</div>
+															
+														</div>
+													</div>
+													<!-- cloning and modifying existing Title row --> <!-- Visual changes mostly, at this point. Some selectors in place -->
+													<div class="info-column" id="Was-multipleEdit-in-Title-Row">
+														<div class="info-pair">
+															<div class="header">
+																<div class="label">Determination History</div>
+																<!--<div class="addrow"><img src="../images/btnAddRow.png" alt="add a row" title="click to add an additional row" height=13 width=31 /></div>-->
+																<div class="clear"></div>
+															</div>
+															<div class="content">
+																<table>
+																	<thead>
+																		<tr>
+																			<td>Name</td>
+																			<td>Qualifier</td>
+																			<td>By</td>
+																			<td>Date</td>
+																			<td>Institution</td>
+																			<td>Kind</td>
+																			<td>Reference</td>
+																			<td>Page</td>
+																			<td>Notes</td>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr class="csc-collection-object-taxonomicIdentGroup">
+																			<td class="flc-inlineEdit-text" style="width:20%;"><input type="text" class="csc-object-identification-taxonomic-identification-taxon editableText"/></td>
+																			<td class="flc-inlineEdit-text"><select class="csc-object-identification-taxonomic-identification-qualifier input-select"><option value="">Options not loaded</option></select></td> <!-- add options -->
+																			<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification--taxonomic-identification-ident-by editableText"/></td>
+																			<td class="flc-inlineEdit-text"><select class="csc-collection-object--taxonomic-identification-ident-date input-date"><option value="">Options not loaded</option></select></td><!-- change from select to date -->
+																			<td class="flc-inlineEdit-text"><select class="csc-object-identification-institution"><option value="">Options not loaded</option></select></td><!-- change from select to autocomplete -->
+																			<td class="flc-inlineEdit-text"><select class="csc-object-identification-taxonomic-identification-ident-kind input-select"><option value="">Options not loaded</option></select></td><!-- add options and beware that cspace-config.xml doesn't say ...indent-kind. -->
+																			<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-taxonomic-identification-reference editableText" /></td>
+																			<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-taxonomic-identification-reference-page editableText" /></td>
+																			<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-taxonomic-identification-notes editableText" /></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+													
+													<div class="info-column">
+														<div class="info-column2-30 fl-force-left">
+															<div class="info-pair">
+																<div class="label">Label Header (still need to add to schema?)</div>
+																<div class="content"> <!-- add selector -->
+																	<input type="" class="" /><!-- add selector... make this an authority field -->
+																</div>
+															</div>
+														</div>
+														<div class="info-column2-30 fl-force-left">
+															<div class="info-pair">
+																<div class="label">Label Footer (still need to add to schema?)</div>
+																<div class="content"><!-- add selector -->
+																	<input type="text" class="" /><!-- add selector... make this an authority field -->
+																</div>
+															</div>
+														</div>
+													</div>
+													
+													<div class="info-column">
+														<div class="info-column2-50 fl-force-left">
+															<div class="info-column2-50 fl-force-left">
+																<div class="info-pair">
+																	<div class="header">
+																		<div class="label">Number of Sheets</div>
+																	</div>
+																	<div class="content">
+																		<input type="text" class="input-numeric-medium csc-object-identification-number-objects"/>
+																	</div>
+																</div>
+															</div>
+															<div class="info-column2-50 fl-force-right">
+																<div class="info-pair-select">
+																	<div class="header">
+																		<div class="label">Record Status</div>
+																	</div>
+																	<div class="content">
+																		<select class="csc-object-identification-record-status input-select"><option value="">Options not loaded</option></select>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<div class="info-column2-50 fl-force-right">
+															<div class="info-pair">
+																<div class="header">
+																	<div class="label">Other Number</div>
+																</div>
+																<div class="content">
+																	<table>
+																		<thead>
+																			<tr>
+																				<!--<td class="table-select"></td>-->
+																				<td>Number</td>
+																				<td>Number Type</td>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<tr class="csc-object-identification-otherNumbers">
+																				<td><input type="text" class="csc-object-identification-other-number"/></td>
+																				<td><select class="csc-object-identification-other-number-type input-select"><option value="">Options not loaded</option></select></td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+														<div class="clear"></div>
+													</div>
 
+													<div class="info-column">							
+														<div class="info-column2-50 fl-force-left">
+															<div class="info-pair">
+																<div class="header">
+																	<div class="label">Brief Description</div>
+																</div>
+																<div class="content">
+																	<textarea rows="4" cols="30" class="input-textarea csc-object-identification-brief-description"></textarea>
+																</div>
+															</div>
+														</div>
+														
+														<div class="info-column2-50 fl-force-right">
+															<div class="info-pair">
+																<div class="header">
+																	<div class="label">Comments</div>
+																</div>
+																<div class="content">
+																	<textarea rows="4" cols="30" class="input-textarea csc-object-identification-comments"></textarea>
+																</div>
+															</div>
+															<div class="clear"></div>
+														</div>
+														<div class="clear"></div>
+													</div>
+													
+													<div class="info-column" id="multipleEdit"><!-- replace this with Type Specimen group -->
+														<div class="info-pair">
+															<div class="header">
+																<div class="label">Title</div>
+																<!--<div class="addrow"><img src="../images/btnAddRow.png" alt="add a row" title="click to add an additional row" height=13 width=31 /></div>-->
+																<div class="clear"></div>
+															</div>
+															<div class="content">
+																<table>
+																	<thead>
+																		<tr>
+																			<td>Title</td>
+																			<td>Title Language</td>
+																			<td>Title Translation</td>
+																			<td>Title Translation Language</td>
+																			<td>Title Type</td>
+																		</tr>
+																	</thead>
+																	<tbody>
+																		<tr class="csc-collection-object-titleGroup">
+																			<td class="flc-inlineEdit-text" style="width:45%;"><input type="text" class="csc-object-identification-object-title editableText"/></td>
+																			<td class="flc-inlineEdit-text"><select class="csc-object-identification-object-title-language input-select"><option value="">Options not loaded</option></select></td>
+																			<td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-object-title-translation editableText"/></td>
+																			<td class="flc-inlineEdit-text"><select class="csc-collection-object-titleTranslationLanguage input-select"><option value="">Options not loaded</option></select></td>
+																			<td class="flc-inlineEdit-text"><select class="csc-object-identification-object-title-type input-select"><option value="">Options not loaded</option></select></td>
+																		</tr>
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													
+														<div class="clear"></div>
+													</div>
+												</div>
+											</div>
+                                    	</div>    
+									</div>
                                     <div class="fl-container-flex fl-fix information-group">
                                         <div class="info-column">
                                             <div class="csc-recordEditor-header fl-container-flex header toggle">Object Description Information</div>
