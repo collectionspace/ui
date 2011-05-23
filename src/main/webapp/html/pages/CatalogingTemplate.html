@@ -21,7 +21,7 @@
             <!-- INFO GROUP ONE -->
             <div class="fl-container-flex fl-fix information-group">
                 <div class="info-column">
-                    <div class="csc-recordEditor-header fl-container-flex header toggle"> Object Identification Information </div>
+                    <div class="csc-recordEditor-header fl-container-flex header toggle">Object Identification Information</div>
                     <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
                         <div class="info-column">
                             <div class="info-column2-50 fl-force-left">
@@ -47,9 +47,7 @@
 
                             </div>
                         </div>
-
-                        <!-- cloning and modifying existing Title row -->
-                        <!-- Visual changes mostly, at this point. Some selectors in place -->
+						<!-- cloning and modifying existing Title row --> <!-- Visual changes mostly, at this point. Some selectors in place -->
                         <div class="info-column" id="Was-multipleEdit-in-Title-Row">
                             <div class="info-pair">
                                 <div class="header">
@@ -79,43 +77,41 @@
                                         <tbody>
                                             <tr class="csc-collection-object-taxonomicIdentGroup">
                                                 <td class="flc-inlineEdit-text" style="width:20%;">
-                                                    <input type="text" class="csc-object-identification-taxonomic-identification-taxon editableText"/>
+                                                    <input type="text" class="csc-taxonomic-identification-taxon editableText"/>
                                                 </td>
                                                 <td class="flc-inlineEdit-text">
-                                                    <select class="csc-object-identification-taxonomic-identification-qualifier input-select">
+                                                    <select class="csc-taxonomic-identification-qualifier input-select">
                                                         <option value="">Options not loaded</option>
                                                     </select>
                                                 </td>
                                                 <!-- add options -->
                                                 <td class="flc-inlineEdit-text">
-                                                    <input type="text" class="csc-object-identification--taxonomic-identification-ident-by editableText"/>
-                                                </td>
-                                                <td class="flc-inlineEdit-text">
-                                                    <select class="csc-collection-object--taxonomic-identification-ident-date input-date">
-                                                        <option value="">Options not loaded</option>
-                                                    </select>
+                                                    <input type="text" class="csc-taxonomic-identification-ident-by editableText"/>
                                                 </td>
                                                 <!-- change from select to date -->
+                                                <td class="content csc-taxonomic-identification-ident-date-container fl-table">
+													<input type="text" class="fl-force-left input-date csc-taxonomic-identification-ident-date csc-calendar-date" style="width:25px;"/>
+													<a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button">
+														<img src="../images/cal.png" alt="calendar" height="17" width="16"/>
+													</a>
+													<div class="csc-date-picker cs-date-picker"/>
+												</td>
                                                 <td class="flc-inlineEdit-text">
-                                                    <select class="csc-object-identification-institution">
+                                                    <input type="text" class="csc-taxonomic-identification-institution"/>
+                                                </td>
+                                                <td class="flc-inlineEdit-text">
+                                                    <select class="csc-taxonomic-identification-ident-kind input-select">
                                                         <option value="">Options not loaded</option>
                                                     </select>
                                                 </td>
-                                                <!-- change from select to autocomplete -->
                                                 <td class="flc-inlineEdit-text">
-                                                    <select class="csc-object-identification-taxonomic-identification-ident-kind input-select">
-                                                        <option value="">Options not loaded</option>
-                                                    </select>
-                                                </td>
-                                                <!-- add options and beware that cspace-config.xml doesn't say ...indent-kind. -->
-                                                <td class="flc-inlineEdit-text">
-                                                    <input type="text" class="csc-object-identification-taxonomic-identification-reference editableText"/>
+                                                    <input type="text" class="csc-taxonomic-identification-reference editableText"/>
                                                 </td>
                                                 <td class="flc-inlineEdit-text">
-                                                    <input type="text" class="csc-object-identification-taxonomic-identification-reference-page editableText"/>
+                                                    <input type="text" class="csc-taxonomic-identification-reference-page editableText"/>
                                                 </td>
                                                 <td class="flc-inlineEdit-text">
-                                                    <input type="text" class="csc-object-identification-taxonomic-identification-notes editableText"/>
+                                                    <input type="text" class="csc-taxonomic-identification-notes editableText"/>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -130,7 +126,7 @@
                                     <div class="label">Label Header (still need to add to schema?)</div>
                                     <div class="content">
                                         <!-- add selector -->
-                                        <input type="" class=""/>
+                                        <input type="text" class=""/>
                                         <!-- add selector... make this an authority field -->
                                     </div>
                                 </div>
@@ -416,7 +412,9 @@
                                         <div class="label"> Field Collection Method </div>
                                     </div>
                                     <div class="content">
-                                        <select class="input-select csc-collection-object-fieldCollectionMethod"/>
+                                        <select class="input-select csc-collection-object-fieldCollectionMethod">
+                                        	<option value="">Options not loaded</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
