@@ -87,12 +87,14 @@
                                                 <td class="flc-inlineEdit-text">
                                                     <input type="text" class="csc-taxonomic-identification-ident-by editableText" />
                                                 </td>
-                                                <!-- change from select to date -->
-                                                <td class="content csc-taxonomic-identification-ident-date-container fl-table">
-                                                    <input type="text" class="fl-force-left input-date csc-taxonomic-identification-ident-date csc-calendar-date" style="width:25px;" />
-                                                    <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button">
-                                                        <img src="../images/cal.png" alt="calendar" height="17" width="16" />
-                                                    </a>
+                                            	<!-- Based on LoansIn Authorization Date -->
+
+                                                <td class="csc-taxonomic-identification-ident-date-container" style="width: 170px;">
+                                                    <input type="text" class="input-date csc-taxonomic-identification-ident-date csc-calendar-date" />
+                                                    <!-- No <a> tag used in LoanIn...maybe the button behavior is controlled elsewhere?
+                                                    <a href="#_bottom" class="csc-calendar-button fl-table-cell disabled cs-calendar-button">-->
+                                                        <img src="../images/cal.png" alt="calendar" class="csc-calendar-button" height="17" width="16" />
+                                                    <!--</a>-->
                                                     <div class="csc-date-picker cs-date-picker" />
                                                 </td>
                                                 <td class="flc-inlineEdit-text">
