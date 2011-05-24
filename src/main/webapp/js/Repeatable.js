@@ -66,7 +66,7 @@ cspace = cspace || {};
     };
     
     var processDeleteInput = function (input, model) {
-        input.attr("disabled", model.length > 1 ? "" : "disabled");
+        input.prop("disabled", model.length <= 1);
     };
 
     var bindEventHandlers = function (that) {        

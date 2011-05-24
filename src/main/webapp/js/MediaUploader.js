@@ -139,7 +139,7 @@ cspace = cspace || {};
     };
     
     cspace.mediaUploader.processLink = function (that) {
-        that.locate("linkButton").attr("disabled", that.locate("linkInput").val() ? false : true);
+        that.locate("linkButton").prop("disabled", that.locate("linkInput").val() ? false : true);
     };
     
     cspace.mediaUploader.assertBlob = function (blobCsid) {

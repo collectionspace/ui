@@ -29,7 +29,7 @@ cspace = cspace || {};
                 var msg = that.options.strings[msgKey] + message;
                 that.options.messageBar.show(msg, null, true);
             }
-            that.locate("save").removeAttr("disabled");
+            that.locate("save").prop("disabled", false);
             that.events.onError.fire(operation);
             if (operation === "create") {
                 // This is only temporary until http://issues.collectionspace.org/browse/CSPACE-263
@@ -67,7 +67,7 @@ cspace = cspace || {};
     
     var processChanges = function (that, revert) {
         that.unsavedChanges = revert;
-        that.locate("cancel").attr("disabled", !revert);
+        that.locate("cancel").prop("disabled", !revert);
     };
     
     var recordSaveHandler = function (that, data, action) {
@@ -76,7 +76,7 @@ cspace = cspace || {};
         that.refreshView();
         that.options.messageBar.show(that.options.strings[message], Date());
         processChanges(that, false);
-        that.locate("save").removeAttr("disabled");
+        that.locate("save").prop("disabled", false);
     };
 
     var bindEventHandlers = function (that) {
@@ -207,7 +207,7 @@ cspace = cspace || {};
         that.requestSave = function () {
             var ret = that.events.onSave.fire(that.model);
             if (ret !== false) {
-                that.locate("save").attr("disabled", "disabled");
+                that.locate("save").prop("disabled", true);
                 if (that.model.csid) {
                     that.options.dataContext.update();
                 } else {
@@ -292,7 +292,7 @@ cspace = cspace || {};
                         }
                     }, {
                         type: "jQuery",
-                        func: "attr",
+                        func: "prop",
                         args: {
                             disabled: that.checkDeleteDisabling
                         }

@@ -167,8 +167,8 @@ var adminUsersTester = function () {
         basicAdminUsersSetup(function (adminUsers, le, re) {
             le.events.afterAddNewListRow.addListener(function () {
                 changeDetails(adminUsers.options.selectors, testDataCreateUser, testDataCreateUser.validPassword);
-                var saveResult = re.requestSave();
-                jqUnit.assertTrue("details.save returns true for successful save", saveResult);
+                var preSaveResult = re.events.onSave.fire(re.model);
+                jqUnit.assertNotEquals("details.save returns true for successful save", preSaveResult, false);
                 cspace.tests.onTearDown.fire(re);
                 start();
             });

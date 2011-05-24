@@ -170,8 +170,12 @@ cspace = cspace || {};
         var styles = tabsList.options.styles;
         var tabContainer = that.locate("tabs");
         tabContainer.tabs({
+            tabTemplate: "<li><a href='#{href}'>#{label}</a></li>",
+            spinner: null,
             cache: true,
             ajaxOptions: {
+                // This is required as of jQuery UI v1.8.12
+                dataType: "html",
                 success: function (data, textStatus, XMLHttpRequest) {
                     var tabModel = fluid.find(tabsList.model.tabs, findStrategy(tabContainer.tabs('option', 'selected')));
                     that.setupTab(tabModel["name"]);

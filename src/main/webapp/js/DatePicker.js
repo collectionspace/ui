@@ -156,12 +156,12 @@ cspace = cspace || {};
         datePickerObj.hide();
         var calendarDate = that.locate(calendarDate);
         // TODO: this is going to go away as soon as all dates are a combination of datePicker and free text date.
-        if (calendarDate.attr("disabled") !== "disabled") {
+        if (!calendarDate.prop("disabled")) {
             that.freeText = true;
         }
         else {
             calendarDate.attr("readonly", "readonly");
-            calendarDate.attr("disabled", true);
+            calendarDate.prop("disabled", true);
         }
 
         return datePicker;

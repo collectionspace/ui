@@ -60,12 +60,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
     recordEditorTest.asyncTest("Delete", function () {
         var model = {
-            csid: "123.456.789",
+            csid: "1984.068.0335b",
             fields: {}
         };
         setupRecordEditor({
             model: model,
-            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
+            dataContext: cspace.dataContext({baseUrl: "../data", recordType: "cataloging", model: model, fileExtension: ".json"}),
             uispec: {}
         }, function (re) {
             fluid.log("RETest: afterRender");
