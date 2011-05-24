@@ -13,6 +13,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 (function ($, fluid) {
     
+    fluid.setLogging(false);
     fluid.registerNamespace("cspace");
     
     cspace.includeLocalDemands = function () {
