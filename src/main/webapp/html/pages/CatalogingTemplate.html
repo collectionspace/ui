@@ -127,7 +127,7 @@
 										<div class="label">Label Header</div>
 										<div class="content">
 											<!-- add selector -->
-											<input type="text" class="" />
+                      <input type="text" class="input-alpha csc-collection-object-labelHeader" />
 											<!-- add selector... make this an authority field -->
 										</div>
 									</div>
@@ -141,7 +141,7 @@
 										<div class="label">Label Footer</div>
 										<div class="content">
 											<!-- add selector -->
-											<input type="text" class="" />
+                      <input type="text" class="input-alpha csc-collection-object-labelFooter" />
 											<!-- add selector... make this an authority field -->
 										</div>
 									</div>
@@ -530,7 +530,7 @@
                                         <div class="label"> Depth </div>
                                     </div>
                                     <div class="content">
-                                        <textarea rows="4" cols="30" class="input-textarea csc-collection-object-xxxxxDepth" />
+                                        <input type="text" class="input-alpha csc-collection-object-fieldLocDepth" />
                                     </div>
                                 </div>
                             </div>
@@ -545,7 +545,7 @@
                                         <div class="label"> Associated Taxa </div>
                                     </div>
                                     <div class="content">
-                                        <textarea rows="4" cols="30" class="input-textarea csc-collection-object-xxxxxTaxa" />
+                                        <input type="text" class="input-alpha csc-collection-object-fieldAssociatedTaxa" />
                                     </div>
                                 </div>
                             </div>
@@ -557,7 +557,7 @@
                                         <div class="label"> Elevation </div>
                                     </div>
                                     <div class="content">
-                                        <textarea rows="4" cols="30" class="input-textarea csc-collection-object-xxxxxElevation" />
+                                        <input type="text" class="input-alpha csc-collection-object-fieldLocElevation" />
                                     </div>
                                 </div>
                             </div>
@@ -576,26 +576,8 @@
                         <div class="info-column2-50 fl-force-left">
 
                             <!-- Copy Number -->
-                            <div class="info-pair">
-                                <div class="header">
-                                    <div class="label">Copy Number</div>
-                                </div>
-                                <div class="content">
-                                    <input type="text" class="csc-object-description-copy-number" />
-                                </div>
-                            </div>
 
                             <!-- Object Status -->
-                            <div class="info-pair">
-                                <div class="header">
-                                    <div class="label">Object Status</div>
-                                </div>
-                                <div class="content">
-                                    <select class="csc-object-description-object-status input-select">
-                                        <option value="">Options not loaded</option>
-                                    </select>
-                                </div>
-                            </div>
 
                             <!-- Sex -->
                             <div class="info-pair">
@@ -608,24 +590,33 @@
                                     </select>
                                 </div>
                             </div>
-
+                            <div class="info-pair">
+                                <div class="header">
+                                   <div class="label">Phenology</div>
+                                </div>
+                                <div class="content">
+                                    <select class="csc-object-description-phase input-select"><option value="">Options not loaded</option></select>
+                                </div>
+                            </div>
                             <div class="info-column"> </div>
+                        </div>
+                        <div class="info-column">
+                            <div class="info-pair">
+                                <div class="header">
+                                    <div class="label">Form</div>
+                                </div>
+                                <div class="content">
+                                    <select class="csc-object-description-form input-select"><option value="">Options not loaded</option></select>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="info-column2-50 fl-force-right">
 
                             <!-- Edition Number -->
-                            <div class="info-pair">
-                                <div class="header">
-                                    <div class="label">Edition Number</div>
-                                </div>
-                                <div class="content">
-                                    <input type="text" class="csc-object-description-edition-number" />
-                                </div>
-                            </div>
-
 
                             <!-- Age -->
+                            <!-- Hide for now
                             <div class="info-pair">
                                 <div class="header">
                                     <div class="label">Age</div>
@@ -657,75 +648,11 @@
                                     </table>
                                 </div>
                             </div>
-
-
-                            <!-- Style -->
-                            <div class="info-pair">
-                                <div class="header">
-                                    <div class="label">Style</div>
-                                </div>
-                                <div class="content">
-                                    <input type="text" class="csc-object-description-style" />
-                                </div>
-                            </div>
-
-
-                            <!-- Color -->
-                            <div class="info-pair">
-                                <div class="header">
-                                    <div class="label">Color</div>
-                                </div>
-                                <div class="content">
-                                    <input type="text" class="csc-object-description-color" />
-                                </div>
-                            </div>
+                            -->
                             <div class="clear" />
                         </div>
                         <div class="clear" />
                         <div class="info-column">
-
-                            <!-- Material -->
-                            <div class="info-pair">
-                                <div class="header">
-                                    <div class="label">Material</div>
-                                </div>
-                                <div class="content">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <!--<td class="table-select"></td>-->
-                                                <td>Material</td>
-                                                <td>Material Component</td>
-                                                <td>Material Component Note</td>
-                                                <td>Material Name</td>
-                                                <td>Material Source</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="csc-collection-object-materialGroup">
-                                                <!--<td class="table-unselected"></td>-->
-                                                <td>
-                                                    <input type="text" class="csc-object-description-material" />
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="csc-object-description-material-component" />
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="csc-object-description-material-component-note" />
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="csc-object-description-material-name" />
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="csc-object-description-material-source" />
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-
                             <!-- Physical Description -->
                             <div class="info-pair">
                                 <div class="header">
@@ -737,81 +664,6 @@
                             </div>
                         </div>
 
-                        <div class="info-column2-50 fl-force-left">
-
-                            <!-- Object Component -->
-                            <div class="info-pair">
-                                <div class="header">
-                                    <div class="label">Object Component</div>
-                                </div>
-                                <div class="content">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <!--<td class="table-select"></td>-->
-                                                <td>Name</td>
-                                                <td>Information</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="csc-collection-object-objectComponentGroup">
-                                                <!--<td class="table-unselected"></td>-->
-                                                <td>
-                                                    <select class="csc-object-description-object-component-name input-select">
-                                                        <option value="">Options not loaded</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="csc-object-description-object-component-information" />
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="info-column2-50 fl-force-right">
-
-                            <!-- Technical Attribute -->
-                            <div class="info-pair">
-                                <div class="header">
-                                    <div class="label">Technical Attribute</div>
-                                </div>
-                                <div class="content">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <!--<td class="table-select"></td>-->
-                                                <td>Technical Attribute</td>
-                                                <td>Measurement</td>
-                                                <td>Unit</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="csc-collection-object-technicalAttributeGroup">
-                                                <!--<td class="table-unselected"></td>-->
-                                                <td>
-                                                    <select class="csc-object-description-technical-attribute input-select">
-                                                        <option value="">Options not loaded</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select class="csc-object-description-technical-attribute-measurement input-select">
-                                                        <option value="">Options not loaded</option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <select class="csc-object-description-technical-attribute-unit input-select">
-                                                        <option value="">Options not loaded</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
                         <div class="clear" />
 
                         <div class="info-column2-50 fl-force-left">
