@@ -26,10 +26,10 @@
                         "fields": [
                             "fields.objectNumber", {
                             "type": "repeatableMatch",
-                            "queryPath": "fields.titleGroup",
+                            "queryPath": "fields.taxonomicIdentGroup",
                             "childPath": "_primary",
                             "value": true,
-                            "path": "title"
+                            "path": "taxon"
                         }]
                     }
                 },
