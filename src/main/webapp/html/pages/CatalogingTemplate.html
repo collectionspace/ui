@@ -46,8 +46,7 @@
                             </div>
                         </div>
                         <!-- cloning and modifying existing Title row -->
-                        <!-- Visual changes mostly, at this point. Some selectors in place -->
-                        <div class="info-column" id="Was-multipleEdit-in-Title-Row">
+                        <div class="info-column">
                             <div class="info-pair">
                                 <div class="header">
                                     <div class="label">Determination History</div>
@@ -74,12 +73,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="csc-collection-object-taxonomicIdentGroup">
-                                                <td class="flc-inlineEdit-text" style="width:20%;">
+                                            <tr class="csc-collection-object-taxonomicIdentGroup determinationHistory">
+                                                <td class="flc-inlineEdit-text taxon">
                                                     <input type="text" class="csc-taxonomic-identification-taxon editableText" />
                                                 </td>
                                                 <td class="flc-inlineEdit-text">
-                                                    <select class="csc-taxonomic-identification-qualifier input-select">
+                                                    <select class="csc-taxonomic-identification-qualifier input-select-shorter">
                                                         <option value="">Options not loaded</option>
                                                     </select>
                                                 </td>
@@ -88,7 +87,7 @@
                                                     <input type="text" class="csc-taxonomic-identification-ident-by editableText" />
                                                 </td>
                                             	<!-- Based on LoansIn Authorization Date -->
-                                                <td class="flc-inlineEdit-text csc-taxonomic-identification-ident-date-container" style="width: 168px;">
+                                                <td class="flc-inlineEdit-text csc-taxonomic-identification-ident-date-container date-container">
                                                     <input type="text" class="input-date csc-taxonomic-identification-ident-date csc-calendar-date" />
                                                     <!-- No <a> tag used in LoanIn...maybe the button behavior is controlled elsewhere?
                                                     <a href="#_bottom" class="csc-calendar-button fl-table-cell disabled cs-calendar-button">-->
@@ -100,7 +99,7 @@
                                                     <input type="text" class="csc-taxonomic-identification-institution" />
                                                 </td>
                                                 <td class="flc-inlineEdit-text">
-                                                    <select class="csc-taxonomic-identification-ident-kind input-select">
+                                                    <select class="csc-taxonomic-identification-ident-kind input-select-longer">
                                                         <option value="">Options not loaded</option>
                                                     </select>
                                                 </td>
@@ -108,7 +107,7 @@
                                                     <input type="text" class="csc-taxonomic-identification-reference editableText" />
                                                 </td>
                                                 <td class="flc-inlineEdit-text">
-                                                    <input type="text" class="csc-taxonomic-identification-reference-page editableText" />
+                                                    <input type="text" class="csc-taxonomic-identification-reference-page editableText input-numeric-tiny" />
                                                 </td>
                                                 <td class="flc-inlineEdit-text">
                                                     <input type="text" class="csc-taxonomic-identification-notes editableText" />
