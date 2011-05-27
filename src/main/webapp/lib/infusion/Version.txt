@@ -1,6 +1,6 @@
 This is a custom build of Fluid Infusion 1.3 including: json, fss, framework, renderer, inlineEdit, pager and jQueryUIWidgets.
 
-It was built from commit a1a9981e8ee9cffd781ebf5de1afa8a8f05cec9f of Infusion project master, at
+It was built from commit b62f829f9241ede17629bc3f4cda7cddc30b4675 of Infusion project master, at
     http://github.com/fluid-project/infusion
 
 using the following command:

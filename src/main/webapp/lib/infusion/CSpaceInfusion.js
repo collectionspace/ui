@@ -20391,1042 +20391,6 @@ var fluid_1_4 = fluid_1_4 || {};
 function FCKeditor_OnComplete(editorInstance) {
     fluid.inlineEdit.FCKEditor.complete.fire(editorInstance);
 }
-/* Copyright (c) 2006 Brandon Aaron (http://brandonaaron.net)
- * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) 
- * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
- *
- * $LastChangedDate$
- * $Rev$
- *
- * Version 2.1
- */
-
-(function($){
-
-/**
- * The bgiframe is chainable and applies the iframe hack to get 
- * around zIndex issues in IE6. It will only apply itself in IE 
- * and adds a class to the iframe called 'bgiframe'. The iframe
- * is appeneded as the first child of the matched element(s) 
- * with a tabIndex and zIndex of -1.
- * 
- * By default the plugin will take borders, sized with pixel units,
- * into account. If a different unit is used for the border's width,
- * then you will need to use the top and left settings as explained below.
- *
- * NOTICE: This plugin has been reported to cause perfromance problems
- * when used on elements that change properties (like width, height and
- * opacity) a lot in IE6. Most of these problems have been caused by 
- * the expressions used to calculate the elements width, height and 
- * borders. Some have reported it is due to the opacity filter. All 
- * these settings can be changed if needed as explained below.
- *
- * @example $('div').bgiframe();
- * @before <div><p>Paragraph</p></div>
- * @result <div><iframe class="bgiframe".../><p>Paragraph</p></div>
- *
- * @param Map settings Optional settings to configure the iframe.
- * @option String|Number top The iframe must be offset to the top
- * 		by the width of the top border. This should be a negative 
- *      number representing the border-top-width. If a number is 
- * 		is used here, pixels will be assumed. Otherwise, be sure
- *		to specify a unit. An expression could also be used. 
- * 		By default the value is "auto" which will use an expression 
- * 		to get the border-top-width if it is in pixels.
- * @option String|Number left The iframe must be offset to the left
- * 		by the width of the left border. This should be a negative 
- *      number representing the border-left-width. If a number is 
- * 		is used here, pixels will be assumed. Otherwise, be sure
- *		to specify a unit. An expression could also be used. 
- * 		By default the value is "auto" which will use an expression 
- * 		to get the border-left-width if it is in pixels.
- * @option String|Number width This is the width of the iframe. If
- *		a number is used here, pixels will be assume. Otherwise, be sure
- * 		to specify a unit. An experssion could also be used.
- *		By default the value is "auto" which will use an experssion
- * 		to get the offsetWidth.
- * @option String|Number height This is the height of the iframe. If
- *		a number is used here, pixels will be assume. Otherwise, be sure
- * 		to specify a unit. An experssion could also be used.
- *		By default the value is "auto" which will use an experssion
- * 		to get the offsetHeight.
- * @option Boolean opacity This is a boolean representing whether or not
- * 		to use opacity. If set to true, the opacity of 0 is applied. If
- *		set to false, the opacity filter is not applied. Default: true.
- * @option String src This setting is provided so that one could change 
- *		the src of the iframe to whatever they need.
- *		Default: "javascript:false;"
- *
- * @name bgiframe
- * @type jQuery
- * @cat Plugins/bgiframe
- * @author Brandon Aaron (brandon.aaron@gmail.com || http://brandonaaron.net)
- */
-$.fn.bgIframe = $.fn.bgiframe = function(s) {
-	// This is only for IE6
-	if ( $.browser.msie && parseInt($.browser.version) <= 6 ) {
-		s = $.extend({
-			top     : 'auto', // auto == .currentStyle.borderTopWidth
-			left    : 'auto', // auto == .currentStyle.borderLeftWidth
-			width   : 'auto', // auto == offsetWidth
-			height  : 'auto', // auto == offsetHeight
-			opacity : true,
-			src     : 'javascript:false;'
-		}, s || {});
-		var prop = function(n){return n&&n.constructor==Number?n+'px':n;},
-		    html = '<iframe class="bgiframe"frameborder="0"tabindex="-1"src="'+s.src+'"'+
-		               'style="display:block;position:absolute;z-index:-1;'+
-			               (s.opacity !== false?'filter:Alpha(Opacity=\'0\');':'')+
-					       'top:'+(s.top=='auto'?'expression(((parseInt(this.parentNode.currentStyle.borderTopWidth)||0)*-1)+\'px\')':prop(s.top))+';'+
-					       'left:'+(s.left=='auto'?'expression(((parseInt(this.parentNode.currentStyle.borderLeftWidth)||0)*-1)+\'px\')':prop(s.left))+';'+
-					       'width:'+(s.width=='auto'?'expression(this.parentNode.offsetWidth+\'px\')':prop(s.width))+';'+
-					       'height:'+(s.height=='auto'?'expression(this.parentNode.offsetHeight+\'px\')':prop(s.height))+';'+
-					'"/>';
-		return this.each(function() {
-			if ( $('> iframe.bgiframe', this).length == 0 )
-				this.insertBefore( document.createElement(html), this.firstChild );
-		});
-	}
-	return this;
-};
-
-// Add browser.version if it doesn't exist
-if (!$.browser.version)
-	$.browser.version = navigator.userAgent.toLowerCase().match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/)[1];
-
-})(jQuery);/*
-Copyright 2008-2009 University of Cambridge
-Copyright 2008-2009 University of Toronto
-Copyright 2010-2011 OCAD University
-Copyright 2010 Lucendo Development Ltd.
-
-Licensed under the Educational Community License (ECL), Version 2.0 or the New
-BSD license. You may not use this file except in compliance with one these
-Licenses.
-
-You may obtain a copy of the ECL 2.0 License and BSD License at
-https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
-*/
-
-// Declare dependencies
-/*global fluid_1_4:true, jQuery*/
-
-// JSLint options 
-/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
-
-var fluid_1_4 = fluid_1_4 || {};
-
-(function ($, fluid) {
-
-    /******************
-     * Pager Bar View *
-     ******************/
-
-    
-    function updateStyles(pageListThat, newModel, oldModel) {
-        if (!pageListThat.pageLinks) {
-            return;
-        }
-        if (oldModel.pageIndex !== undefined) {
-            var oldLink = pageListThat.pageLinks.eq(oldModel.pageIndex);
-            oldLink.removeClass(pageListThat.options.styles.currentPage);
-        }
-        var pageLink = pageListThat.pageLinks.eq(newModel.pageIndex);
-        pageLink.addClass(pageListThat.options.styles.currentPage); 
-    }
-    
-    function bindLinkClick(link, events, eventArg) {
-        link.unbind("click.fluid.pager");
-        link.bind("click.fluid.pager", function () {
-            events.initiatePageChange.fire(eventArg);
-        });
-    }
-    
-    // 10 -> 1, 11 -> 2
-    function computePageCount(model) {
-        model.pageCount = Math.max(1, Math.floor((model.totalRange - 1) / model.pageSize) + 1);
-    }
-
-    fluid.pager = function () {
-        return fluid.pagerImpl.apply(null, arguments);
-    };
-    
-    fluid.pager.computePageLimit = function (model) {
-        return Math.min(model.totalRange, (model.pageIndex + 1) * model.pageSize);
-    };
-
-    fluid.pager.directPageList = function (container, events, options) {
-        var that = fluid.initView("fluid.pager.directPageList", container, options);
-        that.pageLinks = that.locate("pageLinks");
-        for (var i = 0; i < that.pageLinks.length; ++i) {
-            var pageLink = that.pageLinks.eq(i);
-            bindLinkClick(pageLink, events, {pageIndex: i});
-        }
-        events.onModelChange.addListener(
-            function (newModel, oldModel) {
-                updateStyles(that, newModel, oldModel);
-            }
-        );
-        that.defaultModel = {
-            pageIndex: undefined,
-            pageSize: 1,
-            totalRange: that.pageLinks.length
-        };
-        return that;
-    };
-    
-    /** Returns an array of size count, filled with increasing integers, 
-     *  starting at 0 or at the index specified by first. 
-     */
-    
-    fluid.iota = function (count, first) {
-        first = first || 0;
-        var togo = [];
-        for (var i = 0; i < count; ++i) {
-            togo[togo.length] = first++;
-        }
-        return togo;
-    };
-    
-    fluid.pager.everyPageStrategy = fluid.iota;
-    
-    fluid.pager.gappedPageStrategy = function (locality, midLocality) {
-        if (!locality) {
-            locality = 3;
-        }
-        if (!midLocality) {
-            midLocality = locality;
-        }
-        return function (count, first, mid) {
-            var togo = [];
-            var j = 0;
-            var lastSkip = false;
-            for (var i = 0; i < count; ++i) {
-                if (i < locality || (count - i - 1) < locality || (i >= mid - midLocality && i <= mid + midLocality)) {
-                    togo[j++] = i;
-                    lastSkip = false;
-                } else if (!lastSkip) {
-                    togo[j++] = -1;
-                    lastSkip = true;
-                }
-            }
-            return togo;
-        };
-    };
-    
-    /**
-     * An impl of a page strategy that will always display same number of page links (including skip place holders). 
-     * @param   endLinkCount    int     The # of elements first and last trunks of elements
-     * @param   midLinkCount    int     The # of elements from beside the selected #
-     * @author  Eric Dalquist
-     */
-    fluid.pager.consistentGappedPageStrategy = function (endLinkCount, midLinkCount) {
-        if (!endLinkCount) {
-            endLinkCount = 1;
-        }
-        if (!midLinkCount) {
-            midLinkCount = endLinkCount;
-        }
-        var endWidth = endLinkCount + 2 + midLinkCount;
-
-        return function (count, first, mid) {
-            var pages = [];
-            var anchoredLeft = mid < endWidth;
-            var anchoredRight = mid >= count - endWidth;
-            var anchoredEndWidth = endWidth + midLinkCount;
-            var midStart = mid - midLinkCount;
-            var midEnd = mid + midLinkCount;
-            var lastSkip = false;
-            
-            for (var page = 0; page < count; page++) {
-                if (page < endLinkCount || // start pages
-                        count - page <= endLinkCount || // end pages
-                        (anchoredLeft && page < anchoredEndWidth) || // pages if no skipped pages between start and mid
-                        (anchoredRight && page >= count - anchoredEndWidth) || // pages if no skipped pages between mid and end
-                        (page >= midStart && page <= midEnd) // pages around the mid
-                        ) {
-                    pages.push(page);
-                    lastSkip = false;
-                } else if (!lastSkip) {
-                    pages.push(-1);
-                    lastSkip = true;
-                }
-            }
-            return pages;
-        };
-    };  
-    
-    fluid.pager.renderedPageList = function (container, events, pagerBarOptions, options, strings) {
-        options = $.extend(true, pagerBarOptions, options);
-        var that = fluid.initView("fluid.pager.renderedPageList", container, options);
-        options = that.options; // pick up any defaults
-        var idMap = {};
-        var renderOptions = {
-            cutpoints: [ 
-                {
-                    id: "page-link:link",
-                    selector: pagerBarOptions.selectors.pageLinks
-                },
-                {
-                    id: "page-link:skip",
-                    selector: pagerBarOptions.selectors.pageLinkSkip
-                }
-            ],
-            idMap: idMap
-        };
-        
-        if (options.linkBody) {
-            renderOptions.cutpoints[renderOptions.cutpoints.length] = {
-                id: "payload-component",
-                selector: options.linkBody
-            };
-        }   
-        
-        var assembleComponent = function (page, isCurrent) {
-            var obj = {
-                ID: "page-link:link",
-                localID: page + 1,
-                value: page + 1,
-                pageIndex: page,
-                decorators: [
-                    {
-                        type: "jQuery",
-                        func: "click", 
-                        args: function (event) {
-                            events.initiatePageChange.fire({pageIndex: page});
-                            event.preventDefault();
-                        }
-                    }
-                ]
-            };
-            
-            if (isCurrent) {
-                obj.current = true;
-                obj.decorators = obj.decorators.concat([
-                    {
-                        type: "addClass",
-                        classes: that.options.styles.currentPage
-                    },
-                    {
-                        type: "jQuery",
-                        func: "attr", 
-                        args: ["aria-label", that.options.strings.currentPageIndexMsg] 
-                    }
-                ]);
-            }
-            
-            return obj;
-        };
-             
-        function pageToComponent(current) {
-            return function (page) {
-                return page === -1 ? {
-                    ID: "page-link:skip"
-                } : assembleComponent(page, page === current);
-            };
-        }
-        
-        var root = that.locate("root");
-        fluid.expectFilledSelector(root, "Error finding root template for fluid.pager.renderedPageList");
-        
-        var template = fluid.selfRender(root, {}, renderOptions);
-        events.onModelChange.addListener(
-            function (newModel, oldModel) {
-                var pages = that.options.pageStrategy(newModel.pageCount, 0, newModel.pageIndex);
-                var pageTree = fluid.transform(pages, pageToComponent(newModel.pageIndex));
-                if (pageTree.length > 1) {
-                    pageTree[pageTree.length - 1].value = pageTree[pageTree.length - 1].value + strings.last;
-                }
-                events.onRenderPageLinks.fire(pageTree, newModel);
-                
-                //Destroys all the tooltips before rerendering the pagelinks.
-                //This will clean up the tooltips, which are all added to the end at the end of the DOM,
-                //and prevent the tooltips from sticking around when using the keyboard to activate
-                //the page links.
-                $.each(idMap, function (key, id) {
-                    var pageLink = fluid.jById(id);
-                    if (pageLink.tooltip) {
-                        pageLink.tooltip("destroy");
-                    }
-                });
-                fluid.reRender(template, root, pageTree, renderOptions);
-                updateStyles(that, newModel, oldModel);
-            }
-        );
-        return that;
-    };
-    
-    fluid.defaults("fluid.pager.renderedPageList", {
-        selectors: {
-            root: ".flc-pager-links"
-        },
-        linkBody: "a",
-        pageStrategy: fluid.pager.everyPageStrategy
-    });
-    
-    var updatePreviousNext = function (that, options, newModel) {
-        if (newModel.pageIndex === 0) {
-            that.previous.addClass(options.styles.disabled);
-        } else {
-            that.previous.removeClass(options.styles.disabled);
-        }
-        
-        if (newModel.pageIndex === newModel.pageCount - 1) {
-            that.next.addClass(options.styles.disabled);
-        } else {
-            that.next.removeClass(options.styles.disabled);
-        }
-    };
-    
-    fluid.pager.previousNext = function (container, events, options) {
-        var that = fluid.initView("fluid.pager.previousNext", container, options);
-        that.previous = that.locate("previous");
-        bindLinkClick(that.previous, events, {relativePage: -1});
-        that.next = that.locate("next");
-        bindLinkClick(that.next, events, {relativePage: +1});
-        events.onModelChange.addListener(
-            function (newModel, oldModel, overallThat) {
-                updatePreviousNext(that, options, newModel);
-            }
-        );
-        return that;
-    };
-
-    fluid.pager.pagerBar = function (events, container, options, strings) {
-        var that = fluid.initView("fluid.pager.pagerBar", container, options);
-        that.pageList = fluid.initSubcomponent(that, "pageList", 
-            [container, events, that.options, fluid.COMPONENT_OPTIONS, strings]);
-        that.previousNext = fluid.initSubcomponent(that, "previousNext", 
-            [container, events, that.options, fluid.COMPONENT_OPTIONS, strings]);
-        
-        return that;
-    };
-
-    
-    fluid.defaults("fluid.pager.pagerBar", {
-            
-        previousNext: {
-            type: "fluid.pager.previousNext"
-        },
-        
-        pageList: {
-            type: "fluid.pager.renderedPageList",
-            options: {
-                pageStrategy: fluid.pager.gappedPageStrategy(3, 1)
-            }
-        },
-        
-        selectors: {
-            pageLinks: ".flc-pager-pageLink",
-            pageLinkSkip: ".flc-pager-pageLink-skip",
-            previous: ".flc-pager-previous",
-            next: ".flc-pager-next"
-        },
-        
-        styles: {
-            currentPage: "fl-pager-currentPage",
-            disabled: "fl-pager-disabled"
-        },
-        
-        strings: {
-            currentPageIndexMsg: "Current page"
-        }
-    });
-
-    function getColumnDefs(that) {
-        return that.options.columnDefs;
-    }
-
-    fluid.pager.findColumnDef = function (columnDefs, key) {
-        var columnDef = $.grep(columnDefs, function (def) {
-            return def.key === key;
-        })[0];
-        return columnDef;
-    };
-    
-    function getRoots(target, overallThat, index) {
-        var cellRoot = (overallThat.options.dataOffset ? overallThat.options.dataOffset + "." : "");
-        target.shortRoot = index;
-        target.longRoot = cellRoot + target.shortRoot;
-    }
-    
-    function expandPath(EL, shortRoot, longRoot) {
-        if (EL.charAt(0) === "*") {
-            return longRoot + EL.substring(1); 
-        } else {
-            return EL.replace("*", shortRoot);
-        }
-    }
-    
-    fluid.pager.fetchValue = function (that, dataModel, index, valuebinding, roots) {
-        getRoots(roots, that, index);
-
-        var path = expandPath(valuebinding, roots.shortRoot, roots.longRoot);
-        return fluid.get(dataModel, path);
-    };
-    
-    fluid.pager.basicSorter = function (overallThat, model) {        
-        var dataModel = overallThat.options.dataModel;
-        var roots = {};
-        var columnDefs = getColumnDefs(overallThat);
-        var columnDef = fluid.pager.findColumnDef(columnDefs, model.sortKey);
-        var sortrecs = [];
-        for (var i = 0; i < model.totalRange; ++i) {
-            sortrecs[i] = {
-                index: i,
-                value: fluid.pager.fetchValue(overallThat, dataModel, i, columnDef.valuebinding, roots)
-            };
-        }
-        function sortfunc(arec, brec) {
-            var a = arec.value;
-            var b = brec.value;
-            return a === b ? 0 : (a > b ? model.sortDir : -model.sortDir); 
-        }
-        sortrecs.sort(sortfunc);
-        return fluid.transform(sortrecs, function (row) {
-            return row.index;
-        });
-    };
-
-    
-    fluid.pager.directModelFilter = function (model, pagerModel, perm) {
-        var togo = [];
-        var limit = fluid.pager.computePageLimit(pagerModel);
-        for (var i = pagerModel.pageIndex * pagerModel.pageSize; i < limit; ++i) {
-            var index = perm ? perm[i] : i;
-            togo[togo.length] = {index: index, row: model[index]};
-        }
-        return togo;
-    };
-    
-    function expandVariables(value, opts) {
-        var togo = "";
-        var index = 0;
-        while (true) {
-            var nextindex = value.indexOf("${", index);
-            if (nextindex === -1) {
-                togo += value.substring(index);
-                break;
-            } else {
-                togo += value.substring(index, nextindex);
-                var endi = value.indexOf("}", nextindex + 2);
-                var EL = value.substring(nextindex + 2, endi);
-                if (EL === "VALUE") {
-                    EL = opts.EL;
-                } else {
-                    EL = expandPath(EL, opts.shortRoot, opts.longRoot);
-                }
-                var val = fluid.get(opts.dataModel, EL);
-                togo += val;
-                index = endi + 1;
-            }
-        }
-        return togo;
-    }
-   
-    function expandPaths(target, tree, opts) {
-        for (var i in tree) {
-            var val = tree[i];
-            if (val === fluid.VALUE) {
-                if (i === "valuebinding") {
-                    target[i] = opts.EL;
-                } else {
-                    target[i] = {"valuebinding" : opts.EL};
-                }
-            } else if (i === "valuebinding") {
-                target[i] = expandPath(tree[i], opts);
-            } else if (typeof (val) === 'object') {
-                target[i] = val.length !== undefined ? [] : {};
-                expandPaths(target[i], val, opts);
-            } else if (typeof (val) === 'string') {
-                target[i] = expandVariables(val, opts);
-            } else {
-                target[i] = tree[i];
-            }
-        }
-        return target;
-    }
-   
-   // sets opts.EL, returns ID
-    function iDforColumn(columnDef, opts) {
-        var options = opts.options;
-        var EL = columnDef.valuebinding;
-        var key = columnDef.key;
-        if (!EL) {
-            fluid.fail("Error in definition for column with key " + key + ": valuebinding is not set");
-        }
-        opts.EL = expandPath(EL, opts.shortRoot, opts.longRoot);
-        if (!key) {
-            var segs = fluid.model.parseEL(EL);
-            key = segs[segs.length - 1];
-        }
-        var ID = (options.keyPrefix ? options.keyPrefix : "") + key;
-        return ID;
-    }
-   
-    function expandColumnDefs(filteredRow, opts) {
-        var tree = fluid.transform(opts.columnDefs, function (columnDef) {
-            var ID = iDforColumn(columnDef, opts);
-            var togo;
-            if (!columnDef.components) {
-                return {
-                    ID: ID,
-                    valuebinding: opts.EL
-                };
-            } else if (typeof columnDef.components === 'function') {
-                togo = columnDef.components(filteredRow.row, filteredRow.index);
-            } else {
-                togo = columnDef.components;
-            }
-            togo = expandPaths({}, togo, opts);
-            togo.ID = ID;
-            return togo;
-        });
-        return tree;
-    }
-   
-    function fetchModel(overallThat) {
-        return fluid.get(overallThat.options.dataModel, 
-            overallThat.options.dataOffset);
-    }
-   
-    
-    function bigHeaderForKey(key, opts) {
-        var id = opts.options.renderOptions.idMap["header:" + key];
-        var smallHeader = fluid.jById(id);
-        if (smallHeader.length === 0) {
-            return null;
-        }
-        var headerSortStylisticOffset = opts.overallOptions.selectors.headerSortStylisticOffset;
-        var bigHeader = fluid.findAncestor(smallHeader, function (element) {
-            return $(element).is(headerSortStylisticOffset); 
-        });
-        return bigHeader;
-    }
-   
-    function setSortHeaderClass(styles, element, sort) {
-        element = $(element);
-        element.removeClass(styles.ascendingHeader);
-        element.removeClass(styles.descendingHeader);
-        if (sort !== 0) {
-            element.addClass(sort === 1 ? styles.ascendingHeader : styles.descendingHeader);
-            //aria-sort property are specified in the w3 WAI spec, ascending, descending, none, other.
-            //since pager currently uses ascending and descending, we do not support the others.
-            //http://www.w3.org/WAI/PF/aria/states_and_properties#aria-sort
-            element.attr('aria-sort', sort === 1 ? 'ascending' : 'descending'); 
-        }
-    }
-    
-    function isCurrentColumnSortable(columnDefs, model) {
-        var columnDef = model.sortKey ? fluid.pager.findColumnDef(columnDefs, model.sortKey) : null;
-        return columnDef ? columnDef.sortable : false;
-    }
-    
-    function setModelSortHeaderClass(newModel, opts) {
-        var styles = opts.overallOptions.styles;
-        var sort = isCurrentColumnSortable(opts.columnDefs, newModel) ? newModel.sortDir : 0;
-        setSortHeaderClass(styles, bigHeaderForKey(newModel.sortKey, opts), sort);
-    }
-   
-    function fireModelChange(that, newModel, forceUpdate) {
-        computePageCount(newModel);
-        if (newModel.pageIndex >= newModel.pageCount) {
-            newModel.pageIndex = newModel.pageCount - 1;
-        }
-        if (forceUpdate || newModel.pageIndex !== that.model.pageIndex || newModel.pageSize !== that.model.pageSize || newModel.sortKey !== that.model.sortKey ||
-                newModel.sortDir !== that.model.sortDir) {
-            var sorted = isCurrentColumnSortable(getColumnDefs(that), newModel) ? 
-                that.options.sorter(that, newModel) : null;
-            that.permutation = sorted;
-            that.events.onModelChange.fire(newModel, that.model, that);
-            fluid.model.copyModel(that.model, newModel);
-        }
-    }
-
-    function generateColumnClick(overallThat, columnDef, opts) {
-        return function () {
-            if (columnDef.sortable === true) {
-                var model = overallThat.model;
-                var newModel = fluid.copy(model);
-                var styles = overallThat.options.styles;
-                var oldKey = model.sortKey;
-                if (columnDef.key !== model.sortKey) {
-                    newModel.sortKey = columnDef.key;
-                    newModel.sortDir = 1;
-                    var oldBig = bigHeaderForKey(oldKey, opts);
-                    if (oldBig) {
-                        setSortHeaderClass(styles, oldBig, 0);
-                    }
-                } else if (newModel.sortKey === columnDef.key) {
-                    newModel.sortDir = -1 * newModel.sortDir;
-                } else {
-                    return false;
-                }
-                newModel.pageIndex = 0;
-                fireModelChange(overallThat, newModel, true);
-                setModelSortHeaderClass(newModel, opts);                
-            }
-            return false;
-        };
-    }
-   
-    function fetchHeaderDecorators(decorators, columnDef) {
-        return decorators[columnDef.sortable ? "sortableHeader" : "unsortableHeader"];
-    }
-   
-    function generateHeader(overallThat, newModel, columnDefs, opts) {
-        var sortableColumnTxt = opts.options.strings.sortableColumnText;
-        if (newModel.sortDir === 1) {
-            sortableColumnTxt = opts.options.strings.sortableColumnTextAsc;
-        } else if (newModel.sortDir === -1) {
-            sortableColumnTxt = opts.options.strings.sortableColumnTextDesc;
-        }
-
-        return {
-            children:  
-                fluid.transform(columnDefs, function (columnDef) {
-                return {
-                    ID: iDforColumn(columnDef, opts),
-                    value: columnDef.label,
-                    decorators: [ 
-                        {"jQuery": ["click", generateColumnClick(overallThat, columnDef, opts)]},
-                        {identify: "header:" + columnDef.key},
-                        {type: "attrs", attributes: { title: (columnDef.key === newModel.sortKey) ? sortableColumnTxt : opts.options.strings.sortableColumnText}}
-                    ].concat(fetchHeaderDecorators(opts.overallOptions.decorators, columnDef))
-                };
-            })
-        };
-    }
-   
-    /** A body renderer implementation which uses the Fluid renderer to render a table section **/
-   
-    fluid.pager.selfRender = function (overallThat, inOptions) {
-        var that = fluid.initView("fluid.pager.selfRender", overallThat.container, inOptions);
-        var options = that.options;
-        options.renderOptions.idMap = options.renderOptions.idMap || {};
-        var idMap = options.renderOptions.idMap;
-        var root = that.locate("root");
-        var template = fluid.selfRender(root, {}, options.renderOptions);
-        root.addClass(options.styles.root);
-        var columnDefs = getColumnDefs(overallThat);
-        var expOpts = {options: options, columnDefs: columnDefs, overallOptions: overallThat.options, dataModel: overallThat.options.dataModel, idMap: idMap};
-        var directModel = fetchModel(overallThat);
-
-        return {
-            returnedOptions: {
-                listeners: {
-                    onModelChange: function (newModel, oldModel) {
-                        var filtered = overallThat.options.modelFilter(directModel, newModel, overallThat.permutation);
-                        var tree = fluid.transform(filtered, 
-                            function (filteredRow) {
-                                getRoots(expOpts, overallThat, filteredRow.index);
-                                if (columnDefs === "explode") {
-                                    return fluid.explode(filteredRow.row, expOpts.longRoot);
-                                } else if (columnDefs.length) {
-                                    return expandColumnDefs(filteredRow, expOpts);
-                                }
-                            });
-                        var fullTree = {};
-                        fullTree[options.row] = tree;
-                        if (typeof (columnDefs) === "object") {
-                            fullTree[options.header] = generateHeader(overallThat, newModel, columnDefs, expOpts);
-                        }
-                        options.renderOptions = options.renderOptions || {};
-                        options.renderOptions.model = expOpts.dataModel;
-                        fluid.reRender(template, root, fullTree, options.renderOptions);
-                        setModelSortHeaderClass(newModel, expOpts); // TODO, should this not be actually renderable?
-                    }
-                }
-            }
-        };
-    };
-
-    fluid.defaults("fluid.pager.selfRender", {
-        selectors: {
-            root: ".flc-pager-body-template"
-        },
-        
-        styles: {
-            root: "fl-pager"
-        },
-        
-        keyStrategy: "id",
-        keyPrefix: "",
-        row: "row:",
-        header: "header:",
-        
-        strings: {
-            sortableColumnText: "Select to sort",
-            sortableColumnTextDesc: "Select to sort in ascending, currently in descending order.",
-            sortableColumnTextAsc: "Select to sort in descending, currently in ascending order."
-        },
-
-        // Options passed upstream to the renderer
-        renderOptions: {}
-    });
-
-    fluid.pager.summaryAria = function (element) {
-        element.attr({
-            "aria-relevant": "all",
-            "aria-atomic": "false",
-            "aria-live": "assertive",
-            "role": "status"
-        });
-    };
-
-    fluid.pager.summary = function (dom, options) {
-        var node = dom.locate("summary");
-        fluid.pager.summaryAria(node);
-        return {
-            returnedOptions: {
-                listeners: {
-                    onModelChange: function (newModel, oldModel) {
-                        var text = fluid.stringTemplate(options.message, {
-                            first: newModel.pageIndex * newModel.pageSize + 1,
-                            last: fluid.pager.computePageLimit(newModel),
-                            total: newModel.totalRange,
-                            currentPage: newModel.pageIndex + 1
-                        });
-                        if (node.length > 0) {
-                            node.text(text);
-                        }
-                    }
-                }
-            }
-        };
-    };
-    
-    fluid.pager.directPageSize = function (that) {
-        var node = that.locate("pageSize");
-        if (node.length > 0) {
-            that.events.onModelChange.addListener(
-                function (newModel, oldModel) {
-                    if (node.val() !== newModel.pageSize) {
-                        node.val(newModel.pageSize);
-                    }
-                }
-            );
-            node.change(function () {
-                that.events.initiatePageSizeChange.fire(node.val());
-            });
-        }
-    };
-
-
-    fluid.pager.rangeAnnotator = function (that, options) {
-        var roots = {};
-        that.events.onRenderPageLinks.addListener(function (tree, newModel) {
-            var column = that.options.annotateColumnRange;
-            var dataModel = that.options.dataModel;
-            // TODO: reaching into another component's options like this is a bit unfortunate
-            var columnDefs = getColumnDefs(that);
-
-            if (!column || !dataModel || !columnDefs) {
-                return;
-            }
-            var columnDef = fluid.pager.findColumnDef(columnDefs, column);
-            
-            function fetchValue(index) {
-                index = that.permutation ? that.permutation[index] : index;
-                return fluid.pager.fetchValue(that, dataModel, index, columnDef.valuebinding, roots);
-            }
-            var tModel = {};
-            fluid.model.copyModel(tModel, newModel);
-            
-            fluid.transform(tree, function (cell) {
-                if (cell.ID === "page-link:link") {
-                    var page = cell.pageIndex;
-                    var start = page * tModel.pageSize;
-                    tModel.pageIndex = page;
-                    var limit = fluid.pager.computePageLimit(tModel);
-                    var iValue = fetchValue(start);
-                    var lValue = fetchValue(limit - 1);
-                    
-                    var tooltipOpts = fluid.copy(that.options.tooltip.options) || {};
-                    
-                    if (!tooltipOpts.content) {
-                        tooltipOpts.content = function () { 
-                            return fluid.stringTemplate(that.options.markup.rangeAnnotation, {
-                                first: iValue,
-                                last: lValue
-                            });
-                        };
-                    }
-                    
-                    if (!cell.current) {
-                        var decorators = [
-                            {
-                                type: "fluid",
-                                func: that.options.tooltip.type,
-                                options: tooltipOpts
-                            },
-                            {
-                                identify: page
-                            }
-                        ];
-                        cell.decorators = cell.decorators.concat(decorators);
-                    }
-                }
-            });
-        });
-    };
-
-    /*******************
-     * Pager Component *
-     *******************/
-    
-    fluid.pagerImpl = function (container, options) {
-        var that = fluid.initView("fluid.pager", container, options);
-                
-        that.container.attr("role", "application");
-        
-        that.events.initiatePageChange.addListener(
-            function (arg) {
-                var newModel = fluid.copy(that.model);
-                if (arg.relativePage !== undefined) {
-                    newModel.pageIndex = that.model.pageIndex + arg.relativePage;
-                } else {
-                    newModel.pageIndex = arg.pageIndex;
-                }
-                if (newModel.pageIndex === undefined || newModel.pageIndex < 0) {
-                    newModel.pageIndex = 0;
-                }
-                fireModelChange(that, newModel, arg.forceUpdate);
-            }
-        );
-        
-        that.events.initiatePageSizeChange.addListener(
-            function (arg) {
-                var newModel = fluid.copy(that.model);
-                newModel.pageSize = arg;
-                fireModelChange(that, newModel);     
-            }
-        );
-
-        // Setup the top and bottom pager bars.
-        var pagerBarElement = that.locate("pagerBar");
-        if (pagerBarElement.length > 0) {
-            that.pagerBar = fluid.initSubcomponent(that, "pagerBar", 
-                [that.events, pagerBarElement, fluid.COMPONENT_OPTIONS, that.options.strings]);
-        }
-        
-        var pagerBarSecondaryElement = that.locate("pagerBarSecondary");
-        if (pagerBarSecondaryElement.length > 0) {
-            that.pagerBarSecondary = fluid.initSubcomponent(that, "pagerBar",
-                [that.events, pagerBarSecondaryElement, fluid.COMPONENT_OPTIONS, that.options.strings]);
-        }
- 
-        that.bodyRenderer = fluid.initSubcomponent(that, "bodyRenderer", [that, fluid.COMPONENT_OPTIONS]);
-        
-        that.summary = fluid.initSubcomponent(that, "summary", [that.dom, fluid.COMPONENT_OPTIONS]);
-        
-        that.pageSize = fluid.initSubcomponent(that, "pageSize", [that]);
-        
-        that.rangeAnnotator = fluid.initSubcomponent(that, "rangeAnnotator", [that, fluid.COMPONENT_OPTIONS]);
- 
-        that.model = fluid.copy(that.options.model);
-        
-        var dataModel = fetchModel(that);
-        if (dataModel) {
-            that.model.totalRange = dataModel.length;
-        }
-        if (that.model.totalRange === undefined) {
-            if (!that.pagerBar) {
-                fluid.fail("Error in Pager configuration - cannot determine total range, " +
-                    " since not configured in model.totalRange and no PagerBar is configured");
-            }
-            that.model = that.pagerBar.pageList.defaultModel;
-        }
-        that.applier = fluid.makeChangeApplier(that.model);
-
-        that.events.initiatePageChange.fire({pageIndex: that.model.pageIndex ? that.model.pageIndex : 0, 
-            forceUpdate: true});
-
-        return that;
-    };
-    
-    fluid.defaults("fluid.pager", {
-        mergePolicy: {
-            dataModel: "preserve",
-            model: "preserve"
-        },
-        pagerBar: {
-            type: "fluid.pager.pagerBar"
-        },
-        
-        summary: {type: "fluid.pager.summary", options: {
-            message: "Viewing page %currentPage. Showing records %first - %last of %total items." 
-        }},
-        
-        pageSize: {
-            type: "fluid.pager.directPageSize"
-        },
-        
-        modelFilter: fluid.pager.directModelFilter,
-        
-        sorter: fluid.pager.basicSorter,
-        
-        bodyRenderer: {
-            type: "fluid.pager.selfRender"
-        },
-        
-        model: {
-            pageIndex: undefined,
-            pageSize: 10,
-            totalRange: undefined
-        },
-        
-        dataModel: undefined,
-        // Offset of the tree's "main" data from the overall dataModel root
-        dataOffset: "",
-        
-        // strategy for generating a tree row, either "explode" or an array of columnDef objects
-        columnDefs: [], // [{key: "columnName", valuebinding: "*.valuePath", sortable: true/false}]
-        
-        annotateColumnRange: undefined, // specify a "key" from the columnDefs
-        
-        tooltip: {
-            type: "fluid.tooltip"
-        },
-        
-        rangeAnnotator: {
-            type: "fluid.pager.rangeAnnotator"
-        },
-        
-        selectors: {
-            pagerBar: ".flc-pager-top",
-            pagerBarSecondary: ".flc-pager-bottom",
-            summary: ".flc-pager-summary",
-            pageSize: ".flc-pager-page-size",
-            headerSortStylisticOffset: ".flc-pager-sort-header"
-        },
-        
-        styles: {
-            ascendingHeader: "fl-pager-asc",
-            descendingHeader: "fl-pager-desc"
-        },
-        
-        decorators: {
-            sortableHeader: [],
-            unsortableHeader: []
-        },
-        
-        strings: {
-            last: " (last)"
-        },
-        
-        events: {
-            initiatePageChange: null,
-            initiatePageSizeChange: null,
-            onModelChange: null,
-            onRenderPageLinks: null
-        },
-        
-        markup: {
-            rangeAnnotation: "<b> %first </b><br/>&mdash;<br/><b> %last </b>"
-        }
-    });
-})(jQuery, fluid_1_4);
 /**
  * jQuery.ScrollTo
  * Copyright (c) 2007-2009 Ariel Flesler - aflesler(at)gmail(dot)com | http://flesler.blogspot.com
@@ -25729,11 +24693,6 @@ var fluid_1_4 = fluid_1_4 || {};
         return that;
     };
     
-    fluid.uploader.html5Strategy.createFileUploadXHR = function () {
-        var xhr = new XMLHttpRequest();
-        return xhr;
-    };
-    
     fluid.uploader.html5Strategy.monitorFileUploadXHR = function (file, events, xhr) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -25753,17 +24712,13 @@ var fluid_1_4 = fluid_1_4 || {};
         xhr.upload.onprogress = function (pe) {
             events.onFileProgress.fire(file, progressTracker.getChunkSize(pe.loaded), pe.total);
         };
-        
-        return xhr;
     };
     
-    // Set additional POST parameters for xhr  
-    var setPostParams =  function (formData, postParams) {
-        $.each(postParams,  function (key, value) {
-            formData.append(key, value);
-        });
-    };
     
+    /*************************************
+     * HTML5 Strategy's remote behaviour *
+     *************************************/
+     
     fluid.uploader.html5Strategy.remote = function (queue, options) {
         var that = fluid.initLittleComponent("fluid.uploader.html5Strategy.remote", options);
         that.queue = queue;
@@ -25778,10 +24733,9 @@ var fluid_1_4 = fluid_1_4 || {};
         
         that.uploadFile = function (file) {
             that.events.onFileStart.fire(file);
-            var xhr = that.createXHR();
-            var formData = that.createFormData();
-            that.currentXHR = fluid.uploader.html5Strategy.monitorFileUploadXHR(file, that.events, xhr);
-            that.doUpload(file, that.queueSettings, that.currentXHR, formData);            
+            that.currentXHR = that.createXHR();
+            fluid.uploader.html5Strategy.monitorFileUploadXHR(file, that.events, that.currentXHR);
+            that.fileSender.send(file, that.queueSettings, that.currentXHR);            
         };
 
         that.stop = function () {
@@ -25799,10 +24753,13 @@ var fluid_1_4 = fluid_1_4 || {};
         argumentMap: {
             options: 1  
         },                
+        components: {
+            fileSender: {
+                type: "fluid.uploader.html5Strategy.fileSender"
+            }
+        },
         invokers: {
-            doUpload: "fluid.uploader.html5Strategy.doUpload",
-            createXHR: "fluid.uploader.html5Strategy.createFileUploadXHR", 
-            createFormData: "fluid.uploader.html5Strategy.createFormData"
+            createXHR: "fluid.uploader.html5Strategy.createXHR"
         }
     });
     
@@ -25813,27 +24770,60 @@ var fluid_1_4 = fluid_1_4 || {};
             fluid.COMPONENT_OPTIONS
         ]
     });
-    
-    var CRLF = "\r\n";
+
+
+    fluid.uploader.html5Strategy.createXHR = function () {
+        return new XMLHttpRequest();
+    };
     
     fluid.uploader.html5Strategy.createFormData = function () {
-        var formData = new FormData();
-        return formData;
+        return new FormData();
     };
     
-    /** 
-     * Firefox 4  implementation.  FF4 has implemented a FormData function which
-     * conveniently provides easy construct of set key/value pairs representing 
-     * form fields and their values.  The FormData is then easily sent using the 
-     * XMLHttpRequest send() method.  
-     */
-    fluid.uploader.html5Strategy.doFormDataUpload = function (file, queueSettings, xhr, formData) {
-        formData.append("file", file);
-        setPostParams(formData, queueSettings.postParams);
-        xhr.open("POST", queueSettings.uploadURL, true);
-        xhr.send(formData);
+    // Set additional POST parameters for xhr  
+    var setPostParams =  function (formData, postParams) {
+        $.each(postParams,  function (key, value) {
+            formData.append(key, value);
+        });
     };
     
+    /*******************************************************
+     * HTML5 FormData Sender, used by most modern browsers *
+     *******************************************************/
+    
+    fluid.defaults("fluid.uploader.html5Strategy.formDataSender", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        finalInitFunction: "fluid.uploader.html5Strategy.formDataSender.init",
+        invokers: {
+            createFormData: "fluid.uploader.html5Strategy.createFormData"
+        }
+    });
+    
+    fluid.uploader.html5Strategy.formDataSender.init = function (that) {
+        /**
+         * Uploads the file using the HTML5 FormData object.
+         */
+        that.send = function (file, queueSettings, xhr) {
+            var formData = that.createFormData();
+            formData.append("file", file);
+            setPostParams(formData, queueSettings.postParams);
+            xhr.open("POST", queueSettings.uploadURL, true);
+            xhr.send(formData);
+            return formData;
+        };
+    };
+    
+    fluid.demands("fluid.uploader.html5Strategy.fileSender", [
+        "fluid.uploader.html5Strategy.remote", 
+        "fluid.browser.supportsFormData"
+    ], {
+        funcName: "fluid.uploader.html5Strategy.formDataSender"
+    });
+    
+    /********************************************
+     * Raw MIME Sender, required by Firefox 3.6 *
+     ********************************************/
+     
     fluid.uploader.html5Strategy.generateMultipartBoundary = function () {
         var boundary = "---------------------------";
         boundary += Math.floor(Math.random() * 32768);
@@ -25843,6 +24833,7 @@ var fluid_1_4 = fluid_1_4 || {};
     };
     
     fluid.uploader.html5Strategy.generateMultiPartContent = function (boundary, file) {
+        var CRLF = "\r\n";
         var multipart = "";
         multipart += "--" + boundary + CRLF;
         multipart += "Content-Disposition: form-data;" +
@@ -25855,37 +24846,34 @@ var fluid_1_4 = fluid_1_4 || {};
         return multipart;
     };
     
-    /*
-     * Create the multipart/form-data content by hand to send the file
-     */
-    fluid.uploader.html5Strategy.doManualMultipartUpload = function (file, queueSettings, xhr) {
-        var boundary =  fluid.uploader.html5Strategy.generateMultipartBoundary();
-        var multipart = fluid.uploader.html5Strategy.generateMultiPartContent(boundary, file);
-        
-        xhr.open("POST", queueSettings.uploadURL, true);
-        xhr.setRequestHeader("Content-Type", "multipart/form-data; boundary=" + boundary);
-        xhr.sendAsBinary(multipart);
+    fluid.defaults("fluid.uploader.html5Strategy.rawMIMESender", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        finalInitFunction: "fluid.uploader.html5Strategy.rawMIMESender.init"
+    });
+    
+    fluid.uploader.html5Strategy.rawMIMESender.init = function (that) {
+        /**
+         * Uploads the file by manually creating the multipart/form-data request. Required by Firefox 3.6.
+         */
+        that.send = function (file, queueSettings, xhr) {
+            var boundary =  fluid.uploader.html5Strategy.generateMultipartBoundary();
+            var multipart = fluid.uploader.html5Strategy.generateMultiPartContent(boundary, file);
+            xhr.open("POST", queueSettings.uploadURL, true);
+            xhr.setRequestHeader("Content-Type", "multipart/form-data; boundary=" + boundary);
+            xhr.sendAsBinary(multipart);
+            return multipart;
+        };
     };
     
-    // Default configuration for older browsers that don't support FormData
-    fluid.demands("fluid.uploader.html5Strategy.doUpload", "fluid.uploader.html5Strategy.remote", {
-        funcName: "fluid.uploader.html5Strategy.doManualMultipartUpload",
-        args: ["@0", "@1", "@2"]
+    fluid.demands("fluid.uploader.html5Strategy.fileSender", "fluid.uploader.html5Strategy.remote", {
+        funcName: "fluid.uploader.html5Strategy.rawMIMESender"
     });
-    
-    fluid.demands("fluid.uploader.html5Strategy.createFileUploadXHR", "fluid.uploader.html5Strategy.remote", {
-        funcName: "fluid.uploader.html5Strategy.createFileUploadXHR"
-    });    
-    
-    // Configuration for FF4, Chrome, and Safari 4+, all of which support FormData correctly.
-    fluid.demands("fluid.uploader.html5Strategy.doUpload", [
-        "fluid.uploader.html5Strategy.remote", 
-        "fluid.browser.supportsFormData"
-    ], {
-        funcName: "fluid.uploader.html5Strategy.doFormDataUpload",
-        args: ["@0", "@1", "@2", "@3"]
-    });
-    
+
+
+    /************************************
+     * HTML5 Strategy's Local Behaviour *
+     ************************************/
+     
     fluid.uploader.html5Strategy.local = function (queue, legacyBrowserFileLimit, options) {
         var that = fluid.initLittleComponent("fluid.uploader.html5Strategy.local", options);
         that.queue = queue;
@@ -26162,6 +25150,7 @@ var fluid_1_4 = fluid_1_4 || {};
     var stopDemo = function (that) {
         var file = that.demoState.currentFile;
         file.filestatus = fluid.uploader.fileStatusConstants.CANCELLED;
+        that.queue.shouldStop = true;
         
         // In SWFUpload's world, pausing is a combinination of an UPLOAD_STOPPED error and a complete.
         that.events.onFileError.fire(file, 
@@ -26306,7 +25295,1043 @@ var fluid_1_4 = fluid_1_4 || {};
         ppt: "application/vnd.ms-powerpoint",
         pptx: "application/vnd.ms-powerpoint"
     };    
-})(fluid_1_4);/*
+})(fluid_1_4);/* Copyright (c) 2006 Brandon Aaron (http://brandonaaron.net)
+ * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php) 
+ * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
+ *
+ * $LastChangedDate$
+ * $Rev$
+ *
+ * Version 2.1
+ */
+
+(function($){
+
+/**
+ * The bgiframe is chainable and applies the iframe hack to get 
+ * around zIndex issues in IE6. It will only apply itself in IE 
+ * and adds a class to the iframe called 'bgiframe'. The iframe
+ * is appeneded as the first child of the matched element(s) 
+ * with a tabIndex and zIndex of -1.
+ * 
+ * By default the plugin will take borders, sized with pixel units,
+ * into account. If a different unit is used for the border's width,
+ * then you will need to use the top and left settings as explained below.
+ *
+ * NOTICE: This plugin has been reported to cause perfromance problems
+ * when used on elements that change properties (like width, height and
+ * opacity) a lot in IE6. Most of these problems have been caused by 
+ * the expressions used to calculate the elements width, height and 
+ * borders. Some have reported it is due to the opacity filter. All 
+ * these settings can be changed if needed as explained below.
+ *
+ * @example $('div').bgiframe();
+ * @before <div><p>Paragraph</p></div>
+ * @result <div><iframe class="bgiframe".../><p>Paragraph</p></div>
+ *
+ * @param Map settings Optional settings to configure the iframe.
+ * @option String|Number top The iframe must be offset to the top
+ * 		by the width of the top border. This should be a negative 
+ *      number representing the border-top-width. If a number is 
+ * 		is used here, pixels will be assumed. Otherwise, be sure
+ *		to specify a unit. An expression could also be used. 
+ * 		By default the value is "auto" which will use an expression 
+ * 		to get the border-top-width if it is in pixels.
+ * @option String|Number left The iframe must be offset to the left
+ * 		by the width of the left border. This should be a negative 
+ *      number representing the border-left-width. If a number is 
+ * 		is used here, pixels will be assumed. Otherwise, be sure
+ *		to specify a unit. An expression could also be used. 
+ * 		By default the value is "auto" which will use an expression 
+ * 		to get the border-left-width if it is in pixels.
+ * @option String|Number width This is the width of the iframe. If
+ *		a number is used here, pixels will be assume. Otherwise, be sure
+ * 		to specify a unit. An experssion could also be used.
+ *		By default the value is "auto" which will use an experssion
+ * 		to get the offsetWidth.
+ * @option String|Number height This is the height of the iframe. If
+ *		a number is used here, pixels will be assume. Otherwise, be sure
+ * 		to specify a unit. An experssion could also be used.
+ *		By default the value is "auto" which will use an experssion
+ * 		to get the offsetHeight.
+ * @option Boolean opacity This is a boolean representing whether or not
+ * 		to use opacity. If set to true, the opacity of 0 is applied. If
+ *		set to false, the opacity filter is not applied. Default: true.
+ * @option String src This setting is provided so that one could change 
+ *		the src of the iframe to whatever they need.
+ *		Default: "javascript:false;"
+ *
+ * @name bgiframe
+ * @type jQuery
+ * @cat Plugins/bgiframe
+ * @author Brandon Aaron (brandon.aaron@gmail.com || http://brandonaaron.net)
+ */
+$.fn.bgIframe = $.fn.bgiframe = function(s) {
+	// This is only for IE6
+	if ( $.browser.msie && parseInt($.browser.version) <= 6 ) {
+		s = $.extend({
+			top     : 'auto', // auto == .currentStyle.borderTopWidth
+			left    : 'auto', // auto == .currentStyle.borderLeftWidth
+			width   : 'auto', // auto == offsetWidth
+			height  : 'auto', // auto == offsetHeight
+			opacity : true,
+			src     : 'javascript:false;'
+		}, s || {});
+		var prop = function(n){return n&&n.constructor==Number?n+'px':n;},
+		    html = '<iframe class="bgiframe"frameborder="0"tabindex="-1"src="'+s.src+'"'+
+		               'style="display:block;position:absolute;z-index:-1;'+
+			               (s.opacity !== false?'filter:Alpha(Opacity=\'0\');':'')+
+					       'top:'+(s.top=='auto'?'expression(((parseInt(this.parentNode.currentStyle.borderTopWidth)||0)*-1)+\'px\')':prop(s.top))+';'+
+					       'left:'+(s.left=='auto'?'expression(((parseInt(this.parentNode.currentStyle.borderLeftWidth)||0)*-1)+\'px\')':prop(s.left))+';'+
+					       'width:'+(s.width=='auto'?'expression(this.parentNode.offsetWidth+\'px\')':prop(s.width))+';'+
+					       'height:'+(s.height=='auto'?'expression(this.parentNode.offsetHeight+\'px\')':prop(s.height))+';'+
+					'"/>';
+		return this.each(function() {
+			if ( $('> iframe.bgiframe', this).length == 0 )
+				this.insertBefore( document.createElement(html), this.firstChild );
+		});
+	}
+	return this;
+};
+
+// Add browser.version if it doesn't exist
+if (!$.browser.version)
+	$.browser.version = navigator.userAgent.toLowerCase().match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/)[1];
+
+})(jQuery);/*
+Copyright 2008-2009 University of Cambridge
+Copyright 2008-2009 University of Toronto
+Copyright 2010-2011 OCAD University
+Copyright 2010 Lucendo Development Ltd.
+
+Licensed under the Educational Community License (ECL), Version 2.0 or the New
+BSD license. You may not use this file except in compliance with one these
+Licenses.
+
+You may obtain a copy of the ECL 2.0 License and BSD License at
+https://github.com/fluid-project/infusion/raw/master/Infusion-LICENSE.txt
+*/
+
+// Declare dependencies
+/*global fluid_1_4:true, jQuery*/
+
+// JSLint options 
+/*jslint white: true, funcinvoke: true, undef: true, newcap: true, nomen: true, regexp: true, bitwise: true, browser: true, forin: true, maxerr: 100, indent: 4 */
+
+var fluid_1_4 = fluid_1_4 || {};
+
+(function ($, fluid) {
+
+    /******************
+     * Pager Bar View *
+     ******************/
+
+    
+    function updateStyles(pageListThat, newModel, oldModel) {
+        if (!pageListThat.pageLinks) {
+            return;
+        }
+        if (oldModel.pageIndex !== undefined) {
+            var oldLink = pageListThat.pageLinks.eq(oldModel.pageIndex);
+            oldLink.removeClass(pageListThat.options.styles.currentPage);
+        }
+        var pageLink = pageListThat.pageLinks.eq(newModel.pageIndex);
+        pageLink.addClass(pageListThat.options.styles.currentPage); 
+    }
+    
+    function bindLinkClick(link, events, eventArg) {
+        link.unbind("click.fluid.pager");
+        link.bind("click.fluid.pager", function () {
+            events.initiatePageChange.fire(eventArg);
+        });
+    }
+    
+    // 10 -> 1, 11 -> 2
+    function computePageCount(model) {
+        model.pageCount = Math.max(1, Math.floor((model.totalRange - 1) / model.pageSize) + 1);
+    }
+
+    fluid.pager = function () {
+        return fluid.pagerImpl.apply(null, arguments);
+    };
+    
+    fluid.pager.computePageLimit = function (model) {
+        return Math.min(model.totalRange, (model.pageIndex + 1) * model.pageSize);
+    };
+
+    fluid.pager.directPageList = function (container, events, options) {
+        var that = fluid.initView("fluid.pager.directPageList", container, options);
+        that.pageLinks = that.locate("pageLinks");
+        for (var i = 0; i < that.pageLinks.length; ++i) {
+            var pageLink = that.pageLinks.eq(i);
+            bindLinkClick(pageLink, events, {pageIndex: i});
+        }
+        events.onModelChange.addListener(
+            function (newModel, oldModel) {
+                updateStyles(that, newModel, oldModel);
+            }
+        );
+        that.defaultModel = {
+            pageIndex: undefined,
+            pageSize: 1,
+            totalRange: that.pageLinks.length
+        };
+        return that;
+    };
+    
+    /** Returns an array of size count, filled with increasing integers, 
+     *  starting at 0 or at the index specified by first. 
+     */
+    
+    fluid.iota = function (count, first) {
+        first = first || 0;
+        var togo = [];
+        for (var i = 0; i < count; ++i) {
+            togo[togo.length] = first++;
+        }
+        return togo;
+    };
+    
+    fluid.pager.everyPageStrategy = fluid.iota;
+    
+    fluid.pager.gappedPageStrategy = function (locality, midLocality) {
+        if (!locality) {
+            locality = 3;
+        }
+        if (!midLocality) {
+            midLocality = locality;
+        }
+        return function (count, first, mid) {
+            var togo = [];
+            var j = 0;
+            var lastSkip = false;
+            for (var i = 0; i < count; ++i) {
+                if (i < locality || (count - i - 1) < locality || (i >= mid - midLocality && i <= mid + midLocality)) {
+                    togo[j++] = i;
+                    lastSkip = false;
+                } else if (!lastSkip) {
+                    togo[j++] = -1;
+                    lastSkip = true;
+                }
+            }
+            return togo;
+        };
+    };
+    
+    /**
+     * An impl of a page strategy that will always display same number of page links (including skip place holders). 
+     * @param   endLinkCount    int     The # of elements first and last trunks of elements
+     * @param   midLinkCount    int     The # of elements from beside the selected #
+     * @author  Eric Dalquist
+     */
+    fluid.pager.consistentGappedPageStrategy = function (endLinkCount, midLinkCount) {
+        if (!endLinkCount) {
+            endLinkCount = 1;
+        }
+        if (!midLinkCount) {
+            midLinkCount = endLinkCount;
+        }
+        var endWidth = endLinkCount + 2 + midLinkCount;
+
+        return function (count, first, mid) {
+            var pages = [];
+            var anchoredLeft = mid < endWidth;
+            var anchoredRight = mid >= count - endWidth;
+            var anchoredEndWidth = endWidth + midLinkCount;
+            var midStart = mid - midLinkCount;
+            var midEnd = mid + midLinkCount;
+            var lastSkip = false;
+            
+            for (var page = 0; page < count; page++) {
+                if (page < endLinkCount || // start pages
+                        count - page <= endLinkCount || // end pages
+                        (anchoredLeft && page < anchoredEndWidth) || // pages if no skipped pages between start and mid
+                        (anchoredRight && page >= count - anchoredEndWidth) || // pages if no skipped pages between mid and end
+                        (page >= midStart && page <= midEnd) // pages around the mid
+                        ) {
+                    pages.push(page);
+                    lastSkip = false;
+                } else if (!lastSkip) {
+                    pages.push(-1);
+                    lastSkip = true;
+                }
+            }
+            return pages;
+        };
+    };  
+    
+    fluid.pager.renderedPageList = function (container, events, pagerBarOptions, options, strings) {
+        options = $.extend(true, pagerBarOptions, options);
+        var that = fluid.initView("fluid.pager.renderedPageList", container, options);
+        options = that.options; // pick up any defaults
+        var idMap = {};
+        var renderOptions = {
+            cutpoints: [ 
+                {
+                    id: "page-link:link",
+                    selector: pagerBarOptions.selectors.pageLinks
+                },
+                {
+                    id: "page-link:skip",
+                    selector: pagerBarOptions.selectors.pageLinkSkip
+                }
+            ],
+            idMap: idMap
+        };
+        
+        if (options.linkBody) {
+            renderOptions.cutpoints[renderOptions.cutpoints.length] = {
+                id: "payload-component",
+                selector: options.linkBody
+            };
+        }   
+        
+        var assembleComponent = function (page, isCurrent) {
+            var obj = {
+                ID: "page-link:link",
+                localID: page + 1,
+                value: page + 1,
+                pageIndex: page,
+                decorators: [
+                    {
+                        type: "jQuery",
+                        func: "click", 
+                        args: function (event) {
+                            events.initiatePageChange.fire({pageIndex: page});
+                            event.preventDefault();
+                        }
+                    }
+                ]
+            };
+            
+            if (isCurrent) {
+                obj.current = true;
+                obj.decorators = obj.decorators.concat([
+                    {
+                        type: "addClass",
+                        classes: that.options.styles.currentPage
+                    },
+                    {
+                        type: "jQuery",
+                        func: "attr", 
+                        args: ["aria-label", that.options.strings.currentPageIndexMsg] 
+                    }
+                ]);
+            }
+            
+            return obj;
+        };
+             
+        function pageToComponent(current) {
+            return function (page) {
+                return page === -1 ? {
+                    ID: "page-link:skip"
+                } : assembleComponent(page, page === current);
+            };
+        }
+        
+        var root = that.locate("root");
+        fluid.expectFilledSelector(root, "Error finding root template for fluid.pager.renderedPageList");
+        
+        var template = fluid.selfRender(root, {}, renderOptions);
+        events.onModelChange.addListener(
+            function (newModel, oldModel) {
+                var pages = that.options.pageStrategy(newModel.pageCount, 0, newModel.pageIndex);
+                var pageTree = fluid.transform(pages, pageToComponent(newModel.pageIndex));
+                if (pageTree.length > 1) {
+                    pageTree[pageTree.length - 1].value = pageTree[pageTree.length - 1].value + strings.last;
+                }
+                events.onRenderPageLinks.fire(pageTree, newModel);
+                
+                //Destroys all the tooltips before rerendering the pagelinks.
+                //This will clean up the tooltips, which are all added to the end at the end of the DOM,
+                //and prevent the tooltips from sticking around when using the keyboard to activate
+                //the page links.
+                $.each(idMap, function (key, id) {
+                    var pageLink = fluid.jById(id);
+                    if (pageLink.tooltip) {
+                        pageLink.tooltip("destroy");
+                    }
+                });
+                fluid.reRender(template, root, pageTree, renderOptions);
+                updateStyles(that, newModel, oldModel);
+            }
+        );
+        return that;
+    };
+    
+    fluid.defaults("fluid.pager.renderedPageList", {
+        selectors: {
+            root: ".flc-pager-links"
+        },
+        linkBody: "a",
+        pageStrategy: fluid.pager.everyPageStrategy
+    });
+    
+    var updatePreviousNext = function (that, options, newModel) {
+        if (newModel.pageIndex === 0) {
+            that.previous.addClass(options.styles.disabled);
+        } else {
+            that.previous.removeClass(options.styles.disabled);
+        }
+        
+        if (newModel.pageIndex === newModel.pageCount - 1) {
+            that.next.addClass(options.styles.disabled);
+        } else {
+            that.next.removeClass(options.styles.disabled);
+        }
+    };
+    
+    fluid.pager.previousNext = function (container, events, options) {
+        var that = fluid.initView("fluid.pager.previousNext", container, options);
+        that.previous = that.locate("previous");
+        bindLinkClick(that.previous, events, {relativePage: -1});
+        that.next = that.locate("next");
+        bindLinkClick(that.next, events, {relativePage: +1});
+        events.onModelChange.addListener(
+            function (newModel, oldModel, overallThat) {
+                updatePreviousNext(that, options, newModel);
+            }
+        );
+        return that;
+    };
+
+    fluid.pager.pagerBar = function (events, container, options, strings) {
+        var that = fluid.initView("fluid.pager.pagerBar", container, options);
+        that.pageList = fluid.initSubcomponent(that, "pageList", 
+            [container, events, that.options, fluid.COMPONENT_OPTIONS, strings]);
+        that.previousNext = fluid.initSubcomponent(that, "previousNext", 
+            [container, events, that.options, fluid.COMPONENT_OPTIONS, strings]);
+        
+        return that;
+    };
+
+    
+    fluid.defaults("fluid.pager.pagerBar", {
+            
+        previousNext: {
+            type: "fluid.pager.previousNext"
+        },
+        
+        pageList: {
+            type: "fluid.pager.renderedPageList",
+            options: {
+                pageStrategy: fluid.pager.gappedPageStrategy(3, 1)
+            }
+        },
+        
+        selectors: {
+            pageLinks: ".flc-pager-pageLink",
+            pageLinkSkip: ".flc-pager-pageLink-skip",
+            previous: ".flc-pager-previous",
+            next: ".flc-pager-next"
+        },
+        
+        styles: {
+            currentPage: "fl-pager-currentPage",
+            disabled: "fl-pager-disabled"
+        },
+        
+        strings: {
+            currentPageIndexMsg: "Current page"
+        }
+    });
+
+    function getColumnDefs(that) {
+        return that.options.columnDefs;
+    }
+
+    fluid.pager.findColumnDef = function (columnDefs, key) {
+        var columnDef = $.grep(columnDefs, function (def) {
+            return def.key === key;
+        })[0];
+        return columnDef;
+    };
+    
+    function getRoots(target, overallThat, index) {
+        var cellRoot = (overallThat.options.dataOffset ? overallThat.options.dataOffset + "." : "");
+        target.shortRoot = index;
+        target.longRoot = cellRoot + target.shortRoot;
+    }
+    
+    function expandPath(EL, shortRoot, longRoot) {
+        if (EL.charAt(0) === "*") {
+            return longRoot + EL.substring(1); 
+        } else {
+            return EL.replace("*", shortRoot);
+        }
+    }
+    
+    fluid.pager.fetchValue = function (that, dataModel, index, valuebinding, roots) {
+        getRoots(roots, that, index);
+
+        var path = expandPath(valuebinding, roots.shortRoot, roots.longRoot);
+        return fluid.get(dataModel, path);
+    };
+    
+    fluid.pager.basicSorter = function (overallThat, model) {        
+        var dataModel = overallThat.options.dataModel;
+        var roots = {};
+        var columnDefs = getColumnDefs(overallThat);
+        var columnDef = fluid.pager.findColumnDef(columnDefs, model.sortKey);
+        var sortrecs = [];
+        for (var i = 0; i < model.totalRange; ++i) {
+            sortrecs[i] = {
+                index: i,
+                value: fluid.pager.fetchValue(overallThat, dataModel, i, columnDef.valuebinding, roots)
+            };
+        }
+        function sortfunc(arec, brec) {
+            var a = arec.value;
+            var b = brec.value;
+            return a === b ? 0 : (a > b ? model.sortDir : -model.sortDir); 
+        }
+        sortrecs.sort(sortfunc);
+        return fluid.transform(sortrecs, function (row) {
+            return row.index;
+        });
+    };
+
+    
+    fluid.pager.directModelFilter = function (model, pagerModel, perm) {
+        var togo = [];
+        var limit = fluid.pager.computePageLimit(pagerModel);
+        for (var i = pagerModel.pageIndex * pagerModel.pageSize; i < limit; ++i) {
+            var index = perm ? perm[i] : i;
+            togo[togo.length] = {index: index, row: model[index]};
+        }
+        return togo;
+    };
+    
+    function expandVariables(value, opts) {
+        var togo = "";
+        var index = 0;
+        while (true) {
+            var nextindex = value.indexOf("${", index);
+            if (nextindex === -1) {
+                togo += value.substring(index);
+                break;
+            } else {
+                togo += value.substring(index, nextindex);
+                var endi = value.indexOf("}", nextindex + 2);
+                var EL = value.substring(nextindex + 2, endi);
+                if (EL === "VALUE") {
+                    EL = opts.EL;
+                } else {
+                    EL = expandPath(EL, opts.shortRoot, opts.longRoot);
+                }
+                var val = fluid.get(opts.dataModel, EL);
+                togo += val;
+                index = endi + 1;
+            }
+        }
+        return togo;
+    }
+   
+    function expandPaths(target, tree, opts) {
+        for (var i in tree) {
+            var val = tree[i];
+            if (val === fluid.VALUE) {
+                if (i === "valuebinding") {
+                    target[i] = opts.EL;
+                } else {
+                    target[i] = {"valuebinding" : opts.EL};
+                }
+            } else if (i === "valuebinding") {
+                target[i] = expandPath(tree[i], opts);
+            } else if (typeof (val) === 'object') {
+                target[i] = val.length !== undefined ? [] : {};
+                expandPaths(target[i], val, opts);
+            } else if (typeof (val) === 'string') {
+                target[i] = expandVariables(val, opts);
+            } else {
+                target[i] = tree[i];
+            }
+        }
+        return target;
+    }
+   
+   // sets opts.EL, returns ID
+    function iDforColumn(columnDef, opts) {
+        var options = opts.options;
+        var EL = columnDef.valuebinding;
+        var key = columnDef.key;
+        if (!EL) {
+            fluid.fail("Error in definition for column with key " + key + ": valuebinding is not set");
+        }
+        opts.EL = expandPath(EL, opts.shortRoot, opts.longRoot);
+        if (!key) {
+            var segs = fluid.model.parseEL(EL);
+            key = segs[segs.length - 1];
+        }
+        var ID = (options.keyPrefix ? options.keyPrefix : "") + key;
+        return ID;
+    }
+   
+    function expandColumnDefs(filteredRow, opts) {
+        var tree = fluid.transform(opts.columnDefs, function (columnDef) {
+            var ID = iDforColumn(columnDef, opts);
+            var togo;
+            if (!columnDef.components) {
+                return {
+                    ID: ID,
+                    valuebinding: opts.EL
+                };
+            } else if (typeof columnDef.components === 'function') {
+                togo = columnDef.components(filteredRow.row, filteredRow.index);
+            } else {
+                togo = columnDef.components;
+            }
+            togo = expandPaths({}, togo, opts);
+            togo.ID = ID;
+            return togo;
+        });
+        return tree;
+    }
+   
+    function fetchModel(overallThat) {
+        return fluid.get(overallThat.options.dataModel, 
+            overallThat.options.dataOffset);
+    }
+   
+    
+    function bigHeaderForKey(key, opts) {
+        var id = opts.options.renderOptions.idMap["header:" + key];
+        var smallHeader = fluid.jById(id);
+        if (smallHeader.length === 0) {
+            return null;
+        }
+        var headerSortStylisticOffset = opts.overallOptions.selectors.headerSortStylisticOffset;
+        var bigHeader = fluid.findAncestor(smallHeader, function (element) {
+            return $(element).is(headerSortStylisticOffset); 
+        });
+        return bigHeader;
+    }
+   
+    function setSortHeaderClass(styles, element, sort) {
+        element = $(element);
+        element.removeClass(styles.ascendingHeader);
+        element.removeClass(styles.descendingHeader);
+        if (sort !== 0) {
+            element.addClass(sort === 1 ? styles.ascendingHeader : styles.descendingHeader);
+            //aria-sort property are specified in the w3 WAI spec, ascending, descending, none, other.
+            //since pager currently uses ascending and descending, we do not support the others.
+            //http://www.w3.org/WAI/PF/aria/states_and_properties#aria-sort
+            element.attr('aria-sort', sort === 1 ? 'ascending' : 'descending'); 
+        }
+    }
+    
+    function isCurrentColumnSortable(columnDefs, model) {
+        var columnDef = model.sortKey ? fluid.pager.findColumnDef(columnDefs, model.sortKey) : null;
+        return columnDef ? columnDef.sortable : false;
+    }
+    
+    function setModelSortHeaderClass(newModel, opts) {
+        var styles = opts.overallOptions.styles;
+        var sort = isCurrentColumnSortable(opts.columnDefs, newModel) ? newModel.sortDir : 0;
+        setSortHeaderClass(styles, bigHeaderForKey(newModel.sortKey, opts), sort);
+    }
+   
+    function fireModelChange(that, newModel, forceUpdate) {
+        computePageCount(newModel);
+        if (newModel.pageIndex >= newModel.pageCount) {
+            newModel.pageIndex = newModel.pageCount - 1;
+        }
+        if (forceUpdate || newModel.pageIndex !== that.model.pageIndex || newModel.pageSize !== that.model.pageSize || newModel.sortKey !== that.model.sortKey ||
+                newModel.sortDir !== that.model.sortDir) {
+            var sorted = isCurrentColumnSortable(getColumnDefs(that), newModel) ? 
+                that.options.sorter(that, newModel) : null;
+            that.permutation = sorted;
+            that.events.onModelChange.fire(newModel, that.model, that);
+            fluid.model.copyModel(that.model, newModel);
+        }
+    }
+
+    function generateColumnClick(overallThat, columnDef, opts) {
+        return function () {
+            if (columnDef.sortable === true) {
+                var model = overallThat.model;
+                var newModel = fluid.copy(model);
+                var styles = overallThat.options.styles;
+                var oldKey = model.sortKey;
+                if (columnDef.key !== model.sortKey) {
+                    newModel.sortKey = columnDef.key;
+                    newModel.sortDir = 1;
+                    var oldBig = bigHeaderForKey(oldKey, opts);
+                    if (oldBig) {
+                        setSortHeaderClass(styles, oldBig, 0);
+                    }
+                } else if (newModel.sortKey === columnDef.key) {
+                    newModel.sortDir = -1 * newModel.sortDir;
+                } else {
+                    return false;
+                }
+                newModel.pageIndex = 0;
+                fireModelChange(overallThat, newModel, true);
+                setModelSortHeaderClass(newModel, opts);                
+            }
+            return false;
+        };
+    }
+   
+    function fetchHeaderDecorators(decorators, columnDef) {
+        return decorators[columnDef.sortable ? "sortableHeader" : "unsortableHeader"];
+    }
+   
+    function generateHeader(overallThat, newModel, columnDefs, opts) {
+        var sortableColumnTxt = opts.options.strings.sortableColumnText;
+        if (newModel.sortDir === 1) {
+            sortableColumnTxt = opts.options.strings.sortableColumnTextAsc;
+        } else if (newModel.sortDir === -1) {
+            sortableColumnTxt = opts.options.strings.sortableColumnTextDesc;
+        }
+
+        return {
+            children:  
+                fluid.transform(columnDefs, function (columnDef) {
+                return {
+                    ID: iDforColumn(columnDef, opts),
+                    value: columnDef.label,
+                    decorators: [ 
+                        {"jQuery": ["click", generateColumnClick(overallThat, columnDef, opts)]},
+                        {identify: "header:" + columnDef.key},
+                        {type: "attrs", attributes: { title: (columnDef.key === newModel.sortKey) ? sortableColumnTxt : opts.options.strings.sortableColumnText}}
+                    ].concat(fetchHeaderDecorators(opts.overallOptions.decorators, columnDef))
+                };
+            })
+        };
+    }
+   
+    /** A body renderer implementation which uses the Fluid renderer to render a table section **/
+   
+    fluid.pager.selfRender = function (overallThat, inOptions) {
+        var that = fluid.initView("fluid.pager.selfRender", overallThat.container, inOptions);
+        var options = that.options;
+        options.renderOptions.idMap = options.renderOptions.idMap || {};
+        var idMap = options.renderOptions.idMap;
+        var root = that.locate("root");
+        var template = fluid.selfRender(root, {}, options.renderOptions);
+        root.addClass(options.styles.root);
+        var columnDefs = getColumnDefs(overallThat);
+        var expOpts = {options: options, columnDefs: columnDefs, overallOptions: overallThat.options, dataModel: overallThat.options.dataModel, idMap: idMap};
+        var directModel = fetchModel(overallThat);
+
+        return {
+            returnedOptions: {
+                listeners: {
+                    onModelChange: function (newModel, oldModel) {
+                        var filtered = overallThat.options.modelFilter(directModel, newModel, overallThat.permutation);
+                        var tree = fluid.transform(filtered, 
+                            function (filteredRow) {
+                                getRoots(expOpts, overallThat, filteredRow.index);
+                                if (columnDefs === "explode") {
+                                    return fluid.explode(filteredRow.row, expOpts.longRoot);
+                                } else if (columnDefs.length) {
+                                    return expandColumnDefs(filteredRow, expOpts);
+                                }
+                            });
+                        var fullTree = {};
+                        fullTree[options.row] = tree;
+                        if (typeof (columnDefs) === "object") {
+                            fullTree[options.header] = generateHeader(overallThat, newModel, columnDefs, expOpts);
+                        }
+                        options.renderOptions = options.renderOptions || {};
+                        options.renderOptions.model = expOpts.dataModel;
+                        fluid.reRender(template, root, fullTree, options.renderOptions);
+                        setModelSortHeaderClass(newModel, expOpts); // TODO, should this not be actually renderable?
+                    }
+                }
+            }
+        };
+    };
+
+    fluid.defaults("fluid.pager.selfRender", {
+        selectors: {
+            root: ".flc-pager-body-template"
+        },
+        
+        styles: {
+            root: "fl-pager"
+        },
+        
+        keyStrategy: "id",
+        keyPrefix: "",
+        row: "row:",
+        header: "header:",
+        
+        strings: {
+            sortableColumnText: "Select to sort",
+            sortableColumnTextDesc: "Select to sort in ascending, currently in descending order.",
+            sortableColumnTextAsc: "Select to sort in descending, currently in ascending order."
+        },
+
+        // Options passed upstream to the renderer
+        renderOptions: {}
+    });
+
+    fluid.pager.summaryAria = function (element) {
+        element.attr({
+            "aria-relevant": "all",
+            "aria-atomic": "false",
+            "aria-live": "assertive",
+            "role": "status"
+        });
+    };
+
+    fluid.pager.summary = function (dom, options) {
+        var node = dom.locate("summary");
+        fluid.pager.summaryAria(node);
+        return {
+            returnedOptions: {
+                listeners: {
+                    onModelChange: function (newModel, oldModel) {
+                        var text = fluid.stringTemplate(options.message, {
+                            first: newModel.pageIndex * newModel.pageSize + 1,
+                            last: fluid.pager.computePageLimit(newModel),
+                            total: newModel.totalRange,
+                            currentPage: newModel.pageIndex + 1
+                        });
+                        if (node.length > 0) {
+                            node.text(text);
+                        }
+                    }
+                }
+            }
+        };
+    };
+    
+    fluid.pager.directPageSize = function (that) {
+        var node = that.locate("pageSize");
+        if (node.length > 0) {
+            that.events.onModelChange.addListener(
+                function (newModel, oldModel) {
+                    if (node.val() !== newModel.pageSize) {
+                        node.val(newModel.pageSize);
+                    }
+                }
+            );
+            node.change(function () {
+                that.events.initiatePageSizeChange.fire(node.val());
+            });
+        }
+    };
+
+
+    fluid.pager.rangeAnnotator = function (that, options) {
+        var roots = {};
+        that.events.onRenderPageLinks.addListener(function (tree, newModel) {
+            var column = that.options.annotateColumnRange;
+            var dataModel = that.options.dataModel;
+            // TODO: reaching into another component's options like this is a bit unfortunate
+            var columnDefs = getColumnDefs(that);
+
+            if (!column || !dataModel || !columnDefs) {
+                return;
+            }
+            var columnDef = fluid.pager.findColumnDef(columnDefs, column);
+            
+            function fetchValue(index) {
+                index = that.permutation ? that.permutation[index] : index;
+                return fluid.pager.fetchValue(that, dataModel, index, columnDef.valuebinding, roots);
+            }
+            var tModel = {};
+            fluid.model.copyModel(tModel, newModel);
+            
+            fluid.transform(tree, function (cell) {
+                if (cell.ID === "page-link:link") {
+                    var page = cell.pageIndex;
+                    var start = page * tModel.pageSize;
+                    tModel.pageIndex = page;
+                    var limit = fluid.pager.computePageLimit(tModel);
+                    var iValue = fetchValue(start);
+                    var lValue = fetchValue(limit - 1);
+                    
+                    var tooltipOpts = fluid.copy(that.options.tooltip.options) || {};
+                    
+                    if (!tooltipOpts.content) {
+                        tooltipOpts.content = function () { 
+                            return fluid.stringTemplate(that.options.markup.rangeAnnotation, {
+                                first: iValue,
+                                last: lValue
+                            });
+                        };
+                    }
+                    
+                    if (!cell.current) {
+                        var decorators = [
+                            {
+                                type: "fluid",
+                                func: that.options.tooltip.type,
+                                options: tooltipOpts
+                            },
+                            {
+                                identify: page
+                            }
+                        ];
+                        cell.decorators = cell.decorators.concat(decorators);
+                    }
+                }
+            });
+        });
+    };
+
+    /*******************
+     * Pager Component *
+     *******************/
+    
+    fluid.pagerImpl = function (container, options) {
+        var that = fluid.initView("fluid.pager", container, options);
+                
+        that.container.attr("role", "application");
+        
+        that.events.initiatePageChange.addListener(
+            function (arg) {
+                var newModel = fluid.copy(that.model);
+                if (arg.relativePage !== undefined) {
+                    newModel.pageIndex = that.model.pageIndex + arg.relativePage;
+                } else {
+                    newModel.pageIndex = arg.pageIndex;
+                }
+                if (newModel.pageIndex === undefined || newModel.pageIndex < 0) {
+                    newModel.pageIndex = 0;
+                }
+                fireModelChange(that, newModel, arg.forceUpdate);
+            }
+        );
+        
+        that.events.initiatePageSizeChange.addListener(
+            function (arg) {
+                var newModel = fluid.copy(that.model);
+                newModel.pageSize = arg;
+                fireModelChange(that, newModel);     
+            }
+        );
+
+        // Setup the top and bottom pager bars.
+        var pagerBarElement = that.locate("pagerBar");
+        if (pagerBarElement.length > 0) {
+            that.pagerBar = fluid.initSubcomponent(that, "pagerBar", 
+                [that.events, pagerBarElement, fluid.COMPONENT_OPTIONS, that.options.strings]);
+        }
+        
+        var pagerBarSecondaryElement = that.locate("pagerBarSecondary");
+        if (pagerBarSecondaryElement.length > 0) {
+            that.pagerBarSecondary = fluid.initSubcomponent(that, "pagerBar",
+                [that.events, pagerBarSecondaryElement, fluid.COMPONENT_OPTIONS, that.options.strings]);
+        }
+ 
+        that.bodyRenderer = fluid.initSubcomponent(that, "bodyRenderer", [that, fluid.COMPONENT_OPTIONS]);
+        
+        that.summary = fluid.initSubcomponent(that, "summary", [that.dom, fluid.COMPONENT_OPTIONS]);
+        
+        that.pageSize = fluid.initSubcomponent(that, "pageSize", [that]);
+        
+        that.rangeAnnotator = fluid.initSubcomponent(that, "rangeAnnotator", [that, fluid.COMPONENT_OPTIONS]);
+ 
+        that.model = fluid.copy(that.options.model);
+        
+        var dataModel = fetchModel(that);
+        if (dataModel) {
+            that.model.totalRange = dataModel.length;
+        }
+        if (that.model.totalRange === undefined) {
+            if (!that.pagerBar) {
+                fluid.fail("Error in Pager configuration - cannot determine total range, " +
+                    " since not configured in model.totalRange and no PagerBar is configured");
+            }
+            that.model = that.pagerBar.pageList.defaultModel;
+        }
+        that.applier = fluid.makeChangeApplier(that.model);
+
+        that.events.initiatePageChange.fire({pageIndex: that.model.pageIndex ? that.model.pageIndex : 0, 
+            forceUpdate: true});
+
+        return that;
+    };
+    
+    fluid.defaults("fluid.pager", {
+        mergePolicy: {
+            dataModel: "preserve",
+            model: "preserve"
+        },
+        pagerBar: {
+            type: "fluid.pager.pagerBar"
+        },
+        
+        summary: {type: "fluid.pager.summary", options: {
+            message: "Viewing page %currentPage. Showing records %first - %last of %total items." 
+        }},
+        
+        pageSize: {
+            type: "fluid.pager.directPageSize"
+        },
+        
+        modelFilter: fluid.pager.directModelFilter,
+        
+        sorter: fluid.pager.basicSorter,
+        
+        bodyRenderer: {
+            type: "fluid.pager.selfRender"
+        },
+        
+        model: {
+            pageIndex: undefined,
+            pageSize: 10,
+            totalRange: undefined
+        },
+        
+        dataModel: undefined,
+        // Offset of the tree's "main" data from the overall dataModel root
+        dataOffset: "",
+        
+        // strategy for generating a tree row, either "explode" or an array of columnDef objects
+        columnDefs: [], // [{key: "columnName", valuebinding: "*.valuePath", sortable: true/false}]
+        
+        annotateColumnRange: undefined, // specify a "key" from the columnDefs
+        
+        tooltip: {
+            type: "fluid.tooltip"
+        },
+        
+        rangeAnnotator: {
+            type: "fluid.pager.rangeAnnotator"
+        },
+        
+        selectors: {
+            pagerBar: ".flc-pager-top",
+            pagerBarSecondary: ".flc-pager-bottom",
+            summary: ".flc-pager-summary",
+            pageSize: ".flc-pager-page-size",
+            headerSortStylisticOffset: ".flc-pager-sort-header"
+        },
+        
+        styles: {
+            ascendingHeader: "fl-pager-asc",
+            descendingHeader: "fl-pager-desc"
+        },
+        
+        decorators: {
+            sortableHeader: [],
+            unsortableHeader: []
+        },
+        
+        strings: {
+            last: " (last)"
+        },
+        
+        events: {
+            initiatePageChange: null,
+            initiatePageSizeChange: null,
+            onModelChange: null,
+            onRenderPageLinks: null
+        },
+        
+        markup: {
+            rangeAnnotation: "<b> %first </b><br/>&mdash;<br/><b> %last </b>"
+        }
+    });
+})(jQuery, fluid_1_4);
+/*
  * jQuery UI Draggable 1.8.12
  *
  * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
