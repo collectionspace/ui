@@ -267,13 +267,7 @@ cspace = cspace || {};
                 type: "cspace.recordList"
             },
             togglable: {
-                type: "cspace.util.togglable",
-                options: {
-                    selectors: {
-                        header: "{myCollectionSpace}.options.selectors.header",
-                        togglable: "{myCollectionSpace}.options.selectors.togglable"
-                    }
-                }
+                type: "cspace.util.togglable"
             }
         },
         resources: {

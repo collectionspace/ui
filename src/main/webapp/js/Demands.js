@@ -925,7 +925,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         // Togglable demands
         fluid.demands("togglable", "cspace.myCollectionSpace", {
-            container: "{myCollectionSpace}.container"
+            container: "{myCollectionSpace}.container",
+            options: {
+                selectors: {
+                    header: "{myCollectionSpace}.options.selectors.header",
+                    togglable: "{myCollectionSpace}.options.selectors.togglable"
+                }
+            }
         });
         fluid.demands("recordEditorTogglable", "cspace.recordEditor", {
             container: "{recordEditor}.container"
