@@ -15,15 +15,115 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     
-    fluid.registerNamespace("cspace.header");
+    fluid.defaults("cspace.header", {
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        mergePolicy: {
+            model: "preserve"
+        },
+        components: {
+            searchBox: {
+                type: "cspace.searchBox",
+                options: {
+                    related: "all"
+                }
+            }
+        },
+        produceTree: "cspace.header.produceTree",
+        selectorsToIgnore: ["searchBox" ],
+        model: {
+            menuitems: [
+            {
+                name: "myCollectionSpace",
+                href: "myCollectionSpace.html"
+            },
+            {
+                name: "createNew",
+                href: "createnew.html",
+                hide: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.util.modelBuilder",
+                        args: {
+                            related: "all",
+                            resolver: "{permissionsResolver}",
+                            recordTypeManager: "{recordTypeManager}",
+                            permission: "create",
+                            callback: "cspace.header.buildCreateNewModel"
+                        }
+                    }
+                }
+            },
+            {
+                name: "findEdit",
+                href: "findedit.html"
+            },
+            {
+                name: "report",
+                href: "#"
+            },
+            {
+                name: "administration",
+                href: "administration.html"
+            }
+
+            ]
+        },
+        selectors: {
+            //menu-item div box
+            menuItem: ".csc-header-menu-item",
+            label: ".csc-header-link",
+            //other
+            searchBox: ".csc-header-searchBox",
+            logout: ".csc-header-logout",
+            user: ".csc-header-user",
+            userName: ".csc-header-userName"
+        },
+        repeatingSelectors: ["menuItem"],
+        invokers: {
+            refreshComponents: {
+                funcName: "cspace.util.refreshComponents",
+                args: "{header}"
+            }
+        },
+        resources: {
+            template: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.specBuilder",
+                    args: {
+                        forceCache: true,
+                        fetchClass: "fastTemplate",
+                        url: "%webapp/html/components/header.html"
+                    }
+                }
+            }
+        },
+        schema: {},
+        login: "{userLogin}",
+        strings: {
+            //menu-items
+            myCollectionSpace: "My CollectionSpace",
+            createNew: "Create New",
+            findEdit: "Find and Edit",
+            report: "Report",
+            administration: "Administration",
+            //other
+            logout: "Sign out",
+            user: "Hi,",
+            userName: "%userName"
+        },
+        postInitFunction: "cspace.header.postInit",
+        finalInitFunction: "cspace.header.finalInit"
+    });
     
-    cspace.header = function (container, options) {
-        var that = fluid.initRendererComponent("cspace.header", container, options);
+    fluid.fetchResources.primeCacheFromResources("cspace.header");
+    
+    cspace.header.postInit = function (that) {
         that.refreshView();
-        fluid.initDependents(that);        
+    };
+    
+    cspace.header.finalInit = function (that) {
         that.refreshComponents();
-        
-        return that;
     };
 
     /*
@@ -92,106 +192,5 @@ cspace = cspace || {};
         };
         return tree;
     };
-    
-    fluid.defaults("cspace.header", {
-        gradeNames: "fluid.rendererComponent",
-        mergePolicy: {
-            model: "preserve"
-        },
-        components: {
-            searchBox: {
-                type: "cspace.searchBox",
-                options: {
-                    related: "all"
-                }
-            }
-        },
-        produceTree: cspace.header.produceTree,
-
-        selectorsToIgnore: ["searchBox" ],
-        model: {
-            menuitems: [
-            {
-                name: "myCollectionSpace",
-                href: "myCollectionSpace.html"
-            },
-            {
-                name: "createNew",
-                href: "createnew.html",
-                hide: {
-                    expander: {
-                        type: "fluid.deferredInvokeCall",
-                        func: "cspace.util.modelBuilder",
-                        args: {
-                            related: "all",
-                            resolver: "{permissionsResolver}",
-                            recordTypeManager: "{recordTypeManager}",
-                            permission: "create",
-                            callback: "cspace.header.buildCreateNewModel"
-                        }
-                    }
-                }
-            },
-            {
-                name: "findEdit",
-                href: "findedit.html"
-            },
-            {
-                name: "report",
-                href: "#"
-            },
-            {
-                name: "administration",
-                href: "administration.html"
-            }
-
-            ]
-        },
-        selectors: {
-            //menu-item div box
-            "menuItem:": ".csc-header-menu-item",
-            label: ".csc-header-link",
-            //other
-            searchBox: ".csc-header-searchBox",
-            logout: ".csc-header-logout",
-            user: ".csc-header-user",
-            userName: ".csc-header-userName"
-        },
-        invokers: {
-            refreshComponents: {
-                funcName: "cspace.util.refreshComponents",
-                args: "{header}"
-            }
-        },
-        resources: {
-            template: {
-                expander: {
-                    type: "fluid.deferredInvokeCall",
-                    func: "cspace.specBuilder",
-                    args: {
-                        forceCache: true,
-                        fetchClass: "fastTemplate",
-                        url: "%webapp/html/components/header.html"
-                    }
-                }
-            }
-        },
-        schema: {},
-        login: "{userLogin}",
-        strings: {
-            //menu-items
-            myCollectionSpace: "My CollectionSpace",
-            createNew: "Create New",
-            findEdit: "Find and Edit",
-            report: "Report",
-            administration: "Administration",
-            //other
-            logout: "Sign out",
-            user: "Hi,",
-            userName: "%userName"
-        }
-    });
-    
-    fluid.fetchResources.primeCacheFromResources("cspace.header");
     
 })(jQuery, fluid);
