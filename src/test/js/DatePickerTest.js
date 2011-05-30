@@ -52,12 +52,11 @@ var datePickerTester = function ($) {
     };
     
     datePickerTest.test("Initialization", function () {
-        expect(2);
+        expect(1);
         var datePicker = cspace.datePicker(".csc-datePicker-container", {
             messageBar: cspace.messageBar("body")
         });
-        jqUnit.assertTrue("DatePicker should have freeText flag equal to true since the date input field is enabled", datePicker.freeText);
-        jqUnit.assertNotUndefined("datePickers google date picker should not be undefined", datePicker.datePicker);
+        jqUnit.assertNotUndefined("datePickers google date picker should not be undefined", datePicker.datePickerWidget);
     });
     
     datePickerTest.test("Use google DatePicker to select a date", function () {
@@ -65,13 +64,13 @@ var datePickerTester = function ($) {
         var datePicker = cspace.datePicker(".csc-datePicker-container", {
             messageBar: cspace.messageBar("body")
         });
-        datePicker.locate("calendarButton").click();
-        jqUnit.isVisible("Google datePicker widget is now visible", datePicker.locate("datePicker"));
+        datePicker.calendarButton.click();
+        jqUnit.isVisible("Google datePicker widget is now visible", datePicker.datePicker);
         var date = buildDateStructure("1999-01-01", "yyyy-MM-dd");
-        datePicker.datePicker.setDate(date.date);
+        datePicker.datePickerWidget.setDate(date.date);
         // TODO: when datePicker is refactored, that should probably be a selector in the defaults.
         $(".goog-date-picker-selected").click();
-        jqUnit.assertEquals("DatePicker's date input field should now have a value of", date.formattedDate, datePicker.locate("calendarDate").val());
+        jqUnit.assertEquals("DatePicker's date input field should now have a value of", date.formattedDate, datePicker.container.val());
         verifyGoogleDatePickerDate(date.year, date.month, date.day);
     });
     
@@ -81,7 +80,7 @@ var datePickerTester = function ($) {
             messageBar: cspace.messageBar("body")
         });
         var date = buildDateStructure("1999-01-01", "yyyy-MM-dd");
-        var inputField = datePicker.locate("calendarDate"); 
+        var inputField = datePicker.container; 
         inputField.val(date.original);
         inputField.change();        
         jqUnit.assertEquals("Text in the input field should stay the same after validation", date.formattedDate, inputField.val());
@@ -89,12 +88,12 @@ var datePickerTester = function ($) {
     });
     
     datePickerTest.test("Attempt to validate invalid dates", function () {
-        expect(6);
+        expect(5);
         var datePicker = cspace.datePicker(".csc-datePicker-container", {
             messageBar: cspace.messageBar("body")
         });
-        inferAndValidateDates(datePicker.locate("calendarDate"), 
-                              ["999", "fail", "monday", "-A", {"test": "test"}, "{year: '2000'}"], 
+        inferAndValidateDates(datePicker.container, 
+                              ["999", "fail", "monday", "-A", "{year: '2000'}"], 
                               "yyyy-MM-dd",
                               "Text in the input field should be empty since the validation failed", "");     
     });
@@ -104,10 +103,47 @@ var datePickerTester = function ($) {
         var datePicker = cspace.datePicker(".csc-datePicker-container", {
             messageBar: cspace.messageBar("body")
         });
-        inferAndValidateDates(datePicker.locate("calendarDate"), 
+        inferAndValidateDates(datePicker.container, 
                               ["today", "tomorrow", "Dec 12, 2000", "-10", "tomorrow + 10", "2000", "1000-01-01", "1800-11"], 
                               "yyyy-MM-dd",
                               "Text in the input field should be formatted correctly and equal to");
+    });
+    datePickerTest.test("Use None button", function () {
+        expect(4);
+        var datePicker = cspace.datePicker(".csc-datePicker-container", {
+            messageBar: cspace.messageBar("body")
+        });
+        var date = buildDateStructure("1999-01-01", "yyyy-MM-dd");
+        var inputField = datePicker.container; 
+        inputField.val(date.original).change();        
+        jqUnit.assertEquals("Text in the input field should stay the same after validation", date.formattedDate, inputField.val());
+        datePicker.calendarButton.click();
+        jqUnit.isVisible("Date picker widget should be visible", datePicker.datePicker);
+        datePicker.locate("btn", datePicker.datePicker).filter(function () {
+            return $(this).text() === "None";
+        }).click();
+        jqUnit.notVisible("Date picker widget should be now invisible", datePicker.datePicker);
+        jqUnit.assertEquals("Date value should be reset to an empty string", "", inputField.val());
+    });
+    datePickerTest.test("Use Today button", function () {
+        expect(4);
+        var datePicker = cspace.datePicker(".csc-datePicker-container", {
+            messageBar: cspace.messageBar("body")
+        });
+        var date = buildDateStructure("1999-01-01", "yyyy-MM-dd");
+        var inputField = datePicker.container; 
+        inputField.val(date.original).change();        
+        jqUnit.assertEquals("Text in the input field should stay the same after validation", date.formattedDate, inputField.val());
+        datePicker.calendarButton.click();
+        jqUnit.isVisible("Date picker widget should be visible", datePicker.datePicker);
+        datePicker.locate("btn", datePicker.datePicker).filter(function () {
+            return $(this).text() === "Today";
+        }).click();
+        jqUnit.notVisible("Date picker widget should be now invisible", datePicker.datePicker);
+        var today = Date.today();
+        today = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+        today = Date.parse(today).toString("yyyy-MM-dd");
+        jqUnit.assertEquals("Date value should be reset to an empty string", today, inputField.val());
     });
 };
 

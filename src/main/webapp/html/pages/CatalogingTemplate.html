@@ -432,10 +432,8 @@
                                                                         <td><input type="text" class="csc-object-description-dimension-value"/></td>
                                                                         <td><select class="csc-object-description-dimension-unit input-select"><option value="">Options not loaded</option></select></td>
                                                                         <td><input type="text" class="csc-object-description-dimension-value-qualifier"/></td>
-                                                                        <td class="csc-object-description-dimension-value-date-container fl-table">
-                                                                            <input type="text" class="fl-force-left input-date csc-object-description-dimension-value-date csc-calendar-date" />
-                                                                            <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="17" width="16" /></a>
-                                                                            <div class="csc-date-picker cs-date-picker"></div>
+                                                                        <td>
+                                                                            <input type="text" class="csc-object-description-dimension-value-date" />
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
@@ -489,14 +487,12 @@
                                                                         </div>
                                                                     </div>
                                                                     
-                                                                    <div class="info-pair info-pair-date">
+                                                                    <div class="info-pair">
                                                                         <div class="header">
                                                                             <div class="label">Date</div>
                                                                         </div>
-                                                                        <div class="content csc-object-description-content-date-container fl-table">
-                                                                            <input type="text" class="fl-force-left input-date csc-object-description-content-date csc-calendar-date" />
-                                                                            <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="17" width="16" /></a>
-                                                                            <div class="csc-date-picker cs-date-picker"></div>
+                                                                        <div class="content">
+                                                                            <input type="text" class="csc-object-description-content-date" />
                                                                         </div>
                                                                     </div>
                                                                     
@@ -679,14 +675,12 @@
                                                                         </div>
                                                                     </div>
                                                                         
-                                                                    <div class="info-pair info-pair-date">
+                                                                    <div class="info-pair">
                                                                         <div class="header">
                                                                             <div class="label">Date</div>
                                                                         </div>
-                                                                        <div class="content csc-object-description-inscription-content-date-container fl-table">
-                                                                            <input type="text" class="fl-force-left input-date csc-object-description-inscription-content-date csc-calendar-date" />
-                                                                            <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="17" width="16" /></a>
-                                                                            <div class="csc-date-picker cs-date-picker"></div>
+                                                                        <div class="content">
+                                                                            <input type="text" class="csc-object-description-inscription-content-date" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -791,14 +785,12 @@
                                                                         </div>
                                                                     </div>
                                                                         
-                                                                    <div class="info-pair info-pair-date">
+                                                                    <div class="info-pair">
                                                                         <div class="header">
                                                                             <div class="label">Date</div>
                                                                         </div>
-                                                                        <div class="content csc-object-description-inscription-description-date-container fl-table">
-                                                                            <input type="text" class="fl-force-left input-date csc-object-description-inscription-description-date csc-calendar-date" />
-                                                                            <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="17" width="16" /></a>
-                                                                            <div class="csc-date-picker cs-date-picker"></div>
+                                                                        <div class="content">
+                                                                            <input type="text" class="csc-object-description-inscription-description-date" />
                                                                         </div>
                                                                     </div>
                                                                     <div class="clear"></div>
@@ -859,7 +851,7 @@
                                             <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
                                                 <div class="info-column fl-force-left">
                                                     <div class="info-column2-50 fl-force-left">
-                                                        <div class="info-pair-date">
+                                                        <div class="info-pair">
                                                             <div class="header">
                                                                 <div class="label">Production Date</div>
                                                             </div>
@@ -1324,13 +1316,7 @@
                                                                                 </thead>
                                                                                 <tbody>
                                                                                     <tr class="csc-object-history-association-assocDateGroup">
-                                                                                        <td>
-                                                                                            <div class="content csc-object-history-association-assocDate-container fl-table">
-                                                                                                <input type="text" class="fl-force-left input-date csc-object-history-association-assocDate csc-calendar-date" />
-                                                                                                <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="17" width="16" /></a>
-                                                                                                <div class="csc-date-picker cs-date-picker"></div>
-                                                                                            </div>
-                                                                                        </td>
+                                                                                        <td><input type="text" class="csc-object-history-association-assocDate"/></td>
                                                                                         <td><input type="text" class="csc-collection-object-assocDateType"/></td>
                                                                                         <td><input type="text" class="csc-collection-object-assocDateNote"/></td>
                                                                                     </tr>
@@ -1423,10 +1409,8 @@
                                                             <div class="header">
                                                                 <div class="label">Ownership date</div>
                                                             </div>
-                                                            <div class="content csc-object-history-association-ownershipDates-container fl-table">
-                                                                <input type="text" class="fl-force-left input-date csc-object-history-association-ownershipDates csc-calendar-date" />
-                                                                <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="17" width="16" /></a>
-                                                                <div class="csc-date-picker cs-date-picker"></div>
+                                                            <div class="content">
+                                                                <input type="text" class="csc-object-history-association-ownershipDates" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1629,14 +1613,12 @@
                                             <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
                                                 <div class="info-column fl-force-left">
                                                     <div class="info-column2-50 fl-force-left">
-                                                        <div class="info-pair-date">
+                                                        <div class="info-pair">
                                                             <div class="header">
                                                                 <div class="label">Field collection date</div>
                                                             </div>
-                                                            <div class="content csc-collection-object-fieldCollectionDate-container fl-table">
-                                                                <input type="text" class="fl-force-left input-date csc-collection-object-fieldCollectionDate csc-calendar-date" />
-                                                                <a href="#_bottom" class="csc-calendar-button fl-table-cell fl-force-left disabled cs-calendar-button" ><img src="../images/cal.png" alt="calendar"  height="17" width="16" /></a>
-                                                                <div class="csc-date-picker cs-date-picker"></div>
+                                                            <div class="content">
+                                                                <input type="text" class="csc-collection-object-fieldCollectionDate" />
                                                             </div>
                                                         </div>
                                                     </div>

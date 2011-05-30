@@ -1,6 +1,14 @@
 {
     "recordEditor": {
-        ".csc-intake-condition-check-date": "${fields.conditionCheckDate}",
+        ".csc-intake-condition-check-date": {
+            "value": "${fields.conditionCheckDate}",
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
         ".csc-intake-current-owner": {
             "decorators": [
                 {
@@ -67,14 +75,6 @@
             ]
         },
         ".csc-intake-condition-check-note": "${fields.conditionCheckNote}",
-        ".csc-intake-entry-date-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
-        },
         ".csc-intake-currentLocationGroup": {
             "decorators": [
                 {
@@ -122,7 +122,15 @@
         },
         ".csc-intake-fieldCollectionNumber": "${fields.fieldCollectionNumber}",
         ".csc-intake-insurance-policy-number": "${fields.insurancePolicyNumber}",
-        ".csc-intake-fieldCollectionDate": "${fields.fieldCollectionDate}",
+        ".csc-intake-fieldCollectionDate": {
+            "value": "${fields.fieldCollectionDate}",
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
         ".csc-intake-conditionCheckMethod": {
             "decorators": [
                 {
@@ -227,14 +235,6 @@
             ],
             "selection": "${fields.entryReason}"
         },
-        ".csc-intake-location-date-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
-        },
         ".csc-intake-field-collection-event-name": {
             "decorators": [
                 {
@@ -263,7 +263,9 @@
             ]
         },
         ".csc-intake-fieldCollectionNote": "${fields.fieldCollectionNote}",
-        ".csc-intake-insurance-renewal-date-container": {
+        ".csc-intake-insurance-reference-number": "${fields.insuranceReferenceNumber}",
+        ".csc-intake-returnDate": {
+            "value": "${fields.returnDate}",
             "decorators": [
                 {
                     "func": "cspace.datePicker",
@@ -271,8 +273,6 @@
                 }
             ]
         },
-        ".csc-intake-insurance-reference-number": "${fields.insuranceReferenceNumber}",
-        ".csc-intake-returnDate": "${fields.returnDate}",
         ".csc-intake-entry-number-container": {
             "decorators": [
                 {
@@ -316,8 +316,8 @@
             ],
             "value": "${fields.valuer}"
         },
-        ".csc-intake-entry-date": "${fields.entryDate}",
-        ".csc-intake-fieldCollectionDate-container": {
+        ".csc-intake-entry-date": {
+            "value": "${fields.entryDate}",
             "decorators": [
                 {
                     "func": "cspace.datePicker",
@@ -325,7 +325,15 @@
                 }
             ]
         },
-        ".csc-intake-insurance-renewal-date": "${fields.insuranceRenewalDate}",
+        ".csc-intake-insurance-renewal-date": {
+            "value": "${fields.insuranceRenewalDate}",
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
         ".csc-intake-depositor-requirements": "${fields.depositorsRequirements}",
         ".csc-intake-entry-number": "${fields.entryNumber}",
         ".csc-intake-tenantID": "${fields.tenantID}",
@@ -512,7 +520,8 @@
         },
         ".csc-intake-fieldCollectionPlace": "${fields.fieldCollectionPlace}",
         ".csc-intake-condition-check-reference-number": "${fields.conditionCheckReferenceNumber}",
-        ".csc-intake-returnDate-container": {
+        ".csc-intake-location-date": {
+            "value": "${fields.locationDate}",
             "decorators": [
                 {
                     "func": "cspace.datePicker",
@@ -520,15 +529,6 @@
                 }
             ]
         },
-        ".csc-intake-condition-check-date-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
-        },
-        ".csc-intake-location-date": "${fields.locationDate}",
         ".csc-intake-fieldCollectionSource": {
             "decorators": [
                 {

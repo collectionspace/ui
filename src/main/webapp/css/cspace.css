@@ -1261,7 +1261,9 @@ input[disabled]:hover, input[disabled]:hover	{
 	margin-top: 18px;}
 .cs-calendar-button:focus {
 	/*outline: 1px solid black;*/}
-
+.cs-calendar-image {
+    background: url('../images/cal.png') no-repeat center center;
+}
 /*   styling the loading progress indicator */
 .cs-loading-indicator {
     opacity: 0.85;
@@ -1473,6 +1475,7 @@ ul.menu-record li a {
 	border:1px solid #C7CFD4; 
 	border-left:none;
 	height:19px;
+    width: 17px;
 	/*float:left;*/}
 table .cs-calendar-button, .information-subgroup .cs-calendar-button { 
 	border:none;}

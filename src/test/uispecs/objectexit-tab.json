@@ -67,14 +67,6 @@
             "value": "${fields.currentOwner}"
         },
         ".csc-objectexit-updatedAt": "${fields.updatedAt}",
-        ".csc-objectexit-exitDate-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
-        },
         ".csc-objectexit-exitReason-label": {
             "messagekey": "objectexit-exitReasonLabel"
         },
@@ -133,7 +125,15 @@
         ".csc-objectexit-depositor-label": {
             "messagekey": "objectexit-depositorLabel"
         },
-        ".csc-objectexit-exitDate": "${fields.exitDate}",
+        ".csc-objectexit-exitDate": {
+            "value": "${fields.exitDate}",
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
         ".csc-objectexit-exitReason": {
             "default": "0",
             "optionnames": [

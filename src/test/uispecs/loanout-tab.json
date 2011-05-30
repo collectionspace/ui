@@ -26,8 +26,15 @@
             ],
             "value": "${fields.borrowersContact}"
         },
-        ".csc-loanout-tenantID": "${fields.tenantID}",
-        ".csc-loanOut-lendersAuthorizationDate": "${fields.lendersAuthorizationDate}",
+        ".csc-loanOut-lendersAuthorizationDate": {
+            "value": "${fields.lendersAuthorizationDate}",
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
         ".csc-loanOut-borrower": {
             "decorators": [
                 {
@@ -41,7 +48,15 @@
             ],
             "value": "${fields.borrower}"
         },
-        ".csc-loanOut-loanReturnDate": "${fields.loanReturnDate}",
+        ".csc-loanOut-loanReturnDate": {
+            "value": "${fields.loanReturnDate}",
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
         ".csc-loanOut-loanPurpose": {
             "default": "0",
             "optionnames": [
@@ -66,8 +81,8 @@
             ],
             "selection": "${fields.loanPurpose}"
         },
-        ".csc-loanout-createdAt": "${fields.createdAt}",
-        ".csc-loanOut-loanReturnDate-container": {
+        ".csc-loanOut-loanOutDate": {
+            "value": "${fields.loanOutDate}",
             "decorators": [
                 {
                     "func": "cspace.datePicker",
@@ -75,16 +90,6 @@
                 }
             ]
         },
-        ".csc-loanOut-loanOutDate": "${fields.loanOutDate}",
-        ".csc-loanOut-loanRenewalApplicationDate-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
-        },
-        ".csc-loanout-updatedAt": "${fields.updatedAt}",
         ".csc-loanOut-loanOutNumber-patternChooserContainer": {
             "decorators": [
                 {
@@ -109,24 +114,8 @@
                 }
             ]
         },
-        ".csc-loanOut-lendersAuthorizationDate-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
-        },
         ".csc-loanOut-loanOutConditions": "${fields.specialConditionsOfLoan}",
         ".csc-loanOut-loanOutNumber": "${fields.loanOutNumber}",
-        ".csc-loanOut-loanOutDate-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
-        },
         ".csc-loanOut-loanOutNote": "${fields.loanOutNote}",
         ".csc-loanout-loanedObjectStatusGroup": {
             "decorators": [
@@ -144,40 +133,40 @@
                                             ".csc-loanOut-loanedObjectStatus": {
                                                 "optionnames": [
                                                     "Please select a value",
-                                                    "Photography requested",
-                                                    "Sent",
                                                     "Requested",
-                                                    "Refused",
-                                                    "Authorized",
-                                                    "Agreed",
-                                                    "Conservation",
                                                     "Returned",
-                                                    "Renewed"
+                                                    "Authorized",
+                                                    "Refused",
+                                                    "Photography requested",
+                                                    "Agreed",
+                                                    "Renewed",
+                                                    "Sent",
+                                                    "Conservation"
                                                 ],
                                                 "optionlist": [
                                                     "",
-                                                    "photographyrequested",
-                                                    "sent",
                                                     "requested",
-                                                    "refused",
-                                                    "authorized",
-                                                    "agreed",
-                                                    "conservation",
                                                     "returned",
-                                                    "renewed"
+                                                    "authorized",
+                                                    "refused",
+                                                    "photographyrequested",
+                                                    "agreed",
+                                                    "renewed",
+                                                    "sent",
+                                                    "conservation"
                                                 ],
                                                 "selection": "${{row}.loanedObjectStatus}"
                                             },
                                             ".csc-loanOut-loanedObjectStatusNote": "${{row}.loanedObjectStatusNote}",
-                                            ".csc-loanOut-loanedObjectStatusDate-container": {
+                                            ".csc-loanOut-loanedObjectStatusDate": {
+                                                "value": "${{row}.loanedObjectStatusDate}",
                                                 "decorators": [
                                                     {
                                                         "func": "cspace.datePicker",
                                                         "type": "fluid"
                                                     }
                                                 ]
-                                            },
-                                            ".csc-loanOut-loanedObjectStatusDate": "${{row}.loanedObjectStatusDate}"
+                                            }
                                         },
                                         "type": "fluid.renderer.repeat",
                                         "pathAs": "row",
@@ -191,7 +180,15 @@
                 }
             ]
         },
-        ".csc-loanOut-loanRenewalApplicationDate": "${fields.loanRenewalApplicationDate}",
+        ".csc-loanOut-loanRenewalApplicationDate": {
+            "value": "${fields.loanRenewalApplicationDate}",
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
         ".csc-loanOut-lendersAuthorizer": {
             "decorators": [
                 {

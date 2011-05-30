@@ -131,7 +131,9 @@ var utilitiesTester = function ($) {
     var readOnlyMovementSpec = {
         "recordEditor": {
             ".csc-movement-movementNote": "${fields.movementNote}",
-            ".csc-movement-plannedRemovalDate": "${fields.plannedRemovalDate}",
+            ".csc-movement-plannedRemovalDate": {
+                "value": "${fields.plannedRemovalDate}"
+            },
             ".csc-movement-currentLocation": "${fields.currentLocation}",
             ".csc-movement-movementContact": {
                 "value": "${fields.movementContact}",
@@ -140,7 +142,9 @@ var utilitiesTester = function ($) {
                     "type": "fluid"   
                 }]
             },
-            ".csc-movement-locationDate": "${fields.locationDate}",
+            ".csc-movement-locationDate": {
+                "value": "${fields.locationDate}"
+            },
             ".csc-movement-currentLocationFitness": {
                 "value": "${fields.currentLocationFitness}", 
                 "decorators": [{
@@ -243,7 +247,9 @@ var utilitiesTester = function ($) {
                     }
                 }]
             },
-            ".csc-movement-removalDate": "${fields.removalDate}"
+            ".csc-movement-removalDate": {
+                "value": "${fields.removalDate}"
+            }
         }
     }
     
@@ -406,7 +412,9 @@ var utilitiesTester = function ($) {
                     }
                 ]
             },
-            ".csc-acquisition-accession-date": "${fields.accessionDate}",
+            ".csc-acquisition-accession-date": {
+                "value": "${fields.accessionDate}"
+            },
             ".csc-acquisition-owner": {
                 "decorators": [
                     {
@@ -490,7 +498,9 @@ var utilitiesTester = function ($) {
             ".csc-acquisition-acquisitionDates-label": {
                 "messagekey": "acquisition-acquisitionDatesLabel"
             },
-            ".csc-acquisition-acquisitionAuthorizerDate": "${fields.acquisitionAuthorizerDate}",
+            ".csc-acquisition-acquisitionAuthorizerDate": {
+                "value": "${fields.acquisitionAuthorizerDate}"
+            },
             ".csc-acquisition-fieldCollectionEventNames-label": {
                 "messagekey": "acquisition-fieldCollectionEventNamesLabel"
             },
@@ -707,7 +717,7 @@ var utilitiesTester = function ($) {
             },
             ".csc-acquisition-acquisition-note": "${fields.acquisitionNote}",
             ".csc-acquisition-transfer-of-title-number": "${fields.transferOfTitleNumber}",
-            ".csc-acquisition-acquisitionDates": {
+            ".csc-acquisition-date": {
                 "decorators": [
                     {
                         "func": "cspace.makeRepeatable",
@@ -720,7 +730,9 @@ var utilitiesTester = function ($) {
                                         "expander": {
                                             "repeatID": "repeat:",
                                             "tree": {
-                                                ".csc-acquisition-date": "${{row}.acquisitionDate}"
+                                                ".csc-acquisition-date": {
+                                                    "value": "${{row}.acquisitionDate}"
+                                                }
                                             },
                                             "type": "fluid.renderer.repeat",
                                             "pathAs": "row",

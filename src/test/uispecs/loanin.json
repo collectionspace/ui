@@ -26,14 +26,6 @@
                                     "expander": {
                                         "repeatID": "repeat:",
                                         "tree": {
-                                            ".csc-loanIn-lendersAuthorizerDate-container": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.datePicker",
-                                                        "type": "fluid"
-                                                    }
-                                                ]
-                                            },
                                             ".csc-loanIn-lender": {
                                                 "decorators": [
                                                     {
@@ -60,7 +52,15 @@
                                                 ],
                                                 "value": "${{row}.lendersContact}"
                                             },
-                                            ".csc-loanIn-lendersAuthorizerDate": "${{row}.lendersAuthorizationDate}",
+                                            ".csc-loanIn-lendersAuthorizerDate": {
+                                                "value": "${{row}.lendersAuthorizationDate}",
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.datePicker",
+                                                        "type": "fluid"
+                                                    }
+                                                ]
+                                            },
                                             ".csc-loanIn-lendersAuthorizer": {
                                                 "decorators": [
                                                     {
@@ -100,22 +100,6 @@
             ],
             "value": "${fields.loanInContact}"
         },
-        ".csc-loanIn-loanRenewalApplicationDate-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
-        },
-        ".csc-loanIn-loanInDate-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
-        },
         ".csc-loanIn-loanInNumber-patternChooserContainer": {
             "decorators": [
                 {
@@ -141,8 +125,8 @@
             ]
         },
         ".csc-loanIn-loanInNote": "${fields.loanInNote}",
-        ".csc-loanIn-loanReturnDate": "${fields.loanReturnDate}",
-        ".csc-loanIn-loanReturnDate-container": {
+        ".csc-loanIn-loanReturnDate": {
+            "value": "${fields.loanReturnDate}",
             "decorators": [
                 {
                     "func": "cspace.datePicker",
@@ -150,10 +134,26 @@
                 }
             ]
         },
-        ".csc-loanIn-loanInDate": "${fields.loanInDate}",
+        ".csc-loanIn-loanInDate": {
+            "value": "${fields.loanInDate}",
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
         ".csc-loanIn-loanInConditions": "${fields.loanInConditions}",
         ".csc-loanIn-loanInNumber": "${fields.loanInNumber}",
-        ".csc-loanIn-loanRenewalApplicationDate": "${fields.loanRenewalApplicationDate}",
+        ".csc-loanIn-loanRenewalApplicationDate": {
+            "value": "${fields.loanRenewalApplicationDate}",
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
         ".csc-loanIn-loanPurpose": {
             "default": "0",
             "optionnames": [

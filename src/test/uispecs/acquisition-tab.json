@@ -25,14 +25,6 @@
             "selection": "${fields.objectPurchasePriceCurrency}"
         },
         ".csc-acquisition-original-object-purchase-price-value": "${fields.originalObjectPurchasePriceValue}",
-        ".csc-acquisition-acquisitionAuthorizerDate-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
-        },
         ".csc-acquisition-acquisitionFunding": {
             "decorators": [
                 {
@@ -270,7 +262,15 @@
                 }
             ]
         },
-        ".csc-acquisition-accession-date": "${fields.accessionDate}",
+        ".csc-acquisition-accession-date": {
+            "value": "${fields.accessionDate}",
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
         ".csc-acquisition-group-purchase-price-currency": {
             "optionnames": [
                 "Please select a value",
@@ -366,8 +366,8 @@
             ]
         },
         ".csc-acquisition-acquisition-note": "${fields.acquisitionNote}",
-        ".csc-acquisition-acquisitionAuthorizerDate": "${fields.acquisitionAuthorizerDate}",
-        ".csc-acquisition-accession-date-container": {
+        ".csc-acquisition-acquisitionAuthorizerDate": {
+            "value": "${fields.acquisitionAuthorizerDate}",
             "decorators": [
                 {
                     "func": "cspace.datePicker",
@@ -390,8 +390,8 @@
                                     "expander": {
                                         "repeatID": "repeat:",
                                         "tree": {
-                                            ".csc-acquisition-date": "${{row}.acquisitionDate}",
-                                            ".csc-acquisition-acquisition-date-container": {
+                                            ".csc-acquisition-date": {
+                                                "value": "${{row}.acquisitionDate}",
                                                 "decorators": [
                                                     {
                                                         "func": "cspace.datePicker",

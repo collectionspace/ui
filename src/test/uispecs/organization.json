@@ -107,14 +107,6 @@
             ]
         },
         ".csc-organization-shortIdentifier": "${fields.shortIdentifier}",
-        ".csc-organizationAuthority-foundingDate-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
-        },
         ".csc-organizationAuthority-foundingPlace": "${fields.foundingPlace}",
         ".csc-organization-mainBodyGroup": {
             "decorators": [
@@ -145,8 +137,8 @@
                 }
             ]
         },
-        ".csc-organizationAuthority-dissolutionDate": "${fields.dissolutionDate}",
-        ".csc-organizationAuthority-dissolutionDate-container": {
+        ".csc-organizationAuthority-dissolutionDate": {
+            "value": "${fields.dissolutionDate}",
             "decorators": [
                 {
                     "func": "cspace.datePicker",
@@ -196,7 +188,15 @@
             ],
             "selection": "${fields.termStatus}"
         },
-        ".csc-organizationAuthority-foundingDate": "${fields.foundingDate}",
+        ".csc-organizationAuthority-foundingDate": {
+            "value": "${fields.foundingDate}",
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
         ".csc-organizationAuthority-function": {
             "decorators": [
                 {

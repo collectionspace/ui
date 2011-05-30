@@ -13,7 +13,7 @@
             ],
             "value": "${fields.creator}"
         },
-        ".csc-media-dates": {
+        ".csc-media-date": {
             "decorators": [
                 {
                     "func": "cspace.makeRepeatable",
@@ -26,15 +26,15 @@
                                     "expander": {
                                         "repeatID": "repeat:",
                                         "tree": {
-                                            ".csc-media-date-container": {
+                                            ".csc-media-date": {
+                                                "value": "${{row}.date}",
                                                 "decorators": [
                                                     {
                                                         "func": "cspace.datePicker",
                                                         "type": "fluid"
                                                     }
                                                 ]
-                                            },
-                                            ".csc-media-date": "${{row}.date}"
+                                            }
                                         },
                                         "type": "fluid.renderer.repeat",
                                         "pathAs": "row",
@@ -98,26 +98,8 @@
         ".csc-media-dateModified": "${fields.dateModified}",
         ".csc-blobs-imgThumb": "${fields.blobs.0.imgThumb}",
         ".csc-blobs-name": "${fields.blobs.0.name}",
-        "expander": [{
-            "trueTree": {
-                ".csc-media-blobs": {
-                    
-                }
-            },
-            "condition": {
-                "funcName": "cspace.mediaUploader.assertBlob",
-                "args": "${fields.blobCsid}"
-            },
-            "type": "fluid.renderer.condition",
-            "falseTree": {
-                ".csc-media-blobs": {
-                    "decorators": {
-                        "classes": "hidden",
-                        "type": "addClass"
-                    }
-                }
-            }
-        }, {
+        "expander": [
+            {
                 "repeatID": ".csc-blobs-dimensionGroup:",
                 "tree": {
                     ".csc-blobs-value": "${{row}.value}",
@@ -131,7 +113,26 @@
                 "type": "fluid.renderer.repeat",
                 "pathAs": "row",
                 "controlledBy": "fields.blobs.0.dimensionGroup"
-        }],
+            },
+            {
+                "trueTree": {
+                    ".csc-media-blobs": {}
+                },
+                "condition": {
+                    "funcName": "cspace.mediaUploader.assertBlob",
+                    "args": "${fields.blobCsid}"
+                },
+                "type": "fluid.renderer.condition",
+                "falseTree": {
+                    ".csc-media-blobs": {
+                        "decorators": {
+                            "classes": "hidden",
+                            "type": "addClass"
+                        }
+                    }
+                }
+            }
+        ],
         ".csc-media-updatedAt": "${fields.updatedAt}",
         ".csc-media-location": "${fields.location}",
         ".csc-media-rightsHolder": {
@@ -242,14 +243,6 @@
                                     "expander": {
                                         "repeatID": "repeat:",
                                         "tree": {
-                                            ".csc-media-valueDate-container": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.datePicker",
-                                                        "type": "fluid"
-                                                    }
-                                                ]
-                                            },
                                             ".csc-media-dimension": {
                                                 "default": "0",
                                                 "optionnames": [
@@ -387,7 +380,15 @@
                                                 ],
                                                 "selection": "${{row}.measurementMethod}"
                                             },
-                                            ".csc-media-valueDate": "${{row}.valueDate}"
+                                            ".csc-media-valueDate": {
+                                                "value": "${{row}.valueDate}",
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.datePicker",
+                                                        "type": "fluid"
+                                                    }
+                                                ]
+                                            }
                                         },
                                         "type": "fluid.renderer.repeat",
                                         "pathAs": "row",
@@ -412,6 +413,7 @@
         ".csc-media-createdAt": "${fields.createdAt}",
         ".csc-blobs-length": "${fields.blobs.0.length}",
         ".csc-media-dimensionSummary": "${fields.dimensionSummary}",
+        ".csc-media-imgThumb": "${fields.imgThumb}",
         ".csc-media-uri": "${fields.uri}",
         ".csc-media-language": {
             "decorators": [
@@ -434,18 +436,18 @@
                                                     "Latin",
                                                     "Ancient Greek",
                                                     "Swahili",
+                                                    "Japanese",
                                                     "Korean",
                                                     "Hebrew",
-                                                    "Japanese",
-                                                    "Arabic",
                                                     "Chinese",
                                                     "Russian",
+                                                    "Arabic",
                                                     "German",
+                                                    "Italian",
                                                     "Portuguese",
                                                     "French",
-                                                    "Italian",
-                                                    "Spanish",
-                                                    "English"
+                                                    "English",
+                                                    "Spanish"
                                                 ],
                                                 "optionlist": [
                                                     "",
@@ -454,18 +456,18 @@
                                                     "latin",
                                                     "ancientgreek",
                                                     "swahili",
+                                                    "japanese",
                                                     "korean",
                                                     "hebrew",
-                                                    "japanese",
-                                                    "arabic",
                                                     "chinese",
                                                     "russian",
+                                                    "arabic",
                                                     "german",
+                                                    "italian",
                                                     "portuguese",
                                                     "french",
-                                                    "italian",
-                                                    "spn",
-                                                    "eng"
+                                                    "eng",
+                                                    "spn"
                                                 ],
                                                 "selection": "${{row}.language}"
                                             }

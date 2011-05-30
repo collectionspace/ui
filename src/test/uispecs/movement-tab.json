@@ -1,13 +1,5 @@
 {
     "details": {
-        ".csc-movement-plannedRemovalDate-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
-        },
         ".csc-movement-movementReferenceNumber-container": {
             "decorators": [
                 {
@@ -33,7 +25,15 @@
             ]
         },
         ".csc-movement-movementNote": "${fields.movementNote}",
-        ".csc-movement-plannedRemovalDate": "${fields.plannedRemovalDate}",
+        ".csc-movement-plannedRemovalDate": {
+            "value": "${fields.plannedRemovalDate}",
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
         ".csc-movement-currentLocation": "${fields.currentLocation}",
         ".csc-movement-movementContact": {
             "decorators": [
@@ -48,7 +48,8 @@
             ],
             "value": "${fields.movementContact}"
         },
-        ".csc-movement-removalDate-container": {
+        ".csc-movement-locationDate": {
+            "value": "${fields.locationDate}",
             "decorators": [
                 {
                     "func": "cspace.datePicker",
@@ -56,7 +57,6 @@
                 }
             ]
         },
-        ".csc-movement-locationDate": "${fields.locationDate}",
         ".csc-movement-currentLocationFitness": {
             "default": "0",
             "optionnames": [
@@ -119,14 +119,6 @@
             ]
         },
         ".csc-movement-currentLocationNote": "${fields.currentLocationNote}",
-        ".csc-movement-locationDate-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
-        },
         ".csc-movement-movementReferenceNumber": "${fields.movementReferenceNumber}",
         ".csc-movement-reasonForMove": {
             "default": "0",
@@ -152,6 +144,14 @@
             ],
             "selection": "${fields.reasonForMove}"
         },
-        ".csc-movement-removalDate": "${fields.removalDate}"
+        ".csc-movement-removalDate": {
+            "value": "${fields.removalDate}",
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        }
     }
 }

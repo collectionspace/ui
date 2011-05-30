@@ -142,7 +142,15 @@
             ],
             "selection": "${fields.acquisitionMethod}"
         },
-        ".csc-acquisition-accession-date": "${fields.accessionDate}",
+        ".csc-acquisition-accession-date": {
+            "value": "${fields.accessionDate}",
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ]
+        },
         ".csc-acquisition-owner": {
             "decorators": [
                 {
@@ -222,17 +230,17 @@
         ".csc-acquisition-acquisitionDates-label": {
             "messagekey": "acquisition-acquisitionDatesLabel"
         },
-        ".csc-acquisition-acquisitionAuthorizerDate": "${fields.acquisitionAuthorizerDate}",
-        ".csc-acquisition-fieldCollectionEventNames-label": {
-            "messagekey": "acquisition-fieldCollectionEventNamesLabel"
-        },
-        ".csc-acquisition-accession-date-container": {
+        ".csc-acquisition-acquisitionAuthorizerDate": {
+            "value": "${fields.acquisitionAuthorizerDate}",
             "decorators": [
                 {
                     "func": "cspace.datePicker",
                     "type": "fluid"
                 }
             ]
+        },
+        ".csc-acquisition-fieldCollectionEventNames-label": {
+            "messagekey": "acquisition-fieldCollectionEventNamesLabel"
         },
         ".csc-acquisition-object-purchase-offer-price-value": "${fields.objectPurchaseOfferPriceValue}",
         ".csc-object-acquisition-ownersource": "${fields.ownersource}",
@@ -251,14 +259,6 @@
         ".csc-acquisition-original-object-purchase-price-value": "${fields.originalObjectPurchasePriceValue}",
         ".csc-acquisition-objectPurchasePriceValue-label": {
             "messagekey": "acquisition-objectPurchasePriceValueLabel"
-        },
-        ".csc-acquisition-acquisitionAuthorizerDate-container": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ]
         },
         ".csc-acquisition-objectPurchaseOfferPriceCurrency-label": {
             "messagekey": "acquisition-objectPurchaseOfferPriceCurrencyLabel"
@@ -465,7 +465,7 @@
         },
         ".csc-acquisition-acquisition-note": "${fields.acquisitionNote}",
         ".csc-acquisition-transfer-of-title-number": "${fields.transferOfTitleNumber}",
-        ".csc-acquisition-acquisitionDates": {
+        ".csc-acquisition-date": {
             "decorators": [
                 {
                     "func": "cspace.makeRepeatable",
@@ -478,8 +478,8 @@
                                     "expander": {
                                         "repeatID": "repeat:",
                                         "tree": {
-                                            ".csc-acquisition-date": "${{row}.acquisitionDate}",
-                                            ".csc-acquisition-acquisition-date-container": {
+                                            ".csc-acquisition-date": {
+                                                "value": "${{row}.acquisitionDate}",
                                                 "decorators": [
                                                     {
                                                         "func": "cspace.datePicker",

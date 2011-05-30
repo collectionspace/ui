@@ -763,7 +763,7 @@ fluid.registerNamespace("cspace.util");
                     }]
                 };
             }
-            else if (isDecorator(val, "cspace.structuredDate")) {
+            else if (isDecorator(val, "cspace.structuredDate") || isDecorator(val, "cspace.datePicker")) {
                 newspec[key] = {
                     value: val.value
                 };                
