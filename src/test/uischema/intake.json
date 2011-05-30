@@ -2,15 +2,11 @@
     "intake": {
         "properties": {
             "relations": {
-                "default": {
-                    
-                },
+                "default": {},
                 "type": "object"
             },
             "termsUsed": {
-                "default": [
-                    
-                ],
+                "default": [],
                 "type": "array"
             },
             "csid": {
@@ -27,12 +23,12 @@
                     "insurancePolicyNumber": {
                         "type": "string"
                     },
-                    "depositorsRequirements": {
-                        "type": "string"
-                    },
                     "entryReason": {
                         "default": "",
-                        "type": "array"
+                        "type": "string"
+                    },
+                    "depositorsRequirements": {
+                        "type": "string"
                     },
                     "insuranceReferenceNumber": {
                         "type": "string"
@@ -58,14 +54,13 @@
                     "valuer": {
                         "type": "string"
                     },
-                    "currentLocationFitness": {
-                        "default": "",
-                        "type": "string"
-                    },
                     "conditionCheckNote": {
                         "type": "string"
                     },
                     "conditionCheckReferenceNumber": {
+                        "type": "string"
+                    },
+                    "createdAt": {
                         "type": "string"
                     },
                     "entryMethods": {
@@ -83,6 +78,9 @@
                         },
                         "type": "array"
                     },
+                    "insuranceNote": {
+                        "type": "string"
+                    },
                     "fieldCollectionSources": {
                         "items": {
                             "properties": {
@@ -98,9 +96,6 @@
                         "type": "array"
                     },
                     "valuationReferenceNumber": {
-                        "type": "string"
-                    },
-                    "insuranceNote": {
                         "type": "string"
                     },
                     "fieldCollectionEventNames": {
@@ -120,11 +115,32 @@
                     "entryNote": {
                         "type": "string"
                     },
-                    "currentLocationNote": {
-                        "type": "string"
-                    },
                     "conditionCheckDate": {
                         "type": "date"
+                    },
+                    "tenantID": {
+                        "type": "string"
+                    },
+                    "currentLocationGroup": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "currentLocationFitness": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "currentLocationNote": {
+                                    "type": "string"
+                                },
+                                "currentLocation": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
                     },
                     "fieldCollectors": {
                         "items": {
@@ -157,6 +173,9 @@
                     "packingNote": {
                         "type": "string"
                     },
+                    "entryDate": {
+                        "type": "date"
+                    },
                     "conditionCheckersOrAssessors": {
                         "items": {
                             "properties": {
@@ -171,16 +190,13 @@
                         },
                         "type": "array"
                     },
-                    "entryDate": {
-                        "type": "date"
-                    },
                     "fieldCollectionNote": {
                         "type": "string"
                     },
                     "insuranceRenewalDate": {
                         "type": "date"
                     },
-                    "currentLocation": {
+                    "updatedAt": {
                         "type": "string"
                     },
                     "currentOwner": {
@@ -225,11 +241,11 @@
                     "fieldCollectionPlace": {
                         "type": "string"
                     },
-                    "depositor": {
-                        "type": "string"
-                    },
                     "fieldCollectionDate": {
                         "type": "date"
+                    },
+                    "depositor": {
+                        "type": "string"
                     }
                 },
                 "type": "object"

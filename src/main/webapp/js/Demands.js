@@ -1040,7 +1040,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{arguments}.0",
             mergeAllOptions: [{
                 applier: "{recordEditor}.applier",
-                model: "{recordEditor}.model"
+                model: "{recordEditor}.model",
+                schema: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.repeatable.getSchema",
+                        args: ["{pageBuilder}.schema", "{pageBuilderIO}.options.recordType"]
+                    }
+                },
+                recordType: "{pageBuilderIO}.options.recordType"
             }, "{arguments}.1"]
         });
         

@@ -2,15 +2,11 @@
     "movement": {
         "properties": {
             "relations": {
-                "default": {
-                    
-                },
+                "default": {},
                 "type": "object"
             },
             "termsUsed": {
-                "default": [
-                    
-                ],
+                "default": [],
                 "type": "array"
             },
             "csid": {
@@ -21,15 +17,46 @@
                     "normalLocation": {
                         "type": "string"
                     },
-                    "movementContact": {
+                    "tenantID": {
                         "type": "string"
                     },
                     "movementReferenceNumber": {
                         "type": "string"
                     },
+                    "movementMethods": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "movementMethod": {
+                                    "default": "",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "reasonForMove": {
+                        "default": "",
+                        "type": "string"
+                    },
+                    "currentLocation": {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    },
+                    "movementContact": {
+                        "type": "string"
+                    },
                     "currentLocationFitness": {
                         "default": "",
-                        "type": "array"
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string"
                     },
                     "removalDate": {
                         "type": "date"
@@ -40,29 +67,7 @@
                     "plannedRemovalDate": {
                         "type": "date"
                     },
-                    "movementMethods": {
-                        "items": {
-                            "properties": {
-                                "_primary": {
-                                    "type": "boolean"
-                                },
-                                "movementMethod": {
-                                    "default": "",
-                                    "type": "array"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "type": "array"
-                    },
                     "movementNote": {
-                        "type": "string"
-                    },
-                    "reasonForMove": {
-                        "default": "",
-                        "type": "array"
-                    },
-                    "currentLocation": {
                         "type": "string"
                     },
                     "currentLocationNote": {

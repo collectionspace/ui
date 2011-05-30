@@ -2,15 +2,11 @@
     "organization": {
         "properties": {
             "relations": {
-                "default": {
-
-                },
+                "default": {},
                 "type": "object"
             },
             "termsUsed": {
-                "default": [
-
-                ],
+                "default": [],
                 "type": "array"
             },
             "csid": {
@@ -18,12 +14,6 @@
             },
             "fields": {
                 "properties": {
-                    "shortIdentifier": {
-                        "type": "string"
-                    },
-                    "dissolutionDate": {
-                        "type": "date"
-                    },
                     "functions": {
                         "items": {
                             "properties": {
@@ -37,6 +27,9 @@
                             "type": "object"
                         },
                         "type": "array"
+                    },
+                    "tenantID": {
+                        "type": "string"
                     },
                     "mainBodyGroup": {
                         "items": {
@@ -58,27 +51,6 @@
                         },
                         "type": "array"
                     },
-                    "subBodies": {
-                        "items": {
-                            "properties": {
-                                "_primary": {
-                                    "type": "boolean"
-                                },
-                                "subBody": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "type": "array"
-                    },
-                    "foundingPlace": {
-                        "type": "string"
-                    },
-                    "termStatus": {
-                        "default": "",
-                        "type": "array"
-                    },
                     "contactNames": {
                         "items": {
                             "properties": {
@@ -95,6 +67,39 @@
                     },
                     "foundingDate": {
                         "type": "date"
+                    },
+                    "shortIdentifier": {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    },
+                    "dissolutionDate": {
+                        "type": "date"
+                    },
+                    "foundingPlace": {
+                        "type": "string"
+                    },
+                    "subBodies": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "subBody": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "termStatus": {
+                        "default": "",
+                        "type": "string"
                     },
                     "historyNotes": {
                         "items": {

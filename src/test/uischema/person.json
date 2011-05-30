@@ -2,9 +2,7 @@
     "person": {
         "properties": {
             "relations": {
-                "default": {
-                    
-                },
+                "default": {},
                 "type": "object"
             },
             "csid": {
@@ -12,14 +10,31 @@
             },
             "fields": {
                 "properties": {
+                    "relatedTerms": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "relatedTerm": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
                     "surName": {
                         "type": "string"
                     },
-                    "birthPlace": {
-                        "type": "string"
+                    ".csc-contact-addressPlace-label": {
+                        "messagekey": "contact-addressPlaceLabel"
                     },
                     "deathDate": {
                         "type": "date"
+                    },
+                    "birthPlace": {
+                        "type": "string"
                     },
                     "nationalities": {
                         "items": {
@@ -38,6 +53,10 @@
                     "shortIdentifier": {
                         "type": "string"
                     },
+                    "title": {
+                        "default": "",
+                        "type": "string"
+                    },
                     "schoolsOrStyles": {
                         "items": {
                             "properties": {
@@ -52,32 +71,54 @@
                         },
                         "type": "array"
                     },
-                    "title": {
-                        "default": "",
-                        "type": "array"
-                    },
                     "faxNumber": {
                         "type": "string"
+                    },
+                    ".csc-contact-email-label": {
+                        "messagekey": "contact-emailLabel"
                     },
                     "initials": {
                         "type": "string"
                     },
-                    "termStatus": {
-                        "default": "Provisional",
-                        "type": "array"
+                    "createdAt": {
+                        "type": "string"
                     },
                     "nameNote": {
+                        "type": "string"
+                    },
+                    "termStatus": {
+                        "default": "provisional",
                         "type": "string"
                     },
                     "name": {
                         "type": "string"
                     },
+                    ".csc-contact-addressType-label": {
+                        "messagekey": "contact-addressTypeLabel"
+                    },
                     "gender": {
                         "default": "",
-                        "type": "array"
+                        "type": "string"
+                    },
+                    ".csc-contact-tenantID-label": {
+                        "messagekey": "contact-tenantIDLabel"
                     },
                     "birthDate": {
                         "type": "date"
+                    },
+                    "narrowerContexts": {
+                        "items": {
+                            "properties": {
+                                "narrowerContext": {
+                                    "type": "string"
+                                },
+                                "_primary": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
                     },
                     "foreName": {
                         "type": "string"
@@ -99,9 +140,6 @@
                     "nameAdditions": {
                         "type": "string"
                     },
-                    "middleName": {
-                        "type": "string"
-                    },
                     "occupations": {
                         "items": {
                             "properties": {
@@ -116,33 +154,75 @@
                         },
                         "type": "array"
                     },
-                    "addressPlace": {
+                    "middleName": {
                         "type": "string"
                     },
                     "bioNote": {
+                        "type": "string"
+                    },
+                    "addressPlace": {
+                        "type": "string"
+                    },
+                    "tenantID": {
                         "type": "string"
                     },
                     "web": {
                         "type": "string"
                     },
                     "addressType": {
+                        "default": "",
                         "type": "string"
                     },
                     "deathPlace": {
                         "type": "string"
                     },
+                    ".csc-contact-faxNumber-label": {
+                        "messagekey": "contact-faxNumberLabel"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    },
+                    ".csc-contact-updatedAt-label": {
+                        "messagekey": "contact-updatedAtLabel"
+                    },
                     "email": {
+                        "type": "string"
+                    },
+                    "broaderContext": {
                         "type": "string"
                     },
                     "telephoneNumber": {
                         "type": "string"
                     },
+                    ".csc-contact-web-label": {
+                        "messagekey": "contact-webLabel"
+                    },
+                    ".csc-contact-createdAt-label": {
+                        "messagekey": "contact-createdAtLabel"
+                    },
+                    "equivalentContexts": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "equivalentContext": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
                     "displayName": {
                         "type": "string"
                     },
                     "salutation": {
-                        "default": "",
-                        "type": "array"
+                        "default": "dear",
+                        "type": "string"
+                    },
+                    ".csc-contact-telephoneNumber-label": {
+                        "messagekey": "contact-telephoneNumberLabel"
                     }
                 },
                 "type": "object"

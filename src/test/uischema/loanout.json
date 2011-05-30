@@ -2,15 +2,11 @@
     "loanout": {
         "properties": {
             "relations": {
-                "default": {
-
-                },
+                "default": {},
                 "type": "object"
             },
             "termsUsed": {
-                "default": [
-
-                ],
+                "default": [],
                 "type": "array"
             },
             "csid": {
@@ -18,6 +14,9 @@
             },
             "fields": {
                 "properties": {
+                    "tenantID": {
+                        "type": "string"
+                    },
                     "lendersAuthorizer": {
                         "type": "string"
                     },
@@ -26,7 +25,7 @@
                     },
                     "loanPurpose": {
                         "default": "",
-                        "type": "array"
+                        "type": "string"
                     },
                     "loanedObjectStatusGroup": {
                         "items": {
@@ -55,19 +54,25 @@
                     "loanRenewalApplicationDate": {
                         "type": "date"
                     },
+                    "updatedAt": {
+                        "type": "string"
+                    },
                     "lendersContact": {
                         "type": "string"
                     },
-                    "borrowersContact": {
+                    "createdAt": {
                         "type": "string"
                     },
                     "loanReturnDate": {
                         "type": "date"
                     },
-                    "specialConditionsOfLoan": {
+                    "borrowersContact": {
                         "type": "string"
                     },
                     "loanOutNote": {
+                        "type": "string"
+                    },
+                    "specialConditionsOfLoan": {
                         "type": "string"
                     },
                     "lendersAuthorizationDate": {

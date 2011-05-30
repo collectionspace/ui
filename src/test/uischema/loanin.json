@@ -2,15 +2,11 @@
     "loanin": {
         "properties": {
             "relations": {
-                "default": {
-
-                },
+                "default": {},
                 "type": "object"
             },
             "termsUsed": {
-                "default": [
-
-                ],
+                "default": [],
                 "type": "array"
             },
             "csid": {
@@ -18,10 +14,10 @@
             },
             "fields": {
                 "properties": {
-                    "loanInDate": {
-                        "type": "date"
-                    },
                     "loanInNumber": {
+                        "type": "string"
+                    },
+                    "tenantID": {
                         "type": "string"
                     },
                     "lenderGroup": {
@@ -47,27 +43,36 @@
                         },
                         "type": "array"
                     },
-                    "loanInContact": {
-                        "type": "string"
-                    },
-                    "loanInConditions": {
-                        "type": "string"
-                    },
                     "loanInNote": {
                         "type": "string"
                     },
-                    "loanReturnDate": {
-                        "type": "date"
-                    },
                     "loanPurpose": {
                         "default": "",
-                        "type": "array"
+                        "type": "string"
                     },
                     "loanRenewalApplicationDate": {
                         "type": "date"
                     },
                     "borrowersAuthorizer": {
                         "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    },
+                    "loanInDate": {
+                        "type": "date"
+                    },
+                    "loanInContact": {
+                        "type": "string"
+                    },
+                    "loanInConditions": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "loanReturnDate": {
+                        "type": "date"
                     }
                 },
                 "type": "object"

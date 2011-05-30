@@ -18,10 +18,12 @@ cspace = cspace || {};
 
     // TODO: Account for an elPath into the model that points to undefined: not known whether it is a simple field or an object/row.
     //       We need to write a test for this but I think it is fixed now
-    var addRow = function (fields) {
-        // TODO: It's not yet sure whether or not a simple object like this will work for
-        //       groups of fields - we'll have to test against the server when it's supported
-        fields.push({});
+    var addRow = function (fields, index, elPath, schema, recordType) {
+        var row;
+        if (schema && recordType) {
+            row = cspace.util.getBeanValue({}, fluid.model.composeSegments(recordType, elPath, 0), schema);
+        }
+        fields.push(row || {});
         return fields;
     };
     
@@ -48,21 +50,10 @@ cspace = cspace || {};
             radioButtons[index].checked = field._primary || false;
         });
     };
-    
-//    var renderFinalRow = function (that) {
-//        var tree = getExpandedTree(that);
-//        var children = tree.children;
-//        tree.children = [children[children.length - 1]];
-//        var markup = fluid.reRender(that.template, that.tempContainer, tree, that.options.rendererOptions);
-//        var repeats = that.locate("repeat");
-//        var lastRepeat = $(repeats[repeats.length - 1]);
-//        var newRepeat = that.locate("repeat", that.tempContainer);
-//        lastRepeat.after(newRepeat);
-//    };
 
     var requestChange = function (that, callback, index) {
         var elPath = that.options.elPath;
-        that.applier.requestChange(elPath, callback(that.fetchModel(), index));
+        that.applier.requestChange(elPath, callback(that.fetchModel(), index, elPath, that.options.schema, that.options.recordType));
     };
     
     var processDeleteInput = function (input, model) {
@@ -82,8 +73,6 @@ cspace = cspace || {};
         that.container.delegate(that.options.selectors.add, "click", function () {
             requestChange(that, addRow);
             that.refreshView();
-//            renderFinalRow(that);
-//            that.events.afterRender.fire();
             that.events.afterAdd.fire();
         });
         
@@ -95,11 +84,7 @@ cspace = cspace || {};
             
             var index = that.locate("remove").index(this);
             requestChange(that, deleteRow, index);
-//            var repeats = that.locate("repeat");
-//            $(repeats[index]).remove();
-//            setupPrimary(that.locate("primary"), that.fetchModel());
             that.refreshView();
-//            that.events.afterRender.fire(); // the test cases rely on this, though no user would
             that.events.afterDelete.fire();
         });
         
@@ -139,11 +124,6 @@ cspace = cspace || {};
             that.template = fluid.selfRender(that.container, tree, that.options.rendererOptions);
         }
         positionAddButton(that.locate("add")[0], that.locate("remove")[0]);
-
-        // This following line ought to work but fails on the first render on IE8 - it appears that assumptions
-        // about relationship between CSS position and absolute position are violated during jQuery.offset() for 
-        // this freshly created element.
-        //that.locate("add").position({my: "right bottom", at: "right top", of: $(that.locate("repeat")[0]), offset: "0 -2"});
         setupPrimary(that.locate("primary"), that.fetchModel());
         that.events.afterRender.fire();
     };
@@ -153,15 +133,15 @@ cspace = cspace || {};
      * In this case, we require at least one instance of the field in the model.
      */
     // TODO: Make most of this code go away by supporting "offset models" in the applier
-    var prepareModel = function (model, elPath, applier) {
-        var list = fluid.model.getBeanValue(model, elPath);
+    var prepareModel = function (model, elPath, applier, schema, recordType) {
+        var list = fluid.get(model, elPath);
         if (list && list.length > 1) {
             return;
         }
         if (list && list.length > 0 && list[0]._primary) {
             return;
         }
-        list = list && list.length > 0 ? list : addRow([]);
+        list = list && list.length > 0 ? list : addRow([], null, elPath, schema, recordType);
         fluid.merge(null, list[0], {
             _primary: true
         });
@@ -215,7 +195,7 @@ cspace = cspace || {};
         
         that.applier = that.options.applier;
         that.model = that.options.model;
-        prepareModel(that.model, that.options.elPath, that.applier);
+        prepareModel(that.model, that.options.elPath, that.applier, that.options.schema, that.options.recordType);
         fluid.invokeGlobalFunction(that.options.generateMarkup, [that]);
         that.options.rendererOptions.model = that.model;
         that.options.rendererOptions.applier = that.applier;
@@ -298,6 +278,12 @@ cspace = cspace || {};
         addPrimaryAndDelete(that, node);        
     };
     
+    cspace.repeatable.getSchema = function (globalSchema, recordType) {
+        var schema = {};
+        schema[recordType] = globalSchema[recordType];
+        return schema;
+    };
+    
     fluid.defaults("cspace.makeRepeatable", {
         gradeNames: ["fluid.viewComponent"],
         selectors: {
@@ -337,6 +323,7 @@ cspace = cspace || {};
         },
         applier: null,      // Applier for the main record that cspace.repeatable belongs to. REQUIRED
         model: {},        // Model for the main record that cspace.repeatable belongs to. REQUIRED
+        schema: null,
         elPath: "items",    // Path into the model that points to the collection of fields to be repeated - it should reference an array.
         protoTree: {},      // A dehydrated tree that will be expanded by the expander and rendered in the component's refreshView.
         rendererOptions: {

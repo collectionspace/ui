@@ -2,15 +2,11 @@
     "objectexit": {
         "properties": {
             "relations": {
-                "default": {
-
-                },
+                "default": {},
                 "type": "object"
             },
             "termsUsed": {
-                "default": [
-
-                ],
+                "default": [],
                 "type": "array"
             },
             "csid": {
@@ -18,10 +14,19 @@
             },
             "fields": {
                 "properties": {
+                    "updatedAt": {
+                        "type": "string"
+                    },
                     "exitNote": {
                         "type": "string"
                     },
+                    "tenantID": {
+                        "type": "string"
+                    },
                     "currentOwner": {
+                        "type": "string"
+                    },
+                    "createdAt": {
                         "type": "string"
                     },
                     "exitDate": {
@@ -35,7 +40,7 @@
                                 },
                                 "exitMethod": {
                                     "default": "",
-                                    "type": "array"
+                                    "type": "string"
                                 }
                             },
                             "type": "object"
@@ -50,7 +55,7 @@
                     },
                     "exitReason": {
                         "default": "",
-                        "type": "array"
+                        "type": "string"
                     },
                     "depositor": {
                         "type": "string"

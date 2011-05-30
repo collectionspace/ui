@@ -2,15 +2,11 @@
     "acquisition": {
         "properties": {
             "relations": {
-                "default": {
-                    
-                },
+                "default": {},
                 "type": "object"
             },
             "termsUsed": {
-                "default": [
-                    
-                ],
+                "default": [],
                 "type": "array"
             },
             "csid": {
@@ -138,7 +134,7 @@
                     },
                     "acquisitionMethod": {
                         "default": "gift",
-                        "type": "array"
+                        "type": "string"
                     },
                     "originalObjectPurchasePriceValue": {
                         "type": "string"
