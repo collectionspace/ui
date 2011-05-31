@@ -84,6 +84,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         styles: {
             baseStyle: "cs-autocomplete-input",
             loadingStyle: "cs-autocomplete-loading"
+        },
+        components: {
+            eventHolder: "{eventHolder}"
         }
     });
 
@@ -106,6 +109,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
     fluid.autocomplete.autocompleteView = function (container, options) {
         var that = fluid.initView("fluid.autocomplete.autocompleteView", container, options);
+        fluid.initDependents(that);
         that.container.addClass(that.options.styles.baseStyle);
         
         fluid.autocomplete.bindListener(that);
@@ -118,6 +122,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         that.events.onSearchDone.addListener(function () {
             container.removeClass(that.options.styles.loadingStyle);
+        });
+        
+        fluid.each(["selectAuthority", "selectMatch"], function (event) {
+            that.eventHolder.events[event].addListener(function () {
+                container.addClass(that.options.styles.loadingStyle);
+            });
+        });
+        fluid.each(["afterSelectMatch", "afterSelectAuthority"], function (event) {
+            that.eventHolder.events[event].addListener(function () {
+                container.removeClass(that.options.styles.loadingStyle);
+            });
         });
         
         that.suppress = function () {
@@ -173,18 +188,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         styles: {
             button: "cs-autocomplete-closebutton"
         },
-        buttonImageUrl: "../images/icnDelete.png",
-        markup: "<a href=\"#\"><img /></a>",
+        markup: "<a href=\"#\"></a>",
         positionAdjustment: {
             x: -1,
-            y: 1
+            y: 0
         }
     });
     
     cspace.autocomplete.closeButton = function (container, options) {
         var that = fluid.initView("cspace.autocomplete.closeButton", container, options);
         var button = $(that.options.markup);
-        $("img", button).attr("src", that.options.buttonImageUrl);
         button.addClass(that.options.styles.button);
         button.insertAfter(that.container);
         //$("body").append(button);
@@ -337,8 +350,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // old value.
         that.union.keyup(that.escapeHandler);
         
-        that.eventHolder.events.selectAuthority.addListener(that.closeWithFocus);
-        that.eventHolder.events.selectMatch.addListener(that.closeWithFocus);
+        that.eventHolder.events.afterSelectAuthority.addListener(that.closeWithFocus);
+        that.eventHolder.events.afterSelectMatch.addListener(that.closeWithFocus);
        
         fluid.initDependents(that);
         
@@ -490,9 +503,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.autocomplete.selectAuthority = function (that, key) {
         var authority = that.model.authorities[key];
+        that.buttonAdjustor(true); // Hide the button. It will be replaced by the spinnder to indicate selection is being saved (CSPACE-2091).
         that.newTermSource.put({fields: {displayName: that.model.term}}, {termUrl: authority.url}, function (response) {
             updateAuthoritatively(that, response);
-            that.buttonAdjustor();
+            that.eventHolder.events.afterSelectAuthority.fire();
         });
     };
     
@@ -506,6 +520,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var match = that.model.matches[key];
         updateAuthoritatively(that, match);
         that.buttonAdjustor();
+        that.eventHolder.events.afterSelectMatch.fire();
     };
     
     cspace.autocomplete.selectMatchConfirm = function (that, key) {
@@ -513,6 +528,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         if (!match.broader) {
             updateAuthoritatively(that, match);
             that.buttonAdjustor();
+            that.eventHolder.events.afterSelectMatch.fire();
             return;
         }
         that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
@@ -521,6 +537,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     if (userAction === "act") {
                         updateAuthoritatively(that, match);
                         that.buttonAdjustor();
+                        that.eventHolder.events.afterSelectMatch.fire();
                     } else {
                         that.revertState();
                     }
@@ -572,7 +589,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             },
             eventHolder: {
-                type: "fluid.autocomplete.eventHolder"
+                type: "fluid.autocomplete.eventHolder",
+                priority: "first"
             },
             popup: {
                 type: "cspace.autocomplete.popup",
@@ -607,7 +625,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         events: {
             revertState: null,
             selectAuthority: null,
-            selectMatch: null
+            afterSelectAuthority: null,
+            selectMatch: null,
+            afterSelectMatch: null
         }
     });
         

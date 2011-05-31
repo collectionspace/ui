@@ -8,10 +8,15 @@ You may obtain a copy of the ECL 2.0 License at
 https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
-.cs-autocomplete-closebutton {position: absolute}
+.cs-autocomplete-closebutton {
+    position: absolute;
+    background: url('../images/icnDelete.png') no-repeat center center;
+    width: 14px;
+    height: 14px;    
+}
 .cs-autocomplete-input {/*width:99.75%*/ width:100%;}
 .cs-autocomplete-input {background: #fff url(../images/arrowPredictiveText.png) no-repeat right center; }
-.cs-autocomplete-loading { background: #fff url(../images/indeterminate_progress_indicator_true_transparent_16x16.gif) right center no-repeat; }
+.cs-autocomplete-loading { background: #fff url(../images/indeterminate_progress_indicator_true_transparent_16x16.gif) right center no-repeat;}
 
 /* Menu
 ----------------------------------*/
