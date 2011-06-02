@@ -60,16 +60,6 @@ cspace = cspace || {};
     cspace.searchToRelateDialog = function (container, options) {
         var that = fluid.initRendererComponent("cspace.searchToRelateDialog", container, options);
         var recordName = that.messageResolver.resolve(that.options.related);
-        var title = that.messageResolver.resolve("title", {recordType: recordName});
-        that.container.dialog({
-            autoOpen: false,
-            modal: true,
-            minWidth: 700,
-            draggable: true,
-            dialogClass: "cs-search-dialog cs-search-dialogFor-" + recordName.replace(/\s+/g,""),
-            position: ["center", 100],
-            title: title                
-        });
         
         that.open = function () {
             that.search.hideResults();
@@ -81,6 +71,17 @@ cspace = cspace || {};
         };
         that.renderer.refreshView();
         fluid.initDependents(that);
+        
+        var title = that.messageResolver.resolve("title", {recordType: recordName});        
+        that.container.dialog({
+            autoOpen: false,
+            modal: true,
+            minWidth: 700,
+            draggable: true,
+            dialogClass: "cs-search-dialog " + that.setupDialogClass(),
+            position: ["center", 100],
+            title: title                
+        });
 
         that.locate("addButton", that.container).hide();
 
@@ -89,6 +90,11 @@ cspace = cspace || {};
         bindEventHandlers(that, that.container);
         that.events.afterSetup.fire(that);
         return that;
+    };
+
+    cspace.searchToRelateDialog.setupDialogClass = function (dialogTrigger) {
+        var dialog = "cs-search-dialogFor-" + dialogTrigger;
+        return dialog;
     };
 
     cspace.searchToRelateDialog.produceTree = function (that) {
@@ -216,6 +222,9 @@ cspace = cspace || {};
             rendererTargetSelector: "dialog"
         },
         produceTree: cspace.searchToRelateDialog.produceTree,
+        invokers: {
+            setupDialogClass: "setupDialogClass"
+        },
         parentBundle: "{globalBundle}",
         strings: {
             createNewButton: "Create",

@@ -221,6 +221,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+
+        fluid.demands("setupDialogClass", [ "cspace.searchToRelateDialog" ], {
+            funcName: "cspace.searchToRelateDialog.setupDialogClass",
+            args: "{searchToRelateDialog}.options.related"          
+        });              
+
         fluid.demands("cspace.searchToRelateDialog", ["cspace.relationManager", "cspace.localData", "cspace.sidebar"], {
             container: "{relationManager}.dom.searchDialog",
             options: {
@@ -631,7 +637,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 strings: {
                     deletePrimaryMessage: "Delete this role?",
                     deleteFailedMessage: "Error deleting role: ",
-                    removeSuccessfulMessage: "Role successfully deleted"
+                    removeSuccessfulMessage: "Role successfully deleted",
+                    createFailedMessage: "Error creating Role: ",
+                    createSuccessfulMessage: "New Role successfully created",
+                    fetchFailedMessage: "Error retriving Role: ",
+                    updateFailedMessage: "Error saving Role: ",
+                    updateSuccessfulMessage: "Role successfully saved"
                 }
             }
         });
@@ -658,7 +669,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 strings: {
                     deletePrimaryMessage: "Delete this user?",
                     deleteFailedMessage: "Error deleting user: ",
-                    removeSuccessfulMessage: "User successfully deleted"
+                    removeSuccessfulMessage: "User successfully deleted",
+                    createFailedMessage: "Error creating user: ",
+                    createSuccessfulMessage: "New user successfully created",
+                    fetchFailedMessage: "Error retriving user: ",
+                    updateFailedMessage: "Error saving user: ",
+                    updateSuccessfulMessage: "User successfully saved"
                 }
             }
         });
@@ -1445,6 +1461,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("search", ["cspace.searchToRelateDialog", "cspace.localData", "cspace.test"], {
            container: "{searchToRelateDialog}.container"
         });
+        
+        //searchToReleate demands:
+        fluid.demands("setupDialogClass", [ "cspace.searchToRelateDialog", "cspace.localData", "cspace.test" ], {
+            funcName: "cspace.searchToRelateDialog.setupDialogClass",
+            args: "{searchToRelateDialog}.options.related"          
+        });              
     };
     
     fluid.demands("cspace.localDemands", "cspace.localData", {
