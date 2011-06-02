@@ -261,7 +261,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.urlExpander", "cspace.localData", {
             options: {
                 vars: {
-                    chain: ".."
+                    chain: "../../../test"
                 }
             }
         });

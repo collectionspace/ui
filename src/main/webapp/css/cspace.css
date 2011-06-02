@@ -581,7 +581,7 @@ table tbody.highlight tr:hover td {
 .fl-container-1024-inner {padding:0; background-color:#F0F5FB;}
 .fl-container-left {min-width:693px; width:70%;}
 .fl-container-admin   {width:100%;}
-.fl-container-pivot  {width:30%; min-width: 297px;}
+.fl-container-pivot  {width:30%; min-width: 297px; margin-top:23px;}
 .fl-container-admin-menu ul {width:100%;}
 .fl-container-admin-menu ul li{list-style-type:none; cursor:pointer; padding:2px 0 3px 5px; border:1px solid #6E9FCE; background-color:#6E9FCE; margin-bottom:4px; color:#fff; font-weight:bold;}
 .fl-container-admin-menu ul li.selected {background-color:#FFF; color:#6E9FCE;}
@@ -932,8 +932,6 @@ table tbody.highlight tr:hover td {
 	margin-right:auto;}
 .cataloging .fl-container-pivot {
 	padding-top:0px;}
-.fl-container-pivot .right-sidebar {
-	padding-top:23px;}
 .info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-select, .info-pair-termlist {
 	width:100%; 
 	position:relative; 
