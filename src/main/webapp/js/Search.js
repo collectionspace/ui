@@ -80,29 +80,6 @@ cspace = cspace || {};
         return rendererCutpoints;
     };
 
-    var displaySearchResults = function (that) {
-        var range = that.model.pagination.totalItems; // TODO: dependency on external model
-        var pagerModel = that.resultsPager.model;
-
-        // you're not supposed to touch the pager's model, but there's a bug in this version, so...
-        pagerModel.totalRange = range;
-        that.resultsPager.events.initiatePageChange.fire({pageIndex: pagerModel.pageIndex, forceUpdate: true});
-            
-        displayResultsCount(that.dom, range, that.model.searchModel.keywords, that.options.strings);
-        that.locate("resultsContainer").show();
-        that.events.afterSearch.fire();
-    };
-
-    // TODO: start to interact with this model using a proper ChangeApplier
-    var updateModel = function (searchModel, newModel) {
-        searchModel.keywords = newModel.keywords;
-        searchModel.recordTypeLong = newModel.recordTypeLong;
-        var recordType = newModel.recordTypeLong;
-        // CSPACE-1139
-        searchModel.recordType = recordType.indexOf("authorities-") === 0 ? 
-            recordType.substring(12) : recordType;
-    };
-
     cspace.search.makeModelFilter = function (that) {
         return function (directModel, newModel, permutation) {
             var i;
@@ -132,7 +109,7 @@ cspace = cspace || {};
 
     var bindEventHandlers = function (that) {
         that.events.modelChanged.addListener(function () {
-            displaySearchResults(that);
+            that.displaySearchResults();
         });
         
         that.events.onError.addListener(function (action, status) {
@@ -166,128 +143,30 @@ cspace = cspace || {};
             });
         }
     };
-
-    var applyResults = function (that, data) {
-        if (that.searchResultsResolver) {
-            that.searchResultsResolver.resolve(data);
-        }
-        var searchModel = that.model.searchModel;
-        var results = that.model.results;
-        var offset = searchModel.pageIndex * searchModel.pageSize;
-
-        fluid.model.copyModel(that.model.pagination, data.pagination);
-
-        if (data.pagination.totalItems !== that.model.pagination.totalItems) {
-            fluid.clear(results);
-        }
-
-        fluid.each(data.results, function (row, index) {
-            var fullIndex = offset + index;
-            if (!results[fullIndex]) { 
-                results[fullIndex] = row;
-                results[fullIndex].selected = false;
-            }
-        });
-        that.model.searchModel.renderRequest = true;
-        that.events.modelChanged.fire();
-    };
     
-    var makeSearcher = function (that) {
-        return function (newPagerModel) {
-            that.mainSearch.locate("searchQuery").val(that.model.searchModel.keywords);
-            that.mainSearch.locate("recordTypeSelect").val(that.model.searchModel.recordTypeLong);
-            displayLookingMessage(that.dom, that.model.searchModel.keywords, that.options.strings);
-            var searchModel = that.model.searchModel;
-            var pagerModel = newPagerModel || that.resultsPager.model;
-            searchModel.pageSize = pagerModel.pageSize;
-            searchModel.pageIndex = pagerModel.pageIndex;
-            var url = fluid.invokeGlobalFunction(that.options.searchUrlBuilder, [that.model.searchModel]);
-            that.events.onSearch.fire();
-            fluid.log("Querying url " + url);
-            $.ajax({
-                url: url,
-                type: "GET",
-                dataType: "json",
-                success: function (data, textStatus) {
-                    applyResults(that, data);
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    that.events.onError.fire("search", textStatus);
-                }
-            });
-        };
+    cspace.search.handleSubmitSearch = function (searchBox, that) {
+        that.options.messageBar.hide();
+        that.applier.requestChange("results", []);
+        that.updateModel({
+            keywords: searchBox.locate("searchQuery").val(),
+            recordType: searchBox.locate("recordTypeSelect").val()
+        });
+        that.resultsPager.applier.requestChange("pageCount", 1);
+        that.resultsPager.applier.requestChange("pageIndex", 0);
+        that.resultsPager.applier.requestChange("totalRange", 0);
+        that.search();
     };
 
-    cspace.search.searchView = function (container, options) {
-        var that = fluid.initView("cspace.search.searchView", container, options);
-        
-        that.hideResults = function () {
-            that.locate("resultsContainer").hide();
-            that.locate("resultsCountContainer").hide();
-            that.locate("lookingContainer").hide();
-            that.options.messageBar.hide();
-        };
-        
-        that.model = {
+    fluid.defaults("cspace.search.searchView", {
+        gradeNames: ["fluid.viewComponent", "autoInit"],
+        finalInitFunction: "cspace.search.searchView.finalInit",
+        model: {
             searchModel: {
                 initialState: true
             },
             results: [],
             pagination: {}
-        };
-
-        that.search = makeSearcher(that);
-        
-        that.updateModel = function (newModel) {
-            updateModel(that.model.searchModel, newModel);
-        };
-        
-        that.updateModel({
-            keywords: decodeURI(cspace.util.getUrlParameter("keywords")),
-            recordTypeLong: cspace.util.getUrlParameter("recordtype")
-        });
-
-        that.hideResults();
-
-        fluid.initDependents(that);
-        bindEventHandlers(that);
-
-        if (that.model.searchModel.recordTypeLong) {
-            that.search();
-        }
-        return that;
-    };
-    
-    cspace.search.handleSubmitSearch = function (searchBox, that) {
-        that.options.messageBar.hide();
-        fluid.clear(that.model.results);
-        that.updateModel({
-            keywords: searchBox.locate("searchQuery").val(),
-            recordTypeLong: searchBox.locate("recordTypeSelect").val()
-        });
-        that.search();
-    };
-    
-    cspace.search.defaultSearchUrlBuilder = function (options) {
-        var recordTypeParts = options.recordTypeLong.split('-');        
-        var sofar = "../../chain/" + recordTypeParts.join('/') + "/search?query=" + options.keywords;
-        if (options.pageSize !== undefined && options.pageIndex !== undefined) {
-            sofar += "&pageNum=" + options.pageIndex + "&pageSize=" + options.pageSize;
-        }
-        return sofar;
-    };
-    
-    cspace.search.localSearchUrlBuilder = function (searchModel) {
-        // CSPACE-1139
-        var recordType = searchModel.recordTypeLong;
-        var recordTypeParts = recordType.split('-');
-        // TODO: IoC resolve this and remove the "localSearchToRelateDialog" from RelationManager.js
-        var prefix = cspace.util.isTest ? "../data/" : "../../../test/data/";
-        return prefix + recordTypeParts.join('/') + "/search.json";
-    };    
-
-    fluid.defaults("cspace.search.searchView", {
-        gradeNames: ["fluid.viewComponent"],
+        },
         selectors: {
             mainSearch: ".csc-search-box",
             resultsContainer: ".csc-search-results",
@@ -304,6 +183,9 @@ cspace = cspace || {};
             },
             loadingIndicator: ".csc-search-loadingIndicator"
         },
+        styles: {
+            disabled: "cs-search-disabled"
+        },
         strings: {
             errorMessage: "We've encountered an error retrieving search results. Please try again.",
             resultsCount: "Found %count records for %query",
@@ -319,9 +201,29 @@ cspace = cspace || {};
         
         columnList: ["number", "summary", "recordtype", "summarylist.updatedAt"],
         resultsSelectable: false,
-
-        searchUrlBuilder: "cspace.search.defaultSearchUrlBuilder",
-        
+        invokers: {
+            buildUrl: "cspace.search.searchView.buildUrl",
+            hideResults: {
+                funcName: "cspace.search.searchView.hideResults",
+                args: ["{searchView}.dom", "{searchView}.options.messageBar"]
+            },
+            search: {
+                funcName: "cspace.search.searchView.search",
+                args: ["{arguments}.0", "{searchView}"]
+            },
+            updateModel: {
+                funcName: "cspace.search.searchView.updateModel",
+                args: ["{searchView}.applier", "{arguments}.0"]
+            },
+            displaySearchResults: {
+                funcName: "cspace.search.searchView.displaySearchResults",
+                args: ["{searchView}"]
+            },
+            applyResults: {
+                funcName: "cspace.search.searchView.applyResults",
+                args: ["{searchView}", "{arguments}.0"]
+            }
+        },
         components: {
             searchLoadingIndicator: {
                 type: "cspace.util.loadingIndicator",
@@ -394,26 +296,137 @@ cspace = cspace || {};
                     }
                 }
             }
-        }
+        },
+        urls: cspace.componentUrlBuilder({
+            pageNum: "&pageNum=%pageNum",
+            pageSize: "&pageSize=%pageSize",
+            defaultUrl: "%chain/%recordType/search?query=%keywords%pageNum%pageSize",
+            localUrl: "%chain/data/%recordType/search.json"
+        })
     });
+    
+    cspace.search.searchView.applyResults = function (that, data) {
+        var searchModel = that.model.searchModel;
+        var offset = searchModel.pageIndex * searchModel.pageSize;
+        that.applier.requestChange("pagination", data.pagination);
+        fluid.each(data.results, function (row, index) {
+            var fullIndex = offset + index;
+            if (!that.model.results[fullIndex]) {
+                row.selected = false;
+                that.applier.requestChange(fluid.model.composeSegments("results", fullIndex), row);
+            }
+        });
+        that.applier.requestChange("searchModel.renderRequest", true);
+        that.events.modelChanged.fire();
+    };
+    
+    cspace.search.searchView.displaySearchResults = function (that) {
+        var range = that.model.pagination.totalItems; // TODO: dependency on external model
+        var pagerModel = that.resultsPager.model;
+
+        // you're not supposed to touch the pager's model, but there's a bug in this version, so...
+        that.resultsPager.applier.requestChange("totalRange", range);
+        that.resultsPager.events.initiatePageChange.fire({pageIndex: pagerModel.pageIndex, forceUpdate: true});
+            
+        displayResultsCount(that.dom, range, that.model.searchModel.keywords, that.options.strings);
+        if (that.searchResultsResolver) {
+            that.searchResultsResolver.resolve(that.model);
+        }
+        that.locate("resultsContainer").show();
+        that.events.afterSearch.fire();
+    };
+    
+    cspace.search.searchView.updateModel = function (applier, newModel) {
+        fluid.each(newModel, function (value, field) {
+            applier.requestChange(fluid.model.composeSegments("searchModel", field), value);
+        });
+    };
+    
+    cspace.search.searchView.finalInit = function (that) {
+        that.updateModel({
+            keywords: decodeURI(cspace.util.getUrlParameter("keywords")),
+            recordType: cspace.util.getUrlParameter("recordtype")
+        });
+        that.hideResults();
+        bindEventHandlers(that);
+        if (that.model.searchModel.recordType) {
+            that.search();
+        }
+    };
+    
+    cspace.search.searchView.search = function (newPagerModel, that) {
+        var searchModel = that.model.searchModel;
+        that.mainSearch.locate("searchQuery").val(searchModel.keywords);
+        that.mainSearch.locate("recordTypeSelect").val(searchModel.recordType);
+        displayLookingMessage(that.dom, searchModel.keywords, that.options.strings);
+        var pagerModel = newPagerModel || that.resultsPager.model;
+        that.applier.requestChange("searchModel.pageSize", pagerModel.pageSize);
+        that.applier.requestChange("searchModel.pageIndex", pagerModel.pageIndex);
+        var url = that.buildUrl();
+        that.events.onSearch.fire();
+        fluid.log("Querying url " + url);
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "json",
+            success: function (data, textStatus) {
+                that.applyResults(data);
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                that.events.onError.fire("search", textStatus);
+            }
+        });
+    };
+    
+    cspace.search.searchView.hideResults = function (dom, messageBar) {
+        dom.locate("resultsContainer").hide();
+        dom.locate("resultsCountContainer").hide();
+        dom.locate("lookingContainer").hide();
+        messageBar.hide();
+    };
+    
+    fluid.demands("cspace.search.searchView.buildUrl", "cspace.search.searchView", {
+        funcName: "cspace.search.searchView.buildUrlDefault",
+        args: ["{searchView}.model.searchModel", "{searchView}.options.urls"]
+    });
+    fluid.demands("cspace.search.searchView.buildUrl", ["cspace.search.searchView", "cspace.localData"], {
+        funcName: "cspace.search.searchView.buildUrlLocal",
+        args: ["{searchView}.model.searchModel", "{searchView}.options.urls"]
+    });
+    cspace.search.searchView.buildUrlDefault = function (options, urls) {
+        return fluid.stringTemplate(urls.defaultUrl, {
+            recordType: options.recordType,
+            keywords: options.keywords,
+            pageNum: options.pageIndex ? fluid.stringTemplate(urls.pageNum, {pageNum: options.pageIndex}) : "",
+            pageSize: options.pageSize ? fluid.stringTemplate(urls.pageSize, {pageSize: options.pageSize}) : ""
+        });
+    };
+    cspace.search.searchView.buildUrlLocal = function (options, urls) {
+        return fluid.stringTemplate(urls.localUrl, {recordType: options.recordType});
+    };
     
     fluid.defaults("cspace.search.searchResultsResolver", {
         gradeNames: ["fluid.littleComponent", "autoInit"],
         invokers: {
             resolve: {
                 funcName: "cspace.search.searchResultsResolver.resolve",
-                args: ["{relationResolver}", "{arguments}.0"]
+                args: ["{searchView}", "{relationResolver}", "{arguments}.0"]
             }
         }
     });
-    cspace.search.searchResultsResolver.resolve = function (relationResolver, data) {
-        if (!data.results || data.results.length < 1) {
+    cspace.search.searchResultsResolver.resolve = function (search, relationResolver, model) {
+        if (!model.results || model.results.length < 1) {
             return;
         }
-        fluid.remove_if(data.results, function (result) {
-            return relationResolver.isPrimary(result.csid) || relationResolver.isRelated(result.recordtype, result.csid);
-        });
-        data.pagination.totalItems = data.results.length;
-    }
-        
+        var offset = model.pagination.pageSize * model.pagination.pageNum;
+        var index;
+        for (index = offset; index < fluid.pager.computePageLimit(search.resultsPager.model); ++ index) {
+            var result = model.results[index];
+            var row = search.locate("resultsRow").eq(index - offset);
+            var disable = relationResolver.isPrimary(result.csid) || relationResolver.isRelated(result.recordtype, result.csid);
+            row.prop("disabled", disable);
+            row.toggleClass(search.options.styles.disabled, disable);
+        }
+    };
+
 })(jQuery, fluid);

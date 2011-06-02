@@ -745,6 +745,8 @@ table tbody.highlight tr:hover td {
 .list-table  table tbody tr td a, .list-table  table tbody tr td a:hover {}
 .list-table  table tbody tr:hover td {
 	background-color:#C3D9E9;}
+.list-table  table tbody tr.cs-search-disabled:hover td {
+	background-color:#F0F5FB;}
 .list-table  table tbody tr:hover td.csc-related-number {
 	cursor:pointer;}
 .list-table  table tbody tr:hover td.csc-related-number:hover {
@@ -1325,6 +1327,15 @@ ul.menu-record li a {
 	-moz-border-radius:4px; 
 	-webkit-border-radius:4px;
 	line-height: 1.5;}
+.cs-search-disabled {
+    cursor: default !important;
+}
+.cs-search-disabled td {
+    color: #6E6E6E !important;
+}
+.cs-search-disabled input[type="checkbox"] {
+    display: none;
+}
 .cs-createNew-createButton {
 	float:right;}
 .cs-searchBox {

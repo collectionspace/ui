@@ -64,7 +64,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             type: "GET"
         };
         var model = {
-            recordTypeLong: "intake"
+            recordType: "intake"
         };
         callback = callback || function (findEdit) {
             findEdit.updateModel(model);
@@ -96,13 +96,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         findEdit.search();
     };
     
-    cspace.tests.urlBuilder = function (searchModel) {
-        return "../data/" + searchModel.recordType + "/search.json";
-    };
-    
     var findEditInitTests = function (options) {
         var localOpts = {
-            searchUrlBuilder: "cspace.tests.urlBuilder",
             listeners: {
                 onError: function () {
                     jqUnit.assertTrue("Error shouldn't happen", false);
@@ -115,19 +110,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     findEditTests.test("Basic findEdit URL with query", function () {
-        findEditUrlTest(opts, "../../chain/intake/search?query=foofer&pageNum=0&pageSize=10", {
+        findEditUrlTest(opts, "../data/intake/search.json", {
             keywords: "foofer"
         });
     });
     
     findEditTests.test("Use the local search url option to override the default search url", function () {
         var options = fluid.copy(opts) || {};
-        options.searchUrlBuilder = "cspace.search.localSearchUrlBuilder";
         findEditUrlTest(options, "../data/intake/search.json");
     });
     
     findEditTests.test("FindEdit URL through form inputs", function () {
-        findEditUrlTest(opts, "../../chain/loanin/search?query=doodle&pageNum=0&pageSize=10", null, function (findEdit) {
+        findEditUrlTest(opts, "../data/loanin/search.json", null, function (findEdit) {
             jQuery(findEdit.mainSearch.options.selectors.searchQuery).val("doodle");
             jQuery(findEdit.mainSearch.options.selectors.recordTypeSelect).val("loanin");
             jQuery(findEdit.mainSearch.options.selectors.searchButton).click();

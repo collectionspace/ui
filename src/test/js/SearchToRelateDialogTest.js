@@ -25,10 +25,6 @@ var searchToRelateDialogTester = function () {
         
     var searchToRelateDialogTest = cspace.tests.testEnvironment({testCase: bareSearchToRelateDialogTest});
     
-    cspace.tests.searchUrlBuilder = function (searchModel) {
-        return "../data/" + searchModel.recordType + "/search.json";
-    };
-    
     var createSearchToRelate = function (primary, related, listeners, searchOpts) {
         var testOpts = {};
         var testModel = {};
@@ -64,7 +60,6 @@ var searchToRelateDialogTester = function () {
                 dialog.search.mainSearch.locate("searchButton").click();
             }
         }, {
-            searchUrlBuilder: "cspace.tests.searchUrlBuilder",
             listeners: {
                 onSearch: function () {
                     jqUnit.assertEquals("Search should be set up to search for the correct record type", 
@@ -98,7 +93,6 @@ var searchToRelateDialogTester = function () {
                 dialog.search.mainSearch.locate("searchButton").click();
             }
         }, {
-            searchUrlBuilder: "cspace.tests.searchUrlBuilder",
             listeners: {
                 onSearch: function () {
                     jqUnit.assertEquals("Search should be set up to search for the correct record type", testRecordType, searchToRelateDialog.search.model.searchModel.recordType);
@@ -134,7 +128,6 @@ var searchToRelateDialogTester = function () {
                 dialog.search.mainSearch.locate("searchButton").click();
             }
         }, {
-            searchUrlBuilder: "cspace.tests.searchUrlBuilder",
             listeners: {
                 onSearch : function () {
                     jqUnit.notVisible("When search submitted, search results should be hidden",
@@ -153,6 +146,7 @@ var searchToRelateDialogTester = function () {
                         jQuery(searchToRelateDialog.search.options.selectors.resultsCountContainer));
                     jqUnit.notVisible("After clicking search, 'looking' message should be hidden - http://issues.collectionspace.org/browse/CSPACE-2289",
                         jQuery(searchToRelateDialog.search.options.selectors.lookingContainer));
+                    searchToRelateDialog.locate("closeButton").click();
                     start();
                 }
             }
@@ -208,7 +202,6 @@ var searchToRelateDialogTester = function () {
                 start();
             }
         }, {
-            searchUrlBuilder: "cspace.tests.searchUrlBuilder",
             listeners: {
                 afterSearch : function () {
                     searchToRelateDialog.search.model.results[0].selected = true;
@@ -236,7 +229,6 @@ var searchToRelateDialogTester = function () {
                 start();
             }
         }, {
-            searchUrlBuilder: "cspace.tests.searchUrlBuilder",
             listeners: {
                 afterSearch : function () {
                     searchToRelateDialog.search.model.results[0].selected = true;

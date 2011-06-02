@@ -240,7 +240,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("search", ["cspace.searchToRelateDialog", "cspace.localData"], {
            container: "{searchToRelateDialog}.container",
             options: {
-                searchUrlBuilder: "cspace.search.localSearchUrlBuilder",
                 components: {
                     searchResultsResolver: {
                         type: "cspace.search.searchResultsResolver"
@@ -249,10 +248,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
         fluid.demands("search", ["cspace.pageBuilder", "cspace.localData"], {
-            container: "{pageBuilder}.options.selectors.search",
-            options: {
-                searchUrlBuilder: "cspace.search.localSearchUrlBuilder"
-            }
+            container: "{pageBuilder}.options.selectors.search"
         });
         
         // urlExpander demands
@@ -1447,10 +1443,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         // search demands
         fluid.demands("search", ["cspace.searchToRelateDialog", "cspace.localData", "cspace.test"], {
-           container: "{searchToRelateDialog}.container",
-            options: {
-                searchUrlBuilder: "cspace.search.localSearchUrlBuilder"
-            }
+           container: "{searchToRelateDialog}.container"
         });
     };
     
