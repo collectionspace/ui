@@ -744,6 +744,7 @@ fluid.registerNamespace("cspace.util");
                         func: decorator.func,
                         type: decorator.type,
                         options: {
+                            disablePrimary: true,
                             elPath: opts.elPath,
                             protoTree: {
                                 expander: {

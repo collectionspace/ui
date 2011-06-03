@@ -165,6 +165,7 @@ cspace = cspace || {};
             var primary = $(that.options.markup.primaryControl).addClass(that.options.styles.primary);
             // TODO: we need to programatically generate the 'name' attribute since we need more then one group of radio buttons on a page.
             primary.attr("name", "primary-" + that.options.elPath);
+            primary.prop("disabled", that.options.disablePrimary);
             node.prepend(primary);
         }
         
@@ -309,6 +310,7 @@ cspace = cspace || {};
             content: "cs-repeatable-content",
             repeat: "cs-repeatable-repeat"     
         },
+        disablePrimary: false,
         markup: {
             addControl:     "<input class=\"csc-repeatable-add\" type=\"button\" />",
             deleteControl:  "<input class=\"csc-repeatable-delete \" type=\"button\" value=\"\"/>",

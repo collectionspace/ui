@@ -175,6 +175,7 @@ var utilitiesTester = function ($) {
                         "func": "cspace.makeRepeatable",
                         "type": "fluid",
                         "options": {
+                            "disablePrimary": true,
                             "elPath": "fields.movementMethods",
                             "protoTree": {
                                 "expander": {
@@ -293,6 +294,7 @@ var utilitiesTester = function ($) {
                         "func": "cspace.makeRepeatable",
                         "type": "fluid",
                         "options": {
+                            "disablePrimary": true,
                             "elPath": "fields.acquisitionFunding",
                             "protoTree": {
                                 "expander": {
@@ -421,6 +423,7 @@ var utilitiesTester = function ($) {
                         "func": "cspace.makeRepeatable",
                         "type": "fluid",
                         "options": {
+                            "disablePrimary": true,
                             "elPath": "fields.owners",
                             "protoTree": {
                                 "expander": {
@@ -613,6 +616,7 @@ var utilitiesTester = function ($) {
                         "func": "cspace.makeRepeatable",
                         "type": "fluid",
                         "options": {
+                            "disablePrimary": true,
                             "elPath": "fields.fieldCollectionEventNames",
                             "protoTree": {
                                 "expander": {
@@ -680,6 +684,7 @@ var utilitiesTester = function ($) {
                         "func": "cspace.makeRepeatable",
                         "type": "fluid",
                         "options": {
+                            "disablePrimary": true,
                             "elPath": "fields.acquisitionSources",
                             "protoTree": {
                                 "expander": {
@@ -723,6 +728,7 @@ var utilitiesTester = function ($) {
                         "func": "cspace.makeRepeatable",
                         "type": "fluid",
                         "options": {
+                            "disablePrimary": true,
                             "elPath": "fields.acquisitionDates",
                             "protoTree": {
                                 "expander": {
