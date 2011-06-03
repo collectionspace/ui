@@ -223,7 +223,10 @@ cspace = cspace || {};
         },
         produceTree: cspace.searchToRelateDialog.produceTree,
         invokers: {
-            setupDialogClass: "setupDialogClass"
+            setupDialogClass: {
+                funcName: "cspace.searchToRelateDialog.setupDialogClass",
+                args: "{searchToRelateDialog}.options.related"          
+            }
         },
         parentBundle: "{globalBundle}",
         strings: {

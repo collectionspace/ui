@@ -222,11 +222,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
 
-        fluid.demands("setupDialogClass", [ "cspace.searchToRelateDialog" ], {
-            funcName: "cspace.searchToRelateDialog.setupDialogClass",
-            args: "{searchToRelateDialog}.options.related"          
-        });              
-
         fluid.demands("cspace.searchToRelateDialog", ["cspace.relationManager", "cspace.localData", "cspace.sidebar"], {
             container: "{relationManager}.dom.searchDialog",
             options: {
@@ -1460,13 +1455,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // search demands
         fluid.demands("search", ["cspace.searchToRelateDialog", "cspace.localData", "cspace.test"], {
            container: "{searchToRelateDialog}.container"
-        });
-        
-        //searchToReleate demands:
-        fluid.demands("setupDialogClass", [ "cspace.searchToRelateDialog", "cspace.localData", "cspace.test" ], {
-            funcName: "cspace.searchToRelateDialog.setupDialogClass",
-            args: "{searchToRelateDialog}.options.related"          
-        });              
+        });            
     };
     
     fluid.demands("cspace.localDemands", "cspace.localData", {
