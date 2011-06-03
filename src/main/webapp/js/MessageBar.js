@@ -18,13 +18,6 @@ cspace = cspace || {};
     fluid.registerNamespace("cspace.messageBar");
     
     var bindEvents = function (that) {
-        if (that.options.autoCancel) {
-            fluid.deadMansBlur($(document), { 
-                handler: function () {
-                    that.hide();
-                }
-            });
-        }
         that.locate("cancel").click(that.hide);
     };
     
@@ -99,8 +92,7 @@ cspace = cspace || {};
                 fetchClass: "fastTemplate",
                 url: "%webapp/html/components/MessageBarTemplate.html"
             })
-        },
-        autoCancel: true
+        }
     });
     
     fluid.fetchResources.primeCacheFromResources("cspace.messageBarImpl");
