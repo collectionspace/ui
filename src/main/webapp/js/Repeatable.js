@@ -165,7 +165,12 @@ cspace = cspace || {};
             var primary = $(that.options.markup.primaryControl).addClass(that.options.styles.primary);
             // TODO: we need to programatically generate the 'name' attribute since we need more then one group of radio buttons on a page.
             primary.attr("name", "primary-" + that.options.elPath);
-            primary.prop("disabled", that.options.disablePrimary);
+            if (that.options.disablePrimary) {
+                primary.prop("disabled", "disabled");
+            }
+            else {
+                primary.removeProp("disabled");
+            }
             node.prepend(primary);
         }
         
