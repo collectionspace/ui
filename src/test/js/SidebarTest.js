@@ -175,6 +175,28 @@ var sidebarTester = function ($) {
         jqUnit.assertNotEquals("Related Cataloging shown", 0, $(templateCss, sidebar.locate("relatedCataloging")).length);
         jqUnit.assertEquals("Related Procedures hidden", 0, $(templateCss, sidebar.locate("relatedProcedures")).length);
     });
+    
+    //test non-linking cataloging (no read permissions)
+    var noReadCatalogingAndPersonSidebarTest = cspace.tests.testEnvironment({
+        testCase: bareSidebarTest,
+        permissions: (function () {
+            var returnPerms = {};
+            fluid.model.copyModel(returnPerms, cspace.tests.fullPerms);
+            returnPerms["cataloging"] = ["create", "update", "delete", "list"];
+            returnPerms["person"] = ["create", "update", "delete", "list"];
+            return returnPerms;
+        })()
+    });
+    
+    noReadCatalogingAndPersonSidebarTest.test("RelatedRecordsList: cataloging not linking when no read permissions", function () {
+        var sidebar = setupSidebar(sampleOptions);
+        var rowCss = ".csc-recordList-row";
+        var disabledClass = "cs-disabled";
+        jqUnit.assertTrue("Related Cataloging disabled", $(rowCss, sidebar.locate("relatedCataloging")).hasClass(disabledClass));
+        jqUnit.assertFalse("Related Procedures not disabled", $(rowCss, sidebar.locate("relatedProcedures")).hasClass(disabledClass));
+        jqUnit.assertEquals("Related Procedures not disabled", 4, $("."+disabledClass, sidebar.locate("termsUsed")).length);
+
+    });
 };
 
 jQuery(document).ready(function () {

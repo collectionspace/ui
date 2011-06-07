@@ -1,7 +1,7 @@
 /*
 Copyright 2009-2010 University of Toronto, 2011 Museum of Moving Image
 
-Licensed under the Educational Community License (ECL), Version 2.0. 
+Licensed under the Educational Community License (ECL), Version 2.0.
 ou may not use this file except in compliance with this License.
 
 You may obtain a copy of the ECL 2.0 License at
@@ -15,12 +15,12 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     fluid.log("RecordList.js loaded");
-    
+
     var bindEvents = function (that) {
         that.events.onSelect.addListener(function () {
             that.select();
         });
-        
+
         fluid.activatable(that.locate("row"), function (event) {
             var rows = that.locate("row");
             rows.removeClass(that.options.styles.selected);
@@ -38,7 +38,7 @@ cspace = cspace || {};
             noBubbleListeners: false,
             selectablesTabindex: ""
         });
-        
+
         that.locate("row").click(function () {
             $(that.options.selectors["row"]).removeClass(that.options.styles.selected);
             var rows = that.locate("row");
@@ -48,13 +48,13 @@ cspace = cspace || {};
             that.applier.requestChange("selectonIndex", rows.index(row));
             that.events.onSelect.fire();
         });
-        
+
         that.handleNewRow = function (action) {
             that.locate("newRow")[action]();
             that.locate("row").removeClass(that.options.styles.selected);
         };
     };
-    
+
     cspace.recordList = function (container, options) {
         var that = fluid.initRendererComponent("cspace.recordList", container, options);
         fluid.initDependents(that);
@@ -66,9 +66,9 @@ cspace = cspace || {};
             that.renderer.refreshView();
             bindEvents(that);
         };
-        
+
         that.refreshView();
-        
+
         return that;
     };
 
@@ -82,16 +82,16 @@ cspace = cspace || {};
             that.applier.requestChange("sorted" + "." + index, sortedItem);
         });
     };
-    
+
     cspace.recordList.assertItems = function (options) {
         return options.items && options.items.length > 0;
     };
-    
+
     cspace.recordList.calculateRecordListSize = function (model, elPath) {
         var list = fluid.get(model, elPath);
         return list && list.length > 0 ? list.length : 0;
     };
-    
+
     cspace.recordList.produceTree = function (that) {
         return {
             recordList: {
@@ -135,11 +135,11 @@ cspace = cspace || {};
                                 tree: {
                                     value: "${{column}}",
                                     decorators: [{
-                                        type: "addClass",
-                                        classes: that.options.styles["column" + that.options.columns.length.toString()]
-                                    }, {
-                                        type: "addClass",
-                                        classes: that.options.styles.column
+                                        type: "fluid",
+                                        func: "cspace.recordList.rowStyler",
+                                        options: {
+                                            row: "${{row}}"
+                                        }
                                     }]
                                 }
                             }]
@@ -201,6 +201,27 @@ cspace = cspace || {};
         };
     };
     
+    fluid.defaults("cspace.recordList.rowStyler", {
+        gradeNames: ["fluid.viewComponent", "autoInit"],
+        finalInitFunction: "cspace.recordList.rowStyler.finalInitFunction",
+        styles: {
+            disabled: "cs-disabled"
+        }
+    });
+    
+    cspace.recordList.rowStyler.finalInitFunction = function (that) {
+        that.container.addClass(that.options.styles["column" + that.model.columns.length.toString()])
+                      .addClass(that.options.styles.column);
+        var segs = fluid.model.parseEL(that.options.row);
+        if (!cspace.permissions.resolve({
+            permission: "read",
+            target: that.model[that.options.elPath][segs[segs.length - 1]].recordtype,
+            resolver: that.options.permissionsResolver
+        })) {
+            that.container.parent().addClass(that.options.styles.disabled);
+        }
+    };
+    
     fluid.defaults("cspace.recordList.thumbRenderer", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
         finalInitFunction: "cspace.recordList.thumbRenderer.finalInitFunction",
@@ -214,6 +235,7 @@ cspace = cspace || {};
             icnMedia: "%webapp/images/icnMedia.png"
         })
     });
+    
     cspace.recordList.thumbRenderer.finalInitFunction = function (that) {
         var segs = fluid.model.parseEL(that.options.row);
         var item = that.model[that.options.elPath][segs[segs.length - 1]];
@@ -235,7 +257,7 @@ cspace = cspace || {};
                     }, {
                         type: "attrs",
                         attributes: {
-                            alt: that.options.strings.deleteRelation                        
+                            alt: that.options.strings.deleteRelation
                         }
                     }, {
                         type: "jQuery",
@@ -268,9 +290,17 @@ cspace = cspace || {};
         return !!(item && item.imgThumb);
     };
     
-    var selectNavigate = function (model, options, url, typePath) {
+    var selectNavigate = function (model, options, url, permissionsResolver, dom, typePath) {
         var record = fluid.get(model, options.elPaths.items)[model.selectonIndex];
         if (!record) {
+            return;
+        }
+        if (!cspace.permissions.resolve({
+            permission: "read",
+            target: record.recordtype,
+            resolver: permissionsResolver
+        })) {
+            dom.locate("row").removeClass(options.styles.selected);
             return;
         }
         options.globalNavigator.events.onPerformNavigation.fire(function () {
@@ -280,15 +310,15 @@ cspace = cspace || {};
             });
         });
     };
-    
-    cspace.recordList.selectNavigateVocab = function (model, options, url) {
-        selectNavigate(model, options, url, "sourceFieldType");
+
+    cspace.recordList.selectNavigateVocab = function (model, options, url, permissionsResolver, dom) {
+        selectNavigate(model, options, url, permissionsResolver, dom, "sourceFieldType");
     };
-    
-    cspace.recordList.selectNavigate = function (model, options, url) {
-        selectNavigate(model, options, url, "recordtype");
+
+    cspace.recordList.selectNavigate = function (model, options, url, permissionsResolver, dom) {
+        selectNavigate(model, options, url, permissionsResolver, dom, "recordtype");
     };
-    
+
     cspace.recordList.selectFromList = function (model, options, dataContext) {
         var record = fluid.get(model, options.elPaths.items)[model.selectonIndex];
         if (!record) {
@@ -298,7 +328,7 @@ cspace = cspace || {};
             dataContext.fetch(record.csid);
         });
     };
-    
+
     fluid.defaults("cspace.recordList", {
         mergePolicy: {
             "rendererOptions.applier": "applier"
@@ -357,7 +387,8 @@ cspace = cspace || {};
             column2: "cs-recordList-column2",
             column3: "cs-recordList-column3",
             column4: "cs-recordList-column4",
-            selected: "cs-selected"
+            selected: "cs-selected",
+            disabled: "cs-disabled"
         },
         parentBundle: "{globalBundle}",
         globalNavigator: "{globalNavigator}",
@@ -373,15 +404,15 @@ cspace = cspace || {};
             navigateLocal: "%webapp/html/record.html?recordtype=%recordType&csid=%csid"
         })
     });
-    
+
     fluid.fetchResources.primeCacheFromResources("cspace.recordList");
-    
+
     cspace.recordList.extractRowCsid = function (rows, row, model, elPath) {
         return fluid.get(model, elPath)[rows.index(row)].csid;
     };
-    
+
     cspace.recordList.deleteRelation = function (event, recordList, recordEditor, tab) {
-        var targetCsid = cspace.recordList.extractRowCsid(recordList.locate("row"), 
+        var targetCsid = cspace.recordList.extractRowCsid(recordList.locate("row"),
             $(event.target).parent(), recordList.model, recordList.options.elPaths.items);
         recordEditor.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
             listeners: {

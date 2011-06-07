@@ -1637,6 +1637,18 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
     padding: 8px 0 6px 4px;
     background: #FFFBEB url('../images/new_user_arrow.png') no-repeat 95% center; 
 }
+.cs-recordList .cs-disabled.csc-recordList-row:hover {
+    background-color: #F0F5FB;
+}
+.cs-recordList .cs-disabled.csc-recordList-row:nth-child(even):hover {
+    background-color: #FFF; 
+}
+.cs-recordList .cs-disabled.csc-recordList-row:focus {
+    background-color: #F0F5FB;
+}
+.cs-recordList .cs-disabled.csc-recordList-row:nth-child(even):focus {
+    background-color: #FFF;
+}
 .cs-recordList .csc-recordList-row:hover, .cs-recordList .csc-recordList-row:nth-child(even):hover {
     background-color: #C3D9E9;
 }
@@ -1692,6 +1704,11 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
 .cs-recordList .cs-recordList-deleteRelation:hover {
     background: transparent url('../images/icnDelete.png') no-repeat right center;
 }
+.cs-recordList .cs-disabled {
+    color: gray;
+    cursor: default;
+}
+
 .cs-recordList-thumbnail {
     max-height: 10px;
     max-width: 10px;

@@ -41,19 +41,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // Record List demands
         fluid.demands("select", ["cspace.recordList", "cspace.localData"], {
             funcName: "cspace.recordList.selectNavigate",
-            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocal"]
+            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocal", "{permissionsResolver}", "{recordList}.dom"]
         });
         fluid.demands("select", ["cspace.recordList", "cspace.localData", "person", "cspace.relatedRecordsList"], {
             funcName: "cspace.recordList.selectNavigateVocab",
-            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocal"]
+            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocal", "{permissionsResolver}", "{recordList}.dom"]
         });
         fluid.demands("select", ["cspace.recordList", "cspace.localData", "organization", "cspace.relatedRecordsList"], {
             funcName: "cspace.recordList.selectNavigateVocab",
-            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocal"]
+            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocal", "{permissionsResolver}", "{recordList}.dom"]
         });
         fluid.demands("select", ["cspace.recordList", "cspace.localData", "location", "cspace.relatedRecordsList"], {
             funcName: "cspace.recordList.selectNavigateVocab",
-            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocal"]
+            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocal", "{permissionsResolver}", "{recordList}.dom"]
         });
         
         // List editor's demands
@@ -866,19 +866,19 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         fluid.demands("select", "cspace.recordList", {
             funcName: "cspace.recordList.selectNavigate",
-            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigate"]
+            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigate", "{permissionsResolver}", "{recordList}.dom"]
         });
         fluid.demands("select", ["cspace.recordList", "person", "cspace.relatedRecordsList"], {
             funcName: "cspace.recordList.selectNavigateVocab",
-            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigate"]
+            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigate", "{permissionsResolver}", "{recordList}.dom"]
         });
         fluid.demands("select", ["cspace.recordList", "organization", "cspace.relatedRecordsList"], {
             funcName: "cspace.recordList.selectNavigateVocab",
-            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigate"]
+            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigate", "{permissionsResolver}", "{recordList}.dom"]
         });
         fluid.demands("select", ["cspace.recordList", "location", "cspace.relatedRecordsList"], {
             funcName: "cspace.recordList.selectNavigateVocab",
-            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigate"]
+            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigate", "{permissionsResolver}", "{recordList}.dom"]
         });
         fluid.demands("cspace.recordList.thumbRenderer", "cspace.recordList", {
             container: "{arguments}.0",
@@ -886,6 +886,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 model: "{recordList}.model",
                 elPath: "{recordList}.options.elPaths.items"
             }
+        });
+        
+        fluid.demands("cspace.recordList.rowStyler", "cspace.recordList", {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                model: "{recordList}.model",
+                elPath: "{recordList}.options.elPaths.items",
+                permissionsResolver: "{permissionsResolver}",
+                styles: "{recordList}.options.styles"
+            }, "{arguments}.1"]       
         });
         
         // Login demands
