@@ -164,8 +164,8 @@ cspace = cspace || {};
                     columns: ["number", "sourceFieldName", "recordtype"],
                     strings: {
                         number: "Term",
-                        sourceFieldName: "Vocabulary",
-                        recordtype: "Field",
+                        sourceFieldName: "Field",
+                        recordtype: "Vocabulary",
                         nothingYet: "No Authority terms used yet"
                     },
                     showNumberOfItems: false
