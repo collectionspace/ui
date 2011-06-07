@@ -66,13 +66,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     text-decoration:none;
 }
 
-.fl-pager .fl-pager-ui .fl-pager-links a:hover {
+.fl-pager .fl-pager-ui .fl-pager-links a:hover,
+.fl-pager .fl-pager-ui .fl-pager-links a:focus {
     background-color:#0287C5;
     color:#fff;
     text-decoration:none;
 }
 .fl-pager .fl-pager-ui .fl-pager-disabled:hover,
-.fl-pager .fl-pager-ui .fl-pager-links .fl-pager-currentPage:hover {
+.fl-pager .fl-pager-ui .fl-pager-links .fl-pager-currentPage:hover,
+.fl-pager .fl-pager-ui .fl-pager-disabled:focus,
+.fl-pager .fl-pager-ui .fl-pager-links .fl-pager-currentPage:focus {
     background-color:transparent;
     color:#999;
     text-decoration:none;
@@ -95,7 +98,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 /*****pasted from cspace.css*****/
 .fl-pager .fl-pager-ui li.flc-pager-summary  {float:right; color:#6D6E71; width: 300px !important;}
-.fl-pager .fl-pager-ui li.flc-per-page {float:left; color:#6D6E71; width:320px; margin-top:-3px;}
+.fl-pager .fl-pager-ui li.flc-per-page {float:left; color:#6D6E71; width:200px; margin-top:-3px;}
 .pager-links {display:inline; padding-top:5px;}
 
 .flc-pager-top, .flc-pager-bottom {background-color:#F2F2F3; padding:4px 12px; font-size:11px; line-height:11px;}

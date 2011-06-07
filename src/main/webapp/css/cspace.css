@@ -18,7 +18,7 @@ body {
 	line-height:1.2; 
 	padding:5px 4px 0 4px;
 	margin:0;}
-div:focus, p:focus, input:focus, a:focus, img:focus, span:focus, table:focus, tr:focus, td:focus, tbody:focus, thead:focus, li:focus, 
+div:focus, p:focus, input:focus, a:focus, img:focus, span:focus, li:focus, 
 ul:focus, button:focus, form:focus, h1:focus, h2:focus, h3:focus, h4:focus, h5:focus, label:focus, select:focus, textarea:focus {
     outline:1px solid #000 !important;
 }
@@ -72,7 +72,8 @@ input[type="submit"].logout {
 	padding-left:12px; 
 	padding-right:13px; 
 	font-size:13px;}
-input[type="submit"].logout:hover {
+input[type="submit"].logout:hover,
+input[type="submit"].logout:focus {
 	background-color:#333; 
 	color:#FFF;}
 input[type="button"], input[type="submit"]	{
@@ -86,13 +87,15 @@ input[type="button"], input[type="submit"]	{
 	font-size:13px; 
 	line-height:13px; 
 	border:none;}
-input[type="button"]:hover, input[type="submit"]:hover {
+input[type="button"]:hover, input[type="submit"]:hover,
+input[type="button"]:focus, input[type="submit"]:focus {
 	background-color:#48722D;}
 input[type="button"].saveButton, input[type="submit"].saveButton {
 	background:#73AA4F url('../images/icnSave.png') no-repeat 24px 4px; 
 	padding-left:40px; 
 	padding-right:20px; }
-input[type="button"].saveButton:hover, input[type="submit"].saveButton:hover {
+input[type="button"].saveButton:hover, input[type="submit"].saveButton:hover,
+input[type="button"].saveButton:focus, input[type="submit"].saveButton:focus {
 	background-color:#48722D;}
 input[type="button"].cancelButton, input[type="submit"].cancelButton {
     -moz-border-radius:4px; 
@@ -101,7 +104,8 @@ input[type="button"].cancelButton, input[type="submit"].cancelButton {
 	padding-left:24px; 
 	padding-right:8px; 
 	color:#669922;}
-input[type="button"].cancelButton:hover, input[type="submit"].cancelButton:hover {
+input[type="button"].cancelButton:hover, input[type="submit"].cancelButton:hover,
+input[type="button"].cancelButton:focus, input[type="submit"].cancelButton:focus {
 	background-color:#DAEDD1;
 }
 input[type="button"].cancelButton[disabled], input[type="submit"].cancelButton[disabled] {
@@ -111,7 +115,8 @@ input[type="button"].cancelButton[disabled], input[type="submit"].cancelButton[d
 	padding-left:24px; 
 	padding-right:8px; 
 	color:#CCC;}
-input[type="button"].cancelButton[disabled]:hover, input[type="submit"].cancelButton[disabled]:hover {
+input[type="button"].cancelButton[disabled]:hover, input[type="submit"].cancelButton[disabled]:hover,
+input[type="button"].cancelButton[disabled]:focus, input[type="submit"].cancelButton[disabled]:focus {
 	background-color:#ADADAD;
     color:#606060
 }
@@ -120,14 +125,16 @@ input[type="button"].editButton, input[type="submit"].editButton {
 	padding-left:24px; 
 	padding-right:8px; 
 	color:#669922;}
-input[type="button"].editButton:hover, input[type="submit"].editButton:hover {
+input[type="button"].editButton:hover, input[type="submit"].editButton:hover,
+input[type="button"].editButton:focus, input[type="submit"].editButton:focus {
 	background-color:#DAEDD1;}
 input[type="button"].deleteButton, input[type="submit"].deleteButton {
 	background:transparent url('../images/icnDelete.png') no-repeat 8px 4px; 
 	padding-left:24px; 
 	padding-right:8px; 
 	color:#669922;}
-input[type="button"].deleteButton:hover, input[type="submit"].deleteButton:hover {
+input[type="button"].deleteButton:hover, input[type="submit"].deleteButton:hover,
+input[type="button"].deleteButton:focus, input[type="submit"].deleteButton:focus {
 	background-color:#DAEDD1;}
 input[type="button"].deleteButton[disabled], input[type="submit"].deleteButton[disabled] {
     -moz-border-radius:4px;
@@ -136,7 +143,8 @@ input[type="button"].deleteButton[disabled], input[type="submit"].deleteButton[d
 	padding-left:24px; 
 	padding-right:8px;
 	color:#CCC;}
-input[type="button"].deleteButton[disabled]:hover, input[type="submit"].deleteButton[disabled]:hover {
+input[type="button"].deleteButton[disabled]:hover, input[type="submit"].deleteButton[disabled]:hover,
+input[type="button"].deleteButton[disabled]:focus, input[type="submit"].deleteButton[disabled]:focus {
 	background-color:#ADADAD;
     color:#606060
 }
@@ -145,14 +153,16 @@ input[type="button"].duplicateButton, input[type="submit"].duplicateButton {
 	padding-left:24px; 
 	padding-right:8px; 
 	color:#669922;}
-input[type="button"].duplicateButton:hover, input[type="submit"].duplicateButton:hover {
+input[type="button"].duplicateButton:hover, input[type="submit"].duplicateButton:hover,
+input[type="button"].duplicateButton:focus, input[type="submit"].duplicateButton:focus {
 	background-color:#DAEDD1;}
 input[type="button"].searchButton, input[type="submit"].searchButton {
 	background:#73AA4F url('../images/icnSearch.png') no-repeat 8px 4px; 
 	padding-left:24px; 
 	padding-right:8px; 
 	color:#FFF;}
-input[type="button"].searchButton:hover, input[type="submit"].searchButton:hover {
+input[type="button"].searchButton:hover, input[type="submit"].searchButton:hover,
+input[type="button"].searchButton:focus, input[type="submit"].searchButton:focus {
 	background-color:#48722D;}
 input[type="button"].addButton, input[type="submit"].addButton {
 	background:#73AA4F url('../images/icnAdd_.png') no-repeat 8px 4px; 
@@ -160,7 +170,8 @@ input[type="button"].addButton, input[type="submit"].addButton {
 	font-size:11px; 
 	padding-right:8px; 
 	color:#FFF;}
-input[type="button"].addButton:hover, input[type="submit"].addButton:hover {
+input[type="button"].addButton:hover, input[type="submit"].addButton:hover,
+input[type="button"].addButton:focus, input[type="submit"].addButton:focus {
 	background-color:#48722D;}
 input[type="button"].add {
 	height:16px;}
@@ -493,7 +504,8 @@ li .flc-pager-pageLink {
 	color:#BEBEBE;}
 
 
-table tbody.highlight tr:hover td {
+table tbody.highlight tr:hover td,
+table tbody.highlight tr:focus td {
 	background-color:#BFF4FF !important;}
 
 .authority-select {
@@ -611,7 +623,9 @@ table tbody.highlight tr:hover td {
 	height:19px; 
 	padding-bottom:0;}
 .fl-container-left  .information-group       .header.toggle:hover,
-.fl-container-left  .information-subgroup .header.toggle:hover  {
+.fl-container-left  .information-subgroup .header.toggle:hover,
+.fl-container-left  .information-group       .header.toggle:focus,
+.fl-container-left  .information-subgroup .header.toggle:focus  {
 	background-color:#444;}
 .fl-container-left  .information-group       .header.toggle.active   {
 	background-position:left bottom;}
@@ -742,14 +756,18 @@ table tbody.highlight tr:hover td {
 	vertical-align:top;}
 .list-table table tbody tr.add-new-record td{
 	background-color:#FFFBBC;}
-.list-table  table tbody tr td a, .list-table  table tbody tr td a:hover {}
+.list-table  table tbody tr td a {}
+.list-table  table tbody tr td a:focus {
+	background-color:#C3D9E9;}
 .list-table  table tbody tr:hover td {
 	background-color:#C3D9E9;}
-.list-table  table tbody tr.cs-search-disabled:hover td {
+.list-table  table tbody tr.cs-search-disabled:hover td,
+.list-table  table tbody tr.cs-search-disabled:focus td {
 	background-color:#F0F5FB;}
 .list-table  table tbody tr:hover td.csc-related-number {
 	cursor:pointer;}
-.list-table  table tbody tr:hover td.csc-related-number:hover {
+.list-table  table tbody tr:hover td.csc-related-number:hover,
+.list-table  table tbody tr td.csc-related-number:focus {
 	text-decoration:underline;}
 .pivot-box-table {
 	width:100%; 
@@ -838,7 +856,8 @@ table tbody.highlight tr:hover td {
 	border-bottom:1px solid #C7CFD4; 
 	cursor:pointer; 
 	color:#3A3A3A;}
-.fl-container-admin  .information-group  table tbody tr:hover td {
+.fl-container-admin  .information-group  table tbody tr:hover td,
+.fl-container-admin  .information-group  table tbody tr:focus td {
 	background-color:#F0F5FB;}
 .fl-container-admin  .information-group  table tbody tr td.header {
 	background-color:#E8E8E8; 
@@ -848,7 +867,8 @@ table tbody.highlight tr:hover td {
 .fl-container-admin  .information-group  table.permissions tbody tr td {
 	border:none; 
 	border-bottom:1px solid #C7CFD4;}
-.fl-container-admin  .information-group  table tbody tr:hover td.header {
+.fl-container-admin  .information-group  table tbody tr:hover td.header,
+.fl-container-admin  .information-group  table tbody tr:focus td.header {
 	background-color:#E8E8E8; 
 	color:#3A3A3A;}
 .fl-container-admin  .information-group  table tbody tr.add-new-row td {
@@ -1203,7 +1223,7 @@ input[disabled]:hover, input[disabled]:hover	{
 .overflowdiv-admin {
 	overflow-y:auto; 
 	overflow-x:hidden; 
-	max-height:180px;} /*  min-height */
+	max-height:191px;} /*  min-height */
 
 .hidden {
 	display: none;}
@@ -1339,7 +1359,7 @@ ul.menu-record li a {
 .cs-searchBox {
 	-moz-border-radius:8px; 
 	-webkit-border-radius:8px;}
-.cs-repeatable-add, .cs-new-user-submit {
+.cs-repeatable-add, .cs-new-user-submit, .csc-listEditor-createNew { /* need to use proper selector for csc-listEditor-createNew */
 	-moz-border-radius:4px 4px 0 0; 
 	-webkit-border-radius:4px 4px 0 0;}
 .main-users-page #search-box {
@@ -1361,7 +1381,8 @@ ul.menu-record li a {
 	padding-left:24px; 
 	padding-right:8px; 
 	color:#FFF;}
-.cs-searchBox .cs-searchBox-button:hover {
+.cs-searchBox .cs-searchBox-button:hover,
+.cs-searchBox .cs-searchBox-button:focus {
 	background-color:#48722D;}
 .cs-searchBox .cs-searchBox-selectRecordType {
 	width: auto; 
@@ -1470,11 +1491,13 @@ ul.menu-record li a {
 	background: -moz-linear-gradient(top, #e6e6e6, #d1d1d1);}
 .cs-messageBar .cs-messageBar-cancel {
 	background-color:#73AA4F;}
-.cs-messageBar .cs-messageBar-cancel:hover {
+.cs-messageBar .cs-messageBar-cancel:hover,
+.cs-messageBar .cs-messageBar-cancel:focus {
 	background-color:#48722D;}
 .cs-message-error .cs-messageBar-cancel {
 	background-color:#C60018;}
-.cs-message-error .cs-messageBar-cancel:hover {
+.cs-message-error .cs-messageBar-cancel:hover,
+.cs-message-error .cs-messageBar-cancel:focus {
 	background-color:#9E0022;}
 .cs-sidebar-header {
 	padding-right: 5px;}
@@ -1537,7 +1560,8 @@ input[type=button].cs-mediaUploader-removeMedia {
     padding-left: 24px;
     padding-right: 8px;
 }
-input[type=button].cs-mediaUploader-removeMedia:hover {
+input[type=button].cs-mediaUploader-removeMedia:hover,
+input[type=button].cs-mediaUploader-removeMedia:focus {
     background-color: #DAEDD1;
 }
 .cs-mediaUploader-fileUploaderContainer .fl-uploader-queue-footer {
@@ -1637,23 +1661,16 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
     padding: 8px 0 6px 4px;
     background: #FFFBEB url('../images/new_user_arrow.png') no-repeat 95% center; 
 }
-.cs-recordList .cs-disabled.csc-recordList-row:hover {
-    background-color: #F0F5FB;
-}
-.cs-recordList .cs-disabled.csc-recordList-row:nth-child(even):hover {
-    background-color: #FFF; 
-}
+.cs-recordList .cs-disabled.csc-recordList-row:hover,
 .cs-recordList .cs-disabled.csc-recordList-row:focus {
     background-color: #F0F5FB;
 }
+.cs-recordList .cs-disabled.csc-recordList-row:nth-child(even):hover,
 .cs-recordList .cs-disabled.csc-recordList-row:nth-child(even):focus {
-    background-color: #FFF;
+    background-color: #FFF; 
 }
-.cs-recordList .csc-recordList-row:hover, .cs-recordList .csc-recordList-row:nth-child(even):hover {
-    background-color: #C3D9E9;
-}
-.cs-recordList .cs-recordList-row:focus,
-.cs-recordList .cs-recordList-row:nth-child(even):focus {
+.cs-recordList .csc-recordList-row:hover, .cs-recordList .csc-recordList-row:nth-child(even):hover,
+.cs-recordList .csc-recordList-row:focus, .cs-recordList .csc-recordList-row:nth-child(even):focus {
     background-color: #C3D9E9;
 }
 .cs-recordList .cs-recordList-row {
@@ -1701,7 +1718,8 @@ input[type=button].cs-mediaUploader-removeMedia:hover {
     background: transparent url('../images/icnDeleteIdle.png') no-repeat right center;
     height: inherit;
 }
-.cs-recordList .cs-recordList-deleteRelation:hover {
+.cs-recordList .cs-recordList-deleteRelation:hover,
+.cs-recordList .cs-recordList-deleteRelation:focus {
     background: transparent url('../images/icnDelete.png') no-repeat right center;
 }
 .cs-recordList .cs-disabled {
