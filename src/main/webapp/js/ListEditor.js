@@ -129,7 +129,7 @@ cspace = cspace || {};
         that.bindEvents();
         if (!that.options.listModel) {
             that.events.onListUpdate.fire();
-            that.listSource.get(null, function (listModel) {
+            that.updateList(function (listModel) {
                 that.options.listModel = listModel;
                 that.events.beforeCreateList.fire();
                 that.events.afterListUpdate.fire();
@@ -141,23 +141,37 @@ cspace = cspace || {};
         that.hideDetails();
     };
     
-    cspace.listEditor.updateListRelated = function (that, primary, csid) {
+    cspace.listEditor.updateListRelated = function (that, primary, csid, callback) {
+        callback = (typeof callback === "function") ? callback : function (listModel) {
+            that.list.applier.requestChange(that.list.options.elPaths.items, listModel[that.options.recordType]);
+            that.refreshView();
+        };
         that.events.onListUpdate.fire();
         that.listSource.get({
             recordType: primary,
             csid: csid
-        }, function (listModel) {
-            that.list.applier.requestChange(that.list.options.elPaths.items, listModel[that.options.recordType]);
-            that.refreshView();
-        });
+        }, callback);
     };
     
-    cspace.listEditor.updateList = function (that) {
+    var updatelistcallback = function (that) {
+        return function (listmodel) {
+            that.list.applier.requestchange(that.list.options.elpaths.items, listmodel[that.list.options.elpaths.items]);
+            that.refreshview();
+        };
+    };
+    
+    cspace.listEditor.updateListUsers = function (that, searchField, callback) {
+        callback = (typeof callback === "function") ? callback : updatelistcallback(that);
         that.events.onListUpdate.fire();
-        that.listSource.get(null, function (listModel) {
-            that.list.applier.requestChange(that.list.options.elPaths.items, listModel[that.list.options.elPaths.items]);
-            that.refreshView();
-        });
+        that.listSource.get({
+            query: searchField.val() || ""
+        }, callback);
+    };
+    
+    cspace.listEditor.updateList = function (that, callback) {
+        callback = (typeof callback === "function") ? callback : updatelistcallback(that);
+        that.events.onListUpdate.fire();
+        that.listSource.get(null, callback);
     };
     
     cspace.listEditor.hideDetails = function (dom, events) {
@@ -219,6 +233,11 @@ cspace = cspace || {};
     });
     cspace.listEditor.testUsersListDataSource = cspace.URLDataSource;
     
+    fluid.defaults("cspace.listEditor.testUsersListSearchDataSource", {
+        url: "%test/data/users/search.json"
+    });
+    cspace.listEditor.testUsersListSearchDataSource = cspace.URLDataSource;
+    
     fluid.defaults("cspace.listEditor.testRoleListDataSource", {
         url: "%test/data/role/records.json"
     });
@@ -234,8 +253,25 @@ cspace = cspace || {};
         return data.relations;
     };
     
+    cspace.listEditor.responseParseUsers = function (data) {
+        return {
+            items: data.results
+        };
+    };
+    
     // TODO: This demands block is here because currently we need 
     // cspace.listEditor.responseParseTabs to be initialized before.
+    fluid.demands("cspace.listEditor.listDataSource", ["cspace.listEditor", "cspace.users"], {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "{listEditor}.options.urls.listUrl",
+            targetTypeName: "cspace.listEditor.listDataSource",
+            responseParser: cspace.listEditor.responseParseUsers,
+            termMap: {
+                query: "%query"
+            }
+        }
+    });
     fluid.demands("cspace.listEditor.listDataSource", ["cspace.listEditor", "cspace.tab"], {
         funcName: "cspace.URLDataSource",
         args: {

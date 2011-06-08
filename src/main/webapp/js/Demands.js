@@ -347,7 +347,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 recordType: "users",
                 uispec: "{adminUsers}.options.uispec",
                 urls: {
-                    listUrl: "%chain/users"
+                    listUrl: "%chain/users/search?query=%query"
                 }
             }
         });
@@ -366,18 +366,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         fluid.demands("updateList", ["cspace.listEditor", "cspace.tab"], {
             funcName: "cspace.listEditor.updateListRelated",
-            args: ["{listEditor}", "{relatedRecordsTab}.primary", "{relatedRecordsTab}.model.csid"]
+            args: ["{listEditor}", "{relatedRecordsTab}.primary", "{relatedRecordsTab}.model.csid", "{arguments}.0"]
+        });
+        fluid.demands("updateList", ["cspace.listEditor", "cspace.users"], {
+            funcName: "cspace.listEditor.updateListUsers",
+            args: ["{listEditor}", "{adminUsers}.dom.searchField", "{arguments}.0"]
         });
         fluid.demands("updateList", "cspace.listEditor", {
             funcName: "cspace.listEditor.updateList",
-            args: "{listEditor}"
-        });
-        fluid.demands("cspace.listEditor.listDataSource", ["cspace.listEditor", "cspace.users"], {
-            funcName: "cspace.URLDataSource",
-            args: {
-                url: "{listEditor}.options.urls.listUrl",
-                targetTypeName: "cspace.listEditor.listDataSource"
-            }
+            args: ["{listEditor}", "{arguments}.0"]
         });
         fluid.demands("cspace.listEditor.listDataSource", ["cspace.listEditor", "cspace.role"], {
             funcName: "cspace.URLDataSource",
@@ -1473,7 +1470,42 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // search demands
         fluid.demands("search", ["cspace.searchToRelateDialog", "cspace.localData", "cspace.test"], {
            container: "{searchToRelateDialog}.container"
-        });            
+        });
+        
+        // ListEditor demands
+        fluid.demands("userListEditor", ["cspace.userAdminTests", "cspace.adminUsers"], {
+            container: "{adminUsers}.container",
+            options: {
+                selectors: {
+                    allDetails: ".user-details"
+                },
+                selectorsToIgnore: ["allDetails"],
+                recordType: "users",
+                uispec: "{adminUsers}.options.uispec",
+                urls: {
+                    listUrl: "%chain/users/search?query=%query"
+                },
+                components: {
+                    listSearchSource: {
+                        type: "cspace.listEditor.testUsersListSearchDataSource"
+                    }
+                }
+            }
+        });
+        fluid.demands("cspace.listEditor.testUsersListSearchDataSource",  ["cspace.localData", "cspace.userAdminTests", "cspace.listEditor"], {
+            funcName: "cspace.listEditor.testUsersListSearchDataSource",
+            args: {
+                targetTypeName: "cspace.listEditor.testUsersListSearchDataSource"
+            }
+        });
+        fluid.demands("updateList", ["cspace.listEditor", "cspace.userAdminTests", "cspace.localData"], {
+            funcName: "cspace.tests.updateListUsers",
+            args: ["{listEditor}", "{adminUsers}.dom.searchField", "{arguments}.0"]
+        });
+        fluid.demands("updateList", ["cspace.listEditor", "cspace.listEditorTests", "cspace.localData"], {
+            funcName: "cspace.listEditor.updateList",
+            args: ["{listEditor}", "{arguments}.0"]
+        });
     };
     
     fluid.demands("cspace.localDemands", "cspace.localData", {

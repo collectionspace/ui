@@ -72,6 +72,16 @@ var adminUsersTester = function () {
     };
     
     cspace.tests.onTearDown = fluid.event.getEventFirer();
+    
+    cspace.tests.updateListUsers = function (that, searchField, callback) {
+        callback = (typeof callback === "function") ? callback : function (listModel) {
+            that.list.applier.requestChange(that.list.options.elPaths.items, listModel[that.list.options.elPaths.items] || listModel.results);
+            that.refreshView();
+        };
+        that.events.onListUpdate.fire();
+        var query = searchField.val();
+        that[query ? "listSearchSource" : "listSource"].get(null, callback);
+    };
 
     var bareAdminUsersTest = new jqUnit.TestCase("AdminUsers Tests", function () {
         bareAdminUsersTest.fetchTemplate("../../main/webapp/html/administration.html", ".csc-users-userAdmin");
@@ -108,6 +118,7 @@ var adminUsersTester = function () {
             }
         });
         fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.users");
+        fluid.staticEnvironment.cspaceTestEnv = fluid.typeTag("cspace.userAdminTests");
         adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
     };
     
@@ -219,27 +230,30 @@ var adminUsersTester = function () {
         var adminUsers;
         var testOpts = fluid.copy(baseTestOpts);
         fluid.model.setBeanValue(testOpts, "queryURL", "../data/users/search.json");
-        fluid.model.setBeanValue(testOpts, "listeners", {
-            afterSearch: function () {
-                jqUnit.isVisible("Unsearch is visible after search", adminUsers.options.selectors.unSearchButton);
-                jqUnit.assertEquals("There are 2 users in the list after search", 2, adminUsers.userListEditor.list.model.items.length);
-                adminUsers.userListEditor.list.events.afterRender.addListener(function () {
-                    jqUnit.notVisible("Unsearch is invisible after unsearch", adminUsers.options.selectors.unSearchButton);
-                    jqUnit.assertEquals("There are 4 users in the list after unsearch", 4, adminUsers.userListEditor.list.model.items.length);
-                    cspace.tests.onTearDown.fire(adminUsers.userListEditor.details);
-                    start();
-                });
-                adminUsers.locate("unSearchButton").click();
-            },
-            afterRender: function () {
+        fluid.model.setBeanValue(testOpts, "components.userListEditor.options.listeners", {
+            "afterListUpdate.initalEvent": function () {
+                adminUsers.userListEditor.events.afterListUpdate.removeListener("initalEvent");
                 jqUnit.assertEquals("Initially there are 4 users in the list", 4, adminUsers.userListEditor.list.model.items.length);
                 jqUnit.notVisible("Unsearch is invisible initially", adminUsers.options.selectors.unSearchButton);
                 adminUsers.locate("searchField").val("test").change();
                 jqUnit.assertEquals("Value in seatch fiels is 'test'", "test", adminUsers.locate("searchField").val());
+                adminUsers.userListEditor.events.afterListUpdate.addListener(function () {
+                    adminUsers.userListEditor.events.afterListUpdate.removeListener("afterListUpdate");
+                    jqUnit.isVisible("Unsearch is visible after search", adminUsers.options.selectors.unSearchButton);
+                    jqUnit.assertEquals("There are 2 users in the list after search", 2, adminUsers.userListEditor.list.model.items.length);
+                    adminUsers.userListEditor.list.events.afterRender.addListener(function () {
+                        jqUnit.notVisible("Unsearch is invisible after unsearch", adminUsers.options.selectors.unSearchButton);
+                        jqUnit.assertEquals("There are 4 users in the list after unsearch", 4, adminUsers.userListEditor.list.model.items.length);
+                        cspace.tests.onTearDown.fire(adminUsers.userListEditor.details);
+                        start();
+                    });
+                    adminUsers.locate("unSearchButton").click();
+                }, "afterListUpdate");
                 adminUsers.locate("searchButton").click();
             }
         });
         fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.users");
+        fluid.staticEnvironment.cspaceTestEnv = fluid.typeTag("cspace.userAdminTests");
         adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
     });
     
@@ -271,6 +285,7 @@ var adminUsersTester = function () {
             afterSetup: waitMultiple.getListener("afterSetup")
         });
         fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.users");
+        fluid.staticEnvironment.cspaceTestEnv = fluid.typeTag("cspace.userAdminTests");
         cspace.adminUsers(".csc-users-userAdmin", testOpts);
     };
     
@@ -352,13 +367,13 @@ var adminUsersTester = function () {
             re.events.afterRender.removeListener("initialSelect");
             re.remove();
             jqUnit.assertEquals("Selected username is", "Anastasia Cheethem", adminUsers.locate("userName").val());                        
-            re.options.dataContext.events.afterRemove.addListener(function () {                        
+            re.options.dataContext.events.afterSave.addListener(function () {                        
                 jqUnit.assertTrue("Successfully executed remove", true);
                 jqUnit.notVisible("Confirmation Dialog is now invisible", re.confirmation.popup);
                 jqUnit.notVisible("No record selected", adminUsers.locate("userName"));
                 cspace.tests.onTearDown.fire(re);
                 start();
-            });
+            }, undefined, undefined, "last");
             re.confirmation.confirmationDialog.locate("act").click();
         });
     });

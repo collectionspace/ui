@@ -42,40 +42,21 @@ cspace = cspace || {};
 
         return true;
     };
-    
-    var restoreUserList = function (userListEditor, domBinder) {
-        return function () {
-            domBinder.locate("unSearchButton").hide();
-            userListEditor.updateList();
-        };
-    };
-
-    var submitSearch = function (messageBar, listEditor, domBinder, queryURL, successEvent, strings) {
-        return function () {
-            var query = cspace.util.useLocalData() ? "" : domBinder.locate("searchField").val();
-            // TODO: Use the DC for this
-            var url = queryURL + query;
-            $.ajax({
-                url: url,
-                type: "GET",
-                dataType: "json",
-                success: function (data, textStatus) {
-                    listEditor.list.applier.requestChange("items", data.results);                    
-                    listEditor.refreshView();
-                    domBinder.locate("unSearchButton").show();
-                    successEvent.fire();
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    messageBar.show(strings.searchError + textStatus, null, true);
-                }
-            });
-        };
-    };
 
     var bindEventHandlers = function (that) {
-
-        that.locate("searchButton").click(submitSearch(that.options.messageBar, that.userListEditor, that.dom, that.options.queryURL, that.events.afterSearch, that.options.strings));
-        that.locate("unSearchButton").click(restoreUserList(that.userListEditor, that.dom)).hide();
+        that.locate("unSearchButton").click(function () {
+            that.globalNavigator.events.onPerformNavigation.fire(function () {
+                that.locate("searchField").val("")
+                that.locate("unSearchButton").hide();
+                that.userListEditor.updateList();
+            });
+        }).hide();
+        that.locate("searchButton").click(function () {
+            that.globalNavigator.events.onPerformNavigation.fire(function () {
+                that.userListEditor.updateList();
+                that.locate("unSearchButton").show();
+            });
+        });
 
         that.userListEditor.details.events.onSave.addListener(function () {
             return validate(that.options.messageBar, that.dom, that.userListEditor.options.detailsApplier, that.passwordValidator, that.options.strings);
@@ -110,7 +91,8 @@ cspace = cspace || {};
             },
             userListEditor: {
                 type: "cspace.listEditor"
-            }
+            },
+            globalNavigator: "{globalNavigator}"
         },
         selectors: {
             searchField: ".csc-user-searchField",
@@ -125,7 +107,6 @@ cspace = cspace || {};
         },
         events: {
             afterRender: null,
-            afterSearch: null,
             afterSetup: null
         },
         strings: {

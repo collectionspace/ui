@@ -79,6 +79,7 @@ var listEditorTester = function(){
             }
         });
         fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.users");
+        fluid.staticEnvironment.cspaceTestEnv = fluid.typeTag("cspace.listEditorTests");
         listEditor = cspace.listEditor(".csc-users-userAdmin", testOpts);
         stop();
     };
