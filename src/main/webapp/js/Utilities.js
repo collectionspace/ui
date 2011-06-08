@@ -273,7 +273,7 @@ fluid.registerNamespace("cspace.util");
             });
         }
     };
-	
+
     cspace.util.getDefaultConfigURL = function (options) {
         var that = fluid.initLittleComponent("cspace.util.getDefaultConfigURL", options);
         fluid.initDependents(that);
