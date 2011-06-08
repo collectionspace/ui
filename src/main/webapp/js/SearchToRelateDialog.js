@@ -147,21 +147,6 @@ cspace = cspace || {};
                     }
                 }
             },
-            headerSelect: {
-                messagekey: "headerSelect"
-            },
-            headerNumber: {
-                messagekey: "headerNumber"
-            },
-            headerDetails: {
-                messagekey: "headerDetails"
-            },
-            headerType: {
-                messagekey: "headerType"
-            },
-            headerUpdatedAt: {
-                messagekey: "headerUpdatedAt"
-            },
             next: {
                 messagekey: "next"
             },
@@ -198,11 +183,6 @@ cspace = cspace || {};
             createNewButton: ".csc-searchToRelate-createButton",
             relationshipType: ".csc-searchToRelate-relationshipTypeSelect",
             createNew: ".csc-searchToRelate-createNew",
-            headerSelect: ".csc-searchToRelate-headerSelect",
-            headerNumber: ".csc-searchToRelate-headerNumber",
-            headerDetails: ".csc-searchToRelate-headerDetails",
-            headerType: ".csc-searchToRelate-headerType",
-            headerUpdatedAt: ".csc-searchToRelate-headerUpdatedAt",
             previous: ".csc-searchToRelate-previous",
             next: ".csc-searchToRelate-next",
             multipleRelate: ".csc-related-steps"
@@ -237,11 +217,6 @@ cspace = cspace || {};
             relationshipType: "Select relationship type:",
             createNew: "Create new record:",
             addButton: "Add to current record",
-            headerSelect: "Select",
-            headerNumber: "ID Number",
-            headerDetails: "Detail",
-            headerType: "Record Type",
-            headerUpdatedAt: "Updated At",
             next: "next >",
             previous: "< previous"
         },
@@ -259,6 +234,15 @@ cspace = cspace || {};
                                 },
                                 related: "{searchToRelateDialog}.options.related",
                                 permission: "update"
+                            }
+                        },
+                        resultsPager: {
+                            options: {
+                                bodyRenderer: {
+                                    options: {
+                                        template: "{searchToRelateDialog}.options.resources.template.resourceText"
+                                    }
+                                }
                             }
                         }
                     }

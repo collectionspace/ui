@@ -40,24 +40,26 @@
 	        <div class="csc-search-results">
 	            <!-- search results -->
 	            <div class="fl-pager list-table">
-	                <table summary="search results" id="search-results" class="fl-pager-data">
-	                    <thead>
-	                        <tr class="csc-header">
-	                            <th class="csc-searchToRelate-headerSelect"></th>
-	                            <th class="csc-searchToRelate-headerNumber flc-pager-sort-header"></th>
-	                            <th class="csc-searchToRelate-headerDetails flc-pager-sort-header"></th>
-	                            <th class="csc-searchToRelate-headerType flc-pager-sort-header"></th>
-	                            <th class="csc-searchToRelate-headerUpdatedAt flc-pager-sort-header"></th>
-	                        </tr>
-	                    </thead>
-	                    <tbody class="flc-pager-body-template">
-	                        <tr class="csc-row">
-	                            <td class="checkbox"><input type="checkbox" class="csc-search-select"/></td>
-	                            <td class="csc-number link"></td>
-	                            <td class="csc-col"></td>
-	                        </tr>
-	                    </tbody>
-	                </table>
+	                <table summary="search results" id="search-results" class="flc-pager-body-template fl-pager-data" xmlns:rsf="http://ponder.org.uk">
+                        <thead class="flc-pager-body-template-content">
+                            <tr rsf:id="header:">
+                                <th><span rsf:id="selected"></span></th>
+                                <th class="flc-pager-sort-header"><a rsf:id="number" href="#"></a></th>
+                                <th class="flc-pager-sort-header"><a rsf:id="summary" href="#"></a></th>
+                                <th><span rsf:id="recordtype"></span></th>
+                                <th class="flc-pager-sort-header"><a rsf:id="summarylist.updatedAt" href="#"></a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="csc-row" rsf:id="row:">
+                                <td class="checkbox"><input rsf:id="selected" type="checkbox" /></td>
+                                <td><a rsf:id="number" href="#" class="link"></a></td>
+                                <td rsf:id="summary"></td>
+                                <td rsf:id="recordtype"></td>
+                                <td rsf:id="summarylist.updatedAt"></td>
+                            </tr>
+                        </tbody>
+                    </table>
 	                <ul id="pager-bottom" class="fl-pager-ui flc-pager-bottom">
 	                    <li class="flc-per-page">
 	                        Show <span>

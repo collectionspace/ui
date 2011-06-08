@@ -1093,6 +1093,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("search", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.search"
         });
+        fluid.demands("cspace.search.searchView.buildUrl", "cspace.search.searchView", {
+            funcName: "cspace.search.searchView.buildUrlDefault",
+            args: ["{searchView}.model.searchModel", "{searchView}.options.urls"]
+        });
+        fluid.demands("cspace.search.searchView.buildUrl", ["cspace.search.searchView", "cspace.localData"], {
+            funcName: "cspace.search.searchView.buildUrlLocal",
+            args: ["{searchView}.model.searchModel", "{searchView}.options.urls"]
+        });
         
         // searchBox demands
         fluid.demands("mainSearch", "cspace.search.searchView", {

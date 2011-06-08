@@ -61,19 +61,21 @@
 	                                        	</div>
 	                                            <!-- search results -->
 	                                            <div class="fl-pager list-table" id="toggle-records">
-	                                                <table summary="search results" id="search-results" class="fl-pager-data">
+	                                                <table summary="search results" id="search-results" class="flc-pager-body-template fl-pager-data" xmlns:rsf="http://ponder.org.uk">
 	                                                    <thead>
-	                                                        <tr id="header:" class="csc-header">
-	                                                            <th class="flc-pager-sort-header">ID Number</th>
-	                                                            <th class="flc-pager-sort-header">Summary</th>
-	                                                            <th class="flc-pager-sort-header">Type</th>
-	                                                            <th class="flc-pager-sort-header">Updated At</th>
+	                                                        <tr rsf:id="header:">
+	                                                            <th class="flc-pager-sort-header"><a rsf:id="number" href="#"></a></th>
+	                                                            <th class="flc-pager-sort-header"><a rsf:id="summary" href="#"></a></th>
+	                                                            <th><span rsf:id="recordtype"></span></th>
+	                                                            <th class="flc-pager-sort-header"><a rsf:id="summarylist.updatedAt" href="#"></a></th>
 	                                                        </tr>
 	                                                    </thead>
-	                                                    <tbody class="flc-pager-body-template">
-	                                                        <tr class="csc-row">
-	                                                            <td><a href="x" class="csc-number link"></a></td>
-	                                                            <td class="csc-col"></td>
+	                                                    <tbody>
+	                                                        <tr class="csc-row" rsf:id="row:">
+	                                                            <td><a rsf:id="number" href="#" class="link"></a></td>
+	                                                            <td rsf:id="summary"></td>
+	                                                            <td rsf:id="recordtype"></td>
+	                                                            <td rsf:id="summarylist.updatedAt"></td>
 	                                                        </tr>
 	                                                    </tbody>
 	                                                </table>

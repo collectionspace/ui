@@ -26010,7 +26010,12 @@ var fluid_1_4 = fluid_1_4 || {};
         options.renderOptions.idMap = options.renderOptions.idMap || {};
         var idMap = options.renderOptions.idMap;
         var root = that.locate("root");
-        var template = fluid.selfRender(root, {}, options.renderOptions);
+        var template;
+        if (options.template) {
+            template = fluid.render($(that.options.selectors.root, options.template).html(), root, {}, options.renderOptions);
+        } else {
+            template = fluid.selfRender(root, {}, options.renderOptions);
+        }
         root.addClass(options.styles.root);
         var columnDefs = getColumnDefs(overallThat);
         var expOpts = {options: options, columnDefs: columnDefs, overallOptions: overallThat.options, dataModel: overallThat.options.dataModel, idMap: idMap};

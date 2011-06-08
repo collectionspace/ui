@@ -30,54 +30,34 @@ cspace = cspace || {};
 
     fluid.registerNamespace("cspace.search");
 
-    cspace.search.colDefsGenerator = function (columnList, recordType, selectable) {
-        var colDefs = fluid.transform(columnList, function (object, index) {
-            var key = "col:";
+    cspace.search.colDefsGenerator = function (columnList, recordType, selectable, labels) {
+        var colDefs = fluid.transform(columnList, function (key, index) {
             var comp;
-
-            if (object === "number") {
-                key = "number";
+            if (key === "number") {
                 comp = {
                     target: "${searchModel.recordType}.html?csid=${*.csid}",
                     linktext: "${*.number}"
                 };
-            } else if (object === "csid") {
-                key = "csid";
-            } else {
-                comp = {value: "${*." + object + "}"};
+            } else if (key !== "csid") {
+                comp = {value: "${*." + key + "}"};
             }
             return {
                 key: key,
-                valuebinding: "*." + object,
+                valuebinding: "*." + key,
                 components: comp,
-                sortable: true
+                sortable: key !== "recordtype",
+                label: labels[key]
             };
         });
         if (selectable) {
             colDefs[colDefs.length] = {
                 key: "selected",
                 valuebinding: "*.selected",
-                sortable: false
+                sortable: false,
+                label: labels["selected"]
             };
         }
         return colDefs;
-    };
-    
-    cspace.search.makeCutpoints = function (selectors, selectable) {
-        var rendererCutpoints = [
-            {id: "header:", selector: selectors.resultsHeader},
-            {id: "row:", selector: selectors.resultsRow},
-            {id: "number", selector: selectors.columns.number},
-            {id: "col:", selector: selectors.columns.col}
-        ];
-
-        if (selectable) {
-            rendererCutpoints.push({
-                id: "selected",
-                selector: selectors.columns.select
-            });
-        }
-        return rendererCutpoints;
     };
 
     cspace.search.makeModelFilter = function (that) {
@@ -87,24 +67,33 @@ cspace = cspace || {};
             fluid.log("modelFilter: initialState " + searchModel.initialState + 
                 ", renderRequest " + searchModel.renderRequest);
             if (searchModel.initialState) {
-                searchModel.initialState = false;
+                that.applier.requestChange("searchModel.initialState", false);
                 return [];
             }
             var dataRequired = false;
-            var limit = fluid.pager.computePageLimit(newModel);
-            for (i = newModel.pageSize * newModel.pageIndex; i < limit; ++ i) {
+            for (i = newModel.pageSize * newModel.pageIndex; i < fluid.pager.computePageLimit(newModel); ++ i) {
                 if (!directModel[i]) {
                     dataRequired = true;
                     break;
                 }
             } 
             if (!searchModel.renderRequest && dataRequired) {
+                if (searchModel.sortDir !== newModel.sortDir || searchModel.sortKey !== newModel.sortKey) {
+                    that.applier.requestChange("results", []);
+                    that.resultsPager.applier.requestChange("pageCount", 1);
+                    that.resultsPager.applier.requestChange("pageIndex", 0);
+                    that.resultsPager.applier.requestChange("totalRange", 0);
+                }
                 that.search(newModel); // if made through interaction we need to perform "search" to refetch
             }
-            searchModel.renderRequest = false;
+            that.applier.requestChange("searchModel.renderRequest", false);
             return fluid.pager.directModelFilter(directModel, newModel, permutation);
         };
       
+    };
+    
+    cspace.search.sorter = function (overallThat, model) {
+        return null;
     };
 
     var bindEventHandlers = function (that) {
@@ -124,9 +113,7 @@ cspace = cspace || {};
             // but pager does not give us a more suitable event to listen to
             that.resultsPager.events.onModelChange.addListener(function (newModel, oldModel) {
                 that.locate("resultsRow").click(function (event) {
-                    var row = $(event.currentTarget);
-                    var rows = that.locate("resultsRow");
-                    var index = rows.index(row);
+                    var index = that.locate("resultsRow").index($(event.currentTarget));
                     var record = that.model.results[newModel.pageSize * newModel.pageIndex + index];
                     if (!record) {
                         return;
@@ -137,7 +124,7 @@ cspace = cspace || {};
                             csid: record.csid
                         }
                     });
-                    window.location = expander("%recordType.html?csid=%csid");
+                    window.location = expander(that.options.urls.pivot);
                     return false;
                 });
             });
@@ -174,13 +161,7 @@ cspace = cspace || {};
             resultsCount: ".csc-search-results-count",
             lookingContainer: ".csc-search-lookingContainer",
             lookingString: ".csc-search-lookingString",
-            resultsHeader: ".csc-header",
             resultsRow: ".csc-row",
-            columns: {
-                number: ".csc-number",
-                col: ".csc-col",
-                select: ".csc-search-select"
-            },
             loadingIndicator: ".csc-search-loadingIndicator"
         },
         styles: {
@@ -189,7 +170,12 @@ cspace = cspace || {};
         strings: {
             errorMessage: "We've encountered an error retrieving search results. Please try again.",
             resultsCount: "Found %count records for %query",
-            looking: "Looking for %query..."
+            looking: "Looking for %query...",
+            selected: "Select",
+            number: "ID Number",
+            summary: "Summary",
+            recordtype: "Record Type",
+            "summarylist.updatedAt": "Updated At"
         },
         messageBar: "{messageBar}",
         events: {
@@ -198,7 +184,6 @@ cspace = cspace || {};
             afterSearch: null,
             onError: null
         },
-        
         columnList: ["number", "summary", "recordtype", "summarylist.updatedAt"],
         resultsSelectable: false,
         invokers: {
@@ -256,6 +241,7 @@ cspace = cspace || {};
                 options: {
                     dataModel: "{searchView}.model",
                     dataOffset: "results",
+                    sorter: cspace.search.sorter,
                     modelFilter: {
                         expander: {
                             type: "fluid.deferredCall",
@@ -267,7 +253,7 @@ cspace = cspace || {};
                         expander: {
                             type: "fluid.deferredCall",
                             func: "cspace.search.colDefsGenerator",
-                            args: ["{searchView}.options.columnList", "{searchView}.model.searchModel.recordType", "{searchView}.options.resultsSelectable"]
+                            args: ["{searchView}.options.columnList", "{searchView}.model.searchModel.recordType", "{searchView}.options.resultsSelectable", "{searchView}.options.strings"]
                         }
                     },
                     annotateColumnRange: "{searchView}.options.columnList.0",
@@ -275,13 +261,6 @@ cspace = cspace || {};
                         type: "fluid.pager.selfRender",
                         options: {
                             renderOptions: {
-                                cutpoints: {
-                                    expander: {
-                                        type: "fluid.deferredCall",
-                                        func: "cspace.search.makeCutpoints",
-                                        args: ["{searchView}.options.selectors", "{searchView}.options.resultsSelectable"]
-                                    }
-                                },
                                 autoBind: true
                             }
                         }
@@ -298,9 +277,11 @@ cspace = cspace || {};
             }
         },
         urls: cspace.componentUrlBuilder({
+            pivot: "%recordType.html?csid=%csid",
             pageNum: "&pageNum=%pageNum",
             pageSize: "&pageSize=%pageSize",
-            defaultUrl: "%chain/%recordType/search?query=%keywords%pageNum%pageSize",
+            sort: "&sortDir=%sortDir&sortKey=%sortKey",
+            defaultUrl: "%chain/%recordType/search?query=%keywords%pageNum%pageSize%sort",
             localUrl: "%chain/data/%recordType/search.json"
         })
     });
@@ -360,20 +341,28 @@ cspace = cspace || {};
         that.mainSearch.locate("recordTypeSelect").val(searchModel.recordType);
         displayLookingMessage(that.dom, searchModel.keywords, that.options.strings);
         var pagerModel = newPagerModel || that.resultsPager.model;
-        that.applier.requestChange("searchModel.pageSize", pagerModel.pageSize);
-        that.applier.requestChange("searchModel.pageIndex", pagerModel.pageIndex);
+        that.updateModel({
+            pageSize: pagerModel.pageSize,
+            pageIndex: pagerModel.pageIndex,
+            sortKey: pagerModel.sortKey,
+            sortDir: pagerModel.sortDir
+        });
         var url = that.buildUrl();
         that.events.onSearch.fire();
         fluid.log("Querying url " + url);
-        $.ajax({
-            url: url,
-            type: "GET",
-            dataType: "json",
-            success: function (data, textStatus) {
-                that.applyResults(data);
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                that.events.onError.fire("search", textStatus);
+        fluid.fetchResources({
+            results: {
+                href: url,
+                options: {
+                    dataType: "json",
+                    type: "GET",
+                    success: function (data, textStatus) {
+                        that.applyResults(data);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        that.events.onError.fire("search", textStatus);
+                    }
+                }
             }
         });
     };
@@ -385,20 +374,13 @@ cspace = cspace || {};
         messageBar.hide();
     };
     
-    fluid.demands("cspace.search.searchView.buildUrl", "cspace.search.searchView", {
-        funcName: "cspace.search.searchView.buildUrlDefault",
-        args: ["{searchView}.model.searchModel", "{searchView}.options.urls"]
-    });
-    fluid.demands("cspace.search.searchView.buildUrl", ["cspace.search.searchView", "cspace.localData"], {
-        funcName: "cspace.search.searchView.buildUrlLocal",
-        args: ["{searchView}.model.searchModel", "{searchView}.options.urls"]
-    });
     cspace.search.searchView.buildUrlDefault = function (options, urls) {
         return fluid.stringTemplate(urls.defaultUrl, {
             recordType: options.recordType,
             keywords: options.keywords,
             pageNum: options.pageIndex ? fluid.stringTemplate(urls.pageNum, {pageNum: options.pageIndex}) : "",
-            pageSize: options.pageSize ? fluid.stringTemplate(urls.pageSize, {pageSize: options.pageSize}) : ""
+            pageSize: options.pageSize ? fluid.stringTemplate(urls.pageSize, {pageSize: options.pageSize}) : "",
+            sort: options.sortKey ? fluid.stringTemplate(urls.sort, {sortKey: options.sortKey, sortDir: options.sortDir || "1"}) : ""
         });
     };
     cspace.search.searchView.buildUrlLocal = function (options, urls) {
