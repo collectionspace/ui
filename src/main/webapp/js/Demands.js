@@ -438,7 +438,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{arguments}.0",
             mergeAllOptions: [{
                 components: {
-                    confirmation: "{confirmation}"
+                    confirmation: "{confirmation}",
+                    broaderDataSource: {
+                        type: "cspace.autocomplete.broaderDataSource"
+                    }
                 }
             }, "{arguments}.1"]
         });
@@ -446,9 +449,23 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{arguments}.0",
             mergeAllOptions: [{
                 components: {
-                    confirmation: "{confirmation}"
+                    confirmation: "{confirmation}",
+                    broaderDataSource: {
+                        type: "cspace.autocomplete.broaderDataSource"
+                    }
                 }
             }, "{arguments}.1"]
+        });
+        fluid.demands("cspace.autocomplete.broaderDataSource", "cspace.autocomplete", {
+            funcName: "cspace.URLDataSource",
+            args: {
+                url: "../../chain/relationships/hierarchical/search?source=%recordType/%csid&type=hasBroader",
+                termMap: {
+                    recordType: "%recordType",
+                    csid: "%csid"
+                },
+                targetTypeName: "cspace.autocomplete.broaderDataSource"
+            }
         });
         
         // Confirmation demands

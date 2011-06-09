@@ -525,35 +525,37 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.autocomplete.selectMatchConfirm = function (that, key) {
         var match = that.model.matches[key];
-        if (!match.broader) {
-            updateAuthoritatively(that, match);
-            that.buttonAdjustor();
-            that.eventHolder.events.afterSelectMatch.fire();
-            return;
-        }
-        that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
-            listeners: {
-                onClose: function (userAction) {
-                    if (userAction === "act") {
-                        updateAuthoritatively(that, match);
-                        that.buttonAdjustor();
-                        that.eventHolder.events.afterSelectMatch.fire();
-                    } else {
-                        that.revertState();
-                    }
-                }
-            },
-            termMap: {
-                narrower: match["label"],
-                broader: match.broader["label"]
-            },
-            strings: {
-                primaryMessage: that.options.strings.narrowerChange,
-                actText: "Yes",
-                actAlt: "yes",
-                cancelText: "No",
-                cancelAlt: "no"
+        that.broaderDataSource.get({recordType: match.type, csid: match.csid}, function (response) {
+            if (!response.broader) {
+                updateAuthoritatively(that, match);
+                that.buttonAdjustor();
+                that.eventHolder.events.afterSelectMatch.fire();
+                return;
             }
+            that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+                listeners: {
+                    onClose: function (userAction) {
+                        if (userAction === "act") {
+                            updateAuthoritatively(that, match);
+                            that.buttonAdjustor();
+                        } else {
+                            that.revertState();
+                        }
+                        that.eventHolder.events.afterSelectMatch.fire();
+                    }
+                },
+                termMap: {
+                    narrower: match["label"],
+                    broader: response.broader["label"]
+                },
+                strings: {
+                    primaryMessage: that.options.strings.narrowerChange,
+                    actText: "Yes",
+                    actAlt: "yes",
+                    cancelText: "No",
+                    cancelAlt: "no"
+                }
+            });
         });
     };
     
