@@ -176,6 +176,7 @@
             "messagekey": "taxon-taxonCitationListLabel"
         },
         ".csc-taxon-taxonCurrency": {
+            "default": "",
             "optionnames": [
                 "Please select a value",
                 "current",
@@ -224,6 +225,7 @@
             "messagekey": "taxon-taxonIsNamedHybridLabel"
         },
         ".csc-taxon-taxonIsNamedHybrid": {
+            "default": "",
             "optionnames": [
                 "Please select a value",
                 "true",
@@ -264,6 +266,7 @@
                                                 "value": "${{row}.taxonAuthor}"
                                             },
                                             ".csc-taxon-taxonAuthorType": {
+                                                "default": "",
                                                 "optionnames": [
                                                     "Please select a value",
                                                     "ascribed",
@@ -290,6 +293,7 @@
             ]
         },
         ".csc-taxon-taxonomicStatus": {
+            "default": "",
             "optionnames": [
                 "Please select a value",
                 "current",
@@ -310,7 +314,7 @@
         },
         ".csc-taxon-taxonYear": "${fields.taxonYear}",
         ".csc-taxon-termStatus": {
-            "default": "0",
+            "default": "provisional",
             "optionnames": [
                 "Provisional",
                 "Under Review",
@@ -334,7 +338,7 @@
         ".csc-taxon-tenantID": "${fields.tenantID}",
         ".csc-taxon-taxonNameSource": "${fields.taxonNameSource}",
         ".csc-taxon-taxonRank": {
-            "default": "0",
+            "default": "",
             "optionnames": [
                 "Please select a value",
                 "domain",
