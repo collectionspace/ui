@@ -115,8 +115,17 @@
             ]
         },
         ".csc-loanOut-loanOutConditions": "${fields.specialConditionsOfLoan}",
+	".csc-loanOut-loanOutConditions-label": {
+		"messagekey:" ".csc-loanOut-loanOutConditionsLabel"
+	},
         ".csc-loanOut-loanOutNumber": "${fields.loanOutNumber}",
+	".csc-loanOut-loanOutNumber-label": {
+		"messagekey:" ".csc-loanOut-loanOutNumberLabel"
+	},
         ".csc-loanOut-loanOutNote": "${fields.loanOutNote}",
+	".csc-loanOut-loanOutNote-label": {
+		"messagekey:" ".csc-loanOut-loanOutNoteLabel"
+	},
         ".csc-loanout-loanedObjectStatusGroup": {
             "decorators": [
                 {

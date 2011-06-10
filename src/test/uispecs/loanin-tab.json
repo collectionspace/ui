@@ -125,6 +125,9 @@
             ]
         },
         ".csc-loanIn-loanInNote": "${fields.loanInNote}",
+	".csc-loanIn-loanInNote-label": {
+		"messagekey:" ".csc-loanIn-loanInNoteLabel"
+	},
         ".csc-loanIn-loanReturnDate": {
             "value": "${fields.loanReturnDate}",
             "decorators": [
@@ -144,7 +147,13 @@
             ]
         },
         ".csc-loanIn-loanInConditions": "${fields.loanInConditions}",
+	".csc-loanIn-loanInConditions-label": {
+		"messagekey:" ".csc-loanIn-loanInConditionsLabel"
+	},
         ".csc-loanIn-loanInNumber": "${fields.loanInNumber}",
+	".csc-loanIn-loanInNumber-label": {
+		"messagekey:" ".csc-loanIn-loanInNumberLabel"
+	},
         ".csc-loanIn-loanRenewalApplicationDate": {
             "value": "${fields.loanRenewalApplicationDate}",
             "decorators": [

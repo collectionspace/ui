@@ -16,20 +16,20 @@
                                           This corresponds to Information groups within Spectrum's Intake prodedure. -->
                                     <div class="fl-container-flex fl-fix information-group">
                                         <div class="info-column">    
-                                            <div class="csc-recordEditor-header fl-container-flex header toggle">Object Entry</div>
+                                            <div class="csc-recordEditor-header fl-container-flex header toggle csc-intake-objectEntryInformation-label"></div>
                                             <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main" >
                                                 
                                                 <div class="info-column2-50 fl-force-left" >
                                                     
                                                     <div class="info-pair">
-                                                        <div class="label">Intake Entry Number <span class="required">*</span></div>
+                                                        <div class="label csc-intake-entryNumber-label"> <span class="required">*</span></div>
                                                         <div class="content csc-intake-entry-number-container">
 															<div class="input-alpha csc-intake-entry-number pattern-chooser-input" ></div>
 														</div>
                                                     </div>
                                                     
                                                     <div class="info-pair">
-                                                        <div class="label">Entry Date</div>
+                                                        <div class="label csc-intake-entryDate-label"></div>
                                                         <div class="content">
                                                             <div class="input-alpha  csc-intake-entry-date" ></div>
                                                         </div>                                                    
@@ -37,7 +37,7 @@
                                                     
                                                     <div class="info-pair-select">
                                                         <div class="header">
-                                                            <div class="label">Entry Reason</div>
+                                                            <div class="label csc-intake-entryReason-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <table>                                        
@@ -52,7 +52,7 @@
                                                     
                                                     <div class="info-pair-select">
                                                         <div class="header">
-                                                            <div class="label">Entry Method</div>
+                                                            <div class="label csc-intake-entryMethods-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="csc-intake-entryMethod input-select" ></div>
@@ -64,7 +64,7 @@
                                                 <div class="info-column2-50 fl-force-right">
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Return Date</div>
+                                                            <div class="label csc-intake-returnDate-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="input-alpha  csc-intake-returnDate" ></div>
@@ -73,7 +73,7 @@
 
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Current Owner</div>
+                                                            <div class="label csc-intake-currentOwner-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <table>
@@ -91,14 +91,14 @@
                                                     
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Depositor</div>
+                                                            <div class="label csc-intake-depositorGroup-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <table>
                                                                 <thead>
                                                                     <tr>
-                                                                        <td>Depositor</td>
-                                                                        <td>Depositor Requirements</td>
+                                                                        <td class="csc-intake-depositor-label"></td>
+                                                                        <td class="csc-intake-depositorsRequirements-label"></td>
                                                                     </tr>
                                                                 </thead>
                                                                     
@@ -118,7 +118,7 @@
                                                 <div class="info-column fl-force-left">
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Entry Note</div>
+                                                            <div class="label csc-intake-entryNote-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <table>
@@ -134,7 +134,7 @@
                                                 
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Packing Note</div>
+                                                            <div class="label csc-intake-packingNote-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <table>
@@ -164,7 +164,7 @@
                                                     
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Field Collection Date</div>
+                                                            <div class="label csc-intake-fieldCollectionDate-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="input-alpha csc-intake-fieldCollectionDate" ></div>
@@ -172,7 +172,7 @@
                                                     </div>                                                    
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Field collection method</div>
+                                                            <div class="label csc-intake-fieldCollectionMethods-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="input-select csc-intake-fieldCollectionMethod" ></div>
@@ -180,7 +180,7 @@
                                                     </div>                                                    
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Field collection note</div>
+                                                            <div class="label csc-intake-fieldCollectionNote-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="input-textarea csc-intake-fieldCollectionNote" ></div>
@@ -189,7 +189,7 @@
                                                     
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Field collection number</div>
+                                                            <div class="label csc-intake-fieldCollectionNumber-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="input-alpha csc-intake-fieldCollectionNumber" ></div>
@@ -202,7 +202,7 @@
                                                     
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Field collection place</div>
+                                                            <div class="label csc-intake-fieldCollectionPlace-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="input-alpha csc-intake-fieldCollectionPlace" ></div>
@@ -211,7 +211,7 @@
                                                     
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Field collection source</div>
+                                                            <div class="label csc-intake-fieldCollectionSources-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="input-alpha csc-intake-fieldCollectionSource" ></div>
@@ -220,7 +220,7 @@
                                                     
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Field collector</div>
+                                                            <div class="label csc-intake-fieldCollectors-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="input-alpha csc-intake-fieldCollector" ></div>
@@ -229,7 +229,7 @@
                                                                                                     
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Field collection event name</div>
+                                                            <div class="label csc-intake-fieldCollectionEventNames-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="input-alpha csc-intake-field-collection-event-name" ></div>
@@ -245,13 +245,13 @@
                                     
                                     <div class="fl-container-flex fl-fix information-group">
                                         <div class="info-column">
-                                            <div class="csc-recordEditor-header fl-container-flex header toggle">Valuation</div>
+                                            <div class="csc-recordEditor-header fl-container-flex header toggle csc-intake-valuationInformation-label"></div>
                                             <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
                                                 <!-- Left-side column -->
                                                 <div class="info-column2-50 fl-force-left">
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Valuer</div>
+                                                            <div class="label csc-intake-valuer-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="input-alpha input-autocomplete csc-intake-valuer"></div>
@@ -262,7 +262,7 @@
                                                 <div class="info-column2-50 fl-force-right">
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Reference Number</div>
+                                                            <div class="label csc-intake-valuationReferenceNumber-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <table>
@@ -283,12 +283,12 @@
 
                                     <div class="fl-container-flex fl-fix information-group">
                                         <div class="info-column">
-                                            <div class="csc-recordEditor-header fl-container-flex header toggle">Insurance</div>
+                                            <div class="csc-recordEditor-header fl-container-flex header toggle csc-intake-insuranceInformation-label"></div>
                                             <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
                                                 <div class="info-column2-50 fl-force-left">
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Insurer</div>
+                                                            <div class="label csc-intake-insurers-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="input-alpha csc-intake-insurer" ></div>
@@ -297,7 +297,7 @@
                                                     
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Policy Number</div>
+                                                            <div class="label csc-intake-insurancePolicyNumber-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <table>
@@ -312,7 +312,7 @@
 
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Renewal Date</div>
+                                                            <div class="label csc-intake-insuranceRenewalDate-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="input-alpha csc-intake-insurance-renewal-date" ></div>
@@ -323,7 +323,7 @@
                                                 <div class="info-column2-50 fl-force-right">
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Reference Number</div>
+                                                            <div class="label csc-intake-insuranceReferenceNumber-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <table>
@@ -338,7 +338,7 @@
                                                     
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Insurance Note</div>
+                                                            <div class="label csc-intake-insuranceNote-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <table>
@@ -364,15 +364,15 @@
                                                 <div class="info-column fl-force-left">
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Current Location</div>
+                                                            <div class="label csc-intake-currentLocationGroup-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <table>
                                                                 <thead>
                                                                     <tr>
-                                                                        <td>Current Location</td>
-                                                                        <td>Current Location Fitness</td>
-                                                                        <td>Current Location Note</td>
+                                                                        <td class="csc-intake-currentLocation-label"></td>
+                                                                        <td class="csc-intake-currentLocationFitness-label"></td>
+                                                                        <td class="csc-intake-currentLocationNote-label"></td>
                                                                     </tr>
                                                                 </thead>
                                                                     
@@ -394,7 +394,7 @@
                                                 <div class="info-column2-50 fl-force-left">
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Location Date</div>
+                                                            <div class="label csc-intake-locationDate-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="input-alpha csc-intake-location-date" ></div>
@@ -405,7 +405,7 @@
                                                 <div class="info-column2-50 fl-force-right">
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Normal Location</div>
+                                                            <div class="label csc-intake-normalLocation-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <table>
@@ -433,7 +433,7 @@
                                                 <div class="info-column2-50 fl-force-left">
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Condition Check Method</div>
+                                                            <div class="label csc-intake-conditionCheckMethods-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="input-select csc-intake-conditionCheckMethod" ></div>
@@ -442,7 +442,7 @@
                                                     
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Condition Check Reason</div>
+                                                            <div class="label csc-intake-conditionCheckReasons-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="input-select csc-intake-conditionCheckReason" ></div>
@@ -451,7 +451,7 @@
                                                     
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Condition Check Assessor</div>
+                                                            <div class="label csc-intake-conditionCheckersOrAssessors-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="input-alpha csc-intake-conditionCheckerOrAssessor" ></div>
@@ -462,7 +462,7 @@
                                                 <div class="info-column2-50 fl-force-right">
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Condition Check Date</div>
+                                                            <div class="label csc-intake-conditionCheckDate-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <div class="input-alpha csc-intake-condition-check-date"></div>
@@ -471,7 +471,7 @@
                                                     
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Condition Check Reference Number</div>
+                                                            <div class="label csc-intake-conditionCheckReferenceNumber-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <table>
@@ -491,7 +491,7 @@
                                                 <div class="info-column fl-force-left">
                                                     <div class="info-pair">
                                                         <div class="header">
-                                                            <div class="label">Condition Check Note</div>
+                                                            <div class="label csc-intake-conditionCheckNote-label"></div>
                                                         </div>
                                                         <div class="content">
                                                             <table>

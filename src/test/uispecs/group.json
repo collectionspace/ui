@@ -21,6 +21,12 @@
         },
         ".csc-group-createdAt": "${fields.createdAt}",
         ".csc-group-tenantID": "${fields.tenantID}",
+        ".csc-group-summary-label": {
+            "messagekey": "group-summaryLabel"
+        },
+        ".csc-group-createdAt-label": {
+            "messagekey": "group-createdAtLabel"
+        },
         ".csc-group-responsibleDepartment": {
             "optionnames": [
                 "Please select a value",
@@ -50,8 +56,8 @@
             ],
             "selection": "${fields.responsibleDepartment}"
         },
-        ".csc-group-createdAt-label": {
-            "messagekey": "group-createdAtLabel"
+        ".csc-group-number-label": {
+            "messagekey": "group-numberLabel"
         },
         ".csc-group-updatedAt": "${fields.updatedAt}",
         ".csc-group-scopeNote-label": {

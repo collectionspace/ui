@@ -1,5 +1,8 @@
 {
     "hierarchy": {
+        ".csc-hierarchy-narrowerContext-label": {
+            "messagekey": "hierarchy-narrowerContextLabel"
+        },
         ".csc-hierarchy-broaderContext-label": {
             "messagekey": "hierarchy-broaderContextLabel"
         },
@@ -22,8 +25,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../chain/hierarchy/autocomplete/narrowerContext",
-                                                            "vocabUrl": "../../chain/hierarchy/source-vocab/narrowerContext",
+                                                            "queryUrl": "../../chain/vocabularies/location/autocomplete/narrowerContext",
+                                                            "vocabUrl": "../../chain/vocabularies/location/source-vocab/narrowerContext",
                                                             "invokers": {
                                                                 "selectMatch": {
                                                                     "funcName": "cspace.autocomplete.selectMatchConfirm"
@@ -56,18 +59,21 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../chain/hierarchy/autocomplete/broaderContext",
-                        "vocabUrl": "../../chain/hierarchy/source-vocab/broaderContext"
+                        "queryUrl": "../../chain/vocabularies/location/autocomplete/broaderContext",
+                        "vocabUrl": "../../chain/vocabularies/location/source-vocab/broaderContext"
                     }
                 }
             ],
             "value": "${fields.broaderContext}"
         },
+        ".csc-hierarchy-equivalentContext-label": {
+            "messagekey": "hierarchy-equivalentContextLabel"
+        },
         "expander": [
             {
                 "trueTree": {
                     ".csc-hierarchy-equivalentContext-label": {
-                        "messagekey": "hierarchy-equivalentContextsLabel"
+                        "messagekey": "hierarchy-equivalentContextLabel"
                     }
                 },
                 "condition": {
@@ -125,8 +131,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../chain/hierarchy/autocomplete/relatedTerm",
-                                                            "vocabUrl": "../../chain/hierarchy/source-vocab/relatedTerm"
+                                                            "queryUrl": "../../chain/vocabularies/location/autocomplete/relatedTerm",
+                                                            "vocabUrl": "../../chain/vocabularies/location/source-vocab/relatedTerm"
                                                         }
                                                     }
                                                 ],
@@ -147,60 +153,19 @@
         },
         ".csc-hierarchy-equivalentContexts-label": {
             "messagekey": "hierarchy-equivalentContextsLabel"
+        },
+        ".csc-hierarchy-relatedTerm-label": {
+            "messagekey": "hierarchy-relatedTermLabel"
         }
     },
     "recordEditor": {
-        ".csc-location-accessNote-label": {
-            "messagekey": "location-accessNoteLabel"
-        },
-        ".csc-location-accessNote": "${fields.accessNote}",
-        ".csc-location-createdAt": "${fields.createdAt}",
         ".csc-location-address-label": {
             "messagekey": "location-addressLabel"
         },
-        ".csc-location-type": {
-            "optionnames": [
-                "Please select a value",
-                "Drawer",
-                "Tray",
-                "Shelf",
-                "Unit",
-                "Building",
-                "Room"
-            ],
-            "optionlist": [
-                "",
-                "drawer",
-                "tray",
-                "shelf",
-                "unit",
-                "building",
-                "room"
-            ],
-            "selection": "${fields.type}"
-        },
+        ".csc-location-name": "${fields.name}",
         ".csc-location-conditionGroup-label": {
             "messagekey": "location-conditionGroupLabel"
         },
-        ".csc-location-termStatus": {
-            "default": "0",
-            "optionnames": [
-                "Please select a value",
-                "Provisional",
-                "Under Review",
-                "Accepted",
-                "Rejected"
-            ],
-            "optionlist": [
-                "",
-                "provisional",
-                "under review",
-                "accepted",
-                "rejected"
-            ],
-            "selection": "${fields.termStatus}"
-        },
-        ".csc-location-name": "${fields.name}",
         ".csc-location-conditionGroup": {
             "decorators": [
                 {
@@ -216,13 +181,13 @@
                                         "tree": {
                                             ".csc-location-conditionNote": "${{row}.conditionNote}",
                                             ".csc-location-conditionNoteDate": {
-                                                "value": "${{row}.conditionNoteDate}",
                                                 "decorators": [
                                                     {
                                                         "func": "cspace.datePicker",
                                                         "type": "fluid"
                                                     }
-                                                ]
+                                                ],
+                                                "value": "${{row}.conditionNoteDate}"
                                             }
                                         },
                                         "type": "fluid.renderer.repeat",
@@ -240,33 +205,81 @@
         ".csc-location-displayName-label": {
             "messagekey": "location-displayNameLabel"
         },
-        ".csc-location-updatedAt-label": {
-            "messagekey": "location-updatedAtLabel"
-        },
         ".csc-location-address": "${fields.address}",
-        ".csc-location-shortIdentifier-label": {
-            "messagekey": "location-shortIdentifierLabel"
-        },
-        ".csc-location-securityNote": "${fields.securityNote}",
         ".csc-location-tenantID": "${fields.tenantID}",
         ".csc-location-termStatus-label": {
             "messagekey": "location-termStatusLabel"
         },
+        ".csc-location-tenantID-label": {
+            "messagekey": "location-tenantIDLabel"
+        },
+        ".csc-location-locationType-label": {
+            "messagekey": "location-locationTypeLabel"
+        },
+        ".csc-location-shortIdentifier": "${fields.shortIdentifier}",
+        ".csc-location-accessNote-label": {
+            "messagekey": "location-accessNoteLabel"
+        },
+        ".csc-location-createdAt": "${fields.createdAt}",
+        ".csc-location-accessNote": "${fields.accessNote}",
+        ".csc-location-type": {
+            "optionnames": [
+                "Please select a value",
+                "Shelf",
+                "Tray",
+                "Drawer",
+                "Unit",
+                "Room",
+                "Building"
+            ],
+            "optionlist": [
+                "",
+                "shelf",
+                "tray",
+                "drawer",
+                "unit",
+                "room",
+                "building"
+            ],
+            "selection": "${fields.locationType}"
+        },
+        ".csc-location-termStatus": {
+            "default": "provisional",
+            "optionnames": [
+                "Provisional",
+                "Under Review",
+                "Accepted",
+                "Rejected"
+            ],
+            "optionlist": [
+                "provisional",
+                "under review",
+                "accepted",
+                "rejected"
+            ],
+            "selection": "${fields.termStatus}"
+        },
+        ".csc-location-updatedAt-label": {
+            "messagekey": "location-updatedAtLabel"
+        },
+        ".csc-location-shortIdentifier-label": {
+            "messagekey": "location-shortIdentifierLabel"
+        },
+        ".csc-location-securityNote": "${fields.securityNote}",
         ".csc-location-createdAt-label": {
             "messagekey": "location-createdAtLabel"
         },
-        ".csc-location-type-label": {
-            "messagekey": "location-typeLabel"
+        ".csc-location-conditionNote-label": {
+            "messagekey": "location-conditionNoteLabel"
         },
         ".csc-location-name-label": {
             "messagekey": "location-nameLabel"
         },
-        ".csc-location-tenantID-label": {
-            "messagekey": "location-tenantIDLabel"
-        },
         ".csc-location-displayName": "${fields.displayName}",
-        ".csc-location-shortIdentifier": "${fields.shortIdentifier}",
         ".csc-location-updatedAt": "${fields.updatedAt}",
+        ".csc-location-conditionNoteDate-label": {
+            "messagekey": "location-conditionNoteDateLabel"
+        },
         ".csc-location-securityNote-label": {
             "messagekey": "location-securityNoteLabel"
         }

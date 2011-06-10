@@ -52,6 +52,9 @@
         ".csc-objectexit-tenantID-label": {
             "messagekey": "objectexit-tenantIDLabel"
         },
+        ".csc-objectexit-summary-label": {
+            "messagekey": "objectexit-summaryLabel"
+        },
         ".csc-objectexit-tenantID": "${fields.tenantID}",
         ".csc-objectexit-currentOwner": {
             "decorators": [
@@ -94,7 +97,7 @@
                                         "repeatID": "repeat:",
                                         "tree": {
                                             ".csc-objectexit-exitMethods": {
-                                                "default": "0",
+                                                "default": "",
                                                 "optionnames": [
                                                     "Please select a value",
                                                     "Courier",
@@ -125,17 +128,23 @@
         ".csc-objectexit-depositor-label": {
             "messagekey": "objectexit-depositorLabel"
         },
+        ".csc-objectexit-exitMethod-label": {
+            "messagekey": "objectexit-exitMethodLabel"
+        },
+        ".csc-objectexit-number-label": {
+            "messagekey": "objectexit-numberLabel"
+        },
         ".csc-objectexit-exitDate": {
-            "value": "${fields.exitDate}",
             "decorators": [
                 {
                     "func": "cspace.datePicker",
                     "type": "fluid"
                 }
-            ]
+            ],
+            "value": "${fields.exitDate}"
         },
         ".csc-objectexit-exitReason": {
-            "default": "0",
+            "default": "",
             "optionnames": [
                 "Please select a value",
                 "Deaccession",

@@ -1,5 +1,8 @@
 {
     "hierarchy": {
+        ".csc-hierarchy-narrowerContext-label": {
+            "messagekey": "hierarchy-narrowerContextLabel"
+        },
         ".csc-hierarchy-broaderContext-label": {
             "messagekey": "hierarchy-broaderContextLabel"
         },
@@ -62,6 +65,9 @@
                 }
             ],
             "value": "${fields.broaderContext}"
+        },
+        ".csc-hierarchy-equivalentContext-label": {
+            "messagekey": "hierarchy-equivalentContextLabel"
         },
         "expander": [
             {
@@ -147,6 +153,9 @@
         },
         ".csc-hierarchy-equivalentContexts-label": {
             "messagekey": "hierarchy-equivalentContextsLabel"
+        },
+        ".csc-hierarchy-relatedTerm-label": {
+            "messagekey": "hierarchy-relatedTermLabel"
         }
     },
     "recordEditor": {
@@ -162,7 +171,7 @@
         },
         ".csc-personAuthority-deathPlace": "${fields.deathPlace}",
         ".csc-personAuthority-status": {
-            "default": "0",
+            "default": "provisional",
             "optionnames": [
                 "Provisional",
                 "Under Review",
@@ -178,20 +187,20 @@
             "selection": "${fields.termStatus}"
         },
         ".csc-personAuthority-birthDate": {
-            "value": "${fields.birthDate}",
             "decorators": [
                 {
                     "func": "cspace.datePicker",
                     "type": "fluid"
                 }
-            ]
+            ],
+            "value": "${fields.birthDate}"
         },
         ".csc-person-updatedAt": "${fields.updatedAt}",
         ".csc-personAuthority-name": "${fields.name}",
         ".csc-contactAuthority-web": "${fields.web}",
         ".csc-personAuthority-nameAdditions": "${fields.nameAdditions}",
         ".csc-personAuthority-gender": {
-            "default": "0",
+            "default": "",
             "optionnames": [
                 "Please select a value",
                 "Male",
@@ -252,7 +261,7 @@
             "messagekey": "person-bioNoteLabel"
         },
         ".csc-personAuthority-salutation": {
-            "default": "0",
+            "default": "dear",
             "optionnames": [
                 "Dear",
                 "Hello",
@@ -269,7 +278,7 @@
             "messagekey": "person-initialsLabel"
         },
         ".csc-personAuthority-title": {
-            "default": "0",
+            "default": "",
             "optionnames": [
                 "Please select a value",
                 "Mr",
@@ -302,6 +311,9 @@
             ],
             "selection": "${fields.title}"
         },
+        ".csc-person-nationality-label": {
+            "messagekey": "person-nationalityLabel"
+        },
         ".csc-contact-faxNumber-label": {
             "messagekey": "contact-faxNumberLabel"
         },
@@ -315,13 +327,13 @@
             "messagekey": "contact-updatedAtLabel"
         },
         ".csc-personAuthority-deathDate": {
-            "value": "${fields.deathDate}",
             "decorators": [
                 {
                     "func": "cspace.datePicker",
                     "type": "fluid"
                 }
-            ]
+            ],
+            "value": "${fields.deathDate}"
         },
         ".csc-contact-web-label": {
             "messagekey": "contact-webLabel"
@@ -366,21 +378,24 @@
         ".csc-contact-email-label": {
             "messagekey": "contact-emailLabel"
         },
+        ".csc-person-occupation-label": {
+            "messagekey": "person-occupationLabel"
+        },
         ".csc-contact-addressType-label": {
             "messagekey": "contact-addressTypeLabel"
         },
         ".csc-contactAuthority-addressType": {
             "optionnames": [
                 "Please select a value",
-                "Street",
                 "Previous",
+                "Street",
                 "Mailing",
                 "Alternative"
             ],
             "optionlist": [
                 "",
-                "street",
                 "previous",
+                "street",
                 "mailing",
                 "alternative"
             ],
@@ -394,6 +409,9 @@
             "messagekey": "person-birthPlaceLabel"
         },
         ".csc-personAuthority-surName": "${fields.surName}",
+        ".csc-person-schoolOrStyle-label": {
+            "messagekey": "person-schoolOrStyleLabel"
+        },
         ".csc-personAuthority-schoolOrStyle": {
             "decorators": [
                 {
@@ -422,6 +440,9 @@
             ]
         },
         ".csc-personAuthority-displayName": "${fields.displayName}",
+        ".csc-person-group-label": {
+            "messagekey": "person-groupLabel"
+        },
         ".csc-person-contact-label": {
             "messagekey": "person-contactLabel"
         },

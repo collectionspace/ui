@@ -75,6 +75,9 @@
             ]
         },
         ".csc-intake-condition-check-note": "${fields.conditionCheckNote}",
+	".csc-intake-condition-check-note-label": {
+		"messagekey:" ".csc-intake-condition-check-noteLabel"
+	},
         ".csc-intake-currentLocationGroup": {
             "decorators": [
                 {
@@ -121,7 +124,13 @@
             ]
         },
         ".csc-intake-fieldCollectionNumber": "${fields.fieldCollectionNumber}",
+	".csc-intake-fieldCollectionNumber-label": {
+		"messagekey:" ".csc-intake-fieldCollectionNumberLabel"
+	},
         ".csc-intake-insurance-policy-number": "${fields.insurancePolicyNumber}",
+	".csc-intake-insurance-policy-number-label": {
+		"messagekey:" ".csc-intake-insurance-policy-numberLabel"
+	},
         ".csc-intake-fieldCollectionDate": {
             "value": "${fields.fieldCollectionDate}",
             "decorators": [
@@ -171,6 +180,9 @@
             ]
         },
         ".csc-intake-packing-note": "${fields.packingNote}",
+	".csc-intake-packing-note-label": {
+		"messagekey:" ".csc-intake-packing-noteLabel"
+	},
         ".csc-intake-conditionCheckReason": {
             "decorators": [
                 {
@@ -217,6 +229,9 @@
             ]
         },
         ".csc-intake-insurance-note": "${fields.insuranceNote}",
+	".csc-intake-insurance-note-label": {
+		"messagekey:" ".csc-intake-insurance-noteLabel"
+	},
         ".csc-intake-entry-reason": {
             "default": "0",
             "optionnames": [
@@ -263,7 +278,13 @@
             ]
         },
         ".csc-intake-fieldCollectionNote": "${fields.fieldCollectionNote}",
+	".csc-intake-fieldCollectionNote-label": {
+		"messagekey:" ".csc-intake-fieldCollectionNoteLabel"
+	},
         ".csc-intake-insurance-reference-number": "${fields.insuranceReferenceNumber}",
+	".csc-intake-insurance-reference-number-label": {
+		"messagekey:" ".csc-intake-insurance-reference-numberLabel"
+	},
         ".csc-intake-returnDate": {
             "value": "${fields.returnDate}",
             "decorators": [
@@ -335,8 +356,17 @@
             ]
         },
         ".csc-intake-depositor-requirements": "${fields.depositorsRequirements}",
+	".csc-intake-depositor-requirements-label": {
+		"messagekey:" ".csc-intake-depositor-requirementsLabel"
+	},
         ".csc-intake-entry-number": "${fields.entryNumber}",
+	".csc-intake-entry-number-label": {
+		"messagekey:" ".csc-intake-entry-numberLabel"
+	},
         ".csc-intake-tenantID": "${fields.tenantID}",
+	".csc-intake-tenantID-label": {
+		"messagekey:" ".csc-intake-tenantIDLabel"
+	},
         ".csc-intake-entryMethod": {
             "decorators": [
                 {
@@ -379,6 +409,9 @@
             ]
         },
         ".csc-intake-entry-note": "${fields.entryNote}",
+	".csc-intake-entry-note-label": {
+		"messagekey:" ".csc-intake-entry-noteLabel"
+	},
         ".csc-intake-fieldCollectionMethod": {
             "decorators": [
                 {
@@ -437,6 +470,9 @@
             ]
         },
         ".csc-intake-createdAt": "${fields.createdAt}",
+	".csc-intake-createdAt-label": {
+		"messagekey:" ".csc-intake-createdAtLabel"
+	},
         ".csc-intake-fieldCollector": {
             "decorators": [
                 {
@@ -477,8 +513,17 @@
             ]
         },
         ".csc-intake-normal-location": "${fields.normalLocation}",
+	".csc-intake-normal-location-label": {
+		"messagekey:" ".csc-intake-normal-locationLabel"
+	},
         ".csc-intake-valuation-reference-number": "${fields.valuationReferenceNumber}",
+	".csc-intake-valuation-reference-number-label": {
+		"messagekey:" ".csc-intake-valuation-reference-numberLabel"
+	},
         ".csc-intake-updatedAt": "${fields.updatedAt}",
+	".csc-intake-updatedAt-label": {
+		"messagekey:" ".csc-intake-updatedAtLabel"
+	},
         ".csc-intake-insurer": {
             "decorators": [
                 {
@@ -519,7 +564,13 @@
             ]
         },
         ".csc-intake-fieldCollectionPlace": "${fields.fieldCollectionPlace}",
+	".csc-intake-fieldCollectionPlace-label": {
+		"messagekey:" ".csc-intake-fieldCollectionPlaceLabel"
+	},
         ".csc-intake-condition-check-reference-number": "${fields.conditionCheckReferenceNumber}",
+	".csc-intake-condition-check-reference-number-label": {
+		"messagekey:" ".csc-intake-condition-check-reference-numberLabel"
+	},
         ".csc-intake-location-date": {
             "value": "${fields.locationDate}",
             "decorators": [
