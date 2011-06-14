@@ -359,6 +359,58 @@ cspace = cspace || {};
             var pbIO = cspace.pageBuilderIO(optionsWithComponentsWithDemandInParameters.pageBuilderIO.options);
             pbIO.initPageBuilder(optionsWithComponentsWithDemandInParameters.pageBuilder.options);
         });
+        
+        pageBuilderTest.test("cspace.composite.compose", function () {
+            var resourceSpec = {
+                test1: {
+                    href: "../../chain/test/test1",
+                    options: {
+                        type: "GET",
+                        dataType: "json"
+                    }
+                },
+                test2: {
+                    href: "../../chain/test/test2",
+                    options: {
+                        type: "GET",
+                        dataType: "json"
+                    }
+                },
+                test3: {
+                    href: "../../chain/test/test3",
+                    options: {
+                        type: "GET",
+                        dataType: "json"
+                    }
+                }
+            };
+            var expected = {
+                composite: {
+                    href: "../../chain/composite",
+                    options: {
+                        type: "POST",
+                        dataType: "json",
+                        data: "{\"test1\":{\"path\":\"/test/test1\",\"method\":\"GET\",\"dataType\":\"json\"},\"test3\":{\"path\":\"/test/test3\",\"method\":\"GET\",\"dataType\":\"json\"}}"
+                    }
+                },
+                test2: {
+                    href: "../../chain/test/test2",
+                    options: {
+                        type: "GET",
+                        dataType: "json"
+                    }
+                },
+            };
+            var result = cspace.composite.compose(fluid.model.transformWithRules, ["test1", "test3"], {
+                composite: "../../chain/composite",
+                chain: "../../chain"
+            }, resourceSpec);
+            jqUnit.assertDeepEq("Test2 should stay", expected.test2, result.test2);
+            jqUnit.assertEquals("Composite href is now", expected.composite.href, result.composite.href);
+            jqUnit.assertEquals("Composite type is now", expected.composite.options.type, result.composite.options.type);
+            jqUnit.assertEquals("Composite dataType is now", expected.composite.options.dataType, result.composite.options.dataType);
+            jqUnit.assertEquals("Composite data is now", expected.composite.options.data, result.composite.options.data);
+        });
     };
     
     $(document).ready(function () {

@@ -94,6 +94,115 @@ cspace = cspace || {};
             uispec[elPath] = cspace.util.resolveReadOnlyUISpec(uispec[elPath], readOnly);
         }
     };
+    
+    // A composite component that has a compose method for modifying resourceSpecs ready to be fetched.
+    fluid.defaults("cspace.composite", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        invokers: {
+            compose: "cspace.composite.compose"
+        }
+    });
+    // A version of compose for local app.
+    cspace.composite.composeLocal = function (resourceSpec) {
+        return resourceSpec;
+    };
+    // A version of compose for deployment.
+    cspace.composite.compose = function (transform, resources, urls, resourceSpecs) {
+        var compositeCallbacks = {};
+        var rules = {};
+        
+        // Add a composite block to resourceSpecs that will aggregate a number of individual requests.
+        resourceSpecs.composite = {
+            href: urls.composite,
+            options: {
+                dataType: "json",
+                type: "POST",
+                data: {},
+                error: function (xhr, textStatus, errorThrown) {
+                    fluid.fail("Error making a composite request: " + textStatus);
+                }
+            }
+        };
+        
+        // Go through all of resourceSpecs and move|map matched ones into the composite part.
+        fluid.remove_if(resourceSpecs, function (resourceSpec, name) {
+            if ($.inArray(name, resources) < 0) {
+                return;
+            }
+            if (!resourceSpec) {
+                return;
+            }
+            compositeCallbacks[name] = {
+                success: resourceSpec.options.success,
+                error: resourceSpec.options.error
+            };
+            var chainIndex = resourceSpec.href.indexOf(urls.chain);
+            resourceSpec.href = chainIndex < 0 ? resourceSpec.href : resourceSpec.href.substr(chainIndex + urls.chain.length);
+            resourceSpecs.composite.options.data[name] = transform(resourceSpec, {
+                "path": "href",
+                "method": "options.type",
+                "dataType": "options.dataType"
+            });
+            return true;
+        });
+        // Stringify the payload.
+        resourceSpecs.composite.options.data = JSON.stringify(resourceSpecs.composite.options.data);
+        
+        // Make a single success callback that aggregates all individual success and error callbacks.
+        resourceSpecs.composite.options.success = function (data) {
+            fluid.each(compositeCallbacks, function (compositeCallback, resource) {
+                var thisData = data[resource];
+                if (thisData.body.isError === true) {
+                    fluid.each(thisData.body.messages, function (message) {
+                        compositeCallback.error(null, message.message);
+                    });
+                    return;
+                }
+                if (thisData.status === 200 || thisData.status === 201) {
+                    compositeCallback.success(thisData.body);
+                    return;
+                }
+                compositeCallback.error(thisData.body);
+            });
+        };
+        return resourceSpecs;
+    };
+    fluid.demands("cspace.composite", "cspace.pageBuilderIO", {
+        options: {
+            invokers: {
+                transform: {
+                    funcName: "fluid.model.transformWithRules",
+                    args: ["{arguments}.0", "{arguments}.1"]
+                }
+            },
+            resources: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "$.merge",
+                    args: [[], "{pageBuilderIO}.options.schema", ["uispec"]]
+                }
+            },
+            urls: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.urlBuilder",
+                    args: {
+                        composite: "%chain/composite",
+                        chain: "%chain"
+                    }
+                }
+            }
+        }
+    });
+    fluid.demands("cspace.composite", ["cspace.pageBuilderIO", "cspace.localData"], "{options}");
+    fluid.demands("cspace.composite.compose", ["cspace.composite", "cspace.localData"], {
+        funcName: "cspace.composite.composeLocal",
+        args: "{arguments}.0"
+    });
+    fluid.demands("cspace.composite.compose", "cspace.composite", {
+        funcName: "cspace.composite.compose",
+        args: ["{composite}.transform", "{composite}.options.resources", "{composite}.options.urls", "{arguments}.0"]
+    });
 
     cspace.pageBuilderIO = function (options) {
         var that = fluid.initLittleComponent("cspace.pageBuilderIO", options);
@@ -134,6 +243,7 @@ cspace = cspace || {};
                 resourceSpecs[resource] = {
                     href: fluid.invoke("cspace.util.getDefaultSchemaURL", resource),
                     options: {
+                        type: "GET",
                         dataType: "json",
                         success: function (data) {
                             options.schema = options.schema || {};
@@ -155,6 +265,7 @@ cspace = cspace || {};
                 resourceSpecs.uispec = {
                     href: that.options.uispecUrl || fluid.invoke("cspace.util.getUISpecURL", options.pageType),
                     options: {
+                        type: "GET",
                         dataType: "json",
                         success: function (data) {
                             options.uispec = data;
@@ -181,7 +292,7 @@ cspace = cspace || {};
                 pageSpecManager.conclude();
                 that.events.pageReady.fire();
             };
-            fluid.fetchResources(resourceSpecs, fetchCallback, {amalgamateClasses: that.options.amalgamateClasses});
+            fluid.fetchResources(that.composite.compose(resourceSpecs), fetchCallback, {amalgamateClasses: that.options.amalgamateClasses});
         };
         
         return that;
@@ -202,6 +313,9 @@ cspace = cspace || {};
         },
         readOnlyUrlVar: "readonly/",
         components: {
+            composite: {
+                type: "cspace.composite"
+            },
             pageCategory: {
                 type: "cspace.pageCategory",
                 priority: "first",

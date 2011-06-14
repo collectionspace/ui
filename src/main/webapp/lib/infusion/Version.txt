@@ -1,6 +1,6 @@
 This is a custom build of Fluid Infusion 1.3 including: json, fss, framework, renderer, inlineEdit, pager and jQueryUIWidgets.
 
-It was built from commit b62f829f9241ede17629bc3f4cda7cddc30b4675 of Infusion project master, at
+It was built from commit 08651ef62ce1594ccf4ac91af61f0d18173f5a48 of Infusion project master, at
     http://github.com/fluid-project/infusion
     
 Line 26013 (the body of fluid.pager.selfRender): was replaced FROM:
@@ -15,7 +15,9 @@ TO:
     } else {
         template = fluid.selfRender(root, {}, options.renderOptions);
     }
-{code} 
+{code}
+
+NOTE : Also need to add model transformation to framework dependencies.
 
 using the following command:
    ant customBuild -Dinclude="json, fss, framework, renderer, inlineEdit, uploader, pager, jQueryUIWidgets" -Djsfilename="CSpaceInfusion.js" -DnoMinify="true"
