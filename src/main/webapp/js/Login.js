@@ -110,7 +110,7 @@ cspace = cspace || {};
             that.events.emailSubmitted.fire(mockResponse);
         } else {
             jQuery.ajax({
-                url: cspace.util.addTrailingSlash(url) + "passwordreset",
+                url: url,
                 type: "POST",
                 dataType: "json",
                 data: JSON.stringify({"email": email}),
@@ -127,7 +127,7 @@ cspace = cspace || {};
             that.events.passwordSubmitted.fire(mockResponse);
         } else {
             jQuery.ajax({
-                url: cspace.util.addTrailingSlash(url) + "resetpassword",
+                url: url,
                 type: "POST",
                 dataType: "json",
                 data: JSON.stringify({"password": password, "token": that.token, "email": that.email}),
@@ -177,7 +177,7 @@ cspace = cspace || {};
         if (cspace.util.useLocalData()) {
             that.locate("loginForm").attr("action", "createnew.html");
         } else {
-            that.locate("loginForm").attr("action", cspace.util.addTrailingSlash(that.options.baseUrl) + "login");
+            that.locate("loginForm").attr("action", fluid.stringTemplate(that.options.urls.login, {tenantname: that.options.tenantname}));
         }
 
         var result = cspace.util.getUrlParameter("result");
@@ -210,13 +210,13 @@ cspace = cspace || {};
 
         that.submitEmail = function () {
             if (emailFormValid(that.messageBar, that.dom, that.options.strings.emailRequired)) {
-                submitEmail(that.locate("email").val(), that.options.baseUrl, that);
+                submitEmail(that.locate("email").val(), fluid.stringTemplate(that.options.urls.passwordreset, {tenantname: that.options.tenantname}), that);
             }
         };
         
         that.submitNewPassword = function () {
             if (passwordFormValid(that.messageBar, that.dom, that.options.strings.allFieldsRequired, that.options.strings.passwordsMustMatch)) {
-                submitNewPassword(that.locate("newPassword").val(), that.options.baseUrl, that);
+                submitNewPassword(that.locate("newPassword").val(), fluid.stringTemplate(that.options.urls.resetpassword, {tenantname: that.options.tenantname}), that);
             }
         };
 
@@ -263,7 +263,12 @@ cspace = cspace || {};
                 type: "cspace.passwordValidator"
             }
         },
-
+        tenantname: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.util.extractTenant"
+            }
+        },
         strings: {
             allFieldsRequired: "All fields must be filled in",
             emailRequired: "You must enter a valid email address",
@@ -271,7 +276,10 @@ cspace = cspace || {};
             invalid: "Invalid email/password combination",
             generalError: "I'm sorry, an error has occurred. Please try again, or contact your system administrator."
         }, 
-       
-        baseUrl: "../../tenant/html/"
+        urls: cspace.componentUrlBuilder({
+            passwordreset: "%tenant/%tenantname/passwordreset",
+            resetpassword: "%tenant/%tenantname/resetpassword",
+            login: "%tenant/%tenantname/login"
+        })
     });
 })(jQuery, fluid);

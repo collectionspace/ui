@@ -21,7 +21,7 @@ var loginTester = function(){
     var loginTest = cspace.tests.testEnvironment({testCase: bareLoginTest});
 
     loginTest.test("Basic login form visibility, actions", function () {
-        var login = cspace.login(".csc-login", {baseUrl: "http://foo.com/bar"});
+        var login = cspace.login(".csc-login");
         jqUnit.isVisible("Basic login should be visible", login.options.selectors.signIn);
         jqUnit.notVisible("Email entry should not be visible", login.options.selectors.enterEmail);
         jqUnit.notVisible("New password entry should not be visible", login.options.selectors.resetRequest);
@@ -31,7 +31,7 @@ var loginTester = function(){
         var tempIsLocal = cspace.util.useLocalData;
         cspace.util.useLocalData = function () {return false;};
         login = cspace.login(".csc-login", {baseUrl: "http://foo.com/bar"});
-        jqUnit.assertEquals("Login form action should be set based on the supplied baseUrl", "http://foo.com/bar/login", jQuery(login.options.selectors.loginForm).attr("action"));
+        jqUnit.assertEquals("Login form action should be set based on the supplied baseUrl", "../html/login" , jQuery(login.options.selectors.loginForm).attr("action"));
         cspace.util.useLocalData = tempIsLocal;
     });
 
@@ -81,7 +81,7 @@ var loginTester = function(){
         var ajaxMock = new jqMock.Mock(jQuery, "ajax");
         // Don't know how jqMock checks functions, so just check the other parameters for now
         var expectedAjaxParams = {
-            url: "http://foo.com/bar/passwordreset",
+            url: "../html/passwordreset",
             data: JSON.stringify({"email":"test@collectionspace.org"}),
             type: "POST",
             dataType: "json"
@@ -140,7 +140,7 @@ var loginTester = function(){
         var ajaxMock = new jqMock.Mock(jQuery, "ajax");
         // Don't know how jqMock checks functions, so just check the other parameters for now
         var expectedAjaxParams = {
-            url: "http://foo.com/bar/resetpassword",
+            url: "../html/resetpassword",
             data: JSON.stringify({"password":"testPassTwo", "token": "testToken"}),
             type: "POST",
             dataType: "json"

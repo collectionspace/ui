@@ -48,6 +48,11 @@ fluid.registerNamespace("cspace.util");
     cspace.util.addTrailingSlash = function (url) {
         return url + ((url.charAt(url.length - 1) !== "/") ? "/" : "");
     };
+    
+    cspace.util.extractTenant = function () {
+        var pathSegs = window.location.href.split("/");
+        return pathSegs[pathSegs.length - 2];
+    };
 
     cspace.util.getUrlParameter = function (name) {
         name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -116,7 +121,7 @@ fluid.registerNamespace("cspace.util");
     fluid.defaults("cspace.urlExpander", {
         gradeNames: ["fluid.littleComponent"],
         vars: {
-            tenant: "../../tenant/html",
+            tenant: "../../tenant",
             chain: "../../chain",
             webapp: "..",
             test: "../../../test"
@@ -313,12 +318,13 @@ fluid.registerNamespace("cspace.util");
     
     cspace.util.getLoginURL = function (options) {
         var that = fluid.initLittleComponent("cspace.util.getLoginURL", options);
-        return that.options.urlRenderer(that.options.url);
+        var url = that.options.urlRenderer(that.options.url);
+        return fluid.stringTemplate(url, {tenantname: cspace.util.extractTenant()});
     };
     
     fluid.defaults("cspace.util.getLoginURL", {
         gradeNames: ["fluid.littleComponent"],
-        url: "%tenant/loginstatus",
+        url: "%tenant/%tenantname/loginstatus",
         urlRenderer: {
             expander: {
                 type: "fluid.deferredInvokeCall",
