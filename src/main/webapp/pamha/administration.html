@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>CollectionSpace - Administration - Users</title>
+        <link rel="stylesheet" type="text/css" href="../lib/infusion/framework/fss/css/fss-reset.css" />
+        <link rel="stylesheet" type="text/css" href="../lib/infusion/framework/fss/css/fss-layout.css" />
+        <link rel="stylesheet" type="text/css" href="../lib/infusion/framework/fss/css/fss-text.css" />
+        <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
+        <link rel="stylesheet" type="text/css" href="../css/Confirmation.css" />
+        <link rel="stylesheet" type="text/css" href="../css/search.css" />
+        <link rel="stylesheet" type="text/css" href="../css/pivot.css" />
+        <link rel="stylesheet" type="text/css" href="../css/admin.css" />
+        <link rel="stylesheet" type="text/css" href="../css/repeatable.css" />
+        <!--[if lt IE 9]> <link rel="stylesheet" type="text/css" href="../css/cspace_ie.css"> <![endif]-->
+
+        <script type="text/javascript" src="../lib/infusion/CSpaceInfusion.js"></script>
+        <script type="text/javascript" src="../lib/jquery/ui/js/jquery.ui.tabs.js"></script>
+        <script type="text/javascript" src="../js/Demands.js"></script>
+        <script type="text/javascript" src="../js/Permissions.js"></script>
+        <script type="text/javascript" src="../pamha/js/Utilities.js"></script>
+        <script type="text/javascript" src="../js/Renderer.js"></script>
+        <script type="text/javascript" src="../js/SearchBox.js"></script>
+        <script type="text/javascript" src="../js/Header.js"></script>
+        <script type="text/javascript" src="../js/Footer.js"></script>
+        <script type="text/javascript" src="../js/MessageBar.js"></script>
+        <script type="text/javascript" src="../js/Confirmation.js"></script>
+        <script type="text/javascript" src="../js/DataSource.js"></script>
+        <script type="text/javascript" src="../js/DataContext.js"></script>
+        <script type="text/javascript" src="../js/RecordEditor.js"></script>
+        <script type="text/javascript" src="../js/RecordList.js"></script>
+        <script type="text/javascript" src="../js/PasswordValidator.js"></script>
+        <script type="text/javascript" src="../js/ListEditor.js"></script>
+        <script type="text/javascript" src="../js/AdminUsers.js"></script>
+        <script type="text/javascript" src="../js/Search.js"></script>
+        <script type="text/javascript" src="../js/PageBuilder.js"></script>
+    </head>
+    <body id="administration">
+    
+        <div class="fl-container-1024 fl-centered">
+        
+            <div id="header-menu" class="csc-header-container"></div>
+            
+            <div class="fl-container-1024-inner">
+                <div id="title-bar">
+                    <div class="content">
+                        <div class="header-name">Administration</div>
+						<div class="record-type">Users</div>
+						<div class="clear"></div>
+                    </div>
+                </div>
+            
+                <div id="all-content" class="fl-fix">
+                    <div id="secondary-tab">
+                        <div id="secondary-nav-menu">
+                            <ul class="menu-record ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+                                <li><a href="administration.html" class="primary current">Users</a></li>
+                                <li><a href="role.html">Roles and Permissions</a></li>
+                                <li><a class="inactive">Help Management</a></li>
+                                <li><a class="inactive">Reporting</a></li>
+                                <li><a class="inactive">Numbering</a></li>
+                                <li><a class="inactive">Templates</a></li>
+                            </ul>
+                        </div>
+                    </div>
+					
+					<div id="primaryTab">
+						<div class="fl-fix fl-container-flex fl-col-mixed2" >
+							   
+							<div class="fl-container-admin fl-force-left">
+								<div class="main-users-page csc-users-userAdmin">
+									<!-- search form -->
+									<div id="search-box">
+										<input name="keyword" type="text" class="cs-search-user csc-user-searchField" /><input type="submit" class="csc-user-searchButton cs-user-searchButton" value="Find User" /> (searches Full Name) &nbsp;&nbsp;<input type="submit" class="csc-user-unSearchButton cs-user-unSearchButton" value="Show all users" />
+									</div>
+									<!-- end search form -->
+
+									<div class="csc-user-list">
+										<div class="fl-container-flex fl-fix information-group">
+											<div class="fl-container-flex fl-fix">
+												<div class="info-column2-25 fl-force-left">
+													<div>
+														<div class="fl-container-flex header fl-force-left">Users</div>
+														<input type="submit" class="cs-new-user-submit csc-listEditor-createNew button fl-force-right" value="+ User" />
+														<div class="clear"></div>
+													</div>
+													<div class="overflow-list csc-listEditor-list"></div>
+													
+													<div class="clear"></div>
+												</div>
+												
+												<div class="info-column2-75 fl-force-right">
+													<div class="fl-container-flex header">User Details</div>
+													<div class="user-details">
+														<div class="user-details-fields csc-listEditor-details-none">
+															No user selected. <div class="details-none">Please select a user from the list, or create a new user.</div>
+														</div>
+														<div class="user-details-fields information-subgroup csc-listEditor-details">
+															<div class="fl-container-flex button-row details">
+																<input type="button" class="primary saveButton csc-save" value="Save" />
+																<input type="button" class="csc-cancel cancelButton" value="Cancel" />
+																<input type="button" class="csc-delete deleteButton" value="Delete" />
+																<div class="clear"></div>
+															</div>
+															<div class="info-column2-50 fl-force-left">
+																<div class="info-pair">
+																	<div class="label">Email Address <span class="required">*</span></div><div class="user-input"><input type="text" class="input-alpha csc-user-email csc-required" name=""/></div>
+																</div>
+																<div class="info-pair no-padding">
+																	<div class="label">Full Name  <span class="required">*</span></div><div class="user-input"><input type="text" class="input-alpha csc-user-userName csc-required" name=""/></div>
+																</div>
+		
+																<div class="csc-details-hideOnEdit">
+																	<div class="info-pair">
+																		<div class="label">Password  <span class="required">*</span></div><div class="user-input"><input type="password" class="input-alpha csc-user-password csc-required csc-passwordValidator-password" name=""/></div>
+																		<div class="password-instructions">Password must be between 8 and 24 characters.</div>
+																	</div>                                                        
+																	<div class="info-pair">
+																		<div class="label">Confirm Password  <span class="required">*</span></div><div class="user-input"><input type="password" class="input-alpha csc-user-passwordConfirm csc-required" name=""/></div>
+																	</div>
+																</div>
+																<div class="info-pair">
+                                                                    <div class="label">Status <span class="required">*</span></div><div class="user-input">
+                                                                        <select class="csc-user-status csc-required"><option value="">Options not loaded</option></select> 
+                                                                    </div>
+                                                                </div>
+															</div>
+															<div class="info-column2-50 fl-force-left">
+																<div class="info-pair">
+																	<div class="label">Roles</div>
+																	<div class="overflowdiv-admin">
+																		<table>
+																			<thead>
+																				<tr>
+																					<td></td>
+																					<td>Role name</td>
+																					<td>Group</td>
+																				</tr>
+																			</thead>
+																			<tbody>                                                                            
+																				<tr class="csc-accountrole-roles-row">
+																					<td>
+																						<input type="checkbox" class="csc-users-roleSelected"/>
+																					</td>
+																					<td class="csc-users-roleName"></td>
+																					<td class="csc-users-roleGroup"></td>
+																				</tr>
+																			</tbody>
+																		</table>
+																	</div>
+																</div>
+															</div>
+															<div class="clear"></div>
+														</div>
+														<div class="clear"></div>
+													</div>
+													<div class="clear"></div>
+												</div>
+												<div class="clear"></div>
+											</div>                                    
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+						
+					</div>
+                </div>
+            </div>
+            
+            <!-- footer block -->
+            <div id="footer" class="csc-footer-container">
+                <!-- this div will be filled in with the contents of the Template -->
+            </div> <!-- END footer block -->
+            
+        </div> <!-- END body content -->
+        
+        <script type="text/javascript">
+            jQuery(document).ready(function(){
+                cspace.globalSetup("cspace.users");
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>CollectionSpace - My CollectionSpace</title>
+
+        <link rel="stylesheet" type="text/css" href="../lib/infusion/framework/fss/css/fss-reset.css" />
+        <link rel="stylesheet" type="text/css" href="../lib/infusion/framework/fss/css/fss-layout.css" />
+        <link rel="stylesheet" type="text/css" href="../lib/infusion/framework/fss/css/fss-text.css" />
+        <link rel="stylesheet" type="text/css" href="../css/cspace.css" />
+        <link rel="stylesheet" type="text/css" href="../css/pivot.css" />
+        <!--[if lt IE 9]> <link rel="stylesheet" type="text/css" href="../css/cspace_ie.css"> <![endif]-->
+        
+        <script type="text/javascript" src="../lib/infusion/CSpaceInfusion.js"></script>
+        <script type="text/javascript" src="../js/Demands.js"></script>
+        <script type="text/javascript" src="../js/Permissions.js"></script>
+        <script type="text/javascript" src="../pamha/js/Utilities.js"></script>
+        <script type="text/javascript" src="../js/Renderer.js"></script>
+        <script type="text/javascript" src="../js/SearchBox.js"></script>
+        <script type="text/javascript" src="../js/Header.js"></script>
+        <script type="text/javascript" src="../js/Footer.js"></script>
+        <script type="text/javascript" src="../js/MessageBar.js"></script>
+        <script type="text/javascript" src="../js/DataSource.js"></script>
+        <script type="text/javascript" src="../js/DataContext.js"></script>
+        <script type="text/javascript" src="../js/RecordList.js"></script>
+        <script type="text/javascript" src="../js/Search.js"></script>
+        <script type="text/javascript" src="../js/MyCollectionSpace.js"></script>
+        <script type="text/javascript" src="../js/PageBuilder.js"></script>
+    </head>
+
+    <body id="mycollectionspace">
+
+        <div class="fl-container-1024 fl-centered">
+            <div id="name-header" class="csc-header-container">
+                <!-- this div will be filled in with the contents of the Template -->
+            </div>
+            <div class="fl-container-1024-inner">
+                <div id="title-bar" class="nobg">
+                    <div class="content">
+                        <div class="header-name">Recently Created Records</div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+                <div id="all-content" class="fl-fix find-edit">
+                    <div class="fl-fix fl-container-flex fl-col-mixed2">
+                        <div class="fl-container-content fl-force-left fl-container-left">
+                            <div class="csc-myCollectionSpace-container fl-container-left-inner"></div>
+                        </div>
+                        
+                        <div class="fl-container-pivot fl-force-right csc-right-sidebar" id="csc-right-sidebar">
+                            <div class="pivot-search-box">
+                                <div class="info-column">
+                                    <div class="header">
+                                        Search
+                                    </div>
+                                
+                                    <div class="content">
+                                        <div class="csc-pivot-searchBox cs-pivot-searchBox"></div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="csc-footer-container" id="footer">
+                <!-- this div will be filled in with the contents of the Template -->
+            </div>
+        </div>
+        <script type="text/javascript">
+            cspace.globalSetup("cspace.myCollectionSpace");
+        </script>
+
+    </body>
+</html>
