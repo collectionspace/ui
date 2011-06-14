@@ -200,7 +200,12 @@ cspace = cspace || {};
                     return false;
                 }
             }
+        }).scrollabletab();
+        var nav = that.locate("next").add(that.locate("prev"));
+        fluid.activatable(nav, function (event) {
+            $(event.target).click();
         });
+        nav.fluid("tabbable");
     };
 
     fluid.defaults("cspace.tabs", {
@@ -220,7 +225,9 @@ cspace = cspace || {};
         selectors: {
             tabs: ".csc-tabs-container",
             tabsList: ".csc-tabs-tabsList-container",
-            tab: ".csc-relatedRecordsTab"
+            tab: ".csc-relatedRecordsTab",
+            prev: ".stPrev",
+            next: ".stNext"
         },
         mergePolicy: {
             model: "preserve",
