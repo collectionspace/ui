@@ -116,7 +116,7 @@ fluid.registerNamespace("cspace.util");
     fluid.defaults("cspace.urlExpander", {
         gradeNames: ["fluid.littleComponent"],
         vars: {
-            chain: "../../chain",
+            chain: "../../tenant/html",
             webapp: "..",
             test: "../../../test"
         }

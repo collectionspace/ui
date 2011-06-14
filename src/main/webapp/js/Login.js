@@ -272,6 +272,6 @@ cspace = cspace || {};
             generalError: "I'm sorry, an error has occurred. Please try again, or contact your system administrator."
         }, 
        
-        baseUrl: "../../chain/"
+        baseUrl: "../../tenant/html/"
     });
 })(jQuery, fluid);
