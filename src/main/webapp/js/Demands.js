@@ -897,10 +897,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         fluid.demands("cspace.recordList.thumbRenderer", "cspace.recordList", {
             container: "{arguments}.0",
-            options: {
+            mergeAllOptions: [{
                 model: "{recordList}.model",
                 elPath: "{recordList}.options.elPaths.items"
-            }
+            }, "{arguments}.1"]
         });
         
         fluid.demands("cspace.recordList.rowStyler", "cspace.recordList", {

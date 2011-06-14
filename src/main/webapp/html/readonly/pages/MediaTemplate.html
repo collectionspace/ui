@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="fl-container-flex fl-fix information-group info-column">
-        <div class="csc-recordEditor-header fl-container-flex header toggle">File Information</div>
+        <div class="csc-recordEditor-header fl-container-flex header toggle csc-media-mediaInformationHeaderLabel-label"></div>
         <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
             <div class="info-column fl-force-left">
                 <div class="info-pair">
@@ -20,18 +20,18 @@
             <div class="csc-media-blobs">
                 <div class="info-pair">
                     <div class="header">
-                        <div class="label">File Information</div>
+                        <div class="label csc-media-fileInformation-label"></div>
                     </div>
 	                <div class="content">
 	                    <table>
 	                        <thead>
 	                            <tr>
-	                                <td>Thumbnail</td>
-	                                <td>File name</td>
-	                                <td>File location</td>
-	                                <td>File format</td>
-	                                <td>Date created</td>
-	                                <td>Date modified</td>
+	                                <td class="csc-media-imgThumb-label"></td>
+	                                <td class="csc-media-filename-label"></td>
+	                                <td class="csc-media-location-label"></td>
+	                                <td class="csc-media-format-label"></td>
+	                                <td class="csc-media-dateCreated-label"></td>
+	                                <td class="csc-media-dateModified-label"></td>
 	                            </tr>
 	                        </thead>                                                        
 	                        <tbody>
@@ -49,19 +49,19 @@
 	            </div>
                 <div class="info-pair">
                     <div class="header">
-                        <div class="label">Dimensions</div>
+                        <div class="label csc-media-dimensionGroup-label"></div>
                     </div>
                     <div class="content">
                         <table>
                             <thead>
                                 <tr>
-                                    <td>Dimension</td>
-                                    <td>Measured by</td>
-                                    <td>Measurement method</td>
-                                    <td>Value</td>
-                                    <td>Measurement unit</td>
-                                    <td>Value qualifier</td>
-                                    <td>Value date</td>
+                                    <td class="csc-media-dimension-label"></td>
+                                    <td class="csc-media-measuredBy-label"></td>
+                                    <td class="csc-media-measurementMethod-label"></td>
+                                    <td class="csc-media-value-label"></td>
+                                    <td class="csc-media-measurementUnit-label"></td>
+                                    <td class="csc-media-valueQualifier-label"></td>
+                                    <td class="csc-media-valueDate-label"></td>
                                 </tr>
                             </thead>                                                        
                             <tbody>
@@ -83,14 +83,14 @@
         </div>
     </div>
     <div class="fl-container-flex fl-fix information-group info-column">
-        <div class="csc-recordEditor-header fl-container-flex header toggle">Media Handling Information</div>
+        <div class="csc-recordEditor-header fl-container-flex header toggle csc-media-mediaInformation-label"></div>
         <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main"> 
             <div class="info-column fl-force-left">
                 <div class="info-column fl-force-left">
                     <div class="info-column2-50 fl-force-left" >    
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Title</div>
+                                <div class="label csc-media-title-label"></div>
                             </div>
                             <div class="content">
                                 <span class="csc-media-title" ></span>
@@ -100,7 +100,7 @@
                     <div class="info-column2-50 fl-force-right">
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Identification Number</div>
+                                <div class="label csc-media-identificationNumber-label"></div>
                             </div>
                             <div class="content csc-media-identificationNumber-container">
                                 <div class="input-numeric-long csc-media-identificationNumber" ></div>
@@ -112,29 +112,29 @@
                     <div class="info-column2-60 fl-force-left" >    
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Dimension Summary</div>
+                                <div class="label csc-media-dimensionSummary-label"></div>
                             </div>
                             <div class="content">
-                                <div class="csc-media-dimensionSummary" ></div>
+                                <input type="text" class="csc-media-dimensionSummary" />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="info-pair">
                     <div class="header">
-                        <div class="label">Dimensions</div>
+                        <div class="label csc-media-dimensionGroup-label"></div>
                     </div>
                     <div class="content">
                         <table>
                             <thead>
                                 <tr>
-                                    <td>Dimension</td>
-                                    <td>Measured by</td>
-                                    <td>Measurement method</td>
-                                    <td>Value</td>
-                                    <td>Measurement unit</td>
-                                    <td>Value qualifier</td>
-                                    <td>Value date</td>
+                                    <td class="csc-media-dimension-label"></td>
+                                    <td class="csc-media-measuredBy-label"></td>
+                                    <td class="csc-media-measurementMethod-label"></td>
+                                    <td class="csc-media-value-label"></td>
+                                    <td class="csc-media-measurementUnit-label"></td>
+                                    <td class="csc-media-valueQualifier-label"></td>
+                                    <td class="csc-media-valueDate-label"></td>
                                 </tr>
                             </thead>                                                        
                             <tbody>
@@ -155,7 +155,7 @@
                     <div class="info-column2-50 fl-force-left" >    
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Contributor</div>
+                                <div class="label csc-media-contributor-label"></div>
                             </div>
                             <div class="content">
                                 <div class="csc-media-contributor" ></div>
@@ -165,7 +165,7 @@
                     <div class="info-column2-50 fl-force-right">
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Types</div>
+                                <div class="label csc-media-Type-label"></div>
                             </div>
                             <div class="content">
                                 <div class="csc-media-type input-select"></div>
@@ -177,7 +177,7 @@
                     <div class="info-column2-50 fl-force-left" >    
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Creator</div>
+                                <div class="label csc-media-creator-label"></div>
                             </div>
                             <div class="content">
                                 <div class="csc-media-creator" ></div>
@@ -187,7 +187,7 @@
                     <div class="info-column2-50 fl-force-right">
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Coverage</div>
+                                <div class="label csc-media-coverage-label"></div>
                             </div>
                             <div class="content">
                                 <div class="csc-media-coverage" ></div>
@@ -199,7 +199,7 @@
                     <div class="info-column2-50 fl-force-left" >    
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Languages</div>
+                                <div class="label csc-media-language-label"></div>
                             </div>
                             <div class="content">
                                 <div class="csc-media-language input-select"></div>
@@ -209,7 +209,7 @@
                     <div class="info-column2-50 fl-force-right">
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Dates</div>
+                                <div class="label csc-media-date-label"></div>
                             </div>
                             <div class="content">
                                 <div class="input-alpha csc-media-date" ></div>
@@ -221,7 +221,7 @@
                     <div class="info-column2-50 fl-force-left" >    
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Publisher</div>
+                                <div class="label csc-media-publisher-label"></div>
                             </div>
                             <div class="content">
                                 <div class="csc-media-publisher" ></div>
@@ -231,7 +231,7 @@
                     <div class="info-column2-50 fl-force-right">
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Source</div>
+                                <div class="label csc-media-source-label"></div>
                             </div>
                             <div class="content">
                                 <div class="csc-media-source" ></div>
@@ -243,7 +243,7 @@
                     <div class="info-column2-50 fl-force-left" >    
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Relations</div>
+                                <div class="label csc-media-relation-label"></div>
                             </div>
                             <div class="content">
                                 <div class="csc-media-relation" ></div>
@@ -253,7 +253,7 @@
                     <div class="info-column2-50 fl-force-right">
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Subjects</div>
+                                <div class="label csc-media-subject-label"></div>
                             </div>
                             <div class="content">
                                 <div class="csc-media-subject" ></div>
@@ -265,7 +265,7 @@
                     <div class="info-column2-50 fl-force-left" >    
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Copyright statement</div>
+                                <div class="label csc-media-copyrightStatement-label"></div>
                             </div>
                             <div class="content">
                                 <div class="csc-media-copyrightStatement" ></div>
@@ -275,7 +275,7 @@
                     <div class="info-column2-50 fl-force-right">
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Rights holder</div>
+                                <div class="label csc-media-rightsHolder-label"></div>
                             </div>
                             <div class="content">
                                 <div class="csc-media-rightsHolder" ></div>
@@ -287,7 +287,7 @@
                     <div class="info-column fl-force-left" >    
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Description</div>
+                                <div class="label csc-media-description-label"></div>
                             </div>
                             <div class="content">
                                 <div class="input-textarea csc-media-description" ></div>

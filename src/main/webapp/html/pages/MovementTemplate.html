@@ -12,20 +12,20 @@
     </div>
     <div class="fl-container-flex fl-fix information-group">
         <div class="info-column">
-        <div class="csc-recordEditor-header fl-container-flex header toggle">Location and Movement</div>
+        <div class="csc-recordEditor-header fl-container-flex header toggle csc-movement-locationMovementInformation-label"></div>
         <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
             <div class="info-column fl-force-left">
                 <div class="info-pair">
                     <div class="header">
-                        <div class="label">Current Location</div>
+                        <div class="label csc-movement-currentLocationHeader-label"></div>
                     </div>
                     <div class="content">
                         <table>
                             <thead>
                                 <tr>
-                                    <td>Current Location<span class="required">*</span></td>
-                                    <td>Fitness</td>
-                                    <td>Note</td>
+                                    <td class="csc-movement-currentLocation-label"> <span class="required">*</span></td>
+                                    <td class="csc-movement-currentLocationFitness-label"></td>
+                                    <td class="csc-movement-currentLocationNote-label"></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,7 +43,7 @@
                 <div class="info-column2-50 fl-force-left">
                     <div class="info-pair">
                         <div class="header">
-                            <div class="label">Location Date</div>
+                            <div class="label csc-movement-locationDate-label"></div>
                         </div>
                         <div class="content">
                             <input type="text" class="csc-movement-locationDate" />
@@ -53,7 +53,7 @@
                 <div class="info-column2-50 fl-force-right">
                     <div class="info-pair">
                         <div class="header">
-                            <div class="label">Normal Location</div>
+                            <div class="label csc-movement-normalLocation-label"></div>
                         </div>                            
                         <div class="content">
                             <input type="text" class="input-alpha csc-movement-normalLocation" />
@@ -68,12 +68,12 @@
     
     <div class="fl-container-flex fl-fix information-group">
         <div class="info-column">
-            <div class="csc-recordEditor-header fl-container-flex header toggle">Movement Control Information</div>
+            <div class="csc-recordEditor-header fl-container-flex header toggle csc-movement-movementControlInformation-label"></div>
             <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
                 <div class="info-column fl-force-left">
                     <div class="info-column2-50 fl-force-left">
                         <div class="info-pair">
-                            <div class="label">Reference Number</div>
+                            <div class="label csc-movement-movementReferenceNumber-label"></div>
                             <div class="content csc-movement-movementReferenceNumber-container">
                                 <input type="text" class="input-numeric-long csc-movement-movementReferenceNumber pattern-chooser-input" />
                             </div>
@@ -82,7 +82,7 @@
                     <div class="info-column2-50 fl-force-right">
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Contact</div>
+                                <div class="label csc-movement-movementContact-label"></div>
                             </div>
                             <div class="content">
                                 <input type="text" class="input-alpha csc-movement-movementContact" />
@@ -95,7 +95,7 @@
                         <div class="info-column2-50 fl-force-left">
                             <div class="info-pair">
                                 <div class="header">
-                                    <div class="label">Planned removal date</div>
+                                    <div class="label csc-movement-plannedRemovalDate-label"></div>
                                 </div>
                                 <div class="content">
                                     <input type="text" class="csc-movement-plannedRemovalDate" />
@@ -105,7 +105,7 @@
                         <div class="info-column2-50 fl-force-right">
                             <div class="info-pair">
                                 <div class="header">
-                                    <div class="label">Removal date</div>
+                                    <div class="label csc-movement-removalDate-label"></div>
                                 </div>
                                 <div class="content">
                                     <input type="text" class="csc-movement-removalDate" />
@@ -116,7 +116,7 @@
                     <div class="info-column2-50 fl-force-right">
                         <div class="info-pair-select">
                             <div class="header">
-                                <div class="label">Method</div>
+                                <div class="label csc-movement-movementMethods-label"></div>
                             </div>
                             <div class="content repeatable">
                                 <select class="csc-movement-movementMethods input-select"><option value="">Options not loaded</option></select>
@@ -128,7 +128,7 @@
                     <div class="info-column2-50 fl-force-left">
                         <div class="info-pair-select">
                             <div class="header">
-                                <div class="label">Reason for move</div>
+                                <div class="label csc-movement-reasonForMove-label"></div>
                             </div>
                             <div class="content">
                                 <select class="csc-movement-reasonForMove input-select"><option value="">Options not loaded</option></select>
@@ -138,7 +138,7 @@
                     <div class="info-column2-50 fl-force-right">
                         <div class="info-pair">
                             <div class="header">
-                                <div class="label">Note</div>
+                                <div class="label csc-movement-movementNote-label"></div>
                             </div>
                             <div class="content">
                                 <textarea rows="4" cols="30" class="input-textarea csc-movement-movementNote"></textarea>
