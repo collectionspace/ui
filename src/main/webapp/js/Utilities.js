@@ -116,7 +116,8 @@ fluid.registerNamespace("cspace.util");
     fluid.defaults("cspace.urlExpander", {
         gradeNames: ["fluid.littleComponent"],
         vars: {
-            chain: "../../tenant/html",
+            tenant: "../../tenant/html",
+            chain: "../../chain",
             webapp: "..",
             test: "../../../test"
         }
@@ -317,7 +318,7 @@ fluid.registerNamespace("cspace.util");
     
     fluid.defaults("cspace.util.getLoginURL", {
         gradeNames: ["fluid.littleComponent"],
-        url: "%chain/loginstatus",
+        url: "%tenant/loginstatus",
         urlRenderer: {
             expander: {
                 type: "fluid.deferredInvokeCall",
