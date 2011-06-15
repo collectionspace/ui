@@ -15,14 +15,14 @@ var loaninTester = function () {
 
     var bareLoanInTests = new jqUnit.TestCase("Loan In Tests", function () {
         cspace.util.isTest = true;
-        bareLoanInTests.fetchTemplate("../../main/webapp/html/record.html", ".fl-container-1024");
+        bareLoanInTests.fetchTemplate("../../main/webapp/defaults/html/record.html", ".fl-container-1024");
     });
     
     var loanInTests = cspace.tests.testEnvironment({testCase: bareLoanInTests});
     
     loanInTests.asyncTest("Creation", function () {
         var opts = {
-            configURL: "../../main/webapp/config/loanin.json",
+            configURL: "../../main/webapp/defaults/config/loanin.json",
             pageBuilderIO: {
                 options: {
                     listeners: {
@@ -33,7 +33,7 @@ var loaninTester = function () {
                     },
                     pageSpec: {
                         recordEditor: {
-                            href: "../../main/webapp/html/pages/LoaninTemplate.html"
+                            href: "../../main/webapp/defaults/html/pages/LoaninTemplate.html"
                         }
                     }
                 }

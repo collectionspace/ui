@@ -109,7 +109,7 @@ fluid.demands("cspace.urlExpander", ["cspace.localData", "cspace.test"],
         vars: {
             tenant: "..",
             chain: "..",
-            webapp: "../../main/webapp",
+            webapp: "../../main/webapp/defaults",
             test: ".."
         }
     }

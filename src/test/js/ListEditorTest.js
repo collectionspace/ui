@@ -54,7 +54,7 @@ var listEditorTester = function(){
     };
     
     var bareListEditorTest = new jqUnit.TestCase("ListEditor Tests", function () {
-        bareListEditorTest.fetchTemplate("../../main/webapp/html/administration.html", ".csc-users-userAdmin");
+        bareListEditorTest.fetchTemplate("../../main/webapp/defaults/html/administration.html", ".csc-users-userAdmin");
     }, function () {
         $(".ui-dialog").detach();
     });

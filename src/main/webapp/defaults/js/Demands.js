@@ -40,7 +40,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("users", ["cspace.pageBuilder", "cspace.localData"], {
             container: "{pageBuilder}.options.selectors.users",
             options: {
-                queryURL: "../../../test/data/users/search.json"
+                queryURL: "../../../../test/data/users/search.json"
             }
         });
         
@@ -112,7 +112,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("detailsDC", ["cspace.listEditor", "cspace.role", "cspace.localData"], {
             options: {
                 model: "{listEditor}.options.detailsModel",
-                baseUrl: "../../../test/data",
+                baseUrl: "../../../../test/data",
                 fileExtension: ".json",
                 listeners: {
                     modelChanged: {
@@ -126,7 +126,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("detailsDC", ["cspace.listEditor", "cspace.users", "cspace.localData"], {
             options: {
                 model: "{listEditor}.options.detailsModel",
-                baseUrl: "../../../test/data",
+                baseUrl: "../../../../test/data",
                 fileExtension: ".json",
                 listeners: {
                     modelChanged: {
@@ -140,7 +140,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("detailsDC", ["cspace.listEditor", "cspace.localData"], {
             options: {
                 model: "{listEditor}.options.detailsModel",
-                baseUrl: "../../../test/data",
+                baseUrl: "../../../../test/data",
                 fileExtension: ".json",
                 listeners: {
                     modelChanged: {
@@ -153,7 +153,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("detailsDC", ["cspace.listEditor", "cspace.tab", "cspace.localData"], {
             options: {
                 model: "{listEditor}.options.detailsModel",
-                baseUrl: "../../../test/data",
+                baseUrl: "../../../../test/data",
                 fileExtension: ".json",
                 listeners: {
                     modelChanged: {
@@ -166,14 +166,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("dataContext", ["cspace.relationManager", "cspace.localData"], {
             options: {
                 model: "{relationManager}.model",
-                baseUrl: "../../../test/data",
+                baseUrl: "../../../../test/data",
                 fileExtension: ".json"
             }
         });
         fluid.demands("dataContext", ["cspace.pageBuilderIO", "cspace.localData"], {
             options: {
                 model: "{pageBuilderIO}.options.model",
-                baseUrl: "../../../test/data",
+                baseUrl: "../../../../test/data",
                 fileExtension: ".json"
             }
         });
@@ -189,7 +189,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 schema: "{pageBuilder}.schema",
                 sources: {
                     permission: {
-                        href: "../../../test/data/permission/list.json",
+                        href: "../../../../test/data/permission/list.json",
                         path: "fields.permissions",
                         resourcePath: "items",
                         merge: "cspace.dataSource.mergePermissions"
@@ -202,7 +202,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 schema: "{pageBuilder}.schema",
                 sources: {
                     role: {
-                        href: "../../../test/data/role/list.json",
+                        href: "../../../../test/data/role/list.json",
                         path: "fields.role",
                         resourcePath: "items",
                         merge: "cspace.dataSource.mergeRoles"
@@ -262,8 +262,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.urlExpander", "cspace.localData", {
             options: {
                 vars: {
-                    tenant: "../../../test",
-                    chain: "../../../test"
+                    tenant: "../../../../test",
+                    chain: "../../../../test"
                 }
             }
         });
@@ -1371,6 +1371,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.includeTestDemands = function () {
+        
+        fluid.demands("cspace.util.extractTenant.segment", ["cspace.localData" ,"cspace.test"], {
+            options: {
+                path: "test"
+            }
+        });
         
         // Record editor demands
         fluid.demands("afterDelete", ["cspace.recordEditor", "cspace.test"], {

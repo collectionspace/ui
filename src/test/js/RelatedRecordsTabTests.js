@@ -29,7 +29,7 @@ var relatedRecordsTabTester = function ($) {
     });
     
     var bareRelatedRecordsTabTest = new jqUnit.TestCase("Related Records Tab Tests", function () {
-        bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/html/components/TabsTemplate.html", ".csc-tabs-tabList", $(".template1"));
+        bareRelatedRecordsTabTest.fetchTemplate("../../main/webapp/defaults/html/components/TabsTemplate.html", ".csc-tabs-tabList", $(".template1"));
         fluid.model.copyModel(testApplier, applier);
     });
     
@@ -57,7 +57,7 @@ var relatedRecordsTabTester = function ($) {
                         onDependencySetup: function (uispec) {
                             // Change the template URL for the number pattern chooser.
                             uispec.details[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl
-                                = "../../main/webapp/html/components/NumberPatternChooser.html";
+                                = "../../main/webapp/defaults/html/components/NumberPatternChooser.html";
                         }
                     },
                     components: {
@@ -114,7 +114,7 @@ var relatedRecordsTabTester = function ($) {
                     uispecUrl: "../uispecs/cataloging-tab.json",
                     pageSpec: {
                         details: {
-                            href: "../../main/webapp/html/pages/CatalogingTemplate.html"
+                            href: "../../main/webapp/defaults/html/pages/CatalogingTemplate.html"
                         }
                     },
                     listeners: {
@@ -122,7 +122,7 @@ var relatedRecordsTabTester = function ($) {
                     }
                 }
             },
-            configURL: "../../main/webapp/config/cataloging-tab.json"
+            configURL: "../../main/webapp/defaults/config/cataloging-tab.json"
         };
         objTab = cspace.globalSetup("cspace.tab", options);
     };
@@ -134,7 +134,7 @@ var relatedRecordsTabTester = function ($) {
                 var le = tab.listEditor;
                 le.events.afterShowDetails.addListener(function () {
                     jqUnit.isVisible("Related record tab details should have visible link 'Go to record'", tab.locate("goToRecord"));
-                    jqUnit.assertEquals("href for the 'Go to record' should be", "../../main/webapp/html/cataloging.html?csid=2005.018.1383", tab.locate("goToRecord").attr("href"));
+                    jqUnit.assertEquals("href for the 'Go to record' should be", "../../main/webapp/defaults/html/cataloging.html?csid=2005.018.1383", tab.locate("goToRecord").attr("href"));
                     start();
                 });
                 le.list.locate("row").eq(1).click();
@@ -160,10 +160,10 @@ var relatedRecordsTabTester = function ($) {
                 le.events.afterShowDetails.addListener(function () {
                     le.events.afterShowDetails.removeListener("firstSelect");
                     jqUnit.isVisible("Related record tab details should have visible link 'Go to record'", tab.locate("goToRecord"));
-                    jqUnit.assertEquals("Initial href for the 'Go to record' should be", "../../main/webapp/html/cataloging.html?csid=2005.018.1383", tab.locate("goToRecord").attr("href"));
+                    jqUnit.assertEquals("Initial href for the 'Go to record' should be", "../../main/webapp/defaults/html/cataloging.html?csid=2005.018.1383", tab.locate("goToRecord").attr("href"));
                     le.events.afterShowDetails.addListener(function () {
                         jqUnit.isVisible("Related record tab details should still have visible link 'Go to record'", tab.locate("goToRecord"));
-                        jqUnit.assertEquals("href for the 'Go to record' should now be", "../../main/webapp/html/cataloging.html?csid=1984.068.0338", tab.locate("goToRecord").attr("href"));
+                        jqUnit.assertEquals("href for the 'Go to record' should now be", "../../main/webapp/defaults/html/cataloging.html?csid=1984.068.0338", tab.locate("goToRecord").attr("href"));
                         start();
                     });
                     le.list.locate("row").eq(0).click();
@@ -208,7 +208,7 @@ var relatedRecordsTabTester = function ($) {
                         onDependencySetup: function (uispec) {
                             // Change the template URL for the number pattern chooser.
                             uispec.details[".csc-object-identification-object-number-container"].decorators[0].options.templateUrl
-                                = "../../main/webapp/html/components/NumberPatternChooser.html";
+                                = "../../main/webapp/defaults/html/components/NumberPatternChooser.html";
                         }
                     },
                     components: {
@@ -247,7 +247,7 @@ var relatedRecordsTabTester = function ($) {
                     uispecUrl: "../uispecs/cataloging-tab.json",
                     pageSpec: {
                         details: {
-                            href: "../../main/webapp/html/pages/CatalogingTemplate.html"
+                            href: "../../main/webapp/defaults/html/pages/CatalogingTemplate.html"
                         }
                     },
                     listeners: {
@@ -274,7 +274,7 @@ var relatedRecordsTabTester = function ($) {
                     }
                 }
             },
-            configURL: "../../main/webapp/config/cataloging-tab.json"
+            configURL: "../../main/webapp/defaults/config/cataloging-tab.json"
         };
         objTab = cspace.globalSetup("cspace.tab", options);
     });

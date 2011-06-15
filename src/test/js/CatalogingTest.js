@@ -17,18 +17,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
     var catalogingTests = new jqUnit.TestCase("Cataloging Tests", function () {
         cspace.util.isTest = true;
-        catalogingTests.fetchTemplate("../../main/webapp/html/record.html", ".fl-container-1024");
+        catalogingTests.fetchTemplate("../../main/webapp/defaults/html/record.html", ".fl-container-1024");
     });
     
     var setupCataloging = function (options) {
         options = $.extend(true, {
-            configURL: "../../main/webapp/config/cataloging.json",
+            configURL: "../../main/webapp/defaults/config/cataloging.json",
             pageBuilderIO: {
                 options: {
                     recordType: "cataloging",
                     pageSpec: {
                         recordEditor: {
-                            href: "../../main/webapp/html/pages/CatalogingTemplate.html"
+                            href: "../../main/webapp/defaults/html/pages/CatalogingTemplate.html"
                         }
                     }
                 }

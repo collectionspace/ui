@@ -46,7 +46,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     var bareFindEditTests = new jqUnit.TestCase("Find Edit Tests", function () {
         cspace.util.isTest = true;
-        bareFindEditTests.fetchTemplate("../../main/webapp/html/findedit.html", ".main-search-page");
+        bareFindEditTests.fetchTemplate("../../main/webapp/defaults/html/findedit.html", ".main-search-page");
     });
     
     var findEditTests = cspace.tests.testEnvironment({

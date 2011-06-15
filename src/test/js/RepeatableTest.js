@@ -104,7 +104,7 @@ var repeatableTester = function ($) {
             protoTree: "replace"
         }, briefDescUISpec.options, opts);
 
-        bareRepeatableTest.fetchTemplate("../../main/webapp/html/pages/CatalogingTemplate.html", ".csc-object-identification-brief-description");
+        bareRepeatableTest.fetchTemplate("../../main/webapp/defaults/html/pages/CatalogingTemplate.html", ".csc-object-identification-brief-description");
         return cspace.makeRepeatable(".csc-object-identification-brief-description", briefDescUISpec.options);
     };
     

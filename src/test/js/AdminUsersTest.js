@@ -84,7 +84,7 @@ var adminUsersTester = function () {
     };
 
     var bareAdminUsersTest = new jqUnit.TestCase("AdminUsers Tests", function () {
-        bareAdminUsersTest.fetchTemplate("../../main/webapp/html/administration.html", ".csc-users-userAdmin");
+        bareAdminUsersTest.fetchTemplate("../../main/webapp/defaults/html/administration.html", ".csc-users-userAdmin");
         cspace.tests.onTearDown.addListener(function (re) {
             re.options.globalNavigator.events.onPerformNavigation.removeListener("onPerformNavigationRecordEditor");
             re.confirmation.popup.dialog("destroy").remove();

@@ -33,7 +33,7 @@ var rrlTester = function ($) {
     };
     
     var bareRelatedRecordsListTest = new jqUnit.TestCase("RelatedRecordsList Tests", function () {
-        bareRelatedRecordsListTest.fetchTemplate("../../main/webapp/html/components/SidebarTemplate.html", ".csc-right-sidebar");
+        bareRelatedRecordsListTest.fetchTemplate("../../main/webapp/defaults/html/components/SidebarTemplate.html", ".csc-right-sidebar");
     }, function () {
         $(".ui-dialog").detach();
     });

@@ -141,7 +141,7 @@ fluid.registerNamespace("cspace.util");
             tenant: "../../../tenant",
             chain: "../../../chain",
             webapp: "..",
-            test: "../../../test"
+            test: "../../../../test"
         }
     });
     

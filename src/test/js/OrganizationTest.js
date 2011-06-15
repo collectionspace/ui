@@ -21,12 +21,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     var setupOrganization = function (options) {
         options = fluid.merge(null, {
-            configURL: "../../main/webapp/config/organization.json",
+            configURL: "../../main/webapp/defaults/config/organization.json",
             pageBuilderIO: {
                 options: {
                     pageSpec: {
                         recordEditor: {
-                            href: "../../main/webapp/html/pages/OrganizationTemplate.html"
+                            href: "../../main/webapp/defaults/html/pages/OrganizationTemplate.html"
                         }
                     }
                 }
