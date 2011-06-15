@@ -191,7 +191,7 @@ cspace = cspace || {};
             afterSave: null,
             onError: null      // operation["create", "remove", "fetch", "update"], message
         },
-        baseUrl: "../../chain",
+        baseUrl: "../../../chain",
         recordType: "",
         dataType: "json",
         fileExtension: ""

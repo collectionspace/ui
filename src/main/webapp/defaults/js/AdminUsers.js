@@ -115,7 +115,7 @@ cspace = cspace || {};
         },
         login: "{userLogin}",
         messageBar: "{messageBar}",
-        queryURL: "../../chain/users/search?query="
+        queryURL: "../../../chain/users/search?query="
     });
 
 })(jQuery, fluid);

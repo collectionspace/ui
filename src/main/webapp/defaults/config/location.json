@@ -72,7 +72,7 @@
             "components": {
                 "dataContext": {
                     "options": {
-                        "baseUrl": "../../chain/vocabularies"
+                        "baseUrl": "../../../chain/vocabularies"
                     }
                 }
             }

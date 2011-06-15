@@ -50,9 +50,26 @@ fluid.registerNamespace("cspace.util");
     };
     
     cspace.util.extractTenant = function () {
+        var that = fluid.initLittleComponent("cspace.util.extractTenant");
         var pathSegs = window.location.href.split("/");
-        return pathSegs[pathSegs.length - 3];
+        return fluid.find(pathSegs, function (seg, index) {
+            if (seg === that.options.segment.options.path) {
+                return pathSegs[index + 1];
+            }
+        });
     };
+    fluid.defaults("cspace.util.extractTenant", {
+        segment: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.util.extractTenant.segment"
+            }
+        }
+    });
+    fluid.defaults("cspace.util.extractTenant.segment", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        path: "ui"
+    });
 
     cspace.util.getUrlParameter = function (name) {
         name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -121,8 +138,8 @@ fluid.registerNamespace("cspace.util");
     fluid.defaults("cspace.urlExpander", {
         gradeNames: ["fluid.littleComponent"],
         vars: {
-            tenant: "../../tenant",
-            chain: "../../chain",
+            tenant: "../../../tenant",
+            chain: "../../../chain",
             webapp: "..",
             test: "../../../test"
         }

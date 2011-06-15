@@ -17,6 +17,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.includeLocalDemands = function () {
         
+        fluid.demands("cspace.util.extractTenant.segment", "cspace.localData", {
+            options: {
+                path: "defaults"
+            }
+        });
+        
         // getDefaultConfigURL demands
         fluid.demands("getRecordType", ["cspace.util.getDefaultConfigURL", "cspace.localData"], {
             funcName: "cspace.util.getDefaultConfigURL.getRecordTypeLocal"
@@ -415,7 +421,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete.newTermDataSource", "cspace.autocomplete", {
             funcName: "cspace.URLDataSource",
             args: {
-                url: "../../chain%termUrl",
+                url: "../../../chain%termUrl",
                 termMap: {
                     termUrl: "%termUrl"
                 },
@@ -460,7 +466,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete.broaderDataSource", "cspace.autocomplete", {
             funcName: "cspace.URLDataSource",
             args: {
-                url: "../../chain/relationships/hierarchical/search?source=%recordType/%csid&type=hasBroader",
+                url: "../../../chain/relationships/hierarchical/search?source=%recordType/%csid&type=hasBroader",
                 termMap: {
                     recordType: "%recordType",
                     csid: "%csid"
@@ -526,7 +532,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 schema: "{pageBuilder}.schema",
                 sources: {
                     permission: {
-                        href: "../../chain/permission/search?actGrp=CRUDL",
+                        href: "../../../chain/permission/search?actGrp=CRUDL",
                         path: "fields.permissions",
                         resourcePath: "items",
                         merge: "cspace.dataSource.mergePermissions"
@@ -539,7 +545,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 schema: "{pageBuilder}.schema",
                 sources: {
                     role: {
-                        href: "../../chain/role",
+                        href: "../../../chain/role",
                         path: "fields.role",
                         resourcePath: "items",
                         merge: "cspace.dataSource.mergeRoles"

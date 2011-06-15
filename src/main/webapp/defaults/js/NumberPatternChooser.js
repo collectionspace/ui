@@ -199,7 +199,7 @@ cspace = cspace || {};
             afterRender: null
         },
         templateUrl: cspace.componentUrlBuilder("%webapp/html/components/NumberPatternChooser.html"),
-        baseUrl: "../../chain"
+        baseUrl: "../../../chain"
     });
     
 })(jQuery, fluid);

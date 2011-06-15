@@ -21,7 +21,7 @@ cspace = cspace || {};
         if (cspace.util.useLocalData()) {
             return "../../../test/data/" + recordType + "/records.json";
         } else {
-            return "../../chain/" + recordType;
+            return "../../../chain/" + recordType;
         }
     };
     
