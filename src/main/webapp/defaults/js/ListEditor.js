@@ -155,8 +155,8 @@ cspace = cspace || {};
     
     var updatelistcallback = function (that) {
         return function (listmodel) {
-            that.list.applier.requestchange(that.list.options.elpaths.items, listmodel[that.list.options.elpaths.items]);
-            that.refreshview();
+            that.list.applier.requestChange(that.list.options.elPaths.items, listmodel[that.list.options.elPaths.items]);
+            that.refreshView();
         };
     };
     
