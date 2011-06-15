@@ -51,7 +51,7 @@ fluid.registerNamespace("cspace.util");
     
     cspace.util.extractTenant = function () {
         var pathSegs = window.location.href.split("/");
-        return pathSegs[pathSegs.length - 2];
+        return pathSegs[pathSegs.length - 3];
     };
 
     cspace.util.getUrlParameter = function (name) {
