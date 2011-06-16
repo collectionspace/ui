@@ -208,6 +208,10 @@ cspace = cspace || {};
         that.requestSave = function () {
             var ret = that.events.onSave.fire(that.model);
             if (ret !== false) {
+                var namespace = cspace.util.getUrlParameter("namespace");
+                if (namespace) {
+                    that.options.applier.requestChange("namespace", namespace);
+                }
                 that.locate("save").prop("disabled", true);
                 if (that.model.csid) {
                     that.options.dataContext.update();
