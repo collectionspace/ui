@@ -81,22 +81,11 @@ cspace = cspace || {};
      */
     cspace.sidebar.produceTree = function (that) {
         return {
-            reportHeader: {
-                messagekey: "reportHeader"
-            },
             mediaHeader: {
                 messagekey: "mediaHeader"
             },
             termsHeader: {
                 messagekey: "termsHeader"
-            },
-            reportButton: {
-                decorators: {
-                    type: "attrs",
-                    attributes: {
-                        value: that.options.strings.reportButton                        
-                    }
-                }
             },
             expander: [{
                 repeatID: "categoryContainer",
@@ -151,6 +140,11 @@ cspace = cspace || {};
     fluid.defaults("cspace.sidebar", {
         gradeNames: "fluid.rendererComponent",
         components: {
+            report: {
+                type: "cspace.reportProducer",
+                createOnEvent: "afterRender",
+                container: "{sidebar}.dom.report"
+            },
             termsUsed: {
                 type: "cspace.recordList",
                 createOnEvent: "afterRender",
@@ -252,14 +246,13 @@ cspace = cspace || {};
             "categoryContainer:": ".csc-related-record", //to be repeated
             relatedCataloging: ".csc-related-cataloging",
             relatedProcedures: ".csc-related-procedures",
-            reportHeader: ".csc-sidebar-reportHeader",
-            reportButton: ".csc-sidebar-reportButton",
             mediaHeader: ".csc-sidebar-mediaHeader",
             termsHeader: ".csc-sidebar-termsHeader",
             header: ".csc-sidebar-header",
-            togglable: ".csc-sidebar-togglable"
+            togglable: ".csc-sidebar-togglable",
+            report: ".csc-sidebar-report"
         },
-        selectorsToIgnore: ["numOfTerms", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable"],
+        selectorsToIgnore: ["report", "numOfTerms", "termsUsed", "relatedCataloging", "relatedProcedures", "header", "togglable"],
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -268,10 +261,8 @@ cspace = cspace || {};
         },
         strings: {
             numOfTerms: "(%numOfTerms)",
-            reportHeader: "Create Report",
             mediaHeader: "Media Snapshot",
             termsHeader: "Terms Used",
-            reportButton: "Create",
             mediumImage: "This is medium media image."
         },
         styles: {

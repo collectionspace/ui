@@ -1716,6 +1716,27 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .cs-sidebar-mediumImage {
     max-height: 165px;
 }
+.cs-reportProducer {
+    padding-left: 10px;
+    display: table;
+}
+.cs-reportProducer-header {
+    color: #333;
+    padding-bottom: 8px;
+    font-weight: bold;
+}
+.cs-reportProducer .cs-reportProducer-button {
+    margin-bottom: 10px;
+    padding: 0 20px;
+    -moz-border-radius:4px; 
+	-webkit-border-radius:4px;
+    display: table-cell;
+}
+.cs-reportProducer .cs-reportProducer-reportType {
+    display: table-cell;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
 
 /* styling for scrollableTabs plugin */
 #stTabswrapper {
