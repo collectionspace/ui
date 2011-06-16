@@ -20,4 +20,4 @@ TO:
 NOTE : Also need to add model transformation to framework dependencies.
 
 using the following command:
-   ant customBuild -Dinclude="json, fss, framework, renderer, inlineEdit, uploader, pager, jQueryUIWidgets" -Djsfilename="CSpaceInfusion.js" -DnoMinify="true"
+   ant customBuild -Dinclude="json, fss, framework, renderer, inlineEdit, uploader, pager, jQueryUIWidgets" -Djsfilename="CSpaceInfusion.js"
