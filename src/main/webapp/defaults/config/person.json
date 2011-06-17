@@ -60,6 +60,7 @@
             "schema": [
                 "recordlist",
                 "recordtypes",
+                "namespaces",
                 "person"
             ],
             "pageSpec": {

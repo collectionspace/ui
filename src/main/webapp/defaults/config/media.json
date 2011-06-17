@@ -80,6 +80,7 @@
             "recordType": "media",
              "schema": [
                 "recordlist",
+                "namespaces",
                 "recordtypes",
                 "media"
             ],

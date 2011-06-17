@@ -4,6 +4,7 @@
             "recordType": "loanout",
              "schema": [
                 "recordlist",
+                "namespaces",
                 "recordtypes",
                 "loanout"
             ],

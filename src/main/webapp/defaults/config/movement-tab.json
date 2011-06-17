@@ -4,6 +4,7 @@
             "recordType": "movement",
              "schema": [
                 "recordlist",
+                "namespaces",
                 "recordtypes",
                 "movement"
             ],

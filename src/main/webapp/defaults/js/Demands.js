@@ -291,7 +291,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.includeDemands = function () {
-        
+
+        // Namespaces
+        fluid.demands("cspace.namespaces", ["cspace.pageBuilder", "cspace.pageBuilderIO"], {
+            options: {
+                recordType: "{pageBuilderIO}.options.recordType"
+            }
+        });
+
         // PageBuilderIO
         fluid.demands("cspace.pageBuilderIO", "cspace.globalSetup", {
             options: {

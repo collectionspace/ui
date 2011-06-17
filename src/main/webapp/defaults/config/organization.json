@@ -50,6 +50,7 @@
             "schema": [
                 "recordlist",
                 "recordtypes",
+                "namespaces",
                 "organization"
             ],
             "pageSpec": {

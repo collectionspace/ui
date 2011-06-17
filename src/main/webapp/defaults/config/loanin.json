@@ -54,6 +54,7 @@
             "recordType": "loanin",
              "schema": [
                 "recordlist",
+                "namespaces",
                 "recordtypes",
                 "loanin"
             ],

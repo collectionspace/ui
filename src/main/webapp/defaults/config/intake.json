@@ -50,6 +50,7 @@
             "recordType": "intake",
              "schema": [
                 "recordlist",
+                "namespaces",
                 "recordtypes",
                 "intake"
             ],

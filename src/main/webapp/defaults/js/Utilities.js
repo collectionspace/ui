@@ -1110,6 +1110,34 @@ fluid.registerNamespace("cspace.util");
         }
     });
     
+    fluid.defaults("cspace.namespaces", {
+        gradeNames: ["fluid.modelComponent", "autoInit"],
+        mergePolicy: {
+            schema: "preserve"
+        },
+        strategy: cspace.util.schemaStrategy,
+        postInitFunction: "cspace.namespaces.postInit",
+        invokers: {
+            isNamespace: {
+                funcName: "cspace.namespaces.isNamespace",
+                args: ["{namespaces}.namespaces", "{arguments}.0"]
+            }
+        }
+    });
+    cspace.namespaces.postInit = function (that) {
+        that.namespaces = fluid.get(that.model, fluid.model.composeSegments("namespaces", that.options.recordType), {
+            strategies: [that.options.strategy({
+                schema: that.options.schema
+            })]
+        });
+    };
+    cspace.namespaces.isNamespace = function (namespaces, namespace) {
+        if (!namespaces) {
+            return false;
+        }
+        return $.inArray(namespace, namespaces) > -1;
+    };
+    
     cspace.recordTypes = function (options) {
         var that = fluid.initLittleComponent("cspace.recordTypes", options);
         fluid.initDependents(that);

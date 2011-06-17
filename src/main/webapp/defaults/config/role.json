@@ -27,6 +27,7 @@
             "schema": [
                 "recordlist",
                 "recordtypes",
+                "namespaces",
                 "role"
             ],
             "recordType": "role"

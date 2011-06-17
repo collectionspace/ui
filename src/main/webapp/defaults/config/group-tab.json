@@ -4,6 +4,7 @@
             "recordType": "group",
              "schema": [
                 "recordlist",
+                "namespaces",
                 "recordtypes",
                 "group"
             ],

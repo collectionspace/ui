@@ -50,6 +50,7 @@
             "recordType": "objectexit",
              "schema": [
                 "recordlist",
+                "namespaces",
                 "recordtypes",
                 "objectexit"
             ],
