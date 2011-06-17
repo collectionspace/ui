@@ -1,0 +1,25 @@
+{
+    "properties": {
+        "person": {
+            "default": [
+                "persontest1",
+                "person",
+                "persontest2"
+            ],
+            "type": "array"
+        },
+        "organization": {
+            "default": [
+                "organization"
+            ],
+            "type": "array"
+        },
+        "location": {
+            "default": [
+                "location"
+            ],
+            "type": "array"
+        }
+    },
+    "type": "object"
+}

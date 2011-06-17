@@ -301,7 +301,8 @@ cspace = cspace || {};
         gradeNames: ["fluid.littleComponent"],
         schema: [
             "recordlist",
-            "recordtypes"
+            "recordtypes",
+            "namespaces"
         ],
         amalgamateClasses: [
             "fastTemplate"
@@ -421,6 +422,12 @@ cspace = cspace || {};
             },
             globalBundle: {
                 type: "cspace.globalBundle"
+            },
+            namespaces: {
+                type: "cspace.namespaces",
+                options: {
+                    schema: "{pageBuilder}.schema"
+                }
             },
             recordTypes: {
                 type: "cspace.recordTypes",

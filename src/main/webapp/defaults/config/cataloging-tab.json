@@ -3,6 +3,7 @@
         "options": {
             "recordType": "cataloging",
              "schema": [
+                "namespaces",
                 "recordlist",
                 "recordtypes",
                 "cataloging"

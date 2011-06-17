@@ -55,6 +55,7 @@
              "schema": [
                 "recordlist",
                 "recordtypes",
+                "namespaces",
                 "acquisition"
             ],
             "pageSpec": {

@@ -51,6 +51,7 @@
              "schema": [
                 "recordlist",
                 "recordtypes",
+                "namespaces",
                 "movement"
             ],
             "pageSpec": {

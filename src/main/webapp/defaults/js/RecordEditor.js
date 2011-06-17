@@ -208,9 +208,11 @@ cspace = cspace || {};
         that.requestSave = function () {
             var ret = that.events.onSave.fire(that.model);
             if (ret !== false) {
-                var namespace = cspace.util.getUrlParameter("namespace");
-                if (namespace) {
-                    that.options.applier.requestChange("namespace", namespace);
+                if (that.namespaces) {
+                    var namespace = cspace.util.getDefaultConfigURL.getRecordType();
+                    if (that.namespaces.isNamespace(namespace)) {
+                        that.options.applier.requestChange("namespace", namespace);
+                    }
                 }
                 that.locate("save").prop("disabled", true);
                 if (that.model.csid) {
@@ -418,6 +420,7 @@ cspace = cspace || {};
             "dataContext": "nomerge"
         },
         components: {
+            namespaces: "{namespaces}",
             confirmation: {
                 type: "cspace.confirmation"
             },
