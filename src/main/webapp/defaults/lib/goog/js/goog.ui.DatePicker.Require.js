@@ -1,10 +1,6 @@
 goog.require('goog.dom');
 goog.require('goog.date');
 goog.require('goog.i18n.DateTimeSymbols');
-goog.require('goog.i18n.DateTimeSymbols_en_ISO');
 goog.require('goog.i18n.DateTimeSymbols_en_US');
-goog.require('goog.i18n.DateTimeSymbols_de');
-goog.require('goog.i18n.DateTimeSymbols_ml');
-goog.require('goog.i18n.DateTimeSymbols_ar_YE');
 goog.require('goog.locale');
 goog.require('goog.ui.DatePicker');
