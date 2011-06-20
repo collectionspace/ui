@@ -207,7 +207,7 @@ cspace = cspace || {};
     cspace.pageBuilderIO = function (options) {
         var that = fluid.initLittleComponent("cspace.pageBuilderIO", options);
         fluid.instantiateFirers(that, that.options);
-        that.recordTypeTag = fluid.typeTag(that.options.recordType);
+        that.recordTypeTag = fluid.typeTag(that.options.namespace || that.options.recordType);
         fluid.initDependents(that);
         
         that.options.components = {
@@ -225,7 +225,7 @@ cspace = cspace || {};
                 permissions: options.userLogin.permissions,
                 csid: that.options.csid,
                 readOnly: readOnly,
-                target: that.options.recordType
+                target: that.options.namespace || that.options.recordType
             });
             var urlExpander = cspace.urlExpander({
                 vars: {

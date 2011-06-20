@@ -57,6 +57,7 @@
     "pageBuilderIO": {
         "options": {
             "recordType": "person",
+            "namespace": "person",
             "schema": [
                 "recordlist",
                 "recordtypes",
