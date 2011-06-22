@@ -209,7 +209,7 @@ cspace = cspace || {};
         strings: {
             title: "Alert",
             primaryMessage: "Record Successfully Deleted",
-            secondaryMessage: "Redirecting..",
+            secondaryMessage: "Click OK to redirect.",
             actText: "OK",
             actAlt: "Accept"
         }
