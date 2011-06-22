@@ -32,6 +32,8 @@ cspace = cspace || {};
         strings: {
             invalidDateMessage: "Provided date has invalid format."
         },
+        i18n: "en_US",
+        parentBundle: "{globalBundle}",
         selectors: {
             date: ".goog-date-picker-date",
             btn: ".goog-date-picker-btn",
@@ -178,10 +180,31 @@ cspace = cspace || {};
         that.container.after(that[control]);
     };
     
-    var setupDatePicker = function (that) {
+    var internationalize = function (that) {
+        var messages = fluid.copy(that.options.strings);
+        if (that.options.parentBundle) {
+            fluid.merge(null, messages, that.options.parentBundle.messageBase);
+        }
+        that.locate("btn", that.datePicker).each(function () {
+            var thisBtn = $(this);
+            var message = messages[thisBtn.text()];
+            if (message) {
+                thisBtn.text(message);
+            }
+        });
+    };
+    
+    var setupDatePickerWithI18n = function (that) {
+        goog.i18n.DateTimeSymbols = goog.i18n["DateTimeSymbols_" + that.options.i18n];
         var datePickerWidget = new goog.ui.DatePicker();
-        var datePickerClass = that.datePicker[0].className;
         datePickerWidget.create(that.datePicker[0]);
+        internationalize(that);
+        return datePickerWidget;
+    };
+    
+    var setupDatePicker = function (that) {
+        var datePickerClass = that.datePicker[0].className;
+        var datePickerWidget = setupDatePickerWithI18n(that);
         that.datePicker.addClass(datePickerClass);
         that.datePicker.hide();
         return datePickerWidget;
