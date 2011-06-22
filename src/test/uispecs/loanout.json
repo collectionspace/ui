@@ -90,27 +90,27 @@
                                             ".csc-loanOut-loanedObjectStatus": {
                                                 "optionnames": [
                                                     "Please select a value",
-                                                    "Returned",
                                                     "Renewed",
+                                                    "Returned",
                                                     "Refused",
                                                     "Photography requested",
-                                                    "Agreed",
-                                                    "Conservation",
                                                     "Sent",
-                                                    "Authorized",
-                                                    "Requested"
+                                                    "Conservation",
+                                                    "Requested",
+                                                    "Agreed",
+                                                    "Authorized"
                                                 ],
                                                 "optionlist": [
                                                     "",
-                                                    "returned",
                                                     "renewed",
+                                                    "returned",
                                                     "refused",
                                                     "photographyrequested",
-                                                    "agreed",
-                                                    "conservation",
                                                     "sent",
-                                                    "authorized",
-                                                    "requested"
+                                                    "conservation",
+                                                    "requested",
+                                                    "agreed",
+                                                    "authorized"
                                                 ],
                                                 "selection": "${{row}.loanedObjectStatus}"
                                             },
@@ -144,8 +144,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../chain/loanout/autocomplete/lendersAuthorizer",
-                        "vocabUrl": "../../chain/loanout/source-vocab/lendersAuthorizer"
+                        "queryUrl": "../../../tenant/core/loanout/autocomplete/lendersAuthorizer",
+                        "vocabUrl": "../../../tenant/core/loanout/source-vocab/lendersAuthorizer"
                     }
                 }
             ],
@@ -166,8 +166,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../chain/loanout/autocomplete/borrowersContact",
-                        "vocabUrl": "../../chain/loanout/source-vocab/borrowersContact"
+                        "queryUrl": "../../../tenant/core/loanout/autocomplete/borrowersContact",
+                        "vocabUrl": "../../../tenant/core/loanout/source-vocab/borrowersContact"
                     }
                 }
             ],
@@ -179,8 +179,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../chain/loanout/autocomplete/lendersContact",
-                        "vocabUrl": "../../chain/loanout/source-vocab/lendersContact"
+                        "queryUrl": "../../../tenant/core/loanout/autocomplete/lendersContact",
+                        "vocabUrl": "../../../tenant/core/loanout/source-vocab/lendersContact"
                     }
                 }
             ],
@@ -195,8 +195,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../chain/loanout/autocomplete/borrower",
-                        "vocabUrl": "../../chain/loanout/source-vocab/borrower"
+                        "queryUrl": "../../../tenant/core/loanout/autocomplete/borrower",
+                        "vocabUrl": "../../../tenant/core/loanout/source-vocab/borrower"
                     }
                 }
             ],
