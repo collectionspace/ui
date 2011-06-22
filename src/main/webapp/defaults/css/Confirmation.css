@@ -9,7 +9,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 .ui-dialog {
-	min-width:450px !important;
+	width:450px !important;
 	*width:auto;
 }
 .ui-dialog.cs-search-dialog {
@@ -44,7 +44,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 .csc-confirmationDialog-inner {}
 .csc-confirmationDialog-inner .add-more {margin-top:0px;}
-.csc-confirmationDialog-inner .add-more .button.add, .csc-confirmationDialog-inner .add-more .button.add:hover {/*background-color:#94BC80;*/ color:#fff;}
+.csc-confirmationDialog-inner .add-more .button.add, .csc-confirmationDialog-inner .add-more .button.add:hover {
+	/*background-color:#94BC80;*/ color:#fff;}
 
 .csc-recordTypeSelecter-procedures {float:left;}
 
@@ -52,12 +53,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 .ui-icon-closethick {
 	background-color:#fff;
-	float:right;
 	color:#6B8DA7;
-	margin: -8px -4px 0 0;
+	/*position:absolute;
+	top:3px;
+	right:20px;*/
 }
-.ui-dialog-titlebar-close {
+a.ui-dialog-titlebar-close {
 	float:right;
+	width:30px;
+	height:15px;
+	margin:-6px -3px 0 0;
 }
 .ui-dialog-titlebar {
 	background-color:#fff;
@@ -66,6 +71,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 	margin-top:20px;
 	min-width:250px;
 	width:100%;
+	/*position:relative;*/
 }
 
 .ui-dialog-content {
@@ -91,7 +97,7 @@ a, a:hover {text-decoration:none;}
 .cs-dialog-closeBtn {
     position:absolute;
     right:-20px;
-    top:-71px;
+    top:-72px;
     width:auto;
     cursor:pointer;
 }
