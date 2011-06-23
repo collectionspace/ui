@@ -436,9 +436,12 @@ cspace = cspace || {};
             recordEditorLoadingIndicator: {
                 type: "cspace.util.loadingIndicator",
                 options: {
+                    hideOn: [
+                        "{recordEditor}.events.afterRender",
+                        "{recordEditor}.options.dataContext.events.onError"
+                    ],
                     events: {
-                        showOn: "{recordEditor}.options.dataContext.events.onSave",
-                        hideOn: "{recordEditor}.events.afterRender"
+                        showOn: "{recordEditor}.options.dataContext.events.onSave"
                     }
                 }
             }

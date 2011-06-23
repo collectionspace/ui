@@ -103,7 +103,7 @@ cspace = cspace || {};
         
         that.events.onError.addListener(function (action, status) {
             that.locate("resultsContainer").hide();
-            that.options.messageBar.show(that.options.strings.errorMessage, null, true);
+            that.options.messageBar.show(that.options.strings.errorMessage + status, null, true);
         });
         
         if (that.options.pivoting) {
@@ -168,7 +168,7 @@ cspace = cspace || {};
             disabled: "cs-search-disabled"
         },
         strings: {
-            errorMessage: "We've encountered an error retrieving search results. Please try again.",
+            errorMessage: "We've encountered an error retrieving search results. Please try again: ",
             resultsCount: "Found %count records for %query",
             looking: "Looking for %query...",
             selected: "Select",
@@ -214,9 +214,12 @@ cspace = cspace || {};
                 type: "cspace.util.loadingIndicator",
                 container: "{searchView}.dom.loadingIndicator",
                 options: {
+                    hideOn: [
+                        "{searchView}.events.afterSearch",
+                        "{searchView}.events.onError"
+                    ],
                     events: {
-                        showOn: "{searchView}.events.onSearch",
-                        hideOn: "{searchView}.events.afterSearch"
+                        showOn: "{searchView}.events.onSearch"
                     }
                 }
             },
@@ -357,6 +360,12 @@ cspace = cspace || {};
                     dataType: "json",
                     type: "GET",
                     success: function (data, textStatus) {
+                        if (data.isError === true) {
+                            fluid.each(data.messages, function (message) {
+                                that.events.onError.fire("search", message.message);
+                            });
+                            return;
+                        }
                         that.applyResults(data);
                     },
                     error: function (xhr, textStatus, errorThrown) {

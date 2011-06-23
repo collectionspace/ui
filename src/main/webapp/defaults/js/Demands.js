@@ -305,7 +305,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.pageBuilderIO", "cspace.globalSetup", {
             options: {
                 listeners: {
-                    pageReady: "{globalSetup}.events.pageReady.fire"
+                    pageReady: "{globalSetup}.events.pageReady.fire",
+                    onError: "{globalSetup}.events.onError.fire"
                 }
             }
         });
@@ -314,9 +315,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("recordEditorLoadingIndicator", ["cspace.recordEditor", "cspace.listEditor"], {
             container: "{listEditor}.dom.allDetails",
             options: {
+                hideOn: [
+                    "{recordEditor}.options.dataContext.events.afterFetch",
+                    "{recordEditor}.options.dataContext.events.onError"
+                ],
                 events: {
-                    showOn: "{recordEditor}.options.dataContext.events.onFetch",
-                    hideOn: "{recordEditor}.options.dataContext.events.afterFetch"
+                    showOn: "{recordEditor}.options.dataContext.events.onFetch"
                 }
             }
         });
@@ -515,7 +519,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         fluid.demands("dataContext", "cspace.pageBuilderIO", {
             options: {
-                model: "{pageBuilderIO}.options.model"
+                model: "{pageBuilderIO}.options.model",
+                listeners: {
+                    onError: "{globalSetup}.events.onError.fire"
+                }
             }
         });
         fluid.demands("detailsDC", ["cspace.listEditor", "cspace.tab"], {
