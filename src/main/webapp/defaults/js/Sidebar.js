@@ -256,7 +256,10 @@ cspace = cspace || {};
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
-                url: "%webapp/html/components/SidebarTemplate.html"
+                url: "%webapp/html/components/SidebarTemplate.html",
+                options: {
+                    dataType: "html"
+                }
             })
         },
         strings: {

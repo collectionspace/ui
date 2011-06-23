@@ -91,7 +91,8 @@ fluid.registerNamespace("cspace.util");
                 args: {
                     forceCache: true,
                     fetchClass: options.fetchClass,
-                    url: options.url
+                    url: options.url,
+                    options: options.options
                 }
             }
         };
@@ -200,7 +201,10 @@ fluid.registerNamespace("cspace.util");
         resources: {
             globalBundle: cspace.resourceSpecExpander({
                 fetchClass: "fastResource",
-                url: "%webapp/bundle/core-messages.properties"
+                url: "%webapp/bundle/core-messages.properties",
+                options: {
+                    dataType: "text"
+                }
             })
         }
     });

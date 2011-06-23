@@ -28,6 +28,9 @@ cspace = cspace || {};
     var makeArrayExpander = function (recordType) {
         return fluid.expander.makeFetchExpander({
             url: buildUrl(recordType),
+            options: {
+                dataType: "json"
+            },
             fetchKey: recordType, 
             disposer: function (model) {
                 model.selectonIndex = -1;
@@ -273,7 +276,10 @@ cspace = cspace || {};
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
-                url: "%webapp/html/pages/MyCollectionSpaceTemplate.html"
+                url: "%webapp/html/pages/MyCollectionSpaceTemplate.html",
+                options: {
+                    dataType: "html"
+                }
             })
         }
     });

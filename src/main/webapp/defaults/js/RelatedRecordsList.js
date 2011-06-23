@@ -149,7 +149,10 @@ cspace = cspace || {};
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
-                url: "%webapp/html/components/RelatedRecordListTemplate.html"
+                url: "%webapp/html/components/RelatedRecordListTemplate.html",
+                options: {
+                    dataType: "html"
+                }
             })
         }
     });

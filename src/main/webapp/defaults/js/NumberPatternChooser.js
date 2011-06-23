@@ -155,7 +155,10 @@ cspace = cspace || {};
         var resources = {
             chooser: {
                 href: that.options.templateUrl,
-                cutpoints: buildCutpoints(that.options.selectors)
+                cutpoints: buildCutpoints(that.options.selectors),
+                options: {
+                    dataType: "html"
+                }
             }
         };
         

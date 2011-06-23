@@ -252,7 +252,10 @@ cspace = cspace || {};
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "slowTemplate",
-                url: "%webapp/html/components/searchToRelate.html"
+                url: "%webapp/html/components/searchToRelate.html",
+                options: {
+                    dataType: "html"
+                }
             })
         }
     });

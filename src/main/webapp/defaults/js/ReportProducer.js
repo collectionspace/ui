@@ -43,7 +43,10 @@ cspace = cspace || {};
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
-                url: "%webapp/html/components/ReportProducerTemplate.html"
+                url: "%webapp/html/components/ReportProducerTemplate.html",
+                options: {
+                    dataType: "html"
+                }
             })
         },
         model: {
