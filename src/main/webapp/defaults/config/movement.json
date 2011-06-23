@@ -13,7 +13,7 @@
                             "identificationNumber": ".csc-movement-currentLocation" 
                         },
                         "strings": {
-                            "identificationNumberRequired": "Please specify Current Location" 
+                            "identificationNumberRequired": "Please specify a Current Location" 
                         },
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",

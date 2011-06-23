@@ -13,7 +13,7 @@
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "model": "{pageBuilder}.model",
                         "strings": {
-                            "identificationNumberRequired": "Please specify Display Name" 
+                            "identificationNumberRequired": "Please specify a Display Name" 
                         },
                         "selectors": {
                             "hierarchy": ".csc-location-hierarchy",
