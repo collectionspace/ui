@@ -236,7 +236,11 @@ cspace = cspace || {};
             fluid.each(resourceSpecs, function (spec, key) {
                 spec.href = urlExpander(spec.href);
                 spec.options = {
-                    success: pageSpecManager.makeCallback(spec, key)
+                    success: pageSpecManager.makeCallback(spec, key),
+                    error: function (xhr, textStatus, errorThrown) {
+                        that.events.onError.fire();
+                        fluid.fail("Error fetching " + spec.href + " template:" + textStatus);
+                    }
                 };
             });
             fluid.each(that.options.schema, function (resource, key) {
@@ -250,6 +254,7 @@ cspace = cspace || {};
                             fluid.merge(null, options.schema, data);
                         },
                         error: function (xhr, textStatus, errorThrown) {
+                            that.events.onError.fire();
                             fluid.fail("Error fetching " + options.recordType + " schema:" + textStatus);
                         }
                     }
@@ -273,6 +278,7 @@ cspace = cspace || {};
                             resolveReadOnly(options.uispec, "hierarchy", readOnly);
                         },
                         error: function (xhr, textStatus, errorThrown) {
+                            that.events.onError.fire();
                             fluid.fail("Error fetching " + options.pageType + " uispec:" + textStatus);
                         }
                     }
@@ -341,7 +347,8 @@ cspace = cspace || {};
             }
         },
         events: {
-            pageReady: null
+            pageReady: null,
+            onError: null
         }
     });
     

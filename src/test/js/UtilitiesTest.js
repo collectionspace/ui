@@ -1175,6 +1175,16 @@ var utilitiesTester = function ($) {
             "organization"
         ], recTypes.vocabularies);
     });
+    
+    utilitiesTest.test("Loading Indicator basic", function () {
+        var selector = ".loadingIndicator";
+        var indicator = cspace.util.loadingIndicator(selector);
+        jqUnit.notVisible("Indicator is invisible", indicator.indicator);
+        indicator.events.showOn.fire();
+        jqUnit.isVisible("Indicator is visible", indicator.indicator);
+        indicator.events.hideOn.fire();
+        jqUnit.notVisible("Indicator is invisible", indicator.indicator);
+    });
 };
 
 (function () {
