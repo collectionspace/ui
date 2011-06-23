@@ -77,7 +77,10 @@ cspace = cspace || {};
                     args: {
                         forceCache: true,
                         fetchClass: "fastTemplate",
-                        url: "%webapp/html/components/footer.html"
+                        url: "%webapp/html/components/footer.html",
+                        options: {
+                            dataType: "html"
+                        }
                     }
                 }
             }

@@ -236,6 +236,7 @@ cspace = cspace || {};
             fluid.each(resourceSpecs, function (spec, key) {
                 spec.href = urlExpander(spec.href);
                 spec.options = {
+                    dataType: "html",
                     success: pageSpecManager.makeCallback(spec, key),
                     error: function (xhr, textStatus, errorThrown) {
                         that.events.onError.fire();

@@ -297,7 +297,10 @@ cspace = cspace || {};
                     args: {
                         forceCache: true,
                         fetchClass: "fastTemplate",
-                        url: "%webapp/html/components/MediaUploaderTemplate.html"
+                        url: "%webapp/html/components/MediaUploaderTemplate.html",
+                        options: {
+                            dataType: "html"
+                        }
                     }
                 }
             }

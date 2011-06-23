@@ -53,7 +53,10 @@ cspace = cspace || {};
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
-                url: "%webapp/html/components/HierarchyTemplate.html"
+                url: "%webapp/html/components/HierarchyTemplate.html",
+                options: {
+                    dataType: "html"
+                }
             })
         },
         postInitFunction: "cspace.hierarchy.postInitFunction"

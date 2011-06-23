@@ -90,7 +90,10 @@ cspace = cspace || {};
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
-                url: "%webapp/html/components/MessageBarTemplate.html"
+                url: "%webapp/html/components/MessageBarTemplate.html",
+                options: {
+                    dataType: "html"
+                }
             })
         }
     });
