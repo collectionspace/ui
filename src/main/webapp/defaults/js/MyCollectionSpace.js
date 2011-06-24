@@ -28,9 +28,11 @@ cspace = cspace || {};
     var makeArrayExpander = function (recordType) {
         return fluid.expander.makeFetchExpander({
             url: buildUrl(recordType),
-            options: {
-                dataType: "json"
-            },
+//          TODO: Can't specify the data tupe because makeDefaultFetchOptions expander expects
+//          data of type text that it then tries to parse.
+//            options: {
+//                dataType: "json"
+//            },
             fetchKey: recordType, 
             disposer: function (model) {
                 model.selectonIndex = -1;
