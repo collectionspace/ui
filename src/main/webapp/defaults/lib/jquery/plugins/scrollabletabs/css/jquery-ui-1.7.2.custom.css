@@ -47,7 +47,7 @@
 
 /* positioning */
 #stTabswrapper .ui-icon-carat-1-w { background-position: -96px 0; }
-#stTabswrapper .ui-icon-triangle-1-w { background-position: -96px -16px; }
+#stTabswrapper .ui-icon-carat-1-e { background-position: -32px 0; }
 #stTabswrapper .stNav {border:2px solid #6F9ECD; background-color:#fff; cursor:pointer; z-index:30; position:absolute; top:5px; height:15px;}
 #stTabswrapper .stPrev { -moz-border-radius: 6px 0 0 0;	-webkit-border-radius: 6px 0 0 0;}
 #stTabswrapper .stNext { -moz-border-radius: 0 6px 0 0;	-webkit-border-radius: 0 6px 0 0;}
