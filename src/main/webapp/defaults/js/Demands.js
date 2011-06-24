@@ -488,6 +488,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         // Confirmation demands
         fluid.demands("confirmation", "cspace.recordEditor", "{options}");
+        fluid.demands("confirmation", "cspace.reportProducer", "{options}");
 
         // CreateNew demands
         fluid.demands("createRecord", "cspace.pageBuilder", {
