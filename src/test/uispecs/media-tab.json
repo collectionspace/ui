@@ -105,8 +105,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../tenant/html/media/autocomplete/rightsHolder",
-                        "vocabUrl": "../../tenant/html/media/source-vocab/rightsHolder"
+                        "queryUrl": "../../../tenant/core/media/autocomplete/rightsHolder",
+                        "vocabUrl": "../../../tenant/core/media/source-vocab/rightsHolder"
                     }
                 }
             ],
@@ -214,8 +214,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../tenant/html/media/autocomplete/publisher",
-                        "vocabUrl": "../../tenant/html/media/source-vocab/publisher"
+                        "queryUrl": "../../../tenant/core/media/autocomplete/publisher",
+                        "vocabUrl": "../../../tenant/core/media/source-vocab/publisher"
                     }
                 }
             ],
@@ -237,19 +237,19 @@
                                             ".csc-media-language": {
                                                 "optionnames": [
                                                     "Please select a value",
-                                                    "Middle English",
                                                     "Latin",
+                                                    "Middle English",
                                                     "Old English",
-                                                    "Swahili",
                                                     "Ancient Greek",
-                                                    "Japanese",
-                                                    "Hebrew",
                                                     "Korean",
-                                                    "Russian",
+                                                    "Swahili",
+                                                    "Japanese",
                                                     "Chinese",
+                                                    "Hebrew",
+                                                    "German",
+                                                    "Russian",
                                                     "Arabic",
                                                     "Portuguese",
-                                                    "German",
                                                     "Italian",
                                                     "Spanish",
                                                     "French",
@@ -257,19 +257,19 @@
                                                 ],
                                                 "optionlist": [
                                                     "",
-                                                    "middleenglish",
                                                     "latin",
+                                                    "middleenglish",
                                                     "oldenglish",
-                                                    "swahili",
                                                     "ancientgreek",
-                                                    "japanese",
-                                                    "hebrew",
                                                     "korean",
-                                                    "russian",
+                                                    "swahili",
+                                                    "japanese",
                                                     "chinese",
+                                                    "hebrew",
+                                                    "german",
+                                                    "russian",
                                                     "arabic",
                                                     "portuguese",
-                                                    "german",
                                                     "italian",
                                                     "spn",
                                                     "french",
@@ -308,8 +308,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../tenant/html/media/autocomplete/creator",
-                        "vocabUrl": "../../tenant/html/media/source-vocab/creator"
+                        "queryUrl": "../../../tenant/core/media/autocomplete/creator",
+                        "vocabUrl": "../../../tenant/core/media/source-vocab/creator"
                     }
                 }
             ],
@@ -336,8 +336,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../tenant/html/media/autocomplete/contributor",
-                        "vocabUrl": "../../tenant/html/media/source-vocab/contributor"
+                        "queryUrl": "../../../tenant/core/media/autocomplete/contributor",
+                        "vocabUrl": "../../../tenant/core/media/source-vocab/contributor"
                     }
                 }
             ],
@@ -434,10 +434,10 @@
         ".csc-media-number-label": {
             "messagekey": "media-numberLabel"
         },
-        ".csc-media-fileInformationHeaderLabel-label": {
-            "messagekey": "media-fileInformationHeaderLabelLabel"
-        },
         ".csc-blobs-updatedAt": "${fields.blobs.0.updatedAt}",
+        ".csc-media-fileInformationHeader-label": {
+            "messagekey": "media-fileInformationHeaderLabel"
+        },
         ".csc-blobs-encoding": "${fields.blobs.0.encoding}",
         ".csc-media-dimensionGroup-label": {
             "messagekey": "media-dimensionGroupLabel"
@@ -533,8 +533,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../tenant/html/media/autocomplete/measuredBy",
-                                                            "vocabUrl": "../../tenant/html/media/source-vocab/measuredBy"
+                                                            "queryUrl": "../../../tenant/core/media/autocomplete/measuredBy",
+                                                            "vocabUrl": "../../../tenant/core/media/source-vocab/measuredBy"
                                                         }
                                                     }
                                                 ],

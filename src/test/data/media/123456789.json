@@ -18,9 +18,9 @@
                 "length": "2108",
                 "mimeType": "image/png",
                 "depth": "8",
-                "imgOrig": "../../../test/data/images/Original.png",
-                "imgThumb": "../../../test/data/images/Thumbnail.jpeg",
-                "imgMedium": "../../../test/data/images/Medium.jpeg",
+                "imgOrig": "../../../../test/data/images/Original.png",
+                "imgThumb": "../../../../test/data/images/Thumbnail.jpeg",
+                "imgMedium": "../../../../test/data/images/Medium.jpeg",
                 "dimensionGroup": [
                     {
                         "_primary": true,
