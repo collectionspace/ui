@@ -194,8 +194,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../tenant/html/cataloging/autocomplete/fieldCollectionSource",
-                                                            "vocabUrl": "../../tenant/html/cataloging/source-vocab/fieldCollectionSource"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/fieldCollectionSource",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/fieldCollectionSource"
                                                         }
                                                     }
                                                 ],
@@ -265,19 +265,19 @@
                                             ".csc-collection-object-titleTranslationLanguage": {
                                                 "optionnames": [
                                                     "Please select a value",
-                                                    "Middle English",
                                                     "Latin",
+                                                    "Middle English",
                                                     "Old English",
-                                                    "Swahili",
                                                     "Ancient Greek",
-                                                    "Japanese",
-                                                    "Hebrew",
                                                     "Korean",
-                                                    "Russian",
+                                                    "Swahili",
+                                                    "Japanese",
                                                     "Chinese",
+                                                    "Hebrew",
+                                                    "German",
+                                                    "Russian",
                                                     "Arabic",
                                                     "Portuguese",
-                                                    "German",
                                                     "Italian",
                                                     "Spanish",
                                                     "French",
@@ -285,19 +285,19 @@
                                                 ],
                                                 "optionlist": [
                                                     "",
-                                                    "middleenglish",
                                                     "latin",
+                                                    "middleenglish",
                                                     "oldenglish",
-                                                    "swahili",
                                                     "ancientgreek",
-                                                    "japanese",
-                                                    "hebrew",
                                                     "korean",
-                                                    "russian",
+                                                    "swahili",
+                                                    "japanese",
                                                     "chinese",
+                                                    "hebrew",
+                                                    "german",
+                                                    "russian",
                                                     "arabic",
                                                     "portuguese",
-                                                    "german",
                                                     "italian",
                                                     "spn",
                                                     "french",
@@ -331,19 +331,19 @@
                                             ".csc-object-identification-object-title-language": {
                                                 "optionnames": [
                                                     "Please select a value",
-                                                    "Middle English",
                                                     "Latin",
+                                                    "Middle English",
                                                     "Old English",
-                                                    "Swahili",
                                                     "Ancient Greek",
-                                                    "Japanese",
-                                                    "Hebrew",
                                                     "Korean",
-                                                    "Russian",
+                                                    "Swahili",
+                                                    "Japanese",
                                                     "Chinese",
+                                                    "Hebrew",
+                                                    "German",
+                                                    "Russian",
                                                     "Arabic",
                                                     "Portuguese",
-                                                    "German",
                                                     "Italian",
                                                     "Spanish",
                                                     "French",
@@ -351,19 +351,19 @@
                                                 ],
                                                 "optionlist": [
                                                     "",
-                                                    "middleenglish",
                                                     "latin",
+                                                    "middleenglish",
                                                     "oldenglish",
-                                                    "swahili",
                                                     "ancientgreek",
-                                                    "japanese",
-                                                    "hebrew",
                                                     "korean",
-                                                    "russian",
+                                                    "swahili",
+                                                    "japanese",
                                                     "chinese",
+                                                    "hebrew",
+                                                    "german",
+                                                    "russian",
                                                     "arabic",
                                                     "portuguese",
-                                                    "german",
                                                     "italian",
                                                     "spn",
                                                     "french",
@@ -416,8 +416,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../tenant/html/cataloging/autocomplete/owner",
-                                                            "vocabUrl": "../../tenant/html/cataloging/source-vocab/owner"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/owner",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/owner"
                                                         }
                                                     }
                                                 ],
@@ -828,8 +828,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../tenant/html/cataloging/autocomplete/objectProductionOrganization",
-                                                            "vocabUrl": "../../tenant/html/cataloging/source-vocab/objectProductionOrganization"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/objectProductionOrganization",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/objectProductionOrganization"
                                                         }
                                                     }
                                                 ],
@@ -892,19 +892,19 @@
         ".csc-object-description-inscription-content-language": {
             "optionnames": [
                 "Please select a value",
-                "Middle English",
                 "Latin",
+                "Middle English",
                 "Old English",
-                "Swahili",
                 "Ancient Greek",
-                "Japanese",
-                "Hebrew",
                 "Korean",
-                "Russian",
+                "Swahili",
+                "Japanese",
                 "Chinese",
+                "Hebrew",
+                "German",
+                "Russian",
                 "Arabic",
                 "Portuguese",
-                "German",
                 "Italian",
                 "Spanish",
                 "French",
@@ -912,19 +912,19 @@
             ],
             "optionlist": [
                 "",
-                "middleenglish",
                 "latin",
+                "middleenglish",
                 "oldenglish",
-                "swahili",
                 "ancientgreek",
-                "japanese",
-                "hebrew",
                 "korean",
-                "russian",
+                "swahili",
+                "japanese",
                 "chinese",
+                "hebrew",
+                "german",
+                "russian",
                 "arabic",
                 "portuguese",
-                "german",
                 "italian",
                 "spn",
                 "french",
@@ -1060,8 +1060,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../tenant/html/cataloging/autocomplete/assocPerson",
-                                                            "vocabUrl": "../../tenant/html/cataloging/source-vocab/assocPerson"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/assocPerson",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/assocPerson"
                                                         }
                                                     }
                                                 ],
@@ -1303,8 +1303,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../tenant/html/cataloging/autocomplete/objectProductionPerson",
-                                                            "vocabUrl": "../../tenant/html/cataloging/source-vocab/objectProductionPerson"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/objectProductionPerson",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/objectProductionPerson"
                                                         }
                                                     }
                                                 ],
@@ -1748,8 +1748,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../tenant/html/cataloging/autocomplete/inscriptionContentInscriber",
-                        "vocabUrl": "../../tenant/html/cataloging/source-vocab/inscriptionContentInscriber"
+                        "queryUrl": "../../../tenant/core/cataloging/autocomplete/inscriptionContentInscriber",
+                        "vocabUrl": "../../../tenant/core/cataloging/source-vocab/inscriptionContentInscriber"
                     }
                 }
             ],
@@ -1812,8 +1812,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../tenant/html/cataloging/autocomplete/assocEventPerson",
-                                                            "vocabUrl": "../../tenant/html/cataloging/source-vocab/assocEventPerson"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/assocEventPerson",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/assocEventPerson"
                                                         }
                                                     }
                                                 ],
@@ -2011,21 +2011,21 @@
                                     "dateEarliestSingleCertainty": {
                                         "optionnames": [
                                             "Please select a value",
-                                            "Probably",
                                             "Possibly",
                                             "Circa",
-                                            "Before",
+                                            "Probably",
+                                            "After",
                                             "Approximate",
-                                            "After"
+                                            "Before"
                                         ],
                                         "optionlist": [
                                             "",
-                                            "probably",
                                             "possibly",
                                             "circa",
-                                            "before",
+                                            "probably",
+                                            "after",
                                             "approximate",
-                                            "after"
+                                            "before"
                                         ],
                                         "selection": "${fields.objectProductionDate.dateEarliestSingleCertainty}"
                                     },
@@ -2046,21 +2046,21 @@
                                     "dateLatestCertainty": {
                                         "optionnames": [
                                             "Please select a value",
-                                            "Probably",
                                             "Possibly",
                                             "Circa",
-                                            "Before",
+                                            "Probably",
+                                            "After",
                                             "Approximate",
-                                            "After"
+                                            "Before"
                                         ],
                                         "optionlist": [
                                             "",
-                                            "probably",
                                             "possibly",
                                             "circa",
-                                            "before",
+                                            "probably",
+                                            "after",
                                             "approximate",
-                                            "after"
+                                            "before"
                                         ],
                                         "selection": "${fields.objectProductionDate.dateLatestCertainty}"
                                     },
@@ -2082,15 +2082,15 @@
                                     "dateEarliestSingleQualifierUnit": {
                                         "optionnames": [
                                             "Please select a value",
-                                            "Year(s)",
                                             "Day(s)",
-                                            "Month(s)"
+                                            "Month(s)",
+                                            "Year(s)"
                                         ],
                                         "optionlist": [
                                             "",
-                                            "years",
                                             "days",
-                                            "month"
+                                            "month",
+                                            "years"
                                         ],
                                         "selection": "${fields.objectProductionDate.dateEarliestSingleQualifierUnit}"
                                     },
@@ -2100,15 +2100,15 @@
                                     "dateLatestQualifierUnit": {
                                         "optionnames": [
                                             "Please select a value",
-                                            "Year(s)",
                                             "Day(s)",
-                                            "Month(s)"
+                                            "Month(s)",
+                                            "Year(s)"
                                         ],
                                         "optionlist": [
                                             "",
-                                            "years",
                                             "days",
-                                            "month"
+                                            "month",
+                                            "years"
                                         ],
                                         "selection": "${fields.objectProductionDate.dateLatestQualifierUnit}"
                                     },
@@ -2230,19 +2230,19 @@
                                             ".csc-object-identification-object-language": {
                                                 "optionnames": [
                                                     "Please select a value",
-                                                    "Middle English",
                                                     "Latin",
+                                                    "Middle English",
                                                     "Old English",
-                                                    "Swahili",
                                                     "Ancient Greek",
-                                                    "Japanese",
-                                                    "Hebrew",
                                                     "Korean",
-                                                    "Russian",
+                                                    "Swahili",
+                                                    "Japanese",
                                                     "Chinese",
+                                                    "Hebrew",
+                                                    "German",
+                                                    "Russian",
                                                     "Arabic",
                                                     "Portuguese",
-                                                    "German",
                                                     "Italian",
                                                     "Spanish",
                                                     "French",
@@ -2250,19 +2250,19 @@
                                                 ],
                                                 "optionlist": [
                                                     "",
-                                                    "middleenglish",
                                                     "latin",
+                                                    "middleenglish",
                                                     "oldenglish",
-                                                    "swahili",
                                                     "ancientgreek",
-                                                    "japanese",
-                                                    "hebrew",
                                                     "korean",
-                                                    "russian",
+                                                    "swahili",
+                                                    "japanese",
                                                     "chinese",
+                                                    "hebrew",
+                                                    "german",
+                                                    "russian",
                                                     "arabic",
                                                     "portuguese",
-                                                    "german",
                                                     "italian",
                                                     "spn",
                                                     "french",
@@ -2350,8 +2350,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../tenant/html/cataloging/autocomplete/inscriptionDescriptionInscriber",
-                        "vocabUrl": "../../tenant/html/cataloging/source-vocab/inscriptionDescriptionInscriber"
+                        "queryUrl": "../../../tenant/core/cataloging/autocomplete/inscriptionDescriptionInscriber",
+                        "vocabUrl": "../../../tenant/core/cataloging/source-vocab/inscriptionDescriptionInscriber"
                     }
                 }
             ],
@@ -2490,8 +2490,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../tenant/html/cataloging/autocomplete/assocOrganization",
-                                                            "vocabUrl": "../../tenant/html/cataloging/source-vocab/assocOrganization"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/assocOrganization",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/assocOrganization"
                                                         }
                                                     }
                                                 ],
@@ -2562,8 +2562,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../tenant/html/cataloging/autocomplete/fieldCollector",
-                                                            "vocabUrl": "../../tenant/html/cataloging/source-vocab/fieldCollector"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/fieldCollector",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/fieldCollector"
                                                         }
                                                     }
                                                 ],
@@ -2678,8 +2678,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../tenant/html/cataloging/autocomplete/assocEventOrganization",
-                                                            "vocabUrl": "../../tenant/html/cataloging/source-vocab/assocEventOrganization"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/assocEventOrganization",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/assocEventOrganization"
                                                         }
                                                     }
                                                 ],
@@ -2720,8 +2720,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../tenant/html/cataloging/autocomplete/contentOrganization",
-                                                            "vocabUrl": "../../tenant/html/cataloging/source-vocab/contentOrganization"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/contentOrganization",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/contentOrganization"
                                                         }
                                                     }
                                                 ],
@@ -2851,19 +2851,19 @@
                                             ".csc-object-description-content-language": {
                                                 "optionnames": [
                                                     "Please select a value",
-                                                    "Middle English",
                                                     "Latin",
+                                                    "Middle English",
                                                     "Old English",
-                                                    "Swahili",
                                                     "Ancient Greek",
-                                                    "Japanese",
-                                                    "Hebrew",
                                                     "Korean",
-                                                    "Russian",
+                                                    "Swahili",
+                                                    "Japanese",
                                                     "Chinese",
+                                                    "Hebrew",
+                                                    "German",
+                                                    "Russian",
                                                     "Arabic",
                                                     "Portuguese",
-                                                    "German",
                                                     "Italian",
                                                     "Spanish",
                                                     "French",
@@ -2871,19 +2871,19 @@
                                                 ],
                                                 "optionlist": [
                                                     "",
-                                                    "middleenglish",
                                                     "latin",
+                                                    "middleenglish",
                                                     "oldenglish",
-                                                    "swahili",
                                                     "ancientgreek",
-                                                    "japanese",
-                                                    "hebrew",
                                                     "korean",
-                                                    "russian",
+                                                    "swahili",
+                                                    "japanese",
                                                     "chinese",
+                                                    "hebrew",
+                                                    "german",
+                                                    "russian",
                                                     "arabic",
                                                     "portuguese",
-                                                    "german",
                                                     "italian",
                                                     "spn",
                                                     "french",
@@ -3021,22 +3021,22 @@
             "optionnames": [
                 "Please select a value",
                 "Swiss Franc",
-                "Pound Sterling",
                 "Swedish Krona",
                 "Danish Krone",
-                "Canadian Dollar",
+                "Pound Sterling",
+                "Euro",
                 "US Dollar",
-                "Euro"
+                "Canadian Dollar"
             ],
             "optionlist": [
                 "",
                 "swissfranc",
-                "gbp",
                 "swedishkrona",
                 "danishkrone",
-                "canadiandollar",
+                "gbp",
+                "eur",
                 "usd",
-                "eur"
+                "canadiandollar"
             ],
             "selection": "${fields.ownershipExchangePriceCurrency}"
         },
@@ -3218,29 +3218,29 @@
                                                 "optionnames": [
                                                     "Please select a value",
                                                     "trapped",
+                                                    "purchased",
                                                     "shot",
                                                     "salvaged",
-                                                    "photographed",
-                                                    "purchased",
                                                     "netted",
+                                                    "photographed",
                                                     "metal detector",
-                                                    "exchanged",
                                                     "found dead",
                                                     "commissioned",
+                                                    "exchanged",
                                                     "borehole"
                                                 ],
                                                 "optionlist": [
                                                     "",
                                                     "trapped",
+                                                    "purchased",
                                                     "shot",
                                                     "salvaged",
-                                                    "photographed",
-                                                    "purchased",
                                                     "netted",
+                                                    "photographed",
                                                     "metaldetector",
-                                                    "exchanged",
                                                     "founddead",
                                                     "commissioned",
+                                                    "exchanged",
                                                     "borehole"
                                                 ],
                                                 "selection": "${{row}.fieldCollectionMethod}"
@@ -3353,8 +3353,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../tenant/html/cataloging/autocomplete/contentPerson",
-                                                            "vocabUrl": "../../tenant/html/cataloging/source-vocab/contentPerson"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/contentPerson",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/contentPerson"
                                                         }
                                                     }
                                                 ],

@@ -194,8 +194,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../chain/cataloging/autocomplete/fieldCollectionSource",
-                                                            "vocabUrl": "../../chain/cataloging/source-vocab/fieldCollectionSource"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/fieldCollectionSource",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/fieldCollectionSource"
                                                         }
                                                     }
                                                 ],
@@ -265,42 +265,42 @@
                                             ".csc-collection-object-titleTranslationLanguage": {
                                                 "optionnames": [
                                                     "Please select a value",
-                                                    "Middle English",
                                                     "Latin",
+                                                    "Middle English",
                                                     "Old English",
-                                                    "Swahili",
                                                     "Ancient Greek",
-                                                    "Japanese",
                                                     "Korean",
-                                                    "Hebrew",
+                                                    "Swahili",
+                                                    "Japanese",
                                                     "Chinese",
+                                                    "Hebrew",
                                                     "German",
-                                                    "Arabic",
                                                     "Russian",
-                                                    "Italian",
+                                                    "Arabic",
                                                     "Portuguese",
-                                                    "French",
+                                                    "Italian",
                                                     "Spanish",
+                                                    "French",
                                                     "English"
                                                 ],
                                                 "optionlist": [
                                                     "",
-                                                    "middleenglish",
                                                     "latin",
+                                                    "middleenglish",
                                                     "oldenglish",
-                                                    "swahili",
                                                     "ancientgreek",
-                                                    "japanese",
                                                     "korean",
-                                                    "hebrew",
+                                                    "swahili",
+                                                    "japanese",
                                                     "chinese",
+                                                    "hebrew",
                                                     "german",
-                                                    "arabic",
                                                     "russian",
-                                                    "italian",
+                                                    "arabic",
                                                     "portuguese",
-                                                    "french",
+                                                    "italian",
                                                     "spn",
+                                                    "french",
                                                     "eng"
                                                 ],
                                                 "selection": "${{row}.titleTranslationLanguage}"
@@ -331,42 +331,42 @@
                                             ".csc-object-identification-object-title-language": {
                                                 "optionnames": [
                                                     "Please select a value",
-                                                    "Middle English",
                                                     "Latin",
+                                                    "Middle English",
                                                     "Old English",
-                                                    "Swahili",
                                                     "Ancient Greek",
-                                                    "Japanese",
                                                     "Korean",
-                                                    "Hebrew",
+                                                    "Swahili",
+                                                    "Japanese",
                                                     "Chinese",
+                                                    "Hebrew",
                                                     "German",
-                                                    "Arabic",
                                                     "Russian",
-                                                    "Italian",
+                                                    "Arabic",
                                                     "Portuguese",
-                                                    "French",
+                                                    "Italian",
                                                     "Spanish",
+                                                    "French",
                                                     "English"
                                                 ],
                                                 "optionlist": [
                                                     "",
-                                                    "middleenglish",
                                                     "latin",
+                                                    "middleenglish",
                                                     "oldenglish",
-                                                    "swahili",
                                                     "ancientgreek",
-                                                    "japanese",
                                                     "korean",
-                                                    "hebrew",
+                                                    "swahili",
+                                                    "japanese",
                                                     "chinese",
+                                                    "hebrew",
                                                     "german",
-                                                    "arabic",
                                                     "russian",
-                                                    "italian",
+                                                    "arabic",
                                                     "portuguese",
-                                                    "french",
+                                                    "italian",
                                                     "spn",
+                                                    "french",
                                                     "eng"
                                                 ],
                                                 "selection": "${{row}.titleLanguage}"
@@ -416,8 +416,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../chain/cataloging/autocomplete/owner",
-                                                            "vocabUrl": "../../chain/cataloging/source-vocab/owner"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/owner",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/owner"
                                                         }
                                                     }
                                                 ],
@@ -828,8 +828,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../chain/cataloging/autocomplete/objectProductionOrganization",
-                                                            "vocabUrl": "../../chain/cataloging/source-vocab/objectProductionOrganization"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/objectProductionOrganization",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/objectProductionOrganization"
                                                         }
                                                     }
                                                 ],
@@ -892,42 +892,42 @@
         ".csc-object-description-inscription-content-language": {
             "optionnames": [
                 "Please select a value",
-                "Middle English",
                 "Latin",
+                "Middle English",
                 "Old English",
-                "Swahili",
                 "Ancient Greek",
-                "Japanese",
                 "Korean",
-                "Hebrew",
+                "Swahili",
+                "Japanese",
                 "Chinese",
+                "Hebrew",
                 "German",
-                "Arabic",
                 "Russian",
-                "Italian",
+                "Arabic",
                 "Portuguese",
-                "French",
+                "Italian",
                 "Spanish",
+                "French",
                 "English"
             ],
             "optionlist": [
                 "",
-                "middleenglish",
                 "latin",
+                "middleenglish",
                 "oldenglish",
-                "swahili",
                 "ancientgreek",
-                "japanese",
                 "korean",
-                "hebrew",
+                "swahili",
+                "japanese",
                 "chinese",
+                "hebrew",
                 "german",
-                "arabic",
                 "russian",
-                "italian",
+                "arabic",
                 "portuguese",
-                "french",
+                "italian",
                 "spn",
+                "french",
                 "eng"
             ],
             "selection": "${fields.inscriptionContentLanguage}"
@@ -1060,8 +1060,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../chain/cataloging/autocomplete/assocPerson",
-                                                            "vocabUrl": "../../chain/cataloging/source-vocab/assocPerson"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/assocPerson",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/assocPerson"
                                                         }
                                                     }
                                                 ],
@@ -1303,8 +1303,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../chain/cataloging/autocomplete/objectProductionPerson",
-                                                            "vocabUrl": "../../chain/cataloging/source-vocab/objectProductionPerson"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/objectProductionPerson",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/objectProductionPerson"
                                                         }
                                                     }
                                                 ],
@@ -1748,8 +1748,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../chain/cataloging/autocomplete/inscriptionContentInscriber",
-                        "vocabUrl": "../../chain/cataloging/source-vocab/inscriptionContentInscriber"
+                        "queryUrl": "../../../tenant/core/cataloging/autocomplete/inscriptionContentInscriber",
+                        "vocabUrl": "../../../tenant/core/cataloging/source-vocab/inscriptionContentInscriber"
                     }
                 }
             ],
@@ -1812,8 +1812,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../chain/cataloging/autocomplete/assocEventPerson",
-                                                            "vocabUrl": "../../chain/cataloging/source-vocab/assocEventPerson"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/assocEventPerson",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/assocEventPerson"
                                                         }
                                                     }
                                                 ],
@@ -1997,13 +1997,13 @@
                                     "dateEarliestSingleEra": {
                                         "optionnames": [
                                             "Please select a value",
-                                            "BCE",
-                                            "CE"
+                                            "CE",
+                                            "BCE"
                                         ],
                                         "optionlist": [
                                             "",
-                                            "bce",
-                                            "ce"
+                                            "ce",
+                                            "bce"
                                         ],
                                         "selection": "${fields.objectProductionDate.dateEarliestSingleEra}"
                                     },
@@ -2012,33 +2012,33 @@
                                         "optionnames": [
                                             "Please select a value",
                                             "Possibly",
-                                            "Probably",
-                                            "Before",
                                             "Circa",
+                                            "Probably",
                                             "After",
-                                            "Approximate"
+                                            "Approximate",
+                                            "Before"
                                         ],
                                         "optionlist": [
                                             "",
                                             "possibly",
-                                            "probably",
-                                            "before",
                                             "circa",
+                                            "probably",
                                             "after",
-                                            "approximate"
+                                            "approximate",
+                                            "before"
                                         ],
                                         "selection": "${fields.objectProductionDate.dateEarliestSingleCertainty}"
                                     },
                                     "dateLatestEra": {
                                         "optionnames": [
                                             "Please select a value",
-                                            "BCE",
-                                            "CE"
+                                            "CE",
+                                            "BCE"
                                         ],
                                         "optionlist": [
                                             "",
-                                            "bce",
-                                            "ce"
+                                            "ce",
+                                            "bce"
                                         ],
                                         "selection": "${fields.objectProductionDate.dateLatestEra}"
                                     },
@@ -2047,20 +2047,20 @@
                                         "optionnames": [
                                             "Please select a value",
                                             "Possibly",
-                                            "Probably",
-                                            "Before",
                                             "Circa",
+                                            "Probably",
                                             "After",
-                                            "Approximate"
+                                            "Approximate",
+                                            "Before"
                                         ],
                                         "optionlist": [
                                             "",
                                             "possibly",
-                                            "probably",
-                                            "before",
                                             "circa",
+                                            "probably",
                                             "after",
-                                            "approximate"
+                                            "approximate",
+                                            "before"
                                         ],
                                         "selection": "${fields.objectProductionDate.dateLatestCertainty}"
                                     },
@@ -2083,14 +2083,14 @@
                                         "optionnames": [
                                             "Please select a value",
                                             "Day(s)",
-                                            "Year(s)",
-                                            "Month(s)"
+                                            "Month(s)",
+                                            "Year(s)"
                                         ],
                                         "optionlist": [
                                             "",
                                             "days",
-                                            "years",
-                                            "month"
+                                            "month",
+                                            "years"
                                         ],
                                         "selection": "${fields.objectProductionDate.dateEarliestSingleQualifierUnit}"
                                     },
@@ -2101,14 +2101,14 @@
                                         "optionnames": [
                                             "Please select a value",
                                             "Day(s)",
-                                            "Year(s)",
-                                            "Month(s)"
+                                            "Month(s)",
+                                            "Year(s)"
                                         ],
                                         "optionlist": [
                                             "",
                                             "days",
-                                            "years",
-                                            "month"
+                                            "month",
+                                            "years"
                                         ],
                                         "selection": "${fields.objectProductionDate.dateLatestQualifierUnit}"
                                     },
@@ -2230,42 +2230,42 @@
                                             ".csc-object-identification-object-language": {
                                                 "optionnames": [
                                                     "Please select a value",
-                                                    "Middle English",
                                                     "Latin",
+                                                    "Middle English",
                                                     "Old English",
-                                                    "Swahili",
                                                     "Ancient Greek",
-                                                    "Japanese",
                                                     "Korean",
-                                                    "Hebrew",
+                                                    "Swahili",
+                                                    "Japanese",
                                                     "Chinese",
+                                                    "Hebrew",
                                                     "German",
-                                                    "Arabic",
                                                     "Russian",
-                                                    "Italian",
+                                                    "Arabic",
                                                     "Portuguese",
-                                                    "French",
+                                                    "Italian",
                                                     "Spanish",
+                                                    "French",
                                                     "English"
                                                 ],
                                                 "optionlist": [
                                                     "",
-                                                    "middleenglish",
                                                     "latin",
+                                                    "middleenglish",
                                                     "oldenglish",
-                                                    "swahili",
                                                     "ancientgreek",
-                                                    "japanese",
                                                     "korean",
-                                                    "hebrew",
+                                                    "swahili",
+                                                    "japanese",
                                                     "chinese",
+                                                    "hebrew",
                                                     "german",
-                                                    "arabic",
                                                     "russian",
-                                                    "italian",
+                                                    "arabic",
                                                     "portuguese",
-                                                    "french",
+                                                    "italian",
                                                     "spn",
+                                                    "french",
                                                     "eng"
                                                 ],
                                                 "selection": "${{row}.objectNameLanguage}"
@@ -2350,8 +2350,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../chain/cataloging/autocomplete/inscriptionDescriptionInscriber",
-                        "vocabUrl": "../../chain/cataloging/source-vocab/inscriptionDescriptionInscriber"
+                        "queryUrl": "../../../tenant/core/cataloging/autocomplete/inscriptionDescriptionInscriber",
+                        "vocabUrl": "../../../tenant/core/cataloging/source-vocab/inscriptionDescriptionInscriber"
                     }
                 }
             ],
@@ -2490,8 +2490,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../chain/cataloging/autocomplete/assocOrganization",
-                                                            "vocabUrl": "../../chain/cataloging/source-vocab/assocOrganization"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/assocOrganization",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/assocOrganization"
                                                         }
                                                     }
                                                 ],
@@ -2562,8 +2562,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../chain/cataloging/autocomplete/fieldCollector",
-                                                            "vocabUrl": "../../chain/cataloging/source-vocab/fieldCollector"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/fieldCollector",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/fieldCollector"
                                                         }
                                                     }
                                                 ],
@@ -2678,8 +2678,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../chain/cataloging/autocomplete/assocEventOrganization",
-                                                            "vocabUrl": "../../chain/cataloging/source-vocab/assocEventOrganization"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/assocEventOrganization",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/assocEventOrganization"
                                                         }
                                                     }
                                                 ],
@@ -2720,8 +2720,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../chain/cataloging/autocomplete/contentOrganization",
-                                                            "vocabUrl": "../../chain/cataloging/source-vocab/contentOrganization"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/contentOrganization",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/contentOrganization"
                                                         }
                                                     }
                                                 ],
@@ -2851,42 +2851,42 @@
                                             ".csc-object-description-content-language": {
                                                 "optionnames": [
                                                     "Please select a value",
-                                                    "Middle English",
                                                     "Latin",
+                                                    "Middle English",
                                                     "Old English",
-                                                    "Swahili",
                                                     "Ancient Greek",
-                                                    "Japanese",
                                                     "Korean",
-                                                    "Hebrew",
+                                                    "Swahili",
+                                                    "Japanese",
                                                     "Chinese",
+                                                    "Hebrew",
                                                     "German",
-                                                    "Arabic",
                                                     "Russian",
-                                                    "Italian",
+                                                    "Arabic",
                                                     "Portuguese",
-                                                    "French",
+                                                    "Italian",
                                                     "Spanish",
+                                                    "French",
                                                     "English"
                                                 ],
                                                 "optionlist": [
                                                     "",
-                                                    "middleenglish",
                                                     "latin",
+                                                    "middleenglish",
                                                     "oldenglish",
-                                                    "swahili",
                                                     "ancientgreek",
-                                                    "japanese",
                                                     "korean",
-                                                    "hebrew",
+                                                    "swahili",
+                                                    "japanese",
                                                     "chinese",
+                                                    "hebrew",
                                                     "german",
-                                                    "arabic",
                                                     "russian",
-                                                    "italian",
+                                                    "arabic",
                                                     "portuguese",
-                                                    "french",
+                                                    "italian",
                                                     "spn",
+                                                    "french",
                                                     "eng"
                                                 ],
                                                 "selection": "${{row}.contentLanguage}"
@@ -3025,8 +3025,8 @@
                 "Danish Krone",
                 "Pound Sterling",
                 "Euro",
-                "Canadian Dollar",
-                "US Dollar"
+                "US Dollar",
+                "Canadian Dollar"
             ],
             "optionlist": [
                 "",
@@ -3035,8 +3035,8 @@
                 "danishkrone",
                 "gbp",
                 "eur",
-                "canadiandollar",
-                "usd"
+                "usd",
+                "canadiandollar"
             ],
             "selection": "${fields.ownershipExchangePriceCurrency}"
         },
@@ -3217,30 +3217,30 @@
                                             ".csc-collection-object-fieldCollectionMethod": {
                                                 "optionnames": [
                                                     "Please select a value",
-                                                    "salvaged",
-                                                    "shot",
                                                     "trapped",
-                                                    "photographed",
                                                     "purchased",
+                                                    "shot",
+                                                    "salvaged",
                                                     "netted",
+                                                    "photographed",
                                                     "metal detector",
-                                                    "exchanged",
                                                     "found dead",
                                                     "commissioned",
+                                                    "exchanged",
                                                     "borehole"
                                                 ],
                                                 "optionlist": [
                                                     "",
-                                                    "salvaged",
-                                                    "shot",
                                                     "trapped",
-                                                    "photographed",
                                                     "purchased",
+                                                    "shot",
+                                                    "salvaged",
                                                     "netted",
+                                                    "photographed",
                                                     "metaldetector",
-                                                    "exchanged",
                                                     "founddead",
                                                     "commissioned",
+                                                    "exchanged",
                                                     "borehole"
                                                 ],
                                                 "selection": "${{row}.fieldCollectionMethod}"
@@ -3353,8 +3353,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../chain/cataloging/autocomplete/contentPerson",
-                                                            "vocabUrl": "../../chain/cataloging/source-vocab/contentPerson"
+                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/contentPerson",
+                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/contentPerson"
                                                         }
                                                     }
                                                 ],
