@@ -30,6 +30,7 @@ cspace = cspace || {};
             url: cspace.util.buildUrl(operation, options.baseUrl, options.recordType, csid, options.fileExtension),
             type: types[operation],
             dataType: options.dataType,
+            contentType: "application/json; charset=utf-8",
             success: function (responseData, textStatus) {
                 if (responseData && responseData.isError) {
                     events.onError.fire(operation, "Application error", responseData);
