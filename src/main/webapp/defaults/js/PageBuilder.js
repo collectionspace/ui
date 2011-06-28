@@ -312,7 +312,8 @@ cspace = cspace || {};
             "namespaces"
         ],
         amalgamateClasses: [
-            "fastTemplate"
+            "fastTemplate",
+            "fastResource"
         ],
         model: {},
         mergePolicy: {
