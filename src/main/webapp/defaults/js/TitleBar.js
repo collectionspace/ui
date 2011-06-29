@@ -84,7 +84,8 @@ cspace = cspace || {};
     cspace.titleBar.produceTree = function (that) {
         return {
             recordType: {
-                messagekey: "${recordType}"
+                messagekey: "${recordType}",
+                decorators: {"addClass": "{styles}.recordType"}
             },
             title: {
                 value: that.buildTitle()
@@ -97,6 +98,9 @@ cspace = cspace || {};
         selectors: {
             title: ".csc-titleBar-value",
             recordType: ".csc-titleBar-recordType"
+        },
+        styles: {
+            recordType: "cs-titleBar-recordType"
         },
         invokers: {
             bindEvents: {

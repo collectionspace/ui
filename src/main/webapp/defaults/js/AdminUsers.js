@@ -15,8 +15,6 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     fluid.log("AdminUsers.js loaded");
-    
-    fluid.registerNamespace("cspace.adminUsers");
 
     var validate = function (messageBar, domBinder, userDetailsApplier, passwordValidator, strings) {
         // In the default configuration, the email address used as the userid.
@@ -39,7 +37,6 @@ cspace = cspace || {};
         if (password.is(":visible") && !passwordValidator.validateLength(password.val())) {
             return false;
         }
-
         return true;
     };
 
@@ -62,7 +59,7 @@ cspace = cspace || {};
             return validate(that.options.messageBar, that.dom, that.userListEditor.options.detailsApplier, that.passwordValidator, that.options.strings);
         });
         that.userListEditor.events.pageReady.addListener(function () {
-            that.events.afterRender.fire(that);
+            that.events.afterTreeRender.fire(that);
         });
         
         that.userListEditor.events.afterAddNewListRow.addListener(function () {
@@ -74,17 +71,10 @@ cspace = cspace || {};
         });
     };
 
-    cspace.adminUsers = function (container, options) {
-        var that = fluid.initView("cspace.adminUsers", container, options);
-        fluid.initDependents(that);
-        bindEventHandlers(that);
-        that.events.afterSetup.fire(that);
-        return that;
-    };
-
     fluid.defaults("cspace.adminUsers", {
-        gradeNames: ["fluid.viewComponent"],
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
         recordType: "users",
+        finalInitFunction: "cspace.adminUsers.finalInit",
         components: {
             passwordValidator: {
                 type: "cspace.passwordValidator"
@@ -94,6 +84,7 @@ cspace = cspace || {};
             },
             globalNavigator: "{globalNavigator}"
         },
+        produceTree: "cspace.adminUsers.produceTree",
         selectors: {
             searchField: ".csc-user-searchField",
             deleteButton: ".csc-delete",
@@ -103,19 +94,61 @@ cspace = cspace || {};
             email: ".csc-user-email",
             userName: ".csc-user-userName",
             password: ".csc-user-password",
-            passwordConfirm: ".csc-user-passwordConfirm"
+            passwordConfirm: ".csc-user-passwordConfirm",
+            userListHeader: ".csc-users-listHeader",
+            addUser: ".csc-users-addUser",
+            detailsHeader: ".csc-users-detailsHeader",
+            detailsNone: ".csc-users-detailsNone",
+            detaulsNoneSelected: ".csc-users-detailsNoneSelected"
         },
+        renderOnInit: true,
+        selectorsToIgnore: ["searchField", "deleteButton", "searchButton", "unSearchButton", "userId", "email", "userName", "password", "passwordConfirm"],
         events: {
-            afterRender: null,
+            afterTreeRender: null,
             afterSetup: null
         },
         strings: {
             searchError: "Error retrieving search results: ",
-            passwordsDoNotMatch: "Passwords don't match."
+            passwordsDoNotMatch: "Passwords don't match.",
+            userListHeader: "Users",
+            addUser: "+ User",
+            detailsHeader: "User Details",
+            detailsNone: "Please select a user from the list, or create a new user.",
+            detaulsNoneSelected: "No user selected."
         },
         login: "{userLogin}",
         messageBar: "{messageBar}",
         queryURL: "../../../chain/users/search?query="
     });
+    
+    cspace.adminUsers.produceTree = function (that) {
+        return {
+            userListHeader: {
+                messagekey: "userListHeader"
+            },
+            detailsHeader: {
+                messagekey: "detailsHeader"
+            },
+            detailsNone: {
+                messagekey: "detailsNone"
+            },
+            detaulsNoneSelected: {
+                messagekey: "detaulsNoneSelected"
+            },
+            addUser: {
+                decorators: {
+                    type: "attrs",
+                    attributes: {
+                        value: that.options.strings.addUser
+                    }
+                }
+            }
+        };
+    };
+    
+    cspace.adminUsers.finalInit = function (that) {
+        bindEventHandlers(that);
+        that.events.afterSetup.fire(that);
+    };
 
 })(jQuery, fluid);

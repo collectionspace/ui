@@ -1,16 +1,12 @@
 {
     "pageBuilder": {
         "options": {
-            "pageType": "users",
-            "selectors": {
-                "users": ".csc-users-userAdmin"
-            },
             "components": {
-                "users": {
-                    "type": "cspace.adminUsers",
-                    "options": {
-                        "uispec": "{pageBuilder}.options.uispec"
-                    }
+                "tabs": {
+                    "type": "cspace.tabs"
+                },
+                "titleBar": {
+                    "type": "cspace.titleBar"
                 },
                 "header": {
                     "type": "cspace.header",
@@ -27,10 +23,8 @@
             "schema": [
                 "recordlist",
                 "recordtypes",
-                "namespaces",
-                "users" 
-            ],
-            "recordType": "users"
+                "namespaces"
+            ]
         }
     }
 }

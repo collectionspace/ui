@@ -95,7 +95,8 @@ cspace = cspace || {};
     cspace.reportProducer.preInit = function (that) {
         that.options.listeners = {
             reportStarted: function () {
-                that.reportStatus.show();
+                var reportType = that.model.reportTypeNames[$.inArray(that.model.reportTypeSelection, that.model.reportTypeList)];
+                that.reportStatus.show(reportType);
             },
             reportFinished: function () {
                 that.reportStatus.hide();
@@ -129,7 +130,7 @@ cspace = cspace || {};
             listeners: {
                 onClose: function (userAction) {
                     if (userAction === "act") {
-//                        events.reportStarted.fire();
+                        events.reportStarted.fire();
                         // TODO: Send a request with callback:
 //                        events.reportFinished.fire();
                     }
@@ -198,7 +199,7 @@ cspace = cspace || {};
             stop: "cs-reportStatus-stop"
         },
         strings: {
-            message: "Creating %report report...",
+            message: "Creating %reportType report...",
             stop: "Stop" 
         }
     });
@@ -209,6 +210,7 @@ cspace = cspace || {};
         return {
             message: {
                 messagekey: "message",
+                args: {reportType: "${reportType}"},
                 decorators: {"addClass": "{styles}.repormessagetType"}
             },
             stop: {
@@ -222,7 +224,8 @@ cspace = cspace || {};
         };
     };
     cspace.reportProducer.reportStatus.finalInit = function (that) {
-        that.show = function () {
+        that.show = function (reportType) {
+            that.applier.requestChange("reportType", reportType);
             that.refreshView();
             that.container.show();
         };

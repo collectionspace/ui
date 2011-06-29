@@ -14,71 +14,10 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     fluid.log("Tabs.js loaded");
-
-    var setupTabList = function (that) {
-        that.renderer.refreshView();
-        cspace.tabsList.stylefy(that);
-    };
-    
-    cspace.tabsList = function (container, options) {
-        var that = fluid.initRendererComponent("cspace.tabsList", container, options);
-        fluid.initDependents(that);
-        setupTabList(that);
-        return that;
-    };
-    
-    cspace.tabsList.stylefy = function (that) {
-        var styles = that.options.styles;
-        var tabLinks = that.locate("tabLink");
-        that.locate("tabList").addClass(styles.tabList);
-        tabLinks.filter(":not([href])").addClass(styles.inactive);
-        var primary = fluid.find(that.model.tabs, function (tab) {
-            if (tab["name"] === "primary") {
-                return tab;
-            }
-        });
-        var primaryHrefFilter = "[href='" + primary.href + "']";
-        tabLinks.filter(primaryHrefFilter).addClass(styles.primary).addClass(styles.current);
-    };
-    
-    cspace.tabsList.produceTree = function () {
-        return {
-            expander: {
-                repeatID: "tab:",
-                tree: {
-                    tabLink: {
-                        target: "${{tabInfo}.href}",
-                        linktext: {
-                            messagekey: "${{tabInfo}.name}"
-                        }
-                    }
-                },
-                type: "fluid.renderer.repeat",
-                pathAs: "tabInfo",
-                controlledBy: "tabs"
-            }
-        };
-    };
-    
-    cspace.tabsList.buildModel = function (options, records) {
-        var urlExpander = fluid.invoke("cspace.urlExpander");
-        var model = {
-            tabs: [{
-                "name": "primary",
-                href: "#primaryTab"
-            }]
-        };
-        fluid.each(records, function (record) {
-            model.tabs.push({
-                "name": record,
-                href: urlExpander(options.href)
-            });
-        });
-        return model;
-    };
     
     fluid.defaults("cspace.tabsList", {
-        gradeNames: "fluid.rendererComponent",
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        finalInitFunction: "cspace.tabsList.finalInit",
         mergePolicy: {
             model: "replace"
         },
@@ -106,7 +45,23 @@ cspace = cspace || {};
             tabLink: ".csc-tabs-tab-link"
         },
         selectorsToIgnore: ["tabList"],
-        produceTree: cspace.tabsList.produceTree,
+        protoTree: {
+            expander: {
+                repeatID: "tab:",
+                tree: {
+                    tabLink: {
+                        target: "${{tabInfo}.href}",
+                        linktext: {
+                            messagekey: "${{tabInfo}.name}"
+                        }
+                    }
+                },
+                type: "fluid.renderer.repeat",
+                pathAs: "tabInfo",
+                controlledBy: "tabs"
+            }
+        },
+        renderOnInit: true,
         styles: {
             tabList: "menu-record", // TODO: This needs to be moved to "cs-tabs-tabList" style,
             tab: "cs-tabs-tab",
@@ -126,6 +81,92 @@ cspace = cspace || {};
         }
     });
     
+    cspace.tabsList.finalInit = function (that) {
+        var styles = that.options.styles;
+        var tabLinks = that.locate("tabLink");
+        that.locate("tabList").addClass(styles.tabList);
+        tabLinks.filter(":not([href])").addClass(styles.inactive);
+        var primary = fluid.find(that.model.tabs, function (tab) {
+            if (tab["name"] === "primary") {
+                return tab;
+            }
+        });
+        if (!primary) {
+            primary = fluid.find(that.model.tabs, function (tab) {
+                return tab;
+            });
+        }
+        var primaryHrefFilter = "[href='" + primary.href + "']";
+        tabLinks.filter(primaryHrefFilter).addClass(styles.primary).addClass(styles.current);
+    };
+    
+    cspace.tabsList.buildModel = function (options, records) {
+        var urlExpander = fluid.invoke("cspace.urlExpander");
+        var model = {
+            tabs: [{
+                "name": "primary",
+                href: "#primaryTab"
+            }]
+        };
+        fluid.each(records, function (record) {
+            model.tabs.push({
+                "name": record,
+                href: urlExpander(options.href)
+            });
+        });
+        return model;
+    };
+    
+    cspace.tabsList.buildAdminModel = function (options, records) {
+        var urlExpander = fluid.invoke("cspace.urlExpander");
+        var model = {
+            tabs: []
+        };
+        fluid.each(records, function (record) {
+            model.tabs.push({
+                "name": record,
+                href: fluid.stringTemplate(urlExpander(options.href), {recordType: record})
+            });
+        });
+        return model;
+    };
+
+    fluid.defaults("cspace.tabs", {
+        gradeNames: ["fluid.viewComponent", "autoInit"],
+        postInitFunction: "cspace.tabs.postInit",
+        finalInitFunction: "cspace.tabs.finalInit",
+        components: {
+            tabsList: {
+                type: "cspace.tabsList"
+            }
+        },
+        invokers: {
+            tabify: {
+                funcName: "cspace.tabs.tabify",
+                args: "{tabs}"
+            },
+            setupTab: "cspace.tabs.setupTab",
+            tabsSuccess: "cspace.tabs.tabsSuccess",
+            tabsSelect: "cspace.tabs.tabsSelect",
+            tabsSelectWrapper: "cspace.tabs.tabsSelectWrapper"
+        },
+        configURLTemplate: "%webapp/config/%record-tab.json",
+        selectors: {
+            tabs: ".csc-tabs-container",
+            tabsList: ".csc-tabs-tabsList-container",
+            tab: ".csc-relatedRecordsTab",
+            prev: ".stPrev",
+            next: ".stNext"
+        },
+        mergePolicy: {
+            model: "preserve",
+            applier: "nomerge",
+            globalSetup: "nomerge"
+        },
+        globalNavigator: "{globalNavigator}",
+        globalSetup: "{globalSetup}"
+    });
+    
     var findStrategy = function (index) {
         var i = 0;
         return function (value, key) {
@@ -138,14 +179,19 @@ cspace = cspace || {};
         };
     };
     
-    cspace.tabs = function (container, options) {
-        var that = fluid.initView("cspace.tabs", container, options);
-        
-        fluid.staticEnvironment.cspaceRecordType = fluid.typeTag("cspace." + that.options.primaryRecordType);
-        
-        fluid.initDependents(that);
-        cspace.tabs.tabify(that);
-        return that;
+    cspace.tabs.postInit = function (that) {
+        if (that.options.primaryRecordType) {
+            fluid.staticEnvironment.cspaceRecordType = fluid.typeTag("cspace." + that.options.primaryRecordType);
+        }
+    };
+    
+    cspace.tabs.finalInit = function (that) {
+        that.tabify();
+    };
+    
+    cspace.tabs.tabsSuccess = function (data, textStatus, XMLHttpRequest, tabsList, tabContainer, setupTab) {
+        var tabModel = fluid.find(tabsList.model.tabs, findStrategy(tabContainer.tabs('option', 'selected')));
+        setupTab(tabModel["name"]);
     };
     
     cspace.tabs.setupTab = function (tabName, that) {
@@ -168,78 +214,57 @@ cspace = cspace || {};
         });
     };
     
+    cspace.tabs.setupAdminTab = function (tabName, that) {
+        var options = that.options;
+        var urlExpander = fluid.invoke("cspace.urlExpander");
+        options.globalSetup.init(fluid.model.composeSegments("cspace", tabName), {
+            configURL: fluid.stringTemplate(urlExpander(options.configURLTemplate), {record: tabName})
+        });
+    };
+    
+    cspace.tabs.tabsSelect = function (ui, tabsList, selectors, tabContainer) {
+        var recordType = fluid.find(tabsList.model.tabs, findStrategy(ui.index))["name"]
+        $(ui.panel).addClass(selectors.tab.substr(1) + "-" + recordType);
+        tabContainer.tabs("select", ui.index);
+    };
+    
+    cspace.tabs.tabsSelectWrapper = function (event, ui, globalNavigator, tabsList, styles, tabsSelect) {
+        // noPrevent environment is set when user selects an option on the dialog
+        // at the point we don't want the dialog to show again.
+        if (!fluid.resolveEnvironment("{noPrevent}", {fetcher: fluid.makeEnvironmentFetcher()})) {
+            globalNavigator.events.onPerformNavigation.fire(function () {
+                tabsList.locate("tabLink").removeClass(styles.current);
+                $(ui.tab).addClass(styles.current);
+                // set the noPrevent environment and trigger the select on the tab.
+                fluid.withEnvironment({
+                    noPrevent: true
+                }, function () {
+                    tabsSelect(ui);
+                });
+            });
+            return false;
+        }
+    };
+    
     cspace.tabs.tabify = function (that) {
-        var tabsList = that.tabsList;
-        var styles = tabsList.options.styles;
-        var tabContainer = that.locate("tabs");
-        tabContainer.tabs({
+        that.locate("tabs").tabs({
             tabTemplate: "<li><a href='#{href}'>#{label}</a></li>",
             spinner: null,
             cache: true,
             ajaxOptions: {
                 // This is required as of jQuery UI v1.8.12
                 dataType: "html",
-                success: function (data, textStatus, XMLHttpRequest) {
-                    var tabModel = fluid.find(tabsList.model.tabs, findStrategy(tabContainer.tabs('option', 'selected')));
-                    that.setupTab(tabModel["name"]);
-                }
+                success: that.tabsSuccess
             },
-            select: function (event, ui) {
-                // noPrevent environment is set when user selects an option on the dialog
-                // at the point we don't want the dialog to show again.
-                if (!fluid.resolveEnvironment("{noPrevent}", {fetcher: fluid.makeEnvironmentFetcher()})) {
-                    that.options.globalNavigator.events.onPerformNavigation.fire(function () {
-                        tabsList.locate("tabLink").removeClass(styles.current);
-                        $(ui.tab).addClass(styles.current);
-                        // set the noPrevent environment and trigger the select on the tab.
-                        fluid.withEnvironment({
-                            noPrevent: true
-                        }, function () {
-                            var recordType = fluid.find(tabsList.model.tabs, findStrategy(ui.index))["name"]
-                            $(ui.panel).addClass(that.options.selectors.tab.substr(1) + "-" + recordType);
-                            tabContainer.tabs("select", ui.index);
-                        });
-                    });
-                    return false;
-                }
-            }
+            select: that.tabsSelectWrapper
         }).scrollabletab();
+        
         var nav = that.locate("next").add(that.locate("prev"));
         fluid.activatable(nav, function (event) {
             $(event.target).click();
         });
         nav.fluid("tabbable");
     };
-
-    fluid.defaults("cspace.tabs", {
-        gradeNames: ["fluid.viewComponent"],
-        components: {
-            tabsList: {
-                type: "cspace.tabsList"
-            }
-        },
-        invokers: {
-            setupTab: {
-                funcName: "cspace.tabs.setupTab",
-                args: ["@0", "{tabs}"]
-            }
-        },
-        configURLTemplate: "%webapp/config/%record-tab.json",
-        selectors: {
-            tabs: ".csc-tabs-container",
-            tabsList: ".csc-tabs-tabsList-container",
-            tab: ".csc-relatedRecordsTab",
-            prev: ".stPrev",
-            next: ".stNext"
-        },
-        mergePolicy: {
-            model: "preserve",
-            applier: "nomerge",
-            globalSetup: "nomerge"
-        },
-        globalNavigator: "{globalNavigator}",
-        globalSetup: "{globalSetup}"
-    });
     
     fluid.fetchResources.primeCacheFromResources("cspace.tabsList");
     

@@ -1,0 +1,29 @@
+{
+    "pageBuilder": {
+        "options": {
+            "pageType": "users",
+            "selectors": {
+                "users": ".csc-users-userAdmin"
+            },
+            "components": {
+                "users": {
+                    "type": "cspace.adminUsers",
+                    "options": {
+                        "uispec": "{pageBuilder}.options.uispec"
+                    }
+                }
+            }
+        }
+    },
+    "pageBuilderIO": {
+        "options": {
+            "schema": [
+                "recordlist",
+                "recordtypes",
+                "namespaces",
+                "users" 
+            ],
+            "recordType": "users"
+        }
+    }
+}

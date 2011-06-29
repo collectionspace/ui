@@ -28,6 +28,14 @@
                     "media"
                 ],
                 "type": "array"
+            },
+            "administration": {
+                "default": [
+                    "users",
+                    "role",
+                    "termlist"
+                ],
+                "type": "array"
             }
         }
     }

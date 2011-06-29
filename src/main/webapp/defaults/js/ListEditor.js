@@ -238,6 +238,11 @@ cspace = cspace || {};
     });
     cspace.listEditor.testUsersListSearchDataSource = cspace.URLDataSource;
     
+    fluid.defaults("cspace.listEditor.testTermlistListDataSource", {
+        url: "%test/data/termlist/records.json"
+    });
+    cspace.listEditor.testTermlistListDataSource = cspace.URLDataSource;
+    
     fluid.defaults("cspace.listEditor.testRoleListDataSource", {
         url: "%test/data/role/records.json"
     });
@@ -245,7 +250,7 @@ cspace = cspace || {};
     
     fluid.defaults("cspace.listEditor.testTabsListDataSource", {
         url: "%test/data/%recordType/%csid.json",
-        responseParser: cspace.listEditor.responseParseTabs
+        responseParser: "cspace.listEditor.responseParseTabs"
     });
     cspace.listEditor.testTabsListDataSource = cspace.URLDataSource;
     
@@ -258,31 +263,5 @@ cspace = cspace || {};
             items: data.results
         };
     };
-    
-    // TODO: This demands block is here because currently we need 
-    // cspace.listEditor.responseParseTabs to be initialized before.
-    fluid.demands("cspace.listEditor.listDataSource", ["cspace.listEditor", "cspace.users"], {
-        funcName: "cspace.URLDataSource",
-        args: {
-            url: "{listEditor}.options.urls.listUrl",
-            targetTypeName: "cspace.listEditor.listDataSource",
-            responseParser: cspace.listEditor.responseParseUsers,
-            termMap: {
-                query: "%query"
-            }
-        }
-    });
-    fluid.demands("cspace.listEditor.listDataSource", ["cspace.listEditor", "cspace.tab"], {
-        funcName: "cspace.URLDataSource",
-        args: {
-            url: "{listEditor}.options.urls.listUrl",
-            targetTypeName: "cspace.listEditor.listDataSource",
-            responseParser: cspace.listEditor.responseParseTabs,
-            termMap: {
-                csid: "%csid",
-                recordType: "%recordType"
-            }
-        }
-    });
     
 })(jQuery, fluid);

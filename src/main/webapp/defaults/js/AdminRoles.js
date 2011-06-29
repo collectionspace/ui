@@ -18,32 +18,71 @@ cspace = cspace || {};
     
     var bindEventHandlers = function (that) {
         that.roleListEditor.events.pageReady.addListener(function () {
-            that.events.afterRender.fire();
+            that.events.afterTreeRender.fire();
         });
     };
 
-    cspace.adminRoles = function (container, options) {
-        var that = fluid.initView("cspace.adminRoles", container, options);
-        fluid.initDependents(that);
-        bindEventHandlers(that);
-        return that;
-    };
-    
-    cspace.adminRoles.assertDisplay = function (displayString) {
-        return displayString !== "none";
-    };
-
     fluid.defaults("cspace.adminRoles", {
-        gradeNames: ["fluid.viewComponent"],
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        finalInitFunction: "cspace.adminRoles.finalInit",
+        produceTree: "cspace.adminRoles.produceTree",
+        renderOnInit: true,
         recordType: "role",
         components: {
             roleListEditor: {
                 type: "cspace.listEditor"
             }
         },
+        selectors: {
+            roleListHeader: ".csc-role-listHeader",
+            addRole: ".csc-role-addRole",
+            detailsHeader: ".csc-role-detailsHeader",
+            detailsNone: ".csc-role-detailsNone",
+            detaulsNoneSelected: ".csc-role-detailsNoneSelected"
+        },
+        strings: {
+            roleListHeader: "Roles",
+            addRole: "+ Role",
+            detailsHeader: "Edit Role",
+            detailsNone: "Please select a role from the list, or create a new role.",
+            detaulsNoneSelected: "No role selected."
+        },
         events: {
-            afterRender: null
+            afterTreeRender: null
         }
     });
+    
+    cspace.adminRoles.produceTree = function (that) {
+        return {
+            roleListHeader: {
+                messagekey: "roleListHeader"
+            },
+            detailsHeader: {
+                messagekey: "detailsHeader"
+            },
+            detailsNone: {
+                messagekey: "detailsNone"
+            },
+            detaulsNoneSelected: {
+                messagekey: "detaulsNoneSelected"
+            },
+            addRole: {
+                decorators: {
+                    type: "attrs",
+                    attributes: {
+                        value: that.options.strings.addRole
+                    }
+                }
+            }
+        };
+    };
+    
+    cspace.adminRoles.finalInit = function (that) {
+        bindEventHandlers(that);
+    };
+    
+    cspace.adminRoles.assertDisplay = function (displayString) {
+        return displayString !== "none";
+    };
 
 })(jQuery, fluid);

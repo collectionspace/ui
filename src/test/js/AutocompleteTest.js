@@ -11,12 +11,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 /*global cspace jqUnit jQuery start stop*/
 "use strict";
 
-fluid.demands("cspace.specBuilderImpl", "cspace.test", {
-    spec: {
-        async: false
-    }
-});
-
 (function ($) {
     var autocompleteTests = new jqUnit.TestCase("Autocomplete Tests");
     

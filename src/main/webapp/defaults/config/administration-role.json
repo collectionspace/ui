@@ -11,13 +11,6 @@
                     "options": {
                         "uispec": "{pageBuilder}.options.uispec"
                     }
-                },
-                "header": {
-                    "type": "cspace.header",
-                    "options": {
-                        "schema": "{pageBuilder}.schema",
-                        "permissions": "{pageBuilder}.permissions"
-                    }
                 }
             }
         }

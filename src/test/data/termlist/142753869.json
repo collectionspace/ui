@@ -1,0 +1,17 @@
+{
+    "csid": "142753869",
+    "fields": {
+        "name": "Currency",
+        "description": "This is a term list used for currency",
+        "source": "This is some source",
+        "terms": [
+            {"name": "USD", "description": "US Dollar", "source": "US", "sourcePage": "", "status": "inactive"},
+            {"_primary": true, "name": "GBP", "description": "Great Britain Pound", "source": "GB", "sourcePage": "123", "status": "active"},
+            {"name": "EUR", "description": "Euro", "source": "EU", "sourcePage": "", "status": "active"}
+        ],
+        "usedBy": [
+            {"usedBy": "Purchase currency"},
+            {"usedBy": "Other currency"}
+        ]
+    }
+}

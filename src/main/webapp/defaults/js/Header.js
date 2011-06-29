@@ -63,7 +63,20 @@ cspace = cspace || {};
             },
             {
                 name: "administration",
-                href: "administration.html"
+                href: "administration.html",
+                hide: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.util.modelBuilder",
+                        args: {
+                            related: "administration",
+                            resolver: "{permissionsResolver}",
+                            recordTypeManager: "{recordTypeManager}",
+                            permission: "list",
+                            callback: "cspace.header.buildCreateNewModel"
+                        }
+                    }
+                }
             }
 
             ]

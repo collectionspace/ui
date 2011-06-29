@@ -1,0 +1,29 @@
+{
+    "pageBuilder": {
+        "options": {
+            "pageType": "termlist",
+            "selectors": {
+                "termlist": ".csc-termlist-termlistAdmin"
+            },
+            "components": {
+                "termlist": {
+                    "type": "cspace.adminTermlist",
+                    "options": {
+                        "uispec": "{pageBuilder}.options.uispec"
+                    }
+                }
+            }
+        }
+    },
+    "pageBuilderIO": {
+        "options": {
+            "schema": [
+                "recordlist",
+                "recordtypes",
+                "namespaces",
+                "termlist" 
+            ],
+            "recordType": "termlist"
+        }
+    }
+}

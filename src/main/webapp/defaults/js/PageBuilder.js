@@ -167,42 +167,6 @@ cspace = cspace || {};
         };
         return resourceSpecs;
     };
-    fluid.demands("cspace.composite", "cspace.pageBuilderIO", {
-        options: {
-            invokers: {
-                transform: {
-                    funcName: "fluid.model.transformWithRules",
-                    args: ["{arguments}.0", "{arguments}.1"]
-                }
-            },
-            resources: {
-                expander: {
-                    type: "fluid.deferredInvokeCall",
-                    func: "$.merge",
-                    args: [[], "{pageBuilderIO}.options.schema", ["uispec"]]
-                }
-            },
-            urls: {
-                expander: {
-                    type: "fluid.deferredInvokeCall",
-                    func: "cspace.util.urlBuilder",
-                    args: {
-                        composite: "%chain/composite",
-                        chain: "%chain"
-                    }
-                }
-            }
-        }
-    });
-    fluid.demands("cspace.composite", ["cspace.pageBuilderIO", "cspace.localData"], "{options}");
-    fluid.demands("cspace.composite.compose", ["cspace.composite", "cspace.localData"], {
-        funcName: "cspace.composite.composeLocal",
-        args: "{arguments}.0"
-    });
-    fluid.demands("cspace.composite.compose", "cspace.composite", {
-        funcName: "cspace.composite.compose",
-        args: ["{composite}.transform", "{composite}.options.resources", "{composite}.options.urls", "{arguments}.0"]
-    });
 
     cspace.pageBuilderIO = function (options) {
         var that = fluid.initLittleComponent("cspace.pageBuilderIO", options);

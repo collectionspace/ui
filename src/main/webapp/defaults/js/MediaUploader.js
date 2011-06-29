@@ -307,19 +307,6 @@ cspace = cspace || {};
         }
     });
     
-    fluid.demands("fluid.uploader.html5Strategy.browseButtonView", ["fluid.uploader.html5Strategy.local", "cspace.mediaUploader"], {
-        container: "{multiFileUploader}.container",
-        options: {
-            mergePaths: ["{options}", {
-                events: {
-                    onBrowse: "{local}.events.onFileDialog"
-                }
-            }, {
-                multiFileInputMarkup: "<input type='file' name='file' multiple='' class='flc-uploader-html5-input fl-hidden' />"
-            }]
-        }
-    });
-    
     fluid.fetchResources.primeCacheFromResources("cspace.mediaUploader");
     
 })(jQuery, fluid);

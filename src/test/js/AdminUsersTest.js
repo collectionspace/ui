@@ -84,7 +84,7 @@ var adminUsersTester = function () {
     };
 
     var bareAdminUsersTest = new jqUnit.TestCase("AdminUsers Tests", function () {
-        bareAdminUsersTest.fetchTemplate("../../main/webapp/defaults/html/administration.html", ".csc-users-userAdmin");
+        bareAdminUsersTest.fetchTemplate("../../main/webapp/defaults/html/pages/Administration-users.html", ".csc-users-userAdmin");
         cspace.tests.onTearDown.addListener(function (re) {
             re.options.globalNavigator.events.onPerformNavigation.removeListener("onPerformNavigationRecordEditor");
             re.confirmation.popup.dialog("destroy").remove();
@@ -113,7 +113,7 @@ var adminUsersTester = function () {
         var testOpts = fluid.copy(baseTestOpts);
         fluid.merge(null, testOpts, opts);
         fluid.model.setBeanValue(testOpts, "listeners", {
-            afterRender: function () {
+            afterTreeRender: function () {
                 callback(adminUsers, adminUsers.userListEditor, adminUsers.userListEditor.details);
             }
         });

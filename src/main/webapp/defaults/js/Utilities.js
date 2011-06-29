@@ -260,8 +260,11 @@ fluid.registerNamespace("cspace.util");
                 contentType: "application/json; charset=UTF-8",
                 dataType: "json",
                 success: function (data) {
-                    if (that.options.responseParser) {
-                        data = that.options.responseParser(data, directModel);
+                    var responseParser = that.options.responseParser;
+                    if (responseParser) {
+                        data = typeof responseParser === "string" ?
+                            fluid.invokeGlobalFunction(responseParser, [data, directModel]) :
+                            responseParser(data, directModel);
                     }
                     callback(data);
                 },
@@ -1096,6 +1099,7 @@ fluid.registerNamespace("cspace.util");
         that.procedures = that.getRecordTypes("recordtypes.procedures");
         that.vocabularies = that.getRecordTypes("recordtypes.vocabularies");
         that.cataloging = that.getRecordTypes("recordtypes.cataloging");
+        that.administration = that.getRecordTypes("recordtypes.administration");
         that.nonVocabularies = that.cataloging.concat(that.procedures);
     };
     

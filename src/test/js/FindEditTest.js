@@ -168,7 +168,4 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
     });
-
-    fluid.demands("mainSearch", "cspace.search.searchView",
-    ["{searchView}.dom.mainSearch", fluid.COMPONENT_OPTIONS]);
 })();

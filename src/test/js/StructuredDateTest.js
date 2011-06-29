@@ -55,8 +55,6 @@ var structuredDateTester = function ($) {
         return structuredDateTestMain.structuredDate;
     };
 
-    fluid.demands("structuredDate", "cspace.test", [container, "{options}"]);
-
     // ------------------------------------
     // Utilities
     // ------------------------------------

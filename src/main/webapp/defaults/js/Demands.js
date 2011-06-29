@@ -44,6 +44,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
         
+        fluid.demands("termlist", ["cspace.pageBuilder", "cspace.localData"], {
+            container: "{pageBuilder}.options.selectors.termlist",
+            options: {
+                recordType: "termlist/records.json"
+            }
+        });
+        
         // Record List demands
         fluid.demands("select", ["cspace.recordList", "cspace.localData"], {
             funcName: "cspace.recordList.selectNavigate",
@@ -73,6 +80,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             funcName: "cspace.listEditor.testRoleListDataSource",
             args: {
                 targetTypeName: "cspace.listEditor.testRoleListDataSource"
+            }
+        });
+        fluid.demands("cspace.listEditor.listDataSource",  ["cspace.termlist", "cspace.localData", "cspace.listEditor"], {
+            funcName: "cspace.listEditor.testTermlistListDataSource",
+            args: {
+                targetTypeName: "cspace.listEditor.testTermlistListDataSource"
             }
         });
         fluid.demands("cspace.listEditor.listDataSource",  ["cspace.tab", "cspace.localData", "cspace.listEditor"], {
@@ -121,6 +134,20 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }
                 },
                 recordType: "role"
+            }
+        });
+        fluid.demands("detailsDC", ["cspace.listEditor", "cspace.termlist", "cspace.localData"], {
+            options: {
+                model: "{listEditor}.options.detailsModel",
+                baseUrl: "../../../../test/data",
+                fileExtension: ".json",
+                listeners: {
+                    modelChanged: {
+                        listener: "{listEditor}.events.detailsModelChanged.fire",
+                        priority: "last"
+                    }
+                },
+                recordType: "termlist"
             }
         });
         fluid.demands("detailsDC", ["cspace.listEditor", "cspace.users", "cspace.localData"], {
@@ -355,6 +382,20 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+        fluid.demands("termlistListEditor", "cspace.adminTermlist", {
+            container: "{adminTermlist}.container", 
+            options: {
+                selectors: {
+                    allDetails: ".termlist-details"
+                },
+                selectorsToIgnore: ["allDetails"],
+                recordType: "termlist",
+                uispec: "{adminTermlist}.options.uispec",
+                urls: {
+                    listUrl: "%chain/termlist"
+                }
+            }
+        });
         fluid.demands("userListEditor", "cspace.adminUsers", {
             container: "{adminUsers}.container",
             options: {
@@ -401,10 +442,43 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 targetTypeName: "cspace.listEditor.listDataSource"
             }
         });
+        fluid.demands("cspace.listEditor.listDataSource", ["cspace.listEditor", "cspace.termlist"], {
+            funcName: "cspace.URLDataSource",
+            args: {
+                url: "{listEditor}.options.urls.listUrl",
+                targetTypeName: "cspace.listEditor.listDataSource"
+            }
+        });
+        fluid.demands("cspace.listEditor.listDataSource", ["cspace.listEditor", "cspace.users"], {
+            funcName: "cspace.URLDataSource",
+            args: {
+                url: "{listEditor}.options.urls.listUrl",
+                targetTypeName: "cspace.listEditor.listDataSource",
+                responseParser: "cspace.listEditor.responseParseUsers",
+                termMap: {
+                    query: "%query"
+                }
+            }
+        });
+        fluid.demands("cspace.listEditor.listDataSource", ["cspace.listEditor", "cspace.tab"], {
+            funcName: "cspace.URLDataSource",
+            args: {
+                url: "{listEditor}.options.urls.listUrl",
+                targetTypeName: "cspace.listEditor.listDataSource",
+                responseParser: "cspace.listEditor.responseParseTabs",
+                termMap: {
+                    csid: "%csid",
+                    recordType: "%recordType"
+                }
+            }
+        });
             
         // Admin roles demands
         fluid.demands("role", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.role"
+        });
+        fluid.demands("termlist", "cspace.pageBuilder", {
+            container: "{pageBuilder}.options.selectors.termlist"
         });
         fluid.demands("users", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.users"
@@ -677,8 +751,40 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+        
+        fluid.demands("details", [ "cspace.listEditor", "cspace.termlist" ], {
+             container: "{listEditor}.dom.details",
+             options: {
+                showDeleteButton: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.permissions.resolve",
+                        args: {
+                            resolver: "{permissionsResolver}",
+                            permission: "delete",
+                            target: "{pageBuilderIO}.options.recordType"
+                        }
+                    }
+                },
+                strings: {
+                    deletePrimaryMessage: "Delete this term list?",
+                    deleteFailedMessage: "Error deleting term list: ",
+                    removeSuccessfulMessage: "Term list successfully deleted",
+                    createFailedMessage: "Error creating term list: ",
+                    createSuccessfulMessage: "New term list successfully created",
+                    fetchFailedMessage: "Error retriving term list: ",
+                    updateFailedMessage: "Error saving term list: ",
+                    updateSuccessfulMessage: "Term list successfully saved"
+                }
+            }
+        });
 
         fluid.demands("afterDelete", [ "cspace.listEditor", "cspace.role"], {
+            funcName: "cspace.recordEditor.statusAfterDelete",
+            args: "{recordEditor}"
+        });
+        
+        fluid.demands("afterDelete", [ "cspace.listEditor", "cspace.termlist"], {
             funcName: "cspace.recordEditor.statusAfterDelete",
             args: "{recordEditor}"
         });
@@ -766,7 +872,86 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("list", "cspace.listEditor", {
             container: "{listEditor}.dom.list"
         });
-        
+        fluid.demands("list", ["cspace.listEditor", "cspace.tab", "media"], {
+            container: "{listEditor}.dom.list",
+            options: {
+                showDeleteButton: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.permissions.resolveMultiple",
+                        args: {
+                            recordTypeManager: "{recordTypeManager}",
+                            resolver: "{permissionsResolver}",
+                            allOf: [{
+                                target: "{relatedRecordsTab}.primary",
+                                permission: "update"
+                            }, {
+                                target: "{relatedRecordsTab}.related",
+                                permission: "update"
+                            }]
+                        }
+                    }
+                },
+                columns: ["number", "summary"],
+                produceTree: "cspace.recordList.produceTreeMediaTabs",
+                invokers: {
+                    deleteRelation: {
+                        funcName: "cspace.recordList.deleteRelation",
+                        args: ["{arguments}.0", "{recordList}", "{details}", "{relatedRecordsTab}"]
+                    }
+                },
+                styles: {
+                    deleteRelation: "cs-recordList-deleteRelation",
+                    titleColumn: "cs-recordList-title-column-tab",
+                    column2: "cs-recordList-column2-tab"
+                },
+                strings: {
+                    number: "ID Number",
+                    summary: "Summary",
+                    newRow: "Creating New Related Record...",
+                    deleteRelation: "Delete this relation."
+                }
+            }
+        });
+        fluid.demands("list", ["cspace.listEditor", "cspace.tab"], {
+            container: "{listEditor}.dom.list",
+            options: {
+                showDeleteButton: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.permissions.resolveMultiple",
+                        args: {
+                            recordTypeManager: "{recordTypeManager}",
+                            resolver: "{permissionsResolver}",
+                            allOf: [{
+                                target: "{relatedRecordsTab}.primary",
+                                permission: "update"
+                            }, {
+                                target: "{relatedRecordsTab}.related",
+                                permission: "update"
+                            }]
+                        }
+                    }
+                },
+                columns: ["number", "summary"],
+                produceTree: "cspace.recordList.produceTreeTabs",
+                invokers: {
+                    deleteRelation: {
+                        funcName: "cspace.recordList.deleteRelation",
+                        args: ["{arguments}.0", "{recordList}", "{details}", "{relatedRecordsTab}"]
+                    }
+                },
+                styles: {
+                    deleteRelation: "cs-recordList-deleteRelation"
+                },
+                strings: {
+                    number: "ID Number",
+                    summary: "Summary",
+                    newRow: "Creating New Related Record...",
+                    deleteRelation: "Delete this relation."
+                }
+            }
+        });
         fluid.demands("list", ["cspace.listEditor", "cspace.users"], {
             container: "{listEditor}.dom.list",
             options: {
@@ -785,6 +970,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 strings: {
                     number: "Role Name",
                     newRow: "Creating New Role..."
+                }
+            }
+        });
+        fluid.demands("list", ["cspace.listEditor", "cspace.termlist"], {
+            container: "{listEditor}.dom.list",
+            options: {
+                columns: ["number"],
+                strings: {
+                    number: "Term List Name",
+                    newRow: "Creating New Term List..."
                 }
             }
         });
@@ -900,6 +1095,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             funcName: "cspace.recordList.selectFromList",
             args: ["{recordList}.model", "{recordList}.options", "{listEditor}.detailsDC"]
         });
+        fluid.demands("select", ["cspace.recordList", "cspace.termlist"], {
+            funcName: "cspace.recordList.selectFromList",
+            args: ["{recordList}.model", "{recordList}.options", "{listEditor}.detailsDC"]
+        });
         fluid.demands("select", "cspace.recordList", {
             funcName: "cspace.recordList.selectNavigate",
             args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigate", "{permissionsResolver}", "{recordList}.dom"]
@@ -949,6 +1148,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     onLink: "{recordEditor}.requestSave",
                     onRemove: "{recordEditor}.requestSave"
                 }
+            }
+        });
+        fluid.demands("fluid.uploader.html5Strategy.browseButtonView", ["fluid.uploader.html5Strategy.local", "cspace.mediaUploader"], {
+            container: "{multiFileUploader}.container",
+            options: {
+                mergePaths: ["{options}", {
+                    events: {
+                        onBrowse: "{local}.events.onFileDialog"
+                    }
+                }, {
+                    multiFileInputMarkup: "<input type='file' name='file' multiple='' class='flc-uploader-html5-input fl-hidden' />"
+                }]
             }
         });
         
@@ -1310,6 +1521,37 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 model: "{pageBuilder}.model"
             }
         });
+        fluid.demands("tabs", ["cspace.pageBuilder", "cspace.administration"], {
+            container: "{pageBuilder}.options.selectors.tabs",
+            options: {
+                configURLTemplate: "%webapp/config/administration-%record.json"
+            }
+        });
+        
+        fluid.demands("cspace.tabs.tabsSuccess", "cspace.tabs", {
+            funcName: "cspace.tabs.tabsSuccess",
+            args: ["{arguments}.0", "{arguments}.1", "{arguments}.2", "{tabs}.tabsList", "{tabs}.dom.tabs", "{tabs}.setupTab"]
+        });
+        
+        fluid.demands("cspace.tabs.tabsSelect", "cspace.tabs", {
+            funcName: "cspace.tabs.tabsSelect",
+            args: ["{arguments}.0", "{tabs}.tabsList", "{tabs}.options.selectors", "{tabs}.dom.tabs"]
+        });
+        
+        fluid.demands("cspace.tabs.tabsSelectWrapper", "cspace.tabs", {
+            funcName: "cspace.tabs.tabsSelectWrapper",
+            args: ["{arguments}.0", "{arguments}.1", "{tabs}.options.globalNavigator", "{tabs}.tabsList", "{tabs}.tabsList.options.styles", "{tabs}.tabsSelect"]
+        });
+        
+        fluid.demands("cspace.tabs.setupTab", "cspace.tabs", {
+            funcName: "cspace.tabs.setupTab",
+            args: ["@0", "{tabs}"]
+        });
+        
+        fluid.demands("cspace.tabs.setupTab", ["cspace.tabs" ,"cspace.administration"], {
+            funcName: "cspace.tabs.setupAdminTab",
+            args: ["@0", "{tabs}"]
+        });
         
         // tab list demands
         fluid.demands("tabsList", ["cspace.tabs", "person"], {
@@ -1360,6 +1602,30 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+        fluid.demands("tabsList", ["cspace.tabs", "cspace.administration"], {
+            container: "{tabs}.dom.tabsList",
+            options: {
+                strings: {
+                    users: "Users",
+                    role: "Roles & Permissions",
+                    termlist: "Term List Management"
+                },
+                model: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.util.modelBuilder",
+                        args: {
+                            related: "administration",
+                            resolver: "{permissionsResolver}",
+                            recordTypeManager: "{recordTypeManager}",
+                            permission: "list",
+                            href: "%webapp/html/pages/Administration-%recordType.html",
+                            callback: "cspace.tabsList.buildAdminModel"
+                        }
+                    }
+                }
+            }
+        });
         fluid.demands("tabsList", "cspace.tabs", {
             container: "{tabs}.dom.tabsList"
         });
@@ -1373,6 +1639,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+        fluid.demands("titleBar", ["cspace.pageBuilder", "cspace.administration"], {
+            container: "{pageBuilder}.options.selectors.titleBar",
+            options: {
+                strings: {
+                    administration: "Administration"
+                },
+                model: {
+                    recordType: "administration"
+                }
+            }
+        });
         
         // urnToStringFieldConverter demands
         fluid.demands("cspace.util.urnToStringFieldConverter", "cspace.recordEditor", {
@@ -1383,184 +1660,49 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.util.nameForValueFinder", "cspace.recordEditor", {
             container: "{arguments}.0"
         });
-    };
-    
-    cspace.includeTestDemands = function () {
         
-        fluid.demands("cspace.util.extractTenant.segment", ["cspace.localData" ,"cspace.test"], {
+        // Composite demands
+        fluid.demands("cspace.composite", "cspace.pageBuilderIO", {
             options: {
-                path: "test"
-            }
-        });
-        
-        // Record editor demands
-        fluid.demands("afterDelete", ["cspace.recordEditor", "cspace.test"], {
-            funcName: "cspace.tests.testAfterDelete",
-            args: "{recordEditor}"
-        });
-        
-        // Record list demands
-        fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test"], {
-            funcName: "cspace.tests.selectNavigate",
-            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocalTest"]
-        });
-        fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test", "person", "cspace.relatedRecordsList"], {
-            funcName: "cspace.tests.selectNavigateVocab",
-            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocalTest"]
-        });
-        fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test", "location", "cspace.relatedRecordsList"], {
-            funcName: "cspace.tests.selectNavigateVocab",
-            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocalTest"]
-        });
-        fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test", "organization", "cspace.relatedRecordsList"], {
-            funcName: "cspace.tests.selectNavigateVocab",
-            args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocalTest"]
-        });
-        fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test", "cspace.tab"], {
-            funcName: "cspace.recordList.selectFromList",
-            args: ["{recordList}.model", "{recordList}.options", "{listEditor}.detailsDC"]
-        });
-        fluid.demands("select", ["cspace.recordList", "cspace.localData", "cspace.test", "cspace.users"], {
-            funcName: "cspace.recordList.selectFromList",
-            args: ["{recordList}.model", "{recordList}.options", "{listEditor}.detailsDC"]
-        });
-        
-        // DataContext demands
-        fluid.demands("detailsDC", ["cspace.listEditor", "cspace.role", "cspace.localData", "cspace.test"], {
-            options: {
-                model: "{listEditor}.options.detailsModel",
-                baseUrl: "../data",
-                fileExtension: ".json",
-                listeners: {
-                    modelChanged: {
-                        listener: "{listEditor}.events.detailsModelChanged.fire",
-                        priority: "last"
+                invokers: {
+                    transform: {
+                        funcName: "fluid.model.transformWithRules",
+                        args: ["{arguments}.0", "{arguments}.1"]
                     }
                 },
-                recordType: "role"
-            }
-        });
-        fluid.demands("detailsDC", ["cspace.listEditor", "cspace.users", "cspace.localData", "cspace.test"], {
-            options: {
-                model: "{listEditor}.options.detailsModel",
-                baseUrl: "../data",
-                fileExtension: ".json",
-                listeners: {
-                    modelChanged: {
-                        listener: "{listEditor}.events.detailsModelChanged.fire",
-                        priority: "last"
+                resources: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "$.merge",
+                        args: [[], "{pageBuilderIO}.options.schema", ["uispec"]]
                     }
                 },
-                recordType: "users"
-            }
-        });
-        fluid.demands("detailsDC", ["cspace.listEditor", "cspace.tab", "cspace.localData", "cspace.test"], {
-            options: {
-                model: "{listEditor}.options.detailsModel",
-                baseUrl: "../data",
-                fileExtension: ".json",
-                listeners: {
-                    modelChanged: {
-                        listener: "{listEditor}.events.detailsModelChanged.fire",
-                        priority: "last"
-                    }
-                }
-            }
-        });
-        fluid.demands("detailsDC", ["cspace.listEditor", "cspace.test", "cspace.localData"], {
-            options: {
-                model: "{listEditor}.options.detailsModel",
-                baseUrl: "../data",
-                fileExtension: ".json",
-                listeners: {
-                    modelChanged: {
-                        listener: "{listEditor}.events.detailsModelChanged.fire",
-                        priority: "last"
-                    }
-                }
-            }
-        });
-        
-        fluid.demands("dataContext", ["cspace.test", "cspace.localData"], {
-            options: {
-                fileExtension: ".json"
-            }
-        });
-        
-        // DataSource demands
-        fluid.demands("dataSource", ["cspace.tab", "cspace.localData", "cspace.test"], {
-            options: {
-                schema: "{dataContext}.options.schema"
-            }
-        });
-        fluid.demands("dataSource", ["cspace.users", "cspace.localData", "cspace.test"], {
-            options: {
-                schema: "{dataContext}.options.schema",
-                sources: {
-                    role: {
-                        href: "../data/role/list.json",
-                        path: "fields.role",
-                        resourcePath: "items",
-                        merge: "cspace.dataSource.mergeRoles"
-                    } 
-                }
-            }
-        });
-
-        // Messagebar demands
-        fluid.demands("messageBar", "cspace.test", {
-            container: "body"
-        });
-        
-        // search demands
-        fluid.demands("search", ["cspace.searchToRelateDialog", "cspace.localData", "cspace.test"], {
-           container: "{searchToRelateDialog}.container"
-        });
-        
-        // ListEditor demands
-        fluid.demands("userListEditor", ["cspace.userAdminTests", "cspace.adminUsers"], {
-            container: "{adminUsers}.container",
-            options: {
-                selectors: {
-                    allDetails: ".user-details"
-                },
-                selectorsToIgnore: ["allDetails"],
-                recordType: "users",
-                uispec: "{adminUsers}.options.uispec",
                 urls: {
-                    listUrl: "%chain/users/search?query=%query"
-                },
-                components: {
-                    listSearchSource: {
-                        type: "cspace.listEditor.testUsersListSearchDataSource"
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.util.urlBuilder",
+                        args: {
+                            composite: "%chain/composite",
+                            chain: "%chain"
+                        }
                     }
                 }
             }
         });
-        fluid.demands("cspace.listEditor.testUsersListSearchDataSource",  ["cspace.localData", "cspace.userAdminTests", "cspace.listEditor"], {
-            funcName: "cspace.listEditor.testUsersListSearchDataSource",
-            args: {
-                targetTypeName: "cspace.listEditor.testUsersListSearchDataSource"
-            }
+        fluid.demands("cspace.composite", ["cspace.pageBuilderIO", "cspace.localData"], "{options}");
+        fluid.demands("cspace.composite.compose", ["cspace.composite", "cspace.localData"], {
+            funcName: "cspace.composite.composeLocal",
+            args: "{arguments}.0"
         });
-        fluid.demands("updateList", ["cspace.listEditor", "cspace.userAdminTests", "cspace.localData"], {
-            funcName: "cspace.tests.updateListUsers",
-            args: ["{listEditor}", "{adminUsers}.dom.searchField", "{arguments}.0"]
-        });
-        fluid.demands("updateList", ["cspace.listEditor", "cspace.listEditorTests", "cspace.localData"], {
-            funcName: "cspace.listEditor.updateList",
-            args: ["{listEditor}", "{arguments}.0"]
+        fluid.demands("cspace.composite.compose", "cspace.composite", {
+            funcName: "cspace.composite.compose",
+            args: ["{composite}.transform", "{composite}.options.resources", "{composite}.options.urls", "{arguments}.0"]
         });
     };
     
     fluid.demands("cspace.localDemands", "cspace.localData", {
         options: {
             finalInitFunction: cspace.includeLocalDemands
-        }
-    });
-    fluid.demands("cspace.testDemands", "cspace.test", {
-        options: {
-            finalInitFunction: cspace.includeTestDemands
         }
     });
     
@@ -1571,15 +1713,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     fluid.defaults("cspace.localDemands", {
         gradeNames: ["fluid.littleComponent", "autoInit"]
     });
-    fluid.defaults("cspace.testDemands", {
-        gradeNames: ["fluid.littleComponent", "autoInit"]
-    });
     
     if (document.location.protocol === "file:") {
         fluid.staticEnvironment.cspaceEnvironment = fluid.typeTag("cspace.localData");
     }
     fluid.invoke("cspace.demands");
     fluid.invoke("cspace.localDemands");
-    fluid.invoke("cspace.testDemands");
     
 })(jQuery, fluid);

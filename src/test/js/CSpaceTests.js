@@ -103,18 +103,6 @@ cspace.tests.userLogin = {
     csid: "d4f9f4a8-c1a1-49a3-9414-b20fe7aef0b0"
 };
 
-fluid.demands("cspace.urlExpander", ["cspace.localData", "cspace.test"],
-    {
-    args: {
-        vars: {
-            tenant: "..",
-            chain: "..",
-            webapp: "../../main/webapp/defaults",
-            test: ".."
-        }
-    }
-});
-
 cspace.tests.filterToKeys = function(toFilter, keyHolder) {
     return fluid.remove_if(jQuery.extend({}, toFilter), function(value, key) {
         return !keyHolder[key];
