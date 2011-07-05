@@ -46,6 +46,7 @@ cspace = cspace || {};
                 args: "{listEditor}"
             }
         },
+        parentBundle: "{globalBundle}",
         events: {
             beforeCreateList: null,
             detailsModelChanged: null,
@@ -164,14 +165,17 @@ cspace = cspace || {};
         callback = (typeof callback === "function") ? callback : updatelistcallback(that);
         that.events.onListUpdate.fire();
         that.listSource.get({
-            query: searchField.val() || ""
+            query: searchField.val() || "",
+            recordType: that.options.recordType
         }, callback);
     };
     
     cspace.listEditor.updateList = function (that, callback) {
         callback = (typeof callback === "function") ? callback : updatelistcallback(that);
         that.events.onListUpdate.fire();
-        that.listSource.get(null, callback);
+        that.listSource.get({
+            recordType: that.options.recordType
+        }, callback);
     };
     
     cspace.listEditor.hideDetails = function (dom, events) {
@@ -228,25 +232,15 @@ cspace = cspace || {};
         that.events.afterListUpdate.fire();
     };
     
-    fluid.defaults("cspace.listEditor.testUsersListDataSource", {
-        url: "%test/data/users/records.json"
-    });
-    cspace.listEditor.testUsersListDataSource = cspace.URLDataSource;
-    
     fluid.defaults("cspace.listEditor.testUsersListSearchDataSource", {
         url: "%test/data/users/search.json"
     });
     cspace.listEditor.testUsersListSearchDataSource = cspace.URLDataSource;
     
-    fluid.defaults("cspace.listEditor.testTermlistListDataSource", {
-        url: "%test/data/termlist/records.json"
+    fluid.defaults("cspace.listEditor.testListDataSource", {
+        url: "%test/data/%recordType/records.json"
     });
-    cspace.listEditor.testTermlistListDataSource = cspace.URLDataSource;
-    
-    fluid.defaults("cspace.listEditor.testRoleListDataSource", {
-        url: "%test/data/role/records.json"
-    });
-    cspace.listEditor.testRoleListDataSource = cspace.URLDataSource;
+    cspace.listEditor.testListDataSource = cspace.URLDataSource;
     
     fluid.defaults("cspace.listEditor.testTabsListDataSource", {
         url: "%test/data/%recordType/%csid.json",

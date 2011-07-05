@@ -6,7 +6,7 @@
                 "expander": {
                     "type": "fluid.renderer.condition",
                     "condition": {
-                        "funcName": "cspace.adminRoles.assertDisplay",
+                        "funcName": "cspace.admin.assertRoleDisplay",
                         "args": "{rowValue}.display"
                     },
                     "trueTree": {

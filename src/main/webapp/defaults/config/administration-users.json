@@ -3,13 +3,48 @@
         "options": {
             "pageType": "users",
             "selectors": {
-                "users": ".csc-users-userAdmin"
+                "admin": ".csc-admin-users"
             },
             "components": {
-                "users": {
-                    "type": "cspace.adminUsers",
+                "admin": {
+                    "type": "cspace.admin",
                     "options": {
-                        "uispec": "{pageBuilder}.options.uispec"
+                        "uispec": "{pageBuilder}.options.uispec",
+                        "login": "{userLogin}",
+                        "queryURL": "../../../chain/users/search?query=",
+                        "events": {
+                            "afterTreeRender": null,
+                            "afterSetup": null
+                        },
+                        "selectorsToIgnore": ["searchField", "deleteButton", "searchButton", "unSearchButton", "userId", "email", "userName", "password", "passwordConfirm"],
+                        "selectors": {
+                            "searchField": ".csc-user-searchField",
+                            "deleteButton": ".csc-delete",
+                            "searchButton": ".csc-user-searchButton",
+                            "unSearchButton": ".csc-user-unSearchButton",
+                            "userId": ".csc-user-userID",
+                            "email": ".csc-user-email",
+                            "userName": ".csc-user-userName",
+                            "password": ".csc-user-password",
+                            "passwordConfirm": ".csc-user-passwordConfirm"
+                        },
+                        "components": {
+                            "passwordValidator": {
+                                "type": "cspace.passwordValidator"
+                            },
+                            "globalNavigator": "{globalNavigator}"
+                        },
+                        "invokers": {
+                            "validate": {
+                                "funcName": "cspace.admin.validate",
+                                "args": ["{messageBar}", "{admin}.dom", "{admin}.adminListEditor.options.detailsApplier", "{admin}.passwordValidator", "{admin}.options.strings"]
+                            },
+                            "bindEvents": {
+                                "funcName": "cspace.admin.bindEventHandlers",
+                                "args": "{admin}"
+                            }
+                        },
+                        "finalInitFunction": "cspace.admin.finalInit"
                     }
                 }
             }

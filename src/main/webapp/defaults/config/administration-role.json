@@ -3,11 +3,11 @@
         "options": {
             "pageType": "role",
             "selectors": {
-                "role": ".csc-roles-roleAdmin" 
+                "admin": ".csc-admin-role"
             },
             "components": {
-                "role": {
-                    "type": "cspace.adminRoles",
+                "admin": {
+                    "type": "cspace.admin",
                     "options": {
                         "uispec": "{pageBuilder}.options.uispec"
                     }

@@ -3,11 +3,11 @@
         "options": {
             "pageType": "termlist",
             "selectors": {
-                "termlist": ".csc-termlist-termlistAdmin"
+                "admin": ".csc-admin-termlist"
             },
             "components": {
-                "termlist": {
-                    "type": "cspace.adminTermlist",
+                "admin": {
+                    "type": "cspace.admin",
                     "options": {
                         "uispec": "{pageBuilder}.options.uispec"
                     }

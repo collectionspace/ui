@@ -2,6 +2,20 @@
     "userId": "admin@collectionspace.org",
     "screenName": "admin@collectionspace.org",
     "permissions": {
+        "termlist": [
+            "create",
+            "read",
+            "update",
+            "delete",
+            "list"
+        ],
+        "reporting": [
+            "create",
+            "read",
+            "update",
+            "delete",
+            "list"
+        ],
         "userperm": [
             
         ],

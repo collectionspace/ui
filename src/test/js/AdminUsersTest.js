@@ -45,7 +45,7 @@ var adminUsersTester = function () {
             globalNavigator: {
                 type: "cspace.util.globalNavigator",
             },
-            userListEditor: {
+            adminListEditor: {
                 options: {
                     components: {
                         detailsDC: {
@@ -60,8 +60,40 @@ var adminUsersTester = function () {
                         }
                     }
                 }
+            },
+            passwordValidator: {
+                type: "cspace.passwordValidator"
             }
-        }
+        },
+        login: cspace.util.login(cspace.tests.userLogin),
+        queryURL: "../../../chain/users/search?query=",
+        events: {
+            afterTreeRender: null,
+            afterSetup: null
+        },
+        selectorsToIgnore: ["searchField", "deleteButton", "searchButton", "unSearchButton", "userId", "email", "userName", "password", "passwordConfirm"],
+        selectors: {
+            searchField: ".csc-user-searchField",
+            deleteButton: ".csc-delete",
+            searchButton: ".csc-user-searchButton",
+            unSearchButton: ".csc-user-unSearchButton",
+            userId: ".csc-user-userID",
+            email: ".csc-user-email",
+            userName: ".csc-user-userName",
+            password: ".csc-user-password",
+            passwordConfirm: ".csc-user-passwordConfirm"
+        },
+        invokers: {
+            validate: {
+                funcName: "cspace.admin.validate",
+                args: ["{admin}.adminListEditor.options.messageBar", "{admin}.dom", "{admin}.adminListEditor.options.detailsApplier", "{admin}.passwordValidator", "{admin}.options.strings"]
+            },
+            bindEvents: {
+                funcName: "cspace.admin.bindEventHandlers",
+                args: "{admin}"
+            }
+        },
+        finalInitFunction: "cspace.admin.finalInit"
     };
     
     var testDataCreateUser = {
@@ -80,11 +112,13 @@ var adminUsersTester = function () {
         };
         that.events.onListUpdate.fire();
         var query = searchField.val();
-        that[query ? "listSearchSource" : "listSource"].get(null, callback);
+        that[query ? "listSearchSource" : "listSource"].get({
+            recordType: that.options.recordType
+        }, callback);
     };
 
     var bareAdminUsersTest = new jqUnit.TestCase("AdminUsers Tests", function () {
-        bareAdminUsersTest.fetchTemplate("../../main/webapp/defaults/html/pages/Administration-users.html", ".csc-users-userAdmin");
+        bareAdminUsersTest.fetchTemplate("../../main/webapp/defaults/html/pages/Administration-users.html", ".csc-admin-users");
         cspace.tests.onTearDown.addListener(function (re) {
             re.options.globalNavigator.events.onPerformNavigation.removeListener("onPerformNavigationRecordEditor");
             re.confirmation.popup.dialog("destroy").remove();
@@ -114,12 +148,12 @@ var adminUsersTester = function () {
         fluid.merge(null, testOpts, opts);
         fluid.model.setBeanValue(testOpts, "listeners", {
             afterTreeRender: function () {
-                callback(adminUsers, adminUsers.userListEditor, adminUsers.userListEditor.details);
+                callback(adminUsers, adminUsers.adminListEditor, adminUsers.adminListEditor.details);
             }
         });
         fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.users");
         fluid.staticEnvironment.cspaceTestEnv = fluid.typeTag("cspace.userAdminTests");
-        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        adminUsers = cspace.admin(".csc-admin-users", testOpts);
     };
     
     var setupSaveNewUserInvalidPassword = function (confPassword, message) {
@@ -222,7 +256,7 @@ var adminUsersTester = function () {
                 });      
                 var saveResult = re.requestSave();
             }, "initialSelect");
-            adminUsers.userListEditor.list.locate("row").eq(2).click();
+            adminUsers.adminListEditor.list.locate("row").eq(2).click();
         });
     });
     
@@ -230,21 +264,21 @@ var adminUsersTester = function () {
         var adminUsers;
         var testOpts = fluid.copy(baseTestOpts);
         fluid.model.setBeanValue(testOpts, "queryURL", "../data/users/search.json");
-        fluid.model.setBeanValue(testOpts, "components.userListEditor.options.listeners", {
+        fluid.model.setBeanValue(testOpts, "components.adminListEditor.options.listeners", {
             "afterListUpdate.initalEvent": function () {
-                adminUsers.userListEditor.events.afterListUpdate.removeListener("initalEvent");
-                jqUnit.assertEquals("Initially there are 4 users in the list", 4, adminUsers.userListEditor.list.model.items.length);
+                adminUsers.adminListEditor.events.afterListUpdate.removeListener("initalEvent");
+                jqUnit.assertEquals("Initially there are 4 users in the list", 4, adminUsers.adminListEditor.list.model.items.length);
                 jqUnit.notVisible("Unsearch is invisible initially", adminUsers.options.selectors.unSearchButton);
                 adminUsers.locate("searchField").val("test").change();
                 jqUnit.assertEquals("Value in seatch fiels is 'test'", "test", adminUsers.locate("searchField").val());
-                adminUsers.userListEditor.events.afterListUpdate.addListener(function () {
-                    adminUsers.userListEditor.events.afterListUpdate.removeListener("afterListUpdate");
+                adminUsers.adminListEditor.events.afterListUpdate.addListener(function () {
+                    adminUsers.adminListEditor.events.afterListUpdate.removeListener("afterListUpdate");
                     jqUnit.isVisible("Unsearch is visible after search", adminUsers.options.selectors.unSearchButton);
-                    jqUnit.assertEquals("There are 2 users in the list after search", 2, adminUsers.userListEditor.list.model.items.length);
-                    adminUsers.userListEditor.list.events.afterRender.addListener(function () {
+                    jqUnit.assertEquals("There are 2 users in the list after search", 2, adminUsers.adminListEditor.list.model.items.length);
+                    adminUsers.adminListEditor.list.events.afterRender.addListener(function () {
                         jqUnit.notVisible("Unsearch is invisible after unsearch", adminUsers.options.selectors.unSearchButton);
-                        jqUnit.assertEquals("There are 4 users in the list after unsearch", 4, adminUsers.userListEditor.list.model.items.length);
-                        cspace.tests.onTearDown.fire(adminUsers.userListEditor.details);
+                        jqUnit.assertEquals("There are 4 users in the list after unsearch", 4, adminUsers.adminListEditor.list.model.items.length);
+                        cspace.tests.onTearDown.fire(adminUsers.adminListEditor.details);
                         start();
                     });
                     adminUsers.locate("unSearchButton").click();
@@ -254,7 +288,7 @@ var adminUsersTester = function () {
         });
         fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.users");
         fluid.staticEnvironment.cspaceTestEnv = fluid.typeTag("cspace.userAdminTests");
-        adminUsers = cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        adminUsers = cspace.admin(".csc-admin-users", testOpts);
     });
     
     var setupConfirmation = function (testFunc) {
@@ -265,20 +299,20 @@ var adminUsersTester = function () {
             var pageReadyArgs = waitMultiple.waitSet.pageReady.args;
             var setupArgs = waitMultiple.waitSet.afterSetup.args;
             var adminUsers = setupArgs[0];
-            adminUsers.userListEditor.events.afterShowDetails.addListener(waitMultiple.getListener("afterShowDetails"));
+            adminUsers.adminListEditor.events.afterShowDetails.addListener(waitMultiple.getListener("afterShowDetails"));
             waitMultiple.clear(function() {
                 testFunc.apply(null, [pageReadyArgs[0].details, adminUsers]);
             });
             delete waitMultiple.waitSet["pageReady"];
             delete waitMultiple.waitSet["afterSetup"];
-            $(adminUsers.userListEditor.list.locate("row")[2]).click();
+            $(adminUsers.adminListEditor.list.locate("row")[2]).click();
         }; 
         waitMultiple = cspace.util.waitMultiple(
             {outerKey: "pageReady",
              callback: callback,
              once: true}); 
         var testOpts = fluid.copy(baseTestOpts);
-        fluid.model.setBeanValue(testOpts, "components.userListEditor.options.listeners", {
+        fluid.model.setBeanValue(testOpts, "components.adminListEditor.options.listeners", {
             pageReady: waitMultiple.getListener("pageReady")
         });
         fluid.model.setBeanValue(testOpts, "listeners", {
@@ -286,7 +320,7 @@ var adminUsersTester = function () {
         });
         fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.users");
         fluid.staticEnvironment.cspaceTestEnv = fluid.typeTag("cspace.userAdminTests");
-        cspace.adminUsers(".csc-users-userAdmin", testOpts);
+        cspace.admin(".csc-admin-users", testOpts);
     };
     
     adminUsersTest.asyncTest("Confirmation", function () {
@@ -299,7 +333,7 @@ var adminUsersTester = function () {
                 cspace.tests.onTearDown.fire(re);
                 start();
             });
-            adminUsers.userListEditor.list.locate("row").eq(1).click();
+            adminUsers.adminListEditor.list.locate("row").eq(1).click();
         });
     });
     
@@ -315,7 +349,7 @@ var adminUsersTester = function () {
                 });
                 re.confirmation.confirmationDialog.locate("cancel").click();                        
             });
-            adminUsers.userListEditor.list.locate("row").eq(1).click();
+            adminUsers.adminListEditor.list.locate("row").eq(1).click();
          });
     });
     
@@ -323,7 +357,7 @@ var adminUsersTester = function () {
         setupConfirmation(function (re, adminUsers) {
             adminUsers.locate("userName").val("New Name").change();
             re.confirmation.popup.bind("dialogopen", function () {
-                adminUsers.userListEditor.detailsDC.events.afterFetch.addListener(function () {
+                adminUsers.adminListEditor.detailsDC.events.afterFetch.addListener(function () {
                     jqUnit.notVisible("Confirmation dialog is now invisible", re.confirmation.popup);
                     jqUnit.assertEquals("User Name should now be", "Megan Forbes", adminUsers.locate("userName").val());
                     cspace.tests.onTearDown.fire(re);
@@ -331,7 +365,7 @@ var adminUsersTester = function () {
                 });
                 re.confirmation.confirmationDialog.locate("proceed").click();
             });
-            adminUsers.userListEditor.list.locate("row").eq(1).click();
+            adminUsers.adminListEditor.list.locate("row").eq(1).click();
         });
     });
     
@@ -339,7 +373,7 @@ var adminUsersTester = function () {
         setupConfirmation(function (re) {
             re.events.afterRender.removeListener("initialSelect");
             re.remove();
-            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this user?", re.confirmation.confirmationDialog.locate("message:").text());
+            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this User?", re.confirmation.confirmationDialog.locate("message:").text());
             jqUnit.isVisible("Delete button should be visible", re.confirmation.confirmationDialog.locate("act"));
             jqUnit.isVisible("Cancel button should be visible", re.confirmation.confirmationDialog.locate("cancel"));
             jqUnit.assertEquals("Proceed / Don't Save button should not be rendered", 0, re.confirmation.confirmationDialog.locate("proceed").length);
@@ -382,12 +416,12 @@ var adminUsersTester = function () {
         setupConfirmation(function (re, adminUsers) {
             re.events.afterRender.removeListener("initialSelect");                    
             adminUsers.locate("userName").val("New Name").change();
-            adminUsers.userListEditor.list.locate("row").eq(1).click();
+            adminUsers.adminListEditor.list.locate("row").eq(1).click();
             jqUnit.assertEquals("Confirmation Text Should Say", "You are about to leave this record.", re.confirmation.confirmationDialog.locate("message:").eq(0).text());
             jqUnit.assertEquals("Confirmation Text Should Say", "Save Changes?", re.confirmation.confirmationDialog.locate("message:").eq(1).text());
             re.confirmation.confirmationDialog.locate("close").click();
             re.remove();
-            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this user?", re.confirmation.confirmationDialog.locate("message:").text());
+            jqUnit.assertEquals("Confirmation Text Should Say", "Delete this User?", re.confirmation.confirmationDialog.locate("message:").text());
             cspace.tests.onTearDown.fire(re);
             start();
         });
@@ -397,10 +431,10 @@ var adminUsersTester = function () {
         setupConfirmation(function (re, adminUsers) {
             re.events.afterRender.removeListener("initialSelect");                    
             re.remove();
-            jqUnit.assertEquals("After delete clicked, confirmation text should say", "Delete this user?", re.confirmation.confirmationDialog.locate("message:").text());
+            jqUnit.assertEquals("After delete clicked, confirmation text should say", "Delete this User?", re.confirmation.confirmationDialog.locate("message:").text());
             re.confirmation.confirmationDialog.locate("close").click();
             adminUsers.locate("userName").val("New Name").change();
-            adminUsers.userListEditor.list.locate("row").eq(1).click();
+            adminUsers.adminListEditor.list.locate("row").eq(1).click();
             jqUnit.assertEquals("Delete cancelled, record edited, attempt to edit other user, confirmation text should say", "You are about to leave this record.", re.confirmation.confirmationDialog.locate("message:").eq(0).text());
             jqUnit.assertEquals("Confirmation text should also say", "Save Changes?", re.confirmation.confirmationDialog.locate("message:").eq(1).text());
             cspace.tests.onTearDown.fire(re);
@@ -425,7 +459,7 @@ var adminUsersTester = function () {
                 cspace.tests.onTearDown.fire(re);
                 start();
             });
-            adminUsers.userListEditor.list.locate("row").eq(1).click();
+            adminUsers.adminListEditor.list.locate("row").eq(1).click();
         });
     });
     
@@ -436,7 +470,7 @@ var adminUsersTester = function () {
                 cspace.tests.onTearDown.fire(re);
                 start();
             });
-            adminUsers.userListEditor.list.locate("row").eq(index).click();
+            adminUsers.adminListEditor.list.locate("row").eq(index).click();
         }, {
             login: cspace.util.login({csid: userCSID})
         });

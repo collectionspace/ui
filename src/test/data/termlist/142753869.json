@@ -5,11 +5,11 @@
         "description": "This is a term list used for currency",
         "source": "This is some source",
         "terms": [
-            {"name": "USD", "description": "US Dollar", "source": "US", "sourcePage": "", "status": "inactive"},
-            {"_primary": true, "name": "GBP", "description": "Great Britain Pound", "source": "GB", "sourcePage": "123", "status": "active"},
-            {"name": "EUR", "description": "Euro", "source": "EU", "sourcePage": "", "status": "active"}
+            {"termName": "USD", "termDescription": "US Dollar", "termSource": "US", "termSourcePage": "", "termStatus": "inactive"},
+            {"_primary": true, "termName": "GBP", "termDescription": "Great Britain Pound", "termSource": "GB", "termSourcePage": "123", "termStatus": "active"},
+            {"termName": "EUR", "termDescription": "Euro", "termSource": "EU", "termSourcePage": "", "termStatus": "active"}
         ],
-        "usedBy": [
+        "usedBys": [
             {"usedBy": "Purchase currency"},
             {"usedBy": "Other currency"}
         ]

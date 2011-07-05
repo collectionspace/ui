@@ -26,7 +26,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             listeners: {
                 "afterRender.initialRender": callback
             },
-            showDeleteButton: true
+            showDeleteButton: true,
+            recordType: "cataloging"
         });
         cspace.recordEditor("#main", options);
     };
@@ -126,7 +127,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }, function (re) {
             fluid.log("RETest: afterRender");
             re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertEquals("Checking correct text: ", "Delete this record and its relationships and its attached media?", re.confirmation.confirmationDialog.locate("message:").text());
+                jqUnit.assertEquals("Checking correct text: ", "Delete this Cataloging and its relationships and its attached media?", re.confirmation.confirmationDialog.locate("message:").text());
                 start();
             });
             re.remove();
@@ -150,7 +151,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }, function (re) {
             fluid.log("RETest: afterRender");
             re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertEquals("Checking correct text: ", "Delete this record and its attached media?", re.confirmation.confirmationDialog.locate("message:").text());
+                jqUnit.assertEquals("Checking correct text: ", "Delete this Cataloging and its attached media?", re.confirmation.confirmationDialog.locate("message:").text());
                 start();
             });
             re.remove();
@@ -174,7 +175,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }, function (re) {
             fluid.log("RETest: afterRender");
             re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertEquals("Checking correct text: ", "Delete this record and its relationships?", re.confirmation.confirmationDialog.locate("message:").text());
+                jqUnit.assertEquals("Checking correct text: ", "Delete this Cataloging and its relationships?", re.confirmation.confirmationDialog.locate("message:").text());
                 start();
             });
             re.remove();
@@ -196,7 +197,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }, function (re) {
             fluid.log("RETest: afterRender");
             re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertEquals("Checking correct text: ", "Delete this record?", re.confirmation.confirmationDialog.locate("message:").text());
+                jqUnit.assertEquals("Checking correct text: ", "Delete this Cataloging?", re.confirmation.confirmationDialog.locate("message:").text());
                 start();
             });
             re.remove();

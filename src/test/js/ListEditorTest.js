@@ -50,11 +50,11 @@ var listEditorTester = function(){
             }
         },
         uispec: uispec,
-        recordType: "users/records.json"
+        recordType: "users"
     };
     
     var bareListEditorTest = new jqUnit.TestCase("ListEditor Tests", function () {
-        bareListEditorTest.fetchTemplate("../../main/webapp/defaults/html/pages/Administration-users.html", ".csc-users-userAdmin");
+        bareListEditorTest.fetchTemplate("../../main/webapp/defaults/html/pages/Administration-users.html", ".csc-admin-users");
     }, function () {
         $(".ui-dialog").detach();
     });
@@ -80,7 +80,7 @@ var listEditorTester = function(){
         });
         fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.users");
         fluid.staticEnvironment.cspaceTestEnv = fluid.typeTag("cspace.listEditorTests");
-        listEditor = cspace.listEditor(".csc-users-userAdmin", testOpts);
+        listEditor = cspace.listEditor(".csc-admin-users", testOpts);
         stop();
     };
     

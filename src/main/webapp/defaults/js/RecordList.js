@@ -102,6 +102,9 @@ cspace = cspace || {};
             },
             newRow: {
                 messagekey: "newRow",
+                args: {
+                    recordType: that.lookupMessage(that.options.recordType)
+                },
                 decorators: [{
                     type: "addClass",
                     classes: that.options.styles.hidden
@@ -176,6 +179,9 @@ cspace = cspace || {};
                                 controlledBy: "names",
                                 tree: {
                                     messagekey: "${{titleColumn}}",
+                                    args: {
+                                        recordType: that.lookupMessage(that.options.recordType)
+                                    },
                                     decorators: [{
                                         type: "addClass",
                                         classes: that.options.styles.titleColumn
@@ -337,6 +343,10 @@ cspace = cspace || {};
             autoBind: true
         },
         invokers: {
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{recordList}.options.parentBundle.messageBase", "{arguments}.0"]
+            },
             select: "select",
             verifyColumnOrder: {
                 funcName: "cspace.recordList.verifyColumnOrder",

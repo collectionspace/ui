@@ -27,7 +27,9 @@ cspace = cspace || {};
             } else {
                 var msgKey = operation + "FailedMessage";
                 var msg = that.options.strings[msgKey] + message;
-                that.options.messageBar.show(msg, null, true);
+                that.options.messageBar.show(fluid.stringTemplate(msg, {
+                    record: that.lookupMessage(that.options.recordType)
+                }), null, true);
             }
             that.locate("save").prop("disabled", false);
             that.events.onError.fire(operation);
@@ -74,7 +76,9 @@ cspace = cspace || {};
         var message = action.toLowerCase() + "SuccessfulMessage";
         that.options.applier.requestChange("", data);
         that.refreshView();
-        that.options.messageBar.show(that.options.strings[message], Date());
+        that.options.messageBar.show(fluid.stringTemplate(that.options.strings[message], {
+            record: that.lookupMessage(that.options.recordType)
+        }), Date());
         processChanges(that, false);
         that.locate("save").prop("disabled", false);
     };
@@ -96,7 +100,9 @@ cspace = cspace || {};
         });
 
         that.options.dataContext.events.afterRemove.addListener(function () {
-            that.events.afterRemove.fire(that.options.strings.removeSuccessfulMessage);
+            that.events.afterRemove.fire(fluid.stringTemplate(that.options.strings.removeSuccessfulMessage, {
+                record: that.lookupMessage(that.options.recordType)
+            }));
         });
 
         that.options.dataContext.events.afterRemove.addListener(function () {
@@ -245,6 +251,7 @@ cspace = cspace || {};
                 primaryMessage: that.options.strings.deletePrimaryMessage
             },
             termMap: {
+                record: that.lookupMessage(that.options.recordType),
                 media: that.hasMediaAttached(that) ? that.options.strings.deleteMessageMediaAttached : "",
                 relations: that.hasRelations(that) ? that.options.strings.deleteMessageWithRelated : ""
             }
@@ -271,7 +278,9 @@ cspace = cspace || {};
                 }
             },
             strings: {
-                primaryMessage: that.options.strings.removeSuccessfulMessage
+                primaryMessage: fluid.stringTemplate(that.options.strings.removeSuccessfulMessage, {
+                    record: that.lookupMessage(that.options.recordType)
+                })
             }
         });
     };
@@ -283,7 +292,9 @@ cspace = cspace || {};
      */
     cspace.recordEditor.statusAfterDelete = function (that) {
         //show messagebar
-        that.options.messageBar.show(that.options.strings.removeSuccessfulMessage, null, false);
+        that.options.messageBar.show(fluid.stringTemplate(that.options.strings.removeSuccessfulMessage, {
+            record: that.lookupMessage(that.options.recordType)
+        }), null, false);
     };
     
     cspace.recordEditor.produceTree = function (that) {
@@ -447,6 +458,10 @@ cspace = cspace || {};
             }
         },
         invokers: {
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{recordEditor}.options.parentBundle.messageBase", "{arguments}.0"]
+            },
             rollback: {
                 funcName: "cspace.recordEditor.rollback",
                 args: "{recordEditor}"
@@ -492,13 +507,13 @@ cspace = cspace || {};
         strings: {
             specFetchError: "I'm sorry, an error has occurred fetching the UISpec: ",
             errorRecoverySuggestion: "Please try refreshing your browser",
-            updateSuccessfulMessage: "Record successfully saved",
-            createSuccessfulMessage: "New Record successfully created",
-            removeSuccessfulMessage: "Record successfully deleted",
-            updateFailedMessage: "Error saving Record: ",
-            createFailedMessage: "Error creating Record: ",
-            deleteFailedMessage: "Error deleting Record: ",
-            fetchFailedMessage: "Error retriving Record: ",
+            updateSuccessfulMessage: "%record successfully saved",
+            createSuccessfulMessage: "New %record successfully created",
+            removeSuccessfulMessage: "%record successfully deleted",
+            updateFailedMessage: "Error saving %record: ",
+            createFailedMessage: "Error creating %record: ",
+            deleteFailedMessage: "Error deleting %record: ",
+            fetchFailedMessage: "Error retriving %record: ",
             addRelationsFailedMessage: "Error adding related records: ",
             removeRelationsFailedMessage: "Error removing related records: ",
             defaultTermIndicator: " (default)",
@@ -507,7 +522,7 @@ cspace = cspace || {};
             save: "Save",
             cancel: "Cancel changes",
             deleteButton: "Delete",
-            deletePrimaryMessage: "Delete this record%relations%media?",
+            deletePrimaryMessage: "Delete this %record%relations%media?",
             deleteMessageWithRelated: " and its relationships",
             deleteMessageMediaAttached: " and its attached media"
         },

@@ -124,7 +124,8 @@ cspace = cspace || {};
         };
         fluid.each(records, function (record) {
             model.tabs.push({
-                "name": record,
+                "name": record + "-tab",
+                type: record,
                 href: fluid.stringTemplate(urlExpander(options.href), {recordType: record})
             });
         });
@@ -191,7 +192,7 @@ cspace = cspace || {};
     
     cspace.tabs.tabsSuccess = function (data, textStatus, XMLHttpRequest, tabsList, tabContainer, setupTab) {
         var tabModel = fluid.find(tabsList.model.tabs, findStrategy(tabContainer.tabs('option', 'selected')));
-        setupTab(tabModel["name"]);
+        setupTab(tabModel.type || tabModel["name"]);
     };
     
     cspace.tabs.setupTab = function (tabName, that) {

@@ -16,10 +16,10 @@
                                     "expander": {
                                         "repeatID": "repeat:",
                                         "tree": {
-                                            ".csc-termlist-termName": "${{row}.name}",
-                                            ".csc-termlist-termDescription": "${{row}.description}",
-                                            ".csc-termlist-termSource": "${{row}.source}",
-                                            ".csc-termlist-termSourcePage": "${{row}.sourcePage}",
+                                            ".csc-termlist-termName": "${{row}.termName}",
+                                            ".csc-termlist-termDescription": "${{row}.termDescription}",
+                                            ".csc-termlist-termSource": "${{row}.termSource}",
+                                            ".csc-termlist-termSourcePage": "${{row}.termSourcePage}",
                                             ".csc-termlist-termStatus": {
                                                 "optionnames": [
                                                     "Active",
@@ -29,7 +29,7 @@
                                                     "active",
                                                     "inactive"
                                                 ],
-                                                "selection": "${{row}.status}"
+                                                "selection": "${{row}.termStatus}"
                                             }
                                         },
                                         "type": "fluid.renderer.repeat",
@@ -56,7 +56,7 @@
                 },
                 "type": "fluid.renderer.repeat",
                 "pathAs": "row",
-                "controlledBy": "fields.usedBy"
+                "controlledBy": "fields.usedBys"
             }
         ]
     }
