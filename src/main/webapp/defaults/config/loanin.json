@@ -56,7 +56,8 @@
                 "recordlist",
                 "namespaces",
                 "recordtypes",
-                "loanin"
+                "loanin",
+                "reporting"
             ],
             "pageSpec": {
                 "recordEditor": {

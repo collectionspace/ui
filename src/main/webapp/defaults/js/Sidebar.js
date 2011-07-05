@@ -142,8 +142,7 @@ cspace = cspace || {};
         components: {
             report: {
                 type: "cspace.reportProducer",
-                createOnEvent: "afterRender",
-                container: "{sidebar}.dom.report"
+                createOnEvent: "afterRender"
             },
             termsUsed: {
                 type: "cspace.recordList",

@@ -82,7 +82,8 @@
                 "recordlist",
                 "namespaces",
                 "recordtypes",
-                "media"
+                "media",
+                "reporting"
             ],
             "pageSpec": {
                 "recordEditor": {

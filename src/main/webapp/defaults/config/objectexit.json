@@ -52,7 +52,8 @@
                 "recordlist",
                 "namespaces",
                 "recordtypes",
-                "objectexit"
+                "objectexit",
+                "reporting"
             ],
             "pageSpec": {
                 "recordEditor": {

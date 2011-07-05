@@ -1,0 +1,15 @@
+{
+    "reporting": {
+        "type": "object",
+        "properties": {
+            "movement": {
+                "default": [
+                    "Simple report",
+                    "Complicated report",
+                    "Some other report"
+                ],
+                "type": "array"
+            }
+        }
+    }
+}

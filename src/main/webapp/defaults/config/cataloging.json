@@ -56,7 +56,8 @@
                 "recordlist",
                 "recordtypes",
                 "namespaces",
-                "cataloging"
+                "cataloging",
+                "reporting"
             ],
             "pageSpec": {
                 "recordEditor": {

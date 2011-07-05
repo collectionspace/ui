@@ -56,7 +56,8 @@
                 "recordlist",
                 "recordtypes",
                 "namespaces",
-                "acquisition"
+                "acquisition",
+                "reporting"
             ],
             "pageSpec": {
                 "recordEditor": {

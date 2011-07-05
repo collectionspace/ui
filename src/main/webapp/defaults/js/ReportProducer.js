@@ -21,7 +21,11 @@ cspace = cspace || {};
         invokers: {
             generateReport: {
                 funcName: "cspace.reportProducer.generateReport",
-                args: ["{reportProducer}.confirmation", "{reportProducer}.model", "{reportProducer}.options", "{reportProducer}.events"]
+                args: ["{reportProducer}.confirmation", "{reportProducer}.options.strings", "{reportProducer}.requestReport"]
+            },
+            requestReport: {
+                funcName: "cspace.reportProducer.requestReport",
+                args: ["{reportProducer}.model", "{reportProducer}.options", "{reportProducer}.events", "{arguments}.0"]
             }
         },
         components: {
@@ -31,11 +35,18 @@ cspace = cspace || {};
             reportStatus: {
                 type: "cspace.reportProducer.reportStatus",
                 createOnEvent: "ready",
-                container: "{reportProducer}.reportLoadingIndicatorContainer"
-            }
+                container: "{reportProducer}.reportLoadingIndicatorContainer",
+                options: {
+                    events: {
+                        onStop: "{reportProducer}.events.onStop"
+                    }
+                }
+            },
+            messageBar: "{messageBar}"
         },
         events: {
             onError: null,
+            onStop: null,
             reportStarted: null,
             reportFinished: null,
             ready: null
@@ -50,7 +61,11 @@ cspace = cspace || {};
         selectorsToIgnore: ["reportLoadingIndicatorContainer"],
         strings: {
             reportHeader: "Create Report",
-            reportButton: "Create"
+            reportButton: "Create",
+            reportError: "Error creating report: ",
+            primaryMessage: "Are you sure you want to run this report",
+            actText: "Create",
+            actAlt: "Create Report"
         },
         styles: {
             reportHeader: "cs-reportProducer-header",
@@ -69,8 +84,7 @@ cspace = cspace || {};
             })
         },
         model: {
-            reportTypeList: [""],
-            reportTypeNames: ["Please select a value"],
+            reportTypes: ["Please select a value"],
             reportTypeSelection: "",
             enableReporting: {
                 expander: {
@@ -79,30 +93,44 @@ cspace = cspace || {};
                     args: {
                         resolver: "{permissionsResolver}",
                         permission: "read",
-                        // TODO: Double check that this is the right perm. level.
                         target: "reporting"
                     }
                 }
             }
         },
+        urls: cspace.componentUrlBuilder({
+            reportUrl: "%chain/reporting"
+        }),
         finalInitFunction: "cspace.reportProducer.finalInit",
         postInitFunction: "cspace.reportProducer.postInit",
         preInitFunction: "cspace.reportProducer.preInit"
     });
+    
+    cspace.reportProducer.getReportTypes = function (recordType, strategy, options) {
+        var config = {
+            strategies: [fluid.invokeGlobalFunction(strategy, [options])]
+        }; 
+        return fluid.makeArray(fluid.get({}, fluid.model.composeSegments("reporting", recordType), config));
+    };
     
     fluid.fetchResources.primeCacheFromResources("cspace.reportProducer");
     
     cspace.reportProducer.preInit = function (that) {
         that.options.listeners = {
             reportStarted: function () {
-                var reportType = that.model.reportTypeNames[$.inArray(that.model.reportTypeSelection, that.model.reportTypeList)];
-                that.reportStatus.show(reportType);
+                that.applier.requestChange("reportTypeSelection", that.model.reportTypeSelection || that.model.reportTypes[0]);
+                that.reportStatus.show(that.model.reportTypeSelection);
             },
             reportFinished: function () {
                 that.reportStatus.hide();
             },
-            onError: function () {
+            onError: function (message) {
                 that.reportStatus.hide();
+                that.messageBar.show(that.options.strings.reportError + message, null, true)
+            },
+            onStop: function (reportType) {
+                that.applier.requestChange("reportTypeSelection", reportType);
+                that.requestReport(true);
             }
         };
     };
@@ -120,19 +148,43 @@ cspace = cspace || {};
         that.events.ready.fire();
     };
     
-    cspace.reportProducer.generateReport = function (confirmation, model, options, events) {
+    cspace.reportProducer.requestReport = function (model, options, events, stop) {
+        if (!stop) {
+            events.reportStarted.fire();
+        }
+        fluid.fetchResources({
+            report: {
+                href: options.urls.reportUrl,
+                options: {
+                    type: "POST",
+                    dataType: "json",
+                    data: JSON.stringify({
+                        recordType: options.recordType,
+                        stop: stop,
+                        reportType: model.reportTypeSelection
+                    }),
+                    success: function (data) {
+                        events.reportFinished.fire();
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        events.onError.fire(textStatus);
+                    }
+                }
+            }
+        });
+    };
+    
+    cspace.reportProducer.generateReport = function (confirmation, strings, requestReport) {
         confirmation.open("cspace.confirmation.deleteDialog", undefined, {
             strings: {
-                primaryMessage: "Are you sure you want to run this report",
-                actText: "Create",
-                actAlt: "Create Report"
+                primaryMessage: strings.primaryMessage,
+                actText: strings.actText,
+                actAlt: strings.actAlt
             },
             listeners: {
                 onClose: function (userAction) {
                     if (userAction === "act") {
-                        events.reportStarted.fire();
-                        // TODO: Send a request with callback:
-//                        events.reportFinished.fire();
+                        requestReport(false);
                     }
                 }
             }
@@ -155,8 +207,8 @@ cspace = cspace || {};
                 decorators: {"addClass": "{styles}.reportHeader"}
             },
             reportType: {
-                optionnames: "${reportTypeNames}",
-                optionlist: "${reportTypeList}",
+                optionnames: "${reportTypes}",
+                optionlist: "${reportTypes}",
                 selection: "${reportTypeSelection}",
                 decorators: {"addClass": "{styles}.reportType"}
             },
@@ -188,6 +240,9 @@ cspace = cspace || {};
                 }
             })
         },
+        events: {
+            onStop: null
+        },
         produceTree: "cspace.reportProducer.reportStatus.produceTree",
         finalInitFunction: "cspace.reportProducer.reportStatus.finalInit",
         selectors: {
@@ -211,7 +266,7 @@ cspace = cspace || {};
             message: {
                 messagekey: "message",
                 args: {reportType: "${reportType}"},
-                decorators: {"addClass": "{styles}.repormessagetType"}
+                decorators: {"addClass": "{styles}.message"}
             },
             stop: {
                 decorators: [{
@@ -219,7 +274,15 @@ cspace = cspace || {};
                     attributes: {
                         value: that.options.strings.stop                        
                     }
-                }, {"addClass": "{styles}.stop"}]
+                }, {
+                    "addClass": "{styles}.stop"
+                }, {
+                    type: "jQuery",
+                    func: "click",
+                    args: function () {
+                        that.events.onStop.fire(that.model.reportType);
+                    }
+                }]
             }
         };
     };
@@ -229,7 +292,9 @@ cspace = cspace || {};
             that.refreshView();
             that.container.show();
         };
-        that.hide = that.container.hide;
+        that.hide = function () {
+            that.container.hide();
+        }
     };
     
 })(jQuery, fluid);

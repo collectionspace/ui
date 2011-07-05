@@ -61,7 +61,8 @@
                 "recordlist",
                 "recordtypes",
                 "namespaces",
-                "location"
+                "location",
+                "reporting"
             ],
             "pageSpec": {
                 "recordEditor": {

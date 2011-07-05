@@ -51,7 +51,8 @@
                 "recordlist",
                 "recordtypes",
                 "namespaces",
-                "organization"
+                "organization",
+                "reporting"
             ],
             "pageSpec": {
                 "recordEditor": {

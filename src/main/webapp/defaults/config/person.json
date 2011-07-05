@@ -62,7 +62,8 @@
                 "recordlist",
                 "recordtypes",
                 "namespaces",
-                "person"
+                "person",
+                "reporting"
             ],
             "pageSpec": {
                 "recordEditor": {

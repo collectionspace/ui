@@ -23,7 +23,8 @@
             "schema": [
                 "recordlist",
                 "recordtypes",
-                "namespaces"
+                "namespaces",
+                "reporting"
             ]
         }
     }

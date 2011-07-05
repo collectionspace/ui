@@ -23,6 +23,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
         
+        // Report producer
+        fluid.demands("cspace.reportProducer", ["cspace.sidebar", "cspace.localData"], {
+            container: "{sidebar}.dom.report",
+            options: {
+                recordType: "{sidebar}.options.primaryRecordType"
+            }
+        });
+        
         // getDefaultConfigURL demands
         fluid.demands("getRecordType", ["cspace.util.getDefaultConfigURL", "cspace.localData"], {
             funcName: "cspace.util.getDefaultConfigURL.getRecordTypeLocal"
@@ -490,6 +498,28 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 targetTypeName: "cspace.autocomplete.broaderDataSource"
             }
         });
+        
+        // Report producer  
+        fluid.demands("cspace.reportProducer", ["cspace.sidebar", "cspace.pageBuilder"], {
+            container: "{sidebar}.dom.report",
+            options: {
+                recordType: "{sidebar}.options.primaryRecordType",
+                model: {
+                    reportTypes: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.reportProducer.getReportTypes",
+                            args: [
+                                "{sidebar}.options.primaryRecordType", 
+                                "cspace.util.schemaStrategy", {
+                                    schema: "{pageBuilder}.schema"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        });  
         
         // Confirmation demands
         fluid.demands("confirmation", "cspace.recordEditor", "{options}");

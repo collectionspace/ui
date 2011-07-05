@@ -52,7 +52,8 @@
                 "recordlist",
                 "namespaces",
                 "recordtypes",
-                "loanout"
+                "loanout",
+                "reporting"
             ],
             "pageSpec": {
                 "recordEditor": {
