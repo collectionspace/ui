@@ -25,7 +25,7 @@ cspace = cspace || {};
             },
             requestReport: {
                 funcName: "cspace.reportProducer.requestReport",
-                args: ["{reportProducer}.model", "{reportProducer}.options", "{reportProducer}.events", "{arguments}.0"]
+                args: ["{reportProducer}.model", "{reportProducer}.options", "{reportProducer}.events", "{arguments}.0", "{arguments}.1"]
             }
         },
         components: {
@@ -42,7 +42,8 @@ cspace = cspace || {};
                     }
                 }
             },
-            messageBar: "{messageBar}"
+            messageBar: "{messageBar}",
+            globalNavigator: "{globalNavigator}"
         },
         events: {
             onError: null,
@@ -65,7 +66,11 @@ cspace = cspace || {};
             reportError: "Error creating report: ",
             primaryMessage: "Are you sure you want to run this report",
             actText: "Create",
-            actAlt: "Create Report"
+            actAlt: "Create Report",
+            stopPrimaryMessage: "You are about to navigate away from this page.",
+            stopSecondaryMessage: "Do you want to stop current report?",
+            stopActText: "Stop",
+            stopActAlt: "Stop report."
         },
         styles: {
             reportHeader: "cs-reportProducer-header",
@@ -86,6 +91,7 @@ cspace = cspace || {};
         model: {
             reportTypes: ["Please select a value"],
             reportTypeSelection: "",
+            reportInProgress: false,
             enableReporting: {
                 expander: {
                     type: "fluid.deferredInvokeCall",
@@ -118,17 +124,21 @@ cspace = cspace || {};
     cspace.reportProducer.preInit = function (that) {
         that.options.listeners = {
             reportStarted: function () {
+                that.applier.requestChange("reportInProgress", true);
                 that.applier.requestChange("reportTypeSelection", that.model.reportTypeSelection || that.model.reportTypes[0]);
                 that.reportStatus.show(that.model.reportTypeSelection);
             },
             reportFinished: function () {
+                that.applier.requestChange("reportInProgress", false);
                 that.reportStatus.hide();
             },
             onError: function (message) {
+                that.applier.requestChange("reportInProgress", false);
                 that.reportStatus.hide();
                 that.messageBar.show(that.options.strings.reportError + message, null, true)
             },
             onStop: function (reportType) {
+                that.applier.requestChange("reportInProgress", false);
                 that.applier.requestChange("reportTypeSelection", reportType);
                 that.requestReport(true);
             }
@@ -145,10 +155,33 @@ cspace = cspace || {};
     
     cspace.reportProducer.finalInit = function (that) {
         that.refreshView();
+        that.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
+            if (that.model.reportInProgress) {
+                that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+                    strings: {
+                        primaryMessage: that.options.strings.stopPrimaryMessage,
+                        secondaryMessage: that.options.strings.stopSecondaryMessage,
+                        actText: that.options.strings.stopActText,
+                        actAlt: that.options.strings.stopActAlt
+                    },
+                    model: {
+                        messages: ["primaryMessage", "secondaryMessage"]
+                    },
+                    listeners: {
+                        onClose: function (userAction) {
+                            if (userAction === "act") {
+                                that.requestReport(true, callback);
+                            }
+                        }
+                    }
+                });
+                return false;
+            }
+        });
         that.events.ready.fire();
     };
     
-    cspace.reportProducer.requestReport = function (model, options, events, stop) {
+    cspace.reportProducer.requestReport = function (model, options, events, stop, callback) {
         if (!stop) {
             events.reportStarted.fire();
         }
@@ -165,6 +198,9 @@ cspace = cspace || {};
                     }),
                     success: function (data) {
                         events.reportFinished.fire();
+                        if (callback) {
+                            callback();
+                        }
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         events.onError.fire(textStatus);
