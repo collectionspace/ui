@@ -42,12 +42,6 @@ cspace = cspace || {};
         applier.requestChange("", cspace.util.getBeanValue(existingModel, recordType, schema));
     };
     
-    var setUpPageBuilder = function (that) {
-        setupModel(that.applier, that.model, that.options.pageType, that.options.recordType, that.schema);
-        that.events.onDependencySetup.fire(that.options.uispec);
-        fluid.initDependents(that);
-    };
-    
     cspace.pageSpecManager = function (pageSpecs) {
         var texts = {};
         function attemptApply() { // Further soundness in correcting FLUID-2792
@@ -345,21 +339,10 @@ cspace = cspace || {};
         gradeNames: ["fluid.littleComponent"],
         perms: ["create", "update"]
     });
-    
-    cspace.pageBuilder = function (options) {
-        var that = fluid.initLittleComponent("cspace.pageBuilder", options);
-        that.dataContext = that.options.dataContext;
-        that.model = that.options.model || {};
-        that.applier = that.options.applier || fluid.makeChangeApplier(that.model);
-        that.schema = that.options.schema;
-        that.permissions = that.options.userLogin.permissions;
-        fluid.instantiateFirers(that, that.options);
-        setUpPageBuilder(that);
-        return that;
-    };
 
     fluid.defaults("cspace.pageBuilder", {
-        gradeNames: ["fluid.littleComponent"],
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        preInitFunction: "cspace.pageBuilder.preInit",
         dataContext: "{dataContext}",
         recordType: "{pageBuilderIO}.options.recordType",
         model: "{pageBuilderIO}.options.model",
@@ -394,7 +377,8 @@ cspace = cspace || {};
                 }
             },
             globalBundle: {
-                type: "cspace.globalBundle"
+                type: "cspace.globalBundle",
+                priority: "first"
             },
             namespaces: {
                 type: "cspace.namespaces",
@@ -422,5 +406,43 @@ cspace = cspace || {};
             uispec: "noexpand"
         }
     });
+    
+    cspace.pageBuilder.preInit = function (that) {
+        that.dataContext = that.options.dataContext;
+        that.model = that.options.model || {};
+        that.applier = that.options.applier || fluid.makeChangeApplier(that.model);
+        that.schema = that.options.schema;
+        that.permissions = that.options.userLogin.permissions;
+        fluid.instantiateFirers(that, that.options);
+        setupModel(that.applier, that.model, that.options.pageType, that.options.recordType, that.schema);
+        that.events.onDependencySetup.fire(that.options.uispec);
+    };
+    
+    fluid.defaults("cspace.pageBuilder.renderer", {
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        preInitFunction: "cspace.pageBuilder.renderer.preInit",
+        renderOnInit: true,
+        selectors: {
+            header: ".csc-pageBuilder-header"
+        },
+        parentBundle: "{globalBundle}",
+        protoTree: {
+            header: {
+                messagekey: "${header}"
+            }
+        },
+        model: {
+            header: "pageBuilder-header-%pageType"
+        },
+        strings: {}
+    });
+    
+    cspace.pageBuilder.renderer.preInit = function (that) {
+        that.model = cspace.util.stringBuilder(that.model, {
+            vars: {
+                pageType: that.options.pageType
+            }
+        });
+    };
     
 })(jQuery, fluid);

@@ -209,14 +209,7 @@ cspace = cspace || {};
             category2: "cs-createNew-category2",
             category3: "cs-createNew-category3"
         },
-        strings: {                  // List of strings that the component will render (for l10n and i18n).
-            //headers
-            catalogingCategory: "Cataloging Records",
-            proceduresCategory: "Procedural Records",
-            vocabulariesCategory: "Vocabulary Terms",
-            //create new button:
-            createButtonText: "Create"
-        },
+        strings: {},
         produceTree: cspace.createNew.produceTree,
         invokers: {
             refreshView: {          // A public method that renders the component and binds event handlers anew.

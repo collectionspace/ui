@@ -2,9 +2,29 @@
     "pageBuilder": {
         "options": {
             "selectors": {
-                "createNew": ".csc-createNew-main" 
+                "createNew": ".csc-createNew-main"
             },
             "components": {
+                "renderer": {
+                    "type": "cspace.pageBuilder.renderer",
+                    "container": ".csc-createnew",
+                    "options": {
+                        "selectors": {
+                            "search": ".csc-pageBuilder-search"
+                        },
+                        "protoTree": {
+                            "search": {
+                                "messagekey": "${search}"
+                            },
+                            "header": {
+                                "messagekey": "${header}"
+                            }
+                        },
+                        "model": {
+                            "search": "pageBuilder-search"
+                        }
+                    }
+                },
                 "pivotSearch": {
                     "type": "cspace.searchBox",
                     "options": {
@@ -30,6 +50,11 @@
                     } 
                 } 
             } 
+        }
+    },
+    "pageBuilderIO": {
+        "options": {
+            "pageType": "createnew"
         }
     }
 }

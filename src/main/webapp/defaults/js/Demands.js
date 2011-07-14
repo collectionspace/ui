@@ -279,6 +279,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 recordType: "{pageBuilderIO}.options.recordType"
             }
         });
+        
+        // Pagebuilder renderer
+        fluid.demands("cspace.pageBuilder.renderer", ["cspace.pageBuilderIO", "cspace.pageBuilder"], {
+            options: {
+                pageType: "{pageBuilderIO}.options.pageType"
+            }
+        });
 
         // PageBuilderIO
         fluid.demands("cspace.pageBuilderIO", "cspace.globalSetup", {
