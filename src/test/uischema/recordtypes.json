@@ -1,12 +1,21 @@
 {
     "recordtypes": {
-        "type": "object",
         "properties": {
             "vocabularies": {
                 "default": [
+                    "persontest1",
                     "person",
-                    "organization",
-                    "location"
+                    "persontest2",
+                    "location",
+                    "organization"
+                ],
+                "type": "array"
+            },
+            "administration": {
+                "default": [
+                    "users",
+                    "termlist",
+                    "role"
                 ],
                 "type": "array"
             },
@@ -18,25 +27,18 @@
             },
             "procedures": {
                 "default": [
-                    "group",
-                    "intake",
                     "loanin",
                     "loanout",
                     "acquisition",
                     "movement",
                     "objectexit",
+                    "intake",
+                    "group",
                     "media"
                 ],
                 "type": "array"
-            },
-            "administration": {
-                "default": [
-                    "users",
-                    "role",
-                    "termlist"
-                ],
-                "type": "array"
             }
-        }
+        },
+        "type": "object"
     }
 }
