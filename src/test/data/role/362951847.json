@@ -8,7 +8,7 @@
             {"resourceName": "intake", "permission": "none"},
             {"resourceName": "movement", "permission": "none"}
         ],
-        "roleName": "Curator",
+        "displayName": "Curator",
         "description": "Full-time museum curators"
     }
 }

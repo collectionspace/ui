@@ -8,7 +8,7 @@
             {"resourceName": "intake", "permission": "read"},
             {"resourceName": "movement", "permission": "read"}
         ],
-        "roleName": "Director",
+        "displayName": "Director",
         "description": "The big boss"
     }
 }

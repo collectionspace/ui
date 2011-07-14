@@ -8,7 +8,7 @@
             {"resourceName": "intake", "permission": "write"},
             {"resourceName": "movement", "permission": "delete"}
         ],
-        "roleName": "Scanning Intern",
+        "displayName": "Scanning Intern",
         "description": "Interns responsible for scanning documents"
     }
 }

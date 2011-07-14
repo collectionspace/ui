@@ -8,7 +8,7 @@
             {"resourceName": "intake", "permission": "read"},
             {"resourceName": "movement", "permission": "read"}
         ],
-        "roleName": "Media Intern",
+        "displayName": "Media Intern",
         "description": "Interns responsible for working with media records"
     }
 }
