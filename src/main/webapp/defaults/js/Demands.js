@@ -734,10 +734,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }
                 },
                 strings: {
-                    deleteButton: "Delete Relation",
-                    deletePrimaryMessage: "Delete this relation?",
-                    deleteFailedMessage: "Error deleting relation: ",
-                    removeSuccessfulMessage: "Relation successfully deleted"
+                    deleteButton: "{globalBundle}.messageBase.tab-re-deleteButton",
+                    deletePrimaryMessage: "{globalBundle}.messageBase.tab-re-deletePrimaryMessage",
+                    deleteFailedMessage: "{globalBundle}.messageBase.tab-re-deleteFailedMessage",
+                    removeSuccessfulMessage: "{globalBundle}.messageBase.tab-re-removeSuccessfulMessage"
                 }
             }
         });
@@ -790,10 +790,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     column2: "cs-recordList-column2-tab"
                 },
                 strings: {
-                    number: "ID Number",
-                    summary: "Summary",
-                    newRow: "Creating New Related Record...",
-                    deleteRelation: "Delete this relation."
+                    number: "{globalBundle}.messageBase.tab-list-number",
+                    summary: "{globalBundle}.messageBase.tab-list-summary",
+                    newRow: "{globalBundle}.messageBase.tab-list-newRow",
+                    deleteRelation: "{globalBundle}.messageBase.tab-list-deleteRelation"
                 }
             }
         });
@@ -829,10 +829,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     deleteRelation: "cs-recordList-deleteRelation"
                 },
                 strings: {
-                    number: "ID Number",
-                    summary: "Summary",
-                    newRow: "Creating New Related Record...",
-                    deleteRelation: "Delete this relation."
+                    number: "{globalBundle}.messageBase.tab-list-number",
+                    summary: "{globalBundle}.messageBase.tab-list-summary",
+                    newRow: "{globalBundle}.messageBase.tab-list-newRow",
+                    deleteRelation: "{globalBundle}.messageBase.tab-list-deleteRelation"
                 }
             }
         });
@@ -841,9 +841,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 columns: ["screenName", "status"],
                 strings: {
-                    screenName: "User's Full Name",
-                    status: "Status",
-                    newRow: "Creating New User..."
+                    screenName: "{globalBundle}.messageBase.users-admin-screenName",
+                    status: "{globalBundle}.messageBase.users-admin-status",
+                    newRow: "{globalBundle}.messageBase.users-admin-newRow"
                 }
             }
         });
@@ -853,8 +853,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 recordType: "{listEditor}.options.recordType",
                 columns: ["number"],
                 strings: {
-                    number: "%recordType Name",
-                    newRow: "Creating New %recordType..."
+                    number: "{globalBundle}.messageBase.admin-number",
+                    newRow: "{globalBundle}.messageBase.admin-newRow"
                 }
             }
         });
@@ -890,9 +890,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 columns: ["number", "summary", "sourceFieldName"],
                 strings: {
-                    number: "Number",
-                    summary: "Title",
-                    sourceFieldName: "Relationship"
+                    number: "{globalBundle}.messageBase.rl-rrl-number",
+                    summary: "{globalBundle}.messageBase.rl-rrl-summary",
+                    sourceFieldName: "{globalBundle}.messageBase.rl-rrl-sourceFieldName"
                 },
                 model: {
                     items: "{relatedRecordsList}.model.refobjs"
@@ -904,9 +904,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 columns: ["number", "summary", "sourceFieldName"],
                 strings: {
-                    number: "Number",
-                    summary: "Title",
-                    sourceFieldName: "Relationship"
+                    number: "{globalBundle}.messageBase.rl-rrl-number",
+                    summary: "{globalBundle}.messageBase.rl-rrl-summary",
+                    sourceFieldName: "{globalBundle}.messageBase.rl-rrl-sourceFieldName"
                 },
                 model: {
                     items: "{relatedRecordsList}.model.refobjs"
@@ -918,9 +918,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 columns: ["number", "summary", "sourceFieldName"],
                 strings: {
-                    number: "Number",
-                    summary: "Title",
-                    sourceFieldName: "Relationship"
+                    number: "{globalBundle}.messageBase.rl-rrl-number",
+                    summary: "{globalBundle}.messageBase.rl-rrl-summary",
+                    sourceFieldName: "{globalBundle}.messageBase.rl-rrl-sourceFieldName"
                 },
                 model: {
                     items: "{relatedRecordsList}.model.refobjs"
@@ -1425,7 +1425,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{tabs}.dom.tabsList",
             options: {
                 strings: {
-                    primary: "Current record"
+                    primary: "{globalBundle}.messageBase.tablist-primary"
                 },
                 model: {
                     tabs: {
@@ -1441,7 +1441,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{tabs}.dom.tabsList",
             options: {
                 strings: {
-                    primary: "Current record"
+                    primary: "{globalBundle}.messageBase.tablist-primary"
                 },
                 model: {
                     tabs: {
@@ -1457,7 +1457,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{tabs}.dom.tabsList",
             options: {
                 strings: {
-                    primary: "Current record"
+                    primary: "{globalBundle}.messageBase.tablist-primary"
                 },
                 model: {
                     tabs: {
@@ -1505,7 +1505,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{pageBuilder}.options.selectors.titleBar",
             options: {
                 strings: {
-                    administration: "Administration"
+                    administration: "{globalBundle}.messageBase.admin-administration"
                 },
                 model: {
                     recordType: "administration"

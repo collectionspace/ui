@@ -158,9 +158,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             columns: ["screenName", "status"],
             parentBundle: "{listEditor}.options.parentBundle",
             strings: {
-                screenName: "User's Full Name",
-                status: "Status",
-                newRow: "Creating New User..."
+                screenName: "{listEditor}.options.parentBundle.messageBase.users-admin-screenName",
+                status: "{listEditor}.options.parentBundle.messageBase.users-admin-status",
+                newRow: "{listEditor}.options.parentBundle.messageBase.users-admin-newRow"
             }
         }
     });
@@ -171,9 +171,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             columns: ["screenName", "status"],
             parentBundle: "{listEditor}.options.parentBundle",
             strings: {
-                screenName: "User's Full Name",
-                status: "Status",
-                newRow: "Creating New User..."
+                screenName: "{listEditor}.options.parentBundle.messageBase.users-admin-screenName",
+                status: "{listEditor}.options.parentBundle.messageBase.users-admin-status",
+                newRow: "{listEditor}.options.parentBundle.messageBase.users-admin-newRow"
             }
         }
     });
