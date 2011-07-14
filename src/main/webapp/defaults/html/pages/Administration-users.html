@@ -3,7 +3,7 @@
         <div class="main-users-page csc-admin-users">
             <!-- search form -->
             <div id="search-box">
-                <input name="keyword" type="text" class="cs-search-user csc-user-searchField" /><input type="submit" class="csc-user-searchButton cs-user-searchButton" value="Find User" /> (searches Full Name) &nbsp;&nbsp;<input type="submit" class="csc-user-unSearchButton cs-user-unSearchButton" value="Show all users" />
+                <input name="keyword" type="text" class="cs-search-user csc-user-searchField" /><input type="submit" class="csc-user-searchButton cs-user-searchButton" value="" /><span class="csc-users-searchNote"></span><input type="submit" class="csc-user-unSearchButton cs-user-unSearchButton" value="" />
             </div>
             <!-- end search form -->
             <div class="csc-user-list">
@@ -34,37 +34,42 @@
                                     </div>
                                     <div class="info-column2-50 fl-force-left">
                                         <div class="info-pair">
-                                            <div class="label">Email Address <span class="required">*</span></div><div class="user-input"><input type="text" class="input-alpha csc-user-email csc-required" name=""/></div>
+                                            <span class="label csc-users-email-label"></span><span class="required">*</span>
+                                            <div class="user-input"><input type="text" class="input-alpha csc-user-email csc-required" name=""/></div>
                                         </div>
                                         <div class="info-pair no-padding">
-                                            <div class="label">Full Name  <span class="required">*</span></div><div class="user-input"><input type="text" class="input-alpha csc-user-userName csc-required" name=""/></div>
+                                            <span class="label csc-users-screenName-label"></span><span class="required">*</span>
+                                            <div class="user-input"><input type="text" class="input-alpha csc-user-userName csc-required" name=""/></div>
                                         </div>
 
                                         <div class="csc-details-hideOnEdit">
                                             <div class="info-pair">
-                                                <div class="label">Password  <span class="required">*</span></div><div class="user-input"><input type="password" class="input-alpha csc-user-password csc-required csc-passwordValidator-password" name=""/></div>
-                                                <div class="password-instructions">Password must be between 8 and 24 characters.</div>
+                                                <span class="label csc-users-password-label"></span><span class="required">*</span>
+                                                <div class="user-input"><input type="password" class="input-alpha csc-user-password csc-required csc-passwordValidator-password" name=""/></div>
+                                                <div class="password-instructions csc-users-passwordInstructions-label"></div>
                                             </div>                                                        
                                             <div class="info-pair">
-                                                <div class="label">Confirm Password  <span class="required">*</span></div><div class="user-input"><input type="password" class="input-alpha csc-user-passwordConfirm csc-required" name=""/></div>
+                                                <span class="label csc-users-passwordConfirm-label"></span><span class="required">*</span>
+                                                <div class="user-input"><input type="password" class="input-alpha csc-user-passwordConfirm csc-required" name=""/></div>
                                             </div>
                                         </div>
                                         <div class="info-pair">
-                                            <div class="label">Status <span class="required">*</span></div><div class="user-input">
+                                            <span class="label csc-users-status-label"></span><span class="required">*</span>
+                                            <div class="user-input">
                                                 <select class="csc-user-status csc-required"><option value="">Options not loaded</option></select> 
                                             </div>
                                         </div>
                                     </div>
                                     <div class="info-column2-50 fl-force-right">
                                         <div class="info-pair">
-                                            <div class="label">Roles</div>
+                                            <div class="label csc-users-role-label"></div>
                                             <div class="overflowdiv-admin content">
                                                 <table>
                                                     <thead>
                                                         <tr>
                                                             <td></td>
-                                                            <td>Role name</td>
-                                                            <td>Group</td>
+                                                            <td class="csc-users-roleName-label"></td>
+                                                            <td class="csc-users-roleGroup-label"></td>
                                                         </tr>
                                                     </thead>
                                                     <tbody>                                                                            

@@ -79,6 +79,39 @@ cspace = cspace || {};
         };
     };
     
+    cspace.admin.produceAdminUserTree = function (that) {
+        return fluid.merge(null, cspace.admin.produceTree(that), {
+            passwordLabel: {
+                messagekey: "users-passwordLabel"
+            },
+            passwordConfirmLabel: {
+                messagekey: "users-confirmPasswordLabel"
+            },
+            passwordInstructionsLabel: {
+                messagekey: "users-passwordInstructionsLabel"
+            },
+            searchNote: {
+                messagekey: "users-searchNote"
+            },
+            searchButton: {
+                decorators: {
+                    type: "attrs",
+                    attributes: {
+                        value: that.options.parentBundle.messageBase["users-search"]
+                    } 
+                }
+            },
+            unSearchButton: {
+                decorators: {
+                    type: "attrs",
+                    attributes: {
+                        value: that.options.parentBundle.messageBase["users-unsearch"]
+                    } 
+                }
+            }
+        });
+    };
+    
     cspace.admin.assertRoleDisplay = function (displayString) {
         return displayString !== "none";
     };

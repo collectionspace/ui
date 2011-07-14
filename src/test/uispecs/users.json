@@ -1,8 +1,37 @@
 {
     "details": {
-        ".csc-user-userName": "${fields.screenName}",
+        ".csc-users-roleGroup-label": {
+            "messagekey": "users-roleGroupLabel"
+        },
+        ".csc-users-tenantID-label": {
+            "messagekey": "users-tenantIDLabel"
+        },
+        ".csc-users-userId-label": {
+            "messagekey": "users-userIdLabel"
+        },
+        ".csc-users-role-label": {
+            "messagekey": "users-roleLabel"
+        },
+        ".csc-users-status-label": {
+            "messagekey": "users-statusLabel"
+        },
+        ".csc-users-roleSelected-label": {
+            "messagekey": "users-roleSelectedLabel"
+        },
+        ".csc-users-tenantID": "${fields.tenantID}",
+        ".csc-users-email-label": {
+            "messagekey": "users-emailLabel"
+        },
+        ".csc-user-userID": "${fields.userId}",
+        ".csc-user-password": "${fields.password}",
+        ".csc-users-createdAt-label": {
+            "messagekey": "users-createdAtLabel"
+        },
+        ".csc-users-domaindata-label": {
+            "messagekey": "users-domaindataLabel"
+        },
         ".csc-user-status": {
-            "default": "0",
+            "default": "active",
             "optionnames": [
                 "Active",
                 "Inactive"
@@ -13,6 +42,7 @@
             ],
             "selection": "${fields.status}"
         },
+        ".csc-user-userName": "${fields.screenName}",
         "expander": {
             "repeatID": ".csc-accountrole-roles-row:",
             "tree": {
@@ -25,10 +55,27 @@
             "pathAs": "row",
             "controlledBy": "fields.role"
         },
+        ".csc-users-password-label": {
+            "messagekey": "users-passwordLabel"
+        },
         ".csc-users-createdAt": "${fields.createdAt}",
-        ".csc-user-password": "${fields.password}",
-        ".csc-user-userID": "${fields.userId}",
-        ".csc-user-email": "${fields.email}"
+        ".csc-users-updatedAt": "${fields.updatedAt}",
+        ".csc-users-roleId-label": {
+            "messagekey": "users-roleIdLabel"
+        },
+        ".csc-users-roleName-label": {
+            "messagekey": "users-roleNameLabel"
+        },
+        ".csc-user-email": "${fields.email}",
+        ".csc-users-updatedAt-label": {
+            "messagekey": "users-updatedAtLabel"
+        },
+        ".csc-users-csid-label": {
+            "messagekey": "users-csidLabel"
+        },
+        ".csc-users-screenName-label": {
+            "messagekey": "users-screenNameLabel"
+        }
     },
     "list": {
         ".csc-recordList-row:": {

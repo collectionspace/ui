@@ -12,21 +12,26 @@
                         "uispec": "{pageBuilder}.options.uispec",
                         "login": "{userLogin}",
                         "queryURL": "../../../chain/users/search?query=",
+                        "produceTree": "cspace.admin.produceAdminUserTree",
                         "events": {
                             "afterTreeRender": null,
                             "afterSetup": null
                         },
-                        "selectorsToIgnore": ["searchField", "deleteButton", "searchButton", "unSearchButton", "userId", "email", "userName", "password", "passwordConfirm"],
+                        "selectorsToIgnore": ["searchField", "deleteButton", "userId", "email", "userName", "password", "passwordConfirm"],
                         "selectors": {
                             "searchField": ".csc-user-searchField",
                             "deleteButton": ".csc-delete",
                             "searchButton": ".csc-user-searchButton",
+                            "searchNote": ".csc-users-searchNote",
                             "unSearchButton": ".csc-user-unSearchButton",
                             "userId": ".csc-user-userID",
                             "email": ".csc-user-email",
                             "userName": ".csc-user-userName",
                             "password": ".csc-user-password",
-                            "passwordConfirm": ".csc-user-passwordConfirm"
+                            "passwordConfirm": ".csc-user-passwordConfirm",
+                            "passwordLabel": ".csc-users-password-label",
+                            "passwordConfirmLabel": ".csc-users-passwordConfirm-label",
+                            "passwordInstructionsLabel": ".csc-users-passwordInstructions-label"
                         },
                         "components": {
                             "passwordValidator": {
