@@ -1,7 +1,6 @@
 /*  styling repeatable fields  */
 .cs-repeatable-repeat .input-textarea  {border:1px solid #C7CFD4;} 
 .content .cs-repeatable-repeat {
-    /*margin-top:-17px; */
     clear:both;}
 tr.csc-repeatable-headerRow td:first-child, tr.csc-repeatable-headerRow td:last-child {
     width:13px;}
@@ -10,9 +9,7 @@ tr.csc-repeatable-headerRow td:first-child, tr.csc-repeatable-headerRow td:last-
     display:none;}
 #read-only .cs-repeatable-primary {}
 .cs-repeatable-repeat input,.cs-repeatable-repeat textarea {
-    /*border:1px solid #C7CFD4; */
-    width:88.5%; 
-    /*float:left;*/}
+    width:88.5%;}
 input[type="button"].cs-repeatable-add, .info-pair-date input[type="button"].cs-repeatable-add {
     font-size:14px; 
     height:16px; 
@@ -29,8 +26,8 @@ li.cs-repeatable-repeat {
     margin-bottom:1px; 
     width:99%}
 .cs-repeatable-content {
-    width:89%;  
-    /*float:left;*/}
+    width:89%;
+}
 .cs-repeatable-content > input {
     width: 89.2%;}
 .cs-repeatable-content .ui-autocomplete-input {
@@ -38,20 +35,16 @@ li.cs-repeatable-repeat {
 input.cs-repeatable-primary {
     width: 11px; 
     position: relative; 
-    vertical-align:top; 
+    vertical-align:middle; 
     border:none; 
     margin-right:3px;
-    margin-top:1px;
-    height:17px;
-    /*float:left;*/}
+    margin-top:2px;
+}
 td input.cs-repeatable-primary {
-    margin:2px 2px 0 0;
-    height:17px;
-    vertical-align:bottom;}
+    margin:2px 2px 0 2px;
+    vertical-align:middle;}
 input.cs-repeatable-delete {
-    /*float:left; */
     border:none; 
-    height:17px; 
     vertical-align:top; 
     padding:0px;
 	width:16px;
@@ -71,4 +64,4 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete:hover,
 table tr.csc-repeatable-repeat input.cs-repeatable-delete:focus,
 table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:hover, 
 table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
-	background-position:2px 2px;}
+	background-position:2px 3px;}

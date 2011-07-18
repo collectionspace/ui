@@ -273,7 +273,7 @@ cspace = cspace || {};
         
         if (!node.is("tr") && !node.is("li")) {
             // TODO: explain why this manipulation is done, and what assumptions it makes about the markup
-            node.wrap("<ul><li class=\"csc-repeatable-repeat " + that.options.styles.repeat + "\"/></ul>");            
+            node.wrap("<ul class=\"cs-repeatable\"><li class=\"csc-repeatable-repeat " + that.options.styles.repeat + "\"/></ul>");            
             // TODO: there is probably a bug here when the 'repeat' selector is overridden - write a test to prove this
             //       to fix the issue we need to add another selector - repeatable-content
             node.removeClass("csc-repeatable-repeat");

@@ -1,31 +1,26 @@
 <div class="cs-add-related-records-dialog main-search-page csc-confirmationDialog cs-confirmationDialog">
     <div class="csc-searchToRelate-closeBtn cs-dialog-closeBtn"><img class="csc-searchToRelate-closeBtnImg" src="../images/btnCloseTop.png" alt="" /></div>
     <div class="csc-confirmationDialog-inner">
-        <div class="info-column fl-force-left">
+        <div class="info-column">
             <div class="csc-related-steps add-related-steps">
                 <div class="info-column2-45 fl-force-left">
-                    <div class="info-pair">
-                        <div class="csc-search-box"></div>
-                    </div>
+                    <div class="csc-search-box"></div>                    
                 </div>
-                <div class="info-column2-30 fl-force-right">
-                    <div class="info-pair">
-                        <div id="create-box">
-                            <div class="header">
-                                <div class="csc-searchToRelate-createNew label"></div>
-                                <div class="clear"></div>
-                            </div>
-                            <div class="content">
-                                <input type="button" style="margin-bottom:-2px; cursor:default;" class="csc-searchToRelate-createButton button" value="" />
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
+                <div class="info-column2-40 fl-force-right">                    
+					<div id="create-box">
+						<div class="header">
+							<div class="csc-searchToRelate-createNew label"></div>
+							<div class="clear"></div>
+						</div>
+						<div class="content">
+							<input type="button" style="margin-bottom:-2px; cursor:default;" class="csc-searchToRelate-createButton button" value="" />
+						</div>
+					</div>
                 </div>
+				<div class="clear"></div>
             </div>
         </div>
-        <div class="clear"></div>
+		
         <div class="csc-search-loadingIndicator">
 	        <div class="fl-container-flex header static button">
 	            <span class="found-records-content csc-search-resultsCountContainer">
@@ -34,11 +29,10 @@
 	            <span class="found-records-content-looking csc-search-lookingContainer">
                     <span class="csc-search-lookingString cs-search-highlight"></span>
                 </span>
-	            <div class="add-more" style="float:right"><input type="button" class="csc-searchToRelate-addButton button" /></div>
+	            <input type="button" class="csc-searchToRelate-addButton cs-searchToRelate-addButton button add fl-force-right" />
 	            <div class="clear"></div>
 	        </div>
 	        <div class="csc-search-results">
-	            <!-- search results -->
 	            <div class="fl-pager list-table">
 	                <table summary="search results" id="search-results" class="flc-pager-body-template fl-pager-data" xmlns:rsf="http://ponder.org.uk">
                         <thead class="flc-pager-body-template-content">
@@ -91,6 +85,4 @@
 	        </div>
 	    </div>
     </div>
-    <div class="clear"></div>
-    <!-- end search results -->
 </div>

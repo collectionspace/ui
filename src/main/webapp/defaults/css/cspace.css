@@ -63,8 +63,10 @@ input[type="button"], input[type="submit"], input[type="checkbox"], input[type="
 input[type="checkbox"] {
 	padding:0 2px;}
 input[type="text"], input[type="password"], textarea {
-    width:100%; 
+    width:99.5%; 
     margin:0;}
+table input[type="text"], table input[type="password"], table textarea {
+    width:100%;}
 input[type="submit"].logout {
     font-weight:bold; 
     color:#333; 
@@ -177,7 +179,8 @@ input[type="button"].addButton:hover, input[type="submit"].addButton:hover,
 input[type="button"].addButton:focus, input[type="submit"].addButton:focus {
     background-color:#48722D;}
 input[type="button"].add {
-    height:16px;}
+    height:16px;
+}
 .gotoButton {
     background:transparent url('../images/icnGoTo.png') no-repeat 8px 4px; 
     padding-left:28px; 
@@ -1324,7 +1327,7 @@ input[disabled]:hover, input[disabled]:hover    {
     -webkit-border-radius:0;
 	border-radius:0;}
 
-.saveButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-messageBar-cancel, .cs-confirmationDialogButton, .cs-user-searchButton, .cs-user-unSearchButton, .cs-searchToRelate-createButton {
+.saveButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-messageBar-cancel, .cs-confirmationDialogButton, .cs-user-searchButton, .cs-user-unSearchButton, .cs-searchToRelate-createButton, .cs-searchToRelate-addButton {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
 	border-radius:4px;
@@ -1613,7 +1616,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     width: 98%;
 }
 .cs-recordList .cs-recordList-column2 {
-    width: 47.6%;
+    width: 46.6%;
 }
 .cs-recordList .cs-recordList-column2-tab {
     width: 46.5%;
@@ -1666,7 +1669,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     background-color: #F0F5FB;
     border-bottom: 0 solid #ADADAD;
     color: #000000;
-    vertical-align: top;
+    /*vertical-align: top;*/
     border: 0 none;
     text-align: left;
     min-height: 15px;
@@ -1706,11 +1709,13 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 }
 .cs-recordList .cs-recordList-deleteRelation {
     background: transparent url('../images/icnDeleteIdle.png') no-repeat right center;
-    height: inherit;
+    height: 14px;
+	vertical-align:top;
 }
 .cs-recordList .cs-recordList-deleteRelation:hover,
 .cs-recordList .cs-recordList-deleteRelation:focus {
     background: transparent url('../images/icnDelete.png') no-repeat right center;
+	height: 14px;
 }
 .cs-recordList .cs-disabled {
     color: gray;

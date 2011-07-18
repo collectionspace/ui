@@ -105,7 +105,8 @@ cspace = cspace || {};
                 fetchClass: "slowTemplate",
                 url: "%webapp/html/components/Confirmation.html",
                 options: {
-                    dataType: "html"
+                    dataType: "html",
+					width: "500px"
                 }
             })
         }
@@ -126,6 +127,7 @@ cspace = cspace || {};
             autoOpen: false,
             modal: true,
             title: that.options.strings.title,
+			width: 450,
             open: function () {
                 // CSPACE-3811: Focusing on the first input element inside the 
                 // confirmation dialog for smooth keyboard navigation.
