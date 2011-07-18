@@ -12,6 +12,8 @@
 
 .cs-createNew-content .cs-createNew-categoryHeader {
     -moz-border-radius:6px 6px 0 0;
+	-webkit-border-radius:6px 6px 0 0;
+	border-radius:6px 6px 0 0;
     cursor:default;
     height:14px;
     padding:5px 0 5px 5px;

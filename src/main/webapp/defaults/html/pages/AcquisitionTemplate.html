@@ -1,293 +1,265 @@
 <div class="csc-acquisition-template csc-listEditor-details">
     <div class="csc-acquisition">
-        <div id="secondary-nav">
-            <div id="secondary-nav-menu-sub">
-                <div class="button-row">
-                    <input type="button" class="csc-save saveButton primary" />
-                    <input type="button" class="csc-delete deleteButton primary" />
-                    <input type="button" class="csc-cancel cancelButton" />
-                    <a style="display:none;" class="csc-goto gotoButton"></a>
-                    <div class="clear"></div>
-                </div>
-                <div class="time-stamp"> </div>
-                <div class="clear"></div>
-            </div>
-        </div>
+        <div id="secondary-nav">		
+			<div id="secondary-nav-menu-sub">
+				<div class="button-row">
+					<a style="display:none;" class="csc-goto gotoButton"></a>
+					<input type="button" class="csc-cancel cancelButton" />
+					<input type="button" class="csc-delete deleteButton" />
+					<input type="button" class="csc-save saveButton" />                                           
+				</div>
+				<div class="time-stamp"> </div>
+				<div class="clear"></div>
+			</div>
+		</div>
 
-        <div class="acquisition-outer-border">
+		<div class="fl-container-flex fl-fix information-group">
+			<div class="csc-recordEditor-header fl-container-flex header toggle csc-acquisition-acquisitionInformation-label"></div>
+			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+				<div class="info-column">
+					<div class="info-column2-50 fl-force-left">
+						<div class="info-pair">
+							<span class="label csc-acquisition-acquisitionReferenceNumber-label"></span><span class="required">*</span>
+							<div class="content csc-acquisition-reference-number-patternChooserContainer">
+								<input type="text" class="input-numeric-long csc-acquisition-numberPatternChooser-reference-number pattern-chooser-input" />
+							</div>
+						</div>
 
-            <div class="fl-container-flex fl-fix information-group">
-                <div class="info-column">
-                    <div class="csc-recordEditor-header fl-container-flex header toggle csc-acquisition-acquisitionInformation-label"></div>
-                    <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-                        <div class="info-column fl-force-left">
-                            <div class="info-column2-50 fl-force-left">
-                                <div class="info-pair">
-                                    <span class="label csc-acquisition-acquisitionReferenceNumber-label"></span><span class="required">*</span>
-                                    <div class="content csc-acquisition-reference-number-patternChooserContainer">
-                                        <input type="text" class="input-numeric-long csc-acquisition-numberPatternChooser-reference-number pattern-chooser-input" />
-                                    </div>
-                                </div>
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-acquisition-accessionDate-label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-acquisition-accession-date"/>
+							</div>
+						</div>
 
-                                <div class="info-pair">
-                                    <div class="header">
-                                        <div class="label csc-acquisition-accessionDate-label"></div>
-                                    </div>
-                                    <div class="content">
-                                        <input type="text" class="csc-acquisition-accession-date"/>
-                                    </div>
-                                </div>
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-acquisition-acquisitionAuthorizerHeader-label"></div>
+							</div>
+							<div class="content">
+								<table>
+									<thead>
+										<tr>
+											<td class="csc-acquisition-acquisitionAuthorizer-label"></td>
+											<td class="csc-acquisition-acquisitionAuthorizerDate-label"></td>
+										</tr>
+									</thead>                                                                    
+									<tbody>
+										<tr>
+											<td>
+												<input type="text" class="csc-acquisition-acquisitionAuthorizer" />
+											</td>
+											<td>
+												<input type="text" class="csc-acquisition-acquisitionAuthorizerDate" />
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-acquisition-acquisitionDates-label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-acquisition-date" />
+							</div>
+						</div>
 
-                                <div class="info-pair">
-                                    <div class="header">
-                                        <div class="label csc-acquisition-acquisitionAuthorizerHeader-label"></div>
-                                    </div>
-                                    <div class="content">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <td class="csc-acquisition-acquisitionAuthorizer-label"></td>
-                                                    <td class="csc-acquisition-acquisitionAuthorizerDate-label"></td>
-                                                </tr>
-                                            </thead>                                                                    
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <input type="text" class="csc-acquisition-acquisitionAuthorizer" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="csc-acquisition-acquisitionAuthorizerDate" />
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="info-pair">
-                                    <div class="header">
-                                        <div class="label csc-acquisition-acquisitionDates-label"></div>
-                                    </div>
-                                    <div class="content">
-                                        <input type="text" class="csc-acquisition-date" />
-                                    </div>
-                                </div>
+						<div class="info-pair-select">
+							<div class="header">
+								<div class="label csc-acquisition-acquisitionMethod-label"></div>
+							</div>
+							<div class="content">
+								<table>
+									<tbody>
+										<tr class="csc-acquisition-acquisition-method-row">
+											<td><select class="csc-acquisition-acquisition-method input-select"><option value="">Options not loaded</option></select></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
 
-                                <div class="info-pair-select">
-                                    <div class="header">
-                                        <div class="label csc-acquisition-acquisitionMethod-label"></div>
-                                    </div>
-                                    <div class="content">
-                                        <table>
-                                            <tbody>
-                                                <tr class="csc-acquisition-acquisition-method-row">
-                                                    <!--<td class="table-unselected"></td>-->
-                                                    <td><select class="csc-acquisition-acquisition-method input-select"><option value="">Options not loaded</option></select></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-acquisition-acquisitionSources-label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-acquisition-acquisitionSource" />
+							</div>
+						</div>
 
-                                <div class="info-pair">
-                                    <div class="header">
-                                        <div class="label csc-acquisition-acquisitionSources-label"></div>
-                                    </div>
-                                    <div class="content">
-                                        <input type="text" class="csc-acquisition-acquisitionSource" />                                                            
-                                    </div>
-                                </div>
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-acquisition-owners-label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-acquisition-owner" />
+							</div>
+						</div>
 
-                                <div class="info-pair">
-                                    <div class="header">
-                                        <div class="label csc-acquisition-owners-label"></div>
-                                    </div>
-                                    <div class="content">
-                                        <input type="text" class="csc-acquisition-owner" />
-                                    </div>
-                                </div>
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-acquisition-transferOfTitleNumber-label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-acquisition-transfer-of-title-number" />
+							</div>
+						</div>
+					</div>
 
-                                <div class="info-pair">
-                                    <div class="header">
-                                        <div class="label csc-acquisition-transferOfTitleNumber-label"></div>
-                                    </div>
-                                    <div class="content">
-                                        <input type="text" class="csc-acquisition-transfer-of-title-number" />                                                                                                                             
-                                    </div>
-                                </div>
+					<div class="info-column2-50 fl-force-right">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-acquisition-objectPurchaseOfferPriceCurrency-label"></div>
+							</div>
+							<div class="content">
+								<table>
+									<thead>
+										<tr>
+											<td class="csc-acquisition-objectOfferPriceCurrency-label"></td>
+											<td class="csc-acquisition-groupPurchasePriceCurrency-label"></td>
+											<td class="csc-acquisition-groupPurchasePriceValue-label"></td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="label csc-acquisition-objectPurchasePriceValue-label"></td>
+											<td><select class="csc-acquisition-group-purchase-price-currency input-select input-money-type"><option value="">Options not loaded</option></select></td>
+											<td><input type="text" class="input-numeric-medium csc-acquisition-group-purchase-price-value" value="" /></td>
+										</tr>
+										<tr>
+											<td class="label csc-acquisition-objectOfferPriceValue-label"></td>
+											<td><select class="csc-acquisition-object-offer-price-currency input-select input-money-type"><option value="">Options not loaded</option></select></td>
+											<td><input type="text" class="input-numeric-medium csc-acquisition-object-offer-price-value" value="" /></td>
+										</tr>
+										<tr>
+											<td class="label csc-acquisition-objectPurchaseOfferPriceValue-label"></td>
+											<td><select class="csc-acquisition-object-purchase-offer-price-currency input-select input-money-type"><option value="">Options not loaded</option></select></td>
+											<td><input type="text" class="input-numeric-medium csc-acquisition-object-purchase-offer-price-value" value="" /></td>
+										</tr>
+										<tr>
+											<td class="label csc-acquisition-objectPurchasePriceCurrency-label"></td>
+											<td><select class="csc-acquisition-object-purchase-price-currency input-select input-money-type"><option value="">Options not loaded</option></select></td>
+											<td><input type="text" class="input-numeric-medium csc-acquisition-object-purchase-price-value" value="" /></td>
+										</tr>
+										<tr>
+											<td class="label csc-acquisition-originalObjectPurchasePriceCurrency-label"></td>
+											<td><select class="csc-acquisition-original-object-purchase-price-currency input-select input-money-type"><option value="">Options not loaded</option></select></td>
+											<td><input type="text" class="input-numeric-medium csc-acquisition-original-object-purchase-price-value" value="" /></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
 
-                            </div>
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-acquisition-acquisitionReason-label"></div>
+							</div>
+							<div class="content">								
+								<textarea rows="4" cols="30" class="input-textarea csc-acquisition-acquisition-reason"/>
+							</div>
+						</div>
 
-                            <div class="info-column2-50 fl-force-right">
-                                <div class="info-pair">
-                                    <div class="header">
-                                        <div class="label csc-acquisition-objectPurchaseOfferPriceCurrency-label"></div>
-                                    </div>
-                                    <div class="content">
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <td class="csc-acquisition-objectOfferPriceCurrency-label"></td>
-                                                    <td class="csc-acquisition-groupPurchasePriceCurrency-label"></td>
-                                                    <td class="csc-acquisition-groupPurchasePriceValue-label"></td>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="label csc-acquisition-objectPurchasePriceValue-label"></td>
-                                                    <td><select class="csc-acquisition-group-purchase-price-currency input-select input-money-type"><option value="">Options not loaded</option></select></td>
-                                                    <td><input type="text" class="input-numeric-medium csc-acquisition-group-purchase-price-value" value="" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="label csc-acquisition-objectOfferPriceValue-label"></td>
-                                                    <td><select class="csc-acquisition-object-offer-price-currency input-select input-money-type"><option value="">Options not loaded</option></select></td>
-                                                    <td><input type="text" class="input-numeric-medium csc-acquisition-object-offer-price-value" value="" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="label csc-acquisition-objectPurchaseOfferPriceValue-label"></td>
-                                                    <td><select class="csc-acquisition-object-purchase-offer-price-currency input-select input-money-type"><option value="">Options not loaded</option></select></td>
-                                                    <td><input type="text" class="input-numeric-medium csc-acquisition-object-purchase-offer-price-value" value="" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="label csc-acquisition-objectPurchasePriceCurrency-label"></td>
-                                                    <td><select class="csc-acquisition-object-purchase-price-currency input-select input-money-type"><option value="">Options not loaded</option></select></td>
-                                                    <td><input type="text" class="input-numeric-medium csc-acquisition-object-purchase-price-value" value="" /></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="label csc-acquisition-originalObjectPurchasePriceCurrency-label"></td>
-                                                    <td><select class="csc-acquisition-original-object-purchase-price-currency input-select input-money-type"><option value="">Options not loaded</option></select></td>
-                                                    <td><input type="text" class="input-numeric-medium csc-acquisition-original-object-purchase-price-value" value="" /></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-acquisition-acquisitionNote-label"></div>
+							</div>
+							<div class="content">
+								<textarea rows="4" cols="30" class="input-textarea csc-acquisition-acquisition-note" />
+							</div>
+						</div>
 
-                                <div class="info-pair">
-                                    <div class="header">
-                                        <div class="label csc-acquisition-acquisitionReason-label"></div>
-                                    </div>
-                                    <div class="content">
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <!--<td class="table-unselected"></td>-->
-                                                    <td><textarea rows="4" cols="30" class="input-textarea csc-acquisition-acquisition-reason"/></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-acquisition-acquisitionProvisos-label"></div>
+							</div>
+							<div class="content">
+								<textarea rows="4" cols="30" class="input-textarea csc-acquisition-acquisition-provisos" />
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
 
-                                <div class="info-pair">
-                                    <div class="header">
-                                        <div class="label csc-acquisition-acquisitionNote-label"></div>
-                                    </div>
-                                    <div class="content">
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <!--<td class="table-unselected"></td>-->
-                                                    <td><textarea rows="4" cols="30" class="input-textarea csc-acquisition-acquisition-note" /></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+				<div class="info-column">
+					<div class="info-pair">
+						<div class="header">
+							<div class="label csc-acquisition-acquisitionFunding-label"></div>
+						</div>
+						<div class="content">
+							<table>
+								<thead>
+									<tr>
+										<td class="csc-acquisition-acquisitionFundingCurrency-label"></td>
+										<td class="csc-acquisition-acquisitionFundingValue-label"></td>
+										<td class="csc-acquisition-acquisitionFundingSource-label"></td>
+										<td class="csc-acquisition-acquisitionFundingSourceProvisos-label"></td>
+									</tr>
+								</thead>                                                                    
+								<tbody>
+									<tr class="csc-acquisition-acquisitionFunding">                                                                    
+										<td><select class="csc-acquisition-acquisitionFundingCurrency input-select input-money-type"><option value="">Options not loaded</option></select></td>
+										<td><input type="text"  class="csc-acquisition-acquisitionFundingValue" /></td>
+										<td><input type="text"  class="csc-acquisition-acquisitionFundingSource" /></td>
+										<td><input type="text"  class="csc-acquisition-acquisitionFundingSourceProvisos" /></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
 
-                                <div class="info-pair">
-                                    <div class="header">
-                                        <div class="label csc-acquisition-acquisitionProvisos-label"></div>
-                                    </div>
-                                    <div class="content">
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td><textarea rows="4" cols="30" class="input-textarea csc-acquisition-acquisition-provisos" /></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+				<div class="info-column">
+					<div class="info-column2-50 fl-force-left">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-acquisition-creditLine-label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-acquisition-creditLine" />
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div> <!-- information-group -->
 
-                            </div>
-                        </div>
+			<div class="fl-container-flex fl-fix information-group">
+				<div class="csc-recordEditor-header fl-container-flex header toggle csc-acquisition-objectCollectionInformation-label"></div>
+				<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+					<div class="info-column">
+						<div class="info-column2-50 fl-force-left ">
+							<div class="info-pair">
+								<div class="header">
+									<div class="label csc-acquisition-fieldCollectionEventNames-label"></div>
+								</div>
+								<div class="content">
+									<input type="text" class="csc-acquisition-fieldCollectionEventName" />
+								</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>					
+				</div>				
+			</div> <!-- information-group -->
+		</div>
 
-                        <div class="info-column fl-force-left">
-                            <div class="info-pair">
-                                <div class="header">
-                                    <div class="label csc-acquisition-acquisitionFunding-label"></div>
-                                </div>
-                                <div class="content">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <td class="csc-acquisition-acquisitionFundingCurrency-label"></td>
-                                                <td class="csc-acquisition-acquisitionFundingValue-label"></td>
-                                                <td class="csc-acquisition-acquisitionFundingSource-label"></td>
-                                                <td class="csc-acquisition-acquisitionFundingSourceProvisos-label"></td>
-                                            </tr>
-                                        </thead>                                                                    
-                                        <tbody>
-                                            <tr class="csc-acquisition-acquisitionFunding">                                                                    
-                                                <td><select class="csc-acquisition-acquisitionFundingCurrency input-select input-money-type"><option value="">Options not loaded</option></select></td>
-                                                <td><input type="text"  class="input-numeric-medium csc-acquisition-acquisitionFundingValue" /></td>
-                                                <td><input type="text"  class="csc-acquisition-acquisitionFundingSource" /></td>
-                                                <td><input type="text"  class="csc-acquisition-acquisitionFundingSourceProvisos" /></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="info-column fl-force-left">
-                            <div class="info-column2-50 fl-force-left">
-                                <div class="info-pair">
-                                    <div class="header">
-                                        <div class="label csc-acquisition-creditLine-label"></div>
-                                    </div>
-                                    <div class="content">
-                                        <input type="text" class="csc-acquisition-creditLine" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="clear"></div>
-
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="fl-container-flex fl-fix information-group">
-                <div class="info-column">
-                    <div class="csc-recordEditor-header fl-container-flex header toggle csc-acquisition-objectCollectionInformation-label"></div>
-                    <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-                        <div class="info-column fl-force-left">
-                            <div class="info-column2-50 fl-force-left ">
-                                <div class="info-pair">
-                                    <div class="header">
-                                        <div class="label csc-acquisition-fieldCollectionEventNames-label"></div>
-                                    </div>
-                                    <div class="content">
-                                        <input type="text" class="csc-acquisition-fieldCollectionEventName" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="fl-container-flex button-row">
-            <input type="button" class="csc-save saveButton primary" />
-            <input type="button" class="csc-delete deleteButton primary" />
-            <input type="button" class="csc-cancel cancelButton" />
-            <div class="clear"></div>
-        </div>
+        <div id="secondary-nav-footer">
+			<div id="secondary-nav-menu-sub">
+				<div class="button-row">
+					<a style="display:none;" class="csc-goto gotoButton"></a>
+					<input type="button" class="csc-cancel cancelButton" />
+					<input type="button" class="csc-delete deleteButton" />
+					<input type="button" class="csc-save saveButton" />                                           
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
     </div>
-
 </div>

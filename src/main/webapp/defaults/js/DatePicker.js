@@ -42,7 +42,7 @@ cspace = cspace || {};
             calendarButton: ".csc-calendar-button"
         },
         styles: {
-            parent: "fl-table",
+            parent: "fl-table fl-date-group",
             calendarDate: "fl-force-left input-date",
             calendarButton: "fl-table-cell fl-force-left cs-calendar-button cs-calendar-image",
             datePicker: "cs-date-picker",

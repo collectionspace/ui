@@ -12,7 +12,7 @@ tr.csc-repeatable-headerRow td:first-child, tr.csc-repeatable-headerRow td:last-
 .cs-repeatable-repeat input,.cs-repeatable-repeat textarea {
     /*border:1px solid #C7CFD4; */
     width:88.5%; 
-    float:left;}
+    /*float:left;*/}
 input[type="button"].cs-repeatable-add, .info-pair-date input[type="button"].cs-repeatable-add {
     font-size:14px; 
     height:16px; 
@@ -30,7 +30,7 @@ li.cs-repeatable-repeat {
     width:99%}
 .cs-repeatable-content {
     width:89%;  
-    float:left;}
+    /*float:left;*/}
 .cs-repeatable-content > input {
     width: 89.2%;}
 .cs-repeatable-content .ui-autocomplete-input {
@@ -43,24 +43,32 @@ input.cs-repeatable-primary {
     margin-right:3px;
     margin-top:1px;
     height:17px;
-    float:left;}
+    /*float:left;*/}
 td input.cs-repeatable-primary {
     margin:2px 2px 0 0;
     height:17px;
     vertical-align:bottom;}
-input.cs-repeatable-delete, table tr.csc-repeatable-repeat input.cs-repeatable-delete {
-    float:left; 
+input.cs-repeatable-delete {
+    /*float:left; */
     border:none; 
     height:17px; 
     vertical-align:top; 
-    padding:0px; 
-    background:transparent url('../images/icnDeleteIdle.png') no-repeat 0 2px;}
-input.cs-repeatable-delete {
-    width:16px;}
-input.cs-repeatable-delete:hover, input.cs-repeatable-delete:focus,
-table tr.csc-repeatable-repeat input.cs-repeatable-delete:hover, table tr.csc-repeatable-repeat input.cs-repeatable-delete:focus {
+    padding:0px;
+	width:16px;
+    background:transparent url('../images/icnDeleteIdle.png') no-repeat 2px 3px;}
+input.cs-repeatable-delete:hover, 
+input.cs-repeatable-delete:focus {
     color: white; 
-    background: transparent url('../images/icnDelete.png') no-repeat 1px 2px;}
-input.cs-repeatable-delete[disabled], table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled], input.cs-repeatable-delete[disabled]:hover, table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:hover, input.cs-repeatable-delete[disabled]:focus, table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
+    background: transparent url('../images/icnDelete.png') no-repeat 2px 3px;}
+input.cs-repeatable-delete[disabled], 
+input.cs-repeatable-delete[disabled]:hover, 
+input.cs-repeatable-delete[disabled]:focus {
     background-color:transparent !important; 
-    background: url('../images/icnDeleteDisabled.png') no-repeat 0 2px; }
+    background: url('../images/icnDeleteDisabled.png') no-repeat 2px 3px; }
+table tr.csc-repeatable-repeat input.cs-repeatable-delete,
+table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled],
+table tr.csc-repeatable-repeat input.cs-repeatable-delete:hover, 
+table tr.csc-repeatable-repeat input.cs-repeatable-delete:focus,
+table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:hover, 
+table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
+	background-position:2px 2px;}

@@ -1,385 +1,283 @@
-            <div id="person" class="csc-personAuthority-template">
+<div id="person" class="csc-personAuthority-template">
+	<div class="csc-authority-container">
+		<div id="secondary-nav">
+			<div id="secondary-nav-menu-sub">
+				<div class="button-row">
+					<a style="display:none;" class="csc-goto gotoButton"></a>
+					<input type="button" class="csc-cancel cancelButton" />
+					<input type="button" class="csc-delete deleteButton" />
+					<input type="button" class="csc-save saveButton" />                                           
+				</div>
+				<div class="time-stamp"> </div>
+				<div class="clear"></div>
+			</div>
+		</div>
 
-                <div class="csc-authority-container info-column">
-                    <div id="secondary-nav">
-                        <div id="secondary-nav-menu-sub">
-                            <div class="button-row">
-                                <input type="button" class="csc-save saveButton primary" />
-                                <input type="button" class="csc-delete deleteButton primary" />
-                                <input type="button" class="csc-cancel cancelButton" />
-                                <div class="clear"></div>
-                            </div>
-                            <div class="time-stamp"> </div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-                
-                    <div class="authority-outer-border">
-        
-                        <div class="fl-container-flex fl-fix information-group">
-                            <div class="csc-person-personNameAuthorityInformation-label csc-recordEditor-header fl-container-flex header toggle"></div>
-                            <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-                                <div class="info-column">
-                                    <div class="info-column">
-                                        <div class="info-column2-40 fl-force-left">
-                                            <div class="info-pair">
-                                                <div class="header">
-                                                    <span class="csc-person-displayName-label label"></span><span class="required">*</span>
-                                                </div>
-                                                <div class="content">
-                                                    <table>
-                                                        <tbody>
-                                                            <tr>
-                                                                <!--<td class="table-unselected"></td>-->
-                                                                <td><input type="text" class="csc-personAuthority-displayName" /></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                            <div class="info-column2-40 fl-force-right">
-                                                <div class="info-pair-select">
-                                                    <div class="header">
-                                                        <div class="csc-person-termStatus-label label"></div>
-                                                    </div>
-                                                    <div class="content">
-                                                        <table>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td><select class="csc-personAuthority-status input-select"><option value="">Options not loaded</option></select></td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                                <div class="clear"></div>
-                                            </div>
-                                            <div class="clear"></div>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </div>
-                                    
-                                    <div class="info-column fl-force-left">
-                                        <div class="info-pair">
-                                            <div class="header">
-                                                <div class="csc-person-name-label label"></div>
-                                            </div>
-                                            <div class="content">
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <td class="csc-person-salutation-label"></td>
-                                                            <td class="csc-person-title-label"></td>
-                                                            <td class="csc-person-foreName-label"></td>
-                                                            <td class="csc-person-middleName-label"></td>
-                                                            <td class="csc-person-surName-label"></td>
-                                                            <td class="csc-person-nameAdditions-label"></td>
-                                                            <td class="csc-person-initials-label"></td>
-                                                        </tr>
-                                                    </thead>                                                        
-                                                    <tbody>
-                                                        <tr class="csc-personAuthority-name">
-                                                            <td><select class="csc-personAuthority-salutation input-select"><option value="">Options not loaded</option></select></td>
-                                                            <td><select class="csc-personAuthority-title input-select"><option value="">Options not loaded</option></select></td>
-                                                            <td><input type="text" class="csc-personAuthority-foreName"/></td>
-                                                            <td><input type="text" class="csc-personAuthority-middleName"/></td>
-                                                            <td><input type="text" class="csc-personAuthority-surName"/></td>
-                                                            <td><input type="text" class="csc-personAuthority-nameAdditions"/></td>
-                                                            <td><input type="text" class="csc-personAuthority-initials"/></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </div>
-                                        
-                                    <div class="info-column2-40 fl-force-left">
-                                        <div class="info-pair-select">
-                                            <div class="header">
-                                                <div class="csc-person-gender-label label"></div>
-                                            </div>
-                                            <div class="content">
-                                                <table>
-                                                    <tbody>
-                                                        <tr>
-                                                            <!--<td class="table-unselected"></td>-->
-                                                            <td><select class="csc-personAuthority-gender input-select"><option value="">Options not loaded</option></select></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="info-pair">
-                                            <div class="header">
-                                                <div class="csc-person-occupations-label label"></div>
-                                            </div>
-                                            <div class="content">
-                                                <input type="text" class="csc-personAuthority-occupation" />
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="info-pair">
-                                            <div class="header">
-                                                <div class="csc-person-schoolsOrStyles-label label"></div>
-                                            </div>
-                                            <div class="content">
-                                                <input type="text" class="csc-personAuthority-schoolOrStyle" />
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="info-pair">
-                                            <div class="header">
-                                                <div class="csc-person-groups-label label"></div>
-                                            </div>
-                                            <div class="content">
-                                                <input type="text" class="csc-personAuthority-group" />
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="info-pair">
-                                            <div class="header">
-                                                <div class="csc-person-nationalities-label label"></div>
-                                            </div>
-                                            <div class="content">
-                                                <input type="text" class="csc-personAuthority-nationality" />
-                                            </div>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </div>
-                                    
-                                    <div class="info-column2-60 fl-force-right">
-                                        <div class="info-pair">
-                                            <div class="header">
-                                                <div class="csc-person-nameNote-label label"></div>
-                                            </div>
-                                            <div class="content">
-                                                <table>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td><textarea rows="4" cols="30" class="input-textarea csc-personAuthority-nameNote" ></textarea></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="info-column2-40 fl-force-left">
-                                            <div class="info-pair">
-                                                <div class="header">
-                                                    <div class="csc-person-birthDate-label label"></div>
-                                                </div>
-                                                <div class="content">
-                                                    <input type="text" class="csc-personAuthority-birthDate" />
-                                                </div>                                              
-                                            </div>
-                                            
-                                            <div class="info-pair">
-                                                <div class="header">
-                                                    <div class="csc-person-deathDate-label label"></div>
-                                                </div>
-                                                <div class="content">
-                                                    <input type="text" class="csc-personAuthority-deathDate" />
-                                                </div>                                              
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                        <div class="info-column2-60 fl-force-right">
-                                            <div class="info-pair">
-                                                <div class="header">
-                                                    <div class="csc-person-birthPlace-label label"></div>
-                                                </div>
-                                                <div class="content">
-                                                    <table>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td><input type="text" class="csc-personAuthority-birthPlace" /></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="info-pair">
-                                                <div class="header">
-                                                    <div class="csc-person-deathPlace-label label"></div>
-                                                </div>
-                                                <div class="content">
-                                                    <table>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td><input type="text" class="csc-personAuthority-deathPlace" /></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                        <div class="info-pair">
-                                            <div class="header">
-                                                <div class="csc-person-bioNote-label label"></div>
-                                            </div>
-                                            <div class="content">
-                                                <table>
-                                                    <tbody>
-                                                        <tr>
-                                                            <!--<td class="table-unselected"></td>-->
-                                                            <td><textarea rows="4" cols="30" class="input-textarea csc-personAuthority-bioNote" /></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </div>
-                                    <div class="clear"></div>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        
-                        <div class="fl-container-flex fl-fix information-group">
-                            <div class="csc-person-contactInformation-label csc-recordEditor-header fl-container-flex header toggle"></div>
-                            <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-                                <div class="info-column">
-                                    <div class="info-column2-40 fl-force-left">
-                                        <div class="info-pair-select">
-                                            <div class="header">
-                                                <div class="label">Address Type</div>
-                                            </div>
-                                            <div class="content">
-                                                <table>
-                                                    <tbody>
-                                                        <tr>
-                                                            <!--<td class="table-unselected"></td>-->
-                                                            <td class="disabled"><select class="csc-contact-addressType1 input-select" disabled="disabled" ><option value="">Options not loaded</option></select></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="info-pair">
-                                            <div class="header">
-                                                <div class="label">Fax Number</div>
-                                            </div>
-                                            <div class="content">
-                                                <table>
-                                                    <tbody>
-                                                        <tr>
-                                                            <!--<td class="table-unselected"></td>-->
-                                                            <td class="disabled"><input type="text" class="csc-contact-faxNumber1" disabled="disabled" /></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="info-pair">
-                                            <div class="header">
-                                                <div class="label">Telephone Number</div>
-                                            </div>
-                                            <div class="content">
-                                                <table>
-                                                    <tbody>
-                                                        <tr>
-                                                            <!--<td class="table-unselected"></td>-->
-                                                            <td class="disabled"><input type="text" class="csc-contact-telephoneNumber1" disabled="disabled" /></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </div>
-                                    
-                                    <div class="info-column2-60 fl-force-right">
-                                        <div class="info-pair">
-                                            <div class="header">
-                                                <div class="label">Address</div>
-                                            </div>
-                                            <div class="content">
-                                                <table>
-                                                    <tbody>
-                                                        <tr>
-                                                            <!--<td class="table-unselected"></td>-->
-                                                            <td class="disabled"><input type="text" class="csc-contact-addressText1" disabled="disabled" /></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="info-pair">
-                                            <div class="header">
-                                                <div class="label">Place</div>
-                                            </div>
-                                            <div class="content">
-                                                <table>
-                                                    <tbody>
-                                                        <tr>
-                                                            <!--<td class="table-unselected"></td>-->
-                                                            <td class="disabled"><input type="text" class="csc-contact-place" disabled="disabled" />
-<!--                                                                <div class="csc-contact-place-autocomplete"></div>--></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="info-pair">
-                                            <div class="header">
-                                                <div class="label">Postcode</div>
-                                            </div>
-                                            <div class="content">
-                                                <table>
-                                                    <tbody>
-                                                        <tr>
-                                                            <!--<td class="table-unselected"></td>-->
-                                                            <td class="disabled"><input type="text" class="csc-contact-postcode1" disabled="disabled" /></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="info-pair">
-                                            <div class="header">
-                                                <div class="label">Email</div>
-                                            </div>
-                                            <div class="content">
-                                                <table>
-                                                    <tbody>
-                                                        <tr>
-                                                            <!--<td class="table-unselected"></td>-->
-                                                            <td class="disabled"><input type="text" class="csc-contact-email1" disabled="disabled" /></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="clear"></div>
-                                    </div>
-                                    <div class="clear"></div>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-                    <div class="csc-hierarchy"></div>
-
-                    <div class="fl-container-flex button-row">
-                        <input type="button" class="csc-save saveButton primary" />
-                        <input type="button" class="csc-delete deleteButton primary" />
-                        <input type="button" class="csc-cancel cancelButton" />
-                        <div class="clear"></div>
-                    </div>  
-                </div>
+		<div class="fl-container-flex fl-fix information-group">
+			<div class="csc-person-personNameAuthorityInformation-label csc-recordEditor-header fl-container-flex header toggle"></div>
+			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+				<div class="info-column">					
+					<div class="info-column2-40 fl-force-left">
+						<div class="info-pair">
+							<div class="header">
+								<span class="csc-person-displayName-label label"></span><span class="required">*</span>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-personAuthority-displayName" />
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					
+					<div class="info-column2-40 fl-force-right">
+						<div class="info-pair-select">
+							<div class="header">
+								<div class="csc-person-termStatus-label label"></div>
+							</div>
+							<div class="content">
+								<select class="csc-personAuthority-status input-select"><option value="">Options not loaded</option></select>
+							</div>
+						</div>						
+					</div>
+					<div class="clear"></div>
+				</div>
+					
+				<div class="info-column">
+					<div class="info-pair">
+						<div class="header">
+							<div class="csc-person-name-label label"></div>
+						</div>
+						<div class="content">
+							<table>
+								<thead>
+									<tr>
+										<td class="csc-person-salutation-label"></td>
+										<td class="csc-person-title-label"></td>
+										<td class="csc-person-foreName-label"></td>
+										<td class="csc-person-middleName-label"></td>
+										<td class="csc-person-surName-label"></td>
+										<td class="csc-person-nameAdditions-label"></td>
+										<td class="csc-person-initials-label"></td>
+									</tr>
+								</thead>                                                        
+								<tbody>
+									<tr class="csc-personAuthority-name">
+										<td><select class="csc-personAuthority-salutation input-select"><option value="">Options not loaded</option></select></td>
+										<td><select class="csc-personAuthority-title input-select"><option value="">Options not loaded</option></select></td>
+										<td><input type="text" class="csc-personAuthority-foreName"/></td>
+										<td><input type="text" class="csc-personAuthority-middleName"/></td>
+										<td><input type="text" class="csc-personAuthority-surName"/></td>
+										<td><input type="text" class="csc-personAuthority-nameAdditions"/></td>
+										<td><input type="text" class="csc-personAuthority-initials"/></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+				<div class="info-column">				
+					<div class="info-column2-40 fl-force-left">
+						<div class="info-pair-select">
+							<div class="header">
+								<div class="csc-person-gender-label label"></div>
+							</div>
+							<div class="content">
+								<select class="csc-personAuthority-gender input-select"><option value="">Options not loaded</option></select>
+							</div>
+						</div>
+						
+						<div class="info-pair">
+							<div class="header">
+								<div class="csc-person-occupations-label label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-personAuthority-occupation" />
+							</div>
+						</div>
+						
+						<div class="info-pair">
+							<div class="header">
+								<div class="csc-person-schoolsOrStyles-label label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-personAuthority-schoolOrStyle" />
+							</div>
+						</div>
+						
+						<div class="info-pair">
+							<div class="header">
+								<div class="csc-person-groups-label label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-personAuthority-group" />
+							</div>
+						</div>
+						
+						<div class="info-pair">
+							<div class="header">
+								<div class="csc-person-nationalities-label label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-personAuthority-nationality" />
+							</div>
+						</div>
+					</div>
+					
+					<div class="info-column2-60 fl-force-right">
+						<div class="info-pair">
+							<div class="header">
+								<div class="csc-person-nameNote-label label"></div>
+							</div>
+							<div class="content">
+								<textarea rows="4" cols="30" class="input-textarea csc-personAuthority-nameNote" ></textarea>
+							</div>
+						</div>
+						
+						<div class="info-column">
+							<div class="info-column2-40 fl-force-left">
+								<div class="info-pair">
+									<div class="header">
+										<div class="csc-person-birthDate-label label"></div>
+									</div>
+									<div class="content">
+										<input type="text" class="csc-personAuthority-birthDate" />
+									</div>                                              
+								</div>
+								
+								<div class="info-pair">
+									<div class="header">
+										<div class="csc-person-deathDate-label label"></div>
+									</div>
+									<div class="content">
+										<input type="text" class="csc-personAuthority-deathDate" />
+									</div>                                              
+								</div>								
+							</div>
+						
+							<div class="info-column2-60 fl-force-right">
+								<div class="info-pair">
+									<div class="header">
+										<div class="csc-person-birthPlace-label label"></div>
+									</div>
+									<div class="content">
+										<input type="text" class="csc-personAuthority-birthPlace" />
+									</div>
+								</div>
+								
+								<div class="info-pair">
+									<div class="header">
+										<div class="csc-person-deathPlace-label label"></div>
+									</div>
+									<div class="content">
+										<input type="text" class="csc-personAuthority-deathPlace" />
+									</div>
+								</div>								
+							</div>
+							<div class="clear"></div>
+						</div>
+						
+						<div class="info-pair">
+							<div class="header">
+								<div class="csc-person-bioNote-label label"></div>
+							</div>
+							<div class="content">
+								<textarea rows="4" cols="30" class="input-textarea csc-personAuthority-bioNote" />
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div> <!-- information-group -->		
+			
+		<div class="fl-container-flex fl-fix information-group">
+			<div class="csc-person-contactInformation-label csc-recordEditor-header fl-container-flex header toggle"></div>
+			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+				<div class="info-column">
+					<div class="info-column2-40 fl-force-left">
+						<div class="info-pair-select">
+							<div class="header">
+								<div class="label">Address Type</div>
+							</div>
+							<div class="content">
+								<select class="csc-contact-addressType1 input-select" disabled="disabled" ><option value="">Options not loaded</option></select>
+							</div>
+						</div>
+						
+						<div class="info-pair">
+							<div class="header">
+								<div class="label">Fax Number</div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-contact-faxNumber1" disabled="disabled" />
+							</div>
+						</div>
+						
+						<div class="info-pair">
+							<div class="header">
+								<div class="label">Telephone Number</div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-contact-telephoneNumber1" disabled="disabled" />
+							</div>
+						</div>
+					</div>
+					
+					<div class="info-column2-60 fl-force-right">
+						<div class="info-pair">
+							<div class="header">
+								<div class="label">Address</div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-contact-addressText1" disabled="disabled" />
+							</div>
+						</div>
+						
+						<div class="info-pair">
+							<div class="header">
+								<div class="label">Place</div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-contact-place" disabled="disabled" />
+							</div>
+						</div>
+						
+						<div class="info-pair">
+							<div class="header">
+								<div class="label">Postcode</div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-contact-postcode1" disabled="disabled" />
+							</div>
+						</div>
+						
+						<div class="info-pair">
+							<div class="header">
+								<div class="label">Email</div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-contact-email1" disabled="disabled" />
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div> <!-- information-group -->
+		
+		<div class="csc-hierarchy"></div>
+		
+		<div id="secondary-nav-footer">
+			<div id="secondary-nav-menu-sub">
+				<div class="button-row">
+					<a style="display:none;" class="csc-goto gotoButton"></a>
+					<input type="button" class="csc-cancel cancelButton" />
+					<input type="button" class="csc-delete deleteButton" />
+					<input type="button" class="csc-save saveButton" />                                           
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+</div>

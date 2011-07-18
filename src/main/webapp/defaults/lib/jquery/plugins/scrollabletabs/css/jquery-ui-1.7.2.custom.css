@@ -54,7 +54,7 @@
 
 /* Tabs ----------------------------------*/
 .ui-tabs { /*padding: .2em;*/ zoom: 1; }
-.ui-tabs .ui-tabs-nav { list-style: none; position: relative; padding: .8em 0 0 .3em; }
+.ui-tabs .ui-tabs-nav { list-style: none; position: relative; padding: .8em 0 0 .5em; line-height:18px;}
 .ui-tabs .ui-tabs-nav li { position: relative; /*float: left;*/ border-bottom-width: 0 !important; margin: 0 0em 0px 0; padding: 0; display:inline;}
 .ui-tabs .ui-tabs-nav li a { text-decoration: none; -moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6px 0 0;	background-color:#6F9ECD; color:#fff; 
 	font-weight:bold; padding:4px 5px 0px 5px; text-decoration:none; margin-right:2px;}
