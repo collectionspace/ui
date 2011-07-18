@@ -5,6 +5,26 @@
                 "myCollectionSpace": ".csc-myCollectionSpace-container"
             },
             "components": {
+                "renderer": {
+                    "type": "cspace.pageBuilder.renderer",
+                    "container": ".csc-mycspace",
+                    "options": {
+                        "selectors": {
+                            "search": ".csc-pageBuilder-search"
+                        },
+                        "protoTree": {
+                            "search": {
+                                "messagekey": "${search}"
+                            },
+                            "header": {
+                                "messagekey": "${header}"
+                            }
+                        },
+                        "model": {
+                            "search": "pageBuilder-search"
+                        }
+                    }
+                },
                 "pivotSearch": {
                     "type": "cspace.searchBox",
                     "options": {
@@ -31,6 +51,11 @@
                     }
                 }
             }
+        }
+    },
+    "pageBuilderIO": {
+        "options": {
+            "pageType": "myCollectionSpace"
         }
     }
 }

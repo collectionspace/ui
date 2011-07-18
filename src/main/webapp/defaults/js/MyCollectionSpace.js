@@ -108,7 +108,7 @@ cspace = cspace || {};
             return;
         }
         return {
-            "name": options.related,
+            "name": options.related + "Category",
             list: fluid.transform(records, function (record) {
                 return {
                     groupName: record,
@@ -184,10 +184,7 @@ cspace = cspace || {};
             togglable: ".csc-toggle-selector"
         },
         selectorsToIgnore: "togglable",
-        strings: {
-            cataloging: "Cataloging Records",
-            procedures: "Procedural Records"
-        },
+        strings: {},
         collector: {},
         parentBundle: "{globalBundle}",
         globalNavigator: "{globalNavigator}",
