@@ -165,73 +165,23 @@ cspace = cspace || {};
         });
         
         that.events.onError.addListener(function () {
-            that.messageBar.show(that.options.strings.generalError, null, true);            
+            that.messageBar.show(that.lookupMessage("login-generalError"), null, true);            
         });
 
-        that.locate("loginForm").submit(makeRequiredFieldsValidator(that.messageBar, that.dom, "login", that.options.strings.allFieldsRequired));
-        that.locate("resetRequest").submit(makeRequiredFieldsValidator(that.messageBar, that.dom, "password", that.options.strings.allFieldsRequired));
-    };
-
-    var setupLogin = function (that) {  
-        bindEventHandlers(that);      
-        if (cspace.util.useLocalData()) {
-            that.locate("loginForm").attr("action", "createnew.html");
-        } else {
-            that.locate("loginForm").attr("action", fluid.stringTemplate(that.options.urls.login, {tenantname: that.options.tenantname}));
-        }
-
-        var result = cspace.util.getUrlParameter("result");
-        if (result === "fail") {
-            that.messageBar.show(that.options.strings.invalid, null, true);
-        } else {
-            that.messageBar.hide();
-        }
-        var resetToken = cspace.util.getUrlParameter("token");
-        var email = cspace.util.getUrlParameter("email");
-        if (resetToken) {
-            that.token = resetToken;
-            that.email = email;
-            showReset(that.dom);
-        } else {
-            showSignIn(that.dom);
-        }
-
-    };
-    
-    /**
-     * Login Component
-     * 
-     * @param {Object} container
-     * @param {Object} options
-     */
-    cspace.login = function (container, options) {
-        var that = fluid.initView("cspace.login", container, options);
-        fluid.initDependents(that);
-
-        that.submitEmail = function () {
-            if (emailFormValid(that.messageBar, that.dom, that.options.strings.emailRequired)) {
-                submitEmail(that.locate("email").val(), fluid.stringTemplate(that.options.urls.passwordreset, {tenantname: that.options.tenantname}), that);
-            }
-        };
-        
-        that.submitNewPassword = function () {
-            if (passwordFormValid(that.messageBar, that.dom, that.options.strings.allFieldsRequired, that.options.strings.passwordsMustMatch)) {
-                submitNewPassword(that.locate("newPassword").val(), fluid.stringTemplate(that.options.urls.resetpassword, {tenantname: that.options.tenantname}), that);
-            }
-        };
-
-        setupLogin(that);
-        return that;
+        that.locate("loginForm").submit(makeRequiredFieldsValidator(that.messageBar, that.dom, "login", that.lookupMessage("login-allFieldsRequired")));
+        that.locate("resetRequest").submit(makeRequiredFieldsValidator(that.messageBar, that.dom, "password", that.lookupMessage("login-allFieldsRequired")));
     };
 
     fluid.defaults("cspace.login", {
-        gradeNames: ["fluid.viewComponent"],
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        postInitFunction: "cspace.login.postInit",
+        finalInitFunction: "cspace.login.finalInit",
+        parentBundle: "{globalBundle}",
         events: {
             emailSubmitted: null,
             passwordSubmitted: null,
             onError: null
         },
-    
         selectors: {
             loginForm: ".csc-login-loginForm",
             signIn: ".csc-login-signIn",
@@ -252,9 +202,130 @@ cspace = cspace || {};
             newPassword: ".csc-login-newPassword",
             confirmPassword: ".csc-login-confirmPassword",
             submitNewPassword: ".csc-login-submitNewPassword",
-            passwordRequired: ".csc-login-passwordRequired"
+            passwordRequired: ".csc-login-passwordRequired",
+            
+            currentReleaseHeader: ".csc-login-current",
+            currentReleaseInfo: ".csc-login-current-info",
+            currentReleaseDetails: ".csc-login-current-details",
+            loginInfo: ".csc-login-login-info",
+            loginLogin: ".csc-login-login",
+            loginPwd: ".csc-login-login-pwd",
+            loginPwdValue: ".csc-login-login-pwdValue",
+            rologinInfo: ".csc-login-rologin-info",
+            rologinLogin: ".csc-login-rologin",
+            rologinPwd: ".csc-login-rologin-pwd",
+            rologinPwdValue: ".csc-login-rologin-pwdValue",
+            footerFirst: ".csc-login-details-footer-first",
+            footerLink: ".csc-login-details-footer-link",
+            footerLast: ".csc-login-details-footer-last",
+            loginHeader: ".csc-login-header",
+            loginEmailHeader: ".csc-login-email-label",
+            loginPasswordHeader: ".csc-login-password-label",
+            loginForgot: ".csc-login-forgot",
+            loginResetLabel: ".csc-login-reset-label",
+            loginResetHeader: ".csc-login-reset-header",
+            loginBack: ".csc-login-back",
+            loginNewPasswordNote: ".csc-login-newPassword-note",
+            loginPasswordInstructions: ".csc-login-password-instructions",
+            loginNewPasswordLabel: ".csc-login-newPwd-label",
+            loginConfirmPasswordLabel: ".csc-login-confirmPwd-label"
         },
-        
+        protoTree: {
+            footerFirst: {
+                messagekey: "login-footerFirst"
+            },
+            footerLink: {
+                target: "${otherTenant}",
+                linktext: {
+                    messagekey: "login-footerLink"
+                }
+            },
+            footerLast: {
+                messagekey: "login-footerLast"
+            },
+            currentReleaseHeader: {
+                messagekey: "login-current"
+            },
+            currentReleaseInfo: {
+                messagekey: "login-current-info"
+            },
+            currentReleaseDetails: {
+                messagekey: "login-current-details"
+            },
+            loginInfo: {
+                messagekey: "login-login-info"
+            },
+            loginLogin: {
+                messagekey: "login-login"
+            },
+            loginPwd: {
+                messagekey: "login-login-pwd"
+            },
+            loginPwdValue: {
+                messagekey: "login-login-pwdValue"
+            },
+            rologinInfo: {
+                messagekey: "login-rologin-info"
+            },
+            rologinLogin: {
+                messagekey: "login-rologin"
+            },
+            rologinPwd: {
+                messagekey: "login-rologin-pwd"
+            },
+            rologinPwdValue: {
+                messagekey: "login-rologin-pwdValue"
+            },
+            loginHeader: {
+                messagekey: "login-header"
+            },
+            loginEmailHeader: {
+                messagekey: "login-email-label"
+            },
+            loginPasswordHeader: {
+                messagekey: "login-password-label"
+            },
+            loginButton: {
+                messagekey: "login-loginButton"
+            },
+            loginForgot: {
+                messagekey: "login-forgot"
+            },
+            loginResetLabel: {
+                messagekey: "login-reset-label"
+            },
+            loginResetHeader: {
+                messagekey: "login-reset-header"
+            },
+            enterEmailMessage: {
+                messagekey: "login-enterEmailMessage"
+            },
+            submitEmail: {
+                messagekey: "login-submitEmail"
+            },
+            loginBack: {
+                messagekey: "login-loginBack"
+            },
+            loginNewPasswordNote: {
+                messagekey: "login-loginNewPasswordNote"
+            },
+            loginPasswordInstructions: {
+                messagekey: "login-loginPasswordInstructions"
+            },
+            loginNewPasswordLabel: {
+                messagekey: "login-loginNewPasswordLabel"
+            },
+            loginConfirmPasswordLabel: {
+                messagekey: "login-loginConfirmPasswordLabel"
+            },
+            submitNewPassword: {
+                messagekey: "login-submitNewPassword"
+            }
+        },
+        selectorsToIgnore: ["loginForm", "signIn", "userID", "password", "requestReset", "loginRequired",
+            "enterEmail", "enterEmailForm", "email", "emailRequired",
+            "resetRequest", "newPassword", "confirmPassword", "passwordRequired"],
+        renderOnInit: true,
         components: {
             messageBar: {
                 type: "cspace.messageBar"
@@ -269,17 +340,59 @@ cspace = cspace || {};
                 func: "cspace.util.extractTenant"
             }
         },
-        strings: {
-            allFieldsRequired: "All fields must be filled in",
-            emailRequired: "You must enter a valid email address",
-            passwordsMustMatch: "Passwords must match",
-            invalid: "Invalid email/password combination",
-            generalError: "I'm sorry, an error has occurred. Please try again, or contact your system administrator."
-        }, 
+        invokers: {
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{login}.options.parentBundle.messageBase", "{arguments}.0"]
+            }
+        },
+        strings: {}, 
+        model: {
+            otherTenant: "#"
+        },
         urls: cspace.componentUrlBuilder({
             passwordreset: "%tenant/%tenantname/passwordreset",
             resetpassword: "%tenant/%tenantname/resetpassword",
             login: "%tenant/%tenantname/login"
         })
     });
+    
+    cspace.login.finalInit = function (that) {
+        bindEventHandlers(that);      
+        if (cspace.util.useLocalData()) {
+            that.locate("loginForm").attr("action", "createnew.html");
+        } else {
+            that.locate("loginForm").attr("action", fluid.stringTemplate(that.options.urls.login, {tenantname: that.options.tenantname}));
+        }
+
+        var result = cspace.util.getUrlParameter("result");
+        if (result === "fail") {
+            that.messageBar.show(that.lookupMessage("login-invalid"), null, true);
+        } else {
+            that.messageBar.hide();
+        }
+        var resetToken = cspace.util.getUrlParameter("token");
+        var email = cspace.util.getUrlParameter("email");
+        if (resetToken) {
+            that.token = resetToken;
+            that.email = email;
+            showReset(that.dom);
+        } else {
+            showSignIn(that.dom);
+        }
+    };
+    
+    cspace.login.postInit = function (that) {
+        that.submitEmail = function () {
+            if (emailFormValid(that.messageBar, that.dom, that.lookupMessage("login-emailRequired"))) {
+                submitEmail(that.locate("email").val(), fluid.stringTemplate(that.options.urls.passwordreset, {tenantname: that.options.tenantname}), that);
+            }
+        };
+        that.submitNewPassword = function () {
+            if (passwordFormValid(that.messageBar, that.dom, that.lookupMessage("login-allFieldsRequired"), that.lookupMessage("login-passwordsMustMatch"))) {
+                submitNewPassword(that.locate("newPassword").val(), fluid.stringTemplate(that.options.urls.resetpassword, {tenantname: that.options.tenantname}), that);
+            }
+        };
+    };
+    
 })(jQuery, fluid);

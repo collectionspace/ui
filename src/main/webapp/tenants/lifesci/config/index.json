@@ -1,0 +1,19 @@
+{
+    "pageBuilder": {
+        "options": {
+            "selectors": {
+                "login": ".csc-login" 
+            },
+            "components": {
+                "login": {
+                    "type": "cspace.login",
+                    "options": {
+                        "model": {
+                            "otherTenant": "../../core/html/index.html"
+                        }
+                    } 
+                } 
+            }
+        }
+    }
+}

@@ -41,20 +41,21 @@ var loginTester = function(){
 
         jQuery(login.options.selectors.loginForm).submit();
         jqUnit.isVisible("Logging in with empty fields should show error message", login.messageBar.container);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, login.messageBar.locate("message").text());
+        var strings = login.options.parentBundle.messageBase;
+        jqUnit.assertEquals("Message should describe required fields", strings["login-allFieldsRequired"], login.messageBar.locate("message").text());
 
         jQuery(login.options.selectors.messageContainer).hide();
         jQuery(login.options.selectors.userid).val("userid");
         jQuery(login.options.selectors.loginForm).submit();
         jqUnit.isVisible("Logging in with only user id should show error message", login.messageBar.container);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, login.messageBar.locate("message").text());
+        jqUnit.assertEquals("Message should describe required fields", strings["login-allFieldsRequired"], login.messageBar.locate("message").text());
 
         jQuery(login.options.selectors.messageContainer).hide();
         jQuery(login.options.selectors.userid).val("");
         jQuery(login.options.selectors.password).val("password");
         jQuery(login.options.selectors.loginForm).submit();
         jqUnit.isVisible("Logging in with only password should show error message", login.messageBar.container);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, login.messageBar.locate("message").text());
+        jqUnit.assertEquals("Message should describe required fields", strings["login-allFieldsRequired"], login.messageBar.locate("message").text());
     });
 
     loginTest.test("Email submit required field", function () {
@@ -62,7 +63,7 @@ var loginTester = function(){
         jqUnit.notVisible("Before login, message should not be visible", login.messageBar.container);
         login.submitEmail();
         jqUnit.isVisible("Submitting email with empty fields should show error message", login.messageBar.container);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.emailRequired, login.messageBar.locate("message").text());
+        jqUnit.assertEquals("Message should describe required fields", login.options.parentBundle.messageBase["login-emailRequired"], login.messageBar.locate("message").text());
     });
 
     loginTest.test("Email submit (local)", function () {
@@ -103,20 +104,21 @@ var loginTester = function(){
         jqUnit.notVisible("Before login, message should not be visible", login.messageBar.container);
         login.submitNewPassword();
         jqUnit.isVisible("Submitting password with empty fields should show error message", login.messageBar.container);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, login.messageBar.locate("message").text());
+        var strings = login.options.parentBundle.messageBase;
+        jqUnit.assertEquals("Message should describe required fields", strings["login-allFieldsRequired"], login.messageBar.locate("message").text());
 
         jQuery(login.options.selectors.messageContainer).hide();
         jQuery(login.options.selectors.newPassword).val("newPass");
         login.submitNewPassword();
         jqUnit.isVisible("Submitting password with only one field should show error message", login.messageBar.container);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, login.messageBar.locate("message").text());
+        jqUnit.assertEquals("Message should describe required fields", strings["login-allFieldsRequired"], login.messageBar.locate("message").text());
 
         jQuery(login.options.selectors.messageContainer).hide();
         jQuery(login.options.selectors.newPassword).val("");
         jQuery(login.options.selectors.confirmPassword).val("newPass");
         login.submitNewPassword();
         jqUnit.isVisible("Submitting password with only other field should show error message", login.messageBar.container);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.allFieldsRequired, login.messageBar.locate("message").text());
+        jqUnit.assertEquals("Message should describe required fields", strings["login-allFieldsRequired"], login.messageBar.locate("message").text());
 
 
         jQuery(login.options.selectors.messageContainer).hide();
@@ -124,7 +126,7 @@ var loginTester = function(){
         jQuery(login.options.selectors.confirmPassword).val("newPassTwo");
         login.submitNewPassword();
         jqUnit.isVisible("Submitting password with non-matching password should show error message", login.messageBar.container);
-        jqUnit.assertEquals("Message should describe required fields", login.options.strings.passwordsMustMatch, login.messageBar.locate("message").text());
+        jqUnit.assertEquals("Message should describe required fields", strings["login-passwordsMustMatch"], login.messageBar.locate("message").text());
     });
 
     loginTest.test("New password submission (local)", function () {

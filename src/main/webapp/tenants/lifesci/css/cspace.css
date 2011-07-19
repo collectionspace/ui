@@ -344,7 +344,11 @@ li .flc-pager-pageLink {
 	min-height:400px; 
 	height:auto !important;}
 #name-header-login {
-	padding-top:30px;}
+    margin-top:30px;
+    background: #fff url("../images/header-logo.png") no-repeat left top;
+    width:270px; 
+    height:51px;
+}
 
 
 /* header selectors */
