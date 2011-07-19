@@ -1,7 +1,7 @@
 {
     "csid": "142753869",
     "fields": {
-        "name": "Currency",
+        "displayName": "Currency",
         "description": "This is a term list used for currency",
         "source": "This is some source",
         "terms": [
