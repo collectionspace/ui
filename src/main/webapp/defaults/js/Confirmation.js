@@ -105,8 +105,7 @@ cspace = cspace || {};
                 fetchClass: "slowTemplate",
                 url: "%webapp/html/components/Confirmation.html",
                 options: {
-                    dataType: "html",
-					width: "500px"
+                    dataType: "html"
                 }
             })
         }
