@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<groups xmlns="http://www.isdc.ro/wro" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.isdc.ro/wro wro.xsd">
+
+  <group name='createnew'>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
+    <css>/tenants/lifesci/css/cspace.css</css>
+    <css>/defaults/css/search.css</css>
+    <css>/defaults/css/createNew.css</css>
+    <css>/defaults/css/pivot.css</css>
+  </group>
+  
+  <group name='myCollectionSpace'>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
+    <css>/tenants/lifesci/css/cspace.css</css>
+    <css>/defaults/css/pivot.css</css>
+  </group>
+  
+  <group name='findedit'>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
+    <css>/tenants/lifesci/css/cspace.css</css>
+    <css>/defaults/css/Pager.css</css>
+  </group>
+  
+  <group name='index'>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
+    <css>/tenants/lifesci/css/cspace.css</css>
+  </group>
+  
+  <group name='administration'>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
+    <css>/tenants/lifesci/css/cspace.css</css>
+    <css>/defaults/css/cabinet.css</css>
+    <css>/defaults/css/Confirmation.css</css>
+    <css>/defaults/css/search.css</css>
+    <css>/defaults/css/pivot.css</css>
+    <css>/defaults/css/admin.css</css>
+    <css>/defaults/css/repeatable.css</css>
+    <css>/defaults/lib/jquery/plugins/scrollabletabs/css/jquery-ui-1.7.2.custom.css</css>
+  </group>
+  
+  <group name='record'>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
+    <css>/defaults/lib/infusion/components/uploader/css/Uploader.css</css>
+    <css>/tenants/lifesci/css/cspace.css</css>
+    <css>/defaults/css/Pager.css</css>
+    <css>/defaults/css/NumberPatternChooser.css</css>
+    <css>/defaults/css/Confirmation.css</css>
+    <css>/defaults/css/Autocomplete.css</css>
+    <css>/defaults/css/StructuredDate.css</css>
+    <css>/defaults/css/search.css</css>
+    <css>/defaults/css/pivot.css</css>
+    <css>/defaults/css/authority.css</css>
+    <css>/defaults/css/repeatable.css</css>
+    <css>/defaults/lib/goog/demos/css/datepicker.css</css>
+    <css>/defaults/lib/jquery/plugins/scrollabletabs/css/jquery-ui-1.7.2.custom.css</css>
+  </group>
+</groups>

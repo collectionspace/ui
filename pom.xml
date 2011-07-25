@@ -18,6 +18,7 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
+        <warPlugin.warSourceDirectory>${basedir}/src/main/webapp</warPlugin.warSourceDirectory>
         <cspace.server.home>${env.JBOSS_HOME}/server/cspace</cspace.server.home>
         <!-- using the jboss 4.2.x container -->
         <cargo.container>jboss42x</cargo.container>
@@ -26,12 +27,112 @@
     <profile>
       <id>tomcat</id>
       <properties>
+        <warPlugin.warSourceDirectory>${basedir}/src/main/webapp</warPlugin.warSourceDirectory>
         <cspace.server.home>${env.CATALINA_HOME}</cspace.server.home>
         <!-- using the tomcat 6.x container -->
         <cargo.container>tomcat6x</cargo.container>
       </properties>
     </profile>
+    <profile>
+      <id>minimize</id>
+      <properties>
+        <warPlugin.warSourceDirectory>${project.build.directory}/${project.build.finalName}</warPlugin.warSourceDirectory>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>ro.isdc.wro4j</groupId>
+            <artifactId>wro4j-maven-plugin</artifactId>
+            <version>1.3.8</version>
+            <executions>
+              <execution>
+                <id>lifesci</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <targetGroups></targetGroups>
+                  <minimize>true</minimize>
+                  <cssDestinationFolder>${project.build.directory}/${project.build.finalName}/tenants/lifesci/css/</cssDestinationFolder>
+                  <jsDestinationFolder>${project.build.directory}/${project.build.finalName}/tenants/lifesci/js/</jsDestinationFolder>
+                  <wroFile>${basedir}/src/wro-lifesci.xml</wroFile>
+                </configuration>
+              </execution>
+              <execution>
+                <id>default</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <targetGroups></targetGroups>
+                  <minimize>true</minimize>
+                  <cssDestinationFolder>${project.build.directory}/${project.build.finalName}/defaults/css/</cssDestinationFolder>
+                  <jsDestinationFolder>${project.build.directory}/${project.build.finalName}/defaults/js/</jsDestinationFolder>
+                </configuration>
+              </execution>
+            </executions>
+            <configuration>
+              <targetGroups></targetGroups>
+              <minimize>true</minimize>
+              <contextFolder>${basedir}/src/main/webapp/</contextFolder>
+              <wroFile>${basedir}/src/wro.xml</wroFile>
+              <wroManagerFactory>org.collectionspace.CollectionSpaceFactory</wroManagerFactory>
+            </configuration>
+          </plugin>
+          <plugin>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <id>copysrc</id> 
+                <phase>compile</phase>
+                <configuration>
+                  <target>
+                    <property name="finalName" value="${project.build.finalName}"/>
+                    <ant antfile="${basedir}/src/build.xml">
+                      <target name="copysrc"/>
+                    </ant>
+                  </target>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>replace</id> 
+                <phase>compile</phase>
+                <configuration>
+                  <target>
+                    <property name="finalName" value="${project.build.finalName}"/>
+                    <ant antfile="${basedir}/src/build.xml">
+                      <target name="replace"/>
+                    </ant>
+                  </target>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
+  <dependencies>
+    <dependency>
+      <groupId>ro.isdc.wro4j</groupId>
+      <artifactId>wro4j-core</artifactId>
+      <version>1.3.8</version>
+    </dependency>
+    <dependency>
+      <groupId>ro.isdc.wro4j</groupId>
+      <artifactId>wro4j-extensions</artifactId>
+      <version>1.3.8</version>
+    </dependency>
+  </dependencies>
   <build>
     <finalName>cspace-ui</finalName>
     <plugins>
@@ -40,6 +141,7 @@
         <artifactId>maven-war-plugin</artifactId>
         <configuration>
           <outputDirectory>${output.location}</outputDirectory>
+          <warSourceDirectory>${warPlugin.warSourceDirectory}</warSourceDirectory>
         </configuration>
       </plugin>
       <plugin>
