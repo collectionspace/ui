@@ -202,6 +202,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             vars: {
                 tenant: "..",
                 chain: "..",
+                tenantname: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.util.extractTenant"
+                    }
+                },
                 webapp: "../../main/webapp/defaults",
                 test: ".."
             }

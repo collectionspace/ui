@@ -17,6 +17,9 @@ cspace = cspace || {};
     
     fluid.defaults("cspace.reportProducer", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
+        mergePolicy: {
+            recordModel: "preserve"
+        },
         produceTree: "cspace.reportProducer.produceTree",
         invokers: {
             generateReport: {
@@ -43,7 +46,10 @@ cspace = cspace || {};
                 }
             },
             messageBar: "{messageBar}",
-            globalNavigator: "{globalNavigator}"
+            globalNavigator: "{globalNavigator}",
+            reportTypesSource: {
+                type: "cspace.reportProducer.reportTypesSource"
+            }
         },
         events: {
             onError: null,
@@ -89,7 +95,8 @@ cspace = cspace || {};
             })
         },
         model: {
-            reportTypes: ["Please select a value"],
+            reportnames: ["Please select a value"],
+            reportlist: [""],
             reportTypeSelection: "",
             reportInProgress: false,
             enableReporting: {
@@ -105,19 +112,18 @@ cspace = cspace || {};
             }
         },
         urls: cspace.componentUrlBuilder({
-            reportUrl: "%chain/reporting"
+            reportTypesUrl: "%tenant/%tenantname/reporting/search/%recordType",
+            reportUrl: "%tenant/%tenantname/invokereport/%reportcsid"
         }),
         finalInitFunction: "cspace.reportProducer.finalInit",
         postInitFunction: "cspace.reportProducer.postInit",
         preInitFunction: "cspace.reportProducer.preInit"
     });
     
-    cspace.reportProducer.getReportTypes = function (recordType, strategy, options) {
-        var config = {
-            strategies: [fluid.invokeGlobalFunction(strategy, [options])]
-        }; 
-        return fluid.makeArray(fluid.get({}, fluid.model.composeSegments("reporting", recordType), config));
-    };
+    fluid.defaults("cspace.reportProducer.testReportTypesSource", {
+        url: "%test/data/%recordType/reporting.json"
+    });
+    cspace.reportProducer.testReportTypesSource = cspace.URLDataSource;
     
     fluid.fetchResources.primeCacheFromResources("cspace.reportProducer");
     
@@ -125,8 +131,11 @@ cspace = cspace || {};
         that.options.listeners = {
             reportStarted: function () {
                 that.applier.requestChange("reportInProgress", true);
-                that.applier.requestChange("reportTypeSelection", that.model.reportTypeSelection || that.model.reportTypes[0]);
-                that.reportStatus.show(that.model.reportTypeSelection);
+                that.applier.requestChange("reportTypeSelection", that.model.reportTypeSelection || that.model.reportlist[0]);
+                that.reportStatus.show({
+                    reportType: that.model.reportTypeSelection,
+                    reportName: that.model.reportnames[$.inArray(that.model.reportTypeSelection, that.model.reportlist)]
+                });
             },
             reportFinished: function () {
                 that.applier.requestChange("reportInProgress", false);
@@ -154,31 +163,37 @@ cspace = cspace || {};
     };
     
     cspace.reportProducer.finalInit = function (that) {
-        that.refreshView();
-        that.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
-            if (that.model.reportInProgress) {
-                that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
-                    strings: {
-                        primaryMessage: that.options.strings.stopPrimaryMessage,
-                        secondaryMessage: that.options.strings.stopSecondaryMessage,
-                        actText: that.options.strings.stopActText,
-                        actAlt: that.options.strings.stopActAlt
-                    },
-                    model: {
-                        messages: ["primaryMessage", "secondaryMessage"]
-                    },
-                    listeners: {
-                        onClose: function (userAction) {
-                            if (userAction === "act") {
-                                that.requestReport(true, callback);
+        that.reportTypesSource.get({
+            recordType: that.options.recordType
+        }, function (data) {
+            that.applier.requestChange("reportnames", data.reportnames);
+            that.applier.requestChange("reportlist", data.reportlist);
+            that.refreshView();
+            that.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
+                if (that.model.reportInProgress) {
+                    that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+                        strings: {
+                            primaryMessage: that.options.strings.stopPrimaryMessage,
+                            secondaryMessage: that.options.strings.stopSecondaryMessage,
+                            actText: that.options.strings.stopActText,
+                            actAlt: that.options.strings.stopActAlt
+                        },
+                        model: {
+                            messages: ["primaryMessage", "secondaryMessage"]
+                        },
+                        listeners: {
+                            onClose: function (userAction) {
+                                if (userAction === "act") {
+                                    that.requestReport(true, callback);
+                                }
                             }
                         }
-                    }
-                });
-                return false;
-            }
+                    });
+                    return false;
+                }
+            });
+            that.events.ready.fire();
         });
-        that.events.ready.fire();
     };
     
     cspace.reportProducer.requestReport = function (model, options, events, stop, callback) {
@@ -187,16 +202,23 @@ cspace = cspace || {};
         }
         fluid.fetchResources({
             report: {
-                href: options.urls.reportUrl,
+                href: fluid.stringTemplate(options.urls.reportUrl, {reportcsid: model.reportTypeSelection}),
                 options: {
                     type: "POST",
-                    dataType: "json",
                     data: JSON.stringify({
-                        recordType: options.recordType,
-                        stop: stop,
-                        reportType: model.reportTypeSelection
+                        fields: {
+                            docType: options.recordType,
+                            singleCSID: options.recordModel.csid
+//                            stop: stop,
+                        }
                     }),
                     success: function (data) {
+                        if (data.isError) {
+                            fluid.each(data.messages, function(message) {
+                                events.onError.fire(message.message);
+                            });
+                            return;
+                        }
                         events.reportFinished.fire();
                         if (callback) {
                             callback();
@@ -243,8 +265,8 @@ cspace = cspace || {};
                 decorators: {"addClass": "{styles}.reportHeader"}
             },
             reportType: {
-                optionnames: "${reportTypes}",
-                optionlist: "${reportTypes}",
+                optionnames: "${reportnames}",
+                optionlist: "${reportlist}",
                 selection: "${reportTypeSelection}",
                 decorators: {"addClass": "{styles}.reportType"}
             },
@@ -290,7 +312,7 @@ cspace = cspace || {};
             stop: "cs-reportStatus-stop"
         },
         strings: {
-            message: "Creating %reportType report...",
+            message: "Creating %reportName report...",
             stop: "Stop" 
         }
     });
@@ -301,7 +323,7 @@ cspace = cspace || {};
         return {
             message: {
                 messagekey: "message",
-                args: {reportType: "${reportType}"},
+                args: {reportName: "${reportName}"},
                 decorators: {"addClass": "{styles}.message"}
             },
             stop: {
@@ -323,8 +345,8 @@ cspace = cspace || {};
         };
     };
     cspace.reportProducer.reportStatus.finalInit = function (that) {
-        that.show = function (reportType) {
-            that.applier.requestChange("reportType", reportType);
+        that.show = function (model) {
+            that.applier.requestChange("", model);
             that.refreshView();
             that.container.show();
         };

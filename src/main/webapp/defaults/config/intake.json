@@ -52,8 +52,7 @@
                 "recordlist",
                 "namespaces",
                 "recordtypes",
-                "intake",
-                "reporting"
+                "intake"
             ],
             "pageSpec": {
                 "recordEditor": {

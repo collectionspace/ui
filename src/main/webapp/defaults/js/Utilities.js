@@ -140,6 +140,12 @@ fluid.registerNamespace("cspace.util");
         gradeNames: ["fluid.littleComponent"],
         vars: {
             tenant: "../../../tenant",
+            tenantname: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.extractTenant"
+                }
+            },
             chain: "../../../chain",
             webapp: "..",
             test: "../../../../test"
@@ -367,8 +373,7 @@ fluid.registerNamespace("cspace.util");
     
     cspace.util.getLoginURL = function (options) {
         var that = fluid.initLittleComponent("cspace.util.getLoginURL", options);
-        var url = that.options.urlRenderer(that.options.url);
-        return fluid.stringTemplate(url, {tenantname: cspace.util.extractTenant()});
+        return that.options.urlRenderer(that.options.url);
     };
     
     fluid.defaults("cspace.util.getLoginURL", {

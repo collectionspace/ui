@@ -334,12 +334,6 @@ cspace = cspace || {};
                 type: "cspace.passwordValidator"
             }
         },
-        tenantname: {
-            expander: {
-                type: "fluid.deferredInvokeCall",
-                func: "cspace.util.extractTenant"
-            }
-        },
         invokers: {
             lookupMessage: {
                 funcName: "cspace.util.lookupMessage",
@@ -362,7 +356,7 @@ cspace = cspace || {};
         if (cspace.util.useLocalData()) {
             that.locate("loginForm").attr("action", "createnew.html");
         } else {
-            that.locate("loginForm").attr("action", fluid.stringTemplate(that.options.urls.login, {tenantname: that.options.tenantname}));
+            that.locate("loginForm").attr("action", that.options.urls.login);
         }
 
         var result = cspace.util.getUrlParameter("result");
@@ -385,12 +379,12 @@ cspace = cspace || {};
     cspace.login.postInit = function (that) {
         that.submitEmail = function () {
             if (emailFormValid(that.messageBar, that.dom, that.lookupMessage("login-emailRequired"))) {
-                submitEmail(that.locate("email").val(), fluid.stringTemplate(that.options.urls.passwordreset, {tenantname: that.options.tenantname}), that);
+                submitEmail(that.locate("email").val(), that.options.urls.passwordreset, that);
             }
         };
         that.submitNewPassword = function () {
             if (passwordFormValid(that.messageBar, that.dom, that.lookupMessage("login-allFieldsRequired"), that.lookupMessage("login-passwordsMustMatch"))) {
-                submitNewPassword(that.locate("newPassword").val(), fluid.stringTemplate(that.options.urls.resetpassword, {tenantname: that.options.tenantname}), that);
+                submitNewPassword(that.locate("newPassword").val(), that.options.urls.resetpassword, that);
             }
         };
     };

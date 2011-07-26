@@ -63,6 +63,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             args: ["{recordList}.model", "{recordList}.options", "{recordList}.options.urls.navigateLocal", "{permissionsResolver}", "{recordList}.dom"]
         });
         
+        // Report Producer
+        fluid.demands("cspace.reportProducer.reportTypesSource", ["cspace.reportProducer", "cspace.localData"], {
+            funcName: "cspace.reportProducer.testReportTypesSource",
+            args: {
+                targetTypeName: "cspace.reportProducer.testReportTypesSource",
+                termMap: {
+                    recordType: "%recordType"
+                }
+            }
+        });
+        
         // List editor's demands
         fluid.demands("cspace.listEditor.listDataSource",  ["cspace.users", "cspace.localData", "cspace.listEditor"], {
             funcName: "cspace.listEditor.testListDataSource",
@@ -244,6 +255,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 vars: {
                     tenant: "../../../../test",
+                    tenantname: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.util.extractTenant"
+                        }
+                    },
                     chain: "../../../../test"
                 }
             }
@@ -511,22 +528,20 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{sidebar}.dom.report",
             options: {
                 recordType: "{sidebar}.options.primaryRecordType",
-                model: {
-                    reportTypes: {
-                        expander: {
-                            type: "fluid.deferredInvokeCall",
-                            func: "cspace.reportProducer.getReportTypes",
-                            args: [
-                                "{sidebar}.options.primaryRecordType", 
-                                "cspace.util.schemaStrategy", {
-                                    schema: "{pageBuilder}.schema"
-                                }
-                            ]
-                        }
-                    }
+                recordModel: "{pageBuilder}.model"
+            }
+        });
+        
+        fluid.demands("cspace.reportProducer.reportTypesSource", "cspace.reportProducer", {
+            funcName: "cspace.URLDataSource",
+            args: {
+                url: "{reportProducer}.options.urls.reportTypesUrl",
+                targetTypeName: "cspace.reportProducer.reportTypesSource",
+                termMap: {
+                    recordType: "%recordType"
                 }
             }
-        });  
+        });
         
         // Confirmation demands
         fluid.demands("confirmation", "cspace.recordEditor", "{options}");

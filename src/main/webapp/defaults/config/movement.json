@@ -52,8 +52,7 @@
                 "recordlist",
                 "recordtypes",
                 "namespaces",
-                "movement",
-                "reporting"
+                "movement"
             ],
             "pageSpec": {
                 "recordEditor": {
