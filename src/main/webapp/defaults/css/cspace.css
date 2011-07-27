@@ -18,8 +18,7 @@ body {
     line-height:1.2; 
     padding:5px 4px 0 4px;
     margin:0;}
-div:focus, p:focus, input:focus, a:focus, img:focus, span:focus, li:focus, 
-ul:focus, button:focus, form:focus, h1:focus, h2:focus, h3:focus, h4:focus, h5:focus, label:focus, select:focus, textarea:focus {
+input:focus, a:focus, button:focus, form:focus, select:focus, textarea:focus, div:focus {
     outline:1px solid #000 !important;
 }
 table {
@@ -269,15 +268,8 @@ a.add-link:hover, a.add-link:focus {
 a.header-focus {
     text-decoration:none; 
     color:inherit;}
-a.header-foc us:focus {
-    outline: 1px solid black;}
-a.header-focus:focus  .header.toggle {
-    background-color:#666666; 
-    outline: 1px solid black;}
 
 /* table selectors */
-tr:focus {
-    outline:none;}
 td.label {
     background-color:#F3F3F4; 
     padding:0 4px 0 1px; 
@@ -472,7 +464,8 @@ li .flc-pager-pageLink {
 #secondary-nav-menu .menu-record li {
     /*display:inline;*/}
 #secondary-nav-menu-sub  .button-row{
-	float:right;}
+	/*float:right;*/
+	text-align:right;}
 #secondary-nav-menu-sub .upper-save {
     float:right; 
     /*padding-bottom:10px; */
@@ -573,7 +566,7 @@ table tbody.highlight tr:focus td {
 .fl-container-1024-inner {padding:0; background-color:#F0F5FB;}
 .fl-container-left {min-width:693px; width:70%;}
 .fl-container-admin   {width:100%;}
-.fl-container-pivot  {width:30%; min-width: 297px; margin-top:23px;}
+.fl-container-pivot  {width:30%; min-width: 297px; margin-top:26px;}
 .fl-container-admin-menu ul {width:100%;}
 .fl-container-admin-menu ul li{list-style-type:none; cursor:pointer; padding:2px 0 3px 5px; border:1px solid #6E9FCE; background-color:#6E9FCE; margin-bottom:4px; color:#fff; font-weight:bold;}
 .fl-container-admin-menu ul li.selected {background-color:#FFF; color:#6E9FCE;}
@@ -646,16 +639,18 @@ table tbody.highlight tr:focus td {
     padding:0; 
     margin:0; 
     color:#000; 
-    cursor:default;}
+    cursor:default;}	
 .info-pair .label, .info-pair-date .label, .info-pair-select .label {
     padding-bottom:4px; 
     font-weight:bold; 
     color:#333333; 
     font-size:11px; 
     line-height:11px;}
+.info-pair .label.required, .info-pair-date .label.required, .info-pair-select .label.required {
+	display:inline-block;}
 .info-pair .content, .info-pair-date .content,.info-pair-select .content {
     width:100%; 
-    float:left; 
+    /*float:left; */
     border:none;}
 .info-pair .content.fl-date-group {
 	width: 162px;}
@@ -679,7 +674,8 @@ td.fl-date-group {
 table.cs-admin-table td {
 	padding:0 2px;}
 table.cs-admin-table td.checkbox {
-	width:13px; padding-top:2px;}
+	width:13px; 
+	/*padding-top:2px;*/}
 .info-pair .content table table, /* FIX */ /* info-pair-date doesn't use tables anymore*/
 .info-pair-date .content table  table,
 .info-pair-select table table {
@@ -878,9 +874,10 @@ table.cs-admin-table td.checkbox {
 .cs-admin-details .info-pair {
     padding-bottom:16px;}
 .cs-admin-details .info-pair .label { 
-    width:120px; 
+    /*width:120px; */
     font-weight:bold; 
-    padding-bottom:6px;}
+    padding-bottom:6px;
+	display:inline-block;}
 /*.cs-admin-details .info-pair  {
     width:320px;}*/
 /*.cs-admin-details .info-pair  textarea {
@@ -941,8 +938,8 @@ table.cs-admin-table td.checkbox {
     padding-bottom:18px; 
     padding-top:0px; 
     font-size:12px; 
-    line-height:12px; 
-    float:left;}
+    line-height:12px;
+    /*float:left;*/}
 /*.info-pair:hover {
     -moz-border-radius:5px 5px 5px;
     border:1px solid #C2D7EF;
@@ -1207,7 +1204,7 @@ input[disabled]:hover, input[disabled]:hover    {
 .overflowdiv-admin {
     overflow-y:auto; 
     overflow-x:hidden; 
-    max-height:360px;} /*  min-height */
+    max-height:440px;} /*  min-height */
 
 .hidden {
     display: none;}
@@ -1222,6 +1219,15 @@ input[disabled]:hover, input[disabled]:hover    {
     visibility:hidden; 
     display:block;}
 
+.clearfix:after, 
+.info-column:after {
+   content: ".";
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+	
 .ui-tabs .ui-tabs-hide {
     display: none;}
 
@@ -1262,9 +1268,7 @@ input[disabled]:hover, input[disabled]:hover    {
 
 /*   styling the date pickers   */
 .cs-date-picker {
-    margin-top: 18px;}
-.cs-calendar-button:focus {
-    /*outline: 1px solid black;*/}
+    margin-top: 21px;}
 .cs-calendar-image {
     background: url('../images/cal.png') no-repeat center center;
 }
@@ -1362,6 +1366,8 @@ input[disabled]:hover, input[disabled]:hover    {
     padding-bottom: 32px;}*/
 
 /***********    CSS For New Markup for SearchBox widget    ***********/
+.cs-searchBox-container {
+	width:580px;}
 .cs-searchBox {
     padding:12px 14px 12px 0; 
     background-color:#F5F5F5; }
@@ -1443,7 +1449,7 @@ input[disabled]:hover, input[disabled]:hover    {
 .cs-togglable-expanded {
     background:transparent url('../images/toggle-less.png') no-repeat 4px 6px;}
 .cs-togglable-collapsed {
-    background:transparent url('../images/toggle-more.png') no-repeat 4px 6px;}
+    background:transparent url('../images/toggle-more.png') no-repeat 4px 6px;	}
 .csc-related-mainheader {
     display:inline;}
 
@@ -1498,6 +1504,7 @@ input[disabled]:hover, input[disabled]:hover    {
     border-left:none;
     height:19px;
     width: 18px;
+	cursor:pointer;
     /*float:left;*/}
 table .cs-calendar-button { 
     border:none;}

@@ -1,7 +1,11 @@
 /*  styling repeatable fields  */
 .cs-repeatable-repeat .input-textarea  {border:1px solid #C7CFD4;} 
-.content .cs-repeatable-repeat {
-    clear:both;}
+.content .cs-repeatable-repeat {}
+.content li.cs-repeatable-repeat input,
+.content li.cs-repeatable-repeat select,
+.content li.cs-repeatable-repeat button,
+.content li.cs-repeatable-repeat textarea {
+	float:left;}
 tr.csc-repeatable-headerRow td:first-child, tr.csc-repeatable-headerRow td:last-child {
     width:13px;}
 .cs-repeatable-add {}
@@ -41,14 +45,15 @@ input.cs-repeatable-primary {
     margin-top:2px;
 }
 td input.cs-repeatable-primary {
-    margin:2px 2px 0 2px;
+    margin:0px 2px 0 2px;
     vertical-align:middle;}
 input.cs-repeatable-delete {
     border:none; 
     vertical-align:top; 
     padding:0px;
 	width:16px;
-    background:transparent url('../images/icnDeleteIdle.png') no-repeat 2px 3px;}
+    background:transparent url('../images/icnDeleteIdle.png') no-repeat 2px 3px;
+	}
 input.cs-repeatable-delete:hover, 
 input.cs-repeatable-delete:focus {
     color: white; 
@@ -64,4 +69,4 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete:hover,
 table tr.csc-repeatable-repeat input.cs-repeatable-delete:focus,
 table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:hover, 
 table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
-	background-position:2px 3px;}
+	background-position:2px 1px; height:15px;}

@@ -4,6 +4,10 @@
 	margin-bottom:20px;}
 #search-box input {
 	margin-right:10px;}
+.cs-user-unSearchButton {
+	margin-left:10px;}
+.cs-searchBox-container {
+	width:660px;}
 #create-box {
 	padding: 12px 0 12px 12px; 
 	margin-bottom:20px; 

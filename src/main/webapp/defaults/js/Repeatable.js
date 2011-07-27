@@ -102,12 +102,13 @@ cspace = cspace || {};
     };
     
     function positionAddButton(button, target) {
-        var offset = $(target).offset();
+        var offset = $(target).offset();		
         // TODO: Do something when the offset parent is null
-        var offsetParent = button.offsetParent;
+        var offsetParent = button.offsetParent;		
         if (offsetParent) {
-            var poffset = $(offsetParent).offset();
+            var poffset = $(offsetParent).offset();			
             var tleft = offset.left - poffset.left;
+			var foo = tleft + target.offsetWidth - button.offsetWidth;
             $(button).css("left", tleft - button.offsetWidth + "px");
         }
     }
@@ -273,7 +274,7 @@ cspace = cspace || {};
         
         if (!node.is("tr") && !node.is("li")) {
             // TODO: explain why this manipulation is done, and what assumptions it makes about the markup
-            node.wrap("<ul class=\"cs-repeatable\"><li class=\"csc-repeatable-repeat " + that.options.styles.repeat + "\"/></ul>");            
+            node.wrap("<ul class=\"cs-repeatable\"><li class=\"csc-repeatable-repeat clearfix " + that.options.styles.repeat + "\"/></ul>");            
             // TODO: there is probably a bug here when the 'repeat' selector is overridden - write a test to prove this
             //       to fix the issue we need to add another selector - repeatable-content
             node.removeClass("csc-repeatable-repeat");
