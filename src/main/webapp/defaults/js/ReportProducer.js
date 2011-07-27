@@ -113,7 +113,7 @@ cspace = cspace || {};
         },
         urls: cspace.componentUrlBuilder({
             reportTypesUrl: "%tenant/%tenantname/reporting/search/%recordType",
-            reportUrl: "%tenant/%tenantname/invokereport/%reportcsid"
+            reportUrl: "%tenant/%tenantname/invokereport/%reportcsid/%recordType/%csid"
         }),
         finalInitFunction: "cspace.reportProducer.finalInit",
         postInitFunction: "cspace.reportProducer.postInit",
@@ -200,18 +200,16 @@ cspace = cspace || {};
         if (!stop) {
             events.reportStarted.fire();
         }
+        var href = fluid.stringTemplate(options.urls.reportUrl, {
+            reportcsid: model.reportTypeSelection,
+            recordType: options.recordType,
+            csid: options.recordModel.csid
+        });
         fluid.fetchResources({
             report: {
-                href: fluid.stringTemplate(options.urls.reportUrl, {reportcsid: model.reportTypeSelection}),
+                href: href,
                 options: {
-                    type: "POST",
-                    data: JSON.stringify({
-                        fields: {
-                            docType: options.recordType,
-                            singleCSID: options.recordModel.csid
-//                            stop: stop,
-                        }
-                    }),
+                    type: "GET",
                     success: function (data) {
                         if (data.isError) {
                             fluid.each(data.messages, function(message) {
@@ -219,6 +217,7 @@ cspace = cspace || {};
                             });
                             return;
                         }
+                        window.location = href;
                         events.reportFinished.fire();
                         if (callback) {
                             callback();
