@@ -18,7 +18,8 @@ cspace = cspace || {};
     fluid.defaults("cspace.reportProducer", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         mergePolicy: {
-            recordModel: "preserve"
+            recordModel: "preserve",
+            recordApplier: "nomerge"
         },
         produceTree: "cspace.reportProducer.produceTree",
         invokers: {
@@ -29,6 +30,10 @@ cspace = cspace || {};
             requestReport: {
                 funcName: "cspace.reportProducer.requestReport",
                 args: ["{reportProducer}.model", "{reportProducer}.options", "{reportProducer}.events", "{arguments}.0", "{arguments}.1"]
+            },
+            checkReportButtonDisabling: {
+                funcName: "cspace.reportProducer.checkReportButtonDisabling",
+                args: ["{reportProducer}.model", "{reportProducer}.options.recordModel"]
             }
         },
         components: {
@@ -127,6 +132,13 @@ cspace = cspace || {};
     
     fluid.fetchResources.primeCacheFromResources("cspace.reportProducer");
     
+    cspace.reportProducer.checkReportButtonDisabling = function (model, recordModel) {
+        if (!recordModel.csid) {
+            return true;
+        }
+        return model.reportlist.length < 2 && !model.reportlist[0];
+    };
+    
     cspace.reportProducer.preInit = function (that) {
         that.options.listeners = {
             reportStarted: function () {
@@ -152,6 +164,9 @@ cspace = cspace || {};
                 that.requestReport(true);
             }
         };
+        that.options.recordApplier.modelChanged.addListener("csid", function () {
+            that.refreshView();
+        });
     };
     
     cspace.reportProducer.postInit = function (that) {
@@ -166,8 +181,10 @@ cspace = cspace || {};
         that.reportTypesSource.get({
             recordType: that.options.recordType
         }, function (data) {
-            that.applier.requestChange("reportnames", data.reportnames);
-            that.applier.requestChange("reportlist", data.reportlist);
+            if (data.reportlist.length > 0) {
+                that.applier.requestChange("reportnames", data.reportnames);
+                that.applier.requestChange("reportlist", data.reportlist);
+            }
             that.refreshView();
             that.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
                 if (that.model.reportInProgress) {
@@ -281,6 +298,12 @@ cspace = cspace || {};
                     type: "jQuery",
                     func: "click",
                     args: that.generateReport
+                }, {
+                    type: "jQuery",
+                    func: "prop",
+                    args: {
+                        disabled: that.checkReportButtonDisabling
+                    }
                 }]
             }
         };

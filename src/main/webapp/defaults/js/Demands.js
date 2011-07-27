@@ -528,7 +528,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{sidebar}.dom.report",
             options: {
                 recordType: "{sidebar}.options.primaryRecordType",
-                recordModel: "{pageBuilder}.model"
+                recordModel: "{pageBuilder}.model",
+                recordApplier: "{pageBuilder}.applier"
             }
         });
         
