@@ -115,7 +115,10 @@ cspace = cspace || {};
             delete item.recordtype;
             if (source) {
                 $.each(source, function (i, value) {
-                    if (item.roleName === value.roleName) {
+//                    NOTE: Have to compare csid's because roleNames, as
+//                    it turns out are inconsistent.
+//                    if (item.roleName === value.roleName) {
+                    if (item.roleId === value.roleId) {
                         item.roleSelected = true;
                         return false;
                     }
