@@ -216,4 +216,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     fluid.demands("mainSearch", "cspace.search.searchView", ["{searchView}.dom.mainSearch", fluid.COMPONENT_OPTIONS]);
     fluid.demands("structuredDate", "cspace.test", [".csc-structuredDate-container-field", "{options}"]);
     
+    // Report producer  
+    fluid.demands("cspace.reportProducer", ["cspace.sidebar", "cspace.localData", "cspace.test"], {
+        container: "{sidebar}.dom.report",
+        options: {
+            recordType: "{sidebar}.options.primaryRecordType",
+            recordModel: "{sidebar}.options.recordModel",
+            recordApplier: "{sidebar}.options.recordApplier"
+        }
+    });
 })(jQuery, fluid);
