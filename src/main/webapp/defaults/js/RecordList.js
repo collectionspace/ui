@@ -16,11 +16,98 @@ cspace = cspace || {};
 (function ($, fluid) {
     fluid.log("RecordList.js loaded");
 
-    var bindEvents = function (that) {
-        that.events.onSelect.addListener(function () {
-            that.select();
-        });
+    fluid.defaults("cspace.recordList", {
+		preInitFunction: "cspace.recordList.preInit",
+		finalInitFunction: "cspace.recordList.finalInit",
+        mergePolicy: {
+            "rendererOptions.applier": "applier"
+        },
+        rendererOptions: {
+            autoBind: true
+        },
+        invokers: {
+			bindEvents: {
+                funcName: "cspace.recordList.bindEvents",
+                args: ["{recordList}"]
+            },
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{recordList}.options.parentBundle.messageBase", "{arguments}.0"]
+            },
+            select: "select",
+            verifyColumnOrder: {
+                funcName: "cspace.recordList.verifyColumnOrder",
+                args: "{recordList}"
+            },
+            calculateRecordListSize: {
+                funcName: "cspace.recordList.calculateRecordListSize",
+                args: ["{recordList}.model", "{recordList}.options.elPaths.items"]
+            }
+        },
+        model: {
+            selectonIndex: -1
+        },
+        events: {
+            onSelect: null
+        },
+        showTitle: true,
+        showNumberOfItems: true,
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        selectors: {
+            newRow: ".csc-recordList-new",
+            recordList: ".csc-recordList",
+            titleRow: ".csc-recordList-title-row",
+            titleColumn: ".csc-recordList-title-column",
+            numberOfItems: ".csc-recordList-num-items",
+            nothingYet: ".csc-recordList-no-items",
+            row: ".csc-recordList-row",
+            column: ".csc-recordList-column",
+            deleteRelation: ".csc-recordList-deleteRelation",
+            thumbnail: ".csc-recordList-thumbnail"
+        },
+        repeatingSelectors: ["row", "titleColumn", "column"],
+        strings: {
+            nothingYet: "No related records yet",
+            newRow: "New Record",
+            numberOfItems: "%numberOfItems"
+        },
+        styles: {
+            hidden: "hidden",
+            newRow: "cs-recordList-new",
+            recordList: "cs-recordList",
+            titleRow: "cs-recordList-title-row",
+            numberOfItems: "cs-recordList-num-items",
+            nothingYet: "cs-recordList-no-items",
+            titleColumn: "cs-recordList-title-column",
+            column: "cs-recordList-column",
+            column1: "cs-recordList-column1",
+            column2: "cs-recordList-column2",
+            column3: "cs-recordList-column3",
+            column4: "cs-recordList-column4",
+            selected: "cs-selected",
+            disabled: "cs-disabled"
+        },
+        parentBundle: "{globalBundle}",
+        globalNavigator: "{globalNavigator}",
+        produceTree: "cspace.recordList.produceTree",
+        resources: {
+            template: cspace.resourceSpecExpander({
+                fetchClass: "fastTemplate",
+                url: "%webapp/html/components/RecordListTemplate.html",
+                options: {
+                    dataType: "html"
+                }
+            })
+        },
+        urls: cspace.componentUrlBuilder({
+            navigate: "%webapp/html/%recordType.html?csid=%csid",
+            navigateLocal: "%webapp/html/record.html?recordtype=%recordType&csid=%csid"
+        })
+    });
 
+    fluid.fetchResources.primeCacheFromResources("cspace.recordList");
+    
+    cspace.recordList.bindEvents = function (that) {
         fluid.activatable(that.locate("row"), function (event) {
             var rows = that.locate("row");
             rows.removeClass(that.options.styles.selected);
@@ -48,30 +135,37 @@ cspace = cspace || {};
             that.applier.requestChange("selectonIndex", rows.index(row));
             that.events.onSelect.fire();
         });
+    };
 
+    
+    cspace.recordList.finalInit = function (that) {
+    	that.applier.requestChange("columns", that.options.columns);
+        that.applier.requestChange("sorted", []);
+        that.applier.requestChange("names", that.options.names || that.options.columns);
+        
         that.handleNewRow = function (action) {
             that.locate("newRow")[action]();
             that.locate("row").removeClass(that.options.styles.selected);
         };
-    };
-
-    cspace.recordList = function (container, options) {
-        var that = fluid.initRendererComponent("cspace.recordList", container, options);
-        fluid.initDependents(that);
-        that.applier.requestChange("columns", that.options.columns);
-        that.applier.requestChange("sorted", []);
-        that.applier.requestChange("names", that.options.names || that.options.columns);
+        
         that.refreshView = function () {
             that.verifyColumnOrder();
             that.renderer.refreshView();
-            bindEvents(that);
         };
 
         that.refreshView();
-
-        return that;
     };
-
+    
+    cspace.recordList.preInit = function (that) {
+        that.options.listeners = that.options.listeners || {};
+        that.options.listeners.onSelect = function () {
+            that.select();
+        };
+        that.options.listeners.afterRender = function () {
+        	that.bindEvents();
+        };
+    };
+    
     cspace.recordList.verifyColumnOrder = function (that) {
         that.applier.requestChange("sorted", []);
         fluid.each(fluid.get(that.model, that.options.elPaths.items), function (item, index) {
@@ -334,91 +428,6 @@ cspace = cspace || {};
             dataContext.fetch(record.csid);
         });
     };
-
-    fluid.defaults("cspace.recordList", {
-        mergePolicy: {
-            "rendererOptions.applier": "applier"
-        },
-        rendererOptions: {
-            autoBind: true
-        },
-        invokers: {
-            lookupMessage: {
-                funcName: "cspace.util.lookupMessage",
-                args: ["{recordList}.options.parentBundle.messageBase", "{arguments}.0"]
-            },
-            select: "select",
-            verifyColumnOrder: {
-                funcName: "cspace.recordList.verifyColumnOrder",
-                args: "{recordList}"
-            },
-            calculateRecordListSize: {
-                funcName: "cspace.recordList.calculateRecordListSize",
-                args: ["{recordList}.model", "{recordList}.options.elPaths.items"]
-            }
-        },
-        model: {
-            selectonIndex: -1
-        },
-        events: {
-            onSelect: null
-        },
-        showTitle: true,
-        showNumberOfItems: true,
-        gradeNames: "fluid.rendererComponent",
-        selectors: {
-            newRow: ".csc-recordList-new",
-            recordList: ".csc-recordList",
-            titleRow: ".csc-recordList-title-row",
-            titleColumn: ".csc-recordList-title-column",
-            numberOfItems: ".csc-recordList-num-items",
-            nothingYet: ".csc-recordList-no-items",
-            row: ".csc-recordList-row",
-            column: ".csc-recordList-column",
-            deleteRelation: ".csc-recordList-deleteRelation",
-            thumbnail: ".csc-recordList-thumbnail"
-        },
-        repeatingSelectors: ["row", "titleColumn", "column"],
-        strings: {
-            nothingYet: "No related records yet",
-            newRow: "New Record",
-            numberOfItems: "%numberOfItems"
-        },
-        styles: {
-            hidden: "hidden",
-            newRow: "cs-recordList-new",
-            recordList: "cs-recordList",
-            titleRow: "cs-recordList-title-row",
-            numberOfItems: "cs-recordList-num-items",
-            nothingYet: "cs-recordList-no-items",
-            titleColumn: "cs-recordList-title-column",
-            column: "cs-recordList-column",
-            column1: "cs-recordList-column1",
-            column2: "cs-recordList-column2",
-            column3: "cs-recordList-column3",
-            column4: "cs-recordList-column4",
-            selected: "cs-selected",
-            disabled: "cs-disabled"
-        },
-        parentBundle: "{globalBundle}",
-        globalNavigator: "{globalNavigator}",
-        produceTree: cspace.recordList.produceTree,
-        resources: {
-            template: cspace.resourceSpecExpander({
-                fetchClass: "fastTemplate",
-                url: "%webapp/html/components/RecordListTemplate.html",
-                options: {
-                    dataType: "html"
-                }
-            })
-        },
-        urls: cspace.componentUrlBuilder({
-            navigate: "%webapp/html/%recordType.html?csid=%csid",
-            navigateLocal: "%webapp/html/record.html?recordtype=%recordType&csid=%csid"
-        })
-    });
-
-    fluid.fetchResources.primeCacheFromResources("cspace.recordList");
 
     cspace.recordList.extractRowCsid = function (rows, row, model, elPath) {
         return fluid.get(model, elPath)[rows.index(row)].csid;

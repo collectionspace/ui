@@ -91,7 +91,7 @@ var recordListTester = function ($) {
     };
     
     recordListTest.test("Selecting", function () {
-        expect(4);
+        expect(2);
         var model = {
             items: [
                 {"number": "ACQ2009.2", "csid": "ACQ2009.2", "summary": "", "recordtype": "acquisition"},
