@@ -435,7 +435,7 @@ cspace = cspace || {};
 
     cspace.recordList.deleteRelation = function (event, recordList, recordEditor, tab) {
         var targetCsid = cspace.recordList.extractRowCsid(recordList.locate("row"),
-            $(event.target).parent(), recordList.model, recordList.options.elPaths.items);
+            $(event.target).closest("li"), recordList.model, recordList.options.elPaths.items);
         recordEditor.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
             listeners: {
                 onClose: function (userAction) {
