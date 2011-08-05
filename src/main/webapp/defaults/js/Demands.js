@@ -736,6 +736,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("details", ["cspace.listEditor", "cspace.tab"], {
             container: "{listEditor}.dom.details",
             options: {
+                recordType: "{listEditor}.options.recordType",
 	            produceTree: {
                     expander: {
                         type: "fluid.deferredInvokeCall",
