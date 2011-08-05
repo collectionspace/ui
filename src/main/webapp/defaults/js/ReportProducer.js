@@ -23,10 +23,7 @@ cspace = cspace || {};
         },
         produceTree: "cspace.reportProducer.produceTree",
         invokers: {
-            generateReport: {
-                funcName: "cspace.reportProducer.generateReport",
-                args: ["{reportProducer}.confirmation", "{reportProducer}.options.strings", "{reportProducer}.requestReport"]
-            },
+            generateReport: "cspace.reportProducer.generateReport",
             requestReport: {
                 funcName: "cspace.reportProducer.requestReport",
                 args: ["{reportProducer}.model", "{reportProducer}.options", "{reportProducer}.events", "{arguments}.0", "{arguments}.1"]
@@ -75,9 +72,14 @@ cspace = cspace || {};
             reportHeader: "Run Report",
             reportButton: "Run",
             reportError: "Error creating report: ",
-            primaryMessage: "Are you sure you want to run this report",
+            primaryMessage: "Are you sure you want to run this report?",
+            primaryMessageSave: "Are you sure you want to run this report for unsaved record?",
             actText: "Run",
             actAlt: "Run Report",
+            actTextSave: "Save and Run",
+            actAltSave: "Save Record and Run Report",
+            proceedTextSave: "Run",
+            proceedAltSave: "Run Report",
             stopPrimaryMessage: "You are about to navigate away from this page.",
             stopSecondaryMessage: "Do you want to stop current report?",
             stopActText: "Stop",
@@ -248,21 +250,45 @@ cspace = cspace || {};
         });
     };
     
-    cspace.reportProducer.generateReport = function (confirmation, strings, requestReport) {
-        confirmation.open("cspace.confirmation.deleteDialog", undefined, {
-            strings: {
+    var openConfirmation = function (confirmation, name, strings, onClose) {
+        confirmation.open("cspace.confirmation." + name, undefined, {
+            strings: strings,
+            listeners: {
+                onClose: onClose
+            }
+        });
+    };
+    
+    cspace.reportProducer.generateReport = function (confirmation, strings, requestReport, recordEditor) {
+        if (recordEditor && recordEditor.unsavedChanges) {
+            openConfirmation(confirmation, "saveDialog", {
+                primaryMessage: strings.primaryMessageSave,
+                actText: strings.actTextSave,
+                actAlt: strings.actAltSave,
+                proceedText: strings.proceedTextSave,
+                proceedAlt: strings.proceedAltSave
+            }, function (userAction) {
+                if (userAction === "act") {
+                    recordEditor.options.dataContext.events.afterSave.addListener(function () {
+                        requestReport(false);
+                    }, undefined, undefined, "last");
+                    recordEditor.requestSave();
+                } else if (userAction === "proceed") {
+                    requestReport(false);
+                }
+            });
+        }
+        else {
+            openConfirmation(confirmation, "deleteDialog", {
                 primaryMessage: strings.primaryMessage,
                 actText: strings.actText,
                 actAlt: strings.actAlt
-            },
-            listeners: {
-                onClose: function (userAction) {
-                    if (userAction === "act") {
-                        requestReport(false);
-                    }
+            }, function (userAction) {
+                if (userAction === "act") {
+                    requestReport(false);
                 }
-            }
-        });
+            });
+        }
     };
     
     cspace.reportProducer.produceTree = function (that) {
