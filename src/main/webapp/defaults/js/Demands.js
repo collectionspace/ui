@@ -544,6 +544,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
         
+        fluid.demands("cspace.reportProducer.generateReport", ["cspace.reportProducer", "cspace.recordEditor"], {
+            funcName: "cspace.reportProducer.generateReport",
+            args: ["{reportProducer}.confirmation", "{reportProducer}.options.strings", "{reportProducer}.requestReport", "{recordEditor}"]
+        });
+        
         // Confirmation demands
         fluid.demands("confirmation", "cspace.recordEditor", "{options}");
         fluid.demands("confirmation", "cspace.reportProducer", "{options}");
