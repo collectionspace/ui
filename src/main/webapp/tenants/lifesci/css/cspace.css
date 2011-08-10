@@ -134,9 +134,15 @@ input[type="button"].saveButton:hover, input[type="submit"].saveButton:hover,
 input[type="button"].saveButton:focus, input[type="submit"].saveButton:focus {
     background-color:#48722D;}
 input[type="button"].createFromExistingButton, input[type="submit"].createFromExistingButton {
-    background:#73AA4F url('../images/icnSave.png') no-repeat 24px 4px; 
-    padding-left:40px; 
-    padding-right:20px; }
+    background-color:#73AA4F;
+    padding:0 20px; }
+input[type="button"].createFromExistingButton[disabled], input[type="submit"].createFromExistingButton[disabled] {
+    color: #CCC; 
+    background-color:#FFF;}
+input[type="button"].createFromExistingButton[disabled]:hover, input[type="submit"].createFromExistingButton[disabled]:hover,
+input[type="button"].createFromExistingButton[disabled]:focus, input[type="submit"].createFromExistingButton[disabled]:focus {
+    color:#606060
+}
 input[type="button"].createFromExistingButton:hover, input[type="submit"].createFromExistingButton:hover,
 input[type="button"].createFromExistingButton:focus, input[type="submit"].createFromExistingButton:focus {
     background-color:#48722D;}    
