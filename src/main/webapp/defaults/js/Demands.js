@@ -671,6 +671,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             target: "{pageBuilderIO}.options.recordType"
                         }
                     }
+                },
+                showCreateFromExistingButton: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.permissions.resolve",
+                        args: {
+                            resolver: "{permissionsResolver}",
+                            permission: "create",
+                            target: "{pageBuilderIO}.options.recordType"
+                        }
+                    }
                 }
             }
         });
@@ -689,6 +700,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             funcName: "cspace.recordEditor.remove",
             args: "{recordEditor}"
         });
+        
+        fluid.demands("reloadAndCloneRecord", "cspace.recordEditor", {
+            funcName: "cspace.recordEditor.reloadAndCloneRecord", 
+            args: "{recordEditor}"
+        });
+        
+        fluid.demands("createNewFromExistingRecord", "cspace.recordEditor", {
+            funcName: "cspace.recordEditor.createNewFromExistingRecord",
+            args: ["{recordEditor}.options.globalNavigator", "{recordEditor}.reloadAndCloneRecord"]
+        });        
 
         fluid.demands("afterDelete", "cspace.recordEditor", {
             funcName: "cspace.recordEditor.redirectAfterDelete",
@@ -699,6 +720,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             funcName: "cspace.recordEditor.checkDeleteDisabling",
             args: "{recordEditor}"
         });
+        
+        fluid.demands("checkCreateFromExistingDisabling", "cspace.recordEditor", {
+            funcName: "cspace.recordEditor.checkCreateFromExistingDisabling",
+            args: "{recordEditor}.model"
+        });        
 
         fluid.demands("hasMediaAttached", "cspace.recordEditor", {
             funcName: "cspace.recordEditor.hasMediaAttached",
@@ -726,6 +752,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         args: {
                             resolver: "{permissionsResolver}",
                             permission: "delete",
+                            target: "{pageBuilderIO}.options.recordType"
+                        }
+                    }
+                },
+                showCreateFromExistingButton: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.permissions.resolve",
+                        args: {
+                            resolver: "{permissionsResolver}",
+                            permission: "create",
                             target: "{pageBuilderIO}.options.recordType"
                         }
                     }
@@ -759,6 +796,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                     permission: "update"
                                 }
                             ]
+                        }
+                    }
+                },
+                showCreateFromExistingButton: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.permissions.resolve",
+                        args: {
+                            resolver: "{permissionsResolver}",
+                            permission: "create",
+                            target: "{pageBuilderIO}.options.recordType"
                         }
                     }
                 },

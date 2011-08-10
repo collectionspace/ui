@@ -157,6 +157,7 @@ cspace = cspace || {};
         that.locate("cancel").click(function () {
             that.cancel();
         });
+        that.locate("createFromExistingButton").click(that.createNewFromExistingRecord);
         cspace.util.setZIndex();      
     };
 
@@ -185,6 +186,16 @@ cspace = cspace || {};
     cspace.recordEditor = function (container, options) {
         var that = fluid.initRendererComponent("cspace.recordEditor", container, options);
         fluid.initDependents(that);
+        
+        that.checkLocalStorage = function () {
+            var modelToClone = that.localStorage.get(that.localStorage.options.elPath);  
+            if (modelToClone) {
+                that.applier.requestChange("", modelToClone);
+                that.localStorage.set(undefined);
+            }            
+        };
+
+        that.checkLocalStorage();
         that.rollbackModel = fluid.copy(that.model.fields);
         
         that.refreshView = function () {
@@ -318,6 +329,26 @@ cspace = cspace || {};
                 }
             }
         };
+        var createFromExistingButton = {
+            type: "fluid.renderer.condition",
+            condition: that.options.showCreateFromExistingButton,
+            trueTree: {
+                createFromExistingButton: {
+                    decorators: [{
+                        type: "attrs",
+                        attributes: {
+                            value: that.options.strings.createFromExistingButton
+                        }
+                    }, {
+                        type: "jQuery",
+                        func: "prop",
+                        args: {
+                            disabled: that.checkCreateFromExistingDisabling
+                        }
+                    }]
+                }
+            }
+        };
         var tree = fluid.merge(null, {
             save: {
                 decorators: {
@@ -338,6 +369,7 @@ cspace = cspace || {};
         }, that.options.uispec);
         tree.expander = fluid.makeArray(tree.expander); //make an expander array in case we have expanders in the uispec
         tree.expander.push(deleteButton);
+        tree.expander.push(createFromExistingButton);
         return tree;
     };
     
@@ -383,6 +415,20 @@ cspace = cspace || {};
     cspace.recordEditor.cancel = function (that) {
         that.rollback();
     };
+    
+    cspace.recordEditor.reloadAndCloneRecord = function (that) {
+        var modelToClone = fluid.copy(that.model);
+        delete modelToClone.csid;
+        if (modelToClone.fields) {
+            delete modelToClone.fields.csid;
+        }
+        that.localStorage.set(modelToClone);
+        window.location = fluid.stringTemplate(that.options.urls.cloneURL, {recordType: that.options.recordType});
+    };
+    
+    cspace.recordEditor.createNewFromExistingRecord = function (globalNavigator, callback) {
+        globalNavigator.events.onPerformNavigation.fire(callback);
+    };
 
     //Checks whether delete button should be disabled.
     //returns true if the delete button should be disabled,
@@ -417,6 +463,14 @@ cspace = cspace || {};
             resolver: that.options.resolver,
             allOf: relatedTypes
         }));
+    };
+    
+    cspace.recordEditor.checkCreateFromExistingDisabling = function (model) {
+        //disable if: model.csid is not set (not saved)
+        if (model && !model.csid) {
+            return true;
+        }
+        return false;
     };
     
     fluid.defaults("cspace.recordEditor", {
@@ -455,6 +509,12 @@ cspace = cspace || {};
                         showOn: "{recordEditor}.options.dataContext.events.onSave"
                     }
                 }
+            },
+            localStorage: {
+                type: "cspace.util.localStorageDataSource",
+                options: {
+                    elPath: "modelToClone"
+                }
             }
         },
         invokers: {
@@ -469,6 +529,9 @@ cspace = cspace || {};
             remove: "remove",
             afterDeleteAction: "afterDelete",
             checkDeleteDisabling: "checkDeleteDisabling", //whether to disable delete button
+            checkCreateFromExistingDisabling: "checkCreateFromExistingDisabling", //whether to disable createFromExisting button
+            reloadAndCloneRecord: "reloadAndCloneRecord",
+            createNewFromExistingRecord: "createNewFromExistingRecord",
             cancel: "cancel",
             hasMediaAttached: "hasMediaAttached",
             hasRelations: "hasRelations"
@@ -485,10 +548,12 @@ cspace = cspace || {};
             onError: null  // params: operation
         },
         showDeleteButton: false,
+        showCreateFromExistingButton: false,
         selectors: {
             save: ".csc-save",
             cancel: ".csc-cancel",
             deleteButton: ".csc-delete",
+            createFromExistingButton: ".csc-createFromExisting",
             requiredFields: ".csc-required:visible",
             header: ".csc-recordEditor-header",
             togglable: ".csc-recordEditor-togglable"
@@ -522,12 +587,14 @@ cspace = cspace || {};
             save: "Save",
             cancel: "Cancel changes",
             deleteButton: "Delete",
+            createFromExistingButton: "Create new from existing",
             deletePrimaryMessage: "Delete this %record%relations%media?",
             deleteMessageWithRelated: " and its relationships",
             deleteMessageMediaAttached: " and its attached media"
         },
         urls: cspace.componentUrlBuilder({
-            deleteURL: "%webapp/html/findedit.html"
+            deleteURL: "%webapp/html/findedit.html",
+            cloneURL: "%webapp/html/%recordType.html"
         })
     });
     

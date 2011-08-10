@@ -1290,9 +1290,17 @@ fluid.registerNamespace("cspace.util");
         termMap: {}
     });
     cspace.util.localStorageDataSource.get = function (resolveElPath, directModel) {
-        return JSON.parse(localStorage[resolveElPath(directModel)]);
+        var value = localStorage[resolveElPath(directModel)];
+        if (!value) {
+            return;
+        }
+        return JSON.parse(value);
     };
     cspace.util.localStorageDataSource.set = function (resolveElPath, model, directModel) {
+        if (!model) {
+            localStorage.removeItem(resolveElPath(directModel));
+            return;
+        } 
         localStorage[resolveElPath(directModel)] = JSON.stringify(model);
     };
     cspace.util.localStorageDataSource.resolveElPath = function (elPath, termMap, directModel) {
