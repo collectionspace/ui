@@ -17,6 +17,7 @@
 	
 	<target name="replacecss">
 		<replaceregexp file="${base-dir}/defaults/html/administration.html" match="${regexCSS}" replace="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../css/administration.css&quot; />" flags="g"></replaceregexp>
+		<replaceregexp file="${base-dir}/defaults/html/advancedsearch.html" match="${regexCSS}" replace="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../css/advancedsearch.css&quot; />" flags="g"></replaceregexp>
         <replaceregexp file="${base-dir}/defaults/html/createnew.html" match="${regexCSS}" replace="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../css/createnew.css&quot; />" flags="g"></replaceregexp>
         <replaceregexp file="${base-dir}/defaults/html/findedit.html" match="${regexCSS}" replace="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../css/findedit.css&quot; />" flags="g"></replaceregexp>
         <replaceregexp file="${base-dir}/defaults/html/index.html" match="${regexCSS}" replace="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../css/index.css&quot; />" flags="g"></replaceregexp>
@@ -33,6 +34,7 @@
 	<target name="replacejs">
 		
 		<replaceregexp file="${base-dir}/defaults/html/administration.html" match="${regexJS}" replace="&lt;script type=&quot;text/javascript&quot; src=&quot;../js/administration.js&quot;>&lt;/script>" flags="g"></replaceregexp>
+		<replaceregexp file="${base-dir}/defaults/html/advancedsearch.html" match="${regexJS}" replace="&lt;script type=&quot;text/javascript&quot; src=&quot;../js/advancedsearch.js&quot;>&lt;/script>" flags="g"></replaceregexp>
 		<replaceregexp file="${base-dir}/defaults/html/createnew.html" match="${regexJS}" replace="&lt;script type=&quot;text/javascript&quot; src=&quot;../js/createnew.js&quot;>&lt;/script>" flags="g"></replaceregexp>
 		<replaceregexp file="${base-dir}/defaults/html/findedit.html" match="${regexJS}" replace="&lt;script type=&quot;text/javascript&quot; src=&quot;../js/findedit.js&quot;>&lt;/script>" flags="g"></replaceregexp>
 		<replaceregexp file="${base-dir}/defaults/html/index.html" match="${regexJS}" replace="&lt;script type=&quot;text/javascript&quot; src=&quot;../js/index.js&quot;>&lt;/script>" flags="g"></replaceregexp>
