@@ -1,0 +1,44 @@
+{
+    "pageBuilder": {
+        "options": {
+            "selectors": {
+                "advancedSearch": ".csc-advancedsearch-container",
+                "search": ".main-search-page",
+                "tips": ".csc-search-tips"
+            },
+            "components": {
+                "renderer": {
+                    "type": "cspace.pageBuilder.renderer",
+                    "container": ".csc-advancedsearch"
+                },
+                "tips": {
+                    "type": "cspace.searchTips",
+                    "container": "{pageBuilder}.options.selectors.tips"
+                },
+                "search": {
+                    "type": "cspace.search.searchView",
+                    "options": {
+                        "pivoting": true
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions" 
+                    } 
+                } 
+            } 
+        }
+    },
+    "pageBuilderIO": {
+        "options": {
+            "pageType": "advancedsearch",
+            "components": {
+                "dataContext": {
+                    "type": "fluid.emptySubcomponent"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,114 @@
+{
+    "movement": {
+        "properties": {
+            "currentLocations": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "currentLocation": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"            
+            },
+            "locationDateStart": {
+                "type": "date"
+            },
+            "locationDateEnd": {
+                "type": "date"
+            },            
+            "normalLocations": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "normalLocation": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"            
+            },
+            "movementContact": {
+                "type": "string"
+            },
+            "movementMethods": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "movementMethod": {
+                            "default": "",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },            
+            "movementReferenceNumbers": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "movementReferenceNumber": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"            
+            },
+            "removalDateStart": {
+                "type": "date"
+            },
+            "removalDateEnd": {
+                "type": "date"
+            },            
+            "reasonesForMove": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "reasonForMove": {
+                            "default": "",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"            
+            },            
+            "editDateStart": {
+                "type": "date"
+            },
+            "editDateEnd": {
+                "type": "date"
+            },
+            "editUsernames": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "editUsername": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            }
+        },
+        "type": "object"
+    }
+}

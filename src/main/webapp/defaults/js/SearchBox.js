@@ -27,17 +27,85 @@ cspace = cspace || {};
         });
     };
     
-    cspace.searchBox = function (container, options) {
-        var that = fluid.initRendererComponent("cspace.searchBox", container, options);
-        fluid.initDependents(that);
-        that.refreshView = function () {
-            that.renderer.refreshView();
-            bindEvents(that);    
-        };
+    fluid.defaults("cspace.searchBox", {
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        preInitFunction: "cspace.searchBox.preInit",
+        finalInitFunction: "cspace.searchBox.finalInit",
+        mergePolicy: {
+            model: "preserve"   
+        },
+        selectors: {                // Set of selectors that the component is interested in rendering.
+            recordTypeSelect: ".csc-searchBox-selectRecordType",
+            recordTypeSelectLabel: ".csc-searchBox-selectRecordTypeLabel",
+            searchQuery: ".csc-searchBox-query",
+            searchButton: ".csc-searchBox-button",
+            advancedSearch: ".csc-searchBox-advancedSearch"
+        },
+        styles: {                   // Set of styles that the component will be adding onto selectors.
+            searchBox: "cs-searchBox",
+            recordTypeSelect: "cs-searchBox-selectRecordType",
+            recordTypeSelectLabel: "cs-searchBox-selectRecordTypeLabel",
+            searchQuery: "cs-searchBox-query",
+            searchButton: "cs-searchBox-button",
+            advancedSearch: "cs-searchBox-advancedSearch"
+        },
+        strings: {                  // List of strings that the component will render (for l10n and i18n).
+            searchButtonText: "Search",
+            recordTypeSelectLabel: "",
+            advancedSearch: "Advanced search"
+        },
+        parentBundle: "{globalBundle}",
+        globalNavigator: "{globalNavigator}",
+        model: {},                  // A default data model object.
+        produceTree: "cspace.searchBox.produceTree", // direct method expected by interim impl of initRendererComponent
+        rendererOptions: {
+            autoBind: false
+        },
+        components: {
+            recordTypeSelector: {
+                type: "cspace.util.recordTypeSelector",
+                options: {
+                    related: "{searchBox}.options.related",
+                    dom: "{searchBox}.dom",
+                    componentID: "recordTypeSelect",
+                    selector: "recordTypeSelect",
+                    permission: "{searchBox}.options.permission"
+                }
+            }          
+        },
+        invokers: {                 // Component's public functions with arguments that are resolved at the time of invokation.
+            navigateToSearch: {     // A public method that builds search page's url and navigates to that page.
+                funcName: "cspace.searchBox.navigateToSearch",
+                args: ["{searchBox}"]
+            }
+        },
+        selfRender: false,          // An options that indicates whether the component needs to render on initialization.
+        searchUrl: "findedit.html?recordtype=%recordtype&keywords=%keywords",   // Search page's url template.
+        resources: {                // A set of resources that will get resolved and fetched at some point during initialization.
+            template: cspace.resourceSpecExpander({
+                fetchClass: "fastTemplate",
+                url: "%webapp/html/components/SearchBoxTemplate.html",
+                options: {
+                    dataType: "html"
+                }
+            })
+        },
+        urls: cspace.componentUrlBuilder({
+            advancedSearchURL: "%webapp/html/advancedsearch.html"
+        })
+    });
+    
+    cspace.searchBox.finalInit = function (that) {
         if (that.options.selfRender) {
             that.refreshView();
         }
-        return that;
+    };
+    
+    cspace.searchBox.preInit = function (that) {
+        that.options.listeners = that.options.listeners || {};
+        that.options.listeners.afterRender = function () {
+            bindEvents(that);
+        };
     };
     
     // A public function that is called as searchBox's navigateToSearch method and redirects to
@@ -71,68 +139,15 @@ cspace = cspace || {};
                 classes: that.options.styles[key]
             }];
         });
+        tree.advancedSearch = {
+            decorators: {"addClass": "{styles}.advancedSearch"},
+            target: that.options.urls.advancedSearchURL,
+            linktext: {
+                messagekey: "advancedSearch"
+            }
+        };
         return tree;
     };
-    
-    fluid.defaults("cspace.searchBox", {
-        gradeNames: "fluid.rendererComponent",
-        mergePolicy: {
-            model: "preserve"   
-        },
-        selectors: {                // Set of selectors that the component is interested in rendering.
-            recordTypeSelect: ".csc-searchBox-selectRecordType",
-            recordTypeSelectLabel: ".csc-searchBox-selectRecordTypeLabel",
-            searchQuery: ".csc-searchBox-query",
-            searchButton: ".csc-searchBox-button"
-        },
-        styles: {                   // Set of styles that the component will be adding onto selectors.
-            searchBox: "cs-searchBox",
-            recordTypeSelect: "cs-searchBox-selectRecordType",
-            recordTypeSelectLabel: "cs-searchBox-selectRecordTypeLabel",
-            searchQuery: "cs-searchBox-query",
-            searchButton: "cs-searchBox-button"
-        },
-        strings: {                  // List of strings that the component will render (for l10n and i18n).
-            searchButtonText: "Search",
-            recordTypeSelectLabel: ""
-        },
-        parentBundle: "{globalBundle}",
-        globalNavigator: "{globalNavigator}",
-        model: {},                  // A default data model object.
-        produceTree: cspace.searchBox.produceTree, // direct method expected by interim impl of initRendererComponent
-        rendererOptions: {
-            autoBind: false
-        },
-        components: {
-            recordTypeSelector: {
-                type: "cspace.util.recordTypeSelector",
-                options: {
-                    related: "{searchBox}.options.related",
-                    dom: "{searchBox}.dom",
-                    componentID: "recordTypeSelect",
-                    selector: "recordTypeSelect",
-                    permission: "{searchBox}.options.permission"
-                }
-            }          
-        },
-        invokers: {                 // Component's public functions with arguments that are resolved at the time of invokation.
-            navigateToSearch: {     // A public method that builds search page's url and navigates to that page.
-                funcName: "cspace.searchBox.navigateToSearch",
-                args: ["{searchBox}"]
-            }
-        },
-        selfRender: false,          // An options that indicates whether the component needs to render on initialization.
-        searchUrl: "findedit.html?recordtype=%recordtype&keywords=%keywords",   // Search page's url template.
-        resources: {                // A set of resources that will get resolved and fetched at some point during initialization.
-            template: cspace.resourceSpecExpander({
-                fetchClass: "fastTemplate",
-                url: "%webapp/html/components/SearchBoxTemplate.html",
-                options: {
-                    dataType: "html"
-                }
-            })
-        }
-    });
     
     // This function executes on file load and starts the fetch process of component's template.
     fluid.fetchResources.primeCacheFromResources("cspace.searchBox");

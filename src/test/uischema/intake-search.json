@@ -1,0 +1,139 @@
+{
+    "intake": {
+        "properties": {
+            "currentOwners": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "currentOwner": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },        
+            "depositors": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "depositor": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },            
+            "entryDateStart": {
+                "type": "date"
+            },
+            "entryDateEnd": {
+                "type": "date"
+            },
+            "entryMethods": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "entryMethod": {
+                            "default": "",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "entryNumbers": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "entryNumber": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "entryReasons": {
+            	"items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "entryReason": {
+                            "default": "",
+                			"type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "returnDateStart": {
+                "type": "date"
+            },
+            "returnDateEnd": {
+                "type": "date"
+            },
+            "fieldCollectionEventNames": {
+                "items": {
+                    "properties": {
+                        "fieldCollectionEventName": {
+                            "type": "string"
+                        },
+                        "_primary": {
+                            "type": "boolean"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },            
+            "currentLocationGroup": {
+            	"items": {
+                    "properties": {
+                        "currentLocation": {
+                            "type": "string"
+                        },
+                        "_primary": {
+                            "type": "boolean"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "editDateStart": {
+                "type": "date"
+            },
+            "editDateEnd": {
+                "type": "date"
+            },
+            "editUsernames": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "editUsername": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            }
+       },            
+       "type": "object"
+    }
+}

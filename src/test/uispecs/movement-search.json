@@ -1,0 +1,413 @@
+{
+    ".csc-movement-currentLocation-label": {
+        "messagekey": "movement-currentLocationLabel"
+    },
+    ".csc-movement-currentLocation": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "currentLocations",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-movement-currentLocation": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../../tenant/core/movement/autocomplete/currentLocation",
+                                                        "vocabUrl": "../../../tenant/core/movement/source-vocab/currentLocation"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.currentLocation}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "currentLocations"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-movement-locationDate-label": {
+        "messagekey": "movement-locationDateLabel"
+    },
+    ".csc-movement-locationDateStart-label": {
+        "messagekey": "movement-locationDateStartLabel"
+    },    
+    ".csc-movement-locationDateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${locationDateStart}"
+    },
+    ".csc-movement-locationDateEnd-label": {
+        "messagekey": "movement-locationDateEndLabel"
+    },    
+    ".csc-movement-locationDateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${locationDateEnd}"
+    },    
+    ".csc-movement-normalLocation-label": {
+        "messagekey": "movement-normalLocationLabel"
+    },
+    ".csc-movement-normalLocation": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "normalLocations",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-movement-normalLocation": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../../tenant/core/movement/autocomplete/normalLocation",
+                                                        "vocabUrl": "../../../tenant/core/movement/source-vocab/normalLocation"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.normalLocation}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "normalLocations"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },    
+    ".csc-movement-movementContact-label": {
+        "messagekey": "movement-movementContactLabel"
+    },    
+    ".csc-movement-movementContact": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "movementContacts",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-movement-movementContact": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../../tenant/core/movement/autocomplete/movementContact",
+                                                        "vocabUrl": "../../../tenant/core/movement/source-vocab/movementContact"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.movementContact}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "movementContacts"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-movement-movementMethod-label": {
+        "messagekey": "movement-movementMethodsLabel"
+    },    
+    ".csc-movement-movementMethod": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true, 
+                    "elPath": "movementMethods",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-movement-movementMethod": {
+                                            "default": "",
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "Forklift",
+                                                "Handcarried",
+                                                "Trolley"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "forklift",
+                                                "handcarried",
+                                                "trolley"
+                                            ],
+                                            "selection": "${{row}.movementMethod}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "movementMethods"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-movement-movementReferenceNumber-label": {
+        "messagekey": "movement-movementReferenceNumberLabel"
+    },
+    ".csc-movement-movementReferenceNumber": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "movementReferenceNumbers",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-movement-movementReferenceNumber": "${{row}.movementReferenceNumber}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "movementReferenceNumbers"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]    
+    },
+    ".csc-movement-plannedRemovalDate-label": {
+        "messagekey": "movement-plannedRemovalDateLabel"
+    },
+    ".csc-movement-plannedRemovalDateStart-label": {
+        "messagekey": "movement-plannedRemovalDateStartLabel"
+    },    
+    ".csc-movement-plannedRemovalDateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${plannedRemovalDateStart}"
+    },
+    ".csc-movement-plannedRemovalDateEnd-label": {
+        "messagekey": "movement-plannedRemovalDateEndLabel"
+    },        
+    ".csc-movement-plannedRemovalDateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${plannedRemovalDateEnd}"
+    },    
+    ".csc-movement-removalDate-label": {
+        "messagekey": "movement-removalDateLabel"
+    },
+    ".csc-movement-removalDateStart-label": {
+        "messagekey": "movement-removalDateStartLabel"
+    },
+    ".csc-movement-removalDateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${removalDateStart}"
+    },       
+    ".csc-movement-removalDateEnd-label": {
+        "messagekey": "movement-removalDateEndLabel"
+    },        
+    ".csc-movement-removalDateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${removalDateEnd}"
+    },   
+    ".csc-movement-reasonForMove-label": {
+        "messagekey": "movement-reasonForMoveLabel"
+    },    
+    ".csc-movement-reasonForMove": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "reasonesForMove",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-movement-reasonForMove": {
+                                            "default": "",
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "Conservation",
+                                                "Exhibition",
+                                                "Inventory",
+                                                "Loan",
+                                                "New Storage Location",
+                                                "Photography",
+                                                "Research"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "conservation",
+                                                "exhibition",
+                                                "inventory",
+                                                "loan",
+                                                "newstoragelocation",
+                                                "photography",
+                                                "research"
+                                            ],
+                                            "selection": "${{row}.reasonForMove}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "reasonesForMove"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]        
+    },    
+    ".csc-movement-editUsername-label": {
+        "messagekey": "movement-editNameLabel"
+    },
+    ".csc-movement-editUsername": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "editUsernames",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-movement-editUsername": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../../tenant/core/movement/autocomplete/editUsername",
+                                                        "vocabUrl": "../../../tenant/core/movement/source-vocab/editUsername"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.editUsername}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "editUsernames"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },    
+    ".csc-movement-editDate-label": {
+        "messagekey": "movement-editDateLabel"
+    },    
+    ".csc-movement-editDateStart-label": {
+        "messagekey": "movement-editDateStartLabel"
+    },
+    ".csc-movement-editDateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${editDateStart}"
+    },
+    ".csc-movement-editDateEnd-label": {
+        "messagekey": "movement-editDateEndLabel"
+    },
+    ".csc-movement-editDateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${editDateEnd}"
+    }
+}

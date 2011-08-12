@@ -1,0 +1,103 @@
+{
+    "loanout": {
+        "properties": {
+            "loanOutNumbers": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "loanOutNumber": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },        
+            "borrowers": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "borrower": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "loanOutDateStart": {
+                "type": "date"
+            },
+            "loanOutDateEnd": {
+                "type": "date"
+            },            
+            "loanReturnDateStart": {
+                "type": "date"
+            },
+            "loanReturnDateEnd": {
+                "type": "date"
+            },            
+            "loanRenewalApplicationDateStart": {
+                "type": "date"
+            },
+            "loanRenewalApplicationDateEnd": {
+                "type": "date"
+            },            
+            "loanedObjectStatusGroup": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "loanedObjectStatus": {
+                            "default": "",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "loanPurposes": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "loanPurpose": {
+                            "default": "",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"            
+            },
+            "editDateStart": {
+                "type": "date"
+            },                        
+            "editDateEnd": {
+                "type": "date"
+            },
+            "editUsernames": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "editUsername": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            }                        
+        },
+        "type": "object"
+    }
+}

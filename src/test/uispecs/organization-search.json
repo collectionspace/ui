@@ -1,0 +1,296 @@
+{
+    ".csc-organization-displayName-label": {
+        "messagekey": "organization-displayName-label"
+    },
+    ".csc-organization-displayName": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "displayNames",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-organization-displayName": "${{row}.displayName}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "displayNames"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-organization-foundingPlace-label": {
+        "messagekey": "organization-foundingPlaceLabel"
+    },
+    ".csc-organization-foundingPlace": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "foundingPlaces",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-organization-foundingPlace": "${{row}.foundingPlace}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "foundingPlaces"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-organization-foundingDateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${foundingDateStart}"
+    },
+    ".csc-organization-foundingDateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${foundingDateEnd}"
+    },
+    ".csc-organization-foundingDate-label": {
+        "messagekey": "organization-foundingDateLabel"
+    },
+    ".csc-organization-foundingDateStart-label": {
+        "messagekey": "organization-foundingDateStartLabel"
+    },
+    ".csc-organization-foundingDateEnd-label": {
+        "messagekey": "organization-foundingDateEndLabel"
+    },
+    ".csc-organization-dissolutionDate-label": {
+        "messagekey": "organization-dissolutionDateLabel"
+    },
+    ".csc-organization-dissolutionDateStart-label": {
+        "messagekey": "organization-dissolutionDateStartLabel"
+    },
+    ".csc-organization-dissolutionDateEnd-label": {
+        "messagekey": "organization-dissolutionDateEndLabel"
+    },
+    ".csc-organization-dissolutionDateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${dissolutionDateStart}"
+    },
+    ".csc-organization-dissolutionDateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${dissolutionDateEnd}"
+    },
+    ".csc-organization-group": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "groups",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-organization-group": "${{row}.group}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "groups"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-organization-groups-label": {
+        "messagekey": "organization-groupsLabel"
+    },
+    ".csc-organization-functions-label": {
+        "messagekey": "organization-functionsLabel"
+    },
+    ".csc-organization-function": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "functions",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-organization-function": "${{row}.function}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "functions"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-organization-termStatus-label": {
+        "messagekey": "organization-termStatusLabel"
+    },
+    ".csc-organization-termStatus": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "termStatuses",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-organization-termStatus": {
+                                            "default": "provisional",
+                                            "optionnames": [
+                                                "Provisional",
+                                                "Under Review",
+                                                "Accepted",
+                                                "Rejected"
+                                            ],
+                                            "optionlist": [
+                                                "provisional",
+                                                "under review",
+                                                "accepted",
+                                                "rejected"
+                                            ],
+                                            "selection": "${{row}.termStatus}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "termStatuses"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-organization-editDate-label": {
+        "messagekey": "organization-editDate"
+    },
+    ".csc-organization-editDateStart-label": {
+        "messagekey": "organization-editDateStart"
+    },
+    ".csc-organization-editDateEnd-label": {
+        "messagekey": "organization-editDateEnd"
+    },
+    ".csc-organization-editDateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${editDateStart}"
+    },
+    ".csc-organization-editDateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${editDateEnd}"
+    },
+    ".csc-organization-editUsername-label": {
+        "messagekey": "organization-editUsername"
+    },
+    ".csc-organization-editUsername": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "editUsernames",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-organization-editUsername": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../../tenant/core/organization/autocomplete/editUsername",
+                                                        "vocabUrl": "../../../tenant/core/organization/source-vocab/editUsername"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.editUsername}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "editUsernames"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

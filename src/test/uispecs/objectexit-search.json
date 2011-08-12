@@ -1,0 +1,338 @@
+{
+    ".csc-objectexit-exitDate-label": {
+        "messagekey": "objectexit-exitDateLabel"
+    },
+    ".csc-objectexit-exitDateStart-label": {
+        "messagekey": "objectexit-exitDateStartLabel"
+    },
+    ".csc-objectexit-exitDateEnd-label": {
+        "messagekey": "objectexit-exitDateEndLabel"
+    },
+    ".csc-objectexit-exitNote": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "exitNotes",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-objectexit-exitNote": "${{row}.exitNote}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "exitNotes"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-objectexit-depositor": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "depositors",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-objectexit-depositor": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../chain/objectexit/autocomplete/depositor",
+                                                        "vocabUrl": "../../chain/objectexit/source-vocab/depositor"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.depositor}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "depositors"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-objectexit-currentOwner": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "currentOwners",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-objectexit-currentOwner": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../chain/objectexit/autocomplete/currentOwner",
+                                                        "vocabUrl": "../../chain/objectexit/source-vocab/currentOwner"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.currentOwner}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "currentOwners"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-objectexit-exitReason-label": {
+        "messagekey": "objectexit-exitReasonLabel"
+    },
+    ".csc-objectexit-currentOwner-label": {
+        "messagekey": "objectexit-currentOwnerLabel"
+    },
+    ".csc-objectexit-exitNumber": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "exitNumbers",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-objectexit-exitNumber": "${{row}.exitNumber}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "exitNumbers"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-objectexit-exitMethods": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "exitMethods",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-objectexit-exitMethods": {
+                                            "default": "",
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "Courier",
+                                                "In Person",
+                                                "Post"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "courier",
+                                                "inperson",
+                                                "post"
+                                            ],
+                                            "selection": "${{row}.exitMethod}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "exitMethods"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-objectexit-depositor-label": {
+        "messagekey": "objectexit-depositorLabel"
+    },
+    ".csc-objectexit-exitDateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${exitDateStart}"
+    },
+    ".csc-objectexit-exitDateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${exitDateEnd}"
+    },
+    ".csc-objectexit-exitReason": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "exitReasons",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-objectexit-exitReason": {
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "Deaccession",
+                                                "Disposal",
+                                                "Return of Loan"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "deaccession",
+                                                "disposal",
+                                                "returnofloan"
+                                            ],
+                                            "selection": "${{row}.exitReason}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "exitReasons"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-objectexit-exitNumber-label": {
+        "messagekey": "objectexit-exitNumberLabel"
+    },
+    ".csc-objectexit-exitNote-label": {
+        "messagekey": "objectexit-exitNoteLabel"
+    },
+    ".csc-objectexit-exitMethods-label": {
+        "messagekey": "objectexit-exitMethodsLabel"
+    },
+    ".csc-objectexit-editDate-label": {
+        "messagekey": "objectexit-editDate"
+    },
+    ".csc-objectexit-editDateStart-label": {
+        "messagekey": "objectexit-editDateStartLabel"
+    },
+    ".csc-objectexit-editDateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${editDateStart}"
+    },
+    ".csc-objectexit-editDateEnd-label": {
+        "messagekey": "objectexit-editDateEndLabel"
+    },
+    ".csc-objectexit-editDateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${editDateEnd}"
+    },
+    ".csc-objectexit-editUsername-label": {
+        "messagekey": "objectexit-editUsername"
+    },
+    ".csc-objectexit-editUsername": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "editUsernames",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-objectexit-editUsername": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../../tenant/core/objectexit/autocomplete/editUsername",
+                                                        "vocabUrl": "../../../tenant/core/objectexit/source-vocab/editUsername"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.editUsername}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "editUsernames"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

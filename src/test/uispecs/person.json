@@ -25,8 +25,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../chain/vocabularies/person/autocomplete/narrowerContext",
-                                                            "vocabUrl": "../../chain/vocabularies/person/source-vocab/narrowerContext",
+                                                            "queryUrl": "../../../tenant/core/vocabularies/person/autocomplete/narrowerContext",
+                                                            "vocabUrl": "../../../tenant/core/vocabularies/person/source-vocab/narrowerContext",
                                                             "invokers": {
                                                                 "selectMatch": {
                                                                     "funcName": "cspace.autocomplete.selectMatchConfirm"
@@ -59,8 +59,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../chain/vocabularies/person/autocomplete/broaderContext",
-                        "vocabUrl": "../../chain/vocabularies/person/source-vocab/broaderContext"
+                        "queryUrl": "../../../tenant/core/vocabularies/person/autocomplete/broaderContext",
+                        "vocabUrl": "../../../tenant/core/vocabularies/person/source-vocab/broaderContext"
                     }
                 }
             ],
@@ -109,6 +109,9 @@
         ".csc-hierarchy-relatedTerms-label": {
             "messagekey": "hierarchy-relatedTermsLabel"
         },
+        ".csc-hierarchy-domaindata-label": {
+            "messagekey": "hierarchy-domaindataLabel"
+        },
         ".csc-hierarchy-narrowerContexts-label": {
             "messagekey": "hierarchy-narrowerContextsLabel"
         },
@@ -131,8 +134,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../chain/vocabularies/person/autocomplete/relatedTerm",
-                                                            "vocabUrl": "../../chain/vocabularies/person/source-vocab/relatedTerm"
+                                                            "queryUrl": "../../../tenant/core/vocabularies/person/autocomplete/relatedTerm",
+                                                            "vocabUrl": "../../../tenant/core/vocabularies/person/source-vocab/relatedTerm"
                                                         }
                                                     }
                                                 ],
@@ -342,6 +345,9 @@
         ".csc-contact-createdAt-label": {
             "messagekey": "contact-createdAtLabel"
         },
+        ".csc-person-domaindata-label": {
+            "messagekey": "person-domaindataLabel"
+        },
         ".csc-person-surName-label": {
             "messagekey": "person-surNameLabel"
         },
@@ -403,6 +409,9 @@
         },
         ".csc-person-contactInformation-label": {
             "messagekey": "person-contactInformationLabel"
+        },
+        ".csc-contact-domaindata-label": {
+            "messagekey": "contact-domaindataLabel"
         },
         ".csc-personAuthority-middleName": "${fields.middleName}",
         ".csc-person-birthPlace-label": {

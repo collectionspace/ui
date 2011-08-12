@@ -1416,6 +1416,10 @@ input[disabled]:hover, input[disabled]:hover    {
 }
 .cs-searchBox .cs-searchBox-button {
     float:right;}
+a.cs-searchBox-advancedSearch {
+    color: #6F9ECD;
+    text-decoration: none;
+}
 .cs-pivot-searchBox .cs-searchBox .cs-searchBox-query {
     width:99% !important; 
     margin:8px 8px 8px 0; 
@@ -1828,4 +1832,92 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .cs-termlist-usedBy {
     display: block;
     height: 19px;
+}
+
+.cs-advancedSearch-template {
+	padding-left: 20px;
+}
+.cs-advancedSearch-template .cs-advancedSearch-step1 .cs-advancedSearch-selectRecordType {
+    margin-left: 15px;
+}
+.cs-advancedSearch-template .cs-advancedSearch-step1-label, .cs-advancedSearch-template .cs-advancedSearch-step2-label {
+    margin-right: 10px;
+}
+.cs-advancedSearch-template .cs-advancedSearch-step1, .cs-advancedSearch-template .cs-advancedSearch-step2 {
+	border: 1px solid #6E9FCE;
+	margin-bottom: 20px;
+	-moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    background-color: #F5F5F5;
+}
+.cs-advancedSearch-template .cs-advancedSearch-step1-header, .cs-advancedSearch-template .cs-advancedSearch-step2-header {
+	background-color: #6E9FCE;
+    display: inline-block;
+    padding: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFF;
+}
+.cs-advancedSearch-template .cs-advancedSearch-step2 .cs-advancedSearch-step2-header {
+    overflow:hidden; 
+    display:block;
+}
+.cs-advancedSearch-template .cs-advancedSearch-step2 .cs-advancedSearch-step2-subheader1, .cs-advancedSearch-template .cs-advancedSearch-step2 .cs-advancedSearch-step2-subheader2 {
+    padding: 15px;
+    background-color: #E8E8E8;
+}
+.cs-advancedSearch-template .cs-advancedSearch-step2 .cs-advancedSearch-step2-subheader1 .cs-advancedSearch-step2-subheader1-label, .cs-advancedSearch-template .cs-advancedSearch-step2 .cs-advancedSearch-step2-subheader2 .cs-advancedSearch-step2-subheader2-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #438CC9;
+    padding-right: 25px;
+}
+.cs-advancedSearch-template .cs-advancedSearch-step2 .cs-advancedSearch-step2-subheader1 .cs-advancedSearch-step2-subheader1-note, .cs-advancedSearch-template .cs-advancedSearch-step2 .cs-advancedSearch-step2-subheader2 .cs-advancedSearch-step2-subheader2-note1, .cs-advancedSearch-template .cs-advancedSearch-step2 .cs-advancedSearch-step2-subheader2 .cs-advancedSearch-step2-subheader2-note2 {
+    color: #6F9ECD;
+}
+.cs-advancedSearch-template .cs-advancedSearch-step2 .cs-advancedSearch-query {
+    display: inline;
+    width: 45%;
+    margin: 15px 5px 15px 15px;
+}
+.cs-advancedSearch-template .cs-advancedSearch-step2 .cs-advancedSearch-searchButton {
+    display: inline;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+}
+.cs-advancedSearch-template .cs-advancedSearch-searchFields {
+    padding-left: 20px;
+}
+.cs-advancedSearch-searchButton.cs-advancedSearch-fieldBasedSearchButton {
+    margin: 0 0 10px 32px;
+}
+.cs-advancedSearch-template .cs-advancedSearch-toggle {
+    background-color: #FFF;
+    color: #6E9FCE;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    display: none;
+}
+.cs-advancedSearch-template .cs-advancedSearch-toggle:hover, .cs-advancedSearch-template .cs-advancedSearch-toggle:focus {
+    background-color: #6E9FCE;
+    color: #FFF;
+}
+
+.cs-searchTips-template {
+    margin: 0 20px;
+    color: #316285;
+    padding: 10px;
+    background-color: #FBFBDB;
+    border: 1px solid #FBEAAF;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+}
+.cs-searchTips-template .cs-searchTips-title, .cs-searchTips-template .cs-searchTips-instructions-top, .cs-searchTips-template .cs-searchTips-instructions-date, .cs-searchTips-template .cs-searchTips-instructions-number, .cs-searchTips-template .cs-searchTips-instructions-bottom {
+    display: block;
+    padding-bottom: 15px;
+}
+.cs-searchTips-template .cs-searchTips-title {
+    color: #316285;
+    font-size: 14px;
+    font-weight: bold;
 }

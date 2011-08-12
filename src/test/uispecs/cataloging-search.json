@@ -1,0 +1,1028 @@
+{
+    ".csc-collection-object-objectNumber-label": {
+        "messagekey": "collection-object-objectNumberLabel"
+    },
+    ".csc-object-identification-object-number": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "objectNumbers",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-identification-object-number": "${{row}.objectNumber}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "objectNumbers"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-objectName-label": {
+        "messagekey": "collection-object-objectNameLabel"
+    },
+    ".csc-object-identification-object-name": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "objectNameGroup",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-identification-object-name": "${{row}.objectName}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "objectNameGroup"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-responsibleDepartments-label": {
+        "messagekey": "collection-object-responsibleDepartmentsLabel"
+    },
+    ".csc-object-identification-responsible-department": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "responsibleDepartments",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-identification-responsible-department": {
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "Antiquities",
+                                                "Architecture and Design",
+                                                "Decorative Arts",
+                                                "Ethnography",
+                                                "Herpetology",
+                                                "Media and Performance Art",
+                                                "Paintings and Sculpture",
+                                                "Paleobotany",
+                                                "Photographs",
+                                                "Prints and Drawings"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "antiquities",
+                                                "architecture-design",
+                                                "decorative-arts",
+                                                "ethnography",
+                                                "herpetology",
+                                                "media-performance-art",
+                                                "paintings-sculpture",
+                                                "paleobotany",
+                                                "photographs",
+                                                "prints-drawings"
+                                            ],
+                                            "selection": "${{row}.responsibleDepartment}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "responsibleDepartments"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-collection-label": {
+        "messagekey": "collection-object-collectionLabel"
+    },
+    ".csc-object-identification-collection": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "collections",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-identification-collection": {
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "Library collection",
+                                                "Permanent collection",
+                                                "Study collection",
+                                                "Teaching collection"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "library-collection",
+                                                "permanent-collection",
+                                                "study-collection",
+                                                "teaching-collection"
+                                            ],
+                                            "selection": "${{row}.collection}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "collections"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-title-label": {
+        "messagekey": "collection-object-titleLabel"
+    },
+    ".csc-object-identification-object-title": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "titleGroup",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-identification-object-title": "${{row}.title}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "titleGroup"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-recordStatus-label": {
+        "messagekey": "collection-object-recordStatusLabel"
+    },
+    ".csc-object-identification-record-status": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "recordStatuses",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-identification-record-status": {
+                                            "optionnames": [
+                                                "Approved",
+                                                "In process",
+                                                "New",
+                                                "Temporary"
+                                            ],
+                                            "optionlist": [
+                                                "approved",
+                                                "in-process",
+                                                "new",
+                                                "temporary"
+                                            ],
+                                            "selection": "${{row}.recordStatus}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "recordStatuses"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-copyNumber-label": {
+        "messagekey": "collection-object-copyNumberLabel"
+    },
+    ".csc-object-description-copy-number": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "copyNumbers",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-description-copy-number": "${{row}.copyNumber}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "copyNumbers"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-editionNumber-label": {
+        "messagekey": "collection-object-editionNumberLabel"
+    },
+    ".csc-object-description-edition-number": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "editionNumbers",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-description-edition-number": "${{row}.editionNumber}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "editionNumbers"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-forms-label": {
+        "messagekey": "collection-object-formsLabel"
+    },
+    ".csc-object-description-form": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "forms",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-description-form": {
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "dry",
+                                                "pinned",
+                                                "thin section",
+                                                "wet"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "dry",
+                                                "pinned",
+                                                "thin-section",
+                                                "wet"
+                                            ],
+                                            "selection": "${{row}.form}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "forms"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-inscriptionDescriptionInscriber-label": {
+        "messagekey": "collection-object-inscriptionDescriptionInscriberLabel"
+    },
+    ".csc-object-description-inscription-description-inscriber": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "inscriptionDescriptionInscribers",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-description-inscription-description-inscriber": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../../tenant/core/cataloging/autocomplete/inscriptionDescriptionInscriber",
+                                                        "vocabUrl": "../../../tenant/core/cataloging/source-vocab/inscriptionDescriptionInscriber"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.inscriptionDescriptionInscriber}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "inscriptionDescriptionInscribers"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-inscriptionDescriptionMethod-label": {
+        "messagekey": "collection-object-inscriptionDescriptionMethodLabel"
+    },
+    ".csc-object-description-sex": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "sexes",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-description-sex": {
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "male",
+                                                "female"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "male",
+                                                "female"
+                                            ],
+                                            "selection": "${{row}.sex}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "sexes"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-object-description-inscription-description-method": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "inscriptionDescriptionMethods",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-description-inscription-description-method": "${{row}.inscriptionDescriptionMethod}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "inscriptionDescriptionMethods"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-material-label": {
+        "messagekey": "collection-object-materialLabel"
+    },
+    ".csc-object-description-material": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "materialGroup",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-description-material": "${{row}.material}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "materialGroup"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-objectStatus-label": {
+        "messagekey": "collection-object-objectStatusLabel"
+    },
+    ".csc-object-description-object-status": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "objectStatusList",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-description-object-status": {
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "copy",
+                                                "forgery",
+                                                "holotype",
+                                                "paralectotype",
+                                                "paratype",
+                                                "type"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "copy",
+                                                "forgery",
+                                                "holotype",
+                                                "paralectotype",
+                                                "paratype",
+                                                "type"
+                                            ],
+                                            "selection": "${{row}.objectStatus}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "objectStatusList"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-phase-label": {
+        "messagekey": "collection-object-phaseLabel"
+    },
+    ".csc-object-description-phase": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "phases",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-description-phase": {
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "adult",
+                                                "imago",
+                                                "larva",
+                                                "nymph",
+                                                "pupa"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "adult",
+                                                "imago",
+                                                "larva",
+                                                "nymph",
+                                                "pupa"
+                                            ],
+                                            "selection": "${{row}.phase}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "phases"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-styles-label": {
+        "messagekey": "collection-object-stylesLabel"
+    },
+    ".csc-object-description-style": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "styles",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-description-style": "${{row}.style}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "styles"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-technicalAttribute-label": {
+        "messagekey": "collection-object-technicalAttributeLabel"
+    },
+    ".csc-object-description-technical-attribute": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "technicalAttributeGroup",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-description-technical-attribute": {
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "magnetic tape type",
+                                                "record speed"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "magnetic-tape-type",
+                                                "record-speed"
+                                            ],
+                                            "selection": "${{row}.technicalAttribute}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "technicalAttributeGroup"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-objectComponentName-label": {
+        "messagekey": "collection-object-objectComponentNameLabel"
+    },
+    ".csc-object-description-object-component-name": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "objectComponentGroup",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-description-object-component-name": {
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "blade",
+                                                "buttonhole",
+                                                "handle",
+                                                "sleeve"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "blade",
+                                                "buttonhole",
+                                                "handle",
+                                                "sleeve"
+                                            ],
+                                            "selection": "${{row}.objectComponentName}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "objectComponentGroup"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-objectProductionDate-label": {
+        "messagekey": "collection-object-objectProductionDateLabel"
+    },
+    ".csc-collection-object-objectProductionDateStart-label": {
+        "messagekey": "collection-object-objectProductionDateStartLabel"
+    },
+    ".csc-collection-object-objectProductionDateEnd-label": {
+        "messagekey": "collection-object-objectProductionDateEndLabel"
+    },
+    ".csc-object-production-dateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${objectProductionDateStart}"
+    },
+    ".csc-object-production-dateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${objectProductionDateEnd}"
+    },
+    ".csc-collection-object-objectProductionOrganization-label": {
+        "messagekey": "collection-object-objectProductionOrganizationLabel"
+    },
+    ".csc-object-production-organization": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "objectProductionOrganizationGroup",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-production-organization": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../../tenant/core/cataloging/autocomplete/objectProductionOrganization",
+                                                        "vocabUrl": "../../../tenant/core/cataloging/source-vocab/objectProductionOrganization"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.objectProductionOrganization}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "objectProductionOrganizationGroup"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-objectProductionPeople-label": {
+        "messagekey": "collection-object-objectProductionPeopleLabel"
+    },
+    ".csc-object-production-people": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "objectProductionPeopleGroup",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-production-people": "${{row}.objectProductionPeople}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "objectProductionPeopleGroup"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-objectProductionPerson-label": {
+        "messagekey": "collection-object-objectProductionPersonLabel"
+    },
+    ".csc-object-production-person": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "objectProductionPersonGroup",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-production-person": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../../tenant/core/cataloging/autocomplete/objectProductionPerson",
+                                                        "vocabUrl": "../../../tenant/core/cataloging/source-vocab/objectProductionPerson"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.objectProductionPerson}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "objectProductionPersonGroup"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-objectProductionPlace-label": {
+        "messagekey": "collection-object-objectProductionPlaceLabel"
+    },
+    ".csc-object-production-place": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "objectProductionPlaceGroup",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-production-place": "${{row}.objectProductionPlace}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "objectProductionPlaceGroup"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-technique-label": {
+        "messagekey": "collection-object-techniqueLabel"
+    },
+    ".csc-object-production-technique": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "techniqueGroup",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-object-production-technique": "${{row}.technique}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "techniqueGroup"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-fieldColEventNames-label": {
+        "messagekey": "collection-object-fieldColEventNamesLabel"
+    },
+    ".csc-collection-object-fieldColEventName": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "fieldColEventNames",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-collection-object-fieldColEventName": "${{row}.fieldColEventName}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "fieldColEventNames"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-collection-object-editDate-label": {
+        "messagekey": "collection-object-editDate"
+    },
+    ".csc-collection-object-editDateStart-label": {
+        "messagekey": "collection-object-editDateStartLabel"
+    },
+    ".csc-collection-object-editDateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${editDateStart}"
+    },
+    ".csc-collection-object-editDateEnd-label": {
+        "messagekey": "collection-object-editDateEndLabel"
+    },
+    ".csc-collection-object-editDateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${editDateEnd}"
+    },
+    ".csc-collection-object-editUsername-label": {
+        "messagekey": "collection-object-editUsername"
+    },
+    ".csc-collection-object-editUsername": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "editUsernames",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-collection-object-editUsername": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../../tenant/core/cataloging/autocomplete/editUsername",
+                                                        "vocabUrl": "../../../tenant/core/cataloging/source-vocab/editUsername"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.editUsername}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "editUsernames"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

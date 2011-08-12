@@ -192,10 +192,7 @@ cspace = cspace || {};
                 funcName: "cspace.search.searchView.hideResults",
                 args: ["{searchView}.dom", "{searchView}.options.messageBar"]
             },
-            search: {
-                funcName: "cspace.search.searchView.search",
-                args: ["{arguments}.0", "{searchView}"]
-            },
+            search: "cspace.search.searchView.search",
             updateModel: {
                 funcName: "cspace.search.searchView.updateModel",
                 args: ["{searchView}.applier", "{arguments}.0"]
@@ -289,6 +286,22 @@ cspace = cspace || {};
         })
     });
     
+    cspace.search.searchView.preInitAdvanced = function (that) {
+        that.options.listeners = that.options.listeners || {};
+        that.options.listeners.hideResults = function () {
+            that.locate("resultsContainer").hide();
+        };
+        that.options.listeners.onAdvancedSearch = function (searchModel) {
+            that.options.messageBar.hide();
+            that.applier.requestChange("results", []);
+            that.updateModel(searchModel);
+            that.resultsPager.applier.requestChange("pageCount", 1);
+            that.resultsPager.applier.requestChange("pageIndex", 0);
+            that.resultsPager.applier.requestChange("totalRange", 0);
+            that.search();
+        }; 
+    };
+    
     cspace.search.searchView.applyResults = function (that, data) {
         var searchModel = that.model.searchModel;
         var offset = searchModel.pageIndex * searchModel.pageSize;
@@ -336,6 +349,40 @@ cspace = cspace || {};
         if (that.model.searchModel.recordType) {
             that.search();
         }
+    };
+    
+    cspace.search.searchView.advancedSearch = function (newPagerModel, that) {
+        var pagerModel = newPagerModel || that.resultsPager.model;
+        that.updateModel({
+            pageSize: pagerModel.pageSize,
+            pageIndex: pagerModel.pageIndex,
+            sortKey: pagerModel.sortKey,
+            sortDir: pagerModel.sortDir
+        });
+        var url = that.buildUrl();
+        that.events.onSearch.fire();
+        fluid.log("Querying url " + url);
+        fluid.fetchResources({
+            results: {
+                href: url,
+                options: {
+                    dataType: "json",
+                    type: "GET",
+                    success: function (data, textStatus) {
+                        if (data.isError === true) {
+                            fluid.each(data.messages, function (message) {
+                                that.events.onError.fire("search", message.message);
+                            });
+                            return;
+                        }
+                        that.applyResults(data);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        that.events.onError.fire("search", textStatus);
+                    }
+                }
+            }
+        });
     };
     
     cspace.search.searchView.search = function (newPagerModel, that) {

@@ -1,0 +1,537 @@
+{
+    ".csc-media-creator-label": {
+        "messagekey": "media-creatorLabel"
+    },
+    ".csc-media-creator": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "creators",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-creator": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../../tenant/core/media/autocomplete/creator",
+                                                        "vocabUrl": "../../../tenant/core/media/source-vocab/creator"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.creator}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "creators"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-media-date-label": {
+        "messagekey": "media-dateLabel"
+    },
+    ".csc-media-dateStart-label": {
+        "messagekey": "media-dateStartLabel"
+    },
+    ".csc-media-dateEnd-label": {
+        "messagekey": "media-dateEndLabel"
+    },
+    ".csc-media-dateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${dateStart}"
+    },
+    ".csc-media-dateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${dateEnd}"
+    },
+    ".csc-media-filename-label": {
+        "messagekey": "media-filenameLabel"
+    },
+    ".csc-media-filename": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "filenames",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-filename": "${{row}.filename}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "filenames"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-media-format-label": {
+        "messagekey": "media-formatLabel"
+    },
+    ".csc-media-format": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "formats",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-format": "${{row}.format}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "formats"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-media-identificationNumber-label": {
+        "messagekey": "media-identificationNumberLabel"
+    },
+    ".csc-media-identificationNumber": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "identificationNumbers",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-identificationNumber": "${{row}.identificationNumber}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "identificationNumbers"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-media-language-label": {
+        "messagekey": "media-languageLabel"
+    },
+    ".csc-media-language": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "languages",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-language": {
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "Latin",
+                                                "Middle English",
+                                                "Old English",
+                                                "Ancient Greek",
+                                                "Korean",
+                                                "Swahili",
+                                                "Japanese",
+                                                "Chinese",
+                                                "Hebrew",
+                                                "German",
+                                                "Russian",
+                                                "Arabic",
+                                                "Portuguese",
+                                                "Italian",
+                                                "Spanish",
+                                                "French",
+                                                "English"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "latin",
+                                                "middleenglish",
+                                                "oldenglish",
+                                                "ancientgreek",
+                                                "korean",
+                                                "swahili",
+                                                "japanese",
+                                                "chinese",
+                                                "hebrew",
+                                                "german",
+                                                "russian",
+                                                "arabic",
+                                                "portuguese",
+                                                "italian",
+                                                "spn",
+                                                "french",
+                                                "eng"
+                                            ],
+                                            "selection": "${{row}.language}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "languages"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-media-publisher-label": {
+        "messagekey": "media-publisherLabel"
+    },
+    ".csc-media-publisher": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "publishers",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-publisher": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../../tenant/core/media/autocomplete/publisher",
+                                                        "vocabUrl": "../../../tenant/core/media/source-vocab/publisher"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.publisher}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "publishers"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-media-rightsHolder-label": {
+        "messagekey": "media-rightsHolderLabel"
+    },
+    ".csc-media-rightsHolder": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "rightsHolders",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-rightsHolder": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../../tenant/core/media/autocomplete/rightsHolder",
+                                                        "vocabUrl": "../../../tenant/core/media/source-vocab/rightsHolder"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.rightsHolder}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "rightsHolders"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-media-source-label": {
+        "messagekey": "media-sourceLabel"
+    },
+    ".csc-media-source": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "sources",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-source": "${{row}.source}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "sources"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-media-subject-label": {
+        "messagekey": "media-subjectLabel"
+    },
+    ".csc-media-subject": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "subjects",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-subject": "${{row}.subject}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "subjects"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-media-title-label": {
+        "messagekey": "media-titleLabel"
+    },
+    ".csc-media-title": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "titles",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-title": "${{row}.title}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "titles"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-media-types-label": {
+        "messagekey": "media-typesLabel"
+    },
+    ".csc-media-type": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "types",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-type": {
+                                            "default": "",
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "Dataset",
+                                                "Document",
+                                                "Moving Image",
+                                                "Still Image",
+                                                "Sound"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "dataset",
+                                                "document",
+                                                "moving_image",
+                                                "still_image",
+                                                "sound"
+                                            ],
+                                            "selection": "${{row}.type}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "types"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-media-editDate-label": {
+        "messagekey": "media-editDate"
+    },
+    ".csc-media-editDateStart-label": {
+        "messagekey": "media-editDateStartLabel"
+    },
+    ".csc-media-editDateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${editDateStart}"
+    },
+    ".csc-media-editDateEnd-label": {
+        "messagekey": "media-editDateEndLabel"
+    },
+    ".csc-media-editDateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${editDateEnd}"
+    },
+    ".csc-media-editUsername-label": {
+        "messagekey": "media-editUsername"
+    },
+    ".csc-media-editUsername": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "editUsernames",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-editUsername": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../../tenant/core/media/autocomplete/editUsername",
+                                                        "vocabUrl": "../../../tenant/core/media/source-vocab/editUsername"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.editUsername}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "editUsernames"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

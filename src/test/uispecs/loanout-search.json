@@ -1,0 +1,338 @@
+{
+    ".csc-loanout-number-label": {
+        "messagekey": "loanout-loanOutNumberLabel"
+    },
+    ".csc-loanout-loanOutNumber": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "loanOutNumbers",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-loanout-loanOutNumber": "${{row}.loanOutNumber}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "loanOutNumbers"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]        
+    },
+    ".csc-loanout-borrower-label": {
+        "messagekey": "loanout-borrowerLabel"
+    },    
+    ".csc-loanout-borrower": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "borrowers",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-loanout-borrower": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../../tenant/core/loanout/autocomplete/borrower",
+                                                        "vocabUrl": "../../../tenant/core/loanout/source-vocab/borrower"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.borrower}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "borrowers"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-loanout-loanOutDate-label": {
+        "messagekey": "loanout-loanOutDateLabel"
+    },
+    ".csc-loanout-loanOutDateStart-label": {
+        "messagekey": "loanout-loanOutDateStartLabel"
+    },
+    ".csc-loanout-loanOutDateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${loanOutDateStart}"
+    },
+    ".csc-loanout-loanOutDateEnd-label": {
+        "messagekey": "loanout-loanOutDateEndLabel"
+    },
+    ".csc-loanout-loanOutDateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${loanOutDateEnd}"
+    },
+    ".csc-loanout-loanReturnDate-label": {
+        "messagekey": "loanout-loanReturnDateLabel"
+    },
+    ".csc-loanout-loanOutReturnDateStart-label": {
+        "messagekey": "loanout-loanOutReturnDateStartLabel"
+    },
+    ".csc-loanout-loanOutReturnDateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${loanOutReturnDateStart}"
+    },
+    ".csc-loanout-loanOutReturnDateEnd-label": {
+        "messagekey": "loanout-loanOutReturnDateEndLabel"
+    },
+    ".csc-loanout-loanOutReturnDateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${loanOutReturnDateEnd}"
+    },
+    ".csc-loanout-loanRenewalApplicationDateLabel": {
+        "messagekey": "loanout-loanOutRenewalApplicationDateLabel"
+    },    
+    ".csc-loanout-loanOutRenewalDateStart-label": {
+        "messagekey": "loanout-loanOutRenewalDateStartLabel"
+    },
+    ".csc-loanout-loanOutRenewalDateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${loanOutRenewalDateStart}"
+    },
+    ".csc-loanout-loanOutRenewalDateEnd-label": {
+        "messagekey": "loanout-loanOutRenewalDateEndLabel"
+    },
+    ".csc-loanout-loanOutRenewalDateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${loanRenewalDateEnd}"
+    },   
+    ".csc-loanout-loanedObjectStatus-label": {
+        "messagekey": "loanout-loanedObjectStatusLabel"
+    },    
+    ".csc-loanout-loanedObjectStatus": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "loanedObjectStatusGroup",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-loanout-loanedObjectStatus": {
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "Renewed",
+                                                "Returned",
+                                                "Refused",
+                                                "Photography requested",
+                                                "Sent",
+                                                "Conservation",
+                                                "Requested",
+                                                "Agreed",
+                                                "Authorized"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "renewed",
+                                                "returned",
+                                                "refused",
+                                                "photographyrequested",
+                                                "sent",
+                                                "conservation",
+                                                "requested",
+                                                "agreed",
+                                                "authorized"
+                                            ],
+                                            "selection": "${{row}.loanedObjectStatus}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "loanedObjectStatusGroup"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },    
+    ".csc-loanout-loanPurpose-label": {
+        "messagekey": "loanout-loanPurposeLabel"
+    },
+    ".csc-loanout-loanPurpose": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "loanPurposes",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-loanout-loanPurpose": {
+                                            "default": "",
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "Exhibition",
+                                                "Research",
+                                                "Scientific or exhibit preparation",
+                                                "Analysis",
+                                                "Photography",
+                                                "Conservation or other requested services",
+                                                "Long-term collections management and storage"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "exhibition",
+                                                "research",
+                                                "scientificorexhibitpreparation",
+                                                "analysis",
+                                                "photography",
+                                                "conservationotherrequestedservices",
+                                                "longtermcollectionsmanagementandstorage"
+                                            ],
+                                            "selection": "${{row}.loanPurpose}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "loanPurposes"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]    
+    },        
+    ".csc-loanout-editUsername-label": {
+        "messagekey": "loanout-editNameLabel"
+    },
+    ".csc-loanout-editUsername": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "hidePrimary": true,
+                    "elPath": "editUsernames",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-loanout-editUsername": {
+                                            "decorators": [
+                                                {
+                                                    "func": "cspace.autocomplete",
+                                                    "type": "fluid",
+                                                    "options": {
+                                                        "queryUrl": "../../../tenant/core/loanout/autocomplete/editUsername",
+                                                        "vocabUrl": "../../../tenant/core/loanout/source-vocab/editUsername"
+                                                    }
+                                                }
+                                            ],
+                                            "value": "${{row}.editUsername}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "editUsernames"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    ".csc-loanout-editDate-label": {
+        "messagekey": "loanout-editDateLabel"
+    },    
+    ".csc-loanout-editDateStart-label": {
+        "messagekey": "loanout-editDateStartLabel"
+    },
+    ".csc-loanout-editDateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${editDateStart}"
+    },
+    ".csc-loanout-editDateEnd-label": {
+        "messagekey": "loanout-editDateEndLabel"
+    },
+    ".csc-loanout-editDateEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${editDateEnd}"
+    }    
+}

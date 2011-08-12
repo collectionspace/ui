@@ -17,6 +17,31 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.includeLocalDemands = function () {
         
+        fluid.demands("cspace.advancedSearch.fetcher", ["cspace.localData", "cspace.advancedSearch"], {
+            options: {
+                resourceSpec: {
+                    uispec: {
+                        href: {
+                            expander: {
+                                type: "fluid.deferredInvokeCall",
+                                func: "cspace.util.urlBuilder",
+                                args: "%chain/uispecs/%recordType-search.json"
+                            }
+                        }
+                    },
+                    uischema: {
+                        href: {
+                            expander: {
+                                type: "fluid.deferredInvokeCall",
+                                func: "cspace.util.urlBuilder",
+                                args: "%chain/uischema/%recordType-search.json"
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
         fluid.demands("cspace.util.extractTenant.segment", "cspace.localData", {
             options: {
                 path: "defaults"
@@ -233,21 +258,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }
                 }
             }
-        });
-        
-        // searchView demands
-        fluid.demands("search", ["cspace.searchToRelateDialog", "cspace.localData"], {
-           container: "{searchToRelateDialog}.container",
-            options: {
-                components: {
-                    searchResultsResolver: {
-                        type: "cspace.search.searchResultsResolver"
-                    }
-                }
-            }
-        });
-        fluid.demands("search", ["cspace.pageBuilder", "cspace.localData"], {
-            container: "{pageBuilder}.options.selectors.search"
         });
         
         // urlExpander demands
@@ -1260,6 +1270,22 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }, "{arguments}.1"]
         });
         
+        fluid.demands("cspace.makeRepeatable", "cspace.advancedSearch.searchFields", {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                applier: "{searchFields}.applier",
+                model: "{searchFields}.model",
+                schema: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.repeatable.getSchema",
+                        args: ["{advancedSearch}.options.searchFields.schema", "{advancedSearch}.model.recordType"]
+                    }
+                },
+                recordType: "{advancedSearch}.model.recordType"
+            }, "{arguments}.1"]
+        });
+        
         // Structured date demands
         fluid.demands("cspace.structuredDate", "cspace.recordEditor", {
             container: "{arguments}.0",
@@ -1284,6 +1310,42 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("search", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.search"
         });
+        
+        fluid.demands("search", ["cspace.pageBuilder", "cspace.advancedSearch"], {
+            container: "{pageBuilder}.options.selectors.search",
+            options: {
+                selectors: {
+                    mainSearch: "{pageBuilder}.options.selectors.advancedSearch"
+                },
+                preInitFunction: "cspace.search.searchView.preInitAdvanced",
+                events: {
+                    onAdvancedSearch: null,
+                    hideResults: null
+                },
+                components: {
+                    mainSearch: {
+                        type: "cspace.advancedSearch",
+                        options: {
+                            events: {
+                                onSearch: "{searchView}.events.onAdvancedSearch",
+                                afterToggle: "{searchView}.events.hideResults"
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        fluid.demands("cspace.search.searchView.search", "cspace.search.searchView", {
+            funcName: "cspace.search.searchView.search",
+            args: ["{arguments}.0", "{searchView}"]
+        });
+        
+        fluid.demands("cspace.search.searchView.search", ["cspace.search.searchView", "cspace.advancedSearch"], {
+            funcName: "cspace.search.searchView.advancedSearch",
+            args: ["{arguments}.0", "{searchView}"]
+        });
+        
         fluid.demands("cspace.search.searchView.buildUrl", "cspace.search.searchView", {
             funcName: "cspace.search.searchView.buildUrlDefault",
             args: ["{searchView}.model.searchModel", "{searchView}.options.urls"]
@@ -1637,6 +1699,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             funcName: "cspace.composite.compose",
             args: ["{composite}.transform", "{composite}.options.resources", "{composite}.options.urls", "{arguments}.0"]
         });
+        
+        fluid.demands("cspace.advancedSearch.fetcher", "cspace.advancedSearch", "{options}");
     };
     
     fluid.demands("cspace.localDemands", "cspace.localData", {

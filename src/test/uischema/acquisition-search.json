@@ -1,0 +1,124 @@
+{
+    "acquisition": {
+        "properties": {
+            "accessionDateStart": {
+                "type": "date"
+            },
+            "accessionDateEnd": {
+                "type": "date"
+            },                            
+            "acquisitionDateStart": {
+                "type": "date"
+            },
+            "acquisitionDateEnd": {
+                "type": "date"
+            },            
+            "acquisitionFunding": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },                    
+                        "acquisitionFundingSource": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "acquisitionMethods": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },                    
+                        "acquisitionMethod": {
+                            "default": "gift",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"            
+            },
+            "acquisitionReferenceNumbers": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },                    
+                        "acquisitionReferenceNumber": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"                        
+            },
+            "acquisitionSources": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },                    
+                        "acquisitionSource": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"                        
+            },
+            "creditLines": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },                    
+                        "creditLine": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"                        
+            },
+            "fieldCollectionEventNames": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },                    
+                        "fieldCollectionEventName": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"                                    
+            },
+            "editDateStart": {
+                "type": "date"
+            },
+            "editDateEnd": {
+                "type": "date"
+            },
+            "editUsernames": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "editUsername": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            }
+        },
+        "type": "object"
+    }
+}

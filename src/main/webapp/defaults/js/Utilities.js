@@ -877,7 +877,8 @@ fluid.registerNamespace("cspace.util");
         spinnerDimensions: {
             height: 92,
             width: 92
-        }
+        },
+        loadOnInit: false,
     });
     
     cspace.util.loadingIndicator.postInitFunction = function (that) {
@@ -907,6 +908,9 @@ fluid.registerNamespace("cspace.util");
         }
         else if (body.attachEvent) {
             body.attachEvent("onDOMSubtreeModified", domSubtreeModifiedListner);
+        }
+        if (that.options.loadOnInit) {
+            that.show();
         }
     };
     
