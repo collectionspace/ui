@@ -1322,6 +1322,7 @@ fluid.registerNamespace("cspace.util");
     };
     cspace.util.localStorageDataSource.preInitFunction = function () {
         if (!cspace.util.isLocalStorage()) {
+            // TODO: Be more graceful.
             fluid.fail("Your browser does not support local storage!");
         }
     };

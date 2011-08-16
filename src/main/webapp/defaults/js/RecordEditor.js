@@ -188,10 +188,10 @@ cspace = cspace || {};
         fluid.initDependents(that);
         
         that.checkLocalStorage = function () {
-            var modelToClone = that.localStorage.get(that.localStorage.options.elPath);  
+            var modelToClone = that.localStorage.get();  
             if (modelToClone) {
                 that.applier.requestChange("", modelToClone);
-                that.localStorage.set(undefined);
+                that.localStorage.set();
             }            
         };
 
