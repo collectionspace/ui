@@ -396,7 +396,7 @@ fluid.registerNamespace("cspace.util");
     };
     
     fluid.defaults("cspace.util.getDefaultSchemaURL", {
-        url: "%chain/%recordType/uischema",
+        url: "%tenant/%tenantname/%recordType/uischema",
         urlRenderer: {
             expander: {
                 type: "fluid.deferredInvokeCall",
@@ -414,7 +414,7 @@ fluid.registerNamespace("cspace.util");
     };
     
     fluid.defaults("cspace.util.getUISpecURL", {
-        url: "%chain/%pageType/uispec",
+        url: "%tenant/%tenantname/%pageType/uispec",
         urlRenderer: {
             expander: {
                 type: "fluid.deferredInvokeCall",

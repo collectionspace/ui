@@ -1,19 +1,14 @@
 {
     "termlist": {
         "properties": {
-            "relations": {
-                "default": {},
-                "type": "object"
-            },
-            "termsUsed": {
-                "default": [],
-                "type": "array"
-            },
             "csid": {
                 "type": "string"
             },
             "fields": {
                 "properties": {
+                    "shortIdentifier": {
+                        "type": "string"
+                    },
                     "usedBys": {
                         "items": {
                             "properties": {
@@ -34,35 +29,47 @@
                     "description": {
                         "type": "string"
                     },
-                    "name": {
-                        "type": "string"
-                    },
                     "terms": {
                         "items": {
                             "properties": {
-                                "termName": {
+                                "shortIdentifier": {
                                     "type": "string"
                                 },
                                 "_primary": {
                                     "type": "boolean"
                                 },
-                                "termSourcePage": {
+                                "source": {
                                     "type": "string"
                                 },
-                                "termSource": {
+                                "_subrecordcsid": {
+                                    "type": "string"
+                                },
+                                "description": {
                                     "type": "string"
                                 },
                                 "termStatus": {
                                     "default": "active",
                                     "type": "string"
                                 },
-                                "termDescription": {
+                                "displayName": {
+                                    "type": "string"
+                                },
+                                "sourcePage": {
                                     "type": "string"
                                 }
                             },
                             "type": "object"
                         },
                         "type": "array"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "displayName": {
+                        "type": "string"
+                    },
+                    "sourcePage": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
