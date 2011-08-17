@@ -1572,8 +1572,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         type: "fluid.deferredInvokeCall",
                         func: "cspace.util.urlBuilder",
                         args: {
-                            composite: "%chain/composite",
-                            chain: "%chain"
+                            composite: "%tenant/%tenantname/composite",
+                            prefix: "%tenant/%tenantname"
                         }
                     }
                 }

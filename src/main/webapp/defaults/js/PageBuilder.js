@@ -130,8 +130,8 @@ cspace = cspace || {};
                 success: resourceSpec.options.success,
                 error: resourceSpec.options.error
             };
-            var chainIndex = resourceSpec.href.indexOf(urls.chain);
-            resourceSpec.href = chainIndex < 0 ? resourceSpec.href : resourceSpec.href.substr(chainIndex + urls.chain.length);
+            var prefixIndex = resourceSpec.href.indexOf(urls.prefix);
+            resourceSpec.href = prefixIndex < 0 ? resourceSpec.href : resourceSpec.href.substr(prefixIndex + urls.prefix.length);
             resourceSpecs.composite.options.data[name] = transform(resourceSpec, {
                 "path": "href",
                 "method": "options.type",
