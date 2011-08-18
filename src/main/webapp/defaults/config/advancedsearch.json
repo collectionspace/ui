@@ -4,7 +4,8 @@
             "selectors": {
                 "advancedSearch": ".csc-advancedsearch-container",
                 "search": ".main-search-page",
-                "tips": ".csc-search-tips"
+                "tips": ".csc-search-tips",
+                "tools": ".csc-search-tools"
             },
             "components": {
                 "renderer": {
@@ -14,6 +15,10 @@
                 "tips": {
                     "type": "cspace.searchTips",
                     "container": "{pageBuilder}.options.selectors.tips"
+                },
+                "tools": {
+                    "type": "cspace.searchTools",
+                    "container": "{pageBuilder}.options.selectors.tools"
                 },
                 "search": {
                     "type": "cspace.search.searchView",

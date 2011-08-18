@@ -403,7 +403,7 @@ cspace = cspace || {};
             };
             var result = cspace.composite.compose(fluid.model.transformWithRules, ["test1", "test3"], {
                 composite: "../../chain/composite",
-                chain: "../../chain"
+                prefix: "../../chain"
             }, resourceSpec);
             jqUnit.assertDeepEq("Test2 should stay", expected.test2, result.test2);
             jqUnit.assertEquals("Composite href is now", expected.composite.href, result.composite.href);

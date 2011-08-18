@@ -1327,4 +1327,16 @@ fluid.registerNamespace("cspace.util");
         }
     };
     
+    cspace.util.preInitMergeListeners = function (options, listeners) {
+        options.listeners = options.listeners || {};
+        fluid.each(listeners, function (value, key) {
+            if (!options.listeners[key]) {
+                options.listeners[key] = value;
+            } else {
+                options.listeners[key] = fluid.makeArray(options.listeners[key]);
+                options.listeners[key].push(value);
+            }
+        });
+    };
+    
 })(jQuery, fluid);

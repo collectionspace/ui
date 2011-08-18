@@ -286,20 +286,43 @@ cspace = cspace || {};
         })
     });
     
+    cspace.search.searchView.handleAdvancedSearch = function (searchModel, that) {
+        that.options.messageBar.hide();
+        that.applier.requestChange("results", []);
+        that.updateModel(searchModel);
+        that.resultsPager.applier.requestChange("pageCount", 1);
+        that.resultsPager.applier.requestChange("pageIndex", 0);
+        that.resultsPager.applier.requestChange("totalRange", 0);
+        that.search();
+    };
+    
     cspace.search.searchView.preInitAdvanced = function (that) {
-        that.options.listeners = that.options.listeners || {};
-        that.options.listeners.hideResults = function () {
-            that.locate("resultsContainer").hide();
-        };
-        that.options.listeners.onAdvancedSearch = function (searchModel) {
-            that.options.messageBar.hide();
-            that.applier.requestChange("results", []);
-            that.updateModel(searchModel);
-            that.resultsPager.applier.requestChange("pageCount", 1);
-            that.resultsPager.applier.requestChange("pageIndex", 0);
-            that.resultsPager.applier.requestChange("totalRange", 0);
-            that.search();
-        }; 
+        cspace.util.preInitMergeListeners(that.options, {
+            hideResults: function () {
+                that.locate("resultsContainer").hide();
+            },
+            onAdvancedSearch: function (searchModel) {
+                that.handleAdvancedSearch(searchModel);
+            },
+            currentSearchUpdated: function (searchModel) {
+                that.updateSearch(searchModel);
+                that.handleAdvancedSearch(searchModel);
+            }
+        });
+    };
+    
+    cspace.search.searchView.updateSearch = function (currentSearch, search) {
+        var fields = fluid.copy(currentSearch.fields);
+        if (fields) {
+            delete currentSearch.fields;
+            search.options.searchFields.applier.requestChange("", fields);
+        }
+        fluid.each(currentSearch, function (value, path) {
+            search.applier.requestChange(path, value)
+        });
+        search.refreshView();
+        search.toggleControls(true);
+        search.events.recordTypeChanged.fire(search.model.recordType);
     };
     
     cspace.search.searchView.applyResults = function (that, data) {

@@ -1956,3 +1956,34 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     font-size: 14px;
     font-weight: bold;
 }
+
+.cs-searchTools-template {
+    margin: 10px 20px 0 20px;
+    color: #316285;
+    padding: 10px;
+    background-color: #F2F2F2;
+    border: 1px solid #B3B3B3;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+}
+.cs-searchTools-template .cs-searchTools-title{
+    font-size: 14px;
+    font-weight: bold;
+}
+.cs-searchToolsBlock .cs-searchToolsBlock-title{
+    font-weight: bold;
+    display: block;
+    padding: 10px 0 0 15px;
+}
+.cs-searchToolsBlock .cs-searchToolsBlock-noItems, .cs-searchToolsBlock .cs-searchToolsBlock-item{
+    text-decoration:none;
+    display: block;
+    color: #316285;
+    padding: 5px 5px 0 15px;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+}
+.cs-searchToolsBlock .cs-searchToolsBlock-item:hover, .cs-searchToolsBlock .cs-searchToolsBlock-item:focus {
+    background-color: #E8E8E8;
+}

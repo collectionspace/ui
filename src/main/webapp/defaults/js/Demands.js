@@ -299,6 +299,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.includeDemands = function () {
+        
+        // Search history
+        fluid.demands("cspace.searchTools.block", "cspace.searchTools", {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                events: {
+                    currentSearchUpdated: "{searchTools}.events.currentSearchUpdated"
+                }
+            }, "{arguments}.1"]
+        });
 
         // Namespaces
         fluid.demands("cspace.namespaces", ["cspace.pageBuilder", "cspace.pageBuilderIO"], {
@@ -1320,7 +1330,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 preInitFunction: "cspace.search.searchView.preInitAdvanced",
                 events: {
                     onAdvancedSearch: null,
-                    hideResults: null
+                    hideResults: null,
+                    currentSearchUpdated: "{searchTools}.events.currentSearchUpdated"
+                },
+                invokers: {
+                    updateSearch: {
+                        funcName: "cspace.search.searchView.updateSearch",
+                        args: ["{arguments}.0", "{mainSearch}"]
+                    },
+                    handleAdvancedSearch: {
+                        funcName: "cspace.search.searchView.handleAdvancedSearch",
+                        args: ["{arguments}.0", "{searchView}"]
+                    }
                 },
                 components: {
                     mainSearch: {
@@ -1329,6 +1350,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             events: {
                                 onSearch: "{searchView}.events.onAdvancedSearch",
                                 afterToggle: "{searchView}.events.hideResults"
+                            },
+                            listeners: {
+                                onSearch: {
+                                    listener: "{searchTools}.events.renderOn.fire",
+                                    priority: "last"
+                                }
                             }
                         }
                     }

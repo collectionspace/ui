@@ -50,6 +50,12 @@ cspace = cspace || {};
                 },
                 createOnEvent: "afterRender",
                 container: "{advancedSearch}.dom.step2"
+            },
+            searchHistoryStorage: {
+                type: "cspace.util.localStorageDataSource",
+                options: {
+                    elPath: "searchHistory"
+                }
             }
         },
         events: {
@@ -68,7 +74,7 @@ cspace = cspace || {};
                     args: "{globalBundle}.messageBase"
                 } 
             },
-            andOrSelection: "or"
+            operation: "or"
         },
         permission: "list",
         selectors: {
@@ -146,7 +152,11 @@ cspace = cspace || {};
             },
             toggle: {
                 funcName: "cspace.advancedSearch.toggle",
-                args: ["{advancedSearch}.dom", "{advancedSearch}.events.afterToggle"]
+                args: ["{advancedSearch}.toggleControls", "{advancedSearch}.events.afterToggle"]
+            },
+            updateSearchHistory: {
+                funcName: "cspace.advancedSearch.updateSearchHistory",
+                args: ["{advancedSearch}.searchHistoryStorage", "{arguments}.0"]
             }
         },
         strings: {},
@@ -156,9 +166,18 @@ cspace = cspace || {};
         preInitFunction: "cspace.advancedSearch.preInit"
     });
     
-    cspace.advancedSearch.toggle = function (dom, event) {
-        dom.locate("toggle").hide();
-        dom.locate("step1").add(dom.locate("step2")).show();
+    cspace.advancedSearch.updateSearchHistory = function (storage, searchModel) {
+        var history = storage.get();
+        if (!history) {
+            storage.set([searchModel]);
+            return;
+        }
+        history = [searchModel].concat(fluid.makeArray(history));
+        storage.set(history.slice(0, 5));
+    };
+    
+    cspace.advancedSearch.toggle = function (toggleControls, event) {
+        toggleControls(false);
         event.fire();
     };
     
@@ -170,16 +189,15 @@ cspace = cspace || {};
         var searchModel;
         if (fieldsModel) {
             searchModel = transformSearchModel(keywordModel, {
-                "operation": "andOrSelection",
+                "operation": "operation",
                 "recordType": "recordType"
             });
-            searchModel.fields = {};
-            fluid.merge(null, searchModel.fields, fluid.copy(fieldsModel));
+            searchModel.fields = fluid.copy(fieldsModel);
         }
         else {
             searchModel = transformSearchModel(keywordModel, {
                 "recordType": "recordType",
-                "query": "fullText"
+                "query": "query"
             });
         }
         searchEvent.fire(searchModel)
@@ -189,10 +207,12 @@ cspace = cspace || {};
         if (that.searchFields) {
             instantiator.clearComponent(that, ["searchFields"]);
         }
-        var model = cspace.util.getBeanValue({}, options.recordType, options.uischema);
+        that.options.searchFields = that.options.searchFields || {};
+        var model = that.options.searchFields.model || cspace.util.getBeanValue({}, options.recordType, options.uischema);
+        var applier = that.options.searchFields.applier || fluid.makeChangeApplier(model);
         that.options.searchFields = {
             model: model, 
-            applier: fluid.makeChangeApplier(model),
+            applier: applier,
             schema: options.uischema
         };
         that.options.components.searchFields = {
@@ -212,7 +232,7 @@ cspace = cspace || {};
     };
     
     cspace.advancedSearch.preInit = function (that) {
-        that.options.listeners = {
+        cspace.util.preInitMergeListeners(that.options, {
             afterFetch: function (options) {
                 that.initSearchFields(options);
             },
@@ -222,11 +242,11 @@ cspace = cspace || {};
             afterSearchFieldsInit: function () {
                 that.locate("searchFields").show();
             },
-            onSearch: function () {
-                that.locate("step1").add(that.locate("step2")).hide();
-                that.locate("toggle").show();
+            onSearch: function (searchModel) {
+                that.toggleControls(true);
+                that.updateSearchHistory(searchModel);
             }
-        };
+        });
     };
     
     cspace.advancedSearch.postInit = function (that) {
@@ -236,6 +256,10 @@ cspace = cspace || {};
     };
     
     cspace.advancedSearch.finalInit = function (that) {
+        that.toggleControls = function (hideSteps) {
+            that.locate("step1").add(that.locate("step2"))[hideSteps ? "hide" : "show"]();
+            that.locate("toggle")[hideSteps ? "show" : "hide"]();
+        };
         that.refreshView();
     };
     
@@ -287,11 +311,11 @@ cspace = cspace || {};
             step2SubHeader2AndOr: {
                 optionnames: "${andOrNames}",
                 optionlist: "${andOrList}",
-                selection: "${andOrSelection}",
+                selection: "${operation}",
                 decorators: {"addClass": "{styles}.step2SubHeader2AndOr"}
             },
             query: {
-                value: "${fullText}",
+                value: "${query}",
                 decorators: {"addClass": "{styles}.query"}
             },
             keywordSearchButton: {
@@ -344,7 +368,9 @@ cspace = cspace || {};
         };
         tree = $.extend(tree, that.recordTypeSelector.produceComponent());
         // TODO: This is a hack, recordTypeSelector's selection can't be bound.
-        that.applier.requestChange("recordType", tree.recordTypeSelect.selection);
+        if (!that.model.recordType) {
+            that.applier.requestChange("recordType", tree.recordTypeSelect.selection);
+        }
         tree.recordTypeSelect.selection = "${recordType}";
         tree.recordTypeSelect.decorators = {"addClass": "{styles}.recordTypeSelect"};
         return tree;
