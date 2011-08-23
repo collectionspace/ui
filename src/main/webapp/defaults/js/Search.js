@@ -315,14 +315,13 @@ cspace = cspace || {};
         var fields = fluid.copy(currentSearch.fields);
         if (fields) {
             delete currentSearch.fields;
-            search.options.searchFields.applier.requestChange("", fields);
+            search.options.defaultFieldsModel = fields;
         }
         fluid.each(currentSearch, function (value, path) {
             search.applier.requestChange(path, value)
         });
         search.refreshView();
         search.toggleControls(true);
-        search.events.recordTypeChanged.fire(search.model.recordType);
     };
     
     cspace.search.searchView.applyResults = function (that, data) {

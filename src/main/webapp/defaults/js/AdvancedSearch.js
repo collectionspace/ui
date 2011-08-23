@@ -208,8 +208,10 @@ cspace = cspace || {};
             instantiator.clearComponent(that, ["searchFields"]);
         }
         that.options.searchFields = that.options.searchFields || {};
-        var model = that.options.searchFields.model || cspace.util.getBeanValue({}, options.recordType, options.uischema);
-        var applier = that.options.searchFields.applier || fluid.makeChangeApplier(model);
+        var defaultModel = fluid.copy(that.options.defaultFieldsModel);
+        delete that.options.defaultFieldsModel;
+        var model = defaultModel || cspace.util.getBeanValue({}, options.recordType, options.uischema);
+        var applier = fluid.makeChangeApplier(model);
         that.options.searchFields = {
             model: model, 
             applier: applier,
