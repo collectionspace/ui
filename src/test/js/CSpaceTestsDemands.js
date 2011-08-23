@@ -97,7 +97,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     fluid.demands("dataContext", ["cspace.test", "cspace.localData"], {
         options: {
-            fileExtension: ".json"
+            fileExtension: ".json",
+            urls: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.util.urlBuilder",
+                    args: {
+                        templateUrl: "%tenant/%tenantname/%recordType/template/%csid"
+                    }
+                }
+            }
         }
     });
     

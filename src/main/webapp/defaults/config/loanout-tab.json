@@ -11,7 +11,7 @@
             "pageSpec": {
                 "details": {
                     "href": "%readonlypages/LoanoutTemplate.html",
-                    "templateSelector": ".csc-loanOut-template",
+                    "templateSelector": ".csc-loanout-template",
                     "targetSelector": ".csc-relatedRecordsTab-loanout .csc-relatedRecordsTab-recordEditor"
                 } 
             }
@@ -44,7 +44,7 @@
                                         "details": {
                                             "options": {
                                                 "selectors": {
-                                                    "identificationNumber": ".csc-loanOut-loanOutNumber"
+                                                    "identificationNumber": ".csc-loanout-loanOutNumber"
                                                 },
                                                 "strings": {
                                                     "identificationNumberRequired": "Please specify a Loan Out Number"

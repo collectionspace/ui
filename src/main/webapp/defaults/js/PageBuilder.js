@@ -222,9 +222,10 @@ cspace = cspace || {};
             
             if (that.options.csid) {
                 var dcthat = that.dataContext;
-                resourceSpecs.record = that.dataContext.getResourceSpec("fetch", dcthat.options, dcthat.events.afterFetch, dcthat.events, that.options.csid);
+                resourceSpecs.record = that.dataContext.getResourceSpec("fetch", dcthat.buildUrl, dcthat.options, dcthat.events.afterFetch, dcthat.events, that.options.csid);
             }
             
+            options.pageType = options.pageType || that.options.recordType;
             if (options.pageType) {
                 resourceSpecs.uispec = {
                     href: that.options.uispecUrl || fluid.invoke("cspace.util.getUISpecURL", options.pageType),
@@ -311,6 +312,31 @@ cspace = cspace || {};
             onError: null
         }
     });
+    
+    fluid.defaults("cspace.pageBuilderIO.templateLocator", {
+        gradeNames: ["autoInit", "fluid.littleComponent"],
+        mergePolicy: {
+            pageSpec: "nomerge"
+        },
+        finalInitFunction: "cspace.pageBuilderIO.templateLocator.finalInit",
+        specs: {
+            recordEditor: {
+                href: "%readonlypages/%recordTypeTemplate.html",
+                templateSelector: ".csc-%recordType-template",
+                targetSelector: ".csc-record-edit-container"
+            }
+        }
+    });
+    
+    cspace.pageBuilderIO.templateLocator.finalInit = function (that) {
+        fluid.each(that.options.specs, function (spec, key) {
+            that.options.pageSpec[key] = spec;
+            that.options.pageSpec[key].templateSelector = fluid.stringTemplate(that.options.pageSpec[key].templateSelector, {recordType: that.options.recordType});
+            that.options.pageSpec[key].href = fluid.stringTemplate(that.options.pageSpec[key].href, {
+                recordType: that.options.recordType.charAt(0).toUpperCase() + that.options.recordType.slice(1)
+            });
+        });
+    };
     
     cspace.pageBuilderIO.resolveReadOnly = function (options) {
         var that = fluid.initLittleComponent("cspace.pageBuilderIO.resolveReadOnly", options);

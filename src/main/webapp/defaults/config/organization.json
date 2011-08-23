@@ -3,7 +3,7 @@
         "options": {
             "pageType": "organization",
             "selectors": {
-                "recordEditor": ".csc-organizationAuthority-template"
+                "recordEditor": ".csc-organization-template"
             },
             "components": {
                 "recordEditor": {
@@ -56,7 +56,7 @@
             "pageSpec": {
                 "recordEditor": {
                     "href": "%readonlypages/OrganizationTemplate.html",
-                    "templateSelector": ".csc-organizationAuthority-template",
+                    "templateSelector": ".csc-organization-template",
                     "targetSelector": ".csc-record-edit-container" 
                 }
             },

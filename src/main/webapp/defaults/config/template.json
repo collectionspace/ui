@@ -1,0 +1,78 @@
+{
+    "pageBuilder": {
+        "options": {
+            "selectors": {
+                "recordEditor": {
+                    "expander": {
+                        "type": "fluid.deferredInvokeCall",
+                        "func": "fluid.stringTemplate",
+                        "args": [".csc-%recordType-template", {
+                            "recordType": "{pageBuilderIO}.options.recordType"
+                        }]
+                    }
+                }
+            },
+            "components": {
+                "recordEditor": {
+                    "type":  "cspace.recordEditor",
+                    "options": {
+                        "selectors": {
+                            "templateEditor": ".csc-templateEditor"
+                        },
+                        "selectorsToIgnore": ["requiredFields", "identificationNumber", "header", "togglable"],
+                        "applier": "{pageBuilder}.applier",
+                        "uispec": "{pageBuilder}.options.uispec.recordEditor",
+                        "model": "{pageBuilder}.model"
+                    }
+                },
+                "titleBar": {
+                    "type": "cspace.titleBar",
+                    "options": {
+                        "fields": [
+                            "fields.templateName"
+                        ]
+                    }
+                },
+                "header": {
+                    "type": "cspace.header",
+                    "options": {
+                        "schema": "{pageBuilder}.schema",
+                        "permissions": "{pageBuilder}.permissions"
+                    }
+                }
+            }
+        }
+    },
+    "pageBuilderIO": {
+        "options": {
+            "components": {
+                "templateLocator": {
+                    "type": "cspace.pageBuilderIO.templateLocator",
+                    "options": {
+                        "pageSpec": "{pageBuilderIO}.options.pageSpec",
+                        "recordType": "{pageBuilderIO}.options.recordType"
+                    }
+                }
+            },
+            "recordType": {
+                "expander": {
+                    "type": "fluid.deferredInvokeCall",
+                    "func": "cspace.util.getUrlParameter",
+                    "args": "recordtype"
+                }
+            },
+             "schema": [
+                "recordlist",
+                "recordtypes",
+                "namespaces", {
+                    "expander": {
+                        "type": "fluid.deferredInvokeCall",
+                        "func": "cspace.util.getUrlParameter",
+                        "args": "recordtype"
+                    }
+                }
+            ],
+            "pageSpec": {}
+        }
+    }
+}

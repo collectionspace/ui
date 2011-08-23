@@ -148,8 +148,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         // CreateNew demands
         fluid.demands("createRecord", ["cspace.pageBuilder", "cspace.localData"], {
-            funcName: "cspace.createNew.createRecordLocal",
-            args: ["{createNew}"]
+            funcName: "cspace.createNew.createRecord",
+            args: ["{createNew}.dom", "{createNew}.options.urls.newRecordLocalUrl"]
         });
         
         // DataContext demands
@@ -576,7 +576,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // CreateNew demands
         fluid.demands("createRecord", "cspace.pageBuilder", {
             funcName: "cspace.createNew.createRecord",
-            args: ["{createNew}"]
+            args: ["{createNew}.dom", "{createNew}.options.urls.newRecordUrl"]
+        });
+        fluid.demands("createTemplate", "cspace.pageBuilder", {
+            funcName: "cspace.createNew.createRecord",
+            args: ["{createNew}.dom", "{createNew}.options.urls.templateUrl"]
         });
         fluid.demands("createNew", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.createNew"
@@ -607,6 +611,23 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+        fluid.demands("dataContext", ["cspace.pageBuilderIO", "cspace.template"], {
+            options: {
+                model: "{pageBuilderIO}.options.model",
+                listeners: {
+                    onError: "{globalSetup}.events.onError.fire"
+                },
+                urls: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.util.urlBuilder",
+                        args: {
+                            templateUrl: "%tenant/%tenantname/%recordType/template/%csid"
+                        }
+                    }
+                }
+            }
+        });
         fluid.demands("detailsDC", ["cspace.listEditor", "cspace.tab"], {
             options: {
                 model: "{listEditor}.options.detailsModel",
@@ -617,6 +638,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }
                 }
             }
+        });
+        fluid.demands("cspace.dataContext.buildUrl", "cspace.dataContext", {
+            funcName: "cspace.util.buildUrl",
+            args: ["{arguments}.0", "{dataContext}.options.baseUrl", "{dataContext}.options.recordType", "{arguments}.1", "{dataContext}.options.fileExtension"]
+        });
+        fluid.demands("cspace.dataContext.buildUrl", ["cspace.dataContext", "cspace.template"], {
+            funcName: "cspace.dataContext.buildTemplateUrl",
+            args: ["{arguments}.0", "{dataContext}.options.urls.templateUrl", "{dataContext}.options.recordType", "{arguments}.1"]
         });
         
         // DataSource demands
@@ -703,6 +732,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         }
                     }
                 }
+            }
+        });
+        
+        fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.template"], {
+            container: "{pageBuilder}.options.selectors.recordEditor",
+            options: {
+                recordType: "{pageBuilderIO}.options.recordType",
+                produceTree: "cspace.recordEditor.produceTreeTemplate"
             }
         });
         
@@ -1656,6 +1693,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         fluid.demands("tabsList", "cspace.tabs", {
             container: "{tabs}.dom.tabsList"
+        });
+        fluid.demands("cspace.templateEditor", "cspace.recordEditor", {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                applier: "{recordEditor}.applier",
+                model: "{recordEditor}.model"
+            }, "{arguments}.1"]
         });
         fluid.demands("titleBar", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.titleBar",

@@ -3,7 +3,7 @@
         "options": {
             "pageType": "taxon",
             "selectors": {
-                "recordEditor": ".csc-taxonAuthority-template"
+                "recordEditor": ".csc-taxon-template"
             },
             "components": {
                 "recordEditor": {
@@ -67,7 +67,7 @@
             "pageSpec": {
                 "recordEditor": {
                     "href": "%readonlypages/TaxonTemplate.html",
-                    "templateSelector": ".csc-taxonAuthority-template",
+                    "templateSelector": ".csc-taxon-template",
                     "targetSelector": ".csc-record-edit-container"
                 }
             },

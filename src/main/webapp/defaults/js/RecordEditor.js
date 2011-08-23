@@ -406,6 +406,17 @@ cspace = cspace || {};
     cspace.recordEditor.provideProduceTree = function (recordType) {
         return recordType === "media" ? cspace.recordEditor.produceTreeMedia : cspace.recordEditor.produceTree;
     };
+    
+    cspace.recordEditor.produceTreeTemplate = function (that) {
+        var tree = cspace.recordEditor.produceTree(that);
+        tree.templateEditor = {
+            decorators: {
+                type: "fluid",
+                func: "cspace.templateEditor"
+            }
+        };
+        return tree;
+    };
 
     cspace.recordEditor.cutpointGenerator = function (selectors, options) {
         var cutpoints = options.cutpoints || fluid.renderer.selectorsToCutpoints(selectors, options) || [];

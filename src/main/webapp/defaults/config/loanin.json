@@ -3,14 +3,14 @@
         "options": {
             "pageType": "loanin",
             "selectors": {
-                "recordEditor": ".csc-loanIn-template"
+                "recordEditor": ".csc-loanin-template"
             },
             "components": {
                 "recordEditor": {
                     "type":  "cspace.recordEditor",
                     "options": {
                         "selectors": {
-                            "identificationNumber": ".csc-loanIn-loanInNumber"
+                            "identificationNumber": ".csc-loanin-loanInNumber"
                         },
                         "strings": {
                             "identificationNumberRequired": "Please specify a Loan In Number"
@@ -61,7 +61,7 @@
             "pageSpec": {
                 "recordEditor": {
                     "href": "%readonlypages/LoaninTemplate.html",
-                    "templateSelector": ".csc-loanIn-template",
+                    "templateSelector": ".csc-loanin-template",
                     "targetSelector": ".csc-record-edit-container"
                 }
             }

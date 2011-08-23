@@ -81,4 +81,20 @@
     <css>/defaults/lib/goog/demos/css/datepicker.css</css>
     <css>/defaults/lib/jquery/plugins/scrollabletabs/css/jquery-ui-1.7.2.custom.css</css>
   </group>
+  
+  <group name='template'>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-reset.css</css>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
+    <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
+    <css>/defaults/lib/infusion/components/uploader/css/Uploader.css</css>
+    <css>/tenants/lifesci/css/cspace.css</css>
+    <css>/defaults/css/NumberPatternChooser.css</css>
+    <css>/defaults/css/Confirmation.css</css>
+    <css>/defaults/css/Autocomplete.css</css>
+    <css>/defaults/css/StructuredDate.css</css>
+    <css>/defaults/css/pivot.css</css>
+    <css>/defaults/css/authority.css</css>
+    <css>/defaults/css/repeatable.css</css>
+    <css>/defaults/lib/goog/demos/css/datepicker.css</css>
+  </group>
 </groups>

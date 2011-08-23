@@ -25,9 +25,9 @@ cspace = cspace || {};
         removeRelations: "DELETE"
     };
 
-    var buildOpts = function (operation, options, successEvent, events, csid, data) {
+    var buildOpts = function (operation, buildUrl, options, successEvent, events, csid, data) {
         var opts = {
-            url: cspace.util.buildUrl(operation, options.baseUrl, options.recordType, csid, options.fileExtension),
+            url: buildUrl(operation, csid),
             type: types[operation],
             dataType: options.dataType,
             contentType: "application/json; charset=utf-8",
@@ -134,7 +134,7 @@ cspace = cspace || {};
                 that.dataSource.provideModel(csid);
             }
             else {
-                ajax("fetch", that.options, that.events.afterFetch, that.events, csid);
+                ajax("fetch", that.buildUrl, that.options, that.events.afterFetch, that.events, csid);
             }
         };
         
@@ -144,23 +144,23 @@ cspace = cspace || {};
         }
         
         that.update = function () {
-            save("update", that.options, that.events.afterUpdate, that.events, that.model.csid, that.model);
+            save("update", that.buildUrl, that.options, that.events.afterUpdate, that.events, that.model.csid, that.model);
         };
         
         that.create = function () {
-            save("create", that.options, that.events.afterCreate, that.events, null, that.model);
+            save("create", that.buildUrl, that.options, that.events.afterCreate, that.events, null, that.model);
         };
 
         that.remove = function (csid) {
-            save("remove", that.options, that.events.afterRemove, that.events, csid);
+            save("remove", that.buildUrl, that.options, that.events.afterRemove, that.events, csid);
         };
 
         that.addRelations = function (newRelations) {
-            save("addRelations", that.options, that.events.afterAddRelations, that.events, null, newRelations);
+            save("addRelations", that.buildUrl, that.options, that.events.afterAddRelations, that.events, null, newRelations);
         };
         
         that.removeRelations = function (relations) {
-            save("removeRelations", that.options, that.events.afterRemoveRelations, that.events, null, relations);
+            save("removeRelations", that.buildUrl, that.options, that.events.afterRemoveRelations, that.events, null, relations);
         };
 
         that.baseUrl = function () {
@@ -178,6 +178,9 @@ cspace = cspace || {};
         },
         components: {
             instantiator: "{instantiator}"
+        },
+        invokers: {
+            buildUrl: "cspace.dataContext.buildUrl"
         },
         events: {
             modelChanged: null,    // newModel, oldModel, source
@@ -197,5 +200,12 @@ cspace = cspace || {};
         dataType: "json",
         fileExtension: ""
     });
+    
+    cspace.dataContext.buildTemplateUrl = function (operation, templateUrl, recordType, csid) {
+        return fluid.stringTemplate(templateUrl, {
+            recordType: recordType,
+            csid: csid
+        });
+    };
 
 })(jQuery, fluid);

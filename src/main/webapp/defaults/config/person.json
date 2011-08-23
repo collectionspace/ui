@@ -3,7 +3,7 @@
         "options": {
             "pageType": "person",
             "selectors": {
-                "recordEditor": ".csc-personAuthority-template"
+                "recordEditor": ".csc-person-template"
             },
             "components": {
                 "recordEditor": {
@@ -67,7 +67,7 @@
             "pageSpec": {
                 "recordEditor": {
                     "href": "%readonlypages/PersonTemplate.html",
-                    "templateSelector": ".csc-personAuthority-template",
+                    "templateSelector": ".csc-person-template",
                     "targetSelector": ".csc-record-edit-container"
                 }
             },

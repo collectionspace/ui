@@ -11,7 +11,7 @@
             "pageSpec": {
                 "details": {
                     "href": "%readonlypages/LoaninTemplate.html",
-                    "templateSelector": ".csc-loanIn-template",
+                    "templateSelector": ".csc-loanin-template",
                     "targetSelector": ".csc-relatedRecordsTab-loanin .csc-relatedRecordsTab-recordEditor"
                 } 
             }
@@ -44,7 +44,7 @@
                                         "details": {
                                             "options": {
                                                 "selectors": {
-                                                    "identificationNumber": ".csc-loanIn-loanInNumber"
+                                                    "identificationNumber": ".csc-loanin-loanInNumber"
                                                 },
                                                 "strings": {
                                                     "identificationNumberRequired": "Please specify a Loan In Number"
