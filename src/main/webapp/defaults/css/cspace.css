@@ -1353,7 +1353,7 @@ input[disabled]:hover, input[disabled]:hover    {
     -webkit-border-radius:0;
 	border-radius:0;}
 
-.saveButton, .createFromExistingButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-createNew-createTemplateButton, .cs-messageBar-cancel, .cs-confirmationDialogButton, .cs-user-searchButton, .cs-user-unSearchButton, .cs-searchToRelate-createButton, .cs-searchToRelate-addButton {
+.saveButton, .createFromExistingButton, .cs-searchBox-button, .csc-header-logout, .csc-search-submit, .csc-add-related-record-button, .csc-numberPatternChooser-button, .cs-createNew-createButton, .cs-createNew-createTemplateButton, .cs-messageBar-cancel, .cs-confirmationDialogButton, .cs-user-searchButton, .cs-user-unSearchButton, .cs-searchToRelate-createButton, .cs-searchToRelate-addButton, .cs-createTemplateBox-createButton {
     -moz-border-radius:4px; 
     -webkit-border-radius:4px;
 	border-radius:4px;
@@ -1433,7 +1433,17 @@ a.cs-searchBox-advancedSearch {
 .cs-add-related-records-dialog .cs-searchBox {
     background-color:#EBEBEB;}
 
-
+/****************************************
+ * CSS Markup for createTemplateBox widget *
+ ****************************************/
+ 
+ .cs-createTemplateBox-template {
+    width: 150px !important;
+ } 
+ 
+ .cs-createTemplateBox-createButton {
+    float:right;
+ }
 
 /* Read-only page styling selectors */
 #read-only .info-pair .content thead td , #read-only .info-pair .content table, #read-only .info-pair-date .content table, #read-only .info-pair-select table {

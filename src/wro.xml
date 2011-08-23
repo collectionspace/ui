@@ -17,6 +17,7 @@
     <js>/defaults/js/Permissions.js</js>
     <js>/defaults/js/Utilities.js</js>
     <js>/defaults/js/Renderer.js</js>
+    <js>/defaults/js/CreateTemplateBox.js</js>
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/CreateNew.js</js>
     <js>/defaults/js/Header.js</js>

@@ -260,6 +260,41 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
         
+        fluid.demands("cspace.createTemplateBox", ["cspace.localData", "cspace.pageBuilder"], {
+            container: "{pageBuilder}.options.selectors.createTemplateBox",
+            options: {
+                urls: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.util.urlBuilder",
+                        args: {
+                            cloneURL: "%webapp/html/record.html?recordtype=%recordType"
+                        }
+                    }                                    
+                }
+            }
+        });
+        fluid.demands("cspace.createTemplateBox.listDataSource",  ["cspace.localData", "cspace.createTemplateBox"], {
+            funcName: "cspace.createTemplateBox.testListDataSource",
+            args: {
+                targetTypeName: "cspace.createTemplateBox.testListDataSource",
+                termMap: {
+                    recordType: "%recordType"
+                }
+            }
+        });
+        
+        fluid.demands("cspace.createTemplateBox.templateDataSource",  ["cspace.localData", "cspace.createTemplateBox"], {
+            funcName: "cspace.createTemplateBox.testTemplateDataSource",
+            args: {
+                targetTypeName: "cspace.createTemplateBox.testTemplateDataSource",
+                termMap: {
+                    recordType: "%recordType",
+                    templateType: "%templateType"
+                }
+            }
+        });        
+        
         // urlExpander demands
         fluid.demands("cspace.urlExpander", "cspace.localData", {
             options: {
@@ -1429,6 +1464,32 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("searchBox", "cspace.header", {
             container: "{header}.options.selectors.searchBox"
         });
+        
+        // createTemplate demands
+        fluid.demands("cspace.createTemplateBox", "cspace.pageBuilder", {
+            container: "{pageBuilder}.options.selectors.createTemplateBox"
+        });
+        fluid.demands("cspace.createTemplateBox.listDataSource", ["cspace.createTemplateBox"], {
+            funcName: "cspace.URLDataSource",
+            args: {
+                url: "{createTemplateBox}.options.urls.listUrl",
+                targetTypeName: "cspace.createTemplateBox.listDataSource",
+                termMap: {
+                    recordType: "%recordType"
+                }
+            }
+        });
+        fluid.demands("cspace.createTemplateBox.templateDataSource", ["cspace.createTemplateBox"], {
+            funcName: "cspace.URLDataSource",
+            args: {
+                url: "{createTemplateBox}.options.urls.listUrl",
+                targetTypeName: "cspace.createTemplateBox.templateDataSource",
+                termMap: {
+                    recordType: "%recordType",
+                    templateType: "%templateType"
+                }
+            }
+        });        
         
         // sidebar demands
         fluid.demands("sidebar", "cspace.pageBuilder", {

@@ -2,7 +2,8 @@
     "pageBuilder": {
         "options": {
             "selectors": {
-                "createNew": ".csc-createNew-main"
+                "createNew": ".csc-createNew-main",
+                "createTemplateBox": ".csc-createTemplateBox"
             },
             "components": {
                 "renderer": {
@@ -10,31 +11,23 @@
                     "container": ".csc-createnew",
                     "options": {
                         "selectors": {
-                            "search": ".csc-pageBuilder-search"
+                            "createTemplateBox": ".csc-pageBuilder-createTemplateBox"
                         },
                         "protoTree": {
-                            "search": {
-                                "messagekey": "${search}"
+                            "createTemplateBox": {
+                                "messagekey": "${createTemplateBox}"
                             },
                             "header": {
                                 "messagekey": "${header}"
                             }
                         },
                         "model": {
-                            "search": "pageBuilder-search"
+                            "createTemplateBox": "pageBuilder-createTemplateBox"
                         }
                     }
                 },
-                "pivotSearch": {
-                    "type": "cspace.searchBox",
-                    "options": {
-                        "strings": {
-                            "recordTypeSelectLabel": "Record Type" 
-                        },
-                        "selfRender": true,
-                        "related": "all",
-                        "permission": "list"
-                    } 
+                "createTemplateBox": {
+                    "type": "cspace.createTemplateBox"
                 },
                 "createNew": {
                     "type": "cspace.createNew",
