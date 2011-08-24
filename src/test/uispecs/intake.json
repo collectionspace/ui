@@ -79,16 +79,16 @@
                                                 "optionnames": [
                                                     "Please select a value",
                                                     "Unsuitable",
+                                                    "Dangerous",
                                                     "Suitable",
-                                                    "Reasonable",
-                                                    "Dangerous"
+                                                    "Reasonable"
                                                 ],
                                                 "optionlist": [
                                                     "",
                                                     "unsuitable",
+                                                    "dangerous",
                                                     "suitable",
-                                                    "reasonable",
-                                                    "dangerous"
+                                                    "reasonable"
                                                 ],
                                                 "selection": "${{row}.currentLocationFitness}"
                                             },
@@ -203,18 +203,18 @@
                                                 "optionnames": [
                                                     "Please select a value",
                                                     "Conservation",
-                                                    "Loan in",
                                                     "Enquiry",
-                                                    "Damaged in transit",
-                                                    "Consideration"
+                                                    "Loan in",
+                                                    "Consideration",
+                                                    "Damaged in transit"
                                                 ],
                                                 "optionlist": [
                                                     "",
                                                     "conservation",
-                                                    "loanin",
                                                     "enquiry",
-                                                    "damagedintransit",
-                                                    "consideration"
+                                                    "loanin",
+                                                    "consideration",
+                                                    "damagedintransit"
                                                 ],
                                                 "selection": "${{row}.conditionCheckReason}"
                                             }
@@ -319,31 +319,31 @@
                                             ".csc-intake-fieldCollectionMethod": {
                                                 "optionnames": [
                                                     "Please select a value",
-                                                    "found deceased",
                                                     "shot",
                                                     "trapped",
-                                                    "photographed",
                                                     "purchased",
                                                     "salvaged",
-                                                    "metal detector",
                                                     "netted",
+                                                    "metal detector",
+                                                    "photographed",
+                                                    "found dead",
                                                     "exchanged",
-                                                    "commissioned",
-                                                    "borehole"
+                                                    "borehole",
+                                                    "commissioned"
                                                 ],
                                                 "optionlist": [
                                                     "",
-                                                    "founddead",
                                                     "shot",
                                                     "trapped",
-                                                    "photographed",
                                                     "purchased",
                                                     "salvaged",
-                                                    "metaldetector",
                                                     "netted",
+                                                    "metaldetector",
+                                                    "photographed",
+                                                    "founddead",
                                                     "exchanged",
-                                                    "commissioned",
-                                                    "borehole"
+                                                    "borehole",
+                                                    "commissioned"
                                                 ],
                                                 "selection": "${{row}.fieldCollectionMethod}"
                                             }
@@ -417,7 +417,15 @@
         ".csc-intake-fieldCollectionEventNames-label": {
             "messagekey": "intake-fieldCollectionEventNamesLabel"
         },
-        ".csc-intake-updatedAt": "${fields.updatedAt}",
+        ".csc-intake-updatedAt": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ],
+            "value": "${fields.updatedAt}"
+        },
         ".csc-intake-condition-check-reference-number": "${fields.conditionCheckReferenceNumber}",
         ".csc-intake-fieldCollectionPlace": "${fields.fieldCollectionPlace}",
         ".csc-intake-fieldCollectionSource": {
@@ -642,14 +650,14 @@
                                             ".csc-intake-entryMethod": {
                                                 "optionnames": [
                                                     "Please select a value",
-                                                    "Post",
                                                     "Found on doorstep",
+                                                    "Post",
                                                     "In person"
                                                 ],
                                                 "optionlist": [
                                                     "",
-                                                    "post",
                                                     "foundondoorstep",
+                                                    "post",
                                                     "inperson"
                                                 ],
                                                 "selection": "${{row}.entryMethod}"

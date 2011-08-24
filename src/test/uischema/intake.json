@@ -1,13 +1,13 @@
 {
     "intake": {
         "properties": {
-            "relations": {
-                "default": {},
-                "type": "object"
-            },
             "termsUsed": {
                 "default": [],
                 "type": "array"
+            },
+            "relations": {
+                "default": {},
+                "type": "object"
             },
             "csid": {
                 "type": "string"
@@ -20,14 +20,14 @@
                     "entryNumber": {
                         "type": "string"
                     },
-                    "insurancePolicyNumber": {
+                    "depositorsRequirements": {
                         "type": "string"
                     },
                     "entryReason": {
                         "default": "",
                         "type": "string"
                     },
-                    "depositorsRequirements": {
+                    "insurancePolicyNumber": {
                         "type": "string"
                     },
                     "insuranceReferenceNumber": {
@@ -131,10 +131,10 @@
                                     "default": "",
                                     "type": "string"
                                 },
-                                "currentLocationNote": {
+                                "currentLocation": {
                                     "type": "string"
                                 },
-                                "currentLocation": {
+                                "currentLocationNote": {
                                     "type": "string"
                                 }
                             },
@@ -173,9 +173,6 @@
                     "packingNote": {
                         "type": "string"
                     },
-                    "entryDate": {
-                        "type": "date"
-                    },
                     "conditionCheckersOrAssessors": {
                         "items": {
                             "properties": {
@@ -190,6 +187,9 @@
                         },
                         "type": "array"
                     },
+                    "entryDate": {
+                        "type": "date"
+                    },
                     "fieldCollectionNote": {
                         "type": "string"
                     },
@@ -197,7 +197,7 @@
                         "type": "date"
                     },
                     "updatedAt": {
-                        "type": "string"
+                        "type": "date"
                     },
                     "currentOwner": {
                         "type": "string"
@@ -241,11 +241,11 @@
                     "fieldCollectionPlace": {
                         "type": "string"
                     },
-                    "fieldCollectionDate": {
-                        "type": "date"
-                    },
                     "depositor": {
                         "type": "string"
+                    },
+                    "fieldCollectionDate": {
+                        "type": "date"
                     }
                 },
                 "type": "object"

@@ -15,8 +15,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../tenant/html/intake/autocomplete/currentOwner",
-                        "vocabUrl": "../../tenant/html/intake/source-vocab/currentOwner"
+                        "queryUrl": "../../../tenant/core/intake/autocomplete/currentOwner",
+                        "vocabUrl": "../../../tenant/core/intake/source-vocab/currentOwner"
                     }
                 }
             ],
@@ -41,8 +41,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../tenant/html/intake/autocomplete/conditionCheckerOrAssessor",
-                                                            "vocabUrl": "../../tenant/html/intake/source-vocab/conditionCheckerOrAssessor"
+                                                            "queryUrl": "../../../tenant/core/intake/autocomplete/conditionCheckerOrAssessor",
+                                                            "vocabUrl": "../../../tenant/core/intake/source-vocab/conditionCheckerOrAssessor"
                                                         }
                                                     }
                                                 ],
@@ -79,16 +79,16 @@
                                                 "optionnames": [
                                                     "Please select a value",
                                                     "Unsuitable",
+                                                    "Dangerous",
                                                     "Suitable",
-                                                    "Reasonable",
-                                                    "Dangerous"
+                                                    "Reasonable"
                                                 ],
                                                 "optionlist": [
                                                     "",
                                                     "unsuitable",
+                                                    "dangerous",
                                                     "suitable",
-                                                    "reasonable",
-                                                    "dangerous"
+                                                    "reasonable"
                                                 ],
                                                 "selection": "${{row}.currentLocationFitness}"
                                             },
@@ -203,18 +203,18 @@
                                                 "optionnames": [
                                                     "Please select a value",
                                                     "Conservation",
-                                                    "Damaged in transit",
                                                     "Enquiry",
                                                     "Loan in",
-                                                    "Consideration"
+                                                    "Consideration",
+                                                    "Damaged in transit"
                                                 ],
                                                 "optionlist": [
                                                     "",
                                                     "conservation",
-                                                    "damagedintransit",
                                                     "enquiry",
                                                     "loanin",
-                                                    "consideration"
+                                                    "consideration",
+                                                    "damagedintransit"
                                                 ],
                                                 "selection": "${{row}.conditionCheckReason}"
                                             }
@@ -319,31 +319,31 @@
                                             ".csc-intake-fieldCollectionMethod": {
                                                 "optionnames": [
                                                     "Please select a value",
-                                                    "trapped",
                                                     "shot",
-                                                    "salvaged",
-                                                    "photographed",
+                                                    "trapped",
                                                     "purchased",
+                                                    "salvaged",
                                                     "netted",
                                                     "metal detector",
-                                                    "exchanged",
+                                                    "photographed",
                                                     "found dead",
-                                                    "commissioned",
-                                                    "borehole"
+                                                    "exchanged",
+                                                    "borehole",
+                                                    "commissioned"
                                                 ],
                                                 "optionlist": [
                                                     "",
-                                                    "trapped",
                                                     "shot",
-                                                    "salvaged",
-                                                    "photographed",
+                                                    "trapped",
                                                     "purchased",
+                                                    "salvaged",
                                                     "netted",
                                                     "metaldetector",
-                                                    "exchanged",
+                                                    "photographed",
                                                     "founddead",
-                                                    "commissioned",
-                                                    "borehole"
+                                                    "exchanged",
+                                                    "borehole",
+                                                    "commissioned"
                                                 ],
                                                 "selection": "${{row}.fieldCollectionMethod}"
                                             }
@@ -382,8 +382,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../tenant/html/intake/autocomplete/fieldCollector",
-                                                            "vocabUrl": "../../tenant/html/intake/source-vocab/fieldCollector"
+                                                            "queryUrl": "../../../tenant/core/intake/autocomplete/fieldCollector",
+                                                            "vocabUrl": "../../../tenant/core/intake/source-vocab/fieldCollector"
                                                         }
                                                     }
                                                 ],
@@ -417,7 +417,15 @@
         ".csc-intake-fieldCollectionEventNames-label": {
             "messagekey": "intake-fieldCollectionEventNamesLabel"
         },
-        ".csc-intake-updatedAt": "${fields.updatedAt}",
+        ".csc-intake-updatedAt": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ],
+            "value": "${fields.updatedAt}"
+        },
         ".csc-intake-condition-check-reference-number": "${fields.conditionCheckReferenceNumber}",
         ".csc-intake-fieldCollectionPlace": "${fields.fieldCollectionPlace}",
         ".csc-intake-fieldCollectionSource": {
@@ -439,8 +447,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../tenant/html/intake/autocomplete/fieldCollectionSource",
-                                                            "vocabUrl": "../../tenant/html/intake/source-vocab/fieldCollectionSource"
+                                                            "queryUrl": "../../../tenant/core/intake/autocomplete/fieldCollectionSource",
+                                                            "vocabUrl": "../../../tenant/core/intake/source-vocab/fieldCollectionSource"
                                                         }
                                                     }
                                                 ],
@@ -480,8 +488,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../tenant/html/intake/autocomplete/depositor",
-                        "vocabUrl": "../../tenant/html/intake/source-vocab/depositor"
+                        "queryUrl": "../../../tenant/core/intake/autocomplete/depositor",
+                        "vocabUrl": "../../../tenant/core/intake/source-vocab/depositor"
                     }
                 }
             ],
@@ -493,6 +501,9 @@
         },
         ".csc-intake-currentOwner-label": {
             "messagekey": "intake-currentOwnerLabel"
+        },
+        ".csc-intake-domaindata-label": {
+            "messagekey": "intake-domaindataLabel"
         },
         ".csc-intake-conditionCheckMethods-label": {
             "messagekey": "intake-conditionCheckMethodsLabel"
@@ -597,8 +608,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../tenant/html/intake/autocomplete/valuer",
-                        "vocabUrl": "../../tenant/html/intake/source-vocab/valuer"
+                        "queryUrl": "../../../tenant/core/intake/autocomplete/valuer",
+                        "vocabUrl": "../../../tenant/core/intake/source-vocab/valuer"
                     }
                 }
             ],
@@ -640,14 +651,14 @@
                                                 "optionnames": [
                                                     "Please select a value",
                                                     "Found on doorstep",
-                                                    "In person",
-                                                    "Post"
+                                                    "Post",
+                                                    "In person"
                                                 ],
                                                 "optionlist": [
                                                     "",
                                                     "foundondoorstep",
-                                                    "inperson",
-                                                    "post"
+                                                    "post",
+                                                    "inperson"
                                                 ],
                                                 "selection": "${{row}.entryMethod}"
                                             }
@@ -701,8 +712,8 @@
                                                         "func": "cspace.autocomplete",
                                                         "type": "fluid",
                                                         "options": {
-                                                            "queryUrl": "../../tenant/html/intake/autocomplete/insurer",
-                                                            "vocabUrl": "../../tenant/html/intake/source-vocab/insurer"
+                                                            "queryUrl": "../../../tenant/core/intake/autocomplete/insurer",
+                                                            "vocabUrl": "../../../tenant/core/intake/source-vocab/insurer"
                                                         }
                                                     }
                                                 ],

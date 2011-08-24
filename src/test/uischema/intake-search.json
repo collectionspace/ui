@@ -1,20 +1,12 @@
 {
     "intake": {
         "properties": {
-            "currentOwners": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "currentOwner": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },        
+            "entryDateEnd": {
+                "type": "date"
+            },
+            "returnDateEnd": {
+                "type": "date"
+            },
             "depositors": {
                 "items": {
                     "properties": {
@@ -28,12 +20,72 @@
                     "type": "object"
                 },
                 "type": "array"
-            },            
-            "entryDateStart": {
+            },
+            "currentLocationGroup": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "currentLocation": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "returnDateStart": {
                 "type": "date"
             },
-            "entryDateEnd": {
+            "entryReasons": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "entryReason": {
+                            "default": "",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "updatedAtEnd": {
                 "type": "date"
+            },
+            "entryNumbers": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "entryNumber": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "updatedAtStart": {
+                "type": "date"
+            },
+            "currentOwners": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "currentOwner": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
             },
             "entryMethods": {
                 "items": {
@@ -50,39 +102,7 @@
                 },
                 "type": "array"
             },
-            "entryNumbers": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "entryNumber": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "entryReasons": {
-            	"items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "entryReason": {
-                            "default": "",
-                			"type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "returnDateStart": {
-                "type": "date"
-            },
-            "returnDateEnd": {
+            "entryDateStart": {
                 "type": "date"
             },
             "fieldCollectionEventNames": {
@@ -98,42 +118,8 @@
                     "type": "object"
                 },
                 "type": "array"
-            },            
-            "currentLocationGroup": {
-            	"items": {
-                    "properties": {
-                        "currentLocation": {
-                            "type": "string"
-                        },
-                        "_primary": {
-                            "type": "boolean"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "editDateStart": {
-                "type": "date"
-            },
-            "editDateEnd": {
-                "type": "date"
-            },
-            "editUsernames": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "editUsername": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
             }
-       },            
-       "type": "object"
+        },
+        "type": "object"
     }
 }
