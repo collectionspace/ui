@@ -395,7 +395,10 @@ cspace = cspace || {};
                 href: url,
                 options: {
                     dataType: "json",
-                    data: searchModel.fields ? JSON.stringify(searchModel.fields) : undefined,
+                    data: searchModel.fields ? JSON.stringify({
+                        fields: searchModel.fields,
+                        operation: searchModel.operation
+                    }) : undefined,
                     type: searchModel.fields ? "POST" : "GET",
                     success: function (responseData, textStatus) {
                         if (responseData.isError === true) {
