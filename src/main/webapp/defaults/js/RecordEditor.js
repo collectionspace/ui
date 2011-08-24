@@ -90,6 +90,10 @@ cspace = cspace || {};
         that.events.onSave.addListener(function () {
             return validateRequiredFields(that.dom, that.options.messageBar, that.options.strings.missingRequiredFields);
         });
+        
+        that.events.afterRenderRefresh.addListener(function () {
+            clearLocalStorage(that); 
+        });
 
         that.options.dataContext.events.afterCreate.addListener(function (data) {
             recordSaveHandler(that, data, "Create");
@@ -166,8 +170,16 @@ cspace = cspace || {};
         if (!that.options.deferRendering) {
             that.refreshView();
         }
-        processChanges(that, false);
+        that.events.afterRenderRefresh.fire(that);
     };
+    
+    var clearLocalStorage = function (that) {
+        var modelToClone = that.localStorage.get(that.localStorage.options.elPath);
+        if (modelToClone) {
+            that.localStorage.set();
+            processChanges(that, true);
+        }
+    };    
     
     var initDeferredComponents = function (that) {
         fluid.each(that.options.deferredComponents, function (component, name) {
@@ -191,7 +203,6 @@ cspace = cspace || {};
             var modelToClone = that.localStorage.get();  
             if (modelToClone) {
                 that.applier.requestChange("", modelToClone);
-                that.localStorage.set();
             }            
         };
 
@@ -556,7 +567,8 @@ cspace = cspace || {};
             onSave: "preventable",
             onCancel: null,
             afterRemove: null, // params: textStatus
-            onError: null  // params: operation
+            onError: null, // params: operation
+            afterRenderRefresh: null 
         },
         showDeleteButton: false,
         showCreateFromExistingButton: false,
