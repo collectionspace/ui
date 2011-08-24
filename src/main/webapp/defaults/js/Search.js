@@ -281,7 +281,7 @@ cspace = cspace || {};
             pageNum: "&pageNum=%pageNum",
             pageSize: "&pageSize=%pageSize",
             sort: "&sortDir=%sortDir&sortKey=%sortKey",
-            defaultUrl: "%chain/%recordType/search?query=%keywords%pageNum%pageSize%sort",
+            defaultUrl: "%tenant/%tenantname/%recordType/search?query=%keywords%pageNum%pageSize%sort",
             localUrl: "%chain/data/%recordType/search.json"
         })
     });
@@ -289,6 +289,11 @@ cspace = cspace || {};
     cspace.search.searchView.handleAdvancedSearch = function (searchModel, that) {
         that.options.messageBar.hide();
         that.applier.requestChange("results", []);
+        if (searchModel.fields) {
+            searchModel.keywords = "";
+        } else {
+            searchModel.fields = undefined;
+        }
         that.updateModel(searchModel);
         that.resultsPager.applier.requestChange("pageCount", 1);
         that.resultsPager.applier.requestChange("pageIndex", 0);
@@ -375,6 +380,7 @@ cspace = cspace || {};
     
     cspace.search.searchView.advancedSearch = function (newPagerModel, that) {
         var pagerModel = newPagerModel || that.resultsPager.model;
+        var searchModel = that.model.searchModel;
         that.updateModel({
             pageSize: pagerModel.pageSize,
             pageIndex: pagerModel.pageIndex,
@@ -389,15 +395,16 @@ cspace = cspace || {};
                 href: url,
                 options: {
                     dataType: "json",
-                    type: "GET",
-                    success: function (data, textStatus) {
-                        if (data.isError === true) {
-                            fluid.each(data.messages, function (message) {
+                    data: searchModel.fields ? JSON.stringify(searchModel.fields) : undefined,
+                    type: searchModel.fields ? "POST" : "GET",
+                    success: function (responseData, textStatus) {
+                        if (responseData.isError === true) {
+                            fluid.each(responseData.messages, function (message) {
                                 that.events.onError.fire("search", message.message);
                             });
                             return;
                         }
-                        that.applyResults(data);
+                        that.applyResults(responseData);
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         that.events.onError.fire("search", textStatus);

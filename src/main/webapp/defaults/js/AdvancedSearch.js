@@ -197,7 +197,7 @@ cspace = cspace || {};
         else {
             searchModel = transformSearchModel(keywordModel, {
                 "recordType": "recordType",
-                "query": "query"
+                "keywords": "keywords"
             });
         }
         searchEvent.fire(searchModel)
@@ -317,7 +317,7 @@ cspace = cspace || {};
                 decorators: {"addClass": "{styles}.step2SubHeader2AndOr"}
             },
             query: {
-                value: "${query}",
+                value: "${keywords}",
                 decorators: {"addClass": "{styles}.query"}
             },
             keywordSearchButton: {
