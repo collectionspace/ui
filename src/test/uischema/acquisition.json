@@ -1,13 +1,13 @@
 {
     "acquisition": {
         "properties": {
-            "relations": {
-                "default": {},
-                "type": "object"
-            },
             "termsUsed": {
                 "default": [],
                 "type": "array"
+            },
+            "relations": {
+                "default": {},
+                "type": "object"
             },
             "csid": {
                 "type": "string"
@@ -31,10 +31,6 @@
                         },
                         "type": "array"
                     },
-                    "objectOfferPriceCurrency": {
-                        "default": "USD",
-                        "type": "string"
-                    },
                     "acquisitionFunding": {
                         "items": {
                             "properties": {
@@ -48,7 +44,7 @@
                                     "type": "string"
                                 },
                                 "acquisitionFundingCurrency": {
-                                    "default": "USD",
+                                    "default": "usd",
                                     "type": "string"
                                 },
                                 "acquisitionFundingValue": {
@@ -59,15 +55,19 @@
                         },
                         "type": "array"
                     },
+                    "objectOfferPriceCurrency": {
+                        "default": "usd",
+                        "type": "string"
+                    },
                     "acquisitionAuthorizerDate": {
                         "type": "date"
                     },
                     "groupPurchasePriceCurrency": {
-                        "default": "USD",
+                        "default": "usd",
                         "type": "string"
                     },
                     "objectPurchasePriceCurrency": {
-                        "default": "USD",
+                        "default": "usd",
                         "type": "string"
                     },
                     "createdAt": {
@@ -117,11 +117,11 @@
                         "type": "array"
                     },
                     "originalObjectPurchasePriceCurrency": {
-                        "default": "USD",
+                        "default": "usd",
                         "type": "string"
                     },
                     "updatedAt": {
-                        "type": "string"
+                        "type": "date"
                     },
                     "acquisitionReason": {
                         "type": "string"
@@ -140,7 +140,7 @@
                         "type": "string"
                     },
                     "objectPurchaseOfferPriceCurrency": {
-                        "default": "USD",
+                        "default": "usd",
                         "type": "string"
                     },
                     "acquisitionProvisos": {
@@ -149,10 +149,10 @@
                     "transferOfTitleNumber": {
                         "type": "string"
                     },
-                    "ownersource": {
+                    "acquisitionAuthorizer": {
                         "type": "string"
                     },
-                    "acquisitionAuthorizer": {
+                    "ownersource": {
                         "type": "string"
                     },
                     "owners": {
