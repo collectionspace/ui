@@ -21,8 +21,29 @@ var rendererTester = function(){
         }
     };
 
-    var rendererTest = new jqUnit.TestCase("Renderer Tests", function () {
+    var bareRendererTest = new jqUnit.TestCase("Renderer Tests", function () {
         cspace.util.isTest = true;
+    });
+    
+    var rendererTest = cspace.tests.testEnvironment({
+        testCase: bareRendererTest,
+        components: {
+            globalBundle: {
+                type: "fluid.emptySubcomponent"
+            },
+            globalNavigator: {
+                type: "fluid.emptySubcomponent",
+            },
+            userLogin: {
+                type: "fluid.emptySubcomponent",
+            },
+            recordTypes: {
+                type: "fluid.emptySubcomponent"
+            },
+            messageBar: {
+                type: "fluid.emptySubcomponent"
+            }
+        }
     });
 
     rendererTest.test("buildProtoTree(): Basic tree, empty model", function () {
@@ -389,6 +410,70 @@ var rendererTester = function(){
         var selectors = {};
         cspace.renderUtils.buildSelectorsFromUISpec(testUISpec, selectors);        
         jqUnit.assertDeepEq("Selectors are properly generated from the uispec ", expectedSelectors, selectors);        
+    });
+    
+    fluid.defaults("cspace.checkBoxes", {
+        gradeNames: ["autoInit", "fluid.rendererComponent"],
+        mergePolicy: {
+            "rendererOptions.applier": "applier"
+        },
+        model: {
+            choices: ["TEST1", "TEST2", "TEST3"],
+            picked: ["TEST2", "TEST3"],
+            input2: true
+        },
+        protoTree: {
+            expander: {                  
+                type: "fluid.renderer.selection.inputs",
+                rowID: "row",
+                labelID: "label",
+                inputID: "input",
+                selectID: "checkboxes",
+                tree: {
+                    "selection": "${picked}",
+                    "optionlist": "${choices}",
+                    "optionnames": "${choices}"
+                }
+            },
+            input2: "${input2}"
+        },
+        renderOnInit: true,
+        selectors: {
+            row: ".csc-checkboxes-container",
+            "label": ".csc-checkboxes-label",
+            input: ".csc-checkboxes-input",
+            input2: ".csc-checkboxes-input2"
+        },
+        repeatingSelectors: ["row"],
+        resources: {
+            template: cspace.resourceSpecExpander({
+                fetchClass: "fastTemplate",
+                url: "%webapp/html/components/CheckBoxes.html",
+                options: {
+                    dataType: "html"
+                }
+            })
+        },
+        strings: {},
+        parentBundle: "{globalBundle}"
+    });
+    
+    fluid.fetchResources.primeCacheFromResources("cspace.checkBoxes");
+    
+    rendererTest.test("Check boxes", function () {
+        var checkboxes = cspace.checkBoxes(".csc-checkboxes");
+        jqUnit.assertTrue("Initial input2 value is", checkboxes.model.input2);
+        checkboxes.locate("input2").click();
+        jqUnit.assertFalse("Updated input2 value is", checkboxes.model.input2);
+        checkboxes.locate("input2").click();
+        jqUnit.assertTrue("Updated input2 value is", checkboxes.model.input2);
+        
+        jqUnit.assertDeepEq("Initial input value is", ["TEST2", "TEST3"], checkboxes.model.picked);
+        checkboxes.locate("input").eq(0).click();
+        jqUnit.assertDeepEq("Updated input value is", ["TEST1", "TEST2", "TEST3"], checkboxes.model.picked);
+        checkboxes.locate("input").eq(1).click();
+        checkboxes.locate("input").eq(2).click();
+        jqUnit.assertDeepEq("Updated input value is", ["TEST1"], checkboxes.model.picked);
     });
 };
 
