@@ -1,13 +1,27 @@
 {
     "person": {
         "properties": {
-            "displayNames": {
+            "occupations": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "type": "boolean"
                         },
-                        "displayName": {
+                        "occupation": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "createdBys": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "createdBy": {
                             "type": "string"
                         }
                     },
@@ -18,22 +32,17 @@
             "birthDateStart": {
                 "type": "date"
             },
-            "birthDateEnd": {
-                "type": "date"
-            }, 
             "deathDateStart": {
                 "type": "date"
             },
-            "deathDateEnd": {
-                "type": "date"
-            },                    
-            "groups": {
+            "termStatuss": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "type": "boolean"
                         },
-                        "group": {
+                        "termStatus": {
+                            "default": "provisional",
                             "type": "string"
                         }
                     },
@@ -41,19 +50,8 @@
                 },
                 "type": "array"
             },
-            "nationalities": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "nationality": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
+            "updatedAtEnd": {
+                "type": "string"
             },
             "genders": {
                 "items": {
@@ -62,6 +60,7 @@
                             "type": "boolean"
                         },
                         "gender": {
+                            "default": "",
                             "type": "string"
                         }
                     },
@@ -69,13 +68,19 @@
                 },
                 "type": "array"
             },
-            "occupations": {
+            "updatedAtStart": {
+                "type": "string"
+            },
+            "deathDateEnd": {
+                "type": "date"
+            },
+            "nationalities": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "type": "boolean"
                         },
-                        "occupation": {
+                        "nationality": {
                             "type": "string"
                         }
                     },
@@ -97,13 +102,16 @@
                 },
                 "type": "array"
             },
-            "termStatuses": {
+            "birthDateEnd": {
+                "type": "date"
+            },
+            "displayNames": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "type": "boolean"
                         },
-                        "termStatus": {
+                        "displayName": {
                             "type": "string"
                         }
                     },
@@ -111,19 +119,27 @@
                 },
                 "type": "array"
             },
-            "editDateStart": {
-                "type": "date"
-            },
-            "editDateEnd": {
-                "type": "date"
-            },
-            "editUsernames": {
+            "updatedBys": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "type": "boolean"
                         },
-                        "editUsername": {
+                        "updatedBy": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "groups": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "group": {
                             "type": "string"
                         }
                     },

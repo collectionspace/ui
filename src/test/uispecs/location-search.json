@@ -1,100 +1,4 @@
 {
-    ".csc-location-address-label": {
-        "messagekey": "location-addressLabel"
-    },
-    ".csc-location-name": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "hidePrimary": true,
-                    "elPath": "names",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-location-name": "${{row}.name}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "names"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    }
-                }
-            }
-        ]
-    },
-    ".csc-location-conditionNote": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "hidePrimary": true,
-                    "elPath": "conditionGroup",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-location-conditionNote": "${{row}.conditionNote}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "conditionGroup"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    }
-                }
-            }
-        ]
-    },
-    ".csc-location-displayName-label": {
-        "messagekey": "location-displayNameLabel"
-    },
-    ".csc-location-address": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "hidePrimary": true,
-                    "elPath": "addresses",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-location-address": "${{row}.address}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "addresses"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    }
-                }
-            }
-        ]
-    },
-    ".csc-location-termStatus-label": {
-        "messagekey": "location-termStatusLabel"
-    },
-    ".csc-location-locationType-label": {
-        "messagekey": "location-locationTypeLabel"
-    },
     ".csc-location-accessNote-label": {
         "messagekey": "location-accessNoteLabel"
     },
@@ -104,7 +8,6 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "hidePrimary": true,
                     "elPath": "accessNotes",
                     "protoTree": {
                         "expander": {
@@ -121,10 +24,14 @@
                             },
                             "type": "fluid.noexpand"
                         }
-                    }
+                    },
+                    "hidePrimary": true
                 }
             }
         ]
+    },
+    ".csc-location-address-label": {
+        "messagekey": "location-addressLabel"
     },
     ".csc-location-type": {
         "decorators": [
@@ -132,7 +39,6 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "hidePrimary": true,
                     "elPath": "locationTypes",
                     "protoTree": {
                         "expander": {
@@ -143,21 +49,21 @@
                                         ".csc-location-type": {
                                             "optionnames": [
                                                 "Please select a value",
-                                                "Shelf",
                                                 "Tray",
+                                                "Shelf",
                                                 "Drawer",
+                                                "Building",
                                                 "Unit",
-                                                "Room",
-                                                "Building"
+                                                "Room"
                                             ],
                                             "optionlist": [
                                                 "",
-                                                "shelf",
                                                 "tray",
+                                                "shelf",
                                                 "drawer",
+                                                "building",
                                                 "unit",
-                                                "room",
-                                                "building"
+                                                "room"
                                             ],
                                             "selection": "${{row}.locationType}"
                                         }
@@ -169,10 +75,29 @@
                             },
                             "type": "fluid.noexpand"
                         }
-                    }
+                    },
+                    "hidePrimary": true
                 }
             }
         ]
+    },
+    ".csc-location-updatedAtStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${updatedAtStart}"
+    },
+    ".csc-location-updatedAtEnd": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${updatedAtEnd}"
     },
     ".csc-location-termStatus": {
         "decorators": [
@@ -180,8 +105,7 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "hidePrimary": true,
-                    "elPath": "termStatuses",
+                    "elPath": "termStatuss",
                     "protoTree": {
                         "expander": {
                             "tree": {
@@ -189,6 +113,7 @@
                                     "repeatID": "repeat:",
                                     "tree": {
                                         ".csc-location-termStatus": {
+                                            "default": "provisional",
                                             "optionnames": [
                                                 "Provisional",
                                                 "Under Review",
@@ -206,15 +131,84 @@
                                     },
                                     "type": "fluid.renderer.repeat",
                                     "pathAs": "row",
-                                    "controlledBy": "termStatuses"
+                                    "controlledBy": "termStatuss"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
-                    }
+                    },
+                    "hidePrimary": true
                 }
             }
         ]
+    },
+    ".csc-location-conditionGroup": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "conditionGroup",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-location-conditionNote": "${{row}.conditionNote}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "conditionGroup"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-location-displayName-label": {
+        "messagekey": "location-displayNameLabel"
+    },
+    ".csc-location-name-label": {
+        "messagekey": "location-nameLabel"
+    },
+    ".csc-location-createdBy-label": {
+        "messagekey": "location-createdByLabel"
+    },
+    ".csc-location-address": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "addresss",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-location-address": "${{row}.address}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "addresss"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-location-updatedAt-label": {
+        "messagekey": "location-updatedAtLabel"
     },
     ".csc-location-securityNote": {
         "decorators": [
@@ -222,7 +216,6 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "hidePrimary": true,
                     "elPath": "securityNotes",
                     "protoTree": {
                         "expander": {
@@ -239,16 +232,20 @@
                             },
                             "type": "fluid.noexpand"
                         }
-                    }
+                    },
+                    "hidePrimary": true
                 }
             }
         ]
     },
+    ".csc-location-termStatus-label": {
+        "messagekey": "location-termStatusLabel"
+    },
     ".csc-location-conditionNote-label": {
         "messagekey": "location-conditionNoteLabel"
     },
-    ".csc-location-name-label": {
-        "messagekey": "location-nameLabel"
+    ".csc-location-locationType-label": {
+        "messagekey": "location-locationTypeLabel"
     },
     ".csc-location-displayName": {
         "decorators": [
@@ -256,7 +253,6 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "hidePrimary": true,
                     "elPath": "displayNames",
                     "protoTree": {
                         "expander": {
@@ -273,85 +269,109 @@
                             },
                             "type": "fluid.noexpand"
                         }
-                    }
+                    },
+                    "hidePrimary": true
                 }
             }
         ]
     },
-    ".csc-location-conditionNoteDate-label": {
-        "messagekey": "location-conditionNoteDateLabel"
-    },
-    ".csc-location-securityNote-label": {
-        "messagekey": "location-securityNoteLabel"
-    },
-    ".csc-location-editDate-label": {
-        "messagekey": "location-editDate"
-    },
-    ".csc-location-editDateStart-label": {
-        "messagekey": "location-editDateStartLabel"
-    },
-    ".csc-location-editDateStart": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
-            }
-        ],
-        "value": "${editDateStart}"
-    },
-    ".csc-location-editDateEnd-label": {
-        "messagekey": "location-editDateEndLabel"
-    },
-    ".csc-location-editDateEnd": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
-            }
-        ],
-        "value": "${editDateEnd}"
-    },
-    ".csc-location-editUsername-label": {
-        "messagekey": "location-editUsername"
-    },
-    ".csc-location-editUsername": {
+    ".csc-location-name": {
         "decorators": [
             {
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "hidePrimary": true,
-                    "elPath": "editUsernames",
+                    "elPath": "names",
                     "protoTree": {
                         "expander": {
                             "tree": {
                                 "expander": {
                                     "repeatID": "repeat:",
                                     "tree": {
-                                        ".csc-location-editUsername": {
-                                            "decorators": [
-                                                {
-                                                    "func": "cspace.autocomplete",
-                                                    "type": "fluid",
-                                                    "options": {
-                                                        "queryUrl": "../../../tenant/core/location/autocomplete/editUsername",
-                                                        "vocabUrl": "../../../tenant/core/location/source-vocab/editUsername"
-                                                    }
-                                                }
-                                            ],
-                                            "value": "${{row}.editUsername}"
-                                        }
+                                        ".csc-location-name": "${{row}.name}"
                                     },
                                     "type": "fluid.renderer.repeat",
                                     "pathAs": "row",
-                                    "controlledBy": "editUsernames"
+                                    "controlledBy": "names"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
-                    }
+                    },
+                    "hidePrimary": true
                 }
             }
         ]
+    },
+    ".csc-location-createdBy": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "createdBys",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-location-createdBy": "${{row}.createdBy}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "createdBys"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-location-updatedBy": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "updatedBys",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-location-updatedBy": "${{row}.updatedBy}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "updatedBys"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-location-updatedAtEnd-label": {
+        "messagekey": "location-updatedAtEndLabel"
+    },
+    ".csc-location-conditionNoteDate-label": {
+        "messagekey": "location-conditionNoteDateLabel"
+    },
+    ".csc-location-updatedAtStart-label": {
+        "messagekey": "location-updatedAtStartLabel"
+    },
+    ".csc-location-updatedBy-label": {
+        "messagekey": "location-updatedByLabel"
+    },
+    ".csc-location-securityNote-label": {
+        "messagekey": "location-securityNoteLabel"
     }
 }

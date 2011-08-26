@@ -1,27 +1,13 @@
 {
     "location": {
         "properties": {
-            "accessNotes": {
+            "createdBys": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "type": "boolean"
                         },
-                        "accessNote": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "addresses": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "address": {
+                        "createdBy": {
                             "type": "string"
                         }
                     },
@@ -58,14 +44,14 @@
                 },
                 "type": "array"
             },
-            "termStatuses": {
+            "termStatuss": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "type": "boolean"
                         },
                         "termStatus": {
-                            "default": "",
+                            "default": "provisional",
                             "type": "string"
                         }
                     },
@@ -73,19 +59,8 @@
                 },
                 "type": "array"
             },
-            "names": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "name": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
+            "updatedAtEnd": {
+                "type": "string"
             },
             "conditionGroup": {
                 "items": {
@@ -115,19 +90,58 @@
                 },
                 "type": "array"
             },
-            "editDateStart": {
-                "type": "date"
-            },
-            "editDateEnd": {
-                "type": "date"
-            },
-            "editUsernames": {
+            "names": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "type": "boolean"
                         },
-                        "editUsername": {
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "accessNotes": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "accessNote": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "updatedBys": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "updatedBy": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "updatedAtStart": {
+                "type": "string"
+            },
+            "addresss": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "address": {
                             "type": "string"
                         }
                     },

@@ -1,19 +1,11 @@
 {
     "loanin": {
         "properties": {
-            "loanInNumbers": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "loanInNumber": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
+            "loanRenewalApplicationDateStart": {
+                "type": "date"
+            },
+            "loanRenewalApplicationDateEnd": {
+                "type": "date"
             },
             "lenderGroup": {
                 "items": {
@@ -29,59 +21,67 @@
                 },
                 "type": "array"
             },
-            "loanInDateStart": {
+            "loanReturnDateStart": {
                 "type": "date"
             },
             "loanInDateEnd": {
                 "type": "date"
-            },            
-            "loanReturnDateStart": {
-                "type": "date"
             },
             "loanReturnDateEnd": {
                 "type": "date"
-            },            
-            "loanRenewalApplicationDateStart": {
+            },
+            "loanInDateStart": {
                 "type": "date"
             },
-            "loanRenewalApplicationDateEnd": {
+            "updatedAtEnd": {
                 "type": "date"
-            },                                    
+            },
             "loanPurposes": {
                 "items": {
                     "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
                         "loanPurpose": {
                             "default": "",
                             "type": "string"
-                        },
-                        "_primary": {
-                            "type": "boolean"
                         }
                     },
                     "type": "object"
                 },
                 "type": "array"
             },
-            "editDateStart": {
-                "type": "date"
-            },            
-            "editDateEnd": {
-                "type": "date"
-            },
-            "editUsernames": {
+            "updatedBys": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "type": "boolean"
                         },
-                        "editUsername": {
+                        "updatedBy": {
                             "type": "string"
                         }
                     },
                     "type": "object"
                 },
                 "type": "array"
-            }            
+            },
+            "loanInNumbers": {
+                "items": {
+                    "properties": {
+                        "loanInNumber": {
+                            "type": "string"
+                        },
+                        "_primary": {
+                            "type": "boolean"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "updatedAtStart": {
+                "type": "date"
+            }
         },
         "type": "object"
     }
