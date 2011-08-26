@@ -1,6 +1,199 @@
 {
     "cataloging": {
         "properties": {
+            "objectProductionPlaceGroup": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "objectProductionPlace": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "editionNumbers": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "editionNumber": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "copyNumbers": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "copyNumber": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "updatedAtEnd": {
+                "type": "date"
+            },
+            "materialGroup": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "material": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "objectNumbers": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "objectNumber": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "sexs": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "sex": {
+                            "default": "",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "updatedAtStart": {
+                "type": "date"
+            },
+            "technicalAttributeGroup": {
+                "items": {
+                    "properties": {
+                        "technicalAttribute": {
+                            "default": "",
+                            "type": "string"
+                        },
+                        "_primary": {
+                            "type": "boolean"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "objectProductionDates": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "objectProductionDate": {
+                            "properties": {
+                                "dateEarliestSingleQualifier": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "dateLatestDay": {
+                                    "type": "string"
+                                },
+                                "dateLatestYear": {
+                                    "type": "string"
+                                },
+                                "dateAssociation": {
+                                    "type": "string"
+                                },
+                                "dateEarliestSingleEra": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "dateDisplayDate": {
+                                    "type": "string"
+                                },
+                                "dateEarliestSingleCertainty": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "dateLatestEra": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "dateEarliestSingleQualifierValue": {
+                                    "type": "string"
+                                },
+                                "dateLatestCertainty": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "dateEarliestSingleYear": {
+                                    "type": "string"
+                                },
+                                "dateLatestQualifier": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "dateLatestQualifierValue": {
+                                    "type": "string"
+                                },
+                                "dateEarliestSingleQualifierUnit": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "datePeriod": {
+                                    "type": "string"
+                                },
+                                "_primary": {
+                                    "type": "boolean"
+                                },
+                                "dateLatestMonth": {
+                                    "type": "string"
+                                },
+                                "dateNote": {
+                                    "type": "string"
+                                },
+                                "dateLatestQualifierUnit": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "dateEarliestSingleDay": {
+                                    "type": "string"
+                                },
+                                "dateEarliestSingleMonth": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
             "responsibleDepartments": {
                 "items": {
                     "properties": {
@@ -16,13 +209,13 @@
                 },
                 "type": "array"
             },
-            "styles": {
+            "objectProductionOrganizationGroup": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "type": "boolean"
                         },
-                        "style": {
+                        "objectProductionOrganization": {
                             "type": "string"
                         }
                     },
@@ -30,27 +223,13 @@
                 },
                 "type": "array"
             },
-            "objectNameGroup": {
+            "updatedBys": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "type": "boolean"
                         },
-                        "objectName": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "objectProductionPlaceGroup": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "objectProductionPlace": {
+                        "updatedBy": {
                             "type": "string"
                         }
                     },
@@ -73,63 +252,15 @@
                 },
                 "type": "array"
             },
-            "objectStatusList": {
+            "forms": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "type": "boolean"
                         },
-                        "objectStatus": {
+                        "form": {
                             "default": "",
                             "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "techniqueGroup": {
-                "items": {
-                    "properties": {
-                        "technique": {
-                            "type": "string"
-                        },
-                        "_primary": {
-                            "type": "boolean"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "objectProductionDateStart": {
-                "type": "date"
-            },
-            "objectProductionDateEnd": {
-                "type": "date"
-            },
-            "materialGroup": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "material": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "copyNumbers": {
-                "items": {
-                    "properties": {
-                        "copyNumber": {
-                            "type": "string"
-                        },
-                        "_primary": {
-                            "type": "boolean"
                         }
                     },
                     "type": "object"
@@ -151,14 +282,71 @@
                 },
                 "type": "array"
             },
-            "objectNumbers": {
+            "objectProductionPersonGroup": {
                 "items": {
                     "properties": {
-                        "objectNumber": {
-                            "type": "string"
-                        },
                         "_primary": {
                             "type": "boolean"
+                        },
+                        "objectProductionPerson": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "styles": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "style": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "objectProductionPeopleGroup": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "objectProductionPeople": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "objectStatusList": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "objectStatus": {
+                            "default": "",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "inscriptionDescriptionInscribers": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "inscriptionDescriptionInscriber": {
+                            "type": "string"
                         }
                     },
                     "type": "object"
@@ -179,13 +367,13 @@
                 },
                 "type": "array"
             },
-            "titleGroup": {
+            "objectNameGroup": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "type": "boolean"
                         },
-                        "title": {
+                        "objectName": {
                             "type": "string"
                         }
                     },
@@ -193,13 +381,41 @@
                 },
                 "type": "array"
             },
-            "inscriptionDescriptionInscribers": {
+            "techniqueGroup": {
+                "items": {
+                    "properties": {
+                        "technique": {
+                            "type": "string"
+                        },
+                        "_primary": {
+                            "type": "boolean"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "inscriptionDescriptionMethods": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "type": "boolean"
                         },
-                        "inscriptionDescriptionInscriber": {
+                        "inscriptionDescriptionMethod": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "titleGroup": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "title": {
                             "type": "string"
                         }
                     },
@@ -222,36 +438,7 @@
                 },
                 "type": "array"
             },
-            "inscriptionDescriptionMethods": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "inscriptionDescriptionMethod": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "sexes": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "sex": {
-                            "default": "",
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "recordStatuses": {
+            "recordStatuss": {
                 "items": {
                     "properties": {
                         "_primary": {
@@ -259,112 +446,6 @@
                         },
                         "recordStatus": {
                             "default": "new",
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "technicalAttributeGroup": {
-                "items": {
-                    "properties": {
-                        "technicalAttribute": {
-                            "default": "",
-                            "type": "string"
-                        },
-                        "_primary": {
-                            "type": "boolean"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "objectProductionOrganizationGroup": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "objectProductionOrganization": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "forms": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "form": {
-                            "default": "",
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "editionNumbers": {
-                "items": {
-                    "properties": {
-                        "editionNumber": {
-                            "type": "string"
-                        },
-                        "_primary": {
-                            "type": "boolean"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "objectProductionPersonGroup": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "objectProductionPerson": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "objectProductionPeopleGroup": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "objectProductionPeople": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "editDateStart": {
-                "type": "date"
-            },
-            "editDateEnd": {
-                "type": "date"
-            },
-            "editUsernames": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "editUsername": {
                             "type": "string"
                         }
                     },
