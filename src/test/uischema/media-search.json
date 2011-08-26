@@ -1,6 +1,20 @@
 {
     "media": {
         "properties": {
+            "publishers": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "publisher": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
             "subjects": {
                 "items": {
                     "properties": {
@@ -14,6 +28,29 @@
                     "type": "object"
                 },
                 "type": "array"
+            },
+            "filenames": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "filename": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "updatedAtEnd": {
+                "type": "date"
+            },
+            "dateEnd": {
+                "type": "date"
+            },
+            "dateStart": {
+                "type": "date"
             },
             "rightsHolders": {
                 "items": {
@@ -29,13 +66,30 @@
                 },
                 "type": "array"
             },
-            "publishers": {
+            "sources": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "type": "boolean"
                         },
-                        "publisher": {
+                        "source": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "updatedAtStart": {
+                "type": "date"
+            },
+            "formats": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "format": {
                             "type": "string"
                         }
                     },
@@ -64,7 +118,7 @@
                             "type": "boolean"
                         },
                         "language": {
-                            "default": "",
+                            "default": "eng",
                             "type": "string"
                         }
                     },
@@ -86,12 +140,6 @@
                 },
                 "type": "array"
             },
-            "dateStart": {
-                "type": "date"
-            },
-            "dateEnd": {
-                "type": "date"
-            },
             "types": {
                 "items": {
                     "properties": {
@@ -107,13 +155,13 @@
                 },
                 "type": "array"
             },
-            "sources": {
-               "items": {
+            "updatedBys": {
+                "items": {
                     "properties": {
                         "_primary": {
                             "type": "boolean"
                         },
-                        "source": {
+                        "updatedBy": {
                             "type": "string"
                         }
                     },
@@ -128,54 +176,6 @@
                             "type": "boolean"
                         },
                         "identificationNumber": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "filenames": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "filename": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "formats": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "format": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
-            "editDateStart": {
-                "type": "date"
-            },
-            "editDateEnd": {
-                "type": "date"
-            },
-            "editUsernames": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "editUsername": {
                             "type": "string"
                         }
                     },

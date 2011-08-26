@@ -1,6 +1,43 @@
 {
+    ".csc-group-updatedAtStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${updatedAtStart}"
+    },
     ".csc-group-title-label": {
         "messagekey": "group-titleLabel"
+    },
+    ".csc-group-updatedBy": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "updatedBys",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-group-updatedBy": "${{row}.updatedBy}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "updatedBys"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "hidePrimary": true
+                }
+            }
+        ]
     },
     ".csc-group-owner": {
         "decorators": [
@@ -8,7 +45,6 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "hidePrimary": true,
                     "elPath": "owners",
                     "protoTree": {
                         "expander": {
@@ -22,8 +58,8 @@
                                                     "func": "cspace.autocomplete",
                                                     "type": "fluid",
                                                     "options": {
-                                                        "queryUrl": "../../chain/group/autocomplete/owner",
-                                                        "vocabUrl": "../../chain/group/source-vocab/owner"
+                                                        "queryUrl": "../../../tenant/core/group/autocomplete/owner",
+                                                        "vocabUrl": "../../../tenant/core/group/source-vocab/owner"
                                                     }
                                                 }
                                             ],
@@ -37,7 +73,8 @@
                             },
                             "type": "fluid.noexpand"
                         }
-                    }
+                    },
+                    "hidePrimary": true
                 }
             }
         ]
@@ -48,7 +85,6 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "hidePrimary": true,
                     "elPath": "titles",
                     "protoTree": {
                         "expander": {
@@ -65,82 +101,34 @@
                             },
                             "type": "fluid.noexpand"
                         }
-                    }
+                    },
+                    "hidePrimary": true
                 }
             }
         ]
+    },
+    ".csc-group-updatedBy-label": {
+        "messagekey": "group-updatedByLabel"
+    },
+    ".csc-group-updatedAtEnd-label": {
+        "messagekey": "group-updatedAtEndLabel"
+    },
+    ".csc-group-updatedAt-label": {
+        "messagekey": "group-updatedAtLabel"
+    },
+    ".csc-group-updatedAtStart-label": {
+        "messagekey": "group-updatedAtStartLabel"
     },
     ".csc-group-owner-label": {
         "messagekey": "group-ownerLabel"
     },
-    ".csc-group-editDate-label": {
-        "messagekey": "group-editDate"
-    },
-    ".csc-group-editDateStart-label": {
-        "messagekey": "group-editDateStartLabel"
-    },
-    ".csc-group-editDateStart": {
+    ".csc-group-updatedAtEnd": {
         "decorators": [
             {
                 "func": "cspace.datePicker",
                 "type": "fluid"
             }
         ],
-        "value": "${editDateStart}"
-    },
-    ".csc-group-editDateEnd-label": {
-        "messagekey": "group-editDateEndLabel"
-    },
-    ".csc-group-editDateEnd": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
-            }
-        ],
-        "value": "${editDateEnd}"
-    },
-    ".csc-group-editUsername-label": {
-        "messagekey": "group-editUsername"
-    },
-    ".csc-group-editUsername": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "hidePrimary": true,
-                    "elPath": "editUsernames",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-group-editUsername": {
-                                            "decorators": [
-                                                {
-                                                    "func": "cspace.autocomplete",
-                                                    "type": "fluid",
-                                                    "options": {
-                                                        "queryUrl": "../../../tenant/core/group/autocomplete/editUsername",
-                                                        "vocabUrl": "../../../tenant/core/group/source-vocab/editUsername"
-                                                    }
-                                                }
-                                            ],
-                                            "value": "${{row}.editUsername}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "editUsernames"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    }
-                }
-            }
-        ]
+        "value": "${updatedAtEnd}"
     }
 }

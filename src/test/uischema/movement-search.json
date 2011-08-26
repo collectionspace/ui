@@ -1,42 +1,39 @@
 {
     "movement": {
         "properties": {
-            "currentLocations": {
+            "plannedRemovalDateStart": {
+                "type": "date"
+            },
+            "movementContacts": {
                 "items": {
                     "properties": {
+                        "movementContact": {
+                            "type": "string"
+                        },
                         "_primary": {
                             "type": "boolean"
-                        },
-                        "currentLocation": {
-                            "type": "string"
                         }
                     },
                     "type": "object"
                 },
-                "type": "array"            
+                "type": "array"
             },
-            "locationDateStart": {
-                "type": "date"
-            },
-            "locationDateEnd": {
-                "type": "date"
-            },            
             "normalLocations": {
                 "items": {
                     "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
                         "normalLocation": {
                             "type": "string"
+                        },
+                        "_primary": {
+                            "type": "boolean"
                         }
                     },
                     "type": "object"
                 },
-                "type": "array"            
+                "type": "array"
             },
-            "movementContact": {
-                "type": "string"
+            "updatedAtEnd": {
+                "type": "date"
             },
             "movementMethods": {
                 "items": {
@@ -52,7 +49,13 @@
                     "type": "object"
                 },
                 "type": "array"
-            },            
+            },
+            "updatedAtStart": {
+                "type": "date"
+            },
+            "locationDateEnd": {
+                "type": "date"
+            },
             "movementReferenceNumbers": {
                 "items": {
                     "properties": {
@@ -65,15 +68,12 @@
                     },
                     "type": "object"
                 },
-                "type": "array"            
+                "type": "array"
             },
             "removalDateStart": {
                 "type": "date"
             },
-            "removalDateEnd": {
-                "type": "date"
-            },            
-            "reasonesForMove": {
+            "reasonForMoves": {
                 "items": {
                     "properties": {
                         "_primary": {
@@ -86,21 +86,38 @@
                     },
                     "type": "object"
                 },
-                "type": "array"            
-            },            
-            "editDateStart": {
+                "type": "array"
+            },
+            "removalDateEnd": {
                 "type": "date"
             },
-            "editDateEnd": {
+            "plannedRemovalDateEnd": {
                 "type": "date"
             },
-            "editUsernames": {
+            "locationDateStart": {
+                "type": "date"
+            },
+            "currentLocations": {
                 "items": {
                     "properties": {
                         "_primary": {
                             "type": "boolean"
                         },
-                        "editUsername": {
+                        "currentLocation": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "updatedBys": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "updatedBy": {
                             "type": "string"
                         }
                     },

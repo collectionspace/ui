@@ -1,6 +1,9 @@
 {
     "group": {
         "properties": {
+            "updatedAtEnd": {
+                "type": "date"
+            },
             "titles": {
                 "items": {
                     "properties": {
@@ -8,6 +11,20 @@
                             "type": "boolean"
                         },
                         "title": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            },
+            "updatedBys": {
+                "items": {
+                    "properties": {
+                        "_primary": {
+                            "type": "boolean"
+                        },
+                        "updatedBy": {
                             "type": "string"
                         }
                     },
@@ -29,25 +46,8 @@
                 },
                 "type": "array"
             },
-            "editDateStart": {
+            "updatedAtStart": {
                 "type": "date"
-            },
-            "editDateEnd": {
-                "type": "date"
-            },
-            "editUsernames": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "editUsername": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
             }
         },
         "type": "object"

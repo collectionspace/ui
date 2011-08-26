@@ -1,6 +1,15 @@
 {
-    ".csc-media-creator-label": {
-        "messagekey": "media-creatorLabel"
+    ".csc-media-filename-label": {
+        "messagekey": "media-filenameLabel"
+    },
+    ".csc-media-updatedAtStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${updatedAtStart}"
     },
     ".csc-media-creator": {
         "decorators": [
@@ -8,7 +17,6 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "hidePrimary": true,
                     "elPath": "creators",
                     "protoTree": {
                         "expander": {
@@ -37,71 +45,20 @@
                             },
                             "type": "fluid.noexpand"
                         }
-                    }
+                    },
+                    "hidePrimary": true
                 }
             }
         ]
-    },
-    ".csc-media-date-label": {
-        "messagekey": "media-dateLabel"
-    },
-    ".csc-media-dateStart-label": {
-        "messagekey": "media-dateStartLabel"
     },
     ".csc-media-dateEnd-label": {
         "messagekey": "media-dateEndLabel"
     },
-    ".csc-media-dateStart": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
-            }
-        ],
-        "value": "${dateStart}"
+    ".csc-media-identificationNumber-label": {
+        "messagekey": "media-identificationNumberLabel"
     },
-    ".csc-media-dateEnd": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
-            }
-        ],
-        "value": "${dateEnd}"
-    },
-    ".csc-media-filename-label": {
-        "messagekey": "media-filenameLabel"
-    },
-    ".csc-media-filename": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "hidePrimary": true,
-                    "elPath": "filenames",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-media-filename": "${{row}.filename}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "filenames"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    }
-                }
-            }
-        ]
-    },
-    ".csc-media-format-label": {
-        "messagekey": "media-formatLabel"
+    ".csc-media-language-label": {
+        "messagekey": "media-languageLabel"
     },
     ".csc-media-format": {
         "decorators": [
@@ -109,7 +66,6 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "hidePrimary": true,
                     "elPath": "formats",
                     "protoTree": {
                         "expander": {
@@ -126,160 +82,32 @@
                             },
                             "type": "fluid.noexpand"
                         }
-                    }
+                    },
+                    "hidePrimary": true
                 }
             }
         ]
     },
-    ".csc-media-identificationNumber-label": {
-        "messagekey": "media-identificationNumberLabel"
-    },
-    ".csc-media-identificationNumber": {
+    ".csc-media-dateEnd": {
         "decorators": [
             {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "hidePrimary": true,
-                    "elPath": "identificationNumbers",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-media-identificationNumber": "${{row}.identificationNumber}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "identificationNumbers"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    }
-                }
+                "func": "cspace.datePicker",
+                "type": "fluid"
             }
-        ]
+        ],
+        "value": "${dateEnd}"
     },
-    ".csc-media-language-label": {
-        "messagekey": "media-languageLabel"
-    },
-    ".csc-media-language": {
+    ".csc-media-updatedAtEnd": {
         "decorators": [
             {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "hidePrimary": true,
-                    "elPath": "languages",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-media-language": {
-                                            "optionnames": [
-                                                "Please select a value",
-                                                "Latin",
-                                                "Middle English",
-                                                "Old English",
-                                                "Ancient Greek",
-                                                "Korean",
-                                                "Swahili",
-                                                "Japanese",
-                                                "Chinese",
-                                                "Hebrew",
-                                                "German",
-                                                "Russian",
-                                                "Arabic",
-                                                "Portuguese",
-                                                "Italian",
-                                                "Spanish",
-                                                "French",
-                                                "English"
-                                            ],
-                                            "optionlist": [
-                                                "",
-                                                "latin",
-                                                "middleenglish",
-                                                "oldenglish",
-                                                "ancientgreek",
-                                                "korean",
-                                                "swahili",
-                                                "japanese",
-                                                "chinese",
-                                                "hebrew",
-                                                "german",
-                                                "russian",
-                                                "arabic",
-                                                "portuguese",
-                                                "italian",
-                                                "spn",
-                                                "french",
-                                                "eng"
-                                            ],
-                                            "selection": "${{row}.language}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "languages"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    }
-                }
+                "func": "cspace.datePicker",
+                "type": "fluid"
             }
-        ]
+        ],
+        "value": "${updatedAtEnd}"
     },
-    ".csc-media-publisher-label": {
-        "messagekey": "media-publisherLabel"
-    },
-    ".csc-media-publisher": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "hidePrimary": true,
-                    "elPath": "publishers",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-media-publisher": {
-                                            "decorators": [
-                                                {
-                                                    "func": "cspace.autocomplete",
-                                                    "type": "fluid",
-                                                    "options": {
-                                                        "queryUrl": "../../../tenant/core/media/autocomplete/publisher",
-                                                        "vocabUrl": "../../../tenant/core/media/source-vocab/publisher"
-                                                    }
-                                                }
-                                            ],
-                                            "value": "${{row}.publisher}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "publishers"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    }
-                }
-            }
-        ]
-    },
-    ".csc-media-rightsHolder-label": {
-        "messagekey": "media-rightsHolderLabel"
+    ".csc-media-updatedAtEnd-label": {
+        "messagekey": "media-updatedAtEndLabel"
     },
     ".csc-media-rightsHolder": {
         "decorators": [
@@ -287,7 +115,6 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "hidePrimary": true,
                     "elPath": "rightsHolders",
                     "protoTree": {
                         "expander": {
@@ -316,106 +143,45 @@
                             },
                             "type": "fluid.noexpand"
                         }
-                    }
+                    },
+                    "hidePrimary": true
                 }
             }
         ]
     },
-    ".csc-media-source-label": {
-        "messagekey": "media-sourceLabel"
-    },
-    ".csc-media-source": {
+    ".csc-media-updatedBy": {
         "decorators": [
             {
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "hidePrimary": true,
-                    "elPath": "sources",
+                    "elPath": "updatedBys",
                     "protoTree": {
                         "expander": {
                             "tree": {
                                 "expander": {
                                     "repeatID": "repeat:",
                                     "tree": {
-                                        ".csc-media-source": "${{row}.source}"
+                                        ".csc-media-updatedBy": "${{row}.updatedBy}"
                                     },
                                     "type": "fluid.renderer.repeat",
                                     "pathAs": "row",
-                                    "controlledBy": "sources"
+                                    "controlledBy": "updatedBys"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
-                    }
+                    },
+                    "hidePrimary": true
                 }
             }
         ]
     },
-    ".csc-media-subject-label": {
-        "messagekey": "media-subjectLabel"
+    ".csc-media-date-label": {
+        "messagekey": "media-dateLabel"
     },
-    ".csc-media-subject": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "hidePrimary": true,
-                    "elPath": "subjects",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-media-subject": "${{row}.subject}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "subjects"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    }
-                }
-            }
-        ]
-    },
-    ".csc-media-title-label": {
-        "messagekey": "media-titleLabel"
-    },
-    ".csc-media-title": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "hidePrimary": true,
-                    "elPath": "titles",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-media-title": "${{row}.title}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "titles"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    }
-                }
-            }
-        ]
-    },
-    ".csc-media-types-label": {
-        "messagekey": "media-typesLabel"
+    ".csc-media-type-label": {
+        "messagekey": "media-typeLabel"
     },
     ".csc-media-type": {
         "decorators": [
@@ -423,7 +189,6 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "hidePrimary": true,
                     "elPath": "types",
                     "protoTree": {
                         "expander": {
@@ -459,77 +224,300 @@
                             },
                             "type": "fluid.noexpand"
                         }
-                    }
+                    },
+                    "hidePrimary": true
                 }
             }
         ]
     },
-    ".csc-media-editDate-label": {
-        "messagekey": "media-editDate"
-    },
-    ".csc-media-editDateStart-label": {
-        "messagekey": "media-editDateStartLabel"
-    },
-    ".csc-media-editDateStart": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
-            }
-        ],
-        "value": "${editDateStart}"
-    },
-    ".csc-media-editDateEnd-label": {
-        "messagekey": "media-editDateEndLabel"
-    },
-    ".csc-media-editDateEnd": {
-        "decorators": [
-            {
-                "func": "cspace.datePicker",
-                "type": "fluid"
-            }
-        ],
-        "value": "${editDateEnd}"
-    },
-    ".csc-media-editUsername-label": {
-        "messagekey": "media-editUsername"
-    },
-    ".csc-media-editUsername": {
+    ".csc-media-source": {
         "decorators": [
             {
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "hidePrimary": true,
-                    "elPath": "editUsernames",
+                    "elPath": "sources",
                     "protoTree": {
                         "expander": {
                             "tree": {
                                 "expander": {
                                     "repeatID": "repeat:",
                                     "tree": {
-                                        ".csc-media-editUsername": {
+                                        ".csc-media-source": "${{row}.source}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "sources"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-media-subject": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "subjects",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-subject": "${{row}.subject}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "subjects"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-media-updatedBy-label": {
+        "messagekey": "media-updatedByLabel"
+    },
+    ".csc-media-updatedAtStart-label": {
+        "messagekey": "media-updatedAtStartLabel"
+    },
+    ".csc-media-creator-label": {
+        "messagekey": "media-creatorLabel"
+    },
+    ".csc-media-title": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "titles",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-title": "${{row}.title}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "titles"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-media-source-label": {
+        "messagekey": "media-sourceLabel"
+    },
+    ".csc-media-identificationNumber": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "identificationNumbers",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-identificationNumber": "${{row}.identificationNumber}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "identificationNumbers"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-media-filename": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "filenames",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-filename": "${{row}.filename}"
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "filenames"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-media-publisher-label": {
+        "messagekey": "media-publisherLabel"
+    },
+    ".csc-media-dateStart": {
+        "decorators": [
+            {
+                "func": "cspace.datePicker",
+                "type": "fluid"
+            }
+        ],
+        "value": "${dateStart}"
+    },
+    ".csc-media-subject-label": {
+        "messagekey": "media-subjectLabel"
+    },
+    ".csc-media-dateStart-label": {
+        "messagekey": "media-dateStartLabel"
+    },
+    ".csc-media-rightsHolder-label": {
+        "messagekey": "media-rightsHolderLabel"
+    },
+    ".csc-media-updatedAt-label": {
+        "messagekey": "media-updatedAtLabel"
+    },
+    ".csc-media-title-label": {
+        "messagekey": "media-titleLabel"
+    },
+    ".csc-media-format-label": {
+        "messagekey": "media-formatLabel"
+    },
+    ".csc-media-language": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "languages",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-language": {
+                                            "optionnames": [
+                                                "Please select a value",
+                                                "Middle English",
+                                                "Old English",
+                                                "Latin",
+                                                "Ancient Greek",
+                                                "Korean",
+                                                "Swahili",
+                                                "Japanese",
+                                                "Hebrew",
+                                                "Chinese",
+                                                "Arabic",
+                                                "German",
+                                                "Portuguese",
+                                                "Russian",
+                                                "French",
+                                                "Italian",
+                                                "Spanish",
+                                                "English"
+                                            ],
+                                            "optionlist": [
+                                                "",
+                                                "middleenglish",
+                                                "oldenglish",
+                                                "latin",
+                                                "ancientgreek",
+                                                "korean",
+                                                "swahili",
+                                                "japanese",
+                                                "hebrew",
+                                                "chinese",
+                                                "arabic",
+                                                "german",
+                                                "portuguese",
+                                                "russian",
+                                                "french",
+                                                "italian",
+                                                "spn",
+                                                "eng"
+                                            ],
+                                            "selection": "${{row}.language}"
+                                        }
+                                    },
+                                    "type": "fluid.renderer.repeat",
+                                    "pathAs": "row",
+                                    "controlledBy": "languages"
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
+                    },
+                    "hidePrimary": true
+                }
+            }
+        ]
+    },
+    ".csc-media-publisher": {
+        "decorators": [
+            {
+                "func": "cspace.makeRepeatable",
+                "type": "fluid",
+                "options": {
+                    "elPath": "publishers",
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                "expander": {
+                                    "repeatID": "repeat:",
+                                    "tree": {
+                                        ".csc-media-publisher": {
                                             "decorators": [
                                                 {
                                                     "func": "cspace.autocomplete",
                                                     "type": "fluid",
                                                     "options": {
-                                                        "queryUrl": "../../../tenant/core/media/autocomplete/editUsername",
-                                                        "vocabUrl": "../../../tenant/core/media/source-vocab/editUsername"
+                                                        "queryUrl": "../../../tenant/core/media/autocomplete/publisher",
+                                                        "vocabUrl": "../../../tenant/core/media/source-vocab/publisher"
                                                     }
                                                 }
                                             ],
-                                            "value": "${{row}.editUsername}"
+                                            "value": "${{row}.publisher}"
                                         }
                                     },
                                     "type": "fluid.renderer.repeat",
                                     "pathAs": "row",
-                                    "controlledBy": "editUsernames"
+                                    "controlledBy": "publishers"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
-                    }
+                    },
+                    "hidePrimary": true
                 }
             }
         ]
