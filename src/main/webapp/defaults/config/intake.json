@@ -54,13 +54,16 @@
                 "recordtypes",
                 "intake"
             ],
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "%readonlypages/IntakeTemplate.html",
-                    "templateSelector": ".csc-intake-template",
-                    "targetSelector": ".csc-record-edit-container"
-                } 
-            }
+            "components": {
+                "templateLocator": {
+                    "type": "cspace.pageBuilderIO.templateLocator",
+                    "options": {
+                        "pageSpec": "{pageBuilderIO}.options.pageSpec",
+                        "recordType": "{pageBuilderIO}.options.recordType"
+                    }
+                }
+            },
+            "pageSpec": {}
         }
     }
 }

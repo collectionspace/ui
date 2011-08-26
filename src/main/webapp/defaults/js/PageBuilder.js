@@ -321,9 +321,16 @@ cspace = cspace || {};
         finalInitFunction: "cspace.pageBuilderIO.templateLocator.finalInit",
         specs: {
             recordEditor: {
-                href: "%readonlypages/%recordTypeTemplate.html",
+                href: "%readonlypages/%recordTypeTemplate%template.html",
                 templateSelector: ".csc-%recordType-template",
                 targetSelector: ".csc-record-edit-container"
+            }
+        },
+        template: {
+            expander: {
+                type: "fluid.deferredInvokeCall",
+                func: "cspace.util.getUrlParameter",
+                args: "template"
             }
         }
     });
@@ -333,7 +340,8 @@ cspace = cspace || {};
             that.options.pageSpec[key] = spec;
             that.options.pageSpec[key].templateSelector = fluid.stringTemplate(that.options.pageSpec[key].templateSelector, {recordType: that.options.recordType});
             that.options.pageSpec[key].href = fluid.stringTemplate(that.options.pageSpec[key].href, {
-                recordType: that.options.recordType.charAt(0).toUpperCase() + that.options.recordType.slice(1)
+                recordType: that.options.recordType.charAt(0).toUpperCase() + that.options.recordType.slice(1),
+                template: that.options.template ? ("-" + that.options.template) : ""
             });
         });
     };

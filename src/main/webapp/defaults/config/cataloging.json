@@ -58,13 +58,16 @@
                 "namespaces",
                 "cataloging"
             ],
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "%readonlypages/CatalogingTemplate.html",
-                    "templateSelector": ".csc-cataloging-template",
-                    "targetSelector": ".csc-record-edit-container" 
+            "components": {
+                "templateLocator": {
+                    "type": "cspace.pageBuilderIO.templateLocator",
+                    "options": {
+                        "pageSpec": "{pageBuilderIO}.options.pageSpec",
+                        "recordType": "{pageBuilderIO}.options.recordType"
+                    }
                 }
-            }
+            },
+            "pageSpec": {}
         }
     }
 }
