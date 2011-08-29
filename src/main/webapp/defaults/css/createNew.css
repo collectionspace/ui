@@ -31,7 +31,10 @@
     font-size:14px;
     line-height:14px;
     min-width:100px;
-    padding:6px 20px 6px 10px;
+}
+
+.cs-createNew-content .cs-createNew-recordRow input {
+	margin:6px 0 6px 10px;
 }
 
 .cs-createNew-content .cs-createNew-totalOfOneCategories {
@@ -52,3 +55,15 @@
 	width: 49%; float: right;}
 .cs-createNew-content .cs-createNew-totalOfThreeCategories .cs-createNew-category3 {
 	width: 49%; float: left; margin-right:10px;}
+.cs-createNew-templates {
+    background: -webkit-gradient(linear, left top, left bottom, from(#DCDCDC), to(#F3F3F4)); 
+    background: -moz-linear-gradient(top, #DCDCDC, #F3F3F4);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#DCDCDC', endColorstr='#F3F3F4'); /* for IE */
+    padding: 5px 0 5px 25px; 
+}
+.cs-createNew-recordRadio {
+    margin: 3px 0;
+}
+.cs-createNew-templateSelection {
+	margin-left: 28px;
+}

@@ -309,6 +309,10 @@ cspace = cspace || {};
             createFromSelection: "fromScratch",
             templateSelection: "",
             templateNames: []
+        },
+        animationOpts: {
+            time: 300,
+            easing: "linear"
         }
     });
     
@@ -325,7 +329,7 @@ cspace = cspace || {};
         if (that.model.templates) {
             that.refreshView();
             that.locate("radio").prop("checked", true);
-            that.locate("templates").show();
+            that.locate("templates").show(that.options.animationOpts.time, that.options.animationOpts.easing);
         }
         updateModel(that);
     };
@@ -408,7 +412,7 @@ cspace = cspace || {};
     cspace.createNew.recordTemplateBox.preInit = function (that) {
         cspace.util.preInitMergeListeners(that.options, {
             collapseOn: function () {
-                that.locate("templates").hide();
+                that.locate("templates").hide(that.options.animationOpts.time, that.options.animationOpts.easing);
             }
         });
         fixupModel(that.model, that.applier, that.options.parentBundle.messageBase);
