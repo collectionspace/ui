@@ -25,10 +25,7 @@
                             "createTemplateBox": "pageBuilder-createTemplateBox"
                         }
                     }
-                },
-                "createTemplateBox": {
-                    "type": "cspace.createTemplateBox"
-                },
+                },         
                 "createNew": {
                     "type": "cspace.createNew",
                     "options": {

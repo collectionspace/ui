@@ -149,7 +149,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // CreateNew demands
         fluid.demands("createRecord", ["cspace.pageBuilder", "cspace.localData"], {
             funcName: "cspace.createNew.createRecord",
-            args: ["{createNew}.dom", "{createNew}.options.urls.newRecordLocalUrl"]
+            args: ["{createNew}.model", "{createNew}.options.urls.newRecordLocalUrl", "{createNew}.options.urls.template"]
         });
         
         // DataContext demands
@@ -611,14 +611,35 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // CreateNew demands
         fluid.demands("createRecord", "cspace.pageBuilder", {
             funcName: "cspace.createNew.createRecord",
-            args: ["{createNew}.dom", "{createNew}.options.urls.newRecordUrl"]
+            args: ["{createNew}.model", "{createNew}.options.urls.newRecordUrl", "{createNew}.options.urls.template"]
         });
         fluid.demands("createTemplate", "cspace.pageBuilder", {
             funcName: "cspace.createNew.createRecord",
-            args: ["{createNew}.dom", "{createNew}.options.urls.templateUrl"]
+            args: ["{createNew}.model", "{createNew}.options.urls.templateUrl", "{createNew}.options.urls.template"]
         });
         fluid.demands("createNew", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.createNew"
+        });
+        fluid.demands("cspace.createNew.templateViewDataSource",  ["cspace.createNew"], {
+            funcName: "cspace.URLDataSource",
+            args: {
+                url: "{createNew}.options.urls.templateViewsUrl",
+                targetTypeName: "cspace.createNew.templateViewDataSource"
+            }
+        });
+        fluid.demands("cspace.createNew.recordTemplateBox", "cspace.createNew", {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                createNewModel: "{createNew}.model",
+                createNewApplier: "{createNew}.applier",
+                listeners: {
+                    onShowTemplate: "{createNew}.events.collapseAll.fire",
+                    updateModel: "{createNew}.updateModel"
+                },
+                events: {
+                    collapseOn: "{createNew}.events.collapseAll"
+                }
+            }, "{arguments}.1"]
         });
         
         // DataContext demands

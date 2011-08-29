@@ -64,23 +64,21 @@ cspace = cspace || {};
         },
         selectors: {
             categories: ".csc-createNew-categories", //container for repeatable categories
-            "category:": ".csc-createNew-category", //to be repeated
+            category: ".csc-createNew-category", //to be repeated
             categoryHeader: ".csc-createNew-categoryHeader",
-            "row:": ".csc-createNew-recordRow", //row to be repeated
-            radio: ".csc-createNew-recordRadio", //radiobuttn
-            "label": ".csc-createNew-recordLabel", //label
+            rows: ".csc-createNew-recordRows", //row to be repeated
+            row: ".csc-createNew-recordRow",
             //create new button:
             createButton: ".csc-createNew-createButton",
             createTemplateButton: ".csc-createNew-createTemplateButton"
         },
-        selectorsToIgnore: ["categories"],
+        repeatingSelectors: ["category", "rows"],
         styles: {                   // Set of styles that the component will be adding onto selectors.
             categories: "cs-createNew-categories",
-            "category:": "cs-createNew-category",
+            category: "cs-createNew-category",
             categoryHeader: "cs-createNew-categoryHeader",
-            "row:": "cs-createNew-recordRow",
-            radio: "cs-createNew-recordRadio",
-            "label": "cs-createNew-recordLabel",
+            row: "cs-createNew-recordRow",
+            rows: "cs-createNew-recordRows",
             createButton: "cs-createNew-createButton",
             createTemplateButton: "cs-createNew-createTemplateButton",
             totalOf1: "cs-createNew-totalOfOneCategories",
@@ -98,12 +96,18 @@ cspace = cspace || {};
                 args: ["{createNew}"]
             },
             createRecord: "createRecord",
-            createTemplate: "createTemplate"
+            createTemplate: "createTemplate",
+            updateModel: {
+                funcName: "cspace.createNew.updateModel",
+                args: ["{createNew}", "{arguments}.0"]
+            }
         },
         urls: cspace.componentUrlBuilder({
-            newRecordUrl: "%webapp/html/%recordType.html",
-            newRecordLocalUrl: "%webapp/html/record.html?recordtype=%recordType",
+            newRecordUrl: "%webapp/html/%recordType.html%template",
+            newRecordLocalUrl: "%webapp/html/record.html?recordtype=%recordType%template",
             templateUrl: "%webapp/html/template.html?recordtype=%recordType",
+            templateViewsUrl: "%webapp/config/templateViews.json",
+            template: "&template=%template"
         }),
         newRecordUrl: "%recordUrl.html",
         resources: {
@@ -114,17 +118,34 @@ cspace = cspace || {};
                     dataType: "html"
                 }
             })
+        },
+        components: {
+            templateSource: {
+                type: "cspace.createNew.templateViewDataSource"
+            }
+        },
+        events: {
+            collapseAll: null,
+            updateModel: null
         }
     });
+    
+    cspace.createNew.updateModel = function (that, model) {
+        fluid.each(model, function (value, key) {
+            that.applier.requestChange(key, value);
+        });
+    };
     
     // A public function that is called as createNew's createRecord method is called, and
     // creates a new record by navigating to the page of the selected radio button.
     // Note that the record isn't actually created until the user clicks the save button. This
     // function will simply redirect user to a page where he is presented with an empty
     // record
-    cspace.createNew.createRecord = function (dom, url) {
+    cspace.createNew.createRecord = function (model, url, templateUrl) {
+        var template = model.createFromSelection === "fromTemplate" ? model.templateSelection : "";
         window.location = fluid.stringTemplate(url, {
-            recordType: dom.locate("radio").filter(":checked").attr("value")
+            recordType: model.currentSelection,
+            template: template ? fluid.stringTemplate(templateUrl, {template: template}) : ""
         });
     };
 
@@ -138,7 +159,7 @@ cspace = cspace || {};
         });
         //style category divs based on how many there are. If only 1, it should
         //take fullWidth style. Else first half should have "left", second half "right"
-        var categories = that.locate("category:");
+        var categories = that.locate("category");
         that.locate("categories").addClass(styles["totalOf" + categories.length]);
         $.each(categories, function (index, value) {
             $(value).addClass(styles["category" + (index + 1)]);
@@ -161,20 +182,21 @@ cspace = cspace || {};
         return {
             createButton: {
                 messagekey: "createButtonText",
-                decorators: {
+                decorators: [{
                     type: "jQuery",
                     func: "click",
                     args: that.createRecord
-                }
+                }, {"addClass": "{styles}.createButton"}]
             },
             createTemplateButton: {
                 messagekey: "createTemplateButtonText",
-                decorators: {
+                decorators: [{
                     type: "jQuery",
                     func: "click",
                     args: that.createTemplate
-                }
+                }, {"addClass": "{styles}.createTemplateButton"}]
             },
+            categories: {decorators: {"addClass": "{styles}.categories"}},
             expander: {
                 repeatID: "category",
                 type: "fluid.renderer.repeat",
@@ -182,24 +204,27 @@ cspace = cspace || {};
                 controlledBy: "categories",
                 tree: {
                     categoryHeader: {
-                        messagekey: "${{cat}.name}"
+                        messagekey: "${{cat}.name}",
+                        decorators: {"addClass": "{styles}.categoryHeader"}
                     },
                     expander: {
-                        repeatID: "row",
+                        repeatID: "rows",
                         type: "fluid.renderer.repeat",
                         pathAs: "rowdy",
                         valueAs: "rowdyVal",
                         controlledBy: "{cat}.arr",
                         tree: {
-                            "label": {
-                                messagekey: "${{rowdy}}"
-                            },
-                            radio: {
+                            row: {
                                 decorators: [{
-                                    type: "jQuery",
-                                    func: "attr",
-                                    args: ["value", "${{rowdyVal}}"]
-                                }]
+                                    type: "fluid",
+                                    func: "cspace.createNew.recordTemplateBox",
+                                    options: {
+                                        model: {
+                                            recordType: "${{rowdyVal}}",
+                                            templates: "${templateViews}"
+                                        }
+                                    }
+                                }, {"addClass": "{styles}.row"}]
                             }
                         }
                     }
@@ -220,12 +245,180 @@ cspace = cspace || {};
     
     cspace.createNew.finalInit = function (that) {
         cspace.util.modelBuilder.fixupModel(that.model);
-        // Check whether the components needs to be rendered as part of its initialization.
-        that.refreshView();
-        that.locate("radio").filter(":first").attr('checked', true);
+        that.templateSource.get(null, function (templateViews) {
+            that.applier.requestChange("templateViews", templateViews);
+            that.refreshView();
+            $("input[type|='radio']").filter(":first").prop('checked', true).change();
+        });
     };
     
     // This funtction executes on file load and starts the fetch process of component's template.
     fluid.fetchResources.primeCacheFromResources("cspace.createNew");
+    
+    fluid.defaults("cspace.createNew.recordTemplateBox", {
+        gradeNames: ["autoInit", "fluid.rendererComponent"],
+        mergePolicy: {
+            "rendererOptions.applier": "applier",
+            createNewApplier: "nomerge",
+            createNewModel: "preserve"
+        },
+        events: {
+            onShowTemplate: null,
+            collapseOn: null,
+            updateModel: null
+        },
+        produceTree: "cspace.createNew.recordTemplateBox.produceTree",
+        renderOnInit: true,
+        selectors: {
+            radio: ".csc-createNew-recordRadio",
+            "label": ".csc-createNew-recordLabel",
+            templates: ".csc-createNew-templates",
+            createFrom: ".csc-createNew-createFrom",
+            createInput: ".csc-createNew-createFrom-input",
+            createLabel: ".csc-createNew-createFrom-label",
+            templateSelection: ".csc-createNew-templateSelection"
+        },
+        repeatingSelectors: ["createFrom"],
+        styles: {
+            radio: "cs-createNew-recordRadio",
+            "label": "cs-createNew-recordLabel",
+            templates: "cs-createNew-templates",
+            templateSelection: "cs-createNew-templateSelection"
+        },
+        resources: {
+            template: cspace.resourceSpecExpander({
+                fetchClass: "fastTemplate",
+                url: "%webapp/html/components/RecordTemplateTemplate.html",
+                options: {
+                    dataType: "html"
+                }
+            })
+        },
+        invokers: {
+            updateCurrentSelection: {
+                funcName: "cspace.createNew.recordTemplateBox.updateCurrentSelection",
+                args: "{recordTemplateBox}"
+            }
+        },
+        strings: {},
+        parentBundle: "{globalBundle}",
+        preInitFunction: "cspace.createNew.recordTemplateBox.preInit",
+        model: {
+            createFromList: ["fromScratch", "fromTemplate"],
+            createFromNames: [],
+            createFromSelection: "fromScratch",
+            templateSelection: "",
+            templateNames: []
+        }
+    });
+    
+    var updateModel = function (that) {
+        that.events.updateModel.fire({
+            currentSelection: that.locate("radio").val(),
+            createFromSelection: that.model.createFromSelection,
+            templateSelection: that.model.templateSelection
+        });
+    };
+    
+    cspace.createNew.recordTemplateBox.updateCurrentSelection = function (that) {
+        that.events.onShowTemplate.fire();
+        if (that.model.templates) {
+            that.refreshView();
+            that.locate("radio").prop("checked", true);
+            that.locate("templates").show();
+        }
+        updateModel(that);
+    };
+    
+    cspace.createNew.recordTemplateBox.produceTree = function (that) {
+        return {
+            "label": {
+                messagekey: "${recordType}",
+                decorators: {"addClass": "{styles}.label"}
+            },
+            radio: {
+                decorators: [{
+                    type: "jQuery",
+                    func: "attr",
+                    args: ["value", "${recordType}"]
+                }, {
+                    type: "jQuery",
+                    func: "change",
+                    args: function () {
+                        that.updateCurrentSelection();
+                    }
+                }, {"addClass": "{styles}.radio"}]
+            }, 
+            expander: {
+                type: "fluid.renderer.condition",
+                condition: "${templates}",
+                trueTree: {
+                    templates: {decorators: [{"addClass": "{styles}.templates"}, {
+                        type: "jQuery",
+                        func: "hide"
+                    }]},
+                    expander: {                  
+                        type: "fluid.renderer.selection.inputs",
+                        rowID: "createFrom",
+                        labelID: "createLabel",
+                        inputID: "createInput",
+                        selectID: "createFromSelect",
+                        tree: {
+                            "selection": "${createFromSelection}",
+                            "optionlist": "${createFromList}",
+                            "optionnames": "${createFromNames}"
+                        }
+                    },
+                    templateSelection: {
+                        optionnames: "${templateNames}",
+                        optionlist: "${templates}",
+                        selection: "${templateSelection}",
+                        decorators: {"addClass": "{styles}.templateSelection"}
+                    }
+                },
+                falseTree: {
+                    templates: {
+                        decorators: {
+                            type: "jQuery",
+                            func: "hide"
+                        }
+                    }
+                }
+            }
+        };
+    };
+    
+    var lookupNames = function (applier, messageBase, list, key, prefix) {
+        fluid.each(list, function (value, index) {
+            applier.requestChange(fluid.model.composeSegments(key, index), 
+                cspace.util.lookupMessage(messageBase, prefix + "-" + value));
+        });
+    };
+    
+    var fixupModel = function (model, applier, messageBase) {
+        var exists = fluid.get(model, "templates")[model.recordType];
+        applier.requestChange("templates", exists ? exists.templates : undefined);
+        if (exists) {
+            applier.requestChange("templateSelection", exists.templates[0]);
+        }
+        lookupNames(applier, messageBase, model.createFromList, "createFromNames", "createnew");
+        lookupNames(applier, messageBase, model.templates, "templateNames", "template");
+    };
+    
+    cspace.createNew.recordTemplateBox.preInit = function (that) {
+        cspace.util.preInitMergeListeners(that.options, {
+            collapseOn: function () {
+                that.locate("templates").hide();
+            }
+        });
+        fixupModel(that.model, that.applier, that.options.parentBundle.messageBase);
+        fluid.each(["templateSelection", "createFromSelection"], function (value) {
+            that.applier.modelChanged.addListener(value, function () {
+                updateModel(that);
+            });
+        });
+    };
+    
+    fluid.fetchResources.primeCacheFromResources("cspace.createNew.recordTemplateBox");
     
 })(jQuery, fluid);
