@@ -44,7 +44,7 @@
                                         "details": {
                                             "options": {
                                                 "selectors": {
-                                                    "identificationNumber": ".csc-loanin-loanInNumber"
+                                                    "identificationNumber": ".csc-loanIn-loanInNumber"
                                                 },
                                                 "strings": {
                                                     "identificationNumberRequired": "Please specify a Loan In Number"
