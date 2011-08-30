@@ -107,7 +107,8 @@ cspace = cspace || {};
             newRecordLocalUrl: "%webapp/html/record.html?recordtype=%recordType%template",
             templateUrl: "%webapp/html/template.html?recordtype=%recordType",
             templateViewsUrl: "%webapp/config/templateViews.json",
-            template: "&template=%template"
+            template: "?template=%template",
+            templateLocal: "&template=%template"
         }),
         newRecordUrl: "%recordUrl.html",
         resources: {
