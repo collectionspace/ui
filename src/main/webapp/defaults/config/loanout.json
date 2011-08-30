@@ -10,7 +10,7 @@
                     "type":  "cspace.recordEditor",
                     "options": {
                         "selectors": {
-                            "identificationNumber": ".csc-loanout-loanOutNumber"
+                            "identificationNumber": ".csc-loanOut-loanOutNumber"
                         },
                         "strings": {
                             "identificationNumberRequired": "Please specify a Loan Out Number"
