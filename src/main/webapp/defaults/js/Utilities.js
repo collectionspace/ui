@@ -683,6 +683,7 @@ fluid.registerNamespace("cspace.util");
         var that = fluid.initView("cspace.util.urnToStringFieldConverter", container, options);
         var func = that.container.val() ? "val" : "text";
         that.container[func](that.options.convert(that.container[func]()));
+        that.container.prop("disabled", true);
         return that;   
     };
     
@@ -732,6 +733,7 @@ fluid.registerNamespace("cspace.util");
             return;
         } 
         selector.text(options.names[index]);
+        selector.prop("disabled", true);
     };
     
     fluid.defaults("cspace.util.nameForValueFinder", {
@@ -769,10 +771,7 @@ fluid.registerNamespace("cspace.util");
                     newspec.expander.push(expander);
                 });
             }
-            else if (typeof val === "string") {
-                newspec[key] = val;
-            }
-            else if (val.messagekey) {
+            else if (typeof val === "string" || val.messagekey || isDecorator(val, "addClass")) {
                 newspec[key] = val;
             }
             else if (val.selection) { 
