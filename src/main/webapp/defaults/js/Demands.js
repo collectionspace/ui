@@ -16,6 +16,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     fluid.registerNamespace("cspace");
     
     cspace.includeLocalDemands = function () {
+    
+        fluid.demands("cspace.search.searchView.buildUrl", ["cspace.search.searchView", "cspace.localData"], {
+            funcName: "cspace.search.searchView.buildUrlLocal",
+            args: ["{searchView}.model.searchModel", "{searchView}.options.urls"]
+        });
         
         fluid.demands("cspace.advancedSearch.fetcher", ["cspace.localData", "cspace.advancedSearch"], {
             options: {
@@ -1476,11 +1481,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         fluid.demands("cspace.search.searchView.buildUrl", "cspace.search.searchView", {
             funcName: "cspace.search.searchView.buildUrlDefault",
-            args: ["{searchView}.model.searchModel", "{searchView}.options.urls"]
-        });
-        fluid.demands("cspace.search.searchView.buildUrl", ["cspace.search.searchView", "cspace.localData"], {
-            funcName: "cspace.search.searchView.buildUrlLocal",
-            args: ["{searchView}.model.searchModel", "{searchView}.options.urls"]
+            args: ["{searchView}.model.searchModel", "{searchView}.options.urls", "{arguments}.0"]
         });
         
         // searchBox demands

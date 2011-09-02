@@ -71,6 +71,7 @@
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
     <js>/defaults/js/Footer.js</js>
+    <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/Repeatable.js</js>
     <js>/defaults/js/AdvancedSearch.js</js>
@@ -190,6 +191,7 @@
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
     <js>/defaults/js/Footer.js</js>
+    <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/DataSource.js</js>
     <js>/defaults/js/DataContext.js</js>
@@ -242,6 +244,7 @@
     <js>/defaults/js/SearchBox.js</js>
     <js>/defaults/js/Header.js</js>
     <js>/defaults/js/Footer.js</js>
+    <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/DataSource.js</js>
     <js>/defaults/js/DataContext.js</js>

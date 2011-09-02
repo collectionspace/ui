@@ -387,7 +387,8 @@ cspace = cspace || {};
             sortKey: pagerModel.sortKey,
             sortDir: pagerModel.sortDir
         });
-        var url = that.buildUrl();
+        var type = searchModel.fields ? "POST" : "GET";
+        var url = that.buildUrl(type);
         that.events.onSearch.fire();
         fluid.log("Querying url " + url);
         fluid.fetchResources({
@@ -399,7 +400,7 @@ cspace = cspace || {};
                         fields: searchModel.fields,
                         operation: searchModel.operation
                     }) : undefined,
-                    type: searchModel.fields ? "POST" : "GET",
+                    type: type,
                     success: function (responseData, textStatus) {
                         if (responseData.isError === true) {
                             fluid.each(responseData.messages, function (message) {
@@ -462,14 +463,19 @@ cspace = cspace || {};
         messageBar.hide();
     };
     
-    cspace.search.searchView.buildUrlDefault = function (options, urls) {
-        return fluid.stringTemplate(urls.defaultUrl, {
+    cspace.search.searchView.buildUrlDefault = function (options, urls, type) {
+        var url = fluid.stringTemplate(urls.defaultUrl, {
             recordType: options.recordType,
             keywords: options.keywords,
             pageNum: options.pageIndex ? fluid.stringTemplate(urls.pageNum, {pageNum: options.pageIndex}) : "",
             pageSize: options.pageSize ? fluid.stringTemplate(urls.pageSize, {pageSize: options.pageSize}) : "",
             sort: options.sortKey ? fluid.stringTemplate(urls.sort, {sortKey: options.sortKey, sortDir: options.sortDir || "1"}) : ""
         });
+        // TODO: Remove this after app layer can properly handle empty quesry when posting.
+        if (type === "POST") {
+            url = url.replace(/query=.*&/i, "");
+        }
+        return url;
     };
     cspace.search.searchView.buildUrlLocal = function (options, urls) {
         return fluid.stringTemplate(urls.localUrl, {recordType: options.recordType});
