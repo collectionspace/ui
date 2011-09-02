@@ -127,7 +127,6 @@ cspace = cspace || {};
         
         that.options.applier.modelChanged.addListener("fields", function (model, oldModel, changeRequest) {
             processChanges(that, true);
-            that.options.messageBar.hide();
         });
 
         that.options.dataContext.events.onError.addListener(makeDCErrorHandler(that));
