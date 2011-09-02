@@ -559,6 +559,7 @@ fluid.registerNamespace("cspace.util");
                     if (isNaN(parsed)) {
                         throw "Invalid Float";
                     }
+                    return parsed;
                     break;
                 default:
                     return value;
