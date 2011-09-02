@@ -334,6 +334,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.includeDemands = function () {
+    
+        // Validator
+        fluid.demands("cspace.validator", "cspace.recordEditor", {
+            options: {  
+                recordType: "{pageBuilderIO}.options.recordType",
+                schema: "{pageBuilder}.schema"
+            }
+        });
         
         // Search history
         fluid.demands("cspace.searchTools.block", "cspace.searchTools", {

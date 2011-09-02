@@ -242,6 +242,14 @@ cspace = cspace || {};
                         that.options.applier.requestChange("namespace", namespace);
                     }
                 }
+                var validatedModel = that.validator.validate(that.model);
+                if (!validatedModel) {
+                    that.options.messageBar.show(that.lookupMessage("invalidFields"), null, true);
+                    return false;
+                }
+                else {
+                    that.applier.requestChange("", validatedModel)
+                }
                 that.locate("save").prop("disabled", true);
                 if (that.model.csid) {
                     that.options.dataContext.update();
@@ -537,6 +545,9 @@ cspace = cspace || {};
                 options: {
                     elPath: "modelToClone"
                 }
+            },
+            validator: {
+                type: "cspace.validator"
             }
         },
         invokers: {

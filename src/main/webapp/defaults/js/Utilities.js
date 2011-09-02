@@ -534,6 +534,74 @@ fluid.registerNamespace("cspace.util");
         permission: "read"
     });
     
+    fluid.defaults("cspace.validator", {
+        gradeNames: ["autoInit", "fluid.littleComponent"],
+        finalInitFunction: "cspace.validator.finalInit",
+        schema: {},
+        recordType: ""
+    });
+    
+    cspace.validator.finalInit = function (that) {
+        var schema = that.options.schema;
+        schema = schema[that.options.recordType].properties;
+        
+        var validatePrimitive = function (value, type) {
+            switch(type) {
+                case "integer":
+                    var parsed = parseInt(value, 10);
+                    if (isNaN(parsed)) {
+                        throw "Invalid Integer";
+                    }
+                    return parsed;
+                    break;
+                case "float":
+                    var parsed = parseFloat(value);
+                    if (isNaN(parsed)) {
+                        throw "Invalid Float";
+                    }
+                    break;
+                default:
+                    return value;
+                    break;
+            }
+        };
+        
+        var validateImpl = function (data, schema) {
+            fluid.each(data, function (value, key) {
+                var subSchema = schema[key];
+                if (!value || !subSchema) {
+                    return;
+                }
+                var type = subSchema.type;
+                if (fluid.isPrimitive(value)) {
+                    data[key] = validatePrimitive(value, type);
+                }
+                else if (typeof value === "object") {
+                    if (type === "array") {
+                        subSchema = subSchema.items ? fluid.transform(value, function () {
+                            return subSchema.items;
+                        }) : [];
+                    }
+                    else if (type === "object") {
+                        subSchema = subSchema.properties;
+                    }
+                    validateImpl(value, subSchema);
+                }
+            });
+        };
+        
+        that.validate = function (data) {
+            var data = fluid.copy(data);
+            try {
+                validateImpl(data, schema);
+            }
+            catch (e) {
+                return;
+            }
+            return data;
+        };
+    };
+    
     // This will eventually go away once the getBeanValue strategy is used everywhere.
     cspace.util.getBeanValue = function (root, EL, schema, permManager) {
         if (EL === "" || EL === null || EL === undefined) {

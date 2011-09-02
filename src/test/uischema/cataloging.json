@@ -1053,7 +1053,7 @@
                         "type": "array"
                     },
                     "numberOfObjects": {
-                        "type": "string"
+                        "type": "integer"
                     },
                     "recordStatus": {
                         "default": "new",

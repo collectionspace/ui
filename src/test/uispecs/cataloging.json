@@ -2922,7 +2922,15 @@
         ".csc-collection-object-inscriptionContentScript-label": {
             "messagekey": "collection-object-inscriptionContentScriptLabel"
         },
-        ".csc-object-identification-number-objects": "${fields.numberOfObjects}",
+        ".csc-object-identification-number-objects": {"value": "${fields.numberOfObjects}", 
+            "decorators": [{
+                "func": "cspace.inputValidator",
+                "type": "fluid",
+                "options": {
+                    "type": "integer"
+                } 
+            }]
+        },
         ".csc-collection-object-technicalAttributeGroup": {
             "decorators": [
                 {

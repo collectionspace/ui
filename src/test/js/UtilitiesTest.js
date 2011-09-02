@@ -352,23 +352,23 @@ var utilitiesTester = function ($) {
                     "options": {
                         "list": [
                             "",
-                            "swissfranc",
-                            "gbp",
                             "swedishkrona",
+                            "swissfranc",
                             "danishkrone",
+                            "gbp",
                             "eur",
-                            "canadiandollar",
-                            "usd"
+                            "usd",
+                            "canadiandollar"
                         ],
                         "names": [
                             "Please select a value",
-                            "Swiss Franc",
-                            "Pound Sterling",
                             "Swedish Krona",
+                            "Swiss Franc",
                             "Danish Krone",
+                            "Pound Sterling",
                             "Euro",
-                            "Canadian Dollar",
-                            "US Dollar"
+                            "US Dollar",
+                            "Canadian Dollar"
                         ]
                     }
                 }
@@ -409,23 +409,23 @@ var utilitiesTester = function ($) {
                                                         "options": {
                                                             "list": [
                                                                 "",
-                                                                "swissfranc",
-                                                                "gbp",
                                                                 "swedishkrona",
+                                                                "swissfranc",
                                                                 "danishkrone",
+                                                                "gbp",
                                                                 "eur",
-                                                                "canadiandollar",
-                                                                "usd"
+                                                                "usd",
+                                                                "canadiandollar"
                                                             ],
                                                             "names": [
                                                                 "Please select a value",
-                                                                "Swiss Franc",
-                                                                "Pound Sterling",
                                                                 "Swedish Krona",
+                                                                "Swiss Franc",
                                                                 "Danish Krone",
+                                                                "Pound Sterling",
                                                                 "Euro",
-                                                                "Canadian Dollar",
-                                                                "US Dollar"
+                                                                "US Dollar",
+                                                                "Canadian Dollar"
                                                             ]
                                                         }
                                                     }
@@ -558,23 +558,23 @@ var utilitiesTester = function ($) {
                     "options": {
                         "list": [
                             "",
-                            "swissfranc",
-                            "gbp",
                             "swedishkrona",
+                            "swissfranc",
                             "danishkrone",
+                            "gbp",
                             "eur",
-                            "canadiandollar",
-                            "usd"
+                            "usd",
+                            "canadiandollar"
                         ],
                         "names": [
                             "Please select a value",
-                            "Swiss Franc",
-                            "Pound Sterling",
                             "Swedish Krona",
+                            "Swiss Franc",
                             "Danish Krone",
+                            "Pound Sterling",
                             "Euro",
-                            "Canadian Dollar",
-                            "US Dollar"
+                            "US Dollar",
+                            "Canadian Dollar"
                         ]
                     }
                 }
@@ -590,7 +590,9 @@ var utilitiesTester = function ($) {
         ".csc-acquisition-groupPurchasePriceValue-label": {
             "messagekey": "acquisition-groupPurchasePriceValueLabel"
         },
-        ".csc-acquisition-updatedAt": "${fields.updatedAt}",
+        ".csc-acquisition-updatedAt": {
+            "value": "${fields.updatedAt}"
+        },
         ".csc-acquisition-acquisitionDates-label": {
             "messagekey": "acquisition-acquisitionDatesLabel"
         },
@@ -668,23 +670,23 @@ var utilitiesTester = function ($) {
                     "options": {
                         "list": [
                             "",
-                            "swissfranc",
-                            "gbp",
                             "swedishkrona",
+                            "swissfranc",
                             "danishkrone",
+                            "gbp",
                             "eur",
-                            "canadiandollar",
-                            "usd"
+                            "usd",
+                            "canadiandollar"
                         ],
                         "names": [
                             "Please select a value",
-                            "Swiss Franc",
-                            "Pound Sterling",
                             "Swedish Krona",
+                            "Swiss Franc",
                             "Danish Krone",
+                            "Pound Sterling",
                             "Euro",
-                            "Canadian Dollar",
-                            "US Dollar"
+                            "US Dollar",
+                            "Canadian Dollar"
                         ]
                     }
                 }
@@ -702,23 +704,23 @@ var utilitiesTester = function ($) {
                     "options": {
                         "list": [
                             "",
-                            "swissfranc",
-                            "gbp",
                             "swedishkrona",
+                            "swissfranc",
                             "danishkrone",
+                            "gbp",
                             "eur",
-                            "canadiandollar",
-                            "usd"
+                            "usd",
+                            "canadiandollar"
                         ],
                         "names": [
                             "Please select a value",
-                            "Swiss Franc",
-                            "Pound Sterling",
                             "Swedish Krona",
+                            "Swiss Franc",
                             "Danish Krone",
+                            "Pound Sterling",
                             "Euro",
-                            "Canadian Dollar",
-                            "US Dollar"
+                            "US Dollar",
+                            "Canadian Dollar"
                         ]
                     }
                 }
@@ -758,6 +760,9 @@ var utilitiesTester = function ($) {
         ".csc-acquisition-acquisitionDate-label": {
             "messagekey": "acquisition-acquisitionDateLabel"
         },
+        ".csc-acquisition-domaindata-label": {
+            "messagekey": "acquisition-domaindataLabel"
+        },
         ".csc-acquisition-original-object-purchase-price-currency": {
             "value": "${fields.originalObjectPurchasePriceCurrency}",
             "decorators": [
@@ -767,23 +772,23 @@ var utilitiesTester = function ($) {
                     "options": {
                         "list": [
                             "",
-                            "swissfranc",
-                            "gbp",
                             "swedishkrona",
+                            "swissfranc",
                             "danishkrone",
+                            "gbp",
                             "eur",
-                            "canadiandollar",
-                            "usd"
+                            "usd",
+                            "canadiandollar"
                         ],
                         "names": [
                             "Please select a value",
-                            "Swiss Franc",
-                            "Pound Sterling",
                             "Swedish Krona",
+                            "Swiss Franc",
                             "Danish Krone",
+                            "Pound Sterling",
                             "Euro",
-                            "Canadian Dollar",
-                            "US Dollar"
+                            "US Dollar",
+                            "Canadian Dollar"
                         ]
                     }
                 }
