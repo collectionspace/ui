@@ -1481,7 +1481,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         fluid.demands("cspace.search.searchView.buildUrl", "cspace.search.searchView", {
             funcName: "cspace.search.searchView.buildUrlDefault",
-            args: ["{searchView}.model.searchModel", "{searchView}.options.urls", "{arguments}.0"]
+            args: ["{searchView}.model.searchModel", "{searchView}.options.urls"]
         });
         
         // searchBox demands

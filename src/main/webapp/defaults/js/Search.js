@@ -289,9 +289,7 @@ cspace = cspace || {};
     cspace.search.searchView.handleAdvancedSearch = function (searchModel, that) {
         that.options.messageBar.hide();
         that.applier.requestChange("results", []);
-        if (searchModel.fields) {
-            searchModel.keywords = "";
-        } else {
+        if (!searchModel.fields) {
             searchModel.fields = undefined;
         }
         that.updateModel(searchModel);
@@ -387,8 +385,7 @@ cspace = cspace || {};
             sortKey: pagerModel.sortKey,
             sortDir: pagerModel.sortDir
         });
-        var type = searchModel.fields ? "POST" : "GET";
-        var url = that.buildUrl(type);
+        var url = that.buildUrl();
         that.events.onSearch.fire();
         fluid.log("Querying url " + url);
         fluid.fetchResources({
@@ -400,7 +397,7 @@ cspace = cspace || {};
                         fields: searchModel.fields,
                         operation: searchModel.operation
                     }) : undefined,
-                    type: type,
+                    type: searchModel.fields ? "POST" : "GET",
                     success: function (responseData, textStatus) {
                         if (responseData.isError === true) {
                             fluid.each(responseData.messages, function (message) {
@@ -463,7 +460,7 @@ cspace = cspace || {};
         messageBar.hide();
     };
     
-    cspace.search.searchView.buildUrlDefault = function (options, urls, type) {
+    cspace.search.searchView.buildUrlDefault = function (options, urls) {
         var url = fluid.stringTemplate(urls.defaultUrl, {
             recordType: options.recordType,
             keywords: options.keywords,
@@ -471,10 +468,6 @@ cspace = cspace || {};
             pageSize: options.pageSize ? fluid.stringTemplate(urls.pageSize, {pageSize: options.pageSize}) : "",
             sort: options.sortKey ? fluid.stringTemplate(urls.sort, {sortKey: options.sortKey, sortDir: options.sortDir || "1"}) : ""
         });
-        // TODO: Remove this after app layer can properly handle empty quesry when posting.
-        if (type === "POST") {
-            url = url.replace(/query=.*&/i, "");
-        }
         return url;
     };
     cspace.search.searchView.buildUrlLocal = function (options, urls) {

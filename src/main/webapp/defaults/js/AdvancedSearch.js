@@ -186,20 +186,16 @@ cspace = cspace || {};
     };
     
     cspace.advancedSearch.search = function (searchEvent, keywordModel, fieldsModel) {
-        var searchModel;
+        var searchModel = {};
+        var rules = {
+            "recordType": "recordType",
+            "keywords": "keywords"
+        };
         if (fieldsModel) {
-            searchModel = transformSearchModel(keywordModel, {
-                "operation": "operation",
-                "recordType": "recordType"
-            });
+            rules.operation = "operation";
             searchModel.fields = fluid.copy(fieldsModel);
         }
-        else {
-            searchModel = transformSearchModel(keywordModel, {
-                "recordType": "recordType",
-                "keywords": "keywords"
-            });
-        }
+        fluid.merge(null, searchModel, transformSearchModel(keywordModel, rules));
         searchEvent.fire(searchModel)
     };
     
