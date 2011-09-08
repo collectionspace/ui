@@ -23,38 +23,34 @@ cspace = cspace || {};
                 decorators: {"addClass": "{styles}.title"}, 
                 messagekey: "searchTips-title"
             },
-            instructionsTop: {
-                decorators: {"addClass": "{styles}.instructionsTop"}, 
-                messagekey: "searchTips-instructionsTop"
-            },
-            instructionsDate: {
-                decorators: {"addClass": "{styles}.instructionsDate"}, 
-                messagekey: "searchTips-instructionsDate"
-            },
-            instructionsNumber: {
-                decorators: {"addClass": "{styles}.instructionsNumber"}, 
-                messagekey: "searchTips-instructionsNumber"
-            },
-            instructionsBottom: {
-                decorators: {"addClass": "{styles}.instructionsBottom"}, 
-                messagekey: "searchTips-instructionsBottom"
+            expander: {
+                repeatID: "instructions",
+                type: "fluid.renderer.repeat",
+                pathAs: "row",
+                controlledBy: "messagekeys",
+                tree: {
+                    messagekey: "${{row}}"
+                }
             }
-        },
+	    },
+	    model: {
+	        messagekeys: [
+	            "searchTips-instructionsFirst", 
+	            "searchTips-instructionsSecond",
+	            "searchTips-instructionsThird",
+	            "searchTips-instructionsFourth",
+	            "searchTips-instructionsFifth"
+	        ]
+	    },
         selectors: {
             searchTips: ".csc-searchTips-template",
             title: ".csc-searchTips-title",
-            instructionsTop: ".csc-searchTips-instructions-top",
-            instructionsDate: ".csc-searchTips-instructions-date",
-            instructionsNumber: ".csc-searchTips-instructions-number",
-            instructionsBottom: ".csc-searchTips-instructions-bottom"
-        },
+            instructions: ".csc-searchTips-instructions"
+	    },
+	    repeatingSelectors: ["instructions"],
         styles: {
             searchTips: "cs-searchTips-template",
-            title: "cs-searchTips-title",
-            instructionsTop: "cs-searchTips-instructions-top",
-            instructionsDate: "cs-searchTips-instructions-date",
-            instructionsNumber: "cs-searchTips-instructions-number",
-            instructionsBottom: "cs-searchTips-instructions-bottom"
+            title: "cs-searchTips-title"
         },
         resources: {
             template: cspace.resourceSpecExpander({

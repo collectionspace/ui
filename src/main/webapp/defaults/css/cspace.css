@@ -1928,10 +1928,16 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
 }
-.cs-searchTips-template .cs-searchTips-title, .cs-searchTips-template .cs-searchTips-instructions-top, .cs-searchTips-template .cs-searchTips-instructions-date, .cs-searchTips-template .cs-searchTips-instructions-number, .cs-searchTips-template .cs-searchTips-instructions-bottom {
-    display: block;
+
+.cs-searchTips-template ul {
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.cs-searchTips-template li {
     padding-bottom: 15px;
 }
+
 .cs-searchTips-template .cs-searchTips-title {
     color: #316285;
     font-size: 14px;
