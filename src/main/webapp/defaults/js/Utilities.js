@@ -543,7 +543,8 @@ fluid.registerNamespace("cspace.util");
     
     cspace.validator.finalInit = function (that) {
         var schema = that.options.schema;
-        schema = schema[that.options.recordType].properties;
+        // Only validate fields.
+        schema = schema[that.options.recordType].properties.fields.properties;
         
         var validatePrimitive = function (value, type) {
             switch(type) {
@@ -594,7 +595,8 @@ fluid.registerNamespace("cspace.util");
         that.validate = function (data) {
             var data = fluid.copy(data);
             try {
-                validateImpl(data, schema);
+                // Only validate fields.
+                validateImpl(data.fields, schema);
             }
             catch (e) {
                 return;
