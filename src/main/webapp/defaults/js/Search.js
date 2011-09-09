@@ -128,6 +128,10 @@ cspace = cspace || {};
                     return false;
                 });
             });
+        } else {
+            that.container.delegate("a.link", "click", function () {
+                return false;
+            });
         }
     };
     
