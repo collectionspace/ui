@@ -92,7 +92,8 @@ cspace = cspace || {};
         },
         urls: cspace.componentUrlBuilder({
             advancedSearchURL: "%webapp/html/advancedsearch.html"
-        })
+        }),
+        enableAdvancedSearch: true
     });
     
     cspace.searchBox.finalInit = function (that) {
@@ -139,6 +140,9 @@ cspace = cspace || {};
                 classes: that.options.styles[key]
             }];
         });
+        if (!that.options.enableAdvancedSearch) {
+            return tree;
+        }
         tree.advancedSearch = {
             decorators: {"addClass": "{styles}.advancedSearch"},
             target: that.options.urls.advancedSearchURL,

@@ -233,7 +233,8 @@ cspace = cspace || {};
                                     recordTypeSelectLabel: "Search existing:" 
                                 },
                                 related: "{searchToRelateDialog}.options.related",
-                                permission: "update"
+                                permission: "update",
+                                enableAdvancedSearch: false
                             }
                         },
                         resultsPager: {
