@@ -15,6 +15,44 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     fluid.registerNamespace("cspace");
     
+    // Validator
+    fluid.demands("cspace.validator", ["cspace.recordEditor", "cspace.test", "cspace.listEditor"], {
+        options: {  
+            recordType: "{recordEditor}.options.recordType",
+            schema: "{detailsDC}.options.schema"
+        }
+    });
+    
+    fluid.demands("cspace.validator", ["cspace.recordEditor", "cspace.test", "cspace.listEditor", "cspace.relatedRecordsTab"], {
+        options: {  
+            recordType: "{recordEditor}.options.recordType",
+            schema: "{pageBuilder}.schema"
+        }
+    });
+    
+    fluid.demands("cspace.validator", ["cspace.recordEditor", "cspace.test"], {
+        options: {  
+            recordType: "{recordEditor}.options.recordType",
+            schema: "{pageBuilder}.schema"
+        }
+    });
+    
+    fluid.demands("cspace.createNew.recordTemplateBox", ["cspace.createNew", "cspace.test"], {
+        container: "{arguments}.0",
+        mergeAllOptions: [{
+            createNewModel: "{createNew}.model",
+            createNewApplier: "{createNew}.applier",
+            parentBundle: "{createNew}.options.parentBundle",
+            listeners: {
+                onShowTemplate: "{createNew}.events.collapseAll.fire",
+                updateModel: "{createNew}.updateModel"
+            },
+            events: {
+                collapseOn: "{createNew}.events.collapseAll"
+            }
+        }, "{arguments}.1"]
+    });
+    
     fluid.demands("cspace.util.extractTenant.segment", ["cspace.localData" ,"cspace.test"], {
         options: {
             path: "test"

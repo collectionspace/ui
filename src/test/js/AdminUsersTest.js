@@ -39,7 +39,7 @@ var adminUsersTester = function () {
     });
     
     var baseTestOpts = {
-        recordType: "users/records.json",
+        recordType: "users",
         uispec: testUISpec,
         components: {
             globalNavigator: {

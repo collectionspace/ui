@@ -27,7 +27,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 "afterRender.initialRender": callback
             },
             showDeleteButton: true,
-            recordType: "cataloging"
+            recordType: "cataloging",
+            components: {
+                validator: {
+                    type: "fluid.emptySubcomponent"
+                }
+            }
         });
         cspace.recordEditor("#main", options);
     };

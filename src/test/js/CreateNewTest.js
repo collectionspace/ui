@@ -19,7 +19,7 @@ var createNewTester = function ($) {
     
     var assertStyling = function(createNewPage, outerStyle) {
         jqUnit.assertTrue("Checking if container styled as "+outerStyle, createNewPage.locate("categories").hasClass(outerStyle));
-        createNewPage.locate("category:").each(function(index, elem) {
+        createNewPage.locate("category").each(function(index, elem) {
             jqUnit.assertTrue("Checking style of category "+index, $(elem).hasClass(createNewPage.options.styles["category"+(index+1)]));           
         });
     };
@@ -31,16 +31,25 @@ var createNewTester = function ($) {
         permissions: cspace.tests.sampleUserPerms
     });
     
-    var setupCreateNew = function (options) {
+    var setupCreateNew = function (options, callback) {
+        var options = options || {};
+        fluid.merge(null, options, {
+            listeners: {
+                onReady: callback
+            }
+        });
         return cspace.createNew(container, options);
     };
     
-    createNewTest.test("All headers and records shown", function () {
-        var createNewPage = setupCreateNew();
-        jqUnit.assertEquals("Number of headers shown:", 3, createNewPage.locate("categoryHeader").length);
-        jqUnit.assertEquals("Number of records shown ", 6, createNewPage.locate("radio").length);
-        //styling:
-        assertStyling(createNewPage, createNewPage.options.styles.totalOf3);        
+    createNewTest.asyncTest("All headers and records shown", function () {
+        var callback = function (createNewPage) {
+            jqUnit.assertEquals("Number of headers shown:", 3, createNewPage.locate("categoryHeader").length);
+            jqUnit.assertEquals("Number of records shown ", 6, $(".csc-createNew-recordRadio", createNewPage.container).length);
+            //styling:
+            assertStyling(createNewPage, createNewPage.options.styles.totalOf3);
+            start();
+        };
+        setupCreateNew(null, callback);
     });
     
     var lessPermissions = {};
@@ -54,23 +63,26 @@ var createNewTester = function ($) {
         permissions: lessPermissions
     });
     
-    createNewTestLessPerms.test("Hiding Records", function () {
-        var createNewPage = setupCreateNew();
-        jqUnit.assertEquals("All headers shown:", 3, createNewPage.locate("categoryHeader").length);
-        jqUnit.assertEquals("Number of records shown ", 6, createNewPage.locate("radio").length);
-        //acquisition:
-        var str = createNewPage.options.parentBundle.messageBase.acquisition;
-        jqUnit.assertTrue("Aquisition ("+str+") not shown", $('label:contains("'+str+'")').length < 1);
-        str = createNewPage.options.parentBundle.messageBase.movement;
-        jqUnit.assertTrue("Movement ("+str+") not shown", $('label:contains("'+str+'")').length < 1);
-        str = createNewPage.options.parentBundle.messageBase.loanin;
-        jqUnit.assertTrue("Loan In ("+str+") not shown", $('label:contains("'+str+'")').length < 1);
-        str = createNewPage.options.parentBundle.messageBase.intake;
-        jqUnit.assertTrue("Intake ("+str+") shown", $('label:contains("'+str+'")').length == 1);
-        str = createNewPage.options.parentBundle.messageBase.loanout;
-        jqUnit.assertTrue("Loan out ("+str+") shown", $('label:contains("'+str+'")').length == 1);
-        //styling:
-        assertStyling(createNewPage, createNewPage.options.styles.totalOf3);
+    createNewTestLessPerms.asyncTest("Hiding Records", function () {
+        var callback = function (createNewPage) {
+            jqUnit.assertEquals("All headers shown:", 3, createNewPage.locate("categoryHeader").length);
+            jqUnit.assertEquals("Number of records shown ", 6, $(".csc-createNew-recordRadio", createNewPage.container).length);
+            //acquisition:
+            var str = createNewPage.options.parentBundle.messageBase.acquisition;
+            jqUnit.assertTrue("Aquisition ("+str+") not shown", $('label:contains("'+str+'")').length < 1);
+            str = createNewPage.options.parentBundle.messageBase.movement;
+            jqUnit.assertTrue("Movement ("+str+") not shown", $('label:contains("'+str+'")').length < 1);
+            str = createNewPage.options.parentBundle.messageBase.loanin;
+            jqUnit.assertTrue("Loan In ("+str+") not shown", $('label:contains("'+str+'")').length < 1);
+            str = createNewPage.options.parentBundle.messageBase.intake;
+            jqUnit.assertTrue("Intake ("+str+") shown", $('label:contains("'+str+'")').length == 1);
+            str = createNewPage.options.parentBundle.messageBase.loanout;
+            jqUnit.assertTrue("Loan out ("+str+") shown", $('label:contains("'+str+'")').length == 1);
+            //styling:
+            assertStyling(createNewPage, createNewPage.options.styles.totalOf3);
+            start();
+        };
+        setupCreateNew(null, callback);
     });
     
     var lessCategories = {};
@@ -84,11 +96,14 @@ var createNewTester = function ($) {
         permissions: lessCategories
     });
     
-    createNewTestOneCategories.test("Categories Rendering", function () {
-        var createNewPage = setupCreateNew();
-        jqUnit.assertEquals("Number of headers shown:", 1, createNewPage.locate("categoryHeader").length);
-        //styling:
-        assertStyling(createNewPage, createNewPage.options.styles.totalOf1);  
+    createNewTestOneCategories.asyncTest("Categories Rendering", function () {
+        var callback = function (createNewPage) {
+            jqUnit.assertEquals("Number of headers shown:", 1, createNewPage.locate("categoryHeader").length);
+            //styling:
+            assertStyling(createNewPage, createNewPage.options.styles.totalOf1);  
+            start();
+        };
+        setupCreateNew(null, callback);
     });
     
     lessCategories.person = ["create", "read", "update", "delete", "list"];
@@ -98,10 +113,13 @@ var createNewTester = function ($) {
         permissions: lessCategories
     });
     
-    createNewTestTwoCategories.test("Two Categories styling", function () {
-        var createNewPage = setupCreateNew();
-        jqUnit.assertEquals("Number of headers shown:", 2, createNewPage.locate("categoryHeader").length);
-        assertStyling(createNewPage, createNewPage.options.styles.totalOf2);
+    createNewTestTwoCategories.asyncTest("Two Categories styling", function () {
+        var callback = function (createNewPage) {
+            jqUnit.assertEquals("Number of headers shown:", 2, createNewPage.locate("categoryHeader").length);
+            assertStyling(createNewPage, createNewPage.options.styles.totalOf2);
+            start();
+        };
+        setupCreateNew(null, callback);
     });
     
     lessCategories.person = [];
@@ -116,10 +134,13 @@ var createNewTester = function ($) {
         permissions: lessCategories
     });
     
-    createNewTestNoCategories.test("No Categories", function () {
-        var createNewPage = setupCreateNew();
-        jqUnit.assertEquals("Number of headers shown", 0, createNewPage.locate("categoryHeader").length);
-        jqUnit.notVisible("Create button should be invisible", createNewPage.locate("createButton"));  
+    createNewTestNoCategories.asyncTest("No Categories", function () {
+        var callback = function (createNewPage) {
+            jqUnit.assertEquals("Number of headers shown", 0, createNewPage.locate("categoryHeader").length);
+            jqUnit.notVisible("Create button should be invisible", createNewPage.locate("createButton"));  
+            start();
+        };
+        setupCreateNew(null, callback);
     });
 
     // ----- Tests for header/menu-item: -------

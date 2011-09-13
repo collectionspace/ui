@@ -632,7 +632,9 @@ var utilitiesTester = function ($) {
         ".csc-acquisition-objectPurchaseOfferPriceCurrency-label": {
             "messagekey": "acquisition-objectPurchaseOfferPriceCurrencyLabel"
         },
-        ".csc-acquisition-object-purchase-price-value": "${fields.objectPurchasePriceValue}",
+        ".csc-acquisition-object-purchase-price-value": {
+            "value": "${fields.objectPurchasePriceValue}"
+        },
         ".csc-acquisition-acquisition-provisos": "${fields.acquisitionProvisos}",
         ".csc-acquisition-object-offer-price-value": "${fields.objectOfferPriceValue}",
         ".csc-acquisition-updatedAt-label": {

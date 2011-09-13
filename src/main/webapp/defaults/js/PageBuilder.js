@@ -179,7 +179,7 @@ cspace = cspace || {};
             var pageSpecs = fluid.copy(that.options.pageSpec);
             var resourceSpecs = fluid.copy(pageSpecs);
             var pageSpecManager = cspace.pageSpecManager(pageSpecs);
-            var readOnly = cspace.pageBuilderIO.resolveReadOnly({
+            var readOnly = cspace.util.resolveReadOnly({
                 permissions: options.userLogin.permissions,
                 csid: that.options.csid,
                 readOnly: readOnly,
@@ -234,7 +234,8 @@ cspace = cspace || {};
                         dataType: "json",
                         success: function (data) {
                             options.uispec = data;
-                            resolveReadOnly(options.uispec, isTab(options.pageType) ? "details" : "recordEditor", readOnly);
+                            resolveReadOnly(options.uispec, "details", readOnly);
+                            resolveReadOnly(options.uispec, "recordEditor", readOnly);
                             resolveReadOnly(options.uispec, "hierarchy", readOnly);
                         },
                         error: function (xhr, textStatus, errorThrown) {
@@ -321,9 +322,14 @@ cspace = cspace || {};
         finalInitFunction: "cspace.pageBuilderIO.templateLocator.finalInit",
         specs: {
             recordEditor: {
-                href: "%readonlypages/%recordTypeTemplate%template.html",
+                href: "%webapp/html/%readonlypages/%recordTypeTemplate%template.html",
                 templateSelector: ".csc-%recordType-template",
                 targetSelector: ".csc-record-edit-container"
+            }
+        },
+        components: {
+            urlExpander: {
+                type: "cspace.urlExpander"
             }
         },
         template: {
@@ -339,40 +345,12 @@ cspace = cspace || {};
         fluid.each(that.options.specs, function (spec, key) {
             that.options.pageSpec[key] = spec;
             that.options.pageSpec[key].templateSelector = fluid.stringTemplate(that.options.pageSpec[key].templateSelector, {recordType: that.options.recordType});
-            that.options.pageSpec[key].href = fluid.stringTemplate(that.options.pageSpec[key].href, {
+            that.options.pageSpec[key].href = fluid.stringTemplate(that.urlExpander(that.options.pageSpec[key].href), {
                 recordType: that.options.recordType.charAt(0).toUpperCase() + that.options.recordType.slice(1),
                 template: that.options.template ? ("-" + that.options.template) : ""
             });
         });
     };
-    
-    cspace.pageBuilderIO.resolveReadOnly = function (options) {
-        var that = fluid.initLittleComponent("cspace.pageBuilderIO.resolveReadOnly", options);
-        
-        // Return true if read only is enforced.
-        if (that.options.readOnly) {
-            return true;
-        }
-        // If there's no target (recordType) there is no concept of read only and thus we return false.
-        if (!that.options.target) {
-            return false;
-        }
-        
-        that.recordPerms = {};
-        fluid.each(that.options.perms, function (permission) {
-            that.recordPerms[permission] = cspace.permissions.resolve({
-                permission: permission,
-                target: that.options.target,
-                permissions: that.options.permissions
-            });
-        });
-        return !(that.options.csid && that.recordPerms.update || that.recordPerms.create);
-    };
-    
-    fluid.defaults("cspace.pageBuilderIO.resolveReadOnly", {
-        gradeNames: ["fluid.littleComponent"],
-        perms: ["create", "update"]
-    });
 
     fluid.defaults("cspace.pageBuilder", {
         gradeNames: ["fluid.littleComponent", "autoInit"],

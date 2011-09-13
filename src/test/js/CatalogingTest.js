@@ -26,11 +26,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             pageBuilderIO: {
                 options: {
                     recordType: "cataloging",
-                    pageSpec: {
-                        recordEditor: {
-                            href: "../../main/webapp/defaults/html/pages/CatalogingTemplate.html"
-                        }
-                    }
+                    pageSpec: {}
                 }
             }
         }, options);

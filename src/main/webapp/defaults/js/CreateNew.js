@@ -127,7 +127,8 @@ cspace = cspace || {};
         },
         events: {
             collapseAll: null,
-            updateModel: null
+            updateModel: null,
+            onReady: null
         }
     });
     
@@ -250,6 +251,7 @@ cspace = cspace || {};
             that.applier.requestChange("templateViews", templateViews);
             that.refreshView();
             $("input[type|='radio']").filter(":first").prop('checked', true).change();
+            that.events.onReady.fire(that);
         });
     };
     

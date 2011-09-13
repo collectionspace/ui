@@ -448,7 +448,7 @@ var rendererTester = function(){
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
-                url: "%webapp/html/components/CheckBoxes.html",
+                url: "%test/html/CheckBoxes.html",
                 options: {
                     dataType: "html"
                 }

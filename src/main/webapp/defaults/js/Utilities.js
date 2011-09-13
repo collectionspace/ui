@@ -836,6 +836,9 @@ fluid.registerNamespace("cspace.util");
                 fluid.each(fluid.makeArray(val), function (expander) {
                     fluid.each(["tree", "trueTree", "falseTree"], function (tree) {
                         if (!expander[tree]) {return;}
+                        if (expander.type === "fluid.renderer.selection.inputs") {
+                            return;
+                        }
                         expander[tree] = resolveReadOnlyUISpecImpl(expander[tree]);
                     });
                     if (!newspec.expander) {newspec.expander = [];}
@@ -895,7 +898,7 @@ fluid.registerNamespace("cspace.util");
                     }]
                 };
             }
-            else if (isDecorator(val, "cspace.structuredDate") || isDecorator(val, "cspace.datePicker")) {
+            else if (isDecorator(val, "cspace.structuredDate") || isDecorator(val, "cspace.datePicker") || isDecorator(val, "cspace.inputValidator")) {
                 newspec[key] = {
                     value: val.value
                 };                
@@ -1408,5 +1411,33 @@ fluid.registerNamespace("cspace.util");
             }
         });
     };
+    
+    cspace.util.resolveReadOnly = function (options) {
+        var that = fluid.initLittleComponent("cspace.util.resolveReadOnly", options);
+        
+        // Return true if read only is enforced.
+        if (that.options.readOnly) {
+            return true;
+        }
+        // If there's no target (recordType) there is no concept of read only and thus we return false.
+        if (!that.options.target) {
+            return false;
+        }
+        
+        that.recordPerms = {};
+        fluid.each(that.options.perms, function (permission) {
+            that.recordPerms[permission] = cspace.permissions.resolve({
+                permission: permission,
+                target: that.options.target,
+                permissions: that.options.permissions
+            });
+        });
+        return !(that.options.csid && that.recordPerms.update || that.recordPerms.create);
+    };
+    
+    fluid.defaults("cspace.util.resolveReadOnly", {
+        gradeNames: ["fluid.littleComponent"],
+        perms: ["create", "update"]
+    });
     
 })(jQuery, fluid);
