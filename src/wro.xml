@@ -76,7 +76,9 @@
     <js>/defaults/js/Repeatable.js</js>
     <js>/defaults/js/AdvancedSearch.js</js>
     <js>/defaults/js/SearchTips.js</js>
+    <js>/defaults/js/SearchTools.js</js>
     <js>/defaults/js/Search.js</js>
+    <js>/defaults/js/StructuredDate.js</js>
     <js>/defaults/js/PageBuilder.js</js>
     <js>/defaults/lib/datejs/src/globalization/en-US.js</js>
     <js>/defaults/lib/datejs/src/core.js</js>
