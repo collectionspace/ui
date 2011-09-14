@@ -74,7 +74,8 @@ cspace = cspace || {};
                     args: "{globalBundle}.messageBase"
                 } 
             },
-            operation: "or"
+            operation: "or",
+            keywords: ""
         },
         permission: "list",
         selectors: {
@@ -90,8 +91,7 @@ cspace = cspace || {};
             step2Label: ".csc-advancedSearch-step2-label",
             step2Name: ".csc-advancedSearch-step2-name",
             query: ".csc-advancedSearch-query",
-            keywordSearchButton: ".csc-advancedSearch-keywordSearchButton",
-            fieldBasedSearchButton: ".csc-advancedSearch-fieldBasedSearchButton",
+            searchButton: ".csc-advancedSearch-searchButton",
             step2SubHeader1: ".csc-advancedSearch-step2-subheader1",
             step2SubHeader1Label : ".csc-advancedSearch-step2-subheader1-label",
             step2SubHeader1Note : ".csc-advancedSearch-step2-subheader1-note",
@@ -116,8 +116,6 @@ cspace = cspace || {};
             step2Name: "cs-advancedSearch-step2-name",
             query: "cs-advancedSearch-query",
             searchButton: "cs-advancedSearch-searchButton",
-            keywordSearchButton: "cs-advancedSearch-keywordSearchButton",
-            fieldBasedSearchButton: "cs-advancedSearch-fieldBasedSearchButton",
             step2SubHeader1: "cs-advancedSearch-step2-subheader1",
             step2SubHeader1Label : "cs-advancedSearch-step2-subheader1-label",
             step2SubHeader1Note : "cs-advancedSearch-step2-subheader1-note",
@@ -142,13 +140,9 @@ cspace = cspace || {};
                 funcName: "cspace.advancedSearch.initSearchFields",
                 args: ["{advancedSearch}", "{instantiator}", "{arguments}.0"]
             },
-            fieldBasedSearch: {
+            search: {
                 funcName: "cspace.advancedSearch.search",
                 args: ["{advancedSearch}.events.onSearch", "{advancedSearch}.model", "{searchFields}.model"]
-            },
-            keywordSearch: {
-                funcName: "cspace.advancedSearch.search",
-                args: ["{advancedSearch}.events.onSearch", "{advancedSearch}.model"]
             },
             toggle: {
                 funcName: "cspace.advancedSearch.toggle",
@@ -316,7 +310,7 @@ cspace = cspace || {};
                 value: "${keywords}",
                 decorators: {"addClass": "{styles}.query"}
             },
-            keywordSearchButton: {
+            searchButton: {
                 decorators: [{
                     type: "attrs",
                     attributes: {
@@ -325,27 +319,9 @@ cspace = cspace || {};
                 }, {
                     type: "jQuery",
                     func: "click",
-                    args: that.keywordSearch
+                    args: that.search
                 }, {
                     addClass: "{styles}.searchButton"
-                }, {
-                    addClass: "{styles}.keywordSearchButton"
-                }]
-            },
-            fieldBasedSearchButton: {
-                decorators: [{
-                    type: "attrs",
-                    attributes: {
-                        value: that.options.parentBundle.messageBase["advancedSearch-searchButton"]                        
-                    }
-                }, {
-                    type: "jQuery",
-                    func: "click",
-                    args: that.fieldBasedSearch
-                }, {
-                    addClass: "{styles}.searchButton"
-                }, {
-                    addClass: "{styles}.fieldBasedSearchButton"
                 }]
             },
             toggle: {

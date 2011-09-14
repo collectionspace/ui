@@ -1896,16 +1896,19 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     width: 45%;
     margin: 15px 5px 15px 15px;
 }
-.cs-advancedSearch-template .cs-advancedSearch-step2 .cs-advancedSearch-searchButton {
-    display: inline;
+.cs-advancedSearch-template .cs-advancedSearch-searchButton {
     -moz-border-radius:4px;
     -webkit-border-radius:4px;
+    float: right;
+}
+.cs-advancedSearch-template .cs-advancedSearch-searchButton:nth-child(even) {
+    margin: 10px 0;
+}
+.cs-advancedSearch-template .cs-advancedSearch-searchButton:nth-child(odd) {
+    margin-top: -30px;
 }
 .cs-advancedSearch-template .cs-advancedSearch-searchFields {
     padding-left: 20px;
-}
-.cs-advancedSearch-searchButton.cs-advancedSearch-fieldBasedSearchButton {
-    margin: 0 0 10px 32px;
 }
 .cs-advancedSearch-template .cs-advancedSearch-toggle {
     background-color: #FFF;
