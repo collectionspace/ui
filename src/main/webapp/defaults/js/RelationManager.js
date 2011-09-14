@@ -47,15 +47,7 @@ cspace = cspace || {};
     
     var bindEventHandlers = function (that) {
         if (that.showAddButton.visible) {
-            that.locate("addButton").click(function (e) {
-                if (that.model.csid) {
-                    that.options.messageBar.hide();
-                    that.searchToRelateDialog.open();
-                } else {
-                    that.options.messageBar.show(that.options.strings.pleaseSaveFirst, null, true);
-                }
-                return false;
-            });
+            that.locate("addButton").click(that.add);
         }
         else {
             that.locate("addButton").hide();
@@ -75,6 +67,27 @@ cspace = cspace || {};
         
         bindEventHandlers(that);
         return that;
+    };
+    
+    cspace.relationManager.addFromTab = function (that) {
+        that.options.globalNavigator.events.onPerformNavigation.fire(function () {
+            if (that.model.csid) {
+                that.options.messageBar.hide();
+                that.searchToRelateDialog.open();
+            } else {
+                that.options.messageBar.show(that.options.strings.pleaseSaveFirst, null, true);
+            }
+        });
+    };
+    
+    cspace.relationManager.add = function (that) {
+        if (that.model.csid) {
+            that.options.messageBar.hide();
+            that.searchToRelateDialog.open();
+        } else {
+            that.options.messageBar.show(that.options.strings.pleaseSaveFirst, null, true);
+        }
+        return false;
     };
     
     cspace.relationManager.provideLocalAddRelations = function (relationManager) {
@@ -107,6 +120,10 @@ cspace = cspace || {};
     fluid.defaults("cspace.relationManager", {
         gradeNames: "fluid.rendererComponent",
         produceTree: cspace.relationManager.produceTree,
+        globalNavigator: "{globalNavigator}",
+        invokers: {
+            add: "cspace.relationManager.add"
+        },
         components: {
             dataContext: {
                 type: "cspace.dataContext",

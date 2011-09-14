@@ -37,6 +37,27 @@ cspace = cspace || {};
             }];
             that.relationManager.addRelations({items: newRelation});
         });
+        
+        that.options.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
+            if (that.listEditor.details.unsavedChanges) {
+                that.confirmation.open("cspace.confirmation.saveDialog", undefined, {
+                    listeners: {
+                        onClose: function (userAction) {
+                            if (userAction === "act") {
+                                that.listEditor.events.afterListUpdate.addListener(function () {
+                                    callback();
+                                }, undefined, undefined, "last");
+                                that.listEditor.details.requestSave();
+                            } else if (userAction === "proceed") {
+                                callback();
+                            }
+                        }
+                    }
+                });
+                return false;
+            }
+        }, null, null, "first");
+        
         that.listEditor.details.events.afterRender.addListener(function () {
             var csid = that.listEditor.details.model.csid;
             if (csid) {
@@ -115,7 +136,11 @@ cspace = cspace || {};
 
     fluid.defaults("cspace.relatedRecordsTab", {
         gradeNames: "fluid.rendererComponent",
+        globalNavigator: "{globalNavigator}",
         components: {
+            confirmation: {
+                type: "cspace.confirmation"
+            },
             relationManager: {
                 type: "cspace.relationManager",
                 options: {
