@@ -94,7 +94,7 @@ cspace = cspace || {};
     cspace.createTemplateBox.produceTree = function (that) {
         var tree = {
             recordType: {
-                decorators: {"addClass": "{styles}.recordType"},
+                decorators: {"addClass": "{styles}.recordType"}
             },
             recordTypeLabel: {
                 decorators: {"addClass": "{styles}.recordTypeLabel"}, 
@@ -111,7 +111,7 @@ cspace = cspace || {};
                         optionnames: "${templateNames}",
                         optionlist: "${templateList}",
                         selection: "${templateType}",
-                        decorators: {"addClass": "{styles}.templateType"},
+                        decorators: {"addClass": "{styles}.templateType"}
                     },
                     templateTypeLabel: {
                         decorators: {"addClass": "{styles}.templateTypeLabel"},

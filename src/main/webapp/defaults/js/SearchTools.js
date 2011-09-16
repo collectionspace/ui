@@ -135,7 +135,7 @@ cspace = cspace || {};
                 options: {
                     elPath: "{block}.model.elPath"
                 }
-            },
+            }
         },
         invokers: {
             updateCurrentSearch: {
