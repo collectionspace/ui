@@ -9,13 +9,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global jQuery, fluid, cspace:true, window*/
-"use strict";
 
 fluid.registerNamespace("cspace.util");
 
 (function ($, fluid) {
+    "use strict";
+
     fluid.log("Utilities.js loaded");
-    
+
     // Calls to this should cease to appear in application code
     cspace.util.useLocalData = function () {
         return document.location.protocol === "file:";
@@ -30,16 +31,16 @@ fluid.registerNamespace("cspace.util");
             return false;
         }
     });
-    
+
     cspace.recordTypeManager = function (options) {
         var that = fluid.initLittleComponent("cspace.recordTypeManager", options);
         that.recordTypesForCategory = function (category) {
             var classEntry = that.options.recordTypes[category];
-            return classEntry ? classEntry : [category];
+            return classEntry || [category];
         };
         return that;
     };
-    
+
     fluid.defaults("cspace.recordTypeManager", {
         gradeNames: ["fluid.littleComponent"],
         recordTypes: "{recordTypes}"
@@ -48,7 +49,7 @@ fluid.registerNamespace("cspace.util");
     cspace.util.addTrailingSlash = function (url) {
         return url + ((url.charAt(url.length - 1) !== "/") ? "/" : "");
     };
-    
+
     cspace.util.extractTenant = function () {
         var that = fluid.initLittleComponent("cspace.util.extractTenant");
         var pathSegs = window.location.href.split("/");
@@ -97,7 +98,7 @@ fluid.registerNamespace("cspace.util");
             }
         };
     };
-    
+
     fluid.defaults("cspace.specBuilderImpl", {
         gradeNames: ["fluid.littleComponent"],
         urlRenderer: {
@@ -105,7 +106,7 @@ fluid.registerNamespace("cspace.util");
                 type: "fluid.deferredInvokeCall",
                 func: "cspace.urlExpander"
             }
-        }  
+        }
     });
 
     cspace.specBuilderImpl = function (options) {
@@ -113,8 +114,7 @@ fluid.registerNamespace("cspace.util");
         var that = fluid.initLittleComponent("cspace.specBuilderImpl", options);
         if (that.options.urlPrefix) {
             that.options.spec.url = that.options.urlPrefix + that.options.spec.url;
-        }
-        else if (that.options.urlRenderer) {
+        } else if (that.options.urlRenderer) {
             that.options.spec.url = that.options.urlRenderer(that.options.spec.url);
         }
         return that.options.spec;
@@ -123,19 +123,19 @@ fluid.registerNamespace("cspace.util");
     cspace.specBuilder = function (options) {
         return fluid.invoke("cspace.specBuilderImpl", {spec: options});
     };
-    
+
     // a convenience wrapper for specBuilderImpl that lets us pass the URL as a simple string
     cspace.simpleSpecBuilder = function (urlStub) {
         return fluid.invoke("cspace.specBuilderImpl", {url: urlStub});
     };
-    
+
     cspace.urlExpander = function (options) {
         var that = fluid.initLittleComponent("cspace.urlExpander", options);
         return function (url) {
             return fluid.stringTemplate(url, that.options.vars);
         };
     };
-    
+
     fluid.defaults("cspace.urlExpander", {
         gradeNames: ["fluid.littleComponent"],
         vars: {
@@ -151,18 +151,18 @@ fluid.registerNamespace("cspace.util");
             test: "../../../../test"
         }
     });
-    
+
     cspace.util.urlBuilder = function (url, options) {
         var that = fluid.initLittleComponent("cspace.util.urlBuilder", options);
         if (typeof url === "string") {
             return that.options.urlExpander(url);
-        } 
+        }
         fluid.each(url, function (thisUrl, key) {
             url[key] = that.options.urlExpander(thisUrl);
         });
         return url;
     };
-    
+
     fluid.defaults("cspace.util.urlBuilder", {
         urlExpander: {
             expander: {
@@ -171,7 +171,7 @@ fluid.registerNamespace("cspace.util");
             }
         }
     });
-    
+
     cspace.componentUrlBuilder = function (urls) {
         return {
             expander: {
@@ -181,22 +181,22 @@ fluid.registerNamespace("cspace.util");
             }
         };
     };
-    
+
     cspace.util.lookupMessage = function (messageBase, key) {
         return messageBase[key] || fluid.stringTemplate("[String for key: %key is missing. Please, add it to messageBundle.]", {key: key});
     };
-    
+
     cspace.util.stringBuilder = function (strings, options) {
         var that = fluid.initLittleComponent("cspace.util.stringBuilder", options);
         if (typeof strings === "string") {
             return fluid.stringTemplate(strings, that.options.vars);
-        } 
+        }
         fluid.each(strings, function (string, key) {
             strings[key] = fluid.stringTemplate(string, that.options.vars);
         });
         return strings;
     };
-    
+
     cspace.componentStringBuilder = function (strings, options) {
         return {
             expander: {
@@ -206,17 +206,17 @@ fluid.registerNamespace("cspace.util");
             }
         };
     };
-    
+
     /** Resolution of the global message bundle(s) */
-        
+
     cspace.globalBundle = function (options) {
         var that = fluid.initLittleComponent("cspace.globalBundle", options);
         // assuming correct environment, this I/O will resolve synchronously from the cache
-        fluid.fetchResources(that.options.resources); 
+        fluid.fetchResources(that.options.resources);
         fluid.initDependents(that);
         return that.messageResolver;
     };
-    
+
     fluid.defaults("cspace.globalBundle", {
         gradeNames: ["fluid.littleComponent"],
         components: {
@@ -239,20 +239,20 @@ fluid.registerNamespace("cspace.util");
             })
         }
     });
-    
+
     fluid.fetchResources.primeCacheFromResources("cspace.globalBundle");
-    
+
     /** Convert the global state of using local data into an IoC "type tag" so that
      * decisions based on it can be performed out of line with application code.
      * By use of this "indirect dispatch" all test configuration code may now be
      * bundled in files that are not part of the production image */
-  
+
     var eUC = "encodeURIComponent:";
-  
+
     /** A "Data Source" attached to a URL. Reduces HTTP transport to the simple 
      * "Data Source" API. This should become the only form of AJAX throughout CollectionSpace,
      * with the exception of calls routed through fluid.fetchResources (the two methods may
-     * be combined by use of makeAjaxOpts and conversion into a resourceSpec) */   
+     * be combined by use of makeAjaxOpts and conversion into a resourceSpec) */
     // TODO: integrate with Engage conception and knock the rough corners off
     cspace.URLDataSource = function (options) {
         var that = fluid.initLittleComponent(options.value.targetTypeName, options);
@@ -283,7 +283,7 @@ fluid.registerNamespace("cspace.util");
             replaced = expander(replaced);
             return replaced;
         }
-        
+
         that.makeAjaxOpts = function (model, directModel, callback, type) {
             var togo = {
                 type: type,
@@ -294,15 +294,15 @@ fluid.registerNamespace("cspace.util");
                     var responseParser = that.options.responseParser;
                     if (responseParser) {
                         data = typeof responseParser === "string" ?
-                            fluid.invokeGlobalFunction(responseParser, [data, directModel]) :
-                            responseParser(data, directModel);
+                                fluid.invokeGlobalFunction(responseParser, [data, directModel]) :
+                                responseParser(data, directModel);
                     }
                     callback(data);
                 },
                 error: function (xhr, textStatus, errorThrown) {
                     fluid.log("Data fetch error for url " + togo.url + " - textStatus: " + textStatus);
                     fluid.log("ErrorThrown: " + errorThrown);
-                }                
+                }
             };
             if (model) {
                 togo.data = JSON.stringify(model);
@@ -320,7 +320,7 @@ fluid.registerNamespace("cspace.util");
             that.put = function (model, directModel, callback) {
                 var ajaxOpts = that.makeAjaxOpts(model, directModel, callback, "POST");
                 $.ajax(ajaxOpts);
-            }; 
+            };
         }
         return that;
     };
@@ -343,7 +343,7 @@ fluid.registerNamespace("cspace.util");
         });
         return that.options.urlRenderer(url);
     };
-    
+
     cspace.util.getDefaultConfigURL.getRecordTypeLocal = function () {
         var url = cspace.util.getDefaultConfigURL.getRecordType();
         if (url === "record") {
@@ -351,12 +351,12 @@ fluid.registerNamespace("cspace.util");
         }
         return url;
     };
-    
+
     cspace.util.getDefaultConfigURL.getRecordType = function () {
         var url = window.location.pathname;
         return url.substring(url.lastIndexOf("/") + 1, url.indexOf(".html"));
     };
-    
+
     fluid.defaults("cspace.util.getDefaultConfigURL", {
         gradeNames: ["fluid.littleComponent"],
         url: "%webapp/config/%recordType.json",
@@ -370,12 +370,12 @@ fluid.registerNamespace("cspace.util");
             }
         }
     });
-    
+
     cspace.util.getLoginURL = function (options) {
         var that = fluid.initLittleComponent("cspace.util.getLoginURL", options);
         return that.options.urlRenderer(that.options.url);
     };
-    
+
     fluid.defaults("cspace.util.getLoginURL", {
         gradeNames: ["fluid.littleComponent"],
         url: "%tenant/%tenantname/loginstatus",
@@ -386,7 +386,7 @@ fluid.registerNamespace("cspace.util");
             }
         }
     });
-    
+
     cspace.util.getDefaultSchemaURL = function (recordType, options) {
         var that = fluid.initLittleComponent("cspace.util.getDefaultSchemaURL", options);
         var url = fluid.stringTemplate(that.options.url, {
@@ -394,7 +394,7 @@ fluid.registerNamespace("cspace.util");
         });
         return that.options.urlRenderer(url);
     };
-    
+
     fluid.defaults("cspace.util.getDefaultSchemaURL", {
         url: "%tenant/%tenantname/%recordType/uischema",
         urlRenderer: {
@@ -404,7 +404,7 @@ fluid.registerNamespace("cspace.util");
             }
         }
     });
-    
+
     cspace.util.getUISpecURL = function (pageType, options) {
         var that = fluid.initLittleComponent("cspace.util.getUISpecURL", options);
         var url = fluid.stringTemplate(that.options.url, {
@@ -412,7 +412,7 @@ fluid.registerNamespace("cspace.util");
         });
         return that.options.urlRenderer(url);
     };
-    
+
     fluid.defaults("cspace.util.getUISpecURL", {
         url: "%tenant/%tenantname/%pageType/uispec",
         urlRenderer: {
@@ -422,11 +422,11 @@ fluid.registerNamespace("cspace.util");
             }
         }
     });
-    
+
     cspace.util.fullUrl = function (prefix, templateName) {
         return prefix ? prefix + templateName : templateName;
     };
-    
+
     // TODO: This should be removed as soon as createNew stops using the
     // resolverGetCongig.
     cspace.util.resolvePermissions = function (source, permManager) {
@@ -436,13 +436,12 @@ fluid.registerNamespace("cspace.util");
             }
             if (sourceItem && typeof sourceItem === "object") {
                 cspace.util.resolvePermissions(sourceItem, permManager);
-            }
-            else {
+            } else {
                 return !permManager.resolve(sourceItem);
             }
         });
     };
-    
+
     cspace.util.applyClassSelectorOrFail = function (node, selector) {
         if (!selector || !selector.charAt(0) === "." || fluid.SAXStrings.indexOfWhitespace(selector) !== -1) {
             fluid.fail("selector " + selector + " needs to be a pure class-based selector");
@@ -450,17 +449,17 @@ fluid.registerNamespace("cspace.util");
         var clazz = selector.substring(1);
         $(node).addClass(clazz);
     };
-    
+
     cspace.util.waitMultiple = function (options) {
         var that = fluid.initLittleComponent("cspace.util.waitMultiple", options);
         that.waitSet = {};
-        
+
         function checkComplete() {
             if (that.options.once && that.fired) {
                 return;
             }
-            var complete = true;
-            for (var key in that.waitSet) {
+            var complete = true, key;
+            for (key in that.waitSet) {
                 if (!that.waitSet[key].complete) {
                     fluid.log("Wait for " + key + " still required");
                     complete = false;
@@ -469,11 +468,10 @@ fluid.registerNamespace("cspace.util");
             if (complete) {
                 fluid.log("Firing external callback");
                 that.fired = true;
-                that.options.callback.apply(null, that.options.outerKey && that.waitSet[that.options.outerKey] ? 
-                    that.waitSet[that.options.outerKey].args : null);
-
+                that.options.callback.apply(null, that.options.outerKey && that.waitSet[that.options.outerKey] ?
+                        that.waitSet[that.options.outerKey].args : null);
             }
-        } 
+        }
         that.getListener = function (key) {
             var keyStruct = {};
             that.waitSet[key] = keyStruct;
@@ -484,26 +482,25 @@ fluid.registerNamespace("cspace.util");
             };
         };
         that.clear = function (newCallback) {
-            for (var key in that.waitSet) {
+            var key;
+            for (key in that.waitSet) {
                 fluid.clear(that.waitSet[key]);
             }
             that.fired = false;
             that.options.callback = newCallback;
         };
-        return that; 
+        return that;
     };
-    
+
     cspace.util.recordTypeSelector = function (options) {
         var that = fluid.initLittleComponent("cspace.util.recordTypeSelector", options);
-        var model = cspace.permissions.getPermissibleRelatedRecords(
-                that.options.related, that.options.permissionsResolver, that.options.recordTypeManager, that.options.permission);
+        var model = cspace.permissions.getPermissibleRelatedRecords(that.options.related, that.options.permissionsResolver, that.options.recordTypeManager, that.options.permission);
         that.model = model;
-        
         that.produceComponent = function () {
             var togo = {};
             if (model.length > 0) {
                 togo[that.options.componentID] = {
-                    selection: model[0], 
+                    selection: model[0],
                     optionlist: model,
                     optionnames: fluid.transform(model, function (recordType) {
                         return that.options.messageResolver.resolve(recordType);
@@ -512,10 +509,10 @@ fluid.registerNamespace("cspace.util");
             }
             return togo;
         };
-                 
+
         that.returnedOptions = {
             listeners: {
-                afterRender: function () {  
+                afterRender: function () {
                     if (that.model.length < 2) {
                         fluid.enabled(that.options.dom.locate(that.options.selector), false);
                     }
@@ -525,7 +522,7 @@ fluid.registerNamespace("cspace.util");
         fluid.log("Record type selector constructed");
         return that;
     };
-    
+
     fluid.defaults("cspace.util.recordTypeSelector", {
         gradeNames: ["fluid.littleComponent"],
         recordTypeManager: "{recordTypeManager}",
@@ -533,41 +530,39 @@ fluid.registerNamespace("cspace.util");
         messageResolver: "{globalBundle}",
         permission: "read"
     });
-    
+
     fluid.defaults("cspace.validator", {
         gradeNames: ["autoInit", "fluid.littleComponent"],
         finalInitFunction: "cspace.validator.finalInit",
         schema: {},
         recordType: ""
     });
-    
+
     cspace.validator.finalInit = function (that) {
         var schema = that.options.schema;
         // Only validate fields.
         schema = schema[that.options.recordType].properties.fields.properties;
-        
+
         var validatePrimitive = function (value, type) {
-            switch(type) {
-                case "integer":
-                    var parsed = parseInt(value, 10);
-                    if (isNaN(parsed)) {
-                        throw "Invalid Integer";
-                    }
-                    return parsed;
-                    break;
-                case "float":
-                    var parsed = parseFloat(value);
-                    if (isNaN(parsed)) {
-                        throw "Invalid Float";
-                    }
-                    return parsed;
-                    break;
-                default:
-                    return value;
-                    break;
+            var parsed;
+            switch (type) {
+            case "integer":
+                parsed = parseInt(value, 10);
+                if (isNaN(parsed)) {
+                    throw "Invalid Integer";
+                }
+                return parsed;
+            case "float":
+                parsed = parseFloat(value);
+                if (isNaN(parsed)) {
+                    throw "Invalid Float";
+                }
+                return parsed;
+            default:
+                return value;
             }
         };
-        
+
         var validateImpl = function (data, schema) {
             fluid.each(data, function (value, key) {
                 var subSchema = schema[key];
@@ -577,41 +572,39 @@ fluid.registerNamespace("cspace.util");
                 var type = subSchema.type;
                 if (fluid.isPrimitive(value)) {
                     data[key] = validatePrimitive(value, type);
-                }
-                else if (typeof value === "object") {
+                } else if (typeof value === "object") {
                     if (type === "array") {
                         subSchema = subSchema.items ? fluid.transform(value, function () {
                             return subSchema.items;
                         }) : [];
-                    }
-                    else if (type === "object") {
+                    } else if (type === "object") {
                         subSchema = subSchema.properties;
                     }
                     validateImpl(value, subSchema);
                 }
             });
         };
-        
+
         that.validate = function (data) {
-            var data = fluid.copy(data);
+            var thisData = fluid.copy(data);
             try {
                 // Only validate fields.
-                validateImpl(data.fields, schema);
-            }
-            catch (e) {
+                validateImpl(thisData.fields, schema);
+            } catch (e) {
                 return;
             }
-            return data;
+            return thisData;
         };
     };
-    
+
     // This will eventually go away once the getBeanValue strategy is used everywhere.
     cspace.util.getBeanValue = function (root, EL, schema, permManager) {
         if (EL === "" || EL === null || EL === undefined) {
             return root;
         }
         var segs = fluid.model.parseEL(EL);
-        for (var i = 0; i < segs.length; ++i) {
+        var i = 0;
+        for (i; i < segs.length; ++i) {
             var seg = segs[i];
             if (permManager && !permManager.resolve(seg)) {
                 return undefined;
@@ -644,12 +637,10 @@ fluid.registerNamespace("cspace.util");
                 var items = subSchema.items;
                 subSchema = items ? [items] : [];
                 root[seg] = [];
-            }
-            else if (type === "object") {
+            } else if (type === "object") {
                 subSchema = subSchema.properties;
                 root[seg] = {};
-            }
-            else {
+            } else {
                 root[seg] = undefined;
             }
             root = root[seg];
@@ -657,19 +648,20 @@ fluid.registerNamespace("cspace.util");
                 return root;
             }
             // TODO: This will show you the whole WORLD, whether you want it or not.
-            for (var subSegment in subSchema) {
+            var subSegment;
+            for (subSegment in subSchema) {
                 root[subSegment] = cspace.util.getBeanValue(root, subSegment, subSchema);
             }
         }
         return root;
     };
-    
+
     cspace.util.schemaStrategy = function (options) {
         return {
             init: function () {
                 var that = fluid.initLittleComponent("cspace.util.schemaStrategy", options);
                 var schema = that.options.schema;
-                return function (root, segment, index) {
+                return function (root, segment) {
                     if (!root[segment] && !schema) {
                         return;
                     }
@@ -693,12 +685,10 @@ fluid.registerNamespace("cspace.util");
                         var items = schema.items;
                         schema = items ? [items] : [];
                         return [];
-                    }
-                    else if (type === "object") {
+                    } else if (type === "object") {
                         schema = schema.properties;
                         return {};
-                    }
-                    else {
+                    } else {
                         return;
                     }
                 };
@@ -710,7 +700,7 @@ fluid.registerNamespace("cspace.util");
             schema: "preserve"
         }
     });
-    
+
     cspace.util.buildUrl = function (operation, baseUrl, recordType, csid, fileExtension) {
         if (operation === "addRelations") {
             return cspace.util.addTrailingSlash(baseUrl) + "relationships/";
@@ -720,25 +710,24 @@ fluid.registerNamespace("cspace.util");
             return cspace.util.addTrailingSlash(baseUrl) + recordType + "/" + (csid ? csid + fileExtension : "");
         }
     };
-    
+
     cspace.util.invokeWithoutFail = function (toInvoke, args) {
         if (toInvoke) {
             try {
                 toInvoke.apply(null, args);
-            }
-            catch (e) {
+            } catch (e) {
                 fluid.log("Exception applying callback: " + e);
             }
         }
     };
-    
+
     cspace.util.composeCallbacks = function (first, second) {
         return function () {
             cspace.util.invokeWithoutFail(first, arguments);
             return cspace.util.invokeWithoutFail(second, arguments);
         };
     };
-    
+
     var isDecorator = function (source, type) {
         var decorator = fluid.makeArray(source.decorators)[0];
         if (!decorator) {
@@ -747,7 +736,7 @@ fluid.registerNamespace("cspace.util");
         if (decorator.func) {
             return decorator.func === type;
         }
-        return  decorator.type === type;
+        return decorator.type === type;
     };
 
     cspace.util.urnToStringFieldConverter = function (container, options) {
@@ -755,9 +744,9 @@ fluid.registerNamespace("cspace.util");
         var func = that.container.val() ? "val" : "text";
         that.container[func](that.options.convert(that.container[func]()));
         that.container.prop("disabled", true);
-        return that;   
+        return that;
     };
-    
+
     /*
      * Takes a string in URN format and returns it in Human Readable format
      * @param urn a string in URN format
@@ -767,14 +756,14 @@ fluid.registerNamespace("cspace.util");
         if (!urn) {
             return "";
         }
-        return decodeURIComponent(urn.slice(urn.indexOf("'") + 1, urn.length - 1)).replace(/\+/g, " ");            
+        return decodeURIComponent(urn.slice(urn.indexOf("'") + 1, urn.length - 1)).replace(/\+/g, " ");
     };
-    
+
     fluid.defaults("cspace.util.urnToStringFieldConverter", {
         gradeNames: ["fluid.viewComponent"],
-        convert: cspace.util.urnToString 
+        convert: cspace.util.urnToString
     });
-    
+
     /**
      * Used for substituting the text of the continer based on the variables of the options
      * parameter. The options block is expected to hold to arrays: keys and values.
@@ -790,7 +779,7 @@ fluid.registerNamespace("cspace.util");
         that.assignValue();
         return that;
     };
-    
+
     cspace.util.nameForValueFinder.assignValue = function (selector, options) {
         if (!options.list || !options.names) {
             return;
@@ -802,11 +791,11 @@ fluid.registerNamespace("cspace.util");
         var index = $.inArray(listValue, options.list);
         if (index < 0) {
             return;
-        } 
+        }
         selector.text(options.names[index]);
         selector.prop("disabled", true);
     };
-    
+
     fluid.defaults("cspace.util.nameForValueFinder", {
         gradeNames: ["fluid.viewComponent"],
         invokers: {
@@ -816,7 +805,7 @@ fluid.registerNamespace("cspace.util");
             }
         }
     });
-    
+
     /** Function to generate a readonly uispec based on a regular uispec. 
      * @param uispec the uispec to be converted to Read only.
      * @param search if this is defined, each time this string appear in any of the values
@@ -835,17 +824,18 @@ fluid.registerNamespace("cspace.util");
             if (key === "expander") {
                 fluid.each(fluid.makeArray(val), function (expander) {
                     fluid.each(["tree", "trueTree", "falseTree"], function (tree) {
-                        if (!expander[tree]) {return;}
+                        if (!expander[tree]) {return; }
+                        if (expander.type === "fluid.renderer.selection.inputs") {
+                            return;
+                        }
                         expander[tree] = resolveReadOnlyUISpecImpl(expander[tree]);
                     });
-                    if (!newspec.expander) {newspec.expander = [];}
+                    if (!newspec.expander) {newspec.expander = []; }
                     newspec.expander.push(expander);
                 });
-            }
-            else if (typeof val === "string" || val.messagekey || isDecorator(val, "addClass")) {
+            } else if (typeof val === "string" || val.messagekey || isDecorator(val, "addClass")) {
                 newspec[key] = val;
-            }
-            else if (val.selection) { 
+            } else if (val.selection) {
                 newspec[key] = {
                     value: val.selection,
                     decorators: [{
@@ -857,19 +847,17 @@ fluid.registerNamespace("cspace.util");
                         }
                     }]
                 };
-            }
-            else if (isDecorator(val, "cspace.autocomplete")) {
+            } else if (isDecorator(val, "cspace.autocomplete")) {
                 newspec[key] = {
                     value: val.value,
                     decorators: [{
                         func: "cspace.util.urnToStringFieldConverter",
-                        type: "fluid"   
+                        type: "fluid"
                     }]
-                };                
-            } 
-            else if (isDecorator(val, "cspace.makeRepeatable")) {
+                };
+            } else if (isDecorator(val, "cspace.makeRepeatable")) {
                 var decorator = val.decorators[0];
-                var opts = decorator.options;               
+                var opts = decorator.options;
                 newspec[key] = {
                     decorators: [{
                         func: decorator.func,
@@ -885,7 +873,7 @@ fluid.registerNamespace("cspace.util");
                                             tree: resolveReadOnlyUISpecImpl(opts.protoTree.expander.tree.expander.tree),
                                             type: opts.protoTree.expander.tree.expander.type,
                                             pathAs: opts.protoTree.expander.tree.expander.pathAs,
-                                            controlledBy: opts.protoTree.expander.tree.expander.controlledBy 
+                                            controlledBy: opts.protoTree.expander.tree.expander.controlledBy
                                         }
                                     },
                                     type: opts.protoTree.expander.type
@@ -894,16 +882,15 @@ fluid.registerNamespace("cspace.util");
                         }
                     }]
                 };
-            }
-            else if (isDecorator(val, "cspace.structuredDate") || isDecorator(val, "cspace.datePicker")) {
+            } else if (isDecorator(val, "cspace.structuredDate") || isDecorator(val, "cspace.datePicker") || isDecorator(val, "cspace.inputValidator")) {
                 newspec[key] = {
                     value: val.value
-                };                
+                };
             }
-        });  
-        return newspec;   
+        });
+        return newspec;
     };
-    
+
     /** Function to return an apropriate uispec, based on the two parameters.
      * If the readOnly parameter is set to true, a call to UISpecToReadOnlyImpl is 
      * made. This will modify the uispec to be a read only version of the 
@@ -919,14 +906,14 @@ fluid.registerNamespace("cspace.util");
 
     function updateDimensions(that) {
         var target = that.container[0];
-        that.indicator[target.offsetHeight < that.options.spinnerDimensions.height || 
-                       target.offsetWidth < that.options.spinnerDimensions.width ? 
+        that.indicator[target.offsetHeight < that.options.spinnerDimensions.height ||
+                       target.offsetWidth < that.options.spinnerDimensions.width ?
                        "addClass" : "removeClass"](that.options.styles.contain);
         that.indicator.css({
             left: target.offsetLeft + "px",
             top: target.offsetTop + "px",
             width: target.offsetWidth + "px",
-            height: target.offsetHeight + "px" 
+            height: target.offsetHeight + "px"
         });
     }
 
@@ -948,23 +935,23 @@ fluid.registerNamespace("cspace.util");
             height: 92,
             width: 92
         },
-        loadOnInit: false,
+        loadOnInit: false
     });
-    
+
     cspace.util.loadingIndicator.postInitFunction = function (that) {
-        
+
         fluid.each(that.options.showOn, function (event) {
             event.addListener(that.show);
         });
         fluid.each(that.options.hideOn, function (event) {
             event.addListener(that.hide);
         });
-        
-        that.indicator = $("<div />");
+
+        that.indicator = $("<div/>");
         that.indicator.hide();
         that.indicator.addClass(that.options.styles.loading);
         that.container[that.container[0] === document.body ? "append" : "after"](that.indicator);
-        
+
         that.container.resize(that.update);
         var body = document.body;
         var domSubtreeModifiedListner = function (event) {
@@ -975,15 +962,14 @@ fluid.registerNamespace("cspace.util");
         };
         if (body.addEventListener) {
             body.addEventListener("DOMSubtreeModified", domSubtreeModifiedListner, false);
-        }
-        else if (body.attachEvent) {
+        } else if (body.attachEvent) {
             body.attachEvent("onDOMSubtreeModified", domSubtreeModifiedListner);
         }
         if (that.options.loadOnInit) {
             that.show();
         }
     };
-    
+
     cspace.util.loadingIndicator.preInitFunction = function (that) {
         that.update = function () {
             updateDimensions(that);
@@ -1000,7 +986,7 @@ fluid.registerNamespace("cspace.util");
             hideOn: that.hide
         };
     };
-    
+
     cspace.util.refreshComponents = function (that) {
         fluid.each(that.options.components, function (component, name) {
             var subComponent = that[name];
@@ -1009,25 +995,25 @@ fluid.registerNamespace("cspace.util");
             }
         });
     };
-    
+
     cspace.util.modelBuilder = function (options) {
         var records = cspace.permissions.getPermissibleRelatedRecords(options.related, options.resolver, options.recordTypeManager, options.permission);
         return fluid.invokeGlobalFunction(options.callback, [options, records]);
     };
-    
+
     cspace.util.modelBuilder.fixupModel = function (model) {
         fluid.remove_if(model.categories, function (category) {
             return category === undefined;
         });
     };
-    
+
     cspace.util.globalNavigator = function (options) {
         var that = fluid.initView("cspace.util.globalNavigator", "body", options);
         fluid.initDependents(that);
         that.bindEvents();
         return that;
     };
-    
+
     cspace.util.globalNavigator.bindEvents = function (that) {
         that.container.delegate(that.options.selectors.include, "click", function () {
             var target = $(this);
@@ -1050,7 +1036,7 @@ fluid.registerNamespace("cspace.util");
             callback();
         }, "onPerformNavigationFinal", undefined, "last");
     };
-    
+
     fluid.defaults("cspace.util.globalNavigator", {
         gradeNames: ["fluid.viewComponent"],
         selectors: {
@@ -1068,7 +1054,7 @@ fluid.registerNamespace("cspace.util");
             onPerformNavigation: "preventable"
         }
     });
-    
+
     cspace.globalSetup = function (tag, options) {
         var that = fluid.initLittleComponent("cspace.globalSetup");
         fluid.instantiateFirers(that, that.options);
@@ -1108,13 +1094,13 @@ fluid.registerNamespace("cspace.util");
                         options: {
                             userLogin: resourceSpecs.loginstatus.resourceText
                         }
-                    }, 
+                    },
                     pageBuilderIO: {
                         options: {
                             pageCategory: tag
                         }
-                    }}, resourceSpecs.config.resourceText, options
-                );
+                    }
+                }, resourceSpecs.config.resourceText, options);
                 var newPageBuilderIOName = "pageBuilderIO-" + fluid.allocateGuid();
                 that.options.components[newPageBuilderIOName] = {
                     type: "cspace.pageBuilderIO",
@@ -1127,12 +1113,12 @@ fluid.registerNamespace("cspace.util");
         that.init(tag, options);
         return that;
     };
-    
+
     cspace.globalSetup.noLogin = function (options) {
         var that = fluid.initLittleComponent("cspace.globalSetup.noLogin", options);
         return that.options.tag === "cspace.login";
     };
-    
+
     fluid.defaults("cspace.globalSetup", {
         gradeNames: ["fluid.eventedComponent"],
         events: {
@@ -1166,7 +1152,7 @@ fluid.registerNamespace("cspace.util");
             }
         }
     });
-    
+
     fluid.defaults("cspace.namespaces", {
         gradeNames: ["fluid.modelComponent", "autoInit"],
         mergePolicy: {
@@ -1194,14 +1180,14 @@ fluid.registerNamespace("cspace.util");
         }
         return $.inArray(namespace, namespaces) > -1;
     };
-    
+
     cspace.recordTypes = function (options) {
         var that = fluid.initLittleComponent("cspace.recordTypes", options);
         fluid.initDependents(that);
         that.setup();
         return that;
     };
-    
+
     cspace.recordTypes.setup = function (that) {
         that.config = {
             strategies: [that.options.strategy(that.options)]
@@ -1213,7 +1199,7 @@ fluid.registerNamespace("cspace.util");
         that.administration = that.getRecordTypes("recordtypes.administration");
         that.nonVocabularies = that.cataloging.concat(that.procedures);
     };
-    
+
     fluid.defaults("cspace.recordTypes", {
         gradeNames: ["fluid.littleComponent"],
         mergePolicy: {
@@ -1233,13 +1219,13 @@ fluid.registerNamespace("cspace.util");
         model: {},
         strategy: cspace.util.schemaStrategy
     });
-    
+
     cspace.util.togglable = function (container, options) {
         var that = fluid.initView("cspace.util.togglable", container, options);
-        
+
         that.locate("header").addClass(that.options.styles[that.options["default"]])
             .addClass(that.options.styles.header).fluid("tabbable");
-        
+
         that.getNext = function (source) {
             var next = source.next(that.options.selectors.togglable);
             if (next.length > 0) {
@@ -1248,14 +1234,14 @@ fluid.registerNamespace("cspace.util");
             // Assume that the source is last in the block.
             return source.parent().next(that.options.selectors.togglable);
         };
-        
+
         var toggle = function (source) {
             that.getNext(source).toggle();
             source.toggleClass(that.options.styles.expanded);
             source.toggleClass(that.options.styles.collapsed);
             return false;
         };
-        
+
         // Need clean listners to cover the case when the markup was rendered.
         // Listeners from wiped markup retain and thus double.
         that.container.undelegate(that.options.selectors.header, "keyup");
@@ -1269,11 +1255,11 @@ fluid.registerNamespace("cspace.util");
             }
             return toggle($(this));
         });
-            
+
         that.container.delegate(that.options.selectors.header, "click", function () {
             return toggle($(this));
         });
-        
+
         return that;
     };
     fluid.defaults("cspace.util.togglable", {
@@ -1289,18 +1275,18 @@ fluid.registerNamespace("cspace.util");
         },
         "default": "expanded"
     });
-    
+
     cspace.util.keyCode = function (evt) {
-        return evt.keyCode ? evt.keyCode : (evt.which ? evt.which : 0);          
+        return evt.keyCode || evt.which || 0;
     };
-    
+
     cspace.util.login = function (options) {
         return fluid.initLittleComponent("cspace.util.login", options);
     };
     fluid.defaults("cspace.util.login", {
         gradeNames: ["fluid.littleComponent"]
     });
-    
+
     fluid.defaults("cspace.util.relationResolver", {
         gradeNames: ["fluid.modelComponent", "autoInit"],
         invokers: {
@@ -1327,7 +1313,7 @@ fluid.registerNamespace("cspace.util");
             }
         }) || false;
     };
-    
+
     cspace.pageCategory = function (options) {
         var that = fluid.initLittleComponent("cspace.pageCategory", options);
         return fluid.typeTag(that.options.pageCategory);
@@ -1335,10 +1321,10 @@ fluid.registerNamespace("cspace.util");
     fluid.defaults("cspace.pageCategory", {
         gradeNames: "fluid.littleComponent"
     });
-    
+
     cspace.util.isLocalStorage = function () {
         try {
-            return "localStorage" in window && window["localStorage"] !== null;
+            return "localStorage" in window && window.localStorage !== null;
         } catch (e) {
             return false;
         }
@@ -1374,7 +1360,7 @@ fluid.registerNamespace("cspace.util");
         if (!model) {
             localStorage.removeItem(resolveElPath(directModel));
             return;
-        } 
+        }
         localStorage[resolveElPath(directModel)] = JSON.stringify(model);
     };
     cspace.util.localStorageDataSource.resolveElPath = function (elPath, termMap, directModel) {
@@ -1396,7 +1382,7 @@ fluid.registerNamespace("cspace.util");
             fluid.fail("Your browser does not support local storage!");
         }
     };
-    
+
     cspace.util.preInitMergeListeners = function (options, listeners) {
         options.listeners = options.listeners || {};
         fluid.each(listeners, function (value, key) {
@@ -1408,5 +1394,33 @@ fluid.registerNamespace("cspace.util");
             }
         });
     };
-    
+
+    cspace.util.resolveReadOnly = function (options) {
+        var that = fluid.initLittleComponent("cspace.util.resolveReadOnly", options);
+
+        // Return true if read only is enforced.
+        if (that.options.readOnly) {
+            return true;
+        }
+        // If there's no target (recordType) there is no concept of read only and thus we return false.
+        if (!that.options.target) {
+            return false;
+        }
+
+        that.recordPerms = {};
+        fluid.each(that.options.perms, function (permission) {
+            that.recordPerms[permission] = cspace.permissions.resolve({
+                permission: permission,
+                target: that.options.target,
+                permissions: that.options.permissions
+            });
+        });
+        return !(that.options.csid && that.recordPerms.update || that.recordPerms.create);
+    };
+
+    fluid.defaults("cspace.util.resolveReadOnly", {
+        gradeNames: ["fluid.littleComponent"],
+        perms: ["create", "update"]
+    });
+
 })(jQuery, fluid);
