@@ -418,6 +418,13 @@ cspace = cspace || {};
         },
         events: {
             afterFetch: null
+        },
+        invokers: {
+            displayErrorMessage: "cspace.util.displayErrorMessage",
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{globalBundle}.messageBase", "{arguments}.0"]
+            }
         }
     });
     
@@ -425,7 +432,22 @@ cspace = cspace || {};
         that.fetch = function (recordType) {
             var resourceSpec = fluid.copy(that.options.resourceSpec);
             fluid.each(resourceSpec, function (spec) {
-                spec["href"] = fluid.stringTemplate(spec.href, {recordType: recordType});
+                spec.href = fluid.stringTemplate(spec.href, {recordType: recordType});
+                spec.options.error = cspace.util.provideErrorCallback(that, spec.href, "errorFetching");
+                spec.options.success = function (data) {
+                    if (!data) {
+                        that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                            url: spec.href
+                        }));
+                        return;
+                    }
+                    if (data.isError === true) {
+                        fluid.each(data.messages, function (message) {
+                            that.displayErrorMessage(message);
+                        });
+                        return;
+                    }
+                };
             });
             fluid.fetchResources(resourceSpec, function () {
                 that.events.afterFetch.fire({

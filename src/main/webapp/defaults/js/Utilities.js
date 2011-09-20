@@ -284,7 +284,7 @@ fluid.registerNamespace("cspace.util");
             return replaced;
         }
 
-        that.makeAjaxOpts = function (model, directModel, callback, type) {
+        that.makeAjaxOpts = function (model, directModel, callback, type, errorCallback) {
             var togo = {
                 type: type,
                 url: resolveUrl(directModel),
@@ -302,6 +302,9 @@ fluid.registerNamespace("cspace.util");
                 error: function (xhr, textStatus, errorThrown) {
                     fluid.log("Data fetch error for url " + togo.url + " - textStatus: " + textStatus);
                     fluid.log("ErrorThrown: " + errorThrown);
+                    if (errorCallback) {
+                        errorCallback(xhr, textStatus, errorThrown);
+                    }
                 }
             };
             if (model) {
@@ -310,19 +313,28 @@ fluid.registerNamespace("cspace.util");
             return togo;
         };
 
-        that.get = function (directModel, callback) {
-            var ajaxOpts = that.makeAjaxOpts(null, directModel, callback, "GET");
+        that.get = function (directModel, callback, errorCallback) {
+            var ajaxOpts = that.makeAjaxOpts(null, directModel, callback, "GET", errorCallback);
             wrapper(function () {
                 $.ajax(ajaxOpts);
             });
         };
         if (that.options.writeable) {
-            that.put = function (model, directModel, callback) {
-                var ajaxOpts = that.makeAjaxOpts(model, directModel, callback, "POST");
+            that.put = function (model, directModel, callback, errorCallback) {
+                var ajaxOpts = that.makeAjaxOpts(model, directModel, callback, "POST", errorCallback);
                 $.ajax(ajaxOpts);
             };
         }
         return that;
+    };
+    
+    cspace.util.provideErrorCallback = function (that, url, message) {
+        return function (xhr, textStatus, errorThrown) {
+            that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage(message), {
+                url: url,
+                status: textStatus
+            }));
+        };
     };
 
     cspace.util.setZIndex = function () {
@@ -1069,7 +1081,10 @@ fluid.registerNamespace("cspace.util");
                 config: {
                     href: options.configURL || fluid.invoke("cspace.util.getDefaultConfigURL"),
                     options: {
-                        dataType: "json"
+                        dataType: "json",
+                        error: function (xhr, textStatus, errorThrown) {
+                            that.displayErrorMessage("Error fetching config file: " + textStatus);
+                        }
                     }
                 },
                 loginstatus: {
@@ -1077,18 +1092,25 @@ fluid.registerNamespace("cspace.util");
                     options: {
                         dataType: "json",
                         success: function (data) {
+                            if (data.isError === true) {
+                                fluid.each(data.messages, function (message) {
+                                    that.displayErrorMessage(message);
+                                });
+                                return;
+                            }
                             if (!data.login && !that.noLogin) {
                                 var currentUrl = document.location.href;
                                 var loginUrl = currentUrl.substr(0, currentUrl.lastIndexOf('/'));
                                 window.location = loginUrl;
                             }
                         },
-                        fail: function () {
-                            fluid.fail("PageBuilder was not able to retrieve login info and permissions, so failing");
+                        error: function (xhr, textStatus, errorThrown) {
+                            that.displayErrorMessage("PageBuilder was not able to retrieve login information and user permissions: " + textStatus);
                         }
                     }
                 }
             }, function (resourceSpecs) {
+                that.events.afterFetch.fire();
                 options = fluid.merge({"pageBuilder.options.model": "preserve", "pageBuilder.options.applier": "nomerge"}, {
                     pageBuilder: {
                         options: {
@@ -1108,7 +1130,7 @@ fluid.registerNamespace("cspace.util");
                 };
                 fluid.initDependent(that, newPageBuilderIOName, that.instantiator);
                 that[newPageBuilderIOName].initPageBuilder(options.pageBuilder.options);
-            });
+            }, {amalgamateClasses: that.options.amalgamateClasses});
         };
         that.init(tag, options);
         return that;
@@ -1124,10 +1146,23 @@ fluid.registerNamespace("cspace.util");
         events: {
             onFetch: null,
             pageReady: null,
-            onError: null
+            onError: null,
+            afterFetch: null
+        },
+        amalgamateClasses: [
+            "fastTemplate",
+            "fastResource"
+        ],
+        invokers: {
+            displayErrorMessage: "cspace.util.displayErrorMessage"
         },
         components: {
             instantiator: "{instantiator}",
+            globalBundle: {
+                type: "cspace.globalBundle",
+                createOnEvent: "afterFetch",
+                priority: "first"
+            },
             globalNavigator: {
                 type: "cspace.util.globalNavigator"
             },
@@ -1135,7 +1170,8 @@ fluid.registerNamespace("cspace.util");
                 type: "cspace.globalSetup.noLogin"
             },
             messageBar: {
-                type: "cspace.messageBar"
+                type: "cspace.messageBar",
+                createOnEvent: "afterFetch"
             },
             loadingIndicator: {
                 type: "cspace.util.loadingIndicator",
@@ -1152,7 +1188,14 @@ fluid.registerNamespace("cspace.util");
             }
         }
     });
-
+    
+    cspace.util.displayErrorMessage = function (messageBar, message, loadingIndicator) {
+        if (loadingIndicator) {
+            loadingIndicator.hide();
+        }
+        messageBar.show(message, Date(), true);
+    };
+    
     fluid.defaults("cspace.namespaces", {
         gradeNames: ["fluid.modelComponent", "autoInit"],
         mergePolicy: {
@@ -1422,5 +1465,4 @@ fluid.registerNamespace("cspace.util");
         gradeNames: ["fluid.littleComponent"],
         perms: ["create", "update"]
     });
-
 })(jQuery, fluid);

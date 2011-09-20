@@ -103,6 +103,31 @@ cspace = cspace || {};
         }
         return true;
     };
+    
+    var wrapSuccess = function (that, event, url) {
+        return function (data) {
+            if (!data) {
+                that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                    url: url
+                }));
+                return;
+            }
+            if (data.isError === true) {
+                fluid.each(data.messages, function (message) {
+                    that.displayErrorMessage(message);
+                });
+                return;
+            }
+            event.fire(data);
+        };
+    };
+    
+    var wrapError = function (that, event, url) {
+        return function (xhr, textStatus, errorThrown) {
+            cspace.util.provideErrorCallback(that, url, "errorFetching")(xhr, textStatus, errorThrown);
+            event.fire(xhr, textStatus, errorThrown);
+        };
+    };
 
     var submitEmail = function (email, url, that) {
         if (cspace.util.useLocalData()) {
@@ -114,8 +139,8 @@ cspace = cspace || {};
                 type: "POST",
                 dataType: "json",
                 data: JSON.stringify({"email": email}),
-                success: that.events.emailSubmitted.fire,
-                error: that.events.onError.fire
+                success: wrapSuccess(that, that.events.emailSubmitted, url),
+                error: wrapError(that, that.events.onError, url)
             });
         }
     };
@@ -131,8 +156,8 @@ cspace = cspace || {};
                 type: "POST",
                 dataType: "json",
                 data: JSON.stringify({"password": password, "token": that.token, "email": that.email}),
-                success: that.events.passwordSubmitted.fire,
-                error: that.events.onError.fire
+                success: wrapSuccess(that, that.events.passwordSubmitted, url),
+                error: wrapError(that, that.events.onError, url)
             });
         }
     };
@@ -338,6 +363,11 @@ cspace = cspace || {};
             lookupMessage: {
                 funcName: "cspace.util.lookupMessage",
                 args: ["{login}.options.parentBundle.messageBase", "{arguments}.0"]
+            },
+            displayErrorMessage: "cspace.util.displayErrorMessage",
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{globalBundle}.messageBase", "{arguments}.0"]
             }
         },
         strings: {}, 

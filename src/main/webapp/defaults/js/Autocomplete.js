@@ -174,6 +174,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.autocomplete.testNewTermDataSource = function (options) {
         return {
+            options: {
+                url: "../../../chain%termUrl"
+            },
             put: function (model, directModel, callback) {
                 fluid.log("Post of new term record " + JSON.stringify(model) + " to URL " + directModel.termURL);
                 callback({urn: "urn:" + fluid.allocateGuid(), label: model.fields.displayName});
@@ -464,11 +467,23 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 if (permitted) {
                     that.buttonAdjustor(true); // hide the button to show the "loading indicator"
                     that.matchesSource.get(that.model, function (matches) {
+                        if (!matches) {
+                            that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                                url: that.matchesSource.options.url
+                            }));
+                            return;
+                        }
+                        if (matches.isError === true) {
+                            fluid.each(matches.messages, function (message) {
+                                that.displayErrorMessage(message);
+                            });
+                            return;
+                        }
                         that.model.matches = matches;
                         that.buttonAdjustor();
                         that.popup.open();
                         that.autocomplete.events.onSearchDone.fire(newValue);
-                    });
+                    }, cspace.util.provideErrorCallback(that, that.matchesSource.options.url, "errorFetching"));
                 }
                 else {
                     if (newValue === "") { // CSPACE-1651
@@ -486,8 +501,20 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
         // TODO: risk of asynchrony
         that.authoritiesSource.get(null, function (authorities) {
+            if (!authorities) {
+                that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                    url: that.authoritiesSource.options.url
+                }));
+                return;
+            }
+            if (authorities.isError === true) {
+                fluid.each(authorities.messages, function (message) {
+                    that.displayErrorMessage(message);
+                });
+                return;
+            }
             that.model.authorities = authorities;
-        });
+        }, cspace.util.provideErrorCallback(that, that.authoritiesSource.options.url, "errorFetching"));
 
         that.closeButton.button.click(function () {
             that.eventHolder.events.revertState.fire();
@@ -505,9 +532,21 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var authority = that.model.authorities[key];
         that.buttonAdjustor(true); // Hide the button. It will be replaced by the spinnder to indicate selection is being saved (CSPACE-2091).
         that.newTermSource.put({fields: {displayName: that.model.term}}, {termUrl: authority.url}, function (response) {
+            if (!response) {
+                that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                    url: that.newTermSource.options.url
+                }));
+                return;
+            }
+            if (response.isError === true) {
+                fluid.each(response.messages, function (message) {
+                    that.displayErrorMessage(message);
+                });
+                return;
+            }
             updateAuthoritatively(that, response);
             that.eventHolder.events.afterSelectAuthority.fire();
-        });
+        }, cspace.util.provideErrorCallback(that, that.newTermSource.options.url, "errorWriting"));
     };
     
     cspace.autocomplete.revertState = function (that) {
@@ -580,6 +619,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             selectMatch: {
                 funcName: "cspace.autocomplete.selectMatch",
                 args: ["{autocomplete}", "{arguments}.0"]
+            },
+            displayErrorMessage: "cspace.util.displayErrorMessage",
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{globalBundle}.messageBase", "{arguments}.0"]
             }
         },
         components: {

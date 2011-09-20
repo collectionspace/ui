@@ -158,7 +158,12 @@ cspace = cspace || {};
             setupTab: "cspace.tabs.setupTab",
             tabsSuccess: "cspace.tabs.tabsSuccess",
             tabsSelect: "cspace.tabs.tabsSelect",
-            tabsSelectWrapper: "cspace.tabs.tabsSelectWrapper"
+            tabsSelectWrapper: "cspace.tabs.tabsSelectWrapper",
+            displayErrorMessage: "cspace.util.displayErrorMessage",
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{globalBundle}.messageBase", "{arguments}.0"]
+            }
         },
         configURLTemplate: "%webapp/config/%record-tab.json",
         selectors: {
@@ -264,7 +269,8 @@ cspace = cspace || {};
             ajaxOptions: {
                 // This is required as of jQuery UI v1.8.12
                 dataType: "html",
-                success: that.tabsSuccess
+                success: that.tabsSuccess,
+                error: cspace.util.provideErrorCallback(that, "", "errorFetching")
             },
             select: that.tabsSelectWrapper
         }).scrollabletab();

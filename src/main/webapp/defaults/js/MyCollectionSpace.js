@@ -69,6 +69,15 @@ cspace = cspace || {};
     
     var setupMyCollectionSpace = function (that) {
         fluid.initDependent(that, "myCollectionSpaceLoadingIndicator", that.options.instantiator);
+        
+        that.displayErrorMessage = function (message) {
+            cspace.util.displayErrorMessage(that.options.messageBar, message, that.myCollectionSpaceLoadingIndicator);
+        };
+        
+        that.lookupMessage = function (message) {
+            return cspace.util.lookupMessage(that.options.parentBundle.messageBase, message);
+        };
+        
         that.events.onFetch.fire();
         cspace.util.modelBuilder.fixupModel(that.model);
         var options = that.options;
@@ -95,6 +104,7 @@ cspace = cspace || {};
         });
         fluid.each(that.options.collector, function (spec, key) {
             spec.options.success = cspace.util.composeCallbacks(spec.options.success, initDependent(that, key));
+            spec.options.error = cspace.util.composeCallbacks(spec.options.error, cspace.util.provideErrorCallback(that, spec.href, "errorFetching"));
         });
         fluid.initDependent(that, "togglable", that.options.instantiator);
         fluid.fetchResources(that.options.collector, function () {
@@ -188,6 +198,7 @@ cspace = cspace || {};
         collector: {},
         parentBundle: "{globalBundle}",
         globalNavigator: "{globalNavigator}",
+        messageBar: "{messageBar}",
         produceTree: cspace.myCollectionSpace.produceTree,
         // TODO: Once component sibbling options are resolvable with each other, "records"
         // can be used to resolve and censor a model.

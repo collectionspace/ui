@@ -34,7 +34,22 @@ cspace = cspace || {};
             that.resourceSpec[key] = {
                 href: source.href,
                 options: {
-                    dataType: "json"
+                    dataType: "json",
+                    error: cspace.util.provideErrorCallback(that, source.href, "errorFetching"),
+                    success: function (data) {
+                        if (!data) {
+                            that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                                url: source.href
+                            }));
+                            return;
+                        }
+                        if (data.isError === true) {
+                            fluid.each(data.messages, function (message) {
+                                that.displayErrorMessage(message);
+                            });
+                            return;
+                        }
+                    }
                 },
                 forceCache: true
             };
@@ -75,7 +90,7 @@ cspace = cspace || {};
     
     cspace.dataSource = function (options) {
         var that = fluid.initLittleComponent("cspace.dataSource", options);
-        
+        fluid.initDependents(that);
         buildResourceSpec(that);
         
         // Publics method that will either provide a full existing model or create a new model based on 
@@ -151,6 +166,13 @@ cspace = cspace || {};
         gradeNames: ["fluid.littleComponent"],
         events: {
             afterFetchResources: null
+        },
+        invokers: {
+            displayErrorMessage: "cspace.util.displayErrorMessage",
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{globalBundle}.messageBase", "{arguments}.0"]
+            }
         },
         recordType: "", // Main record's type, generally inhereted from parent dataContext.
         baseUrl: "../../../chain", // Url that will be put in the base path when building main record's fetch url.

@@ -54,13 +54,14 @@ cspace = cspace || {};
     };
 
     var fetchNextNumberInSequence = function (that, sequenceName, callback) {
+        var url = cspace.util.addTrailingSlash(that.options.baseUrl) + "id/" + sequenceName;
         jQuery.ajax({
-            url: cspace.util.addTrailingSlash(that.options.baseUrl) + "id/" + sequenceName,
+            url: url,
             type: "GET",
             dataType: "json",
             success: callback,
             error: function (xhr, textStatus, errorThrown) {
-                // TODO: implement proper error handling
+                cspace.util.provideErrorCallback(that, url, "errorFetching")(xhr, textStatus, errorThrown);
                 callback({next: "Not supported yet"}, "error");
             }
         });
@@ -69,6 +70,18 @@ cspace = cspace || {};
 
     var populateInputField = function (that) {
         return function (data, status) {
+            if (!data) {
+                that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                    url: cspace.util.addTrailingSlash(that.options.baseUrl) + "id/" + that.options.selected
+                }));
+                return;
+            }
+            if (data.isError === true) {
+                fluid.each(data.messages, function (message) {
+                    that.displayErrorMessage(message);
+                });
+                return;
+            }
             var numField = that.locate("numberField", that.container);
             numField.val(data.next);
             numField.change();
@@ -150,39 +163,9 @@ cspace = cspace || {};
         that.locate("list").hide();
     };
 
-    var setupChooser = function (that) {
-        // Data structure needed by fetchResources
-        var resources = {
-            chooser: {
-                href: that.options.templateUrl,
-                cutpoints: buildCutpoints(that.options.selectors),
-                options: {
-                    dataType: "html"
-                }
-            }
-        };
-        
-        // Get the template, create the tree and render the table of contents
-        fluid.fetchResources(resources, function () {
-            var templates = fluid.parseTemplates(resources, ["chooser"], {});
-            var node = $("<div></div>", that.container[0].ownerDocument).addClass(that.options.styles.container);
-            fluid.reRender(templates, node, buildTree(that.model), {model: that.model});
-            that.container.append(node);
-            setupNode(that);
-            bindEvents(that);
-            that.events.afterRender.fire(node);
-        });
-    };
-
-    cspace.numberPatternChooser = function (container, options) {
-        var that = fluid.initView("cspace.numberPatternChooser", container, options);
-        that.model = that.options.model;
-        setupChooser(that);
-        return that;
-    };
-
     fluid.defaults("cspace.numberPatternChooser", {
-        gradeNames: ["fluid.viewComponent"],
+        gradeNames: ["fluid.viewComponent", "fluid.modelComponent", "autoInit"],
+        finalInitFunction: "cspace.numberPatternChooser.finalInit",
         selectors: {
             button: ".csc-numberPatternChooser-button",
             list: ".csc-numberPatternChooser-list",
@@ -202,7 +185,53 @@ cspace = cspace || {};
             afterRender: null
         },
         templateUrl: cspace.componentUrlBuilder("%webapp/html/components/NumberPatternChooser.html"),
-        baseUrl: "../../../chain"
+        baseUrl: "../../../chain",
+        invokers: {
+            displayErrorMessage: "cspace.util.displayErrorMessage",
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{globalBundle}.messageBase", "{arguments}.0"]
+            }
+        }
     });
+    
+    cspace.numberPatternChooser.finalInit = function (that) {
+        // Data structure needed by fetchResources
+        var resources = {
+            chooser: {
+                href: that.options.templateUrl,
+                cutpoints: buildCutpoints(that.options.selectors),
+                options: {
+                    dataType: "html",
+                    success: function (data) {
+                        if (!data) {
+                            that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                                url: that.options.templateUrl
+                            }));
+                            return;
+                        }
+                        if (data.isError === true) {
+                            fluid.each(data.messages, function (message) {
+                                that.displayErrorMessage(message);
+                            });
+                            return;
+                        }
+                    },
+                    error: cspace.util.provideErrorCallback(that, that.options.templateUrl, "errorFetching")
+                }
+            }
+        };
+        
+        // Get the template, create the tree and render the table of contents
+        fluid.fetchResources(resources, function () {
+            var templates = fluid.parseTemplates(resources, ["chooser"], {});
+            var node = $("<div></div>", that.container[0].ownerDocument).addClass(that.options.styles.container);
+            fluid.reRender(templates, node, buildTree(that.model), {model: that.model});
+            that.container.append(node);
+            setupNode(that);
+            bindEvents(that);
+            that.events.afterRender.fire(node);
+        });
+    };
     
 })(jQuery, fluid);

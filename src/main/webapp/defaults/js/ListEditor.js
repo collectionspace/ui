@@ -44,6 +44,11 @@ cspace = cspace || {};
             addNewListRow: {
                 funcName: "cspace.listEditor.addNewListRow",
                 args: "{listEditor}"
+            },
+            displayErrorMessage: "cspace.util.displayErrorMessage",
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{globalBundle}.messageBase", "{arguments}.0"]
             }
         },
         parentBundle: "{globalBundle}",
@@ -142,16 +147,37 @@ cspace = cspace || {};
         that.hideDetails();
     };
     
+    var provideSuccessCallback = function (that, callback) {
+        return function (data) {
+            if (!data) {
+                that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                    url: that.listSource.options.url
+                }));
+                return;
+            }
+            if (data.isError === true) {
+                fluid.each(data.messages, function (message) {
+                    that.displayErrorMessage(message);
+                });
+            }
+            callback.apply(null, arguments);
+        };
+    };
+    
+    var getList = function (that, callback, termMap) {
+        that.events.onListUpdate.fire();
+        that.listSource.get(termMap, provideSuccessCallback(that, callback), cspace.util.provideErrorCallback(that, that.listSource.options.url, "errorFetching"));
+    };
+    
     cspace.listEditor.updateListRelated = function (that, primary, csid, callback) {
         callback = (typeof callback === "function") ? callback : function (listModel) {
             that.list.applier.requestChange(that.list.options.elPaths.items, listModel[that.options.recordType]);
             that.refreshView();
         };
-        that.events.onListUpdate.fire();
-        that.listSource.get({
+        getList(that, callback, {
             recordType: primary,
             csid: csid
-        }, callback);
+        });
     };
     
     var updatelistcallback = function (that) {
@@ -163,19 +189,17 @@ cspace = cspace || {};
     
     cspace.listEditor.updateListUsers = function (that, searchField, callback) {
         callback = (typeof callback === "function") ? callback : updatelistcallback(that);
-        that.events.onListUpdate.fire();
-        that.listSource.get({
+        getList(that, callback, {
             query: searchField.val() || "",
             recordType: that.options.recordType
-        }, callback);
+        });
     };
     
     cspace.listEditor.updateList = function (that, callback) {
         callback = (typeof callback === "function") ? callback : updatelistcallback(that);
-        that.events.onListUpdate.fire();
-        that.listSource.get({
+        getList(that, callback, {
             recordType: that.options.recordType
-        }, callback);
+        });
     };
     
     cspace.listEditor.hideDetails = function (dom, events) {

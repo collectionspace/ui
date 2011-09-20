@@ -100,6 +100,11 @@ cspace = cspace || {};
             updateModel: {
                 funcName: "cspace.createNew.updateModel",
                 args: ["{createNew}", "{arguments}.0"]
+            },
+            displayErrorMessage: "cspace.util.displayErrorMessage",
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{globalBundle}.messageBase", "{arguments}.0"]
             }
         },
         urls: cspace.componentUrlBuilder({
@@ -248,11 +253,23 @@ cspace = cspace || {};
     cspace.createNew.finalInit = function (that) {
         cspace.util.modelBuilder.fixupModel(that.model);
         that.templateSource.get(null, function (templateViews) {
+            if (!templateViews) {
+                that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                    url: that.templateSource.options.url
+                }));
+                return;
+            }
+            if (templateViews.isError === true) {
+                fluid.each(templateViews.messages, function (message) {
+                    that.displayErrorMessage(message);
+                });
+                return;
+            }
             that.applier.requestChange("templateViews", templateViews);
             that.refreshView();
             $("input[type|='radio']").filter(":first").prop('checked', true).change();
             that.events.onReady.fire(that);
-        });
+        }, cspace.util.provideErrorCallback(that, that.templateSource.options.url, "errorFetching"));
     };
     
     // This funtction executes on file load and starts the fetch process of component's template.

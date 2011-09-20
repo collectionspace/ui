@@ -46,6 +46,13 @@ cspace = cspace || {};
             createButton: "cs-createTemplateBox-createButton"            
         },
         strings: {},
+        invokers: {
+            displayErrorMessage: "cspace.util.displayErrorMessage",
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{globalBundle}.messageBase", "{arguments}.0"]
+            }
+        },
         components: {
             recordTypeSelector: {
                 type: "cspace.util.recordTypeSelector",
@@ -152,10 +159,22 @@ cspace = cspace || {};
                 that.listSource.get({
                     recordType: recordType
                 }, function (data) {
+                    if (!data) {
+                        that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                            url: that.listSource.options.url
+                        }));
+                        return;
+                    }
+                    if (data.isError === true) {
+                        fluid.each(data.messages, function (message) {
+                            that.displayErrorMessage(message);
+                        });
+                        return;
+                    }
                     that.applier.requestChange("templateList", data.templateList);
                     that.applier.requestChange("templateNames", data.templateNames);
                     that.refreshView();
-                });
+                }, cspace.util.provideErrorCallback(that, that.listSource.options.url, "errorFetching"));
             }
         };
         that.applier.modelChanged.addListener("recordType", function () {
@@ -169,9 +188,21 @@ cspace = cspace || {};
                 recordType: that.model.recordType,
                 templateType: that.model.templateType
             }, function (data) {
+                if (!data) {
+                    that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                        url: that.templateSource.options.url
+                    }));
+                    return;
+                }
+                if (data.isError === true) {
+                    fluid.each(data.messages, function (message) {
+                        that.displayErrorMessage(message);
+                    });
+                    return;
+                }
                 that.localStorage.set(data);
                 window.location = fluid.stringTemplate(that.options.urls.cloneURL, {recordType: that.model.recordType});
-            });
+            }, cspace.util.provideErrorCallback(that, that.templateSource.options.url, "errorFetching"));
         };
         
         that.refreshView();

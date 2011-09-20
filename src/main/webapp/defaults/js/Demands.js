@@ -339,6 +339,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.includeDemands = function () {
+        
+        // Display error message
+        fluid.demands("cspace.util.displayErrorMessage", "cspace.globalSetup", {
+            funcName: "cspace.util.displayErrorMessage",
+            args: ["{messageBar}", "{arguments}.0", "{loadingIndicator}"]
+        });
     
         fluid.demands("cspace.relationManager.add", "cspace.relationManager", {
             funcName: "cspace.relationManager.add",
@@ -1869,7 +1875,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         fluid.demands("cspace.composite.compose", "cspace.composite", {
             funcName: "cspace.composite.compose",
-            args: ["{composite}.transform", "{composite}.options.resources", "{composite}.options.urls", "{arguments}.0"]
+            args: ["{composite}", "{arguments}.0"]
         });
         
         fluid.demands("cspace.advancedSearch.fetcher", "cspace.advancedSearch", "{options}");

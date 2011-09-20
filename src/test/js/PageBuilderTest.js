@@ -401,9 +401,15 @@ cspace = cspace || {};
                     }
                 },
             };
-            var result = cspace.composite.compose(fluid.model.transformWithRules, ["test1", "test3"], {
-                composite: "../../chain/composite",
-                prefix: "../../chain"
+            var result = cspace.composite.compose({
+                transform: fluid.model.transformWithRules,
+                options: {
+                    resources: ["test1", "test3"],
+                    urls: {
+                        composite: "../../chain/composite",
+                        prefix: "../../chain"
+                    }
+                }
             }, resourceSpec);
             jqUnit.assertDeepEq("Test2 should stay", expected.test2, result.test2);
             jqUnit.assertEquals("Composite href is now", expected.composite.href, result.composite.href);

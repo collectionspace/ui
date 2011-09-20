@@ -65,8 +65,20 @@ cspace = cspace || {};
             }
         }
         var that = {
-            makeCallback: function (spec, key) {
+            makeCallback: function (that, spec, key) {
                 return function (text) {
+                    if (!text) {
+                        that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                            url: spec.href
+                        }));
+                        return;
+                    }
+                    if (text.isError === true) {
+                        fluid.each(text.messages, function (message) {
+                            that.displayErrorMessage(message);
+                        });
+                        return;
+                    }
                     texts[key] = {text: text};
                     attemptApply();
                 };
@@ -93,7 +105,12 @@ cspace = cspace || {};
     fluid.defaults("cspace.composite", {
         gradeNames: ["fluid.littleComponent", "autoInit"],
         invokers: {
-            compose: "cspace.composite.compose"
+            compose: "cspace.composite.compose",
+            displayErrorMessage: "cspace.util.displayErrorMessage",
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{globalBundle}.messageBase", "{arguments}.0"]
+            }
         }
     });
     // A version of compose for local app.
@@ -101,9 +118,10 @@ cspace = cspace || {};
         return resourceSpec;
     };
     // A version of compose for deployment.
-    cspace.composite.compose = function (transform, resources, urls, resourceSpecs) {
+    cspace.composite.compose = function (that, resourceSpecs) {
         var compositeCallbacks = {};
         var rules = {};
+        var urls = that.options.urls;
         
         // Add a composite block to resourceSpecs that will aggregate a number of individual requests.
         resourceSpecs.composite = {
@@ -112,15 +130,13 @@ cspace = cspace || {};
                 dataType: "json",
                 type: "POST",
                 data: {},
-                error: function (xhr, textStatus, errorThrown) {
-                    fluid.fail("Error making a composite request: " + textStatus);
-                }
+                error: cspace.util.provideErrorCallback(that, urls.composite, "errorFetching")
             }
         };
         
         // Go through all of resourceSpecs and move|map matched ones into the composite part.
         fluid.remove_if(resourceSpecs, function (resourceSpec, name) {
-            if ($.inArray(name, resources) < 0) {
+            if ($.inArray(name, that.options.resources) < 0) {
                 return;
             }
             if (!resourceSpec) {
@@ -132,7 +148,7 @@ cspace = cspace || {};
             };
             var prefixIndex = resourceSpec.href.indexOf(urls.prefix);
             resourceSpec.href = prefixIndex < 0 ? resourceSpec.href : resourceSpec.href.substr(prefixIndex + urls.prefix.length);
-            resourceSpecs.composite.options.data[name] = transform(resourceSpec, {
+            resourceSpecs.composite.options.data[name] = that.transform(resourceSpec, {
                 "path": "href",
                 "method": "options.type",
                 "dataType": "options.dataType"
@@ -144,6 +160,17 @@ cspace = cspace || {};
         
         // Make a single success callback that aggregates all individual success and error callbacks.
         resourceSpecs.composite.options.success = function (data) {
+            if (!data) {
+                that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                    url: resourceSpecs.composite.href
+                }));
+            }
+            if (data.isError === true) {
+                fluid.each(data.messages, function (message) {
+                    that.displayErrorMessage(message);
+                });
+                return;
+            }
             fluid.each(compositeCallbacks, function (compositeCallback, resource) {
                 var thisData = data[resource];
                 if (thisData.body.isError === true) {
@@ -195,26 +222,39 @@ cspace = cspace || {};
                 spec.href = urlExpander(spec.href);
                 spec.options = {
                     dataType: "html",
-                    success: pageSpecManager.makeCallback(spec, key),
+                    success: pageSpecManager.makeCallback(that, spec, key),
                     error: function (xhr, textStatus, errorThrown) {
+                        cspace.util.provideErrorCallback(that, spec.href, "errorFetching")(xhr, textStatus, errorThrown);
                         that.events.onError.fire();
-                        fluid.fail("Error fetching " + spec.href + " template:" + textStatus);
                     }
                 };
             });
             fluid.each(that.options.schema, function (resource, key) {
+                var url = fluid.invoke("cspace.util.getDefaultSchemaURL", resource);
                 resourceSpecs[resource] = {
-                    href: fluid.invoke("cspace.util.getDefaultSchemaURL", resource),
+                    href: url,
                     options: {
                         type: "GET",
                         dataType: "json",
                         success: function (data) {
+                            if (!data) {
+                                that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                                    url: url
+                                }));
+                                return;
+                            }
+                            if (data.isError === true) {
+                                fluid.each(data.messages, function (message) {
+                                    that.displayErrorMessage(message);
+                                });
+                                return;
+                            }
                             options.schema = options.schema || {};
                             fluid.merge(null, options.schema, data);
                         },
                         error: function (xhr, textStatus, errorThrown) {
+                            cspace.util.provideErrorCallback(that, url, "errorFetching")(xhr, textStatus, errorThrown);
                             that.events.onError.fire();
-                            fluid.fail("Error fetching " + options.recordType + " schema:" + textStatus);
                         }
                     }
                 };
@@ -227,20 +267,33 @@ cspace = cspace || {};
             
             options.pageType = options.pageType || that.options.recordType;
             if (options.pageType) {
+                var url = that.options.uispecUrl || fluid.invoke("cspace.util.getUISpecURL", options.pageType);
                 resourceSpecs.uispec = {
-                    href: that.options.uispecUrl || fluid.invoke("cspace.util.getUISpecURL", options.pageType),
+                    href: url,
                     options: {
                         type: "GET",
                         dataType: "json",
                         success: function (data) {
+                            if (!data) {
+                                that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                                    url: url
+                                }));
+                                return;
+                            }
+                            if (data.isError === true) {
+                                fluid.each(data.messages, function (message) {
+                                    that.displayErrorMessage(message);
+                                });
+                                return;
+                            }
                             options.uispec = data;
                             resolveReadOnly(options.uispec, "details", readOnly);
                             resolveReadOnly(options.uispec, "recordEditor", readOnly);
                             resolveReadOnly(options.uispec, "hierarchy", readOnly);
                         },
                         error: function (xhr, textStatus, errorThrown) {
+                            cspace.util.provideErrorCallback(that, url, "errorFetching")(xhr, textStatus, errorThrown);
                             that.events.onError.fire();
-                            fluid.fail("Error fetching " + options.pageType + " uispec:" + textStatus);
                         }
                     }
                 };
@@ -259,7 +312,7 @@ cspace = cspace || {};
                 pageSpecManager.conclude();
                 that.events.pageReady.fire();
             };
-            fluid.fetchResources(that.composite.compose(resourceSpecs), fetchCallback, {amalgamateClasses: that.options.amalgamateClasses});
+            fluid.fetchResources(that.composite.compose(resourceSpecs), fetchCallback);
         };
         
         return that;
@@ -271,14 +324,17 @@ cspace = cspace || {};
             "recordtypes",
             "namespaces"
         ],
-        amalgamateClasses: [
-            "fastTemplate",
-            "fastResource"
-        ],
         model: {},
         mergePolicy: {
             model: "preserve",
             applier: "nomerge"
+        },
+        invokers: {
+            displayErrorMessage: "cspace.util.displayErrorMessage",
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{globalBundle}.messageBase", "{arguments}.0"]
+            }
         },
         readOnlyUrlVar: "readonly/",
         components: {
@@ -387,10 +443,6 @@ cspace = cspace || {};
                     userId: "{pageBuilder}.options.userLogin.userId",
                     csid: "{pageBuilder}.options.userLogin.csid"
                 }
-            },
-            globalBundle: {
-                type: "cspace.globalBundle",
-                priority: "first"
             },
             namespaces: {
                 type: "cspace.namespaces",

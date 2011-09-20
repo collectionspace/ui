@@ -56,6 +56,13 @@ cspace = cspace || {};
         };
     };
     
+    cspace.mediaUploader.onFileError = function (that) {
+        return function (file, error, responseText, xhr) {
+            cspace.util.provideErrorCallback(that, that.options.urls.upload, "errorWriting")(error, responseText, xhr);
+            return false;
+        };
+    };
+    
     cspace.mediaUploader.produceTree = function (that) {
         return {
             expander: [{
@@ -190,6 +197,11 @@ cspace = cspace || {};
             removeMedia: {
                 funcName: "cspace.mediaUploader.removeMedia",
                 args: "{mediaUploader}"
+            },
+            displayErrorMessage: "cspace.util.displayErrorMessage",
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{globalBundle}.messageBase", "{arguments}.0"]
             }
         },
         elPaths: {
@@ -283,6 +295,13 @@ cspace = cspace || {};
                                 type: "fluid.deferredInvokeCall",
                                 func: "cspace.mediaUploader.onFileSuccess",
                                 args: ["{mediaUploader}", "{mediaUploader}.dom.uploadInput"]
+                            }
+                        },
+                        onFileError: {
+                            expander: {
+                                type: "fluid.deferredInvokeCall",
+                                func: "cspace.mediaUploader.onFileError",
+                                args: "{mediaUploader}"
                             }
                         }
                     }

@@ -31,6 +31,11 @@ cspace = cspace || {};
             checkReportButtonDisabling: {
                 funcName: "cspace.reportProducer.checkReportButtonDisabling",
                 args: ["{reportProducer}.model", "{reportProducer}.options.recordModel"]
+            },
+            displayErrorMessage: "cspace.util.displayErrorMessage",
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{globalBundle}.messageBase", "{arguments}.0"]
             }
         },
         components: {
@@ -183,6 +188,18 @@ cspace = cspace || {};
         that.reportTypesSource.get({
             recordType: that.options.recordType
         }, function (data) {
+            if (!data) {
+                    that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
+                        url: that.reportTypesSource.options.url
+                    }));
+                    return;
+                }
+                if (data.isError === true) {
+                    fluid.each(data.messages, function (message) {
+                        that.displayErrorMessage(message);
+                    });
+                    return;
+                }
             if (data.reportlist.length > 0) {
                 that.applier.requestChange("reportnames", data.reportnames);
                 that.applier.requestChange("reportlist", data.reportlist);
@@ -212,7 +229,7 @@ cspace = cspace || {};
                 }
             });
             that.events.ready.fire();
-        });
+        }, cspace.util.provideErrorCallback(that, that.reportTypesSource.options.url, "errorFetching"));
     };
     
     cspace.reportProducer.requestReport = function (model, options, events, stop, callback) {
