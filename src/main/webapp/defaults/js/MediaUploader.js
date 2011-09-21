@@ -9,14 +9,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 */
 
 /*global cspace:true, jQuery, fluid*/
-"use strict";
 
 cspace = cspace || {};
 
 (function ($, fluid) {
-    
+    "use strict";
+
     cspace.mediaUploader = function (container, options) {
         var that = fluid.initRendererComponent("cspace.mediaUploader", container, options);
+        // This selector is for uploader loading indicator.
+        var parent = that.container.parents(that.options.selectors.parents);
+        that.parent = parent.length > 0 ? parent : that.container;
         fluid.initDependents(that);
         that.refreshView();
         that.bindEvents();
@@ -221,9 +224,10 @@ cspace = cspace || {};
             fileUploader: ".csc-mediaUploader-fileUploaderContainer",
             uploadMediaLabel: ".csc-mediaUploader-uploadMedia-label",
             linkMediaLabel: ".csc-mediaUploader-linkMedia-label",
-            uploader: ".csc-mediaUploader"
+            uploader: ".csc-mediaUploader",
+            parents: ".content.main"
         },
-        selectorsToIgnore: ["fileUploader", "uploadInput"],
+        selectorsToIgnore: ["fileUploader", "uploadInput", "parents"],
         strings: {
             uploadButton: "+ Upload",
             linkButton: "Link",
@@ -247,6 +251,21 @@ cspace = cspace || {};
         },
         produceTree: cspace.mediaUploader.produceTree,
         components: {
+            loadingIndicator: {
+                type: "cspace.util.loadingIndicator",
+                container: "{mediaUploader}.parent",
+                options: {
+                    hideOn: [
+                        "{fileUploader}.events.onFileSuccess",
+                        "{fileUploader}.events.onFileError"
+                    ],
+                    events: {
+                        showOn: "{fileUploader}.events.onUploadStart"
+                    }
+                },
+                createOnEvent: "afterRender",
+                priority: "last"
+            },
             uploaderContext: {
                 type: "fluid.progressiveChecker",
                 options: {
