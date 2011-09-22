@@ -1231,8 +1231,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 model: "{recordEditor}.model",
                 applier: "{recordEditor}.options.applier",
                 listeners: {
-                    onLink: "{recordEditor}.requestSave",
-                    onRemove: "{recordEditor}.requestSave"
+                    onLink: "{recordEditor}.refreshNoSave",
+                    onRemove: "{recordEditor}.refreshNoSave"
                 }
             }
         });

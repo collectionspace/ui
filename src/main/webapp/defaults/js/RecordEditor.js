@@ -218,6 +218,14 @@ cspace = cspace || {};
             initDeferredComponents(that);
             fluid.log("RecordEditor.js renderPage end");
         };
+        that.refreshNoSave = function () {
+            fluid.log("RecordEditor.js before render");
+            that.renderer.refreshView();
+            that.options.messageBar.hide();
+            bindHandlers(that);
+            initDeferredComponents(that);
+            fluid.log("RecordEditor.js renderPage end");
+        };
 
 
         cspace.recordEditor.hasMediaAttached = function (that) {

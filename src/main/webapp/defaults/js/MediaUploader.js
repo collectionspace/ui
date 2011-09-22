@@ -54,8 +54,14 @@ cspace = cspace || {};
     cspace.mediaUploader.onFileSuccess = function (that, input) {
         return function (file, responseText, xhr) {
             var response = JSON.parse(responseText);
-            that.options.applier.requestChange(that.options.elPaths.srcUri, response.file);
-            that.events.onLink.fire();
+            that.applier.requestChange(that.options.elPaths.srcUri, response.file);
+            delete response.file;
+            that.applier.requestChange(that.options.elPaths.blobs, [response]);
+            that.applier.requestChange(that.options.elPaths.blobCsid, response.csid);
+            // TODO: When the onLink event listener triggers rerender and reinstantiation of media uploader this uploader dies :(.
+            setTimeout(function () {
+                that.events.onLink.fire();
+            }, 1);
         };
     };
     
@@ -209,7 +215,8 @@ cspace = cspace || {};
         },
         elPaths: {
             blobCsid: "fields.blobCsid",
-            srcUri: "fields.srcUri"
+            srcUri: "fields.srcUri",
+            blobs: "fields.blobs"
         },
         mergePolicy: {
             model: "preserve",
