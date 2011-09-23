@@ -399,6 +399,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     fluid.fetchResources.primeCacheFromResources("cspace.autocomplete.popup");
 
     function updateAuthoritatively(that, termRecord) {
+        if (that.hiddenInput.val() && 
+            termRecord.urn === that.hiddenInput.val() && 
+            that.autocompleteInput.val() === termRecord.label) {
+            return;
+        }
         that.hiddenInput.val(termRecord.urn);
         that.hiddenInput.change();
         fluid.log("New value " + termRecord.label);
