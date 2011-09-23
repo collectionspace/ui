@@ -238,7 +238,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 return index;
             }
         });
-        if (index === undefined) {
+        if (index === undefined && that.model.authorities.length > 0) {
             tree.addToPanel = {};
             tree.addTermTo = {
                 messagekey: "addTermTo",
@@ -363,9 +363,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     fluid.defaults("cspace.autocomplete.popup", {
         gradeNames: "fluid.rendererComponent",
-        mergePolicy: {
-            model: "preserve"
-        },
         selectors: {
             addToPanel: ".csc-autocomplete-addToPanel",
             authorityItem: ".csc-autocomplete-authorityItem",
@@ -406,8 +403,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.hiddenInput.change();
         fluid.log("New value " + termRecord.label);
         that.autocompleteInput.val(termRecord.label);
-        that.model.baseRecord = fluid.copy(termRecord);
-        that.model.term = termRecord.label;
+        that.applier.requestChange("baseRecord", fluid.copy(termRecord));
+        that.applier.requestChange("term", termRecord.label);
         if (that.autocomplete) {
             that.autocomplete.suppress();
         }
@@ -428,6 +425,24 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             node = node.parentNode; 
         }
     }
+    
+    cspace.autocomplete.handlePermissions = function (applier, model, resolve, options, permission, selector) {
+        var types = fluid.transform(model.authorities, function (auth) {
+            return auth.type;
+        });
+        options.oneOf = types;
+        if (!fluid.invokeGlobalFunction(resolve, [options])) {
+            selector.prop("disabled", true);
+        };
+        var authorities = fluid.remove_if(fluid.copy(model.authorities), function (auth) {
+            return !cspace.permissions.resolve({
+                resolver: options.resolver,
+                permission: permission,
+                target: auth.type
+            });
+        });
+        applier.requestChange("authorities", authorities);
+    };
 
     var setupAutocomplete = function (that) {
         that.hiddenInput = that.container.is("input") ? that.container : $("input", that.container.parent());
@@ -446,15 +461,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.popupElement = popup;
 
         var initialRec = cspace.autocomplete.urnToRecord(that.hiddenInput.val());
+        
         updateAuthoritatively(that, initialRec);
     };
 
     cspace.autocompleteImpl = function (container, options) {
         var that = fluid.initView("cspace.autocomplete", container, options);
-        that.model = {
-            authorities: [],
-            matches: []
-        };
 
         setupAutocomplete(that);
         fluid.initDependents(that);
@@ -463,7 +475,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
        
         that.autocomplete.events.onSearch.addListener(
             function (newValue, permitted) {
-                that.model.term = newValue; // TODO: use applier and use "double wait" in "flapjax style"
+                that.applier.requestChange("term", newValue);
                 if (permitted) {
                     that.buttonAdjustor(true); // hide the button to show the "loading indicator"
                     that.matchesSource.get(that.model, function (matches) {
@@ -479,7 +491,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             });
                             return;
                         }
-                        that.model.matches = matches;
+                        that.applier.requestChange("matches", matches);
                         that.buttonAdjustor();
                         that.popup.open();
                         that.autocomplete.events.onSearchDone.fire(newValue);
@@ -513,7 +525,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 });
                 return;
             }
-            that.model.authorities = authorities;
+            that.applier.requestChange("authorities", authorities);
+            if (that.handlePermissions) {
+                that.handlePermissions();
+            }
         }, cspace.util.provideErrorCallback(that, that.authoritiesSource.options.url, "errorFetching"));
 
         that.closeButton.button.click(function () {
@@ -602,6 +617,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         gradeNames: ["fluid.viewComponent"],
         termSaverFn: cspace.autocomplete.ajaxTermSaver,
         minChars: 3,
+        model: {
+            authorities: [],
+            matches: []
+        },
         delay: 500,
         invokers: {
             buttonAdjustor: {
@@ -642,6 +661,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 type: "cspace.autocomplete.popup",
                 options: {
                     model: "{autocomplete}.model",
+                    applier: "{autocomplete}.applier",
                     inputField: "{autocomplete}.autocompleteInput",
                     strings: "{autocomplete}.options.strings"
                 }

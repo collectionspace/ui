@@ -571,11 +571,31 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{autocomplete}.autocompleteInput"
         });
         fluid.demands("cspace.autocomplete", "cspace.recordEditor", {
-            container: "{arguments}.0" 
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                invokers: {
+                    handlePermissions: {
+                        funcName: "cspace.autocomplete.handlePermissions",
+                        args: ["{autocomplete}.applier", "{autocomplete}.model", "cspace.permissions.resolve", {
+                            resolver: "{permissionsResolver}",
+                            permission: "update"
+                        }, "create", "{autocomplete}.autocompleteInput"]
+                    }
+                }
+            }, "{arguments}.1"]
         });
         fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "location", "cspace.hierarchy"], {
             container: "{arguments}.0",
             mergeAllOptions: [{
+                invokers: {
+                    handlePermissions: {
+                        funcName: "cspace.autocomplete.handlePermissions",
+                        args: ["{autocomplete}.applier", "{autocomplete}.model", "cspace.permissions.resolve", {
+                            resolver: "{permissionsResolver}",
+                            permission: "update"
+                        }, "create", "{autocomplete}.autocompleteInput"]
+                    }
+                },
                 components: {
                     confirmation: "{confirmation}",
                     broaderDataSource: {
@@ -587,6 +607,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "person", "cspace.hierarchy"], {
             container: "{arguments}.0",
             mergeAllOptions: [{
+                invokers: {
+                    handlePermissions: {
+                        funcName: "cspace.autocomplete.handlePermissions",
+                        args: ["{autocomplete}.applier", "{autocomplete}.model", "cspace.permissions.resolve", {
+                            resolver: "{permissionsResolver}",
+                            permission: "update"
+                        }, "create", "{autocomplete}.autocompleteInput"]
+                    }
+                },
                 components: {
                     confirmation: "{confirmation}",
                     broaderDataSource: {
