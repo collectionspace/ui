@@ -62,23 +62,23 @@ cspace = cspace || {};
 
     cspace.search.makeModelFilter = function (that) {
         return function (directModel, newModel, permutation) {
-            var i;
-            var searchModel = that.model.searchModel;
+            var i, searchModel = that.model.searchModel;
+            var sortChanged = searchModel.sortDir !== newModel.sortDir || searchModel.sortKey !== newModel.sortKey;
             fluid.log("modelFilter: initialState " + searchModel.initialState + 
                 ", renderRequest " + searchModel.renderRequest);
             if (searchModel.initialState) {
                 that.applier.requestChange("searchModel.initialState", false);
                 return [];
             }
-            var dataRequired = false;
+            var dataRequired = sortChanged;
             for (i = newModel.pageSize * newModel.pageIndex; i < fluid.pager.computePageLimit(newModel); ++ i) {
                 if (!directModel[i]) {
                     dataRequired = true;
                     break;
                 }
-            } 
+            }
             if (!searchModel.renderRequest && dataRequired) {
-                if (searchModel.sortDir !== newModel.sortDir || searchModel.sortKey !== newModel.sortKey) {
+                if (sortChanged) {
                     that.applier.requestChange("results", []);
                     that.resultsPager.applier.requestChange("pageCount", 1);
                     that.resultsPager.applier.requestChange("pageIndex", 0);
