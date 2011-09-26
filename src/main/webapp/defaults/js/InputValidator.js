@@ -28,7 +28,8 @@ cspace = cspace || {};
                 args: ["{inputValidator}.options.parentBundle.messageBase", "{arguments}.0"]
             }
         },
-        type: ""
+        type: "",
+        delay: 500
     });
     
     /**
@@ -40,28 +41,33 @@ cspace = cspace || {};
                 return false;
             }
             var isNumber = !isNaN(new Number(number));
-            if(isNumber) {
-                if (that.options.type === "integer") {
-                    if(number.indexOf('.') < 0) {
-                        return true;
-                    } 
-                    return false;
-                }
-                return true;
-            } else {
+            if (!isNumber) {
                 return false;
             }
+            if (that.options.type === "integer") {
+                return number.indexOf(".") < 0;
+            }
+            if (that.options.type === "float") {
+                return number.split(".").length <= 2;
+            }
+            return true;
         };
     };
 
     cspace.inputValidator.postInit = function (that) {
-        that.container.change(function () {
-            var value = that.container.val();
-            var valid = that.validateNumber(value);
-            if (!valid) {
-                that.container.val("");
-                that.options.messageBar.show(that.lookupMessage("invalidNumber"), null, true);
-            }
+        that.container.keyup(function () {
+            clearTimeout(that.outFirer);
+            that.outFirer = setTimeout(function () {
+                var value = that.container.val();
+                if (!value) {
+                    return;
+                }
+                var valid = that.validateNumber(value);
+                if (!valid) {
+                    that.container.val("").change();
+                    that.options.messageBar.show(that.lookupMessage("invalidNumber"), null, true);
+                }
+            }, that.options.delay);
         });
     };
 })(jQuery, fluid);    
