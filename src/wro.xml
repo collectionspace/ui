@@ -73,6 +73,7 @@
     <js>/defaults/js/Footer.js</js>
     <js>/defaults/js/InputValidator.js</js>
     <js>/defaults/js/MessageBar.js</js>
+    <js>/defaults/js/TermList.js</js>
     <js>/defaults/js/Repeatable.js</js>
     <js>/defaults/js/AdvancedSearch.js</js>
     <js>/defaults/js/SearchTips.js</js>
@@ -154,6 +155,7 @@
     <js>/defaults/js/Confirmation.js</js>
     <js>/defaults/js/DataSource.js</js>
     <js>/defaults/js/DataContext.js</js>
+    <js>/defaults/js/TermList.js</js>
     <js>/defaults/js/RecordEditor.js</js>
     <js>/defaults/js/RecordList.js</js>
     <js>/defaults/js/PasswordValidator.js</js>
@@ -200,6 +202,7 @@
     <js>/defaults/js/Confirmation.js</js>
     <js>/defaults/js/StructuredDate.js</js>
     <js>/defaults/js/Autocomplete.js</js>
+    <js>/defaults/js/TermList.js</js>
     <js>/defaults/js/RecordEditor.js</js>
     <js>/defaults/js/Search.js</js>
     <js>/defaults/js/SearchToRelateDialog.js</js>
@@ -253,6 +256,7 @@
     <js>/defaults/js/Confirmation.js</js>
     <js>/defaults/js/StructuredDate.js</js>
     <js>/defaults/js/Autocomplete.js</js>
+    <js>/defaults/js/TermList.js</js>
     <js>/defaults/js/RecordEditor.js</js>
     <js>/defaults/js/TemplateEditor.js</js>
     <js>/defaults/js/NumberPatternChooser.js</js>

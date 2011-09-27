@@ -279,6 +279,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+        
+        fluid.demands("cspace.termList.termListSource",  ["cspace.localData", "cspace.termList"], {
+            funcName: "cspace.termList.testTermListSource",
+            args: {
+                targetTypeName: "cspace.termList.testTermListSource"
+            }
+        });
+        
         fluid.demands("cspace.createTemplateBox.listDataSource",  ["cspace.localData", "cspace.createTemplateBox"], {
             funcName: "cspace.createTemplateBox.testListDataSource",
             args: {
@@ -339,6 +347,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.includeDemands = function () {
+    
+        // Term list
+        fluid.demands("cspace.termList", "cspace.recordEditor", {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                recordType: "{recordEditor}.options.recordType",
+                applier: "{recordEditor}.applier",
+                model: "{recordEditor}.model"
+            }, "{arguments}.1"]
+        });
         
         // Display error message
         fluid.demands("cspace.util.displayErrorMessage", "cspace.globalSetup", {
@@ -1538,6 +1556,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         fluid.demands("searchBox", "cspace.header", {
             container: "{header}.options.selectors.searchBox"
+        });
+        
+        fluid.demands("cspace.termList.termListSource", ["cspace.termList"], {
+            funcName: "cspace.URLDataSource",
+            args: {
+                url: "{termList}.options.urls.termList",
+                targetTypeName: "cspace.termList.termListSource",
+                termMap: {
+                    recordType: "%recordType",
+                    termListType: "%termListType"
+                }
+            }
         });
         
         // createTemplate demands

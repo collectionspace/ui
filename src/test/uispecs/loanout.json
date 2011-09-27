@@ -88,31 +88,17 @@
                                         "repeatID": "repeat:",
                                         "tree": {
                                             ".csc-loanOut-loanedObjectStatus": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Renewed",
-                                                    "Returned",
-                                                    "Refused",
-                                                    "Photography requested",
-                                                    "Sent",
-                                                    "Conservation",
-                                                    "Requested",
-                                                    "Agreed",
-                                                    "Authorized"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "renewed",
-                                                    "returned",
-                                                    "refused",
-                                                    "photographyrequested",
-                                                    "sent",
-                                                    "conservation",
-                                                    "requested",
-                                                    "agreed",
-                                                    "authorized"
-                                                ],
-                                                "selection": "${{row}.loanedObjectStatus}"
+                                                "decorators": [
+                                                    {
+                                                        "func": "cspace.termList",
+                                                        "type": "fluid",
+                                                        "options": {
+                                                            "elPath": "loanedObjectStatus",
+                                                            "termListType": "loanedObjectStatus",
+                                                            "root": "{row}"
+                                                        }
+                                                    }
+                                                ]
                                             },
                                             ".csc-loanOut-loanedObjectStatusNote": "${{row}.loanedObjectStatusNote}",
                                             ".csc-loanOut-loanedObjectStatusDate": {
@@ -212,28 +198,16 @@
             "value": "${fields.loanReturnDate}"
         },
         ".csc-loanOut-loanPurpose": {
-            "default": "",
-            "optionnames": [
-                "Please select a value",
-                "Exhibition",
-                "Research",
-                "Scientific or exhibit preparation",
-                "Analysis",
-                "Photography",
-                "Conservation or other requested services",
-                "Long-term collections management and storage"
-            ],
-            "optionlist": [
-                "",
-                "exhibition",
-                "research",
-                "scientificorexhibitpreparation",
-                "analysis",
-                "photography",
-                "conservationotherrequestedservices",
-                "longtermcollectionsmanagementandstorage"
-            ],
-            "selection": "${fields.loanPurpose}"
+            "decorators": [
+                {
+                    "func": "cspace.termList",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.loanPurpose",
+                        "termListType": "loanPurpose"
+                    }
+                }
+            ]
         },
         ".csc-loanout-createdAt": "${fields.createdAt}",
         ".csc-loanout-number-label": {
