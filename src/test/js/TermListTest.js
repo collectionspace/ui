@@ -13,7 +13,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 cspace.test = cspace.test || {};
 
-var searchBoxTester = function ($) {
+var termListTester = function ($) {
     
     var container = ".termList";
     
@@ -72,5 +72,5 @@ var searchBoxTester = function ($) {
 };
 
 (function () {
-    searchBoxTester(jQuery);
+    termListTester(jQuery);
 }());

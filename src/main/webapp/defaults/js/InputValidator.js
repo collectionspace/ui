@@ -18,40 +18,30 @@ cspace = cspace || {};
     
     fluid.defaults("cspace.inputValidator", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
-        parentBundle: "{globalBundle}",
-        messageBar: "{messageBar}",
-        preInitFunction: "cspace.inputValidator.preInit",
         postInitFunction: "cspace.inputValidator.postInit",
+        finalInitFunction: "cspace.inputValidator.finalInit",
         invokers: {
             lookupMessage: {
                 funcName: "cspace.util.lookupMessage",
-                args: ["{inputValidator}.options.parentBundle.messageBase", "{arguments}.0"]
+                args: ["{globalBundle}.messageBase", "{arguments}.0"]
+            },
+            validate: {
+                funcName: "cspace.util.validate",
+                args: ["{arguments}.0", "{inputValidator}.options.type", "{messageBar}", "{arguments}.1"]
             }
         },
         type: "",
         delay: 500
     });
     
-    /**
-     * Checks if a given string is valid number or not
-     */
-    cspace.inputValidator.preInit = function (that) {
-        that.validateNumber = function (number) {
-            if(!number || (typeof number != "string" || number.constructor != String)) {
-                return false;
-            }
-            var isNumber = !isNaN(new Number(number));
-            if (!isNumber) {
-                return false;
-            }
-            if (that.options.type === "integer") {
-                return number.indexOf(".") < 0;
-            }
-            if (that.options.type === "float") {
-                return number.split(".").length <= 2;
-            }
-            return true;
+    cspace.inputValidator.finalInit = function (that) {
+        var label;
+        if (that.options.label) {
+            label = that.lookupMessage(that.options.label) + ": ";
         };
+        that.invalidNumberMessage = fluid.stringTemplate(that.lookupMessage("invalidNumber"), {
+            label: label || ""
+        });
     };
 
     cspace.inputValidator.postInit = function (that) {
@@ -59,14 +49,7 @@ cspace = cspace || {};
             clearTimeout(that.outFirer);
             that.outFirer = setTimeout(function () {
                 var value = that.container.val();
-                if (!value) {
-                    return;
-                }
-                var valid = that.validateNumber(value);
-                if (!valid) {
-                    that.container.val("").change();
-                    that.options.messageBar.show(that.lookupMessage("invalidNumber"), null, true);
-                }
+                that.validate(value, that.invalidNumberMessage);
             }, that.options.delay);
         });
     };

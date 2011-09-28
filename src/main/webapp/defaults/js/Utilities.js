@@ -1465,4 +1465,35 @@ fluid.registerNamespace("cspace.util");
         gradeNames: ["fluid.littleComponent"],
         perms: ["create", "update"]
     });
+
+    cspace.util.validateNumber = function (number, type) {
+        if (number === null) {
+            return false;
+        }
+        if (!number) {
+            return true;
+        }
+        if(typeof number !== "string" || number.constructor !== String) {
+            return false;
+        }
+        var isNumber = !isNaN(new Number(number));
+        if (!isNumber) {
+            return false;
+        }
+        if (type === "integer") {
+            return number.indexOf(".") < 0;
+        }
+        if (type === "float") {
+            return number.split(".").length <= 2;
+        }
+        return true;
+    };
+
+    cspace.util.validate = function (value, type, messageBar, message) {
+        var valid = cspace.util.validateNumber(value, type);
+        if (!valid && messageBar) {
+            messageBar.show(message, null, true);
+        }
+        return valid;
+    };
 })(jQuery, fluid);
