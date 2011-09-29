@@ -28,11 +28,19 @@ cspace = cspace || {};
             validate: {
                 funcName: "cspace.util.validate",
                 args: ["{arguments}.0", "{inputValidator}.options.type", "{messageBar}", "{arguments}.1"]
+            },
+            clear: {
+                funcName: "cspace.inputValidator.clear",
+                args: "{messageBar}"
             }
         },
         type: "",
         delay: 500
     });
+    
+    cspace.inputValidator.clear = function (messageBar) {
+        messageBar.hide();
+    };
     
     cspace.inputValidator.finalInit = function (that) {
         var label;
@@ -48,6 +56,7 @@ cspace = cspace || {};
         that.container.keyup(function () {
             clearTimeout(that.outFirer);
             that.outFirer = setTimeout(function () {
+                that.clear();
                 var value = that.container.val();
                 that.validate(value, that.invalidNumberMessage);
             }, that.options.delay);
