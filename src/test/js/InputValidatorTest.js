@@ -79,7 +79,7 @@ var inputValidatorTester = function ($) {
             jqUnit.assertEquals("Invalid message should be present", "[String for key: TEST is missing. Please, add it to messageBundle.]: The number you have entered is invalid. Please try again.", iv.messageBar.locate("message").text());
             iv.messageBar.hide();
             start();
-        }, 1000);
+        }, 600);
         iv.container.val("0.0.1");
         iv.container.keyup();
     });
@@ -96,8 +96,30 @@ var inputValidatorTester = function ($) {
         setTimeout(function () {
             jqUnit.notVisible("There should be no message bar", iv.messageBar.container);
             start();
-        }, 1000);
+        }, 600);
         iv.container.val("0.1");
+        iv.container.keyup();
+    });
+    
+    inputValidatorTest.asyncTest("Message display then hidden", function () {
+        expect(2);
+        var iv = setupInputValidator({
+            type: "float",
+            components: {
+                messageBar: "{messageBar}"
+            },
+            label: "TEST"
+        });
+        setTimeout(function () {
+            jqUnit.assertEquals("Invalid message should be present", "[String for key: TEST is missing. Please, add it to messageBundle.]: The number you have entered is invalid. Please try again.", iv.messageBar.locate("message").text());
+            setTimeout(function () {
+                jqUnit.notVisible("There should be no message bar", iv.messageBar.container);
+                start();
+            }, 600);
+            iv.container.val("0.1");
+            iv.container.keyup();
+        }, 600);
+        iv.container.val("0.0.1");
         iv.container.keyup();
     });
 };
