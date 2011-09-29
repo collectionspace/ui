@@ -294,7 +294,8 @@
                 "func": "cspace.inputValidator",
                 "type": "fluid",
                 "options": {
-                    "type": "float"
+                    "type": "float",
+                    "label": "acquisition-objectPurchasePriceValueLabel"
                 } 
             }]
         },

@@ -252,7 +252,6 @@ cspace = cspace || {};
                 if (that.validator) {
                     var validatedModel = that.validator.validate(that.model);
                     if (!validatedModel) {
-                        that.options.messageBar.show(that.lookupMessage("invalidFields"), null, true);
                         return false;
                     }
                     else {

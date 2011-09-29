@@ -543,72 +543,6 @@ fluid.registerNamespace("cspace.util");
         permission: "read"
     });
 
-    fluid.defaults("cspace.validator", {
-        gradeNames: ["autoInit", "fluid.littleComponent"],
-        finalInitFunction: "cspace.validator.finalInit",
-        schema: {},
-        recordType: ""
-    });
-
-    cspace.validator.finalInit = function (that) {
-        var schema = that.options.schema;
-        // Only validate fields.
-        schema = schema[that.options.recordType].properties.fields.properties;
-
-        var validatePrimitive = function (value, type) {
-            var parsed;
-            switch (type) {
-            case "integer":
-                parsed = parseInt(value, 10);
-                if (isNaN(parsed)) {
-                    throw "Invalid Integer";
-                }
-                return parsed;
-            case "float":
-                parsed = parseFloat(value);
-                if (isNaN(parsed)) {
-                    throw "Invalid Float";
-                }
-                return parsed;
-            default:
-                return value;
-            }
-        };
-
-        var validateImpl = function (data, schema) {
-            fluid.each(data, function (value, key) {
-                var subSchema = schema[key];
-                if (!value || !subSchema) {
-                    return;
-                }
-                var type = subSchema.type;
-                if (fluid.isPrimitive(value)) {
-                    data[key] = validatePrimitive(value, type);
-                } else if (typeof value === "object") {
-                    if (type === "array") {
-                        subSchema = subSchema.items ? fluid.transform(value, function () {
-                            return subSchema.items;
-                        }) : [];
-                    } else if (type === "object") {
-                        subSchema = subSchema.properties;
-                    }
-                    validateImpl(value, subSchema);
-                }
-            });
-        };
-
-        that.validate = function (data) {
-            var thisData = fluid.copy(data);
-            try {
-                // Only validate fields.
-                validateImpl(thisData.fields, schema);
-            } catch (e) {
-                return;
-            }
-            return thisData;
-        };
-    };
-
     // This will eventually go away once the getBeanValue strategy is used everywhere.
     cspace.util.getBeanValue = function (root, EL, schema, permManager) {
         if (EL === "" || EL === null || EL === undefined) {
@@ -1495,5 +1429,88 @@ fluid.registerNamespace("cspace.util");
             messageBar.show(message, null, true);
         }
         return valid;
+    };
+    
+    fluid.defaults("cspace.validator", {
+        gradeNames: ["autoInit", "fluid.littleComponent"],
+        finalInitFunction: "cspace.validator.finalInit",
+        schema: {},
+        recordType: "",
+        invokers: {
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{globalBundle}.messageBase", "{arguments}.0"]
+            },
+            validatePrimitive: {
+                funcName: "cspace.util.validate",
+                args: ["{arguments}.0", "{arguments}.1", "{messageBar}", "{arguments}.2"]
+            }
+        }
+    });
+    
+    var validateParseNumber = function (value, type, parse, validate, message) {
+        var valid = validate(value, type, message);
+        if (!valid) {
+            throw message || "Invalid Number";
+        }
+        return parse(value);
+    };
+    
+    var validatePrimitive = function (value, type, validate, message) {
+        switch (type) {
+        case "integer":
+            return validateParseNumber(value, type, parseInt, validate, message);
+        case "float":
+            return validateParseNumber(value, type, parseFloat, validate, message);
+        default:
+            return value;
+        }
+    };
+    
+    var validateImpl = function (data, schema, validate, lookupMessage, recordType) {
+        fluid.each(data, function (value, key) {
+            var subSchema = schema[key];
+            if (!value || !subSchema) {
+                return;
+            }
+            var type = subSchema.type;
+            if (fluid.isPrimitive(value)) {
+                data[key] = validatePrimitive(value, type, validate, fluid.stringTemplate(lookupMessage("invalidNumber"), {
+                    label: lookupMessage(cspace.util.getLabel(key, recordType)) + ": "
+                }));
+            } else if (typeof value === "object") {
+                if (type === "array") {
+                    subSchema = subSchema.items ? fluid.transform(value, function () {
+                        return subSchema.items;
+                    }) : [];
+                } else if (type === "object") {
+                    subSchema = subSchema.properties;
+                }
+                validateImpl(value, subSchema, validate, lookupMessage, recordType);
+            }
+        });
+    };
+
+    cspace.validator.finalInit = function (that) {
+        var schema = that.options.schema;
+        // Only validate fields.
+        schema = schema[that.options.recordType].properties.fields.properties;
+
+        that.validate = function (data) {
+            var thisData = fluid.copy(data);
+            try {
+                // Only validate fields.
+                validateImpl(thisData.fields, schema, that.validatePrimitive, that.lookupMessage, that.options.recordType);
+            } catch (e) {
+                return;
+            }
+            return thisData;
+        };
+    };
+    
+    cspace.util.getLabel = function (key, recordType) {
+        // TODO: This is a hack, since cataloging is also called collection-object in other layers.
+        var prefix = recordType === "cataloging" ? "collection-object-" : (recordType + "-");
+        return prefix + key + "Label"
     };
 })(jQuery, fluid);
