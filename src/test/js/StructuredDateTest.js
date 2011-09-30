@@ -151,10 +151,10 @@ var structuredDateTester = function ($) {
         var structuredDate = setupStructuredDate({
             model: "{modelHolder}.options.model",
             applier: "{modelHolder}.options.applier",
-            protoTree: {
-                dateDisplayDate: "${someDate.dateDisplayDate}",
-                dateAssociation: "${someDate.dateAssociation}",
-                datePeriod: "${someDate.datePeriod}"
+            elPaths: {
+                dateDisplayDate: "someDate.dateDisplayDate",
+                dateAssociation: "someDate.dateAssociation",
+                datePeriod: "someDate.datePeriod"
             }
         });
 
@@ -192,8 +192,8 @@ var structuredDateTester = function ($) {
         var structuredDate = setupStructuredDate({
             model: "{modelHolder}.options.model",
             applier: "{modelHolder}.options.applier",
-            protoTree: {
-                dateDisplayDate: "${someDate.dateDisplayDate}"
+            elPaths: {
+                dateDisplayDate: "someDate.dateDisplayDate"
             },
             elPath: "someDate.dateDisplayDate"
         });

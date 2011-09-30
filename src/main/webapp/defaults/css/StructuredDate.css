@@ -40,7 +40,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     font-size: 11px;
     color: #3B3B3C;
 }
-.info-pair-date .content input.cs-structuredDate-input {
+.content input.cs-structuredDate-input {
 	background:url('../images/icnStructuredDate.png') no-repeat scroll 98% center #fff;
 	border:1px solid #C7CFD4;
 }

@@ -15,6 +15,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     fluid.registerNamespace("cspace");
     
+    fluid.demands("cspace.termList", ["cspace.structuredDate"], {
+        funcName: "fluid.emptySubcomponent"
+    })
+    
     // Validator
     fluid.demands("cspace.validator", ["cspace.recordEditor", "cspace.test", "cspace.listEditor"], {
         options: {  

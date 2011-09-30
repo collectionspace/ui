@@ -26,6 +26,7 @@ cspace = cspace || {};
         styles: {
             structuredDate: "cs-structuredDate-input"
         },
+        root: "",
         elPath: "",
         invokers: {
             showPopup: {
@@ -48,8 +49,8 @@ cspace = cspace || {};
                 options: {
                     model: "{structuredDate}.model",
                     applier: "{structuredDate}.applier",
-                    protoTree: "{structuredDate}.options.protoTree",
-                    elPath: "{structuredDate}.options.elPath"
+                    elPaths: "{structuredDate}.options.elPaths",
+                    root: "{structuredDate}.options.root"
                 }
                 
             }
@@ -86,8 +87,9 @@ cspace = cspace || {};
         // If the value of the summary element in the model changes,
         // update the value of the container field to reflect that change.
         if (that.options.elPath) {
-            that.applier.modelChanged.addListener(that.options.elPath, function (model) {
-                that.container.val(fluid.get(model, that.options.elPath));
+            var fullElPath = fluid.model.composeSegments.apply(null, that.options.root ? [that.options.root, that.options.elPath] : [that.options.elPath]);
+            that.applier.modelChanged.addListener(fullElPath, function (model) {
+                that.container.val(fluid.get(model, fullElPath));
             });
         }
         
@@ -127,72 +129,11 @@ cspace = cspace || {};
         // the "preserve" policy will share the original model object,
         // rather than using an independent copy of that object for each.
         mergePolicy: {
-            protoTree: "preserve",
             "rendererOptions.applier": "applier"
         },
-        // You can have a protoTree: {} default instead of produceTree default.
-        // Because the popup is a renderer decorator it will know that it would
-        // need to use protoTree to generate the renderer tree.
-        //
-        // So in order to autobind this field to a field in the model,
-        // you have to have this selector dateText in your prototree
-        // pointing to the field in the model.
-        // NOTE ADDED BY RICK: 05 May 2011: 
-        // dateText field dropped in favor of dateDisplayDate; 
-        // concommitant changes made in selectors and strings below.
-        // dateText field replaced by dateDisplayDate in UISpec (value and elPath) 
-        // and UISchema, too, for development purposes. 
-        // Also changed in StructuredDateTest.js.
-        protoTree: {
-            dateDisplayDateLabel: {
-                messagekey: "dateDisplayDateLabel"
-            },
-            datePeriodLabel: {
-                messagekey: "datePeriodLabel"
-            },
-            dateAssociationLabel: {
-                messagekey: "dateAssociationLabel"
-            },
-            dateNoteLabel: {
-                messagekey: "dateNoteLabel"
-            },
-            dateHeaderLabel: {
-                messagekey: "dateHeaderLabel"
-            },
-            dateYearLabel: {
-                messagekey: "dateYearLabel"
-            },
-            dateMonthLabel: {
-                messagekey: "dateMonthLabel"
-            },
-            dateDayLabel: {
-                messagekey: "dateDayLabel"
-            },
-            dateEraLabel: {
-                messagekey: "dateEraLabel"
-            },
-            dateCertaintyHeaderLabel: {
-                messagekey: "dateCertaintyHeaderLabel"
-            },
-            dateCertaintyLabel: {
-                messagekey: "dateCertaintyLabel"
-            },
-            dateQualifierLabel: {
-                messagekey: "dateQualifierLabel"
-            },
-            dateQualifierValueLabel: {
-                messagekey: "dateQualifierValueLabel"
-            },
-            dateQualifierUnitLabel: {
-                messagekey: "dateQualifierUnitLabel"
-            },
-            dateEarliestSingleRowLabel: {
-                messagekey: "dateEarliestSingleRowLabel"
-            },
-            dateLatestRowLabel: {
-                messagekey: "dateLatestRowLabel"
-            }
-        },
+        protoTree: {},
+        getProtoTree: "cspace.structuredDate.popup.getProtoTree",
+        parentBundle: "{globalBundle}",
         selectors: {
             // Also you will need a separate selector for the label "Date Text" as well
             // in order to be able to assign the label value from the message bundle and make
@@ -236,24 +177,25 @@ cspace = cspace || {};
             dateLatestQualifierValue: ".csc-structuredDate-dateLatestQualifierValue",
             dateLatestQualifierUnit: ".csc-structuredDate-dateLatestQualifierUnit"
         },
-        strings: {
-            close: "Close",
-            dateDisplayDateLabel: "Display Date",
-            datePeriodLabel: "Date Period",
-            dateAssociationLabel: "Association",
-            dateNoteLabel: "Note",
-            dateHeaderLabel: "Date",
-            dateYearLabel: "Year",
-            dateMonthLabel: "Month",
-            dateDayLabel: "Day",
-            dateEraLabel: "Era",
-            dateCertaintyHeaderLabel: "Certainty Term OR Qualifier, Value and Unit",
-            dateCertaintyLabel: "Certainty",
-            dateQualifierLabel: "Qualifier",
-            dateQualifierValueLabel: "Value",
-            dateQualifierUnitLabel: "Unit",
-            dateEarliestSingleRowLabel: "Earliest/Single Date",
-            dateLatestRowLabel: "Latest Date"
+        strings: {},
+        stringPaths: {
+            close: "structuredDate-close",
+            dateDisplayDateLabel: "structuredDate-dateDisplayDateLabel",
+            datePeriodLabel: "structuredDate-datePeriodLabel",
+            dateAssociationLabel: "structuredDate-dateAssociationLabel",
+            dateNoteLabel: "structuredDate-dateNoteLabel",
+            dateHeaderLabel: "structuredDate-dateHeaderLabel",
+            dateYearLabel: "structuredDate-dateYearLabel",
+            dateMonthLabel: "structuredDate-dateMonthLabel",
+            dateDayLabel: "structuredDate-dateDayLabel",
+            dateEraLabel: "structuredDate-dateEraLabel",
+            dateCertaintyHeaderLabel: "structuredDate-dateCertaintyHeaderLabel",
+            dateCertaintyLabel: "structuredDate-dateCertaintyLabel",
+            dateQualifierLabel: "structuredDate-dateQualifierLabel",
+            dateQualifierValueLabel: "structuredDate-dateQualifierValueLabel",
+            dateQualifierUnitLabel: "structuredDate-dateQualifierUnitLabel",
+            dateEarliestSingleRowLabel: "structuredDate-dateEarliestSingleRowLabel",
+            dateLatestRowLabel: "structuredDate-dateLatestRowLabel"
         },
         // This is the place to specify the template for the popup
         // (e.g. StructuredDate.html). This template will be fetched
@@ -267,10 +209,177 @@ cspace = cspace || {};
                     dataType: "html"
                 }
             })
+        },
+        root: "",
+        elPaths: [],
+        invokers: {
+            resolveFullElPath: {
+                funcName: "cspace.structuredDate.popup.resolveFullElPath",
+                args: ["{popup}.composeElPath", "{arguments}.0"]
+            },
+            composeElPath: {
+                funcName: "cspace.structuredDate.popup.composeElPath",
+                args: ["{popup}.options.elPaths", "{popup}.options.root", "{arguments}.0"]
+            }
         }
     });
     
+    cspace.structuredDate.popup.resolveFullElPath = function (composeElPath, key) {
+        return "${" + composeElPath(key) + "}";
+    };
+    
+    cspace.structuredDate.popup.composeElPath = function (elPaths, root, key) {
+        var elPath = elPaths[key];
+        return fluid.model.composeSegments.apply(null, root ? [root, elPath] : [elPath]);
+    };
+    
+    cspace.structuredDate.popup.getProtoTree = function (that) {
+        return {
+            dateEarliestSingleQualifier: {
+                decorators: [{
+                    func: "cspace.termList",
+                    type: "fluid",
+                    options: {
+                        elPath: that.composeElPath("dateEarliestSingleQualifier"),
+                        termListType: "dateEarliestSingleQualifier"
+                    }
+                }]
+            },
+            dateLatestDay: that.resolveFullElPath("dateLatestDay"),
+            dateLatestYear: that.resolveFullElPath("dateLatestYear"),
+            dateAssociation: that.resolveFullElPath("dateAssociation"),
+            dateEarliestSingleEra: {
+                decorators: [{
+                    func: "cspace.termList",
+                    type: "fluid",
+                    options: {
+                        elPath: that.composeElPath("dateEarliestSingleEra"),
+                        termListType: "dateEarliestSingleEra"
+                    }
+                }]
+            },
+            dateDisplayDate: that.resolveFullElPath("dateDisplayDate"),
+            dateEarliestSingleCertainty: {
+                decorators: [{
+                    func: "cspace.termList",
+                    type: "fluid",
+                    options: {
+                        elPath: that.composeElPath("dateEarliestSingleCertainty"),
+                        termListType: "dateEarliestSingleCertainty"
+                    }
+                }]
+            },
+            dateLatestEra: {
+                decorators: [{
+                    func: "cspace.termList",
+                    type: "fluid",
+                    options: {
+                        elPath: that.composeElPath("dateLatestEra"),
+                        termListType: "dateLatestEra"
+                    }
+                }]
+            },
+            dateEarliestSingleQualifierValue: that.resolveFullElPath("dateEarliestSingleQualifierValue"),
+            dateLatestCertainty: {
+                decorators: [{
+                    func: "cspace.termList",
+                    type: "fluid",
+                    options: {
+                        elPath: that.composeElPath("dateLatestCertainty"),
+                        termListType: "dateLatestCertainty"
+                    }
+                }]
+            },
+            dateEarliestSingleYear: that.resolveFullElPath("dateEarliestSingleYear"),
+            dateLatestQualifier: {
+                decorators: [{
+                    func: "cspace.termList",
+                    type: "fluid",
+                    options: {
+                        elPath: that.composeElPath("dateLatestQualifier"),
+                        termListType: "dateLatestQualifier"
+                    }
+                }]
+            },
+            dateLatestQualifierValue: that.resolveFullElPath("dateLatestQualifierValue"),
+            dateEarliestSingleQualifierUnit: {
+                decorators: [{
+                    func: "cspace.termList",
+                    type: "fluid",
+                    options: {
+                        elPath: that.composeElPath("dateEarliestSingleQualifierUnit"),
+                        termListType: "dateEarliestSingleQualifierUnit"
+                    }
+                }]
+            },
+            datePeriod: that.resolveFullElPath("datePeriod"),
+            dateLatestMonth: that.resolveFullElPath("dateLatestMonth"),
+            dateNote: that.resolveFullElPath("dateNote"),
+            dateLatestQualifierUnit: {
+                decorators: [{
+                    func: "cspace.termList",
+                    type: "fluid",
+                    options: {
+                        elPath: that.composeElPath("dateLatestQualifierUnit"),
+                        termListType: "dateLatestQualifierUnit"
+                    }
+                }]
+            },
+            dateEarliestSingleDay: that.resolveFullElPath("dateEarliestSingleDay"),
+            dateEarliestSingleMonth: that.resolveFullElPath("dateEarliestSingleMonth"),
+            dateDisplayDateLabel: {
+                messagekey: that.options.stringPaths.dateDisplayDateLabel
+            },
+            datePeriodLabel: {
+                messagekey: that.options.stringPaths.datePeriodLabel
+            },
+            dateAssociationLabel: {
+                messagekey: that.options.stringPaths.dateAssociationLabel
+            },
+            dateNoteLabel: {
+                messagekey: that.options.stringPaths.dateNoteLabel
+            },
+            dateHeaderLabel: {
+                messagekey: that.options.stringPaths.dateHeaderLabel
+            },
+            dateYearLabel: {
+                messagekey: that.options.stringPaths.dateYearLabel
+            },
+            dateMonthLabel: {
+                messagekey: that.options.stringPaths.dateMonthLabel
+            },
+            dateDayLabel: {
+                messagekey: that.options.stringPaths.dateDayLabel
+            },
+            dateEraLabel: {
+                messagekey: that.options.stringPaths.dateEraLabel
+            },
+            dateCertaintyHeaderLabel: {
+                messagekey: that.options.stringPaths.dateCertaintyHeaderLabel
+            },
+            dateCertaintyLabel: {
+                messagekey: that.options.stringPaths.dateCertaintyLabel
+            },
+            dateQualifierLabel: {
+                messagekey: that.options.stringPaths.dateQualifierLabel
+            },
+            dateQualifierValueLabel: {
+                messagekey: that.options.stringPaths.dateQualifierValueLabel
+            },
+            dateQualifierUnitLabel: {
+                messagekey: that.options.stringPaths.dateQualifierUnitLabel
+            },
+            dateEarliestSingleRowLabel: {
+                messagekey: that.options.stringPaths.dateEarliestSingleRowLabel
+            },
+            dateLatestRowLabel: {
+                messagekey: that.options.stringPaths.dateLatestRowLabel
+            }
+        };
+    };
+    
     cspace.structuredDate.popup.finalInitFunction = function (that) {
+        that.options.protoTree = fluid.invokeGlobalFunction(that.options.getProtoTree, [that]);
         that.refreshView();
     };
 
