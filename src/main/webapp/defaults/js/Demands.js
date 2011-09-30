@@ -422,11 +422,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 hideOn: [
                     "{recordEditor}.options.dataContext.events.afterFetch",
-                    "{recordEditor}.options.dataContext.events.onError"
+                    "{recordEditor}.options.dataContext.events.onError",
+                    "{recordEditor}.events.afterRender",
                 ],
-                events: {
-                    showOn: "{recordEditor}.options.dataContext.events.onFetch"
-                }
+                showOn: [
+                    "{recordEditor}.options.dataContext.events.onFetch",
+                    "{recordEditor}.options.dataContext.events.onSave"
+                ]
             }
         });
         fluid.demands("recordEditorLoadingIndicator", ["cspace.recordEditor"], {
