@@ -236,14 +236,17 @@ cspace = cspace || {};
     cspace.structuredDate.popup.getProtoTree = function (that) {
         return {
             dateEarliestSingleQualifier: {
-                decorators: [{
-                    func: "cspace.termList",
-                    type: "fluid",
-                    options: {
-                        elPath: that.composeElPath("dateEarliestSingleQualifier"),
-                        termListType: "dateEarliestSingleQualifier"
-                    }
-                }]
+                optionnames: [
+                    "+/-",
+                    "+",
+                    "-"
+                ],
+                optionlist: [
+                    "+/-",
+                    "+",
+                    "-"
+                ],
+                selection: that.resolveFullElPath("dateEarliestSingleQualifier")
             },
             dateLatestDay: that.resolveFullElPath("dateLatestDay"),
             dateLatestYear: that.resolveFullElPath("dateLatestYear"),
@@ -292,14 +295,17 @@ cspace = cspace || {};
             },
             dateEarliestSingleYear: that.resolveFullElPath("dateEarliestSingleYear"),
             dateLatestQualifier: {
-                decorators: [{
-                    func: "cspace.termList",
-                    type: "fluid",
-                    options: {
-                        elPath: that.composeElPath("dateLatestQualifier"),
-                        termListType: "dateLatestQualifier"
-                    }
-                }]
+                optionnames: [
+                    "+/-",
+                    "+",
+                    "-"
+                ],
+                optionlist: [
+                    "+/-",
+                    "+",
+                    "-"
+                ],
+                selection: that.resolveFullElPath("dateLatestQualifier")
             },
             dateLatestQualifierValue: that.resolveFullElPath("dateLatestQualifierValue"),
             dateEarliestSingleQualifierUnit: {
