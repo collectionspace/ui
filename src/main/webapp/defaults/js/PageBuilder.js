@@ -107,10 +107,7 @@ cspace = cspace || {};
         invokers: {
             compose: "cspace.composite.compose",
             displayErrorMessage: "cspace.util.displayErrorMessage",
-            lookupMessage: {
-                funcName: "cspace.util.lookupMessage",
-                args: ["{globalBundle}.messageBase", "{arguments}.0"]
-            }
+            lookupMessage: "cspace.util.lookupMessage"
         }
     });
     // A version of compose for local app.
@@ -331,10 +328,7 @@ cspace = cspace || {};
         },
         invokers: {
             displayErrorMessage: "cspace.util.displayErrorMessage",
-            lookupMessage: {
-                funcName: "cspace.util.lookupMessage",
-                args: ["{globalBundle}.messageBase", "{arguments}.0"]
-            }
+            lookupMessage: "cspace.util.lookupMessage"
         },
         readOnlyUrlVar: "readonly/",
         components: {

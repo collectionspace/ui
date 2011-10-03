@@ -208,10 +208,7 @@ cspace = cspace || {};
                 args: "{mediaUploader}"
             },
             displayErrorMessage: "cspace.util.displayErrorMessage",
-            lookupMessage: {
-                funcName: "cspace.util.lookupMessage",
-                args: ["{globalBundle}.messageBase", "{arguments}.0"]
-            }
+            lookupMessage: "cspace.util.lookupMessage"
         },
         elPaths: {
             blobCsid: "fields.blobCsid",

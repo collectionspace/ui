@@ -30,10 +30,7 @@ cspace = cspace || {};
                 funcName: "cspace.recordList.bindEvents",
                 args: ["{recordList}"]
             },
-            lookupMessage: {
-                funcName: "cspace.util.lookupMessage",
-                args: ["{recordList}.options.parentBundle.messageBase", "{arguments}.0"]
-            },
+            lookupMessage: "cspace.util.lookupMessage",
             select: "select",
             verifyColumnOrder: {
                 funcName: "cspace.recordList.verifyColumnOrder",

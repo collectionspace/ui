@@ -102,10 +102,7 @@ cspace = cspace || {};
                 args: ["{createNew}", "{arguments}.0"]
             },
             displayErrorMessage: "cspace.util.displayErrorMessage",
-            lookupMessage: {
-                funcName: "cspace.util.lookupMessage",
-                args: ["{globalBundle}.messageBase", "{arguments}.0"]
-            }
+            lookupMessage: "cspace.util.lookupMessage"
         },
         urls: cspace.componentUrlBuilder({
             newRecordUrl: "%webapp/html/%recordType.html%template",

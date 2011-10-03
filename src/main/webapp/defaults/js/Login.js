@@ -360,15 +360,8 @@ cspace = cspace || {};
             }
         },
         invokers: {
-            lookupMessage: {
-                funcName: "cspace.util.lookupMessage",
-                args: ["{login}.options.parentBundle.messageBase", "{arguments}.0"]
-            },
-            displayErrorMessage: "cspace.util.displayErrorMessage",
-            lookupMessage: {
-                funcName: "cspace.util.lookupMessage",
-                args: ["{globalBundle}.messageBase", "{arguments}.0"]
-            }
+            lookupMessage: "cspace.util.lookupMessage",
+            displayErrorMessage: "cspace.util.displayErrorMessage"
         },
         strings: {}, 
         model: {

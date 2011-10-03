@@ -155,6 +155,10 @@ var sidebarTester = function ($) {
         testCase: bareSidebarTest,
         permissions: getLimitedPermissions(["cataloging", "loanout"])
     });
+    
+    cspace.tests.displayErrorMessage = function (message) {
+        console.log(message);
+    };
 
     noCatalogingSidebarTest.test("RelatedRecordsList: cataloging not rendering", function () {
         var sidebar = setupSidebar(sampleOptions);

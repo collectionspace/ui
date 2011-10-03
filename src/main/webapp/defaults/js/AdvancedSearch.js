@@ -421,10 +421,7 @@ cspace = cspace || {};
         },
         invokers: {
             displayErrorMessage: "cspace.util.displayErrorMessage",
-            lookupMessage: {
-                funcName: "cspace.util.lookupMessage",
-                args: ["{globalBundle}.messageBase", "{arguments}.0"]
-            }
+            lookupMessage: "cspace.util.lookupMessage"
         }
     });
     

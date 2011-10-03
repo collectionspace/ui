@@ -645,10 +645,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 args: ["{autocomplete}", "{arguments}.0"]
             },
             displayErrorMessage: "cspace.util.displayErrorMessage",
-            lookupMessage: {
-                funcName: "cspace.util.lookupMessage",
-                args: ["{globalBundle}.messageBase", "{arguments}.0"]
-            }
+            lookupMessage: "cspace.util.lookupMessage"
         },
         components: {
             autocomplete: {

@@ -160,10 +160,7 @@ cspace = cspace || {};
             tabsSelect: "cspace.tabs.tabsSelect",
             tabsSelectWrapper: "cspace.tabs.tabsSelectWrapper",
             displayErrorMessage: "cspace.util.displayErrorMessage",
-            lookupMessage: {
-                funcName: "cspace.util.lookupMessage",
-                args: ["{globalBundle}.messageBase", "{arguments}.0"]
-            }
+            lookupMessage: "cspace.util.lookupMessage"
         },
         configURLTemplate: "%webapp/config/%record-tab.json",
         selectors: {

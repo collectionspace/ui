@@ -15,6 +15,26 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     fluid.registerNamespace("cspace");
     
+    fluid.demands("cspace.util.lookupMessage", ["cspace.test", "cspace.localData"], {
+        funcName: "cspace.util.lookupMessage",
+        args: ["{recordEditor}.options.parentBundle.messageBase", "{arguments}.0"]
+    });
+    
+    fluid.demands("cspace.util.lookupMessage", ["cspace.test", "cspace.localData", "cspace.recordList"], {
+        funcName: "cspace.util.lookupMessage",
+        args: ["{recordList}.options.parentBundle.messageBase", "{arguments}.0"]
+    });
+    
+    fluid.demands("cspace.util.lookupMessage", ["cspace.test", "cspace.localData", "cspace.sidebar"], {
+        funcName: "cspace.util.lookupMessage",
+        args: ["{sidebar}.options.parentBundle.messageBase", "{arguments}.0"]
+    });
+    
+    fluid.demands("cspace.util.displayErrorMessage", "cspace.test", {
+        funcName: "cspace.tests.displayErrorMessage",
+        args: "{arguments}.0"
+    });
+    
     fluid.demands("cspace.termList", ["cspace.structuredDate"], {
         funcName: "fluid.emptySubcomponent"
     })
@@ -234,6 +254,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             targetTypeName: "cspace.listEditor.testUsersListSearchDataSource"
         }
     });
+    
     fluid.demands("updateList", ["cspace.listEditor", "cspace.userAdminTests", "cspace.localData"], {
         funcName: "cspace.tests.updateListUsers",
         args: ["{listEditor}", "{admin}.dom.searchField", "{arguments}.0"]

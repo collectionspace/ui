@@ -169,10 +169,7 @@ cspace = cspace || {};
         },
         invokers: {
             displayErrorMessage: "cspace.util.displayErrorMessage",
-            lookupMessage: {
-                funcName: "cspace.util.lookupMessage",
-                args: ["{globalBundle}.messageBase", "{arguments}.0"]
-            }
+            lookupMessage: "cspace.util.lookupMessage"
         },
         recordType: "", // Main record's type, generally inhereted from parent dataContext.
         baseUrl: "../../../chain", // Url that will be put in the base path when building main record's fetch url.

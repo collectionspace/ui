@@ -358,6 +358,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }, "{arguments}.1"]
         });
         
+        fluid.demands("cspace.util.lookupMessage", "cspace.globalSetup", {
+            funcName: "cspace.util.lookupMessage",
+            args: ["{globalBundle}.messageBase", "{arguments}.0"]
+        });
+        
         // Display error message
         fluid.demands("cspace.util.displayErrorMessage", "cspace.globalSetup", {
             funcName: "cspace.util.displayErrorMessage",
@@ -1748,6 +1753,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }, undefined]
                 }
             }
+        });
+        fluid.demands("cspace.sidebar.media", "cspace.sidebar", {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                model: "{sidebar}.options.recordModel",
+                applier: "{sidebar}.options.recordApplier"
+            }, "{arguments}.1"]
         });
         
         // tabs demands

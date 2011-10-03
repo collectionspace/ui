@@ -1437,10 +1437,7 @@ fluid.registerNamespace("cspace.util");
         schema: {},
         recordType: "",
         invokers: {
-            lookupMessage: {
-                funcName: "cspace.util.lookupMessage",
-                args: ["{globalBundle}.messageBase", "{arguments}.0"]
-            },
+            lookupMessage: "cspace.util.lookupMessage",
             validatePrimitive: {
                 funcName: "cspace.util.validate",
                 args: ["{arguments}.0", "{arguments}.1", "{messageBar}", "{arguments}.2"]
