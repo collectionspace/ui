@@ -961,20 +961,20 @@ fluid.registerNamespace("cspace.util");
     };
 
     cspace.util.globalNavigator.bindEvents = function (that) {
-        that.container.delegate(that.options.selectors.include, "click", function () {
+        that.container.delegate(that.options.selectors.include, "click", function (evt) {
             var target = $(this);
             if (target.is(that.options.selectors.exclude)) {
                 return;
             }
             that.events.onPerformNavigation.fire(function () {
-                window.location = target.attr("href");
+                target[0].dispatchEvent(evt);
             });
             return false;
         });
-        that.container.delegate(that.options.selectors.forms, "submit", function () {
+        that.container.delegate(that.options.selectors.forms, "submit", function (evt) {
             var form = $(this);
             that.events.onPerformNavigation.fire(function () {
-                form[0].submit();
+                form[0].dispatchEvent(evt);
             });
             return false;
         });
