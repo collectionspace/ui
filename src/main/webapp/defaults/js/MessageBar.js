@@ -50,7 +50,7 @@ cspace = cspace || {};
             message: "${message}",
             time: "${time}",
             cancel: {
-                messagekey: "cancel"
+                messagekey: "messagebar-cancel"
             }
         };
     };
@@ -72,9 +72,7 @@ cspace = cspace || {};
             cancel: "cs-messageBar-cancel",
             error: "cs-message-error"
         },
-        strings: {
-            cancel: "OK"
-        },
+        strings: {},
         parentBundle: "{globalBundle}",
         produceTree: cspace.messageBarImpl.produceTree,
         invokers: {
@@ -102,6 +100,7 @@ cspace = cspace || {};
     
     cspace.messageBar = function (container, options) {
         var that = fluid.initView("cspace.messageBar", container, options);
+
         that.messageBarContainer = that.locate("messageBarContainer");
         if (that.messageBarContainer.length === 0) {
             that.messageBarContainer = $("<div/>").addClass(that.options.selectors.messageBarContainer.substr(1));

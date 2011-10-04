@@ -59,7 +59,6 @@ cspace = cspace || {};
     
     cspace.searchToRelateDialog = function (container, options) {
         var that = fluid.initRendererComponent("cspace.searchToRelateDialog", container, options);
-        var recordName = that.messageResolver.resolve(that.options.related);
         
         that.open = function () {
             that.search.hideResults();
@@ -71,8 +70,9 @@ cspace = cspace || {};
         };
         that.renderer.refreshView();
         fluid.initDependents(that);
-        
-        var title = that.messageResolver.resolve("title", {recordType: recordName});        
+
+        var recordName = that.lookupMessage((that.options.related == "procedures") ? "searchToRelateDialog-procedures" : that.options.related);
+        var title = fluid.stringTemplate(that.lookupMessage("searchToRelateDialog-title"), {recordType: recordName});        
         that.container.dialog({
             autoOpen: false,
             modal: true,
@@ -108,22 +108,18 @@ cspace = cspace || {};
                 }
             },
             relationshipType: {
-                messagekey: "relationshipType"
+                messagekey: "searchToRelateDialog-relationshipType"
             },
             expander: {
                 type: "fluid.renderer.condition",
                 condition: that.options.showCreate || false,
                 trueTree: {
                     createNew: {
-                        messagekey: "createNew"
+                        messagekey: "searchToRelateDialog-createNew"
                     },
                     createNewButton: {
+                        messagekey: "searchToRelateDialog-createNewButton",
                         decorators: [{
-                            type: "attrs",
-                            attributes: {
-                                value: that.options.strings.createNewButton
-                            }
-                        }, {
                             type: "addClass",
                             classes: that.options.styles.createNewButton
                         }]
@@ -140,18 +136,13 @@ cspace = cspace || {};
                 }
             },
             addButton: {
-                decorators: {
-                    type: "attrs",
-                    attributes: {
-                        value: that.options.strings.addButton
-                    }
-                }
+                messagekey: "searchToRelateDialog-addButton"
             },
             next: {
-                messagekey: "next"
+                messagekey: "searchToRelateDialog-next"
             },
             previous: {
-                messagekey: "previous"
+                messagekey: "searchToRelateDialog-previous"
             }
         };
     };
@@ -206,19 +197,15 @@ cspace = cspace || {};
             setupDialogClass: {
                 funcName: "cspace.searchToRelateDialog.setupDialogClass",
                 args: "{searchToRelateDialog}.options.related"          
+            },
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{searchToRelateDialog}.options.parentBundle.messageBase", "{arguments}.0"]
             }
         },
         parentBundle: "{globalBundle}",
         strings: {
-            createNewButton: "Create",
-            procedures: "Procedural",
-            title: "Add Related %recordType Record",
-            closeAlt: "close button",
-            relationshipType: "Select relationship type:",
-            createNew: "Create new record:",
-            addButton: "Add to current record",
-            next: "next >",
-            previous: "< previous"
+            closeAlt: "close button"
         },
         components: {
             search: {
@@ -229,8 +216,10 @@ cspace = cspace || {};
                     components: {
                         mainSearch: {
                             options: {
-                                strings: {
-                                    recordTypeSelectLabel: "Search existing:" 
+                                model: {
+                                    messagekeys: {
+                                        recordTypeSelectLabel: "searchToRelateDialog-recordTypeSelectLabel"
+                                    }
                                 },
                                 related: "{searchToRelateDialog}.options.related",
                                 permission: "update",

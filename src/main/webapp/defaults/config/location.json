@@ -12,9 +12,6 @@
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "model": "{pageBuilder}.model",
-                        "strings": {
-                            "identificationNumberRequired": "Please specify a Display Name" 
-                        },
                         "selectors": {
                             "hierarchy": ".csc-location-hierarchy",
                             "identificationNumber": ".csc-location-displayName"

@@ -12,9 +12,6 @@
                         "selectors": {
                             "identificationNumber": ".csc-group-title"
                         },
-                        "strings": {
-                            "identificationNumberRequired": "Please specify a Title"
-                        },
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "model": "{pageBuilder}.model"

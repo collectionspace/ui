@@ -22,9 +22,6 @@
                                 }
                             }
                         },
-                        "strings": {
-                            "identificationNumberRequired": "Please specify a Display Name"
-                        },
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "model": "{pageBuilder}.model"

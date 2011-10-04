@@ -45,9 +45,6 @@
                                             "options": {
                                                 "selectors": {
                                                     "identificationNumber": ".csc-movement-currentLocation" 
-                                                },
-                                                "strings": {
-                                                    "identificationNumberRequired": "Please specify a Current Location" 
                                                 } 
                                             }
                                         }

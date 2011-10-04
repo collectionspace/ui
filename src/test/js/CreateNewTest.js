@@ -155,7 +155,7 @@ var createNewTester = function ($) {
 
     createNewTestOneCategories.test("Menu item shown with at least one create permissions", function() {
         var header = setupHeader();
-        jqUnit.assertTrue("The Create new menu item is rendered",  header.locate("label").filter(':contains("'+header.options.strings.createNew+'")').length > 0);
+        jqUnit.assertTrue("The Create new menu item is rendered",  header.locate("label").filter(':contains("'+header.options.parentBundle.messageBase["menuItems-createNew"]+'")').length > 0);
     });
 };
 

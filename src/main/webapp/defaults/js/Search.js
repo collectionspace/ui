@@ -230,8 +230,10 @@ cspace = cspace || {};
             mainSearch: {
                 type: "cspace.searchBox",
                 options: {
-                    strings: {
-                        recordTypeSelectLabel: "Record Type" 
+                    model: {
+                        messagekeys: {
+                            recordTypeSelectLabel: "mainSearch-recordTypeSelectLabel" 
+                        }
                     },
                     selfRender: true,
                     related: "all",

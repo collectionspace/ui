@@ -85,7 +85,7 @@ cspace = cspace || {};
 
     var bindEventHandlers = function (that) {
         
-        that.events.onSave.addListener(validateIdentificationNumber(that.dom, that.container, that.options.messageBar, that.options.strings.identificationNumberRequired));
+        that.events.onSave.addListener(validateIdentificationNumber(that.dom, that.container, that.options.messageBar, that.lookupMessage(fluid.stringTemplate("%recordtype-identificationNumberRequired", { recordtype: that.options.recordType }))));
         
         that.events.onSave.addListener(function () {
             return validateRequiredFields(that.dom, that.options.messageBar, that.options.strings.missingRequiredFields);
@@ -437,7 +437,7 @@ cspace = cspace || {};
     };
     
     cspace.recordEditor.navigateToFullImage = function (that) {
-        window.open(that.model.fields.blobs[0].imgOrig, "_blank", fluid.stringTemplate(that.options.strings.originalMediaOptions, {
+        window.open(that.model.fields.blobs[0].imgOrig, "_blank", fluid.stringTemplate(that.lookupMessage("media-originalMediaOptions"), {
             height: that.options.originalMediaDimensions.height,
             width: that.options.originalMediaDimensions.width
         }));

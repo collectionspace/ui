@@ -12,9 +12,6 @@
                         "selectors": {
                             "identificationNumber": ".csc-loanIn-loanInNumber"
                         },
-                        "strings": {
-                            "identificationNumberRequired": "Please specify a Loan In Number"
-                        },
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "model": "{pageBuilder}.model"

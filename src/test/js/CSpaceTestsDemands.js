@@ -15,19 +15,29 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     fluid.registerNamespace("cspace");
     
-    fluid.demands("cspace.util.lookupMessage", ["cspace.test", "cspace.localData"], {
+    fluid.demands("cspace.util.lookupMessage", "cspace.admin", {
+        funcName: "cspace.util.lookupMessage",
+        args: ["{admin}.options.parentBundle.messageBase", "{arguments}.0"]
+    });
+    
+    fluid.demands("cspace.util.lookupMessage", "cspace.inputValidator", {
+        funcName: "cspace.util.lookupMessage",
+        args: ["{globalBundle}.messageBase", "{arguments}.0"]
+    });
+    
+    fluid.demands("cspace.util.lookupMessage", "cspace.login", {
+        funcName: "cspace.util.lookupMessage",
+        args: ["{globalBundle}.messageBase", "{arguments}.0"]
+    });
+    
+    fluid.demands("cspace.util.lookupMessage", "cspace.recordEditor", {
         funcName: "cspace.util.lookupMessage",
         args: ["{recordEditor}.options.parentBundle.messageBase", "{arguments}.0"]
     });
     
-    fluid.demands("cspace.util.lookupMessage", ["cspace.test", "cspace.localData", "cspace.recordList"], {
+    fluid.demands("cspace.util.lookupMessage", "cspace.recordList", {
         funcName: "cspace.util.lookupMessage",
-        args: ["{recordList}.options.parentBundle.messageBase", "{arguments}.0"]
-    });
-    
-    fluid.demands("cspace.util.lookupMessage", ["cspace.test", "cspace.localData", "cspace.sidebar"], {
-        funcName: "cspace.util.lookupMessage",
-        args: ["{sidebar}.options.parentBundle.messageBase", "{arguments}.0"]
+        args: ["{globalBundle}.messageBase", "{arguments}.0"]
     });
     
     fluid.demands("cspace.util.displayErrorMessage", "cspace.test", {

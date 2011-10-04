@@ -35,6 +35,7 @@ cspace = cspace || {};
             displayErrorMessage: "cspace.util.displayErrorMessage",
             lookupMessage: "cspace.util.lookupMessage"
         },
+        parentBundle: "{globalBundle}",
         components: {
             confirmation: {
                 type: "cspace.confirmation"
@@ -71,9 +72,6 @@ cspace = cspace || {};
         },
         selectorsToIgnore: ["reportLoadingIndicatorContainer"],
         strings: {
-            reportHeader: "Run Report",
-            reportButton: "Run",
-            reportError: "Error creating report: ",
             primaryMessage: "Are you sure you want to run this report?",
             primaryMessageSave: "Are you sure you want to run this report for unsaved record?",
             actText: "Run",
@@ -160,7 +158,7 @@ cspace = cspace || {};
             onError: function (message) {
                 that.applier.requestChange("reportInProgress", false);
                 that.reportStatus.hide();
-                that.messageBar.show(that.options.strings.reportError + message, null, true)
+                that.messageBar.show(that.lookupMessage("reporting-reportError") + message, null, true)
             },
             onStop: function (reportType) {
                 that.applier.requestChange("reportInProgress", false);
@@ -317,7 +315,7 @@ cspace = cspace || {};
                 }
             },
             reportHeader: {
-                messagekey: "reportHeader",
+                messagekey: "reporting-reportHeader",
                 decorators: {"addClass": "{styles}.reportHeader"}
             },
             reportType: {
@@ -327,12 +325,8 @@ cspace = cspace || {};
                 decorators: {"addClass": "{styles}.reportType"}
             },
             reportButton: {
+                messagekey: "reporting-reportButton",
                 decorators: [{
-                    type: "attrs",
-                    attributes: {
-                        value: that.options.strings.reportButton                        
-                    }
-                }, {
                     addClass: "{styles}.reportButton"
                 }, {
                     type: "jQuery",

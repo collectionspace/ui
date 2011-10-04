@@ -29,7 +29,7 @@
                     "type": "cspace.searchBox",
                     "options": {
                         "strings": {
-                            "recordTypeSelectLabel": "Record Type"
+                            "searchBox-recordTypeSelectLabel": "Record Type"
                         },
                         "related": "all",
                         "selfRender": true,

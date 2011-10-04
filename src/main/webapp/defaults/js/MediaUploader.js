@@ -79,7 +79,7 @@ cspace = cspace || {};
                 condition: "${" + that.options.elPaths.blobCsid + "}",
                 trueTree: {
                     removeButton: {
-                        messagekey: "removeButton",
+                        messagekey: "mediaUploader-removeButton",
                         decorators: [{
                             type: "addClass",
                             classes: that.options.styles.removeButton
@@ -107,18 +107,14 @@ cspace = cspace || {};
                 }
             }],
             uploadMediaLabel: {
-                messagekey: "uploadMediaLabel"
+                messagekey: "mediaUploader-uploadMediaLabel"
             },
             linkMediaLabel: {
-                messagekey: "linkMediaLabel"
+                messagekey: "mediaUploader-linkMediaLabel"
             },
             uploadButton: {
+                messagekey: "mediaUploader-uploadButton",
                 decorators: [{
-                    type: "attrs",
-                    attributes: {
-                        value: that.options.strings.uploadButton
-                    } 
-                }, {
                     type: "addClass",
                     classes: that.options.styles.button
                 }]
@@ -131,12 +127,8 @@ cspace = cspace || {};
                 }]
             },
             linkButton: {
+                messagekey: "mediaUploader-linkButton",
                 decorators: [{
-                    type: "attrs",
-                    attributes: {
-                        value: that.options.strings.linkButton
-                    } 
-                }, {
                     type: "addClass",
                     classes: that.options.styles.button
                 }, {
@@ -186,6 +178,7 @@ cspace = cspace || {};
     
     fluid.defaults("cspace.mediaUploader", {
         gradeNames: "fluid.rendererComponent",
+        parentBundle: "{globalBundle}",
         invokers: {
             bindEvents: {
                 funcName: "cspace.mediaUploader.bindEvents",
@@ -233,11 +226,6 @@ cspace = cspace || {};
         },
         selectorsToIgnore: ["fileUploader", "uploadInput", "parents"],
         strings: {
-            uploadButton: "+ Upload",
-            linkButton: "Link",
-            removeButton: "Remove this media",
-            uploadMediaLabel: "Upload Media",
-            linkMediaLabel: "Link To External Media",
             confirmationPrimaryMessage: "Remove media from this record?",
             confirmationSecondaryMessage: "This action can not be undone. Any changes on the media handling record will also be saved automatically.",
             confirmationActText: "Remove",

@@ -25,11 +25,12 @@ cspace = cspace || {};
 
     cspace.passwordValidator = function (container, options) {
         var that = fluid.initView("cspace.passwordValidator", container, options);
-
+        fluid.initDependents(that);
+        
         that.validateLength = function (password) {
             var passwordLength = password.length;
             if (passwordLength < that.options.minLength || passwordLength > that.options.maxLength) {
-                var msg = fluid.stringTemplate(that.options.messages.length, {min: that.options.minLength, max: that.options.maxLength});
+                var msg = fluid.stringTemplate(that.lookupMessage("passwordLengthError"), {min: that.options.minLength, max: that.options.maxLength});
                 that.options.messageBar.show(msg, null, true);
                 return false;
             }
@@ -52,9 +53,14 @@ cspace = cspace || {};
         selectors: {
             passwordField: ".csc-passwordValidator-password"
         },
-        messages: {
-            length: "Passwords must be between %min and %max characters in length."
+        parentBundle: "{globalBundle}",
+        invokers: {
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{passwordValidator}.options.parentBundle.messageBase", "{arguments}.0"]
+            }
         },
+        strings: {},
         minLength: 8,
         maxLength: 24,
         messageBar: "{messageBar}"

@@ -10,10 +10,7 @@
                     "type":  "cspace.recordEditor",
                     "options": {
                         "selectors": {
-                            "identificationNumber": ".csc-intake-entry-number" 
-                        },
-                        "strings": {
-                            "identificationNumberRequired": "Please specify an Intake Entry Number" 
+                            "identificationNumber": ".csc-intake-entry-number"
                         },
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",

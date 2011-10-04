@@ -49,14 +49,14 @@ cspace = cspace || {};
             searchButton: "cs-searchBox-button",
             advancedSearch: "cs-searchBox-advancedSearch"
         },
-        strings: {                  // List of strings that the component will render (for l10n and i18n).
-            searchButtonText: "Search",
-            recordTypeSelectLabel: "",
-            advancedSearch: "Advanced search"
-        },
+        strings: {},
         parentBundle: "{globalBundle}",
         globalNavigator: "{globalNavigator}",
-        model: {},                  // A default data model object.
+        model: {
+            messagekeys: {
+                recordTypeSelectLabel: "searchBox-recordTypeSelectLabel"
+            }
+        },                  // A default data model object.
         produceTree: "cspace.searchBox.produceTree", // direct method expected by interim impl of initRendererComponent
         rendererOptions: {
             autoBind: false
@@ -125,11 +125,11 @@ cspace = cspace || {};
     cspace.searchBox.produceTree = function (that) {
         var tree = {
             searchButton: {
-                messagekey: "searchButtonText"
+                messagekey: "searchBox-searchButtonText"
             },
             searchQuery: {},
             recordTypeSelectLabel: {
-                messagekey: "recordTypeSelectLabel"
+                messagekey: "${messagekeys.recordTypeSelectLabel}"
             }
         };
         tree = $.extend(tree, that.recordTypeSelector.produceComponent());
@@ -147,7 +147,7 @@ cspace = cspace || {};
             decorators: {"addClass": "{styles}.advancedSearch"},
             target: that.options.urls.advancedSearchURL,
             linktext: {
-                messagekey: "advancedSearch"
+                messagekey: "searchBox-advancedSearchText"
             }
         };
         return tree;

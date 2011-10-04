@@ -12,9 +12,6 @@
                         "selectors": {
                             "identificationNumber": ".csc-acquisition-numberPatternChooser-reference-number" 
                         },
-                        "strings": {
-                            "identificationNumberRequired": "Please specify an Acquisition Reference Number" 
-                        },
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "model": "{pageBuilder}.model"

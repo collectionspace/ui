@@ -53,10 +53,6 @@
                                                     "height": "600"
                                                 },
                                                 "selectorsToIgnore": ["requiredFields", "identificationNumber", "header", "togglable", "uploader"],
-                                                "strings": {
-                                                    "identificationNumberRequired": "Please specify an Identification Number",
-                                                    "originalMediaOptions": "height=%height,width=%width"
-                                                },
                                                 "invokers": {
                                                     "navigateToFullImage": "navigateToFullImage"
                                                 },

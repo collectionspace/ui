@@ -12,9 +12,6 @@
                         "selectors": {
                             "identificationNumber": ".csc-objectexit-exitNumber"
                         },
-                        "strings": {
-                            "identificationNumberRequired": "Please specify an Exit Number"
-                        },
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "model": "{pageBuilder}.model"

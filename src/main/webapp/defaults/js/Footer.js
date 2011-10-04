@@ -24,28 +24,28 @@ cspace = cspace || {};
     cspace.footer.produceTree = function () {
         return {
             text1: {
-                messagekey: "text1"
+                messagekey: "footer-text1"
             },
             text2: {
-                messagekey: "text2"
+                messagekey: "footer-text2"
             },
             currentRelease: {
                 target: "${currentRelease}",
                 linktext: {
-                    messagekey: "currentRelease",
-                    args: {version: "${version}"}
+                    messagekey: "footer-currentRelease",
+                    args: ["${version}"]
                 }
             },
             about: {
                 target: "${about}",
                 linktext: {
-                    messagekey: "about"
+                    messagekey: "footer-about"
                 }
             },
             feedback: {
                 target: "${feedback}",
                 linktext: {
-                    messagekey: "feedback"
+                    messagekey: "footer-feedback"
                 }
             }
         };
@@ -87,13 +87,7 @@ cspace = cspace || {};
         },
         parentBundle: "{globalBundle}",
         produceTree: cspace.footer.produceTree,
-        strings: {
-            text1: "2009 - 2011",
-            text2: "CollectionSpace",
-            currentRelease: "Release %version",
-            about: "About CollectionSpace",
-            feedback: "Leave Feedback"
-        }
+        strings: {}
     });
     
     fluid.fetchResources.primeCacheFromResources("cspace.footer");

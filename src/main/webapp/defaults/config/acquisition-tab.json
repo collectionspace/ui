@@ -45,9 +45,6 @@
                                             "options": {
                                                 "selectors": {
                                                     "identificationNumber": ".csc-acquisition-numberPatternChooser-reference-number" 
-                                                },
-                                                "strings": {
-                                                    "identificationNumberRequired": "Please specify an Acquisition Reference Number"
                                                 }
                                             } 
                                         }
