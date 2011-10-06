@@ -192,71 +192,166 @@
 		<div class="fl-container-flex fl-fix information-group">
 			<div class="csc-person-contactInformation-label csc-recordEditor-header fl-container-flex header toggle"></div>
 			<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-				<div class="info-column">
+			    <div class="info-column">
 					<div class="info-column2-40 fl-force-left">
-						<div class="info-pair-select">
+					   
+					    <div class="info-pair">
 							<div class="header">
-								<div class="label">Address Type</div>
+								<div class="label csc-contact-createdAt-label"></div>
 							</div>
 							<div class="content">
-								<select class="csc-contact-addressType1 input-select" disabled="disabled" ><option value="">Options not loaded</option></select>
+								<input type="text" class="csc-contact-createdAt" disabled="disabled"/>
 							</div>
 						</div>
 						
 						<div class="info-pair">
 							<div class="header">
-								<div class="label">Fax Number</div>
+								<div class="label csc-contact-createdBy-label"></div>
 							</div>
 							<div class="content">
-								<input type="text" class="csc-contact-faxNumber1" disabled="disabled" />
+								<input type="text" class="csc-contact-createdBy" disabled="disabled"/>
 							</div>
 						</div>
 						
 						<div class="info-pair">
 							<div class="header">
-								<div class="label">Telephone Number</div>
+								<div class="label csc-contact-updatedBy-label"></div>
 							</div>
 							<div class="content">
-								<input type="text" class="csc-contact-telephoneNumber1" disabled="disabled" />
+								<input type="text" class="csc-contact-updatedBy" disabled="disabled"/>
+							</div>
+						</div>
+						
+						<div class="info-pair">
+							<div class="header">
+								<div class="label csc-contact-updatedAt-label"></div>
+							</div>
+							<div class="content">
+								<input type="text" class="csc-contact-updatedAt" disabled="disabled"/>
 							</div>
 						</div>
 					</div>
 					
 					<div class="info-column2-60 fl-force-right">
 						<div class="info-pair">
-							<div class="header">
-								<div class="label">Address</div>
-							</div>
-							<div class="content">
-								<input type="text" class="csc-contact-addressText1" disabled="disabled" />
-							</div>
+    						<div class="header">
+    							<div class="csc-contact-telephoneNumberGroup-label label"></div>
+    						</div>
+    						<div class="content">
+    							<table>
+    								<thead>
+    									<tr>
+    										<td class="csc-contact-telephoneNumberType-label"></td>
+    										<td class="csc-contact-telephoneNumber-label"></td>
+    									</tr>
+    								</thead>                                                        
+    								<tbody>
+    									<tr class="csc-contact-telephoneNumberGroup">
+    										<td><select class="csc-contact-telephoneNumberType input-select"><option value="">Options not loaded</option></select></td>
+    										<td><input type="text" class="csc-contact-telephoneNumber"/></td>
+    									</tr>
+    								</tbody>
+    							</table>
+    						</div>
+    					</div>
+    					
+    					<div class="info-pair">
+    						<div class="header">
+    							<div class="csc-contact-emailGroup-label label"></div>
+    						</div>
+    						<div class="content">
+    							<table>
+    								<thead>
+    									<tr>
+    										<td class="csc-contact-emailType-label"></td>
+    										<td class="csc-contact-email-label"></td>
+    									</tr>
+    								</thead>                                                        
+    								<tbody>
+    									<tr class="csc-contact-emailGroup">
+    										<td><select class="csc-contact-emailType input-select"><option value="">Options not loaded</option></select></td>
+    										<td><input type="text" class="csc-contact-email"/></td>
+    									</tr>
+    								</tbody>
+    							</table>
+    						</div>
+    					</div>
+    					
+    					<div class="info-pair">
+    						<div class="header">
+    							<div class="csc-contact-faxNumberGroup-label label"></div>
+    						</div>
+    						<div class="content">
+    							<table>
+    								<thead>
+    									<tr>
+    										<td class="csc-contact-faxNumberType-label"></td>
+    										<td class="csc-contact-faxNumber-label"></td>
+    									</tr>
+    								</thead>                                                        
+    								<tbody>
+    									<tr class="csc-contact-faxNumberGroup">
+    										<td><select class="csc-contact-faxNumberType input-select"><option value="">Options not loaded</option></select></td>
+    										<td><input type="text" class="csc-contact-faxNumber"/></td>
+    									</tr>
+    								</tbody>
+    							</table>
+    						</div>
+    					</div>
+    					
+    					<div class="info-pair">
+    						<div class="header">
+    							<div class="csc-contact-webAddressGroup-label label"></div>
+    						</div>
+    						<div class="content">
+    							<table>
+    								<thead>
+    									<tr>
+    										<td class="csc-contact-webAddressType-label"></td>
+    										<td class="csc-contact-webAddress-label"></td>
+    									</tr>
+    								</thead>                                                        
+    								<tbody>
+    									<tr class="csc-contact-webAddressGroup">
+    										<td><select class="csc-contact-webAddressType input-select"><option value="">Options not loaded</option></select></td>
+    										<td><input type="text" class="csc-contact-webAddress"/></td>
+    									</tr>
+    								</tbody>
+    							</table>
+    						</div>
+    					</div>
+					</div>
+				</div>
+			    <div class="info-column">
+				    <div class="info-pair">
+						<div class="header">
+							<div class="csc-contact-addressGroup-label label"></div>
 						</div>
-						
-						<div class="info-pair">
-							<div class="header">
-								<div class="label">Place</div>
-							</div>
-							<div class="content">
-								<input type="text" class="csc-contact-place" disabled="disabled" />
-							</div>
-						</div>
-						
-						<div class="info-pair">
-							<div class="header">
-								<div class="label">Postcode</div>
-							</div>
-							<div class="content">
-								<input type="text" class="csc-contact-postcode1" disabled="disabled" />
-							</div>
-						</div>
-						
-						<div class="info-pair">
-							<div class="header">
-								<div class="label">Email</div>
-							</div>
-							<div class="content">
-								<input type="text" class="csc-contact-email1" disabled="disabled" />
-							</div>
+						<div class="content">
+							<table>
+								<thead>
+									<tr>
+										<td class="csc-contact-addressMunicipality-label"></td>
+										<td class="csc-contact-addressCountry-label"></td>
+										<td class="csc-contact-addressType-label"></td>
+										<td class="csc-contact-addressPlace2-label"></td>
+										<td class="csc-contact-addressStateOrProvince-label"></td>
+										<td class="csc-contact-addressPlace1-label"></td>
+										<td class="csc-contact-addressPostCode-label"></td>
+									</tr>
+								</thead>                                                        
+								<tbody>
+									<tr class="csc-contact-addressGroup">
+									    <td><input type="text" class="csc-contact-addressMunicipality"/></td>
+									    <td><input type="text" class="csc-contact-addressCountry"/></td>
+										<td><select class="csc-contact-addressType input-select"><option value="">Options not loaded</option></select></td>
+										<td><input type="text" class="csc-contact-addressPlace2"/></td>
+										<td><input type="text" class="csc-contact-addressStateOrProvince"/></td>
+										<td><input type="text" class="csc-contact-addressPlace1"/></td>
+										<td><input type="text" class="csc-contact-addressPostCode"/></td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
