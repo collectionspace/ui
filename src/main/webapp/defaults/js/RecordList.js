@@ -105,32 +105,32 @@ cspace = cspace || {};
     fluid.fetchResources.primeCacheFromResources("cspace.recordList");
     
     cspace.recordList.bindEvents = function (that) {
-        fluid.activatable(that.locate("row"), function (event) {
-            var rows = that.locate("row");
-            rows.removeClass(that.options.styles.selected);
+    
+        function styleAndActivate (row, rows) {
             that.locate("newRow").hide();
-            var row = $(event.target);
             row.addClass(that.options.styles.selected);
             that.applier.requestChange("selectonIndex", rows.index(row));
             that.events.onSelect.fire();
+        }
+    
+        fluid.activatable(that.locate("row"), function (event) {
+            var rows = that.locate("row");
+            rows.removeClass(that.options.styles.selected);
+            styleAndActivate($(event.target), rows);
+            return false;
         });
+        
         fluid.selectable(that.container, {
             selectableElements: that.locate("row"),
             onLeaveContainer: function () {
                 that.locate("row").removeClass(that.options.styles.selected);
-            },
-            noBubbleListeners: false,
-            selectablesTabindex: ""
+            }
         });
+        that.container.fluid("tabbable");
 
         that.locate("row").click(function () {
             $(that.options.selectors["row"]).removeClass(that.options.styles.selected);
-            var rows = that.locate("row");
-            that.locate("newRow").hide();
-            var row = $(this);
-            row.addClass(that.options.styles.selected);
-            that.applier.requestChange("selectonIndex", rows.index(row));
-            that.events.onSelect.fire();
+            styleAndActivate($(this), that.locate("row"));
         });
     };
 
