@@ -1510,4 +1510,8 @@ fluid.registerNamespace("cspace.util");
         var prefix = recordType === "cataloging" ? "collection-object-" : (recordType + "-");
         return prefix + key + "Label"
     };
+    
+    cspace.util.findLabel = function (required) {
+        return $(required).parents(".info-pair").find(".label").text();
+    };
 })(jQuery, fluid);

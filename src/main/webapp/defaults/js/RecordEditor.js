@@ -60,7 +60,7 @@ cspace = cspace || {};
         var i;
         for (i = 0; i < required.length; i++) {
             if (required[i].value === "") {
-                messageBar.show(message, null, true);
+                messageBar.show(fluid.stringTemplate(message, {field: cspace.util.findLabel(required[i])}), null, true);
                 return false;
             }
         }
@@ -636,7 +636,7 @@ cspace = cspace || {};
             removeRelationsFailedMessage: "Error removing related records: ",
             defaultTermIndicator: " (default)",
             noDefaultInvitation: "-- Select an item from the list --",
-            missingRequiredFields: "Some required fields are empty",
+            missingRequiredFields: "Required field is empty: %field",
             save: "Save",
             cancel: "Cancel changes",
             deleteButton: "Delete",
