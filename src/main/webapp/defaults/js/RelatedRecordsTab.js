@@ -45,8 +45,9 @@ cspace = cspace || {};
                         onClose: function (userAction) {
                             if (userAction === "act") {
                                 that.listEditor.events.afterListUpdate.addListener(function () {
+                                    that.listEditor.events.afterListUpdate.removeListener("afterListUpdate");
                                     callback();
-                                }, undefined, undefined, "last");
+                                }, "afterListUpdate", undefined, "last");
                                 that.listEditor.details.requestSave();
                             } else if (userAction === "proceed") {
                                 callback();
