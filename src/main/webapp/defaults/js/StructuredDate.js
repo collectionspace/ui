@@ -257,7 +257,8 @@ cspace = cspace || {};
                     type: "fluid",
                     options: {
                         elPath: that.composeElPath("dateEarliestSingleEra"),
-                        termListType: "dateEarliestSingleEra"
+                        termListType: "dateEarliestSingleEra",
+                        recordType: "structureddate"
                     }
                 }]
             },
@@ -268,7 +269,8 @@ cspace = cspace || {};
                     type: "fluid",
                     options: {
                         elPath: that.composeElPath("dateEarliestSingleCertainty"),
-                        termListType: "dateEarliestSingleCertainty"
+                        termListType: "dateEarliestSingleCertainty",
+                        recordType: "structureddate"
                     }
                 }]
             },
@@ -278,7 +280,8 @@ cspace = cspace || {};
                     type: "fluid",
                     options: {
                         elPath: that.composeElPath("dateLatestEra"),
-                        termListType: "dateLatestEra"
+                        termListType: "dateLatestEra",
+                        recordType: "structureddate"
                     }
                 }]
             },
@@ -289,7 +292,8 @@ cspace = cspace || {};
                     type: "fluid",
                     options: {
                         elPath: that.composeElPath("dateLatestCertainty"),
-                        termListType: "dateLatestCertainty"
+                        termListType: "dateLatestCertainty",
+                        recordType: "structureddate"
                     }
                 }]
             },
@@ -314,7 +318,8 @@ cspace = cspace || {};
                     type: "fluid",
                     options: {
                         elPath: that.composeElPath("dateEarliestSingleQualifierUnit"),
-                        termListType: "dateEarliestSingleQualifierUnit"
+                        termListType: "dateEarliestSingleQualifierUnit",
+                        recordType: "structureddate"
                     }
                 }]
             },
@@ -327,7 +332,8 @@ cspace = cspace || {};
                     type: "fluid",
                     options: {
                         elPath: that.composeElPath("dateLatestQualifierUnit"),
-                        termListType: "dateLatestQualifierUnit"
+                        termListType: "dateLatestQualifierUnit",
+                        recordType: "structureddate"
                     }
                 }]
             },
