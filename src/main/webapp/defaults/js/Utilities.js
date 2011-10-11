@@ -962,19 +962,41 @@ fluid.registerNamespace("cspace.util");
 
     cspace.util.globalNavigator.bindEvents = function (that) {
         that.container.delegate(that.options.selectors.include, "click", function (evt) {
+            // IF shift or ctrl is pressed - not a navigation away so no need to fire onPerformNavigation
+            if (evt.shiftKey || evt.ctrlKey || evt.metaKey) {
+                return;
+            }
             var target = $(this);
             if (target.is(that.options.selectors.exclude)) {
                 return;
             }
             that.events.onPerformNavigation.fire(function () {
-                target[0].dispatchEvent(evt);
+                // Create a new event similar to the original.
+                var event = document.createEvent("MouseEvents");
+                event.initMouseEvent(evt.originalEvent.type, 
+                                     evt.originalEvent.bubbles, 
+                                     evt.originalEvent.cancelable, 
+                                     evt.originalEvent.view, 
+                                     evt.originalEvent.detail,
+                                     evt.originalEvent.screenX, 
+                                     evt.originalEvent.screenY, 
+                                     evt.originalEvent.clientX, 
+                                     evt.originalEvent.clientY,
+                                     evt.originalEvent.ctrlKey,
+                                     evt.originalEvent.altKey,
+                                     evt.originalEvent.shiftKey,
+                                     evt.originalEvent.metaKey,
+                                     evt.originalEvent.button,
+                                     evt.originalEvent.relatedTarget);
+                // Dispatch a new event.
+                target[0].dispatchEvent(event);
             });
             return false;
         });
-        that.container.delegate(that.options.selectors.forms, "submit", function (evt) {
-            var form = $(this);
+        that.container.delegate(that.options.selectors.forms, "submit", function () {
+            var target = $(this);
             that.events.onPerformNavigation.fire(function () {
-                form[0].dispatchEvent(evt);
+                target[0].submit();
             });
             return false;
         });
