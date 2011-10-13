@@ -147,7 +147,8 @@ cspace = cspace || {};
                                 callback();
                             }
                         }
-                    }
+                    },
+                    parentBundle: that.options.parentBundle
                 });
                 return false;
             }
@@ -285,14 +286,15 @@ cspace = cspace || {};
                     }
                 }
             },
-            strings: {
-                primaryMessage: that.options.strings.deletePrimaryMessage
+            model: {
+                messages: [ "recordEditor-dialog-deletePrimaryMessage" ]
             },
-            termMap: {
-                record: that.lookupMessage(that.options.recordType),
-                media: that.hasMediaAttached(that) ? that.options.strings.deleteMessageMediaAttached : "",
-                relations: that.hasRelations(that) ? that.options.strings.deleteMessageWithRelated : ""
-            }
+            termMap: [
+                that.lookupMessage(that.options.recordType),
+                that.hasMediaAttached(that) ? that.options.strings.deleteMessageMediaAttached : "",
+                that.hasRelations(that) ? that.options.strings.deleteMessageWithRelated : ""
+            ],
+            parentBundle: that.options.parentBundle
         });
     };
     
@@ -315,11 +317,13 @@ cspace = cspace || {};
                     window.location = that.options.urls.deleteURL;
                 }
             },
-            strings: {
-                primaryMessage: fluid.stringTemplate(that.options.strings.removeSuccessfulMessage, {
-                    record: that.lookupMessage(that.options.recordType)
-                })
-            }
+            parentBundle: that.options.parentBundle,
+            model: {
+                 messages: [ "recordEditor-dialog-removeSuccessfulMessage" ]
+            },
+            termMap: [
+                that.lookupMessage(that.options.recordType)
+            ]
         });
     };
 
@@ -641,7 +645,6 @@ cspace = cspace || {};
             cancel: "Cancel changes",
             deleteButton: "Delete",
             createFromExistingButton: "Create new from existing",
-            deletePrimaryMessage: "Delete this %record%relations%media?",
             deleteMessageWithRelated: " and its relationships",
             deleteMessageMediaAttached: " and its attached media"
         },

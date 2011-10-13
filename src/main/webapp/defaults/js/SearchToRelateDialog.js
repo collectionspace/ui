@@ -204,9 +204,7 @@ cspace = cspace || {};
             }
         },
         parentBundle: "{globalBundle}",
-        strings: {
-            closeAlt: "close button"
-        },
+        strings: { },
         components: {
             search: {
                 type: "cspace.search.searchView",

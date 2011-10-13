@@ -132,7 +132,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }, function (re) {
             fluid.log("RETest: afterRender");
             re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertEquals("Checking correct text: ", "Delete this Cataloging and its relationships and its attached media?", re.confirmation.confirmationDialog.locate("message:").text());
+                jqUnit.assertEquals("Checking correct text: ", "Delete this Cataloging and its attached media and its relationships?", re.confirmation.confirmationDialog.locate("message:").text());
                 start();
             });
             re.remove();

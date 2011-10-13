@@ -19,7 +19,7 @@ cspace = cspace || {};
     fluid.registerNamespace("cspace.sidebar");
     
     var setupSideBar = function (that) {
-        that.locate("numOfTerms").text(fluid.stringTemplate(that.options.strings.numOfTerms, {
+        that.locate("numOfTerms").text(fluid.stringTemplate(that.lookupMessage("sidebar-numOfTerms"), {
             numOfTerms: that.termsUsed.calculateRecordListSize()
         }));
     }; 
@@ -88,7 +88,7 @@ cspace = cspace || {};
                 }
             },
             termsHeader: {
-                messagekey: "termsHeader"
+                messagekey: "sidebar-termsHeader"
             },
             expander: [{
                 repeatID: "categoryContainer",
@@ -115,6 +115,10 @@ cspace = cspace || {};
             showMediaImage: {
                 funcName: "cspace.sidebar.media.showMediaImage",
                 args: "{media}.model"
+            },
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{sidebar}.options.parentBundle.messageBase", "{arguments}.0"]
             }
         },
         components: {
@@ -136,15 +140,13 @@ cspace = cspace || {};
             header: ".csc-media-header",
             togglable: ".csc-media-togglable"
         },
+        parentBundle: "{globalBundle}",
         selectorsToIgnore: ["header", "togglable"],
         styles: {
             mediumImage: "cs-sidebar-mediumImage",
             mediaSnapshot: "cs-media-snapshot-image"
         },
-        strings: {
-            mediumImage: "This is medium media image.",
-            mediaHeader: "Media Snapshot",
-        }
+        strings: { }
     });
     
     cspace.sidebar.media.showMediaImage = function (model) {
@@ -186,7 +188,7 @@ cspace = cspace || {};
     cspace.sidebar.media.produceTree = function (that) {
         return {
             mediaHeader: {
-                messagekey: "mediaHeader"
+                messagekey: "sidebar-mediaHeader"
             },
             expander: {
                 type: "fluid.renderer.condition",
@@ -198,7 +200,7 @@ cspace = cspace || {};
                         }, {
                             type: "attrs",
                             attributes: {
-                                alt: that.options.strings.mediumImage,
+                                alt: that.lookupMessage("sidebar-mediumImage"),
                                 src: that.getImageSource()
                             }
                         }]
@@ -228,7 +230,10 @@ cspace = cspace || {};
                 createOnEvent: "afterRender",
                 options: {
                     model: {
-                        items: "{sidebar}.options.recordModel.termsUsed"
+                        items: "{sidebar}.options.recordModel.termsUsed",
+                        messagekeys: {
+                            nothingYet: "sidebar-nothingYet"
+                        }
                     },
                     elPaths: {
                         items: "items"
@@ -237,8 +242,7 @@ cspace = cspace || {};
                     strings: {
                         number: "Term",
                         sourceFieldName: "Field",
-                        recordtype: "Vocabulary",
-                        nothingYet: "No Authority terms used yet"
+                        recordtype: "Vocabulary"
                     },
                     showNumberOfItems: false
                 }
@@ -274,6 +278,12 @@ cspace = cspace || {};
                         togglable: "{sidebar}.options.selectors.togglable"
                     }
                 }
+            }
+        },
+        invokers: {
+            lookupMessage: {
+                funcName: "cspace.util.lookupMessage",
+                args: ["{sidebar}.options.parentBundle.messageBase", "{arguments}.0"]
             }
         },
         model: {
@@ -333,10 +343,7 @@ cspace = cspace || {};
                 }
             })
         },
-        strings: {
-            numOfTerms: "(%numOfTerms)",
-            termsHeader: "Terms Used"
-        }
+        strings: { }
     });
         
     fluid.fetchResources.primeCacheFromResources("cspace.sidebar");

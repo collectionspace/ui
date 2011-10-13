@@ -26,7 +26,7 @@ cspace = cspace || {};
             autoBind: true
         },
         invokers: {
-			bindEvents: {
+            bindEvents: {
                 funcName: "cspace.recordList.bindEvents",
                 args: ["{recordList}"]
             },
@@ -42,7 +42,11 @@ cspace = cspace || {};
             }
         },
         model: {
-            selectonIndex: -1
+            selectonIndex: -1,
+            messagekeys: {
+                nothingYet: "recordList-nothingYet",
+                newRow: "recordList-newRow"
+            }
         },
         events: {
             onSelect: null
@@ -64,8 +68,6 @@ cspace = cspace || {};
         },
         repeatingSelectors: ["row", "titleColumn", "column"],
         strings: {
-            nothingYet: "No related records yet",
-            newRow: "New Record",
             numberOfItems: "%numberOfItems"
         },
         styles: {
@@ -192,10 +194,10 @@ cspace = cspace || {};
                 }
             },
             newRow: {
-                messagekey: "newRow",
-                args: {
-                    recordType: that.lookupMessage(that.options.recordType)
-                },
+                messagekey: "${messagekeys.newRow}",
+                args: [
+                    that.lookupMessage(that.options.recordType)
+                ],
                 decorators: [{
                     type: "addClass",
                     classes: that.options.styles.hidden
@@ -287,7 +289,7 @@ cspace = cspace || {};
                 },
                 falseTree: {
                     nothingYet: {
-                        messagekey: "nothingYet",
+                        messagekey: "${messagekeys.nothingYet}",
                         decorators: {
                             type: "addClass",
                             classes: that.options.styles.nothingYet
@@ -322,9 +324,7 @@ cspace = cspace || {};
     fluid.defaults("cspace.recordList.thumbRenderer", {
         gradeNames: ["fluid.viewComponent", "autoInit"],
         finalInitFunction: "cspace.recordList.thumbRenderer.finalInitFunction",
-        strings: {
-            thumbnail: "This is a thumbnail for the related record."
-        },
+        strings: {},
         styles: {
             thumbnail: "cs-recordList-thumbnail"
         },
@@ -337,7 +337,7 @@ cspace = cspace || {};
         var segs = fluid.model.parseEL(that.options.row);
         var item = that.model[that.options.elPath][segs[segs.length - 1]];
         that.container.attr("src", item.summarylist.imgThumb || that.options.urls.icnMedia)
-            .attr("alt", that.options.strings.thumbnail)
+            .attr("alt", that.lookupMessage("recordList-thumbnail"))
             .addClass(that.options.styles.thumbnail);
     };
     
@@ -354,7 +354,7 @@ cspace = cspace || {};
                     }, {
                         type: "attrs",
                         attributes: {
-                            alt: that.options.strings.deleteRelation
+                            alt: that.lookupMessage("tab-list-deleteRelation") 
                         }
                     }, {
                         type: "jQuery",
@@ -452,9 +452,10 @@ cspace = cspace || {};
                     }
                 }
             },
-            strings: {
-                primaryMessage: recordEditor.options.strings.deletePrimaryMessage
-            }
+            model: {
+                messages: [ "tab-re-deletePrimaryMessage" ]
+            },
+            parentBundle: recordEditor.options.parentBundle
         });
         return false;
     };

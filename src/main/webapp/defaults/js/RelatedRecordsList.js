@@ -101,8 +101,12 @@ cspace = cspace || {};
                     strings: {
                         number: "Number",
                         summary: "Summary",
-                        recordtype: "Type",
-                        nothingYet: "No related records yet"
+                        recordtype: "Type"
+                    },
+                    model: {
+                        messagekeys: {
+                            nothingYet: "relatedRecordsList-nothingYet"
+                        }
                     },
                     showNumberOfItems: false
                 }

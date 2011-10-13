@@ -237,6 +237,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.searchToRelateDialog", ["cspace.relationManager", "cspace.localData"], {
             container: "{relationManager}.dom.searchDialog",
             options: {
+                strings: {
+                    closeAlt: "{globalBundle}.messageBase.searchToRelateDialog-closeAlt"
+                },
                 showCreate: true,
                 listeners: {
                     addRelations: {
@@ -252,7 +255,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
         fluid.demands("cspace.searchToRelateDialog", ["cspace.relationManager", "cspace.localData", "cspace.sidebar"], {
             container: "{relationManager}.dom.searchDialog",
-            options: {
+            options: {                
+                strings: {
+                    closeAlt: "{globalBundle}.messageBase.searchToRelateDialog-closeAlt"
+                },
                 listeners: {
                     addRelations: {
                         expander: {
@@ -684,11 +690,26 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         fluid.demands("cspace.reportProducer.generateReport", ["cspace.reportProducer", "cspace.recordEditor"], {
             funcName: "cspace.reportProducer.generateReport",
-            args: ["{reportProducer}.confirmation", "{reportProducer}.options.strings", "{reportProducer}.requestReport", "{recordEditor}"]
+            args: ["{reportProducer}.confirmation", "{reportProducer}.options.parentBundle", "{reportProducer}.requestReport", "{recordEditor}"]
         });
         
         // Confirmation demands
-        fluid.demands("confirmation", "cspace.recordEditor", "{options}");
+        fluid.demands("confirmation", "cspace.recordEditor", {
+            options: {
+                strings: {
+                    title: "{globalBundle}.messageBase.confirmationDialog-title"
+                }
+            }
+        });
+
+        fluid.demands("confirmation", "cspace.relatedRecordsTab", {
+            options: {
+                strings: {
+                    title: "{globalBundle}.messageBase.confirmationDialog-title"
+                }
+            }
+        });
+        
         fluid.demands("confirmation", "cspace.reportProducer", "{options}");
 
         // CreateNew demands
@@ -1008,7 +1029,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 strings: {
                     deleteButton: "{globalBundle}.messageBase.tab-re-deleteButton",
-                    deletePrimaryMessage: "{globalBundle}.messageBase.tab-re-deletePrimaryMessage",
                     deleteFailedMessage: "{globalBundle}.messageBase.tab-re-deleteFailedMessage",
                     removeSuccessfulMessage: "{globalBundle}.messageBase.tab-re-removeSuccessfulMessage"
                 }
@@ -1062,11 +1082,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     titleColumn: "cs-recordList-title-column-tab",
                     column2: "cs-recordList-column2-tab"
                 },
+//                model: {
+//                    messagekeys: {
+//                        newRow: "tab-list-newRow"
+//                    }
+//                },
                 strings: {
                     number: "{globalBundle}.messageBase.tab-list-number",
-                    summary: "{globalBundle}.messageBase.tab-list-summary",
-                    newRow: "{globalBundle}.messageBase.tab-list-newRow",
-                    deleteRelation: "{globalBundle}.messageBase.tab-list-deleteRelation"
+                    summary: "{globalBundle}.messageBase.tab-list-summary"
                 }
             }
         });
@@ -1101,11 +1124,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 styles: {
                     deleteRelation: "cs-recordList-deleteRelation"
                 },
+//                model: {
+//                    messagekeys: {
+//                        newRow: "tab-list-newRow"
+//                     }
+//                },
                 strings: {
                     number: "{globalBundle}.messageBase.tab-list-number",
-                    summary: "{globalBundle}.messageBase.tab-list-summary",
-                    newRow: "{globalBundle}.messageBase.tab-list-newRow",
-                    deleteRelation: "{globalBundle}.messageBase.tab-list-deleteRelation"
+                    summary: "{globalBundle}.messageBase.tab-list-summary"
                 }
             }
         });
@@ -1113,10 +1139,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{listEditor}.dom.list",
             options: {
                 columns: ["screenName", "status"],
+//                model: {
+//                    messagekeys: {
+//                        newRow: "users-admin-newRow"
+//                    }
+//                },
                 strings: {
                     screenName: "{globalBundle}.messageBase.users-admin-screenName",
-                    status: "{globalBundle}.messageBase.users-admin-status",
-                    newRow: "{globalBundle}.messageBase.users-admin-newRow"
+                    status: "{globalBundle}.messageBase.users-admin-status"
                 }
             }
         });
@@ -1125,9 +1155,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 recordType: "{listEditor}.options.recordType",
                 columns: ["number"],
+//                model: {
+//                    messagekeys: {
+//                        newRow: "admin-newRow"                        
+//                    }
+//                },
                 strings: {
-                    number: "{globalBundle}.messageBase.admin-number",
-                    newRow: "{globalBundle}.messageBase.admin-newRow"
+                    number: "{globalBundle}.messageBase.admin-number"
                 }
             }
         });
@@ -1431,12 +1465,20 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         // Search To Relate Dialog demands
         fluid.demands("cspace.searchToRelateDialog", "cspace.relationManager", {
             container: "{relationManager}.dom.searchDialog",
-            options: {
+            options: {                
+                strings: {
+                    closeAlt: "{globalBundle}.messageBase.searchToRelateDialog-closeAlt"
+                },                
                 showCreate: true
             }
         });
         fluid.demands("cspace.searchToRelateDialog", ["cspace.relationManager", "cspace.sidebar"], {
-            container: "{relationManager}.dom.searchDialog"
+            container: "{relationManager}.dom.searchDialog",
+            options: {              
+                strings: {
+                    closeAlt: "{globalBundle}.messageBase.searchToRelateDialog-closeAlt"
+                }                
+            }
         });
         
         // Repeatable demands
@@ -1807,13 +1849,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("tabsList", ["cspace.tabs", "person"], {
             container: "{tabs}.dom.tabsList",
             options: {
-                strings: {
-                    primary: "{globalBundle}.messageBase.tablist-primary"
-                },
                 model: {
                     tabs: {
                         primary: {
-                            "name": "primary",
+                            "name": "tablist-primary",
                             href: "#primaryTab"
                         }
                     }
@@ -1823,13 +1862,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("tabsList", ["cspace.tabs", "organization"], {
             container: "{tabs}.dom.tabsList",
             options: {
-                strings: {
-                    primary: "{globalBundle}.messageBase.tablist-primary"
-                },
                 model: {
                     tabs: {
                         primary: {
-                            "name": "primary",
+                            "name": "tablist-primary",
                             href: "#primaryTab"
                         }
                     }
@@ -1839,13 +1875,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("tabsList", ["cspace.tabs", "location"], {
             container: "{tabs}.dom.tabsList",
             options: {
-                strings: {
-                    primary: "{globalBundle}.messageBase.tablist-primary"
-                },
                 model: {
                     tabs: {
                         primary: {
-                            "name": "primary",
+                            "name": "tablist-primary",
                             href: "#primaryTab"
                         }
                     }

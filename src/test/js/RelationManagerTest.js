@@ -95,7 +95,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             relationManager.locate("addButton").click();
             jqUnit.notVisible("Search to Relate Dialog is invisible if the record is not saved", $(".ui-dialog"));
             jqUnit.isVisible("Error message is visible", relationManager.options.messageBar.container);
-            jqUnit.assertEquals("Object should be saved first", relationManager.options.strings.pleaseSaveFirst, relationManager.options.messageBar.locate("message").text());
+            jqUnit.assertEquals("Object should be saved first", relationManager.options.parentBundle.resolve("relationManager-pleaseSaveFirst"), relationManager.options.messageBar.locate("message").text());
             start();
         }, "cataloging", "cataloging");
     });

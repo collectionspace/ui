@@ -25,7 +25,7 @@ cspace = cspace || {};
         }
     };
     
-    var makeArrayExpander = function (recordType) {
+    var makeArrayExpander = function (recordType, options) {
         return fluid.expander.makeFetchExpander({
             url: buildUrl(recordType),
 //          TODO: Can't specify the data tupe because makeDefaultFetchOptions expander expects
@@ -36,6 +36,9 @@ cspace = cspace || {};
             fetchKey: recordType, 
             disposer: function (model) {
                 model.selectonIndex = -1;
+                model.messagekeys = { 
+                    nothingYet: "myCollectionSpace-nothingYet" 
+                };
                 return model;
             }
         });
@@ -43,10 +46,7 @@ cspace = cspace || {};
     
     var makeOpts = function (recordType, options) {
         return {
-            strings: {
-                nothingYet: "No records yet"
-            },
-            model: makeArrayExpander(recordType),
+            model: makeArrayExpander(recordType, options),
             globalNavigator: "{myCollectionSpace}.options.globalNavigator",
             parentBundle: "{myCollectionSpace}.options.parentBundle",
             elPaths: {
@@ -84,6 +84,7 @@ cspace = cspace || {};
         fluid.remove_if(options.components, function (component, key) {
             return component.type === "cspace.recordList" && $.inArray(key, options.records) < 0;
         });
+        options.applier = that.applier;
         makeComponentsOpts(options);
         that.renderer.refreshView();
     };

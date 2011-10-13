@@ -78,7 +78,7 @@ var recordListTester = function ($) {
                 }
             });
             jqUnit.isVisible("Nothing yet message should be invisible", recordList.locate("nothingYet"));
-            jqUnit.assertEquals("NothingYet text shouls say", recordList.options.strings.nothingYet, recordList.locate("nothingYet").text());
+            jqUnit.assertEquals("NothingYet text shouls say", recordList.options.parentBundle.resolve("recordList-nothingYet"), recordList.locate("nothingYet").text());
             jqUnit.assertEquals("There should be no records listed", 0, recordList.locate("row").length);
         });
     };

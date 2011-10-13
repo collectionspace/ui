@@ -53,7 +53,8 @@ cspace = cspace || {};
                                 callback();
                             }
                         }
-                    }
+                    },
+                    parentBundle: that.options.parentBundle
                 });
                 return false;
             }
@@ -115,9 +116,10 @@ cspace = cspace || {};
                     }
                 }
             },
-            strings: {
-                primaryMessage: recordEditor.options.strings.deletePrimaryMessage
-            }
+            model: {
+                messages: [ "tab-re-deletePrimaryMessage" ]
+            },
+            parentBundle: that.options.parentBundle
         });
     };
     
@@ -150,8 +152,8 @@ cspace = cspace || {};
                     related: "{relatedRecordsTab}.related",
                     model: "{relatedRecordsTab}.model",
                     applier: "{relatedRecordsTab}.applier",
-                    strings: {
-                        addButton: "Add record"
+                    messagekeys: {
+                        addButton: "relatedRecordsTab-addButton"
                     }
                 }
             },
