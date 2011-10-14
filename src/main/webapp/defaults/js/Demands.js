@@ -1016,17 +1016,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         }
                     }
                 },
-                showCreateFromExistingButton: {
-                    expander: {
-                        type: "fluid.deferredInvokeCall",
-                        func: "cspace.permissions.resolve",
-                        args: {
-                            resolver: "{permissionsResolver}",
-                            permission: "create",
-                            target: "{pageBuilderIO}.options.recordType"
-                        }
-                    }
-                },
+                showCreateFromExistingButton: false,
                 strings: {
                     deleteButton: "{globalBundle}.messageBase.tab-re-deleteButton",
                     deleteFailedMessage: "{globalBundle}.messageBase.tab-re-deleteFailedMessage",
