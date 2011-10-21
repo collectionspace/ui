@@ -971,25 +971,9 @@ fluid.registerNamespace("cspace.util");
                 return;
             }
             that.events.onPerformNavigation.fire(function () {
-                // Create a new event similar to the original.
-                var event = document.createEvent("MouseEvents");
-                event.initMouseEvent(evt.originalEvent.type, 
-                                     evt.originalEvent.bubbles, 
-                                     evt.originalEvent.cancelable, 
-                                     evt.originalEvent.view, 
-                                     evt.originalEvent.detail,
-                                     evt.originalEvent.screenX, 
-                                     evt.originalEvent.screenY, 
-                                     evt.originalEvent.clientX, 
-                                     evt.originalEvent.clientY,
-                                     evt.originalEvent.ctrlKey,
-                                     evt.originalEvent.altKey,
-                                     evt.originalEvent.shiftKey,
-                                     evt.originalEvent.metaKey,
-                                     evt.originalEvent.button,
-                                     evt.originalEvent.relatedTarget);
-                // Dispatch a new event.
-                target[0].dispatchEvent(event);
+                // NOTE: dispatchEvent has proven to be extremely unreliable in cross
+                // browser testing. Thus we resolve to more straitforward redirect. 
+                window.location.href = target.attr("href");
             });
             return false;
         });
