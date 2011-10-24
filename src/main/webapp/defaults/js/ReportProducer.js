@@ -364,6 +364,7 @@ cspace = cspace || {};
             message: "cs-reportStatus-message", 
             stop: "cs-reportStatus-stop"
         },
+        parentBundle: "{globalBundle}",
         strings: { }
     });
     
@@ -373,7 +374,7 @@ cspace = cspace || {};
         return {
             message: {
                 messagekey: "reporting-message",
-                args: {reportName: "${reportName}"},
+                args: ["${reportName}"],
                 decorators: {"addClass": "{styles}.message"}
             },
             stop: {
