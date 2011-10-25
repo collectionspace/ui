@@ -553,7 +553,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     cspace.autocomplete.selectAuthority = function (that, key) {
         var authority = that.model.authorities[key];
         that.buttonAdjustor(true); // Hide the button. It will be replaced by the spinnder to indicate selection is being saved (CSPACE-2091).
-        that.newTermSource.put({fields: {displayName: that.model.term}}, {termUrl: authority.url}, function (response) {
+        that.newTermSource.put({fields: {displayName: that.model.term}, _view: "autocomplete"}, {termUrl: authority.url}, function (response) {
             if (!response) {
                 that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
                     url: that.newTermSource.options.url
