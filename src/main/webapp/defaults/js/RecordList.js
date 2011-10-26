@@ -325,6 +325,7 @@ cspace = cspace || {};
         gradeNames: ["fluid.viewComponent", "autoInit"],
         finalInitFunction: "cspace.recordList.thumbRenderer.finalInitFunction",
         strings: {},
+        parentBundle: "{globalBundle}",
         styles: {
             thumbnail: "cs-recordList-thumbnail"
         },
@@ -337,7 +338,7 @@ cspace = cspace || {};
         var segs = fluid.model.parseEL(that.options.row);
         var item = that.model[that.options.elPath][segs[segs.length - 1]];
         that.container.attr("src", item.summarylist.imgThumb || that.options.urls.icnMedia)
-            .attr("alt", that.lookupMessage("recordList-thumbnail"))
+            .attr("alt", that.options.parentBundle.resolve("recordList-thumbnail"))
             .addClass(that.options.styles.thumbnail);
     };
     
