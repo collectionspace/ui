@@ -19,7 +19,7 @@ cspace = cspace || {};
         var that = fluid.initRendererComponent("cspace.mediaUploader", container, options);
         // This selector is for uploader loading indicator.
         var parent = that.container.parents(that.options.selectors.parents);
-        that.parent = parent.length > 0 ? parent : that.container;
+        that.parent = parent.length > 0 ? parent.eq(0) : that.container;
         fluid.initDependents(that);
         that.refreshView();
         that.bindEvents();
