@@ -28,7 +28,13 @@ cspace = cspace || {};
     
     // TODO: This is a hack to imitate focus on the file input and simulate a single file uploader. 
     cspace.mediaUploader.bindEvents = function (that) {
+        if (!that.fileUploader.strategy) {
+            return;
+        }
         var buttonView = that.fileUploader.strategy.local.browseButtonView;
+        if (!buttonView) {
+            return;
+        }
         buttonView.container.delegate(buttonView.options.selectors.fileInputs, "focus", function () {
             buttonView.locate("browseButton").addClass(that.options.styles.fileInputFocused);
             var existing = that.fileUploader.queue.files[0];
@@ -240,20 +246,12 @@ cspace = cspace || {};
             loadingIndicator: {
                 type: "cspace.util.loadingIndicator",
                 container: "{mediaUploader}.parent",
-                options: {
-                    hideOn: [
-                        "{fileUploader}.events.onFileSuccess",
-                        "{fileUploader}.events.onFileError"
-                    ],
-                    events: {
-                        showOn: "{fileUploader}.events.onUploadStart"
-                    }
-                },
                 createOnEvent: "afterRender",
                 priority: "last"
             },
             uploaderContext: {
                 type: "fluid.progressiveChecker",
+                priority: "first",
                 options: {
                     checks: [{
                         feature: "{fluid.browser.supportsBinaryXHR}",
@@ -262,7 +260,7 @@ cspace = cspace || {};
                         feature: "{fluid.browser.supportsFlash}",
                         contextName: "fluid.uploader.swfUpload"
                     }],
-                    defaultTypeTag: fluid.typeTag("fluid.uploader.singleFile")
+                    defaultContextName: "fluid.uploader.singleFile"
                 }
             },
             confirmation: "{confirmation}",
@@ -286,29 +284,6 @@ cspace = cspace || {};
                     },
                     selectors: {
                         uploadButton: "{mediaUploader}.options.selectors.uploadButton"
-                    },
-                    listeners: {
-                        afterFileQueued: {
-                            expander: {
-                                type: "fluid.deferredInvokeCall",
-                                func: "cspace.mediaUploader.afterFileQueuedListener",
-                                args: "{mediaUploader}.dom.uploadInput"
-                            }
-                        },
-                        onFileSuccess: {
-                            expander: {
-                                type: "fluid.deferredInvokeCall",
-                                func: "cspace.mediaUploader.onFileSuccess",
-                                args: ["{mediaUploader}", "{mediaUploader}.dom.uploadInput"]
-                            }
-                        },
-                        onFileError: {
-                            expander: {
-                                type: "fluid.deferredInvokeCall",
-                                func: "cspace.mediaUploader.onFileError",
-                                args: "{mediaUploader}"
-                            }
-                        }
                     }
                 }
             }

@@ -1314,6 +1314,88 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
+        fluid.demands("cspace.util.loadingIndicator", ["cspace.mediaUploader", "fluid.uploader.singleFile", "fileUploader"], {
+            options: fluid.COMPONENT_OPTIONS
+        });
+        fluid.demands("cspace.util.loadingIndicator", ["cspace.mediaUploader", "fluid.uploader.html5", "fileUploader"], {
+            options: {
+                hideOn: [
+                    "{fileUploader}.events.onFileSuccess",
+                    "{fileUploader}.events.onFileError"
+                ],
+                events: {
+                    showOn: "{fileUploader}.events.onUploadStart"
+                }
+            }
+        });
+        fluid.demands("cspace.util.loadingIndicator", ["cspace.mediaUploader", "fluid.uploader.swfUpload", "fileUploader"], {
+            options: {
+                hideOn: [
+                    "{fileUploader}.events.onFileSuccess",
+                    "{fileUploader}.events.onFileError"
+                ],
+                events: {
+                    showOn: "{fileUploader}.events.onUploadStart"
+                }
+            }
+        });
+        fluid.demands("fluid.uploader", ["cspace.mediaUploader", "fluid.uploader.singleFile"], {
+            options: fluid.COMPONENT_OPTIONS
+        });
+        fluid.demands("fluid.uploader", ["cspace.mediaUploader", "fluid.uploader.html5"], {
+            options: {
+                listeners: {
+                    afterFileQueued: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.mediaUploader.afterFileQueuedListener",
+                            args: "{mediaUploader}.dom.uploadInput"
+                        }
+                    },
+                    onFileSuccess: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.mediaUploader.onFileSuccess",
+                            args: ["{mediaUploader}", "{mediaUploader}.dom.uploadInput"]
+                        }
+                    },
+                    onFileError: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.mediaUploader.onFileError",
+                            args: "{mediaUploader}"
+                        }
+                    }
+                }
+            }
+        });
+        fluid.demands("fluid.uploader", ["cspace.mediaUploader", "fluid.uploader.swfUpload"], {
+            options: {
+                listeners: {
+                    afterFileQueued: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.mediaUploader.afterFileQueuedListener",
+                            args: "{mediaUploader}.dom.uploadInput"
+                        }
+                    },
+                    onFileSuccess: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.mediaUploader.onFileSuccess",
+                            args: ["{mediaUploader}", "{mediaUploader}.dom.uploadInput"]
+                        }
+                    },
+                    onFileError: {
+                        expander: {
+                            type: "fluid.deferredInvokeCall",
+                            func: "cspace.mediaUploader.onFileError",
+                            args: "{mediaUploader}"
+                        }
+                    }
+                }
+            }
+        });
         fluid.demands("fluid.uploader.html5Strategy.browseButtonView", ["fluid.uploader.html5Strategy.local", "cspace.mediaUploader"], {
             container: "{multiFileUploader}.container",
             options: {
