@@ -1562,12 +1562,32 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 schema: {
                     expander: {
                         type: "fluid.deferredInvokeCall",
-                        func: "cspace.repeatable.getSchema",
+                        func: "cspace.repeatableImpl.getSchema",
                         args: ["{pageBuilder}.schema", "{pageBuilderIO}.options.recordType"]
                     }
                 },
                 recordType: "{pageBuilderIO}.options.recordType"
             }, "{arguments}.1"]
+        });
+        fluid.demands("cspace.repeatableImpl", "cspace.makeRepeatable", {
+            mergeAllOptions: [{
+                selectors: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.repeatableImpl.expandSelectors",
+                        args: [{
+                            add: ".csc-repeatable-add",
+                            "delete": ".csc-repeatable-delete",
+                            primary: ".csc-repeatable-primary",
+                            repeat: ".csc-repeatable-repeat",
+                            headerRow: ".csc-repeatable-headerRow"
+                        }, "{makeRepeatable}.id"]
+                    }
+                }
+            }, "{options}"]
+        });
+        fluid.demands("cspace.repeatableImpl", "cspace.repeatable", {
+            options: fluid.COMPONENT_OPTIONS
         });
         
         fluid.demands("cspace.makeRepeatable", "cspace.advancedSearch.searchFields", {
@@ -1578,7 +1598,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 schema: {
                     expander: {
                         type: "fluid.deferredInvokeCall",
-                        func: "cspace.repeatable.getSchema",
+                        func: "cspace.repeatableImpl.getSchema",
                         args: ["{advancedSearch}.options.searchFields.schema", "{advancedSearch}.model.recordType"]
                     }
                 },

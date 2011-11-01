@@ -4,6 +4,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Repeatable Test Suite</title>
         <link rel="stylesheet" media="screen" href="../lib/qunit/css/qunit.css" />
+        <link rel="stylesheet" media="screen" href="../../main/webapp/defaults/css/cspace.css" />
+        <link rel="stylesheet" media="screen" href="../../main/webapp/defaults/css/repeatable.css" />
         
         <script type="text/javascript" src="../../main/webapp/defaults/lib/infusion/CSpaceInfusion.js"></script>
 
@@ -15,6 +17,7 @@
         <script type="text/javascript" src="../js/CSpaceTestsDemands.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/Permissions.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/Utilities.js"></script>
+        <script type="text/javascript" src="../../main/webapp/defaults/js/Autocomplete.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/MessageBar.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/Renderer.js"></script>
         <script type="text/javascript" src="../../main/webapp/defaults/js/Repeatable.js"></script>
@@ -111,6 +114,21 @@
                     </ul>
                     
                 </div>                
+            </div>
+            
+            <div id="repeatableCon">
+                <span class="csc-repeatable-li-text"></span>
+            </div>
+            
+            <div id="repeatableAutoCompleteCon">
+                <input type="text" class="csc-repeatableAC-li-text" />
+            </div>
+            
+            <div id="repeatableGrandParent">
+                <div class="csc-repeatable-group">
+                    <input type="text" class="csc-repeatable-li-text" />
+                    <input type="text" class="csc-nested-repeatable-li-text" />
+                </div>
             </div>
         </div>
     </body>

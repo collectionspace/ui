@@ -1,29 +1,45 @@
 {
     "objectexit": {
         "properties": {
-            "relations": {
-                "default": {},
-                "type": "object"
-            },
             "termsUsed": {
                 "default": [],
                 "type": "array"
+            },
+            "relations": {
+                "default": {},
+                "type": "object"
             },
             "csid": {
                 "type": "string"
             },
             "fields": {
                 "properties": {
-                    "updatedAt": {
-                        "type": "string"
-                    },
                     "exitNote": {
                         "type": "string"
                     },
                     "tenantID": {
                         "type": "string"
                     },
+                    "exitNumber": {
+                        "type": "string"
+                    },
+                    "packingNote": {
+                        "type": "string"
+                    },
+                    "exitReason": {
+                        "default": "",
+                        "type": "string"
+                    },
+                    "updatedBy": {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "date"
+                    },
                     "currentOwner": {
+                        "type": "string"
+                    },
+                    "createdBy": {
                         "type": "string"
                     },
                     "createdAt": {
@@ -36,6 +52,7 @@
                         "items": {
                             "properties": {
                                 "_primary": {
+                                    "default": true,
                                     "type": "boolean"
                                 },
                                 "exitMethod": {
@@ -46,16 +63,6 @@
                             "type": "object"
                         },
                         "type": "array"
-                    },
-                    "exitNumber": {
-                        "type": "string"
-                    },
-                    "packingNote": {
-                        "type": "string"
-                    },
-                    "exitReason": {
-                        "default": "",
-                        "type": "string"
                     },
                     "depositor": {
                         "type": "string"
