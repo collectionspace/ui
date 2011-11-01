@@ -12,43 +12,35 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.narrowerContexts",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-hierarchy-narrowerContext": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.autocomplete",
-                                                        "type": "fluid",
-                                                        "options": {
-                                                            "queryUrl": "../../../tenant/core/vocabularies/person/autocomplete/narrowerContext",
-                                                            "vocabUrl": "../../../tenant/core/vocabularies/person/source-vocab/narrowerContext",
-                                                            "invokers": {
-                                                                "selectMatch": {
-                                                                    "funcName": "cspace.autocomplete.selectMatchConfirm"
-                                                                }
-                                                            },
-                                                            "strings": {
-                                                                "narrowerChange": "Warning: %narrower currently has broader term %broader. Change broader term?"
-                                                            }
+                                    ".csc-hierarchy-narrowerContext": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/vocabularies/person/autocomplete/narrowerContext",
+                                                    "vocabUrl": "../../../tenant/core/vocabularies/person/source-vocab/narrowerContext",
+                                                    "invokers": {
+                                                        "selectMatch": {
+                                                            "funcName": "cspace.autocomplete.selectMatchConfirm"
                                                         }
+                                                    },
+                                                    "strings": {
+                                                        "narrowerChange": "Warning: %narrower currently has broader term %broader. Change broader term?"
                                                     }
-                                                ],
-                                                "value": "${{row}.narrowerContext}"
+                                                }
                                             }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.narrowerContexts"
+                                        ],
+                                        "value": "${{row}.narrowerContext}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.narrowerContexts"
                     }
                 }
             ]
@@ -121,35 +113,27 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.relatedTerms",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-hierarchy-relatedTerm": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.autocomplete",
-                                                        "type": "fluid",
-                                                        "options": {
-                                                            "queryUrl": "../../../tenant/core/vocabularies/person/autocomplete/relatedTerm",
-                                                            "vocabUrl": "../../../tenant/core/vocabularies/person/source-vocab/relatedTerm"
-                                                        }
-                                                    }
-                                                ],
-                                                "value": "${{row}.relatedTerm}"
+                                    ".csc-hierarchy-relatedTerm": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/vocabularies/person/autocomplete/relatedTerm",
+                                                    "vocabUrl": "../../../tenant/core/vocabularies/person/source-vocab/relatedTerm"
+                                                }
                                             }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.relatedTerms"
+                                        ],
+                                        "value": "${{row}.relatedTerm}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.relatedTerms"
                     }
                 }
             ]
@@ -195,7 +179,7 @@
             ],
             "value": "${fields.birthDate}"
         },
-        ".csc-contact-createdBy": "${fields.createdBy}",
+        ".csc-contact-createdBy": "${fields.contact.createdBy}",
         ".csc-person-updatedAt": {
             "decorators": [
                 {
@@ -211,40 +195,32 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.telephoneNumberGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-contact-telephoneNumberType": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "business",
-                                                    "home",
-                                                    "mobile",
-                                                    "other"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "business",
-                                                    "home",
-                                                    "mobile",
-                                                    "other"
-                                                ],
-                                                "selection": "${{row}.telephoneNumberType}"
-                                            },
-                                            ".csc-contact-telephoneNumber": "${{row}.telephoneNumber}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.telephoneNumberGroup"
-                                    }
+                                    ".csc-contact-telephoneNumberType": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "business",
+                                            "home",
+                                            "mobile",
+                                            "other"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "business",
+                                            "home",
+                                            "mobile",
+                                            "other"
+                                        ],
+                                        "selection": "${{row}.telephoneNumberType}"
+                                    },
+                                    ".csc-contact-telephoneNumber": "${{row}.telephoneNumber}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contact.telephoneNumberGroup"
                     }
                 }
             ]
@@ -272,38 +248,30 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.faxNumberGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-contact-faxNumberType": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "business",
-                                                    "home",
-                                                    "other"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "business",
-                                                    "home",
-                                                    "other"
-                                                ],
-                                                "selection": "${{row}.faxNumberType}"
-                                            },
-                                            ".csc-contact-faxNumber": "${{row}.faxNumber}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.faxNumberGroup"
-                                    }
+                                    ".csc-contact-faxNumberType": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "business",
+                                            "home",
+                                            "other"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "business",
+                                            "home",
+                                            "other"
+                                        ],
+                                        "selection": "${{row}.faxNumberType}"
+                                    },
+                                    ".csc-contact-faxNumber": "${{row}.faxNumber}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contact.faxNumberGroup"
                     }
                 }
             ]
@@ -311,7 +279,7 @@
         ".csc-person-deathDate-label": {
             "messagekey": "person-deathDateLabel"
         },
-        ".csc-contact-createdAt": "${fields.createdAt}",
+        ".csc-contact-createdAt": "${fields.contact.createdAt}",
         ".csc-person-birthDate-label": {
             "messagekey": "person-birthDateLabel"
         },
@@ -321,38 +289,30 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.emailGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-contact-emailType": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "business",
-                                                    "personal",
-                                                    "other"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "business",
-                                                    "personal",
-                                                    "other"
-                                                ],
-                                                "selection": "${{row}.emailType}"
-                                            },
-                                            ".csc-contact-email": "${{row}.email}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.emailGroup"
-                                    }
+                                    ".csc-contact-emailType": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "business",
+                                            "personal",
+                                            "other"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "business",
+                                            "personal",
+                                            "other"
+                                        ],
+                                        "selection": "${{row}.emailType}"
+                                    },
+                                    ".csc-contact-email": "${{row}.email}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contact.emailGroup"
                     }
                 }
             ]
@@ -383,11 +343,11 @@
             "messagekey": "person-surNameLabel"
         },
         ".csc-person-shortIdentifier": "${fields.shortIdentifier}",
-        ".csc-contact-telephoneNumber-label": {
-            "messagekey": "contact-telephoneNumberLabel"
-        },
         ".csc-person-updatedAt-label": {
             "messagekey": "person-updatedAtLabel"
+        },
+        ".csc-contact-telephoneNumber-label": {
+            "messagekey": "contact-telephoneNumberLabel"
         },
         ".csc-person-shortIdentifier-label": {
             "messagekey": "person-shortIdentifierLabel"
@@ -395,6 +355,7 @@
         ".csc-person-gender-label": {
             "messagekey": "person-genderLabel"
         },
+        ".csc-person-uri": "${fields.uri}",
         ".csc-contact-webAddressGroup-label": {
             "messagekey": "contact-webAddressGroupLabel"
         },
@@ -414,38 +375,30 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.webAddressGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-contact-webAddressType": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "business",
-                                                    "personal",
-                                                    "other"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "business",
-                                                    "personal",
-                                                    "other"
-                                                ],
-                                                "selection": "${{row}.webAddressType}"
-                                            },
-                                            ".csc-contact-webAddress": "${{row}.webAddress}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.webAddressGroup"
-                                    }
+                                    ".csc-contact-webAddressType": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "business",
+                                            "personal",
+                                            "other"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "business",
+                                            "personal",
+                                            "other"
+                                        ],
+                                        "selection": "${{row}.webAddressType}"
+                                    },
+                                    ".csc-contact-webAddress": "${{row}.webAddress}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contact.webAddressGroup"
                     }
                 }
             ]
@@ -463,6 +416,7 @@
         ".csc-person-birthPlace-label": {
             "messagekey": "person-birthPlaceLabel"
         },
+        ".csc-person-csid": "${fields.csid}",
         ".csc-contact-addressMunicipality-label": {
             "messagekey": "contact-addressMunicipalityLabel"
         },
@@ -495,9 +449,13 @@
         ".csc-person-foreName-label": {
             "messagekey": "person-foreNameLabel"
         },
+        ".csc-person-refName-label": {
+            "messagekey": "person-refNameLabel"
+        },
         ".csc-person-deathPlace-label": {
             "messagekey": "person-deathPlaceLabel"
         },
+        ".csc-person-refName": "${fields.refName}",
         ".csc-contact-addressStateOrProvince-label": {
             "messagekey": "contact-addressStateOrProvinceLabel"
         },
@@ -513,46 +471,41 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.addressGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-contact-addressMunicipality": "${{row}.addressMunicipality}",
-                                            ".csc-contact-addressType": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "business",
-                                                    "home",
-                                                    "other"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "business",
-                                                    "home",
-                                                    "other"
-                                                ],
-                                                "selection": "${{row}.addressType}"
-                                            },
-                                            ".csc-contact-addressCountry": "${{row}.addressCountry}",
-                                            ".csc-contact-addressStateOrProvince": "${{row}.addressStateOrProvince}",
-                                            ".csc-contact-addressPlace2": "${{row}.addressPlace2}",
-                                            ".csc-contact-addressPlace1": "${{row}.addressPlace1}",
-                                            ".csc-contact-addressPostCode": "${{row}.addressPostCode}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.addressGroup"
-                                    }
+                                    ".csc-contact-addressMunicipality": "${{row}.addressMunicipality}",
+                                    ".csc-contact-addressType": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "business",
+                                            "home",
+                                            "other"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "business",
+                                            "home",
+                                            "other"
+                                        ],
+                                        "selection": "${{row}.addressType}"
+                                    },
+                                    ".csc-contact-addressCountry": "${{row}.addressCountry}",
+                                    ".csc-contact-addressStateOrProvince": "${{row}.addressStateOrProvince}",
+                                    ".csc-contact-addressPlace2": "${{row}.addressPlace2}",
+                                    ".csc-contact-addressPlace1": "${{row}.addressPlace1}",
+                                    ".csc-contact-addressPostCode": "${{row}.addressPostCode}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contact.addressGroup"
                     }
                 }
             ]
+        },
+        ".csc-person-uri-label": {
+            "messagekey": "person-uriLabel"
         },
         ".csc-personAuthority-name": "${fields.name}",
         ".csc-personAuthority-nameAdditions": "${fields.nameAdditions}",
@@ -563,30 +516,22 @@
         ".csc-contact-faxNumberGroup-label": {
             "messagekey": "contact-faxNumberGroupLabel"
         },
-        ".csc-contact-tenantID": "${fields.tenantID}",
+        ".csc-contact-tenantID": "${fields.contact.tenantID}",
         ".csc-personAuthority-occupation": {
             "decorators": [
                 {
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.occupations",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-personAuthority-occupation": "${{row}.occupation}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.occupations"
-                                    }
+                                    ".csc-personAuthority-occupation": "${{row}.occupation}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.occupations"
                     }
                 }
             ]
@@ -648,11 +593,11 @@
             ],
             "selection": "${fields.title}"
         },
-        ".csc-contact-faxNumber-label": {
-            "messagekey": "contact-faxNumberLabel"
-        },
         ".csc-person-nationality-label": {
             "messagekey": "person-nationalityLabel"
+        },
+        ".csc-contact-faxNumber-label": {
+            "messagekey": "contact-faxNumberLabel"
         },
         ".csc-person-createdBy": "${fields.createdBy}",
         ".csc-person-tenantID-label": {
@@ -664,11 +609,14 @@
         ".csc-contact-createdAt-label": {
             "messagekey": "contact-createdAtLabel"
         },
+        ".csc-person-createdBy-label": {
+            "messagekey": "person-createdByLabel"
+        },
         ".csc-person-personNameAuthorityInformation-label": {
             "messagekey": "person-personNameAuthorityInformationLabel"
         },
-        ".csc-person-createdBy-label": {
-            "messagekey": "person-createdByLabel"
+        ".csc-person-csid-label": {
+            "messagekey": "person-csidLabel"
         },
         ".csc-person-schoolsOrStyles-label": {
             "messagekey": "person-schoolsOrStylesLabel"
@@ -686,7 +634,7 @@
         ".csc-contact-email-label": {
             "messagekey": "contact-emailLabel"
         },
-        ".csc-contact-updatedBy": "${fields.updatedBy}",
+        ".csc-contact-updatedBy": "${fields.contact.updatedBy}",
         ".csc-contact-addressCountry-label": {
             "messagekey": "contact-addressCountryLabel"
         },
@@ -706,23 +654,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.schoolsOrStyles",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-personAuthority-schoolOrStyle": "${{row}.schoolOrStyle}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.schoolsOrStyles"
-                                    }
+                                    ".csc-personAuthority-schoolOrStyle": "${{row}.schoolOrStyle}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.schoolsOrStyles"
                     }
                 }
             ]
@@ -734,7 +674,7 @@
         ".csc-person-occupations-label": {
             "messagekey": "person-occupationsLabel"
         },
-        ".csc-contact-updatedAt": "${fields.updatedAt}",
+        ".csc-contact-updatedAt": "${fields.contact.updatedAt}",
         ".csc-person-title-label": {
             "messagekey": "person-titleLabel"
         },
@@ -745,23 +685,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.groups",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-personAuthority-group": "${{row}.group}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.groups"
-                                    }
+                                    ".csc-personAuthority-group": "${{row}.group}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.groups"
                     }
                 }
             ]
@@ -772,23 +704,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.nationalities",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-personAuthority-nationality": "${{row}.nationality}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.nationalities"
-                                    }
+                                    ".csc-personAuthority-nationality": "${{row}.nationality}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.nationalities"
                     }
                 }
             ]

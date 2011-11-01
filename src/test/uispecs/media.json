@@ -6,31 +6,23 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.dates",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-media-date": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.datePicker",
-                                                        "type": "fluid"
-                                                    }
-                                                ],
-                                                "value": "${{row}.date}"
+                                    ".csc-media-date": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.datePicker",
+                                                "type": "fluid"
                                             }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.dates"
+                                        ],
+                                        "value": "${{row}.date}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.dates"
                     }
                 }
             ]
@@ -44,17 +36,8 @@
         ".csc-media-relation-label": {
             "messagekey": "media-relationLabel"
         },
-        ".csc-media-srcUri-label": {
-            "messagekey": "media-srcUriLabel"
-        },
         ".csc-media-location-label": {
             "messagekey": "media-locationLabel"
-        },
-        ".csc-media-blobs-label": {
-            "messagekey": "media-blobsLabel"
-        },
-        ".csc-media-languages-label": {
-            "messagekey": "media-languagesLabel"
         },
         ".csc-media-relation": {
             "decorators": [
@@ -62,23 +45,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.relations",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-media-relation": "${{row}.relation}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.relations"
-                                    }
+                                    ".csc-media-relation": "${{row}.relation}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.relations"
                     }
                 }
             ]
@@ -87,103 +62,45 @@
             "messagekey": "media-languageLabel"
         },
         ".csc-media-format": "${fields.format}",
-        ".csc-blobs-digest": "${fields.blobs.0.digest}",
-        ".csc-media-subjects-label": {
-            "messagekey": "media-subjectsLabel"
-        },
-        ".csc-media-dateModified": "${fields.dateModified}",
         ".csc-media-dateCreated": "${fields.dateCreated}",
+        ".csc-media-dateModified": "${fields.dateModified}",
         ".csc-blobs-name": "${fields.blobs.0.name}",
-        ".csc-media-updatedAt": "${fields.updatedAt}",
-        ".csc-media-coverage-label": {
-            "messagekey": "media-coverageLabel"
-        },
-        ".csc-media-location": "${fields.location}",
-        ".csc-media-rightsHolder": {
+        ".csc-media-updatedAt": {
             "decorators": [
                 {
-                    "func": "cspace.autocomplete",
-                    "type": "fluid",
-                    "options": {
-                        "queryUrl": "../../../tenant/core/media/autocomplete/rightsHolder",
-                        "vocabUrl": "../../../tenant/core/media/source-vocab/rightsHolder"
-                    }
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
                 }
             ],
-            "value": "${fields.rightsHolder}"
+            "value": "${fields.updatedAt}"
+        },
+        ".csc-media-coverage-label": {
+            "messagekey": "media-coverageLabel"
         },
         ".csc-media-dimension-label": {
             "messagekey": "media-dimensionLabel"
         },
-        ".csc-media-date-label": {
-            "messagekey": "media-dateLabel"
-        },
+        ".csc-blobs-imgOrig": "${fields.blobs.0.imgOrig}",
         ".csc-media-valueQualifier-label": {
             "messagekey": "media-valueQualifierLabel"
-        },
-        ".csc-blobs-imgOrig": "${fields.blobs.0.imgOrig}",
-        ".csc-media-source": "${fields.source}",
-        ".csc-media-externalMediaUrl": "${fields.externalMediaUrl}",
-        ".csc-media-relations-label": {
-            "messagekey": "media-relationsLabel"
         },
         ".csc-media-value-label": {
             "messagekey": "media-valueLabel"
         },
-        ".csc-media-subject": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "elPath": "fields.subjects",
-                        "protoTree": {
-                            "expander": {
-                                "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-media-subject": "${{row}.subject}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.subjects"
-                                    }
-                                },
-                                "type": "fluid.noexpand"
-                            }
-                        }
-                    }
-                }
-            ]
+        ".csc-media-relations-label": {
+            "messagekey": "media-relationsLabel"
         },
-        ".csc-blobs-createdAt": "${fields.blobs.0.createdAt}",
         ".csc-media-creator-label": {
             "messagekey": "media-creatorLabel"
         },
-        ".csc-media-copyrightStatement-label": {
-            "messagekey": "media-copyrightStatementLabel"
-        },
-        ".csc-media-source-label": {
-            "messagekey": "media-sourceLabel"
-        },
         ".csc-blobs-data": "${fields.blobs.0.data}",
-        ".csc-media-valueDate-label": {
-            "messagekey": "media-valueDateLabel"
-        },
         ".csc-media-contributor-label": {
             "messagekey": "media-contributorLabel"
         },
         ".csc-media-identificationNumber": "${fields.identificationNumber}",
+        ".csc-media-filename": "${fields.filename}",
         ".csc-media-dates-label": {
             "messagekey": "media-datesLabel"
-        },
-        ".csc-media-filename": "${fields.filename}",
-        ".csc-media-externalMediaUrl-label": {
-            "messagekey": "media-externalMediaUrlLabel"
-        },
-        ".csc-media-uri-label": {
-            "messagekey": "media-uriLabel"
         },
         ".csc-media-tenantID-label": {
             "messagekey": "media-tenantIDLabel"
@@ -191,21 +108,18 @@
         ".csc-media-dateCreated-label": {
             "messagekey": "media-dateCreatedLabel"
         },
-        ".csc-media-rightsHolder-label": {
-            "messagekey": "media-rightsHolderLabel"
-        },
         ".csc-media-subject-label": {
             "messagekey": "media-subjectLabel"
+        },
+        ".csc-media-rightsHolder-label": {
+            "messagekey": "media-rightsHolderLabel"
         },
         ".csc-media-updatedAt-label": {
             "messagekey": "media-updatedAtLabel"
         },
+        ".csc-blobs-length": "${fields.blobs.0.length}",
         ".csc-media-format-label": {
             "messagekey": "media-formatLabel"
-        },
-        ".csc-blobs-length": "${fields.blobs.0.length}",
-        ".csc-media-dateModified-label": {
-            "messagekey": "media-dateModifiedLabel"
         },
         ".csc-media-imgThumb": "${fields.imgThumb}",
         ".csc-media-publisher": {
@@ -221,86 +135,15 @@
             ],
             "value": "${fields.publisher}"
         },
-        ".csc-media-language": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "elPath": "fields.languages",
-                        "protoTree": {
-                            "expander": {
-                                "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-media-language": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Latin",
-                                                    "Middle English",
-                                                    "Old English",
-                                                    "Ancient Greek",
-                                                    "Korean",
-                                                    "Swahili",
-                                                    "Japanese",
-                                                    "Chinese",
-                                                    "Hebrew",
-                                                    "German",
-                                                    "Russian",
-                                                    "Arabic",
-                                                    "Portuguese",
-                                                    "Italian",
-                                                    "Spanish",
-                                                    "French",
-                                                    "English"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "latin",
-                                                    "middleenglish",
-                                                    "oldenglish",
-                                                    "ancientgreek",
-                                                    "korean",
-                                                    "swahili",
-                                                    "japanese",
-                                                    "chinese",
-                                                    "hebrew",
-                                                    "german",
-                                                    "russian",
-                                                    "arabic",
-                                                    "portuguese",
-                                                    "italian",
-                                                    "spn",
-                                                    "french",
-                                                    "eng"
-                                                ],
-                                                "selection": "${{row}.language}"
-                                            }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.languages"
-                                    }
-                                },
-                                "type": "fluid.noexpand"
-                            }
-                        }
-                    }
-                }
-            ]
-        },
         ".csc-media-mediaInformation-label": {
             "messagekey": "media-mediaInformationLabel"
-        },
-        ".csc-media-description-label": {
-            "messagekey": "media-descriptionLabel"
         },
         ".csc-media-measurementMethod-label": {
             "messagekey": "media-measurementMethodLabel"
         },
-        ".csc-media-createdAt-label": {
-            "messagekey": "media-createdAtLabel"
+        ".csc-blobs-createdBy": "${fields.blobs.0.createdBy}",
+        ".csc-media-createdBy-label": {
+            "messagekey": "media-createdByLabel"
         },
         ".csc-media-creator": {
             "decorators": [
@@ -321,14 +164,8 @@
         ".csc-media-fileInformation-label": {
             "messagekey": "media-fileInformationLabel"
         },
-        ".csc-media-types-label": {
-            "messagekey": "media-typesLabel"
-        },
-        ".csc-media-coverage": "${fields.coverage}",
         ".csc-blobs-uri": "${fields.blobs.0.uri}",
-        ".csc-media-identificationNumber-label": {
-            "messagekey": "media-identificationNumberLabel"
-        },
+        ".csc-media-coverage": "${fields.coverage}",
         ".csc-media-srcUri": "${fields.srcUri}",
         ".csc-media-contributor": {
             "decorators": [
@@ -343,15 +180,39 @@
             ],
             "value": "${fields.contributor}"
         },
-        ".csc-blobs-mimeType": "${fields.blobs.0.mimeType}",
         ".csc-blobs-imgThumb": "${fields.blobs.0.imgThumb}",
         "expander": [
             {
                 "repeatID": ".csc-blobs-dimensionGroup:",
                 "tree": {
-                    ".csc-blobs-value": "${{row}.value}",
+                    ".csc-blobs-value": {
+                        "decorators": [
+                            {
+                                "func": "cspace.inputValidator",
+                                "type": "fluid",
+                                "options": {
+                                    "label": "blobs-valueLabel",
+                                    "type": "float"
+                                }
+                            }
+                        ],
+                        "value": "${{row}.value}"
+                    },
                     ".csc-blobs-measurementMethod": "${{row}.measurementMethod}",
-                    ".csc-blobs-measuredBy": "${{row}.measuredBy}",
+                    ".csc-blobs-measuredBy": {
+                        "decorators": [
+                            {
+                                "func": "cspace.autocomplete",
+                                "type": "fluid",
+                                "options": {
+                                    "queryUrl": "../../../tenant/core/blobs/autocomplete/measuredBy",
+                                    "vocabUrl": "../../../tenant/core/blobs/source-vocab/measuredBy"
+                                }
+                            }
+                        ],
+                        "value": "${{row}.measuredBy}"
+                    },
+                    ".csc-blobs-measuredPart": "${{row}.measuredPart}",
                     ".csc-blobs-valueQualifier": "${{row}.valueQualifier}",
                     ".csc-blobs-valueDate": "${{row}.valueDate}",
                     ".csc-blobs-measurementUnit": "${{row}.measurementUnit}",
@@ -380,53 +241,40 @@
                 }
             }
         ],
-        ".csc-media-tenantID": "${fields.tenantID}",
-        ".csc-media-type-label": {
-            "messagekey": "media-typeLabel"
-        },
-        ".csc-media-copyrightStatement": "${fields.copyrightStatement}",
         ".csc-media-type": {
             "decorators": [
                 {
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.types",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-media-type": {
-                                                "default": "",
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Dataset",
-                                                    "Document",
-                                                    "Moving Image",
-                                                    "Still Image",
-                                                    "Sound"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "dataset",
-                                                    "document",
-                                                    "moving_image",
-                                                    "still_image",
-                                                    "sound"
-                                                ],
-                                                "selection": "${{row}.type}"
-                                            }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.types"
+                                    ".csc-media-type": {
+                                        "default": "",
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "Dataset",
+                                            "Document",
+                                            "Moving Image",
+                                            "Still Image",
+                                            "Sound"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "dataset",
+                                            "document",
+                                            "moving_image",
+                                            "still_image",
+                                            "sound"
+                                        ],
+                                        "selection": "${{row}.type}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.types"
                     }
                 }
             ]
@@ -435,211 +283,27 @@
             "messagekey": "media-numberLabel"
         },
         ".csc-blobs-updatedAt": "${fields.blobs.0.updatedAt}",
-        ".csc-media-fileInformationHeader-label": {
-            "messagekey": "media-fileInformationHeaderLabel"
+        ".csc-media-domaindata-label": {
+            "messagekey": "media-domaindataLabel"
         },
-        ".csc-blobs-encoding": "${fields.blobs.0.encoding}",
         ".csc-media-dimensionGroup-label": {
             "messagekey": "media-dimensionGroupLabel"
         },
-        ".csc-media-dimensionGroup": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "elPath": "fields.dimensionGroup",
-                        "protoTree": {
-                            "expander": {
-                                "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-media-dimension": {
-                                                "default": "",
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Area",
-                                                    "Base",
-                                                    "Circumference",
-                                                    "Count",
-                                                    "Depth",
-                                                    "Diameter",
-                                                    "Height",
-                                                    "Length",
-                                                    "Running Time",
-                                                    "Target",
-                                                    "Volume",
-                                                    "Weight",
-                                                    "Width"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "area",
-                                                    "base",
-                                                    "circumference",
-                                                    "count",
-                                                    "depth",
-                                                    "diameter",
-                                                    "height",
-                                                    "length",
-                                                    "running_time",
-                                                    "target",
-                                                    "volume",
-                                                    "weight",
-                                                    "width"
-                                                ],
-                                                "selection": "${{row}.dimension}"
-                                            },
-                                            ".csc-media-measurementUnit": {
-                                                "default": "",
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Carats",
-                                                    "Centimeters",
-                                                    "Cubic Centimeters",
-                                                    "Feet",
-                                                    "Inches",
-                                                    "Kilograms",
-                                                    "Liters",
-                                                    "Millimeters",
-                                                    "Meters",
-                                                    "Minutes",
-                                                    "Pixels",
-                                                    "Square Feet",
-                                                    "Stories"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "carats",
-                                                    "centimeters",
-                                                    "cubic_centimeters",
-                                                    "feet",
-                                                    "inches",
-                                                    "kilograms",
-                                                    "liters",
-                                                    "millimeters",
-                                                    "meters",
-                                                    "minutes",
-                                                    "pixels",
-                                                    "square_feet",
-                                                    "stories"
-                                                ],
-                                                "selection": "${{row}.measurementUnit}"
-                                            },
-                                            ".csc-media-measuredBy": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.autocomplete",
-                                                        "type": "fluid",
-                                                        "options": {
-                                                            "queryUrl": "../../../tenant/core/media/autocomplete/measuredBy",
-                                                            "vocabUrl": "../../../tenant/core/media/source-vocab/measuredBy"
-                                                        }
-                                                    }
-                                                ],
-                                                "value": "${{row}.measuredBy}"
-                                            },
-                                            ".csc-media-valueQualifier": "${{row}.valueQualifier}",
-                                            ".csc-media-value": "${{row}.value}",
-                                            ".csc-media-measurementMethod": {
-                                                "default": "",
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Microscopy (reticule)",
-                                                    "Standard Mesh/Screen",
-                                                    "Sliding Calipers",
-                                                    "Spreading Calipers",
-                                                    "Measuring Tape (cloth)",
-                                                    "Measuring Tape (metal)",
-                                                    "Osteometric Board",
-                                                    "Ruler",
-                                                    "Pacing Pedometer",
-                                                    "Odometer",
-                                                    "Taping/Thaining",
-                                                    "Stadia/Transit",
-                                                    "Optical Range Finder",
-                                                    "Electronic Distance Measurement",
-                                                    "Protractor",
-                                                    "Goniometer",
-                                                    "Theodolite/Total Station",
-                                                    "Balance/Beam Scale",
-                                                    "Spring Scale",
-                                                    "Hydraulic or Pneumatic Scale"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "microscopy_reticule",
-                                                    "standard_mesh_screen",
-                                                    "sliding_calipers",
-                                                    "spreading_calipers",
-                                                    "measuring_tape_cloth",
-                                                    "measuring_tape_metal",
-                                                    "osteometric_board",
-                                                    "ruler",
-                                                    "pacing_pedometer",
-                                                    "odometer",
-                                                    "taping_chaining",
-                                                    "stadia_transit",
-                                                    "optical_range_finder",
-                                                    "electronic_distance_measurement",
-                                                    "protractor",
-                                                    "goniometer",
-                                                    "theodolite_total_station",
-                                                    "balance_beam_scale",
-                                                    "spring_scale",
-                                                    "hydraulic_or_pneumatic_scale"
-                                                ],
-                                                "selection": "${{row}.measurementMethod}"
-                                            },
-                                            ".csc-media-valueDate": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.datePicker",
-                                                        "type": "fluid"
-                                                    }
-                                                ],
-                                                "value": "${{row}.valueDate}"
-                                            }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.dimensionGroup"
-                                    }
-                                },
-                                "type": "fluid.noexpand"
-                            }
-                        }
-                    }
-                }
-            ]
-        },
         ".csc-blobs-id": "${fields.blobs.0.id}",
-        ".csc-media-blobCsid": "${fields.blobCsid}",
-        ".csc-media-title": "${fields.title}",
-        ".csc-blobs-tenantID": "${fields.blobs.0.tenantID}",
         ".csc-blobs-imgMedium": "${fields.blobs.0.imgMedium}",
-        ".csc-media-measuredBy-label": {
-            "messagekey": "media-measuredByLabel"
-        },
+        ".csc-media-description": "${fields.description}",
         ".csc-media-imgThumb-label": {
             "messagekey": "media-imgThumbLabel"
-        },
-        ".csc-media-description": "${fields.description}",
-        ".csc-media-publisher-label": {
-            "messagekey": "media-publisherLabel"
         },
         ".csc-media-summary-label": {
             "messagekey": "media-summaryLabel"
         },
-        ".csc-media-dimensionSummary-label": {
-            "messagekey": "media-dimensionSummaryLabel"
+        ".csc-media-publisher-label": {
+            "messagekey": "media-publisherLabel"
         },
-        ".csc-media-createdAt": "${fields.createdAt}",
         ".csc-media-title-label": {
             "messagekey": "media-titleLabel"
         },
-        ".csc-media-dimensionSummary": "${fields.dimensionSummary}",
         ".csc-media-uri": "${fields.uri}",
         ".csc-media-identificationNumber-container": {
             "decorators": [
@@ -664,6 +328,350 @@
                     }
                 }
             ]
-        }
+        },
+        ".csc-media-srcUri-label": {
+            "messagekey": "media-srcUriLabel"
+        },
+        ".csc-media-blobs-label": {
+            "messagekey": "media-blobsLabel"
+        },
+        ".csc-media-languages-label": {
+            "messagekey": "media-languagesLabel"
+        },
+        ".csc-blobs-digest": "${fields.blobs.0.digest}",
+        ".csc-media-subjects-label": {
+            "messagekey": "media-subjectsLabel"
+        },
+        ".csc-media-location": "${fields.location}",
+        ".csc-media-rightsHolder": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../../tenant/core/media/autocomplete/rightsHolder",
+                        "vocabUrl": "../../../tenant/core/media/source-vocab/rightsHolder"
+                    }
+                }
+            ],
+            "value": "${fields.rightsHolder}"
+        },
+        ".csc-media-date-label": {
+            "messagekey": "media-dateLabel"
+        },
+        ".csc-media-source": "${fields.source}",
+        ".csc-media-externalMediaUrl": "${fields.externalMediaUrl}",
+        ".csc-media-subject": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-media-subject": "${{row}.subject}"
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.subjects"
+                    }
+                }
+            ]
+        },
+        ".csc-blobs-createdAt": "${fields.blobs.0.createdAt}",
+        ".csc-media-updatedBy-label": {
+            "messagekey": "media-updatedByLabel"
+        },
+        ".csc-media-copyrightStatement-label": {
+            "messagekey": "media-copyrightStatementLabel"
+        },
+        ".csc-media-source-label": {
+            "messagekey": "media-sourceLabel"
+        },
+        ".csc-media-valueDate-label": {
+            "messagekey": "media-valueDateLabel"
+        },
+        ".csc-media-externalMediaUrl-label": {
+            "messagekey": "media-externalMediaUrlLabel"
+        },
+        ".csc-media-uri-label": {
+            "messagekey": "media-uriLabel"
+        },
+        ".csc-media-dateModified-label": {
+            "messagekey": "media-dateModifiedLabel"
+        },
+        ".csc-media-language": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-media-language": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.termList",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "root": "{row}",
+                                                    "elPath": "language",
+                                                    "termListType": "language"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.languages"
+                    }
+                }
+            ]
+        },
+        ".csc-media-description-label": {
+            "messagekey": "media-descriptionLabel"
+        },
+        ".csc-blobs-updatedBy": "${fields.blobs.0.updatedBy}",
+        ".csc-media-createdAt-label": {
+            "messagekey": "media-createdAtLabel"
+        },
+        ".csc-media-types-label": {
+            "messagekey": "media-typesLabel"
+        },
+        ".csc-media-identificationNumber-label": {
+            "messagekey": "media-identificationNumberLabel"
+        },
+        ".csc-media-measuredPart-label": {
+            "messagekey": "media-measuredPartLabel"
+        },
+        ".csc-blobs-mimeType": "${fields.blobs.0.mimeType}",
+        ".csc-media-createdBy": "${fields.createdBy}",
+        ".csc-media-updatedBy": "${fields.updatedBy}",
+        ".csc-media-tenantID": "${fields.tenantID}",
+        ".csc-media-type-label": {
+            "messagekey": "media-typeLabel"
+        },
+        ".csc-media-copyrightStatement": "${fields.copyrightStatement}",
+        ".csc-media-fileInformationHeader-label": {
+            "messagekey": "media-fileInformationHeaderLabel"
+        },
+        ".csc-blobs-encoding": "${fields.blobs.0.encoding}",
+        ".csc-media-dimensionGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-media-dimension": {
+                                        "default": "",
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "Area",
+                                            "Base",
+                                            "Circumference",
+                                            "Count",
+                                            "Depth",
+                                            "Diameter",
+                                            "Height",
+                                            "Length",
+                                            "Running Time",
+                                            "Target",
+                                            "Volume",
+                                            "Weight",
+                                            "Width"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "area",
+                                            "base",
+                                            "circumference",
+                                            "count",
+                                            "depth",
+                                            "diameter",
+                                            "height",
+                                            "length",
+                                            "running_time",
+                                            "target",
+                                            "volume",
+                                            "weight",
+                                            "width"
+                                        ],
+                                        "selection": "${{row}.dimension}"
+                                    },
+                                    ".csc-media-measurementUnit": {
+                                        "default": "",
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "Carats",
+                                            "Centimeters",
+                                            "Cubic Centimeters",
+                                            "Feet",
+                                            "Inches",
+                                            "Kilograms",
+                                            "Liters",
+                                            "Millimeters",
+                                            "Meters",
+                                            "Minutes",
+                                            "Pixels",
+                                            "Square Feet",
+                                            "Stories"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "carats",
+                                            "centimeters",
+                                            "cubic_centimeters",
+                                            "feet",
+                                            "inches",
+                                            "kilograms",
+                                            "liters",
+                                            "millimeters",
+                                            "meters",
+                                            "minutes",
+                                            "pixels",
+                                            "square_feet",
+                                            "stories"
+                                        ],
+                                        "selection": "${{row}.measurementUnit}"
+                                    },
+                                    ".csc-media-measuredPart": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "base",
+                                            "frame",
+                                            "framed",
+                                            "image size",
+                                            "mount",
+                                            "paper size",
+                                            "plate size",
+                                            "unframed"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "base",
+                                            "frame",
+                                            "framed",
+                                            "image-size",
+                                            "mount",
+                                            "paper-size",
+                                            "plate-size",
+                                            "unframed"
+                                        ],
+                                        "selection": "${{row}.measuredPart}"
+                                    },
+                                    ".csc-media-measuredBy": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/media/autocomplete/measuredBy",
+                                                    "vocabUrl": "../../../tenant/core/media/source-vocab/measuredBy"
+                                                }
+                                            }
+                                        ],
+                                        "value": "${{row}.measuredBy}"
+                                    },
+                                    ".csc-media-valueQualifier": "${{row}.valueQualifier}",
+                                    ".csc-media-value": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.inputValidator",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "label": "media-valueLabel",
+                                                    "type": "float"
+                                                }
+                                            }
+                                        ],
+                                        "value": "${{row}.value}"
+                                    },
+                                    ".csc-media-measurementMethod": {
+                                        "default": "",
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "Microscopy (reticule)",
+                                            "Standard Mesh/Screen",
+                                            "Sliding Calipers",
+                                            "Spreading Calipers",
+                                            "Measuring Tape (cloth)",
+                                            "Measuring Tape (metal)",
+                                            "Osteometric Board",
+                                            "Ruler",
+                                            "Pacing Pedometer",
+                                            "Odometer",
+                                            "Taping/Chaining",
+                                            "Stadia/Transit",
+                                            "Optical Range Finder",
+                                            "Electronic Distance Measurement",
+                                            "Protractor",
+                                            "Goniometer",
+                                            "Theodolite/Total Station",
+                                            "Balance/Beam Scale",
+                                            "Spring Scale",
+                                            "Hydraulic or Pneumatic Scale"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "microscopy_reticule",
+                                            "standard_mesh_screen",
+                                            "sliding_calipers",
+                                            "spreading_calipers",
+                                            "measuring_tape_cloth",
+                                            "measuring_tape_metal",
+                                            "osteometric_board",
+                                            "ruler",
+                                            "pacing_pedometer",
+                                            "odometer",
+                                            "taping_chaining",
+                                            "stadia_transit",
+                                            "optical_range_finder",
+                                            "electronic_distance_measurement",
+                                            "protractor",
+                                            "goniometer",
+                                            "theodolite_total_station",
+                                            "balance_beam_scale",
+                                            "spring_scale",
+                                            "hydraulic_or_pneumatic_scale"
+                                        ],
+                                        "selection": "${{row}.measurementMethod}"
+                                    },
+                                    ".csc-media-valueDate": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.datePicker",
+                                                "type": "fluid"
+                                            }
+                                        ],
+                                        "value": "${{row}.valueDate}"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.dimensionGroup"
+                    }
+                }
+            ]
+        },
+        ".csc-media-blobCsid": "${fields.blobCsid}",
+        ".csc-media-title": "${fields.title}",
+        ".csc-blobs-tenantID": "${fields.blobs.0.tenantID}",
+        ".csc-media-measuredBy-label": {
+            "messagekey": "media-measuredByLabel"
+        },
+        ".csc-media-dimensionSummary-label": {
+            "messagekey": "media-dimensionSummaryLabel"
+        },
+        ".csc-media-createdAt": "${fields.createdAt}",
+        ".csc-media-dimensionSummary": "${fields.dimensionSummary}"
     }
 }

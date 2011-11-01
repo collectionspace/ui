@@ -7,6 +7,10 @@
             "messagekey": "objectexit-exitDateLabel"
         },
         ".csc-objectexit-packingNote": "${fields.packingNote}",
+        ".csc-objectexit-updatedBy": "${fields.updatedBy}",
+        ".csc-objectexit-updatedBy-label": {
+            "messagekey": "objectexit-updatedByLabel"
+        },
         ".csc-objectexit-createdAt": "${fields.createdAt}",
         ".csc-objectexit-exitNote": "${fields.exitNote}",
         ".csc-objectexit-packingNote-label": {
@@ -18,8 +22,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../tenant/html/objectexit/autocomplete/depositor",
-                        "vocabUrl": "../../tenant/html/objectexit/source-vocab/depositor"
+                        "queryUrl": "../../../tenant/core/objectexit/autocomplete/depositor",
+                        "vocabUrl": "../../../tenant/core/objectexit/source-vocab/depositor"
                     }
                 }
             ],
@@ -55,29 +59,43 @@
         ".csc-objectexit-summary-label": {
             "messagekey": "objectexit-summaryLabel"
         },
+        ".csc-objectexit-createdBy-label": {
+            "messagekey": "objectexit-createdByLabel"
+        },
         ".csc-objectexit-tenantID": "${fields.tenantID}",
+        ".csc-objectexit-domaindata-label": {
+            "messagekey": "objectexit-domaindataLabel"
+        },
         ".csc-objectexit-currentOwner": {
             "decorators": [
                 {
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../tenant/html/objectexit/autocomplete/currentOwner",
-                        "vocabUrl": "../../tenant/html/objectexit/source-vocab/currentOwner"
+                        "queryUrl": "../../../tenant/core/objectexit/autocomplete/currentOwner",
+                        "vocabUrl": "../../../tenant/core/objectexit/source-vocab/currentOwner"
                     }
                 }
             ],
             "value": "${fields.currentOwner}"
         },
-        ".csc-objectexit-updatedAt": "${fields.updatedAt}",
+        ".csc-objectexit-updatedAt": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ],
+            "value": "${fields.updatedAt}"
+        },
         ".csc-objectexit-exitReason-label": {
             "messagekey": "objectexit-exitReasonLabel"
         },
-        ".csc-objectexit-currentOwner-label": {
-            "messagekey": "objectexit-currentOwnerLabel"
-        },
         ".csc-objectexit-createdAt-label": {
             "messagekey": "objectexit-createdAtLabel"
+        },
+        ".csc-objectexit-currentOwner-label": {
+            "messagekey": "objectexit-currentOwnerLabel"
         },
         ".csc-objectexit-exitNumber": "${fields.exitNumber}",
         ".csc-objectexit-objectexitInformation-label": {
@@ -89,38 +107,30 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.exitMethods",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-objectexit-exitMethods": {
-                                                "default": "",
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Courier",
-                                                    "In Person",
-                                                    "Post"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "courier",
-                                                    "inperson",
-                                                    "post"
-                                                ],
-                                                "selection": "${{row}.exitMethod}"
-                                            }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.exitMethods"
+                                    ".csc-objectexit-exitMethods": {
+                                        "default": "",
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "Courier",
+                                            "In Person",
+                                            "Post"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "courier",
+                                            "inperson",
+                                            "post"
+                                        ],
+                                        "selection": "${{row}.exitMethod}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.exitMethods"
                     }
                 }
             ]
@@ -143,6 +153,7 @@
             ],
             "value": "${fields.exitDate}"
         },
+        ".csc-objectexit-createdBy": "${fields.createdBy}",
         ".csc-objectexit-exitReason": {
             "default": "",
             "optionnames": [

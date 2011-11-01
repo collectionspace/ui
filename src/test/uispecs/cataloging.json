@@ -9,7 +9,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.ownersReferences",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -17,7 +16,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.ownersReferences"
                     }
                 }
             ]
@@ -61,7 +61,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.viewersReferences",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -69,7 +68,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.viewersReferences"
                     }
                 }
             ]
@@ -123,7 +123,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentActivities",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -131,7 +130,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentActivities"
                     }
                 }
             ]
@@ -157,7 +157,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.fieldCollectionSources",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -177,7 +176,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.fieldCollectionSources"
                     }
                 }
             ]
@@ -223,7 +223,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.titleGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -279,7 +278,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.titleGroup"
                     }
                 }
             ]
@@ -303,7 +303,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.owners",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -323,7 +322,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.owners"
                     }
                 }
             ]
@@ -334,7 +334,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.forms",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -358,7 +357,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.forms"
                     }
                 }
             ]
@@ -378,7 +378,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.usageGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -387,7 +386,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.usageGroup"
                     }
                 }
             ]
@@ -404,7 +404,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocEventPlaces",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -412,7 +411,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocEventPlaces"
                     }
                 }
             ]
@@ -446,7 +446,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.objectProductionReasons",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -454,7 +453,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.objectProductionReasons"
                     }
                 }
             ]
@@ -527,7 +527,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentScripts",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -557,7 +556,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentScripts"
                     }
                 }
             ]
@@ -580,7 +580,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.techniqueGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -589,7 +588,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.techniqueGroup"
                     }
                 }
             ]
@@ -632,7 +632,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocPeopleGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -642,7 +641,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocPeopleGroup"
                     }
                 }
             ]
@@ -654,7 +654,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.objectProductionOrganizationGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -675,7 +674,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.objectProductionOrganizationGroup"
                     }
                 }
             ]
@@ -696,8 +696,7 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentOtherGroup",
-                        "reepatTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
                                     ".csc-object-description-content-other-type": "${{row}.contentOtherType}",
@@ -705,7 +704,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentOtherGroup"
                     }
                 }
             ]
@@ -755,7 +755,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.colors",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -763,7 +762,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.colors"
                     }
                 }
             ]
@@ -834,7 +834,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocPersonGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -856,7 +855,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocPersonGroup"
                     }
                 }
             ]
@@ -867,7 +867,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocConceptGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -877,7 +876,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocConceptGroup"
                     }
                 }
             ]
@@ -938,7 +938,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.materialGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -950,7 +949,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.materialGroup"
                     }
                 }
             ]
@@ -1016,7 +1016,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.objectComponentGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -1041,7 +1040,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.objectComponentGroup"
                     }
                 }
             ]
@@ -1053,7 +1053,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.objectProductionPersonGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -1074,7 +1073,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.objectProductionPersonGroup"
                     }
                 }
             ]
@@ -1100,7 +1100,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentEventNameGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -1109,7 +1108,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentEventNameGroup"
                     }
                 }
             ]
@@ -1120,7 +1120,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.dimensionGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -1258,7 +1257,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.dimensionGroup"
                     }
                 }
             ]
@@ -1288,7 +1288,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentPositions",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -1328,7 +1327,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentPositions"
                     }
                 }
             ]
@@ -1354,7 +1354,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.briefDescriptions",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -1362,7 +1361,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.briefDescriptions"
                     }
                 }
             ]
@@ -1383,7 +1383,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocEventPeoples",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -1391,7 +1390,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocEventPeoples"
                     }
                 }
             ]
@@ -1409,7 +1409,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.objectStatusList",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -1437,7 +1436,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.objectStatusList"
                     }
                 }
             ]
@@ -1494,7 +1494,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentPlaces",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -1502,7 +1501,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentPlaces"
                     }
                 }
             ]
@@ -1524,7 +1524,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocEventPersons",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -1544,7 +1543,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocEventPersons"
                     }
                 }
             ]
@@ -1571,7 +1571,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.responsibleDepartments",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -1607,7 +1606,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.responsibleDepartments"
                     }
                 }
             ]
@@ -1640,7 +1640,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentObjectGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -1661,7 +1660,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentObjectGroup"
                     }
                 }
             ]
@@ -1718,7 +1718,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.referenceGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -1727,7 +1726,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.referenceGroup"
                     }
                 }
             ]
@@ -1744,7 +1744,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocObjectGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -1754,7 +1753,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocObjectGroup"
                     }
                 }
             ]
@@ -1765,7 +1765,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.objectNameGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -1846,7 +1845,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.objectNameGroup"
                     }
                 }
             ]
@@ -1925,7 +1925,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocCulturalContextGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -1935,7 +1934,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocCulturalContextGroup"
                     }
                 }
             ]
@@ -2005,7 +2005,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocOrganizationGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -2027,7 +2026,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocOrganizationGroup"
                     }
                 }
             ]
@@ -2071,7 +2071,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.fieldCollectors",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -2091,7 +2090,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.fieldCollectors"
                     }
                 }
             ]
@@ -2143,7 +2143,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentPeoples",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -2151,7 +2150,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentPeoples"
                     }
                 }
             ]
@@ -2171,7 +2171,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocEventOrganizations",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -2191,7 +2190,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocEventOrganizations"
                     }
                 }
             ]
@@ -2205,7 +2205,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentOrganizations",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -2225,7 +2224,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentOrganizations"
                     }
                 }
             ]
@@ -2245,7 +2245,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.otherNumber",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -2272,7 +2271,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.otherNumber"
                     }
                 }
             ]
@@ -2286,7 +2286,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentConcepts",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -2294,7 +2293,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentConcepts"
                     }
                 }
             ]
@@ -2315,7 +2315,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentLanguages",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -2335,7 +2334,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentLanguages"
                     }
                 }
             ]
@@ -2377,7 +2377,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.technicalAttributeGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -2421,7 +2420,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.technicalAttributeGroup"
                     }
                 }
             ]
@@ -2475,7 +2475,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.objectProductionPlaceGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -2484,7 +2483,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.objectProductionPlaceGroup"
                     }
                 }
             ]
@@ -2525,7 +2525,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.objectProductionPeopleGroup",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -2534,7 +2533,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.objectProductionPeopleGroup"
                     }
                 }
             ]
@@ -2635,7 +2635,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.fieldCollectionMethods",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -2655,7 +2654,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.fieldCollectionMethods"
                     }
                 }
             ]
@@ -2670,7 +2670,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.fieldColEventNames",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -2678,7 +2677,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.fieldColEventNames"
                     }
                 }
             ]
@@ -2699,7 +2699,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.styles",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -2707,7 +2706,8 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.styles"
                     }
                 }
             ]
@@ -2727,7 +2727,6 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentPersons",
                         "repeatTree": {
                             "expander": {
                                 "tree": {
@@ -2747,7 +2746,231 @@
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentPersons"
+                    }
+                }
+            ]
+        },
+        ".csc-collection-object-assocEventPlaces-label": {
+            "messagekey": "collection-object-assocEventPlacesLabel"
+        },
+        ".csc-collection-object-objectNameNote-label": {
+            "messagekey": "collection-object-objectNameNoteLabel"
+        },
+        ".csc-collection-object-techniqueGroup-label": {
+            "messagekey": "collection-object-techniqueGroupLabel"
+        },
+        ".csc-collection-object-numberValue-label": {
+            "messagekey": "collection-object-numberValueLabel"
+        },
+        ".csc-collection-object-inscriptionDescriptionMethod-label": {
+            "messagekey": "collection-object-inscriptionDescriptionMethodLabel"
+        },
+        ".csc-collection-object-assocActivityGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-collection-object-assocActivity": "${{row}.assocActivity}",
+                                    ".csc-collection-object-assocActivityNote": "${{row}.assocActivityNote}",
+                                    ".csc-collection-object-assocActivityType": "${{row}.assocActivityType}"
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.assocActivityGroup"
+                    }
+                }
+            ]
+        },
+        ".csc-object-identification-comments": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-object-identification-comments": "${{row}.comment}"
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.comments"
+                    }
+                }
+            ]
+        },
+        ".csc-collection-object-recordStatus-label": {
+            "messagekey": "collection-object-recordStatusLabel"
+        },
+        ".csc-collection-object-assocEventName-label": {
+            "messagekey": "collection-object-assocEventNameLabel"
+        },
+        ".csc-object-description-content-description": "${fields.contentDescription}",
+        ".csc-object-history-association-assocDateGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-collection-object-assocDateNote": "${{row}.assocDateNote}",
+                                    ".csc-object-history-association-assocDate": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.datePicker",
+                                                "type": "fluid"
+                                            }
+                                        ],
+                                        "value": "${{row}.assocDate}"
+                                    },
+                                    ".csc-collection-object-assocDateType": "${{row}.assocDateType}"
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.assocDateGroup"
+                    }
+                }
+            ]
+        },
+        ".csc-collection-object-materialSource-label": {
+            "messagekey": "collection-object-materialSourceLabel"
+        },
+        ".csc-collection-object-updatedBy-label": {
+            "messagekey": "collection-object-updatedByLabel"
+        },
+        ".csc-collection-object-domaindata-label": {
+            "messagekey": "collection-object-domaindataLabel"
+        },
+        ".csc-collection-object-materialName-label": {
+            "messagekey": "collection-object-materialNameLabel"
+        },
+        ".csc-object-history-association-category": {
+            "optionnames": [
+                "Please select a value",
+                "company",
+                "public",
+                "private"
+            ],
+            "optionlist": [
+                "",
+                "company",
+                "public",
+                "private"
+            ],
+            "selection": "${fields.ownershipCategory}"
+        },
+        ".csc-collection-object-viewersRole-label": {
+            "messagekey": "collection-object-viewersRoleLabel"
+        },
+        ".csc-collection-object-objectNameSystem-label": {
+            "messagekey": "collection-object-objectNameSystemLabel"
+        },
+        ".csc-object-description-physical-description": "${fields.physicalDescription}",
+        ".csc-object-description-inscription-content-interpretation": "${fields.inscriptionContentInterpretation}",
+        ".csc-object-description-inscription-description-type": {
+            "optionnames": [
+                "Please select a value",
+                "brand",
+                "decoration",
+                "estate stamp",
+                "graffiti",
+                "label",
+                "maker's mark"
+            ],
+            "optionlist": [
+                "",
+                "brand",
+                "decoration",
+                "estate-stamp",
+                "graffiti",
+                "label",
+                "maker's-mark"
+            ],
+            "selection": "${fields.inscriptionDescriptionType}"
+        },
+        ".csc-collection-object-objectOwnerContributionInformation-label": {
+            "messagekey": "collection-object-objectOwnerContributionInformationLabel"
+        },
+        ".csc-collection-object-dateEarliestSingleCertainty-label": {
+            "messagekey": "collection-object-dateEarliestSingleCertaintyLabel"
+        },
+        ".csc-collection-object-updatedAt": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ],
+            "value": "${fields.updatedAt}"
+        },
+        ".csc-collection-object-referenceInformation-label": {
+            "messagekey": "collection-object-referenceInformationLabel"
+        },
+        ".csc-collection-object-referenceGroup-label": {
+            "messagekey": "collection-object-referenceGroupLabel"
+        },
+        ".csc-object-description-phase": {
+            "optionnames": [
+                "Please select a value",
+                "adult",
+                "imago",
+                "larva",
+                "nymph",
+                "pupa"
+            ],
+            "optionlist": [
+                "",
+                "adult",
+                "imago",
+                "larva",
+                "nymph",
+                "pupa"
+            ],
+            "selection": "${fields.phase}"
+        },
+        ".csc-collection-object-inscriptionDescriptionType-label": {
+            "messagekey": "collection-object-inscriptionDescriptionTypeLabel"
+        },
+        ".csc-collection-object-dateLatestCertainty-label": {
+            "messagekey": "collection-object-dateLatestCertaintyLabel"
+        },
+        ".csc-collection-object-assocEventPersons-label": {
+            "messagekey": "collection-object-assocEventPersonsLabel"
+        },
+        ".csc-collection-object-contentEventName-label": {
+            "messagekey": "collection-object-contentEventNameLabel"
+        },
+        ".csc-collection-object-assocPlace-label": {
+            "messagekey": "collection-object-assocPlaceLabel"
+        },
+        ".csc-collection-object-assocPlaceGroup": {
+            "decorators": [
+                {
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-collection-object-assocPlaceNote": "${{row}.assocPlaceNote}",
+                                    ".csc-collection-object-assocPlaceType": "${{row}.assocPlaceType}",
+                                    ".csc-collection-object-assocPlace": "${{row}.assocPlace}"
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.assocPlaceGroup"
                     }
                 }
             ]

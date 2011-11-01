@@ -9,23 +9,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.ownersReferences",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-owner-reference": "${{row}.ownersReference}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.ownersReferences"
-                                    }
+                                    ".csc-object-owner-reference": "${{row}.ownersReference}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.ownersReferences"
                     }
                 }
             ]
@@ -69,23 +61,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.viewersReferences",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-viewer-reference": "${{row}.viewersReference}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.viewersReferences"
-                                    }
+                                    ".csc-object-viewer-reference": "${{row}.viewersReference}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.viewersReferences"
                     }
                 }
             ]
@@ -139,23 +123,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentActivities",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-content-activity": "${{row}.contentActivity}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.contentActivities"
-                                    }
+                                    ".csc-object-description-content-activity": "${{row}.contentActivity}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentActivities"
                     }
                 }
             ]
@@ -181,35 +157,27 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.fieldCollectionSources",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-fieldCollectionSource": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.autocomplete",
-                                                        "type": "fluid",
-                                                        "options": {
-                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/fieldCollectionSource",
-                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/fieldCollectionSource"
-                                                        }
-                                                    }
-                                                ],
-                                                "value": "${{row}.fieldCollectionSource}"
+                                    ".csc-collection-object-fieldCollectionSource": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/cataloging/autocomplete/fieldCollectionSource",
+                                                    "vocabUrl": "../../../tenant/core/cataloging/source-vocab/fieldCollectionSource"
+                                                }
                                             }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.fieldCollectionSources"
+                                        ],
+                                        "value": "${{row}.fieldCollectionSource}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.fieldCollectionSources"
                     }
                 }
             ]
@@ -255,131 +223,63 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.titleGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-titleTranslationLanguage": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Latin",
-                                                    "Middle English",
-                                                    "Old English",
-                                                    "Ancient Greek",
-                                                    "Korean",
-                                                    "Swahili",
-                                                    "Japanese",
-                                                    "Chinese",
-                                                    "Hebrew",
-                                                    "German",
-                                                    "Russian",
-                                                    "Arabic",
-                                                    "Portuguese",
-                                                    "Italian",
-                                                    "Spanish",
-                                                    "French",
-                                                    "English"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "latin",
-                                                    "middleenglish",
-                                                    "oldenglish",
-                                                    "ancientgreek",
-                                                    "korean",
-                                                    "swahili",
-                                                    "japanese",
-                                                    "chinese",
-                                                    "hebrew",
-                                                    "german",
-                                                    "russian",
-                                                    "arabic",
-                                                    "portuguese",
-                                                    "italian",
-                                                    "spn",
-                                                    "french",
-                                                    "eng"
-                                                ],
-                                                "selection": "${{row}.titleTranslationLanguage}"
-                                            },
-                                            ".csc-object-identification-object-title-translation": "${{row}.titleTranslation}",
-                                            ".csc-object-identification-object-title": "${{row}.title}",
-                                            ".csc-object-identification-object-title-type": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Assigned by Artist",
-                                                    "Collection",
-                                                    "Generic",
-                                                    "Popular",
-                                                    "Series",
-                                                    "Trade"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "assigned-by-artist",
-                                                    "collection",
-                                                    "generic",
-                                                    "popular",
-                                                    "series",
-                                                    "trade"
-                                                ],
-                                                "selection": "${{row}.titleType}"
-                                            },
-                                            ".csc-object-identification-object-title-language": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Latin",
-                                                    "Middle English",
-                                                    "Old English",
-                                                    "Ancient Greek",
-                                                    "Korean",
-                                                    "Swahili",
-                                                    "Japanese",
-                                                    "Chinese",
-                                                    "Hebrew",
-                                                    "German",
-                                                    "Russian",
-                                                    "Arabic",
-                                                    "Portuguese",
-                                                    "Italian",
-                                                    "Spanish",
-                                                    "French",
-                                                    "English"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "latin",
-                                                    "middleenglish",
-                                                    "oldenglish",
-                                                    "ancientgreek",
-                                                    "korean",
-                                                    "swahili",
-                                                    "japanese",
-                                                    "chinese",
-                                                    "hebrew",
-                                                    "german",
-                                                    "russian",
-                                                    "arabic",
-                                                    "portuguese",
-                                                    "italian",
-                                                    "spn",
-                                                    "french",
-                                                    "eng"
-                                                ],
-                                                "selection": "${{row}.titleLanguage}"
+                                    ".csc-collection-object-titleTranslationLanguage": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.termList",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "root": "{row}",
+                                                    "elPath": "titleTranslationLanguage",
+                                                    "termListType": "titleTranslationLanguage"
+                                                }
                                             }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.titleGroup"
+                                        ]
+                                    },
+                                    ".csc-object-identification-object-title-translation": "${{row}.titleTranslation}",
+                                    ".csc-object-identification-object-title": "${{row}.title}",
+                                    ".csc-object-identification-object-title-type": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "Assigned by Artist",
+                                            "Collection",
+                                            "Generic",
+                                            "Popular",
+                                            "Series",
+                                            "Trade"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "assigned-by-artist",
+                                            "collection",
+                                            "generic",
+                                            "popular",
+                                            "series",
+                                            "trade"
+                                        ],
+                                        "selection": "${{row}.titleType}"
+                                    },
+                                    ".csc-object-identification-object-title-language": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.termList",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "root": "{row}",
+                                                    "elPath": "titleLanguage",
+                                                    "termListType": "titleLanguage"
+                                                }
+                                            }
+                                        ]
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.titleGroup"
                     }
                 }
             ]
@@ -403,35 +303,27 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.owners",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-history-association-owner": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.autocomplete",
-                                                        "type": "fluid",
-                                                        "options": {
-                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/owner",
-                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/owner"
-                                                        }
-                                                    }
-                                                ],
-                                                "value": "${{row}.owner}"
+                                    ".csc-object-history-association-owner": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/cataloging/autocomplete/owner",
+                                                    "vocabUrl": "../../../tenant/core/cataloging/source-vocab/owner"
+                                                }
                                             }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.owners"
+                                        ],
+                                        "value": "${{row}.owner}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.owners"
                     }
                 }
             ]
@@ -442,39 +334,31 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.forms",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-form": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "dry",
-                                                    "pinned",
-                                                    "thin section",
-                                                    "wet"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "dry",
-                                                    "pinned",
-                                                    "thin-section",
-                                                    "wet"
-                                                ],
-                                                "selection": "${{row}.form}"
-                                            }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.forms"
+                                    ".csc-object-description-form": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "dry",
+                                            "pinned",
+                                            "thin section",
+                                            "wet"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "dry",
+                                            "pinned",
+                                            "thin-section",
+                                            "wet"
+                                        ],
+                                        "selection": "${{row}.form}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.forms"
                     }
                 }
             ]
@@ -494,24 +378,16 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.usageGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-usage": "${{row}.usage}",
-                                            ".csc-collection-object-usageNote": "${{row}.usageNote}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.usageGroup"
-                                    }
+                                    ".csc-collection-object-usage": "${{row}.usage}",
+                                    ".csc-collection-object-usageNote": "${{row}.usageNote}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.usageGroup"
                     }
                 }
             ]
@@ -528,23 +404,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocEventPlaces",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-history-association-event-place": "${{row}.assocEventPlace}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.assocEventPlaces"
-                                    }
+                                    ".csc-object-history-association-event-place": "${{row}.assocEventPlace}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocEventPlaces"
                     }
                 }
             ]
@@ -578,23 +446,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.objectProductionReasons",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-production-reason": "${{row}.objectProductionReason}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.objectProductionReasons"
-                                    }
+                                    ".csc-object-production-reason": "${{row}.objectProductionReason}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.objectProductionReasons"
                     }
                 }
             ]
@@ -667,45 +527,37 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentScripts",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-content-script": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Carolingian miniscule",
-                                                    "Gothic script",
-                                                    "Palmer method",
-                                                    "Roman cursive",
-                                                    "rustic capitals",
-                                                    "Spencerian method",
-                                                    "square capitals"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "carolingian-miniscule",
-                                                    "gothic-script",
-                                                    "palmer-method",
-                                                    "roman-cursive",
-                                                    "rustic-capitals",
-                                                    "spencerian-method",
-                                                    "square-capitals"
-                                                ],
-                                                "selection": "${{row}.contentScript}"
-                                            }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.contentScripts"
+                                    ".csc-object-description-content-script": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "Carolingian miniscule",
+                                            "Gothic script",
+                                            "Palmer method",
+                                            "Roman cursive",
+                                            "rustic capitals",
+                                            "Spencerian method",
+                                            "square capitals"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "carolingian-miniscule",
+                                            "gothic-script",
+                                            "palmer-method",
+                                            "roman-cursive",
+                                            "rustic-capitals",
+                                            "spencerian-method",
+                                            "square-capitals"
+                                        ],
+                                        "selection": "${{row}.contentScript}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentScripts"
                     }
                 }
             ]
@@ -728,27 +580,22 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.techniqueGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-production-technique-type": "${{row}.techniqueType}",
-                                            ".csc-object-production-technique": "${{row}.technique}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.techniqueGroup"
-                                    }
+                                    ".csc-object-production-technique-type": "${{row}.techniqueType}",
+                                    ".csc-object-production-technique": "${{row}.technique}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.techniqueGroup"
                     }
                 }
             ]
+        },
+        ".csc-collection-object-measuredBy-label": {
+            "messagekey": "collection-object-measuredByLabel"
         },
         ".csc-object-description-inscription-description-date": {
             "decorators": [
@@ -785,25 +632,17 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocPeopleGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-assocPeopleNote": "${{row}.assocPeopleNote}",
-                                            ".csc-collection-object-assocPeople": "${{row}.assocPeople}",
-                                            ".csc-collection-object-assocPeopleType": "${{row}.assocPeopleType}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.assocPeopleGroup"
-                                    }
+                                    ".csc-collection-object-assocPeopleNote": "${{row}.assocPeopleNote}",
+                                    ".csc-collection-object-assocPeople": "${{row}.assocPeople}",
+                                    ".csc-collection-object-assocPeopleType": "${{row}.assocPeopleType}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocPeopleGroup"
                     }
                 }
             ]
@@ -815,36 +654,28 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.objectProductionOrganizationGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-production-organization": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.autocomplete",
-                                                        "type": "fluid",
-                                                        "options": {
-                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/objectProductionOrganization",
-                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/objectProductionOrganization"
-                                                        }
-                                                    }
-                                                ],
-                                                "value": "${{row}.objectProductionOrganization}"
-                                            },
-                                            ".csc-collection-object-objectProductionOrganizationRole": "${{row}.objectProductionOrganizationRole}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.objectProductionOrganizationGroup"
-                                    }
+                                    ".csc-object-production-organization": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/cataloging/autocomplete/objectProductionOrganization",
+                                                    "vocabUrl": "../../../tenant/core/cataloging/source-vocab/objectProductionOrganization"
+                                                }
+                                            }
+                                        ],
+                                        "value": "${{row}.objectProductionOrganization}"
+                                    },
+                                    ".csc-collection-object-objectProductionOrganizationRole": "${{row}.objectProductionOrganizationRole}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.objectProductionOrganizationGroup"
                     }
                 }
             ]
@@ -855,6 +686,7 @@
         ".csc-collection-object-objectComponentName-label": {
             "messagekey": "collection-object-objectComponentNameLabel"
         },
+        ".csc-collection-object-createdBy": "${fields.createdBy}",
         ".csc-collection-object-ownersContributionNote-label": {
             "messagekey": "collection-object-ownersContributionNoteLabel"
         },
@@ -864,24 +696,16 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentOtherGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-content-other-type": "${{row}.contentOtherType}",
-                                            ".csc-object-description-content-other": "${{row}.contentOther}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.contentOtherGroup"
-                                    }
+                                    ".csc-object-description-content-other-type": "${{row}.contentOtherType}",
+                                    ".csc-object-description-content-other": "${{row}.contentOther}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentOtherGroup"
                     }
                 }
             ]
@@ -890,47 +714,16 @@
             "messagekey": "collection-object-contentLanguagesLabel"
         },
         ".csc-object-description-inscription-content-language": {
-            "optionnames": [
-                "Please select a value",
-                "Latin",
-                "Middle English",
-                "Old English",
-                "Ancient Greek",
-                "Korean",
-                "Swahili",
-                "Japanese",
-                "Chinese",
-                "Hebrew",
-                "German",
-                "Russian",
-                "Arabic",
-                "Portuguese",
-                "Italian",
-                "Spanish",
-                "French",
-                "English"
-            ],
-            "optionlist": [
-                "",
-                "latin",
-                "middleenglish",
-                "oldenglish",
-                "ancientgreek",
-                "korean",
-                "swahili",
-                "japanese",
-                "chinese",
-                "hebrew",
-                "german",
-                "russian",
-                "arabic",
-                "portuguese",
-                "italian",
-                "spn",
-                "french",
-                "eng"
-            ],
-            "selection": "${fields.inscriptionContentLanguage}"
+            "decorators": [
+                {
+                    "func": "cspace.termList",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.inscriptionContentLanguage",
+                        "termListType": "inscriptionContentLanguage"
+                    }
+                }
+            ]
         },
         ".csc-collection-object-materialGroup-label": {
             "messagekey": "collection-object-materialGroupLabel"
@@ -962,23 +755,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.colors",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-color": "${{row}.color}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.colors"
-                                    }
+                                    ".csc-object-description-color": "${{row}.color}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.colors"
                     }
                 }
             ]
@@ -1031,6 +816,9 @@
         ".csc-collection-object-ownersReferences-label": {
             "messagekey": "collection-object-ownersReferencesLabel"
         },
+        ".csc-collection-object-dateEarliestSingle-label": {
+            "messagekey": "collection-object-dateEarliestSingleLabel"
+        },
         ".csc-collection-object-fieldCollectionDate": {
             "decorators": [
                 {
@@ -1046,43 +834,32 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocPersonGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-assocPersonType": "${{row}.assocPersonType}",
-                                            ".csc-collection-object-assocPerson": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.autocomplete",
-                                                        "type": "fluid",
-                                                        "options": {
-                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/assocPerson",
-                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/assocPerson"
-                                                        }
-                                                    }
-                                                ],
-                                                "value": "${{row}.assocPerson}"
-                                            },
-                                            ".csc-collection-object-assocPersonNote": "${{row}.assocPersonNote}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.assocPersonGroup"
-                                    }
+                                    ".csc-collection-object-assocPersonType": "${{row}.assocPersonType}",
+                                    ".csc-collection-object-assocPerson": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/cataloging/autocomplete/assocPerson",
+                                                    "vocabUrl": "../../../tenant/core/cataloging/source-vocab/assocPerson"
+                                                }
+                                            }
+                                        ],
+                                        "value": "${{row}.assocPerson}"
+                                    },
+                                    ".csc-collection-object-assocPersonNote": "${{row}.assocPersonNote}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocPersonGroup"
                     }
                 }
             ]
-        },
-        ".csc-collection-object-dateEarliestSingle-label": {
-            "messagekey": "collection-object-dateEarliestSingleLabel"
         },
         ".csc-collection-object-assocConceptGroup": {
             "decorators": [
@@ -1090,25 +867,17 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocConceptGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-assocConceptType": "${{row}.assocConceptType}",
-                                            ".csc-collection-object-assocConcept": "${{row}.assocConcept}",
-                                            ".csc-collection-object-assocConceptNote": "${{row}.assocConceptNote}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.assocConceptGroup"
-                                    }
+                                    ".csc-collection-object-assocConceptType": "${{row}.assocConceptType}",
+                                    ".csc-collection-object-assocConcept": "${{row}.assocConcept}",
+                                    ".csc-collection-object-assocConceptNote": "${{row}.assocConceptNote}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocConceptGroup"
                     }
                 }
             ]
@@ -1128,7 +897,18 @@
         ".csc-collection-object-contentPersons-label": {
             "messagekey": "collection-object-contentPersonsLabel"
         },
-        ".csc-object-description-age-qualifier": "${fields.ageQualifier}",
+        ".csc-object-description-age-qualifier": {
+            "decorators": [
+                {
+                    "func": "cspace.termList",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.ageQualifier",
+                        "termListType": "ageQualifier"
+                    }
+                }
+            ]
+        },
         ".csc-object-description-inscription-content-script": {
             "optionnames": [
                 "Please select a value",
@@ -1158,27 +938,19 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.materialGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-material-source": "${{row}.materialSource}",
-                                            ".csc-object-description-material-component": "${{row}.materialComponent}",
-                                            ".csc-object-description-material-name": "${{row}.materialName}",
-                                            ".csc-object-description-material": "${{row}.material}",
-                                            ".csc-object-description-material-component-note": "${{row}.materialComponentNote}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.materialGroup"
-                                    }
+                                    ".csc-object-description-material-source": "${{row}.materialSource}",
+                                    ".csc-object-description-material-component": "${{row}.materialComponent}",
+                                    ".csc-object-description-material-name": "${{row}.materialName}",
+                                    ".csc-object-description-material": "${{row}.material}",
+                                    ".csc-object-description-material-component-note": "${{row}.materialComponentNote}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.materialGroup"
                     }
                 }
             ]
@@ -1244,40 +1016,32 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.objectComponentGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-object-component-name": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "blade",
-                                                    "buttonhole",
-                                                    "handle",
-                                                    "sleeve"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "blade",
-                                                    "buttonhole",
-                                                    "handle",
-                                                    "sleeve"
-                                                ],
-                                                "selection": "${{row}.objectComponentName}"
-                                            },
-                                            ".csc-object-description-object-component-information": "${{row}.objectComponentInformation}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.objectComponentGroup"
-                                    }
+                                    ".csc-object-description-object-component-name": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "blade",
+                                            "buttonhole",
+                                            "handle",
+                                            "sleeve"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "blade",
+                                            "buttonhole",
+                                            "handle",
+                                            "sleeve"
+                                        ],
+                                        "selection": "${{row}.objectComponentName}"
+                                    },
+                                    ".csc-object-description-object-component-information": "${{row}.objectComponentInformation}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.objectComponentGroup"
                     }
                 }
             ]
@@ -1289,36 +1053,28 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.objectProductionPersonGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-objectProductionPersonRole": "${{row}.objectProductionPersonRole}",
-                                            ".csc-object-production-person": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.autocomplete",
-                                                        "type": "fluid",
-                                                        "options": {
-                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/objectProductionPerson",
-                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/objectProductionPerson"
-                                                        }
-                                                    }
-                                                ],
-                                                "value": "${{row}.objectProductionPerson}"
+                                    ".csc-collection-object-objectProductionPersonRole": "${{row}.objectProductionPersonRole}",
+                                    ".csc-object-production-person": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/cataloging/autocomplete/objectProductionPerson",
+                                                    "vocabUrl": "../../../tenant/core/cataloging/source-vocab/objectProductionPerson"
+                                                }
                                             }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.objectProductionPersonGroup"
+                                        ],
+                                        "value": "${{row}.objectProductionPerson}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.objectProductionPersonGroup"
                     }
                 }
             ]
@@ -1344,24 +1100,16 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentEventNameGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-content-event-name-type": "${{row}.contentEventNameType}",
-                                            ".csc-object-description-content-event-name": "${{row}.contentEventName}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.contentEventNameGroup"
-                                    }
+                                    ".csc-object-description-content-event-name-type": "${{row}.contentEventNameType}",
+                                    ".csc-object-description-content-event-name": "${{row}.contentEventName}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentEventNameGroup"
                     }
                 }
             ]
@@ -1372,128 +1120,145 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.dimensionGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-dimension-part": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "base",
-                                                    "frame",
-                                                    "framed",
-                                                    "image size",
-                                                    "mount",
-                                                    "paper size",
-                                                    "plate size",
-                                                    "unframed"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "base",
-                                                    "frame",
-                                                    "framed",
-                                                    "image-size",
-                                                    "mount",
-                                                    "paper-size",
-                                                    "plate-size",
-                                                    "unframed"
-                                                ],
-                                                "selection": "${{row}.measuredPart}"
-                                            },
-                                            ".csc-object-description-dimension-unit": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "carats",
-                                                    "centimeters",
-                                                    "cubic centimeters",
-                                                    "feet",
-                                                    "inches",
-                                                    "kilograms",
-                                                    "liters",
-                                                    "millimeters",
-                                                    "meters",
-                                                    "minutes",
-                                                    "pixels",
-                                                    "square feet",
-                                                    "stories"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "carats",
-                                                    "centimeters",
-                                                    "cubic-centimeters",
-                                                    "feet",
-                                                    "inches",
-                                                    "kilograms",
-                                                    "liters",
-                                                    "millimeters",
-                                                    "meters",
-                                                    "minutes",
-                                                    "pixels",
-                                                    "square-feet",
-                                                    "stories"
-                                                ],
-                                                "selection": "${{row}.measurementUnit}"
-                                            },
-                                            ".csc-object-description-dimension": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "area",
-                                                    "base",
-                                                    "circumference",
-                                                    "count",
-                                                    "depth",
-                                                    "diameter",
-                                                    "height",
-                                                    "length",
-                                                    "running time",
-                                                    "target",
-                                                    "volume",
-                                                    "weight",
-                                                    "width"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "area",
-                                                    "base",
-                                                    "circumference",
-                                                    "count",
-                                                    "depth",
-                                                    "diameter",
-                                                    "height",
-                                                    "length",
-                                                    "running-time",
-                                                    "target",
-                                                    "volume",
-                                                    "weight",
-                                                    "width"
-                                                ],
-                                                "selection": "${{row}.dimension}"
-                                            },
-                                            ".csc-object-description-dimension-value-qualifier": "${{row}.valueQualifier}",
-                                            ".csc-object-description-dimension-value-date": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.datePicker",
-                                                        "type": "fluid"
-                                                    }
-                                                ],
-                                                "value": "${{row}.valueDate}"
-                                            },
-                                            ".csc-object-description-dimension-value": "${{row}.value}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.dimensionGroup"
+                                    ".csc-object-description-dimension-part": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "base",
+                                            "frame",
+                                            "framed",
+                                            "image size",
+                                            "mount",
+                                            "paper size",
+                                            "plate size",
+                                            "unframed"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "base",
+                                            "frame",
+                                            "framed",
+                                            "image-size",
+                                            "mount",
+                                            "paper-size",
+                                            "plate-size",
+                                            "unframed"
+                                        ],
+                                        "selection": "${{row}.measuredPart}"
+                                    },
+                                    ".csc-object-description-dimension-unit": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "carats",
+                                            "centimeters",
+                                            "cubic centimeters",
+                                            "feet",
+                                            "inches",
+                                            "kilograms",
+                                            "liters",
+                                            "millimeters",
+                                            "meters",
+                                            "minutes",
+                                            "pixels",
+                                            "square feet",
+                                            "stories"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "carats",
+                                            "centimeters",
+                                            "cubic-centimeters",
+                                            "feet",
+                                            "inches",
+                                            "kilograms",
+                                            "liters",
+                                            "millimeters",
+                                            "meters",
+                                            "minutes",
+                                            "pixels",
+                                            "square-feet",
+                                            "stories"
+                                        ],
+                                        "selection": "${{row}.measurementUnit}"
+                                    },
+                                    ".csc-object-description-dimension": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "area",
+                                            "base",
+                                            "circumference",
+                                            "count",
+                                            "depth",
+                                            "diameter",
+                                            "height",
+                                            "length",
+                                            "running time",
+                                            "target",
+                                            "volume",
+                                            "weight",
+                                            "width"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "area",
+                                            "base",
+                                            "circumference",
+                                            "count",
+                                            "depth",
+                                            "diameter",
+                                            "height",
+                                            "length",
+                                            "running-time",
+                                            "target",
+                                            "volume",
+                                            "weight",
+                                            "width"
+                                        ],
+                                        "selection": "${{row}.dimension}"
+                                    },
+                                    ".csc-object-description-dimension-value-qualifier": "${{row}.valueQualifier}",
+                                    ".csc-object-description-dimension-value-date": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.datePicker",
+                                                "type": "fluid"
+                                            }
+                                        ],
+                                        "value": "${{row}.valueDate}"
+                                    },
+                                    ".csc-collection-object-measuredBy": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/cataloging/autocomplete/measuredBy",
+                                                    "vocabUrl": "../../../tenant/core/cataloging/source-vocab/measuredBy"
+                                                }
+                                            }
+                                        ],
+                                        "value": "${{row}.measuredBy}"
+                                    },
+                                    ".csc-object-description-dimension-value": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.inputValidator",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "label": "collection-object-valueLabel",
+                                                    "type": "float"
+                                                }
+                                            }
+                                        ],
+                                        "value": "${{row}.value}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.dimensionGroup"
                     }
                 }
             ]
@@ -1523,55 +1288,47 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentPositions",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-content-position": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "back",
-                                                    "base",
-                                                    "bottom",
-                                                    "front",
-                                                    "inside",
-                                                    "left",
-                                                    "outside",
-                                                    "recto",
-                                                    "right",
-                                                    "rim",
-                                                    "top",
-                                                    "verso"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "back",
-                                                    "base",
-                                                    "bottom",
-                                                    "front",
-                                                    "inside",
-                                                    "left",
-                                                    "outside",
-                                                    "recto",
-                                                    "right",
-                                                    "rim",
-                                                    "top",
-                                                    "verso"
-                                                ],
-                                                "selection": "${{row}.contentPosition}"
-                                            }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.contentPositions"
+                                    ".csc-object-description-content-position": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "back",
+                                            "base",
+                                            "bottom",
+                                            "front",
+                                            "inside",
+                                            "left",
+                                            "outside",
+                                            "recto",
+                                            "right",
+                                            "rim",
+                                            "top",
+                                            "verso"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "back",
+                                            "base",
+                                            "bottom",
+                                            "front",
+                                            "inside",
+                                            "left",
+                                            "outside",
+                                            "recto",
+                                            "right",
+                                            "rim",
+                                            "top",
+                                            "verso"
+                                        ],
+                                        "selection": "${{row}.contentPosition}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentPositions"
                     }
                 }
             ]
@@ -1597,23 +1354,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.briefDescriptions",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-identification-brief-description": "${{row}.briefDescription}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.briefDescriptions"
-                                    }
+                                    ".csc-object-identification-brief-description": "${{row}.briefDescription}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.briefDescriptions"
                     }
                 }
             ]
@@ -1634,23 +1383,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocEventPeoples",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-history-association-event-people": "${{row}.assocEventPeople}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.assocEventPeoples"
-                                    }
+                                    ".csc-object-history-association-event-people": "${{row}.assocEventPeople}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocEventPeoples"
                     }
                 }
             ]
@@ -1668,43 +1409,35 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.objectStatusList",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-object-status": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "copy",
-                                                    "forgery",
-                                                    "holotype",
-                                                    "paralectotype",
-                                                    "paratype",
-                                                    "type"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "copy",
-                                                    "forgery",
-                                                    "holotype",
-                                                    "paralectotype",
-                                                    "paratype",
-                                                    "type"
-                                                ],
-                                                "selection": "${{row}.objectStatus}"
-                                            }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.objectStatusList"
+                                    ".csc-object-description-object-status": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "copy",
+                                            "forgery",
+                                            "holotype",
+                                            "paralectotype",
+                                            "paratype",
+                                            "type"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "copy",
+                                            "forgery",
+                                            "holotype",
+                                            "paralectotype",
+                                            "paratype",
+                                            "type"
+                                        ],
+                                        "selection": "${{row}.objectStatus}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.objectStatusList"
                     }
                 }
             ]
@@ -1761,23 +1494,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentPlaces",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-content-place": "${{row}.contentPlace}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.contentPlaces"
-                                    }
+                                    ".csc-object-description-content-place": "${{row}.contentPlace}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentPlaces"
                     }
                 }
             ]
@@ -1799,35 +1524,27 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocEventPersons",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-history-association-event-person": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.autocomplete",
-                                                        "type": "fluid",
-                                                        "options": {
-                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/assocEventPerson",
-                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/assocEventPerson"
-                                                        }
-                                                    }
-                                                ],
-                                                "value": "${{row}.assocEventPerson}"
+                                    ".csc-object-history-association-event-person": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/cataloging/autocomplete/assocEventPerson",
+                                                    "vocabUrl": "../../../tenant/core/cataloging/source-vocab/assocEventPerson"
+                                                }
                                             }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.assocEventPersons"
+                                        ],
+                                        "value": "${{row}.assocEventPerson}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocEventPersons"
                     }
                 }
             ]
@@ -1854,51 +1571,43 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.responsibleDepartments",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-identification-responsible-department": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Antiquities",
-                                                    "Architecture and Design",
-                                                    "Decorative Arts",
-                                                    "Ethnography",
-                                                    "Herpetology",
-                                                    "Media and Performance Art",
-                                                    "Paintings and Sculpture",
-                                                    "Paleobotany",
-                                                    "Photographs",
-                                                    "Prints and Drawings"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "antiquities",
-                                                    "architecture-design",
-                                                    "decorative-arts",
-                                                    "ethnography",
-                                                    "herpetology",
-                                                    "media-performance-art",
-                                                    "paintings-sculpture",
-                                                    "paleobotany",
-                                                    "photographs",
-                                                    "prints-drawings"
-                                                ],
-                                                "selection": "${{row}.responsibleDepartment}"
-                                            }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.responsibleDepartments"
+                                    ".csc-object-identification-responsible-department": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "Antiquities",
+                                            "Architecture and Design",
+                                            "Decorative Arts",
+                                            "Ethnography",
+                                            "Herpetology",
+                                            "Media and Performance Art",
+                                            "Paintings and Sculpture",
+                                            "Paleobotany",
+                                            "Photographs",
+                                            "Prints and Drawings"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "antiquities",
+                                            "architecture-design",
+                                            "decorative-arts",
+                                            "ethnography",
+                                            "herpetology",
+                                            "media-performance-art",
+                                            "paintings-sculpture",
+                                            "paleobotany",
+                                            "photographs",
+                                            "prints-drawings"
+                                        ],
+                                        "selection": "${{row}.responsibleDepartment}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.responsibleDepartments"
                     }
                 }
             ]
@@ -1931,36 +1640,28 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentObjectGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-content-object": "${{row}.contentObject}",
-                                            ".csc-object-description-content-object-type": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Furniture",
-                                                    "Food"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "furniture",
-                                                    "food"
-                                                ],
-                                                "selection": "${{row}.contentObjectType}"
-                                            }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.contentObjectGroup"
+                                    ".csc-object-description-content-object": "${{row}.contentObject}",
+                                    ".csc-object-description-content-object-type": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "Furniture",
+                                            "Food"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "furniture",
+                                            "food"
+                                        ],
+                                        "selection": "${{row}.contentObjectType}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentObjectGroup"
                     }
                 }
             ]
@@ -1975,148 +1676,27 @@
                     "type": "fluid",
                     "options": {
                         "elPath": "fields.objectProductionDate.dateDisplayDate",
-                        "protoTree": {
-                            "expander": {
-                                "tree": {
-                                    "dateEarliestSingleQualifier": {
-                                        "optionnames": [
-                                            "+/-",
-                                            "+",
-                                            "-"
-                                        ],
-                                        "optionlist": [
-                                            "+/-",
-                                            "+",
-                                            "-"
-                                        ],
-                                        "selection": "${fields.objectProductionDate.dateEarliestSingleQualifier}"
-                                    },
-                                    "dateLatestDay": "${fields.objectProductionDate.dateLatestDay}",
-                                    "dateLatestYear": "${fields.objectProductionDate.dateLatestYear}",
-                                    "dateAssociation": "${fields.objectProductionDate.dateAssociation}",
-                                    "dateEarliestSingleEra": {
-                                        "optionnames": [
-                                            "Please select a value",
-                                            "CE",
-                                            "BCE"
-                                        ],
-                                        "optionlist": [
-                                            "",
-                                            "ce",
-                                            "bce"
-                                        ],
-                                        "selection": "${fields.objectProductionDate.dateEarliestSingleEra}"
-                                    },
-                                    "dateDisplayDate": "${fields.objectProductionDate.dateDisplayDate}",
-                                    "dateEarliestSingleCertainty": {
-                                        "optionnames": [
-                                            "Please select a value",
-                                            "Possibly",
-                                            "Circa",
-                                            "Probably",
-                                            "After",
-                                            "Approximate",
-                                            "Before"
-                                        ],
-                                        "optionlist": [
-                                            "",
-                                            "possibly",
-                                            "circa",
-                                            "probably",
-                                            "after",
-                                            "approximate",
-                                            "before"
-                                        ],
-                                        "selection": "${fields.objectProductionDate.dateEarliestSingleCertainty}"
-                                    },
-                                    "dateLatestEra": {
-                                        "optionnames": [
-                                            "Please select a value",
-                                            "CE",
-                                            "BCE"
-                                        ],
-                                        "optionlist": [
-                                            "",
-                                            "ce",
-                                            "bce"
-                                        ],
-                                        "selection": "${fields.objectProductionDate.dateLatestEra}"
-                                    },
-                                    "dateEarliestSingleQualifierValue": "${fields.objectProductionDate.dateEarliestSingleQualifierValue}",
-                                    "dateLatestCertainty": {
-                                        "optionnames": [
-                                            "Please select a value",
-                                            "Possibly",
-                                            "Circa",
-                                            "Probably",
-                                            "After",
-                                            "Approximate",
-                                            "Before"
-                                        ],
-                                        "optionlist": [
-                                            "",
-                                            "possibly",
-                                            "circa",
-                                            "probably",
-                                            "after",
-                                            "approximate",
-                                            "before"
-                                        ],
-                                        "selection": "${fields.objectProductionDate.dateLatestCertainty}"
-                                    },
-                                    "dateEarliestSingleYear": "${fields.objectProductionDate.dateEarliestSingleYear}",
-                                    "dateLatestQualifier": {
-                                        "optionnames": [
-                                            "+/-",
-                                            "+",
-                                            "-"
-                                        ],
-                                        "optionlist": [
-                                            "+/-",
-                                            "+",
-                                            "-"
-                                        ],
-                                        "selection": "${fields.objectProductionDate.dateLatestQualifier}"
-                                    },
-                                    "dateLatestQualifierValue": "${fields.objectProductionDate.dateLatestQualifierValue}",
-                                    "dateEarliestSingleQualifierUnit": {
-                                        "optionnames": [
-                                            "Please select a value",
-                                            "Day(s)",
-                                            "Month(s)",
-                                            "Year(s)"
-                                        ],
-                                        "optionlist": [
-                                            "",
-                                            "days",
-                                            "month",
-                                            "years"
-                                        ],
-                                        "selection": "${fields.objectProductionDate.dateEarliestSingleQualifierUnit}"
-                                    },
-                                    "datePeriod": "${fields.objectProductionDate.datePeriod}",
-                                    "dateLatestMonth": "${fields.objectProductionDate.dateLatestMonth}",
-                                    "dateNote": "${fields.objectProductionDate.dateNote}",
-                                    "dateLatestQualifierUnit": {
-                                        "optionnames": [
-                                            "Please select a value",
-                                            "Day(s)",
-                                            "Month(s)",
-                                            "Year(s)"
-                                        ],
-                                        "optionlist": [
-                                            "",
-                                            "days",
-                                            "month",
-                                            "years"
-                                        ],
-                                        "selection": "${fields.objectProductionDate.dateLatestQualifierUnit}"
-                                    },
-                                    "dateEarliestSingleDay": "${fields.objectProductionDate.dateEarliestSingleDay}",
-                                    "dateEarliestSingleMonth": "${fields.objectProductionDate.dateEarliestSingleMonth}"
-                                },
-                                "type": "fluid.noexpand"
-                            }
+                        "elPaths": {
+                            "dateEarliestSingleQualifier": "fields.objectProductionDate.dateEarliestSingleQualifier",
+                            "dateLatestDay": "fields.objectProductionDate.dateLatestDay",
+                            "dateLatestYear": "fields.objectProductionDate.dateLatestYear",
+                            "dateAssociation": "fields.objectProductionDate.dateAssociation",
+                            "dateEarliestSingleEra": "fields.objectProductionDate.dateEarliestSingleEra",
+                            "dateDisplayDate": "fields.objectProductionDate.dateDisplayDate",
+                            "dateEarliestSingleCertainty": "fields.objectProductionDate.dateEarliestSingleCertainty",
+                            "dateLatestEra": "fields.objectProductionDate.dateLatestEra",
+                            "dateEarliestSingleQualifierValue": "fields.objectProductionDate.dateEarliestSingleQualifierValue",
+                            "dateLatestCertainty": "fields.objectProductionDate.dateLatestCertainty",
+                            "dateEarliestSingleYear": "fields.objectProductionDate.dateEarliestSingleYear",
+                            "dateLatestQualifier": "fields.objectProductionDate.dateLatestQualifier",
+                            "dateLatestQualifierValue": "fields.objectProductionDate.dateLatestQualifierValue",
+                            "dateEarliestSingleQualifierUnit": "fields.objectProductionDate.dateEarliestSingleQualifierUnit",
+                            "datePeriod": "fields.objectProductionDate.datePeriod",
+                            "dateLatestMonth": "fields.objectProductionDate.dateLatestMonth",
+                            "dateNote": "fields.objectProductionDate.dateNote",
+                            "dateLatestQualifierUnit": "fields.objectProductionDate.dateLatestQualifierUnit",
+                            "dateEarliestSingleDay": "fields.objectProductionDate.dateEarliestSingleDay",
+                            "dateEarliestSingleMonth": "fields.objectProductionDate.dateEarliestSingleMonth"
                         }
                     }
                 }
@@ -2138,24 +1718,16 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.referenceGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-referenceNote": "${{row}.referenceNote}",
-                                            ".csc-collection-object-reference": "${{row}.reference}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.referenceGroup"
-                                    }
+                                    ".csc-collection-object-referenceNote": "${{row}.referenceNote}",
+                                    ".csc-collection-object-reference": "${{row}.reference}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.referenceGroup"
                     }
                 }
             ]
@@ -2172,25 +1744,17 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocObjectGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-assocObjectNote": "${{row}.assocObjectNote}",
-                                            ".csc-collection-object-assocObjectType": "${{row}.assocObjectType}",
-                                            ".csc-collection-object-assocObject": "${{row}.assocObject}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.assocObjectGroup"
-                                    }
+                                    ".csc-collection-object-assocObjectNote": "${{row}.assocObjectNote}",
+                                    ".csc-collection-object-assocObjectType": "${{row}.assocObjectType}",
+                                    ".csc-collection-object-assocObject": "${{row}.assocObject}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocObjectGroup"
                     }
                 }
             ]
@@ -2201,131 +1765,105 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.objectNameGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-identification-object-type": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Classified",
-                                                    "Denomination",
-                                                    "Simple",
-                                                    "Taxonomic",
-                                                    "Typological"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "classified",
-                                                    "denomination",
-                                                    "simple",
-                                                    "taxonomic",
-                                                    "typological"
-                                                ],
-                                                "selection": "${{row}.objectNameType}"
-                                            },
-                                            ".csc-object-identification-object-language": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Latin",
-                                                    "Middle English",
-                                                    "Old English",
-                                                    "Ancient Greek",
-                                                    "Korean",
-                                                    "Swahili",
-                                                    "Japanese",
-                                                    "Chinese",
-                                                    "Hebrew",
-                                                    "German",
-                                                    "Russian",
-                                                    "Arabic",
-                                                    "Portuguese",
-                                                    "Italian",
-                                                    "Spanish",
-                                                    "French",
-                                                    "English"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "latin",
-                                                    "middleenglish",
-                                                    "oldenglish",
-                                                    "ancientgreek",
-                                                    "korean",
-                                                    "swahili",
-                                                    "japanese",
-                                                    "chinese",
-                                                    "hebrew",
-                                                    "german",
-                                                    "russian",
-                                                    "arabic",
-                                                    "portuguese",
-                                                    "italian",
-                                                    "spn",
-                                                    "french",
-                                                    "eng"
-                                                ],
-                                                "selection": "${{row}.objectNameLanguage}"
-                                            },
-                                            ".csc-object-identification-object-level": {
-                                                "default": "",
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Group",
-                                                    "Subgroup"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "group",
-                                                    "subgroup"
-                                                ],
-                                                "selection": "${{row}.objectNameLevel}"
-                                            },
-                                            ".csc-object-identification-object-system": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Art & Architecture Thesaurus",
-                                                    "Nomenclature"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "art-and-architecture-thesaurus",
-                                                    "nomenclature"
-                                                ],
-                                                "selection": "${{row}.objectNameSystem}"
-                                            },
-                                            ".csc-object-identification-object-note": "${{row}.objectNameNote}",
-                                            ".csc-object-identification-object-currency": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Current",
-                                                    "Archaic"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "current",
-                                                    "archaic"
-                                                ],
-                                                "selection": "${{row}.objectNameCurrency}"
-                                            },
-                                            ".csc-object-identification-object-name": "${{row}.objectName}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.objectNameGroup"
-                                    }
+                                    ".csc-object-identification-object-type": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "Classified",
+                                            "Denomination",
+                                            "Simple",
+                                            "Taxonomic",
+                                            "Typological"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "classified",
+                                            "denomination",
+                                            "simple",
+                                            "taxonomic",
+                                            "typological"
+                                        ],
+                                        "selection": "${{row}.objectNameType}"
+                                    },
+                                    ".csc-object-identification-object-language": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.termList",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "root": "{row}",
+                                                    "elPath": "objectNameLanguage",
+                                                    "termListType": "objectNameLanguage"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    ".csc-object-identification-object-level": {
+                                        "default": "",
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "Group",
+                                            "Subgroup"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "group",
+                                            "subgroup"
+                                        ],
+                                        "selection": "${{row}.objectNameLevel}"
+                                    },
+                                    ".csc-object-identification-object-system": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "Art & Architecture Thesaurus",
+                                            "Nomenclature"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "art-and-architecture-thesaurus",
+                                            "nomenclature"
+                                        ],
+                                        "selection": "${{row}.objectNameSystem}"
+                                    },
+                                    ".csc-object-identification-object-note": "${{row}.objectNameNote}",
+                                    ".csc-object-identification-object-currency": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "Current",
+                                            "Archaic"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "current",
+                                            "archaic"
+                                        ],
+                                        "selection": "${{row}.objectNameCurrency}"
+                                    },
+                                    ".csc-object-identification-object-name": "${{row}.objectName}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.objectNameGroup"
                     }
                 }
             ]
         },
-        ".csc-object-description-age": "${fields.age}",
+        ".csc-object-description-age": {
+            "decorators": [
+                {
+                    "func": "cspace.inputValidator",
+                    "type": "fluid",
+                    "options": {
+                        "label": "collection-object-ageLabel",
+                        "type": "integer"
+                    }
+                }
+            ],
+            "value": "${fields.age}"
+        },
         ".csc-collection-object-numberType-label": {
             "messagekey": "collection-object-numberTypeLabel"
         },
@@ -2387,25 +1925,17 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocCulturalContextGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-assocCulturalContext": "${{row}.assocCulturalContext}",
-                                            ".csc-collection-object-assocCulturalContextNote": "${{row}.assocCulturalContextNote}",
-                                            ".csc-collection-object-assocCulturalContextType": "${{row}.assocCulturalContextType}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.assocCulturalContextGroup"
-                                    }
+                                    ".csc-collection-object-assocCulturalContext": "${{row}.assocCulturalContext}",
+                                    ".csc-collection-object-assocCulturalContextNote": "${{row}.assocCulturalContextNote}",
+                                    ".csc-collection-object-assocCulturalContextType": "${{row}.assocCulturalContextType}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocCulturalContextGroup"
                     }
                 }
             ]
@@ -2475,37 +2005,29 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocOrganizationGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-assocOrganizationType": "${{row}.assocOrganizationType}",
-                                            ".csc-collection-object-assocOrganizationNote": "${{row}.assocOrganizationNote}",
-                                            ".csc-collection-object-assocOrganization": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.autocomplete",
-                                                        "type": "fluid",
-                                                        "options": {
-                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/assocOrganization",
-                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/assocOrganization"
-                                                        }
-                                                    }
-                                                ],
-                                                "value": "${{row}.assocOrganization}"
+                                    ".csc-collection-object-assocOrganizationType": "${{row}.assocOrganizationType}",
+                                    ".csc-collection-object-assocOrganizationNote": "${{row}.assocOrganizationNote}",
+                                    ".csc-collection-object-assocOrganization": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/cataloging/autocomplete/assocOrganization",
+                                                    "vocabUrl": "../../../tenant/core/cataloging/source-vocab/assocOrganization"
+                                                }
                                             }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.assocOrganizationGroup"
+                                        ],
+                                        "value": "${{row}.assocOrganization}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocOrganizationGroup"
                     }
                 }
             ]
@@ -2549,35 +2071,27 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.fieldCollectors",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-fieldCollector": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.autocomplete",
-                                                        "type": "fluid",
-                                                        "options": {
-                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/fieldCollector",
-                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/fieldCollector"
-                                                        }
-                                                    }
-                                                ],
-                                                "value": "${{row}.fieldCollector}"
+                                    ".csc-collection-object-fieldCollector": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/cataloging/autocomplete/fieldCollector",
+                                                    "vocabUrl": "../../../tenant/core/cataloging/source-vocab/fieldCollector"
+                                                }
                                             }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.fieldCollectors"
+                                        ],
+                                        "value": "${{row}.fieldCollector}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.fieldCollectors"
                     }
                 }
             ]
@@ -2629,23 +2143,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentPeoples",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-content-people": "${{row}.contentPeople}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.contentPeoples"
-                                    }
+                                    ".csc-object-description-content-people": "${{row}.contentPeople}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentPeoples"
                     }
                 }
             ]
@@ -2665,35 +2171,27 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocEventOrganizations",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-history-association-event-organization": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.autocomplete",
-                                                        "type": "fluid",
-                                                        "options": {
-                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/assocEventOrganization",
-                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/assocEventOrganization"
-                                                        }
-                                                    }
-                                                ],
-                                                "value": "${{row}.assocEventOrganization}"
+                                    ".csc-object-history-association-event-organization": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/cataloging/autocomplete/assocEventOrganization",
+                                                    "vocabUrl": "../../../tenant/core/cataloging/source-vocab/assocEventOrganization"
+                                                }
                                             }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.assocEventOrganizations"
+                                        ],
+                                        "value": "${{row}.assocEventOrganization}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocEventOrganizations"
                     }
                 }
             ]
@@ -2707,35 +2205,27 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentOrganizations",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-content-organization": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.autocomplete",
-                                                        "type": "fluid",
-                                                        "options": {
-                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/contentOrganization",
-                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/contentOrganization"
-                                                        }
-                                                    }
-                                                ],
-                                                "value": "${{row}.contentOrganization}"
+                                    ".csc-object-description-content-organization": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/cataloging/autocomplete/contentOrganization",
+                                                    "vocabUrl": "../../../tenant/core/cataloging/source-vocab/contentOrganization"
+                                                }
                                             }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.contentOrganizations"
+                                        ],
+                                        "value": "${{row}.contentOrganization}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentOrganizations"
                     }
                 }
             ]
@@ -2755,42 +2245,34 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.otherNumber",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-identification-other-number-type": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Lender",
-                                                    "Obsolete",
-                                                    "Previous",
-                                                    "Serial",
-                                                    "Unknown"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "lender",
-                                                    "obsolete",
-                                                    "previous",
-                                                    "serial",
-                                                    "unknown"
-                                                ],
-                                                "selection": "${{row}.numberType}"
-                                            },
-                                            ".csc-object-identification-other-number": "${{row}.numberValue}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.otherNumber"
-                                    }
+                                    ".csc-object-identification-other-number-type": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "Lender",
+                                            "Obsolete",
+                                            "Previous",
+                                            "Serial",
+                                            "Unknown"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "lender",
+                                            "obsolete",
+                                            "previous",
+                                            "serial",
+                                            "unknown"
+                                        ],
+                                        "selection": "${{row}.numberType}"
+                                    },
+                                    ".csc-object-identification-other-number": "${{row}.numberValue}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.otherNumber"
                     }
                 }
             ]
@@ -2804,23 +2286,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentConcepts",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-content-concept": "${{row}.contentConcept}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.contentConcepts"
-                                    }
+                                    ".csc-object-description-content-concept": "${{row}.contentConcept}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentConcepts"
                     }
                 }
             ]
@@ -2841,65 +2315,27 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentLanguages",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-content-language": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Latin",
-                                                    "Middle English",
-                                                    "Old English",
-                                                    "Ancient Greek",
-                                                    "Korean",
-                                                    "Swahili",
-                                                    "Japanese",
-                                                    "Chinese",
-                                                    "Hebrew",
-                                                    "German",
-                                                    "Russian",
-                                                    "Arabic",
-                                                    "Portuguese",
-                                                    "Italian",
-                                                    "Spanish",
-                                                    "French",
-                                                    "English"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "latin",
-                                                    "middleenglish",
-                                                    "oldenglish",
-                                                    "ancientgreek",
-                                                    "korean",
-                                                    "swahili",
-                                                    "japanese",
-                                                    "chinese",
-                                                    "hebrew",
-                                                    "german",
-                                                    "russian",
-                                                    "arabic",
-                                                    "portuguese",
-                                                    "italian",
-                                                    "spn",
-                                                    "french",
-                                                    "eng"
-                                                ],
-                                                "selection": "${{row}.contentLanguage}"
+                                    ".csc-object-description-content-language": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.termList",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "root": "{row}",
+                                                    "elPath": "contentLanguage",
+                                                    "termListType": "contentLanguage"
+                                                }
                                             }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.contentLanguages"
+                                        ]
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentLanguages"
                     }
                 }
             ]
@@ -2922,66 +2358,70 @@
         ".csc-collection-object-inscriptionContentScript-label": {
             "messagekey": "collection-object-inscriptionContentScriptLabel"
         },
-        ".csc-object-identification-number-objects": "${fields.numberOfObjects}",
+        ".csc-object-identification-number-objects": {
+            "decorators": [
+                {
+                    "func": "cspace.inputValidator",
+                    "type": "fluid",
+                    "options": {
+                        "label": "collection-object-numberOfObjectsLabel",
+                        "type": "integer"
+                    }
+                }
+            ],
+            "value": "${fields.numberOfObjects}"
+        },
         ".csc-collection-object-technicalAttributeGroup": {
             "decorators": [
                 {
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.technicalAttributeGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-technical-attribute-measurement": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "metal",
-                                                    "78"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "metal",
-                                                    "78"
-                                                ],
-                                                "selection": "${{row}.technicalAttributeMeasurement}"
-                                            },
-                                            ".csc-object-description-technical-attribute-unit": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "rpm"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "rpm"
-                                                ],
-                                                "selection": "${{row}.technicalAttributeMeasurementUnit}"
-                                            },
-                                            ".csc-object-description-technical-attribute": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "magnetic tape type",
-                                                    "record speed"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "magnetic-tape-type",
-                                                    "record-speed"
-                                                ],
-                                                "selection": "${{row}.technicalAttribute}"
-                                            }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.technicalAttributeGroup"
+                                    ".csc-object-description-technical-attribute-measurement": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "metal",
+                                            "78"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "metal",
+                                            "78"
+                                        ],
+                                        "selection": "${{row}.technicalAttributeMeasurement}"
+                                    },
+                                    ".csc-object-description-technical-attribute-unit": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "rpm"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "rpm"
+                                        ],
+                                        "selection": "${{row}.technicalAttributeMeasurementUnit}"
+                                    },
+                                    ".csc-object-description-technical-attribute": {
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "magnetic tape type",
+                                            "record speed"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "magnetic-tape-type",
+                                            "record-speed"
+                                        ],
+                                        "selection": "${{row}.technicalAttribute}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.technicalAttributeGroup"
                     }
                 }
             ]
@@ -3018,27 +2458,16 @@
             "messagekey": "collection-object-contentObjectTypeLabel"
         },
         ".csc-object-history-association-denomination": {
-            "optionnames": [
-                "Please select a value",
-                "Swiss Franc",
-                "Swedish Krona",
-                "Danish Krone",
-                "Pound Sterling",
-                "Euro",
-                "US Dollar",
-                "Canadian Dollar"
-            ],
-            "optionlist": [
-                "",
-                "swissfranc",
-                "swedishkrona",
-                "danishkrone",
-                "gbp",
-                "eur",
-                "usd",
-                "canadiandollar"
-            ],
-            "selection": "${fields.ownershipExchangePriceCurrency}"
+            "decorators": [
+                {
+                    "func": "cspace.termList",
+                    "type": "fluid",
+                    "options": {
+                        "elPath": "fields.ownershipExchangePriceCurrency",
+                        "termListType": "ownershipExchangePriceCurrency"
+                    }
+                }
+            ]
         },
         ".csc-collection-object-objectProductionPlaceGroup": {
             "decorators": [
@@ -3046,24 +2475,16 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.objectProductionPlaceGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-production-place": "${{row}.objectProductionPlace}",
-                                            ".csc-collection-object-objectProductionPlaceRole": "${{row}.objectProductionPlaceRole}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.objectProductionPlaceGroup"
-                                    }
+                                    ".csc-object-production-place": "${{row}.objectProductionPlace}",
+                                    ".csc-collection-object-objectProductionPlaceRole": "${{row}.objectProductionPlaceRole}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.objectProductionPlaceGroup"
                     }
                 }
             ]
@@ -3104,30 +2525,25 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.objectProductionPeopleGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-objectProductionPeopleRole": "${{row}.objectProductionPeopleRole}",
-                                            ".csc-object-production-people": "${{row}.objectProductionPeople}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.objectProductionPeopleGroup"
-                                    }
+                                    ".csc-collection-object-objectProductionPeopleRole": "${{row}.objectProductionPeopleRole}",
+                                    ".csc-object-production-people": "${{row}.objectProductionPeople}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.objectProductionPeopleGroup"
                     }
                 }
             ]
         },
         ".csc-collection-object-assocActivityGroup-label": {
             "messagekey": "collection-object-assocActivityGroupLabel"
+        },
+        ".csc-collection-object-createdBy-label": {
+            "messagekey": "collection-object-createdByLabel"
         },
         ".csc-date-information-date-latest-certainty": "${fields.dateLatestCertainty}",
         ".csc-collection-object-contentConcepts-label": {
@@ -3190,7 +2606,19 @@
         ".csc-collection-object-assocPersonGroup-label": {
             "messagekey": "collection-object-assocPersonGroupLabel"
         },
-        ".csc-object-history-association-exchange-price-value": "${fields.ownershipExchangePriceValue}",
+        ".csc-object-history-association-exchange-price-value": {
+            "decorators": [
+                {
+                    "func": "cspace.inputValidator",
+                    "type": "fluid",
+                    "options": {
+                        "label": "collection-object-ownershipExchangePriceValueLabel",
+                        "type": "float"
+                    }
+                }
+            ],
+            "value": "${fields.ownershipExchangePriceValue}"
+        },
         ".csc-collection-object-inscriptionContentType-label": {
             "messagekey": "collection-object-inscriptionContentTypeLabel"
         },
@@ -3207,57 +2635,32 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.fieldCollectionMethods",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-fieldCollectionMethod": {
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "trapped",
-                                                    "purchased",
-                                                    "shot",
-                                                    "salvaged",
-                                                    "netted",
-                                                    "photographed",
-                                                    "metal detector",
-                                                    "found dead",
-                                                    "commissioned",
-                                                    "exchanged",
-                                                    "borehole"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "trapped",
-                                                    "purchased",
-                                                    "shot",
-                                                    "salvaged",
-                                                    "netted",
-                                                    "photographed",
-                                                    "metaldetector",
-                                                    "founddead",
-                                                    "commissioned",
-                                                    "exchanged",
-                                                    "borehole"
-                                                ],
-                                                "selection": "${{row}.fieldCollectionMethod}"
+                                    ".csc-collection-object-fieldCollectionMethod": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.termList",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "root": "{row}",
+                                                    "elPath": "fieldCollectionMethod",
+                                                    "termListType": "fieldCollectionMethod"
+                                                }
                                             }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.fieldCollectionMethods"
+                                        ]
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.fieldCollectionMethods"
                     }
                 }
             ]
         },
+        ".csc-collection-object-updatedBy": "${fields.updatedBy}",
         ".csc-collection-object-ownershipExchangeMethod-label": {
             "messagekey": "collection-object-ownershipExchangeMethodLabel"
         },
@@ -3267,23 +2670,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.fieldColEventNames",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-fieldColEventName": "${{row}.fieldColEventName}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.fieldColEventNames"
-                                    }
+                                    ".csc-collection-object-fieldColEventName": "${{row}.fieldColEventName}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.fieldColEventNames"
                     }
                 }
             ]
@@ -3304,23 +2699,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.styles",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-style": "${{row}.style}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.styles"
-                                    }
+                                    ".csc-object-description-style": "${{row}.style}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.styles"
                     }
                 }
             ]
@@ -3340,35 +2727,27 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.contentPersons",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-description-content-person": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.autocomplete",
-                                                        "type": "fluid",
-                                                        "options": {
-                                                            "queryUrl": "../../../tenant/core/cataloging/autocomplete/contentPerson",
-                                                            "vocabUrl": "../../../tenant/core/cataloging/source-vocab/contentPerson"
-                                                        }
-                                                    }
-                                                ],
-                                                "value": "${{row}.contentPerson}"
+                                    ".csc-object-description-content-person": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.autocomplete",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "queryUrl": "../../../tenant/core/cataloging/autocomplete/contentPerson",
+                                                    "vocabUrl": "../../../tenant/core/cataloging/source-vocab/contentPerson"
+                                                }
                                             }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.contentPersons"
+                                        ],
+                                        "value": "${{row}.contentPerson}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.contentPersons"
                     }
                 }
             ]
@@ -3394,25 +2773,17 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocActivityGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-assocActivity": "${{row}.assocActivity}",
-                                            ".csc-collection-object-assocActivityNote": "${{row}.assocActivityNote}",
-                                            ".csc-collection-object-assocActivityType": "${{row}.assocActivityType}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.assocActivityGroup"
-                                    }
+                                    ".csc-collection-object-assocActivity": "${{row}.assocActivity}",
+                                    ".csc-collection-object-assocActivityNote": "${{row}.assocActivityNote}",
+                                    ".csc-collection-object-assocActivityType": "${{row}.assocActivityType}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocActivityGroup"
                     }
                 }
             ]
@@ -3423,23 +2794,15 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.comments",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-object-identification-comments": "${{row}.comment}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.comments"
-                                    }
+                                    ".csc-object-identification-comments": "${{row}.comment}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.comments"
                     }
                 }
             ]
@@ -3457,39 +2820,37 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocDateGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-assocDateNote": "${{row}.assocDateNote}",
-                                            ".csc-object-history-association-assocDate": {
-                                                "decorators": [
-                                                    {
-                                                        "func": "cspace.datePicker",
-                                                        "type": "fluid"
-                                                    }
-                                                ],
-                                                "value": "${{row}.assocDate}"
-                                            },
-                                            ".csc-collection-object-assocDateType": "${{row}.assocDateType}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.assocDateGroup"
-                                    }
+                                    ".csc-collection-object-assocDateNote": "${{row}.assocDateNote}",
+                                    ".csc-object-history-association-assocDate": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.datePicker",
+                                                "type": "fluid"
+                                            }
+                                        ],
+                                        "value": "${{row}.assocDate}"
+                                    },
+                                    ".csc-collection-object-assocDateType": "${{row}.assocDateType}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocDateGroup"
                     }
                 }
             ]
         },
         ".csc-collection-object-materialSource-label": {
             "messagekey": "collection-object-materialSourceLabel"
+        },
+        ".csc-collection-object-updatedBy-label": {
+            "messagekey": "collection-object-updatedByLabel"
+        },
+        ".csc-collection-object-domaindata-label": {
+            "messagekey": "collection-object-domaindataLabel"
         },
         ".csc-collection-object-materialName-label": {
             "messagekey": "collection-object-materialNameLabel"
@@ -3544,7 +2905,15 @@
         ".csc-collection-object-dateEarliestSingleCertainty-label": {
             "messagekey": "collection-object-dateEarliestSingleCertaintyLabel"
         },
-        ".csc-collection-object-updatedAt": "${fields.updatedAt}",
+        ".csc-collection-object-updatedAt": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ],
+            "value": "${fields.updatedAt}"
+        },
         ".csc-collection-object-referenceInformation-label": {
             "messagekey": "collection-object-referenceInformationLabel"
         },
@@ -3591,25 +2960,17 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.assocPlaceGroup",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-collection-object-assocPlaceNote": "${{row}.assocPlaceNote}",
-                                            ".csc-collection-object-assocPlaceType": "${{row}.assocPlaceType}",
-                                            ".csc-collection-object-assocPlace": "${{row}.assocPlace}"
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.assocPlaceGroup"
-                                    }
+                                    ".csc-collection-object-assocPlaceNote": "${{row}.assocPlaceNote}",
+                                    ".csc-collection-object-assocPlaceType": "${{row}.assocPlaceType}",
+                                    ".csc-collection-object-assocPlace": "${{row}.assocPlace}"
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.assocPlaceGroup"
                     }
                 }
             ]

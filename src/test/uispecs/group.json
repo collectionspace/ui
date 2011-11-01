@@ -1,20 +1,27 @@
 {
     "recordEditor": {
+        ".csc-group-domaindata-label": {
+            "messagekey": "group-domaindataLabel"
+        },
         ".csc-group-title-label": {
             "messagekey": "group-titleLabel"
         },
+        ".csc-group-createdBy": "${fields.createdBy}",
         ".csc-group-owner": {
             "decorators": [
                 {
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../chain/group/autocomplete/owner",
-                        "vocabUrl": "../../chain/group/source-vocab/owner"
+                        "queryUrl": "../../../tenant/core/group/autocomplete/owner",
+                        "vocabUrl": "../../../tenant/core/group/source-vocab/owner"
                     }
                 }
             ],
             "value": "${fields.owner}"
+        },
+        ".csc-group-createdBy-label": {
+            "messagekey": "group-createdByLabel"
         },
         ".csc-group-responsibleDepartment-label": {
             "messagekey": "group-responsibleDepartmentLabel"
@@ -59,11 +66,23 @@
         ".csc-group-number-label": {
             "messagekey": "group-numberLabel"
         },
-        ".csc-group-updatedAt": "${fields.updatedAt}",
+        ".csc-group-updatedAt": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ],
+            "value": "${fields.updatedAt}"
+        },
         ".csc-group-scopeNote-label": {
             "messagekey": "group-scopeNoteLabel"
         },
+        ".csc-group-updatedBy": "${fields.updatedBy}",
         ".csc-group-title": "${fields.title}",
+        ".csc-group-updatedBy-label": {
+            "messagekey": "group-updatedByLabel"
+        },
         ".csc-group-updatedAt-label": {
             "messagekey": "group-updatedAtLabel"
         },
@@ -71,11 +90,11 @@
         ".csc-group-owner-label": {
             "messagekey": "group-ownerLabel"
         },
-        ".csc-group-groupInformation-label": {
-            "messagekey": "group-groupInformationLabel"
-        },
         ".csc-group-tenantID-label": {
             "messagekey": "group-tenantIDLabel"
+        },
+        ".csc-group-groupInformation-label": {
+            "messagekey": "group-groupInformationLabel"
         }
     }
 }

@@ -53,8 +53,8 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../tenant/html/movement/autocomplete/movementContact",
-                        "vocabUrl": "../../tenant/html/movement/source-vocab/movementContact"
+                        "queryUrl": "../../../tenant/core/movement/autocomplete/movementContact",
+                        "vocabUrl": "../../../tenant/core/movement/source-vocab/movementContact"
                     }
                 }
             ],
@@ -63,11 +63,17 @@
         ".csc-movement-currentLocationHeader-label": {
             "messagekey": "movement-currentLocationHeaderLabel"
         },
+        ".csc-movement-createdBy-label": {
+            "messagekey": "movement-createdByLabel"
+        },
         ".csc-movement-reasonForMove-label": {
             "messagekey": "movement-reasonForMoveLabel"
         },
         ".csc-movement-summary-label": {
             "messagekey": "movement-summaryLabel"
+        },
+        ".csc-movement-number-label": {
+            "messagekey": "movement-numberLabel"
         },
         ".csc-movement-movementMethods": {
             "decorators": [
@@ -75,38 +81,30 @@
                     "func": "cspace.makeRepeatable",
                     "type": "fluid",
                     "options": {
-                        "elPath": "fields.movementMethods",
-                        "protoTree": {
+                        "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    "expander": {
-                                        "repeatID": "repeat:",
-                                        "tree": {
-                                            ".csc-movement-movementMethods": {
-                                                "default": "",
-                                                "optionnames": [
-                                                    "Please select a value",
-                                                    "Forklift",
-                                                    "Handcarried",
-                                                    "Trolley"
-                                                ],
-                                                "optionlist": [
-                                                    "",
-                                                    "forklift",
-                                                    "handcarried",
-                                                    "trolley"
-                                                ],
-                                                "selection": "${{row}.movementMethod}"
-                                            }
-                                        },
-                                        "type": "fluid.renderer.repeat",
-                                        "pathAs": "row",
-                                        "controlledBy": "fields.movementMethods"
+                                    ".csc-movement-movementMethods": {
+                                        "default": "",
+                                        "optionnames": [
+                                            "Please select a value",
+                                            "Forklift",
+                                            "Handcarried",
+                                            "Trolley"
+                                        ],
+                                        "optionlist": [
+                                            "",
+                                            "forklift",
+                                            "handcarried",
+                                            "trolley"
+                                        ],
+                                        "selection": "${{row}.movementMethod}"
                                     }
                                 },
                                 "type": "fluid.noexpand"
                             }
-                        }
+                        },
+                        "elPath": "fields.movementMethods"
                     }
                 }
             ]
@@ -117,21 +115,27 @@
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../tenant/html/movement/autocomplete/normalLocation",
-                        "vocabUrl": "../../tenant/html/movement/source-vocab/normalLocation"
+                        "queryUrl": "../../../tenant/core/movement/autocomplete/normalLocation",
+                        "vocabUrl": "../../../tenant/core/movement/source-vocab/normalLocation"
                     }
                 }
             ],
             "value": "${fields.normalLocation}"
         },
-        ".csc-movement-number-label": {
-            "messagekey": "movement-numberLabel"
-        },
         ".csc-movement-currentLocationNote": "${fields.currentLocationNote}",
+        ".csc-movement-createdBy": "${fields.createdBy}",
         ".csc-movement-currentLocation-label": {
             "messagekey": "movement-currentLocationLabel"
         },
-        ".csc-movement-updatedAt": "${fields.updatedAt}",
+        ".csc-movement-updatedAt": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ],
+            "value": "${fields.updatedAt}"
+        },
         ".csc-movement-currentLocationFitness-label": {
             "messagekey": "movement-currentLocationFitnessLabel"
         },
@@ -153,14 +157,17 @@
         ".csc-movement-movementNote-label": {
             "messagekey": "movement-movementNoteLabel"
         },
+        ".csc-movement-domaindata-label": {
+            "messagekey": "movement-domaindataLabel"
+        },
         ".csc-movement-currentLocation": {
             "decorators": [
                 {
                     "func": "cspace.autocomplete",
                     "type": "fluid",
                     "options": {
-                        "queryUrl": "../../tenant/html/movement/autocomplete/currentLocation",
-                        "vocabUrl": "../../tenant/html/movement/source-vocab/currentLocation"
+                        "queryUrl": "../../../tenant/core/movement/autocomplete/currentLocation",
+                        "vocabUrl": "../../../tenant/core/movement/source-vocab/currentLocation"
                     }
                 }
             ],
@@ -202,6 +209,9 @@
         ".csc-movement-locationMovementInformation-label": {
             "messagekey": "movement-locationMovementInformationLabel"
         },
+        ".csc-movement-updatedBy-label": {
+            "messagekey": "movement-updatedByLabel"
+        },
         ".csc-movement-updatedAt-label": {
             "messagekey": "movement-updatedAtLabel"
         },
@@ -242,6 +252,7 @@
         },
         ".csc-movement-movementMethods-label": {
             "messagekey": "movement-movementMethodsLabel"
-        }
+        },
+        ".csc-movement-updatedBy": "${fields.updatedBy}"
     }
 }
