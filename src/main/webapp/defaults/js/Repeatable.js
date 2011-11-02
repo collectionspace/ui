@@ -332,15 +332,13 @@ cspace = cspace || {};
         var offset = target.offset();
         button = button[0];
         target = target[0];
-        // TODO: Do something when the offset parent is null
         var offsetParent = button.offsetParent;
         if (!offsetParent) {
+            // Button is display=none, do not position.
             return;
         }
-        var poffset = $(offsetParent).offset();			
-        var tleft = offset.left - poffset.left;
-		var foo = tleft + target.offsetWidth - button.offsetWidth;
-        $(button).css("left", tleft - button.offsetWidth + "px");
+        var tleft = offset.left - $(offsetParent).offset().left;
+        $(button).css("left", (tleft - button.offsetWidth) / offsetParent.offsetWidth * 100 + "%");
     };
     
     cspace.repeatableImpl.processDeleteInput = function (inputs, fetchModel) {
