@@ -69,6 +69,16 @@ var termListTester = function ($) {
             elPath: elPath
         });
     });
+    
+    termListTest.asyncTest("Read Only", function () {
+        var elPath = "test";
+        setupTermList(function (termList, termListImpl) {
+            jqUnit.assertTrue("The drop down should be disabled", termListImpl.locate("termList").is(":disabled"));
+        }, {
+            elPath: elPath,
+            readOnly: true
+        });
+    });
 };
 
 (function () {

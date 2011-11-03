@@ -217,6 +217,9 @@
         ".csc-collection-object-dateLatestQualifier-label": {
             "messagekey": "collection-object-dateLatestQualifierLabel"
         },
+        ".csc-collection-object-titleTranslationSubGroup-label": {
+            "messagekey": "collection-object-titleTranslationSubGroupLabel"
+        },
         ".csc-collection-object-titleGroup": {
             "decorators": [
                 {
@@ -226,20 +229,37 @@
                         "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    ".csc-collection-object-titleTranslationLanguage": {
-                                        "decorators": [
-                                            {
-                                                "func": "cspace.termList",
-                                                "type": "fluid",
-                                                "options": {
-                                                    "root": "{row}",
-                                                    "elPath": "titleTranslationLanguage",
-                                                    "termListType": "titleTranslationLanguage"
+                                    ".csc-collection-object-titleTranslationSubGroup": {
+                                        "decorators": [{
+                                            "func": "cspace.makeRepeatable",
+                                            "type": "fluid",
+                                            "options": {
+                                                "elPath": "titleTranslationSubGroup",
+                                                "root": "{row}",
+                                                "repeatTree": {
+                                                    "expander": {
+                                                        "tree": {
+                                                            ".csc-collection-object-titleTranslationLanguage": {
+                                                                "decorators": [
+                                                                    {
+                                                                        "func": "cspace.termList",
+                                                                        "type": "fluid",
+                                                                        "options": {
+                                                                            "root": "{row}",
+                                                                            "elPath": "titleTranslationLanguage",
+                                                                            "termListType": "titleTranslationLanguage"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            ".csc-object-identification-object-title-translation": "${{row}.titleTranslation}"
+                                                        },
+                                                        "type": "fluid.noexpand"
+                                                    }
                                                 }
                                             }
-                                        ]
+                                        }]
                                     },
-                                    ".csc-object-identification-object-title-translation": "${{row}.titleTranslation}",
                                     ".csc-object-identification-object-title": "${{row}.title}",
                                     ".csc-object-identification-object-title-type": {
                                         "optionnames": [

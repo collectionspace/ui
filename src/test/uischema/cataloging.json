@@ -946,15 +946,23 @@
                                 "title": {
                                     "type": "string"
                                 },
-                                "titleTranslationLanguage": {
-                                    "default": "eng",
-                                    "type": "string"
+                                "titleTranslationSubGroup": {
+                                    "items": {
+                                        "properties": {
+                                            "titleTranslationLanguage": {
+                                                "default": "eng",
+                                                "type": "string"
+                                            },
+                                            "titleTranslation": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
                                 },
                                 "titleType": {
                                     "default": "",
-                                    "type": "string"
-                                },
-                                "titleTranslation": {
                                     "type": "string"
                                 },
                                 "titleLanguage": {

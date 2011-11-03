@@ -68,15 +68,26 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         recordEditor: {
                             options: {
                                 listeners: {
-                                    afterRender: function () {
-                                        jqUnit.assertTrue("Group field is repeatable", $(".csc-organizationAuthority-group").parent().hasClass("csc-repeatable-repeat"));
-                                        jqUnit.assertTrue("Function field is repeatable", $(".csc-organizationAuthority-function").parent().hasClass("csc-repeatable-repeat"));
-                                        jqUnit.assertTrue("History field is repeatable", $(".csc-organizationAuthority-history").parent().hasClass("csc-repeatable-repeat"));
-        
-                                        // authority fields are inside a container, and so we must check the grandparent for the repeatability indicator
-                                        jqUnit.assertTrue("Contact Name field is repeatable", $(".csc-organizationAuthority-contactName").parent().hasClass("csc-repeatable-repeat"));
-                                        jqUnit.assertTrue("Sub-body field is repeatable", $(".csc-organizationAuthority-subBodyName").parent().hasClass("csc-repeatable-repeat"));
-        
+                                    afterRender: function (recordEditor) {
+                                        var repeatableField = [
+                                            "organizationAuthority-group",
+                                            "organizationAuthority-function",
+                                            "organizationAuthority-history",
+                                            "organizationAuthority-contactName",
+                                            "organizationAuthority-subBodyName"
+                                        ];
+                                        fluid.each(repeatableField, function (repeatableName) {
+                                            var found = fluid.find(recordEditor, function (property, name) {
+                                                if (name.indexOf(repeatableName) > -1) {
+                                                    return property;
+                                                }
+                                            });
+                                            if (!found) {
+                                                ok(false, "Repeatable " + repeatableName + " not found");
+                                                return;
+                                            }
+                                            jqUnit.assertEquals("Type of renderer decorator subcomponent " + repeatableName + " is ", "cspace.makeRepeatable", found.typeName);
+                                        });
                                         start();
                                     }
                                 }

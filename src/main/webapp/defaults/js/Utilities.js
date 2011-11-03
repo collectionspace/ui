@@ -793,6 +793,10 @@ fluid.registerNamespace("cspace.util");
                         }
                     }]
                 };
+            } else if (isDecorator(val, "cspace.termList")) {
+                var decorator = val.decorators[0];
+                decorator.options.readOnly = true;
+                newspec[key] = val;
             } else if (isDecorator(val, "cspace.autocomplete")) {
                 newspec[key] = {
                     value: val.value,
@@ -811,18 +815,11 @@ fluid.registerNamespace("cspace.util");
                         options: {
                             disablePrimary: true,
                             elPath: opts.elPath,
-                            protoTree: {
+                            root: opts.root,
+                            repeatTree: {
                                 expander: {
-                                    tree: {
-                                        expander: {
-                                            repeatID: opts.protoTree.expander.tree.expander.repeatID,
-                                            tree: resolveReadOnlyUISpecImpl(opts.protoTree.expander.tree.expander.tree),
-                                            type: opts.protoTree.expander.tree.expander.type,
-                                            pathAs: opts.protoTree.expander.tree.expander.pathAs,
-                                            controlledBy: opts.protoTree.expander.tree.expander.controlledBy
-                                        }
-                                    },
-                                    type: opts.protoTree.expander.type
+                                    tree: resolveReadOnlyUISpecImpl(opts.repeatTree.expander.tree),
+                                    type: opts.repeatTree.expander.type
                                 }
                             }
                         }
