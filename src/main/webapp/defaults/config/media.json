@@ -82,7 +82,7 @@
             ],
             "pageSpec": {
                 "recordEditor": {
-                    "href": "%readonlypages/MediaTemplate.html",
+                    "href": "pages/MediaTemplate.html",
                     "templateSelector": ".csc-media-template",
                     "targetSelector": ".csc-record-edit-container"
                 }

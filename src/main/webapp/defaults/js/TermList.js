@@ -32,7 +32,6 @@ cspace = cspace || {};
                     root: "{termList}.options.root",
                     model: "{termList}.model",
                     applier: "{termList}.applier",
-                    readOnly: "{termList}.options.readOnly", 
                     events: {
                         afterRender: "{termList}.events.afterRender"
                     }
@@ -54,7 +53,6 @@ cspace = cspace || {};
             afterFetch: null,
             afterRender: null
         },
-        readOnly: false,
         postInitFunction: "cspace.termList.postInit",
         finalInitFunction: "cspace.termList.finalInit"
     });
@@ -101,27 +99,11 @@ cspace = cspace || {};
     });
 
     cspace.termList.impl.produceTree = function (that) {
-        var fullPath = fluid.model.composeSegments.apply(null, that.options.root ? [that.options.root, that.options.elPath] : [that.options.elPath]);
-        if (that.options.readOnly) {
-            var val = that.options.optionnames[$.inArray(fluid.get(that.model, fullPath), that.options.optionlist)];
-            return {
-                termList: {
-                    decorators: {
-                        type: "jQuery",
-                        func: "prop",
-                        args: {
-                            disabled: true
-                        }
-                    },
-                    value: val
-                }
-            };
-        }
         return {
             termList: {
                 optionlist: that.options.optionlist,
                 optionnames: that.options.optionnames,
-                selection: "${" + fullPath + "}"
+                selection: "${" + fluid.model.composeSegments.apply(null, that.options.root ? [that.options.root, that.options.elPath] : [that.options.elPath]) + "}"
             }
         };
     };

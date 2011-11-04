@@ -57,7 +57,7 @@
             ],
             "pageSpec": {
                 "recordEditor": {
-                    "href": "%readonlypages/AcquisitionTemplate.html",
+                    "href": "pages/AcquisitionTemplate.html",
                     "templateSelector": ".csc-acquisition-template",
                     "targetSelector": ".csc-record-edit-container" 
                 }

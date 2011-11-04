@@ -10,7 +10,7 @@
             ],
             "pageSpec": {
                 "details": {
-                    "href": "%readonlypages/MovementTemplate.html",
+                    "href": "pages/MovementTemplate.html",
                     "templateSelector": ".csc-movement-template",
                     "targetSelector": ".csc-relatedRecordsTab-movement .csc-relatedRecordsTab-recordEditor"
                 } 

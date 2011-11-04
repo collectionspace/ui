@@ -10,7 +10,7 @@
             ],
             "pageSpec": {
                 "details": {
-                    "href": "%readonlypages/GroupTemplate.html",
+                    "href": "pages/GroupTemplate.html",
                     "templateSelector": ".csc-group-template",
                     "targetSelector": ".csc-relatedRecordsTab-group .csc-relatedRecordsTab-recordEditor"
                 }

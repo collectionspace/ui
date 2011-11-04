@@ -10,7 +10,7 @@
             ],
             "pageSpec": {
                 "details": {
-                    "href": "%readonlypages/LoanoutTemplate.html",
+                    "href": "pages/LoanoutTemplate.html",
                     "templateSelector": ".csc-loanout-template",
                     "targetSelector": ".csc-relatedRecordsTab-loanout .csc-relatedRecordsTab-recordEditor"
                 } 

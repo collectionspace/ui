@@ -10,7 +10,7 @@
             ],
             "pageSpec": {
                 "details": {
-                    "href": "%readonlypages/MediaTemplate.html",
+                    "href": "pages/MediaTemplate.html",
                     "templateSelector": ".csc-media-template",
                     "targetSelector": ".csc-relatedRecordsTab-media .csc-relatedRecordsTab-recordEditor"
                 } 

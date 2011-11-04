@@ -95,12 +95,6 @@ cspace = cspace || {};
         return that;
     };
     
-    var resolveReadOnly = function (uispec, elPath, readOnly) {
-        if (uispec[elPath]) {
-            uispec[elPath] = cspace.util.resolveReadOnlyUISpec(uispec[elPath], readOnly);
-        }
-    };
-    
     // A composite component that has a compose method for modifying resourceSpecs ready to be fetched.
     fluid.defaults("cspace.composite", {
         gradeNames: ["fluid.littleComponent", "autoInit"],
@@ -203,20 +197,15 @@ cspace = cspace || {};
             var pageSpecs = fluid.copy(that.options.pageSpec);
             var resourceSpecs = fluid.copy(pageSpecs);
             var pageSpecManager = cspace.pageSpecManager(pageSpecs);
-            var readOnly = cspace.util.resolveReadOnly({
+            that.options.readOnly = cspace.util.resolveReadOnly({
                 permissions: options.userLogin.permissions,
                 csid: that.options.csid,
-                readOnly: readOnly,
+                readOnly: options.readOnly,
                 target: that.options.namespace || that.options.recordType
-            });
-            var urlExpander = cspace.urlExpander({
-                vars: {
-                    readonly: readOnly ? that.options.readOnlyUrlVar : ""
-                }
             });
             
             fluid.each(resourceSpecs, function (spec, key) {
-                spec.href = urlExpander(spec.href);
+                spec.href = spec.href
                 spec.options = {
                     dataType: "html",
                     success: pageSpecManager.makeCallback(that, spec, key),
@@ -284,9 +273,6 @@ cspace = cspace || {};
                                 return;
                             }
                             options.uispec = data;
-                            resolveReadOnly(options.uispec, "details", readOnly);
-                            resolveReadOnly(options.uispec, "recordEditor", readOnly);
-                            resolveReadOnly(options.uispec, "hierarchy", readOnly);
                         },
                         error: function (xhr, textStatus, errorThrown) {
                             cspace.util.provideErrorCallback(that, url, "errorFetching")(xhr, textStatus, errorThrown);
@@ -330,7 +316,6 @@ cspace = cspace || {};
             displayErrorMessage: "cspace.util.displayErrorMessage",
             lookupMessage: "cspace.util.lookupMessage"
         },
-        readOnlyUrlVar: "readonly/",
         components: {
             composite: {
                 type: "cspace.composite"
@@ -372,7 +357,7 @@ cspace = cspace || {};
         finalInitFunction: "cspace.pageBuilderIO.templateLocator.finalInit",
         specs: {
             recordEditor: {
-                href: "%webapp/html/%readonlypages/%recordTypeTemplate%template.html",
+                href: "%webapp/html/pages/%recordTypeTemplate%template.html",
                 templateSelector: ".csc-%recordType-template",
                 targetSelector: ".csc-record-edit-container"
             }

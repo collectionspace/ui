@@ -52,7 +52,7 @@
             ],
             "pageSpec": {
                 "recordEditor": {
-                    "href": "%readonlypages/OrganizationTemplate.html",
+                    "href": "pages/OrganizationTemplate.html",
                     "templateSelector": ".csc-organization-template",
                     "targetSelector": ".csc-record-edit-container" 
                 }

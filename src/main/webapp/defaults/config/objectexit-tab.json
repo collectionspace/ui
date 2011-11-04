@@ -10,7 +10,7 @@
             ],
             "pageSpec": {
                 "details": {
-                    "href": "%readonlypages/ObjectexitTemplate.html",
+                    "href": "pages/ObjectexitTemplate.html",
                     "templateSelector": ".csc-objectexit-template",
                     "targetSelector": ".csc-relatedRecordsTab-objectexit .csc-relatedRecordsTab-recordEditor"
                 }

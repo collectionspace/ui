@@ -752,101 +752,6 @@ fluid.registerNamespace("cspace.util");
         }
     });
 
-    /** Function to generate a readonly uispec based on a regular uispec. 
-     * @param uispec the uispec to be converted to Read only.
-     * @param search if this is defined, each time this string appear in any of the values
-     *         of fields, this will be replaced by the value defined in the replace
-     *         parameter. This is needed for pathAs in repeatable fields. 
-     * @param replace if search is defined, this value will replace the occurences of 
-     *        the string defined in search. This is needed for pathAs in repeatable fields. 
-     * @return a new uispec modified to be in read only mode.
-     */
-    var resolveReadOnlyUISpecImpl = function (uispec) {
-        var newspec = {};
-        fluid.each(uispec, function (val, key) {
-            if (!val) {
-                return;
-            }
-            if (key === "expander") {
-                fluid.each(fluid.makeArray(val), function (expander) {
-                    fluid.each(["tree", "trueTree", "falseTree"], function (tree) {
-                        if (!expander[tree]) {return; }
-                        if (expander.type === "fluid.renderer.selection.inputs") {
-                            return;
-                        }
-                        expander[tree] = resolveReadOnlyUISpecImpl(expander[tree]);
-                    });
-                    if (!newspec.expander) {newspec.expander = []; }
-                    newspec.expander.push(expander);
-                });
-            } else if (typeof val === "string" || val.messagekey || isDecorator(val, "addClass")) {
-                newspec[key] = val;
-            } else if (val.selection) {
-                newspec[key] = {
-                    value: val.selection,
-                    decorators: [{
-                        func: "cspace.util.nameForValueFinder",
-                        type: "fluid",
-                        options: {
-                            list: val.optionlist,
-                            names: val.optionnames
-                        }
-                    }]
-                };
-            } else if (isDecorator(val, "cspace.termList")) {
-                var decorator = val.decorators[0];
-                decorator.options.readOnly = true;
-                newspec[key] = val;
-            } else if (isDecorator(val, "cspace.autocomplete")) {
-                newspec[key] = {
-                    value: val.value,
-                    decorators: [{
-                        func: "cspace.util.urnToStringFieldConverter",
-                        type: "fluid"
-                    }]
-                };
-            } else if (isDecorator(val, "cspace.makeRepeatable")) {
-                var decorator = val.decorators[0];
-                var opts = decorator.options;
-                newspec[key] = {
-                    decorators: [{
-                        func: decorator.func,
-                        type: decorator.type,
-                        options: {
-                            disablePrimary: true,
-                            elPath: opts.elPath,
-                            root: opts.root,
-                            repeatTree: {
-                                expander: {
-                                    tree: resolveReadOnlyUISpecImpl(opts.repeatTree.expander.tree),
-                                    type: opts.repeatTree.expander.type
-                                }
-                            }
-                        }
-                    }]
-                };
-            } else if (isDecorator(val, "cspace.structuredDate") || isDecorator(val, "cspace.datePicker") || isDecorator(val, "cspace.inputValidator")) {
-                newspec[key] = {
-                    value: val.value
-                };
-            }
-        });
-        return newspec;
-    };
-
-    /** Function to return an apropriate uispec, based on the two parameters.
-     * If the readOnly parameter is set to true, a call to UISpecToReadOnlyImpl is 
-     * made. This will modify the uispec to be a read only version of the 
-     * generate a readonly uispec based on the passed uispec. If readOnly is false,
-     * the uispec will be returned unmodified.
-     * @param uispec the uispec that potentially should be converted to Read only.
-     * @param readOnly flag telling whether the uispec should be modified to readonly
-     * @return unmodified uispec if readOnly is false. Else the uispec modified to read only
-     */
-    cspace.util.resolveReadOnlyUISpec = function (uispec, readOnly) {
-        return readOnly ? resolveReadOnlyUISpecImpl(uispec) : uispec;
-    };
-
     function updateDimensions(that) {
         var target = that.container[0];
         that.indicator[target.offsetHeight < that.options.spinnerDimensions.height ||
@@ -1516,5 +1421,11 @@ fluid.registerNamespace("cspace.util");
     
     cspace.util.findLabel = function (required) {
         return $(required).parents(".info-pair").find(".label").text();
+    };
+    
+    cspace.util.processReadOnly = function (container, readOnly) {
+        fluid.each(["input", "select", "textarea"], function (tag) {
+            container.find(tag).prop("disabled", readOnly);
+        });
     };
 })(jQuery, fluid);

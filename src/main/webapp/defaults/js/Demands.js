@@ -845,6 +845,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.datePicker", "cspace.recordEditor", {
             container: "{arguments}.0",
             options: {
+                readOnly: "{recordEditor}.options.readOnly",
                 messageBar: "{recordEditor}.options.messageBar"
             }
         });
@@ -862,6 +863,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("recordEditor", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.recordEditor",
             options: {
+                readOnly: "{pageBuilderIO}.options.readOnly",
                 recordType: "{pageBuilderIO}.options.recordType",
                 produceTree: {
                     expander: {
@@ -898,6 +900,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.template"], {
             container: "{pageBuilder}.options.selectors.recordEditor",
             options: {
+                readOnly: "{pageBuilderIO}.options.readOnly",
                 recordType: "{pageBuilderIO}.options.recordType",
                 produceTree: "cspace.recordEditor.produceTreeTemplate"
             }
@@ -961,6 +964,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("details", ["cspace.listEditor", "cspace.administration"], {
             container: "{listEditor}.dom.details",
             options: {
+                readOnly: "{pageBuilderIO}.options.readOnly",
                 recordType: "{listEditor}.options.recordType",
                 showDeleteButton: {
                     expander: {
@@ -990,6 +994,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("details", ["cspace.listEditor", "cspace.tab"], {
             container: "{listEditor}.dom.details",
             options: {
+                readOnly: "{pageBuilderIO}.options.readOnly",
                 recordType: "{listEditor}.options.recordType",
 	            produceTree: {
                     expander: {
@@ -1429,7 +1434,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.numberPatternChooser", "cspace.recordEditor", {
             container: "{arguments}.0",
             mergeAllOptions: [{
-                baseUrl: "{recordEditor}.options.dataContext.options.baseUrl"
+                baseUrl: "{recordEditor}.options.dataContext.options.baseUrl",
+                readOnly: "{recordEditor}.options.readOnly"
             }, "{arguments}.1"]
         });
         
@@ -1989,7 +1995,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             resolver: "{permissionsResolver}",
                             recordTypeManager: "{recordTypeManager}",
                             permission: "list",
-                            href: "%webapp/html/%readonlypages/Administration-%recordType.html",
+                            href: "%webapp/html/pages/Administration-%recordType.html",
                             callback: "cspace.tabsList.buildAdminModel"
                         }
                     }

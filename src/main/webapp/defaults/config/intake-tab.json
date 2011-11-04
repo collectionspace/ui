@@ -10,7 +10,7 @@
             ],
             "pageSpec": {
                 "details": {
-                    "href": "%readonlypages/IntakeTemplate.html",
+                    "href": "pages/IntakeTemplate.html",
                     "templateSelector": ".csc-intake-template",
                     "targetSelector": ".csc-relatedRecordsTab-intake .csc-relatedRecordsTab-recordEditor"
                 } 

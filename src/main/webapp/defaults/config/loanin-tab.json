@@ -10,7 +10,7 @@
             ],
             "pageSpec": {
                 "details": {
-                    "href": "%readonlypages/LoaninTemplate.html",
+                    "href": "pages/LoaninTemplate.html",
                     "templateSelector": ".csc-loanin-template",
                     "targetSelector": ".csc-relatedRecordsTab-loanin .csc-relatedRecordsTab-recordEditor"
                 } 

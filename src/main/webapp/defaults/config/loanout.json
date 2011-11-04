@@ -53,7 +53,7 @@
             ],
             "pageSpec": {
                 "recordEditor": {
-                    "href": "%readonlypages/LoanoutTemplate.html",
+                    "href": "pages/LoanoutTemplate.html",
                     "templateSelector": ".csc-loanout-template",
                     "targetSelector": ".csc-record-edit-container"
                 }

@@ -10,7 +10,7 @@
             ],
             "pageSpec": {
                 "details": {
-                    "href": "%readonlypages/AcquisitionTemplate.html",
+                    "href": "pages/AcquisitionTemplate.html",
                     "templateSelector": ".csc-acquisition-template",
                     "targetSelector": ".csc-relatedRecordsTab-acquisition .csc-relatedRecordsTab-recordEditor"
                 }

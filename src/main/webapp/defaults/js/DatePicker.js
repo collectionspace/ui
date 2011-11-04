@@ -52,6 +52,7 @@ cspace = cspace || {};
             calendarButton: "<a href=\"#_bottom\" />",
             datePicker: "<div></div>"
         },
+        readOnly: false,
         buildMarkup: "cspace.datePicker.buildMarkup",
         defaultFormat: "yyyy-MM-dd",
         messageBar: "{messageBar}"
@@ -211,6 +212,9 @@ cspace = cspace || {};
     };
     
     cspace.datePicker.finalInit = function (that) {
+        if (that.options.readOnly) {
+            return;
+        }
         that.datePickerWidget = setupDatePicker(that);
         bindEvents(that);
     };
@@ -219,7 +223,8 @@ cspace = cspace || {};
         that.parent = that.container.parent();
         that.parent.addClass(that.options.styles.parent);
         that.container.addClass(that.options.styles.calendarDate).addClass(that.options.selectors.calendarDate.slice(1));
-        fluid.each(["datePicker", "calendarButton"], function (control) {
+        var elements = that.options.readOnly ? ["datePicker"] : ["datePicker", "calendarButton"];
+        fluid.each(elements, function (control) {
             fluid.invokeGlobalFunction(that.options.buildMarkup, [that, control]);
         });
     };

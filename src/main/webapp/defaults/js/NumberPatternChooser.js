@@ -179,6 +179,7 @@ cspace = cspace || {};
             selecting: "cs-selecting",
             container: "cs-numberPatternChooserContainer"
         },
+        readOnly: false,
         model: null,
         selected: null,
         events: {
@@ -193,6 +194,9 @@ cspace = cspace || {};
     });
     
     cspace.numberPatternChooser.finalInit = function (that) {
+        if (that.options.readOnly) {
+            return;
+        }
         // Data structure needed by fetchResources
         var resources = {
             chooser: {

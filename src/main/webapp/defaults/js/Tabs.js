@@ -121,18 +121,11 @@ cspace = cspace || {};
             tabs: []
         };
         fluid.each(records, function (record) {
-            var readonly = cspace.util.resolveReadOnly({
-                permissions: options.resolver.options.permissions,
-                csid: null,
-                readOnly: null,
-                target: record
-            });
             model.tabs.push({
                 "name": record + "-tab",
                 type: record,
                 href: fluid.stringTemplate(urlExpander(options.href), {
-                    recordType: record,
-                    readonly: readonly ? "readonly/" : ""
+                    recordType: record
                 })
             });
         });

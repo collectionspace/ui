@@ -10,7 +10,7 @@
             ],
             "pageSpec": {
                 "details": {
-                    "href": "%readonlypages/CatalogingTemplate.html",
+                    "href": "pages/CatalogingTemplate.html",
                     "templateSelector": ".csc-cataloging-template",
                     "targetSelector": ".csc-relatedRecordsTab-cataloging .csc-relatedRecordsTab-recordEditor" 
                 } 

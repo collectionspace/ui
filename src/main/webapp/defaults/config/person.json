@@ -63,7 +63,7 @@
             ],
             "pageSpec": {
                 "recordEditor": {
-                    "href": "%readonlypages/PersonTemplate.html",
+                    "href": "pages/PersonTemplate.html",
                     "templateSelector": ".csc-person-template",
                     "targetSelector": ".csc-record-edit-container"
                 }

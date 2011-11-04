@@ -62,7 +62,7 @@
             ],
             "pageSpec": {
                 "recordEditor": {
-                    "href": "%readonlypages/LocationTemplate.html",
+                    "href": "pages/LocationTemplate.html",
                     "templateSelector": ".csc-location-template",
                     "targetSelector": ".csc-record-edit-container" 
                 }
