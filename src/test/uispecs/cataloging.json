@@ -214,8 +214,8 @@
         ".csc-collection-object-dateLatestQualifier-label": {
             "messagekey": "collection-object-dateLatestQualifierLabel"
         },
-        ".csc-collection-object-titleTranslationSubGroup-label": {
-            "messagekey": "collection-object-titleTranslationSubGroupLabel"
+        ".csc-titleGroup-titleTranslationSubGroup-label": {
+            "messagekey": "titleGroup-titleTranslationSubGroupLabel"
         },
         ".csc-collection-object-titleGroup": {
             "decorators": [
@@ -226,7 +226,7 @@
                         "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    ".csc-collection-object-titleTranslationSubGroup": {
+                                    ".csc-titleGroup-titleTranslationSubGroup": {
                                         "decorators": [{
                                             "func": "cspace.makeRepeatable",
                                             "type": "fluid",
