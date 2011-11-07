@@ -201,6 +201,7 @@
     <js>/defaults/js/DataContext.js</js>
     <js>/defaults/js/Confirmation.js</js>
     <js>/defaults/js/StructuredDate.js</js>
+    <js>/defaults/js/Dimension.js</js>
     <js>/defaults/js/Autocomplete.js</js>
     <js>/defaults/js/TermList.js</js>
     <js>/defaults/js/RecordEditor.js</js>
@@ -255,6 +256,7 @@
     <js>/defaults/js/DataContext.js</js>
     <js>/defaults/js/Confirmation.js</js>
     <js>/defaults/js/StructuredDate.js</js>
+    <js>/defaults/js/Dimension.js</js>
     <js>/defaults/js/Autocomplete.js</js>
     <js>/defaults/js/TermList.js</js>
     <js>/defaults/js/RecordEditor.js</js>

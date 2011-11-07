@@ -347,6 +347,19 @@ var repeatableTester = function ($) {
         basicMarkupGenerateTest(myRepeatable, ".cst-simpleTestFieldNoContainer", "Bruges");    
     });
     
+    repeatableTest.test("Inital Delete Rendering", function () {    
+        expect(1);
+
+        var myRepeatable = basicSetup({model: {
+            myTexts: [{
+                myText: "cat",
+                _primary: true
+            }]
+        }});
+        
+        jqUnit.assertTrue("Initally repeatable should be disabled", myRepeatable.locate("delete").eq(0).is(":disabled"));
+    });
+    
     repeatableTest.test("Delete Functionality", function () {    
         expect(9);
 

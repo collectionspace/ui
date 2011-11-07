@@ -1425,7 +1425,10 @@ fluid.registerNamespace("cspace.util");
     
     cspace.util.processReadOnly = function (container, readOnly) {
         fluid.each(["input", "select", "textarea"], function (tag) {
-            container.find(tag).prop("disabled", readOnly);
+            container.find(tag).prop("disabled", function (index, oldPropertyValue) {
+                // if oldPropertyValue is "disabled" or true: leave it unchanged.
+                return oldPropertyValue || readOnly;
+            });
         });
     };
 })(jQuery, fluid);

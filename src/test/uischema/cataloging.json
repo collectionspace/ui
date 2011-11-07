@@ -603,28 +603,42 @@
                     "dimensionGroup": {
                         "items": {
                             "properties": {
+                                "dimensionSubGroup": {
+                                    "items": {
+                                        "properties": {
+                                            "dimension": {
+                                                "default": "",
+                                                "type": "string"
+                                            },
+                                            "valueDate": {
+                                                "type": "date"
+                                            },
+                                            "_primary": {
+                                                "type": "boolean"
+                                            },
+                                            "measurementUnit": {
+                                                "default": "",
+                                                "type": "string"
+                                            },
+                                            "value": {
+                                                "type": "string"
+                                            },
+                                            "valueQualifier": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
                                 "_primary": {
                                     "type": "boolean"
-                                },
-                                "dimension": {
-                                    "default": "",
-                                    "type": "string"
-                                },
-                                "valueDate": {
-                                    "type": "date"
                                 },
                                 "measuredPart": {
                                     "default": "",
                                     "type": "string"
                                 },
-                                "measurementUnit": {
-                                    "default": "",
-                                    "type": "string"
-                                },
-                                "value": {
-                                    "type": "string"
-                                },
-                                "valueQualifier": {
+                                "dimensionSummary": {
                                     "type": "string"
                                 }
                             },
@@ -741,9 +755,6 @@
                     },
                     "ownershipCategory": {
                         "default": "",
-                        "type": "string"
-                    },
-                    "dimensionSummary": {
                         "type": "string"
                     },
                     "copyNumber": {
