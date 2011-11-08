@@ -140,9 +140,6 @@
         ".csc-collection-object-contentLanguage-label": {
             "messagekey": "collection-object-contentLanguageLabel"
         },
-        ".csc-collection-object-valueDate-label": {
-            "messagekey": "collection-object-valueDateLabel"
-        },
         ".csc-collection-object-contentPosition-label": {
             "messagekey": "collection-object-contentPositionLabel"
         },
@@ -217,6 +214,9 @@
         ".csc-collection-object-dateLatestQualifier-label": {
             "messagekey": "collection-object-dateLatestQualifierLabel"
         },
+        ".csc-titleGroup-titleTranslationSubGroup-label": {
+            "messagekey": "titleGroup-titleTranslationSubGroupLabel"
+        },
         ".csc-collection-object-titleGroup": {
             "decorators": [
                 {
@@ -226,20 +226,37 @@
                         "repeatTree": {
                             "expander": {
                                 "tree": {
-                                    ".csc-collection-object-titleTranslationLanguage": {
-                                        "decorators": [
-                                            {
-                                                "func": "cspace.termList",
-                                                "type": "fluid",
-                                                "options": {
-                                                    "root": "{row}",
-                                                    "elPath": "titleTranslationLanguage",
-                                                    "termListType": "titleTranslationLanguage"
+                                    ".csc-titleGroup-titleTranslationSubGroup": {
+                                        "decorators": [{
+                                            "func": "cspace.makeRepeatable",
+                                            "type": "fluid",
+                                            "options": {
+                                                "elPath": "titleTranslationSubGroup",
+                                                "root": "{row}",
+                                                "repeatTree": {
+                                                    "expander": {
+                                                        "tree": {
+                                                            ".csc-collection-object-titleTranslationLanguage": {
+                                                                "decorators": [
+                                                                    {
+                                                                        "func": "cspace.termList",
+                                                                        "type": "fluid",
+                                                                        "options": {
+                                                                            "root": "{row}",
+                                                                            "elPath": "titleTranslationLanguage",
+                                                                            "termListType": "titleTranslationLanguage"
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            ".csc-object-identification-object-title-translation": "${{row}.titleTranslation}"
+                                                        },
+                                                        "type": "fluid.noexpand"
+                                                    }
                                                 }
                                             }
-                                        ]
+                                        }]
                                     },
-                                    ".csc-object-identification-object-title-translation": "${{row}.titleTranslation}",
                                     ".csc-object-identification-object-title": "${{row}.title}",
                                     ".csc-object-identification-object-title-type": {
                                         "optionnames": [
@@ -479,9 +496,6 @@
         ".csc-collection-object-assocCulturalContextNote-label": {
             "messagekey": "collection-object-assocCulturalContextNoteLabel"
         },
-        ".csc-collection-object-value-label": {
-            "messagekey": "collection-object-valueLabel"
-        },
         ".csc-collection-object-assocPlaceNote-label": {
             "messagekey": "collection-object-assocPlaceNoteLabel"
         },
@@ -594,9 +608,6 @@
                 }
             ]
         },
-        ".csc-collection-object-measuredBy-label": {
-            "messagekey": "collection-object-measuredByLabel"
-        },
         ".csc-object-description-inscription-description-date": {
             "decorators": [
                 {
@@ -622,9 +633,6 @@
             "messagekey": "collection-object-fieldCollectionNoteLabel"
         },
         ".csc-collection-object-assocEventName": "${fields.assocEventName}",
-        ".csc-collection-object-dimensionGroup-label": {
-            "messagekey": "collection-object-dimensionGroupLabel"
-        },
         ".csc-object-description-inscription-content-translation": "${fields.inscriptionContentTranslation}",
         ".csc-collection-object-assocPeopleGroup": {
             "decorators": [
@@ -1114,154 +1122,217 @@
                 }
             ]
         },
-        ".csc-collection-object-dimensionGroup": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "repeatTree": {
-                            "expander": {
-                                "tree": {
-                                    ".csc-object-description-dimension-part": {
-                                        "optionnames": [
-                                            "Please select a value",
-                                            "base",
-                                            "frame",
-                                            "framed",
-                                            "image size",
-                                            "mount",
-                                            "paper size",
-                                            "plate size",
-                                            "unframed"
-                                        ],
-                                        "optionlist": [
-                                            "",
-                                            "base",
-                                            "frame",
-                                            "framed",
-                                            "image-size",
-                                            "mount",
-                                            "paper-size",
-                                            "plate-size",
-                                            "unframed"
-                                        ],
-                                        "selection": "${{row}.measuredPart}"
-                                    },
-                                    ".csc-object-description-dimension-unit": {
-                                        "optionnames": [
-                                            "Please select a value",
-                                            "carats",
-                                            "centimeters",
-                                            "cubic centimeters",
-                                            "feet",
-                                            "inches",
-                                            "kilograms",
-                                            "liters",
-                                            "millimeters",
-                                            "meters",
-                                            "minutes",
-                                            "pixels",
-                                            "square feet",
-                                            "stories"
-                                        ],
-                                        "optionlist": [
-                                            "",
-                                            "carats",
-                                            "centimeters",
-                                            "cubic-centimeters",
-                                            "feet",
-                                            "inches",
-                                            "kilograms",
-                                            "liters",
-                                            "millimeters",
-                                            "meters",
-                                            "minutes",
-                                            "pixels",
-                                            "square-feet",
-                                            "stories"
-                                        ],
-                                        "selection": "${{row}.measurementUnit}"
-                                    },
-                                    ".csc-object-description-dimension": {
-                                        "optionnames": [
-                                            "Please select a value",
-                                            "area",
-                                            "base",
-                                            "circumference",
-                                            "count",
-                                            "depth",
-                                            "diameter",
-                                            "height",
-                                            "length",
-                                            "running time",
-                                            "target",
-                                            "volume",
-                                            "weight",
-                                            "width"
-                                        ],
-                                        "optionlist": [
-                                            "",
-                                            "area",
-                                            "base",
-                                            "circumference",
-                                            "count",
-                                            "depth",
-                                            "diameter",
-                                            "height",
-                                            "length",
-                                            "running-time",
-                                            "target",
-                                            "volume",
-                                            "weight",
-                                            "width"
-                                        ],
-                                        "selection": "${{row}.dimension}"
-                                    },
-                                    ".csc-object-description-dimension-value-qualifier": "${{row}.valueQualifier}",
-                                    ".csc-object-description-dimension-value-date": {
-                                        "decorators": [
-                                            {
-                                                "func": "cspace.datePicker",
-                                                "type": "fluid"
-                                            }
-                                        ],
-                                        "value": "${{row}.valueDate}"
-                                    },
-                                    ".csc-collection-object-measuredBy": {
-                                        "decorators": [
-                                            {
-                                                "func": "cspace.autocomplete",
-                                                "type": "fluid",
-                                                "options": {
-                                                    "queryUrl": "../../../tenant/core/cataloging/autocomplete/measuredBy",
-                                                    "vocabUrl": "../../../tenant/core/cataloging/source-vocab/measuredBy"
-                                                }
-                                            }
-                                        ],
-                                        "value": "${{row}.measuredBy}"
-                                    },
-                                    ".csc-object-description-dimension-value": {
-                                        "decorators": [
-                                            {
-                                                "func": "cspace.inputValidator",
-                                                "type": "fluid",
-                                                "options": {
-                                                    "label": "collection-object-valueLabel",
-                                                    "type": "float"
-                                                }
-                                            }
-                                        ],
-                                        "value": "${{row}.value}"
-                                    }
+        ".csc-collection-object-dimension": {
+            "decorators": [{
+                "func": "cspace.dimension",
+                "type": "fluid",
+                "options": {
+                    "protoTree": {
+                        "expander": {
+                            "tree": {
+                                ".csc-dimension-dimensionGroup-label": {
+                                    "messagekey": "dimension-dimensionGroupLabel"
                                 },
-                                "type": "fluid.noexpand"
-                            }
-                        },
-                        "elPath": "fields.dimensionGroup"
+                                ".csc-dimension-dimensionSubGroup-label": {
+                                    "messagekey": "dimension-dimensionSubGroupLabel"
+                                },
+                                ".csc-dimension-dimension-label": {
+                                    "messagekey": "dimension-dimensionLabel"
+                                },
+                                ".csc-dimension-dimensionSummary-label": {
+                                    "messagekey": "dimension-dimensionSummaryLabel"
+                                },
+                                ".csc-dimension-measuredPart-label": {
+                                    "messagekey": "dimension-measuredPartLabel"
+                                },
+                                ".csc-dimension-value-label": {
+                                    "messagekey": "dimension-valueLabel"
+                                },
+                                ".csc-dimension-valueQualifier-label": {
+                                    "messagekey": "dimension-valueQualifierLabel"
+                                },
+                                ".csc-dimension-measuredBy-label": {
+                                    "messagekey": "dimension-measuredByLabel"
+                                },
+                                ".csc-dimension-measurementUnit-label": {
+                                    "messagekey": "dimension-measurementUnitLabel"
+                                },
+                                ".csc-dimension-valueDate-label": {
+                                    "messagekey": "dimension-valueDateLabel"
+                                },
+                                ".csc-dimension-dimensionGroup": {
+                                    "decorators": [
+                                        {
+                                            "func": "cspace.makeRepeatable",
+                                            "type": "fluid",
+                                            "options": {
+                                                "repeatTree": {
+                                                    "expander": {
+                                                        "tree": {
+                                                            ".csc-dimension-dimensionSubGroup": {
+                                                                "decorators": [{
+                                                                    "func": "cspace.makeRepeatable",
+                                                                    "type": "fluid",
+                                                                    "options": {
+                                                                        "elPath": "dimensionSubGroup",
+                                                                        "root": "{row}",
+                                                                        "repeatTree": {
+                                                                            "expander": {
+                                                                                "tree": {
+                                                                                    ".csc-dimension-unit": {
+                                                                                        "optionnames": [
+                                                                                            "Please select a value",
+                                                                                            "carats",
+                                                                                            "centimeters",
+                                                                                            "cubic centimeters",
+                                                                                            "feet",
+                                                                                            "inches",
+                                                                                            "kilograms",
+                                                                                            "liters",
+                                                                                            "millimeters",
+                                                                                            "meters",
+                                                                                            "minutes",
+                                                                                            "pixels",
+                                                                                            "square feet",
+                                                                                            "stories"
+                                                                                        ],
+                                                                                        "optionlist": [
+                                                                                            "",
+                                                                                            "carats",
+                                                                                            "centimeters",
+                                                                                            "cubic-centimeters",
+                                                                                            "feet",
+                                                                                            "inches",
+                                                                                            "kilograms",
+                                                                                            "liters",
+                                                                                            "millimeters",
+                                                                                            "meters",
+                                                                                            "minutes",
+                                                                                            "pixels",
+                                                                                            "square-feet",
+                                                                                            "stories"
+                                                                                        ],
+                                                                                        "selection": "${{row}.measurementUnit}"
+                                                                                    },
+                                                                                    ".csc-dimension-dimension": {
+                                                                                        "optionnames": [
+                                                                                            "Please select a value",
+                                                                                            "area",
+                                                                                            "base",
+                                                                                            "circumference",
+                                                                                            "count",
+                                                                                            "depth",
+                                                                                            "diameter",
+                                                                                            "height",
+                                                                                            "length",
+                                                                                            "running time",
+                                                                                            "target",
+                                                                                            "volume",
+                                                                                            "weight",
+                                                                                            "width"
+                                                                                        ],
+                                                                                        "optionlist": [
+                                                                                            "",
+                                                                                            "area",
+                                                                                            "base",
+                                                                                            "circumference",
+                                                                                            "count",
+                                                                                            "depth",
+                                                                                            "diameter",
+                                                                                            "height",
+                                                                                            "length",
+                                                                                            "running-time",
+                                                                                            "target",
+                                                                                            "volume",
+                                                                                            "weight",
+                                                                                            "width"
+                                                                                        ],
+                                                                                        "selection": "${{row}.dimension}"
+                                                                                    },
+                                                                                    ".csc-dimension-value-qualifier": "${{row}.valueQualifier}",
+                                                                                    ".csc-dimension-value-date": {
+                                                                                        "decorators": [
+                                                                                            {
+                                                                                                "func": "cspace.datePicker",
+                                                                                                "type": "fluid"
+                                                                                            }
+                                                                                        ],
+                                                                                        "value": "${{row}.valueDate}"
+                                                                                    },
+                                                                                    ".csc-dimension-measuredBy": {
+                                                                                        "decorators": [
+                                                                                            {
+                                                                                                "func": "cspace.autocomplete",
+                                                                                                "type": "fluid",
+                                                                                                "options": {
+                                                                                                    "queryUrl": "../../../tenant/core/cataloging/autocomplete/measuredBy",
+                                                                                                    "vocabUrl": "../../../tenant/core/cataloging/source-vocab/measuredBy"
+                                                                                                }
+                                                                                            }
+                                                                                        ],
+                                                                                        "value": "${{row}.measuredBy}"
+                                                                                    },
+                                                                                    ".csc-dimension-value": {
+                                                                                        "decorators": [
+                                                                                            {
+                                                                                                "func": "cspace.inputValidator",
+                                                                                                "type": "fluid",
+                                                                                                "options": {
+                                                                                                    "label": "dimension-valueLabel",
+                                                                                                    "type": "float"
+                                                                                                }
+                                                                                            }
+                                                                                        ],
+                                                                                        "value": "${{row}.value}"
+                                                                                    }
+                                                                                },
+                                                                                "type": "fluid.noexpand"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }]
+                                                            },
+                                                            ".csc-dimension-part": {
+                                                                "optionnames": [
+                                                                    "Please select a value",
+                                                                    "base",
+                                                                    "frame",
+                                                                    "framed",
+                                                                    "image size",
+                                                                    "mount",
+                                                                    "paper size",
+                                                                    "plate size",
+                                                                    "unframed"
+                                                                ],
+                                                                "optionlist": [
+                                                                    "",
+                                                                    "base",
+                                                                    "frame",
+                                                                    "framed",
+                                                                    "image-size",
+                                                                    "mount",
+                                                                    "paper-size",
+                                                                    "plate-size",
+                                                                    "unframed"
+                                                                ],
+                                                                "selection": "${{row}.measuredPart}"
+                                                            },
+                                                            ".csc-dimension-dimensionSummary": "${{row}.dimensionSummary}"
+                                                        },
+                                                        "type": "fluid.noexpand"
+                                                    }
+                                                },
+                                                "elPath": "fields.dimensionGroup"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            "type": "fluid.noexpand"
+                        }
                     }
                 }
-            ]
+            }]
         },
         ".csc-collection-object-viewersReferences-label": {
             "messagekey": "collection-object-viewersReferencesLabel"
@@ -1472,9 +1543,6 @@
         ".csc-collection-object-assocObjectType-label": {
             "messagekey": "collection-object-assocObjectTypeLabel"
         },
-        ".csc-collection-object-technicalAttributeMeasurementUnit-label": {
-            "messagekey": "collection-object-technicalAttributeMeasurementUnitLabel"
-        },
         ".csc-object-description-inscription-content-inscriber": {
             "decorators": [
                 {
@@ -1665,9 +1733,6 @@
                     }
                 }
             ]
-        },
-        ".csc-collection-object-dimension-label": {
-            "messagekey": "collection-object-dimensionLabel"
         },
         ".csc-object-production-date": {
             "decorators": [
@@ -1870,9 +1935,6 @@
         ".csc-collection-object-assocOrganizationGroup-label": {
             "messagekey": "collection-object-assocOrganizationGroupLabel"
         },
-        ".csc-collection-object-measurementUnit-label": {
-            "messagekey": "collection-object-measurementUnitLabel"
-        },
         ".csc-object-history-association-ownershipDates": {
             "decorators": [
                 {
@@ -1894,9 +1956,6 @@
                 }
             ],
             "value": "${fields.inscriptionDescriptionInscriber}"
-        },
-        ".csc-collection-object-valueQualifier-label": {
-            "messagekey": "collection-object-valueQualifierLabel"
         },
         ".csc-collection-object-assocActivityType-label": {
             "messagekey": "collection-object-assocActivityTypeLabel"
@@ -1939,9 +1998,6 @@
                     }
                 }
             ]
-        },
-        ".csc-collection-object-measuredPart-label": {
-            "messagekey": "collection-object-measuredPartLabel"
         },
         ".csc-collection-object-number-label": {
             "messagekey": "collection-object-numberLabel"
@@ -2453,7 +2509,6 @@
         ".csc-collection-object-inscriptionDescriptionInscriber-label": {
             "messagekey": "collection-object-inscriptionDescriptionInscriberLabel"
         },
-        ".csc-collection-object-dimensionSummary": "${fields.dimensionSummary}",
         ".csc-collection-object-contentObjectType-label": {
             "messagekey": "collection-object-contentObjectTypeLabel"
         },
@@ -2711,9 +2766,6 @@
                     }
                 }
             ]
-        },
-        ".csc-collection-object-dimensionSummary-label": {
-            "messagekey": "collection-object-dimensionSummaryLabel"
         },
         ".csc-collection-object-fieldCollectionSource-label": {
             "messagekey": "collection-object-fieldCollectionSourceLabel"
