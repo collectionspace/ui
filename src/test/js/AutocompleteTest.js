@@ -12,7 +12,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 "use strict";
 
 (function ($) {
-    var autocompleteTests = new jqUnit.TestCase("Autocomplete Tests");
+    var bareAutocompleteTests = new jqUnit.TestCase("Autocomplete Tests");
+    
+    var autocompleteTests = cspace.tests.testEnvironment({testCase: bareAutocompleteTests});
     
     var popDefs = fluid.defaults("cspace.autocomplete.popup");
     

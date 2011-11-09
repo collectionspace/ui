@@ -43,9 +43,9 @@ cspace = cspace || {};
             }
         },
         invokers: {
-            displayErrorMessage: "cspace.util.displayErrorMessage",
-            lookupMessage: "cspace.util.lookupMessage"
+            displayErrorMessage: "cspace.util.displayErrorMessage"
         },
+        parentBundle: "{globalBundle}",
         urls: {
             termList: "%tenant/%tenantname/%recordType/termList/%termListType"
         },
@@ -58,13 +58,14 @@ cspace = cspace || {};
     });
 
     cspace.termList.finalInit = function (that) {
-        that.termListSource.get({
+        var directModel = {
             recordType: that.options.recordType,
             termListType: that.options.termListType
-        }, function (data) {
+        }, termListUrl = that.termListSource.resolveUrl(directModel);
+        that.termListSource.get(directModel, function (data) {
             if (!data) {
-                that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
-                    url: that.termListSource.options.url
+                that.displayErrorMessage(fluid.stringTemplate(that.options.parentBundle.resolve("emptyResponse"), {
+                    url: termListUrl
                 }));
                 return;
             }
@@ -77,7 +78,7 @@ cspace = cspace || {};
             that.optionnames = data.optionnames;
             that.optionlist = data.optionlist;
             that.events.afterFetch.fire();
-        }, cspace.util.provideErrorCallback(that, that.termListSource.options.url, "errorFetching"));
+        }, cspace.util.provideErrorCallback(that, termListUrl, "errorFetching"));
     };
 
     cspace.termList.postInit = function (that) {

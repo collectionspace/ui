@@ -262,7 +262,7 @@ fluid.registerNamespace("cspace.util");
             func();
         };
 
-        function resolveUrl(directModel) {
+        that.resolveUrl = function (directModel) {
             var expander = fluid.invoke("cspace.urlExpander");
             var map = fluid.copy(that.options.termMap) || {};
             map = fluid.transform(map, function (entry) {
@@ -282,12 +282,12 @@ fluid.registerNamespace("cspace.util");
             var replaced = fluid.stringTemplate(that.options.url, map);
             replaced = expander(replaced);
             return replaced;
-        }
+        };
 
         that.makeAjaxOpts = function (model, directModel, callback, type, errorCallback) {
             var togo = {
                 type: type,
-                url: resolveUrl(directModel),
+                url: that.resolveUrl(directModel),
                 contentType: "application/json; charset=UTF-8",
                 dataType: "json",
                 success: function (data) {

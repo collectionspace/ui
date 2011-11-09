@@ -173,9 +173,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     cspace.autocomplete.testMatchesDataSource = cspace.URLDataSource;
     
     cspace.autocomplete.testNewTermDataSource = function (options) {
+        var url = "../../../chain%termUrl";
         return {
             options: {
-                url: "../../../chain%termUrl"
+                url: url
+            },
+            resolveUrl: function (directModel) {
+                var expander = fluid.invoke("cspace.urlExpander");
+                var replaced = url;
+                replaced = expander(replaced);
+                return replaced;
             },
             put: function (model, directModel, callback) {
                 fluid.log("Post of new term record " + JSON.stringify(model) + " to URL " + directModel.termURL);
@@ -473,22 +480,26 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
 
     cspace.autocompleteImpl = function (container, options) {
-        var that = fluid.initView("cspace.autocomplete", container, options);
+        var that = fluid.initView("cspace.autocomplete", container, options),
+            authUrl;
 
         setupAutocomplete(that);
         fluid.initDependents(that);
+        
+        that.resolveMessage = that.options.parentBundle.resolve;
        
-        that.closeButton.button.attr("title", that.lookupMessage("autocomplete-closeButton")); 
+        that.closeButton.button.attr("title", that.resolveMessage("autocomplete-closeButton")); 
        
         that.autocomplete.events.onSearch.addListener(
             function (newValue, permitted) {
                 that.applier.requestChange("term", newValue);
                 if (permitted) {
                     that.buttonAdjustor(true); // hide the button to show the "loading indicator"
+                    var matchesUrl = that.matchesSource.resolveUrl(that.model);
                     that.matchesSource.get(that.model, function (matches) {
                         if (!matches) {
-                            that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
-                                url: that.matchesSource.options.url
+                            that.displayErrorMessage(fluid.stringTemplate(that.resolveMessage("emptyResponse"), {
+                                url: matchesUrl
                             }));
                             return;
                         }
@@ -502,7 +513,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         that.buttonAdjustor();
                         that.popup.open();
                         that.autocomplete.events.onSearchDone.fire(newValue);
-                    }, cspace.util.provideErrorCallback(that, that.matchesSource.options.url, "errorFetching"));
+                    }, cspace.util.provideErrorCallback(that, matchesUrl, "errorFetching"));
                 }
                 else {
                     if (newValue === "") { // CSPACE-1651
@@ -519,10 +530,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         that.eventHolder.events.revertState.addListener(that.revertState);
 
         // TODO: risk of asynchrony
+        authUrl = that.authoritiesSource.resolveUrl();
         that.authoritiesSource.get(null, function (authorities) {
             if (!authorities) {
-                that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
-                    url: that.authoritiesSource.options.url
+                that.displayErrorMessage(fluid.stringTemplate(that.resolveMessage("emptyResponse"), {
+                    url: authUrl
                 }));
                 return;
             }
@@ -536,7 +548,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             if (that.handlePermissions) {
                 that.handlePermissions();
             }
-        }, cspace.util.provideErrorCallback(that, that.authoritiesSource.options.url, "errorFetching"));
+        }, cspace.util.provideErrorCallback(that, authUrl, "errorFetching"));
 
         that.closeButton.button.click(function () {
             that.eventHolder.events.revertState.fire();
@@ -551,12 +563,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     cspace.autocomplete.selectAuthority = function (that, key) {
-        var authority = that.model.authorities[key];
+        var authority = that.model.authorities[key],
+            newTermUrl = that.newTermSource.resolveUrl({termUrl: authority.url});
         that.buttonAdjustor(true); // Hide the button. It will be replaced by the spinnder to indicate selection is being saved (CSPACE-2091).
         that.newTermSource.put({fields: {displayName: that.model.term}, _view: "autocomplete"}, {termUrl: authority.url}, function (response) {
             if (!response) {
-                that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage("emptyResponse"), {
-                    url: that.newTermSource.options.url
+                that.displayErrorMessage(fluid.stringTemplate(that.resolveMessage("emptyResponse"), {
+                    url: newTermUrl
                 }));
                 return;
             }
@@ -568,7 +581,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
             updateAuthoritatively(that, response);
             that.eventHolder.events.afterSelectAuthority.fire();
-        }, cspace.util.provideErrorCallback(that, that.newTermSource.options.url, "errorWriting"));
+        }, cspace.util.provideErrorCallback(that, newTermUrl, "errorWriting"));
     };
     
     cspace.autocomplete.revertState = function (that) {
@@ -649,8 +662,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 funcName: "cspace.autocomplete.selectMatch",
                 args: ["{autocomplete}", "{arguments}.0"]
             },
-            displayErrorMessage: "cspace.util.displayErrorMessage",
-            lookupMessage: "cspace.util.lookupMessage"
+            displayErrorMessage: "cspace.util.displayErrorMessage"
         },
         components: {
             autocomplete: {
