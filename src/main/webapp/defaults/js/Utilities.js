@@ -329,8 +329,9 @@ fluid.registerNamespace("cspace.util");
     };
     
     cspace.util.provideErrorCallback = function (that, url, message) {
+        var lookup = that.lookupMessage || that.options.parentBundle.resolve;
         return function (xhr, textStatus, errorThrown) {
-            that.displayErrorMessage(fluid.stringTemplate(that.lookupMessage(message), {
+            that.displayErrorMessage(fluid.stringTemplate(lookup(message), {
                 url: url,
                 status: textStatus
             }));
