@@ -372,6 +372,15 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }, "{arguments}.1"]
         });
         
+        fluid.demands("cspace.termList", "cspace.advancedSearch.searchFields", {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                recordType: "{searchFields}.options.recordType",
+                applier: "{searchFields}.applier",
+                model: "{searchFields}.model"
+            }, "{arguments}.1"]
+        });
+
         fluid.demands("cspace.util.lookupMessage", "cspace.globalSetup", {
             funcName: "cspace.util.lookupMessage",
             args: ["{globalBundle}.messageBase", "{arguments}.0"]

@@ -1,7 +1,4 @@
 {
-    ".csc-person-createdBy-label": {
-        "messagekey": "person-createdByLabel"
-    },
     ".csc-person-deathDateStart-label": {
         "messagekey": "person-deathDateStartLabel"
     },
@@ -26,38 +23,32 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "termStatuss",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-personAuthority-status": {
-                                            "default": "provisional",
-                                            "optionnames": [
-                                                "Provisional",
-                                                "Under Review",
-                                                "Accepted",
-                                                "Rejected"
-                                            ],
-                                            "optionlist": [
-                                                "provisional",
-                                                "under review",
-                                                "accepted",
-                                                "rejected"
-                                            ],
-                                            "selection": "${{row}.termStatus}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "termStatuss"
+                                ".csc-personAuthority-status": {
+                                    "default": "",
+                                    "optionnames": [
+                                        "Provisional",
+                                        "Under Review",
+                                        "Accepted",
+                                        "Rejected",
+                                        "Please select a value"
+                                    ],
+                                    "optionlist": [
+                                        "provisional",
+                                        "under review",
+                                        "accepted",
+                                        "rejected",
+                                        ""
+                                    ],
+                                    "selection": "${{row}.termStatus}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "termStatuss",
                     "hidePrimary": true
                 }
             }
@@ -90,36 +81,28 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "genders",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-personAuthority-gender": {
-                                            "default": "",
-                                            "optionnames": [
-                                                "Please select a value",
-                                                "Male",
-                                                "Female"
-                                            ],
-                                            "optionlist": [
-                                                "",
-                                                "male",
-                                                "female"
-                                            ],
-                                            "selection": "${{row}.gender}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "genders"
+                                ".csc-personAuthority-gender": {
+                                    "default": "",
+                                    "optionnames": [
+                                        "Please select a value",
+                                        "Male",
+                                        "Female"
+                                    ],
+                                    "optionlist": [
+                                        "",
+                                        "male",
+                                        "female"
+                                    ],
+                                    "selection": "${{row}.gender}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "genders",
                     "hidePrimary": true
                 }
             }
@@ -131,23 +114,15 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "updatedBys",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-person-updatedBy": "${{row}.updatedBy}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "updatedBys"
-                                }
+                                ".csc-person-updatedBy": "${{row}.updatedBy}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "updatedBys",
                     "hidePrimary": true
                 }
             }
@@ -180,23 +155,15 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "occupations",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-personAuthority-occupation": "${{row}.occupation}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "occupations"
-                                }
+                                ".csc-personAuthority-occupation": "${{row}.occupation}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "occupations",
                     "hidePrimary": true
                 }
             }
@@ -223,23 +190,15 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "schoolsOrStyles",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-personAuthority-schoolOrStyle": "${{row}.schoolOrStyle}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "schoolsOrStyles"
-                                }
+                                ".csc-personAuthority-schoolOrStyle": "${{row}.schoolOrStyle}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "schoolsOrStyles",
                     "hidePrimary": true
                 }
             }
@@ -251,23 +210,15 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "displayNames",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-personAuthority-displayName": "${{row}.displayName}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "displayNames"
-                                }
+                                ".csc-personAuthority-displayName": "${{row}.displayName}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "displayNames",
                     "hidePrimary": true
                 }
             }
@@ -285,57 +236,21 @@
     ".csc-person-nationality-label": {
         "messagekey": "person-nationalityLabel"
     },
-    ".csc-person-createdBy": {
-        "decorators": [
-            {
-                "func": "cspace.makeRepeatable",
-                "type": "fluid",
-                "options": {
-                    "elPath": "createdBys",
-                    "protoTree": {
-                        "expander": {
-                            "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-person-createdBy": "${{row}.createdBy}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "createdBys"
-                                }
-                            },
-                            "type": "fluid.noexpand"
-                        }
-                    },
-                    "hidePrimary": true
-                }
-            }
-        ]
-    },
     ".csc-personAuthority-group": {
         "decorators": [
             {
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "groups",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-personAuthority-group": "${{row}.group}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "groups"
-                                }
+                                ".csc-personAuthority-group": "${{row}.group}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "groups",
                     "hidePrimary": true
                 }
             }
@@ -347,23 +262,15 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "nationalities",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-personAuthority-nationality": "${{row}.nationality}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "nationalities"
-                                }
+                                ".csc-personAuthority-nationality": "${{row}.nationality}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "nationalities",
                     "hidePrimary": true
                 }
             }
@@ -381,10 +288,10 @@
         ],
         "value": "${updatedAtStart}"
     },
-    ".csc-person-updatedAtStart-label": {
-        "messagekey": "person-updatedAtStartLabel"
-    },
     ".csc-person-updatedAt-label": {
         "messagekey": "person-updatedAtLabel"
+    },
+    ".csc-person-updatedAtStart-label": {
+        "messagekey": "person-updatedAtStartLabel"
     }
 }

@@ -5,6 +5,7 @@
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "occupation": {
@@ -15,34 +16,18 @@
                 },
                 "type": "array"
             },
-            "createdBys": {
-                "items": {
-                    "properties": {
-                        "_primary": {
-                            "type": "boolean"
-                        },
-                        "createdBy": {
-                            "type": "string"
-                        }
-                    },
-                    "type": "object"
-                },
-                "type": "array"
-            },
             "birthDateStart": {
-                "type": "date"
-            },
-            "deathDateStart": {
                 "type": "date"
             },
             "termStatuss": {
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "termStatus": {
-                            "default": "provisional",
+                            "default": "",
                             "type": "string"
                         }
                     },
@@ -50,13 +35,17 @@
                 },
                 "type": "array"
             },
+            "deathDateStart": {
+                "type": "date"
+            },
             "updatedAtEnd": {
-                "type": "string"
+                "type": "date"
             },
             "genders": {
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "gender": {
@@ -69,7 +58,7 @@
                 "type": "array"
             },
             "updatedAtStart": {
-                "type": "string"
+                "type": "date"
             },
             "deathDateEnd": {
                 "type": "date"
@@ -78,6 +67,7 @@
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "nationality": {
@@ -92,6 +82,7 @@
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "schoolOrStyle": {
@@ -109,6 +100,7 @@
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "displayName": {
@@ -123,6 +115,7 @@
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "updatedBy": {
@@ -137,6 +130,7 @@
                 "items": {
                     "properties": {
                         "_primary": {
+                            "default": true,
                             "type": "boolean"
                         },
                         "group": {

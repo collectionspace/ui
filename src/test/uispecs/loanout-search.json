@@ -74,49 +74,27 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "loanedObjectStatusGroup",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-loanOut-loanedObjectStatus": {
-                                            "optionnames": [
-                                                "Please select a value",
-                                                "Renewed",
-                                                "Returned",
-                                                "Refused",
-                                                "Photography requested",
-                                                "Sent",
-                                                "Conservation",
-                                                "Requested",
-                                                "Agreed",
-                                                "Authorized"
-                                            ],
-                                            "optionlist": [
-                                                "",
-                                                "renewed",
-                                                "returned",
-                                                "refused",
-                                                "photographyrequested",
-                                                "sent",
-                                                "conservation",
-                                                "requested",
-                                                "agreed",
-                                                "authorized"
-                                            ],
-                                            "selection": "${{row}.loanedObjectStatus}"
+                                ".csc-loanOut-loanedObjectStatus": {
+                                    "decorators": [
+                                        {
+                                            "func": "cspace.termList",
+                                            "type": "fluid",
+                                            "options": {
+                                                "root": "{row}",
+                                                "elPath": "loanedObjectStatus",
+                                                "termListType": "loanedObjectStatus"
+                                            }
                                         }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "loanedObjectStatusGroup"
+                                    ]
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "loanedObjectStatusGroup",
                     "hidePrimary": true
                 }
             }
@@ -128,23 +106,15 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "updatedBys",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-loanout-updatedBy": "${{row}.updatedBy}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "updatedBys"
-                                }
+                                ".csc-loanout-updatedBy": "${{row}.updatedBy}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "updatedBys",
                     "hidePrimary": true
                 }
             }
@@ -162,35 +132,27 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "borrowers",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-loanOut-borrower": {
-                                            "decorators": [
-                                                {
-                                                    "func": "cspace.autocomplete",
-                                                    "type": "fluid",
-                                                    "options": {
-                                                        "queryUrl": "../../../tenant/core/loanout/autocomplete/borrower",
-                                                        "vocabUrl": "../../../tenant/core/loanout/source-vocab/borrower"
-                                                    }
-                                                }
-                                            ],
-                                            "value": "${{row}.borrower}"
+                                ".csc-loanOut-borrower": {
+                                    "decorators": [
+                                        {
+                                            "func": "cspace.autocomplete",
+                                            "type": "fluid",
+                                            "options": {
+                                                "queryUrl": "../../../tenant/core/loanout/autocomplete/borrower",
+                                                "vocabUrl": "../../../tenant/core/loanout/source-vocab/borrower"
+                                            }
                                         }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "borrowers"
+                                    ],
+                                    "value": "${{row}.borrower}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "borrowers",
                     "hidePrimary": true
                 }
             }
@@ -205,46 +167,38 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "loanPurposes",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-loanOut-loanPurpose": {
-                                            "default": "",
-                                            "optionnames": [
-                                                "Please select a value",
-                                                "Exhibition",
-                                                "Research",
-                                                "Scientific or exhibit preparation",
-                                                "Analysis",
-                                                "Photography",
-                                                "Conservation or other requested services",
-                                                "Long-term collections management and storage"
-                                            ],
-                                            "optionlist": [
-                                                "",
-                                                "exhibition",
-                                                "research",
-                                                "scientificorexhibitpreparation",
-                                                "analysis",
-                                                "photography",
-                                                "conservationotherrequestedservices",
-                                                "longtermcollectionsmanagementandstorage"
-                                            ],
-                                            "selection": "${{row}.loanPurpose}"
-                                        }
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "loanPurposes"
+                                ".csc-loanOut-loanPurpose": {
+                                    "default": "",
+                                    "optionnames": [
+                                        "Please select a value",
+                                        "Exhibition",
+                                        "Research",
+                                        "Scientific or exhibit preparation",
+                                        "Analysis",
+                                        "Photography",
+                                        "Conservation or other requested services",
+                                        "Long-term collections management and storage"
+                                    ],
+                                    "optionlist": [
+                                        "",
+                                        "exhibition",
+                                        "research",
+                                        "scientificorexhibitpreparation",
+                                        "analysis",
+                                        "photography",
+                                        "conservationotherrequestedservices",
+                                        "longtermcollectionsmanagementandstorage"
+                                    ],
+                                    "selection": "${{row}.loanPurpose}"
                                 }
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "loanPurposes",
                     "hidePrimary": true
                 }
             }
@@ -277,23 +231,15 @@
                 "func": "cspace.makeRepeatable",
                 "type": "fluid",
                 "options": {
-                    "elPath": "loanOutNumbers",
-                    "protoTree": {
+                    "repeatTree": {
                         "expander": {
                             "tree": {
-                                "expander": {
-                                    "repeatID": "repeat:",
-                                    "tree": {
-                                        ".csc-loanOut-loanOutNumber": "${{row}.loanOutNumber}"
-                                    },
-                                    "type": "fluid.renderer.repeat",
-                                    "pathAs": "row",
-                                    "controlledBy": "loanOutNumbers"
-                                }
+                                ".csc-loanOut-loanOutNumber": "${{row}.loanOutNumber}"
                             },
                             "type": "fluid.noexpand"
                         }
                     },
+                    "elPath": "loanOutNumbers",
                     "hidePrimary": true
                 }
             }

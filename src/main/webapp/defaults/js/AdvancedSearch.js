@@ -214,6 +214,7 @@ cspace = cspace || {};
                 uispec: options.uispec,
                 applier: "{advancedSearch}.options.searchFields.applier",
                 model: "{advancedSearch}.options.searchFields.model",
+                recordType: options.recordType,
                 resources: {
                     template: options.template
                 }
