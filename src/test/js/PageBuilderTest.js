@@ -42,8 +42,12 @@ cspace = cspace || {};
 
     var pageBuilderTester = function () {
         
-        var pageBuilderTest = new jqUnit.TestCase("PageBuilder Tests", function () {
+        var barePageBuilderTest = new jqUnit.TestCase("PageBuilder Tests", function () {
             cspace.util.isTest = true;
+        });
+        
+        var pageBuilderTest = cspace.tests.testEnvironment({
+            testCase: barePageBuilderTest
         });
         
         var basicTestListeners = {
@@ -409,7 +413,8 @@ cspace = cspace || {};
                         composite: "../../chain/composite",
                         prefix: "../../chain"
                     }
-                }
+                },
+                lookupMessage: function () {}
             }, resourceSpec);
             jqUnit.assertDeepEq("Test2 should stay", expected.test2, result.test2);
             jqUnit.assertEquals("Composite href is now", expected.composite.href, result.composite.href);

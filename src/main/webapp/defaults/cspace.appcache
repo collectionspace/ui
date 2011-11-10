@@ -1,0 +1,11 @@
+CACHE MANIFEST
+# 10-11-2011:v1
+
+CACHE:
+../css/*
+../js/*
+../config/*
+../bundle/*
+../lib/*
+../html/*
+../images/*

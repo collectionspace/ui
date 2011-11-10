@@ -451,7 +451,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 hideOn: [
                     "{recordEditor}.options.dataContext.events.afterFetch",
                     "{recordEditor}.options.dataContext.events.onError",
-                    "{recordEditor}.events.afterRender",
+                    "{recordEditor}.events.afterRender"
                 ],
                 showOn: [
                     "{recordEditor}.options.dataContext.events.onFetch",
@@ -2073,8 +2073,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 resources: {
                     expander: {
                         type: "fluid.deferredInvokeCall",
-                        func: "$.merge",
-                        args: [[], "{pageBuilderIO}.options.schema", ["uispec"]]
+                        func: "cspace.util.merge",
+                        args: ["{pageBuilderIO}.options.schema", "uispec"]
                     }
                 },
                 urls: {
