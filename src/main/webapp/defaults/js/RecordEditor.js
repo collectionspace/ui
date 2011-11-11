@@ -555,16 +555,7 @@ cspace = cspace || {};
                 }
             },
             recordEditorLoadingIndicator: {
-                type: "cspace.util.loadingIndicator",
-                options: {
-                    hideOn: [
-                        "{recordEditor}.events.afterRender",
-                        "{recordEditor}.options.dataContext.events.onError"
-                    ],
-                    events: {
-                        showOn: "{recordEditor}.options.dataContext.events.onSave"
-                    }
-                }
+                type: "cspace.util.loadingIndicator"
             },
             localStorage: {
                 type: "cspace.util.localStorageDataSource",

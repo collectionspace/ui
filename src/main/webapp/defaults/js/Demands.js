@@ -451,7 +451,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 hideOn: [
                     "{recordEditor}.options.dataContext.events.afterFetch",
                     "{recordEditor}.options.dataContext.events.onError",
-                    "{recordEditor}.events.afterRender"
+                    "{recordEditor}.events.afterRender",
+                    "{recordEditor}.events.afterRemove"
                 ],
                 showOn: [
                     "{recordEditor}.options.dataContext.events.onFetch",
