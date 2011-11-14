@@ -326,7 +326,6 @@ cspace = cspace || {};
     cspace.search.searchView.updateSearch = function (currentSearch, search) {
         var fields = fluid.copy(currentSearch.fields);
         if (fields) {
-            delete currentSearch.fields;
             search.options.defaultFieldsModel = fields;
         }
         fluid.each(currentSearch, function (value, path) {
