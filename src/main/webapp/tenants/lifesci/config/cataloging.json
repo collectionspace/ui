@@ -12,9 +12,6 @@
                         "selectors": {
                             "identificationNumber": ".csc-object-identification-object-number" 
                         },
-                        "strings": {
-                            "identificationNumberRequired": "Please specify an Identification Number" 
-                        },
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "model": "{pageBuilder}.model"
@@ -58,13 +55,16 @@
                 "namespaces",
                 "cataloging"
             ],
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "%readonlypages/CatalogingTemplate.html",
-                    "templateSelector": ".csc-cataloging-template",
-                    "targetSelector": ".csc-record-edit-container" 
+            "components": {
+                "templateLocator": {
+                    "type": "cspace.pageBuilderIO.templateLocator",
+                    "options": {
+                        "pageSpec": "{pageBuilderIO}.options.pageSpec",
+                        "recordType": "{pageBuilderIO}.options.recordType"
+                    }
                 }
-            }
+            },
+            "pageSpec": {}
         }
     }
 }

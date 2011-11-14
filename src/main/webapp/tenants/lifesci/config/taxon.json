@@ -22,9 +22,6 @@
                                 }
                             }
                         },
-                        "strings": {
-                            "identificationNumberRequired": "Please specify a Display Name"
-                        },
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "model": "{pageBuilder}.model"
@@ -64,14 +61,15 @@
                 "namespaces",
                 "taxon"
             ],
-            "pageSpec": {
-                "recordEditor": {
-                    "href": "%readonlypages/TaxonTemplate.html",
-                    "templateSelector": ".csc-taxon-template",
-                    "targetSelector": ".csc-record-edit-container"
-                }
-            },
+            "pageSpec": {},
             "components": {
+                "templateLocator": {
+                    "type": "cspace.pageBuilderIO.templateLocator",
+                    "options": {
+                        "pageSpec": "{pageBuilderIO}.options.pageSpec",
+                        "recordType": "{pageBuilderIO}.options.recordType"
+                    }
+                },
                 "dataContext": {
                     "options": {
                         "baseUrl": "../../../chain/vocabularies"
