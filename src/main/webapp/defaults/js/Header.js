@@ -59,10 +59,6 @@ cspace = cspace || {};
                 href: "findedit.html"
             },
             {
-                messagekey: "menuItems-report",
-                href: "#"
-            },
-            {
                 messagekey: "menuItems-administration",
                 href: "administration.html",
                 hide: {
