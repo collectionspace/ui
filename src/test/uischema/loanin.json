@@ -1,13 +1,13 @@
 {
     "loanin": {
         "properties": {
-            "relations": {
-                "default": {},
-                "type": "object"
-            },
             "termsUsed": {
                 "default": [],
                 "type": "array"
+            },
+            "relations": {
+                "default": {},
+                "type": "object"
             },
             "csid": {
                 "type": "string"
@@ -24,6 +24,7 @@
                         "items": {
                             "properties": {
                                 "_primary": {
+                                    "default": true,
                                     "type": "boolean"
                                 },
                                 "lendersAuthorizer": {
@@ -50,16 +51,41 @@
                         "default": "",
                         "type": "string"
                     },
+                    "loanStatusGroup": {
+                        "items": {
+                            "properties": {
+                                "_primary": {
+                                    "default": true,
+                                    "type": "boolean"
+                                },
+                                "loanStatusNote": {
+                                    "type": "string"
+                                },
+                                "loanStatus": {
+                                    "default": "",
+                                    "type": "string"
+                                },
+                                "loanStatusDate": {
+                                    "type": "date"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
                     "loanRenewalApplicationDate": {
                         "type": "date"
                     },
                     "borrowersAuthorizer": {
                         "type": "string"
                     },
-                    "updatedAt": {
+                    "updatedBy": {
                         "type": "string"
                     },
                     "loanInDate": {
+                        "type": "date"
+                    },
+                    "updatedAt": {
                         "type": "date"
                     },
                     "loanInContact": {
@@ -68,10 +94,19 @@
                     "loanInConditions": {
                         "type": "string"
                     },
+                    "createdBy": {
+                        "type": "string"
+                    },
                     "createdAt": {
                         "type": "string"
                     },
                     "loanReturnDate": {
+                        "type": "date"
+                    },
+                    "borrowersContact": {
+                        "type": "string"
+                    },
+                    "borrowersAuthorizationDate": {
                         "type": "date"
                     }
                 },
