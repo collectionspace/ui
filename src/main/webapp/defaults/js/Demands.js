@@ -452,16 +452,31 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     "{recordEditor}.options.dataContext.events.afterFetch",
                     "{recordEditor}.options.dataContext.events.onError",
                     "{recordEditor}.events.afterRender",
-                    "{recordEditor}.events.afterRemove"
+                    "{recordEditor}.events.afterRemove",
+                    "{recordEditor}.events.cancelSave"
                 ],
                 showOn: [
                     "{recordEditor}.options.dataContext.events.onFetch",
-                    "{recordEditor}.options.dataContext.events.onSave"
+                    "{recordEditor}.events.onSave",
+                    "{recordEditor}.events.onCancel"
                 ]
             }
         });
         fluid.demands("recordEditorLoadingIndicator", ["cspace.recordEditor"], {
-            container: "{recordEditor}.container"
+            container: "{recordEditor}.container",
+            options: {
+                hideOn: [
+                    "{recordEditor}.options.dataContext.events.afterFetch",
+                    "{recordEditor}.options.dataContext.events.onError",
+                    "{recordEditor}.events.afterRender",
+                    "{recordEditor}.events.cancelSave"
+                ],
+                showOn: [
+                    "{recordEditor}.options.dataContext.events.onFetch",
+                    "{recordEditor}.events.onSave",
+                    "{recordEditor}.events.onCancel"
+                ]
+            }
         });
         
         // Hierarchy demands

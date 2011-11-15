@@ -790,10 +790,10 @@ fluid.registerNamespace("cspace.util");
     cspace.util.loadingIndicator.postInitFunction = function (that) {
 
         fluid.each(that.options.showOn, function (event) {
-            event.addListener(that.show);
+            event.addListener(that.show, undefined, undefined, "first");
         });
         fluid.each(that.options.hideOn, function (event) {
-            event.addListener(that.hide);
+            event.addListener(that.hide, undefined, undefined, "last");
         });
 
         that.indicator = $("<div/>");
@@ -831,8 +831,14 @@ fluid.registerNamespace("cspace.util");
             that.indicator.hide();
         };
         that.options.listeners = {
-            showOn: that.show,
-            hideOn: that.hide
+            showOn: {
+                listener: that.show,
+                priority: "first"
+            },
+            hideOn: {
+                listener: that.hide,
+                priority: "last"
+            }
         };
     };
 

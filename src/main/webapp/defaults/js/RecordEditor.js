@@ -244,32 +244,33 @@ cspace = cspace || {};
          */
         that.requestSave = function () {
             var ret = that.events.onSave.fire(that.model);
-            if (ret !== false) {
-                if (that.namespaces) {
-                    var namespace = cspace.util.getDefaultConfigURL.getRecordType();
-                    if (that.namespaces.isNamespace(namespace)) {
-                        that.options.applier.requestChange("namespace", namespace);
-                    }
-                }
-                if (that.validator) {
-                    var validatedModel = that.validator.validate(that.model);
-                    if (!validatedModel) {
-                        return false;
-                    }
-                    else {
-                        that.applier.requestChange("", validatedModel)
-                    }
-                }
-                that.locate("save").prop("disabled", true);
-                if (that.model.csid) {
-                    that.options.dataContext.update();
-                } else {
-                    that.options.applier.requestChange("csid", "");
-                    that.options.dataContext.create();
-                }
-                return true;
+            if (ret === false) {
+                that.events.cancelSave.fire();
+                return ret;
             }
-            return false;
+            if (that.namespaces) {
+                var namespace = cspace.util.getDefaultConfigURL.getRecordType();
+                if (that.namespaces.isNamespace(namespace)) {
+                    that.options.applier.requestChange("namespace", namespace);
+                }
+            }
+            if (that.validator) {
+                var validatedModel = that.validator.validate(that.model);
+                if (!validatedModel) {
+                    return false;
+                }
+                else {
+                    that.applier.requestChange("", validatedModel)
+                }
+            }
+            that.locate("save").prop("disabled", true);
+            if (that.model.csid) {
+                that.options.dataContext.update();
+            } else {
+                that.options.applier.requestChange("csid", "");
+                that.options.dataContext.create();
+            }
+            return true;
         };
 
         setupRecordEditor(that);
@@ -469,6 +470,7 @@ cspace = cspace || {};
     };
     
     cspace.recordEditor.cancel = function (that) {
+        that.events.onCancel.fire();
         that.rollback();
     };
     
@@ -591,6 +593,7 @@ cspace = cspace || {};
         events: {
             onSave: "preventable",
             onCancel: null,
+            cancelSave: null,
             afterRemove: null, // params: textStatus
             onError: null, // params: operation
             afterRenderRefresh: null 
