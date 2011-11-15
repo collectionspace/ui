@@ -1,30 +1,73 @@
 {
     "details": {
-        ".csc-loanout-createdBy": "${fields.createdBy}",
-        ".csc-loanout-tenantID": "${fields.tenantID}",
         ".csc-loanout-summary-label": {
             "messagekey": "loanout-summaryLabel"
         },
-        ".csc-loanOut-lendersAuthorizationDate": {
+        ".csc-loanout-loanStatusGroup": {
             "decorators": [
                 {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
+                    "func": "cspace.makeRepeatable",
+                    "type": "fluid",
+                    "options": {
+                        "repeatTree": {
+                            "expander": {
+                                "tree": {
+                                    ".csc-loanOut-loanedObjectStatus": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.termList",
+                                                "type": "fluid",
+                                                "options": {
+                                                    "root": "{row}",
+                                                    "elPath": "loanStatus",
+                                                    "termListType": "loanStatus"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    ".csc-loanOut-loanedObjectStatusNote": "${{row}.loanStatusNote}",
+                                    ".csc-loanOut-loanedObjectStatusDate": {
+                                        "decorators": [
+                                            {
+                                                "func": "cspace.datePicker",
+                                                "type": "fluid"
+                                            }
+                                        ],
+                                        "value": "${{row}.loanStatusDate}"
+                                    }
+                                },
+                                "type": "fluid.noexpand"
+                            }
+                        },
+                        "elPath": "fields.loanStatusGroup"
+                    }
                 }
-            ],
-            "value": "${fields.lendersAuthorizationDate}"
+            ]
+        },
+        ".csc-loanout-borrowersAuthorizer-label": {
+            "messagekey": "loanout-borrowersAuthorizerLabel"
         },
         ".csc-loanout-updatedAt-label": {
             "messagekey": "loanout-updatedAtLabel"
         },
-        ".csc-loanout-loanedObjectStatusDate-label": {
-            "messagekey": "loanout-loanedObjectStatusDateLabel"
+        ".csc-loanout-loanStatusDate-label": {
+            "messagekey": "loanout-loanStatusDateLabel"
         },
         ".csc-loanout-borrower-label": {
             "messagekey": "loanout-borrowerLabel"
         },
-        ".csc-loanout-loanRenewalApplicationDate-label": {
-            "messagekey": "loanout-loanRenewalApplicationDateLabel"
+        ".csc-loanout-borrowersAuthorizer": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../../tenant/core/loanout/autocomplete/borrowersAuthorizer",
+                        "vocabUrl": "../../../tenant/core/loanout/source-vocab/borrowersAuthorizer"
+                    }
+                }
+            ],
+            "value": "${fields.borrowersAuthorizer}"
         },
         ".csc-loanOut-loanOutDate": {
             "decorators": [
@@ -41,136 +84,21 @@
         ".csc-loanout-loanOutNumber-label": {
             "messagekey": "loanout-loanOutNumberLabel"
         },
-        ".csc-loanout-createdAt-label": {
-            "messagekey": "loanout-createdAtLabel"
-        },
         ".csc-loanout-updatedBy-label": {
             "messagekey": "loanout-updatedByLabel"
         },
         ".csc-loanout-lendersAuthorizer-label": {
             "messagekey": "loanout-lendersAuthorizerLabel"
         },
-        ".csc-loanOut-loanOutConditions": "${fields.specialConditionsOfLoan}",
-        ".csc-loanOut-loanOutNumber-patternChooserContainer": {
-            "decorators": [
-                {
-                    "func": "cspace.numberPatternChooser",
-                    "type": "fluid",
-                    "options": {
-                        "model": {
-                            "names": [
-                                "Loan Out"
-                            ],
-                            "list": [
-                                "loanout"
-                            ],
-                            "samples": [
-                                "LO2010.1"
-                            ]
-                        },
-                        "selectors": {
-                            "numberField": ".csc-loanOut-loanOutNumber"
-                        }
-                    }
-                }
-            ]
-        },
-        ".csc-loanout-loanPurpose-label": {
-            "messagekey": "loanout-loanPurposeLabel"
-        },
-        ".csc-loanout-loanedObjectStatusGroup": {
-            "decorators": [
-                {
-                    "func": "cspace.makeRepeatable",
-                    "type": "fluid",
-                    "options": {
-                        "repeatTree": {
-                            "expander": {
-                                "tree": {
-                                    ".csc-loanOut-loanedObjectStatus": {
-                                        "decorators": [
-                                            {
-                                                "func": "cspace.termList",
-                                                "type": "fluid",
-                                                "options": {
-                                                    "root": "{row}",
-                                                    "elPath": "loanedObjectStatus",
-                                                    "termListType": "loanedObjectStatus"
-                                                }
-                                            }
-                                        ]
-                                    },
-                                    ".csc-loanOut-loanedObjectStatusNote": "${{row}.loanedObjectStatusNote}",
-                                    ".csc-loanOut-loanedObjectStatusDate": {
-                                        "decorators": [
-                                            {
-                                                "func": "cspace.datePicker",
-                                                "type": "fluid"
-                                            }
-                                        ],
-                                        "value": "${{row}.loanedObjectStatusDate}"
-                                    }
-                                },
-                                "type": "fluid.noexpand"
-                            }
-                        },
-                        "elPath": "fields.loanedObjectStatusGroup"
-                    }
-                }
-            ]
-        },
         ".csc-loanOut-loanOutNote": "${fields.loanOutNote}",
-        ".csc-loanOut-lendersAuthorizer": {
-            "decorators": [
-                {
-                    "func": "cspace.autocomplete",
-                    "type": "fluid",
-                    "options": {
-                        "queryUrl": "../../../tenant/core/loanout/autocomplete/lendersAuthorizer",
-                        "vocabUrl": "../../../tenant/core/loanout/source-vocab/lendersAuthorizer"
-                    }
-                }
-            ],
-            "value": "${fields.lendersAuthorizer}"
+        ".csc-loanout-loanStatus-label": {
+            "messagekey": "loanout-loanStatusLabel"
         },
         ".csc-loanout-tenantID-label": {
             "messagekey": "loanout-tenantIDLabel"
         },
-        ".csc-loanout-updatedBy": "${fields.updatedBy}",
-        ".csc-loanout-loanedObjectStatus-label": {
-            "messagekey": "loanout-loanedObjectStatusLabel"
-        },
         ".csc-loanout-loanoutInformation-label": {
             "messagekey": "loanout-loanoutInformationLabel"
-        },
-        ".csc-loanOut-lendersContact": {
-            "decorators": [
-                {
-                    "func": "cspace.autocomplete",
-                    "type": "fluid",
-                    "options": {
-                        "queryUrl": "../../../tenant/core/loanout/autocomplete/lendersContact",
-                        "vocabUrl": "../../../tenant/core/loanout/source-vocab/lendersContact"
-                    }
-                }
-            ],
-            "value": "${fields.lendersContact}"
-        },
-        ".csc-loanOut-borrowersContact": {
-            "decorators": [
-                {
-                    "func": "cspace.autocomplete",
-                    "type": "fluid",
-                    "options": {
-                        "queryUrl": "../../../tenant/core/loanout/autocomplete/borrowersContact",
-                        "vocabUrl": "../../../tenant/core/loanout/source-vocab/borrowersContact"
-                    }
-                }
-            ],
-            "value": "${fields.borrowersContact}"
-        },
-        ".csc-loanout-linktext-label": {
-            "messagekey": "loanout-linktextLabel"
         },
         ".csc-loanOut-borrower": {
             "decorators": [
@@ -184,15 +112,6 @@
                 }
             ],
             "value": "${fields.borrower}"
-        },
-        ".csc-loanOut-loanReturnDate": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ],
-            "value": "${fields.loanReturnDate}"
         },
         ".csc-loanOut-loanPurpose": {
             "default": "",
@@ -218,10 +137,146 @@
             ],
             "selection": "${fields.loanPurpose}"
         },
-        ".csc-loanout-createdAt": "${fields.createdAt}",
         ".csc-loanout-number-label": {
             "messagekey": "loanout-numberLabel"
         },
+        ".csc-loanout-borrowersContact-label": {
+            "messagekey": "loanout-borrowersContactLabel"
+        },
+        ".csc-loanout-lendersAuthorizationDate-label": {
+            "messagekey": "loanout-lendersAuthorizationDateLabel"
+        },
+        ".csc-loanout-borrowersAuthorizationDate-label": {
+            "messagekey": "loanout-borrowersAuthorizationDateLabel"
+        },
+        ".csc-loanout-loanReturnDate-label": {
+            "messagekey": "loanout-loanReturnDateLabel"
+        },
+        ".csc-loanout-borrowersAuthorizationDate": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ],
+            "value": "${fields.borrowersAuthorizationDate}"
+        },
+        ".csc-loanOut-loanRenewalApplicationDate": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ],
+            "value": "${fields.loanRenewalApplicationDate}"
+        },
+        ".csc-loanout-specialConditionsOfLoan-label": {
+            "messagekey": "loanout-specialConditionsOfLoanLabel"
+        },
+        ".csc-loanout-loanOutDate-label": {
+            "messagekey": "loanout-loanOutDateLabel"
+        },
+        ".csc-loanout-loanStatusGroup-label": {
+            "messagekey": "loanout-loanStatusGroupLabel"
+        },
+        ".csc-loanout-tenantID": "${fields.tenantID}",
+        ".csc-loanout-createdBy": "${fields.createdBy}",
+        ".csc-loanOut-lendersAuthorizationDate": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ],
+            "value": "${fields.lendersAuthorizationDate}"
+        },
+        ".csc-loanout-loanRenewalApplicationDate-label": {
+            "messagekey": "loanout-loanRenewalApplicationDateLabel"
+        },
+        ".csc-loanout-createdAt-label": {
+            "messagekey": "loanout-createdAtLabel"
+        },
+        ".csc-loanOut-loanOutNumber-patternChooserContainer": {
+            "decorators": [
+                {
+                    "func": "cspace.numberPatternChooser",
+                    "type": "fluid",
+                    "options": {
+                        "model": {
+                            "names": [
+                                "Loan Out"
+                            ],
+                            "list": [
+                                "loanout"
+                            ],
+                            "samples": [
+                                "LO2010.1"
+                            ]
+                        },
+                        "selectors": {
+                            "numberField": ".csc-loanOut-loanOutNumber"
+                        }
+                    }
+                }
+            ]
+        },
+        ".csc-loanOut-loanOutConditions": "${fields.specialConditionsOfLoan}",
+        ".csc-loanout-loanPurpose-label": {
+            "messagekey": "loanout-loanPurposeLabel"
+        },
+        ".csc-loanOut-lendersAuthorizer": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../../tenant/core/loanout/autocomplete/lendersAuthorizer",
+                        "vocabUrl": "../../../tenant/core/loanout/source-vocab/lendersAuthorizer"
+                    }
+                }
+            ],
+            "value": "${fields.lendersAuthorizer}"
+        },
+        ".csc-loanout-updatedBy": "${fields.updatedBy}",
+        ".csc-loanOut-borrowersContact": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../../tenant/core/loanout/autocomplete/borrowersContact",
+                        "vocabUrl": "../../../tenant/core/loanout/source-vocab/borrowersContact"
+                    }
+                }
+            ],
+            "value": "${fields.borrowersContact}"
+        },
+        ".csc-loanOut-lendersContact": {
+            "decorators": [
+                {
+                    "func": "cspace.autocomplete",
+                    "type": "fluid",
+                    "options": {
+                        "queryUrl": "../../../tenant/core/loanout/autocomplete/lendersContact",
+                        "vocabUrl": "../../../tenant/core/loanout/source-vocab/lendersContact"
+                    }
+                }
+            ],
+            "value": "${fields.lendersContact}"
+        },
+        ".csc-loanout-linktext-label": {
+            "messagekey": "loanout-linktextLabel"
+        },
+        ".csc-loanOut-loanReturnDate": {
+            "decorators": [
+                {
+                    "func": "cspace.datePicker",
+                    "type": "fluid"
+                }
+            ],
+            "value": "${fields.loanReturnDate}"
+        },
+        ".csc-loanout-createdAt": "${fields.createdAt}",
         ".csc-loanout-createdBy-label": {
             "messagekey": "loanout-createdByLabel"
         },
@@ -234,48 +289,21 @@
             ],
             "value": "${fields.updatedAt}"
         },
-        ".csc-loanout-borrowersContact-label": {
-            "messagekey": "loanout-borrowersContactLabel"
-        },
-        ".csc-loanout-lendersAuthorizationDate-label": {
-            "messagekey": "loanout-lendersAuthorizationDateLabel"
-        },
         ".csc-loanout-lendersContact-label": {
             "messagekey": "loanout-lendersContactLabel"
         },
-        ".csc-loanout-loanedObjectStatusNote-label": {
-            "messagekey": "loanout-loanedObjectStatusNoteLabel"
-        },
         ".csc-loanOut-loanOutNumber": "${fields.loanOutNumber}",
-        ".csc-loanout-loanReturnDate-label": {
-            "messagekey": "loanout-loanReturnDateLabel"
-        },
-        ".csc-loanout-specialConditionsOfLoan-label": {
-            "messagekey": "loanout-specialConditionsOfLoanLabel"
-        },
-        ".csc-loanOut-loanRenewalApplicationDate": {
-            "decorators": [
-                {
-                    "func": "cspace.datePicker",
-                    "type": "fluid"
-                }
-            ],
-            "value": "${fields.loanRenewalApplicationDate}"
-        },
         ".csc-loanout-domaindata-label": {
             "messagekey": "loanout-domaindataLabel"
         },
         ".csc-loanout-sourceFieldName-label": {
             "messagekey": "loanout-sourceFieldNameLabel"
         },
+        ".csc-loanout-loanStatusNote-label": {
+            "messagekey": "loanout-loanStatusNoteLabel"
+        },
         ".csc-loanout-loanOutNote-label": {
             "messagekey": "loanout-loanOutNoteLabel"
-        },
-        ".csc-loanout-loanOutDate-label": {
-            "messagekey": "loanout-loanOutDateLabel"
-        },
-        ".csc-loanout-loanedObjectStatusGroup-label": {
-            "messagekey": "loanout-loanedObjectStatusGroupLabel"
         }
     }
 }
