@@ -93,8 +93,9 @@ var repeatableTester = function ($) {
         return cspace.makeRepeatable(".csc-object-identification-brief-description", opts).repeatableImpl;
     };
     
-    var basicMarkupGenerateTest = function (repeatable, repeatEl, text) {
+    var basicMarkupGenerateTest = function (repeatable, repeatEl, text, nested) {
         var container = repeatable.container;
+        jqUnit[nested ? "assertTrue" : "assertFalse"]("Repeatable and withSubgroup style applied to its container", container.hasClass(repeatable.options.styles.withSubgroup));
         var selectors = repeatable.options.selectors;
         function getClass(name) {
             return selectors[name].substr(1);
@@ -129,10 +130,10 @@ var repeatableTester = function ($) {
     };
     
     repeatableTest.test("Markup Generation for Basic Component", function () {
-        expect(13);
+        expect(14);
         var myRepeatable = basicSetup({text: "blue"});
         
-        basicMarkupGenerateTest(myRepeatable, ".cst-simpleTestField", "blue");
+        basicMarkupGenerateTest(myRepeatable, ".cst-simpleTestField", "blue", false);
     });
    
     repeatableTest.test("Markup Generation For a Table", function () {
@@ -316,7 +317,7 @@ var repeatableTester = function ($) {
     });
     
     repeatableTest.test("Make repeatable with simple field", function () {
-        expect(15);
+        expect(16);
         
         var model = {
             myTexts: [
@@ -344,7 +345,7 @@ var repeatableTester = function ($) {
         jqUnit.assertFalse("The container is not the element we are repeating", container.hasClass("cst-simpleTestFieldNoContainer"));
         jqUnit.assertEquals("the container is a div ", "DIV", container[0].tagName);
         
-        basicMarkupGenerateTest(myRepeatable, ".cst-simpleTestFieldNoContainer", "Bruges");    
+        basicMarkupGenerateTest(myRepeatable, ".cst-simpleTestFieldNoContainer", "Bruges", false);    
     });
     
     repeatableTest.test("Inital Delete Rendering", function () {    
@@ -450,9 +451,9 @@ var repeatableTester = function ($) {
 
     
     repeatableTest.test("Init test for brief description", function () {
-        expect(13);
+        expect(14);
         var myRepeatable = setupRepeatableWithBriefDesc();
-        basicMarkupGenerateTest(myRepeatable, ".csc-object-identification-brief-description", "This is brief description.");
+        basicMarkupGenerateTest(myRepeatable, ".csc-object-identification-brief-description", "This is brief description.", false);
 
     });
     
@@ -780,7 +781,7 @@ var repeatableTester = function ($) {
     });
     
     repeatableTest.test("Nested Repeatable", function () {
-        expect(68);
+        expect(71);
         var repeatableGrandParent = cspace.tests.repeatableGrandParent("#repeatableGrandParent");
         var repeatable = repeatableGrandParent["**-renderer-csc-repeatable-group-0"].repeatableImpl;
         var nested1 = repeatable["**-renderer-repeat::csc-nested-repeatable-li-text-2"].repeatableImpl;
@@ -791,14 +792,14 @@ var repeatableTester = function ($) {
         jqUnit.assertTrue("Delete for repeatable should be disabled", repeatable.locate("delete").is(":disabled"));
         jqUnit.assertTrue("Delete for nested repeatable should be disabled", nested1.locate("delete").is(":disabled"));
 
-        basicMarkupGenerateTest(repeatable, ".csc-repeatable-group", "");
-        basicMarkupGenerateTest(nested1, ".csc-nested-repeatable-li-text", "");
+        basicMarkupGenerateTest(repeatable, ".csc-repeatable-group", "", true);
+        basicMarkupGenerateTest(nested1, ".csc-nested-repeatable-li-text", "", false);
         
         repeatable.locate("add").click();
         nested1 = repeatable["**-renderer-repeat::csc-nested-repeatable-li-text-2"].repeatableImpl;
         var nested2 = repeatable["**-renderer-repeat:1:csc-nested-repeatable-li-text-4"].repeatableImpl;
         
-        basicMarkupGenerateTest(nested2, ".csc-nested-repeatable-li-text", "");
+        basicMarkupGenerateTest(nested2, ".csc-nested-repeatable-li-text", "", false);
         jqUnit.assertEquals("Size of repeatable should be 2", 2, repeatableGrandParent.model.myTexts.length);
         jqUnit.assertTrue("Delete for repeatable should not be disabled", repeatable.locate("delete").is(":not(disabled)"));
         jqUnit.assertTrue("Delete for nested 1 repeatable should be disabled", nested1.locate("delete").is(":disabled"));

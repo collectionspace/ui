@@ -147,7 +147,8 @@ cspace = cspace || {};
             clearfix: "clearfix",
             "delete": "cs-repeatable-delete",
             primary: "cs-repeatable-primary",
-            content: "cs-repeatable-content"
+            content: "cs-repeatable-content",
+            withSubgroup: "cs-repeatable-withSubgroup"
         },
         preInitFunction: [{
             namespace: "preInitGenerateMethods",
@@ -166,6 +167,9 @@ cspace = cspace || {};
         }, {
             namespace: "finalInitBindEvents",
             listener: "cspace.repeatableImpl.finalInitBindEvents"
+        }, {
+            namespace: "finalInitStyleNested",
+            listener: "cspace.repeatableImpl.finalInitStyleNested"
         }],
         markup: {
             addControl:     "<input type='button' />",
@@ -264,6 +268,26 @@ cspace = cspace || {};
         }
     });
     
+    var hasRepeatableSubgroup = function (components) {
+        var repeatableTypes = [
+            "cspace.makeRepeatable",
+            "cspace.repeatable",
+            "cspace.repeatableImpl"
+        ];
+        return fluid.find(components, function (component) {
+            if ($.inArray(component.type, repeatableTypes) > -1) {
+                return true;
+            }
+        });
+    };
+
+    cspace.repeatableImpl.finalInitStyleNested = function (that) {
+        if (hasRepeatableSubgroup(that.options.components)) {
+            that.container.addClass(that.options.styles.withSubgroup);
+        }
+        that.positionAddButton();
+    };
+
     cspace.repeatableImpl.expandSelectors = function (selectors, id) {
         return fluid.transform(selectors, function (selector) {
             return selector.concat("-", id);
@@ -352,7 +376,8 @@ cspace = cspace || {};
     };
     
     cspace.repeatableImpl.finalInitRender = function (that) {
-        that.refreshView();
+        that.renderer.refreshView();
+        that.setupPrimary();
         that.processDeleteInput();
     };
         

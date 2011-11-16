@@ -953,7 +953,8 @@ table.cs-admin-table td.checkbox {
 .info-pair, .info-pair-addrow, .info-pair-table, .info-pair-date, .info-pair-select, .info-pair-termlist {
     width:100%; 
     position:relative; 
-    padding-bottom:18px; 
+    margin-bottom:18px;
+	padding-bottom:0px;
     padding-top:0px; 
     font-size:12px; 
     line-height:12px;

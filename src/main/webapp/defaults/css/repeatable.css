@@ -6,6 +6,11 @@
 .content li.cs-repeatable-repeat button,
 .content li.cs-repeatable-repeat textarea {
 	float:left;}
+.content li.cs-repeatable-repeat .content input,
+.content li.cs-repeatable-repeat .content select,
+.content li.cs-repeatable-repeat .content button,
+.content li.cs-repeatable-repeat .content textarea {
+	float:none;}
 tr.csc-repeatable-headerRow td:first-child, tr.csc-repeatable-headerRow td:last-child {
     width:13px;}
 .cs-repeatable-add {}
@@ -70,3 +75,13 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete:focus,
 table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:hover, 
 table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 	background-position:2px 1px; height:15px;}
+	
+.cs-repeatable-withSubgroup .cs-repeatable-repeat  {
+	border:1px solid #CCC;
+	background-color:#E2E2E2;
+	padding:4px 4px 0 4px;
+}
+
+.cs-repeatable-withSubgroup .cs-repeatable-repeat .cs-repeatable-content {
+	float:left;
+	width:96%;}
