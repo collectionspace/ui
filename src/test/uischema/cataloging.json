@@ -600,46 +600,55 @@
                         },
                         "type": "array"
                     },
-                    "dimensionGroup": {
+                    "measuredPartGroup": {
                         "items": {
                             "properties": {
-                                "dimensionSubGroup": {
-                                    "items": {
-                                        "properties": {
-                                            "dimension": {
-                                                "default": "",
-                                                "type": "string"
-                                            },
-                                            "valueDate": {
-                                                "type": "date"
-                                            },
-                                            "_primary": {
-                                                "type": "boolean"
-                                            },
-                                            "measurementUnit": {
-                                                "default": "",
-                                                "type": "string"
-                                            },
-                                            "value": {
-                                                "type": "string"
-                                            },
-                                            "valueQualifier": {
-                                                "type": "string"
-                                            }
-                                        },
-                                        "type": "object"
-                                    },
-                                    "type": "array"
+                                "dimensionSummary": {
+                                    "type": "string"
                                 },
                                 "_primary": {
+                                    "default": true,
                                     "type": "boolean"
                                 },
                                 "measuredPart": {
                                     "default": "",
                                     "type": "string"
                                 },
-                                "dimensionSummary": {
-                                    "type": "string"
+                                "dimensionSubGroup": {
+                                    "items": {
+                                        "properties": {
+                                            "measuredBy": {
+                                                "type": "string"
+                                            },
+                                            "dimension": {
+                                                "default": "",
+                                                "type": "string"
+                                            },
+                                            "_primary": {
+                                                "default": true,
+                                                "type": "boolean"
+                                            },
+                                            "valueDate": {
+                                                "type": "date"
+                                            },
+                                            "measurementUnit": {
+                                                "default": "",
+                                                "type": "string"
+                                            },
+                                            "value": {
+                                                "type": "float"
+                                            },
+                                            "valueQualifier": {
+                                                "type": "string"
+                                            },
+                                            "measurementMethod": {
+                                                "default": "",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
                                 }
                             },
                             "type": "object"

@@ -1,8 +1,8 @@
 <div class="info-pair">
 	<div class="header">
-		<div class="label csc-dimension-dimensionGroup-label"></div>
+		<div class="label csc-dimension-measuredPartGroup-label"></div>
 	</div>
-	<div class="content csc-dimension-dimensionGroup">
+	<div class="content csc-dimension-measuredPartGroup">
         <div class="info-column">
 			<div class="info-column2-30 fl-force-left">
 				<div class="info-pair">
@@ -10,7 +10,7 @@
 						<div class="label csc-dimension-measuredPart-label"></div>
 					</div>
 					<div class="content">
-						<select class="csc-dimension-part input-select"><option value="">Options not loaded</option></select>
+						<select class="csc-dimension-measuredPart input-select"><option value="">Options not loaded</option></select>
 					</div>
 				</div>
 			</div>
@@ -28,7 +28,7 @@
 		<div class="info-column">
 			<div class="info-pair">
 			    <div class="header">
-            		<div class="label csc-dimension-dimensionSubGroup-label"></div>
+            		<div class="label csc-measuredPartGroup-dimensionSubGroup-label"></div>
             	</div>
 				<div class="content">
 					<table>
@@ -36,6 +36,7 @@
 							<tr>
 								<td class="csc-dimension-dimension-label"></td>
 								<td class="csc-dimension-value-label"></td>
+								<td class="csc-dimension-measurementMethod-label"></td>
 								<td class="csc-dimension-measuredBy-label"></td>
 								<td class="csc-dimension-measurementUnit-label"></td>
 								<td class="csc-dimension-valueQualifier-label"></td>
@@ -43,13 +44,14 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="csc-dimension-dimensionSubGroup">
+							<tr class="csc-measuredPartGroup-dimensionSubGroup">
 								<td><select class="csc-dimension-dimension input-select"><option value="">Options not loaded</option></select></td>
 								<td><input type="text" class="csc-dimension-value"/></td>
+								<td><select class="csc-dimension-measurementMethod input-select"><option value="">Options not loaded</option></select></td>
 								<td><input type="text" class="csc-dimension-measuredBy" /></td>
-								<td><select class="csc-dimension-unit input-select"><option value="">Options not loaded</option></select></td>
-								<td><input type="text" class="csc-dimension-value-qualifier"/></td>
-								<td><input type="text" class="csc-dimension-value-date" /></td>
+								<td><select class="csc-dimension-measurementUnit input-select"><option value="">Options not loaded</option></select></td>
+								<td><input type="text" class="csc-dimension-valueQualifier"/></td>
+								<td><input type="text" class="csc-dimension-valueDate" /></td>
 							</tr>
 						</tbody>
 					</table>
