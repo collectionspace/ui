@@ -1,10 +1,6 @@
 {
-    "termsUsed": [
-        
-    ],
-    "relations": {
-        
-    },
+    "termsUsed": [],
+    "relations": {},
     "csid": "123456789",
     "fields": {
         "blobCsid": "aa5d64e6-8e45-41f0-aa57",
@@ -21,34 +17,23 @@
                 "imgOrig": "../../../../test/data/images/Original.png",
                 "imgThumb": "../../../../test/data/images/Thumbnail.jpeg",
                 "imgMedium": "../../../../test/data/images/Medium.jpeg",
-                "dimensionGroup": [
+                "measuredPartGroup": [
                     {
+                        "dimensionSummary": "This is dimension summary",
                         "_primary": true,
-                        "dimension": "width",
-                        "measuredBy": "",
-                        "valueDate": "",
-                        "measurementUnit": "pixels",
-                        "value": "1200",
-                        "valueQualifier": "",
-                        "measurementMethod": ""
-                    },
-                    {
-                        "dimension": "height",
-                        "measuredBy": "",
-                        "valueDate": "",
-                        "measurementUnit": "pixels",
-                        "value": "900",
-                        "valueQualifier": "",
-                        "measurementMethod": ""
-                    },
-                    {
-                        "dimension": "depth",
-                        "measuredBy": "",
-                        "valueDate": "",
-                        "measurementUnit": "bits",
-                        "value": "8",
-                        "valueQualifier": "",
-                        "measurementMethod": ""
+                        "measuredPart": "frame",
+                        "dimensionSubGroup": [
+                            {
+                                "_primary": true,
+                                "dimension": "area",
+                                "measuredBy": "urn:cspace:org.collectionspace.demo:personauthority:name(person):person:name(johnsmith)'John+Smith'",
+                                "measurementUnit": "carats",
+                                "measurementMethod": "protractor",
+                                "value": "123",
+                                "valueDate": "July 2, 2010",
+                                "valueQualifier": "exact"
+                            }
+                        ]
                     }
                 ]
             }
@@ -61,28 +46,34 @@
         "dates": [
             {
                 "date": "July 1, 2010",
-                "_primary": false 
+                "_primary": false
             },
             {
                 "date": "July 2, 2010",
-                "_primary": true 
-            } 
+                "_primary": true
+            }
         ],
         "dateCreated": "July 2, 2011",
         "dateModified": "July 3, 2011",
         "description": "This is description",
-        "dimensionSummary": "This is dimension summary",
-        "dimensionGroup": [
+        "measuredPartGroup": [
             {
+                "dimensionSummary": "This is dimension summary",
                 "_primary": true,
-                "dimension": "area",
-                "measuredBy": "urn:cspace:org.collectionspace.demo:personauthority:name(person):person:name(johnsmith)'John+Smith'",
-                "measurementUnit": "carats",
-                "measurementMethod": "protractor",
-                "value": "123",
-                "valueDate": "July 2, 2010",
-                "valueQualifier": "exact" 
-            } 
+                "measuredPart": "frame",
+                "dimensionSubGroup": [
+                    {
+                        "_primary": true,
+                        "dimension": "area",
+                        "measuredBy": "urn:cspace:org.collectionspace.demo:personauthority:name(person):person:name(johnsmith)'John+Smith'",
+                        "measurementUnit": "carats",
+                        "measurementMethod": "protractor",
+                        "value": "123",
+                        "valueDate": "July 2, 2010",
+                        "valueQualifier": "exact"
+                    }
+                ]
+            }
         ],
         "filename": "sample_file.jpg",
         "format": "JPEG Image",
@@ -90,43 +81,43 @@
         "languages": [
             {
                 "language": "ancientgreek",
-                "_primary": false 
+                "_primary": false
             },
             {
                 "language": "ancientgreek",
-                "_primary": true 
-            } 
+                "_primary": true
+            }
         ],
         "location": "someserve.org/img/sample_file.jpg",
         "publisher": "urn: cspace: org.collectionspace.demo: personauthority: name(person): person: name(johnjohn)'John+John'",
         "relations": [
             {
                 "relation": "Some relation",
-                "_primary": false 
+                "_primary": false
             },
             {
                 "relation": "Primary relation",
-                "_primary": true 
-            } 
+                "_primary": true
+            }
         ],
         "rightsHolder": "urn: cspace: org.collectionspace.demo: personauthority: name(person): person: name(jimnabors)'Jim+Nabors'",
         "source": "This is source",
         "subjects": [
             {
                 "subject": "This is topic",
-                "_primary": true 
-            } 
+                "_primary": true
+            }
         ],
         "title": "Sample File",
         "types": [
             {
                 "type": "document",
-                "_primary": true 
+                "_primary": true
             },
             {
                 "type": "dataset",
-                "_primary": false 
-            } 
-        ] 
+                "_primary": false
+            }
+        ]
     }
 }

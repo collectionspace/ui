@@ -38,9 +38,17 @@ cspace = cspace || {};
                 }
             })
         },
+        finalInitFunction: "cspace.dimension.finalInit",
         renderOnInit: true
     });
     
+    cspace.dimension.finalInit = function (that) {
+        cspace.util.processReadOnly(that.container, that.options.readOnly);
+        if (that.options.readOnly) {
+            $("a", that.container).hide();
+        }
+    };
+
     cspace.dimension.cutpointGenerator = function (selectors, options) {
         return cspace.renderUtils.cutpointsFromUISpec(options.protoTree);
     };
