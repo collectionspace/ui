@@ -688,6 +688,26 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }, "{arguments}.1"]
         });
+        fluid.demands("cspace.autocomplete", ["cspace.recordEditor", "organization", "cspace.hierarchy"], {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                invokers: {
+                    handlePermissions: {
+                        funcName: "cspace.autocomplete.handlePermissions",
+                        args: ["{autocomplete}.applier", "{autocomplete}.model", "cspace.permissions.resolve", {
+                            resolver: "{permissionsResolver}",
+                            permission: "update"
+                        }, "create", "{autocomplete}.autocompleteInput"]
+                    }
+                },
+                components: {
+                    confirmation: "{confirmation}",
+                    broaderDataSource: {
+                        type: "cspace.autocomplete.broaderDataSource"
+                    }
+                }
+            }, "{arguments}.1"]
+        });
         fluid.demands("cspace.autocomplete.broaderDataSource", "cspace.autocomplete", {
             funcName: "cspace.URLDataSource",
             args: {
