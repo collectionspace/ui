@@ -160,6 +160,7 @@ cspace = cspace || {};
             dateQualifierUnitLabel: ".csc-structuredDate-dateQualifierUnit-label",
             dateEarliestSingleRowLabel: ".csc-structuredDate-dateEarliestSingleRow-label",
             dateLatestRowLabel: ".csc-structuredDate-dateLatestRow-label",
+            dateScalarValueLabel: ".csc-structuredDate-dateScalarValue-label",
             dateEarliestSingleYear: ".csc-structuredDate-dateEarliestSingleYear",
             dateEarliestSingleMonth: ".csc-structuredDate-dateEarliestSingleMonth",
             dateEarliestSingleDay: ".csc-structuredDate-dateEarliestSingleDay",
@@ -168,6 +169,7 @@ cspace = cspace || {};
             dateEarliestSingleQualifier: ".csc-structuredDate-dateEarliestSingleQualifier",
             dateEarliestSingleQualifierValue: ".csc-structuredDate-dateEarliestSingleQualifierValue",
             dateEarliestSingleQualifierUnit: ".csc-structuredDate-dateEarliestSingleQualifierUnit",
+            dateEarliestScalarValue: ".csc-structuredDate-dateEarliestScalarValue",
             dateLatestYear: ".csc-structuredDate-dateLatestYear",
             dateLatestMonth: ".csc-structuredDate-dateLatestMonth",
             dateLatestDay: ".csc-structuredDate-dateLatestDay",
@@ -175,7 +177,8 @@ cspace = cspace || {};
             dateLatestCertainty: ".csc-structuredDate-dateLatestCertainty",
             dateLatestQualifier: ".csc-structuredDate-dateLatestQualifier",
             dateLatestQualifierValue: ".csc-structuredDate-dateLatestQualifierValue",
-            dateLatestQualifierUnit: ".csc-structuredDate-dateLatestQualifierUnit"
+            dateLatestQualifierUnit: ".csc-structuredDate-dateLatestQualifierUnit",
+            dateLatestScalarValue: ".csc-structuredDate-dateLatestScalarValue"
         },
         strings: {},
         stringPaths: {
@@ -195,7 +198,8 @@ cspace = cspace || {};
             dateQualifierValueLabel: "structuredDate-dateQualifierValueLabel",
             dateQualifierUnitLabel: "structuredDate-dateQualifierUnitLabel",
             dateEarliestSingleRowLabel: "structuredDate-dateEarliestSingleRowLabel",
-            dateLatestRowLabel: "structuredDate-dateLatestRowLabel"
+            dateLatestRowLabel: "structuredDate-dateLatestRowLabel",
+            dateScalarValueLabel: "structuredDate-scalarValueLabel"
         },
         // This is the place to specify the template for the popup
         // (e.g. StructuredDate.html). This template will be fetched
@@ -211,7 +215,7 @@ cspace = cspace || {};
             })
         },
         root: "",
-        elPaths: [],
+        elPaths: {},
         invokers: {
             resolveFullElPath: {
                 funcName: "cspace.structuredDate.popup.resolveFullElPath",
@@ -220,9 +224,108 @@ cspace = cspace || {};
             composeElPath: {
                 funcName: "cspace.structuredDate.popup.composeElPath",
                 args: ["{popup}.options.elPaths", "{popup}.options.root", "{arguments}.0"]
+            },
+            composeRootElPath: {
+                funcName: "cspace.structuredDate.popup.composeRootElPath",
+                args: ["{popup}.options.elPaths", "{popup}.options.root"]
+            },
+            updateScalarValues: {
+                funcName: "cspace.structuredDate.popup.updateScalarValues",
+                args: ["{arguments}.0", "{arguments}.2", "{popup}.applier", "{popup}.composeElPath", "{popup}.refreshView","{popup}.options.defaultFormat"]
             }
-        }
+        },
+        defaultFormat: "yyyy-MM-dd",
+        displayScalars: false
     });
+    
+    var setDateYear = function (year) {
+        var date = new Date();
+        return date.set({year: parseInt(year, 10)});
+    };
+    
+    var setDateMonth = function (date, month, earliest) {
+        var opts = {};
+        if (!month) {
+            opts.month = earliest ? 0 : 11;
+        } else {
+            opts.month = parseInt(month, 10) - 1;
+        }
+        return date.set(opts);
+    }
+    
+    var setDateDay = function (date, day, earliest) {
+        var opts = {};
+        if (!day) {
+            opts.day = earliest ? 1 : Date.getDaysInMonth(date.getYear(), date.getMonth());
+        } else {
+            opts.month = parseInt(day, 10);
+        }
+        return date.set(opts);
+    }
+    
+    var setDate = function (year, month, day, earliest) {
+        var date = setDateYear(year);
+        setDateMonth(date, month, earliest);
+        setDateDay(date, day, earliest);
+        return date;
+    };
+    
+    cspace.structuredDate.popup.updateScalarValues = function (model, changeRequest, applier, composeElPath, refreshView, defaultFormat) {
+        // Login is based on:
+        // http://wiki.collectionspace.org/display/collectionspace/Date+Schema+Computations
+        var eScalarValuePath = composeElPath("dateEarliestScalarValue"),
+            lScalarValuePath = composeElPath("dateLatestScalarValue");
+        if (changeRequest[0].path === eScalarValuePath || changeRequest[0].path === lScalarValuePath) {
+            return;
+        }   
+        var eYear = fluid.get(model, composeElPath("dateEarliestSingleYear")),
+            lYear = fluid.get(model, composeElPath("dateLatestYear")),
+            eMonth = fluid.get(model, composeElPath("dateEarliestSingleMonth")),
+            lMonth = fluid.get(model, composeElPath("dateLatestMonth")),
+            eDay = fluid.get(model, composeElPath("dateEarliestSingleDay")),
+            lDay = fluid.get(model, composeElPath("dateLatestDay")),
+            eQualifier = fluid.get(model, composeElPath("dateEarliestSingleQualifier")),
+            lQualifier = fluid.get(model, composeElPath("dateLatestQualifier")),
+            eQualifierValue = fluid.get(model, composeElPath("dateEarliestSingleQualifierValue")),
+            lQualifierValue = fluid.get(model, composeElPath("dateLatestQualifierValue")),
+            eQualifierUnit = fluid.get(model, composeElPath("dateEarliestSingleQualifierUnit")),
+            lQualifierUnit = fluid.get(model, composeElPath("dateLatestQualifierUnit"));
+
+        if (!eYear && !lYear) {
+            return;
+        }
+        
+        var eStaticDate, lStaticDate;
+        
+        try {
+            if (eYear && lYear) {
+                eStaticDate = setDate(eYear, eMonth, eDay, true);
+                lStaticDate = setDate(lYear, lMonth, lDay, false);
+            }
+            else if (eYear) {
+                eStaticDate = setDate(eYear, eMonth, eDay, true);
+                lStaticDate = eStaticDate.clone();
+            }
+            else if (lYear) {
+                lStaticDate = setDate(lYear, lMonth, lDay, false);
+                eStaticDate = lStaticDate.clone();
+            }
+        } catch (e) {
+            return;
+        }
+
+        applier.requestChange(eScalarValuePath, eStaticDate.toString(defaultFormat));
+        applier.requestChange(lScalarValuePath, lStaticDate.toString(defaultFormat));
+        refreshView();
+   };
+    
+    cspace.structuredDate.popup.composeRootElPath = function (elPaths, root) {
+        var path = fluid.find(elPaths, function(elPath) {
+            var segs = elPath.split(".");
+            return segs.slice(0, segs.length - 1).join(".");
+        });
+        return fluid.model.composeSegments.apply(null, root ? [root, path] : [path]);
+    };
     
     cspace.structuredDate.popup.resolveFullElPath = function (composeElPath, key) {
         return "${" + composeElPath(key) + "}";
@@ -339,6 +442,17 @@ cspace = cspace || {};
             },
             dateEarliestSingleDay: that.resolveFullElPath("dateEarliestSingleDay"),
             dateEarliestSingleMonth: that.resolveFullElPath("dateEarliestSingleMonth"),
+            expander: {
+                type: "fluid.renderer.condition",
+                condition: that.options.displayScalars,
+                trueTree: {
+                    dateScalarValueLabel: {
+                        messagekey: that.options.stringPaths.dateScalarValueLabel
+                    },
+                    dateEarliestScalarValue: that.resolveFullElPath("dateEarliestScalarValue"),
+                    dateLatestScalarValue: that.resolveFullElPath("dateLatestScalarValue"),
+                }
+            },
             dateDisplayDateLabel: {
                 messagekey: that.options.stringPaths.dateDisplayDateLabel
             },
@@ -393,6 +507,10 @@ cspace = cspace || {};
     cspace.structuredDate.popup.finalInitFunction = function (that) {
         that.options.protoTree = fluid.invokeGlobalFunction(that.options.getProtoTree, [that]);
         that.refreshView();
+        var scalarValuesComputedPath = that.composeElPath("scalarValuesComputed"); 
+        if (scalarValuesComputedPath && fluid.get(that.model, scalarValuesComputedPath)) {
+            that.applier.modelChanged.addListener(that.composeRootElPath(), that.updateScalarValues);
+        }
     };
 
     // Fetching / Caching

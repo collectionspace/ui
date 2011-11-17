@@ -1818,7 +1818,10 @@
                             "dateNote": "fields.objectProductionDate.dateNote",
                             "dateLatestQualifierUnit": "fields.objectProductionDate.dateLatestQualifierUnit",
                             "dateEarliestSingleDay": "fields.objectProductionDate.dateEarliestSingleDay",
-                            "dateEarliestSingleMonth": "fields.objectProductionDate.dateEarliestSingleMonth"
+                            "dateEarliestSingleMonth": "fields.objectProductionDate.dateEarliestSingleMonth",
+                            "dateEarliestScalarValue": "fields.objectProductionDate.dateEarliestScalarValue",
+                            "dateLatestScalarValue": "fields.objectProductionDate.dateLatestScalarValue",
+                            "scalarValuesComputed": "fields.objectProductionDate.scalarValuesComputed"
                         }
                     }
                 }
