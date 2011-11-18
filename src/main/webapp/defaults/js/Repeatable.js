@@ -394,7 +394,7 @@ cspace = cspace || {};
                     // "items" as a default value for the first element in the array. So if we want to extract a default
                     // value we always need to change the index to 0.
                     fluid.model.composeSegments(that.options.recordType, that.options.fullPath.replace(/\.\d\./gi, ".0."), 0), 
-                    that.options.schema);
+                    that.options.schema) || baseRow;
             }
             // Make new row's primary by default = 0. Currently UISCHEMA set's default value as true.
             baseRow._primary = false;
