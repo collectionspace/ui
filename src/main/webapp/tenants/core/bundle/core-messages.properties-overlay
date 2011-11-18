@@ -1,0 +1,5 @@
+#test overlay functionality
+overlaykey1: overlayval3
+overlaykey2: overlayval3
+overlaykey3: overlayval3
+login-login-info: THIS IS AN OVERLAY MESSAGE: To view the CollectionSpace Core tenant, use the login box on the right with the login:
