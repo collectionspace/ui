@@ -258,7 +258,7 @@ cspace = cspace || {};
         if (!day) {
             opts.day = earliest ? 1 : Date.getDaysInMonth(date.getYear(), date.getMonth());
         } else {
-            opts.month = parseInt(day, 10);
+            opts.day = parseInt(day, 10);
         }
         return date.set(opts);
     }
@@ -304,11 +304,11 @@ cspace = cspace || {};
             }
             else if (eYear) {
                 eStaticDate = setDate(eYear, eMonth, eDay, true);
-                lStaticDate = eStaticDate.clone();
+                lStaticDate = setDate(eYear, lMonth || eMonth, lDay || eDay, false);
             }
             else if (lYear) {
                 lStaticDate = setDate(lYear, lMonth, lDay, false);
-                eStaticDate = lStaticDate.clone();
+                eStaticDate = setDate(lYear, eMonth || lMonth, eDay || lDay , true);
             }
         } catch (e) {
             return;
