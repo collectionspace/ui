@@ -76,12 +76,16 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:hover,
 table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 	background-position:2px 1px; height:15px;}
 	
+.cs-repeatable-group .cs-repeatable-repeat ,
+.cs-repeatable-group .cs-repeatable-repeat ,
 .cs-repeatable-withSubgroup .cs-repeatable-repeat  {
 	border:1px solid #CCC;
 	background-color:#E2E2E2;
 	padding:4px 4px 0 4px;
 }
 
+.cs-repeatable-group .cs-repeatable-repeat .cs-repeatable-content,
+.cs-repeatable-group .cs-repeatable-repeat .cs-repeatable-content,
 .cs-repeatable-withSubgroup .cs-repeatable-repeat .cs-repeatable-content {
 	float:left;
 	width:96%;}

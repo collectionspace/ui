@@ -148,7 +148,8 @@ cspace = cspace || {};
             "delete": "cs-repeatable-delete",
             primary: "cs-repeatable-primary",
             content: "cs-repeatable-content",
-            withSubgroup: "cs-repeatable-withSubgroup"
+            withSubgroup: "cs-repeatable-withSubgroup",
+            repeatableGroup: "cs-repeatable-group"
         },
         preInitFunction: [{
             namespace: "preInitGenerateMethods",
@@ -168,8 +169,8 @@ cspace = cspace || {};
             namespace: "finalInitBindEvents",
             listener: "cspace.repeatableImpl.finalInitBindEvents"
         }, {
-            namespace: "finalInitStyleNested",
-            listener: "cspace.repeatableImpl.finalInitStyleNested"
+            namespace: "finalInitStyle",
+            listener: "cspace.repeatableImpl.finalInitStyle"
         }],
         markup: {
             addControl:     "<input type='button' />",
@@ -281,9 +282,22 @@ cspace = cspace || {};
         });
     };
 
-    cspace.repeatableImpl.finalInitStyleNested = function (that) {
+    var isGroup = function (tree) {
+        var index = 0;
+        return fluid.find(tree, function (leaf) {
+            if (index > 1) {
+                return true;
+            }
+            ++index;
+        });
+    };
+
+    cspace.repeatableImpl.finalInitStyle = function (that) {
         if (hasRepeatableSubgroup(that.options.components)) {
             that.container.addClass(that.options.styles.withSubgroup);
+        }
+        if (isGroup(that.options.repeatTree)) {
+            that.container.addClass(that.options.styles.repeatableGroup);
         }
         that.positionAddButton();
     };
