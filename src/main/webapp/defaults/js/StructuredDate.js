@@ -238,9 +238,24 @@ cspace = cspace || {};
         displayScalars: false
     });
     
+    var validate = function (value, field) {
+        var parsed = parseInt(value, 10),
+            month = arguments[2],
+            year = arguments[3];
+
+        if (field === "Month") {
+            parsed -= 1;
+        }
+        if (!Date["validate" + field](parsed, year, month)) {
+            throw "Invalid " + field;
+        }
+        return parsed;
+    };
+
     var setDateYear = function (year) {
+        var parsedYear = validate(year, "Year");
         var date = new Date();
-        return date.set({year: parseInt(year, 10)});
+        return date.set({year: parsedYear});
     };
     
     var setDateMonth = function (date, month, earliest) {
@@ -248,7 +263,7 @@ cspace = cspace || {};
         if (!month) {
             opts.month = earliest ? 0 : 11;
         } else {
-            opts.month = parseInt(month, 10) - 1;
+            opts.month = validate(month, "Month");
         }
         return date.set(opts);
     }
@@ -258,7 +273,7 @@ cspace = cspace || {};
         if (!day) {
             opts.day = earliest ? 1 : Date.getDaysInMonth(date.getYear(), date.getMonth());
         } else {
-            opts.day = parseInt(day, 10);
+            opts.day = validate(day, "Day", date.getYear(), date.getMonth());
         }
         return date.set(opts);
     }
@@ -270,6 +285,22 @@ cspace = cspace || {};
         return date;
     };
     
+    var setStaticDate = function (eYear, eMonth, eDay, lYear, lMonth, lDay, earliest) {
+        var firstYear = eYear, secondYear = lYear,
+            firstMonth = eMonth, secondMonth = lMonth,
+            firstDay = eDay, secondDay = lDay;
+        if (!earliest) {
+            firstYear = lYear;
+            firstMonth = lMonth;
+            firstDay = lDay;
+            secondYear = eYear;
+            secondMonth = eMonth;
+            secondDay = eDay;
+        }
+        return firstYear ? setDate(firstYear, firstMonth, firstDay, earliest) :
+                           setDate(secondYear, firstMonth || secondMonth, firstDay || secondDay, earliest);
+    };
+
     cspace.structuredDate.popup.updateScalarValues = function (model, changeRequest, applier, composeElPath, refreshView, defaultFormat) {
         // Login is based on:
         // http://wiki.collectionspace.org/display/collectionspace/Date+Schema+Computations
@@ -296,20 +327,9 @@ cspace = cspace || {};
         }
         
         var eStaticDate, lStaticDate;
-        
         try {
-            if (eYear && lYear) {
-                eStaticDate = setDate(eYear, eMonth, eDay, true);
-                lStaticDate = setDate(lYear, lMonth, lDay, false);
-            }
-            else if (eYear) {
-                eStaticDate = setDate(eYear, eMonth, eDay, true);
-                lStaticDate = setDate(eYear, lMonth || eMonth, lDay || eDay, false);
-            }
-            else if (lYear) {
-                lStaticDate = setDate(lYear, lMonth, lDay, false);
-                eStaticDate = setDate(lYear, eMonth || lMonth, eDay || lDay , true);
-            }
+            eStaticDate = setStaticDate(eYear, eMonth, eDay, lYear, lMonth, lDay, true);
+            lStaticDate = setStaticDate(eYear, eMonth, eDay, lYear, lMonth, lDay, false);
         } catch (e) {
             return;
         }
