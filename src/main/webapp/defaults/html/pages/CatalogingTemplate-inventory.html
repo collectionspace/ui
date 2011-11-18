@@ -62,28 +62,104 @@
 						</div>
 					</div>
 				</div>
-				<div class="info-column">
-					<div class="info-column2-50 fl-force-left">
-						<div class="info-pair">
-							<div class="header">
-								<div class="label csc-collection-object-title-label"></div>
-							</div>
-							<div class="content csc-collection-object-titleGroup">
-								<input type="text" class="csc-object-identification-object-title editableText"/>
-							</div>
-						</div>
-					</div>
-					<div class="info-column2-50 fl-force-right">
-	                    <div class="info-pair">
-	                        <div class="header">
-	                            <div class="label csc-collection-object-objectName-label"></div>
-	                        </div>
-	                        <div class="content csc-collection-object-objectNameGroup">
-	                            <input type="text" class="csc-object-identification-object-name"/>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
+				<div class="info-column" id="multipleEdit">
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label csc-collection-object-titleGroup-label"></div>
+                        </div>
+                        <div class="content csc-collection-object-titleGroup">
+                            <div class="info-column">
+                                <div class="info-column2-60 fl-force-left">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-collection-object-title-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <input type="text" class="csc-object-identification-object-title input-alpha"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="info-column2-40 fl-force-right">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-collection-object-titleLanguage-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <select class="csc-object-identification-object-title-language input-select"><option value="">Options not loaded</option></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="info-column">
+                                <div class="info-column2-60 fl-force-left">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-titleGroup-titleTranslationSubGroup-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <td class="csc-collection-object-titleTranslation-label"></td>
+                                                        <td class="csc-collection-object-titleTranslationLanguage-label"></td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="csc-titleGroup-titleTranslationSubGroup">
+                                                        <td class="flc-inlineEdit-text"><input type="text" class="csc-object-identification-object-title-translation editableText"/></td>
+                                                        <td class="flc-inlineEdit-text"><select class="csc-collection-object-titleTranslationLanguage input-select"><option value="">Options not loaded</option></select></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="info-column2-40 fl-force-right">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-collection-object-titleType-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <select class="csc-object-identification-object-title-type input-select"><option value="">Options not loaded</option></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="info-pair">
+                        <div class="header">
+                            <div class="label csc-collection-object-objectNameGroup-label"></div>
+                        </div>
+                        <div class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td class="csc-collection-object-objectName-label"></td>
+                                        <td class="csc-collection-object-objectNameCurrency-label"></td>
+                                        <td class="csc-collection-object-objectNameLevel-label"></td>
+                                        <td class="csc-collection-object-objectNameSystem-label"></td>
+                                        <td class="csc-collection-object-objectNameType-label"></td>
+                                        <td class="csc-collection-object-objectNameLanguage-label"></td>
+                                        <td class="csc-collection-object-objectNameNote-label"></td>
+                                    </tr>
+                                </thead>                                                                
+                                <tbody>
+                                    <tr class="csc-collection-object-objectNameGroup">
+                                        <td><input type="text" class="csc-object-identification-object-name"/></td>
+                                        <td><select class="csc-object-identification-object-currency input-select"><option value="">Options not loaded</option></select></td>
+                                        <td><select class="csc-object-identification-object-level input-select"><option value="">Options not loaded</option></select></td>
+                                        <td><select class="csc-object-identification-object-system input-select"><option value="">Options not loaded</option></select></td>
+                                        <td><select class="csc-object-identification-object-type input-select"><option value="">Options not loaded</option></select></td>
+                                        <td><select class="csc-object-identification-object-language input-select"><option value="">Options not loaded</option></select></td>    
+                                        <td style="width:25%;"><input type="text" class="csc-object-identification-object-note"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 			</div>
 		</div> <!-- information-group -->
 
