@@ -1,5 +1,35 @@
-#test overlay functionality
-overlaykey1: overlayval3
-overlaykey2: overlayval3
-overlaykey3: overlayval3
-login-login-info: THIS IS AN OVERLAY MESSAGE: To view the CollectionSpace Core tenant, use the login box on the right with the login:
+#Login
+login-allFieldsRequired: All fields must be filled in
+login-emailRequired: You must enter a valid email address
+login-passwordsMustMatch: Passwords must match
+login-invalid: Invalid email/password combination
+login-generalError: We are sorry, an error has occurred. Please try again, or contact your system administrator.
+login-current: Current Release 1.12 Information
+login-current-info: The CollectionSpace project team is pleased to announce the release of CollectionSpace 1.12. For the full release announcement, please visit the project's website.
+login-current-details: A major deliverable for this release is increased support for multi-tenancy, or the means by which a single CollectionSpace instance can support disparate tenants. This work is foundational to supporting CollectionSpace in a hosted environment. This demo site now supports two tenants.
+login-login-info: To view the CollectionSpace Core tenant, use the login box on the right with the login:
+login-login: admin@core.collectionspace.org
+login-login-pwd:  and that password\t 
+login-login-pwdValue: Administrator
+login-rologin-info:
+login-rologin:
+login-rologin-pwd: 
+login-rologin-pwdValue:
+login-footerFirst: A tenant configured for use with \t
+login-footerLink: life sciences collections
+login-footerLast:  is also available. In the future, additional demo tenants will be created to show configurations specific to art, digital and variable media, and anthropology.
+login-header: Sign In
+login-email-label: Email
+login-password-label: Password
+login-loginButton: Sign In
+login-forgot: Forgot Password?\t
+login-reset-label: Click here to reset password,
+login-reset-header: Reset password
+login-enterEmailMessage: Please enter the email address associated with your account.
+login-submitEmail: Reset My Password
+login-loginBack: Back to Sign In page
+login-loginNewPasswordNote: Enter the new password for\t
+login-loginPasswordInstructions: Password must be between 8 and 24 characters.
+login-loginNewPasswordLabel: New Password
+login-loginConfirmPasswordLabel: Confirm Password
+login-submitNewPassword: Reset
