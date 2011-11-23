@@ -194,6 +194,9 @@ fluid.defaults("cspace.tests.testEnvironment", {
                 schema: "{testEnvironment}.options.schema"
             }
         },
+        loadingIndicator: {
+            type: "cspace.util.loadingIndicator"
+        },
         messageBar: {
             type: "cspace.messageBar"
         }

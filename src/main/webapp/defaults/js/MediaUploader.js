@@ -17,9 +17,6 @@ cspace = cspace || {};
 
     cspace.mediaUploader = function (container, options) {
         var that = fluid.initRendererComponent("cspace.mediaUploader", container, options);
-        // This selector is for uploader loading indicator.
-        var parent = that.container.parents(that.options.selectors.parents);
-        that.parent = parent.length > 0 ? parent.eq(0) : that.container;
         fluid.initDependents(that);
         that.refreshView();
         that.bindEvents();
@@ -226,10 +223,9 @@ cspace = cspace || {};
             fileUploader: ".csc-mediaUploader-fileUploaderContainer",
             uploadMediaLabel: ".csc-mediaUploader-uploadMedia-label",
             linkMediaLabel: ".csc-mediaUploader-linkMedia-label",
-            uploader: ".csc-mediaUploader",
-            parents: ".content.main"
+            uploader: ".csc-mediaUploader"
         },
-        selectorsToIgnore: ["fileUploader", "uploadInput", "parents"],
+        selectorsToIgnore: ["fileUploader", "uploadInput"],
         strings: {},
         styles: {
             button: "cs-mediaUploader-button",
@@ -243,12 +239,6 @@ cspace = cspace || {};
         },
         produceTree: cspace.mediaUploader.produceTree,
         components: {
-            loadingIndicator: {
-                type: "cspace.util.loadingIndicator",
-                container: "{mediaUploader}.parent",
-                createOnEvent: "afterRender",
-                priority: "last"
-            },
             uploaderContext: {
                 type: "fluid.progressiveChecker",
                 priority: "first",

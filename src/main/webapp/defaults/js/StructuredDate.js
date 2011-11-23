@@ -470,7 +470,7 @@ cspace = cspace || {};
                         messagekey: that.options.stringPaths.dateScalarValueLabel
                     },
                     dateEarliestScalarValue: that.resolveFullElPath("dateEarliestScalarValue"),
-                    dateLatestScalarValue: that.resolveFullElPath("dateLatestScalarValue"),
+                    dateLatestScalarValue: that.resolveFullElPath("dateLatestScalarValue")
                 }
             },
             dateDisplayDateLabel: {

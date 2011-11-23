@@ -6,7 +6,7 @@
             },
             "components": {
                 "login": {
-                    "type": "cspace.login" 
+                    "type": "cspace.login"
                 } 
             }
         }

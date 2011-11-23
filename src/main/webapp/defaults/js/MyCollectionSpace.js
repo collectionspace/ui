@@ -68,10 +68,9 @@ cspace = cspace || {};
     };
     
     var setupMyCollectionSpace = function (that) {
-        fluid.initDependent(that, "myCollectionSpaceLoadingIndicator", that.options.instantiator);
         
         that.displayErrorMessage = function (message) {
-            cspace.util.displayErrorMessage(that.options.messageBar, message, that.myCollectionSpaceLoadingIndicator);
+            cspace.util.displayErrorMessage(that.options.messageBar, message);
         };
         
         that.lookupMessage = function (message) {
@@ -243,16 +242,6 @@ cspace = cspace || {};
             }]
         },
         components: {
-            myCollectionSpaceLoadingIndicator: {
-                type: "cspace.util.loadingIndicator",
-                container: "{myCollectionSpace}.container",
-                options: {
-                    events: {
-                        showOn: "{myCollectionSpace}.events.onFetch",
-                        hideOn: "{myCollectionSpace}.events.afterFetch"
-                    }
-                }
-            },
             cataloging: {
                 type: "cspace.recordList"
             },

@@ -74,16 +74,6 @@ cspace = cspace || {};
         globalNavigator: "{globalNavigator}",
         messageBar: "{messageBar}",
         components: {
-            listLoadingIndicator: {
-                type: "cspace.util.loadingIndicator",
-                container: "{listEditor}.dom.list",
-                options: {
-                    events: {
-                        showOn: "{listEditor}.events.onListUpdate",
-                        hideOn: "{listEditor}.events.afterListUpdate"
-                    }
-                }
-            },
             listSource: {
                 type: "cspace.listEditor.listDataSource"
             },

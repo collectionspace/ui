@@ -68,7 +68,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         recordEditor: {
                             options: {
                                 listeners: {
-                                    afterRender: function (recordEditor) {
+                                    "afterRender.orgTest": function (recordEditor) {
                                         var repeatableField = [
                                             "organizationAuthority-group",
                                             "organizationAuthority-function",

@@ -753,29 +753,16 @@ fluid.registerNamespace("cspace.util");
         }
     });
 
-    function updateDimensions(that) {
-        var target = that.container[0];
-        that.indicator[target.offsetHeight < that.options.spinnerDimensions.height ||
-                       target.offsetWidth < that.options.spinnerDimensions.width ?
-                       "addClass" : "removeClass"](that.options.styles.contain);
-        that.indicator.css({
-            left: target.offsetLeft + "px",
-            top: target.offsetTop + "px",
-            width: target.offsetWidth + "px",
-            height: target.offsetHeight + "px"
-        });
-    }
-
     fluid.defaults("cspace.util.loadingIndicator", {
-        gradeNames: ["fluid.viewComponent", "autoInit"],
+        gradeNames: ["fluid.eventedComponent", "autoInit"],
         preInitFunction: "cspace.util.loadingIndicator.preInitFunction",
         postInitFunction: "cspace.util.loadingIndicator.postInitFunction",
         styles: {
             loading: "cs-loading-indicator",
             contain: "cs-loading-contain"
         },
-        showOn: [],
-        hideOn: [],
+        showOn: null,
+        hideOn: null,
         events: {
             showOn: null,
             hideOn: null
@@ -789,42 +776,26 @@ fluid.registerNamespace("cspace.util");
 
     cspace.util.loadingIndicator.postInitFunction = function (that) {
 
-        fluid.each(that.options.showOn, function (event) {
+        fluid.each(fluid.makeArray(that.options.showOn), function (event) {
             event.addListener(that.show, undefined, undefined, "first");
         });
-        fluid.each(that.options.hideOn, function (event) {
+        
+        fluid.each(fluid.makeArray(that.options.hideOn), function (event) {
             event.addListener(that.hide, undefined, undefined, "last");
         });
 
         that.indicator = $("<div/>");
         that.indicator.hide();
         that.indicator.addClass(that.options.styles.loading);
-        that.container[that.container[0] === document.body ? "append" : "after"](that.indicator);
+        $(document.body).append(that.indicator);
 
-        that.container.resize(that.update);
-        var body = document.body;
-        var domSubtreeModifiedListner = function (event) {
-            if ($(event.target).hasClass(that.options.styles.loading)) {
-                return;
-            }
-            that.update();
-        };
-        if (body.addEventListener) {
-            body.addEventListener("DOMSubtreeModified", domSubtreeModifiedListner, false);
-        } else if (body.attachEvent) {
-            body.attachEvent("onDOMSubtreeModified", domSubtreeModifiedListner);
-        }
         if (that.options.loadOnInit) {
             that.show();
         }
     };
 
     cspace.util.loadingIndicator.preInitFunction = function (that) {
-        that.update = function () {
-            updateDimensions(that);
-        };
         that.show = function () {
-            that.update();
             that.indicator.show();
         };
         that.hide = function () {
@@ -1024,15 +995,14 @@ fluid.registerNamespace("cspace.util");
             },
             loadingIndicator: {
                 type: "cspace.util.loadingIndicator",
-                container: "body",
                 options: {
+                	loadOnInit: true,
                     hideOn: [
-                        "{globalSetup}.events.pageReady",
                         "{globalSetup}.events.onError"
                     ],
-                    events: {
-                        showOn: "{globalSetup}.events.onFetch"
-                    }
+                    showOn: [
+                    	"{globalSetup}.events.onFetch"
+                    ]
                 }
             }
         }

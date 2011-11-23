@@ -13,6 +13,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 (function ($, fluid) {
     
+    fluid.setLogging(false);
+
     fluid.registerNamespace("cspace");
     
     cspace.includeLocalDemands = function () {
@@ -164,6 +166,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 baseUrl: "../../../../test/data",
                 fileExtension: ".json",
                 listeners: {
+                    afterFetch: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire",
+                    onFetch: "{loadingIndicator}.events.showOn.fire",
                     modelChanged: {
                         listener: "{listEditor}.events.detailsModelChanged.fire",
                         priority: "last"
@@ -181,7 +186,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     modelChanged: {
                         listener: "{listEditor}.events.detailsModelChanged.fire",
                         priority: "last"
-                    }
+                    },
+                    afterFetch: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire",
+                    onFetch: "{loadingIndicator}.events.showOn.fire"
                 }
             }
         });
@@ -194,6 +202,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         fluid.demands("dataContext", ["cspace.pageBuilderIO", "cspace.localData"], {
             options: {
+                listeners: {
+                    afterFetch: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire",
+                    onFetch: "{loadingIndicator}.events.showOn.fire"
+                },
                 model: "{pageBuilderIO}.options.model",
                 baseUrl: "../../../../test/data",
                 fileExtension: ".json"
@@ -443,41 +456,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
-    
-        // Loading indicator demands
-        fluid.demands("recordEditorLoadingIndicator", ["cspace.recordEditor", "cspace.listEditor"], {
-            container: "{listEditor}.dom.allDetails",
-            options: {
-                hideOn: [
-                    "{recordEditor}.options.dataContext.events.afterFetch",
-                    "{recordEditor}.options.dataContext.events.onError",
-                    "{recordEditor}.events.afterRender",
-                    "{recordEditor}.events.afterRemove",
-                    "{recordEditor}.events.cancelSave"
-                ],
-                showOn: [
-                    "{recordEditor}.options.dataContext.events.onFetch",
-                    "{recordEditor}.events.onSave",
-                    "{recordEditor}.events.onCancel"
-                ]
-            }
-        });
-        fluid.demands("recordEditorLoadingIndicator", ["cspace.recordEditor"], {
-            container: "{recordEditor}.container",
-            options: {
-                hideOn: [
-                    "{recordEditor}.options.dataContext.events.afterFetch",
-                    "{recordEditor}.options.dataContext.events.onError",
-                    "{recordEditor}.events.afterRender",
-                    "{recordEditor}.events.cancelSave"
-                ],
-                showOn: [
-                    "{recordEditor}.options.dataContext.events.onFetch",
-                    "{recordEditor}.events.onSave",
-                    "{recordEditor}.events.onCancel"
-                ]
-            }
-        });
         
         // Hierarchy demands
         fluid.demands("hierarchy", "cspace.recordEditor", {
@@ -497,6 +475,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("adminListEditor", ["cspace.admin"], {
             container: "{admin}.container", 
             options: {
+                listeners: {
+                    afterListUpdate: "{loadingIndicator}.events.hideOn.fire",
+                    onListUpdate: "{loadingIndicator}.events.showOn.fire"
+                },
                 selectors: {
                     allDetails: ".csc-admin-details"
                 },
@@ -519,6 +501,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("adminListEditor", ["cspace.admin", "cspace.users"], {
             container: "{admin}.container",
             options: {
+                listeners: {
+                    afterListUpdate: "{loadingIndicator}.events.hideOn.fire",
+                    onListUpdate: "{loadingIndicator}.events.showOn.fire"
+                },
                 selectors: {
                     allDetails: ".csc-admin-details"
                 },
@@ -533,6 +519,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("listEditor", "cspace.relatedRecordsTab", {
             container: "{relatedRecordsTab}.container",
             options: {
+                listeners: {
+                    afterListUpdate: "{loadingIndicator}.events.hideOn.fire",
+                    onListUpdate: "{loadingIndicator}.events.showOn.fire"
+                },
                 selectors: {
                     allDetails: ".csc-relatedRecordsTab-recordEditor"
                 },
@@ -807,7 +797,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     modelChanged: {
                         listener: "{listEditor}.events.detailsModelChanged.fire",
                         priority: "last"
-                    }
+                    },
+                    afterFetch: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire",
+                    onFetch: "{loadingIndicator}.events.showOn.fire"
                 }
             }
         });
@@ -820,7 +813,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 model: "{pageBuilderIO}.options.model",
                 listeners: {
-                    onError: "{globalSetup}.events.onError.fire"
+                    onError: [{
+                        listener: "{globalSetup}.events.onError.fire"
+                    }, {
+                        listener: "{loadingIndicator}.events.hideOn.fire"
+                    }],
+                    afterFetch: "{loadingIndicator}.events.hideOn.fire",
+                    onFetch: "{loadingIndicator}.events.showOn.fire"
                 }
             }
         });
@@ -828,7 +827,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 model: "{pageBuilderIO}.options.model",
                 listeners: {
-                    onError: "{globalSetup}.events.onError.fire"
+                    onError: [{
+                        listener: "{globalSetup}.events.onError.fire"
+                    }, {
+                        listener: "{loadingIndicator}.events.hideOn.fire"
+                    }],
+                    afterFetch: "{loadingIndicator}.events.hideOn.fire",
+                    onFetch: "{loadingIndicator}.events.showOn.fire"
                 },
                 urls: {
                     expander: {
@@ -848,7 +853,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     modelChanged: {
                         listener: "{listEditor}.events.detailsModelChanged.fire",
                         priority: "last"
-                    }
+                    },
+                    afterFetch: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire",
+                    onFetch: "{loadingIndicator}.events.showOn.fire"
                 }
             }
         });
@@ -916,6 +924,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("recordEditor", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.recordEditor",
             options: {
+                listeners: {
+                    afterRender: "{loadingIndicator}.events.hideOn.fire",
+                    cancelSave: "{loadingIndicator}.events.hideOn.fire",
+                    onSave: "{loadingIndicator}.events.showOn.fire",
+                    onCancel: "{loadingIndicator}.events.showOn.fire"
+                },
                 readOnly: "{pageBuilderIO}.options.readOnly",
                 recordType: "{pageBuilderIO}.options.recordType",
                 produceTree: {
@@ -953,6 +967,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.template"], {
             container: "{pageBuilder}.options.selectors.recordEditor",
             options: {
+                listeners: {
+                    afterRender: "{loadingIndicator}.events.hideOn.fire",
+                    cancelSave: "{loadingIndicator}.events.hideOn.fire",
+                    onSave: "{loadingIndicator}.events.showOn.fire",
+                    onCancel: "{loadingIndicator}.events.showOn.fire"
+                },
                 readOnly: "{pageBuilderIO}.options.readOnly",
                 recordType: "{pageBuilderIO}.options.recordType",
                 produceTree: "cspace.recordEditor.produceTreeTemplate"
@@ -1017,6 +1037,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("details", ["cspace.listEditor", "cspace.administration"], {
             container: "{listEditor}.dom.details",
             options: {
+                listeners: {
+                    afterRender: "{loadingIndicator}.events.hideOn.fire",
+                    cancelSave: "{loadingIndicator}.events.hideOn.fire",
+                    afterRemove: "{loadingIndicator}.events.hideOn.fire",
+                    onSave: "{loadingIndicator}.events.showOn.fire",
+                    onCancel: "{loadingIndicator}.events.showOn.fire"
+                },
                 readOnly: "{pageBuilderIO}.options.readOnly",
                 recordType: "{listEditor}.options.recordType",
                 showDeleteButton: {
@@ -1047,6 +1074,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("details", ["cspace.listEditor", "cspace.tab"], {
             container: "{listEditor}.dom.details",
             options: {
+                listeners: {
+                    afterRender: "{loadingIndicator}.events.hideOn.fire",
+                    cancelSave: "{loadingIndicator}.events.hideOn.fire",
+                    afterRemove: "{loadingIndicator}.events.hideOn.fire",
+                    onSave: "{loadingIndicator}.events.showOn.fire",
+                    onCancel: "{loadingIndicator}.events.showOn.fire"
+                },
                 readOnly: "{pageBuilderIO}.options.readOnly",
                 recordType: "{listEditor}.options.recordType",
 	            produceTree: {
@@ -1357,7 +1391,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         // Login demands
         fluid.demands("login", "cspace.pageBuilder", {
-            container: "{pageBuilder}.options.selectors.login"
+            container: "{pageBuilder}.options.selectors.login",
+            options: {
+                listeners: {
+                    afterRender: "{loadingIndicator}.events.hideOn.fire"
+                }
+            }
         });
         
         // Media upload demands
@@ -1372,37 +1411,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
-        fluid.demands("cspace.util.loadingIndicator", ["cspace.mediaUploader", "fluid.uploader.singleFile", "fileUploader"], {
-            options: fluid.COMPONENT_OPTIONS
-        });
-        fluid.demands("cspace.util.loadingIndicator", ["cspace.mediaUploader", "fluid.uploader.html5", "fileUploader"], {
-            options: {
-                hideOn: [
-                    "{fileUploader}.events.onFileSuccess",
-                    "{fileUploader}.events.onFileError"
-                ],
-                events: {
-                    showOn: "{fileUploader}.events.onUploadStart"
-                }
-            }
-        });
-        fluid.demands("cspace.util.loadingIndicator", ["cspace.mediaUploader", "fluid.uploader.swfUpload", "fileUploader"], {
-            options: {
-                hideOn: [
-                    "{fileUploader}.events.onFileSuccess",
-                    "{fileUploader}.events.onFileError"
-                ],
-                events: {
-                    showOn: "{fileUploader}.events.onUploadStart"
-                }
-            }
-        });
+
         fluid.demands("fluid.uploader", ["cspace.mediaUploader", "fluid.uploader.singleFile"], {
             options: fluid.COMPONENT_OPTIONS
         });
         fluid.demands("fluid.uploader", ["cspace.mediaUploader", "fluid.uploader.html5"], {
             options: {
                 listeners: {
+                    onUploadStart: "{loadingIndicator}.events.showOn.fire",
                     afterFileQueued: {
                         expander: {
                             type: "fluid.deferredInvokeCall",
@@ -1410,26 +1426,35 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             args: "{mediaUploader}.dom.uploadInput"
                         }
                     },
-                    onFileSuccess: {
-                        expander: {
-                            type: "fluid.deferredInvokeCall",
-                            func: "cspace.mediaUploader.onFileSuccess",
-                            args: ["{mediaUploader}", "{mediaUploader}.dom.uploadInput"]
+                    onFileSuccess: [{
+                        listener: {
+                            expander: {
+                                type: "fluid.deferredInvokeCall",
+                                func: "cspace.mediaUploader.onFileSuccess",
+                                args: ["{mediaUploader}", "{mediaUploader}.dom.uploadInput"]
+                            }
                         }
-                    },
-                    onFileError: {
-                        expander: {
-                            type: "fluid.deferredInvokeCall",
-                            func: "cspace.mediaUploader.onFileError",
-                            args: "{mediaUploader}"
+                    }, {
+                        listener: "{loadingIndicator}.events.hideOn.fire"
+                    }],
+                    onFileError: [{
+                        listener: "{loadingIndicator}.events.hideOn.fire"
+                    }, {
+                        listener: {
+                            expander: {
+                                type: "fluid.deferredInvokeCall",
+                                func: "cspace.mediaUploader.onFileError",
+                                args: "{mediaUploader}"
+                            }
                         }
-                    }
+                    }]
                 }
             }
         });
         fluid.demands("fluid.uploader", ["cspace.mediaUploader", "fluid.uploader.swfUpload"], {
             options: {
                 listeners: {
+                    onUploadStart: "{loadingIndicator}.events.showOn.fire",
                     afterFileQueued: {
                         expander: {
                             type: "fluid.deferredInvokeCall",
@@ -1437,20 +1462,28 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             args: "{mediaUploader}.dom.uploadInput"
                         }
                     },
-                    onFileSuccess: {
-                        expander: {
-                            type: "fluid.deferredInvokeCall",
-                            func: "cspace.mediaUploader.onFileSuccess",
-                            args: ["{mediaUploader}", "{mediaUploader}.dom.uploadInput"]
+                    onFileSuccess: [{
+                        listener: {
+                            expander: {
+                                type: "fluid.deferredInvokeCall",
+                                func: "cspace.mediaUploader.onFileSuccess",
+                                args: ["{mediaUploader}", "{mediaUploader}.dom.uploadInput"]
+                            }
                         }
-                    },
-                    onFileError: {
-                        expander: {
-                            type: "fluid.deferredInvokeCall",
-                            func: "cspace.mediaUploader.onFileError",
-                            args: "{mediaUploader}"
+                    }, {
+                        listener: "{loadingIndicator}.events.hideOn.fire"
+                    }],
+                    onFileError: [{
+                        listener: "{loadingIndicator}.events.hideOn.fire"
+                    }, {
+                        listener: {
+                            expander: {
+                                type: "fluid.deferredInvokeCall",
+                                func: "cspace.mediaUploader.onFileError",
+                                args: "{mediaUploader}"
+                            }
                         }
-                    }
+                    }]
                 }
             }
         });
@@ -1683,11 +1716,24 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     searchResultsResolver: {
                         type: "cspace.search.searchResultsResolver"
                     }
+                },
+                listeners: {
+                    afterSearch: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire",
+                    onSearch: "{loadingIndicator}.events.showOn.fire"
                 }
             }
         });
         fluid.demands("search", "cspace.pageBuilder", {
-            container: "{pageBuilder}.options.selectors.search"
+            container: "{pageBuilder}.options.selectors.search",
+            options: {
+                listeners: {
+                    ready: "{loadingIndicator}.events.hideOn.fire",
+                    afterSearch: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire",
+                    onSearch: "{loadingIndicator}.events.showOn.fire"
+                }
+            }
         });
         
         fluid.demands("search", ["cspace.pageBuilder", "cspace.advancedSearch"], {
@@ -1701,6 +1747,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     onAdvancedSearch: null,
                     hideResults: null,
                     currentSearchUpdated: "{searchTools}.events.currentSearchUpdated"
+                },
+                listeners: {
+                	ready: "{loadingIndicator}.events.hideOn.fire",
+                	afterSearch: "{loadingIndicator}.events.hideOn.fire",
+                    onError: "{loadingIndicator}.events.hideOn.fire",
+                    onSearch: "{loadingIndicator}.events.showOn.fire"
                 },
                 invokers: {
                     updateSearch: {
@@ -1721,6 +1773,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                 afterToggle: "{searchView}.events.hideResults"
                             },
                             listeners: {
+                            	afterSearchFieldsInit: "{loadingIndicator}.events.hideOn.fire",
+                                recordTypeChanged: "{loadingIndicator}.events.showOn.fire",
                                 onSearch: {
                                     listener: "{searchTools}.events.renderOn.fire",
                                     priority: "last"

@@ -61,7 +61,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         recordEditor: {
                             options: {
                                 listeners: {
-                                    afterRender: function () {
+                                    "afterRender.catalogingTest": function () {
                                         jqUnit.notVisible("On the main record tab link 'Go to record' should be invisible", $(".csc-goto"));
                                         jqUnit.assertUndefined("Link for the invisible 'Go to record' should not have href attribute", $(".csc-goto").attr("href"));
                                         start();                  

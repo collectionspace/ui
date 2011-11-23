@@ -317,7 +317,7 @@ cspace = cspace || {};
     
         pageBuilderTest.asyncTest("Invocation of dependent components: container parameter", function () {
             expect(4);    // this is total num of assertions in the test components
-            fluid.demands("recordEditor", "cspace.pageBuilder", {
+            fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.test"], {
                 container: "{pageBuilder}.options.selectors.recordEditor"
             });
             fluid.demands("relatedRecords", "cspace.pageBuilder", {
@@ -340,7 +340,7 @@ cspace = cspace || {};
         pageBuilderTest.asyncTest("Invocation of dependent components: mini IOC", function () {
             expect(5);
             fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.test1");
-            fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.test1"], 
+            fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.test1", "cspace.test"], 
                 ["{pageBuilder}.options.selectors.recordEditor", fluid.COMPONENT_OPTIONS]);
             var pbIO = cspace.pageBuilderIO(optionsWithComponentsWithIOCdemands.pageBuilderIO.options);
             pbIO.initPageBuilder(optionsWithComponentsWithIOCdemands.pageBuilder.options);
@@ -349,7 +349,7 @@ cspace = cspace || {};
         pageBuilderTest.asyncTest("Invocation of dependent components: additional parameters to components", function () {
             expect(4);
             fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.test2");
-            fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.test2"], 
+            fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.test2", "cspace.test"], 
                 ["{pageBuilder}.options.selectors.recordEditor", "extraParameter", fluid.COMPONENT_OPTIONS]);
             var pbIO = cspace.pageBuilderIO(optionsWithComponentsWithAdditionalParameters.pageBuilderIO.options);
             pbIO.initPageBuilder(optionsWithComponentsWithAdditionalParameters.pageBuilder.options);
@@ -358,7 +358,7 @@ cspace = cspace || {};
         pageBuilderTest.asyncTest("Invocation of dependent components: IOC in additional parameters", function () {
             expect(4);
             fluid.staticEnvironment.cspacePage = fluid.typeTag("cspace.test3");
-            fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.test3"], 
+            fluid.demands("recordEditor", ["cspace.pageBuilder", "cspace.test3", "cspace.test"], 
                 ["{pageBuilder}.options.selectors.recordEditor", "{pageBuilder}.options.pbOpt", fluid.COMPONENT_OPTIONS]);
             var pbIO = cspace.pageBuilderIO(optionsWithComponentsWithDemandInParameters.pageBuilderIO.options);
             pbIO.initPageBuilder(optionsWithComponentsWithDemandInParameters.pageBuilder.options);

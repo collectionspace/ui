@@ -189,7 +189,8 @@ cspace = cspace || {};
             modelChanged: null,
             onSearch: null,
             afterSearch: null,
-            onError: null
+            onError: null,
+            ready: null
         },
         columnList: ["number", "summary", "recordtype", "summarylist.updatedAt"],
         resultsSelectable: false,
@@ -214,19 +215,6 @@ cspace = cspace || {};
             }
         },
         components: {
-            searchLoadingIndicator: {
-                type: "cspace.util.loadingIndicator",
-                container: "{searchView}.dom.loadingIndicator",
-                options: {
-                    hideOn: [
-                        "{searchView}.events.afterSearch",
-                        "{searchView}.events.onError"
-                    ],
-                    events: {
-                        showOn: "{searchView}.events.onSearch"
-                    }
-                }
-            },
             mainSearch: {
                 type: "cspace.searchBox",
                 options: {
@@ -382,6 +370,7 @@ cspace = cspace || {};
         if (that.model.searchModel.recordType) {
             that.search();
         }
+        that.events.ready.fire();
     };
     
     cspace.search.searchView.advancedSearch = function (newPagerModel, that) {

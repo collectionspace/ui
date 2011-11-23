@@ -29,7 +29,10 @@
                 "createNew": {
                     "type": "cspace.createNew",
                     "options": {
-                        "permissions": "{pageBuilder}.permissions" 
+                        "permissions": "{pageBuilder}.permissions",
+                        "listeners": {
+                            "onReady": "{loadingIndicator}.events.hideOn.fire"
+                        }
                     } 
                 },
                 "header": {

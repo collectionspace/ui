@@ -39,18 +39,6 @@ cspace = cspace || {};
                 },
                 priority: "first"
             },
-            advancedSearchLoadingIndicator: {
-                type: "cspace.util.loadingIndicator",
-                options: {
-                    loadOnInit: true,
-                    events: {
-                        hideOn: "{advancedSearch}.events.afterSearchFieldsInit",
-                        showOn: "{advancedSearch}.events.recordTypeChanged"
-                    }
-                },
-                createOnEvent: "afterRender",
-                container: "{advancedSearch}.dom.step2"
-            },
             searchHistoryStorage: {
                 type: "cspace.util.localStorageDataSource",
                 options: {
