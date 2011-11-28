@@ -211,6 +211,7 @@ cspace = cspace || {};
         
         that.refreshView = function () {
             fluid.log("RecordEditor.js before render");
+            that.events.onRefreshView.fire();
             that.renderer.refreshView();
             cspace.util.processReadOnly(that.container, that.options.readOnly);
             processChanges(that, false);
@@ -222,6 +223,7 @@ cspace = cspace || {};
         };
         that.refreshNoSave = function () {
             fluid.log("RecordEditor.js before render");
+            that.events.onRefreshView.fire();
             that.renderer.refreshView();
             that.options.messageBar.hide();
             bindHandlers(that);
@@ -596,7 +598,8 @@ cspace = cspace || {};
             cancelSave: null,
             afterRemove: null, // params: textStatus
             onError: null, // params: operation
-            afterRenderRefresh: null 
+            afterRenderRefresh: null,
+            onRefreshView: null
         },
         showDeleteButton: false,
         showCreateFromExistingButton: false,

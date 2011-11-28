@@ -1703,7 +1703,21 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{arguments}.0",
             mergeAllOptions: [{
                 applier: "{recordEditor}.applier",
-                model: "{recordEditor}.model"
+                model: "{recordEditor}.model",
+                events: {
+                    removeListeners: "{recordEditor}.events.onRefreshView"
+                }
+            }, "{arguments}.1"]
+        });
+
+        fluid.demands("cspace.structuredDate", ["cspace.repeatableImpl", "cspace.makeRepeatable"], {
+            container: "{arguments}.0",
+            mergeAllOptions: [{
+                applier: "{repeatableImpl}.applier",
+                model: "{repeatableImpl}.model",
+                events: {
+                    removeListeners: "{repeatableImpl}.events.onRefreshView"
+                }
             }, "{arguments}.1"]
         });
         

@@ -74,7 +74,8 @@ cspace = cspace || {};
         events: {
             afterDelete: null,
             afterAdd: null,
-            afterUpdatePrimary: null
+            afterUpdatePrimary: null,
+            onRefreshView: null
         }
     });
 
@@ -100,7 +101,8 @@ cspace = cspace || {};
         events: {
             afterDelete: null,
             afterAdd: null,
-            afterUpdatePrimary: null
+            afterUpdatePrimary: null,
+            onRefreshView: null
         }
     });
 
@@ -334,6 +336,7 @@ cspace = cspace || {};
     cspace.repeatableImpl.updateAndRefresh = function (that, callback, event, render, index) {
         that.requestChange(callback, index);
         if (render) {
+            that.events.onRefreshView.fire();
             that.refreshView();
         }
         event.fire();
@@ -384,12 +387,14 @@ cspace = cspace || {};
     };
     
     cspace.repeatableImpl.refreshView = function (that) {
+        that.events.onRefreshView.fire();
         that.renderer.refreshView();
         that.positionAddButton();
         that.setupPrimary();
     };
     
     cspace.repeatableImpl.finalInitRender = function (that) {
+        that.events.onRefreshView.fire();
         that.renderer.refreshView();
         that.setupPrimary();
         that.processDeleteInput();

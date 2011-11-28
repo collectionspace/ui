@@ -18,6 +18,7 @@ cspace = cspace || {};
     // Default options for the component.
     fluid.defaults("cspace.structuredDate", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
+        preInitFunction: "cspace.structuredDate.preInit",
         postInitFunction: "cspace.structuredDate.postInitFunction",
         finalInitFunction: "cspace.structuredDate.finalInitFunction",
         selectors: {
@@ -50,13 +51,30 @@ cspace = cspace || {};
                     model: "{structuredDate}.model",
                     applier: "{structuredDate}.applier",
                     elPaths: "{structuredDate}.options.elPaths",
-                    root: "{structuredDate}.options.root"
+                    root: "{structuredDate}.options.root",
+                    events: {
+                        removeListeners: "{structuredDate}.events.removeListeners"
+                    }
                 }
                 
+            }
+        },
+        events: {
+            removeListeners: null
+        },
+        listeners: {
+            removeListeners: {
+                listener: "{structuredDate}.removeApplierListeners"
             }
         }
     });
     
+    cspace.structuredDate.preInit = function (that) {
+        that.removeApplierListeners = function () {
+            that.applier.modelChanged.removeListener("elPath-" + that.id);
+        };
+    };
+
     cspace.structuredDate.finalInitFunction = function (that) {
         // Dismiss the structured date popup by pressing the ESC key
         that.union.keyup(function (event) {
@@ -90,7 +108,7 @@ cspace = cspace || {};
             var fullElPath = fluid.model.composeSegments.apply(null, that.options.root ? [that.options.root, that.options.elPath] : [that.options.elPath]);
             that.applier.modelChanged.addListener(fullElPath, function (model) {
                 that.container.val(fluid.get(model, fullElPath));
-            });
+            }, "elPath-" + that.id);
         }
         
         // Show the structured date popup when focus is placed
@@ -314,13 +332,7 @@ cspace = cspace || {};
             eMonth = fluid.get(model, composeElPath("dateEarliestSingleMonth")),
             lMonth = fluid.get(model, composeElPath("dateLatestMonth")),
             eDay = fluid.get(model, composeElPath("dateEarliestSingleDay")),
-            lDay = fluid.get(model, composeElPath("dateLatestDay")),
-            eQualifier = fluid.get(model, composeElPath("dateEarliestSingleQualifier")),
-            lQualifier = fluid.get(model, composeElPath("dateLatestQualifier")),
-            eQualifierValue = fluid.get(model, composeElPath("dateEarliestSingleQualifierValue")),
-            lQualifierValue = fluid.get(model, composeElPath("dateLatestQualifierValue")),
-            eQualifierUnit = fluid.get(model, composeElPath("dateEarliestSingleQualifierUnit")),
-            lQualifierUnit = fluid.get(model, composeElPath("dateLatestQualifierUnit"));
+            lDay = fluid.get(model, composeElPath("dateLatestDay"));
 
         if (!eYear && !lYear) {
             return;
@@ -526,10 +538,13 @@ cspace = cspace || {};
     
     cspace.structuredDate.popup.finalInitFunction = function (that) {
         that.options.protoTree = fluid.invokeGlobalFunction(that.options.getProtoTree, [that]);
-        that.refreshView();
-        var scalarValuesComputedPath = that.composeElPath("scalarValuesComputed"); 
+        var scalarValuesComputedPath = that.composeElPath("scalarValuesComputed"),
+            namespace = "scalar-" + that.id; 
         if (scalarValuesComputedPath && fluid.get(that.model, scalarValuesComputedPath)) {
-            that.applier.modelChanged.addListener(that.composeRootElPath(), that.updateScalarValues);
+            that.applier.modelChanged.addListener(that.composeRootElPath(), that.updateScalarValues, namespace);
+            that.events.removeListeners.addListener(function () {
+                that.applier.modelChanged.removeListener(namespace);
+            });
         }
     };
 
