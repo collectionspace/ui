@@ -21,7 +21,8 @@ cspace = cspace || {};
         if (cspace.util.useLocalData()) {
             return "../../../../test/data/" + recordType + "/records.json";
         } else {
-            return "../../../chain/" + recordType;
+            var expander = fluid.invoke("cspace.urlExpander");
+            return expander("%tenant/%tenantname/" + recordType);
         }
     };
     
