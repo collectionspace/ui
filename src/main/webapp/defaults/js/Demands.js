@@ -520,6 +520,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{relatedRecordsTab}.container",
             options: {
                 listeners: {
+                    pageReady: "{loadingIndicator}.events.hideOn.fire",
                     afterListUpdate: "{loadingIndicator}.events.hideOn.fire",
                     onListUpdate: "{loadingIndicator}.events.showOn.fire"
                 },
