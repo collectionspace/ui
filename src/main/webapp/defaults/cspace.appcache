@@ -1,11 +1,21 @@
 CACHE MANIFEST
-# 10-11-2011:v1
-
+NETWORK:
+*
 CACHE:
-../css/*
-../js/*
-../config/*
-../bundle/*
-../lib/*
-../html/*
-../images/*
+js/index.js
+js/template.js
+js/record.js
+js/myCollectionSpace.js
+js/findedit.js
+js/createnew.js
+js/advancedsearch.js
+js/administration.js
+
+css/index.css
+css/template.css
+css/record.css
+css/myCollectionSpace.css
+css/findedit.css
+css/createnew.css
+css/advancedsearch.css
+css/administration.css
