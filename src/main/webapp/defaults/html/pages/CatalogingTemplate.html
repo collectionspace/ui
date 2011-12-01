@@ -608,197 +608,201 @@
 					</div>
 				</div> <!-- information-subgroup -->			
 				
-				<div class="fl-container-flex fl-fix information-subgroup">
-					<div class="csc-recordEditor-header fl-container-flex header toggle csc-collection-object-textualInscriptionInformation-label"></div>
-					<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-						<div class="info-column">
-							<div class="info-pair">
-								<div class="header">
-									<div class="label csc-collection-object-inscriptionContent-label"></div>
-								</div>
-								<div class="content">
-									<textarea rows="4" cols="30" class="input-textarea csc-object-description-inscription-content"></textarea>
-								</div>
-							</div>
-						</div>
-						
-						<div class="info-column">
-							<div class="info-column2-50 fl-force-left">
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-inscriptionContentInscriber-label"></div>
-									</div>
-									<div class="content">
-										<input type="text" class="csc-object-description-inscription-content-inscriber"/>
-									</div>
-								</div>
-								
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-inscriptionContentLanguage-label"></div>
-									</div>
-									<div class="content">
-										<select class="csc-object-description-inscription-content-language input-select"><option value="">Options not loaded</option></select>
-									</div>
-								</div>
-									
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-inscriptionContentDate-label"></div>
-									</div>
-									<div class="content">
-										<input type="text" class="csc-object-description-inscription-content-date" />
-									</div>
-								</div>
-							</div>
-						
-							<div class="info-column2-50 fl-force-right">
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-inscriptionContentPosition-label"></div>
-									</div>
-									<div class="content">
-										<select class="csc-object-description-inscription-content-position input-select"><option value="">Options not loaded</option></select>
-									</div>
-								</div>
-								
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-inscriptionContentScript-label"></div>
-									</div>
-									<div class="content">
-										<select class="csc-object-description-inscription-content-script input-select"><option value="">Options not loaded</option></select>
-									</div>
-								</div>
-								
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-inscriptionContentType-label"></div>
-									</div>
-									<div class="content">
-										<select class="csc-object-description-inscription-content-type input-select"><option value="">Options not loaded</option></select>
-									</div>
-								</div>
-								
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-inscriptionContentMethod-label"></div>
-									</div>
-									<div class="content">
-										<input type="text" class="csc-object-description-inscription-content-method"/>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="info-column">
-							<div class="info-pair">
-								<div class="header">
-									<div class="label csc-collection-object-inscriptionContentInterpretation-label"></div>
-								</div>
-								<div class="content">
-									<textarea rows="4" cols="30" class="input-textarea csc-object-description-inscription-content-interpretation"></textarea>
-								</div>
-							</div>
-							
-							<div class="info-pair">
-								<div class="header">
-									<div class="label csc-collection-object-inscriptionContentTranslation-label"></div>
-								</div>
-								<div class="content">
-									<input type="text" class="csc-object-description-inscription-content-translation"/>
-								</div>
-							</div>
-							
-							<div class="info-pair">
-								<div class="header">
-									<div class="label csc-collection-object-inscriptionContentTransliteration-label"></div>
-								</div>
-								<div class="content">
-									<input type="text" class="csc-object-description-inscription-content-transliteration"/>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div> <!-- information-subgroup -->
+				<div class="fl-container-flex fl-fix information-group infoGroup"> <!--info-group = repeatable container -->
+                    <div class="csc-collection-object-textualInscriptionGroup">
+					    <div class="csc-recordEditor-header fl-container-flex header toggle csc-collection-object-textualInscriptionInformation-label"></div>
+                        <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+                            <div class="info-column">
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label csc-collection-object-inscriptionContent-label"></div>
+                                    </div>
+                                    <div class="content">
+                                        <textarea rows="4" cols="30" class="input-textarea csc-object-description-inscription-content"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-column">
+                                <div class="info-column2-50 fl-force-left">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-collection-object-inscriptionContentInscriber-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <input type="text" class="csc-object-description-inscription-content-inscriber"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-collection-object-inscriptionContentLanguage-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <select class="csc-object-description-inscription-content-language input-select"><option value="">Options not loaded</option></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-collection-object-inscriptionContentDate-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <input type="text" class="csc-object-description-inscription-content-date" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="info-column2-50 fl-force-right">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-collection-object-inscriptionContentPosition-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <select class="csc-object-description-inscription-content-position input-select"><option value="">Options not loaded</option></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-collection-object-inscriptionContentScript-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <select class="csc-object-description-inscription-content-script input-select"><option value="">Options not loaded</option></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-collection-object-inscriptionContentType-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <select class="csc-object-description-inscription-content-type input-select"><option value="">Options not loaded</option></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-collection-object-inscriptionContentMethod-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <input type="text" class="csc-object-description-inscription-content-method"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-column">
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label csc-collection-object-inscriptionContentInterpretation-label"></div>
+                                    </div>
+                                    <div class="content">
+                                        <textarea rows="4" cols="30" class="input-textarea csc-object-description-inscription-content-interpretation"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label csc-collection-object-inscriptionContentTranslation-label"></div>
+                                    </div>
+                                    <div class="content">
+                                        <input type="text" class="csc-object-description-inscription-content-translation"/>
+                                    </div>
+                                </div>
+
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label csc-collection-object-inscriptionContentTransliteration-label"></div>
+                                    </div>
+                                    <div class="content">
+                                        <input type="text" class="csc-object-description-inscription-content-transliteration"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- /.csc-collection-object-textualInscriptionGroup sub-group -->
+				</div> <!-- /info-group -->
 				
-				<div class="fl-container-flex fl-fix information-subgroup">
-					<div class="csc-recordEditor-header fl-container-flex header toggle csc-collection-object-nonTextualInscriptionInformation-label"></div>
-					<div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
-						<div class="info-column">
-							<div class="info-pair">
-								<div class="header">
-									<div class="label csc-collection-object-inscriptionDescription-label"></div>
-								</div>
-								<div class="content">
-									<textarea rows="4" cols="30" class="input-textarea csc-object-description-inscription-description"></textarea>
-								</div>
-							</div>
-						</div>
-						
-						<div class="info-column">
-							<div class="info-column2-50 fl-force-left">
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-inscriptionDescriptionInscriber-label"></div>
-									</div>
-									<div class="content">
-										<input type="text" class="csc-object-description-inscription-description-inscriber"/>
-									</div>
-								</div>
-									
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-inscriptionDescriptionDate-label"></div>
-									</div>
-									<div class="content">
-										<input type="text" class="csc-object-description-inscription-description-date" />
-									</div>
-								</div>								
-							</div>
-						
-							<div class="info-column2-50 fl-force-right">
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-inscriptionDescriptionPosition-label"></div>
-									</div>
-									<div class="content">
-										<select class="csc-object-description-inscription-description-position input-select"><option value="">Options not loaded</option></select>
-									</div>
-								</div>
-								
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-inscriptionDescriptionType-label"></div>
-									</div>
-									<div class="content">
-										<select class="csc-object-description-inscription-description-type input-select"><option value="">Options not loaded</option></select>
-									</div>
-								</div>
-								
-								<div class="info-pair">
-									<div class="header">
-										<div class="label csc-collection-object-inscriptionDescriptionMethod-label"></div>
-									</div>
-									<div class="content">
-										<input type="text" class="csc-object-description-inscription-description-method"/>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="info-column">
-							<div class="info-pair">
-								<div class="header">
-									<div class="label csc-collection-object-inscriptionDescriptionInterpretation-label"></div>
-								</div>
-								<div class="content">
-									<textarea rows="4" cols="30" class="input-textarea csc-object-description-inscription-description-interpretation"></textarea>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div> <!-- information-subgroup -->
+				<div class="fl-container-flex fl-fix information-group infoGroup"> <!--info-group = repeatable container -->
+                    <div class="csc-collection-object-nonTextualInscriptionGroup">
+					    <div class="csc-recordEditor-header fl-container-flex header toggle csc-collection-object-nonTextualInscriptionInformation-label"></div>
+                        <div class="csc-recordEditor-togglable fl-container-flex fl-fix content main">
+                            <div class="info-column">
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label csc-collection-object-inscriptionDescription-label"></div>
+                                    </div>
+                                    <div class="content">
+                                        <textarea rows="4" cols="30" class="input-textarea csc-object-description-inscription-description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-column">
+                                <div class="info-column2-50 fl-force-left">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-collection-object-inscriptionDescriptionInscriber-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <input type="text" class="csc-object-description-inscription-description-inscriber"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-collection-object-inscriptionDescriptionDate-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <input type="text" class="csc-object-description-inscription-description-date" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="info-column2-50 fl-force-right">
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-collection-object-inscriptionDescriptionPosition-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <select class="csc-object-description-inscription-description-position input-select"><option value="">Options not loaded</option></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-collection-object-inscriptionDescriptionType-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <select class="csc-object-description-inscription-description-type input-select"><option value="">Options not loaded</option></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="info-pair">
+                                        <div class="header">
+                                            <div class="label csc-collection-object-inscriptionDescriptionMethod-label"></div>
+                                        </div>
+                                        <div class="content">
+                                            <input type="text" class="csc-object-description-inscription-description-method"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-column">
+                                <div class="info-pair">
+                                    <div class="header">
+                                        <div class="label csc-collection-object-inscriptionDescriptionInterpretation-label"></div>
+                                    </div>
+                                    <div class="content">
+                                        <textarea rows="4" cols="30" class="input-textarea csc-object-description-inscription-description-interpretation"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- /.csc-collection-nonTextualInscriptionGroup sub-group -->
+                 </div> <!-- / infogroup -->
 			</div>
 		</div> <!-- information-group -->
 			
