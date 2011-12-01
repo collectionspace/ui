@@ -89,3 +89,10 @@ table tr.csc-repeatable-repeat input.cs-repeatable-delete[disabled]:focus {
 .cs-repeatable-withSubgroup .cs-repeatable-repeat .cs-repeatable-content {
 	float:left;
 	width:96%;}
+
+/* From Jesse, 21Nov011 */
+.infoGroup { padding:4px 0 0 0; background-color:#E2E2E2;}
+
+.infoGroup .cs-repeatable-group { position:relative;}
+
+.infoGroup .cs-repeatable-group .cs-repeatable-repeat { padding:16px 4px 10px 4px; border:none; background-color:inherit;}
