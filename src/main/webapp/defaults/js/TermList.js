@@ -104,7 +104,7 @@ cspace = cspace || {};
             termList: {
                 optionlist: that.options.optionlist,
                 optionnames: that.options.optionnames,
-                selection: "${" + fluid.model.composeSegments.apply(null, that.options.root ? [that.options.root, that.options.elPath] : [that.options.elPath]) + "}"
+                selection: "${" + cspace.util.composeSegments(that.options.root, that.options.elPath) + "}"
             }
         };
     };

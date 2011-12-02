@@ -105,7 +105,7 @@ cspace = cspace || {};
         // If the value of the summary element in the model changes,
         // update the value of the container field to reflect that change.
         if (that.options.elPath) {
-            var fullElPath = fluid.model.composeSegments.apply(null, that.options.root ? [that.options.root, that.options.elPath] : [that.options.elPath]);
+            var fullElPath = cspace.util.composeSegments(that.options.root, that.options.elPath);
             that.applier.modelChanged.addListener(fullElPath, function (model) {
                 that.container.val(fluid.get(model, fullElPath));
             }, "elPath-" + that.id);
@@ -142,6 +142,7 @@ cspace = cspace || {};
     // Default options for the popup sub-component.
     fluid.defaults("cspace.structuredDate.popup", {
         finalInitFunction: "cspace.structuredDate.popup.finalInitFunction",
+        preInitFunction: "cspace.structuredDate.popup.preInit",
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         // When merging models between component and sub-component,
         // the "preserve" policy will share the original model object,
@@ -253,7 +254,15 @@ cspace = cspace || {};
             }
         },
         defaultFormat: "yyyy-MM-dd",
-        displayScalars: false
+        displayScalars: false,
+        events: {
+            removeListeners: null
+        },
+        listeners: {
+            removeListeners: {
+                listener: "{popup}.removeApplierListeners"
+            }
+        }
     });
     
     var validate = function (value, field) {
@@ -356,7 +365,7 @@ cspace = cspace || {};
             var segs = elPath.split(".");
             return segs.slice(0, segs.length - 1).join(".");
         });
-        return fluid.model.composeSegments.apply(null, root ? [root, path] : [path]);
+        return cspace.util.composeSegments(root, path);
     };
     
     cspace.structuredDate.popup.resolveFullElPath = function (composeElPath, key) {
@@ -364,8 +373,7 @@ cspace = cspace || {};
     };
     
     cspace.structuredDate.popup.composeElPath = function (elPaths, root, key) {
-        var elPath = elPaths[key];
-        return fluid.model.composeSegments.apply(null, root ? [root, elPath] : [elPath]);
+        return cspace.util.composeSegments(root, elPaths[key]);
     };
     
     cspace.structuredDate.popup.getProtoTree = function (that) {
@@ -538,14 +546,16 @@ cspace = cspace || {};
     
     cspace.structuredDate.popup.finalInitFunction = function (that) {
         that.options.protoTree = fluid.invokeGlobalFunction(that.options.getProtoTree, [that]);
-        var scalarValuesComputedPath = that.composeElPath("scalarValuesComputed"),
-            namespace = "scalar-" + that.id; 
+        var scalarValuesComputedPath = that.composeElPath("scalarValuesComputed");
         if (scalarValuesComputedPath && fluid.get(that.model, scalarValuesComputedPath)) {
-            that.applier.modelChanged.addListener(that.composeRootElPath(), that.updateScalarValues, namespace);
-            that.events.removeListeners.addListener(function () {
-                that.applier.modelChanged.removeListener(namespace);
-            });
+            that.applier.modelChanged.addListener(that.composeRootElPath(), that.updateScalarValues, "scalar-" + that.id);
         }
+    };
+    
+    cspace.structuredDate.popup.preInit = function (that) {
+        that.removeApplierListeners = function () {
+            that.applier.modelChanged.removeListener("scalar-" + that.id);
+        };
     };
 
     // Fetching / Caching
