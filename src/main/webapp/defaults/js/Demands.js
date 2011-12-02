@@ -1711,13 +1711,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }, "{arguments}.1"]
         });
 
-        fluid.demands("cspace.structuredDate", ["cspace.repeatableImpl", "cspace.makeRepeatable"], {
+        fluid.demands("cspace.structuredDate", ["cspace.repeatableImpl", "cspace.makeRepeatable", "cspace.recordEditor"], {
             container: "{arguments}.0",
             mergeAllOptions: [{
                 applier: "{repeatableImpl}.applier",
                 model: "{repeatableImpl}.model",
                 events: {
-                    removeListeners: "{repeatableImpl}.events.onRefreshView"
+                    repeatableOnRefreshView: "{repeatableImpl}.events.onRefreshView",
+                    recordEditorOnRefreshView: "{recordEditor}.events.onRefreshView"
+                },
+                listeners: {
+                    repeatableOnRefreshView: "{structuredDate}.events.removeListeners.fire",
+                    recordEditorOnRefreshView: "{structuredDate}.events.removeListeners.fire"
                 }
             }, "{arguments}.1"]
         });

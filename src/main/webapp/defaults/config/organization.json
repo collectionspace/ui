@@ -70,7 +70,13 @@
             "components": {
                 "dataContext": {
                     "options": {
-                        "baseUrl": "../../../chain/vocabularies"
+                        "baseUrl": {
+                            "expander": {
+                                "type": "fluid.deferredInvokeCall",
+                                "func": "cspace.util.urlBuilder",
+                                "args": "%tenant/%tenantname/vocabularies"
+                            }
+                        }
                     }
                 }
             }

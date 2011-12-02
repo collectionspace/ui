@@ -66,9 +66,9 @@
                                                             "urls": {
                                                                 "expander": {
                                                                     "type": "fluid.deferredInvokeCall",
-                                                                    "func": "cspace.componentUrlBuilder",
+                                                                    "func": "cspace.util.urlBuilder",
                                                                     "args": {
-                                                                        "upload": "%chain/uploads/"
+                                                                        "upload": "%tenant/%tenantname/uploads/"
                                                                     }
                                                                 }
                                                             }

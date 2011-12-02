@@ -402,8 +402,7 @@ cspace = cspace || {};
         
     cspace.repeatableImpl.preInitGenerateMethods = function (that) {
         // This is a full path to repeatable sub-model.
-        that.options.fullPath = fluid.model.composeSegments.apply(null, 
-            that.options.root ? [that.options.root, that.options.elPath] : [that.options.elPath]);
+        that.options.fullPath = cspace.util.composeSegments(that.options.root, that.options.elPath);
         
         that.getBaseRow = function () {
             var baseRow = {};
