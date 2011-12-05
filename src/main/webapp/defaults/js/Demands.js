@@ -1522,7 +1522,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             container: "{arguments}.0",
             mergeAllOptions: [{
                 baseUrl: "{recordEditor}.options.dataContext.options.baseUrl",
-                readOnly: "{recordEditor}.options.readOnly"
+                readOnly: "{recordEditor}.options.readOnly",
+                strings: {
+                    notSupported: "{globalBundle}.messageBase.numberPatternChooser-notSupported"
+                }
             }, "{arguments}.1"]
         });
         

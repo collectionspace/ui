@@ -62,7 +62,7 @@ cspace = cspace || {};
             success: callback,
             error: function (xhr, textStatus, errorThrown) {
                 cspace.util.provideErrorCallback(that, url, "errorFetching")(xhr, textStatus, errorThrown);
-                callback({next: "Not supported yet"}, "error");
+                callback({next: that.options.strings.notSupported}, "error");
             }
         });
 
@@ -179,6 +179,7 @@ cspace = cspace || {};
             selecting: "cs-selecting",
             container: "cs-numberPatternChooserContainer"
         },
+        strings: {},
         readOnly: false,
         model: null,
         selected: null,
