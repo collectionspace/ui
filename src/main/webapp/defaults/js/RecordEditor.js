@@ -259,6 +259,7 @@ cspace = cspace || {};
             if (that.validator) {
                 var validatedModel = that.validator.validate(that.model);
                 if (!validatedModel) {
+                    that.events.cancelSave.fire();
                     return false;
                 }
                 else {
