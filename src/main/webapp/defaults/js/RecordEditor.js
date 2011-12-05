@@ -369,18 +369,14 @@ cspace = cspace || {};
             condition: that.options.showCreateFromExistingButton,
             trueTree: {
                 createFromExistingButton: {
-                    decorators: [{
-                        type: "attrs",
-                        attributes: {
-                            value: that.options.strings.createFromExistingButton
-                        }
-                    }, {
+                    messagekey: "recordEditor-createFromExistingButton",
+                    decorators: {
                         type: "jQuery",
                         func: "prop",
                         args: {
                             disabled: that.checkCreateFromExistingDisabling
                         }
-                    }]
+                    }
                 }
             }
         };
@@ -396,20 +392,10 @@ cspace = cspace || {};
             },
             trueTree: {
                 save: {
-                    decorators: {
-                        type: "attrs",
-                        attributes: {
-                            value: that.options.strings.save
-                        }
-                    }
+                    messagekey: "recordEditor-save"
                 },
                 cancel: {
-                    decorators: {
-                        type: "attrs",
-                        attributes: {
-                            value: that.options.strings.cancel
-                        }
-                    }
+                    messagekey: "recordEditor-cancel"
                 }
             }
         };
@@ -624,28 +610,7 @@ cspace = cspace || {};
         },
         parentBundle: "{globalBundle}",
         resolver: "{permissionsResolver}",
-        strings: {
-            specFetchError: "I'm sorry, an error has occurred fetching the UISpec: ",
-            errorRecoverySuggestion: "Please try refreshing your browser",
-            updateSuccessfulMessage: "%record successfully saved",
-            createSuccessfulMessage: "New %record successfully created",
-            removeSuccessfulMessage: "%record successfully deleted",
-            updateFailedMessage: "Error saving %record: ",
-            createFailedMessage: "Error creating %record: ",
-            deleteFailedMessage: "Error deleting %record: ",
-            fetchFailedMessage: "Error retriving %record: ",
-            addRelationsFailedMessage: "Error adding related records: ",
-            removeRelationsFailedMessage: "Error removing related records: ",
-            defaultTermIndicator: " (default)",
-            noDefaultInvitation: "-- Select an item from the list --",
-            missingRequiredFields: "Required field is empty: %field",
-            save: "Save",
-            cancel: "Cancel changes",
-            deleteButton: "Delete",
-            createFromExistingButton: "Create new from existing",
-            deleteMessageWithRelated: " and its relationships",
-            deleteMessageMediaAttached: " and its attached media"
-        },
+        strings: {},
         urls: cspace.componentUrlBuilder({
             deleteURL: "%webapp/html/findedit.html",
             cloneURL: "%webapp/html/%recordType.html"

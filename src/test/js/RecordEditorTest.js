@@ -32,6 +32,21 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 validator: {
                     type: "fluid.emptySubcomponent"
                 }
+            },
+            strings: {
+                updateSuccessfulMessage: "%record successfully saved",
+                createSuccessfulMessage: "New %record successfully created",
+                removeSuccessfulMessage: "%record successfully deleted",
+                updateFailedMessage: "Error saving %record: ",
+                createFailedMessage: "Error creating %record: ",
+                deleteFailedMessage: "Error deleting %record: ",
+                fetchFailedMessage: "Error retriving %record: ",
+                addRelationsFailedMessage: "Error adding related records: ",
+                removeRelationsFailedMessage: "Error removing related records: ",
+                missingRequiredFields: "Required field is empty: %field",
+                deleteButton: "Delete",
+                deleteMessageWithRelated: " and its relationships",
+                deleteMessageMediaAttached: " and its attached media"
             }
         });
         cspace.recordEditor("#main", options);

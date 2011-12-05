@@ -961,6 +961,21 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             target: "{pageBuilderIO}.options.recordType"
                         }
                     }
+                },
+                strings: {
+                    updateSuccessfulMessage: "{globalBundle}.messageBase.recordEditor-updateSuccessfulMessage",
+                    createSuccessfulMessage: "{globalBundle}.messageBase.recordEditor-createSuccessfulMessage",
+                    removeSuccessfulMessage: "{globalBundle}.messageBase.recordEditor-removeSuccessfulMessage",
+                    updateFailedMessage: "{globalBundle}.messageBase.recordEditor-updateFailedMessage",
+                    createFailedMessage: "{globalBundle}.messageBase.recordEditor-createFailedMessage",
+                    deleteFailedMessage: "{globalBundle}.messageBase.recordEditor-deleteFailedMessage",
+                    fetchFailedMessage: "{globalBundle}.messageBase.recordEditor-fetchFailedMessage",
+                    addRelationsFailedMessage: "{globalBundle}.messageBase.recordEditor-addRelationsFailedMessage",
+                    removeRelationsFailedMessage: "{globalBundle}.messageBase.recordEditor-removeRelationsFailedMessage",
+                    missingRequiredFields: "{globalBundle}.messageBase.recordEditor-missingRequiredFields",
+                    deleteButton: "{globalBundle}.messageBase.recordEditor-deleteButton",
+                    deleteMessageWithRelated: "{globalBundle}.messageBase.recordEditor-deleteMessageWithRelated",
+                    deleteMessageMediaAttached: "{globalBundle}.messageBase.recordEditor-deleteMessageMediaAttached"
                 }
             }
         });
@@ -976,7 +991,22 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 readOnly: "{pageBuilderIO}.options.readOnly",
                 recordType: "{pageBuilderIO}.options.recordType",
-                produceTree: "cspace.recordEditor.produceTreeTemplate"
+                produceTree: "cspace.recordEditor.produceTreeTemplate",
+                strings: {
+                    updateSuccessfulMessage: "{globalBundle}.messageBase.recordEditor-updateSuccessfulMessage",
+                    createSuccessfulMessage: "{globalBundle}.messageBase.recordEditor-createSuccessfulMessage",
+                    removeSuccessfulMessage: "{globalBundle}.messageBase.recordEditor-removeSuccessfulMessage",
+                    updateFailedMessage: "{globalBundle}.messageBase.recordEditor-updateFailedMessage",
+                    createFailedMessage: "{globalBundle}.messageBase.recordEditor-createFailedMessage",
+                    deleteFailedMessage: "{globalBundle}.messageBase.recordEditor-deleteFailedMessage",
+                    fetchFailedMessage: "{globalBundle}.messageBase.recordEditor-fetchFailedMessage",
+                    addRelationsFailedMessage: "{globalBundle}.messageBase.recordEditor-addRelationsFailedMessage",
+                    removeRelationsFailedMessage: "{globalBundle}.messageBase.recordEditor-removeRelationsFailedMessage",
+                    missingRequiredFields: "{globalBundle}.messageBase.recordEditor-missingRequiredFields",
+                    deleteButton: "{globalBundle}.messageBase.recordEditor-deleteButton",
+                    deleteMessageWithRelated: "{globalBundle}.messageBase.recordEditor-deleteMessageWithRelated",
+                    deleteMessageMediaAttached: "{globalBundle}.messageBase.recordEditor-deleteMessageMediaAttached"
+                }
             }
         });
         
@@ -1068,6 +1098,21 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             target: "{pageBuilderIO}.options.recordType"
                         }
                     }
+                },
+                strings: {
+                    updateSuccessfulMessage: "{globalBundle}.messageBase.recordEditor-updateSuccessfulMessage",
+                    createSuccessfulMessage: "{globalBundle}.messageBase.recordEditor-createSuccessfulMessage",
+                    removeSuccessfulMessage: "{globalBundle}.messageBase.recordEditor-removeSuccessfulMessage",
+                    updateFailedMessage: "{globalBundle}.messageBase.recordEditor-updateFailedMessage",
+                    createFailedMessage: "{globalBundle}.messageBase.recordEditor-createFailedMessage",
+                    deleteFailedMessage: "{globalBundle}.messageBase.recordEditor-deleteFailedMessage",
+                    fetchFailedMessage: "{globalBundle}.messageBase.recordEditor-fetchFailedMessage",
+                    addRelationsFailedMessage: "{globalBundle}.messageBase.recordEditor-addRelationsFailedMessage",
+                    removeRelationsFailedMessage: "{globalBundle}.messageBase.recordEditor-removeRelationsFailedMessage",
+                    missingRequiredFields: "{globalBundle}.messageBase.recordEditor-missingRequiredFields",
+                    deleteButton: "{globalBundle}.messageBase.recordEditor-deleteButton",
+                    deleteMessageWithRelated: "{globalBundle}.messageBase.recordEditor-deleteMessageWithRelated",
+                    deleteMessageMediaAttached: "{globalBundle}.messageBase.recordEditor-deleteMessageMediaAttached"
                 }
             }
         });
@@ -1111,6 +1156,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 showCreateFromExistingButton: false,
                 strings: {
+                    updateSuccessfulMessage: "{globalBundle}.messageBase.recordEditor-updateSuccessfulMessage",
+                    createSuccessfulMessage: "{globalBundle}.messageBase.recordEditor-createSuccessfulMessage",
+                    updateFailedMessage: "{globalBundle}.messageBase.recordEditor-updateFailedMessage",
+                    createFailedMessage: "{globalBundle}.messageBase.recordEditor-createFailedMessage",
+                    fetchFailedMessage: "{globalBundle}.messageBase.recordEditor-fetchFailedMessage",
+                    addRelationsFailedMessage: "{globalBundle}.messageBase.recordEditor-addRelationsFailedMessage",
+                    removeRelationsFailedMessage: "{globalBundle}.messageBase.recordEditor-removeRelationsFailedMessage",
+                    missingRequiredFields: "{globalBundle}.messageBase.recordEditor-missingRequiredFields",
+                    deleteMessageWithRelated: "{globalBundle}.messageBase.recordEditor-deleteMessageWithRelated",
+                    deleteMessageMediaAttached: "{globalBundle}.messageBase.recordEditor-deleteMessageMediaAttached",
                     deleteButton: "{globalBundle}.messageBase.tab-re-deleteButton",
                     deleteFailedMessage: "{globalBundle}.messageBase.tab-re-deleteFailedMessage",
                     removeSuccessfulMessage: "{globalBundle}.messageBase.tab-re-removeSuccessfulMessage"
