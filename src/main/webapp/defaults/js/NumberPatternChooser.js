@@ -28,6 +28,12 @@ cspace = cspace || {};
                 optionnames: {valuebinding: "names"},
                 optionlist: {valuebinding: "list"},
                 selection: {valuebinding: ""}
+            }, {
+                ID: "sample-header",
+                messagekey: "numberPatternChooser-sample"
+            }, {
+                ID: "type-header",
+                messagekey: "numberPatternChooser-type"
             }]
         };
         return tree.children.concat(fluid.transform(samples, function (node, index) {
@@ -49,7 +55,9 @@ cspace = cspace || {};
         return [
             {id: "pattern-row:", selector: selectors.row},
             {id: "pattern-name", selector: selectors.name},
-            {id: "pattern-sample", selector: selectors.sample}
+            {id: "pattern-sample", selector: selectors.sample},
+            {id: "sample-header", selector: selectors.sampleHeader},
+            {id: "type-header", selector: selectors.typeHeader}
         ];
     };
 
@@ -172,7 +180,9 @@ cspace = cspace || {};
             row: ".csc-numberPatternChooser-patternRow",
             name: ".csc-numberPatternChooser-name",
             sample: ".csc-numberPatternChooser-sample",
-            checkmark: ".csc-numberPatternChooser-checkmark"
+            checkmark: ".csc-numberPatternChooser-checkmark",
+            typeHeader: ".csc-numberPatternChooser-typeColumnHeader",
+            sampleHeader: ".csc-numberPatternChooser-sampleColumnHeader"
         },
         styles: {
             selected: "cs-numberPatternChooser-selected",
@@ -186,6 +196,7 @@ cspace = cspace || {};
         events: {
             afterRender: null
         },
+        parentBundle: "{globalBundle}",
         templateUrl: cspace.componentUrlBuilder("%webapp/html/components/NumberPatternChooser.html"),
         baseUrl: "../../../chain",
         invokers: {
@@ -226,9 +237,17 @@ cspace = cspace || {};
         
         // Get the template, create the tree and render the table of contents
         fluid.fetchResources(resources, function () {
-            var templates = fluid.parseTemplates(resources, ["chooser"], {});
-            var node = $("<div></div>", that.container[0].ownerDocument).addClass(that.options.styles.container);
-            fluid.reRender(templates, node, buildTree(that.model), {model: that.model});
+            var templates = fluid.parseTemplates(resources, ["chooser"], {}),
+                node = $("<div></div>", that.container[0].ownerDocument).addClass(that.options.styles.container),
+                messageResolver = fluid.messageResolver({
+                    messageBase: that.options.strings,
+                    resolveFunc: that.options.messageResolverFunction,
+                    parents: fluid.makeArray(that.options.parentBundle)
+                });
+            fluid.reRender(templates, node, buildTree(that.model), {
+                model: that.model,
+                messageSource: {type: "resolver", resolver: messageResolver}
+            });
             that.container.append(node);
             setupNode(that);
             bindEvents(that);

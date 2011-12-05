@@ -132,7 +132,7 @@ cspace = cspace || {};
                 messagekey: "recordList"
             },
             goToRecord: {
-                messagekey: "goToRecord"
+                messagekey: "relatedRecordsTab-goToRecord"
             }
         };
     };
@@ -199,9 +199,7 @@ cspace = cspace || {};
             afterRender: null
         },
         parentBundle: "{globalBundle}",
-        strings: {
-            goToRecord: "Go To Record"
-        },
+        strings: {},
         urls: cspace.componentUrlBuilder({
             "goTo": "%webapp/html/%related.html?csid=%csid"
         })
