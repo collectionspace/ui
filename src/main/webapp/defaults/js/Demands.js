@@ -1735,6 +1735,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("search", "cspace.searchToRelateDialog", {
             container: "{searchToRelateDialog}.container",
             options: {
+                strings: {
+                    errorMessage: "{globalBundle}.messageBase.search-errorMessage",
+                    resultsCount: "{globalBundle}.messageBase.search-resultsCount",
+                    looking: "{globalBundle}.messageBase.search-looking",
+                    selected: "{globalBundle}.messageBase.search-selected",
+                    number: "{globalBundle}.messageBase.search-number",
+                    summary: "{globalBundle}.messageBase.search-summary",
+                    recordtype: "{globalBundle}.messageBase.search-recordtype",
+                    "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
+                },
                 components: {
                     searchResultsResolver: {
                         type: "cspace.search.searchResultsResolver"
@@ -1750,6 +1760,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("search", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.search",
             options: {
+                strings: {
+                    errorMessage: "{globalBundle}.messageBase.search-errorMessage",
+                    resultsCount: "{globalBundle}.messageBase.search-resultsCount",
+                    looking: "{globalBundle}.messageBase.search-looking",
+                    selected: "{globalBundle}.messageBase.search-selected",
+                    number: "{globalBundle}.messageBase.search-number",
+                    summary: "{globalBundle}.messageBase.search-summary",
+                    recordtype: "{globalBundle}.messageBase.search-recordtype",
+                    "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
+                },
                 listeners: {
                     ready: "{loadingIndicator}.events.hideOn.fire",
                     afterSearch: "{loadingIndicator}.events.hideOn.fire",
@@ -1762,6 +1782,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("search", ["cspace.pageBuilder", "cspace.advancedSearch"], {
             container: "{pageBuilder}.options.selectors.search",
             options: {
+                strings: {
+                    errorMessage: "{globalBundle}.messageBase.search-errorMessage",
+                    resultsCount: "{globalBundle}.messageBase.search-resultsCount",
+                    looking: "{globalBundle}.messageBase.search-looking",
+                    selected: "{globalBundle}.messageBase.search-selected",
+                    number: "{globalBundle}.messageBase.search-number",
+                    summary: "{globalBundle}.messageBase.search-summary",
+                    recordtype: "{globalBundle}.messageBase.search-recordtype",
+                    "summarylist.updatedAt": "{globalBundle}.messageBase.search-updatedAt"
+                },
                 selectors: {
                     mainSearch: "{pageBuilder}.options.selectors.advancedSearch"
                 },

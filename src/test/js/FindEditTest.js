@@ -54,6 +54,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     });
     
     var setupFindEdit = function (options) {
+        options.strings = options.strings || {
+            errorMessage: "We've encountered an error retrieving search results. Please try again: ",
+            resultsCount: "Found %count records for %query",
+            looking: "Looking for %query...",
+            selected: "Select",
+            number: "ID Number",
+            summary: "Summary",
+            recordtype: "Record Type",
+            "summarylist.updatedAt": "Updated At"
+        };
         return cspace.search.searchView(".main-search-page", options);
     };
     

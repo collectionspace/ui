@@ -174,16 +174,7 @@ cspace = cspace || {};
         styles: {
             disabled: "cs-search-disabled"
         },
-        strings: {
-            errorMessage: "We've encountered an error retrieving search results. Please try again: ",
-            resultsCount: "Found %count records for %query",
-            looking: "Looking for %query...",
-            selected: "Select",
-            number: "ID Number",
-            summary: "Summary",
-            recordtype: "Record Type",
-            "summarylist.updatedAt": "Updated At"
-        },
+        strings: {},
         messageBar: "{messageBar}",
         events: {
             modelChanged: null,
