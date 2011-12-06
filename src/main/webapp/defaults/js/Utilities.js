@@ -1337,7 +1337,7 @@ fluid.registerNamespace("cspace.util");
         if (!valid) {
             throw message || "Invalid Number";
         }
-        return parse(value);
+        return parse(value, 10);
     };
     
     var validatePrimitive = function (value, type, validate, message) {
