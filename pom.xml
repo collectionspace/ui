@@ -14,9 +14,6 @@
   <profiles>
     <profile>
       <id>jboss</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <properties>
         <warPlugin.warSourceDirectory>${basedir}/src/main/webapp</warPlugin.warSourceDirectory>
         <cspace.server.home>${env.JBOSS_HOME}/server/cspace</cspace.server.home>
@@ -26,6 +23,9 @@
     </profile>
     <profile>
       <id>tomcat</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
       <properties>
         <warPlugin.warSourceDirectory>${basedir}/src/main/webapp</warPlugin.warSourceDirectory>
         <cspace.server.home>${env.CATALINA_HOME}</cspace.server.home>
