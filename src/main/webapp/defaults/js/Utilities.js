@@ -930,7 +930,9 @@ fluid.registerNamespace("cspace.util");
                     }
                 }
             }, function (resourceSpecs) {
-                that.events.afterFetch.fire();
+                if (!that.globalBundle || !that.messageBar) {
+                    that.events.afterFetch.fire();
+                }
                 options = fluid.merge({"pageBuilder.options.model": "preserve", "pageBuilder.options.applier": "nomerge"}, {
                     pageBuilder: {
                         options: {
