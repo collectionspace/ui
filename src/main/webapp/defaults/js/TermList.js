@@ -75,8 +75,18 @@ cspace = cspace || {};
                 });
                 return;
             }
-            that.optionnames = data.optionnames;
-            that.optionlist = data.optionlist;
+            if (data.activestatus) {
+                that.optionnames = [];
+                that.optionlist = [];
+                fluid.each(data.activestatus, function (stat, index) {
+                    if (stat) {
+                        that.optionnames.push(data.optionnames[index]);
+                        that.optionlist.push(data.optionlist[index]);
+                    }
+                });
+            }
+            that.optionnames = that.optionnames || data.optionnames;
+            that.optionlist = that.optionlist || data.optionlist;
             that.events.afterFetch.fire();
         }, cspace.util.provideErrorCallback(that, termListUrl, "errorFetching"));
     };
