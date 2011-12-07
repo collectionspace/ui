@@ -79,7 +79,7 @@ cspace = cspace || {};
                 that.optionnames = [];
                 that.optionlist = [];
                 fluid.each(data.activestatus, function (stat, index) {
-                    if (stat) {
+                    if (stat === "active") {
                         that.optionnames.push(data.optionnames[index]);
                         that.optionlist.push(data.optionlist[index]);
                     }
