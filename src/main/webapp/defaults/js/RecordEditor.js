@@ -162,7 +162,7 @@ cspace = cspace || {};
             that.cancel();
         });
         that.locate("createFromExistingButton").click(that.createNewFromExistingRecord);
-        cspace.util.setZIndex();      
+//        cspace.util.setZIndex();      
     };
 
     var setupRecordEditor = function (that) {

@@ -100,7 +100,7 @@ cspace = cspace || {};
     var bindEvents = function (that) {
         var list = that.locate("list");
         var rows = that.locate("row");
-        cspace.util.setZIndex(list);
+//        cspace.util.setZIndex(list);
         
         that.locate("button").click(function () {
             var list = that.locate("list");
