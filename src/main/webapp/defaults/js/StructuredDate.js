@@ -250,7 +250,7 @@ cspace = cspace || {};
             },
             updateScalarValues: {
                 funcName: "cspace.structuredDate.popup.updateScalarValues",
-                args: ["{arguments}.0", "{arguments}.2", "{popup}.applier", "{popup}.composeElPath", "{popup}.refreshView","{popup}.options.defaultFormat"]
+                args: ["{arguments}.0", "{arguments}.2", "{popup}.applier", "{popup}.composeElPath", "{popup}.refreshView","{popup}.options.defaultFormat", "{popup}.options.displayScalars"]
             }
         },
         defaultFormat: "yyyy-MM-dd",
@@ -328,7 +328,7 @@ cspace = cspace || {};
                            setDate(secondYear, firstMonth || secondMonth, firstDay || secondDay, earliest);
     };
 
-    cspace.structuredDate.popup.updateScalarValues = function (model, changeRequest, applier, composeElPath, refreshView, defaultFormat) {
+    cspace.structuredDate.popup.updateScalarValues = function (model, changeRequest, applier, composeElPath, refreshView, defaultFormat, displayScalars) {
         // Login is based on:
         // http://wiki.collectionspace.org/display/collectionspace/Date+Schema+Computations
         var eScalarValuePath = composeElPath("dateEarliestScalarValue"),
@@ -357,7 +357,9 @@ cspace = cspace || {};
 
         applier.requestChange(eScalarValuePath, eStaticDate.toString(defaultFormat));
         applier.requestChange(lScalarValuePath, lStaticDate.toString(defaultFormat));
-        refreshView();
+        if (displayScalars) {
+            refreshView();
+        }
    };
     
     cspace.structuredDate.popup.composeRootElPath = function (elPaths, root) {
