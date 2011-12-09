@@ -1982,3 +1982,6 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .cs-searchToolsBlock .cs-searchToolsBlock-item:hover, .cs-searchToolsBlock .cs-searchToolsBlock-item:focus {
     background-color: #E8E8E8;
 }
+
+/* CSPACE-4676 */
+.csc-blobs-dimension *{ display:none;}
