@@ -28,12 +28,13 @@ cspace = cspace || {};
                     },
                     optionnames: "{termList}.optionnames",
                     optionlist: "{termList}.optionlist",
+                    activestatus: "{termList}.activestatus",
                     elPath: "{termList}.options.elPath",
                     root: "{termList}.options.root",
                     model: "{termList}.model",
                     applier: "{termList}.applier",
-                    events: {
-                        afterRender: "{termList}.events.afterRender"
+                    listeners: {
+                        ready: "{termList}.events.ready.fire"
                     }
                 },
                 createOnEvent: "afterFetch"
@@ -51,7 +52,7 @@ cspace = cspace || {};
         },
         events: {
             afterFetch: null,
-            afterRender: null
+            ready: null
         },
         postInitFunction: "cspace.termList.postInit",
         finalInitFunction: "cspace.termList.finalInit"
@@ -75,18 +76,9 @@ cspace = cspace || {};
                 });
                 return;
             }
-            if (data.activestatus) {
-                that.optionnames = [];
-                that.optionlist = [];
-                fluid.each(data.activestatus, function (stat, index) {
-                    if (stat === "active") {
-                        that.optionnames.push(data.optionnames[index]);
-                        that.optionlist.push(data.optionlist[index]);
-                    }
-                });
-            }
-            that.optionnames = that.optionnames || data.optionnames;
-            that.optionlist = that.optionlist || data.optionlist;
+            that.optionnames = data.optionnames;
+            that.optionlist = data.optionlist;
+            that.activestatus = data.activestatus;
             that.events.afterFetch.fire();
         }, cspace.util.provideErrorCallback(that, termListUrl, "errorFetching"));
     };
@@ -104,10 +96,23 @@ cspace = cspace || {};
         mergePolicy: {
             "rendererOptions.applier": "applier"
         },
+        events: {
+            ready: null
+        },
         renderOnInit: true,
         root: "",
-        produceTree: "cspace.termList.impl.produceTree"
+        produceTree: "cspace.termList.impl.produceTree",
+        finalInitFunction: "cspace.termList.impl.finalInit"
     });
+    
+    cspace.termList.impl.finalInit = function (that) {
+        if (that.options.activestatus) {
+            fluid.each($("option", that.locate("termList")), function (option, index) {
+                $(option).prop("disabled", that.options.activestatus[index] !== "active")
+            });
+        }
+        that.events.ready.fire(that);
+    };
 
     cspace.termList.impl.produceTree = function (that) {
         return {

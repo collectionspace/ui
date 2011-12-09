@@ -26,7 +26,7 @@ var termListTester = function ($) {
     var setupTermList = function (callback, options) {
         options = fluid.merge(null, options || {}, {
             listeners: {
-                afterRender: function (termListImpl) {
+                ready: function (termListImpl) {
                     callback(termList, termListImpl);
                     start();
                 }
@@ -46,12 +46,16 @@ var termListTester = function ($) {
     termListTest.asyncTest("Options Propagation", function () {
         var elPath = "test";
         setupTermList(function (termList, termListImpl) {
-            jqUnit.assertEquals("Size of optionlist", 3, termListImpl.options.optionlist.length);
-            jqUnit.assertEquals("Size of optionnames", 3, termListImpl.options.optionnames.length);
+            jqUnit.assertEquals("Size of optionlist", 4, termListImpl.options.optionlist.length);
+            jqUnit.assertEquals("Size of optionnames", 4, termListImpl.options.optionnames.length);
             jqUnit.assertEquals("Size of optionlist", termList.optionlist.length, termListImpl.options.optionlist.length);
             jqUnit.assertEquals("Size of optionnames", termList.optionnames.length, termListImpl.options.optionnames.length);
             jqUnit.assertEquals("El Path should be", elPath, termListImpl.options.elPath);
             jqUnit.assertEquals("Root should be", "", termListImpl.options.root);
+            jqUnit.assertFalse("Inactive should be enabled", $("option", termListImpl.locate("termList")).eq(0).is(":disabled"));
+            jqUnit.assertFalse("Inactive should be enabled", $("option", termListImpl.locate("termList")).eq(1).is(":disabled"));
+            jqUnit.assertTrue("Inactive should be disabled", $("option", termListImpl.locate("termList")).eq(2).is(":disabled"));
+            jqUnit.assertFalse("Inactive should be enabled", $("option", termListImpl.locate("termList")).eq(3).is(":disabled"));
         }, {
             elPath: elPath
         });
