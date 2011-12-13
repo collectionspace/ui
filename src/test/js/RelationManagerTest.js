@@ -53,7 +53,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         var defaultOpts = {
             applier: applier,
             model: model,
-            addRelations: cspace.relationManager.provideLocalAddRelations,
             relationsElPath: "relations"
         };
         fluid.merge(null, defaultOpts, opts);
@@ -94,8 +93,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             jqUnit.notVisible("Search to Relate Dialog is invisible initially", $(".ui-dialog"));
             relationManager.locate("addButton").click();
             jqUnit.notVisible("Search to Relate Dialog is invisible if the record is not saved", $(".ui-dialog"));
-            jqUnit.isVisible("Error message is visible", relationManager.options.messageBar.container);
-            jqUnit.assertEquals("Object should be saved first", relationManager.options.parentBundle.resolve("relationManager-pleaseSaveFirst"), relationManager.options.messageBar.locate("message").text());
+            jqUnit.isVisible("Error message is visible", relationManager.messageBar.container);
+            jqUnit.assertEquals("Object should be saved first", relationManager.options.parentBundle.resolve("relationManager-pleaseSaveFirst"), relationManager.messageBar.locate("message").text());
             start();
         }, "cataloging", "cataloging");
     });
@@ -105,7 +104,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             relationManager.options.applier.requestChange("csid", "123456798");
             jqUnit.notVisible("Search to Relate Dialog is invisible initially", $(".ui-dialog"));
             relationManager.locate("addButton").click();
-            jqUnit.notVisible("Error message is invisible", relationManager.options.messageBar.container);
+            jqUnit.notVisible("Error message is invisible", relationManager.messageBar.container);
             jqUnit.isVisible("After clicking Add, Add Relation Dialog is visible", relationManager.dialogNode);
             jqUnit.assertEquals("Dialog should have correct primary record type", "cataloging", 
                  relationManager.searchToRelateDialog.options.primary);
@@ -123,7 +122,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             relationManager.options.applier.requestChange("csid", "123456798");
             jqUnit.notVisible("Search to Relate Dialog is invisible initially", $(".ui-dialog"));
             relationManager.locate("addButton").click();
-            jqUnit.notVisible("Error message is invisible", relationManager.options.messageBar.container);
+            jqUnit.notVisible("Error message is invisible", relationManager.messageBar.container);
             jqUnit.isVisible("After clicking Add, Add Relation Dialog is visible", relationManager.dialogNode);
             jqUnit.assertEquals("Dialog should have correct primary record type", "cataloging", relationManager.searchToRelateDialog.options.primary);
             jqUnit.isVisible("Record-type drop-down is visible", relationManager.searchToRelateDialog.locate("recordType"));
@@ -140,7 +139,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             relationManager.options.applier.requestChange("csid", "123456798");
             jqUnit.notVisible("Search to Relate Dialog is invisible initially", $(".ui-dialog"));
             relationManager.locate("addButton").click();
-            jqUnit.notVisible("Error message is invisible", relationManager.options.messageBar.container);
+            jqUnit.notVisible("Error message is invisible", relationManager.messageBar.container);
             jqUnit.isVisible("After clicking Add, Add Relation Dialog is visible", relationManager.searchToRelateDialog.container);
             jqUnit.isVisible("Record-type drop-down is visible", relationManager.searchToRelateDialog.search.mainSearch.locate("recordTypeSelect"));
             

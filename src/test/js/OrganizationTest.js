@@ -73,8 +73,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                                             "organizationAuthority-group",
                                             "organizationAuthority-function",
                                             "organizationAuthority-history",
-                                            "organizationAuthority-contactName",
-                                            "organizationAuthority-subBodyName"
+                                            "organizationAuthority-contactName"
                                         ];
                                         fluid.each(repeatableField, function (repeatableName) {
                                             var found = fluid.find(recordEditor, function (property, name) {

@@ -30,7 +30,7 @@ cspace = cspace || {};
         mergePolicy: {
             "rendererFnOptions.uispec": "uispec",
             "rendererOptions.applier": "applier",
-            "uispec": "noexpand"
+            "uispec": "nomerge noexpand"
         },
         selectors: {
             header: ".csc-hierarchy-header",

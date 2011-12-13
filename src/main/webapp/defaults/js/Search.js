@@ -103,7 +103,7 @@ cspace = cspace || {};
         
         that.events.onError.addListener(function (action, status) {
             that.locate("resultsContainer").hide();
-            that.options.messageBar.show(that.options.strings.errorMessage + status, null, true);
+            that.messageBar.show(that.options.strings.errorMessage + status, null, true);
         });
         
         if (that.options.pivoting) {
@@ -139,7 +139,7 @@ cspace = cspace || {};
     };
     
     cspace.search.handleSubmitSearch = function (searchBox, that) {
-        that.options.messageBar.hide();
+        that.messageBar.hide();
         that.applier.requestChange("results", []);
         that.updateModel({
             keywords: searchBox.locate("searchQuery").val(),
@@ -175,7 +175,6 @@ cspace = cspace || {};
             disabled: "cs-search-disabled"
         },
         strings: {},
-        messageBar: "{messageBar}",
         events: {
             modelChanged: null,
             onSearch: null,
@@ -189,7 +188,7 @@ cspace = cspace || {};
             buildUrl: "cspace.search.searchView.buildUrl",
             hideResults: {
                 funcName: "cspace.search.searchView.hideResults",
-                args: ["{searchView}.dom", "{searchView}.options.messageBar"]
+                args: ["{searchView}.dom", "{searchView}.messageBar"]
             },
             search: "cspace.search.searchView.search",
             updateModel: {
@@ -206,6 +205,7 @@ cspace = cspace || {};
             }
         },
         components: {
+            messageBar: "{messageBar}",
             mainSearch: {
                 type: "cspace.searchBox",
                 options: {
@@ -215,13 +215,7 @@ cspace = cspace || {};
                         }
                     },
                     selfRender: true,
-                    related: "all",
-                    invokers: {
-                        navigateToSearch: {
-                            funcName: "cspace.search.handleSubmitSearch",
-                            args: ["{searchBox}", "{searchView}"]
-                        }
-                    } 
+                    related: "all"
                 }
             },
             resultsPager: {
@@ -269,13 +263,13 @@ cspace = cspace || {};
             pageNum: "&pageNum=%pageNum",
             pageSize: "&pageSize=%pageSize",
             sort: "&sortDir=%sortDir&sortKey=%sortKey",
-            defaultUrl: "%tenant/%tenantname/%recordType/search?query=%keywords%pageNum%pageSize%sort",
+            defaultUrl: "%tenant/%tname/%recordType/search?query=%keywords%pageNum%pageSize%sort",
             localUrl: "%chain/data/%recordType/search.json"
         })
     });
     
     cspace.search.searchView.handleAdvancedSearch = function (searchModel, that) {
-        that.options.messageBar.hide();
+        that.messageBar.hide();
         that.applier.requestChange("results", []);
         if (!searchModel.fields) {
             searchModel.fields = undefined;

@@ -137,6 +137,7 @@ cspace = cspace || {};
         postInitFunction: "cspace.tabs.postInit",
         finalInitFunction: "cspace.tabs.finalInit",
         components: {
+            globalNavigator: "{globalNavigator}",
             tabsList: {
                 type: "cspace.tabsList"
             }
@@ -166,7 +167,6 @@ cspace = cspace || {};
             applier: "nomerge",
             globalSetup: "nomerge"
         },
-        globalNavigator: "{globalNavigator}",
         globalSetup: "{globalSetup}"
     });
     

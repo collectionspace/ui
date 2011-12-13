@@ -357,7 +357,8 @@ cspace = cspace || {};
             "rendererOptions.parentComponent": "nomerge",
             "rendererFnOptions.uispec": "uispec",
             "rendererOptions.applier": "applier",
-            uispec: "noexpand"
+            uispec: "nomerge noexpand",
+            schema: "normerge"
         },
         renderOnInit: true,
         rendererFnOptions: {
@@ -391,14 +392,14 @@ cspace = cspace || {};
                 }
             },
             uispec: {
-                href: cspace.componentUrlBuilder("%tenant/%tenantname/%recordType-search/uispec"),
+                href: cspace.componentUrlBuilder("%tenant/%tname/%recordType-search/uispec"),
                 options: {
                     dataType: "json",
                     forceCache: true
                 }
             },
             uischema: {
-                href: cspace.componentUrlBuilder("%tenant/%tenantname/%recordType-search/uischema"),
+                href: cspace.componentUrlBuilder("%tenant/%tname/%recordType-search/uischema"),
                 options: {
                     dataType: "json",
                     forceCache: true

@@ -17,33 +17,6 @@ cspace = cspace || {};
     fluid.log("RelationManager.js loaded");
     
     fluid.registerNamespace("cspace.relationManager");
-
-    var updateRelations = function (relationsElPath, applier, model, remove) {
-        return remove ? function (relations) {
-            var related = relations.target.recordtype;
-            var elPath = relationsElPath + "." + related;
-            var csid = relations.target.csid;
-            var newModelRelations = fluid.copy(model[relationsElPath][related]);
-            fluid.remove_if(newModelRelations, function (relation) {
-                return relation.csid === csid;
-            });
-            applier.requestChange(elPath, newModelRelations);
-        }: function (relations) {
-            if (!relations.items || !relations.items[0] || !relations.items[0].target) {
-                return;
-            }
-            var related = relations.items[0].target.recordtype;
-            var newModelRelations = fluid.copy(model[relationsElPath][related]) || [];
-            var elPath = relationsElPath + "." + related;
-            var relIndex = newModelRelations.length;
-            fluid.each(relations.items, function (relation) {
-                newModelRelations[relIndex] = relation.target;
-                newModelRelations[relIndex].relationshiptype = relation.type;
-                ++relIndex;
-            });
-            applier.requestChange(elPath, newModelRelations);
-        };
-    };
     
     var bindEventHandlers = function (that) {
         if (that.showAddButton.visible) {
@@ -52,8 +25,8 @@ cspace = cspace || {};
         else {
             that.locate("addButton").hide();
         }
-        that.dataContext.events.afterAddRelations.addListener(updateRelations(that.options.relationsElPath, that.options.applier, that.model));
-        that.dataContext.events.afterRemoveRelations.addListener(updateRelations(that.options.relationsElPath, that.options.applier, that.model, true));
+        that.dataContext.events.afterAddRelations.addListener(that.addRelations);
+        that.dataContext.events.afterRemoveRelations.addListener(that.removeRelations);
     };
     
     cspace.relationManager = function (container, options) {
@@ -62,46 +35,75 @@ cspace = cspace || {};
         
         that.dialogNode = that.locate("searchDialog"); // since blasted jQuery UI dialog will move it out of our container
         fluid.initDependents(that);
-        
-        that.addRelations = that.searchToRelateDialog.options.listeners.addRelations;
+        that.events.afterInitDependents.fire();
         
         bindEventHandlers(that);
         return that;
     };
     
     cspace.relationManager.addFromTab = function (that) {
-        that.options.globalNavigator.events.onPerformNavigation.fire(function () {
+        that.globalNavigator.events.onPerformNavigation.fire(function () {
             if (that.model.csid) {
-                that.options.messageBar.hide();
+                that.messageBar.hide();
                 that.searchToRelateDialog.open();
             } else {
-                that.options.messageBar.show(that.lookupMessage("relationManager-pleaseSaveFirst"), null, true);
+                that.messageBar.show(that.lookupMessage("relationManager-pleaseSaveFirst"), null, true);
             }
         });
     };
-    
+
     cspace.relationManager.add = function (that) {
         if (that.model.csid) {
-            that.options.messageBar.hide();
+            that.messageBar.hide();
             that.searchToRelateDialog.open();
         } else {
-            that.options.messageBar.show(that.lookupMessage("relationManager-pleaseSaveFirst"), null, true);
+            that.messageBar.show(that.lookupMessage("relationManager-pleaseSaveFirst"), null, true);
         }
         return false;
     };
     
-    cspace.relationManager.provideLocalAddRelations = function (relationManager) {
-        return updateRelations(relationManager.options.relationsElPath, relationManager.options.applier, relationManager.model);
+    cspace.relationManager.addRelations = function (relationsElPath, applier, model, relations) {
+        if (!relations.items || !relations.items[0] || !relations.items[0].target) {
+            return;
+        }
+        var related = relations.items[0].target.recordtype;
+        var newModelRelations = fluid.copy(model[relationsElPath][related]) || [];
+        var elPath = relationsElPath + "." + related;
+        var relIndex = newModelRelations.length;
+        fluid.each(relations.items, function (relation) {
+            newModelRelations[relIndex] = relation.target;
+            newModelRelations[relIndex].relationshiptype = relation.type;
+            ++relIndex;
+        });
+        applier.requestChange(elPath, newModelRelations);
+    };
+    
+    cspace.relationManager.removeRelations = function (relationsElPath, applier, model, relations) {
+        var related = relations.target.recordtype;
+        var elPath = relationsElPath + "." + related;
+        var csid = relations.target.csid;
+        var newModelRelations = fluid.copy(model[relationsElPath][related]);
+        fluid.remove_if(newModelRelations, function (relation) {
+            return relation.csid === csid;
+        });
+        applier.requestChange(elPath, newModelRelations);
     };
 
-    cspace.relationManager.permissionResolver = function (options) {
-        var that = fluid.initLittleComponent("cspace.relationManager.permissionResolver", options);
+    fluid.defaults("cspace.relationManager.permissionResolver", {
+        gradeNames: ["fluid.littleComponent", "autoInit"],
+        components: {
+            recordTypeManager: "{recordTypeManager}",
+            resolver: "{permissionsResolver}"
+        },
+        finalInitFunction: "cspace.relationManager.permissionResolver.finalInit"
+    });
+    cspace.relationManager.permissionResolver.finalInit = function (that) {
+        that.options.resolver = that.resolver;
         that.options.allOf.push({
             permission: that.options.recordClassPermission,
-            oneOf: that.options.recordTypeManager.recordTypesForCategory(that.options.recordClass)
+            oneOf: that.recordTypeManager.recordTypesForCategory(that.options.recordClass)
         });
         that.visible = cspace.permissions.resolveMultiple(that.options);
-        return that;
     };
     
     cspace.relationManager.produceTree = function (that) {
@@ -115,16 +117,25 @@ cspace = cspace || {};
     fluid.defaults("cspace.relationManager", {
         gradeNames: "fluid.rendererComponent",
         produceTree: cspace.relationManager.produceTree,
-        globalNavigator: "{globalNavigator}",
         invokers: {
             add: "cspace.relationManager.add",            
             lookupMessage: {
                 funcName: "cspace.util.lookupMessage",
                 args: ["{searchToRelateDialog}.options.parentBundle.messageBase", "{arguments}.0"]
+            },
+            addRelations: {
+                funcName: "cspace.relationManager.addRelations",
+                args: ["{relationManager}.options.relationsElPath", "{relationManager}.options.applier", "{relationManager}.model", "{arguments}.0"]
+            },
+            removeRelations: {
+                funcName: "cspace.relationManager.removeRelations",
+                args: ["{relationManager}.options.relationsElPath", "{relationManager}.options.applier", "{relationManager}.model", "{arguments}.0"]
             }
         },
         parentBundle: "{globalBundle}",
         components: {
+            messageBar: "{messageBar}",
+            globalNavigator: "{globalNavigator}",
             dataContext: {
                 type: "cspace.dataContext",
                 options: {
@@ -133,6 +144,7 @@ cspace = cspace || {};
             },
             searchToRelateDialog: {
                 type: "cspace.searchToRelateDialog",
+                createOnEvent: "afterInitDependents",
                 options: {
                     listeners: {
                         addRelations: "{relationManager}.dataContext.addRelations",
@@ -149,8 +161,6 @@ cspace = cspace || {};
             showAddButton: {
                 type: "cspace.relationManager.permissionResolver",
                 options: {
-                    recordTypeManager: "{recordTypeManager}",
-                    resolver: "{permissionsResolver}",
                     recordClass: "{relationManager}.options.related",
                     recordClassPermission: "update",
                     allOf: [{
@@ -165,13 +175,13 @@ cspace = cspace || {};
             addButton: ".csc-add-related-record-button"
         },
         selectorsToIgnore: "searchDialog",
-        messageBar: "{messageBar}",
         strings: { },
         messagekeys: {
             addButton: "relationManager-addButton"
         },
         events: {
-            onCreateNewRecord: null
+            onCreateNewRecord: null,
+            afterInitDependents: null
         },
         mergePolicy: {
             model: "preserve",

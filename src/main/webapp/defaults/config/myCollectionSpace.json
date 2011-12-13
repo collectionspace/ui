@@ -39,7 +39,6 @@
                 "myCollectionSpace": {
                     "type": "cspace.myCollectionSpace",
                     "options": {
-                        "uispec": "{pageBuilder}.options.uispec",
                         "schema": "{pageBuilder}.schema",
                         "listeners": {
                             "afterFetch": "{loadingIndicator}.events.hideOn.fire",

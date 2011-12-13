@@ -106,8 +106,8 @@ cspace = cspace || {};
             }
         },
         urls: cspace.componentUrlBuilder({
-            reportTypesUrl: "%tenant/%tenantname/reporting/search/%recordType",
-            reportUrl: "%tenant/%tenantname/invokereport/%reportcsid/%recordType/%csid"
+            reportTypesUrl: "%tenant/%tname/reporting/search/%recordType",
+            reportUrl: "%tenant/%tname/invokereport/%reportcsid/%recordType/%csid"
         }),
         finalInitFunction: "cspace.reportProducer.finalInit",
         postInitFunction: "cspace.reportProducer.postInit",

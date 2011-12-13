@@ -48,7 +48,7 @@ cspace = cspace || {};
         },
         parentBundle: "{globalBundle}",
         urls: {
-            termList: "%tenant/%tenantname/%recordType/termList/%termListType"
+            termList: "%tenant/%tname/%recordType/termList/%termListType"
         },
         events: {
             afterFetch: null,

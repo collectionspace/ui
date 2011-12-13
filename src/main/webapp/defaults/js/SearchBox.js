@@ -51,7 +51,6 @@ cspace = cspace || {};
         },
         strings: {},
         parentBundle: "{globalBundle}",
-        globalNavigator: "{globalNavigator}",
         model: {
             messagekeys: {
                 recordTypeSelectLabel: "searchBox-recordTypeSelectLabel"
@@ -62,6 +61,7 @@ cspace = cspace || {};
             autoBind: false
         },
         components: {
+            globalNavigator: "{globalNavigator}",
             recordTypeSelector: {
                 type: "cspace.util.recordTypeSelector",
                 options: {
@@ -73,11 +73,8 @@ cspace = cspace || {};
                 }
             }          
         },
-        invokers: {                 // Component's public functions with arguments that are resolved at the time of invokation.
-            navigateToSearch: {     // A public method that builds search page's url and navigates to that page.
-                funcName: "cspace.searchBox.navigateToSearch",
-                args: ["{searchBox}"]
-            }
+        invokers: {
+            navigateToSearch: "cspace.searchBox.navigateToSearch"
         },
         selfRender: false,          // An options that indicates whether the component needs to render on initialization.
         searchUrl: "findedit.html?recordtype=%recordtype&keywords=%keywords",   // Search page's url template.
@@ -112,7 +109,7 @@ cspace = cspace || {};
     // A public function that is called as searchBox's navigateToSearch method and redirects to
     // the search results page.    
     cspace.searchBox.navigateToSearch = function (that) {
-        that.options.globalNavigator.events.onPerformNavigation.fire(function () {
+        that.globalNavigator.events.onPerformNavigation.fire(function () {
             var url = fluid.stringTemplate(that.options.searchUrl, {
                 recordtype: that.locate("recordTypeSelect").val(),
                 keywords: that.locate("searchQuery").val() || ""

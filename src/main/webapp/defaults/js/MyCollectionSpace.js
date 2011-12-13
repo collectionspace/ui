@@ -22,7 +22,7 @@ cspace = cspace || {};
             return "../../../../test/data/" + recordType + "/records.json";
         } else {
             var expander = fluid.invoke("cspace.urlExpander");
-            return expander("%tenant/%tenantname/" + recordType);
+            return expander("%tenant/%tname/" + recordType);
         }
     };
     
@@ -48,7 +48,7 @@ cspace = cspace || {};
     var makeOpts = function (recordType, options) {
         return {
             model: makeArrayExpander(recordType, options),
-            globalNavigator: "{myCollectionSpace}.options.globalNavigator",
+            globalNavigator: "{myCollectionSpace}.globalNavigator",
             parentBundle: "{myCollectionSpace}.options.parentBundle",
             elPaths: {
                 items: "items"
@@ -71,7 +71,7 @@ cspace = cspace || {};
     var setupMyCollectionSpace = function (that) {
         
         that.displayErrorMessage = function (message) {
-            cspace.util.displayErrorMessage(that.options.messageBar, message);
+            cspace.util.displayErrorMessage(that.messageBar, message);
         };
         
         that.lookupMessage = function (message) {
@@ -97,6 +97,8 @@ cspace = cspace || {};
     
     cspace.myCollectionSpace = function (container, options) {
         var that = fluid.initRendererComponent("cspace.myCollectionSpace", container, options);
+        fluid.initDependent(that, "globalNavigator", that.options.instantiator);
+        fluid.initDependent(that, "messageBar", that.options.instantiator);
         setupMyCollectionSpace(that);
         fluid.withEnvironment({resourceSpecCollector: that.options.collector}, function () {
             that.options.components = fluid.expander.expandLight(that.options.components, {
@@ -198,8 +200,6 @@ cspace = cspace || {};
         strings: {},
         collector: {},
         parentBundle: "{globalBundle}",
-        globalNavigator: "{globalNavigator}",
-        messageBar: "{messageBar}",
         produceTree: cspace.myCollectionSpace.produceTree,
         // TODO: Once component sibbling options are resolvable with each other, "records"
         // can be used to resolve and censor a model.
@@ -243,6 +243,8 @@ cspace = cspace || {};
             }]
         },
         components: {
+            messageBar: "{messageBar}",
+            globalNavigator: "{globalNavigator}",
             cataloging: {
                 type: "cspace.recordList"
             },

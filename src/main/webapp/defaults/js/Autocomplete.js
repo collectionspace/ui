@@ -668,8 +668,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             autocomplete: {
                 type: "fluid.autocomplete.autocompleteView",
                 options: {
-                    minChars: "{autocomplete}.options.minChars",
-                    delay: "{autocomplete}.options.delay"
+                    minChars: "{cspace.autocomplete}.options.minChars",
+                    delay: "{cspace.autocomplete}.options.delay"
                 }
             },
             eventHolder: {

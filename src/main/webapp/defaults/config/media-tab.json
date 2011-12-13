@@ -68,7 +68,7 @@
                                                                     "type": "fluid.deferredInvokeCall",
                                                                     "func": "cspace.util.urlBuilder",
                                                                     "args": {
-                                                                        "upload": "%tenant/%tenantname/uploads/"
+                                                                        "upload": "%tenant/%tname/uploads/"
                                                                     }
                                                                 }
                                                             }

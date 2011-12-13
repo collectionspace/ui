@@ -48,32 +48,26 @@ cspace = cspace || {};
         that.renderer.refreshView();
     };
     
-    cspace.mediaUploader.afterFileQueuedListener = function (input) {
-        return function (file) {
-            input.text(file.name);
-        };
+    cspace.mediaUploader.afterFileQueuedListener = function (input, file) {
+        input.text(file.name);
     };
     
-    cspace.mediaUploader.onFileSuccess = function (that, input) {
-        return function (file, responseText, xhr) {
-            var response = JSON.parse(responseText);
-            that.applier.requestChange(that.options.elPaths.srcUri, response.file);
-            delete response.file;
-            that.applier.requestChange(that.options.elPaths.blobs, [response]);
-            that.applier.requestChange(that.options.elPaths.blobCsid, response.csid);
-            // TODO: When the onLink event listener triggers rerender and reinstantiation of media uploader this uploader dies :(.
-            setTimeout(function () {
-                that.events.onLink.fire();
-            }, 1);
-        };
+    cspace.mediaUploader.onFileSuccess = function (that, input, file, responseText, xhr) {
+        var response = JSON.parse(responseText);
+        that.applier.requestChange(that.options.elPaths.srcUri, response.file);
+        delete response.file;
+        that.applier.requestChange(that.options.elPaths.blobs, [response]);
+        that.applier.requestChange(that.options.elPaths.blobCsid, response.csid);
+        // TODO: When the onLink event listener triggers rerender and reinstantiation of media uploader this uploader dies :(.
+        setTimeout(function () {
+            that.events.onLink.fire();
+        }, 1);
     };
     
-    cspace.mediaUploader.onFileError = function (that) {
-        return function (file, error, responseText, xhr) {
-            cspace.util.provideErrorCallback(that, that.options.urls.upload, "errorWriting")(error, responseText, xhr);
-            return false;
-        };
-    };
+    cspace.mediaUploader.onFileError = function (that, file, error, responseText, xhr) {
+        cspace.util.provideErrorCallback(that, that.options.urls.upload, "errorWriting")(error, responseText, xhr);
+        return false;
+    };;
     
     cspace.mediaUploader.produceTree = function (that) {
         return {
@@ -203,7 +197,19 @@ cspace = cspace || {};
                 args: "{mediaUploader}"
             },
             displayErrorMessage: "cspace.util.displayErrorMessage",
-            lookupMessage: "cspace.util.lookupMessage"
+            lookupMessage: "cspace.util.lookupMessage",
+            onFileError: {
+                funcName: "cspace.mediaUploader.onFileError",
+                args: ["{mediaUploader}", "{arguments}.0", "{arguments}.1", "{arguments}.2", "{arguments}.3"]
+            },
+            onFileSuccess: {
+                funcName: "cspace.mediaUploader.onFileSuccess",
+                args: ["{mediaUploader}", "{mediaUploader}.dom.uploadInput", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+            },
+            afterFileQueuedListener: {
+                funcName: "cspace.mediaUploader.afterFileQueuedListener",
+                args: ["{mediaUploader}.dom.uploadInput", "{arguments}.0"]
+            }
         },
         elPaths: {
             blobCsid: "fields.blobCsid",
@@ -265,6 +271,16 @@ cspace = cspace || {};
                         },
                         totalProgressBar: {
                             type: "fluid.emptySubcomponent"
+                        },
+                        errorPanel: {
+                            type: "fluid.emptySubcomponent"
+                        },
+                        strategy: {
+                            options: {
+                                flashMovieSettings: {
+                                    flashURL: "../lib/infusion/lib/swfupload/flash/swfupload.swf"
+                                }
+                            }
                         }
                     },
                     queueSettings: {

@@ -18,7 +18,7 @@ cspace = cspace || {};
     
     var setupTitleBar = function (that) {
         // Create a resolvers' config for titleBar's fluid.get
-        that.config = $.extend(true, fluid.model.defaultGetConfig, {
+        that.config = $.extend(true, {}, fluid.model.defaultGetConfig, {
             resolvers: that.options.resolvers
         });
     };

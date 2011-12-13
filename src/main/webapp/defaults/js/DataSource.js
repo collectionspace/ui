@@ -167,6 +167,9 @@ cspace = cspace || {};
         events: {
             afterFetchResources: null
         },
+        mergePolicy: {
+            schema: "nomerge"
+        },
         invokers: {
             displayErrorMessage: "cspace.util.displayErrorMessage",
             lookupMessage: "cspace.util.lookupMessage"

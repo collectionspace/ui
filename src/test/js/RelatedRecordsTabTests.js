@@ -257,11 +257,11 @@ var relatedRecordsTabTester = function ($) {
                             var details = le.details;
                             le.events.afterShowDetails.addListener(function () {
                                 var reSelectors = details.options.selectors;
-                                jqUnit.notVisible("Before testing, message should not be visible", details.options.messageBar.container);
+                                jqUnit.notVisible("Before testing, message should not be visible", details.messageBar.container);
                                 $(".csc-object-identification-object-number", details.container).val("");
                                 var ret = details.requestSave();
-                                jqUnit.isVisible("After clicking save, message should be visible", details.options.messageBar.container);
-                                jqUnit.assertEquals("Message should be ", "Please specify an Identification Number", details.options.messageBar.locate("message").text());
+                                jqUnit.isVisible("After clicking save, message should be visible", details.messageBar.container);
+                                jqUnit.assertEquals("Message should be ", "Please specify an Identification Number", details.messageBar.locate("message").text());
                                 details.events.afterRender.removeListener("testFunc");
                                 start();
                             }, "testFunc");
