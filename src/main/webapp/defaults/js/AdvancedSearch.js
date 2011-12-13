@@ -357,8 +357,8 @@ cspace = cspace || {};
             "rendererOptions.parentComponent": "nomerge",
             "rendererFnOptions.uispec": "uispec",
             "rendererOptions.applier": "applier",
-            uispec: "nomerge noexpand",
-            schema: "normerge"
+            uispec: "noexpand",
+            schema: "nomerge"
         },
         renderOnInit: true,
         rendererFnOptions: {
