@@ -179,20 +179,6 @@ cspace = cspace || {};
             that.localStorage.set();
             processChanges(that, true);
         }
-    };    
-    
-    var initDeferredComponents = function (that) {
-        fluid.each(that.options.deferredComponents, function (component, name) {
-            var instantiator = that.options.rendererOptions.instantiator;
-            if (that[name]) {
-                instantiator.clearComponent(that, name);
-            }
-            that.options.components[name] = {
-                type: component.type,
-                options: component.options
-            };
-            fluid.initDependent(that, name, instantiator);
-        });
     };
 
     cspace.recordEditor = function (container, options) {
@@ -218,7 +204,6 @@ cspace = cspace || {};
             that.rollbackModel = fluid.copy(that.model.fields);
             that.messageBar.hide();
             bindHandlers(that);
-            initDeferredComponents(that);
             fluid.log("RecordEditor.js renderPage end");
         };
         that.refreshNoSave = function () {
@@ -227,7 +212,6 @@ cspace = cspace || {};
             that.renderer.refreshView();
             that.messageBar.hide();
             bindHandlers(that);
-            initDeferredComponents(that);
             fluid.log("RecordEditor.js renderPage end");
         };
 
