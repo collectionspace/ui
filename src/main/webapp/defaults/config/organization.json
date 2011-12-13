@@ -14,12 +14,13 @@
                             "identificationNumber": ".csc-organizationAuthority-displayName" 
                         },
                         "selectorsToIgnore": ["requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
-                        "deferredComponents": {
+                        "components": {
                             "hierarchy": {
                                 "type": "cspace.hierarchy",
                                 "options": {
                                     "uispec": "{pageBuilder}.options.uispec.hierarchy"
-                                }
+                                },
+                                "createOnEvent": "afterRender"
                             }
                         },
                         "applier": "{pageBuilder}.applier",
