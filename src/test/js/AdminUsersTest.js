@@ -86,7 +86,7 @@ var adminUsersTester = function () {
         invokers: {
             validate: {
                 funcName: "cspace.admin.validate",
-                args: ["{admin}.adminListEditor.options.messageBar", "{admin}.dom", "{admin}.adminListEditor.options.detailsApplier", "{admin}.passwordValidator", "{admin}.options.strings"]
+                args: ["{admin}.adminListEditor.messageBar", "{admin}.dom", "{admin}.adminListEditor.options.detailsApplier", "{admin}.passwordValidator", "{admin}.options.strings"]
             },
             bindEvents: {
                 funcName: "cspace.admin.bindEventHandlers",
@@ -120,7 +120,7 @@ var adminUsersTester = function () {
     var bareAdminUsersTest = new jqUnit.TestCase("AdminUsers Tests", function () {
         bareAdminUsersTest.fetchTemplate("../../main/webapp/defaults/html/pages/Administration-users.html", ".csc-admin-users");
         cspace.tests.onTearDown.addListener(function (re) {
-            re.options.globalNavigator.events.onPerformNavigation.removeListener("onPerformNavigationRecordEditor");
+            re.globalNavigator.events.onPerformNavigation.removeListener("onPerformNavigationRecordEditor");
             re.confirmation.popup.dialog("destroy").remove();
         }, "tearDown");
     }, cspace.tests.onTearDown.removeListener("tearDown"));
@@ -162,7 +162,7 @@ var adminUsersTester = function () {
                 changeDetails(adminUsers.options.selectors, testDataCreateUser, confPassword);
                 var saveResult = re.requestSave();
                 jqUnit.assertFalse("details.save returns false if " + message, saveResult);
-                jqUnit.isVisible("message container is visible", le.options.messageBar.container);
+                jqUnit.isVisible("message container is visible", le.messageBar.container);
                 cspace.tests.onTearDown.fire(re);
                 start();
             });
@@ -177,7 +177,7 @@ var adminUsersTester = function () {
             jqUnit.assertEquals("User list model should have right number of entries", 4, list.length);
             jqUnit.assertEquals("User list model should contain expected user", "Megan Forbes", list[1].screenName);
             jqUnit.assertEquals("Rendered table has 4 data rows visible", 4, le.list.locate("row").length);
-            jqUnit.notVisible("message container is hidden", le.options.messageBar.container);
+            jqUnit.notVisible("message container is hidden", le.messageBar.container);
             jqUnit.isVisible("details none is visible", selectors.detailsNone);
             jqUnit.notVisible("details is not visible", selectors.details);
             jqUnit.notVisible("hide on edit is visible", selectors.hideOnEdit);
@@ -196,7 +196,7 @@ var adminUsersTester = function () {
                 jqUnit.assertEquals("Password is blank", adminUsers.locate("password").val(), "");
                 jqUnit.assertEquals("Password confirm is blank", adminUsers.locate("passwordConfirm").val(), "");
                 jqUnit.assertTrue("Delete button is disabled", re.locate("deleteButton").attr("disabled"));
-                jqUnit.notVisible("message container is hidden", le.options.messageBar.container);
+                jqUnit.notVisible("message container is hidden", le.messageBar.container);
                 jqUnit.notVisible("details none is hidden", selectors.detailsNone);
                 jqUnit.isVisible("details is visible", selectors.details);
                 jqUnit.isVisible("hide on edit is visible", selectors.hideOnEdit);
@@ -228,7 +228,7 @@ var adminUsersTester = function () {
                 adminUsers.locate("email").val("").change();
                 var saveResult = re.requestSave();
                 jqUnit.assertFalse("details.save returns false if passwords do not match", saveResult);
-                jqUnit.isVisible("message container is visible", le.options.messageBar.container);
+                jqUnit.isVisible("message container is visible", le.messageBar.container);
                 cspace.tests.onTearDown.fire(re);
                 start();
             });
@@ -250,7 +250,7 @@ var adminUsersTester = function () {
                 le.events.afterShowDetails.removeListener("initialSelect");
                 re.options.dataContext.events.afterSave.addListener(function () {
                     jqUnit.assertTrue("Save should succeed (validation should not prevent save)", saveResult);
-                    jqUnit.isVisible("message container is visible", le.options.messageBar.container);
+                    jqUnit.isVisible("message container is visible", le.messageBar.container);
                     cspace.tests.onTearDown.fire(re);
                     start();
                 });      

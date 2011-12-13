@@ -31,10 +31,10 @@ cspace = cspace || {};
             var passwordLength = password.length;
             if (passwordLength < that.options.minLength || passwordLength > that.options.maxLength) {
                 var msg = fluid.stringTemplate(that.lookupMessage("passwordLengthError"), {min: that.options.minLength, max: that.options.maxLength});
-                that.options.messageBar.show(msg, null, true);
+                that.messageBar.show(msg, null, true);
                 return false;
             }
-            that.options.messageBar.hide();
+            that.messageBar.hide();
             return true;
         };
 
@@ -44,7 +44,7 @@ cspace = cspace || {};
         that.bindEvents = function () {
             bindEvents(that);
         };
-        that.options.messageBar.hide();
+        that.messageBar.hide();
         return that;
     };
 
@@ -63,6 +63,8 @@ cspace = cspace || {};
         strings: {},
         minLength: 8,
         maxLength: 24,
-        messageBar: "{messageBar}"
+        components: {
+            messageBar: "{messageBar}"
+        }
     });
 })(jQuery, fluid);

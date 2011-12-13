@@ -18,7 +18,9 @@ cspace = cspace || {};
     fluid.defaults("cspace.header", {
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         mergePolicy: {
-            model: "preserve"
+            model: "preserve",
+            schema: "nomerge",
+            permissions: "nomerge"
         },
         components: {
             searchBox: {
@@ -111,7 +113,6 @@ cspace = cspace || {};
                 }
             }
         },
-        schema: {},
         login: "{userLogin}",
         strings: {},
         postInitFunction: "cspace.header.postInit",

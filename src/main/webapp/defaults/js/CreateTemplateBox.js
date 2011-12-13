@@ -89,8 +89,8 @@ cspace = cspace || {};
         },
         urls: cspace.componentUrlBuilder({
             cloneURL: "%webapp/html/%recordType.html",
-            listUrl: "%tenant/%tenantname/%recordType/template",
-            templateUrl: "%tenant/%tenantname/%recordType/template/%templateType"
+            listUrl: "%tenant/%tname/%recordType/template",
+            templateUrl: "%tenant/%tname/%recordType/template/%templateType"
         }),
         permission: "create"
     });

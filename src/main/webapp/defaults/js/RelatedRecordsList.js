@@ -32,8 +32,8 @@ cspace = cspace || {};
     };
 
     var bindEventHandlers = function (that) {
-        fluid.each(that.options.recordTypes[that.options.related], function (value) {
-            addModelChangeListener(that, that.options.recordTypes, that.options.applier, that.recordList, value, that.options.related);
+        fluid.each(that.recordTypes[that.options.related], function (value) {
+            addModelChangeListener(that, that.recordTypes, that.options.applier, that.recordList, value, that.options.related);
         });
     };
     
@@ -92,6 +92,7 @@ cspace = cspace || {};
         },
         instantiator: "{instantiator}",
         components: {
+            recordTypes: "{recordTypes}",
             recordList: {
                 type: "cspace.recordList",
                 options: {
@@ -136,7 +137,6 @@ cspace = cspace || {};
         },
         recordListAfterSelectHandler: cspace.recordList.afterSelectHandlerDefault,
         parentBundle: "{globalBundle}",
-        recordTypes: "{recordTypes}",
         produceTree: cspace.relatedRecordsList.produceTree,
         selectors: {
             numOfRelated: ".csc-num-items",

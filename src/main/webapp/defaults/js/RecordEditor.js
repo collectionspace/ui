@@ -22,12 +22,12 @@ cspace = cspace || {};
             if (data && data.messages) {
                 // TODO: expand this branch as sophistication increases for CSPACE-3142
                 fluid.each(data.messages, function (message) {
-                    that.options.messageBar.show(message.message, null, data.isError);
+                    that.messageBar.show(message.message, null, data.isError);
                 });
             } else {
                 var msgKey = operation + "FailedMessage";
                 var msg = that.options.strings[msgKey] + message;
-                that.options.messageBar.show(fluid.stringTemplate(msg, {
+                that.messageBar.show(fluid.stringTemplate(msg, {
                     record: that.lookupMessage(that.options.recordType)
                 }), null, true);
             }
@@ -76,7 +76,7 @@ cspace = cspace || {};
         var message = action.toLowerCase() + "SuccessfulMessage";
         that.options.applier.requestChange("", data);
         that.refreshView();
-        that.options.messageBar.show(fluid.stringTemplate(that.options.strings[message], {
+        that.messageBar.show(fluid.stringTemplate(that.options.strings[message], {
             record: that.lookupMessage(that.options.recordType)
         }), Date());
         processChanges(that, false);
@@ -85,10 +85,10 @@ cspace = cspace || {};
 
     var bindEventHandlers = function (that) {
         
-        that.events.onSave.addListener(validateIdentificationNumber(that.dom, that.container, that.options.messageBar, that.lookupMessage(fluid.stringTemplate("%recordtype-identificationNumberRequired", { recordtype: that.options.recordType }))));
+        that.events.onSave.addListener(validateIdentificationNumber(that.dom, that.container, that.messageBar, that.lookupMessage(fluid.stringTemplate("%recordtype-identificationNumberRequired", { recordtype: that.options.recordType }))));
         
         that.events.onSave.addListener(function () {
-            return validateRequiredFields(that.dom, that.options.messageBar, that.options.strings.missingRequiredFields);
+            return validateRequiredFields(that.dom, that.messageBar, that.options.strings.missingRequiredFields);
         });
         
         that.events.afterRenderRefresh.addListener(function () {
@@ -131,7 +131,7 @@ cspace = cspace || {};
 
         that.options.dataContext.events.onError.addListener(makeDCErrorHandler(that));
         
-        that.options.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
+        that.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
             if (that.unsavedChanges) {
                 that.confirmation.open("cspace.confirmation.saveDialog", undefined, {
                     listeners: {
@@ -216,7 +216,7 @@ cspace = cspace || {};
             cspace.util.processReadOnly(that.container, that.options.readOnly);
             processChanges(that, false);
             that.rollbackModel = fluid.copy(that.model.fields);
-            that.options.messageBar.hide();
+            that.messageBar.hide();
             bindHandlers(that);
             initDeferredComponents(that);
             fluid.log("RecordEditor.js renderPage end");
@@ -225,7 +225,7 @@ cspace = cspace || {};
             fluid.log("RecordEditor.js before render");
             that.events.onRefreshView.fire();
             that.renderer.refreshView();
-            that.options.messageBar.hide();
+            that.messageBar.hide();
             bindHandlers(that);
             initDeferredComponents(that);
             fluid.log("RecordEditor.js renderPage end");
@@ -339,7 +339,7 @@ cspace = cspace || {};
      */
     cspace.recordEditor.statusAfterDelete = function (that) {
         //show messagebar
-        that.options.messageBar.show(fluid.stringTemplate(that.options.strings.removeSuccessfulMessage, {
+        that.messageBar.show(fluid.stringTemplate(that.options.strings.removeSuccessfulMessage, {
             record: that.lookupMessage(that.options.recordType)
         }), null, false);
     };
@@ -529,9 +529,13 @@ cspace = cspace || {};
             "rendererOptions.parentComponent": "nomerge",
             "rendererFnOptions.uispec": "uispec",
             "rendererOptions.applier": "applier",
-            "dataContext": "nomerge"
+            "dataContext": "nomerge",
+            "uispec": "nomerge",
+            "resolver": "nomerge"
         },
         components: {
+            messageBar: "{messageBar}",
+            globalNavigator: "{globalNavigator}",
             namespaces: "{namespaces}",
             confirmation: {
                 type: "cspace.confirmation"
@@ -576,8 +580,6 @@ cspace = cspace || {};
         },
         dataContext: "{dataContext}",
         navigationEventNamespace: undefined,
-        globalNavigator: "{globalNavigator}",
-        messageBar: "{messageBar}",
         produceTree: cspace.recordEditor.produceTree,
         events: {
             onSave: "preventable",

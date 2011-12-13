@@ -81,6 +81,9 @@ cspace = cspace || {};
 
     fluid.defaults("cspace.makeRepeatable", {
         gradeNames: "fluid.viewComponent",
+        mergePolicy: {
+            schema: "nomerge"
+        },
         repeatableClasses: {
             expander: {
                 type: "fluid.deferredInvokeCall",
@@ -126,6 +129,7 @@ cspace = cspace || {};
     fluid.defaults("cspace.repeatableImpl", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         mergePolicy: {
+            schema: "nomerge",
             repeatTree: "preserve",
             "rendererFnOptions.repeatTree": "repeatTree",
             "rendererOptions.instantiator": "nomerge",

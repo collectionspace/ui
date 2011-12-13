@@ -38,7 +38,7 @@ var passwordValidatorTester = function(){
     passwordValidatorTest.test("Show hide appropriately", function () {
         var pw = jQuery("#password-field");
         var pv = cspace.passwordValidator("#main");
-        var msg = pv.options.messageBar;
+        var msg = pv.messageBar;
         pv.bindEvents();
         jqUnit.notVisible("To begin, message should not be visible", msg.container);
         pw.val(samplePasswords.invalidTooSmall).change();
@@ -52,7 +52,7 @@ var passwordValidatorTester = function(){
     passwordValidatorTest.test("Default lengths", function () {
         var pw = jQuery("#password-field");
         var pv = cspace.passwordValidator("#main");
-        var msg = pv.options.messageBar;
+        var msg = pv.messageBar;
         pv.bindEvents();
         jqUnit.notVisible("To begin, message should not be visible", msg.container);
         pw.val(samplePasswords.invalidTooSmall).change();
@@ -68,7 +68,7 @@ var passwordValidatorTester = function(){
     passwordValidatorTest.test("Custom lengths", function () {
         var pw = jQuery("#password-field");
         var pv = cspace.passwordValidator("#main", {minLength: 4, maxLength: 7});
-        var msg = pv.options.messageBar;
+        var msg = pv.messageBar;
         pv.bindEvents();
         jqUnit.notVisible("To begin, message should not be visible", msg.container);
         pw.val("123").change();
@@ -84,7 +84,7 @@ var passwordValidatorTester = function(){
     passwordValidatorTest.test("Message text: default lengths", function () {
         var pw = jQuery("#password-field");
         var pv = cspace.passwordValidator("#main");
-        var msg = pv.options.messageBar;
+        var msg = pv.messageBar;
         pv.bindEvents();
         jqUnit.notVisible("To begin, message should not be visible", msg.container);
         pw.val(samplePasswords.invalidTooSmall).change();
@@ -95,7 +95,7 @@ var passwordValidatorTester = function(){
     passwordValidatorTest.test("Message text: custom lengths", function () {
         var pw = jQuery("#password-field");
         var pv = cspace.passwordValidator("#main", {minLength: 3, maxLength: 33});
-        var msg = pv.options.messageBar;
+        var msg = pv.messageBar;
         pv.bindEvents();
         jqUnit.notVisible("To begin, message should not be visible", msg.container);
         pw.val("1").change();

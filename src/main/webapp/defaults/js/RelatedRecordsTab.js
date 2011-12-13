@@ -38,7 +38,7 @@ cspace = cspace || {};
             that.relationManager.addRelations({items: newRelation});
         });
         
-        that.options.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
+        that.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
             if (that.listEditor.details.unsavedChanges) {
                 that.confirmation.open("cspace.confirmation.saveDialog", undefined, {
                     listeners: {
@@ -71,10 +71,7 @@ cspace = cspace || {};
     };
 
     /**
-     *
      * @param {Object} container
-     * @param {Object} uispec
-     * @param {Object} applier  The applier holding the data model of the primary record
      * @param {Object} options
      */
     cspace.relatedRecordsTab = function (container, options) {
@@ -139,8 +136,8 @@ cspace = cspace || {};
 
     fluid.defaults("cspace.relatedRecordsTab", {
         gradeNames: "fluid.rendererComponent",
-        globalNavigator: "{globalNavigator}",
         components: {
+            globalNavigator: "{globalNavigator}",
             confirmation: {
                 type: "cspace.confirmation"
             },
@@ -202,7 +199,10 @@ cspace = cspace || {};
         strings: {},
         urls: cspace.componentUrlBuilder({
             "goTo": "%webapp/html/%related.html?csid=%csid"
-        })
+        }),
+        mergePolicy: {
+            uispec: "nomerge"
+        }
     });
 
 })(jQuery, fluid);

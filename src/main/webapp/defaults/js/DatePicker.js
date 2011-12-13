@@ -55,7 +55,9 @@ cspace = cspace || {};
         readOnly: false,
         buildMarkup: "cspace.datePicker.buildMarkup",
         defaultFormat: "yyyy-MM-dd",
-        messageBar: "{messageBar}"
+        components: {
+            messageBar: "{messageBar}"
+        }
     });
     
     cspace.datePicker.formatDate = function (date, format) {
@@ -99,8 +101,8 @@ cspace = cspace || {};
         
         that.container.change(function () {
             // If there is an error message clear it.
-            if (that.options.messageBar) {
-                that.options.messageBar.hide();
+            if (that.messageBar) {
+                that.messageBar.hide();
             }
             // Get a string value for a field.
             var dateFieldValue = that.container.val();

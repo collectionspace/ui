@@ -44,7 +44,10 @@ fluid.registerNamespace("cspace.permissions");
         return that;
     };
     fluid.defaults("cspace.permissions.resolver", {
-        gradeNames: ["fluid.littleComponent"]
+        gradeNames: ["fluid.littleComponent"],
+        mergePolicy: {
+            permissions: "nomerge"
+        }
     });
     
     cspace.permissions.ensureResolver = function (options) {

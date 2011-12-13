@@ -255,13 +255,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 },
                 showCreate: true,
                 listeners: {
-                    addRelations: {
-                        expander: {
-                            type: "fluid.deferredInvokeCall",
-                            func: "cspace.relationManager.provideLocalAddRelations",
-                            args: "{relationManager}"
-                        }
-                    }
+                    addRelations: "{relationManager}.addRelations"
                 }
             }
         });
@@ -273,13 +267,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     closeAlt: "{globalBundle}.messageBase.searchToRelateDialog-closeAlt"
                 },
                 listeners: {
-                    addRelations: {
-                        expander: {
-                            type: "fluid.deferredInvokeCall",
-                            func: "cspace.relationManager.provideLocalAddRelations",
-                            args: "{relationManager}"
-                        }
-                    }
+                    addRelations: "{relationManager}.addRelations"
                 }
             }
         });
@@ -332,7 +320,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 vars: {
                     tenant: "../../../../test",
-                    tenantname: {
+                    tname: {
                         expander: {
                             type: "fluid.deferredInvokeCall",
                             func: "cspace.util.extractTenant"
@@ -841,7 +829,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         type: "fluid.deferredInvokeCall",
                         func: "cspace.util.urlBuilder",
                         args: {
-                            templateUrl: "%tenant/%tenantname/%recordType/template/%csid"
+                            templateUrl: "%tenant/%tname/%recordType/template/%csid"
                         }
                     }
                 }
@@ -907,8 +895,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.datePicker", "cspace.recordEditor", {
             container: "{arguments}.0",
             options: {
-                readOnly: "{recordEditor}.options.readOnly",
-                messageBar: "{recordEditor}.options.messageBar"
+                readOnly: "{recordEditor}.options.readOnly"
             }
         });
         
@@ -1032,7 +1019,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         fluid.demands("createNewFromExistingRecord", "cspace.recordEditor", {
             funcName: "cspace.recordEditor.createNewFromExistingRecord",
-            args: ["{recordEditor}.options.globalNavigator", "{recordEditor}.reloadAndCloneRecord"]
+            args: ["{recordEditor}.globalNavigator", "{recordEditor}.reloadAndCloneRecord"]
         });        
 
         fluid.demands("afterDelete", "cspace.recordEditor", {
@@ -1475,34 +1462,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 listeners: {
                     onUploadStart: "{loadingIndicator}.events.showOn.fire",
-                    afterFileQueued: {
-                        expander: {
-                            type: "fluid.deferredInvokeCall",
-                            func: "cspace.mediaUploader.afterFileQueuedListener",
-                            args: "{mediaUploader}.dom.uploadInput"
-                        }
-                    },
+                    afterFileQueued: "{mediaUploader}.afterFileQueuedListener",
                     onFileSuccess: [{
-                        listener: {
-                            expander: {
-                                type: "fluid.deferredInvokeCall",
-                                func: "cspace.mediaUploader.onFileSuccess",
-                                args: ["{mediaUploader}", "{mediaUploader}.dom.uploadInput"]
-                            }
-                        }
+                        listener: "{mediaUploader}.onFileSuccess"
                     }, {
                         listener: "{loadingIndicator}.events.hideOn.fire"
                     }],
                     onFileError: [{
                         listener: "{loadingIndicator}.events.hideOn.fire"
                     }, {
-                        listener: {
-                            expander: {
-                                type: "fluid.deferredInvokeCall",
-                                func: "cspace.mediaUploader.onFileError",
-                                args: "{mediaUploader}"
-                            }
-                        }
+                        listener: "{mediaUploader}.onFileError"
                     }]
                 }
             }
@@ -1511,34 +1480,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 listeners: {
                     onUploadStart: "{loadingIndicator}.events.showOn.fire",
-                    afterFileQueued: {
-                        expander: {
-                            type: "fluid.deferredInvokeCall",
-                            func: "cspace.mediaUploader.afterFileQueuedListener",
-                            args: "{mediaUploader}.dom.uploadInput"
-                        }
-                    },
+                    afterFileQueued: "{mediaUploader}.afterFileQueuedListener",
                     onFileSuccess: [{
-                        listener: {
-                            expander: {
-                                type: "fluid.deferredInvokeCall",
-                                func: "cspace.mediaUploader.onFileSuccess",
-                                args: ["{mediaUploader}", "{mediaUploader}.dom.uploadInput"]
-                            }
-                        }
+                        listener: "{mediaUploader}.onFileSuccess"
                     }, {
                         listener: "{loadingIndicator}.events.hideOn.fire"
                     }],
                     onFileError: [{
                         listener: "{loadingIndicator}.events.hideOn.fire"
                     }, {
-                        listener: {
-                            expander: {
-                                type: "fluid.deferredInvokeCall",
-                                func: "cspace.mediaUploader.onFileError",
-                                args: "{mediaUploader}"
-                            }
-                        }
+                        listener: "{mediaUploader}.onFileError"
                     }]
                 }
             }
@@ -1919,6 +1870,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("searchBox", "cspace.header", {
             container: "{header}.options.selectors.searchBox"
         });
+        fluid.demands("cspace.searchBox.navigateToSearch", "cspace.searchBox", {
+            funcName: "cspace.searchBox.navigateToSearch",
+            args: ["{searchBox}"]
+        });
+        fluid.demands("cspace.searchBox.navigateToSearch", ["cspace.searchBox", "cspace.search.searchView"], {
+            funcName: "cspace.search.handleSubmitSearch",
+            args: ["{searchBox}", "{searchView}"]
+        });
         
         fluid.demands("cspace.termList.termListSource", ["cspace.termList"], {
             funcName: "cspace.URLDataSource",
@@ -2145,7 +2104,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         
         fluid.demands("cspace.tabs.tabsSelectWrapper", "cspace.tabs", {
             funcName: "cspace.tabs.tabsSelectWrapper",
-            args: ["{arguments}.0", "{arguments}.1", "{tabs}.options.globalNavigator", "{tabs}.tabsList", "{tabs}.tabsList.options.styles", "{tabs}.tabsSelect"]
+            args: ["{arguments}.0", "{arguments}.1", "{tabs}.globalNavigator", "{tabs}.tabsList", "{tabs}.tabsList.options.styles", "{tabs}.tabsSelect"]
         });
         
         fluid.demands("cspace.tabs.setupTab", "cspace.tabs", {
@@ -2280,8 +2239,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         type: "fluid.deferredInvokeCall",
                         func: "cspace.util.urlBuilder",
                         args: {
-                            composite: "%tenant/%tenantname/composite",
-                            prefix: "%tenant/%tenantname"
+                            composite: "%tenant/%tname/composite",
+                            prefix: "%tenant/%tname"
                         }
                     }
                 }

@@ -215,6 +215,8 @@ cspace = cspace || {};
                     }
                 };
             });
+
+            options.schema = options.schema || {};
             fluid.each(that.options.schema, function (resource, key) {
                 var url = fluid.invoke("cspace.util.getDefaultSchemaURL", resource);
                 resourceSpecs[resource] = {
@@ -235,8 +237,9 @@ cspace = cspace || {};
                                 });
                                 return;
                             }
-                            options.schema = options.schema || {};
-                            fluid.merge(null, options.schema, data);
+                            fluid.each(data, function (schema, key) {
+                                options.schema[key] = schema;
+                            });
                         },
                         error: function (xhr, textStatus, errorThrown) {
                             cspace.util.provideErrorCallback(that, url, "errorFetching")(xhr, textStatus, errorThrown);
@@ -446,7 +449,9 @@ cspace = cspace || {};
             model: "preserve",
             applier: "nomerge",
             dataContext: "nomerge",
-            uispec: "noexpand"
+            uispec: "noexpand",
+            schema: "nomerge",
+            userLogin: "nomerge"
         }
     });
     

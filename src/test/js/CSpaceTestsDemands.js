@@ -175,7 +175,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     type: "fluid.deferredInvokeCall",
                     func: "cspace.util.urlBuilder",
                     args: {
-                        templateUrl: "%tenant/%tenantname/%recordType/template/%csid"
+                        templateUrl: "%tenant/%tname/%recordType/template/%csid"
                     }
                 }
             }
@@ -286,9 +286,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         args: ["{listEditor}", "{arguments}.0"]
     });
     fluid.demands("cspace.specBuilderImpl", "cspace.test", {
-        spec: {
-            async: false
-        }
+        mergeAllOptions: [{
+            spec: {
+                async: false
+            }
+        }, "{arguments}.0"]
     });
     fluid.demands("cspace.urlExpander", ["cspace.localData", "cspace.test"],
         {
@@ -296,7 +298,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             vars: {
                 tenant: "..",
                 chain: "..",
-                tenantname: {
+                tname: {
                     expander: {
                         type: "fluid.deferredInvokeCall",
                         func: "cspace.util.extractTenant"

@@ -368,9 +368,9 @@ cspace = cspace || {};
             otherTenant: "#"
         },
         urls: cspace.componentUrlBuilder({
-            passwordreset: "%tenant/%tenantname/passwordreset",
-            resetpassword: "%tenant/%tenantname/resetpassword",
-            login: "%tenant/%tenantname/login"
+            passwordreset: "%tenant/%tname/passwordreset",
+            resetpassword: "%tenant/%tname/resetpassword",
+            login: "%tenant/%tname/login"
         })
     });
     

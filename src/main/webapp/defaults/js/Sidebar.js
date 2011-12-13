@@ -316,10 +316,12 @@ cspace = cspace || {};
         produceTree: cspace.sidebar.produceTree,
         mergePolicy: {
             recordModel: "preserve",
-            recordApplier: "nomerge"
+            recordApplier: "nomerge",
+            recordTypeManager: "nomerge",
+            resolver: "nomerge"
         },
+        recordTypeManager: "{recordTypeManager}",
         resolver: "{permissionsResolver}",
-        recordTypeManager: "{recordTypeManager}", //used to decide whether to show RelatedRecordsLists
         selectors: {
             media: ".csc-sidebar-media",
             numOfTerms: ".csc-num-items-terms",

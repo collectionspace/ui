@@ -43,6 +43,9 @@ fluid.registerNamespace("cspace.util");
 
     fluid.defaults("cspace.recordTypeManager", {
         gradeNames: ["fluid.littleComponent"],
+        mergePolicy: {
+            recordTypes: "nomerge"
+        },
         recordTypes: "{recordTypes}"
     });
 
@@ -140,7 +143,7 @@ fluid.registerNamespace("cspace.util");
         gradeNames: ["fluid.littleComponent"],
         vars: {
             tenant: "../../../tenant",
-            tenantname: {
+            tname: {
                 expander: {
                     type: "fluid.deferredInvokeCall",
                     func: "cspace.util.extractTenant"
@@ -391,7 +394,7 @@ fluid.registerNamespace("cspace.util");
 
     fluid.defaults("cspace.util.getLoginURL", {
         gradeNames: ["fluid.littleComponent"],
-        url: "%tenant/%tenantname/loginstatus",
+        url: "%tenant/%tname/loginstatus",
         urlRenderer: {
             expander: {
                 type: "fluid.deferredInvokeCall",
@@ -409,7 +412,7 @@ fluid.registerNamespace("cspace.util");
     };
 
     fluid.defaults("cspace.util.getDefaultSchemaURL", {
-        url: "%tenant/%tenantname/%recordType/uischema",
+        url: "%tenant/%tname/%recordType/uischema",
         urlRenderer: {
             expander: {
                 type: "fluid.deferredInvokeCall",
@@ -427,7 +430,7 @@ fluid.registerNamespace("cspace.util");
     };
 
     fluid.defaults("cspace.util.getUISpecURL", {
-        url: "%tenant/%tenantname/%pageType/uispec",
+        url: "%tenant/%tname/%pageType/uispec",
         urlRenderer: {
             expander: {
                 type: "fluid.deferredInvokeCall",
@@ -507,7 +510,8 @@ fluid.registerNamespace("cspace.util");
 
     cspace.util.recordTypeSelector = function (options) {
         var that = fluid.initLittleComponent("cspace.util.recordTypeSelector", options);
-        var model = cspace.permissions.getPermissibleRelatedRecords(that.options.related, that.options.permissionsResolver, that.options.recordTypeManager, that.options.permission);
+        fluid.initDependents(that);
+        var model = cspace.permissions.getPermissibleRelatedRecords(that.options.related, that.permissionsResolver, that.recordTypeManager, that.options.permission);
         that.model = model;
         that.produceComponent = function () {
             var togo = {};
@@ -516,7 +520,7 @@ fluid.registerNamespace("cspace.util");
                     selection: model[0],
                     optionlist: model,
                     optionnames: fluid.transform(model, function (recordType) {
-                        return that.options.messageResolver.resolve(recordType);
+                        return that.messageResolver.resolve(recordType);
                     })
                 };
             }
@@ -538,9 +542,11 @@ fluid.registerNamespace("cspace.util");
 
     fluid.defaults("cspace.util.recordTypeSelector", {
         gradeNames: ["fluid.littleComponent"],
-        recordTypeManager: "{recordTypeManager}",
-        permissionsResolver: "{permissionsResolver}",
-        messageResolver: "{globalBundle}",
+        components: {
+            recordTypeManager: "{recordTypeManager}",
+            permissionsResolver: "{permissionsResolver}",
+            messageResolver: "{globalBundle}"
+        },
         permission: "read"
     });
 
@@ -643,8 +649,9 @@ fluid.registerNamespace("cspace.util");
         };
     };
     fluid.defaults("cspace.util.schemaStrategy", {
+        gradeNames: "fluid.littleComponent",
         mergePolicy: {
-            schema: "preserve"
+            schema: "nomerge"
         }
     });
 
@@ -933,7 +940,11 @@ fluid.registerNamespace("cspace.util");
                 if (!that.globalBundle || !that.messageBar) {
                     that.events.afterFetch.fire();
                 }
-                options = fluid.merge({"pageBuilder.options.model": "preserve", "pageBuilder.options.applier": "nomerge"}, {
+                options = fluid.merge({
+                    "pageBuilder.options.model": "preserve", 
+                    "pageBuilder.options.applier": "nomerge",
+                    "pageBuilder.options.userLogin": "nomerge"
+                }, {
                     pageBuilder: {
                         options: {
                             userLogin: resourceSpecs.loginstatus.resourceText
@@ -1020,7 +1031,7 @@ fluid.registerNamespace("cspace.util");
     fluid.defaults("cspace.namespaces", {
         gradeNames: ["fluid.modelComponent", "autoInit"],
         mergePolicy: {
-            schema: "preserve"
+            schema: "nomerge"
         },
         strategy: cspace.util.schemaStrategy,
         postInitFunction: "cspace.namespaces.postInit",
@@ -1067,7 +1078,7 @@ fluid.registerNamespace("cspace.util");
     fluid.defaults("cspace.recordTypes", {
         gradeNames: ["fluid.littleComponent"],
         mergePolicy: {
-            schema: "preserve",
+            schema: "nomerge",
             model: "preserve"
         },
         invokers: {
@@ -1284,6 +1295,9 @@ fluid.registerNamespace("cspace.util");
 
     fluid.defaults("cspace.util.resolveReadOnly", {
         gradeNames: ["fluid.littleComponent"],
+        mergePolicy: {
+            permissions: "nomerge"
+        },
         perms: ["create", "update"]
     });
 
@@ -1321,7 +1335,9 @@ fluid.registerNamespace("cspace.util");
     fluid.defaults("cspace.validator", {
         gradeNames: ["autoInit", "fluid.littleComponent"],
         finalInitFunction: "cspace.validator.finalInit",
-        schema: {},
+        mergePolicy: {
+            schema: "nomerge"
+        },
         recordType: "",
         invokers: {
             lookupMessage: "cspace.util.lookupMessage",

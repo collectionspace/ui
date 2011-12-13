@@ -20,7 +20,8 @@ cspace = cspace || {};
 		preInitFunction: "cspace.recordList.preInit",
 		finalInitFunction: "cspace.recordList.finalInit",
         mergePolicy: {
-            "rendererOptions.applier": "applier"
+            "rendererOptions.applier": "applier",
+            globalNavigator: "nomerge"
         },
         rendererOptions: {
             autoBind: true
@@ -234,7 +235,7 @@ cspace = cspace || {};
                                         type: "fluid",
                                         func: "cspace.recordList.rowStyler",
                                         options: {
-                                            row: "${{row}}"
+                                            row: "{row}"
                                         }
                                     }]
                                 }

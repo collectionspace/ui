@@ -195,7 +195,7 @@ cspace = cspace || {};
             afterSave: null,
             onError: null      // operation["create", "remove", "fetch", "update"], message
         },
-        baseUrl: cspace.componentUrlBuilder("%tenant/%tenantname"),
+        baseUrl: cspace.componentUrlBuilder("%tenant/%tname"),
         recordType: "",
         dataType: "json",
         fileExtension: ""

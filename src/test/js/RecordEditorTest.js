@@ -121,7 +121,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 jqUnit.assertEquals("The value of the field should still be", "NEW VALUE", jQuery(field).val());
                 re.confirmation.confirmationDialog.locate("proceed").click();
             });
-            re.options.globalNavigator.events.onPerformNavigation.fire(function () {
+            re.globalNavigator.events.onPerformNavigation.fire(function () {
                 jqUnit.assertEquals("The value of the field should roll back to", "TEST", jQuery(field).val());
                 start();
             });

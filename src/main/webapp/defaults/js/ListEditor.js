@@ -71,9 +71,9 @@ cspace = cspace || {};
             addNewListRowButton: ".csc-listEditor-createNew"
         },
         urls: {},
-        globalNavigator: "{globalNavigator}",
-        messageBar: "{messageBar}",
         components: {
+            messageBar: "{messageBar}",
+            globalNavigator: "{globalNavigator}",
             listSource: {
                 type: "cspace.listEditor.listDataSource"
             },
@@ -109,7 +109,8 @@ cspace = cspace || {};
         },
         mergePolicy: {
             listModel: "preserve",
-            detailsModel: "preserve"
+            detailsModel: "preserve",
+            uispec: "nomerge"
         }
     });
     
@@ -230,7 +231,7 @@ cspace = cspace || {};
     };
     
     cspace.listEditor.addNewListRow = function (that) {
-        that.options.globalNavigator.events.onPerformNavigation.fire(function () {
+        that.globalNavigator.events.onPerformNavigation.fire(function () {
             that.list.handleNewRow("show");
             that.detailsDC.fetch();
             that.events.afterAddNewListRow.fire();
