@@ -45,7 +45,7 @@ cspace = cspace || {};
                 key: key,
                 valuebinding: "*." + key,
                 components: comp,
-                sortable: key !== "recordtype",
+                sortable: key !== "recordtype" && key !== "summary",
                 label: labels[key]
             };
         });
