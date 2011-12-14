@@ -32,10 +32,10 @@ login-login-info: To view the CollectionSpace Life Science tenant, use the login
 login-login: admin@lifesci.collectionspace.org
 login-login-pwd:  and the password\t 
 login-login-pwdValue: Administrator
-login-rologin-info:
-login-rologin:
-login-rologin-pwd: 
-login-rologin-pwdValue:
+login-rologin-info: or use the read-only account:
+login-rologin: reader@core.collectionspace.org
+login-rologin-pwd:  and password: 
+login-rologin-pwdValue: reader
 login-footerFirst: To return to the CollectionSpace Core tenant, follow\t
 login-footerLink: this link
 login-footerLast: .
