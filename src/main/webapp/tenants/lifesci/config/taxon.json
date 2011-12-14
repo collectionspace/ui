@@ -14,12 +14,13 @@
                             "identificationNumber": ".csc-taxon-displayName"
                         },
                         "selectorsToIgnore": ["requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
-                        "deferredComponents": {
+                        "components": {
                             "hierarchy": {
                                 "type": "cspace.hierarchy",
                                 "options": {
                                     "uispec": "{pageBuilder}.options.uispec.hierarchy"
-                                }
+                                },
+                                "createOnEvent": "afterRender"
                             }
                         },
                         "applier": "{pageBuilder}.applier",
@@ -72,7 +73,13 @@
                 },
                 "dataContext": {
                     "options": {
-                        "baseUrl": "../../../chain/vocabularies"
+                        "baseUrl": {
+                            "expander": {
+                                "type": "fluid.deferredInvokeCall",
+                                "func": "cspace.util.urlBuilder",
+                                "args": "%tenant/%tname/vocabularies"
+                            }
+                        }
                     }
                 }
             }
