@@ -266,7 +266,7 @@ cspace = cspace || {};
             pageSize: "&pageSize=%pageSize",
             sort: "&sortDir=%sortDir&sortKey=%sortKey",
             defaultUrl: "%tenant/%tname/%recordType/search?query=%keywords%pageNum%pageSize%sort",
-            localUrl: "%chain/data/%recordType/search.json"
+            localUrl: "%tenant/%tname/data/%recordType/search.json"
         })
     });
     

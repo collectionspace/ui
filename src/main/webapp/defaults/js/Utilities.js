@@ -149,7 +149,6 @@ fluid.registerNamespace("cspace.util");
                     func: "cspace.util.extractTenant"
                 }
             },
-            chain: "../../../chain",
             webapp: "..",
             test: "../../../../test"
         }

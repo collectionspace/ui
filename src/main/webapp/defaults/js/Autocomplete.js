@@ -173,7 +173,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     cspace.autocomplete.testMatchesDataSource = cspace.URLDataSource;
     
     cspace.autocomplete.testNewTermDataSource = function (options) {
-        var url = "../../../chain%termUrl";
+        var url = "%tenant/%tname/%termUrl";
         return {
             options: {
                 url: url

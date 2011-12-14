@@ -88,7 +88,8 @@ cspace = cspace || {};
             searchBox: ".csc-header-searchBox",
             logout: ".csc-header-logout",
             user: ".csc-header-user",
-            userName: ".csc-header-userName"
+            userName: ".csc-header-userName",
+            logoutForm: ".csc-header-logout-form"
         },
         repeatingSelectors: ["menuItem"],
         invokers: {
@@ -113,6 +114,9 @@ cspace = cspace || {};
                 }
             }
         },
+        urls: cspace.componentUrlBuilder({
+            logoutUrl: "%tenant/%tname/logout"
+        }),
         login: "{userLogin}",
         strings: {},
         postInitFunction: "cspace.header.postInit",
@@ -165,6 +169,14 @@ cspace = cspace || {};
             userName: {
                 messagekey: "header-userName",
                 args: [that.options.login.options.screenName]
+            },
+            logoutForm: {
+                decorators: {
+                    type: "attrs",
+                    attributes: {
+                        action: that.options.urls.logoutUrl
+                    }
+                }
             },
             expander: {
                 repeatID: "menuItem",

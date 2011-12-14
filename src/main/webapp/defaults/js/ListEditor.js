@@ -115,7 +115,7 @@ cspace = cspace || {};
     });
     
     cspace.listEditor.preInitFunction = function (that) {
-        that.options.detailsApplier = fluid.makeChangeApplier(that.options.detailsModel);
+        that.options.detailsApplier = fluid.makeChangeApplier(that.options.detailsModel, {thin: true});
     };
     
     cspace.listEditor.finalInitFunction = function (that) {

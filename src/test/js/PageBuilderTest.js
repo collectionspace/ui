@@ -367,21 +367,21 @@ cspace = cspace || {};
         pageBuilderTest.test("cspace.composite.compose", function () {
             var resourceSpec = {
                 test1: {
-                    href: "../../chain/test/test1",
+                    href: "../../tenant/core/test/test1",
                     options: {
                         type: "GET",
                         dataType: "json"
                     }
                 },
                 test2: {
-                    href: "../../chain/test/test2",
+                    href: "../../tenant/core/test/test2",
                     options: {
                         type: "GET",
                         dataType: "json"
                     }
                 },
                 test3: {
-                    href: "../../chain/test/test3",
+                    href: "../../tenant/core/test/test3",
                     options: {
                         type: "GET",
                         dataType: "json"
@@ -390,7 +390,7 @@ cspace = cspace || {};
             };
             var expected = {
                 composite: {
-                    href: "../../chain/composite",
+                    href: "../../tenant/core/composite",
                     options: {
                         type: "POST",
                         dataType: "json",
@@ -398,7 +398,7 @@ cspace = cspace || {};
                     }
                 },
                 test2: {
-                    href: "../../chain/test/test2",
+                    href: "../../tenant/core/test/test2",
                     options: {
                         type: "GET",
                         dataType: "json"
@@ -410,8 +410,8 @@ cspace = cspace || {};
                 options: {
                     resources: ["test1", "test3"],
                     urls: {
-                        composite: "../../chain/composite",
-                        prefix: "../../chain"
+                        composite: "../../tenant/core/composite",
+                        prefix: "../../tenant/core"
                     }
                 },
                 lookupMessage: function () {}

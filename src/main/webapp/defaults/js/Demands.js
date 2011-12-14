@@ -32,7 +32,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             expander: {
                                 type: "fluid.deferredInvokeCall",
                                 func: "cspace.util.urlBuilder",
-                                args: "%chain/uispecs/%recordType-search.json"
+                                args: "%tenant/%tname/uispecs/%recordType-search.json"
                             }
                         }
                     },
@@ -41,7 +41,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                             expander: {
                                 type: "fluid.deferredInvokeCall",
                                 func: "cspace.util.urlBuilder",
-                                args: "%chain/uischema/%recordType-search.json"
+                                args: "%tenant/%tname/uischema/%recordType-search.json"
                             }
                         }
                     }
@@ -320,13 +320,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             options: {
                 vars: {
                     tenant: "../../../../test",
-                    tname: {
-                        expander: {
-                            type: "fluid.deferredInvokeCall",
-                            func: "cspace.util.extractTenant"
-                        }
-                    },
-                    chain: "../../../../test"
+                    tname: "."
                 }
             }
         });
@@ -478,7 +472,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         expander: {
                             type: "fluid.deferredInvokeCall",
                             func: "fluid.stringTemplate",
-                            args: ["%chain/%recordType", {
+                            args: ["%tenant/%tname/%recordType", {
                                 recordType: "{admin}.options.recordType"
                             }]  
                         }
@@ -500,7 +494,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 recordType: "users",
                 uispec: "{admin}.options.uispec",
                 urls: {
-                    listUrl: "%chain/users/search?query=%query"
+                    listUrl: "%tenant/%tname/users/search?query=%query"
                 }
             }
         });
@@ -518,7 +512,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 selectorsToIgnore: ["allDetails"],
                 uispec: "{relatedRecordsTab}.options.uispec",
                 urls: {
-                    listUrl: "%chain/%recordType/%csid"
+                    listUrl: "%tenant/%tname/%recordType/%csid"
                 }
             }
         });
@@ -596,7 +590,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete.newTermDataSource", "cspace.autocomplete", {
             funcName: "cspace.URLDataSource",
             args: {
-                url: "../../../chain%termUrl",
+                url: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.util.urlBuilder",
+                        args: "%tenant/%tname/%termUrl"
+                    }
+                },
                 termMap: {
                     termUrl: "%termUrl"
                 },
@@ -690,7 +690,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("cspace.autocomplete.broaderDataSource", "cspace.autocomplete", {
             funcName: "cspace.URLDataSource",
             args: {
-                url: "../../../chain/relationships/hierarchical/search?source=%recordType/%csid&type=hasBroader",
+                url: {
+                    expander: {
+                        type: "fluid.deferredInvokeCall",
+                        func: "cspace.util.urlBuilder",
+                        args: "%tenant/%tname/relationships/hierarchical/search?source=%recordType/%csid&type=hasBroader"
+                    }
+                },
                 termMap: {
                     recordType: "%recordType",
                     csid: "%csid"
@@ -869,7 +875,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 schema: "{pageBuilder}.schema",
                 sources: {
                     permission: {
-                        href: "../../../chain/permission/search?actGrp=CRUDL",
+                        href: {
+                            expander: {
+                                type: "fluid.deferredInvokeCall",
+                                func: "cspace.util.urlBuilder",
+                                args: "%tenant/%tname/permission/search?actGrp=CRUDL"
+                            }
+                        },
                         path: "fields.permissions",
                         resourcePath: "items",
                         merge: "cspace.dataSource.mergePermissions"
@@ -882,7 +894,13 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 schema: "{pageBuilder}.schema",
                 sources: {
                     role: {
-                        href: "../../../chain/role",
+                        href: {
+                            expander: {
+                                type: "fluid.deferredInvokeCall",
+                                func: "cspace.util.urlBuilder",
+                                args: "%tenant/%tname/role"
+                            }
+                        },
                         path: "fields.role",
                         resourcePath: "items",
                         merge: "cspace.dataSource.mergeRoles"

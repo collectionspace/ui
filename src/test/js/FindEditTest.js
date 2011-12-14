@@ -109,18 +109,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     };
     
     findEditTests.test("Basic findEdit URL with query", function () {
-        findEditUrlTest(opts, "../data/intake/search.json", {
+        findEditUrlTest(opts, ".././data/intake/search.json", {
             keywords: "foofer"
         });
     });
     
     findEditTests.test("Use the local search url option to override the default search url", function () {
         var options = fluid.copy(opts) || {};
-        findEditUrlTest(options, "../data/intake/search.json");
+        findEditUrlTest(options, ".././data/intake/search.json");
     });
     
     findEditTests.test("FindEdit URL through form inputs", function () {
-        findEditUrlTest(opts, "../data/loanin/search.json", null, function (findEdit) {
+        findEditUrlTest(opts, ".././data/loanin/search.json", null, function (findEdit) {
             jQuery(findEdit.mainSearch.options.selectors.searchQuery).val("doodle");
             jQuery(findEdit.mainSearch.options.selectors.recordTypeSelect).val("loanin");
             jQuery(findEdit.mainSearch.options.selectors.searchButton).click();

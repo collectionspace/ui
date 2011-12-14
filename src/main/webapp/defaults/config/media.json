@@ -28,20 +28,21 @@
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "model": "{pageBuilder}.model",
-                        "deferredComponents": {
+                        "components": {
                             "uploader": {
                                 "type": "cspace.mediaUploader",
                                 "options": {
                                     "urls": {
                                         "expander": {
                                             "type": "fluid.deferredInvokeCall",
-                                            "func": "cspace.componentUrlBuilder",
+                                            "func": "cspace.util.urlBuilder",
                                             "args": {
-                                                "upload": "%chain/uploads/"
+                                                "upload": "%tenant/%tname/uploads/"
                                             }
                                         }
                                     }
-                                }
+                                },
+                                "createOnEvent": "afterRender"
                             }
                         }
                     }

@@ -189,7 +189,7 @@ cspace = cspace || {};
         var defaultModel = fluid.copy(that.options.defaultFieldsModel);
         delete that.options.defaultFieldsModel;
         var model = defaultModel || cspace.util.getBeanValue({}, options.recordType, options.uischema);
-        var applier = fluid.makeChangeApplier(model);
+        var applier = fluid.makeChangeApplier(model, {thin: true});
         that.options.searchFields = {
             model: model, 
             applier: applier,

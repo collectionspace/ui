@@ -175,7 +175,7 @@ cspace = cspace || {};
             lookupMessage: "cspace.util.lookupMessage"
         },
         recordType: "", // Main record's type, generally inhereted from parent dataContext.
-        baseUrl: "../../../chain", // Url that will be put in the base path when building main record's fetch url.
+        baseUrl: cspace.componentUrlBuilder("%tenant/%tname"), // Url that will be put in the base path when building main record's fetch url.
         fileExtension: "",
         schema: null, // Schema that will fill the model if necessary.
         sources: null // Structure that describes all additional resources that will be merged with the base model.

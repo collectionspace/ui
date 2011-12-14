@@ -31,7 +31,7 @@ var loginTester = function(){
         var tempIsLocal = cspace.util.useLocalData;
         cspace.util.useLocalData = function () {return false;};
         login = cspace.login(".csc-login", {baseUrl: "http://foo.com/bar"});
-        jqUnit.assertEquals("Login form action should be set based on the supplied baseUrl", "../html/login" , jQuery(login.options.selectors.loginForm).attr("action"));
+        jqUnit.assertEquals("Login form action should be set based on the supplied baseUrl", ".././login" , jQuery(login.options.selectors.loginForm).attr("action"));
         cspace.util.useLocalData = tempIsLocal;
     });
 
@@ -82,7 +82,7 @@ var loginTester = function(){
         var ajaxMock = new jqMock.Mock(jQuery, "ajax");
         // Don't know how jqMock checks functions, so just check the other parameters for now
         var expectedAjaxParams = {
-            url: "../html/passwordreset",
+            url: ".././passwordreset",
             data: JSON.stringify({"email":"test@collectionspace.org"}),
             type: "POST",
             dataType: "json"
@@ -142,7 +142,7 @@ var loginTester = function(){
         var ajaxMock = new jqMock.Mock(jQuery, "ajax");
         // Don't know how jqMock checks functions, so just check the other parameters for now
         var expectedAjaxParams = {
-            url: "../html/resetpassword",
+            url: ".././resetpassword",
             data: JSON.stringify({"password":"testPassTwo", "token": "testToken"}),
             type: "POST",
             dataType: "json"

@@ -11,7 +11,13 @@
                     "options": {
                         "uispec": "{pageBuilder}.options.uispec",
                         "login": "{userLogin}",
-                        "queryURL": "../../../chain/users/search?query=",
+                        "queryURL": {
+                            "expander": {
+                                "type": "fluid.deferredInvokeCall",
+                                "func": "cspace.util.urlBuilder",
+                                "args": "%tenant/%tname/users/search?query="
+                            }
+                        },
                         "produceTree": "cspace.admin.produceAdminUserTree",
                         "events": {
                             "afterTreeRender": null,

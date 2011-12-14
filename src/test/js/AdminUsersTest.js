@@ -66,7 +66,7 @@ var adminUsersTester = function () {
             }
         },
         login: cspace.util.login(cspace.tests.userLogin),
-        queryURL: "../../../chain/users/search?query=",
+        queryURL: "../../../tenant/core/users/search?query=",
         events: {
             afterTreeRender: null,
             afterSetup: null

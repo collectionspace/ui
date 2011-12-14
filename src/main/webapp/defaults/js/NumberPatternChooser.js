@@ -198,7 +198,7 @@ cspace = cspace || {};
         },
         parentBundle: "{globalBundle}",
         templateUrl: cspace.componentUrlBuilder("%webapp/html/components/NumberPatternChooser.html"),
-        baseUrl: "../../../chain",
+        baseUrl: cspace.componentUrlBuilder("%tenant/%tname"),
         invokers: {
             displayErrorMessage: "cspace.util.displayErrorMessage",
             lookupMessage: "cspace.util.lookupMessage"

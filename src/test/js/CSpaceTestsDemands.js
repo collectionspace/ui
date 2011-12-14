@@ -235,7 +235,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             recordType: "users",
             uispec: "{admin}.options.uispec",
             urls: {
-                listUrl: "%chain/users/search?query=%query"
+                listUrl: "%tenant/%tname/users/search?query=%query"
             },
             components: {
                 listSearchSource: {
@@ -297,13 +297,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         args: {
             vars: {
                 tenant: "..",
-                chain: "..",
-                tname: {
-                    expander: {
-                        type: "fluid.deferredInvokeCall",
-                        func: "cspace.util.extractTenant"
-                    }
-                },
+                tname: ".",
                 webapp: "../../main/webapp/defaults",
                 test: ".."
             }

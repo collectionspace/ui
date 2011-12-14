@@ -458,7 +458,7 @@ cspace = cspace || {};
     cspace.pageBuilder.preInit = function (that) {
         that.dataContext = that.options.dataContext;
         that.model = that.options.model || {};
-        that.applier = that.options.applier || fluid.makeChangeApplier(that.model);
+        that.applier = that.options.applier || fluid.makeChangeApplier(that.model, {thin: true});
         that.schema = that.options.schema;
         that.permissions = that.options.userLogin.permissions;
         fluid.instantiateFirers(that, that.options);
