@@ -59,7 +59,7 @@
                                                 "styles": {
                                                     "mediaImage": "cs-media-image"
                                                 },
-                                                "deferredComponents": {
+                                                "components": {
                                                     "uploader": {
                                                         "type": "cspace.mediaUploader",
                                                         "options": {
@@ -72,7 +72,8 @@
                                                                     }
                                                                 }
                                                             }
-                                                        }
+                                                        },
+                                                        "createOnEvent": "afterRender"
                                                     }
                                                 }
                                             } 
