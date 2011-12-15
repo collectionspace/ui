@@ -1,6 +1,6 @@
 This is a custom build of Fluid Infusion 1.3 including: json, fss, framework, renderer, inlineEdit, pager and jQueryUIWidgets.
 
-It was built from commit 8d688a67bf7524a369834d7cf86121c5e72ee79b of Infusion project master, at
+It was built from commit 0ad3f745bbf8945ccc1253e0411fd46ebaa8b692 of Infusion project master, at
     http://github.com/fluid-project/infusion
     
 Line 26013 (the body of fluid.pager.selfRender): was replaced FROM:
