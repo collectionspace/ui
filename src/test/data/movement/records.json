@@ -2,5 +2,8 @@
     "items": [
         {"number": "Front Porch", "csid": "112.442.1", "summary": "not covered", "recordtype": "movement"},
         {"number": "Back Porch", "csid": "221.244.9", "summary": "covered", "recordtype": "movement"}
-    ]
+    ],
+    "pagination": {
+        "totalItems": 2
+    }
 }

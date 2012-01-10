@@ -1308,32 +1308,14 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
-        fluid.demands("cataloging", "cspace.myCollectionSpace", {
-            container: "{myCollectionSpace}.dom.cataloging"
-        }); 
-        fluid.demands("intake", "cspace.myCollectionSpace", {
-            container: "{myCollectionSpace}.dom.intake"
-        }); 
-        fluid.demands("acquisition", "cspace.myCollectionSpace", {
-            container: "{myCollectionSpace}.dom.acquisition"
-        });
-        fluid.demands("loanin", "cspace.myCollectionSpace", {
-            container: "{myCollectionSpace}.dom.loanin"
-        });
-        fluid.demands("loanout", "cspace.myCollectionSpace", {
-            container: "{myCollectionSpace}.dom.loanout"
-        }); 
-        fluid.demands("movement", "cspace.myCollectionSpace", {
-            container: "{myCollectionSpace}.dom.movement"
-        });
-        fluid.demands("objectexit", "cspace.myCollectionSpace", {
-            container: "{myCollectionSpace}.dom.objectexit"
-        });
-        fluid.demands("media", "cspace.myCollectionSpace", {
-            container: "{myCollectionSpace}.dom.media"
-        });
-        fluid.demands("group", "cspace.myCollectionSpace", {
-            container: "{myCollectionSpace}.dom.group"
+        fluid.demands("cspace.listView", "cspace.myCollectionSpace", {
+            options: {
+                listeners: {
+                    onModelChange: "{loadingIndicator}.events.showOn.fire",
+                    afterUpdate: "{loadingIndicator}.events.hideOn.fire",
+                    ready: "{loadingIndicator}.events.hideOn.fire"
+                }
+            }
         });
         fluid.demands("cspace.recordList", ["cspace.relatedRecordsList", "person"], {
             container: "{relatedRecordsList}.dom.recordListSelector",

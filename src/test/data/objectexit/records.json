@@ -1,5 +1,8 @@
 {
     "items": [
         { "number": "CompleteObjectExit001", "csid": "76feffe4-92e7-4da8-8a78", "summary": "Jim Nabors", "recordtype": "objectexit"}
-    ]
+    ],
+    "pagination": {
+        "totalItems": 1
+    }
 }

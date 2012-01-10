@@ -1427,7 +1427,7 @@ input[disabled]:hover, input[disabled]:hover    {
 }
 .cs-searchBox .cs-searchBox-button {
     float:right;}
-a.cs-searchBox-advancedSearch {
+a.cs-searchBox-advancedSearch, a.cs-listView-header-link {
     color: #6F9ECD;
     text-decoration: none;
 }
@@ -1634,7 +1634,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     text-align: left;
     font: inherit;
 }
-.cs-recordList .cs-selected {
+.cs-recordList .cs-selected, .list-table .cs-selected, .list-table .cs-selected > td {
     background-color:#6E9FCE !important;
     color:#fff !important; 
 }
@@ -1985,3 +1985,19 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 
 /* CSPACE-4676 */
 .csc-blobs-dimension *{ display:none;}
+
+.cs-listView-row:hover {
+    cursor:pointer;
+}
+.list-table .cs-disabled.cs-listView-row:hover > td,
+.list-table .cs-disabled.cs-listView-row:focus > td {
+    background-color: #F0F5FB;
+}
+.list-table .cs-disabled.cs-listView-row:nth-child(even):hover > td,
+.list-table .cs-disabled.cs-listView-row:nth-child(even):focus > td {
+    background-color: #F0F5FB;
+}
+.list-table .cs-disabled, .cs-disabled > td {
+    color: gray !important;
+    cursor: default !important;
+}

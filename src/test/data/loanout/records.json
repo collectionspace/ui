@@ -1,5 +1,8 @@
 {
     "items": [
         {"number": "LO2010.1", "csid": "124357689", "summary": "Bing Crosby Ice Cream Sales, Inc.", "recordtype": "loanout"}
-    ]
+    ],
+    "pagination": {
+        "totalItems": 1
+    }
 }

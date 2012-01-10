@@ -1,5 +1,8 @@
 {
     "items": [
         {"number": "Exhibition One", "csid": "c7da67bd-f689-4451-9c03", "summary": "", "recordtype": "group"}
-    ]
+    ],
+    "pagination": {
+        "totalItems": 1
+    }
 }

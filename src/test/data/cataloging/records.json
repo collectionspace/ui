@@ -29,5 +29,8 @@
             "objectNumber": "2005.018.1383",
             "updatedAt": "2011-04-18T16:31:11Z"
         }
-    }]
+    }],
+    "pagination": {
+        "totalItems": 3
+    }
 }

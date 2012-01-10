@@ -41,8 +41,8 @@
                     "options": {
                         "schema": "{pageBuilder}.schema",
                         "listeners": {
-                            "afterFetch": "{loadingIndicator}.events.hideOn.fire",
-                            "onFetch": "{loadingIndicator}.events.showOn.fire"
+                            "afterRender": "{loadingIndicator}.events.hideOn.fire",
+                            "onRenderTree": "{loadingIndicator}.events.showOn.fire"
                         }
                     }
                 },
