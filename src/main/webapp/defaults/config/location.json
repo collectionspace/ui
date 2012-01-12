@@ -12,6 +12,7 @@
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
                         "model": "{pageBuilder}.model",
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.shortIdentifier"],
                         "selectors": {
                             "hierarchy": ".csc-location-hierarchy",
                             "identificationNumber": ".csc-location-displayName"
