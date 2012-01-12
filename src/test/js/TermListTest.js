@@ -73,6 +73,20 @@ var termListTester = function ($) {
             elPath: elPath
         });
     });
+    
+    termListTest.asyncTest("Container test", function () {
+        var elPath = "test";
+        setupTermList(function (termList, termListImpl) {
+            var container = termListImpl.container;
+            jqUnit.assertEquals("the container of termlist is a div ", "DIV", container[0].tagName);
+            jqUnit.assertNotEquals("and its ID should not be main ", "main", container[0].id);
+            container = termListImpl.container.parent();
+            jqUnit.assertEquals("the parent container of termlist is a div as well ", "DIV", container[0].tagName);
+            jqUnit.assertEquals("and its ID should be main ", "main", container[0].id);
+        }, {
+            elPath: elPath
+        });
+    });
 };
 
 (function () {
