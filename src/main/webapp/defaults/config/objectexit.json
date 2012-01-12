@@ -14,7 +14,8 @@
                         },
                         "applier": "{pageBuilder}.applier",
                         "uispec": "{pageBuilder}.options.uispec.recordEditor",
-                        "model": "{pageBuilder}.model"
+                        "model": "{pageBuilder}.model",
+                        "fieldsToIgnore": ["csid", "fields.csid", "fields.exitNumber"]
                     }
                 },
                 "titleBar": {

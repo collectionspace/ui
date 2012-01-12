@@ -1030,6 +1030,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             args: "{recordEditor}"
         });
         
+        fluid.demands("cspace.recordEditor.cloneAndStore", "cspace.recordEditor", {
+            funcName: "cspace.recordEditor.cloneAndStore", 
+            args: "{recordEditor}"
+        });
+
         fluid.demands("reloadAndCloneRecord", "cspace.recordEditor", {
             funcName: "cspace.recordEditor.reloadAndCloneRecord", 
             args: "{recordEditor}"

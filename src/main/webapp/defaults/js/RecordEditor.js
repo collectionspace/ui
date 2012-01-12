@@ -447,13 +447,16 @@ cspace = cspace || {};
         that.rollback();
     };
     
-    cspace.recordEditor.reloadAndCloneRecord = function (that) {
+    cspace.recordEditor.cloneAndStore = function (that) {
         var modelToClone = fluid.copy(that.model);
-        delete modelToClone.csid;
-        if (modelToClone.fields) {
-            delete modelToClone.fields.csid;
-        }
+        fluid.each(that.options.fieldsToIgnore, function (fieldPath) {
+            fluid.set(modelToClone, fieldPath);
+        });
         that.localStorage.set(modelToClone);
+    };
+    
+    cspace.recordEditor.reloadAndCloneRecord = function (that) {
+        that.cloneAndStore();
         window.location = fluid.stringTemplate(that.options.urls.cloneURL, {recordType: that.options.recordType});
     };
     
@@ -509,6 +512,7 @@ cspace = cspace || {};
         mergePolicy: {
             model: "preserve",
             applier: "nomerge",
+            fieldsToIgnore: "replace",
             "rendererOptions.instantiator": "nomerge",
             "rendererOptions.parentComponent": "nomerge",
             "rendererFnOptions.uispec": "uispec",
@@ -560,7 +564,8 @@ cspace = cspace || {};
             createNewFromExistingRecord: "createNewFromExistingRecord",
             cancel: "cancel",
             hasMediaAttached: "hasMediaAttached",
-            hasRelations: "hasRelations"
+            hasRelations: "hasRelations",
+            cloneAndStore: "cspace.recordEditor.cloneAndStore"
         },
         dataContext: "{dataContext}",
         navigationEventNamespace: undefined,
@@ -587,6 +592,7 @@ cspace = cspace || {};
             togglable: ".csc-recordEditor-togglable"
         },
         selectorsToIgnore: ["requiredFields", "identificationNumber", "header", "togglable"],
+        fieldsToIgnore: ["csid", "fields.csid"],
         rendererFnOptions: {
             cutpointGenerator: "cspace.recordEditor.cutpointGenerator"
         },

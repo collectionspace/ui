@@ -222,6 +222,31 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             });
             re.remove();
         });
-    }); 
+    });
+
+    recordEditorTest.asyncTest("Record editor's fields to ignore (cloneAndStore)", function () {
+         var model = {
+            csid: "somecsid",
+            relations: {},
+            fields: {},
+            fieldToIgnore: "IGNORE"
+        };
+        setupRecordEditor({
+            model: model,
+            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
+            showDeleteButton: true,
+            applier: fluid.makeChangeApplier(model),
+            uispec: {},
+            fieldsToIgnore: ["fieldToIgnore"]
+        }, function (recordEditor) {
+            jqUnit.assertValue("Model should contain fieldToIgnore", recordEditor.model.fieldToIgnore);
+            jqUnit.assertUndefined("Local storage should have nothing there", recordEditor.localStorage.get());
+            recordEditor.cloneAndStore();
+            var modelToClone = recordEditor.localStorage.get();
+            jqUnit.assertValue("Model to clone exists", modelToClone);
+            jqUnit.assertUndefined("Ignored fields are removed", modelToClone.fieldToIgnore);
+            start();
+        });
+    });
 
 }());
