@@ -1770,6 +1770,9 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     color: gray;
     cursor: default;
 }
+.cs-mediaUploader .cs-disabled {
+	background-color: #CCC;
+}
 
 .cs-recordList-thumbnail {
     max-height: 10px;

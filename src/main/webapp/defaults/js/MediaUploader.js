@@ -14,14 +14,153 @@ cspace = cspace || {};
 
 (function ($, fluid) {
     "use strict";
-
-    cspace.mediaUploader = function (container, options) {
-        var that = fluid.initRendererComponent("cspace.mediaUploader", container, options);
-        fluid.initDependents(that);
-        that.refreshView();
-        that.bindEvents();
-        return that;
-    };
+    
+    fluid.defaults("cspace.mediaUploader", {
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        parentBundle: "{globalBundle}",
+        finalInitFunction: "cspace.mediaUploader.finalInit",
+        invokers: {
+            bindEvents: {
+                funcName: "cspace.mediaUploader.bindEvents",
+                args: "{mediaUploader}"
+            },
+            refreshView: {
+                funcName: "cspace.mediaUploader.refreshView",
+                args: "{mediaUploader}"
+            },
+            linkMedia: {
+                funcName: "cspace.mediaUploader.linkMedia",
+                args: "{mediaUploader}"
+            },
+            processLink: {
+                funcName: "cspace.mediaUploader.processLink",
+                args: "{mediaUploader}"
+            },
+            removeMedia: {
+                funcName: "cspace.mediaUploader.removeMedia",
+                args: "{mediaUploader}"
+            },
+            displayErrorMessage: "cspace.util.displayErrorMessage",
+            lookupMessage: "cspace.util.lookupMessage",
+            onFileError: {
+                funcName: "cspace.mediaUploader.onFileError",
+                args: ["{mediaUploader}", "{arguments}.0", "{arguments}.1", "{arguments}.2", "{arguments}.3"]
+            },
+            onFileSuccess: {
+                funcName: "cspace.mediaUploader.onFileSuccess",
+                args: ["{mediaUploader}", "{mediaUploader}.dom.uploadInput", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
+            },
+            afterFileQueuedListener: {
+                funcName: "cspace.mediaUploader.afterFileQueuedListener",
+                args: ["{mediaUploader}.dom.uploadInput", "{arguments}.0"]
+            },
+            toggleUpload: {
+                funcName: "cspace.mediaUploader.toggleUpload",
+                args: ["{mediaUploader}.model.csid", "{mediaUploader}.fileUploader.strategy.local.browseButtonView.dom.fileInputs"]
+            }
+        },
+        elPaths: {
+            blobCsid: "fields.blobCsid",
+            srcUri: "fields.srcUri",
+            blobs: "fields.blobs"
+        },
+        mergePolicy: {
+            model: "preserve",
+            applier: "nomerge"
+        },
+        selectors: {
+            uploadInput: ".csc-mediaUploader-uploadInput",
+            uploadInputContainer: ".csc-mediaUploader-uploadInputContainer",
+            linkInput: ".csc-mediaUploader-linkInput",
+            uploadButton: ".csc-mediaUploader-uploadButton",
+            linkButton: ".csc-mediaUploader-linkButton",
+            removeButton: ".csc-mediaUploader-removeMedia",
+            fileUploader: ".csc-mediaUploader-fileUploaderContainer",
+            uploadMediaLabel: ".csc-mediaUploader-uploadMedia-label",
+            linkMediaLabel: ".csc-mediaUploader-linkMedia-label",
+            uploader: ".csc-mediaUploader"
+        },
+        selectorsToIgnore: ["fileUploader", "uploadInput"],
+        strings: {},
+        styles: {
+            button: "cs-mediaUploader-button",
+            hidden: "hidden",
+            removeButton: "cs-mediaUploader-removeMedia",
+            fileInputFocused: "cs-mediaUploader-fileInputFocused",
+            disabled: "cs-disabled"
+        },
+        events: {
+            onLink: null,
+            onRemove: null
+        },
+        produceTree: "cspace.mediaUploader.produceTree",
+        components: {
+            uploaderContext: {
+                type: "fluid.progressiveChecker",
+                priority: "first",
+                options: {
+                    checks: [{
+                        feature: "{fluid.browser.supportsBinaryXHR}",
+                        contextName: "fluid.uploader.html5"
+                    }, {
+                        feature: "{fluid.browser.supportsFlash}",
+                        contextName: "fluid.uploader.swfUpload"
+                    }],
+                    defaultContextName: "fluid.uploader.singleFile"
+                }
+            },
+            confirmation: "{confirmation}",
+            fileUploader: {
+                type: "fluid.uploader",
+                createOnEvent: "afterRender",
+                container: "{mediaUploader}.dom.fileUploader",
+                options: {
+                    components: {
+                        fileQueueView: {
+                            type: "fluid.emptySubcomponent"
+                        },
+                        totalProgressBar: {
+                            type: "fluid.emptySubcomponent"
+                        },
+                        errorPanel: {
+                            type: "fluid.emptySubcomponent"
+                        },
+                        strategy: {
+                            options: {
+                                flashMovieSettings: {
+                                    flashURL: "../lib/infusion/lib/swfupload/flash/swfupload.swf"
+                                }
+                            }
+                        }
+                    },
+                    queueSettings: {
+                        uploadURL: "{mediaUploader}.options.urls.upload",
+                        fileUploadLimit: 1,
+                        fileQueueLimit : 1
+                    },
+                    selectors: {
+                        uploadButton: "{mediaUploader}.options.selectors.uploadButton"
+                    }
+                }
+            }
+        },
+        resources: {
+            template: {
+                expander: {
+                    type: "fluid.deferredInvokeCall",
+                    func: "cspace.specBuilder",
+                    args: {
+                        forceCache: true,
+                        fetchClass: "fastTemplate",
+                        url: "%webapp/html/components/MediaUploaderTemplate.html",
+                        options: {
+                            dataType: "html"
+                        }
+                    }
+                }
+            }
+        }
+    });
     
     // TODO: This is a hack to imitate focus on the file input and simulate a single file uploader. 
     cspace.mediaUploader.bindEvents = function (that) {
@@ -72,6 +211,17 @@ cspace = cspace || {};
     cspace.mediaUploader.produceTree = function (that) {
         return {
             expander: [{
+                type: "fluid.renderer.condition",
+                condition: "${csid}",
+                trueTree: {
+                    uploadInputContainer: {}
+                },
+                falseTree: {
+                    uploadInputContainer: {
+                        decorators: {"addClass": "{styles}.disabled"}
+                    }
+                }
+            }, {
                 type: "fluid.renderer.condition",
                 condition: "${" + that.options.elPaths.blobCsid + "}",
                 trueTree: {
@@ -150,6 +300,16 @@ cspace = cspace || {};
     cspace.mediaUploader.assertBlob = function (blobCsid) {
         return !!blobCsid;
     };
+
+    cspace.mediaUploader.toggleUpload = function (csid, fileUploader) {
+        fileUploader.attr("disabled", !!csid ? undefined: "disabled");
+    };
+    
+    cspace.mediaUploader.finalInit = function (that) {
+        that.refreshView();
+        that.bindEvents();
+        that.toggleUpload();
+    };
     
     cspace.mediaUploader.removeMedia = function (that) {
         that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
@@ -171,146 +331,6 @@ cspace = cspace || {};
             parentBundle: that.options.parentBundle
         });
     };
-    
-    fluid.defaults("cspace.mediaUploader", {
-        gradeNames: "fluid.rendererComponent",
-        parentBundle: "{globalBundle}",
-        invokers: {
-            bindEvents: {
-                funcName: "cspace.mediaUploader.bindEvents",
-                args: "{mediaUploader}"
-            },
-            refreshView: {
-                funcName: "cspace.mediaUploader.refreshView",
-                args: "{mediaUploader}"
-            },
-            linkMedia: {
-                funcName: "cspace.mediaUploader.linkMedia",
-                args: "{mediaUploader}"
-            },
-            processLink: {
-                funcName: "cspace.mediaUploader.processLink",
-                args: "{mediaUploader}"
-            },
-            removeMedia: {
-                funcName: "cspace.mediaUploader.removeMedia",
-                args: "{mediaUploader}"
-            },
-            displayErrorMessage: "cspace.util.displayErrorMessage",
-            lookupMessage: "cspace.util.lookupMessage",
-            onFileError: {
-                funcName: "cspace.mediaUploader.onFileError",
-                args: ["{mediaUploader}", "{arguments}.0", "{arguments}.1", "{arguments}.2", "{arguments}.3"]
-            },
-            onFileSuccess: {
-                funcName: "cspace.mediaUploader.onFileSuccess",
-                args: ["{mediaUploader}", "{mediaUploader}.dom.uploadInput", "{arguments}.0", "{arguments}.1", "{arguments}.2"]
-            },
-            afterFileQueuedListener: {
-                funcName: "cspace.mediaUploader.afterFileQueuedListener",
-                args: ["{mediaUploader}.dom.uploadInput", "{arguments}.0"]
-            }
-        },
-        elPaths: {
-            blobCsid: "fields.blobCsid",
-            srcUri: "fields.srcUri",
-            blobs: "fields.blobs"
-        },
-        mergePolicy: {
-            model: "preserve",
-            applier: "nomerge"
-        },
-        selectors: {
-            uploadInput: ".csc-mediaUploader-uploadInput",
-            linkInput: ".csc-mediaUploader-linkInput",
-            uploadButton: ".csc-mediaUploader-uploadButton",
-            linkButton: ".csc-mediaUploader-linkButton",
-            removeButton: ".csc-mediaUploader-removeMedia",
-            fileUploader: ".csc-mediaUploader-fileUploaderContainer",
-            uploadMediaLabel: ".csc-mediaUploader-uploadMedia-label",
-            linkMediaLabel: ".csc-mediaUploader-linkMedia-label",
-            uploader: ".csc-mediaUploader"
-        },
-        selectorsToIgnore: ["fileUploader", "uploadInput"],
-        strings: {},
-        styles: {
-            button: "cs-mediaUploader-button",
-            hidden: "hidden",
-            removeButton: "cs-mediaUploader-removeMedia",
-            fileInputFocused: "cs-mediaUploader-fileInputFocused"
-        },
-        events: {
-            onLink: null,
-            onRemove: null
-        },
-        produceTree: cspace.mediaUploader.produceTree,
-        components: {
-            uploaderContext: {
-                type: "fluid.progressiveChecker",
-                priority: "first",
-                options: {
-                    checks: [{
-                        feature: "{fluid.browser.supportsBinaryXHR}",
-                        contextName: "fluid.uploader.html5"
-                    }, {
-                        feature: "{fluid.browser.supportsFlash}",
-                        contextName: "fluid.uploader.swfUpload"
-                    }],
-                    defaultContextName: "fluid.uploader.singleFile"
-                }
-            },
-            confirmation: "{confirmation}",
-            fileUploader: {
-                type: "fluid.uploader",
-                createOnEvent: "afterRender",
-                container: "{mediaUploader}.dom.fileUploader",
-                options: {
-                    components: {
-                        fileQueueView: {
-                            type: "fluid.emptySubcomponent"
-                        },
-                        totalProgressBar: {
-                            type: "fluid.emptySubcomponent"
-                        },
-                        errorPanel: {
-                            type: "fluid.emptySubcomponent"
-                        },
-                        strategy: {
-                            options: {
-                                flashMovieSettings: {
-                                    flashURL: "../lib/infusion/lib/swfupload/flash/swfupload.swf"
-                                }
-                            }
-                        }
-                    },
-                    queueSettings: {
-                        uploadURL: "{mediaUploader}.options.urls.upload",
-                        fileUploadLimit: 1,
-                        fileQueueLimit : 1
-                    },
-                    selectors: {
-                        uploadButton: "{mediaUploader}.options.selectors.uploadButton"
-                    }
-                }
-            }
-        },
-        resources: {
-            template: {
-                expander: {
-                    type: "fluid.deferredInvokeCall",
-                    func: "cspace.specBuilder",
-                    args: {
-                        forceCache: true,
-                        fetchClass: "fastTemplate",
-                        url: "%webapp/html/components/MediaUploaderTemplate.html",
-                        options: {
-                            dataType: "html"
-                        }
-                    }
-                }
-            }
-        }
-    });
     
     fluid.fetchResources.primeCacheFromResources("cspace.mediaUploader");
     

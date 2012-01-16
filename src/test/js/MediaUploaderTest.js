@@ -23,6 +23,10 @@ var mediaUploaderTester = function ($) {
         }
     };
     
+    var baseCSIDModel = {
+        csid: "123"  
+    };
+    
     var bareMediaUploaderTest = new jqUnit.TestCase("Media Uploader Tests");
     
     var mediaUploaderTest = cspace.tests.testEnvironment({
@@ -46,6 +50,26 @@ var mediaUploaderTester = function ($) {
         jqUnit.notVisible("Remove media is invisible", mediaUploader.locate("removeButton"));
         jqUnit.assertTrue("+ Upload button is disabled", mediaUploader.locate("uploadButton").attr("disabled"));
         jqUnit.assertTrue("Link button is disabled", mediaUploader.locate("linkButton").attr("disabled"));
+    });
+    
+    mediaUploaderTest.test("Init and render. Check that upload field is disabled depending on CSID presence, no CSID", function () {
+        expect(2);
+        var mediaUploader = setupMediaUploader();
+        var mediaUploaderInput = mediaUploader.fileUploader.strategy.local.browseButtonView.locate("fileInputs");
+        jqUnit.assertTrue("HTML input is disabled", mediaUploaderInput.is(":disabled"));
+        jqUnit.assertTrue("Media uploader styled as disabled", mediaUploader.locate("uploadInputContainer").hasClass(mediaUploader.options.styles.disabled));
+    });
+    
+    mediaUploaderTest.test("Init and render. Check that upload field is disabled depending on CSID presence, with CSID", function () {
+        expect(2);
+        var model = fluid.copy(baseCSIDModel);
+        var mediaUploader = setupMediaUploader({
+            model: model,
+            applier: fluid.makeChangeApplier(model)
+        });
+        var mediaUploaderInput = mediaUploader.fileUploader.strategy.local.browseButtonView.locate("fileInputs");
+        jqUnit.assertFalse("HTML input is not disabled since it has CSID", mediaUploaderInput.is(":disabled"));
+        jqUnit.assertFalse("Media uploader not styled as disabled since it has CSID", mediaUploader.locate("uploadInputContainer").hasClass(mediaUploader.options.styles.disabled));
     });
     
     mediaUploaderTest.asyncTest("Linking", function () {
