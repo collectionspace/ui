@@ -109,7 +109,10 @@ cspace = cspace || {};
     cspace.termList.impl.finalInit = function (that) {
         if (that.options.activestatus) {
             fluid.each($("option", that.locate("termList")), function (option, index) {
-                $(option).prop("disabled", that.options.activestatus[index] !== "active")
+                var stat = that.options.activestatus[index];
+                // http://issues.collectionspace.org/browse/CSPACE-4782: If status is "",
+                // UI will not disable the option in dropdown (as per JIRA).
+                $(option).prop("disabled", stat && stat !== "active")
             });
         }
         that.events.ready.fire(that);
