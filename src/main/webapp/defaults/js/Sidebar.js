@@ -238,11 +238,11 @@ cspace = cspace || {};
                     elPaths: {
                         items: "items"
                     },
-                    columns: ["number", "sourceFieldName", "recordtype"],
+                    columns: ["number", "recordtype", "sourceFieldName"],
                     strings: {
-                        number: "Term",
-                        sourceFieldName: "Field",
-                        recordtype: "Vocabulary"
+                        number: "{globalBundle}.messageBase.rl-rrl-termsUsed-number",
+                        sourceFieldName: "{globalBundle}.messageBase.rl-rrl-termsUsed-sourceFieldName",
+                        recordtype: "{globalBundle}.messageBase.rl-rrl-termsUsed-recordtype"
                     },
                     showNumberOfItems: false
                 }

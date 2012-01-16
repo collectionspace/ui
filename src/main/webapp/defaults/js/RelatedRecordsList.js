@@ -63,14 +63,14 @@ cspace = cspace || {};
     
     cspace.relatedRecordsList.buildRelationsListColumns = function (related) {
         if (related !== "cataloging") {
-            return ["number", "recordtype", "summary"];
+            return ["number", "recordtype", "summarylist.updatedAt"];
         }
         return ["number", "summary", "summarylist.updatedAt"];
     };
     
     cspace.relatedRecordsList.buildRelationsListNames = function (related) {
         if (related !== "cataloging") {
-            return;
+            return ["number", "recordtype", "updatedAt"];
         }
         return ["number", "summary", "updatedAt"];
     };
