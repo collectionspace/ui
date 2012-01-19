@@ -35,7 +35,7 @@ cspace = cspace || {};
                 type: "affects",
                 "one-way": false
             }];
-            that.relationManager.addRelations({items: newRelation});
+            that.relationManager.dataContext.addRelations({items: newRelation});
         });
         
         that.globalNavigator.events.onPerformNavigation.addListener(function (callback) {
