@@ -12,13 +12,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 "use strict";
 
 (function () {
-    fluid.setLogging(true);
+    //fluid.setLogging(true);
 
     var bareRecordEditorTest = new jqUnit.TestCase("recordEditor Tests", null, function () {
         $(".ui-dialog").detach();
     });
 
     var recordEditorTest = cspace.tests.testEnvironment({testCase: bareRecordEditorTest});
+    
+    var recordEditorTestUsedBy = cspace.tests.testEnvironment({testCase: bareRecordEditorTest, components: {
+        someComponent: fluid.typeTag("person")
+    }});
 
     var setupRecordEditor = function (options, callback) {
         fluid.merge(null, options, {
@@ -27,7 +31,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 "afterRender.initialRender": callback
             },
             showDeleteButton: true,
-            recordType: "cataloging",
             components: {
                 validator: {
                     type: "fluid.emptySubcomponent"
@@ -87,7 +90,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         setupRecordEditor({
             model: model,
             dataContext: cspace.dataContext({baseUrl: "../data", recordType: "cataloging", model: model, fileExtension: ".json"}),
-            uispec: {}
+            uispec: {},
+            recordType: "cataloging"
         }, function (re) {
             fluid.log("RETest: afterRender");
             re.confirmation.popup.bind("dialogopen", function () {
@@ -110,7 +114,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         setupRecordEditor({
             model: model,
             dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
-            uispec: uispec
+            uispec: uispec,
+            recordType: "cataloging"
         }, function (re) {
             re.events.afterRender.removeListener("initialRender");
             fluid.log("RETest: afterRender");
@@ -143,7 +148,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
             showDeleteButton: true,
             applier: fluid.makeChangeApplier(model),
-            uispec: {}
+            uispec: {},
+            recordType: "cataloging"
         }, function (re) {
             fluid.log("RETest: afterRender");
             re.confirmation.popup.bind("dialogopen", function () {
@@ -167,7 +173,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
             showDeleteButton: true,
             applier: fluid.makeChangeApplier(model),
-            uispec: {}
+            uispec: {},
+            recordType: "cataloging"
         }, function (re) {
             fluid.log("RETest: afterRender");
             re.confirmation.popup.bind("dialogopen", function () {
@@ -191,7 +198,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
             showDeleteButton: true,
             applier: fluid.makeChangeApplier(model),
-            uispec: {}
+            uispec: {},
+            recordType: "cataloging"
         }, function (re) {
             fluid.log("RETest: afterRender");
             re.confirmation.popup.bind("dialogopen", function () {
@@ -213,7 +221,8 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
             showDeleteButton: true,
             applier: fluid.makeChangeApplier(model),
-            uispec: {}
+            uispec: {},
+            recordType: "cataloging"
         }, function (re) {
             fluid.log("RETest: afterRender");
             re.confirmation.popup.bind("dialogopen", function () {
@@ -224,7 +233,11 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
     });
     
-    recordEditorTest.asyncTest("Test cannot delete-confirmation text - record is used by other records", function () {
+    /////
+    // This test block is responsible for record Deletion tests of the records which potentially could be used by other records
+    /////
+    // Test for the removal of the record which is referenced somewhere else but it is not Person/Location/Organization  
+    recordEditorTest.asyncTest("Test cannot delete-confirmation text - record is used by other records. Not Person/Location/Organization", function () {
          var model = {
             csid: "somecsid",
             relations: {},
@@ -238,16 +251,47 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
             showDeleteButton: true,
             applier: fluid.makeChangeApplier(model),
-            uispec: {}
+            uispec: {},
+            recordType: "cataloging"
         }, function (re) {
             fluid.log("RETest: afterRender");
             re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertEquals("Checking correct text: ", "Cannot remove this Cataloging which is used by other records.", re.confirmation.confirmationDialog.locate("message:").text());
+                jqUnit.assertNotEquals("Checking correct text: ", "Cannot remove this Cataloging which is used by other records.", re.confirmation.confirmationDialog.locate("message:").text());
                 start();
             });
             re.remove();
         });
     });
+    
+    // Test for the removal of the record which is referenced somewhere else and it is a Person  
+    recordEditorTestUsedBy.asyncTest("Test cannot delete-confirmation text - record is used by other records. Record of type person", function () {
+         var model = {
+            csid: "somecsid",
+            relations: {},
+            fields: {},
+            refobjs: [
+                {someobj: "This record "}
+            ]
+        };
+        setupRecordEditor({
+            model: model,
+            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
+            showDeleteButton: true,
+            applier: fluid.makeChangeApplier(model),
+            uispec: {},
+            recordType: "person"
+        }, function (re) {
+            fluid.log("RETest: afterRender");
+            re.confirmation.popup.bind("dialogopen", function () {
+                jqUnit.assertEquals("Checking correct text: ", "Can not remove this Person record which is used by other records.", re.confirmation.confirmationDialog.locate("message:").text());
+                start();
+            });
+            re.remove();
+        });
+    });
+    /////
+    // End of the test block
+    /////
 
     recordEditorTest.asyncTest("Record editor's fields to ignore (cloneAndStore)", function () {
          var model = {
