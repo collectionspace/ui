@@ -42,16 +42,21 @@ cspace = cspace || {};
             if (that.listEditor.details.unsavedChanges) {
                 that.confirmation.open("cspace.confirmation.saveDialog", undefined, {
                     listeners: {
-                        onClose: function (userAction) {
-                            if (userAction === "act") {
-                                that.listEditor.events.afterListUpdate.addListener(function () {
-                                    that.listEditor.events.afterListUpdate.removeListener("afterListUpdate");
+                        onClose: {
+                            listener: function (userAction) {
+                                if (userAction === "act") {
+                                    that.listEditor.events.afterListUpdate.addListener(function () {
+                                        that.listEditor.events.afterListUpdate.removeListener("afterListUpdate");
+                                        callback();
+                                    }, "afterListUpdate", undefined, "last");
+                                    that.listEditor.details.requestSave();
+                                } else if (userAction === "proceed") {
                                     callback();
-                                }, "afterListUpdate", undefined, "last");
-                                that.listEditor.details.requestSave();
-                            } else if (userAction === "proceed") {
-                                callback();
-                            }
+                                }
+                            },
+                            // http://issues.collectionspace.org/browse/CSPACE-4412:
+                            // Need to wait till confirmation dialog is closed.
+                            priority: "last"
                         }
                     },
                     parentBundle: that.options.parentBundle
