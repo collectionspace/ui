@@ -172,6 +172,9 @@ cspace = cspace || {};
     };
     
     fluid.defaults("cspace.confirmation.deleteDialog", {
+        mergePolicy: {
+            enableButtons: "replace"
+        },
         enableButtons: ["act", "cancel"],
         model: {
             messages: ["deleteDialog-primaryMessage"],
