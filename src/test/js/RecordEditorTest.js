@@ -223,6 +223,31 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             re.remove();
         });
     });
+    
+    recordEditorTest.asyncTest("Test cannot delete-confirmation text - record is used by other records", function () {
+         var model = {
+            csid: "somecsid",
+            relations: {},
+            fields: {},
+            refobjs: [
+                {someobj: "This record "}
+            ]
+        };
+        setupRecordEditor({
+            model: model,
+            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
+            showDeleteButton: true,
+            applier: fluid.makeChangeApplier(model),
+            uispec: {}
+        }, function (re) {
+            fluid.log("RETest: afterRender");
+            re.confirmation.popup.bind("dialogopen", function () {
+                jqUnit.assertEquals("Checking correct text: ", "Cannot remove this Cataloging which is used by other records.", re.confirmation.confirmationDialog.locate("message:").text());
+                start();
+            });
+            re.remove();
+        });
+    });
 
     recordEditorTest.asyncTest("Record editor's fields to ignore (cloneAndStore)", function () {
          var model = {
