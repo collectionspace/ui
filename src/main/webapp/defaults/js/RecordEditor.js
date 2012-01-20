@@ -265,7 +265,7 @@ cspace = cspace || {};
         return that;
     };
     
-    cspace.recordEditor.remove = function (that) {
+    cspace.recordEditor.removeWithCheck = function (that) {
         // If our record is used by any other record then we do not want to allow to
         // delete it. Just notify a user about it.
         if (!!that.model.refobjs && that.model.refobjs.length > 0) {
@@ -283,26 +283,30 @@ cspace = cspace || {};
                 parentBundle: that.options.parentBundle
             });
         } else {
-            that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
-                listeners: {
-                    onClose: function (userAction) {
-                        if (userAction === "act") {
-                            that.options.dataContext.remove(that.model.csid);
-                            processChanges(that, false);
-                        }
-                    }
-                },
-                model: {
-                    messages: [ "recordEditor-dialog-deletePrimaryMessage" ]
-                },
-                termMap: [
-                    that.lookupMessage(that.options.recordType),
-                    that.hasMediaAttached(that) ? that.options.strings.deleteMessageMediaAttached : "",
-                    that.hasRelations(that) ? that.options.strings.deleteMessageWithRelated : ""
-                ],
-                parentBundle: that.options.parentBundle
-            });
+            cspace.recordEditor.remove(that);
         }
+    };
+    
+    cspace.recordEditor.remove = function (that) {
+        that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+            listeners: {
+                onClose: function (userAction) {
+                    if (userAction === "act") {
+                        that.options.dataContext.remove(that.model.csid);
+                        processChanges(that, false);
+                    }
+                }
+            },
+            model: {
+                messages: [ "recordEditor-dialog-deletePrimaryMessage" ]
+            },
+            termMap: [
+                that.lookupMessage(that.options.recordType),
+                that.hasMediaAttached(that) ? that.options.strings.deleteMessageMediaAttached : "",
+                that.hasRelations(that) ? that.options.strings.deleteMessageWithRelated : ""
+            ],
+            parentBundle: that.options.parentBundle
+        });
     };
     
     cspace.recordEditor.rollback = function (that) {
