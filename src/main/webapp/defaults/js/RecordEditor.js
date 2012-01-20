@@ -265,6 +265,28 @@ cspace = cspace || {};
         return that;
     };
     
+    cspace.recordEditor.removeWithCheck = function (that) {
+        // If our record is used by any other record then we do not want to allow to
+        // delete it. Just notify a user about it.
+        if (!!that.model.refobjs && that.model.refobjs.length > 0) {
+            that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
+                enableButtons: ["act"],
+                model: {
+                    messages: [ "deleteDialog-usedByMessage" ],
+                    messagekeys: {
+                        actText: "alertDialog-actText"
+                    }
+                },
+                termMap: [
+                    that.lookupMessage(that.options.recordType)
+                ],
+                parentBundle: that.options.parentBundle
+            });
+        } else {
+            cspace.recordEditor.remove(that);
+        }
+    };
+    
     cspace.recordEditor.remove = function (that) {
         that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
             listeners: {
