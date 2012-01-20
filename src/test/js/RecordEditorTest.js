@@ -256,7 +256,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }, function (re) {
             fluid.log("RETest: afterRender");
             re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertNotEquals("Checking correct text: ", "Cannot remove this Cataloging which is used by other records.", re.confirmation.confirmationDialog.locate("message:").text());
+                jqUnit.assertNotEquals("Checking correct text: ", "This Cataloging record can not be removed. It is used by other records.", re.confirmation.confirmationDialog.locate("message:").text());
                 start();
             });
             re.remove();
@@ -283,7 +283,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         }, function (re) {
             fluid.log("RETest: afterRender");
             re.confirmation.popup.bind("dialogopen", function () {
-                jqUnit.assertEquals("Checking correct text: ", "Can not remove this Person record which is used by other records.", re.confirmation.confirmationDialog.locate("message:").text());
+                jqUnit.assertEquals("Checking correct text: ", "This Person record can not be removed. It is used by other records.", re.confirmation.confirmationDialog.locate("message:").text());
                 start();
             });
             re.remove();
