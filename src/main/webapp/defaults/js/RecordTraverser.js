@@ -16,13 +16,13 @@ cspace = cspace || {};
 (function ($, fluid) {
     
     fluid.defaults("cspace.recordTraverser", {
-        gradeNames: ["autoInit", "fluid.rendererComponent"],
-	    model: { },
+        gradeNames: ["fluid.rendererComponent", "autoInit"],
+        model: { },
         selectors: {
-            next: ".csc-recordTraverser-next",
-            previous: ".csc-recordTraverser-previous",
-            current: ".csc-recordTraverser-current"
-	    },
+            link_next: ".csc-recordTraverser-next",
+            link_previous: ".csc-recordTraverser-previous",
+            link_current: ".csc-recordTraverser-current"
+        },
         resources: {
             template: cspace.resourceSpecExpander({
                 fetchClass: "fastTemplate",
@@ -32,9 +32,18 @@ cspace = cspace || {};
                 }
             })
         },
+        styles: {
+            link_active: "cs-recordTraverser-linkActive",
+            link_deactive: "cs-recordTraverser-linkDeactive"
+        },
         strings: {},
         parentBundle: "{globalBundle}",
-        renderOnInit: true
+        renderOnInit: true,
+        protoTree: {
+            link_next: {decorators: {"addClass": "{styles}.link_active"}},
+            link_previous: {decorators: {"addClass": "{styles}.link_active"}},
+            link_current: {decorators: {"addClass": "{styles}.link_active"}}
+        }
     });
     
     fluid.fetchResources.primeCacheFromResources("cspace.recordTraverser");

@@ -548,6 +548,9 @@ cspace = cspace || {};
             },
             validator: {
                 type: "cspace.validator"
+            },
+            recordTraverser: {
+                type: "cspace.recordTraverser"
             }
         },
         invokers: {
@@ -589,9 +592,10 @@ cspace = cspace || {};
             createFromExistingButton: ".csc-createFromExisting",
             requiredFields: ".csc-required:visible",
             header: ".csc-recordEditor-header",
-            togglable: ".csc-recordEditor-togglable"
+            togglable: ".csc-recordEditor-togglable",
+            recordTraverser: ".csc-recordTraverser-container"
         },
-        selectorsToIgnore: ["requiredFields", "identificationNumber", "header", "togglable"],
+        selectorsToIgnore: ["requiredFields", "identificationNumber", "header", "togglable", "recordTraverser"],
         fieldsToIgnore: ["csid", "fields.csid"],
         rendererFnOptions: {
             cutpointGenerator: "cspace.recordEditor.cutpointGenerator"
