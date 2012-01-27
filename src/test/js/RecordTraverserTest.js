@@ -22,13 +22,23 @@ var rtTester = function ($) {
     var recordTraverserTest = cspace.tests.testEnvironment({testCase: bareRecordTraverserTest});
     
     var setupRecordTraverser = function (options) {
-        cspace.recordTraverser(container, options);
+        return cspace.recordTraverser(container, options);
     };
 
-    recordTraverserTest.test("Creation", function () {
+    recordTraverserTest.test("Creation with no Loco Storage", function () {
         var rt = setupRecordTraverser();
         
-        // Hola! Coma estas?
+        jqUnit.assertNoValue("Record Traverser found nothing in the local storage", rt.model.recordsData);
+        
+        jqUnit.assertEquals("Record Traverser did not render anything", 0, rt.locate("linkNext").length);
+        jqUnit.assertEquals("Record Traverser did not render anything", 0, rt.locate("linkPrevious").length);
+        jqUnit.assertEquals("Record Traverser did not render anything", 0, rt.locate("linkCurrent").length);
+    });
+    
+    recordTraverserTest.test("Creation with no Loco Storage", function () {
+        var rt = setupRecordTraverser();
+        
+        jqUnit.assertNoValue("Record Traverser found nothing in the local storage", rt.model.recordsData);
     });
 };
 

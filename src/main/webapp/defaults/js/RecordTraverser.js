@@ -19,9 +19,9 @@ cspace = cspace || {};
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         model: { },
         selectors: {
-            link_next: ".csc-recordTraverser-next",
-            link_previous: ".csc-recordTraverser-previous",
-            link_current: ".csc-recordTraverser-current"
+            linkNext: ".csc-recordTraverser-next",
+            linkPrevious: ".csc-recordTraverser-previous",
+            linkCurrent: ".csc-recordTraverser-current"
         },
         resources: {
             template: cspace.resourceSpecExpander({
@@ -33,18 +33,26 @@ cspace = cspace || {};
             })
         },
         styles: {
-            link_active: "cs-recordTraverser-linkActive",
-            link_deactive: "cs-recordTraverser-linkDeactive"
+            linkActive: "cs-recordTraverser-linkActive",
+            linkDeactive: "cs-recordTraverser-linkDeactive"
         },
         strings: {},
         parentBundle: "{globalBundle}",
-        renderOnInit: true,
         protoTree: {
-            link_next: {decorators: {"addClass": "{styles}.link_active"}},
-            link_previous: {decorators: {"addClass": "{styles}.link_active"}},
-            link_current: {decorators: {"addClass": "{styles}.link_active"}}
-        }
+            linkNext: {decorators: {"addClass": "{styles}.linkActive"}},
+            linkPrevious: {decorators: {"addClass": "{styles}.linkActive"}},
+            linkCurrent: {decorators: {"addClass": "{styles}.linkActive"}}
+        },
+        finalInitFunction: "cspace.recordTraverser.finalInitFunction"
     });
+    
+    cspace.recordTraverser.finalInitFunction = function(that) {
+        if (!that.model.recordsData) {
+            return;
+        }
+        
+        that.refreshView();
+    };
     
     fluid.fetchResources.primeCacheFromResources("cspace.recordTraverser");
     
