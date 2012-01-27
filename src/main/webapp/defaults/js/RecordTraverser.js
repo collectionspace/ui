@@ -43,10 +43,23 @@ cspace = cspace || {};
             linkPrevious: {decorators: {"addClass": "{styles}.linkActive"}},
             linkCurrent: {decorators: {"addClass": "{styles}.linkActive"}}
         },
-        finalInitFunction: "cspace.recordTraverser.finalInitFunction"
+        finalInitFunction: "cspace.recordTraverser.finalInitFunction",
+        components: {
+            localStorage: {
+                type: "cspace.util.localStorageDataSource",
+                options: {
+                    elPath: "recordsData"
+                }
+            }
+        },
+        elPath: "recordsData"
     });
     
     cspace.recordTraverser.finalInitFunction = function(that) {
+        that.applier.requestChange(that.options.elPath, that.localStorage.get());
+        
+        that.localStorage.set();
+        
         if (!that.model.recordsData) {
             return;
         }
