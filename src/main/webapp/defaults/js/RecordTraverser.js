@@ -21,7 +21,7 @@ cspace = cspace || {};
         selectors: {
             linkNext: ".csc-recordTraverser-next",
             linkPrevious: ".csc-recordTraverser-previous",
-            linkCurrent: ".csc-recordTraverser-current"
+            current: ".csc-recordTraverser-current"
         },
         resources: {
             template: cspace.resourceSpecExpander({
@@ -39,9 +39,15 @@ cspace = cspace || {};
         strings: {},
         parentBundle: "{globalBundle}",
         protoTree: {
-            linkNext: {decorators: {"addClass": "{styles}.linkActive"}},
-            linkPrevious: {decorators: {"addClass": "{styles}.linkActive"}},
-            linkCurrent: {decorators: {"addClass": "{styles}.linkActive"}}
+            linkNext: {
+                target: "#",
+                linktext: "${currentNext.number}"
+            },
+            linkPrevious: {
+                target: "#",
+                linktext: "${currentPrevious.number}"
+            },
+            current: "${current.number}"
         },
         finalInitFunction: "cspace.recordTraverser.finalInitFunction",
         components: {
@@ -52,11 +58,38 @@ cspace = cspace || {};
                 }
             }
         },
-        elPath: "recordsData"
+        invokers: {
+            prepareModel: {
+                funcName: "cspace.recordTraverser.prepareModel",
+                args: ["{cspace.recordTraverser}.model", "{cspace.recordTraverser}.applier", "{cspace.recordTraverser}.options.elPaths"]
+            }
+        },
+        listeners: {
+            prepareModelForRender: "{cspace.recordTraverser}.prepareModelForRenderListener"
+        },
+        preInitFunction: "cspace.recordTraverser.preInitFunction",
+        elPaths: {
+            recordsData: "recordsData",
+            recordsDataResults: "recordsData.results",
+            totalItems: "recordsData.pagination.totalItems"
+        }
     });
     
+    cspace.recordTraverser.prepareModel = function (model, applier, elPaths) {
+        var selected = model.recordsData.selected;
+        applier.requestChange("current", fluid.get(model, fluid.model.composeSegments(elPaths.recordsDataResults, selected)));
+        applier.requestChange("currentNext", fluid.get(model, fluid.model.composeSegments(elPaths.recordsDataResults, selected + 1)));
+        applier.requestChange("currentPrevious", fluid.get(model, fluid.model.composeSegments(elPaths.recordsDataResults, selected - 1)));
+    };
+    
+    cspace.recordTraverser.preInitFunction = function (that) {
+        that.prepareModelForRenderListener = function () {
+            that.prepareModel();
+        };
+    };
+    
     cspace.recordTraverser.finalInitFunction = function(that) {
-        that.applier.requestChange(that.options.elPath, that.localStorage.get());
+        that.applier.requestChange(that.options.elPaths.recordsData, that.localStorage.get());
         
         that.localStorage.set();
         

@@ -73,7 +73,7 @@ var rtTester = function ($) {
         
         jqUnit.assertEquals("Record Traverser did not render linkNext", 0, rt.locate("linkNext").length);
         jqUnit.assertEquals("Record Traverser did not render linkPrevious", 0, rt.locate("linkPrevious").length);
-        jqUnit.assertEquals("Record Traverser did not render linkCurrent", 0, rt.locate("linkCurrent").length);
+        jqUnit.assertEquals("Record Traverser did not render current", 0, rt.locate("current").length);
     });
     
     recordTraverserTest.test("Creation with Local Storage", function () {
@@ -89,7 +89,13 @@ var rtTester = function ($) {
         
         jqUnit.assertEquals("Record Traverser render linkNext", 1, rt.locate("linkNext").length);
         jqUnit.assertEquals("Record Traverser render linkPrevious", 1, rt.locate("linkPrevious").length);
-        jqUnit.assertEquals("Record Traverser render linkCurrent", 1, rt.locate("linkCurrent").length);
+        jqUnit.assertEquals("Record Traverser render current", 1, rt.locate("current").length);
+        
+        jqUnit.assertEquals("Selected retreived correctly", searchResult.selected, rt.model.recordsData.selected);
+        
+        jqUnit.assertEquals("linkPrevious is rendered correctly", searchResult.results[0].number, rt.locate("linkPrevious").text());
+        jqUnit.assertEquals("current is rendered correctly", searchResult.results[1].number, rt.locate("current").text());
+        jqUnit.assertEquals("linkNext is rendered correctly", searchResult.results[2].number, rt.locate("linkNext").text());
     });
 
 };
