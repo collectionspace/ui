@@ -78,6 +78,8 @@ var rtTester = function ($) {
     
     recordTraverserTest.test("Creation with Local Storage", function () {
         
+        var webapp = fluid.invoke("cspace.urlExpander")("%webapp/html/");
+        
         var ls = cspace.util.localStorageDataSource({
             elPath: "recordsData"
         });
@@ -96,6 +98,11 @@ var rtTester = function ($) {
         jqUnit.assertEquals("linkPrevious is rendered correctly", searchResult.results[0].number, rt.locate("linkPrevious").text());
         jqUnit.assertEquals("current is rendered correctly", searchResult.results[1].number, rt.locate("current").text());
         jqUnit.assertEquals("linkNext is rendered correctly", searchResult.results[2].number, rt.locate("linkNext").text());
+        
+        var a = rt.locate("linkPrevious");
+        
+        jqUnit.assertEquals("linkPrevious is rendered correctly", webapp + searchResult.results[0].recordtype + ".html?csid=" + searchResult.results[0].csid, rt.locate("linkPrevious").attr("href"));
+        jqUnit.assertEquals("linkNext is rendered correctly", webapp + searchResult.results[2].recordtype + ".html?csid=" + searchResult.results[2].csid, rt.locate("linkNext").attr("href"));
     });
 
 };

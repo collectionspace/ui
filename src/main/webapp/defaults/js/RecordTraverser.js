@@ -40,11 +40,11 @@ cspace = cspace || {};
         parentBundle: "{globalBundle}",
         protoTree: {
             linkNext: {
-                target: "#",
+                target: "${currentNext.target}",
                 linktext: "${currentNext.number}"
             },
             linkPrevious: {
-                target: "#",
+                target: "${currentPrevious.target}",
                 linktext: "${currentPrevious.number}"
             },
             current: "${current.number}"
@@ -61,25 +61,38 @@ cspace = cspace || {};
         invokers: {
             prepareModel: {
                 funcName: "cspace.recordTraverser.prepareModel",
-                args: ["{cspace.recordTraverser}.model", "{cspace.recordTraverser}.applier", "{cspace.recordTraverser}.options.elPaths"]
+                args: ["{cspace.recordTraverser}.model", "{cspace.recordTraverser}.applier", "{cspace.recordTraverser}.options.elPaths", "{cspace.recordTraverser}.options.urls"]
             }
         },
         listeners: {
             prepareModelForRender: "{cspace.recordTraverser}.prepareModelForRenderListener"
         },
         preInitFunction: "cspace.recordTraverser.preInitFunction",
+        urls: cspace.componentUrlBuilder({
+            navigate: "%webapp/html/%recordType.html?csid=%csid"
+        }),
         elPaths: {
             recordsData: "recordsData",
             recordsDataResults: "recordsData.results",
-            totalItems: "recordsData.pagination.totalItems"
+            totalItems: "recordsData.pagination.totalItems",
+            recordType: "recordtype",
+            csid: "csid"
         }
     });
     
-    cspace.recordTraverser.prepareModel = function (model, applier, elPaths) {
+    cspace.recordTraverser.prepareModel = function (model, applier, elPaths, urls) {
         var selected = model.recordsData.selected;
         applier.requestChange("current", fluid.get(model, fluid.model.composeSegments(elPaths.recordsDataResults, selected)));
         applier.requestChange("currentNext", fluid.get(model, fluid.model.composeSegments(elPaths.recordsDataResults, selected + 1)));
         applier.requestChange("currentPrevious", fluid.get(model, fluid.model.composeSegments(elPaths.recordsDataResults, selected - 1)));
+        
+        fluid.each(["Next", "Previous"], function (rec) {
+            var currentRec = "current" + rec;
+            applier.requestChange(currentRec + ".target", fluid.stringTemplate(urls.navigate, {
+                recordType: fluid.get(model, fluid.model.composeSegments(currentRec, elPaths.recordType)),
+                csid: fluid.get(model, fluid.model.composeSegments(currentRec, elPaths.csid))
+            }));
+        });
     };
     
     cspace.recordTraverser.preInitFunction = function (that) {
