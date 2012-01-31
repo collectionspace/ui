@@ -53,7 +53,10 @@ var rtTester = function ($) {
             }
         ],
         "pagination": {
-            "totalItems": 4
+            "totalItems": 4,
+            "pageSize": 5,
+            "itemsInPage": 4,
+            "pageNum": 1
         },
         "selected" : 1
     };
