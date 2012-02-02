@@ -65,7 +65,7 @@ cspace = cspace || {};
         invokers: {
             prepareModel: {
                 funcName: "cspace.recordTraverser.prepareModel",
-                args: ["{cspace.recordTraverser}.model", "{cspace.recordTraverser}.applier", "{cspace.recordTraverser}.options.elPaths", "{cspace.recordTraverser}.options.urls"]
+                args: ["{cspace.recordTraverser}", "{cspace.recordTraverser}.model", "{cspace.recordTraverser}.applier", "{cspace.recordTraverser}.options.elPaths", "{cspace.recordTraverser}.options.urls"]
             },
             linkTraverse: "linkTraverse"
         },
@@ -119,11 +119,11 @@ cspace = cspace || {};
         that.locate("linkTraverse").click(that.linkTraverse);
     };
     
-    var assembleTriple = function (model, applier, elPaths, prevIndex, curIndex, nextIndex) {
+    var assembleTriple = function (that, model, applier, elPaths, prevIndex, curIndex, nextIndex) {
         
-        var prevEl = getElement(model, applier, elPaths, prevIndex);
-        var curEl = getElement(model, applier, elPaths, curIndex);
-        var nextEl = getElement(model, applier, elPaths, nextIndex);
+        var prevEl = getElement(that, model, applier, elPaths, prevIndex);
+        var curEl = getElement(that, model, applier, elPaths, curIndex);
+        var nextEl = getElement(that, model, applier, elPaths, nextIndex);
         
         // Create an array of 3 records if possible
         var results = [];
@@ -148,7 +148,7 @@ cspace = cspace || {};
             that.globalNavigator.events.onPerformNavigation.fire(function () {
                 
                 var selected = model.recordsData.selected;
-                var results = assembleTriple(model, applier, elPaths, selected, selected + 1, selected + 2);
+                var results = assembleTriple(that, model, applier, elPaths, selected, selected + 1, selected + 2);
                 
                 // put this new localStorage
                 model.recordsData.results = results;
@@ -167,7 +167,7 @@ cspace = cspace || {};
             that.globalNavigator.events.onPerformNavigation.fire(function () {
                 
                 var selected = model.recordsData.selected;
-                var results = assembleTriple(model, applier, elPaths, selected - 2, selected - 1, selected);
+                var results = assembleTriple(that, model, applier, elPaths, selected - 2, selected - 1, selected);
                 
                 // put this new localStorage
                 model.recordsData.results = results;
@@ -187,48 +187,19 @@ cspace = cspace || {};
         globalNavigator.events.onPerformNavigation.fire(callback);
     };
     
-    var getElement = function(model, applier, elPaths, index) {
+    var getElement = function(that, model, applier, elPaths, index) {
         // try to get an element
         var element = fluid.get(model, fluid.model.composeSegments(elPaths.recordsDataResults, index));
         
         // if it does not exist then just try to find it
         if (!element) {
-            element = searchElement(model, index);
+            element = that.searchElement(index);
         }
         
         return element;
     };
     
-    var searchElement = function (model, index) {
-        
-        // Put some logic here not to do the search if it is obvious that we won't find an element
-        // ...
-        
-        var initialUpdate;
-        var element;
-        
-        if (!model) {
-            initialUpdate = true;
-            model = that.recordsData.pagination;
-        }
-        var directModel = {
-            recordType: that.model.recordType,
-            pageNum: ((model.pageIndex - 1) * model.pageSize + index) + 1,
-            pageSize: 1
-        };
-        that.dataSource.get(directModel, function (data) {
-            // get data
-            that.updateList(fluid.get(data, that.options.elPath.items));
-            
-            // get the element we tried to find?
-            element = data.items[0];
-            
-        }, cspace.util.provideErrorCallback(that, that.dataSource.resolveUrl(directModel), "errorFetching"));
-        
-        return element;
-    };
-    
-    cspace.recordTraverser.prepareModel = function (model, applier, elPaths, urls) {
+    cspace.recordTraverser.prepareModel = function (that, model, applier, elPaths, urls) {
         
 //          OLD WORKING CODE
         
@@ -250,10 +221,10 @@ cspace = cspace || {};
         
         var selected = model.recordsData.selected;
         
-        assembleTriple(model, applier, elPaths, selected - 1, selected, selected + 1);
-        //applier.requestChange("currentNext", getElement(model, applier, elPaths, selected + 1));
-        //applier.requestChange("current", getElement(model, applier, elPaths, selected));
-        //applier.requestChange("currentPrevious", getElement(model, applier, elPaths, selected - 1));
+        // Find what type of the record we are dealing first since we might need it to
+        applier.requestChange("recordType", fluid.get(model, fluid.model.composeSegments(elPaths.recordsDataResults, selected, elPaths.recordType)));
+        
+        assembleTriple(that, model, applier, elPaths, selected - 1, selected, selected + 1);
         
         fluid.each(["Next", "Previous"], function (rec) {
             var currentRec = "current" + rec;
@@ -270,6 +241,40 @@ cspace = cspace || {};
     cspace.recordTraverser.preInitFunction = function (that) {
         that.prepareModelForRenderListener = function () {
             that.prepareModel();
+        };
+        
+        that.updateList = function (list) {
+            var a = 5;
+        };
+        that.searchElement = function (index) {
+        
+            // Put some logic here not to do the search if it is obvious that we won't find an element
+            // ...
+            
+            var initialUpdate;
+            var element;
+            var model = that.model.recordsData.pagination;
+            
+            if (!model) {
+                return undefined;
+            }
+            var directModel = {
+                recordType: that.model.recordType,
+                pageNum: ((model.pageNum - 1) * model.pageSize + index) + 1,
+                pageSize: 1,
+                sortDir: null,
+                sortKey: null
+            };
+            that.dataSource.get(directModel, function (data) {
+                // get data
+                that.updateList(fluid.get(data, that.options.elPaths.items));
+                
+                // get the element we tried to find?
+                element = data.items[0];
+                
+            }, cspace.util.provideErrorCallback(that, that.dataSource.resolveUrl(directModel), "errorFetching"));
+            
+            return element;
         };
     };
     

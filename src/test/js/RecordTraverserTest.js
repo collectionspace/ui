@@ -56,9 +56,9 @@ var rtTester = function ($) {
             "totalItems": 4,
             "pageSize": 5,
             "itemsInPage": 4,
-            "pageNum": 1
+            "pageNum": 0
         },
-        "selected" : 1
+        "selected" : 0
     };
 
     var bareRecordTraverserTest = new jqUnit.TestCase("recordTraverser Tests");

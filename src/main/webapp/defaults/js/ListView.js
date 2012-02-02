@@ -123,6 +123,12 @@ cspace = cspace || {};
                     list: "{cspace.listView}.model.list"
                 }
             },
+            localStorage: {
+                type: "cspace.util.localStorageDataSource",
+                options: {
+                    elPath: "recordsData"
+                }
+            },
             pager: {
                 type: "fluid.pager",
                 createOnEvent: "afterRender",
@@ -265,20 +271,30 @@ cspace = cspace || {};
 
     fluid.demands("cspace.listView.select", ["cspace.listView", "cspace.localData"], {
         funcName: "cspace.listView.selectNavigate",
-        args: ["{listView}.model", "{listView}.options.urls.navigateLocal", "{globalNavigator}"]
+        args: ["{listView}.localStorage", "{listView}.model", "{listView}.options.urls.navigateLocal", "{globalNavigator}"]
     });
 
     fluid.demands("cspace.listView.select", "cspace.listView", {
         funcName: "cspace.listView.selectNavigate",
-        args: ["{listView}.model", "{listView}.options.urls.navigate", "{globalNavigator}"]
+        args: ["{listView}.localStorage", "{listView}.model", "{listView}.options.urls.navigate", "{globalNavigator}"]
     });
 
-    var selectNavigate = function (model, url, globalNavigator, typePath) {
+    var selectNavigate = function (localStorage, model, url, globalNavigator, typePath) {
         var record = fluid.get(model, "list")[model.selectonIndex];
         if (!record) {
             return;
         }
         globalNavigator.events.onPerformNavigation.fire(function () {
+            // Build a localStorage for the RecordTraverser
+            var data = {
+                results: model.list,
+                pagination: model.pagerModel,
+                selected: model.selectonIndex
+            };
+            
+            // put it in
+            localStorage.set(data);
+            
             window.location = fluid.stringTemplate(url, {
                 recordType: record[typePath].toLowerCase(),
                 csid: record.csid
@@ -286,8 +302,8 @@ cspace = cspace || {};
         });
     };
 
-    cspace.listView.selectNavigate = function (model, url, globalNavigator) {
-        selectNavigate(model, url, globalNavigator, "recordtype");
+    cspace.listView.selectNavigate = function (localStorage, model, url, globalNavigator) {
+        selectNavigate(localStorage, model, url, globalNavigator, "recordtype");
     };
 
     cspace.listView.finalInit = function (that) {
