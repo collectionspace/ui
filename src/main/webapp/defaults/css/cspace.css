@@ -2015,3 +2015,12 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     color: gray !important;
     cursor: default !important;
 }
+
+.cs-search-highlight {
+    display:inline-block;
+    overflow:hidden;
+    width:99%;
+    text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;
+    white-space: nowrap;
+}
