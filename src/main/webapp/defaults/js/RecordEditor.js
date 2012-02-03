@@ -550,7 +550,8 @@ cspace = cspace || {};
                 type: "cspace.validator"
             },
             recordTraverser: {
-                type: "cspace.recordTraverser"
+                type: "cspace.recordTraverser",
+                createOnEvent: "afterRender"
             }
         },
         invokers: {

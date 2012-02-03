@@ -287,9 +287,8 @@ cspace = cspace || {};
         globalNavigator.events.onPerformNavigation.fire(function () {
             // Build a localStorage for the RecordTraverser
             var data = {
-                results: model.list,
-                pagination: model.pagerModel,
-                selected: model.selectonIndex
+                token: "abc",
+                index: 1
             };
             
             // put it in

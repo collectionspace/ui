@@ -40,21 +40,21 @@ cspace = cspace || {};
         parentBundle: "{globalBundle}",
         protoTree: {
             linkNext: {
-                target: "${currentNext.target}",
-                linktext: "${currentNext.number}"
+                target: "${adjacentRecords.next.target}",
+                linktext: "${adjacentRecords.next.number}"
             },
             linkPrevious: {
-                target: "${currentPrevious.target}",
-                linktext: "${currentPrevious.number}"
+                target: "${adjacentRecords.previous.target}",
+                linktext: "${adjacentRecords.previous.number}"
             },
-            current: "${current.number}"
+            current: "${adjacentRecords.current.number}"
         },
         finalInitFunction: "cspace.recordTraverser.finalInitFunction",
         components: {
             localStorage: {
                 type: "cspace.util.localStorageDataSource",
                 options: {
-                    elPath: "recordsData"
+                    elPath: "searchReference"
                 }
             },
             dataSource: {
@@ -65,231 +65,122 @@ cspace = cspace || {};
         invokers: {
             prepareModel: {
                 funcName: "cspace.recordTraverser.prepareModel",
-                args: ["{cspace.recordTraverser}", "{cspace.recordTraverser}.model", "{cspace.recordTraverser}.applier", "{cspace.recordTraverser}.options.elPaths", "{cspace.recordTraverser}.options.urls"]
+                args: ["{cspace.recordTraverser}.model", "{cspace.recordTraverser}.applier", "{cspace.recordTraverser}.options.elPaths", "{cspace.recordTraverser}.options.urls"]
             },
-            linkTraverse: "linkTraverse"
+            afterRender: {
+                funcName: "cspace.recordTraverser.afterRender",
+                args: ["{cspace.recordTraverser}.dom", "{globalNavigator}", "{cspace.recordTraverser}.localStorage", "{cspace.recordTraverser}.model", "{cspace.recordTraverser}.options.elPaths"]
+            }
         },
+        urls: cspace.componentUrlBuilder({
+            navigate: "%webapp/html/%recordType.html?csid=%csid",
+            adjacentRecords: "%tenant/%tname/adjacentRecords?token=%token&index=%index"
+        }),
         listeners: {
-            prepareModelForRender: "{cspace.recordTraverser}.prepareModelForRenderListener"
+            prepareModelForRender: "{cspace.recordTraverser}.prepareModelForRenderListener",
+            afterRender: "{cspace.recordTraverser}.afterRenderHandler"
         },
         preInitFunction: "cspace.recordTraverser.preInitFunction",
-        urls: cspace.componentUrlBuilder({
-            listUrl: "%tenant/%tname/%recordType?pageNum=%pageNum&pageSize=%pageSize&sortDir=%sortDir&sortKey=%sortKey",
-            navigate: "%webapp/html/%recordType.html?csid=%csid"
-        }),
         elPaths: {
-            recordsData: "recordsData",
-            recordsDataResults: "recordsData.results",
-            totalItems: "recordsData.pagination.totalItems",
-            recordType: "recordtype",
+            searchReference: "searchReference",
+            index: "index",
+            token: "token",
             csid: "csid",
-            items: "items"
+            adjacentRecords: "adjacentRecords",
+            current: "adjacentRecords.current",
+            previous: "adjacentRecords.previous",
+            next: "adjacentRecords.next",
+            recordType: "recordtype"
         }
     });
-    
+
+    fluid.demands("cspace.recordTraverser.dataSource", ["cspace.recordTraverser"], {
+        funcName: "cspace.URLDataSource",
+        args: {
+            url: "{cspace.recordTraverser}.options.urls.adjacentRecords",
+            termMap: {
+                token: "%token",
+                index: "%index"
+            },
+            targetTypeName: "cspace.recordTraverser.dataSource"
+        }
+    });
+
     fluid.demands("cspace.recordTraverser.dataSource",  ["cspace.localData", "cspace.recordTraverser"], {
         funcName: "cspace.recordTraverser.testDataSource",
         args: {
             targetTypeName: "cspace.recordTraverser.testDataSource",
             termMap: {
-                recordType: "%recordType"
+                token: "%token",
+                index: "%index"
             }
-        }
-    });
-    fluid.demands("cspace.recordTraverser.dataSource", ["cspace.recordTraverser"], {
-        funcName: "cspace.URLDataSource",
-        args: {
-            url: "{cspace.recordTraverser}.options.urls.listUrl",
-            termMap: {
-                recordType: "%recordType",
-                pageNum: "%pageNum",
-                pageSize: "%pageSize",
-                sortDir: "%sortDir",
-                sortKey: "%sortKey"
-            },
-            targetTypeName: "cspace.recordTraverser.dataSource"
         }
     });
     fluid.defaults("cspace.recordTraverser.testDataSource", {
-        url: "%test/data/%recordType/records.json"
+        url: "%test/data/person/%token.json"
     });
     cspace.recordTraverser.testDataSource = cspace.URLDataSource;
     
-    var bindHandlers = function (that) {
-        that.locate("linkTraverse").click(that.linkTraverse);
+    var get = function (model) {
+        return fluid.get(model, fluid.model.composeSegments.apply(null, Array().slice.call(arguments, 1)));
     };
-    
-    var assembleTriple = function (that, model, applier, elPaths, prevIndex, curIndex, nextIndex) {
-        
-        var prevEl = getElement(that, model, applier, elPaths, prevIndex);
-        var curEl = getElement(that, model, applier, elPaths, curIndex);
-        var nextEl = getElement(that, model, applier, elPaths, nextIndex);
-        
-        // Create an array of 3 records if possible
-        var results = [];
-        fluid.each([prevEl, curEl, nextEl], function (rec) {
-            if (!rec) {
-                return;
-            }
-            
-            results.push(rec);
-        });
-        
-        applier.requestChange("currentNext", nextEl);
-        applier.requestChange("current", curEl);
-        applier.requestChange("currentPrevious", prevEl);
-        
-        return results;
-    };
-    
-    
-    var bindEventHandlers = function (that) {
-        that.locate("currentNext").click(function () {
-            that.globalNavigator.events.onPerformNavigation.fire(function () {
-                
-                var selected = model.recordsData.selected;
-                var results = assembleTriple(that, model, applier, elPaths, selected, selected + 1, selected + 2);
-                
-                // put this new localStorage
-                model.recordsData.results = results;
-                model.recordsData.selected = 1;
-                
-                // modify pagination
-                // ......
-                
-                that.localStorage.set(model.recordsData);
-                
-                window.location = that.locate("currentNext").target;
-            });
-        });
-        
-        that.locate("currentPrevious").click(function () {
-            that.globalNavigator.events.onPerformNavigation.fire(function () {
-                
-                var selected = model.recordsData.selected;
-                var results = assembleTriple(that, model, applier, elPaths, selected - 2, selected - 1, selected);
-                
-                // put this new localStorage
-                model.recordsData.results = results;
-                model.recordsData.selected = 1;
-                
-                // modify pagination
-                // ......
-                
-                that.localStorage.set(model.recordsData);
-                
-                window.location = that.locate("currentNext").target;
+
+    cspace.recordTraverser.afterRender = function (dom, globalNavigator, localStorage, model, elPaths) {
+        var searchReference = elPaths.searchReference;
+        fluid.each({
+            "linkNext": 1,
+            "linkPrevious": -1
+        }, function (increment, selector) {
+            dom.locate(selector).click(function () {
+                var link = $(this);
+                globalNavigator.events.onPerformNavigation.fire(function () {
+                    localStorage.set({
+                        token: get(model, searchReference, elPaths.token),
+                        index: get(model, searchReference, elPaths.index) + increment
+                    });
+                    window.location = link.attr("href");
+                });
             });
         });
     };
     
-    cspace.recordTraverser.linkTraverse = function (globalNavigator, callback) {
-        globalNavigator.events.onPerformNavigation.fire(callback);
-    };
-    
-    var getElement = function(that, model, applier, elPaths, index) {
-        // try to get an element
-        var element = fluid.get(model, fluid.model.composeSegments(elPaths.recordsDataResults, index));
-        
-        // if it does not exist then just try to find it
-        if (!element) {
-            element = that.searchElement(index);
-        }
-        
-        return element;
-    };
-    
-    cspace.recordTraverser.prepareModel = function (that, model, applier, elPaths, urls) {
-        
-//          OLD WORKING CODE
-        
-//        var selected = model.recordsData.selected;
-//        applier.requestChange("currentNext", fluid.get(model, fluid.model.composeSegments(elPaths.recordsDataResults, selected + 1)));
-//        applier.requestChange("current", fluid.get(model, fluid.model.composeSegments(elPaths.recordsDataResults, selected)));
-//        applier.requestChange("currentPrevious", fluid.get(model, fluid.model.composeSegments(elPaths.recordsDataResults, selected - 1)));
-//        
-//        fluid.each(["Next", "Previous"], function (rec) {
-//            var currentRec = "current" + rec;
-//            applier.requestChange(currentRec + ".target", fluid.stringTemplate(urls.navigate, {
-//                recordType: fluid.get(model, fluid.model.composeSegments(currentRec, elPaths.recordType)),
-//                csid: fluid.get(model, fluid.model.composeSegments(currentRec, elPaths.csid))
-//            }));
-//        });
-//        
-//        // now modify pagination
-        
-        
-        var selected = model.recordsData.selected;
-        
-        // Find what type of the record we are dealing first since we might need it to
-        applier.requestChange("recordType", fluid.get(model, fluid.model.composeSegments(elPaths.recordsDataResults, selected, elPaths.recordType)));
-        
-        assembleTriple(that, model, applier, elPaths, selected - 1, selected, selected + 1);
-        
-        fluid.each(["Next", "Previous"], function (rec) {
-            var currentRec = "current" + rec;
-            applier.requestChange(currentRec + ".target", fluid.stringTemplate(urls.navigate, {
-                recordType: fluid.get(model, fluid.model.composeSegments(currentRec, elPaths.recordType)),
-                csid: fluid.get(model, fluid.model.composeSegments(currentRec, elPaths.csid))
+    cspace.recordTraverser.prepareModel = function (model, applier, elPaths, urls) {
+        fluid.each([elPaths.next, elPaths.previous], function (rec) {
+            applier.requestChange(rec + ".target", fluid.stringTemplate(urls.navigate, {
+                recordType: get(model, rec, elPaths.recordType),
+                csid: get(model, rec, elPaths.csid)
             }));
         });
-        
-        // modify pagination
-
     };
     
     cspace.recordTraverser.preInitFunction = function (that) {
+        that.afterRenderHandler = function () {
+            that.afterRender();
+        };
         that.prepareModelForRenderListener = function () {
             that.prepareModel();
-        };
-        
-        that.updateList = function (list) {
-            var a = 5;
-        };
-        that.searchElement = function (index) {
-        
-            // Put some logic here not to do the search if it is obvious that we won't find an element
-            // ...
-            
-            var initialUpdate;
-            var element;
-            var model = that.model.recordsData.pagination;
-            
-            if (!model) {
-                return undefined;
-            }
-            var directModel = {
-                recordType: that.model.recordType,
-                pageNum: ((model.pageNum - 1) * model.pageSize + index) + 1,
-                pageSize: 1,
-                sortDir: null,
-                sortKey: null
-            };
-            that.dataSource.get(directModel, function (data) {
-                // get data
-                that.updateList(fluid.get(data, that.options.elPaths.items));
-                
-                // get the element we tried to find?
-                element = data.items[0];
-                
-            }, cspace.util.provideErrorCallback(that, that.dataSource.resolveUrl(directModel), "errorFetching"));
-            
-            return element;
         };
     };
     
     cspace.recordTraverser.finalInitFunction = function(that) {
-        that.applier.requestChange(that.options.elPaths.recordsData, that.localStorage.get());
-        
-        that.localStorage.set();
-        
-        if (!that.model.recordsData) {
+        var applier = that.applier,
+            model = that.model,
+            elPaths = that.options.elPaths,
+            searchReference = elPaths.searchReference,
+            localStorage = that.localStorage;
+
+        applier.requestChange(searchReference, localStorage.get());
+        if (!fluid.get(model, searchReference)) {
             return;
         }
-        
-        bindEventHandlers(that);
-        
-        that.refreshView();
+        localStorage.set();
+        that.dataSource.get({
+            token: get(model, searchReference, elPaths.token),
+            index: get(model, searchReference, elPaths.index)
+        }, function(data) {
+            applier.requestChange(elPaths.adjacentRecords, data);
+            that.refreshView();
+        });
     };
     
     fluid.fetchResources.primeCacheFromResources("cspace.recordTraverser");
