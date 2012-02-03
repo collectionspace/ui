@@ -39,15 +39,33 @@ cspace = cspace || {};
         strings: {},
         parentBundle: "{globalBundle}",
         protoTree: {
-            linkNext: {
-                target: "${adjacentRecords.next.target}",
-                linktext: "${adjacentRecords.next.number}"
+            expander: [{
+                type: "fluid.renderer.condition",
+                condition: "${adjacentRecords.previous}",
+                trueTree: {
+                    linkPrevious: {
+                        target: "${adjacentRecords.previous.target}",
+                        linktext: "${adjacentRecords.previous.number}"
+                    }
+                }
             },
-            linkPrevious: {
-                target: "${adjacentRecords.previous.target}",
-                linktext: "${adjacentRecords.previous.number}"
+            {
+                type: "fluid.renderer.condition",
+                condition: "${adjacentRecords.current}",
+                trueTree: {
+                    current: "${adjacentRecords.current.number}"
+                }
             },
-            current: "${adjacentRecords.current.number}"
+            {
+                type: "fluid.renderer.condition",
+                condition: "${adjacentRecords.next}",
+                trueTree: {
+                    linkNext: {
+                        target: "${adjacentRecords.next.target}",
+                        linktext: "${adjacentRecords.next.number}"
+                    }
+                }
+            }]
         },
         finalInitFunction: "cspace.recordTraverser.finalInitFunction",
         components: {
@@ -146,6 +164,9 @@ cspace = cspace || {};
     
     cspace.recordTraverser.prepareModel = function (model, applier, elPaths, urls) {
         fluid.each([elPaths.next, elPaths.previous], function (rec) {
+            if (!get(model, rec, elPaths.csid)) {
+                return;
+            }
             applier.requestChange(rec + ".target", fluid.stringTemplate(urls.navigate, {
                 recordType: get(model, rec, elPaths.recordType),
                 csid: get(model, rec, elPaths.csid)

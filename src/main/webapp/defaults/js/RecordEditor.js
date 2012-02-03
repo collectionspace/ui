@@ -593,8 +593,7 @@ cspace = cspace || {};
             createFromExistingButton: ".csc-createFromExisting",
             requiredFields: ".csc-required:visible",
             header: ".csc-recordEditor-header",
-            togglable: ".csc-recordEditor-togglable",
-            recordTraverser: ".csc-recordTraverser-container"
+            togglable: ".csc-recordEditor-togglable"
         },
         selectorsToIgnore: ["requiredFields", "identificationNumber", "header", "togglable", "recordTraverser"],
         fieldsToIgnore: ["csid", "fields.csid"],
