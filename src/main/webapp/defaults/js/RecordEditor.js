@@ -570,6 +570,10 @@ cspace = cspace || {};
             },
             validator: {
                 type: "cspace.validator"
+            },
+            recordTraverser: {
+                type: "cspace.recordTraverser",
+                createOnEvent: "afterRender"
             }
         },
         invokers: {
@@ -613,7 +617,7 @@ cspace = cspace || {};
             header: ".csc-recordEditor-header",
             togglable: ".csc-recordEditor-togglable"
         },
-        selectorsToIgnore: ["requiredFields", "identificationNumber", "header", "togglable"],
+        selectorsToIgnore: ["requiredFields", "identificationNumber", "header", "togglable", "recordTraverser"],
         fieldsToIgnore: ["csid", "fields.csid"],
         rendererFnOptions: {
             cutpointGenerator: "cspace.recordEditor.cutpointGenerator"

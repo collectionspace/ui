@@ -1986,6 +1986,17 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     background-color: #E8E8E8;
 }
 
+/* recordTraverser styling */
+.cs-recordTraverser-linkActive {
+}
+
+.cs-recordTraverser-linkDeactive {
+}
+
+.cs-recordTraverser-template li {
+    display: inline;
+}
+
 /* CSPACE-4676 */
 .csc-blobs-dimension *{ display:none;}
 

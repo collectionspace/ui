@@ -2228,6 +2228,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             }
         });
         
+        fluid.demands("cspace.recordTraverser", "cspace.recordEditor", {
+            container: "{recordEditor}.dom.recordTraverser"
+        });
+        
         // urnToStringFieldConverter demands
         fluid.demands("cspace.util.urnToStringFieldConverter", "cspace.recordEditor", {
             container: "{arguments}.0"
