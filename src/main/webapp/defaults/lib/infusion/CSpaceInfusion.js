@@ -10766,6 +10766,7 @@ var fluid = fluid || fluid_1_5;
     
     // unsupported, NON-API function
     // Returns undefined to signal complex configuration which needs to be farmed out to DataBinding.js
+    // any other return represents an environment value AND a simple configuration we can handle here
     fluid.decodeAccessorArg = function (arg3) {
         return (!arg3 || arg3 === fluid.model.defaultGetConfig || arg3 === fluid.model.defaultSetConfig) ? 
             null : (arg3.type === "environment" ? arg3.value : undefined);
@@ -11301,11 +11302,11 @@ var fluid = fluid || fluid_1_5;
 
     // Cheapskate implementation which avoids dependency on DataBinding.js    
     fluid.model.mergeModel = function (target, source, applier) {
-        var copySource = fluid.copy(source);
         if (!fluid.isPrimitive(target)) {
-            $.extend(source, target);
+            var copySource = fluid.copy(source);
+            $.extend(true, source, target);
+            $.extend(true, source, copySource);
         }
-        $.extend(source, copySource);
         return source; 
     };
 
@@ -14421,7 +14422,7 @@ var fluid_1_5 = fluid_1_5 || {};
     
     // Return a function wrapped by the activity of describing its activity
     // unsupported, non-API function
-    fluid.wrapActivity = fluid.notrycatch? fluid.identity: function(func, messageSpec) {
+    fluid.wrapActivity = fluid.notrycatch? fluid.identity : function(func, messageSpec) {
         return function() {
             var args = fluid.makeArray(arguments);
             var message = fluid.transform(fluid.makeArray(messageSpec), function(specEl) {
@@ -14948,7 +14949,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
             }
             var resolved = fluid.embodyDemands(instantiator, that, demandspec, args, {passArgs: true, componentOptions: eventSpec}); 
             return listener.apply(null, resolved.args);
-        }, [" firing to listener to event named " + eventName + " of ", that]);
+        }, [" firing to listener to event named " + eventName + " of component ", that]);
     };
     
     fluid.event.resolveListenerRecord = function(lisrec, that, eventName) {
@@ -14959,13 +14960,17 @@ outer:  for (var i = 0; i < exist.length; ++i) {
                     record = {listener: record};
                 }
                 var listener = fluid.expandOptions(record.listener, that);
+                if (!listener) {
+                    fluid.fail("Error in listener record - could not resolve reference " + record.listener + " to a listener or firer. "
+                    + "Did you miss out \"events.\" when referring to an event firer?");
+                }
                 if (listener.typeName === "fluid.event.firer") {
                     listener = listener.fire;
                 }
                 record.listener = fluid.event.dispatchListener(instantiator, that, listener, eventName, record);
                 return record;
             });
-        }); 
+        }, [ "    while resolving listener record for event named " + eventName + " for component ", that]); 
     };
     
     fluid.event.expandOneEvent = function(event, that) {
@@ -14987,8 +14992,8 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         return typeof(event) === "string"?
             fluid.event.expandOneEvent(event, that) :
             fluid.transform(event, function(oneEvent) {
-                return fluid.event.expandOneEvent(oneEvent, that)
-        });
+                return fluid.event.expandOneEvent(oneEvent, that);
+            });
     };
     
     // unsupported, non-API function
@@ -14998,7 +15003,6 @@ outer:  for (var i = 0; i < exist.length; ++i) {
                 eventSpec = {event: eventSpec};
             }
             var event = eventSpec.event || eventSpec.events;
-            var origin;
             if (!event) {
                 fluid.fail("Event specification for event with name " + eventName + " does not include a base event specification: ", eventSpec);
             }
@@ -15010,9 +15014,9 @@ outer:  for (var i = 0; i < exist.length; ++i) {
             // If "event" is not composite, we want to share the listener list and FIRE method with the original
             // If "event" is composite, we need to create a new firer. "composite" includes case where any boiling
             // occurred - this was implemented wrongly in 1.4.
-               
+            var firer;
             if (isComposite) {
-                var firer = fluid.event.getEventFirer(null, null, " [composite] " + fluid.event.nameEvent(that, eventName));
+                firer = fluid.event.getEventFirer(null, null, " [composite] " + fluid.event.nameEvent(that, eventName));
                 var dispatcher = fluid.event.dispatchListener(instantiator, that, firer.fire, eventName, eventSpec, isMultiple);
                 if (isMultiple) {
                     fluid.event.listenerEngine(origin, dispatcher);
@@ -15022,22 +15026,23 @@ outer:  for (var i = 0; i < exist.length; ++i) {
                 }
             }
             else {
-                var firer = {typeName: "fluid.event.firer"}; // jslint:ok - already defined
-                fluid.each(["fire", "removeListener"], function(method) {
-                    firer[method] = function() {
-                        var outerArgs = fluid.makeArray(arguments);
-                        return fluid.applyInstantiator(instantiator, that, function() {
-                            return origin[method].apply(null, outerArgs);
-                        });
-                    };
-                });
-                firer.addListener = function(listener, namespace, predicate, priority) {
+                firer = {typeName: "fluid.event.firer"}; // jslint:ok - already defined
+                firer.fire = function () {
+                    var outerArgs = fluid.makeArray(arguments);
+                    return fluid.applyInstantiator(instantiator, that, function () {
+                        return origin.fire.apply(null, outerArgs);
+                    });
+                };
+                firer.addListener = function (listener, namespace, predicate, priority) {
                     var dispatcher = fluid.event.dispatchListener(instantiator, that, listener, eventName, eventSpec);
                     origin.addListener(dispatcher, namespace, predicate, priority);
                 };
+                firer.removeListener = function (listener) {
+                    origin.removeListener(listener);
+                };
             }
             return firer;
-        }); 
+        }, ["    while resolving event with name " + eventName + " attached to component ", that]); 
     };
     
         
@@ -15098,7 +15103,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
                 pres.restore(expanded);
             }
             return expanded;
-        });
+        }, ["    while expanding options for component of type " + that.typeName + ": ", that]);
     };
     
     // unsupported, non-API function    
@@ -15181,12 +15186,12 @@ outer:  for (var i = 0; i < exist.length; ++i) {
     fluid.expandComponentOptions = fluid.wrapActivity(fluid.expandComponentOptions, 
         ["    while expanding component options ", "arguments.1.value", " with record ", "arguments.1", " for component ", "arguments.2"]);
     
-    fluid.applyInstantiator = function(userInstantiator, that, func) {
+    fluid.applyInstantiator = function(userInstantiator, that, func, message) {
         var root = fluid.threadLocal();
         if (userInstantiator) {
             var existing = root["fluid.instantiator"];
             if (existing && existing !== userInstantiator) {
-                fluid.fail("Error in initDependent: user instantiator supplied with id " + userInstantiator.id 
+                fluid.fail("Error in applyInstantiator: user instantiator supplied with id " + userInstantiator.id 
                     + " which differs from that for currently active instantiation with id " + existing.id);
             }
             else {
@@ -15194,7 +15199,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
                 fluid.log("*** restored USER instantiator with id " + userInstantiator.id + " - STORED");
             }
         }
-        return fluid.withInstantiator(that, func);
+        return fluid.withInstantiator(that, func, message);
     };
     
     // The case without the instantiator is from the ginger strategy - this logic is still a little ragged
@@ -15317,7 +15322,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
                 }, ["    while instantiating invoker with name \"" + name + "\" with record ", invokerec, " as child of ", that]); // jslint:ok
                 fluid.log("Finished instantiation of invoker with name \"" + name + "\" as child of " + fluid.dumpThat(that)); 
             }
-        });
+        }, ["    while instantiating dependent components for component " + that.typeName]);
     };   
         
     fluid.staticEnvironment = fluid.typeTag("fluid.staticEnvironment");
@@ -15426,7 +15431,7 @@ outer:  for (var i = 0; i < exist.length; ++i) {
         if (!base) {
             return base;
         }
-        return parsed.noDereference? parsed.path: fluid.get(base, parsed.path);
+        return parsed.noDereference? parsed.path : fluid.get(base, parsed.path);
     };
     
     // unsupported, non-API function
@@ -18575,11 +18580,13 @@ fluid_1_5 = fluid_1_5 || {};
         var source = options.templateSource ? options.templateSource : {node: $(container)};
         var rendererOptions = fluid.renderer.modeliseOptions(options.rendererOptions, null, baseObject);
         rendererOptions.fossils = fossils || {};
-        var cascadeOptions = container.jquery? {
-            document: container[0].ownerDocument,
-            jQuery: container.constructor  
-        } : {};
-        fluid.renderer.reverseMerge(rendererOptions, cascadeOptions, fluid.keys(cascadeOptions));
+        if (container.jquery) {
+            var cascadeOptions = {
+                document: container[0].ownerDocument,
+                jQuery: container.constructor  
+            };
+            fluid.renderer.reverseMerge(rendererOptions, cascadeOptions, fluid.keys(cascadeOptions));
+        }
         
         var expanderOptions = fluid.renderer.modeliseOptions(options.expanderOptions, {ELstyle: "${}"}, baseObject);
         fluid.renderer.reverseMerge(expanderOptions, options, ["resolverGetConfig", "resolverSetConfig"]);
@@ -25402,7 +25409,7 @@ var fluid_1_5 = fluid_1_5 || {};
             if (xhr.readyState === 4) {
                 var status = xhr.status;
                 // TODO: See a pattern here? Fix it.
-                if (status === 200) {
+                if (status >= 200 && status <= 204) {
                     fluid.uploader.html5Strategy.fileSuccessHandler(file, events, xhr);
                 } else if (status === 0) {
                     fluid.uploader.html5Strategy.fileStopHandler(file, events, xhr);
@@ -25734,7 +25741,7 @@ var fluid_1_5 = fluid_1_5 || {};
             that.locate("fileInputs").prop("disabled", true);
         };
         
-        that.isEnabled = function() {
+        that.isEnabled = function () {
             return !that.locate("fileInputs").prop("disabled");  
         };
         
