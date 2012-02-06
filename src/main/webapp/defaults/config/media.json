@@ -19,7 +19,7 @@
                             "width": "800",
                             "height": "600"
                         },
-                        "selectorsToIgnore": ["requiredFields", "identificationNumber", "header", "togglable", "recordTraverser", "uploader"],
+                        "selectorsToIgnore": ["requiredFields", "identificationNumber", "header", "togglable", "uploader"],
                         "invokers": {
                             "navigateToFullImage": "navigateToFullImage"
                         },
