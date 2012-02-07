@@ -46,7 +46,7 @@
     <js>/defaults/js/MessageBar.js</js>
     <js>/defaults/js/DataSource.js</js>
     <js>/defaults/js/DataContext.js</js>
-    <js>/defaults/js/RecordList.js</js>
+    <js>/defaults/js/ListView.js</js>
     <js>/defaults/js/Search.js</js>
     <js>/defaults/js/MyCollectionSpace.js</js>
     <js>/defaults/js/PageBuilder.js</js>
