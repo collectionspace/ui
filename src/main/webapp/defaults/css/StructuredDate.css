@@ -10,7 +10,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 .cs-structuredDate-popup {
 	width:auto;
-    float:left;
     border:1px solid #C7CFD4;
     position:absolute;
     z-index:9999 !important;
