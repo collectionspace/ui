@@ -123,6 +123,26 @@ cspace = cspace || {};
     cspace.structuredDate.showPopup = function (that) {
         that.popup.refreshView();
         that.popupContainer.show();
+        var popup = that.popup.locate("popup");
+        popup.position({
+            my: "left top",
+            at: "left bottom",
+            of: that.container,
+            using: function (hash) {
+                if ($(window).width() - popup.width() - popup.offset().left < 0) {
+                    popup.position({
+                        my: "right top",
+                        at: "right bottom",
+                        of: that.container
+                    });
+                } else {
+                    popup.css({
+                        "top": hash.top,
+                        "left": hash.left
+                    });
+                }
+            }
+        });
     };
     
     cspace.structuredDate.postInitFunction = function (that) {
@@ -153,7 +173,9 @@ cspace = cspace || {};
         protoTree: {},
         getProtoTree: "cspace.structuredDate.popup.getProtoTree",
         parentBundle: "{globalBundle}",
+        selectorsToIgnore: ["popup"],
         selectors: {
+            popup: ".csc-structuredDate-popup",
             // Also you will need a separate selector for the label "Date Text" as well
             // in order to be able to assign the label value from the message bundle and make
             // it ready for initialization.
