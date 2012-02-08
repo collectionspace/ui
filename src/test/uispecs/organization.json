@@ -161,7 +161,20 @@
         ".csc-organization-foundingDate-label": {
             "messagekey": "organization-foundingDateLabel"
         },
-        ".csc-organizationAuthority-displayName": "${fields.displayName}",
+        ".csc-organizationAuthority-displayName": {
+            "decorators": [{
+                "func": "cspace.displayNameGenerator",
+                "type": "fluid",
+                "options": {
+                    "fields": [
+                        "fields.termStatus",
+                        "fields.foundingDate",
+                        "fields.foundingPlace"
+                    ]
+                }
+            }],
+            "value": "${fields.displayName}"
+        },
         ".csc-organization-uri-label": {
             "messagekey": "organization-uriLabel"
         },
@@ -267,7 +280,6 @@
             "messagekey": "organization-historyNotesLabel"
         },
         ".csc-organizationAuthority-status": {
-            "default": "provisional",
             "optionnames": [
                 "Provisional",
                 "Under Review",
