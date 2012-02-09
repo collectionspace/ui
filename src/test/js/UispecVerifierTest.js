@@ -183,12 +183,21 @@ var uispecVerifierTester = function ($) {
     var uispecVerifierTest = cspace.tests.testEnvironment({
         testCase: bareUISpecVerifierTest
     });
-    
+
+    var tearDown = function (messageBar) {
+        messageBar.applier.requestChange("", {
+            message: "",
+            time: undefined
+        });
+        messageBar.refreshView();
+        messageBar.hide();
+    };
+
     uispecVerifierTest.test("Init", function () {
         var uv = cspace.uispecVerifier();
         jqUnit.assertValue("UV is created", uv);
     });
-    
+
     uispecVerifierTest.test("Simple Match", function () {
         var uv = cspace.uispecVerifier({
             uispec: {
@@ -200,8 +209,9 @@ var uispecVerifierTester = function ($) {
             template: template
         });
         jqUnit.assertEquals("There should be no message", "", uv.messageBar.locate("message").text());
+        tearDown(uv.messageBar);
     });
-    
+
     uispecVerifierTest.test("Simple No Match", function () {
         var uv = cspace.uispecVerifier({
             uispec: {
@@ -214,6 +224,214 @@ var uispecVerifierTester = function ($) {
             template: template
         });
         jqUnit.assertEquals("Message should say", "The following keys are missing in the template: .csc-movement-fieldThatWillNotMatch", uv.messageBar.locate("message").text());
+        tearDown(uv.messageBar);
+    });
+
+    uispecVerifierTest.test("Complicated Match", function () {
+        var uv = cspace.uispecVerifier({
+            uispec: {
+                "recordEditor": {
+                    ".csc-movement-movementReferenceNumber-container": {
+                        "decorators": [
+                            {
+                                "func": "cspace.numberPatternChooser",
+                                "type": "fluid",
+                                "options": {
+                                    "model": {
+                                        "names": [
+                                            "Movement"
+                                        ],
+                                        "list": [
+                                            "movement"
+                                        ],
+                                        "samples": [
+                                            "MV2010.001"
+                                        ]
+                                    },
+                                    "selectors": {
+                                        "numberField": ".csc-movement-movementReferenceNumber"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    ".csc-movement-movementReferenceNumber-label": {
+                        "messagekey": "movement-movementReferenceNumberLabel"
+                    },
+                    ".csc-movement-plannedRemovalDate": {
+                        "decorators": [
+                            {
+                                "func": "cspace.datePicker",
+                                "type": "fluid"
+                            }
+                        ],
+                        "value": "${fields.plannedRemovalDate}"
+                    },
+                    ".csc-movement-movementContact": {
+                        "decorators": [
+                            {
+                                "func": "cspace.autocomplete",
+                                "type": "fluid",
+                                "options": {
+                                    "queryUrl": "../../../tenant/core/movement/autocomplete/movementContact",
+                                    "vocabUrl": "../../../tenant/core/movement/source-vocab/movementContact"
+                                }
+                            }
+                        ],
+                        "value": "${fields.movementContact}"
+                    },
+                    ".csc-movement-movementMethods": {
+                        "decorators": [
+                            {
+                                "func": "cspace.makeRepeatable",
+                                "type": "fluid",
+                                "options": {
+                                    "repeatTree": {
+                                        "expander": {
+                                            "tree": {
+                                                ".csc-movement-movementMethods": {
+                                                    "default": "",
+                                                    "optionnames": [
+                                                        "Please select a value",
+                                                        "Forklift",
+                                                        "Handcarried",
+                                                        "Trolley"
+                                                    ],
+                                                    "optionlist": [
+                                                        "",
+                                                        "forklift",
+                                                        "handcarried",
+                                                        "trolley"
+                                                    ],
+                                                    "selection": "${{row}.movementMethod}"
+                                                }
+                                            },
+                                            "type": "fluid.noexpand"
+                                        }
+                                    },
+                                    "elPath": "fields.movementMethods"
+                                }
+                            }
+                        ]
+                    },
+                    expander: {
+                        tree: {
+                            ".csc-movement-movementMethods": "quickTest"
+                        }
+                    }
+                }
+            },
+            template: template
+        });
+        jqUnit.assertEquals("There should be no message", "", uv.messageBar.locate("message").text());
+        tearDown(uv.messageBar);
+    });
+
+    uispecVerifierTest.test("Complicated NO Match", function () {
+        var uv = cspace.uispecVerifier({
+            uispec: {
+                "recordEditor": {
+                    ".csc-movement-movementReferenceNumber-container-NO": {
+                        "decorators": [
+                            {
+                                "func": "cspace.numberPatternChooser",
+                                "type": "fluid",
+                                "options": {
+                                    "model": {
+                                        "names": [
+                                            "Movement"
+                                        ],
+                                        "list": [
+                                            "movement"
+                                        ],
+                                        "samples": [
+                                            "MV2010.001"
+                                        ]
+                                    },
+                                    "selectors": {
+                                        "numberField": ".csc-movement-movementReferenceNumber"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    ".csc-movement-movementReferenceNumber-label-NO": {
+                        "messagekey": "movement-movementReferenceNumberLabel"
+                    },
+                    ".csc-movement-plannedRemovalDate-NO": {
+                        "decorators": [
+                            {
+                                "func": "cspace.datePicker",
+                                "type": "fluid"
+                            }
+                        ],
+                        "value": "${fields.plannedRemovalDate}"
+                    },
+                    ".csc-movement-movementContact-NO": {
+                        "decorators": [
+                            {
+                                "func": "cspace.autocomplete",
+                                "type": "fluid",
+                                "options": {
+                                    "queryUrl": "../../../tenant/core/movement/autocomplete/movementContact",
+                                    "vocabUrl": "../../../tenant/core/movement/source-vocab/movementContact"
+                                }
+                            }
+                        ],
+                        "value": "${fields.movementContact}"
+                    },
+                    ".csc-movement-movementMethods-NO": {
+                        "decorators": [
+                            {
+                                "func": "cspace.makeRepeatable",
+                                "type": "fluid",
+                                "options": {
+                                    "repeatTree": {
+                                        "expander": {
+                                            "tree": {
+                                                ".csc-movement-movementMethods-NO": {
+                                                    "default": "",
+                                                    "optionnames": [
+                                                        "Please select a value",
+                                                        "Forklift",
+                                                        "Handcarried",
+                                                        "Trolley"
+                                                    ],
+                                                    "optionlist": [
+                                                        "",
+                                                        "forklift",
+                                                        "handcarried",
+                                                        "trolley"
+                                                    ],
+                                                    "selection": "${{row}.movementMethod}"
+                                                }
+                                            },
+                                            "type": "fluid.noexpand"
+                                        }
+                                    },
+                                    "elPath": "fields.movementMethods"
+                                }
+                            }
+                        ]
+                    },
+                    expander: {
+                        tree: {
+                            ".csc-movement-movementMethods-NO": "quickTest"
+                        }
+                    }
+                }
+            },
+            template: template
+        });
+        jqUnit.assertEquals("Message should say", "The following keys are missing in the template: " +
+                ".csc-movement-movementReferenceNumber-container-NO, " +
+                ".csc-movement-movementReferenceNumber-label-NO, " +
+                ".csc-movement-plannedRemovalDate-NO, " +
+                ".csc-movement-movementContact-NO, " +
+                ".csc-movement-movementMethods-NO, " +
+                ".csc-movement-movementMethods-NO, " +
+                ".csc-movement-movementMethods-NO", uv.messageBar.locate("message").text());
+        tearDown(uv.messageBar);
     });
 };
 
