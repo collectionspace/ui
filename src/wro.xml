@@ -34,6 +34,7 @@
     <css>/defaults/lib/infusion/framework/fss/css/fss-layout.css</css>
     <css>/defaults/lib/infusion/framework/fss/css/fss-text.css</css>
     <css>/defaults/css/cspace.css</css>
+    <css>/defaults/css/Pager.css</css>
     <css>/defaults/css/pivot.css</css>
     <js>/defaults/lib/infusion/CSpaceInfusion.js</js>
     <js>/defaults/js/Demands.js</js>
