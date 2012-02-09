@@ -20,6 +20,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     background-color: #E6F4F5; /* Light blue per wireframe */
     padding: 10px;
 }
+table .cs-structuredDate-popup {
+	width: 615px !important;
+}
 .cs-structuredDate-popup .info-pair .content tbody tr td:first-of-type{
 	min-width:110px;
 	padding-left:2px;
