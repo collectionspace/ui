@@ -14,7 +14,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
-    
+
     fluid.defaults("cspace.uispecVerifier", {
         gradeNames: ["autoInit", "fluid.littleComponent"],
         components: {
@@ -31,16 +31,48 @@ cspace = cspace || {};
             message: "The following keys are missing in the template: %keys"
         }
     });
-    
-    cspace.uispecVerifier.preInit = function (that) { 
-        that.verifyUispec = function (uispec) {
-            var keys = [];
+
+    var isDecorator = function (source, type) {
+        var decorator = fluid.makeArray(source.decorators)[0];
+        if (!decorator) {
+            return false;
+        }
+        if (decorator.func) {
+            return decorator.func === type;
+        }
+        return  decorator.type === type;
+    };
+
+    cspace.uispecVerifier.preInit = function (that) {
+        function checkTemplate(keys, key) {
+            if ($(key, that.options.template).length > 0) {
+                return;
+            }
+            keys.push(key);
+        }
+        function verifyUispecImpl (uispec, keys) {
             fluid.each(uispec, function (val, key) {
-                if ($(key, that.options.template).length > 0) {
+                if (!val) {
                     return;
                 }
-                keys.push(key);
+                if (key === "expander") {
+                    fluid.each(fluid.makeArray(val), function (expander) {
+                        fluid.each(["tree", "trueTree", "falseTree"], function (tree) {
+                            if (!expander[tree]) {return;}
+                            verifyUispecImpl(expander[tree], keys);
+                        });
+                    });
+                } else if (isDecorator(val, "cspace.makeRepeatable")) {
+                    checkTemplate(keys, key);
+                    verifyUispecImpl(val.decorators[0].options.repeatTree.expander.tree, keys);
+                } else {
+                    checkTemplate(keys, key);
+                }
             });
+        }
+        that.verifyUispec = function (uispec) {
+            var keys = [];
+            verifyUispecImpl(uispec, keys);
             if (keys.length < 1) {
                 return;
             }
@@ -49,11 +81,11 @@ cspace = cspace || {};
             }));
         };
     };
-    
+
     cspace.uispecVerifier.finalInit = function (that) {
         fluid.each(that.options.uispec, function (uispec) {
             that.verifyUispec(uispec);
         });
     };
-    
+
 })(jQuery, fluid);
