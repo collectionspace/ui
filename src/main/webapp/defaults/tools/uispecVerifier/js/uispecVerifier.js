@@ -20,11 +20,6 @@ cspace = cspace || {};
         components: {
             messageBar: "{messageBar}"
         },
-        mergePolicy: {
-            uispec: "noexpand"
-        },
-        uispec: {},
-        template: "",
         finalInitFunction: "cspace.uispecVerifier.finalInit",
         preInitFunction: "cspace.uispecVerifier.preInit",
         strings: {
@@ -78,7 +73,7 @@ cspace = cspace || {};
             }
             that.messageBar.show(fluid.stringTemplate(that.options.strings.message, {
                 keys: keys.join(", ")
-            }));
+            }), undefined, true);
         };
     };
 
@@ -87,5 +82,17 @@ cspace = cspace || {};
             that.verifyUispec(uispec);
         });
     };
+
+    fluid.demands("cspace.uispecVerifier", ["cspace.pageBuilder", "cspace.pageBuilderIO"], {
+        options: {
+            uispec: "{pageBuilder}.options.uispec",
+            template: "{pageBuilderIO}.resourceSpecs.recordEditor.resourceText"
+        }
+    });
+
+    if (cspace.util.getUrlParameter("debug")) {
+        fluid.staticEnvironment.debugEnvironment =
+            fluid.staticEnvironment.debugEnvironment || fluid.typeTag("cspace.debug");
+    }
 
 })(jQuery, fluid);
