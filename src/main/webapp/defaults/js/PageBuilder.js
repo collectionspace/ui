@@ -195,7 +195,7 @@ cspace = cspace || {};
         
         that.initPageBuilder = function (options) {
             var pageSpecs = fluid.copy(that.options.pageSpec);
-            var resourceSpecs = fluid.copy(pageSpecs);
+            var resourceSpecs = that.resourceSpecs = fluid.copy(pageSpecs);
             var pageSpecManager = cspace.pageSpecManager(pageSpecs);
             that.options.readOnly = cspace.util.resolveReadOnly({
                 permissions: options.userLogin.permissions,

@@ -421,7 +421,18 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 recordType: "{pageBuilderIO}.options.recordType"
             }
         });
-        
+
+        // Pagebuilder
+        fluid.demands("cspace.pageBuilder", "cspace.debug", {
+            options: {
+                components: {
+                    uispecValidator: {
+                        type: "cspace.uispecVerifier"
+                    }
+                }
+            }
+        });
+
         // Pagebuilder renderer
         fluid.demands("cspace.pageBuilder.renderer", ["cspace.pageBuilderIO", "cspace.pageBuilder"], {
             options: {
