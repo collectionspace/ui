@@ -10,7 +10,6 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 
 .cs-structuredDate-popup {
 	width:auto;
-    float:left;
     border:1px solid #C7CFD4;
     position:absolute;
     z-index:9999 !important;
@@ -20,6 +19,9 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     box-shadow: 3px 3px 4px  #C7CFD4;
     background-color: #E6F4F5; /* Light blue per wireframe */
     padding: 10px;
+}
+table .cs-structuredDate-popup {
+	width: 615px !important;
 }
 .cs-structuredDate-popup .info-pair .content tbody tr td:first-of-type{
 	min-width:110px;
