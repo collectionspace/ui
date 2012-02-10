@@ -90,6 +90,15 @@ cspace = cspace || {};
         }
     });
 
+    fluid.demands("cspace.uispecVerifier", ["cspace.pageBuilder", "cspace.pageBuilderIO", "cspace.advancedSearch.searchFields"], {
+        options: {
+            uispec: {
+                advancedSearch: "{searchFields}.options.uispec"
+            },
+            template: "{searchFields}.options.resources.template.resourceText"
+        }
+    });
+
     if (cspace.util.getUrlParameter("debug")) {
         fluid.staticEnvironment.debugEnvironment =
             fluid.staticEnvironment.debugEnvironment || fluid.typeTag("cspace.debug");
