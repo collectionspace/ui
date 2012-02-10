@@ -423,14 +423,17 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
 
         // Pagebuilder
-        fluid.demands("cspace.pageBuilder", "cspace.debug", {
+        fluid.demands("cspace.pageBuilder", ["cspace.debug", "cspace.record"], {
             options: {
                 components: {
-                    uispecValidator: {
+                    uispecVerifier: {
                         type: "cspace.uispecVerifier"
                     }
                 }
             }
+        });
+        fluid.demands("cspace.pageBuilder", "cspace.pageBuilderIO", {
+            options: fluid.COMPONENT_OPTIONS
         });
 
         // Pagebuilder renderer
@@ -2288,6 +2291,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         });
         
         fluid.demands("cspace.advancedSearch.fetcher", "cspace.advancedSearch", "{options}");
+
+        fluid.demands("cspace.advancedSearch.searchFields", "cspace.debug", {
+            options: {
+                components: {
+                    uispecVerifier: {
+                        type: "cspace.uispecVerifier"
+                    }
+                }
+            }
+        });
     };
     
     fluid.demands("cspace.localDemands", "cspace.localData", {
