@@ -160,6 +160,12 @@ cspace = cspace || {};
     };
     
     cspace.sidebar.media.finalInit = function (that) {
+        // Find proper Label Names for items
+        fluid.each(fluid.get(that.model, "termsUsed"), function (item, index) {
+            item.labelText = that.lookupMessage(item.sourceFieldselector + "Label");
+            that.applier.requestChange(fluid.model.composeSegments("termsUsed", index), item);
+        }); 
+        
         that.refreshView();
     };
     
@@ -238,11 +244,11 @@ cspace = cspace || {};
                     elPaths: {
                         items: "items"
                     },
-                    columns: ["number", "recordtype", "sourceFieldName"],
+                    columns: ["number", "recordtype", "labelText"],
                     strings: {
                         number: "{globalBundle}.messageBase.rl-rrl-termsUsed-number",
-                        sourceFieldName: "{globalBundle}.messageBase.rl-rrl-termsUsed-sourceFieldName",
-                        recordtype: "{globalBundle}.messageBase.rl-rrl-termsUsed-recordtype"
+                        recordtype: "{globalBundle}.messageBase.rl-rrl-termsUsed-recordtype",
+                        labelText: "{globalBundle}.messageBase.rl-rrl-termsUsed-sourceFieldName"
                     },
                     showNumberOfItems: false
                 }
