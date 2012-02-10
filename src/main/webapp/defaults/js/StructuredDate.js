@@ -119,51 +119,51 @@ cspace = cspace || {};
     cspace.structuredDate.hidePopup = function (that) {
         that.popupContainer.hide();
     };
-
+    
     var positionPopup = function (popup, container) {
-		/*
-			if popup window overflows screen on right
-			try positioning it by (my) top right (at) right bottom (of) container
-			if this causes the popup to overflow to the left 
-			position it by (my) center top (at) center bottom (of) container 
-			with (collision) fit horizontal, flip vertical 
-		*/
-		var offset = popup.offset();
-		if ($(window).width() - offset.left < popup.width()) {
-			popup.position({
-				my: "right top", 
-				at: "right bottom", 
-				of: container,
-				collision: "none flip",
-				using: function (hash) {
-					if (hash.left < 0) {
-						popup.position({
-							my: "center top",
-							at: "center bottom",
-							of: container,
-							collision: "fit flip"
-						});
-					} else {
-						popup.css({
-							"top": hash.top,
-							"left": hash.left
-						});
-					}
-				}
-			});
-		} else {
-			popup.position({
-				my: "left top", 
-				at: "left bottom",
-				of: container
-			})
-		}
-	};
+        /*
+            if popup window overflows screen on right
+            try positioning it by (my) top right (at) right bottom (of) container
+            if this causes the popup to overflow to the left 
+            position it by (my) center top (at) center bottom (of) container 
+            with (collision) fit horizontal, flip vertical 
+        */
+        var offset = popup.offset();
+        if ($(window).width() - offset.left < popup.width()) {
+            popup.position({
+                my: "right top", 
+                at: "right bottom", 
+                of: container,
+                collision: "none flip",
+                using: function (hash) {
+                    if (hash.left < 0) {
+                        popup.position({
+                            my: "center top",
+                            at: "center bottom",
+                            of: container,
+                            collision: "fit flip"
+                        });
+                    } else {
+                        popup.css({
+                            "top": hash.top,
+                            "left": hash.left
+                        });
+                    }
+                }
+            });
+        } else {
+            popup.position({
+                my: "left top", 
+                at: "left bottom",
+                of: container
+            });
+        }
+    };
 
     cspace.structuredDate.showPopup = function (that) {
         that.popup.refreshView();
         that.popupContainer.show();
-		positionPopup(that.popup.locate("popup"), that.container);
+        positionPopup(that.popup.locate("popup"), that.container);
     };
     
     cspace.structuredDate.postInitFunction = function (that) {
@@ -336,7 +336,7 @@ cspace = cspace || {};
             opts.month = validate(month, "Month");
         }
         return date.set(opts);
-    }
+    };
     
     var setDateDay = function (date, day, earliest) {
         var opts = {};
@@ -346,7 +346,7 @@ cspace = cspace || {};
             opts.day = validate(day, "Day", date.getYear(), date.getMonth());
         }
         return date.set(opts);
-    }
+    };
     
     var setDate = function (year, month, day, earliest) {
         var date = setDateYear(year);
