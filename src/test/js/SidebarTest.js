@@ -37,7 +37,8 @@ var sidebarTester = function ($) {
                             target:"${items.0.recordtype}.html?csid=${items.0.csid}"
                         },
                         ".csc-related-field":"${items.0.sourceFieldName}",
-                        ".csc-related-recordtype":"${items.0.recordtype}"
+                        ".csc-related-recordtype":"${items.0.recordtype}",
+                        ".csc-related-labelText":"${items.0.sourceFieldselector}"
                     }]
                 }
             },
@@ -123,6 +124,25 @@ var sidebarTester = function ($) {
         options.recordApplier = fluid.makeChangeApplier(options.recordModel);
         return cspace.sidebar(container, options);
     };
+    
+    var labelTestOptions = {
+        "relations": {},
+        "termsUsed": [
+            {
+                "sourceFieldName": "collectionobjects_common:inscriber",
+                "number": "Margaret Brodie",
+                "csid": "c0fd9987-7625-4b5f-bbac",
+                "recordtype": "person",
+                "sourceFieldselector" : "objectexit-currentOwner"
+            }
+        ]
+    };
+    
+    var setupSidebarWithLabels = function (options, additionalOptions) {
+        options.recordModel = options.recordModel || labelTestOptions;
+        options.recordApplier = fluid.makeChangeApplier(options.recordModel);
+        return cspace.sidebar(container, options);
+    };
 
     var bareSidebarTest = new jqUnit.TestCase("Sidebar Tests");
     
@@ -133,10 +153,22 @@ var sidebarTester = function ($) {
     });
         
     sidebarTest.test("RelatedRecordsList: all rendered", function () {
-        var sidebar = setupSidebar(sampleOptions);
+        var sidebar = setupSidebar(fluid.copy(sampleOptions));
         var templateCss = ".csc-relatedRecord-template";
         jqUnit.assertNotEquals("Related Cataloging shown", 0, $(templateCss, sidebar.locate("relatedCataloging")).length);
         jqUnit.assertNotEquals("Related Procedures shown", 0, $(templateCss, sidebar.locate("relatedProcedures")).length);
+    });
+
+    sidebarTest.test("RelatedRecordsList: created with known labels", function () {
+        var sidebar = setupSidebarWithLabels(fluid.copy(sampleOptions), labelTestOptions);
+        jqUnit.assertEquals("Found a proper label", "Current Owner", $("#row\\:\\:column\\:2").text());
+    });
+    
+    sidebarTest.test("RelatedRecordsList: created without known labels", function () {
+        var selectorValue = "someObject-text";
+        labelTestOptions.termsUsed[0].sourceFieldselector = selectorValue;
+        var sidebar = setupSidebarWithLabels(fluid.copy(sampleOptions), labelTestOptions);
+        jqUnit.assertEquals("Found a proper label", "[String for key: " + selectorValue + "Label is missing. Please, add it to messageBundle.]", $("#row\\:\\:column\\:2").text());
     });
 
     //returns full permissions except for those specified in the array noperm,
@@ -161,7 +193,7 @@ var sidebarTester = function ($) {
     };
 
     noCatalogingSidebarTest.test("RelatedRecordsList: cataloging not rendering", function () {
-        var sidebar = setupSidebar(sampleOptions);
+        var sidebar = setupSidebar(fluid.copy(sampleOptions));
         var templateCss = ".csc-relatedRecord-template";
         jqUnit.assertEquals("Related Cataloging hidden", 0, $(templateCss, sidebar.locate("relatedCataloging")).length);
         jqUnit.assertNotEquals("Related Procedures shown", 0, $(templateCss, sidebar.locate("relatedProcedures")).length);
@@ -174,7 +206,7 @@ var sidebarTester = function ($) {
     });
 
     noProceduresSidebarTest.test("RelatedRecordsList: procedures not rendering", function () {
-        var sidebar = setupSidebar(sampleOptions);
+        var sidebar = setupSidebar(fluid.copy(sampleOptions));
         var templateCss = ".csc-relatedRecord-template";
         jqUnit.assertNotEquals("Related Cataloging shown", 0, $(templateCss, sidebar.locate("relatedCataloging")).length);
         jqUnit.assertEquals("Related Procedures hidden", 0, $(templateCss, sidebar.locate("relatedProcedures")).length);
@@ -193,7 +225,7 @@ var sidebarTester = function ($) {
     });
     
     noReadCatalogingAndPersonSidebarTest.test("RelatedRecordsList: cataloging not linking when no read permissions", function () {
-        var sidebar = setupSidebar(sampleOptions);
+        var sidebar = setupSidebar(fluid.copy(sampleOptions));
         var rowCss = ".csc-recordList-row";
         var disabledClass = "cs-disabled";
         jqUnit.assertTrue("Related Cataloging disabled", $(rowCss, sidebar.locate("relatedCataloging")).hasClass(disabledClass));
