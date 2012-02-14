@@ -269,9 +269,11 @@ cspace = cspace || {};
         // If our record is used by any other record then we do not want to allow to
         // delete it. Just notify a user about it.
         var removeMessage = "";
-        if (!!that.model.refobjs && that.model.refobjs.length > 0) {
+        var narrowerContexts = that.model.fields.narrowerContexts;
+        var refobjs = that.model.refobjs;
+        if (!!refobjs && refobjs.length > 0) {
             removeMessage = "deleteDialog-usedByMessage";
-        } else if (!!that.model.fields.narrowerContexts && that.model.fields.narrowerContexts.length > 0) {
+        } else if (!!narrowerContexts && narrowerContexts.filter(function(element){return element.narrowerContext}).length > 0) {
             removeMessage = "deleteDialog-hasNarrowerContextsMessage";
         } else if (that.model.fields.broaderContext) {
             removeMessage = "deleteDialog-hasBroaderContextMessage";
