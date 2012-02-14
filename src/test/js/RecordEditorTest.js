@@ -294,13 +294,41 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     /////
     
     // Test if there is Narrower Context
+    recordEditorTestUsedBy.asyncTest("Test delete-confirmation text - NO Narrower and NO Broader Contexts", function () {
+         var model = {
+            csid: "somecsid",
+            relations: {},
+            fields: {
+                broaderContext: "",
+                narrowerContexts: [ { _primary : 0} ]
+            },
+            refobjs: []
+        };
+        setupRecordEditor({
+            model: model,
+            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
+            showDeleteButton: true,
+            applier: fluid.makeChangeApplier(model),
+            uispec: {},
+            recordType: "person"
+        }, function (re) {
+            fluid.log("RETest: afterRender");
+            re.confirmation.popup.bind("dialogopen", function () {
+                jqUnit.assertEquals("Checking correct text: ", "Delete this Person?", re.confirmation.confirmationDialog.locate("message:").text());
+                start();
+            });
+            re.remove();
+        });
+    });
+    
+    // Test if there is Narrower Context
     recordEditorTestUsedBy.asyncTest("Test cannot delete-confirmation text - record has Narrower context.", function () {
          var model = {
             csid: "somecsid",
             relations: {},
             fields: {
                 broaderContext: "",
-                narrowerContexts: [ "some narrower context" ]
+                narrowerContexts: [ { narrowerContext : "some narrower context"} ]
             },
             refobjs: []
         };
