@@ -1469,7 +1469,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 model: "{recordEditor}.model",
                 applier: "{recordEditor}.options.applier",
                 listeners: {
-                    onLink: "{recordEditor}.refreshNoSave",
+                    onLink: "{recordEditor}.requestSave",
                     onRemove: "{recordEditor}.refreshNoSave"
                 }
             }
