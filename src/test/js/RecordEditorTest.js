@@ -292,6 +292,90 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     /////
     // End of the test block
     /////
+    
+    // Test if there is Narrower Context
+    recordEditorTestUsedBy.asyncTest("Test delete-confirmation text - NO Narrower and NO Broader Contexts", function () {
+         var model = {
+            csid: "somecsid",
+            relations: {},
+            fields: {
+                broaderContext: "",
+                narrowerContexts: [ { _primary : 0} ]
+            },
+            refobjs: []
+        };
+        setupRecordEditor({
+            model: model,
+            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
+            showDeleteButton: true,
+            applier: fluid.makeChangeApplier(model),
+            uispec: {},
+            recordType: "person"
+        }, function (re) {
+            fluid.log("RETest: afterRender");
+            re.confirmation.popup.bind("dialogopen", function () {
+                jqUnit.assertEquals("Checking correct text: ", "Delete this Person?", re.confirmation.confirmationDialog.locate("message:").text());
+                start();
+            });
+            re.remove();
+        });
+    });
+    
+    // Test if there is Narrower Context
+    recordEditorTestUsedBy.asyncTest("Test cannot delete-confirmation text - record has Narrower context.", function () {
+         var model = {
+            csid: "somecsid",
+            relations: {},
+            fields: {
+                broaderContext: "",
+                narrowerContexts: [ { narrowerContext : "some narrower context"} ]
+            },
+            refobjs: []
+        };
+        setupRecordEditor({
+            model: model,
+            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
+            showDeleteButton: true,
+            applier: fluid.makeChangeApplier(model),
+            uispec: {},
+            recordType: "person"
+        }, function (re) {
+            fluid.log("RETest: afterRender");
+            re.confirmation.popup.bind("dialogopen", function () {
+                jqUnit.assertEquals("Checking correct text: ", "This Person record can not be removed. It has a Narrower Context.", re.confirmation.confirmationDialog.locate("message:").text());
+                start();
+            });
+            re.remove();
+        });
+    });
+    
+    // Test if there is Broader Context
+    recordEditorTestUsedBy.asyncTest("Test cannot delete-confirmation text - record has Broader context.", function () {
+         var model = {
+            csid: "somecsid",
+            relations: {},
+            fields: {
+                broaderContext: "some stuff here",
+                narrowerContexts: [ ]
+            },
+            refobjs: []
+        };
+        setupRecordEditor({
+            model: model,
+            dataContext: cspace.dataContext({baseUrl: "http://mymuseum.org", recordType: "thisRecordType", model: model}),
+            showDeleteButton: true,
+            applier: fluid.makeChangeApplier(model),
+            uispec: {},
+            recordType: "person"
+        }, function (re) {
+            fluid.log("RETest: afterRender");
+            re.confirmation.popup.bind("dialogopen", function () {
+                jqUnit.assertEquals("Checking correct text: ", "This Person record can not be removed. It has a Broader Context.", re.confirmation.confirmationDialog.locate("message:").text());
+                start();
+            });
+            re.remove();
+        });
+    });
 
     recordEditorTest.asyncTest("Record editor's fields to ignore (cloneAndStore)", function () {
          var model = {
