@@ -53,10 +53,6 @@ cspace = cspace || {};
             afterFileQueuedListener: {
                 funcName: "cspace.mediaUploader.afterFileQueuedListener",
                 args: ["{mediaUploader}.dom.uploadInput", "{arguments}.0"]
-            },
-            toggleUpload: {
-                funcName: "cspace.mediaUploader.toggleUpload",
-                args: ["{mediaUploader}.model.csid", "{mediaUploader}.fileUploader.strategy.local.browseButtonView.dom.fileInputs"]
             }
         },
         elPaths: {
@@ -70,7 +66,6 @@ cspace = cspace || {};
         },
         selectors: {
             uploadInput: ".csc-mediaUploader-uploadInput",
-            uploadInputContainer: ".csc-mediaUploader-uploadInputContainer",
             linkInput: ".csc-mediaUploader-linkInput",
             uploadButton: ".csc-mediaUploader-uploadButton",
             linkButton: ".csc-mediaUploader-linkButton",
@@ -212,17 +207,6 @@ cspace = cspace || {};
         return {
             expander: [{
                 type: "fluid.renderer.condition",
-                condition: "${csid}",
-                trueTree: {
-                    uploadInputContainer: {}
-                },
-                falseTree: {
-                    uploadInputContainer: {
-                        decorators: {"addClass": "{styles}.disabled"}
-                    }
-                }
-            }, {
-                type: "fluid.renderer.condition",
                 condition: "${" + that.options.elPaths.blobCsid + "}",
                 trueTree: {
                     removeButton: {
@@ -300,15 +284,10 @@ cspace = cspace || {};
     cspace.mediaUploader.assertBlob = function (blobCsid) {
         return !!blobCsid;
     };
-
-    cspace.mediaUploader.toggleUpload = function (csid, fileUploader) {
-        fileUploader.attr("disabled", !!csid ? undefined: "disabled");
-    };
     
     cspace.mediaUploader.finalInit = function (that) {
         that.refreshView();
         that.bindEvents();
-        that.toggleUpload();
     };
     
     cspace.mediaUploader.removeMedia = function (that) {
