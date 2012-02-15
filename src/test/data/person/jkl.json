@@ -1,0 +1,12 @@
+{
+    "index": 0,
+    "token": "jkl",
+    "current": {
+        "summary": "Fred Bloggs",
+        "number": "Fred Bloggs",
+        "csid": "123.456.789",
+        "displayName": "Fred Bloggs",
+        "refid": "urn:cspace.org.collectionspace.demo.personauthority:name(cc025527-3f1f-4a21-84fc):person:name(e4a1d777-9226-4a69-86c0)'Fred Bloggs'",
+        "recordtype": "person"
+    }
+}
