@@ -268,12 +268,12 @@ cspace = cspace || {};
     cspace.recordEditor.removeWithCheck = function (that) {
         // If our record is used by any other record then we do not want to allow to
         // delete it. Just notify a user about it.
-        var removeMessage = "";
-        var narrowerContexts = that.model.fields.narrowerContexts;
-        var refobjs = that.model.refobjs;
-        if (!!refobjs && refobjs.length > 0) {
+        var removeMessage;
+        if (fluid.makeArray(that.model.refobjs.length) > 0) {
             removeMessage = "deleteDialog-usedByMessage";
-        } else if (!!narrowerContexts && narrowerContexts.filter(function(element){return element.narrowerContext}).length > 0) {
+        } else if (fluid.find(that.model.fields.narrowerContexts, function (element) {
+            return element.narrowerContext || undefined;
+        })) {
             removeMessage = "deleteDialog-hasNarrowerContextsMessage";
         } else if (that.model.fields.broaderContext) {
             removeMessage = "deleteDialog-hasBroaderContextMessage";
@@ -283,7 +283,7 @@ cspace = cspace || {};
             that.confirmation.open("cspace.confirmation.deleteDialog", undefined, {
                 enableButtons: ["act"],
                 model: {
-                    messages: [ removeMessage ],
+                    messages: [removeMessage],
                     messagekeys: {
                         actText: "alertDialog-actText"
                     }
@@ -309,7 +309,7 @@ cspace = cspace || {};
                 }
             },
             model: {
-                messages: [ "recordEditor-dialog-deletePrimaryMessage" ]
+                messages: ["recordEditor-dialog-deletePrimaryMessage"]
             },
             termMap: [
                 that.lookupMessage(that.options.recordType),
