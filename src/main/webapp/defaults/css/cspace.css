@@ -1987,14 +1987,25 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 }
 
 /* recordTraverser styling */
-.cs-recordTraverser-linkActive {
+.cs-recordTraverser-template {
+    display: table;
 }
-
-.cs-recordTraverser-linkDeactive {
+.cs-recordTraverser-template .cs-recordTraverser-indexTotal, .cs-recordTraverser-template .cs-recordTraverser-nextPrevious {
+    padding-left: 10px;
+    display: table-cell;
+    vertical-align: middle;
 }
-
-.cs-recordTraverser-template li {
-    display: inline;
+.cs-recordTraverser-template .cs-recordTraverser-nextPrevious a {
+    display: block;
+    padding-left: 18px;
+    padding-top: 9px;
+}
+.cs-recordTraverser-template .cs-recordTraverser-nextPrevious .cs-recordTraverser-previous {
+    background:transparent url('../images/previous.png') no-repeat 0px 0px;
+    margin-bottom: 5px;
+}
+.cs-recordTraverser-template .cs-recordTraverser-nextPrevious .cs-recordTraverser-next {
+    background:transparent url('../images/next.png') no-repeat 0px 0px;
 }
 
 /* CSPACE-4676 */

@@ -19,9 +19,9 @@ cspace = cspace || {};
         gradeNames: ["fluid.rendererComponent", "autoInit"],
         model: { },
         selectors: {
+            indexTotal: ".csc-recordTraverser-indexTotal",
             linkNext: ".csc-recordTraverser-next",
-            linkPrevious: ".csc-recordTraverser-previous",
-            current: ".csc-recordTraverser-current"
+            linkPrevious: ".csc-recordTraverser-previous"
         },
         resources: {
             template: cspace.resourceSpecExpander({
@@ -33,27 +33,31 @@ cspace = cspace || {};
             })
         },
         styles: {
-            linkActive: "cs-recordTraverser-linkActive",
-            linkDeactive: "cs-recordTraverser-linkDeactive"
+            indexTotal: "cs-recordTraverser-indexTotal",
+            linkNext: "cs-recordTraverser-next",
+            linkPrevious: "cs-recordTraverser-previous"
         },
         strings: {},
         parentBundle: "{globalBundle}",
         protoTree: {
+            indexTotal: {
+                messagekey: "recordTraverser-indexTotal",
+                args: ["${adjacentRecords.userIndex}", "${adjacentRecords.total}"],
+                decorators: {"addClass": "{styles}.indexTotal"}
+            },
             expander: [{
                 type: "fluid.renderer.condition",
                 condition: "${adjacentRecords.previous}",
                 trueTree: {
                     linkPrevious: {
                         target: "${adjacentRecords.previous.target}",
-                        linktext: "${adjacentRecords.previous.number}"
+                        decorators: [{"addClass": "{styles}.linkPrevious"}, {
+                            type: "attrs",
+                            attributes: {
+                                title: "${adjacentRecords.previous.number}"
+                            }
+                        }]
                     }
-                }
-            },
-            {
-                type: "fluid.renderer.condition",
-                condition: "${adjacentRecords.current}",
-                trueTree: {
-                    current: "${adjacentRecords.current.number}"
                 }
             },
             {
@@ -62,7 +66,12 @@ cspace = cspace || {};
                 trueTree: {
                     linkNext: {
                         target: "${adjacentRecords.next.target}",
-                        linktext: "${adjacentRecords.next.number}"
+                        decorators: [{"addClass": "{styles}.linkNext"}, {
+                            type: "attrs",
+                            attributes: {
+                                title: "${adjacentRecords.next.number}"
+                            }
+                        }]
                     }
                 }
             }]
@@ -102,10 +111,11 @@ cspace = cspace || {};
         elPaths: {
             searchReference: "searchReference",
             index: "index",
+            userIndex: "userIndex",
             token: "token",
+            total: "total",
             csid: "csid",
             adjacentRecords: "adjacentRecords",
-            current: "adjacentRecords.current",
             previous: "adjacentRecords.previous",
             next: "adjacentRecords.next",
             recordType: "recordtype"
@@ -172,6 +182,8 @@ cspace = cspace || {};
                 csid: get(model, rec, elPaths.csid)
             }));
         });
+        applier.requestChange(fluid.model.composeSegments(elPaths.adjacentRecords, elPaths.userIndex),
+            get(model, elPaths.adjacentRecords, elPaths.index) + 1);
     };
     
     cspace.recordTraverser.preInitFunction = function (that) {
