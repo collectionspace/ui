@@ -1990,7 +1990,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 .cs-recordTraverser-template {
     display: table;
 }
-.cs-recordTraverser-template .cs-recordTraverser-indexTotal, .cs-recordTraverser-template .cs-recordTraverser-nextPrevious {
+.cs-recordTraverser-template .cs-recordTraverser-controls, .cs-recordTraverser-template .cs-recordTraverser-nextPrevious {
     padding-left: 10px;
     display: table-cell;
     vertical-align: middle;
@@ -2006,6 +2006,10 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 }
 .cs-recordTraverser-template .cs-recordTraverser-nextPrevious .cs-recordTraverser-next {
     background:transparent url('../images/next.png') no-repeat 0px 0px;
+}
+.cs-recordTraverser-template .cs-recordTraverser-returnToSearch {
+    display: table-row;
+    text-decoration: none;
 }
 
 /* CSPACE-4676 */

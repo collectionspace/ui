@@ -20,6 +20,7 @@ cspace = cspace || {};
         model: { },
         selectors: {
             indexTotal: ".csc-recordTraverser-indexTotal",
+            returnToSearch: ".csc-recordTraverser-returnToSearch",
             linkNext: ".csc-recordTraverser-next",
             linkPrevious: ".csc-recordTraverser-previous"
         },
@@ -35,7 +36,8 @@ cspace = cspace || {};
         styles: {
             indexTotal: "cs-recordTraverser-indexTotal",
             linkNext: "cs-recordTraverser-next",
-            linkPrevious: "cs-recordTraverser-previous"
+            linkPrevious: "cs-recordTraverser-previous",
+            returnToSearch: "cs-recordTraverser-returnToSearch"
         },
         strings: {},
         parentBundle: "{globalBundle}",
@@ -44,6 +46,10 @@ cspace = cspace || {};
                 messagekey: "recordTraverser-indexTotal",
                 args: ["${adjacentRecords.userIndex}", "${adjacentRecords.total}"],
                 decorators: {"addClass": "{styles}.indexTotal"}
+            },
+            returnToSearch: {
+                messagekey: "recordTraverser-returnToSearch",
+                decorators: {"addClass": "{styles}.returnToSearch"}
             },
             expander: [{
                 type: "fluid.renderer.condition",
