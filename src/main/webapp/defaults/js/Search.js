@@ -338,7 +338,7 @@ cspace = cspace || {};
             that.searchResultsResolver.resolve(that.model);
         }
         that.locate("resultsContainer").show();
-        that.events.afterSearch.fire();
+        that.events.afterSearch.fire(that.model.searchModel);
     };
     
     cspace.search.searchView.updateModel = function (applier, newModel) {

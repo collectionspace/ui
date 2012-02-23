@@ -1818,7 +1818,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                 }
             }
         });
-        
+
+        fluid.demands("cspace.advancedSearch.updateSearchHistory", ["cspace.advancedSearch", "cspace.search.searchView"], {
+            funcName: "cspace.advancedSearch.updateSearchHistory",
+            args: ["{advancedSearch}.searchHistoryStorage", "{arguments}.0", "{cspace.search.searchView}.model.pagination.traverser"]
+        });
+
         fluid.demands("search", ["cspace.pageBuilder", "cspace.advancedSearch"], {
             container: "{pageBuilder}.options.selectors.search",
             options: {
@@ -1862,6 +1867,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                         type: "cspace.advancedSearch",
                         options: {
                             events: {
+                                afterSearch: "{searchView}.events.afterSearch",
                                 onSearch: "{searchView}.events.onAdvancedSearch",
                                 afterToggle: "{searchView}.events.hideResults"
                             },
