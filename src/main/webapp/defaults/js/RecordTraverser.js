@@ -116,6 +116,12 @@ cspace = cspace || {};
                     source: "advancedsearch"
                }
             },
+            findeditHistoryStorage: {
+                type: "cspace.util.localStorageDataSource",
+                options: {
+                    elPath: "findeditHistory"
+                }
+            },
             dataSource: {
                 type: "cspace.recordTraverser.dataSource"
             },
@@ -125,7 +131,7 @@ cspace = cspace || {};
             prepareModel: {
                 funcName: "cspace.recordTraverser.prepareModel",
                 args: [
-                    ["{cspace.recordTraverser}.searchHistoryStorage"],
+                    ["{cspace.recordTraverser}.searchHistoryStorage", "{cspace.recordTraverser}.findeditHistoryStorage"],
                     "{cspace.recordTraverser}.model",
                     "{cspace.recordTraverser}.applier",
                     "{cspace.recordTraverser}.options.elPaths",

@@ -279,6 +279,20 @@ cspace = cspace || {};
             localUrl: "%tenant/%tname/data/%recordType/search.json"
         })
     });
+
+    cspace.search.updateSearchHistory = function (storage, searchModel, hashtoken) {
+        // NOTE: The empty line token is a temporary hack to save search history.
+        hashtoken = hashtoken || "";
+        var history = storage.get() || {},
+            searchToSave = {};
+        searchToSave[hashtoken] = searchModel;
+        if (!history) {
+            storage.set([searchToSave]);
+            return;
+        }
+        history = [searchToSave].concat(fluid.makeArray(history));
+        storage.set(history.slice(0, 10));
+    };
     
     cspace.search.searchView.handleAdvancedSearch = function (searchModel, that) {
         that.messageBar.hide();

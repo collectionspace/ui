@@ -145,20 +145,6 @@ cspace = cspace || {};
         postInitFunction: "cspace.advancedSearch.postInit",
         preInitFunction: "cspace.advancedSearch.preInit"
     });
-
-    cspace.advancedSearch.updateSearchHistory = function (storage, searchModel, hashtoken) {
-        // NOTE: The empty line token is a temporary hack to save search history.
-        hashtoken = hashtoken || "";
-        var history = storage.get() || {},
-            searchToSave = {};
-        searchToSave[hashtoken] = searchModel;
-        if (!history) {
-            storage.set([searchToSave]);
-            return;
-        }
-        history = [searchToSave].concat(fluid.makeArray(history));
-        storage.set(history.slice(0, 10));
-    };
     
     cspace.advancedSearch.toggle = function (toggleControls, event) {
         toggleControls(false);

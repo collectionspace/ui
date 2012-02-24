@@ -1825,13 +1825,39 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     afterSearch: "{loadingIndicator}.events.hideOn.fire",
                     onError: "{loadingIndicator}.events.hideOn.fire",
                     onSearch: "{loadingIndicator}.events.showOn.fire"
+                },
+                components: {
+                    mainSearch: {
+                        options: {
+                            components: {
+                                findeditHistoryStorage: {
+                                    type: "cspace.util.localStorageDataSource",
+                                    options: {
+                                        elPath: "findeditHistory"
+                                    }
+                                }
+                            },
+                            events: {
+                                afterSearch: "{searchView}.events.afterSearch"
+                            },
+                            preInitFunction: "cspace.searchBox.preInitSearch",
+                            invokers: {
+                                updateSearchHistory: "cspace.searchBox.updateSearchHistory"
+                            }
+                        }
+                    }
                 }
             }
         });
 
         fluid.demands("cspace.advancedSearch.updateSearchHistory", ["cspace.advancedSearch", "cspace.search.searchView"], {
-            funcName: "cspace.advancedSearch.updateSearchHistory",
+            funcName: "cspace.search.updateSearchHistory",
             args: ["{advancedSearch}.searchHistoryStorage", "{arguments}.0", "{cspace.search.searchView}.model.pagination.traverser"]
+        });
+
+        fluid.demands("cspace.searchBox.updateSearchHistory", ["cspace.searchBox", "cspace.search.searchView"], {
+            funcName: "cspace.search.updateSearchHistory",
+            args: ["{searchBox}.findeditHistoryStorage", "{arguments}.0", "{cspace.search.searchView}.model.pagination.traverser"]
         });
 
         fluid.demands("search", ["cspace.pageBuilder", "cspace.advancedSearch"], {

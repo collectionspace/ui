@@ -2029,12 +2029,14 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
 }
 .cs-recordTraverser-template .cs-recordTraverser-nextPrevious .cs-recordTraverser-previous.cs-recordTraverser-disabled {
     background:transparent url('../images/noprevious.png') no-repeat 0px 0px;
+    cursor: default;
 }
 .cs-recordTraverser-template .cs-recordTraverser-nextPrevious .cs-recordTraverser-next {
     background:transparent url('../images/next.png') no-repeat 0px 0px;
 }
 .cs-recordTraverser-template .cs-recordTraverser-nextPrevious .cs-recordTraverser-next.cs-recordTraverser-disabled {
     background:transparent url('../images/nonext.png') no-repeat 0px 0px;
+    cursor: default;
 }
 .cs-recordTraverser-template .cs-recordTraverser-returnToSearch {
     display: table-row;
