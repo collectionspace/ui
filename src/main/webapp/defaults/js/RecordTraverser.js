@@ -37,7 +37,8 @@ cspace = cspace || {};
             indexTotal: "cs-recordTraverser-indexTotal",
             linkNext: "cs-recordTraverser-next",
             linkPrevious: "cs-recordTraverser-previous",
-            returnToSearch: "cs-recordTraverser-returnToSearch"
+            returnToSearch: "cs-recordTraverser-returnToSearch",
+            disabled: "cs-recordTraverser-disabled"
         },
         strings: {},
         parentBundle: "{globalBundle}",
@@ -64,6 +65,11 @@ cspace = cspace || {};
                             }
                         }]
                     }
+                },
+                falseTree: {
+                    linkPrevious: {
+                        decorators: [{"addClass": "{styles}.linkPrevious"}, {"addClass": "{styles}.disabled"}]
+                    }
                 }
             },
             {
@@ -78,6 +84,11 @@ cspace = cspace || {};
                                 title: "${adjacentRecords.next.number}"
                             }
                         }]
+                    }
+                },
+                falseTree: {
+                    linkNext: {
+                        decorators: [{"addClass": "{styles}.linkNext"}, {"addClass": "{styles}.disabled"}]
                     }
                 }
             }]

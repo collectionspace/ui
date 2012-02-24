@@ -1994,6 +1994,7 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     padding-left: 10px;
     display: table-cell;
     vertical-align: middle;
+    text-align: right;
 }
 .cs-recordTraverser-template .cs-recordTraverser-nextPrevious a {
     display: block;
@@ -2004,8 +2005,14 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     background:transparent url('../images/previous.png') no-repeat 0px 0px;
     margin-bottom: 5px;
 }
+.cs-recordTraverser-template .cs-recordTraverser-nextPrevious .cs-recordTraverser-previous.cs-recordTraverser-disabled {
+    background:transparent url('../images/noprevious.png') no-repeat 0px 0px;
+}
 .cs-recordTraverser-template .cs-recordTraverser-nextPrevious .cs-recordTraverser-next {
     background:transparent url('../images/next.png') no-repeat 0px 0px;
+}
+.cs-recordTraverser-template .cs-recordTraverser-nextPrevious .cs-recordTraverser-next.cs-recordTraverser-disabled {
+    background:transparent url('../images/nonext.png') no-repeat 0px 0px;
 }
 .cs-recordTraverser-template .cs-recordTraverser-returnToSearch {
     display: table-row;

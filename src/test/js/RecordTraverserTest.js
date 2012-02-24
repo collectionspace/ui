@@ -105,7 +105,8 @@ var rtTester = function ($) {
             jqUnit.assertValue("Record Traverser found token and index in local storage", rt.model.searchReference);
 
             jqUnit.assertEquals("Record Traverser render indexTotal", 1, rt.locate("indexTotal").length);
-            jqUnit.assertEquals("Record Traverser render linkNext", 0, rt.locate("linkNext").length);
+            jqUnit.assertEquals("Record Traverser render linkNext", 1, rt.locate("linkNext").length);
+            jqUnit.assertTrue("Record Traverser render linkNext disabled", rt.locate("linkNext").hasClass(rt.options.styles.disabled));
             jqUnit.assertEquals("Record Traverser render linkPrevious", 1, rt.locate("linkPrevious").length);
             
             jqUnit.assertEquals("Selected retreived correctly", searchReferenceNoNext.index, rt.model.searchReference.index);
@@ -134,7 +135,8 @@ var rtTester = function ($) {
 
             jqUnit.assertEquals("Record Traverser render indexTotal", 1, rt.locate("indexTotal").length);
             jqUnit.assertEquals("Record Traverser render linkNext", 1, rt.locate("linkNext").length);
-            jqUnit.assertEquals("Record Traverser render linkPrevious", 0, rt.locate("linkPrevious").length);
+            jqUnit.assertEquals("Record Traverser render linkPrevious", 1, rt.locate("linkPrevious").length);
+            jqUnit.assertTrue("Record Traverser render linkPrevious disabled", rt.locate("linkPrevious").hasClass(rt.options.styles.disabled));
             
             jqUnit.assertEquals("Selected retreived correctly", searchReferenceNoPrevious.index, rt.model.searchReference.index);
 
@@ -161,8 +163,10 @@ var rtTester = function ($) {
             jqUnit.assertValue("Record Traverser found token and index in local storage", rt.model.searchReference);
 
             jqUnit.assertEquals("Record Traverser render indexTotal", 1, rt.locate("indexTotal").length);
-            jqUnit.assertEquals("Record Traverser render linkNext", 0, rt.locate("linkNext").length);
-            jqUnit.assertEquals("Record Traverser render linkPrevious", 0, rt.locate("linkPrevious").length);
+            jqUnit.assertEquals("Record Traverser render linkNext", 1, rt.locate("linkNext").length);
+            jqUnit.assertTrue("Record Traverser render linkNext disabled", rt.locate("linkNext").hasClass(rt.options.styles.disabled));
+            jqUnit.assertEquals("Record Traverser render linkPrevious", 1, rt.locate("linkPrevious").length);
+            jqUnit.assertTrue("Record Traverser render linkPrevious disabled", rt.locate("linkPrevious").hasClass(rt.options.styles.disabled));
             
             jqUnit.assertEquals("Selected retreived correctly", searchReferenceNoPreviousNoNext.index, rt.model.searchReference.index);
 
