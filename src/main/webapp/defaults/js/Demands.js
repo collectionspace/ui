@@ -349,6 +349,10 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
     
     cspace.includeDemands = function () {
         
+        fluid.demands("cspace.recordTraverser", "cspace.recordEditor", {
+            container: "{cspace.recordEditor}.dom.recordTraverser"
+        });
+
         fluid.demands("cspace.dimension", "cspace.recordEditor", {
             container: "{arguments}.0",
             mergeAllOptions: [{
@@ -944,6 +948,12 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("recordEditor", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.recordEditor",
             options: {
+                components: {
+                    recordTraverser: {
+                        type: "cspace.recordTraverser",
+                        createOnEvent: "afterRender"
+                    }
+                },
                 listeners: {
                     afterRender: "{loadingIndicator}.events.hideOn.fire",
                     cancelSave: "{loadingIndicator}.events.hideOn.fire",
