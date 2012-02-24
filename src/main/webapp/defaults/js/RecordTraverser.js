@@ -135,7 +135,7 @@ cspace = cspace || {};
         },
         urls: cspace.componentUrlBuilder({
             navigate: "%webapp/html/%recordType.html?csid=%csid",
-            adjacentRecords: "%tenant/%tname/adjacentRecords?token=%token&index=%index",
+            adjacentRecords: "%tenant/%tname/adjacentRecords/%token/%index",
             returnToSearch: "%webapp/html/%source.html?hashtoken=%hashtoken"
         }),
         listeners: {

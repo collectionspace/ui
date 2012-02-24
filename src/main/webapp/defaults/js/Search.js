@@ -127,6 +127,10 @@ cspace = cspace || {};
                             csid: record.csid
                         }
                     });
+                    that.searchReferenceStorage.set({
+                        token: that.model.pagination.traverser,
+                        index: index + newModel.pageSize * newModel.pageIndex
+                    });
                     window.location = expander(that.options.urls.pivot);
                     return false;
                 });
@@ -208,6 +212,12 @@ cspace = cspace || {};
         },
         components: {
             messageBar: "{messageBar}",
+            searchReferenceStorage: {
+                type: "cspace.util.localStorageDataSource",
+                options: {
+                    elPath: "searchReference"
+                }
+            },
             mainSearch: {
                 type: "cspace.searchBox",
                 options: {
