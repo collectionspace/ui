@@ -860,7 +860,7 @@ fluid.registerNamespace("cspace.util");
                 // NOTE: dispatchEvent has proven to be extremely unreliable in cross
                 // browser testing. Thus we resolve to more straitforward redirect. 
                 window.location.href = target.attr("href");
-            });
+            }, evt);
             return false;
         });
         that.container.delegate(that.options.selectors.forms, "submit", function () {

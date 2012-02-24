@@ -131,10 +131,6 @@ cspace = cspace || {};
                     "{cspace.recordTraverser}.options.elPaths",
                     "{cspace.recordTraverser}.options.urls"
                 ]
-            },
-            afterRender: {
-                funcName: "cspace.recordTraverser.afterRender",
-                args: ["{cspace.recordTraverser}.dom", "{globalNavigator}", "{cspace.recordTraverser}.searchReferenceStorage", "{cspace.recordTraverser}.model", "{cspace.recordTraverser}.options.elPaths"]
             }
         },
         urls: cspace.componentUrlBuilder({
@@ -143,8 +139,7 @@ cspace = cspace || {};
             returnToSearch: "%webapp/html/%source.html?hashtoken=%hashtoken"
         }),
         listeners: {
-            prepareModelForRender: "{cspace.recordTraverser}.prepareModelForRenderListener",
-            afterRender: "{cspace.recordTraverser}.afterRenderHandler"
+            prepareModelForRender: "{cspace.recordTraverser}.prepareModelForRenderListener"
         },
         preInitFunction: "cspace.recordTraverser.preInitFunction",
         elPaths: {
@@ -192,25 +187,6 @@ cspace = cspace || {};
     var get = function (model) {
         return fluid.get(model, fluid.model.composeSegments.apply(null, Array().slice.call(arguments, 1)));
     };
-
-    cspace.recordTraverser.afterRender = function (dom, globalNavigator, searchReferenceStorage, model, elPaths) {
-        var searchReference = elPaths.searchReference;
-        fluid.each({
-            "linkNext": 1,
-            "linkPrevious": -1
-        }, function (increment, selector) {
-            dom.locate(selector).click(function () {
-                var link = $(this);
-                globalNavigator.events.onPerformNavigation.fire(function () {
-                    searchReferenceStorage.set({
-                        token: get(model, searchReference, elPaths.token),
-                        index: get(model, searchReference, elPaths.index) + increment
-                    });
-                    window.location = link.attr("href");
-                });
-            });
-        });
-    };
     
     cspace.recordTraverser.prepareModel = function (storages, model, applier, elPaths, urls) {
         fluid.each([elPaths.next, elPaths.previous], function (rec) {
@@ -231,16 +207,15 @@ cspace = cspace || {};
             if (!history) {
                 return;
             }
-            fluid.each(history, function (search) {
+            returnToSearch = fluid.find(history, function (search) {
                 var val = fluid.find(search, function (val, key) {
                     if (key === hashtoken) {return true};
                 });
                 if (val) {
-                    returnToSearch = {
+                    return {
                         hashtoken: hashtoken,
                         source: storage.options.source
                     };
-                    return false;
                 }
             });
         });
@@ -251,9 +226,6 @@ cspace = cspace || {};
     };
 
     cspace.recordTraverser.preInitFunction = function (that) {
-        that.afterRenderHandler = function () {
-            that.afterRender();
-        };
         that.prepareModelForRenderListener = function () {
             that.prepareModel();
         };
@@ -277,6 +249,27 @@ cspace = cspace || {};
         }, function(data) {
             applier.requestChange(elPaths.adjacentRecords, data);
             that.refreshView();
+        });
+
+        that.globalNavigator.events.onPerformNavigation.addListener(function (callback, evt) {
+            if (!evt) {
+                return;
+            }
+            var target = $(evt.target);
+            if (target.length === 0) {
+                return;
+            }
+            searchReferenceStorage.set(fluid.find({
+                "linkNext": 1,
+                "linkPrevious": -1
+            }, function (increment, selector) {
+                if (that.locate(selector).attr("href") === target.attr("href")) {
+                    return {
+                        token: get(model, searchReference, elPaths.token),
+                        index: get(model, searchReference, elPaths.index) + increment
+                    };
+                }
+            }));
         });
     };
     
