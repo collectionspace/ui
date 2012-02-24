@@ -72,12 +72,20 @@ var rtTester = function ($) {
         
         ls.set(searchReference);
         
+        var sh = cspace.util.localStorageDataSource({
+            elPath: "searchHistory"
+        });
+        var shs = {};
+        shs[searchReference.token] = {};
+        sh.set([shs]);
+
         setupRecordTraverser(undefined, function (rt) {
             jqUnit.assertValue("Record Traverser found token and index in local storage", rt.model.searchReference);
 
             jqUnit.assertEquals("Record Traverser render indexTotal", 1, rt.locate("indexTotal").length);
             jqUnit.assertEquals("Record Traverser render linkNext", 1, rt.locate("linkNext").length);
             jqUnit.assertEquals("Record Traverser render linkPrevious", 1, rt.locate("linkPrevious").length);
+            jqUnit.assertEquals("Record Traverser render returnToSearch", 1, rt.locate("returnToSearch").length);
             
             jqUnit.assertEquals("Selected retreived correctly", searchReference.index, rt.model.searchReference.index);
 
@@ -85,8 +93,11 @@ var rtTester = function ($) {
             jqUnit.assertEquals("linkPrevious is rendered correctly", rt.model.adjacentRecords.previous.number, rt.locate("linkPrevious").attr("title"));
             jqUnit.assertEquals("linkNext is rendered correctly", rt.model.adjacentRecords.next.number, rt.locate("linkNext").attr("title"));
             
+            jqUnit.assertEquals("returnToSearch is rendered correctly", "../../main/webapp/defaults/html/advancedsearch.html?hashtoken=abc", rt.locate("returnToSearch").attr("href"));
             jqUnit.assertEquals("linkPrevious is rendered correctly", webapp + rt.model.adjacentRecords.previous.recordtype + ".html?csid=" + rt.model.adjacentRecords.previous.csid, rt.locate("linkPrevious").attr("href"));
             jqUnit.assertEquals("linkNext is rendered correctly", webapp + rt.model.adjacentRecords.next.recordtype + ".html?csid=" + rt.model.adjacentRecords.next.csid, rt.locate("linkNext").attr("href"));
+
+            sh.set();
             start();
         });
     });
@@ -108,6 +119,7 @@ var rtTester = function ($) {
             jqUnit.assertEquals("Record Traverser render linkNext", 1, rt.locate("linkNext").length);
             jqUnit.assertTrue("Record Traverser render linkNext disabled", rt.locate("linkNext").hasClass(rt.options.styles.disabled));
             jqUnit.assertEquals("Record Traverser render linkPrevious", 1, rt.locate("linkPrevious").length);
+            jqUnit.assertEquals("Record Traverser render returnToSearch", 0, rt.locate("returnToSearch").length);
             
             jqUnit.assertEquals("Selected retreived correctly", searchReferenceNoNext.index, rt.model.searchReference.index);
 
@@ -137,6 +149,7 @@ var rtTester = function ($) {
             jqUnit.assertEquals("Record Traverser render linkNext", 1, rt.locate("linkNext").length);
             jqUnit.assertEquals("Record Traverser render linkPrevious", 1, rt.locate("linkPrevious").length);
             jqUnit.assertTrue("Record Traverser render linkPrevious disabled", rt.locate("linkPrevious").hasClass(rt.options.styles.disabled));
+            jqUnit.assertEquals("Record Traverser render returnToSearch", 0, rt.locate("returnToSearch").length);
             
             jqUnit.assertEquals("Selected retreived correctly", searchReferenceNoPrevious.index, rt.model.searchReference.index);
 
@@ -159,6 +172,13 @@ var rtTester = function ($) {
         
         ls.set(searchReferenceNoPreviousNoNext);
         
+        var sh = cspace.util.localStorageDataSource({
+            elPath: "searchHistory"
+        });
+        var shs = {};
+        shs[searchReferenceNoPreviousNoNext.token] = {};
+        sh.set([shs]);
+
         setupRecordTraverser(undefined, function (rt) {
             jqUnit.assertValue("Record Traverser found token and index in local storage", rt.model.searchReference);
 
@@ -167,13 +187,16 @@ var rtTester = function ($) {
             jqUnit.assertTrue("Record Traverser render linkNext disabled", rt.locate("linkNext").hasClass(rt.options.styles.disabled));
             jqUnit.assertEquals("Record Traverser render linkPrevious", 1, rt.locate("linkPrevious").length);
             jqUnit.assertTrue("Record Traverser render linkPrevious disabled", rt.locate("linkPrevious").hasClass(rt.options.styles.disabled));
+            jqUnit.assertEquals("Record Traverser render returnToSearch", 1, rt.locate("returnToSearch").length);
             
             jqUnit.assertEquals("Selected retreived correctly", searchReferenceNoPreviousNoNext.index, rt.model.searchReference.index);
 
+            jqUnit.assertEquals("returnToSearch is rendered correctly", "../../main/webapp/defaults/html/advancedsearch.html?hashtoken=jkl", rt.locate("returnToSearch").attr("href"));
             jqUnit.assertEquals("Record Traverser indexTotal", "1 of 1", rt.locate("indexTotal").text());
             jqUnit.assertUndefined("linkPrevious is undefined in the model", rt.model.adjacentRecords.previous);
             jqUnit.assertUndefined("linkNext is undefined in the model", rt.model.adjacentRecords.next);
-            
+
+            sh.set();
             start();
         });
     });

@@ -48,11 +48,19 @@ cspace = cspace || {};
                 args: ["${adjacentRecords.userIndex}", "${adjacentRecords.total}"],
                 decorators: {"addClass": "{styles}.indexTotal"}
             },
-            returnToSearch: {
-                messagekey: "recordTraverser-returnToSearch",
-                decorators: {"addClass": "{styles}.returnToSearch"}
-            },
             expander: [{
+                type: "fluid.renderer.condition",
+                condition: "${returnToSearch}",
+                trueTree: {
+                    returnToSearch: {
+                        target: "${returnToSearch}",
+                        linktext: {
+                            messagekey: "recordTraverser-returnToSearch"
+                        },
+                        decorators: {"addClass": "{styles}.returnToSearch"}
+                    }
+                }
+            }, {
                 type: "fluid.renderer.condition",
                 condition: "${adjacentRecords.previous}",
                 trueTree: {
@@ -95,11 +103,18 @@ cspace = cspace || {};
         },
         finalInitFunction: "cspace.recordTraverser.finalInitFunction",
         components: {
-            localStorage: {
+            searchReferenceStorage: {
                 type: "cspace.util.localStorageDataSource",
                 options: {
                     elPath: "searchReference"
                 }
+            },
+            searchHistoryStorage: {
+                type: "cspace.util.localStorageDataSource",
+                options: {
+                    elPath: "searchHistory",
+                    source: "advancedsearch"
+               }
             },
             dataSource: {
                 type: "cspace.recordTraverser.dataSource"
@@ -109,16 +124,23 @@ cspace = cspace || {};
         invokers: {
             prepareModel: {
                 funcName: "cspace.recordTraverser.prepareModel",
-                args: ["{cspace.recordTraverser}.model", "{cspace.recordTraverser}.applier", "{cspace.recordTraverser}.options.elPaths", "{cspace.recordTraverser}.options.urls"]
+                args: [
+                    ["{cspace.recordTraverser}.searchHistoryStorage"],
+                    "{cspace.recordTraverser}.model",
+                    "{cspace.recordTraverser}.applier",
+                    "{cspace.recordTraverser}.options.elPaths",
+                    "{cspace.recordTraverser}.options.urls"
+                ]
             },
             afterRender: {
                 funcName: "cspace.recordTraverser.afterRender",
-                args: ["{cspace.recordTraverser}.dom", "{globalNavigator}", "{cspace.recordTraverser}.localStorage", "{cspace.recordTraverser}.model", "{cspace.recordTraverser}.options.elPaths"]
+                args: ["{cspace.recordTraverser}.dom", "{globalNavigator}", "{cspace.recordTraverser}.searchReferenceStorage", "{cspace.recordTraverser}.model", "{cspace.recordTraverser}.options.elPaths"]
             }
         },
         urls: cspace.componentUrlBuilder({
             navigate: "%webapp/html/%recordType.html?csid=%csid",
-            adjacentRecords: "%tenant/%tname/adjacentRecords?token=%token&index=%index"
+            adjacentRecords: "%tenant/%tname/adjacentRecords?token=%token&index=%index",
+            returnToSearch: "%webapp/html/%source.html?hashtoken=%hashtoken"
         }),
         listeners: {
             prepareModelForRender: "{cspace.recordTraverser}.prepareModelForRenderListener",
@@ -126,6 +148,7 @@ cspace = cspace || {};
         },
         preInitFunction: "cspace.recordTraverser.preInitFunction",
         elPaths: {
+            returnToSearch: "returnToSearch",
             searchReference: "searchReference",
             index: "index",
             userIndex: "userIndex",
@@ -170,7 +193,7 @@ cspace = cspace || {};
         return fluid.get(model, fluid.model.composeSegments.apply(null, Array().slice.call(arguments, 1)));
     };
 
-    cspace.recordTraverser.afterRender = function (dom, globalNavigator, localStorage, model, elPaths) {
+    cspace.recordTraverser.afterRender = function (dom, globalNavigator, searchReferenceStorage, model, elPaths) {
         var searchReference = elPaths.searchReference;
         fluid.each({
             "linkNext": 1,
@@ -179,7 +202,7 @@ cspace = cspace || {};
             dom.locate(selector).click(function () {
                 var link = $(this);
                 globalNavigator.events.onPerformNavigation.fire(function () {
-                    localStorage.set({
+                    searchReferenceStorage.set({
                         token: get(model, searchReference, elPaths.token),
                         index: get(model, searchReference, elPaths.index) + increment
                     });
@@ -189,7 +212,7 @@ cspace = cspace || {};
         });
     };
     
-    cspace.recordTraverser.prepareModel = function (model, applier, elPaths, urls) {
+    cspace.recordTraverser.prepareModel = function (storages, model, applier, elPaths, urls) {
         fluid.each([elPaths.next, elPaths.previous], function (rec) {
             if (!get(model, rec, elPaths.csid)) {
                 return;
@@ -201,8 +224,32 @@ cspace = cspace || {};
         });
         applier.requestChange(fluid.model.composeSegments(elPaths.adjacentRecords, elPaths.userIndex),
             get(model, elPaths.adjacentRecords, elPaths.index) + 1);
+        var hashtoken = get(model, elPaths.searchReference, elPaths.token),
+            returnToSearch;
+        fluid.each(storages, function (storage) {
+            var history = storage.get();
+            if (!history) {
+                return;
+            }
+            fluid.each(history, function (search) {
+                var val = fluid.find(search, function (val, key) {
+                    if (key === hashtoken) {return true};
+                });
+                if (val) {
+                    returnToSearch = {
+                        hashtoken: hashtoken,
+                        source: storage.options.source
+                    };
+                    return false;
+                }
+            });
+        });
+        if (!returnToSearch) {
+            return;
+        }
+        applier.requestChange(elPaths.returnToSearch, fluid.stringTemplate(urls.returnToSearch, returnToSearch));
     };
-    
+
     cspace.recordTraverser.preInitFunction = function (that) {
         that.afterRenderHandler = function () {
             that.afterRender();
@@ -211,19 +258,19 @@ cspace = cspace || {};
             that.prepareModel();
         };
     };
-    
+
     cspace.recordTraverser.finalInitFunction = function(that) {
         var applier = that.applier,
             model = that.model,
             elPaths = that.options.elPaths,
             searchReference = elPaths.searchReference,
-            localStorage = that.localStorage;
+            searchReferenceStorage = that.searchReferenceStorage;
 
-        applier.requestChange(searchReference, localStorage.get());
+        applier.requestChange(searchReference, searchReferenceStorage.get());
         if (!fluid.get(model, searchReference)) {
             return;
         }
-        localStorage.set();
+        searchReferenceStorage.set();
         that.dataSource.get({
             token: get(model, searchReference, elPaths.token),
             index: get(model, searchReference, elPaths.index)
