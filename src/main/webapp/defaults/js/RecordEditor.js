@@ -617,6 +617,7 @@ cspace = cspace || {};
         saveCancelPermission: "update",
         selectors: {
             save: ".csc-save",
+            recordTraverser: ".csc-recordTraverser",
             cancel: ".csc-cancel",
             deleteButton: ".csc-delete",
             createFromExistingButton: ".csc-createFromExisting",
@@ -624,7 +625,7 @@ cspace = cspace || {};
             header: ".csc-recordEditor-header",
             togglable: ".csc-recordEditor-togglable"
         },
-        selectorsToIgnore: ["requiredFields", "identificationNumber", "header", "togglable"],
+        selectorsToIgnore: ["recordTraverser", "requiredFields", "identificationNumber", "header", "togglable"],
         fieldsToIgnore: ["csid", "fields.csid"],
         rendererFnOptions: {
             cutpointGenerator: "cspace.recordEditor.cutpointGenerator"

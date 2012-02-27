@@ -13,7 +13,7 @@
                             "hierarchy": ".csc-hierarchy",
                             "identificationNumber": ".csc-organizationAuthority-displayName" 
                         },
-                        "selectorsToIgnore": ["requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
+                        "selectorsToIgnore": ["recordTraverser", "requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
                         "components": {
                             "hierarchy": {
                                 "type": "cspace.hierarchy",

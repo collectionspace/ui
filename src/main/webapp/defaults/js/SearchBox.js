@@ -105,6 +105,15 @@ cspace = cspace || {};
             bindEvents(that);
         };
     };
+
+    cspace.searchBox.preInitSearch = function (that) {
+        cspace.searchBox.preInit(that);
+        cspace.util.preInitMergeListeners(that.options, {
+            afterSearch: function (searchModel) {
+                that.updateSearchHistory(searchModel);
+            }
+        });
+    };
     
     // A public function that is called as searchBox's navigateToSearch method and redirects to
     // the search results page.    

@@ -17,7 +17,7 @@
                             "hierarchy": ".csc-location-hierarchy",
                             "identificationNumber": ".csc-location-displayName"
                         },
-                        "selectorsToIgnore": ["requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
+                        "selectorsToIgnore": ["recordTraverser", "requiredFields", "identificationNumber", "header", "togglable", "hierarchy"],
                         "components": {
                             "hierarchy": {
                                 "type": "cspace.hierarchy",

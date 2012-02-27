@@ -14,7 +14,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
 cspace = cspace || {};
 
 (function ($, fluid) {
-    
+
     fluid.defaults("cspace.searchTools", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         mergePolicy: {
@@ -28,7 +28,7 @@ cspace = cspace || {};
         protoTree: {
             searchTools: {decorators: {"addClass": "{styles}.searchTools"}},
             title: {
-                decorators: {"addClass": "{styles}.title"}, 
+                decorators: {"addClass": "{styles}.title"},
                 messagekey: "searchTools-title"
             },
             expander: {
@@ -85,7 +85,7 @@ cspace = cspace || {};
         parentBundle: "{globalBundle}",
         renderOnInit: true
     });
-    
+
     cspace.searchTools.preInit = function (that) {
         cspace.util.preInitMergeListeners(that.options, {
             renderOn: function () {
@@ -93,9 +93,9 @@ cspace = cspace || {};
             }
         });
     };
-    
+
     fluid.fetchResources.primeCacheFromResources("cspace.searchTools");
-    
+
     fluid.defaults("cspace.searchTools.block", {
         gradeNames: ["autoInit", "fluid.rendererComponent"],
         preInitFunction: "cspace.searchTools.block.preInit",
@@ -149,20 +149,18 @@ cspace = cspace || {};
             currentSearchUpdated: null
         }
     });
-    
+
     cspace.searchTools.block.updateCurrentSearch = function (event, dom, storage, currentSearchUpdated) {
         var searches = storage.get();
-        if (!searches) {
-            return;
-        }
-        currentSearchUpdated.fire(searches[dom.locate("item").index($(event.target))]);
+        if (!searches) {return;}
+        currentSearchUpdated.fire(searches[dom.locate("item").index($(event.target))].model);
     };
-    
+
     cspace.searchTools.block.produceTree = function (that) {
         return {
             searchToolsBlock: {decorators: {"addClass": "{styles}.searchToolsBlock"}},
             title: {
-                decorators: {"addClass": "{styles}.title"}, 
+                decorators: {"addClass": "{styles}.title"},
                 messagekey: "${strings.title}"
             },
             expander: [{
@@ -189,18 +187,18 @@ cspace = cspace || {};
                 },
                 trueTree: {
                     noItems: {
-                        decorators: {"addClass": "{styles}.noItems"}, 
+                        decorators: {"addClass": "{styles}.noItems"},
                         messagekey: "${strings.noItems}"
                     }
                 }
             }]
         };
     };
-    
+
     cspace.searchTools.block.assertItems = function (options) {
         return options.items.length < 1;
     };
-    
+
     cspace.searchTools.block.preInit = function (that) {
         cspace.util.preInitMergeListeners(that.options, {
             prepareModelForRender: function (model, applier, that) {
@@ -210,19 +208,18 @@ cspace = cspace || {};
                 var items = fluid.makeArray(that.localStorage.get());
                 fluid.each(items, function (item, index) {
                     items[index] = {
-                        str: JSON.stringify(item),
-                        value: item
+                        str: JSON.stringify(item.model)
                     };
                 });
                 applier.requestChange("items", items);
             }
         });
     };
-    
+
     cspace.searchTools.block.finalInit = function (that) {
         that.refreshView();
     };
-    
+
     fluid.fetchResources.primeCacheFromResources("cspace.searchTools.block");
-    
+
 })(jQuery, fluid);

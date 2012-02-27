@@ -2008,6 +2008,44 @@ input[type=button].cs-mediaUploader-removeMedia:focus {
     background-color: #E8E8E8;
 }
 
+/* recordTraverser styling */
+.cs-recordTraverser-template {
+    display: table;
+}
+.cs-recordTraverser-template .cs-recordTraverser-controls, .cs-recordTraverser-template .cs-recordTraverser-nextPrevious {
+    padding-left: 10px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: right;
+}
+.cs-recordTraverser-template .cs-recordTraverser-nextPrevious a {
+    display: block;
+    padding-left: 18px;
+    padding-top: 9px;
+}
+.cs-recordTraverser-template .cs-recordTraverser-nextPrevious .cs-recordTraverser-previous {
+    background:transparent url('../images/previous.png') no-repeat 0px 0px;
+    margin-bottom: 5px;
+}
+.cs-recordTraverser-template .cs-recordTraverser-nextPrevious .cs-recordTraverser-previous.cs-recordTraverser-disabled {
+    background:transparent url('../images/noprevious.png') no-repeat 0px 0px;
+    cursor: default;
+}
+.cs-recordTraverser-template .cs-recordTraverser-nextPrevious .cs-recordTraverser-next {
+    background:transparent url('../images/next.png') no-repeat 0px 0px;
+}
+.cs-recordTraverser-template .cs-recordTraverser-nextPrevious .cs-recordTraverser-next.cs-recordTraverser-disabled {
+    background:transparent url('../images/nonext.png') no-repeat 0px 0px;
+    cursor: default;
+}
+.cs-recordTraverser-template .cs-recordTraverser-returnToSearch {
+    display: table-row;
+    text-decoration: none;
+}
+
+/* CSPACE-4676 */
+.csc-blobs-dimension *{ display:none;}
+
 .cs-listView-row:hover {
     cursor:pointer;
 }
