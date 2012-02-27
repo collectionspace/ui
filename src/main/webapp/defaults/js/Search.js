@@ -218,6 +218,20 @@ cspace = cspace || {};
                     elPath: "searchReference"
                 }
             },
+            searchHistoryStorage: {
+                type: "cspace.util.localStorageDataSource",
+                options: {
+                    elPath: "searchHistory",
+                    source: "advancedsearch"
+               }
+            },
+            findeditHistoryStorage: {
+                type: "cspace.util.localStorageDataSource",
+                options: {
+                    elPath: "findeditHistory",
+                    source: "findedit"
+                }
+            },
             mainSearch: {
                 type: "cspace.searchBox",
                 options: {
@@ -372,10 +386,29 @@ cspace = cspace || {};
     };
     
     cspace.search.searchView.finalInit = function (that) {
-        that.updateModel({
-            keywords: decodeURI(cspace.util.getUrlParameter("keywords")),
-            recordType: cspace.util.getUrlParameter("recordtype")
-        });
+        var hashtoken = cspace.util.getUrlParameter("hashtoken");
+        if (hashtoken) {
+            var searchData;
+            fluid.each([that.searchHistoryStorage, that.findeditHistoryStorage], function (storage) {
+                var history = storage.get();
+                if (!history) {
+                    return;
+                }
+                searchData = fluid.find(history, function (search) {
+                    return fluid.find(search, function (val, key) {
+                        if (key === hashtoken) {return val};
+                    });
+                });
+            });
+            if (searchData) {
+                that.updateModel(searchData);
+            }
+        } else {
+            that.updateModel({
+                keywords: decodeURI(cspace.util.getUrlParameter("keywords")),
+                recordType: cspace.util.getUrlParameter("recordtype")
+            });
+        }
         that.hideResults();
         bindEventHandlers(that);
         if (that.model.searchModel.recordType) {

@@ -119,7 +119,8 @@ cspace = cspace || {};
             findeditHistoryStorage: {
                 type: "cspace.util.localStorageDataSource",
                 options: {
-                    elPath: "findeditHistory"
+                    elPath: "findeditHistory",
+                    source: "findedit"
                 }
             },
             dataSource: {
