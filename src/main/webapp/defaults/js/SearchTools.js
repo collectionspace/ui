@@ -151,13 +151,9 @@ cspace = cspace || {};
     });
 
     cspace.searchTools.block.updateCurrentSearch = function (event, dom, storage, currentSearchUpdated) {
-        var searches = storage.get(),
-            search;
-        if (!searches) {
-            return;
-        }
-        fluid.each(searches[dom.locate("item").index($(event.target))], function (val) {search = val;});
-        currentSearchUpdated.fire(search);
+        var searches = storage.get();
+        if (!searches) {return;}
+        currentSearchUpdated.fire(searches[dom.locate("item").index($(event.target))].model);
     };
 
     cspace.searchTools.block.produceTree = function (that) {
@@ -211,12 +207,8 @@ cspace = cspace || {};
                 });
                 var items = fluid.makeArray(that.localStorage.get());
                 fluid.each(items, function (item, index) {
-                    var hashtoken, value;
-                    fluid.each(item, function (val, key) {hashtoken = key; value = val;});
                     items[index] = {
-                        str: JSON.stringify(value),
-                        value: value,
-                        hashtoken: hashtoken
+                        str: JSON.stringify(item.model)
                     };
                 });
                 applier.requestChange("items", items);

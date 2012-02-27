@@ -18,22 +18,26 @@ var rtTester = function ($) {
     var container = "#main";
     var searchReference = {
         "token": "abc",
-        "index": 22
+        "index": 22,
+        "source": "advancedsearch"
     };
     
     var searchReferenceNoNext = {
         "token": "def",
-        "index": 1
+        "index": 1,
+        "source": "advancedsearch"
     };
     
     var searchReferenceNoPrevious = {
         "token": "ghi",
-        "index": 0
+        "index": 0,
+        "source": "advancedsearch"
     };
     
     var searchReferenceNoPreviousNoNext = {
         "token": "jkl",
-        "index": 0
+        "index": 0,
+        "source": "advancedsearch"
     };
 
     var bareRecordTraverserTest = new jqUnit.TestCase("recordTraverser Tests");
@@ -75,8 +79,9 @@ var rtTester = function ($) {
         var sh = cspace.util.localStorageDataSource({
             elPath: "searchHistory"
         });
-        var shs = {};
-        shs[searchReference.token] = {};
+        var shs = {
+            hashtoken: searchReference.token
+        };
         sh.set([shs]);
 
         setupRecordTraverser(undefined, function (rt) {
@@ -175,8 +180,9 @@ var rtTester = function ($) {
         var sh = cspace.util.localStorageDataSource({
             elPath: "searchHistory"
         });
-        var shs = {};
-        shs[searchReferenceNoPreviousNoNext.token] = {};
+        var shs = {
+            hashtoken: searchReferenceNoPreviousNoNext.token
+        };
         sh.set([shs]);
 
         setupRecordTraverser(undefined, function (rt) {

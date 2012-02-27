@@ -127,9 +127,11 @@ cspace = cspace || {};
                             csid: record.csid
                         }
                     });
+                    // TODO: Do this only in advanced and findedit searches.
                     that.searchReferenceStorage.set({
                         token: that.model.pagination.traverser,
-                        index: index + newModel.pageSize * newModel.pageIndex
+                        index: index + newModel.pageSize * newModel.pageIndex,
+                        source: that.mainSearch.nickName === "advancedSearch" ? "advancedsearch" : "findedit"
                     });
                     window.location = expander(that.options.urls.pivot);
                     return false;
@@ -184,12 +186,16 @@ cspace = cspace || {};
         events: {
             modelChanged: null,
             onSearch: null,
+            onInitialSearch: null,
             afterSearch: null,
             onError: null,
             ready: null
         },
         columnList: ["number", "summary", "recordtype", "summarylist.updatedAt"],
         resultsSelectable: false,
+        listeners: {
+            onInitialSearch: "{cspace.search.searchView}.onInitialSearchHandler"
+        },
         invokers: {
             buildUrl: "cspace.search.searchView.buildUrl",
             hideResults: {
@@ -208,7 +214,8 @@ cspace = cspace || {};
             applyResults: {
                 funcName: "cspace.search.searchView.applyResults",
                 args: ["{searchView}", "{arguments}.0"]
-            }
+            },
+            onInitialSearch: "cspace.search.searchView.onInitialSearch"
         },
         components: {
             messageBar: "{messageBar}",
@@ -291,15 +298,18 @@ cspace = cspace || {};
             sort: "&sortDir=%sortDir&sortKey=%sortKey",
             defaultUrl: "%tenant/%tname/%recordType/search?query=%keywords%pageNum%pageSize%sort",
             localUrl: "%tenant/%tname/data/%recordType/search.json"
-        })
+        }),
+        preInitFunction: "cspace.search.searchView.preInit"
     });
 
     cspace.search.updateSearchHistory = function (storage, searchModel, hashtoken) {
         // NOTE: The empty line token is a temporary hack to save search history.
         hashtoken = hashtoken || "";
         var history = storage.get() || {},
-            searchToSave = {};
-        searchToSave[hashtoken] = searchModel;
+            searchToSave = {
+                hashtoken: hashtoken,
+                model: searchModel
+            };
         if (!history) {
             storage.set([searchToSave]);
             return;
@@ -334,6 +344,15 @@ cspace = cspace || {};
                 that.handleAdvancedSearch(searchModel);
             }
         });
+        that.onInitialSearchHandler = function () {
+            that.onInitialSearch();
+        };
+    };
+
+    cspace.search.searchView.preInit = function (that) {
+        that.onInitialSearchHandler = function () {
+            that.onInitialSearch();
+        };
     };
     
     cspace.search.searchView.updateSearch = function (currentSearch, search) {
@@ -388,16 +407,16 @@ cspace = cspace || {};
     cspace.search.searchView.finalInit = function (that) {
         var hashtoken = cspace.util.getUrlParameter("hashtoken");
         if (hashtoken) {
-            var searchData;
+            var searchData,
+                source = that.mainSearch.nickName === "advancedSearch" ? "advancedsearch" : "findedit";
             fluid.each([that.searchHistoryStorage, that.findeditHistoryStorage], function (storage) {
-                var history = storage.get();
-                if (!history) {
+                if (storage.options.source !== source) {
                     return;
                 }
+                var history = storage.get();
+                if (!history) {return;}
                 searchData = fluid.find(history, function (search) {
-                    return fluid.find(search, function (val, key) {
-                        if (key === hashtoken) {return val};
-                    });
+                    if (search.hashtoken === hashtoken) {return search.model;}
                 });
             });
             if (searchData) {
@@ -412,9 +431,20 @@ cspace = cspace || {};
         that.hideResults();
         bindEventHandlers(that);
         if (that.model.searchModel.recordType) {
-            that.search();
+            that.events.onInitialSearch.fire();
         }
         that.events.ready.fire();
+    };
+
+    cspace.search.searchView.onInitialSearch = function (that) {
+        that.mainSearch.refreshView();
+        that.search();
+    };
+
+    cspace.search.searchView.onInitialSearchAdvanced = function (that) {
+        var searchModel = that.model.searchModel;
+        that.updateSearch(searchModel);
+        that.handleAdvancedSearch(searchModel);
     };
     
     cspace.search.searchView.advancedSearch = function (newPagerModel, that) {

@@ -1860,6 +1860,16 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
             args: ["{searchBox}.findeditHistoryStorage", "{arguments}.0", "{cspace.search.searchView}.model.pagination.traverser"]
         });
 
+        fluid.demands("cspace.search.searchView.onInitialSearch", ["cspace.advancedSearch", "cspace.search.searchView"], {
+            funcName: "cspace.search.searchView.onInitialSearchAdvanced",
+            args: "{cspace.search.searchView}"
+        });
+
+        fluid.demands("cspace.search.searchView.onInitialSearch", ["cspace.search.searchView"], {
+            funcName: "cspace.search.searchView.onInitialSearch",
+            args: "{cspace.search.searchView}"
+        });
+
         fluid.demands("search", ["cspace.pageBuilder", "cspace.advancedSearch"], {
             container: "{pageBuilder}.options.selectors.search",
             options: {

@@ -160,7 +160,8 @@ cspace = cspace || {};
             adjacentRecords: "adjacentRecords",
             previous: "adjacentRecords.previous",
             next: "adjacentRecords.next",
-            recordType: "recordtype"
+            recordType: "recordtype",
+            source: "source"
         }
     });
 
@@ -208,20 +209,21 @@ cspace = cspace || {};
         applier.requestChange(fluid.model.composeSegments(elPaths.adjacentRecords, elPaths.userIndex),
             get(model, elPaths.adjacentRecords, elPaths.index) + 1);
         var hashtoken = get(model, elPaths.searchReference, elPaths.token),
+            source = get(model, elPaths.searchReference, elPaths.source),
             returnToSearch;
         fluid.each(storages, function (storage) {
+            if (storage.options.source !== source) {
+                return;
+            }
             var history = storage.get();
             if (!history) {
                 return;
             }
             returnToSearch = fluid.find(history, function (search) {
-                var val = fluid.find(search, function (val, key) {
-                    if (key === hashtoken) {return true};
-                });
-                if (val) {
+                if (search.hashtoken === hashtoken) {
                     return {
                         hashtoken: hashtoken,
-                        source: storage.options.source
+                        source: source
                     };
                 }
             });
@@ -252,7 +254,8 @@ cspace = cspace || {};
         searchReferenceStorage.set();
         that.dataSource.get({
             token: get(model, searchReference, elPaths.token),
-            index: get(model, searchReference, elPaths.index)
+            index: get(model, searchReference, elPaths.index),
+            source: get(model, searchReference, elPaths.source)
         }, function(data) {
             applier.requestChange(elPaths.adjacentRecords, data);
             that.refreshView();
@@ -273,7 +276,8 @@ cspace = cspace || {};
                 if (that.locate(selector).attr("href") === target.attr("href")) {
                     return {
                         token: get(model, searchReference, elPaths.token),
-                        index: get(model, searchReference, elPaths.index) + increment
+                        index: get(model, searchReference, elPaths.index) + increment,
+                        source: get(model, searchReference, elPaths.source)
                     };
                 }
             }));
