@@ -1810,6 +1810,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("search", "cspace.pageBuilder", {
             container: "{pageBuilder}.options.selectors.search",
             options: {
+                source: "findedit",
                 strings: {
                     errorMessage: "{globalBundle}.messageBase.search-errorMessage",
                     resultsCount: "{globalBundle}.messageBase.search-resultsCount",
@@ -1827,6 +1828,26 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     onSearch: "{loadingIndicator}.events.showOn.fire"
                 },
                 components: {
+                    searchReferenceStorage: {
+                        type: "cspace.util.localStorageDataSource",
+                        options: {
+                            elPath: "searchReference"
+                        }
+                    },
+                    searchHistoryStorage: {
+                        type: "cspace.util.localStorageDataSource",
+                        options: {
+                            elPath: "searchHistory",
+                            source: "advancedsearch"
+                       }
+                    },
+                    findeditHistoryStorage: {
+                        type: "cspace.util.localStorageDataSource",
+                        options: {
+                            elPath: "findeditHistory",
+                            source: "findedit"
+                        }
+                    },
                     mainSearch: {
                         options: {
                             components: {
@@ -1873,6 +1894,7 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
         fluid.demands("search", ["cspace.pageBuilder", "cspace.advancedSearch"], {
             container: "{pageBuilder}.options.selectors.search",
             options: {
+                source: "advancedsearch",
                 strings: {
                     errorMessage: "{globalBundle}.messageBase.search-errorMessage",
                     resultsCount: "{globalBundle}.messageBase.search-resultsCount",
@@ -1909,6 +1931,26 @@ https://source.collectionspace.org/collection-space/LICENSE.txt
                     }
                 },
                 components: {
+                    searchReferenceStorage: {
+                        type: "cspace.util.localStorageDataSource",
+                        options: {
+                            elPath: "searchReference"
+                        }
+                    },
+                    searchHistoryStorage: {
+                        type: "cspace.util.localStorageDataSource",
+                        options: {
+                            elPath: "searchHistory",
+                            source: "advancedsearch"
+                       }
+                    },
+                    findeditHistoryStorage: {
+                        type: "cspace.util.localStorageDataSource",
+                        options: {
+                            elPath: "findeditHistory",
+                            source: "findedit"
+                        }
+                    },
                     mainSearch: {
                         type: "cspace.advancedSearch",
                         options: {

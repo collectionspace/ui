@@ -127,12 +127,13 @@ cspace = cspace || {};
                             csid: record.csid
                         }
                     });
-                    // TODO: Do this only in advanced and findedit searches.
-                    that.searchReferenceStorage.set({
-                        token: that.model.pagination.traverser,
-                        index: index + newModel.pageSize * newModel.pageIndex,
-                        source: that.mainSearch.nickName === "advancedSearch" ? "advancedsearch" : "findedit"
-                    });
+                    if (that.searchReferenceStorage) {
+                        that.searchReferenceStorage.set({
+                            token: that.model.pagination.traverser,
+                            index: index + newModel.pageSize * newModel.pageIndex,
+                            source: that.options.source
+                        });
+                    }
                     window.location = expander(that.options.urls.pivot);
                     return false;
                 });
@@ -219,26 +220,6 @@ cspace = cspace || {};
         },
         components: {
             messageBar: "{messageBar}",
-            searchReferenceStorage: {
-                type: "cspace.util.localStorageDataSource",
-                options: {
-                    elPath: "searchReference"
-                }
-            },
-            searchHistoryStorage: {
-                type: "cspace.util.localStorageDataSource",
-                options: {
-                    elPath: "searchHistory",
-                    source: "advancedsearch"
-               }
-            },
-            findeditHistoryStorage: {
-                type: "cspace.util.localStorageDataSource",
-                options: {
-                    elPath: "findeditHistory",
-                    source: "findedit"
-                }
-            },
             mainSearch: {
                 type: "cspace.searchBox",
                 options: {
@@ -407,10 +388,10 @@ cspace = cspace || {};
     cspace.search.searchView.finalInit = function (that) {
         var hashtoken = cspace.util.getUrlParameter("hashtoken");
         if (hashtoken) {
-            var searchData,
-                source = that.mainSearch.nickName === "advancedSearch" ? "advancedsearch" : "findedit";
+            // Only present on findedit and advanced search pages.
+            var searchData;
             fluid.each([that.searchHistoryStorage, that.findeditHistoryStorage], function (storage) {
-                if (storage.options.source !== source) {
+                if (storage.options.source !== that.options.source) {
                     return;
                 }
                 var history = storage.get();
