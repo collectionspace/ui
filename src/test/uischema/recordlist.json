@@ -1,6 +1,7 @@
 {
     "recordlist": {
         "default": [
+            "all",
             "person",
             "intake",
             "loanin",
