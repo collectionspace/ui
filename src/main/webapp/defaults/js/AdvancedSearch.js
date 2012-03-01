@@ -22,7 +22,7 @@ cspace = cspace || {};
             recordTypeSelector: {
                 type: "cspace.util.recordTypeSelector",
                 options: {
-                    related: "all",
+                    related: "allTypes",
                     dom: "{advancedSearch}.dom",
                     componentID: "recordTypeSelect",
                     selector: "recordTypeSelect",

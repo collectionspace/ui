@@ -1072,6 +1072,7 @@ fluid.registerNamespace("cspace.util");
         that.cataloging = that.getRecordTypes("recordtypes.cataloging");
         that.administration = that.getRecordTypes("recordtypes.administration");
         that.nonVocabularies = that.cataloging.concat(that.procedures);
+        that.allTypes = that.vocabularies.concat(that.procedures, that.cataloging);
     };
 
     fluid.defaults("cspace.recordTypes", {
